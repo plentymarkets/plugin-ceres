@@ -61,7 +61,8 @@ export default Vue.component("address-select", {
         {
             type: String,
             default: null
-        }
+        },
+        email: String
     },
 
     data()
@@ -81,6 +82,7 @@ export default Vue.component("address-select", {
             {
                 1: "vatNumber",
                 4: "telephone",
+                5: "email",
                 6: "postNumber",
                 9: "birthday",
                 11: "title",
@@ -128,6 +130,14 @@ export default Vue.component("address-select", {
             const countryKey = countryId === 12 ? "gb" : "de";
 
             return this.optionalAddressFields[countryKey].includes(`${addressKey}.salutation`);
+        },
+
+        shouldShowEditAddressButton()
+        {
+            // filters addresses like "Same as billing address"
+            const realAddressList = this.addressList?.filter((address) => address.id >= 0);
+
+            return realAddressList && realAddressList.length > 0;
         },
 
         addressTypePrefix()
@@ -195,12 +205,13 @@ export default Vue.component("address-select", {
                 this.addressToEdit = {
                     gender: this.defaultSalutation,
                     countryId: this.shippingCountryId,
-                    showPickupStation: false
+                    showPickupStation: false,
+                    email: this.email
                 };
             }
             else
             {
-                this.addressToEdit = { countryId: this.shippingCountryId };
+                this.addressToEdit = { countryId: this.shippingCountryId, email: this.email };
             }
 
             this.updateHeadline();
@@ -364,6 +375,15 @@ export default Vue.component("address-select", {
                 event.stopPropagation();
                 this.showAddModal();
             }
+        },
+
+        toggleDropdown(event)
+        {
+            event.preventDefault();
+            event.stopPropagation();
+            this.$refs.dropdown.click();
+            event.currentTarget.blur();
+
         }
     },
 

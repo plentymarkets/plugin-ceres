@@ -1,0 +1,21 @@
+on:
+  push:
+    branches:
+      - "stable"
+jobs:
+  distribute_stable:
+    runs-on: ubuntu-latest
+    name: "Distribute changes on stable branch"
+    steps:
+      - uses: actions/checkout@v2
+#      - uses: everlytic/branch-merge@1.1.0
+#        with:
+#          github_token: ${{ secrets.PLENTY_ACTION_TOKEN }}
+#          source_ref: ${{ github.ref }}
+#          target_branch: "beta"
+#          commit_message_template: "Merge branch 'stable' into 'beta'"
+      - uses: alagos/regex-merge@v1.0
+        with:
+          accessToken: ${{ secrets.PLENTY_ACTION_TOKEN }}
+          headBranch: "stable"
+          branchRegex: '^.+\/stable\/.+$'

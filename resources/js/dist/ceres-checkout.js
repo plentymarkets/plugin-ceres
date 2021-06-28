@@ -1874,6 +1874,118 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -12058,6 +12170,31 @@ exports.f = NASHORN_BUG ? function propertyIsEnumerable(V) {
 
 /***/ }),
 
+/***/ "./node_modules/core-js/internals/object-prototype-accessors-forced.js":
+/*!*****************************************************************************!*\
+  !*** ./node_modules/core-js/internals/object-prototype-accessors-forced.js ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var IS_PURE = __webpack_require__(/*! ../internals/is-pure */ "./node_modules/core-js/internals/is-pure.js");
+var global = __webpack_require__(/*! ../internals/global */ "./node_modules/core-js/internals/global.js");
+var fails = __webpack_require__(/*! ../internals/fails */ "./node_modules/core-js/internals/fails.js");
+
+// Forced replacement object prototype accessors methods
+module.exports = IS_PURE || !fails(function () {
+  var key = Math.random();
+  // In FF throws only define methods
+  // eslint-disable-next-line no-undef, no-useless-call -- required for testing
+  __defineSetter__.call(null, key, function () { /* empty */ });
+  delete global[key];
+});
+
+
+/***/ }),
+
 /***/ "./node_modules/core-js/internals/object-set-prototype-of.js":
 /*!*******************************************************************!*\
   !*** ./node_modules/core-js/internals/object-set-prototype-of.js ***!
@@ -14128,6 +14265,64 @@ var assign = __webpack_require__(/*! ../internals/object-assign */ "./node_modul
 $({ target: 'Object', stat: true, forced: Object.assign !== assign }, {
   assign: assign
 });
+
+
+/***/ }),
+
+/***/ "./node_modules/core-js/modules/es.object.define-getter.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.object.define-getter.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__(/*! ../internals/export */ "./node_modules/core-js/internals/export.js");
+var DESCRIPTORS = __webpack_require__(/*! ../internals/descriptors */ "./node_modules/core-js/internals/descriptors.js");
+var FORCED = __webpack_require__(/*! ../internals/object-prototype-accessors-forced */ "./node_modules/core-js/internals/object-prototype-accessors-forced.js");
+var toObject = __webpack_require__(/*! ../internals/to-object */ "./node_modules/core-js/internals/to-object.js");
+var aFunction = __webpack_require__(/*! ../internals/a-function */ "./node_modules/core-js/internals/a-function.js");
+var definePropertyModule = __webpack_require__(/*! ../internals/object-define-property */ "./node_modules/core-js/internals/object-define-property.js");
+
+// `Object.prototype.__defineGetter__` method
+// https://tc39.es/ecma262/#sec-object.prototype.__defineGetter__
+if (DESCRIPTORS) {
+  $({ target: 'Object', proto: true, forced: FORCED }, {
+    __defineGetter__: function __defineGetter__(P, getter) {
+      definePropertyModule.f(toObject(this), P, { get: aFunction(getter), enumerable: true, configurable: true });
+    }
+  });
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/core-js/modules/es.object.define-setter.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.object.define-setter.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__(/*! ../internals/export */ "./node_modules/core-js/internals/export.js");
+var DESCRIPTORS = __webpack_require__(/*! ../internals/descriptors */ "./node_modules/core-js/internals/descriptors.js");
+var FORCED = __webpack_require__(/*! ../internals/object-prototype-accessors-forced */ "./node_modules/core-js/internals/object-prototype-accessors-forced.js");
+var toObject = __webpack_require__(/*! ../internals/to-object */ "./node_modules/core-js/internals/to-object.js");
+var aFunction = __webpack_require__(/*! ../internals/a-function */ "./node_modules/core-js/internals/a-function.js");
+var definePropertyModule = __webpack_require__(/*! ../internals/object-define-property */ "./node_modules/core-js/internals/object-define-property.js");
+
+// `Object.prototype.__defineSetter__` method
+// https://tc39.es/ecma262/#sec-object.prototype.__defineSetter__
+if (DESCRIPTORS) {
+  $({ target: 'Object', proto: true, forced: FORCED }, {
+    __defineSetter__: function __defineSetter__(P, setter) {
+      definePropertyModule.f(toObject(this), P, { set: aFunction(setter), enumerable: true, configurable: true });
+    }
+  });
+}
 
 
 /***/ }),
@@ -39946,7 +40141,97 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _vm._t("custom-address-fields")
+            _c(
+              "div",
+              {
+                staticClass: "col-12 col-sm-4",
+                attrs: { "data-testing": "address-country-select" }
+              },
+              [
+                _c("country-select", {
+                  attrs: {
+                    "selected-country-id": _vm.value.countryId,
+                    "selected-state-id": _vm.value.stateId,
+                    "address-type": _vm.addressType,
+                    "optional-address-fields": _vm.optionalAddressFields,
+                    "required-address-fields": _vm.requiredAddressFields
+                  },
+                  on: {
+                    "country-changed": function($event) {
+                      return _vm.onSelectedCountryChanged($event)
+                    },
+                    "state-changed": function($event) {
+                      return _vm.emitInputEvent("stateId", $event)
+                    }
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _vm._t("custom-address-fields"),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-12" }, [
+              _c("hr", { staticClass: "mt-0" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _vm.isInOptionalFields("de", "delivery_address.email")
+                  ? _c("div", { staticClass: "col-12" }, [
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate:text",
+                              value: _vm.isInRequiredFields(
+                                "de",
+                                "delivery_address.email"
+                              ),
+                              expression:
+                                "isInRequiredFields('de', 'delivery_address.email')",
+                              arg: "text"
+                            }
+                          ],
+                          staticClass: "input-unit",
+                          attrs: { "data-model": "email" }
+                        },
+                        [
+                          _c("input", {
+                            attrs: {
+                              type: "mail",
+                              name: "email",
+                              id: "email" + _vm._uid,
+                              "data-testing": "packing-station-de-email-input"
+                            },
+                            domProps: { value: _vm.value.email },
+                            on: {
+                              input: function($event) {
+                                return _vm.emitInputEvent(
+                                  "email",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("label", { attrs: { for: "email" + _vm._uid } }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.transformTranslation(
+                                  "Ceres::Template.addressMail",
+                                  "de",
+                                  "delivery_address.email"
+                                )
+                              )
+                            )
+                          ])
+                        ]
+                      )
+                    ])
+                  : _vm._e()
+              ])
+            ])
           ]
         : _vm.localeToShow == "DE" && _vm.addressType === "1"
         ? [
@@ -40876,7 +41161,97 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _vm._t("custom-address-fields")
+            _c(
+              "div",
+              {
+                staticClass: "col-12 col-sm-4",
+                attrs: { "data-testing": "address-country-select" }
+              },
+              [
+                _c("country-select", {
+                  attrs: {
+                    "selected-country-id": _vm.value.countryId,
+                    "selected-state-id": _vm.value.stateId,
+                    "address-type": _vm.addressType,
+                    "optional-address-fields": _vm.optionalAddressFields,
+                    "required-address-fields": _vm.requiredAddressFields
+                  },
+                  on: {
+                    "country-changed": function($event) {
+                      return _vm.onSelectedCountryChanged($event)
+                    },
+                    "state-changed": function($event) {
+                      return _vm.emitInputEvent("stateId", $event)
+                    }
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _vm._t("custom-address-fields"),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-12" }, [
+              _c("hr", { staticClass: "mt-0" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _vm.isInOptionalFields("de", "billing_address.email")
+                  ? _c("div", { staticClass: "col-12" }, [
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate:text",
+                              value: _vm.isInRequiredFields(
+                                "de",
+                                "billing_address.email"
+                              ),
+                              expression:
+                                "isInRequiredFields('de', 'billing_address.email')",
+                              arg: "text"
+                            }
+                          ],
+                          staticClass: "input-unit",
+                          attrs: { "data-model": "email" }
+                        },
+                        [
+                          _c("input", {
+                            attrs: {
+                              type: "mail",
+                              name: "email",
+                              id: "email" + _vm._uid,
+                              "data-testing": "billing-address-de-email-input"
+                            },
+                            domProps: { value: _vm.value.email },
+                            on: {
+                              input: function($event) {
+                                return _vm.emitInputEvent(
+                                  "email",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("label", { attrs: { for: "email" + _vm._uid } }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.transformTranslation(
+                                  "Ceres::Template.addressMail",
+                                  "de",
+                                  "billing_address.email"
+                                )
+                              )
+                            )
+                          ])
+                        ]
+                      )
+                    ])
+                  : _vm._e()
+              ])
+            ])
           ]
         : _vm.localeToShow == "GB" && _vm.addressType === "1"
         ? [
@@ -41808,7 +42183,97 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _vm._t("custom-address-fields")
+            _c(
+              "div",
+              {
+                staticClass: "col-12 col-sm-4",
+                attrs: { "data-testing": "address-country-select" }
+              },
+              [
+                _c("country-select", {
+                  attrs: {
+                    "selected-country-id": _vm.value.countryId,
+                    "selected-state-id": _vm.value.stateId,
+                    "address-type": _vm.addressType,
+                    "optional-address-fields": _vm.optionalAddressFields,
+                    "required-address-fields": _vm.requiredAddressFields
+                  },
+                  on: {
+                    "country-changed": function($event) {
+                      return _vm.onSelectedCountryChanged($event)
+                    },
+                    "state-changed": function($event) {
+                      return _vm.emitInputEvent("stateId", $event)
+                    }
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _vm._t("custom-address-fields"),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-12" }, [
+              _c("hr", { staticClass: "mt-0" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _vm.isInOptionalFields("gb", "billing_address.email")
+                  ? _c("div", { staticClass: "col-12" }, [
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate:text",
+                              value: _vm.isInRequiredFields(
+                                "gb",
+                                "billing_address.email"
+                              ),
+                              expression:
+                                "isInRequiredFields('gb', 'billing_address.email')",
+                              arg: "text"
+                            }
+                          ],
+                          staticClass: "input-unit",
+                          attrs: { "data-model": "email" }
+                        },
+                        [
+                          _c("input", {
+                            attrs: {
+                              type: "mail",
+                              name: "email",
+                              id: "email" + _vm._uid,
+                              "data-testing": "billing-address-gb-email-input"
+                            },
+                            domProps: { value: _vm.value.email },
+                            on: {
+                              input: function($event) {
+                                return _vm.emitInputEvent(
+                                  "email",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("label", { attrs: { for: "email" + _vm._uid } }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.transformTranslation(
+                                  "Ceres::Template.addressMail",
+                                  "gb",
+                                  "billing_address.email"
+                                )
+                              )
+                            )
+                          ])
+                        ]
+                      )
+                    ])
+                  : _vm._e()
+              ])
+            ])
           ]
         : _vm.localeToShow == "DE" && _vm.addressType === "2"
         ? [
@@ -42675,7 +43140,97 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _vm._t("custom-address-fields")
+            _c(
+              "div",
+              {
+                staticClass: "col-12 col-sm-4",
+                attrs: { "data-testing": "address-country-select" }
+              },
+              [
+                _c("country-select", {
+                  attrs: {
+                    "selected-country-id": _vm.value.countryId,
+                    "selected-state-id": _vm.value.stateId,
+                    "address-type": _vm.addressType,
+                    "optional-address-fields": _vm.optionalAddressFields,
+                    "required-address-fields": _vm.requiredAddressFields
+                  },
+                  on: {
+                    "country-changed": function($event) {
+                      return _vm.onSelectedCountryChanged($event)
+                    },
+                    "state-changed": function($event) {
+                      return _vm.emitInputEvent("stateId", $event)
+                    }
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _vm._t("custom-address-fields"),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-12" }, [
+              _c("hr", { staticClass: "mt-0" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _vm.isInOptionalFields("de", "delivery_address.email")
+                  ? _c("div", { staticClass: "col-12" }, [
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate:text",
+                              value: _vm.isInRequiredFields(
+                                "de",
+                                "delivery_address.email"
+                              ),
+                              expression:
+                                "isInRequiredFields('de', 'delivery_address.email')",
+                              arg: "text"
+                            }
+                          ],
+                          staticClass: "input-unit",
+                          attrs: { "data-model": "email" }
+                        },
+                        [
+                          _c("input", {
+                            attrs: {
+                              type: "mail",
+                              name: "email",
+                              id: "email" + _vm._uid,
+                              "data-testing": "delivery-address-de-email-input"
+                            },
+                            domProps: { value: _vm.value.email },
+                            on: {
+                              input: function($event) {
+                                return _vm.emitInputEvent(
+                                  "email",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("label", { attrs: { for: "email" + _vm._uid } }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.transformTranslation(
+                                  "Ceres::Template.addressMail",
+                                  "de",
+                                  "delivery_address.email"
+                                )
+                              )
+                            )
+                          ])
+                        ]
+                      )
+                    ])
+                  : _vm._e()
+              ])
+            ])
           ]
         : _vm.localeToShow == "GB" && _vm.addressType === "2"
         ? [
@@ -43525,37 +44080,99 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _vm._t("custom-address-fields")
-          ]
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "col-12 col-sm-4",
-          attrs: { "data-testing": "address-country-select" }
-        },
-        [
-          _c("country-select", {
-            attrs: {
-              "selected-country-id": _vm.value.countryId,
-              "selected-state-id": _vm.value.stateId,
-              "address-type": _vm.addressType,
-              "optional-address-fields": _vm.optionalAddressFields,
-              "required-address-fields": _vm.requiredAddressFields
-            },
-            on: {
-              "country-changed": function($event) {
-                return _vm.onSelectedCountryChanged($event)
+            _c(
+              "div",
+              {
+                staticClass: "col-12 col-sm-4",
+                attrs: { "data-testing": "address-country-select" }
               },
-              "state-changed": function($event) {
-                return _vm.emitInputEvent("stateId", $event)
-              }
-            }
-          })
-        ],
-        1
-      )
+              [
+                _c("country-select", {
+                  attrs: {
+                    "selected-country-id": _vm.value.countryId,
+                    "selected-state-id": _vm.value.stateId,
+                    "address-type": _vm.addressType,
+                    "optional-address-fields": _vm.optionalAddressFields,
+                    "required-address-fields": _vm.requiredAddressFields
+                  },
+                  on: {
+                    "country-changed": function($event) {
+                      return _vm.onSelectedCountryChanged($event)
+                    },
+                    "state-changed": function($event) {
+                      return _vm.emitInputEvent("stateId", $event)
+                    }
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _vm._t("custom-address-fields"),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-12" }, [
+              _c("hr", { staticClass: "mt-0" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _vm.isInOptionalFields("gb", "delivery_address.email")
+                  ? _c("div", { staticClass: "col-12" }, [
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate:text",
+                              value: _vm.isInRequiredFields(
+                                "gb",
+                                "delivery_address.email"
+                              ),
+                              expression:
+                                "isInRequiredFields('gb', 'delivery_address.email')",
+                              arg: "text"
+                            }
+                          ],
+                          staticClass: "input-unit",
+                          attrs: { "data-model": "email" }
+                        },
+                        [
+                          _c("input", {
+                            attrs: {
+                              type: "mail",
+                              name: "email",
+                              id: "email" + _vm._uid,
+                              "data-testing": "delivery-address-gb-email-input"
+                            },
+                            domProps: { value: _vm.value.email },
+                            on: {
+                              input: function($event) {
+                                return _vm.emitInputEvent(
+                                  "email",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("label", { attrs: { for: "email" + _vm._uid } }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.transformTranslation(
+                                  "Ceres::Template.addressMail",
+                                  "gb",
+                                  "delivery_address.email"
+                                )
+                              )
+                            )
+                          ])
+                        ]
+                      )
+                    ])
+                  : _vm._e()
+              ])
+            ])
+          ]
+        : _vm._e()
     ],
     2
   )
@@ -67477,7 +68094,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     addressFields: {
       type: Array,
       default: function _default() {
-        return ["title", "contactPerson", "name1", "name2", "name3", "name4", "address1", "address2", "address3", "address4", "postalCode", "town", "country"];
+        return ["email", "title", "contactPerson", "name1", "name2", "name3", "name4", "address1", "address2", "address3", "address4", "postalCode", "town", "country"];
       }
     }
   },
@@ -67531,14 +68148,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.string.includes.js */ "./node_modules/core-js/modules/es.string.includes.js");
 /* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_object_assign_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.object.assign.js */ "./node_modules/core-js/modules/es.object.assign.js");
-/* harmony import */ var core_js_modules_es_object_assign_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_assign_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_object_assign_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.object.assign.js */ "./node_modules/core-js/modules/es.object.assign.js");
+/* harmony import */ var core_js_modules_es_object_assign_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_assign_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
 /* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
@@ -67652,7 +68269,8 @@ var ModalService = __webpack_require__(/*! ../../../services/ModalService */ "./
     paddingInlineStyles: {
       type: String,
       default: null
-    }
+    },
+    email: String
   },
   data: function data() {
     return {
@@ -67669,6 +68287,7 @@ var ModalService = __webpack_require__(/*! ../../../services/ModalService */ "./
       addressOptionTypeFieldMap: {
         1: "vatNumber",
         4: "telephone",
+        5: "email",
         6: "postNumber",
         9: "birthday",
         11: "title",
@@ -67701,6 +68320,15 @@ var ModalService = __webpack_require__(/*! ../../../services/ModalService */ "./
       var addressKey = parseInt(this.addressType) === 1 ? "billing_address" : "delivery_address";
       var countryKey = countryId === 12 ? "gb" : "de";
       return this.optionalAddressFields[countryKey].includes("".concat(addressKey, ".salutation"));
+    },
+    shouldShowEditAddressButton: function shouldShowEditAddressButton() {
+      var _this$addressList;
+
+      // filters addresses like "Same as billing address"
+      var realAddressList = (_this$addressList = this.addressList) === null || _this$addressList === void 0 ? void 0 : _this$addressList.filter(function (address) {
+        return address.id >= 0;
+      });
+      return realAddressList && realAddressList.length > 0;
     },
     addressTypePrefix: function addressTypePrefix() {
       return parseInt(this.addressType) === 1 ? "billing-" : "delivery-";
@@ -67765,11 +68393,13 @@ var ModalService = __webpack_require__(/*! ../../../services/ModalService */ "./
         this.addressToEdit = {
           gender: this.defaultSalutation,
           countryId: this.shippingCountryId,
-          showPickupStation: false
+          showPickupStation: false,
+          email: this.email
         };
       } else {
         this.addressToEdit = {
-          countryId: this.shippingCountryId
+          countryId: this.shippingCountryId,
+          email: this.email
         };
       }
 
@@ -67912,6 +68542,12 @@ var ModalService = __webpack_require__(/*! ../../../services/ModalService */ "./
         event.stopPropagation();
         this.showAddModal();
       }
+    },
+    toggleDropdown: function toggleDropdown(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.$refs.dropdown.click();
+      event.currentTarget.blur();
     }
   },
   filters: {
@@ -68222,6 +68858,15 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
                   break;
                 }
 
+              case 5:
+                {
+                  if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_14__["isNullOrUndefined"])(this.addressData.email) && this.addressData.email !== optionType.value) {
+                    optionType.value = this.addressData.email;
+                  }
+
+                  break;
+                }
+
               case 6:
                 {
                   if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_14__["isNullOrUndefined"])(this.addressData.postNumber) && this.addressData.postNumber !== optionType.value) {
@@ -68308,7 +68953,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     AddressSelect: _AddressSelect__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
-  template: "\n        <address-select \n            ref=\"invoice\"\n            @address-changed=\"addressChanged\"\n            address-type=\"1\"\n            :show-error=\"showError\"\n            :optional-address-fields=\"optionalAddressFields\"\n            :required-address-fields=\"requiredAddressFields\"\n            :default-salutation=\"defaultSalutation\"\n            :padding-classes=\"paddingClasses\"\n            :padding-inline-styles=\"paddingInlineStyles\"\n            data-testing=\"billing-address-select\">\n        </address-select>\n    ",
+  template: "\n        <address-select \n            ref=\"invoice\"\n            @address-changed=\"addressChanged\"\n            address-type=\"1\"\n            :show-error=\"showError\"\n            :optional-address-fields=\"optionalAddressFields\"\n            :required-address-fields=\"requiredAddressFields\"\n            :default-salutation=\"defaultSalutation\"\n            :padding-classes=\"paddingClasses\"\n            :padding-inline-styles=\"paddingInlineStyles\"\n            data-testing=\"billing-address-select\"\n            :email=\"email\">\n        </address-select>\n    ",
   props: {
     optionalAddressFields: {
       type: Object,
@@ -68337,7 +68982,8 @@ __webpack_require__.r(__webpack_exports__);
     paddingInlineStyles: {
       type: String,
       default: null
-    }
+    },
+    email: String
   },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])({
     billingAddressId: function billingAddressId(state) {
@@ -68433,7 +69079,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     AddressSelect: _AddressSelect__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
-  template: "\n        <address-select\n            ref:shipping-address-select\n            template=\"#vue-address-select\"\n            @address-changed=\"addressChanged\"\n            address-type=\"2\"\n            :optional-address-fields=\"optionalAddressFields\"\n            :required-address-fields=\"requiredAddressFields\"\n            :default-salutation=\"defaultSalutation\"\n            :padding-classes=\"paddingClasses\"\n            :padding-inline-styles=\"paddingInlineStyles\"\n            data-testing=\"delivery-address-select\">\n        </address-select>\n    ",
+  template: "\n        <address-select\n            ref:shipping-address-select\n            template=\"#vue-address-select\"\n            @address-changed=\"addressChanged\"\n            address-type=\"2\"\n            :optional-address-fields=\"optionalAddressFields\"\n            :required-address-fields=\"requiredAddressFields\"\n            :default-salutation=\"defaultSalutation\"\n            :padding-classes=\"paddingClasses\"\n            :padding-inline-styles=\"paddingInlineStyles\"\n            data-testing=\"delivery-address-select\"\n            :email=\"email\">\n        </address-select>\n    ",
   props: {
     optionalAddressFields: {
       type: Object,
@@ -68466,7 +69112,8 @@ __webpack_require__.r(__webpack_exports__);
     paddingInlineStyles: {
       type: String,
       default: null
-    }
+    },
+    email: String
   },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
     deliveryAddressId: function deliveryAddressId(state) {
@@ -74925,6 +75572,84 @@ function whenConsented(key, onConsent, onDecline) {
 
 /***/ }),
 
+/***/ "./resources/js/src/app/jQuery.js":
+/*!****************************************!*\
+  !*** ./resources/js/src/app/jQuery.js ***!
+  \****************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_object_define_getter_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.object.define-getter.js */ "./node_modules/core-js/modules/es.object.define-getter.js");
+/* harmony import */ var core_js_modules_es_object_define_getter_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_getter_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_object_define_setter_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.object.define-setter.js */ "./node_modules/core-js/modules/es.object.define-setter.js");
+/* harmony import */ var core_js_modules_es_object_define_setter_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_setter_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+
+var _jQuery;
+
+function setJQuery(newJQuery) {
+  if (_jQuery && _jQuery !== newJQuery) {
+    console.warn("jQuery ".concat(_jQuery.fn.jquery, " is already included in Ceres. It's not recommended to register new instances of jQuery.")); // Copy ajax config to new jQuery instance
+
+    newJQuery.ajaxSetup(_jQuery.ajaxSetup()); // Copy registered jQuery plugins to new jQuery instance
+
+    Object.keys(_jQuery.fn).forEach(function (jQueryFn) {
+      if (!newJQuery.fn.hasOwnProperty(jQueryFn)) {
+        newJQuery.fn[jQueryFn] = _jQuery.fn[jQueryFn];
+      }
+    }); // unset existing setter to avoid endless loop
+
+    delete window.jQuery;
+  } // Store new jQuery instance in global object
+
+
+  _jQuery = newJQuery; // Add new setter to catch new assignments of jQuery instances
+
+  if (!window.__defineGetter__) {
+    Object.defineProperty(window, "jQuery", {
+      get: function get() {
+        return _jQuery;
+      },
+      set: setJQuery
+    });
+    Object.defineProperty(window, "$", {
+      get: function get() {
+        return _jQuery;
+      },
+      set: setJQuery
+    });
+  } else {
+    window.__defineGetter__("jQuery", function () {
+      return _jQuery;
+    });
+
+    window.__defineSetter__("jQuery", setJQuery);
+
+    window.__defineGetter__("$", function () {
+      return _jQuery;
+    });
+
+    window.__defineSetter__("$", setJQuery);
+  }
+} // assign initial jQuery instance
+
+
+setJQuery(jquery__WEBPACK_IMPORTED_MODULE_4___default.a);
+
+/***/ }),
+
 /***/ "./resources/js/src/app/main.js":
 /*!**************************************!*\
   !*** ./resources/js/src/app/main.js ***!
@@ -78885,6 +79610,9 @@ var actions = {
               event.target.reset();
               disableForm(event.target, false);
               _services_NotificationService__WEBPACK_IMPORTED_MODULE_14__["default"].success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_15__["default"].translate("Ceres::Template.contactSendSuccess")).closeAfter(3000);
+              document.dispatchEvent(new CustomEvent("contactFormSent", {
+                detail: formData
+              }));
             }).fail(function (response) {
               resetRecaptcha(recaptchaEl);
               disableForm(event.target, false);
@@ -79510,14 +80238,17 @@ var actions = {
       return new Promise(function (resolve, reject) {
         commit("setIsLastSeenItemsLoading", true);
         ApiService.put("/rest/io/item/last_seen/".concat(variationId)).done(function (response) {
+          var _response$lastSeenIte;
+
+          commit("setIsLastSeenItemsLoading", false);
+
           if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_2__["isDefined"])(response.lastSeenItems)) {
             commit("setLastSeenItems", response.lastSeenItems.documents);
             commit("setLastSeenItemContainers", response.containers);
             commit("setIsLastSeenItemsLoading", false);
-            resolve(response.lastSeenItems.documents);
-          } else {
-            resolve(null);
           }
+
+          resolve(response === null || response === void 0 ? void 0 : (_response$lastSeenIte = response.lastSeenItems) === null || _response$lastSeenIte === void 0 ? void 0 : _response$lastSeenIte.documents);
         }).fail(function (error) {
           commit("setIsLastSeenItemsLoading", false);
           reject(error);
@@ -81391,8 +82122,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _mount__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./mount */ "./resources/js/src/mount.js");
 /* harmony import */ var _app_plugins_script2__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./app/plugins/script2 */ "./resources/js/src/app/plugins/script2.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _app_jQuery__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./app/jQuery */ "./resources/js/src/app/jQuery.js");
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! owl.carousel */ "./node_modules/owl.carousel/dist/owl.carousel.js");
@@ -81484,8 +82214,6 @@ window.Vuex = vuex__WEBPACK_IMPORTED_MODULE_8__["default"];
 
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.use(_app_plugins_script2__WEBPACK_IMPORTED_MODULE_10__["default"]);
 
-window.jQuery = jquery__WEBPACK_IMPORTED_MODULE_11___default.a;
-window.$ = jquery__WEBPACK_IMPORTED_MODULE_11___default.a;
 
 
 
@@ -81505,6 +82233,9 @@ vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("basket-preview", function 
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("basket-totals", function () {
   return __webpack_require__.e(/*! import() */ 20).then(__webpack_require__.bind(null, /*! ./app/components/basket/BasketTotals.vue */ "./resources/js/src/app/components/basket/BasketTotals.vue"));
 });
+vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("mail-changed-info", function () {
+  return __webpack_require__.e(/*! import() */ 22).then(__webpack_require__.bind(null, /*! ./app/components/basket/MailChangedInfo.vue */ "./resources/js/src/app/components/basket/MailChangedInfo.vue"));
+});
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("coupon", function () {
   return __webpack_require__.e(/*! import() */ 21).then(__webpack_require__.bind(null, /*! ./app/components/basket/Coupon.vue */ "./resources/js/src/app/components/basket/Coupon.vue"));
 });
@@ -81515,7 +82246,7 @@ vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("step-by-step-navigation", 
   return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ./app/components/category/StepByStepNavigation.vue */ "./resources/js/src/app/components/category/StepByStepNavigation.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("google-maps-widget", function () {
-  return __webpack_require__.e(/*! import() */ 22).then(__webpack_require__.bind(null, /*! ./app/components/common/GoogleMaps.vue */ "./resources/js/src/app/components/common/GoogleMaps.vue"));
+  return __webpack_require__.e(/*! import() */ 23).then(__webpack_require__.bind(null, /*! ./app/components/common/GoogleMaps.vue */ "./resources/js/src/app/components/common/GoogleMaps.vue"));
 });
 
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("lazy-img", _app_components_common_LazyImg_vue__WEBPACK_IMPORTED_MODULE_15__["default"]);
@@ -81526,10 +82257,10 @@ vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("tab-list", _app_components
 
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("tab-item", _app_components_common_TabItem_vue__WEBPACK_IMPORTED_MODULE_18__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("last-seen-item-list", function () {
-  return __webpack_require__.e(/*! import() */ 23).then(__webpack_require__.bind(null, /*! ./app/components/containers/LastSeenItemList.vue */ "./resources/js/src/app/components/containers/LastSeenItemList.vue"));
+  return __webpack_require__.e(/*! import() */ 24).then(__webpack_require__.bind(null, /*! ./app/components/containers/LastSeenItemList.vue */ "./resources/js/src/app/components/containers/LastSeenItemList.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("change-email-form", function () {
-  return __webpack_require__.e(/*! import() */ 24).then(__webpack_require__.bind(null, /*! ./app/components/customer/ChangeEmailForm.vue */ "./resources/js/src/app/components/customer/ChangeEmailForm.vue"));
+  return __webpack_require__.e(/*! import() */ 25).then(__webpack_require__.bind(null, /*! ./app/components/customer/ChangeEmailForm.vue */ "./resources/js/src/app/components/customer/ChangeEmailForm.vue"));
 });
 
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("recaptcha", _app_components_customer_ReCaptcha_vue__WEBPACK_IMPORTED_MODULE_19__["default"]);
@@ -81537,10 +82268,10 @@ vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("registration", function ()
   return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./app/components/customer/Registration.vue */ "./resources/js/src/app/components/customer/Registration.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("reset-password-form", function () {
-  return __webpack_require__.e(/*! import() */ 25).then(__webpack_require__.bind(null, /*! ./app/components/customer/ResetPasswordForm.vue */ "./resources/js/src/app/components/customer/ResetPasswordForm.vue"));
+  return __webpack_require__.e(/*! import() */ 26).then(__webpack_require__.bind(null, /*! ./app/components/customer/ResetPasswordForm.vue */ "./resources/js/src/app/components/customer/ResetPasswordForm.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("forgot-password-modal", function () {
-  return __webpack_require__.e(/*! import() */ 26).then(__webpack_require__.bind(null, /*! ./app/components/customer/login/ForgotPassword.vue */ "./resources/js/src/app/components/customer/login/ForgotPassword.vue"));
+  return __webpack_require__.e(/*! import() */ 27).then(__webpack_require__.bind(null, /*! ./app/components/customer/login/ForgotPassword.vue */ "./resources/js/src/app/components/customer/login/ForgotPassword.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("guest-login", function () {
   return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ./app/components/customer/login/GuestLogin.vue */ "./resources/js/src/app/components/customer/login/GuestLogin.vue"));
@@ -81550,24 +82281,24 @@ vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("login", function () {
 }); // legacy non-shopbuilder component
 
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("login-view", function () {
-  return __webpack_require__.e(/*! import() */ 27).then(__webpack_require__.bind(null, /*! ./app/components/customer/login/LoginView.vue */ "./resources/js/src/app/components/customer/login/LoginView.vue"));
+  return __webpack_require__.e(/*! import() */ 28).then(__webpack_require__.bind(null, /*! ./app/components/customer/login/LoginView.vue */ "./resources/js/src/app/components/customer/login/LoginView.vue"));
 });
 
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("user-login-handler", _app_components_customer_login_UserLoginHandler_vue__WEBPACK_IMPORTED_MODULE_20__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("form-attachment", function () {
-  return __webpack_require__.e(/*! import() */ 28).then(__webpack_require__.bind(null, /*! ./app/components/form/FormAttachment.vue */ "./resources/js/src/app/components/form/FormAttachment.vue"));
+  return __webpack_require__.e(/*! import() */ 29).then(__webpack_require__.bind(null, /*! ./app/components/form/FormAttachment.vue */ "./resources/js/src/app/components/form/FormAttachment.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("item-bundle", function () {
-  return __webpack_require__.e(/*! import() */ 32).then(__webpack_require__.bind(null, /*! ./app/components/item/ItemBundle.vue */ "./resources/js/src/app/components/item/ItemBundle.vue"));
+  return __webpack_require__.e(/*! import() */ 33).then(__webpack_require__.bind(null, /*! ./app/components/item/ItemBundle.vue */ "./resources/js/src/app/components/item/ItemBundle.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("order-property-value", function () {
-  return __webpack_require__.e(/*! import() */ 35).then(__webpack_require__.bind(null, /*! ./app/components/item/OrderPropertyValue.vue */ "./resources/js/src/app/components/item/OrderPropertyValue.vue"));
+  return __webpack_require__.e(/*! import() */ 36).then(__webpack_require__.bind(null, /*! ./app/components/item/OrderPropertyValue.vue */ "./resources/js/src/app/components/item/OrderPropertyValue.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("quantity-input", function () {
   return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./app/components/item/QuantityInput.vue */ "./resources/js/src/app/components/item/QuantityInput.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("tag-list", function () {
-  return __webpack_require__.e(/*! import() */ 39).then(__webpack_require__.bind(null, /*! ./app/components/item/TagList.vue */ "./resources/js/src/app/components/item/TagList.vue"));
+  return __webpack_require__.e(/*! import() */ 40).then(__webpack_require__.bind(null, /*! ./app/components/item/TagList.vue */ "./resources/js/src/app/components/item/TagList.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("category-item", function () {
   return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./app/components/itemList/CategoryItem.vue */ "./resources/js/src/app/components/itemList/CategoryItem.vue"));
@@ -81575,13 +82306,13 @@ vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("category-item", function (
 
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("item-search", _app_components_itemList_ItemSearch_vue__WEBPACK_IMPORTED_MODULE_21__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("search-suggestion-item", function () {
-  return __webpack_require__.e(/*! import() */ 40).then(__webpack_require__.bind(null, /*! ./app/components/itemList/SearchSuggestionItem.vue */ "./resources/js/src/app/components/itemList/SearchSuggestionItem.vue"));
+  return __webpack_require__.e(/*! import() */ 41).then(__webpack_require__.bind(null, /*! ./app/components/itemList/SearchSuggestionItem.vue */ "./resources/js/src/app/components/itemList/SearchSuggestionItem.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("item-filter-list", function () {
   return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./app/components/itemList/filter/ItemFilterList.vue */ "./resources/js/src/app/components/itemList/filter/ItemFilterList.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("item-filter-tag-list", function () {
-  return __webpack_require__.e(/*! import() */ 41).then(__webpack_require__.bind(null, /*! ./app/components/itemList/filter/ItemFilterTagList.vue */ "./resources/js/src/app/components/itemList/filter/ItemFilterTagList.vue"));
+  return __webpack_require__.e(/*! import() */ 42).then(__webpack_require__.bind(null, /*! ./app/components/itemList/filter/ItemFilterTagList.vue */ "./resources/js/src/app/components/itemList/filter/ItemFilterTagList.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("live-shopping-item", function () {
   return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./app/components/liveShopping/LiveShoppingItem.vue */ "./resources/js/src/app/components/liveShopping/LiveShoppingItem.vue"));
@@ -81596,13 +82327,13 @@ vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("order-return", function ()
   return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./app/components/orderReturn/OrderReturn.vue */ "./resources/js/src/app/components/orderReturn/OrderReturn.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("cookie-bar", function () {
-  return __webpack_require__.e(/*! import() */ 43).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/CookieBar.vue */ "./resources/js/src/app/components/pageDesign/CookieBar.vue"));
+  return __webpack_require__.e(/*! import() */ 44).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/CookieBar.vue */ "./resources/js/src/app/components/pageDesign/CookieBar.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("privacy-settings", function () {
-  return __webpack_require__.e(/*! import() */ 46).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/PrivacySettings.vue */ "./resources/js/src/app/components/pageDesign/PrivacySettings.vue"));
+  return __webpack_require__.e(/*! import() */ 47).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/PrivacySettings.vue */ "./resources/js/src/app/components/pageDesign/PrivacySettings.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("carousel", function () {
-  return __webpack_require__.e(/*! import() */ 42).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/Carousel.vue */ "./resources/js/src/app/components/pageDesign/Carousel.vue"));
+  return __webpack_require__.e(/*! import() */ 43).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/Carousel.vue */ "./resources/js/src/app/components/pageDesign/Carousel.vue"));
 });
 
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("icon", _app_components_pageDesign_Icon_vue__WEBPACK_IMPORTED_MODULE_22__["default"]);
@@ -81613,13 +82344,13 @@ vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("mobile-navigation", _app_c
 
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("notifications", _app_components_pageDesign_Notifications_vue__WEBPACK_IMPORTED_MODULE_25__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("popper", function () {
-  return __webpack_require__.e(/*! import() */ 45).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/Popper.vue */ "./resources/js/src/app/components/pageDesign/Popper.vue"));
+  return __webpack_require__.e(/*! import() */ 46).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/Popper.vue */ "./resources/js/src/app/components/pageDesign/Popper.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("shipping-country-select", function () {
-  return __webpack_require__.e(/*! import() */ 47).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/ShippingCountrySelect.vue */ "./resources/js/src/app/components/pageDesign/ShippingCountrySelect.vue"));
+  return __webpack_require__.e(/*! import() */ 48).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/ShippingCountrySelect.vue */ "./resources/js/src/app/components/pageDesign/ShippingCountrySelect.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("loading-animation", function () {
-  return __webpack_require__.e(/*! import() */ 44).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/LoadingAnimation.vue */ "./resources/js/src/app/components/pageDesign/LoadingAnimation.vue"));
+  return __webpack_require__.e(/*! import() */ 45).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/LoadingAnimation.vue */ "./resources/js/src/app/components/pageDesign/LoadingAnimation.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("wish-list", function () {
   return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./app/components/wishList/WishList.vue */ "./resources/js/src/app/components/wishList/WishList.vue"));
@@ -81629,22 +82360,22 @@ vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("wish-list-count", _app_com
 
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("lazy-load", _app_components_common_LazyLoad_vue__WEBPACK_IMPORTED_MODULE_27__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("add-to-wish-list", function () {
-  return __webpack_require__.e(/*! import() */ 29).then(__webpack_require__.bind(null, /*! ./app/components/item/AddToWishList.vue */ "./resources/js/src/app/components/item/AddToWishList.vue"));
+  return __webpack_require__.e(/*! import() */ 30).then(__webpack_require__.bind(null, /*! ./app/components/item/AddToWishList.vue */ "./resources/js/src/app/components/item/AddToWishList.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("graduated-prices", function () {
-  return __webpack_require__.e(/*! import() */ 30).then(__webpack_require__.bind(null, /*! ./app/components/item/GraduatedPrices.vue */ "./resources/js/src/app/components/item/GraduatedPrices.vue"));
+  return __webpack_require__.e(/*! import() */ 31).then(__webpack_require__.bind(null, /*! ./app/components/item/GraduatedPrices.vue */ "./resources/js/src/app/components/item/GraduatedPrices.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("item-data-table", function () {
   return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./app/components/item/ItemDataTable.vue */ "./resources/js/src/app/components/item/ItemDataTable.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("item-image-carousel", function () {
-  return __webpack_require__.e(/*! import() */ 33).then(__webpack_require__.bind(null, /*! ./app/components/item/ItemImageCarousel.vue */ "./resources/js/src/app/components/item/ItemImageCarousel.vue"));
+  return __webpack_require__.e(/*! import() */ 34).then(__webpack_require__.bind(null, /*! ./app/components/item/ItemImageCarousel.vue */ "./resources/js/src/app/components/item/ItemImageCarousel.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("item-price", function () {
-  return __webpack_require__.e(/*! import() */ 34).then(__webpack_require__.bind(null, /*! ./app/components/item/ItemPrice.vue */ "./resources/js/src/app/components/item/ItemPrice.vue"));
+  return __webpack_require__.e(/*! import() */ 35).then(__webpack_require__.bind(null, /*! ./app/components/item/ItemPrice.vue */ "./resources/js/src/app/components/item/ItemPrice.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("set-price", function () {
-  return __webpack_require__.e(/*! import() */ 36).then(__webpack_require__.bind(null, /*! ./app/components/item/SetPrice.vue */ "./resources/js/src/app/components/item/SetPrice.vue"));
+  return __webpack_require__.e(/*! import() */ 37).then(__webpack_require__.bind(null, /*! ./app/components/item/SetPrice.vue */ "./resources/js/src/app/components/item/SetPrice.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("order-property-list", function () {
   return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./app/components/item/OrderPropertyList.vue */ "./resources/js/src/app/components/item/OrderPropertyList.vue"));
@@ -81653,16 +82384,16 @@ vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("variation-select", functio
   return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./app/components/item/VariationSelect.vue */ "./resources/js/src/app/components/item/VariationSelect.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("item-availability", function () {
-  return __webpack_require__.e(/*! import() */ 31).then(__webpack_require__.bind(null, /*! ./app/components/item/ItemAvailability.vue */ "./resources/js/src/app/components/item/ItemAvailability.vue"));
+  return __webpack_require__.e(/*! import() */ 32).then(__webpack_require__.bind(null, /*! ./app/components/item/ItemAvailability.vue */ "./resources/js/src/app/components/item/ItemAvailability.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("single-item-bundle", function () {
   return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./app/components/item/SingleItemBundle.vue */ "./resources/js/src/app/components/item/SingleItemBundle.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("single-add-to-basket", function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(38)]).then(__webpack_require__.bind(null, /*! ./app/components/item/SingleAddToBasket.vue */ "./resources/js/src/app/components/item/SingleAddToBasket.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(39)]).then(__webpack_require__.bind(null, /*! ./app/components/item/SingleAddToBasket.vue */ "./resources/js/src/app/components/item/SingleAddToBasket.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("set-quantity-input", function () {
-  return __webpack_require__.e(/*! import() */ 37).then(__webpack_require__.bind(null, /*! ./app/components/item/SetQuantityInput.vue */ "./resources/js/src/app/components/item/SetQuantityInput.vue"));
+  return __webpack_require__.e(/*! import() */ 38).then(__webpack_require__.bind(null, /*! ./app/components/item/SetQuantityInput.vue */ "./resources/js/src/app/components/item/SetQuantityInput.vue"));
 });
 
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("single-item", _app_components_item_SingleItem_vue__WEBPACK_IMPORTED_MODULE_28__["default"]);

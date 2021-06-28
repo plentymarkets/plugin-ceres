@@ -246,6 +246,12 @@ context("Address", () =>
         });
     });
 
+    it("should prefill email input", () =>
+    {
+        cy.getByTestingAttr("billing-address-select-add").click();
+        cy.getByTestingAttr("billing-address-de-email-input").should("have.value", ADDRESS_TEST_USER_EMAIL);
+    });
+
     function deleteAllAddresses()
     {
         cy.getStore().then((store) =>

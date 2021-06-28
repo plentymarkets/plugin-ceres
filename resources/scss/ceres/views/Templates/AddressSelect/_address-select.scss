@@ -21,24 +21,6 @@
         }
     }
 
-    .dropdown-toggle {
-        &::after {
-            position: absolute;
-            top: 80%;
-            right: 1.5rem;
-            z-index: 1;
-            transform: translateY(-50%);
-        }
-    }
-
-    .items.open {
-        .dropdown-toggle {
-            border-bottom: none;
-            border-bottom-right-radius: 0; // stylelint-disable-line property-blacklist
-            border-bottom-left-radius: 0; // stylelint-disable-line property-blacklist
-        }
-    }
-
     .dropdown-menu {
         width: 100%;
         padding: 0;
@@ -88,18 +70,14 @@
         margin-bottom: 0;
         cursor: pointer;
 
+        @include media-breakpoint-down(xs) {
+            display: block;
+        }
     }
 
     .item-controls {
         display: flex;
 
-        .item-edit .fa {
-            padding-top: .3rem;
-            padding-left: .1rem;
-        }
-        .item-remove .fa {
-            padding-top: .1rem;
-        }
         .fa {
             float: none;
             @include transition(all .2s ease-in-out);
@@ -108,7 +86,6 @@
             width: 2.2rem;
             height: 2.2rem;
             padding: 0;
-            margin-left: 5px;
         }
     }
 
@@ -144,7 +121,7 @@
         & button {
             width: 50px;
             min-width: auto !important; // stylelint-disable-line declaration-no-important
-            height: 74px;
+            height: 54px;
         }
     }
 

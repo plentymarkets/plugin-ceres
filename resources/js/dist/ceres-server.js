@@ -1549,6 +1549,55 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0__);
+
+//
+//
+//
+//
+//
+var ADDRESS_EMAIL_TYPE_ID = 5;
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "mail-changed-info",
+  props: {
+    userMail: {
+      type: String,
+      required: true
+    }
+  },
+  computed: {
+    showMailChanged: function showMailChanged() {
+      return !!this.billingAddressMail && this.billingAddressMail !== this.userMail;
+    },
+    billingAddressMail: function billingAddressMail() {
+      var _this$$store$state$ad, _this$$store$state$ad2;
+
+      var mail = "";
+      (_this$$store$state$ad = this.$store.state.address.billingAddress) === null || _this$$store$state$ad === void 0 ? void 0 : (_this$$store$state$ad2 = _this$$store$state$ad.options) === null || _this$$store$state$ad2 === void 0 ? void 0 : _this$$store$state$ad2.forEach(function (option) {
+        if (option.typeId === ADDRESS_EMAIL_TYPE_ID) {
+          mail = option.value;
+        }
+      });
+      return mail;
+    },
+    isGuest: function isGuest() {
+      return !this.$store.getters.isLoggedIn;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/list/BasketList.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/basket/list/BasketList.vue?vue&type=script&lang=js& ***!
@@ -3174,6 +3223,12 @@ __webpack_require__.r(__webpack_exports__);
       default: null
     }
   },
+  data: function data() {
+    return {
+      mountedItems: [],
+      isMounted: false
+    };
+  },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])({
     items: function items(state) {
       return state.lastSeen.lastSeenItems.slice(0, this.maxItems);
@@ -3183,7 +3238,21 @@ __webpack_require__.r(__webpack_exports__);
     }
   }),
   beforeMount: function beforeMount() {
-    this.$store.dispatch("getLastSeenItems");
+    // SingleItem executes a PUT on the route, which already returns the data fetched here
+    if (!App.isItemView) {
+      this.$store.dispatch("getLastSeenItems");
+    }
+  },
+  mounted: function mounted() {
+    this.mountedItems = this.items;
+    this.isMounted = true;
+  },
+  watch: {
+    items: function items() {
+      if (this.isMounted) {
+        this.mountedItems = this.items;
+      }
+    }
   },
   methods: {
     getContainerContentById: function getContainerContentById(variationId, containerKey) {
@@ -3299,6 +3368,118 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -12676,9 +12857,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
 /* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 
 
@@ -12781,7 +12960,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -12816,7 +13005,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.$translate("Ceres::Template.cookieBarHintText", links);
     }
   },
-  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_7__["mapMutations"])(["storeConsents", "acceptAll"])), {}, {
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_6__["mapMutations"])(["storeConsents", "acceptAll"])), {}, {
     close: function close() {
       this.isCollapsed = true;
       this.isExpanded = false;
@@ -41682,6 +41871,45 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=template&id=2e21aa14&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=template&id=2e21aa14& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.showMailChanged && !_vm.isGuest
+    ? _c("div", { staticClass: "mail-changed-info alert alert-info w-100" }, [
+        _vm._ssrNode(
+          _vm._ssrEscape(
+            "\n    " +
+              _vm._s(
+                _vm.$translate("Ceres::Template.checkoutChangedMail", {
+                  newMail: _vm.billingAddressMail,
+                  currMail: _vm.userMail
+                })
+              ) +
+              "\n"
+          )
+        )
+      ])
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/list/BasketList.vue?vue&type=template&id=354088c4&":
 /*!*********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/basket/list/BasketList.vue?vue&type=template&id=354088c4& ***!
@@ -42865,7 +43093,7 @@ var render = function() {
       _vm._ssrNode(
         '<div class="col-12"' +
           _vm._ssrStyle(null, null, {
-            display: _vm.items.length ? "" : "none"
+            display: _vm.mountedItems.length ? "" : "none"
           }) +
           ">",
         "</div>",
@@ -42877,7 +43105,7 @@ var render = function() {
         '<div class="col-12">',
         "</div>",
         [
-          _vm.items && _vm.items.length > 0
+          _vm.mountedItems && _vm.mountedItems.length > 0
             ? _c(
                 "carousel",
                 {
@@ -42897,7 +43125,7 @@ var render = function() {
                             "decimal-count":
                               _vm.$ceres.config.item.storeSpecial,
                             "disable-carousel-on-mobile":
-                              _vm.items.length > _vm.itemsPerPage,
+                              _vm.mountedItems.length > _vm.itemsPerPage,
                             "padding-classes": _vm.paddingClasses,
                             "padding-inline-styles": _vm.paddingInlineStyles
                           },
@@ -43618,7 +43846,88 @@ var render = function() {
                 ) +
                 "</label></div></div> "
             ),
-            _vm._t("custom-address-fields")
+            _vm._ssrNode(
+              '<div data-testing="address-country-select" class="col-12 col-sm-4">',
+              "</div>",
+              [
+                _c("country-select", {
+                  attrs: {
+                    "selected-country-id": _vm.value.countryId,
+                    "selected-state-id": _vm.value.stateId,
+                    "address-type": _vm.addressType,
+                    "optional-address-fields": _vm.optionalAddressFields,
+                    "required-address-fields": _vm.requiredAddressFields
+                  },
+                  on: {
+                    "country-changed": function($event) {
+                      return _vm.onSelectedCountryChanged($event)
+                    },
+                    "state-changed": function($event) {
+                      return _vm.emitInputEvent("stateId", $event)
+                    }
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._ssrNode(" "),
+            _vm._t("custom-address-fields"),
+            _vm._ssrNode(" "),
+            _vm._ssrNode(
+              '<div class="col-12">',
+              "</div>",
+              [
+                _vm._ssrNode('<hr class="mt-0"> '),
+                _vm._ssrNode('<div class="row">', "</div>", [
+                  _vm.isInOptionalFields("de", "delivery_address.email")
+                    ? _vm._ssrNode('<div class="col-12">', "</div>", [
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "validate",
+                                rawName: "v-validate:text",
+                                value: _vm.isInRequiredFields(
+                                  "de",
+                                  "delivery_address.email"
+                                ),
+                                expression:
+                                  "isInRequiredFields('de', 'delivery_address.email')",
+                                arg: "text"
+                              }
+                            ],
+                            staticClass: "input-unit",
+                            attrs: { "data-model": "email" }
+                          },
+                          [
+                            _vm._ssrNode(
+                              '<input type="mail" name="email"' +
+                                _vm._ssrAttr("id", "email" + _vm._uid) +
+                                ' data-testing="packing-station-de-email-input"' +
+                                _vm._ssrAttr("value", _vm.value.email) +
+                                "> <label" +
+                                _vm._ssrAttr("for", "email" + _vm._uid) +
+                                ">" +
+                                _vm._ssrEscape(
+                                  _vm._s(
+                                    _vm.transformTranslation(
+                                      "Ceres::Template.addressMail",
+                                      "de",
+                                      "delivery_address.email"
+                                    )
+                                  )
+                                ) +
+                                "</label>"
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e()
+                ])
+              ],
+              2
+            )
           ]
         : _vm.localeToShow == "DE" && _vm.addressType === "1"
         ? [
@@ -44352,7 +44661,88 @@ var render = function() {
                 ) +
                 "</label></div></div> "
             ),
-            _vm._t("custom-address-fields")
+            _vm._ssrNode(
+              '<div data-testing="address-country-select" class="col-12 col-sm-4">',
+              "</div>",
+              [
+                _c("country-select", {
+                  attrs: {
+                    "selected-country-id": _vm.value.countryId,
+                    "selected-state-id": _vm.value.stateId,
+                    "address-type": _vm.addressType,
+                    "optional-address-fields": _vm.optionalAddressFields,
+                    "required-address-fields": _vm.requiredAddressFields
+                  },
+                  on: {
+                    "country-changed": function($event) {
+                      return _vm.onSelectedCountryChanged($event)
+                    },
+                    "state-changed": function($event) {
+                      return _vm.emitInputEvent("stateId", $event)
+                    }
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._ssrNode(" "),
+            _vm._t("custom-address-fields"),
+            _vm._ssrNode(" "),
+            _vm._ssrNode(
+              '<div class="col-12">',
+              "</div>",
+              [
+                _vm._ssrNode('<hr class="mt-0"> '),
+                _vm._ssrNode('<div class="row">', "</div>", [
+                  _vm.isInOptionalFields("de", "billing_address.email")
+                    ? _vm._ssrNode('<div class="col-12">', "</div>", [
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "validate",
+                                rawName: "v-validate:text",
+                                value: _vm.isInRequiredFields(
+                                  "de",
+                                  "billing_address.email"
+                                ),
+                                expression:
+                                  "isInRequiredFields('de', 'billing_address.email')",
+                                arg: "text"
+                              }
+                            ],
+                            staticClass: "input-unit",
+                            attrs: { "data-model": "email" }
+                          },
+                          [
+                            _vm._ssrNode(
+                              '<input type="mail" name="email"' +
+                                _vm._ssrAttr("id", "email" + _vm._uid) +
+                                ' data-testing="billing-address-de-email-input"' +
+                                _vm._ssrAttr("value", _vm.value.email) +
+                                "> <label" +
+                                _vm._ssrAttr("for", "email" + _vm._uid) +
+                                ">" +
+                                _vm._ssrEscape(
+                                  _vm._s(
+                                    _vm.transformTranslation(
+                                      "Ceres::Template.addressMail",
+                                      "de",
+                                      "billing_address.email"
+                                    )
+                                  )
+                                ) +
+                                "</label>"
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e()
+                ])
+              ],
+              2
+            )
           ]
         : _vm.localeToShow == "GB" && _vm.addressType === "1"
         ? [
@@ -45105,7 +45495,88 @@ var render = function() {
                 ) +
                 "</label></div></div> "
             ),
-            _vm._t("custom-address-fields")
+            _vm._ssrNode(
+              '<div data-testing="address-country-select" class="col-12 col-sm-4">',
+              "</div>",
+              [
+                _c("country-select", {
+                  attrs: {
+                    "selected-country-id": _vm.value.countryId,
+                    "selected-state-id": _vm.value.stateId,
+                    "address-type": _vm.addressType,
+                    "optional-address-fields": _vm.optionalAddressFields,
+                    "required-address-fields": _vm.requiredAddressFields
+                  },
+                  on: {
+                    "country-changed": function($event) {
+                      return _vm.onSelectedCountryChanged($event)
+                    },
+                    "state-changed": function($event) {
+                      return _vm.emitInputEvent("stateId", $event)
+                    }
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._ssrNode(" "),
+            _vm._t("custom-address-fields"),
+            _vm._ssrNode(" "),
+            _vm._ssrNode(
+              '<div class="col-12">',
+              "</div>",
+              [
+                _vm._ssrNode('<hr class="mt-0"> '),
+                _vm._ssrNode('<div class="row">', "</div>", [
+                  _vm.isInOptionalFields("gb", "billing_address.email")
+                    ? _vm._ssrNode('<div class="col-12">', "</div>", [
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "validate",
+                                rawName: "v-validate:text",
+                                value: _vm.isInRequiredFields(
+                                  "gb",
+                                  "billing_address.email"
+                                ),
+                                expression:
+                                  "isInRequiredFields('gb', 'billing_address.email')",
+                                arg: "text"
+                              }
+                            ],
+                            staticClass: "input-unit",
+                            attrs: { "data-model": "email" }
+                          },
+                          [
+                            _vm._ssrNode(
+                              '<input type="mail" name="email"' +
+                                _vm._ssrAttr("id", "email" + _vm._uid) +
+                                ' data-testing="billing-address-gb-email-input"' +
+                                _vm._ssrAttr("value", _vm.value.email) +
+                                "> <label" +
+                                _vm._ssrAttr("for", "email" + _vm._uid) +
+                                ">" +
+                                _vm._ssrEscape(
+                                  _vm._s(
+                                    _vm.transformTranslation(
+                                      "Ceres::Template.addressMail",
+                                      "gb",
+                                      "billing_address.email"
+                                    )
+                                  )
+                                ) +
+                                "</label>"
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e()
+                ])
+              ],
+              2
+            )
           ]
         : _vm.localeToShow == "DE" && _vm.addressType === "2"
         ? [
@@ -45753,7 +46224,88 @@ var render = function() {
                 ) +
                 "</label></div></div> "
             ),
-            _vm._t("custom-address-fields")
+            _vm._ssrNode(
+              '<div data-testing="address-country-select" class="col-12 col-sm-4">',
+              "</div>",
+              [
+                _c("country-select", {
+                  attrs: {
+                    "selected-country-id": _vm.value.countryId,
+                    "selected-state-id": _vm.value.stateId,
+                    "address-type": _vm.addressType,
+                    "optional-address-fields": _vm.optionalAddressFields,
+                    "required-address-fields": _vm.requiredAddressFields
+                  },
+                  on: {
+                    "country-changed": function($event) {
+                      return _vm.onSelectedCountryChanged($event)
+                    },
+                    "state-changed": function($event) {
+                      return _vm.emitInputEvent("stateId", $event)
+                    }
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._ssrNode(" "),
+            _vm._t("custom-address-fields"),
+            _vm._ssrNode(" "),
+            _vm._ssrNode(
+              '<div class="col-12">',
+              "</div>",
+              [
+                _vm._ssrNode('<hr class="mt-0"> '),
+                _vm._ssrNode('<div class="row">', "</div>", [
+                  _vm.isInOptionalFields("de", "delivery_address.email")
+                    ? _vm._ssrNode('<div class="col-12">', "</div>", [
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "validate",
+                                rawName: "v-validate:text",
+                                value: _vm.isInRequiredFields(
+                                  "de",
+                                  "delivery_address.email"
+                                ),
+                                expression:
+                                  "isInRequiredFields('de', 'delivery_address.email')",
+                                arg: "text"
+                              }
+                            ],
+                            staticClass: "input-unit",
+                            attrs: { "data-model": "email" }
+                          },
+                          [
+                            _vm._ssrNode(
+                              '<input type="mail" name="email"' +
+                                _vm._ssrAttr("id", "email" + _vm._uid) +
+                                ' data-testing="delivery-address-de-email-input"' +
+                                _vm._ssrAttr("value", _vm.value.email) +
+                                "> <label" +
+                                _vm._ssrAttr("for", "email" + _vm._uid) +
+                                ">" +
+                                _vm._ssrEscape(
+                                  _vm._s(
+                                    _vm.transformTranslation(
+                                      "Ceres::Template.addressMail",
+                                      "de",
+                                      "delivery_address.email"
+                                    )
+                                  )
+                                ) +
+                                "</label>"
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e()
+                ])
+              ],
+              2
+            )
           ]
         : _vm.localeToShow == "GB" && _vm.addressType === "2"
         ? [
@@ -46433,34 +46985,90 @@ var render = function() {
                 ) +
                 "</label></div></div> "
             ),
-            _vm._t("custom-address-fields")
+            _vm._ssrNode(
+              '<div data-testing="address-country-select" class="col-12 col-sm-4">',
+              "</div>",
+              [
+                _c("country-select", {
+                  attrs: {
+                    "selected-country-id": _vm.value.countryId,
+                    "selected-state-id": _vm.value.stateId,
+                    "address-type": _vm.addressType,
+                    "optional-address-fields": _vm.optionalAddressFields,
+                    "required-address-fields": _vm.requiredAddressFields
+                  },
+                  on: {
+                    "country-changed": function($event) {
+                      return _vm.onSelectedCountryChanged($event)
+                    },
+                    "state-changed": function($event) {
+                      return _vm.emitInputEvent("stateId", $event)
+                    }
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._ssrNode(" "),
+            _vm._t("custom-address-fields"),
+            _vm._ssrNode(" "),
+            _vm._ssrNode(
+              '<div class="col-12">',
+              "</div>",
+              [
+                _vm._ssrNode('<hr class="mt-0"> '),
+                _vm._ssrNode('<div class="row">', "</div>", [
+                  _vm.isInOptionalFields("gb", "delivery_address.email")
+                    ? _vm._ssrNode('<div class="col-12">', "</div>", [
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "validate",
+                                rawName: "v-validate:text",
+                                value: _vm.isInRequiredFields(
+                                  "gb",
+                                  "delivery_address.email"
+                                ),
+                                expression:
+                                  "isInRequiredFields('gb', 'delivery_address.email')",
+                                arg: "text"
+                              }
+                            ],
+                            staticClass: "input-unit",
+                            attrs: { "data-model": "email" }
+                          },
+                          [
+                            _vm._ssrNode(
+                              '<input type="mail" name="email"' +
+                                _vm._ssrAttr("id", "email" + _vm._uid) +
+                                ' data-testing="delivery-address-gb-email-input"' +
+                                _vm._ssrAttr("value", _vm.value.email) +
+                                "> <label" +
+                                _vm._ssrAttr("for", "email" + _vm._uid) +
+                                ">" +
+                                _vm._ssrEscape(
+                                  _vm._s(
+                                    _vm.transformTranslation(
+                                      "Ceres::Template.addressMail",
+                                      "gb",
+                                      "delivery_address.email"
+                                    )
+                                  )
+                                ) +
+                                "</label>"
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e()
+                ])
+              ],
+              2
+            )
           ]
-        : _vm._e(),
-      _vm._ssrNode(" "),
-      _vm._ssrNode(
-        '<div data-testing="address-country-select" class="col-12 col-sm-4">',
-        "</div>",
-        [
-          _c("country-select", {
-            attrs: {
-              "selected-country-id": _vm.value.countryId,
-              "selected-state-id": _vm.value.stateId,
-              "address-type": _vm.addressType,
-              "optional-address-fields": _vm.optionalAddressFields,
-              "required-address-fields": _vm.requiredAddressFields
-            },
-            on: {
-              "country-changed": function($event) {
-                return _vm.onSelectedCountryChanged($event)
-              },
-              "state-changed": function($event) {
-                return _vm.emitInputEvent("stateId", $event)
-              }
-            }
-          })
-        ],
-        1
-      )
+        : _vm._e()
     ],
     2
   )
@@ -53422,6 +54030,14 @@ var render = function() {
   return _c(
     "div",
     {
+      directives: [
+        {
+          name: "show",
+          rawName: "v-show",
+          value: !_vm.$ceres.isSSR,
+          expression: "!$ceres.isSSR"
+        }
+      ],
       staticClass: "cookie-bar",
       class: {
         out: !_vm.isVisible,
@@ -73826,6 +74442,9 @@ function createApp(options, store) {
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("basket-totals", function () {
     return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./app/components/basket/BasketTotals.vue */ "./resources/js/src/app/components/basket/BasketTotals.vue"));
   });
+  vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("mail-changed-info", function () {
+    return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./app/components/basket/MailChangedInfo.vue */ "./resources/js/src/app/components/basket/MailChangedInfo.vue"));
+  });
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("coupon", function () {
     return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./app/components/basket/Coupon.vue */ "./resources/js/src/app/components/basket/Coupon.vue"));
   });
@@ -74313,6 +74932,73 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Coupon_vue_vue_type_template_id_127bda26___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Coupon_vue_vue_type_template_id_127bda26___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/src/app/components/basket/MailChangedInfo.vue":
+/*!********************************************************************!*\
+  !*** ./resources/js/src/app/components/basket/MailChangedInfo.vue ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _MailChangedInfo_vue_vue_type_template_id_2e21aa14___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MailChangedInfo.vue?vue&type=template&id=2e21aa14& */ "./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=template&id=2e21aa14&");
+/* harmony import */ var _MailChangedInfo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MailChangedInfo.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _MailChangedInfo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _MailChangedInfo_vue_vue_type_template_id_2e21aa14___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _MailChangedInfo_vue_vue_type_template_id_2e21aa14___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  "c1b2c042"
+  
+)
+
+component.options.__file = "resources/js/src/app/components/basket/MailChangedInfo.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_MailChangedInfo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./MailChangedInfo.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_MailChangedInfo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=template&id=2e21aa14&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=template&id=2e21aa14& ***!
+  \***************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MailChangedInfo_vue_vue_type_template_id_2e21aa14___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./MailChangedInfo.vue?vue&type=template&id=2e21aa14& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=template&id=2e21aa14&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MailChangedInfo_vue_vue_type_template_id_2e21aa14___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MailChangedInfo_vue_vue_type_template_id_2e21aa14___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -86826,6 +87512,9 @@ var actions = {
               event.target.reset();
               disableForm(event.target, false);
               _services_NotificationService__WEBPACK_IMPORTED_MODULE_14__["default"].success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_15__["default"].translate("Ceres::Template.contactSendSuccess")).closeAfter(3000);
+              document.dispatchEvent(new CustomEvent("contactFormSent", {
+                detail: formData
+              }));
             }).fail(function (response) {
               resetRecaptcha(recaptchaEl);
               disableForm(event.target, false);
@@ -87451,14 +88140,17 @@ var actions = {
       return new Promise(function (resolve, reject) {
         commit("setIsLastSeenItemsLoading", true);
         ApiService.put("/rest/io/item/last_seen/".concat(variationId)).done(function (response) {
+          var _response$lastSeenIte;
+
+          commit("setIsLastSeenItemsLoading", false);
+
           if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_2__["isDefined"])(response.lastSeenItems)) {
             commit("setLastSeenItems", response.lastSeenItems.documents);
             commit("setLastSeenItemContainers", response.containers);
             commit("setIsLastSeenItemsLoading", false);
-            resolve(response.lastSeenItems.documents);
-          } else {
-            resolve(null);
           }
+
+          resolve(response === null || response === void 0 ? void 0 : (_response$lastSeenIte = response.lastSeenItems) === null || _response$lastSeenIte === void 0 ? void 0 : _response$lastSeenIte.documents);
         }).fail(function (error) {
           commit("setIsLastSeenItemsLoading", false);
           reject(error);

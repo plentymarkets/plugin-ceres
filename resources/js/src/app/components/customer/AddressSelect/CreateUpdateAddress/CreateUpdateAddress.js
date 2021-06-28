@@ -228,6 +228,14 @@ export default Vue.component("create-update-address", {
                         }
                         break;
                     }
+                    case 5:
+                    {
+                        if (!isNullOrUndefined(this.addressData.email) && this.addressData.email !== optionType.value)
+                        {
+                            optionType.value = this.addressData.email;
+                        }
+                        break;
+                    }
                     case 6:
                     {
                         if (!isNullOrUndefined(this.addressData.postNumber) && this.addressData.postNumber !== optionType.value)
