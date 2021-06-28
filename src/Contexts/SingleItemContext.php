@@ -178,7 +178,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
             $barcodeType = 'GTIN';
             $this->gtin = $this->getFirstBarcode($itemData['barcodes'], $barcodeType);
         } elseif ($gtinMapping == 3) {
-            $this->gtin = $this->getBarcodeWithId($itemData['barcodes'], $gtinMappingId, );
+            $this->gtin = $this->getBarcodeWithId($itemData['barcodes'], $gtinMappingId);
         }
 
         $gtin8Mapping = $this->ceresConfig->seo->gtin8Mapping;
@@ -187,7 +187,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
             $barcodeType = "GTIN_8";
             $this->gtin8 = $this->getFirstBarcode($itemData['barcodes'], $barcodeType);
         } elseif ($gtin8Mapping == 3) {
-            $this->gtin8 = $this->getBarcodeWithId($itemData['barcodes'], $gtin8MappingId,);
+            $this->gtin8 = $this->getBarcodeWithId($itemData['barcodes'], $gtin8MappingId);
         }
 
         $gtin13Mapping = $this->ceresConfig->seo->gtin13Mapping;
