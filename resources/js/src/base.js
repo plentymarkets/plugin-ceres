@@ -92,6 +92,8 @@ Vue.component("privacy-settings", () => import("./app/components/pageDesign/Priv
 Vue.component("carousel", () => import("./app/components/pageDesign/Carousel.vue"));
 import Icon from "./app/components/pageDesign/Icon.vue";
 Vue.component("icon", Icon);
+import LanguageDetection from "./app/components/pageDesign/LanguageDetection.vue";
+Vue.component("language-detection", LanguageDetection);
 import MobileNavigation from "./app/components/pageDesign/MobileNavigation.vue";
 Vue.component("mobile-navigation", MobileNavigation);
 import Notifications from "./app/components/pageDesign/Notifications.vue";

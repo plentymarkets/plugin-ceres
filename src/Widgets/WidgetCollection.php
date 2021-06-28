@@ -65,6 +65,7 @@ use Ceres\Widgets\Grid\TabWidget;
 use Ceres\Widgets\Grid\ThreeColumnWidget;
 use Ceres\Widgets\Grid\TwoColumnWidget;
 use Ceres\Widgets\Header\BreadcrumbWidget;
+use Ceres\Widgets\Header\LanguageDetectionWidget;
 use Ceres\Widgets\Header\NavigationWidget;
 use Ceres\Widgets\Header\Search\SearchSuggestionCategoryWidget;
 use Ceres\Widgets\Header\Search\SearchSuggestionItemWidget;
@@ -185,7 +186,8 @@ class WidgetCollection
         SearchSuggestionCategoryWidget::class,
         SearchSuggestionItemWidget::class,
         SearchSuggestionSuggestionWidget::class,
-        TopBarWidget::class
+        TopBarWidget::class,
+        LanguageDetectionWidget::class
     ];
 
     const ITEM_WIDGETS = [

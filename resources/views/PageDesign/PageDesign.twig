@@ -205,7 +205,8 @@
             "shippingCountryId": {{ services.checkout.getShippingCountryId() }},
             "showNetPrices": {{ showNetPrices | json_encode }}
         },
-        "features": {}
+        "features": {},
+        "languageMap": {{ webstoreConfig.browserLanguage | json_encode | raw }}
     }
 </script>
 <!-- /SSR -->
