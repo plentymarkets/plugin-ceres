@@ -4341,6 +4341,59 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -43023,62 +43076,6 @@ var render = function() {
         ? [
             _vm._ssrNode('<div class="col-12">', "</div>", [
               _vm._ssrNode('<div class="row">', "</div>", [
-                _vm.isInOptionalFields("de", "delivery_address.email")
-                  ? _vm._ssrNode(
-                      '<div class="col-12">',
-                      "</div>",
-                      [
-                        _c(
-                          "div",
-                          {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate:text",
-                                value: _vm.isInRequiredFields(
-                                  "de",
-                                  "delivery_address.email"
-                                ),
-                                expression:
-                                  "isInRequiredFields('de', 'delivery_address.email')",
-                                arg: "text"
-                              }
-                            ],
-                            staticClass: "input-unit mb-0",
-                            attrs: { "data-model": "email" }
-                          },
-                          [
-                            _vm._ssrNode(
-                              '<input type="mail" name="email"' +
-                                _vm._ssrAttr("id", "email" + _vm._uid) +
-                                ' data-testing="packing-station-de-email-input"' +
-                                _vm._ssrAttr("value", _vm.value.email) +
-                                "> <label" +
-                                _vm._ssrAttr("for", "email" + _vm._uid) +
-                                ">" +
-                                _vm._ssrEscape(
-                                  _vm._s(
-                                    _vm.transformTranslation(
-                                      "Ceres::Template.addressMail",
-                                      "de",
-                                      "delivery_address.email"
-                                    )
-                                  )
-                                ) +
-                                "</label>"
-                            )
-                          ]
-                        ),
-                        _vm._ssrNode(" <hr>")
-                      ],
-                      2
-                    )
-                  : _vm._e()
-              ])
-            ]),
-            _vm._ssrNode(" "),
-            _vm._ssrNode('<div class="col-12">', "</div>", [
-              _vm._ssrNode('<div class="row">', "</div>", [
                 _vm.isInOptionalFields("de", "delivery_address.salutation")
                   ? _vm._ssrNode('<div class="col-12 col-sm-4">', "</div>", [
                       _c(
@@ -43666,17 +43663,41 @@ var render = function() {
                 ) +
                 "</label></div></div> "
             ),
-            _vm._t("custom-address-fields")
-          ]
-        : _vm.localeToShow == "DE" && _vm.addressType === "1"
-        ? [
-            _vm._ssrNode('<div class="col-12">', "</div>", [
-              _vm._ssrNode('<div class="row">', "</div>", [
-                _vm.isInOptionalFields("de", "billing_address.email")
-                  ? _vm._ssrNode(
-                      '<div class="col-12">',
-                      "</div>",
-                      [
+            _vm._ssrNode(
+              '<div data-testing="address-country-select" class="col-12 col-sm-4">',
+              "</div>",
+              [
+                _c("country-select", {
+                  attrs: {
+                    "selected-country-id": _vm.value.countryId,
+                    "selected-state-id": _vm.value.stateId,
+                    "address-type": _vm.addressType,
+                    "optional-address-fields": _vm.optionalAddressFields,
+                    "required-address-fields": _vm.requiredAddressFields
+                  },
+                  on: {
+                    "country-changed": function($event) {
+                      return _vm.onSelectedCountryChanged($event)
+                    },
+                    "state-changed": function($event) {
+                      return _vm.emitInputEvent("stateId", $event)
+                    }
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._ssrNode(" "),
+            _vm._t("custom-address-fields"),
+            _vm._ssrNode(" "),
+            _vm._ssrNode(
+              '<div class="col-12">',
+              "</div>",
+              [
+                _vm._ssrNode('<hr class="mt-0"> '),
+                _vm._ssrNode('<div class="row">', "</div>", [
+                  _vm.isInOptionalFields("de", "delivery_address.email")
+                    ? _vm._ssrNode('<div class="col-12">', "</div>", [
                         _c(
                           "div",
                           {
@@ -43686,21 +43707,21 @@ var render = function() {
                                 rawName: "v-validate:text",
                                 value: _vm.isInRequiredFields(
                                   "de",
-                                  "billing_address.email"
+                                  "delivery_address.email"
                                 ),
                                 expression:
-                                  "isInRequiredFields('de', 'billing_address.email')",
+                                  "isInRequiredFields('de', 'delivery_address.email')",
                                 arg: "text"
                               }
                             ],
-                            staticClass: "input-unit mb-0",
+                            staticClass: "input-unit",
                             attrs: { "data-model": "email" }
                           },
                           [
                             _vm._ssrNode(
                               '<input type="mail" name="email"' +
                                 _vm._ssrAttr("id", "email" + _vm._uid) +
-                                ' data-testing="billing-address-de-email-input"' +
+                                ' data-testing="packing-station-de-email-input"' +
                                 _vm._ssrAttr("value", _vm.value.email) +
                                 "> <label" +
                                 _vm._ssrAttr("for", "email" + _vm._uid) +
@@ -43710,22 +43731,23 @@ var render = function() {
                                     _vm.transformTranslation(
                                       "Ceres::Template.addressMail",
                                       "de",
-                                      "billing_address.email"
+                                      "delivery_address.email"
                                     )
                                   )
                                 ) +
                                 "</label>"
                             )
                           ]
-                        ),
-                        _vm._ssrNode(" <hr>")
-                      ],
-                      2
-                    )
-                  : _vm._e()
-              ])
-            ]),
-            _vm._ssrNode(" "),
+                        )
+                      ])
+                    : _vm._e()
+                ])
+              ],
+              2
+            )
+          ]
+        : _vm.localeToShow == "DE" && _vm.addressType === "1"
+        ? [
             _vm._ssrNode('<div class="col-12">', "</div>", [
               _vm._ssrNode('<div class="row">', "</div>", [
                 _vm.isInOptionalFields("de", "billing_address.salutation")
@@ -44456,17 +44478,41 @@ var render = function() {
                 ) +
                 "</label></div></div> "
             ),
-            _vm._t("custom-address-fields")
-          ]
-        : _vm.localeToShow == "GB" && _vm.addressType === "1"
-        ? [
-            _vm._ssrNode('<div class="col-12">', "</div>", [
-              _vm._ssrNode('<div class="row">', "</div>", [
-                _vm.isInOptionalFields("gb", "billing_address.email")
-                  ? _vm._ssrNode(
-                      '<div class="col-12">',
-                      "</div>",
-                      [
+            _vm._ssrNode(
+              '<div data-testing="address-country-select" class="col-12 col-sm-4">',
+              "</div>",
+              [
+                _c("country-select", {
+                  attrs: {
+                    "selected-country-id": _vm.value.countryId,
+                    "selected-state-id": _vm.value.stateId,
+                    "address-type": _vm.addressType,
+                    "optional-address-fields": _vm.optionalAddressFields,
+                    "required-address-fields": _vm.requiredAddressFields
+                  },
+                  on: {
+                    "country-changed": function($event) {
+                      return _vm.onSelectedCountryChanged($event)
+                    },
+                    "state-changed": function($event) {
+                      return _vm.emitInputEvent("stateId", $event)
+                    }
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._ssrNode(" "),
+            _vm._t("custom-address-fields"),
+            _vm._ssrNode(" "),
+            _vm._ssrNode(
+              '<div class="col-12">',
+              "</div>",
+              [
+                _vm._ssrNode('<hr class="mt-0"> '),
+                _vm._ssrNode('<div class="row">', "</div>", [
+                  _vm.isInOptionalFields("de", "billing_address.email")
+                    ? _vm._ssrNode('<div class="col-12">', "</div>", [
                         _c(
                           "div",
                           {
@@ -44475,22 +44521,22 @@ var render = function() {
                                 name: "validate",
                                 rawName: "v-validate:text",
                                 value: _vm.isInRequiredFields(
-                                  "gb",
+                                  "de",
                                   "billing_address.email"
                                 ),
                                 expression:
-                                  "isInRequiredFields('gb', 'billing_address.email')",
+                                  "isInRequiredFields('de', 'billing_address.email')",
                                 arg: "text"
                               }
                             ],
-                            staticClass: "input-unit mb-0",
+                            staticClass: "input-unit",
                             attrs: { "data-model": "email" }
                           },
                           [
                             _vm._ssrNode(
                               '<input type="mail" name="email"' +
                                 _vm._ssrAttr("id", "email" + _vm._uid) +
-                                ' data-testing="billing-address-gb-email-input"' +
+                                ' data-testing="billing-address-de-email-input"' +
                                 _vm._ssrAttr("value", _vm.value.email) +
                                 "> <label" +
                                 _vm._ssrAttr("for", "email" + _vm._uid) +
@@ -44499,7 +44545,7 @@ var render = function() {
                                   _vm._s(
                                     _vm.transformTranslation(
                                       "Ceres::Template.addressMail",
-                                      "gb",
+                                      "de",
                                       "billing_address.email"
                                     )
                                   )
@@ -44507,15 +44553,16 @@ var render = function() {
                                 "</label>"
                             )
                           ]
-                        ),
-                        _vm._ssrNode(" <hr>")
-                      ],
-                      2
-                    )
-                  : _vm._e()
-              ])
-            ]),
-            _vm._ssrNode(" "),
+                        )
+                      ])
+                    : _vm._e()
+                ])
+              ],
+              2
+            )
+          ]
+        : _vm.localeToShow == "GB" && _vm.addressType === "1"
+        ? [
             _vm._ssrNode('<div class="col-12">', "</div>", [
               _vm._ssrNode('<div class="row">', "</div>", [
                 _vm.isInOptionalFields("gb", "billing_address.salutation")
@@ -45265,17 +45312,41 @@ var render = function() {
                 ) +
                 "</label></div></div> "
             ),
-            _vm._t("custom-address-fields")
-          ]
-        : _vm.localeToShow == "DE" && _vm.addressType === "2"
-        ? [
-            _vm._ssrNode('<div class="col-12">', "</div>", [
-              _vm._ssrNode('<div class="row">', "</div>", [
-                _vm.isInOptionalFields("de", "delivery_address.email")
-                  ? _vm._ssrNode(
-                      '<div class="col-12">',
-                      "</div>",
-                      [
+            _vm._ssrNode(
+              '<div data-testing="address-country-select" class="col-12 col-sm-4">',
+              "</div>",
+              [
+                _c("country-select", {
+                  attrs: {
+                    "selected-country-id": _vm.value.countryId,
+                    "selected-state-id": _vm.value.stateId,
+                    "address-type": _vm.addressType,
+                    "optional-address-fields": _vm.optionalAddressFields,
+                    "required-address-fields": _vm.requiredAddressFields
+                  },
+                  on: {
+                    "country-changed": function($event) {
+                      return _vm.onSelectedCountryChanged($event)
+                    },
+                    "state-changed": function($event) {
+                      return _vm.emitInputEvent("stateId", $event)
+                    }
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._ssrNode(" "),
+            _vm._t("custom-address-fields"),
+            _vm._ssrNode(" "),
+            _vm._ssrNode(
+              '<div class="col-12">',
+              "</div>",
+              [
+                _vm._ssrNode('<hr class="mt-0"> '),
+                _vm._ssrNode('<div class="row">', "</div>", [
+                  _vm.isInOptionalFields("gb", "billing_address.email")
+                    ? _vm._ssrNode('<div class="col-12">', "</div>", [
                         _c(
                           "div",
                           {
@@ -45284,22 +45355,22 @@ var render = function() {
                                 name: "validate",
                                 rawName: "v-validate:text",
                                 value: _vm.isInRequiredFields(
-                                  "de",
-                                  "delivery_address.email"
+                                  "gb",
+                                  "billing_address.email"
                                 ),
                                 expression:
-                                  "isInRequiredFields('de', 'delivery_address.email')",
+                                  "isInRequiredFields('gb', 'billing_address.email')",
                                 arg: "text"
                               }
                             ],
-                            staticClass: "input-unit mb-0",
+                            staticClass: "input-unit",
                             attrs: { "data-model": "email" }
                           },
                           [
                             _vm._ssrNode(
                               '<input type="mail" name="email"' +
                                 _vm._ssrAttr("id", "email" + _vm._uid) +
-                                ' data-testing="delivery-address-de-email-input"' +
+                                ' data-testing="billing-address-gb-email-input"' +
                                 _vm._ssrAttr("value", _vm.value.email) +
                                 "> <label" +
                                 _vm._ssrAttr("for", "email" + _vm._uid) +
@@ -45308,23 +45379,24 @@ var render = function() {
                                   _vm._s(
                                     _vm.transformTranslation(
                                       "Ceres::Template.addressMail",
-                                      "de",
-                                      "delivery_address.email"
+                                      "gb",
+                                      "billing_address.email"
                                     )
                                   )
                                 ) +
                                 "</label>"
                             )
                           ]
-                        ),
-                        _vm._ssrNode(" <hr>")
-                      ],
-                      2
-                    )
-                  : _vm._e()
-              ])
-            ]),
-            _vm._ssrNode(" "),
+                        )
+                      ])
+                    : _vm._e()
+                ])
+              ],
+              2
+            )
+          ]
+        : _vm.localeToShow == "DE" && _vm.addressType === "2"
+        ? [
             _vm._ssrNode('<div class="col-12">', "</div>", [
               _vm._ssrNode('<div class="row">', "</div>", [
                 _vm.isInOptionalFields("de", "delivery_address.salutation")
@@ -45969,17 +46041,41 @@ var render = function() {
                 ) +
                 "</label></div></div> "
             ),
-            _vm._t("custom-address-fields")
-          ]
-        : _vm.localeToShow == "GB" && _vm.addressType === "2"
-        ? [
-            _vm._ssrNode('<div class="col-12">', "</div>", [
-              _vm._ssrNode('<div class="row">', "</div>", [
-                _vm.isInOptionalFields("gb", "delivery_address.email")
-                  ? _vm._ssrNode(
-                      '<div class="col-12">',
-                      "</div>",
-                      [
+            _vm._ssrNode(
+              '<div data-testing="address-country-select" class="col-12 col-sm-4">',
+              "</div>",
+              [
+                _c("country-select", {
+                  attrs: {
+                    "selected-country-id": _vm.value.countryId,
+                    "selected-state-id": _vm.value.stateId,
+                    "address-type": _vm.addressType,
+                    "optional-address-fields": _vm.optionalAddressFields,
+                    "required-address-fields": _vm.requiredAddressFields
+                  },
+                  on: {
+                    "country-changed": function($event) {
+                      return _vm.onSelectedCountryChanged($event)
+                    },
+                    "state-changed": function($event) {
+                      return _vm.emitInputEvent("stateId", $event)
+                    }
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._ssrNode(" "),
+            _vm._t("custom-address-fields"),
+            _vm._ssrNode(" "),
+            _vm._ssrNode(
+              '<div class="col-12">',
+              "</div>",
+              [
+                _vm._ssrNode('<hr class="mt-0"> '),
+                _vm._ssrNode('<div class="row">', "</div>", [
+                  _vm.isInOptionalFields("de", "delivery_address.email")
+                    ? _vm._ssrNode('<div class="col-12">', "</div>", [
                         _c(
                           "div",
                           {
@@ -45988,22 +46084,22 @@ var render = function() {
                                 name: "validate",
                                 rawName: "v-validate:text",
                                 value: _vm.isInRequiredFields(
-                                  "gb",
+                                  "de",
                                   "delivery_address.email"
                                 ),
                                 expression:
-                                  "isInRequiredFields('gb', 'delivery_address.email')",
+                                  "isInRequiredFields('de', 'delivery_address.email')",
                                 arg: "text"
                               }
                             ],
-                            staticClass: "input-unit mb-0",
+                            staticClass: "input-unit",
                             attrs: { "data-model": "email" }
                           },
                           [
                             _vm._ssrNode(
                               '<input type="mail" name="email"' +
                                 _vm._ssrAttr("id", "email" + _vm._uid) +
-                                ' data-testing="delivery-address-gb-email-input"' +
+                                ' data-testing="delivery-address-de-email-input"' +
                                 _vm._ssrAttr("value", _vm.value.email) +
                                 "> <label" +
                                 _vm._ssrAttr("for", "email" + _vm._uid) +
@@ -46012,7 +46108,7 @@ var render = function() {
                                   _vm._s(
                                     _vm.transformTranslation(
                                       "Ceres::Template.addressMail",
-                                      "gb",
+                                      "de",
                                       "delivery_address.email"
                                     )
                                   )
@@ -46020,15 +46116,16 @@ var render = function() {
                                 "</label>"
                             )
                           ]
-                        ),
-                        _vm._ssrNode(" <hr>")
-                      ],
-                      2
-                    )
-                  : _vm._e()
-              ])
-            ]),
-            _vm._ssrNode(" "),
+                        )
+                      ])
+                    : _vm._e()
+                ])
+              ],
+              2
+            )
+          ]
+        : _vm.localeToShow == "GB" && _vm.addressType === "2"
+        ? [
             _vm._ssrNode('<div class="col-12">', "</div>", [
               _vm._ssrNode('<div class="row">', "</div>", [
                 _vm.isInOptionalFields("gb", "delivery_address.salutation")
@@ -46705,34 +46802,90 @@ var render = function() {
                 ) +
                 "</label></div></div> "
             ),
-            _vm._t("custom-address-fields")
+            _vm._ssrNode(
+              '<div data-testing="address-country-select" class="col-12 col-sm-4">',
+              "</div>",
+              [
+                _c("country-select", {
+                  attrs: {
+                    "selected-country-id": _vm.value.countryId,
+                    "selected-state-id": _vm.value.stateId,
+                    "address-type": _vm.addressType,
+                    "optional-address-fields": _vm.optionalAddressFields,
+                    "required-address-fields": _vm.requiredAddressFields
+                  },
+                  on: {
+                    "country-changed": function($event) {
+                      return _vm.onSelectedCountryChanged($event)
+                    },
+                    "state-changed": function($event) {
+                      return _vm.emitInputEvent("stateId", $event)
+                    }
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._ssrNode(" "),
+            _vm._t("custom-address-fields"),
+            _vm._ssrNode(" "),
+            _vm._ssrNode(
+              '<div class="col-12">',
+              "</div>",
+              [
+                _vm._ssrNode('<hr class="mt-0"> '),
+                _vm._ssrNode('<div class="row">', "</div>", [
+                  _vm.isInOptionalFields("gb", "delivery_address.email")
+                    ? _vm._ssrNode('<div class="col-12">', "</div>", [
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "validate",
+                                rawName: "v-validate:text",
+                                value: _vm.isInRequiredFields(
+                                  "gb",
+                                  "delivery_address.email"
+                                ),
+                                expression:
+                                  "isInRequiredFields('gb', 'delivery_address.email')",
+                                arg: "text"
+                              }
+                            ],
+                            staticClass: "input-unit",
+                            attrs: { "data-model": "email" }
+                          },
+                          [
+                            _vm._ssrNode(
+                              '<input type="mail" name="email"' +
+                                _vm._ssrAttr("id", "email" + _vm._uid) +
+                                ' data-testing="delivery-address-gb-email-input"' +
+                                _vm._ssrAttr("value", _vm.value.email) +
+                                "> <label" +
+                                _vm._ssrAttr("for", "email" + _vm._uid) +
+                                ">" +
+                                _vm._ssrEscape(
+                                  _vm._s(
+                                    _vm.transformTranslation(
+                                      "Ceres::Template.addressMail",
+                                      "gb",
+                                      "delivery_address.email"
+                                    )
+                                  )
+                                ) +
+                                "</label>"
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e()
+                ])
+              ],
+              2
+            )
           ]
-        : _vm._e(),
-      _vm._ssrNode(" "),
-      _vm._ssrNode(
-        '<div data-testing="address-country-select" class="col-12 col-sm-4">',
-        "</div>",
-        [
-          _c("country-select", {
-            attrs: {
-              "selected-country-id": _vm.value.countryId,
-              "selected-state-id": _vm.value.stateId,
-              "address-type": _vm.addressType,
-              "optional-address-fields": _vm.optionalAddressFields,
-              "required-address-fields": _vm.requiredAddressFields
-            },
-            on: {
-              "country-changed": function($event) {
-                return _vm.onSelectedCountryChanged($event)
-              },
-              "state-changed": function($event) {
-                return _vm.emitInputEvent("stateId", $event)
-              }
-            }
-          })
-        ],
-        1
-      )
+        : _vm._e()
     ],
     2
   )
