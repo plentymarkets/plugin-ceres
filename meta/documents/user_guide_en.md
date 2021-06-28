@@ -18,6 +18,10 @@ You want to certify your online store with Trusted Shops? Ceres has been pre-cer
 
 You want to certify your online store with IT-Recht Kanzlei? Your standard plentyShop has been [pre-certified by IT-Recht Kanzlei](https://www.it-recht-kanzlei.de/Service/pruefzeichen.php?sid=1e657-d848), so your certification will be handled as fast and easy as possible. Find all necessary information [here](https://www.it-recht-kanzlei.de/Service/pruefzeichen.php?sid=1e657-d848)
 
+## You want to contribute to the Ceres project?
+
+If you want to help develop the Ceres plugin, either by contributing bugfixes or features, our [Contribution Guide](https://github.com/plentymarkets/plugin-ceres/blob/stable/contributionGuide.md) provides ways of contacting our team as well as a number of guidelines you should kep in mind while developing for Ceres. We're looking forward to your contribution.
+
 ## License
 
 This project is licensed under the GNU AFFERO GENERAL PUBLIC LICENSE. – find further information in the [LICENSE.md](https://github.com/plentymarkets/plugin-ceres/blob/stable/LICENSE.md).
