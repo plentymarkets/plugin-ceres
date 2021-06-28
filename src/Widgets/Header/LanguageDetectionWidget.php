@@ -37,7 +37,8 @@ class LanguageDetectionWidget extends BaseWidget
         $settingsFactory = pluginApp(WidgetSettingsFactory::class);
 
         $settingsFactory->createCustomClass();
-        $settingsFactory->createAppearance();
+        $settingsFactory->createAppearance(true)
+            ->withDefaultValue("primary");
         $settingsFactory->createCheckbox("redirect")
             ->withDefaultValue(false)
             ->withName("Widget.languageDetectionRedirect");
