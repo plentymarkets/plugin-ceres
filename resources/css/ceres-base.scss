@@ -11091,7 +11091,7 @@ html.ios .basket-preview-content .totals { // stylelint-disable-line selector-no
         position: absolute;
         top: 0;
         right: 0;
-        z-index: 98;
+        z-index: 90;
         cursor: pointer;
         border-color: transparent #f7f7f9 transparent transparent;
         border-style: solid;
@@ -13457,6 +13457,11 @@ html.safari .widget-grid .widget-inner-stacked .widget-inner { // stylelint-disa
 
 .breadcrumbs {
     background-color: $breadcrumb-bg;
+}
+
+.language-detection {
+    z-index: 200 !important;
+    top: 0;
 }
 
 /* settings */
