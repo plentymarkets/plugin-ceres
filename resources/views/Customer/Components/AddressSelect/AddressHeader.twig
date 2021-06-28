@@ -1,7 +1,5 @@
 <script type="x/template" id="vue-address-header">
     <div v-if="address">
-        <div class="address-mail" v-if="isAddressFieldEnabled('email')">${ address | optionType(5) }</div>
-
         <template v-if="isAddressFieldEnabled('name1')">
             <div class="font-bold address-name1" v-if="address.name1 && address.name1.length > 0">
                 ${ address.name1 }
@@ -31,7 +29,7 @@
             </template> 
             ${ address.address3 }
         </div>
-
+  
         <div class="address-address4" v-if="isAddressFieldEnabled('address4')">
             ${ address.address4 }
         </div>
@@ -41,5 +39,7 @@
         </div>
 
         <div class="address-country" v-if="isAddressFieldEnabled('country')">${ getCountryName(address.countryId) }</div>
+
+        <div class="address-mail" v-if="isAddressFieldEnabled('email')">${ address | optionType(5) }</div>
     </div>
 </script>
