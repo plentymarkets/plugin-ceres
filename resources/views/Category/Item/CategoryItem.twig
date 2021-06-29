@@ -163,7 +163,10 @@
 
 {% block PartialHead %}
     {% set canonicalUrl = services.url.getCanonicalURL(null, true) %}
-    {% if currentPage - 1 > 0 %}
+
+    {% if currentPage == 2 %}
+        <link rel="prev" href="{{ canonicalUrl ~ queryString({'page': null}) }}" />
+    {% elseif currentPage > 2 %}
         <link rel="prev" href="{{ canonicalUrl ~ queryString({'page': currentPage - 1}) }}" />
     {% endif %}
 
