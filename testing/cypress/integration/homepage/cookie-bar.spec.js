@@ -96,14 +96,14 @@ context("Cookiebar", () =>
     {
         cy.location("pathname").should("eq", "/");
         cy.getByTestingAttr("cookie-bar-show-more-information").click();
-        cy.getByTestingAttr("cookie-bar").find(".privacy-settings .custom-control").should("have.length", 2);
+        cy.getByTestingAttr("cookie-bar").find(".privacy-settings .custom-control").should("have.length", 3);
     });
 
     it("Should consent group on toggle", () =>
     {
         cy.location("pathname").should("eq", "/");
         cy.getByTestingAttr("cookie-bar-show-more-information").click();
-        cy.getByTestingAttr("cookie-bar").find(".privacy-settings .custom-control").first().click();
+        cy.getByTestingAttr("cookie-bar").find(".privacy-settings .custom-control").eq(2).click();
 
         cy.getStore().then((store) =>
         {
@@ -138,12 +138,12 @@ context("Cookiebar", () =>
     {
         cy.location("pathname").should("eq", "/");
         cy.getByTestingAttr("cookie-bar-show-more-information").click();
-        cy.get(".consent-group").eq(0).find("[data-testing=privacy-settings-show-more-information]").click();
-        cy.get(".consent-group").eq(0).find(".consent .custom-control").click();
+        cy.get(".consent-group").eq(2).find("[data-testing=privacy-settings-show-more-information]").click();
+        cy.get(".consent-group").eq(2).find(".consent .custom-control").click();
 
         cy.getStore().then((store) =>
         {
-            expect(store.state.consents.consents.paypal["paypal-cookies"]).to.be.false;
+            expect(store.state.consents.consents.convenience.languageDetection).to.be.true;
         });
     });
 });
