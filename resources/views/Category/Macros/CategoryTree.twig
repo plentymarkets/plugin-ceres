@@ -49,8 +49,9 @@
 
             {% if category.children and translatedChildren > 0 %}
 
-                <li class="ddown" v-navigation-touch-handler>
+                <li {% if maxItemsPerStage[1] > 0 %}class="ddown"{% endif %} v-navigation-touch-handler>
                     <a href="{{ currentScopeUrl }}{{ urls.trailingSlashSuffix }}">{{ category.details[0].name }}</a>
+                    {% if maxItemsPerStage[1] > 0 %}
                     <ul data-level="1" class="collapse nav-dropdown-{{ counter }}">
                         {% set counter = counter + 1 %}
                         {% if megaMenuLevels == 1 %}
@@ -69,6 +70,7 @@
                             {{ navbar.get_children(category, currentScopeUrl, 1, megaMenuLevels, maxItemsPerStage) }}
                         {% endif %}
                     </ul>
+                    {% endif %}
                 </li>
 
             {% else %}
@@ -130,9 +132,9 @@
         <ul>
             <li class="nav-item{% if isCategoryActive %} active{% if category.children | length > 0 %} is-open{% endif %}{% endif %}">
                 {% if category.childCount > 0 and expandableChildren %}
-                    <div v-sidenavigation-children="{ 
-                            categoryId: {{ category.id }}, 
-                            currentUrl: {{ currentUrl | json_encode }}, 
+                    <div v-sidenavigation-children="{
+                            categoryId: {{ category.id }},
+                            currentUrl: {{ currentUrl | json_encode }},
                             isActive: {{ (isCategoryActive and category.children | length > 0) | json_encode }},
                             showItemCount: {{ showItemCount | json_encode }},
                             childCount: {{ category.childCount }},
@@ -144,7 +146,7 @@
                     </div>
                 {% endif %}
 
-                <a href="{{ currentUrl }}{{ urls.trailingSlashSuffix }}" class="nav-link 
+                <a href="{{ currentUrl }}{{ urls.trailingSlashSuffix }}" class="nav-link
                 {% if isCategoryActive %} bg-appearance{% endif %}
                 {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                 {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
@@ -190,7 +192,7 @@
                 </ul>
             {% endfor %}
         {% endif %}
-        
+
     {% endfor %}
 
 {% endmacro %}
