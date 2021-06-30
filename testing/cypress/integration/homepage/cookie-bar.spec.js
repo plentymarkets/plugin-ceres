@@ -146,4 +146,17 @@ context("Cookiebar", () =>
             expect(store.state.consents.consents.convenience.languageDetection).to.be.true;
         });
     });
+
+    it("Should withdraw the consent for paypal cookie", () =>
+    {
+        cy.location("pathname").should("eq", "/");
+        cy.getByTestingAttr("cookie-bar-show-more-information").click();
+        cy.get(".consent-group").eq(3).find("[data-testing=privacy-settings-show-more-information]").click();
+        cy.get(".consent-group").eq(3).find(".consent .custom-control").click();
+
+        cy.getStore().then((store) =>
+        {
+            expect(store.state.consents.consents.paypal["paypal-cookies"]).to.be.false;
+        });
+    });
 });
