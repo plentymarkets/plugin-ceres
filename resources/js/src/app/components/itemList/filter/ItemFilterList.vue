@@ -9,11 +9,11 @@
     </div>
 
     <div v-else class="filter-wrapper" v-show="facets && facets.length > 0">
-        <a class="btn btn-link filter-toggle" data-toggle="collapse" :href="'#filter-collapse_' + _uid" aria-expanded="false" :aria-controls="'filter-collapse_' + _uid">
+        <a class="btn btn-link filter-toggle" data-toggle="collapse" :href="'#filter-collapse_' + uuid" aria-expanded="false" :aria-controls="'filter-collapse_' + _uid">
             <i class="fa fa-sliders default-float" aria-hidden="true"></i> {{ $translate("Ceres::Template.itemFilter") }}
         </a>
 
-        <div v-open-filter-toolbar class="filter-collapse collapse" :id="'filter-collapse_' + _uid">
+        <div v-open-filter-toolbar class="filter-collapse collapse" :id="'filter-collapse_' + uuid">
             <div class="container-max page-content component-loading" :class="{ 'is-loading': isLoading }">
                 <div class="card-columns">
                     <item-filter v-for="facet in facets" :facet="facet" :key="facet.id"></item-filter>
@@ -35,6 +35,8 @@
 <script>
 import { mapState } from "vuex";
 import ItemFilter from "./ItemFilter.vue";
+
+let uuid = 0;
 
 export default {
 
@@ -70,6 +72,11 @@ export default {
             type: String,
             default: null
         }
+    },
+
+    beforeCreate() {
+        this.uuid = uuid.toString();
+        uuid += 1;
     },
 
     computed:
