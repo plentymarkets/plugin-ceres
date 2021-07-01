@@ -345,7 +345,7 @@ class OnlineStoreStep extends Step
                 ],
                 "onlineStore_blockCookies" => [
                     "type" => "checkbox",
-                    "defaultValue" => false,
+                    "defaultValue" => true,
                     "options" => [
                         "name" => "Wizard.blockCookies"
                     ]
