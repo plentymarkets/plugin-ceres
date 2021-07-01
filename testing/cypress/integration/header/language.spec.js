@@ -84,4 +84,9 @@ context("Header topbar languages", () =>
         cy.visit("/en/livingroom/");
         cy.get(".category-title").should("contain", "Livingroom");
     });
+
+    it.only("should display language detection widget", () =>
+    {
+        cy.visit("/en/");
+    });
 });
