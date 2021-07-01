@@ -97,7 +97,7 @@ class CeresGlobalConfig extends PluginConfig
         $this->googleRecaptchaApiKey    = $this->getTextValue( 'global.google_recaptcha_api_key', '' );
         $this->googleRecaptchaThreshold = $this->getConfigValue('google_recaptcha_threshold', 0.5);
         $this->registrationRequirePrivacyPolicyConfirmation = $this->getBooleanValue( 'global.registration_require_privacy_policy_confirmation', true );
-        $this->blockCookies             = $this->getBooleanValue( 'global.block_cookies', false );
+        $this->blockCookies             = $this->getBooleanValue( 'global.block_cookies', true );
         $this->userDataHashMaxAge       = $this->getIntegerValue('global.user_data_hash_max_age', 24);
     }
 }

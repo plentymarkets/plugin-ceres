@@ -150,7 +150,7 @@
                     "required": false,
                     "label": "Config.globalBlockCookies",
                     "options": {
-                        "defaultValue": "false"
+                        "defaultValue": "true"
                     }
                 }
             }
