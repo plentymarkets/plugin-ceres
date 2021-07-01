@@ -119,4 +119,11 @@ context("Header topbar languages", () =>
             .should("have.attr", "href", HOMEEN);
         cy.get(".language-detection div").should("not.exist");
     });
+
+    it("should automatically redirect if option is set", () =>
+    {
+        cy.visit("/en/language-detection-redirect/");
+        cy.get(".language-detection div").should("not.exist");
+        cy.location("pathname").should("eq", "/spracherkennung-weiterleitung/");
+    });
 });
