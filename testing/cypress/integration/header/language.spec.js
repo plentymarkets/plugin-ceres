@@ -2,6 +2,8 @@
 context("Header topbar languages", () =>
 {
     const URL = "/en/livingroom/armchair-and-stool/loungesessel-herkules_116_1014/";
+    const HOME = "https://2x3z2pucy2z9.c01-16.plentymarkets.com/";
+    const HOMEEN = "https://2x3z2pucy2z9.c01-16.plentymarkets.com/en/";
 
     beforeEach(() =>
     {
@@ -49,8 +51,8 @@ context("Header topbar languages", () =>
     {
         cy.visit(URL);
         cy.get(".breadcrumbs").should("contain", "Livingroom")
-                              .should("contain", "Armchair & stool")
-                              .should("contain", "Loungesessel Herkules");
+            .should("contain", "Armchair & stool")
+            .should("contain", "Loungesessel Herkules");
     });
 
     it("should display correct translation for add to basket button", () =>
@@ -83,5 +85,45 @@ context("Header topbar languages", () =>
     {
         cy.visit("/en/livingroom/");
         cy.get(".category-title").should("contain", "Livingroom");
+    });
+
+    it("should display language detection widget with correct language and links", () =>
+    {
+        cy.visit("/en/");
+        cy.get("head link[hreflang='x-default']")
+            .should("have.attr", "href", HOME);
+        cy.get("head link[hreflang='de']")
+            .should("have.attr", "href", HOME);
+        cy.get("head link[hreflang='en']")
+            .should("have.attr", "href", HOMEEN);
+        cy.get(".language-detection a.btn").should("have.attr", "href", HOME);
+        cy.get(".language-detection a.btn").should("contain", "Deutsche Website öffnen");
+        cy.get(".language-detection .align-self-center.mr-auto").should("contain", "Klicken Sie auf die Schaltfläche, um deutsche Inhalte zu sehen.");
+    });
+
+    it("should navigate to site with correct language", () =>
+    {
+        cy.visit("/en/");
+        cy.get(".language-detection a.btn").click();
+        cy.location("pathname").should("eq", "/");
+    });
+
+    it("should not display language detection widget if visited language is the client one", () =>
+    {
+        cy.visit("/");
+        cy.get("head link[hreflang='x-default']")
+            .should("have.attr", "href", HOME);
+        cy.get("head link[hreflang='de']")
+            .should("have.attr", "href", HOME);
+        cy.get("head link[hreflang='en']")
+            .should("have.attr", "href", HOMEEN);
+        cy.get(".language-detection div").should("not.exist");
+    });
+
+    it("should automatically redirect if option is set", () =>
+    {
+        cy.visit("/en/language-detection-redirect/");
+        cy.get(".language-detection div").should("not.exist");
+        cy.location("pathname").should("eq", "/spracherkennung-weiterleitung/");
     });
 });
