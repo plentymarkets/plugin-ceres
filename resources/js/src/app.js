@@ -36,6 +36,7 @@ import SingleItemSetComponent from "./app/components/item/SingleItemSetComponent
 import LazyHydrate from "vue-lazy-hydration";
 import ClientOnly from "./app/components/common/ClientOnly.vue";
 import script2 from "./app/plugins/script2";
+import UUID from "vue-uuid";
 
 
 // =========================
@@ -174,6 +175,19 @@ export function createApp(options, store)
     // EXTERNAL
     Vue.component("lazy-hydrate", LazyHydrate);
     Vue.use(script2);
+    Vue.use(UUID);
+
+    Vue.use({
+        install: function(Vue, options)
+        {
+            Vue.mixin({
+                created()
+                {
+                    this.uuid = this.$uuid.v4();
+                }
+            })
+        }
+    })
 
     Vue.prototype.$translate = TranslationService.translate;
     Vue.prototype.$ceres = App;
