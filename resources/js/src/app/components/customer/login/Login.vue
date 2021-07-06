@@ -1,19 +1,19 @@
 <template>
     <div class="login-pwd-reset">
-        <form ref="loginForm" :id="'login-form-' + _uid" method="post">
+        <form ref="loginForm" :id="'login-form-' + uuid" method="post">
             <div :class="{'modal-body': modalElement}">
                 <div class="row">
                     <div class="col-12">
                         <div class="input-unit" data-validate="mail">
-                            <input data-testing="email-login" type="email" name="email" autocomplete="email" :id="'email' + _uid" v-model="username" data-autofocus>
-                            <label :for="'email' + _uid">{{ $translate("Ceres::Template.loginEmail") }}*</label>
+                            <input data-testing="email-login" type="email" name="email" autocomplete="email" :id="'email' + uuid" v-model="username" data-autofocus>
+                            <label :for="'email' + uuid">{{ $translate("Ceres::Template.loginEmail") }}*</label>
                         </div>
                         <span class="error-msg">{{ $translate("Ceres::Template.loginEnterConfirmEmail") }}</span>
                     </div>
                     <div class="col-12">
                         <div class="input-unit" :class="{'no-bottom': modalElement}" data-validate="text">
-                            <input data-testing="password-login" type="password" name="password" autocomplete="current-password" :id="'password' + _uid" v-model="password">
-                            <label :for="'password' + _uid">{{ $translate("Ceres::Template.loginPassword") }}*</label>
+                            <input data-testing="password-login" type="password" name="password" autocomplete="current-password" :id="'password' + uuid" v-model="password">
+                            <label :for="'password' + uuid">{{ $translate("Ceres::Template.loginPassword") }}*</label>
                         </div>
                         <span class="error-msg">{{ $translate("Ceres::Template.loginEmptyPassword") }}</span>
                     </div>
@@ -107,7 +107,7 @@ export default {
 
         validateLogin()
         {
-            ValidationService.validate($("#login-form-" + this._uid))
+            ValidationService.validate($("#login-form-" + this.uuid))
                 .done(() =>
                 {
                     this.sendLogin();
@@ -204,7 +204,7 @@ export default {
         resetError()
         {
             this.loginFields.forEach( element => element.classList.remove("has-login-error"));
-            ValidationService.unmarkAllFields("#login-form-" + this._uid);
+            ValidationService.unmarkAllFields("#login-form-" + this.uuid);
         }
     }
 }

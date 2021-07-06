@@ -1,8 +1,8 @@
 {{ component("Ceres::MyAccount.Components.OrderDocuments") }}
 
 <script type="x/template" id="vue-order-return-history-list-item">
-    <div :id="'accordion_' + _uid" class="accordion col-sm-12">
-        <div :id="'heading_' + _uid" class="row container-clickable collapsed border-top-0 border py-3" data-toggle="collapse" :data-target="'#collapse_'+ _uid" aria-expanded="false" :aria-controls="'collapse_'+ _uid">
+    <div :id="'accordion_' + uuid" class="accordion col-sm-12">
+        <div :id="'heading_' + uuid" class="row container-clickable collapsed border-top-0 border py-3" data-toggle="collapse" :data-target="'#collapse_'+ uuid" aria-expanded="false" :aria-controls="'collapse_'+ uuid">
             <div class="col-md-10">
                 <div class="row">
                     <i class="fa fa-chevron-up" aria-hidden="true"></i>
@@ -26,7 +26,7 @@
             </div>
             <order-documents :documents="returnOrder.order.documents" class="col-md-2" type="return"></order-documents>
         </div>
-        <div :id="'collapse_'+ _uid" class="row container-middle border border-top-0 collapse" :aria-labelledby="'heading_'+ _uid" :data-parent="'#accordion_'+ _uid">
+        <div :id="'collapse_'+ uuid" class="row container-middle border border-top-0 collapse" :aria-labelledby="'heading_'+ uuid" :data-parent="'#accordion_'+ uuid">
             <div class="col-sm-12 item py-2" v-for="orderItem in itemsToRender">
                 <div class="row">
                     <div class="col-sm-12">
@@ -62,7 +62,7 @@
                 </div> 
             </div> 
             <div class="col-sm-12 text-center mb-2">
-                <a class="text-primary text-appearance" v-if="returnOrder.order.orderItems.length > 5" @click="toggleShowAllOrderItems()" :id="'more-return-text-' + _uid" data-toggle="collapse" :href="'#more-return-items-' + _uid" aria-expanded="false" aria-controls="collapseExample">
+                <a class="text-primary text-appearance" v-if="returnOrder.order.orderItems.length > 5" @click="toggleShowAllOrderItems()" :id="'more-return-text-' + uuid" data-toggle="collapse" :href="'#more-return-items-' + uuid" aria-expanded="false" aria-controls="collapseExample">
                     <template v-if="showAllOrderItems">
                         {{ trans("Ceres::Template.returnHistoryReturnShowLess") }}
                     </template>

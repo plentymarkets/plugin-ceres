@@ -9,11 +9,11 @@
     </div>
 
     <div v-else class="filter-wrapper" v-show="facets && facets.length > 0">
-        <a class="btn btn-link filter-toggle" data-toggle="collapse" :href="'#filter-collapse_' + _uid" aria-expanded="false" :aria-controls="'filter-collapse_' + _uid">
+        <a class="btn btn-link filter-toggle" data-toggle="collapse" :href="'#filter-collapse_' + uuid" aria-expanded="false" :aria-controls="'filter-collapse_' + uuid">
             <i class="fa fa-sliders default-float" aria-hidden="true"></i> {{ $translate("Ceres::Template.itemFilter") }}
         </a>
 
-        <div v-open-filter-toolbar class="filter-collapse collapse" :id="'filter-collapse_' + _uid">
+        <div v-open-filter-toolbar class="filter-collapse collapse" :id="'filter-collapse_' + uuid">
             <div class="container-max page-content component-loading" :class="{ 'is-loading': isLoading }">
                 <div class="card-columns">
                     <item-filter v-for="facet in facets" :facet="facet" :key="facet.id"></item-filter>
@@ -21,7 +21,7 @@
 
                 <div class="row">
                     <div class="col-12 text-right">
-                        <button type="button" class="btn btn-primary btn-medium-large" data-toggle="collapse" :href="'#filter-collapse_' + _uid" :aria-controls="'filter-collapse_' + _uid">
+                        <button type="button" class="btn btn-primary btn-medium-large" data-toggle="collapse" :href="'#filter-collapse_' + uuid" :aria-controls="'filter-collapse_' + uuid">
                             <i class="fa fa-times" aria-hidden="true"></i>
                             <span>{{ $translate("Ceres::Template.itemClose") }}&nbsp;</span>
                         </button>

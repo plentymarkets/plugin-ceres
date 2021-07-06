@@ -8,7 +8,7 @@
             <div class="dropdown items">
                 <div
                     class="component-loading"
-                    :id="'addressMultiSelect' + _uid"
+                    :id="'addressMultiSelect' + uuid"
                     v-bind:class="{'card': !isAddressListEmpty && !(addressType === '2' && addressList.length === 1), 'items items-empty': isAddressListEmpty && (addressType === '2' && addressList.length === 1), 'is-loading disabled': isBasketLoading || isCheckoutReadonly}"
                     @click="onDropdownClicked($event)"
                     data-toggle="dropdown"
@@ -63,7 +63,7 @@
 
                 <div
                     class="dropdown-menu"
-                    :aria-labelledby="'addressMultiSelect' + _uid"
+                    :aria-labelledby="'addressMultiSelect' + uuid"
                     v-if="!isAddressListEmpty && !(addressType === '2' && addressList.length === 1)"
                     {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-dropdown'\"") | raw }}
                 >
@@ -71,12 +71,12 @@
                         <li class="item" v-for="(address, index) in addressList">
                             <input
                                 type="radio"
-                                :name="'shippingAddress' + _uid"
-                                :id="'addressSelectItem' + _uid + address.id"
+                                :name="'shippingAddress' + uuid"
+                                :id="'addressSelectItem' + uuid + address.id"
                                 :value="address.id"
                                 :checked="selectedAddress && selectedAddress.id === address.id"
                                 @change="onAddressChanged(address)">
-                            <label :for="'addressSelectItem' + _uid + address.id" class="item-inner">
+                            <label :for="'addressSelectItem' + uuid + address.id" class="item-inner">
                             <span v-if="address.id == -99">
                                 <p class="text-muted small font-italic pt-3">{{ trans("Ceres::Template.addressSameAsInvoice") }}</p>
                             </span>

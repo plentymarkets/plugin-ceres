@@ -158,7 +158,7 @@ export default {
     updated()
     {
         const tabs = this.getVisibleTabs();
-        const hash = tabs.map((component) => component._uid).join("_");
+        const hash = tabs.map((component) => component.uuid).join("_");
 
         // need to check if visible tabs have been changed after rendering
         if (this.tabsHash !== hash)

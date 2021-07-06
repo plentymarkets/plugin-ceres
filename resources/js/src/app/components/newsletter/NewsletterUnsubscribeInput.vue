@@ -1,5 +1,5 @@
 <template>
-    <form :id="'newsletter-unsubscribe-input-form_' + _uid" method="post" @submit.prevent="validateData">
+    <form :id="'newsletter-unsubscribe-input-form_' + uuid" method="post" @submit.prevent="validateData">
         <div class="row">
             <div class="col-12">
                 <div class="input-unit mt-3" data-validate="mail">
@@ -47,7 +47,7 @@ export default {
         {
             this.isDisabled = true;
 
-            ValidationService.validate($("#newsletter-unsubscribe-input-form_" + this._uid))
+            ValidationService.validate($("#newsletter-unsubscribe-input-form_" + this.uuid))
                 .done(() =>
                 {
                     this.save();

@@ -2,8 +2,8 @@
     <div>
         <form ref="form" method="post" class="mb-3 login-pwd-reset">
             <div class="input-unit" data-validate="mail">
-                <input type="email" name="email" autocomplete="email" data-testing="guest-login-input" :id="_uid" v-model="email" data-autofocus>
-                <label :for="_uid">{{ $translate("Ceres::Template.loginEmail") }}*</label>
+                <input type="email" name="email" autocomplete="email" data-testing="guest-login-input" :id="uuid" v-model="email" data-autofocus>
+                <label :for="uuid">{{ $translate("Ceres::Template.loginEmail") }}*</label>
             </div>
             <span class="error-msg">{{ $translate("Ceres::Template.loginEnterConfirmEmail") }}</span>
 

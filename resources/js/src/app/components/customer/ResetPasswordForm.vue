@@ -4,7 +4,7 @@
             <div class="input-unit">
                 <popper v-cloak trigger="focus" placement="bottom" ref="passwordHint">
                     <template #handle>
-                        <input type="password" name="password" autocomplete="new-password" :id="_uid + 'password_first'" v-model="passwordFirst">
+                        <input type="password" name="password" autocomplete="new-password" :id="uuid + 'password_first'" v-model="passwordFirst">
                     </template>
                     <template #title>
                         {{ $translate("Ceres::Template.resetPwPasswordHintTitle") }}
@@ -18,14 +18,14 @@
                     </template>
                 </popper>
 
-                <label :for="_uid + 'password_first'">{{ $translate("Ceres::Template.resetPwNewPassword") }}*</label>
+                <label :for="uuid + 'password_first'">{{ $translate("Ceres::Template.resetPwNewPassword") }}*</label>
             </div>
         </div>
 
         <div class="input-feedback-container" data-validate="ref">
             <div class="input-unit">
-                <input type="password" name="password" autocomplete="new-password" :id="_uid + 'password_second'" v-model="passwordSecond" :data-validate-ref="'#' + _uid + 'password_first'">
-                <label :for="_uid + 'password_second'">{{ $translate("Ceres::Template.resetPwRepeatPassword") }}*</label>
+                <input type="password" name="password" autocomplete="new-password" :id="uuid + 'password_second'" v-model="passwordSecond" :data-validate-ref="'#' + uuid + 'password_first'">
+                <label :for="uuid + 'password_second'">{{ $translate("Ceres::Template.resetPwRepeatPassword") }}*</label>
             </div>
         </div>
 

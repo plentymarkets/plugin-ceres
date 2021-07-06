@@ -8,8 +8,8 @@
 
         <div v-else class="form-check-wrapper" v-for="value in facets" :key="value.id" :class="value.cssClass">
             <div class="form-check mb-0 pl-0">
-                <input :id="'option-' + value.id + '-' + _uid" class="form-check-input d-none" type="checkbox" :checked="isSelected(value.id)" @change="updateFacet(value)" :disabled="isLoading || value.count <= 0">
-                <label :for="'option-' + value.id + '-' + _uid" class="form-check-label" :class="[paddingClasses, isSelected(value.id) ? 'bg-appearance' : '', 'option-' + value.id]" :style="paddingInlineStyles">
+                <input :id="'option-' + value.id + '-' + uuid" class="form-check-input d-none" type="checkbox" :checked="isSelected(value.id)" @change="updateFacet(value)" :disabled="isLoading || value.count <= 0">
+                <label :for="'option-' + value.id + '-' + uuid" class="form-check-label" :class="[paddingClasses, isSelected(value.id) ? 'bg-appearance' : '', 'option-' + value.id]" :style="paddingInlineStyles">
                     <div class="d-flex">
                         <span class="flex-grow-1">{{ value.name }}</span>
                         <div class="filter-badge">{{ value.count }}</div>

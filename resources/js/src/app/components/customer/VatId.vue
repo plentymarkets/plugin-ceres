@@ -15,12 +15,12 @@
                 aria-describedby="basic-addon1"
                 type="text"
                 name="vatNumber"
-                :id="'txtVatNumber' + _uid"
+                :id="'txtVatNumber' + uuid"
                 v-model="vatNumber"
                 data-autofocus
                 data-testing="vat-id"
             >
-            <label :for="'txtVatNumber' + _uid">
+            <label :for="'txtVatNumber' + uuid">
                 {{ transformTranslation("Ceres::Template.addressVatNumber", "de", "billing_address.vatNumber") }}
             </label>
         </div>

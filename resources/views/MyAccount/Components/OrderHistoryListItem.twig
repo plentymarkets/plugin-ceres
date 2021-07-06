@@ -2,8 +2,8 @@
 {{ component("Ceres::Customer.Components.AddressSelect.AddressHeader") }}
 
 <script type="x/template" id="vue-order-history-list-item">
-    <div :id="'accordion_' + _uid" class="accordion col-sm-12">
-        <div @click="loadOrderDetailTemplate()" class="row container-clickable collapsed border-top-0 border py-3" :id="'heading_' + _uid" data-toggle="collapse" :data-target="'#collapse_'+ _uid" aria-expanded="false" :aria-controls="'collapse_'+ _uid">
+    <div :id="'accordion_' + uuid" class="accordion col-sm-12">
+        <div @click="loadOrderDetailTemplate()" class="row container-clickable collapsed border-top-0 border py-3" :id="'heading_' + uuid" data-toggle="collapse" :data-target="'#collapse_'+ uuid" aria-expanded="false" :aria-controls="'collapse_'+ uuid">
             <div class="col-md-10">
                 <div class="row">
                     <i class="fa fa-chevron-up" aria-hidden="true"></i>
@@ -75,7 +75,7 @@
             </div>
         </div>
 
-        <div class="collapse" :id="'collapse_'+ _uid" :data-parent="'#accordion_'+ _uid">
+        <div class="collapse" :id="'collapse_'+ uuid" :data-parent="'#accordion_'+ uuid">
             <div ref="orderDetailsContainer" class="container-main">
                 <loading-animation class="row border border-top-0"></loading-animation>
                 {# lazy load: Ceres::MyAccount.Partials.OrderHistoryListItemDetails #}

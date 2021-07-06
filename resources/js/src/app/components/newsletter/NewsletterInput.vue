@@ -1,24 +1,24 @@
 <template>
-    <form ref="newsletterForm" :id="'newsletter-input-form_' + _uid" method="post" @submit.prevent="validateData">
+    <form ref="newsletterForm" :id="'newsletter-input-form_' + uuid" method="post" @submit.prevent="validateData">
         <div class="row">
             <div class="col-6" v-if="showNameInputs">
                 <div class="input-unit">
-                    <label :for="'first-name-input_' + _uid">{{ $translate("Ceres::Template.newsletterFirstName") }}</label>
-                    <input type="text" :id="'first-name-input_' + _uid" v-model="firstName">
+                    <label :for="'first-name-input_' + uuid">{{ $translate("Ceres::Template.newsletterFirstName") }}</label>
+                    <input type="text" :id="'first-name-input_' + uuid" v-model="firstName">
                 </div>
             </div>
             <div class="col-6 pl-0" v-if="showNameInputs">
                 <div class="input-unit">
-                    <label :for="'last-name-input_' + _uid">{{ $translate("Ceres::Template.newsletterLastName") }}</label>
-                    <input type="text" :id="'last-name-input_' + _uid" v-model="lastName">
+                    <label :for="'last-name-input_' + uuid">{{ $translate("Ceres::Template.newsletterLastName") }}</label>
+                    <input type="text" :id="'last-name-input_' + uuid" v-model="lastName">
                 </div>
             </div>
 
             <div class="col-12">
                 <div class="input-group">
                     <div class="input-unit" data-validate="mail">
-                        <label :for="'email-input-id_' + _uid">{{ $translate("Ceres::Template.newsletterEmail") }} *</label>
-                        <input @focus="loadRecaptcha = true" type="email" autocomplete="email" :id="'email-input-id_' + _uid" v-model="email">
+                        <label :for="'email-input-id_' + uuid">{{ $translate("Ceres::Template.newsletterEmail") }} *</label>
+                        <input @focus="loadRecaptcha = true" type="email" autocomplete="email" :id="'email-input-id_' + uuid" v-model="email">
                     </div>
                     <input autocomplete="none" class="honey" type="text" name="username" tabindex="-1" v-model="honeypot">
                 </div>
@@ -26,8 +26,8 @@
 
             <div class="col-12" v-if="showPrivacyPolicyCheckbox">
                 <div class="form-check small" data-validate>
-                    <input type="checkbox" class="form-check-input" :id="'privacy-policy-accept-id_' + _uid" name="privacy-policy-accept" v-model="privacyPolicyValue">
-                    <label :for="'privacy-policy-accept-id_' + _uid" class="form-check-label" v-html="privacyPolicyText">
+                    <input type="checkbox" class="form-check-input" :id="'privacy-policy-accept-id_' + uuid" name="privacy-policy-accept" v-model="privacyPolicyValue">
+                    <label :for="'privacy-policy-accept-id_' + uuid" class="form-check-label" v-html="privacyPolicyText">
                     </label>
                 </div>
             </div>
@@ -103,7 +103,7 @@ export default {
         {
             this.isDisabled = true;
 
-            ValidationService.validate($("#newsletter-input-form_" + this._uid))
+            ValidationService.validate($("#newsletter-input-form_" + this.uuid))
                 .done(() =>
                 {
                     this.save();

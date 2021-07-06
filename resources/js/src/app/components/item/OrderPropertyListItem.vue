@@ -18,8 +18,8 @@
         <div v-else-if="inputType === 'checkbox' || inputType === 'radio'" class="form-check">
             <input v-if="inputType === 'checkbox'"
                    type="checkbox"
-                   :name="group ? group.id : 'check' + _uid"
-                   :id="'check' + _uid"
+                   :name="group ? group.id : 'check' + uuid"
+                   :id="'check' + uuid"
                    :value="property.id"
                    :checked="property.value"
                    @change="onInputValueChanged($event.target.checked)"
@@ -27,8 +27,8 @@
                    data-testing="order-property-input-checkbox">
             <input v-else
                    type="radio"
-                   :name="group ? group.id : 'check' + _uid"
-                   :id="'check' + _uid"
+                   :name="group ? group.id : 'check' + uuid"
+                   :id="'check' + uuid"
                    :value="property.id"
                    @change="onInputValueChanged($event.target.value)"
                    class="form-check-input"
@@ -36,7 +36,7 @@
                    data-testing="order-property-input-radio">
 
             <label class="form-check-label text-appearance d-flex"
-                   :for="'check' + _uid"
+                   :for="'check' + uuid"
                    :class="{ 'text-danger': hasError }"
                    v-tooltip data-toggle="tooltip"
                    :title="property.names.description">

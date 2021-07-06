@@ -1,13 +1,13 @@
 <template>
     <form method="post" @submit.prevent="submit()" class="clearfix">
         <div class="input-unit mt-3">
-            <label :for="'new-mail' + _uid" class="disabled">{{ $translate("Ceres::Template.myAccountNewEmail") }}</label>
-            <input type="email" name="email" class="form-control" :id="'new-mail' + _uid" :value="newMail" disabled>
+            <label :for="'new-mail' + uuid" class="disabled">{{ $translate("Ceres::Template.myAccountNewEmail") }}</label>
+            <input type="email" name="email" class="form-control" :id="'new-mail' + uuid" :value="newMail" disabled>
         </div>
 
         <div class="input-unit">
-            <label :for="'password' + _uid">{{ $translate("Ceres::Template.loginPassword") }}</label>
-            <input type="password" name="password" autocomplete="current-password" class="form-control" :id="'password' + _uid" v-model="password">
+            <label :for="'password' + uuid">{{ $translate("Ceres::Template.loginPassword") }}</label>
+            <input type="password" name="password" autocomplete="current-password" class="form-control" :id="'password' + uuid" v-model="password">
         </div>
 
         <button type="submit" :disabled="isDisabled" class="btn btn-primary btn-appearance float-right btn-medium btn-xs-max-width">

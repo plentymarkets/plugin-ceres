@@ -2,7 +2,7 @@
     <div class="pb-3">
         <div class="row">
             <div class="col-12 col-sm-6">
-                <button type="button" class="btn btn-primary btn-appearance btn-block coupon-edit" data-toggle="modal" :data-target="'#edit-coupon-overlay-' + _uid">
+                <button type="button" class="btn btn-primary btn-appearance btn-block coupon-edit" data-toggle="modal" :data-target="'#edit-coupon-overlay-' + uuid">
                     <span>{{ $translate("Ceres::Template.couponEdit") }}</span>
                     <i class="fa fa-gift default-float" aria-hidden="true"></i> 
                 </button>
@@ -30,7 +30,7 @@
             </div>
         </div>
         <form method="post" @submit.prevent="submit()">
-            <div :id="'edit-coupon-overlay-' + _uid" class="modal fade" tabindex="-1" role="dialog" ref="editCouponOverlay">
+            <div :id="'edit-coupon-overlay-' + uuid" class="modal fade" tabindex="-1" role="dialog" ref="editCouponOverlay">
                 <div class="modal-dialog modal-lg mx-auto modal-dialog-scrollable" role="document">
                     <div class="modal-content">
                         

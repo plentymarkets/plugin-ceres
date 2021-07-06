@@ -1,5 +1,5 @@
 <template>
-    <a :id="'owl-carousel-' + _uid" v-if="$data.$_enableCarousel" class="owl-carousel owl-theme" :href="itemUrl" role="listbox" :aria-label="$translate('Ceres::Template.itemImageCarousel')">
+    <a :id="'owl-carousel-' + uuid" v-if="$data.$_enableCarousel" class="owl-carousel owl-theme" :href="itemUrl" role="listbox" :aria-label="$translate('Ceres::Template.itemImageCarousel')">
         <div v-for="(imageUrl, index) in imageUrls" :key="index">
             <lazy-img v-if="index === 0 && !disableLazyLoad" ref="itemLazyImage" picture-class="img-fluid" :image-url="imageUrl.url" :alt="getAltText(imageUrl)" :title="getTitleText(imageUrl)" role="option"></lazy-img>
             <img v-else-if="index !== 0 && !disableLazyLoad" class="img-fluid owl-lazy" :data-src="imageUrl.url" :alt="getAltText(imageUrl)" :title="getTitleText(imageUrl)" role="option">
@@ -99,7 +99,7 @@ export default {
     {
         initializeCarousel()
         {
-            $("#owl-carousel-" + this._uid).owlCarousel({
+            $("#owl-carousel-" + this.uuid).owlCarousel({
                 dots     : !!this.showDots,
                 items    : 1,
                 mouseDrag: false,
@@ -108,8 +108,8 @@ export default {
                 margin   : 10,
                 nav      : !!this.showNav,
                 navText  : [
-                    `<i id="owl-nav-text-left-${this._uid}" class='fa fa-chevron-left' aria-hidden='true'></i>`,
-                    `<i id="owl-nav-text-right-${this._uid}" class='fa fa-chevron-right' aria-hidden='true'></i>`
+                    `<i id="owl-nav-text-left-${this.uuid}" class='fa fa-chevron-left' aria-hidden='true'></i>`,
+                    `<i id="owl-nav-text-right-${this.uuid}" class='fa fa-chevron-right' aria-hidden='true'></i>`
                 ],
                 onTranslated(event)
                 {
@@ -125,8 +125,8 @@ export default {
                 {
                     if (this.showNav)
                     {
-                        document.querySelector(`#owl-nav-text-left-${this._uid}`).parentElement.onclick = event => event.preventDefault();
-                        document.querySelector(`#owl-nav-text-right-${this._uid}`).parentElement.onclick = event => event.preventDefault();
+                        document.querySelector(`#owl-nav-text-left-${this.uuid}`).parentElement.onclick = event => event.preventDefault();
+                        document.querySelector(`#owl-nav-text-right-${this.uuid}`).parentElement.onclick = event => event.preventDefault();
                     }
                 }
             });
