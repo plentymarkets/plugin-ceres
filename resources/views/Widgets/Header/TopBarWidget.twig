@@ -308,10 +308,10 @@
                                                     {{ Twig.set("url", "'/'") }}
                                                     {{ Twig.if("languageUrls[languageISO] is defined") }}
                                                         {{ Twig.set("url", "languageUrls[languageISO] ~ queryString") }}
-                                                    {{ Twig.elseif("language != defaultLanguage") }}
+                                                    {{ Twig.elseif("language is not defaultLanguage") }}
                                                         {{ Twig.set("url", "'/' ~ language ~ urls.trailingSlashSuffix") }}
                                                     {{ Twig.endif() }}
-                                                    <a class="nav-link" href="{{ Twig.print("url") }}" 
+                                                    <a class="nav-link" href="{{ Twig.print("url") }}"
                                                         data-testing="lang-select-{{ Twig.print("language") }}" data-update-url>
                                                         <i class="flag-icon flag-icon-{{ Twig.print("language") }}"></i>
                                                         {{ Twig.print('trans("Ceres::Template.header" ~ language | capitalize)') }}
