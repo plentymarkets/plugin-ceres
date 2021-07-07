@@ -5,12 +5,14 @@
 ### TODO
 
 - In order to ensure legal compliance with regard to contact data in the checkout, it is necessary to activate the option **Email** for the settings **Show invoice address fields** and **Show shipping address fields** of the address selection widget in the checkout.
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents for single item views via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
 
 ### Added
 
 - The option **Email** has been added to the settings **Show invoice address fields** and **Show shipping address fields** of the address selection widget. Thus, shop visitors can now change the email address to which the order confirmation and other information is sent.
 - The email address that users use to sign up in plentyShop is now automatically stored as part of the invoice and shipping addresses. 
 - You can now activate the mapping of the barcode GTIN and the manufacturer name for the Rich Snippets of the single item view in the SEO settings of the plentyShop assistant and the Ceres settings. Furthermore, you can now add the external variation ID for MPN barcodes.
+- The widget **Automatic language detection** has been added to the ShopBuilder. Through this widget, users can change online shop contents to the language that has been recognised as the browser language in consideration of redirects that have been set up in the backend.
 
 ### Changed
 

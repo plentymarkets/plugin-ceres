@@ -5,12 +5,14 @@
 ### TODO
 
 - Um eine rechtssichere Bearbeitung der Kontaktdaten im Checkout zu gewährleisten, ist es notwendig, am Adressauswahl-Widget im Checkout die Option **E-Mail** für die Einstellungen **Rechnungsadressfelder anzeigen** und **Lieferadressfelder anzeigen** zu aktivieren.
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
 
 ### Hinzugefügt
 
-- Am Adressauswahl-Widget wurde die Option **E-mail** für die Einstellungen **Rechnungsadressfelder anzeigen/Lieferadressfelder anzeigen** hinzugefügt. Dadurch können Shop-Besucher:innen die E-Mail-Adresse ändern, an die die Bestellbestätigung und andere Informationen gesendet werden.
+- Am Adressauswahl-Widget wurde die Option **E-Mail** für die Einstellungen **Rechnungsadressfelder anzeigen/Lieferadressfelder anzeigen** hinzugefügt. Dadurch können Shop-Besucher:innen die E-Mail-Adresse ändern, an die die Bestellbestätigung und andere Informationen gesendet werden.
 - Die E-Mail, die Besucher:innen zur Anmeldung im plentyShop nutzen, wird nun automatisch an Rechnungs- und Lieferadresse hinterlegt.
 - In den SEO-Einstellungen des plentyShop-Assistenten und des Ceres-Plugins kann jetzt das Mapping für den GTIN-Barcode und den Herstellernamen für die Rich Snippets der Artikelseite aktiviert werden. Weiterhin kann die externe Varianten-ID für MPN-Barcodes hinzugefügt werden.
+- Das Widget **Spracherkennung** wurde zum ShopBuilder hinzugefügt. Dieses bietet Nutzer:innen einen Wechsel der Inhalte auf die erkannte Browser-Sprache unter Berücksichtigung der konfigurierten Weiterleitungen im Backend an.
 
 ### Geändert
 
