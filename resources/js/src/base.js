@@ -11,7 +11,6 @@ import "custom-event-polyfill";
 
 import Vue from "vue";
 import Vuex from "vuex";
-import UUID from "vue-uuid";
 import { mount } from "./mount";
 
 Vue.prototype.$mount = mount;
@@ -21,19 +20,6 @@ window.Vuex = Vuex;
 
 import script2 from "./app/plugins/script2";
 Vue.use(script2);
-Vue.use(UUID);
-
-Vue.use({
-    install: (Vue, options) =>
-    {
-        Vue.mixin({
-            created()
-            {
-                this.uuid = this.$uuid.v4();
-            }
-        });
-    }
-});
 
 import "./app/jQuery";
 
@@ -209,6 +195,7 @@ import "./app/filters/truncate.filter";
 // =========================
 import "./app/mixins/getJsonData.mixin";
 import "./app/mixins/template.mixin";
+import "./app/mixins/uuid.mixin";
 
 // =========================
 // Bootstrap frameworks
