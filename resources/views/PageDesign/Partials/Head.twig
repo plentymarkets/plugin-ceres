@@ -15,7 +15,7 @@
     <link rel="canonical" href="{{ canonicalUrl  ~ services.url.getCanonicalQueryString() }}">
 {% endif %}
 
-{% if services.url.isCanonical() %}
+{% if services.url.isCanonical() or request.get('env') == "testing" %}
     {% for language, url in languageUrls %}
         <link rel="alternate" hreflang="{{language}}" href="{{url}}"/>
     {% endfor %}

@@ -64,10 +64,9 @@
                 <div
                     class="dropdown-menu"
                     :aria-labelledby="'addressMultiSelect' + uuid"
-                    v-if="!isAddressListEmpty && !(addressType === '2' && addressList.length === 1)"
                     {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-dropdown'\"") | raw }}
                 >
-                    <ul>
+                    <ul v-if="!isAddressListEmpty && !(addressType === '2' && addressList.length === 1)">
                         <li class="item" v-for="(address, index) in addressList">
                             <input
                                 type="radio"
