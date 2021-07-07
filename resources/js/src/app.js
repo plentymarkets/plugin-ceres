@@ -178,7 +178,7 @@ export function createApp(options, store)
     Vue.use(UUID);
 
     Vue.use({
-        install: function(Vue, options)
+        install: (Vue, options) =>
         {
             Vue.mixin({
                 created()

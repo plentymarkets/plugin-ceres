@@ -24,7 +24,7 @@ Vue.use(script2);
 Vue.use(UUID);
 
 Vue.use({
-    install: function(Vue, options)
+    install: (Vue, options) =>
     {
         Vue.mixin({
             created()
