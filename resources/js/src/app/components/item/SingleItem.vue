@@ -368,9 +368,7 @@ export default {
         })
 
         // listen for variation change to hydrate all children lazy-hydrate components
-        document.addEventListener("onVariationChanged", () => {
-                this.hydrateChildren(this.$children);
-        });
+        document.addEventListener("onVariationChanged", () => this.hydrateChildren(this.$children));
     },
 
     methods:
