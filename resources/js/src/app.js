@@ -97,7 +97,7 @@ import "./app/filters/propertyFileUrl.filter";
 import "./app/filters/translate.filter";
 import "./app/filters/truncate.filter";
 
-export function createApp(options, store)
+export function beforeCreate(context)
 {
     // =========================
     // COMPONENTS
@@ -177,7 +177,10 @@ export function createApp(options, store)
 
     Vue.prototype.$translate = TranslationService.translate;
     Vue.prototype.$ceres = App;
+}
 
+export function createApp(options, store)
+{
     const defaultOptions = {
         store,
         ...options
