@@ -1,11 +1,35 @@
 # Release Notes for Ceres
 
+## v5.0.35 (2021-07-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.34...5.0.35" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
+- The setting **Block unaccepted cookies** in the Ceres settings has been activated for all systems for which no Ceres settings have been saved so far. If you do not want to block cookies your customers have not accepted, check and, if necessary, deactivate the setting in the **Plugins » Plugin set overview »** *Select plugin set* **» Ceres » Configuration » Tab: Global** menu.
+
+### Changed
+
+- The setting **Block unaccepted cookies** in the Ceres settings is now active by default.
+
+### Fixed
+
+- Due to an error, it was not possible to set up the category navigation in such a way that the second level did not display any categories. This behaviour has been fixed.
+- A wrong `prev` link was set in the HTML markup on the second page of a category. This has been fixed.
+- Switching item variations on mobile devices could lead to the page scrolling to a different part of the page. This has been fixed.
+- Data fields in text widgets were not updated in the single item view when a different variation was selected. This has been fixed.
+
+### Changed templates
+
+- In Ceres 5.0.35 we have made changes to a number of template files which are relevant for theme developers. You can find the changed template below. The link directs you to the effected changes in the corresponding file.
+- [resources/views/Widgets/Header/TopBarWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2960/files#diff-2696f6a2e31a39130c691133b3d6fdf30b218a6bdbbd0717433c835d060c3f66)
+- [resources/views/Category/Item/CategoryItem.twig](https://github.com/plentymarkets/plugin-ceres/pull/2949/files#diff-6e3fe08ffe8086b5176c1c0451cb0c0034b99195843630994e5e79347f8d1158)
+
 ## v5.0.34 (2021-06-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.33...5.0.34" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
 
 - In order to ensure legal compliance with regard to contact data in the checkout, it is necessary to activate the option **Email** for the settings **Show invoice address fields** and **Show shipping address fields** of the address selection widget in the checkout.
-- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents for single item views via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
 
 ### Added
 
