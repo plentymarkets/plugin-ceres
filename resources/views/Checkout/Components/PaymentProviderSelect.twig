@@ -4,14 +4,14 @@
             <li v-for="paymentProvider in methodOfPaymentList" class="method-list-item" :data-id="paymentProvider.id">
                 <input
                         type="radio"
-                        :id="'paymentMethod' + _uid + paymentProvider.id"
-                        :name="'MethodOfPaymentID' + _uid"
+                        :id="'paymentMethod' + uuid + paymentProvider.id"
+                        :name="'MethodOfPaymentID' + uuid"
                         :value="paymentProvider.id"
                         @change="onPaymentProviderChange(paymentProvider)"
                         :checked="methodOfPaymentId === paymentProvider.id"
                         :disabled="!paymentProvider.isSelectable || isCheckoutReadonly"
                 >
-                <label class="provider-select-label" :for="'paymentMethod' + _uid + paymentProvider.id"
+                <label class="provider-select-label" :for="'paymentMethod' + uuid + paymentProvider.id"
                        :class="paddingClasses"
                        :style="paddingInlineStyles"
                        v-tooltip="isPaymentMethodExcluded(paymentProvider.id)"

@@ -1,7 +1,7 @@
 <template>
     <div class="form-check" :class="{ 'error': showError }">
-        <input class="form-check-input" type="checkbox" :id="'privacy-policy-accept' + _uid" :checked="value" @change="onValueChanged($event.target.checked)" data-testing="privacy-policy-accept-register">
-        <label class="form-check-label" :for="'privacy-policy-accept' + _uid">
+        <input class="form-check-input" type="checkbox" :id="'privacy-policy-accept' + uuid" :checked="value" @change="onValueChanged($event.target.checked)" data-testing="privacy-policy-accept-register">
+        <label class="form-check-label" :for="'privacy-policy-accept' + uuid">
             <span v-html="labelHtml"></span><!--
             --><sup>*</sup>
         </label>

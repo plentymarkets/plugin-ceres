@@ -115,7 +115,7 @@ export default {
     {
         currentOffer()
         {
-            return this.$store.state.liveShopping.liveShoppingOffers[this._uid];
+            return this.$store.state.liveShopping.liveShoppingOffers[this.uuid];
         },
 
         isActive()
@@ -228,7 +228,7 @@ export default {
 
         reloadOffer()
         {
-            this.$store.dispatch("retrieveLiveShoppingOffer", { liveShoppingId: this.liveShoppingId, sorting: this.sorting, uid: this._uid });
+            this.$store.dispatch("retrieveLiveShoppingOffer", { liveShoppingId: this.liveShoppingId, sorting: this.sorting, uid: this.uuid });
         }
     }
 }

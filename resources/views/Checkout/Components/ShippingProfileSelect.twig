@@ -4,8 +4,8 @@
             <li v-for="shippingProfile in shippingProfileList" class="method-list-item"  :data-id="shippingProfile.parcelServicePresetId">
                 <input
                         type="radio"
-                        :id="'ShippingProfileID' + _uid + shippingProfile.parcelServicePresetId"
-                        :name="'shippingProfileSelect' + _uid"
+                        :id="'ShippingProfileID' + uuid + shippingProfile.parcelServicePresetId"
+                        :name="'shippingProfileSelect' + uuid"
                         :value="shippingProfile.parcelServicePresetId"
                         @change="onShippingProfileChange(shippingProfile.parcelServicePresetId)"
                         :checked="shippingProfileId === shippingProfile.parcelServicePresetId"
@@ -14,7 +14,7 @@
 
 
                 <label class="provider-select-label"
-                       :for="'ShippingProfileID' +  _uid + shippingProfile.parcelServicePresetId"
+                       :for="'ShippingProfileID' +  uuid + shippingProfile.parcelServicePresetId"
                        :class="paddingClasses"
                        :style="paddingInlineStyles"
                         v-tooltip="isPaymentMethodExcluded(shippingProfile, selectedPaymentMethodId)"

@@ -195,6 +195,7 @@ import "./app/filters/truncate.filter";
 // =========================
 import "./app/mixins/getJsonData.mixin";
 import "./app/mixins/template.mixin";
+import "./app/mixins/uuid.mixin";
 
 // =========================
 // Bootstrap frameworks

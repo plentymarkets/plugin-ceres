@@ -60,7 +60,7 @@
             </div>
             {# /show initial #}
             <hr class="gradient-hr" v-if="returnOrder.order.orderItems.length > 4">
-            <a v-if="returnOrder.order.orderItems.length > 4" @click="toggleNaming('more-return-text-' + _uid)" :id="'more-return-text-' + _uid" class="show-more-returns" data-toggle="collapse" :href="'#more-return-items-' + _uid" aria-expanded="false" aria-controls="collapseExample">
+            <a v-if="returnOrder.order.orderItems.length > 4" @click="toggleNaming('more-return-text-' + uuid)" :id="'more-return-text-' + uuid" class="show-more-returns" data-toggle="collapse" :href="'#more-return-items-' + uuid" aria-expanded="false" aria-controls="collapseExample">
                 {{ trans("Ceres::Template.returnHistoryReturnShowMore") }}
             </a>
         </div>

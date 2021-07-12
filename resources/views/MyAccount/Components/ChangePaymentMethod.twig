@@ -68,12 +68,12 @@
 
                                         <input
                                                 type="radio"
-                                                :id="'paymentMethod' + _uid + paymentProvider.id"
+                                                :id="'paymentMethod' + uuid + paymentProvider.id"
                                                 :name="'MethodOfPaymentID_' + currentOrder.id"
                                                 v-model="paymentMethod"
                                                 :value="paymentProvider.id"
                                         >
-                                        <label :for="'paymentMethod' + _uid + paymentProvider.id">
+                                        <label :for="'paymentMethod' + uuid + paymentProvider.id">
                                             <div class="icon">
                                                 <img class="img-fluid" :src="paymentProvider.icon" :alt="paymentProvider.name" :title="paymentProvider.name">
                                             </div><!--

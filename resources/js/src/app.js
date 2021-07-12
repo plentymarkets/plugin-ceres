@@ -48,6 +48,7 @@ import TranslationService from "./app/services/TranslationService";
 // =========================
 import "./app/mixins/template.mixin";
 import "./app/mixins/getJsonData.mixin";
+import "./app/mixins/uuid.mixin";
 
 // =========================
 // DIRECTIVES
