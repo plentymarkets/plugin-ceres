@@ -258,6 +258,10 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
         font-size: .8em;
         background: $gray-900;
 
+        .breadcrumb-item {
+            padding-right: .5rem;
+        }
+
         li {
             display: inline-block;
             padding: .8rem 0;

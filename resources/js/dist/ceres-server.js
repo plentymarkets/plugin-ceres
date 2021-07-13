@@ -8428,7 +8428,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     maximumHint: function maximumHint() {
       return this.$translate("Ceres::Template.singleItemQuantityMax", {
-        max: this.$options.filters.numberFormat(this.Max)
+        max: this.$options.filters.numberFormat(this.max)
       });
     },
     displayValue: function displayValue() {
@@ -8447,6 +8447,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   })),
   watch: {
+    variationId: function variationId(newValue) {
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isDefined"])(newValue)) {
+        this.fetchQuantityFromBasket();
+      }
+    },
     basketItems: {
       handler: function handler(newValue, oldValue) {
         if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isDefined"])(this.variationId)) {
@@ -8794,8 +8799,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.symbol.description.js */ "./node_modules/core-js/modules/es.symbol.description.js");
 /* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _helper_get__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../helper/get */ "./resources/js/src/app/helper/get.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _helper_get__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../helper/get */ "./resources/js/src/app/helper/get.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+
+
 
 
 
@@ -9093,16 +9104,16 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.getters["".concat(this.itemId, "/variationMissingProperties")];
     },
     currentVariation: function currentVariation() {
-      return Object(_helper_get__WEBPACK_IMPORTED_MODULE_5__["get"])(this.$store.state, "items[".concat(this.itemId, "].variation.documents[0].data"));
+      return Object(_helper_get__WEBPACK_IMPORTED_MODULE_7__["get"])(this.$store.state, "items[".concat(this.itemId, "].variation.documents[0].data"));
     },
     isVariationSelected: function isVariationSelected() {
-      return Object(_helper_get__WEBPACK_IMPORTED_MODULE_5__["get"])(this.$store.state, "items[".concat(this.itemId, "].variationSelect.isVariationSelected"));
+      return Object(_helper_get__WEBPACK_IMPORTED_MODULE_7__["get"])(this.$store.state, "items[".concat(this.itemId, "].variationSelect.isVariationSelected"));
     },
     attributes: function attributes() {
-      return Object(_helper_get__WEBPACK_IMPORTED_MODULE_5__["get"])(this.$store.state, "items[".concat(this.itemId, "].variationSelect.attributes"));
+      return Object(_helper_get__WEBPACK_IMPORTED_MODULE_7__["get"])(this.$store.state, "items[".concat(this.itemId, "].variationSelect.attributes"));
     },
     units: function units() {
-      return Object(_helper_get__WEBPACK_IMPORTED_MODULE_5__["get"])(this.$store.state, "items[".concat(this.itemId, "].variationSelect.units"));
+      return Object(_helper_get__WEBPACK_IMPORTED_MODULE_7__["get"])(this.$store.state, "items[".concat(this.itemId, "].variationSelect.units"));
     },
     isItemSet: function isItemSet() {
       return this.$store.state.items.isItemSet;
@@ -9130,18 +9141,34 @@ __webpack_require__.r(__webpack_exports__);
       if (_this.isItemSet) {
         _this.$store.dispatch("initSetComponents", _this.itemData);
       }
+    }); // listen for variation change to hydrate all children lazy-hydrate components
+
+    document.addEventListener("onVariationChanged", function () {
+      return _this.hydrateChildren(_this.$children);
     });
   },
   methods: {
     getDataField: function getDataField(field) {
-      return Object(_helper_get__WEBPACK_IMPORTED_MODULE_5__["get"])(this.currentVariation, field);
+      return Object(_helper_get__WEBPACK_IMPORTED_MODULE_7__["get"])(this.currentVariation, field);
     },
     getFilteredDataField: function getFilteredDataField(field, filter) {
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_6__["isNullOrUndefined"])(this.$options.filters[filter])) {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_8__["isNullOrUndefined"])(this.$options.filters[filter])) {
         return this.$options.filters[filter](this.getDataField(field));
       }
 
       return this.getDataField(field);
+    },
+    // iterate recursively the children components and call their hydrate method, if it is a lazy-hydrate component
+    hydrateChildren: function hydrateChildren(nodes) {
+      var _this2 = this;
+
+      nodes.forEach(function (component) {
+        if (component.$options.name === "lazy-hydrate") {
+          component.hydrate();
+        } else if (component.$children.length) {
+          _this2.hydrateChildren(component.$children);
+        }
+      });
     }
   }
 });
@@ -74226,11 +74253,12 @@ module.exports = function(module) {
 /*!*********************************!*\
   !*** ./resources/js/src/app.js ***!
   \*********************************/
-/*! exports provided: createApp */
+/*! exports provided: beforeCreate, createApp */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "beforeCreate", function() { return beforeCreate; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createApp", function() { return createApp; });
 /* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.promise.js */ "./node_modules/core-js/modules/es.promise.js");
 /* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_0__);
@@ -74422,7 +74450,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-function createApp(options, store) {
+function beforeCreate(context) {
   // =========================
   // COMPONENTS
   // =========================
@@ -74588,7 +74616,8 @@ function createApp(options, store) {
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.use(_app_plugins_script2__WEBPACK_IMPORTED_MODULE_34__["default"]);
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.prototype.$translate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_35__["default"].translate;
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.prototype.$ceres = App;
-
+}
+function createApp(options, store) {
   var defaultOptions = _objectSpread({
     store: store
   }, options);
@@ -89997,13 +90026,14 @@ var cloneDeep = __webpack_require__(/*! lodash/cloneDeep */ "./node_modules/loda
 /*!******************************************!*\
   !*** ./resources/js/src/entry-server.js ***!
   \******************************************/
-/*! exports provided: createApp, globals */
+/*! exports provided: createApp, globals, beforeCreate */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createApp", function() { return createApp; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "globals", function() { return globals; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "beforeCreate", function() { return beforeCreate; });
 /* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.promise.js */ "./node_modules/core-js/modules/es.promise.js");
 /* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
@@ -90029,6 +90059,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
  // Override global component function to allow overriding templates
 
 vue__WEBPACK_IMPORTED_MODULE_6___default.a.component = _mount__WEBPACK_IMPORTED_MODULE_9__["component"];
@@ -90036,6 +90067,10 @@ var globals = {
   Vue: vue__WEBPACK_IMPORTED_MODULE_6___default.a,
   Vuex: vuex__WEBPACK_IMPORTED_MODULE_7__["default"]
 };
+
+function beforeCreate(context) {
+  Object(_app__WEBPACK_IMPORTED_MODULE_5__["beforeCreate"])(context);
+}
 
 function createApp(context) {
   return new Promise(function (resolve, reject) {
