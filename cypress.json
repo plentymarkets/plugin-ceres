@@ -8,5 +8,6 @@
     "videosFolder": "testing/cypress/videos",
     "projectId": "a1vvhz",
     "videoUploadOnPasses": false,
-    "defaultCommandTimeout": 10000
+    "defaultCommandTimeout": 10000,
+    "scrollBehavior": "center"
 }
