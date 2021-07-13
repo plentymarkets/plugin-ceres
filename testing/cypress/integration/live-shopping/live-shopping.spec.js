@@ -65,6 +65,7 @@ context("Live shopping", () =>
     it("Should link to the correct variation", () =>
     {
         // check if item name links correctly
+        cy.wait(100);
         cy.get(".live-shopping-item-name > a")
             .first()
             .should("have.attr", "href")
