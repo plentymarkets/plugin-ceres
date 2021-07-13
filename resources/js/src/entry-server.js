@@ -56,4 +56,4 @@ function createApp(context)
     });
 }
 
-export { createApp, globals };
+export { createApp, globals, beforeCreate };
