@@ -157,7 +157,7 @@ export default {
             return this.$translate(
                 "Ceres::Template.singleItemQuantityMax",
                 {
-                    max: this.$options.filters.numberFormat(this.Max)
+                    max: this.$options.filters.numberFormat(this.max)
                 }
             );
         },
@@ -184,6 +184,14 @@ export default {
 
     watch:
     {
+        variationId(newValue)
+        {
+            if (isDefined(newValue))
+            {
+                this.fetchQuantityFromBasket();
+            }
+        },
+
         basketItems:
         {
             handler(newValue, oldValue)
