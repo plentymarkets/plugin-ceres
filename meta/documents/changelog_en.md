@@ -17,6 +17,9 @@
 - A wrong `prev` link was set in the HTML markup on the second page of a category. This has been fixed.
 - Switching item variations on mobile devices could lead to the page scrolling to a different part of the page. This has been fixed.
 - Data fields in text widgets were not updated in the single item view when a different variation was selected. This has been fixed.
+- With active server-side rendering (SSR), it was impossible for external plugins to override Vue components in Ceres. This has been fixed.
+- The allowed maximum value for the quantity input of an item was not updated when changing a variant. This has been fixed.
+- The tooltip that displays the maximum value at the quantity entry of an item now outputs the correct value.
 
 ### Changed templates
 

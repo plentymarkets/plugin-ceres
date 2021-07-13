@@ -17,6 +17,9 @@
 - Im HTML-Markup wurde ein falscher `prev`-Link gesetzt, wenn man auf der zweiten Seite einer Kategorie war. Dies wurde behoben.
 - Das Wechseln zwischen Artikelvarianten konnte auf mobilen Geräten dazu führen, dass zu einer anderen Stelle der Seite gescrollt wurde. Dies wurde behoben.
 - Auf der Artikeleinzelansicht wurden Datenfelder in Text-Widgets bei einem Wechsel der Variante nicht aktualisiert. Dies wurde behoben.
+- Mit aktiven Server-Side Rendering (SSR), war es für externe Plugins nicht möglich Vue-Komponenten in Ceres zu überschreiben. Dies wurde behoben.
+- Der erlaubte Maximalwert für die Mengeneingabe eines Artikel wurde beim Wechsel einer Variante nicht aktualisiert. Dies wurde behoben.
+- Der Tooltip der den Maximalwert an der Mengeneingabe eines Artikels anzeigt gibt jetzt den korrekt Wert aus.
 
 ### Angepasste Templates
 
