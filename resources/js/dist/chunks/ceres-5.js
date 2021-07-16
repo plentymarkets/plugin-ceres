@@ -129,6 +129,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     "order-property-list-group": _OrderPropertyListGroup_vue__WEBPACK_IMPORTED_MODULE_17__["default"]
   },
   props: {
+    useVariationOrderProperties: {
+      type: Boolean,
+      default: false
+    },
     paddingClasses: {
       type: String,
       default: null
@@ -150,6 +154,15 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         0: true
       }
     };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    if (this.useVariationOrderProperties) {
+      document.addEventListener("onVariationChanged", function (event) {
+        _this.activeSlide = 0;
+      });
+    }
   },
   computed: {
     sortedGroupedProperties: function sortedGroupedProperties() {

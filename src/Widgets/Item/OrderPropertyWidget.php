@@ -7,6 +7,7 @@ use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetCategories;
 use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
+use Plenty\Modules\Webshop\Contracts\WebstoreConfigurationRepositoryContract;
 
 class OrderPropertyWidget extends BaseWidget
 {
@@ -43,5 +44,14 @@ class OrderPropertyWidget extends BaseWidget
         $settingsFactory->createSpacing();
 
         return $settingsFactory->toArray();
+    }
+
+    public function getTemplateData($widgetSettings, $isPreview)
+    {
+        /** @var WebstoreConfigurationRepositoryContract $webstoreConfigurationRepository */
+        $webstoreConfigurationRepository = pluginApp(WebstoreConfigurationRepositoryContract::class);
+        $webstoreConfiguration = $webstoreConfigurationRepository->getWebstoreConfiguration();
+
+        return ['useVariationOrderProperties' => $webstoreConfiguration->useVariationOrderProperties];
     }
 }

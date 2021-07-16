@@ -158,7 +158,6 @@ class DisplayedInformationStep extends Step
     {
         return [
             "title" => "Wizard.itemViewSettings",
-            "description" => "Wizard.itemViewSettingsDescription",
             "form" => [
                 "displayInfo_requireOrderProperties" => [
                     "type" => "checkbox",

@@ -135,6 +135,10 @@ class OnlineStoreMapping
             'global'    => true,
             'optional'  => false
         ],
+        'onlineStore_useVariationOrderProperties' => [
+            'field'     => 'useVariationOrderProperties',
+            'type'      => 'boolean',
+        ],
         'onlineStore_externalVatIdCheckServiceUnavailableFallbackStatus' => [
             'field'     => 'externalVatCheckServiceUnavailableFallbackStatus',
             'type'      => 'float',
