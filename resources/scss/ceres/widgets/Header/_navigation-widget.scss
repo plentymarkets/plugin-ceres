@@ -21,7 +21,7 @@ $normalmenu-color: $primary !default;
 
 .navbar-brand {
     img {
-        max-height: 3rem;
+        max-height: 42px;
     }
 }
 
@@ -257,6 +257,10 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
     .breadcrumb {
         font-size: .8em;
         background: $gray-900;
+
+        .breadcrumb-item {
+            padding-right: .5rem;
+        }
 
         li {
             display: inline-block;

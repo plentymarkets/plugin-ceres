@@ -20,7 +20,7 @@
 {{ Twig.set("currencyFormatSelect", Twig.call("config", ["Ceres.currency.format_selection"])) }}
 {{ Twig.set("currencyData", Twig.call("services.checkout.getCurrencyData") ~ "[currencyFormat]") }}
 {{ Twig.set("activeCurrencies", Twig.call("config", ["Ceres.currency.available_currencies"]) ~ " | split(\", \")") }}
-{{ Twig.set("defaultLanguage", Twig.call("services.webstoreConfigurationRepository.getWebstoreConfiguration().defaultLanguage")) }}
+{{ Twig.set("defaultLanguage", "webstoreConfig.defaultLanguage" ) }}
 {{ Twig.set("overrideSearchBar", Twig.call("LayoutContainer.show", ["Ceres::Search.SearchBar"])) }}
 
 <div class="top-bar header-fw{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if not isFixed %} unfixed{% endif %}">
@@ -293,7 +293,6 @@
                         <div class="row py-3">
                             {% if enableLanguageSelect and not isPreview %}
                                 <div class="col-12 {% if enableShippingCountrySelect %}col-lg-6{% else %}col-lg-12{% endif %}">
-
                                     <div class="language-settings">
                                         <div class="list-title">
                                             <strong>{{ Twig.print('trans("Ceres::Template.headerSelectLanguage")') }}</strong>
@@ -311,7 +310,7 @@
                                                     {{ Twig.elseif("language != defaultLanguage") }}
                                                         {{ Twig.set("url", "'/' ~ language ~ urls.trailingSlashSuffix") }}
                                                     {{ Twig.endif() }}
-                                                    <a class="nav-link" href="{{ Twig.print("url") }}" 
+                                                    <a class="nav-link" href="{{ Twig.print("url") }}"
                                                         data-testing="lang-select-{{ Twig.print("language") }}" data-update-url>
                                                         <i class="flag-icon flag-icon-{{ Twig.print("language") }}"></i>
                                                         {{ Twig.print('trans("Ceres::Template.header" ~ language | capitalize)') }}

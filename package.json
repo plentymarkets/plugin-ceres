@@ -1,7 +1,7 @@
 {
   "name": "Ceres",
   "license": "AGPL-3.0",
-  "version": "5.0.33",
+  "version": "5.0.35",
   "repository": {
     "type": "git",
     "url": "https://github.com/plentymarkets/plugin-ceres.git"
@@ -12,8 +12,8 @@
     "build:dev": "webpack --progress",
     "build:prod": "webpack --env.prod --progress",
     "build:js": "npm run build:js:dev && npm run build:js:prod",
-    "build:js:dev": "webpack --config-name scripts --progress",
-    "build:js:prod": "webpack --config-name scripts --env.prod --progress",
+    "build:js:dev": "webpack --config-name scripts --progress && webpack --config-name client --progress && webpack --config-name server --progress",
+    "build:js:prod": "webpack --config-name scripts --env.prod --progress && webpack --config-name client --env.prod --progress && webpack --config-name server --env.prod --progress",
     "build:sass": "npm run build:sass:dev && npm run build:sass:prod",
     "build:sass:dev": "webpack --config-name styles --progress",
     "build:sass:prod": "webpack --config-name styles --env.prod --progress",
@@ -39,7 +39,7 @@
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.3",
-    "cypress": "^6.2.0",
+    "cypress": "^7.5.0",
     "cypress-file-upload": "^4.1.1",
     "del": "^2.2.0",
     "eslint": "^6.8.0",

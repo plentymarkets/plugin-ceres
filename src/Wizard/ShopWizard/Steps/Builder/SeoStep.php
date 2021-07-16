@@ -30,6 +30,7 @@ class SeoStep extends Step
                 $this->generateItemMetaTitleSection(),
                 $this->generateBrandMappingSection(),
                 $this->generateManufacturerMappingSection(),
+                $this->generateGtinMappingSection(),
                 $this->generateGtin8MappingSection(),
                 $this->generateGtin13MappingSection(),
                 $this->generateIsbnMappingSection(),
@@ -266,6 +267,38 @@ class SeoStep extends Step
     /**
      * @return array
      */
+    private function generateGtinMappingSection():array
+    {
+        $gtinOptions = SeoConfig::getGtinOptions();
+        $options       = StepHelper::generateTranslatedListBoxValues($gtinOptions);
+
+        return [
+            "title"       => "Wizard.gtinMapping",
+            "description" => "Wizard.gtinMappingDescription",
+            "form"        => [
+                "seo_gtin" => [
+                    "type"         => "select",
+                    "defaultValue" => "1",
+                    "options"      => [
+                        "name" => "Wizard.gtinChoose",
+                        "listBoxValues" => $options,
+                    ]
+                ],
+                "seo_gtinId" => [
+                    "type"         => "text",
+                    "isVisible"    => "seo_gtin === '3'",
+                    "defaultValue" => "",
+                    "options"      => [
+                        "name"          => "Wizard.gtinID",
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
     private function generateGtin8MappingSection():array
     {
         $gtin8Options = SeoConfig::getGtin8Options();
@@ -364,15 +397,27 @@ class SeoStep extends Step
      */
     private function generateMpnMappingSection():array
     {
+        $mpnOptions = SeoConfig::getMpnOptions();
+        $options    = StepHelper::generateTranslatedListBoxValues($mpnOptions);
+
         return [
-            "title" => "Wizard.mpnMapping",
+            "title"       => "Wizard.mpnMapping",
             "description" => "Wizard.mpnMappingDescription",
-            "form" => [
+            "form"        => [
+                "seo_mpn" => [
+                    "type"         => "select",
+                    "defaultValue" => "1",
+                    "options"      => [
+                        "name" => "Wizard.mpnChoose",
+                        "listBoxValues" => $options,
+                    ]
+                ],
                 "seo_mpnId" => [
-                    "type" => "text",
+                    "type"         => "text",
+                    "isVisible"    => "seo_mpn === '3'",
                     "defaultValue" => "",
-                    "options" => [
-                        "name" => "Wizard.mpnID",
+                    "options"      => [
+                        "name"          => "Wizard.mpnID",
                     ]
                 ]
             ]

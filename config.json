@@ -150,7 +150,7 @@
                     "required": false,
                     "label": "Config.globalBlockCookies",
                     "options": {
-                        "defaultValue": "false"
+                        "defaultValue": "true"
                     }
                 }
             }
@@ -2884,11 +2884,15 @@
                     "deprecated": true,
                     "label": "Config.billingAddressShowLabel",
                     "options": {
-                        "defaultValue": "billing_address.name1, billing_address.salutation",
+                        "defaultValue": "billing_address.name1, billing_address.salutation, billing_address.email",
                         "checkBoxValues": [
                             {
                                 "value": "billing_address.name1",
                                 "caption": "Config.addressFieldName1"
+                            },
+                            {
+                                "value": "billing_address.email",
+                                "caption": "Config.addressFieldEMail"
                             },
                             {
                                 "value": "billing_address.vatNumber",
@@ -2946,6 +2950,10 @@
                                 "caption": "Config.addressFieldVatNumber"
                             },
                             {
+                                "value": "billing_address.email",
+                                "caption": "Config.addressFieldEMail"
+                            },
+                            {
                                 "value": "billing_address.salutation",
                                 "caption": "Config.addressFieldSalutation"
                             },
@@ -2990,7 +2998,7 @@
                     "deprecated": true,
                     "label": "Config.deliveryAddressShowLabel",
                     "options": {
-                        "defaultValue": "delivery_address.name1, delivery_address.salutation",
+                        "defaultValue": "delivery_address.name1, delivery_address.salutation, delivery_address.email",
                         "checkBoxValues": [
                             {
                                 "value": "delivery_address.name1",
@@ -2999,6 +3007,10 @@
                             {
                                 "value": "delivery_address.salutation",
                                 "caption": "Config.addressFieldSalutation"
+                            },
+                            {
+                                "value": "delivery_address.email",
+                                "caption": "Config.addressFieldEMail"
                             },
                             {
                                 "value": "delivery_address.contactPerson",
@@ -3048,6 +3060,10 @@
                                 "caption": "Config.addressFieldTitle"
                             },
                             {
+                                "value": "delivery_address.email",
+                                "caption": "Config.addressFieldEMail"
+                            },
+                            {
                                 "value": "delivery_address.contactPerson",
                                 "caption": "Config.addressFieldContactPerson"
                             },
@@ -3080,7 +3096,7 @@
                     "deprecated": true,
                     "label": "Config.billingAddressEnShowLabel",
                     "options": {
-                        "defaultValue": "billing_address.name1, billing_address.address2, billing_address.salutation",
+                        "defaultValue": "billing_address.name1, billing_address.address2, billing_address.salutation, billing_address.email",
                         "checkBoxValues": [
                             {
                                 "value": "billing_address.name1",
@@ -3089,6 +3105,10 @@
                             {
                                 "value": "billing_address.vatNumber",
                                 "caption": "Config.addressFieldEnVatNumber"
+                            },
+                            {
+                                "value": "billing_address.email",
+                                "caption": "Config.addressFieldEnEMail"
                             },
                             {
                                 "value": "billing_address.contactPerson",
@@ -3146,6 +3166,10 @@
                                 "caption": "Config.addressFieldEnSalutation"
                             },
                             {
+                                "value": "billing_address.email",
+                                "caption": "Config.addressFieldEnEMail"
+                            },
+                            {
                                 "value": "billing_address.title",
                                 "caption": "Config.addressFieldEnTitle"
                             },
@@ -3186,7 +3210,7 @@
                     "deprecated": true,
                     "label": "Config.deliveryAddressEnShowLabel",
                     "options": {
-                        "defaultValue": "delivery_address.name1, delivery_address.salutation",
+                        "defaultValue": "delivery_address.name1, delivery_address.salutation, delivery_address.email",
                         "checkBoxValues": [
                             {
                                 "value": "delivery_address.name1",
@@ -3195,6 +3219,10 @@
                             {
                                 "value": "delivery_address.salutation",
                                 "caption": "Config.addressFieldEnSalutation"
+                            },
+                            {
+                                "value": "delivery_address.email",
+                                "caption": "Config.addressFieldEnEMail"
                             },
                             {
                                 "value": "delivery_address.contactPerson",
@@ -3242,6 +3270,10 @@
                             {
                                 "value": "delivery_address.title",
                                 "caption": "Config.addressFieldEnTitle"
+                            },
+                            {
+                                "value": "delivery_address.email",
+                                "caption": "Config.addressFieldEnEMail"
                             },
                             {
                                 "value": "delivery_address.contactPerson",
@@ -4395,8 +4427,54 @@
                                             "value": "2",
                                             "caption": "Config.manufacturerExtern",
                                             "position": 1
+                                        },
+                                        {
+                                            "value": "3",
+                                            "caption": "Config.manufacturerName",
+                                            "position": 2
                                         }
                                     ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "gtin.mapping": {
+                    "type": "verticalContainer",
+                    "label": "Config.gtinMapping",
+                    "options": {
+                        "containerEntries": {
+                            "gtin.mapping.gtin": {
+                                "type": "selectBox",
+                                "required": false,
+                                "label": "Config.gtin",
+                                "options": {
+                                    "defaultValue": "",
+                                    "selectBoxValues": [
+                                        {
+                                            "value": "1",
+                                            "caption": "Config.gtinNotSet",
+                                            "position": 0
+                                        },
+                                        {
+                                            "value": "2",
+                                            "caption": "Config.gtinSetFirst",
+                                            "position": 1
+                                        },
+                                        {
+                                            "value": "3",
+                                            "caption": "Config.gtinSet",
+                                            "position": 2
+                                        }
+                                    ]
+                                }
+                            },
+                            "gtin.mapping.gtinID": {
+                                "type": "inputText",
+                                "required": false,
+                                "label": "Config.gtinID",
+                                "options": {
+                                    "defaultValue": ""
                                 }
                             }
                         }
@@ -4530,6 +4608,31 @@
                     "label": "Config.mpnMapping",
                     "options": {
                         "containerEntries": {
+                            "mpn.mapping.mpn": {
+                                "type": "selectBox",
+                                "required": false,
+                                "label": "Config.mpn",
+                                "options": {
+                                    "defaultValue": "",
+                                    "selectBoxValues": [
+                                        {
+                                            "value": "1",
+                                            "caption": "Config.mpnNotSet",
+                                            "position": 0
+                                        },
+                                        {
+                                            "value": "2",
+                                            "caption": "Config.externalVariationId",
+                                            "position": 1
+                                        },
+                                        {
+                                            "value": "3",
+                                            "caption": "Config.mpnSet",
+                                            "position": 2
+                                        }
+                                    ]
+                                }
+                            },
                             "mpn.mapping.mpnID": {
                                 "type": "inputText",
                                 "required": false,

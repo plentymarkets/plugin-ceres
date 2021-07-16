@@ -101,12 +101,17 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $manufacturer = '';
 
     /**
-     * @var string $gtin Contains the "GTIN8" Barcode for SEO attribute.
+     * @var string $gtin Contains the "GTIN" Barcode for SEO attribute.
+     */
+    public $gtin = '';
+
+    /**
+     * @var string $gtin8 Contains the "GTIN8" Barcode for SEO attribute.
      */
     public $gtin8 = '';
 
     /**
-     * @var string $gtin Contains the "GTIN13" Barcode for SEO attribute.
+     * @var string $gtin13 Contains the "GTIN13" Barcode for SEO attribute.
      */
     public $gtin13 = '';
 
@@ -163,73 +168,51 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $manufacturerMapping = $this->ceresConfig->seo->manufacturerMapping;
         if ($manufacturerMapping == 2) {
             $this->manufacturer = $itemData['item']['manufacturer']['externalName'] ?? '';
+        } elseif ($manufacturerMapping == 3) {
+            $this->manufacturer = $itemData['item']['manufacturer']['name'];
+        }
+
+        $gtinMapping = $this->ceresConfig->seo->gtinMapping;
+        $gtinMappingId = $this->ceresConfig->seo->gtinMappingId;
+        if ($gtinMapping == 2) {
+            $barcodeType = 'GTIN';
+            $this->gtin = $this->getFirstBarcode($itemData['barcodes'], $barcodeType);
+        } elseif ($gtinMapping == 3) {
+            $this->gtin = $this->getBarcodeWithId($itemData['barcodes'], $gtinMappingId);
         }
 
         $gtin8Mapping = $this->ceresConfig->seo->gtin8Mapping;
         $gtin8MappingId = $this->ceresConfig->seo->gtin8MappingId;
-        $propertyGtin8 = '';
         if ($gtin8Mapping == 2) {
-            foreach ($itemData['barcodes'] as $property) {
-                if ($property['type'] == 'GTIN_8' && $this->isWebshopReferrer($property['referrers'])) {
-                    $propertyGtin8 = $property['code'];
-                    break;
-                }
-            }
-            $this->gtin8 = $propertyGtin8;
+            $barcodeType = "GTIN_8";
+            $this->gtin8 = $this->getFirstBarcode($itemData['barcodes'], $barcodeType);
         } elseif ($gtin8Mapping == 3) {
-            foreach ($itemData['barcodes'] as $property) {
-                if ($property['id'] == $gtin8MappingId) {
-                    $propertyGtin8 = $property['code'];
-                    break;
-                }
-            }
-            $this->gtin8 = $propertyGtin8;
+            $this->gtin8 = $this->getBarcodeWithId($itemData['barcodes'], $gtin8MappingId);
         }
 
         $gtin13Mapping = $this->ceresConfig->seo->gtin13Mapping;
         $gtin13MappingId = $this->ceresConfig->seo->gtin13MappingId;
-        $propertyGtin13 = '';
         if ($gtin13Mapping == 2) {
-            foreach ($itemData['barcodes'] as $property) {
-                if ($property['type'] == 'GTIN_13' && $this->isWebshopReferrer($property['referrers'])) {
-                    $propertyGtin13 = $property['code'];
-                    break;
-                }
-            }
-            $this->gtin13 = $propertyGtin13;
+            $barcodeType = "GTIN_13";
+            $this->gtin13 = $this->getFirstBarcode($itemData['barcodes'], $barcodeType);
         } elseif ($gtin13Mapping == 3) {
-            foreach ($itemData['barcodes'] as $property) {
-                if ($property['id'] == $gtin13MappingId) {
-                    $propertyGtin13 = $property['code'];
-                    break;
-                }
-            }
-            $this->gtin13 = $propertyGtin13;
+            $this->gtin13 = $this->getBarcodeWithId($itemData['barcodes'], $gtin13MappingId);
         }
 
         $isbnMapping = $this->ceresConfig->seo->isbnMapping;
         $isbnMappingId = $this->ceresConfig->seo->isbnMappingId;
-        $propertyIsbn = '';
         if ($isbnMapping == 2) {
-            foreach ($itemData['barcodes'] as $property) {
-                if ($property['type'] == 'ISBN' && $this->isWebshopReferrer($property['referrers'])) {
-                    $propertyIsbn = $property['code'];
-                    break;
-                }
-            }
-            $this->isbn = $propertyIsbn;
+            $barcodeType = "ISBN";
+            $this->isbn = $this->getFirstBarcode($itemData['barcodes'], $barcodeType);
         } elseif ($isbnMapping == 3) {
-            foreach ($itemData['barcodes'] as $property) {
-                if ($property['id'] == $isbnMappingId) {
-                    $propertyIsbn = $property['code'];
-                    break;
-                }
-            }
-            $this->isbn = $propertyIsbn;
+            $this->isbn = $this->getBarcodeWithId($itemData['barcodes'], $isbnMappingId);
         }
 
+        $mpnMapping = $this->ceresConfig->seo->mpnMapping;
         $mpnMappingId = $this->ceresConfig->seo->mpnMappingId;
-        if ($mpnMappingId > 0) {
+        if ($mpnMapping == 2) {
+            $this->mpn = $itemData['variation']['externalId'];
+        } elseif ($mpnMapping == 3) {
             $this->mpn = $this->getVariationProperty($itemData['variationProperties'], $mpnMappingId);
         }
 
@@ -303,6 +286,12 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         return false;
     }
 
+    /**
+     * @param array $variationPropertyGroups
+     * @param $mappingPropertyId
+     *
+     * @return string
+     */
     private function getVariationProperty($variationPropertyGroups, $mappingPropertyId) {
         $variationProperty = '';
         foreach ($variationPropertyGroups as $propertyGroup) {
@@ -314,5 +303,39 @@ class SingleItemContext extends GlobalContext implements ContextInterface
             }
         }
         return $variationProperty;
+    }
+
+    /**
+     * @param $barcodes
+     * @param $barcodeType
+     *
+     * @return string
+     */
+    private function getFirstBarcode($barcodes, $barcodeType){
+        $barcode = '';
+        foreach ($barcodes as $property) {
+            if (strpos($property['type'], $barcodeType) === 0 && $this->isWebshopReferrer($property['referrers'])) {
+                $barcode = $property['code'];
+                break;
+            }
+        }
+        return $barcode;
+    }
+
+    /**
+     * @param $barcodes
+     * @param $barcodeMappingId
+     * 
+     * @return string
+     */
+    private function getBarcodeWithId($barcodes, $barcodeMappingId){
+        $barcode = '';
+        foreach ($barcodes as $property) {
+            if ($property['id'] == $barcodeMappingId) {
+                $barcode = $property['code'];
+                break;
+            }
+        }
+        return $barcode;
     }
 }

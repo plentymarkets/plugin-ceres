@@ -21,6 +21,7 @@ import ItemSearch from "./app/components/itemList/ItemSearch.vue";
 import CookieBar from "./app/components/pageDesign/CookieBar.vue";
 import Carousel from "./app/components/pageDesign/Carousel.vue";
 import Icon from "./app/components/pageDesign/Icon.vue";
+import LanguageDetection from "./app/components/pageDesign/LanguageDetection.vue";
 import MobileNavigation from "./app/components/pageDesign/MobileNavigation.vue";
 import Notifications from "./app/components/pageDesign/Notifications.vue";
 import Popper from "./app/components/pageDesign/Popper.vue";
@@ -96,7 +97,7 @@ import "./app/filters/propertyFileUrl.filter";
 import "./app/filters/translate.filter";
 import "./app/filters/truncate.filter";
 
-export function createApp(options, store)
+export function beforeCreate(context)
 {
     // =========================
     // COMPONENTS
@@ -107,6 +108,7 @@ export function createApp(options, store)
     Vue.component("add-to-basket", () => import("./app/components/basket/AddToBasket.vue"));
     Vue.component("basket-preview", () => import("./app/components/basket/BasketPreview.vue"));
     Vue.component("basket-totals", () => import("./app/components/basket/BasketTotals.vue"));
+    Vue.component("mail-changed-info", () => import("./app/components/basket/MailChangedInfo.vue"));
     Vue.component("coupon", () => import("./app/components/basket/Coupon.vue"));
     Vue.component("basket-list", () => import("./app/components/basket/list/BasketList.vue"));
     Vue.component("step-by-step-navigation", () => import("./app/components/category/StepByStepNavigation.vue"));
@@ -142,6 +144,7 @@ export function createApp(options, store)
     Vue.component("privacy-settings", () => import("./app/components/pageDesign/PrivacySettings.vue"));
     Vue.component("carousel", Carousel);
     Vue.component("icon", Icon);
+    Vue.component("language-detection", LanguageDetection);
     Vue.component("mobile-navigation", MobileNavigation);
     Vue.component("notifications", Notifications);
     Vue.component("popper", Popper);
@@ -174,7 +177,10 @@ export function createApp(options, store)
 
     Vue.prototype.$translate = TranslationService.translate;
     Vue.prototype.$ceres = App;
+}
 
+export function createApp(options, store)
+{
     const defaultOptions = {
         store,
         ...options

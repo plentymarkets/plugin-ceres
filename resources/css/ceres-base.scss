@@ -11091,7 +11091,7 @@ html.ios .basket-preview-content .totals { // stylelint-disable-line selector-no
         position: absolute;
         top: 0;
         right: 0;
-        z-index: 99;
+        z-index: 90;
         cursor: pointer;
         border-color: transparent #f7f7f9 transparent transparent;
         border-style: solid;
@@ -13459,6 +13459,11 @@ html.safari .widget-grid .widget-inner-stacked .widget-inner { // stylelint-disa
     background-color: $breadcrumb-bg;
 }
 
+.language-detection {
+    z-index: 200 !important;
+    top: 0;
+}
+
 /* settings */
 $menu-link-color: $primary !default;
 $mobile-navigation-color: $primary !default;
@@ -13485,7 +13490,7 @@ $normalmenu-color: $primary !default;
 
 .navbar-brand {
     img {
-        max-height: 3rem;
+        max-height: 42px;
     }
 }
 
@@ -13739,6 +13744,10 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
     .breadcrumb {
         font-size: .8em;
         background: $gray-900;
+
+        .breadcrumb-item {
+            padding-right: .5rem;
+        }
 
         li {
             display: inline-block;

@@ -183,7 +183,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     maximumHint: function maximumHint() {
       return this.$translate("Ceres::Template.singleItemQuantityMax", {
-        max: this.$options.filters.numberFormat(this.Max)
+        max: this.$options.filters.numberFormat(this.max)
       });
     },
     displayValue: function displayValue() {
@@ -202,6 +202,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   })),
   watch: {
+    variationId: function variationId(newValue) {
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isDefined"])(newValue)) {
+        this.fetchQuantityFromBasket();
+      }
+    },
     basketItems: {
       handler: function handler(newValue, oldValue) {
         if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isDefined"])(this.variationId)) {

@@ -50,6 +50,7 @@
 
     {{ Twig.if("currentTemplate == 'tpl.checkout' or currentTemplate == 'tpl.checkout.category'") }}
         {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Checkout.AfterBasketTotals"])) }}
+        <mail-changed-info user-mail="{{ Twig.print("services.customer.getEmail()") }}"></mail-changed-info>
     {{ Twig.else() }}
         {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Basket.AfterBasketTotals"])) }}
     {{ Twig.endif() }}
