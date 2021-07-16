@@ -1,5 +1,8 @@
 <script>
 export default {
+    props: {
+        wrapperTag: String
+    },
     data ()
     {
         return {
@@ -13,7 +16,8 @@ export default {
             // if there are multiple nodes in the default slot
             if (this.$slots.default?.length > 1)
             {
-                return createElement("div", this.$slots.default);
+                const tag = this.wrapperTag ? this.wrapperTag : 'div';
+                return createElement(tag, this.$slots.default);
             }
 
             return this.$slots.default ? this.$slots.default : null;
