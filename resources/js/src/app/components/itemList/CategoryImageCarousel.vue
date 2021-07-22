@@ -3,7 +3,7 @@
         <div v-for="(imageUrl, index) in imageUrls" :key="index">
             <lazy-img v-if="index === 0 && !disableLazyLoad" ref="itemLazyImage" picture-class="img-fluid" :image-url="imageUrl.url" :alt="getAltText(imageUrl)" :title="getTitleText(imageUrl)" role="option"></lazy-img>
             <img v-else-if="index !== 0 && !disableLazyLoad" class="img-fluid owl-lazy" :data-src="imageUrl.url" :alt="getAltText(imageUrl)" :title="getTitleText(imageUrl)" role="option">
-            <img v-else class="img-fluid" :src="imageUrl.url" :alt="getAltText(imageUrl)" :title="getAltText(imageUrl)" role="option">
+            <img class="img-fluid" :src="imageUrl.url" :alt="getAltText(imageUrl)" :title="getAltText(imageUrl)" role="option">
         </div>
     </a>
 
