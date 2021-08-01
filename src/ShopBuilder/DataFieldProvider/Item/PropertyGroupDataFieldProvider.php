@@ -4,11 +4,11 @@ namespace Ceres\ShopBuilder\DataFieldProvider\Item;
 
 use IO\Helper\Utils;
 use Plenty\Modules\Authorization\Services\AuthHelper;
-use Plenty\Modules\Property\Contracts\PropertyRepositoryContract;
-use Plenty\Modules\Property\Models\Property;
-use Plenty\Modules\Property\Models\PropertyGroup;
-use Plenty\Modules\Property\Models\PropertyGroupName;
-use Plenty\Modules\Property\Models\PropertyOption;
+use Plenty\Modules\Property\V2\Contracts\PropertyRepositoryContract;
+use Plenty\Modules\Property\V2\Models\Property;
+use Plenty\Modules\Property\V2\Models\PropertyGroup;
+use Plenty\Modules\Property\V2\Models\PropertyGroupName;
+use Plenty\Modules\Property\V2\Models\PropertyOption;
 use Plenty\Modules\ShopBuilder\Providers\DataFieldProvider;
 use Plenty\Plugin\Translation\Translator;
 
@@ -37,19 +37,21 @@ class PropertyGroupDataFieldProvider extends DataFieldProvider
         if (is_null(self::$properties)) {
             /** @var AuthHelper $authHelper */
             $authHelper = pluginApp(AuthHelper::class);
-            $filters = ['typeIdentifier' => 'item', 'lang' => Utils::getLang()];
+            $filters = ['type' => 'item', 'lang' => Utils::getLang()];
 
             $propertyList = $authHelper->processUnguarded(
                 function () use ($filters) {
                     /** @var PropertyRepositoryContract $propertyRepo */
                     $propertyRepo = pluginApp(PropertyRepositoryContract::class);
-                    return $propertyRepo->listProperties(1, 1000, ['names', 'options'], $filters, 0, ['id' => 'asc']);
+                    $propertyRepo->setFilters($filters);
+                    return $propertyRepo->search(['names', 'options'],1000, 1);
                 }
             );
 
             if (!is_null($propertyList)) {
+                $propertyList = collect($propertyList);
                 $plentyId = Utils::getPlentyId();
-                $types = ['empty', 'int', 'float', 'selection', 'shortText', 'longText', 'date', 'file'];
+                $types = ['empty', 'int', 'float', 'selection', 'string', 'text', 'html', 'date', 'file'];
                 $propertyList->filter(
                     function ($property) use ($types, $plentyId) {
                         /** @var Property $property */
@@ -62,12 +64,12 @@ class PropertyGroupDataFieldProvider extends DataFieldProvider
                         }
 
                         $propertyOptions = $property->options;
-                        $clientOptions = $propertyOptions->where('typeOptionIdentifier', 'clients');
+                        $clientOptions = $propertyOptions->where('type', 'clients');
                         if (count($clientOptions) === 0 || !$this->hasOptionValue($clientOptions, $plentyId)) {
                             return false;
                         }
 
-                        $displayOptions = $propertyOptions->where('typeOptionIdentifier', 'display');
+                        $displayOptions = $propertyOptions->where('type', 'display');
                         if (count($displayOptions) === 0 || !$this->hasOptionValue(
                                 $displayOptions,
                                 'showOnItemsPage'
@@ -75,7 +77,7 @@ class PropertyGroupDataFieldProvider extends DataFieldProvider
                             return false;
                         }
 
-                        $referrerOptions = $propertyOptions->where('typeOptionIdentifier', 'referrers');
+                        $referrerOptions = $propertyOptions->where('type', 'referrers');
                         if (count($referrerOptions) === 0 || !$this->hasOptionValue($referrerOptions, 1)) {
                             return false;
                         }
@@ -85,16 +87,12 @@ class PropertyGroupDataFieldProvider extends DataFieldProvider
                 )->each(
                     function ($property) {
                         /** @var Property $property */
-                        if (is_null($property->propertyGroupId)) {
-                            $this->addPropertyToGroup($property, self::$noneGroupId);
-                        } else {
-                            $property->groups->each(
-                                function ($group) use ($property) {
-                                    /** @var PropertyGroup $group */
-                                    $this->addPropertyToGroup($property, $group->id);
-                                }
-                            );
-                        }
+                        $property->groups->each(
+                            function ($group) use ($property) {
+                                /** @var PropertyGroup $group */
+                                $this->addPropertyToGroup($property, $group->id);
+                            }
+                        );
                     }
                 );
             }
@@ -115,7 +113,7 @@ class PropertyGroupDataFieldProvider extends DataFieldProvider
         $propertyOptions->each(
             function ($propertyOption) use ($needle, &$hit) {
                 /** @var PropertyOption $propertyOption */
-                if ($propertyOption->propertyOptionValues->where('value', $needle)->count() > 0) {
+                if ($propertyOption->where('value', $needle)->count() > 0) {
                     $hit = true;
                     return false;
                 }
