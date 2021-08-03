@@ -2,7 +2,7 @@
 
 namespace Ceres\ShopBuilder\DataFieldProvider\Item;
 
-use Plenty\Modules\Property\Models\Property;
+use Plenty\Modules\Property\V2\Models\Property;
 use Plenty\Modules\ShopBuilder\Providers\DataFieldProvider;
 
 /**
