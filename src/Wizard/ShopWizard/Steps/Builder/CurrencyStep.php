@@ -148,7 +148,7 @@ class CurrencyStep extends Step
             "description" => "",
             "form"        => [
                 "currencies_allowCurrencyChange" => [
-                    "type"         => "toggle",
+                    "type"         => "checkbox",
                     "defaultValue" => true,
                     "options"      => [
                         "name" => "Wizard.allowCurrencyChange"
