@@ -2,6 +2,7 @@
 
 namespace Ceres\ShopBuilder\DataFieldProvider\Item;
 
+use Illuminate\Support\Collection;
 use IO\Helper\Utils;
 use Plenty\Modules\Authorization\Services\AuthHelper;
 use Plenty\Modules\Property\V2\Contracts\PropertyRepositoryContract;
@@ -49,7 +50,7 @@ class PropertyGroupDataFieldProvider extends DataFieldProvider
             );
 
             if (!is_null($propertyList)) {
-                $propertyList = collect($propertyList);
+                $propertyList = Collection::make($propertyList);
                 $plentyId = Utils::getPlentyId();
                 $types = ['empty', 'int', 'float', 'selection', 'string', 'text', 'html', 'date', 'file'];
                 $propertyList->filter(
