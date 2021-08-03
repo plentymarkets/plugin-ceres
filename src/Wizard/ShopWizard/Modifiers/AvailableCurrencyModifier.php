@@ -17,15 +17,6 @@ class AvailableCurrencyModifier implements WizardDataModifier
      */
     public function modify(array $parameters)
     {
-        $data = $parameters['data'];
-        $this->allowCurrenciesModifier($data);
-        return $data;
-    }
-
-    private function allowCurrenciesModifier(array &$data)
-    {
-        if(!$data['currencies_allowCurrencyChange']) {
-            $data['currencies_availableCurrencies'] = [];
-        }
+        return $parameters['data'];
     }
 }
