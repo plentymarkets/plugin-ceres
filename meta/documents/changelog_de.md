@@ -1,6 +1,6 @@
 # Release Notes für Ceres
 
-## v5.0.36 (2021-08-03) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.35...5.0.36" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.36 (2021-08-43) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.35...5.0.36" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Geändert
 
@@ -11,6 +11,7 @@
 
 - Beim Ändern des Lieferlands im Header wurde die Auswahl nicht gespeichert. Dies wurde behoben.
 - Wenn die Währungsauswahl im plentyShop Ceres-Assistenten deaktiviert wurde, wurden alle verfügbaren Währungen für den Webshop deaktiviert. Dies wurde behoben.
+- Bei plentyShops, bei denen Server-Side Rendering inaktiv war, wurden Bilder, die in inaktiven Tabs eines Tab-Widgets positioniert waren und für die die Option **Nur sichtbare Inhalte laden** aktiviert war, direkt beim Seitenaufruf geladen. Dies wurde behoben.
 
 ## v5.0.35 (2021-07-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.34...5.0.35" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
