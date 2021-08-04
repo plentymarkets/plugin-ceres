@@ -2,7 +2,7 @@
 
 namespace Ceres\ShopBuilder\DataFieldProvider\Item;
 
-use Plenty\Modules\Property\Models\Property;
+use Plenty\Modules\Property\V2\Models\Property;
 use Plenty\Modules\ShopBuilder\Providers\DataFieldProvider;
 
 /**
@@ -21,10 +21,10 @@ class PropertyListDataFieldProvider extends DataFieldProvider
      * @var array
      */
     private $properties;
-    
+
     /** @var int */
     private $propertyGroupId;
-    
+
     /**
      * PropertyListDataFieldProvider constructor.
      * @param $properties
@@ -48,7 +48,7 @@ class PropertyListDataFieldProvider extends DataFieldProvider
             {
                 $this->addField("name_$propertyGroupId", "Ceres::Widget.dataFieldPropertyGroupName", "item_data_field('variationProperties.{id, $propertyGroupId}.name')");
             }
-            
+
             /** @var Property $property */
             foreach ($this->properties as $property)
             {
