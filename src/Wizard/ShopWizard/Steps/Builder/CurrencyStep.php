@@ -5,7 +5,6 @@ namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 use Ceres\Wizard\ShopWizard\Config\CurrencyConfig;
 use Ceres\Wizard\ShopWizard\Helpers\LanguagesHelper;
 use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
-use Ceres\Wizard\ShopWizard\Modifiers\AvailableCurrencyModifier;
 use Plenty\Modules\Order\Currency\Contracts\CurrencyRepositoryContract;
 
 /**
@@ -41,7 +40,6 @@ class CurrencyStep extends Step
             "title"         => "Wizard.currenciesSettings",
             "description"   => "Wizard.currenciesSettingsDescription",
             "condition"     => $this->hasRequiredSettings(),
-            "modifierClass" => AvailableCurrencyModifier::class,
             "sections"      => [
                 $this->generateCurrenciesSection(),
                 $this->generateFormatCurrenciesSection(),
@@ -150,7 +148,7 @@ class CurrencyStep extends Step
             "description" => "",
             "form"        => [
                 "currencies_allowCurrencyChange" => [
-                    "type"         => "toggle",
+                    "type"         => "checkbox",
                     "defaultValue" => true,
                     "options"      => [
                         "name" => "Wizard.allowCurrencyChange"
@@ -158,7 +156,6 @@ class CurrencyStep extends Step
                 ],
                 "currencies_availableCurrencies" => [
                     "type"         => "checkboxGroup",
-                    "isVisible"    => "typeof currencies_allowCurrencyChange === 'undefined' || currencies_allowCurrencyChange === true",
                     "defaultValue" => $this->currencies,
                     "options"      => [
                         "name"           => "Wizard.activateCurrencies",
