@@ -19,8 +19,10 @@ context("Coupon", () =>
         cy.server().route("POST", "/rest/io/coupon/").as("redeemCoupon");
         cy.getByTestingAttr("coupon-input").type("x").clear().type(COUPON_CODE, { delay: 50 });
         cy.getByTestingAttr("coupon-redeem").click();
-        cy.wait("@redeemCoupon");
-        checkTotals(1, true);
+        cy.wait("@redeemCoupon").then(() =>
+        {
+            checkTotals(1, true);
+        });
     });
 
     it("Should remove coupon code", () =>

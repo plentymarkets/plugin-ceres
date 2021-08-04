@@ -75,6 +75,7 @@ context("Single Item", () =>
 
     it("should display scale prices and apply marker on quantity change", () =>
     {
+        cy.wait(50);
         cy.getByTestingAttr("quantity-btn-increase").click().click().click().click().click();
         cy.get(".graduated-prices-table").should("exist");
 
@@ -87,6 +88,7 @@ context("Single Item", () =>
 
     it("should display scaled price after quantity change", () =>
     {
+        cy.wait(50);
         cy.getByTestingAttr("quantity-btn-increase").click().click().click().click();
         cy.get(".price").should("contain", "0,50");
     });

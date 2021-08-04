@@ -65,8 +65,7 @@ context("Live shopping", () =>
     it("Should link to the correct variation", () =>
     {
         // check if item name links correctly
-        cy.wait(100);
-        cy.get(".live-shopping-item-name > a")
+        cy.get(`[data-testing='1071'] .live-shopping-item-name > a`)
             .first()
             .should("have.attr", "href")
             .and("include", ACTIVE_LIVE_SHOPPING_URL);
@@ -80,7 +79,7 @@ context("Live shopping", () =>
 
     it("Should add the live shopping item to the basket and show the correct price in the basket preview", () =>
     {
-        cy.get(".add-to-basket-lg-container").first().click();
+        cy.get(`[data-testing='1071'] .add-to-basket-lg-container`).click();
         cy.getByTestingAttr("basket-preview-button").should("contain", ACTIVE_LIVE_SHOPPING_PRICE);
     });
 });
