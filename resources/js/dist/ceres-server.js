@@ -8428,7 +8428,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     maximumHint: function maximumHint() {
       return this.$translate("Ceres::Template.singleItemQuantityMax", {
-        max: this.$options.filters.numberFormat(this.Max)
+        max: this.$options.filters.numberFormat(this.max)
       });
     },
     displayValue: function displayValue() {
@@ -8447,6 +8447,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   })),
   watch: {
+    variationId: function variationId(newValue) {
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isDefined"])(newValue)) {
+        this.fetchQuantityFromBasket();
+      }
+    },
     basketItems: {
       handler: function handler(newValue, oldValue) {
         if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isDefined"])(this.variationId)) {
@@ -88383,7 +88388,7 @@ var actions = {
       var oldShippingCountryId = state.shippingCountryId;
       commit("setShippingCountryId", shippingCountryId);
       ApiService.post("/rest/io/shipping/country", {
-        shippingCountryId: shippingCountryId
+        "shippingCountryId": shippingCountryId
       }).done(function (data) {
         if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isNullOrUndefined"])(oldShippingCountryId) || oldShippingCountryId !== data) {
           if (openBasketPreview) {
@@ -90021,13 +90026,14 @@ var cloneDeep = __webpack_require__(/*! lodash/cloneDeep */ "./node_modules/loda
 /*!******************************************!*\
   !*** ./resources/js/src/entry-server.js ***!
   \******************************************/
-/*! exports provided: createApp, globals */
+/*! exports provided: createApp, globals, beforeCreate */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createApp", function() { return createApp; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "globals", function() { return globals; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "beforeCreate", function() { return beforeCreate; });
 /* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.promise.js */ "./node_modules/core-js/modules/es.promise.js");
 /* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");

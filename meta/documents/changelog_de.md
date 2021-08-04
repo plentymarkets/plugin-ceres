@@ -1,5 +1,32 @@
 # Release Notes für Ceres
 
+## v5.0.35 (2021-07-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.34...5.0.35" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+- Die Einstellung **Nicht akzeptiere Cookies blockieren** in den Ceres-Einstellungen wurde für alle Systeme, für die die Ceres-Einstellungen noch nie gespeichert wurden, aktiviert. Falls du Cookies, die durch Besucher:innen nicht akzeptiert wurden, nicht blockieren möchtest, überprüfe die Einstellung im Menü **Plugins » Plugin-Set-Übersicht »** *Plugin-Set wählen* **» Ceres » Konfiguration » Tab: Global** und deaktiviere sie, falls nötig. 
+
+### Geändert
+
+- Die Einstellung **Nicht akzeptiere Cookies blockieren** in den Ceres-Einstellungen ist nun standardmäßig aktiv.
+
+### Behoben
+
+- Durch einen Fehler war es nicht möglich, die Kategorienavigation so einzustellen, dass keine Kategorien in Ebene 2 angezeigt werden. Dieses Verhalten wurde behoben.
+- Im HTML-Markup wurde ein falscher `prev`-Link gesetzt, wenn man auf der zweiten Seite einer Kategorie war. Dies wurde behoben.
+- Das Wechseln zwischen Artikelvarianten konnte auf mobilen Geräten dazu führen, dass zu einer anderen Stelle der Seite gescrollt wurde. Dies wurde behoben.
+- Auf der Artikeleinzelansicht wurden Datenfelder in Text-Widgets bei einem Wechsel der Variante nicht aktualisiert. Dies wurde behoben.
+- Mit aktiven Server-Side Rendering (SSR), war es für externe Plugins nicht möglich Vue-Komponenten in Ceres zu überschreiben. Dies wurde behoben.
+- Der erlaubte Maximalwert für die Mengeneingabe eines Artikel wurde beim Wechsel einer Variante nicht aktualisiert. Dies wurde behoben.
+- Der Tooltip der den Maximalwert an der Mengeneingabe eines Artikels anzeigt gibt jetzt den korrekt Wert aus.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.35 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in der entsprechenden Datei.
+- [resources/views/Widgets/Header/TopBarWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2960/files#diff-2696f6a2e31a39130c691133b3d6fdf30b218a6bdbbd0717433c835d060c3f66)
+- [resources/views/Category/Item/CategoryItem.twig](https://github.com/plentymarkets/plugin-ceres/pull/2949/files#diff-6e3fe08ffe8086b5176c1c0451cb0c0034b99195843630994e5e79347f8d1158)
+
 ## v5.0.34 (2021-06-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.33...5.0.34" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
