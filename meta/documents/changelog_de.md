@@ -1,5 +1,18 @@
 # Release Notes für Ceres
 
+## v5.0.36 (2021-08-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.35...5.0.36" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Das Laden von Kundendaten, Warenkorb und Warenkorb-Artikeln wurde unter einer Abfrage zusammengefasst.
+- Varianteneigenschaften auf der Artikeldetailseite werden nun im ShopBuilder und im plentyShop über die neuen Repositories für Varianteneigenschaften geladen.
+
+### Behoben
+
+- Beim Ändern des Lieferlands im Header wurde die Auswahl nicht gespeichert. Dies wurde behoben.
+- Wenn die Währungsauswahl im plentyShop Ceres-Assistenten deaktiviert wurde, wurden alle verfügbaren Währungen für den Webshop deaktiviert. Dies wurde behoben.
+- Bei plentyShops, bei denen Server-Side Rendering inaktiv war, wurden Bilder, die in inaktiven Tabs eines Tab-Widgets positioniert waren und für die die Option **Nur sichtbare Inhalte laden** aktiviert war, direkt beim Seitenaufruf geladen. Dies wurde behoben.
+
 ## v5.0.35 (2021-07-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.34...5.0.35" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
@@ -313,7 +326,7 @@
 ## v5.0.25 (2021-03-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.24...5.0.25" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Geändert
--Der letzte Paragraph des Text-Widgets zum Inline-Editing besaß einen Außenabstand nach unten. Hierdurch war es nicht möglich, ein Text-Widget ohne unteren Abstand zu platzieren. Dieser wurde daher entfernt.
+- Der letzte Paragraph des Text-Widgets zum Inline-Editing besaß einen Außenabstand nach unten. Hierdurch war es nicht möglich, ein Text-Widget ohne unteren Abstand zu platzieren. Dieser wurde daher entfernt.
 - Bei der Ausgabe der Übersetzungen für "Brutto" (Ceres::Template.checkoutGross) und "Netto" (Ceres::Template.checkoutNet) wurden in den Summen Klammern angezeigt, die sich nicht entfernen ließen. Die Klammern wurden in die Übersetzung überführt und können zukünftig entfernt werden.
 -Beim Wechsel der Anrede in der Adressauswahl werden die Felder nur noch geleert, wenn man zwischen einer Personen-Anrede und einer Firma wechselt.
 
@@ -421,7 +434,7 @@
 
 ### TODO
 
-- Falls dein Theme die CSS-Eigenschaft `position:sticky` verwendet, musst du die `overflow-x: hidden` Eigenschaft im `.app` Container überschreiben um die Funktion der Stickys-Eigenschaft zu erhalten. plentyShops ohne eigenes Theme sind hiervon nicht betroffen.
+- Falls dein Theme die CSS-Eigenschaft `position:sticky` verwendet, musst du die `overflow-x: hidden` Eigenschaft im `.app` Container überschreiben, um die Funktion der Sticky-Eigenschaft zu erhalten. plentyShops ohne eigenes Theme sind hiervon nicht betroffen.
 
 ### Geändert
 
@@ -642,7 +655,7 @@
 ### TODO
 - Die Einstellungen der Kategorie Startseite für die Meta-Beschreibung und -Keywords werden jetzt berücksichtigt und müssen ggf. aus dem Bereich **CMS » Mehrsprachigkeit** übernommen werden.
 - Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
-- Wenn der Platzhalter für die Zolltarifnummer auf der Artikelansicht im ShopBuilder verwendet wird, muss dieser einmal entfernt und erneut eignefügt werden.
+- Wenn der Platzhalter für die Zolltarifnummer auf der Artikelansicht im ShopBuilder verwendet wird, muss dieser einmal entfernt und erneut eingefügt werden.
 
 ### Geändert
 
