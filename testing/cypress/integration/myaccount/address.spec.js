@@ -18,7 +18,7 @@ context("Address", () =>
     {
         cy.intercept("POST", "/rest/io/customer/address/?typeId=1").as("createAddress");
 
-        cy.getByTestingAttr("billing-address-select-add").click({ force: true });
+        cy.getByTestingAttr("billing-address-select-add").click();
 
         cy.getByTestingAttr("billing-address-de-name-inputs").find(`input[name="firstName"]`).type("x").clear().type("Plenty", { delay: 15 });
         cy.getByTestingAttr("billing-address-de-name-inputs").find(`input[name="lastName"]`).type("Test", { delay: 15 });
@@ -27,7 +27,7 @@ context("Address", () =>
         cy.getByTestingAttr("billing-address-de-zip").type("12345", { delay: 15 });
         cy.getByTestingAttr("billing-address-de-town").type("Kassel", { delay: 15 });
 
-        cy.getByTestingAttr("modal-submit").first().click({ force: true });
+        cy.getByTestingAttr("modal-submit").first().click();
 
         cy.wait("@createAddress").then((res) =>
         {
@@ -44,7 +44,7 @@ context("Address", () =>
 
     it("should add new billing address for company with uid", () =>
     {
-        cy.getByTestingAttr("billing-address-select-add").click({ force: true });
+        cy.getByTestingAttr("billing-address-select-add").click();
         cy.getByTestingAttr("salutation-select").eq(0).select("Firma");
         cy.getByTestingAttr("billing-address-de-company").type("x").clear().type("plentysystems AG");
         cy.getByTestingAttr("vat-id").type("250560740", { delay: 15 });
@@ -54,7 +54,7 @@ context("Address", () =>
         cy.getByTestingAttr("billing-address-de-town").type("Kassel", { delay: 15 });
 
         cy.intercept("POST", "/rest/io/customer/address/?typeId=1").as("createAddress");
-        cy.getByTestingAttr("modal-submit").first().click({ force: true });
+        cy.getByTestingAttr("modal-submit").first().click();
 
         cy.wait("@createAddress").then((res) =>
         {
@@ -71,7 +71,7 @@ context("Address", () =>
 
     it("should show error message if invalide UID is typed in", () =>
     {
-        cy.getByTestingAttr("billing-address-select-add").click({ force: true });
+        cy.getByTestingAttr("billing-address-select-add").click();
         cy.getByTestingAttr("salutation-select").eq(0).select("Firma");
         cy.getByTestingAttr("billing-address-de-company").type("x").clear().type("plentysystems AG");
         cy.getByTestingAttr("vat-id").type("abcdefg", { delay: 15 });
@@ -81,7 +81,7 @@ context("Address", () =>
         cy.getByTestingAttr("billing-address-de-town").type("Kassel", { delay: 15 });
 
         cy.intercept("POST", "/rest/io/customer/address/?typeId=1").as("createAddress");
-        cy.getByTestingAttr("modal-submit").first().click({ force: true });
+        cy.getByTestingAttr("modal-submit").first().click();
 
         cy.get(".notification-wrapper").children().should("have.class", "show").should("have.class", "alert");
         cy.get(".notification-wrapper").children().first().should("contain", "Die Umsatzsteuer-Identifikationsnummer ist ungültig. Bitte entfernen Sie alle Leer- und Sonderzeichen.");
@@ -89,7 +89,7 @@ context("Address", () =>
 
     it("should add new delivery address", () =>
     {
-        cy.getByTestingAttr("delivery-address-select-add").click({ force: true });
+        cy.getByTestingAttr("delivery-address-select-add").click();
 
         cy.getByTestingAttr("delivery-address-de-firstname").type("x").clear().type("Plenty", { delay: 15 });
         cy.getByTestingAttr("delivery-address-de-lastname").type("Test", { delay: 15 });
@@ -99,7 +99,7 @@ context("Address", () =>
         cy.getByTestingAttr("delivery-address-de-town").type("Kassel", { delay: 15 });
 
         cy.intercept("POST", "/rest/io/customer/address/?typeId=2").as("createAddress");
-        cy.getByTestingAttr("modal-submit").eq(1).click({ force: true });
+        cy.getByTestingAttr("modal-submit").eq(1).click();
 
         cy.wait("@createAddress").then((res) =>
         {
@@ -122,10 +122,10 @@ context("Address", () =>
         cy.reload();
         cy.intercept("POST", "/rest/io/customer/address/?typeId=1").as("updateAddress");
 
-        cy.getByTestingAttr("billing-address-select").click({ force: true });
-        cy.getByTestingAttr("billing-address-select-edit").first().click({ force: true });
+        cy.getByTestingAttr("billing-address-select").click();
+        cy.getByTestingAttr("billing-address-select-edit").first().click();
         cy.getByTestingAttr("billing-address-de-firstname").clear().type("UPDATE");
-        cy.get("[data-testing='billing-address-select'] [data-testing='modal-submit']").click({ force: true });
+        cy.get("[data-testing='billing-address-select'] [data-testing='modal-submit']").click();
 
         cy.wait("@updateAddress").then((res) =>
         {
@@ -139,10 +139,10 @@ context("Address", () =>
         cy.reload();
         cy.intercept("POST", "/rest/io/customer/address/?typeId=2").as("updateAddress");
 
-        cy.getByTestingAttr("delivery-address-select").click({ force: true });
-        cy.getByTestingAttr("delivery-address-select-edit").first().click({ force: true });
+        cy.getByTestingAttr("delivery-address-select").click();
+        cy.getByTestingAttr("delivery-address-select-edit").first().click();
         cy.getByTestingAttr("delivery-address-de-firstname").clear().type("UPDATE");
-        cy.get("[data-testing='delivery-address-select'] [data-testing='modal-submit']").click({ force: true });
+        cy.get("[data-testing='delivery-address-select'] [data-testing='modal-submit']").click();
 
         cy.wait("@updateAddress").then((res) =>
         {
@@ -176,8 +176,8 @@ context("Address", () =>
             selectedAddressId = store.state.address.billingAddressId;
         });
 
-        cy.getByTestingAttr("billing-address-select").click({ force: true });
-        cy.getByTestingAttr("billing-address-select-dropdown").find("li").eq(1).click({ force: true });
+        cy.getByTestingAttr("billing-address-select").click();
+        cy.getByTestingAttr("billing-address-select-dropdown").find("li").eq(1).click();
     });
 
     it("should select another delivery address", () =>
@@ -206,8 +206,8 @@ context("Address", () =>
             selectedAddressId = store.state.address.deliveryAddressId;
         });
 
-        cy.getByTestingAttr("delivery-address-select").click({ force: true });
-        cy.getByTestingAttr("delivery-address-select-dropdown").find("li").eq(1).click({ force: true });
+        cy.getByTestingAttr("delivery-address-select").click();
+        cy.getByTestingAttr("delivery-address-select-dropdown").find("li").eq(1).click();
     });
 
     it("should remove billing address", () =>
@@ -218,9 +218,9 @@ context("Address", () =>
 
         cy.intercept("DELETE", "/rest/io/customer/address/**/?typeId=1").as("removeAddress");
 
-        cy.getByTestingAttr("billing-address-select").click({ force: true });
-        cy.getByTestingAttr("billing-address-select-remove").first().click({ force: true });
-        cy.getByTestingAttr("billing-address-select-remove-modal-remove").click({ force: true });
+        cy.getByTestingAttr("billing-address-select").click();
+        cy.getByTestingAttr("billing-address-select-remove").first().click();
+        cy.getByTestingAttr("billing-address-select-remove-modal-remove").click();
 
         cy.wait("@removeAddress").then((res) =>
         {
@@ -236,9 +236,9 @@ context("Address", () =>
 
         cy.intercept("DELETE", "/rest/io/customer/address/**/?typeId=2").as("removeAddress");
 
-        cy.getByTestingAttr("delivery-address-select").click({ force: true });
-        cy.getByTestingAttr("delivery-address-select-remove").first().click({ force: true });
-        cy.getByTestingAttr("delivery-address-select-remove-modal-remove").click({ force: true });
+        cy.getByTestingAttr("delivery-address-select").click();
+        cy.getByTestingAttr("delivery-address-select-remove").first().click();
+        cy.getByTestingAttr("delivery-address-select-remove-modal-remove").click();
 
         cy.wait("@removeAddress").then((res) =>
         {
@@ -248,7 +248,7 @@ context("Address", () =>
 
     it("should prefill email input", () =>
     {
-        cy.getByTestingAttr("billing-address-select-add").click({ force: true });
+        cy.getByTestingAttr("billing-address-select-add").click();
         cy.getByTestingAttr("billing-address-de-email-input").should("have.value", ADDRESS_TEST_USER_EMAIL);
     });
 
