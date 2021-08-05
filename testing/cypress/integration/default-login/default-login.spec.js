@@ -4,6 +4,7 @@ context("Default Login Page", () =>
     beforeEach(() =>
     {
         cy.visit("/login/");
+        cy.wait(100);
     });
 
     it("should check for module titles", () =>

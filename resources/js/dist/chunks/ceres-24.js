@@ -82,7 +82,10 @@ __webpack_require__.r(__webpack_exports__);
     }
   }),
   beforeMount: function beforeMount() {
-    this.$store.dispatch("getLastSeenItems");
+    // SingleItem executes a PUT on the route, which already returns the data fetched here
+    if (!App.isItemView) {
+      this.$store.dispatch("getLastSeenItems");
+    }
   },
   mounted: function mounted() {
     this.mountedItems = this.items;

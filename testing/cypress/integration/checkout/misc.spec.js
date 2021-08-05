@@ -52,7 +52,9 @@ context("Checkout misc", () =>
 
     function addAddress()
     {
-        cy.wait(1000);
+        // Force Modal
+        cy.getByTestingAttr("billing-address-select-add").click({ force: true });
+
         cy.getByTestingAttr("billing-address-de-email-input").type("CHANGED@test.de", { delay: 40 });
         cy.getByTestingAttr("billing-address-de-name-inputs").find(`input[name="firstName"]`).type("Plenty", { delay: 40 });
         cy.getByTestingAttr("billing-address-de-name-inputs").find(`input[name="lastName"]`).type("Test");

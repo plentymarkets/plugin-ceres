@@ -3228,6 +3228,8 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.$nextTick(function () {
+      _this.$store.dispatch("addLastSeenItem", _this.currentVariation.variation.id);
+
       _this.$store.dispatch("".concat(_this.itemId, "/variationSelect/setVariationSelect"), {
         itemId: _this.itemId,
         attributes: _this.attributesData,
@@ -78055,12 +78057,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_singleItem_BaseItemModule__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./modules/singleItem/BaseItemModule */ "./resources/js/src/app/store/modules/singleItem/BaseItemModule.js");
 /* harmony import */ var _plugins_EventPropagationPlugin__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./plugins/EventPropagationPlugin */ "./resources/js/src/app/store/plugins/EventPropagationPlugin.js");
 /* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
-
-
-
 
 
 
@@ -78129,18 +78125,7 @@ function initClientListeners(store) {
   _services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].listen("AfterBasketChanged", function (data) {
     store.commit("setBasket", data.basket);
     store.commit("setShowNetPrices", data.showNetPrices);
-    store.commit("updateBasketItems", data.basketItems);
     store.commit("setWishListIds", data.basket.itemWishListIds);
-  });
-  _services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].listen("AfterBasketItemAdd", function (data) {
-    store.commit("addBasketItem", data.basketItems);
-  });
-  _services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].listen("AfterBasketItemUpdate", function (data) {
-    store.commit("updateBasketItem", data.basketItems[0]);
-  });
-  _services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].after(function () {
-    // unset flag that indicates a basket item quantity update after each request.
-    store.commit("setIsBasketItemQuantityUpdate", false);
   });
   /**
    * Adds login/logout event listeners
@@ -78155,38 +78140,18 @@ function initClientListeners(store) {
 } // TODO: add code comment
 
 function initClientStore(store) {
-  store.commit("initConsents"); // Use request animation frame to load session data after app has been initialized
+  store.commit("initConsents");
+  store.dispatch("loadBasketData");
+  /**
+   * Loads user data after pageload
+   */
 
-  window.requestAnimationFrame(function () {
-    var urlParams = Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_21__["getUrlParams"])();
-
-    if (store.getters.currentItemVariation) {
-      urlParams.lastSeenVariationId = store.getters.currentItemVariation.variation.id;
+  _services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].get("/rest/io/customer", {}, {
+    keepOriginalResponse: true
+  }).done(function (response) {
+    if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_20__["isDefined"])(response.data)) {
+      store.commit("setUserData", response.data);
     }
-
-    _services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].get("/rest/io/session", urlParams, {
-      cache: false,
-      keepOriginalResponse: true
-    }).done(function (response) {
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_20__["isDefined"])(response.data.customer)) {
-        store.commit("setUserData", response.data.customer);
-      }
-
-      if (!response.events.hasOwnProperty("AfterBasketChanged")) {
-        // only set basket if not change event is emitted. In this case, the basket will be set by the event listener.
-        store.commit("setBasket", response.data.basket);
-        store.commit("setWishListIds", response.data.basket.itemWishListIds);
-      }
-
-      store.commit("setIsBasketInitiallyLoaded");
-      store.commit("setBasketItems", response.data.basketItems);
-    }).catch(function (error, status) {
-      console.log(error, status);
-
-      if (status > 0) {
-        _services_NotificationService__WEBPACK_IMPORTED_MODULE_23__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_22__["default"].translate("Ceres::Template.basketOops")).closeAfter(10000);
-      }
-    });
   });
 }
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -78661,9 +78626,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_14__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
-/* harmony import */ var _helper_url__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../helper/url */ "./resources/js/src/app/helper/url.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
+/* harmony import */ var _helper_url__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../helper/url */ "./resources/js/src/app/helper/url.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
 
 
 
@@ -78690,6 +78656,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 
+
+
+
+var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js"); // cache updated base prices for performance purposes
 
@@ -78771,11 +78741,11 @@ var mutations = {
       return item.id === basketItem.id;
     });
 
-    if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_18__["isNullOrUndefined"])(entry)) {
+    if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isNullOrUndefined"])(entry)) {
       entry.price = basketItem.price;
       entry.quantity = basketItem.quantity; // check if the 'AfterBasketItemUpdate' contains a new base price for the item (graduated prices)
 
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_18__["isNullOrUndefined"])(basketItem.basePrice)) {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isNullOrUndefined"])(basketItem.basePrice)) {
         vue__WEBPACK_IMPORTED_MODULE_15___default.a.set(entry, "updatedBasePrice", basketItem.basePrice);
         updatedItemBasePriceCache[basketItem.id] = basketItem.basePrice;
       }
@@ -78823,7 +78793,48 @@ var actions = {
   loadBasketData: function loadBasketData(_ref2) {
     var state = _ref2.state,
         commit = _ref2.commit;
-    console.warn("This action is not in use anymore and should not be committed anymore.");
+
+    if (!state.isBasketInitiallyLoaded) {
+      jQuery.when(ApiService.get("/rest/io/basket", Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_17__["getUrlParams"])(), {
+        cache: false,
+        keepOriginalResponse: true
+      }), ApiService.get("/rest/io/basket/items", {
+        template: "Ceres::Basket.Basket"
+      }, {
+        cache: false,
+        keepOriginalResponse: true
+      })).then(function (basket, basketItems) {
+        if (!basket.events.hasOwnProperty("AfterBasketChanged") && !basketItems.events.hasOwnProperty("AfterBasketChanged")) {
+          commit("setBasket", basket.data);
+          commit("setWishListIds", basket.data.itemWishListIds);
+        }
+
+        commit("setIsBasketInitiallyLoaded");
+        commit("setBasketItems", basketItems.data);
+      }).catch(function (error, status) {
+        console.log(error, status);
+
+        if (status > 0) {
+          NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_16__["default"].translate("Ceres::Template.basketOops")).closeAfter(10000);
+        }
+      });
+    }
+
+    ApiService.listen("AfterBasketChanged", function (data) {
+      commit("setBasket", data.basket);
+      commit("setShowNetPrices", data.showNetPrices);
+      commit("updateBasketItems", data.basketItems);
+      commit("setWishListIds", data.basket.itemWishListIds);
+    });
+    ApiService.listen("AfterBasketItemAdd", function (data) {
+      commit("addBasketItem", data.basketItems);
+    });
+    ApiService.listen("AfterBasketItemUpdate", function (data) {
+      commit("updateBasketItem", data.basketItems[0]);
+    });
+    ApiService.after(function () {
+      commit("setIsBasketItemQuantityUpdate", false);
+    });
   },
   addBasketNotification: function addBasketNotification(_ref3, _ref4) {
     var commit = _ref3.commit;
@@ -78879,8 +78890,8 @@ var actions = {
         commit("removeBasketItem", basketItemId);
         resolve(response);
 
-        if (Object(_helper_url__WEBPACK_IMPORTED_MODULE_17__["pathnameEquals"])(App.urls.checkout) && state.items.length === 0) {
-          Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_16__["navigateTo"])(App.urls.basket);
+        if (Object(_helper_url__WEBPACK_IMPORTED_MODULE_18__["pathnameEquals"])(App.urls.checkout) && state.items.length === 0) {
+          Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_17__["navigateTo"])(App.urls.basket);
         }
       }).fail(function (error) {
         commit("setIsBasketLoading", false);
@@ -78938,21 +78949,21 @@ var actions = {
 function _fillMissingData(state, item) {
   var oldBasketItem = null;
 
-  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_18__["isNullOrUndefined"])(item.variation)) {
+  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isNullOrUndefined"])(item.variation)) {
     oldBasketItem = state.items.find(function (i) {
       return i.id === item.id;
     });
     item.variation = oldBasketItem.variation;
   }
 
-  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_18__["isNullOrUndefined"])(item.basketItemOrderParams)) {
+  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isNullOrUndefined"])(item.basketItemOrderParams)) {
     oldBasketItem = oldBasketItem || state.items.find(function (i) {
       return i.id === item.id;
     });
     item.basketItemOrderParams = oldBasketItem.basketItemOrderParams;
   }
 
-  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_18__["isDefined"])(item.setComponents) && item.setComponents.length > 0 && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_18__["isNullOrUndefined"])(item.setComponents[0].variation)) {
+  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isDefined"])(item.setComponents) && item.setComponents.length > 0 && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isNullOrUndefined"])(item.setComponents[0].variation)) {
     oldBasketItem = oldBasketItem || state.items.find(function (i) {
       return i.id === item.id;
     });
@@ -78969,7 +78980,7 @@ function _fillMissingData(state, item) {
           });
           setComponent.variation = oldComp.variation;
 
-          if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_18__["isNullOrUndefined"])(setComponent.basketItemOrderParams)) {
+          if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isNullOrUndefined"])(setComponent.basketItemOrderParams)) {
             setComponent.basketItemOrderParams = oldComp.basketItemOrderParams;
           }
         };
@@ -80244,7 +80255,30 @@ var actions = {
   addLastSeenItem: function addLastSeenItem(_ref, variationId) {
     var commit = _ref.commit,
         state = _ref.state;
-    console.warn("This action is not in use anymore and should not be committed anymore.");
+
+    if (!state.isLastSeenItemsLoading) {
+      return new Promise(function (resolve, reject) {
+        commit("setIsLastSeenItemsLoading", true);
+        ApiService.put("/rest/io/item/last_seen/".concat(variationId)).done(function (response) {
+          var _response$lastSeenIte;
+
+          commit("setIsLastSeenItemsLoading", false);
+
+          if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_2__["isDefined"])(response.lastSeenItems)) {
+            commit("setLastSeenItems", response.lastSeenItems.documents);
+            commit("setLastSeenItemContainers", response.containers);
+            commit("setIsLastSeenItemsLoading", false);
+          }
+
+          resolve(response === null || response === void 0 ? void 0 : (_response$lastSeenIte = response.lastSeenItems) === null || _response$lastSeenIte === void 0 ? void 0 : _response$lastSeenIte.documents);
+        }).fail(function (error) {
+          commit("setIsLastSeenItemsLoading", false);
+          reject(error);
+        });
+      });
+    }
+
+    return null;
   },
   getLastSeenItems: function getLastSeenItems(_ref2) {
     var commit = _ref2.commit;
