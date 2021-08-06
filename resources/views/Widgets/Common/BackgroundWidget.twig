@@ -56,10 +56,9 @@
     {% if fullWidth %} widget-fw{% endif %}
     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
      style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %}
-            {{ Twig.if("hasUrl or hasColor or #{ isPreview | json_encode }") }}
-                {% if inlineMinHeight | length > 0 %} {{ inlineMinHeight }}
-            {{ Twig.endif() }}{% endif %}">
+        {{ Twig.if("hasUrl or hasColor or #{ isPreview | json_encode }") }}{% if inlineMinHeight | length > 0 %} {{ inlineMinHeight }}{{ Twig.endif() }}{% endif %}">
     <div>
+    Detlef
         {% if preloadImage %}
             {{ Twig.if("hasUrl") }}
                 {{ Twig.print("add_asset(url,'image')") }}
