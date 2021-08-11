@@ -47,6 +47,7 @@ import TranslationService from "./app/services/TranslationService";
 // MIXINS
 // =========================
 import "./app/mixins/template.mixin";
+import "./app/mixins/componentId.mixin";
 import "./app/mixins/getJsonData.mixin";
 
 // =========================

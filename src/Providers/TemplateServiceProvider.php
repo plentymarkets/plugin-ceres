@@ -325,6 +325,46 @@ class TemplateServiceProvider extends ServiceProvider
         );
 
         $consentRepository->registerConsent(
+            'sessionn',
+            'Ceres::Template.consentSessionLabel',
+            [
+                'necessary' => true,
+                'position' => 200,
+                'description' => 'Ceres::Template.consentSessionDescription',
+                'provider' => 'Ceres::Template.headerCompanyName',
+                'lifespan' => $webstoreConfig->sessionLifetime > 0 ? 'Ceres::Template.consentLifespan100Days' : 'Ceres::Template.consentLifespanSession',
+                'policyUrl' => function () {
+                    /** @var ShopUrls $shopUrls */
+                    $shopUrls = pluginApp(ShopUrls::class);
+                    /** @var UrlQuery $urlQuery */
+                    $urlQuery = pluginApp(UrlQuery::class, ['path' => $shopUrls->privacyPolicy]);
+                    return $urlQuery->toAbsoluteUrl();
+                },
+                'group' => 'marketing'
+            ]
+        );
+
+        $consentRepository->registerConsent(
+            'sessionnn',
+            'Ceres::Template.consentSessionLabel',
+            [
+                'necessary' => true,
+                'position' => 200,
+                'description' => 'Ceres::Template.consentSessionDescription',
+                'provider' => 'Ceres::Template.headerCompanyName',
+                'lifespan' => $webstoreConfig->sessionLifetime > 0 ? 'Ceres::Template.consentLifespan100Days' : 'Ceres::Template.consentLifespanSession',
+                'policyUrl' => function () {
+                    /** @var ShopUrls $shopUrls */
+                    $shopUrls = pluginApp(ShopUrls::class);
+                    /** @var UrlQuery $urlQuery */
+                    $urlQuery = pluginApp(UrlQuery::class, ['path' => $shopUrls->privacyPolicy]);
+                    return $urlQuery->toAbsoluteUrl();
+                },
+                'group' => 'tracking'
+            ]
+        );
+
+        $consentRepository->registerConsent(
             'csrf',
             'Ceres::Template.consentCsrfLabel',
             [

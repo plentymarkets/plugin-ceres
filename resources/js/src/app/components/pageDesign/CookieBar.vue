@@ -22,11 +22,11 @@
                                   :key="consentGroup.key">
                                 <input type="checkbox"
                                        class="custom-control-input"
-                                       :id="_uid + '-group-' + consentGroup.key"
+                                       :id="componentKey + '-group-' + consentGroup.key"
                                        :disabled="consentGroup.necessary"
                                        :checked="isConsented(consentGroup.key) || consentGroup.necessary"
                                        @change="toggleConsent(consentGroup.key)">
-                                <label class="custom-control-label" :for="_uid + '-group-' + consentGroup.key">
+                                <label class="custom-control-label" :for="componentKey + '-group-' + consentGroup.key">
                                     <template v-if="consentGroup.label.length > 0">
                                         {{ consentGroup.label }}
                                     </template>

@@ -559,7 +559,7 @@ var render = function() {
               staticClass: "btn btn-link filter-toggle",
               attrs: {
                 "data-toggle": "collapse",
-                href: "#filter-collapse_" + _vm._uid,
+                href: "#filter-collapse_" + _vm.uid,
                 "aria-expanded": "false",
                 "aria-controls": "filter-collapse_" + _vm._uid
               }
@@ -587,7 +587,7 @@ var render = function() {
                 }
               ],
               staticClass: "filter-collapse collapse",
-              attrs: { id: "filter-collapse_" + _vm._uid }
+              attrs: { id: "filter-collapse_" + _vm.uid }
             },
             [
               _c(
