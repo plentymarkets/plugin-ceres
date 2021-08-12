@@ -1,42 +1,72 @@
 /**
- * Mixin for reading and writing uids to the components dataset.
- * This mixin is used to synchronize uids between server and client in an ssr environment.
+ * Mixing for generating unique keys, that can be similarly created on server and clientside.
+ * Collisions are possible in theory,
  */
 
 import Vue from "vue";
+
+const KEYS = {};
+if(typeof document !== "undefined")
+{
+    document.debug_keys = KEYS;
+}
 
 Vue.mixin({
     created()
     {
         // Root elements, early exit
-        if(!this.$options._componentTag && !this?.$vnode?.tag) {
+        if(!this.$options._componentTag && !this.$vnode?.tag) {
             return;
         }
 
-        this.componentKey = "uid_";
+        this._cid = "";
 
         let node = this;
         let prevNode = undefined;
         while (node !== undefined)
         {
-            // Break on root component
-            if(node === node.$root)
-            {
-                //break;
-            }
-
             if(prevNode !== undefined)
             {
-                this.componentKey += node.$children.indexOf(prevNode)
-                this.componentKey += "_"
+                if(hasSiblings(node.$children, prevNode))
+                {
+                    const occurenceIndex = getOwnOccurenceIndex(node.$children, prevNode)
+                    this._cid += occurenceIndex
+                }
             }
 
+            this._cid += "_"
+
             if(node.$options._componentTag) {
-                this.componentKey += node.$options._componentTag;
+                this._cid += node.$options._componentTag;
             }
 
             prevNode = node;
             node = node.$parent;
         }
+
+        if(!KEYS[this._cid])
+        {
+            KEYS[this._cid] = 0;
+        }
+
+        KEYS[this._cid]++;
     }
 });
+
+function hasSiblings(potentialSiblings, node)
+{
+    for (const potentialSibling of potentialSiblings) {
+        if(potentialSibling.$options._componentTag === node.$options._componentTag && potentialSibling !== node)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function getOwnOccurenceIndex(potentialSiblings, node)
+{
+    const siblings = potentialSiblings.filter(potentialSibling => potentialSibling.$options._componentTag === node.$options._componentTag)
+    return siblings.indexOf(node);
+}
