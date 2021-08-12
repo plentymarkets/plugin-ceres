@@ -262,9 +262,7 @@ var render = function() {
                                     attrs: {
                                       type: "checkbox",
                                       id:
-                                        _vm.componentKey +
-                                        "-group-" +
-                                        consentGroup.key,
+                                        _vm._cid + "-group-" + consentGroup.key,
                                       disabled: consentGroup.necessary
                                     },
                                     domProps: {
@@ -287,7 +285,7 @@ var render = function() {
                                       staticClass: "custom-control-label",
                                       attrs: {
                                         for:
-                                          _vm.componentKey +
+                                          _vm._cid +
                                           "-group-" +
                                           consentGroup.key
                                       }
