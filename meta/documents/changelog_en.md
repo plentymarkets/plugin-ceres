@@ -1,5 +1,22 @@
 # Release Notes for Ceres
 
+## v5.0.37 (2021-08-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.36...5.0.37" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
+
+### Fixed
+
+- Due to an error, line breaks were included in the inline styles of the background image widget. These have been removed.
+- If server-side rendering was active, the filter tool bar could not be opened on category pages that had not been created with ShopBuilder. This has been fixed.
+- All values of properties of the type **Multiselect** can now be displayed in plentyShop.
+
+### Changed templates
+
+- In Ceres 5.0.37 we made a change to a template file which is relevant for theme developers. You can find the changed template below. The link directs you to the effected changes in the corresponding file.
+- [resources/views/Widgets/Common/BackgroundWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2995/files#diff-bd9967b42e5604fbd1cc0034b2ed9fbc4bb18113880fe371167076f046aee956)
+
 ## v5.0.36 (2021-08-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.35...5.0.36" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Changed
