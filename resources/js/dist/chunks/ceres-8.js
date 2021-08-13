@@ -559,9 +559,9 @@ var render = function() {
               staticClass: "btn btn-link filter-toggle",
               attrs: {
                 "data-toggle": "collapse",
-                href: "#filter-collapse_" + _vm._uid,
+                href: "#filter-collapse_" + _vm._cid,
                 "aria-expanded": "false",
-                "aria-controls": "filter-collapse_" + _vm._uid
+                "aria-controls": "filter-collapse_" + _vm._cid
               }
             },
             [
@@ -587,7 +587,7 @@ var render = function() {
                 }
               ],
               staticClass: "filter-collapse collapse",
-              attrs: { id: "filter-collapse_" + _vm._uid }
+              attrs: { id: "filter-collapse_" + _vm._cid }
             },
             [
               _c(
@@ -618,8 +618,8 @@ var render = function() {
                           attrs: {
                             type: "button",
                             "data-toggle": "collapse",
-                            href: "#filter-collapse_" + _vm._uid,
-                            "aria-controls": "filter-collapse_" + _vm._uid
+                            href: "#filter-collapse_" + _vm._cid,
+                            "aria-controls": "filter-collapse_" + _vm._cid
                           }
                         },
                         [
