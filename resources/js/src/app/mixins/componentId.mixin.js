@@ -1,19 +1,18 @@
 /**
  * Mixing for generating unique keys, that can be similarly created on server and clientside.
- * Collisions are possible in theory,
+ * Collisions are possible in theory, be advised that this is an experimental mixin and may be removed in the future.
  */
 
-import Vue from "vue";
 import { isNullOrUndefined } from "../helper/utils";
 
 const KEYS = {};
 
 if (typeof document !== "undefined")
 {
-    document.debug_keys = KEYS;
+    document.debug_component_ids = KEYS;
 }
 
-Vue.mixin({
+export const ComponentIdMixin = {
     created()
     {
         // Root elements, early exit
@@ -58,7 +57,7 @@ Vue.mixin({
 
         KEYS[this._cid]++;
     }
-});
+}
 
 function hasSiblings(potentialSiblings, node)
 {

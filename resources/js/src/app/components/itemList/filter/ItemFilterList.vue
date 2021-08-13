@@ -35,6 +35,7 @@
 <script>
 import { mapState } from "vuex";
 import ItemFilter from "./ItemFilter.vue";
+import { ComponentIdMixin } from "../../../mixins/componentId.mixin";
 
 export default {
 
@@ -44,6 +45,8 @@ export default {
     {
         ItemFilter
     },
+
+    mixins: [ComponentIdMixin], // Experimental mixin, may be removed in the future.
 
     props: {
         filterListBulk: Boolean,

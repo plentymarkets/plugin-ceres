@@ -100,6 +100,7 @@
 
 <script>
 import { mapMutations } from "vuex";
+import { ComponentIdMixin } from "../../mixins/componentId.mixin";
 
 export default {
     props:
@@ -108,6 +109,8 @@ export default {
         classes: String,
         consentGroups: Object
     },
+
+    mixins: [ComponentIdMixin], // Experimental mixin, may be removed in the future.
 
     data()
     {

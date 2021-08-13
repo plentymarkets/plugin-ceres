@@ -194,7 +194,6 @@ import "./app/filters/truncate.filter";
 // MIXINS
 // =========================
 import "./app/mixins/getJsonData.mixin";
-import "./app/mixins/componentId.mixin";
 import "./app/mixins/template.mixin";
 
 // =========================
