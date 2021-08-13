@@ -57,7 +57,7 @@ export const ComponentIdMixin = {
 
         KEYS[this._cid]++;
     }
-}
+};
 
 function hasSiblings(potentialSiblings, node)
 {
