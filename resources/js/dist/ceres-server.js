@@ -1926,6 +1926,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -42239,6 +42244,24 @@ var render = function() {
                                           ' target="_blank">' +
                                           _vm._s(property.values.value) +
                                           "</a></span>"
+                                        : property.cast === "multiSelection" &&
+                                          property.values[0] !== undefined
+                                        ? '<ul class="pl-3">' +
+                                          _vm._ssrList(
+                                            property.values,
+                                            function(multiSelectProperty) {
+                                              return (
+                                                "<li>" +
+                                                _vm._ssrEscape(
+                                                  _vm._s(
+                                                    multiSelectProperty.value
+                                                  )
+                                                ) +
+                                                "</li>"
+                                              )
+                                            }
+                                          ) +
+                                          "</ul>"
                                         : "<span>" +
                                           _vm._s(property.values.value) +
                                           "</span>") +
