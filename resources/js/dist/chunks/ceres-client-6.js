@@ -195,6 +195,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _ItemFilter_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ItemFilter.vue */ "./resources/js/src/app/components/itemList/filter/ItemFilter.vue");
+/* harmony import */ var _mixins_componentId_mixin__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../mixins/componentId.mixin */ "./resources/js/src/app/mixins/componentId.mixin.js");
 
 
 
@@ -246,11 +247,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-filter-list",
   components: {
     ItemFilter: _ItemFilter_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
   },
+  mixins: [_mixins_componentId_mixin__WEBPACK_IMPORTED_MODULE_10__["ComponentIdMixin"]],
+  // Experimental mixin, may be removed in the future.
   props: {
     filterListBulk: Boolean,
     facetData: {
@@ -559,9 +563,9 @@ var render = function() {
               staticClass: "btn btn-link filter-toggle",
               attrs: {
                 "data-toggle": "collapse",
-                href: "#filter-collapse_" + _vm._uid,
+                href: "#filter-collapse_" + _vm._cid,
                 "aria-expanded": "false",
-                "aria-controls": "filter-collapse_" + _vm._uid
+                "aria-controls": "filter-collapse_" + _vm._cid
               }
             },
             [
@@ -587,7 +591,7 @@ var render = function() {
                 }
               ],
               staticClass: "filter-collapse collapse",
-              attrs: { id: "filter-collapse_" + _vm._uid }
+              attrs: { id: "filter-collapse_" + _vm._cid }
             },
             [
               _c(
@@ -618,8 +622,8 @@ var render = function() {
                           attrs: {
                             type: "button",
                             "data-toggle": "collapse",
-                            href: "#filter-collapse_" + _vm._uid,
-                            "aria-controls": "filter-collapse_" + _vm._uid
+                            href: "#filter-collapse_" + _vm._cid,
+                            "aria-controls": "filter-collapse_" + _vm._cid
                           }
                         },
                         [

@@ -328,6 +328,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -950,43 +955,67 @@ var render = function() {
                               return _vm._l(propertyGroup.properties, function(
                                 property
                               ) {
-                                return _c("div", [
-                                  propertyGroup.name
-                                    ? _c("strong", [
-                                        _vm._v(
-                                          _vm._s(propertyGroup.name) + ": "
-                                        )
-                                      ])
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _c("span", [
-                                    _vm._v(_vm._s(property.names.name))
-                                  ]),
-                                  _vm._v(" "),
-                                  property.cast === "file"
-                                    ? _c("span", [
-                                        _c("a", {
-                                          attrs: {
-                                            href: _vm._f("propertyFileUrl")(
-                                              property.values.value
-                                            ),
-                                            target: "_blank"
-                                          },
+                                return _c(
+                                  "div",
+                                  [
+                                    propertyGroup.name
+                                      ? _c("strong", [
+                                          _vm._v(
+                                            _vm._s(propertyGroup.name) + ": "
+                                          )
+                                        ])
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _c("span", [
+                                      _vm._v(_vm._s(property.names.name))
+                                    ]),
+                                    _vm._v(" "),
+                                    property.cast === "file"
+                                      ? _c("span", [
+                                          _c("a", {
+                                            attrs: {
+                                              href: _vm._f("propertyFileUrl")(
+                                                property.values.value
+                                              ),
+                                              target: "_blank"
+                                            },
+                                            domProps: {
+                                              innerHTML: _vm._s(
+                                                property.values.value
+                                              )
+                                            }
+                                          })
+                                        ])
+                                      : property.cast === "multiSelection" &&
+                                        property.values[0] !== undefined
+                                      ? [
+                                          _c(
+                                            "ul",
+                                            { staticClass: "pl-3" },
+                                            _vm._l(property.values, function(
+                                              multiSelectProperty
+                                            ) {
+                                              return _c("li", [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    multiSelectProperty.value
+                                                  )
+                                                )
+                                              ])
+                                            }),
+                                            0
+                                          )
+                                        ]
+                                      : _c("span", {
                                           domProps: {
                                             innerHTML: _vm._s(
                                               property.values.value
                                             )
                                           }
                                         })
-                                      ])
-                                    : _c("span", {
-                                        domProps: {
-                                          innerHTML: _vm._s(
-                                            property.values.value
-                                          )
-                                        }
-                                      })
-                                ])
+                                  ],
+                                  2
+                                )
                               })
                             }
                           )
