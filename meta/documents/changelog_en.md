@@ -1,6 +1,6 @@
 # Release Notes for Ceres
 
-## v5.0.37 (2021-08-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.36...5.0.37" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.37 (2021-08-17) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.36...5.0.37" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
 
