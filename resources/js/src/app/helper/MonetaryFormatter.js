@@ -100,7 +100,13 @@ const MonetaryFormatter = (function()
 
         currency = displayCurrency || currency;
 
-        if (isNullOrUndefined(value) || Number.isNaN(parseFloat(value)))
+        /* use es5 check */
+        function isNaN(value)
+        {
+            return value !== value;
+        }
+
+        if (isNullOrUndefined(value) || isNaN(parseFloat(value)))
         {
             value = 0;
         }
