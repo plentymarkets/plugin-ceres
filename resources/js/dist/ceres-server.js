@@ -82457,10 +82457,6 @@ var MonetaryFormatter = function () {
     });
     currency = displayCurrency || currency;
 
-    Number.isNaN = Number.isNaN || function (value) {
-      return value !== value;
-    };
-
     if (Object(_utils__WEBPACK_IMPORTED_MODULE_14__["isNullOrUndefined"])(value) || Number.isNaN(parseFloat(value))) {
       value = 0;
     }
