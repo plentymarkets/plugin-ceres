@@ -28,7 +28,7 @@
     "test:monetaryFormatter": "node -r esm tools/testMonetaryFormatter.js"
   },
   "browserslist": [
-    "> .25%"
+    "> .05%"
   ],
   "devDependencies": {
     "@babel/core": "^7.10.5",
