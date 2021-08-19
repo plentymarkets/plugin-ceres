@@ -28,7 +28,7 @@
     "test:monetaryFormatter": "node -r esm tools/testMonetaryFormatter.js"
   },
   "browserslist": [
-    "> .05%"
+    "> .25%"
   ],
   "devDependencies": {
     "@babel/core": "^7.10.5",
@@ -68,7 +68,7 @@
   "dependencies": {
     "bootstrap": "4.4.1",
     "core-js": "^3.6.5",
-    "custom-event-polyfill": "^0.3.0",
+    "custom-event-polyfill": "^1.0.0",
     "dayjs": "^1.8.26",
     "detect-browser": "^4.8.0",
     "flag-icon-css": "^2.9.0",
