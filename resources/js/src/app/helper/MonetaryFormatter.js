@@ -100,13 +100,19 @@ const MonetaryFormatter = (function()
 
         currency = displayCurrency || currency;
 
-        console.log(value);
-        console.log(parseFloat(value));
+        function myIsNaN(hopefullynotanumber)
+        {
+            return hopefullynotanumber !== hopefullynotanumber;
+        }
 
-        if (isNullOrUndefined(value) || Number.isNaN(parseFloat(value)))
+        console.log(value);
+
+        if (isNullOrUndefined(value) || myIsNaN(parseFloat(value)))
         {
             value = 0;
         }
+
+        console.log(value);
 
         if (value < 0)
         {
