@@ -100,6 +100,9 @@ const MonetaryFormatter = (function()
 
         currency = displayCurrency || currency;
 
+        console.log(value);
+        console.log(parseFloat(value));
+
         if (isNullOrUndefined(value) || Number.isNaN(parseFloat(value)))
         {
             value = 0;
