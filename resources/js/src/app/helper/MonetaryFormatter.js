@@ -90,6 +90,7 @@ const MonetaryFormatter = (function()
 
     MonetaryFormatter.prototype.format = function(value, currency)
     {
+        value = parseInt(value);
         console.log(93);
         console.log(value);
         console.log(currency);
@@ -172,7 +173,7 @@ const MonetaryFormatter = (function()
                 const roundDigits = !pattern.some(subpattern =>
                 {
                     console.log(174);
-                    console.log(subpattern);
+                    console.log(parseInt(subpattern.value));
                     console.log(value);
 
                     return subpattern.type === T_DECIMAL
