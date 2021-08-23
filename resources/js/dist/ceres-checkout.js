@@ -74058,9 +74058,6 @@ var MonetaryFormatter = function () {
   MonetaryFormatter.prototype.format = function (value, currency) {
     var _this2 = this;
 
-    console.log(93);
-    console.log(value);
-    console.log(currency);
     var patternIndex = 0;
     var prefix = "";
     var displayCurrency = App.config.currency.format === "symbol" ? App.currencyPattern.symbols[currency] : Object.keys(App.currencyPattern.symbols).find(function (isoCode) {
@@ -74097,15 +74094,11 @@ var MonetaryFormatter = function () {
       Number.MAX_SAFE_INTEGER = 9007199254740991; // FIX: add smallest number next to 0 to value to avoid float conversion errors, eg 0.005 => 0.004999999.
 
       var result = Math.round((value + 1 / Number.MAX_SAFE_INTEGER) * Math.pow(10, numberOfDecimals)).toFixed(0).substr(-1 * numberOfDecimals, numberOfDecimals);
-      console.log(143);
-      console.log(result);
 
       while (result.length < numberOfDecimals) {
         result = "0" + result;
       }
 
-      console.log(144);
-      console.log(result);
       return result;
     };
 
@@ -74119,10 +74112,6 @@ var MonetaryFormatter = function () {
 
 
             var roundDigits = !pattern.some(function (subpattern) {
-              // console.log(174);
-              // console.log(subpattern.value);
-              // console.log(parseInt(subpattern.value));
-              // console.log(value);
               if (!subpattern.value) {
                 return false;
               }
