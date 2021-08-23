@@ -90,7 +90,6 @@ const MonetaryFormatter = (function()
 
     MonetaryFormatter.prototype.format = function(value, currency)
     {
-        value = parseInt(value);
         console.log(93);
         console.log(value);
         console.log(currency);
@@ -113,6 +112,9 @@ const MonetaryFormatter = (function()
         {
             value = 0;
         }
+
+        console.log(117);
+        console.log(value);
 
         if (value < 0)
         {
@@ -172,10 +174,10 @@ const MonetaryFormatter = (function()
                 // check if pattern include decimals to decide if digits should be rounded or not
                 const roundDigits = !pattern.some(subpattern =>
                 {
-                    console.log(174);
-                    console.log(subpattern.value);
-                    console.log(parseInt(subpattern.value));
-                    console.log(value);
+                    // console.log(174);
+                    // console.log(subpattern.value);
+                    // console.log(parseInt(subpattern.value));
+                    // console.log(value);
 
                     if (!subpattern.value)
                     {
@@ -205,10 +207,6 @@ const MonetaryFormatter = (function()
             }
             case T_DECIMAL: {
                 const numberOfDecimals = parseInt(partial.value);
-
-                console.log(numberOfDecimals);
-                console.log(this.separatorDecimals);
-                console.log(formatDecimals(value, numberOfDecimals));
 
                 return this.separatorDecimals + formatDecimals(value, numberOfDecimals);
             }
