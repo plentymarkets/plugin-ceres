@@ -145,10 +145,6 @@ const MonetaryFormatter = (function()
                 // check if pattern include decimals to decide if digits should be rounded or not
                 const roundDigits = !pattern.some(subpattern =>
                 {
-                    // if (!subpattern.value)
-                    // {
-                    //     return false;
-                    // }
 
                     return subpattern.type === T_DECIMAL
                         && parseInt(formatDecimals(value, parseInt(subpattern.value))) !== 0;
