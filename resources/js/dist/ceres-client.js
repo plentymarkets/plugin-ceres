@@ -63415,6 +63415,7 @@ var MonetaryFormatter = function () {
   MonetaryFormatter.prototype.format = function (value, currency) {
     var _this2 = this;
 
+    console.log(93);
     console.log(value);
     console.log(currency);
     var patternIndex = 0;
@@ -63440,6 +63441,7 @@ var MonetaryFormatter = function () {
       }
     }
 
+    console.log(128);
     console.log(value);
     console.log(currency);
 
@@ -63451,6 +63453,7 @@ var MonetaryFormatter = function () {
         result = "0" + result;
       }
 
+      console.log(144);
       console.log(result);
       return result;
     };
@@ -63477,6 +63480,7 @@ var MonetaryFormatter = function () {
 
 
             digits = digits.split("").reverse().join("");
+            console.log(181);
             console.log(digits);
             return digits;
           }
@@ -63484,6 +63488,7 @@ var MonetaryFormatter = function () {
         case T_DECIMAL:
           {
             var numberOfDecimals = parseInt(partial.value);
+            console.log(189);
             console.log(_this2.separatorDecimals + formatDecimals(value, numberOfDecimals));
             return _this2.separatorDecimals + formatDecimals(value, numberOfDecimals);
           }
