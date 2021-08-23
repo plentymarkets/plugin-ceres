@@ -82404,7 +82404,8 @@ var MonetaryFormatter = function () {
   MonetaryFormatter.prototype.format = function (value, currency) {
     var _this2 = this;
 
-    console.log(value, currency);
+    console.log(value);
+    console.log(currency);
     var patternIndex = 0;
     var prefix = "";
     var displayCurrency = App.config.currency.format === "symbol" ? App.currencyPattern.symbols[currency] : Object.keys(App.currencyPattern.symbols).find(function (isoCode) {
@@ -82428,7 +82429,8 @@ var MonetaryFormatter = function () {
       }
     }
 
-    console.log(value, currency);
+    console.log(value);
+    console.log(currency);
 
     var formatDecimals = function formatDecimals(value, numberOfDecimals) {
       // FIX: add smallest number next to 0 to value to avoid float conversion errors, eg 0.005 => 0.004999999.
@@ -82464,12 +82466,14 @@ var MonetaryFormatter = function () {
 
 
             digits = digits.split("").reverse().join("");
+            console.log(digits);
             return digits;
           }
 
         case T_DECIMAL:
           {
             var numberOfDecimals = parseInt(partial.value);
+            console.log(_this2.separatorDecimals + formatDecimals(value, numberOfDecimals));
             return _this2.separatorDecimals + formatDecimals(value, numberOfDecimals);
           }
 
@@ -82497,8 +82501,6 @@ var MonetaryFormatter = function () {
     }).join("");
   };
 
-  console.log("ende");
-  console.log(value, currency);
   return MonetaryFormatter;
 }();
 

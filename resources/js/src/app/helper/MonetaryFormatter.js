@@ -90,7 +90,8 @@ const MonetaryFormatter = (function()
 
     MonetaryFormatter.prototype.format = function(value, currency)
     {
-        console.log(value, currency);
+        console.log(value);
+        console.log(currency);
         let patternIndex = 0;
 
         let prefix = "";
@@ -123,7 +124,8 @@ const MonetaryFormatter = (function()
             }
         }
 
-        console.log(value, currency);
+        console.log(value);
+        console.log(currency);
 
         const formatDecimals = (value, numberOfDecimals) =>
         {
@@ -173,10 +175,14 @@ const MonetaryFormatter = (function()
                 // revert back again
                 digits = digits.split("").reverse().join("");
 
+                console.log(digits);
+
                 return digits;
             }
             case T_DECIMAL: {
                 const numberOfDecimals = parseInt(partial.value);
+
+                console.log(this.separatorDecimals + formatDecimals(value, numberOfDecimals));
 
                 return this.separatorDecimals + formatDecimals(value, numberOfDecimals);
             }
@@ -196,9 +202,6 @@ const MonetaryFormatter = (function()
             }
         }).join("");
     };
-
-    console.log("ende");
-    console.log(value, currency);
 
     return MonetaryFormatter;
 })();
