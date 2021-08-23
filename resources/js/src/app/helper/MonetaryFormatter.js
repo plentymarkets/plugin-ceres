@@ -100,12 +100,7 @@ const MonetaryFormatter = (function()
 
         currency = displayCurrency || currency;
 
-        function myIsNaN(hopefullynotanumber)
-        {
-            return hopefullynotanumber !== hopefullynotanumber;
-        }
-
-        if (isNullOrUndefined(value) || myIsNaN(parseFloat(value)))
+        if (isNullOrUndefined(value) || (parseFloat(value) !== parseFloat(value)))
         {
             value = 0;
         }
@@ -124,16 +119,6 @@ const MonetaryFormatter = (function()
 
         const formatDecimals = (value, numberOfDecimals) =>
         {
-            function myIsNaN(hopefullynotanumber)
-            {
-                return hopefullynotanumber !== hopefullynotanumber;
-            }
-
-            if (isNullOrUndefined(value) || myIsNaN(parseFloat(value)))
-            {
-                value = 0;
-            }
-
             // Fix IE11
             Number.MAX_SAFE_INTEGER = 9007199254740991;
 
@@ -162,10 +147,10 @@ const MonetaryFormatter = (function()
                 // check if pattern include decimals to decide if digits should be rounded or not
                 const roundDigits = !pattern.some(subpattern =>
                 {
-                    if (!subpattern.value)
-                    {
-                        return false;
-                    }
+                    // if (!subpattern.value)
+                    // {
+                    //     return false;
+                    // }
 
                     return subpattern.type === T_DECIMAL
                         && parseInt(formatDecimals(value, parseInt(subpattern.value))) !== 0;

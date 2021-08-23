@@ -74065,11 +74065,7 @@ var MonetaryFormatter = function () {
     });
     currency = displayCurrency || currency;
 
-    function myIsNaN(hopefullynotanumber) {
-      return hopefullynotanumber !== hopefullynotanumber;
-    }
-
-    if (Object(_utils__WEBPACK_IMPORTED_MODULE_13__["isNullOrUndefined"])(value) || myIsNaN(parseFloat(value))) {
+    if (Object(_utils__WEBPACK_IMPORTED_MODULE_13__["isNullOrUndefined"])(value) || parseFloat(value) !== parseFloat(value)) {
       value = 0;
     }
 
@@ -74082,15 +74078,7 @@ var MonetaryFormatter = function () {
     }
 
     var formatDecimals = function formatDecimals(value, numberOfDecimals) {
-      function myIsNaN(hopefullynotanumber) {
-        return hopefullynotanumber !== hopefullynotanumber;
-      }
-
-      if (Object(_utils__WEBPACK_IMPORTED_MODULE_13__["isNullOrUndefined"])(value) || myIsNaN(parseFloat(value))) {
-        value = 0;
-      } // Fix IE11
-
-
+      // Fix IE11
       Number.MAX_SAFE_INTEGER = 9007199254740991; // FIX: add smallest number next to 0 to value to avoid float conversion errors, eg 0.005 => 0.004999999.
 
       var result = Math.round((value + 1 / Number.MAX_SAFE_INTEGER) * Math.pow(10, numberOfDecimals)).toFixed(0).substr(-1 * numberOfDecimals, numberOfDecimals);
@@ -74112,10 +74100,10 @@ var MonetaryFormatter = function () {
 
 
             var roundDigits = !pattern.some(function (subpattern) {
-              if (!subpattern.value) {
-                return false;
-              }
-
+              // if (!subpattern.value)
+              // {
+              //     return false;
+              // }
               return subpattern.type === T_DECIMAL && parseInt(formatDecimals(value, parseInt(subpattern.value))) !== 0;
             }); // cut decimal places instead of rounding
             // revert the value to insert thousands separators next
