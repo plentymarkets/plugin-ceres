@@ -134,14 +134,18 @@ const MonetaryFormatter = (function()
 
         const formatDecimals = (value, numberOfDecimals) =>
         {
-            value = parseInt(value);
+            function myIsNaN(hopefullynotanumber)
+            {
+                return hopefullynotanumber !== hopefullynotanumber;
+            }
 
-            console.log(128);
+            if (isNullOrUndefined(value) || myIsNaN(parseFloat(value)))
+            {
+                value = 0;
+            }
+
             console.log(value);
-            console.log(numberOfDecimals);
-            console.log(137);
             console.log(value + (1/Number.MAX_SAFE_INTEGER));
-            console.log(Math.pow(10, numberOfDecimals));
 
             // FIX: add smallest number next to 0 to value to avoid float conversion errors, eg 0.005 => 0.004999999.
             let result =  Math.round((value + (1/Number.MAX_SAFE_INTEGER)) * Math.pow(10, numberOfDecimals))
