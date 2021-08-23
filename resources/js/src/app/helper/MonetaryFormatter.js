@@ -131,10 +131,20 @@ const MonetaryFormatter = (function()
 
         const formatDecimals = (value, numberOfDecimals) =>
         {
+            console.log(128);
+            console.log(value);
+            console.log(numberOfDecimals);
+            console.log(137);
+            console.log(value + (1/Number.MAX_SAFE_INTEGER));
+            console.log(Math.pow(10, numberOfDecimals));
+
             // FIX: add smallest number next to 0 to value to avoid float conversion errors, eg 0.005 => 0.004999999.
             let result =  Math.round((value + (1/Number.MAX_SAFE_INTEGER)) * Math.pow(10, numberOfDecimals))
                 .toFixed(0)
                 .substr(-1 * numberOfDecimals, numberOfDecimals);
+
+            console.log(143);
+            console.log(result);
 
             while (result.length < numberOfDecimals)
             {
@@ -178,16 +188,10 @@ const MonetaryFormatter = (function()
                 // revert back again
                 digits = digits.split("").reverse().join("");
 
-                console.log(181);
-                console.log(digits);
-
                 return digits;
             }
             case T_DECIMAL: {
                 const numberOfDecimals = parseInt(partial.value);
-
-                console.log(189);
-                console.log(this.separatorDecimals + formatDecimals(value, numberOfDecimals));
 
                 return this.separatorDecimals + formatDecimals(value, numberOfDecimals);
             }
