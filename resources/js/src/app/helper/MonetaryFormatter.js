@@ -173,6 +173,7 @@ const MonetaryFormatter = (function()
                 const roundDigits = !pattern.some(subpattern =>
                 {
                     console.log(174);
+                    console.log(subpattern.value);
                     console.log(parseInt(subpattern.value));
                     console.log(value);
 

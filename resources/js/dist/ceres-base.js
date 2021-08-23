@@ -60773,6 +60773,7 @@ var MonetaryFormatter = function () {
 
             var roundDigits = !pattern.some(function (subpattern) {
               console.log(174);
+              console.log(subpattern.value);
               console.log(parseInt(subpattern.value));
               console.log(value);
               return subpattern.type === T_DECIMAL && parseInt(formatDecimals(value, parseInt(subpattern.value))) !== 0;
