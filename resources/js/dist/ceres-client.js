@@ -63415,6 +63415,7 @@ var MonetaryFormatter = function () {
   MonetaryFormatter.prototype.format = function (value, currency) {
     var _this2 = this;
 
+    console.log(value, currency);
     var patternIndex = 0;
     var prefix = "";
     var displayCurrency = App.config.currency.format === "symbol" ? App.currencyPattern.symbols[currency] : Object.keys(App.currencyPattern.symbols).find(function (isoCode) {
@@ -63426,13 +63427,9 @@ var MonetaryFormatter = function () {
       return hopefullynotanumber !== hopefullynotanumber;
     }
 
-    console.log(value);
-
     if (Object(_utils__WEBPACK_IMPORTED_MODULE_13__["isNullOrUndefined"])(value) || myIsNaN(parseFloat(value))) {
       value = 0;
     }
-
-    console.log(value);
 
     if (value < 0) {
       if (this.pattern.length > 1) {
@@ -63442,6 +63439,8 @@ var MonetaryFormatter = function () {
       }
     }
 
+    console.log(value, currency);
+
     var formatDecimals = function formatDecimals(value, numberOfDecimals) {
       // FIX: add smallest number next to 0 to value to avoid float conversion errors, eg 0.005 => 0.004999999.
       var result = Math.round((value + 1 / Number.MAX_SAFE_INTEGER) * Math.pow(10, numberOfDecimals)).toFixed(0).substr(-1 * numberOfDecimals, numberOfDecimals);
@@ -63450,6 +63449,7 @@ var MonetaryFormatter = function () {
         result = "0" + result;
       }
 
+      console.log(result);
       return result;
     };
 
@@ -63508,6 +63508,8 @@ var MonetaryFormatter = function () {
     }).join("");
   };
 
+  console.log("ende");
+  console.log(value, currency);
   return MonetaryFormatter;
 }();
 

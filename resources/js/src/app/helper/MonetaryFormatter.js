@@ -90,7 +90,7 @@ const MonetaryFormatter = (function()
 
     MonetaryFormatter.prototype.format = function(value, currency)
     {
-        debugger;
+        console.log(value, currency);
         let patternIndex = 0;
 
         let prefix = "";
@@ -123,6 +123,8 @@ const MonetaryFormatter = (function()
             }
         }
 
+        console.log(value, currency);
+
         const formatDecimals = (value, numberOfDecimals) =>
         {
             // FIX: add smallest number next to 0 to value to avoid float conversion errors, eg 0.005 => 0.004999999.
@@ -134,6 +136,8 @@ const MonetaryFormatter = (function()
             {
                 result = "0" + result;
             }
+
+            console.log(result);
 
             return result;
         };
@@ -192,6 +196,9 @@ const MonetaryFormatter = (function()
             }
         }).join("");
     };
+
+    console.log("ende");
+    console.log(value, currency);
 
     return MonetaryFormatter;
 })();
