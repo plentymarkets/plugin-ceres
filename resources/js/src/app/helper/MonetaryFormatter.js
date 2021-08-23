@@ -131,6 +131,8 @@ const MonetaryFormatter = (function()
 
         const formatDecimals = (value, numberOfDecimals) =>
         {
+            value = parseInt(value);
+
             console.log(128);
             console.log(value);
             console.log(numberOfDecimals);
