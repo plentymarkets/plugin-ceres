@@ -90,6 +90,7 @@ const MonetaryFormatter = (function()
 
     MonetaryFormatter.prototype.format = function(value, currency)
     {
+        debugger;
         let patternIndex = 0;
 
         let prefix = "";
@@ -105,14 +106,10 @@ const MonetaryFormatter = (function()
             return hopefullynotanumber !== hopefullynotanumber;
         }
 
-        console.log(value);
-
         if (isNullOrUndefined(value) || myIsNaN(parseFloat(value)))
         {
             value = 0;
         }
-
-        console.log(value);
 
         if (value < 0)
         {
