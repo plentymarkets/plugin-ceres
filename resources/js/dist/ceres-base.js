@@ -60771,6 +60771,9 @@ var MonetaryFormatter = function () {
 
 
             var roundDigits = !pattern.some(function (subpattern) {
+              console.log(174);
+              console.log(subpattern);
+              console.log(value);
               return subpattern.type === T_DECIMAL && parseInt(formatDecimals(value, parseInt(subpattern.value))) !== 0;
             }); // cut decimal places instead of rounding
             // revert the value to insert thousands separators next
@@ -60789,6 +60792,9 @@ var MonetaryFormatter = function () {
         case T_DECIMAL:
           {
             var numberOfDecimals = parseInt(partial.value);
+            console.log(numberOfDecimals);
+            console.log(_this2.separatorDecimals);
+            console.log(formatDecimals(value, numberOfDecimals));
             return _this2.separatorDecimals + formatDecimals(value, numberOfDecimals);
           }
 
