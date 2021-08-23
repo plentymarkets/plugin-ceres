@@ -74125,6 +74125,11 @@ var MonetaryFormatter = function () {
               console.log(subpattern.value);
               console.log(parseInt(subpattern.value));
               console.log(value);
+
+              if (!subpattern.value) {
+                return false;
+              }
+
               return subpattern.type === T_DECIMAL && parseInt(formatDecimals(value, parseInt(subpattern.value))) !== 0;
             }); // cut decimal places instead of rounding
             // revert the value to insert thousands separators next

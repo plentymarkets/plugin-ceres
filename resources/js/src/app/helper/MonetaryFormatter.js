@@ -177,6 +177,11 @@ const MonetaryFormatter = (function()
                     console.log(parseInt(subpattern.value));
                     console.log(value);
 
+                    if (!subpattern.value)
+                    {
+                        return false;
+                    }
+
                     return subpattern.type === T_DECIMAL
                         && parseInt(formatDecimals(value, parseInt(subpattern.value))) !== 0;
                 });
