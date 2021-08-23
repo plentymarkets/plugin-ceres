@@ -110,7 +110,10 @@ trait ItemListContext
                 ExternalSearch::getExternalResults($externalSearch);
             } catch (\Exception $exception) {
                 $successfully = false;
-                $this->getLogger(__METHOD__)->error('Error on executing external search.', $exception->getMessage());
+                $this->getLogger(__METHOD__)->error('Error on executing external search.', [
+                    'message' => $exception->getMessage(),
+                    'options' => $options
+                ]);
             }
 
 
