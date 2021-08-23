@@ -113,9 +113,6 @@ const MonetaryFormatter = (function()
             value = 0;
         }
 
-        console.log(117);
-        console.log(value);
-
         if (value < 0)
         {
             if (this.pattern.length > 1)
@@ -127,10 +124,6 @@ const MonetaryFormatter = (function()
                 prefix = this.sign;
             }
         }
-
-        console.log(128);
-        console.log(value);
-        console.log(currency);
 
         const formatDecimals = (value, numberOfDecimals) =>
         {
@@ -144,8 +137,8 @@ const MonetaryFormatter = (function()
                 value = 0;
             }
 
-            console.log(value);
-            console.log(value + (1/Number.MAX_SAFE_INTEGER));
+            // Fix IE11
+            NumberNumber["MAX_SAFE_INTEGER"] = 9007199254740991;
 
             // FIX: add smallest number next to 0 to value to avoid float conversion errors, eg 0.005 => 0.004999999.
             let result =  Math.round((value + (1/Number.MAX_SAFE_INTEGER)) * Math.pow(10, numberOfDecimals))
