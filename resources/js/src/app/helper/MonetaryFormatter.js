@@ -138,7 +138,7 @@ const MonetaryFormatter = (function()
             }
 
             // Fix IE11
-            NumberNumber["MAX_SAFE_INTEGER"] = 9007199254740991;
+            Number.MAX_SAFE_INTEGER = 9007199254740991;
 
             // FIX: add smallest number next to 0 to value to avoid float conversion errors, eg 0.005 => 0.004999999.
             let result =  Math.round((value + (1/Number.MAX_SAFE_INTEGER)) * Math.pow(10, numberOfDecimals))
