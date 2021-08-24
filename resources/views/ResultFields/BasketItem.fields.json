@@ -1,5 +1,8 @@
 [
     "itemId",
+    "item.manufacturer.externalName",
+    "item.manufacturer.name",
+    "item.manufacturer.logo",
     "texts.name*",
     "texts.description",
     "texts.shortDescription",
