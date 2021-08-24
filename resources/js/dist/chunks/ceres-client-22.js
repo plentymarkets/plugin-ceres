@@ -46,7 +46,9 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_1__["isDefined"])(this.supported)) {
-        if (!this.supported) {
+        var _this$fallbackUrl;
+
+        if (!this.supported && (_this$fallbackUrl = this.fallbackUrl) !== null && _this$fallbackUrl !== void 0 && _this$fallbackUrl.length) {
           return {
             backgroundImage: 'url(' + this.fallbackUrl + ')'
           };

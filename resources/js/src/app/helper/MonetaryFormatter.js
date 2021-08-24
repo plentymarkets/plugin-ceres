@@ -100,7 +100,7 @@ const MonetaryFormatter = (function()
 
         currency = displayCurrency || currency;
 
-        if (isNullOrUndefined(value) || Number.isNaN(parseFloat(value)))
+        if (isNullOrUndefined(value) || (parseFloat(value) !== parseFloat(value)))
         {
             value = 0;
         }
@@ -120,7 +120,8 @@ const MonetaryFormatter = (function()
         const formatDecimals = (value, numberOfDecimals) =>
         {
             // FIX: add smallest number next to 0 to value to avoid float conversion errors, eg 0.005 => 0.004999999.
-            let result =  Math.round((value + (1/Number.MAX_SAFE_INTEGER)) * Math.pow(10, numberOfDecimals))
+            // 9007199254740991 = Number.MAX_SAFE_INTEGER
+            let result =  Math.round((value + (1/9007199254740991)) * Math.pow(10, numberOfDecimals))
                 .toFixed(0)
                 .substr(-1 * numberOfDecimals, numberOfDecimals);
 
@@ -144,6 +145,7 @@ const MonetaryFormatter = (function()
                 // check if pattern include decimals to decide if digits should be rounded or not
                 const roundDigits = !pattern.some(subpattern =>
                 {
+
                     return subpattern.type === T_DECIMAL
                         && parseInt(formatDecimals(value, parseInt(subpattern.value))) !== 0;
                 });

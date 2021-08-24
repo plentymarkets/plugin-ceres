@@ -37,7 +37,7 @@ export default {
             }
             if (isDefined(this.supported))
             {
-                if (!this.supported) {
+                if (!this.supported && this.fallbackUrl?.length) {
                     return { backgroundImage: 'url(' + this.fallbackUrl + ')' };
                 }
             }

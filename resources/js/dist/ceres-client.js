@@ -10079,26 +10079,6 @@ module.exports = isForced;
 
 /***/ }),
 
-/***/ "./node_modules/core-js/internals/is-integer.js":
-/*!******************************************************!*\
-  !*** ./node_modules/core-js/internals/is-integer.js ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var isObject = __webpack_require__(/*! ../internals/is-object */ "./node_modules/core-js/internals/is-object.js");
-
-var floor = Math.floor;
-
-// `Number.isInteger` method implementation
-// https://tc39.es/ecma262/#sec-number.isinteger
-module.exports = function isInteger(it) {
-  return !isObject(it) && isFinite(it) && floor(it) === it;
-};
-
-
-/***/ }),
-
 /***/ "./node_modules/core-js/internals/is-object.js":
 /*!*****************************************************!*\
   !*** ./node_modules/core-js/internals/is-object.js ***!
@@ -12759,47 +12739,6 @@ if (isForced(NUMBER, !NativeNumber(' 0o1') || !NativeNumber('0b1') || NativeNumb
 
 /***/ }),
 
-/***/ "./node_modules/core-js/modules/es.number.is-safe-integer.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/core-js/modules/es.number.is-safe-integer.js ***!
-  \*******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var $ = __webpack_require__(/*! ../internals/export */ "./node_modules/core-js/internals/export.js");
-var isInteger = __webpack_require__(/*! ../internals/is-integer */ "./node_modules/core-js/internals/is-integer.js");
-
-var abs = Math.abs;
-
-// `Number.isSafeInteger` method
-// https://tc39.es/ecma262/#sec-number.issafeinteger
-$({ target: 'Number', stat: true }, {
-  isSafeInteger: function isSafeInteger(number) {
-    return isInteger(number) && abs(number) <= 0x1FFFFFFFFFFFFF;
-  }
-});
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/modules/es.number.min-safe-integer.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/core-js/modules/es.number.min-safe-integer.js ***!
-  \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var $ = __webpack_require__(/*! ../internals/export */ "./node_modules/core-js/internals/export.js");
-
-// `Number.MIN_SAFE_INTEGER` constant
-// https://tc39.es/ecma262/#sec-number.min_safe_integer
-$({ target: 'Number', stat: true }, {
-  MIN_SAFE_INTEGER: -0x1FFFFFFFFFFFFF
-});
-
-
-/***/ }),
-
 /***/ "./node_modules/core-js/modules/es.number.to-fixed.js":
 /*!************************************************************!*\
   !*** ./node_modules/core-js/modules/es.number.to-fixed.js ***!
@@ -14649,6 +14588,61 @@ for (var COLLECTION_NAME in DOMIterables) {
       }
     }
   }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/custom-event-polyfill/custom-event-polyfill.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/custom-event-polyfill/custom-event-polyfill.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// Polyfill for creating CustomEvents on IE9/10/11
+
+// code pulled from:
+// https://github.com/d4tocchini/customevent-polyfill
+// https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent#Polyfill
+
+try {
+    var ce = new window.CustomEvent('test');
+    ce.preventDefault();
+    if (ce.defaultPrevented !== true) {
+        // IE has problems with .preventDefault() on custom events
+        // http://stackoverflow.com/questions/23349191
+        throw new Error('Could not prevent default');
+    }
+} catch(e) {
+  var CustomEvent = function(event, params) {
+    var evt, origPrevent;
+    params = params || {
+      bubbles: false,
+      cancelable: false,
+      detail: undefined
+    };
+
+    evt = document.createEvent("CustomEvent");
+    evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+    origPrevent = evt.preventDefault;
+    evt.preventDefault = function () {
+      origPrevent.call(this);
+      try {
+        Object.defineProperty(this, 'defaultPrevented', {
+          get: function () {
+            return true;
+          }
+        });
+      } catch(e) {
+        this.defaultPrevented = true;
+      }
+    };
+    return evt;
+  };
+
+  CustomEvent.prototype = window.Event.prototype;
+  window.CustomEvent = CustomEvent; // expose definition to window
 }
 
 
@@ -59188,6 +59182,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
  // =========================
+// Polyfill's
+// =========================
+// =========================
 // COMPONENTS
 // =========================
 // BASE
@@ -63179,22 +63176,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
 /* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_number_is_safe_integer_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.number.is-safe-integer.js */ "./node_modules/core-js/modules/es.number.is-safe-integer.js");
-/* harmony import */ var core_js_modules_es_number_is_safe_integer_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_is_safe_integer_js__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.number.constructor.js */ "./node_modules/core-js/modules/es.number.constructor.js");
-/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_number_to_fixed_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.number.to-fixed.js */ "./node_modules/core-js/modules/es.number.to-fixed.js");
-/* harmony import */ var core_js_modules_es_number_to_fixed_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_to_fixed_js__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_number_min_safe_integer_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.number.min-safe-integer.js */ "./node_modules/core-js/modules/es.number.min-safe-integer.js");
-/* harmony import */ var core_js_modules_es_number_min_safe_integer_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_min_safe_integer_js__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.array.join.js */ "./node_modules/core-js/modules/es.array.join.js");
-/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.array.map.js */ "./node_modules/core-js/modules/es.array.map.js");
-/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./utils */ "./resources/js/src/app/helper/utils.js");
-
-
-
+/* harmony import */ var core_js_modules_es_number_to_fixed_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.number.to-fixed.js */ "./node_modules/core-js/modules/es.number.to-fixed.js");
+/* harmony import */ var core_js_modules_es_number_to_fixed_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_to_fixed_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.array.join.js */ "./node_modules/core-js/modules/es.array.join.js");
+/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.array.map.js */ "./node_modules/core-js/modules/es.array.map.js");
+/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./utils */ "./resources/js/src/app/helper/utils.js");
 
 
 
@@ -63286,7 +63274,7 @@ var MonetaryFormatter = function () {
     });
     currency = displayCurrency || currency;
 
-    if (Object(_utils__WEBPACK_IMPORTED_MODULE_12__["isNullOrUndefined"])(value) || Number.isNaN(parseFloat(value))) {
+    if (Object(_utils__WEBPACK_IMPORTED_MODULE_9__["isNullOrUndefined"])(value) || parseFloat(value) !== parseFloat(value)) {
       value = 0;
     }
 
@@ -63300,7 +63288,8 @@ var MonetaryFormatter = function () {
 
     var formatDecimals = function formatDecimals(value, numberOfDecimals) {
       // FIX: add smallest number next to 0 to value to avoid float conversion errors, eg 0.005 => 0.004999999.
-      var result = Math.round((value + 1 / Number.MAX_SAFE_INTEGER) * Math.pow(10, numberOfDecimals)).toFixed(0).substr(-1 * numberOfDecimals, numberOfDecimals);
+      // 9007199254740991 = Number.MAX_SAFE_INTEGER
+      var result = Math.round((value + 1 / 9007199254740991) * Math.pow(10, numberOfDecimals)).toFixed(0).substr(-1 * numberOfDecimals, numberOfDecimals);
 
       while (result.length < numberOfDecimals) {
         result = "0" + result;
@@ -71455,11 +71444,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! owl.carousel */ "./node_modules/owl.carousel/dist/owl.carousel.js");
 /* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(owl_carousel__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app */ "./resources/js/src/app.js");
-/* harmony import */ var _app_store__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app/store */ "./resources/js/src/app/store/index.js");
-/* harmony import */ var _app_services_ApiService__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app/services/ApiService */ "./resources/js/src/app/services/ApiService.js");
-/* harmony import */ var _mount__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./mount */ "./resources/js/src/mount.js");
-/* harmony import */ var _app_jQuery__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./app/jQuery */ "./resources/js/src/app/jQuery.js");
-/* harmony import */ var _app_main__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./app/main */ "./resources/js/src/app/main.js");
+/* harmony import */ var custom_event_polyfill__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! custom-event-polyfill */ "./node_modules/custom-event-polyfill/custom-event-polyfill.js");
+/* harmony import */ var custom_event_polyfill__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(custom_event_polyfill__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _app_store__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app/store */ "./resources/js/src/app/store/index.js");
+/* harmony import */ var _app_services_ApiService__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./app/services/ApiService */ "./resources/js/src/app/services/ApiService.js");
+/* harmony import */ var _mount__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./mount */ "./resources/js/src/mount.js");
+/* harmony import */ var _app_jQuery__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./app/jQuery */ "./resources/js/src/app/jQuery.js");
+/* harmony import */ var _app_main__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./app/main */ "./resources/js/src/app/main.js");
 
 
 
@@ -71472,7 +71463,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.prototype.$mount = _mount__WEBPACK_IMPORTED_MODULE_10__["mount"]; // defines if the render location is the client
+
+vue__WEBPACK_IMPORTED_MODULE_1___default.a.prototype.$mount = _mount__WEBPACK_IMPORTED_MODULE_11__["mount"]; // defines if the render location is the client
 
 App.isSSR = false;
 App.isSSREnabled = App.config.log.performanceSsr;
@@ -71485,12 +71477,12 @@ window.createApp = function (selector) {
   }, store);
   app.$mount(selector, true);
   window.vueApp = app;
-  Object(_app_services_ApiService__WEBPACK_IMPORTED_MODULE_9__["initListener"])();
-  Object(_app_store__WEBPACK_IMPORTED_MODULE_8__["initClientListeners"])(store);
-  Object(_app_store__WEBPACK_IMPORTED_MODULE_8__["initClientStore"])(store);
+  Object(_app_services_ApiService__WEBPACK_IMPORTED_MODULE_10__["initListener"])();
+  Object(_app_store__WEBPACK_IMPORTED_MODULE_9__["initClientListeners"])(store);
+  Object(_app_store__WEBPACK_IMPORTED_MODULE_9__["initClientStore"])(store);
 };
 
-var store = Object(_app_store__WEBPACK_IMPORTED_MODULE_8__["createStore"])();
+var store = Object(_app_store__WEBPACK_IMPORTED_MODULE_9__["createStore"])();
 
 if (window.__INITIAL_STATE__) {
   store.replaceState(window.__INITIAL_STATE__);
