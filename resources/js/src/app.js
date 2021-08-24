@@ -4,8 +4,6 @@ import Vue from "vue";
 // Polyfill's
 // =========================
 
-import "custom-event-polyfill";
-
 // =========================
 // COMPONENTS
 // =========================
