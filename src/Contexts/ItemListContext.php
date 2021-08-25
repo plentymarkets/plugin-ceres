@@ -114,6 +114,7 @@ trait ItemListContext
                     'message' => $exception->getMessage(),
                     'options' => $options
                 ]);
+                $this->getLogger(__METHOD__)->logException($exception, 10);
             }
 
 
