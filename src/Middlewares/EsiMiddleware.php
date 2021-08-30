@@ -28,11 +28,14 @@ class EsiMiddleware extends Middleware
         if($request->has('block'))
         {
             // liefere Inhalt für ESI Block aus ?block=xyz
-            //$response->setContent('Steve');
-            $response->setContent($this->parseDirectives($response->content(), $request->get('block')));
-            $response->withHeaders([
-               'X-esi-id' => $request->get('block')
-            ]);
+            //$response->setContent($this->parseDirectives($response->content(), $request->get('block')));
+            
+            $response = $response->make($this->parseDirectives($response->content(), $request->get('block')), $response->status(), array_merge($response->headers->all(), [
+                'X-esi-id' => $request->get('block')
+            ]));
+            /*$response->withHeaders([
+                                       'X-esi-id' => $request->get('block')
+                                   ]);*/
         }
         else {
             /*$content = '<!-- ESI: header -->
@@ -40,7 +43,8 @@ class EsiMiddleware extends Middleware
                             <esi:include src="/?block=header">';
     
             $response->setContent($content);*/
-            $response->setContent($this->removeDirectives($response->content()));
+            //$response->setContent($this->removeDirectives($response->content()));
+            $response = $response->make($this->removeDirectives($response->content()), $response->status(), $response->headers->all());
             
         }
         
