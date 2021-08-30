@@ -49,13 +49,20 @@
         <notifications template="#vue-notifications" :initial-notifications="{{ notifications | json_encode() }}"></notifications>
     </lazy-hydrate>
 
+    <!-- ESI:header() -->
     {% include getPartial('header') %}
+    <!-- /ESI -->
 
     <div id="page-body" class="main">
+        <!-- ESI:body() -->
         {% block PageBody %}{% endblock %}
+        <!-- /ESI -->
     </div>
 
+
+    <!-- ESI:footer() -->
     {% include getPartial('footer') %}
+    <!-- /ESI -->
     {% block PartialFooter %}{% endblock %}
 
     <!-- LOGIN MODAL -->

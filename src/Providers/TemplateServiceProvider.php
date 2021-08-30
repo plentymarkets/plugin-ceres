@@ -22,6 +22,7 @@ use Ceres\Extensions\TwigLayoutContainerInternal;
 use Ceres\Extensions\TwigStyleScriptTagFilter;
 use Ceres\Hooks\CeresAfterBuildPlugins;
 use Ceres\Hooks\UploadFavicon;
+use Ceres\Middlewares\EsiMiddleware;
 use Ceres\Widgets\WidgetCollection;
 use Ceres\Wizard\ShopWizard\Services\DefaultSettingsService;
 use Ceres\Wizard\ShopWizard\ShopWizard;
@@ -104,6 +105,8 @@ class TemplateServiceProvider extends ServiceProvider
     {
         $this->getApplication()->singleton(CeresConfig::class);
         $this->getApplication()->singleton(DefaultSettingsService::class);
+    
+        $this->addGlobalMiddleware(EsiMiddleware::class);
     }
 
     /**
