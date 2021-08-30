@@ -8503,6 +8503,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (newValue !== oldValue) {
         this.setValue(newValue);
       }
+    },
+    interval: function interval(newInterval) {
+      this.compInterval = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["defaultValue"])(newInterval, 1);
     }
   },
   methods: {
