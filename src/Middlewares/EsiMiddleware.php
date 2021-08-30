@@ -30,6 +30,9 @@ class EsiMiddleware extends Middleware
             // liefere Inhalt für ESI Block aus ?block=xyz
             //$response->setContent('Steve');
             $response->setContent($this->parseDirectives($response->content(), $request->get('block')));
+            $response->withHeaders([
+               'X-esi-id' => $request->get('block')
+            ]);
         }
         else {
             /*$content = '<!-- ESI: header -->
