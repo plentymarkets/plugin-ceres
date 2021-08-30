@@ -124,7 +124,7 @@ class EsiMiddleware extends Middleware
                 */
     
                 //$directiveContent = '<esi:include src="/?block='.$directiveName.'"/>';
-                $directiveContent = '<!--#include virtual="/?block='.$directiveName.'" -->';
+                $directiveContent = '<!--# include virtual="/?block='.$directiveName.'" -->';
                 if ($directiveName !== 'on') {
                     $output .= $directiveContent;
                 }
