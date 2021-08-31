@@ -1,5 +1,18 @@
 # Release Notes für Ceres
 
+## v5.0.38 (2021-08-31) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.37...5.0.38" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Zum Ändern der Zahlungsart wird nun zusätzlich der `accessKey` für den Auftrag übergeben.
+
+### Behoben
+
+- Die Intervallbestellmenge in der Mengeneingabe wird nun aktualisiert, sobald die Variante gewechselt wird.
+- Bei der Verwendung von externen Suchanbietern konnte es bei einem Fehlerfall auf externer Seite zu fehlerhaften Darstellung im Frontend kommen. Dies wurde behoben.
+- Im Internet Explorer 11 wurden unter bestimmten Umständen Bilder nicht angezeigt. Dies wurde behoben.
+- Die Platzhalter für "Artikeltext", "Technische Daten" und für Texteigenschaften werden nun vom ShopBuilder als Block-Elemente ausgegeben und erzeugen so kein ungültigen HTML mehr.
+
 ## v5.0.37 (2021-08-17) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.36...5.0.37" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO

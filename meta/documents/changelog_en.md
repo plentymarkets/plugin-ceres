@@ -1,5 +1,18 @@
 # Release Notes for Ceres
 
+## v5.0.38 (2021-08-31) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.37...5.0.38" target="_blank" rel="noopener"><b>Overview of all changes<</b></a>
+
+### Changed
+
+- For the changing of payment methods, the `accessKey` for the order is now also passed. 
+
+### Fixed
+
+- The interval order quantity of the quantity input is now updated when the user changes the variation.
+- Using external search service providers could lead to the faulty display of search results in the frontend, due to an error on part of the search provider. This has been fixed.
+- Under certain circumstances, images could not be displayed in the browser Internet Explorer 11. This has been fixed.
+- The placeholders for "item text", "technical data", and for text properties are now output as block elements by ShopBuilder, therefore no longer creating invalid HTML.
+
 ## v5.0.37 (2021-08-17) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.36...5.0.37" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
