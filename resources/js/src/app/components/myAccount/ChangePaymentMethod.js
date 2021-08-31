@@ -137,7 +137,7 @@ export default Vue.component("change-payment-method", {
         {
             this.isPending = true;
 
-            ApiService.post("/rest/io/order/payment", { orderId: this.currentOrder.id, paymentMethodId: this.paymentMethod })
+            ApiService.post("/rest/io/order/payment", { orderId: this.currentOrder.id, paymentMethodId: this.paymentMethod, accessKey: this.currentOrder.accessKey })
                 .done(response =>
                 {
                     document.dispatchEvent(new CustomEvent("historyPaymentMethodChanged", { detail: { oldOrder: this.currentOrder, newOrder: response } }));
