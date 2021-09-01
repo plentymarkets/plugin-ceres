@@ -107,6 +107,8 @@ class TemplateServiceProvider extends ServiceProvider
         $this->getApplication()->singleton(DefaultSettingsService::class);
     
         $this->addGlobalMiddleware(EsiMiddleware::class);
+
+        $this->getApplication()->register(CeresRouteServiceProvider::class);
     }
 
     /**
