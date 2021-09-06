@@ -270,7 +270,15 @@ export default {
             value = limit(value, this.compMin, this.compMax);
 
             // make sure, new value is an even multiple of interval
-            const diff = formatFloat((value - this.min) % this.compInterval, this.compDecimals, true);
+            let diff;
+            if (this.variationBasketQuantity === 0 && this.min !== 0)
+            {
+                diff = formatFloat((value - this.min) % this.compInterval, this.compDecimals, true);
+            }
+            else
+            {
+                diff = formatFloat(value % this.compInterval, this.compDecimals, true);
+            }
 
             if (diff > 0 && diff !== this.compInterval)
             {
@@ -303,10 +311,12 @@ export default {
         {
             if (!isNullOrUndefined(this.min) && this.variationBasketQuantity >= this.min && this.variationBasketQuantity !== 0)
             {
-                this.compMin = this.min % this.compInterval  || this.compInterval;
+                // set the minimum value to the interval, if the item is already in the basket
+                this.compMin = this.compInterval;
             }
             else if (this.variationBasketQuantity === 0)
             {
+                // reset minimum, when item is not in the basket
                 this.compMin = this.min;
             }
 
