@@ -316,7 +316,7 @@ export default {
             }
             else if (this.variationBasketQuantity === 0)
             {
-                // reset minimum, when item is not in the basket
+                // reset the minimum, when item is not in the basket
                 this.compMin = this.min;
             }
 
