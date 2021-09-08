@@ -7,6 +7,7 @@ let gRecaptchaApiLoaded;
 
 import { whenConsented } from "../../helper/whenConsented";
 
+
 export default {
 
     name: "recaptcha",
@@ -23,6 +24,15 @@ export default {
     {
         this.$nextTick(() =>
         {
+            this.checkConsent();
+            document.addEventListener("consent-change", () => this.checkConsent());
+        });
+    },
+
+    methods:
+    {
+        checkConsent()
+        {
             whenConsented(
                 "media.reCaptcha",
                 () =>
@@ -31,12 +41,10 @@ export default {
                 },
                 () =>
                 {
+                    // remove recaptcha when previously consented
                 });
-        });
-    },
+        },
 
-    methods:
-    {
         createScript()
         {
             if (!this.apiKey || window.grecaptcha)
