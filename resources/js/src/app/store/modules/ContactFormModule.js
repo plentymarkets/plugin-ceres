@@ -137,7 +137,7 @@ const actions =
 
             if (!window.grecaptcha || !recaptchaEl)
             {
-                NotificationService.error(TranslationService.translate("contactAccepctRecaptchaCookie"));
+                NotificationService.error(TranslationService.translate("contactAcceptRecaptchaCookie"));
                 return;
             }
 
