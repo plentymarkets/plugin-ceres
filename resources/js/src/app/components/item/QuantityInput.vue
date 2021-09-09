@@ -222,6 +222,11 @@ export default {
             {
                 this.setValue(newValue);
             }
+        },
+
+        interval(newInterval)
+        {
+            this.compInterval = defaultValue(newInterval, 1)
         }
     },
 

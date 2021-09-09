@@ -351,7 +351,6 @@ export default {
     {
         this.$nextTick(() =>
         {
-            this.$store.dispatch("addLastSeenItem", this.currentVariation.variation.id);
             this.$store.dispatch(`${this.itemId}/variationSelect/setVariationSelect`, {
                 itemId:             this.itemId,
                 attributes:         this.attributesData,

@@ -31,11 +31,13 @@ context("category", () =>
         cy.getByTestingAttr("category-toolbar-filter").click();
         cy.get(".widget-filter-price").find("input").first().type("400", { delay: 30 });
         cy.get(".widget-filter-price").find("button").click();
+        cy.wait(100);
         cy.get(".product-list").children().each((product) =>
         {
             cy.get(product).find(".price").invoke("text").then((text) =>
             {
-                let priceTotals = +text.replace(/[^0-9\,\.]+/g, "").replace(",", ".");
+                const priceTotals = +text.replace(/[^0-9\,\.]+/g, "").replace(",", ".");
+
                 expect(priceTotals >= 400).to.be.true;
             });
         });
@@ -50,7 +52,8 @@ context("category", () =>
         {
             cy.get(product).find(".price").invoke("text").then((text) =>
             {
-                let priceTotals = +text.replace(/[^0-9\,\.]+/g, "").replace(",", ".");
+                const priceTotals = +text.replace(/[^0-9\,\.]+/g, "").replace(",", ".");
+
                 expect(priceTotals <= 0.01).to.be.true;
             });
         });

@@ -52,7 +52,7 @@ context("Header topbar registration", () =>
 
         const password = "Testuser1234";
 
-        cy.getByTestingAttr("mail-register").type("plentytest@plenty.de", { delay: 40 });
+        cy.getByTestingAttr("mail-register").type("x").clear().type("plentytest@plenty.de", { delay: 40 });
         cy.getByTestingAttr("password-register").type(password, { delay: 30 });
         cy.getByTestingAttr("repeat-password-register").type(password, { delay: 30 });
         cy.getByTestingAttr("privacy-policy-accept-register").click();

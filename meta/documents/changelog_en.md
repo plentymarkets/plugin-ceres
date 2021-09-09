@@ -1,5 +1,51 @@
 # Release Notes for Ceres
 
+## v5.0.38 (2021-08-31) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.37...5.0.38" target="_blank" rel="noopener"><b>Overview of all changes<</b></a>
+
+### Changed
+
+- For the changing of payment methods, the `accessKey` for the order is now also passed. 
+
+### Fixed
+
+- The interval order quantity of the quantity input is now updated when the user changes the variation.
+- Using external search service providers could lead to the faulty display of search results in the frontend, due to an error on part of the search provider. This has been fixed.
+- Under certain circumstances, images could not be displayed in the browser Internet Explorer 11. This has been fixed.
+- The placeholders for "item text", "technical data", and for text properties are now output as block elements by ShopBuilder, therefore no longer creating invalid HTML.
+
+## v5.0.37 (2021-08-17) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.36...5.0.37" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
+
+### Fixed
+
+- Due to an error, line breaks were included in the inline styles of the background image widget. These have been removed.
+- If server-side rendering was active, the filter tool bar could not be opened on category pages that had not been created with ShopBuilder. This has been fixed.
+- If server-side rendering was active, the toggles of the cookie bar could not be used in certain cases. This has been fixed.
+- All values of properties of the type **Multiselect** can now be displayed in plentyShop.
+
+### Changed templates
+
+- In Ceres 5.0.37 we made a change to a template file which is relevant for theme developers. You can find the changed template below. The link directs you to the effected changes in the corresponding file.
+- [resources/views/Widgets/Common/BackgroundWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2995/files#diff-bd9967b42e5604fbd1cc0034b2ed9fbc4bb18113880fe371167076f046aee956)
+- [resources/js/src/app/components/itemList/filter/ItemFilterList.vue](https://github.com/plentymarkets/plugin-ceres/pull/3000/files#diff-e9e66af238168dbc3f834944944094a491bee28d6d7016c8e9365b673872a82b)
+- [resources/js/src/app/components/pageDesign/CookieBar.vue](https://github.com/plentymarkets/plugin-ceres/pull/3000/files#diff-07203a2a14f4fdfe0285c115db84358b9b18bbe84d3ab3536f80b667529b7392)
+
+## v5.0.36 (2021-08-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.35...5.0.36" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Changed
+
+- The loading of customer data, the shopping cart, and shopping cart items are now subsumed under a single query.
+- Variation properties on the single item view in the ShopBuilder and the plentyShop are now loaded via the new new repositories for variation properties.
+
+### Fixed
+
+- After changing the country of delivery in the header, the newly selected country of delivery was not saved. This has been fixed.
+- Deactivating the currency selection in the plentyShop Ceres assistant deactivated all available currencies. This has been fixed.
+- In plentyShops that didn't use server-side rendering, images in inactive tabs of the tab widget for which the option **Only load visible content** was active, were already loaded when the page was accessed. This has been fixed.
+
 ## v5.0.35 (2021-07-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.34...5.0.35" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO

@@ -76,11 +76,7 @@ export default {
 
     beforeMount()
     {
-        // SingleItem executes a PUT on the route, which already returns the data fetched here
-        if (!App.isItemView)
-        {
-            this.$store.dispatch("getLastSeenItems");
-        }
+        this.$store.dispatch("getLastSeenItems");
     },
 
     mounted()

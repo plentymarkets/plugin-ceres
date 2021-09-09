@@ -1,5 +1,52 @@
 # Release Notes für Ceres
 
+## v5.0.38 (2021-08-31) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.37...5.0.38" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Zum Ändern der Zahlungsart wird nun zusätzlich der `accessKey` für den Auftrag übergeben.
+
+### Behoben
+
+- Die Intervallbestellmenge in der Mengeneingabe wird nun aktualisiert, sobald die Variante gewechselt wird.
+- Bei der Verwendung von externen Suchanbietern konnte es bei einem Fehlerfall auf externer Seite zu fehlerhaften Darstellung im Frontend kommen. Dies wurde behoben.
+- Im Internet Explorer 11 wurden unter bestimmten Umständen Bilder nicht angezeigt. Dies wurde behoben.
+- Die Platzhalter für "Artikeltext", "Technische Daten" und für Texteigenschaften werden nun vom ShopBuilder als Block-Elemente ausgegeben und erzeugen so kein ungültiges HTML mehr.
+
+## v5.0.37 (2021-08-17) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.36...5.0.37" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+
+### Behoben
+
+- Es wurden fälschlicherweise Zeilenumbrüche in den Inline-Styles des Hintergrundbild-Widgets eingefügt. Diese wurden entfernt.
+- Bei aktivem Server-Side Rendering konnte die Filter-Toolbar auf einer Kategorieseite, die nicht über den ShopBuilder gebaut wurde, nicht geöffnet werden. Dies wurde behoben.
+- Bei aktivem Server-Side Rendering ließ sich die Cookie Bar in bestimmten Fällen nicht benutzen. Dies wurde behoben.
+- Es können jetzt alle Werte der Eigenschaften vom Typ **Mehrfachauswahl** im plentyShop angezeigt werden.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.37 gab es Änderungen an einer Template-Datei, die für Theme-Entwickler relevant ist. Die Verlinkung führt direkt zu der umgesetzten Änderung in der entsprechenden Datei.
+- [resources/views/Widgets/Common/BackgroundWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2995/files#diff-bd9967b42e5604fbd1cc0034b2ed9fbc4bb18113880fe371167076f046aee956)
+- [resources/js/src/app/components/itemList/filter/ItemFilterList.vue](https://github.com/plentymarkets/plugin-ceres/pull/3000/files#diff-e9e66af238168dbc3f834944944094a491bee28d6d7016c8e9365b673872a82b)
+- [resources/js/src/app/components/pageDesign/CookieBar.vue](https://github.com/plentymarkets/plugin-ceres/pull/3000/files#diff-07203a2a14f4fdfe0285c115db84358b9b18bbe84d3ab3536f80b667529b7392)
+
+
+## v5.0.36 (2021-08-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.35...5.0.36" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Das Laden von Kundendaten, Warenkorb und Warenkorb-Artikeln wurde unter einer Abfrage zusammengefasst.
+- Varianteneigenschaften auf der Artikeldetailseite werden nun im ShopBuilder und im plentyShop über die neuen Repositories für Varianteneigenschaften geladen.
+
+### Behoben
+
+- Beim Ändern des Lieferlands im Header wurde die Auswahl nicht gespeichert. Dies wurde behoben.
+- Wenn die Währungsauswahl im plentyShop Ceres-Assistenten deaktiviert wurde, wurden alle verfügbaren Währungen für den Webshop deaktiviert. Dies wurde behoben.
+- Bei plentyShops, bei denen Server-Side Rendering inaktiv war, wurden Bilder, die in inaktiven Tabs eines Tab-Widgets positioniert waren und für die die Option **Nur sichtbare Inhalte laden** aktiviert war, direkt beim Seitenaufruf geladen. Dies wurde behoben.
+
 ## v5.0.35 (2021-07-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.34...5.0.35" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
@@ -313,7 +360,7 @@
 ## v5.0.25 (2021-03-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.24...5.0.25" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Geändert
--Der letzte Paragraph des Text-Widgets zum Inline-Editing besaß einen Außenabstand nach unten. Hierdurch war es nicht möglich, ein Text-Widget ohne unteren Abstand zu platzieren. Dieser wurde daher entfernt.
+- Der letzte Paragraph des Text-Widgets zum Inline-Editing besaß einen Außenabstand nach unten. Hierdurch war es nicht möglich, ein Text-Widget ohne unteren Abstand zu platzieren. Dieser wurde daher entfernt.
 - Bei der Ausgabe der Übersetzungen für "Brutto" (Ceres::Template.checkoutGross) und "Netto" (Ceres::Template.checkoutNet) wurden in den Summen Klammern angezeigt, die sich nicht entfernen ließen. Die Klammern wurden in die Übersetzung überführt und können zukünftig entfernt werden.
 -Beim Wechsel der Anrede in der Adressauswahl werden die Felder nur noch geleert, wenn man zwischen einer Personen-Anrede und einer Firma wechselt.
 
@@ -421,7 +468,7 @@
 
 ### TODO
 
-- Falls dein Theme die CSS-Eigenschaft `position:sticky` verwendet, musst du die `overflow-x: hidden` Eigenschaft im `.app` Container überschreiben um die Funktion der Stickys-Eigenschaft zu erhalten. plentyShops ohne eigenes Theme sind hiervon nicht betroffen.
+- Falls dein Theme die CSS-Eigenschaft `position:sticky` verwendet, musst du die `overflow-x: hidden` Eigenschaft im `.app` Container überschreiben, um die Funktion der Sticky-Eigenschaft zu erhalten. plentyShops ohne eigenes Theme sind hiervon nicht betroffen.
 
 ### Geändert
 
@@ -642,7 +689,7 @@
 ### TODO
 - Die Einstellungen der Kategorie Startseite für die Meta-Beschreibung und -Keywords werden jetzt berücksichtigt und müssen ggf. aus dem Bereich **CMS » Mehrsprachigkeit** übernommen werden.
 - Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
-- Wenn der Platzhalter für die Zolltarifnummer auf der Artikelansicht im ShopBuilder verwendet wird, muss dieser einmal entfernt und erneut eignefügt werden.
+- Wenn der Platzhalter für die Zolltarifnummer auf der Artikelansicht im ShopBuilder verwendet wird, muss dieser einmal entfernt und erneut eingefügt werden.
 
 ### Geändert
 

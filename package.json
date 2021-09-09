@@ -1,7 +1,7 @@
 {
   "name": "Ceres",
   "license": "AGPL-3.0",
-  "version": "5.0.35",
+  "version": "5.0.38",
   "repository": {
     "type": "git",
     "url": "https://github.com/plentymarkets/plugin-ceres.git"
@@ -39,7 +39,7 @@
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.3",
-    "cypress": "^7.5.0",
+    "cypress": "^8.1.0",
     "cypress-file-upload": "^4.1.1",
     "del": "^2.2.0",
     "eslint": "^6.8.0",
@@ -68,7 +68,7 @@
   "dependencies": {
     "bootstrap": "4.4.1",
     "core-js": "^3.6.5",
-    "custom-event-polyfill": "^0.3.0",
+    "custom-event-polyfill": "^1.0.0",
     "dayjs": "^1.8.26",
     "detect-browser": "^4.8.0",
     "flag-icon-css": "^2.9.0",
@@ -78,8 +78,8 @@
     "owl.carousel": "2.2.0",
     "popper.js": "^1.16.1",
     "vue": "^2.6.12",
-    "vue-template-compiler": "^2.6.12",
     "vue-lazy-hydration": "^2.0.0-beta.4",
+    "vue-template-compiler": "^2.6.12",
     "vuex": "^3.3.0"
   }
 }

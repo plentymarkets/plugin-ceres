@@ -9,6 +9,7 @@ use Plenty\Modules\Webshop\ItemSearch\SearchPresets\Facets;
 use Plenty\Modules\Webshop\ItemSearch\SearchPresets\SearchItems;
 use Plenty\Modules\Webshop\ItemSearch\SearchPresets\VariationList;
 use Plenty\Modules\Webshop\ItemSearch\Services\ItemSearchService;
+use Plenty\Plugin\Log\Loggable;
 
 /**
  * Trait ItemListContext
@@ -19,6 +20,8 @@ use Plenty\Modules\Webshop\ItemSearch\Services\ItemSearchService;
  */
 trait ItemListContext
 {
+    use Loggable;
+
     /**
      * @var int $currentPage Current page of items.
      */
@@ -101,10 +104,21 @@ trait ItemListContext
             $externalSearch->categoryId = $options['categoryId'];
             $externalSearch->sorting = $this->itemSorting;
 
-            // emit event to perform external search
-            ExternalSearch::getExternalResults($externalSearch);
+            $successfully = true;
+            try {
+                // emit event to perform external search
+                ExternalSearch::getExternalResults($externalSearch);
+            } catch (\Exception $exception) {
+                $successfully = false;
+                $this->getLogger(__METHOD__)->error('Error on executing external search.', [
+                    'message' => $exception->getMessage(),
+                    'options' => $options
+                ]);
+                $this->getLogger(__METHOD__)->logException($exception, 10);
+            }
 
-            if ($externalSearch->hasResults()) {
+
+            if ($successfully && $externalSearch->hasResults()) {
                 $this->pageMax = 1;
                 $this->itemCountTotal = 0;
                 $this->itemCountPage = 0;

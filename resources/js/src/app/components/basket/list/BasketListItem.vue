@@ -65,6 +65,11 @@
                                         <span v-if="property.cast === 'file'">
                                             <a :href="property.values.value | propertyFileUrl" v-html="property.values.value" target="_blank"></a>
                                         </span>
+                                        <template v-else-if="property.cast === 'multiSelection' && property.values[0] !== undefined">
+                                            <ul class="pl-3">
+                                                <li v-for="multiSelectProperty in property.values">{{ multiSelectProperty.value }}</li>
+                                            </ul>
+                                        </template>
                                         <span v-else v-html="property.values.value"></span>
                                     </div>
                                 </template>

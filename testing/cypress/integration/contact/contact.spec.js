@@ -18,11 +18,13 @@ context("Contact Page", () =>
 
     it("should check for Google Maps iFrame", () =>
     {
+        cy.getByTestingAttr("cookie-bar-accept-all").click();
         cy.get(".widget-google-maps iframe").its("0.contentDocument").should("exist");
     });
 
     it("should check form for error if recquired fields are empty and privacy policy is not checked", () =>
     {
+        cy.wait(50);
         cy.getByTestingAttr("send-contact-form").click();
         cy.get(".widget-mail-input .input-unit").should("have.class", "error").and("have.class", "required");
         cy.get(".contact-form-subject .input-unit").should("have.class", "error").and("have.class", "required");

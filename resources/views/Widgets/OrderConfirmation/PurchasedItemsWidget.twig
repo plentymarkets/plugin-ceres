@@ -278,6 +278,12 @@
                                         <span>
                                             {{ Twig.if('property.cast == "file"') }}
                                                 <a :href="'{{ Twig.print("property.values.value") }}' | propertyFileUrl" v-html="'{{ Twig.print("property.values.value") }}'" target="_blank"></a>
+                                            {{ Twig.elseif('property.cast == "multiSelection" and property.values[0] is defined') }}
+                                                <ul class="pl-3">
+                                                    {{ Twig.for("multiSelectProperty", "property.values") }}
+                                                        <li>{{ Twig.print("multiSelectProperty.value | raw") }}</li>
+                                                    {{ Twig.endfor() }}
+                                                </ul>
                                             {{ Twig.else() }}
                                                 {{ Twig.print("property.values.value | raw") }}
                                             {{ Twig.endif() }}
