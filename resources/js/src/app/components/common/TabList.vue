@@ -111,7 +111,8 @@ export default {
             {
                 staticClass: "tab-content"
             },
-            [this.$slots.default.filter(tab => !!tab.componentOptions)]
+            [(this.$slots.default || [])
+                .filter(tab => !!tab.componentOptions)]
         );
 
         tabListElements.push(content);
