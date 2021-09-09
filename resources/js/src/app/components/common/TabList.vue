@@ -181,14 +181,12 @@ export default {
         getVisibleTabs()
         {
             // filter visible tabs
-            const tabs = this.tabComponents.filter((tab) =>
+            return this.tabComponents.filter((tab) =>
             {
                 return isDefined(tab) &&
                     isDefined(tab.$slots.default) &&
                     (this.renderEmpty || this.filterContent(tab));
             });
-
-            return tabs;
         },
 
         activateTab(tab)
@@ -209,7 +207,7 @@ export default {
          */
         filterContent(tab)
         {
-            return tab.$el.textContent.trim().length > 0 || tab.$el.querySelector("img, iframe");
+            return tab.$el.textContent.trim().length > 0 || tab.$el.querySelector("img, iframe, picture");
         }
     }
 }
