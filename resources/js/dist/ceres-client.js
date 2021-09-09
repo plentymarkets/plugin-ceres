@@ -645,7 +645,7 @@ var TabNavItem = {
 
     var content = createElement("div", {
       staticClass: "tab-content"
-    }, [this.$slots.default.filter(function (tab) {
+    }, [(this.$slots.default || []).filter(function (tab) {
       return !!tab.componentOptions;
     })]);
     tabListElements.push(content);
@@ -702,10 +702,9 @@ var TabNavItem = {
       var _this4 = this;
 
       // filter visible tabs
-      var tabs = this.tabComponents.filter(function (tab) {
+      return this.tabComponents.filter(function (tab) {
         return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_6__["isDefined"])(tab) && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_6__["isDefined"])(tab.$slots.default) && (_this4.renderEmpty || _this4.filterContent(tab));
       });
-      return tabs;
     },
     activateTab: function activateTab(tab) {
       var activeTab = this.tabComponents.find(function (tab) {
@@ -723,7 +722,7 @@ var TabNavItem = {
      * @param {*} tab
      */
     filterContent: function filterContent(tab) {
-      return tab.$el.textContent.trim().length > 0 || tab.$el.querySelector("img, iframe");
+      return tab.$el.textContent.trim().length > 0 || tab.$el.querySelector("img, iframe, picture");
     }
   }
 });
