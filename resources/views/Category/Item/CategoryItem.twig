@@ -113,19 +113,22 @@
                     {% if itemList is not empty %}
                         <ul class="product-list row grid">
                             {% for item in itemList %}
-                                <li class="col-12 col-sm-6 col-md-4 col-lg-{% if category is defined and ceresConfig.header.showNavBars in ["side", "both"] %}4{% else %}3{% endif %}">
-                                    <category-item
-                                        item-data-ref="{{ item.data | json_data }}"
-                                        :decimal-count="{{ ceresConfig.item.storeSpecial }}">
-                                        <template #before-prices>{{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}</template>
-                                        <template #after-prices>{{ LayoutContainer.show("Ceres::CategoryItem.AfterPrices", item.data) }}</template>
+                                {% cacheblock %}
+                                    {% cachewatch item as item %}
+                                    <li class="col-12 col-sm-6 col-md-4 col-lg-{% if category is defined and ceresConfig.header.showNavBars in ["side", "both"] %}4{% else %}3{% endif %}">
+                                        <category-item
+                                            item-data-ref="{{ item.data | json_data }}"
+                                            :decimal-count="{{ ceresConfig.item.storeSpecial }}">
+                                            <template #before-prices>{{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}</template>
+                                            <template #after-prices>{{ LayoutContainer.show("Ceres::CategoryItem.AfterPrices", item.data) }}</template>
 
-                                        <a href="{{ item.data | itemURL }}" class="small">
-                                            <i class="fa fa-image"></i>
-                                            <span>{{ item.data | itemName }}</span>
-                                        </a>
-                                    </category-item>
-                                </li>
+                                            <a href="{{ item.data | itemURL }}" class="small">
+                                                <i class="fa fa-image"></i>
+                                                <span>{{ item.data | itemName }}</span>
+                                            </a>
+                                        </category-item>
+                                    </li>
+                                {% endcacheblock %}
                             {% endfor %}
                         </ul>
                     {% endif %}
