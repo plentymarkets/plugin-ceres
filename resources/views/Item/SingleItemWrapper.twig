@@ -104,6 +104,7 @@
 {% endblock %}
 
 {% block PageBody %}
+    {% cachewatch item.documents[0] as item %}
     {{ set_item_data_base(item.documents[0].data) }}
 
     {% set shopBuilderTemplate = "" %}
