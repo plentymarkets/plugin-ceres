@@ -3084,7 +3084,7 @@ var TabNavItem = {
 
     var content = createElement("div", {
       staticClass: "tab-content"
-    }, [(this.$slots.default || []).filter(function (tab) {
+    }, [this.$slots.default.filter(function (tab) {
       return !!tab.componentOptions;
     })]);
     tabListElements.push(content);
@@ -3141,9 +3141,10 @@ var TabNavItem = {
       var _this4 = this;
 
       // filter visible tabs
-      return this.tabComponents.filter(function (tab) {
+      var tabs = this.tabComponents.filter(function (tab) {
         return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_6__["isDefined"])(tab) && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_6__["isDefined"])(tab.$slots.default) && (_this4.renderEmpty || _this4.filterContent(tab));
       });
+      return tabs;
     },
     activateTab: function activateTab(tab) {
       var activeTab = this.tabComponents.find(function (tab) {
@@ -3161,7 +3162,7 @@ var TabNavItem = {
      * @param {*} tab
      */
     filterContent: function filterContent(tab) {
-      return tab.$el.textContent.trim().length > 0 || tab.$el.querySelector("img, iframe, picture");
+      return tab.$el.textContent.trim().length > 0 || tab.$el.querySelector("img, iframe");
     }
   }
 });
@@ -8537,13 +8538,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       value = Object(_helper_number__WEBPACK_IMPORTED_MODULE_11__["limit"])(value, this.compMin, this.compMax); // make sure, new value is an even multiple of interval
 
-      var diff;
-
-      if (this.variationBasketQuantity === 0 && this.min !== 0) {
-        diff = Object(_helper_number__WEBPACK_IMPORTED_MODULE_11__["formatFloat"])((value - this.min) % this.compInterval, this.compDecimals, true);
-      } else {
-        diff = Object(_helper_number__WEBPACK_IMPORTED_MODULE_11__["formatFloat"])(value % this.compInterval, this.compDecimals, true);
-      }
+      var diff = Object(_helper_number__WEBPACK_IMPORTED_MODULE_11__["formatFloat"])((value - this.min) % this.compInterval, this.compDecimals, true);
 
       if (diff > 0 && diff !== this.compInterval) {
         if (diff < this.compInterval / 2) {
@@ -8567,10 +8562,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     fetchQuantityFromBasket: function fetchQuantityFromBasket() {
       if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isNullOrUndefined"])(this.min) && this.variationBasketQuantity >= this.min && this.variationBasketQuantity !== 0) {
-        // set the minimum value to the interval, if the item is already in the basket
-        this.compMin = this.compInterval;
+        this.compMin = this.min % this.compInterval || this.compInterval;
       } else if (this.variationBasketQuantity === 0) {
-        // reset the minimum, when item is not in the basket
         this.compMin = this.min;
       }
 
