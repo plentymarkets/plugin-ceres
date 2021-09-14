@@ -21,6 +21,14 @@ export default Vue.component("order-return-history-list-item", {
         }
     },
 
+    computed:
+    {
+        useVariationOrderProperties()
+        {
+            return !!App.useVariationOrderProperties;
+        }
+    },
+
     data()
     {
         return {
