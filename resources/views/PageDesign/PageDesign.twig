@@ -201,7 +201,7 @@
         "initialPleaseSelect": {{ webstoreConfig.attributeSelectDefaultOption | default(0) }},
         "publicPath": "{{ plugin_path('Ceres') ~ '/js/dist/' }}",
         "isCheapestSorting": "{{ services.template.isCheapestSorting() }}",
-        "useVariationOrderProperties": {{ webstoreConfig.useVariationOrderProperties | default(0) }},
+        "useVariationOrderProperties": {% if webstoreConfig.useVariationOrderProperties | default(0) %}true{% else %}false{% endif %},
         "initialData": {
             "shippingCountries": {{ services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name", "vatCodes"]) | json_encode | raw }},
             "shippingCountryId": {{ services.checkout.getShippingCountryId() }},
