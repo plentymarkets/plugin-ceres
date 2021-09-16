@@ -1,5 +1,17 @@
 # Release Notes für Ceres
 
+## v5.0.39 (2021-09-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.38...5.0.39" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Das Kontaktformular lässt sich nun bei aktiviertem reCaptcha nicht mehr absenden, wenn der entsprechende Cookie nicht akzeptiert wurde.
+
+### Behoben
+
+- Die Mengeneingabe auf der Artikelansicht ignoriert nun den Mindestbestellwert, falls der betreffende Artikel bereits im Warenkorb vorhanden ist.
+- Tabs werden wieder richtig angezeigt, auch wenn sie nur ein Bilder-Widget enthalten.
+- Wenn Eigenschaften mehreren Gruppen zugeordnet waren, kam es zu Problemen wenn diese über die Datenfeldauswahl in die ShopBuilder-Vorlage eingebaut wurden. Dieses Verhalten wurde behoben.
+
 ## v5.0.38 (2021-08-31) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.37...5.0.38" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Geändert

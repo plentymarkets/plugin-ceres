@@ -731,7 +731,7 @@ var TabNavItem = {
 
     var content = createElement("div", {
       staticClass: "tab-content"
-    }, [this.$slots.default.filter(function (tab) {
+    }, [(this.$slots.default || []).filter(function (tab) {
       return !!tab.componentOptions;
     })]);
     tabListElements.push(content);
@@ -788,10 +788,9 @@ var TabNavItem = {
       var _this4 = this;
 
       // filter visible tabs
-      var tabs = this.tabComponents.filter(function (tab) {
+      return this.tabComponents.filter(function (tab) {
         return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_6__["isDefined"])(tab) && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_6__["isDefined"])(tab.$slots.default) && (_this4.renderEmpty || _this4.filterContent(tab));
       });
-      return tabs;
     },
     activateTab: function activateTab(tab) {
       var activeTab = this.tabComponents.find(function (tab) {
@@ -809,7 +808,7 @@ var TabNavItem = {
      * @param {*} tab
      */
     filterContent: function filterContent(tab) {
-      return tab.$el.textContent.trim().length > 0 || tab.$el.querySelector("img, iframe");
+      return tab.$el.textContent.trim().length > 0 || tab.$el.querySelector("img, iframe, picture");
     }
   }
 });
@@ -850,16 +849,26 @@ var gRecaptchaApiLoaded;
     var _this = this;
 
     this.$nextTick(function () {
-      Object(_helper_whenConsented__WEBPACK_IMPORTED_MODULE_2__["whenConsented"])("media.reCaptcha", function () {
-        _this.createScript().then(function () {
-          return _this.initializeV3();
-        });
-      }, function () {});
+      _this.checkConsent();
+
+      document.addEventListener("consent-change", function () {
+        return _this.checkConsent();
+      });
     });
   },
   methods: {
-    createScript: function createScript() {
+    checkConsent: function checkConsent() {
       var _this2 = this;
+
+      Object(_helper_whenConsented__WEBPACK_IMPORTED_MODULE_2__["whenConsented"])("media.reCaptcha", function () {
+        _this2.createScript().then(function () {
+          return _this2.initializeV3();
+        });
+      }, function () {// remove recaptcha when previously consented
+      });
+    },
+    createScript: function createScript() {
+      var _this3 = this;
 
       if (!this.apiKey || window.grecaptcha) {
         return Promise.resolve();
@@ -870,8 +879,8 @@ var gRecaptchaApiLoaded;
           var script = document.createElement("script");
           var scriptSource;
 
-          if (_this2.version === 3) {
-            scriptSource = "https://www.google.com/recaptcha/api.js?render=".concat(_this2.apiKey);
+          if (_this3.version === 3) {
+            scriptSource = "https://www.google.com/recaptcha/api.js?render=".concat(_this3.apiKey);
           } else {
             scriptSource = "https://www.google.com/recaptcha/api.js";
           }
@@ -892,16 +901,16 @@ var gRecaptchaApiLoaded;
       return gRecaptchaApiLoaded;
     },
     initializeV3: function initializeV3() {
-      var _this3 = this;
+      var _this4 = this;
 
       if (window.grecaptcha) {
         window.grecaptcha.ready(function () {
-          if (_this3.version !== 3) {
-            _this3.$el.dataset.recaptcha = window.grecaptcha.render(_this3.$el, {
-              sitekey: _this3.apiKey,
+          if (_this4.version !== 3) {
+            _this4.$el.dataset.recaptcha = window.grecaptcha.render(_this4.$el, {
+              sitekey: _this4.apiKey,
               size: "invisible",
               badge: "bottomright",
-              callback: _this3.recaptchaCallback.bind(_this3)
+              callback: _this4.recaptchaCallback.bind(_this4)
             });
           }
         });
@@ -64306,7 +64315,7 @@ function encodeParams(params, prefix) {
     return encodeURIComponent(params);
   }
 
-  return prefix + "=" + encodeURIComponent(params);
+  return encodeURIComponent(prefix) + "=" + encodeURIComponent(params);
 }
 function setUrlByItem(itemData, keepVariationId) {
   var url = vueApp.$options.filters.itemURL(itemData, keepVariationId);
@@ -66232,6 +66241,12 @@ var actions = {
     }
 
     var recaptchaEl = event.target.querySelector("[data-recaptcha]");
+
+    if (App.config.global.googleRecaptchaApiKey && (!window.grecaptcha || !recaptchaEl)) {
+      _services_NotificationService__WEBPACK_IMPORTED_MODULE_14__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_15__["default"].translate("Ceres::Template.contactAcceptRecaptchaCookie"));
+      return;
+    }
+
     Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_18__["executeReCaptcha"])(event.target).then(function (recaptchaResponse) {
       _services_ValidationService__WEBPACK_IMPORTED_MODULE_13__["default"].validate(event.target).done(function () {
         disableForm(event.target, true);
