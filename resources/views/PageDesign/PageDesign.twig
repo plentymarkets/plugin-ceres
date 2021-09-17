@@ -246,6 +246,17 @@
 {% if isItem %}
     {{ LayoutContainer.show("Ceres::SingleItem.AfterScriptsLoaded") }}
 {% endif %}
+<!-- SSR:template(category-item) -->
+<script type="x/template" data-component="category-item">
+    <article class="cmp cmp-product-thumb">
+        <div class="thumb-inner" :class="paddingClasses" :style="paddingInlineStyles">
+
+            <h1>Override!</h1>
+
+        </div>
+    </article>
+</script>
+<!-- /SSR -->
 
 <!-- SSR:on() -->
 <script>
