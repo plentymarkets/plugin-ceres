@@ -57,7 +57,7 @@
 }
 
 .autocomplete-suggestion:nth-child(n + #{$autocomplete-max-items + 1}),
-.widget-inner-stacked .autocomplete-suggestion:nth-child(n + #{($autocomplete-max-items / 2)}) {
+.widget-inner-stacked .autocomplete-suggestion:nth-child(n + #{($autocomplete-max-items * 0.5)}) {
     display: none;
 }
 

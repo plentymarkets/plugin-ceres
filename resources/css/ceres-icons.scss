@@ -1,6 +1,9 @@
 //
 // Fonts
 //
+@use "sass:math";
+@use "sass:list";
+
 $root-directory:            ".." !default;
 
 $flag-icon-css-path:        "#{$root-directory}/images/flags" !default;
@@ -21,7 +24,7 @@ $fa-css-prefix:       fa !default;
 $fa-version:          "4.7.0" !default;
 $fa-border-color:     #eee !default;
 $fa-inverse:          #fff !default;
-$fa-li-width:         (30em / 14) !default;
+$fa-li-width:         math.div(30em, 14) !default;
 
 $fa-var-500px: "\f26e";
 $fa-var-address-book: "\f2b9";
@@ -816,7 +819,7 @@ $fa-var-youtube-square: "\f166";
 
 @mixin fa-icon() {
   display: inline-block;
-  font: normal normal normal #{$fa-font-size-base}/#{$fa-line-height-base} FontAwesome; // shortening font declaration
+  font: normal normal normal list.slash($fa-font-size-base, $fa-line-height-base) FontAwesome; // shortening font declaration
   font-size: inherit; // can't have font-size inherit on line above, so need to override
   text-rendering: auto; // optimizelegibility throws things off #1094
   -webkit-font-smoothing: antialiased;
@@ -886,7 +889,7 @@ $fa-var-youtube-square: "\f166";
 
 .#{$fa-css-prefix} {
   display: inline-block;
-  font: normal normal normal #{$fa-font-size-base}/#{$fa-line-height-base} FontAwesome; // shortening font declaration
+  font: normal normal normal list.slash($fa-font-size-base, $fa-line-height-base) FontAwesome; // shortening font declaration
   font-size: inherit; // can't have font-size inherit on line above, so need to override
   text-rendering: auto; // optimizelegibility throws things off #1094
   -webkit-font-smoothing: antialiased;
@@ -899,8 +902,8 @@ $fa-var-youtube-square: "\f166";
 
 /* makes the font 33% larger relative to the icon container */
 .#{$fa-css-prefix}-lg {
-  font-size: (4em / 3);
-  line-height: (3em / 4);
+  font-size: math.div(4em, 3);
+  line-height: (3em * 0.25);
   vertical-align: -15%;
 }
 .#{$fa-css-prefix}-2x { font-size: 2em; }
@@ -911,7 +914,7 @@ $fa-var-youtube-square: "\f166";
 // Fixed Width Icons
 // -------------------------
 .#{$fa-css-prefix}-fw {
-  width: (18em / 14);
+  width: math.div(18em, 14);
   text-align: center;
 }
 
@@ -928,10 +931,10 @@ $fa-var-youtube-square: "\f166";
   position: absolute;
   left: -$fa-li-width;
   width: $fa-li-width;
-  top: (2em / 14);
+  top: math.div(2em, 14);
   text-align: center;
   &.#{$fa-css-prefix}-lg {
-    left: -$fa-li-width + (4em / 14);
+    left: -$fa-li-width + math.div(4em, 14);
   }
 }
 
@@ -1850,7 +1853,7 @@ $flag-icon-square-path: '/1x1' !default;
   @extend .flag-icon-background;
   position: relative;
   display: inline-block;
-  width: (4 / 3) * 1em;
+  width: math.div(4, 3) * 1em;
   line-height: 1em;
   &:before {
     content: '\00a0';

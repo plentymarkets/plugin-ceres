@@ -1,3 +1,5 @@
+@use "sass:math";
+
 [class^="prop-"] {
     position: relative;
     width: 100% !important; // stylelint-disable-line declaration-no-important
@@ -12,7 +14,7 @@
         @each $i in 1, 2, 3 {
             @each $j in 1, 2, 3 {
                 .prop#{$infix}-#{$i}-#{$j} {
-                    padding-bottom: percentage($j / $i);
+                    padding-bottom: percentage(math.div($j, $i));
                 }
             }
         }

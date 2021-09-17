@@ -24,14 +24,14 @@ $border-width: 1px;
 .input-unit {
     position: relative;
     width: 100%;
-    margin-bottom: $grid-gutter-width/2;
+    margin-bottom: $grid-gutter-width*0.5;
     overflow: hidden;
     border: $border-width solid $border-color;
     border-radius: $border-radius;
 
     &.media-xs-d {
         @include media-breakpoint-down(xs) {
-            margin-bottom: $grid-gutter-width/2 !important;
+            margin-bottom: $grid-gutter-width*0.5 !important;
         }
     }
 
@@ -327,7 +327,7 @@ $border-width: 1px;
 }
 
 .input-feedback-container {
-    margin-bottom: $grid-gutter-width/2;
+    margin-bottom: $grid-gutter-width*0.5;
 
     .input-unit {
         margin-bottom: 0;

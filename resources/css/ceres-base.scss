@@ -4,6 +4,9 @@
 
 // Ascending
 // Used to evaluate Sass maps like our grid breakpoints.
+@use "sass:math";
+@use "sass:list";
+
 @mixin _assert-ascending($map, $map-name) {
   $prev-key: null;
   $prev-num: null;
@@ -65,7 +68,7 @@
   $g: green($color);
   $b: blue($color);
 
-  $yiq: (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
+  $yiq: (($r * 299) + ($g * 587) + ($b * 114)) * 0.001;
 
   @if ($yiq >= $yiq-contrasted-threshold) {
     @return $dark;
@@ -266,7 +269,7 @@ $list-inline-padding:       5px !default;
 //
 // Define common padding and border radius sizes and more.
 
-$line-height-lg:            (4 / 3) !default;
+$line-height-lg:            math.div(4, 3) !default;
 
 $border-radius:             .1rem !default;
 $border-radius-sm:          .15rem !default;
@@ -507,7 +510,7 @@ $shop-builder-colors: (
   $g: green($color);
   $b: blue($color);
 
-  $yiq: (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
+  $yiq: (($r * 299) + ($g * 587) + ($b * 114)) * 0.001;
 
   @if ($yiq >= $yiq-contrasted-threshold) {
     @return $dark;
@@ -880,7 +883,7 @@ $h4-font-size:                $font-size-base * 1.5 !default;
 $h5-font-size:                $font-size-base * 1.25 !default;
 $h6-font-size:                $font-size-base !default;
 
-$headings-margin-bottom:      $spacer / 2 !default;
+$headings-margin-bottom:      $spacer * 0.5 !default;
 $headings-font-family:        null !default;
 $headings-font-weight:        500 !default;
 $headings-line-height:        1.2 !default;
@@ -1075,7 +1078,7 @@ $input-height-border:                   $input-border-width * 2 !default;
 
 $input-height-inner:                    add($input-line-height * 1em, $input-padding-y * 2) !default;
 $input-height-inner-half:               add($input-line-height * .5em, $input-padding-y) !default;
-$input-height-inner-quarter:            add($input-line-height * .25em, $input-padding-y / 2) !default;
+$input-height-inner-quarter:            add($input-line-height * .25em, $input-padding-y * 0.5) !default;
 
 $input-height:                          add($input-line-height * 1em, add($input-padding-y * 2, $input-height-border, false)) !default;
 $input-height-sm:                       add($input-line-height-sm * 1em, add($input-padding-y-sm * 2, $input-height-border, false)) !default;
@@ -1145,7 +1148,7 @@ $custom-radio-indicator-border-radius:          50% !default;
 $custom-radio-indicator-icon-checked:           url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='-4 -4 8 8'><circle r='3' fill='#{$custom-control-indicator-checked-color}'/></svg>") !default;
 
 $custom-switch-width:                           $custom-control-indicator-size * 1.75 !default;
-$custom-switch-indicator-border-radius:         $custom-control-indicator-size / 2 !default;
+$custom-switch-indicator-border-radius:         $custom-control-indicator-size * 0.5 !default;
 $custom-switch-indicator-size:                  subtract($custom-control-indicator-size, $custom-control-indicator-border-width * 4) !default;
 
 $custom-select-padding-y:           $input-padding-y !default;
@@ -1291,12 +1294,12 @@ $nav-pills-link-active-color:       $component-active-color !default;
 $nav-pills-link-active-bg:          $component-active-bg !default;
 
 $nav-divider-color:                 $gray-200 !default;
-$nav-divider-margin-y:              $spacer / 2 !default;
+$nav-divider-margin-y:              $spacer * 0.5 !default;
 
 
 // Navbar
 
-$navbar-padding-y:                  $spacer / 2 !default;
+$navbar-padding-y:                  $spacer * 0.5 !default;
 $navbar-padding-x:                  $spacer !default;
 
 $navbar-nav-link-padding-x:         .5rem !default;
@@ -1305,7 +1308,7 @@ $navbar-brand-font-size:            $font-size-lg !default;
 // Compute the navbar-brand padding-y so the navbar-brand will have the same height as navbar-text and nav-link
 $nav-link-height:                   $font-size-base * $line-height-base + $nav-link-padding-y * 2 !default;
 $navbar-brand-height:               $navbar-brand-font-size * $line-height-base !default;
-$navbar-brand-padding-y:            ($nav-link-height - $navbar-brand-height) / 2 !default;
+$navbar-brand-padding-y:            ($nav-link-height - $navbar-brand-height) * 0.5 !default;
 
 $navbar-toggler-padding-y:          .25rem !default;
 $navbar-toggler-padding-x:          .75rem !default;
@@ -1419,7 +1422,7 @@ $card-bg:                           $white !default;
 
 $card-img-overlay-padding:          1.25rem !default;
 
-$card-group-margin:                 $grid-gutter-width / 2 !default;
+$card-group-margin:                 $grid-gutter-width * 0.5 !default;
 $card-deck-margin:                  $card-group-margin !default;
 
 $card-columns-count:                3 !default;
@@ -1769,10 +1772,10 @@ $rfs-base-font-size-unit: unit($rfs-base-font-size);
 
 // Remove px-unit from $rfs-base-font-size for calculations
 @if $rfs-base-font-size-unit == "px" {
-  $rfs-base-font-size: $rfs-base-font-size / ($rfs-base-font-size * 0 + 1);
+  $rfs-base-font-size: math.div($rfs-base-font-size, $rfs-base-font-size * 0 + 1);
 }
 @else if $rfs-base-font-size-unit == "rem" {
-  $rfs-base-font-size: $rfs-base-font-size / ($rfs-base-font-size * 0 + 1 / $rfs-rem-value);
+  $rfs-base-font-size: math.div($rfs-base-font-size, $rfs-base-font-size * 0 + math.div(1, $rfs-rem-value));
 }
 
 // Cache $rfs-breakpoint unit to prevent multiple calls
@@ -1780,10 +1783,10 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
 
 // Remove unit from $rfs-breakpoint for calculations
 @if $rfs-breakpoint-unit-cache == "px" {
-  $rfs-breakpoint: $rfs-breakpoint / ($rfs-breakpoint * 0 + 1);
+  $rfs-breakpoint: math.div($rfs-breakpoint, $rfs-breakpoint * 0 + 1);
 }
 @else if $rfs-breakpoint-unit-cache == "rem" or $rfs-breakpoint-unit-cache == "em" {
-  $rfs-breakpoint: $rfs-breakpoint / ($rfs-breakpoint * 0 + 1 / $rfs-rem-value);
+  $rfs-breakpoint: math.div($rfs-breakpoint, $rfs-breakpoint * 0 + math.div(1, $rfs-rem-value));
 }
 
 // Responsive font-size mixin
@@ -1805,15 +1808,15 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
 
     // Remove px-unit from $fs for calculations
     @if $fs-unit == "px" {
-      $fs: $fs / ($fs * 0 + 1);
+      $fs: math.div($fs, $fs * 0 + 1);
     }
     @else if $fs-unit == "rem" {
-      $fs: $fs / ($fs * 0 + 1 / $rfs-rem-value);
+      $fs: math.div($fs, $fs * 0 + math.div(1, $rfs-rem-value));
     }
 
     // Set default font-size
     @if $rfs-font-size-unit == rem {
-      $rfs-static: #{$fs / $rfs-rem-value}rem#{$rfs-suffix};
+      $rfs-static: #{math.div($fs, $rfs-rem-value)}rem#{$rfs-suffix};
     }
     @else if $rfs-font-size-unit == px {
       $rfs-static: #{$fs}px#{$rfs-suffix};
@@ -1829,20 +1832,20 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
       $variable-unit: null;
 
       // Calculate minimum font-size for given font-size
-      $fs-min: $rfs-base-font-size + ($fs - $rfs-base-font-size) / $rfs-factor;
+      $fs-min: $rfs-base-font-size + math.div($fs - $rfs-base-font-size, $rfs-factor);
 
       // Calculate difference between given font-size and minimum font-size for given font-size
       $fs-diff: $fs - $fs-min;
 
       // Base font-size formatting
       // No need to check if the unit is valid, because we did that before
-      $min-width: if($rfs-font-size-unit == rem, #{$fs-min / $rfs-rem-value}rem, #{$fs-min}px);
+      $min-width: if($rfs-font-size-unit == rem, #{math.div($fs-min, $rfs-rem-value)}rem, #{$fs-min}px);
 
       // If two-dimensional, use smallest of screen width and height
       $variable-unit: if($rfs-two-dimensional, vmin, vw);
 
       // Calculate the variable width between 0 and $rfs-breakpoint
-      $variable-width: #{$fs-diff * 100 / $rfs-breakpoint}#{$variable-unit};
+      $variable-width: #{math.div($fs-diff * 100, $rfs-breakpoint)}#{$variable-unit};
 
       // Set the calculated font-size.
       $rfs-fluid: calc(#{$min-width} + #{$variable-width}) #{$rfs-suffix};
@@ -1858,7 +1861,7 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
 
       // RFS breakpoint formatting
       @if $rfs-breakpoint-unit == em or $rfs-breakpoint-unit == rem {
-        $mq-value: #{$rfs-breakpoint / $rfs-rem-value}#{$rfs-breakpoint-unit};
+        $mq-value: #{math.div($rfs-breakpoint, $rfs-rem-value)}#{$rfs-breakpoint-unit};
       }
       @else if $rfs-breakpoint-unit == px {
         $mq-value: #{$rfs-breakpoint}px;
@@ -2653,7 +2656,7 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
 
       @if $enable-validation-icons {
         padding-right: $custom-select-feedback-icon-padding-right;
-        background: $custom-select-background, escape-svg($icon) $custom-select-bg no-repeat $custom-select-feedback-icon-position / $custom-select-feedback-icon-size;
+        background: $custom-select-background, escape-svg($icon) $custom-select-bg no-repeat math.div($custom-select-feedback-icon-position, $custom-select-feedback-icon-size);
       }
 
       &:focus {
@@ -2969,8 +2972,8 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
   %grid-column {
     position: relative;
     width: 100%;
-    padding-right: $gutter / 2;
-    padding-left: $gutter / 2;
+    padding-right: $gutter * 0.5;
+    padding-left: $gutter * 0.5;
   }
 
   @each $breakpoint in map-keys($breakpoints) {
@@ -3040,8 +3043,8 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
 
 @mixin make-container($gutter: $grid-gutter-width) {
   width: 100%;
-  padding-right: $gutter / 2;
-  padding-left: $gutter / 2;
+  padding-right: $gutter * 0.5;
+  padding-left: $gutter * 0.5;
   margin-right: auto;
   margin-left: auto;
 }
@@ -3062,8 +3065,8 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  margin-right: -$gutter / 2;
-  margin-left: -$gutter / 2;
+  margin-right: -$gutter * 0.5;
+  margin-left: -$gutter * 0.5;
 }
 
 @mixin make-col-ready($gutter: $grid-gutter-width) {
@@ -3072,18 +3075,18 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
   // always setting `width: 100%;`. This works because we use `flex` values
   // later on to override this initial width.
   width: 100%;
-  padding-right: $gutter / 2;
-  padding-left: $gutter / 2;
+  padding-right: $gutter * 0.5;
+  padding-left: $gutter * 0.5;
 }
 
 @mixin make-col($size, $columns: $grid-columns) {
   -webkit-box-flex: 0;
-      -ms-flex: 0 0 percentage($size / $columns);
-          flex: 0 0 percentage($size / $columns);
+      -ms-flex: 0 0 percentage(math.div($size, $columns));
+          flex: 0 0 percentage(math.div($size, $columns));
   // Add a `max-width` to ensure content within each column does not blow out
   // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
   // do not appear to require this.
-  max-width: percentage($size / $columns);
+  max-width: percentage(math.div($size, $columns));
 }
 
 @mixin make-col-auto() {
@@ -3095,7 +3098,7 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
 }
 
 @mixin make-col-offset($size, $columns: $grid-columns) {
-  $num: $size / $columns;
+  $num: math.div($size, $columns);
   margin-left: if($num == 0, 0, percentage($num));
 }
 
@@ -3107,9 +3110,9 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
 @mixin row-cols($count) {
   & > * {
     -webkit-box-flex: 0;
-        -ms-flex: 0 0 100% / $count;
-            flex: 0 0 100% / $count;
-    max-width: 100% / $count;
+        -ms-flex: 0 0 math.div(100%, $count);
+            flex: 0 0 math.div(100%, $count);
+    max-width: math.div(100%, $count);
   }
 }
 
@@ -3799,7 +3802,7 @@ mark,
 }
 
 .figure-img {
-  margin-bottom: $spacer / 2;
+  margin-bottom: $spacer * 0.5;
   line-height: 1;
 }
 
@@ -4323,13 +4326,13 @@ textarea.form-control {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  margin-right: -$form-grid-gutter-width / 2;
-  margin-left: -$form-grid-gutter-width / 2;
+  margin-right: -$form-grid-gutter-width * 0.5;
+  margin-left: -$form-grid-gutter-width * 0.5;
 
   > .col,
   > [class*="col-"] {
-    padding-right: $form-grid-gutter-width / 2;
-    padding-left: $form-grid-gutter-width / 2;
+    padding-right: $form-grid-gutter-width * 0.5;
+    padding-left: $form-grid-gutter-width * 0.5;
   }
 }
 
@@ -5285,7 +5288,7 @@ input[type="button"] {
   left: 0;
   z-index: -1; // Put the input behind the label so it doesn't overlay text
   width: $custom-control-indicator-size;
-  height: ($font-size-base * $line-height-base + $custom-control-indicator-size) / 2;
+  height: ($font-size-base * $line-height-base + $custom-control-indicator-size) * 0.5;
   opacity: 0;
 
   &:checked ~ .custom-control-label::before {
@@ -5344,7 +5347,7 @@ input[type="button"] {
   // Background-color and (when enabled) gradient
   &::before {
     position: absolute;
-    top: ($font-size-base * $line-height-base - $custom-control-indicator-size) / 2;
+    top: ($font-size-base * $line-height-base - $custom-control-indicator-size) * 0.5;
     left: -($custom-control-gutter + $custom-control-indicator-size);
     display: block;
     width: $custom-control-indicator-size;
@@ -5359,13 +5362,13 @@ input[type="button"] {
   // Foreground (icon)
   &::after {
     position: absolute;
-    top: ($font-size-base * $line-height-base - $custom-control-indicator-size) / 2;
+    top: ($font-size-base * $line-height-base - $custom-control-indicator-size) * 0.5;
     left: -($custom-control-gutter + $custom-control-indicator-size);
     display: block;
     width: $custom-control-indicator-size;
     height: $custom-control-indicator-size;
     content: "";
-    background: no-repeat 50% / #{$custom-control-indicator-bg-size};
+    background: no-repeat list.slash(50%, $custom-control-indicator-bg-size);
   }
 }
 
@@ -5447,7 +5450,7 @@ input[type="button"] {
     }
 
     &::after {
-      top: add(($font-size-base * $line-height-base - $custom-control-indicator-size) / 2, $custom-control-indicator-border-width * 2);
+      top: add(($font-size-base * $line-height-base - $custom-control-indicator-size) * 0.5, $custom-control-indicator-border-width * 2);
       left: add(-($custom-switch-width + $custom-control-gutter), $custom-control-indicator-border-width * 2);
       width: $custom-switch-indicator-size;
       height: $custom-switch-indicator-size;
@@ -5672,7 +5675,7 @@ input[type="button"] {
   &::-webkit-slider-thumb {
     width: $custom-range-thumb-width;
     height: $custom-range-thumb-height;
-    margin-top: ($custom-range-track-height - $custom-range-thumb-height) / 2; // Webkit specific
+    margin-top: ($custom-range-track-height - $custom-range-thumb-height) * 0.5; // Webkit specific
     @include gradient-bg($custom-range-thumb-bg);
     border: $custom-range-thumb-border;
     @include border-radius($custom-range-thumb-border-radius);
@@ -5749,7 +5752,7 @@ input[type="button"] {
     cursor: $custom-range-track-cursor;
     background-color: transparent;
     border-color: transparent;
-    border-width: $custom-range-thumb-height / 2;
+    border-width: $custom-range-thumb-height * 0.5;
     @include box-shadow($custom-range-track-box-shadow);
   }
 
@@ -6340,7 +6343,7 @@ input[type="button"] {
 }
 
 .card-subtitle {
-  margin-top: -$card-spacer-y / 2;
+  margin-top: -$card-spacer-y * 0.5;
   margin-bottom: 0;
 }
 
@@ -6396,15 +6399,15 @@ input[type="button"] {
 //
 
 .card-header-tabs {
-  margin-right: -$card-spacer-x / 2;
+  margin-right: -$card-spacer-x * 0.5;
   margin-bottom: -$card-spacer-y;
-  margin-left: -$card-spacer-x / 2;
+  margin-left: -$card-spacer-x * 0.5;
   border-bottom: 0;
 }
 
 .card-header-pills {
-  margin-right: -$card-spacer-x / 2;
-  margin-left: -$card-spacer-x / 2;
+  margin-right: -$card-spacer-x * 0.5;
+  margin-left: -$card-spacer-x * 0.5;
 }
 
 // Card image
@@ -6767,7 +6770,7 @@ input[type="button"] {
 }
 
 .jumbotron {
-  padding: $jumbotron-padding ($jumbotron-padding / 2);
+  padding: $jumbotron-padding ($jumbotron-padding * 0.5);
   margin-bottom: $jumbotron-padding;
   color: $jumbotron-color;
   background-color: $jumbotron-bg;
@@ -7386,7 +7389,7 @@ a.close.disabled {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end; // Right align buttons with flex property because text-align doesn't work on flex items
-  padding: $modal-inner-padding - $modal-footer-margin-between / 2;
+  padding: $modal-inner-padding - $modal-footer-margin-between * 0.5;
   border-top: $modal-footer-border-width solid $modal-footer-border-color;
   @include border-bottom-radius($modal-content-inner-border-radius);
 
@@ -7395,7 +7398,7 @@ a.close.disabled {
   // but is needed to fix https://github.com/twbs/bootstrap/issues/24800
   // stylelint-disable-next-line selector-max-universal
   > * {
-    margin: $modal-footer-margin-between / 2;
+    margin: $modal-footer-margin-between * 0.5;
   }
 }
 
@@ -7489,7 +7492,7 @@ a.close.disabled {
 
     &::before {
       top: 0;
-      border-width: $tooltip-arrow-height ($tooltip-arrow-width / 2) 0;
+      border-width: $tooltip-arrow-height ($tooltip-arrow-width * 0.5) 0;
       border-top-color: $tooltip-arrow-color;
     }
   }
@@ -7505,7 +7508,7 @@ a.close.disabled {
 
     &::before {
       right: 0;
-      border-width: ($tooltip-arrow-width / 2) $tooltip-arrow-height ($tooltip-arrow-width / 2) 0;
+      border-width: ($tooltip-arrow-width * 0.5) $tooltip-arrow-height ($tooltip-arrow-width * 0.5) 0;
       border-right-color: $tooltip-arrow-color;
     }
   }
@@ -7519,7 +7522,7 @@ a.close.disabled {
 
     &::before {
       bottom: 0;
-      border-width: 0 ($tooltip-arrow-width / 2) $tooltip-arrow-height;
+      border-width: 0 ($tooltip-arrow-width * 0.5) $tooltip-arrow-height;
       border-bottom-color: $tooltip-arrow-color;
     }
   }
@@ -7535,7 +7538,7 @@ a.close.disabled {
 
     &::before {
       left: 0;
-      border-width: ($tooltip-arrow-width / 2) 0 ($tooltip-arrow-width / 2) $tooltip-arrow-height;
+      border-width: ($tooltip-arrow-width * 0.5) 0 ($tooltip-arrow-width * 0.5) $tooltip-arrow-height;
       border-left-color: $tooltip-arrow-color;
     }
   }
@@ -7611,13 +7614,13 @@ a.close.disabled {
 
     &::before {
       bottom: 0;
-      border-width: $popover-arrow-height ($popover-arrow-width / 2) 0;
+      border-width: $popover-arrow-height ($popover-arrow-width * 0.5) 0;
       border-top-color: $popover-arrow-outer-color;
     }
 
     &::after {
       bottom: $popover-border-width;
-      border-width: $popover-arrow-height ($popover-arrow-width / 2) 0;
+      border-width: $popover-arrow-height ($popover-arrow-width * 0.5) 0;
       border-top-color: $popover-arrow-color;
     }
   }
@@ -7634,13 +7637,13 @@ a.close.disabled {
 
     &::before {
       left: 0;
-      border-width: ($popover-arrow-width / 2) $popover-arrow-height ($popover-arrow-width / 2) 0;
+      border-width: ($popover-arrow-width * 0.5) $popover-arrow-height ($popover-arrow-width * 0.5) 0;
       border-right-color: $popover-arrow-outer-color;
     }
 
     &::after {
       left: $popover-border-width;
-      border-width: ($popover-arrow-width / 2) $popover-arrow-height ($popover-arrow-width / 2) 0;
+      border-width: ($popover-arrow-width * 0.5) $popover-arrow-height ($popover-arrow-width * 0.5) 0;
       border-right-color: $popover-arrow-color;
     }
   }
@@ -7654,13 +7657,13 @@ a.close.disabled {
 
     &::before {
       top: 0;
-      border-width: 0 ($popover-arrow-width / 2) $popover-arrow-height ($popover-arrow-width / 2);
+      border-width: 0 ($popover-arrow-width * 0.5) $popover-arrow-height ($popover-arrow-width * 0.5);
       border-bottom-color: $popover-arrow-outer-color;
     }
 
     &::after {
       top: $popover-border-width;
-      border-width: 0 ($popover-arrow-width / 2) $popover-arrow-height ($popover-arrow-width / 2);
+      border-width: 0 ($popover-arrow-width * 0.5) $popover-arrow-height ($popover-arrow-width * 0.5);
       border-bottom-color: $popover-arrow-color;
     }
   }
@@ -7672,7 +7675,7 @@ a.close.disabled {
     left: 50%;
     display: block;
     width: $popover-arrow-width;
-    margin-left: -$popover-arrow-width / 2;
+    margin-left: -$popover-arrow-width * 0.5;
     content: "";
     border-bottom: $popover-border-width solid $popover-header-bg;
   }
@@ -7689,13 +7692,13 @@ a.close.disabled {
 
     &::before {
       right: 0;
-      border-width: ($popover-arrow-width / 2) 0 ($popover-arrow-width / 2) $popover-arrow-height;
+      border-width: ($popover-arrow-width * 0.5) 0 ($popover-arrow-width * 0.5) $popover-arrow-height;
       border-left-color: $popover-arrow-outer-color;
     }
 
     &::after {
       right: $popover-border-width;
-      border-width: ($popover-arrow-width / 2) 0 ($popover-arrow-width / 2) $popover-arrow-height;
+      border-width: ($popover-arrow-width * 0.5) 0 ($popover-arrow-width * 0.5) $popover-arrow-height;
       border-left-color: $popover-arrow-color;
     }
   }
@@ -7946,9 +7949,9 @@ a.close.disabled {
 
 .carousel-caption {
   position: absolute;
-  right: (100% - $carousel-caption-width) / 2;
+  right: (100% - $carousel-caption-width) * 0.5;
   bottom: 20px;
-  left: (100% - $carousel-caption-width) / 2;
+  left: (100% - $carousel-caption-width) * 0.5;
   z-index: 10;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -8200,7 +8203,7 @@ a.close.disabled {
 
   .embed-responsive-#{$embed-responsive-aspect-ratio-x}by#{$embed-responsive-aspect-ratio-y} {
     &::before {
-      padding-top: percentage($embed-responsive-aspect-ratio-y / $embed-responsive-aspect-ratio-x);
+      padding-top: percentage(math.div($embed-responsive-aspect-ratio-y, $embed-responsive-aspect-ratio-x));
     }
   }
 }
@@ -8776,7 +8779,7 @@ a.close.disabled {
 .input-group {
 
     .input-unit + .input-group-btn {
-        padding-bottom: $grid-gutter-width / 2;
+        padding-bottom: $grid-gutter-width * 0.5;
 
         .btn {
             height: calc(2.8em + 1px); // stylelint-disable-line function-blacklist
@@ -9185,7 +9188,7 @@ tab-list {
         @each $i in 1, 2, 3 {
             @each $j in 1, 2, 3 {
                 .prop#{$infix}-#{$i}-#{$j} {
-                    padding-bottom: percentage($j / $i);
+                    padding-bottom: percentage(math.div($j, $i));
                 }
             }
         }
@@ -9292,7 +9295,7 @@ html.ios { // stylelint-disable-line selector-no-qualifying-type
 }
 
 .autocomplete-suggestion:nth-child(n + #{$autocomplete-max-items + 1}),
-.widget-inner-stacked .autocomplete-suggestion:nth-child(n + #{($autocomplete-max-items / 2)}) {
+.widget-inner-stacked .autocomplete-suggestion:nth-child(n + #{($autocomplete-max-items * 0.5)}) {
     display: none;
 }
 
@@ -10132,7 +10135,7 @@ html.ie {
     @include media-breakpoint-down(xs) {
         right: auto;
         width: 100%;
-        padding: 0 ($grid-gutter-width / 2);
+        padding: 0 ($grid-gutter-width * 0.5);
     }
 }
 
@@ -10222,14 +10225,14 @@ $border-width: 1px;
 .input-unit {
     position: relative;
     width: 100%;
-    margin-bottom: $grid-gutter-width/2;
+    margin-bottom: $grid-gutter-width*0.5;
     overflow: hidden;
     border: $border-width solid $border-color;
     border-radius: $border-radius;
 
     &.media-xs-d {
         @include media-breakpoint-down(xs) {
-            margin-bottom: $grid-gutter-width/2 !important;
+            margin-bottom: $grid-gutter-width*0.5 !important;
         }
     }
 
@@ -10538,7 +10541,7 @@ $border-width: 1px;
 }
 
 .input-feedback-container {
-    margin-bottom: $grid-gutter-width/2;
+    margin-bottom: $grid-gutter-width*0.5;
 
     .input-unit {
         margin-bottom: 0;
@@ -11057,7 +11060,7 @@ html.ios .basket-preview-content .totals { // stylelint-disable-line selector-no
 .cmp-product-thumb {
     width: 100%;
     padding: .8rem;
-    margin-bottom: $grid-gutter-width / 2;
+    margin-bottom: $grid-gutter-width * 0.5;
     overflow: hidden;
     background-color: $white;
 
@@ -12422,26 +12425,26 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
 .widget-item-grid {
     .product-list {
         > .col-12 {
-            padding-right: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important
-            padding-left: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important
+            padding-right: $grid-gutter-width * 0.5 !important; // stylelint-disable-line declaration-no-important
+            padding-left: $grid-gutter-width * 0.5 !important; // stylelint-disable-line declaration-no-important
         }
         > .col-6:nth-child(odd) {
-            padding-left: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important
+            padding-left: $grid-gutter-width * 0.5 !important; // stylelint-disable-line declaration-no-important
         }
         > .col-6:nth-child(even) {
-            padding-right: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important
+            padding-right: $grid-gutter-width * 0.5 !important; // stylelint-disable-line declaration-no-important
         }
         > .col-4:nth-child(3n+1) {
-            padding-left: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important
+            padding-left: $grid-gutter-width * 0.5 !important; // stylelint-disable-line declaration-no-important
         }
         > .col-4:nth-child(3n+3) {
-            padding-right: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important
+            padding-right: $grid-gutter-width * 0.5 !important; // stylelint-disable-line declaration-no-important
         }
         > .col-3:nth-child(4n+1) {
-            padding-left: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important
+            padding-left: $grid-gutter-width * 0.5 !important; // stylelint-disable-line declaration-no-important
         }
         > .col-3:nth-child(4n+4) {
-            padding-right: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important
+            padding-right: $grid-gutter-width * 0.5 !important; // stylelint-disable-line declaration-no-important
         }
     }
 
@@ -14302,7 +14305,7 @@ header .widget {
 
 .widget-proportional {
     position: relative;
-    padding-bottom: percentage(1 / 3);
+    padding-bottom: percentage(math.div(1, 3));
     overflow: hidden;
 
     .widget-inner {
@@ -14322,12 +14325,12 @@ header .widget {
         @each $i in 1, 2, 3 {
             @each $j in 1, 2, 3 {
                 .widget-prop#{$infix}-#{$i}-#{$j} .widget-proportional {
-                    padding-bottom: percentage($j / $i);
+                    padding-bottom: percentage(math.div($j, $i));
                 }
                 .widget-proportional.widget-prop#{$infix}-#{$i}-#{$j} {
                     height: auto !important; // stylelint-disable-line declaration-no-important
                     min-height: auto !important; // stylelint-disable-line declaration-no-important
-                    padding-bottom: percentage($j / $i) !important; // stylelint-disable-line declaration-no-important
+                    padding-bottom: percentage(math.div($j, $i)) !important; // stylelint-disable-line declaration-no-important
                 }
             }
         }

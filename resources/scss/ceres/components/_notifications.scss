@@ -7,6 +7,6 @@
     @include media-breakpoint-down(xs) {
         right: auto;
         width: 100%;
-        padding: 0 ($grid-gutter-width / 2);
+        padding: 0 ($grid-gutter-width * 0.5);
     }
 }
