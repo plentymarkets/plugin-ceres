@@ -263,7 +263,7 @@
 <script type="x/template" data-component="carousel">
     <div class="row">
         <div class="col-12 col-lg-12" v-if="itemsPerPage === 14 || $slots.items && $slots.items.length > itemsPerPage">
-            <div class="slide-items owl-carousel owl-theme">
+            <div class="slide-items owl-carousel owl-theme" ref="carouselContainer">
                 <slot-component v-for="(item, index) in $slots.items" :key="index" :vnode="item" />
             </div>
         </div>
