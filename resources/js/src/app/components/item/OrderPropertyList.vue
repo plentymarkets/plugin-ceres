@@ -57,11 +57,6 @@ export default {
 
     props:
     {
-        useVariationOrderProperties:
-        {
-            type: Boolean,
-            default: false
-        },
         paddingClasses:
         {
             type: String,
@@ -90,9 +85,10 @@ export default {
 
     mounted()
     {
-        if(this.useVariationOrderProperties)
+        if (App.useVariationOrderProperties)
         {
-            document.addEventListener("onVariationChanged", event => {
+            // go to first side, because variation order properties could differ between variations
+            document.addEventListener("onVariationChanged", () => {
                 this.activeSlide = 0;
             });
         }

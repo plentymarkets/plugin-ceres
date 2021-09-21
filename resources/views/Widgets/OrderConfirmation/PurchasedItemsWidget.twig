@@ -79,18 +79,18 @@
                                                                     </a>
                                                                 {{ Twig.else() }}
                                                                     <span class="item-word-break">
-                                                                            {{ Twig.set("splitPath", "property.value | split('/')") }}
+                                                                        {{ Twig.set("splitPath", "property.value | split('/')") }}
                                                                         {{ Twig.set("filename", "''") }}
                                                                         {{ Twig.set("path", "''") }}
 
                                                                         {{ Twig.for("temp", "splitPath") }}
-                                                                        {{ Twig.if("loop.first") }}
-                                                                        {{ Twig.set("path", "temp") }}
-                                                                        {{ Twig.elseif("loop.last") }}
-                                                                        {{ Twig.set("filename", "temp") }}
-                                                                        {{ Twig.else() }}
-                                                                        {{ Twig.set("path", "path ~ '/' ~ temp") }}
-                                                                        {{ Twig.endif() }}
+                                                                            {{ Twig.if("loop.first") }}
+                                                                                {{ Twig.set("path", "temp") }}
+                                                                            {{ Twig.elseif("loop.last") }}
+                                                                                {{ Twig.set("filename", "temp") }}
+                                                                            {{ Twig.else() }}
+                                                                                {{ Twig.set("path", "path ~ '/' ~ temp") }}
+                                                                            {{ Twig.endif() }}
                                                                         {{ Twig.endfor() }}
 
                                                                             <a class="text-appearance" href="{{ Twig.print('urls.orderPropertyFile(path)') }}?filename={{ Twig.print('filename') }}{{ Twig.if("services.customer.getContactId() == 0") }}&orderId={{ Twig.print('data.order.id') }}{{ Twig.endif() }}"
