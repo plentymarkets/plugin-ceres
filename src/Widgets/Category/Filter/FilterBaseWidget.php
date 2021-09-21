@@ -2,7 +2,6 @@
 
 namespace Ceres\Widgets\Category\Filter;
 
-use Ceres\Config\CeresConfig;
 use Ceres\Widgets\Helper\BaseWidget;
 use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use IO\Services\ItemSearch\Factories\Faker\FacetFaker;
