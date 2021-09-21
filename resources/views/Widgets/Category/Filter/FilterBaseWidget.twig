@@ -10,18 +10,21 @@
 
 {% set appearance      = widget.settings.appearance.mobile | default("none") %}
 
+{{ Twig.set("hasCategoryFilter", "ceresConfig.item.showCategoryFilter") }}
+{{ Twig.set("className", "className") }}
+
 {{ Twig.if("services.facet.facetDataExists(facets, #{allowedFacetTypes | json_encode}) or #{ isPreview | json_encode }") }}
 <div class="widget widget-filter-base widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
 
-    {% if className == 'category' and hasCategoryFilter == false %}
+    {{ Twig.if("className == 'category' and hasCategoryFilter == false") }}
         <div class="widget-placeholder p-0">
             <div>
                 <p class="title mb-0">{{ trans("Ceres::Widget.categoryFilterLabel") }}</p>
                 <p class="description mt-2 mb-2">{{ trans("Ceres::Widget.categoryPlaceholderDescription") }}</p>
             </div>
         </div>
-    {% else %}
+    {{ Twig.else() }}
         <item-filter-list
             class="{{ "widget-filter-" ~ className }}"
             :filter-list-bulk="true"
@@ -30,6 +33,6 @@
             :padding-classes="{{ spacingPadding | json_encode }}"
             :padding-inline-styles="{{ inlinePadding | json_encode }}">
         </item-filter-list>
-    {% endif %}
+    {{ Twig.endif() }}
 </div>
 {{ Twig.endif() }}

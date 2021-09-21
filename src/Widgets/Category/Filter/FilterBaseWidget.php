@@ -84,12 +84,9 @@ class FilterBaseWidget extends BaseWidget
         $facetFaker  = pluginApp(FacetFaker::class);
         $facetResult = $facetFaker->fill([]);
 
-        /** @var CeresConfig $ceresConfig */
-        $ceresConfig = pluginApp(CeresConfig::class);
-
         return [
             'facets' => $facetResult,
-            'hasCategoryFilter' => $ceresConfig->item->showCategoryFilter
+            'className' => $this->className
         ];
     }
 }
