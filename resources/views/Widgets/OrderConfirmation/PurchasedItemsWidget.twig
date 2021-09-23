@@ -73,7 +73,7 @@
                                                             <strong class="item-word-break">{{ Twig.print('property | propertyName') }}</strong>
                                                             {{ Twig.if("property.type == 'file'") }}
                                                                 {{ Twig.if("property.fileUrl is not empty") }}
-                                                                    <a class="text-appearance" href="{{ Twig.print('property.fileUrl') }}" target="_blank">
+                                                                    <a class="text-appearance" href="{{ Twig.print(Twig.call("urls.variationOrderPropertyFile", [Twig.var("property.fileUrl")])) }}?filename={{ Twig.print("property.value") }}" target="_blank">
                                                                         <i class="fa fa-external-link" aria-hidden="true"></i>
                                                                         {{ Twig.print('property.value') }}
                                                                     </a>
@@ -212,7 +212,7 @@
                                     <strong class="col-12 mt-1 item-word-break">{{ Twig.print('property | propertyName') }} {{ Twig.if("webstoreConfig.useVariationOrderProperties and property.surcharge > 0") }} ({{ Twig.trans("Ceres::Template.basketIncludeAbbr") }} {{ Twig.print("property.surcharge | formatMonetary(itemAmount.currency)") }}) {{ Twig.endif() }}</strong>
                                     {{ Twig.if("property.type == 'file'") }}
                                         {{ Twig.if("property.fileUrl is not empty") }}
-                                            <a class="text-appearance" href="{{ Twig.print('property.fileUrl') }}" target="_blank">
+                                            <a class="text-appearance" href="{{ Twig.print(Twig.call("urls.variationOrderPropertyFile", [Twig.var("property.fileUrl")])) }}?filename={{ Twig.print("property.value") }}" target="_blank">
                                                 <i class="fa fa-external-link" aria-hidden="true"></i>
                                                 {{ Twig.print('property.value') }}
                                             </a>
