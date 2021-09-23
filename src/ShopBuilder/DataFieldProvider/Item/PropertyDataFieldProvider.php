@@ -39,7 +39,8 @@ class PropertyDataFieldProvider extends DataFieldProvider
 
         $propertyId = $this->property->id;
         $groupId = $this->propertyGroupId;
-        $this->addField("name_$propertyId", "Ceres::Widget.dataFieldPropertyName", "item_data_field('variationProperties.{id, $this->propertyGroupId}.properties.{id, $propertyId}.names.name')");
+        $this->addField("name_$propertyId", "Ceres::Widget.dataFieldPropertyName", "item_data_field('variationProperties.{id, $this->propertyGroupId}.properties.{id, $propertyId}.names.name')", false, true);
+        $this->addField("name_{$propertyId}_{$groupId}", "Ceres::Widget.dataFieldPropertyName", "item_data_field('variationProperties.{id, $this->propertyGroupId}.properties.{id, $propertyId}.names.name')");
 
         if ($this->property->cast === 'file')
         {
