@@ -85,7 +85,7 @@
                                                                         {% if property.type == 'file' %}
                                                                             <span class="item-word-break">
                                                                             {% if property.fileUrl is not empty %}
-                                                                                <a class="text-appearance" href="{{ property.fileUrl }}" target="_blank">
+                                                                                <a class="text-appearance" href="{{ urls.variationOrderPropertyFile(property.fileUrl) }}" target="_blank">
                                                                                     <i class="fa fa-external-link" aria-hidden="true"></i>
                                                                                     {{ property.value }}
                                                                                 </a>
@@ -200,7 +200,7 @@
                                                     {% if property.type == 'file' %}
                                                         <span>
                                                         {% if property.fileUrl is not empty %}
-                                                            <a href="{{ property.fileUrl }}" target="_blank" class="text-primary text-appearance">
+                                                            <a href="{{ urls.variationOrderPropertyFile(property.fileUrl) }}?filename={{ property.value }}" target="_blank" class="text-primary text-appearance">
                                                                 <i class="fa fa-external-link" aria-hidden="true"></i>
                                                                 {{ property.value }}
                                                             </a>
