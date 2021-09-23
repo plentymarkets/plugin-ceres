@@ -84,7 +84,7 @@
                                                                         <strong class="item-word-break">{{ property | propertyName }}</strong>
                                                                         {% if property.type == 'file' %}
                                                                             <span class="item-word-break">
-                                                                            {% if webstoreConfig.useVariationOrderProperties %}
+                                                                            {% if property.fileUrl is not empty %}
                                                                                 <a class="text-appearance" href="{{ property.fileUrl }}" target="_blank">
                                                                                     <i class="fa fa-external-link" aria-hidden="true"></i>
                                                                                     {{ property.value }}
@@ -199,7 +199,7 @@
                                                     <strong>{{ property | propertyName }}</strong>
                                                     {% if property.type == 'file' %}
                                                         <span>
-                                                        {% if webstoreConfig.useVariationOrderProperties %}
+                                                        {% if property.fileUrl is not empty %}
                                                             <a href="{{ property.fileUrl }}" target="_blank" class="text-primary text-appearance">
                                                                 <i class="fa fa-external-link" aria-hidden="true"></i>
                                                                 {{ property.value }}

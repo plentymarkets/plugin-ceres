@@ -72,25 +72,25 @@
                                                         <div>
                                                             <strong class="item-word-break">{{ Twig.print('property | propertyName') }}</strong>
                                                             {{ Twig.if("property.type == 'file'") }}
-                                                                {{ Twig.if("webstoreConfig.useVariationOrderProperties") }}
+                                                                {{ Twig.if("property.fileUrl is not empty") }}
                                                                     <a class="text-appearance" href="{{ Twig.print('property.fileUrl') }}" target="_blank">
                                                                         <i class="fa fa-external-link" aria-hidden="true"></i>
                                                                         {{ Twig.print('property.value') }}
                                                                     </a>
                                                                 {{ Twig.else() }}
                                                                     <span class="item-word-break">
-                                                                            {{ Twig.set("splitPath", "property.value | split('/')") }}
+                                                                        {{ Twig.set("splitPath", "property.value | split('/')") }}
                                                                         {{ Twig.set("filename", "''") }}
                                                                         {{ Twig.set("path", "''") }}
 
                                                                         {{ Twig.for("temp", "splitPath") }}
-                                                                        {{ Twig.if("loop.first") }}
-                                                                        {{ Twig.set("path", "temp") }}
-                                                                        {{ Twig.elseif("loop.last") }}
-                                                                        {{ Twig.set("filename", "temp") }}
-                                                                        {{ Twig.else() }}
-                                                                        {{ Twig.set("path", "path ~ '/' ~ temp") }}
-                                                                        {{ Twig.endif() }}
+                                                                            {{ Twig.if("loop.first") }}
+                                                                                {{ Twig.set("path", "temp") }}
+                                                                            {{ Twig.elseif("loop.last") }}
+                                                                                {{ Twig.set("filename", "temp") }}
+                                                                            {{ Twig.else() }}
+                                                                                {{ Twig.set("path", "path ~ '/' ~ temp") }}
+                                                                            {{ Twig.endif() }}
                                                                         {{ Twig.endfor() }}
 
                                                                             <a class="text-appearance" href="{{ Twig.print('urls.orderPropertyFile(path)') }}?filename={{ Twig.print('filename') }}{{ Twig.if("services.customer.getContactId() == 0") }}&orderId={{ Twig.print('data.order.id') }}{{ Twig.endif() }}"
@@ -211,7 +211,7 @@
                                 {{ Twig.for("property", "item.orderProperties") }}
                                     <strong class="col-12 mt-1 item-word-break">{{ Twig.print('property | propertyName') }} {{ Twig.if("webstoreConfig.useVariationOrderProperties and property.surcharge > 0") }} ({{ Twig.trans("Ceres::Template.basketIncludeAbbr") }} {{ Twig.print("property.surcharge | formatMonetary(itemAmount.currency)") }}) {{ Twig.endif() }}</strong>
                                     {{ Twig.if("property.type == 'file'") }}
-                                        {{ Twig.if("webstoreConfig.useVariationOrderProperties") }}
+                                        {{ Twig.if("property.fileUrl is not empty") }}
                                             <a class="text-appearance" href="{{ Twig.print('property.fileUrl') }}" target="_blank">
                                                 <i class="fa fa-external-link" aria-hidden="true"></i>
                                                 {{ Twig.print('property.value') }}
