@@ -238,7 +238,7 @@
                                         {% if property.type == 'file' %}
                                             <span class="col-6 col-sm-9 item-word-break">
                                                 {% if property.fileUrl is not empty %}
-                                                    <a href="{{ urls.variationOrderPropertyFile(property.fileUrl) }}?filename={{ property.value }}" target="_blank">
+                                                    <a href="{{ urls.variationOrderPropertyFile(property.fileUrl, property.value, orderData.order.accessKey) }}" target="_blank">
                                                         <i class="fa fa-external-link" aria-hidden="true"></i>
                                                         {{ property.value }}
                                                     </a>
