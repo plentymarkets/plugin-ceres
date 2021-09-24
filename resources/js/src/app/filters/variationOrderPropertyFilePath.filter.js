@@ -1,10 +1,19 @@
 import Vue from "vue";
 
-Vue.filter("variationOrderPropertyFilePath", property =>
+Vue.filter("variationOrderPropertyFilePath", (property, accessKey) =>
 {
-    let path = property?.fileUrl?.match(/orderPropertyFiles\/\d*\/\d*\//)[0];
+    const result = property?.fileUrl?.match(/orderPropertyFiles\/\d*\/\d*\//);
 
-    path = path.replace("orderPropertyFiles/", "");
+    if (result && result.length)
+    {
+        let path = result[0].replace("orderPropertyFiles/", "");
 
-    return `/order-property-file/confirmation/${path}?filename=${property.value}`;
+        path = path.split("/")
+            .filter(str => str.length)
+            .join("/");
+
+        return `/order-property-file/confirmation/${path}/${property.value}/${accessKey}`;
+    }
+
+    return "";
 });

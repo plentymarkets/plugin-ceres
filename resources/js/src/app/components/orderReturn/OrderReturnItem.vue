@@ -143,7 +143,9 @@ export default {
         {
             type: Boolean,
             default: false
-        }
+        },
+
+        accessKey: String
     },
 
     data()
@@ -216,7 +218,7 @@ export default {
         getOrderPropertyFileUrl(property)
         {
             return property.fileUrl ?
-                this.$options.filters.variationOrderPropertyFilePath(property)
+                this.$options.filters.variationOrderPropertyFilePath(property, this.accessKey)
                 : this.$options.filters.fileUploadPath(property.value);
         }
     }
