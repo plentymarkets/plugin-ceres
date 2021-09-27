@@ -124,11 +124,17 @@ export function initClientListeners(store)
 // TODO: add code comment
 export function initClientStore(store)
 {
+    document.addEventListener("DOMContentLoaded", function()
+    {
+        console.log("DOM " + Date.now());
+    });
     store.commit("initConsents");
 
     // Use request animation frame to load session data after app has been initialized
     window.requestAnimationFrame(() =>
     {
+        console.log("index.js " + Date.now());
+
         const urlParams = getUrlParams();
 
         if (store.getters.currentItemVariation)

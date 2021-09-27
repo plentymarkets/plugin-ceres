@@ -1368,6 +1368,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
+    console.log("SingleItem " + Date.now());
     this.$store.dispatch("initVariation", this.itemData);
     this.$store.commit("".concat(this.itemId, "/setPleaseSelectVariationId"), this.pleaseSelectOptionVariationId);
   },
@@ -64797,9 +64798,13 @@ function initClientListeners(store) {
 } // TODO: add code comment
 
 function initClientStore(store) {
+  document.addEventListener("DOMContentLoaded", function () {
+    console.log("DOM " + Date.now());
+  });
   store.commit("initConsents"); // Use request animation frame to load session data after app has been initialized
 
   window.requestAnimationFrame(function () {
+    console.log("index.js " + Date.now());
     var urlParams = Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_21__["getUrlParams"])();
 
     if (store.getters.currentItemVariation) {
