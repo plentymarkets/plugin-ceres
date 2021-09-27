@@ -343,7 +343,6 @@ export default {
 
     created()
     {
-        console.log("SingleItem " + Date.now());
         this.$store.dispatch("initVariation", this.itemData);
         this.$store.commit(`${this.itemId}/setPleaseSelectVariationId`, this.pleaseSelectOptionVariationId);
     },
