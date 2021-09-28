@@ -4,23 +4,20 @@
 
         <div class="basket-item component-loading with-icon d-flex" :class="{ 'sending is-loading': waiting, 'is-loading': isCheckoutReadonly }">
             <div class="image-container">
-              <a :href="basketItem.variation.data | itemURL">
                 <lazy-img
                     picture-class="d-block mw-100 mh-100"
                     v-if="image"
                     :image-url="image"
                     :alt="altText"
-                    :title="itemName"
-                    data-testing="basket-item-img">
+                    :title="itemName">
                 </lazy-img>
-              </a>
             </div>
 
             <div class="meta-container-wrapper">
                 <div class="meta-container-wrapper-inner">
                     <div class="meta-container">
                         <div class="position-relative w-100">
-                            <a :href="basketItem.variation.data | itemURL" class="item-name text-primary text-appearance small font-weight-bold text-break" data-testing="basket-item-name">
+                            <a :href="basketItem.variation.data | itemURL" class="item-name text-primary text-appearance small font-weight-bold text-break">
                                 {{ basketItem.variation.data | itemName }}
                             </a>
 
@@ -72,7 +69,7 @@
                         </div>
                     </div>
 
-                    <div class="basket-item-container-right">
+                    <div v-if="basketItem.price > 0" class="basket-item-container-right">
                         <div class="qty-box-container">
                             <quantity-input
                                     @quantity-change="updateQuantity"
@@ -89,13 +86,19 @@
 
                             <button
                                 class="btn btn-sm text-danger p-0"
-                                :class="{ 'disabled': waiting || isBasketLoading || isCheckoutReadonly || waitingForDelete }"
-                                @click="deleteItem"
-                                data-testing="basket-item-delete">
+                                :class="{ 'disabled': waiting || isBasketLoading || isCheckoutReadonly || waitingForDelete }" @click="deleteItem">
                                 {{ $translate("Ceres::Template.basketDelete") }}
                                 <icon icon="trash-o" class="default-float" :loading="waitingForDelete"></icon>
                             </button>
                         </div>
+                    </div>
+                    <div v-else class="basket-item-container-right">
+                        <lazy-img
+                            picture-class="d-block mw-100 mh-100 gift-item-image"
+                            image-url="https://cdn02.plentymarkets.com/xp4oxtd91bsc/frontend/Images/present_icon.jpg"
+                            :alt="altText"
+                            :title="itemName">
+                        </lazy-img>
                     </div>
                 </div>
 

@@ -1,28 +1,33 @@
 <template>
     <div class="row" v-show="items.length">
+        <div class="col-12" style="padding: 0;">
+				<div class="widget-caption bg-appearance widget-item-list-caption mb-3" style="padding: 0;">
+					<div>
+						<h2>Zuletzt angesehen</h2>
+					</div>
+				</div>
+			</div>
         <div class="col-12">
-            <slot name="heading"></slot>
-        </div>
-
-        <div class="col-12">
-            <carousel v-if="items && items.length > 0" :items-per-page="itemsPerPage" ref="carousel">
-                <template slot="items" v-for="item in items">
-                    <category-item
-                            :key="item.id"
-                            :item-data="item.data"
-                            :decimal-count="$ceres.config.item.storeSpecial"
-                            :disable-carousel-on-mobile="items.length > itemsPerPage"
-                            :padding-classes="paddingClasses"
-                            :padding-inline-styles="paddingInlineStyles">
-                        <template #before-prices>
-                            <div v-html="getContainerContentById(item.id, 'beforePrices')"></div>
-                        </template>
-                        <template #after-prices>
-                            <div v-html="getContainerContentById(item.id, 'afterPrices')"></div>
-                        </template>
-                    </category-item>
-                </template>
-            </carousel>
+            <div class="row">
+                <template v-for="item in items">
+                    <div class="col-6 col-md-3 col-lg-3">
+                        <category-item
+                                :key="item.id"
+                                :item-data="item.data"
+                                :decimal-count="$ceres.config.item.storeSpecial"
+                                :disable-carousel-on-mobile="items.length > itemsPerPage"
+                                :padding-classes="paddingClasses"
+                                :padding-inline-styles="paddingInlineStyles">
+                            <template #before-prices>
+                                <div v-html="getContainerContentById(item.id, 'beforePrices')"></div>
+                            </template>
+                            <template #after-prices>
+                                <div v-html="getContainerContentById(item.id, 'afterPrices')"></div>
+                            </template>
+                        </category-item>
+                        </div>
+                    </template>
+            </div>
         </div>
     </div>
 </template>

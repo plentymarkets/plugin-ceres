@@ -22,14 +22,11 @@
                             </div>
                             <div class="col-md-8">
                                 <p>
-                                    <strong>{{ itemName }}</strong>
-                                    <br>
-                                    <span v-if="countAdditionalBasketItems > 0">{{ $translate("Ceres::Template.basketItemOverlayAdditionalCount", {"count": countAdditionalBasketItems }) }}</span>
+                                    <strong class="basket-item-name">{{ itemName }}</strong>
                                 </p>
 
-                                <p class="small">
-                                    <strong>
-                                        <span class="text-muted">{{ basketItem.quantity }} x </span>
+                                <p>
+                                    <strong class="basket-item-price">
                                         <span>{{ price | currency }}</span>
                                     </strong>
                                 </p>
@@ -37,7 +34,7 @@
                                     <item-bundle v-if="isLastBasketEntrySet" :bundle-type="variation.variation.bundleType" :bundle-components="variation.bundleComponents"></item-bundle>
                                 </p> -->
 
-                                <p class="small" v-for="attribute in variation.attributes">
+                                <p class="small" v-for="(attribute, i) in variation.attributes" :key="i">
                                     <strong>{{ attribute.attribute.names.name }}</strong>:
                                     <span>{{ attribute.value.names.name }}</span>
                                 </p>

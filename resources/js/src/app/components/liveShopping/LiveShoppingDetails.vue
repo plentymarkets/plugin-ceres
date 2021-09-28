@@ -2,72 +2,32 @@
     <div class="live-shopping-details">
         <div class="h3 live-shopping-item-name">
             <a :href="liveShoppingData.item | itemURL">
-                {{ liveShoppingData.item | itemName }}
+                <div class="two-lines-of-text">
+                    {{ (liveShoppingData.item.texts.name1.match(/[^\ - ]+ -/) || ['']).pop() }} 
+                    {{ liveShoppingData.item.texts.name2 }}
+                </div>
+                <span class="live-shopping-item-name-condition two-lines-of-text">{{ liveShoppingData.item.texts.name3 }}</span>
             </a>
         </div>
-
-        <slot name="after-item-name"></slot>
-
-        <div class="live-shopping-countdown" v-if="displaySettings.showTimer || displaySettings.showStock">
-            <hr class="live-shopping-countdown-separator">
-            <div class="live-shopping-countdown-heading" v-if="displaySettings.showTimer">
-                <div v-if="hasStarted">
-                    {{ $translate("Ceres::Template.liveShoppingOfferEndsIn") }}
-                </div>
-                <div v-else>
-                    {{ $translate("Ceres::Template.liveShoppingOfferBeginsIn") }}
-                </div>
-            </div>
-
-            <div class="live-shopping-countdown-thread-container" v-if="displaySettings.showTimer && !!duration">
-                <div v-if="duration.days > 0" class="live-shopping-countdown-thread">
-                    <div class="live-shopping-countdown-thread-number">{{ duration.days }}</div>
-                    <div class="small">{{ $translate("Ceres::Template.liveShoppingDays") }}</div>
-                </div>
-                <div class="live-shopping-countdown-thread">
-                    <div class="live-shopping-countdown-thread-number">{{ duration.hours }}</div>
-                    <div class="small">{{ $translate("Ceres::Template.liveShoppingHours") }}</div>
-                </div>
-                <div class="live-shopping-countdown-thread">
-                    <div class="live-shopping-countdown-thread-number">{{ duration.minutes }}</div>
-                    <div class="small">{{ $translate("Ceres::Template.liveShoppingMinutes") }}</div>
-                </div>
-                <div v-if="duration.days <= 0" class="live-shopping-countdown-thread">
-                    <div class="live-shopping-countdown-thread-number">{{ duration.seconds }}</div>
-                    <div class="small">{{ $translate("Ceres::Template.liveShoppingSeconds") }}</div>
-                </div>
-            </div>
-
-            <template v-if="hasStarted && !hasClosed">
-                <div class="live-shopping-progress" v-if="displaySettings.showTimer && displaySettings.showTimerProgress">
-                    <div class="progress">
-                        <div :class="'progress-' + Math.round(timePercentage / 10) * 10" class="progress-bar" role="progressbar" :style="'width:' + timePercentage + '%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-
-                <div class="live-shopping-progress" v-if="displaySettings.showStock">
-                    <div class="live-shopping-progress-heading">
-                        <span>{{ $translate("Ceres::Template.liveShoppingRemainingStock", {"quantityRemaining": itemQuantityRemaining, "quantityMax": liveShoppingData.liveShopping.quantityMax }) }}</span>
-                    </div>
-
-                    <div class="progress" v-if="displaySettings.showStockProgress">
-                        <div :class="'progress-' + Math.round(quantitySoldPercentage / 10) * 10" class="progress-bar" role="progressbar" :style="'width:' + quantitySoldPercentage + '%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-            </template>
-        </div>
-
-        <div class="live-shopping-prices bg-danger" v-if="hasStarted && !hasClosed">
+        <div class="live-shopping-prices" v-if="hasStarted">
             <div class="live-shopping-prices-inner">
-                <div class="live-shopping-prices-rebate" v-if="!isNaN(itemPriceRebatePercentage) && itemPriceRebatePercentage > 0">{{ $translate("Ceres::Template.liveShoppingRebate", {"rebate": itemPriceRebatePercentage }) }}</div>
                 <div class="live-shopping-prices-container">
-                    <div class="live-shopping-price">
-                        <strong>{{ prices.price.unitPrice.formatted }} *</strong>
-                    </div>
                     <span v-if="displaySettings.showCrossPrice && prices.rrp && prices.rrp.unitPrice.value > 0">
-                        <span v-if="prices.isRrpDefaultPrice" v-html="oldPriceBefore"></span>
-                        <span v-else v-html="oldPriceRrp"></span>
+                        <span v-if="liveShoppingData.item.prices.default.unitPrice.value > liveShoppingData.item.prices.rrp.unitPrice.value">
+                            statt <del>{{ liveShoppingData.item.prices.default.unitPrice.formatted }}</del>
+                        </span>
+                        <span v-else>
+                            statt <del>{{ liveShoppingData.item.prices.rrp.unitPrice.formatted }}</del>
+                        </span>
                     </span>
+
+                    <span v-if="displaySettings.showCrossPrice && prices.rrp && prices.rrp.unitPrice.value === 0">
+                        <span>&nbsp;</span>
+                    </span>
+
+                    <div class="live-shopping-price">
+                        <strong><span class="d-none d-lg-inline">heute </span>nur {{ prices.price.unitPrice.formatted }}</strong>
+                    </div>
                 </div>
             </div>
 
@@ -78,10 +38,51 @@
                     <span v-if="liveShoppingData.item.variation.mayShowUnitPrice">| {{ prices.price.basePrice }}</span>
                 </div>
 
-                * <template v-if="showNetPrices">{{ $translate("Ceres::Template.itemExclVAT") }}</template><template v-else>{{ $translate("Ceres::Template.itemInclVAT") }}</template> {{ $translate("Ceres::Template.itemExclusive") }}
-                <a v-if="$ceres.config.global.shippingCostsCategoryId > 0" data-toggle="modal" href="#shippingscosts" :title="$translate('Ceres::Template.itemShippingCosts')">{{ $translate("Ceres::Template.itemShippingCosts") }}</a>
+                <template v-if="showNetPrices">{{ $translate("Ceres::Template.itemExclVAT") }}</template><template v-else>{{ $translate("Ceres::Template.itemInclVAT") }}</template> {{ $translate("Ceres::Template.itemExclusive") }}
+                <a v-if="$ceres.config.global.shippingCostsCategoryId > 0" href="https://www.konsolenkost.de/versand" :title="$translate('Ceres::Template.itemShippingCosts')">{{ $translate("Ceres::Template.itemShippingCosts") }}</a>
                 <a v-else :title="$translate('Ceres::Template.itemShippingCosts')">{{ $translate("Ceres::Template.itemShippingCosts") }}</a>
             </div>
+        </div>
+        <div v-if="!hasClosed">
+            <a class="btn btn-primary d-block d-lg-inline-block my-lg-3" :href="liveShoppingData.item | itemURL">
+                Will ich haben <span class="d-none d-lg-inline">&gt;</span>
+            </a>
+        </div>
+
+        <div v-else>
+            <a class="btn btn-primary btn-danger text-white d-block d-lg-inline-block my-lg-3">
+               AUSVERKAUFT* <span class="d-none d-lg-inline"></span>
+            </a>
+        </div>
+
+        <slot name="after-item-name"></slot>
+
+        <div class="live-shopping-countdown" v-if="displaySettings.showTimer || displaySettings.showStock">
+
+            <template v-if="hasStarted && !hasClosed">
+                <div class="live-shopping-progress" v-if="displaySettings.showStock">
+                    <div class="progress" v-if="displaySettings.showStockProgress">
+                        <div :class="'progress-' + Math.round(quantitySoldPercentage / 10) * 10" class="progress-bar" role="progressbar" :style="'width:' + quantitySoldPercentage + '%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" v-if="liveShoppingData.liveShopping.quantitySold < liveShoppingData.liveShopping.quantityMax"></div>
+                        <div class="progress-bar-done" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" v-else></div>
+                    </div>
+                    <div class="live-shopping-progress-heading">
+                        <span>{{ $translate("Ceres::Template.liveShoppingRemainingStock", {"quantitySoldPercentage": quantitySoldPercentage }}) }</span>
+                    </div>
+                </div>
+            </template>
+
+            <template v-if="hasClosed">
+                <div class="live-shopping-progress" v-if="displaySettings.showStock">
+                    <div class="progress" v-if="displaySettings.showStockProgress">
+                        <div class="progress-10" role="progressbar" style="width: 100%" aria-valuemin="0" aria-valuemax="100" v-if="liveShoppingData.liveShopping.quantitySold < liveShoppingData.liveShopping.quantityMax"></div>
+                        <div class="progress-bar-done" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" v-else></div>
+                    </div>
+                    <div class="live-shopping-progress-heading">
+                        <span>*Aktionsbestand ausverkauft</span>
+                    </div>
+                </div>
+            </template>
+
         </div>
 
         <div class="thumb-content" v-else>
@@ -105,8 +106,8 @@
                 </div>
 
                 <span class="vat small text-muted">
-                    * <template v-if="showNetPrices">{{ $translate("Ceres::Template.itemExclVAT") }}</template><template v-else>{{ $translate("Ceres::Template.itemInclVAT") }}</template> {{ $translate("Ceres::Template.itemExclusive") }}
-                    <a v-if="$ceres.config.global.shippingCostsCategoryId > 0" data-toggle="modal" href="#shippingscosts" :title="$translate('Ceres::Template.itemShippingCosts')">{{ $translate("Ceres::Template.itemShippingCosts") }}</a>
+                    <template v-if="showNetPrices">{{ $translate("Ceres::Template.itemExclVAT") }}</template><template v-else>{{ $translate("Ceres::Template.itemInclVAT") }}</template> {{ $translate("Ceres::Template.itemExclusive") }}
+                    <a v-if="$ceres.config.global.shippingCostsCategoryId > 0" href="https://www.konsolenkost.de/versand" :title="$translate('Ceres::Template.itemShippingCosts')">{{ $translate("Ceres::Template.itemShippingCosts") }}</a>
                     <a v-else :title="$translate('Ceres::Template.itemShippingCosts')">{{ $translate("Ceres::Template.itemShippingCosts") }}</a>
                 </span>
             </div>

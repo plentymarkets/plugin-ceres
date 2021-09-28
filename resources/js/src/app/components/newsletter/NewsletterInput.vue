@@ -1,5 +1,5 @@
 <template>
-    <form ref="newsletterForm" :id="'newsletter-input-form_' + _uid" method="post" @submit.prevent="validateData">
+    <form :id="'newsletter-input-form_' + _uid" method="post" @submit.prevent="validateData">
         <div class="row">
             <div class="col-6" v-if="showNameInputs">
                 <div class="input-unit">
@@ -14,11 +14,11 @@
                 </div>
             </div>
 
-            <div class="col-12">
+            <div class="newsletter-input">
                 <div class="input-group">
-                    <div class="input-unit" data-validate="mail">
-                        <label :for="'email-input-id_' + _uid">{{ $translate("Ceres::Template.newsletterEmail") }} *</label>
-                        <input @focus="loadRecaptcha = true" type="email" autocomplete="email" :id="'email-input-id_' + _uid" v-model="email">
+                    <div class="input-unit border-0" data-validate="mail">
+                        <label v-if="showNameInputs" :for="'email-input-id_' + _uid">{{ $translate("Ceres::Template.newsletterEmail") }} *</label>
+                        <input type="email" autocomplete="email" :id="'email-input-id_' + _uid" v-model="email" placeholder="Deine E-Mail" class="newsletter-input">
                     </div>
                     <input autocomplete="none" class="honey" type="text" name="username" tabindex="-1" v-model="honeypot">
                 </div>
@@ -34,14 +34,13 @@
 
             <div class="col-12 mt-3">
                 <div class="input-group-btn">
-                    <button type="button" class="btn btn-block btn-primary btn-appearance" @click="validateData" :disabled="isDisabled" :class="buttonSizeClass">
-                        <icon icon="paper-plane-o" :loading="isDisabled"></icon>
-                        {{ $translate("Ceres::Template.newsletterSubscribeButtonLabel") }}
+                    <button type="button" class="btn btn-block btn-primary btn-appearance newsletter-button" @click="validateData" :disabled="isDisabled" :class="buttonSizeClass">
+                        <img width="13" height="13" src="https://cdn02.plentymarkets.com/xp4oxtd91bsc/frontend/Images/Footer/Redesign/mail_white.png"><span class="newsletter-button-text">&nbsp; Anmelden</span>
                     </button>
                 </div>
             </div>
+
         </div>
-        <recaptcha v-if="!!$ceres.config.global.googleRecaptchaApiKey && loadRecaptcha"></recaptcha>
     </form>
 </template>
 

@@ -16,7 +16,7 @@
                         </template>
 
                         <template #title>
-                            <div>
+                            <div class="kk-heading">
                                 {{ $translate("Ceres::Template.regPasswordHintTitle") }}
                             </div>
                         </template>
@@ -44,15 +44,7 @@
             <input class="honey" type="text" name="username" autocomplete="new-password" tabindex="-1" v-model="honeypot">
 
             <div class="col-12">
-                <address-input-group
-                    template="#vue-address-input-group"
-                    v-if="!isSimpleRegistration"
-                    address-type="1"
-                    :value="billingAddress"
-                    @input="setAddressDataField($event)"
-                    :optional-address-fields="shownFields"
-                    :required-address-fields="requiredFields"
-                    :default-salutation="defaultSalutation">
+                <address-input-group template="#vue-address-input-group" v-if="!isSimpleRegistration" address-type="1" :value="billingAddress" @input="setAddressDataField($event)" :optional-address-fields="shownFields" :required-address-fields="requiredFields">
                     <template #custom-address-fields>
                         <slot name="custom-address-fields"></slot>
                     </template>
@@ -60,12 +52,7 @@
             </div>
 
             <div class="col-12" v-if="enableConfirmingPrivacyPolicy">
-                <accept-privacy-policy-check
-                        class="mt-3 mb-0"
-                        v-model="privacyPolicyAccepted"
-                        @input="privacyPolicyValueChanged($event)"
-                        :show-error="privacyPolicyShowError">
-                </accept-privacy-policy-check>
+                <accept-privacy-policy-check class="mt-3 mb-0" v-model="privacyPolicyAccepted" @input="privacyPolicyValueChanged($event)" :show-error="privacyPolicyShowError"></accept-privacy-policy-check>
             </div>
         </div>
         <div class="border-top mt-2 text-right">

@@ -1,23 +1,18 @@
 <template>
     <div class="container-max" :class="{'p-0' : $ceres.isShopBuilder}"> 
-        <div class="position-relative">
-            <div class="d-flex flex-grow-1 position-relative my-2">
-                <input type="search" class="search-input flex-grow-1 px-3 py-2" ref="searchInput" v-model="searchString" @input="onValueChanged($event.target.value)"
-                    @keyup.enter="search()" @focus="isSearchFocused = true" @blur="onBlurSearchField($event)" :autofocus="isShopBuilder" :aria-label="$translate('Ceres::Template.headerSearchTerm')">
-
-                <slot name="search-button">
-                    <button class="search-submit px-3" type="submit" @click="search()" :aria-label="$translate('Ceres::Template.headerSearch')">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </slot>
-            </div>
+        <div class="position-relative"><div class="d-flex flex-grow-1 position-relative clearable">
+            <input type="text" id="query" name="q" placeholder="Wonach suchst Du?" class="search-input flex-grow-1"> 
+            <i class="clearable__clear">&times;</i>
+            <button type="button" class="search-button" onclick="buttonOnClick(this)">
+                <img src="https://cdn02.plentymarkets.com/xp4oxtd91bsc/frontend/Images/Header/Navigation/magnifier-white.png">
+            </button>
 
             <template v-if="isSearchFocused">
                 <div v-show="hasAutocompleteResults">
                     <slot name="autocomplete-suggestions">
                         <div class="autocomplete-suggestions shadow bg-white w-100 ">
                             <search-suggestion-item
-                                :show-images="showItemImages"
+                                :show-images="true"
                                 suggestion-type="item">
                             </search-suggestion-item>
                         </div>
@@ -106,6 +101,27 @@ export default {
 
             this.$refs.searchInput.value = !isNullOrUndefined(urlParams.query) ? urlParams.query : "";
         });
+
+        $('.search-input').each( (index, input) => {$(input).keypress( function onEvent(event) {
+                if (event.key === "Enter") {
+                    changeWindow(event.target.value);
+                }
+            });
+        });
+        $(".clearable").each(function() {
+            const $inp = $(this).find("input:text"),
+                $cle = $(this).find(".clearable__clear");
+
+            $inp.on("input", function(){
+                $cle.toggle(!!this.value);
+            });
+            
+            $cle.on("click", function(e) {
+                e.preventDefault();
+                $inp.val("").trigger("input");
+            });
+            
+        });
     },
 
     methods:
@@ -146,6 +162,18 @@ export default {
             {
                 this.isSearchFocused = false;
             }
+        },
+
+        changeWindow(value){
+            let path = window.location.pathname.split("/")[1];
+            if(path != "suche") window.location = "https://www.konsolenkost.de/suche/?q=" + encodeURIComponent(value);
+        },
+
+        buttonOnClick(elem){
+            $(elem).siblings("input").each( (index, input) => { 
+                let e = jQuery.Event( 'keypress', { key: "Enter" });
+                $(input).trigger(e); 
+            });
         }
     },
 

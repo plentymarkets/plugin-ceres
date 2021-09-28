@@ -1,12 +1,19 @@
 <template>
-    <div v-if="facet.name" class="card pt-4 border-0" :class="facet.cssClass">
-        <div class="h3 title py-0">{{ facetName }}</div>
-
+    <div v-if="facet.name" class="card pt-4 border-0">
+        <button class="category-menu-button card-header btn btn-link text-appearance collapsed"
+                        type="button" data-toggle="collapse"
+                        data-target="#collapse-form-check" aria-expanded="false"
+                        aria-controls="collapse-form-check">
+                    <h5 class="category-menu-header h3 py-0">
+                    {{ facetName }}
+                        <i class="fa fa-chevron-down"></i>
+                    </h5>
+                </button>
         <div v-if="facet.type === 'price'">
             <item-filter-price></item-filter-price>
         </div>
-
-        <div v-else class="form-check-wrapper" v-for="value in facets" :key="value.id" :class="value.cssClass">
+        
+        <div v-else class="form-check-wrapper collapse" id="collapse-form-check" v-for="value in facets" :key="value.id">
             <div class="form-check mb-0 pl-0">
                 <input :id="'option-' + value.id + '-' + _uid" class="form-check-input d-none" type="checkbox" :checked="isSelected(value.id)" @change="updateFacet(value)" :disabled="isLoading || value.count <= 0">
                 <label :for="'option-' + value.id + '-' + _uid" class="form-check-label" :class="[paddingClasses, isSelected(value.id) ? 'bg-appearance' : '', 'option-' + value.id]" :style="paddingInlineStyles">

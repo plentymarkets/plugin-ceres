@@ -6,10 +6,9 @@
                 :decimal-count="$ceres.config.item.storeSpecial"
                 image-url-accessor="urlMiddle"
                 :padding-classes="paddingClasses"
-                :padding-inline-styles="paddingInlineStyles"
-                :force-url-with-variation-id="true">
+                :padding-inline-styles="paddingInlineStyles">
             <template #store-special>
-                <item-store-special v-if="!!storeSpecial"
+                <item-store-special 
                                     :store-special="storeSpecial"
                                     :recommended-retail-price="prices.rrp"
                                     :variation-retail-price="prices.price"
@@ -18,15 +17,14 @@
             </template>
 
             <template #item-image>
-                <a v-if="!!displaySettings.customImagePath" :href="currentOffer.item | itemURL">
-                    <lazy-img   :image-url="displaySettings.customImagePath"
-                                :alt="currentOffer.item | itemName"
-                                :title="currentOffer.item | itemName">
-                    </lazy-img>
-                </a>
+                    <a v-if="!!displaySettings.customImagePath" :href="currentOffer.item | itemURL">
+                        <lazy-img   :image-url="displaySettings.customImagePath"
+                                    :alt="currentOffer.item | itemName"
+                                    :title="currentOffer.item | itemName">
+                        </lazy-img>
+                    </a>
             </template>
-
-            <template #item-details v-if="!!currentOffer && whenIsCurrentOffer() !== 1 && isActiveByStock">
+            <template #item-details v-if="!!currentOffer ">
                 <live-shopping-details :live-shopping-data="currentOffer"
                                        @reload-offer="reloadOffer()"
                                        :display-settings="displaySettings"
