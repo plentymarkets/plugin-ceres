@@ -78237,9 +78237,9 @@ function initClientListeners(store) {
 } // TODO: add code comment
 
 function initClientStore(store) {
-  store.commit("initConsents"); // Use request animation frame to load session data after app has been initialized
+  store.commit("initConsents"); // Use DOMContentLoaded to load session data after app has been initialized
 
-  window.requestAnimationFrame(function () {
+  document.addEventListener("DOMContentLoaded", function () {
     var urlParams = Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_21__["getUrlParams"])();
 
     if (store.getters.currentItemVariation) {
