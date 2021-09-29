@@ -200,6 +200,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -492,6 +494,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     isDataFieldVisible: function isDataFieldVisible(value) {
       return this.itemDetailsData.includes(value);
+    },
+    getOrderPropertyFileUrl: function getOrderPropertyFileUrl(property) {
+      return property.fileUrl || this.$options.filters.fileUploadPath(property.value);
     }
   }
 });
@@ -1079,8 +1084,8 @@ var render = function() {
                                   {
                                     staticClass: "text-primary text-appearance",
                                     attrs: {
-                                      href: _vm._f("fileUploadPath")(
-                                        property.value
+                                      href: _vm.getOrderPropertyFileUrl(
+                                        property
                                       ),
                                       target: "_blank"
                                     }

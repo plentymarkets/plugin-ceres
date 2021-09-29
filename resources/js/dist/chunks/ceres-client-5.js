@@ -129,10 +129,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     "order-property-list-group": _OrderPropertyListGroup_vue__WEBPACK_IMPORTED_MODULE_17__["default"]
   },
   props: {
-    useVariationOrderProperties: {
-      type: Boolean,
-      default: false
-    },
     paddingClasses: {
       type: String,
       default: null
@@ -158,8 +154,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   mounted: function mounted() {
     var _this = this;
 
-    if (this.useVariationOrderProperties) {
-      document.addEventListener("onVariationChanged", function (event) {
+    if (App.useVariationOrderProperties) {
+      // go to first side, because variation order properties could differ between variations
+      document.addEventListener("onVariationChanged", function () {
         _this.activeSlide = 0;
       });
     }

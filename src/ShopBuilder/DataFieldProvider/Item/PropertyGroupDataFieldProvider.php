@@ -45,7 +45,14 @@ class PropertyGroupDataFieldProvider extends DataFieldProvider
                     /** @var PropertyRepositoryContract $propertyRepo */
                     $propertyRepo = pluginApp(PropertyRepositoryContract::class);
                     $propertyRepo->setFilters($filters);
-                    return $propertyRepo->search(['names', 'options'],1000, 1);
+                    $result = [];
+                    $i = 0;
+                    do {
+                        $i++;
+                        $data = $propertyRepo->search(['names', 'options'], 250, $i);
+                        $result = array_merge($result, $data);
+                    } while(count($data) != 0 && $i != 6);
+                    return $result;
                 }
             );
 
