@@ -217,9 +217,7 @@ export default {
 
         getOrderPropertyFileUrl(property)
         {
-            return property.fileUrl ?
-                this.$options.filters.variationOrderPropertyFilePath(property, this.accessKey)
-                : this.$options.filters.fileUploadPath(property.value);
+            return property.fileUrl || this.$options.filters.fileUploadPath(property.value);
         }
     }
 }

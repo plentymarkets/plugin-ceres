@@ -172,7 +172,6 @@ import "./app/filters/currency.filter";
 import "./app/filters/date.filter";
 import "./app/filters/fileName.filter";
 import "./app/filters/fileUploadPath.filter";
-import "./app/filters/variationOrderPropertyFilePath.filter";
 import "./app/filters/graduatedPrice.filter";
 import "./app/filters/hasItemDefaultPrice.filter";
 import "./app/filters/inputUnit.filter";

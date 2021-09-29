@@ -65,9 +65,7 @@ export default Vue.component("order-return-history-list-item", {
 
         getOrderPropertyFileUrl(property)
         {
-            return property.fileUrl ?
-                this.$options.filters.variationOrderPropertyFilePath(property, this.returnOrder.order.accessKey)
-                : this.$options.filters.fileUploadPath(property.value);
+            return property.fileUrl || this.$options.filters.fileUploadPath(property.value);
         }
     }
 });
