@@ -6,7 +6,6 @@
                 :order-item="orderItem"
                 :is-net="amount.isNet || showNetPrices"
                 :item-details-data="itemDetailsData"
-                :access-key="orderData.order.accessKey"
         >
         </order-return-item>
 

@@ -143,9 +143,7 @@ export default {
         {
             type: Boolean,
             default: false
-        },
-
-        accessKey: String
+        }
     },
 
     data()
