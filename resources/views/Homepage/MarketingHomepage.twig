@@ -25,7 +25,7 @@
     <div class="row">
         <div class="col-lg-6">
             <h1 id="welcome-text">{% autoescape false %}{{ homepageData.texts.welcome }}{% endautoescape %}</h1>
-            <p>{{ "now" | date('d.m.Y H:m:s') }}</p>
+            <p>{{ "now" | date('d.m.Y H:i:s') }}</p>
         </div>
         <div class="col-lg-6">
             <p id="short-description">{% autoescape false %}{{ homepageData.texts.shortDescription }}{% endautoescape %}</p>
