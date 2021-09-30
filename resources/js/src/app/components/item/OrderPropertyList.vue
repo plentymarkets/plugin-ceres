@@ -83,6 +83,17 @@ export default {
         };
     },
 
+    mounted()
+    {
+        if (App.useVariationOrderProperties)
+        {
+            // go to first side, because variation order properties could differ between variations
+            document.addEventListener("onVariationChanged", () => {
+                this.activeSlide = 0;
+            });
+        }
+    },
+
     computed:
     {
         sortedGroupedProperties()

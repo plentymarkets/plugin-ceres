@@ -31,18 +31,34 @@ export default {
                 const propertyId = parseInt(this.property.propertyId);
                 // TODO: pass as property
                 const basketItemId = parseInt(this.property.basketItemId);
-                const basketItem = this.basketItems.find(basketItem => basketItem.id === basketItemId);
+                let basketItem = this.basketItems.find(basketItem => basketItem.id === basketItemId);
 
                 if (isDefined(basketItem))
                 {
-                    const properties = basketItem.variation.data.properties;
-                    const property = properties.find(property => property.property.id === propertyId);
+                    let properties = basketItem.variation.data.properties;
+                    let property = properties.find(property => property.property.id === propertyId);
 
                     if (isDefined(property))
                     {
                         return property.property.selectionValues[this.property.value].name;
                     }
                 }
+                else
+                {
+                    basketItem = this.basketItems.find(basketItem => basketItem.basketItemOrderParams.find(orderParam => parseInt(orderParam.basketItemId) === basketItemId));
+                    if (isDefined(basketItem))
+                    {
+                        let properties = basketItem.variation.data.properties;
+                        let property = properties.find(property => property.property.id === propertyId);
+
+                        if (isDefined(property))
+                        {
+                            return property.property.selectionValues.find(sv => parseInt(sv.id) === parseInt(this.property.value)).name;
+                        }
+                    }
+                }
+
+                return "";
             }
             // exclude properties of type 'none' (checkboxes)
             else if (isDefined(this.property.type) && this.property.type.length)

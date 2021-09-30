@@ -43,7 +43,7 @@
                                 <div v-for="property in orderItem.orderProperties">
                                     <strong>{{ property.name }}: </strong>
                                     <span v-if="property.type === 'file'">
-                                        <a :href="property.value | fileUploadPath" target="_blank" class="text-primary text-appearance">
+                                        <a :href="getOrderPropertyFileUrl(property)" target="_blank" class="text-primary text-appearance">
                                             <i class="fa fa-external-link" aria-hidden="true"></i>
                                             {{ property.value | fileName }}
                                         </a>
@@ -211,6 +211,11 @@ export default {
         isDataFieldVisible(value)
         {
             return this.itemDetailsData.includes(value);
+        },
+
+        getOrderPropertyFileUrl(property)
+        {
+            return property.fileUrl || this.$options.filters.fileUploadPath(property.value);
         }
     }
 }

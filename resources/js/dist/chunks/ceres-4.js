@@ -1164,27 +1164,35 @@ var render = function() {
                                 "strong",
                                 { class: { colon: property.type.length > 0 } },
                                 [
-                                  _vm._v(
-                                    _vm._s(property.name) +
-                                      " (" +
-                                      _vm._s(
-                                        _vm.$translate(
-                                          "Ceres::Template.basketIncludeAbbr"
+                                  _vm._v(_vm._s(property.name) + " "),
+                                  _vm.$options.filters.propertySurcharge(
+                                    _vm.basketItem.variation.data.properties,
+                                    property.propertyId
+                                  ) > 0
+                                    ? [
+                                        _vm._v(
+                                          "(" +
+                                            _vm._s(
+                                              _vm.$translate(
+                                                "Ceres::Template.basketIncludeAbbr"
+                                              )
+                                            ) +
+                                            " " +
+                                            _vm._s(
+                                              _vm._f("currency")(
+                                                _vm._f("propertySurcharge")(
+                                                  _vm.basketItem.variation.data
+                                                    .properties,
+                                                  property.propertyId
+                                                )
+                                              )
+                                            ) +
+                                            ")"
                                         )
-                                      ) +
-                                      " " +
-                                      _vm._s(
-                                        _vm._f("currency")(
-                                          _vm._f("propertySurcharge")(
-                                            _vm.basketItem.variation.data
-                                              .properties,
-                                            property.propertyId
-                                          )
-                                        )
-                                      ) +
-                                      ")"
-                                  )
-                                ]
+                                      ]
+                                    : _vm._e()
+                                ],
+                                2
                               ),
                               _vm._v(" "),
                               _c(

@@ -46,7 +46,7 @@
                                 <div v-for="property in orderItem.orderProperties" {{ set_testing_attr("data-testing", "return-history-property") }}>
                                     <b>${ property.name }</b>
                                     <span v-if="property.type === 'file'">
-                                        <a :href="property.value | fileUploadPath" target="_blank" class="text-primary text-appearance">
+                                        <a :href="getOrderPropertyFileUrl(property)" target="_blank" class="text-primary text-appearance">
                                             <i class="fa fa-external-link" aria-hidden="true"></i>
                                             ${ property.value | fileName }
                                         </a>

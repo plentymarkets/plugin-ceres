@@ -151,6 +151,16 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }
     };
   },
+  mounted: function mounted() {
+    var _this = this;
+
+    if (App.useVariationOrderProperties) {
+      // go to first side, because variation order properties could differ between variations
+      document.addEventListener("onVariationChanged", function () {
+        _this.activeSlide = 0;
+      });
+    }
+  },
   computed: {
     sortedGroupedProperties: function sortedGroupedProperties() {
       var groupedProperties = JSON.parse(JSON.stringify(this.variationGroupedProperties));

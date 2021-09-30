@@ -5,7 +5,9 @@
                 :key="index"
                 :order-item="orderItem"
                 :is-net="amount.isNet || showNetPrices"
-                :item-details-data="itemDetailsData"></order-return-item>
+                :item-details-data="itemDetailsData"
+        >
+        </order-return-item>
 
         <div class="d-flex flex-wrap flex-column flex-sm-row justify-content-between mt-3">
             <button class="btn btn-primary btn-appearance mt-1" @click="selectAllItems()" :class="buttonSizeClass">

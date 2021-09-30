@@ -84,10 +84,15 @@
                                                                         <strong class="item-word-break">{{ property | propertyName }}</strong>
                                                                         {% if property.type == 'file' %}
                                                                             <span class="item-word-break">
+                                                                            {% if property.fileUrl is not empty %}
+                                                                                <a class="text-appearance" href="{{ property.fileUrl }}" target="_blank">
+                                                                                    <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                                                    {{ property.value }}
+                                                                                </a>
+                                                                            {% else %}
                                                                                 {% set splitPath = property.value | split('/') %}
                                                                                 {% set filename = '' %}
                                                                                 {% set path = '' %}
-
                                                                                 {% for temp in splitPath %}
                                                                                     {% if loop.first %}
                                                                                         {% set path = temp %}
@@ -99,10 +104,11 @@
                                                                                 {% endfor %}
 
                                                                                 <a class="text-appearance" href="{{ urls.orderPropertyFile(path) }}?filename={{ filename }}{% if services.customer.getContactId() == 0 %}&orderId={{ orderData.order.id }}{% endif %}"
-                                                                                target="_blank">
+                                                                                   target="_blank">
                                                                                     <i class="fa fa-external-link" aria-hidden="true"></i>
                                                                                     {{ splitPath | last }}
                                                                                 </a>
+                                                                            {% endif %}
                                                                             </span>
                                                                         {% elseif property.type == 'selection' %}
                                                                             <span class="item-word-break">
@@ -193,7 +199,13 @@
                                                     <strong>{{ property | propertyName }}</strong>
                                                     {% if property.type == 'file' %}
                                                         <span>
-                                                        {% set splitPath = property.value |split('/') %}
+                                                        {% if property.fileUrl is not empty %}
+                                                            <a href="{{ property.fileUrl }}" target="_blank" class="text-primary text-appearance">
+                                                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                                {{ property.value }}
+                                                            </a>
+                                                        {% else %}
+                                                            {% set splitPath = property.value |split('/') %}
                                                             {% set filename = '' %}
                                                             {% set path = '' %}
 
@@ -211,6 +223,7 @@
                                                                 <i class="fa fa-external-link" aria-hidden="true"></i>
                                                                 {{ splitPath | last }}
                                                             </a>
+                                                        {% endif %}
                                                         </span>
                                                     {% elseif property.type == "selection" %}
                                                         <br>
