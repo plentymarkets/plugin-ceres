@@ -81613,12 +81613,12 @@ vue__WEBPACK_IMPORTED_MODULE_5___default.a.filter("itemBundleName", function (it
   var prefixName;
 
   if (item.bundleType === "bundle") {
-    prefixName = item.orderItemName.replace("[BUNDLE]", "").trim();
+    prefixName = item.orderItemName.replace(App.bundlePrefix, "").trim();
     prefixName = _services_TranslationService__WEBPACK_IMPORTED_MODULE_4__["default"].translate("Ceres::Template.itemBundleName", {
       itemName: prefixName
     });
   } else if (item.bundleType == "bundle_item") {
-    prefixName = item.orderItemName.replace("[-]", "").trim();
+    prefixName = item.orderItemName.replace(App.bundleComponentPrefix, "").trim();
   } else {
     prefixName = item.orderItemName;
   }
