@@ -10,6 +10,7 @@
 
 * A maximum of 250 properties were displayed in the data field picker in the ShopBuilder. This has been changed to a maximum of 1500 properties.
 * plentyShop is now able to react to a future order setting with which prefixes for item bundles and components can be customised. Note that changing these prefixes may lead to a faulty display of older orders.
+* The maximum number of displayed items in the preview of the item grid widget in the ShopBuilder has been limited to 50.
 
 ### Fixed
 
