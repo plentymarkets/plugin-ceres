@@ -55,7 +55,6 @@ export default {
 
             if (!gRecaptchaApiLoaded && !this.recaptchaInitiated)
             {
-                this.recaptchaInitiated = true;
                 gRecaptchaApiLoaded = new Promise((resolve, reject) =>
                 {
                     const script = document.createElement("script");
@@ -86,8 +85,9 @@ export default {
 
         initializeV3()
         {
-            if (window.grecaptcha)
+            if (window.grecaptcha && !this.recaptchaInitiated)
             {
+                this.recaptchaInitiated = true;
                 window.grecaptcha.ready(() =>
                 {
                     if (this.version !== 3)
