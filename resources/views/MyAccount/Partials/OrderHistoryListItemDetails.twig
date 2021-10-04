@@ -18,7 +18,7 @@
                         <div v-if="showAllOrderItems">
                     {% endif %}
 
-                    {% if item.itemVariationId > 0 and not ('[-]' in item.orderItemName) %}
+                    {% if item.itemVariationId > 0 and not services.order.containsComponentPrefix(item.orderItemName) %}
                         {% set currentVariationId = item.itemVariationId | trimNewlines %}
 
                         {% set itemAmount = item.amounts[0] %}

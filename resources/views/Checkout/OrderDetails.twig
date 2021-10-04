@@ -146,7 +146,7 @@
     <div class="col-md-6">
         <div class="confirmation-order-list">
             {% for item in orderData.order.orderItems %}
-                {% if item.itemVariationId > 0 and not ('[-]' in item.orderItemName) %}
+                {% if item.itemVariationId > 0 and not services.order.containsComponentPrefix(item.orderItemName) %}
                     {% set currentVariationId = item.itemVariationId | trimNewlines %}
                     <article class="cmp cmp-order-item">
                         <a href="{{ orderData.itemURLs | getObjectValue(currentVariationId) }}" class="item-image">

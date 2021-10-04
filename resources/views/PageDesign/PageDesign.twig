@@ -198,6 +198,8 @@
         "propertyFileUrl": "{{ services.propertyFile.getPropertyFileUrl() }}",
         "isShopBuilder": {{ isShopBuilder | default(false) | json_encode }},
         "bundleSetting": {{ webstoreConfig.dontSplitItemBundle | default(1) }},
+        "bundlePrefix": "{{ services.order.getOrderItemPrefix(2) }}",
+        "bundleComponentPrefix": "{{ services.order.getOrderItemPrefix(3) }}",
         "initialPleaseSelect": {{ webstoreConfig.attributeSelectDefaultOption | default(0) }},
         "publicPath": "{{ plugin_path('Ceres') ~ '/js/dist/' }}",
         "isCheapestSorting": "{{ services.template.isCheapestSorting() }}",

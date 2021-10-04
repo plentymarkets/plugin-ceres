@@ -21,7 +21,7 @@
 
     <div class="widget-inner confirmation-order-list">
         {{ Twig.for("item", "data.order.orderItems") }}
-            {{ Twig.if("item.itemVariationId > 0 and not ('[-]' in item.orderItemName)") }}
+            {{ Twig.if("item.itemVariationId > 0 and not services.order.containsComponentPrefix(item.orderItemName)") }}
                 {{ Twig.set("currentVariationId", "item.itemVariationId | trimNewlines") }}
 
                 <article class="cmp cmp-order-item mb-0 border-bottom-0">
