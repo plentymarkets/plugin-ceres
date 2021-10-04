@@ -1,5 +1,20 @@
 # Release Notes für Ceres
 
+## v5.0.40 (2021-10-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.39...5.0.40" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+* plentySHop unterstützt jetzt Bestelleigenschaften. Um Bestelleigenschaften zu nutzen, aktiviere die Einstellung **Nutzung von Bestelleigenschaften (beta)** im Schritt **Webshop** des plentyShop-Assistenten. **Achtung:** Dadurch werden Bestellmerkmale deaktiviert.
+
+### Geändert
+
+* Im ShopBuilder wurden maximal 250 Eigenschaften angezeigt, wenn man versucht hat, über den Datenfeldpicker in einem Textfeld auf Eigenschaften zuzugreifen. Dieses Verhalten wurde angepasst und die Zahl der maximal angezeigten Eigenschaften auf 1500 erhöht.
+* plentyShop kann jetzt auf eine zukünftige Auftragseinstellung reagieren, mit der Präfixe für Artikelpakete und Komponenten angepasst werden können. Beachte, dass es bei Änderungen an diesen Präfixen zu einer fehlerhaften Darstellugn von älteren Aufträgen kommen kann.
+
+### Behoben
+
+* Artikellisten vom Typ **Zuletzt gesehen** funktionierten teilweise nicht korrekt wenn Server-Side Rendering inaktiv war. Dieses Verhalten wurde behoben.
+
 ## v5.0.39 (2021-09-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.38...5.0.39" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Geändert
