@@ -10,6 +10,7 @@
 
 * Im ShopBuilder wurden maximal 250 Eigenschaften angezeigt, wenn man versucht hat, über den Datenfeldpicker in einem Textfeld auf Eigenschaften zuzugreifen. Dieses Verhalten wurde angepasst und die Zahl der maximal angezeigten Eigenschaften auf 1500 erhöht.
 * plentyShop kann jetzt auf eine zukünftige Auftragseinstellung reagieren, mit der Präfixe für Artikelpakete und Komponenten angepasst werden können. Beachte, dass es bei Änderungen an diesen Präfixen zu einer fehlerhaften Darstellugn von älteren Aufträgen kommen kann.
+* Die maximale Menge der angezeigten Artikel in der Vorschau des Artikelraster-Widgets im ShopBuilder wurde auf 50 begrenzt.
 
 ### Behoben
 
