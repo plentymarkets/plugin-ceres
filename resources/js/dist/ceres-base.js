@@ -842,7 +842,8 @@ var gRecaptchaApiLoaded;
   data: function data() {
     return {
       version: App.config.global.googleRecaptchaVersion,
-      apiKey: App.config.global.googleRecaptchaApiKey
+      apiKey: App.config.global.googleRecaptchaApiKey,
+      recaptchaInitiated: false
     };
   },
   mounted: function mounted() {
@@ -874,7 +875,8 @@ var gRecaptchaApiLoaded;
         return Promise.resolve();
       }
 
-      if (!gRecaptchaApiLoaded) {
+      if (!gRecaptchaApiLoaded && !this.recaptchaInitiated) {
+        this.recaptchaInitiated = true;
         gRecaptchaApiLoaded = new Promise(function (resolve, reject) {
           var script = document.createElement("script");
           var scriptSource;
