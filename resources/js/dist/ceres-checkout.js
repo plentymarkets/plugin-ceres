@@ -2415,7 +2415,6 @@ var gRecaptchaApiLoaded;
       }
 
       if (!gRecaptchaApiLoaded && !this.recaptchaInitiated) {
-        this.recaptchaInitiated = true;
         gRecaptchaApiLoaded = new Promise(function (resolve, reject) {
           var script = document.createElement("script");
           var scriptSource;
@@ -2444,7 +2443,8 @@ var gRecaptchaApiLoaded;
     initializeV3: function initializeV3() {
       var _this4 = this;
 
-      if (window.grecaptcha) {
+      if (window.grecaptcha && !this.recaptchaInitiated) {
+        this.recaptchaInitiated = true;
         window.grecaptcha.ready(function () {
           if (_this4.version !== 3) {
             _this4.$el.dataset.recaptcha = window.grecaptcha.render(_this4.$el, {
