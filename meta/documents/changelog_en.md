@@ -16,6 +16,7 @@
 
 * Item lists of the type **Last seen** didn't work as intended if Server-Side Rendering was inactive. This behaviour has been fixed.
 * If the setting **Block unaccepted cookies** was inactive, accepting cookies could lead to a reCAPTCHA error. This has been fixed.
+* The option **Show categories as filter options for search results**, which is necessary for displaying the category filter widget, has been added to the plentyShop assistant.
 
 ## v5.0.39 (2021-09-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.38...5.0.39" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
