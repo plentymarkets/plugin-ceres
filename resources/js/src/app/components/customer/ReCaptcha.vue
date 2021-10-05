@@ -16,7 +16,8 @@ export default {
     {
         return {
             version: App.config.global.googleRecaptchaVersion,
-            apiKey: App.config.global.googleRecaptchaApiKey
+            apiKey: App.config.global.googleRecaptchaApiKey,
+            recaptchaInitiated: false
         };
     },
 
@@ -52,7 +53,7 @@ export default {
                 return Promise.resolve();
             }
 
-            if (!gRecaptchaApiLoaded)
+            if (!gRecaptchaApiLoaded && !this.recaptchaInitiated)
             {
                 gRecaptchaApiLoaded = new Promise((resolve, reject) =>
                 {
@@ -84,8 +85,9 @@ export default {
 
         initializeV3()
         {
-            if (window.grecaptcha)
+            if (window.grecaptcha && !this.recaptchaInitiated)
             {
+                this.recaptchaInitiated = true;
                 window.grecaptcha.ready(() =>
                 {
                     if (this.version !== 3)
