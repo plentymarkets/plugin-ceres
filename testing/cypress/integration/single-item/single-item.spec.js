@@ -75,7 +75,7 @@ context("Single Item", () =>
 
     it("should display scale prices and apply marker on quantity change", () =>
     {
-        cy.wait(50);
+        cy.wait(250);
         cy.getByTestingAttr("quantity-btn-increase").click().click().click().click().click();
         cy.get(".graduated-prices-table").should("exist");
 
@@ -83,12 +83,11 @@ context("Single Item", () =>
         cy.getByTestingAttr("quantity-btn-increase").click().click().click().click().click();
 
         cy.get(".graduated-prices-table").children().first().children().eq(2).children().eq(1).children().first().should("have.class", "fa-check-circle-o");
-
     });
 
     it("should display scaled price after quantity change", () =>
     {
-        cy.wait(50);
+        cy.wait(250);
         cy.getByTestingAttr("quantity-btn-increase").click().click().click().click();
         cy.get(".price").should("contain", "0,50");
     });
