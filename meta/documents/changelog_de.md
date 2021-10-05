@@ -15,6 +15,7 @@
 ### Behoben
 
 * Artikellisten vom Typ **Zuletzt gesehen** funktionierten teilweise nicht korrekt wenn Server-Side Rendering inaktiv war. Dieses Verhalten wurde behoben.
+* Wenn die Einstellung **Nicht akzeptierte Cookies blockieren** inaktiv war, konnte durch das Akzeptieren der Cookies ein reCAPTCHA-Fehler ausgelöst werden. Dies wurde behoben.
 
 ## v5.0.39 (2021-09-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.38...5.0.39" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
