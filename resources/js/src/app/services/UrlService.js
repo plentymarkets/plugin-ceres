@@ -1,6 +1,5 @@
 import { isDefined, isNullOrUndefined } from "../helper/utils";
 import { normalizeUrl } from "../helper/url";
-import store from "../store/index";
 import { set } from "../helper/set";
 
 function _parseUrlParam(paramKey, paramValue, result)
@@ -11,6 +10,7 @@ function _parseUrlParam(paramKey, paramValue, result)
     }
 
     const regex = /(^([^\[]+)|\[([^\]]*)\])/gm;
+
     let match;
     const keyList = [];
 
@@ -80,7 +80,9 @@ export function getUrlParams(urlParams)
     }
 
     const regex = /[\\?&]([^=&#]+)=([^&#]*)/gm;
+
     let result = {};
+
     let match;
 
     while ((match = regex.exec(urlParams)) !== null)
@@ -97,12 +99,7 @@ export function getUrlParams(urlParams)
 
 export function setUrlParams(urlParams, pushState = true)
 {
-    const pathName =
-        isDefined(store.state.navigation.currentCategory) &&
-        isDefined(store.state.navigation.currentCategory.url) ?
-            store.state.navigation.currentCategory.url :
-            window.location.pathname;
-
+    const pathName = window.location.pathname;
     const params = _createQueryString(urlParams);
     const titleElement = document.getElementsByTagName("title")[0];
 
@@ -205,7 +202,7 @@ export function encodeParams(params, prefix)
     {
         return encodeURIComponent(params);
     }
-    return prefix + "=" + encodeURIComponent(params);
+    return encodeURIComponent(prefix) + "=" + encodeURIComponent(params);
 }
 
 export function setUrlByItem(itemData, keepVariationId)

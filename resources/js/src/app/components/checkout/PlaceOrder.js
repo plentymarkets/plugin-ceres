@@ -7,7 +7,7 @@ import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
 const ApiService = require("../../services/ApiService");
 const NotificationService = require("../../services/NotificationService");
 
-Vue.component("place-order", {
+export default Vue.component("place-order", {
 
     mixins: [ButtonSizePropertyMixin],
 
@@ -80,6 +80,7 @@ Vue.component("place-order", {
         ...mapState({
             checkoutValidation: state => state.checkout.validation,
             contactWish: state => state.checkout.contactWish,
+            customerSign: state => state.checkout.customerSign,
             isBasketLoading: state => state.basket.isBasketLoading,
             basketItemQuantity: state => state.basket.data.itemQuantity,
             isBasketInitiallyLoaded: state => state.basket.isBasketInitiallyLoaded,
@@ -91,28 +92,32 @@ Vue.component("place-order", {
     methods: {
         placeOrder()
         {
-            this.waiting = true;
+            if (this.validateCheckout())
+            {
+                this.waiting = true;
 
-            const url = "/rest/io/order/additional_information";
-            const params = {
-                orderContactWish: this.contactWish,
-                shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted,
-                newsletterSubscriptions: this.activeNewsletterSubscriptions
-            };
-            const options = { supressNotifications: true };
+                const url = "/rest/io/order/additional_information";
+                const params = {
+                    orderContactWish: this.contactWish,
+                    orderCustomerSign: this.customerSign,
+                    shippingPrivacyHintAccepted: this.shippingPrivacyHintAccepted,
+                    newsletterSubscriptions: this.activeNewsletterSubscriptions
+                };
+                const options = { supressNotifications: true };
 
-            ApiService.post(url, params, options)
-                .always(() =>
-                {
-                    this.preparePayment();
-                });
+                ApiService.post(url, params, options)
+                    .always(() =>
+                    {
+                        this.preparePayment();
+                    });
+            }
         },
 
         preparePayment()
         {
             this.waiting = true;
 
-            if (this.validateCheckout() && this.basketItemQuantity > 0)
+            if (this.basketItemQuantity > 0)
             {
                 ApiService.post("/rest/io/checkout/payment")
                     .done(response =>
@@ -158,11 +163,9 @@ Vue.component("place-order", {
             switch (paymentType)
             {
             case "continue":
-                var target = this.targetContinue;
-
-                if (target)
+                if (this.targetContinue)
                 {
-                    navigateTo(target);
+                    navigateTo(this.targetContinue);
                 }
                 break;
             case "redirectUrl":

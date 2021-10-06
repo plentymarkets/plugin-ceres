@@ -1,17 +1,10 @@
 {% macro get( itemName, bundleType ) %}
     {% spaceless %}
     {% if bundleType == "bundle" %}
-        {% if "[BUNDLE]" in itemName %}
-            {% set itemName = itemName | replace({"[BUNDLE]": ""}) | trim %}
-        {% endif %}
-        
+        {% set itemName = services.order.removeBundlePrefix(itemName) %}
         {{ trans("Ceres::Template.itemBundleName", {"itemName": itemName}) }}
     {% elseif bundleType == "bundle_item" %}
-        {% if "[-]" in itemName %}
-            {% set itemName = itemName | replace({"[-]": ""}) | trim %}
-        {% endif %}
-
-        {{ itemName }}
+        {{ services.order.removeBundleComponentPrefix(itemName) }}
     {% else %}
         {{ itemName }}
     {% endif %}

@@ -11,8 +11,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class BackgroundWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = 'Ceres::Widgets.Common.BackgroundWidget';
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make('Ceres::BackgroundWidget')
@@ -21,9 +25,15 @@ class BackgroundWidget extends BaseWidget
             ->withType(WidgetTypes::STATIC)
             ->withCategory(WidgetCategories::IMAGE)
             ->withPosition(700)
+            ->withSearchKeyWords([
+                "hintergrund", "background",
+            ])
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */
@@ -33,23 +43,23 @@ class BackgroundWidget extends BaseWidget
 
         $settings->createCheckbox('fullWidth')
             ->withDefaultValue(true)
-            ->withName("Widget.backgroundFullWidthLabel")
-            ->withTooltip("Widget.backgroundFullWidthTooltip");
+            ->withName('Widget.backgroundFullWidthLabel')
+            ->withTooltip('Widget.backgroundFullWidthTooltip');
 
-        $settings->createCheckbox("hugeFont")
+        $settings->createCheckbox('hugeFont')
             ->withDefaultValue(false)
-            ->withName("Widget.backgroundHugeFontLabel")
-            ->withTooltip("Widget.backgroundHugeFontTooltip");
-            
-        $settings->createCheckbox("backgroundFixed")
+            ->withName('Widget.backgroundHugeFontLabel')
+            ->withTooltip('Widget.backgroundHugeFontTooltip');
+
+        $settings->createCheckbox('backgroundFixed')
             ->withDefaultValue(false)
-            ->withName("Widget.backgroundFixedLabel")
-            ->withTooltip("Widget.backgroundFixedTooltip");
+            ->withName('Widget.backgroundFixedLabel')
+            ->withTooltip('Widget.backgroundFixedTooltip');
 
         $settings->createColorPalette();
 
         $settings->createColor('customColor')
-            ->withCondition('colorPalette === "custom"')
+            ->withCondition("colorPalette === 'custom'")
             ->withDefaultValue('#000000');
 
         $this->createImageSettings($settings);
@@ -72,6 +82,18 @@ class BackgroundWidget extends BaseWidget
      */
     private function createImageSettings($settings)
     {
+
+        $settings->createCheckbox('lazyloadImage')
+            ->withName('Widget.backgroundLazyloadLabel')
+            ->withTooltip('Widget.backgroundLazyloadTooltip')
+            ->withCondition("!preloadImage");
+
+        $settings->createCheckbox('preloadImage')
+            ->withName('Widget.preloadImageLabel')
+            ->withTooltip('Widget.preloadImageTooltip')
+            ->withCondition("!lazyloadImage");
+
+
         $settings->createSelect('sourceType')
             ->withDefaultValue('none')
             ->withName('Widget.backgroundSourceTypeLabel')
@@ -86,11 +108,20 @@ class BackgroundWidget extends BaseWidget
             );
 
         $settings->createFile('customImagePath')
-            ->withCondition('sourceType === "custom-image"')
-            ->withName('Widget.backgroundImageSource');
+            ->withCondition("sourceType === 'custom-image'")
+            ->withName('Widget.backgroundImageSourceLabel')
+            ->withTooltip('Widget.backgroundImageSourceTooltip')
+            ->withAllowedExtensions(array_merge(ImageBoxWidget::IMAGE_EXTENSIONS, ImageBoxWidget::MODERN_IMAGE_EXTENSIONS));
+
+
+        $settings->createFile('fallbackImagePath')
+            ->withCondition("sourceType === 'custom-image' && /.?(\.webp)(?:$|\?)/.test(customImagePath)")
+            ->withName('Widget.backgroundFallbackImageSourceLabel')
+            ->withTooltip('Widget.backgroundFallbackImageSourceTooltip')
+            ->withAllowedExtensions(ImageBoxWidget::IMAGE_EXTENSIONS);
 
         $settings->createSelect('backgroundSize')
-            ->withCondition('sourceType !== "none"')
+            ->withCondition("sourceType !== 'none'")
             ->withDefaultValue('bg-cover')
             ->withName('Widget.backgroundSizeLabel')
             ->withTooltip('Widget.backgroundSizeTooltip')
@@ -103,18 +134,21 @@ class BackgroundWidget extends BaseWidget
             );
 
         $settings->createCheckbox('backgroundFixed')
-            ->withCondition('sourceType !== "none"')
+            ->withCondition("sourceType !== 'none'")
             ->withDefaultValue(false)
             ->withName('Widget.backgroundFixedLabel')
             ->withTooltip('Widget.backgroundFixedTooltip');
 
         $settings->createCheckbox('backgroundRepeat')
-            ->withCondition('sourceType !== "none" && backgroundSize !== "bg-cover"')
+            ->withCondition("sourceType !== 'none' && backgroundSize !== 'bg-cover'")
             ->withDefaultValue(false)
             ->withName('Widget.backgroundRepeatLabel')
             ->withTooltip('Widget.backgroundRepeatTooltip');
     }
 
+    /**
+     * @inheritDoc
+     */
     protected function getTemplateData($widgetSettings, $isPreview)
     {
         $stylingClasses = '';

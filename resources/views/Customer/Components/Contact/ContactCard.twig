@@ -18,37 +18,41 @@
 
 <div class="contact-card">
     {% if "name" in showData or "ceo" in showData or "street" in showData or "zip" in showData or "city" in showData or "country" in showData %}
-        <p class="contact-address">
-            <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i>
-            {% if "name" in showData or showData == 'all' %}
-                <span class="d-inline-block">{{ name }}</span><br>
-            {% endif %}
+        <div>
+            <i class="fa fa-fw fa-map-marker mr-2" aria-hidden="true"></i>
+            <div class="d-inline-block align-top">
+                <p class="my-0">
+                    {% if "name" in showData or showData == 'all' %}
+                        <span class="d-inline-block">{{ name }}</span><br>
+                    {% endif %}
 
-            {% if "ceo" in showData or showData == 'all' %}
-                <span class="d-inline-block">{{ ceo }}</span> <br>
-            {% endif %}
+                    {% if "ceo" in showData or showData == 'all' %}
+                        <span class="d-inline-block">{{ ceo }}</span> <br>
+                    {% endif %}
 
-            {% if "street" in showData or showData == 'all' %}
-                <span class="d-inline-block">{{ street }}</span> <br>
-            {% endif %}
+                    {% if "street" in showData or showData == 'all' %}
+                        <span class="d-inline-block">{{ street }}</span> <br>
+                    {% endif %}
 
-            {% if "zip" in showData or "city" in showData or showData == 'all' %}
-                <span class="d-inline-block">{{ zip }} {{ city }}</span>
-            {% endif %}
+                    {% if "zip" in showData or "city" in showData or showData == 'all' %}
+                        <span class="d-inline-block">{{ zip }} {{ city }}</span>
+                    {% endif %}
 
-            {% if "zip" in showData or "city" in showData or showData == 'all' %}
-                <br>
-            {% endif %}
+                    {% if "zip" in showData or "city" in showData or showData == 'all' %}
+                        <br>
+                    {% endif %}
 
-            {% if "country" in showData or showData == 'all' %}
-                <span class="d-inline-block">{{ country }}</span>
-            {% endif %}
-		</p>
+                    {% if "country" in showData or showData == 'all' %}
+                        <span class="d-inline-block">{{ country }}</span>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
     {% endif %}
     {% if "fon" in showData or showData == 'all' %}
 		<p class="my-0">
-            <a href="tel:{{ fon | replace('/[^0-9+]/',' ') | trimNewlines }}">
-                <i class="fa fa-fw fa-phone" aria-hidden="true"></i>
+            <a class="text-dark" href="tel:{{ fon | replace('/[^0-9+]/',' ') | trimNewlines }}">
+                <i class="fa fa-fw fa-phone mr-2" aria-hidden="true"></i>
                 <span class="d-inline-block">{{ fon }}</span>
             </a>
 		</p>
@@ -56,8 +60,8 @@
 
     {% if "hotline" in showData or showData == 'all' %}
 		<p class="my-0">
-            <a href="tel:{{ hotline | replace('/[^0-9+]/',' ') | trimNewlines }}">
-                <i class="fa fa-fw fa-phone" aria-hidden="true"></i>
+            <a class="text-dark" href="tel:{{ hotline | replace('/[^0-9+]/',' ') | trimNewlines }}">
+                <i class="fa fa-fw fa-phone mr-2" aria-hidden="true"></i>
                 <span class="d-inline-block">{{ hotline }}</span>
             </a>
 		</p>
@@ -65,15 +69,15 @@
 
     {% if "fax" in showData or showData == 'all' %}
 		<p class="my-0">
-            <i class="fa fa-fw fa-fax" aria-hidden="true"></i>
+            <i class="fa fa-fw fa-fax mr-2" aria-hidden="true"></i>
             <span class="d-inline-block">{{ fax }}</span>
 		</p>
     {% endif %}
 
     {% if "email" in showData or showData == 'all' %}
 		<p class="my-0">
-            <a href="mailto:{{ email }}">
-                <i class="fa fa-envelope fa-fw" aria-hidden="true"></i>
+            <a class="text-dark" href="mailto:{{ email }}">
+                <i class="fa fa-envelope fa-fw mr-2" aria-hidden="true"></i>
                 <span class="d-inline-block">{{ email }}</span>
             </a>
 		</p>
@@ -81,7 +85,7 @@
 
     {% if "opening_times" in showData or showData == 'all' %}
 		<p class="my-0">
-			<i class="fa fa-fw fa-clock-o" aria-hidden="true"></i>
+			<i class="fa fa-fw fa-clock-o mr-2" aria-hidden="true"></i>
 			<span class="d-inline-block">
                 {{ trans("Ceres::Template.contactOpeningTimes") }}
             </span>
@@ -90,16 +94,20 @@
 
     {% if "timezone" in showData or showData == 'all' %}
 		<p class="my-0">
-			<i class="fa fa-fw fa-globe" aria-hidden="true"></i>
+			<i class="fa fa-fw fa-globe mr-2" aria-hidden="true"></i>
 			<span class="d-inline-block">{{ timezone }}</span>
 		</p>
     {% endif %}
 
     {% if "vatNumber" in showData or showData == 'all' %}
-		<p class="my-0 contact-vat-number">
-			<i class="fa fa-fw" aria-hidden="true"></i>
-			<span class="d-inline-block vat-number-field">{{ trans("Ceres::Template.contactVatNumber") }}:</span><br>
-			<span class="d-inline-block">{{ vat }}</span>
-		</p>
+        <div>
+			<i class="fa fa-fw mr-2" aria-hidden="true"></i>
+            <div class="d-inline-block align-top">
+                <p class="my-0">
+                    <span class="d-inline-block font-weight-bold">{{ trans("Ceres::Template.contactVatNumber") }}:</span><br>
+                    <span class="d-inline-block">{{ vat }}</span>
+                </p>
+            </div>
+        </div>
     {% endif %}
 </div>

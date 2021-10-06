@@ -18,11 +18,21 @@ Vue.mixin({
                     .toLowerCase();
 
                 const uid = this.$attrs[attrKey];
-                const element = document.getElementById(uid);
 
-                if (!isNullOrUndefined(element))
+                if (typeof document !== "undefined")
                 {
-                    this[dataField] = JSON.parse(element.textContent);
+                    // read json data from dom element on client side
+                    const element = document.getElementById(uid);
+
+                    if (!isNullOrUndefined(element))
+                    {
+                        this[dataField] = JSON.parse(element.textContent);
+                    }
+                }
+                else if (typeof jsonData !== "undefined")
+                {
+                    // read json data from global object during ssr
+                    this[dataField] = jsonData[uid];
                 }
             });
         }

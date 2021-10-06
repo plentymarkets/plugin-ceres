@@ -1,14 +1,14 @@
+import dayjs from "dayjs";
 const ApiService = require("../../services/ApiService");
 
-const state =
-    {
-        billingAddressId: null,
-        billingAddress: null,
-        billingAddressList: [],
-        deliveryAddressId: null,
-        deliveryAddress: null,
-        deliveryAddressList: []
-    };
+const state = () => ({
+    billingAddressId: null,
+    billingAddress: null,
+    billingAddressList: [],
+    deliveryAddressId: null,
+    deliveryAddress: null,
+    deliveryAddressList: []
+});
 
 const mutations =
     {
@@ -26,7 +26,6 @@ const mutations =
             {
                 state.billingAddressId = billingAddress.id;
                 state.billingAddress = billingAddress;
-                document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
             }
         },
 
@@ -79,7 +78,6 @@ const mutations =
             {
                 state.deliveryAddressId = deliveryAddress.id;
                 state.deliveryAddress = deliveryAddress;
-                document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
             }
         },
 
@@ -213,8 +211,20 @@ const actions =
     {
         initBillingAddress({ commit }, { id, addressList })
         {
+            // format dates from the old ui into ISO
+            addressList.forEach(address =>
+            {
+                const option = address.options.find(option => option.typeId === 9);
+
+                if (option && isNaN(Date.parse(option.value)))
+                {
+                    option.value = dayjs(option.value * 1000).format("YYYY-MM-DD");
+                }
+            });
+
             commit("setBillingAddressList", addressList);
             commit("selectBillingAddress", addressList.find(address => address.id === id));
+            document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
         },
 
         initDeliveryAddress({ commit }, { id, addressList })
@@ -227,6 +237,7 @@ const actions =
 
             commit("setDeliveryAddressList", addressList);
             commit("selectDeliveryAddress", addressList.find(address => address.id === id));
+            document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
         },
 
         selectAddress({ commit, state, rootState, dispatch }, { selectedAddress, addressType })
@@ -252,6 +263,14 @@ const actions =
                     .done(response =>
                     {
                         commit("setIsBasketLoading", false);
+                        if (addressType === "1")
+                        {
+                            document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
+                        }
+                        else if (addressType === "2")
+                        {
+                            document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
+                        }
                         return resolve(response);
                     })
                     .fail(error =>

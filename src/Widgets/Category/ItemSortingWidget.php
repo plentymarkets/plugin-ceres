@@ -5,34 +5,46 @@ namespace Ceres\Widgets\Category;
 use Ceres\Config\CeresSortingConfig;
 use Ceres\Widgets\Helper\BaseWidget;
 use Ceres\Helper\SearchOptions;
+use Ceres\Widgets\Helper\Factories\Settings\ItemSortValueListFactory;
 use Ceres\Widgets\Helper\Factories\Settings\ValueListFactory;
 use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
+use IO\Services\ItemService;
 use Plenty\Plugin\Http\Request;
 
 class ItemSortingWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = 'Ceres::Widgets.Category.ItemSortingWidget';
-    
+
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make('Ceres::ItemSortingWidget')
                                 ->withLabel('Widget.itemSortingLabel')
                                 ->withPreviewImageUrl('/images/widgets/item-sorting.svg')
-                                ->withType(WidgetTypes::TOOLBAR)
+                                ->withType(WidgetTypes::CATEGORY_ITEM)
                                 ->withCategory(WidgetTypes::CATEGORY_ITEM)
                                 ->withPosition(300)
+                                ->withSearchKeyWords([
+                                    "item", "artikel", "article", "produkt", "sorting", "sortierung", "category", "kategorie"
+                                ])
                                 ->toArray();
     }
-    
+
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */
         $settings = pluginApp(WidgetSettingsFactory::class);
-        
+
         $settings->createCustomClass();
-        
+
         $settings->createCheckboxGroup('itemSortOptions')
                  ->withDefaultValue(
                      [
@@ -45,62 +57,61 @@ class ItemSortingWidget extends BaseWidget
                  ->withName('Widget.itemSortingOptionsLabel')
                  ->withTooltip('Widget.itemSortingOptionsTooltip')
                  ->withCheckboxValues(
-                     ValueListFactory::make()
-                                     ->addEntry('default.recommended_sorting', 'Widget.itemRecommendedSorting')
-                                     ->addEntry('texts.name1_asc', 'Widget.itemName_asc')
-                                     ->addEntry('texts.name1_desc', 'Widget.itemName_desc')
-                                     ->addEntry('sorting.price.avg_asc', 'Widget.itemPrice_asc')
-                                     ->addEntry('sorting.price.avg_desc', 'Widget.itemPrice_desc')
-                                     ->addEntry('variation.createdAt_desc', 'Widget.itemVariationCreateTimestamp_desc')
-                                     ->addEntry('variation.createdAt_asc', 'Widget.itemVariationCreateTimestamp_asc')
-                                     ->addEntry('variation.availability.averageDays_asc', 'Widget.itemAvailabilityAverageDays_asc')
-                                     ->addEntry('variation.availability.averageDays_desc', 'Widget.itemAvailabilityAverageDays_desc')
-                                     ->addEntry('variation.number_asc', 'Widget.itemVariationCustomNumber_asc')
-                                     ->addEntry('variation.number_desc', 'Widget.itemVariationCustomNumber_desc')
-                                     ->addEntry('variation.updatedAt_asc', 'Widget.itemVariationLastUpdateTimestamp_asc')
-                                     ->addEntry('variation.updatedAt_desc', 'Widget.itemVariationLastUpdateTimestamp_desc')
-                                     ->addEntry('item.manufacturer.externalName_asc', 'Widget.itemProducerName_asc')
-                                     ->addEntry('item.manufacturer.externalName_desc', 'Widget.itemProducerName_desc')
-                                     ->addEntry('variation.position_asc', 'Widget.itemVariationTopseller_asc')
-                                     ->addEntry('variation.position_desc', 'Widget.itemVariationTopseller_desc')
-                                     ->toArray()
+                     ItemSortValueListFactory::make()->toArray()
                  );
-        
+
         $settings->createSpacing(false, true);
-        
+
         return $settings->toArray();
     }
-    
+
+    /**
+     * @inheritDoc
+     */
     protected function getTemplateData($widgetSettings, $isPreview)
     {
         $itemSortOptions = [];
         $result          = [];
         $translationMap  = SearchOptions::TRANSLATION_MAP;
+        $translationMap = array_map(function($value) { return 'Ceres::Template.'.$value; }, $translationMap);
+
         /**
          * @var CeresSortingConfig $ceresSortingConfig
          */
         $ceresSortingConfig = pluginApp(CeresSortingConfig::class);
-        
+
         if (array_key_exists('itemSortOptions', $widgetSettings)) {
             $temp = $widgetSettings['itemSortOptions']['mobile'];
-            
+
             // add default from ceres config
             if (!in_array($ceresSortingConfig->defaultSorting, $temp)) {
                 array_push($temp, $ceresSortingConfig->defaultSorting);
             }
-            
+
             foreach ($translationMap as $key => $value) {
                 if (in_array($key, $temp)) {
                     array_push($itemSortOptions, $key);
                 }
             }
         }
-        
+
+        /** @var ItemService $itemService */
+        $itemService = pluginApp(ItemService::class);
+        $additionalItemSortings = $itemService->getAdditionalItemSorting();
+        foreach($additionalItemSortings as $additionalItemSortingKey => $additionalItemSortingTranslation) {
+            $itemSortOptions[] = $additionalItemSortingKey;
+            $translationMap[$additionalItemSortingKey] = $additionalItemSortingTranslation;
+        }
+
         $result['itemSortOptions'] = $itemSortOptions;
         $result['translations']    = $translationMap;
+
         return $result;
     }
-    
+
+    /**
+     * @inheritDoc
+     */
     protected function getPreviewData($widgetSettings)
     {
         /**

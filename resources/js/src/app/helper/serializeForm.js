@@ -3,7 +3,9 @@ import { isDefined } from "./utils";
 function _readElement(inputElement)
 {
     let name   = inputElement.name;
+
     let label  = getLabel(inputElement);
+
     let value  = inputElement.value;
 
     if (inputElement.type === "checkbox")
@@ -100,7 +102,7 @@ export function getLabelForId(id)
 export function serializeForm(form)
 {
     const formData = {};
-    const formElements = form.querySelectorAll("[name]:not(.g-recaptcha-response)");
+    const formElements = form.querySelectorAll("[name]:not(.g-recaptcha-response):not([type=file])");
 
     for (const formElement of formElements)
     {

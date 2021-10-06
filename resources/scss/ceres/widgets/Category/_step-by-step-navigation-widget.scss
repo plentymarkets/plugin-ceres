@@ -1,0 +1,44 @@
+.widget-step-by-step-navigation {
+    .nav-item {
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+        min-height: 75px;
+        cursor: pointer;
+        background-color: $white;
+
+        &.preview svg {
+            position: absolute;
+            right: 0;
+            left: 0;
+            display: block !important; // stylelint-disable-line declaration-no-important
+            fill: $gray-100;
+        }
+    }
+
+    .nav-text {
+        flex: auto;
+        background-color: $gray-200;
+    }
+
+    img {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    &.widget-none {
+        span {
+            color: $black;
+        }
+    }
+
+    span {
+        align-self: center;
+    }
+}

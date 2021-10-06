@@ -5,6 +5,8 @@
 {% set spacingSettings  = widget.settings.spacing %}
 {% set inlinePadding    = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set paddingClasses   = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin     = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingMargin    = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 {% set appearance       = widget.settings.appearance.mobile | default("primary") %}
 {% set placement        = widget.settings.placement.mobile | default("auto") %}
 {% set icon             = widget.settings.icon.mobile %}
@@ -12,7 +14,7 @@
 {% set buttonSize       = widget.settings.buttonSize.mobile | default("") %}
 {% set popoverSize      = widget.settings.size.mobile | default("") %}
 
-<div class="widget widget-additional-information{% if customClass | length > 0 %} {{ customClass }}{% endif %}">
+<div class="widget widget-additional-information{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     {% if children.popper | length > 0 or title | length > 0 or isPreview %}
     <div class="d-inline">
         <popper v-cloak placement="{{ placement }}"

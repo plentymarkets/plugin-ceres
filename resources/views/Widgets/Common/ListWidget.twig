@@ -4,7 +4,7 @@
 {% set title            = widget.settings.title.mobile %}
 {% set icon             = widget.settings.icon.mobile %}
 {% set centered         = widget.settings.centered.mobile %}
-{% set hasEntries    = false %}
+{% set hasEntries       = false %}
 
 {% set customClass = widget.settings.customClass.mobile %}
 {% set spacingSettings = widget.settings.spacing %}
@@ -31,7 +31,7 @@
                             {% endif %}
 
                             {% if entry.text is not empty %}
-                                <a class="d-inline-block{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}{% if entry.url.openInNewTab == true %} target="_blank"{% endif %}{% if entry.url.type == 'external' %} rel="noopener"{% endif %}{{ Twig.if("url | trim is not empty") }} href="{{ Twig.print("url") }}"{{ Twig.endif() }}>
+                                <a class="d-inline-block{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}{% if entry.url.openInNewTab == true %} target="_blank"{% endif %}{{ Twig.if("url | trim is not empty") }} {% if entry.rel != "none" %}rel="{{ entry.rel }}"{% endif %} href="{{ Twig.print("url") }}"{{ Twig.endif() }}>
                                     {{ entry.text }}
                                 </a>
                             {% endif %}

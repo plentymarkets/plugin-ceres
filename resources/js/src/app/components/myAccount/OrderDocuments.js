@@ -1,7 +1,7 @@
 import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
 
-Vue.component("order-documents", {
+export default Vue.component("order-documents", {
 
     props: {
         template:
@@ -31,7 +31,8 @@ Vue.component("order-documents", {
                 "delivery_note",
                 "order_confirmation",
                 "pickup_delivery",
-                "reversal_document"
+                "reversal_document",
+                "return_note"
             ]
         },
 

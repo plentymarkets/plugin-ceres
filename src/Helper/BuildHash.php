@@ -6,6 +6,7 @@ use Plenty\Plugin\CachingRepository;
 
 /**
  * Class BuildHash
+ *
  * Helper to store build dependent hash for cache busting.
  *
  * @package Ceres\Helper

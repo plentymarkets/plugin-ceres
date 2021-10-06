@@ -1,4 +1,4 @@
-import store from "../../store/index";
+import { store } from "../../store/index";
 import { isDefined } from "../../helper/utils";
 import Vue from "vue";
 

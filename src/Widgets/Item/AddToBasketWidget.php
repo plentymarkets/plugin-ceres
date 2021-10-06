@@ -10,19 +10,29 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class AddToBasketWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Item.AddToBasketWidget";
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::AddToBasketWidget")
             ->withLabel("Widget.addtoBasketLabel")
             ->withPreviewImageUrl("/images/widgets/add-to-basket.svg")
-            ->withType(WidgetTypes::ITEM)
+            ->withType(WidgetTypes::ITEM_CONTENT)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(200)
+            ->withSearchKeyWords([
+                "item", "artikel", "article", "basket", "add", "hinzufügen", "warenkorb"
+            ])
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settingsFactory */

@@ -5,10 +5,14 @@ const NotificationService = require("../../../../services/NotificationService");
 import ValidationService from "../../../../services/ValidationService";
 import TranslationService from "../../../../services/TranslationService";
 import Vue from "vue";
+import AddressInputGroup from "../../AddressInputGroup.vue";
 
-Vue.component("create-update-address", {
+export default Vue.component("create-update-address", {
 
-    delimiters: ["${", "}"],
+    components:
+    {
+        AddressInputGroup
+    },
 
     props: {
         addressData: {
@@ -59,7 +63,7 @@ Vue.component("create-update-address", {
     {
         addressList()
         {
-            this.$store.getters.getAddressList(this.addressType);
+            return this.$store.getters.getAddressList(this.addressType);
         }
     },
 
@@ -118,7 +122,7 @@ Vue.component("create-update-address", {
 
             this.$store.dispatch("updateAddress", { address: this.addressData, addressType: this.addressType })
                 .then(
-                    resolve =>
+                    () =>
                     {
                         this.addressModal.hide();
                         this.waiting = false;
@@ -149,7 +153,7 @@ Vue.component("create-update-address", {
 
             this.$store.dispatch("createAddress", { address: this.addressData, addressType: this.addressType })
                 .then(
-                    response =>
+                    () =>
                     {
                         this.addressModal.hide();
                         this.waiting = false;
@@ -191,6 +195,10 @@ Vue.component("create-update-address", {
                 NotificationService.error({ code: error.code, message: "" });
                 window.location.reload();
             }
+            else if ([210, 211].indexOf(error.code) !== -1)
+            {
+                NotificationService.error({ code: error.code, message: error.message });
+            }
             else this._handleValidationErrors(error);
         },
 
@@ -217,6 +225,14 @@ Vue.component("create-update-address", {
                         if (!isNullOrUndefined(this.addressData.telephone) && this.addressData.telephone !== optionType.value)
                         {
                             optionType.value = this.addressData.telephone;
+                        }
+                        break;
+                    }
+                    case 5:
+                    {
+                        if (!isNullOrUndefined(this.addressData.email) && this.addressData.email !== optionType.value)
+                        {
+                            optionType.value = this.addressData.email;
                         }
                         break;
                     }

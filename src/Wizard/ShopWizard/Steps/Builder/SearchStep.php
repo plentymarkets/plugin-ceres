@@ -23,6 +23,7 @@ class SearchStep extends Step
                            " settingsSelection_search === true) && "
                            . $this->globalsCondition . " && " . $this->hasRequiredSettings(),
             "sections" => [
+                $this->generateSearchOperatorSection(),
                 $this->generateDefaultSortingSection(),
                 $this->generateSearchFieldsSection(),
                 $this->generateRecommendedSearchSortingSection()
@@ -30,6 +31,34 @@ class SearchStep extends Step
         ];
     }
 
+    private function generateSearchOperatorSection(): array
+    {
+        $defaultSearchOperatorOptions = SearchConfig::getSortingOperatorOptions();
+        $defaultSearchOperatorOptionsList = StepHelper::generateTranslatedListBoxValues($defaultSearchOperatorOptions);
+        return [
+            "title" => "Wizard.searchDefaultSortingOperator",
+            "description" => "Wizard.searchDefaultSortinOperatorgDescription",
+            "condition" => $this->globalsCondition,
+            "form" => [
+                "search_itemSearchOperator" => [
+                    "type" => "select",
+                    "defaultValue" => $defaultSearchOperatorOptionsList[0]['value'],
+                    "options" => [
+                        "name" => "Wizard.defaultSearchOperatorSorting",
+                        "listBoxValues" => $defaultSearchOperatorOptionsList
+                    ]
+                ],
+                "search_itemAutocompleteSearchOperator" => [
+                    "type" => "select",
+                    "defaultValue" => $defaultSearchOperatorOptionsList[0]['value'],
+                    "options" => [
+                        "name" => "Wizard.defaultAutocompleteSearchOperatorSorting",
+                        "listBoxValues" => $defaultSearchOperatorOptionsList
+                    ]
+                ]
+            ]
+        ];
+    }
     /**
      * @return array
      */
@@ -75,7 +104,7 @@ class SearchStep extends Step
     private function getSearchFields():array
     {
         $formFields = [];
-        
+
         $searchFieldsOptions     = SearchConfig::getSearchFieldsOptions();
         $searchFieldsOptionsList = StepHelper::generateTranslatedListBoxValues($searchFieldsOptions);
 

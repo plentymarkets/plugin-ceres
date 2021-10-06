@@ -8,14 +8,7 @@
 {% endblock %}
 
 {% block PageBody %}
-
-    {{ component( "Ceres::Basket.Components.BasketList" ) }}
-    {{ component( "Ceres::Basket.Components.Coupon" ) }}
-    {{ component( "Ceres::Basket.Components.BasketTotals" ) }}
-    {{ component( "Ceres::Basket.Components.BasketShippingCountrySelect" ) }}
-
-    <div v-cloak class="page-content basket container-max" itemtype="http://schema.org/Product http://schema.org/Thing http://schema.org/Offer http://schema.org/PriceSpecification">
-
+    <div v-cloak class="page-content basket container-max pt-3" itemtype="http://schema.org/Product http://schema.org/Thing http://schema.org/Offer http://schema.org/PriceSpecification">
         <div class="row mt-3">
             <div class="col-12">
                 <h1 class="h2">{{ trans("Ceres::Template.basket") }}</h1>
@@ -28,6 +21,12 @@
             <div class="col-md-7">
                 <div class="py-4 px-3 bg-white">
                     <basket-list :basket-details-data="{{ ceresConfig.basket.itemData | json_encode }}">
+                        <template #before-basket-item>
+                            {{ LayoutContainer.show("Ceres::BasketList.BeforeItem") }}
+                        </template>
+                        <template #after-basket-item>
+                            {{ LayoutContainer.show("Ceres::BasketList.AfterItem") }}
+                        </template>
                     </basket-list>
                 </div>
             </div>
@@ -36,13 +35,38 @@
                 <div class="py-4 px-3 bg-white" v-stick-in-parent="$store.state.basket.isBasketInitiallyLoaded">
 
                     {% if ceresConfig.basket.showShippingCountrySelect %}
-                        <shipping-country-select template="#vue-basket-shipping-country-select" :open-basket-preview="false"></shipping-country-select>
+                        <shipping-country-select :basket-select="true" :open-basket-preview="false"></shipping-country-select>
                         <hr>
                     {% endif %}
 
                     <hr class="d-md-none">
                     {{ LayoutContainer.show("Ceres::Basket.BeforeBasketTotals") }}
-                    <basket-totals class="mb-4" template="#vue-basket-totals"></basket-totals>
+                    <basket-totals class="mb-4">
+                        <template #before-item-sum>
+                            {{ LayoutContainer.show("Ceres::BasketTotals.BeforeItemSum") }}
+                        </template>
+                        <template #after-item-sum>
+                            {{ LayoutContainer.show("Ceres::BasketTotals.AfterItemSum") }}
+                        </template>
+                        <template #before-shipping-costs>
+                            {{ LayoutContainer.show("Ceres::BasketTotals.BeforeShippingCosts") }}
+                        </template>
+                        <template #after-shipping-costs>
+                            {{ LayoutContainer.show("Ceres::BasketTotals.AfterShippingCosts") }}
+                        </template>
+                        <template #before-total-sum>
+                            {{ LayoutContainer.show("Ceres::BasketTotals.BeforeTotalSum") }}
+                        </template>
+                        <template #before-vat>
+                            {{ LayoutContainer.show("Ceres::BasketTotals.BeforeVat") }}
+                        </template>
+                        <template #after-vat>
+                            {{ LayoutContainer.show("Ceres::BasketTotals.AfterVat") }}
+                        </template>
+                        <template #after-total-sum>
+                            {{ LayoutContainer.show("Ceres::BasketTotals.AfterTotalSum") }}
+                        </template>
+                    </basket-totals>
                     {{ LayoutContainer.show("Ceres::Basket.AfterBasketTotals") }}
 
                     <hr>

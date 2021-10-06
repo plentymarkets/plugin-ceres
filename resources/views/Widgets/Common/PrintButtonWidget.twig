@@ -11,7 +11,7 @@
 {% set appearance = widget.settings.appearance.mobile | default("primary") %}
 {% set buttonSize = widget.settings.buttonSize.mobile | default("") %}
 
-<div class="widget widget-print-button no-padding no-print{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+<div class="widget widget-print-button px-0 d-print-none{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
 
     <button type="button" class="btn btn-{{ appearance }} {{ buttonSize }}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"

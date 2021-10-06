@@ -6,6 +6,9 @@ use Ceres\Widgets\Helper\BaseWidget;
 
 class GridWidget extends BaseWidget
 {
+    /**
+     * @inheritDoc
+     */
     protected function getTemplateData($widgetSettings, $isPreview)
     {
         return [

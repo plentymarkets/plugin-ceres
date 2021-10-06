@@ -11,21 +11,27 @@ use Plenty\Plugin\Templates\Twig;
 use Plenty\Plugin\Translation\Translator;
 
 /**
- * Class TwigStyleScriptTagFilter
+ * Class TwigItemDataField
+ * This TWIG extension provides several functions and filters for accessing item data.
+ * Created for the ShopBuilder text widget.
+ *
  * @package Ceres\Extensions
  */
 class TwigItemDataField extends Twig_Extension
 {
     /**
-     * @var TwigFactory
+     * @var TwigFactory $twig The factory to render TWIG.
      */
     private $twig;
 
-    private $itemData = null;
+    /**
+     * @var array $itemData This array acts as a stack (LIFO). The last element is used for data field fetches.
+     */
+    private $itemData = [];
 
     /**
-     * TwigStyleScriptTagFilter constructor.
-     * @param TwigFactory $twig
+     * TwigItemDataField constructor.
+     * @param TwigFactory $twig The factory to render TWIG.
      */
     public function __construct(TwigFactory $twig)
     {
@@ -33,9 +39,9 @@ class TwigItemDataField extends Twig_Extension
     }
 
     /**
-     * Return the name of the extension. The name must be unique.
+     * Return the name of the extension.
      *
-     * @return string The name of the extension
+     * @return string The name of the extension.
      */
     public function getName(): string
     {
@@ -45,12 +51,13 @@ class TwigItemDataField extends Twig_Extension
     /**
      * Return a list of functions to add.
      *
-     * @return array the list of functions to add.
+     * @return array The list of functions to add.
      */
     public function getFunctions(): array
     {
         return [
             $this->twig->createSimpleFunction('set_item_data_base', [$this, 'setItemDataBase']),
+            $this->twig->createSimpleFunction('pop_item_data_base', [$this, 'popItemDataBase']),
             $this->twig->createSimpleFunction('item_data_field', [$this, 'getDataField'], ['is_safe' => array('html')]),
             $this->twig->createSimpleFunction(
                 'item_data_field_html',
@@ -73,20 +80,43 @@ class TwigItemDataField extends Twig_Extension
         ];
     }
 
+    /**
+     * Add an item data array into the property itemData.
+     *
+     * @param array $itemData Item data array.
+     * @return string Empty string.
+     */
     public function setItemDataBase($itemData)
     {
-        $this->itemData = $itemData;
-        return "";
+        $this->itemData[] = $itemData;
+        return '';
     }
 
     /**
-     * @param $field
-     * @param null $filter
-     * @return string
+     * Calls array_pop against the property itemData.
+     *
+     * @return string Empty string.
+     */
+    public function popItemDataBase()
+    {
+        array_pop($this->itemData);
+        return '';
+    }
+
+    /**
+     * Return a created HTML element. The content of the element is a TWIG statement to print a field from the item data.
+     *
+     * @param string $field The accessor for the field in the item data.
+     * @param string $filter Add a filter in the TWIG string.
+     * @param string $directiveType Vue.js directive type for the element.
+     * @param string $htmlTagType HTML Tag for element.
+     * @param string $linkType If set to "file", the element gets the attribute target="_black".
+     * @return string Created element.
      */
     public function getDataField($field, $filter = null, $directiveType = "text", $htmlTagType = "span", $linkType = "")
     {
-        $twigPrint = SafeGetter::get($this->itemData, $field);
+        $itemData = $this->itemData[count($this->itemData)-1];
+        $twigPrint = SafeGetter::get($itemData, $field);
         if (!is_null($filter)) {
             try {
                 /** @var Twig $twigRenderer */
@@ -98,6 +128,7 @@ class TwigItemDataField extends Twig_Extension
         }
 
         if (is_null($directiveType)) {
+
             return $twigPrint;
         }
 
@@ -138,15 +169,24 @@ class TwigItemDataField extends Twig_Extension
     }
 
     /**
-     * @param $field
-     * @param null $filter
-     * @return string
+     * Call method getDataField with the directiveType "html".
+     *
+     * @param string $field The accessor for the field in the item data.
+     * @param string $filter Add a filter in the TWIG string.
+     * @return string Created element.
      */
     public function getDataFieldHtml($field, $filter = null)
     {
         return $this->getDataField($field, $filter, 'html');
     }
 
+
+    /**
+     * Convert an age to the assigned translation string.
+     *
+     * @param int $age The age.
+     * @return string The translated age string.
+     */
     public function formatAgeRestriction($age)
     {
         $age = intval($age);
@@ -154,7 +194,7 @@ class TwigItemDataField extends Twig_Extension
         $translator = pluginApp(Translator::class);
         if ($age === 0) {
             return $translator->trans('Ceres::Template.singleItemAgeRestrictionNone', ['age' => $age]);
-        } elseif ($age > 0 && $age < 18) {
+        } elseif ($age > 0 && $age <= 18) {
             return $translator->trans('Ceres::Template.singleItemAgeRestriction', ['age' => $age]);
         } elseif ($age === 50) {
             return $translator->trans('Ceres::Template.singleItemAgeRestrictionNotFlagged', ['age' => $age]);
@@ -167,6 +207,12 @@ class TwigItemDataField extends Twig_Extension
         return $translator->trans('Ceres::Template.singleItemAgeRestrictionUnknown', ['age' => $age]);
     }
 
+    /**
+     * Format a date string.
+     *
+     * @param string $date The date string.
+     * @return string The formatted date.
+     */
     public function formatDate($date)
     {
         return date(
@@ -178,7 +224,7 @@ class TwigItemDataField extends Twig_Extension
     /**
      * Return a map of global helper objects to add.
      *
-     * @return array the map of helper objects to add.
+     * @return array The map of helper objects to add.
      */
     public function getGlobals(): array
     {

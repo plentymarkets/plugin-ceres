@@ -18,29 +18,56 @@ const INPUT = [
     [99.9950, "100,00"],
     [99.9999, "100,00"]
 ];
-const CURRENCY = "EUR";
 
 global.App = {
     currencyPattern: {
         pattern: "#,##0.00 ¤",
         separator_thousands: ".",
-        separator_decimal: ","
+        separator_decimal: ",",
+        symbols: {
+            "EUR": "€"
+        }
+    },
+    config: {
+        currency: {
+            format: "name"
+        }
     }
 };
 
 const formatter = new MonetaryFormatter();
 let errorCount = 0;
+let testCount = 0;
+let result;
+let expected;
 
 INPUT.forEach(input =>
 {
-    const result   = formatter.format(input[0], CURRENCY);
-    const expected = input[1] + " " + CURRENCY;
-
-    if (result !== expected)
+    Object.keys(global.App.currencyPattern.symbols).forEach(currency =>
     {
-        errorCount++;
-        console.error(`Error formatting ${input[0]}: Expected "${expected}" got "${result}"`);
-    }
+        global.App.config.currency.format = "name";
+        result   = formatter.format(input[0], currency);
+        expected = input[1] + " " + currency;
+        testCount++;
+
+
+        if (result !== expected)
+        {
+            errorCount++;
+            console.error(`Error formatting ${input[0]}: Expected "${expected}" got "${result}"`);
+        }
+
+        global.App.config.currency.format = "symbol";
+        result   = formatter.format(input[0], currency);
+        expected = input[1] + " " + global.App.currencyPattern.symbols[currency];
+        testCount++;
+
+        if (result !== expected)
+        {
+            errorCount++;
+            console.error(`Error formatting ${input[0]}: Expected "${expected}" got "${result}"`);
+        }
+    });
 });
 
-console.log(`Run ${INPUT.length} tests with ${errorCount} errors.`);
+console.log(`Run ${testCount} tests with ${errorCount} errors.`);

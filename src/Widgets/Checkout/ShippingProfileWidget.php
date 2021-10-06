@@ -10,8 +10,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class ShippingProfileWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Checkout.ShippingProfileWidget";
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::ShippingProfileWidget")
@@ -21,9 +25,15 @@ class ShippingProfileWidget extends BaseWidget
             ->withCategory(WidgetCategories::CHECKOUT)
             ->withPosition(100)
             ->withMaxPerPage(1)
+            ->withSearchKeyWords([
+                "checkout", "bestellvorgang", "bestellung", "shipping", "versand"
+            ])
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */

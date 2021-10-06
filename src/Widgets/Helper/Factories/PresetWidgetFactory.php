@@ -15,11 +15,11 @@ class PresetWidgetFactory
      * @param mixed     $value
      * @return PresetWidgetFactory
      */
-    public function withSetting($key, $valueMobile, $valueTalet = null, $valueDesktop = null, $valueLargeDesktop = null )
+    public function withSetting($key, $valueMobile, $valueTablet = null, $valueDesktop = null, $valueLargeDesktop = null )
     {
         $this->mergeValue($this->settings, $key, [
             'mobile'        => $valueMobile,
-            'tablet'        => $valueTalet ?? $valueMobile,
+            'tablet'        => $valueTablet ?? $valueMobile,
             'desktop'       => $valueDesktop ?? $valueMobile,
             'largeDesktop'  => $valueLargeDesktop ?? $valueMobile
         ]);

@@ -1,5 +1,6 @@
 const path = require("path");
-const MomentLocalesPlugin = require("moment-locales-webpack-plugin");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const WebpackRequireFrom = require("webpack-require-from");
 
 module.exports = env =>
 {
@@ -7,10 +8,14 @@ module.exports = env =>
     return {
         name: "scripts",
         mode: env.prod ? "production" : "development",
-        entry: "./resources/js/src/app/index.js",
+        entry: {
+            base: "./resources/js/src/base.js",
+            checkout: "./resources/js/src/checkout.js"
+        },
         output: {
-            filename: "../../../resources/js/dist/ceres" + (env.prod ? ".min" : "") + ".js",
-            path: path.resolve(__dirname, "dist")
+            filename: "ceres-[name]" + (env.prod ? ".min" : "") + ".js",
+            chunkFilename: "chunks/ceres-[name]"+ (env.prod ? ".min" : "") + ".js",
+            path: path.resolve(__dirname, "..", "..", "resources/js/dist/")
         },
         resolve: {
             alias: {
@@ -44,6 +49,10 @@ module.exports = env =>
                     ]
                 },
                 {
+                    test: /\.vue$/,
+                    loader: "vue-loader"
+                },
+                {
                     test: /\.m?js$/,
                     exclude: /node_modules/,
                     use: {
@@ -53,8 +62,11 @@ module.exports = env =>
             ]
         },
         plugins: [
-            new MomentLocalesPlugin({
-                localesToKeep: ["de", "en", "fr", "it", "es", "tr", "nl", "pl", "se", "ru", "sk", "pt", "bg", "ro"]
+            new VueLoaderPlugin({
+                exposeFilename: true
+            }),
+            new WebpackRequireFrom({
+                replaceSrcMethodName: "__loadPluginChunk"
             })
         ]
     };

@@ -1,25 +1,8 @@
-.alert-dynamic {
-	position: fixed;
-	display: inline-block;
-	width: auto;
-	top: 10rem;
-	right:.5rem;
-}
-
-.alert {
-	@include media-breakpoint-up(sm) {
-	  width: 400px;
-	}
-	@include media-breakpoint-up(xs) {
-	  width: 100%;
-	}
-}
-
-.password-info {
-
-	padding: 10px !important;
-
-	.info-badge {
-		margin-left: 0.2rem;
-	}
+.notification-wrapper .alert {
+    @include media-breakpoint-up(sm) {
+        width: 400px;
+    }
+    @include media-breakpoint-up(xs) {
+        width: 100%;
+    }
 }

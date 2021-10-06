@@ -1,11 +1,14 @@
-const ApiService = require("../../services/ApiService");
+import ExceptionMap from "../../exceptions/ExceptionMap";
 
-const state =
-    {
-        orderData: {},
-        orderReturnItems: [],
-        orderReturnNote: ""
-    };
+const ApiService = require("../../services/ApiService");
+const NotificationService = require("../../services/NotificationService");
+
+const state = () => ({
+    orderData: {},
+    orderAccessKey: "",
+    orderReturnItems: [],
+    orderReturnNote: ""
+});
 
 const mutations =
     {
@@ -14,6 +17,11 @@ const mutations =
             orderData.order.orderItems = orderData.order.orderItems.filter(orderItem => orderItem.quantity !== 0);
 
             state.orderData = orderData;
+        },
+
+        setOrderAccessKey(state, orderAccessKey)
+        {
+            state.orderAccessKey = orderAccessKey;
         },
 
         updateOrderReturnItems(state, { quantity, orderItem })
@@ -62,13 +70,22 @@ const actions =
                         variationIds[state.orderReturnItems[index].orderItem.itemVariationId] = state.orderReturnItems[index].quantity;
                     }
 
-                    ApiService.post("/rest/io/order/return", { orderId: state.orderData.order.id, variationIds, returnNote: state.orderReturnNote })
+                    ApiService.post("/rest/io/order/return", { orderId: state.orderData.order.id, orderAccessKey: state.orderAccessKey, variationIds, returnNote: state.orderReturnNote })
                         .done(data =>
                         {
                             resolve(data);
                         })
                         .fail(error =>
                         {
+                            if (error.data)
+                            {
+                                NotificationService.error(
+                                    this.$translate(
+                                        "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString()),
+                                        error.data.placeholder
+                                    )
+                                ).closeAfter(5000);
+                            }
                             reject(error);
                         });
                 }

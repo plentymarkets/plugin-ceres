@@ -1,0 +1,63 @@
+@import "~bootstrap/scss/functions";
+@import "variables";
+// ==========================================================================
+// External Libs
+// ==========================================================================
+@import "~bootstrap/scss/bootstrap";
+
+// ==========================================================================
+// Custom styles
+// ==========================================================================
+
+// global
+@import "mixins/general-mixins";
+
+@import "common/background";
+@import "common/buttons";
+@import "common/common";
+@import "common/heights";
+@import "common/modal"; // TODO: This would better fit into /components
+@import "common/proportional-boxes";
+@import "common/reboot";
+@import "common/search-box";
+
+// External plugins overrides
+@import "plugins/owl-carousel";
+
+// Components
+@import "components/alerts";
+@import "components/anicon";
+@import "components/component-base";
+
+@import "components/live-shopping";
+@import "components/notifications";
+@import "components/popover";
+@import "components/cookie-bar";
+@import "components/tooltip";
+@import "components/sticky-element";
+
+// Forms
+@import "forms/inputs";
+
+// Page Design / Global components
+@import "views/PageDesign/footer";
+@import "views/PageDesign/header";
+
+// Templates
+@import "views/Templates/BasketItemList/basket-list-item";
+@import "views/Templates/BasketPreview/basket-preview";
+@import "views/Templates/BasketTotalSum/basket-total-sum";
+@import "views/Templates/CategoryListItem/category-list-item";
+@import "views/Templates/Common/component-loading";
+@import "views/Templates/Item/quantity-input";
+
+// Pages
+@import "views/Category/category-list";
+@import "views/Category/category-list-controls";
+@import "views/Item/set-item";
+@import "views/Item/single-item";
+@import "views/ItemList/loading-animation";
+
+// Widgets
+@import "widgets/widgets";
+

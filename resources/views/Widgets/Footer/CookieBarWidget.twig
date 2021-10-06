@@ -7,16 +7,15 @@
 {% set inlineSpacings   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set spacingClasses   = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
-{{ Twig.component("Ceres::PageDesign.Components.CookieBar") }}
-{{ Twig.component("Ceres::PageDesign.Components.PrivacySettings") }}
-
 <div class="widget-cookie-bar widget-{{ appearance -}}
     {%- if customClass | length > 0 %} {{ customClass }}{% endif -%}
     {%- if isPreview %} widget-fw{% endif %}">
     <div class="widget-inner">
         <cookie-bar
-                {%- if spacingClasses | length > 0 %} classes="{{ spacingClasses }}"{% endif %}
-                {%- if inlineSpacings | length > 0 %} styles="{{ inlineSpacings }}"{% endif %}>
+            :consent-groups="{{ Twig.print('get_consent_groups() | json_encode') }}"
+            {%- if spacingClasses | length > 0 %} classes="{{ spacingClasses }}"{% endif %}
+            {%- if inlineSpacings | length > 0 %} styles="{{ inlineSpacings }}"{% endif %}
+            data-testing="cookie-bar">
         </cookie-bar>
     </div>
 </div>

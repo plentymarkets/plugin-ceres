@@ -11,8 +11,12 @@ use IO\Services\Order\Factories\OrderResultFactory;
 
 class OrderReturnWidget extends OrderConfirmationBaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.OrderConfirmation.OrderReturnWidget";
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::OrderReturnWidget")
@@ -21,9 +25,15 @@ class OrderReturnWidget extends OrderConfirmationBaseWidget
             ->withType(WidgetTypes::DEFAULT)
             ->withCategory(WidgetCategories::ORDER_CONFIRMATION)
             ->withPosition(500)
+            ->withSearchKeyWords([
+                "order", "bestellung", "retoure"
+            ])
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */
@@ -33,7 +43,7 @@ class OrderReturnWidget extends OrderConfirmationBaseWidget
         $settings->createAppearance();
 
         $settings->createCheckboxGroup("itemDetailsData")
-            ->withDefaultValue(["availability"])
+            ->withDefaultValue([])
             ->withName("Widget.basketDetailsDataLabel")
             ->withCheckboxValues(
                 ValueListFactory::make()

@@ -7,7 +7,11 @@ use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 class PresetHelper
 {
     private $widgetFactories = [];
-
+    
+    /**
+     * @param string $identifier The identifier of the widget to create
+     * @return PresetWidgetFactory
+     */
     public function createWidget($identifier)
     {
         /** @var PresetWidgetFactory $widgetFactory */
@@ -16,7 +20,11 @@ class PresetHelper
         $this->widgetFactories[] = $widgetFactory;
         return $widgetFactory;
     }
-
+    
+    /**
+     * Return the widget factory as an array
+     * @return array
+     */
     public function toArray()
     {
         return array_map(function($widgetFactory)

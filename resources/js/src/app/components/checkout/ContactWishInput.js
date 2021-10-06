@@ -1,7 +1,7 @@
 import Vue from "vue";
 import { mapState } from "vuex";
 
-Vue.component("contact-wish-input", {
+export default Vue.component("contact-wish-input", {
 
     props:
     {
@@ -19,7 +19,7 @@ Vue.component("contact-wish-input", {
     methods: {
         updateContactWish(event)
         {
-            this.$store.commit("setContactWish", event.srcElement.value);
+            this.$store.commit("setContactWish", event.target.value);
         }
     }
 });

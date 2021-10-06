@@ -1,0 +1,70 @@
+//
+// Fonts
+//
+$root-directory:            ".." !default;
+
+$flag-icon-css-path:        "#{$root-directory}/images/flags" !default;
+$flag-icon-rect-path:       "/4x3" !default;
+$flag-icon-square-path:     "/1x1" !default;
+
+$fa-font-path:              "#{$root-directory}/documents/fonts" !default;
+
+
+@import "~font-awesome/scss/variables";
+@import "~font-awesome/scss/mixins";
+
+// FIX: Need to set font-display for better SEO performance
+@font-face {
+    font-family: FontAwesome;
+    font-style: normal;
+    //  src: url('#{$fa-font-path}/FontAwesome.otf') format('opentype'); // used when developing fonts
+    font-weight: 300;
+    src: url("#{$fa-font-path}/fontawesome-webfont.eot?v=#{$fa-version}");
+    src: url("#{$fa-font-path}/fontawesome-webfont.eot?#iefix&v=#{$fa-version}") format("embedded-opentype"), url("#{$fa-font-path}/fontawesome-webfont.woff2?v=#{$fa-version}") format("woff2"), url("#{$fa-font-path}/fontawesome-webfont.woff?v=#{$fa-version}") format("woff"), url("#{$fa-font-path}/fontawesome-webfont.ttf?v=#{$fa-version}") format("truetype"), url("#{$fa-font-path}/fontawesome-webfont.svg?v=#{$fa-version}#fontawesomeregular") format("svg");
+    font-display: block;
+}
+@import "~font-awesome/scss/core";
+@import "~font-awesome/scss/larger";
+@import "~font-awesome/scss/fixed-width";
+@import "~font-awesome/scss/list";
+@import "~font-awesome/scss/bordered-pulled";
+@import "~font-awesome/scss/animated";
+@import "~font-awesome/scss/rotated-flipped";
+@import "~font-awesome/scss/stacked";
+@import "~font-awesome/scss/icons";
+@import "~font-awesome/scss/screen-reader";
+
+@import "~flag-icon-css/sass/flag-icon";
+
+.fa.none {
+    @extend .fa-circle;
+    color: transparent !important; // stylelint-disable-line declaration-no-important
+}
+
+.flag-icon-en {
+    background-image: url("../images/flags/4x3/gb.svg");
+}
+
+.flag-icon-da {
+    background-image: url("../images/flags/4x3/dk.svg");
+}
+
+.flag-icon-nn {
+    background-image: url("../images/flags/4x3/no.svg");
+}
+
+.flag-icon-ic {
+    background-image: url("../images/flags/ic.svg");
+}
+
+.flag-icon-ea {
+    background-image: url("../images/flags/ea.svg");
+}
+
+.flag-icon-an {
+    background-image: url("../images/flags/an.svg");
+}
+
+.flag-icon-xi {
+    background-image: url("../images/flags/4x3/gb.svg");
+}

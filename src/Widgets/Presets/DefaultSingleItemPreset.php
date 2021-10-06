@@ -9,6 +9,29 @@ use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 use Plenty\Plugin\Translation\Translator;
 use IO\Extensions\Functions\UniqueId;
 
+/**
+ * Class DefaultSingleItemPreset
+ *
+ * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
+ * This particular preset generates a page for viewing single items. It contains:
+ * - TwoColumnWidget
+ * - StickyContainerWidget
+ * - InlineTextWidget
+ * - AddToBasketWidget
+ * - ItemAvailabilityWidget
+ * - AddToWishListWidget
+ * - ItemPriceWidget
+ * - ItemImageWidget
+ * - GraduatedPriceWidget
+ * - OrderPropertyWidget
+ * - ItemBundleWidget
+ * - TabWidget
+ * - ItemDataTableWidget
+ * - AttributeWidget
+ * - TagsWidget
+ *
+ * @package Ceres\Widgets\Presets
+ */
 class DefaultSingleItemPreset implements ContentPreset
 {
     /** @var PresetHelper */
@@ -32,6 +55,9 @@ class DefaultSingleItemPreset implements ContentPreset
     /** @var Translator */
     private $translator;
 
+    /**
+     * @inheritDoc
+     */
     public function getWidgets()
     {
         $this->preset = pluginApp(PresetHelper::class);
@@ -118,7 +144,7 @@ class DefaultSingleItemPreset implements ContentPreset
         }
         $dataProvider = $this->getShopBuilderDataFieldProvider("TextsDataFieldProvider::$itemName",array("texts.$itemName"));
         $this->stickyContainer->createChild('sticky', 'Ceres::InlineTextWidget')
-            ->withSetting('customClass', 'title-outer')
+            ->withSetting('customClass', 'title-outer item-name')
             ->withSetting('spacing.customPadding', true)
             ->withSetting('spacing.padding.left.value', 0)
             ->withSetting('spacing.padding.left.unit', null)
@@ -194,6 +220,7 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('maxQuantity', 10)
             ->withSetting('imageSize', 'urlMiddle')
             ->withSetting('showThumbs', true)
+            ->withSetting('preloadImage', true)
             ->withSetting('showDots', true);
     }
 
@@ -238,7 +265,7 @@ class DefaultSingleItemPreset implements ContentPreset
         $uuidTabTechData     = $uuidGenerator->generateUniqueId();
         $uuidTabMoreDetails  = $uuidGenerator->generateUniqueId();
         $titleTabDescription = $this->translator->trans("Ceres::Template.singleItemDescription");
-        $titleTabTechData    = $this->translator->trans("Ceres::Widget.dataFieldTextsTechnicalData");
+        $titleTabTechData    = $this->translator->trans("Ceres::Template.singleItemTechnicalData");
         $titleTabMoreDetails = $this->translator->trans("Ceres::Template.singleItemMoreDetails");
         $tabs = array(array('title' => $titleTabDescription,'uuid' => $uuidTabDescription),
                       array('title' => $titleTabTechData, 'uuid' => $uuidTabTechData),
@@ -291,7 +318,7 @@ class DefaultSingleItemPreset implements ContentPreset
                                 "variation.weightG",
                                 "variation.weightNetG",
                                 "item.variationDimensions",
-                                "item.customsTariffNumber"));
+                                "variation.customsTariffNumber"));
     }
 
     private function createAttributeWidget()

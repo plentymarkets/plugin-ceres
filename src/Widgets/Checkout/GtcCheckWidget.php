@@ -10,8 +10,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class GtcCheckWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Checkout.GtcCheckWidget";
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::GtcCheckWidget")
@@ -21,9 +25,15 @@ class GtcCheckWidget extends BaseWidget
             ->withCategory(WidgetCategories::CHECKOUT)
             ->withPosition(400)
             ->withMaxPerPage(1)
+            ->withSearchKeyWords([
+                "checkout", "bestellvorgang", "bestellung", "zahlungsmittel", "zahlung", "payment"
+            ])
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */

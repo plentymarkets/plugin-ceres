@@ -1,6 +1,11 @@
 import Vue from "vue";
+import OrderReturnSetComponentList from "../orderReturn/OrderReturnSetComponentList.vue";
 
-Vue.component("order-return-history-list-item", {
+export default Vue.component("order-return-history-list-item", {
+
+    components: {
+        OrderReturnSetComponentList
+    },
 
     props: {
         template:
@@ -56,6 +61,11 @@ Vue.component("order-return-history-list-item", {
             }
 
             return "-";
+        },
+
+        getOrderPropertyFileUrl(property)
+        {
+            return property.fileUrl || this.$options.filters.fileUploadPath(property.value);
         }
     }
 });

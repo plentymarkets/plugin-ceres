@@ -1,52 +1,50 @@
-.widget.accordion {
-    div.card {
-        &:first-of-type {
+.widget-accordion {
+    .card {
+        border-bottom: 0;
+
+        &:last-child {
             border-bottom: $card-border-width solid $card-border-color;
         }
-        &:nth-of-type(2) {
-            border-top: 0;
-        }
 
-        button.collapsed {
-            h5 {
-                > .fa {
-                    transform: scaleY(1);
-                }
-            }
-        }
         button {
-            text-align: left;
             padding: $card-spacer-x;
+            text-align: left;
             border-top-width: 0;
 
             h5 {
-                font-weight: bold;
                 position: relative;
-
-                > .fa {
-                    position: absolute;
-                    right: 0;
-                    top: -4px;
-                    font-size: 1.5rem;
-                    transform: scaleY(-1);
-                    transition-timing-function: ease;
-                    transition-duration: .35s;
-                    transform-origin: 50% 60%;
-                }
+                font-weight: $font-weight-bold;
             }
-        }        
-        button:hover,
-        button:focus { 
-            color: black;
+
+            .fa {
+                position: absolute;
+                top: -4px;
+                right: 0;
+                font-size: 1.5rem;
+                transition-timing-function: ease;
+                transition-duration: .35s;
+                transform: scaleY(-1);
+                transform-origin: 50% 60%;
+            }
+
+            &.collapsed .fa { // stylelint-disable-line selector-no-qualifying-type
+                transform: scaleY(1);
+            }
         }
 
-        div .card-body {
-            margin-top: 1px;
+        button:hover,
+        button:focus {
+            color: $black;
+        }
 
-            p {
-                margin: 0;
-                line-height: $headings-line-height;
-            }
+    }
+
+    .card-body {
+        margin-top: 1px;
+
+        p {
+            margin: 0;
+            line-height: $headings-line-height;
         }
     }
 }

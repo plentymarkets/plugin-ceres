@@ -1,12 +1,11 @@
 const ApiService = require("../../services/ApiService");
 
-const state =
-    {
-        wishListIds: [],
-        wishListItems: [],
-        isWishListInitiallyLoading: false,
-        isLoading: false
-    };
+const state = () => ({
+    wishListIds: [],
+    wishListItems: [],
+    isWishListInitiallyLoading: false,
+    isLoading: false
+});
 
 const mutations =
     {

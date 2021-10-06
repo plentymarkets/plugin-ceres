@@ -4,10 +4,17 @@ import jQuery from "jquery";
 
 const TranslationService = (function($)
 {
-    const _translations = {};
+    let _translations = {};
 
     // initialize translations
-    _readTranslations();
+    if (typeof translations !== "undefined")
+    {
+        _translations = translations;
+    }
+    else
+    {
+        _readTranslations();
+    }
 
     return {
         translate: _translate
@@ -36,13 +43,10 @@ const TranslationService = (function($)
             const namespace = match[1];
             const group = match[2];
 
-            if (_translations.hasOwnProperty(namespace))
+            if (!_translations.hasOwnProperty(namespace))
             {
-                console.warn("Cannot override namespace \"" + namespace + "\"");
-                continue;
+                _translations[namespace] = {};
             }
-
-            _translations[namespace] = {};
 
             if (_translations[namespace].hasOwnProperty(group))
             {

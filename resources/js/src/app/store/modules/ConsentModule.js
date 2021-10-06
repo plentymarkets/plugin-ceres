@@ -17,11 +17,10 @@ function _setConsent(state, { key, value })
     }
 }
 
-const state =
-    {
-        consents: {},
-        hasResponse: false
-    };
+const state = () => ({
+    consents: {},
+    hasResponse: false
+});
 
 const mutations =
     {
@@ -71,10 +70,6 @@ const mutations =
         }
     };
 
-const actions =
-    {
-    };
-
 const getters =
     {
         isConsented: state => (key) =>
@@ -98,6 +93,5 @@ export default
 {
     state,
     mutations,
-    actions,
     getters
 };

@@ -1,20 +1,20 @@
-import TranslationService from "../../services/TranslationService";
+import Vue from "vue";
 import { navigateTo } from "../../services/UrlService";
 import { pathnameEquals } from "../../helper/url";
-import { isNullOrUndefined } from "../../helper/utils";
-const NotificationService = require("../../services/NotificationService");
+import { isNullOrUndefined, isDefined } from "../../helper/utils";
 const ApiService = require("../../services/ApiService");
 
-const state =
-    {
-        data: {},
-        items: [],
-        showNetPrices: false,
-        isBasketLoading: false,
-        isBasketInitiallyLoaded: false,
-        isBasketItemQuantityUpdate: false,
-        basketNotifications: []
-    };
+// cache updated base prices for performance purposes
+const updatedItemBasePriceCache = {};
+const state = () => ({
+    data: {},
+    items: [],
+    showNetPrices: false,
+    isBasketLoading: false,
+    isBasketInitiallyLoaded: false,
+    isBasketItemQuantityUpdate: false,
+    basketNotifications: []
+});
 
 const mutations =
     {
@@ -35,24 +35,13 @@ const mutations =
 
         updateBasketItems(state, basketItems)
         {
-            if (basketItems)
+            if (basketItems && state.items.length)
             {
                 const newItems = [];
 
                 for (const item of basketItems)
                 {
-                    const oldBasketItem = null;
-
-                    if (isNullOrUndefined(item.variation))
-                    {
-                        oldBasketItem = state.items.find(i => i.id === item.id);
-                        item.variation = oldBasketItem.variation;
-                    }
-                    if (isNullOrUndefined(item.basketItemOrderParams))
-                    {
-                        oldBasketItem = oldBasketItem || state.items.find(i => i.id === item.id);
-                        item.basketItemOrderParams = oldBasketItem.basketItemOrderParams;
-                    }
+                    _fillMissingData(state, item);
                     newItems.push(item);
                 }
 
@@ -73,7 +62,11 @@ const mutations =
                 }
                 else
                 {
-                    state.items.push(basketItem);
+                    // use array clone to keep activity, could be removed with usage of vue3
+                    const clonedItems = state.items.slice(0);
+
+                    clonedItems.push(basketItem);
+                    state.items = clonedItems;
                 }
             }
         },
@@ -86,6 +79,13 @@ const mutations =
             {
                 entry.price = basketItem.price;
                 entry.quantity = basketItem.quantity;
+
+                // check if the 'AfterBasketItemUpdate' contains a new base price for the item (graduated prices)
+                if (!isNullOrUndefined(basketItem.basePrice))
+                {
+                    Vue.set(entry, "updatedBasePrice", basketItem.basePrice);
+                    updatedItemBasePriceCache[basketItem.id] = basketItem.basePrice;
+                }
             }
         },
 
@@ -141,55 +141,7 @@ const actions =
     {
         loadBasketData({ state, commit })
         {
-            if ( !state.isBasketInitiallyLoaded )
-            {
-                jQuery
-                    .when(
-                        ApiService.get("/rest/io/basket", {}, { cache: false }),
-                        ApiService.get("/rest/io/basket/items", { template: "Ceres::Basket.Basket" }, { cache: false })
-                    )
-                    .then((basket, basketItems) =>
-                    {
-                        commit("setBasket", basket);
-                        commit("setBasketItems", basketItems);
-                        commit("setIsBasketInitiallyLoaded");
-                        commit("setWishListIds", basket.itemWishListIds);
-                    })
-                    .catch((error, status) =>
-                    {
-                        console.log(error, status);
-
-                        if (status > 0)
-                        {
-                            NotificationService.error(
-                                TranslationService.translate("Ceres::Template.basketOops")
-                            ).closeAfter(10000);
-                        }
-                    });
-            }
-
-            ApiService.listen("AfterBasketChanged", data =>
-            {
-                commit("setBasket", data.basket);
-                commit("setShowNetPrices", data.showNetPrices);
-                commit("updateBasketItems", data.basketItems);
-                commit("setWishListIds", data.basket.itemWishListIds);
-            });
-
-            ApiService.listen("AfterBasketItemAdd", data =>
-            {
-                commit("addBasketItem", data.basketItems);
-            });
-
-            ApiService.listen("AfterBasketItemUpdate", data =>
-            {
-                commit("updateBasketItem", data.basketItems);
-            });
-
-            ApiService.after(() =>
-            {
-                commit("setIsBasketItemQuantityUpdate", false);
-            });
+            console.warn("This action is not in use anymore and should not be committed anymore.");
         },
 
         addBasketNotification({ commit }, { type, message })
@@ -331,6 +283,61 @@ const actions =
             });
         }
     };
+
+function _fillMissingData(state, item)
+{
+    let oldBasketItem = null;
+
+    if (isNullOrUndefined(item.variation))
+    {
+        oldBasketItem = state.items.find(i => i.id === item.id);
+        item.variation = oldBasketItem.variation;
+    }
+
+    if (isDefined(item.basketItemOrderParams))
+    {
+        item.basketItemOrderParams.forEach(param =>
+        {
+            const propToUpdate = item.variation.data.properties.find(prop => prop.propertyId === Number(param.propertyId));
+
+            propToUpdate.property.surcharge = param.price || propToUpdate.property.surcharge;
+        });
+    }
+
+    if (isNullOrUndefined(item.basketItemOrderParams))
+    {
+        oldBasketItem = oldBasketItem || state.items.find(i => i.id === item.id);
+        item.basketItemOrderParams = oldBasketItem.basketItemOrderParams;
+    }
+
+    if (isDefined(item.setComponents) &&
+        item.setComponents.length > 0 &&
+        isNullOrUndefined(item.setComponents[0].variation))
+    {
+        oldBasketItem = oldBasketItem || state.items.find(i => i.id === item.id);
+
+        if (oldBasketItem.setComponents && oldBasketItem.setComponents.length > 0)
+        {
+            for (const setComponent of item.setComponents)
+            {
+                const oldComp = oldBasketItem.setComponents.find(comp => comp.variationId === setComponent.variationId);
+
+                setComponent.variation = oldComp.variation;
+
+                if (isNullOrUndefined(setComponent.basketItemOrderParams))
+                {
+                    setComponent.basketItemOrderParams = oldComp.basketItemOrderParams;
+                }
+            }
+        }
+    }
+
+    if (updatedItemBasePriceCache.hasOwnProperty(item.id))
+    {
+        item.updatedBasePrice = updatedItemBasePriceCache[item.id];
+        delete updatedItemBasePriceCache[item.id];
+    }
+}
 
 export default
 {

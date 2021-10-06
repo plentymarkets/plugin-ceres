@@ -2,28 +2,14 @@
 
 namespace Ceres\Widgets\Helper\Factories\Settings;
 
-class DateSettingFactory extends BaseSettingFactory
+use Plenty\Modules\ShopBuilder\Factories\Settings\DateSettingFactory as CoreDateSettingFactory;
+
+/**
+ * Class DateSettingFactory
+ * @package Ceres\Widgets\Helper\Factories\Settings
+ * @deprecated since 5.0.23
+ * @see \Plenty\Modules\ShopBuilder\Factories\Settings\DateSettingFactory
+ */
+class DateSettingFactory extends CoreDateSettingFactory
 {
-    public function __construct()
-    {
-        $this->withType('date');
-    }
-
-    /**
-     * @param boolean $isCalendarTop
-     * @return DateSettingFactory
-     */
-    public function withCalendarTop($isCalendarTop)
-    {
-        return $this->withOption('openCalendarTop', $isCalendarTop);
-    }
-
-    /**
-     * @param string $format
-     * @return DateSettingFactory
-     */
-    public function withDisplayDateFormat($format)
-    {
-        return $this->withOption('displayDateFormat', $format);
-    }
 }

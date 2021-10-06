@@ -13,15 +13,19 @@
 {% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+{% set lazyloadImage   = widget.settings.lazyloadImage.mobile %}
+{% set preloadImage    = widget.settings.preloadImage.mobile %}
 
 {% set sourceType = widget.settings.sourceType.mobile %}
 {% set customImagePath = widget.settings.customImagePath.mobile %}
+{% set fallbackImagePath = widget.settings.fallbackImagePath.mobile | default(customImagePath) %}
 {% set colorPalette = widget.settings.colorPalette.mobile | default("none") %}
 {% set customColor = widget.settings.customColor.mobile %}
 
 {{ Twig.set("url", "" | json_encode) }}
 {{ Twig.set("hasUrl", "false") }}
 {{ Twig.set("hasColor", "false") }}
+{{ Twig.set("imageAltText", "" | json_encode) }}
 
 {% if sourceType == "category-image1" %}
     {{ Twig.set("url", "category.details[0].imagePath") }}
@@ -29,6 +33,8 @@
     {{ Twig.set("url", "category.details[0].image2Path") }}
 {% elseif sourceType == "custom-image" %}
     {{ Twig.set("url", customImagePath | json_encode) }}
+    {{ Twig.set("imageAltText", "cdn_metadata(url, 'alttext')") }}
+
 {% endif %}
 
 {{ Twig.if("url | trim is not empty") }}
@@ -50,22 +56,48 @@
     {% if fullWidth %} widget-fw{% endif %}
     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
      style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %}
-            {{ Twig.if("hasUrl or hasColor or #{ isPreview | json_encode }") }}
-                {% if inlineMinHeight | length > 0 %} {{ inlineMinHeight }}
-            {{ Twig.endif() }}{% endif %}">
+        {{ Twig.if("hasUrl or hasColor or #{ isPreview | json_encode }") }}{% if inlineMinHeight | length > 0 %} {{ inlineMinHeight }}{{ Twig.endif() }}{% endif %}">
     <div>
-        <div class="parallax-img-container-inner
+        {% if preloadImage %}
+            {{ Twig.if("hasUrl") }}
+                {{ Twig.print("add_asset(url,'image')") }}
+            {{ Twig.endif() }}
+        {% endif %}
+
+        {% if lazyloadImage %}
+            <lazy-img picture-class="parallax-img-container-inner
             {% if stylingClasses | length > 0 %} {{ stylingClasses }}{% endif %}
             {% if colorPalette != "custom" and colorPalette != "none" %} bg-{{ colorPalette | default("none") }}{% endif %}"
 
-            style="{{ Twig.if("hasUrl") }}background-image: url({{ Twig.print("url") }});{{ Twig.endif() }}
-                {% if opacity < 1 %} opacity:{{ opacity }};{% endif %}
-                {% if colorPalette == "custom" %} background-color:{{ customColor }}{% endif %}">
-        </div>
+                    {{ Twig.if("hasUrl") }}
+                      image-url="{{ Twig.print("url") }}"
+                      fallback-url="{{ fallbackImagePath }}"
+                      role="img"
+                    {{ Twig.endif() }}
+
+                    {{ Twig.if("imageAltText is not empty ") }}
+                      aria-label="{{ Twig.print("imageAltText") }}"
+                    {{ Twig.endif() }}
+                      :is-background-image="true"
+
+                      style="{% if opacity < 1 %}opacity:{{ opacity }};{% endif %}{% if colorPalette == "custom" %} background-color:{{ customColor }}{% endif %}">
+            </lazy-img>
+        {% else  %}
+            <background-img picture-class="parallax-img-container-inner
+                    {% if stylingClasses | length > 0 %} {{ stylingClasses }}{% endif %}
+                    {% if colorPalette != "custom" and colorPalette != "none" %} bg-{{ colorPalette | default("none") }}{% endif %}"
+                    {{ Twig.if("hasUrl") }}
+                      url="{{ Twig.print("url") }}"
+                      fallback-url="{{ fallbackImagePath }}"
+                      role="img"
+                    {{ Twig.endif() }}
+                     style="{% if opacity < 1 %}opacity:{{ opacity }};{% endif %}{% if colorPalette == "custom" %} background-color:{{ customColor }}{% endif %}">
+            </background-img>
+        {% endif %}
     </div>
-    <div class="container-max{% if not showPlaceholder %} d-flex{% endif %}{% if not fullWidth %} px-0{% endif %}">
+    <div class="container-max{% if not showPlaceholder %} d-flex{% endif %}">
         {% if showPlaceholder %}
-            <div class="widget-placeholder">
+            <div class="widget-placeholder p-0">
                 <div>
                     <p class="title mb-0">{{ trans("Ceres::Widget.backgroundPlaceholderTitle") }}</p>
                     <p class="description mt-3">{{ trans("Ceres::Widget.backgroundPlaceholderDescription") }}</p>

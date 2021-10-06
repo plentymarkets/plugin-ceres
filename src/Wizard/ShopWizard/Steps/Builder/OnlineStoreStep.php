@@ -5,6 +5,7 @@ namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 use Ceres\Wizard\ShopWizard\Config\OnlineStoreConfig;
 use Ceres\Wizard\ShopWizard\Helpers\LanguagesHelper;
 use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
+use Plenty\Modules\Authorization\Services\AuthHelper;
 use Plenty\Modules\Order\Status\Contracts\OrderStatusRepositoryContract;
 use Plenty\Modules\System\Module\Contracts\PlentyModuleRepositoryContract;
 
@@ -16,26 +17,33 @@ use Plenty\Modules\System\Module\Contracts\PlentyModuleRepositoryContract;
 class OnlineStoreStep extends Step
 {
     /**
+     * @var array Collection of order status.
+     */
+    private static $orderStatusList = null;
+
+    /**
      * @return array
      */
-    public function generateStep():array
+    public function generateStep(): array
     {
         return [
-            "title"       => "Wizard.onlineStoreSettings",
+            "title" => "Wizard.onlineStoreSettings",
             "description" => "Wizard.onlineStoreSettingsDescription",
-            "condition"   => $this->hasRequiredSettings(),
-            "sections"    => [
-                $this->buildStoreNameStructure(),
+            "condition" => $this->hasRequiredSettings(),
+            "sections" => [
                 $this->buildStoreFaviconStructure(),
                 $this->buildStoreCategoryTypesStructure(),
                 $this->buildStoreBack2Top(),
                 $this->buildStoreEmailSettings(),
+                $this->buildVariationOrderPropertiesSettings(),
                 $this->buildStoreOrderSettings(),
                 $this->buildStoreShippingSettings(),
                 $this->buildGoogleMapsSettings(),
                 $this->buildGoogleRecaptchaSettings(),
                 $this->buildSessionLifeTimeSection(),
                 $this->buildStoreCallistoSettings(),
+                $this->buildExternalVatIdCheckSettings(),
+                $this->buildLoginModeSettings()
             ]
         ];
     }
@@ -43,25 +51,7 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreNameStructure():array
-    {
-        return [
-            "title" => "Wizard.storeName",
-            "form" => [
-                "onlineStore_storeName" => [
-                    "type" => "text",
-                    "options" => [
-                        "name" => "Wizard.storeNameLabel"
-                    ]
-                ]
-            ]
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    private function buildStoreFaviconStructure():array
+    private function buildStoreFaviconStructure(): array
     {
         return [
             "title" => "Wizard.storeFavicon",
@@ -79,12 +69,12 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreCategoryTypesStructure():array
+    private function buildStoreCategoryTypesStructure(): array
     {
-        $catTypes      = OnlineStoreConfig::getCategoryTypes();
-        $depths        = OnlineStoreConfig::getCategoryTreeDepths();
+        $catTypes = OnlineStoreConfig::getCategoryTypes();
+        $depths = OnlineStoreConfig::getCategoryTreeDepths();
         $categoryTypes = StepHelper::generateTranslatedListBoxValues($catTypes);
-        $treeDepths    = StepHelper::generateTranslatedListBoxValues($depths);
+        $treeDepths = StepHelper::generateTranslatedListBoxValues($depths);
 
         return [
             "title" => "Wizard.storeCategoryTypes",
@@ -113,10 +103,10 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreBack2Top():array
+    private function buildStoreBack2Top(): array
     {
         $top2bottomPositions = OnlineStoreConfig::getToTopButtonPosition();
-        $positions           = StepHelper::generateTranslatedListBoxValues($top2bottomPositions);
+        $positions = StepHelper::generateTranslatedListBoxValues($top2bottomPositions);
 
         return [
             "title" => "Wizard.back2Top",
@@ -136,12 +126,12 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreEmailSettings():array
+    private function buildStoreEmailSettings(): array
     {
         $confirmationLinkExpiration = OnlineStoreConfig::getConfirmationLinkExpiration();
-        $confirmationList           = StepHelper::generateTranslatedListBoxValues($confirmationLinkExpiration);
-        $globaUserHashMax           = OnlineStoreConfig::getUserHashMaxAge();
-        $globaUserHashMaxList       = StepHelper::generateTranslatedListBoxValues($globaUserHashMax);
+        $confirmationList = StepHelper::generateTranslatedListBoxValues($confirmationLinkExpiration);
+        $globaUserHashMax = OnlineStoreConfig::getUserHashMaxAge();
+        $globaUserHashMaxList = StepHelper::generateTranslatedListBoxValues($globaUserHashMax);
 
         return [
             "title" => "Wizard.emailSettings",
@@ -177,11 +167,11 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreOrderSettings():array
+    private function buildStoreOrderSettings(): array
     {
-        $itemBundles     = OnlineStoreConfig::getItemBundles();
+        $itemBundles = OnlineStoreConfig::getItemBundles();
         $itemBundlesList = StepHelper::generateTranslatedListBoxValues($itemBundles);
-        
+
         return [
             "title" => "Wizard.ordersSettings",
             "description" => "Wizard.ordersSettingsDescription",
@@ -207,9 +197,16 @@ class OnlineStoreStep extends Step
                     "defaultValue" => "9",
                     "options" => [
                         "name" => "Wizard.statusReturn",
-                        "listBoxValues" => $this->getOrderStatusListBoxValues()
+                        "listBoxValues" => $this->getReturnOrderStatusListBoxValues()
                     ]
                 ],
+                "onlineStore_minimumOrderAmount" => [
+                    "type" => "number",
+                    "defaultValue" => "0",
+                    "options" => [
+                        "name" => "Wizard.minimumOrderAmount"
+                    ]
+                ]
             ]
         ];
     }
@@ -217,7 +214,7 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreShippingSettings():array
+    private function buildStoreShippingSettings(): array
     {
         return [
             "title" => "Wizard.shippingSettings",
@@ -237,7 +234,7 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildGoogleMapsSettings():array
+    private function buildGoogleMapsSettings(): array
     {
         return [
             "title" => "Wizard.settingsGoogleMaps",
@@ -256,23 +253,15 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildGoogleRecaptchaSettings():array
+    private function buildGoogleRecaptchaSettings(): array
     {
         return [
             "title" => "Wizard.settingsRecaptcha",
             "description" => "Wizard.settingsRecaptchaDescription",
             "form" => [
-                "onlineStore_enableRecaptcha" => [
-                    "type" => "toggle",
-                    "defaultValue" => false,
-                    "options" => [
-                        "name" => "Wizard.enableRecaptcha"
-                    ]
-                ],
                 "onlineStore_recaptchaVersion" => [
                     "type" => "select",
                     "defaultValue" => 2,
-                    "isVisible" => "typeof onlineStore_enableRecaptcha ==='undefined' || onlineStore_enableRecaptcha === true",
                     "options" => [
                         "name" => "Wizard.recaptchaVersion",
                         "listBoxValues" => [
@@ -289,14 +278,12 @@ class OnlineStoreStep extends Step
                 ],
                 "onlineStore_recaptchaApiKey" => [
                     "type" => "text",
-                    "isVisible" => "typeof onlineStore_enableRecaptcha ==='undefined' || onlineStore_enableRecaptcha === true",
                     "options" => [
                         "name" => "Wizard.recaptchaApiKey"
                     ]
                 ],
                 "onlineStore_recaptchaSecret" => [
                     "type" => "text",
-                    "isVisible" => "typeof onlineStore_enableRecaptcha ==='undefined' || onlineStore_enableRecaptcha === true",
                     "options" => [
                         "name" => "Wizard.recaptchaSecret"
                     ]
@@ -304,7 +291,6 @@ class OnlineStoreStep extends Step
                 "onlineStore_recaptchaThreshold" => [
                     "type" => "number",
                     "defaultValue" => 0.5,
-                    "isVisible" => "(typeof onlineStore_enableRecaptcha ==='undefined' || onlineStore_enableRecaptcha === true) && onlineStore_recaptchaVersion === 3",
                     "options" => [
                         "name" => "Wizard.recaptchaThreshold"
                     ]
@@ -316,7 +302,7 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreCallistoSettings():array
+    private function buildStoreCallistoSettings(): array
     {
         $moduleRepo = pluginApp(PlentyModuleRepositoryContract::class);
         $webstoreActive = $moduleRepo->isActive("webstore.cms");
@@ -360,7 +346,7 @@ class OnlineStoreStep extends Step
                 ],
                 "onlineStore_blockCookies" => [
                     "type" => "checkbox",
-                    "defaultValue" => false,
+                    "defaultValue" => true,
                     "options" => [
                         "name" => "Wizard.blockCookies"
                     ]
@@ -369,37 +355,146 @@ class OnlineStoreStep extends Step
         ];
     }
 
-    
+    private function buildExternalVatIdCheckSettings()
+    {
+        $listValues[] = [
+            "value" => 0,
+            "caption" => "Wizard.active"
+        ];
+        return [
+            "title" => "Wizard.externalVatIdCheckTitle",
+            "description" => "Wizard.externalVatIdCheckDescription",
+            "condition" => $this->globalsCondition,
+            "form" => [
+                "onlineStore_externalVatIdCheck" => [
+                    "type" => "select",
+                    "defaultValue" => 0,
+                    "options" => [
+                        "name" => "Wizard.externalVatIdCheck",
+                        "listBoxValues" => [
+                            [
+                                "value" => 0,
+                                "caption" => "Wizard.active"
+                            ],
+                            [
+                                "value" => 1,
+                                "caption" => "Wizard.inactive"
+                            ]
+                        ]
+                    ]
+                ],
+                "onlineStore_externalVatIdCheckServiceUnavailableFallbackStatus" => [
+                    "type" => "select",
+                    "defaultValue" => 0.0,
+                    "options" => [
+                        "name" => "Wizard.externalVatIdCheckServiceUnavailableFallbackStatus",
+                        "listBoxValues" => array_merge([                            [
+                                "value" => 0.0,
+                                "caption" => "Wizard.serviceUnavailableFallbackStatus"
+                            ],], $this->getOrderStatusListBoxValues())
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    private function buildVariationOrderPropertiesSettings()
+    {
+        return [
+            "title" => "Wizard.variationOrderPropertiesTitle",
+            "description" => "Wizard.variationOrderPropertiesDescription",
+            "condition" => $this->globalsCondition,
+            "form" => [
+                "onlineStore_useVariationOrderProperties" => [
+                    "type" => "checkbox",
+                    "defaultValue" => false,
+                    "options" => [
+                        "name" => "Wizard.useVariationOrderProperties"
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function getReturnOrderStatusListBoxValues()
+    {
+        $orderStatusList = [];
+        $all = $this->getOrderStatusListBoxValues();
+        foreach ($all as $status) {
+            if ($status['value'] >= 9 && $status['value'] < 10) {
+                $orderStatusList[] = [
+                    "value" => (string)$status['value'],
+                    "caption" => $status['caption']
+                ];
+            }
+        }
+        return $orderStatusList;
+    }
+
+
     /**
      * @return array
      */
     private function getOrderStatusListBoxValues()
     {
+        if(isset(self::$orderStatusList) && count(self::$orderStatusList)) {
+            return self::$orderStatusList;
+        }
         $currentLang = LanguagesHelper::getUserLang();
-        
+
+        /** @var AuthHelper $authHelper */
+        $authHelper = pluginApp(AuthHelper::class);
         /** @var OrderStatusRepositoryContract $orderStatusRepo */
         $orderStatusRepo = pluginApp(OrderStatusRepositoryContract::class);
-        $orderStatusCollection = $orderStatusRepo->all();
-        
+        $orderStatusCollection = $authHelper->processUnguarded(function() use ($orderStatusRepo) {
+            return $orderStatusRepo->all();
+        });
+
         $orderStatusList = [];
-        foreach($orderStatusCollection as $status)
-        {
-            if($status->statusId >= 9 && $status->statusId < 10)
-            {
+        foreach ($orderStatusCollection as $status) {
                 $statusName = $status->names[$currentLang] ?? '';
                 $prefix = '[' . $status->statusId . ']';
-                if(substr($statusName, 0, strlen($prefix)) !== $prefix)
-                {
+                if (substr($statusName, 0, strlen($prefix)) !== $prefix) {
                     $statusName = $prefix . $statusName;
                 }
 
                 $orderStatusList[] = [
-                    "value" => "$status->statusId",
+                    "value" => $status->statusId,
                     "caption" => $statusName
                 ];
-            }
         }
-        
+        self::$orderStatusList = $orderStatusList;
         return $orderStatusList;
+    }
+
+    private function buildLoginModeSettings()
+    {
+        return [
+            "title" => "Wizard.loginModeTitle",
+            "description" => "Wizard.loginModeDescription",
+            "condition" => $this->globalsCondition,
+            "form" => [
+                "onlineStore_loginMode" => [
+                    "type" => "select",
+                    "defaultValue" => 0,
+                    "options" => [
+                        "name" => "Wizard.loginMode",
+                        "listBoxValues" => [
+                            [
+                                "value" => 0,
+                                "caption" => "Wizard.loginMode1"
+                            ],
+                            [
+                                "value" => 1,
+                                "caption" => "Wizard.loginMode2"
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
     }
 }

@@ -1,40 +1,15 @@
 <?php
 
-
 namespace Ceres\Widgets\Helper\Factories\Settings;
 
+use Plenty\Modules\ShopBuilder\Factories\Settings\CategorySettingFactory as CoreCategorySettingFactory;
 
-class CategorySettingFactory extends BaseSettingFactory
+/**
+ * Class CategorySettingFactory
+ * @package Ceres\Widgets\Helper\Factories\Settings
+ * @deprecated since 5.0.23
+ * @see \Plenty\Modules\ShopBuilder\Factories\Settings\CategorySettingFactory
+ */
+class CategorySettingFactory extends CoreCategorySettingFactory
 {
-    public function __construct()
-    {
-        $this->withType('category');
-    }
-
-    /**
-     * @param boolean $displayResetButton
-     * @return CategorySettingFactory
-     */
-    public function withDisplayResetButton($displayResetButton)
-    {
-        return $this->withOption('displayResetButton', $displayResetButton);
-    }
-
-    /**
-     * @param boolean $displaySearch
-     * @return CategorySettingFactory
-     */
-    public function withDisplaySearch($displaySearch)
-    {
-        return $this->withOption('displaySearch', $displaySearch);
-    }
-
-    /**
-     * @param boolean $showFullSelectionPath
-     * @return CategorySettingFactory
-     */
-    public function withShowFullSelectionPath($showFullSelectionPath)
-    {
-        return $this->withOption('showFullSelectionPath', $showFullSelectionPath);
-    }
 }

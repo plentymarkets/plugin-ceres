@@ -25,7 +25,6 @@ class DisplayedInformationStep extends Step
             "sections" => [
                 $this->generateItemSection(),
                 $this->generateDecimalPlacesSection(),
-                $this->generateLoadingAnimationSection(),
                 $this->generateCategoryView(),
                 $this->generateItemView(),
                 $this->generateShoppingCartView(),
@@ -93,30 +92,6 @@ class DisplayedInformationStep extends Step
     /**
      * @return array
      */
-    private function generateLoadingAnimationSection():array
-    {
-        $loadingAnimationTypes = ItemViewConfig::getLoadingAnimationTypes();
-        $loadingAnimationTypesList = StepHelper::generateTranslatedListBoxValues($loadingAnimationTypes);
-
-        return [
-            "title" => "Wizard.displayedInfoLoadingAnimation",
-            "description" => "Wizard.displayedInfoLoadingAnimationDescription",
-            "form" => [
-                "displayInfo_loadingAnimation" => [
-                    "type" => "select",
-                    "defaultValue" => $loadingAnimationTypesList[0]['value'],
-                    "options" => [
-                        "name" => "Wizard.loadingAnimation",
-                        "listBoxValues" => $loadingAnimationTypesList
-                    ]
-                ]
-            ]
-        ];
-    }
-
-    /**
-     * @return array
-     */
     private function generateCategoryView(): array
     {
         $categoryDescriptionPositions = ItemViewConfig::getCategoryDescriptionPositions();
@@ -172,6 +147,13 @@ class DisplayedInformationStep extends Step
                         "name" => "Wizard.showCarouselNav",
                     ]
                 ],
+                "displayInfo_showCategoryFilter" => [
+                    "type" => "checkbox",
+                    "defaultValue" => false,
+                    "options" => [
+                        "name" => "Wizard.showCategoryFilter",
+                    ]
+                ],
             ]
         ];
     }
@@ -183,7 +165,6 @@ class DisplayedInformationStep extends Step
     {
         return [
             "title" => "Wizard.itemViewSettings",
-            "description" => "Wizard.itemViewSettingsDescription",
             "form" => [
                 "displayInfo_requireOrderProperties" => [
                     "type" => "checkbox",

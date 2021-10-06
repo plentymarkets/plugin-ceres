@@ -11,8 +11,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class LinkWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Common.LinkWidget";
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::LinkWidget")
@@ -21,9 +25,15 @@ class LinkWidget extends BaseWidget
             ->withType(WidgetTypes::STATIC)
             ->withCategory(WidgetCategories::TEXT)
             ->withPosition(900)
+            ->withSearchKeyWords([
+                "link", "button", "knopf", "schaltfläche"
+            ])
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */
@@ -43,6 +53,23 @@ class LinkWidget extends BaseWidget
         $settings->createText("text")
             ->withName("Widget.linkTextLabel")
             ->withTooltip("Widget.linkTextTooltip");
+
+        $settings->createText("linkTitle")
+            ->withName("Widget.linkTitleTextLabel")
+            ->withTooltip("Widget.linkTitleTextTooltip");
+
+        $settings->createSelect('linkRel')
+            ->withDefaultValue('none')
+            ->withName('Widget.linkRel')
+            ->withTooltip('Widget.linkRelTooltip')
+            ->withListBoxValues(
+                ValueListFactory::make()
+                    ->addEntry('none', 'Widget.linkRelNone')
+                    ->addEntry('nofollow', 'Widget.linkRelNofollow')
+                    ->addEntry('sponsored', 'Widget.linkRelSponsored')
+                    ->addEntry('noopener', 'Widget.linkRelNoopener')
+                    ->toArray()
+            );
 
         $settings->createUrl("url")
             ->withName("Widget.linkUrlLabel")

@@ -7,7 +7,7 @@ import { removeUrlParam } from "../../services/UrlService";
 import Vue from "vue";
 import { mapState } from "vuex";
 
-Vue.component("checkout", {
+export default Vue.component("checkout", {
 
     props: {
         template: {
@@ -52,7 +52,10 @@ Vue.component("checkout", {
         this.$store.dispatch("initDeliveryAddress", { id: this.selectedDeliveryAddress, addressList: this.deliveryAddressList });
 
         this.addEventHandler();
+    },
 
+    mounted()
+    {
         removeUrlParam("readonlyCheckout");
     },
 

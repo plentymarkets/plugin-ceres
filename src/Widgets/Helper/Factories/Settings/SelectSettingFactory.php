@@ -2,28 +2,14 @@
 
 namespace Ceres\Widgets\Helper\Factories\Settings;
 
-class SelectSettingFactory extends BaseSettingFactory
+use Plenty\Modules\ShopBuilder\Factories\Settings\SelectSettingFactory as CoreSelectSettingFactory;
+
+/**
+ * Class SelectSettingFactory
+ * @package Ceres\Widgets\Helper\Factories\Settings
+ * @deprecated since 5.0.23
+ * @see \Plenty\Modules\ShopBuilder\Factories\Settings\SelectSettingFactory
+ */
+class SelectSettingFactory extends CoreSelectSettingFactory
 {
-    public function __construct()
-    {
-        $this->withType('select');
-    }
-
-    /**
-     * @param boolean $openOnTop
-     * @return SelectSettingFactory
-     */
-    public function withOpenOnTop($openOnTop)
-    {
-        return $this->withOption('openOnTop', $openOnTop);
-    }
-
-    /**
-     * @param array $listBoxValues
-     * @return SelectSettingFactory
-     */
-    public function withListBoxValues($listBoxValues)
-    {
-        return $this->withOption('listBoxValues', $listBoxValues);
-    }
 }

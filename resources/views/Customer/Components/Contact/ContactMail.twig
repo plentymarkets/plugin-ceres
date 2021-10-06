@@ -1,4 +1,4 @@
-{% for entry in data if entry.label | length > 0 %}
+{% for entry in data %}
 <p>
     <b>{{ entry.label }}:</b>
     {% if entry.value is iterable %}

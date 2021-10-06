@@ -8,22 +8,18 @@
             "label":            "Widget.containerFooter",
             "name":             "Ceres::Footer"
         },
-        "content": [
-            {
-                "label":        "Widget.containerHomepage",
-                "name":         "Ceres::Homepage"
-            }
-        ]
+        "content": []
     },
     "allowedTypes": {
-        "categoryitem": ["static", "structure", "default", "categoryitem", "customer"],
-        "itemsearch":   ["static", "structure", "default", "categoryitem", "customer"],
-        "checkout":     ["static", "structure", "default", "checkout", "customer"],
-        "content":      ["static", "structure", "default"],
-        "footer":       ["footer", "static", "structure", "default"],
         "header":       ["header", "static", "structure", "default"],
-        "myaccount":    ["static", "structure", "default", "myaccount", "customer"],
-        "singleitem":   ["static", "structure", "default", "item"]
+        "footer":       ["footer", "static", "structure", "default"],
+        "content":      ["static", "structure", "default"],
+        "singleitem":   ["static", "structure", "default", "item", "itemcontent", "singleitem", "setcomponent"],
+        "itemset":      ["static", "structure", "default", "item", "itemcontent", "setitem"],
+        "categoryitem": ["static", "structure", "default", "categoryitem"],
+        "itemsearch":   ["static", "structure", "default", "categoryitem"],
+        "checkout":     ["static", "structure", "default", "checkout", "customer"],
+        "myaccount":    ["static", "structure", "default", "myaccount", "customer"]
     },
     "presets": {
         "header": [
@@ -137,10 +133,17 @@
                 "label":"Widget.presetSingleItemDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\DefaultSingleItemPreset"
             }
+        ],
+        "itemset": [
+            {
+                "label":"Widget.presetItemSetDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\ItemSetPreset"
+            }
         ]
     },
     "dataFieldProviders": {
-        "singleitem": "Ceres\\ShopBuilder\\DataFieldProvider\\Item\\ItemDataFieldProvider"
+        "singleitem": "Ceres\\ShopBuilder\\DataFieldProvider\\Item\\ItemDataFieldProvider",
+        "itemset": "Ceres\\ShopBuilder\\DataFieldProvider\\Item\\ItemDataFieldProvider"
     },
     "categories": [
         {
@@ -622,6 +625,7 @@
         "categoryItemContent": true,
         "itemSearchContent": true,
         "singleItemContent": true,
+        "itemSetContent": true,
         "globalElementsOverride": true,
         "safeMode" : true
     }

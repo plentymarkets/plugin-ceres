@@ -1,0 +1,32 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set appearance = widget.settings.appearance.mobile %}
+{% set redirect = widget.settings.redirect.mobile | default(false) %}
+
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+
+{{ Twig.do("set textTranslations = {}") }}
+{{ Twig.do("set buttonTranslations = {}") }}
+{{ Twig.set("languageList", Twig.call("services.webstoreConfigurationRepository.getActiveLanguageList")) }}
+{{ Twig.for("language", "languageList") }}
+    {{ Twig.set("languageISO", "services.localizationRepository.getLanguageCode(language)") }}
+    {{ Twig.do("set textTranslations = textTranslations | merge({(languageISO): trans('Ceres::Template.languageDetectionText', [], languageISO ) })") }}
+    {{ Twig.do("set buttonTranslations = buttonTranslations | merge({(languageISO): trans('Ceres::Template.languageDetectionButton', [], languageISO ) })") }}
+{{ Twig.endfor() }}
+
+<div class="language-detection {% if not isPreview %}position-absolute {% endif %}header-fw widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}"
+    data-scroll-void>
+    <language-detection
+        class="{% if spacingClasses | length > 0 %}{{ spacingClasses }}{% endif %}"
+        {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}
+        :auto-redirect="{{ redirect | json_encode }}"
+        :text-translations="{{ Twig.print('textTranslations | json_encode') }}"
+        :button-translations="{{ Twig.print('buttonTranslations | json_encode') }}"
+        :language-map="{{ Twig.print("webstoreConfig.browserLanguage | json_encode") }}"
+    >
+    </language-detection>
+</div>

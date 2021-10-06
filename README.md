@@ -1,6 +1,6 @@
 ![plentymarkets Logo](http://www.plentymarkets.eu/layout/pm/images/logo/plentymarkets-logo.jpg)
 
-# Ceres
+# Ceres ![Travis Build Stable](https://img.shields.io/travis/plentymarkets/plugin-ceres/stable?label=build)
 
 This is the official **Ceres** plugin developed by plentymarkets. **Ceres** is the default template plugin for [plentymarkets 7](https://www.plentymarkets.eu/tour/) online stores.
 
@@ -34,6 +34,10 @@ Your Javascript, widget and SCSS changes have now been assembled locally.
 ## Join our community
 
 Sign up today and become a member of our [forum](https://forum.plentymarkets.com/c/plugin-entwicklung). Discuss the latest trends in plugin development and share your ideas with our community.
+
+## Contribute to the project 
+
+If you want to contribute to our open source projects, you can learn how to open pull requests in our [Contribution guide](https://github.com/plentymarkets/plugin-ceres/blob/stable/contributionGuide.md).
 
 ## Versioning
 

@@ -2,19 +2,14 @@
 
 namespace Ceres\Widgets\Helper\Factories\Settings;
 
-class SuggestionSettingFactory extends BaseSettingFactory
-{
-    public function __construct()
-    {
-        $this->withType('suggestion');
-    }
+use Plenty\Modules\ShopBuilder\Factories\Settings\SuggestionSettingFactory as CoreSuggestionSettingFactory;
 
-    /**
-     * @param array $listBoxValues
-     * @return SuggestionSettingFactory
-     */
-    public function withListBoxValues($listBoxValues)
-    {
-        return $this->withOption('listBoxValues', $listBoxValues);
-    }
+/**
+ * Class SuggestionSettingFactory
+ * @package Ceres\Widgets\Helper\Factories\Settings
+ * @deprecated since 5.0.23
+ * @see \Plenty\Modules\ShopBuilder\Factories\Settings\SuggestionSettingFactory
+ */
+class SuggestionSettingFactory extends CoreSuggestionSettingFactory
+{
 }

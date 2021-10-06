@@ -33,8 +33,20 @@ class SearchMapping
             "global"   => false,
             "optional" => true,
         ],
+        "search_itemSearchOperator" => [
+            "field"    => "itemSearchOperator",
+            "type"     => "string",
+            "global"   => true,
+            "optional" => true,
+        ],
+        "search_itemAutocompleteSearchOperator" => [
+            "field"    => "itemAutocompleteSearchOperator",
+            "type"     => "string",
+            "global"   => true,
+            "optional" => true,
+        ],
     ];
-    
+
     /**
      * @return array
      */

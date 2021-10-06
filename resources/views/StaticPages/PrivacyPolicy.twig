@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-12">
                 {% autoescape false %}
-                    <h1>{{ trans("Ceres::Template.privacyPolicy", {"hyphen": "&shy;"}) }}</h1>
+                    <h1 class="pt-3">{{ trans("Ceres::Template.privacyPolicy", {"hyphen": "&shy;"}) }}</h1>
                 {% endautoescape %}
 
                 <hr class="my-5">
@@ -26,7 +26,7 @@
                 {% if privacyPolicy.htmlText %}
                     {{ privacyPolicy.htmlText | raw }}
                 {% else %}
-                    <p class="static-page-plain-text">{{ privacyPolicy.plainText }}</p>
+                    <p>{{ privacyPolicy.plainText }}</p>
                 {% endif %}
 
                 {{ LayoutContainer.show("Ceres::StaticPages.PrivacyPolicy") }}

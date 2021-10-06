@@ -4,7 +4,7 @@ import { mapState } from "vuex";
 import { isDefined } from "../../helper/utils";
 const NotificationService = require("../../services/NotificationService");
 
-Vue.component("payment-provider-select", {
+export default Vue.component("payment-provider-select", {
     props:
     {
         template:
@@ -76,7 +76,7 @@ Vue.component("payment-provider-select", {
 
         isPaymentMethodExcluded(paymentMethodId)
         {
-            if (isDefined(this.selectedShippingProfile.excludedPaymentMethodIds))
+            if (isDefined(this.selectedShippingProfile?.excludedPaymentMethodIds))
             {
                 return this.selectedShippingProfile.excludedPaymentMethodIds.includes(paymentMethodId);
             }

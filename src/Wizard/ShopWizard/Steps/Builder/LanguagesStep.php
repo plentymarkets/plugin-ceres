@@ -95,17 +95,9 @@ class LanguagesStep extends Step
     {
         $languageOptions = StepHelper::buildListBoxData($this->languages);
         $formFields = [
-            "languages_setLinkedStoreLanguage" => [
-                "type" => "toggle",
-                "defaultValue" => false,
-                "options" => [
-                    "name" => "Wizard.setLinkedStoreLanguage"
-                ]
-            ],
             "languages_defaultBrowserLang" => [
                 "type" => "select",
                 "defaultValue" => $languageOptions[0]['value'],
-                "isVisible" => "typeof languages_setLinkedStoreLanguage ==='undefined' || languages_setLinkedStoreLanguage === true",
                 "options" => [
                     "name" => "Wizard.defaultBrowserLanguage",
                     'listBoxValues' => $languageOptions
@@ -124,7 +116,6 @@ class LanguagesStep extends Step
             $formFields[$key] = [
                 "type" => "select",
                 "defaultValue" => "",
-                "isVisible" => "typeof languages_setLinkedStoreLanguage ==='undefined' || languages_setLinkedStoreLanguage === true",
                 "options" => [
                     "name" => "Wizard.{$translateKey}",
                     "listBoxValues" => $languageOptions

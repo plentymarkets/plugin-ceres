@@ -1,8 +1,7 @@
-.widget-legal-information
-{
-    a
-    {
-        color: black;
-	    margin-right: 10px;
+.widget-legal-information {
+    a {
+        display: inline-block;
+        margin-right: 10px;
+        color: $black;
     }
 }

@@ -61,7 +61,7 @@ class ShopWizard extends WizardProvider
         $performance       = pluginApp(PerformanceStep::class);
         $search            = pluginApp(SearchStep::class);
         $seo               = pluginApp(SeoStep::class);
-        
+
         return [
             'title' => 'Wizard.title',
             'shortDescription' => 'Wizard.shortDescription',
@@ -71,14 +71,13 @@ class ShopWizard extends WizardProvider
             ],
             'key' => 'shopCeres-assistant',
             'reloadStructure' => true,
-            'iconPath' => 'https://plentymarkets-assistant.s3.eu-central-1.amazonaws.com/ceres_assistent.svg',
+            'iconPath' => 'https://plentymarkets-assistant.s3.eu-central-1.amazonaws.com/ceres-5.svg',
             'dataSource' => 'Ceres\Wizard\ShopWizard\DataSource\ShopWizardDataSource',
             'settingsHandlerClass' => 'Ceres\Wizard\ShopWizard\SettingsHandlers\ShopWizardSettingsHandler',
             'dependencyClass' => 'Ceres\Wizard\ShopWizard\DynamicLoaders\ShopWizardDynamicLoader',
             'translationNamespace' => 'Ceres',
             'options' => [
                 'client' => $this->buildClientOptions(),
-                'pluginSet' => $this->buildPluginSetOptions()
             ],
             'undeleteableOptionIds' => $this->getUnDeletableOptions(),
             'steps' => [
@@ -96,7 +95,7 @@ class ShopWizard extends WizardProvider
             ]
         ];
     }
-    
+
     /**
      * @return array
      */
@@ -105,7 +104,7 @@ class ShopWizard extends WizardProvider
         $keywords = [];
         $i = 1;
         $prefix = ['Ceres::', 'Wizard.keyword'];
-        
+
         while($this->translator->trans($prefix[0].$prefix[1].$i) !== $prefix[0].$prefix[1].$i)
         {
             $keywords[] = $prefix[1].$i;
@@ -126,7 +125,7 @@ class ShopWizard extends WizardProvider
     {
         $clients = $this->settingsService->getWebstores();
         $pluginSets = $this->settingsService->getPluginSets();
-        
+
         $clientsList = [
             [
                 'value' => '',
@@ -158,41 +157,6 @@ class ShopWizard extends WizardProvider
                 'name' => 'Wizard.clientSelection',
                 'required' => true,
                 'listBoxValues' => $clientsList
-            ]
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    private function buildPluginSetOptions(): array
-    {
-        $pluginSets = $this->settingsService->getPluginSets();
-        
-        $pluginSetValues = [
-            [
-                'value' => '',
-                'caption' => $this->translator->trans('Ceres::Wizard.selectPluginSet')
-            ]
-
-        ];
-
-        if (count($pluginSets)) {
-            foreach ($pluginSets as $pluginSet) {
-                $pluginSetValues[] = [
-                    'value' => $pluginSet['id'],
-                    'caption' => $pluginSet['name']
-                ];
-            }
-        }
-
-        return [
-            'type' => 'select',
-            'defaultValue' => $pluginSetValues[0]['value'],
-            'options' => [
-                'name' => 'Wizard.pluginSetSelection',
-                'required' => true,
-                'listBoxValues' => $pluginSetValues
             ]
         ];
     }

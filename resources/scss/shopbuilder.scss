@@ -1,0 +1,6 @@
+// stylelint-disable
+.sb-no-animation.collapsing {
+    display: none !important;
+    -webkit-transition: none !important;
+    transition: none !important;
+}

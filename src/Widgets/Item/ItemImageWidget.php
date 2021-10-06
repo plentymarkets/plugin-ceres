@@ -11,8 +11,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class ItemImageWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Item.ItemImageWidget";
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::ItemImageWidget")
@@ -21,9 +25,15 @@ class ItemImageWidget extends BaseWidget
             ->withType(WidgetTypes::ITEM)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(200)
+            ->withSearchKeyWords([
+                "item", "artikel", "article", "image", "product", "bild", "produktbild"
+            ])
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settingsFactory */
@@ -38,7 +48,7 @@ class ItemImageWidget extends BaseWidget
             ->withListBoxValues(
                 ValueListFactory::make()
                     ->addEntry("standard", "Widget.itemImageAnimationStyleSlide")
-                    ->addEntry("fadeOut", "Widget.itemImageAnimationStyleFade")
+                    ->addEntry("fade-out", "Widget.itemImageAnimationStyleFade")
                     ->toArray()
             );
 
@@ -59,6 +69,10 @@ class ItemImageWidget extends BaseWidget
                     ->addEntry("url", "Widget.itemImageSizeFull")
                     ->toArray()
             );
+
+        $settingsFactory->createCheckbox('preloadImage')
+            ->withTooltip('Widget.preloadImageTooltip')
+            ->withName('Widget.preloadImageLabel');
 
         $settingsFactory->createCheckbox("showThumbs")
             ->withName("Widget.itemImageShowThumbsLabel")

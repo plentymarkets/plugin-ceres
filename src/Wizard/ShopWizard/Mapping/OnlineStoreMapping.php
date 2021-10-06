@@ -15,12 +15,6 @@ class OnlineStoreMapping
             'global'   => true,
             'optional' => false,
         ],
-        'onlineStore_storeName' => [
-            'field'    => 'header.company_name',
-            'type'     => 'string',
-            'global'   => false,
-            'optional' => false,
-        ],
         'onlineStore_storeFavicon' => [
             'field'    => 'global.favicon',
             'type'     => 'string',
@@ -75,6 +69,12 @@ class OnlineStoreMapping
             'global'   => false,
             'optional' => false,
         ],
+        'onlineStore_minimumOrderAmount' => [
+            'field'    => 'minimumOrderValue',
+            'type'     => 'integer',
+            'global'   => true,
+            'optional' => false,
+        ],
         'onlineStore_enableCallisto' => [
             'field'    => 'global.enableOldUrlPattern',
             'type'     => 'boolean',
@@ -127,6 +127,28 @@ class OnlineStoreMapping
             'field'     => 'checkout.show_all_shipping_profiles',
             'type'      => 'boolean',
             'global'    => false,
+            'optional'  => false
+        ],
+        'onlineStore_externalVatIdCheck' => [
+            'field'     => 'externalVatCheckInactive',
+            'type'      => 'integer',
+            'global'    => true,
+            'optional'  => false
+        ],
+        'onlineStore_useVariationOrderProperties' => [
+            'field'     => 'useVariationOrderProperties',
+            'type'      => 'boolean',
+        ],
+        'onlineStore_externalVatIdCheckServiceUnavailableFallbackStatus' => [
+            'field'     => 'externalVatCheckServiceUnavailableFallbackStatus',
+            'type'      => 'float',
+            'global'    => true,
+            'optional'  => false
+        ],
+        'onlineStore_loginMode' => [
+            'field'     => 'loginMode',
+            'type'      => 'integer',
+            'global'    => true,
             'optional'  => false
         ]
     ];

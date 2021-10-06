@@ -3,11 +3,13 @@ const cloneDeep = require("lodash/cloneDeep");
 
 export default function(store)
 {
-    let oldState = cloneDeep(store.state);
+    const useDeepClone = App.config.log.performanceEventPropagation;
+
+    let oldState = useDeepClone ? cloneDeep(store.state) : {};
 
     store.subscribe((mutation, state) =>
     {
-        const nextState = cloneDeep(state);
+        const nextState = useDeepClone ? cloneDeep(state) : {};
         const eventName = "on" + mutation.type.charAt(0).toUpperCase() + mutation.type.substr(1);
         const event = new CustomEvent(eventName, { detail: { payload: mutation.payload, newState: nextState, oldState } });
 

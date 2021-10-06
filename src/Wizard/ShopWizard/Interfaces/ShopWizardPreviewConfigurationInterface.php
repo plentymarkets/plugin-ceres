@@ -8,7 +8,6 @@ namespace Ceres\Wizard\ShopWizard\Interfaces;
  */
 interface ShopWizardPreviewConfigurationInterface
 {
-
     /**
      * Create new preview config
      *
@@ -30,30 +29,36 @@ interface ShopWizardPreviewConfigurationInterface
      *
      * @param string $pluginSetId
      *
+     * @param int $webstoreId
+     *
      * @param array $data
      *
      * @return mixed
      */
-    public function updateConfig($pluginSetId, array $data);
+    public function updateConfig($pluginSetId, $webstoreId, array $data);
 
     /**
      * Delete config
      *
      * @param string $pluginSetId
      *
+     * @param int $webstoreId
+     *
      * @param bool $deleted
      *
      * @return mixed
      */
-    public function deleteConfig($pluginSetId, $deleted);
+    public function deleteConfig($pluginSetId, $webstoreId, $deleted);
 
     /**
      * Read account
      *
      * @param string $pluginSetId
      *
+     * @param  $webstoreId
+     *
      * @return mixed
      */
-    public function getConfig($pluginSetId);
+    public function getConfig($pluginSetId, $webstoreId);
 
 }

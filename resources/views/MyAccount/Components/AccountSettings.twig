@@ -41,13 +41,13 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="input-unit">
-                                            <input type="email" name="newMail" autocomplete="off" v-model="newMail" data-autofocus>
+                                            <input type="email" name="newMail" autocomplete="off" v-model="newMail" data-autofocus {{ set_testing_attr("data-testing", "change-mail") }}>
                                             <label for="newMail">{{ trans("Ceres::Template.myAccountNewEmail") }}</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="input-unit no-bottom">
-                                            <input type="email" name="newMail2" autocomplete="off" v-model="newMail2">
+                                            <input type="email" name="newMail2" autocomplete="off" v-model="newMail2" {{ set_testing_attr("data-testing", "change-mail-repeat") }}>
                                             <label for="newMail2">{{ trans("Ceres::Template.myAccountRepeatEmail") }}</label>
                                         </div>
                                     </div>
@@ -60,7 +60,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary btn-appearance btn-block" @click="saveAccountEmail" :class="{'disabled': !isValidEmail || isLoading}">
+                                <button type="submit" class="btn btn-primary btn-appearance btn-block" @click="saveAccountEmail" :class="{'disabled': !isValidEmail || isLoading}" {{ set_testing_attr("data-testing", "change-mail-submit") }}>
                                     <i class="fa fa-check" aria-hidden="true"></i> 
                                     <span>{{ trans("Ceres::Template.myAccountSave") }}</span>
                                 </button>
@@ -85,7 +85,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="input-unit">
-                                        <input type="password" name="old_password" autocomplete="old-password" v-model="oldPassword" data-autofocus>
+                                        <input type="password" name="old_password" autocomplete="old-password" v-model="oldPassword" data-autofocus {{ set_testing_attr("data-testing", "old-password") }}>
                                         <label for="old_password">{{ trans("Ceres::Template.myAccountOldPassword") }}</label>
                                     </div>
                                 </div>
@@ -94,7 +94,7 @@
                                         <popper v-cloak trigger="focus" placement="bottom" ref="passwordHint">
                                             {% set uid_pwd = uid() %}
                                             <template #handle>
-                                                <input type="password" id="{{ uid_pwd }}" name="password" autocomplete="new-password" v-model="newPassword">
+                                                <input type="password" id="{{ uid_pwd }}" name="password" autocomplete="new-password" v-model="newPassword" {{ set_testing_attr("data-testing", "new-password") }}>
                                             </template>
 
                                             <template #title>
@@ -115,7 +115,7 @@
                                     </div>
                                     <div class="input-unit" data-validate="password">
                                         {% set uid_pwd_repeat = uid() %}
-                                        <input type="password" id="{{ uid_pwd_repeat }}" name="password" autocomplete="new-password" v-model="confirmPassword">
+                                        <input type="password" id="{{ uid_pwd_repeat }}" name="password" autocomplete="new-password" v-model="confirmPassword" {{ set_testing_attr("data-testing", "new-password-repeat") }}>
                                         <label for="{{ uid_pwd_repeat }}">{{ trans("Ceres::Template.myAccountRepeatPassword") }}</label>
                                     </div>
                                 </div>
@@ -127,7 +127,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary btn-appearance btn-block" @click="validatePassword" :class="{'disabled': !isValidPassword || isLoading}">
+                            <button type="submit" class="btn btn-primary btn-appearance btn-block" @click="validatePassword" :class="{'disabled': !isValidPassword || isLoading}" {{ set_testing_attr("data-testing", "new-password-submit") }}>
                                     <i class="fa fa-check" aria-hidden="true"></i> 
                                     <span>{{ trans("Ceres::Template.myAccountSave") }}</span>
                             </button>

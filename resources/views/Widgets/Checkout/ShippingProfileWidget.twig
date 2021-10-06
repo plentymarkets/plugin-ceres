@@ -37,8 +37,8 @@
         <div class="shipping-method-select">
             <shipping-profile-select
                     :payment-container-is-overwritten="{{ Twig.print("isOverwritten | json_encode") }}"
-                {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
-                {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
+                    {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
+                    {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
             </shipping-profile-select>
         </div>
     {{ Twig.else() }}

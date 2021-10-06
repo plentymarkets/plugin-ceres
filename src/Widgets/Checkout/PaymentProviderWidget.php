@@ -10,8 +10,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class PaymentProviderWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Checkout.PaymentProviderWidget";
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::PaymentProviderWidget")
@@ -21,9 +25,15 @@ class PaymentProviderWidget extends BaseWidget
             ->withCategory(WidgetCategories::CHECKOUT)
             ->withPosition(200)
             ->withMaxPerPage(1)
+            ->withSearchKeyWords([
+                "checkout", "bestellvorgang", "bestellung", "zahlungsmittel", "zahlung", "payment"
+            ])
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */

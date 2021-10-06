@@ -1,10 +1,31 @@
+html {
+    font-size: $font-size-root;
+}
+
+body {
+    overflow-x: hidden;
+}
+
 // additional compatibility scss to bootstrap's reboot
+dt {
+    font-weight: 400;
+}
+
+a:hover,
+a:focus,
+a:active {
+    text-decoration: none;
+}
+
+.tooltip {
+    z-index: $zindex-9;
+}
 
 // prevent iOS standard zoom on input elements on focus
-html.ios {
+html.ios { // stylelint-disable-line selector-no-qualifying-type
     input,
     select,
     textarea {
-        font-size: 16px !important;
+        font-size: 16px !important; // stylelint-disable-line declaration-no-important
     }
 }

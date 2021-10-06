@@ -19,7 +19,8 @@
         delivery_note:      "Ceres::Template.orderConfirmationOrderDocumentsDeliveryNote",
         order_confirmation: "Ceres::Template.orderConfirmationOrderDocumentsOrderConfirmation",
         pickup_delivery:    "Ceres::Template.orderConfirmationOrderDocumentsPickupDelivery",
-        reversal_document:  "Ceres::Template.orderConfirmationOrderDocumentsReversalDocument"
+        reversal_document:  "Ceres::Template.orderConfirmationOrderDocumentsReversalDocument",
+        return_note:        "Ceres::Template.orderConfirmationOrderDocumentsReturnNote"
     } | json_encode)
 }}
 
@@ -37,7 +38,7 @@
 
         {{ Twig.if("orderDocuments | length > 1 or #{ isPreview | json_encode }") }}
         {# dropdown for multiple documents #}
-            <div class="btn-group">
+            <div class="btn-group" {{ Twig.print('set_testing_attr("data-testing", "order-confirmation-order-documents")') }}>
                 <button type="button"
                     class="btn btn-appearance dropdown-toggle {{ buttonSize }}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                     {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
@@ -73,7 +74,7 @@
 
 {{ Twig.elseif("#{ isPreview | json_encode }") }}
 
-    <div class="widget-placeholder">
+    <div class="widget-placeholder p-0">
         <div>
             <p class="title">{{ Twig.trans("Ceres::Widget.orderDocumentsLabel") }}</p>
             <p class="description">{{ Twig.trans("Ceres::Widget.orderDocumentsPlaceholderDescription") }}</p>

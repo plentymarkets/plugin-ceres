@@ -7,5 +7,6 @@
     "details.metaTitle",
     "details.imagePath",
     "details.image2Path",
-    "itemCount"
+    "itemCount",
+    "childCount"
 ]

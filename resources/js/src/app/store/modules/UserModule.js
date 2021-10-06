@@ -1,9 +1,8 @@
 import { isDefined } from "../../helper/utils";
 
-const state =
-    {
-        userData: null
-    };
+const state = () => ({
+    userData: null
+});
 
 const mutations =
     {

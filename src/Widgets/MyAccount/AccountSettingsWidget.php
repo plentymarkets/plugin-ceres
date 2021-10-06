@@ -11,8 +11,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class AccountSettingsWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.MyAccount.AccountSettingsWidget";
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::AccountSettingsWidget")
@@ -21,8 +25,15 @@ class AccountSettingsWidget extends BaseWidget
             ->withType(WidgetTypes::MY_ACCOUNT)
             ->withCategory(WidgetCategories::MY_ACCOUNT)
             ->withPosition(100)
+            ->withSearchKeyWords([
+                "account", "settings", "einstellungen"
+            ])
             ->toArray();
     }
+
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settings */

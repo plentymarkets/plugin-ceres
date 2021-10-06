@@ -16,5 +16,6 @@ class WidgetCategories
     const FORM = "form";
     const CONTACT = "contact";
     const ORDER_CONFIRMATION = "orderconfirmation";
+    const NAVIGATION = "navigation";
     const FOOTER = "footer";
 }

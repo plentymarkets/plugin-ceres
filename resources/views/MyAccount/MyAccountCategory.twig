@@ -11,9 +11,7 @@
                         :selected-delivery-address="{{ services.checkout.getDeliveryAddressId() | json_encode }}"
                         :billing-address-list="{{ services.customer.getAddresses(1) | json_encode }}"
                         :selected-billing-address="{{ services.checkout.getBillingAddressId() | json_encode }}">
-                        <div class="bg-white p-3">
                             {{ shopBuilderTemplate | raw }}
-                        </div>
                     </my-account>
                 </div>
             </div>

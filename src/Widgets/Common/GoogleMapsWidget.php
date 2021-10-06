@@ -14,8 +14,12 @@ class GoogleMapsWidget extends BaseWidget
 {
     use Loggable;
 
+    /** @inheritDoc */
     protected $template = 'Ceres::Widgets.Common.GoogleMapsWidget';
 
+    /**
+     * @inheritDoc
+     */
     public function getData(): array
     {
         return WidgetDataFactory::make('Ceres::GoogleMapsWidget')
@@ -23,14 +27,21 @@ class GoogleMapsWidget extends BaseWidget
             ->withPreviewImageUrl('/images/widgets/google-maps.svg')
             ->withType(WidgetTypes::DEFAULT)
             ->withPosition(1050)
+            ->withSearchKeyWords([
+                "google", "maps", "karte", "location", "anfahrt"
+            ])
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings(): array
     {
         /** @var WidgetSettingsFactory $settings */
         $settings = pluginApp(WidgetSettingsFactory::class);
 
+        $settings->createCustomClass();
         $settings->createTextarea('address')
             ->withName('Widget.googleMapsAddressLabel')
             ->withTooltip('Widget.googleMapsAddressTooltip');
@@ -54,77 +65,19 @@ class GoogleMapsWidget extends BaseWidget
             ->withTooltip('Widget.googleMapsZoomTooltip');
 
         $settings->createSelect('aspectRatio')
-            ->withDefaultValue('prop-xs-3-1')
+            ->withDefaultValue('3-1')
             ->withName('Widget.googleMapsAspectRatioLabel')
             ->withTooltip('Widget.googleMapsAspectRatioTooltip')
             ->withListBoxValues(
                 ValueListFactory::make()
-                    ->addEntry('prop-xs-3-1', 'Widget.googleMapsAspectRatioThreeToOne')
-                    ->addEntry('prop-xs-2-1', 'Widget.googleMapsAspectRatioTwoToOne')
-                    ->addEntry('prop-xs-1-1', 'Widget.googleMapsAspectRatioOneToOne')
+                    ->addEntry('3-1', 'Widget.googleMapsAspectRatioThreeToOne')
+                    ->addEntry('2-1', 'Widget.googleMapsAspectRatioTwoToOne')
+                    ->addEntry('1-1', 'Widget.googleMapsAspectRatioOneToOne')
                     ->toArray()
             );
 
+        $settings->createSpacing();
+
         return $settings->toArray();
-    }
-
-    protected function getTemplateData($widgetSettings, $isPreview)
-    {
-        /** @var CeresConfig $config */
-        $config = pluginApp(CeresConfig::class);
-        $address = $widgetSettings['address']['mobile'];
-        $apiKey = $config->contact->apiKey;
-
-        if (empty($address) || empty($apiKey)) {
-            return [
-                'location' => null
-            ];
-        }
-
-        $address = urlencode($address);
-
-        // google map geocode api url
-        $url = "https://maps.googleapis.com/maps/api/geocode/json?address={$address}&key={$apiKey}";
-
-        $curl = curl_init();
-
-        curl_setopt_array(
-            $curl,
-            array(
-                CURLOPT_RETURNTRANSFER => 1,
-                CURLOPT_URL => $url
-            )
-        );
-
-        $result_json = curl_exec($curl);
-        $result = json_decode($result_json, true);
-
-        curl_close($curl);
-
-        $lat = $result['results'][0]['geometry']['location']['lat'] ?? '';
-        $lng = $result['results'][0]['geometry']['location']['lng'] ?? '';
-
-        if ($lat && $lng) {
-            return [
-                'location' => [
-                    'lat' => $lat,
-                    'lng' => $lng
-                ]
-            ];
-        }
-
-        if (isset($result['error_message'])) {
-            $this->getLogger(__CLASS__)->error(
-                'Google Maps API error',
-                [
-                    'status' => $result['status'],
-                    'error' => $result['error_message']
-                ]
-            );
-        }
-
-        return [
-            'location' => null
-        ];
     }
 }

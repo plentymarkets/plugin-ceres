@@ -1,0 +1,40 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set showImages                 = widget.settings.showImages.mobile is same as (true) %}
+{% set showCount                  = widget.settings.showCount.mobile is same as (true) %}
+{% set showAdditionalInformation  = widget.settings.showAdditionalInformation.mobile is same as (true) %}
+
+{% set customClass     = widget.settings.customClass.mobile %}
+{% set appearance      = widget.settings.appearance.mobile | default("primary") %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+{% set widgetClasses = WidgetHelper.concatClasses(["widget-#{ appearance }", customClass, spacingMargin]) %}
+
+{% set headline = widget.settings.headline.mobile %}
+{% set showHeadline = widget.settings.showHeadline.mobile %}
+
+<div class="widget widget-search-suggestion-item {{ widgetClasses }}"{% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    {% if showHeadline %}
+        <div class="px-3 pt-3 border-bottom" {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+            {% if headline is empty %}
+                <h4 class="mb-2">{{ WidgetHelper.editableTwig(isPreview, Twig.trans(defaultHeadline)) }}</h4>
+            {% else %}
+                {{ WidgetHelper.editableTwig(isPreview, headline) }}
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <search-suggestion-item
+        :show-images="{{ showImages | json_encode }}"
+        {% if spacingSettings.customPadding.mobile %}:padding-classes="{{ spacingPadding | json_encode }}"
+        :padding-inline-styles="{{ inlinePadding | json_encode }}"{% endif %}
+        suggestion-type="{{ suggestionType | default("item") }}"
+        :show-count="{{ showCount | json_encode }}"
+        :show-additional-information="{{ showAdditionalInformation | json_encode }}">
+    </search-suggestion-item>
+</div>

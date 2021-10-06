@@ -19,6 +19,7 @@ use Ceres\Widgets\Category\PaginationWidget;
 use Ceres\Widgets\Category\ToolbarWidget;
 use Ceres\Widgets\Checkout\CancelPaymentWidget;
 use Ceres\Widgets\Checkout\ContactWishWidget;
+use Ceres\Widgets\Checkout\CustomerSignWidget;
 use Ceres\Widgets\Checkout\GtcCheckWidget;
 use Ceres\Widgets\Checkout\PaymentProviderWidget;
 use Ceres\Widgets\Checkout\PlaceOrderWidget;
@@ -53,6 +54,7 @@ use Ceres\Widgets\Footer\LegalInformationWidget;
 use Ceres\Widgets\Form\AcceptPrivacyPolicyWidget;
 use Ceres\Widgets\Form\MailFormWidget;
 use Ceres\Widgets\Form\MailInputWidget;
+use Ceres\Widgets\Form\MailAttachmentWidget;
 use Ceres\Widgets\Form\SelectionWidget;
 use Ceres\Widgets\Form\TextAreaWidget;
 use Ceres\Widgets\Form\TextInputWidget;
@@ -63,7 +65,11 @@ use Ceres\Widgets\Grid\TabWidget;
 use Ceres\Widgets\Grid\ThreeColumnWidget;
 use Ceres\Widgets\Grid\TwoColumnWidget;
 use Ceres\Widgets\Header\BreadcrumbWidget;
+use Ceres\Widgets\Header\LanguageDetectionWidget;
 use Ceres\Widgets\Header\NavigationWidget;
+use Ceres\Widgets\Header\Search\SearchSuggestionCategoryWidget;
+use Ceres\Widgets\Header\Search\SearchSuggestionItemWidget;
+use Ceres\Widgets\Header\Search\SearchSuggestionSuggestionWidget;
 use Ceres\Widgets\Header\TopBarWidget;
 use Ceres\Widgets\Item\AddToBasketWidget;
 use Ceres\Widgets\Item\AddToWishListWidget;
@@ -74,7 +80,9 @@ use Ceres\Widgets\Item\ItemBundleWidget;
 use Ceres\Widgets\Item\ItemDataTableWidget;
 use Ceres\Widgets\Item\ItemImageWidget;
 use Ceres\Widgets\Item\ItemPriceWidget;
+use Ceres\Widgets\Item\ItemSetWidget;
 use Ceres\Widgets\Item\OrderPropertyWidget;
+use Ceres\Widgets\Item\QuantityInputWidget;
 use Ceres\Widgets\Item\TagsWidget;
 use Ceres\Widgets\Item\WishListWidget;
 use Ceres\Widgets\Legal\LegalTextsWidget;
@@ -88,6 +96,7 @@ use Ceres\Widgets\MyAccount\LogoutButtonWidget;
 use Ceres\Widgets\MyAccount\OrderHistoryWidget;
 use Ceres\Widgets\MyAccount\OrderReturnHistoryWidget;
 use Ceres\Widgets\Navigation\NavigationTreeWidget;
+use Ceres\Widgets\Navigation\StepByStepNavigationWidget;
 use Ceres\Widgets\OrderConfirmation\OrderDataWidget;
 use Ceres\Widgets\OrderConfirmation\OrderDocumentsWidget;
 use Ceres\Widgets\OrderConfirmation\OrderReturnWidget;
@@ -111,7 +120,8 @@ class WidgetCollection
         PlaceOrderWidget::class,
         ShippingPrivacyCheckWidget::class,
         ShippingProfileWidget::class,
-        SubscribeNewsletterCheckWidget::class
+        SubscribeNewsletterCheckWidget::class,
+        CustomerSignWidget::class
     ];
 
     const COMMON_WIDGETS = [
@@ -155,6 +165,7 @@ class WidgetCollection
         AcceptPrivacyPolicyWidget::class,
         MailFormWidget::class,
         MailInputWidget::class,
+        MailAttachmentWidget::class,
         SelectionWidget::class,
         TextAreaWidget::class,
         TextInputWidget::class
@@ -172,7 +183,11 @@ class WidgetCollection
     const HEADER_WIDGETS = [
         BreadcrumbWidget::class,
         NavigationWidget::class,
-        TopBarWidget::class
+        SearchSuggestionCategoryWidget::class,
+        SearchSuggestionItemWidget::class,
+        SearchSuggestionSuggestionWidget::class,
+        TopBarWidget::class,
+        LanguageDetectionWidget::class
     ];
 
     const ITEM_WIDGETS = [
@@ -188,6 +203,11 @@ class WidgetCollection
         OrderPropertyWidget::class,
         WishListWidget::class,
         TagsWidget::class
+    ];
+
+    const ITEM_SET_WIDGETS = [
+        ItemSetWidget::class,
+        QuantityInputWidget::class
     ];
 
     const LEGAL_WIDGETS = [
@@ -224,6 +244,7 @@ class WidgetCollection
         ToolbarWidget::class,
         PaginationWidget::class,
         NavigationTreeWidget::class,
+        StepByStepNavigationWidget::class,
         SelectedFilterWidget::class,
         AttributesPropertiesCharacteristicsFilterWidget::class,
         AvailabilityFilterWidget::class,
@@ -245,6 +266,7 @@ class WidgetCollection
             self::GRID_WIDGETS,
             self::HEADER_WIDGETS,
             self::ITEM_WIDGETS,
+            self::ITEM_SET_WIDGETS,
             self::LEGAL_WIDGETS,
             self::LOGIN_WIDGETS,
             self::MY_ACCOUNT_WIDGETS,

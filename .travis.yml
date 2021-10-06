@@ -1,0 +1,24 @@
+dist: trusty
+git:
+  depth: 3
+
+branches:
+  only:
+    - stable
+    - beta
+    - /^feature\/beta\/.*/
+
+language: node_js
+node_js:
+  - 12
+
+cache: npm
+
+jobs:
+  include:
+    - name: 'Run linters'
+      script: npm run lint
+    - name: 'Run test scripts'
+      script: npm run test
+    - name: 'Build assets'
+      script: npm run build:prod

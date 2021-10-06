@@ -1,5 +1,7 @@
 import { isNullOrUndefined } from "./utils";
 import { applyStyles } from "./dom";
+import { detectPassiveEvents } from "./featureDetect";
+import { repeatAnimationFrame } from "./repeatAnimationFrame";
 
 const STICKY_EVENTS = [
     "resize",
@@ -10,6 +12,12 @@ const STICKY_EVENTS = [
     "pageshow",
     "load",
     "move-sticky"
+];
+
+const STICKY_EVENTS_PASSIVE = [
+    "scroll",
+    "touchstart",
+    "touchmove"
 ];
 
 export class StickyElement
@@ -37,13 +45,39 @@ export class StickyElement
         });
 
         el.classList.add("sticky-element");
+
+        const updateHandler = () =>
+        {
+            if (this.enabled)
+            {
+                this.checkElement();
+                this.updateStyles();
+            }
+        };
+
+        // Update if height of sticky element changes
+        if ("ResizeObserver" in window)
+        {
+            this.resizeObserver = new ResizeObserver(updateHandler.bind(this));
+            this.resizeObserver.observe(this.el);
+        }
+        // IE11 + Safari < 13.0
+        else
+        {
+            this.el.addEventListener("updateStickyContainer", () =>
+            {
+                const stop = repeatAnimationFrame(updateHandler.bind(this));
+
+                setTimeout(stop, 500);
+            });
+        }
     }
 
     enable()
     {
         this.vm.$nextTick(() =>
         {
-            if (this.enabled || this.isMinWidth || App.isShopBuilder)
+            if (this.enabled || App.isShopBuilder)
             {
                 return;
             }
@@ -55,19 +89,29 @@ export class StickyElement
             {
                 if (this.shouldUpdate())
                 {
-                    this.checkElement();
+                    if (this.checkElement())
+                    {
+                        if (this.animationFrame > 0)
+                        {
+                            cancelAnimationFrame(this.animationFrame);
+                            this.animationFrame = 0;
+                        }
+                        this.animationFrame = requestAnimationFrame(this.updateStyles.bind(this));
+                    }
                 }
             };
+
+            const isPassiveEventSupported = detectPassiveEvents();
 
             document.addEventListener("storeChanged", this.eventListener);
             STICKY_EVENTS.forEach(event =>
             {
-                window.addEventListener(event, this.eventListener);
+                window.addEventListener(event, this.eventListener,
+                    isPassiveEventSupported && !!STICKY_EVENTS_PASSIVE.includes(event) ? { passive: true } : false);
             });
 
             this.enabled = true;
             this.calculateOffset();
-            this.tick();
         });
     }
 
@@ -102,25 +146,20 @@ export class StickyElement
         }
         this.animationFrame = 0;
         this.enabled = false;
-
-    }
-
-    tick()
-    {
-        if (this.shouldUpdate())
-        {
-            this.updateStyles();
-        }
-        this.animationFrame = requestAnimationFrame(this.tick.bind(this));
     }
 
     shouldUpdate()
     {
-        return (this.enabled && !this.isMinWidth) || (this.position || {}).isSticky;
+        return (this.enabled && this.isMinWidth) || (this.position || {}).isSticky;
     }
 
     checkElement(skipOffsetCalculation)
     {
+        if (!this.enabled)
+        {
+            return false;
+        }
+
         const oldValue        = this.position || {};
         const elementRect     = this.el.getBoundingClientRect();
         const placeholderRect = this.placeholder.getBoundingClientRect();
@@ -142,6 +181,10 @@ export class StickyElement
             origY: placeholderRect.top,
             isSticky: elementRect.height < containerRect.height && placeholderRect.top <= this.offsetTop
         };
+
+        // check if any property has changed
+        return ["width", "height", "x", "y", "origY", "isSticky"]
+            .some(property => oldValue[property] !== this.position[property]);
     }
 
     calculateOffset()
@@ -213,10 +256,13 @@ export class StickyElement
 
         if (this.position.isSticky)
         {
+            // Fix blur while gpu accelerated
+            const roundedPosition = Math.round(this.position.y / 2) * 2;
+
             styles = {
                 position:   "fixed",
                 top:        0,
-                transform:  "translate3d(0, " + this.position.y + "px, 0)",
+                transform:  "translate3d(0, " + roundedPosition + "px, 0)",
                 left:       this.position.x + "px",
                 width:      this.position.width + "px"
             };
@@ -238,7 +284,7 @@ export class StickyElement
 
     checkMinWidth()
     {
-        this.isMinWidth = !window.matchMedia("(min-width: " + this.minWidth + "px)").matches;
+        this.isMinWidth = window.matchMedia("(min-width: " + this.minWidth + "px)").matches;
     }
 
     getSiblingStickies()
@@ -280,6 +326,11 @@ export class StickyElement
         if (idx >= 0)
         {
             this.getContainerElement().__stickyElements.splice(idx, 1);
+        }
+
+        if (this.resizeObserver)
+        {
+            this.resizeObserver.unobserve(this.el);
         }
 
         this.el.classList.remove("sticky-element");

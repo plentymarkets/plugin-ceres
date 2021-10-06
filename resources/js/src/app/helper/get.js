@@ -3,6 +3,7 @@ import { isNullOrUndefined } from "./utils";
 export function get(object, path)
 {
     const fieldExp = /{\s*\S+\s*,\s*\S+\s*}|\w+/gm;
+
     let key;
 
     while (!isNullOrUndefined(object) && (key = fieldExp.exec(path)) !== null)

@@ -9,7 +9,7 @@
 {% set spacingMargin    = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
 {% set visibleFields = widget.settings.visibleFields.mobile | default([
-    "orderValueNet", "orderValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "totalSumNet", "promotionCoupon", "vats", "totalSumGross", "salesCoupon", "openAmount"
+    "orderValueNet", "orderValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "totalSumNet", "promotionCoupon", "vats", "totalSumGross", "salesCoupon", "openAmount", "additionalCosts"
 ]) %}
 
 {{ Twig.set("visibleFields", visibleFields | json_encode) }}

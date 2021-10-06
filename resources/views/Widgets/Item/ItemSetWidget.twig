@@ -1,0 +1,41 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+
+<div class="widget widget-item-set
+    {% if customClass | length > 0 %} {{ customClass }}{% endif %}
+    {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+
+    {% if isPreview %}
+        <single-item-set-component v-slot="slotProps">
+            <div data-builder-child-container="itemSet">
+                {{ children.itemSet | raw }}
+            </div>
+        </single-item-set-component>
+    {% else %}
+        {{ Twig.for("setComponent", "setComponents") }}
+            {{ Twig.print(Twig.call("set_item_data_base", [Twig.var("setComponent")])) }}
+
+            <single-item-set-component
+                    :item-id="{{ Twig.print("setComponent.item.id") }}"
+                    {{ Twig.if("setAttributeMap[setComponent.item.id] is defined") }}
+                        :initial-variation-id="{{ Twig.print("setComponent.variation.id") }}"
+                        :attributes="{{ Twig.print("setAttributeMap[setComponent.item.id].attributes | json_encode") }}"
+                        :variations="{{ Twig.print("setAttributeMap[setComponent.item.id].variations | json_encode") }}"
+                        :after-key="{{ Twig.print("setAttributeMap[setComponent.item.id].afterKey | json_encode") }}"
+                    {{ Twig.endif() }}
+                    v-slot="slotProps">
+                <div>
+                    {{ children.itemSet | raw }}
+                </div>
+            </single-item-set-component>
+            
+            {{ Twig.print(Twig.call("pop_item_data_base")) }}
+        {{ Twig.endfor() }}
+    {% endif %}
+</div>

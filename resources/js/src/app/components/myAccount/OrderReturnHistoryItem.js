@@ -1,7 +1,7 @@
 import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
 
-Vue.component("order-return-history-item", {
+export default Vue.component("order-return-history-item", {
 
     props: {
         template:

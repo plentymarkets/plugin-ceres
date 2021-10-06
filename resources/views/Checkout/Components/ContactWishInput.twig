@@ -1,6 +1,6 @@
 <script type="x/template" id="vue-contact-wish-input">
     <div class="input-unit textarea cmp-contact">
-        <textarea id="contact_wish" @change="updateContactWish($event)" class="no-resize" rows="5"></textarea>
+        <textarea id="contact_wish" @change="updateContactWish($event)" class="no-resize" rows="5">{{ checkout.contactWish }}</textarea>
         <label for="contact_wish">{{ trans("Ceres::Template.checkoutContactWishMessage") }}</label>
     </div>
 </script>

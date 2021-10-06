@@ -1,9 +1,13 @@
 import Vue from "vue";
 import { mapState } from "vuex";
+import AddressSelect from "./AddressSelect";
 
-Vue.component("shipping-address-select", {
+export default Vue.component("shipping-address-select", {
 
-    delimiters: ["${", "}"],
+    components:
+    {
+        AddressSelect
+    },
 
     template: `
         <address-select
@@ -15,7 +19,9 @@ Vue.component("shipping-address-select", {
             :required-address-fields="requiredAddressFields"
             :default-salutation="defaultSalutation"
             :padding-classes="paddingClasses"
-            :padding-inline-styles="paddingInlineStyles">
+            :padding-inline-styles="paddingInlineStyles"
+            data-testing="delivery-address-select"
+            :email="email">
         </address-select>
     `,
 
@@ -40,7 +46,17 @@ Vue.component("shipping-address-select", {
         defaultSalutation:
         {
             type: String,
-            default: "male"
+            default: App.config.addresses.defaultSalutation
+        },
+        hasAnyPostOfficePreset:
+        {
+            type: Boolean,
+            default: false
+        },
+        hasAnyParcelBoxPreset:
+        {
+            type: Boolean,
+            default: false
         },
         paddingClasses:
         {
@@ -51,12 +67,28 @@ Vue.component("shipping-address-select", {
         {
             type: String,
             default: null
-        }
+        },
+        email: String
     },
 
     computed: mapState({
         deliveryAddressId: state => state.address.deliveryAddressId
     }),
+
+    mounted()
+    {
+        if (App.templateType === "my-account")
+        {
+            if (this.hasAnyParcelBoxPreset)
+            {
+                this.$store.commit("setParcelBoxAvailability", true);
+            }
+            if (this.hasAnyPostOfficePreset)
+            {
+                this.$store.commit("setPostOfficeAvailability", true);
+            }
+        }
+    },
 
     methods:
     {

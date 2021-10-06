@@ -1,43 +1,36 @@
-@each $color, $value in $shop-builder-colors
-{
-    .widget-#{$color}
-    {
+// stylelint-disable declaration-no-important
+@each $color, $value in $shop-builder-colors {
+    .widget-#{$color} {
         @include text-emphasis-variant(".text-appearance", $value);
 
-        .bg-appearance
-        {
-            background-color: $value !important;
+        .bg-appearance {
             color: color-yiq($value) !important;
+            background-color: $value !important;
 
-            a
-            {
+            a {
                 color: color-yiq($value) !important;
             }
         }
 
         a.bg-appearance:hover,
-        button.bg-appearance:hover
-        {
-            background-color: darken($value, 10%) !important;
+        button.bg-appearance:hover {
             color: color-yiq(darken($value, 10%)) !important;
+            background-color: darken($value, 10%) !important;
         }
 
-        .btn-appearance
-        {
+        .btn-appearance {
             @include button-variant($value, $value);
         }
 
-        .btn-outline-appearance
-        {
+        .btn-outline-appearance {
             @include button-outline-variant($value);
         }
 
         a.text-appearance,
-        .btn-appearance
-        {
+        .btn-appearance {
             text-decoration-color: $value;
 
-            @include hover-focus {
+            @include hover-focus () {
                 text-decoration-color: darken($value, 7.5);
             }
         }
@@ -49,8 +42,7 @@
         }
 
         .border-appearance.active,
-        .border-appearance:hover
-        {
+        .border-appearance:hover {
             border-color: $value !important;
         }
 
@@ -58,34 +50,26 @@
             border-color: transparent $value transparent transparent !important;
         }
 
-        .pagination 
-        {
-            flex-wrap: wrap;
-
-            .page-item
-            {
-                .page-link
-                {
+        .pagination {
+            .page-item {
+                .page-link {
                     color: $value;
-                    @include hover-focus {
+                    @include hover-focus () {
                         color: darken($value, 15%);
                     }
                 }
-    
-                &.active .page-link
-                {
+
+                &.active .page-link { // stylelint-disable-line selector-max-class
                     border-color: $value;
                     @include context-bg($value);
                 }
             }
         }
 
-        .custom-control-appearance
-        {
-            .custom-control-input:checked ~ .custom-control-label::before
-            {
-                border-color: $value;
+        .custom-control-appearance {
+            .custom-control-input:checked ~ .custom-control-label::before {
                 background-color: $value;
+                border-color: $value;
             }
         }
     }

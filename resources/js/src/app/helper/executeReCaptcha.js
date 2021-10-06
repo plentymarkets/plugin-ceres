@@ -37,6 +37,7 @@ export function executeReCaptcha(form)
                         }
                         else
                         {
+                            window.grecaptcha.reset(recaptchaElement.dataset.recaptcha);
                             reject();
                         }
                     });

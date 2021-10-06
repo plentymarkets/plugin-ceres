@@ -2,20 +2,21 @@
 
 namespace Ceres\Migrations;
 
-use IO\Services\WebstoreConfigurationService;
-use Plenty\Modules\Plugin\Models\Plugin;
-use Plenty\Modules\Plugin\Contracts\ConfigurationRepositoryContract;
-use Plenty\Modules\Plugin\Contracts\PluginRepositoryContract;
 use Plenty\Modules\ShopBuilder\Contracts\ContentLinkRepositoryContract;
 use Plenty\Modules\ShopBuilder\Contracts\ContentRepositoryContract;
-use Plenty\Modules\System\Module\Contracts\PlentyModuleRepositoryContract;
 
 /**
  * Class RebuildShopBuilderHomepage
+ *
+ * This migration is used for re-rendering all contents.
+ * Migrations are referenced in the 'runOnBuild' section of the plugin.json and run exactly once.
  * @package Ceres\Migrations
  */
 class Migration_2018_07_06_001_RebuildShopBuilderHomepage
 {
+    /**
+     * Hook for running the migration.
+     */
     public function run()
     {
         $pluginSetId = pluginSetId();

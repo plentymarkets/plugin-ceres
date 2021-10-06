@@ -10,19 +10,29 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class GraduatedPriceWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Item.GraduatedPriceWidget";
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::GraduatedPriceWidget")
             ->withLabel("Widget.graduatedPriceLabel")
             ->withPreviewImageUrl("/images/widgets/graduated-price.svg")
-            ->withType(WidgetTypes::ITEM)
+            ->withType(WidgetTypes::SINGLE_ITEM)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(500)
+            ->withSearchKeyWords([
+                "item", "artikel", "article", "graduated", "price", "staffelpreis"
+            ])
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settingsFactory */

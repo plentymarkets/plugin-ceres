@@ -10,10 +10,25 @@
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlineMargin = WidgetHelper.getInlineSpacings(spacingSettings,"", spacingSettings.customMargin.mobile) %}
 {% set margin = WidgetHelper.getSpacingClasses(spacingSettings,"", spacingSettings.customMargin.mobile) %}
+{% set preloadImage    = widget.settings.preloadImage.mobile %}
+
 
 {{ Twig.import("ItemName", "Ceres::PageDesign.Macros.ItemName") }}
 
 {{ Twig.set("slides", "[]") }}
+{% set variationIds = [] %}
+
+{% for slideSettings in sliderParams.mobile %}
+    {% if slideSettings.url.type == 'item' and slideSettings.url.value | trim is not empty %}
+        {% set variationIds = variationIds|merge([slideSettings.url.value]) %}
+    {% endif %}
+{% endfor %}
+
+{% if variationIds|length > 0 %}
+    {# For result fields see \Plenty\Modules\Webshop\ItemSearch\Helpers\ResultFieldTemplate #}
+    {{ Twig.set("variations", Twig.call("services.item.getVariations",  [variationIds, "Webshop.ResultFields.SingleItem"])) }}
+{% endif %}
+
 
 {% for slideSettings in sliderParams.mobile %}
 
@@ -37,11 +52,10 @@
         {% set pushCurrentSlide = true %}
 
     {% elseif slideUrlType == 'item' and slideUrlValue | trim is not empty %}
+        {{ Twig.set("item", "find_item_variation(#{ slideUrlValue | json_encode }, variations.documents)") }}
 
-        {{ Twig.set("itemData", Twig.call("services.item.getVariation", [slideUrlValue])) }}
-        {{ Twig.set("itemData", "itemData.documents[0].data") }}
+        {{ Twig.set("itemData", "item.data") }}
         {{ Twig.set("itemImage", "itemData.images | itemImages | orderByKey('position') | first") }}
-
         {{ Twig.set("name", Twig.call("ItemName.get", ["$itemData | itemName", "$itemData.variation.bundleType"])) }}
         {{ Twig.set("url", "itemData | itemURL") }}
         {{ Twig.set("imageUrl", "itemImage.url") }}
@@ -50,6 +64,7 @@
         {{ Twig.set("slide", "slide | merge({ url: itemData | itemURL })") }}
         {{ Twig.set("slide", "slide | merge({ imageUrl: itemImage.url })") }}
         {{ Twig.set("slide", "slide | merge({ imageAltText: itemImage.alternate })") }}
+        {{ Twig.set("slide", "slide | merge({ imageName: itemImage.name })") }}
 
         {% set pushCurrentSlide = true %}
 
@@ -73,6 +88,12 @@
         {{ Twig.set("slide", "slide | merge({ imageAltText: cdn_metadata(#{ slideSettings.customImagePath | json_encode }, 'alttext') })") }}
 
         {% set pushCurrentSlide = true %}
+
+    {% endif %}
+
+    {% if slideSettings.fallbackImagePath | trim is not empty %}
+
+        {{ Twig.set("slide", "slide | merge({ fallbackImageUrl: #{ slideSettings.fallbackImagePath | json_encode } })") }}
 
     {% endif %}
 
@@ -100,12 +121,12 @@
 
 {{ Twig.endif() }}
 
-<div class="widget widget-image-carousel widget-{{ appearance | default('primary') }} widget-proportional{% if aspectRatio != 'auto' %} prop-xs-{{ aspectRatio }}{% endif %}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if margin | length > 0 %} {{ margin }}{% endif %}"
+<div class="widget widget-image-carousel widget-{{ appearance | default('primary') }} widget-proportional{% if aspectRatio != 'auto' %} widget-prop-{{ aspectRatio }}{% endif %}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if margin | length > 0 %} {{ margin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div id="image-carousel_{{ carouselId }}" class="widget-inner carousel slide{% if animationStyle == 'fade' %} carousel-fade{% endif %}" data-ride="carousel">
-        <div class="carousel-inner" role="listbox">
+        <div class="carousel-inner" role="listbox" aria-label="{{ trans("Ceres::Template.itemImageCarousel") }}">
             {{ Twig.for("slide", "slides") }}
-            
+
             <div class="carousel-item{{ Twig.if("loop.first") }} active{{ Twig.endif() }}">
                 <a {{ Twig.if("slide.url is not empty") }}href="{{ Twig.print("slide.url") }}"{{ Twig.endif() }}
                     {{ Twig.if("slide.openInNewTab is not empty") }} target="_blank" {{ Twig.endif() }}>
@@ -113,17 +134,50 @@
                         {{ Twig.set("altText", "slide.imageAltText") }}
                         {{ Twig.if("altText | trim is empty") }}
                             {{ Twig.set("altText", "slide.name") }}
-                        {{ Twig.endif }}
-                        
+                        {{ Twig.endif() }}
+
+                        {{ Twig.set("imgTitle", "slide.imageName") }}
+                        {{ Twig.if("imgTitle | trim is empty") }}
+                            {{ Twig.set("imgTitle", "slide.name") }}
+                        {{ Twig.endif() }}
+
+                        {{ Twig.set("fallbackUrl", "slide.fallbackImageUrl") }}
+                        {{ Twig.if("fallbackUrl | trim is empty") }}
+                            {{ Twig.set("fallbackUrl", "slide.imageUrl") }}
+                        {{ Twig.endif() }}
+
+                        {% if preloadImage %}
+                            {{ Twig.if("loop.first") }}
+                                {{ Twig.print("add_asset(slide.imageUrl,'image')") }}
+                            {{ Twig.endif() }}
+                        {% endif %}
+
                         {% if widget.settings.lazyLoading.mobile %}
                             <lazy-img
-                                class="img-cover"
+                                picture-class="img-cover"
                                 image-url="{{ Twig.print("slide.imageUrl") }}"
+                                fallback-url="{{ Twig.print("slide.fallbackImageUrl") }}"
                                 alt="{{ Twig.print("altText") }}"
-                                title="{{ Twig.print("slide.name") }}">
+                                title="{{ Twig.print("imgTitle") }}"
+                                role="option">
                             </lazy-img>
+                            <noscript v-if="false">
+                                <img src="{{ Twig.print("fallbackUrl") }}"
+                                    class="img-cover"
+                                    alt="{{ Twig.print("altText") }}"
+                                    title="{{ Twig.print("imgTitle") }}">
+                            </noscript>
                         {% else %}
-                            <img src="{{ Twig.print("slide.imageUrl") }}" alt="{{ Twig.print("altText") }}" title="{{ Twig.print("slide.name") }}" class="img-cover">
+                            <picture>
+                                <source srcset="{{ Twig.print("slide.imageUrl") }}" {{ Twig.if("slide.imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>
+                                <img
+                                    class="img-cover"
+                                    src="{{ Twig.print("fallbackUrl") }}"
+                                    alt="{{ Twig.print("altText") }}"
+                                    title="{{ Twig.print("imgTitle") }}"
+                                    role="option"
+                                />
+                            </picture>
                         {% endif %}
                     {{ Twig.endif() }}
 
@@ -138,7 +192,7 @@
             </div>
             {{ Twig.endfor() }}
         </div>
-        
+
         {{ Twig.if("slides | length > 1") }}
             <ol class="carousel-indicators">
                 {{ Twig.for("i", "1..slides | length") }}

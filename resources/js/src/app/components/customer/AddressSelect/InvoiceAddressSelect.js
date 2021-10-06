@@ -1,11 +1,15 @@
 import TranslationService from "../../../services/TranslationService";
 import Vue from "vue";
 import { mapState } from "vuex";
-const NotificationService = require("../../../services/NotificationService");
+import { error } from "../../../services/NotificationService";
+import AddressSelect from "./AddressSelect";
 
-Vue.component("invoice-address-select", {
+export default Vue.component("invoice-address-select", {
 
-    delimiters: ["${", "}"],
+    components:
+    {
+        AddressSelect
+    },
 
     template: `
         <address-select 
@@ -17,7 +21,9 @@ Vue.component("invoice-address-select", {
             :required-address-fields="requiredAddressFields"
             :default-salutation="defaultSalutation"
             :padding-classes="paddingClasses"
-            :padding-inline-styles="paddingInlineStyles">
+            :padding-inline-styles="paddingInlineStyles"
+            data-testing="billing-address-select"
+            :email="email">
         </address-select>
     `,
 
@@ -41,7 +47,7 @@ Vue.component("invoice-address-select", {
         defaultSalutation:
         {
             type: String,
-            default: "male"
+            default: App.config.addresses.defaultSalutation
         },
         hasToValidate:
         {
@@ -57,7 +63,8 @@ Vue.component("invoice-address-select", {
         {
             type: String,
             default: null
-        }
+        },
+        email: String
     },
 
     computed: mapState({
@@ -124,7 +131,7 @@ Vue.component("invoice-address-select", {
 
             if (showError)
             {
-                NotificationService.error(
+                error(
                     TranslationService.translate("Ceres::Template.checkoutCheckInvoiceAddress")
                 );
             }

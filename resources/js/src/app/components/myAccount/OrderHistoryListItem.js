@@ -1,7 +1,8 @@
 import Vue from "vue";
+import TranslationService from "../../services/TranslationService";
 const ApiService = require("../../services/ApiService");
 
-Vue.component("order-history-list-item", {
+export default Vue.component("order-history-list-item", {
 
     props:
     {
@@ -49,8 +50,10 @@ Vue.component("order-history-list-item", {
             {
                 this.waiting = true;
 
+                const testing = window.ceresEnv !== "testing" ? "" : "&env=testing";
+
                 ApiService
-                    .get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + this.order.id)
+                    .get("/rest/io/order/template?template=" + this.orderDetailsTemplate + "&orderId=" + this.order.id + testing)
                     .done(orderDetails =>
                     {
                         const compiled = Vue.compile(orderDetails);
@@ -74,6 +77,11 @@ Vue.component("order-history-list-item", {
                         this.waiting = true;
                     });
             }
+        },
+
+        getWarrantyTooltip(referenceOrderId)
+        {
+            return TranslationService.translate("Ceres::Template.orderHistoryWarranty", { id: referenceOrderId });
         }
     }
 });

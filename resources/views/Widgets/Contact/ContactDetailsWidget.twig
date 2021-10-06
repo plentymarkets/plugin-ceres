@@ -20,22 +20,21 @@
     <div class="widget widget-contact-details cmp-contact widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
             {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
         <div class="contact-card">
-
-            <div class="contact-address">
-                <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i>
-                <span class="d-inline-block align-top" {{ WidgetHelper.makeEditable("address", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+            <div>
+                <i class="fa fa-fw fa-map-marker mr-2" aria-hidden="true"></i>
+                <div class="d-inline-block align-top" {{ WidgetHelper.makeEditable("address", TOOLBAR_LAYOUT.ALL, isPreview) }}>
                     {% if address | trim is empty %}
                         <p>{{ WidgetHelper.editableTwig(isPreview, config("system.company.name")) }}</p>
                     {% else %}
                         {{ WidgetHelper.editableTwig(isPreview, address | raw) }}
                     {% endif %}
-                </span>
+                </div>
             </div>
 
             {% if phone | trim is not empty %}
                 <p class="my-0">
-                    <i class="fa fa-fw fa-phone" aria-hidden="true"></i>
-                    <a class="text-appearance" href="tel:{{ phone | replace('/[^0-9+]/',' ') | trimNewlines }}">
+                    <i class="fa fa-fw fa-phone mr-2" aria-hidden="true"></i>
+                    <a class="text-dark text-appearance" href="tel:{{ phone | replace('/[^0-9+]/',' ') | trimNewlines }}">
                         <span class="d-inline-block">{{ phone }}</span>
                     </a>
                 </p>
@@ -43,8 +42,8 @@
 
             {% if fax | trim is not empty %}
                 <p class="my-0">
-                    <i class="fa fa-fw fa-fax" aria-hidden="true"></i>
-                    <a class="text-appearance" href="fax:{{ fax | replace('/[^0-9+]/',' ') | trimNewlines }}">
+                    <i class="fa fa-fw fa-fax mr-2" aria-hidden="true"></i>
+                    <a class="text-dark text-appearance" href="fax:{{ fax | replace('/[^0-9+]/',' ') | trimNewlines }}">
                       <span class="d-inline-block">{{ fax }}</span>
                     </a>
                 </p>
@@ -52,8 +51,8 @@
 
             {% if email | trim is not empty %}
                 <p class="my-0">
-                    <i class="fa fa-envelope fa-fw" aria-hidden="true"></i>
-                    <a class="text-appearance" href="mailto:{{ email }}">
+                    <i class="fa fa-envelope fa-fw mr-2" aria-hidden="true"></i>
+                    <a class="text-dark text-appearance" href="mailto:{{ email }}">
                         <span class="d-inline-block">{{ email }}</span>
                     </a>
                 </p>
@@ -61,7 +60,7 @@
 
             {% if isPreview or businessTimes | trim is not empty and businessTimes != emptyInlineEditingContent %}
                 <div>
-                    <i class="fa fa-fw fa-clock-o" aria-hidden="true"></i>
+                    <i class="fa fa-fw fa-clock-o mr-2" aria-hidden="true"></i>
                     <span class="d-inline-block align-top" {{ WidgetHelper.makeEditable("businessTimes", TOOLBAR_LAYOUT.ALL, isPreview) }}>
                         {% if businessTimes | trim is empty %}
                             <p>{{ WidgetHelper.editableTwig(isPreview, trans("Ceres::Template.contactOpeningTimes")) }}</p>

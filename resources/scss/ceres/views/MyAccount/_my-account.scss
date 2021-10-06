@@ -1,87 +1,71 @@
 .button-spacer {
-  margin-top: .5rem;
+    margin-top: .5rem;
 }
 
 .modal-address {
     display: grid;
 }
 
-.cannot-change-payment
-{
-    font-size: 1rem;
+.cannot-change-payment {
     padding: 5px;
+    font-size: 1rem;
     cursor: default;
-    .info-badge
-    {
+
+    .info-badge {
         margin-left: .2rem;
     }
 }
 
-.history-pagination {
-    margin-top: 15px;
-}
-
 .gradient-hr {
-    border: 0;
     height: 1px;
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #DCDBD7, rgba(0, 0, 0, 0));
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #dcdbd7, rgba(0, 0, 0, 0));
+    border: 0;
 }
 
 .show-more-returns {
     position: absolute;
     bottom: 22px;
     left: 40%;
-    background-color: #fff;
     width: 96px;
     text-align: center;
+    background-color: #fff;
 }
 
 .order-return-history-image-container {
-    max-width: 100%;
-    width: 100%;
     position: relative;
+    width: 100%;
+    max-width: 100%;
 
     @include img-contain();
 }
 
 .order-return-history-count {
-    color: $gray;
     margin-top: 15px;
+    color: $gray-600;
 }
 
-.switchable-warning
-{
+.switchable-warning {
     display: flex;
-    display: -webkit-flex;
     flex-direction: row;
-    -webkit-flex-direction: row;
     margin-bottom: 10px;
-    border-width: 1px;
     border-style: solid;
+    border-width: 1px;
 }
 
-.warning-triangle
-{
+.warning-triangle {
     margin: auto;
     font-size: large;
 }
 
-.warning-text
-{
-    text-align: justify;
+.warning-text {
     width: 85%;
     margin: auto;
+    text-align: justify;
 }
 
-.current-payment-text
-{
-    border: 1px solid $gray-lighter;
-    border-radius: $border-radius;
-}
-
-.current-payment-width
-{
-    width: 100%!important;
+.current-payment-text {
+    border: 1px solid $gray-300;
+    @include border-radius($border-radius);
 }
 
 .card-body {
@@ -91,11 +75,11 @@
         @include media-breakpoint-down(xs) {
             .item-edit {
                 height: 45%;
-                margin-bottom: 0 !important;
+                margin-bottom: 0 !important; // stylelint-disable-line declaration-no-important
             }
-            span.item-edit:nth-of-type(2) {
-                bottom: 0;
+            .item-edit:nth-of-type(2) {
                 position: absolute;
+                bottom: 0;
             }
 
             button {
@@ -108,5 +92,11 @@
 .widget-account-settings {
     .card {
         min-height: 115px;
+    }
+}
+
+.page-item {
+    &:not(.disabled):not(.active) {
+        cursor: pointer;
     }
 }

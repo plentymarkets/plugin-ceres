@@ -11,8 +11,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class AddressWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Customer.AddressWidget";
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::AddressWidget")
@@ -21,9 +25,15 @@ class AddressWidget extends BaseWidget
             ->withType(WidgetTypes::CUSTOMER)
             ->withCategory(WidgetCategories::CUSTOMER)
             ->withPosition(200)
+            ->withSearchKeyWords([
+                "adresse", "address", "customer", "kunde", "kundendaten"
+            ])
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settingsFactory */
@@ -80,9 +90,9 @@ class AddressWidget extends BaseWidget
                     );
 
                 if($addressLayout === 'DE' || $addressType === '2') {
-                    $addressFields->withDefaultValue([$fieldPrefix."name1", $fieldPrefix."salutation"]);
+                    $addressFields->withDefaultValue([$fieldPrefix."name1", $fieldPrefix."salutation", $fieldPrefix."email"]);
                 } else {
-                    $addressFields->withDefaultValue([$fieldPrefix."name1", $fieldPrefix."address2", $fieldPrefix."salutation"]);
+                    $addressFields->withDefaultValue([$fieldPrefix."name1", $fieldPrefix."address2", $fieldPrefix."salutation", $fieldPrefix."email"]);
                 }
 
                 $settingsFactory->createCheckboxGroup("addressRequiredFields".$translationSuffix.$addressLayout)
@@ -110,6 +120,7 @@ class AddressWidget extends BaseWidget
         }
 
         $fieldList
+            ->addEntry($fieldPrefix."email", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."EMail")
             ->addEntry($fieldPrefix."vatNumber", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."VatNumber")
             ->addEntry($fieldPrefix."contactPerson", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."ContactPerson")
             ->addEntry($fieldPrefix."salutation", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."Salutation")

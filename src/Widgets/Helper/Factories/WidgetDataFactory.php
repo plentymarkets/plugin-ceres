@@ -120,6 +120,17 @@ class WidgetDataFactory
     }
 
     /**
+     * List of keywords for the shopBuilder widget search
+     *
+     * @param string[] $keywords
+     * @return $this
+     */
+    public function withSearchKeyWords($keywords){
+        $this->data['keywords'] = $keywords;
+        return $this;
+    }
+
+    /**
      * Get widget data.
      *
      * @return array

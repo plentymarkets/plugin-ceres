@@ -7,63 +7,90 @@ use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 
+/**
+ * Class ItemCategoryPreset
+ *
+ * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
+ * This particular preset generates a page for viewing item categories. It contains:
+ * - ThreeColumnWidget
+ * - BackgroundWidget
+ * - InlineTextWidget
+ * - CodeWidget
+ * - ToolbarWidget
+ * - ItemSortingWidget
+ * - ItemsPerPageWidget
+ * - AttributesPropertiesCharacteristicsFilterWidget
+ * - PriceFilterWidget
+ * - AvailabilityFilterWidget
+ * - ManufacturerFilterWidget
+ * - SelectedFilterWidget
+ * - PaginationWidget
+ * - TwoColumnWidget
+ * - NavigationTreeWidget
+ * - ItemGridWidget
+ *
+ * @package Ceres\Widgets\Presets
+ */
 class ItemCategoryPreset implements ContentPreset
 {
     /** @var CeresConfig */
     private $ceresConfig;
-    
+
     /** @var bool */
     private $showNavigationTree = false;
-    
+
     /** @var PresetHelper */
     private $preset;
-    
+
     /** @var PresetWidgetFactory */
     private $backgroundWidget;
-    
+
     /** @var PresetWidgetFactory */
     private $toolbarWidget;
-    
+
     /** @var PresetWidgetFactory */
     private $threeColumnWidget;
-    
+
     /** @var PresetWidgetFactory */
     private $twoColumnWidget;
-    
+
+    /**
+     * @inheritDoc
+     */
     public function getWidgets()
     {
         $this->ceresConfig        = pluginApp(CeresConfig::class);
         $this->showNavigationTree = $this->ceresConfig->header->showNavBars == 'side' || $this->ceresConfig->header->showNavBars == 'both';
-        
+
         $this->preset = pluginApp(PresetHelper::class);
-        
+
         $this->createBackgroundWidget();
-        
+
         $this->createToolbarWidget();
         $this->createItemSortingWidget();
         $this->createItemsPerPageWidget();
         $this->createThreeColumnWidget();
-        
+
         $this->createAttributesPropertiesCharacteristicsFilterWidget();
         $this->createPriceFilterWidget();
         $this->createAvailabilityFilterWidget();
         $this->createManufacturerFilterWidget();
-        
+
         $this->selectedFilterWidget();
         $this->paginationWidget();
-        
+
         if ($this->showNavigationTree) {
             $this->createTwoColumnWidget();
             $this->createNavigationTreeWidget();
         }
-        
+
         $this->createItemGridWidget();
-        
+
         $this->createInlineTextWidget(false, 'Bottom');
-        
+
         return $this->preset->toArray();
     }
-    
+
     private function createBackgroundWidget()
     {
         if ($this->ceresConfig->item->showCategoryImage) {
@@ -80,14 +107,15 @@ class ItemCategoryPreset implements ContentPreset
                                                    ->withSetting('sourceType', 'category-image1')
                                                    ->withSetting('hugeFont', true)
                                                    ->withSetting('colorPalette', 'none')
-                                                   ->withSetting('height.top.value', 4);
+                                                   ->withSetting('height.top.value', 4)
+                                                   ->withSetting('preloadImage', true);
 
             $this->createInlineTextWidget();
         } else {
             $this->createInlineTextWidget(false);
         }
     }
-    
+
     private function createInlineTextWidget($asChild = true, $descriptionSettingKey = 'Top')
     {
         $text = '{% if category is not empty %}
@@ -101,11 +129,11 @@ class ItemCategoryPreset implements ContentPreset
                 {% endif %}
 
                 {% set descriptionSetting = ceresConfig.item.showCategoryDescription' . $descriptionSettingKey . ' %}';
-        
+
         if ($descriptionSettingKey == 'Top') {
             $text .= '<h1 class="pt-4 category-title">{{ categoryName }}</h1>';
         }
-        
+
         $text .= '
                 {% if descriptionSetting == "both" %}
                      <div class="category-description mb-3">{{ categoryDescription | raw }}</div>
@@ -113,7 +141,7 @@ class ItemCategoryPreset implements ContentPreset
                 {% else %}
                     <div class="category-description mb-3">{% if descriptionSetting == "description1" %}{{ categoryDescription | raw }}{% elseif descriptionSetting == "description2" %}{{ categoryDescription2 | raw }}{% endif %}</div>
                 {% endif %}';
-        
+
         $codeWidget = $asChild
         ? $this->backgroundWidget->createChild('background', 'Ceres::CodeWidget')
         : $this->preset->createWidget('Ceres::CodeWidget');
@@ -140,7 +168,7 @@ class ItemCategoryPreset implements ContentPreset
             $codeWidget->withSetting('customClass', '');
         }
     }
-    
+
     private function createToolbarWidget()
     {
         $this->toolbarWidget = $this->preset->createWidget('Ceres::ToolbarWidget')
@@ -149,7 +177,7 @@ class ItemCategoryPreset implements ContentPreset
                                             ->withSetting('spacing.margin.bottom.value', 4)
                                             ->withSetting('spacing.margin.bottom.unit', null);
     }
-    
+
     private function createItemSortingWidget()
     {
         $this->toolbarWidget->createChild('toolbar', 'Ceres::ItemSortingWidget')
@@ -163,7 +191,7 @@ class ItemCategoryPreset implements ContentPreset
                                           ]
                             );
     }
-    
+
     private function createItemsPerPageWidget()
     {
         $this->toolbarWidget->createChild('toolbar', 'Ceres::ItemsPerPageWidget')
@@ -174,20 +202,20 @@ class ItemCategoryPreset implements ContentPreset
                                 ['text' => '100']
                             ]);
     }
-    
+
     private function createThreeColumnWidget()
     {
         $this->threeColumnWidget = $this->toolbarWidget->createChild('collapsable', 'Ceres::ThreeColumnWidget')
                                                        ->withSetting('customClass', '')
                                                        ->withSetting('layout', 'oneToOneToOne');
     }
-    
+
     private function createAttributesPropertiesCharacteristicsFilterWidget()
     {
         $this->threeColumnWidget->createChild('first', 'Ceres::AttributesPropertiesCharacteristicsFilterWidget')
                                 ->withSetting('customClass', '');
     }
-    
+
     private function createPriceFilterWidget()
     {
         $this->threeColumnWidget->createChild('second', 'Ceres::PriceFilterWidget')
@@ -197,19 +225,19 @@ class ItemCategoryPreset implements ContentPreset
                                 ->withSetting('spacing.margin.bottom.value', 4)
                                 ->withSetting('spacing.margin.bottom.unit', null);
     }
-    
+
     private function createAvailabilityFilterWidget()
     {
         $this->threeColumnWidget->createChild('second', 'Ceres::AvailabilityFilterWidget')
                                 ->withSetting('customClass', '');
     }
-    
+
     private function createManufacturerFilterWidget()
     {
         $this->threeColumnWidget->createChild('third', 'Ceres::ManufacturerFilterWidget')
                                 ->withSetting('customClass', '');
     }
-    
+
     private function selectedFilterWidget()
     {
         $this->preset->createWidget('Ceres::SelectedFilterWidget')
@@ -220,27 +248,29 @@ class ItemCategoryPreset implements ContentPreset
                      ->withSetting('spacing.margin.bottom.value', 2)
                      ->withSetting('spacing.margin.bottom.unit', null);
     }
-    
+
     private function paginationWidget()
     {
         $this->preset->createWidget('Ceres::PaginationWidget')
                      ->withSetting('alignment', 'right');
     }
-    
+
     private function createTwoColumnWidget()
     {
         $this->twoColumnWidget = $this->preset->createWidget('Ceres::TwoColumnWidget')
                                               ->withSetting('layout', 'threeToNine')
-                                              ->withSetting('layoutTablet', 'threeToNine')
+                                              ->withSetting('layoutTablet', 'stackedTablet')
                                               ->withSetting('layoutMobile', 'stackedMobile');
     }
-    
+
     private function createNavigationTreeWidget()
     {
         $this->twoColumnWidget->createChild('first', 'Ceres::NavigationTreeWidget')
-                              ->withSetting('customClass', '');
+                              ->withSetting('customClass', '')
+                              ->withSetting('expandableChildren', true)
+                              ->withSetting('showItemCount', true);
     }
-    
+
     private function createItemGridWidget()
     {
         if ($this->showNavigationTree) {

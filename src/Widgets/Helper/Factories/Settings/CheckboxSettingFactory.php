@@ -2,19 +2,14 @@
 
 namespace Ceres\Widgets\Helper\Factories\Settings;
 
-class CheckboxSettingFactory extends BaseSettingFactory
-{
-    public function __construct()
-    {
-        $this->withType('checkbox');
-    }
+use Plenty\Modules\ShopBuilder\Factories\Settings\CheckboxSettingFactory as CoreCheckboxSettingFactory;
 
-    /**
-     * @param string $icon
-     * @return CheckboxSettingFactory
-     */
-    public function withIcon($icon)
-    {
-        return $this->withOption('icon', $icon);
-    }
+/**
+ * Class CheckboxSettingFactory
+ * @package Ceres\Widgets\Helper\Factories\Settings
+ * @deprecated since 5.0.23
+ * @see \Plenty\Modules\ShopBuilder\Factories\Settings\CheckboxSettingFactory
+ */
+class CheckboxSettingFactory extends CoreCheckboxSettingFactory
+{
 }

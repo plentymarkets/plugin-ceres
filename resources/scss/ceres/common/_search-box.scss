@@ -1,0 +1,100 @@
+.autocomplete-suggestions {
+    position: absolute;
+    top: 100%;
+    z-index: $zindex-7;
+    max-height: 80vh;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+}
+
+.autocomplete-suggestion {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    outline: none;
+
+    &:hover {
+        background: $gray-300;
+    }
+
+    .label {
+        flex: 1;
+        color: $gray-900;
+
+        .small {
+            color: $gray-600;
+        }
+
+        &.compact .small {
+            line-height: .85;
+        }
+    }
+
+    .image {
+        position: relative;
+        display: flex;
+        width: 40px;
+        height: 40px;
+
+    }
+
+    img {
+        max-width: 100%;
+        object-fit: contain;
+    }
+
+    .count span {
+        display: inline-block;
+        min-width: 3em;
+        padding: .1rem 0;
+        font-size: .85rem;
+        color: $gray-600;
+        text-align: center;
+        background: $gray-200;
+    }
+}
+
+.autocomplete-suggestion:nth-child(n + #{$autocomplete-max-items + 1}),
+.widget-inner-stacked .autocomplete-suggestion:nth-child(n + #{($autocomplete-max-items / 2)}) {
+    display: none;
+}
+
+.search-input {
+    font-size: 1.3rem;
+    line-height: 1;
+    border: none;
+    outline: none;
+}
+
+.search-submit {
+    font-size: 1.3rem;
+    line-height: 1;
+    color: $primary;
+    background-color: $gray-200;
+    border: none;
+    outline: none;
+    @include transition(all .3s);
+
+    &:hover {
+        color: darken($primary, 20%);
+    }
+}
+
+.search-permanent {
+    @include media-breakpoint-up(md) {
+        align-items: center;
+        justify-content: space-between;
+
+        .controls {
+            .nav-link {
+                padding: 1.2rem .8rem;
+            }
+        }
+    }
+}
+
+html.ie .always-visible-search { // stylelint-disable-line selector-no-qualifying-type
+    min-height: 32px;
+}

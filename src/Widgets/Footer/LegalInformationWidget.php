@@ -10,8 +10,12 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class LegalInformationWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Footer.LegalInformationWidget";
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::LegalInformationWidget")
@@ -20,9 +24,15 @@ class LegalInformationWidget extends BaseWidget
             ->withType(WidgetTypes::FOOTER)
             ->withCategory(WidgetCategories::FOOTER)
             ->withPosition(200)
+            ->withSearchKeyWords([
+                "datenschutz", "legal", "privacy"
+            ])
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settingsFactory */

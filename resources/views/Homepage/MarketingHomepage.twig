@@ -1,4 +1,4 @@
-{% set currentLang = services.sessionStorage.getLang() %}
+{% set currentLang = services.localizationRepository.getLanguage() %}
 {% set homepageJson = getExternalContent("https://cdn02.plentymarkets.com/pmsbpnokwu6a/plugin/production/marketingresource/js/HomepageContent.json") %}
 {% set homepageData = homepageJson[currentLang] %}
 
@@ -41,22 +41,18 @@
 
     <hr class="my-2">
 
-    <div class="row">
-        <div class="row mt-xs-0_5">
-            <ul class="flex-container" id="recommended-plugins">
-                {% for plugin in homepageData.recommended | shuffle %}
-                    <li class="flex-item">
-                        <a rel="noopener noreferrer" target="_blank" href="{{ plugin.pluginLink }}">
-                            <img class="flex-image" src="{{ plugin.pluginIcon }}" />
-                            <div class="flex-align-bottom">
-                                <h1 class="flex-title">{% autoescape false %}{{ plugin.pluginTitle }}{% endautoescape %}</h1>
-                                <div class="flex-text">{% autoescape false %}{{ plugin.pluginText }}{% endautoescape %}</div>
-                            </div>
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
+    <div class="row" id="recommended-plugins">
+        {% for plugin in homepageData.recommended | shuffle %}
+            <div class="col-4 text-center mb-3">
+                <a rel="noopener noreferrer" target="_blank" href="{{ plugin.pluginLink }}">
+                    <img class="img-fluid" src="{{ plugin.pluginIcon }}" />
+                    <div class="flex-align-bottom">
+                        <h1 class="flex-title">{% autoescape false %}{{ plugin.pluginTitle }}{% endautoescape %}</h1>
+                        <div class="flex-text">{% autoescape false %}{{ plugin.pluginText }}{% endautoescape %}</div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
     </div>
 </div>
 

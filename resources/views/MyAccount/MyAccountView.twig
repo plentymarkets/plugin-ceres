@@ -15,7 +15,7 @@
 
     {% set userObject = services.customer.getContact() %}
     {% set userBankData = services.contactBank.getBanksOfContact(frontend.Account.AccountContactId) %}
-    {% set isReturnActive = services.order.isReturnActive() %}
+    {% set isReturnActive = ceresConfig.myAccount.orderReturnActive %}
     {% set contactHasReturns = services.customer.hasReturns() %}
 
     {% set optionalInvoiceAddressFields = {
@@ -46,7 +46,7 @@
         :billing-address-list="{{ services.customer.getAddresses(1) | json_encode }}"
         :selected-billing-address="{{ services.checkout.getBillingAddressId() | json_encode }}">
         <div>
-            <div class="page-content myaccount container-max mb-5 mt-3">
+            <div class="page-content myaccount container-max mb-5 mt-3 pt-3 bg-white">
                 <!-- HEADER -->
                 <div class="row mb-5">
                     <div class="col-sm-9">
@@ -82,7 +82,8 @@
                             <invoice-address-select
                                 :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
                                 :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}"
-                                default-salutation="{{ ceresConfig.addresses.defaultSalutation }}">
+                                default-salutation="{{ ceresConfig.addresses.defaultSalutation }}"
+                                email="{{ services.customer.getEmail() }}">
                             </invoice-address-select>
                         </div>
                     </div>
@@ -95,7 +96,10 @@
                             <shipping-address-select
                                 :optional-address-fields="{{ optionalShippingAddressFields | json_encode }}"
                                 :required-address-fields="{{ requiredShippingAddressFields | json_encode }}"
-                                default-salutation="{{ ceresConfig.addresses.defaultSalutation }}">
+                                :has-any-parcel-box-preset="{{ services.shipping.hasAnyParcelBoxPreset() | json_encode }}"
+                                :has-any-post-office-preset="{{ services.shipping.hasAnyPostOfficePreset() | json_encode }}"
+                                default-salutation="{{ ceresConfig.addresses.defaultSalutation }}"
+                                email="{{ services.customer.getEmail() }}">
                             </shipping-address-select>
                         </div>
                     </div>
@@ -120,7 +124,7 @@
                             {{ trans("Ceres::Template.myAccountBankDetails") }}
                         </h4>
 
-    
+
                         <p class="text-muted small font-italic">{{ trans("Ceres::Template.myAccountChangePaymentInformation") }}</p>
                         <bank-data-select template="#vue-bank-data-select" :user-bank-data="{{ userBankData }}"
                                         contact-id="{{ frontend.Account.AccountContactId }}"></bank-data-select>
@@ -128,9 +132,9 @@
                     </div>
                 </div>
                 <!-- ./ACCOUNT SETTINGS AREA -->
-    
+
             </div>
-    
+
             {% set ordersPerPage = config("Ceres.my_account.orders_per_page") %}
             {% if not (ordersPerPage matches '/^\\d+$/') %}
                 {# config value is not a valid number #}
@@ -138,7 +142,7 @@
             {% endif %}
 
             <!-- HISTORY -->
-            <history template="#vue-history" 
+            <history template="#vue-history"
                     :orders-per-page="{{ ordersPerPage }}"
                     :is-return-active="{{ isReturnActive | json_encode }}"
                     :contact-has-returns="{{ contactHasReturns | json_encode }}">

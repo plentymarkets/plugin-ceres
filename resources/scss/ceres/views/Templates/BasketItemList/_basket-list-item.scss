@@ -1,278 +1,87 @@
-// Arrange counter and price side by side
-@include media-breakpoint-up(sm) {
-	.main .basket .basket-item-container .basket-item-container-right {	
-		display: flex;
-
-		.qty-box-container {
-			margin-right: 15px;
-		}
-	}
-}
-// Arrange counter and price side by side
-@include media-breakpoint-only(sm) {
-	.main .checkout .basket-item-container .basket-item-container-right {	
-		display: flex;
-
-		.qty-box-container {
-			margin-right: 15px;
-		}
-	}
+// transitions for item lists
+.list-transition-enter-active,
+.list-transition-leave-active {
+    animation-name: item-leaving;
+    animation-duration: .175s;
+    animation-fill-mode: forwards;
 }
 
-.top-bar .controls-list > li .basket-preview-hover {
-	.basket-item {
-		a {
-			padding: 0;
-			color: $primary;
-			
-			&:hover {
-				color: darken($top-bar-basket-btn, 10%);
-				background-color: transparent;
-			}
-		}
-	}
-    
-    .fa:not(.qty-sign) {
-        line-height: 1;
-        font-size: 1.2rem;
+.list-transition-enter-active {
+    animation-direction: reverse;
+}
+
+@keyframes item-leaving {
+    from { max-height: 1000px; }
+    to { max-height: 0; }
+}
+
+.basket-list-item {
+    position: relative;
+    overflow: hidden;
+
+    &:not(:last-child) {
+        border-bottom: 1px solid $gray-300;
+    }
+
+    .image-container {
+        flex-shrink: 0;
+        width: 75px;
+        margin-right: 10px;
+
+        @include media-breakpoint-down(xs) {
+            width: 50px;
+        }
+    }
+
+    .meta-container {
+        width: 100%;
+        min-width: 0;
+
+        html.ie & { // stylelint-disable-line selector-no-qualifying-type
+            display: block;
+            float: left;
+            width: 65%;
+
+            @include media-breakpoint-down(lg) {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    }
+
+    .meta-container-wrapper {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .meta-container-wrapper-inner {
+        display: flex;
+
+        html.ie & { // stylelint-disable-line selector-no-qualifying-type
+            display: block;
+        }
+    }
+
+    .colon::after {
+        // TODO: maybe move to more general class
+        content: ":";
     }
 }
 
-.basket-item-container {
-	position: relative;
-	overflow: hidden;
-	padding: 1.5rem 0;
-		
-	&:first-child {
-		padding-top: 0;
-	}
+.basket-item-container-right {
 
-	&:last-child {
-		padding-bottom: 0;
-	}
+    .qty-box-container {
+        height: 41px;
+    }
 
-	&:not(:last-child) {
-		border-bottom: 1px solid $gray-lighter;
-	}
-
-	& .item-bundle {
-		font-weight: 700;
-		font-size: 80%;
-	}
-
-	.basket-item {
-		display: flex;
-	
-		.image-container {
-			width: 75px;
-			flex-shrink: 0;
-			margin-right: 10px;
-
-			@include media-breakpoint-down(xs) {
-				width: 50px;
-				margin: 0 10px;
-			}	
-		}
-	
-		.meta-container-wrapper {
-			width: 100%;
-			min-width: 0;
-
-			.meta-container-wrapper-inner {
-				display: flex;
-
-				.meta-container {
-					width: 100%;
-					min-width: 0;
-			
-					& > div {
-						width: 100%;
-						position: relative;
-					}
-			
-					.item-name {
-						font-weight: 700;
-						font-size: 80%;
-						overflow-wrap: break-word;
-    					word-wrap: break-word;
-					}
-		
-					.item-base-price {
-						font-size: 80%;
-					}
-		
-					.item-small-prices {
-						font-size: 75%;
-					}
-				}
-			}
-		}
-
-		.basket-item-container-right {
-			display: block;
-			margin-left: auto;
-
-			.qty-box-container {
-				margin: 0 0 0 10px;
-
-				@include media-breakpoint-down(sm) {
-					margin: 0 0 5px 27px; 
-				}
-
-				.qty-box {
-					margin: 0 0 5px auto;
-					height: 41px;
-		
-					.qty-input {
-						margin-left: auto;
-					}
-				}
-			}
-
-			.price-box {
-				margin-left: auto;
-			}
-
-			.item-total-price {
-				font-weight: 700;
-				white-space: nowrap;
-				text-align: right;
-			}
-
-			.item-remove-container {
-				font-size: 1.2em;
-				line-height: 1.2em;
-				text-align: right;
-
-				> .item-remove-button {
-					cursor: pointer;
-					padding: 0;
-					background: none;
-					color: $danger;
-					border: none;
-
-					&.disabled {
-						cursor: not-allowed;
-					}
-				}
-			}
-		}
-
-		.item-properties {
-			margin-top: .25em;
-			font-size: 75%;
-
-			.item-properties-header {
-				margin-bottom: .25em;
-				font-weight: 700;
-			}
-
-			.item-property-value {
-				text-overflow: ellipsis;
-				overflow: hidden;
-				white-space: nowrap;
-				display: block;
-			}
-
-
-			.item-property-value > strong.colon:after {
-				content: ':';
-			}
-
-			ul {
-				list-style: disc;
-				padding: 0;
-				margin-bottom: 0;
-
-				div {
-					margin-bottom: .25em;
-				}
-			}
-		}
-
-		.item-additional-information-container {
-			.item-additional-information {
-				font-size: 75%;
-			}
-		}
-	}
-}
-
-/* Compatibility for IE */
-html.ie .wrapper-main .basket-item-container {
-	.meta-container-wrapper-inner {
-		display: block;
-
-		.meta-container {
-			float: left;
-			width: 65%;
-			display: block;
-		}
-	}
-
-	.basket-item-container-right {
-        width: 35%;
+    html.ie & { // stylelint-disable-line selector-no-qualifying-type
         display: block;
+        width: 35%;
+        margin-left: auto;
 
-        // Align childs right
-        .qty-box-container .qty-box {
-			margin: 0 0 5px 0;
-    
-			.qty-input {
-				margin-left: auto;
-			}
-		}
-	}
-
-	// For Basket-Preview and Basket
-	@include media-breakpoint-down(sm) {
-		.meta-container-wrapper-inner {
-			display: block;
-	
-			.meta-container {
-				margin-bottom: 10px;
-				width: 100%;
-			}
-	
-			// Initialise width
-			.basket-item-container-right {
-				width: 100%;
-				display: flex;
-				// Arrange to the right
-				.qty-box-container {
-					margin-left: auto;
-				}
-				.price-box {
-					margin-left: 10px;
-				}
-			}
-		}	
-	}
-}
-
-// For Checkout
-html.ie .wrapper-main .checkout .checkout-rightside .basket-item-container .basket-item {
-	@include media-breakpoint-down(lg) {
-		.meta-container-wrapper-inner {
-			display: block;
-	
-			.meta-container {
-				margin-bottom: 10px;
-				width: 100%;
-			}
-	
-			// Initialise width
-			.basket-item-container-right {
-				width: 100%;
-				display: flex;
-				// Arrange to the right
-				.qty-box-container {
-					margin-left: auto;
-				}
-				.price-box {
-					margin-left: 10px;
-				}
-			}
-		}	
-	}
+        @include media-breakpoint-down(lg) {
+            display: flex;
+            width: 100%;
+        }
+    }
 }

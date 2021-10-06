@@ -4,7 +4,7 @@ const ApiService          = require("../../services/ApiService");
 import TranslationService from "../../services/TranslationService";
 import Vue from "vue";
 
-Vue.component("change-payment-method", {
+export default Vue.component("change-payment-method", {
 
     props:
     {
@@ -70,6 +70,9 @@ Vue.component("change-payment-method", {
                 {
                     // TODO: research - if response should be false, it returns an object
                     this.changePossible = typeof response === "object" ? response.data : response;
+
+                    // Reload page because the order amounts could have changed because of payment method rebates or surcharges
+                    window.location.reload();
                 })
                 .fail(() =>
                 {
@@ -134,7 +137,7 @@ Vue.component("change-payment-method", {
         {
             this.isPending = true;
 
-            ApiService.post("/rest/io/order/payment", { orderId: this.currentOrder.id, paymentMethodId: this.paymentMethod })
+            ApiService.post("/rest/io/order/payment", { orderId: this.currentOrder.id, paymentMethodId: this.paymentMethod, accessKey: this.currentOrder.accessKey })
                 .done(response =>
                 {
                     document.dispatchEvent(new CustomEvent("historyPaymentMethodChanged", { detail: { oldOrder: this.currentOrder, newOrder: response } }));

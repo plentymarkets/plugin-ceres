@@ -2,43 +2,43 @@ import { isNullOrUndefined } from "../../helper/utils";
 
 const ApiService = require("../../services/ApiService");
 
-const state =
-    {
-        shipping: {
-            isParcelBoxAvailable: false,
-            isPostOfficeAvailable: false,
-            selectedShippingProfile: null,
-            shippingProfileId: null,
-            shippingProfileList: [],
-            maxDeliveryDays: null
+const state = () => ({
+    shipping: {
+        isParcelBoxAvailable: false,
+        isPostOfficeAvailable: false,
+        selectedShippingProfile: null,
+        shippingProfileId: null,
+        shippingProfileList: [],
+        maxDeliveryDays: null
+    },
+    payment: {
+        methodOfPaymentId: null,
+        methodOfPaymentList: []
+    },
+    contactWish: null,
+    customerSign: null,
+    shippingPrivacyHintAccepted: false,
+    validation: {
+        gtc: {
+            showError: false,
+            validate: null
         },
-        payment: {
-            methodOfPaymentId: null,
-            methodOfPaymentList: []
+        invoiceAddress: {
+            showError: false,
+            validate: null
         },
-        contactWish: null,
-        shippingPrivacyHintAccepted: false,
-        validation: {
-            gtc: {
-                showError: false,
-                validate: null
-            },
-            invoiceAddress: {
-                showError: false,
-                validate: null
-            },
-            paymentProvider: {
-                showError: false,
-                validate: null
-            },
-            shippingProfile: {
-                showError: false,
-                validate: null
-            }
+        paymentProvider: {
+            showError: false,
+            validate: null
         },
-        newsletterSubscription: {},
-        readOnly: false
-    };
+        shippingProfile: {
+            showError: false,
+            validate: null
+        }
+    },
+    newsletterSubscription: {},
+    readOnly: false
+});
 
 const mutations =
     {
@@ -92,6 +92,11 @@ const mutations =
         setContactWish(state, contactWish)
         {
             state.contactWish = contactWish;
+        },
+
+        setCustomerSign(state, customerSign)
+        {
+            state.customerSign = customerSign;
         },
 
         setShippingPrivacyHintAccepted(state, value)
@@ -181,6 +186,7 @@ const actions =
             commit("setMethodOfPaymentList", checkout.paymentDataList);
             commit("setMethodOfPayment", checkout.methodOfPaymentId);
             commit("setIsCheckoutReadonly", checkout.readOnly);
+            commit("setContactWish", checkout.contactWish);
 
             dispatch("setShippingProfileById", checkout.shippingProfileId);
             dispatch("initProfileAvailabilities");
@@ -199,7 +205,7 @@ const actions =
             }
         },
 
-        selectMethodOfPayment({ commit, dispatch }, methodOfPaymentId)
+        selectMethodOfPayment({ commit, state }, methodOfPaymentId)
         {
             return new Promise((resolve, reject) =>
             {
@@ -223,7 +229,7 @@ const actions =
             });
         },
 
-        selectShippingProfile({ commit, dispatch, getters }, shippingProfile)
+        selectShippingProfile({ commit, state }, shippingProfile)
         {
             return new Promise((resolve, reject) =>
             {

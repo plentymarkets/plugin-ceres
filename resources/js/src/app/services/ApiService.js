@@ -2,51 +2,53 @@ import { normalizeUrl } from "../helper/url";
 import { isDefined, isNullOrUndefined } from "../helper/utils";
 
 const NotificationService = require("./NotificationService");
-const WaitScreenService   = require("./WaitScreenService");
 
 const _eventListeners = {};
 
-$(document).ready(() =>
+export function initListener()
 {
-    $.ajaxSetup({
-        headers: {
-            "X-CSRF-TOKEN": $("input[id=\"csrf-token\"]").val()
+    $(document).ready(() =>
+    {
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $("input[id=\"csrf-token\"]").val()
+            }
+        });
+    });
+
+    $(document).ajaxComplete((ajaxEvent, xhr, options) =>
+    {
+        let response;
+
+        try
+        {
+            response = JSON.parse(xhr.responseText);
+        }
+        catch (exception)
+        {
+
+        }
+
+        if (response)
+        {
+            triggerEvent("_before", response);
+
+            for (const event in response.events)
+            {
+                triggerEvent("_before_" + event, response.events[event]);
+                triggerEvent(event, response.events[event]);
+                triggerEvent("_after_" + event, response.events[event]);
+            }
+
+            if (!options.supressNotifications)
+            {
+                _printMessages(response);
+            }
+
+            triggerEvent("_after", response);
         }
     });
-});
-
-$(document).ajaxComplete((ajaxEvent, xhr, options) =>
-{
-    let response;
-
-    try
-    {
-        response = JSON.parse(xhr.responseText);
-    }
-    catch (exception)
-    {
-
-    }
-
-    if (response)
-    {
-        triggerEvent("_before", response);
-
-        for (const event in response.events)
-        {
-            triggerEvent("_before_" + event, response.events[event]);
-            triggerEvent(event, response.events[event]);
-            triggerEvent("_after_" + event, response.events[event]);
-        }
-
-        if (!options.supressNotifications)
-        {
-            _printMessages(response);
-        }
-
-        triggerEvent("_after", response);
-    }
-});
+}
 
 export function listen(event, handler)
 {
@@ -137,13 +139,15 @@ export function send(url, data = {}, config)
     config.keepOriginalResponse = !!config.keepOriginalResponse;
     config.headers = config.headers || { "Accept-Language": App.language };
 
-    data.templateEvent = App.templateEvent;
-    config.data = data;
+    const csrfToken = config.headers["X-CSRF-TOKEN"] || (document.getElementById("csrf-token") || {}).value;
 
-    if (!config.doInBackground)
+    if (csrfToken)
     {
-        WaitScreenService.showWaitScreen();
+        config.headers["X-CSRF-TOKEN"] = csrfToken;
     }
+
+    data.templateType = App.templateType;
+    config.data = data;
 
     const request = $.ajax(url, config)
         .done(function(response)
@@ -162,13 +166,6 @@ export function send(url, data = {}, config)
             const response = jqXHR.responseText ? $.parseJSON(jqXHR.responseText) : {};
 
             deferred.reject(response, jqXHR.status);
-        })
-        .always(function()
-        {
-            if (!config.doInBackground)
-            {
-                WaitScreenService.hideWaitScreen();
-            }
         });
 
     deferred.abort = request.abort;
@@ -220,4 +217,4 @@ export function getToken()
     return this._token;
 }
 
-export default { get, put, post, del, send, setToken, getToken, listen, before, after };
+export default { get, put, post, del, send, setToken, getToken, listen, before, after, initListener };

@@ -2,6 +2,9 @@
 
 namespace Ceres\Widgets\Helper\Factories\Settings;
 
+use Plenty\Modules\ShopBuilder\Factories\Settings\SelectSettingFactory;
+use Plenty\Modules\ShopBuilder\Factories\Settings\ValueListFactory;
+
 class ButtonSizeSettingFactory extends SelectSettingFactory
 {
     public function __construct()

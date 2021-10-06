@@ -10,19 +10,29 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class ItemBundleWidget extends BaseWidget
 {
+    /** @inheritDoc */
     protected $template = "Ceres::Widgets.Item.ItemBundleWidget";
 
+    /**
+     * @inheritDoc
+     */
     public function getData()
     {
         return WidgetDataFactory::make("Ceres::ItemBundleWidget")
             ->withLabel("Widget.itemBundleLabel")
             ->withPreviewImageUrl("/images/widgets/item-bundle.svg")
-            ->withType(WidgetTypes::ITEM)
+            ->withType(WidgetTypes::SINGLE_ITEM)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(400)
+            ->withSearchKeyWords([
+                "item", "artikel", "article", "bundle", "artikelliste"
+            ])
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settingsFactory */
