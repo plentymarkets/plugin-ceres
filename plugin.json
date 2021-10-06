@@ -73,6 +73,11 @@
             "description"   : "Add content after the opening HTML body tag."
         },
         {
+            "key"           : "PageDesign.AfterOpeningHeadTag",
+            "name"          : "Page Design: After opening HTML head tag",
+            "description"   : "Add content after the opening HTML head tag."
+        },
+        {
             "key"           : "StaticPages.CancellationRights",
             "name"          : "Static Pages: Cancellation rights",
             "description"   : "Add additional content on the cancellation rights page."
