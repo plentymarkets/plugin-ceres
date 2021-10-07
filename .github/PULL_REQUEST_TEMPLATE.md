@@ -4,4 +4,4 @@
 - [ ] Changes have been tested by the author
 - [ ] Changes have been tested by the reviewer
 
-@plentymarkets/ceres-io
+@plentymarkets/plentyShop

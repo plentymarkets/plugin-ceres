@@ -1,18 +1,18 @@
 {
     "version"           : "5.0.40",
     "name"              : "Ceres",
-    "marketplaceName"   : {"de": "Ceres","en": "Ceres"},
-    "description"       : "This is the official Ceres plugin developed by plentymarkets. Ceres is the default template plugin for plentymarkets 7 online stores.",
+    "marketplaceName"   : {"de": "plentyShop LTS","en": "plentyShop LTS"},
+    "description"       : "This is the official plentyShop LTS plugin developed by plentymarkets. plentyShop LTS is the default template plugin for plentymarkets online stores.",
     "author"            : "plentysystems AG",
     "license"           : "AGPL-3.0",
     "pluginIcon"        : "icon_plugin_xs.png",
     "price"             : 0.00,
-    "shortDescription"  : {"de": "Das offizielle, von plentymarkets entwickelte Template-Plugin. Ceres ist das Standard-Template für plentymarkets 7 Webshops. ","en": "The official template plugin developed by plentymarkets. Ceres is the default template for plentymarkets 7 online stores."},
+    "shortDescription"  : {"de": "Das offizielle, von plentymarkets entwickelte Template-Plugin. plentyShop LTS ist das Standard-Template für plentymarkets Webshops. ","en": "The official template plugin developed by plentymarkets. plentyShop LTS is the default template for plentymarkets online stores."},
     "authorIcon"        : "icon_author_xs.png",
     "email"             : "sales@plentymarkets.com",
     "phone"             : "+49 561 98 681 100",
     "categories"        : ["3885"],
-    "keywords"          : ["plentymarkets", "plugins", "layout", "template", "ceres"],
+    "keywords"          : ["plentymarkets", "plugins", "layout", "template", "ceres", "plentyshop"],
     "type"              : "template",
     "require"           : {
         "IO": "~5.0.40"
@@ -50,12 +50,12 @@
         {
             "key"           : "Template.Style",
             "name"          : "Template: Style",
-            "description"   : "Add style to Ceres with a theme plugin."
+            "description"   : "Add style to plentyShop LTS with a theme plugin."
         },
         {
             "key"           : "Template.StyleOverwrite",
             "name"          : "Template: Override style",
-            "description"   : "Override the default CSS file of Ceres."
+            "description"   : "Override the default CSS file of plentyShop LTS."
         },
         {
             "key"           : "Script.Loader",
