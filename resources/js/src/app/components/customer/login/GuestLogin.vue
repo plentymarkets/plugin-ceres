@@ -25,6 +25,7 @@ import AutoFocusService from "../../../services/AutoFocusService";
 import ValidationService from "../../../services/ValidationService";
 import { navigateTo } from "../../../services/UrlService";
 import { isDefined, isNullOrUndefined } from "../../../helper/utils";
+import ModalService from "../../../services/ModalService";
 
 export default {
     mixins: [ButtonSizePropertyMixin],
@@ -61,17 +62,25 @@ export default {
     {
         this.$nextTick(() =>
         {
+            const modal = ModalService.findModal(this.$parent.$refs.guestModal);
+
             // for old login view only (input in modal)
-            if(!isNullOrUndefined(this.$parent.$refs.guestModal))
+            if(!isNullOrUndefined(modal))
             {
-                this.$parent.$refs.guestModal.addEventListener("hidden.bs.modal", () =>
+                modal.on("hidden.bs.modal", () =>
                 {
                     this.email = "";
                     ValidationService.unmarkAllFields(this.$refs.form);
                 });
             }
 
-            AutoFocusService.triggerAutoFocus();
+            if (isDefined(modal))
+            {
+                modal.on("shown.bs.modal", () =>
+                {
+                    AutoFocusService.triggerAutoFocus(modal);
+                });
+            }
         });
     },
 
