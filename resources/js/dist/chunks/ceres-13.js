@@ -15,6 +15,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
 /* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
 /* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var _services_ModalService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../services/ModalService */ "./resources/js/src/app/services/ModalService.js");
 //
 //
 //
@@ -34,6 +35,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -66,15 +68,20 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.$nextTick(function () {
-      // for old login view only (input in modal)
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_5__["isNullOrUndefined"])(_this.$parent.$refs.guestModal)) {
-        _this.$parent.$refs.guestModal.addEventListener("hidden.bs.modal", function () {
+      var modal = _services_ModalService__WEBPACK_IMPORTED_MODULE_6__["default"].findModal(_this.$parent.$refs.guestModal); // for old login view only (input in modal)
+
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_5__["isNullOrUndefined"])(modal)) {
+        modal.on("hidden.bs.modal", function () {
           _this.email = "";
           _services_ValidationService__WEBPACK_IMPORTED_MODULE_3__["default"].unmarkAllFields(_this.$refs.form);
         });
       }
 
-      _services_AutoFocusService__WEBPACK_IMPORTED_MODULE_2__["default"].triggerAutoFocus();
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_5__["isDefined"])(modal)) {
+        modal.on("shown.bs.modal", function () {
+          _services_AutoFocusService__WEBPACK_IMPORTED_MODULE_2__["default"].triggerAutoFocus(modal);
+        });
+      }
     });
   },
   methods: {
