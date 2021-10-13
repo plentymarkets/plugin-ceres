@@ -83,7 +83,7 @@ class ItemSortingWidget extends BaseWidget
         if (array_key_exists('itemSortOptions', $widgetSettings)) {
             $temp = $widgetSettings['itemSortOptions']['mobile'];
 
-            // add default from ceres config
+            // add default from plentyShop LTS config
             if (!in_array($ceresSortingConfig->defaultSorting, $temp)) {
                 array_push($temp, $ceresSortingConfig->defaultSorting);
             }

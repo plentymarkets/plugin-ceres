@@ -97,7 +97,7 @@ class CeresHeaderConfig extends PluginConfig
      */
     protected function load()
     {
-        $this->companyName          = $this->getTextValue('header.company_name', 'Ceres Webshop' );
+        $this->companyName          = $this->getTextValue('header.company_name', 'plentyShop LTS' );
         $this->companyLogo          = $this->getTextValue( 'header.company_logo', '' );
         $this->showNavBars          = $this->getTextValue( 'header.show_navbars', 'top' );
         $this->fixedNavBar          = $this->getBooleanValue( 'header.fixed_navbar', true );

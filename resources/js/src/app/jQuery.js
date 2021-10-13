@@ -6,7 +6,7 @@ function setJQuery(newJQuery)
 {
     if (_jQuery && _jQuery !== newJQuery)
     {
-        console.warn(`jQuery ${ _jQuery.fn.jquery } is already included in Ceres. It\'s not recommended to register new instances of jQuery.`);
+        console.warn(`jQuery ${ _jQuery.fn.jquery } is already included in plentyShop LTS. It\'s not recommended to register new instances of jQuery.`);
 
         // Copy ajax config to new jQuery instance
         newJQuery.ajaxSetup(_jQuery.ajaxSetup());

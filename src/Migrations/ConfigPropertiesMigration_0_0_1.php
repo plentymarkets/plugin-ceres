@@ -54,7 +54,7 @@ class ConfigPropertiesMigration_0_0_1
     /**
      * This function contains the main logic of this migration
      * @param int $pluginSetId The pluginset id
-     * @param Configuration $config The Ceres config
+     * @param Configuration $config The plentyShop LTS config
      */
     public function migrate($pluginSetId, $config)
     {

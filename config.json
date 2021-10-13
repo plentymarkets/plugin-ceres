@@ -10,7 +10,7 @@
                     "deprecated": true,
                     "label": "Config.headerCompanyNameLabel",
                     "options": {
-                        "defaultValue": "Ceres Webshop"
+                        "defaultValue": "plentyShop LTS"
                     }
                 },
                 "header.company_logo": {
@@ -19,7 +19,7 @@
                     "deprecated": true,
                     "label": "Config.headerCompanyLogoLabel",
                     "options": {
-                        "defaultValue": "images/ceres-logo.svg"
+                        "defaultValue": "images/plentyShop-lts-logo.svg"
                     }
                 },
                 "global.favicon": {

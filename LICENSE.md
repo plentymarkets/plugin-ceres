@@ -1,6 +1,6 @@
-plentymarkets Ceres
+plentymarkets plentyShop LTS
 
-Copyright © 2017 plentysystems AG
+Copyright © 2021 plentysystems AG
 
 According to our dual licensing model, this program can be used either
 under the terms of the GNU Affero General Public License, version 3,

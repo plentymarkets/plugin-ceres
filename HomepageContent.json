@@ -22,7 +22,7 @@
     "texts":
     {
       "welcome": "Herzlich Willkommen!",
-      "shortDescription": "... in unserem neuen Responsive-Template <b>Ceres</b>. Das Template wurde optimiert für die Darstellung auf allen modernen Endgeräten (Desktop, Notebook, Tablet, Smartphone). Wir freuen uns über Ihr Interesse und wünschen Ihnen viel Spaß beim Entdecken der neuen Funktionalitäten.",
+      "shortDescription": "... in unserem neuen Responsive-Template <b>plentyShop LTS</b>. Das Template wurde optimiert für die Darstellung auf allen modernen Endgeräten (Desktop, Notebook, Tablet, Smartphone). Wir freuen uns über Ihr Interesse und wünschen Ihnen viel Spaß beim Entdecken der neuen Funktionalitäten.",
       "longText": "",
       "recommendText": "plentymarkets empfiehlt"
     },
@@ -72,7 +72,7 @@
     "texts":
     {
       "welcome": "Welcome!",
-      "shortDescription": "... to our new responsive template <b>Ceres</b>.",
+      "shortDescription": "... to our new responsive template <b>plentyShop LTS</b>.",
       "longText": "",
       "recommendText": "plentymarkets recommends"
     },
