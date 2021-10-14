@@ -1,50 +1,5 @@
-{% extends getPartial('page-design') %}
-
-{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
-
-{% block PartialHead %}
-    {% embed getPartial('page-metadata') %}
-        {% if category is defined and category is not null %}
-            {# Override default behaviour: Use empty title if no explicit meta title is defined #}
-            {% block title category.details[0].metaTitle | default('') %}
-            {% set metaDescription = category.details[0].metaDescription | default('') %}
-            {% set metaRobots = metaRobots %}
-        {% else %}
-            {% set metaDescription = trans('Ceres::Template.homepageMetaDescription') %}
-            {% set metaRobots = ceresConfig.meta.robotsHome %}
-        {% endif %}
-
-        {% block description metaDescription %}
-        {% block robots metaRobots %}
-
-    {% endembed %}
-{% endblock %}
-
-{% block PageBody %}
-    {% set shopBuilderTemplate = "" %}
-    {% if category is defined and category is not null %}
-        {# get shopbuilder template for category if defined #}
-        {% set shopBuilderTemplate = shop_builder_category_template(category.id) %}
-    {% endif %}
-
-    {% if shopBuilderTemplate | trim is not empty %}
-        {# show shopbuilder content for homepage category #}
-        <div class="container-max">
-            <div class="row">
-                <div class="col">
-                    {{ shopBuilderTemplate | raw }}
-                </div>
-            </div>
-        </div>
-    {% else %}
-        {% set overrideHomepage = LayoutContainer.show("Ceres::Homepage") %}
-        {% if overrideHomepage | trim is not empty %}
-            {# Show contents for container Ceres::Homepage #}
-            {{ overrideHomepage }}
-        {% else %}
-            {# Show default homepage #}
-            {% include "Ceres::Homepage.MarketingHomepage.twig" %}
-        {% endif %}
-    {% endif %}
-
-{% endblock %}
+<html>
+<body>
+<h1>Hallo</h1>
+</body>
+</html>

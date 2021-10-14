@@ -1,5 +1,58 @@
-<html>
-<body>
-<h1>Hallo</h1>
-</body>
-</html>
+{% set currentLang = services.localizationRepository.getLanguage() %}
+{% set homepageJson = getExternalContent("https://cdn02.plentymarkets.com/pmsbpnokwu6a/plugin/production/marketingresource/js/HomepageContent.json") %}
+{% set homepageData = homepageJson[currentLang] %}
+
+<div class="container-max mkt-homepage">
+    <div class="carousel slide" data-interval="5000" data-ride="carousel" id="carousel-example">
+        <div class="carousel-inner" id="carousel-content">
+            {% for picture in homepageData.pictures %}
+                <div class="carousel-item text-muted {% if loop.first %}active{% endif %}">
+                    <a href="{{ picture.pictureLink }}">
+                        <img class="img-fluid" src="{{ picture.pictureUrl }}" />
+                    </a>
+                    <div class="carousel-caption">
+                        <h2>{% autoescape false %}{{ picture.text }}{% endautoescape %}</h2>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <a class="left carousel-control carousel-control-prev" href="#carousel-example" data-slide="prev"><i
+                    class="icon-prev  fa fa-angle-left"></i></a>
+        <a class="right carousel-control carousel-control-next" href="#carousel-example" data-slide="next"><i
+                    class="icon-next fa fa-angle-right"></i></a>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <h1 id="welcome-text">{% autoescape false %}{{ homepageData.texts.welcome }}{% endautoescape %}</h1>
+        </div>
+        <div class="col-lg-6">
+            <p id="short-description">{% autoescape false %}{{ homepageData.texts.shortDescription }}{% endautoescape %}</p>
+        </div>
+    </div>
+
+    <hr class="my-2">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 id="recommend-text">{% autoescape false %}{{ homepageData.texts.recommendText }}{% endautoescape %}</h2>
+        </div>
+    </div>
+
+    <hr class="my-2">
+
+    <div class="row" id="recommended-plugins">
+        {% for plugin in homepageData.recommended | shuffle %}
+            <div class="col-4 text-center mb-3">
+                <a rel="noopener noreferrer" target="_blank" href="{{ plugin.pluginLink }}">
+                    <img class="img-fluid" src="{{ plugin.pluginIcon }}" />
+                    <div class="flex-align-bottom">
+                        <h1 class="flex-title">{% autoescape false %}{{ plugin.pluginTitle }}{% endautoescape %}</h1>
+                        <div class="flex-text">{% autoescape false %}{{ plugin.pluginText }}{% endautoescape %}</div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
