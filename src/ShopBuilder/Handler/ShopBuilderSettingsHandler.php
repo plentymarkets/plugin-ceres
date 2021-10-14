@@ -8,14 +8,14 @@ use Plenty\Modules\ShopBuilder\Helper\MappableSettingsHandler;
 /**
  * Class ShopBuilderSettingsHandler
  *
- * Maps the routing settings from IO to Ceres. This allows us to set routing settings in the ShopBuilder.
+ * Maps the routing settings from IO to plentyShop LTS. This allows us to set routing settings in the ShopBuilder.
  *
  * @package Ceres\ShopBuilder\Handler
  */
 class ShopBuilderSettingsHandler extends MappableSettingsHandler
 {
     /**
-     * @var string[] Maps the Ceres settings to the IO settings.
+     * @var string[] Maps the plentyShop LTS settings to the IO settings.
      */
     protected $mappings = [
         'routing.homeCategory'                  => 'IO.routing.category_home',

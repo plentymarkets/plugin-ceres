@@ -135,6 +135,12 @@ const actions =
 
             const recaptchaEl = event.target.querySelector("[data-recaptcha]");
 
+            if (App.config.global.googleRecaptchaApiKey && (!window.grecaptcha || !recaptchaEl))
+            {
+                NotificationService.error(TranslationService.translate("Ceres::Template.contactAcceptRecaptchaCookie"));
+                return;
+            }
+
             executeReCaptcha(event.target)
                 .then((recaptchaResponse) =>
                 {

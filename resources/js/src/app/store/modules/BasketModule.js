@@ -294,6 +294,16 @@ function _fillMissingData(state, item)
         item.variation = oldBasketItem.variation;
     }
 
+    if (isDefined(item.basketItemOrderParams))
+    {
+        item.basketItemOrderParams.forEach(param =>
+        {
+            const propToUpdate = item.variation.data.properties.find(prop => prop.propertyId === Number(param.propertyId));
+
+            propToUpdate.property.surcharge = param.price || propToUpdate.property.surcharge;
+        });
+    }
+
     if (isNullOrUndefined(item.basketItemOrderParams))
     {
         oldBasketItem = oldBasketItem || state.items.find(i => i.id === item.id);

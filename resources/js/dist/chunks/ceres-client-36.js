@@ -66,6 +66,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: _objectSpread({
     valueLabel: function valueLabel() {
+      var _this = this;
+
       if (this.property.type === "selection") {
         var propertyId = parseInt(this.property.propertyId); // TODO: pass as property
 
@@ -83,7 +85,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_9__["isDefined"])(property)) {
             return property.property.selectionValues[this.property.value].name;
           }
+        } else {
+          basketItem = this.basketItems.find(function (basketItem) {
+            return basketItem.basketItemOrderParams.find(function (orderParam) {
+              return parseInt(orderParam.basketItemId) === basketItemId;
+            });
+          });
+
+          if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_9__["isDefined"])(basketItem)) {
+            var _properties = basketItem.variation.data.properties;
+
+            var _property = _properties.find(function (property) {
+              return property.property.id === propertyId;
+            });
+
+            if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_9__["isDefined"])(_property)) {
+              return _property.property.selectionValues.find(function (sv) {
+                return parseInt(sv.id) === parseInt(_this.property.value);
+              }).name;
+            }
+          }
         }
+
+        return "";
       } // exclude properties of type 'none' (checkboxes)
       else if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_9__["isDefined"])(this.property.type) && this.property.type.length) {
           return this.property.value;

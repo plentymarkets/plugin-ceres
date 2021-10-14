@@ -157,6 +157,10 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     $webstoreData['externalVatCheckServiceUnavailableFallbackStatus'] = (float)$data['onlineStore_externalVatIdCheckServiceUnavailableFallbackStatus'];
                 }
 
+                if (isset($data['onlineStore_useVariationOrderProperties'])) {
+                    $webstoreData['useVariationOrderProperties'] = $data['onlineStore_useVariationOrderProperties'];
+                }
+
                 if (isset($data['pagination_sortingMonthlySales'])) {
                     $webstoreData['itemSortByMonthlySales'] = $data['pagination_sortingMonthlySales'];
                 }

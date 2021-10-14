@@ -7,6 +7,7 @@ let gRecaptchaApiLoaded;
 
 import { whenConsented } from "../../helper/whenConsented";
 
+
 export default {
 
     name: "recaptcha",
@@ -15,13 +16,23 @@ export default {
     {
         return {
             version: App.config.global.googleRecaptchaVersion,
-            apiKey: App.config.global.googleRecaptchaApiKey
+            apiKey: App.config.global.googleRecaptchaApiKey,
+            recaptchaInitiated: false
         };
     },
 
     mounted()
     {
         this.$nextTick(() =>
+        {
+            this.checkConsent();
+            document.addEventListener("consent-change", () => this.checkConsent());
+        });
+    },
+
+    methods:
+    {
+        checkConsent()
         {
             whenConsented(
                 "media.reCaptcha",
@@ -31,12 +42,10 @@ export default {
                 },
                 () =>
                 {
+                    // remove recaptcha when previously consented
                 });
-        });
-    },
+        },
 
-    methods:
-    {
         createScript()
         {
             if (!this.apiKey || window.grecaptcha)
@@ -44,7 +53,7 @@ export default {
                 return Promise.resolve();
             }
 
-            if (!gRecaptchaApiLoaded)
+            if (!gRecaptchaApiLoaded && !this.recaptchaInitiated)
             {
                 gRecaptchaApiLoaded = new Promise((resolve, reject) =>
                 {
@@ -76,8 +85,9 @@ export default {
 
         initializeV3()
         {
-            if (window.grecaptcha)
+            if (window.grecaptcha && !this.recaptchaInitiated)
             {
+                this.recaptchaInitiated = true;
                 window.grecaptcha.ready(() =>
                 {
                     if (this.version !== 3)

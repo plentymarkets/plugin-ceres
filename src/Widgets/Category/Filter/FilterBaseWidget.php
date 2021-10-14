@@ -82,7 +82,10 @@ class FilterBaseWidget extends BaseWidget
         /** @var FacetFaker $facetFaker */
         $facetFaker  = pluginApp(FacetFaker::class);
         $facetResult = $facetFaker->fill([]);
-        
-        return ['facets' => $facetResult];
+
+        return [
+            'facets' => $facetResult,
+            'className' => $this->className
+        ];
     }
 }

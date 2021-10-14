@@ -126,8 +126,8 @@ export function initClientStore(store)
 {
     store.commit("initConsents");
 
-    // Use request animation frame to load session data after app has been initialized
-    window.requestAnimationFrame(() =>
+    // Use DOMContentLoaded to load session data after app has been initialized
+    document.addEventListener("DOMContentLoaded", () =>
     {
         const urlParams = getUrlParams();
 

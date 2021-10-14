@@ -202,7 +202,7 @@ export function encodeParams(params, prefix)
     {
         return encodeURIComponent(params);
     }
-    return prefix + "=" + encodeURIComponent(params);
+    return encodeURIComponent(prefix) + "=" + encodeURIComponent(params);
 }
 
 export function setUrlByItem(itemData, keepVariationId)

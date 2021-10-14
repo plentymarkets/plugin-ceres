@@ -147,6 +147,13 @@ class DisplayedInformationStep extends Step
                         "name" => "Wizard.showCarouselNav",
                     ]
                 ],
+                "displayInfo_showCategoryFilter" => [
+                    "type" => "checkbox",
+                    "defaultValue" => false,
+                    "options" => [
+                        "name" => "Wizard.showCategoryFilter",
+                    ]
+                ],
             ]
         ];
     }
@@ -158,7 +165,6 @@ class DisplayedInformationStep extends Step
     {
         return [
             "title" => "Wizard.itemViewSettings",
-            "description" => "Wizard.itemViewSettingsDescription",
             "form" => [
                 "displayInfo_requireOrderProperties" => [
                     "type" => "checkbox",

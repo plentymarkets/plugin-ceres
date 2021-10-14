@@ -170,6 +170,6 @@ class CeresItemConfig extends PluginConfig
         $this->showCategoryDescriptionTop       = $this->getTextValue( 'item.show_category_description_top', 'description1' );
         $this->showCategoryDescriptionBottom    = $this->getTextValue( 'item.show_category_description_bottom', 'none' );
         $this->requireOrderProperties           = $this->getBooleanValue( 'item.require_all_properties', false );
-
+        $this->showCategoryFilter               = $this->getBooleanValue( 'item.show_category_filter', false );
     }
 }

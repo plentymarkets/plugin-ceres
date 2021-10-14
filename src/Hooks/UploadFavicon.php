@@ -25,7 +25,7 @@ class UploadFavicon
     }
 
     /**
-     * Search ceres configuration inside a given plugin set to read the favicon from.
+     * Search plentyShop LTS configuration inside a given plugin set to read the favicon from.
      * Upload the plugin set to a given webstore or to all assigned webstores of the plugin set.
      *
      * @param PluginSet $pluginSet The plugin set to search for favicon config in.
@@ -35,7 +35,7 @@ class UploadFavicon
     {
         /** @var PluginSetEntry $pluginSetEntry */
         foreach($pluginSet->pluginSetEntries as $pluginSetEntry) {
-            // search for ceres plugin
+            // search for plentyShop LTS plugin
             if($pluginSetEntry->plugin->name === 'Ceres') {
                 /** @var Configuration $configuration */
                 foreach ($pluginSetEntry->configurations()->getResults() as $configuration) {

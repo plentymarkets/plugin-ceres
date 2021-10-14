@@ -18,6 +18,8 @@
 <html lang="{{ lang }}" data-framework="vue" prefix="og: http://ogp.me/ns#" class="icons-loading">
 
 <head>
+    {{ LayoutContainer.show("Ceres::PageDesign.AfterOpeningHeadTag") }}
+
     {{ get_consent_scripts(ceresConfig.global.blockCookies) }}
 
     {% include getPartial('head') %}
@@ -177,6 +179,7 @@
 </div>
 <!-- /SSR -->
 
+
 <!-- SSR:global(App) -->
 <script id="app-data" type="application/json">
     {
@@ -197,9 +200,12 @@
         "propertyFileUrl": "{{ services.propertyFile.getPropertyFileUrl() }}",
         "isShopBuilder": {{ isShopBuilder | default(false) | json_encode }},
         "bundleSetting": {{ webstoreConfig.dontSplitItemBundle | default(1) }},
+        "bundlePrefix": "{{ services.order.getOrderItemPrefix(2) }}",
+        "bundleComponentPrefix": "{{ services.order.getOrderItemPrefix(3) }}",
         "initialPleaseSelect": {{ webstoreConfig.attributeSelectDefaultOption | default(0) }},
         "publicPath": "{{ plugin_path('Ceres') ~ '/js/dist/' }}",
         "isCheapestSorting": "{{ services.template.isCheapestSorting() }}",
+        "useVariationOrderProperties": {% if webstoreConfig.useVariationOrderProperties | default(0) %}true{% else %}false{% endif %},
         "initialData": {
             "shippingCountries": {{ services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name", "vatCodes"]) | json_encode | raw }},
             "shippingCountryId": {{ services.checkout.getShippingCountryId() }},

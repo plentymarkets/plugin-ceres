@@ -27,6 +27,12 @@ class DisplayInfoMapping
             "global"   => false,
             "optional" => true,
         ],
+        "displayInfo_showCategoryFilter"=> [
+            "field"    => "item.show_category_filter",
+            "type"     => "string",
+            "global"   => false,
+            "optional" => true,
+        ],
         "displayInfo_showDescriptionTop" => [
             "field"    => "item.show_category_description_top",
             "type"     => "string",

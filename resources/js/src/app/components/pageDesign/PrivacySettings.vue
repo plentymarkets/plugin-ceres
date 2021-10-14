@@ -77,7 +77,7 @@
                         class="card-link text-primary text-appearance"
                         @click="setGroupVisibility(consentGroup.key, false, $event)"
                         v-else
-                        data-testing="privacy-settings-hide-more-information">>
+                        data-testing="privacy-settings-hide-more-information">
                         {{ $translate("Ceres::Template.privacySettingsLessInformation") }}
                     </a>
                 </div>

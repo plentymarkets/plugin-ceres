@@ -31,7 +31,7 @@ function createApp(context)
             Vue.config.errorHandler = (err, vm, info) =>
             {
                 context.throwError({
-                    message: `[Vue error]: Error in ${ info }: "${ err.toString() }". Activate development mode in Ceres for detailed stack trace.`,
+                    message: `[Vue error]: Error in ${ info }: "${ err.toString() }". Activate development mode in plentyShop LTS for detailed stack trace.`,
                     stack: err.stack
                 });
             };

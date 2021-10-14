@@ -1,12 +1,12 @@
 ![plentymarkets Logo](http://www.plentymarkets.eu/layout/pm/images/logo/plentymarkets-logo.jpg)
 
-# Ceres ![Travis Build Stable](https://img.shields.io/travis/plentymarkets/plugin-ceres/stable?label=build)
+# plentyShop LTS ![Travis Build Stable](https://img.shields.io/travis/plentymarkets/plugin-ceres/stable?label=build)
 
-This is the official **Ceres** plugin developed by plentymarkets. **Ceres** is the default template plugin for [plentymarkets 7](https://www.plentymarkets.eu/tour/) online stores.
+This is the official **plentyShop LTS** plugin developed by plentymarkets. **plentyShop LTS** is the default template plugin for [plentymarkets](https://www.plentymarkets.eu/tour/) online stores.
 
 ## Requirements
 
-This is a plugin for [plentymarkets 7](https://www.plentymarkets.com). The [IO](https://github.com/plentymarkets/plugin-io) plugin is required to run the plentymarkets **Ceres** plugin.
+This is a plugin for [plentymarkets](https://www.plentymarkets.com). The [IO](https://github.com/plentymarkets/plugin-io) plugin is required to run the plentymarkets **plentyShop LTS** plugin.
 
 ## Installing
 
@@ -14,10 +14,10 @@ For detailed information about plugin provisioning refer to [plentymarkets devel
 
 ## Quick start
 
-If you want make your own individual changes to the Ceres plugin, you need to follow the following steps.
+If you want make your own individual changes to the plentyShop LTS plugin, you need to follow the following steps.
 
 1. Install node.js in the LTS version from [nodejs.org](https://nodejs.org/en/).
-2. Open your console and navigate to the Ceres directory.
+2. Open your console and navigate to the plentyShop LTS directory.
 3. Run the command **npm install**.
 4. After you have integrated your changes, run the command **npm run build**.
 

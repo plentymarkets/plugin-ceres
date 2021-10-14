@@ -1,4 +1,34 @@
-# Release Notes for Ceres
+# Release Notes for plentyShop LTS
+
+## v5.0.40 (2021-10-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.39...5.0.40" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Added
+
++ plentyShop LTS now supports order properties. In order to use order properties, you need to activate the setting **Activate order properties** in the step **Online store** of the plentyShop LTS assistant. Please note that this replaces order characteristics.
+
+### Changed
+
+* A maximum of 250 properties were displayed in the data field picker in the ShopBuilder. This has been changed to a maximum of 1500 properties.
+* plentyShop LTS is now able to react to a future order setting with which prefixes for item bundles and components can be customised. Note that changing these prefixes may lead to a faulty display of older orders.
+* The maximum number of displayed items in the preview of the item grid widget in the ShopBuilder has been limited to 50.
+
+### Fixed
+
+* Item lists of the type **Last seen** didn't work as intended if Server-Side Rendering was inactive. This behaviour has been fixed.
+* If the setting **Block unaccepted cookies** was inactive, accepting cookies could lead to a reCAPTCHA error. This has been fixed.
+* The option **Show categories as filter options for search results**, which is necessary for displaying the category filter widget, has been added to the plentyShop LTS assistant.
+
+## v5.0.39 (2021-09-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.38...5.0.39" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Changed
+
+- It's no longer possible to send the contact form if reCaptcha is active and the corresponding cookie was not accepted by the user.
+
+### Fixed
+
+- The quantity input on the single item view now ignores the minimum order value if the shopping cart already contains the item in question.
+- Tabs are displayed correctly again, even when they only include an image widget.
+- If properties were assigned to multiple groups, display problems could occur if they were added to the ShopBuilder preset via the data field picker. This behaviour has been fixed.
 
 ## v5.0.38 (2021-08-31) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.37...5.0.38" target="_blank" rel="noopener"><b>Overview of all changes<</b></a>
 

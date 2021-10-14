@@ -61,6 +61,11 @@ export default Vue.component("order-return-history-list-item", {
             }
 
             return "-";
+        },
+
+        getOrderPropertyFileUrl(property)
+        {
+            return property.fileUrl || this.$options.filters.fileUploadPath(property.value);
         }
     }
 });

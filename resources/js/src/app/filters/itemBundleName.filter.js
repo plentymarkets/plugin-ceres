@@ -7,13 +7,13 @@ Vue.filter("itemBundleName", item =>
 
     if (item.bundleType === "bundle")
     {
-        prefixName = item.orderItemName.replace("[BUNDLE]", "").trim();
+        prefixName = item.orderItemName.replace(App.bundlePrefix, "").trim();
 
         prefixName = TranslationService.translate("Ceres::Template.itemBundleName", { itemName: prefixName });
     }
     else if (item.bundleType == "bundle_item")
     {
-        prefixName = item.orderItemName.replace("[-]", "").trim();
+        prefixName = item.orderItemName.replace(App.bundleComponentPrefix, "").trim();
     }
     else
     {
