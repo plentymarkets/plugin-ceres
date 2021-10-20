@@ -4,7 +4,7 @@
 
 ### Added
 
-+ A new LayoutContainer "Ceres::PageDesign.AfterOpeningHeadTag" was added. @FelixRies
++ The LayoutContainer "Ceres::PageDesign.AfterOpeningHeadTag" was added. @FelixRies
 
 ### Changed
 
