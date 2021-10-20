@@ -8,7 +8,7 @@
 
 ### Changed
 
-* Rebranding **Ceres** is now promoted as **plentyShop LTS**.
+* Rebranding: **Ceres** is now promoted as **plentyShop LTS**.
 
 ### Fixed
 
