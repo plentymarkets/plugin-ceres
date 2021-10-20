@@ -1,5 +1,25 @@
 # Release Notes for plentyShop LTS
 
+## v5.0.41 (2021-10-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.40...5.0.41" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Added
+
++ The LayoutContainer "Ceres::PageDesign.AfterOpeningHeadTag" was added. @FelixRies
+
+### Changed
+
+* Rebranding: **Ceres** is now promoted as **plentyShop LTS**.
+
+### Fixed
+
+* In the standard login template, the input of the guest login modal was not focused after opening. This has been fixed.
+* The assistant didn't show when the order properties were activated. This has been fixed.
+
+### Changed templates
+
+- In Ceres 5.0.41 we made a change to a template file which is relevant for theme developers. You can find the changed template below. The link directs you to the effected changes in the corresponding file.
+- [resources/views/PageDesign/PageDesign.twig](https://github.com/plentymarkets/plugin-ceres/pull/3051/files#diff-6103acda40fc331c6f5ba92faab9976e92848d8fde0e9af7fe34abd593885128)
+
 ## v5.0.40 (2021-10-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.39...5.0.40" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added
