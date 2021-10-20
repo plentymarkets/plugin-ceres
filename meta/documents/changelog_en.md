@@ -13,7 +13,7 @@
 ### Fixed
 
 * In the standard login template, the input of the guest login modal was not focused after opening. This has been fixed.
-* In the assistant it was not shown that the order properties were activated. This has been fixed.
+* The assistant didn't show when the order properties were activated. This has been fixed.
 
 ### Changed templates
 
