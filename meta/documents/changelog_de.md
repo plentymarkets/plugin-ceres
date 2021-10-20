@@ -8,7 +8,7 @@
 
 ### Geändert
 
-* Rebranding **Ceres** wird jetzt unter **plentyShop LTS** beworben.
+* Rebranding: **Ceres** wird jetzt unter **plentyShop LTS** beworben.
 
 ### Behoben
 
