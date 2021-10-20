@@ -12,7 +12,7 @@
 
 ### Behoben
 
-* Im Standard Login Template wurde der Input des Gastlogin-Modals nach dem öffnen nicht fokussiert. Dies wurde behoben.
+* Im Standard Login-Template wurde der Input des Gastlogin-Modals nach dem Öffnen nicht fokussiert. Dies wurde behoben.
 * Im Assistenten wurde nicht dargestellt, das die Bestelleigenschaften aktiviert wurden. Das wurde behoben.
 
 ### Angepasste Templates
