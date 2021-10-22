@@ -1,5 +1,6 @@
 const path = require("path");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const WebpackRequireFrom = require("webpack-require-from");
 
 module.exports = env =>
 {
@@ -50,6 +51,9 @@ module.exports = env =>
         plugins: [
             new VueLoaderPlugin({
                 exposeFilename: true
+            }),
+            new WebpackRequireFrom({
+                replaceSrcMethodName: "__loadPluginChunk"
             })
         ]
     };
