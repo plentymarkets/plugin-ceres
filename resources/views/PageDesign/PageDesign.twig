@@ -216,7 +216,12 @@
     }
 </script>
 <!-- /SSR -->
-<script>window.App = JSON.parse(document.getElementById("app-data").innerText);</script>
+<script>
+    window.App = JSON.parse(document.getElementById("app-data").innerText);
+    window.__loadPluginChunk = function(source) {
+        return source += "?v={{ buildHash }}";
+    };
+</script>
 
 {{ Loader.include_components() }}
 
@@ -291,10 +296,6 @@
 {% endif %}
 
 <script>
-    window.__loadPluginChunk = function(source) {
-        return source += "?v={{ buildHash }}";
-    };
-
     {% if request.get("openBasketPreview") == 1 %}window.ceresStore.dispatch("loadComponent", "basket-preview"){% endif %}
     {% if request.get("show") == "forgotPassword" %}window.ceresStore.dispatch("loadComponent", "forgot-password-modal"){% endif %}
 </script>
