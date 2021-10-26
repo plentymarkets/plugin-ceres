@@ -146,7 +146,6 @@ export default Vue.component("create-update-address", {
         },
 
         // remove invible fields from the data object, to prevent validation errors
-        // removed fields will not be changed / deleted on the database
         cleanupAddress(address)
         {
             const optionalFieldsToCheck = ["email", "vatNumber", "contactPerson", "salutation", "title", "birthday", "name4", "address3", "address4"];
