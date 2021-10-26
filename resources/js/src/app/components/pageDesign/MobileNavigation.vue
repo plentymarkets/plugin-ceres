@@ -1,5 +1,5 @@
 <template>
-    <div class="mobile-navigation">
+    <div class="mobile-navigation" :class="{ 'open': isMobileNavigationOpen }">
         <div v-show="isNavigationInitialized">
             <ul class="breadcrumb d-block px-3 py-0">
                 <li class="btn-close" @click="closeNavigation()"></li>
@@ -137,7 +137,8 @@ export default {
         },
 
         ...mapState({
-            navigationTree: state => state.navigation.tree
+            navigationTree: state => state.navigation.tree,
+            isMobileNavigationOpen: state => state.navigation.isMobileNavigationOpen
         })
     },
 
@@ -308,8 +309,7 @@ export default {
 
         closeNavigation()
         {
-            document.querySelector(".mobile-navigation").classList.remove("open");
-            document.querySelector("body").classList.remove("menu-is-visible");
+            this.$store.commit("setIsMobileNavigationOpen", false);
         },
 
         getCategoryUrl(url)

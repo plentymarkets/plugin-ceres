@@ -6,7 +6,8 @@ const state = () => ({
     tree: [],
     cachedTrees: {},
     currentCategory: null,
-    categoryChildren: []
+    categoryChildren: [],
+    isMobileNavigationOpen: false
 });
 
 const mutations =
@@ -34,6 +35,20 @@ const mutations =
                 {
                     state.categoryChildren.push(category);
                 }
+            }
+        },
+
+        setIsMobileNavigationOpen(state, value)
+        {
+            state.isMobileNavigationOpen = value;
+
+            if (value)
+            {
+                document.querySelector("body")?.classList.add("menu-is-visible");
+            }
+            else
+            {
+                document.querySelector("body")?.classList.remove("menu-is-visible");
             }
         }
     };
