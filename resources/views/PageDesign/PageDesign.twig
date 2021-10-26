@@ -261,10 +261,6 @@
 
 <!-- SSR:off() -->
 <script>
-    window.__loadPluginChunk = function(source) {
-        return source += "?v={{ buildHash }}";
-    };
-
     window.vueEventHub = new Vue();
     if (App.config.log.checkSyntax)
     {
@@ -295,6 +291,10 @@
 {% endif %}
 
 <script>
+    window.__loadPluginChunk = function(source) {
+        return source += "?v={{ buildHash }}";
+    };
+
     {% if request.get("openBasketPreview") == 1 %}window.ceresStore.dispatch("loadComponent", "basket-preview"){% endif %}
     {% if request.get("show") == "forgotPassword" %}window.ceresStore.dispatch("loadComponent", "forgot-password-modal"){% endif %}
 </script>
