@@ -1,4 +1,5 @@
 import { isNullOrUndefined } from "../../../../helper/utils";
+import { cloneDeep } from "lodash";
 
 const NotificationService = require("../../../../services/NotificationService");
 
@@ -119,8 +120,9 @@ export default Vue.component("create-update-address", {
         {
             this.waiting = true;
             this._syncOptionTypesAddressData();
+            const address = this.cleanupAddress(cloneDeep(this.addressData));
 
-            this.$store.dispatch("updateAddress", { address: this.addressData, addressType: this.addressType })
+            this.$store.dispatch("updateAddress", { address, addressType: this.addressType })
                 .then(
                     () =>
                     {
@@ -141,6 +143,26 @@ export default Vue.component("create-update-address", {
                         }
                     }
                 );
+        },
+
+        // remove invible fields from the data object, to prevent validation errors
+        // removed fields will not be changed / deleted on the database
+        cleanupAddress(address)
+        {
+            const optionalFieldsToCheck = ["email", "vatNumber", "contactPerson", "salutation", "title", "birthday", "name4", "address3", "address4"];
+            const selectedCountryIso = address.countryId === 1 ? "de" : "gb";
+            // cut "billing_address" & "delivery_address." from the field name
+            const optionalAddressFields = this.optionalAddressFields[selectedCountryIso]?.map(field => field.split(".")[1]) || [];
+
+            for (const addressField in address)
+            {
+                if (optionalFieldsToCheck.includes(addressField) && !optionalAddressFields.includes(addressField))
+                {
+                    delete address[addressField];
+                }
+            }
+
+            return address;
         },
 
         /**
