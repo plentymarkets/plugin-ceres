@@ -120,7 +120,12 @@ export default Vue.component("create-update-address", {
         {
             this.waiting = true;
             this._syncOptionTypesAddressData();
-            const address = this.cleanupAddress(cloneDeep(this.addressData));
+            const address = cloneDeep(this.addressData);
+
+            if (!this.validateBirthday(address))
+            {
+                delete address.birthday;
+            }
 
             this.$store.dispatch("updateAddress", { address, addressType: this.addressType })
                 .then(
@@ -145,23 +150,36 @@ export default Vue.component("create-update-address", {
                 );
         },
 
-        // remove invible fields from the data object, to prevent validation errors
-        cleanupAddress(address)
+        /**
+         * returs true, if a birthdate is displayable in an input of type date
+         */
+        validateBirthday(address)
         {
-            const optionalFieldsToCheck = ["email", "vatNumber", "contactPerson", "salutation", "title", "birthday", "name4", "address3", "address4"];
-            const selectedCountryIso = address.countryId === 1 ? "de" : "gb";
-            // cut "billing_address" & "delivery_address." from the field name
-            const optionalAddressFields = this.optionalAddressFields[selectedCountryIso]?.map(field => field.split(".")[1]) || [];
+            const birthdayInput = this.$refs.addressForm.querySelector("input[type=date][id*='txtBirthdate']");
 
-            for (const addressField in address)
+            if (address.birthday)
             {
-                if (optionalFieldsToCheck.includes(addressField) && !optionalAddressFields.includes(addressField))
+                // input for birthday is not active
+                if (!birthdayInput)
                 {
-                    delete address[addressField];
+                    const input = document.createElement("input");
+
+                    input.type = "date";
+                    input.value = address.birthday;
+
+                    if (input.value !== address.birthday)
+                    {
+                        return false;
+                    }
+                }
+                // the input's value doesn't match the addresses value
+                else if (birthdayInput.value !== address.birthday)
+                {
+                    return false;
                 }
             }
 
-            return address;
+            return true;
         },
 
         /**
