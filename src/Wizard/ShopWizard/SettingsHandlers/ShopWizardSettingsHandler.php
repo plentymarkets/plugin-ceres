@@ -313,12 +313,12 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
 
                 $this->savePreviewConfig($pluginSet, $previewConfData);
             }
-            
+
             $configRepo = pluginApp(ConfigurationRepositoryContract::class);
             $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
             $pluginSets = $pluginSetRepo->list();
             $pluginId = '';
-            
+
             if (count($pluginSets)) {
                 foreach ($pluginSets as $pluginSet) {
                     foreach ($pluginSet->pluginSetEntries as $pluginSetEntry) {
@@ -328,7 +328,7 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     }
                 }
             }
-            
+
             /** @var MappingService $mappingService */
             $mappingService = pluginApp(MappingService::class);
             $pluginData = $mappingService->processPluginMappingData($data, "store");
