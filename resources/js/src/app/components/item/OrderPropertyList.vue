@@ -49,6 +49,7 @@
 import OrderPropertyListGroup from "./OrderPropertyListGroup.vue";
 
 export default {
+    name: "order-property-list",
 
     components:
     {
