@@ -39,6 +39,8 @@
 import { isNullOrUndefined } from "../../helper/utils";
 
 export default {
+    name: "item-image-carousel",
+
     props: {
         maxQuantity:
         {
