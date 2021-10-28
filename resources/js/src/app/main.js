@@ -16,7 +16,7 @@ const headerCollapses = [];
 function HeaderCollapse(selector)
 {
     headerCollapses.push(selector);
-    $(document).ready(function()
+    $(function()
     {
         $(selector).on("show.bs.collapse", () =>
         {
@@ -98,7 +98,7 @@ function CeresMain()
         $("#mainNavbarCollapse").collapse("hide");
     }
 
-    $(document).ready(function()
+    $(function()
     {
         const offset = 250;
         const duration = 300;
@@ -139,7 +139,7 @@ function CeresMain()
             isDesktop = window.matchMedia("(min-width: 768px)").matches;
         });
 
-        $(".back-to-top").click(function(event)
+        $(".back-to-top").on("click", function(event)
         {
             event.preventDefault();
 
@@ -148,7 +148,7 @@ function CeresMain()
             return false;
         });
 
-        $(".back-to-top-center").click(function(event)
+        $(".back-to-top-center").on("click", function(event)
         {
             event.preventDefault();
 
@@ -157,7 +157,7 @@ function CeresMain()
             return false;
         });
 
-        $("#accountMenuList").click(function()
+        $("#accountMenuList").on("click", function()
         {
             $("#countrySettings").collapse("hide");
             $("#searchBox").collapse("hide");
@@ -230,7 +230,7 @@ $(document).on("shopbuilder.after.drop shopbuilder.after.widget_replace", functi
     component.$mount( widgetElement[0] );
     $(component.$el).find("*").each(function(index, elem)
     {
-        $(elem).click(function(event)
+        $(elem).on("click", function(event)
         {
             event.preventDefault();
         });
