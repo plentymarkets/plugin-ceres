@@ -157,7 +157,7 @@ function CeresMain()
             return false;
         });
 
-        $("#accountMenuList").on("click",function()
+        $("#accountMenuList").on("click", function()
         {
             $("#countrySettings").collapse("hide");
             $("#searchBox").collapse("hide");
@@ -230,7 +230,7 @@ $(document).on("shopbuilder.after.drop shopbuilder.after.widget_replace", functi
     component.$mount( widgetElement[0] );
     $(component.$el).find("*").each(function(index, elem)
     {
-        $(elem).on("click",function(event)
+        $(elem).on("click", function(event)
         {
             event.preventDefault();
         });

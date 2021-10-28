@@ -75801,7 +75801,7 @@ var headerCollapses = [];
 
 function HeaderCollapse(selector) {
   headerCollapses.push(selector);
-  $(document).ready(function () {
+  $(function () {
     $(selector).on("show.bs.collapse", function () {
       headerCollapses.forEach(function (element) {
         if (!$(element).is(selector)) {
@@ -75859,7 +75859,7 @@ function CeresMain() {
     $("#mainNavbarCollapse").collapse("hide");
   }
 
-  $(document).ready(function () {
+  $(function () {
     var offset = 250;
     var duration = 300;
     var isDesktop = window.matchMedia("(min-width: 768px)").matches;
@@ -75887,21 +75887,21 @@ function CeresMain() {
     window.addEventListener("resize", function () {
       isDesktop = window.matchMedia("(min-width: 768px)").matches;
     });
-    $(".back-to-top").click(function (event) {
+    $(".back-to-top").on("click", function (event) {
       event.preventDefault();
       $("html, body").animate({
         scrollTop: 0
       }, duration);
       return false;
     });
-    $(".back-to-top-center").click(function (event) {
+    $(".back-to-top-center").on("click", function (event) {
       event.preventDefault();
       $("html, body").animate({
         scrollTop: 0
       }, duration);
       return false;
     });
-    $("#accountMenuList").click(function () {
+    $("#accountMenuList").on("click", function () {
       $("#countrySettings").collapse("hide");
       $("#searchBox").collapse("hide");
       $("#currencySelect").collapse("hide");
@@ -75966,7 +75966,7 @@ $(document).on("shopbuilder.after.drop shopbuilder.after.widget_replace", functi
   });
   component.$mount(widgetElement[0]);
   $(component.$el).find("*").each(function (index, elem) {
-    $(elem).click(function (event) {
+    $(elem).on("click", function (event) {
       event.preventDefault();
     });
   });
