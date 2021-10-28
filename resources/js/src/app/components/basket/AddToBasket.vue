@@ -87,6 +87,8 @@ import QuantityInput from "../item/QuantityInput.vue";
 const NotificationService = require("../../services/NotificationService");
 
 export default {
+    name: "add-to-basket",
+
     mixins: [ButtonSizePropertyMixin],
     
     components:
