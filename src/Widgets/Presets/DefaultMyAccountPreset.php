@@ -23,7 +23,7 @@ use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
  * - BankDataSelectWidget
  * - OrderHistoryWidget
  * - OrderReturnHistoryWidget
- * - TextWidget
+ * - InlineTextWidget
  *
  * @package Ceres\Widgets\Presets
  */
@@ -75,7 +75,7 @@ class DefaultMyAccountPreset implements ContentPreset
     private function createHeadline()
     {
         $text = '<h1 class="h2">{{ trans("Ceres::Template.myAccount") }}</h1>';
-        $this->createWidget('Ceres::TextWidget')
+        $this->createWidget('Ceres::InlineTextWidget')
                      ->withSetting("text", $text)
                      ->withSetting("appearance", "none")
                      ->withSetting("customPadding", true)
