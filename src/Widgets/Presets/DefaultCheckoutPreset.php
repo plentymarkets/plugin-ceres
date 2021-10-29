@@ -280,7 +280,7 @@ class DefaultCheckoutPreset implements ContentPreset
     private function createAsterisk()
     {
         $text = '*)&nbsp;{{ trans("Ceres::Template.contactRequiredField") }}';
-        $this->preset->createWidget('Ceres::TextWidget')
+        $this->preset->createWidget('Ceres::InlineTextWidget')
             ->withSetting("text", $text)
             ->withSetting("appearance", "none")
             ->withSetting("customPadding", true)
@@ -309,7 +309,7 @@ class DefaultCheckoutPreset implements ContentPreset
         $text .= '{{ overrideCheckoutHeadline }}';
         $text .= '{% endif %}';
 
-        $this->preset->createWidget('Ceres::TextWidget')
+        $this->preset->createWidget('Ceres::InlineTextWidget')
             ->withSetting("text", $text)
             ->withSetting("appearance", "none")
             ->withSetting("customPadding", true)
