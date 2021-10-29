@@ -135,6 +135,10 @@ export default {
             this.sendOrderReturn().then(
                 response =>
                 {
+                    NotificationService.success(
+                        this.$translate("Ceres::Template.returnConfirmationInfo")
+                    ).closeAfter(3000);
+
                     $(this.$refs.orderReturnConfirmation).modal("hide");
                     if(this.$store.getters.isLoggedIn) {
                         navigateTo(App.urls.myAccount)

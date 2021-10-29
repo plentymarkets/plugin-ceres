@@ -70,7 +70,7 @@ const actions =
                         variationIds[state.orderReturnItems[index].orderItem.itemVariationId] = state.orderReturnItems[index].quantity;
                     }
 
-                    ApiService.post("/rest/io/order/return", { orderId: state.orderData.order.id, orderAccessKey: state.orderAccessKey, variationIds, returnNote: state.orderReturnNote, keepNotificationAfterReload: true })
+                    ApiService.post("/rest/io/order/return", { orderId: state.orderData.order.id, orderAccessKey: state.orderAccessKey, variationIds, returnNote: state.orderReturnNote })
                         .done(data =>
                         {
                             resolve(data);
