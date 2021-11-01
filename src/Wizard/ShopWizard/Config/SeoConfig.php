@@ -82,6 +82,7 @@ class SeoConfig
         "skuVariationID"              => "1",
         "skuVariationNr"              => "2",
         "skuVarPropSet"               => "3",
+        "skuItemID"                   => "4",
     ];
 
     /**

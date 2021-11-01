@@ -237,6 +237,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
             case 3:
                 $this->sku = $this->getVariationProperty($itemData['variationProperties'], $skuMappingId);
                 break;
+            case 4:
+                $this->sku = $itemData['item']['id'];
         }
 
         $this->isItemSet = $params['isItemSet'];
