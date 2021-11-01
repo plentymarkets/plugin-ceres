@@ -3458,6 +3458,10 @@
                                 "caption": "Config.currencyAvailableCurrenciesAED"
                             },
                             {
+                                "value": "ANG",
+                                "caption": "Config.currencyAvailableCurrenciesANG"
+                            },
+                            {
                                 "value": "ARS",
                                 "caption": "Config.currencyAvailableCurrenciesARS"
                             },

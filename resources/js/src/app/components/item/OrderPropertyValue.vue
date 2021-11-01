@@ -13,6 +13,8 @@ import { isDefined } from "../../helper/utils";
 import { mapState } from "vuex";
 
 export default {
+    name: "order-property-value",
+
     props:
     {
         property:

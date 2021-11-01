@@ -216,7 +216,12 @@
     }
 </script>
 <!-- /SSR -->
-<script>window.App = JSON.parse(document.getElementById("app-data").innerText);</script>
+<script>
+    window.App = JSON.parse(document.getElementById("app-data").innerText);
+    window.__loadPluginChunk = function(source) {
+        return source += "?v={{ buildHash }}";
+    };
+</script>
 
 {{ Loader.include_components() }}
 
@@ -261,10 +266,6 @@
 
 <!-- SSR:off() -->
 <script>
-    window.__loadPluginChunk = function(source) {
-        return source += "?v={{ buildHash }}";
-    };
-
     window.vueEventHub = new Vue();
     if (App.config.log.checkSyntax)
     {

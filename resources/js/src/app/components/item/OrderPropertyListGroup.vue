@@ -21,6 +21,7 @@
 import OrderPropertyListItem from "./OrderPropertyListItem.vue";
 
 export default {
+    name: "order-property-list-group",
 
     components:
     {

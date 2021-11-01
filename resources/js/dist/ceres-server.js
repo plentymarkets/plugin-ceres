@@ -6893,6 +6893,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "item-availability",
   props: {
     paddingClasses: String,
     paddingStyles: String
@@ -7185,6 +7186,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "item-image-carousel",
   props: {
     maxQuantity: {
       type: Number,
@@ -7602,6 +7604,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "order-property-list",
   components: {
     "order-property-list-group": _OrderPropertyListGroup_vue__WEBPACK_IMPORTED_MODULE_17__["default"]
   },
@@ -7775,6 +7778,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "order-property-list-group",
   components: {
     OrderPropertyListItem: _OrderPropertyListItem_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
@@ -8259,6 +8263,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "order-property-value",
   props: {
     property: {
       type: Object,
@@ -12589,9 +12594,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       this.isLoading = true;
       this.sendOrderReturn().then(function (response) {
-        $(_this.$refs.orderReturnConfirmation).modal("hide");
-        Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_9__["navigateTo"])(window.location.origin);
         _services_NotificationService__WEBPACK_IMPORTED_MODULE_7__["default"].success(_this.$translate("Ceres::Template.returnConfirmationInfo")).closeAfter(3000);
+        $(_this.$refs.orderReturnConfirmation).modal("hide");
+
+        if (_this.$store.getters.isLoggedIn) {
+          Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_9__["navigateTo"])(App.urls.myAccount);
+        } else {
+          Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_9__["navigateTo"])(App.urls.confirmation);
+        }
       }, function (error) {
         _this.isLoading = false;
         $(_this.$refs.orderReturnConfirmation).modal("hide");
@@ -13658,6 +13668,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_25__["mapState"])({
     navigationTree: function navigationTree(state) {
       return state.navigation.tree;
+    },
+    isMobileNavigationOpen: function isMobileNavigationOpen(state) {
+      return state.navigation.isMobileNavigationOpen;
     }
   })),
   created: function created() {
@@ -13799,8 +13812,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return null;
     },
     closeNavigation: function closeNavigation() {
-      document.querySelector(".mobile-navigation").classList.remove("open");
-      document.querySelector("body").classList.remove("menu-is-visible");
+      this.$store.commit("setIsMobileNavigationOpen", false);
     },
     getCategoryUrl: function getCategoryUrl(url) {
       var trailingSlash = url[0] === "/" ? "" : "/";
@@ -54517,7 +54529,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "mobile-navigation" },
+    {
+      staticClass: "mobile-navigation",
+      class: { open: _vm.isMobileNavigationOpen }
+    },
     [
       _vm._ssrNode(
         "<div" +
@@ -80790,12 +80805,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.directive("open-mobile-navigation", {
-  bind: function bind(el, binding) {
-    el.onclick = function (event) {
-      if (document.querySelector(".mobile-navigation")) {
-        document.querySelector(".mobile-navigation").classList.add("open");
-        document.querySelector("body").classList.add("menu-is-visible");
-      }
+  bind: function bind(el) {
+    el.onclick = function () {
+      return ceresStore.commit("setIsMobileNavigationOpen", true);
     };
   }
 });
@@ -88820,7 +88832,8 @@ var state = function state() {
     tree: [],
     cachedTrees: {},
     currentCategory: null,
-    categoryChildren: []
+    categoryChildren: [],
+    isMobileNavigationOpen: false
   };
 };
 
@@ -88858,6 +88871,19 @@ var mutations = {
       _iterator.e(err);
     } finally {
       _iterator.f();
+    }
+  },
+  setIsMobileNavigationOpen: function setIsMobileNavigationOpen(state, value) {
+    state.isMobileNavigationOpen = value;
+
+    if (value) {
+      var _document$querySelect;
+
+      (_document$querySelect = document.querySelector("body")) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.classList.add("menu-is-visible");
+    } else {
+      var _document$querySelect2;
+
+      (_document$querySelect2 = document.querySelector("body")) === null || _document$querySelect2 === void 0 ? void 0 : _document$querySelect2.classList.remove("menu-is-visible");
     }
   }
 };
