@@ -34,6 +34,8 @@ import { mapState } from "vuex";
 import BasketListItem from "./BasketListItem.vue";
 
 export default {
+    name: "basket-list",
+    
     components:
     {
         BasketListItem

@@ -176,6 +176,8 @@ const NotificationService = require("../../../services/NotificationService");
 import BasketSetComponentList from "./BasketSetComponentList.vue";
 
 export default {
+    name: "basket-list-item",
+    
     components:
     {
         BasketSetComponentList

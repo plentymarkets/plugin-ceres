@@ -49,6 +49,7 @@ import TranslationService from "../../services/TranslationService";
 import { mapState } from "vuex";
 
 export default {
+    name: "coupon",
 
     props: {
         template:
