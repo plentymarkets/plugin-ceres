@@ -89,6 +89,8 @@ const ModalService  = require("../../services/ModalService");
 const ApiService    = require("../../services/ApiService");
 
 export default {
+    name: "add-item-to-basket-overlay",
+    
     props: {
         defaultTimeToClose: {
             type: Number,
