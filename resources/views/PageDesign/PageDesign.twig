@@ -51,7 +51,9 @@
         <notifications template="#vue-notifications" :initial-notifications="{{ notifications | json_encode() }}"></notifications>
     </lazy-hydrate>
 
-    {% include getPartial('header') %}
+    {% cacheblock %}
+        {% include getPartial('header') %}
+    {% endcacheblock %}
 
     <div id="page-body" class="main">
         {% block PageBody %}{% endblock %}
