@@ -21,6 +21,7 @@ use Ceres\Extensions\TwigJsonDataContainer;
 use Ceres\Extensions\TwigLayoutContainerInternal;
 use Ceres\Extensions\TwigStyleScriptTagFilter;
 use Ceres\Hooks\CeresAfterBuildPlugins;
+use Ceres\Hooks\GenerateShopBuilderPresets;
 use Ceres\Hooks\UploadFavicon;
 use Ceres\Widgets\WidgetCollection;
 use Ceres\Wizard\ShopWizard\Services\DefaultSettingsService;
@@ -29,6 +30,7 @@ use IO\Extensions\Constants\ShopUrls;
 use IO\Extensions\Functions\Partial;
 use IO\Helper\RouteConfig;
 use IO\Helper\TemplateContainer;
+use Plenty\Console\Commands\GenerateShopBuilderPresetsEvent;
 use Plenty\Modules\Plugin\Events\AfterBuildPlugins;
 use Plenty\Modules\ShopBuilder\Contracts\ContentWidgetRepositoryContract;
 use Plenty\Modules\System\Events\AfterPluginSetAssociated;
@@ -182,6 +184,7 @@ class TemplateServiceProvider extends ServiceProvider
 
         $eventDispatcher->listen(AfterBuildPlugins::class, CeresAfterBuildPlugins::class);
         $eventDispatcher->listen(AfterPluginSetAssociated::class, UploadFavicon::class);
+        $eventDispatcher->listen(GenerateShopBuilderPresetsEvent::class, GenerateShopBuilderPresets::class);
     }
 
     /**
