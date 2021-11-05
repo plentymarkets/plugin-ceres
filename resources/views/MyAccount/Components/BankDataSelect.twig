@@ -4,11 +4,11 @@
 
             <div class="items items-empty" v-show="userBankData.length == 0">
                 <div class="card">
-                    <span class="item-inner">
-                        <span class="item-content">
+                    <div class="item-inner">
+                        <div class="item-content">
                             <p class="text-muted small font-italic pt-3">{{ trans("Ceres::Template.myAccountBankNoBankData") }}</p>
-                        </span>
-                    </span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -22,9 +22,9 @@
                             <span>BIC:         ${ selectedBankData.bic }</span>
                         </span>
 
-                        <span class="item-content" v-show="!selectedBankData">
+                        <div class="item-content" v-show="!selectedBankData">
                             <p class="text-muted small font-italic pt-3">{{ trans("Ceres::Template.myAccountPleaseSelect") }}</p>
-                        </span>
+                        </div>
                     </span>
                 </div>
                 <div class="dropdown-menu" aria-labelledby="bankData">

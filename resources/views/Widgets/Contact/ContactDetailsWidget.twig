@@ -61,13 +61,13 @@
             {% if isPreview or businessTimes | trim is not empty and businessTimes != emptyInlineEditingContent %}
                 <div>
                     <i class="fa fa-fw fa-clock-o mr-2" aria-hidden="true"></i>
-                    <span class="d-inline-block align-top" {{ WidgetHelper.makeEditable("businessTimes", TOOLBAR_LAYOUT.ALL, isPreview) }}>
+                    <div class="d-inline-block align-top" {{ WidgetHelper.makeEditable("businessTimes", TOOLBAR_LAYOUT.ALL, isPreview) }}>
                         {% if businessTimes | trim is empty %}
                             <p>{{ WidgetHelper.editableTwig(isPreview, trans("Ceres::Template.contactOpeningTimes")) }}</p>
                         {% else %}
                             {{ WidgetHelper.editableTwig(isPreview, businessTimes | raw) }}
                         {% endif %}
-                    </span>
+                    </div>
                 </div>
             {% endif %}
 
