@@ -75,7 +75,8 @@ export default Vue.component("create-update-address", {
         {
             if (!this.validateBirthday(this.addressData))
             {
-                delete this.addressData.birthday;
+                this.emitInputEvent("birthday", "");
+                // delete this.addressData.birthday;
             }
 
             ValidationService.validate(this.$refs.addressForm)
