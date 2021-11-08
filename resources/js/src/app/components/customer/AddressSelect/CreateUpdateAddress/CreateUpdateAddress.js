@@ -1,5 +1,4 @@
 import { isNullOrUndefined } from "../../../../helper/utils";
-import { cloneDeep } from "lodash";
 
 const NotificationService = require("../../../../services/NotificationService");
 
@@ -74,6 +73,11 @@ export default Vue.component("create-update-address", {
          */
         validate()
         {
+            if (!this.validateBirthday(this.addressData))
+            {
+                this.emitInputEvent("birthday", null);
+            }
+
             ValidationService.validate(this.$refs.addressForm)
                 .done(() =>
                 {
@@ -120,12 +124,6 @@ export default Vue.component("create-update-address", {
         {
             this.waiting = true;
             this._syncOptionTypesAddressData();
-            const address = cloneDeep(this.addressData);
-
-            if (!this.validateBirthday(address))
-            {
-                delete address.birthday;
-            }
 
             this.$store.dispatch("updateAddress", { address, addressType: this.addressType })
                 .then(
