@@ -5,6 +5,7 @@ namespace Ceres\Hooks;
 use Plenty\Console\Commands\GenerateShopBuilderPresetsEvent;
 use Plenty\Modules\ShopBuilder\Contracts\ContentRepositoryContract;
 use Plenty\Plugin\ConfigRepository;
+use Plenty\Plugin\Translation\Translator;
 
 /**
  *
@@ -28,24 +29,91 @@ class GenerateShopBuilderPresets
             "type" => "content",
             "name" => "Widget.presetBasketDefault"
         ],
-        "IO.routing.category_my-account" => "Ceres\\Widgets\\Presets\\DefaultMyAccountPreset",
-        "IO.routing.category_search" => "Ceres\\Widgets\\Presets\\ItemSearchPreset",
-        "IO.routing.category_login" => "Ceres\\Widgets\\Presets\\DefaultLoginPreset",
-        "IO.routing.category_register" => "Ceres\\Widgets\\Presets\\RegistrationPreset",
-        "IO.routing.category_confirmation" => "Ceres\\Widgets\\Presets\\DefaultOrderConfirmationPreset",
-        "IO.routing.category_confirmation-guest" => "Ceres\\Widgets\\Presets\\DefaultOrderConfirmationPreset",
-        "IO.routing.category_cancellation-rights" => "Ceres\\Widgets\\Presets\\Legal\\DefaultCancellationRightsPreset",
-        "IO.routing.category_cancellation-form" => "Ceres\\Widgets\\Presets\\Legal\\DefaultCancellationFormPreset",
-        "IO.routing.category_legal-disclosure" => "Ceres\\Widgets\\Presets\\Legal\\DefaultLegalDisclosurePreset",
-        "IO.routing.category_privacy-policy" => "Ceres\\Widgets\\Presets\\Legal\\DefaultPrivacyPolicyPreset",
-        "IO.routing.category_gtc" => "Ceres\\Widgets\\Presets\\Legal\\DefaultGTCPreset",
-        "IO.routing.category_contact" => "Ceres\\Widgets\\Presets\\DefaultContactPreset",
-        "IO.routing.category_wish-list" => "Ceres\\Widgets\\Presets\\WishListPreset",
-        "IO.routing.category_change-mail" => "Ceres\\Widgets\\Presets\\DefaultChangeMailPreset",
-        "IO.routing.category_password-reset" => "Ceres\\Widgets\\Presets\\ChangePasswordPreset",
-        "IO.routing.category_newsletter-opt-out" => "Ceres\\Widgets\\Presets\\DefaultNewsletterUnsubscribePreset",
-        "IO.routing.category_order-return" => "Ceres\\Widgets\\Presets\\OrderReturnPreset",
-        "IO.routing.category_page-not-found" => "Ceres\\Widgets\\Presets\\DefaultPageNotFoundPreset",
+        "IO.routing.category_my-account" => [
+            "presetClass" => "Ceres\\Widgets\\Presets\\DefaultMyAccountPreset",
+            "type" => "content",
+            "name" => "Widget.presetMyAccountDefault"
+        ],
+        "IO.routing.category_search" => [
+            "presetClass" => "Ceres\\Widgets\\Presets\\ItemSearchPreset",
+            "type" => "content",
+            "name" => "Widget.presetItemSearchDefault"
+        ],
+        "IO.routing.category_login" => [
+            "presetClass" => "Ceres\\Widgets\\Presets\\DefaultLoginPreset",
+            "type" => "content",
+            "name" => "Widget.presetLoginDefault"
+        ],
+        "IO.routing.category_register" => [
+            "presetClass" => "Ceres\\Widgets\\Presets\\RegistrationPreset",
+            "type" => "content",
+            "name" => "Widget.presetContactDefault"
+        ],
+        "IO.routing.category_confirmation-guest" => [
+            "presetClass" => "Ceres\\Widgets\\Presets\\DefaultOrderConfirmationPreset",
+            "type" => "content",
+            "name" => "Widget.presetOrderConfirmationDefault"
+        ],
+        "IO.routing.category_cancellation-rights" => [
+            "presetClass" => "Ceres\\Widgets\\Presets\\Legal\\DefaultCancellationRightsPreset",
+            "type" => "content",
+            "name" => "Widget.presetCancellationRightsDefault"
+        ],
+        "IO.routing.category_cancellation-form" => [
+            "presetClass" => "Ceres\\Widgets\\Presets\\Legal\\DefaultCancellationFormPreset",
+            "type" => "content",
+            "name" => "Widget.presetCancellationFormDefault"
+        ],
+        "IO.routing.category_legal-disclosure" => [
+            "presetClass" => "Ceres\\Widgets\\Presets\\Legal\\DefaultLegalDisclosurePreset",
+            "type" => "content",
+            "name" => "Widget.presetLegalDisclosureDefault"
+        ],
+        "IO.routing.category_privacy-policy" => [
+            "presetClass" => "Ceres\\Widgets\\Presets\\Legal\\DefaultPrivacyPolicyPreset",
+            "type" => "content",
+            "name" => "Widget.presetPrivacyPolicyDefault"
+        ],
+        "IO.routing.category_gtc" => [
+            "presetClass" => "Ceres\\Widgets\\Presets\\Legal\\DefaultGTCPreset",
+            "type" => "content",
+            "name" => "Widget.presetGTCDefault"
+        ],
+        "IO.routing.category_contact" => [
+            "presetClass" => "Ceres\\Widgets\\Presets\\DefaultContactPreset",
+            "type" => "content",
+            "name" => "Widget.presetContactDefault"
+        ],
+        "IO.routing.category_wish-list" => [
+            "presetClass" => "Ceres\\Widgets\\Presets\\WishListPreset",
+            "type" => "content",
+            "name" => "Widget.presetWishList"
+        ],
+        "IO.routing.category_change-mail" => [
+            "presetClass" => "Ceres\\Widgets\\Presets\\DefaultChangeMailPreset",
+            "type" => "content",
+            "name" => "Widget.presetChangeMailDefault"
+        ],
+        "IO.routing.category_password-reset" => [
+            "presetClass" => "Ceres\\Widgets\\Presets\\ChangePasswordPreset",
+            "type" => "content",
+            "name" => "Widget.presetChangePassword"
+        ],
+        "IO.routing.category_newsletter-opt-out" => [
+            "presetClass" => "Ceres\\Widgets\\Presets\\DefaultNewsletterUnsubscribePreset",
+            "type" => "content",
+            "name" => "Widget.presetNewsletterUnsubscribe"
+        ],
+        "IO.routing.category_order-return" => [
+            "presetClass" => "Ceres\\Widgets\\Presets\\OrderReturnPreset",
+            "type" => "content",
+            "name" => "Widget.presetOrderReturn"
+        ],
+        "IO.routing.category_page-not-found" => [
+            "presetClass" => "Ceres\\Widgets\\Presets\\DefaultPageNotFoundPreset",
+            "type" => "content",
+            "name" => "Widget.presetPageNotFound"
+        ]
     ];
 
     public function handle(GenerateShopBuilderPresetsEvent $event)
@@ -55,6 +123,7 @@ class GenerateShopBuilderPresets
 
     public static function generatePresets(GenerateShopBuilderPresetsEvent $event)
     {
+        $translator = pluginApp(Translator::class);
         /** @var ConfigRepository $config */
         $config = pluginApp(ConfigRepository::class);
         /** @var ContentRepositoryContract $contentRepository */
@@ -78,7 +147,7 @@ class GenerateShopBuilderPresets
         }
         $data = [
             "presetClass" => $configData["presetClass"],
-            "dataProviderName" => $configData["name"], // translation service
+            "dataProviderName" => $translator->trans("Ceres::{$configData['name']}"),
             "type" => $configData["type"],
             "link" => [
                 "containerName" => "ShopBuilder::Category.$catId",
