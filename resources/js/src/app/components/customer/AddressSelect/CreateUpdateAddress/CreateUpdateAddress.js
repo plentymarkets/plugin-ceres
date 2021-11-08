@@ -79,6 +79,10 @@ export default Vue.component("create-update-address", {
                     field: "birthday",
                     value: null
                 });
+
+                NotificationService.warn(
+                    TranslationService.translate("Ceres::Template.checkoutAddressNoValidBirthdate")
+                );
             }
 
             Vue.nextTick(() =>

@@ -68805,6 +68805,7 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
           field: "birthday",
           value: null
         });
+        NotificationService.warn(_services_TranslationService__WEBPACK_IMPORTED_MODULE_16__["default"].translate("Ceres::Template.checkoutAddressNoValidBirthdate"));
       }
 
       vue__WEBPACK_IMPORTED_MODULE_17___default.a.nextTick(function () {
