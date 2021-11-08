@@ -81,28 +81,31 @@ export default Vue.component("create-update-address", {
                 });
             }
 
-            ValidationService.validate(this.$refs.addressForm)
-                .done(() =>
-                {
-                    this.saveAddress();
-                })
-                .fail(invalidFields =>
-                {
-                    const fieldNames = [];
-
-                    for (const field of invalidFields)
+            Vue.nextTick(() =>
+            {
+                ValidationService.validate(this.$refs.addressForm)
+                    .done(() =>
                     {
-                        let fieldName = field.lastElementChild.innerHTML.trim();
+                        this.saveAddress();
+                    })
+                    .fail(invalidFields =>
+                    {
+                        const fieldNames = [];
 
-                        fieldName = fieldName.slice(-1) === "*" ? fieldName.slice(0, fieldName.length - 1) : fieldName;
-                        fieldNames.push(fieldName);
-                    }
+                        for (const field of invalidFields)
+                        {
+                            let fieldName = field.lastElementChild.innerHTML.trim();
 
-                    ValidationService.markInvalidFields(invalidFields, "error");
-                    NotificationService.error(
-                        TranslationService.translate("Ceres::Template.checkoutCheckAddressFormFields", { fields: fieldNames.join(", ") })
-                    );
-                });
+                            fieldName = fieldName.slice(-1) === "*" ? fieldName.slice(0, fieldName.length - 1) : fieldName;
+                            fieldNames.push(fieldName);
+                        }
+
+                        ValidationService.markInvalidFields(invalidFields, "error");
+                        NotificationService.error(
+                            TranslationService.translate("Ceres::Template.checkoutCheckAddressFormFields", { fields: fieldNames.join(", ") })
+                        );
+                    });
+            });
         },
 
         /**
