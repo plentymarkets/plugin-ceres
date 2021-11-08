@@ -68801,7 +68801,7 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
       var _this = this;
 
       if (!this.validateBirthday(this.addressData)) {
-        this.emitInputEvent("birthday", null);
+        delete this.addressData.birthday;
       }
 
       _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__["default"].validate(this.$refs.addressForm).done(function () {
@@ -68854,7 +68854,7 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
       this._syncOptionTypesAddressData();
 
       this.$store.dispatch("updateAddress", {
-        address: address,
+        address: this.addressData,
         addressType: this.addressType
       }).then(function () {
         _this2.addressModal.hide();
