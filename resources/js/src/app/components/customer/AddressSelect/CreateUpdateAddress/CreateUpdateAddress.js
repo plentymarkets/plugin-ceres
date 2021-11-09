@@ -73,28 +73,43 @@ export default Vue.component("create-update-address", {
          */
         validate()
         {
-            ValidationService.validate(this.$refs.addressForm)
-                .done(() =>
-                {
-                    this.saveAddress();
-                })
-                .fail(invalidFields =>
-                {
-                    const fieldNames = [];
-
-                    for (const field of invalidFields)
-                    {
-                        let fieldName = field.lastElementChild.innerHTML.trim();
-
-                        fieldName = fieldName.slice(-1) === "*" ? fieldName.slice(0, fieldName.length - 1) : fieldName;
-                        fieldNames.push(fieldName);
-                    }
-
-                    ValidationService.markInvalidFields(invalidFields, "error");
-                    NotificationService.error(
-                        TranslationService.translate("Ceres::Template.checkoutCheckAddressFormFields", { fields: fieldNames.join(", ") })
-                    );
+            if (!this.validateBirthday(this.addressData))
+            {
+                this.emitInputEvent({
+                    field: "birthday",
+                    value: null
                 });
+
+                NotificationService.warn(
+                    TranslationService.translate("Ceres::Template.checkoutAddressNoValidBirthdate")
+                );
+            }
+
+            Vue.nextTick(() =>
+            {
+                ValidationService.validate(this.$refs.addressForm)
+                    .done(() =>
+                    {
+                        this.saveAddress();
+                    })
+                    .fail(invalidFields =>
+                    {
+                        const fieldNames = [];
+
+                        for (const field of invalidFields)
+                        {
+                            let fieldName = field.lastElementChild.innerHTML.trim();
+
+                            fieldName = fieldName.slice(-1) === "*" ? fieldName.slice(0, fieldName.length - 1) : fieldName;
+                            fieldNames.push(fieldName);
+                        }
+
+                        ValidationService.markInvalidFields(invalidFields, "error");
+                        NotificationService.error(
+                            TranslationService.translate("Ceres::Template.checkoutCheckAddressFormFields", { fields: fieldNames.join(", ") })
+                        );
+                    });
+            });
         },
 
         /**
@@ -141,6 +156,38 @@ export default Vue.component("create-update-address", {
                         }
                     }
                 );
+        },
+
+        /**
+         * returs true, if a birthdate is displayable in an input of type date
+         */
+        validateBirthday(address)
+        {
+            const birthdayInput = this.$refs.addressForm.querySelector("input[type=date][id*='txtBirthdate']");
+
+            if (address.birthday)
+            {
+                // input for birthday is not active
+                if (!birthdayInput)
+                {
+                    const input = document.createElement("input");
+
+                    input.type = "date";
+                    input.value = address.birthday;
+
+                    if (input.value !== address.birthday)
+                    {
+                        return false;
+                    }
+                }
+                // the input's value doesn't match the addresses value
+                else if (birthdayInput.value !== address.birthday)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         },
 
         /**

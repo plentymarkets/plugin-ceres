@@ -68800,31 +68800,41 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
     validate: function validate() {
       var _this = this;
 
-      _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__["default"].validate(this.$refs.addressForm).done(function () {
-        _this.saveAddress();
-      }).fail(function (invalidFields) {
-        var fieldNames = [];
+      if (!this.validateBirthday(this.addressData)) {
+        this.emitInputEvent({
+          field: "birthday",
+          value: null
+        });
+        NotificationService.warn(_services_TranslationService__WEBPACK_IMPORTED_MODULE_16__["default"].translate("Ceres::Template.checkoutAddressNoValidBirthdate"));
+      }
 
-        var _iterator = _createForOfIteratorHelper(invalidFields),
-            _step;
+      vue__WEBPACK_IMPORTED_MODULE_17___default.a.nextTick(function () {
+        _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__["default"].validate(_this.$refs.addressForm).done(function () {
+          _this.saveAddress();
+        }).fail(function (invalidFields) {
+          var fieldNames = [];
 
-        try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
-            var field = _step.value;
-            var fieldName = field.lastElementChild.innerHTML.trim();
-            fieldName = fieldName.slice(-1) === "*" ? fieldName.slice(0, fieldName.length - 1) : fieldName;
-            fieldNames.push(fieldName);
+          var _iterator = _createForOfIteratorHelper(invalidFields),
+              _step;
+
+          try {
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
+              var field = _step.value;
+              var fieldName = field.lastElementChild.innerHTML.trim();
+              fieldName = fieldName.slice(-1) === "*" ? fieldName.slice(0, fieldName.length - 1) : fieldName;
+              fieldNames.push(fieldName);
+            }
+          } catch (err) {
+            _iterator.e(err);
+          } finally {
+            _iterator.f();
           }
-        } catch (err) {
-          _iterator.e(err);
-        } finally {
-          _iterator.f();
-        }
 
-        _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__["default"].markInvalidFields(invalidFields, "error");
-        NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_16__["default"].translate("Ceres::Template.checkoutCheckAddressFormFields", {
-          fields: fieldNames.join(", ")
-        }));
+          _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__["default"].markInvalidFields(invalidFields, "error");
+          NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_16__["default"].translate("Ceres::Template.checkoutCheckAddressFormFields", {
+            fields: fieldNames.join(", ")
+          }));
+        });
       });
     },
 
@@ -68865,6 +68875,31 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
           _this2._handleError(error.error);
         }
       });
+    },
+
+    /**
+     * returs true, if a birthdate is displayable in an input of type date
+     */
+    validateBirthday: function validateBirthday(address) {
+      var birthdayInput = this.$refs.addressForm.querySelector("input[type=date][id*='txtBirthdate']");
+
+      if (address.birthday) {
+        // input for birthday is not active
+        if (!birthdayInput) {
+          var input = document.createElement("input");
+          input.type = "date";
+          input.value = address.birthday;
+
+          if (input.value !== address.birthday) {
+            return false;
+          }
+        } // the input's value doesn't match the addresses value
+        else if (birthdayInput.value !== address.birthday) {
+            return false;
+          }
+      }
+
+      return true;
     },
 
     /**
