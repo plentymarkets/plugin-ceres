@@ -44,6 +44,17 @@
 
 {{ LayoutContainer.show("Ceres::PageDesign.AfterOpeningBodyTag") }}
 
+<script>
+    if('ontouchstart' in document.documentElement)
+    {
+        document.body.classList.add("touch");
+    }
+    else
+    {
+        document.body.classList.add("no-touch");
+    }
+</script>
+
 <!-- SSR:app() -->
 <div id="vue-app" class="app">
     {{ context.renderState() }}
