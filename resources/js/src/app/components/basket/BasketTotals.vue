@@ -185,6 +185,7 @@
 import { mapState } from "vuex";
 
 export default {
+    name: "basket-totals",
 
     props:
     {

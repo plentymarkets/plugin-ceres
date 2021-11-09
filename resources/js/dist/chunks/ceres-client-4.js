@@ -45,6 +45,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "basket-list",
   components: {
     BasketListItem: _BasketListItem_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
@@ -345,6 +346,7 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "basket-list-item",
   components: {
     BasketSetComponentList: _BasketSetComponentList_vue__WEBPACK_IMPORTED_MODULE_26__["default"]
   },

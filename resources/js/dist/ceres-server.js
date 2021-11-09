@@ -238,6 +238,7 @@ var ModalService = __webpack_require__(/*! ../../services/ModalService */ "./res
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "add-item-to-basket-overlay",
   props: {
     defaultTimeToClose: {
       type: Number,
@@ -518,6 +519,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "add-to-basket",
   mixins: [_mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_25__["ButtonSizePropertyMixin"]],
   components: {
     QuantityInput: _item_QuantityInput_vue__WEBPACK_IMPORTED_MODULE_26__["default"]
@@ -935,6 +937,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "basket-preview",
   props: {
     showNetPrices: {
       type: Boolean,
@@ -1247,6 +1250,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "basket-totals",
   props: {
     visibleFields: {
       type: Array,
@@ -1458,6 +1462,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "coupon",
   props: {
     template: {
       type: String,
@@ -1643,6 +1648,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "basket-list",
   components: {
     BasketListItem: _BasketListItem_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
@@ -1943,6 +1949,7 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "basket-list-item",
   components: {
     BasketSetComponentList: _BasketSetComponentList_vue__WEBPACK_IMPORTED_MODULE_26__["default"]
   },

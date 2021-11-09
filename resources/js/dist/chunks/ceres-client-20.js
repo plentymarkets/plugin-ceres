@@ -97,6 +97,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "coupon",
   props: {
     template: {
       type: String,

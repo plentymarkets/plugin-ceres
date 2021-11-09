@@ -4690,6 +4690,11 @@
                                             "value": "3",
                                             "caption": "Config.skuVarPropSet",
                                             "position": 2
+                                        },
+                                        {
+                                            "value": "4",
+                                            "caption": "Config.skuItemID",
+                                            "position": 3
                                         }
                                     ]
                                 }

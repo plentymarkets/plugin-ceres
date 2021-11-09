@@ -132,6 +132,7 @@ var ModalService = __webpack_require__(/*! ../../services/ModalService */ "./res
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "add-item-to-basket-overlay",
   props: {
     defaultTimeToClose: {
       type: Number,
