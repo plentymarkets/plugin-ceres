@@ -51,17 +51,11 @@
         <notifications template="#vue-notifications" :initial-notifications="{{ notifications | json_encode() }}"></notifications>
     </lazy-hydrate>
 
+    <!--# set var="test" value="{{ request.getRequestUri() }}" -->
     {% cacheblock use "pluginConfig" %}
         {% include getPartial('header') %}
+        <!--# echo var="test" -->
     {% endcacheblock %}
-
-    <!--# block name="test" -->
-        Das kommt aus dem Block
-    <!--# endblock -->
-    <hr>
-    <div class="block-injected-content">
-        <!--# include stub="test" -->
-    </div>
 
     <div id="page-body" class="main">
         {% block PageBody %}{% endblock %}
