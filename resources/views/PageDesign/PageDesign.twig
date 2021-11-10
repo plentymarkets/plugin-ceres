@@ -65,6 +65,10 @@
     {% include getPartial('header') %}
 
     <div id="page-body" class="main">
+        <h1>
+            {{ request.all() | json_encode }}
+        </h1>
+
         {% block PageBody %}{% endblock %}
     </div>
 
