@@ -12,6 +12,7 @@ use IO\Services\CategoryService;
 use IO\Services\CheckoutService;
 use IO\Services\NotificationService;
 use IO\Services\TemplateService;
+use Plenty\Modules\ContentCache\CacheBlocks\Repositories\CacheTagRepository;
 use Plenty\Modules\ShopBuilder\Helper\ShopBuilderRequest;
 use Plenty\Modules\Webshop\Contracts\ContactRepositoryContract;
 use Plenty\Modules\Webshop\Contracts\WebstoreConfigurationRepositoryContract;
@@ -156,6 +157,9 @@ class GlobalContext implements ContextInterface
     {
         $this->params = $params;
 
+        /** @var CacheTagRepository $cacheTagRepository */
+        $cacheTagRepository = pluginApp(CacheTagRepository::class);
+
         /** @var CategoryService $categoryService */
         $categoryService = pluginApp(CategoryService::class);
 
@@ -205,12 +209,14 @@ class GlobalContext implements ContextInterface
             $this->categoryBreadcrumbs = $categoryService->getHierarchy(0, false, true);
         }
 
-        $this->categories = $categoryService->getNavigationTree(
-            $this->ceresConfig->header->showCategoryTypes,
-            $this->lang,
-            $this->ceresConfig->header->menuLevels,
-            $contactRepository->getContactClassId()
-        );
+        $this->categories = $cacheTagRepository->watchTwigGlobals('categories', function() use ($categoryService, $contactRepository) {
+            return $categoryService->getNavigationTree(
+                $this->ceresConfig->header->showCategoryTypes,
+                $this->lang,
+                $this->ceresConfig->header->menuLevels,
+                $contactRepository->getContactClassId()
+            );
+        });
 
         $this->notifications = $notificationService->getNotifications();
 

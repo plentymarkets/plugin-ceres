@@ -1,5 +1,6 @@
 {% import "Ceres::Category.Macros.CategoryTree" as Tree %}
 
+{% cacheblock use "pluginConfig" %}
 <ul class="mainmenu p-0 m-0 d-flex">
     {{ Tree.get_nav_bar(
         categories,
@@ -12,3 +13,4 @@
         }
     ) }}
 </ul>
+{% endcacheblock %}
