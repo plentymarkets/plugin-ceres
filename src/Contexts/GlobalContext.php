@@ -209,7 +209,7 @@ class GlobalContext implements ContextInterface
             $this->categoryBreadcrumbs = $categoryService->getHierarchy(0, false, true);
         }
 
-        $this->categories = $cacheTagRepository->watchTwigGlobals('categories', function() use ($categoryService, $contactRepository) {
+        $this->categories = $cacheTagRepository->registerWatchableTwigGlobal('categories', function() use ($categoryService, $contactRepository) {
             return $categoryService->getNavigationTree(
                 $this->ceresConfig->header->showCategoryTypes,
                 $this->lang,
