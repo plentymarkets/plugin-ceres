@@ -1,5 +1,38 @@
 # Release Notes for plentyShop LTS
 
+## v5.0.42 (2021-11-15) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.41...5.0.42" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### ToDo
+
+- Themes and customised CSS have to be checked for obsolete `<span>` elements. We either removed or replaced all `<span>` elements that contained block level elements in order to prevent invalid HTML. Please check whether your selectors use the affected `<span>` elements and, if necessary, adjust your selectors. You can find the affected files in the section **Changed templates** below.
+
+### Changed
+
+- The validity of the date of birth is now checked whenever the address is updated, even if the date of birth input field is not visible.
+- The ShopBuilder presets for **Checkout** and **My account** now use Inline Text widgets instead of Text widgets.
+- The option **Item ID** has been added for the SEO setting for stock keeping units.
+
+### Fixed
+
+- The setting **Show when hovering over shopping cart icon in the hearder** for the shopping cart preview no longer worked as intended. This has been fixed.
+- Opening and closing the mobile navigation is now carried out in one central place, which prevents varying states of the CSS classes that are applied to the displayed navigation.
+- When server-side rendering was active, parts of the Javascript bundle were loaded without the build hash, which could lead to obsolete content being loaded from the browser cache. This has been fixed.
+- Saving the plentyShop assistant no longer invalidates the entire ShopBooster cache. Settings which only affect values of the plugin configuration (preview mode) now only invalidate those pages affected by the setting. 
+- After creating a return, users are no longer redirected to the homepage; instead, they are redirected to the **My account** area or the order confirmation page, depending on their login state.
+- The missing translation for the currency Netherlands Antillean guilder and the corresponding setting ind the plugin configuration have been added.
+- Invalid items were not removed from the shopping cart when a user changed the country of delivery. This has been fixed.
+- `<span>` elements must not contain block level elements. The affected `<span>` elements have either been removed or replaced with `<div>` elements in order to prevent invalid HTML.
+
+### Changed templates
+
+- In Ceres 5.0.42 we made changes to template files which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
+- [resources/views/Customer/Components/AddressSelect/AddressSelect.twig](https://github.com/plentymarkets/plugin-ceres/pull/2880/files#diff-969624803dfeb696a58e16de0d95c285a458ec83a615026882d9b1e65386935b)
+- [resources/views/Checkout/OrderDetails.twig](https://github.com/plentymarkets/plugin-ceres/pull/3086/files#diff-49e9a28ec33181e8fd3720d39345363b8b0614f2bf29ceb66b403ef22c18bd4d)
+- [resources/views/MyAccount/Components/BankDataSelect.twig](https://github.com/plentymarkets/plugin-ceres/pull/3086/files#diff-1f3a9b0d80f77b92422277ac44697c3af03430626f4bbc8afc281c5b66ec0b1f)
+- [resources/views/Widgets/Contact/ContactDetailsWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3086/files#diff-b7d6f7d1aeff7c602684070225c40c435e3de1caed65ca3df51fdd554a994e33)
+- [resources/views/Widgets/OrderConfirmation/OrderDataWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3086/files#diff-82affb09026a21fd94995e057ae7214f6751cf84dfed718216f4760865567c33)
+- [resources/views/Widgets/OrderConfirmation/PurchasedItemsWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3086/files#diff-2cee15b4b8add92d304d2f4cbbb5a5891a5752c533b564f1e1d152982c1e62d0)
+
 ## v5.0.41 (2021-10-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.40...5.0.41" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added
