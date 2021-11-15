@@ -21,7 +21,7 @@
 - After creating a return, users are no longer redirected to the homepage; instead, they are redirected to the **My account** area or the order confirmation page, depending on their login state.
 - The missing translation for the currency Netherlands Antillean guilder and the corresponding setting ind the plugin configuration have been added.
 - Invalid items were not removed from the shopping cart when a user changed the country of delivery. This has been fixed.
-- `<span>` elements must not contain block level elements. The affected `<span>` elements have either been removed or replaced with `<div>` elements in order to prevent invalid HTML.
+- `<span>` elements must not contain block level elements. The affected `<span>` elements have either been removed or replaced with `<div>` elements in order to prevent invalid HTML. We'd like to thank user @MaxBentz for their contribution.
 
 ### Changed templates
 
