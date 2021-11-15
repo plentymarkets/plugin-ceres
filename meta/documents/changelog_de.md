@@ -21,7 +21,7 @@
 - Nach dem Anlegen einer Retoure wird man nun je nach Login-Status auf den **Mein Konto**-Bereich oder auf die Bestellbestätigungsseite weitergeleitet und nicht mehr auf die Startseite.
 - Die fehlende Übersetzung für die Währung Antillen-Gulden und die dazugehörige Einstellung in der Plugin-Konfiguration wurden ergänzt.
 - Beim Lieferlandwechsel wurden ungültig Artikel nicht aus dem Warenkorb entfernt. Dies wurde behoben.
-- `<span>`-Elemente dürfen keine Block-Level Elemente enthalten. Diese `<span>`-Elemente wurden entweder entfernt oder zu `<div>`-Elementen umgewandelt, um invalides HTML zu verhindern.
+- `<span>`-Elemente dürfen keine Block-Level Elemente enthalten. Diese `<span>`-Elemente wurden entweder entfernt oder zu `<div>`-Elementen umgewandelt, um invalides HTML zu verhindern. Wir bedanken uns bei @MaxBentz für den Beitrag.
 
 ### Angepasste Templates
 
