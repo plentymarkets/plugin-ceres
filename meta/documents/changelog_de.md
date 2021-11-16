@@ -1,5 +1,38 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.42 (2021-11-15) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.41...5.0.42" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### ToDo
+
+- Themes und eigenes CSS müssen hinsichtlich `<span>`-Elementen überprüft werden. Wir haben alle `<span>`-Elemente, die Block-Level-Elemente enthielten, entweder entfernt oder in `<div>`-Elemente umgewandelt, um invalides HTML zu verhindern. Überprüfe, ob du in deinen Selektoren auf die betroffenen `<span>`-Elemente zugreifst und passe deine Stilanweisungen gegebenenfalls an. Die betroffenen Dateien findest du im Abschnitt **Angepasste Templates**.
+
+### Geändert
+
+- Beim Aktualisieren der Adresse wird nun geprüft, ob das Geburtsdatum valide ist, auch wenn der Eingabewert nicht sichtbar ist.
+- In den ShopBuilder-Vorlagen für die Bereiche **Checkout** und **Mein Konto** werden nun Inline Text-Widgets anstatt Text-Widgets verwendet.
+- Für die SEO-Einstellung im Bereich SKU wurde die Option **Artikel-ID** hinzugefügt.
+
+### Behoben
+
+- Die Einstellung **Bei Mouse-Over über dem Warenkorbsymbol im Header einblenden** für die Anzeige der Warenkorbvorschau funktionierte nicht wie gewünscht. Dies wurde behoben.
+- Das Öffnen und Schließen der mobilen Navigation passiert nun über eine zentrale Stelle. Dadurch kann es nicht mehr zu unterschiedlichen Ständen der CSS-Klassen kommen, die den Zustand der Navigation darstellen.
+- Chunks des JS-Bundles wurden bei aktivierten Server-side Rendering ohne den Buildhash geladen und wurden daher teilweise veraltet aus dem Browsercache ausgeliefert. Dies wurde behoben.
+- Beim Speichern des plentyShop-Assistenten wird jetzt nicht mehr der gesamte ShopBooster-Cache invalidiert. Bei Einstellungen, die nur Werte aus der Plugin-Konfiguration betreffen (Vorschaumodus), werden nur betroffene Seiten im Cache invalidiert.
+- Nach dem Anlegen einer Retoure wird man nun je nach Login-Status auf den **Mein Konto**-Bereich oder auf die Bestellbestätigungsseite weitergeleitet und nicht mehr auf die Startseite.
+- Die fehlende Übersetzung für die Währung Antillen-Gulden und die dazugehörige Einstellung in der Plugin-Konfiguration wurden ergänzt.
+- Beim Lieferlandwechsel wurden ungültig Artikel nicht aus dem Warenkorb entfernt. Dies wurde behoben.
+- `<span>`-Elemente dürfen keine Block-Level Elemente enthalten. Diese `<span>`-Elemente wurden entweder entfernt oder zu `<div>`-Elementen umgewandelt, um invalides HTML zu verhindern. Wir bedanken uns bei @MaxBentz für den Beitrag.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.42 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- [resources/views/Customer/Components/AddressSelect/AddressSelect.twig](https://github.com/plentymarkets/plugin-ceres/pull/2880/files#diff-969624803dfeb696a58e16de0d95c285a458ec83a615026882d9b1e65386935b)
+- [resources/views/Checkout/OrderDetails.twig](https://github.com/plentymarkets/plugin-ceres/pull/3086/files#diff-49e9a28ec33181e8fd3720d39345363b8b0614f2bf29ceb66b403ef22c18bd4d)
+- [resources/views/MyAccount/Components/BankDataSelect.twig](https://github.com/plentymarkets/plugin-ceres/pull/3086/files#diff-1f3a9b0d80f77b92422277ac44697c3af03430626f4bbc8afc281c5b66ec0b1f)
+- [resources/views/Widgets/Contact/ContactDetailsWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3086/files#diff-b7d6f7d1aeff7c602684070225c40c435e3de1caed65ca3df51fdd554a994e33)
+- [resources/views/Widgets/OrderConfirmation/OrderDataWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3086/files#diff-82affb09026a21fd94995e057ae7214f6751cf84dfed718216f4760865567c33)
+- [resources/views/Widgets/OrderConfirmation/PurchasedItemsWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3086/files#diff-2cee15b4b8add92d304d2f4cbbb5a5891a5752c533b564f1e1d152982c1e62d0)
+
 ## v5.0.41 (2021-10-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.40...5.0.41" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
