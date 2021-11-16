@@ -89,6 +89,10 @@
                 <input :disabled="waiting" ref="fileInput" type="file" size="50" accept="image/*" @change="setPropertyFile($event)" data-testing="order-property-input-file">
             </label>
         </div>
+
+        <div v-if="isTouchDevice && property.names.description">
+            <p>{{ property.names.description }}</p>
+        </div>
     </div>
 </template>
 
@@ -222,6 +226,10 @@ export default {
         variationMarkInvalidProperties() {
             const currentVariation = this.$store.getters[`${this.itemId}/currentItemVariation`];
             return currentVariation && currentVariation.variationMarkInvalidProperties;
+        },
+
+        isTouchDevice() {
+            return document.body.classList.contains(".touch")
         },
 
         ...mapState({

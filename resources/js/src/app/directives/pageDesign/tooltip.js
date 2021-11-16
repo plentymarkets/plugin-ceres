@@ -1,12 +1,19 @@
 import Vue from "vue";
 
+// ignore mobile devices
+const isNoMobileDevice = () =>
+{
+    return window.matchMedia("(min-width: 768px)").matches
+        && !document.body.classList.contains(".touch");
+};
+
 const toggleTooltip = (el, disable) =>
 {
     if (disable)
     {
         $(el).tooltip("disable");
     }
-    else
+    else if (isNoMobileDevice())
     {
         // reinitialize tooltip, to update the title value
         $(el).tooltip("dispose");
@@ -28,7 +35,7 @@ Vue.directive("tooltip", {
 
     bind(el, binding)
     {
-        if (window.matchMedia("(min-width: 768px)").matches)
+        if (isNoMobileDevice())
         {
             setTimeout(() =>
             {
