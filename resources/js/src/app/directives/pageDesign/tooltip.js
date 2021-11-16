@@ -4,7 +4,7 @@ import Vue from "vue";
 const isNoMobileDevice = () =>
 {
     return window.matchMedia("(min-width: 768px)").matches
-        && !document.body.classList.contains(".touch");
+        && !document.body.classList.contains("touch");
 };
 
 const toggleTooltip = (el, disable) =>

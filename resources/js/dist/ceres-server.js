@@ -8065,7 +8065,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       return currentVariation && currentVariation.variationMarkInvalidProperties;
     },
     isTouchDevice: function isTouchDevice() {
-      return document.body.classList.contains(".touch");
+      return !App.isSSR ? document.body.classList.contains("touch") : false;
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_18__["mapState"])({
     isBasketLoading: function isBasketLoading(state) {
@@ -81072,7 +81072,7 @@ __webpack_require__.r(__webpack_exports__);
  // ignore mobile devices
 
 var isNoMobileDevice = function isNoMobileDevice() {
-  return window.matchMedia("(min-width: 768px)").matches && !document.body.classList.contains(".touch");
+  return window.matchMedia("(min-width: 768px)").matches && !document.body.classList.contains("touch");
 };
 
 var toggleTooltip = function toggleTooltip(el, disable) {

@@ -229,7 +229,7 @@ export default {
         },
 
         isTouchDevice() {
-            return document.body.classList.contains(".touch")
+            return !App.isSSR ? document.body.classList.contains("touch"): false;
         },
 
         ...mapState({

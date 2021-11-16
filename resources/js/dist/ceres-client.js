@@ -61785,7 +61785,7 @@ __webpack_require__.r(__webpack_exports__);
  // ignore mobile devices
 
 var isNoMobileDevice = function isNoMobileDevice() {
-  return window.matchMedia("(min-width: 768px)").matches && !document.body.classList.contains(".touch");
+  return window.matchMedia("(min-width: 768px)").matches && !document.body.classList.contains("touch");
 };
 
 var toggleTooltip = function toggleTooltip(el, disable) {
