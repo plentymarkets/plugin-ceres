@@ -49918,7 +49918,7 @@ var render = function() {
           ])
         : _vm._e(),
       _vm._ssrNode(
-        ' <div class="h6 text-wrap mt-n1"' +
+        ' <div class="h6 text-wrap mt-n2"' +
           _vm._ssrStyle(null, null, {
             display:
               _vm.isTouchDevice && _vm.property.names.description ? "" : "none"

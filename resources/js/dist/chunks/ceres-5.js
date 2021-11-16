@@ -1411,7 +1411,7 @@ var render = function() {
             expression: "isTouchDevice && property.names.description"
           }
         ],
-        staticClass: "h6 text-wrap mt-n1"
+        staticClass: "h6 text-wrap mt-n2"
       },
       [_vm._v("\n        " + _vm._s(_vm.property.names.description) + "\n    ")]
     )
