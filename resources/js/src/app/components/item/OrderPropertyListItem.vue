@@ -90,7 +90,7 @@
             </label>
         </div>
 
-        <div v-show="isTouchDevice && property.names.description">
+        <div v-show="isTouchDevice && property.names.description" class="h6 text-wrap mt-n1">
             {{ property.names.description }}
         </div>
     </div>
