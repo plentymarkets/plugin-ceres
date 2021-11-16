@@ -113,6 +113,7 @@
                     {% if itemList is not empty %}
                         <ul class="product-list row grid">
                             {% for item in itemList %}
+                                {% cacheblock %}
                                 <li class="col-12 col-sm-6 col-md-4 col-lg-{% if category is defined and ceresConfig.header.showNavBars in ["side", "both"] %}4{% else %}3{% endif %}">
                                     <category-item
                                         item-data-ref="{{ item.data | json_data }}"
@@ -126,6 +127,7 @@
                                         </a>
                                     </category-item>
                                 </li>
+                                {% endcacheblock %}
                             {% endfor %}
                         </ul>
                     {% endif %}

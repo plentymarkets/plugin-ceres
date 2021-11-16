@@ -5,6 +5,7 @@ namespace Ceres\Contexts;
 use Ceres\Helper\ExternalSearch;
 use Ceres\Helper\SearchOptions;
 use IO\Services\ItemSearchAutocompleteService;
+use Plenty\Modules\ContentCache\CacheBlocks\Contracts\CacheTagRepositoryContract;
 use Plenty\Modules\Webshop\ItemSearch\SearchPresets\Facets;
 use Plenty\Modules\Webshop\ItemSearch\SearchPresets\SearchItems;
 use Plenty\Modules\Webshop\ItemSearch\SearchPresets\VariationList;
@@ -95,6 +96,9 @@ trait ItemListContext
         /** @var ItemSearchService $itemSearchService */
         $itemSearchService = pluginApp(ItemSearchService::class);
 
+        /** @var CacheTagRepositoryContract $cacheTagRepository */
+        $cacheTagRepository = pluginApp(CacheTagRepositoryContract::class);
+
         if (ExternalSearch::hasExternalSearch()) {
             /** @var ExternalSearch $externalSearch */
             $externalSearch = pluginApp(ExternalSearch::class);
@@ -176,7 +180,13 @@ trait ItemListContext
             }
         }
 
-        $searchResults = $itemSearchService->getResults($defaultSearchFactories);
+        $searchResults = $cacheTagRepository->makeTaggable(
+            'itemList',
+            function () use ($itemSearchService, $defaultSearchFactories) {
+                return $itemSearchService->getResults($defaultSearchFactories);
+            },
+            'item'
+        );
 
         //try to get result for the "did you mean?" search if there is no result for the original search string
         if ($scope === SearchOptions::SCOPE_SEARCH && (int)$searchResults['itemList']['total'] === 0) {
