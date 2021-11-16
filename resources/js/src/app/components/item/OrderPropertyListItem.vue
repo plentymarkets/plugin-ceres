@@ -90,8 +90,8 @@
             </label>
         </div>
 
-        <div v-if="isTouchDevice && property.names.description">
-            <p>{{ property.names.description }}</p>
+        <div v-show="isTouchDevice && property.names.description">
+            {{ property.names.description }}
         </div>
     </div>
 </template>
