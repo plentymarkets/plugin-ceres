@@ -37,7 +37,7 @@
                         <!-- MODAL HEADER -->
                         <div class="modal-header">
                             <div class="modal-title h4">{{ $translate("Ceres::Template.couponEdit") }}</div>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="closeEditModal()">
+                            <button type="button" class="close" data-dismiss="modal" :aria-label="$translate('Ceres::Template.closeIcon')" @click="closeEditModal()">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -105,7 +105,7 @@
                                     class="btn btn-danger"
                                     :disabled="isLoading"
                                     data-dismiss="modal"
-                                    aria-label="Close"
+                                    :aria-label="$translate('Ceres::Template.closeIcon')"
                                     @click="closeEditModal()">
                                 <span>{{ $translate("Ceres::Template.couponCancel") }}</span>
                                 <i class="fa fa-times default-float" aria-hidden="true"></i> 
@@ -134,7 +134,7 @@
                     <!-- MODAL HEADER -->
                     <div class="modal-header">
                         <div class="modal-title h4">{{ $translate("Ceres::Template.couponFinalize") }}</div>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="closeConfirmModal()">
+                        <button type="button" class="close" data-dismiss="modal" :aria-label="$translate('Ceres::Template.closeIcon')" @click="closeConfirmModal()">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -152,7 +152,7 @@
                                 class="btn btn-danger"
                                 :disabled="isFinalizing"
                                 data-dismiss="modal"
-                                aria-label="Close"
+                                :aria-label="$translate('Ceres::Template.closeIcon')"
                                 @click="closeConfirmModal()">
                             <span>{{ $translate("Ceres::Template.couponFinalizeConfirmNo") }}</span>
                             <i class="fa fa-times default-float" aria-hidden="true"></i> 

@@ -5,7 +5,7 @@
 
                 <header class="basket-preview-header border-bottom p-3">
                     <span class="h3 mb-0">{{ $translate("Ceres::Template.basketPreview") }}</span>
-                    <button v-toggle-basket-preview type="button" class="close" aria-label="Close">
+                    <button v-toggle-basket-preview type="button" class="close" :aria-label="$translate('Ceres::Template.closeIcon')">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </header>
