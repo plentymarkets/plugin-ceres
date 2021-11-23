@@ -65,7 +65,7 @@
     {% include getPartial('header') %}
 
     <div id="page-body" class="main">
-        {% cacheblock %}
+        {% cacheblock use "pluginConfig" %}
             Hackathon 2021
         {% endcacheblock %}
 
