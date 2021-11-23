@@ -38,7 +38,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="modal-title h3">{{ $translate("Ceres::Template.loginOrderAsGuest") }}</div>
-                        <button type="button" class="close" data-testing="guest-login-modal" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <button type="button" class="close" data-testing="guest-login-modal" data-dismiss="modal" aria-hidden="true" :aria-label="$translate('Ceres::Template.closeIcon')">&times;</button>
                     </div>
                     <div class="modal-body">
                         <guest-login :backlink="sanitizedBacklink" :initial-email="guestEmail"></guest-login>
