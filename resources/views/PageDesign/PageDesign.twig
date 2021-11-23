@@ -65,11 +65,6 @@
     {% include getPartial('header') %}
 
     <div id="page-body" class="main">
-
-        {% cacheblock use "pluginConfig" %}
-            Test Cache Block
-        {% endcacheblock %}
-
         {% block PageBody %}{% endblock %}
     </div>
 
