@@ -65,6 +65,9 @@
     {% include getPartial('header') %}
 
     <div id="page-body" class="main">
+        {% cacheblock %}
+            Hackathon 2021
+        {% endcacheblock %}
         {% block PageBody %}{% endblock %}
     </div>
 
