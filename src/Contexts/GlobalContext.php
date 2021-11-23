@@ -247,9 +247,13 @@ class GlobalContext implements ContextInterface
             $templateClass = "page-singleitem";
         }
         
-        /** @var ItemListService $itemListService */
-        $itemListService = pluginApp(ItemListService::class);
-        $itemList = $itemListService->getItemList(ItemListService::TYPE_CATEGORY, 16, null, 4);
+        /** @var CacheTagRepositoryContract $cacheTagRepository */
+        $cacheTagRepository = pluginApp(CacheTagRepositoryContract::class);
+        $itemList = $cacheTagRepository->makeTaggable('itemList', function() {
+            /** @var ItemListService $itemListService */
+            $itemListService = pluginApp(ItemListService::class);
+            return $itemListService->getItemList(ItemListService::TYPE_CATEGORY, 16, null, 4);
+        });
         $this->itemList = $itemList;
         
         $this->bodyClasses[] = $templateClass;
