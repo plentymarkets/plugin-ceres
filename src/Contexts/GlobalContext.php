@@ -150,6 +150,8 @@ class GlobalContext implements ContextInterface
      * @var string $assetName Key for the assets to be loaded.
      */
     public $assetName = "ceres-checkout";
+    
+    public $itemList = [];
 
     /**
      * @inheritDoc
@@ -244,7 +246,12 @@ class GlobalContext implements ContextInterface
         if ($templateClass === "page-item") {
             $templateClass = "page-singleitem";
         }
-
+        
+        /** @var ItemListService $itemListService */
+        $itemListService = pluginApp(ItemListService::class);
+        $itemList = $itemListService->getItemList(ItemListService::TYPE_CATEGORY, 16, null, 4);
+        $this->itemList = $itemList;
+        
         $this->bodyClasses[] = $templateClass;
 
         $this->buildHash = BuildHash::get();
