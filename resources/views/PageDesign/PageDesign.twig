@@ -65,11 +65,9 @@
     {% include getPartial('header') %}
 
     <div id="page-body" class="main">
-        {% cacheblock %}
-            <h1>
-                Test Bla
-            </h1>
-            {{ "now" | date("Y-m-d H:i:s") }}
+
+        {% cacheblock use "pluginConfig" %}
+            Test Cache Block
         {% endcacheblock %}
 
         {% block PageBody %}{% endblock %}

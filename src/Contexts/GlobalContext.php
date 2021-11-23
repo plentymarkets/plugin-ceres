@@ -10,8 +10,10 @@ use IO\Helper\Utils;
 use IO\Services\BasketService;
 use IO\Services\CategoryService;
 use IO\Services\CheckoutService;
+use IO\Services\ItemListService;
 use IO\Services\NotificationService;
 use IO\Services\TemplateService;
+use Plenty\Modules\ContentCache\CacheBlocks\Contracts\CacheTagRepositoryContract;
 use Plenty\Modules\ShopBuilder\Helper\ShopBuilderRequest;
 use Plenty\Modules\Webshop\Contracts\ContactRepositoryContract;
 use Plenty\Modules\Webshop\Contracts\WebstoreConfigurationRepositoryContract;
@@ -187,6 +189,7 @@ class GlobalContext implements ContextInterface
         $app = pluginApp(Application::class);
 
         $this->ceresConfig = pluginApp(CeresConfig::class);
+        
         $this->webstoreConfig = $webstoreConfigurationRepository->getWebstoreConfiguration();
 
         $this->request = pluginApp(Request::class);
