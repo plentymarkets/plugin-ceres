@@ -3,12 +3,21 @@
 
 <script type="x/template" id="vue-order-history-list">
     <div class="order-history-list">
-        <div class="row mt-3 mb-2" v-if="orderList.totalsCount > ordersPerPage">
+        <div class="row mt-3 mb-2" v-if="orderList.totalsCount > ordersPerPage || orderId !== null">
             <div class="col-sm-12">
                 <div class="float-left counter">
                     {{ trans("Ceres::Template.orderHistoryShow", {"countStart": "${ orderList.firstOnPage }", "countEnd": "${ orderList.lastOnPage }", "orderMaxCount": "${ orderList.totalsCount }" }) }}
                 </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="input-unit mt-3">
+                    <label :for="'order-id-input-id_' + _uid">{{ trans("Ceres::Template.orderHistoryOrderId") }}</label>
+                    <input type="text" :id="'order-id-input-id_' + _uid" v-model="orderId">
+                </div>
+                <button class="btn btn-primary btn-appearance btn-large btn-only-icon-xs-down" type="button" @click="searchOrderId()"><span>Suchen</span><i aria-hidden="true" class="fa fa-search"></i></button>
+                <button class="input-unit-btn btn btn-secondary btn-appearance btn-large btn-only-icon-xs-down" type="button" @click="setPage(1)"><span>Zurücksetzen</span><i aria-hidden="true" class="fa fa-undo"></i></button>
                 {% include "Ceres::PageDesign.Partials.PaginationTemplate" with { 'page': 'orderList.page', 'pageMax': 'orderList.lastPageNumber', 'setPage': 'setPage' } %}
+
             </div>
         </div>
 

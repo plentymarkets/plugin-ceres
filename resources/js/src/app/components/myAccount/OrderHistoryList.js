@@ -47,6 +47,7 @@ export default Vue.component("order-history-list", {
         return {
             waiting: false,
             orderList: {},
+            orderId: null,
             page: 1
         };
     },
@@ -65,12 +66,34 @@ export default Vue.component("order-history-list", {
 
     methods:
     {
+        searchOrderId(id)
+        {
+            if (!this.waiting)
+            {
+                this.waiting = true;
+                this.orderList.page = 1;
+
+                ApiService.get("/rest/io/customer/order/list", { page: 1, items: 1, orderId: this.orderId })
+                    .done(response =>
+                    {
+                        this.waiting = false;
+                        this.orderList = response;
+                    })
+                    .fail(response =>
+                    {
+                        this.waiting = false;
+                        NotificationService.error(
+                            TranslationService.translate("Ceres::Template.returnHistoryOops")
+                        );
+                    });
+            }
+        },
         setPage(page = 1)
         {
             if (!this.waiting)
             {
                 this.waiting = true;
-
+                this.orderId = "";
                 const lastPage = this.orderList.page;
 
                 this.orderList.page = page;
