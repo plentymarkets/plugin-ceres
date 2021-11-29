@@ -5,7 +5,7 @@
             :class="'alert alert-dismissible fade in show alert-' + notification.context"
             role="alert"
         >
-            <button type="button" class="close" aria-label="Close" @click="notification.close()">
+            <button type="button" class="close" :aria-label="$translate('Ceres::Template.closeIcon')" @click="notification.close()">
                 <span aria-hidden="true">&times;</span>
             </button>
 
