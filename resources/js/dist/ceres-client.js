@@ -39862,7 +39862,10 @@ var render = function() {
             "button",
             {
               staticClass: "close",
-              attrs: { type: "button", "aria-label": "Close" },
+              attrs: {
+                type: "button",
+                "aria-label": _vm.$translate("Ceres::Template.closeIcon")
+              },
               on: {
                 click: function($event) {
                   return notification.close()

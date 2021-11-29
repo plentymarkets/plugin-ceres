@@ -46131,7 +46131,9 @@ var render = function() {
                         attrs: {
                           type: "button",
                           "data-dismiss": "modal",
-                          "aria-label": "Close"
+                          "aria-label": _vm.$translate(
+                            "Ceres::Template.closeIcon"
+                          )
                         },
                         on: {
                           click: function($event) {
@@ -46354,7 +46356,9 @@ var render = function() {
                           type: "button",
                           disabled: _vm.isLoading,
                           "data-dismiss": "modal",
-                          "aria-label": "Close"
+                          "aria-label": _vm.$translate(
+                            "Ceres::Template.closeIcon"
+                          )
                         },
                         on: {
                           click: function($event) {
@@ -46453,7 +46457,7 @@ var render = function() {
                     attrs: {
                       type: "button",
                       "data-dismiss": "modal",
-                      "aria-label": "Close"
+                      "aria-label": _vm.$translate("Ceres::Template.closeIcon")
                     },
                     on: {
                       click: function($event) {
@@ -46488,7 +46492,7 @@ var render = function() {
                       type: "button",
                       disabled: _vm.isFinalizing,
                       "data-dismiss": "modal",
-                      "aria-label": "Close"
+                      "aria-label": _vm.$translate("Ceres::Template.closeIcon")
                     },
                     on: {
                       click: function($event) {
@@ -47060,7 +47064,10 @@ var render = function() {
             "button",
             {
               staticClass: "close",
-              attrs: { type: "button", "aria-label": "Close" },
+              attrs: {
+                type: "button",
+                "aria-label": _vm.$translate("Ceres::Template.closeIcon")
+              },
               on: {
                 click: function($event) {
                   return notification.close()
