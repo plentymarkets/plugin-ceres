@@ -127,8 +127,8 @@ class ItemGridWidget extends BaseWidget
             return null;
         }
 
-        if ($maxItems > 0) {
-            $searchFactory->setPage(1, $maxItems);
+        if ($itemListOptions['itemsPerPage'] > 0) {
+            $searchFactory->setPage(1, $itemListOptions['itemsPerPage']);
         }
 
         $itemListResult = $searchService->getResult($searchFactory);
