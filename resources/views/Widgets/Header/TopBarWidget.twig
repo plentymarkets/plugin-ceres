@@ -23,6 +23,9 @@
 {{ Twig.set("defaultLanguage", "webstoreConfig.defaultLanguage" ) }}
 {{ Twig.set("overrideSearchBar", Twig.call("LayoutContainer.show", ["Ceres::Search.SearchBar"])) }}
 
+{{ Twig.set("visibleFields", Twig.call("config", ["Ceres.basket.preview_data"])) }}	
+{{ Twig.set("visibleFields", "visibleFields | split(\', \')") }}	
+
 <div class="top-bar header-fw{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if not isFixed %} unfixed{% endif %}">
     <div class="container-max px-0 pr-lg-3">
         <div class="row mx-0 flex-row-reverse position-relative">
@@ -181,7 +184,7 @@
                                     {% endif %}
                                 </a>
 
-                                <basket-preview v-if="$store.state.lazyComponent.components['basket-preview']" :show-net-prices="{{ Twig.print("showNetPrices | json_encode") }}">
+                                <basket-preview v-if="$store.state.lazyComponent.components['basket-preview']" :show-net-prices="{{ Twig.print("showNetPrices | json_encode") }}" :visible-fields="{{ Twig.print("visibleFields | json_encode") }}">                                    <template #before-basket-item>
                                     <template #before-basket-item>
                                         {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketList.BeforeItem"])) }}
                                     </template>
