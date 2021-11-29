@@ -40627,7 +40627,12 @@ var render = function() {
                     _vm._ssrEscape(
                       _vm._s(_vm.$translate("Ceres::Template.singleItemAdded"))
                     ) +
-                    '</div> <span class="text-muted ml-auto"><span class="timer"></span>s</span> <button type="button" data-dismiss="modal" aria-label="Close" class="close ml-0 pl-1"><span aria-hidden="true">×</span></button></div> '
+                    '</div> <span class="text-muted ml-auto"><span class="timer"></span>s</span> <button type="button" data-dismiss="modal"' +
+                    _vm._ssrAttr(
+                      "aria-label",
+                      _vm.$translate("Ceres::Template.closeIcon")
+                    ) +
+                    ' class="close ml-0 pl-1"><span aria-hidden="true">×</span></button></div> '
                 ),
                 _vm._ssrNode('<div class="modal-body">', "</div>", [
                   _vm._ssrNode(
@@ -41214,7 +41219,10 @@ var render = function() {
                       }
                     ],
                     staticClass: "close",
-                    attrs: { type: "button", "aria-label": "Close" }
+                    attrs: {
+                      type: "button",
+                      "aria-label": _vm.$translate("Ceres::Template.closeIcon")
+                    }
                   },
                   [_vm._ssrNode('<span aria-hidden="true">×</span>')]
                 )
@@ -48248,7 +48256,12 @@ var render = function() {
                         _vm.$translate("Ceres::Template.loginForgotPassword")
                       )
                     ) +
-                    '</div> <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button></div> <div class="modal-body"><div class="alert alert-info w-100 pwd-forgot-info"><span class="info-badge">' +
+                    '</div> <button type="button" data-dismiss="modal" aria-hidden="true"' +
+                    _vm._ssrAttr(
+                      "aria-label",
+                      _vm.$translate("Ceres::Template.closeIcon")
+                    ) +
+                    ' class="close">×</button></div> <div class="modal-body"><div class="alert alert-info w-100 pwd-forgot-info"><span class="info-badge">' +
                     _vm._ssrEscape(
                       _vm._s(
                         _vm.$translate(
@@ -48656,7 +48669,12 @@ var render = function() {
                         _vm.$translate("Ceres::Template.loginOrderAsGuest")
                       )
                     ) +
-                    '</div> <button type="button" data-testing="guest-login-modal" data-dismiss="modal" aria-hidden="true" class="close">×</button></div> '
+                    '</div> <button type="button" data-testing="guest-login-modal" data-dismiss="modal" aria-hidden="true"' +
+                    _vm._ssrAttr(
+                      "aria-label",
+                      _vm.$translate("Ceres::Template.closeIcon")
+                    ) +
+                    ' class="close">×</button></div> '
                 ),
                 _vm._ssrNode(
                   '<div class="modal-body">',
@@ -53731,7 +53749,12 @@ var render = function() {
                     _vm._ssrEscape(
                       _vm._s(_vm.$translate("Ceres::Template.returnSendBack"))
                     ) +
-                    '</h3> <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button></div> <div class="modal-body"><ul>' +
+                    '</h3> <button type="button" data-dismiss="modal" aria-hidden="true"' +
+                    _vm._ssrAttr(
+                      "aria-label",
+                      _vm.$translate("Ceres::Template.closeIcon")
+                    ) +
+                    ' class="close">×</button></div> <div class="modal-body"><ul>' +
                     _vm._ssrList(_vm.orderReturnItems, function(
                       orderReturnItem
                     ) {
@@ -54740,7 +54763,12 @@ var render = function() {
             null,
             "alert alert-dismissible fade in show alert-" + notification.context
           ) +
-          '><button type="button" aria-label="Close" class="close"><span aria-hidden="true">×</span></button> ' +
+          '><button type="button"' +
+          _vm._ssrAttr(
+            "aria-label",
+            _vm.$translate("Ceres::Template.closeIcon")
+          ) +
+          ' class="close"><span aria-hidden="true">×</span></button> ' +
           (_vm.showErrorCode
             ? "<strong>" +
               _vm._ssrEscape(_vm._s(notification.code)) +
