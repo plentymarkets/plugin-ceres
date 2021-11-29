@@ -1357,7 +1357,7 @@
                 "basket.preview_data": {
                     "type": "multiCheckBox",
                     "required": false,
-                    "deprecated": true,
+                    "deprecated": false,
                     "label": "Config.basketPreviewDataLabel",
                     "options": {
                         "defaultValue": "basket.value_of_items_gross, basket.shipping_costs_gross, basket.order_total_gross",

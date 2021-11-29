@@ -37,7 +37,7 @@
 
                         <slot name="before-basket-totals"></slot>
 
-                        <basket-totals>
+                        <basket-totals :visible-fields="visibleFields">
                             <template #before-item-sum>
                                 <slot name="before-item-sum"></slot>
                             </template>
@@ -100,6 +100,10 @@ export default {
         {
             type: Boolean,
             default: false
+        },
+        visibleFields:
+        {
+            type: Array
         }
     },
 
