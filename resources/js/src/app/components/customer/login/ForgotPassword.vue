@@ -5,7 +5,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<div class="modal-title h3">{{ $translate("Ceres::Template.loginForgotPassword") }}</div>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true" :aria-label="$translate('Ceres::Template.closeIcon')">&times;</button>
 					</div>
 					<div class="modal-body">
 						<div class="alert alert-info w-100 pwd-forgot-info">
