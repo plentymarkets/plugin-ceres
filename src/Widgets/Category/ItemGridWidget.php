@@ -101,8 +101,8 @@ class ItemGridWidget extends BaseWidget
 
         $itemListOptions = [];
         $itemListOptions = SearchOptions::validateItemListOptions($itemListOptions, SearchOptions::SCOPE_CATEGORY);
-        // limit the maximum of items to 50, to prevent memory exhaustion errors
-        $itemListOptions['itemsPerPage'] = min(50, $itemListOptions['itemsPerPage']);
+        // limit the maximum of items to 8, to prevent memory exhaustion errors
+        $itemListOptions['itemsPerPage'] = min(8, $itemListOptions['itemsPerPage']);
 
         $itemList        = $itemListService->getItemList(
             ItemListService::TYPE_RANDOM,
