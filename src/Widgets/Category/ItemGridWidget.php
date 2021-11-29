@@ -9,6 +9,13 @@ use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
 use IO\Services\ItemListService;
+use IO\Services\ItemSearch\Factories\VariationSearchResultFactory;
+use Plenty\Modules\Webshop\ItemSearch\Services\ItemSearchService;
+use Plenty\Modules\ShopBuilder\Helper\ShopBuilderRequest;
+use Plenty\Modules\Webshop\ItemSearch\SearchPresets\VariationList;
+
+
+
 
 class ItemGridWidget extends BaseWidget
 {
@@ -104,15 +111,42 @@ class ItemGridWidget extends BaseWidget
         // limit the maximum of items to 8, to prevent memory exhaustion errors
         $itemListOptions['itemsPerPage'] = min(8, $itemListOptions['itemsPerPage']);
 
-        $itemList        = $itemListService->getItemList(
-            ItemListService::TYPE_RANDOM,
-            null,
-            $itemListOptions['sorting'],
-            $itemListOptions['itemsPerPage']
+        /** @var ItemSearchService $searchService */
+        $searchService = pluginApp(ItemSearchService::class);
+        $searchFactory = null;
+
+        $searchFactory = VariationList::getSearchFactory(
+            [
+                'sorting' => $itemListOptions['sorting'],
+                'itemsPerPage' => $itemListOptions['itemsPerPage'],
+                'withoutAdditionalResultFields' => true
+            ]
         );
 
+        if (is_null($searchFactory)) {
+            return null;
+        }
+
+        if ($maxItems > 0) {
+            $searchFactory->setPage(1, $maxItems);
+        }
+
+        $itemListResult = $searchService->getResult($searchFactory);
+
+        /** @var ShopBuilderRequest $shopBuilderRequest */
+        $shopBuilderRequest = pluginApp(ShopBuilderRequest::class);
+
+        if ($shopBuilderRequest->isShopBuilder()) {
+            /** @var VariationSearchResultFactory $searchResultFactory */
+            $searchResultFactory = pluginApp(VariationSearchResultFactory::class);
+            $itemListResult = $searchResultFactory->fillSearchResults(
+                $itemListResult,
+                null
+            );
+        }
+  
         return [
-            'itemList' => $itemList['documents']
+            'itemList' => $itemListResult['documents']
         ];
     }
 }
