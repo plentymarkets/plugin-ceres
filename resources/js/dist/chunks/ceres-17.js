@@ -136,24 +136,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -191,7 +173,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.$translate("Ceres::Template.cookieBarHintText", links);
     }
   },
-  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_6__["mapMutations"])(["storeConsents", "acceptAll", "denyAll"])), {}, {
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_6__["mapMutations"])(["storeConsents", "acceptAll"])), {}, {
     close: function close() {
       this.isCollapsed = true;
       this.isExpanded = false;
@@ -377,53 +359,7 @@ var render = function() {
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-block btn-appearance",
-                      attrs: { "data-testing": "cookie-bar-save" },
-                      on: {
-                        click: function($event) {
-                          _vm.storeConsents()
-                          _vm.close()
-                        }
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.cookieBarSave")
-                          ) +
-                          "\n                "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-block btn-appearance",
-                      attrs: { "data-testing": "cookie-bar-deny-all" },
-                      on: {
-                        click: function($event) {
-                          _vm.denyAll()
-                          _vm.close()
-                        }
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.cookieBarDenyAll")
-                          ) +
-                          "\n                "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-block btn-appearance",
+                      staticClass: "btn btn-primary btn-block btn-appearance",
                       attrs: { "data-testing": "cookie-bar-accept-all" },
                       on: {
                         click: function($event) {
@@ -437,6 +373,29 @@ var render = function() {
                         "\n                    " +
                           _vm._s(
                             _vm.$translate("Ceres::Template.cookieBarAcceptAll")
+                          ) +
+                          "\n                "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-default btn-block",
+                      attrs: { "data-testing": "cookie-bar-save" },
+                      on: {
+                        click: function($event) {
+                          _vm.storeConsents()
+                          _vm.close()
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.cookieBarSave")
                           ) +
                           "\n                "
                       )
@@ -466,7 +425,7 @@ var render = function() {
                       1
                     ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-12 col-md-3" }, [
+                    _c("div", { staticClass: "col-12 col-md-6" }, [
                       _c(
                         "a",
                         {
@@ -496,104 +455,59 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-12 col-md-9" }, [
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-12 col-md-4" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-block btn-appearance",
-                              attrs: {
-                                "data-testing": "cookie-bar-expanded-save"
-                              },
-                              on: {
-                                click: function($event) {
-                                  _vm.storeConsents()
-                                  _vm.close()
-                                }
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(
-                                    _vm.$translate(
-                                      "Ceres::Template.cookieBarSave"
-                                    )
-                                  ) +
-                                  "\n                        "
-                              )
-                            ]
+                    _c("div", { staticClass: "col-6 col-md-3" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "btn btn-block btn-primary btn-appearance",
+                          attrs: {
+                            "data-testing": "cookie-bar-expanded-accept-all"
+                          },
+                          on: {
+                            click: function($event) {
+                              _vm.acceptAll()
+                              _vm.close()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.cookieBarAcceptAll"
+                                )
+                              ) +
+                              "\n                "
                           )
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "col-12 col-md-4 mt-2 mt-md-0" },
-                          [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-block btn-appearance",
-                                attrs: {
-                                  "data-testing": "cookie-bar-expanded-deny-all"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    _vm.denyAll()
-                                    _vm.close()
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                            " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.cookieBarDenyAll"
-                                      )
-                                    ) +
-                                    "\n                        "
-                                )
-                              ]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "col-12 col-md-4 mt-2 mt-md-0" },
-                          [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-block btn-appearance",
-                                attrs: {
-                                  "data-testing":
-                                    "cookie-bar-expanded-accept-all"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    _vm.acceptAll()
-                                    _vm.close()
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                            " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.cookieBarAcceptAll"
-                                      )
-                                    ) +
-                                    "\n                        "
-                                )
-                              ]
-                            )
-                          ]
-                        )
-                      ])
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-6 col-md-3" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-block btn-block btn-default",
+                          attrs: { "data-testing": "cookie-bar-expanded-save" },
+                          on: {
+                            click: function($event) {
+                              _vm.storeConsents()
+                              _vm.close()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(
+                                _vm.$translate("Ceres::Template.cookieBarSave")
+                              ) +
+                              "\n                "
+                          )
+                        ]
+                      )
                     ])
                   ]
                 )
