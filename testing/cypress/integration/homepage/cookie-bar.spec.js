@@ -92,6 +92,36 @@ context("Cookiebar", () =>
         });
     });
 
+    it("Should deny all consent on deny all", () =>
+    {
+        cy.location("pathname").should("eq", "/");
+        cy.getByTestingAttr("cookie-bar-expanded-deny-all").click();
+
+        let allConsent = false;
+
+        // iterate over the constent store module to check if everything is consented
+        cy.getStore().then(store =>
+        {
+            for (const constent in store.state.consents.consents)
+            {
+                for (const key in store.state.consents.consents[constent])
+                {
+                    if (!store.state.consents.consents[constent][key])
+                    {
+                        allConsent = false;
+                        return;
+                    }
+                    allConsent = true;
+                }
+                if (!allConsent)
+                {
+                    return;
+                }
+            }
+            expect(allConsent).to.be.false;
+        });
+    });
+
     it("Should display toggles for the optional cookies", () =>
     {
         cy.location("pathname").should("eq", "/");
