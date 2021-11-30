@@ -54,6 +54,12 @@
                         data-testing="cookie-bar-save">
                         {{ $translate("Ceres::Template.cookieBarSave") }}
                     </button>
+                    <button
+                        class="btn btn-default btn-block"
+                        @click="denyAll(); close()"
+                        data-testing="cookie-bar-save">
+                        {{ $translate("Ceres::Template.cookieBarDenyAll") }}
+                    </button>
                 </div>
 
             </div>
@@ -149,7 +155,8 @@ export default {
     {
         ...mapMutations([
             "storeConsents",
-            "acceptAll"
+            "acceptAll",
+            "denyAll"
         ]),
 
         close()

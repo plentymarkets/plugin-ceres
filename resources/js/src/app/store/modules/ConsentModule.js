@@ -67,6 +67,26 @@ const mutations =
                 window.ConsentManager.setResponse(state.consents);
                 state.hasResponse = true;
             }
+        },
+        denyAll(state)
+        {
+            Object.keys((state.consents || {})).forEach((groupKey) =>
+            {
+                if (typeof state.consents[groupKey] === "object")
+                {
+                    Object.keys(state.consents[groupKey]).forEach((consentKey) =>
+                    {
+                        state.consents[groupKey] = state.consents[groupKey] || {};
+                        state.consents[groupKey][consentKey] = false;
+                    });
+                }
+            });
+
+            if (window.ConsentManager)
+            {
+                window.ConsentManager.setResponse(state.consents);
+                state.hasResponse = true;
+            }
         }
     };
 
