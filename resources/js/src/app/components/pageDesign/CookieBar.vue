@@ -43,22 +43,22 @@
                 </div>
                 <div class="col-12 col-md-4 pt-3 pt-md-0">
                     <button
-                        class="btn btn-primary btn-block btn-appearance"
-                        @click="acceptAll(); close()"
-                        data-testing="cookie-bar-accept-all">
-                        {{ $translate("Ceres::Template.cookieBarAcceptAll") }}
-                    </button>
-                    <button
-                        class="btn btn-default btn-block"
+                        class="btn btn-block btn-appearance"
                         @click="storeConsents(); close()"
                         data-testing="cookie-bar-save">
                         {{ $translate("Ceres::Template.cookieBarSave") }}
                     </button>
                     <button
-                        class="btn btn-default btn-block"
+                        class="btn btn-block btn-appearance"
                         @click="denyAll(); close()"
-                        data-testing="cookie-bar-save">
+                        data-testing="cookie-bar-deny-all">
                         {{ $translate("Ceres::Template.cookieBarDenyAll") }}
+                    </button>
+                    <button
+                        class="btn btn-block btn-appearance"
+                        @click="acceptAll(); close()"
+                        data-testing="cookie-bar-accept-all">
+                        {{ $translate("Ceres::Template.cookieBarAcceptAll") }}
                     </button>
                 </div>
 
