@@ -59,6 +59,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -94,6 +95,10 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       }
 
       return currentVariation && currentVariation.variation && currentVariation.variation.id;
+    },
+    tooltipText: function tooltipText() {
+      var tooltipText = this.$translate("Ceres::Template." + (this.isVariationInWishList ? "singleItemWishListRemove" : "singleItemWishListAdd"));
+      return tooltipText;
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_11__["mapState"])({
     wishListIds: function wishListIds(state) {
@@ -135,15 +140,6 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
           _this2.isLoading = false;
         });
       }
-    },
-    changeTooltipText: function changeTooltipText() {
-      var tooltipText = this.$translate("Ceres::Template." + (this.isVariationInWishList ? "singleItemWishListRemove" : "singleItemWishListAdd"));
-      $(".add-to-wish-list").attr("data-original-title", tooltipText).tooltip("hide").tooltip("setContent");
-    }
-  },
-  watch: {
-    isVariationInWishList: function isVariationInWishList() {
-      this.changeTooltipText();
     }
   }
 });
@@ -168,9 +164,14 @@ var render = function() {
   return _c(
     "a",
     {
+      directives: [{ name: "tooltip", rawName: "v-tooltip" }],
       ref: "addToWishList",
       staticClass: "btn btn-link btn-sm text-muted",
-      attrs: { "data-toggle": "tooltip", "data-placement": "top", title: "" },
+      attrs: {
+        "data-toggle": "tooltip",
+        "data-placement": "top",
+        title: _vm.tooltipText
+      },
       on: {
         click: function($event) {
           $event.preventDefault()
