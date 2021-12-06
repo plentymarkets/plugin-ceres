@@ -72,8 +72,14 @@
                                 <template v-if="item.item.itemType === 'set'">
                                     {{ $translate("Ceres::Template.itemSetPrice", { price: itemSetPrice }) }} *
                                 </template>
-                                 <template v-else-if="!!item.item && item.item.salableVariationCount > 1 && $ceres.isCheapestSorting" >
-                                     {{ $translate("Ceres::Template.categoryItemFromPrice", { price: itemPrice }) }} *
+                                <template v-else-if="!!item.item && item.item.salableVariationCount > 1 && $ceres.isCheapestSorting" >
+                                     {{ $translate("Ceres::Template.categoryItemFromPrice", { price: itemPriceGraduated }) }} *
+                                </template>
+                                <template v-else-if="!!item.item && item.item.salableVariationCount > 1" >
+                                  {{ $translate("Ceres::Template.categoryItemFromPrice", { price: itemPrice }) }} *
+                                </template>
+                                <template v-else-if="!!item.item && item.item.salableVariationCount == 1 && item.prices.graduatedPrices.length > 1">
+                                  {{ $translate("Ceres::Template.categoryItemFromPrice", { price: itemPriceGraduated }) }} *
                                 </template>
                                 <template v-else>
                                     {{ item.prices.default.unitPrice.formatted | specialOffer(item.prices, "unitPrice", "formatted") }} *
@@ -87,7 +93,7 @@
                     <div class="category-unit-price small" v-if="!(item.unit.unitOfMeasurement === 'C62' && item.unit.content === 1)">
                         <span>{{ item.unit.content }}</span>
                         <span>&nbsp;{{ item.unit.names.name }}</span>
-                        <span v-if="item.variation.mayShowUnitPrice">&nbsp;| {{ item.prices.default.basePrice }}</span>
+                        <span v-if="item.variation.mayShowUnitPrice">&nbsp;| {{ item.prices.graduatedPrices[0].basePrice }}</span>
                     </div>
 
                     <add-to-basket
@@ -197,6 +203,11 @@ export default {
         itemPrice()
         {
             return this.$options.filters.specialOffer(this.item.prices.default.unitPrice.formatted, this.item.prices, "unitPrice", "formatted" );
+        },
+
+        itemPriceGraduated()
+        {
+          return this.$options.filters.specialOffer(this.item.prices.graduatedPrices[0].unitPrice.formatted, this.item.prices, "unitPrice", "formatted" );
         },
 
         itemSetPrice()
