@@ -137,8 +137,11 @@
     }
 
     .order-property-selection-info-popper {
+        top: 0;
+        right: 0;
+
         .btn {
-            margin: 5px;
+            margin: 4px;
         }
     }
 }
@@ -264,9 +267,15 @@
             }
         }
 
-        .form-check {
-            padding-left: 1.35rem;
-        }
+  
+    }
+
+    .form-check {
+        margin-bottom: 15px;
+    }
+
+    .checkbox-or-radio {
+        top: -45%;
     }
 
     .order-property-slider-controls {
