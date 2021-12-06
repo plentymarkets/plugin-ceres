@@ -241,6 +241,10 @@ export default {
             return currentVariation && currentVariation.variationMarkInvalidProperties;
         },
 
+        isTouchDevice() {
+            return !App.isSSR ? document.body.classList.contains("touch"): false;
+        },
+
         ...mapState({
             isBasketLoading: state => state.basket.isBasketLoading,
         })
