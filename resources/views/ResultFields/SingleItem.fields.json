@@ -53,6 +53,7 @@
     "properties.property.isShownAtCheckout",
     "properties.property.isShownOnItemList",
     "properties.property.isShownOnItemPage",
+    "properties.property.isShownAsAdditionalCosts",
     "properties.property.names.description",
     "properties.property.names.lang",
     "properties.property.names.name",

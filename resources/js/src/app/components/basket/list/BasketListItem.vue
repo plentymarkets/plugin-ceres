@@ -106,9 +106,14 @@
 
                 <basket-set-component-list v-if="basketItem.setComponents" :set-components="basketItem.setComponents" :set-item="basketItem"></basket-set-component-list>
 
-                <div class="small" v-if="basketItem.basketItemOrderParams && basketItem.basketItemOrderParams.length">
-                    <div class="font-weight-bold my-1">{{ $translate("Ceres::Template.basketAdditionalOptions") }}:</div>
+                <div class="small" v-if="(basketItem.basketItemOrderParams && basketItem.basketItemOrderParams.length) || (basketItem.variation.data.properties && basketItem.variation.data.properties.length)">
+                    <div class="font-weight-bold my-1">{{ $translate("Ceres::Template.basketAdditionalCosts") }}:</div>
                     <ul class="ml-1 pl-3">
+                      <li v-for="property in basketItem.variation.data.properties" :key="property.propertyId" v-show="isPropertyWithAdditionalCostsVisible(property.propertyId)">
+                            <span class="d-block">
+                              <strong>{{ property.property.names.name }} <template v-if="$options.filters.propertySurcharge(basketItem.variation.data.properties, property.propertyId) > 0">({{ $translate("Ceres::Template.basketPlusAbbr") }} {{ basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency }})</template></strong>
+                            </span>
+                      </li>
                         <li v-for="property in basketItem.basketItemOrderParams" :key="property.propertyId" v-show="isPropertyVisible(property.propertyId)">
                             <span class="d-block">
                               <strong :class="{ 'colon': property.type.length > 0 }">{{ property.name }} <template v-if="$options.filters.propertySurcharge(basketItem.variation.data.properties, property.propertyId) > 0">({{ $translate("Ceres::Template.basketIncludeAbbr") }} {{ basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency }})</template></strong>
@@ -374,7 +379,6 @@ export default {
                     });
             }
         },
-
         isPropertyVisible(propertyId)
         {
             const property = this.basketItem.variation.data.properties.find(property => property.property.id === parseInt(propertyId));
@@ -385,6 +389,17 @@ export default {
             }
 
             return false;
+        },
+        isPropertyWithAdditionalCostsVisible(propertyId)
+        {
+          const property = this.basketItem.variation.data.properties.find(property => property.property.id === parseInt(propertyId));
+
+          if (property)
+          {
+            return property.property.isShownAtCheckout && property.property.isShownAsAdditionalCosts && !property.property.isOderProperty;
+          }
+
+          return false;
         },
 
         isDataFieldVisible(value)
