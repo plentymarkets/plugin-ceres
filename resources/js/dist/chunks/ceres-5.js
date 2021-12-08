@@ -967,6 +967,7 @@ var render = function() {
     _vm.isShownOnItemPageCount
       ? _c(
           "div",
+          { staticClass: "pt-2" },
           [
             _vm.propertyGroup.group
               ? _c(

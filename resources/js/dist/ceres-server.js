@@ -49569,7 +49569,7 @@ var render = function() {
   return _c("div", [
     _vm.isShownOnItemPageCount
       ? _vm._ssrNode(
-          "<div>",
+          '<div class="pt-2">',
           "</div>",
           [
             _vm._ssrNode(
