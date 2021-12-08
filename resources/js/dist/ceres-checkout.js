@@ -46131,7 +46131,9 @@ var render = function() {
                         attrs: {
                           type: "button",
                           "data-dismiss": "modal",
-                          "aria-label": "Close"
+                          "aria-label": _vm.$translate(
+                            "Ceres::Template.closeIcon"
+                          )
                         },
                         on: {
                           click: function($event) {
@@ -46354,7 +46356,9 @@ var render = function() {
                           type: "button",
                           disabled: _vm.isLoading,
                           "data-dismiss": "modal",
-                          "aria-label": "Close"
+                          "aria-label": _vm.$translate(
+                            "Ceres::Template.closeIcon"
+                          )
                         },
                         on: {
                           click: function($event) {
@@ -46453,7 +46457,7 @@ var render = function() {
                     attrs: {
                       type: "button",
                       "data-dismiss": "modal",
-                      "aria-label": "Close"
+                      "aria-label": _vm.$translate("Ceres::Template.closeIcon")
                     },
                     on: {
                       click: function($event) {
@@ -46488,7 +46492,7 @@ var render = function() {
                       type: "button",
                       disabled: _vm.isFinalizing,
                       "data-dismiss": "modal",
-                      "aria-label": "Close"
+                      "aria-label": _vm.$translate("Ceres::Template.closeIcon")
                     },
                     on: {
                       click: function($event) {
@@ -47060,7 +47064,10 @@ var render = function() {
             "button",
             {
               staticClass: "close",
-              attrs: { type: "button", "aria-label": "Close" },
+              attrs: {
+                type: "button",
+                "aria-label": _vm.$translate("Ceres::Template.closeIcon")
+              },
               on: {
                 click: function($event) {
                   return notification.close()
@@ -68800,31 +68807,41 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
     validate: function validate() {
       var _this = this;
 
-      _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__["default"].validate(this.$refs.addressForm).done(function () {
-        _this.saveAddress();
-      }).fail(function (invalidFields) {
-        var fieldNames = [];
+      if (!this.validateBirthday(this.addressData)) {
+        this.emitInputEvent({
+          field: "birthday",
+          value: null
+        });
+        NotificationService.warn(_services_TranslationService__WEBPACK_IMPORTED_MODULE_16__["default"].translate("Ceres::Template.checkoutAddressNoValidBirthdate"));
+      }
 
-        var _iterator = _createForOfIteratorHelper(invalidFields),
-            _step;
+      vue__WEBPACK_IMPORTED_MODULE_17___default.a.nextTick(function () {
+        _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__["default"].validate(_this.$refs.addressForm).done(function () {
+          _this.saveAddress();
+        }).fail(function (invalidFields) {
+          var fieldNames = [];
 
-        try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
-            var field = _step.value;
-            var fieldName = field.lastElementChild.innerHTML.trim();
-            fieldName = fieldName.slice(-1) === "*" ? fieldName.slice(0, fieldName.length - 1) : fieldName;
-            fieldNames.push(fieldName);
+          var _iterator = _createForOfIteratorHelper(invalidFields),
+              _step;
+
+          try {
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
+              var field = _step.value;
+              var fieldName = field.lastElementChild.innerHTML.trim();
+              fieldName = fieldName.slice(-1) === "*" ? fieldName.slice(0, fieldName.length - 1) : fieldName;
+              fieldNames.push(fieldName);
+            }
+          } catch (err) {
+            _iterator.e(err);
+          } finally {
+            _iterator.f();
           }
-        } catch (err) {
-          _iterator.e(err);
-        } finally {
-          _iterator.f();
-        }
 
-        _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__["default"].markInvalidFields(invalidFields, "error");
-        NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_16__["default"].translate("Ceres::Template.checkoutCheckAddressFormFields", {
-          fields: fieldNames.join(", ")
-        }));
+          _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__["default"].markInvalidFields(invalidFields, "error");
+          NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_16__["default"].translate("Ceres::Template.checkoutCheckAddressFormFields", {
+            fields: fieldNames.join(", ")
+          }));
+        });
       });
     },
 
@@ -68865,6 +68882,31 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
           _this2._handleError(error.error);
         }
       });
+    },
+
+    /**
+     * returs true, if a birthdate is displayable in an input of type date
+     */
+    validateBirthday: function validateBirthday(address) {
+      var birthdayInput = this.$refs.addressForm.querySelector("input[type=date][id*='txtBirthdate']");
+
+      if (address.birthday) {
+        // input for birthday is not active
+        if (!birthdayInput) {
+          var input = document.createElement("input");
+          input.type = "date";
+          input.value = address.birthday;
+
+          if (input.value !== address.birthday) {
+            return false;
+          }
+        } // the input's value doesn't match the addresses value
+        else if (birthdayInput.value !== address.birthday) {
+            return false;
+          }
+      }
+
+      return true;
     },
 
     /**
@@ -72574,7 +72616,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var exceptionMap = new Map([["0", "errorActionIsNotExecuted"], ["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["11", "notificationsNoEmailEntered"], ["12", "notificationsWarningOverselling"], ["13", "consentReCaptchaCookieNotSet"], ["14", "notificationsBasketItemsRemovedForCurrency"], ["110", "errorBasketItemVariationNotFound"], ["111", "errorBasketItemNotEnoughStockForVariation"], ["112", "errorBasketItemMaximumQuantityReachedForItem"], ["113", "errorBasketItemMaximumQuantityReachedForVariation"], ["114", "errorBasketItemMinimumQuantityNotReachedForVariation"], ["115", "errorCreateOrderRetryTimeNotReached"], ["210", "errorVatService"], ["211", "errorVatNumberValidation"], ["212", "errorVatServiceFallback"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["302", "couponNoMatchingItemInBasket"], ["401", "notificationsCalculateShippingFailed"], ["501", "couponPromotionRequired"], ["502", "errorGiftCardReturnQuantity"], ["1018", "couponMinOrderValueNotReached"], ["1051", "couponnotUsableForSpecialOffer"], ["1070", "couponAlreadyUsedOrInvalidCouponCode"], ["1078", "couponCampaignExpired"], ["1126", "couponNoMatchingItemInBasket"], ["1329", "couponOnlySubscription"], ["1330", "couponOnlySingleUsage"], ["1331", "couponNoOpenAmount"], ["1332", "couponExpired"], ["1334", "couponOnlyForNewCustomers"], ["1335", "couponOnlyForExistingCustomers"], ["1336", "couponWrongCustomerGroup"], ["1337", "couponWrongCustomerType"], ["1338", "couponNoCustomerTypeProvided"], ["1339", "couponNoCustomerTypeActivated"], ["1340", "couponNoCustomerGroupActivated"], ["1341", "couponCampaignNoWebstoreActivated"], ["1342", "couponCampaignWrongWebstoreId"], ["1343", "couponCampaignNoWebstoreIdGiven"]]);
+var exceptionMap = new Map([["0", "errorActionIsNotExecuted"], ["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["11", "notificationsNoEmailEntered"], ["12", "notificationsWarningOverselling"], ["13", "consentReCaptchaCookieNotSet"], ["14", "notificationsBasketItemsRemovedForCurrency"], ["15", "notificationsBasketItemsRemovedForShippingCountry"], ["110", "errorBasketItemVariationNotFound"], ["111", "errorBasketItemNotEnoughStockForVariation"], ["112", "errorBasketItemMaximumQuantityReachedForItem"], ["113", "errorBasketItemMaximumQuantityReachedForVariation"], ["114", "errorBasketItemMinimumQuantityNotReachedForVariation"], ["115", "errorCreateOrderRetryTimeNotReached"], ["210", "errorVatService"], ["211", "errorVatNumberValidation"], ["212", "errorVatServiceFallback"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["302", "couponNoMatchingItemInBasket"], ["401", "notificationsCalculateShippingFailed"], ["501", "couponPromotionRequired"], ["502", "errorGiftCardReturnQuantity"], ["1018", "couponMinOrderValueNotReached"], ["1051", "couponnotUsableForSpecialOffer"], ["1070", "couponAlreadyUsedOrInvalidCouponCode"], ["1078", "couponCampaignExpired"], ["1126", "couponNoMatchingItemInBasket"], ["1329", "couponOnlySubscription"], ["1330", "couponOnlySingleUsage"], ["1331", "couponNoOpenAmount"], ["1332", "couponExpired"], ["1334", "couponOnlyForNewCustomers"], ["1335", "couponOnlyForExistingCustomers"], ["1336", "couponWrongCustomerGroup"], ["1337", "couponWrongCustomerType"], ["1338", "couponNoCustomerTypeProvided"], ["1339", "couponNoCustomerTypeActivated"], ["1340", "couponNoCustomerGroupActivated"], ["1341", "couponCampaignNoWebstoreActivated"], ["1342", "couponCampaignWrongWebstoreId"], ["1343", "couponCampaignNoWebstoreIdGiven"]]);
 /* harmony default export */ __webpack_exports__["default"] = (exceptionMap);
 
 /***/ }),
@@ -79443,6 +79485,22 @@ function _setConsent(state, _ref) {
   }
 }
 
+function setStateForConsents(state, changeTo) {
+  Object.keys(state.consents || {}).forEach(function (groupKey) {
+    if (_typeof(state.consents[groupKey]) === "object") {
+      Object.keys(state.consents[groupKey]).forEach(function (consentKey) {
+        state.consents[groupKey] = state.consents[groupKey] || {};
+        state.consents[groupKey][consentKey] = changeTo;
+      });
+    }
+  });
+
+  if (window.ConsentManager) {
+    window.ConsentManager.setResponse(state.consents);
+    state.hasResponse = true;
+  }
+}
+
 var state = function state() {
   return {
     consents: {},
@@ -79464,19 +79522,10 @@ var mutations = {
     });
   },
   acceptAll: function acceptAll(state) {
-    Object.keys(state.consents || {}).forEach(function (groupKey) {
-      if (_typeof(state.consents[groupKey]) === "object") {
-        Object.keys(state.consents[groupKey]).forEach(function (consentKey) {
-          state.consents[groupKey] = state.consents[groupKey] || {};
-          state.consents[groupKey][consentKey] = true;
-        });
-      }
-    });
-
-    if (window.ConsentManager) {
-      window.ConsentManager.setResponse(state.consents);
-      state.hasResponse = true;
-    }
+    setStateForConsents(state, true);
+  },
+  denyAll: function denyAll(state) {
+    setStateForConsents(state, false);
   },
   initConsents: function initConsents(state) {
     if (window.ConsentManager) {

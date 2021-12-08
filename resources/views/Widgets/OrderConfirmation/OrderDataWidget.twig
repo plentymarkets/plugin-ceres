@@ -81,28 +81,26 @@
 
         <div class="row" {{ Twig.print('set_testing_attr("data-testing", "order-confirmation-invoice-address")') }}>
             <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationInvoiceAddress") }}</strong>
-            <span class="col-6 col-sm-7">
+            <div class="col-6 col-sm-7">
                 <address-header
                     :address="{{ Twig.print("data.order.billingAddress | json_encode") }}"
                     :address-fields="{{ addressFields | json_encode }}"></address-header>
-            </span>
+            </div>
         </div>
 
         <div class="row mt-3" {{ Twig.print('set_testing_attr("data-testing", "order-confirmation-shipping-address")') }}>
             <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationShippingAddress") }}</strong>
-            <span class="col-6 col-sm-7">
+            <div class="col-6 col-sm-7">
                 {{ Twig.if("data.order.billingAddress.id == data.order.deliveryAddress.id") }}
                     <span>
                         {{ Twig.trans("Ceres::Template.orderConfirmationSameAsInvoice") }}
                     </span>
                 {{ Twig.else() }}
-                    <span>
-                        <address-header
-                            :address="{{ Twig.print("data.order.deliveryAddress | json_encode") }}"
-                            :address-fields="{{ addressFields | json_encode }}"></address-header>
-                    </span>
+                    <address-header
+                        :address="{{ Twig.print("data.order.deliveryAddress | json_encode") }}"
+                        :address-fields="{{ addressFields | json_encode }}"></address-header>
                 {{ Twig.endif() }}
-            </span>
+            </div>
         </div>
 
         <hr>

@@ -44,6 +44,17 @@
 
 {{ LayoutContainer.show("Ceres::PageDesign.AfterOpeningBodyTag") }}
 
+<script>
+    if('ontouchstart' in document.documentElement)
+    {
+        document.body.classList.add("touch");
+    }
+    else
+    {
+        document.body.classList.add("no-touch");
+    }
+</script>
+
 <!-- SSR:app() -->
 <div id="vue-app" class="app">
     {{ context.renderState() }}
@@ -57,8 +68,10 @@
         {% block PageBody %}{% endblock %}
     </div>
 
-    {% include getPartial('footer') %}
-    {% block PartialFooter %}{% endblock %}
+    {% cacheblock %}
+        {% include getPartial('footer') %}
+        {% block PartialFooter %}{% endblock %}
+    {% endcacheblock %}
 
     <!-- LOGIN MODAL -->
     <div id="login-modal-wrapper">
@@ -67,7 +80,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="modal-title h3">{{ trans("Ceres::Template.login") }}</div>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="{{ trans("Ceres::Template.closeIcon") }}">&times;</button>
                     </div>
                     <lazy-load component="login-modal">
                         <login modal-element="login-modal-wrapper">
@@ -113,7 +126,7 @@
                                 </template>
                             </popper>
 
-                            <button type="button" class="close ml-0" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <button type="button" class="close ml-0" data-dismiss="modal" aria-hidden="true" aria-label="{{ trans("Ceres::Template.closeIcon") }}">&times;</button>
                         </div>
                         <div class="modal-body">
                             <registration :is-simple-registration="true" modal-element="simple-registration-modal-wrapper">
@@ -160,7 +173,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <div class="modal-title h3">{{ trans('Ceres::Template.shippingInfoCosts') }}</div>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="{{ trans("Ceres::Template.closeIcon") }}">&times;</button>
                         </div>
                         <div class="modal-body">
                             {% set shopBuilderShippingTemplate = shop_builder_category_template(ceresConfig.global.shippingCostsCategoryId) %}

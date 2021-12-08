@@ -12032,8 +12032,11 @@ html.crios {
     }
 
     .order-property-selection-info-popper {
+        top: 0;
+        right: 0;
+
         .btn {
-            margin: 5px;
+            margin: 4px;
         }
     }
 }
@@ -12158,10 +12161,14 @@ html.crios {
                 visibility: visible;
             }
         }
+    }
 
-        .form-check {
-            padding-left: 1.35rem;
-        }
+    .form-check {
+        margin-bottom: 15px;
+    }
+
+    .checkbox-or-radio {
+        top: -45%;
     }
 
     .order-property-slider-controls {
@@ -15420,7 +15427,7 @@ html.ie .confirmation-order-list .cmp-order-item {
                 -ms-flex-align: center;
                     align-items: center;
             width: 100%;
-            height: 5rem;
+            min-height: 5rem;
             padding: .5em;
             margin-bottom: 0;
             overflow: hidden;

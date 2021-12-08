@@ -196,7 +196,8 @@ var render = function() {
                     attrs: {
                       type: "button",
                       "data-dismiss": "modal",
-                      "aria-hidden": "true"
+                      "aria-hidden": "true",
+                      "aria-label": _vm.$translate("Ceres::Template.closeIcon")
                     }
                   },
                   [_vm._v("×")]
