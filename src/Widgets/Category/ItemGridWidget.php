@@ -10,11 +10,10 @@ use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
 use IO\Services\ItemListService;
 use IO\Services\ItemSearch\Factories\VariationSearchResultFactory;
+use Plenty\Modules\Webshop\ItemSearch\Helpers\ResultFieldTemplate;
 use Plenty\Modules\Webshop\ItemSearch\Services\ItemSearchService;
 use Plenty\Modules\ShopBuilder\Helper\ShopBuilderRequest;
 use Plenty\Modules\Webshop\ItemSearch\SearchPresets\VariationList;
-
-
 
 
 class ItemGridWidget extends BaseWidget
@@ -28,15 +27,21 @@ class ItemGridWidget extends BaseWidget
     public function getData()
     {
         return WidgetDataFactory::make('Ceres::ItemGridWidget')
-                                ->withLabel('Widget.itemGridLabel')
-                                ->withPreviewImageUrl('/images/widgets/item-grid.svg')
-                                ->withType(WidgetTypes::CATEGORY_ITEM)
-                                ->withCategory(WidgetTypes::CATEGORY_ITEM)
-                                ->withPosition(400)
-                                ->withSearchKeyWords([
-                                    "item", "artikel", "article", "produkt", "ansicht", "category", "kategorie"
-                                ])
-                                ->toArray();
+            ->withLabel('Widget.itemGridLabel')
+            ->withPreviewImageUrl('/images/widgets/item-grid.svg')
+            ->withType(WidgetTypes::CATEGORY_ITEM)
+            ->withCategory(WidgetTypes::CATEGORY_ITEM)
+            ->withPosition(400)
+            ->withSearchKeyWords([
+                                     "item",
+                                     "artikel",
+                                     "article",
+                                     "produkt",
+                                     "ansicht",
+                                     "category",
+                                     "kategorie"
+                                 ])
+            ->toArray();
     }
 
     /**
@@ -50,44 +55,44 @@ class ItemGridWidget extends BaseWidget
         $settings->createCustomClass();
 
         $settings->createAppearance()
-                 ->withDefaultValue('primary');
+            ->withDefaultValue('primary');
 
         $settings->createSelect('numberOfColumnsDesktop')
-                 ->withDefaultValue(4)
-                 ->withName('Widget.itemGridNumberOfColumnsDesktopLabel')
-                 ->withTooltip('Widget.itemGridNumberOfColumnsDesktopTooltip')
-                 ->withListBoxValues(
-                     ValueListFactory::make()
-                                     ->addEntry(1, 'Widget.widgetNum1')
-                                     ->addEntry(2, 'Widget.widgetNum2')
-                                     ->addEntry(3, 'Widget.widgetNum3')
-                                     ->addEntry(4, 'Widget.widgetNum4')
-                                     ->toArray()
-                 );
+            ->withDefaultValue(4)
+            ->withName('Widget.itemGridNumberOfColumnsDesktopLabel')
+            ->withTooltip('Widget.itemGridNumberOfColumnsDesktopTooltip')
+            ->withListBoxValues(
+                ValueListFactory::make()
+                    ->addEntry(1, 'Widget.widgetNum1')
+                    ->addEntry(2, 'Widget.widgetNum2')
+                    ->addEntry(3, 'Widget.widgetNum3')
+                    ->addEntry(4, 'Widget.widgetNum4')
+                    ->toArray()
+            );
 
         $settings->createSelect('numberOfColumnsTablet')
-                 ->withDefaultValue(3)
-                 ->withName('Widget.itemGridNumberOfColumnsTabletLabel')
-                 ->withTooltip('Widget.itemGridNumberOfColumnsTabletTooltip')
-                 ->withListBoxValues(
-                     ValueListFactory::make()
-                                     ->addEntry(1, 'Widget.widgetNum1')
-                                     ->addEntry(2, 'Widget.widgetNum2')
-                                     ->addEntry(3, 'Widget.widgetNum3')
-                                     ->addEntry(4, 'Widget.widgetNum4')
-                                     ->toArray()
-                 );
+            ->withDefaultValue(3)
+            ->withName('Widget.itemGridNumberOfColumnsTabletLabel')
+            ->withTooltip('Widget.itemGridNumberOfColumnsTabletTooltip')
+            ->withListBoxValues(
+                ValueListFactory::make()
+                    ->addEntry(1, 'Widget.widgetNum1')
+                    ->addEntry(2, 'Widget.widgetNum2')
+                    ->addEntry(3, 'Widget.widgetNum3')
+                    ->addEntry(4, 'Widget.widgetNum4')
+                    ->toArray()
+            );
 
         $settings->createSelect('numberOfColumnsMobile')
-                 ->withDefaultValue(1)
-                 ->withName('Widget.itemGridNumberOfColumnsMobileLabel')
-                 ->withTooltip('Widget.itemGridNumberOfColumnsMobileTooltip')
-                 ->withListBoxValues(
-                     ValueListFactory::make()
-                                     ->addEntry(1, 'Widget.widgetNum1')
-                                     ->addEntry(2, 'Widget.widgetNum2')
-                                     ->toArray()
-                 );
+            ->withDefaultValue(1)
+            ->withName('Widget.itemGridNumberOfColumnsMobileLabel')
+            ->withTooltip('Widget.itemGridNumberOfColumnsMobileTooltip')
+            ->withListBoxValues(
+                ValueListFactory::make()
+                    ->addEntry(1, 'Widget.widgetNum1')
+                    ->addEntry(2, 'Widget.widgetNum2')
+                    ->toArray()
+            );
 
         $settings->createSpacing();
 
@@ -123,6 +128,8 @@ class ItemGridWidget extends BaseWidget
             ]
         );
 
+        $searchFactory->withResultFields(ResultFieldTemplate::get(ResultFieldTemplate::TEMPLATE_LIST_ITEM));
+
         if (is_null($searchFactory)) {
             return null;
         }
@@ -141,10 +148,10 @@ class ItemGridWidget extends BaseWidget
             $searchResultFactory = pluginApp(VariationSearchResultFactory::class);
             $itemListResult = $searchResultFactory->fillSearchResults(
                 $itemListResult,
-                null
+                ResultFieldTemplate::get(ResultFieldTemplate::TEMPLATE_LIST_ITEM)
             );
         }
-  
+
         return [
             'itemList' => $itemListResult['documents']
         ];
