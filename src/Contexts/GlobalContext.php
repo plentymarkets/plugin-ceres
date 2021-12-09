@@ -212,7 +212,7 @@ class GlobalContext implements ContextInterface
         $this->categories = $cacheTagRepository->makeTaggable(
             'categories',
             function() use ($categoryService, $contactRepository) {
-                $categoryService->getNavigationTree(
+                return $categoryService->getNavigationTree(
                     $this->ceresConfig->header->showCategoryTypes,
                     $this->lang,
                     $this->ceresConfig->header->menuLevels,
