@@ -53320,6 +53320,7 @@ var render = function() {
               "</div></div>"
             : '<div class="thumb-content"><div><div class="prices"><div class="price-view-port">' +
               (_vm.displaySettings.showCrossPrice &&
+              _vm.prices.rrp &&
               _vm.prices.rrp.price.value > 0
                 ? '<del class="crossprice">' +
                   _vm._ssrEscape(
