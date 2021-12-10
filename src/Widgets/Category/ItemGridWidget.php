@@ -104,13 +104,6 @@ class ItemGridWidget extends BaseWidget
      */
     protected function getPreviewData($widgetSettings)
     {
-        //TODO load data from context when its possible
-
-        /**
-         * @var ItemListService $itemListService
-         */
-        $itemListService = pluginApp(ItemListService::class);
-
         $itemListOptions = [];
         $itemListOptions = SearchOptions::validateItemListOptions($itemListOptions, SearchOptions::SCOPE_CATEGORY);
         // limit the maximum of items to 8, to prevent memory exhaustion errors
