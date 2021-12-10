@@ -12,6 +12,7 @@ use IO\Services\CategoryService;
 use IO\Services\CheckoutService;
 use IO\Services\NotificationService;
 use IO\Services\TemplateService;
+use Plenty\Modules\ContentCache\CacheBlocks\Contracts\CacheTagRepositoryContract;
 use Plenty\Modules\ShopBuilder\Helper\ShopBuilderRequest;
 use Plenty\Modules\Webshop\Contracts\ContactRepositoryContract;
 use Plenty\Modules\Webshop\Contracts\WebstoreConfigurationRepositoryContract;
@@ -185,7 +186,10 @@ class GlobalContext implements ContextInterface
 
         /** @var Application $app */
         $app = pluginApp(Application::class);
-
+    
+        /** @var CacheTagRepositoryContract $cacheTagRepository */
+        $cacheTagRepository = pluginApp(CacheTagRepositoryContract::class);
+        
         $this->ceresConfig = pluginApp(CeresConfig::class);
         $this->webstoreConfig = $webstoreConfigurationRepository->getWebstoreConfiguration();
 
@@ -204,12 +208,17 @@ class GlobalContext implements ContextInterface
         if (!is_null($categoryService->getCurrentCategory())) {
             $this->categoryBreadcrumbs = $categoryService->getHierarchy(0, false, true);
         }
-
-        $this->categories = $categoryService->getNavigationTree(
-            $this->ceresConfig->header->showCategoryTypes,
-            $this->lang,
-            $this->ceresConfig->header->menuLevels,
-            $contactRepository->getContactClassId()
+    
+        $this->categories = $cacheTagRepository->makeTaggable(
+            'categories',
+            function() use ($categoryService, $contactRepository) {
+                return $categoryService->getNavigationTree(
+                    $this->ceresConfig->header->showCategoryTypes,
+                    $this->lang,
+                    $this->ceresConfig->header->menuLevels,
+                    $contactRepository->getContactClassId()
+                );
+            }
         );
 
         $this->notifications = $notificationService->getNotifications();
