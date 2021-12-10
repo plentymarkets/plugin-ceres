@@ -3,4 +3,6 @@
 {% set lang = services.localizationRepository.getLanguage() %}
 {% set categoryBreadcrumbs = services.category.getHierarchy() %}
 
-{{ Tree.get_sidemenu(categoryBreadcrumbs, categories, "", spacingPadding, inlinePadding, showItemCount, expandableChildren, customEntries) }}
+{% cacheblock use "pluginConfig" %}
+    {{ Tree.get_sidemenu(categoryBreadcrumbs, categories, "", spacingPadding, inlinePadding, showItemCount, expandableChildren, customEntries) }}
+{% endcacheblock %}
