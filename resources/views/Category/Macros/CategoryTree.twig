@@ -130,16 +130,17 @@
         {% endfor %}
 
         <ul>
-            <li class="nav-item{% if isCategoryActive %} active{% if category.children | length > 0 %} is-open{% endif %}{% endif %}">
+            <li class="nav-item">
                 {% if category.childCount > 0 and expandableChildren %}
                     <div v-sidenavigation-children="{
                             categoryId: {{ category.id }},
                             currentUrl: {{ currentUrl | json_encode }},
-                            isActive: {{ (isCategoryActive and category.children | length > 0) | json_encode }},
+                            isActive: false,
                             showItemCount: {{ showItemCount | json_encode }},
                             childCount: {{ category.childCount }},
                             spacingPadding: {{ spacingPadding | json_encode }},
-                            inlinePadding: {{ inlinePadding | json_encode }} }"
+                            inlinePadding: {{ inlinePadding | json_encode }},
+                            breadcrumbs: {{ breadcrumbs | json_encode }} }"
                          class="expand-nav{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                          {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
                         <i class="fa fa-caret-right" aria-hidden="true"></i>

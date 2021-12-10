@@ -72280,7 +72280,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 var SidenavigationChildrenLoader = /*#__PURE__*/function () {
-  function SidenavigationChildrenLoader(element, categoryId, currentUrl, isActive, showItemCount, childCount, openClassName, spacingPadding, inlinePadding) {
+  function SidenavigationChildrenLoader(element, categoryId, currentUrl, isActive, showItemCount, childCount, openClassName, spacingPadding, inlinePadding, breadcrumbs) {
     var _this = this;
 
     _classCallCheck(this, SidenavigationChildrenLoader);
@@ -72293,6 +72293,7 @@ var SidenavigationChildrenLoader = /*#__PURE__*/function () {
     this.openClassName = openClassName || "is-open";
     this.spacingPadding = spacingPadding || "";
     this.inlinePadding = inlinePadding || "";
+    this.breadcrumbs = breadcrumbs || {};
     this.template = "";
     this.placeholders = [];
 
@@ -72456,13 +72457,24 @@ var SidenavigationChildrenLoader = /*#__PURE__*/function () {
 vue__WEBPACK_IMPORTED_MODULE_16___default.a.directive("sidenavigation-children", {
   bind: function bind(el, binding) {
     var categoryId = binding.value.categoryId;
-    var currentUrl = binding.value.currentUrl;
-    var isActive = binding.value.isActive;
+    var currentUrl = binding.value.currentUrl; // const isActive   = binding.value.isActive;
+
+    var isActive = false;
+    var breadcrumbs = binding.value.breadcrumbs;
     var showItemCount = binding.value.showItemCount;
     var childCount = binding.value.childCount;
     var openClassName = binding.value.openClassName;
     var spacingPadding = binding.value.spacingPadding;
     var inlinePadding = binding.value.inlinePadding;
+
+    for (var breadcrumbIndex in breadcrumbs) {
+      var breadcrumb = breadcrumbs[breadcrumbIndex];
+
+      if (categoryId == breadcrumb.id) {
+        isActive = true;
+      }
+    }
+
     var sidenavigationChildrenLoader = new SidenavigationChildrenLoader(el, categoryId, currentUrl, isActive, showItemCount, childCount, openClassName, spacingPadding, inlinePadding);
     el.addEventListener("click", function () {
       sidenavigationChildrenLoader.toggle();
