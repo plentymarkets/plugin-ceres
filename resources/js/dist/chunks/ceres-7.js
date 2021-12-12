@@ -1098,6 +1098,7 @@ var render = function() {
               _c("div", { staticClass: "prices" }, [
                 _c("div", { staticClass: "price-view-port" }, [
                   _vm.displaySettings.showCrossPrice &&
+                  _vm.prices.rrp &&
                   _vm.prices.rrp.price.value > 0
                     ? _c("del", { staticClass: "crossprice" }, [
                         _vm._v(

@@ -88,7 +88,7 @@
             <div>
                 <div class="prices">
                     <div class="price-view-port">
-                        <del class="crossprice" v-if="displaySettings.showCrossPrice && prices.rrp.price.value > 0">
+                        <del class="crossprice" v-if="displaySettings.showCrossPrice && prices.rrp && prices.rrp.price.value > 0">
                             {{ prices.rrp.price.formatted | itemCrossPrice  }}
                         </del>
                     </div>
