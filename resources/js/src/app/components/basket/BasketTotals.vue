@@ -28,7 +28,7 @@
                 <!-- Basket value (gross) -->
 
                 <!-- Rebate -->
-                <template v-if="visibleFields.includes('rebate') && basket.basketRebate">
+                <template v-if="(visibleFields.includes('rebate') || visibleFields.includes('basket.rebate')) && basket.basketRebate">
                     <dt class="rebate-hint">
                         {{ $translate("Ceres::Template.basketRebate") }}
                     </dt><!--
@@ -83,7 +83,7 @@
                 <slot name="after-shipping-costs"></slot>
 
                 <!-- Coupon -->
-                <template v-if="visibleFields.includes('promotionCoupon') && basket.couponCode && basket.couponCampaignType === 'promotion'">
+                <template v-if="(visibleFields.includes('promotionCoupon') || visibleFields.includes('basket.promotion_coupon')) && basket.couponCode && basket.couponCampaignType === 'promotion'">
                     <dt class="font-weight-bold">
                         {{ $translate("Ceres::Template.basketCoupon") }}
                     </dt><!--
@@ -110,14 +110,14 @@
                 <slot name="before-vat"></slot>
 
                 <!-- VAT -->
-                <div v-if="visibleFields.includes('vats') || visibleFields.includes('basket.vat')" class="vatTotals" v-for="totalVat in basket.totalVats">
+                <template v-if="visibleFields.includes('vats') || visibleFields.includes('basket.vat')" class="vatTotals" v-for="totalVat in basket.totalVats">
                     <dt>
                         {{ $translate("Ceres::Template.basketVAT") }} {{ totalVat.vatValue }}%
                     </dt><!--
                     --><dd data-testing="vat-amount">
                         {{ totalVat.vatAmount | currency }}
                     </dd>
-                </div>
+                </template>
                 <!-- VAT -->
 
                 <slot name="after-vat"></slot>
@@ -125,7 +125,7 @@
                 <div class="totalSum">
                     <hr>
                     <!-- AdditionalCosts -->
-                    <template v-if="visibleFields.includes('additionalCosts') && propertiesWithAdditionalCosts.length">
+                    <template v-if="(visibleFields.includes('additionalCosts') || visibleFields.includes('basket.additional_costs')) && propertiesWithAdditionalCosts.length">
                         <template v-for="property in propertiesWithAdditionalCosts">
                             <dt class="font-weight-bold" :key="'property-name-' + property.propertyId">
                                 {{ property.name }}
@@ -149,7 +149,7 @@
                     <!-- Total sum (gross) -->
 
                     <!-- Coupon -->
-                    <template v-if="visibleFields.includes('salesCoupon') && basket.couponCode && basket.couponCampaignType === 'sales'">
+                    <template v-if="(visibleFields.includes('salesCoupon') || visibleFields.includes('basket.sales_coupon')) && basket.couponCode && basket.couponCampaignType === 'sales'">
                         <dt class="font-weight-bold">
                             {{ $translate("Ceres::Template.basketCoupon") }}
                         </dt><!--
@@ -160,7 +160,7 @@
                     <!-- Coupon -->
 
                     <!-- Coupon open amount -->
-                    <template v-if="visibleFields.includes('openAmount') && basket.couponCampaignType === 'sales'">
+                    <template v-if="(visibleFields.includes('openAmount') || visibleFields.includes('basket.open_amount')) && basket.couponCampaignType === 'sales'">
                         <dt class="font-weight-bold">
                             {{ $translate("Ceres::Template.basketOpenAmount") }}
                         </dt><!--
