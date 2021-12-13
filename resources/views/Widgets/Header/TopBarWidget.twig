@@ -23,8 +23,7 @@
 {{ Twig.set("defaultLanguage", "webstoreConfig.defaultLanguage" ) }}
 {{ Twig.set("overrideSearchBar", Twig.call("LayoutContainer.show", ["Ceres::Search.SearchBar"])) }}
 
-{{ Twig.set("visibleFields", Twig.call("config", ["Ceres.basket.preview_data"])) }}	
-{{ Twig.set("visibleFields", "visibleFields | split(\', \')") }}	
+{{ Twig.set("visibleFields", "ceresConfig.basket.previewData") }}
 
 <div class="top-bar header-fw{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if not isFixed %} unfixed{% endif %}">
     <div class="container-max px-0 pr-lg-3">
@@ -183,6 +182,12 @@
                                         <span class="badge p-0 ml-2" v-else v-cloak v-basket-item-sum="$store.state.basket.data.itemSumNet">0,00 {{ Twig.print("currencyData") }}</span>
                                     {% endif %}
                                 </a>
+
+                                
+                                <div>detelef</div>
+                                <div>{{ ceresConfig.basket.previewData | json_encode }}</div>
+                                <div>{{ Twig.print("visibleFields | json_encode") }}</div>
+                                <div>detelef</div>
 
                                 <basket-preview v-if="$store.state.lazyComponent.components['basket-preview']" :show-net-prices="{{ Twig.print("showNetPrices | json_encode") }}" :visible-fields="{{ Twig.print("visibleFields | json_encode") }}">
                                     <template #before-basket-item>
