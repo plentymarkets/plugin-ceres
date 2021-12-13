@@ -1389,6 +1389,26 @@
                             {
                                 "value": "basket.order_total_net",
                                 "caption": "Config.basketDataOrderTotalNet"
+                            },
+                            {
+                                "value": "basket.rebate",
+                                "caption": "Config.basketDataRebate"
+                            },
+                            {
+                                "value": "basket.promotion_coupon",
+                                "caption": "Config.basketDataPromotionCoupon"
+                            },
+                            {
+                                "value": "basket.additional_costs",
+                                "caption": "Config.basketDataAdditionalCosts"
+                            },
+                            {
+                                "value": "basket.sales_coupon",
+                                "caption": "Config.basketDataSalesCoupon"
+                            },
+                            {
+                                "value": "basket.open_amount",
+                                "caption": "Config.basketDataOpenAmount"
                             }
                         ]
                     }

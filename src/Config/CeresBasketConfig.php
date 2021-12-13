@@ -113,12 +113,11 @@ class CeresBasketConfig extends PluginConfig
                 'basket.vat',
                 'basket.order_total_gross',
                 'basket.order_total_net',
-                "rebate",
-                "promotionCoupon",
-                "vats",
-                "additionalCosts",
-                "salesCoupon",
-                "openAmount"
+                "basket.rebate",
+                "basket.promotion_coupon",
+                "basket.additional_costs",
+                "basket.sales_coupon",
+                "basket.open_amount"
             ]
         );
 
