@@ -26,7 +26,7 @@ function setStateForConsents(state, changeTo)
             Object.keys(state.consents[groupKey]).forEach((consentKey) =>
             {
                 state.consents[groupKey] = state.consents[groupKey] || {};
-                state.consents[groupKey][consentKey] = changeTo;
+                state.consents[groupKey][consentKey] = groupKey === "necessary" ? true : changeTo;
             });
         }
     });
