@@ -61860,9 +61860,7 @@ var SidenavigationChildrenLoader = /*#__PURE__*/function () {
         });
       }
 
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_18__["isNullOrUndefined"])(this.parent)) {
-        this.parent.classList.toggle(this.openClassName);
-      }
+      this.parent.classList.toggle(this.openClassName);
     }
   }]);
 
@@ -61872,8 +61870,7 @@ var SidenavigationChildrenLoader = /*#__PURE__*/function () {
 vue__WEBPACK_IMPORTED_MODULE_16___default.a.directive("sidenavigation-children", {
   bind: function bind(el, binding) {
     var categoryId = binding.value.categoryId;
-    var currentUrl = binding.value.currentUrl; // const isActive   = binding.value.isActive;
-
+    var currentUrl = binding.value.currentUrl;
     var isActive = false;
     var showItemCount = binding.value.showItemCount;
     var childCount = binding.value.childCount;
@@ -61894,11 +61891,6 @@ vue__WEBPACK_IMPORTED_MODULE_16___default.a.directive("sidenavigation-children",
     }
 
     var sidenavigationChildrenLoader = new SidenavigationChildrenLoader(el, categoryId, currentUrl, isActive, showItemCount, childCount, openClassName, spacingPadding, inlinePadding);
-
-    if (isActive) {
-      sidenavigationChildrenLoader.toggle();
-    }
-
     el.addEventListener("click", function () {
       sidenavigationChildrenLoader.toggle();
     });
