@@ -139,8 +139,7 @@
                             showItemCount: {{ showItemCount | json_encode }},
                             childCount: {{ category.childCount }},
                             spacingPadding: {{ spacingPadding | json_encode }},
-                            inlinePadding: {{ inlinePadding | json_encode }},
-                            breadcrumbs: {{ breadcrumbs | json_encode }} }"
+                            inlinePadding: {{ inlinePadding | json_encode }} }"
                          class="expand-nav{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                          {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
                         <i class="fa fa-caret-right" aria-hidden="true"></i>

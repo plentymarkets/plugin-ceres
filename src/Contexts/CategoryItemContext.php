@@ -4,6 +4,7 @@ namespace Ceres\Contexts;
 
 use Ceres\Helper\SearchOptions;
 use IO\Helper\ContextInterface;
+use IO\Services\CategoryService;
 use Plenty\Modules\Webshop\ItemSearch\SearchPresets\CategoryItems;
 use Plenty\Modules\Webshop\ItemSearch\SearchPresets\Facets;
 
@@ -17,6 +18,8 @@ use Plenty\Modules\Webshop\ItemSearch\SearchPresets\Facets;
 class CategoryItemContext extends CategoryContext implements ContextInterface
 {
     use ItemListContext;
+    
+    public $categoryBreadcrumbs = [];
 
     /**
      * @inheritDoc
@@ -45,5 +48,9 @@ class CategoryItemContext extends CategoryContext implements ContextInterface
             $itemListOptions,
             SearchOptions::SCOPE_CATEGORY
         );
+        
+        /** @var CategoryService $categoryService */
+        $categoryService = pluginApp(CategoryService::class);
+        $this->categoryBreadcrumbs = $categoryService->getHierarchy();
     }
 }

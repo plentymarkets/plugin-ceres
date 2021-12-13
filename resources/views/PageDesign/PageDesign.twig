@@ -225,7 +225,8 @@
             "showNetPrices": {{ showNetPrices | json_encode }}
         },
         "features": {},
-        "languageMap": {{ webstoreConfig.browserLanguage | json_encode | raw }}
+        "languageMap": {{ webstoreConfig.browserLanguage | json_encode | raw }},
+        "categoryBreadcrumbs": {{ categoryBreadcrumbs | json_encode | raw }}
     }
 </script>
 <!-- /SSR -->

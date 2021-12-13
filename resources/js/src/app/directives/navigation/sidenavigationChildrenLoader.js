@@ -4,7 +4,7 @@ import { isDefined, isNull } from "../../helper/utils";
 
 class SidenavigationChildrenLoader
 {
-    constructor(element, categoryId, currentUrl, isActive, showItemCount, childCount, openClassName, spacingPadding, inlinePadding, breadcrumbs)
+    constructor(element, categoryId, currentUrl, isActive, showItemCount, childCount, openClassName, spacingPadding, inlinePadding)
     {
         this.categoryId = categoryId;
         this.element = element;
@@ -14,7 +14,6 @@ class SidenavigationChildrenLoader
         this.openClassName = openClassName || "is-open";
         this.spacingPadding = spacingPadding || "";
         this.inlinePadding = inlinePadding || "";
-        this.breadcrumbs = breadcrumbs || {};
 
         this.template = "";
         this.placeholders = [];
@@ -180,27 +179,28 @@ class SidenavigationChildrenLoader
 Vue.directive("sidenavigation-children", {
     bind(el, binding)
     {
-
-
         const categoryId = binding.value.categoryId;
         const currentUrl = binding.value.currentUrl;
-        // const isActive   = binding.value.isActive;
 
         let isActive = false;
-        const breadcrumbs = binding.value.breadcrumbs;
         const showItemCount = binding.value.showItemCount;
         const childCount = binding.value.childCount;
         const openClassName = binding.value.openClassName;
         const spacingPadding = binding.value.spacingPadding;
         const inlinePadding = binding.value.inlinePadding;
 
-        for (const breadcrumbIndex in breadcrumbs)
+        for (const breadcrumbIndex in App.categoryBreadcrumbs)
         {
-            const breadcrumb = breadcrumbs[breadcrumbIndex];
+            const breadcrumb = App.categoryBreadcrumbs[breadcrumbIndex];
 
-            if (categoryId == breadcrumb.id)
+            if (categoryId === breadcrumb.id)
             {
                 isActive = true;
+
+                if (childCount > 0)
+                {
+                    el.classList.add("is-open");
+                }
             }
         }
 

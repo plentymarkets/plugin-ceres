@@ -81099,7 +81099,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 var SidenavigationChildrenLoader = /*#__PURE__*/function () {
-  function SidenavigationChildrenLoader(element, categoryId, currentUrl, isActive, showItemCount, childCount, openClassName, spacingPadding, inlinePadding, breadcrumbs) {
+  function SidenavigationChildrenLoader(element, categoryId, currentUrl, isActive, showItemCount, childCount, openClassName, spacingPadding, inlinePadding) {
     var _this = this;
 
     _classCallCheck(this, SidenavigationChildrenLoader);
@@ -81112,7 +81112,6 @@ var SidenavigationChildrenLoader = /*#__PURE__*/function () {
     this.openClassName = openClassName || "is-open";
     this.spacingPadding = spacingPadding || "";
     this.inlinePadding = inlinePadding || "";
-    this.breadcrumbs = breadcrumbs || {};
     this.template = "";
     this.placeholders = [];
 
@@ -81266,7 +81265,9 @@ var SidenavigationChildrenLoader = /*#__PURE__*/function () {
         });
       }
 
-      this.parent.classList.toggle(this.openClassName);
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_18__["isNullOrUndefined"])(this.parent)) {
+        this.parent.classList.toggle(this.openClassName);
+      }
     }
   }]);
 
@@ -81279,22 +81280,30 @@ vue__WEBPACK_IMPORTED_MODULE_16___default.a.directive("sidenavigation-children",
     var currentUrl = binding.value.currentUrl; // const isActive   = binding.value.isActive;
 
     var isActive = false;
-    var breadcrumbs = binding.value.breadcrumbs;
     var showItemCount = binding.value.showItemCount;
     var childCount = binding.value.childCount;
     var openClassName = binding.value.openClassName;
     var spacingPadding = binding.value.spacingPadding;
     var inlinePadding = binding.value.inlinePadding;
 
-    for (var breadcrumbIndex in breadcrumbs) {
-      var breadcrumb = breadcrumbs[breadcrumbIndex];
+    for (var breadcrumbIndex in App.categoryBreadcrumbs) {
+      var breadcrumb = App.categoryBreadcrumbs[breadcrumbIndex];
 
-      if (categoryId == breadcrumb.id) {
+      if (categoryId === breadcrumb.id) {
         isActive = true;
+
+        if (childCount > 0) {
+          el.classList.add("is-open");
+        }
       }
     }
 
     var sidenavigationChildrenLoader = new SidenavigationChildrenLoader(el, categoryId, currentUrl, isActive, showItemCount, childCount, openClassName, spacingPadding, inlinePadding);
+
+    if (isActive) {
+      sidenavigationChildrenLoader.toggle();
+    }
+
     el.addEventListener("click", function () {
       sidenavigationChildrenLoader.toggle();
     });
