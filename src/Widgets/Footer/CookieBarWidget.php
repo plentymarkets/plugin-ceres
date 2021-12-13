@@ -39,8 +39,28 @@ class CookieBarWidget extends BaseWidget
         $settingFactory = pluginApp(WidgetSettingsFactory::class);
 
         $settingFactory->createCustomClass();
-        $settingFactory->createAppearance();
+        $settingFactory->createAppearance(true)
+            ->withDefaultValue('none');
         $settingFactory->createSpacing(false, true);
+
+        // $settings->createSelect("layout")
+        //     ->withDefaultValue("1-2-3")
+        //     ->withName("Widget.cookieBarOrder")
+        //     ->withTooltip("Widget.cookieBarOrderTooltip")
+        //     ->withListBoxValues(
+        //         ValueListFactory::make()
+        //             ->addEntry("1-2-3", "Widget.cookieBarOrder123")
+        //             ->addEntry("1-3-2", "Widget.cookieBarOrder132")
+        //             ->addEntry("2-1-3", "Widget.cookieBarOrder213")
+        //             ->addEntry("2-3-1", "Widget.cookieBarOrder231")
+        //             ->addEntry("3-1-2", "Widget.cookieBarOrder312")
+        //             ->addEntry("3-2-1", "Widget.cookieBarOrder321")
+        //             ->toArray()
+        //     );
+
+        $settingFactory->createCheckbox("showRejectAll")
+            ->withDefaultValue(true)
+            ->withName("Widget.cookieBarShowRejectAll");
 
         return $settingFactory->toArray();
     }
