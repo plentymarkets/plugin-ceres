@@ -29,204 +29,110 @@ class DefaultHomepagePreset implements ContentPreset
 
     /** @var Translator */
     private $translator;
-    
+
     /**
      * @inheritDoc
      */
+
     public function getWidgets()
     {
         $this->preset = pluginApp(PresetHelper::class);
-        $this->ceresConfig = pluginApp(CeresConfig::class);
         $this->translator = pluginApp(Translator::class);
+        $this->ceresConfig = pluginApp(ceresConfig::class);
 
-        $this->preset->createWidget("Ceres::TitleBarWidget")
-            ->withSetting("appearance", "primary");
+        $this->createImageSlider();
+        $this->createImageGrid();
+        $this->createImageBox();
+        $this->createItemShowcase();
+        $this->createText();
+        $this->createImageTextBox();
+        $this->createNewsletterbox();
 
-        //
-        // FIRST ROW
-        //
-        $hasSlides = $this->ceresConfig->homepage->sliderItemId1 > 0
-            || $this->ceresConfig->homepage->sliderItemId2 > 0
-            || $this->ceresConfig->homepage->sliderItemId3 > 0;
-
-        $hasHeroExtra1 = $this->ceresConfig->homepage->heroExtraItemId1
-            || $this->ceresConfig->homepage->heroExtraImageUrl1;
-
-        $hasHeroExtra2 = $this->ceresConfig->homepage->heroExtraItemId2
-            || $this->ceresConfig->homepage->heroExtraImageUrl2;
-
-        if ( $hasSlides )
-        {
-            $grid = null;
-            if ( $hasHeroExtra1 && $hasHeroExtra2 )
-            {
-                $grid = $this->preset->createWidget("Ceres::ThreeColumnWidget")
-                    ->withSetting("layout", "twoToOneStacked");
-
-            }
-            elseif ( $hasHeroExtra1 || $hasHeroExtra2 )
-            {
-                $grid = $this->preset->createWidget("Ceres::TwoColumnWidget")
-                    ->withSetting("layout", "oneToOne");
-            }
-
-            if ( !is_null($grid) )
-            {
-                $this->setupSliderWidget(
-                    $grid->createChild("first", "Ceres::ImageCarouselWidget")
-                );
-
-                if ( $hasHeroExtra1 )
-                {
-                    $this->setupImageBoxWidget(
-                        $grid->createChild("second", "Ceres::ImageBoxWidget"),
-                        0,
-                        $this->ceresConfig->homepage->heroExtraItemId1,
-                        $this->ceresConfig->homepage->heroExtraImageUrl1,
-                        $this->ceresConfig->homepage->heroExtraItemId1 > 0 ? 'block-caption' : 'no-caption'
-                    );
-                }
-
-                if ( $hasHeroExtra2 )
-                {
-                    $this->setupImageBoxWidget(
-                        $grid->createChild($hasHeroExtra1 ? "third" : "second", "Ceres::ImageBoxWidget"),
-                        0,
-                        $this->ceresConfig->homepage->heroExtraItemId2,
-                        $this->ceresConfig->homepage->heroExtraImageUrl2,
-                        $this->ceresConfig->homepage->heroExtraItemId2 > 0 ? 'block-caption' : 'no-caption'
-                    );
-                }
-            }
-            else
-            {
-                $this->setupSliderWidget(
-                    $this->preset->createWidget("Ceres::ImageCarouselWidget")
-                );
-            }
-
-        }
-        else
-        {
-            if ( $hasHeroExtra1 )
-            {
-                $this->setupImageBoxWidget(
-                    $this->preset->createWidget("Ceres::ImageBoxWidget"),
-                    0,
-                    $this->ceresConfig->homepage->heroExtraItemId1,
-                    $this->ceresConfig->homepage->heroExtraImageUrl1,
-                    $this->ceresConfig->homepage->heroExtraItemId1 > 0 ? 'block-caption' : 'no-caption'
-                );
-            }
-
-            if ( $hasHeroExtra2 )
-            {
-                $this->setupImageBoxWidget(
-                    $this->preset->createWidget("Ceres::ImageBoxWidget"),
-                    0,
-                    $this->ceresConfig->homepage->heroExtraItemId2,
-                    $this->ceresConfig->homepage->heroExtraImageUrl2,
-                    $this->ceresConfig->homepage->heroExtraItemId2 > 0 ? 'block-caption' : 'no-caption'
-                );
-            }
-        }
-
-        //
-        // SECOND ROW
-        //
-        $hasHomepageCategory1 = $this->ceresConfig->homepage->homepageCategory1 > 0;
-        $hasHomepageCategory2 = $this->ceresConfig->homepage->homepageCategory2 > 0;
-        $hasHomepageCategory3 = $this->ceresConfig->homepage->homepageCategory3 > 0;
-        $hasHomepageCategory4 = $this->ceresConfig->homepage->homepageCategory4 > 0;
-        $hasHomepageCategory5 = $this->ceresConfig->homepage->homepageCategory5 > 0;
-        $hasHomepageCategory6 = $this->ceresConfig->homepage->homepageCategory6 > 0;
-
-        $grid = null;
-        if ( $hasHomepageCategory1 && $hasHomepageCategory2 )
-        {
-            $grid = $this->preset->createWidget("Ceres:TwoColumnWidget")
-                ->withSetting("layout", "oneToOne");
-        }
-
-        if ( $hasHomepageCategory1 )
-        {
-            $this->setupImageBoxWidget(
-                is_null($grid) ? $this->preset->createWidget("Ceres::ImageBoxWidget") : $grid->createChild("first", "Ceres::ImageBoxWidget"),
-                $this->ceresConfig->homepage->homepageCategory1,
-                0,
-                "",
-                "fullwidth",
-                "secondary"
-            );
-        }
-
-        if ( $hasHomepageCategory2 )
-        {
-            $this->setupImageBoxWidget(
-                is_null($grid) ? $this->preset->createWidget("Ceres::ImageBoxWidget") : $grid->createChild("second", "Ceres::ImageBoxWidget"),
-                $this->ceresConfig->homepage->homepageCategory2,
-                0,
-                "",
-                "fullwidth",
-                "secondary"
-            );
-        }
-
-        //
-        // THIRD ROW
-        //
-        if ( $hasHomepageCategory3 )
-        {
-            $this->setupItemListWidget(
-                $this->preset->createWidget("Ceres::ItemListWidget"),
-                $this->ceresConfig->homepage->homepageCategory3
-            );
-        }
-
-        //
-        // FOURTH ROW
-        //
-        $grid = null;
-        if ( $hasHomepageCategory4 && $hasHomepageCategory5 )
-        {
-            $grid = $this->preset->createWidget("Ceres::TwoColumnWidget")
-                ->withSetting("layout", "twoToOne");
-        }
-
-        if ( $hasHomepageCategory4 )
-        {
-            $this->setupImageBoxWidget(
-                is_null($grid) ? $this->preset->createWidget("Ceres::ImageBoxWidget") : $grid->createChild("first", "Ceres::ImageBoxWidget"),
-                $this->ceresConfig->homepage->homepageCategory4,
-                0,
-                "",
-                "inline-caption"
-            );
-        }
-
-        if ( $hasHomepageCategory5 )
-        {
-            $this->setupImageBoxWidget(
-                is_null($grid) ? $this->preset->createWidget("Ceres::ImageBoxWidget") : $grid->createChild("second", "Ceres::ImageBoxWidget"),
-                $this->ceresConfig->homepage->homepageCategory4,
-                0,
-                "",
-                "inline-caption"
-            );
-        }
-
-        //
-        // FIFTH ROW
-        //
-        if ( $hasHomepageCategory6 )
-        {
-            $this->setupItemListWidget(
-                $this->preset->createWidget("Ceres::ItemListWidget"),
-                $this->ceresConfig->homepage->homepageCategory6
-            );
-        }
 
         return $this->preset->toArray();
+    }
+
+    public function createImageSlider()
+    {
+        $this->setupSliderWidget(
+            $this->preset->createWidget("Ceres::ImageCarouselWidget")
+        );
+    }
+
+    public function createImageGrid()
+    {
+        $grid = $this->preset->createWidget("Ceres::TwoColumnWidget")->withSetting("layout", "oneToOne");
+
+        $this->setupImageBoxWidget(
+            $grid->createChild("first", "Ceres::ImageBoxWidget"),
+            $this->ceresConfig->homepage->homepageCategory1,
+            0,
+            "",
+            "fullwidth",
+            "secondary"
+        );
+
+        $childGrid = $grid->createChild("second", "Ceres::ImageBoxWidget")->withSetting("layout", "oneToOne");
+
+        $this->setupImageBoxWidget(
+            $childGrid->createChild("first", "Ceres::ImageBoxWidget"),
+            $this->ceresConfig->homepage->homepageCategory2,
+            0,
+            "",
+            "fullwidth",
+            "secondary"
+        );
+        $this->setupImageBoxWidget(
+            $childGrid->createChild("second", "Ceres::ImageBoxWidget"),
+            $this->ceresConfig->homepage->homepageCategory3,
+            0,
+            "",
+            "fullwidth",
+            "secondary"
+        );
+
+        $this->setupImageBoxWidget(
+            $grid->createChild("second", "Ceres::ImageBoxWidget"),
+            $this->ceresConfig->homepage->homepageCategory4,
+            0,
+            "",
+            "fullwidth",
+            "secondary"
+        );
+    }
+    public function createImageBox()
+    {
+        $this->setupImageBoxWidget(
+            $this->preset->createWidget("Ceres::ImageBoxWidget"),
+            $this->ceresConfig->homepage->homepageCategory4,
+            0,
+            "",
+            "fullwidth",
+            "secondary"
+        );
+    }
+    public function createItemShowcase()
+    {
+        $this->setupItemListWidget(
+            $this->preset->createWidget("Ceres::ItemListWidget"),
+            $this->ceresConfig->homepage->homepageCategory1
+        );
+        $this->setupItemListWidget(
+            $this->preset->createWidget("Ceres::ItemListWidget"),
+            $this->ceresConfig->homepage->homepageCategory2
+        );
+    }
+    public function createText()
+    {
+        $this->preset->createWidget("Ceres::InlineTextWidget")
+            ->withSetting("text", '<h1>{{ trans("Ceres::Template.infoTextHeadline") }}</h1><br><p>{{ trans("Ceres::Template.infoText") }}</p>');
+    }
+    public function createImageTextBox()
+    {
+    }
+    public function createNewsletterbox()
+    {
+        $this->preset->createWidget("Ceres::NewsletterWidget");
     }
 
     private function setupSliderWidget($widget)
@@ -272,15 +178,13 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("customImagePath", $customImagePath);
     }
 
-    private function setupItemListWidget( $widget, $categoryId = 0, $tagId = 0, $itemSort = "texts.name1_asc" )
+    private function setupItemListWidget($widget, $categoryId = 0, $tagId = 0, $itemSort = "texts.name1_asc")
     {
         $listType = "last_seen";
-        if ( $categoryId > 0 )
-        {
+        if ($categoryId > 0) {
             $listType = "category";
         }
-        if ( $tagId > 0 )
-        {
+        if ($tagId > 0) {
             $listType = "tag_list";
         }
 
