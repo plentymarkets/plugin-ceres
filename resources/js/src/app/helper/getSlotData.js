@@ -11,7 +11,7 @@ export function getSlotData(slotKey)
     return (vm) =>
     {
         vm.$options.slotData = vm.$options.slotData || {};
-        if (!vm.$options.hasOwnProperty(slotKey))
+        if (!vm.$options.slotData.hasOwnProperty(slotKey) && vm.$slots.hasOwnProperty(slotKey))
         {
             const slotNode = vm.$slots[slotKey][0];
 
