@@ -75,23 +75,3 @@
         }
     }
 }
-
-.cookie-order {
-    display: grid;
-    grid-template-areas: 
-    "first"
-    "second"
-    "last";
-}
-
-.cookie-order-first {
-    grid-area: first;
-}
-
-.cookie-order-second {
-    grid-area: second;
-}
-
-.cookie-order-last {
-    grid-area: last;
-}

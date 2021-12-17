@@ -9,7 +9,13 @@
 
 {% set showRejectAll    = widget.settings.showRejectAll.mobile %}
 
-<div class="widget-cookie-bar widget-{{ appearance -}}
+{% if showRejectAll %}
+    {% set buttonOrder = widget.settings.buttonOrder.mobile %}
+{% else %}
+    {% set buttonOrder = widget.settings.buttonOrderWithoutRejectAll.mobile %}
+{% endif %}
+
+<div class="widget-cookie-bar widget-{{ appearance }} order-{{ buttonOrder }}
     {%- if customClass | length > 0 %} {{ customClass }}{% endif -%}
     {%- if isPreview %} widget-fw{% endif %}">
     <div class="widget-inner">
