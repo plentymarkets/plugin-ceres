@@ -1,5 +1,5 @@
 <template>
-    <div v-if="tags" class="pt-1 pb-1">
+    <div v-if="tags && tags.length > 0" class="pt-1 pb-1">
         <template v-if="isTagRouteEnabled">
             <a
                 v-for="tag in tags"
