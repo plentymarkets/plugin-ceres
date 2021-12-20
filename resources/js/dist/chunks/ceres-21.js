@@ -489,7 +489,9 @@ var render = function() {
                 ]
               : _vm._e(),
             _vm._v(" "),
-            _vm.visibleFields.includes("rebate") && _vm.basket.basketRebate
+            (_vm.visibleFields.includes("rebate") ||
+              _vm.visibleFields.includes("basket.rebate")) &&
+            _vm.basket.basketRebate
               ? [
                   _c("dt", { staticClass: "rebate-hint" }, [
                     _vm._v(
@@ -678,7 +680,8 @@ var render = function() {
             _vm._v(" "),
             _vm._t("after-shipping-costs"),
             _vm._v(" "),
-            _vm.visibleFields.includes("promotionCoupon") &&
+            (_vm.visibleFields.includes("promotionCoupon") ||
+              _vm.visibleFields.includes("basket.promotion_coupon")) &&
             _vm.basket.couponCode &&
             _vm.basket.couponCampaignType === "promotion"
               ? [
@@ -754,7 +757,7 @@ var render = function() {
             _vm._l(_vm.basket.totalVats, function(totalVat) {
               return _vm.visibleFields.includes("vats") ||
                 _vm.visibleFields.includes("basket.vat")
-                ? _c("div", { staticClass: "vatTotals" }, [
+                ? [
                     _c("dt", [
                       _vm._v(
                         "\n                    " +
@@ -771,7 +774,7 @@ var render = function() {
                           "\n                "
                       )
                     ])
-                  ])
+                  ]
                 : _vm._e()
             }),
             _vm._v(" "),
@@ -783,7 +786,8 @@ var render = function() {
               [
                 _c("hr"),
                 _vm._v(" "),
-                _vm.visibleFields.includes("additionalCosts") &&
+                (_vm.visibleFields.includes("additionalCosts") ||
+                  _vm.visibleFields.includes("basket.additional_costs")) &&
                 _vm.propertiesWithAdditionalCosts.length
                   ? [
                       _vm._l(_vm.propertiesWithAdditionalCosts, function(
@@ -862,7 +866,8 @@ var render = function() {
                     ]
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.visibleFields.includes("salesCoupon") &&
+                (_vm.visibleFields.includes("salesCoupon") ||
+                  _vm.visibleFields.includes("basket.sales_coupon")) &&
                 _vm.basket.couponCode &&
                 _vm.basket.couponCampaignType === "sales"
                   ? [
@@ -894,7 +899,8 @@ var render = function() {
                     ]
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.visibleFields.includes("openAmount") &&
+                (_vm.visibleFields.includes("openAmount") ||
+                  _vm.visibleFields.includes("basket.open_amount")) &&
                 _vm.basket.couponCampaignType === "sales"
                   ? [
                       _c("dt", { staticClass: "font-weight-bold" }, [
