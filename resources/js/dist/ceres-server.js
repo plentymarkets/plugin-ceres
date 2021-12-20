@@ -13169,13 +13169,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     styles: String,
     classes: String,
-    consentGroups: Object
+    consentGroups: Object,
+    showRejectAll: {
+      type: Boolean,
+      default: true
+    }
   },
   mixins: [_mixins_componentId_mixin__WEBPACK_IMPORTED_MODULE_7__["ComponentIdMixin"]],
   // Experimental mixin, may be removed in the future.
@@ -54512,26 +54517,30 @@ var render = function() {
                       _vm.$translate("Ceres::Template.cookieBarMoreSettings")
                     )
                   ) +
-                  '</a></div></div> <div class="col-12 col-md-4 pt-3 pt-md-0"><button data-testing="cookie-bar-save" class="btn btn-block btn-appearance">' +
-                  _vm._ssrEscape(
-                    "\n                    " +
-                      _vm._s(_vm.$translate("Ceres::Template.cookieBarSave")) +
-                      "\n                "
-                  ) +
-                  '</button> <button data-testing="cookie-bar-deny-all" class="btn btn-block btn-appearance">' +
-                  _vm._ssrEscape(
-                    "\n                    " +
-                      _vm._s(
-                        _vm.$translate("Ceres::Template.cookieBarDenyAll")
-                      ) +
-                      "\n                "
-                  ) +
-                  '</button> <button data-testing="cookie-bar-accept-all" class="btn btn-block btn-appearance">' +
+                  '</a></div></div> <div class="button-order col-12 col-md-4 pt-3 pt-md-0"><button data-testing="cookie-bar-accept-all" class="btn btn-block btn-default btn-appearance button-order-1 mb-2 mt-0">' +
                   _vm._ssrEscape(
                     "\n                    " +
                       _vm._s(
                         _vm.$translate("Ceres::Template.cookieBarAcceptAll")
                       ) +
+                      "\n                "
+                  ) +
+                  "</button> " +
+                  (_vm.showRejectAll
+                    ? '<button data-testing="cookie-bar-deny-all" class="btn btn-block btn-default btn-appearance button-order-2 mb-2 mt-0">' +
+                      _vm._ssrEscape(
+                        "\n                    " +
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.cookieBarDenyAll")
+                          ) +
+                          "\n                "
+                      ) +
+                      "</button>"
+                    : "<!---->") +
+                  ' <button data-testing="cookie-bar-save" class="btn btn-block btn-default button-order-3 mb-2 mt-0">' +
+                  _vm._ssrEscape(
+                    "\n                    " +
+                      _vm._s(_vm.$translate("Ceres::Template.cookieBarSave")) +
                       "\n                "
                   ) +
                   "</button></div></div> "
@@ -54563,31 +54572,35 @@ var render = function() {
                               ) +
                               "\n                "
                           ) +
-                          '</a></div> <div class="col-12 col-md-9"><div class="row"><div class="col-12 col-md-4"><button data-testing="cookie-bar-expanded-save" class="btn btn-block btn-appearance">' +
-                          _vm._ssrEscape(
-                            "\n                            " +
-                              _vm._s(
-                                _vm.$translate("Ceres::Template.cookieBarSave")
-                              ) +
-                              "\n                        "
-                          ) +
-                          '</button></div> <div class="col-12 col-md-4 mt-2 mt-md-0"><button data-testing="cookie-bar-expanded-deny-all" class="btn btn-block btn-appearance">' +
-                          _vm._ssrEscape(
-                            "\n                            " +
-                              _vm._s(
-                                _vm.$translate(
-                                  "Ceres::Template.cookieBarDenyAll"
-                                )
-                              ) +
-                              "\n                        "
-                          ) +
-                          '</button></div> <div class="col-12 col-md-4 mt-2 mt-md-0"><button data-testing="cookie-bar-expanded-accept-all" class="btn btn-block btn-appearance">' +
+                          '</a></div> <div class="col-12 col-md-9"><div class="row"><div class="col-12 col-md-4 mt-2 mt-md-0"><button data-testing="cookie-bar-expanded-accept-all" class="btn btn-block btn-default btn-appearance">' +
                           _vm._ssrEscape(
                             "\n                            " +
                               _vm._s(
                                 _vm.$translate(
                                   "Ceres::Template.cookieBarAcceptAll"
                                 )
+                              ) +
+                              "\n                        "
+                          ) +
+                          "</button></div> " +
+                          (_vm.showRejectAll
+                            ? '<div class="col-12 col-md-4 mt-2 mt-md-0"><button data-testing="cookie-bar-expanded-deny-all" class="btn btn-block btn-default btn-appearance">' +
+                              _vm._ssrEscape(
+                                "\n                            " +
+                                  _vm._s(
+                                    _vm.$translate(
+                                      "Ceres::Template.cookieBarDenyAll"
+                                    )
+                                  ) +
+                                  "\n                        "
+                              ) +
+                              "</button></div>"
+                            : "<!---->") +
+                          ' <div class="col-12 col-md-4"><button data-testing="cookie-bar-expanded-save" class="btn btn-block btn-default">' +
+                          _vm._ssrEscape(
+                            "\n                            " +
+                              _vm._s(
+                                _vm.$translate("Ceres::Template.cookieBarSave")
                               ) +
                               "\n                        "
                           ) +
