@@ -1318,7 +1318,7 @@
                 "basket.data": {
                     "type": "multiCheckBox",
                     "required": false,
-                    "deprecated": false,
+                    "deprecated": true,
                     "label": "Config.basketDataLabel",
                     "options": {
                         "defaultValue": "basket.value_of_items_gross, basket.value_of_items_net, basket.shipping_costs_gross, basket.shipping_costs_net, basket.vat, basket.order_total_gross, basket.order_total_net",
@@ -1357,7 +1357,6 @@
                 "basket.preview_data": {
                     "type": "multiCheckBox",
                     "required": false,
-                    "deprecated": true,
                     "label": "Config.basketPreviewDataLabel",
                     "options": {
                         "defaultValue": "basket.value_of_items_gross, basket.shipping_costs_gross, basket.order_total_gross",
@@ -1389,6 +1388,26 @@
                             {
                                 "value": "basket.order_total_net",
                                 "caption": "Config.basketDataOrderTotalNet"
+                            },
+                            {
+                                "value": "basket.rebate",
+                                "caption": "Config.basketDataRebate"
+                            },
+                            {
+                                "value": "basket.promotion_coupon",
+                                "caption": "Config.basketDataPromotionCoupon"
+                            },
+                            {
+                                "value": "basket.additional_costs",
+                                "caption": "Config.basketDataAdditionalCosts"
+                            },
+                            {
+                                "value": "basket.sales_coupon",
+                                "caption": "Config.basketDataSalesCoupon"
+                            },
+                            {
+                                "value": "basket.open_amount",
+                                "caption": "Config.basketDataOpenAmount"
                             }
                         ]
                     }
