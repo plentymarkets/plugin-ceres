@@ -41,24 +41,25 @@
                     </div>
 
                 </div>
-                <div class="col-12 col-md-4 pt-3 pt-md-0">
+                <div class="button-order col-12 col-md-4 pt-3 pt-md-0">
                     <button
-                        class="btn btn-block btn-appearance"
-                        @click="storeConsents(); close()"
-                        data-testing="cookie-bar-save">
-                        {{ $translate("Ceres::Template.cookieBarSave") }}
+                        class="btn btn-block btn-default btn-appearance button-order-1 mb-2 mt-0"
+                        @click="acceptAll(); close()"
+                        data-testing="cookie-bar-accept-all">
+                        {{ $translate("Ceres::Template.cookieBarAcceptAll") }}
                     </button>
                     <button
-                        class="btn btn-block btn-appearance"
+                        v-if="showRejectAll"
+                        class="btn btn-block btn-default btn-appearance button-order-2 mb-2 mt-0"
                         @click="denyAll(); close()"
                         data-testing="cookie-bar-deny-all">
                         {{ $translate("Ceres::Template.cookieBarDenyAll") }}
                     </button>
                     <button
-                        class="btn btn-block btn-appearance"
-                        @click="acceptAll(); close()"
-                        data-testing="cookie-bar-accept-all">
-                        {{ $translate("Ceres::Template.cookieBarAcceptAll") }}
+                        class="btn btn-block btn-default button-order-3 mb-2 mt-0"
+                        @click="storeConsents(); close()"
+                        data-testing="cookie-bar-save">
+                        {{ $translate("Ceres::Template.cookieBarSave") }}
                     </button>
                 </div>
 
@@ -78,28 +79,28 @@
                 </div>
                 <div class="col-12 col-md-9">
                     <div class="row">
-                        <div class="col-12 col-md-4">
-                            <button
-                                class="btn btn-block btn-appearance"
-                                @click="storeConsents(); close()"
-                                data-testing="cookie-bar-expanded-save">
-                                {{ $translate("Ceres::Template.cookieBarSave") }}
+                        <div class="col-12 col-md-4 mt-2 mt-md-0">
+                           <button
+                                class="btn btn-block btn-default btn-appearance"
+                                @click="acceptAll(); close()"
+                                data-testing="cookie-bar-expanded-accept-all">
+                                {{ $translate("Ceres::Template.cookieBarAcceptAll") }}
                             </button>
                         </div>
-                        <div class="col-12 col-md-4 mt-2 mt-md-0">
+                        <div v-if="showRejectAll" class="col-12 col-md-4 mt-2 mt-md-0">
                             <button
-                                class="btn btn-block btn-appearance"
+                                class="btn btn-block btn-default btn-appearance"
                                 @click="denyAll(); close()"
                                 data-testing="cookie-bar-expanded-deny-all">
                                 {{ $translate("Ceres::Template.cookieBarDenyAll") }}
                             </button>
                         </div>
-                        <div class="col-12 col-md-4 mt-2 mt-md-0">
-                           <button
-                                class="btn btn-block btn-appearance"
-                                @click="acceptAll(); close()"
-                                data-testing="cookie-bar-expanded-accept-all">
-                                {{ $translate("Ceres::Template.cookieBarAcceptAll") }}
+                        <div class="col-12 col-md-4">
+                            <button
+                                class="btn btn-block btn-default"
+                                @click="storeConsents(); close()"
+                                data-testing="cookie-bar-expanded-save">
+                                {{ $translate("Ceres::Template.cookieBarSave") }}
                             </button>
                         </div>
                     </div>
@@ -125,7 +126,11 @@ export default {
     {
         styles: String,
         classes: String,
-        consentGroups: Object
+        consentGroups: Object,
+        showRejectAll: {
+            type: Boolean,
+            default: true
+        },
     },
 
     mixins: [ComponentIdMixin], // Experimental mixin, may be removed in the future.
