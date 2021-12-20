@@ -148,6 +148,11 @@ export default {
             type: Boolean,
             default: false
         },
+        hasMandatoryOrderProperty:
+        {
+            type: Boolean,
+            default: false
+        },
         hasPrice:
         {
             type: Boolean,
@@ -209,8 +214,9 @@ export default {
 
         requiresProperties()
         {
-            return App.config.item.requireOrderProperties &&
-                (this.hasOrderProperties || this.orderProperties.filter(property => property.property.isShownOnItemPage).length > 0);
+            return (App.config.item.requireOrderProperties && 
+                (this.hasOrderProperties || this.orderProperties.filter(property => property.property.isShownOnItemPage).length > 0)) ||
+                this.hasMandatoryOrderProperty;
         },
 
         buttonClasses()
