@@ -2,124 +2,68 @@
 
 namespace Ceres\Widgets\Presets;
 
-use Ceres\Config\CeresConfig;
-use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
-use Illuminate\Foundation\Console\Presets\Preset;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
-use Plenty\Plugin\Application;
-use Plenty\Plugin\Translation\Translator;
 
-/**
- * Class DefaultHomepagePreset
- *
- * This is a preset for ShopBuilder contents. Presets can be applied during content creation to generate a default content with predefined and configured widgets.
- * This particular preset generates a basic homepage based on settings in the plentyShop LTS config.
- *
- * @package Ceres\Widgets\Presets
- * @depreacted since 5.0
- */
 class DefaultHomepagePreset implements ContentPreset
 {
-    /** @var PresetHelper */
     private $preset;
 
-    /** @var CeresConfig */
-    private $ceresConfig;
-
-    /** @var Translator */
-    private $translator;
-
-    /**
-     * @inheritDoc
-     */
-
-    public function getWidgets()
+    public function getWidgets(): array
     {
         $this->preset = pluginApp(PresetHelper::class);
-        $this->translator = pluginApp(Translator::class);
-        $this->ceresConfig = pluginApp(ceresConfig::class);
 
         $this->createImageSlider();
-        $this->createImageGrid();
+        $this->createCategoryShowcase();
         $this->createImageBox();
         $this->createItemShowcase();
         $this->createText();
         $this->createImageTextBox();
+        $this->createImageBox();
         $this->createNewsletterbox();
-
 
         return $this->preset->toArray();
     }
 
-    public function createImageSlider()
+    public function createImageSlider(): void
     {
-        $this->setupSliderWidget(
-            $this->preset->createWidget("Ceres::ImageCarouselWidget")
+        $this->preset->createWidget("Ceres::ImageCarouselWidget");
+    }
+    public function createCategoryShowcase(): void
+    {
+        $threeColumnWidget = $this->preset->createWidget('Ceres::ThreeColumnWidget')
+            ->withSetting('layout', 'twoToOneStacked');
+        $this->setupImageBoxWidget(
+            $threeColumnWidget->createChild('first', 'Ceres::ImageBoxWidget')
+        );
+        $twoColumnWidget = $threeColumnWidget->createChild('second', 'Ceres::TwoColumnWidget')
+            ->withSetting('layout', 'oneToOne');
+
+        $this->setupImageBoxWidget(
+            $twoColumnWidget->createChild('first', 'Ceres::ImageBoxWidget')
+        );
+        $this->setupImageBoxWidget(
+            $twoColumnWidget->createChild('second', 'Ceres::ImageBoxWidget')
+        );
+        $this->setupImageBoxWidget(
+            $threeColumnWidget->createChild('third', 'Ceres::ImageBoxWidget')
         );
     }
-
-    public function createImageGrid()
-    {
-        $grid = $this->preset->createWidget("Ceres::TwoColumnWidget")->withSetting("layout", "oneToOne");
-
-        $this->setupImageBoxWidget(
-            $grid->createChild("first", "Ceres::ImageBoxWidget"),
-            $this->ceresConfig->homepage->homepageCategory1,
-            0,
-            "",
-            "fullwidth",
-            "secondary"
-        );
-
-        $childGrid = $grid->createChild("second", "Ceres::ImageBoxWidget")->withSetting("layout", "oneToOne");
-
-        $this->setupImageBoxWidget(
-            $childGrid->createChild("first", "Ceres::ImageBoxWidget"),
-            $this->ceresConfig->homepage->homepageCategory2,
-            0,
-            "",
-            "fullwidth",
-            "secondary"
-        );
-        $this->setupImageBoxWidget(
-            $childGrid->createChild("second", "Ceres::ImageBoxWidget"),
-            $this->ceresConfig->homepage->homepageCategory3,
-            0,
-            "",
-            "fullwidth",
-            "secondary"
-        );
-
-        $this->setupImageBoxWidget(
-            $grid->createChild("second", "Ceres::ImageBoxWidget"),
-            $this->ceresConfig->homepage->homepageCategory4,
-            0,
-            "",
-            "fullwidth",
-            "secondary"
-        );
-    }
-    public function createImageBox()
+    public function createImageBox(): void
     {
         $this->setupImageBoxWidget(
-            $this->preset->createWidget("Ceres::ImageBoxWidget"),
-            $this->ceresConfig->homepage->homepageCategory4,
-            0,
-            "",
-            "fullwidth",
-            "secondary"
+            $this->preset->createWidget('Ceres::ImageBoxWidget')
         );
     }
     public function createItemShowcase()
     {
         $this->setupItemListWidget(
             $this->preset->createWidget("Ceres::ItemListWidget"),
-            $this->ceresConfig->homepage->homepageCategory1
+            1
         );
         $this->setupItemListWidget(
             $this->preset->createWidget("Ceres::ItemListWidget"),
-            $this->ceresConfig->homepage->homepageCategory2
+            2
         );
     }
     public function createText()
@@ -129,44 +73,35 @@ class DefaultHomepagePreset implements ContentPreset
     }
     public function createImageTextBox()
     {
+        $twoColumnWidget = $this->preset->createWidget('Ceres::TwoColumnWidget')
+            ->withSetting('layout', 'oneToOne');
+        $this->setupImageBoxWidget(
+            $twoColumnWidget->createChild('first', 'Ceres::ImageBoxWidget')
+        );
+        $twoColumnWidget->createChild('second', "Ceres::InlineTextWidget")
+            ->withSetting("text", '<h1>{{ trans("Ceres::Template.infoTextHeadline") }}</h1><br><p>{{ trans("Ceres::Template.infoText") }}</p>');
+        $twoColumnWidget->createChild('first', "Ceres::InlineTextWidget")
+            ->withSetting("text", '<h1>{{ trans("Ceres::Template.infoTextHeadline") }}</h1><br><p>{{ trans("Ceres::Template.infoText") }}</p>');
+        $this->setupImageBoxWidget(
+            $twoColumnWidget->createChild('second', 'Ceres::ImageBoxWidget')
+        );
     }
     public function createNewsletterbox()
     {
-        $this->preset->createWidget("Ceres::NewsletterWidget");
+        $row = $this->preset
+            ->createWidget("Ceres::ThreeColumnWidget")
+            ->withSetting("customClass", "")
+            ->withSetting("layout", "oneToTwoToOne");
+
+        $row->createChild("second", "Ceres::InlineTextWidget")
+            ->withSetting("text", '<h1>{{ trans("Ceres::Template.newsletterOptInTitle") }}</h1><p>{{ trans("Ceres::Template.newsletterOptInInfoText") }}</p>')
+            ->withSetting("customClass", "");
+
+        $row->createChild("second", "Ceres::NewsletterWidget")
+            ->withSetting("customClass", "")
+            ->withSetting("appearance", "primary");
     }
 
-    private function setupSliderWidget($widget)
-    {
-        $slides = [
-            [
-                "categoryId" => "",
-                "variationId" => $this->ceresConfig->homepage->sliderItemId1,
-                "customImagePath" => $this->ceresConfig->homepage->sliderImageUrl1
-            ],
-            [
-                "categoryId" => "",
-                "variationId" => $this->ceresConfig->homepage->sliderItemId2,
-                "customImagePath" => $this->ceresConfig->homepage->sliderImageUrl2
-            ],
-            [
-                "categoryId" => "",
-                "variationId" => $this->ceresConfig->homepage->sliderItemId3,
-                "customImagePath" => $this->ceresConfig->homepage->sliderImageUrl3
-            ]
-        ];
-
-        $widget
-            ->withSetting("appearance", "primary")
-            ->withSetting("slides", $slides);
-    }
-
-    /**
-     * @param PresetWidgetFactory $widget
-     * @param $categoryId
-     * @param $variationId
-     * @param $customImagePath
-     * @param $style
-     */
     private function setupImageBoxWidget($widget, $categoryId = 0, $variationId = 0, $customImagePath = "", $style = "no-caption", $appearance = "primary")
     {
         $widget
@@ -177,7 +112,6 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("variationId", $variationId > 0 ? $variationId : "")
             ->withSetting("customImagePath", $customImagePath);
     }
-
     private function setupItemListWidget($widget, $categoryId = 0, $tagId = 0, $itemSort = "texts.name1_asc")
     {
         $listType = "last_seen";
