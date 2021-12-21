@@ -237,8 +237,7 @@ export default {
         },
 
         variationMarkInvalidProperties() {
-            const currentVariation = this.$store.getters[`${this.itemId}/currentItemVariation`];
-            return currentVariation && currentVariation.variationMarkInvalidProperties;
+            return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variationMarkInvalidProperties;
         },
 
         isTouchDevice() {
