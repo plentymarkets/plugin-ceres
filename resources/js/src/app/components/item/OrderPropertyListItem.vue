@@ -15,7 +15,7 @@
             </label>
         </div>
 
-        <div v-else-if="inputType === 'checkbox' || inputType === 'radio'" class="form-check">
+        <div v-else-if="inputType === 'checkbox' || inputType === 'radio'" class="form-check" :class="{ 'error': hasError }">
             <input v-if="inputType === 'checkbox'"
                    type="checkbox"
                    :name="group ? group.id : 'check' + _uid"
@@ -37,7 +37,6 @@
 
             <label class="form-check-label text-appearance d-flex"
                    :for="'check' + _uid"
-                   :class="{ 'text-danger': hasError }"
                    v-tooltip data-toggle="tooltip"
                    :title="property.names.description">
                 <span class="text-wrap">{{ property.names.name }}</span>
