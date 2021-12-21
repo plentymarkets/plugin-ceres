@@ -1,0 +1,36 @@
+name: NodeJS with Webpack
+
+on:
+  push:
+    branches: [ test_stable ]
+    
+concurrency:
+  group: ${{ github.event.number }}
+
+env:
+  NODE_VERSION: "14"
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - name: "Checkout Code"
+      uses: actions/checkout@v2
+  
+    - name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: Install dependencies
+      run: |
+        rm -rf node_modules
+    - name: Build
+      run: |
+        npm run build
+    - name: Commit and Push
+      run: |
+        git add .
+        git diff-index --quiet HEAD || git commit -m "Automatic build" && git push origin HEAD:stable
