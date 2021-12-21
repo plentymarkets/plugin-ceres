@@ -1,0 +1,39 @@
+name: Automatic build
+
+on:
+  push:
+    branches: [ stable ]
+
+env:
+  NODE_VERSION: "14"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.PUBLIC_PLENTY_ACTION_TOKEN }}
+
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install dependencies
+        run: |
+          rm -rf node_modules
+          npm install
+
+      - name: Build files
+        run: |
+          npm run build
+
+      - name: Commit and push
+        run: |
+          git config user.name "Plentymarkets build monkey"
+          git config user.email "10546500+plentymonkey@users.noreply.github.com"
+          git add .
+          git diff-index --quiet HEAD || git commit -m "Automatic build" && git push origin HEAD:stable
