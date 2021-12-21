@@ -315,11 +315,11 @@ const getters =
                             return property.property.isShownOnItemPage && !property.property.value && property.property.isOderProperty;
                         });
                     }
-                    else if (state.variation.documents[0].data.hasMandatoryProperty)
+                    else if (state.variation.documents[0].data.hasRequiredOrderProperty)
                     {
                         missingProperties = state.variation.documents[0].data.properties.filter(property =>
                         {
-                            return  property.property.isRequired &&
+                            return property.property.isRequired &&
                                     property.property.isShownOnItemPage &&
                                     !property.property.value &&
                                     property.property.isOderProperty;

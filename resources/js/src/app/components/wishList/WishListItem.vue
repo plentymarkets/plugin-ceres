@@ -86,7 +86,7 @@
                         :maximum-quantity="!!wishListItem.variation.maximumOrderQuantity && wishListItem.variation.maximumOrderQuantity > 0 ? wishListItem.variation.maximumOrderQuantity : null"
                         :order-properties="wishListItem.properties.filter((prop) => prop.property.isOderProperty)"
                         :has-order-properties="wishListItem.hasOrderProperties"
-                        :has-mandaotry-order-properties="wishListItem.hasMandatoryOrderProperties"
+                        :has-required-order-property="wishListItem.hasRequiredOrderProperty"
                         :use-large-scale="false"
                         :show-quantity="false"
                         :item-url="wishListItem | itemURL"
