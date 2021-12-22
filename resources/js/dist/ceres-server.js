@@ -50118,7 +50118,7 @@ var render = function() {
                           ' class="input-unit-btn"><i class="fa fa-times"></i></span>') +
                       " <input" +
                       _vm._ssrAttr("disabled", _vm.waiting) +
-                      ' type="file" size="50" accept="image/*" data-testing="order-property-input-file">'
+                      ' type="file" size="50" data-testing="order-property-input-file">'
                   )
                 ]
               ),
