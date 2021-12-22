@@ -205,12 +205,14 @@ export default {
 
         hasError()
         {
-            if (this.variationMarkInvalidProperties && this.inputType === "radio")
+            const isRequired = this.property.isRequired || App.config.item.requireOrderProperties;
+
+            if (isRequired && this.variationMarkInvalidProperties && this.inputType === "radio")
             {
                 return this.variationMissingProperties.find(property => property.property.id === this.property.id);
             }
 
-            return this.variationMarkInvalidProperties && !this.property.value;
+            return isRequired && this.variationMarkInvalidProperties && !this.property.value;
         },
 
         surcharge()
