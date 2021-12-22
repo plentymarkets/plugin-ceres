@@ -11,7 +11,9 @@
                 :data-testing="'order-property-input-' + inputType">
             <label class="d-flex">
                 <span class="text-truncate">{{ property.names.name }}</span>
-                <strong class="ml-1" v-if="surcharge > 0">(+ {{ surcharge | currency }}) *</strong>
+                <strong class="ml-1">
+                    <template v-if="surcharge > 0">(+ {{ surcharge | currency }})</template><span> {{ footnotes }}</span>
+                </strong>
             </label>
         </div>
 
@@ -40,7 +42,9 @@
                    v-tooltip data-toggle="tooltip"
                    :title="property.names.description">
                 <span class="text-wrap">{{ property.names.name }}</span>
-                <strong class="ml-1" v-if="surcharge > 0">(+ {{ surcharge | currency }}) *</strong>
+                <strong class="ml-1">
+                    <template v-if="surcharge > 0">(+ {{ surcharge | currency }})</template><span> {{ footnotes }}</span>
+                </strong>
             </label>
         </div>
 
@@ -57,7 +61,9 @@
                 </select>
                 <label class="d-flex w-100" for="order-property-input-select">
                     <span class="text-truncate">{{ property.names.name }}</span>
-                    <strong class="ml-1" v-if="surcharge > 0">(+ {{ surcharge | currency }}) *</strong>
+                    <strong class="ml-1">
+                        <template v-if="surcharge > 0">(+ {{ surcharge | currency }})</template><span> {{ footnotes }}</span>
+                    </strong>
                 </label>
             </div>
 
@@ -76,7 +82,9 @@
                 <span class="input-unit-preview" :class="{ 'disabled': waiting }">{{selectedFileName}}</span>
                 <span class="input-unit-label d-flex">
                     <span class="text-truncate">{{ property.names.name }}</span>
-                    <strong class="ml-1" v-if="surcharge > 0">(+ {{ surcharge | currency }}) *</strong>
+                    <strong class="ml-1">
+                        <template v-if="surcharge > 0">(+ {{ surcharge | currency }})</template><span> {{ footnotes }}</span>
+                    </strong>
                 </span>
                 <span class="input-unit-btn" v-if="!selectedFile">
                     <i class="fa fa-ellipsis-h"></i>
@@ -218,6 +226,19 @@ export default {
         surcharge()
         {
             return this.property.itemSurcharge || this.property.surcharge;
+        },
+
+        footnotes()
+        {
+            if(this.surcharge > 0 && this.property.isRequired){
+                return "*, **"
+            }
+            if(this.surcharge <= 0 && this.property.isRequired){
+                return "**"
+            }
+            if(this.surcharge > 0 && !this.property.isRequired){
+                return "*"
+            }
         },
 
         selectedDescription()

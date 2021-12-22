@@ -84,6 +84,7 @@ class DefaultSingleItemPreset implements ContentPreset
         $this->createAddToWishListWiget();
         $this->createSeparatorWidget();
         $this->createLegalInformation();
+        $this->createIsRequieredFootnote();
 
         return $this->preset->toArray();
     }
@@ -237,6 +238,15 @@ class DefaultSingleItemPreset implements ContentPreset
         $this->stickyContainer->createChild('sticky', 'Ceres::CodeWidget')
             ->withSetting('customClass', 'vat small text-muted')
             ->withSetting('text', "<span>$text</span>")
+            ->withSetting('appearance', 'none');
+    }
+
+    private function createIsRequieredFootnote()
+    {
+        $text ="{% if item.documents[0].data.hasRequiredOrderProperty %}<span>** {{ trans(\"Ceres::Template.singleItemIsRequiredProperty\") }}</span>{% endif %}";
+        $this->stickyContainer->createChild('sticky', 'Ceres::CodeWidget')
+            ->withSetting('customClass', 'small text-muted')
+            ->withSetting('text', "$text")
             ->withSetting('appearance', 'none');
     }
 
