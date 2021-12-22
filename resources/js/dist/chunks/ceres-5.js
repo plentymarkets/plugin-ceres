@@ -1412,7 +1412,6 @@ var render = function() {
                       disabled: _vm.waiting,
                       type: "file",
                       size: "50",
-                      accept: "image/*",
                       "data-testing": "order-property-input-file"
                     },
                     on: {
