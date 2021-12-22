@@ -85,7 +85,7 @@
                 <span class="input-unit-btn" v-else :disabled="waiting" @click.prevent="clearSelectedFile()">
                     <i class="fa fa-times"></i>
                 </span>
-                <input :disabled="waiting" ref="fileInput" type="file" size="50" accept="image/*" @change="setPropertyFile($event)" data-testing="order-property-input-file">
+                <input :disabled="waiting" ref="fileInput" type="file" size="50" @change="setPropertyFile($event)" data-testing="order-property-input-file">
             </label>
 
             <popper class="order-property-selection-info-popper" v-cloak v-if="isTouchDevice && property.names.description" placement="bottom">
