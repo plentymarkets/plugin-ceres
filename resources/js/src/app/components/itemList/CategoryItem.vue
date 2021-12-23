@@ -124,6 +124,7 @@
 import { mapState } from "vuex";
 import CategoryImageCarousel from "./CategoryImageCarousel.vue";
 import ItemStoreSpecial from "./ItemStoreSpecial.vue";
+import {getSlotData} from "../../helper/getSlotData";
 
 export default {
     components: {
@@ -167,16 +168,14 @@ export default {
         }
     },
 
-    jsonDataFields: [
-        "itemDataRef"
-    ],
-
     computed:
     {
         item()
         {
             return this.itemData || this.itemDataRef;
         },
+
+        itemDataRef: getSlotData('item-data'),
 
         /**
          * returns itemData.item.storeSpecial
