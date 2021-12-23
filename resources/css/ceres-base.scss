@@ -11103,6 +11103,10 @@ html.ios .basket-preview-content .totals { // stylelint-disable-line selector-no
     display: block !important; // stylelint-disable-line declaration-no-important
 }
 
+body.basket-open {
+    overflow: hidden;
+}
+
 .cmp-totals {
     dt,
     dd {
