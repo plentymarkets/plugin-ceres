@@ -75,7 +75,7 @@ export default class HeaderScroller
         this.headerHeight = 0;
         this.allHeaderChildrenHeights = [];
 
-        this.headerParent?.children.forEach(element =>
+        Array.from(this.headerParent?.children).forEach(element =>
         {
             let elementHeight = 0;
 
@@ -97,7 +97,7 @@ export default class HeaderScroller
         {
             let zIndex = 100;
 
-            this.headerParent?.children.forEach(element =>
+            Array.from(this.headerParent?.children).forEach(element =>
             {
                 element.style.zIndex = zIndex--;
             });
