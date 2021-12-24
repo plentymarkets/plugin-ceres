@@ -1,5 +1,51 @@
 # Release Notes for plentyShop LTS
 
+## v5.0.44 (2021-12-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.43...5.0.44" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- The settings for displaying price information in the shopping cart preview are now effective. Review the settings in the **Plugins » plentyShop LTS » Shopping cart** section for the setting **Show basket preview information** and adjust the settings to your needs.
+
+### Added
+
+- It is now possible to prioritise the search results by variation name. You can find the setting in the **Search** step in the plentyShop assistant.
+- It is now possible to determine the order of the buttons of the cookie bar in the widget settings. Additionally, you can hide the **Reject all** button.
+- The description of order characteristics and order properties can now be displayed on mobile devices via a button.
+- It is now possible to show or hide price information in the shopping cart preview. You can carry out this setting in the plentyShop configuration under **Shopping cart » Show basket preview information**.
+- Order characteristics with the option **Required** are now supported.
+
+### Changed
+
+- The colour settings in the tab **Design** of the plentyShop LTS settings have been deprecated. These settings can now only be accessed in the design settings of ShopBuilder. The selected colours remain unchanged.
+- The scroll bar of the shop is now hidden as long as the shopping cart preview is opened. We would like to thank user @MaxBentz for their contribution.
+
+### Fixed
+
+- The item grid widget generated too much data in the ShopBuilder preview and unnecessarily increased the file size. This has been fixed.
+- The cookie bar also rejected essential cookies if a user clicked **Reject all**. This has been fixed.
+- Live shopping items scheduled for a future time slot that have no strikethrough price now display the correct normal price.
+- The automatic phone number detection in the Safari browser could lead to hydration errors if SSR was active. It is therefore deactivated by default.
+- Tool tips for the Add to wish list widget were not displayed correctly. This has been fixed.
+- The plentyShop assistant did not display the back end name of shipping profiles. This has been fixed.
+- An HTML element was output for the tag list, even if an item was not linked to any tags. This has been fixed. We would like to thank user @Lauflust for their contribution.
+- The validation of order properties and order characteristics of the type **File** is now exclusively carried out on the server side.
+
+### Changed templates
+
+- In Ceres 5.0.44 we made changes to template files which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
+- [resources/js/src/app/components/pageDesign/CookieBar.vue](https://github.com/plentymarkets/plugin-ceres/pull/3133/files#diff-07203a2a14f4fdfe0285c115db84358b9b18bbe84d3ab3536f80b667529b7392)
+- [resources/views/Widgets/Footer/CookieBarWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3133/files#diff-c05849d77ed56c7c3fe936d53064ffa075171ba20822d0448e351ee940c1dc59)
+- [resources/views/PageDesign/Partials/Head.twig](https://github.com/plentymarkets/plugin-ceres/pull/3109/files#diff-33a10158d672d50c9bc1c0e8a46fbd8edb701925dcb3f619c6ff6f8ca11e45ee)
+- [resources/js/src/app/components/item/AddToWishList.vue](https://github.com/plentymarkets/plugin-ceres/pull/3110/files#diff-ca84d4fb86526c6d5ab30af678de22127f6721548962854510cf3fc42d36352e)
+- [resources/js/src/app/components/item/OrderPropertyListGroup.vue](https://github.com/plentymarkets/plugin-ceres/pull/3115/files#diff-66d47567497f0cc8e0143d9f963d8c812092114dd774e63ccae91fe1179330ba)
+- [resources/js/src/app/components/item/OrderPropertyListItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3115/files#diff-38e564e102ed3a17d36a85e7a337ea233f1fba3a1e43d95808c20dde2484f1c9)
+- [resources/js/src/app/components/basket/BasketPreview.vue](https://github.com/plentymarkets/plugin-ceres/pull/3104/files#diff-21af208d0ab5bd9055fcd8ca0bda5d6c0770336ed010aa788a2f0c1d7222e2b6)
+- [resources/js/src/app/components/basket/BasketTotals.vue](https://github.com/plentymarkets/plugin-ceres/pull/3104/files#diff-74c12ada105a013f79bbea3a162d3e4358d1afa3f38c3e9e00894a3ab6ad01c1)
+- [resources/views/Widgets/Header/TopBarWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3104/files#diff-2696f6a2e31a39130c691133b3d6fdf30b218a6bdbbd0717433c835d060c3f66)
+- [resources/js/src/app/components/item/TagList.vue](https://github.com/plentymarkets/plugin-ceres/pull/3134/files#diff-1b324b2465d4c6e8aefae057e8d7e36990efbd9e72f3beee9c61149d8bbc7e00)
+- [resources/js/src/app/components/item/OrderPropertyListItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3123/files#diff-38e564e102ed3a17d36a85e7a337ea233f1fba3a1e43d95808c20dde2484f1c9)
+
+
 ## v5.0.43 (2021-11-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.42...5.0.43" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added 
