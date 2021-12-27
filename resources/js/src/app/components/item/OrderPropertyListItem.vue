@@ -231,13 +231,13 @@ export default {
         footnotes()
         {
             if(this.surcharge > 0 && this.property.isRequired){
-                return "*, **"
+                return this.$translate("Ceres::Template.singleItemFootnote12");
             }
             if(this.surcharge <= 0 && this.property.isRequired){
-                return "**"
+                return this.$translate("Ceres::Template.singleItemFootnote2");
             }
             if(this.surcharge > 0 && !this.property.isRequired){
-                return "*"
+                return this.$translate("Ceres::Template.singleItemFootnote1");
             }
         },
 
