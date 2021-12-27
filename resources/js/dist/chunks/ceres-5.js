@@ -201,8 +201,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       return this.$store.getters["".concat(this.itemId, "/variationMissingProperties")];
     },
     variationMarkInvalidProperties: function variationMarkInvalidProperties() {
-      var currentVariation = this.$store.getters["".concat(this.itemId, "/currentItemVariation")];
-      return currentVariation && currentVariation.variationMarkInvalidProperties;
+      return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variationMarkInvalidProperties;
     }
   },
   methods: {
@@ -513,6 +512,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
@@ -586,16 +592,31 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     hasError: function hasError() {
       var _this2 = this;
 
-      if (this.variationMarkInvalidProperties && this.inputType === "radio") {
+      var isRequired = this.property.isRequired || App.config.item.requireOrderProperties;
+
+      if (isRequired && this.variationMarkInvalidProperties && this.inputType === "radio") {
         return this.variationMissingProperties.find(function (property) {
           return property.property.id === _this2.property.id;
         });
       }
 
-      return this.variationMarkInvalidProperties && !this.property.value;
+      return isRequired && this.variationMarkInvalidProperties && !this.property.value;
     },
     surcharge: function surcharge() {
       return this.property.itemSurcharge || this.property.surcharge;
+    },
+    footnotes: function footnotes() {
+      if (this.surcharge > 0 && this.property.isRequired) {
+        return this.$translate("Ceres::Template.singleItemFootnote12");
+      }
+
+      if (this.surcharge <= 0 && this.property.isRequired) {
+        return this.$translate("Ceres::Template.singleItemFootnote2");
+      }
+
+      if (this.surcharge > 0 && !this.property.isRequired) {
+        return this.$translate("Ceres::Template.singleItemFootnote1");
+      }
     },
     selectedDescription: function selectedDescription() {
       if (this.inputType !== "selection" || Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isNullOrUndefined"])(this.selectionValue)) {
@@ -609,8 +630,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       return this.$store.getters["".concat(this.itemId, "/variationMissingProperties")];
     },
     variationMarkInvalidProperties: function variationMarkInvalidProperties() {
-      var currentVariation = this.$store.getters["".concat(this.itemId, "/currentItemVariation")];
-      return currentVariation && currentVariation.variationMarkInvalidProperties;
+      return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variationMarkInvalidProperties;
     },
     isTouchDevice: function isTouchDevice() {
       return !App.isSSR ? document.body.classList.contains("touch") : false;
@@ -1100,87 +1120,106 @@ var render = function() {
                   _vm._v(_vm._s(_vm.property.names.name))
                 ]),
                 _vm._v(" "),
-                _vm.surcharge > 0
-                  ? _c("strong", { staticClass: "ml-1" }, [
-                      _vm._v(
-                        "(+ " +
-                          _vm._s(_vm._f("currency")(_vm.surcharge)) +
-                          ") *"
-                      )
-                    ])
-                  : _vm._e()
+                _c(
+                  "strong",
+                  { staticClass: "ml-1" },
+                  [
+                    _vm.surcharge > 0
+                      ? [
+                          _vm._v(
+                            "(+ " +
+                              _vm._s(_vm._f("currency")(_vm.surcharge)) +
+                              ")"
+                          )
+                        ]
+                      : _vm._e(),
+                    _c("span", [_vm._v(" " + _vm._s(_vm.footnotes))])
+                  ],
+                  2
+                )
               ])
             ]
           )
         : _vm.inputType === "checkbox" || _vm.inputType === "radio"
-        ? _c("div", { staticClass: "form-check" }, [
-            _vm.inputType === "checkbox"
-              ? _c("input", {
-                  staticClass: "form-check-input",
-                  attrs: {
-                    type: "checkbox",
-                    name: _vm.group ? _vm.group.id : "check" + _vm._uid,
-                    id: "check" + _vm._uid,
-                    "data-testing": "order-property-input-checkbox"
-                  },
-                  domProps: {
-                    value: _vm.property.id,
-                    checked: _vm.property.value
-                  },
-                  on: {
-                    change: function($event) {
-                      return _vm.onInputValueChanged($event.target.checked)
+        ? _c(
+            "div",
+            { staticClass: "form-check", class: { error: _vm.hasError } },
+            [
+              _vm.inputType === "checkbox"
+                ? _c("input", {
+                    staticClass: "form-check-input",
+                    attrs: {
+                      type: "checkbox",
+                      name: _vm.group ? _vm.group.id : "check" + _vm._uid,
+                      id: "check" + _vm._uid,
+                      "data-testing": "order-property-input-checkbox"
+                    },
+                    domProps: {
+                      value: _vm.property.id,
+                      checked: _vm.property.value
+                    },
+                    on: {
+                      change: function($event) {
+                        return _vm.onInputValueChanged($event.target.checked)
+                      }
                     }
-                  }
-                })
-              : _c("input", {
-                  staticClass: "form-check-input",
-                  attrs: {
-                    type: "radio",
-                    name: _vm.group ? _vm.group.id : "check" + _vm._uid,
-                    id: "check" + _vm._uid,
-                    "data-testing": "order-property-input-radio"
-                  },
-                  domProps: {
-                    value: _vm.property.id,
-                    checked: _vm.property.value
-                  },
-                  on: {
-                    change: function($event) {
-                      return _vm.onInputValueChanged($event.target.value)
+                  })
+                : _c("input", {
+                    staticClass: "form-check-input",
+                    attrs: {
+                      type: "radio",
+                      name: _vm.group ? _vm.group.id : "check" + _vm._uid,
+                      id: "check" + _vm._uid,
+                      "data-testing": "order-property-input-radio"
+                    },
+                    domProps: {
+                      value: _vm.property.id,
+                      checked: _vm.property.value
+                    },
+                    on: {
+                      change: function($event) {
+                        return _vm.onInputValueChanged($event.target.value)
+                      }
                     }
+                  }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  directives: [{ name: "tooltip", rawName: "v-tooltip" }],
+                  staticClass: "form-check-label text-appearance d-flex",
+                  attrs: {
+                    for: "check" + _vm._uid,
+                    "data-toggle": "tooltip",
+                    title: _vm.property.names.description
                   }
-                }),
-            _vm._v(" "),
-            _c(
-              "label",
-              {
-                directives: [{ name: "tooltip", rawName: "v-tooltip" }],
-                staticClass: "form-check-label text-appearance d-flex",
-                class: { "text-danger": _vm.hasError },
-                attrs: {
-                  for: "check" + _vm._uid,
-                  "data-toggle": "tooltip",
-                  title: _vm.property.names.description
-                }
-              },
-              [
-                _c("span", { staticClass: "text-wrap" }, [
-                  _vm._v(_vm._s(_vm.property.names.name))
-                ]),
-                _vm._v(" "),
-                _vm.surcharge > 0
-                  ? _c("strong", { staticClass: "ml-1" }, [
-                      _vm._v(
-                        "(+ " +
-                          _vm._s(_vm._f("currency")(_vm.surcharge)) +
-                          ") *"
-                      )
-                    ])
-                  : _vm._e()
-              ]
-            )
-          ])
+                },
+                [
+                  _c("span", { staticClass: "text-wrap" }, [
+                    _vm._v(_vm._s(_vm.property.names.name))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "strong",
+                    { staticClass: "ml-1" },
+                    [
+                      _vm.surcharge > 0
+                        ? [
+                            _vm._v(
+                              "(+ " +
+                                _vm._s(_vm._f("currency")(_vm.surcharge)) +
+                                ")"
+                            )
+                          ]
+                        : _vm._e(),
+                      _c("span", [_vm._v(" " + _vm._s(_vm.footnotes))])
+                    ],
+                    2
+                  )
+                ]
+              )
+            ]
+          )
         : _vm.inputType === "selection"
         ? _c(
             "div",
@@ -1281,15 +1320,23 @@ var render = function() {
                         _vm._v(_vm._s(_vm.property.names.name))
                       ]),
                       _vm._v(" "),
-                      _vm.surcharge > 0
-                        ? _c("strong", { staticClass: "ml-1" }, [
-                            _vm._v(
-                              "(+ " +
-                                _vm._s(_vm._f("currency")(_vm.surcharge)) +
-                                ") *"
-                            )
-                          ])
-                        : _vm._e()
+                      _c(
+                        "strong",
+                        { staticClass: "ml-1" },
+                        [
+                          _vm.surcharge > 0
+                            ? [
+                                _vm._v(
+                                  "(+ " +
+                                    _vm._s(_vm._f("currency")(_vm.surcharge)) +
+                                    ")"
+                                )
+                              ]
+                            : _vm._e(),
+                          _c("span", [_vm._v(" " + _vm._s(_vm.footnotes))])
+                        ],
+                        2
+                      )
                     ]
                   )
                 ]
@@ -1376,15 +1423,23 @@ var render = function() {
                       _vm._v(_vm._s(_vm.property.names.name))
                     ]),
                     _vm._v(" "),
-                    _vm.surcharge > 0
-                      ? _c("strong", { staticClass: "ml-1" }, [
-                          _vm._v(
-                            "(+ " +
-                              _vm._s(_vm._f("currency")(_vm.surcharge)) +
-                              ") *"
-                          )
-                        ])
-                      : _vm._e()
+                    _c(
+                      "strong",
+                      { staticClass: "ml-1" },
+                      [
+                        _vm.surcharge > 0
+                          ? [
+                              _vm._v(
+                                "(+ " +
+                                  _vm._s(_vm._f("currency")(_vm.surcharge)) +
+                                  ")"
+                              )
+                            ]
+                          : _vm._e(),
+                        _c("span", [_vm._v(" " + _vm._s(_vm.footnotes))])
+                      ],
+                      2
+                    )
                   ]),
                   _vm._v(" "),
                   !_vm.selectedFile

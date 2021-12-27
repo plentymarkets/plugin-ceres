@@ -567,6 +567,10 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       type: Boolean,
       default: false
     },
+    hasRequiredOrderProperty: {
+      type: Boolean,
+      default: false
+    },
     hasPrice: {
       type: Boolean,
       default: true
@@ -607,7 +611,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     requiresProperties: function requiresProperties() {
       return App.config.item.requireOrderProperties && (this.hasOrderProperties || this.orderProperties.filter(function (property) {
         return property.property.isShownOnItemPage;
-      }).length > 0);
+      }).length > 0) || this.hasRequiredOrderProperty;
     },
     buttonClasses: function buttonClasses() {
       var classes = [];
@@ -7689,8 +7693,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       return this.$store.getters["".concat(this.itemId, "/variationMissingProperties")];
     },
     variationMarkInvalidProperties: function variationMarkInvalidProperties() {
-      var currentVariation = this.$store.getters["".concat(this.itemId, "/currentItemVariation")];
-      return currentVariation && currentVariation.variationMarkInvalidProperties;
+      return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variationMarkInvalidProperties;
     }
   },
   methods: {
@@ -8001,6 +8004,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
@@ -8074,16 +8084,31 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     hasError: function hasError() {
       var _this2 = this;
 
-      if (this.variationMarkInvalidProperties && this.inputType === "radio") {
+      var isRequired = this.property.isRequired || App.config.item.requireOrderProperties;
+
+      if (isRequired && this.variationMarkInvalidProperties && this.inputType === "radio") {
         return this.variationMissingProperties.find(function (property) {
           return property.property.id === _this2.property.id;
         });
       }
 
-      return this.variationMarkInvalidProperties && !this.property.value;
+      return isRequired && this.variationMarkInvalidProperties && !this.property.value;
     },
     surcharge: function surcharge() {
       return this.property.itemSurcharge || this.property.surcharge;
+    },
+    footnotes: function footnotes() {
+      if (this.surcharge > 0 && this.property.isRequired) {
+        return this.$translate("Ceres::Template.singleItemFootnote12");
+      }
+
+      if (this.surcharge <= 0 && this.property.isRequired) {
+        return this.$translate("Ceres::Template.singleItemFootnote2");
+      }
+
+      if (this.surcharge > 0 && !this.property.isRequired) {
+        return this.$translate("Ceres::Template.singleItemFootnote1");
+      }
     },
     selectedDescription: function selectedDescription() {
       if (this.inputType !== "selection" || Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isNullOrUndefined"])(this.selectionValue)) {
@@ -8097,8 +8122,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       return this.$store.getters["".concat(this.itemId, "/variationMissingProperties")];
     },
     variationMarkInvalidProperties: function variationMarkInvalidProperties() {
-      var currentVariation = this.$store.getters["".concat(this.itemId, "/currentItemVariation")];
-      return currentVariation && currentVariation.variationMarkInvalidProperties;
+      return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variationMarkInvalidProperties;
     },
     isTouchDevice: function isTouchDevice() {
       return !App.isSSR ? document.body.classList.contains("touch") : false;
@@ -8883,6 +8907,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "single-add-to-basket",
@@ -8940,6 +8965,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+//
+//
 //
 //
 //
@@ -10653,6 +10680,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -11992,6 +12021,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+//
 //
 //
 //
@@ -14607,6 +14637,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -41154,7 +41185,7 @@ var render = function() {
                 '<div role="group" aria-label="Thumb Control" class="btn-group">',
                 "</div>",
                 [
-                  _vm.canBeAddedToBasket || _vm.isWishList
+                  _vm.canBeAddedToBasket
                     ? _vm._ssrNode(
                         '<button type="button"' +
                           _vm._ssrClass(
@@ -49840,24 +49871,22 @@ var render = function() {
               _vm._ssrNode(
                 ' <label class="d-flex"><span class="text-truncate">' +
                   _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
-                  "</span> " +
+                  '</span> <strong class="ml-1">' +
                   (_vm.surcharge > 0
-                    ? '<strong class="ml-1">' +
-                      _vm._ssrEscape(
-                        "(+ " +
-                          _vm._s(_vm._f("currency")(_vm.surcharge)) +
-                          ") *"
-                      ) +
-                      "</strong>"
+                    ? _vm._ssrEscape(
+                        "(+ " + _vm._s(_vm._f("currency")(_vm.surcharge)) + ")"
+                      )
                     : "<!---->") +
-                  "</label>"
+                  "<span>" +
+                  _vm._ssrEscape(" " + _vm._s(_vm.footnotes)) +
+                  "</span></strong></label>"
               )
             ],
             2
           )
         : _vm.inputType === "checkbox" || _vm.inputType === "radio"
         ? _vm._ssrNode(
-            '<div class="form-check">',
+            "<div" + _vm._ssrClass("form-check", { error: _vm.hasError }) + ">",
             "</div>",
             [
               _vm._ssrNode(
@@ -49888,7 +49917,6 @@ var render = function() {
                 {
                   directives: [{ name: "tooltip", rawName: "v-tooltip" }],
                   staticClass: "form-check-label text-appearance d-flex",
-                  class: { "text-danger": _vm.hasError },
                   attrs: {
                     for: "check" + _vm._uid,
                     "data-toggle": "tooltip",
@@ -49899,16 +49927,17 @@ var render = function() {
                   _vm._ssrNode(
                     '<span class="text-wrap">' +
                       _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
-                      "</span> " +
+                      '</span> <strong class="ml-1">' +
                       (_vm.surcharge > 0
-                        ? '<strong class="ml-1">' +
-                          _vm._ssrEscape(
+                        ? _vm._ssrEscape(
                             "(+ " +
                               _vm._s(_vm._f("currency")(_vm.surcharge)) +
-                              ") *"
-                          ) +
-                          "</strong>"
-                        : "<!---->")
+                              ")"
+                          )
+                        : "<!---->") +
+                      "<span>" +
+                      _vm._ssrEscape(" " + _vm._s(_vm.footnotes)) +
+                      "</span></strong>"
                   )
                 ]
               )
@@ -50008,17 +50037,17 @@ var render = function() {
                   _vm._ssrNode(
                     ' <label for="order-property-input-select" class="d-flex w-100"><span class="text-truncate">' +
                       _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
-                      "</span> " +
+                      '</span> <strong class="ml-1">' +
                       (_vm.surcharge > 0
-                        ? '<strong class="ml-1">' +
-                          _vm._ssrEscape(
+                        ? _vm._ssrEscape(
                             "(+ " +
                               _vm._s(_vm._f("currency")(_vm.surcharge)) +
-                              ") *"
-                          ) +
-                          "</strong>"
+                              ")"
+                          )
                         : "<!---->") +
-                      "</label>"
+                      "<span>" +
+                      _vm._ssrEscape(" " + _vm._s(_vm.footnotes)) +
+                      "</span></strong></label>"
                   )
                 ],
                 2
@@ -50100,17 +50129,17 @@ var render = function() {
                       _vm._ssrEscape(_vm._s(_vm.selectedFileName)) +
                       '</span> <span class="input-unit-label d-flex"><span class="text-truncate">' +
                       _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
-                      "</span> " +
+                      '</span> <strong class="ml-1">' +
                       (_vm.surcharge > 0
-                        ? '<strong class="ml-1">' +
-                          _vm._ssrEscape(
+                        ? _vm._ssrEscape(
                             "(+ " +
                               _vm._s(_vm._f("currency")(_vm.surcharge)) +
-                              ") *"
-                          ) +
-                          "</strong>"
+                              ")"
+                          )
                         : "<!---->") +
-                      "</span> " +
+                      "<span>" +
+                      _vm._ssrEscape(" " + _vm._s(_vm.footnotes)) +
+                      "</span></strong></span> " +
                       (!_vm.selectedFile
                         ? '<span class="input-unit-btn"><i class="fa fa-ellipsis-h"></i></span>'
                         : "<span" +
@@ -50553,6 +50582,8 @@ var render = function() {
             return prop.property.isOderProperty
           }),
           "has-order-properties": _vm.currentVariation.hasOrderProperties,
+          "has-required-order-property":
+            _vm.currentVariation.hasRequiredOrderProperty,
           "use-large-scale": false,
           "show-quantity": true,
           "item-url": _vm._f("itemURL")(_vm.currentVariation),
@@ -50795,6 +50826,11 @@ var render = function() {
                                         return prop.property.isOderProperty
                                       }
                                     ),
+                                    "has-order-properties":
+                                      _vm.currentVariation.hasOrderProperties,
+                                    "has-required-order-property":
+                                      _vm.currentVariation
+                                        .hasRequiredOrderProperty,
                                     "use-large-scale": false,
                                     "show-quantity": true,
                                     "item-url": _vm._f("itemURL")(
@@ -52188,6 +52224,7 @@ var render = function() {
                 return prop.property.isOderProperty
               }),
               "has-order-properties": _vm.item.hasOrderProperties,
+              "has-required-order-property": _vm.item.hasRequiredOrderProperty,
               "use-large-scale": true,
               "show-quantity": false,
               "item-url": _vm._f("itemURL")(_vm.item, _vm.urlWithVariationId),
@@ -52423,6 +52460,8 @@ var render = function() {
                       return prop.property.isOderProperty
                     }),
                     "has-order-properties": _vm.item.hasOrderProperties,
+                    "has-required-order-property":
+                      _vm.item.hasRequiredOrderProperty,
                     "use-large-scale": false,
                     "show-quantity": false,
                     "item-url": _vm._f("itemURL")(
@@ -53576,6 +53615,9 @@ var render = function() {
                                               "has-order-properties":
                                                 _vm.currentOffer.item
                                                   .hasOrderProperties,
+                                              "has-required-order-property":
+                                                _vm.currentOffer
+                                                  .hasRequiredOrderProperty,
                                               "use-large-scale": false,
                                               "show-quantity": false,
                                               "item-url": _vm._f("itemURL")(
@@ -53596,7 +53638,7 @@ var render = function() {
                               ],
                               null,
                               false,
-                              741665433
+                              883888925
                             )
                           })
                         ]
@@ -55743,6 +55785,8 @@ var render = function() {
                       }
                     ),
                     "has-order-properties": _vm.wishListItem.hasOrderProperties,
+                    "has-required-order-property":
+                      _vm.wishListItem.hasRequiredOrderProperty,
                     "use-large-scale": false,
                     "show-quantity": false,
                     "item-url": _vm._f("itemURL")(_vm.wishListItem),
@@ -90221,93 +90265,46 @@ var getters = {
     return [];
   },
   variationMissingProperties: function variationMissingProperties(state, getters, rootState, rootGetters) {
-    if (App.config.item.requireOrderProperties) {
-      if (getters.currentItemVariation.item.itemType === "set") {
-        var setMissingProperties = [];
+    if (getters.currentItemVariation.item.itemType === "set") {
+      var setMissingProperties = [];
 
-        var _iterator4 = _createForOfIteratorHelper(rootState.items.setComponentIds),
-            _step4;
+      var _iterator4 = _createForOfIteratorHelper(rootState.items.setComponentIds),
+          _step4;
 
-        try {
-          for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-            var itemId = _step4.value;
-            var componentMissingProperties = rootGetters["".concat(itemId, "/variationMissingProperties")];
-            setMissingProperties = [].concat(_toConsumableArray(setMissingProperties), _toConsumableArray(componentMissingProperties));
-          }
-        } catch (err) {
-          _iterator4.e(err);
-        } finally {
-          _iterator4.f();
+      try {
+        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+          var itemId = _step4.value;
+          var componentMissingProperties = rootGetters["".concat(itemId, "/variationMissingProperties")];
+          setMissingProperties = [].concat(_toConsumableArray(setMissingProperties), _toConsumableArray(componentMissingProperties));
         }
+      } catch (err) {
+        _iterator4.e(err);
+      } finally {
+        _iterator4.f();
+      }
 
-        return setMissingProperties;
-      } else {
-        if (state && state.variation.documents && state.variation.documents[0].data.properties) {
-          var missingProperties = state.variation.documents[0].data.properties.filter(function (property) {
+      return setMissingProperties;
+    } else {
+      if (state && state.variation.documents && state.variation.documents[0].data.properties) {
+        var missingProperties = [];
+
+        if (App.config.item.requireOrderProperties) {
+          missingProperties = state.variation.documents[0].data.properties.filter(function (property) {
             return property.property.isShownOnItemPage && !property.property.value && property.property.isOderProperty;
           });
-
-          if (missingProperties.length) {
-            var radioInformation = state.variation.documents[0].data.properties.map(function (property) {
-              if (property.group && property.group.orderPropertyGroupingType === "single" && property.property.valueType === "empty") {
-                return {
-                  groupId: property.group.id,
-                  propertyId: property.property.id,
-                  hasValue: !!property.property.value
-                };
-              }
-
-              return null;
-            });
-            radioInformation = _toConsumableArray(new Set(radioInformation.filter(function (id) {
-              return id;
-            })));
-            var radioIdsToRemove = [];
-
-            var _loop2 = function _loop2() {
-              var radioGroupId = _arr[_i];
-              var radioGroupToClean = radioInformation.find(function (radio) {
-                return radio.groupId === radioGroupId && radio.hasValue;
-              });
-
-              if (radioGroupToClean) {
-                var _iterator5 = _createForOfIteratorHelper(radioInformation.filter(function (radio) {
-                  return radio.groupId === radioGroupToClean.groupId && !radio.hasValue;
-                })),
-                    _step5;
-
-                try {
-                  for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-                    var radio = _step5.value;
-                    radioIdsToRemove.push(radio.propertyId);
-                  }
-                } catch (err) {
-                  _iterator5.e(err);
-                } finally {
-                  _iterator5.f();
-                }
-              }
-            };
-
-            for (var _i = 0, _arr = _toConsumableArray(new Set(radioInformation.map(function (radio) {
-              return radio.groupId;
-            }))); _i < _arr.length; _i++) {
-              _loop2();
-            }
-
-            missingProperties = missingProperties.filter(function (property) {
-              return !radioIdsToRemove.includes(property.property.id);
-            });
-          }
-
-          return missingProperties;
+        } else if (state.variation.documents[0].data.hasRequiredOrderProperty) {
+          missingProperties = state.variation.documents[0].data.properties.filter(function (property) {
+            return property.property.isRequired && property.property.isShownOnItemPage && !property.property.value && property.property.isOderProperty;
+          });
         }
 
-        return [];
-      }
-    }
+        _removeRadioValueProperties(state.variation, missingProperties);
 
-    return [];
+        return missingProperties;
+      }
+
+      return [];
+    }
   },
   currentItemVariation: function currentItemVariation(state) {
     return state.variation.documents && state.variation.documents[0] && state.variation.documents[0].data;
@@ -90326,6 +90323,65 @@ function normalizeOrderQuantities(variation) {
   }
 
   return variation;
+}
+
+function _removeRadioValueProperties(variation) {
+  var missingProperties = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+
+  if (missingProperties.length) {
+    var radioInformation = variation.documents[0].data.properties.map(function (property) {
+      if (property.group && property.group.orderPropertyGroupingType === "single" && property.property.valueType === "empty") {
+        return {
+          groupId: property.group.id,
+          propertyId: property.property.id,
+          hasValue: !!property.property.value
+        };
+      }
+
+      return null;
+    });
+    radioInformation = _toConsumableArray(new Set(radioInformation.filter(function (id) {
+      return id;
+    })));
+    var radioIdsToRemove = [];
+
+    var _loop2 = function _loop2() {
+      var radioGroupId = _arr[_i];
+      var radioGroupToClean = radioInformation.find(function (radio) {
+        return radio.groupId === radioGroupId && radio.hasValue;
+      });
+
+      if (radioGroupToClean) {
+        var _iterator5 = _createForOfIteratorHelper(radioInformation.filter(function (radio) {
+          return radio.groupId === radioGroupToClean.groupId && !radio.hasValue;
+        })),
+            _step5;
+
+        try {
+          for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+            var radio = _step5.value;
+            radioIdsToRemove.push(radio.propertyId);
+          }
+        } catch (err) {
+          _iterator5.e(err);
+        } finally {
+          _iterator5.f();
+        }
+      }
+    };
+
+    for (var _i = 0, _arr = _toConsumableArray(new Set(radioInformation.map(function (radio) {
+      return radio.groupId;
+    }))); _i < _arr.length; _i++) {
+      _loop2();
+    }
+
+    missingProperties = missingProperties.filter(function (property) {
+      return !radioIdsToRemove.includes(property.property.id);
+    });
+  }
+
+  return missingProperties;
 }
 
 /* harmony default export */ __webpack_exports__["default"] = ({
