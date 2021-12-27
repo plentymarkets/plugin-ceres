@@ -13,6 +13,7 @@
 - The description of order characteristics and order properties can now be displayed on mobile devices via a button.
 - It is now possible to show or hide price information in the shopping cart preview. You can carry out this setting in the plentyShop configuration under **Shopping cart » Show basket preview information**.
 - Order characteristics with the option **Required** are now supported.
+- Footnote symbols on the single item page are now customizable via multilingualism. The corresponding translation keys are: **singleItemFootnote1**, **singleItemFootnote2**, **singleItemFootnote12**.
 
 ### Changed
 

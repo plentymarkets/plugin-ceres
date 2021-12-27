@@ -13,6 +13,7 @@
 - Die Beschreibungen von Bestelleigenschaften und Bestellmerkmalen lassen sich jetzt auf mobilen Geräten über eine Schaltfläche anzeigen.
 - Es ist jetzt möglich, die angezeigten Preisinformationen in der Warenkorbvorschau ein- oder auszublenden. Du findest den Punkt in den plentyShop LTS Einstellungen unter **Warenkorb » Preisinformationen in der Warenkorbvorschau anzeigen**.
 - Bestelleigenschaften mir der Option **Verpflichtend** werden jetzt unterstützt.
+- Die Symbole für Fußnoten auf der Artikeldetailseite sind jetzt über die Multilingualität anpassbar. Die entsprechenden Übersetzungsschlüssel sind: **singleItemFootnote1**, **singleItemFootnote2**, **singleItemFootnote12**
 
 ### Geändert
 
