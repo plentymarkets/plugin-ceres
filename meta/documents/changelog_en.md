@@ -5,6 +5,7 @@
 ### TODO
 
 - The settings for displaying price information in the shopping cart preview are now effective. Review the settings in the **Plugins » plentyShop LTS » Shopping cart** section for the setting **Show basket preview information** and adjust the settings to your needs.
+- Due to changes to CookieBar widget in the ShopBuilder, it is necessary to regenerate the related contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
 
 ### Added
 
