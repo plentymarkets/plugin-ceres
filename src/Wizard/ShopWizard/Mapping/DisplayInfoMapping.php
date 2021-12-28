@@ -87,6 +87,12 @@ class DisplayInfoMapping
             "global"   => false,
             "optional" => true,
         ],
+        "displayInfo_cartPreviewData" => [
+            "field"    => "basket.preview_data",
+            "type"     => "concatenated",
+            "global"   => false,
+            "optional" => true,
+        ],
         "displayInfo_itemAdditionalInfo" => [
             "field"    => "basket.add_item_to_basket_confirm",
             "type"     => "string",
