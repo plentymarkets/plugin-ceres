@@ -5,7 +5,7 @@
 ### TODO
 
 - Die Einstellung **Preisinformation in der Warenkorbvorschau anzeigen** im Menü **Plugins » plentyShop LTS » Warenkorb** greift nun wieder. Überprüfe, ob du die dort angehakten Preisinformationen in der Warenkorbvorschau anzeigen willst. Passe die Einstellungen gegebenenfalls an.
-- Aufgrund von Änderungen am CookieBar Widget müssen die betroffenen ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+- Aufgrund von neuen Einstellungen am CookieBar Widget müssen die betroffenen ShopBuilder-Inhalte einmal im Editor geöffnet und neu gespeichert werden. Das Neugenerieren bestehender Inhalte ist an dieser Stelle nicht ausreichend.
 
 ### Hinzugefügt
 
