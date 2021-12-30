@@ -17,7 +17,7 @@
         "singleitem":   ["static", "structure", "default", "item", "itemcontent", "singleitem", "setcomponent"],
         "itemset":      ["static", "structure", "default", "item", "itemcontent", "setitem"],
         "categoryitem": ["static", "structure", "default", "categoryitem"],
-        "itemsearch":   ["static", "structure", "default", "categoryitem"],
+        "itemsearch":   ["static", "structure", "default", "categoryitem", "itemsearch"],
         "checkout":     ["static", "structure", "default", "checkout", "customer"],
         "myaccount":    ["static", "structure", "default", "myaccount", "customer"]
     },
