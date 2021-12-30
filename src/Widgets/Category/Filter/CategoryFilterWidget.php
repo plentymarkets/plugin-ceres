@@ -21,7 +21,7 @@ class CategoryFilterWidget extends FilterBaseWidget
         return WidgetDataFactory::make('Ceres::CategoryFilterWidget')
                                 ->withLabel('Widget.categoryFilterLabel')
                                 ->withPreviewImageUrl('/images/widgets/category-filter.svg')
-                                ->withType(WidgetTypes::CATEGORY_ITEM)
+                                ->withType(WidgetTypes::ITEM_SEARCH)
                                 ->withCategory(WidgetTypes::CATEGORY_ITEM)
                                 ->withPosition(1000)
                                 ->withSearchKeyWords([
