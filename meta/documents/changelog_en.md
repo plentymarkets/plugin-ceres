@@ -12,7 +12,7 @@
 - It is now possible to prioritise the search results by variation name. You can find the setting in the **Search** step in the plentyShop assistant.
 - It is now possible to determine the order of the buttons of the cookie bar in the widget settings. Additionally, you can hide the **Reject all** button.
 - The description of order characteristics and order properties can now be displayed on mobile devices via a button.
-- It is now possible to show or hide price information in the shopping cart preview. You can carry out this setting in the plentyShop configuration under **Shopping cart » Show basket preview information**.
+- It is now possible to show or hide price information in the shopping cart preview. You can carry out this setting in the plentyShop configuration under **Shopping cart » Show basket preview information**. This functionality is available only in ShopBuilder headers.
 - Order characteristics with the option **Required** are now supported.
 - Footnote symbols on the single item page are now customizable via multilingualism. The corresponding translation keys are: **singleItemFootnote1**, **singleItemFootnote2**, **singleItemFootnote12**.
 
