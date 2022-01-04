@@ -3,6 +3,7 @@
 namespace Ceres\Config;
 
 use Plenty\Modules\Webshop\Helpers\PluginConfig;
+use Plenty\Modules\System\Models\WebstoreConfiguration;
 
 /**
  * Class CeresItemConfig
@@ -127,6 +128,11 @@ class CeresItemConfig extends PluginConfig
     {
         return 'Ceres';
     }
+
+    /**
+     * @var WebstoreConfiguration $webstoreConfig The webstore configuration.
+     */
+    public $webstoreConfiguration;
 
     /**
      * @inheritDoc
