@@ -126,6 +126,11 @@ export function initClientStore(store)
 {
     store.commit("initConsents");
 
+    if (App.isSearch)
+    {
+        store.dispatch("loadComponent", "item-search");
+    }
+
     // Use DOMContentLoaded to load session data after app has been initialized
     document.addEventListener("DOMContentLoaded", () =>
     {
