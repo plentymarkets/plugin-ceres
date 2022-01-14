@@ -2,7 +2,7 @@
 
 namespace Ceres\Config;
 
-use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
+use Plenty\Modules\Webshop\Contracts\WebstoreConfigurationRepositoryContract;
 use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
 /**
@@ -172,8 +172,8 @@ class CeresItemConfig extends PluginConfig
         $this->showCategoryDescriptionBottom = $this->getTextValue('item.show_category_description_bottom', 'none');
 
         /** @var WebstoreConfigurationRepositoryContract $webstoreConfigurationRepository */
-        $webstoreConfigurationRepository = app(WebstoreConfigurationRepositoryContract::class);
-        $webstoreConfiguration = $webstoreConfigurationRepository->findByPlentyId(config('plentyId'));
+        $webstoreConfigurationRepository = pluginApp(WebstoreConfigurationRepositoryContract::class);
+        $webstoreConfiguration = $webstoreConfigurationRepository->getWebstoreConfiguration();
         $this->requireOrderProperties = !$webstoreConfiguration->useVariationOrderProperties && $this->getBooleanValue(
                 'item.require_all_properties',
                 false
