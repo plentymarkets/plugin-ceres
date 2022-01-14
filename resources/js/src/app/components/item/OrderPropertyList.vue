@@ -126,7 +126,7 @@ export default {
 
         renderOrderPropertyList()
         {
-            return (this.$store.getters[`${this.itemId}/currentItemVariation`].filter.isSalable && this.variationGroupedProperties.length) || App.isShopBuilder;
+            return this.variationGroupedProperties.length || App.isShopBuilder;
         },
 
         variationMissingProperties()
