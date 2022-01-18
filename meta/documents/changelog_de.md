@@ -1,5 +1,29 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.45 (2022-01-18) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.44...5.0.45" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Da die Option **Kund:innen müssen alle Bestellmerkmale ausfüllen, bevor sie einen Artikel in den Warenkorb legen können.** im Schritt **Angezeigte Informationen** des plentyShop-Assistenten ab sofort nicht mehr für Bestelleigenschaften gilt, müssen Händler:innen für Bestelleigenschaften im Menü **Einrichtung » Einstellungen » Eigenschaften » Konfiguration » (Eigenschaft wählen) » Optionen » Bestelloptionen** die Option **Verpflichtend** aktivieren, sofern die jeweilige Bestelleigenschaft verpflichtend sein soll.
+
+### Hinzugefügt
+
+- Die Sichtbarkeit der angezeigten Summen in der Warenkorbvorschau lässt sich jetzt auch über den plentyShop-Assistenten im Schritt **Angezeigte Informationen** einstellen.
+
+### Geändert
+
+- Bestelleigenschaften und Bestellmerkmale wurden nun auch angezeigt wenn die Variante nicht kaufbar ist.
+
+### Behoben
+
+- Das Styling von abgeschlossenen Live-Shopping-Angeboten wurde dem von noch laufenden Live-Shopping-Angeboten angeglichen.
+- Es war möglich eine Newsletter-Anmeldung ohne reCAPTCHA abzuschicken, wenn der dazugehörige Cookie nicht akzeptiert wurde. Dies wurde behoben.
+- Im plentyShop-Assistenten wurden keine Standardwerte für globale Werte angezeigt. Das wurde behoben.
+- Durch einen Fehler wurde der eingegebene Suchbegriff nicht richtig an die URL angehangen. Dies wurde behoben.
+- Die Option **Kund:innen müssen alle Bestellmerkmale ausfüllen, bevor sie einen Artikel in den Warenkorb legen können.** im plentyShop-Assistenten wird nun nicht mehr für Bestelleigenschaften berücksichtigt.
+- Durch einen Fehler wurden Änderungen an den Einstellungen des Cookie-Bar-Widgets nicht übernommen. Dies wurde behoben.
+- Eigenschaften vom Typ **Kein** in einer Gruppe vom Typ **Select** funktionieren nun korrekt, wenn für sie die Option **Verpflichtend** aktiv ist.
+
 ## v5.0.44 (2021-12-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.43...5.0.44" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
