@@ -68439,8 +68439,7 @@ var getters = {
           });
         }
 
-        _removeRadioValueProperties(state.variation, missingProperties);
-
+        missingProperties = _removeRadioValueProperties(state.variation, missingProperties);
         return missingProperties;
       }
 
@@ -68465,6 +68464,10 @@ function normalizeOrderQuantities(variation) {
 
   return variation;
 }
+/**
+ * Check all properties if a radio in a group is selected. If so, remove the group from the validation.
+ */
+
 
 function _removeRadioValueProperties(variation) {
   var missingProperties = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
