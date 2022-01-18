@@ -191,6 +191,8 @@ class DefaultFooterPreset implements ContentPreset
     {
         $this->preset->createWidget('Ceres::CookieBarWidget')
             ->withSetting('customClass', '')
-            ->withSetting('appearance', 'primary');
+            ->withSetting('appearance', 'primary')
+            ->withSetting('buttonOrder', '1-2-3')
+            ->withSetting('showRejectAll', 'true');
     }
 }
