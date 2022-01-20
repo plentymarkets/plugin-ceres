@@ -50,12 +50,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    facetData: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
-    },
     marginClasses: {
       type: String,
       default: null
@@ -70,13 +64,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return state.itemList.selectedFacets;
     }
   }),
-  created: function created() {
-    var _this$$store$state$it;
-
-    if (!((_this$$store$state$it = this.$store.state.itemList.facets) !== null && _this$$store$state$it !== void 0 && _this$$store$state$it.length)) {
-      this.$store.commit("addFacets", this.facetData);
-    }
-  },
   methods: _objectSpread(_objectSpread({
     removeTag: function removeTag(tag) {
       this.selectFacet({
