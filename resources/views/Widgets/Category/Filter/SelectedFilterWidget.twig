@@ -24,7 +24,7 @@
     <div class="list-controls widget-alignment">
         <lazy-hydrate when-idle>
             <item-filter-tag-list
-                    template="#vue-item-filter-tag-list"
+                    :facet-data="{{ Twig.print('facets | json_encode') }}"
                     :margin-classes       ="{{ spacingPadding | json_encode }}"
                     :margin-inline-styles ="{{ inlinePadding | json_encode }}">
             </item-filter-tag-list>
