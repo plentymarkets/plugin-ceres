@@ -44611,9 +44611,10 @@ var render = function() {
                 directives: [
                   {
                     name: "model",
-                    rawName: "v-model",
+                    rawName: "v-model.trim",
                     value: _vm.vatNumber,
-                    expression: "vatNumber"
+                    expression: "vatNumber",
+                    modifiers: { trim: true }
                   }
                 ],
                 attrs: {
@@ -44630,7 +44631,10 @@ var render = function() {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.vatNumber = $event.target.value
+                    _vm.vatNumber = $event.target.value.trim()
+                  },
+                  blur: function($event) {
+                    return _vm.$forceUpdate()
                   }
                 }
               }),
