@@ -22,7 +22,8 @@
 - Durch einen Fehler wurde der eingegebene Suchbegriff nicht richtig an die URL angehangen. Dies wurde behoben.
 - Die Option **Kund:innen müssen alle Bestellmerkmale ausfüllen, bevor sie einen Artikel in den Warenkorb legen können.** im plentyShop-Assistenten wird nun nicht mehr für Bestelleigenschaften berücksichtigt.
 - Durch einen Fehler wurden Änderungen an den Einstellungen des Cookie-Bar-Widgets nicht übernommen. Dies wurde behoben.
-- Eigenschaften vom Typ **Kein** in einer Gruppe vom Typ **Select** funktionieren nun korrekt, wenn für sie die Option **Verpflichtend** aktiv ist.
+- Bestelleigenschaften vom Typ **Kein** in einer Gruppe vom Typ **Select** funktionieren nun korrekt, wenn für sie die Option **Verpflichtend** aktiv ist.
+- Bestellmerkmale vom Typ **Kein** in einer Gruppe vom Typ **Einfachauswahl** funktionieren nun wieder korrekt, wenn im plentyShop-Assistenten die Option **Kund:innen müssen alle Bestellmerkmale ausfüllen, bevor sie einen Artikel in den Warenkorb legen können.** aktiv ist.
 
 ## v5.0.44 (2021-12-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.43...5.0.44" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
