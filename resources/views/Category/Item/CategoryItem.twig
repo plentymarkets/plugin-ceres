@@ -33,7 +33,7 @@
                             {% if isTag %}
                                 {{ trans("Ceres::Template.tagSearchResults", {"searchString": searchString}) }}
                             {% else %}
-                                {{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }}
+                                {{ trans("Ceres::Template.itemSearchResults") }} {{ searchString | e("js") }}
                             {% endif %}
                         </h1>
                     </div>
