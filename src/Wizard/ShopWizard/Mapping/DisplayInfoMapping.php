@@ -29,7 +29,7 @@ class DisplayInfoMapping
         ],
         "displayInfo_showCategoryFilter"=> [
             "field"    => "item.show_category_filter",
-            "type"     => "string",
+            "type"     => "boolean",
             "global"   => false,
             "optional" => true,
         ],
