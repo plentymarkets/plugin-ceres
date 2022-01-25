@@ -6,6 +6,7 @@ use Ceres\Helper\SearchOptions;
 use IO\Helper\ContextInterface;
 use Plenty\Modules\Webshop\ItemSearch\SearchPresets\Facets;
 use Plenty\Modules\Webshop\ItemSearch\SearchPresets\SearchItems;
+
 /**
  * Class ItemSearchContext
  *
