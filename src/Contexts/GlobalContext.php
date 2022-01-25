@@ -4,6 +4,7 @@ namespace Ceres\Contexts;
 
 use Ceres\Config\CeresConfig;
 use Ceres\Helper\BuildHash;
+use Ceres\Helper\XSS;
 use IO\Extensions\Constants\ShopUrls;
 use IO\Helper\ContextInterface;
 use IO\Helper\Utils;
@@ -154,6 +155,13 @@ class GlobalContext implements ContextInterface
      */
     public function init($params)
     {
+        // Prevent vue xss
+        foreach ($params as &$param) {
+           if( XSS::testVue($param) ) {
+                $param = null;
+           }
+        }
+
         $this->params = $params;
 
         /** @var CategoryService $categoryService */

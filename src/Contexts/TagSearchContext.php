@@ -52,12 +52,6 @@ class TagSearchContext extends CategoryContext implements ContextInterface
             'priceMax'      => $this->request->get('priceMax', 0)
         ];
 
-        // Prevent vue xss
-        if (preg_match('/\$\{.*\}/', $itemListOptions['tagName']))
-        {
-            $itemListOptions['tagName'] = null;
-        }
-
         $itemListOptions = SearchOptions::validateItemListOptions($itemListOptions, SearchOptions::SCOPE_SEARCH);
         $this->initItemList(
             [

@@ -50,12 +50,6 @@ class ItemSearchContext extends CategoryContext implements ContextInterface
 
         $this->isSearch = true;
 
-        // Prevent vue xss
-        if (preg_match('/\$\{.*\}/', $itemListOptions['query']))
-        {
-            $itemListOptions['query'] = null;
-        }
-
         $this->searchString = $itemListOptions['query'];
 
         $this->initItemList(
