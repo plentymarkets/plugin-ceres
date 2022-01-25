@@ -865,7 +865,13 @@ var render = function() {
                         : _vm._e()
                     ])
                   : _vm._e(),
-                _vm._v("\n\n            * "),
+                _vm._v(
+                  "\n\n            " +
+                    _vm._s(
+                      _vm.$translate("Ceres::Template.liveShoppingFootnote")
+                    ) +
+                    " "
+                ),
                 _vm.showNetPrices
                   ? [
                       _vm._v(
@@ -978,7 +984,13 @@ var render = function() {
                 "span",
                 { staticClass: "vat small text-muted" },
                 [
-                  _vm._v("\n                * "),
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(
+                        _vm.$translate("Ceres::Template.liveShoppingFootnote")
+                      ) +
+                      " "
+                  ),
                   _vm.showNetPrices
                     ? [
                         _vm._v(
