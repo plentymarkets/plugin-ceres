@@ -49,7 +49,7 @@ export const exceptionMap = new Map(
         ["1341", "couponCampaignNoWebstoreActivated"],
         ["1342", "couponCampaignWrongWebstoreId"],
         ["1343", "couponCampaignNoWebstoreIdGiven"],
-        ["9999", "csrfTokenMismatch"]
+        ["1344", "csrfTokenMismatch"]
     ]
 );
 
