@@ -228,7 +228,7 @@
 
                 {% include "Ceres::PageDesign.Partials.Header.Navigation" %}
 
-                {% cacheslot breadcrumbs %}
+                {% cacheslot %}
                     {# breadcrumbs are related to every single page so they need to be wrapped in a cache slot #}
                     {% if not services.template.isHome() and not services.template.isMyAccount() and not services.template.isCheckout() %}
                         {% include "Ceres::PageDesign.Partials.Header.Breadcrumb" %}
