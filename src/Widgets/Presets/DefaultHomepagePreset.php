@@ -15,119 +15,347 @@ class DefaultHomepagePreset implements ContentPreset
 
         $this->createImageSlider();
         $this->createCategoryShowcase();
-        $this->createImageBox();
-        $this->createItemShowcase();
-        $this->createText();
-        $this->createImageTextBox();
-        $this->createImageBox();
-        $this->createNewsletterbox();
+        $this->createBackground();
+        $this->createBestsellersShowcase();
+        $this->createTextBox();
+        $this->createFirstImageTextContainer();
+        $this->createSecondImageTextContainer();
+        $this->createSecondBackground();
+        $this->createNewsletter();
 
         return $this->preset->toArray();
     }
 
-    public function createImageSlider(): void
+    private function createImageSlider(): void
     {
-        $this->preset->createWidget("Ceres::ImageCarouselWidget");
-    }
-    public function createCategoryShowcase(): void
-    {
-        $threeColumnWidget = $this->preset->createWidget('Ceres::ThreeColumnWidget')
-            ->withSetting('layout', 'twoToOneStacked');
-        $this->setupImageBoxWidget(
-            $threeColumnWidget->createChild('first', 'Ceres::ImageBoxWidget')
-        );
-        $twoColumnWidget = $threeColumnWidget->createChild('second', 'Ceres::TwoColumnWidget')
-            ->withSetting('layout', 'oneToOne');
+        $slides = [
+            [
+                "url" => [
+                    "type" => "category",
+                    "value" => "16"
+                ],
+                "slideUrlType" => "category",
+                "customImagePath" => "https://cdn15.plentymarkets.com/ksvjcz2xpb12/frontend/slider-living-3840x.jpg",
+                "headline" => "FURNITURE THAT STANDS OUT",
+                "headlineStyle" => "custom-caption",
+            ],
+            [
+                "url" => [
+                    "type" => "category",
+                    "value" => "16"
+                ],
+                "customImagePath" => "https://cdn15.plentymarkets.com/ksvjcz2xpb12/frontend/slider-wear-3840x.jpg",
+                "headline" => "CLOTHING OF THE FUTURE",
+                "headlineStyle" => "custom-caption",
+            ],
+            [
+                "url" => [
+                    "type" => "category",
+                    "value" => "16"
+                ],
+                "customImagePath" => "https://cdn15.plentymarkets.com/ksvjcz2xpb12/frontend/slider-gear-3840x.jpg",
+                "headline" => "THE FUTURE HAS ARRIVED",
+                "headlineStyle" => "custom-caption",
+            ]
+        ];
 
-        $this->setupImageBoxWidget(
-            $twoColumnWidget->createChild('first', 'Ceres::ImageBoxWidget')
-        );
-        $this->setupImageBoxWidget(
-            $twoColumnWidget->createChild('second', 'Ceres::ImageBoxWidget')
-        );
-        $this->setupImageBoxWidget(
-            $threeColumnWidget->createChild('third', 'Ceres::ImageBoxWidget')
-        );
+        $this->preset->createWidget("Ceres::ImageCarouselWidget")
+            ->withSetting("appearance", "primary")
+            ->withSetting("preloadImage", true)
+            ->withSetting("customClass", "negative-margin-top widget-fw vh-100 widget-dark img-1-offset-md-20-flip-horizontal")
+            ->withSetting("slides", $slides)
+            ->withSetting('spacing.customMargin', true)
+            ->withSetting('spacing.margin.bottom.value', 3)
+            ->withSetting('spacing.margin.bottom.unit', null);
     }
-    public function createImageBox(): void
+    private function createCategoryShowcase(): void
     {
-        $this->setupImageBoxWidget(
-            $this->preset->createWidget('Ceres::ImageBoxWidget')
-        );
+        $twoColumnWidget =  $this->preset->createWidget("Ceres::TwoColumnWidget")
+            ->withSetting('layout', 'oneToOne')
+            ->withSetting('layoutTablet', 'oneToOne')
+            ->withSetting('layoutMobile', 'stackedMobile');
+        $twoColumnWidgetRight = $twoColumnWidget->createChild('second', 'Ceres::TwoColumnWidget')
+            ->withSetting('layout', 'stacked')
+            ->withSetting('layoutTablet', 'stacked')
+            ->withSetting('layoutMobile', 'stackedMobile');
+        $innerTwoColumnWidgetRight = $twoColumnWidgetRight->createChild('first', 'Ceres::TwoColumnWidget')
+            ->withSetting('layout', 'oneToOne')
+            ->withSetting('layoutTablet', 'oneToOne')
+            ->withSetting('layoutMobile', 'stackedMobile');
+
+        $twoColumnWidget->createChild('first', 'Ceres::ImageBoxWidget')
+            ->withSetting("appearance", "primary")
+            ->withSetting("customClass", "h-100 widget-dark mouseover-zoom")
+            ->withSetting("style", "inline-caption")
+            ->withSetting("aspectRatio", "retain")
+            ->withSetting("headline", "PLENTY GEAR")
+            ->withSetting("customImagePath", "https://cdn15.plentymarkets.com/ksvjcz2xpb12/frontend/category-gear-1430x.png")
+            ->withSetting('url.type', 'category')
+            ->withSetting('url.value', '16')
+            ->withSetting("customCaption", true)
+            ->withSetting("lazyLoading", true);
+
+        $innerTwoColumnWidgetRight->createChild('first', 'Ceres::ImageBoxWidget')
+            ->withSetting("appearance", "primary")
+            ->withSetting("customClass", "widget-dark mouseover-zoom")
+            ->withSetting("style", "inline-caption")
+            ->withSetting("aspectRatio", "retain")
+            ->withSetting("headline", "PLENTY WEAR - WOMEN")
+            ->withSetting("customImagePath", "https://cdn15.plentymarkets.com/ksvjcz2xpb12/frontend/category-wear-female-715x.png")
+            ->withSetting('url.type', 'category')
+            ->withSetting('url.value', '16')
+            ->withSetting("customCaption", true)
+            ->withSetting("lazyLoading", true);
+
+        $innerTwoColumnWidgetRight->createChild('second', 'Ceres::ImageBoxWidget')
+            ->withSetting("appearance", "primary")
+            ->withSetting("customClass", "widget-dark mouseover-zoom")
+            ->withSetting("style", "inline-caption")
+            ->withSetting("aspectRatio", "retain")
+            ->withSetting("headline", "PLENTY WEAR - MEN")
+            ->withSetting("customImagePath", "https://cdn15.plentymarkets.com/ksvjcz2xpb12/frontend/category-wear-male-715x.png")
+            ->withSetting('url.type', 'category')
+            ->withSetting('url.value', '16')
+            ->withSetting("customCaption", true)
+            ->withSetting("lazyLoading", true);
+
+        $twoColumnWidgetRight->createChild('second', 'Ceres::ImageBoxWidget')
+            ->withSetting("appearance", "primary")
+            ->withSetting("customClass", "widget-dark mouseover-zoom")
+            ->withSetting("style", "inline-caption")
+            ->withSetting("aspectRatio", "retain")
+            ->withSetting("headline", '"PLENTY LIVING"')
+            ->withSetting("customImagePath", "https://cdn15.plentymarkets.com/ksvjcz2xpb12/frontend/category-living-1430x.png")
+            ->withSetting('url.type', 'category')
+            ->withSetting('url.value', '16')
+            ->withSetting("customCaption", true)
+            ->withSetting("lazyLoading", true);
     }
-    public function createItemShowcase()
+    private function createBackground(): void
     {
-        $this->setupItemListWidget(
-            $this->preset->createWidget("Ceres::ItemListWidget"),
-            1
-        );
-        $this->setupItemListWidget(
-            $this->preset->createWidget("Ceres::ItemListWidget"),
-            2
-        );
+        $bgContainer = $this->preset->createWidget("Ceres::BackgroundWidget")
+            ->withSetting('customClass', 'd-flex align-items-end vh-100')
+            ->withSetting('fullWidth', true)
+            ->withSetting('lazyloadImage', true)
+            ->withSetting('sourceType', 'custom-image')
+            ->withSetting('customImagePath', "https://cdn15.plentymarkets.com/ksvjcz2xpb12/frontend/story-tree-3840x.jpg")
+            ->withSetting("imageSize", "cover")
+            ->withSetting("aspectRatio", "auto")
+            ->withSetting('spacing.customMargin', true)
+            ->withSetting('spacing.margin.bottom.value', 3)
+            ->withSetting('spacing.margin.bottom.unit', null);
+
+        $bgContainer->createChild('background', 'Ceres::InlineTextWidget')
+            ->withSetting("text", '<h4>NO MATTER HOW SMALL</h4>')
+            ->withSetting("appearance", "none")
+            ->withSetting("spacing.customPadding", true)
+            ->withSetting("spacing.padding.left.value", 0)
+            ->withSetting("spacing.padding.left.unit", null)
+            ->withSetting("spacing.padding.right.value", 0)
+            ->withSetting("spacing.padding.right.unit", null)
+            ->withSetting("spacing.padding.top.value", 0)
+            ->withSetting("spacing.padding.top.unit", null)
+            ->withSetting("spacing.padding.bottom.value", 0)
+            ->withSetting("spacing.padding.bottom.unit", null);
+
+        $bgContainer->createChild('background', 'Ceres::InlineTextWidget')
+            ->withSetting("text", '<h4>WITH EVERY ORDER /n WE WILL PLANT A TREE</h4>')
+            ->withSetting("appearance", "none")
+            ->withSetting("spacing.customPadding", true)
+            ->withSetting("spacing.padding.top.value", 0)
+            ->withSetting("spacing.padding.top.unit", null);
+
+        $bgContainer->createChild('background', 'Ceres::LinkWidget')
+            ->withSetting('customClass', 'text-center btn-outline widget-light')
+            ->withSetting('appearance', 'primary')
+            ->withSetting('block', 'true')
+            ->withSetting('text', 'SHOP NOW')
+            ->withSetting('url.type', 'category')
+            ->withSetting('url.value', '16');
     }
-    public function createText()
+    private function createBestsellersShowcase(): void
     {
         $this->preset->createWidget("Ceres::InlineTextWidget")
-            ->withSetting("text", '<h1>{{ trans("Ceres::Template.infoTextHeadline") }}</h1><br><p>{{ trans("Ceres::Template.infoText") }}</p>');
-    }
-    public function createImageTextBox()
-    {
-        $twoColumnWidget = $this->preset->createWidget('Ceres::TwoColumnWidget')
-            ->withSetting('layout', 'oneToOne');
-        $this->setupImageBoxWidget(
-            $twoColumnWidget->createChild('first', 'Ceres::ImageBoxWidget')
-        );
-        $twoColumnWidget->createChild('second', "Ceres::InlineTextWidget")
-            ->withSetting("text", '<h1>{{ trans("Ceres::Template.infoTextHeadline") }}</h1><br><p>{{ trans("Ceres::Template.infoText") }}</p>');
-        $twoColumnWidget->createChild('first', "Ceres::InlineTextWidget")
-            ->withSetting("text", '<h1>{{ trans("Ceres::Template.infoTextHeadline") }}</h1><br><p>{{ trans("Ceres::Template.infoText") }}</p>');
-        $this->setupImageBoxWidget(
-            $twoColumnWidget->createChild('second', 'Ceres::ImageBoxWidget')
-        );
-    }
-    public function createNewsletterbox()
-    {
-        $row = $this->preset
-            ->createWidget("Ceres::ThreeColumnWidget")
-            ->withSetting("customClass", "")
-            ->withSetting("layout", "oneToTwoToOne");
+            ->withSetting("text", '<h2>Best sellers</h2>')
+            ->withSetting("appearance", "none")
+            ->withSetting("spacing.customPadding", true)
+            ->withSetting("spacing.padding.left.value", 0)
+            ->withSetting("spacing.padding.left.unit", null)
+            ->withSetting("spacing.padding.right.value", 0)
+            ->withSetting("spacing.padding.right.unit", null)
+            ->withSetting("spacing.customMargin", true)
+            ->withSetting("spacing.margin.top.value", 5)
+            ->withSetting("spacing.margin.top.unit", null);
 
-        $row->createChild("second", "Ceres::InlineTextWidget")
-            ->withSetting("text", '<h1>{{ trans("Ceres::Template.newsletterOptInTitle") }}</h1><p>{{ trans("Ceres::Template.newsletterOptInInfoText") }}</p>')
-            ->withSetting("customClass", "");
-
-        $row->createChild("second", "Ceres::NewsletterWidget")
-            ->withSetting("customClass", "")
-            ->withSetting("appearance", "primary");
-    }
-
-    private function setupImageBoxWidget($widget, $categoryId = 0, $variationId = 0, $customImagePath = "", $style = "no-caption", $appearance = "primary")
-    {
-        $widget
-            ->withSetting("appearance", $appearance)
-            ->withSetting("style", $style)
-            ->withSetting("imageSize", "cover")
-            ->withSetting("categoryId", $categoryId > 0 ? $categoryId : "")
-            ->withSetting("variationId", $variationId > 0 ? $variationId : "")
-            ->withSetting("customImagePath", $customImagePath);
-    }
-    private function setupItemListWidget($widget, $categoryId = 0, $tagId = 0, $itemSort = "texts.name1_asc")
-    {
-        $listType = "last_seen";
-        if ($categoryId > 0) {
-            $listType = "category";
-        }
-        if ($tagId > 0) {
-            $listType = "tag_list";
-        }
-
-        $widget
+        $this->preset->createWidget("Ceres::ItemListWidget")
             ->withSetting("appearance", "primary")
-            ->withSetting("listType", $listType)
-            ->withSetting("categoryId", $categoryId)
-            ->withSetting("tagId", $tagId)
-            ->withSetting("itemSort", $itemSort)
-            ->withSetting("maxItems", 8);
+            ->withSetting('customClass', 'widget-dark item-bg-gray item-vat-hidden btn-outline')
+            ->withSetting("categoryId", 16)
+            ->withSetting("itemSort", "texts.name1_asc")
+            ->withSetting("headlineStyle", "no-caption")
+            ->withSetting("maxItems", 4);
+
+        $this->preset->createWidget("Ceres::ItemListWidget")
+            ->withSetting("appearance", "primary")
+            ->withSetting('customClass', 'widget-dark item-bg-gray item-vat-hidden btn-outline')
+            ->withSetting("categoryId", 16)
+            ->withSetting("itemSort", "texts.name1_desc")
+            ->withSetting("spacing.customMargin", true)
+            ->withSetting("spacing.margin.bottom.value", 0)
+            ->withSetting("spacing.margin.bottom.unit", null)
+            ->withSetting("headlineStyle", "no-caption")
+            ->withSetting("maxItems", 4);
+            
+            
+        $this->preset->createWidget('Ceres::CodeWidget')
+        ->withSetting('appearance', 'none')
+        ->withSetting('text', '<p class="mb-0">{{ trans("Ceres::Template.singleItemFootnote1") }} {% if services.customer.showNetPrices() %}{{ trans("Ceres::Template.singleItemExclVAT") }}{% else %}{{ trans("Ceres::Template.singleItemInclVAT") }}{% endif %} {{ trans("Ceres::Template.singleItemExclusive") }} <a {% if ceresConfig.global.shippingCostsCategoryId > 0 %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.singleItemShippingCosts") }}">{{ trans("Ceres::Template.singleItemShippingCosts") }}</a></p>');
+    }
+    private function createTextBox(): void
+    {
+        $this->preset->createWidget("Ceres::InlineTextWidget")
+            ->withSetting("text", '<h2>Our philosophy</h2><br/><p>We create sustainable products that last & look unique. Our collection is divers and is meant to meet your needs in almost any situation. From shirts to drones, we provide products that benefit not only you, but also our planet.</p>')
+            ->withSetting("appearance", "none")
+            ->withSetting('customClass', 'container')
+            ->withSetting("spacing.customMargin", true)
+            ->withSetting("spacing.margin.top.value", 5)
+            ->withSetting("spacing.margin.top.unit", null)
+            ->withSetting("spacing.margin.bottom.value", 4)
+            ->withSetting("spacing.margin.bottom.unit", null);
+    }
+    private function createFirstImageTextContainer(): void
+    {
+        $twoColumnWidget =  $this->preset->createWidget("Ceres::TwoColumnWidget")
+        ->withSetting('layout', 'sevenToFive')
+        ->withSetting('layoutTablet', 'stackedTablet')
+        ->withSetting('layoutMobile', 'stackedMobile')
+        ->withSetting('customClass','mb-4');
+
+        $twoColumnWidget->createChild('first', 'Ceres::ImageBoxWidget')
+        ->withSetting("appearance", "primary")
+        ->withSetting("style", "no-caption")
+        ->withSetting("aspectRatio", "retain")
+        ->withSetting("customImagePath", "https://cdn15.plentymarkets.com/ksvjcz2xpb12/frontend/story-precision-1920x.jpg")
+        ->withSetting("lazyLoading", true);
+
+        $innerTwoColumnWidget = $twoColumnWidget->createChild('second', 'Ceres::TwoColumnWidget')
+        ->withSetting('layout', 'nineToThree')
+        ->withSetting('layoutTablet', 'stackedTablet')
+        ->withSetting('layoutMobile', 'stackedMobile');
+
+        $innerTwoColumnWidget->createChild('first', 'Ceres::InlineTextWidget')
+        ->withSetting("text", '<h2>High precision, High-Tech</h2><br/><p>We have perfected our craft and achieved high performance quality in clothing, furniture and applicable technologies. Being at the tip of innovation and using holistic methods is our default way of creating.</p>')
+        ->withSetting("appearance", "none")
+        ->withSetting("spacing.customPadding", true)
+        ->withSetting('customClass', 'container')
+        ->withSetting("spacing.padding.top.value", 4)
+        ->withSetting("spacing.padding.top.unit", null)
+        ->withSetting("spacing.padding.bottom.value", 4)
+        ->withSetting("spacing.padding.bottom.unit", null)
+        ->withSetting("spacing.padding.left.value", 4)
+        ->withSetting("spacing.padding.left.unit", null)
+        ->withSetting("spacing.padding.right.value", 4)
+        ->withSetting("spacing.padding.right.unit", null);
+    }
+
+    private function createSecondImageTextContainer(): void
+    {
+        $twoColumnWidget =  $this->preset->createWidget("Ceres::TwoColumnWidget")
+        ->withSetting('layout', 'sevenToFive')
+        ->withSetting('layoutTablet', 'stackedTablet')
+        ->withSetting('layoutMobile', 'stackedMobile')
+        ->withSetting('customClass','mb-4');
+
+        $twoColumnWidget->createChild('second', 'Ceres::ImageBoxWidget')
+        ->withSetting("appearance", "primary")
+        ->withSetting("style", "no-caption")
+        ->withSetting("aspectRatio", "retain")
+        ->withSetting("customImagePath", "https://cdn15.plentymarkets.com/ksvjcz2xpb12/frontend/story-precision-1920x.jpg")
+        ->withSetting("lazyLoading", true);
+
+        $innerTwoColumnWidget = $twoColumnWidget->createChild('first', 'Ceres::TwoColumnWidget')
+        ->withSetting('layout', 'nineToThree')
+        ->withSetting('layoutTablet', 'stackedTablet')
+        ->withSetting('layoutMobile', 'stackedMobile');
+
+        $innerTwoColumnWidget->createChild('first', 'Ceres::InlineTextWidget')
+        ->withSetting("text", '<h2>High precision, High-Tech</h2><br/><p>We have perfected our craft and achieved high performance quality in clothing, furniture and applicable technologies. Being at the tip of innovation and using holistic methods is our default way of creating.</p>')
+        ->withSetting("appearance", "none")
+        ->withSetting("spacing.customPadding", true)
+        ->withSetting('customClass', 'container')
+        ->withSetting("spacing.padding.top.value", 4)
+        ->withSetting("spacing.padding.top.unit", null)
+        ->withSetting("spacing.padding.bottom.value", 4)
+        ->withSetting("spacing.padding.bottom.unit", null)
+        ->withSetting("spacing.padding.left.value", 4)
+        ->withSetting("spacing.padding.left.unit", null)
+        ->withSetting("spacing.padding.right.value", 4)
+        ->withSetting("spacing.padding.right.unit", null);
+    }
+    private function createSecondBackground(): void
+    {
+        $bgContainer = $this->preset->createWidget("Ceres::BackgroundWidget")
+            ->withSetting('customClass', 'text-right vh-100 pt-md-4 pr-md-4')
+            ->withSetting('fullWidth', true)
+            ->withSetting('lazyloadImage', true)
+            ->withSetting('sourceType', 'custom-image')
+            ->withSetting('customImagePath', "https://cdn15.plentymarkets.com/ksvjcz2xpb12/frontend/category-living-3840x.png")
+            ->withSetting("imageSize", "cover")
+            ->withSetting("aspectRatio", "auto")
+            ->withSetting('spacing.customMargin', true)
+            ->withSetting('spacing.margin.top.value', 5)
+            ->withSetting('spacing.margin.top.unit', null)
+            ->withSetting('spacing.margin.bottom.value', 5)
+            ->withSetting('spacing.margin.bottom.unit', null)
+            ->withSetting('spacing.customPadding', true)
+            ->withSetting('spacing.padding.top.value', 4)
+            ->withSetting('spacing.padding.top.unit', null)
+            ->withSetting('spacing.padding.right.value', 3)
+            ->withSetting('spacing.padding.right.unit', null);
+
+        $bgContainer->createChild('background', 'Ceres::InlineTextWidget')
+            ->withSetting("text", '<h4>LOVED BY MANY</h4><br/><h1>OUR TIMELESS CLASSIC</h1>')
+            ->withSetting("appearance", "none");
+
+        $bgContainer->createChild('background', 'Ceres::LinkWidget')
+            ->withSetting('customClass', 'text-right btn-outline widget-dark')
+            ->withSetting('appearance', 'primary')
+            ->withSetting('block', 'true')
+            ->withSetting('text', 'SHOP NOW')
+            ->withSetting('url.type', 'category')
+            ->withSetting('url.value', '16')
+            ->withSetting('spacing.customMargin', true)
+            ->withSetting('spacing.margin.left.value', 3)
+            ->withSetting('spacing.margin.left.unit', null)
+            ->withSetting('spacing.margin.right.value', 3)
+            ->withSetting('spacing.margin.right.unit', null)
+            ;
+    }
+    private function createNewsletter(): void
+    {
+
+       $threeColumnWidget = $this->preset->createWidget('Ceres::ThreeColumnWidget')
+        ->withSetting('layout', 'oneToOneToOne')
+        ->withSetting('customClass', 'mb-5');
+
+        $threeColumnWidget->createChild('second', 'Ceres::InlineTextWidget')
+        ->withSetting("text", '<h2>Get your 8€ welcome gift now</h2><br/><p>by subscribing to our weekly newsletter</p>')
+        ->withSetting("appearance", "none")
+        ->withSetting("spacing.customPadding", true)
+        ->withSetting("spacing.padding.top.value", 0)
+        ->withSetting("spacing.padding.top.unit", null)
+        ->withSetting("spacing.padding.bottom.value", 0)
+        ->withSetting("spacing.padding.bottom.unit", null)
+        ->withSetting("spacing.padding.left.value", 0)
+        ->withSetting("spacing.padding.left.unit", null)
+        ->withSetting("spacing.padding.right.value", 0)
+        ->withSetting("spacing.padding.right.unit", null)
+        ->withSetting("spacing.customMargin", true)
+        ->withSetting("spacing.margin.bottom.value", 2)
+        ->withSetting("spacing.margin.bottom.unit", null);
+
+        $threeColumnWidget->createChild('second', 'Ceres::NewsletterWidget')
+        ->withSetting('showPrivacyPolicyCheckbox', true)
+        ->withSetting('customClass', 'widget-dark');
     }
 }
