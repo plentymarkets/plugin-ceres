@@ -121,6 +121,14 @@ __webpack_require__.r(__webpack_exports__);
     save: function save() {
       var _this2 = this;
 
+      var recaptchaEl = this.$el.querySelector("[data-recaptcha]");
+
+      if (App.config.global.googleRecaptchaApiKey && (!window.grecaptcha || !recaptchaEl)) {
+        _services_NotificationService__WEBPACK_IMPORTED_MODULE_2__["default"].error(this.$translate("Ceres::Template.newsletterAcceptRecaptchaCookie"));
+        this.isDisabled = false;
+        return;
+      }
+
       Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_4__["executeReCaptcha"])(this.$el).then(function (recaptchaToken) {
         _services_ApiService__WEBPACK_IMPORTED_MODULE_1__["default"].post("/rest/io/customer/newsletter", {
           email: _this2.email,

@@ -226,6 +226,10 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       type: Boolean,
       default: false
     },
+    hasRequiredOrderProperty: {
+      type: Boolean,
+      default: false
+    },
     hasPrice: {
       type: Boolean,
       default: true
@@ -266,7 +270,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     requiresProperties: function requiresProperties() {
       return App.config.item.requireOrderProperties && (this.hasOrderProperties || this.orderProperties.filter(function (property) {
         return property.property.isShownOnItemPage;
-      }).length > 0);
+      }).length > 0) || this.hasRequiredOrderProperty;
     },
     buttonClasses: function buttonClasses() {
       var classes = [];
@@ -684,7 +688,7 @@ var render = function() {
                 attrs: { role: "group", "aria-label": "Thumb Control" }
               },
               [
-                _vm.canBeAddedToBasket || _vm.isWishList
+                _vm.canBeAddedToBasket
                   ? _c(
                       "button",
                       {

@@ -5,7 +5,3 @@
         margin-bottom: 0; // remove margin of empty paragraph for correct height detection
     }
 }
-
-.sticky-element.is-sticky {
-    z-index: $zindex-sticky !important; // stylelint-disable-line declaration-no-important
-}

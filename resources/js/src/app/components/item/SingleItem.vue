@@ -77,6 +77,8 @@
                                         :minimum-quantity="currentVariation.variation.minimumOrderQuantity"
                                         :maximum-quantity="!!currentVariation.variation.maximumOrderQuantity && currentVariation.variation.maximumOrderQuantity > 0 ? currentVariation.variation.maximumOrderQuantity : null"
                                         :order-properties="currentVariation.properties.filter(function(prop) { return prop.property.isOderProperty })"
+                                        :has-order-properties="currentVariation.hasOrderProperties"
+                                        :has-required-order-property="currentVariation.hasRequiredOrderProperty"
                                         :use-large-scale="false"
                                         :show-quantity="true"
                                         :item-url="currentVariation | itemURL"
@@ -103,7 +105,7 @@
                             <hr>
 
                             <span class="vat small text-muted">
-                                * <template v-if="showNetPrices">{{ $translate("Ceres::Template.singleItemExclVAT") }}</template><template v-else>{{ $translate("Ceres::Template.singleItemInclVAT") }}</template> {{ $translate("Ceres::Template.singleItemExclusive") }}
+                                {{ $translate("Ceres::Template.singleItemFootnote1") }} <template v-if="showNetPrices">{{ $translate("Ceres::Template.singleItemExclVAT") }}</template><template v-else>{{ $translate("Ceres::Template.singleItemInclVAT") }}</template> {{ $translate("Ceres::Template.singleItemExclusive") }}
                             <a v-if="hasShippingCostsCategoryId" data-toggle="modal" href="#shippingscosts" :title="$translate('Ceres::Template.singleItemShippingCosts')">{{ $translate("Ceres::Template.singleItemShippingCosts") }}</a>
                             <a v-else :title="$translate('Ceres::Template.singleItemShippingCosts')">{{ $translate("Ceres::Template.singleItemShippingCosts") }}</a>
 

@@ -11,11 +11,13 @@
                 :data-testing="'order-property-input-' + inputType">
             <label class="d-flex">
                 <span class="text-truncate">{{ property.names.name }}</span>
-                <strong class="ml-1" v-if="surcharge > 0">(+ {{ surcharge | currency }}) *</strong>
+                <strong class="ml-1">
+                    <template v-if="surcharge > 0">(+ {{ surcharge | currency }})</template><span> {{ footnotes }}</span>
+                </strong>
             </label>
         </div>
 
-        <div v-else-if="inputType === 'checkbox' || inputType === 'radio'" class="form-check">
+        <div v-else-if="inputType === 'checkbox' || inputType === 'radio'" class="form-check" :class="{ 'error': hasError }">
             <input v-if="inputType === 'checkbox'"
                    type="checkbox"
                    :name="group ? group.id : 'check' + _uid"
@@ -37,11 +39,12 @@
 
             <label class="form-check-label text-appearance d-flex"
                    :for="'check' + _uid"
-                   :class="{ 'text-danger': hasError }"
                    v-tooltip data-toggle="tooltip"
                    :title="property.names.description">
                 <span class="text-wrap">{{ property.names.name }}</span>
-                <strong class="ml-1" v-if="surcharge > 0">(+ {{ surcharge | currency }}) *</strong>
+                <strong class="ml-1">
+                    <template v-if="surcharge > 0">(+ {{ surcharge | currency }})</template><span> {{ footnotes }}</span>
+                </strong>
             </label>
         </div>
 
@@ -58,7 +61,9 @@
                 </select>
                 <label class="d-flex w-100" for="order-property-input-select">
                     <span class="text-truncate">{{ property.names.name }}</span>
-                    <strong class="ml-1" v-if="surcharge > 0">(+ {{ surcharge | currency }}) *</strong>
+                    <strong class="ml-1">
+                        <template v-if="surcharge > 0">(+ {{ surcharge | currency }})</template><span> {{ footnotes }}</span>
+                    </strong>
                 </label>
             </div>
 
@@ -77,7 +82,9 @@
                 <span class="input-unit-preview" :class="{ 'disabled': waiting }">{{selectedFileName}}</span>
                 <span class="input-unit-label d-flex">
                     <span class="text-truncate">{{ property.names.name }}</span>
-                    <strong class="ml-1" v-if="surcharge > 0">(+ {{ surcharge | currency }}) *</strong>
+                    <strong class="ml-1">
+                        <template v-if="surcharge > 0">(+ {{ surcharge | currency }})</template><span> {{ footnotes }}</span>
+                    </strong>
                 </span>
                 <span class="input-unit-btn" v-if="!selectedFile">
                     <i class="fa fa-ellipsis-h"></i>
@@ -85,7 +92,7 @@
                 <span class="input-unit-btn" v-else :disabled="waiting" @click.prevent="clearSelectedFile()">
                     <i class="fa fa-times"></i>
                 </span>
-                <input :disabled="waiting" ref="fileInput" type="file" size="50" accept="image/*" @change="setPropertyFile($event)" data-testing="order-property-input-file">
+                <input :disabled="waiting" ref="fileInput" type="file" size="50" @change="setPropertyFile($event)" data-testing="order-property-input-file">
             </label>
 
             <popper class="order-property-selection-info-popper" v-cloak v-if="isTouchDevice && property.names.description" placement="bottom">
@@ -206,17 +213,32 @@ export default {
 
         hasError()
         {
-            if (this.variationMarkInvalidProperties && this.inputType === "radio")
+            const isRequired = this.property.isRequired || App.config.item.requireOrderProperties;
+
+            if (isRequired && this.variationMarkInvalidProperties && this.inputType === "radio")
             {
                 return this.variationMissingProperties.find(property => property.property.id === this.property.id);
             }
 
-            return this.variationMarkInvalidProperties && !this.property.value;
+            return isRequired && this.variationMarkInvalidProperties && !this.property.value;
         },
 
         surcharge()
         {
             return this.property.itemSurcharge || this.property.surcharge;
+        },
+
+        footnotes()
+        {
+            if(this.surcharge > 0 && this.property.isRequired){
+                return this.$translate("Ceres::Template.singleItemFootnote12");
+            }
+            if(this.surcharge <= 0 && this.property.isRequired){
+                return this.$translate("Ceres::Template.singleItemFootnote2");
+            }
+            if(this.surcharge > 0 && !this.property.isRequired){
+                return this.$translate("Ceres::Template.singleItemFootnote1");
+            }
         },
 
         selectedDescription()
@@ -237,8 +259,7 @@ export default {
         },
 
         variationMarkInvalidProperties() {
-            const currentVariation = this.$store.getters[`${this.itemId}/currentItemVariation`];
-            return currentVariation && currentVariation.variationMarkInvalidProperties;
+            return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variationMarkInvalidProperties;
         },
 
         isTouchDevice() {

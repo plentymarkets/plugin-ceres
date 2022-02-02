@@ -8,6 +8,7 @@
         :maximum-quantity="!!currentVariation.variation.maximumOrderQuantity && currentVariation.variation.maximumOrderQuantity > 0 ? currentVariation.variation.maximumOrderQuantity : null"
         :order-properties="currentVariation.properties.filter(function(prop) { return prop.property.isOderProperty })"
         :has-order-properties="currentVariation.hasOrderProperties"
+        :has-required-order-property="currentVariation.hasRequiredOrderProperty"
         :use-large-scale="false"
         :show-quantity="true"
         :item-url="currentVariation | itemURL"

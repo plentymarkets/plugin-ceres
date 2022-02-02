@@ -16,7 +16,7 @@
                 type="text"
                 name="vatNumber"
                 :id="'txtVatNumber' + _uid"
-                v-model="vatNumber"
+                v-model.trim="vatNumber"
                 data-autofocus
                 data-testing="vat-id"
             >

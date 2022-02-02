@@ -20,7 +20,7 @@
                     {{ dynamicPrice | currency(currentVariation.prices.set.currency) }}
                 </template>
             </span>
-            <sup>*</sup>
+            <sup>{{ $translate("Ceres::Template.singleItemFootnote1") }}</sup>
         </span>
     </div>
 </template>

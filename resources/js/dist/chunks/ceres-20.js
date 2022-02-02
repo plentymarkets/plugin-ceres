@@ -135,7 +135,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       default: false
     },
     visibleFields: {
-      type: Array
+      type: Array,
+      default: function _default() {
+        return ["basketValueNet", "basketValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "promotionCoupon", "totalSumNet", "vats", "additionalCosts", "totalSumGross", "salesCoupon", "openAmount"];
+      }
     }
   },
   computed: _objectSpread({

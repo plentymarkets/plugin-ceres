@@ -13,6 +13,7 @@ class SearchConfig
         "searchFieldItemId"           => "itemId",
         "searchFieldVariationId"      => "variationId",
         "searchFieldVariationNumber"  => "variationNumber",
+        "searchFieldVariationName"    => "variationName",
         "searchFieldManufacturer"     => "manufacturer",
         "searchFieldModel"            => "model",
         "searchFieldBarcodes"         => "barcode",

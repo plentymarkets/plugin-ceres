@@ -104,7 +104,7 @@ class CeresBasketConfig extends PluginConfig
         );
 
         $this->previewData = $this->getMultiSelectValue(
-            'basket.data',
+            'basket.preview_data',
             [
                 'basket.value_of_items_gross',
                 'basket.value_of_items_net',
@@ -112,7 +112,12 @@ class CeresBasketConfig extends PluginConfig
                 'basket.shipping_costs_net',
                 'basket.vat',
                 'basket.order_total_gross',
-                'basket.order_total_net'
+                'basket.order_total_net',
+                "basket.rebate",
+                "basket.promotion_coupon",
+                "basket.additional_costs",
+                "basket.sales_coupon",
+                "basket.open_amount"
             ]
         );
 
