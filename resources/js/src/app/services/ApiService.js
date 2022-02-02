@@ -47,7 +47,7 @@ export function initListener()
 
             triggerEvent("_after", response);
 
-            if (response.error?.code === 9999)
+            if (response.error?.code === 1400)
             {
                 window.location.reload();
             }
