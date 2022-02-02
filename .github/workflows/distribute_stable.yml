@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v2
 #      - uses: everlytic/branch-merge@1.1.0
 #        with:
-#          github_token: ${{ secrets.PLENTY_ACTION_TOKEN }}
+#          github_token: ${{ secrets.ORGA_PAT_CICD2_FULL_REPO_AND_PACKAGES }}
 #          source_ref: ${{ github.ref }}
 #          target_branch: "beta"
 #          commit_message_template: "Merge branch 'stable' into 'beta'"
