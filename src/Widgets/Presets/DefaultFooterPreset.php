@@ -193,6 +193,6 @@ class DefaultFooterPreset implements ContentPreset
             ->withSetting('customClass', '')
             ->withSetting('appearance', 'primary')
             ->withSetting('buttonOrder', '1-2-3')
-            ->withSetting('showRejectAll', 'true');
+            ->withSetting('showRejectAll', true);
     }
 }
