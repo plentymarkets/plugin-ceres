@@ -22,7 +22,8 @@
 - Due to an error, the entered search term was not correctly appended to the URL. This has been fixed.
 - The setting **Customers have to fill in all possible order characteristics before they can add an item to the shopping cart** in the plentyShop assistant no longer applies to order properties.
 - Due to an error, changes to the settings of the cookie bar widget were not applied. This has been fixed.
-- Properties of the type **None** in a group of the type **Select** are now working properly if the option **Required** has been activated.
+- Order properties of the type **None** in a group of the type **Select** are now working properly if the option **Required** has been activated.
+- Order characteristics of the type **None** in a characteristic group of the type **Single selection** are now working properly if the option **Customers have to fill in all possible order characteristics before they can add an item to the shopping cart.** has been activated in the plentyShop assistant.
 
 ## v5.0.44 (2021-12-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.43...5.0.44" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 

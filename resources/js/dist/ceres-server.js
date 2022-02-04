@@ -49554,7 +49554,11 @@ var render = function() {
                 ) +
                 "\n            "
             )) +
-        "</span> <sup>*</sup></span> " +
+        "</span> <sup>" +
+        _vm._ssrEscape(
+          _vm._s(_vm.$translate("Ceres::Template.singleItemFootnote1"))
+        ) +
+        "</sup></span> " +
         (_vm.currentVariation.unit
           ? "<div" +
             _vm._ssrClass("base-price text-muted my-3", {
@@ -50511,7 +50515,11 @@ var render = function() {
                 ) +
                 "\n            "
             )) +
-        "</span> <sup>*</sup></span>"
+        "</span> <sup>" +
+        _vm._ssrEscape(
+          _vm._s(_vm.$translate("Ceres::Template.singleItemFootnote1"))
+        ) +
+        "</sup></span>"
     )
   ])
 }
@@ -50904,7 +50912,15 @@ var render = function() {
                         "span",
                         { staticClass: "vat small text-muted" },
                         [
-                          _vm._v("\n                            * "),
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.singleItemFootnote1"
+                                )
+                              ) +
+                              " "
+                          ),
                           _vm.showNetPrices
                             ? [
                                 _vm._v(
@@ -52396,7 +52412,13 @@ var render = function() {
                                         { price: _vm.itemSetPrice }
                                       )
                                     ) +
-                                    " *\n                            "
+                                    " " +
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.categoryItemFootnote"
+                                      )
+                                    ) +
+                                    "\n                            "
                                 )
                               ]
                             : !!_vm.item.item &&
@@ -52411,7 +52433,13 @@ var render = function() {
                                         { price: _vm.itemPrice }
                                       )
                                     ) +
-                                    " *\n                            "
+                                    " " +
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.categoryItemFootnote"
+                                      )
+                                    ) +
+                                    "\n                            "
                                 )
                               ]
                             : [
@@ -52426,7 +52454,13 @@ var render = function() {
                                         "formatted"
                                       )
                                     ) +
-                                    " *\n                            "
+                                    " " +
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.categoryItemFootnote"
+                                      )
+                                    ) +
+                                    "\n                            "
                                 )
                               ]
                         ],
@@ -52496,7 +52530,13 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("div", { staticClass: "vat small text-muted" }, [
-                  _vm._v("\n                    * "),
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(
+                        _vm.$translate("Ceres::Template.categoryItemFootnote")
+                      ) +
+                      " "
+                  ),
                   _vm.showNetPrices
                     ? _c("span", [
                         _vm._v(
@@ -53357,7 +53397,13 @@ var render = function() {
                     : "<!---->") +
                   "</div>"
                 : "<!---->") +
-              "\n\n            * " +
+              _vm._ssrEscape(
+                "\n\n            " +
+                  _vm._s(
+                    _vm.$translate("Ceres::Template.liveShoppingFootnote")
+                  ) +
+                  " "
+              ) +
               (_vm.showNetPrices
                 ? _vm._ssrEscape(
                     _vm._s(_vm.$translate("Ceres::Template.itemExclVAT"))
@@ -53435,7 +53481,14 @@ var render = function() {
                     : "<!---->") +
                   "</div>"
                 : "<!---->") +
-              ' <span class="vat small text-muted">\n                * ' +
+              ' <span class="vat small text-muted">' +
+              _vm._ssrEscape(
+                "\n                " +
+                  _vm._s(
+                    _vm.$translate("Ceres::Template.liveShoppingFootnote")
+                  ) +
+                  " "
+              ) +
               (_vm.showNetPrices
                 ? _vm._ssrEscape(
                     _vm._s(_vm.$translate("Ceres::Template.itemExclVAT"))

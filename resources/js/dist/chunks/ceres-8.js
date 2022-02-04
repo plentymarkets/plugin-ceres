@@ -789,7 +789,13 @@ var render = function() {
                                         { price: _vm.itemSetPrice }
                                       )
                                     ) +
-                                    " *\n                            "
+                                    " " +
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.categoryItemFootnote"
+                                      )
+                                    ) +
+                                    "\n                            "
                                 )
                               ]
                             : !!_vm.item.item &&
@@ -804,7 +810,13 @@ var render = function() {
                                         { price: _vm.itemPrice }
                                       )
                                     ) +
-                                    " *\n                            "
+                                    " " +
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.categoryItemFootnote"
+                                      )
+                                    ) +
+                                    "\n                            "
                                 )
                               ]
                             : [
@@ -819,7 +831,13 @@ var render = function() {
                                         "formatted"
                                       )
                                     ) +
-                                    " *\n                            "
+                                    " " +
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.categoryItemFootnote"
+                                      )
+                                    ) +
+                                    "\n                            "
                                 )
                               ]
                         ],
@@ -889,7 +907,13 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("div", { staticClass: "vat small text-muted" }, [
-                  _vm._v("\n                    * "),
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(
+                        _vm.$translate("Ceres::Template.categoryItemFootnote")
+                      ) +
+                      " "
+                  ),
                   _vm.showNetPrices
                     ? _c("span", [
                         _vm._v(

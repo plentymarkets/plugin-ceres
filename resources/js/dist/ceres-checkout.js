@@ -44611,9 +44611,10 @@ var render = function() {
                 directives: [
                   {
                     name: "model",
-                    rawName: "v-model",
+                    rawName: "v-model.trim",
                     value: _vm.vatNumber,
-                    expression: "vatNumber"
+                    expression: "vatNumber",
+                    modifiers: { trim: true }
                   }
                 ],
                 attrs: {
@@ -44630,7 +44631,10 @@ var render = function() {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.vatNumber = $event.target.value
+                    _vm.vatNumber = $event.target.value.trim()
+                  },
+                  blur: function($event) {
+                    return _vm.$forceUpdate()
                   }
                 }
               }),
@@ -45125,7 +45129,15 @@ var render = function() {
                         "span",
                         { staticClass: "vat small text-muted" },
                         [
-                          _vm._v("\n                            * "),
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.singleItemFootnote1"
+                                )
+                              ) +
+                              " "
+                          ),
                           _vm.showNetPrices
                             ? [
                                 _vm._v(
