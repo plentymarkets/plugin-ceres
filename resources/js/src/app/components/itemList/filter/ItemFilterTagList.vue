@@ -15,6 +15,14 @@ import { mapState, mapMutations, mapActions } from "vuex";
 
 export default {
     props: {
+        facetData:
+        {
+            type: Array,
+            default()
+            {
+                return [];
+            }
+        },
         marginClasses:
         {
             type: String,
@@ -30,6 +38,14 @@ export default {
     computed: mapState({
         tagList: state => state.itemList.selectedFacets
     }),
+
+    created()
+    {
+        if (!this.$store.state.itemList.facets?.length)
+        {
+            this.$store.commit("addFacets", this.facetData);
+        }
+    },
 
     methods:
     {
