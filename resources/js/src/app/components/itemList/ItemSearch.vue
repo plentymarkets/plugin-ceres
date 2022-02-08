@@ -13,7 +13,7 @@
             </div>
 
             <template v-if="isSearchFocused">
-                <div v-show="searchString.length > 2">
+                <div v-show="searchString.length >= searchMinLength">
                     <slot name="autocomplete-suggestions">
                         <div class="autocomplete-suggestions shadow bg-white w-100">
                             <search-suggestion-item
@@ -54,6 +54,11 @@ export default {
         {
             type: Number,
             default: 200
+        },
+        searchMinLength:
+        {
+            type: Number,
+            default: 2
         }
     },
 
@@ -124,7 +129,7 @@ export default {
 
         autocomplete(searchString)
         {
-            if (searchString.length >= 2)
+            if (searchString.length >= this.searchMinLength)
             {
                 this.$store.dispatch("loadItemSearchAutocomplete", searchString);
             }

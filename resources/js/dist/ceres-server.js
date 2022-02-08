@@ -10852,6 +10852,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     timeout: {
       type: Number,
       default: 200
+    },
+    searchMinLength: {
+      type: Number,
+      default: 2
     }
   },
   data: function data() {
@@ -10904,7 +10908,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     autocomplete: function autocomplete(searchString) {
-      if (searchString.length >= 2) {
+      if (searchString.length >= this.searchMinLength) {
         this.$store.dispatch("loadItemSearchAutocomplete", searchString);
       } else {
         this.$store.commit("setAutocompleteResult", {
@@ -52686,7 +52690,10 @@ var render = function() {
                 _vm._ssrNode(
                   "<div" +
                     _vm._ssrStyle(null, null, {
-                      display: _vm.searchString.length > 2 ? "" : "none"
+                      display:
+                        _vm.searchString.length >= _vm.searchMinLength
+                          ? ""
+                          : "none"
                     }) +
                     ">",
                   "</div>",
