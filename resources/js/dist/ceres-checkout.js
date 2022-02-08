@@ -45944,16 +45944,6 @@ var render = function() {
             ? [
                 _c(
                   "div",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.hasAutocompleteResults,
-                        expression: "hasAutocompleteResults"
-                      }
-                    ]
-                  },
                   [
                     _vm._t("autocomplete-suggestions", [
                       _c(
