@@ -13,7 +13,7 @@
             </div>
 
             <template v-if="isSearchFocused">
-                <div v-show="hasAutocompleteResults">
+                <div>
                     <slot name="autocomplete-suggestions">
                         <div class="autocomplete-suggestions shadow bg-white w-100 ">
                             <search-suggestion-item
