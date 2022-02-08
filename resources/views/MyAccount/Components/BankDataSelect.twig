@@ -40,8 +40,9 @@
                                 </span><!--
                                 -->
                                 <div class="item-controls">
-                                    <span class="item-edit" @click.prevent="openUpdateBank(index, bankData)">
-                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountEdit") }}" class="btn btn-primary" @click.prevent="openUpdateBank(index, bankData)" {{ set_testing_attr("data-testing", "bank-data-delete-set") }}>
+                                    <span class="item-edit ml-auto" @click.prevent="openUpdateBank(index, bankData)">
+                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountEdit") }}" class="btn btn-primary btn-medium btn-appearance mr-1" @click.prevent="openUpdateBank(index, bankData)" {{ set_testing_attr("data-testing", "bank-data-delete-set") }}>
+                                            <span>{{ trans("Ceres::Template.myAccountEdit") }}</span>
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </button>
                                     </span>
