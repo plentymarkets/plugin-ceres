@@ -13,9 +13,9 @@
             </div>
 
             <template v-if="isSearchFocused">
-                <div>
+                <div v-show="searchString.length > 2">
                     <slot name="autocomplete-suggestions">
-                        <div class="autocomplete-suggestions shadow bg-white w-100 ">
+                        <div class="autocomplete-suggestions shadow bg-white w-100">
                             <search-suggestion-item
                                 :show-images="showItemImages"
                                 suggestion-type="item">

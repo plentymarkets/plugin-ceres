@@ -52684,7 +52684,11 @@ var render = function() {
           _vm.isSearchFocused
             ? [
                 _vm._ssrNode(
-                  "<div>",
+                  "<div" +
+                    _vm._ssrStyle(null, null, {
+                      display: _vm.searchString.length > 2 ? "" : "none"
+                    }) +
+                    ">",
                   "</div>",
                   [
                     _vm._t("autocomplete-suggestions", [
@@ -52692,7 +52696,7 @@ var render = function() {
                         "div",
                         {
                           staticClass:
-                            "autocomplete-suggestions shadow bg-white w-100 "
+                            "autocomplete-suggestions shadow bg-white w-100"
                         },
                         [
                           _c("search-suggestion-item", {
