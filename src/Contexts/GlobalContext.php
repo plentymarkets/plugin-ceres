@@ -157,7 +157,7 @@ class GlobalContext implements ContextInterface
     {
         // Prevent vue xss
         foreach ($params as &$param) {
-           if( XSS::testVue($param) ) {
+           if (XSS::testVue($param)) {
                 $param = null;
            }
         }
