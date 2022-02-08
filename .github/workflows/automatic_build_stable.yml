@@ -15,7 +15,7 @@ jobs:
       - name: "Checkout code"
         uses: actions/checkout@v2
         with:
-          token: ${{ secrets.ORGA_PAT_CICD1_FULL_REPO_AND_PACKAGES }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v2
