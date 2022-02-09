@@ -154,6 +154,14 @@ function _validateElement(elem)
             return true;
         }
 
+        if (validationKey.startsWith("!"))
+        {
+            if (_validateInput($formControl, validationKey.replace("!", "")))
+            {
+                hasError = true;
+            }
+        }
+
         if (!_validateInput($formControl, validationKey))
         {
             hasError = true;
@@ -202,7 +210,6 @@ function _validateSelect($formControl, validationKey)
 
 function _validateInput($formControl, validationKey)
 {
-
     switch (validationKey)
     {
     case "text":
@@ -221,8 +228,6 @@ function _validateInput($formControl, validationKey)
         return _hasValue($formControl);
     case "regex":
         return _regex($formControl);
-    case "!regex":
-        return !_regex($formControl);
     default:
         console.error("Form validation error: unknown validation property: \"" + validationKey + "\"");
         return true;

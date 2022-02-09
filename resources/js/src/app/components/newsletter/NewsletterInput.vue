@@ -4,13 +4,13 @@
             <div class="col-6" v-if="showNameInputs">
                 <div class="input-unit" data-validate="!regex">
                     <label :for="'first-name-input_' + _uid">{{ $translate("Ceres::Template.newsletterFirstName") }}</label>
-                    <input type="text" data-validate-ref="/[.:\/\/\d]/g" :id="'first-name-input_' + _uid" v-model="firstName">
+                    <input type="text" data-validate-ref="/[.:\/\d]/g" :id="'first-name-input_' + _uid" v-model="firstName">
                 </div>
             </div>
             <div class="col-6 pl-0" v-if="showNameInputs">
                 <div class="input-unit" data-validate="!regex">
                     <label :for="'last-name-input_' + _uid">{{ $translate("Ceres::Template.newsletterLastName") }}</label>
-                    <input type="text" data-validate-ref="/[.:\/\/\d]/g" :id="'last-name-input_' + _uid" v-model="lastName">
+                    <input type="text" data-validate-ref="/[.:\/\d]/g" :id="'last-name-input_' + _uid" v-model="lastName">
                 </div>
             </div>
 
