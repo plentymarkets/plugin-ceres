@@ -49,7 +49,6 @@ class ItemSearchContext extends CategoryContext implements ContextInterface
         $itemListOptions = SearchOptions::validateItemListOptions($itemListOptions, SearchOptions::SCOPE_SEARCH);
 
         $this->isSearch = true;
-
         $this->searchString = $itemListOptions['query'];
 
         $this->initItemList(
