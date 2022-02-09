@@ -3427,9 +3427,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
 /* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
 /* harmony import */ var _helper_url__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../helper/url */ "./resources/js/src/app/helper/url.js");
-/* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _helper_debounce__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../helper/debounce */ "./resources/js/src/app/helper/debounce.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _helper_debounce__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../helper/debounce */ "./resources/js/src/app/helper/debounce.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -3481,7 +3480,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-search",
   props: {
@@ -3495,13 +3493,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     timeout: {
       type: Number,
       default: 200
+    },
+    searchMinLength: {
+      type: Number,
+      default: 2
     }
   },
   data: function data() {
     return {
       isSearchFocused: App.isShopBuilder,
       onValueChanged: null,
-      searchString: ""
+      searchString: "",
+      hasInitialInput: false
     };
   },
   computed: _objectSpread({
@@ -3514,18 +3517,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     isShopBuilder: function isShopBuilder() {
       return App.isShopBuilder;
     }
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_14__["mapState"])({
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_13__["mapState"])({
     autocompleteResult: function autocompleteResult(state) {
       return state.itemSearch.autocompleteResult;
     },
     moduleSearchString: function moduleSearchString(state) {
       return state.itemList.searchString;
+    },
+    autocompleteIsLoading: function autocompleteIsLoading(state) {
+      return state.itemSearch.autocompleteIsLoading;
     }
   })),
   mounted: function mounted() {
     var _this = this;
 
-    this.onValueChanged = Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_15__["debounce"])(function (searchString) {
+    this.onValueChanged = Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_14__["debounce"])(function (searchString) {
       _this.autocomplete(searchString);
     }, Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["defaultValue"])(this.timeout, 200));
     this.$nextTick(function () {
@@ -3547,14 +3553,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     autocomplete: function autocomplete(searchString) {
-      if (searchString.length >= 2) {
+      if (searchString.length >= this.searchMinLength) {
         this.$store.dispatch("loadItemSearchAutocomplete", searchString);
       } else {
         this.$store.commit("setAutocompleteResult", {
           item: [],
           category: [],
           suggestion: []
-        });
+        }); // hide the autocomplete box
+
+        this.hasInitialInput = false;
       }
     },
     // hide search, if targetElement of the blur event is not a child of components' root element
@@ -3571,6 +3579,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     moduleSearchString: function moduleSearchString(newVal) {
       if (newVal && newVal.length) {
         this.searchString = newVal;
+      }
+    },
+    autocompleteIsLoading: function autocompleteIsLoading(newVal, oldVal) {
+      // when client was loading and has stopped now, the autocomplete box should be shown
+      if (oldVal && !newVal) {
+        this.hasInitialInput = true;
       }
     }
   }
@@ -45933,7 +45947,16 @@ var render = function() {
                       }
                     }
                   },
-                  [_c("i", { staticClass: "fa fa-search" })]
+                  [
+                    _c("icon", {
+                      staticClass: "fa-fw",
+                      attrs: {
+                        icon: "search",
+                        loading: _vm.autocompleteIsLoading
+                      }
+                    })
+                  ],
+                  1
                 )
               ])
             ],
@@ -45949,8 +45972,12 @@ var render = function() {
                       {
                         name: "show",
                         rawName: "v-show",
-                        value: _vm.hasAutocompleteResults,
-                        expression: "hasAutocompleteResults"
+                        value:
+                          (_vm.searchString.length >= _vm.searchMinLength &&
+                            _vm.hasInitialInput) ||
+                          _vm.$ceres.isShopBuilder,
+                        expression:
+                          "(searchString.length >= searchMinLength && hasInitialInput) || $ceres.isShopBuilder"
                       }
                     ]
                   },
@@ -45960,7 +45987,7 @@ var render = function() {
                         "div",
                         {
                           staticClass:
-                            "autocomplete-suggestions shadow bg-white w-100 "
+                            "autocomplete-suggestions shadow bg-white w-100"
                         },
                         [
                           _c("search-suggestion-item", {
@@ -80348,7 +80375,8 @@ var state = function state() {
       suggestion: []
     },
     autocompleteSearchString: "",
-    autocompleteTypes: []
+    autocompleteTypes: [],
+    autocompleteIsLoading: false
   };
 };
 
@@ -80364,6 +80392,9 @@ var mutations = {
   },
   addAutocompleteType: function addAutocompleteType(state, type) {
     state.autocompleteTypes.push(type);
+  },
+  setAutocompleteIsLoading: function setAutocompleteIsLoading(state, value) {
+    vue__WEBPACK_IMPORTED_MODULE_13___default.a.set(state, "autocompleteIsLoading", !!value);
   }
 };
 var actions = {
@@ -80371,6 +80402,7 @@ var actions = {
     var state = _ref.state,
         commit = _ref.commit;
     commit("setAutocompleteSearchString", searchString);
+    commit("setAutocompleteIsLoading", true);
 
     if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(state.autocompleteRequest) && typeof state.autocompleteRequest.abort === "function") {
       state.autocompleteRequest.abort();
@@ -80385,6 +80417,7 @@ var actions = {
     newRequest.done(function (response) {
       commit("setAutocompleteRequest", null);
       commit("setAutocompleteResult", response);
+      commit("setAutocompleteIsLoading", false);
     });
   }
 };
