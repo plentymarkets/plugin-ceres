@@ -13,7 +13,7 @@
             </div>
 
             <template v-if="isSearchFocused">
-                <div v-show="searchString.length >= searchMinLength">
+                <div v-show="(searchString.length >= searchMinLength && !autocompleteIsLoading) || $ceres.isShopBuilder">
                     <slot name="autocomplete-suggestions">
                         <div class="autocomplete-suggestions shadow bg-white w-100">
                             <search-suggestion-item
@@ -22,6 +22,13 @@
                             </search-suggestion-item>
                         </div>
                     </slot>
+                </div>
+
+                <div v-if="autocompleteIsLoading" class="autocomplete-suggestions shadow bg-white w-100">
+                    <!-- <div class="px-3 py-2 text-center">
+                        <icon :loading="true"></icon>
+                    </div> -->
+                    <loading-animation></loading-animation>
                 </div>
             </template>
         </div>
@@ -32,7 +39,6 @@
 import UrlService from "../../services/UrlService";
 import { isNullOrUndefined, defaultValue } from "../../helper/utils";
 import { pathnameEquals } from "../../helper/url";
-import ApiService from "../../services/ApiService";
 import { mapState } from 'vuex';
 import { debounce } from '../../helper/debounce';
 
@@ -89,7 +95,8 @@ export default {
 
         ...mapState({
             autocompleteResult: state => state.itemSearch.autocompleteResult,
-            moduleSearchString: state => state.itemList.searchString
+            moduleSearchString: state => state.itemList.searchString,
+            autocompleteIsLoading: state => state.itemSearch.autocompleteIsLoading
         })
     },
 

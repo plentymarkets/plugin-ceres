@@ -175,9 +175,7 @@ var render = function() {
   return _c(
     "div",
     [
-      _vm.autocompleteResult &&
-      _vm.autocompleteResult.length &&
-      !_vm.autocompleteIsLoading
+      _vm.autocompleteResult && _vm.autocompleteResult.length
         ? [
             _c(
               "div",
@@ -251,13 +249,6 @@ var render = function() {
               0
             )
           ]
-        : _vm.autocompleteIsLoading
-        ? _c(
-            "p",
-            { class: _vm.paddingClasses, style: _vm.paddingInlineStyles },
-            [_c("loading-animation")],
-            1
-          )
         : _c(
             "p",
             {

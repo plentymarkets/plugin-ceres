@@ -10784,9 +10784,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
 /* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
 /* harmony import */ var _helper_url__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../helper/url */ "./resources/js/src/app/helper/url.js");
-/* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _helper_debounce__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../helper/debounce */ "./resources/js/src/app/helper/debounce.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _helper_debounce__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../helper/debounce */ "./resources/js/src/app/helper/debounce.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -10833,7 +10832,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -10875,18 +10880,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     isShopBuilder: function isShopBuilder() {
       return App.isShopBuilder;
     }
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_14__["mapState"])({
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_13__["mapState"])({
     autocompleteResult: function autocompleteResult(state) {
       return state.itemSearch.autocompleteResult;
     },
     moduleSearchString: function moduleSearchString(state) {
       return state.itemList.searchString;
+    },
+    autocompleteIsLoading: function autocompleteIsLoading(state) {
+      return state.itemSearch.autocompleteIsLoading;
     }
   })),
   mounted: function mounted() {
     var _this = this;
 
-    this.onValueChanged = Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_15__["debounce"])(function (searchString) {
+    this.onValueChanged = Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_14__["debounce"])(function (searchString) {
       _this.autocomplete(searchString);
     }, Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["defaultValue"])(this.timeout, 200));
     this.$nextTick(function () {
@@ -52697,7 +52705,9 @@ var render = function() {
                   "<div" +
                     _vm._ssrStyle(null, null, {
                       display:
-                        _vm.searchString.length >= _vm.searchMinLength
+                        (_vm.searchString.length >= _vm.searchMinLength &&
+                          !_vm.autocompleteIsLoading) ||
+                        _vm.$ceres.isShopBuilder
                           ? ""
                           : "none"
                     }) +
@@ -52724,7 +52734,16 @@ var render = function() {
                     ])
                   ],
                   2
-                )
+                ),
+                _vm._ssrNode(" "),
+                _vm.autocompleteIsLoading
+                  ? _vm._ssrNode(
+                      '<div class="autocomplete-suggestions shadow bg-white w-100">',
+                      "</div>",
+                      [_c("loading-animation")],
+                      1
+                    )
+                  : _vm._e()
               ]
             : _vm._e()
         ],
@@ -52811,95 +52830,72 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _vm.autocompleteResult &&
-      _vm.autocompleteResult.length &&
-      !_vm.autocompleteIsLoading
-        ? [
-            _vm._ssrNode(
-              '<div data-testing="autocomplete-list">' +
-                _vm._ssrList(_vm.autocompleteResult, function(item, index) {
-                  return (
-                    "<a" +
-                    _vm._ssrAttr("href", _vm.getTargetUrl(item)) +
-                    ' tabindex="0"' +
-                    _vm._ssrClass(
-                      "autocomplete-suggestion",
-                      _vm.paddingClasses
-                    ) +
-                    _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
-                    ">" +
-                    (_vm.showImages
-                      ? '<div class="image flex-shrink-0 mr-3">' +
-                        (item.image
-                          ? "<img" + _vm._ssrAttr("src", item.image) + ">"
-                          : "<!---->") +
-                        "</div>"
+  return _c("div", [
+    _vm._ssrNode(
+      _vm.autocompleteResult && _vm.autocompleteResult.length
+        ? '<div data-testing="autocomplete-list">' +
+            _vm._ssrList(_vm.autocompleteResult, function(item, index) {
+              return (
+                "<a" +
+                _vm._ssrAttr("href", _vm.getTargetUrl(item)) +
+                ' tabindex="0"' +
+                _vm._ssrClass("autocomplete-suggestion", _vm.paddingClasses) +
+                _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
+                ">" +
+                (_vm.showImages
+                  ? '<div class="image flex-shrink-0 mr-3">' +
+                    (item.image
+                      ? "<img" + _vm._ssrAttr("src", item.image) + ">"
                       : "<!---->") +
-                    " <div" +
-                    _vm._ssrClass("label overflow-hidden", {
-                      compact:
-                        _vm.showAdditionalInformation &&
-                        item.beforeLabel &&
-                        item.afterLabel
-                    }) +
-                    ">" +
-                    (_vm.showAdditionalInformation && item.beforeLabel
-                      ? '<p class="small mb-0 text-truncate">' +
-                        _vm._ssrEscape(_vm._s(item.beforeLabel)) +
-                        "</p>"
-                      : "<!---->") +
-                    ' <p class="mb-0 text-truncate">' +
-                    _vm._s(_vm.getHighlightedLabel(item.label)) +
-                    "</p> " +
-                    (_vm.showAdditionalInformation && item.afterLabel
-                      ? '<p class="small mb-0 text-truncate">' +
-                        _vm._ssrEscape(_vm._s(item.afterLabel)) +
-                        "</p>"
-                      : "<!---->") +
-                    "</div> " +
-                    (_vm.showCount && item.count > 0
-                      ? '<div class="count"><span>' +
-                        _vm._ssrEscape(_vm._s(item.count)) +
-                        "</span></div>"
-                      : "<!---->") +
-                    "</a>"
-                  )
+                    "</div>"
+                  : "<!---->") +
+                " <div" +
+                _vm._ssrClass("label overflow-hidden", {
+                  compact:
+                    _vm.showAdditionalInformation &&
+                    item.beforeLabel &&
+                    item.afterLabel
                 }) +
-                "</div>"
-            )
-          ]
-        : _vm.autocompleteIsLoading
-        ? _vm._ssrNode(
-            "<p" +
-              _vm._ssrClass(null, _vm.paddingClasses) +
-              _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
-              ">",
-            "</p>",
-            [_c("loading-animation")],
-            1
-          )
-        : _vm._ssrNode(
-            "<p" +
-              _vm._ssrClass("text-muted", _vm.paddingClasses) +
-              _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
-              ">" +
-              _vm._ssrEscape(
-                "\n        " +
-                  _vm._s(
-                    _vm.$translate(
-                      "Ceres::Template.itemSearchSuggestionNoResults"
-                    )
-                  ) +
-                  "\n    "
-              ) +
-              "</p>"
-          )
-    ],
-    2
-  )
+                ">" +
+                (_vm.showAdditionalInformation && item.beforeLabel
+                  ? '<p class="small mb-0 text-truncate">' +
+                    _vm._ssrEscape(_vm._s(item.beforeLabel)) +
+                    "</p>"
+                  : "<!---->") +
+                ' <p class="mb-0 text-truncate">' +
+                _vm._s(_vm.getHighlightedLabel(item.label)) +
+                "</p> " +
+                (_vm.showAdditionalInformation && item.afterLabel
+                  ? '<p class="small mb-0 text-truncate">' +
+                    _vm._ssrEscape(_vm._s(item.afterLabel)) +
+                    "</p>"
+                  : "<!---->") +
+                "</div> " +
+                (_vm.showCount && item.count > 0
+                  ? '<div class="count"><span>' +
+                    _vm._ssrEscape(_vm._s(item.count)) +
+                    "</span></div>"
+                  : "<!---->") +
+                "</a>"
+              )
+            }) +
+            "</div>"
+        : "<p" +
+            _vm._ssrClass("text-muted", _vm.paddingClasses) +
+            _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
+            ">" +
+            _vm._ssrEscape(
+              "\n        " +
+                _vm._s(
+                  _vm.$translate(
+                    "Ceres::Template.itemSearchSuggestionNoResults"
+                  )
+                ) +
+                "\n    "
+            ) +
+            "</p>"
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
