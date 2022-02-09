@@ -1,6 +1,6 @@
 <template>
     <div>
-        <template v-if="autocompleteResult && autocompleteResult.length">
+        <template v-if="autocompleteResult && autocompleteResult.length && !autocompleteIsLoading">
             <div data-testing="autocomplete-list">
                 <a
                     v-for="(item, index) in autocompleteResult"
@@ -27,11 +27,14 @@
                 </a>
             </div>
         </template>
-        <template v-else>
-            <p class="text-muted" :class="paddingClasses" :style="paddingInlineStyles">
-                {{ $translate("Ceres::Template.itemSearchSuggestionNoResults") }}
-            </p>
-        </template>
+
+        <p v-else-if="autocompleteIsLoading" :class="paddingClasses" :style="paddingInlineStyles">
+            <loading-animation></loading-animation>
+        </p>
+
+        <p v-else class="text-muted" :class="paddingClasses" :style="paddingInlineStyles">
+            {{ $translate("Ceres::Template.itemSearchSuggestionNoResults") }}
+        </p>
     </div>
 </template>
 
@@ -73,7 +76,8 @@ export default {
             {
                 return state.itemSearch.autocompleteResult[this.suggestionType];
             },
-            autocompleteSearchString: state => state.itemSearch.autocompleteSearchString
+            autocompleteSearchString: state => state.itemSearch.autocompleteSearchString,
+            autocompleteIsLoading: state => state.itemSearch.autocompleteIsLoading,
         })
     },
 

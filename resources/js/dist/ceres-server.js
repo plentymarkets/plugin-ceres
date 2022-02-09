@@ -11161,6 +11161,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -11186,6 +11189,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     autocompleteSearchString: function autocompleteSearchString(state) {
       return state.itemSearch.autocompleteSearchString;
+    },
+    autocompleteIsLoading: function autocompleteIsLoading(state) {
+      return state.itemSearch.autocompleteIsLoading;
     }
   })),
   created: function created() {
@@ -52805,72 +52811,95 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm._ssrNode(
-      _vm.autocompleteResult && _vm.autocompleteResult.length
-        ? '<div data-testing="autocomplete-list">' +
-            _vm._ssrList(_vm.autocompleteResult, function(item, index) {
-              return (
-                "<a" +
-                _vm._ssrAttr("href", _vm.getTargetUrl(item)) +
-                ' tabindex="0"' +
-                _vm._ssrClass("autocomplete-suggestion", _vm.paddingClasses) +
-                _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
-                ">" +
-                (_vm.showImages
-                  ? '<div class="image flex-shrink-0 mr-3">' +
-                    (item.image
-                      ? "<img" + _vm._ssrAttr("src", item.image) + ">"
+  return _c(
+    "div",
+    [
+      _vm.autocompleteResult &&
+      _vm.autocompleteResult.length &&
+      !_vm.autocompleteIsLoading
+        ? [
+            _vm._ssrNode(
+              '<div data-testing="autocomplete-list">' +
+                _vm._ssrList(_vm.autocompleteResult, function(item, index) {
+                  return (
+                    "<a" +
+                    _vm._ssrAttr("href", _vm.getTargetUrl(item)) +
+                    ' tabindex="0"' +
+                    _vm._ssrClass(
+                      "autocomplete-suggestion",
+                      _vm.paddingClasses
+                    ) +
+                    _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
+                    ">" +
+                    (_vm.showImages
+                      ? '<div class="image flex-shrink-0 mr-3">' +
+                        (item.image
+                          ? "<img" + _vm._ssrAttr("src", item.image) + ">"
+                          : "<!---->") +
+                        "</div>"
                       : "<!---->") +
-                    "</div>"
-                  : "<!---->") +
-                " <div" +
-                _vm._ssrClass("label overflow-hidden", {
-                  compact:
-                    _vm.showAdditionalInformation &&
-                    item.beforeLabel &&
-                    item.afterLabel
-                }) +
-                ">" +
-                (_vm.showAdditionalInformation && item.beforeLabel
-                  ? '<p class="small mb-0 text-truncate">' +
-                    _vm._ssrEscape(_vm._s(item.beforeLabel)) +
-                    "</p>"
-                  : "<!---->") +
-                ' <p class="mb-0 text-truncate">' +
-                _vm._s(_vm.getHighlightedLabel(item.label)) +
-                "</p> " +
-                (_vm.showAdditionalInformation && item.afterLabel
-                  ? '<p class="small mb-0 text-truncate">' +
-                    _vm._ssrEscape(_vm._s(item.afterLabel)) +
-                    "</p>"
-                  : "<!---->") +
-                "</div> " +
-                (_vm.showCount && item.count > 0
-                  ? '<div class="count"><span>' +
-                    _vm._ssrEscape(_vm._s(item.count)) +
-                    "</span></div>"
-                  : "<!---->") +
-                "</a>"
-              )
-            }) +
-            "</div>"
-        : "<p" +
-            _vm._ssrClass("text-muted", _vm.paddingClasses) +
-            _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
-            ">" +
-            _vm._ssrEscape(
-              "\n            " +
-                _vm._s(
-                  _vm.$translate(
-                    "Ceres::Template.itemSearchSuggestionNoResults"
+                    " <div" +
+                    _vm._ssrClass("label overflow-hidden", {
+                      compact:
+                        _vm.showAdditionalInformation &&
+                        item.beforeLabel &&
+                        item.afterLabel
+                    }) +
+                    ">" +
+                    (_vm.showAdditionalInformation && item.beforeLabel
+                      ? '<p class="small mb-0 text-truncate">' +
+                        _vm._ssrEscape(_vm._s(item.beforeLabel)) +
+                        "</p>"
+                      : "<!---->") +
+                    ' <p class="mb-0 text-truncate">' +
+                    _vm._s(_vm.getHighlightedLabel(item.label)) +
+                    "</p> " +
+                    (_vm.showAdditionalInformation && item.afterLabel
+                      ? '<p class="small mb-0 text-truncate">' +
+                        _vm._ssrEscape(_vm._s(item.afterLabel)) +
+                        "</p>"
+                      : "<!---->") +
+                    "</div> " +
+                    (_vm.showCount && item.count > 0
+                      ? '<div class="count"><span>' +
+                        _vm._ssrEscape(_vm._s(item.count)) +
+                        "</span></div>"
+                      : "<!---->") +
+                    "</a>"
                   )
-                ) +
-                "\n        "
-            ) +
-            "</p>"
-    )
-  ])
+                }) +
+                "</div>"
+            )
+          ]
+        : _vm.autocompleteIsLoading
+        ? _vm._ssrNode(
+            "<p" +
+              _vm._ssrClass(null, _vm.paddingClasses) +
+              _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
+              ">",
+            "</p>",
+            [_c("loading-animation")],
+            1
+          )
+        : _vm._ssrNode(
+            "<p" +
+              _vm._ssrClass("text-muted", _vm.paddingClasses) +
+              _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
+              ">" +
+              _vm._ssrEscape(
+                "\n        " +
+                  _vm._s(
+                    _vm.$translate(
+                      "Ceres::Template.itemSearchSuggestionNoResults"
+                    )
+                  ) +
+                  "\n    "
+              ) +
+              "</p>"
+          )
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -88800,7 +88829,8 @@ var state = function state() {
       suggestion: []
     },
     autocompleteSearchString: "",
-    autocompleteTypes: []
+    autocompleteTypes: [],
+    autocompleteIsLoading: false
   };
 };
 
@@ -88816,6 +88846,9 @@ var mutations = {
   },
   addAutocompleteType: function addAutocompleteType(state, type) {
     state.autocompleteTypes.push(type);
+  },
+  setAutocompleteIsLoading: function setAutocompleteIsLoading(state, value) {
+    vue__WEBPACK_IMPORTED_MODULE_13___default.a.set(state, "autocompleteIsLoading", !!value);
   }
 };
 var actions = {
@@ -88823,6 +88856,7 @@ var actions = {
     var state = _ref.state,
         commit = _ref.commit;
     commit("setAutocompleteSearchString", searchString);
+    commit("setAutocompleteIsLoading", true);
 
     if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(state.autocompleteRequest) && typeof state.autocompleteRequest.abort === "function") {
       state.autocompleteRequest.abort();
@@ -88837,6 +88871,7 @@ var actions = {
     newRequest.done(function (response) {
       commit("setAutocompleteRequest", null);
       commit("setAutocompleteResult", response);
+      commit("setAutocompleteIsLoading", false);
     });
   }
 };

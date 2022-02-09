@@ -99,6 +99,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -124,6 +127,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     autocompleteSearchString: function autocompleteSearchString(state) {
       return state.itemSearch.autocompleteSearchString;
+    },
+    autocompleteIsLoading: function autocompleteIsLoading(state) {
+      return state.itemSearch.autocompleteIsLoading;
     }
   })),
   created: function created() {
@@ -169,7 +175,9 @@ var render = function() {
   return _c(
     "div",
     [
-      _vm.autocompleteResult && _vm.autocompleteResult.length
+      _vm.autocompleteResult &&
+      _vm.autocompleteResult.length &&
+      !_vm.autocompleteIsLoading
         ? [
             _c(
               "div",
@@ -243,27 +251,32 @@ var render = function() {
               0
             )
           ]
-        : [
-            _c(
-              "p",
-              {
-                staticClass: "text-muted",
-                class: _vm.paddingClasses,
-                style: _vm.paddingInlineStyles
-              },
-              [
-                _vm._v(
-                  "\n            " +
-                    _vm._s(
-                      _vm.$translate(
-                        "Ceres::Template.itemSearchSuggestionNoResults"
-                      )
-                    ) +
-                    "\n        "
-                )
-              ]
-            )
-          ]
+        : _vm.autocompleteIsLoading
+        ? _c(
+            "p",
+            { class: _vm.paddingClasses, style: _vm.paddingInlineStyles },
+            [_c("loading-animation")],
+            1
+          )
+        : _c(
+            "p",
+            {
+              staticClass: "text-muted",
+              class: _vm.paddingClasses,
+              style: _vm.paddingInlineStyles
+            },
+            [
+              _vm._v(
+                "\n        " +
+                  _vm._s(
+                    _vm.$translate(
+                      "Ceres::Template.itemSearchSuggestionNoResults"
+                    )
+                  ) +
+                  "\n    "
+              )
+            ]
+          )
     ],
     2
   )
