@@ -2,15 +2,15 @@
     <form ref="newsletterForm" :id="'newsletter-input-form_' + _uid" method="post" @submit.prevent="validateData">
         <div class="row">
             <div class="col-6" v-if="showNameInputs">
-                <div class="input-unit">
+                <div class="input-unit" data-validate="!regex">
                     <label :for="'first-name-input_' + _uid">{{ $translate("Ceres::Template.newsletterFirstName") }}</label>
-                    <input type="text" :id="'first-name-input_' + _uid" v-model="firstName">
+                    <input type="text" data-validate-ref="/[.:\/\/\d]/g" :id="'first-name-input_' + _uid" v-model="firstName">
                 </div>
             </div>
             <div class="col-6 pl-0" v-if="showNameInputs">
-                <div class="input-unit">
+                <div class="input-unit" data-validate="!regex">
                     <label :for="'last-name-input_' + _uid">{{ $translate("Ceres::Template.newsletterLastName") }}</label>
-                    <input type="text" :id="'last-name-input_' + _uid" v-model="lastName">
+                    <input type="text" data-validate-ref="/[.:\/\/\d]/g" :id="'last-name-input_' + _uid" v-model="lastName">
                 </div>
             </div>
 
@@ -111,6 +111,20 @@ export default {
                 .fail(invalidFields =>
                 {
                     ValidationService.markInvalidFields(invalidFields, "error");
+
+                    invalidFields.filter(field => {
+                        return field.dataset.validate !== null
+                    }).map((field) => {
+                        return {
+                            type: field.dataset.validate,
+                            name: field.innerText
+                        }
+                    }).forEach((field) => {
+                        if(field.type === '!regex')
+                        {
+                            NotificationService.error(this.$translate("Ceres::Template.newsletterNotAllowedCharacters", {name: field.name}));
+                        }
+                    });
 
                     this.isDisabled = false;
                 });

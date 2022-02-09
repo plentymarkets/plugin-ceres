@@ -220,16 +220,21 @@ function _validateInput($formControl, validationKey)
     case "file":
         return _hasValue($formControl);
     case "regex":
-    {
-        const ref = $formControl.attr("data-validate-ref");
-        const regex = ref.startsWith("/") ? _eval(ref) : new RegExp(ref);
-
-        return _hasValue($formControl) && regex.test($.trim($formControl.val()));
-    }
+        return _regex($formControl);
+    case "!regex":
+        return !_regex($formControl);
     default:
         console.error("Form validation error: unknown validation property: \"" + validationKey + "\"");
         return true;
     }
+}
+
+function _regex($formControl)
+{
+    const ref = $formControl.attr("data-validate-ref");
+    const regex = ref.startsWith("/") ? _eval(ref) : new RegExp(ref);
+
+    return _hasValue($formControl) && regex.test($.trim($formControl.val()));
 }
 
 function _hasValue($formControl)
