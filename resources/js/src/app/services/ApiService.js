@@ -46,6 +46,11 @@ export function initListener()
             }
 
             triggerEvent("_after", response);
+
+            if (response.error?.code === 1400)
+            {
+                window.location.reload();
+            }
         }
     });
 }
