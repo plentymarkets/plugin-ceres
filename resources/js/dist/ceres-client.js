@@ -1907,13 +1907,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -1942,7 +1935,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       isSearchFocused: App.isShopBuilder,
       onValueChanged: null,
-      searchString: ""
+      searchString: "",
+      hasInitialInput: false
     };
   },
   computed: _objectSpread({
@@ -1998,7 +1992,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           item: [],
           category: [],
           suggestion: []
-        });
+        }); // hide the autocomplete box
+
+        this.hasInitialInput = false;
       }
     },
     // hide search, if targetElement of the blur event is not a child of components' root element
@@ -2015,6 +2011,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     moduleSearchString: function moduleSearchString(newVal) {
       if (newVal && newVal.length) {
         this.searchString = newVal;
+      }
+    },
+    autocompleteIsLoading: function autocompleteIsLoading(newVal, oldVal) {
+      // when client was loading and has stopped now, the autocomplete box should be shown
+      if (oldVal && !newVal) {
+        this.hasInitialInput = true;
       }
     }
   }
@@ -38922,7 +38924,16 @@ var render = function() {
                       }
                     }
                   },
-                  [_c("i", { staticClass: "fa fa-search" })]
+                  [
+                    _c("icon", {
+                      staticClass: "fa-fw",
+                      attrs: {
+                        icon: "search",
+                        loading: _vm.autocompleteIsLoading
+                      }
+                    })
+                  ],
+                  1
                 )
               ])
             ],
@@ -38940,10 +38951,10 @@ var render = function() {
                         rawName: "v-show",
                         value:
                           (_vm.searchString.length >= _vm.searchMinLength &&
-                            !_vm.autocompleteIsLoading) ||
+                            _vm.hasInitialInput) ||
                           _vm.$ceres.isShopBuilder,
                         expression:
-                          "(searchString.length >= searchMinLength && !autocompleteIsLoading) || $ceres.isShopBuilder"
+                          "(searchString.length >= searchMinLength && hasInitialInput) || $ceres.isShopBuilder"
                       }
                     ]
                   },
@@ -38968,19 +38979,7 @@ var render = function() {
                     ])
                   ],
                   2
-                ),
-                _vm._v(" "),
-                _vm.autocompleteIsLoading
-                  ? _c(
-                      "div",
-                      {
-                        staticClass:
-                          "autocomplete-suggestions shadow bg-white w-100"
-                      },
-                      [_c("loading-animation")],
-                      1
-                    )
-                  : _vm._e()
+                )
               ]
             : _vm._e()
         ],

@@ -98,10 +98,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -127,9 +123,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     autocompleteSearchString: function autocompleteSearchString(state) {
       return state.itemSearch.autocompleteSearchString;
-    },
-    autocompleteIsLoading: function autocompleteIsLoading(state) {
-      return state.itemSearch.autocompleteIsLoading;
     }
   })),
   created: function created() {

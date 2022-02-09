@@ -7,13 +7,13 @@
 
                 <slot name="search-button">
                     <button class="search-submit px-3" type="submit" @click="search()" :aria-label="$translate('Ceres::Template.headerSearch')">
-                        <i class="fa fa-search"></i>
+                        <icon class="fa-fw" icon="search" :loading="autocompleteIsLoading"></icon>
                     </button>
                 </slot>
             </div>
 
             <template v-if="isSearchFocused">
-                <div v-show="(searchString.length >= searchMinLength && !autocompleteIsLoading) || $ceres.isShopBuilder">
+                <div v-show="(searchString.length >= searchMinLength && hasInitialInput) || $ceres.isShopBuilder">
                     <slot name="autocomplete-suggestions">
                         <div class="autocomplete-suggestions shadow bg-white w-100">
                             <search-suggestion-item
@@ -22,13 +22,6 @@
                             </search-suggestion-item>
                         </div>
                     </slot>
-                </div>
-
-                <div v-if="autocompleteIsLoading" class="autocomplete-suggestions shadow bg-white w-100">
-                    <!-- <div class="px-3 py-2 text-center">
-                        <icon :loading="true"></icon>
-                    </div> -->
-                    <loading-animation></loading-animation>
                 </div>
             </template>
         </div>
@@ -73,7 +66,8 @@ export default {
         return {
             isSearchFocused: App.isShopBuilder,
             onValueChanged: null,
-            searchString: ""
+            searchString: "",
+            hasInitialInput: false
         };
     },
 
@@ -143,6 +137,9 @@ export default {
             else
             {
                 this.$store.commit("setAutocompleteResult", { item: [], category: [], suggestion: [] });
+
+                // hide the autocomplete box
+                this.hasInitialInput = false;
             }
         },
 
@@ -167,7 +164,14 @@ export default {
             {
                 this.searchString = newVal;
             }
-        }        
+        },
+
+        autocompleteIsLoading(newVal, oldVal) {
+            // when client was loading and has stopped now, the autocomplete box should be shown
+            if (oldVal && !newVal) {
+                this.hasInitialInput = true;
+            }
+        }
     }
 }
 </script>

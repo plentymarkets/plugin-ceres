@@ -28,10 +28,6 @@
             </div>
         </template>
 
-        <!-- <p v-else-if="autocompleteIsLoading" :class="paddingClasses" :style="paddingInlineStyles">
-            <loading-animation></loading-animation>
-        </p> -->
-
         <p v-else class="text-muted" :class="paddingClasses" :style="paddingInlineStyles">
             {{ $translate("Ceres::Template.itemSearchSuggestionNoResults") }}
         </p>
@@ -76,8 +72,7 @@ export default {
             {
                 return state.itemSearch.autocompleteResult[this.suggestionType];
             },
-            autocompleteSearchString: state => state.itemSearch.autocompleteSearchString,
-            autocompleteIsLoading: state => state.itemSearch.autocompleteIsLoading,
+            autocompleteSearchString: state => state.itemSearch.autocompleteSearchString
         })
     },
 
