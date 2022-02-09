@@ -28,9 +28,11 @@
             </div>
         </template>
 
-        <p v-else class="text-muted" :class="paddingClasses" :style="paddingInlineStyles">
-            {{ $translate("Ceres::Template.itemSearchSuggestionNoResults") }}
-        </p>
+        <template v-else>
+            <p class="text-muted" :class="paddingClasses" :style="paddingInlineStyles">
+                {{ $translate("Ceres::Template.itemSearchSuggestionNoResults") }}
+            </p>
+        </template>
     </div>
 </template>
 
