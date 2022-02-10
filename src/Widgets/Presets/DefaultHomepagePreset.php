@@ -4,6 +4,9 @@ namespace Ceres\Widgets\Presets;
 
 use Ceres\Widgets\Helper\PresetHelper;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
+use Plenty\Plugin\Application;
+
+/* TODO phpdoc */
 
 class DefaultHomepagePreset implements ContentPreset
 {
@@ -35,7 +38,7 @@ class DefaultHomepagePreset implements ContentPreset
                     "value" => "16"
                 ],
                 "slideUrlType" => "category",
-                "customImagePath" => "https://cdn15.plentymarkets.com/ksvjcz2xpb12/frontend/slider-living-3840x.jpg",
+                "customImagePath" => $this->imagePath . "slider-living-1920.webp",
                 "headline" => "FURNITURE THAT STANDS OUT",
                 "headlineStyle" => "custom-caption",
             ],
@@ -44,7 +47,7 @@ class DefaultHomepagePreset implements ContentPreset
                     "type" => "category",
                     "value" => "16"
                 ],
-                "customImagePath" => "https://cdn15.plentymarkets.com/ksvjcz2xpb12/frontend/slider-wear-3840x.jpg",
+                "customImagePath" => $this->imagePath . "slider-wear-1920.webp",
                 "headline" => "CLOTHING OF THE FUTURE",
                 "headlineStyle" => "custom-caption",
             ],
@@ -53,7 +56,7 @@ class DefaultHomepagePreset implements ContentPreset
                     "type" => "category",
                     "value" => "16"
                 ],
-                "customImagePath" => "https://cdn15.plentymarkets.com/ksvjcz2xpb12/frontend/slider-gear-3840x.jpg",
+                "customImagePath" => $this->imagePath . "slider-gear-1920.webp",
                 "headline" => "THE FUTURE HAS ARRIVED",
                 "headlineStyle" => "custom-caption",
             ]
@@ -70,6 +73,10 @@ class DefaultHomepagePreset implements ContentPreset
     }
     public function createCategoryShowcase(): void
     {
+        /** @var Application $app */
+        $app = pluginApp(Application::class);
+        $this->imagePath = $app->getUrlPath('Ceres') . '/resources/images/homepage/' ;
+
         $twoColumnWidget =  $this->preset->createWidget("Ceres::TwoColumnWidget")
             ->withSetting('layout', 'oneToOne')
             ->withSetting('layoutTablet', 'oneToOne')
@@ -89,7 +96,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("style", "inline-caption")
             ->withSetting("aspectRatio", "retain")
             ->withSetting("headline", "PLENTY GEAR")
-            ->withSetting("customImagePath", "https://cdn15.plentymarkets.com/ksvjcz2xpb12/frontend/category-gear-1430x.png")
+            ->withSetting("customImagePath", $this->imagePath . "category-gear-1430x.webp")
             ->withSetting('url.type', 'category')
             ->withSetting('url.value', '16')
             ->withSetting("customCaption", true)
@@ -101,7 +108,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("style", "inline-caption")
             ->withSetting("aspectRatio", "retain")
             ->withSetting("headline", "PLENTY WEAR - WOMEN")
-            ->withSetting("customImagePath", "https://cdn15.plentymarkets.com/ksvjcz2xpb12/frontend/category-wear-female-715x.png")
+            ->withSetting("customImagePath", $this->imagePath . "category-wear-female-715x.webp")
             ->withSetting('url.type', 'category')
             ->withSetting('url.value', '16')
             ->withSetting("customCaption", true)
@@ -113,7 +120,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("style", "inline-caption")
             ->withSetting("aspectRatio", "retain")
             ->withSetting("headline", "PLENTY WEAR - MEN")
-            ->withSetting("customImagePath", "https://cdn15.plentymarkets.com/ksvjcz2xpb12/frontend/category-wear-male-715x.png")
+            ->withSetting("customImagePath", $this->imagePath . "category-wear-male-715x.webp")
             ->withSetting('url.type', 'category')
             ->withSetting('url.value', '16')
             ->withSetting("customCaption", true)
@@ -125,7 +132,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("style", "inline-caption")
             ->withSetting("aspectRatio", "retain")
             ->withSetting("headline", '"PLENTY LIVING"')
-            ->withSetting("customImagePath", "https://cdn15.plentymarkets.com/ksvjcz2xpb12/frontend/category-living-1430x.png")
+            ->withSetting("customImagePath", $this->imagePath . "category-living-1430x.webp")
             ->withSetting('url.type', 'category')
             ->withSetting('url.value', '16')
             ->withSetting("customCaption", true)
@@ -138,7 +145,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting('fullWidth', true)
             ->withSetting('lazyloadImage', true)
             ->withSetting('sourceType', 'custom-image')
-            ->withSetting('customImagePath', "https://cdn15.plentymarkets.com/ksvjcz2xpb12/frontend/story-tree-3840x.jpg")
+            ->withSetting('customImagePath', $this->imagePath . "story-tree-1920.webp")
             ->withSetting("imageSize", "cover")
             ->withSetting("aspectRatio", "auto")
             ->withSetting('spacing.customMargin', true)
@@ -225,6 +232,10 @@ class DefaultHomepagePreset implements ContentPreset
     }
     public function createFirstImageTextContainer(): void
     {
+        /** @var Application $app */
+        $app = pluginApp(Application::class);
+        $this->imagePath = $app->getUrlPath('Ceres') . '/resources/images/homepage/' ;
+
         $twoColumnWidget =  $this->preset->createWidget("Ceres::TwoColumnWidget")
             ->withSetting('layout', 'sevenToFive')
             ->withSetting('layoutTablet', 'stackedTablet')
@@ -235,7 +246,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("appearance", "primary")
             ->withSetting("style", "no-caption")
             ->withSetting("aspectRatio", "retain")
-            ->withSetting("customImagePath", "https://cdn15.plentymarkets.com/ksvjcz2xpb12/frontend/story-precision-1920x.jpg")
+            ->withSetting("customImagePath", $this->imagePath . "story-precision-1920x.webp")
             ->withSetting("lazyLoading", true);
 
         $innerTwoColumnWidget = $twoColumnWidget->createChild('second', 'Ceres::TwoColumnWidget')
@@ -260,6 +271,10 @@ class DefaultHomepagePreset implements ContentPreset
 
     public function createSecondImageTextContainer(): void
     {
+        /** @var Application $app */
+        $app = pluginApp(Application::class);
+        $this->imagePath = $app->getUrlPath('Ceres') . '/resources/images/homepage/' ;
+
         $twoColumnWidget =  $this->preset->createWidget("Ceres::TwoColumnWidget")
             ->withSetting('layout', 'sevenToFive')
             ->withSetting('layoutTablet', 'stackedTablet')
@@ -270,7 +285,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("appearance", "primary")
             ->withSetting("style", "no-caption")
             ->withSetting("aspectRatio", "retain")
-            ->withSetting("customImagePath", "https://cdn15.plentymarkets.com/ksvjcz2xpb12/frontend/story-precision-1920x.jpg")
+            ->withSetting("customImagePath", "../images/homepage/story-precision-1920x.webp")
             ->withSetting("lazyLoading", true);
 
         $innerTwoColumnWidget = $twoColumnWidget->createChild('first', 'Ceres::TwoColumnWidget')
@@ -294,12 +309,16 @@ class DefaultHomepagePreset implements ContentPreset
     }
     public function createSecondBackground(): void
     {
+        /** @var Application $app */
+        $app = pluginApp(Application::class);
+        $this->imagePath = $app->getUrlPath('Ceres') . '/resources/images/homepage/' ;
+
         $bgContainer = $this->preset->createWidget("Ceres::BackgroundWidget")
             ->withSetting('customClass', 'text-right vh-100 pt-md-4 pr-md-4')
             ->withSetting('fullWidth', true)
             ->withSetting('lazyloadImage', true)
             ->withSetting('sourceType', 'custom-image')
-            ->withSetting('customImagePath', "https://cdn15.plentymarkets.com/ksvjcz2xpb12/frontend/category-living-3840x.png")
+            ->withSetting('customImagePath', "../images/homepage/story-precision-1920x.webp")
             ->withSetting("imageSize", "cover")
             ->withSetting("aspectRatio", "auto")
             ->withSetting('spacing.customMargin', true)
