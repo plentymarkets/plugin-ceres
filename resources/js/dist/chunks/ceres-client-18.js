@@ -133,6 +133,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     showNetPrices: {
       type: Boolean,
       default: false
+    },
+    visibleFields: {
+      type: Array,
+      default: function _default() {
+        return ["basketValueNet", "basketValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "promotionCoupon", "totalSumNet", "vats", "additionalCosts", "totalSumGross", "salesCoupon", "openAmount"];
+      }
     }
   },
   computed: _objectSpread({
@@ -239,7 +245,10 @@ var render = function() {
                       }
                     ],
                     staticClass: "close",
-                    attrs: { type: "button", "aria-label": "Close" }
+                    attrs: {
+                      type: "button",
+                      "aria-label": _vm.$translate("Ceres::Template.closeIcon")
+                    }
                   },
                   [
                     _c("span", { attrs: { "aria-hidden": "true" } }, [
@@ -318,6 +327,7 @@ var render = function() {
                     _vm._t("before-basket-totals"),
                     _vm._v(" "),
                     _c("basket-totals", {
+                      attrs: { "visible-fields": _vm.visibleFields },
                       scopedSlots: _vm._u(
                         [
                           {

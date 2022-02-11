@@ -262,6 +262,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -658,6 +659,8 @@ var render = function() {
                     }
                   ),
                   "has-order-properties": _vm.wishListItem.hasOrderProperties,
+                  "has-required-order-property":
+                    _vm.wishListItem.hasRequiredOrderProperty,
                   "use-large-scale": false,
                   "show-quantity": false,
                   "item-url": _vm._f("itemURL")(_vm.wishListItem),

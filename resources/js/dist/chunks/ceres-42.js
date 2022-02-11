@@ -98,7 +98,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -243,27 +242,25 @@ var render = function() {
               0
             )
           ]
-        : [
-            _c(
-              "p",
-              {
-                staticClass: "text-muted",
-                class: _vm.paddingClasses,
-                style: _vm.paddingInlineStyles
-              },
-              [
-                _vm._v(
-                  "\n            " +
-                    _vm._s(
-                      _vm.$translate(
-                        "Ceres::Template.itemSearchSuggestionNoResults"
-                      )
-                    ) +
-                    "\n        "
-                )
-              ]
-            )
-          ]
+        : _c(
+            "p",
+            {
+              staticClass: "text-muted",
+              class: _vm.paddingClasses,
+              style: _vm.paddingInlineStyles
+            },
+            [
+              _vm._v(
+                "\n        " +
+                  _vm._s(
+                    _vm.$translate(
+                      "Ceres::Template.itemSearchSuggestionNoResults"
+                    )
+                  ) +
+                  "\n    "
+              )
+            ]
+          )
     ],
     2
   )

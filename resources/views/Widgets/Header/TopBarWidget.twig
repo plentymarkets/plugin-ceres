@@ -22,6 +22,7 @@
 {{ Twig.set("activeCurrencies", Twig.call("config", ["Ceres.currency.available_currencies"]) ~ " | split(\", \")") }}
 {{ Twig.set("defaultLanguage", "webstoreConfig.defaultLanguage" ) }}
 {{ Twig.set("overrideSearchBar", Twig.call("LayoutContainer.show", ["Ceres::Search.SearchBar"])) }}
+{{ Twig.set("visibleFields", "ceresConfig.basket.previewData") }}
 
 <div class="top-bar header-fw{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if not isFixed %} unfixed{% endif %}">
     <div class="container-max px-0 pr-lg-3">
@@ -168,7 +169,7 @@
                         {% endif %}
 
                         {% if enableBasketPreview %}
-                            <li class="list-inline-item control-basket position-relative" @mouseover.once="$store.dispatch('loadComponent', 'basket-preview')">
+                            <li class="list-inline-item control-basket position-relative">
                                 <a v-toggle-basket-preview href="#" class="toggle-basket-preview nav-link" {{ Twig.print('set_testing_attr("data-testing", "basket-preview-button")') }}>
                                     {% if basketValues != "sum" %}
                                         <span class="mr-2" v-basket-item-quantity="$store.state.basket.data.itemQuantity">0</span>
@@ -181,7 +182,7 @@
                                     {% endif %}
                                 </a>
 
-                                <basket-preview v-if="$store.state.lazyComponent.components['basket-preview']" :show-net-prices="{{ Twig.print("showNetPrices | json_encode") }}">
+                                <basket-preview v-if="$store.state.lazyComponent.components['basket-preview']" :show-net-prices="{{ Twig.print("showNetPrices | json_encode") }}" :visible-fields="{{ Twig.print("visibleFields | json_encode") }}">
                                     <template #before-basket-item>
                                         {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::BasketList.BeforeItem"])) }}
                                     </template>

@@ -46,7 +46,7 @@ context("Coupon", () =>
         cy.getByTestingAttr("coupon-input").type("INVALID", { delay: 30 });
         cy.getByTestingAttr("coupon-redeem").click();
         cy.get(".notification-wrapper").children().first().should("have.class", "alert-danger");
-        cy.get(".notification-wrapper").children().first().should("contain", "Der Gutschein konnte nicht eingelöst werden.");
+        cy.get(".notification-wrapper").children().first().should("contain", "Der Gutschein wurde bereits verwendet oder ist ungültig.");
     });
 
     function checkTotals(itemQuantity = 1, isFree = false)

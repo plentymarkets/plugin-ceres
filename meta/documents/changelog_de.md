@@ -1,5 +1,146 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.45 (2022-01-18) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.44...5.0.45" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Da die Option **Kund:innen müssen alle Bestellmerkmale ausfüllen, bevor sie einen Artikel in den Warenkorb legen können.** im Schritt **Angezeigte Informationen** des plentyShop-Assistenten ab sofort nicht mehr für Bestelleigenschaften gilt, müssen Händler:innen für Bestelleigenschaften im Menü **Einrichtung » Einstellungen » Eigenschaften » Konfiguration » (Eigenschaft wählen) » Optionen » Bestelloptionen** die Option **Verpflichtend** aktivieren, sofern die jeweilige Bestelleigenschaft verpflichtend sein soll.
+
+### Hinzugefügt
+
+- Die Sichtbarkeit der angezeigten Summen in der Warenkorbvorschau lässt sich jetzt auch über den plentyShop-Assistenten im Schritt **Angezeigte Informationen** einstellen.
+
+### Geändert
+
+- Bestelleigenschaften und Bestellmerkmale wurden nun auch angezeigt wenn die Variante nicht kaufbar ist.
+
+### Behoben
+
+- Das Styling von abgeschlossenen Live-Shopping-Angeboten wurde dem von noch laufenden Live-Shopping-Angeboten angeglichen.
+- Es war möglich eine Newsletter-Anmeldung ohne reCAPTCHA abzuschicken, wenn der dazugehörige Cookie nicht akzeptiert wurde. Dies wurde behoben.
+- Im plentyShop-Assistenten wurden keine Standardwerte für globale Werte angezeigt. Das wurde behoben.
+- Durch einen Fehler wurde der eingegebene Suchbegriff nicht richtig an die URL angehangen. Dies wurde behoben.
+- Die Option **Kund:innen müssen alle Bestellmerkmale ausfüllen, bevor sie einen Artikel in den Warenkorb legen können.** im plentyShop-Assistenten wird nun nicht mehr für Bestelleigenschaften berücksichtigt.
+- Durch einen Fehler wurden Änderungen an den Einstellungen des Cookie-Bar-Widgets nicht übernommen. Dies wurde behoben.
+- Bestelleigenschaften vom Typ **Kein** in einer Gruppe vom Typ **Select** funktionieren nun korrekt, wenn für sie die Option **Verpflichtend** aktiv ist.
+- Bestellmerkmale vom Typ **Kein** in einer Gruppe vom Typ **Einfachauswahl** funktionieren nun wieder korrekt, wenn im plentyShop-Assistenten die Option **Kund:innen müssen alle Bestellmerkmale ausfüllen, bevor sie einen Artikel in den Warenkorb legen können.** aktiv ist.
+
+## v5.0.44 (2021-12-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.43...5.0.44" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Die Einstellung **Preisinformation in der Warenkorbvorschau anzeigen** im Menü **Plugins » plentyShop LTS » Warenkorb** greift nun wieder. Überprüfe, ob du die dort angehakten Preisinformationen in der Warenkorbvorschau anzeigen willst. Passe die Einstellungen gegebenenfalls an.
+- Aufgrund von Änderungen am CookieBar Widget müssen die betroffenen ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+
+### Hinzugefügt
+
+- Es ist jetzt möglich, die Suche nach Variantennamen zu priorisieren. Du findest die Einstellung im plentyShop-Assistenten im Schritt **Suche**.
+- Es ist jetzt möglich, die Reihenfolge der Schaltflächen der Cookie-Bar in den Widget-Einstellungen festzulegen. Zusätzlich lässt sich die **Alle ablehnen**-Schaltfläche ausblenden.
+- Die Beschreibungen von Bestelleigenschaften und Bestellmerkmalen lassen sich jetzt auf mobilen Geräten über eine Schaltfläche anzeigen.
+- Es ist jetzt möglich, die angezeigten Preisinformationen in der Warenkorbvorschau ein- oder auszublenden. Du findest den Punkt in den plentyShop LTS Einstellungen unter **Warenkorb » Preisinformationen in der Warenkorbvorschau anzeigen**. Diese Funktionalität steht nur in ShopBuilder-Headern zur Verfügung.
+- Bestelleigenschaften mir der Option **Verpflichtend** werden jetzt unterstützt.
+- Die Symbole für Fußnoten auf der Artikeldetailseite sind jetzt über die Multilingualität anpassbar. Die entsprechenden Übersetzungsschlüssel sind: **singleItemFootnote1**, **singleItemFootnote2**, **singleItemFootnote12**
+
+### Geändert
+
+- Die Farbeinstellungen im Tab **Design** der plentyShop LTS-Konfiguration sind jetzt deprecated. Diese Einstellungen finden sich jetzt nur noch in den Designeinstellungen des ShopBuilders. Die bisher ausgewählten Farben bleiben erhalten.
+- Während die Warenkorbvorschau geöffnet ist, wird nun die Scrollbar des Shops ausgeblendet. Wir bedanken uns bei User @MaxBentz für den Beitrag.
+
+### Behoben
+
+- Das Artikelraster-Widget erzeugte eine zu große Datenmenge in der ShopBuilder-Vorschau und vergrößerte beim Speichern die Dateigröße. Dies wurde behoben.
+- Die Cookiebar lehnte bei Klick auf **Alle ablehnen** auch essenzielle Cookies ab. Dies wurde behoben.
+- Zukünftige Liveshopping-Artikel, die keinen Streichpreis haben, zeigen nun wieder den Normalpreis an.
+- Die automatische Telefonnummerkennung im Safari-Browser konnte in Kombination mit SSR zu Hydration-Fehlern führen. Sie ist jetzt standardmäßig deaktiviert.
+- Die Tooltips des Zur-Wunschliste-hinzufügen-Widgets wurden nicht angezeigt. Dies wurde behoben.
+- Im plentyShop LTS-Assistenten wurde der Backend-Name von Versandprofilen nicht angezeigt. Dies wurde behoben.
+- Für die Tag-Liste wurde ein HTML-Element ausgegeben, auch wenn kein Tag am Artikel vorhanden war. Dies wurde behoben. Wir bedanken uns bei User @Lauflust für den Beitrag.
+- Die Validierung von Bestellmerkmalen und Bestelleigenschaften vom Typ **Datei** findet jetzt nur noch serverseitig statt.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.44 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- [resources/js/src/app/components/pageDesign/CookieBar.vue](https://github.com/plentymarkets/plugin-ceres/pull/3133/files#diff-07203a2a14f4fdfe0285c115db84358b9b18bbe84d3ab3536f80b667529b7392)
+- [resources/views/Widgets/Footer/CookieBarWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3133/files#diff-c05849d77ed56c7c3fe936d53064ffa075171ba20822d0448e351ee940c1dc59)
+- [resources/views/PageDesign/Partials/Head.twig](https://github.com/plentymarkets/plugin-ceres/pull/3109/files#diff-33a10158d672d50c9bc1c0e8a46fbd8edb701925dcb3f619c6ff6f8ca11e45ee)
+- [resources/js/src/app/components/item/AddToWishList.vue](https://github.com/plentymarkets/plugin-ceres/pull/3110/files#diff-ca84d4fb86526c6d5ab30af678de22127f6721548962854510cf3fc42d36352e)
+- [resources/js/src/app/components/item/OrderPropertyListGroup.vue](https://github.com/plentymarkets/plugin-ceres/pull/3115/files#diff-66d47567497f0cc8e0143d9f963d8c812092114dd774e63ccae91fe1179330ba)
+- [resources/js/src/app/components/item/OrderPropertyListItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3115/files#diff-38e564e102ed3a17d36a85e7a337ea233f1fba3a1e43d95808c20dde2484f1c9)
+- [resources/js/src/app/components/basket/BasketPreview.vue](https://github.com/plentymarkets/plugin-ceres/pull/3104/files#diff-21af208d0ab5bd9055fcd8ca0bda5d6c0770336ed010aa788a2f0c1d7222e2b6)
+- [resources/js/src/app/components/basket/BasketTotals.vue](https://github.com/plentymarkets/plugin-ceres/pull/3104/files#diff-74c12ada105a013f79bbea3a162d3e4358d1afa3f38c3e9e00894a3ab6ad01c1)
+- [resources/views/Widgets/Header/TopBarWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3104/files#diff-2696f6a2e31a39130c691133b3d6fdf30b218a6bdbbd0717433c835d060c3f66)
+- [resources/js/src/app/components/item/TagList.vue](https://github.com/plentymarkets/plugin-ceres/pull/3134/files#diff-1b324b2465d4c6e8aefae057e8d7e36990efbd9e72f3beee9c61149d8bbc7e00)
+- [resources/js/src/app/components/item/OrderPropertyListItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3123/files#diff-38e564e102ed3a17d36a85e7a337ea233f1fba3a1e43d95808c20dde2484f1c9)
+
+
+## v5.0.43 (2021-11-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.42...5.0.43" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Es wurden `aria-label` für alle **Schließen**-Schaltflächen hinzugefügt. Wir möchten uns bei @MaxBentz für diesen Beitrag bedanken!
+- Für die Cookie-Bar-Schaltfläche **Alle ablehnen** wurde der Eintrag `cookieBarDenyAll` in der Mehrsprachigkeitsoberfläche hinzugefügt.
+
+### Geändert
+
+- Die standardmäßige Cookie-Bar enthält nun die drei Schaltflächen **Auswahl akzeptieren**, **Alle akzeptieren** und **Alle ablehnen**.
+- Alle Schaltflächen der Cookie-Bar haben nun die gleiche Farbe.
+
+### Behoben
+
+- Die Standardlogos für plentyShop LTS und plentymarkets wurden nicht korrekt angezeigt. Dies wurde behoben.
+- Zahlungsarten mit viel beschreibendem Text wurden im Checkout auf kleinen Display-Größen nicht richtig dargestellt. Dies wurde behoben.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.43 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- [resources/js/src/app/components/basket/AddItemToBasketOverlay.vue](https://github.com/plentymarkets/plugin-ceres/pull/3099/files#diff-311f3a2f3e02a8f6bb38785576b25dc75bf8b3e56a36a8cc2e4ae474745266b5)
+- [resources/js/src/app/components/basket/BasketPreview.vue](https://github.com/plentymarkets/plugin-ceres/pull/3099/files#diff-21af208d0ab5bd9055fcd8ca0bda5d6c0770336ed010aa788a2f0c1d7222e2b6)
+- [resources/js/src/app/components/customer/login/ForgotPassword.vue](https://github.com/plentymarkets/plugin-ceres/pull/3099/files#diff-44987529408a4046ff667225875e66b190a54913180f2aadcb986f8c349e1a33)
+- [resources/js/src/app/components/customer/login/LoginView.vue](https://github.com/plentymarkets/plugin-ceres/pull/3099/files#diff-00501fd1757fdacd13f2da43432cb2de657278d7db72c324b8317160a0ece5d3)
+- [resources/js/src/app/components/myAccount/EditCouponOverlay.vue](https://github.com/plentymarkets/plugin-ceres/pull/3099/files#diff-3385c5d0e4771710be00b0a70811ac5b8018e23b7da889cb9923959dbb8a9a29)
+- [resources/js/src/app/components/orderReturn/OrderReturn.vue](https://github.com/plentymarkets/plugin-ceres/pull/3099/files#diff-971e659557f3b0f7e6b0d68a65d9a3f7fba777397bc842f3ecf77313d54857f1)
+- [resources/js/src/app/components/pageDesign/Notifications.vue](https://github.com/plentymarkets/plugin-ceres/pull/3099/files#diff-aaca879a460ddd8b7177f493c43c224bf1589a43cdf0e284069d25656f0e93c8)
+- [resources/views/Customer/Components/AddressSelect/AddressSelect.twig](https://github.com/plentymarkets/plugin-ceres/pull/3099/files#diff-969624803dfeb696a58e16de0d95c285a458ec83a615026882d9b1e65386935b)
+- [resources/views/MyAccount/Components/AccountSettings.twig](https://github.com/plentymarkets/plugin-ceres/pull/3099/files#diff-f99642810d726bab73f9000f541ceebf82d6470974403d0c6693ea16ed9a47a4)
+- [resources/views/MyAccount/Components/BankDataSelect.twig](https://github.com/plentymarkets/plugin-ceres/pull/3099/files#diff-1f3a9b0d80f77b92422277ac44697c3af03430626f4bbc8afc281c5b66ec0b1f)
+- [resources/views/MyAccount/Components/ChangePaymentMethod.twig](https://github.com/plentymarkets/plugin-ceres/pull/3099/files#diff-eb7c6713f77e2474d697d9c61965c24b43696f444a9d6cc11fc93428da719535)
+- [resources/views/MyAccount/Components/OrderHistory.twig](https://github.com/plentymarkets/plugin-ceres/pull/3099/files#diff-a4e17105e37f62c4fbc0b52da6bbcc7b5d0f134fd425f71b536e95e4ea565f5b)
+- [resources/views/PageDesign/PageDesign.twig](https://github.com/plentymarkets/plugin-ceres/pull/3099/files#diff-6103acda40fc331c6f5ba92faab9976e92848d8fde0e9af7fe34abd593885128)
+
+
+## v5.0.42 (2021-11-15) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.41...5.0.42" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### ToDo
+
+- Themes und eigenes CSS müssen hinsichtlich `<span>`-Elementen überprüft werden. Wir haben alle `<span>`-Elemente, die Block-Level-Elemente enthielten, entweder entfernt oder in `<div>`-Elemente umgewandelt, um invalides HTML zu verhindern. Überprüfe, ob du in deinen Selektoren auf die betroffenen `<span>`-Elemente zugreifst und passe deine Stilanweisungen gegebenenfalls an. Die betroffenen Dateien findest du im Abschnitt **Angepasste Templates**.
+
+### Geändert
+
+- Beim Aktualisieren der Adresse wird nun geprüft, ob das Geburtsdatum valide ist, auch wenn der Eingabewert nicht sichtbar ist.
+- In den ShopBuilder-Vorlagen für die Bereiche **Checkout** und **Mein Konto** werden nun Inline Text-Widgets anstatt Text-Widgets verwendet.
+- Für die SEO-Einstellung im Bereich SKU wurde die Option **Artikel-ID** hinzugefügt.
+
+### Behoben
+
+- Die Einstellung **Bei Mouse-Over über dem Warenkorbsymbol im Header einblenden** für die Anzeige der Warenkorbvorschau funktionierte nicht wie gewünscht. Dies wurde behoben.
+- Das Öffnen und Schließen der mobilen Navigation passiert nun über eine zentrale Stelle. Dadurch kann es nicht mehr zu unterschiedlichen Ständen der CSS-Klassen kommen, die den Zustand der Navigation darstellen.
+- Chunks des JS-Bundles wurden bei aktivierten Server-side Rendering ohne den Buildhash geladen und wurden daher teilweise veraltet aus dem Browsercache ausgeliefert. Dies wurde behoben.
+- Beim Speichern des plentyShop-Assistenten wird jetzt nicht mehr der gesamte ShopBooster-Cache invalidiert. Bei Einstellungen, die nur Werte aus der Plugin-Konfiguration betreffen (Vorschaumodus), werden nur betroffene Seiten im Cache invalidiert.
+- Nach dem Anlegen einer Retoure wird man nun je nach Login-Status auf den **Mein Konto**-Bereich oder auf die Bestellbestätigungsseite weitergeleitet und nicht mehr auf die Startseite.
+- Die fehlende Übersetzung für die Währung Antillen-Gulden und die dazugehörige Einstellung in der Plugin-Konfiguration wurden ergänzt.
+- Beim Lieferlandwechsel wurden ungültig Artikel nicht aus dem Warenkorb entfernt. Dies wurde behoben.
+- `<span>`-Elemente dürfen keine Block-Level Elemente enthalten. Diese `<span>`-Elemente wurden entweder entfernt oder zu `<div>`-Elementen umgewandelt, um invalides HTML zu verhindern. Wir bedanken uns bei @MaxBentz für den Beitrag.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.42 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- [resources/views/Customer/Components/AddressSelect/AddressSelect.twig](https://github.com/plentymarkets/plugin-ceres/pull/2880/files#diff-969624803dfeb696a58e16de0d95c285a458ec83a615026882d9b1e65386935b)
+- [resources/views/Checkout/OrderDetails.twig](https://github.com/plentymarkets/plugin-ceres/pull/3086/files#diff-49e9a28ec33181e8fd3720d39345363b8b0614f2bf29ceb66b403ef22c18bd4d)
+- [resources/views/MyAccount/Components/BankDataSelect.twig](https://github.com/plentymarkets/plugin-ceres/pull/3086/files#diff-1f3a9b0d80f77b92422277ac44697c3af03430626f4bbc8afc281c5b66ec0b1f)
+- [resources/views/Widgets/Contact/ContactDetailsWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3086/files#diff-b7d6f7d1aeff7c602684070225c40c435e3de1caed65ca3df51fdd554a994e33)
+- [resources/views/Widgets/OrderConfirmation/OrderDataWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3086/files#diff-82affb09026a21fd94995e057ae7214f6751cf84dfed718216f4760865567c33)
+- [resources/views/Widgets/OrderConfirmation/PurchasedItemsWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3086/files#diff-2cee15b4b8add92d304d2f4cbbb5a5891a5752c533b564f1e1d152982c1e62d0)
+
 ## v5.0.41 (2021-10-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.40...5.0.41" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt

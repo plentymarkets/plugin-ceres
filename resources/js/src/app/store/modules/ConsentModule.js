@@ -17,6 +17,31 @@ function _setConsent(state, { key, value })
     }
 }
 
+function setStateForConsents(state, changeTo)
+{
+    Object.keys((state.consents || {})).forEach((groupKey) =>
+    {
+        if (typeof state.consents[groupKey] === "object")
+        {
+            Object.keys(state.consents[groupKey]).forEach((consentKey) =>
+            {
+
+                state.consents[groupKey] = state.consents[groupKey] || {};
+                if (window.ConsentManager && !window.ConsentManager.isNecessary(`${groupKey}.${consentKey}`))
+                {
+                    state.consents[groupKey][consentKey] = changeTo;
+                }
+            });
+        }
+    });
+
+    if (window.ConsentManager)
+    {
+        window.ConsentManager.setResponse(state.consents);
+        state.hasResponse = true;
+    }
+}
+
 const state = () => ({
     consents: {},
     hasResponse: false
@@ -34,23 +59,11 @@ const mutations =
         },
         acceptAll(state)
         {
-            Object.keys((state.consents || {})).forEach((groupKey) =>
-            {
-                if (typeof state.consents[groupKey] === "object")
-                {
-                    Object.keys(state.consents[groupKey]).forEach((consentKey) =>
-                    {
-                        state.consents[groupKey] = state.consents[groupKey] || {};
-                        state.consents[groupKey][consentKey] = true;
-                    });
-                }
-            });
-
-            if (window.ConsentManager)
-            {
-                window.ConsentManager.setResponse(state.consents);
-                state.hasResponse = true;
-            }
+            setStateForConsents(state, true);
+        },
+        denyAll(state)
+        {
+            setStateForConsents(state, false);
         },
         initConsents(state)
         {
@@ -95,3 +108,5 @@ export default
     mutations,
     getters
 };
+
+

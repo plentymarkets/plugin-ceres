@@ -1357,7 +1357,6 @@
                 "basket.preview_data": {
                     "type": "multiCheckBox",
                     "required": false,
-                    "deprecated": true,
                     "label": "Config.basketPreviewDataLabel",
                     "options": {
                         "defaultValue": "basket.value_of_items_gross, basket.shipping_costs_gross, basket.order_total_gross",
@@ -1389,6 +1388,26 @@
                             {
                                 "value": "basket.order_total_net",
                                 "caption": "Config.basketDataOrderTotalNet"
+                            },
+                            {
+                                "value": "basket.rebate",
+                                "caption": "Config.basketDataRebate"
+                            },
+                            {
+                                "value": "basket.promotion_coupon",
+                                "caption": "Config.basketDataPromotionCoupon"
+                            },
+                            {
+                                "value": "basket.additional_costs",
+                                "caption": "Config.basketDataAdditionalCosts"
+                            },
+                            {
+                                "value": "basket.sales_coupon",
+                                "caption": "Config.basketDataSalesCoupon"
+                            },
+                            {
+                                "value": "basket.open_amount",
+                                "caption": "Config.basketDataOpenAmount"
                             }
                         ]
                     }
@@ -4716,6 +4735,7 @@
             "label": "Config.designTab",
             "formFields": {
                 "brand-primary": {
+                    "deprecated": true,
                     "type": "colorPicker",
                     "required": false,
                     "scss": true,
@@ -4725,6 +4745,7 @@
                     }
                 },
                 "brand-secondary": {
+                    "deprecated": true,
                     "type": "colorPicker",
                     "required": false,
                     "scss": true,
@@ -4734,6 +4755,7 @@
                     }
                 },
                 "brand-success": {
+                    "deprecated": true,
                     "type": "colorPicker",
                     "required": false,
                     "scss": true,
@@ -4743,6 +4765,7 @@
                     }
                 },
                 "brand-info": {
+                    "deprecated": true,
                     "type": "colorPicker",
                     "required": false,
                     "scss": true,
@@ -4752,6 +4775,7 @@
                     }
                 },
                 "brand-warning": {
+                    "deprecated": true,
                     "type": "colorPicker",
                     "required": false,
                     "scss": true,
@@ -4761,6 +4785,7 @@
                     }
                 },
                 "brand-danger": {
+                    "deprecated": true,
                     "type": "colorPicker",
                     "required": false,
                     "scss": true,

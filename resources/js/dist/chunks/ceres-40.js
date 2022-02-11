@@ -31,6 +31,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "single-add-to-basket",
@@ -96,6 +97,8 @@ var render = function() {
             return prop.property.isOderProperty
           }),
           "has-order-properties": _vm.currentVariation.hasOrderProperties,
+          "has-required-order-property":
+            _vm.currentVariation.hasRequiredOrderProperty,
           "use-large-scale": false,
           "show-quantity": true,
           "item-url": _vm._f("itemURL")(_vm.currentVariation),

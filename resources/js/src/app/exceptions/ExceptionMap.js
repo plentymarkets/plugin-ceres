@@ -15,6 +15,7 @@ export const exceptionMap = new Map(
         ["12", "notificationsWarningOverselling"],
         ["13", "consentReCaptchaCookieNotSet"],
         ["14", "notificationsBasketItemsRemovedForCurrency"],
+        ["15", "notificationsBasketItemsRemovedForShippingCountry"],
         ["110", "errorBasketItemVariationNotFound"],
         ["111", "errorBasketItemNotEnoughStockForVariation"],
         ["112", "errorBasketItemMaximumQuantityReachedForItem"],
@@ -47,7 +48,8 @@ export const exceptionMap = new Map(
         ["1340", "couponNoCustomerGroupActivated"],
         ["1341", "couponCampaignNoWebstoreActivated"],
         ["1342", "couponCampaignWrongWebstoreId"],
-        ["1343", "couponCampaignNoWebstoreIdGiven"]
+        ["1343", "couponCampaignNoWebstoreIdGiven"],
+        ["1400", "csrfTokenMismatch"]
     ]
 );
 

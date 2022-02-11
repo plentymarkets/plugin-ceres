@@ -4,7 +4,8 @@
         data-toggle="tooltip"
         data-placement="top"
         ref="addToWishList"
-        title="">
+        v-tooltip
+        :title="tooltipText">
         <icon icon="heart" class="default-float" :class="{'text-appearance text-danger': isVariationInWishList}" :loading="isLoading"></icon>
         {{ $translate("Ceres::Template.singleItemWishList") }}
     </a>
@@ -59,6 +60,16 @@ export default {
             }
 
             return currentVariation && currentVariation.variation && currentVariation.variation.id;
+        },
+
+        tooltipText()
+        {
+            const tooltipText = this.$translate(
+                "Ceres::Template." + (this.isVariationInWishList ? "singleItemWishListRemove" : "singleItemWishListAdd")
+            );
+
+
+            return tooltipText;
         },
 
         ...mapState({
@@ -119,26 +130,6 @@ export default {
                         this.isLoading = false;
                     });
             }
-        },
-
-        changeTooltipText()
-        {
-            const tooltipText = this.$translate(
-                "Ceres::Template." + (this.isVariationInWishList ? "singleItemWishListRemove" : "singleItemWishListAdd")
-            );
-
-            $(".add-to-wish-list")
-                .attr("data-original-title", tooltipText)
-                .tooltip("hide")
-                .tooltip("setContent");
-        }
-    },
-
-    watch:
-    {
-        isVariationInWishList()
-        {
-            this.changeTooltipText();
         }
     }
 }

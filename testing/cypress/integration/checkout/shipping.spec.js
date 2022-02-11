@@ -98,7 +98,7 @@ context("Checkout shipping", () =>
         {
             const shippingGross = text.replace(/(\r\n|\n|\r|\s)/gm, "");
 
-            expect(shippingGross).to.eql("10,00EUR");
+            expect(shippingGross).to.eql("8,40EUR");
         });
 
     });
@@ -120,7 +120,7 @@ context("Checkout shipping", () =>
         {
             const shippingGross = text.replace(/(\r\n|\n|\r|\s)/gm, "");
 
-            expect(shippingGross).to.eql("10,00EUR");
+            expect(shippingGross).to.eql("8,40EUR");
         });
     });
 

@@ -8,7 +8,7 @@
                     <div class="modal-header">
                         <div class="modal-title h5">{{ $translate("Ceres::Template.singleItemAdded") }}</div>
                         <span class="text-muted ml-auto"><span class="timer"></span>s</span>
-                        <button type="button" class="close ml-0 pl-1" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close ml-0 pl-1" data-dismiss="modal" :aria-label="$translate('Ceres::Template.closeIcon')">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>

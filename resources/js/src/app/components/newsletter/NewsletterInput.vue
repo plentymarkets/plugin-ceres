@@ -118,6 +118,15 @@ export default {
 
         save()
         {
+            const recaptchaEl = this.$el.querySelector("[data-recaptcha]");
+
+            if (App.config.global.googleRecaptchaApiKey && (!window.grecaptcha || !recaptchaEl))
+            {
+                NotificationService.error(this.$translate("Ceres::Template.newsletterAcceptRecaptchaCookie"));
+                this.isDisabled = false;
+                return;
+            }
+
             executeReCaptcha(this.$el)
             .then((recaptchaToken) =>
             {

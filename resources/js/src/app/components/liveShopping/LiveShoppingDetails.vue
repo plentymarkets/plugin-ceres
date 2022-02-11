@@ -78,7 +78,7 @@
                     <span v-if="liveShoppingData.item.variation.mayShowUnitPrice">| {{ prices.price.basePrice }}</span>
                 </div>
 
-                * <template v-if="showNetPrices">{{ $translate("Ceres::Template.itemExclVAT") }}</template><template v-else>{{ $translate("Ceres::Template.itemInclVAT") }}</template> {{ $translate("Ceres::Template.itemExclusive") }}
+                {{ $translate("Ceres::Template.liveShoppingFootnote") }} <template v-if="showNetPrices">{{ $translate("Ceres::Template.itemExclVAT") }}</template><template v-else>{{ $translate("Ceres::Template.itemInclVAT") }}</template> {{ $translate("Ceres::Template.itemExclusive") }}
                 <a v-if="$ceres.config.global.shippingCostsCategoryId > 0" data-toggle="modal" href="#shippingscosts" :title="$translate('Ceres::Template.itemShippingCosts')">{{ $translate("Ceres::Template.itemShippingCosts") }}</a>
                 <a v-else :title="$translate('Ceres::Template.itemShippingCosts')">{{ $translate("Ceres::Template.itemShippingCosts") }}</a>
             </div>
@@ -88,7 +88,7 @@
             <div>
                 <div class="prices">
                     <div class="price-view-port">
-                        <del class="crossprice" v-if="displaySettings.showCrossPrice && prices.rrp.price.value > 0">
+                        <del class="crossprice" v-if="displaySettings.showCrossPrice && prices.rrp && prices.rrp.price.value > 0">
                             {{ prices.rrp.price.formatted | itemCrossPrice  }}
                         </del>
                     </div>
@@ -105,7 +105,7 @@
                 </div>
 
                 <span class="vat small text-muted">
-                    * <template v-if="showNetPrices">{{ $translate("Ceres::Template.itemExclVAT") }}</template><template v-else>{{ $translate("Ceres::Template.itemInclVAT") }}</template> {{ $translate("Ceres::Template.itemExclusive") }}
+                    {{ $translate("Ceres::Template.liveShoppingFootnote") }} <template v-if="showNetPrices">{{ $translate("Ceres::Template.itemExclVAT") }}</template><template v-else>{{ $translate("Ceres::Template.itemInclVAT") }}</template> {{ $translate("Ceres::Template.itemExclusive") }}
                     <a v-if="$ceres.config.global.shippingCostsCategoryId > 0" data-toggle="modal" href="#shippingscosts" :title="$translate('Ceres::Template.itemShippingCosts')">{{ $translate("Ceres::Template.itemShippingCosts") }}</a>
                     <a v-else :title="$translate('Ceres::Template.itemShippingCosts')">{{ $translate("Ceres::Template.itemShippingCosts") }}</a>
                 </span>
