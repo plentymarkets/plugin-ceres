@@ -94,7 +94,6 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting('fallbackImagePath', $this->imagePath . "category-living-2.jpg")
             ->withSetting('url.type', 'category')
             ->withSetting('url.value', '20')
-            ->withSetting("customCaption", true)
             ->withSetting("lazyLoading", true);
 
         $innerTwoColumnWidgetRight->createChild('first', 'Ceres::ImageBoxWidget')
@@ -106,7 +105,6 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting('fallbackImagePath', $this->imagePath . "category-living-4.jpg")
             ->withSetting('url.type', 'category')
             ->withSetting('url.value', '16')
-            ->withSetting("customCaption", true)
             ->withSetting("lazyLoading", true);
 
         $innerTwoColumnWidgetRight->createChild('second', 'Ceres::ImageBoxWidget')
@@ -117,8 +115,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("customImagePath", $this->imagePath . "category-living-3.webp")
             ->withSetting('fallbackImagePath', $this->imagePath . "category-living-3.jpg")
             ->withSetting('url.type', 'category')
-            ->withSetting('url.value', '16')
-            ->withSetting("customCaption", true)
+            ->withSetting('url.value', '17')
             ->withSetting("lazyLoading", true);
 
         $twoColumnWidgetRight->createChild('second', 'Ceres::ImageBoxWidget')
@@ -130,7 +127,6 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting('fallbackImagePath', $this->imagePath . "category-living-1.jpg")
             ->withSetting('url.type', 'category')
             ->withSetting('url.value', '18')
-            ->withSetting("customCaption", true)
             ->withSetting("lazyLoading", true);
     }
     public function createBackground(): void
