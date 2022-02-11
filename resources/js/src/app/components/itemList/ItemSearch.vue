@@ -7,15 +7,15 @@
 
                 <slot name="search-button">
                     <button class="search-submit px-3" type="submit" @click="search()" :aria-label="$translate('Ceres::Template.headerSearch')">
-                        <i class="fa fa-search"></i>
+                        <icon class="fa-fw" icon="search" :loading="autocompleteIsLoading"></icon>
                     </button>
                 </slot>
             </div>
 
             <template v-if="isSearchFocused">
-                <div v-show="hasAutocompleteResults">
+                <div v-show="(searchString.length >= searchMinLength && hasInitialInput) || $ceres.isShopBuilder">
                     <slot name="autocomplete-suggestions">
-                        <div class="autocomplete-suggestions shadow bg-white w-100 ">
+                        <div class="autocomplete-suggestions shadow bg-white w-100">
                             <search-suggestion-item
                                 :show-images="showItemImages"
                                 suggestion-type="item">
@@ -32,7 +32,6 @@
 import UrlService from "../../services/UrlService";
 import { isNullOrUndefined, defaultValue } from "../../helper/utils";
 import { pathnameEquals } from "../../helper/url";
-import ApiService from "../../services/ApiService";
 import { mapState } from 'vuex';
 import { debounce } from '../../helper/debounce';
 
@@ -54,6 +53,11 @@ export default {
         {
             type: Number,
             default: 200
+        },
+        searchMinLength:
+        {
+            type: Number,
+            default: 2
         }
     },
 
@@ -62,7 +66,8 @@ export default {
         return {
             isSearchFocused: App.isShopBuilder,
             onValueChanged: null,
-            searchString: ""
+            searchString: "",
+            hasInitialInput: false
         };
     },
 
@@ -84,7 +89,8 @@ export default {
 
         ...mapState({
             autocompleteResult: state => state.itemSearch.autocompleteResult,
-            moduleSearchString: state => state.itemList.searchString
+            moduleSearchString: state => state.itemList.searchString,
+            autocompleteIsLoading: state => state.itemSearch.autocompleteIsLoading
         })
     },
 
@@ -124,13 +130,16 @@ export default {
 
         autocomplete(searchString)
         {
-            if (searchString.length >= 2)
+            if (searchString.length >= this.searchMinLength)
             {
                 this.$store.dispatch("loadItemSearchAutocomplete", searchString);
             }
             else
             {
                 this.$store.commit("setAutocompleteResult", { item: [], category: [], suggestion: [] });
+
+                // hide the autocomplete box
+                this.hasInitialInput = false;
             }
         },
 
@@ -155,7 +164,14 @@ export default {
             {
                 this.searchString = newVal;
             }
-        }        
+        },
+
+        autocompleteIsLoading(newVal, oldVal) {
+            // when client was loading and has stopped now, the autocomplete box should be shown
+            if (oldVal && !newVal) {
+                this.hasInitialInput = true;
+            }
+        }
     }
 }
 </script>
