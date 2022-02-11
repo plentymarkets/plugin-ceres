@@ -10,10 +10,15 @@ use Plenty\Plugin\Application;
 
 class DefaultHomepagePreset implements ContentPreset
 {
+    /** @var PresetHelper $preset */
     public $preset;
+
+    /** @var string $imagePath */
+    private $imagePath;
 
     public function getWidgets(): array
     {
+        $this->imagePath = pluginApp(Application::class)->getUrlPath('Ceres') . '/images/homepage/';
         $this->preset = pluginApp(PresetHelper::class);
 
         $this->createImageSlider();
@@ -38,7 +43,8 @@ class DefaultHomepagePreset implements ContentPreset
                     "value" => "16"
                 ],
                 "slideUrlType" => "category",
-                "customImagePath" => $this->imagePath . "slider-living-1920.webp",
+                "customImagePath" => $this->imagePath . "slider-living-1920x.webp",
+                "fallbackImagePath" => $this->imagePath . "slider-living-1920x.jpg",
                 "headline" => "FURNITURE THAT STANDS OUT",
                 "headlineStyle" => "custom-caption",
             ],
@@ -47,7 +53,8 @@ class DefaultHomepagePreset implements ContentPreset
                     "type" => "category",
                     "value" => "16"
                 ],
-                "customImagePath" => $this->imagePath . "slider-wear-1920.webp",
+                "customImagePath" => $this->imagePath . "slider-wear-1920x.webp",
+                "fallbackImagePath" => $this->imagePath . "slider-wear-1920x.jpg",
                 "headline" => "CLOTHING OF THE FUTURE",
                 "headlineStyle" => "custom-caption",
             ],
@@ -56,7 +63,8 @@ class DefaultHomepagePreset implements ContentPreset
                     "type" => "category",
                     "value" => "16"
                 ],
-                "customImagePath" => $this->imagePath . "slider-gear-1920.webp",
+                "customImagePath" => $this->imagePath . "slider-gear-1920x.webp",
+                "fallbackImagePath" => $this->imagePath . "slider-gear-1920x.jpg",
                 "headline" => "THE FUTURE HAS ARRIVED",
                 "headlineStyle" => "custom-caption",
             ]
@@ -73,10 +81,6 @@ class DefaultHomepagePreset implements ContentPreset
     }
     public function createCategoryShowcase(): void
     {
-        /** @var Application $app */
-        $app = pluginApp(Application::class);
-        $this->imagePath = $app->getUrlPath('Ceres') . '/resources/images/homepage/' ;
-
         $twoColumnWidget =  $this->preset->createWidget("Ceres::TwoColumnWidget")
             ->withSetting('layout', 'oneToOne')
             ->withSetting('layoutTablet', 'oneToOne')
@@ -97,6 +101,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("aspectRatio", "retain")
             ->withSetting("headline", "PLENTY GEAR")
             ->withSetting("customImagePath", $this->imagePath . "category-gear-1430x.webp")
+            ->withSetting('fallbackImagePath', $this->imagePath . "category-gear-1430x.jpg")
             ->withSetting('url.type', 'category')
             ->withSetting('url.value', '16')
             ->withSetting("customCaption", true)
@@ -109,6 +114,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("aspectRatio", "retain")
             ->withSetting("headline", "PLENTY WEAR - WOMEN")
             ->withSetting("customImagePath", $this->imagePath . "category-wear-female-715x.webp")
+            ->withSetting('fallbackImagePath', $this->imagePath . "category-wear-female-715x.jpg")
             ->withSetting('url.type', 'category')
             ->withSetting('url.value', '16')
             ->withSetting("customCaption", true)
@@ -121,6 +127,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("aspectRatio", "retain")
             ->withSetting("headline", "PLENTY WEAR - MEN")
             ->withSetting("customImagePath", $this->imagePath . "category-wear-male-715x.webp")
+            ->withSetting('fallbackImagePath', $this->imagePath . "category-wear-male-715x.jpg")
             ->withSetting('url.type', 'category')
             ->withSetting('url.value', '16')
             ->withSetting("customCaption", true)
@@ -133,6 +140,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("aspectRatio", "retain")
             ->withSetting("headline", '"PLENTY LIVING"')
             ->withSetting("customImagePath", $this->imagePath . "category-living-1430x.webp")
+            ->withSetting('fallbackImagePath', $this->imagePath . "category-living-1430x.jpg")
             ->withSetting('url.type', 'category')
             ->withSetting('url.value', '16')
             ->withSetting("customCaption", true)
@@ -145,7 +153,8 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting('fullWidth', true)
             ->withSetting('lazyloadImage', true)
             ->withSetting('sourceType', 'custom-image')
-            ->withSetting('customImagePath', $this->imagePath . "story-tree-1920.webp")
+            ->withSetting('customImagePath', $this->imagePath . "story-tree-1920x.webp")
+            ->withSetting('fallbackImagePath', $this->imagePath . "story-tree-1920x.jpg")
             ->withSetting("imageSize", "cover")
             ->withSetting("aspectRatio", "auto")
             ->withSetting('spacing.customMargin', true)
@@ -153,7 +162,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting('spacing.margin.bottom.unit', null);
 
         $bgContainer->createChild('background', 'Ceres::InlineTextWidget')
-            ->withSetting("text", '<h4>NO MATTER HOW SMALL</h4>')
+            ->withSetting("text", '<h4 class="align-center color-light">NO MATTER HOW SMALL</h4>')
             ->withSetting("appearance", "none")
             ->withSetting("spacing.customPadding", true)
             ->withSetting("spacing.padding.left.value", 0)
@@ -175,7 +184,6 @@ class DefaultHomepagePreset implements ContentPreset
         $bgContainer->createChild('background', 'Ceres::LinkWidget')
             ->withSetting('customClass', 'text-center btn-outline widget-light')
             ->withSetting('appearance', 'primary')
-            ->withSetting('block', 'true')
             ->withSetting('text', 'SHOP NOW')
             ->withSetting('url.type', 'category')
             ->withSetting('url.value', '16');
@@ -213,7 +221,6 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("headlineStyle", "no-caption")
             ->withSetting("maxItems", 4);
 
-
         $this->preset->createWidget('Ceres::CodeWidget')
             ->withSetting('appearance', 'none')
             ->withSetting('text', '<p class="mb-0">{{ trans("Ceres::Template.singleItemFootnote1") }} {% if services.customer.showNetPrices() %}{{ trans("Ceres::Template.singleItemExclVAT") }}{% else %}{{ trans("Ceres::Template.singleItemInclVAT") }}{% endif %} {{ trans("Ceres::Template.singleItemExclusive") }} <a {% if ceresConfig.global.shippingCostsCategoryId > 0 %} data-toggle="modal" href="#shippingscosts"{% endif %} title="{{ trans("Ceres::Template.singleItemShippingCosts") }}">{{ trans("Ceres::Template.singleItemShippingCosts") }}</a></p>');
@@ -232,10 +239,6 @@ class DefaultHomepagePreset implements ContentPreset
     }
     public function createFirstImageTextContainer(): void
     {
-        /** @var Application $app */
-        $app = pluginApp(Application::class);
-        $this->imagePath = $app->getUrlPath('Ceres') . '/resources/images/homepage/' ;
-
         $twoColumnWidget =  $this->preset->createWidget("Ceres::TwoColumnWidget")
             ->withSetting('layout', 'sevenToFive')
             ->withSetting('layoutTablet', 'stackedTablet')
@@ -245,8 +248,9 @@ class DefaultHomepagePreset implements ContentPreset
         $twoColumnWidget->createChild('first', 'Ceres::ImageBoxWidget')
             ->withSetting("appearance", "primary")
             ->withSetting("style", "no-caption")
-            ->withSetting("aspectRatio", "retain")
+            ->withSetting("aspectRatio", "2-1")
             ->withSetting("customImagePath", $this->imagePath . "story-precision-1920x.webp")
+            ->withSetting('fallbackImagePath', $this->imagePath . "story-precision-1920x.jpg")
             ->withSetting("lazyLoading", true);
 
         $innerTwoColumnWidget = $twoColumnWidget->createChild('second', 'Ceres::TwoColumnWidget')
@@ -271,12 +275,8 @@ class DefaultHomepagePreset implements ContentPreset
 
     public function createSecondImageTextContainer(): void
     {
-        /** @var Application $app */
-        $app = pluginApp(Application::class);
-        $this->imagePath = $app->getUrlPath('Ceres') . '/resources/images/homepage/' ;
-
         $twoColumnWidget =  $this->preset->createWidget("Ceres::TwoColumnWidget")
-            ->withSetting('layout', 'sevenToFive')
+            ->withSetting('layout', 'fiveToSeven')
             ->withSetting('layoutTablet', 'stackedTablet')
             ->withSetting('layoutMobile', 'stackedMobile')
             ->withSetting('customClass', 'mb-4');
@@ -284,8 +284,9 @@ class DefaultHomepagePreset implements ContentPreset
         $twoColumnWidget->createChild('second', 'Ceres::ImageBoxWidget')
             ->withSetting("appearance", "primary")
             ->withSetting("style", "no-caption")
-            ->withSetting("aspectRatio", "retain")
-            ->withSetting("customImagePath", "../images/homepage/story-precision-1920x.webp")
+            ->withSetting("aspectRatio", "2-1")
+            ->withSetting("customImagePath", $this->imagePath . "story-natural-1920x.webp")
+            ->withSetting('fallbackImagePath', $this->imagePath . "story-natural-1920x.jpg")
             ->withSetting("lazyLoading", true);
 
         $innerTwoColumnWidget = $twoColumnWidget->createChild('first', 'Ceres::TwoColumnWidget')
@@ -309,16 +310,14 @@ class DefaultHomepagePreset implements ContentPreset
     }
     public function createSecondBackground(): void
     {
-        /** @var Application $app */
-        $app = pluginApp(Application::class);
-        $this->imagePath = $app->getUrlPath('Ceres') . '/resources/images/homepage/' ;
-
         $bgContainer = $this->preset->createWidget("Ceres::BackgroundWidget")
             ->withSetting('customClass', 'text-right vh-100 pt-md-4 pr-md-4')
             ->withSetting('fullWidth', true)
             ->withSetting('lazyloadImage', true)
             ->withSetting('sourceType', 'custom-image')
-            ->withSetting('customImagePath', "../images/homepage/story-precision-1920x.webp")
+            ->withSetting('backgroundFixed', false)
+            ->withSetting('customImagePath', $this->imagePath . "category-living-1920x.webp")
+            ->withSetting('fallbackImagePath', $this->imagePath . "category-living-1920x.jpg")
             ->withSetting("imageSize", "cover")
             ->withSetting("aspectRatio", "auto")
             ->withSetting('spacing.customMargin', true)
@@ -339,7 +338,6 @@ class DefaultHomepagePreset implements ContentPreset
         $bgContainer->createChild('background', 'Ceres::LinkWidget')
             ->withSetting('customClass', 'text-right btn-outline widget-dark')
             ->withSetting('appearance', 'primary')
-            ->withSetting('block', 'true')
             ->withSetting('text', 'SHOP NOW')
             ->withSetting('url.type', 'category')
             ->withSetting('url.value', '16')
@@ -351,7 +349,6 @@ class DefaultHomepagePreset implements ContentPreset
     }
     public function createNewsletter(): void
     {
-
         $threeColumnWidget = $this->preset->createWidget('Ceres::ThreeColumnWidget')
             ->withSetting('layout', 'oneToOneToOne')
             ->withSetting('customClass', 'mb-5');
