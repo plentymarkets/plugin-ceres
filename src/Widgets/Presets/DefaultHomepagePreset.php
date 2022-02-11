@@ -5,6 +5,7 @@ namespace Ceres\Widgets\Presets;
 use Ceres\Widgets\Helper\PresetHelper;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 use Plenty\Plugin\Application;
+use Plenty\Plugin\Translation\Translator;
 
 /* TODO phpdoc */
 
@@ -13,13 +14,17 @@ class DefaultHomepagePreset implements ContentPreset
     /** @var PresetHelper $preset */
     public $preset;
 
+    /** @var Translator $translator */
+    public $translator;
+
     /** @var string $imagePath */
     private $imagePath;
 
     public function getWidgets(): array
     {
-        $this->imagePath = pluginApp(Application::class)->getUrlPath("Ceres") . "/images/homepage/";
         $this->preset = pluginApp(PresetHelper::class);
+        $this->translator = pluginApp(Translator::class);
+        $this->imagePath = pluginApp(Application::class)->getUrlPath("Ceres") . "/images/homepage/";
 
         $this->createImageSlider();
         $this->createCategoryShowcase();
@@ -45,19 +50,19 @@ class DefaultHomepagePreset implements ContentPreset
                 "slideUrlType" => "category",
                 "customImagePath" => $this->imagePath . "slider-living-1920x.webp",
                 "fallbackImagePath" => $this->imagePath . "slider-living-1920x.jpg",
-                "headline" => "{{ trans(\"Ceres::Homepage.categoryHeadline1\") }}",
+                "headline" => $this->translator->trans("Ceres::Homepage.categoryHeadline1"),
                 "headlineStyle" => "custom-caption",
             ],
             [
                 "customImagePath" => $this->imagePath . "slider-wear-1920x.webp",
                 "fallbackImagePath" => $this->imagePath . "slider-wear-1920x.jpg",
-                "headline" => "{{ trans(\"Ceres::Homepage.categoryHeadline2\") }}",
+                "headline" => $this->translator->trans("Ceres::Homepage.categoryHeadline2"),
                 "headlineStyle" => "custom-caption",
             ],
             [
                 "customImagePath" => $this->imagePath . "slider-gear-1920x.webp",
                 "fallbackImagePath" => $this->imagePath . "slider-gear-1920x.jpg",
-                "headline" => "{{ trans(\"Ceres::Homepage.categoryHeadline3\") }}",
+                "headline" => $this->translator->trans("Ceres::Homepage.categoryHeadline3"),
                 "headlineStyle" => "custom-caption",
             ]
         ];
@@ -87,9 +92,10 @@ class DefaultHomepagePreset implements ContentPreset
 
         $twoColumnWidget->createChild("first", "Ceres::ImageBoxWidget")
             ->withSetting("customClass", "h-100 mouseover-zoom")
+            ->withSetting("appearance", "primary")
             ->withSetting("style", "inline-caption")
-            ->withSetting("aspectRatio", "retain")
-            ->withSetting("headline", "{{ trans(\"Ceres::Homepage.categoryName1\") }}")
+            ->withSetting("aspectRatio", "auto")
+            ->withSetting("imageSize", "cover")
             ->withSetting("customImagePath", $this->imagePath . "category-living-2.webp")
             ->withSetting("fallbackImagePath", $this->imagePath . "category-living-2.jpg")
             ->withSetting("url.type", "category")
@@ -98,9 +104,9 @@ class DefaultHomepagePreset implements ContentPreset
 
         $innerTwoColumnWidgetRight->createChild("first", "Ceres::ImageBoxWidget")
             ->withSetting("customClass", "mouseover-zoom")
+            ->withSetting("appearance", "primary")
             ->withSetting("style", "inline-caption")
             ->withSetting("aspectRatio", "1-1")
-            ->withSetting("headline", "{{ trans(\"Ceres::Homepage.categoryName2\") }}")
             ->withSetting("customImagePath", $this->imagePath . "category-living-4.webp")
             ->withSetting("fallbackImagePath", $this->imagePath . "category-living-4.jpg")
             ->withSetting("url.type", "category")
@@ -109,9 +115,9 @@ class DefaultHomepagePreset implements ContentPreset
 
         $innerTwoColumnWidgetRight->createChild("second", "Ceres::ImageBoxWidget")
             ->withSetting("customClass", "mouseover-zoom")
+            ->withSetting("appearance", "primary")
             ->withSetting("style", "inline-caption")
             ->withSetting("aspectRatio", "1-1")
-            ->withSetting("headline", "{{ trans(\"Ceres::Homepage.categoryName3\") }}")
             ->withSetting("customImagePath", $this->imagePath . "category-living-3.webp")
             ->withSetting("fallbackImagePath", $this->imagePath . "category-living-3.jpg")
             ->withSetting("url.type", "category")
@@ -120,9 +126,9 @@ class DefaultHomepagePreset implements ContentPreset
 
         $twoColumnWidgetRight->createChild("second", "Ceres::ImageBoxWidget")
             ->withSetting("customClass", "mouseover-zoom")
+            ->withSetting("appearance", "primary")
             ->withSetting("style", "inline-caption")
             ->withSetting("aspectRatio", "retain")
-            ->withSetting("headline", "{{ trans(\"Ceres::Homepage.categoryName4\") }}")
             ->withSetting("customImagePath", $this->imagePath . "category-living-1.webp")
             ->withSetting("fallbackImagePath", $this->imagePath . "category-living-1.jpg")
             ->withSetting("url.type", "category")
@@ -160,7 +166,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("spacing.padding.bottom.unit", null);
 
         $bgContainer->createChild("background", "Ceres::InlineTextWidget")
-            ->withSetting("text", "<h4 class=\"align-center\"><span class=\"color-light\">{{ trans(\"Ceres::Homepage.imageBackgroundHeadline2\") }}</span></h4>")
+            ->withSetting("text", "<h4 class=\"align-center\"><span class=\"color-light\">{{ trans(\"Ceres::Homepage.imageBackgroundHeadline2\") }}<br>{{ trans(\"Ceres::Homepage.imageBackgroundHeadline3\") }}</span></h4>")
             ->withSetting("appearance", "none")
             ->withSetting("spacing.customPadding", true)
             ->withSetting("spacing.padding.top.value", 0)
@@ -168,7 +174,7 @@ class DefaultHomepagePreset implements ContentPreset
 
         $bgContainer->createChild("background", "Ceres::LinkWidget")
             ->withSetting("customClass", "text-center btn-outline")
-            ->withSetting("text", "{{ trans(\"Ceres::Homepage.shopNow\") }}")
+            ->withSetting("text", $this->translator->trans("Ceres::Homepage.shopNow"))
             ->withSetting("url.type", "category")
             ->withSetting("url.value", "16");
     }
@@ -210,7 +216,7 @@ class DefaultHomepagePreset implements ContentPreset
     public function createTextBox(): void
     {
         $this->preset->createWidget("Ceres::InlineTextWidget")
-            ->withSetting("text", "<h2>{{ trans(\"Ceres::Homepage.philosophyHeadline\") }}</h2><br/><p{{ trans(\"Ceres::Homepage.philosophyText\") }}</p>")
+            ->withSetting("text", "<h2>{{ trans(\"Ceres::Homepage.philosophyHeadline\") }}</h2><br/><p>{{ trans(\"Ceres::Homepage.philosophyText\") }}</p>")
             ->withSetting("appearance", "none")
             ->withSetting("spacing.customMargin", true)
             ->withSetting("spacing.margin.top.value", 5)
@@ -227,6 +233,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("customClass", "mb-4");
 
         $twoColumnWidget->createChild("first", "Ceres::ImageBoxWidget")
+            ->withSetting("appearance", "primary")
             ->withSetting("style", "no-caption")
             ->withSetting("aspectRatio", "retain")
             ->withSetting("customImagePath", $this->imagePath . "story-precision-1920x.webp")
@@ -262,6 +269,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("customClass", "mb-4");
 
         $twoColumnWidget->createChild("second", "Ceres::ImageBoxWidget")
+            ->withSetting("appearance", "primary")
             ->withSetting("style", "no-caption")
             ->withSetting("aspectRatio", "retain")
             ->withSetting("customImagePath", $this->imagePath . "story-natural-1920x.webp")
