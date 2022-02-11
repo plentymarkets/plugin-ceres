@@ -49,20 +49,12 @@ class DefaultHomepagePreset implements ContentPreset
                 "headlineStyle" => "custom-caption",
             ],
             [
-                "url" => [
-                    "type" => "category",
-                    "value" => "16"
-                ],
                 "customImagePath" => $this->imagePath . "slider-wear-1920x.webp",
                 "fallbackImagePath" => $this->imagePath . "slider-wear-1920x.jpg",
                 "headline" => "CLOTHING OF THE FUTURE",
                 "headlineStyle" => "custom-caption",
             ],
             [
-                "url" => [
-                    "type" => "category",
-                    "value" => "16"
-                ],
                 "customImagePath" => $this->imagePath . "slider-gear-1920x.webp",
                 "fallbackImagePath" => $this->imagePath . "slider-gear-1920x.jpg",
                 "headline" => "THE FUTURE HAS ARRIVED",
@@ -71,9 +63,8 @@ class DefaultHomepagePreset implements ContentPreset
         ];
 
         $this->preset->createWidget("Ceres::ImageCarouselWidget")
-            ->withSetting("appearance", "primary")
             ->withSetting("preloadImage", true)
-            ->withSetting("customClass", "negative-margin-top widget-fw vh-100 widget-dark img-1-offset-md-20-flip-horizontal")
+            ->withSetting("customClass", "widget-fw vh-100 img-1-offset-md-20-flip-horizontal")
             ->withSetting("slides", $slides)
             ->withSetting('spacing.customMargin', true)
             ->withSetting('spacing.margin.bottom.value', 3)
@@ -95,54 +86,50 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting('layoutMobile', 'stackedMobile');
 
         $twoColumnWidget->createChild('first', 'Ceres::ImageBoxWidget')
-            ->withSetting("appearance", "primary")
-            ->withSetting("customClass", "h-100 widget-dark mouseover-zoom")
+            ->withSetting("customClass", "h-100 mouseover-zoom")
             ->withSetting("style", "inline-caption")
             ->withSetting("aspectRatio", "retain")
             ->withSetting("headline", "PLENTY GEAR")
-            ->withSetting("customImagePath", $this->imagePath . "category-gear-1430x.webp")
-            ->withSetting('fallbackImagePath', $this->imagePath . "category-gear-1430x.jpg")
+            ->withSetting("customImagePath", $this->imagePath . "category-living-2.webp")
+            ->withSetting('fallbackImagePath', $this->imagePath . "category-living-2.jpg")
             ->withSetting('url.type', 'category')
-            ->withSetting('url.value', '16')
+            ->withSetting('url.value', '20')
             ->withSetting("customCaption", true)
             ->withSetting("lazyLoading", true);
 
         $innerTwoColumnWidgetRight->createChild('first', 'Ceres::ImageBoxWidget')
-            ->withSetting("appearance", "primary")
-            ->withSetting("customClass", "widget-dark mouseover-zoom")
+            ->withSetting("customClass", "mouseover-zoom")
             ->withSetting("style", "inline-caption")
-            ->withSetting("aspectRatio", "retain")
+            ->withSetting("aspectRatio", "1-1")
             ->withSetting("headline", "PLENTY WEAR - WOMEN")
-            ->withSetting("customImagePath", $this->imagePath . "category-wear-female-715x.webp")
-            ->withSetting('fallbackImagePath', $this->imagePath . "category-wear-female-715x.jpg")
+            ->withSetting("customImagePath", $this->imagePath . "category-living-4.webp")
+            ->withSetting('fallbackImagePath', $this->imagePath . "category-living-4.jpg")
             ->withSetting('url.type', 'category')
             ->withSetting('url.value', '16')
             ->withSetting("customCaption", true)
             ->withSetting("lazyLoading", true);
 
         $innerTwoColumnWidgetRight->createChild('second', 'Ceres::ImageBoxWidget')
-            ->withSetting("appearance", "primary")
-            ->withSetting("customClass", "widget-dark mouseover-zoom")
+            ->withSetting("customClass", "mouseover-zoom")
             ->withSetting("style", "inline-caption")
-            ->withSetting("aspectRatio", "retain")
+            ->withSetting("aspectRatio", "1-1")
             ->withSetting("headline", "PLENTY WEAR - MEN")
-            ->withSetting("customImagePath", $this->imagePath . "category-wear-male-715x.webp")
-            ->withSetting('fallbackImagePath', $this->imagePath . "category-wear-male-715x.jpg")
+            ->withSetting("customImagePath", $this->imagePath . "category-living-3.webp")
+            ->withSetting('fallbackImagePath', $this->imagePath . "category-living-3.jpg")
             ->withSetting('url.type', 'category')
             ->withSetting('url.value', '16')
             ->withSetting("customCaption", true)
             ->withSetting("lazyLoading", true);
 
         $twoColumnWidgetRight->createChild('second', 'Ceres::ImageBoxWidget')
-            ->withSetting("appearance", "primary")
-            ->withSetting("customClass", "widget-dark mouseover-zoom")
+            ->withSetting("customClass", "mouseover-zoom")
             ->withSetting("style", "inline-caption")
             ->withSetting("aspectRatio", "retain")
-            ->withSetting("headline", '"PLENTY LIVING"')
-            ->withSetting("customImagePath", $this->imagePath . "category-living-1430x.webp")
-            ->withSetting('fallbackImagePath', $this->imagePath . "category-living-1430x.jpg")
+            ->withSetting("headline", "PLENTY LIVING")
+            ->withSetting("customImagePath", $this->imagePath . "category-living-1.webp")
+            ->withSetting('fallbackImagePath', $this->imagePath . "category-living-1.jpg")
             ->withSetting('url.type', 'category')
-            ->withSetting('url.value', '16')
+            ->withSetting('url.value', '18')
             ->withSetting("customCaption", true)
             ->withSetting("lazyLoading", true);
     }
@@ -154,6 +141,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting('lazyloadImage', true)
             ->withSetting('sourceType', 'custom-image')
             ->withSetting('backgroundFixed', false)
+            ->withSetting("hugeFont", true)
             ->withSetting('customImagePath', $this->imagePath . "story-tree-1920x.webp")
             ->withSetting('fallbackImagePath', $this->imagePath . "story-tree-1920x.jpg")
             ->withSetting("imageSize", "cover")
@@ -163,7 +151,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting('spacing.margin.bottom.unit', null);
 
         $bgContainer->createChild('background', 'Ceres::InlineTextWidget')
-            ->withSetting("text", '<h4 class="align-center color-light">NO MATTER HOW SMALL</h4>')
+            ->withSetting("text", '<h5 class="align-center"><span class="color-light">NO MATTER HOW SMALL</span></h5>')
             ->withSetting("appearance", "none")
             ->withSetting("spacing.customPadding", true)
             ->withSetting("spacing.padding.left.value", 0)
@@ -172,19 +160,18 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("spacing.padding.right.unit", null)
             ->withSetting("spacing.padding.top.value", 0)
             ->withSetting("spacing.padding.top.unit", null)
-            ->withSetting("spacing.padding.bottom.value", 0)
+            ->withSetting("spacing.padding.bottom.value", 2)
             ->withSetting("spacing.padding.bottom.unit", null);
 
         $bgContainer->createChild('background', 'Ceres::InlineTextWidget')
-            ->withSetting("text", '<h1 class="align-center"><span class="color-light">WITH EVERY ORDER<br>WE WILL PLANT A TREE</span></h1>')
+            ->withSetting("text", '<h4 class="align-center"><span class="color-light">WITH EVERY ORDER<br>WE WILL PLANT A TREE</span></h4>')
             ->withSetting("appearance", "none")
             ->withSetting("spacing.customPadding", true)
             ->withSetting("spacing.padding.top.value", 0)
             ->withSetting("spacing.padding.top.unit", null);
 
         $bgContainer->createChild('background', 'Ceres::LinkWidget')
-            ->withSetting('customClass', 'text-center btn-outline widget-light')
-            ->withSetting('appearance', 'primary')
+            ->withSetting('customClass', 'text-center btn-outline')
             ->withSetting('text', 'SHOP NOW')
             ->withSetting('url.type', 'category')
             ->withSetting('url.value', '16');
@@ -204,16 +191,14 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("spacing.margin.top.unit", null);
 
         $this->preset->createWidget("Ceres::ItemListWidget")
-            ->withSetting("appearance", "primary")
-            ->withSetting('customClass', 'widget-dark item-bg-gray item-vat-hidden btn-outline')
+            ->withSetting('customClass', 'item-bg-gray item-vat-hidden btn-outline')
             ->withSetting("categoryId", 16)
             ->withSetting("itemSort", "texts.name1_asc")
             ->withSetting("headlineStyle", "no-caption")
             ->withSetting("maxItems", 4);
 
         $this->preset->createWidget("Ceres::ItemListWidget")
-            ->withSetting("appearance", "primary")
-            ->withSetting('customClass', 'widget-dark item-bg-gray item-vat-hidden btn-outline')
+            ->withSetting('customClass', 'item-bg-gray item-vat-hidden btn-outline')
             ->withSetting("categoryId", 16)
             ->withSetting("itemSort", "texts.name1_desc")
             ->withSetting("spacing.customMargin", true)
@@ -231,7 +216,6 @@ class DefaultHomepagePreset implements ContentPreset
         $this->preset->createWidget("Ceres::InlineTextWidget")
             ->withSetting("text", '<h2>Our philosophy</h2><br/><p>We create sustainable products that last & look unique. Our collection is divers and is meant to meet your needs in almost any situation. From shirts to drones, we provide products that benefit not only you, but also our planet.</p>')
             ->withSetting("appearance", "none")
-            ->withSetting('customClass', 'container')
             ->withSetting("spacing.customMargin", true)
             ->withSetting("spacing.margin.top.value", 5)
             ->withSetting("spacing.margin.top.unit", null)
@@ -247,9 +231,8 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting('customClass', 'mb-4');
 
         $twoColumnWidget->createChild('first', 'Ceres::ImageBoxWidget')
-            ->withSetting("appearance", "primary")
             ->withSetting("style", "no-caption")
-            ->withSetting("aspectRatio", "2-1")
+            ->withSetting("aspectRatio", "retain")
             ->withSetting("customImagePath", $this->imagePath . "story-precision-1920x.webp")
             ->withSetting('fallbackImagePath', $this->imagePath . "story-precision-1920x.jpg")
             ->withSetting("lazyLoading", true);
@@ -283,9 +266,8 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting('customClass', 'mb-4');
 
         $twoColumnWidget->createChild('second', 'Ceres::ImageBoxWidget')
-            ->withSetting("appearance", "primary")
             ->withSetting("style", "no-caption")
-            ->withSetting("aspectRatio", "2-1")
+            ->withSetting("aspectRatio", "retain")
             ->withSetting("customImagePath", $this->imagePath . "story-natural-1920x.webp")
             ->withSetting('fallbackImagePath', $this->imagePath . "story-natural-1920x.jpg")
             ->withSetting("lazyLoading", true);
@@ -296,7 +278,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting('layoutMobile', 'stackedMobile');
 
         $innerTwoColumnWidget->createChild('first', 'Ceres::InlineTextWidget')
-            ->withSetting("text", '<h2>High precision, High-Tech</h2><br/><p>We have perfected our craft and achieved high performance quality in clothing, furniture and applicable technologies. Being at the tip of innovation and using holistic methods is our default way of creating.</p>')
+            ->withSetting("text", '<h2>Natural beauty<br></h2><p>Nature is our role model. Therefore, we only use materials that meet the highest standards of renewable production to respect the environment in a sustainable way.&nbsp;</p><p><a href="#">Find out more</a></p>')
             ->withSetting("appearance", "none")
             ->withSetting("spacing.customPadding", true)
             ->withSetting('customClass', 'container')
@@ -337,8 +319,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("appearance", "none");
 
         $bgContainer->createChild('background', 'Ceres::LinkWidget')
-            ->withSetting('customClass', 'text-right btn-outline widget-dark')
-            ->withSetting('appearance', 'primary')
+            ->withSetting('customClass', 'text-right btn-outline')
             ->withSetting('text', 'SHOP NOW')
             ->withSetting('url.type', 'category')
             ->withSetting('url.value', '16')
@@ -371,7 +352,6 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("spacing.margin.bottom.unit", null);
 
         $threeColumnWidget->createChild('second', 'Ceres::NewsletterWidget')
-            ->withSetting('showPrivacyPolicyCheckbox', true)
-            ->withSetting('customClass', 'widget-dark');
+            ->withSetting('showPrivacyPolicyCheckbox', true);
     }
 }
