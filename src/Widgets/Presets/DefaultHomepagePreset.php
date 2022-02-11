@@ -153,6 +153,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting('fullWidth', true)
             ->withSetting('lazyloadImage', true)
             ->withSetting('sourceType', 'custom-image')
+            ->withSetting('backgroundFixed', false)
             ->withSetting('customImagePath', $this->imagePath . "story-tree-1920x.webp")
             ->withSetting('fallbackImagePath', $this->imagePath . "story-tree-1920x.jpg")
             ->withSetting("imageSize", "cover")
