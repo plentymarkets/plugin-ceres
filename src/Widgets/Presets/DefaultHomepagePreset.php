@@ -91,7 +91,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("layoutMobile", "stackedMobile");
 
         $twoColumnWidget->createChild("first", "Ceres::ImageBoxWidget")
-            ->withSetting("customClass", "h-100 mouseover-zoom")
+            ->withSetting("customClass", "h-100")
             ->withSetting("appearance", "primary")
             ->withSetting("style", "inline-caption")
             ->withSetting("aspectRatio", "auto")
@@ -103,9 +103,8 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("lazyLoading", true);
 
         $innerTwoColumnWidgetRight->createChild("first", "Ceres::ImageBoxWidget")
-            ->withSetting("customClass", "mouseover-zoom")
             ->withSetting("appearance", "primary")
-            ->withSetting("style", "inline-caption")
+            ->withSetting("style", "block-caption")
             ->withSetting("aspectRatio", "1-1")
             ->withSetting("customImagePath", $this->imagePath . "category-living-4.webp")
             ->withSetting("fallbackImagePath", $this->imagePath . "category-living-4.jpg")
@@ -114,9 +113,8 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("lazyLoading", true);
 
         $innerTwoColumnWidgetRight->createChild("second", "Ceres::ImageBoxWidget")
-            ->withSetting("customClass", "mouseover-zoom")
             ->withSetting("appearance", "primary")
-            ->withSetting("style", "inline-caption")
+            ->withSetting("style", "block-caption")
             ->withSetting("aspectRatio", "1-1")
             ->withSetting("customImagePath", $this->imagePath . "category-living-3.webp")
             ->withSetting("fallbackImagePath", $this->imagePath . "category-living-3.jpg")
@@ -125,7 +123,6 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("lazyLoading", true);
 
         $twoColumnWidgetRight->createChild("second", "Ceres::ImageBoxWidget")
-            ->withSetting("customClass", "mouseover-zoom")
             ->withSetting("appearance", "primary")
             ->withSetting("style", "inline-caption")
             ->withSetting("aspectRatio", "retain")
@@ -138,7 +135,7 @@ class DefaultHomepagePreset implements ContentPreset
     public function createBackground(): void
     {
         $bgContainer = $this->preset->createWidget("Ceres::BackgroundWidget")
-            ->withSetting("customClass", "d-flex align-items-end vh-100")
+            ->withSetting("customClass", "align-items-end vh-100")
             ->withSetting("fullWidth", true)
             ->withSetting("lazyloadImage", true)
             ->withSetting("sourceType", "custom-image")
@@ -173,7 +170,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("spacing.padding.top.unit", null);
 
         $bgContainer->createChild("background", "Ceres::LinkWidget")
-            ->withSetting("customClass", "text-center btn-outline")
+            ->withSetting("customClass", "text-center")
             ->withSetting("text", $this->translator->trans("Ceres::Homepage.shopNow"))
             ->withSetting("url.type", "category")
             ->withSetting("url.value", "16");
@@ -193,16 +190,14 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("spacing.margin.top.unit", null);
 
         $this->preset->createWidget("Ceres::ItemListWidget")
-            ->withSetting("customClass", "item-bg-gray item-vat-hidden btn-outline")
-            ->withSetting("categoryId", 16)
-            ->withSetting("itemSort", "texts.name1_asc")
+            ->withSetting("listType", "all")
+            ->withSetting("itemSort", "default.recommended_sorting")
             ->withSetting("headlineStyle", "no-caption")
             ->withSetting("maxItems", 4);
 
         $this->preset->createWidget("Ceres::ItemListWidget")
-            ->withSetting("customClass", "item-bg-gray item-vat-hidden btn-outline")
-            ->withSetting("categoryId", 16)
-            ->withSetting("itemSort", "texts.name1_desc")
+            ->withSetting("listType", "all")
+            ->withSetting("itemSort", "variation.createdAt_desc")
             ->withSetting("spacing.customMargin", true)
             ->withSetting("spacing.margin.bottom.value", 0)
             ->withSetting("spacing.margin.bottom.unit", null)
@@ -249,7 +244,6 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("text", "<h2>{{ trans(\"Ceres::Homepage.imageHeadline1\") }}</h2><br/><p>{{ trans(\"Ceres::Homepage.imageText1\") }}</p>")
             ->withSetting("appearance", "none")
             ->withSetting("spacing.customPadding", true)
-            ->withSetting("customClass", "container")
             ->withSetting("spacing.padding.top.value", 4)
             ->withSetting("spacing.padding.top.unit", null)
             ->withSetting("spacing.padding.bottom.value", 4)
@@ -285,7 +279,6 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("text", "<h2>{{ trans(\"Ceres::Homepage.imageHeadline2\") }}<br></h2><p>{{ trans(\"Ceres::Homepage.imageText2\") }}</p>")
             ->withSetting("appearance", "none")
             ->withSetting("spacing.customPadding", true)
-            ->withSetting("customClass", "container")
             ->withSetting("spacing.padding.top.value", 4)
             ->withSetting("spacing.padding.top.unit", null)
             ->withSetting("spacing.padding.bottom.value", 4)
@@ -298,7 +291,7 @@ class DefaultHomepagePreset implements ContentPreset
     public function createSecondBackground(): void
     {
         $bgContainer = $this->preset->createWidget("Ceres::BackgroundWidget")
-            ->withSetting("customClass", "text-right vh-100 pt-md-4 pr-md-4")
+            ->withSetting("customClass", "text-right vh-100")
             ->withSetting("fullWidth", true)
             ->withSetting("lazyloadImage", true)
             ->withSetting("sourceType", "custom-image")
@@ -323,7 +316,6 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("appearance", "none");
 
         $bgContainer->createChild("background", "Ceres::LinkWidget")
-            ->withSetting("customClass", "text-right btn-outline")
             ->withSetting("text", "SHOP NOW")
             ->withSetting("url.type", "category")
             ->withSetting("url.value", "16")
