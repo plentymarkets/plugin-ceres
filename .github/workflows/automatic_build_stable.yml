@@ -15,7 +15,7 @@ jobs:
       - name: "Checkout code"
         uses: actions/checkout@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PUBLIC_PAT_CICD4_PUBLIC }}
 
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v2
@@ -33,7 +33,7 @@ jobs:
 
       - name: Commit and push
         run: |
-          git config user.name "Plentymarkets build monkey"
-          git config user.email "10546500+plentymonkey@users.noreply.github.com"
+          git config user.name "plenty-cicd-4"
+          git config user.email "98583752+plenty-cicd-4@users.noreply.github.com"
           git add .
           git diff-index --quiet HEAD || git commit -m "Automatic build" && git push origin HEAD:stable
