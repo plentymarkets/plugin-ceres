@@ -102,6 +102,7 @@ use Ceres\Widgets\OrderConfirmation\OrderDocumentsWidget;
 use Ceres\Widgets\OrderConfirmation\OrderReturnWidget;
 use Ceres\Widgets\OrderConfirmation\OrderTotalsWidget;
 use Ceres\Widgets\OrderConfirmation\PurchasedItemsWidget;
+use Ceres\Widgets\OrderConfirmation\SoftLoginWidget;
 
 class WidgetCollection
 {
@@ -253,6 +254,10 @@ class WidgetCollection
         PriceFilterWidget::class
     ];
 
+    const SOFT_LOGIN_WIDGETS = [
+        SoftLoginWidget::class
+    ];
+
     public static function all()
     {
         return array_merge(
@@ -271,7 +276,8 @@ class WidgetCollection
             self::LOGIN_WIDGETS,
             self::MY_ACCOUNT_WIDGETS,
             self::ORDER_CONFIRMATION_WIDGETS,
-            self::CATEGORY_ITEM_WIDGETS
+            self::CATEGORY_ITEM_WIDGETS,
+            self::SOFT_LOGIN_WIDGETS
         );
     }
 
