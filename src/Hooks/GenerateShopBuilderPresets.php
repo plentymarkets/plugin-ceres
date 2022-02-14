@@ -15,6 +15,36 @@ class GenerateShopBuilderPresets
 {
     private static $presetsData = [
         [
+            "containerName" => "Ceres::Header",
+            "presetClass" => "Ceres\\Widgets\\Presets\\DefaultHeaderPreset",
+            "type" => "header",
+            "name" => "Widget.presetHeaderDefault"
+        ],
+        [
+            "containerName" => "Ceres::Footer",
+            "presetClass" => "Ceres\\Widgets\\Presets\\DefaultFooterPreset",
+            "type" => "footer",
+            "name" => "Widget.presetFooterDefault"
+        ],
+        [
+            "containerName" => "ShopBuilder::Category.0",
+            "presetClass" => "Ceres\\Widgets\\Presets\\DefaultSingleItemPreset",
+            "type" => "singleitem",
+            "name" => "Widget.presetSingleItemDefault"
+        ],
+        [
+            "containerName" => "ShopBuilder::Category.0",
+            "presetClass" => "Ceres\\Widgets\\Presets\\ItemSetPreset",
+            "type" => "itemset",
+            "name" => "Widget.presetItemSetDefault"
+        ],
+        [
+            "containerName" => "ShopBuilder::Category.0",
+            "presetClass" => "Ceres\\Widgets\\Presets\\ItemCategoryPreset",
+            "type" => "categoryitem",
+            "name" => "Widget.presetItemCategoryDefault"
+        ],
+        [
             "configKey" => "IO.routing.category_home",
             "presetClass" => "Ceres\\Widgets\\Presets\\DefaultHomepagePreset",
             "type" => "content",
@@ -156,14 +186,20 @@ class GenerateShopBuilderPresets
         $contentRepository = pluginApp(ContentRepositoryContract::class);
 
         foreach (self::$presetsData as $presetData) {
+            $containerName = $presetData["containerName"];
             $categoryId = $config->get($presetData["configKey"]);
-            if ($categoryId) {
+
+            if (!$containerName && $categoryId) {
+                $containerName = "ShopBuilder::Category.$categoryId";
+            }
+
+            if ($containerName) {
                 $data = [
                     "presetClass" => $presetData["presetClass"],
                     "dataProviderName" => $translator->trans("Ceres::{$presetData['name']}"),
                     "type" => $presetData["type"],
                     "link" => [
-                        "containerName" => "ShopBuilder::Category.$categoryId",
+                        "containerName" => $containerName,
                         "pluginSetId" => $event->getPluginSet()->id,
                         "language" => $lang,
                         "active" => $lang === "de"
