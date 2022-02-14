@@ -82,6 +82,7 @@ class DefaultHomepagePreset implements ContentPreset
         ];
 
         $this->preset->createWidget("Ceres::ImageCarouselWidget")
+            ->withSetting("appearance", "primary")
             ->withSetting("preloadImage", true)
             ->withSetting("customClass", "widget-fw vh-100 img-1-offset-md-20-flip-horizontal")
             ->withSetting("slides", $slides)
@@ -105,9 +106,8 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("layoutMobile", "stackedMobile");
 
         $twoColumnWidget->createChild("first", "Ceres::ImageBoxWidget")
-            ->withSetting("customClass", "h-100")
             ->withSetting("appearance", "primary")
-            ->withSetting("style", "inline-caption")
+            ->withSetting("customClass", "h-100")
             ->withSetting("aspectRatio", "auto")
             ->withSetting("imageSize", "cover")
             ->withSetting("customImagePath", $this->imagePath . "category-living-2.webp")
@@ -164,7 +164,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("spacing.margin.bottom.unit", null);
 
         $bgContainer->createChild("background", "Ceres::InlineTextWidget")
-            ->withSetting("text", "<h5 class=\"align-center\"><span class=\"color-light\">{{ trans(\"Ceres::Homepage.imageBackgroundHeadline1\") }}</span></h5>")
+            ->withSetting("text", "<h5 class='align-center'><span class='color-light'>{{ trans('Ceres::Homepage.imageBackgroundHeadline1') }}</span></h5>")
             ->withSetting("appearance", "none")
             ->withSetting("spacing.customPadding", true)
             ->withSetting("spacing.padding.left.value", 0)
@@ -177,7 +177,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("spacing.padding.bottom.unit", null);
 
         $bgContainer->createChild("background", "Ceres::InlineTextWidget")
-            ->withSetting("text", "<h4 class=\"align-center\"><span class=\"color-light\">{{ trans(\"Ceres::Homepage.imageBackgroundHeadline2\") }}<br>{{ trans(\"Ceres::Homepage.imageBackgroundHeadline3\") }}</span></h4>")
+            ->withSetting("text", "<h4 class='align-center'><span class='color-light'>{{ trans('Ceres::Homepage.imageBackgroundHeadline2') }}<br>{{ trans('Ceres::Homepage.imageBackgroundHeadline3') }}</span></h4>")
             ->withSetting("appearance", "none")
             ->withSetting("spacing.customPadding", true)
             ->withSetting("spacing.padding.top.value", 0)
@@ -192,7 +192,7 @@ class DefaultHomepagePreset implements ContentPreset
     public function createBestsellersShowcase(): void
     {
         $this->preset->createWidget("Ceres::InlineTextWidget")
-            ->withSetting("text", "<h2>{{ trans(\"Ceres::Homepage.bestSellers\") }}</h2>")
+            ->withSetting("text", "<h2>{{ trans('Ceres::Homepage.bestSellers') }}</h2>")
             ->withSetting("appearance", "none")
             ->withSetting("spacing.customPadding", true)
             ->withSetting("spacing.padding.left.value", 0)
@@ -220,12 +220,12 @@ class DefaultHomepagePreset implements ContentPreset
 
         $this->preset->createWidget("Ceres::CodeWidget")
             ->withSetting("appearance", "none")
-            ->withSetting("text", "<p class=\"mb-0\">{{ trans(\"Ceres::Template.singleItemFootnote1\") }} {% if services.customer.showNetPrices() %}{{ trans(\"Ceres::Template.singleItemExclVAT\") }}{% else %}{{ trans(\"Ceres::Template.singleItemInclVAT\") }}{% endif %} {{ trans(\"Ceres::Template.singleItemExclusive\") }} <a {% if ceresConfig.global.shippingCostsCategoryId > 0 %} data-toggle=\"modal\" href=\"#shippingscosts\"{% endif %} title=\"{{ trans(\"Ceres::Template.singleItemShippingCosts\") }}\">{{ trans(\"Ceres::Template.singleItemShippingCosts\") }}</a></p>");
+            ->withSetting("text", "<p class='mb-0'>{{ trans('Ceres::Template.singleItemFootnote1') }} {% if services.customer.showNetPrices() %}{{ trans('Ceres::Template.singleItemExclVAT') }}{% else %}{{ trans('Ceres::Template.singleItemInclVAT') }}{% endif %} {{ trans('Ceres::Template.singleItemExclusive') }} <a {% if ceresConfig.global.shippingCostsCategoryId > 0 %} data-toggle='modal' href='#shippingscosts'{% endif %} title='{{ trans('Ceres::Template.singleItemShippingCosts') }}'>{{ trans('Ceres::Template.singleItemShippingCosts') }}</a></p>");
     }
     public function createTextBox(): void
     {
         $this->preset->createWidget("Ceres::InlineTextWidget")
-            ->withSetting("text", "<h2>{{ trans(\"Ceres::Homepage.philosophyHeadline\") }}</h2><br/><p>{{ trans(\"Ceres::Homepage.philosophyText\") }}</p>")
+            ->withSetting("text", "<h2>{{ trans('Ceres::Homepage.philosophyHeadline') }}</h2><br/><p>{{ trans('Ceres::Homepage.philosophyText') }}</p>")
             ->withSetting("appearance", "none")
             ->withSetting("spacing.customMargin", true)
             ->withSetting("spacing.margin.top.value", 5)
@@ -255,7 +255,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("layoutMobile", "stackedMobile");
 
         $innerTwoColumnWidget->createChild("first", "Ceres::InlineTextWidget")
-            ->withSetting("text", "<h2>{{ trans(\"Ceres::Homepage.imageHeadline1\") }}</h2><br/><p>{{ trans(\"Ceres::Homepage.imageText1\") }}</p>")
+            ->withSetting("text", "<h2>{{ trans('Ceres::Homepage.imageHeadline1') }}</h2><br/><p>{{ trans('Ceres::Homepage.imageText1') }}</p>")
             ->withSetting("appearance", "none")
             ->withSetting("spacing.customPadding", true)
             ->withSetting("spacing.padding.top.value", 4)
@@ -290,7 +290,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("layoutMobile", "stackedMobile");
 
         $innerTwoColumnWidget->createChild("first", "Ceres::InlineTextWidget")
-            ->withSetting("text", "<h2>{{ trans(\"Ceres::Homepage.imageHeadline2\") }}<br></h2><p>{{ trans(\"Ceres::Homepage.imageText2\") }}</p>")
+            ->withSetting("text", "<h2>{{ trans('Ceres::Homepage.imageHeadline2') }}</h2><br/><p>{{ trans('Ceres::Homepage.imageText2') }}</p>")
             ->withSetting("appearance", "none")
             ->withSetting("spacing.customPadding", true)
             ->withSetting("spacing.padding.top.value", 4)
@@ -326,11 +326,11 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("spacing.padding.right.unit", null);
 
         $bgContainer->createChild("background", "Ceres::InlineTextWidget")
-            ->withSetting("text", "<h4>{{ trans(\"Ceres::Homepage.imageHeadline3\") }}</h4><h1>{{ trans(\"Ceres::Homepage.imageHeadline4\") }}</h1>")
+            ->withSetting("text", "<h4>{{ trans('Ceres::Homepage.imageHeadline3') }}</h4><h1>{{ trans('Ceres::Homepage.imageHeadline4') }}</h1>")
             ->withSetting("appearance", "none");
 
         $bgContainer->createChild("background", "Ceres::LinkWidget")
-            ->withSetting("text", "SHOP NOW")
+            ->withSetting("text", $this->translator->trans('Ceres::Homepage.shopNow'))
             ->withSetting("url.type", "category")
             ->withSetting("url.value", "16")
             ->withSetting("spacing.customMargin", true)
@@ -346,7 +346,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("customClass", "mb-5");
 
         $threeColumnWidget->createChild("second", "Ceres::InlineTextWidget")
-            ->withSetting("text", "<h2>{{ trans(\"Ceres::Homepage.newsletterHeadline\") }}</h2><p>{{ trans(\"Ceres::Homepage.newsletterText\") }}</p>")
+            ->withSetting("text", "<h2>{{ trans('Ceres::Homepage.newsletterHeadline') }}</h2><p>{{ trans('Ceres::Homepage.newsletterText') }}</p>")
             ->withSetting("appearance", "none")
             ->withSetting("spacing.customPadding", true)
             ->withSetting("spacing.padding.top.value", 0)
