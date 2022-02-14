@@ -29,19 +29,19 @@ class GenerateShopBuilderPresets
         [
             "configKey" => "IO.routing.category_checkout",
             "presetClass" => "Ceres\\Widgets\\Presets\\DefaultCheckoutPreset",
-            "type" => "content",
+            "type" => "checkout",
             "name" => "Widget.presetCheckoutDefault"
         ],
         [
             "configKey" => "IO.routing.category_my-account",
             "presetClass" => "Ceres\\Widgets\\Presets\\DefaultMyAccountPreset",
-            "type" => "content",
+            "type" => "myaccount",
             "name" => "Widget.presetMyAccountDefault"
         ],
         [
             "configKey" => "IO.routing.category_search",
             "presetClass" => "Ceres\\Widgets\\Presets\\ItemSearchPreset",
-            "type" => "content",
+            "type" => "itemsearch",
             "name" => "Widget.presetItemSearchDefault"
         ],
         [
@@ -54,7 +54,7 @@ class GenerateShopBuilderPresets
             "configKey" => "IO.routing.category_register",
             "presetClass" => "Ceres\\Widgets\\Presets\\RegistrationPreset",
             "type" => "content",
-            "name" => "Widget.presetContactDefault"
+            "name" => "Widget.presetRegistration"
         ],
         [
             "configKey" => "IO.routing.category_confirmation-guest",
