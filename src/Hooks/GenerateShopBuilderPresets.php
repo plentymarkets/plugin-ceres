@@ -30,7 +30,7 @@ class GenerateShopBuilderPresets
             "configKey" => "IO.routing.category_checkout",
             "presetClass" => "Ceres\\Widgets\\Presets\\DefaultCheckoutPreset",
             "type" => "content",
-            "name" => "Widget.presetBasketDefault"
+            "name" => "Widget.presetCheckoutDefault"
         ],
         [
             "configKey" => "IO.routing.category_my-account",
