@@ -196,13 +196,13 @@ class GenerateShopBuilderPresets
             if ($containerName) {
                 $data = [
                     "presetClass" => $presetData["presetClass"],
-                    "dataProviderName" => $translator->trans("Ceres::{$presetData['name']}"),
+                    "dataProviderName" => "{$translator->trans("Ceres::{$presetData['name']}")} ({$translator->trans("Ceres::Widget.presetDefault")})",
                     "type" => $presetData["type"],
                     "link" => [
                         "containerName" => $containerName,
                         "pluginSetId" => $event->getPluginSet()->id,
                         "language" => $lang,
-                        "active" => $lang === "de"
+                        "active" => true
                     ]
                 ];
 
