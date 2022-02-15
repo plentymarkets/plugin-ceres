@@ -186,6 +186,7 @@ class DefaultHomepagePreset implements ContentPreset
         $bgContainer->createChild("background", "Ceres::LinkWidget")
             ->withSetting("customClass", "text-center")
             ->withSetting("text", $this->translator->trans("Ceres::Homepage.shopNow"))
+            ->withSetting("icon", "none")
             ->withSetting("url.type", "category")
             ->withSetting("url.value", "16");
     }
@@ -326,11 +327,12 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("spacing.padding.right.unit", null);
 
         $bgContainer->createChild("background", "Ceres::InlineTextWidget")
-            ->withSetting("text", "<h4>{{ trans('Ceres::Homepage.imageHeadline3') }}</h4><h1>{{ trans('Ceres::Homepage.imageHeadline4') }}</h1>")
+            ->withSetting("text", "<h4>{{ trans('Ceres::Homepage.imageHeadline3') }}</h4><h2>{{ trans('Ceres::Homepage.imageHeadline4') }}</h2>")
             ->withSetting("appearance", "none");
 
         $bgContainer->createChild("background", "Ceres::LinkWidget")
             ->withSetting("text", $this->translator->trans('Ceres::Homepage.shopNow'))
+            ->withSetting("icon", "none")
             ->withSetting("url.type", "category")
             ->withSetting("url.value", "16")
             ->withSetting("spacing.customMargin", true)
