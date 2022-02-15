@@ -7,7 +7,12 @@
 {% set spacingClasses = WidgetHelper.getSpacingClasses(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
 
 <div class="widget widget-softlogin widget-{{ appearance | default('primary') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    <div class="widget-inner{% if hasSpacing %} m-0 p-0{% endif %} bg-appearance">
-        {{ confirmation_softlogin() | raw }}
+    <div class="widget-inner{% if hasSpacing %} m-0 p-0{% endif %}">
+
+        {% set title = "" %}
+        {% set label = "widgettestlabel" %}
+        {% set description = "widgettestdescription" %}
+        {% set buttonSubmitLabel = "widgettestbuttonlabel" %}
+        {{ confirmation_softlogin(title, label, description, buttonSubmitLabel) | raw }}
     </div>
 </div>

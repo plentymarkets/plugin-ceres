@@ -639,6 +639,7 @@
         "singleItemContent": true,
         "itemSetContent": true,
         "globalElementsOverride": true,
-        "safeMode" : true
+        "safeMode" : true,
+        "softlogin" : true
     }
 }

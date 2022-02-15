@@ -16,10 +16,12 @@
         {% set shopBuilderTemplate = shop_builder_category_template(category.id, "softlogin") %}
         {% if shopBuilderTemplate | trim is not empty %}
             {% set hasShopBuilderContent = true %}
-            <div class="page-content verify-order container-max mt-3">
-                <div class="row">
-                    <div class="col-12">
-                        {{ shopBuilderTemplate | raw }}
+            <div class="container-max mt-5 verify-order">
+                <div class="row mb-5">
+                    <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-3">
+                        <div>
+                            {{ shopBuilderTemplate | raw }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -30,7 +32,19 @@
         {# No category defined to be used as order confirmation #}
         {% set overrideConfirmationSoftlogin = LayoutContainer.show("Ceres::OrderConfirmationSoftLogin.Override") %}
         {% if overrideConfirmationSoftlogin | trim is empty %}
-            {{ confirmation_softlogin() | raw }}
+            <div class="container-max mt-5 verify-order">
+                <div class="row mb-5">
+                    <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-3">
+                        <div>
+                            {% set title = "testtitle" %}
+                            {% set label = "testlabel" %}
+                            {% set description = "testdescription" %}
+                            {% set buttonSubmitLabel = "testbuttonlabel" %}
+                            {{ confirmation_softlogin(title, description, label, buttonSubmitLabel) | raw }}
+                        </div>
+                    </div>
+                </div>
+            </div>
         {% else %}
             {{ overrideConfirmationSoftlogin }}
         {% endif %}
