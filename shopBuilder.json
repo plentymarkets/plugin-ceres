@@ -107,8 +107,8 @@
         ],
         "softlogin": [
             {
-                "label": "Widget.presetCheckoutDefault",
-                "presetClass": "Ceres\\Widgets\\Presets\\DefaultCheckoutPreset"
+                "label": "Widget.presetSoftLoginDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultSoftLoginPreset"
             }
         ],
         "checkout": [
