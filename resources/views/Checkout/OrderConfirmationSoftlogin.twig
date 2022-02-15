@@ -18,10 +18,8 @@
             {% set hasShopBuilderContent = true %}
             <div class="container-max mt-5 verify-order">
                 <div class="row mb-5">
-                    <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-3">
-                        <div>
-                            {{ shopBuilderTemplate | raw }}
-                        </div>
+                    <div>
+                        {{ shopBuilderTemplate | raw }}
                     </div>
                 </div>
             </div>
@@ -36,10 +34,16 @@
                 <div class="row mb-5">
                     <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-3">
                         <div>
-                            {% set title = "testtitle" %}
-                            {% set label = "testlabel" %}
-                            {% set description = "testdescription" %}
-                            {% set buttonSubmitLabel = "testbuttonlabel" %}
+                            {% if orderInputType == 'postcode' %}
+                                {% set description = trans("Ceres::Template.softLoginDescriptionPostcode") %}
+                                {% set label = trans("Ceres::Template.softLoginInputLabelPostcode") %}
+                            {% else %}
+                                {% set description = trans('Ceres::Template.softLoginDescriptionName') %}
+                                {% set label = trans('Ceres::Template.softLoginInputLabelName') %}
+                            {% endif %}
+                            {% set title =  trans("Ceres::Template.softLoginTitle") %}
+                            {% set buttonSubmitLabel = trans('Ceres::Template.softLoginSubmitLabel') %}
+
                             {{ confirmation_softlogin(title, description, label, buttonSubmitLabel) | raw }}
                         </div>
                     </div>

@@ -3,8 +3,9 @@
 {% set customClass = widget.settings.customClass.mobile %}
 {% set appearance   = widget.settings.appearance.mobile %}
 {% set hasSpacing = widget.settings.customMargin.mobile or widget.settings.customPadding.mobile %}
-{% set inlineSpacings = WidgetHelper.getInlineSpacings(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
-{% set spacingClasses = WidgetHelper.getSpacingClasses(widget.settings, widget.settings.customPadding.mobile, widget.settings.customMargin.mobile) %}
+{% set spacingSettings  = widget.settings.spacing %}
+{% set inlineSpacings   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses   = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% if orderInputType == 'postcode' %}
     {% set description = trans("Ceres::Template.softLoginDescriptionPostcode") %}
     {% set label = trans("Ceres::Template.softLoginInputLabelPostcode") %}
@@ -17,7 +18,6 @@
 
 <div class="widget widget-softlogin widget-{{ appearance | default('primary') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div class="widget-inner{% if hasSpacing %} m-0 p-0{% endif %}">
-        {{ inlineSpacings }} {{ spacingClasses }}
         {{ confirmation_softlogin(title, description, label, buttonSubmitLabel) | raw }}
     </div>
 </div>
