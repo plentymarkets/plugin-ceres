@@ -42,6 +42,11 @@ class ImageCarouselWidget extends BaseWidget
         $settings->createCustomClass();
         $settings->createAppearance();
 
+        $settings->createCheckbox('fullHeight')
+        ->withDefaultValue(false)
+        ->withName('Widget.imageCarouselFullHeightLabel')
+        ->withTooltip('Widget.imageCarouselFullHeightTooltip');
+
         $settings->createSelect("animationStyle")
             ->withDefaultValue("standard")
             ->withName("Widget.imageCarouselAnimationStyleLabel")
