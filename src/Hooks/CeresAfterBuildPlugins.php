@@ -30,7 +30,6 @@ class CeresAfterBuildPlugins
      */
     public function handle(AfterBuildPlugins $afterBuildPlugins)
     {
-        echo "handle build";
         $pluginSet = $afterBuildPlugins->getPluginSet();
 
         if ($pluginSet instanceof PluginSet) {

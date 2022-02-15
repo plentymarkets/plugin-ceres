@@ -206,7 +206,6 @@ class GenerateShopBuilderPresets
                     ]
                 ];
 
-                echo json_encode($data) . "\n";
                 $contentRepository->createContent($event->getPluginSet()->id, $data, $lang);
             }
         }
