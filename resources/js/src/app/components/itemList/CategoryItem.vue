@@ -73,7 +73,7 @@
                                 <template v-if="item.item.itemType === 'set'">
                                     {{ $translate("Ceres::Template.itemSetPrice", { price: itemSetPrice }) }} {{ $translate("Ceres::Template.categoryItemFootnote") }}
                                 </template>
-                                <template v-else-if="!!item.item && item.item.salableVariationCount > 1 && $ceres.isCheapestSorting" >
+                                <template v-else-if="!!item.item && item.item.salableVariationCount > 1 && $ceres.isCheapestSorting">
                                     {{ $translate("Ceres::Template.categoryItemFromPrice", { price: itemPriceGraduated }) }} {{ $translate("Ceres::Template.categoryItemFootnote") }}
                                 </template>
                                 <template v-else-if="!!item.item && item.item.salableVariationCount > 1" >
