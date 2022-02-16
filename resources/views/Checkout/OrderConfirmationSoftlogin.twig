@@ -18,7 +18,7 @@
             {% set hasShopBuilderContent = true %}
             <div class="container-max mt-5 verify-order">
                 <div class="row mb-5">
-                    <div>
+                    <div class="col">
                         {{ shopBuilderTemplate | raw }}
                     </div>
                 </div>
@@ -58,7 +58,6 @@
                                 'label': label,
                                 'buttonSubmitLabel': buttonSubmitLabel
                             } %}
-
                             {{ confirmation_softlogin(contextData, texts) | raw }}
                         </div>
                     </div>
