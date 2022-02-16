@@ -69,9 +69,7 @@ class OrderConfirmationContext extends CategoryContext implements ContextInterfa
             $orderConfirmationToken = $sessionStorage->getSessionValue('orderConfirmationToken', '');
             $this->orderConfirmationToken = $orderConfirmationToken;
 
-
             $orderArray = $this->data->toArray();
-
             $this->orderId = $orderArray['order']['id'];
 
             /** @var UrlQuery $urlQuery */
