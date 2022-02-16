@@ -7,41 +7,17 @@
 {% set spacingSettings  = widget.settings.spacing %}
 {% set inlineSpacings   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set spacingClasses   = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
-{% if orderInputType == 'postcode' %}
-    {% set description = trans("Ceres::Template.softLoginDescriptionPostcode") %}
-    {% set label = trans("Ceres::Template.softLoginInputLabelPostcode") %}
-{% else %}
-    {% set description = trans('Ceres::Template.softLoginDescriptionName') %}
-    {% set label = trans('Ceres::Template.softLoginInputLabelName') %}
-{% endif %}
-{% set title =  trans("Ceres::Template.softLoginTitle") %}
-{% set buttonSubmitLabel = trans('Ceres::Template.softLoginSubmitLabel') %}
+{{ Twig.if("orderInputType == 'postcode'") }}
+{{ Twig.else() }}
+{{ Twig.endif() }}
 
-{# {{ Twig.set("contextData", "[]") }}
-{{ Twig.set("contextData", "contextData | merge({ backlinkUrl: 'backlinkUrl' })") }}
-{{ Twig.set("contextData", "contextData | merge({ orderAccessKey: orderAccessKey })") }}
-{{ Twig.set("contextData", "contextData | merge({ orderConfirmationToken: orderConfirmationToken })") }}
-{{ Twig.set("contextData", "contextData | merge({ orderId: orderId })") }}
-{{ Twig.set("contextData", "contextData | merge({ orderInputType: orderInputType })") }}
 
-{{ Twig.set("texts", "[]") }}
-{{ Twig.set("texts", "texts | merge({ title: title })") }}
-{{ Twig.set("texts", "texts | merge({ description: description })") }}
-{{ Twig.set("texts", "texts | merge({ label: label })") }}
-{{ Twig.set("texts", "texts | merge({ buttonSubmitLabel: buttonSubmitLabel })") }}
+{{ Twig.set('title', trans('Ceres::Template.softLoginTitle')) }}
+{{ Twig.set('buttonSubmitLabel', 'TEST') }}
 
-{{ Twig.print("texts") | json_encode }}
-{{ Twig.print("contextData") | json_encode }} #}
-{# 
-
-<div class="widget widget-softlogin widget-{{ appearance | default('primary') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    <div class="widget-inner{% if hasSpacing %} m-0 p-0{% endif %}">
-       {{ Twig.print("confirmation_softlogin(contextData, texts) | raw") }}
-    </div>
-</div> #}
 
 {{ Twig.set("contextData","{
-        'backlinkUrl': {{ Twig.print('backlinkUrl') }},
+        'backlinkUrl': backlinkUrl,
         'orderAccessKey': orderAccessKey,
         'orderConfirmationToken': orderConfirmationToken,
         'orderId': orderId,
@@ -56,10 +32,10 @@
         'buttonSubmitLabel': buttonSubmitLabel
     }")
 }}
-
+<h2>TESTWIDGET1</h2>
 <div class="widget widget-softlogin widget-{{ appearance | default('primary') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div class="widget-inner{% if hasSpacing %} m-0 p-0{% endif %}">
-       {{ Twig.print("confirmation_softlogin(contextData, texts) | raw") }}
+        {{ Twig.print("confirmation_softlogin(contextData, texts) | raw") }}
     </div>
 </div>
 
