@@ -1,5 +1,5 @@
 <template>
-    <a class="btn btn-link btn-sm text-muted"
+    <button class="btn btn-link btn-sm text-muted"
         @click.prevent="switchState()"
         data-toggle="tooltip"
         data-placement="top"
@@ -8,7 +8,7 @@
         :title="tooltipText">
         <icon icon="heart" class="default-float" :class="{'text-appearance text-danger': isVariationInWishList}" :loading="isLoading"></icon>
         {{ $translate("Ceres::Template.singleItemWishList") }}
-    </a>
+    </button>
 </template>
 
 <script>

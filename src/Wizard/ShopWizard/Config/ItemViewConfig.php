@@ -34,11 +34,26 @@ class ItemViewConfig
     ];
 
     private static $cartItemData = [
-        "basketItemId" => "basket.item.item_id",
+        "basketItemId"               => "basket.item.item_id",
         "basketItemDescriptionShort" => "basket.item.description_short",
         "basketItemDescriptionLong"  => "basket.item.description_long",
         "basketItemAvailability"     => "basket.item.availability",
         "basketItemCustomNumber"     => "basket.item.customNumber",
+    ];
+
+    private static $cartItemPreviewData = [
+        "basketDataValueOfItemsGross"   => "basket.value_of_items_gross",
+        "basketDataValueOfItemsNet"     => "basket.value_of_items_net",
+        "basketDataShippingCostsGross"  => "basket.shipping_costs_gross",
+        "basketDataShippingCostsNet"    => "basket.shipping_costs_net",
+        "basketDataVat"                 => "basket.vat",
+        "basketDataOrderTotalGross"     => "basket.order_total_gross",
+        "basketDataOrderTotalNet"       => "basket.order_total_net",
+        "basketDataRebate"              => "basket.rebate",
+        "basketDataPromotionCoupon"     => "basket.promotion_coupon",
+        "basketDataAdditionalCosts"     => "basket.additional_costs",
+        "basketDataSalesCoupon"         => "basket.sales_coupon",
+        "basketDataOpenAmount"          => "basket.open_amount",
     ];
 
     private static $cartItemAdditionalInfo = [
@@ -90,6 +105,14 @@ class ItemViewConfig
     public static function getCartItemData()
     {
         return self::$cartItemData;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getCartItemPreviewData()
+    {
+        return self::$cartItemPreviewData;
     }
 
     /**

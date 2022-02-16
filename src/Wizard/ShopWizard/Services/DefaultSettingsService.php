@@ -27,7 +27,7 @@ class DefaultSettingsService
      * @var AuthHelper
      */
     private $authHelper;
-    
+
     /**
      * @var ParcelServicePresetRepositoryContract
      */
@@ -52,10 +52,10 @@ class DefaultSettingsService
      * @var array
      */
     private $pluginSetList;
-    
+
     /** @var int */
     private $pluginSetId;
-    
+
     /** @var PluginSetRepositoryContract */
     private $pluginSetRepository;
 
@@ -82,7 +82,7 @@ class DefaultSettingsService
         $this->countryRepository = $countryRepository;
         $this->accountingLocationRepo = $accountingLocationRepo;
         $this->pluginSetRepository = $pluginSetRepository;
-    
+
         /** @var Request $request */
         $request = pluginApp(Request::class);
         $this->pluginSetId = $this->pluginSetRepository->getPluginSetIdFromHash($request->get('bootPluginSetHash'));
@@ -104,14 +104,14 @@ class DefaultSettingsService
     {
         /** @var PluginSet $pluginSet */
         $pluginSet = $this->pluginSetRepository->get($this->pluginSetId);
-    
+
         $paymentPlugins = $pluginSet->pluginSetEntriesWithTrashed->filter(function(PluginSetEntry $pluginSetEntry) {
             return $pluginSetEntry->plugin->type === Plugin::TYPE_PAYMENT;
         });
-    
+
         return $paymentPlugins->count() > 0;
     }
-    
+
     /**
      * @return bool
      */
@@ -119,43 +119,43 @@ class DefaultSettingsService
     {
         $pluginSetId = $this->pluginSetId;
         $pluginSetRepo = $this->pluginSetRepository;
-        
+
         /** @var PluginSet $pluginSet */
         $pluginSet = $pluginSetRepo->get($pluginSetId);
-        
+
         $paymentPlugins = $pluginSet->pluginSetEntriesWithTrashed->filter(function(PluginSetEntry $pluginSetEntry) {
             return $pluginSetEntry->plugin->type === Plugin::TYPE_PAYMENT && $pluginSetEntry->plugin->activeProductive;
         });
-    
+
         /** @var PluginRepositoryContract $pluginRepository */
         $pluginRepository = pluginApp(PluginRepositoryContract::class);
-        
+
         $activePaymentPlugins = $paymentPlugins->filter(function(PluginSetEntry $pluginSetEntry) use ($pluginSetId, $pluginRepository) {
             return $pluginRepository->isActiveInPluginSet($pluginSetEntry->plugin->id, $pluginSetId);
         });
-        
+
         return $paymentPlugins->count() > 0 && $activePaymentPlugins->count() === 0;
     }
-    
+
     /**
      * @return array
      */
     public function getPluginPaymentMethodsRegistered():array
     {
         $paymentMethods = $this->paymentRepository->allPluginPaymentMethods();
-    
+
         $paymentMethodIds = [];
         foreach ($paymentMethods as $paymentMethod) {
             $paymentMethodIds[] = $paymentMethod->id;
         }
-        
+
         foreach ($this->paymentRepository->listAllActive('en') as $paymentMethodId => $paymentMethodId)
         {
             if (!in_array($paymentMethodId, $paymentMethodIds)) {
                 $paymentMethods[] = $this->paymentRepository->findByPaymentMethodId($paymentMethodId);
             }
         }
-        
+
         $paymentMethodContainer = pluginApp(PaymentMethodContainer::class);
 
         $pluginPaymentMethodsRegistered = [];
@@ -194,7 +194,7 @@ class DefaultSettingsService
      */
     public function getShippingProfiles(): array
     {
-        return $this->parcelServicePresetRepo->getPreviewList();
+        return $this->parcelServicePresetRepo->getPreviewList(null, true);
     }
 
     /**

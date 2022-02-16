@@ -2,6 +2,7 @@
 
 namespace Ceres\Config;
 
+use Plenty\Modules\Webshop\Contracts\WebstoreConfigurationRepositoryContract;
 use Plenty\Modules\Webshop\Helpers\PluginConfig;
 
 /**
@@ -123,7 +124,7 @@ class CeresItemConfig extends PluginConfig
     /**
      * @inheritDoc
      */
-    protected function getPluginName() :string
+    protected function getPluginName(): string
     {
         return 'Ceres';
     }
@@ -133,9 +134,9 @@ class CeresItemConfig extends PluginConfig
      */
     protected function load()
     {
-        $this->displayName      = $this->getTextValue( 'item.displayName', 'itemName' );
-        $this->itemName         = $this->getIntegerValue( 'item.name', 0 );
-        $this->itemData         = $this->getMultiSelectValue(
+        $this->displayName = $this->getTextValue('item.displayName', 'itemName');
+        $this->itemName = $this->getIntegerValue('item.name', 0);
+        $this->itemData = $this->getMultiSelectValue(
             'item.data',
             [
                 'item.condition',
@@ -158,18 +159,25 @@ class CeresItemConfig extends PluginConfig
             ]
         );
 
-        $this->storeSpecial                     = $this->getIntegerValue( 'item.storeSpecial', 0 );
-        $this->showVariationOverDropdown        = $this->getBooleanValue( 'item.show_variation_over_dropdown', false );
-        $this->variationShowType                = $this->getTextValue( 'item.variation_show_type', 'all' );
-        $this->showPleaseSelect                 = $this->getBooleanValue( 'item.show_please_select', false );
-        $this->enableImageCarousel              = $this->getBooleanValue( 'item.enable_image_carousel', true );
-        $this->categoryShowDots                 = $this->getBooleanValue( 'item.category_show_dots', true );
-        $this->categoryShowNav                  = $this->getBooleanValue( 'item.category_show_nav', true );
-        $this->showCategoryImage                = $this->getBooleanValue( 'item.show_category_image', true );
-        $this->showCategoryDescription          = $this->getBooleanValue( 'item.show_category_description', true );
-        $this->showCategoryDescriptionTop       = $this->getTextValue( 'item.show_category_description_top', 'description1' );
-        $this->showCategoryDescriptionBottom    = $this->getTextValue( 'item.show_category_description_bottom', 'none' );
-        $this->requireOrderProperties           = $this->getBooleanValue( 'item.require_all_properties', false );
-        $this->showCategoryFilter               = $this->getBooleanValue( 'item.show_category_filter', false );
+        $this->storeSpecial = $this->getIntegerValue('item.storeSpecial', 0);
+        $this->showVariationOverDropdown = $this->getBooleanValue('item.show_variation_over_dropdown', false);
+        $this->variationShowType = $this->getTextValue('item.variation_show_type', 'all');
+        $this->showPleaseSelect = $this->getBooleanValue('item.show_please_select', false);
+        $this->enableImageCarousel = $this->getBooleanValue('item.enable_image_carousel', true);
+        $this->categoryShowDots = $this->getBooleanValue('item.category_show_dots', true);
+        $this->categoryShowNav = $this->getBooleanValue('item.category_show_nav', true);
+        $this->showCategoryImage = $this->getBooleanValue('item.show_category_image', true);
+        $this->showCategoryDescription = $this->getBooleanValue('item.show_category_description', true);
+        $this->showCategoryDescriptionTop = $this->getTextValue('item.show_category_description_top', 'description1');
+        $this->showCategoryDescriptionBottom = $this->getTextValue('item.show_category_description_bottom', 'none');
+
+        /** @var WebstoreConfigurationRepositoryContract $webstoreConfigurationRepository */
+        $webstoreConfigurationRepository = pluginApp(WebstoreConfigurationRepositoryContract::class);
+        $webstoreConfiguration = $webstoreConfigurationRepository->getWebstoreConfiguration();
+        $this->requireOrderProperties = !$webstoreConfiguration->useVariationOrderProperties && $this->getBooleanValue(
+                'item.require_all_properties',
+                false
+            );
+        $this->showCategoryFilter = $this->getBooleanValue('item.show_category_filter', false);
     }
 }

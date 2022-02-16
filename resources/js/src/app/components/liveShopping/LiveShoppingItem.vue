@@ -43,6 +43,7 @@
                                     :maximum-quantity="!!currentOffer.item.variation.maximumOrderQuantity && currentOffer.item.variation.maximumOrderQuantity > 0 ? currentOffer.item.variation.maximumOrderQuantity : null"
                                     :order-properties="currentOffer.item.properties.filter(function(prop) { return prop.property.isOderProperty })"
                                     :has-order-properties="currentOffer.item.hasOrderProperties"
+                                    :has-required-order-property="currentOffer.hasRequiredOrderProperty"
                                     :use-large-scale="false"
                                     :show-quantity="false"
                                     :item-url="currentOffer.item | itemURL"

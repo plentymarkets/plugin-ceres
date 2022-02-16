@@ -11,11 +11,23 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.number.constructor.js */ "./node_modules/core-js/modules/es.number.constructor.js");
 /* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
-/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
-/* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
-/* harmony import */ var _helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../helper/executeReCaptcha */ "./resources/js/src/app/helper/executeReCaptcha.js");
-/* harmony import */ var _mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../mixins/buttonSizeProperty.mixin */ "./resources/js/src/app/mixins/buttonSizeProperty.mixin.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.map.js */ "./node_modules/core-js/modules/es.array.map.js");
+/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
+/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
+/* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
+/* harmony import */ var _helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../helper/executeReCaptcha */ "./resources/js/src/app/helper/executeReCaptcha.js");
+/* harmony import */ var _mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../mixins/buttonSizeProperty.mixin */ "./resources/js/src/app/mixins/buttonSizeProperty.mixin.js");
+
+
+
+
 
 //
 //
@@ -70,7 +82,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mixins: [_mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_5__["ButtonSizePropertyMixin"]],
+  mixins: [_mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_9__["ButtonSizePropertyMixin"]],
   props: {
     showNameInputs: {
       type: Boolean,
@@ -111,18 +123,40 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.isDisabled = true;
-      _services_ValidationService__WEBPACK_IMPORTED_MODULE_3__["default"].validate($("#newsletter-input-form_" + this._uid)).done(function () {
+      _services_ValidationService__WEBPACK_IMPORTED_MODULE_7__["default"].validate($("#newsletter-input-form_" + this._uid)).done(function () {
         _this.save();
       }).fail(function (invalidFields) {
-        _services_ValidationService__WEBPACK_IMPORTED_MODULE_3__["default"].markInvalidFields(invalidFields, "error");
+        _services_ValidationService__WEBPACK_IMPORTED_MODULE_7__["default"].markInvalidFields(invalidFields, "error");
+        invalidFields.filter(function (field) {
+          return field.dataset.validate !== null;
+        }).map(function (field) {
+          return {
+            type: field.dataset.validate,
+            name: field.innerText
+          };
+        }).forEach(function (field) {
+          if (field.type === '!regex') {
+            _services_NotificationService__WEBPACK_IMPORTED_MODULE_6__["default"].error(_this.$translate("Ceres::Template.newsletterNotAllowedCharacters", {
+              name: field.name
+            }));
+          }
+        });
         _this.isDisabled = false;
       });
     },
     save: function save() {
       var _this2 = this;
 
-      Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_4__["executeReCaptcha"])(this.$el).then(function (recaptchaToken) {
-        _services_ApiService__WEBPACK_IMPORTED_MODULE_1__["default"].post("/rest/io/customer/newsletter", {
+      var recaptchaEl = this.$el.querySelector("[data-recaptcha]");
+
+      if (App.config.global.googleRecaptchaApiKey && (!window.grecaptcha || !recaptchaEl)) {
+        _services_NotificationService__WEBPACK_IMPORTED_MODULE_6__["default"].error(this.$translate("Ceres::Template.newsletterAcceptRecaptchaCookie"));
+        this.isDisabled = false;
+        return;
+      }
+
+      Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_8__["executeReCaptcha"])(this.$el).then(function (recaptchaToken) {
+        _services_ApiService__WEBPACK_IMPORTED_MODULE_5__["default"].post("/rest/io/customer/newsletter", {
           email: _this2.email,
           firstName: _this2.firstName,
           lastName: _this2.lastName,
@@ -131,14 +165,14 @@ __webpack_require__.r(__webpack_exports__);
           recaptcha: recaptchaToken
         }).done(function (data) {
           if (!!data.containsHoneypot) {
-            _services_NotificationService__WEBPACK_IMPORTED_MODULE_2__["default"].warn(_this2.$translate("Ceres::Template.newsletterHoneypotWarning"));
+            _services_NotificationService__WEBPACK_IMPORTED_MODULE_6__["default"].warn(_this2.$translate("Ceres::Template.newsletterHoneypotWarning"));
           } else {
-            _services_NotificationService__WEBPACK_IMPORTED_MODULE_2__["default"].success(_this2.$translate("Ceres::Template.newsletterSuccessMessage")).closeAfter(3000);
+            _services_NotificationService__WEBPACK_IMPORTED_MODULE_6__["default"].success(_this2.$translate("Ceres::Template.newsletterSuccessMessage")).closeAfter(3000);
           }
 
           _this2.resetInputs();
         }).fail(function () {
-          _services_NotificationService__WEBPACK_IMPORTED_MODULE_2__["default"].error(_this2.$translate("Ceres::Template.newsletterErrorMessage")).closeAfter(5000);
+          _services_NotificationService__WEBPACK_IMPORTED_MODULE_6__["default"].error(_this2.$translate("Ceres::Template.newsletterErrorMessage")).closeAfter(5000);
         }).always(function () {
           _this2.isDisabled = false;
 
@@ -194,73 +228,101 @@ var render = function() {
       _c("div", { staticClass: "row" }, [
         _vm.showNameInputs
           ? _c("div", { staticClass: "col-6" }, [
-              _c("div", { staticClass: "input-unit" }, [
-                _c(
-                  "label",
-                  { attrs: { for: "first-name-input_" + _vm._uid } },
-                  [
-                    _vm._v(
-                      _vm._s(
-                        _vm.$translate("Ceres::Template.newsletterFirstName")
+              _c(
+                "div",
+                {
+                  staticClass: "input-unit",
+                  attrs: { "data-validate": "!regex" }
+                },
+                [
+                  _c(
+                    "label",
+                    { attrs: { for: "first-name-input_" + _vm._uid } },
+                    [
+                      _vm._v(
+                        _vm._s(
+                          _vm.$translate("Ceres::Template.newsletterFirstName")
+                        )
                       )
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.firstName,
-                      expression: "firstName"
-                    }
-                  ],
-                  attrs: { type: "text", id: "first-name-input_" + _vm._uid },
-                  domProps: { value: _vm.firstName },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.firstName,
+                        expression: "firstName"
                       }
-                      _vm.firstName = $event.target.value
+                    ],
+                    attrs: {
+                      type: "text",
+                      "data-validate-ref": "/[.:\\/\\d]/g",
+                      id: "first-name-input_" + _vm._uid
+                    },
+                    domProps: { value: _vm.firstName },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.firstName = $event.target.value
+                      }
                     }
-                  }
-                })
-              ])
+                  })
+                ]
+              )
             ])
           : _vm._e(),
         _vm._v(" "),
         _vm.showNameInputs
           ? _c("div", { staticClass: "col-6 pl-0" }, [
-              _c("div", { staticClass: "input-unit" }, [
-                _c("label", { attrs: { for: "last-name-input_" + _vm._uid } }, [
-                  _vm._v(
-                    _vm._s(_vm.$translate("Ceres::Template.newsletterLastName"))
-                  )
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.lastName,
-                      expression: "lastName"
-                    }
-                  ],
-                  attrs: { type: "text", id: "last-name-input_" + _vm._uid },
-                  domProps: { value: _vm.lastName },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+              _c(
+                "div",
+                {
+                  staticClass: "input-unit",
+                  attrs: { "data-validate": "!regex" }
+                },
+                [
+                  _c(
+                    "label",
+                    { attrs: { for: "last-name-input_" + _vm._uid } },
+                    [
+                      _vm._v(
+                        _vm._s(
+                          _vm.$translate("Ceres::Template.newsletterLastName")
+                        )
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.lastName,
+                        expression: "lastName"
                       }
-                      _vm.lastName = $event.target.value
+                    ],
+                    attrs: {
+                      type: "text",
+                      "data-validate-ref": "/[.:\\/\\d]/g",
+                      id: "last-name-input_" + _vm._uid
+                    },
+                    domProps: { value: _vm.lastName },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.lastName = $event.target.value
+                      }
                     }
-                  }
-                })
-              ])
+                  })
+                ]
+              )
             ])
           : _vm._e(),
         _vm._v(" "),
