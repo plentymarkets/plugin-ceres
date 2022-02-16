@@ -84,6 +84,7 @@ class DefaultSingleItemPreset implements ContentPreset
         $this->createAddToWishListWiget();
         $this->createSeparatorWidget();
         $this->createLegalInformation();
+        $this->createIsRequieredFootnote();
 
         return $this->preset->toArray();
     }
@@ -232,11 +233,20 @@ class DefaultSingleItemPreset implements ContentPreset
 
     private function createLegalInformation()
     {
-        $text ="* {% if services.customer.showNetPrices() %}{{ trans(\"Ceres::Template.singleItemExclVAT\") }}{% else %}{{ trans(\"Ceres::Template.singleItemInclVAT\") }}{% endif %} {{ trans(\"Ceres::Template.singleItemExclusive\") }}";
+        $text ="{{ trans(\"Ceres::Template.singleItemFootnote1\") }} {% if services.customer.showNetPrices() %}{{ trans(\"Ceres::Template.singleItemExclVAT\") }}{% else %}{{ trans(\"Ceres::Template.singleItemInclVAT\") }}{% endif %} {{ trans(\"Ceres::Template.singleItemExclusive\") }}";
         $text .="<a {% if ceresConfig.global.shippingCostsCategoryId > 0 %} data-toggle=\"modal\" href=\"#shippingscosts\"{% endif %} title=\"{{ trans(\"Ceres::Template.singleItemShippingCosts\") }}\"> {{ trans(\"Ceres::Template.singleItemShippingCosts\") }}</a>";
         $this->stickyContainer->createChild('sticky', 'Ceres::CodeWidget')
             ->withSetting('customClass', 'vat small text-muted')
             ->withSetting('text', "<span>$text</span>")
+            ->withSetting('appearance', 'none');
+    }
+
+    private function createIsRequieredFootnote()
+    {
+        $text ="{% if item.documents[0].data.hasRequiredOrderProperty %}<span>{{ trans(\"Ceres::Template.singleItemFootnote2\") }} {{ trans(\"Ceres::Template.singleItemIsRequiredProperty\") }}</span>{% endif %}";
+        $this->stickyContainer->createChild('sticky', 'Ceres::CodeWidget')
+            ->withSetting('customClass', 'small text-muted')
+            ->withSetting('text', "$text")
             ->withSetting('appearance', 'none');
     }
 

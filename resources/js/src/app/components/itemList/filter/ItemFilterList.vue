@@ -95,7 +95,10 @@ export default {
 
     created()
     {
-        this.$store.commit("addFacets", this.facetData);
+        if (!this.$store.state.itemList.facets?.length)
+        {
+            this.$store.commit("addFacets", this.facetData);
+        }
     }
 }
 </script>

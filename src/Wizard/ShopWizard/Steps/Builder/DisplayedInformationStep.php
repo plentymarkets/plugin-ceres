@@ -199,6 +199,9 @@ class DisplayedInformationStep extends Step
     {
         $cartItemData    = ItemViewConfig::getCartItemData();
         $cartItemOptions = StepHelper::generateTranslatedListBoxValues($cartItemData);
+        
+        $cartItemPreviewData    = ItemViewConfig::getCartItemPreviewData();
+        $cartItemPreviewOptions = StepHelper::generateTranslatedListBoxValues($cartItemPreviewData);
 
         $cartItemAdditionalData        = ItemViewConfig::getCartItemAdditionalInfo();
         $cartItemAdditionalDataOptions = StepHelper::generateTranslatedListBoxValues($cartItemAdditionalData);
@@ -220,6 +223,27 @@ class DisplayedInformationStep extends Step
                     "options" => [
                         "name" => "Wizard.displayShoppingCartInfo",
                         "checkboxValues" => $cartItemOptions
+                    ]
+                ],
+                "displayInfo_cartPreviewData" => [
+                    "type" => "checkboxGroup",
+                    "defaultValue" => [
+                        $cartItemPreviewOptions[0]['value'],
+                        $cartItemPreviewOptions[1]['value'],
+                        $cartItemPreviewOptions[3]['value'],
+                        $cartItemPreviewOptions[4]['value'],
+                        $cartItemPreviewOptions[5]['value'],
+                        $cartItemPreviewOptions[6]['value'],
+                        $cartItemPreviewOptions[7]['value'],
+                        $cartItemPreviewOptions[8]['value'],
+                        $cartItemPreviewOptions[9]['value'],
+                        $cartItemPreviewOptions[10]['value'],
+                        $cartItemPreviewOptions[11]['value'],
+                        $cartItemPreviewOptions[12]['value'],
+                    ],
+                    "options" => [
+                        "name" => "Wizard.displayShoppingCartPreviewInfo",
+                        "checkboxValues" => $cartItemPreviewOptions
                     ]
                 ],
                 "displayInfo_itemAdditionalInfo" => [

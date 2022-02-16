@@ -12,6 +12,7 @@
                     :maximum-quantity="!!item.variation.maximumOrderQuantity && item.variation.maximumOrderQuantity > 0 ? item.variation.maximumOrderQuantity : null"
                     :order-properties="item.properties.filter(function(prop) { return prop.property.isOderProperty })"
                     :has-order-properties="item.hasOrderProperties"
+                    :has-required-order-property="item.hasRequiredOrderProperty"
                     :use-large-scale="true"
                     :show-quantity="false"
                     :item-url="item | itemURL(urlWithVariationId)"
@@ -70,19 +71,19 @@
 
                             <div class="price">
                                 <template v-if="item.item.itemType === 'set'">
-                                    {{ $translate("Ceres::Template.itemSetPrice", { price: itemSetPrice }) }} *
+                                    {{ $translate("Ceres::Template.itemSetPrice", { price: itemSetPrice }) }} {{ $translate("Ceres::Template.categoryItemFootnote") }}
                                 </template>
                                 <template v-else-if="!!item.item && item.item.salableVariationCount > 1 && $ceres.isCheapestSorting" >
-                                    {{ $translate("Ceres::Template.categoryItemFromPrice", { price: itemPriceGraduated }) }} *
+                                    {{ $translate("Ceres::Template.categoryItemFromPrice", { price: itemPriceGraduated }) }} {{ $translate("Ceres::Template.categoryItemFootnote") }}
                                 </template>
                                 <template v-else-if="!!item.item && item.item.salableVariationCount > 1" >
-                                    {{ $translate("Ceres::Template.categoryItemFromPrice", { price: itemPrice }) }} *
+                                    {{ $translate("Ceres::Template.categoryItemFromPrice", { price: itemPrice }) }} {{ $translate("Ceres::Template.categoryItemFootnote") }}
                                 </template>
                                 <template v-else-if="!!item.item && item.item.salableVariationCount == 1 && item.prices.graduatedPrices.length > 1">
-                                    {{ $translate("Ceres::Template.categoryItemFromPrice", { price: itemPriceGraduated }) }} *
+                                    {{ $translate("Ceres::Template.categoryItemFromPrice", { price: itemPriceGraduated }) }} {{ $translate("Ceres::Template.categoryItemFootnote") }}
                                 </template>
                                 <template v-else>
-                                    {{ item.prices.default.unitPrice.formatted | specialOffer(item.prices, "unitPrice", "formatted") }} *
+                                    {{ item.prices.default.unitPrice.formatted | specialOffer(item.prices, "unitPrice", "formatted") }} {{ $translate("Ceres::Template.categoryItemFootnote") }}
                                 </template>
                             </div>
                         </div>
@@ -105,6 +106,7 @@
                             :maximum-quantity="!!item.variation.maximumOrderQuantity && item.variation.maximumOrderQuantity > 0 ? item.variation.maximumOrderQuantity : null"
                             :order-properties="item.properties.filter(function(prop) { return prop.property.isOderProperty })"
                             :has-order-properties="item.hasOrderProperties"
+                            :has-required-order-property="item.hasRequiredOrderProperty"
                             :use-large-scale="false"
                             :show-quantity="false"
                             :item-url="item | itemURL(urlWithVariationId)"
@@ -113,7 +115,7 @@
                     </add-to-basket>
 
                     <div class="vat small text-muted">
-                        * <span v-if="showNetPrices">{{ $translate("Ceres::Template.itemExclVAT") }}</span>
+                        {{ $translate("Ceres::Template.categoryItemFootnote") }} <span v-if="showNetPrices">{{ $translate("Ceres::Template.itemExclVAT") }}</span>
                         <span v-else>{{ $translate("Ceres::Template.itemInclVAT") }}</span>
                         {{ $translate("Ceres::Template.itemExclusive") }}
                         <a v-if="$ceres.config.global.shippingCostsCategoryId > 0" data-toggle="modal" href="#shippingscosts" class="text-appearance" :title="$translate('Ceres::Template.itemShippingCosts')">{{ $translate("Ceres::Template.itemShippingCosts") }}</a>

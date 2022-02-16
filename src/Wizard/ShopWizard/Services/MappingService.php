@@ -32,8 +32,7 @@ class MappingService
     public function processGlobalMappingData(array $dataToProcess, string $scope = "display" ): array
     {
         $mappedData = $this->dataMapping->getGlobalData();
-        $processedData = $this->matchArrayData($dataToProcess, $mappedData, $scope);
-
+        $processedData = $this->matchArrayData($dataToProcess, $mappedData, $scope, $dismissNullValues = true);
         return $processedData;
     }
 
@@ -55,17 +54,22 @@ class MappingService
      * @param array $processingData
      * @param array $mappingData
      * @param string $scope
+     * @param bool $dismissNullValues
      *
      * @return array
      */
-    private function matchArrayData(array $processingData, array $mappingData, string $scope): array
+    private function matchArrayData(array $processingData, array $mappingData, string $scope, bool $dismissNullValues = false): array
     {
         $matchedData = [];
 
         foreach ($mappingData as $itemKey => $itemData) {
             $key = $itemData['field'];
 
+
             if ($scope == "display") {
+                if ($dismissNullValues && is_null($processingData[$key])) {
+                    continue;
+                }
                 list($step,$fieldName) = explode("_", $itemKey);
 
                 if ($itemData['optional'] && !empty($processingData[$key])) {
