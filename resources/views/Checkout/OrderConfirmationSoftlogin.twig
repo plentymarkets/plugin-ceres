@@ -44,7 +44,22 @@
                             {% set title =  trans("Ceres::Template.softLoginTitle") %}
                             {% set buttonSubmitLabel = trans('Ceres::Template.softLoginSubmitLabel') %}
 
-                            {{ confirmation_softlogin(title, description, label, buttonSubmitLabel) | raw }}
+                            {% set contextData = {
+                                'backlinkUrl': backlinkUrl,
+                                'orderAccessKey': orderAccessKey,
+                                'orderConfirmationToken': orderConfirmationToken,
+                                'orderId': orderId,
+                                'orderInputType': orderInputType
+                            } %}
+
+                            {% set texts = {
+                                'title': title,
+                                'description': description,
+                                'label': label,
+                                'buttonSubmitLabel': buttonSubmitLabel
+                            } %}
+
+                            {{ confirmation_softlogin(contextData, texts) | raw }}
                         </div>
                     </div>
                 </div>
