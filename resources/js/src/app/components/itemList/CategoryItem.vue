@@ -16,7 +16,8 @@
                     :use-large-scale="true"
                     :show-quantity="false"
                     :item-url="item | itemURL(urlWithVariationId)"
-                    :has-price="item | hasItemDefaultPrice && !(itemGraduatedPriceisCheapestSorting || itemGraduatedPricesalableVariationCount)"
+                    :has-price="item | hasItemDefaultPrice"
+                    :has-graduated-price="itemGraduatedPriceisCheapestSorting || itemGraduatedPricesalableVariationCount"
                     :item-type="item.item.itemType">
             </add-to-basket>
 
@@ -110,7 +111,8 @@
                             :use-large-scale="false"
                             :show-quantity="false"
                             :item-url="item | itemURL(urlWithVariationId)"
-                            :has-price="item | hasItemDefaultPrice && !(itemGraduatedPriceisCheapestSorting || itemGraduatedPricesalableVariationCount)"
+                            :has-price="item | hasItemDefaultPrice"
+                            :has-graduated-price="itemGraduatedPriceisCheapestSorting || itemGraduatedPricesalableVariationCount"
                             :item-type="item.item.itemType">
                     </add-to-basket>
 
@@ -214,12 +216,12 @@ export default {
 
         itemGraduatedPriceisCheapestSorting()
         {
-            return !!item.item && item.item.salableVariationCount > 1 && $ceres.isCheapestSorting;
+            return !!this.item.item && this.item.item.salableVariationCount > 1 && !!this.$ceres.isCheapestSorting;
         },
 
         itemGraduatedPricesalableVariationCount()
         {
-            return !!item.item && item.item.salableVariationCount == 1 && item.prices.graduatedPrices.length > 1;
+            return !!this.item.item && this.item.item.salableVariationCount == 1 && this.item.prices.graduatedPrices.length > 1;
         },
 
         itemSetPrice()
