@@ -7,6 +7,7 @@ use IO\Helper\Utils;
 use IO\Models\LocalizedOrder;
 use Plenty\Modules\Webshop\Contracts\SessionStorageRepositoryContract;
 use Plenty\Modules\Webshop\Helpers\UrlQuery;
+use Plenty\Plugin\Http\Request;
 
 /**
  * Class OrderConfirmationContext
@@ -67,13 +68,16 @@ class OrderConfirmationContext extends CategoryContext implements ContextInterfa
             /** @var SessionStorageRepositoryContract $sessionStorage */
             $sessionStorage = pluginApp(SessionStorageRepositoryContract::class);
             $orderConfirmationToken = $sessionStorage->getSessionValue('orderConfirmationToken', '');
+
+            /** @var Request $request */
+            $request = pluginApp(Request::class); 
             $this->orderConfirmationToken = $orderConfirmationToken;
 
             $orderArray = $this->data->toArray();
             $this->orderId = $orderArray['order']['id'];
 
             /** @var UrlQuery $urlQuery */
-            $urlQuery = pluginApp(UrlQuery::class, ['path' => request()->getRequestUri()]);
+            $urlQuery = pluginApp(UrlQuery::class, ['path' => $request->getRequestUri()]);
             $includeLanguage = Utils::getLang() != Utils::getDefaultLang();
             $this->backlinkUrl = $urlQuery->getPath($includeLanguage);
             $this->orderAccessKey = $orderArray['order']['accessKey'];
