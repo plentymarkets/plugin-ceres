@@ -234,6 +234,10 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       type: Boolean,
       default: true
     },
+    hasGraduatedPrice: {
+      type: Boolean,
+      default: false
+    },
     paddingClasses: {
       type: String,
       default: null
@@ -265,7 +269,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variation && this.$store.state.items[this.itemId].variation.documents[0].data.item.itemType === "set" || this.itemType === "set";
     },
     canBeAddedToBasket: function canBeAddedToBasket() {
-      return this.isSalable && !this.hasChildren && !(this.minimumQuantity != 1 || this.intervalQuantity != 1) && !this.requiresProperties && this.hasPrice && !this.isSet;
+      return this.isSalable && !this.hasChildren && !(this.minimumQuantity != 1 || this.intervalQuantity != 1) && !this.requiresProperties && this.hasPrice && !this.hasGraduatedPrice && !this.isSet;
     },
     requiresProperties: function requiresProperties() {
       return App.config.item.requireOrderProperties && (this.hasOrderProperties || this.orderProperties.filter(function (property) {
