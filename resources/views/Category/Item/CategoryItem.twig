@@ -31,9 +31,9 @@
                     <div class="col-12">
                         <h1 class="h2">
                             {% if isTag %}
-                                {{ trans("Ceres::Template.tagSearchResults", {"searchString": searchString}) | e("js") }}
+                                {{ trans("Ceres::Template.tagSearchResults", {"searchString": searchString}) }}
                             {% else %}
-                                {{ trans("Ceres::Template.itemSearchResults") }} {{ searchString | e("js") }}
+                                {{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }}
                             {% endif %}
                         </h1>
                     </div>

@@ -82,19 +82,19 @@ class ItemSearchPreset implements ContentPreset
     <div class="col-12">
         <h1 class="h2">
             {% if isTag %}
-                {{ trans("Ceres::Template.tagSearchResults", {"searchString": searchString}) | e("js") }}
+                {{ trans("Ceres::Template.tagSearchResults", {"searchString": searchString}) }}
             {% elseif itemCountTotal > 0 and suggestionString | length > 0 %}
-                <p class="text-muted">{{ trans("Ceres::Template.itemSearchNoResults", {"searchString": searchString}) | e("js") }}</p>
+                <p class="text-muted">{{ trans("Ceres::Template.itemSearchNoResults", {"searchString": searchString}) }}</p>
                 <p>
                     {% autoescape false %}
                         {% set suggestionStringHtml -%}
-                            <a href="{{ queryString({query: suggestionString }) }}">{{ suggestionString | e("js") }}</a>
+                            <a href="{{ queryString({query: suggestionString }) }}">{{ suggestionString }}</a>
                         {%- endset %}
                         {{ trans("Ceres::Template.itemSearchDidYouMean", {"suggestionString": suggestionStringHtml }) }}
                     {% endautoescape %}
                 </p>
             {% elseif itemCountTotal > 0 %}
-                {{ trans("Ceres::Template.itemSearchResults") }} {{ searchString | e("js") }}
+                {{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }}
             {% endif %}
         </h1>
     </div>
@@ -109,7 +109,7 @@ class ItemSearchPreset implements ContentPreset
                      ->withSetting('text',
 '{% if itemCountTotal <= 0 %}
     {% if category is empty and searchString is empty %}{% set searchString = trans("Ceres::Template.itemSearchSearchTerm") %}{% endif %}
-    <p class="h3 text-muted mb-5 text-center">{{ trans("Ceres::Template.itemSearchNoResults", {"searchString": searchString}) | e("js") }}</p>
+    <p class="h3 text-muted mb-5 text-center">{{ trans("Ceres::Template.itemSearchNoResults", {"searchString": searchString}) }}</p>
 {% endif%}');
     }
 
