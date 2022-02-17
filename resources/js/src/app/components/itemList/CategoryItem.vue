@@ -16,7 +16,7 @@
                     :use-large-scale="true"
                     :show-quantity="false"
                     :item-url="item | itemURL(urlWithVariationId)"
-                    :has-price="item | hasItemDefaultPrice"
+                    :has-price="item | hasItemDefaultPrice && !(itemGraduatedPriceisCheapestSorting || itemGraduatedPricesalableVariationCount)"
                     :item-type="item.item.itemType">
             </add-to-basket>
 
@@ -73,13 +73,13 @@
                                 <template v-if="item.item.itemType === 'set'">
                                     {{ $translate("Ceres::Template.itemSetPrice", { price: itemSetPrice }) }} {{ $translate("Ceres::Template.categoryItemFootnote") }}
                                 </template>
-                                <template v-else-if="!!item.item && item.item.salableVariationCount > 1 && $ceres.isCheapestSorting">
+                                <template v-else-if="itemGraduatedPriceisCheapestSorting">
                                     {{ $translate("Ceres::Template.categoryItemFromPrice", { price: itemPriceGraduated }) }} {{ $translate("Ceres::Template.categoryItemFootnote") }}
                                 </template>
                                 <template v-else-if="!!item.item && item.item.salableVariationCount > 1">
                                     {{ $translate("Ceres::Template.categoryItemFromPrice", { price: itemPrice }) }} {{ $translate("Ceres::Template.categoryItemFootnote") }}
                                 </template>
-                                <template v-else-if="!!item.item && item.item.salableVariationCount == 1 && item.prices.graduatedPrices.length > 1">
+                                <template v-else-if="itemGraduatedPricesalableVariationCount">
                                     {{ $translate("Ceres::Template.categoryItemFromPrice", { price: itemPriceGraduated }) }} {{ $translate("Ceres::Template.categoryItemFootnote") }}
                                 </template>
                                 <template v-else>
@@ -110,7 +110,7 @@
                             :use-large-scale="false"
                             :show-quantity="false"
                             :item-url="item | itemURL(urlWithVariationId)"
-                            :has-price="item | hasItemDefaultPrice"
+                            :has-price="item | hasItemDefaultPrice && !(itemGraduatedPriceisCheapestSorting || itemGraduatedPricesalableVariationCount)"
                             :item-type="item.item.itemType">
                     </add-to-basket>
 
@@ -210,6 +210,16 @@ export default {
         itemPriceGraduated()
         {
           return this.$options.filters.specialOffer(this.item.prices.graduatedPrices[0].unitPrice.formatted, this.item.prices, "unitPrice", "formatted" );
+        },
+
+        itemGraduatedPriceisCheapestSorting()
+        {
+            return !!item.item && item.item.salableVariationCount > 1 && $ceres.isCheapestSorting;
+        },
+
+        itemGraduatedPricesalableVariationCount()
+        {
+            return !!item.item && item.item.salableVariationCount == 1 && item.prices.graduatedPrices.length > 1;
         },
 
         itemSetPrice()

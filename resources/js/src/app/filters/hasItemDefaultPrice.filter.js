@@ -5,5 +5,5 @@ Vue.filter("hasItemDefaultPrice", itemData =>
 {
     const defaultPrice = itemData.prices.default;
 
-    return isDefined(defaultPrice) && (!isNaN(defaultPrice.price.value) || itemData.item.itemType === "set") && (itemData.prices.graduatedPrices.length <= 1 || App.isItemView);
+    return isDefined(defaultPrice) && !isNaN(defaultPrice.price.value) || itemData.item.itemType === "set";
 });
