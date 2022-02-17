@@ -67,7 +67,7 @@ class OrderConfirmationContext extends CategoryContext implements ContextInterfa
         if ($this->data instanceof LocalizedOrder) {
             /** @var SessionStorageRepositoryContract $sessionStorage */
             $sessionStorage = pluginApp(SessionStorageRepositoryContract::class);
-            $orderConfirmationToken = $sessionStorage->getSessionValue('orderConfirmationToken', '');
+            $orderConfirmationToken = $sessionStorage->getSessionValue('orderConfirmationToken') ?? '';
 
             /** @var Request $request */
             $request = pluginApp(Request::class); 
