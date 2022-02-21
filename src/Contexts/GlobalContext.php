@@ -161,7 +161,7 @@ class GlobalContext implements ContextInterface
             // Check string for vue xss payload
             if(isset($params[$queryParam]) && !!preg_match('/\$\{.*\}/', $params[$queryParam]))
             {
-                $params[$queryParam] = preg_replace('/[\$\{.*\}]/', '', $params[$queryParam]);
+                $params[$queryParam] = preg_replace('/[\$\{\}]/', '', $params[$queryParam]);
             }
         }
 
