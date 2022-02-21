@@ -1,0 +1,27 @@
+{% if orderInputType == 'postcode' %}
+    {% set description = trans("Ceres::Template.softLoginDescriptionPostcode") %}
+    {% set label = trans("Ceres::Template.softLoginInputLabelPostcode") %}
+{% else %}
+    {% set description = trans('Ceres::Template.softLoginDescriptionName') %}
+    {% set label = trans('Ceres::Template.softLoginInputLabelName') %}
+{% endif %}
+
+{% set title =  trans("Ceres::Template.softLoginTitle") %}
+{% set buttonSubmitLabel = trans('Ceres::Template.softLoginSubmitLabel') %}
+
+{% set contextData = {
+    'backlinkUrl': backlinkUrl,
+    'orderAccessKey': orderAccessKey,
+    'orderConfirmationToken': orderConfirmationToken,
+    'orderId': orderId,
+    'orderInputType': orderInputType
+} %}
+
+{% set texts = {
+    'title': title,
+    'description': description,
+    'label': label,
+    'buttonSubmitLabel': buttonSubmitLabel
+} %}
+
+{{ confirmation_softlogin(contextData, texts) | raw }}

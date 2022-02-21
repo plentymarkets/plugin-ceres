@@ -34,31 +34,7 @@
                 <div class="row mb-5">
                     <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-3">
                         <div>
-                            {% if orderInputType == 'postcode' %}
-                                {% set description = trans("Ceres::Template.softLoginDescriptionPostcode") %}
-                                {% set label = trans("Ceres::Template.softLoginInputLabelPostcode") %}
-                            {% else %}
-                                {% set description = trans('Ceres::Template.softLoginDescriptionName') %}
-                                {% set label = trans('Ceres::Template.softLoginInputLabelName') %}
-                            {% endif %}
-                            {% set title =  trans("Ceres::Template.softLoginTitle") %}
-                            {% set buttonSubmitLabel = trans('Ceres::Template.softLoginSubmitLabel') %}
-
-                            {% set contextData = {
-                                'backlinkUrl': backlinkUrl,
-                                'orderAccessKey': orderAccessKey,
-                                'orderConfirmationToken': orderConfirmationToken,
-                                'orderId': orderId,
-                                'orderInputType': orderInputType
-                            } %}
-
-                            {% set texts = {
-                                'title': title,
-                                'description': description,
-                                'label': label,
-                                'buttonSubmitLabel': buttonSubmitLabel
-                            } %}
-                            {{ confirmation_softlogin(contextData, texts) | raw }}
+                            {% include "Ceres::Checkout.Partials.SoftLoginForm" %}
                         </div>
                     </div>
                 </div>

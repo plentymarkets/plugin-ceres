@@ -8,38 +8,9 @@
 {% set inlineSpacings   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set spacingClasses   = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
-
-{{ Twig.if("orderInputType == 'postcode'") }}
-    {{ Twig.set('description', "trans('Ceres::Template.softLoginDescriptionPostcode')") }}
-    {{ Twig.set('label', "trans('Ceres::Template.softLoginInputLabelPostcode')") }}
-{{ Twig.else() }}
-    {{ Twig.set('description', "trans('Ceres::Template.softLoginDescriptionName')") }}
-    {{ Twig.set('label', "trans('Ceres::Template.softLoginInputLabelName')") }}
-{{ Twig.endif() }}
-
-
-{{ Twig.set('title', "trans('Ceres::Template.softLoginTitle')") }}
-{{ Twig.set('buttonSubmitLabel', "trans('Ceres::Template.softLoginSubmitLabel')") }}
-
-{{ Twig.set("contextData","{
-        'backlinkUrl': backlinkUrl,
-        'orderAccessKey': orderAccessKey,
-        'orderConfirmationToken': orderConfirmationToken,
-        'orderId': orderId,
-        'orderInputType': orderInputType
-    }")
-}}
-
-{{ Twig.set("texts", "{
-        'title': title,
-        'description': description,
-        'label': label,
-        'buttonSubmitLabel': buttonSubmitLabel
-    }")
-}}
 <div class="widget widget-softlogin widget-{{ appearance | default('primary') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div class="widget-inner{% if hasSpacing %} m-0 p-0{% endif %}">
-        {{ Twig.print("confirmation_softlogin(contextData, texts) | raw") }}
+        {{ Twig.do("include \"Ceres::Checkout.Partials.SoftLoginForm\"") }}
     </div>
 </div>
 
