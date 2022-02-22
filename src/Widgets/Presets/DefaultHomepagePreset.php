@@ -183,8 +183,8 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("customClass", "text-center")
             ->withSetting("text", $this->translator->trans("Ceres::Homepage.shopNow"))
             ->withSetting("icon", "none")
-            ->withSetting("url.type", "category")
-            ->withSetting("url.value", "16");
+            ->withSetting("url.type", "external")
+            ->withSetting("url.value", "/");
     }
     public function createBestsellersShowcase(): void
     {
@@ -334,8 +334,8 @@ class DefaultHomepagePreset implements ContentPreset
         $bgContainer->createChild("background", "Ceres::LinkWidget")
             ->withSetting("text", $this->translator->trans('Ceres::Homepage.shopNow'))
             ->withSetting("icon", "none")
-            ->withSetting("url.type", "category")
-            ->withSetting("url.value", "16")
+            ->withSetting("url.type", "external")
+            ->withSetting("url.value", "/")
             ->withSetting("spacing.customMargin", true)
             ->withSetting("spacing.margin.left.value", 3)
             ->withSetting("spacing.margin.left.unit", null)
