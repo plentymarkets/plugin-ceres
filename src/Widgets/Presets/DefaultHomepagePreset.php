@@ -110,8 +110,8 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("customClass", "h-100")
             ->withSetting("aspectRatio", "auto")
             ->withSetting("imageSize", "cover")
-            ->withSetting("customImagePath", $this->imagePath . "category-living-2.webp")
-            ->withSetting("fallbackImagePath", $this->imagePath . "category-living-2.jpg")
+            ->withSetting("customImagePath", $this->imagePath . "category-gear-1430x.webp")
+            ->withSetting("fallbackImagePath", $this->imagePath . "category-gear-1430x.jpg")
             ->withSetting("url.type", "category")
             ->withSetting("url.value", "20")
             ->withSetting("lazyLoading", true);
@@ -120,8 +120,8 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("appearance", "primary")
             ->withSetting("style", "block-caption")
             ->withSetting("aspectRatio", "1-1")
-            ->withSetting("customImagePath", $this->imagePath . "category-living-4.webp")
-            ->withSetting("fallbackImagePath", $this->imagePath . "category-living-4.jpg")
+            ->withSetting("customImagePath", $this->imagePath . "category-wear-female-715x.webp")
+            ->withSetting("fallbackImagePath", $this->imagePath . "category-wear-female-715x.jpg")
             ->withSetting("url.type", "category")
             ->withSetting("url.value", "16")
             ->withSetting("lazyLoading", true);
@@ -130,8 +130,8 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("appearance", "primary")
             ->withSetting("style", "block-caption")
             ->withSetting("aspectRatio", "1-1")
-            ->withSetting("customImagePath", $this->imagePath . "category-living-3.webp")
-            ->withSetting("fallbackImagePath", $this->imagePath . "category-living-3.jpg")
+            ->withSetting("customImagePath", $this->imagePath . "category-wear-male-715x.webp")
+            ->withSetting("fallbackImagePath", $this->imagePath . "category-wear-male-715x.jpg")
             ->withSetting("url.type", "category")
             ->withSetting("url.value", "17")
             ->withSetting("lazyLoading", true);
@@ -140,8 +140,8 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("appearance", "primary")
             ->withSetting("style", "inline-caption")
             ->withSetting("aspectRatio", "retain")
-            ->withSetting("customImagePath", $this->imagePath . "category-living-1.webp")
-            ->withSetting("fallbackImagePath", $this->imagePath . "category-living-1.jpg")
+            ->withSetting("customImagePath", $this->imagePath . "category-living-1430x.webp")
+            ->withSetting("fallbackImagePath", $this->imagePath . "category-living-1430x.jpg")
             ->withSetting("url.type", "category")
             ->withSetting("url.value", "18")
             ->withSetting("lazyLoading", true);
