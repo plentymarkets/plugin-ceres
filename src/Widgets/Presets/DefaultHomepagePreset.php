@@ -114,7 +114,9 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("fallbackImagePath", $this->imagePath . "category-gear-1430x.jpg")
             ->withSetting("url.type", "category")
             ->withSetting("url.value", "20")
-            ->withSetting("lazyLoading", true);
+            ->withSetting("lazyLoading", true)
+            ->withSetting("customCaption", true)
+            ->withSetting("headline", "<p>{{ trans(\"Ceres::Homepage.categoryName1\") }}</p>");
 
         $innerTwoColumnWidgetRight->createChild("first", "Ceres::ImageBoxWidget")
             ->withSetting("appearance", "primary")
@@ -124,7 +126,9 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("fallbackImagePath", $this->imagePath . "category-wear-female-715x.jpg")
             ->withSetting("url.type", "category")
             ->withSetting("url.value", "16")
-            ->withSetting("lazyLoading", true);
+            ->withSetting("lazyLoading", true)
+            ->withSetting("customCaption", true)
+            ->withSetting("headline", "<p>{{ trans(\"Ceres::Homepage.categoryName2\") }}</p>");
 
         $innerTwoColumnWidgetRight->createChild("second", "Ceres::ImageBoxWidget")
             ->withSetting("appearance", "primary")
@@ -134,7 +138,9 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("fallbackImagePath", $this->imagePath . "category-wear-male-715x.jpg")
             ->withSetting("url.type", "category")
             ->withSetting("url.value", "17")
-            ->withSetting("lazyLoading", true);
+            ->withSetting("lazyLoading", true)
+            ->withSetting("customCaption", true)
+            ->withSetting("headline", "<p>{{ trans(\"Ceres::Homepage.categoryName3\") }}</p>");
 
         $twoColumnWidgetRight->createChild("second", "Ceres::ImageBoxWidget")
             ->withSetting("appearance", "primary")
@@ -144,7 +150,9 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("fallbackImagePath", $this->imagePath . "category-living-1430x.jpg")
             ->withSetting("url.type", "category")
             ->withSetting("url.value", "18")
-            ->withSetting("lazyLoading", true);
+            ->withSetting("lazyLoading", true)
+            ->withSetting("customCaption", true)
+            ->withSetting("headline", "<p>{{ trans(\"Ceres::Homepage.categoryName4\") }}</p>");
     }
     public function createBackground(): void
     {
