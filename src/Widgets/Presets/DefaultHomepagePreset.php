@@ -107,6 +107,7 @@ class DefaultHomepagePreset implements ContentPreset
 
         $twoColumnWidget->createChild("first", "Ceres::ImageBoxWidget")
             ->withSetting("appearance", "primary")
+            ->withSetting("style", "block-caption")
             ->withSetting("customClass", "h-100")
             ->withSetting("aspectRatio", "auto")
             ->withSetting("imageSize", "cover")
