@@ -240,7 +240,12 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("spacing.margin.top.value", 5)
             ->withSetting("spacing.margin.top.unit", null)
             ->withSetting("spacing.margin.bottom.value", 4)
-            ->withSetting("spacing.margin.bottom.unit", null);
+            ->withSetting("spacing.margin.bottom.unit", null)
+            ->withSetting("spacing.customPadding", true)
+            ->withSetting("spacing.padding.left.value", 0)
+            ->withSetting("spacing.padding.left.unit", null)
+            ->withSetting("spacing.padding.right.value", 0)
+            ->withSetting("spacing.padding.right.unit", null);
     }
     public function createFirstImageTextContainer(): void
     {
@@ -306,7 +311,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("spacing.padding.top.unit", null)
             ->withSetting("spacing.padding.bottom.value", 4)
             ->withSetting("spacing.padding.bottom.unit", null)
-            ->withSetting("spacing.padding.left.value", 4)
+            ->withSetting("spacing.padding.left.value", 0)
             ->withSetting("spacing.padding.left.unit", null)
             ->withSetting("spacing.padding.right.value", 4)
             ->withSetting("spacing.padding.right.unit", null);
@@ -346,7 +351,7 @@ class DefaultHomepagePreset implements ContentPreset
             ->withSetting("spacing.customMargin", true)
             ->withSetting("spacing.margin.left.value", 3)
             ->withSetting("spacing.margin.left.unit", null)
-            ->withSetting("spacing.margin.right.value", 3)
+            ->withSetting("spacing.margin.right.value", 0)
             ->withSetting("spacing.margin.right.unit", null);
     }
     public function createNewsletter(): void
