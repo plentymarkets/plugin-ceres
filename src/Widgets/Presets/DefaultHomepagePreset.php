@@ -57,11 +57,6 @@ class DefaultHomepagePreset implements ContentPreset
     {
         $slides = [
             [
-                "url" => [
-                    "type" => "category",
-                    "value" => "16"
-                ],
-                "slideUrlType" => "category",
                 "customImagePath" => $this->imagePath . "slider-living-1920x.webp",
                 "fallbackImagePath" => $this->imagePath . "slider-living-1920x.jpg",
                 "headline" => $this->translator->trans("Ceres::Homepage.categoryHeadline1"),
