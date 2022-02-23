@@ -1,5 +1,45 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.46 (2022-02-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.45...5.0.46" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+- Standardmäßig werden Staffelpreise auf Kategorieseiten jetzt mit einem "ab" davor angezeigt. Nutzer:innen können das "ab" im Menü **CMS » Mehrsprachigkeit** entfernen. Der entsprechende Übersetzungsschlüssel ist **categoryItemFromPrice**.
+
+### Hinzugefügt
+
+- Die ShopBuilder-Vorlage für die Startseite wurde grundlegend überarbeitet. Sie enthält jetzt Demobilder, Demotexte und eine Zusammenstellung verschiedener Widgets.
+- Die Asterisk-Zeichen für Fußnoten auf der Artikeleinzelansicht, Kategorieseite und Liveshopping-Seite sind jetzt über das Menü **CMS » Mehrsprachigkeit** anpassbar. Die entsprechenden Übersetzungsschlüssel sind **singleItemFootnote1**, **categoryItemFootnote** und **liveShoppingFootnote**.
+
+### Geändert
+
+- Vor- und Nachname werden jetzt in der Newsletter-Anmeldung auf unzulässige Zeichen geprüft, um Spam von Bots zu verhindern.
+- Wenn der CSRF-Token bei sensiblen REST-Aufrufen nicht übereinstimmt, wird der Client neu geladen und gibt eine entsprechende Meldung aus. Nutzer:innen werden in diesem Fall zur Anmeldeseite weitergeleitet.
+- Das Lupen-Icon in der Suchleiste wird nun zu einer Ladeanimation, während die Daten angefordert werden.
+
+### Behoben
+
+- In der Kategorieansicht wird jetzt der hinterlegte Staffelpreis angezeigt und mit einem "ab" gekennzeichnet. Der dazugehörige Übersetzungsschlüssel ist **categoryItemFromPrice**.
+- Das Template der **Zur Wunschliste**-Komponente wurde von einem `a-tag` in ein `button-tag` geändert.
+- Die Option **Kategorien als Filteroptionen bei Suchergebnissen anzeigen** wurde umbenannt. Weiterhin wurde ein Fehler beim Speichern dieser Option behoben.
+- Unter gewissen Umständen konnte das Sticky-Container-Widget die Warenkorbvorschau überlagern. Dies wurde behoben.
+- In der ShopBuilder-Vorlage **Footer** wurde ein ungültiger Parameterwert für die Cookie-Bar übergeben. Dies wurde behoben.
+- Das Widget **Ausgewählte Filter** produziert nun keine Fehler mehr im serverseitigen Render-Prozess (SSR), wenn es auf einer Seite über der Filterauswahl platziert wird.
+- Die Warenkorbvorschau wurde auf iOS-Geräten erst beim zweiten Tippen geöffnet. Dies wurde behoben.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.46 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- [resources/js/src/app/components/basket/AddToBasket.vue](https://github.com/plentymarkets/plugin-ceres/pull/3112/files#diff-460828a2142adb35f926ca9c28a7d0c1c4eb9a2d127e2fafce1de5bceb925598)
+- [resources/js/src/app/components/itemList/CategoryItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3112/files#diff-4c35af622ef09ba8949eb1c47557e3e6651b088291a0d2e2463c9244007b5516)
+- [resources/js/src/app/components/item/AddToWishList.vue](https://github.com/plentymarkets/plugin-ceres/pull/3217/files#diff-ca84d4fb86526c6d5ab30af678de22127f6721548962854510cf3fc42d36352e)
+- [resources/js/src/app/components/item/ItemPrice.vue](https://github.com/plentymarkets/plugin-ceres/pull/3187/files#diff-eed3a26bc24bb9bbfd91d04e54f17d682022d8a9b1918fe760fe93d366beed22)
+- [resources/js/src/app/components/item/SetPrice.vue](https://github.com/plentymarkets/plugin-ceres/pull/3187/files#diff-30614b885f8e0ea365fe8fbf3186a95f79a6a4b519e7d26f53c371301a0db3c1)
+- [resources/js/src/app/components/item/SingleItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3187/files#diff-24dd25ca458027f998950fb4b48c9908ba241ac54bcf94c6de48c26107d86c15)
+- [resources/js/src/app/components/itemList/CategoryItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3187/files#diff-4c35af622ef09ba8949eb1c47557e3e6651b088291a0d2e2463c9244007b5516)
+- [resources/js/src/app/components/liveShopping/LiveShoppingDetails.vue](https://github.com/plentymarkets/plugin-ceres/pull/3187/files#diff-c2a08d86ac9eeeb7f4ba9b1855dc844c4e03a6446fd422d637f686975465ed3b)
+
 ## v5.0.45 (2022-01-18) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.44...5.0.45" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
