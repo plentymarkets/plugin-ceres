@@ -69002,7 +69002,8 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
         window.location.reload();
       } else if ([210, 211].indexOf(error.code) !== -1) {
         NotificationService.error({
-          error: error
+          code: error.code,
+          message: error.message
         });
       } else {
         this._handleValidationErrors(error);
