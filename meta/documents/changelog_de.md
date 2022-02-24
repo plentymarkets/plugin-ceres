@@ -1,6 +1,6 @@
 # Release Notes für plentyShop LTS
 
-## v5.0.46 (2022-02-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.45...5.0.46" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.46 (2022-02-24) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.45...5.0.46" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
 
@@ -9,6 +9,7 @@
 
 ### Hinzugefügt
 
+- ShopBooster unterstützt nun blockweises Cachen von Shop-Inhalten. Im plentyShop LTS-Standard werden Header, Footer und Artikelkacheln (bspw. in Artikellisten) als Blöcke in den Cache geschrieben. Dadurch erhöht sich die Cache-Abdeckung des ShopBoosters. 
 - Die ShopBuilder-Vorlage für die Startseite wurde grundlegend überarbeitet. Sie enthält jetzt Demobilder, Demotexte und eine Zusammenstellung verschiedener Widgets.
 - Die Asterisk-Zeichen für Fußnoten auf der Artikeleinzelansicht, Kategorieseite und Liveshopping-Seite sind jetzt über das Menü **CMS » Mehrsprachigkeit** anpassbar. Die entsprechenden Übersetzungsschlüssel sind **singleItemFootnote1**, **categoryItemFootnote** und **liveShoppingFootnote**.
 

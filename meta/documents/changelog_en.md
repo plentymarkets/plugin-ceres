@@ -1,6 +1,6 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.46 (2022-02-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.45...5.0.46" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.46 (2022-02-24) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.45...5.0.46" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
 
@@ -9,6 +9,7 @@
 
 ### Added
 
+- ShopBooster now supports cache blocks. In the default plentyShop LTS, header, footer and item tiles (e.g. in item lists) are cached in blocks. This increases the ShopBooster cache coverage.
 - The ShopBuilder preset for the homepage has been completely overhauled. The preset now contains demo images, sample texts, and a collection of various widgets.
 - The asterisk characters for footnotes in the single item view, the category view, and live shopping pages can now be changed in the **CMS » Multilingualism** menu. The corresponding translation keys are **singleItemFootnote1**, **categoryItemFootnote**, and **liveShoppingFootnote**.
 
