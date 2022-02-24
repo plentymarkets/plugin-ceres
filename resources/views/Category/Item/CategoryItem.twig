@@ -81,7 +81,7 @@
 
                 {# TAGS #}
                 <lazy-hydrate when-idle>
-                    <item-filter-tag-list></item-filter-tag-list>
+                    <item-filter-tag-list :facet-data="{{ facets | json_encode }}"></item-filter-tag-list>
                 </lazy-hydrate>
             </div>
 

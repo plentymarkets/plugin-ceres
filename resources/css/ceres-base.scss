@@ -10266,10 +10266,6 @@ html.ie {
     }
 }
 
-.sticky-element.is-sticky {
-    z-index: $zindex-sticky !important; // stylelint-disable-line declaration-no-important
-}
-
 
 // Forms
 // stylelint-disable
@@ -10912,6 +10908,10 @@ textarea.no-resize {
     .colon::after {
         // TODO: maybe move to more general class
         content: ":";
+    }
+
+    table {
+        max-width: 100%;
     }
 }
 
@@ -13416,6 +13416,18 @@ html.ie {
                 padding-bottom: 50%;
             }
         }
+    }
+
+    .thumb-content {
+        display: block;
+        width: auto;
+        padding-top: 0;
+    }
+    .thumb-title {
+        text-align: center;
+        font-size: 1.5rem;
+        padding: 0.8rem;
+        font-weight: initial;
     }
 }
 

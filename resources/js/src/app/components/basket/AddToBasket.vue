@@ -63,7 +63,7 @@
 
         <div class="d-inline" v-if="!showQuantity && !useLargeScale" :class="{'d-lg-none': !isWishList }">
             <div class="btn-group" role="group" aria-label="Thumb Control">
-                <button type="button" :class="{'no-pointer-events': isLoading}" v-if="canBeAddedToBasket || isWishList" class="btn btn-primary btn-appearance mobile-width-button" @click="addToBasket()">
+                <button type="button" :class="{'no-pointer-events': isLoading}" v-if="canBeAddedToBasket" class="btn btn-primary btn-appearance mobile-width-button" @click="addToBasket()">
                     <icon icon="shopping-cart" class="fa-lg mobile-icon-right" :loading="isLoading"></icon>
                     {{ $translate("Ceres::Template.singleItemAddToBasket") }}
                 </button>
@@ -148,10 +148,20 @@ export default {
             type: Boolean,
             default: false
         },
+        hasRequiredOrderProperty:
+        {
+            type: Boolean,
+            default: false
+        },
         hasPrice:
         {
             type: Boolean,
             default: true
+        },
+        hasGraduatedPrice:
+        {
+          type: Boolean,
+          default: false
         },
         paddingClasses:
         {
@@ -204,13 +214,15 @@ export default {
                 !(this.minimumQuantity != 1 || this.intervalQuantity != 1) &&
                 !this.requiresProperties &&
                 this.hasPrice &&
+                !this.hasGraduatedPrice &&
                 !this.isSet;
         },
 
         requiresProperties()
         {
-            return App.config.item.requireOrderProperties &&
-                (this.hasOrderProperties || this.orderProperties.filter(property => property.property.isShownOnItemPage).length > 0);
+            return (App.config.item.requireOrderProperties && 
+                (this.hasOrderProperties || this.orderProperties.filter(property => property.property.isShownOnItemPage).length > 0)) ||
+                this.hasRequiredOrderProperty;
         },
 
         buttonClasses()

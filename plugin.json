@@ -1,5 +1,5 @@
 {
-    "version"           : "5.0.43",
+    "version"           : "5.0.45",
     "name"              : "Ceres",
     "marketplaceName"   : {"de": "plentyShop LTS","en": "plentyShop LTS"},
     "description"       : "This is the official plentyShop LTS plugin developed by plentymarkets. plentyShop LTS is the default template plugin for plentymarkets online stores.",
@@ -7,7 +7,7 @@
     "license"           : "AGPL-3.0",
     "pluginIcon"        : "icon_plugin_xs.png",
     "price"             : 0.00,
-    "shortDescription"  : {"de": "Das offizielle, von plentymarkets entwickelte Template-Plugin. plentyShop LTS ist das Standard-Template für plentymarkets Webshops. ","en": "The official template plugin developed by plentymarkets. plentyShop LTS is the default template for plentymarkets online stores."},
+    "shortDescription"  : {"de": "plentyShop LTS, das offizielle Onlineshop-Plugin von plentymarkets.","en": "plentyShop LTS, the plentymarkets online shop plugin."},
     "authorIcon"        : "icon_author_xs.png",
     "email"             : "sales@plentymarkets.com",
     "phone"             : "+49 561 98 681 100",
@@ -15,7 +15,7 @@
     "keywords"          : ["plentymarkets", "plugins", "layout", "template", "ceres", "plentyshop"],
     "type"              : "template",
     "require"           : {
-        "IO": "~5.0.43"
+        "IO": "~5.0.45"
     },
     "namespace"         : "Ceres",
     "serviceProvider"   : "Ceres\\Providers\\TemplateServiceProvider",

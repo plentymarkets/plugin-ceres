@@ -365,6 +365,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -864,7 +865,13 @@ var render = function() {
                         : _vm._e()
                     ])
                   : _vm._e(),
-                _vm._v("\n\n            * "),
+                _vm._v(
+                  "\n\n            " +
+                    _vm._s(
+                      _vm.$translate("Ceres::Template.liveShoppingFootnote")
+                    ) +
+                    " "
+                ),
                 _vm.showNetPrices
                   ? [
                       _vm._v(
@@ -977,7 +984,13 @@ var render = function() {
                 "span",
                 { staticClass: "vat small text-muted" },
                 [
-                  _vm._v("\n                * "),
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(
+                        _vm.$translate("Ceres::Template.liveShoppingFootnote")
+                      ) +
+                      " "
+                  ),
                   _vm.showNetPrices
                     ? [
                         _vm._v(
@@ -1206,6 +1219,9 @@ var render = function() {
                                               "has-order-properties":
                                                 _vm.currentOffer.item
                                                   .hasOrderProperties,
+                                              "has-required-order-property":
+                                                _vm.currentOffer
+                                                  .hasRequiredOrderProperty,
                                               "use-large-scale": false,
                                               "show-quantity": false,
                                               "item-url": _vm._f("itemURL")(
@@ -1226,7 +1242,7 @@ var render = function() {
                               ],
                               null,
                               false,
-                              741665433
+                              883888925
                             )
                           })
                         ]

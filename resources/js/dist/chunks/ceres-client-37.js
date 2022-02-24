@@ -171,7 +171,9 @@ var render = function() {
         2
       ),
       _vm._v(" "),
-      _c("sup", [_vm._v("*")])
+      _c("sup", [
+        _vm._v(_vm._s(_vm.$translate("Ceres::Template.singleItemFootnote1")))
+      ])
     ])
   ])
 }

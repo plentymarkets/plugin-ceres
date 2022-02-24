@@ -25,7 +25,7 @@
                     {{ variationTotalPrice | currency(currentVariation.prices.default.currency) }}
                 </template>
             </span>
-            <sup>*</sup>
+            <sup>{{ $translate("Ceres::Template.singleItemFootnote1") }}</sup>
         </span>
 
         <!-- class .is-single-piece is added for customers to hide the unit if it is C62 -->

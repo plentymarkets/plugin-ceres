@@ -41,7 +41,7 @@ class CookieBarWidget extends BaseWidget
 
         $settingFactory->createCustomClass();
         $settingFactory->createAppearance(true)
-            ->withDefaultValue('none');
+            ->withDefaultValue('primary');
         $settingFactory->createSpacing(false, true);
 
         $settingFactory->createSelect("buttonOrder")

@@ -226,9 +226,17 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       type: Boolean,
       default: false
     },
+    hasRequiredOrderProperty: {
+      type: Boolean,
+      default: false
+    },
     hasPrice: {
       type: Boolean,
       default: true
+    },
+    hasGraduatedPrice: {
+      type: Boolean,
+      default: false
     },
     paddingClasses: {
       type: String,
@@ -261,12 +269,12 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variation && this.$store.state.items[this.itemId].variation.documents[0].data.item.itemType === "set" || this.itemType === "set";
     },
     canBeAddedToBasket: function canBeAddedToBasket() {
-      return this.isSalable && !this.hasChildren && !(this.minimumQuantity != 1 || this.intervalQuantity != 1) && !this.requiresProperties && this.hasPrice && !this.isSet;
+      return this.isSalable && !this.hasChildren && !(this.minimumQuantity != 1 || this.intervalQuantity != 1) && !this.requiresProperties && this.hasPrice && !this.hasGraduatedPrice && !this.isSet;
     },
     requiresProperties: function requiresProperties() {
       return App.config.item.requireOrderProperties && (this.hasOrderProperties || this.orderProperties.filter(function (property) {
         return property.property.isShownOnItemPage;
-      }).length > 0);
+      }).length > 0) || this.hasRequiredOrderProperty;
     },
     buttonClasses: function buttonClasses() {
       var classes = [];
@@ -684,7 +692,7 @@ var render = function() {
                 attrs: { role: "group", "aria-label": "Thumb Control" }
               },
               [
-                _vm.canBeAddedToBasket || _vm.isWishList
+                _vm.canBeAddedToBasket
                   ? _c(
                       "button",
                       {
