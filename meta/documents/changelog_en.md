@@ -1,5 +1,49 @@
 # Release Notes for plentyShop LTS
 
+## v5.0.46 (2022-02-24) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.45...5.0.46" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
+- Graduated prices in the category view are now labelled with a "from" by default. Users can remove the "from" in the **CMS » Multilingualism** menu. The corresponding translation key is **categoryItemFromPrice**. 
+
+### Added
+
+- ShopBooster now supports cache blocks. In the default plentyShop LTS, header, footer and item tiles (e.g. in item lists) are cached in blocks. This increases the ShopBooster cache coverage.
+- The ShopBuilder preset for the homepage has been completely overhauled. The preset now contains demo images, sample texts, and a collection of various widgets.
+- The asterisk characters for footnotes in the single item view, the category view, and live shopping pages can now be changed in the **CMS » Multilingualism** menu. The corresponding translation keys are **singleItemFootnote1**, **categoryItemFootnote**, and **liveShoppingFootnote**.
+
+### Changed
+
+- In the newsletter registration, first and last names are now checked for invalid characters in order to prevent spam.
+- In case of a CSRF token mismatch during a sensitive REST call, the client is reloaded and a notification is displayed. In this case, users are forwarded to the login page.
+- The magnifying glass icon in the search bar now changes into a loading animation while the search data is requested.
+
+### Fixed
+
+- Graduated prices are now displayed in the category view, if they exist. The graduated price is now also labelled with "from". The corresponding translation key is **categoryItemFromPrice**.
+- The template of the **Add to wish list** component was changed from an `a-tag` to a `button-tag`.
+- The setting **Show categories as filter options for search results** has been renamed and an error that occurred during saving was fixed.
+- Under certain circumstances, the sticky container widget and the shopping cart preview overlapped. This has been fixed.
+- The ShopBuilder preset **Footer** used an invalid parameter value for the cookie bar. This has been fixed.
+- The widget **Selected filters** no longer leads to errors in the server-side rendering process (SSR) if it is placed above the filter selection.
+- On iOS devices the shopping cart preview only opened after a second touch interaction. This has been fixed.
+
+### Changed templates
+
+- In Ceres 5.0.46 we made changes to template files which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
+- [resources/js/src/app/components/basket/AddToBasket.vue](https://github.com/plentymarkets/plugin-ceres/pull/3112/files#diff-460828a2142adb35f926ca9c28a7d0c1c4eb9a2d127e2fafce1de5bceb925598)
+- [resources/js/src/app/components/itemList/CategoryItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3112/files#diff-4c35af622ef09ba8949eb1c47557e3e6651b088291a0d2e2463c9244007b5516)
+- [resources/js/src/app/components/item/AddToWishList.vue](https://github.com/plentymarkets/plugin-ceres/pull/3217/files#diff-ca84d4fb86526c6d5ab30af678de22127f6721548962854510cf3fc42d36352e)
+- [resources/js/src/app/components/item/ItemPrice.vue](https://github.com/plentymarkets/plugin-ceres/pull/3187/files#diff-eed3a26bc24bb9bbfd91d04e54f17d682022d8a9b1918fe760fe93d366beed22)
+- [resources/js/src/app/components/item/SetPrice.vue](https://github.com/plentymarkets/plugin-ceres/pull/3187/files#diff-30614b885f8e0ea365fe8fbf3186a95f79a6a4b519e7d26f53c371301a0db3c1)
+- [resources/js/src/app/components/item/SingleItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3187/files#diff-24dd25ca458027f998950fb4b48c9908ba241ac54bcf94c6de48c26107d86c15)
+- [resources/js/src/app/components/itemList/CategoryItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3187/files#diff-4c35af622ef09ba8949eb1c47557e3e6651b088291a0d2e2463c9244007b5516)
+- [resources/js/src/app/components/liveShopping/LiveShoppingDetails.vue](https://github.com/plentymarkets/plugin-ceres/pull/3187/files#diff-c2a08d86ac9eeeb7f4ba9b1855dc844c4e03a6446fd422d637f686975465ed3b)
+- [resources/js/src/app/components/itemList/ItemSearch.vue](https://github.com/plentymarkets/plugin-ceres/pull/3204/files#diff-5bd4d6672453a0a141bfacda9410575580bca2d670355850d95619b77f2c1fb6)
+- [resources/js/src/app/components/itemList/SearchSuggestionItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3204/files#diff-004f2a9020c0efb677e721298f2739088d6620ebafccde4b94ced464e21b75ec)
+
+
 ## v5.0.45 (2022-01-18) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.44...5.0.45" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
