@@ -95,7 +95,7 @@
                     <div class="category-unit-price small" v-if="!(item.unit.unitOfMeasurement === 'C62' && item.unit.content === 1)">
                         <span>{{ item.unit.content }}</span>
                         <span>&nbsp;{{ item.unit.names.name }}</span>
-                        <span v-if="item.variation.mayShowUnitPrice">&nbsp;| {{ item.prices.graduatedPrices[0].basePrice }}</span>
+                        <span v-if="item.variation.mayShowUnitPrice">&nbsp;| {{ basePrice }}</span>
                     </div>
 
                     <add-to-basket
@@ -208,9 +208,19 @@ export default {
             return this.$options.filters.specialOffer(this.item.prices.default.unitPrice.formatted, this.item.prices, "unitPrice", "formatted" );
         },
 
+        basePrice()
+        {
+            return this.item.prices.graduatedPrices.length > 0
+                ? this.item.prices.graduatedPrices[0].basePrice
+                : this.item.prices.default.basePrice;
+        },
+
         itemPriceGraduated()
         {
-          return this.$options.filters.specialOffer(this.item.prices.graduatedPrices[0].unitPrice.formatted, this.item.prices, "unitPrice", "formatted" );
+            let unitPrice = this.item.prices.graduatedPrices.length > 0
+                ? this.item.prices.graduatedPrices[0].unitPrice
+                : this.item.prices.default.unitPrice;
+            return this.$options.filters.specialOffer(unitPrice.formatted, this.item.prices, "unitPrice", "formatted" );
         },
 
         itemGraduatedPriceisCheapestSorting()
