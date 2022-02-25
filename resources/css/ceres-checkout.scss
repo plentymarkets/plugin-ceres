@@ -13019,6 +13019,18 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
             @include widget-bg-variant(rgba($danger, .9));
         }
     }
+    &.mouseover-zoom {
+      &:hover, &:focus {
+          img {
+              -webkit-transform: scale(1.05);
+                      transform: scale(1.05);
+              -webkit-transition: -webkit-transform 0.4s cubic-bezier(0, 0, 0.26, 1);
+              transition: -webkit-transform 0.4s cubic-bezier(0, 0, 0.26, 1);
+              transition: transform 0.4s cubic-bezier(0, 0, 0.26, 1);
+              transition: transform 0.4s cubic-bezier(0, 0, 0.26, 1), -webkit-transform 0.4s cubic-bezier(0, 0, 0.26, 1);
+          }
+      }
+  }
 }
 
 .widget-grid .widget-image-box-fullwidth .widget-inner .widget-caption h2 { // stylelint-disable-line selector-max-compound-selectors
