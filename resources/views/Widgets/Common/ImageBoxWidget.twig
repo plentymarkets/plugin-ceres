@@ -14,6 +14,7 @@
 {% set style            = widget.settings.style.mobile %}
 {% set customCaption    = widget.settings.customCaption.mobile %}
 {% set preloadImage     = widget.settings.preloadImage.mobile %}
+{% set fullHeight = widget.settings.fullHeight.mobile is same as (true) %}
 
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlineMargin = WidgetHelper.getInlineSpacings(spacingSettings,"", spacingSettings.customMargin.mobile) %}
@@ -84,6 +85,7 @@
 <div class="widget widget-image-box widget-image-box-{{ style }} widget-{{ appearance | default('primary') }}
     {% if aspectRatio != 'retain' %} widget-proportional widget-prop-{{ aspectRatio }}{% else %} widget-retain-aspect-ratio{% endif %}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}
+    {% if fullHeight %} vh-100{% endif %}
     {% if margin | length > 0 %} {{ margin }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     {{ Twig.if("imageUrl | trim is not empty") }}

@@ -75,7 +75,8 @@ class BackgroundWidget extends BaseWidget
             ->withOption('inputInterval', 1)
             ->withOption('inputMax', 100);
 
-        $settings->createHeight();
+        $settings->createHeight()
+            ->withCondition("fullHeight !== true");
 
         $settings->createSpacing();
 
@@ -158,13 +159,17 @@ class BackgroundWidget extends BaseWidget
     {
         $stylingClasses = '';
 
-        if (array_key_exists('backgroundFixed',
-                $widgetSettings) && $widgetSettings['backgroundFixed']['mobile'] == false) {
+        if (array_key_exists(
+            'backgroundFixed',
+            $widgetSettings
+        ) && $widgetSettings['backgroundFixed']['mobile'] == false) {
             $stylingClasses .= 'bg-scroll ';
         }
 
-        if (array_key_exists('backgroundRepeat',
-                $widgetSettings) && $widgetSettings['backgroundRepeat']['mobile'] == true && $widgetSettings['backgroundSize']['mobile'] !== 'bg-cover') {
+        if (array_key_exists(
+            'backgroundRepeat',
+            $widgetSettings
+        ) && $widgetSettings['backgroundRepeat']['mobile'] == true && $widgetSettings['backgroundSize']['mobile'] !== 'bg-cover') {
             $stylingClasses .= 'bg-repeat ';
         }
 

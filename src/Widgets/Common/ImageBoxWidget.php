@@ -56,10 +56,15 @@ class ImageBoxWidget extends BaseWidget
 
         $settings->createCustomClass();
         $settings->createAppearance();
+        $settings->createCheckbox('fullHeight')
+            ->withDefaultValue(false)
+            ->withName('Widget.imageBoxFullHeightLabel')
+            ->withTooltip('Widget.imageBoxFullHeightTooltip');
         $settings->createSelect('aspectRatio')
             ->withDefaultValue('auto')
             ->withName('Widget.imageBoxAspectRatioLabel')
             ->withTooltip('Widget.imageBoxAspectRatioTooltip')
+            ->withCondition("fullHeight !== true")
             ->withListBoxValues(
                 ValueListFactory::make()
                     ->addEntry('retain', 'Widget.imageBoxRetainAspectRatio')
