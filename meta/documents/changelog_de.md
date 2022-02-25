@@ -1,5 +1,11 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.47 (2022-02-24) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.46...5.0.47" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Das Sortieren von Artikeln nach Preis führte unter gewissen Umständen zu Fehlern. Dies wurde behoben.
+
 ## v5.0.46 (2022-02-24) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.45...5.0.46" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
