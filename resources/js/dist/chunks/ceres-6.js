@@ -364,8 +364,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     itemPrice: function itemPrice() {
       return this.$options.filters.specialOffer(this.item.prices.default.unitPrice.formatted, this.item.prices, "unitPrice", "formatted");
     },
+    basePrice: function basePrice() {
+      return this.item.prices.graduatedPrices.length > 0 ? this.item.prices.graduatedPrices[0].basePrice : this.item.prices.default.basePrice;
+    },
     itemPriceGraduated: function itemPriceGraduated() {
-      return this.$options.filters.specialOffer(this.item.prices.graduatedPrices[0].unitPrice.formatted, this.item.prices, "unitPrice", "formatted");
+      var unitPrice = this.item.prices.graduatedPrices.length > 0 ? this.item.prices.graduatedPrices[0].unitPrice : this.item.prices.default.unitPrice;
+      return this.$options.filters.specialOffer(unitPrice.formatted, this.item.prices, "unitPrice", "formatted");
     },
     itemGraduatedPriceisCheapestSorting: function itemGraduatedPriceisCheapestSorting() {
       return !!this.item.item && this.item.item.salableVariationCount > 1 && !!this.$ceres.isCheapestSorting;
@@ -921,14 +925,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _vm.item.variation.mayShowUnitPrice
-                        ? _c("span", [
-                            _vm._v(
-                              " | " +
-                                _vm._s(
-                                  _vm.item.prices.graduatedPrices[0].basePrice
-                                )
-                            )
-                          ])
+                        ? _c("span", [_vm._v(" | " + _vm._s(_vm.basePrice))])
                         : _vm._e()
                     ])
                   : _vm._e(),
