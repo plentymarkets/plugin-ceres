@@ -17,10 +17,7 @@
                     "type": "inputFile",
                     "required": false,
                     "deprecated": true,
-                    "label": "Config.headerCompanyLogoLabel",
-                    "options": {
-                        "defaultValue": "https://cdn01.plentymarkets.com/avw8j9fg70hi/frontend/plentyShop_LTS/plentyShop-lts-logo.svg"
-                    }
+                    "label": "Config.headerCompanyLogoLabel"
                 },
                 "global.favicon": {
                     "type": "inputFile",

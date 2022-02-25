@@ -1,4 +1,4 @@
-{% set companyLogo  = config("Ceres.header.company_logo") %}
+{% set companyLogo  = config("Ceres.header.company_logo") | default(get_plenty_shop_logo()) %}
 {% set showHeaderNavBar = config("Ceres.header.show_navbars") %}
 {% set companyName  = trans("Ceres::Template.headerCompanyName") %}
 {% set useMegaMenu  = config("Ceres.header.megamenu_levels") > 1 %}

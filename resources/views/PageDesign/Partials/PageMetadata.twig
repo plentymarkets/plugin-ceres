@@ -27,10 +27,11 @@
     {% set keywords = details.metaKeywords %}
 {% endif %}
 
+{% set companyLogo = ceresConfig.header.companyLogo | default(get_plenty_shop_logo()) %}
 {% if block('image') is defined %}
-    {% set image = block('image') | default(ceresConfig.header.companyLogo) %}
+    {% set image = block('image') | default(companyLogo) %}
 {% elseif details is not null %}
-    {% set image = details.imagePath | default(ceresConfig.header.companyLogo) %}
+    {% set image = details.imagePath | default(companyLogo) %}
     {% if not (image starts with 'https://' or image starts with 'http://' or image starts with 'images/')  %}
         {%  set image = webstoreConfig.domainSsl | trim('/') ~ '/documents/' ~ image %}
     {% endif %}
