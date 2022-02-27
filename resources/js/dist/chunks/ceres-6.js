@@ -342,11 +342,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       default: false
     }
   },
+  jsonDataFields: ["itemDataRef"],
   computed: _objectSpread({
     item: function item() {
-      return this.itemData || this.itemDataRef;
+      return this.itemData || this.itemSlotData || this.itemDataRef;
     },
-    itemDataRef: Object(_helper_getSlotData__WEBPACK_IMPORTED_MODULE_10__["getSlotData"])('item-data'),
+    itemSlotData: Object(_helper_getSlotData__WEBPACK_IMPORTED_MODULE_10__["getSlotData"])('item-data'),
 
     /**
      * returns itemData.item.storeSpecial
