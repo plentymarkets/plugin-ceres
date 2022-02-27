@@ -33,7 +33,7 @@
 
                                 <template #before-prices>  {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::CategoryItem.BeforePrices", Twig.var("item.data")])) }}</template>
                                 <template #after-prices> {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::CategoryItem.AfterPrices", Twig.var("item.data")])) }}</template>
-                                <template #item-data>{{ Twig.print("item.data | json_encode | raw") }}</template>
+                                <template #item-data>{{ Twig.print("item.data | json_encode | e") }}</template>
 
                                 <a href="{{ Twig.print("item.data | itemURL(buildUrlWithVariationId | json_encode)") }}" class="small">
                                     <i class="fa fa-image"></i>
