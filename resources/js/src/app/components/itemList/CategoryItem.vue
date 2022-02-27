@@ -178,14 +178,18 @@ export default {
         }
     },
 
+    jsonDataFields: [
+        "itemDataRef"
+    ],
+
     computed:
     {
         item()
         {
-            return this.itemData || this.itemDataRef;
+            return this.itemData || this.itemSlotData || this.itemDataRef;
         },
 
-        itemDataRef: getSlotData('item-data'),
+        itemSlotData: getSlotData('item-data'),
 
         /**
          * returns itemData.item.storeSpecial
