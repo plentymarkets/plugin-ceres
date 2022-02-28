@@ -103,7 +103,21 @@ export default {
         },
         visibleFields:
         {
-            type: Array
+            type: Array,
+            default: () => [
+                "basketValueNet",
+                "basketValueGross",
+                "rebate",
+                "shippingCostsNet",
+                "shippingCostsGross",
+                "promotionCoupon",
+                "totalSumNet",
+                "vats",
+                "additionalCosts",
+                "totalSumGross",
+                "salesCoupon",
+                "openAmount"
+            ]
         }
     },
 

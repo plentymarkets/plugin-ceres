@@ -12,10 +12,12 @@
                     :maximum-quantity="!!item.variation.maximumOrderQuantity && item.variation.maximumOrderQuantity > 0 ? item.variation.maximumOrderQuantity : null"
                     :order-properties="item.properties.filter(function(prop) { return prop.property.isOderProperty })"
                     :has-order-properties="item.hasOrderProperties"
+                    :has-required-order-property="item.hasRequiredOrderProperty"
                     :use-large-scale="true"
                     :show-quantity="false"
                     :item-url="item | itemURL(urlWithVariationId)"
                     :has-price="item | hasItemDefaultPrice"
+                    :has-graduated-price="itemGraduatedPriceisCheapestSorting || itemGraduatedPricesalableVariationCount"
                     :item-type="item.item.itemType">
             </add-to-basket>
 
@@ -70,13 +72,19 @@
 
                             <div class="price">
                                 <template v-if="item.item.itemType === 'set'">
-                                    {{ $translate("Ceres::Template.itemSetPrice", { price: itemSetPrice }) }} *
+                                    {{ $translate("Ceres::Template.itemSetPrice", { price: itemSetPrice }) }} {{ $translate("Ceres::Template.categoryItemFootnote") }}
                                 </template>
-                                 <template v-else-if="!!item.item && item.item.salableVariationCount > 1 && $ceres.isCheapestSorting" >
-                                     {{ $translate("Ceres::Template.categoryItemFromPrice", { price: itemPrice }) }} *
+                                <template v-else-if="itemGraduatedPriceisCheapestSorting">
+                                    {{ $translate("Ceres::Template.categoryItemFromPrice", { price: itemPriceGraduated }) }} {{ $translate("Ceres::Template.categoryItemFootnote") }}
+                                </template>
+                                <template v-else-if="!!item.item && item.item.salableVariationCount > 1">
+                                    {{ $translate("Ceres::Template.categoryItemFromPrice", { price: itemPrice }) }} {{ $translate("Ceres::Template.categoryItemFootnote") }}
+                                </template>
+                                <template v-else-if="itemGraduatedPricesalableVariationCount">
+                                    {{ $translate("Ceres::Template.categoryItemFromPrice", { price: itemPriceGraduated }) }} {{ $translate("Ceres::Template.categoryItemFootnote") }}
                                 </template>
                                 <template v-else>
-                                    {{ item.prices.default.unitPrice.formatted | specialOffer(item.prices, "unitPrice", "formatted") }} *
+                                    {{ item.prices.default.unitPrice.formatted | specialOffer(item.prices, "unitPrice", "formatted") }} {{ $translate("Ceres::Template.categoryItemFootnote") }}
                                 </template>
                             </div>
                         </div>
@@ -87,7 +95,7 @@
                     <div class="category-unit-price small" v-if="!(item.unit.unitOfMeasurement === 'C62' && item.unit.content === 1)">
                         <span>{{ item.unit.content }}</span>
                         <span>&nbsp;{{ item.unit.names.name }}</span>
-                        <span v-if="item.variation.mayShowUnitPrice">&nbsp;| {{ item.prices.default.basePrice }}</span>
+                        <span v-if="item.variation.mayShowUnitPrice">&nbsp;| {{ item.prices.graduatedPrices[0].basePrice }}</span>
                     </div>
 
                     <add-to-basket
@@ -99,15 +107,17 @@
                             :maximum-quantity="!!item.variation.maximumOrderQuantity && item.variation.maximumOrderQuantity > 0 ? item.variation.maximumOrderQuantity : null"
                             :order-properties="item.properties.filter(function(prop) { return prop.property.isOderProperty })"
                             :has-order-properties="item.hasOrderProperties"
+                            :has-required-order-property="item.hasRequiredOrderProperty"
                             :use-large-scale="false"
                             :show-quantity="false"
                             :item-url="item | itemURL(urlWithVariationId)"
                             :has-price="item | hasItemDefaultPrice"
+                            :has-graduated-price="itemGraduatedPriceisCheapestSorting || itemGraduatedPricesalableVariationCount"
                             :item-type="item.item.itemType">
                     </add-to-basket>
 
                     <div class="vat small text-muted">
-                        * <span v-if="showNetPrices">{{ $translate("Ceres::Template.itemExclVAT") }}</span>
+                        {{ $translate("Ceres::Template.categoryItemFootnote") }} <span v-if="showNetPrices">{{ $translate("Ceres::Template.itemExclVAT") }}</span>
                         <span v-else>{{ $translate("Ceres::Template.itemInclVAT") }}</span>
                         {{ $translate("Ceres::Template.itemExclusive") }}
                         <a v-if="$ceres.config.global.shippingCostsCategoryId > 0" data-toggle="modal" href="#shippingscosts" class="text-appearance" :title="$translate('Ceres::Template.itemShippingCosts')">{{ $translate("Ceres::Template.itemShippingCosts") }}</a>
@@ -197,6 +207,21 @@ export default {
         itemPrice()
         {
             return this.$options.filters.specialOffer(this.item.prices.default.unitPrice.formatted, this.item.prices, "unitPrice", "formatted" );
+        },
+
+        itemPriceGraduated()
+        {
+          return this.$options.filters.specialOffer(this.item.prices.graduatedPrices[0].unitPrice.formatted, this.item.prices, "unitPrice", "formatted" );
+        },
+
+        itemGraduatedPriceisCheapestSorting()
+        {
+            return !!this.item.item && this.item.item.salableVariationCount > 1 && !!this.$ceres.isCheapestSorting;
+        },
+
+        itemGraduatedPricesalableVariationCount()
+        {
+            return !!this.item.item && this.item.item.salableVariationCount == 1 && this.item.prices.graduatedPrices.length > 1;
         },
 
         itemSetPrice()

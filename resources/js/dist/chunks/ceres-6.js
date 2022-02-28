@@ -298,7 +298,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   })),
   created: function created() {
-    this.$store.commit("addFacets", this.facetData);
+    var _this$$store$state$it;
+
+    if (!((_this$$store$state$it = this.$store.state.itemList.facets) !== null && _this$$store$state$it !== void 0 && _this$$store$state$it.length)) {
+      this.$store.commit("addFacets", this.facetData);
+    }
   }
 });
 

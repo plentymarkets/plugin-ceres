@@ -294,6 +294,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -351,6 +361,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     itemPrice: function itemPrice() {
       return this.$options.filters.specialOffer(this.item.prices.default.unitPrice.formatted, this.item.prices, "unitPrice", "formatted");
+    },
+    itemPriceGraduated: function itemPriceGraduated() {
+      return this.$options.filters.specialOffer(this.item.prices.graduatedPrices[0].unitPrice.formatted, this.item.prices, "unitPrice", "formatted");
+    },
+    itemGraduatedPriceisCheapestSorting: function itemGraduatedPriceisCheapestSorting() {
+      return !!this.item.item && this.item.item.salableVariationCount > 1 && !!this.$ceres.isCheapestSorting;
+    },
+    itemGraduatedPricesalableVariationCount: function itemGraduatedPricesalableVariationCount() {
+      return !!this.item.item && this.item.item.salableVariationCount == 1 && this.item.prices.graduatedPrices.length > 1;
     },
     itemSetPrice: function itemSetPrice() {
       return this.$options.filters.currency(this.item.prices.default.price.value, this.item.prices.default.currency);
@@ -637,10 +656,14 @@ var render = function() {
                 return prop.property.isOderProperty
               }),
               "has-order-properties": _vm.item.hasOrderProperties,
+              "has-required-order-property": _vm.item.hasRequiredOrderProperty,
               "use-large-scale": true,
               "show-quantity": false,
               "item-url": _vm._f("itemURL")(_vm.item, _vm.urlWithVariationId),
               "has-price": _vm._f("hasItemDefaultPrice")(_vm.item),
+              "has-graduated-price":
+                _vm.itemGraduatedPriceisCheapestSorting ||
+                _vm.itemGraduatedPricesalableVariationCount,
               "item-type": _vm.item.item.itemType
             }
           }),
@@ -786,22 +809,71 @@ var render = function() {
                                         { price: _vm.itemSetPrice }
                                       )
                                     ) +
-                                    " *\n                            "
+                                    " " +
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.categoryItemFootnote"
+                                      )
+                                    ) +
+                                    "\n                            "
+                                )
+                              ]
+                            : _vm.itemGraduatedPriceisCheapestSorting
+                            ? [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.categoryItemFromPrice",
+                                        { price: _vm.itemPriceGraduated }
+                                      )
+                                    ) +
+                                    " " +
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.categoryItemFootnote"
+                                      )
+                                    ) +
+                                    "\n                            "
                                 )
                               ]
                             : !!_vm.item.item &&
-                              _vm.item.item.salableVariationCount > 1 &&
-                              _vm.$ceres.isCheapestSorting
+                              _vm.item.item.salableVariationCount > 1
                             ? [
                                 _vm._v(
-                                  "\n                                 " +
+                                  "\n                                " +
                                     _vm._s(
                                       _vm.$translate(
                                         "Ceres::Template.categoryItemFromPrice",
                                         { price: _vm.itemPrice }
                                       )
                                     ) +
-                                    " *\n                            "
+                                    " " +
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.categoryItemFootnote"
+                                      )
+                                    ) +
+                                    "\n                            "
+                                )
+                              ]
+                            : _vm.itemGraduatedPricesalableVariationCount
+                            ? [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.categoryItemFromPrice",
+                                        { price: _vm.itemPriceGraduated }
+                                      )
+                                    ) +
+                                    " " +
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.categoryItemFootnote"
+                                      )
+                                    ) +
+                                    "\n                            "
                                 )
                               ]
                             : [
@@ -816,7 +888,13 @@ var render = function() {
                                         "formatted"
                                       )
                                     ) +
-                                    " *\n                            "
+                                    " " +
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.categoryItemFootnote"
+                                      )
+                                    ) +
+                                    "\n                            "
                                 )
                               ]
                         ],
@@ -843,7 +921,10 @@ var render = function() {
                       _vm.item.variation.mayShowUnitPrice
                         ? _c("span", [
                             _vm._v(
-                              " | " + _vm._s(_vm.item.prices.default.basePrice)
+                              " | " +
+                                _vm._s(
+                                  _vm.item.prices.graduatedPrices[0].basePrice
+                                )
                             )
                           ])
                         : _vm._e()
@@ -872,6 +953,8 @@ var render = function() {
                       return prop.property.isOderProperty
                     }),
                     "has-order-properties": _vm.item.hasOrderProperties,
+                    "has-required-order-property":
+                      _vm.item.hasRequiredOrderProperty,
                     "use-large-scale": false,
                     "show-quantity": false,
                     "item-url": _vm._f("itemURL")(
@@ -879,12 +962,21 @@ var render = function() {
                       _vm.urlWithVariationId
                     ),
                     "has-price": _vm._f("hasItemDefaultPrice")(_vm.item),
+                    "has-graduated-price":
+                      _vm.itemGraduatedPriceisCheapestSorting ||
+                      _vm.itemGraduatedPricesalableVariationCount,
                     "item-type": _vm.item.item.itemType
                   }
                 }),
                 _vm._v(" "),
                 _c("div", { staticClass: "vat small text-muted" }, [
-                  _vm._v("\n                    * "),
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(
+                        _vm.$translate("Ceres::Template.categoryItemFootnote")
+                      ) +
+                      " "
+                  ),
                   _vm.showNetPrices
                     ? _c("span", [
                         _vm._v(

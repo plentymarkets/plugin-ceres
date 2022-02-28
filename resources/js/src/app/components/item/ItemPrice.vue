@@ -25,7 +25,8 @@
                     {{ variationTotalPrice | currency(currentVariation.prices.default.currency) }}
                 </template>
             </span>
-            <sup>*</sup>
+            <sup>{{ $translate("Ceres::Template.singleItemFootnote1") }}</sup>
+        </span>
 
         </span>
         <template v-if="currentVariation.properties && currentVariation.properties.length">

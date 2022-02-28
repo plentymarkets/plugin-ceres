@@ -289,73 +289,50 @@ const getters =
 
         variationMissingProperties(state, getters, rootState, rootGetters)
         {
-            if (App.config.item.requireOrderProperties)
+            if (getters.currentItemVariation.item.itemType === "set")
             {
-                if (getters.currentItemVariation.item.itemType === "set")
+                let setMissingProperties = [];
+
+                for (const itemId of rootState.items.setComponentIds)
                 {
-                    let setMissingProperties = [];
+                    const componentMissingProperties = rootGetters[`${ itemId }/variationMissingProperties`];
 
-                    for (const itemId of rootState.items.setComponentIds)
-                    {
-                        const componentMissingProperties = rootGetters[`${ itemId }/variationMissingProperties`];
-
-                        setMissingProperties = [...setMissingProperties, ...componentMissingProperties];
-                    }
-
-                    return setMissingProperties;
+                    setMissingProperties = [...setMissingProperties, ...componentMissingProperties];
                 }
-                else
+
+                return setMissingProperties;
+            }
+            else
+            {
+                if (state && state.variation.documents && state.variation.documents[0].data.properties)
                 {
-                    if (state && state.variation.documents && state.variation.documents[0].data.properties)
+                    let missingProperties = [];
+
+                    if (App.config.item.requireOrderProperties)
                     {
-                        let missingProperties = state.variation.documents[0].data.properties.filter(property =>
+                        missingProperties = state.variation.documents[0].data.properties.filter(property =>
                         {
                             return property.property.isShownOnItemPage && !property.property.value && property.property.isOderProperty;
                         });
-
-                        if (missingProperties.length)
+                    }
+                    else if (state.variation.documents[0].data.hasRequiredOrderProperty)
+                    {
+                        missingProperties = state.variation.documents[0].data.properties.filter(property =>
                         {
-                            let radioInformation = state.variation.documents[0].data.properties.map(property =>
-                            {
-                                if (property.group && property.group.orderPropertyGroupingType === "single" && property.property.valueType === "empty")
-                                {
-                                    return {
-                                        groupId: property.group.id,
-                                        propertyId: property.property.id,
-                                        hasValue: !!property.property.value
-                                    };
-                                }
-                                return null;
-                            });
-
-                            radioInformation = [...new Set(radioInformation.filter(id => id))];
-
-                            const radioIdsToRemove = [];
-
-                            for (const radioGroupId of [...new Set(radioInformation.map(radio => radio.groupId))])
-                            {
-                                const radioGroupToClean = radioInformation.find(radio => radio.groupId === radioGroupId && radio.hasValue);
-
-                                if (radioGroupToClean)
-                                {
-                                    for (const radio of radioInformation.filter(radio => radio.groupId === radioGroupToClean.groupId && !radio.hasValue))
-                                    {
-                                        radioIdsToRemove.push(radio.propertyId);
-                                    }
-                                }
-                            }
-
-                            missingProperties = missingProperties.filter(property => !radioIdsToRemove.includes(property.property.id));
-                        }
-
-                        return missingProperties;
+                            return property.property.isRequired &&
+                                    property.property.isShownOnItemPage &&
+                                    !property.property.value &&
+                                    property.property.isOderProperty;
+                        });
                     }
 
-                    return [];
-                }
-            }
+                    missingProperties = _removeRadioValueProperties(state.variation, missingProperties);
 
-            return [];
+                    return missingProperties;
+                }
+
+                return [];
+            }
         },
 
         currentItemVariation(state)
@@ -382,6 +359,49 @@ function normalizeOrderQuantities(variation)
     }
 
     return variation;
+}
+
+/**
+ * Check all properties if a radio in a group is selected. If so, remove the group from the validation.
+ */
+function _removeRadioValueProperties(variation, missingProperties = [])
+{
+    if (missingProperties.length)
+    {
+        let radioInformation = variation.documents[0].data.properties.map(property =>
+        {
+            if (property.group && property.group.orderPropertyGroupingType === "single" && property.property.valueType === "empty")
+            {
+                return {
+                    groupId: property.group.id,
+                    propertyId: property.property.id,
+                    hasValue: !!property.property.value
+                };
+            }
+            return null;
+        });
+
+        radioInformation = [...new Set(radioInformation.filter(id => id))];
+
+        const radioIdsToRemove = [];
+
+        for (const radioGroupId of [...new Set(radioInformation.map(radio => radio.groupId))])
+        {
+            const radioGroupToClean = radioInformation.find(radio => radio.groupId === radioGroupId && radio.hasValue);
+
+            if (radioGroupToClean)
+            {
+                for (const radio of radioInformation.filter(radio => radio.groupId === radioGroupToClean.groupId && !radio.hasValue))
+                {
+                    radioIdsToRemove.push(radio.propertyId);
+                }
+            }
+        }
+
+        missingProperties = missingProperties.filter(property => !radioIdsToRemove.includes(property.property.id));
+    }
+
+    return missingProperties;
 }
 
 export default

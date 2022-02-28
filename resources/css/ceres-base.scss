@@ -10178,6 +10178,82 @@ html.ie {
     }
 }
 
+.button-order {
+    display: grid;
+}
+.button-order-1 {
+    grid-area: first;
+}
+.button-order-2 {
+    grid-area: second;
+}
+.button-order-3 {
+    grid-area: last;
+}
+.order-1-3 {
+    .button-order {
+        grid-template-areas: 
+        "first"
+        "last";
+    }
+}
+.order-3-1 {
+    .button-order {
+        grid-template-areas:
+        "last"
+        "first";
+    }
+}
+
+.order-1-2-3 {
+    .button-order {
+        grid-template-areas: 
+        "first"
+        "second"
+        "last";
+    }
+}
+.order-1-3-2 {
+    .button-order {
+        grid-template-areas: 
+        "first"
+        "last"
+        "second";
+    }
+}
+.order-2-1-3 {
+    .button-order {
+        grid-template-areas: 
+        "second"
+        "first"
+        "last";
+    }
+}
+.order-2-3-1 {
+    .button-order {
+        grid-template-areas: 
+        "second"
+        "last"
+        "first";
+    }
+}
+.order-3-1-2 {
+    .button-order {
+        grid-template-areas: 
+        "last"
+        "first"
+        "second";
+    }
+}
+.order-3-2-1 {
+    .button-order {
+        grid-template-areas: 
+        "last"
+        "second"
+        "first";
+    }
+}
+
 .tooltip {
     pointer-events: none;
 }
@@ -10188,10 +10264,6 @@ html.ie {
     p:empty {
         margin-bottom: 0; // remove margin of empty paragraph for correct height detection
     }
-}
-
-.sticky-element.is-sticky {
-    z-index: $zindex-sticky !important; // stylelint-disable-line declaration-no-important
 }
 
 
@@ -10837,6 +10909,10 @@ textarea.no-resize {
         // TODO: maybe move to more general class
         content: ":";
     }
+
+    table {
+        max-width: 100%;
+    }
 }
 
 .basket-item-container-right {
@@ -11025,6 +11101,10 @@ html.safari .basket-preview-content .totals { // stylelint-disable-line selector
 }
 html.ios .basket-preview-content .totals { // stylelint-disable-line selector-no-qualifying-type
     display: block !important; // stylelint-disable-line declaration-no-important
+}
+
+body.basket-open {
+    overflow: hidden;
 }
 
 .cmp-totals {
@@ -13336,6 +13416,18 @@ html.ie {
                 padding-bottom: 50%;
             }
         }
+    }
+
+    .thumb-content {
+        display: block;
+        width: auto;
+        padding-top: 0;
+    }
+    .thumb-title {
+        text-align: center;
+        font-size: 1.5rem;
+        padding: 0.8rem;
+        font-weight: initial;
     }
 }
 

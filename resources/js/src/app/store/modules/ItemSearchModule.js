@@ -6,7 +6,8 @@ const state = () => ({
     autocompleteRequest: null,
     autocompleteResult: { item: [], category: [], suggestion: [] },
     autocompleteSearchString: "",
-    autocompleteTypes: []
+    autocompleteTypes: [],
+    autocompleteIsLoading: false
 });
 
 const mutations =
@@ -29,6 +30,11 @@ const mutations =
         addAutocompleteType(state, type)
         {
             state.autocompleteTypes.push(type);
+        },
+
+        setAutocompleteIsLoading(state, value)
+        {
+            Vue.set(state, "autocompleteIsLoading", !!value);
         }
     };
 
@@ -37,6 +43,7 @@ const actions =
         loadItemSearchAutocomplete({ state, commit }, searchString)
         {
             commit("setAutocompleteSearchString", searchString);
+            commit("setAutocompleteIsLoading", true);
 
             if (!isNullOrUndefined(state.autocompleteRequest) && typeof state.autocompleteRequest.abort === "function")
             {
@@ -58,6 +65,7 @@ const actions =
             {
                 commit("setAutocompleteRequest", null);
                 commit("setAutocompleteResult", response);
+                commit("setAutocompleteIsLoading", false);
             });
         }
     };
