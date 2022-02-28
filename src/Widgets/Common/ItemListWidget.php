@@ -148,6 +148,16 @@ class ItemListWidget extends BaseWidget
             )
             ->withCondition("preloadImage");
 
+        $settings->createCheckbox('noVat')
+            ->withDefaultValue(false)
+            ->withName('Widget.itemListNoVatLabel')
+            ->withTooltip('Widget.itemListNoVatTooltip');
+
+        $settings->createCheckbox('grayBackground')
+            ->withDefaultValue(false)
+            ->withName('Widget.itemListGrayBackgroundLabel')
+            ->withTooltip('Widget.itemListGrayBackgroundTooltip');
+
         $settings->createSpacing();
 
         return $settings->toArray();
