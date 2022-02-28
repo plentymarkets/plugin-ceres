@@ -27,8 +27,7 @@
             <div class="col-12" v-if="showPrivacyPolicyCheckbox">
                 <div class="form-check small" data-validate>
                     <input type="checkbox" class="form-check-input" :id="'privacy-policy-accept-id_' + _uid" name="privacy-policy-accept" v-model="privacyPolicyValue">
-                    <label :for="'privacy-policy-accept-id_' + _uid" class="form-check-label" v-html="privacyPolicyText">
-                    </label>
+                    <label :for="'privacy-policy-accept-id_' + _uid" class="form-check-label" v-html="privacyPolicyText"></label>
                 </div>
             </div>
 
@@ -40,6 +39,8 @@
                     </button>
                 </div>
             </div>
+
+            <div class="col-12 text-right small mt-2">{{ $translate("Ceres::Template.newsletterOptIn") }}</div>
         </div>
         <recaptcha v-if="!!$ceres.config.global.googleRecaptchaApiKey && loadRecaptcha"></recaptcha>
     </form>
