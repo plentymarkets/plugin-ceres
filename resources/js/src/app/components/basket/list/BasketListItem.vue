@@ -311,8 +311,12 @@ export default {
 
         visibleProperties()
         {
-            return this.basketItem.basketItemOrderParams.filter(property => {
-                return property.property.isShownAtCheckout;
+            return this.basketItem.basketItemOrderParams.filter(orderParam => {
+                const matchingProperty = this.basketItem.variation.data.properties.find(property => {
+                    return property.property.id === parseInt(orderParam.propertyId)
+                });
+
+                return matchingProperty && matchingProperty.property.isShownAtCheckout;
             });
         },
 
