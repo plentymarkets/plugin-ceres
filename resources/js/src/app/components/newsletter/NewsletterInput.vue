@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <div class="col-12 text-right small mt-2">{{ $translate("Ceres::Template.newsletterOptIn") }}</div>
+            <div class="col-12 text-right small mt-2">{{ $translate("Ceres::Template.newsletterIsRequiered") }}</div>
         </div>
         <recaptcha v-if="!!$ceres.config.global.googleRecaptchaApiKey && loadRecaptcha"></recaptcha>
     </form>
