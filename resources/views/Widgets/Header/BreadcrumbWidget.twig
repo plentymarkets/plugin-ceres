@@ -8,6 +8,8 @@
 {% set showOnContentCategory = widget.settings.showOnContentCategory.mobile %}
 {% set showOnLegalPages      = widget.settings.showOnLegalPages.mobile %}
 
+{{ Twig.do("cacheslot breadcrumbs") }}
+
 {% if not isPreview %}
     {% if not showOnHomepage %}
         {{ Twig.if("not services.template.isCurrentTemplate('tpl.home') and not services.template.isCurrentTemplate('tpl.home.category')") }}
@@ -157,3 +159,4 @@
         {{ Twig.endif() }}
     {% endif %}
 {% endif %}
+{{ Twig.do("endcacheslot") }}
