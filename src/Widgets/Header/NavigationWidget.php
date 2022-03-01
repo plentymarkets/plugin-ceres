@@ -125,10 +125,15 @@ class NavigationWidget extends BaseWidget
             ->withDefaultValue(2)
             ->withCondition('navigationStyle === "megaMenu" && megaMenuLevels >= 4');
 
+        $settingsFactory->createCheckbox('enableCompanyLogo')
+            ->withName('Widget.navigationEnableCompanyLogoLabel')
+            ->withDefaultValue(true);
+
         $settingsFactory->createFile('companyLogoUrl')
             ->withName('Widget.navigationCompanyLogoUrlLabel')
             ->withTooltip('Widget.navigationCompanyLogoUrlTooltip')
             ->withDefaultValue('')
+            ->withCondition('enableCompanyLogo')
             ->withAllowedExtensions(array_merge(ImageBoxWidget::IMAGE_EXTENSIONS, ImageBoxWidget::MODERN_IMAGE_EXTENSIONS));
 
         $settingsFactory->createFile('fallbackImagePath')
