@@ -27,19 +27,15 @@
             </span>
             <sup>{{ $translate("Ceres::Template.singleItemFootnote1") }}</sup>
         </span>
-
-        </span>
-        <template v-if="currentVariation.properties && currentVariation.properties.length">
-            <div class="text-muted">
-                <ul>
-                    <li v-for="property in propertiesWithAdditionalCostsVisible" :key="property.propertyId">
-                        <span class="d-block">
-                            <strong>{{ property.property.names.name }} <template v-if="$options.filters.propertySurcharge(currentVariation.properties, property.propertyId) > 0">({{ $translate("Ceres::Template.basketPlusAbbr") }} {{ currentVariation.properties | propertySurcharge(property.propertyId) | currency }})</template></strong>
-                        </span>
-                    </li>
-                </ul>
-            </div>
-        </template>
+        
+        <ul class="text-muted pl-0 list-unstyled" v-if="currentVariation.properties && currentVariation.properties.length">
+            <li v-for="property in propertiesWithAdditionalCostsVisible" :key="property.propertyId">
+                <span class="d-block">
+                    {{ property.property.names.name }} <template v-if="$options.filters.propertySurcharge(currentVariation.properties, property.propertyId) > 0">({{ $translate("Ceres::Template.basketPlusAbbr") }} {{ currentVariation.properties | propertySurcharge(property.propertyId) | currency }})</template>
+                </span>
+            </li>
+        </ul>
+        
         <!-- class .is-single-piece is added for customers to hide the unit if it is C62 -->
         <div class="base-price text-muted my-3"
             v-if="currentVariation.unit"
