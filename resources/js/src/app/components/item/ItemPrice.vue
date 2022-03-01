@@ -118,7 +118,7 @@ export default {
 
         propertiesWithAdditionalCostsVisible() {
             return this.currentVariation.properties.filter(property => {
-                return property.property.isShownOnItemPage && property.property.isShownAsAdditionalCosts && !property.property.isOderProperty
+                return property.property && property.property.isShownOnItemPage && property.property.isShownAsAdditionalCosts && !property.property.isOderProperty
             });
         }
     }

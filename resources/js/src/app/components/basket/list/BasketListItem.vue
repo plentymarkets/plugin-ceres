@@ -302,7 +302,8 @@ export default {
         propertiesWithAdditionalCostsVisible()
         {
             return this.basketItem.variation.data.properties.filter(property => {
-                return property.property.isShownAtCheckout &&
+                return property.property &&
+                        property.property.isShownAtCheckout &&
                         property.property.isShownAsAdditionalCosts &&
                         !property.property.isOderProperty;
             });
