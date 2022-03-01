@@ -32,9 +32,6 @@
     {% set image = block('image') | default(companyLogo) %}
 {% elseif details is not null %}
     {% set image = details.imagePath | default(companyLogo) %}
-    {% if not (image starts with 'https://' or image starts with 'http://' or image starts with 'images/')  %}
-        {%  set image = webstoreConfig.domainSsl | trim('/') ~ '/documents/' ~ image %}
-    {% endif %}
 {% endif %}
 
 {% if block('title') is defined %}

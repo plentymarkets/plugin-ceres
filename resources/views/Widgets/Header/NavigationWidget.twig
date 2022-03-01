@@ -24,9 +24,6 @@
 
 {% if companyLogoUrl is empty %}
     {% set companyLogoUrl = ceresConfig.header.companyLogo | default(get_plenty_shop_logo()) %}
-    {% if not (companyLogoUrl starts with 'https://' or companyLogoUrl starts with 'http://' or companyLogoUrl starts with 'layout/') and companyLogoUrl | trim | length > 0 %}
-        {% set companyLogoUrl = plugin_path('Ceres') ~ "/" ~ companyLogoUrl %}
-    {% endif %}
 {% endif %}
 
 {% if fallbackImagePath | trim is empty %}
