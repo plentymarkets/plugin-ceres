@@ -22,7 +22,7 @@
     {% set megaMenuLevels = 2 %}
 {% endif %}
 
-{% if companyLogoUrl is empty %}
+{% if companyLogoUrl is empty and widget.settings.enableCompanyLogo.mobile %}
     {% set companyLogoUrl = ceresConfig.header.companyLogo | default(get_plenty_shop_logo()) %}
 {% endif %}
 
@@ -40,7 +40,7 @@
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
         <div class="row mx-0 position-relative d-flex">
             <div class="brand-wrapper px-lg-3 d-flex flex-fill">
-                {% if companyLogoUrl | trim | length > 0 %}
+                {% if companyLogoUrl | trim | length > 0 and widget.settings.enableCompanyLogo.mobile %}
                 <a class="navbar-brand py-2" href="{{ Twig.print('urls.home') }}">
                     <picture>
                         <source srcset="{{ companyLogoUrl }}"{% if companyLogoUrl matches '/.?(\\.webp)(?:$|\\?)/' %} type="image/webp"{% endif %}>
