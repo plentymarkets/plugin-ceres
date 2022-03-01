@@ -30,15 +30,15 @@
 
         </span>
         <template v-if="currentVariation.properties && currentVariation.properties.length">
-          <div class="text-muted">
-            <ul>
-              <li v-for="property in currentVariation.properties" :key="property.propertyId" v-show="isPropertyWithAdditionalCostsVisible(property.propertyId)">
-                    <span class="d-block">
-                      <strong>{{ property.property.names.name }} <template v-if="$options.filters.propertySurcharge(currentVariation.properties, property.propertyId) > 0">({{ $translate("Ceres::Template.basketPlusAbbr") }} {{ currentVariation.properties | propertySurcharge(property.propertyId) | currency }})</template></strong>
-                    </span>
-              </li>
-            </ul>
-          </div>
+            <div class="text-muted">
+                <ul>
+                    <li v-for="property in propertiesWithAdditionalCostsVisible" :key="property.propertyId">
+                        <span class="d-block">
+                            <strong>{{ property.property.names.name }} <template v-if="$options.filters.propertySurcharge(currentVariation.properties, property.propertyId) > 0">({{ $translate("Ceres::Template.basketPlusAbbr") }} {{ currentVariation.properties | propertySurcharge(property.propertyId) | currency }})</template></strong>
+                        </span>
+                    </li>
+                </ul>
+            </div>
         </template>
         <!-- class .is-single-piece is added for customers to hide the unit if it is C62 -->
         <div class="base-price text-muted my-3"
@@ -79,21 +79,6 @@ export default {
         }
     },
 
-    methods:
-   {
-     isPropertyWithAdditionalCostsVisible(propertyId)
-     {
-       const property = this.currentVariation.properties.find(property => property.property.id === parseInt(propertyId));
-
-       if (property)
-       {
-         return property.property.isShownOnItemPage && property.property.isShownAsAdditionalCosts && !property.property.isOderProperty;
-       }
-
-       return false;
-     }
-    },
-
     computed:
     {
         currentVariation() {
@@ -129,6 +114,12 @@ export default {
                 && (state.variationSelect && !state.variationSelect.isVariationSelected)
                 && (state.pleaseSelectVariationId === this.currentVariation.variation.id
                     || state.pleaseSelectVariationId === 0);
+        },
+
+        propertiesWithAdditionalCostsVisible() {
+            return this.currentVariation.properties.filter(property => {
+                return property.property.isShownOnItemPage && property.property.isShownAsAdditionalCosts && !property.property.isOderProperty
+            });
         }
     }
 }
