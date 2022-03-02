@@ -19,7 +19,7 @@
                     "deprecated": true,
                     "label": "Config.headerCompanyLogoLabel",
                     "options": {
-                        "defaultValue": "images/plentyShop-lts-logo.svg"
+                        "defaultValue": "https://cdn01.plentymarkets.com/avw8j9fg70hi/frontend/plentyShop_LTS/plentyShop-lts-logo.svg"
                     }
                 },
                 "global.favicon": {
