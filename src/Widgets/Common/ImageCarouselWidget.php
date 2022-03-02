@@ -42,7 +42,7 @@ class ImageCarouselWidget extends BaseWidget
         $settings->createCustomClass();
         $settings->createAppearance();
 
-        $settings->createCheckbox('fullWidth')
+        $settings->createCheckbox("fullWidth")
             ->withDefaultValue(false)
             ->withName('Widget.backgroundFullWidthLabel')
             ->withTooltip('Widget.backgroundFullWidthTooltip');
