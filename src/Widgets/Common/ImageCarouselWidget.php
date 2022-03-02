@@ -42,10 +42,6 @@ class ImageCarouselWidget extends BaseWidget
         $settings->createCustomClass();
         $settings->createAppearance();
 
-        $settings->createCheckbox('fullHeight')
-            ->withDefaultValue(false)
-            ->withName('Widget.imageCarouselFullHeightLabel')
-            ->withTooltip('Widget.imageCarouselFullHeightTooltip');
 
         $settings->createSelect("animationStyle")
             ->withDefaultValue("standard")
@@ -75,6 +71,11 @@ class ImageCarouselWidget extends BaseWidget
                     ->addEntry("1-3", "Widget.imageCarouselAspectRatioOneToThree")
                     ->toArray()
             );
+
+        $settings->createCheckbox('fullHeight')
+            ->withDefaultValue(false)
+            ->withName('Widget.imageCarouselFullHeightLabel')
+            ->withTooltip('Widget.imageCarouselFullHeightTooltip');
 
         $settings->createCheckbox("lazyLoading")
             ->withName("Widget.imageCarouselLazyLoadingName")

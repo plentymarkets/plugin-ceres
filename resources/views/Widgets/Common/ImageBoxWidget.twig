@@ -83,7 +83,7 @@
 {{ Twig.endif() }}
 
 <div class="widget widget-image-box widget-image-box-{{ style }} widget-{{ appearance | default('primary') }}
-    {% if aspectRatio != 'retain' %} widget-proportional widget-prop-{{ aspectRatio }}{% else %} widget-retain-aspect-ratio{% endif %}
+    {% if aspectRatio != 'retain' and fullHeight != true %} widget-proportional widget-prop-{{ aspectRatio }}{% else %} widget-retain-aspect-ratio {% endif %}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}
     {% if fullHeight %} vh-100{% endif %}
     {% if margin | length > 0 %} {{ margin }}{% endif %}"

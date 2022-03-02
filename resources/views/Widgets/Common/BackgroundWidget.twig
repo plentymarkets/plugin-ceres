@@ -53,7 +53,7 @@
 
 <div class="widget widget-background d-flex parallax-img-container
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}
-    {% if minHeightClass | length > 0 %}{{ Twig.if("hasUrl or hasColor or #{ isPreview | json_encode }") }} {{ minHeightClass }}{{ Twig.endif() }}{% endif %}
+    {% if minHeightClass | length > 0 and fullHeight != true %}{{ Twig.if("hasUrl or hasColor or #{ isPreview | json_encode }") }} {{ minHeightClass }}{{ Twig.endif() }}{% endif %}
     {% if fullWidth %} widget-fw{% endif %}
     {% if fullHeight %} vh-100{% endif %}
     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"

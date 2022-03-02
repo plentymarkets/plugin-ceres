@@ -56,10 +56,7 @@ class ImageBoxWidget extends BaseWidget
 
         $settings->createCustomClass();
         $settings->createAppearance();
-        $settings->createCheckbox('fullHeight')
-            ->withDefaultValue(false)
-            ->withName('Widget.imageBoxFullHeightLabel')
-            ->withTooltip('Widget.imageBoxFullHeightTooltip');
+
         $settings->createSelect('aspectRatio')
             ->withDefaultValue('auto')
             ->withName('Widget.imageBoxAspectRatioLabel')
@@ -123,6 +120,11 @@ class ImageBoxWidget extends BaseWidget
             ->withTooltip('Widget.imageBoxFallbackImagePathTooltip')
             ->withCondition('!!customImagePath && /.?(\.webp)(?:$|\?)/.test(customImagePath)')
             ->withAllowedExtensions(self::IMAGE_EXTENSIONS);
+
+        $settings->createCheckbox('fullHeight')
+            ->withDefaultValue(false)
+            ->withName('Widget.imageBoxFullHeightLabel')
+            ->withTooltip('Widget.imageBoxFullHeightTooltip');
 
         $settings->createCheckbox('lazyLoading')
             ->withName('Widget.imageBoxLazyLoadingName')
