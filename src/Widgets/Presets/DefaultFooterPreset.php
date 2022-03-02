@@ -177,7 +177,7 @@ class DefaultFooterPreset implements ContentPreset
         $defaultText = '';
         $defaultText .= '<div class="copyright text-center">';
         $defaultText .= '<a class="d-inline-block" rel="nofollow" href="https://www.plentymarkets.com">';
-        $defaultText .= '<img alt="plentymarkets logo" class="svg plenty-brand" src="{{ get_plentymarkets_logo() }}" rel="nofollow">';
+        $defaultText .= '<img alt="plentymarkets logo" class="svg plenty-brand" src="https://cdn01.plentymarkets.com/avw8j9fg70hi/frontend/plentyShop_LTS/plentymarkets-logo.svg" rel="nofollow">';
         $defaultText .= '</a>';
         $defaultText .= '<small class="d-block">&copy; Copyright {{ "now" | date("Y") }} | {{ trans("Ceres::Template.footerAllRightsReserved") }}</small>';
         $defaultText .= '</div>';

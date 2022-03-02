@@ -27,7 +27,7 @@
     {% set keywords = details.metaKeywords %}
 {% endif %}
 
-{% set companyLogo = ceresConfig.header.companyLogo | default(get_plenty_shop_logo()) %}
+{% set companyLogo = ceresConfig.header.companyLogo %}
 {% if block('image') is defined %}
     {% set image = block('image') | default(companyLogo) %}
 {% elseif details is not null %}
