@@ -230,14 +230,6 @@ export default {
                 .findModal(document.getElementById("add-item-to-basket-overlay"))
                 .setTimeout(this.defaultTimeToClose * 1000)
                 .show();
-        },
-
-        isPropertyWithAdditionalCost(property)
-        {
-            return property.property &&
-                    property.property.isShownAtCheckout &&
-                    property.property.isShownAsAdditionalCosts &&
-                    !property.property.isOderProperty;
         }
     }
 }
