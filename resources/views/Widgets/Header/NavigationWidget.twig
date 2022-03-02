@@ -40,6 +40,10 @@
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
         <div class="row mx-0 position-relative d-flex">
             <div class="brand-wrapper px-lg-3 d-flex flex-fill">
+
+                config: {{ ceresConfig.header.companyLogo }}
+                logoUrl: {{ companyLogoUrl }}
+
                 {% if companyLogoUrl | trim | length > 0 %}
                     <a class="navbar-brand py-2" href="{{ Twig.print('urls.home') }}">
                         <picture>
