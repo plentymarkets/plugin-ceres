@@ -60,7 +60,6 @@ class ImageCarouselWidget extends BaseWidget
 
         $settings->createSelect("aspectRatio")
             ->withDefaultValue("auto")
-            ->withCondition("!fullWidth")
             ->withName("Widget.imageCarouselAspectRatioLabel")
             ->withTooltip("Widget.imageCarouselAspectRatioTooltip")
             ->withListBoxValues(
