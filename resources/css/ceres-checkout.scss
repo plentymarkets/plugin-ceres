@@ -12507,6 +12507,18 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
 }
 
 .widget-item-grid {
+    &.item-vat-hidden {
+        .vat {
+            display: none;
+        }
+    } 
+    &.item-bg-gray {
+        .cmp-product-thumb {
+            .thumb-image {
+                background-color: $gray-100;
+            }
+        }
+    }
     .product-list {
         > .col-12 {
             padding-right: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important
@@ -13294,6 +13306,18 @@ html.ie {
 @include widget-carousel-variant(".widget-danger", $danger);
 
 .widget-item-list {
+    &.item-bg-gray {
+        .cmp-product-thumb {
+            .thumb-image {
+                background-color: $gray-100;
+            }
+        }
+    }
+    &.item-vat-hidden {
+        .vat {
+            display: none;
+        }
+    }
     .widget-inner {
         padding-right: 0;
         padding-left: 0;
