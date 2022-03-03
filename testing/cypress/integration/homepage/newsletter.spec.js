@@ -87,4 +87,19 @@ context("Newsletter", () =>
             expect(res.status).to.eql(400);
         });
     });
+
+    it.only("should unsubscribe", () =>
+    {
+        cy.visit("/newsletter-unsubscribe");
+        cy.intercept("DELETE", " /rest/io/customer/newsletter/**").as("unsubscribe");
+       
+        cy.get(".widget-newsletter-unsubscribe").should("exist");
+        cy.getByTestingAttr("unsub-nl-mail").type("max.mustermann@plentymarkets.com", { delay: 40 });
+        cy.getByTestingAttr("unsub-nl-send").click();
+
+        cy.wait("@unsubscribe").then((res) =>
+        {
+            expect(res.response.statusCode).to.eql(200);
+        });
+    });
 });

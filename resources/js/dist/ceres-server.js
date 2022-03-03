@@ -54041,7 +54041,7 @@ var render = function() {
                 _vm._ssrEscape(
                   _vm._s(_vm.$translate("Ceres::Template.newsletterEmail"))
                 ) +
-                '</label> <input type="email" name="email" autocomplete="email" id="email-input-id"' +
+                '</label> <input type="email" name="email" autocomplete="email" id="email-input-id" data-testing="unsub-nl-mail"' +
                 _vm._ssrAttr("value", _vm.email) +
                 ' class="form-control"></div> <input type="text" name="username" autocomplete="new-password" tabindex="-1"' +
                 _vm._ssrAttr("value", _vm.honeypot) +
@@ -54051,6 +54051,7 @@ var render = function() {
               _vm._ssrNode(
                 '<button type="submit"' +
                   _vm._ssrAttr("disabled", _vm.isDisabled) +
+                  ' data-testing="unsub-nl-send"' +
                   _vm._ssrClass(
                     "btn btn-primary btn-appearance float-right btn-medium btn-xs-max-width",
                     _vm.buttonSizeClass
