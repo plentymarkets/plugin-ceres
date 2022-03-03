@@ -88,7 +88,7 @@ context("Newsletter", () =>
         });
     });
 
-    it.only("should unsubscribe", () =>
+    it("should unsubscribe", () =>
     {
         cy.visit("/newsletter-unsubscribe");
         cy.intercept("DELETE", " /rest/io/customer/newsletter/**").as("unsubscribe");
