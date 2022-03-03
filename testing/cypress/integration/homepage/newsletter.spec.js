@@ -12,10 +12,8 @@ context("Newsletter", () =>
         cy.getByTestingAttr("nl-mail").type("max.mustermann@plentymarkets.com", { delay: 40 });
         cy.getByTestingAttr("nl-policy").click();
         cy.getByTestingAttr("nl-send").click();
-        // check request and notification
 
-        cy.get(".notification-wrapper").children().eq( 1 ).should("exist").should("have.class", "show");
-        cy.get(".notification-wrapper").children().eq( 1 ).should("contain", "Die Newsletter-Anmeldung war erfolgreich.");
+        cy.get(".notification-wrapper").should("contain", "Die Newsletter-Anmeldung war erfolgreich.");
 
         cy.wait("@nlRegister").then((res) =>
         {
@@ -33,9 +31,8 @@ context("Newsletter", () =>
         cy.getByTestingAttr("nl-policy").click();
         cy.getByTestingAttr("nl-send").click();
 
-        // check request and notification
-        cy.get(".notification-wrapper").children().eq( 1 ).should("exist").should("have.class", "show");
-        cy.get(".notification-wrapper").children().eq( 1 ).should("contain", "Die Newsletter-Anmeldung war nicht erfolgreich.");
+        cy.get(".notification-wrapper").should("contain", "Die Newsletter-Anmeldung war erfolgreich.");
+
 
         cy.wait("@nlRegister").then((res) =>
         {
@@ -54,8 +51,7 @@ context("Newsletter", () =>
         cy.getByTestingAttr("nl-policy").click();
         cy.getByTestingAttr("nl-send").click();
 
-        cy.get(".notification-wrapper").children().eq( 1 ).should("exist").should("have.class", "show");
-        cy.get(".notification-wrapper").children().eq( 1 ).should("contain", "Die Newsletter-Anmeldung war nicht erfolgreich.");
+        cy.get(".notification-wrapper").children().should("contain", `Das Feld "NACHNAME" darf keine Sonderzeichen enthalten.`);
     });
 
     it("should validate mail input", () =>
@@ -67,18 +63,28 @@ context("Newsletter", () =>
         cy.getByTestingAttr("nl-mail").type("max.mustermannplentymarkets.com", { delay: 40 });
         cy.getByTestingAttr("nl-policy").click();
         cy.getByTestingAttr("nl-send").click();
+        cy.getByTestingAttr("nl-mail").parent().should("have.class", "error");
+    });
 
-        cy.get(".notification-wrapper").children().eq( 1 ).should("exist").should("have.class", "show");
-        cy.get(".notification-wrapper").children().eq( 1 ).should("contain", "Die Newsletter-Anmeldung war nicht erfolgreich.");
+    it("should validate policy", () =>
+    {
+        cy.visit("/newsletter");
+        cy.get(".widget-newsletter").should("exist");
+        cy.getByTestingAttr("nl-mail").type("max.mustermann@plentymarkets.com", { delay: 40 });
+        cy.getByTestingAttr("nl-send").click();
+        cy.getByTestingAttr("nl-policy").parent().should("have.class", "error");
     });
 
     it("should test spam newsletter rest call", () =>
     {
-        cy.request("POST", "/rest/io/customer/newsletter", { email: "max.mustermann@plentymarkets.com", firstName: "Visit", lastName: "https://spamsite.de", emailFolder: 0 }).then(
-            (res) =>
-            {
-                expect(res.response.statusCode).to.eql(400);
-            }
-        );
+        cy.request({
+            method: "POST",
+            url: "/rest/io/customer/newsletter",
+            failOnStatusCode: false,
+            body: { email: "max.mustermann@plentymarkets.com", firstName: "Visit", lastName: "test.de", emailFolder: 1 }
+        }).then((res) =>
+        {
+            expect(res.status).to.eql(400);
+        });
     });
 });

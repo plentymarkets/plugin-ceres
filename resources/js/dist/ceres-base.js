@@ -64574,9 +64574,7 @@ function _validateElement(elem) {
       if (_validateInput($formControl, validationKey.replace("!", ""))) {
         hasError = true;
       }
-    }
-
-    if (!_validateInput($formControl, validationKey)) {
+    } else if (!_validateInput($formControl, validationKey)) {
       hasError = true;
     }
 
