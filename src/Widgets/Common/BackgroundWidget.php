@@ -61,13 +61,13 @@ class BackgroundWidget extends BaseWidget
             ->withName('Widget.backgroundFixedLabel')
             ->withTooltip('Widget.backgroundFixedTooltip');
 
+        $this->createImageSettings($settings);
+
         $settings->createColorPalette();
 
         $settings->createColor('customColor')
             ->withCondition("colorPalette === 'custom'")
             ->withDefaultValue('#000000');
-
-        $this->createImageSettings($settings);
 
         $settings->createSlider('opacity')
             ->withDefaultValue(100)
@@ -98,7 +98,6 @@ class BackgroundWidget extends BaseWidget
             ->withName('Widget.preloadImageLabel')
             ->withTooltip('Widget.preloadImageTooltip')
             ->withCondition("!lazyloadImage");
-
 
         $settings->createSelect('sourceType')
             ->withDefaultValue('none')

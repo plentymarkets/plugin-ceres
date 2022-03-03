@@ -42,22 +42,22 @@ class ImageCarouselWidget extends BaseWidget
         $settings->createCustomClass();
         $settings->createAppearance();
 
+        $settings->createSelect("animationStyle")
+        ->withDefaultValue("standard")
+        ->withName("Widget.imageCarouselAnimationStyleLabel")
+        ->withTooltip("Widget.imageCarouselAnimationStyleTooltip")
+        ->withListBoxValues(
+            ValueListFactory::make()
+            ->addEntry("standard", "Widget.imageCarouselAnimationStyleSlide")
+            ->addEntry("fade", "Widget.imageCarouselAnimationStyleFade")
+            ->toArray()
+        );
+
         $settings->createCheckbox("fullWidth")
             ->withDefaultValue(false)
             ->withName('Widget.backgroundFullWidthLabel')
             ->withTooltip('Widget.backgroundFullWidthTooltip');
-
-        $settings->createSelect("animationStyle")
-            ->withDefaultValue("standard")
-            ->withName("Widget.imageCarouselAnimationStyleLabel")
-            ->withTooltip("Widget.imageCarouselAnimationStyleTooltip")
-            ->withListBoxValues(
-                ValueListFactory::make()
-                    ->addEntry("standard", "Widget.imageCarouselAnimationStyleSlide")
-                    ->addEntry("fade", "Widget.imageCarouselAnimationStyleFade")
-                    ->toArray()
-            );
-
+        
         $settings->createSelect("aspectRatio")
             ->withDefaultValue("auto")
             ->withName("Widget.imageCarouselAspectRatioLabel")
