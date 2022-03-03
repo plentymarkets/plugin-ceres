@@ -1617,6 +1617,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _CategoryImageCarousel_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./CategoryImageCarousel.vue */ "./resources/js/src/app/components/itemList/CategoryImageCarousel.vue");
 /* harmony import */ var _ItemStoreSpecial_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ItemStoreSpecial.vue */ "./resources/js/src/app/components/itemList/ItemStoreSpecial.vue");
+/* harmony import */ var _helper_getSlotData__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../helper/getSlotData */ "./resources/js/src/app/helper/getSlotData.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -1754,6 +1755,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -1793,8 +1803,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   jsonDataFields: ["itemDataRef"],
   computed: _objectSpread({
     item: function item() {
-      return this.itemData || this.itemDataRef;
+      return this.itemData || this.itemSlotData || this.itemDataRef;
     },
+    itemSlotData: Object(_helper_getSlotData__WEBPACK_IMPORTED_MODULE_10__["getSlotData"])('item-data'),
 
     /**
      * returns itemData.item.storeSpecial
@@ -1811,6 +1822,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     itemPrice: function itemPrice() {
       return this.$options.filters.specialOffer(this.item.prices.default.unitPrice.formatted, this.item.prices, "unitPrice", "formatted");
+    },
+    basePrice: function basePrice() {
+      return this.item.prices.graduatedPrices.length > 0 ? this.item.prices.graduatedPrices[0].basePrice : this.item.prices.default.basePrice;
+    },
+    itemPriceGraduated: function itemPriceGraduated() {
+      var unitPrice = this.item.prices.graduatedPrices.length > 0 ? this.item.prices.graduatedPrices[0].unitPrice : this.item.prices.default.unitPrice;
+      return this.$options.filters.specialOffer(unitPrice.formatted, this.item.prices, "unitPrice", "formatted");
+    },
+    itemGraduatedPriceisCheapestSorting: function itemGraduatedPriceisCheapestSorting() {
+      return !!this.item.item && this.item.item.salableVariationCount > 1 && !!this.$ceres.isCheapestSorting;
+    },
+    itemGraduatedPricesalableVariationCount: function itemGraduatedPricesalableVariationCount() {
+      return !!this.item.item && this.item.item.salableVariationCount == 1 && this.item.prices.graduatedPrices.length > 1;
     },
     itemSetPrice: function itemSetPrice() {
       return this.$options.filters.currency(this.item.prices.default.price.value, this.item.prices.default.currency);
@@ -38479,6 +38503,9 @@ var render = function() {
               "show-quantity": false,
               "item-url": _vm._f("itemURL")(_vm.item, _vm.urlWithVariationId),
               "has-price": _vm._f("hasItemDefaultPrice")(_vm.item),
+              "has-graduated-price":
+                _vm.itemGraduatedPriceisCheapestSorting ||
+                _vm.itemGraduatedPricesalableVariationCount,
               "item-type": _vm.item.item.itemType
             }
           }),
@@ -38633,16 +38660,53 @@ var render = function() {
                                     "\n                            "
                                 )
                               ]
-                            : !!_vm.item.item &&
-                              _vm.item.item.salableVariationCount > 1 &&
-                              _vm.$ceres.isCheapestSorting
+                            : _vm.itemGraduatedPriceisCheapestSorting
                             ? [
                                 _vm._v(
-                                  "\n                                 " +
+                                  "\n                                " +
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.categoryItemFromPrice",
+                                        { price: _vm.itemPriceGraduated }
+                                      )
+                                    ) +
+                                    " " +
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.categoryItemFootnote"
+                                      )
+                                    ) +
+                                    "\n                            "
+                                )
+                              ]
+                            : !!_vm.item.item &&
+                              _vm.item.item.salableVariationCount > 1
+                            ? [
+                                _vm._v(
+                                  "\n                                " +
                                     _vm._s(
                                       _vm.$translate(
                                         "Ceres::Template.categoryItemFromPrice",
                                         { price: _vm.itemPrice }
+                                      )
+                                    ) +
+                                    " " +
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.categoryItemFootnote"
+                                      )
+                                    ) +
+                                    "\n                            "
+                                )
+                              ]
+                            : _vm.itemGraduatedPricesalableVariationCount
+                            ? [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.categoryItemFromPrice",
+                                        { price: _vm.itemPriceGraduated }
                                       )
                                     ) +
                                     " " +
@@ -38697,11 +38761,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _vm.item.variation.mayShowUnitPrice
-                        ? _c("span", [
-                            _vm._v(
-                              " | " + _vm._s(_vm.item.prices.default.basePrice)
-                            )
-                          ])
+                        ? _c("span", [_vm._v(" | " + _vm._s(_vm.basePrice))])
                         : _vm._e()
                     ])
                   : _vm._e(),
@@ -38737,6 +38797,9 @@ var render = function() {
                       _vm.urlWithVariationId
                     ),
                     "has-price": _vm._f("hasItemDefaultPrice")(_vm.item),
+                    "has-graduated-price":
+                      _vm.itemGraduatedPriceisCheapestSorting ||
+                      _vm.itemGraduatedPricesalableVariationCount,
                     "item-type": _vm.item.item.itemType
                   }
                 }),
@@ -64549,6 +64612,44 @@ function readField(object, field) {
   }
 
   return object[field];
+}
+
+/***/ }),
+
+/***/ "./resources/js/src/app/helper/getSlotData.js":
+/*!****************************************************!*\
+  !*** ./resources/js/src/app/helper/getSlotData.js ***!
+  \****************************************************/
+/*! exports provided: getSlotData */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSlotData", function() { return getSlotData; });
+/**
+ * Return a getter function to read json formatted data from a slot of the component.
+ * This can be used to create a dynamic property for a vue component returning the parsed
+ * json data from the given slot.
+ * Once the data have been parsed, the result is stored on the vm options to avoid parsing the slot again.
+ *
+ * @param string slotKey The identifier of the slot to parse json data from
+ */
+function getSlotData(slotKey) {
+  return function (vm) {
+    vm.$options.slotData = vm.$options.slotData || {};
+
+    if (!vm.$options.slotData.hasOwnProperty(slotKey) && vm.$slots.hasOwnProperty(slotKey)) {
+      var slotNode = vm.$slots[slotKey][0];
+
+      if (slotNode.elm) {
+        vm.$options.slotData[slotKey] = JSON.parse(slotNode.elm.textContent);
+      } else {
+        vm.$options.slotData[slotKey] = JSON.parse(slotNode.text);
+      }
+    }
+
+    return vm.$options.slotData[slotKey];
+  };
 }
 
 /***/ }),

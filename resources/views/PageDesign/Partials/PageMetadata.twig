@@ -27,13 +27,11 @@
     {% set keywords = details.metaKeywords %}
 {% endif %}
 
+{% set companyLogo = ceresConfig.header.companyLogo %}
 {% if block('image') is defined %}
-    {% set image = block('image') | default(ceresConfig.header.companyLogo) %}
+    {% set image = block('image') | default(companyLogo) %}
 {% elseif details is not null %}
-    {% set image = details.imagePath | default(ceresConfig.header.companyLogo) %}
-    {% if not (image starts with 'https://' or image starts with 'http://' or image starts with 'images/')  %}
-        {%  set image = webstoreConfig.domainSsl | trim('/') ~ '/documents/' ~ image %}
-    {% endif %}
+    {% set image = details.imagePath | default(companyLogo) %}
 {% endif %}
 
 {% if block('title') is defined %}

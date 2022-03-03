@@ -93,6 +93,17 @@ class ItemGridWidget extends BaseWidget
                     ->toArray()
             );
 
+        $settings->createCheckbox('noVat')
+            ->withDefaultValue(false)
+            ->withName('Widget.itemGridNoVatLabel')
+            ->withTooltip('Widget.itemGridNoVatTooltip');
+
+
+        $settings->createCheckbox('grayBackground')
+        ->withDefaultValue(false)
+        ->withName('Widget.itemGridGrayBackgroundLabel')
+        ->withTooltip('Widget.itemGridGrayBackgroundTooltip');
+
         $settings->createSpacing();
 
         return $settings->toArray();
