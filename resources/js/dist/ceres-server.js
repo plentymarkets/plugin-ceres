@@ -53928,8 +53928,9 @@ var render = function() {
               ) +
               '</label> <input type="email" autocomplete="email"' +
               _vm._ssrAttr("id", "email-input-id_" + _vm._uid) +
+              ' data-testing="nl-mail"' +
               _vm._ssrAttr("value", _vm.email) +
-              '></div> <input autocomplete="none" type="text" name="username" tabindex="-1" data-testing="nl-mail"' +
+              '></div> <input autocomplete="none" type="text" name="username" tabindex="-1"' +
               _vm._ssrAttr("value", _vm.honeypot) +
               ' class="honey"></div></div> ' +
               (_vm.showPrivacyPolicyCheckbox

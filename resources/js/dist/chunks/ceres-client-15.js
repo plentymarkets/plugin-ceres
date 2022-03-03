@@ -353,7 +353,8 @@ var render = function() {
                   attrs: {
                     type: "email",
                     autocomplete: "email",
-                    id: "email-input-id_" + _vm._uid
+                    id: "email-input-id_" + _vm._uid,
+                    "data-testing": "nl-mail"
                   },
                   domProps: { value: _vm.email },
                   on: {
@@ -385,8 +386,7 @@ var render = function() {
                 autocomplete: "none",
                 type: "text",
                 name: "username",
-                tabindex: "-1",
-                "data-testing": "nl-mail"
+                tabindex: "-1"
               },
               domProps: { value: _vm.honeypot },
               on: {

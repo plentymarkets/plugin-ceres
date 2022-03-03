@@ -18,9 +18,9 @@
                 <div class="input-group">
                     <div class="input-unit" data-validate="mail">
                         <label :for="'email-input-id_' + _uid">{{ $translate("Ceres::Template.newsletterEmail") }} *</label>
-                        <input @focus="loadRecaptcha = true" type="email" autocomplete="email" :id="'email-input-id_' + _uid" v-model="email">
+                        <input @focus="loadRecaptcha = true" type="email" autocomplete="email" :id="'email-input-id_' + _uid" v-model="email" data-testing="nl-mail">
                     </div>
-                    <input autocomplete="none" class="honey" type="text" name="username" tabindex="-1" v-model="honeypot" data-testing="nl-mail">
+                    <input autocomplete="none" class="honey" type="text" name="username" tabindex="-1" v-model="honeypot">
                 </div>
             </div>
 
