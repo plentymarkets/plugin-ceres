@@ -259,7 +259,8 @@ var render = function() {
                     attrs: {
                       type: "text",
                       "data-validate-ref": "/[.:\\/\\d]/g",
-                      id: "first-name-input_" + _vm._uid
+                      id: "first-name-input_" + _vm._uid,
+                      "data-testing": "nl-first-name"
                     },
                     domProps: { value: _vm.firstName },
                     on: {
@@ -309,7 +310,8 @@ var render = function() {
                     attrs: {
                       type: "text",
                       "data-validate-ref": "/[.:\\/\\d]/g",
-                      id: "last-name-input_" + _vm._uid
+                      id: "last-name-input_" + _vm._uid,
+                      "data-testing": "nl-last-name"
                     },
                     domProps: { value: _vm.lastName },
                     on: {
@@ -383,7 +385,8 @@ var render = function() {
                 autocomplete: "none",
                 type: "text",
                 name: "username",
-                tabindex: "-1"
+                tabindex: "-1",
+                "data-testing": "nl-mail"
               },
               domProps: { value: _vm.honeypot },
               on: {
@@ -420,7 +423,8 @@ var render = function() {
                     attrs: {
                       type: "checkbox",
                       id: "privacy-policy-accept-id_" + _vm._uid,
-                      name: "privacy-policy-accept"
+                      name: "privacy-policy-accept",
+                      "data-testing": "nl-policy"
                     },
                     domProps: {
                       checked: Array.isArray(_vm.privacyPolicyValue)
@@ -468,7 +472,11 @@ var render = function() {
               {
                 staticClass: "btn btn-block btn-primary btn-appearance",
                 class: _vm.buttonSizeClass,
-                attrs: { type: "button", disabled: _vm.isDisabled },
+                attrs: {
+                  type: "button",
+                  disabled: _vm.isDisabled,
+                  "data-testing": "nl-send"
+                },
                 on: { click: _vm.validateData }
               },
               [
