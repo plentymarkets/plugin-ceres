@@ -33,6 +33,20 @@ a {
     overflow-wrap: break-word;
 }
 
+.widget.mouseover-zoom {
+    &:hover, &:focus {
+        img {
+            transform: scale(1.05);
+            
+        }
+    }
+
+    img {
+        transform: scale(1.00);
+        @include transition(.4s cubic-bezier(0, 0, .26, 1));
+    }
+}
+
 .lozad {
     display: block;
     min-height: 1px;

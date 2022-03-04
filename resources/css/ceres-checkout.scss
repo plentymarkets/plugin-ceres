@@ -9105,6 +9105,22 @@ a {
     overflow-wrap: break-word;
 }
 
+.widget.mouseover-zoom {
+    &:hover, &:focus {
+        img {
+            -webkit-transform: scale(1.05);
+                    transform: scale(1.05);
+            
+        }
+    }
+
+    img {
+        -webkit-transform: scale(1.00);
+                transform: scale(1.00);
+        @include transition(.4s cubic-bezier(0, 0, .26, 1));
+    }
+}
+
 .lozad {
     display: block;
     min-height: 1px;
@@ -12507,6 +12523,18 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
 }
 
 .widget-item-grid {
+    &.item-vat-hidden {
+        .vat {
+            display: none;
+        }
+    } 
+    &.item-bg-gray {
+        .cmp-product-thumb {
+            .thumb-image {
+                background-color: $gray-100;
+            }
+        }
+    }
     .product-list {
         > .col-12 {
             padding-right: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important
@@ -13294,6 +13322,18 @@ html.ie {
 @include widget-carousel-variant(".widget-danger", $danger);
 
 .widget-item-list {
+    &.item-bg-gray {
+        .cmp-product-thumb {
+            .thumb-image {
+                background-color: $gray-100;
+            }
+        }
+    }
+    &.item-vat-hidden {
+        .vat {
+            display: none;
+        }
+    }
     .widget-inner {
         padding-right: 0;
         padding-left: 0;

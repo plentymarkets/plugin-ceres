@@ -1,4 +1,16 @@
 .widget-item-grid {
+    &.item-vat-hidden {
+        .vat {
+            display: none;
+        }
+    } 
+    &.item-bg-gray {
+        .cmp-product-thumb {
+            .thumb-image {
+                background-color: $gray-100;
+            }
+        }
+    }
     .product-list {
         > .col-12 {
             padding-right: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important

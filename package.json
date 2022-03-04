@@ -1,7 +1,7 @@
 {
   "name": "Ceres",
   "license": "AGPL-3.0",
-  "version": "5.0.45",
+  "version": "5.0.47",
   "repository": {
     "type": "git",
     "url": "https://github.com/plentymarkets/plugin-ceres.git"
@@ -38,6 +38,7 @@
     "autoprefixer": "^8.6.5",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
+    "copy-webpack-plugin": "^6.4.1",
     "css-loader": "^3.5.3",
     "cypress": "^8.5.0",
     "cypress-file-upload": "^4.1.1",

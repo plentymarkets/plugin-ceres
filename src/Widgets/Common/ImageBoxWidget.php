@@ -130,6 +130,11 @@ class ImageBoxWidget extends BaseWidget
             ->withTooltip('Widget.preloadImageTooltip')
             ->withCondition("!lazyLoading");
 
+        $settings->createCheckbox('zoomImage')
+            ->withName('Widget.zoomImageLabel')
+            ->withTooltip('Widget.zoomImageTooltip')
+            ->withDefaultValue(false);
+
         $settings->createSpacing(false, true);
 
         return $settings->toArray();
