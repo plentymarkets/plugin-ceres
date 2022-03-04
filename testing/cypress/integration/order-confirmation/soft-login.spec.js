@@ -30,4 +30,14 @@ context("Order confirmation", () =>
         cy.get("#page-body").should("contain", "404");
         cy.get("#page-body").should("contain", "Die Seite, die du aufgerufen hast, wurde nicht gefunden.");
     });
+
+    it("Should contain robots noindex in head metadata", () =>
+    {
+        cy.visit("/bestellbestaetigung/?orderId=1392&accessKey=ILZIIM0MB");
+        cy.get(`meta[content="NOINDEX"]`).should("exist");
+        cy.get(`input[name="postcode"]`).type("12345");
+        cy.get(`button[type="submit"]`).click();
+        cy.get(".h3").should("contain", "1392");
+        cy.get(`meta[content="NOINDEX"]`).should("exist");
+    });
 });
