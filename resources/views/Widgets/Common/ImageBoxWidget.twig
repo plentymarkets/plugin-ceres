@@ -17,6 +17,10 @@
 {% set fullHeight = widget.settings.fullHeight.mobile is same as (true) %}
 {% set zoomImage = widget.settings.zoomImage.mobile is same as (true) %}
 
+{% if fullHeight %}
+    {% set aspectRatio = "auto" %}
+{% endif %}
+
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlineMargin = WidgetHelper.getInlineSpacings(spacingSettings,"", spacingSettings.customMargin.mobile) %}
 {% set margin = WidgetHelper.getSpacingClasses(spacingSettings,"", spacingSettings.customMargin.mobile) %}
@@ -84,7 +88,7 @@
 {{ Twig.endif() }}
 
 <div class="widget widget-image-box widget-image-box-{{ style }} widget-{{ appearance | default('primary') }}
-    {% if aspectRatio != 'retain' and fullHeight != true %} widget-proportional widget-prop-{{ aspectRatio }}{% else %} widget-retain-aspect-ratio {% endif %}
+    {% if aspectRatio != 'retain' %} widget-proportional widget-prop-{{ aspectRatio }}{% else %} widget-retain-aspect-ratio {% endif %}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}
     {% if fullHeight %} vh-100{% endif %}
     {% if margin | length > 0 %} {{ margin }}{% endif %}
@@ -103,7 +107,7 @@
 
         {% if widget.settings.lazyLoading.mobile %}
             <lazy-img
-                picture-class="img-{{ imageSize }}"
+                picture-class="img-{{ imageSize }}{% if imageSize == "contain" and fullHeight %} vh-100{% endif %}"
                 image-url="{{ Twig.print("imageUrl") }}"
                 fallback-url="{{ fallbackImagePath }}"
                 alt="{{ Twig.print("imageAltText") }}"
@@ -119,7 +123,7 @@
             <picture>
                 <source srcset="{{ Twig.print("imageUrl") }}" {{ Twig.if("imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>
                 <img
-                    class="img-{{ imageSize }}"
+                    class="img-{{ imageSize }}{% if imageSize == "contain" and fullHeight %} vh-100{% endif %}"
                     src="{{ Twig.print("fallbackUrl") }}"
                     alt="{{ Twig.print("imageAltText") }}"
                     {{ Twig.if("imageName | trim is not empty") }}title="{{ Twig.print("imageName") }}"{{ Twig.endif() }}
