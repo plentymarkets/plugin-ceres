@@ -76,6 +76,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -115,7 +116,7 @@ __webpack_require__.r(__webpack_exports__);
       }) + "</span></a>";
       return this.$translate("Ceres::Template.newsletterAcceptPrivacyPolicy", {
         "policy": link
-      });
+      }) + this.$translate("Ceres::Template.newsletterIsRequieredFootnote");
     }
   },
   methods: {
@@ -335,7 +336,12 @@ var render = function() {
                 _c("label", { attrs: { for: "email-input-id_" + _vm._uid } }, [
                   _vm._v(
                     _vm._s(_vm.$translate("Ceres::Template.newsletterEmail")) +
-                      " *"
+                      " " +
+                      _vm._s(
+                        _vm.$translate(
+                          "Ceres::Template.newsletterIsRequieredFootnote"
+                        )
+                      )
                   )
                 ]),
                 _vm._v(" "),
@@ -488,6 +494,16 @@ var render = function() {
               1
             )
           ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12 text-right small mt-2" }, [
+          _vm._v(
+            _vm._s(
+              _vm.$translate("Ceres::Template.newsletterIsRequieredFootnote")
+            ) +
+              " " +
+              _vm._s(_vm.$translate("Ceres::Template.newsletterIsRequiered"))
+          )
         ])
       ]),
       _vm._v(" "),
