@@ -56,10 +56,12 @@ class ImageBoxWidget extends BaseWidget
 
         $settings->createCustomClass();
         $settings->createAppearance();
+
         $settings->createSelect('aspectRatio')
             ->withDefaultValue('auto')
             ->withName('Widget.imageBoxAspectRatioLabel')
             ->withTooltip('Widget.imageBoxAspectRatioTooltip')
+            ->withCondition("fullHeight !== true")
             ->withListBoxValues(
                 ValueListFactory::make()
                     ->addEntry('retain', 'Widget.imageBoxRetainAspectRatio')
@@ -119,6 +121,11 @@ class ImageBoxWidget extends BaseWidget
             ->withCondition('!!customImagePath && /.?(\.webp)(?:$|\?)/.test(customImagePath)')
             ->withAllowedExtensions(self::IMAGE_EXTENSIONS);
 
+        $settings->createCheckbox('fullHeight')
+            ->withDefaultValue(false)
+            ->withName('Widget.imageBoxFullHeightLabel')
+            ->withTooltip('Widget.imageBoxFullHeightTooltip');
+
         $settings->createCheckbox('lazyLoading')
             ->withName('Widget.imageBoxLazyLoadingName')
             ->withTooltip('Widget.imageBoxLazyLoadingTooltip')
@@ -129,6 +136,11 @@ class ImageBoxWidget extends BaseWidget
             ->withName('Widget.preloadImageLabel')
             ->withTooltip('Widget.preloadImageTooltip')
             ->withCondition("!lazyLoading");
+
+        $settings->createCheckbox('zoomImage')
+            ->withName('Widget.zoomImageLabel')
+            ->withTooltip('Widget.zoomImageTooltip')
+            ->withDefaultValue(false);
 
         $settings->createSpacing(false, true);
 

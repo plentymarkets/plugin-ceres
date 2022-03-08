@@ -2,7 +2,9 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {% set customClass = widget.settings.customClass.mobile %}
+{% set fullWidth = widget.settings.fullWidth.mobile is same as (true) %}
 {% set appearance  = widget.settings.appearance.mobile %}
+{% set fullHeight = widget.settings.fullHeight.mobile is same as (true) %}
 {% set aspectRatio = widget.settings.aspectRatio.mobile %}
 {% set animationStyle = widget.settings.animationStyle.mobile %}
 {% set carouselId  = uid() %}
@@ -121,8 +123,7 @@
 
 {{ Twig.endif() }}
 
-<div class="widget widget-image-carousel widget-{{ appearance | default('primary') }} widget-proportional{% if aspectRatio != 'auto' %} widget-prop-{{ aspectRatio }}{% endif %}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if margin | length > 0 %} {{ margin }}{% endif %}"
-    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+<div class="widget widget-image-carousel widget-{{ appearance | default('primary') }} widget-proportional{% if aspectRatio != 'auto' and fullHeight != true %} widget-prop-{{ aspectRatio }}{% endif %}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if margin | length > 0 %} {{ margin }}{% endif %}{% if stylingClasses | length > 0 %} {{ stylingClasses }}{% endif %}{% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}{% if fullHeight %} vh-100{% endif %}{% if fullWidth %} widget-fw{% endif %}">
     <div id="image-carousel_{{ carouselId }}" class="widget-inner carousel slide{% if animationStyle == 'fade' %} carousel-fade{% endif %}" data-ride="carousel">
         <div class="carousel-inner" role="listbox" aria-label="{{ trans("Ceres::Template.itemImageCarousel") }}">
             {{ Twig.for("slide", "slides") }}
