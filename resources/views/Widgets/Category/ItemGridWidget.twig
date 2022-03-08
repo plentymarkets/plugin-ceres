@@ -18,10 +18,11 @@
 
 {% set noVat = widget.settings.noVat.mobile is same as (true) %}
 {% set grayBackground = widget.settings.grayBackground.mobile is same as (true) %}
+{% set outline = widget.settings.outline.mobile is same as (true) %}
 
 {{ Twig.set("buildUrlWithVariationId", "not ceresConfig.item.showPleaseSelect or webstoreConfig.attributeSelectDefaultOption == 0") }}
 
-<div class="widget widget-item-grid widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if noVat %} item-vat-hidden{% endif %}{% if grayBackground %} item-bg-gray{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+<div class="widget widget-item-grid widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if noVat %} item-vat-hidden{% endif %}{% if grayBackground %} item-bg-gray{% endif %}{% if outline %} btn-outline{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     {{ Twig.if( "itemList is not empty" ) }}
         <ul class="widget-inner row product-list grid">
             {{ Twig.for("item", "itemList") }}

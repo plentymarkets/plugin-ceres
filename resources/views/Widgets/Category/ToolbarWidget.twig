@@ -7,6 +7,7 @@
 {% set icon = widget.settings.icon.mobile | default("fa-sliders") %}
 {% set text = widget.settings.text.mobile %}
 {% set appearance = widget.settings.appearance.mobile | default("primary") %}
+{% set outline = widget.settings.outline.mobile is same as (true) %}
 
 {% set uid = uid() %}
 
@@ -23,7 +24,7 @@
     {% set hasCollapsableContent = true %}
 {% endif %}
 
-<div class="widget widget-toolbar list-controls{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+<div class="widget widget-toolbar list-controls{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if outline %} btn-outline{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div class="list-controls-inner{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
         <div class="d-sm-flex p-2">
 

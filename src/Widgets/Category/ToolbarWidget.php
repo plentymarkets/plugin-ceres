@@ -63,6 +63,11 @@ class ToolbarWidget extends BaseWidget
                  ->withName('Widget.toolbarAutoFormatLabel')
                  ->withTooltip('Widget.toolbarAutoFormatTooltip');
 
+        $settings->createCheckbox('outline')
+                 ->withDefaultValue(false)
+                 ->withName('Widget.toolbarOutlineLabel')
+                 ->withTooltip('Widget.toolbarOutlineTooltip');
+
         $settings->createSpacing();
 
         return $settings->toArray();
