@@ -19,6 +19,7 @@
 
 {% if fullHeight %}
     {% set aspectRatio = "auto" %}
+    {% set imageSize = "cover" %}
 {% endif %}
 
 {% set spacingSettings = widget.settings.spacing %}
@@ -107,7 +108,7 @@
 
         {% if widget.settings.lazyLoading.mobile %}
             <lazy-img
-                picture-class="img-{{ imageSize }}{% if imageSize == "contain" and fullHeight %} vh-100{% endif %}"
+                picture-class="img-{{ imageSize }}"
                 image-url="{{ Twig.print("imageUrl") }}"
                 fallback-url="{{ fallbackImagePath }}"
                 alt="{{ Twig.print("imageAltText") }}"
@@ -123,7 +124,7 @@
             <picture>
                 <source srcset="{{ Twig.print("imageUrl") }}" {{ Twig.if("imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>
                 <img
-                    class="img-{{ imageSize }}{% if imageSize == "contain" and fullHeight %} vh-100{% endif %}"
+                    class="img-{{ imageSize }}"
                     src="{{ Twig.print("fallbackUrl") }}"
                     alt="{{ Twig.print("imageAltText") }}"
                     {{ Twig.if("imageName | trim is not empty") }}title="{{ Twig.print("imageName") }}"{{ Twig.endif() }}
