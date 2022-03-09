@@ -3,6 +3,7 @@
 
 {% set opacity = (widget.settings.opacity.mobile | default(100)) / 100 %}
 {% set fullWidth = widget.settings.fullWidth.mobile is same as (true) %}
+{% set fullHeight = widget.settings.fullHeight.mobile is same as (true) %}
 {% set hugeFont = widget.settings.hugeFont.mobile is same as (true) %}
 {% set minHeightClass  = WidgetHelper.getMinHeightClass(widget.settings) %}
 {% set inlineMinHeight = WidgetHelper.getInlineMinHeight(widget.settings) %}
@@ -52,8 +53,9 @@
 
 <div class="widget widget-background d-flex parallax-img-container
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}
-    {% if minHeightClass | length > 0 %}{{ Twig.if("hasUrl or hasColor or #{ isPreview | json_encode }") }} {{ minHeightClass }}{{ Twig.endif() }}{% endif %}
+    {% if minHeightClass | length > 0 and fullHeight != true %}{{ Twig.if("hasUrl or hasColor or #{ isPreview | json_encode }") }} {{ minHeightClass }}{{ Twig.endif() }}{% endif %}
     {% if fullWidth %} widget-fw{% endif %}
+    {% if fullHeight %} vh-100{% endif %}
     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
      style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %}
         {{ Twig.if("hasUrl or hasColor or #{ isPreview | json_encode }") }}{% if inlineMinHeight | length > 0 %} {{ inlineMinHeight }}{{ Twig.endif() }}{% endif %}">

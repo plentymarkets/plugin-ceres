@@ -51,14 +51,6 @@ class DefaultHeaderPreset implements ContentPreset
             ->withSetting("forwardToSingleItem", $config->search->forwardToSingleItem)
             ->withSetting('customClass', '');
 
-        $companyLogo = $config->header->companyLogo;
-        if ( strpos($companyLogo, 'http') !== 0 && strpos($companyLogo, 'layout/') !== 0 )
-        {
-            /** @var Application $app */
-            $app = pluginApp(Application::class);
-            $companyLogo = $app->getUrlPath('Ceres') . '/' . $companyLogo;
-        }
-
         $this->topBarWidget->createChild('suggestions', 'Ceres::SearchSuggestionItemWidget')
             ->withSetting('customClass', '');
 
@@ -69,7 +61,7 @@ class DefaultHeaderPreset implements ContentPreset
             ->withSetting("megaMenuMaxItems.stage1", $config->header->megamenuItemsStage1)
             ->withSetting("megaMenuMaxItems.stage2", $config->header->megamenuItemsStage2)
             ->withSetting("megaMenuMaxItems.stage3", $config->header->megamenuItemsStage3)
-            ->withSetting("companyLogoUrl", $companyLogo)
+            ->withSetting("companyLogoUrl", $config->header->companyLogo)
             ->withSetting('customClass', '');
 
         $preset->createWidget("Ceres::BreadcrumbWidget")
