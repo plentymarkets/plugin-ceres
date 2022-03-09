@@ -17,7 +17,6 @@ use Plenty\Plugin\Translation\Translator;
  * - ItemImageWidget
  * - BackgroundWidget
  * - InlineTextWidget
- * - SeparatorWidget
  * - ItemPriceWidget
  * - ItemAvailabilityWidget
  * - AddToWishListWidget
@@ -74,10 +73,8 @@ class ItemSetPreset implements ContentPreset
         $this->createSetItemBackgroundWidget();
 
         $this->createNameHeader();
-        $this->createNameSeparatorWidget();
         $this->createManufacturer();
         $this->createSetDescriptionWidget();
-        $this->createSetDescriptionSeparatorWidget();
         $this->createSetPriceWidget();
         $this->createItemAvailabilityWidget();
         $this->createItemWishListWidget();
@@ -179,11 +176,6 @@ class ItemSetPreset implements ContentPreset
             ->withSetting('appearance','none');
     }
 
-    private function createNameSeparatorWidget()
-    {
-        $this->setItemBackgroundWidget->createChild('background', 'Ceres::SeparatorWidget')
-            ->withSetting('customClass','');
-    }
 
     private function createManufacturer()
     {
@@ -220,11 +212,6 @@ class ItemSetPreset implements ContentPreset
             ->withSetting('text', $this->getShopBuilderDataFieldProvider('TextsDataFieldProvider::description',array('texts.description', null, null)));
     }
 
-    private function createSetDescriptionSeparatorWidget()
-    {
-        $this->setItemBackgroundWidget->createChild('background', 'Ceres::SeparatorWidget')
-            ->withSetting('customClass','');
-    }
 
     private function createSetPriceWidget()
     {
