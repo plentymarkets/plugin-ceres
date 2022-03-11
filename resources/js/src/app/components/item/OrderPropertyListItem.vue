@@ -40,7 +40,8 @@
             <label class="form-check-label text-appearance d-flex"
                    :for="'check' + _uid"
                    v-tooltip data-toggle="tooltip"
-                   :title="property.names.description">
+                   :title="property.names.description"
+                    :data-testing="'order-property-label-' + inputType">
                 <span class="text-wrap">{{ property.names.name }}</span>
                 <strong class="ml-1">
                     <template v-if="surcharge > 0">(+ {{ surcharge | currency }})</template><span> {{ footnotes }}</span>

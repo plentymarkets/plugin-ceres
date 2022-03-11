@@ -516,6 +516,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
@@ -1207,7 +1208,8 @@ var render = function() {
                   attrs: {
                     for: "check" + _vm._uid,
                     "data-toggle": "tooltip",
-                    title: _vm.property.names.description
+                    title: _vm.property.names.description,
+                    "data-testing": "order-property-label-" + _vm.inputType
                   }
                 },
                 [
