@@ -14,7 +14,13 @@
 {% set style            = widget.settings.style.mobile %}
 {% set customCaption    = widget.settings.customCaption.mobile %}
 {% set preloadImage     = widget.settings.preloadImage.mobile %}
+{% set fullHeight = widget.settings.fullHeight.mobile is same as (true) %}
 {% set zoomImage = widget.settings.zoomImage.mobile is same as (true) %}
+
+{% if fullHeight %}
+    {% set aspectRatio = "auto" %}
+    {% set imageSize = "cover" %}
+{% endif %}
 
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlineMargin = WidgetHelper.getInlineSpacings(spacingSettings,"", spacingSettings.customMargin.mobile) %}
@@ -83,8 +89,9 @@
 {{ Twig.endif() }}
 
 <div class="widget widget-image-box widget-image-box-{{ style }} widget-{{ appearance | default('primary') }}
-    {% if aspectRatio != 'retain' %} widget-proportional widget-prop-{{ aspectRatio }}{% else %} widget-retain-aspect-ratio{% endif %}
+    {% if aspectRatio != 'retain' %} widget-proportional widget-prop-{{ aspectRatio }}{% else %} widget-retain-aspect-ratio {% endif %}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}
+    {% if fullHeight %} vh-100{% endif %}
     {% if margin | length > 0 %} {{ margin }}{% endif %}
     {% if zoomImage %} mouseover-zoom{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>

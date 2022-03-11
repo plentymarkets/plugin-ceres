@@ -42,26 +42,27 @@ class ImageCarouselWidget extends BaseWidget
         $settings->createCustomClass();
         $settings->createAppearance();
 
+        $settings->createSelect("animationStyle")
+        ->withDefaultValue("standard")
+        ->withName("Widget.imageCarouselAnimationStyleLabel")
+        ->withTooltip("Widget.imageCarouselAnimationStyleTooltip")
+        ->withListBoxValues(
+            ValueListFactory::make()
+            ->addEntry("standard", "Widget.imageCarouselAnimationStyleSlide")
+            ->addEntry("fade", "Widget.imageCarouselAnimationStyleFade")
+            ->toArray()
+        );
+
         $settings->createCheckbox("fullWidth")
             ->withDefaultValue(false)
             ->withName('Widget.backgroundFullWidthLabel')
             ->withTooltip('Widget.backgroundFullWidthTooltip');
-
-        $settings->createSelect("animationStyle")
-            ->withDefaultValue("standard")
-            ->withName("Widget.imageCarouselAnimationStyleLabel")
-            ->withTooltip("Widget.imageCarouselAnimationStyleTooltip")
-            ->withListBoxValues(
-                ValueListFactory::make()
-                    ->addEntry("standard", "Widget.imageCarouselAnimationStyleSlide")
-                    ->addEntry("fade", "Widget.imageCarouselAnimationStyleFade")
-                    ->toArray()
-            );
-
+        
         $settings->createSelect("aspectRatio")
             ->withDefaultValue("auto")
             ->withName("Widget.imageCarouselAspectRatioLabel")
             ->withTooltip("Widget.imageCarouselAspectRatioTooltip")
+            ->withCondition("fullHeight !== true")
             ->withListBoxValues(
                 ValueListFactory::make()
                     ->addEntry("auto", "Widget.imageCarouselAspectRatioAuto")
@@ -74,6 +75,11 @@ class ImageCarouselWidget extends BaseWidget
                     ->addEntry("1-3", "Widget.imageCarouselAspectRatioOneToThree")
                     ->toArray()
             );
+
+        $settings->createCheckbox('fullHeight')
+            ->withDefaultValue(false)
+            ->withName('Widget.imageCarouselFullHeightLabel')
+            ->withTooltip('Widget.imageCarouselFullHeightTooltip');
 
         $settings->createCheckbox("lazyLoading")
             ->withName("Widget.imageCarouselLazyLoadingName")

@@ -12359,6 +12359,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -12398,7 +12399,7 @@ __webpack_require__.r(__webpack_exports__);
       }) + "</span></a>";
       return this.$translate("Ceres::Template.newsletterAcceptPrivacyPolicy", {
         "policy": link
-      });
+      }) + this.$translate("Ceres::Template.newsletterIsRequieredFootnote");
     }
   },
   methods: {
@@ -53902,6 +53903,7 @@ var render = function() {
                 ) +
                 '</label> <input type="text" data-validate-ref="/[.:\\/\\d]/g"' +
                 _vm._ssrAttr("id", "first-name-input_" + _vm._uid) +
+                ' data-testing="nl-first-name"' +
                 _vm._ssrAttr("value", _vm.firstName) +
                 "></div></div>"
               : "<!---->") +
@@ -53915,6 +53917,7 @@ var render = function() {
                   ) +
                   '</label> <input type="text" data-validate-ref="/[.:\\/\\d]/g"' +
                   _vm._ssrAttr("id", "last-name-input_" + _vm._uid) +
+                  ' data-testing="nl-last-name"' +
                   _vm._ssrAttr("value", _vm.lastName) +
                   "></div></div>"
                 : "<!---->") +
@@ -53922,10 +53925,17 @@ var render = function() {
               _vm._ssrAttr("for", "email-input-id_" + _vm._uid) +
               ">" +
               _vm._ssrEscape(
-                _vm._s(_vm.$translate("Ceres::Template.newsletterEmail")) + " *"
+                _vm._s(_vm.$translate("Ceres::Template.newsletterEmail")) +
+                  " " +
+                  _vm._s(
+                    _vm.$translate(
+                      "Ceres::Template.newsletterIsRequieredFootnote"
+                    )
+                  )
               ) +
               '</label> <input type="email" autocomplete="email"' +
               _vm._ssrAttr("id", "email-input-id_" + _vm._uid) +
+              ' data-testing="nl-mail"' +
               _vm._ssrAttr("value", _vm.email) +
               '></div> <input autocomplete="none" type="text" name="username" tabindex="-1"' +
               _vm._ssrAttr("value", _vm.honeypot) +
@@ -53933,7 +53943,7 @@ var render = function() {
               (_vm.showPrivacyPolicyCheckbox
                 ? '<div class="col-12"><div data-validate class="form-check small"><input type="checkbox"' +
                   _vm._ssrAttr("id", "privacy-policy-accept-id_" + _vm._uid) +
-                  ' name="privacy-policy-accept"' +
+                  ' name="privacy-policy-accept" data-testing="nl-policy"' +
                   _vm._ssrAttr(
                     "checked",
                     Array.isArray(_vm.privacyPolicyValue)
@@ -53953,6 +53963,7 @@ var render = function() {
               _vm._ssrNode(
                 '<button type="button"' +
                   _vm._ssrAttr("disabled", _vm.isDisabled) +
+                  ' data-testing="nl-send"' +
                   _vm._ssrClass(
                     "btn btn-block btn-primary btn-appearance",
                     _vm.buttonSizeClass
@@ -53978,7 +53989,22 @@ var render = function() {
                 2
               )
             ])
-          ])
+          ]),
+          _vm._ssrNode(
+            ' <div class="col-12 text-right small mt-2">' +
+              _vm._ssrEscape(
+                _vm._s(
+                  _vm.$translate(
+                    "Ceres::Template.newsletterIsRequieredFootnote"
+                  )
+                ) +
+                  " " +
+                  _vm._s(
+                    _vm.$translate("Ceres::Template.newsletterIsRequiered")
+                  )
+              ) +
+              "</div>"
+          )
         ],
         2
       ),
@@ -54037,7 +54063,7 @@ var render = function() {
                 _vm._ssrEscape(
                   _vm._s(_vm.$translate("Ceres::Template.newsletterEmail"))
                 ) +
-                '</label> <input type="email" name="email" autocomplete="email" id="email-input-id"' +
+                '</label> <input type="email" name="email" autocomplete="email" id="email-input-id" data-testing="unsub-nl-mail"' +
                 _vm._ssrAttr("value", _vm.email) +
                 ' class="form-control"></div> <input type="text" name="username" autocomplete="new-password" tabindex="-1"' +
                 _vm._ssrAttr("value", _vm.honeypot) +
@@ -54047,6 +54073,7 @@ var render = function() {
               _vm._ssrNode(
                 '<button type="submit"' +
                   _vm._ssrAttr("disabled", _vm.isDisabled) +
+                  ' data-testing="unsub-nl-send"' +
                   _vm._ssrClass(
                     "btn btn-primary btn-appearance float-right btn-medium btn-xs-max-width",
                     _vm.buttonSizeClass
@@ -86638,9 +86665,7 @@ function _validateElement(elem) {
       if (_validateInput($formControl, validationKey.replace("!", ""))) {
         hasError = true;
       }
-    }
-
-    if (!_validateInput($formControl, validationKey)) {
+    } else if (!_validateInput($formControl, validationKey)) {
       hasError = true;
     }
 

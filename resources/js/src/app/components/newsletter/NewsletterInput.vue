@@ -4,21 +4,21 @@
             <div class="col-6" v-if="showNameInputs">
                 <div class="input-unit" data-validate="!regex">
                     <label :for="'first-name-input_' + _uid">{{ $translate("Ceres::Template.newsletterFirstName") }}</label>
-                    <input type="text" data-validate-ref="/[.:\/\d]/g" :id="'first-name-input_' + _uid" v-model="firstName">
+                    <input type="text" data-validate-ref="/[.:\/\d]/g" :id="'first-name-input_' + _uid" v-model="firstName" data-testing="nl-first-name">
                 </div>
             </div>
             <div class="col-6 pl-0" v-if="showNameInputs">
                 <div class="input-unit" data-validate="!regex">
                     <label :for="'last-name-input_' + _uid">{{ $translate("Ceres::Template.newsletterLastName") }}</label>
-                    <input type="text" data-validate-ref="/[.:\/\d]/g" :id="'last-name-input_' + _uid" v-model="lastName">
+                    <input type="text" data-validate-ref="/[.:\/\d]/g" :id="'last-name-input_' + _uid" v-model="lastName"  data-testing="nl-last-name">
                 </div>
             </div>
 
             <div class="col-12">
                 <div class="input-group">
                     <div class="input-unit" data-validate="mail">
-                        <label :for="'email-input-id_' + _uid">{{ $translate("Ceres::Template.newsletterEmail") }} *</label>
-                        <input @focus="loadRecaptcha = true" type="email" autocomplete="email" :id="'email-input-id_' + _uid" v-model="email">
+                        <label :for="'email-input-id_' + _uid">{{ $translate("Ceres::Template.newsletterEmail") }} {{ $translate("Ceres::Template.newsletterIsRequieredFootnote") }}</label>
+                        <input @focus="loadRecaptcha = true" type="email" autocomplete="email" :id="'email-input-id_' + _uid" v-model="email" data-testing="nl-mail">
                     </div>
                     <input autocomplete="none" class="honey" type="text" name="username" tabindex="-1" v-model="honeypot">
                 </div>
@@ -26,20 +26,21 @@
 
             <div class="col-12" v-if="showPrivacyPolicyCheckbox">
                 <div class="form-check small" data-validate>
-                    <input type="checkbox" class="form-check-input" :id="'privacy-policy-accept-id_' + _uid" name="privacy-policy-accept" v-model="privacyPolicyValue">
-                    <label :for="'privacy-policy-accept-id_' + _uid" class="form-check-label" v-html="privacyPolicyText">
-                    </label>
+                    <input type="checkbox" class="form-check-input" :id="'privacy-policy-accept-id_' + _uid" name="privacy-policy-accept" v-model="privacyPolicyValue" data-testing="nl-policy">
+                    <label :for="'privacy-policy-accept-id_' + _uid" class="form-check-label" v-html="privacyPolicyText"></label>
                 </div>
             </div>
 
             <div class="col-12 mt-3">
                 <div class="input-group-btn">
-                    <button type="button" class="btn btn-block btn-primary btn-appearance" @click="validateData" :disabled="isDisabled" :class="buttonSizeClass">
+                    <button type="button" class="btn btn-block btn-primary btn-appearance" @click="validateData" :disabled="isDisabled" :class="buttonSizeClass" data-testing="nl-send">
                         <icon icon="paper-plane-o" :loading="isDisabled"></icon>
                         {{ $translate("Ceres::Template.newsletterSubscribeButtonLabel") }}
                     </button>
                 </div>
             </div>
+
+            <div class="col-12 text-right small mt-2">{{ $translate("Ceres::Template.newsletterIsRequieredFootnote") }} {{ $translate("Ceres::Template.newsletterIsRequiered") }}</div>
         </div>
         <recaptcha v-if="!!$ceres.config.global.googleRecaptchaApiKey && loadRecaptcha"></recaptcha>
     </form>
@@ -94,7 +95,7 @@ export default {
                 + this.$translate("Ceres::Template.checkoutPrivacyPolicy", {"hyphen": "&shy;"})
                 + "</span></a>";
 
-            return this.$translate("Ceres::Template.newsletterAcceptPrivacyPolicy", {"policy": link});
+            return this.$translate("Ceres::Template.newsletterAcceptPrivacyPolicy", {"policy": link}) + this.$translate("Ceres::Template.newsletterIsRequieredFootnote");
         }
     },
 
