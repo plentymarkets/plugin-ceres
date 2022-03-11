@@ -18,7 +18,7 @@
         </div>
 
         <div v-else-if="inputType === 'checkbox' || inputType === 'radio'" class="form-check" :class="{ 'error': hasError }">
-            <input v-if="inputType === 'checkbox'"
+            <input v-if="inputType === 'checkbox' && !(property.isRequired && property.isPreSelected)"
                    type="checkbox"
                    :name="group ? group.id : 'check' + _uid"
                    :id="'check' + _uid"
@@ -27,7 +27,7 @@
                    @change="onInputValueChanged($event.target.checked)"
                    class="form-check-input"
                    data-testing="order-property-input-checkbox">
-            <input v-else
+            <input v-else-if="inputType === 'radio'"
                    type="radio"
                    :name="group ? group.id : 'check' + _uid"
                    :id="'check' + _uid"
@@ -230,6 +230,28 @@ export default {
 
         footnotes()
         {
+            if(this.surcharge <= 0){
+                if(this.property.isRequired && !this.property.isPreSelected)
+                {
+                    return this.$translate("Ceres::Template.singleItemFootnote2");
+                }
+            }
+
+            else if(this.surcharge > 0){
+                if(this.property.isRequired && !this.property.isPreSelected){
+                    return this.$translate("Ceres::Template.singleItemFootnote12");
+                }
+                else {
+                    return this.$translate("Ceres::Template.singleItemFootnote1");
+                }
+            }
+
+            /* if(this.surcharge <= 0 && this.property.isRequired && this.property.isPreSelected){
+                return '';
+            }
+            if(this.surcharge > 0 && this.property.isRequired && this.property.isPreSelected){
+                return this.$translate("Ceres::Template.singleItemFootnote1");
+            }
             if(this.surcharge > 0 && this.property.isRequired){
                 return this.$translate("Ceres::Template.singleItemFootnote12");
             }
@@ -238,7 +260,7 @@ export default {
             }
             if(this.surcharge > 0 && !this.property.isRequired){
                 return this.$translate("Ceres::Template.singleItemFootnote1");
-            }
+            } */
         },
 
         selectedDescription()
