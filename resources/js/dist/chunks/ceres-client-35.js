@@ -9,6 +9,17 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0__);
+
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -93,6 +104,11 @@ __webpack_require__.r(__webpack_exports__);
     showDynamicPrice: function showDynamicPrice() {
       var state = this.$store.state.items[this.itemId];
       return App.config.item.showPleaseSelect && App.isCheapestSorting && state.variationSelect && !state.variationSelect.isVariationSelected && (state.pleaseSelectVariationId === this.currentVariation.variation.id || state.pleaseSelectVariationId === 0);
+    },
+    propertiesWithAdditionalCostsVisible: function propertiesWithAdditionalCostsVisible() {
+      return this.currentVariation.properties.filter(function (property) {
+        return property.property && property.property.isShownOnItemPage && property.property.isShownAsAdditionalCosts && !property.property.isOderProperty;
+      });
     }
   }
 });
@@ -209,6 +225,53 @@ var render = function() {
         ])
       ]
     ),
+    _vm._v(" "),
+    _vm.currentVariation.properties && _vm.currentVariation.properties.length
+      ? _c(
+          "ul",
+          { staticClass: "text-muted pl-0 list-unstyled" },
+          _vm._l(_vm.propertiesWithAdditionalCostsVisible, function(property) {
+            return _c("li", { key: property.propertyId }, [
+              _c(
+                "span",
+                { staticClass: "d-block" },
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(property.property.names.name) +
+                      " "
+                  ),
+                  _vm.$options.filters.propertySurcharge(
+                    _vm.currentVariation.properties,
+                    property.propertyId
+                  ) > 0
+                    ? [
+                        _vm._v(
+                          "(" +
+                            _vm._s(
+                              _vm.$translate("Ceres::Template.basketPlusAbbr")
+                            ) +
+                            " " +
+                            _vm._s(
+                              _vm._f("currency")(
+                                _vm._f("propertySurcharge")(
+                                  _vm.currentVariation.properties,
+                                  property.propertyId
+                                )
+                              )
+                            ) +
+                            ")"
+                        )
+                      ]
+                    : _vm._e()
+                ],
+                2
+              )
+            ])
+          }),
+          0
+        )
+      : _vm._e(),
     _vm._v(" "),
     _vm.currentVariation.unit
       ? _c(

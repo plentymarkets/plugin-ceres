@@ -124,6 +124,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -220,6 +225,11 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
         return !!_this2.variation.properties.find(function (prop) {
           return prop.propertyId == property.propertyId;
         });
+      });
+    },
+    propertiesWithAdditionalCostsVisible: function propertiesWithAdditionalCostsVisible() {
+      return this.variation.properties.filter(function (property) {
+        return property.property && property.property.isShownAtCheckout && property.property.isShownAsAdditionalCosts && !property.property.isOderProperty;
       });
     }
   }),
@@ -355,7 +365,8 @@ var render = function() {
                           ])
                         }),
                         _vm._v(" "),
-                        _vm.shownOrderProperties.length
+                        _vm.shownOrderProperties.length ||
+                        _vm.propertiesWithAdditionalCostsVisible.length
                           ? _c("div", { staticClass: "small" }, [
                               _c(
                                 "div",
@@ -374,71 +385,138 @@ var render = function() {
                               _c(
                                 "ul",
                                 { staticClass: "ml-1 pl-3" },
-                                _vm._l(_vm.shownOrderProperties, function(
-                                  property
-                                ) {
-                                  return _c(
-                                    "li",
-                                    { key: property.propertyId },
-                                    [
-                                      _c("span", { staticClass: "d-block" }, [
-                                        _c(
-                                          "strong",
-                                          {
-                                            class: {
-                                              colon: property.type.length > 0
-                                            }
-                                          },
-                                          [
-                                            _vm._v(_vm._s(property.name) + " "),
-                                            _vm.$options.filters.propertySurcharge(
-                                              _vm.basketItem.variation.data
-                                                .properties,
-                                              property.propertyId
-                                            ) > 0
-                                              ? [
+                                [
+                                  _vm._l(
+                                    _vm.propertiesWithAdditionalCostsVisible,
+                                    function(property) {
+                                      return _c(
+                                        "li",
+                                        { key: property.propertyId },
+                                        [
+                                          _c(
+                                            "span",
+                                            { staticClass: "d-block" },
+                                            [
+                                              _c(
+                                                "strong",
+                                                [
                                                   _vm._v(
-                                                    "(" +
-                                                      _vm._s(
-                                                        _vm.$translate(
-                                                          "Ceres::Template.singleItemIncludeAbbr"
+                                                    _vm._s(
+                                                      property.property.names
+                                                        .name
+                                                    ) + " "
+                                                  ),
+                                                  _vm.$options.filters.propertySurcharge(
+                                                    _vm.basketItem.variation
+                                                      .data.properties,
+                                                    property.propertyId
+                                                  ) > 0
+                                                    ? [
+                                                        _vm._v(
+                                                          "(" +
+                                                            _vm._s(
+                                                              _vm.$translate(
+                                                                "Ceres::Template.singleItemIncludeAbbr"
+                                                              )
+                                                            ) +
+                                                            " " +
+                                                            _vm._s(
+                                                              _vm._f(
+                                                                "currency"
+                                                              )(
+                                                                _vm._f(
+                                                                  "propertySurcharge"
+                                                                )(
+                                                                  _vm.basketItem
+                                                                    .variation
+                                                                    .data
+                                                                    .properties,
+                                                                  property.propertyId
+                                                                )
+                                                              )
+                                                            ) +
+                                                            ")"
                                                         )
-                                                      ) +
-                                                      " " +
-                                                      _vm._s(
-                                                        _vm._f("currency")(
-                                                          _vm._f(
-                                                            "propertySurcharge"
-                                                          )(
-                                                            _vm.basketItem
-                                                              .variation.data
-                                                              .properties,
-                                                            property.propertyId
+                                                      ]
+                                                    : _vm._e()
+                                                ],
+                                                2
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    }
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.shownOrderProperties, function(
+                                    property
+                                  ) {
+                                    return _c(
+                                      "li",
+                                      { key: property.propertyId },
+                                      [
+                                        _c("span", { staticClass: "d-block" }, [
+                                          _c(
+                                            "strong",
+                                            {
+                                              class: {
+                                                colon: property.type.length > 0
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(property.name) + " "
+                                              ),
+                                              _vm.$options.filters.propertySurcharge(
+                                                _vm.basketItem.variation.data
+                                                  .properties,
+                                                property.propertyId
+                                              ) > 0
+                                                ? [
+                                                    _vm._v(
+                                                      "(" +
+                                                        _vm._s(
+                                                          _vm.$translate(
+                                                            "Ceres::Template.singleItemIncludeAbbr"
                                                           )
-                                                        )
-                                                      ) +
-                                                      ") "
-                                                  )
-                                                ]
-                                              : _vm._e()
-                                          ],
-                                          2
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          [
-                                            _c("order-property-value", {
-                                              attrs: { property: property }
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      ])
-                                    ]
-                                  )
-                                }),
-                                0
+                                                        ) +
+                                                        " " +
+                                                        _vm._s(
+                                                          _vm._f("currency")(
+                                                            _vm._f(
+                                                              "propertySurcharge"
+                                                            )(
+                                                              _vm.basketItem
+                                                                .variation.data
+                                                                .properties,
+                                                              property.propertyId
+                                                            )
+                                                          )
+                                                        ) +
+                                                        ") "
+                                                    )
+                                                  ]
+                                                : _vm._e()
+                                            ],
+                                            2
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "span",
+                                            [
+                                              _c("order-property-value", {
+                                                attrs: { property: property }
+                                              })
+                                            ],
+                                            1
+                                          )
+                                        ])
+                                      ]
+                                    )
+                                  })
+                                ],
+                                2
                               )
                             ])
                           : _vm._e()

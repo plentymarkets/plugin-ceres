@@ -96,22 +96,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.symbol.description.js */ "./node_modules/core-js/modules/es.symbol.description.js");
 /* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string.js */ "./node_modules/core-js/modules/es.regexp.to-string.js");
-/* harmony import */ var core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
-/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_parse_int_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.parse-int.js */ "./node_modules/core-js/modules/es.parse-int.js");
-/* harmony import */ var core_js_modules_es_parse_int_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_parse_int_js__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.array.includes.js */ "./node_modules/core-js/modules/es.array.includes.js");
-/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.string.includes.js */ "./node_modules/core-js/modules/es.string.includes.js");
-/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_parse_int_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.parse-int.js */ "./node_modules/core-js/modules/es.parse-int.js");
+/* harmony import */ var core_js_modules_es_parse_int_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_parse_int_js__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string.js */ "./node_modules/core-js/modules/es.regexp.to-string.js");
+/* harmony import */ var core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.array.includes.js */ "./node_modules/core-js/modules/es.array.includes.js");
+/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.string.includes.js */ "./node_modules/core-js/modules/es.string.includes.js");
+/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
 /* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_13__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
@@ -170,6 +170,11 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -443,6 +448,22 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
     // eslint-disable-next-line complexity
     isMoreButtonVisible: function isMoreButtonVisible() {
       return this.isDataFieldVisible("basket.item.item_id") && this.basketItem.variation.data.item.id || this.isDataFieldVisible("basket.item.customNumber") && this.basketItem.variation.data.variation.number || this.isDataFieldVisible("basket.item.availability") && this.basketItem.variation.data.variation.availability.names.name || this.isDataFieldVisible("basket.item.description_long") && this.basketItem.variation.data.texts.description || this.isDataFieldVisible("basket.item.description_short") && this.basketItem.variation.data.texts.shortDescription;
+    },
+    propertiesWithAdditionalCostsVisible: function propertiesWithAdditionalCostsVisible() {
+      return this.basketItem.variation.data.properties.filter(function (property) {
+        return property.property && property.property.isShownAtCheckout && property.property.isShownAsAdditionalCosts && !property.property.isOderProperty;
+      });
+    },
+    visibleProperties: function visibleProperties() {
+      var _this = this;
+
+      return this.basketItem.basketItemOrderParams.filter(function (orderParam) {
+        var matchingProperty = _this.basketItem.variation.data.properties.find(function (property) {
+          return property.property.id === parseInt(orderParam.propertyId);
+        });
+
+        return matchingProperty && matchingProperty.property.isShownAtCheckout;
+      });
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_25__["mapState"])({
     isBasketLoading: function isBasketLoading(state) {
@@ -460,17 +481,17 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
      * Delete item from basket
      */
     deleteItem: function deleteItem() {
-      var _this = this;
+      var _this2 = this;
 
       if (!this.waiting && !this.waitingForDelete && !this.isBasketLoading) {
         this.waitingForDelete = true;
         this.$store.dispatch("removeBasketItem", this.basketItem.id).then(function (response) {
           document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", {
-            detail: _this.basketItem
+            detail: _this2.basketItem
           }));
-          _this.waitingForDelete = false;
+          _this2.waitingForDelete = false;
         }, function (error) {
-          _this.waitingForDelete = false;
+          _this2.waitingForDelete = false;
         });
       }
     },
@@ -480,7 +501,7 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
      * @param quantity
      */
     updateQuantity: function updateQuantity(quantity) {
-      var _this2 = this;
+      var _this3 = this;
 
       if (this.basketItem.quantity !== quantity) {
         this.waiting = true;
@@ -491,14 +512,14 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
           quantity: quantity
         }).then(function (response) {
           document.dispatchEvent(new CustomEvent("afterBasketItemQuantityUpdated", {
-            detail: _this2.basketItem
+            detail: _this3.basketItem
           }));
-          _this2.waiting = false;
+          _this3.waiting = false;
         }, function (error) {
-          _this2.basketItem.quantity = origQty;
+          _this3.basketItem.quantity = origQty;
 
-          if (_this2.isPreview) {
-            _this2.$store.dispatch("addBasketNotification", {
+          if (_this3.isPreview) {
+            _this3.$store.dispatch("addBasketNotification", {
               type: "error",
               message: _services_TranslationService__WEBPACK_IMPORTED_MODULE_23__["default"].translate("Ceres::Template." + _exceptions_ExceptionMap__WEBPACK_IMPORTED_MODULE_22__["default"].get(error.data.exceptionCode.toString()), error.data.placeholder)
             });
@@ -506,20 +527,9 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
             NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_23__["default"].translate("Ceres::Template." + _exceptions_ExceptionMap__WEBPACK_IMPORTED_MODULE_22__["default"].get(error.data.exceptionCode.toString()), error.data.placeholder)).closeAfter(5000);
           }
 
-          _this2.waiting = false;
+          _this3.waiting = false;
         });
       }
-    },
-    isPropertyVisible: function isPropertyVisible(propertyId) {
-      var property = this.basketItem.variation.data.properties.find(function (property) {
-        return property.property.id === parseInt(propertyId);
-      });
-
-      if (property) {
-        return property.property.isShownAtCheckout;
-      }
-
-      return false;
     },
     isDataFieldVisible: function isDataFieldVisible(value) {
       return this.basketDetailsData.includes(value);
@@ -1125,14 +1135,16 @@ var render = function() {
                   })
                 : _vm._e(),
               _vm._v(" "),
-              _vm.basketItem.basketItemOrderParams &&
-              _vm.basketItem.basketItemOrderParams.length
+              (_vm.basketItem.basketItemOrderParams &&
+                _vm.basketItem.basketItemOrderParams.length) ||
+              (_vm.basketItem.variation.data.properties &&
+                _vm.basketItem.variation.data.properties.length)
                 ? _c("div", { staticClass: "small" }, [
                     _c("div", { staticClass: "font-weight-bold my-1" }, [
                       _vm._v(
                         _vm._s(
                           _vm.$translate(
-                            "Ceres::Template.basketAdditionalOptions"
+                            "Ceres::Template.basketAdditionalCosts"
                           )
                         ) + ":"
                       )
@@ -1141,26 +1153,54 @@ var render = function() {
                     _c(
                       "ul",
                       { staticClass: "ml-1 pl-3" },
-                      _vm._l(_vm.basketItem.basketItemOrderParams, function(
-                        property
-                      ) {
-                        return _c(
-                          "li",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.isPropertyVisible(
-                                  property.propertyId
-                                ),
-                                expression:
-                                  "isPropertyVisible(property.propertyId)"
-                              }
-                            ],
-                            key: property.propertyId
-                          },
-                          [
+                      [
+                        _vm._l(
+                          _vm.propertiesWithAdditionalCostsVisible,
+                          function(property) {
+                            return _c("li", { key: property.propertyId }, [
+                              _c("span", { staticClass: "d-block" }, [
+                                _c(
+                                  "strong",
+                                  [
+                                    _vm._v(
+                                      _vm._s(property.property.names.name) + " "
+                                    ),
+                                    _vm.$options.filters.propertySurcharge(
+                                      _vm.basketItem.variation.data.properties,
+                                      property.propertyId
+                                    ) > 0
+                                      ? [
+                                          _vm._v(
+                                            "(" +
+                                              _vm._s(
+                                                _vm.$translate(
+                                                  "Ceres::Template.basketPlusAbbr"
+                                                )
+                                              ) +
+                                              " " +
+                                              _vm._s(
+                                                _vm._f("currency")(
+                                                  _vm._f("propertySurcharge")(
+                                                    _vm.basketItem.variation
+                                                      .data.properties,
+                                                    property.propertyId
+                                                  )
+                                                )
+                                              ) +
+                                              ")"
+                                          )
+                                        ]
+                                      : _vm._e()
+                                  ],
+                                  2
+                                )
+                              ])
+                            ])
+                          }
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.visibleProperties, function(property) {
+                          return _c("li", { key: property.propertyId }, [
                             _c("span", { staticClass: "d-block" }, [
                               _c(
                                 "strong",
@@ -1207,10 +1247,10 @@ var render = function() {
                                 1
                               )
                             ])
-                          ]
-                        )
-                      }),
-                      0
+                          ])
+                        })
+                      ],
+                      2
                     )
                   ])
                 : _vm._e(),

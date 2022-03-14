@@ -230,6 +230,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -326,6 +331,11 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
         return !!_this2.variation.properties.find(function (prop) {
           return prop.propertyId == property.propertyId;
         });
+      });
+    },
+    propertiesWithAdditionalCostsVisible: function propertiesWithAdditionalCostsVisible() {
+      return this.variation.properties.filter(function (property) {
+        return property.property && property.property.isShownAtCheckout && property.property.isShownAsAdditionalCosts && !property.property.isOderProperty;
       });
     }
   }),
@@ -1713,22 +1723,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.symbol.description.js */ "./node_modules/core-js/modules/es.symbol.description.js");
 /* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string.js */ "./node_modules/core-js/modules/es.regexp.to-string.js");
-/* harmony import */ var core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
-/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_parse_int_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.parse-int.js */ "./node_modules/core-js/modules/es.parse-int.js");
-/* harmony import */ var core_js_modules_es_parse_int_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_parse_int_js__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.array.includes.js */ "./node_modules/core-js/modules/es.array.includes.js");
-/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.string.includes.js */ "./node_modules/core-js/modules/es.string.includes.js");
-/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_parse_int_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.parse-int.js */ "./node_modules/core-js/modules/es.parse-int.js");
+/* harmony import */ var core_js_modules_es_parse_int_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_parse_int_js__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string.js */ "./node_modules/core-js/modules/es.regexp.to-string.js");
+/* harmony import */ var core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.array.includes.js */ "./node_modules/core-js/modules/es.array.includes.js");
+/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.string.includes.js */ "./node_modules/core-js/modules/es.string.includes.js");
+/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
 /* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_13__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
@@ -1787,6 +1797,11 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2060,6 +2075,22 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
     // eslint-disable-next-line complexity
     isMoreButtonVisible: function isMoreButtonVisible() {
       return this.isDataFieldVisible("basket.item.item_id") && this.basketItem.variation.data.item.id || this.isDataFieldVisible("basket.item.customNumber") && this.basketItem.variation.data.variation.number || this.isDataFieldVisible("basket.item.availability") && this.basketItem.variation.data.variation.availability.names.name || this.isDataFieldVisible("basket.item.description_long") && this.basketItem.variation.data.texts.description || this.isDataFieldVisible("basket.item.description_short") && this.basketItem.variation.data.texts.shortDescription;
+    },
+    propertiesWithAdditionalCostsVisible: function propertiesWithAdditionalCostsVisible() {
+      return this.basketItem.variation.data.properties.filter(function (property) {
+        return property.property && property.property.isShownAtCheckout && property.property.isShownAsAdditionalCosts && !property.property.isOderProperty;
+      });
+    },
+    visibleProperties: function visibleProperties() {
+      var _this = this;
+
+      return this.basketItem.basketItemOrderParams.filter(function (orderParam) {
+        var matchingProperty = _this.basketItem.variation.data.properties.find(function (property) {
+          return property.property.id === parseInt(orderParam.propertyId);
+        });
+
+        return matchingProperty && matchingProperty.property.isShownAtCheckout;
+      });
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_25__["mapState"])({
     isBasketLoading: function isBasketLoading(state) {
@@ -2077,17 +2108,17 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
      * Delete item from basket
      */
     deleteItem: function deleteItem() {
-      var _this = this;
+      var _this2 = this;
 
       if (!this.waiting && !this.waitingForDelete && !this.isBasketLoading) {
         this.waitingForDelete = true;
         this.$store.dispatch("removeBasketItem", this.basketItem.id).then(function (response) {
           document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", {
-            detail: _this.basketItem
+            detail: _this2.basketItem
           }));
-          _this.waitingForDelete = false;
+          _this2.waitingForDelete = false;
         }, function (error) {
-          _this.waitingForDelete = false;
+          _this2.waitingForDelete = false;
         });
       }
     },
@@ -2097,7 +2128,7 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
      * @param quantity
      */
     updateQuantity: function updateQuantity(quantity) {
-      var _this2 = this;
+      var _this3 = this;
 
       if (this.basketItem.quantity !== quantity) {
         this.waiting = true;
@@ -2108,14 +2139,14 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
           quantity: quantity
         }).then(function (response) {
           document.dispatchEvent(new CustomEvent("afterBasketItemQuantityUpdated", {
-            detail: _this2.basketItem
+            detail: _this3.basketItem
           }));
-          _this2.waiting = false;
+          _this3.waiting = false;
         }, function (error) {
-          _this2.basketItem.quantity = origQty;
+          _this3.basketItem.quantity = origQty;
 
-          if (_this2.isPreview) {
-            _this2.$store.dispatch("addBasketNotification", {
+          if (_this3.isPreview) {
+            _this3.$store.dispatch("addBasketNotification", {
               type: "error",
               message: _services_TranslationService__WEBPACK_IMPORTED_MODULE_23__["default"].translate("Ceres::Template." + _exceptions_ExceptionMap__WEBPACK_IMPORTED_MODULE_22__["default"].get(error.data.exceptionCode.toString()), error.data.placeholder)
             });
@@ -2123,20 +2154,9 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
             NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_23__["default"].translate("Ceres::Template." + _exceptions_ExceptionMap__WEBPACK_IMPORTED_MODULE_22__["default"].get(error.data.exceptionCode.toString()), error.data.placeholder)).closeAfter(5000);
           }
 
-          _this2.waiting = false;
+          _this3.waiting = false;
         });
       }
-    },
-    isPropertyVisible: function isPropertyVisible(propertyId) {
-      var property = this.basketItem.variation.data.properties.find(function (property) {
-        return property.property.id === parseInt(propertyId);
-      });
-
-      if (property) {
-        return property.property.isShownAtCheckout;
-      }
-
-      return false;
     },
     isDataFieldVisible: function isDataFieldVisible(value) {
       return this.basketDetailsData.includes(value);
@@ -7406,6 +7426,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0__);
+
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7490,6 +7521,11 @@ __webpack_require__.r(__webpack_exports__);
     showDynamicPrice: function showDynamicPrice() {
       var state = this.$store.state.items[this.itemId];
       return App.config.item.showPleaseSelect && App.isCheapestSorting && state.variationSelect && !state.variationSelect.isVariationSelected && (state.pleaseSelectVariationId === this.currentVariation.variation.id || state.pleaseSelectVariationId === 0);
+    },
+    propertiesWithAdditionalCostsVisible: function propertiesWithAdditionalCostsVisible() {
+      return this.currentVariation.properties.filter(function (property) {
+        return property.property && property.property.isShownOnItemPage && property.property.isShownAsAdditionalCosts && !property.property.isOderProperty;
+      });
     }
   }
 });
@@ -40865,7 +40901,8 @@ var render = function() {
                               }) +
                               " "
                           ),
-                          _vm.shownOrderProperties.length
+                          _vm.shownOrderProperties.length ||
+                          _vm.propertiesWithAdditionalCostsVisible.length
                             ? _vm._ssrNode(
                                 '<div class="small">',
                                 "</div>",
@@ -40884,70 +40921,119 @@ var render = function() {
                                   _vm._ssrNode(
                                     '<ul class="ml-1 pl-3">',
                                     "</ul>",
-                                    _vm._l(_vm.shownOrderProperties, function(
-                                      property
-                                    ) {
-                                      return _vm._ssrNode("<li>", "</li>", [
-                                        _vm._ssrNode(
-                                          '<span class="d-block">',
-                                          "</span>",
-                                          [
-                                            _vm._ssrNode(
-                                              "<strong" +
-                                                _vm._ssrClass(null, {
-                                                  colon:
-                                                    property.type.length > 0
-                                                }) +
-                                                ">" +
-                                                _vm._ssrEscape(
-                                                  _vm._s(property.name) + " "
-                                                ) +
-                                                (_vm.$options.filters.propertySurcharge(
-                                                  _vm.basketItem.variation.data
-                                                    .properties,
-                                                  property.propertyId
-                                                ) > 0
-                                                  ? _vm._ssrEscape(
-                                                      "(" +
-                                                        _vm._s(
-                                                          _vm.$translate(
-                                                            "Ceres::Template.singleItemIncludeAbbr"
+                                    [
+                                      _vm._ssrNode(
+                                        _vm._ssrList(
+                                          _vm.propertiesWithAdditionalCostsVisible,
+                                          function(property) {
+                                            return (
+                                              '<li><span class="d-block"><strong>' +
+                                              _vm._ssrEscape(
+                                                _vm._s(
+                                                  property.property.names.name
+                                                ) + " "
+                                              ) +
+                                              (_vm.$options.filters.propertySurcharge(
+                                                _vm.basketItem.variation.data
+                                                  .properties,
+                                                property.propertyId
+                                              ) > 0
+                                                ? _vm._ssrEscape(
+                                                    "(" +
+                                                      _vm._s(
+                                                        _vm.$translate(
+                                                          "Ceres::Template.singleItemIncludeAbbr"
+                                                        )
+                                                      ) +
+                                                      " " +
+                                                      _vm._s(
+                                                        _vm._f("currency")(
+                                                          _vm._f(
+                                                            "propertySurcharge"
+                                                          )(
+                                                            _vm.basketItem
+                                                              .variation.data
+                                                              .properties,
+                                                            property.propertyId
                                                           )
-                                                        ) +
-                                                        " " +
-                                                        _vm._s(
-                                                          _vm._f("currency")(
-                                                            _vm._f(
-                                                              "propertySurcharge"
-                                                            )(
-                                                              _vm.basketItem
-                                                                .variation.data
-                                                                .properties,
-                                                              property.propertyId
-                                                            )
-                                                          )
-                                                        ) +
-                                                        ") "
-                                                    )
-                                                  : "<!---->") +
-                                                "</strong> "
-                                            ),
-                                            _vm._ssrNode(
-                                              "<span>",
-                                              "</span>",
-                                              [
-                                                _c("order-property-value", {
-                                                  attrs: { property: property }
-                                                })
-                                              ],
-                                              1
+                                                        )
+                                                      ) +
+                                                      ")"
+                                                  )
+                                                : "<!---->") +
+                                              "</strong></span></li>"
                                             )
-                                          ],
-                                          2
-                                        )
-                                      ])
-                                    }),
-                                    0
+                                          }
+                                        ) + " "
+                                      ),
+                                      _vm._l(_vm.shownOrderProperties, function(
+                                        property
+                                      ) {
+                                        return _vm._ssrNode("<li>", "</li>", [
+                                          _vm._ssrNode(
+                                            '<span class="d-block">',
+                                            "</span>",
+                                            [
+                                              _vm._ssrNode(
+                                                "<strong" +
+                                                  _vm._ssrClass(null, {
+                                                    colon:
+                                                      property.type.length > 0
+                                                  }) +
+                                                  ">" +
+                                                  _vm._ssrEscape(
+                                                    _vm._s(property.name) + " "
+                                                  ) +
+                                                  (_vm.$options.filters.propertySurcharge(
+                                                    _vm.basketItem.variation
+                                                      .data.properties,
+                                                    property.propertyId
+                                                  ) > 0
+                                                    ? _vm._ssrEscape(
+                                                        "(" +
+                                                          _vm._s(
+                                                            _vm.$translate(
+                                                              "Ceres::Template.singleItemIncludeAbbr"
+                                                            )
+                                                          ) +
+                                                          " " +
+                                                          _vm._s(
+                                                            _vm._f("currency")(
+                                                              _vm._f(
+                                                                "propertySurcharge"
+                                                              )(
+                                                                _vm.basketItem
+                                                                  .variation
+                                                                  .data
+                                                                  .properties,
+                                                                property.propertyId
+                                                              )
+                                                            )
+                                                          ) +
+                                                          ") "
+                                                      )
+                                                    : "<!---->") +
+                                                  "</strong> "
+                                              ),
+                                              _vm._ssrNode(
+                                                "<span>",
+                                                "</span>",
+                                                [
+                                                  _c("order-property-value", {
+                                                    attrs: {
+                                                      property: property
+                                                    }
+                                                  })
+                                                ],
+                                                1
+                                              )
+                                            ],
+                                            2
+                                          )
+                                        ])
+                                      })
+                                    ],
+                                    2
                                   )
                                 ],
                                 2
@@ -42734,8 +42820,10 @@ var render = function() {
                   })
                 : _vm._e(),
               _vm._ssrNode(" "),
-              _vm.basketItem.basketItemOrderParams &&
-              _vm.basketItem.basketItemOrderParams.length
+              (_vm.basketItem.basketItemOrderParams &&
+                _vm.basketItem.basketItemOrderParams.length) ||
+              (_vm.basketItem.variation.data.properties &&
+                _vm.basketItem.variation.data.properties.length)
                 ? _vm._ssrNode(
                     '<div class="small">',
                     "</div>",
@@ -42745,7 +42833,7 @@ var render = function() {
                           _vm._ssrEscape(
                             _vm._s(
                               _vm.$translate(
-                                "Ceres::Template.basketAdditionalOptions"
+                                "Ceres::Template.basketAdditionalCosts"
                               )
                             ) + ":"
                           ) +
@@ -42754,21 +42842,47 @@ var render = function() {
                       _vm._ssrNode(
                         '<ul class="ml-1 pl-3">',
                         "</ul>",
-                        _vm._l(_vm.basketItem.basketItemOrderParams, function(
-                          property
-                        ) {
-                          return _vm._ssrNode(
-                            "<li" +
-                              _vm._ssrStyle(null, null, {
-                                display: _vm.isPropertyVisible(
-                                  property.propertyId
+                        [
+                          _vm._ssrNode(
+                            _vm._ssrList(
+                              _vm.propertiesWithAdditionalCostsVisible,
+                              function(property) {
+                                return (
+                                  '<li><span class="d-block"><strong>' +
+                                  _vm._ssrEscape(
+                                    _vm._s(property.property.names.name) + " "
+                                  ) +
+                                  (_vm.$options.filters.propertySurcharge(
+                                    _vm.basketItem.variation.data.properties,
+                                    property.propertyId
+                                  ) > 0
+                                    ? _vm._ssrEscape(
+                                        "(" +
+                                          _vm._s(
+                                            _vm.$translate(
+                                              "Ceres::Template.basketPlusAbbr"
+                                            )
+                                          ) +
+                                          " " +
+                                          _vm._s(
+                                            _vm._f("currency")(
+                                              _vm._f("propertySurcharge")(
+                                                _vm.basketItem.variation.data
+                                                  .properties,
+                                                property.propertyId
+                                              )
+                                            )
+                                          ) +
+                                          ")"
+                                      )
+                                    : "<!---->") +
+                                  "</strong></span></li>"
                                 )
-                                  ? ""
-                                  : "none"
-                              }) +
-                              ">",
-                            "</li>",
-                            [
+                              }
+                            ) + " "
+                          ),
+                          _vm._l(_vm.visibleProperties, function(property) {
+                            return _vm._ssrNode("<li>", "</li>", [
                               _vm._ssrNode(
                                 '<span class="d-block">',
                                 "</span>",
@@ -42822,10 +42936,10 @@ var render = function() {
                                 ],
                                 2
                               )
-                            ]
-                          )
-                        }),
-                        0
+                            ])
+                          })
+                        ],
+                        2
                       )
                     ],
                     2
@@ -49629,6 +49743,46 @@ var render = function() {
           _vm._s(_vm.$translate("Ceres::Template.singleItemFootnote1"))
         ) +
         "</sup></span> " +
+        (_vm.currentVariation.properties &&
+        _vm.currentVariation.properties.length
+          ? '<ul class="text-muted pl-0 list-unstyled">' +
+            _vm._ssrList(_vm.propertiesWithAdditionalCostsVisible, function(
+              property
+            ) {
+              return (
+                '<li><span class="d-block">' +
+                _vm._ssrEscape(
+                  "\n                " +
+                    _vm._s(property.property.names.name) +
+                    " "
+                ) +
+                (_vm.$options.filters.propertySurcharge(
+                  _vm.currentVariation.properties,
+                  property.propertyId
+                ) > 0
+                  ? _vm._ssrEscape(
+                      "(" +
+                        _vm._s(
+                          _vm.$translate("Ceres::Template.basketPlusAbbr")
+                        ) +
+                        " " +
+                        _vm._s(
+                          _vm._f("currency")(
+                            _vm._f("propertySurcharge")(
+                              _vm.currentVariation.properties,
+                              property.propertyId
+                            )
+                          )
+                        ) +
+                        ")"
+                    )
+                  : "<!---->") +
+                "</span></li>"
+              )
+            }) +
+            "</ul>"
+          : "<!---->") +
+        " " +
         (_vm.currentVariation.unit
           ? "<div" +
             _vm._ssrClass("base-price text-muted my-3", {
@@ -61662,10 +61816,10 @@ module.exports = __webpack_require__(/*! ./build */ "./node_modules/vue-template
 /*!*********************************************************!*\
   !*** ./node_modules/vue-template-compiler/package.json ***!
   \*********************************************************/
-/*! exports provided: _args, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, browser, bugs, dependencies, description, devDependencies, homepage, jsdelivr, keywords, license, main, name, repository, types, unpkg, version, default */
+/*! exports provided: name, version, description, main, unpkg, jsdelivr, browser, types, repository, keywords, author, license, bugs, homepage, dependencies, devDependencies, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"_args\":[[\"vue-template-compiler@2.6.12\",\"/home/runner/work/plugin-ceres/plugin-ceres\"]],\"_from\":\"vue-template-compiler@2.6.12\",\"_id\":\"vue-template-compiler@2.6.12\",\"_inBundle\":false,\"_integrity\":\"sha512-OzzZ52zS41YUbkCBfdXShQTe69j1gQDZ9HIX8miuC9C3rBCk9wIRjLiZZLrmX9V+Ftq/YEyv1JaVr5Y/hNtByg==\",\"_location\":\"/vue-template-compiler\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"vue-template-compiler@2.6.12\",\"name\":\"vue-template-compiler\",\"escapedName\":\"vue-template-compiler\",\"rawSpec\":\"2.6.12\",\"saveSpec\":null,\"fetchSpec\":\"2.6.12\"},\"_requiredBy\":[\"/\"],\"_resolved\":\"https://registry.npmjs.org/vue-template-compiler/-/vue-template-compiler-2.6.12.tgz\",\"_spec\":\"2.6.12\",\"_where\":\"/home/runner/work/plugin-ceres/plugin-ceres\",\"author\":{\"name\":\"Evan You\"},\"browser\":\"browser.js\",\"bugs\":{\"url\":\"https://github.com/vuejs/vue/issues\"},\"dependencies\":{\"de-indent\":\"^1.0.2\",\"he\":\"^1.1.0\"},\"description\":\"template compiler for Vue 2.0\",\"devDependencies\":{\"vue\":\"file:../..\"},\"homepage\":\"https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#readme\",\"jsdelivr\":\"browser.js\",\"keywords\":[\"vue\",\"compiler\"],\"license\":\"MIT\",\"main\":\"index.js\",\"name\":\"vue-template-compiler\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/vuejs/vue.git\"},\"types\":\"types/index.d.ts\",\"unpkg\":\"browser.js\",\"version\":\"2.6.12\"}");
+module.exports = JSON.parse("{\"name\":\"vue-template-compiler\",\"version\":\"2.6.12\",\"description\":\"template compiler for Vue 2.0\",\"main\":\"index.js\",\"unpkg\":\"browser.js\",\"jsdelivr\":\"browser.js\",\"browser\":\"browser.js\",\"types\":\"types/index.d.ts\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/vuejs/vue.git\"},\"keywords\":[\"vue\",\"compiler\"],\"author\":\"Evan You\",\"license\":\"MIT\",\"bugs\":{\"url\":\"https://github.com/vuejs/vue/issues\"},\"homepage\":\"https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#readme\",\"dependencies\":{\"he\":\"^1.1.0\",\"de-indent\":\"^1.0.2\"},\"devDependencies\":{\"vue\":\"file:../..\"}}");
 
 /***/ }),
 
@@ -75346,7 +75500,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "cd590b12"
+  "30bd0a97"
   
 )
 
@@ -75413,7 +75567,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "35f09196"
+  "7cdfd576"
   
 )
 
@@ -75480,7 +75634,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d9b14c54"
+  "4955b494"
   
 )
 
@@ -75547,7 +75701,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "43abbade"
+  "75235ab1"
   
 )
 
@@ -75614,7 +75768,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "c6ddc3bc"
+  "545eee42"
   
 )
 
@@ -75681,7 +75835,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5c436a7f"
+  "502dbe5f"
   
 )
 
@@ -75748,7 +75902,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "13817c09"
+  "076bcfe9"
   
 )
 
@@ -75815,7 +75969,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "a1e10d88"
+  "3becdd1c"
   
 )
 
@@ -75882,7 +76036,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "9a61c138"
+  "457aa344"
   
 )
 
@@ -75949,7 +76103,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "fbbf239a"
+  "4d345a13"
   
 )
 
@@ -76016,7 +76170,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4414b6a7"
+  "49037272"
   
 )
 
@@ -76083,7 +76237,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "374da5ce"
+  "7f7b71ae"
   
 )
 
@@ -76149,7 +76303,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "f2694264"
+  "04f41eee"
   
 )
 
@@ -76198,7 +76352,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2034f4a7"
+  "c3449672"
   
 )
 
@@ -76265,7 +76419,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3957dab8"
+  "9df2d2d0"
   
 )
 
@@ -76332,7 +76486,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5cb9c188"
+  "c2b41530"
   
 )
 
@@ -76399,7 +76553,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "56eccd1e"
+  "5fb83cde"
   
 )
 
@@ -76465,7 +76619,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "789641a1"
+  "8afb14fe"
   
 )
 
@@ -76513,7 +76667,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "fac88ca8"
+  "76f024e8"
   
 )
 
@@ -76562,7 +76716,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3cc5ee52"
+  "4b950672"
   
 )
 
@@ -76629,7 +76783,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7cc8609a"
+  "26ace0ba"
   
 )
 
@@ -76696,7 +76850,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "83ff1816"
+  "4addd7d5"
   
 )
 
@@ -76763,7 +76917,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "26d1623c"
+  "6d1383c8"
   
 )
 
@@ -76830,7 +76984,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1ff5c484"
+  "38211cc4"
   
 )
 
@@ -76897,7 +77051,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "bd839c5a"
+  "2fa5149a"
   
 )
 
@@ -76964,7 +77118,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6fce645d"
+  "2d5a147d"
   
 )
 
@@ -77034,7 +77188,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   injectStyles,
   null,
-  "dcd4830c"
+  "1e73225a"
   
 )
 
@@ -77101,7 +77255,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "78009558"
+  "29f73578"
   
 )
 
@@ -77168,7 +77322,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2207c2b0"
+  "63f3f690"
   
 )
 
@@ -77235,7 +77389,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "b1ce2730"
+  "3e827c88"
   
 )
 
@@ -77302,7 +77456,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "b64b850a"
+  "56d0dd9b"
   
 )
 
@@ -77369,7 +77523,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2a55c34f"
+  "72838f2f"
   
 )
 
@@ -77436,7 +77590,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "295a5414"
+  "6801a018"
   
 )
 
@@ -77503,7 +77657,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4b50b116"
+  "a2d28d94"
   
 )
 
@@ -77570,7 +77724,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0aeea185"
+  "bc304cb6"
   
 )
 
@@ -77637,7 +77791,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "c58fbcfc"
+  "37b1353c"
   
 )
 
@@ -77704,7 +77858,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "29fccb64"
+  "722a9744"
   
 )
 
@@ -77771,7 +77925,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "48c8b09d"
+  "065460bd"
   
 )
 
@@ -77838,7 +77992,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "8f7f7078"
+  "984ae038"
   
 )
 
@@ -77905,7 +78059,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "ea5f8e1c"
+  "5c81065c"
   
 )
 
@@ -77972,7 +78126,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "feb22fee"
+  "74913be9"
   
 )
 
@@ -78039,7 +78193,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0065c477"
+  "4251f857"
   
 )
 
@@ -78106,7 +78260,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "a2468afc"
+  "ba71e33c"
   
 )
 
@@ -78173,7 +78327,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3d30cbcd"
+  "4bffe3ed"
   
 )
 
@@ -78240,7 +78394,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d5765996"
+  "22223715"
   
 )
 
@@ -78307,7 +78461,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4aad16bd"
+  "57e58246"
   
 )
 
@@ -78374,7 +78528,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2566e380"
+  "6c562760"
   
 )
 
@@ -78441,7 +78595,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "db52f5d4"
+  "4a245536"
   
 )
 
@@ -78508,7 +78662,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6fedb468"
+  "f4d65428"
   
 )
 
@@ -78575,7 +78729,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1ca62dfb"
+  "109081db"
   
 )
 
@@ -78642,7 +78796,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "224826ca"
+  "1de26eea"
   
 )
 
@@ -78709,7 +78863,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6a19b4ec"
+  "27a5650c"
   
 )
 
@@ -78776,7 +78930,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4e4badb6"
+  "30ad7d76"
   
 )
 
@@ -78843,7 +78997,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6bee3719"
+  "5915e2f9"
   
 )
 
@@ -78910,7 +79064,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7c707c30"
+  "76c36fe0"
   
 )
 
@@ -78977,7 +79131,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d0ecb788"
+  "255bcfc8"
   
 )
 
@@ -79044,7 +79198,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "77371a7c"
+  "fc1fba3c"
   
 )
 
@@ -79111,7 +79265,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "b05fa528"
+  "3ec9658c"
   
 )
 
@@ -79178,7 +79332,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1fae8f5c"
+  "5cb5a108"
   
 )
 
@@ -79245,7 +79399,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "00f0cee0"
+  "d21daea0"
   
 )
 
@@ -79312,7 +79466,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5b2f3161"
+  "2fe6d57e"
   
 )
 
@@ -79379,7 +79533,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5db83a9f"
+  "98fea302"
   
 )
 
@@ -79446,7 +79600,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "26310e18"
+  "ed11d390"
   
 )
 
@@ -79513,7 +79667,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "442f72e7"
+  "23d819f2"
   
 )
 
@@ -79580,7 +79734,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "16d81bd0"
+  "1c5317b0"
   
 )
 
@@ -79647,7 +79801,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "641af7f5"
+  "08f6efd6"
   
 )
 
@@ -79714,7 +79868,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "410c13b8"
+  "642d10d0"
   
 )
 
@@ -79781,7 +79935,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2df9150a"
+  "0e6ae59b"
   
 )
 
@@ -79848,7 +80002,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "66e7cc40"
+  "1f701740"
   
 )
 
@@ -79915,7 +80069,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "49d4d5f3"
+  "58a3ee13"
   
 )
 
@@ -79982,7 +80136,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6adba9d9"
+  "57b0dc0e"
   
 )
 
@@ -80049,7 +80203,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "179fbbd5"
+  "a2ce1816"
   
 )
 
@@ -80116,7 +80270,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "67d9342c"
+  "144131ca"
   
 )
 
@@ -80183,7 +80337,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5b17d8ee"
+  "56b2210e"
   
 )
 
@@ -80250,7 +80404,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0ecea230"
+  "78a6ca70"
   
 )
 
@@ -80317,7 +80471,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "da8e71c6"
+  "bcf04186"
   
 )
 
@@ -80384,7 +80538,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d86d526a"
+  "bacf222a"
   
 )
 
@@ -80451,7 +80605,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "874cc47a"
+  "5efe79a3"
   
 )
 
@@ -80518,7 +80672,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "76270e3e"
+  "43153901"
   
 )
 
@@ -80585,7 +80739,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1468d334"
+  "faae0b74"
   
 )
 
@@ -80652,7 +80806,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "14c9f602"
+  "09d3fe42"
   
 )
 
@@ -80719,7 +80873,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4c60eee2"
+  "6aeca1fc"
   
 )
 
@@ -80786,7 +80940,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7af4e5fd"
+  "6edf39dd"
   
 )
 
@@ -80853,7 +81007,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "9a5050d6"
+  "706387b5"
   
 )
 
