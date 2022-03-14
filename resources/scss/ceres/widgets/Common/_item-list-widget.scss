@@ -1,4 +1,16 @@
 .widget-item-list {
+    &.item-bg-gray {
+        .cmp-product-thumb {
+            .thumb-image {
+                background-color: $gray-100;
+            }
+        }
+    }
+    &.item-vat-hidden {
+        .vat {
+            display: none;
+        }
+    }
     .widget-inner {
         padding-right: 0;
         padding-left: 0;

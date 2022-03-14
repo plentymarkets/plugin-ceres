@@ -159,7 +159,8 @@ var render = function() {
                   type: "email",
                   name: "email",
                   autocomplete: "email",
-                  id: "email-input-id"
+                  id: "email-input-id",
+                  "data-testing": "unsub-nl-mail"
                 },
                 domProps: { value: _vm.email },
                 on: {
@@ -208,7 +209,11 @@ var render = function() {
                 staticClass:
                   "btn btn-primary btn-appearance float-right btn-medium btn-xs-max-width",
                 class: _vm.buttonSizeClass,
-                attrs: { type: "submit", disabled: _vm.isDisabled },
+                attrs: {
+                  type: "submit",
+                  disabled: _vm.isDisabled,
+                  "data-testing": "unsub-nl-send"
+                },
                 on: { click: _vm.validateData }
               },
               [

@@ -46,6 +46,11 @@ class BackgroundWidget extends BaseWidget
             ->withName('Widget.backgroundFullWidthLabel')
             ->withTooltip('Widget.backgroundFullWidthTooltip');
 
+        $settings->createCheckbox('fullHeight')
+            ->withDefaultValue(false)
+            ->withName('Widget.backgroundFullHeightLabel')
+            ->withTooltip('Widget.backgroundFullHeightTooltip');
+
         $settings->createCheckbox('hugeFont')
             ->withDefaultValue(false)
             ->withName('Widget.backgroundHugeFontLabel')
@@ -56,13 +61,13 @@ class BackgroundWidget extends BaseWidget
             ->withName('Widget.backgroundFixedLabel')
             ->withTooltip('Widget.backgroundFixedTooltip');
 
+        $this->createImageSettings($settings);
+
         $settings->createColorPalette();
 
         $settings->createColor('customColor')
             ->withCondition("colorPalette === 'custom'")
             ->withDefaultValue('#000000');
-
-        $this->createImageSettings($settings);
 
         $settings->createSlider('opacity')
             ->withDefaultValue(100)
@@ -70,7 +75,8 @@ class BackgroundWidget extends BaseWidget
             ->withOption('inputInterval', 1)
             ->withOption('inputMax', 100);
 
-        $settings->createHeight();
+        $settings->createHeight()
+            ->withCondition("fullHeight !== true");
 
         $settings->createSpacing();
 
@@ -92,7 +98,6 @@ class BackgroundWidget extends BaseWidget
             ->withName('Widget.preloadImageLabel')
             ->withTooltip('Widget.preloadImageTooltip')
             ->withCondition("!lazyloadImage");
-
 
         $settings->createSelect('sourceType')
             ->withDefaultValue('none')
@@ -153,13 +158,17 @@ class BackgroundWidget extends BaseWidget
     {
         $stylingClasses = '';
 
-        if (array_key_exists('backgroundFixed',
-                $widgetSettings) && $widgetSettings['backgroundFixed']['mobile'] == false) {
+        if (array_key_exists(
+            'backgroundFixed',
+            $widgetSettings
+        ) && $widgetSettings['backgroundFixed']['mobile'] == false) {
             $stylingClasses .= 'bg-scroll ';
         }
 
-        if (array_key_exists('backgroundRepeat',
-                $widgetSettings) && $widgetSettings['backgroundRepeat']['mobile'] == true && $widgetSettings['backgroundSize']['mobile'] !== 'bg-cover') {
+        if (array_key_exists(
+            'backgroundRepeat',
+            $widgetSettings
+        ) && $widgetSettings['backgroundRepeat']['mobile'] == true && $widgetSettings['backgroundSize']['mobile'] !== 'bg-cover') {
             $stylingClasses .= 'bg-repeat ';
         }
 
