@@ -63,4 +63,12 @@ context("new order properties", () =>
         cy.getByTestingAttr("single-add-to-basket-button").click();
         cy.get("#add-item-to-basket-overlay").should("contain", "30,01");
     });
+
+    it("should fail to add properties to basket", () =>
+    {
+        cy.visit("/wohnzimmer/sofas/couch-purple-dreams_134_1032");
+        cy.getByTestingAttr("single-add-to-basket-button").click();
+        cy.getByTestingAttr("order-property-label-checkbox").eq(2).parent().should("have.class", "error");
+        cy.getByTestingAttr("order-property-label-checkbox").eq(3).parent().should("have.class", "error");
+    });
 });
