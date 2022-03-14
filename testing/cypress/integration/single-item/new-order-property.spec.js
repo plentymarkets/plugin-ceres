@@ -55,12 +55,12 @@ context("new order properties", () =>
         cy.getByTestingAttr("order-property-label-checkbox").eq(4).should("not.contain", "*");
     });
 
-    it.only("should add item to basket with all required properties", () =>
+    it("should add item to basket with all required properties", () =>
     {
         cy.visit("/wohnzimmer/sofas/couch-purple-dreams_134_1032");
         cy.getByTestingAttr("order-property-label-checkbox").eq(2).parent().find("input").check();
         cy.getByTestingAttr("order-property-label-checkbox").eq(3).parent().find("input").check();
         cy.getByTestingAttr("single-add-to-basket-button").click();
-        cy.get("#add-item-to-basket-overlay").should("contain", "Mehrfachauswahl +0€");
+        cy.get("#add-item-to-basket-overlay").should("contain", "30,01");
     });
 });
