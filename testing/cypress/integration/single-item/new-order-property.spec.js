@@ -3,8 +3,8 @@ context("new order properties", () =>
 {
 
     /**
-     * The new order property feature has to be activate in the plentyShop wizard->webshop
-     */
+    *     The new order property feature has to be activated in the plentyShop wizard->webshop
+    */
 
     it("should not show checkbox for preselected / required property", () =>
     {
@@ -30,6 +30,13 @@ context("new order properties", () =>
         cy.getByTestingAttr("order-property-label-checkbox").eq(1).parent().find("input").should("be.checked");
     });
 
+    it("should preselect a preselected property and add price to totals", () =>
+    {
+        cy.visit("/wohnzimmer/sofas/couch-purple-dreams_134_1032");
+        cy.getByTestingAttr("order-property-label-checkbox").eq(1).parent().find("input").should("be.checked");
+        cy.get(".price").should("contain", "20,01");
+    });
+
     it("should only show one '*' when it has surcharge and not required", () =>
     {
         cy.visit("/wohnzimmer/sofas/couch-purple-dreams_134_1032");
@@ -46,5 +53,14 @@ context("new order properties", () =>
     {
         cy.visit("/wohnzimmer/sofas/couch-purple-dreams_134_1032");
         cy.getByTestingAttr("order-property-label-checkbox").eq(4).should("not.contain", "*");
+    });
+
+    it.only("should add item to basket with all required properties", () =>
+    {
+        cy.visit("/wohnzimmer/sofas/couch-purple-dreams_134_1032");
+        cy.getByTestingAttr("order-property-label-checkbox").eq(2).parent().find("input").check();
+        cy.getByTestingAttr("order-property-label-checkbox").eq(3).parent().find("input").check();
+        cy.getByTestingAttr("single-add-to-basket-button").click();
+        cy.get("#add-item-to-basket-overlay").should("contain", "Mehrfachauswahl +0€");
     });
 });
