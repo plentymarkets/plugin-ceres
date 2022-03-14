@@ -615,22 +615,6 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
           return this.$translate("Ceres::Template.singleItemFootnote1");
         }
       }
-      /* if(this.surcharge <= 0 && this.property.isRequired && this.property.isPreSelected){
-          return '';
-      }
-      if(this.surcharge > 0 && this.property.isRequired && this.property.isPreSelected){
-          return this.$translate("Ceres::Template.singleItemFootnote1");
-      }
-      if(this.surcharge > 0 && this.property.isRequired){
-          return this.$translate("Ceres::Template.singleItemFootnote12");
-      }
-      if(this.surcharge <= 0 && this.property.isRequired){
-          return this.$translate("Ceres::Template.singleItemFootnote2");
-      }
-      if(this.surcharge > 0 && !this.property.isRequired){
-          return this.$translate("Ceres::Template.singleItemFootnote1");
-      } */
-
     },
     selectedDescription: function selectedDescription() {
       if (this.inputType !== "selection" || Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isNullOrUndefined"])(this.selectionValue)) {

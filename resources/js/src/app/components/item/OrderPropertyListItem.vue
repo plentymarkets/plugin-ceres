@@ -231,37 +231,25 @@ export default {
 
         footnotes()
         {
-            if(this.surcharge <= 0){
-                if(this.property.isRequired && !this.property.isPreSelected)
+            if (this.surcharge <= 0)
+            {
+                if (this.property.isRequired && !this.property.isPreSelected)
                 {
                     return this.$translate("Ceres::Template.singleItemFootnote2");
                 }
             }
 
-            else if(this.surcharge > 0){
-                if(this.property.isRequired && !this.property.isPreSelected){
+            else if (this.surcharge > 0)
+            {
+                if (this.property.isRequired && !this.property.isPreSelected)
+                {
                     return this.$translate("Ceres::Template.singleItemFootnote12");
                 }
-                else {
+                else 
+                {
                     return this.$translate("Ceres::Template.singleItemFootnote1");
                 }
             }
-
-            /* if(this.surcharge <= 0 && this.property.isRequired && this.property.isPreSelected){
-                return '';
-            }
-            if(this.surcharge > 0 && this.property.isRequired && this.property.isPreSelected){
-                return this.$translate("Ceres::Template.singleItemFootnote1");
-            }
-            if(this.surcharge > 0 && this.property.isRequired){
-                return this.$translate("Ceres::Template.singleItemFootnote12");
-            }
-            if(this.surcharge <= 0 && this.property.isRequired){
-                return this.$translate("Ceres::Template.singleItemFootnote2");
-            }
-            if(this.surcharge > 0 && !this.property.isRequired){
-                return this.$translate("Ceres::Template.singleItemFootnote1");
-            } */
         },
 
         selectedDescription()
