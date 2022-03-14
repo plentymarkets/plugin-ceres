@@ -82,7 +82,6 @@ class DefaultSingleItemPreset implements ContentPreset
         $this->createItemAvailabilityWidget();
         $this->createAddToBasketWidget();
         $this->createAddToWishListWiget();
-        $this->createSeparatorWidget();
         $this->createLegalInformation();
         $this->createIsRequieredFootnote();
 

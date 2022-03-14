@@ -158,6 +158,11 @@ export default {
             type: Boolean,
             default: true
         },
+        hasGraduatedPrice:
+        {
+          type: Boolean,
+          default: false
+        },
         paddingClasses:
         {
             type: String,
@@ -209,6 +214,7 @@ export default {
                 !(this.minimumQuantity != 1 || this.intervalQuantity != 1) &&
                 !this.requiresProperties &&
                 this.hasPrice &&
+                !this.hasGraduatedPrice &&
                 !this.isSet;
         },
 
