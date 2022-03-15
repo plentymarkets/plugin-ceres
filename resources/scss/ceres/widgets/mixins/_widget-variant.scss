@@ -1,8 +1,42 @@
 @mixin widget-bg-variant($color) {
-    color: color-yiq($color);
-    background-color: $color;
+  color: color-yiq($color);
+  background-color: $color;
 
-    a {
-        color: color-yiq($color);
-    }
+  a {
+    color: color-yiq($color);
+  }
+}
+
+@mixin btn-appearance($color: $dark, $outline: false) {
+  @if ($color == $transparent) {
+    @include button-variant(
+      $white,
+      $white,
+      $primary,
+      $primary,
+      $primary,
+      $primary
+    );
+    background: transparent;
+    border-color: transparent;
+  } @else {
+    @include button-variant(
+      $color,
+      $color,
+      $primary,
+      $primary,
+      $primary,
+      $primary
+    );
+  }
+
+  @if $outline == true {
+    background-color: $transparent;
+    @include button-outline-variant(
+      $color,
+      $color-hover: color-contrast($primary),
+      $active-background: $primary,
+      $active-border: $primary
+    );
+  }
 }
