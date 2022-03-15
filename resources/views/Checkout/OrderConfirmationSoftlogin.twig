@@ -28,19 +28,12 @@
 
     {% if not hasShopBuilderContent %}
         {# No category defined to be used as order confirmation #}
-        {% set overrideConfirmationSoftlogin = LayoutContainer.show("Ceres::OrderConfirmationSoftLogin.Override") %}
-        {% if overrideConfirmationSoftlogin | trim is empty %}
-            <div class="container-max mt-5 verify-order">
-                <div class="row mb-5">
-                    <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-3">
-                        <div>
-                            {% include "Ceres::Checkout.Partials.SoftLoginForm" %}
-                        </div>
-                    </div>
+        <div class="container-max mt-5 verify-order">
+            <div class="row mb-5">
+                <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-3">
+                    {% include "Ceres::Checkout.Partials.SoftLoginForm" %}
                 </div>
             </div>
-        {% else %}
-            {{ overrideConfirmationSoftlogin }}
-        {% endif %}
+        </div>
     {% endif %}
 {% endblock %}
