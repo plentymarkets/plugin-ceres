@@ -516,6 +516,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
@@ -603,16 +604,16 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       return this.property.itemSurcharge || this.property.surcharge;
     },
     footnotes: function footnotes() {
-      if (this.surcharge > 0 && this.property.isRequired) {
-        return this.$translate("Ceres::Template.singleItemFootnote12");
-      }
-
-      if (this.surcharge <= 0 && this.property.isRequired) {
-        return this.$translate("Ceres::Template.singleItemFootnote2");
-      }
-
-      if (this.surcharge > 0 && !this.property.isRequired) {
-        return this.$translate("Ceres::Template.singleItemFootnote1");
+      if (this.surcharge <= 0) {
+        if (this.property.isRequired && !this.property.isPreSelected) {
+          return this.$translate("Ceres::Template.singleItemFootnote2");
+        }
+      } else if (this.surcharge > 0) {
+        if (this.property.isRequired && !this.property.isPreSelected) {
+          return this.$translate("Ceres::Template.singleItemFootnote12");
+        } else {
+          return this.$translate("Ceres::Template.singleItemFootnote1");
+        }
       }
     },
     selectedDescription: function selectedDescription() {
@@ -1142,7 +1143,8 @@ var render = function() {
             "div",
             { staticClass: "form-check", class: { error: _vm.hasError } },
             [
-              _vm.inputType === "checkbox"
+              _vm.inputType === "checkbox" &&
+              !(_vm.property.isRequired && _vm.property.isPreSelected)
                 ? _c("input", {
                     staticClass: "form-check-input",
                     attrs: {
@@ -1161,7 +1163,8 @@ var render = function() {
                       }
                     }
                   })
-                : _c("input", {
+                : _vm.inputType === "radio"
+                ? _c("input", {
                     staticClass: "form-check-input",
                     attrs: {
                       type: "radio",
@@ -1178,7 +1181,8 @@ var render = function() {
                         return _vm.onInputValueChanged($event.target.value)
                       }
                     }
-                  }),
+                  })
+                : _vm._e(),
               _vm._v(" "),
               _c(
                 "label",
@@ -1188,7 +1192,8 @@ var render = function() {
                   attrs: {
                     for: "check" + _vm._uid,
                     "data-toggle": "tooltip",
-                    title: _vm.property.names.description
+                    title: _vm.property.names.description,
+                    "data-testing": "order-property-label-" + _vm.inputType
                   }
                 },
                 [
