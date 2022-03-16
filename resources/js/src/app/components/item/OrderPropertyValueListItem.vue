@@ -1,7 +1,7 @@
 <template>
     <li>
         <span class="d-block">
-            <strong :class="{ 'colon': property.property.valueType.length > 0 }">
+            <strong :class="{ 'colon': showColon }">
                 {{ property.property.names.name }} 
                 <template v-if="surcharge > 0">
                     <template v-if="isPropertyWithAdditionalCosts">
@@ -51,6 +51,11 @@ export default {
                 this.property.property.isShownAtCheckout &&
                 this.property.property.isShownAsAdditionalCosts &&
                 !this.property.property.isOderProperty
+        },
+
+        showColon()
+        {
+            return this.property && this.property.property.value && !this.property.property.valueType === "empty";
         }
     }
 }

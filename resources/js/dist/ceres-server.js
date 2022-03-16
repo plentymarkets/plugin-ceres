@@ -8514,6 +8514,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     isPropertyWithAdditionalCosts: function isPropertyWithAdditionalCosts() {
       return this.property && this.property.property.isShownAtCheckout && this.property.property.isShownAsAdditionalCosts && !this.property.property.isOderProperty;
+    },
+    showColon: function showColon() {
+      return this.property && this.property.property.value && !this.property.property.valueType === "empty";
     }
   }
 });
@@ -50603,9 +50606,7 @@ var render = function() {
   return _c("li", [
     _vm._ssrNode(
       '<span class="d-block"><strong' +
-        _vm._ssrClass(null, {
-          colon: _vm.property.property.valueType.length > 0
-        }) +
+        _vm._ssrClass(null, { colon: _vm.showColon }) +
         ">" +
         _vm._ssrEscape(
           "\n            " +

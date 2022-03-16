@@ -773,6 +773,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     isPropertyWithAdditionalCosts: function isPropertyWithAdditionalCosts() {
       return this.property && this.property.property.isShownAtCheckout && this.property.property.isShownAsAdditionalCosts && !this.property.property.isOderProperty;
+    },
+    showColon: function showColon() {
+      return this.property && this.property.property.value && !this.property.property.valueType === "empty";
     }
   }
 });
@@ -1692,7 +1695,7 @@ var render = function() {
     _c("span", { staticClass: "d-block" }, [
       _c(
         "strong",
-        { class: { colon: _vm.property.property.valueType.length > 0 } },
+        { class: { colon: _vm.showColon } },
         [
           _vm._v(
             "\n            " +
