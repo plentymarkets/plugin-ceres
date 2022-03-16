@@ -50548,7 +50548,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.properties && _vm.properties.length
+  return _vm.shownProperties && _vm.shownProperties.length
     ? _c(
         "div",
         { staticClass: "small" },
