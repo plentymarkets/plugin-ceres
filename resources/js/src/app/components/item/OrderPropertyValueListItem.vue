@@ -42,12 +42,12 @@ export default {
     {
         surcharge()
         {
-            return this.$options.filters.propertySurcharge([property], property.propertyId);
+            return this.$options.filters.propertySurcharge([this.property], this.property.propertyId);
         },
 
         isPropertyWithAdditionalCosts()
         {
-            return this.property.property &&
+            return this.property &&
                 this.property.property.isShownAtCheckout &&
                 this.property.property.isShownAsAdditionalCosts &&
                 !this.property.property.isOderProperty

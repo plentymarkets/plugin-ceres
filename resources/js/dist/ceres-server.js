@@ -8510,10 +8510,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     surcharge: function surcharge() {
-      return this.$options.filters.propertySurcharge([property], property.propertyId);
+      return this.$options.filters.propertySurcharge([this.property], this.property.propertyId);
     },
     isPropertyWithAdditionalCosts: function isPropertyWithAdditionalCosts() {
-      return this.property.property && this.property.property.isShownAtCheckout && this.property.property.isShownAsAdditionalCosts && !this.property.property.isOderProperty;
+      return this.property && this.property.property.isShownAtCheckout && this.property.property.isShownAsAdditionalCosts && !this.property.property.isOderProperty;
     }
   }
 });
