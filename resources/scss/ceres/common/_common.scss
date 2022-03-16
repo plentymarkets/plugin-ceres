@@ -40,6 +40,12 @@ a {
             
         }
     }
+    &.widget-image-box{
+        img {
+            top: 0;
+            left: 0;
+        }
+    }
 
     img {
         transform: scale(1.00);
