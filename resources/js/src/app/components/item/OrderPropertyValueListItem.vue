@@ -55,7 +55,7 @@ export default {
 
         showColon()
         {
-            return this.property && this.property.property.value && !this.property.property.valueType === "empty";
+            return this.property && this.property.property.value && this.property.property.valueType !== "empty";
         }
     }
 }
