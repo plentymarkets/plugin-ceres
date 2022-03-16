@@ -105,25 +105,8 @@
                 </div>
 
                 <basket-set-component-list v-if="basketItem.setComponents" :set-components="basketItem.setComponents" :set-item="basketItem"></basket-set-component-list>
-
-                <div class="small" v-if="(basketItem.basketItemOrderParams && basketItem.basketItemOrderParams.length) || (basketItem.variation.data.properties && basketItem.variation.data.properties.length)">
-                    <div class="font-weight-bold my-1">{{ $translate("Ceres::Template.basketAdditionalCosts") }}:</div>
-                    <ul class="ml-1 pl-3">
-                      <li v-for="property in propertiesWithAdditionalCostsVisible" :key="property.propertyId">
-                            <span class="d-block">
-                              <strong>{{ property.property.names.name }} <template v-if="$options.filters.propertySurcharge(basketItem.variation.data.properties, property.propertyId) > 0">({{ $translate("Ceres::Template.basketPlusAbbr") }} {{ basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency }})</template></strong>
-                            </span>
-                      </li>
-                        <li v-for="property in visibleProperties" :key="property.propertyId">
-                            <span class="d-block">
-                              <strong :class="{ 'colon': property.type.length > 0 }">{{ property.name }} <template v-if="$options.filters.propertySurcharge(basketItem.variation.data.properties, property.propertyId) > 0">({{ $translate("Ceres::Template.basketIncludeAbbr") }} {{ basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency }})</template></strong>
-                                <span>
-                                    <order-property-value :property="property"></order-property-value>
-                                </span>
-                            </span>
-                        </li>
-                    </ul>
-                </div>
+                
+                <order-property-value-list :basketItem="basketItem"></order-property-value-list>
 
                 <div class="small" v-if="showMoreInformation">
                     <template v-if="isDataFieldVisible('basket.item.item_id') && basketItem.variation.data.item.id">
@@ -179,14 +162,17 @@ import { mapState } from "vuex";
 const NotificationService = require("../../../services/NotificationService");
 
 import BasketSetComponentList from "./BasketSetComponentList.vue";
+import OrderPropertyValueList from "../../item/OrderPropertyValueList.vue"
 
 export default {
     name: "basket-list-item",
     
     components:
     {
-        BasketSetComponentList
+        BasketSetComponentList,
+        OrderPropertyValueList
     },
+
     props:
     {
         template:
@@ -297,27 +283,6 @@ export default {
                    this.isDataFieldVisible("basket.item.availability") && this.basketItem.variation.data.variation.availability.names.name ||
                    this.isDataFieldVisible("basket.item.description_long") && this.basketItem.variation.data.texts.description ||
                    this.isDataFieldVisible("basket.item.description_short") && this.basketItem.variation.data.texts.shortDescription;
-        },
-
-        propertiesWithAdditionalCostsVisible()
-        {
-            return this.basketItem.variation.data.properties.filter(property => {
-                return property.property &&
-                        property.property.isShownAtCheckout &&
-                        property.property.isShownAsAdditionalCosts &&
-                        !property.property.isOderProperty;
-            });
-        },
-
-        visibleProperties()
-        {
-            return this.basketItem.basketItemOrderParams.filter(orderParam => {
-                const matchingProperty = this.basketItem.variation.data.properties.find(property => {
-                    return property.property.id === parseInt(orderParam.propertyId)
-                });
-
-                return matchingProperty && matchingProperty.property.isShownAtCheckout;
-            });
         },
 
         ...mapState({
