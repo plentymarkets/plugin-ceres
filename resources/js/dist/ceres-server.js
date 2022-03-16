@@ -50567,7 +50567,8 @@ var render = function() {
             "</ul>",
             _vm._l(_vm.shownProperties, function(property) {
               return _c("order-property-value-list-item", {
-                key: property.propertyId
+                key: property.propertyId,
+                attrs: { property: property }
               })
             }),
             1

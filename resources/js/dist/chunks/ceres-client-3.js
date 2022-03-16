@@ -1657,7 +1657,8 @@ var render = function() {
           { staticClass: "ml-1 pl-3" },
           _vm._l(_vm.shownProperties, function(property) {
             return _c("order-property-value-list-item", {
-              key: property.propertyId
+              key: property.propertyId,
+              attrs: { property: property }
             })
           }),
           1
