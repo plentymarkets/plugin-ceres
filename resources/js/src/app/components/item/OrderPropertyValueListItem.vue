@@ -1,7 +1,17 @@
 <template>
     <li>
         <span class="d-block">
-            <strong :class="{ 'colon': property.property.valueType.length > 0 }">{{ property.property.names.name }} <template v-if="surcharge > 0">({{ $translate("Ceres::Template.basketIncludeAbbr") }} {{ surcharge | currency }})</template></strong>
+            <strong :class="{ 'colon': property.property.valueType.length > 0 }">
+                {{ property.property.names.name }} 
+                <template v-if="surcharge > 0">
+                    <template v-if="isPropertyWithAdditionalCosts">
+                        ({{ $translate("Ceres::Template.basketPlusAbbr") }} {{ surcharge | currency }})
+                    </template>
+                    <template v-else>
+                        ({{ $translate("Ceres::Template.basketIncludeAbbr") }} {{ surcharge | currency }})
+                    </template>
+                </template>
+            </strong>
             <span>
                 <span v-if="property.property.valueType === 'file'">
                     <a :href="property.property.value | fileUploadPath" target="_blank">
@@ -33,6 +43,14 @@ export default {
         surcharge()
         {
             return this.$options.filters.propertySurcharge([property], property.propertyId);
+        },
+
+        isPropertyWithAdditionalCosts()
+        {
+            return this.property.property &&
+                this.property.property.isShownAtCheckout &&
+                this.property.property.isShownAsAdditionalCosts &&
+                !this.property.property.isOderProperty
         }
     }
 }
