@@ -1,0 +1,16 @@
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set appearance   = widget.settings.appearance.mobile %}
+{% set hasSpacing = widget.settings.customMargin.mobile or widget.settings.customPadding.mobile %}
+{% set spacingSettings  = widget.settings.spacing %}
+{% set inlineSpacings   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses   = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+
+<div class="widget widget-softlogin widget-{{ appearance | default('primary') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+    <div class="widget-inner{% if hasSpacing %} m-0 p-0{% endif %}">
+        {{ Twig.do("include \"Ceres::Checkout.Partials.SoftLoginForm\"") }}
+    </div>
+</div>
+

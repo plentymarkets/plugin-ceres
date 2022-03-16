@@ -23,4 +23,5 @@ class WidgetTypes
     const CUSTOMER = 'customer';
     const MY_ACCOUNT = 'myaccount';
     const FORM = 'form';
+    const SOFT_LOGIN = 'softlogin';
 }

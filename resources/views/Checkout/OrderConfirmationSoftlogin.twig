@@ -1,0 +1,39 @@
+{% extends originalTemplate %}
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
+{% block PartialHead %}
+    {% embed getPartial('page-metadata') %}
+        {% if category is not defined %}
+            {# Use page title from multiligualism if no category is linked to be used as order confirmation #}
+            {% block title trans("Ceres::Template.orderConfirmation") %}
+        {% endif %}
+    {% endembed %}
+{% endblock %}
+
+{% block PageBody %}
+    {% set hasShopBuilderContent = false %}
+    {% if category is defined %}
+        {% set shopBuilderTemplate = shop_builder_category_template(category.id, "softlogin") %}
+        {% if shopBuilderTemplate | trim is not empty %}
+            {% set hasShopBuilderContent = true %}
+            <div class="container-max mt-5 verify-order">
+                <div class="row mb-5">
+                    <div class="col">
+                        {{ shopBuilderTemplate | raw }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% if not hasShopBuilderContent %}
+        {# No category defined to be used as order confirmation #}
+        <div class="container-max mt-5 verify-order">
+            <div class="row mb-5">
+                <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-3">
+                    {% include "Ceres::Checkout.Partials.SoftLoginForm" %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
