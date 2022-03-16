@@ -1,5 +1,5 @@
 <template>
-    <div class="small" v-if="properties && properties.length">
+    <div class="small" v-if="shownProperties && shownProperties.length">
         <div class="font-weight-bold my-1">{{ $translate('Ceres::Template.basketAdditionalCosts') }}:</div>
         <ul class="ml-1 pl-3">
             <order-property-value-list-item v-for="property in shownProperties" :key="property.propertyId"></order-property-value-list-item>

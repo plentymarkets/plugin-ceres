@@ -35,6 +35,7 @@
             <div class="small" v-if="orderProperties && orderProperties.length">
                 <div class="font-weight-bold my-1">{{ $translate("Ceres::Template.basketAdditionalOptions") }}:</div>
                 <ul class="ml-1 pl-3">
+                    <!-- TODO add property with aditional costs -->
                     <li v-for="property in orderProperties" :key="property.propertyId" v-show="isPropertyVisible(property.propertyId)">
                         <span class="d-block">
                             <strong :class="{ 'colon': property.type.length > 0 }">{{ property.name }} ({{ $translate("Ceres::Template.basketIncludeAbbr") }} {{ variation.properties | propertySurcharge(property.propertyId, rebate) | currency }})</strong>
