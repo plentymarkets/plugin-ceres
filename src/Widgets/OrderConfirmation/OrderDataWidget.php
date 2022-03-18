@@ -80,6 +80,11 @@ class OrderDataWidget extends OrderConfirmationBaseWidget
         $settings->createCheckbox("showCustomerId")
             ->withDefaultValue(false)
             ->withName("Widget.orderDataShowCustomerId");
+        
+        $settings->createCheckbox("outline")
+            ->withDefaultValue(false)
+            ->withName("Widget.orderDataOutlineLabel")
+            ->withTooltip("Widget.orderDataOutlineTooltip");
 
         $settings->createSpacing();
 
