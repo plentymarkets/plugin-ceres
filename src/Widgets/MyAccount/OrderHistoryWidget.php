@@ -77,6 +77,11 @@ class OrderHistoryWidget extends BaseWidget
             ->withName("Widget.orderHistoryAllowReturnLabel")
             ->withTooltip("Widget.orderHistoryAllowReturnTooltip");
 
+        $settings->createCheckbox("outline")
+            ->withDefaultValue(false)
+            ->withName("Widget.orderHistoryOutlineLabel")
+            ->withTooltip("Widget.orderHistoryOutlineTooltip");
+
         $settings->createSpacing(false, true);
 
         return $settings->toArray();
