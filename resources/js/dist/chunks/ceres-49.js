@@ -578,7 +578,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "order-property-value-list",
   components: {
-    "order-property-value-list-item": _OrderPropertyValueListItem_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+    OrderPropertyValueListItem: _OrderPropertyValueListItem_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   props: {
     basketItem: {

@@ -616,9 +616,14 @@ __webpack_require__.r(__webpack_exports__);
       return this.$options.filters.itemName(this.variation);
     },
     basketItem: function basketItem() {
-      return this.$store.state.basket.items.find(function (item) {
-        return property.basketItemId === item.id;
-      });
+      if (this.orderProperties && this.orderProperties.length > 0) {
+        var basketItemId = this.orderProperties[0].basketItemId;
+        return this.$store.state.basket.items.find(function (item) {
+          return basketItemId === item.id;
+        });
+      }
+
+      return null;
     }
   }
 });

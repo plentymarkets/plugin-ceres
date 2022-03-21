@@ -69,7 +69,13 @@ export default {
 
         basketItem()
         {
-            return this.$store.state.basket.items.find(item => property.basketItemId === item.id);
+            if (this.orderProperties && this.orderProperties.length > 0)
+            {
+                const basketItemId = this.orderProperties[0].basketItemId;
+                return this.$store.state.basket.items.find(item => basketItemId === item.id);
+            }
+
+            return null;
         }
     }
 }
