@@ -38,8 +38,14 @@
 </template>
 
 <script>
+import OrderPropertyValueList from "../../item/OrderPropertyValueList.vue"
+
 export default {
     name: "set-component-item",
+
+    components: {
+        OrderPropertyValueList
+    },
     
     props: {
         variation: Object,
