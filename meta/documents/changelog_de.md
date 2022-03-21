@@ -10,7 +10,7 @@
 
 - Dem Artikelraster-Widget und dem Artikellisten-Widget wurden eine Option hinzugefügt, mit der der Hinweis auf die Mehrwertsteuer ausgeblendet werden kann.
 - Dem Artikelraster-Widget und dem Artikellisten-Widget wurden eine Option hinzugefügt, mit der der Hintergrund der Artikelkacheln grau eingefärbt werden kann.
-- Im Newsletter-Widget wurde ein Text zur Beschreibung der Pflichtangaben hinzugefügt. Dieser lässt sich über den Übersetzungschlüssel **newsletterIsRequiered** in Menü **CMS » Mehrsprachigkeit** anpassen.
+- Im Newsletter-Widget wurde ein Text zur Beschreibung der Pflichtangaben hinzugefügt. Dieser lässt sich über den Übersetzungschlüssel **newsletterIsRequired** in Menü **CMS » Mehrsprachigkeit** anpassen.
 - Dem Widget Bilderkarussell wurde eine neue Option hinzugefügt, mit der Bilder auf die gesamte Bildschirmbreite skaliert werden können.
 - Die Widgets Bilderbox, Bilderkarussell und Hintergrundbild enthalten nun die Option, Bilder auf die volle Bildschirmhöhe zu skalieren.
 - Die Widgets Gutscheineingabe, Artikelliste, Artikelraster, Toolbar, Auftragsdaten und Auftragshistorie enthalten nun die Option, Schaltflächen als umrandete Buttons anzuzeigen. Für die Artikelliste und das Artikelraster betrifft dies nur die Darstellung auf mobilen Endgeräten.
