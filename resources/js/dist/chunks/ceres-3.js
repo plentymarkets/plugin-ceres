@@ -552,9 +552,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.number.constructor.js */ "./node_modules/core-js/modules/es.number.constructor.js");
 /* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
-/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_1__);
-
 
 //
 //
@@ -615,15 +612,14 @@ __webpack_require__.r(__webpack_exports__);
     itemName: function itemName() {
       return this.$options.filters.itemName(this.variation);
     },
-    basketItem: function basketItem() {
-      if (this.orderProperties && this.orderProperties.length > 0) {
-        var basketItemId = this.orderProperties[0].basketItemId;
-        return this.$store.state.basket.items.find(function (item) {
-          return basketItemId === item.id;
-        });
-      }
-
-      return null;
+    mappedBasketItem: function mappedBasketItem() {
+      // bring given data in basket item structure
+      return {
+        variation: {
+          data: this.variation
+        },
+        basketItemOrderParams: this.orderProperties
+      };
     }
   }
 });
@@ -1532,11 +1528,9 @@ var render = function() {
           2
         ),
         _vm._v(" "),
-        _vm.basketItem
-          ? _c("order-property-value-list", {
-              attrs: { "basket-item": _vm.basketItem }
-            })
-          : _vm._e()
+        _c("order-property-value-list", {
+          attrs: { "basket-item": _vm.mappedBasketItem }
+        })
       ],
       2
     )

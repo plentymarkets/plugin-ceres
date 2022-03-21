@@ -32,7 +32,7 @@
                 </template>
             </div>
 
-            <order-property-value-list v-if="basketItem" :basket-item="basketItem"></order-property-value-list>
+            <order-property-value-list :basket-item="mappedBasketItem"></order-property-value-list>
         </div>
     </div>
 </template>
@@ -67,15 +67,16 @@ export default {
             return this.$options.filters.itemName(this.variation);
         },
 
-        basketItem()
+        mappedBasketItem()
         {
-            if (this.orderProperties && this.orderProperties.length > 0)
-            {
-                const basketItemId = this.orderProperties[0].basketItemId;
-                return this.$store.state.basket.items.find(item => basketItemId === item.id);
-            }
-
-            return null;
+            // bring given data in basket item structure
+            return {
+                variation:
+                {
+                    data: this.variation
+                },
+                basketItemOrderParams: this.orderProperties
+            };
         }
     }
 }
