@@ -17,7 +17,7 @@
             <div class="col-12">
                 <div class="input-group">
                     <div class="input-unit" data-validate="mail">
-                        <label :for="'email-input-id_' + _uid">{{ $translate("Ceres::Template.newsletterEmail") }} {{ $translate("Ceres::Template.newsletterIsRequieredFootnote") }}</label>
+                        <label :for="'email-input-id_' + _uid">{{ $translate("Ceres::Template.newsletterEmail") }} {{ $translate("Ceres::Template.newsletterIsRequiredFootnote") }}</label>
                         <input @focus="loadRecaptcha = true" type="email" autocomplete="email" :id="'email-input-id_' + _uid" v-model="email" data-testing="nl-mail">
                     </div>
                     <input autocomplete="none" class="honey" type="text" name="username" tabindex="-1" v-model="honeypot">
@@ -95,7 +95,7 @@ export default {
                 + this.$translate("Ceres::Template.checkoutPrivacyPolicy", {"hyphen": "&shy;"})
                 + "</span></a>";
 
-            return this.$translate("Ceres::Template.newsletterAcceptPrivacyPolicy", {"policy": link}) + this.$translate("Ceres::Template.newsletterIsRequieredFootnote");
+            return this.$translate("Ceres::Template.newsletterAcceptPrivacyPolicy", {"policy": link}) + this.$translate("Ceres::Template.newsletterIsRequiredFootnote");
         }
     },
 
