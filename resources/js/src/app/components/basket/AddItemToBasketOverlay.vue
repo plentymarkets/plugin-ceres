@@ -72,12 +72,17 @@
 <script>
 import { isNullOrUndefined } from "../../helper/utils";
 import { mapState } from "vuex";
+import OrderPropertyValueList from "../item/OrderPropertyValueList.vue"
 
 const ModalService  = require("../../services/ModalService");
 const ApiService    = require("../../services/ApiService");
 
 export default {
     name: "add-item-to-basket-overlay",
+
+    components: {
+        OrderPropertyValueList
+    },
     
     props: {
         defaultTimeToClose: {
