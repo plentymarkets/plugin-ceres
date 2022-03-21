@@ -13,12 +13,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
 /* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
 /* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
@@ -41,23 +41,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -217,20 +200,6 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
         basket: App.urls.basket,
         checkout: App.urls.checkout
       };
-    },
-    shownOrderProperties: function shownOrderProperties() {
-      var _this2 = this;
-
-      return this.basketItem.basketItemOrderParams.filter(function (property) {
-        return !!_this2.variation.properties.find(function (prop) {
-          return prop.propertyId == property.propertyId;
-        });
-      });
-    },
-    propertiesWithAdditionalCostsVisible: function propertiesWithAdditionalCostsVisible() {
-      return this.variation.properties.filter(function (property) {
-        return property.property && property.property.isShownAtCheckout && property.property.isShownAsAdditionalCosts && !property.property.isOderProperty;
-      });
     }
   }),
   methods: {
@@ -365,161 +334,9 @@ var render = function() {
                           ])
                         }),
                         _vm._v(" "),
-                        _vm.shownOrderProperties.length ||
-                        _vm.propertiesWithAdditionalCostsVisible.length
-                          ? _c("div", { staticClass: "small" }, [
-                              _c(
-                                "div",
-                                { staticClass: "font-weight-bold my-1" },
-                                [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.singleItemAdditionalOptions"
-                                      )
-                                    ) + ":"
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "ul",
-                                { staticClass: "ml-1 pl-3" },
-                                [
-                                  _vm._l(
-                                    _vm.propertiesWithAdditionalCostsVisible,
-                                    function(property) {
-                                      return _c(
-                                        "li",
-                                        { key: property.propertyId },
-                                        [
-                                          _c(
-                                            "span",
-                                            { staticClass: "d-block" },
-                                            [
-                                              _c(
-                                                "strong",
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      property.property.names
-                                                        .name
-                                                    ) + " "
-                                                  ),
-                                                  _vm.$options.filters.propertySurcharge(
-                                                    _vm.basketItem.variation
-                                                      .data.properties,
-                                                    property.propertyId
-                                                  ) > 0
-                                                    ? [
-                                                        _vm._v(
-                                                          "(" +
-                                                            _vm._s(
-                                                              _vm.$translate(
-                                                                "Ceres::Template.singleItemIncludeAbbr"
-                                                              )
-                                                            ) +
-                                                            " " +
-                                                            _vm._s(
-                                                              _vm._f(
-                                                                "currency"
-                                                              )(
-                                                                _vm._f(
-                                                                  "propertySurcharge"
-                                                                )(
-                                                                  _vm.basketItem
-                                                                    .variation
-                                                                    .data
-                                                                    .properties,
-                                                                  property.propertyId
-                                                                )
-                                                              )
-                                                            ) +
-                                                            ")"
-                                                        )
-                                                      ]
-                                                    : _vm._e()
-                                                ],
-                                                2
-                                              )
-                                            ]
-                                          )
-                                        ]
-                                      )
-                                    }
-                                  ),
-                                  _vm._v(" "),
-                                  _vm._l(_vm.shownOrderProperties, function(
-                                    property
-                                  ) {
-                                    return _c(
-                                      "li",
-                                      { key: property.propertyId },
-                                      [
-                                        _c("span", { staticClass: "d-block" }, [
-                                          _c(
-                                            "strong",
-                                            {
-                                              class: {
-                                                colon: property.type.length > 0
-                                              }
-                                            },
-                                            [
-                                              _vm._v(
-                                                _vm._s(property.name) + " "
-                                              ),
-                                              _vm.$options.filters.propertySurcharge(
-                                                _vm.basketItem.variation.data
-                                                  .properties,
-                                                property.propertyId
-                                              ) > 0
-                                                ? [
-                                                    _vm._v(
-                                                      "(" +
-                                                        _vm._s(
-                                                          _vm.$translate(
-                                                            "Ceres::Template.singleItemIncludeAbbr"
-                                                          )
-                                                        ) +
-                                                        " " +
-                                                        _vm._s(
-                                                          _vm._f("currency")(
-                                                            _vm._f(
-                                                              "propertySurcharge"
-                                                            )(
-                                                              _vm.basketItem
-                                                                .variation.data
-                                                                .properties,
-                                                              property.propertyId
-                                                            )
-                                                          )
-                                                        ) +
-                                                        ") "
-                                                    )
-                                                  ]
-                                                : _vm._e()
-                                            ],
-                                            2
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "span",
-                                            [
-                                              _c("order-property-value", {
-                                                attrs: { property: property }
-                                              })
-                                            ],
-                                            1
-                                          )
-                                        ])
-                                      ]
-                                    )
-                                  })
-                                ],
-                                2
-                              )
-                            ])
-                          : _vm._e()
+                        _c("order-property-value-list", {
+                          attrs: { "basket-item": _vm.basketItem }
+                        })
                       ],
                       2
                     )

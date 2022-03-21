@@ -106,7 +106,7 @@
 
                 <basket-set-component-list v-if="basketItem.setComponents" :set-components="basketItem.setComponents" :set-item="basketItem"></basket-set-component-list>
                 
-                <order-property-value-list :basketItem="basketItem"></order-property-value-list>
+                <order-property-value-list :basket-item="basketItem"></order-property-value-list>
 
                 <div class="small" v-if="showMoreInformation">
                     <template v-if="isDataFieldVisible('basket.item.item_id') && basketItem.variation.data.item.id">

@@ -42,24 +42,7 @@
                                     <span>{{ attribute.value.names.name }}</span>
                                 </p>
 
-                                <div class="small" v-if="shownOrderProperties.length || propertiesWithAdditionalCostsVisible.length">
-                                    <div class="font-weight-bold my-1">{{ $translate("Ceres::Template.singleItemAdditionalOptions") }}:</div>
-                                    <ul class="ml-1 pl-3">
-                                        <li v-for="property in propertiesWithAdditionalCostsVisible" :key="property.propertyId">
-                                            <span class="d-block">
-                                                <strong>{{ property.property.names.name }} <template v-if="$options.filters.propertySurcharge(basketItem.variation.data.properties, property.propertyId) > 0">({{ $translate("Ceres::Template.singleItemIncludeAbbr") }} {{ basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency }})</template></strong>
-                                            </span>
-                                        </li>
-                                        <li v-for="property in shownOrderProperties" :key="property.propertyId">
-                                            <span class="d-block">
-                                                <strong :class="{ 'colon': property.type.length > 0 }">{{ property.name }} <template v-if="$options.filters.propertySurcharge(basketItem.variation.data.properties, property.propertyId) > 0">({{ $translate("Ceres::Template.singleItemIncludeAbbr") }} {{ basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency }}) </template></strong>
-                                                <span>
-                                                    <order-property-value :property="property"></order-property-value>
-                                                </span>
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <order-property-value-list :basket-item="basketItem"></order-property-value-list>
 
                             </div>
                         </div>
@@ -197,24 +180,6 @@ export default {
                 basket: App.urls.basket,
                 checkout: App.urls.checkout
             }
-        },
-
-        shownOrderProperties()
-        {
-            return this.basketItem.basketItemOrderParams.filter(property =>
-            {
-                return !!this.variation.properties.find(prop => prop.propertyId == property.propertyId);
-            });
-        },
-
-        propertiesWithAdditionalCostsVisible()
-        {
-            return this.variation.properties.filter(property => {
-                return property.property &&
-                        property.property.isShownAtCheckout &&
-                        property.property.isShownAsAdditionalCosts &&
-                        !property.property.isOderProperty;
-            });
         }
     },
 

@@ -16,7 +16,7 @@ export default {
 
     components:
     {
-        "order-property-value-list-item": OrderPropertyValueListItem
+        OrderPropertyValueListItem
     },
 
     props:

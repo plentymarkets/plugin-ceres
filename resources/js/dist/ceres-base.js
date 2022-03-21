@@ -69079,9 +69079,6 @@ vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("form-attachment", function
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("item-bundle", function () {
   return __webpack_require__.e(/*! import() */ 34).then(__webpack_require__.bind(null, /*! ./app/components/item/ItemBundle.vue */ "./resources/js/src/app/components/item/ItemBundle.vue"));
 });
-vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("order-property-value", function () {
-  return __webpack_require__.e(/*! import() */ 37).then(__webpack_require__.bind(null, /*! ./app/components/item/OrderPropertyValue.vue */ "./resources/js/src/app/components/item/OrderPropertyValue.vue"));
-});
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("quantity-input", function () {
   return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./app/components/item/QuantityInput.vue */ "./resources/js/src/app/components/item/QuantityInput.vue"));
 });
