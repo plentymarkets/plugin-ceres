@@ -26,7 +26,7 @@
     {{ Twig.if( "itemList is not empty" ) }}
         <ul class="widget-inner row product-list grid">
             {{ Twig.for("item", "itemList") }}
-                {{ Twig.do("cacheblock") }}
+                {{ Twig.do("cacheblock use \"variation.\" ~ item.data.variation.id") }}
                     <li class="col-{{ 12 / numberOfColumnsMobile }} col-md-{{ 12 / numberOfColumnsTablet }} col-lg-{{ 12 / numberOfColumnsDesktop }}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                     {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
                         <intersect>
