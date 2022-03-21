@@ -116,7 +116,7 @@ __webpack_require__.r(__webpack_exports__);
       }) + "</span></a>";
       return this.$translate("Ceres::Template.newsletterAcceptPrivacyPolicy", {
         "policy": link
-      }) + this.$translate("Ceres::Template.newsletterIsRequieredFootnote");
+      }) + this.$translate("Ceres::Template.newsletterIsRequiredFootnote");
     }
   },
   methods: {
@@ -341,7 +341,7 @@ var render = function() {
                       " " +
                       _vm._s(
                         _vm.$translate(
-                          "Ceres::Template.newsletterIsRequieredFootnote"
+                          "Ceres::Template.newsletterIsRequiredFootnote"
                         )
                       )
                   )
