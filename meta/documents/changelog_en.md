@@ -10,7 +10,7 @@
 
 - The item grid and item list widgets now contain a new option via which the VAT note can be hidden.
 - The item grid and item list widgets now contain a new option via which the bakground of the item tiles can be coloured grey.
-- The newsletter widget now contains a text for describing mandatory input fields. You can edit the text with the translation key **newsletterIsRequiered** in the **CMS » Multilingualism** menu. 
+- The newsletter widget now contains a text for describing mandatory input fields. You can edit the text with the translation key **newsletterIsRequired** in the **CMS » Multilingualism** menu. 
 - We added a new option to the image carousel widget with which images can be scaled to the full screen width.
 - The widgets image box, image carousel and background image now contain an option via which images can be scaled to the full screen height.
 - The widgets coupon input, item list, item grid, tool bar, order data and order history now contain the option to display buttons as outlined buttons. For item lists and item grid widgets, this only applies to the display on mobile devices.
