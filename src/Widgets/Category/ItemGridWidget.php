@@ -104,6 +104,11 @@ class ItemGridWidget extends BaseWidget
         ->withName('Widget.itemGridGrayBackgroundLabel')
         ->withTooltip('Widget.itemGridGrayBackgroundTooltip');
 
+        $settings->createCheckbox('outline')
+        ->withDefaultValue(false)
+        ->withName('Widget.itemGridOutlineLabel')
+        ->withTooltip('Widget.itemGridOutlineTooltip');
+
         $settings->createSpacing();
 
         return $settings->toArray();

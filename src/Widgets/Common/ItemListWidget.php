@@ -158,6 +158,11 @@ class ItemListWidget extends BaseWidget
             ->withName('Widget.itemListGrayBackgroundLabel')
             ->withTooltip('Widget.itemListGrayBackgroundTooltip');
 
+        $settings->createCheckbox('outline')
+            ->withDefaultValue(false)
+            ->withName('Widget.itemListOutlineLabel')
+            ->withTooltip('Widget.itemListOutlineTooltip');
+
         $settings->createSpacing();
 
         return $settings->toArray();

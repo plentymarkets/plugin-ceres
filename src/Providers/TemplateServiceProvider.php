@@ -409,6 +409,7 @@ class TemplateServiceProvider extends ServiceProvider
         $templateConfigRepo = pluginApp(TemplateConfigRepositoryContract::class);
 
         $templateConfigRepo
+            ->registerConfigValue('confirmation.verifyOrderTemplate', 'Ceres::Checkout.OrderConfirmationSoftlogin')
             ->registerConfigValue('currency.format', $ceresConfig->currency->format)
             ->registerConfigValue('sort.defaultSorting', $ceresConfig->sorting->defaultSorting)
             ->registerConfigValue('sort.defaultSortingSearch', $ceresConfig->sorting->defaultSortingSearch)

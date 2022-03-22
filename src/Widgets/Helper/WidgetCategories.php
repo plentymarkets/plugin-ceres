@@ -18,4 +18,5 @@ class WidgetCategories
     const ORDER_CONFIRMATION = "orderconfirmation";
     const NAVIGATION = "navigation";
     const FOOTER = "footer";
+    const SOFT_LOGIN = "softlogin";
 }

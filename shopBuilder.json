@@ -14,6 +14,7 @@
         "header":       ["header", "static", "structure", "default"],
         "footer":       ["footer", "static", "structure", "default"],
         "content":      ["static", "structure", "default"],
+        "softlogin":    ["static", "structure", "default", "softlogin"],
         "singleitem":   ["static", "structure", "default", "item", "itemcontent", "singleitem", "setcomponent"],
         "itemset":      ["static", "structure", "default", "item", "itemcontent", "setitem"],
         "categoryitem": ["static", "structure", "default", "categoryitem"],
@@ -102,6 +103,12 @@
             {
                 "label": "Widget.presetGTCDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultGTCPreset"
+            }
+        ],
+        "softlogin": [
+            {
+                "label": "Widget.presetSoftLoginDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\DefaultSoftLoginPreset"
             }
         ],
         "checkout": [
@@ -215,6 +222,11 @@
             "key": "navigation",
             "label": "Widget.categoryNavigation",
             "position": 1400
+        },
+        {
+            "key": "softlogin",
+            "label": "Widget.categoryOrderConfirmationSoftlogin",
+            "position": 1500
         },
         {
             "key": "footer",
@@ -627,6 +639,7 @@
         "singleItemContent": true,
         "itemSetContent": true,
         "globalElementsOverride": true,
-        "safeMode" : true
+        "safeMode" : true,
+        "softlogin" : true
     }
 }

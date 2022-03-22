@@ -7974,6 +7974,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
@@ -8061,16 +8062,16 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       return this.property.itemSurcharge || this.property.surcharge;
     },
     footnotes: function footnotes() {
-      if (this.surcharge > 0 && this.property.isRequired) {
-        return this.$translate("Ceres::Template.singleItemFootnote12");
-      }
-
-      if (this.surcharge <= 0 && this.property.isRequired) {
-        return this.$translate("Ceres::Template.singleItemFootnote2");
-      }
-
-      if (this.surcharge > 0 && !this.property.isRequired) {
-        return this.$translate("Ceres::Template.singleItemFootnote1");
+      if (this.surcharge <= 0) {
+        if (this.property.isRequired && !this.property.isPreSelected) {
+          return this.$translate("Ceres::Template.singleItemFootnote2");
+        }
+      } else if (this.surcharge > 0) {
+        if (this.property.isRequired && !this.property.isPreSelected) {
+          return this.$translate("Ceres::Template.singleItemFootnote12");
+        } else {
+          return this.$translate("Ceres::Template.singleItemFootnote1");
+        }
       }
     },
     selectedDescription: function selectedDescription() {
@@ -12374,7 +12375,7 @@ __webpack_require__.r(__webpack_exports__);
       }) + "</span></a>";
       return this.$translate("Ceres::Template.newsletterAcceptPrivacyPolicy", {
         "policy": link
-      }) + this.$translate("Ceres::Template.newsletterIsRequieredFootnote");
+      }) + this.$translate("Ceres::Template.newsletterIsRequiredFootnote");
     }
   },
   methods: {
@@ -49741,7 +49742,8 @@ var render = function() {
             "</div>",
             [
               _vm._ssrNode(
-                (_vm.inputType === "checkbox"
+                (_vm.inputType === "checkbox" &&
+                !(_vm.property.isRequired && _vm.property.isPreSelected)
                   ? '<input type="checkbox"' +
                     _vm._ssrAttr(
                       "name",
@@ -49752,7 +49754,8 @@ var render = function() {
                     _vm._ssrAttr("value", _vm.property.id) +
                     _vm._ssrAttr("checked", _vm.property.value) +
                     ' class="form-check-input">'
-                  : '<input type="radio"' +
+                  : _vm.inputType === "radio"
+                  ? '<input type="radio"' +
                     _vm._ssrAttr(
                       "name",
                       _vm.group ? _vm.group.id : "check" + _vm._uid
@@ -49761,7 +49764,8 @@ var render = function() {
                     ' data-testing="order-property-input-radio"' +
                     _vm._ssrAttr("value", _vm.property.id) +
                     _vm._ssrAttr("checked", _vm.property.value) +
-                    ' class="form-check-input">') + " "
+                    ' class="form-check-input">'
+                  : "<!---->") + " "
               ),
               _c(
                 "label",
@@ -49771,7 +49775,8 @@ var render = function() {
                   attrs: {
                     for: "check" + _vm._uid,
                     "data-toggle": "tooltip",
-                    title: _vm.property.names.description
+                    title: _vm.property.names.description,
+                    "data-testing": "order-property-label-" + _vm.inputType
                   }
                 },
                 [
@@ -53763,7 +53768,7 @@ var render = function() {
                   " " +
                   _vm._s(
                     _vm.$translate(
-                      "Ceres::Template.newsletterIsRequieredFootnote"
+                      "Ceres::Template.newsletterIsRequiredFootnote"
                     )
                   )
               ) +
@@ -61496,10 +61501,10 @@ module.exports = __webpack_require__(/*! ./build */ "./node_modules/vue-template
 /*!*********************************************************!*\
   !*** ./node_modules/vue-template-compiler/package.json ***!
   \*********************************************************/
-/*! exports provided: name, version, description, main, unpkg, jsdelivr, browser, types, repository, keywords, author, license, bugs, homepage, dependencies, devDependencies, default */
+/*! exports provided: _args, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, browser, bugs, dependencies, description, devDependencies, homepage, jsdelivr, keywords, license, main, name, repository, types, unpkg, version, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"vue-template-compiler\",\"version\":\"2.6.12\",\"description\":\"template compiler for Vue 2.0\",\"main\":\"index.js\",\"unpkg\":\"browser.js\",\"jsdelivr\":\"browser.js\",\"browser\":\"browser.js\",\"types\":\"types/index.d.ts\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/vuejs/vue.git\"},\"keywords\":[\"vue\",\"compiler\"],\"author\":\"Evan You\",\"license\":\"MIT\",\"bugs\":{\"url\":\"https://github.com/vuejs/vue/issues\"},\"homepage\":\"https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#readme\",\"dependencies\":{\"he\":\"^1.1.0\",\"de-indent\":\"^1.0.2\"},\"devDependencies\":{\"vue\":\"file:../..\"}}");
+module.exports = JSON.parse("{\"_args\":[[\"vue-template-compiler@2.6.12\",\"/Users/lukasmatzen/workspace/plugin-ceres\"]],\"_from\":\"vue-template-compiler@2.6.12\",\"_id\":\"vue-template-compiler@2.6.12\",\"_inBundle\":false,\"_integrity\":\"sha512-OzzZ52zS41YUbkCBfdXShQTe69j1gQDZ9HIX8miuC9C3rBCk9wIRjLiZZLrmX9V+Ftq/YEyv1JaVr5Y/hNtByg==\",\"_location\":\"/vue-template-compiler\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"vue-template-compiler@2.6.12\",\"name\":\"vue-template-compiler\",\"escapedName\":\"vue-template-compiler\",\"rawSpec\":\"2.6.12\",\"saveSpec\":null,\"fetchSpec\":\"2.6.12\"},\"_requiredBy\":[\"/\"],\"_resolved\":\"https://registry.npmjs.org/vue-template-compiler/-/vue-template-compiler-2.6.12.tgz\",\"_spec\":\"2.6.12\",\"_where\":\"/Users/lukasmatzen/workspace/plugin-ceres\",\"author\":{\"name\":\"Evan You\"},\"browser\":\"browser.js\",\"bugs\":{\"url\":\"https://github.com/vuejs/vue/issues\"},\"dependencies\":{\"de-indent\":\"^1.0.2\",\"he\":\"^1.1.0\"},\"description\":\"template compiler for Vue 2.0\",\"devDependencies\":{\"vue\":\"file:../..\"},\"homepage\":\"https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#readme\",\"jsdelivr\":\"browser.js\",\"keywords\":[\"vue\",\"compiler\"],\"license\":\"MIT\",\"main\":\"index.js\",\"name\":\"vue-template-compiler\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/vuejs/vue.git\"},\"types\":\"types/index.d.ts\",\"unpkg\":\"browser.js\",\"version\":\"2.6.12\"}");
 
 /***/ }),
 

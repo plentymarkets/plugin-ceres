@@ -90,7 +90,7 @@ class ImageBoxWidget extends BaseWidget
             );
 
         $settings->createSelect('imageSize')
-            ->withCondition("aspectRatio !== 'retain'")
+            ->withCondition("aspectRatio !== 'retain' && fullHeight !== true")
             ->withDefaultValue('cover')
             ->withName('Widget.imageBoxImageSizeLabel')
             ->withTooltip('Widget.imageBoxImageSizeTooltip')

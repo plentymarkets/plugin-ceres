@@ -35,6 +35,7 @@ class OnlineStoreStep extends Step
                 $this->buildStoreCategoryTypesStructure(),
                 $this->buildStoreBack2Top(),
                 $this->buildStoreEmailSettings(),
+                $this->buildOrderconfirmationSettings(),
                 $this->buildVariationOrderPropertiesSettings(),
                 $this->buildStoreOrderSettings(),
                 $this->buildStoreShippingSettings(),
@@ -126,10 +127,32 @@ class OnlineStoreStep extends Step
     /**
      * @return array
      */
-    private function buildStoreEmailSettings(): array
+    private function buildOrderconfirmationSettings(): array
     {
         $confirmationLinkExpiration = OnlineStoreConfig::getConfirmationLinkExpiration();
         $confirmationList = StepHelper::generateTranslatedListBoxValues($confirmationLinkExpiration);
+
+        return [
+            "title" => "Wizard.orderconfirmationSetting",
+            "description" => "Wizard.orderconfirmationSettingsDescription",
+            "form" => [
+                "onlineStore_confirmationLinkExpiration" => [
+                    "type" => "select",
+                    "defaultValue" => $confirmationList[0]['value'],
+                    "options" => [
+                        "name" => "Wizard.validityCheckoutURL",
+                        "listBoxValues" => $confirmationList
+                    ]
+                ],
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function buildStoreEmailSettings(): array
+    {
         $globaUserHashMax = OnlineStoreConfig::getUserHashMaxAge();
         $globaUserHashMaxList = StepHelper::generateTranslatedListBoxValues($globaUserHashMax);
 
@@ -142,14 +165,6 @@ class OnlineStoreStep extends Step
                     "defaultValue" => false,
                     "options" => [
                         "name" => "Wizard.forward2LoginPage"
-                    ]
-                ],
-                "onlineStore_confirmationLinkExpiration" => [
-                    "type" => "select",
-                    "defaultValue" => $confirmationList[0]['value'],
-                    "options" => [
-                        "name" => "Wizard.validityCheckoutURL",
-                        "listBoxValues" => $confirmationList
                     ]
                 ],
                 "onlineStore_globalUserDataHashMaxAge" => [

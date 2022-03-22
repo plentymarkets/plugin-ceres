@@ -13,6 +13,7 @@
 {% set spacingPadding   = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin    = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 {% set appearance       = widget.settings.appearance.mobile | default("primary") %}
+{% set outline          = widget.settings.outline.mobile is same as (true) %}
 
 {% set addressFields = widget.settings.addressFields.mobile | default([
     "title",
@@ -34,7 +35,8 @@
 <div class="widget widget-order-data widget-{{ appearance }} border
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}
     {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% else %} px-4 py-3{% endif %}
-    {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"
+    {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}
+    {% if outline %} btn-outline{% endif %}"
     {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
 

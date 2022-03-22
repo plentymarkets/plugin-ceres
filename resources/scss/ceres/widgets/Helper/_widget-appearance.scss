@@ -1,76 +1,98 @@
+@use "sass:selector";
 // stylelint-disable declaration-no-important
 @each $color, $value in $shop-builder-colors {
-    .widget-#{$color} {
-        @include text-emphasis-variant(".text-appearance", $value);
+  .widget-#{$color} {
+    @include text-emphasis-variant(".text-appearance", $value);
 
-        .bg-appearance {
-            color: color-yiq($value) !important;
-            background-color: $value !important;
+    .bg-appearance {
+      color: color-yiq($value) !important;
+      background-color: $value !important;
 
-            a {
-                color: color-yiq($value) !important;
-            }
-        }
-
-        a.bg-appearance:hover,
-        button.bg-appearance:hover {
-            color: color-yiq(darken($value, 10%)) !important;
-            background-color: darken($value, 10%) !important;
-        }
-
-        .btn-appearance {
-            @include button-variant($value, $value);
-        }
-
-        .btn-outline-appearance {
-            @include button-outline-variant($value);
-        }
-
-        a.text-appearance,
-        .btn-appearance {
-            text-decoration-color: $value;
-
-            @include hover-focus () {
-                text-decoration-color: darken($value, 7.5);
-            }
-        }
-
-        a:hover {
-            i.text-appearance {
-                color: darken($value, 7.5) !important;
-            }
-        }
-
-        .border-appearance.active,
-        .border-appearance:hover {
-            border-color: $value !important;
-        }
-
-        .add-to-basket-lg-container:hover {
-            border-color: transparent $value transparent transparent !important;
-        }
-
-        .pagination {
-            .page-item {
-                .page-link {
-                    color: $value;
-                    @include hover-focus () {
-                        color: darken($value, 15%);
-                    }
-                }
-
-                &.active .page-link { // stylelint-disable-line selector-max-class
-                    border-color: $value;
-                    @include context-bg($value);
-                }
-            }
-        }
-
-        .custom-control-appearance {
-            .custom-control-input:checked ~ .custom-control-label::before {
-                background-color: $value;
-                border-color: $value;
-            }
-        }
+      a {
+        color: color-yiq($value) !important;
+      }
     }
+
+    a.bg-appearance:hover,
+    button.bg-appearance:hover {
+      color: color-yiq(darken($value, 10%)) !important;
+      background-color: darken($value, 10%) !important;
+    }
+
+    .btn-appearance {
+      @include button-variant($value, $value);
+    }
+
+    &.btn-outline {
+      .btn {
+        @include btn-appearance($color: $value, $outline: true);
+        &.text-appearance:hover,
+        &.text-appearance:focus {
+          color: color-contrast(
+            $primary
+          ) !important; // special case for filter button
+        }
+      }
+    }
+
+    @at-root {
+      .btn-outline {
+        .btn-#{$color} {
+          @include btn-appearance($color: $value, $outline: true);
+        }
+      }
+    }
+
+    .btn-outline-appearance {
+      @include btn-appearance($color: $value, $outline: true);
+    }
+
+    a.text-appearance,
+    .btn-appearance {
+      text-decoration-color: $value;
+
+      @include hover-focus() {
+        text-decoration-color: darken($value, 7.5);
+      }
+    }
+
+    a:hover {
+      i.text-appearance {
+        color: darken($value, 7.5) !important;
+      }
+    }
+
+    .border-appearance.active,
+    .border-appearance:hover {
+      border-color: $value !important;
+    }
+
+    .add-to-basket-lg-container:hover {
+      border-color: transparent $value transparent transparent !important;
+    }
+
+    .pagination {
+      .page-item {
+        .page-link {
+          color: $value;
+          @include hover-focus() {
+            color: darken($value, 15%);
+          }
+        }
+
+        &.active .page-link {
+          // stylelint-disable-line selector-max-class
+          border-color: $value;
+          @include context-bg($value);
+        }
+      }
+    }
+
+    .custom-control-appearance {
+      .custom-control-input:checked ~ .custom-control-label::before {
+        background-color: $value;
+        border-color: $value;
+      }
+    }
+  }
 }
