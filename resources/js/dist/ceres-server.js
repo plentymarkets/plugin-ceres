@@ -53999,14 +53999,10 @@ var render = function() {
             ' <div class="col-12 text-right small mt-2">' +
               _vm._ssrEscape(
                 _vm._s(
-                  _vm.$translate(
-                    "Ceres::Template.newsletterIsRequieredFootnote"
-                  )
+                  _vm.$translate("Ceres::Template.newsletterIsRequiredFootnote")
                 ) +
                   " " +
-                  _vm._s(
-                    _vm.$translate("Ceres::Template.newsletterIsRequiered")
-                  )
+                  _vm._s(_vm.$translate("Ceres::Template.newsletterIsRequired"))
               ) +
               "</div>"
           )
