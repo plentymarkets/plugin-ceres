@@ -105,20 +105,8 @@
                 </div>
 
                 <basket-set-component-list v-if="basketItem.setComponents" :set-components="basketItem.setComponents" :set-item="basketItem"></basket-set-component-list>
-
-                <div class="small" v-if="basketItem.basketItemOrderParams && basketItem.basketItemOrderParams.length">
-                    <div class="font-weight-bold my-1">{{ $translate("Ceres::Template.basketAdditionalOptions") }}:</div>
-                    <ul class="ml-1 pl-3">
-                        <li v-for="property in basketItem.basketItemOrderParams" :key="property.propertyId" v-show="isPropertyVisible(property.propertyId)">
-                            <span class="d-block">
-                              <strong :class="{ 'colon': property.type.length > 0 }">{{ property.name }} <template v-if="$options.filters.propertySurcharge(basketItem.variation.data.properties, property.propertyId) > 0">({{ $translate("Ceres::Template.basketIncludeAbbr") }} {{ basketItem.variation.data.properties | propertySurcharge(property.propertyId) | currency }})</template></strong>
-                                <span>
-                                    <order-property-value :property="property"></order-property-value>
-                                </span>
-                            </span>
-                        </li>
-                    </ul>
-                </div>
+                
+                <order-property-value-list :basket-item="basketItem"></order-property-value-list>
 
                 <div class="small" v-if="showMoreInformation">
                     <template v-if="isDataFieldVisible('basket.item.item_id') && basketItem.variation.data.item.id">
@@ -174,14 +162,17 @@ import { mapState } from "vuex";
 const NotificationService = require("../../../services/NotificationService");
 
 import BasketSetComponentList from "./BasketSetComponentList.vue";
+import OrderPropertyValueList from "../../item/OrderPropertyValueList.vue"
 
 export default {
     name: "basket-list-item",
     
     components:
     {
-        BasketSetComponentList
+        BasketSetComponentList,
+        OrderPropertyValueList
     },
+
     props:
     {
         template:
@@ -373,18 +364,6 @@ export default {
                         this.waiting = false;
                     });
             }
-        },
-
-        isPropertyVisible(propertyId)
-        {
-            const property = this.basketItem.variation.data.properties.find(property => property.property.id === parseInt(propertyId));
-
-            if (property)
-            {
-                return property.property.isShownAtCheckout;
-            }
-
-            return false;
         },
 
         isDataFieldVisible(value)

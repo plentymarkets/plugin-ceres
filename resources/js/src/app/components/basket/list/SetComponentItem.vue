@@ -32,26 +32,20 @@
                 </template>
             </div>
 
-            <div class="small" v-if="orderProperties && orderProperties.length">
-                <div class="font-weight-bold my-1">{{ $translate("Ceres::Template.basketAdditionalOptions") }}:</div>
-                <ul class="ml-1 pl-3">
-                    <li v-for="property in orderProperties" :key="property.propertyId" v-show="isPropertyVisible(property.propertyId)">
-                        <span class="d-block">
-                            <strong :class="{ 'colon': property.type.length > 0 }">{{ property.name }} ({{ $translate("Ceres::Template.basketIncludeAbbr") }} {{ variation.properties | propertySurcharge(property.propertyId, rebate) | currency }})</strong>
-                            <span>
-                                <order-property-value :property="property"></order-property-value>
-                            </span>
-                        </span>
-                    </li>
-                </ul>
-            </div>
+            <order-property-value-list :basket-item="mappedBasketItem"></order-property-value-list>
         </div>
     </div>
 </template>
 
 <script>
+import OrderPropertyValueList from "../../item/OrderPropertyValueList.vue"
+
 export default {
     name: "set-component-item",
+
+    components: {
+        OrderPropertyValueList
+    },
     
     props: {
         variation: Object,
@@ -59,7 +53,6 @@ export default {
         orderProperties: Array,
         rebate: Number
     },
-
     computed: {
         itemImage()
         {
@@ -78,15 +71,18 @@ export default {
         itemName()
         {
             return this.$options.filters.itemName(this.variation);
-        }
-    },
+        },
 
-    methods: {
-        isPropertyVisible(propertyId)
+        mappedBasketItem()
         {
-            const property = this.variation.properties.find(property => property.property.id === parseInt(propertyId));
-
-            return property ? property.property.isShownAtCheckout : false;
+            // bring given data in basket item structure
+            return {
+                variation:
+                {
+                    data: this.variation
+                },
+                basketItemOrderParams: this.orderProperties
+            };
         }
     }
 }
