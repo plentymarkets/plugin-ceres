@@ -1,5 +1,47 @@
 # Release Notes for plentyShop LTS
 
+## v5.0.48 (2022-03-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.47...5.0.48" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
+
+### Added
+
+- The item grid and item list widgets now contain a new option via which the VAT note can be hidden.
+- The item grid and item list widgets now contain a new option via which the bakground of the item tiles can be coloured grey.
+- The newsletter widget now contains a text for describing mandatory input fields. You can edit the text with the translation key **newsletterIsRequired** in the **CMS » Multilingualism** menu. 
+- We added a new option to the image carousel widget with which images can be scaled to the full screen width.
+- The widgets image box, image carousel and background image now contain an option via which images can be scaled to the full screen height.
+- The widgets coupon input, item list, item grid, tool bar, order data and order history now contain the option to display buttons as outlined buttons. For item lists and item grid widgets, this only applies to the display on mobile devices.
+- You can now create ShopBuilder contents of the type **Softlogin** with the corresponding coftlogin widget.
+
+### Changed
+
+- The order property option **Pre-selected** is now considered by checkboxes in the shop. For order properties of the type **None** for which the order options **Pre-selected** and **Required** are active, no checkbox is displayed in the shop.
+- The URL from which the default company logo and default footer logo were loaded has been changed.
+
+### Fixed
+
+- The default tagging of cache blocks that contain category tree data or item data now works as intended.
+
+### Changed templates
+
+- In Ceres 5.0.48 we made changes to template files which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
+- [resources/views/Widgets/Category/ItemGridWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3232/files#diff-f0aaf1ea155523f16c664c97d4b8877ad9db66f705f85a59ebffc0a3834f2456)
+- [resources/views/Widgets/Common/ItemListWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3232/files#diff-56e4aca5195c81e2f933daaf2a1d1397fcd1e72844a24d75155dcab09e4cb0ee)
+- [resources/js/src/app/components/newsletter/NewsletterInput.vue](https://github.com/plentymarkets/plugin-ceres/pull/3235/files#diff-b0d8af375291becdbc1a0f4d1a4cee18317d747dc3bd044270ff390cdf4b1fa6)
+- [resources/views/Widgets/Common/ImageCarouselWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3233/files#diff-43b0576fe9cb61d0343a4aa220f562347c237717821f276ab632973e3970ec96)
+- [resources/views/Widgets/Common/BackgroundWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3213/files#diff-bd9967b42e5604fbd1cc0034b2ed9fbc4bb18113880fe371167076f046aee956)
+- [resources/views/Widgets/Common/ImageBoxWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3213/files#diff-9f438954b9f177761379a8b382eea014077ec743060583796ac4f9aaed3d3003)
+- [resources/views/Widgets/Common/ImageCarouselWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3213/files#diff-43b0576fe9cb61d0343a4aa220f562347c237717821f276ab632973e3970ec96)
+- [resources/views/Widgets/MyAccount/OrderHistoryWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3256/files#diff-f196d6bb6f33571742988039f2a995b8bb5b7e2b8e217ba7ddb9a6ebde4ada85)
+- [resources/views/Widgets/OrderConfirmation/OrderDataWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3256/files#diff-82affb09026a21fd94995e057ae7214f6751cf84dfed718216f4760865567c33)
+- [resources/views/Widgets/Basket/CouponWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3243/files#diff-1510e82d2597eb5bd730a313495e2f99bf742edc008f1d1e367fe7541e0e14e2)
+- [resources/views/Widgets/Category/ItemGridWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3243/files#diff-f0aaf1ea155523f16c664c97d4b8877ad9db66f705f85a59ebffc0a3834f2456)
+- [resources/views/Widgets/Category/ToolbarWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3243/files#diff-cfedbade4ecd9f8d924f41e488e7d75c9b3273dbc2e422fe3f3238ea03b0d3ea)
+- [resources/views/Widgets/Common/ItemListWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3243/files#diff-56e4aca5195c81e2f933daaf2a1d1397fcd1e72844a24d75155dcab09e4cb0ee)
+
 ## v5.0.47 (2022-02-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.46...5.0.47" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed

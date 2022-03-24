@@ -79,7 +79,8 @@ class DefaultHomepagePreset implements ContentPreset
         $this->preset->createWidget("Ceres::ImageCarouselWidget")
             ->withSetting("appearance", "primary")
             ->withSetting("preloadImage", true)
-            ->withSetting("customClass", "widget-fw vh-100 img-1-offset-md-20-flip-horizontal")
+            ->withSetting("customClass", "widget-fw img-1-offset-md-20-flip-horizontal")
+            ->withSetting("fullHeight", true)
             ->withSetting("slides", $slides)
             ->withSetting("spacing.customMargin", true)
             ->withSetting("spacing.margin.bottom.value", 3)
@@ -145,7 +146,8 @@ class DefaultHomepagePreset implements ContentPreset
     public function createBackground(): void
     {
         $bgContainer = $this->preset->createWidget("Ceres::BackgroundWidget")
-            ->withSetting("customClass", "align-items-end vh-100")
+            ->withSetting("customClass", "align-items-end")
+            ->withSetting("fullHeight", true)
             ->withSetting("fullWidth", true)
             ->withSetting("lazyloadImage", true)
             ->withSetting("sourceType", "custom-image")
@@ -307,7 +309,8 @@ class DefaultHomepagePreset implements ContentPreset
     public function createSecondBackground(): void
     {
         $bgContainer = $this->preset->createWidget("Ceres::BackgroundWidget")
-            ->withSetting("customClass", "text-right vh-100")
+            ->withSetting("customClass", "text-right")
+            ->withSetting("fullHeight", true)
             ->withSetting("fullWidth", true)
             ->withSetting("lazyloadImage", true)
             ->withSetting("sourceType", "custom-image")

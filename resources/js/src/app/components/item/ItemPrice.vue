@@ -27,7 +27,15 @@
             </span>
             <sup>{{ $translate("Ceres::Template.singleItemFootnote1") }}</sup>
         </span>
-
+        
+        <ul class="text-muted pl-0 list-unstyled" v-if="currentVariation.properties && currentVariation.properties.length">
+            <li v-for="property in propertiesWithAdditionalCostsVisible" :key="property.propertyId">
+                <span class="d-block">
+                    {{ property.property.names.name }} <template v-if="$options.filters.propertySurcharge(currentVariation.properties, property.propertyId) > 0">({{ $translate("Ceres::Template.basketPlusAbbr") }} {{ currentVariation.properties | propertySurcharge(property.propertyId) | currency }})</template>
+                </span>
+            </li>
+        </ul>
+        
         <!-- class .is-single-piece is added for customers to hide the unit if it is C62 -->
         <div class="base-price text-muted my-3"
             v-if="currentVariation.unit"
@@ -102,6 +110,15 @@ export default {
                 && (state.variationSelect && !state.variationSelect.isVariationSelected)
                 && (state.pleaseSelectVariationId === this.currentVariation.variation.id
                     || state.pleaseSelectVariationId === 0);
+        },
+
+        propertiesWithAdditionalCostsVisible() {
+            return this.currentVariation.properties.filter(property => {
+                return property.property &&
+                    property.property.isShownOnItemPage &&
+                    property.property.isShownAsAdditionalCosts &&
+                    !property.property.isOderProperty
+            });
         }
     }
 }

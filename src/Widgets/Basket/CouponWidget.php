@@ -40,6 +40,10 @@ class CouponWidget extends BaseWidget
 
         $settingsFactory->createCustomClass();
         $settingsFactory->createAppearance();
+        $settingsFactory->createCheckbox('outline')
+        ->withDefaultValue(false)
+        ->withName('Widget.couponOutlineLabel')
+        ->withTooltip('Widget.couponOutlineTooltip');
         $settingsFactory->createSpacing(false, true);
 
         return $settingsFactory->toArray();

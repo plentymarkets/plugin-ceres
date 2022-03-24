@@ -1,0 +1,25 @@
+<h1 class="form-title mb-5">{{ trans("Ceres::Template.softLoginTitle") }}</h1>
+<p>
+    {% if orderInputType == 'postcode' %}
+        {{ trans("Ceres::Template.softLoginDescriptionPostcode") }}
+    {% else %}
+        {{ trans("Ceres::Template.softLoginDescriptionName") }}
+    {% endif %}
+</p>
+
+<form method="POST" action="{{ confirmation_softlogin_action() }}">
+    <div class="input-unit">
+        {{ confirmation_softlogin_fields(orderId, orderAccessKey) }}
+        <label for="order_{{ orderInputType }}">
+            {% if orderInputType == 'postcode' %}
+                {{ trans("Ceres::Template.softLoginInputLabelPostcode") }}
+            {% else %}
+                {{ trans("Ceres::Template.softLoginInputLabelName") }}
+            {% endif %}
+        </label>
+    </div>
+    <button type="submit" class="btn btn-primary btn-appearance btn-medium float-right">
+        {{ trans('Ceres::Template.softLoginSubmitLabel') }}
+        <i aria-hidden="true" class="fa fa-user"></i>
+    </button>
+</form>

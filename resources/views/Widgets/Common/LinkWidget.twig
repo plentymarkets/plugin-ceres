@@ -18,6 +18,7 @@
 {% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+{% set outline = widget.settings.outline.mobile is same as (true) %}
 
 {% if not isPreview %}
     {% if url.type.mobile == 'internalLink' %}
@@ -40,7 +41,7 @@
 {% endif %}
 
 {{ Twig.if("real_url or #{ isPreview | json_encode }") }}
-<div class="widget widget-link widget-{{ appearance | default('primary') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}">
+<div class="widget widget-link widget-{{ appearance | default('primary') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}{% if outline %} btn-outline{% endif %}">
     <a class="btn btn-appearance {{ buttonSize }}{% if block %} btn-block text-truncate{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
     {% if linkRel != "none" %}rel="{{ linkRel }}"{% endif %}
     href="{{ Twig.print("real_url") }}"

@@ -44,6 +44,11 @@ class LinkWidget extends BaseWidget
 
         $settings->createButtonSize();
 
+        $settings->createCheckbox('outline')
+            ->withDefaultValue(false)
+            ->withName('Widget.linkOutlineLabel')
+            ->withTooltip('Widget.linkOutlineTooltip');
+
         $settings->createCheckbox("block")
             ->withDefaultValue(false)
             ->withName("Widget.linkBlock");

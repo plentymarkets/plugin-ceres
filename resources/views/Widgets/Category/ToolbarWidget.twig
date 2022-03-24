@@ -7,6 +7,7 @@
 {% set icon = widget.settings.icon.mobile | default("fa-sliders") %}
 {% set text = widget.settings.text.mobile %}
 {% set appearance = widget.settings.appearance.mobile | default("primary") %}
+{% set outline = widget.settings.outline.mobile is same as (true) %}
 
 {% set uid = uid() %}
 
@@ -33,7 +34,7 @@
 
             {{ Twig.if("overrideSearchFilters | trim is empty") }}
                 {% if isPreview or hasCollapsableContent %}
-                <div class="d-flex widget-{{ appearance }}">
+                <div class="d-flex widget-{{ appearance }}{% if outline %} btn-outline{% endif %}">
                     <a {{ WidgetHelper.makeClickable(isPreview) }} class="btn btn-link text-appearance align-self-center collapsed" data-toggle="collapse" href="#filter-collapse_{{ uid }}" role="button" aria-expanded="false" aria-controls="filter-collapse_{{ uid }}" {{ Twig.print('set_testing_attr("data-testing", "category-toolbar-filter")') }}>
                         {%- if icon != "none" -%}
                             <i class="fa {{ icon }} default-float mr-1" aria-hidden="true" style="line-height: inherit"></i>
@@ -54,7 +55,7 @@
             <div class="collapse-container{% if autoFormat %} card-columns{% endif %}" data-translation-empty="{{ trans("Ceres::Template.itemFilterNoContentMessage") }}" {% if isPreview %}data-builder-child-container="collapsable" style="min-height:100px !important;"{% endif %}>
                 {{ children.collapsable | raw }}
             </div>
-            <div class="text-right mt-3 widget-{{ appearance }}">
+            <div class="text-right mt-3 widget-{{ appearance }}{% if outline %} btn-outline{% endif %}">
                 <button class="btn btn-appearance btn-medium-large" type="button" data-toggle="collapse" href="#filter-collapse_{{ uid }}" aria-controls="filter-collapse_{{ uid }}" aria-expanded="true" {{ Twig.print('set_testing_attr("data-testing", "category-toolbar-close")') }}><i aria-hidden="true" class="fa fa-times"></i><span>{{ Twig.trans("Ceres::Template.itemClose") }}</span></button>
             </div>
         </div>
