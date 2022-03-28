@@ -1003,18 +1003,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
 /* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
 /* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
 /* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
 /* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.array.slice.js */ "./node_modules/core-js/modules/es.array.slice.js");
@@ -1246,9 +1246,48 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "basket-totals",
+  data: function data() {
+    return {
+      propertiesCostsWithTax: [],
+      propertiesCosts: []
+    };
+  },
+  watch: {
+    basketItems: {
+      deep: true,
+      handler: function handler(newItems) {
+        this.setAdditionalCosts(newItems);
+      }
+    }
+  },
   props: {
     visibleFields: {
       type: Array,
@@ -1278,64 +1317,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         to: currentShippingCountry
       });
     },
-    propertiesWithAdditionalCosts: function propertiesWithAdditionalCosts() {
-      var _this = this;
-
-      var entries = [];
-
-      var _iterator = _createForOfIteratorHelper(this.basketItems),
-          _step;
-
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var basketItem = _step.value;
-          var matchingProperties = basketItem.variation.data.properties.filter(function (property) {
-            return property.property.isShownAsAdditionalCosts && property.property.isOderProperty === false;
-          });
-
-          var _iterator2 = _createForOfIteratorHelper(matchingProperties),
-              _step2;
-
-          try {
-            var _loop = function _loop() {
-              var property = _step2.value;
-              var existingEntry = entries.find(function (entry) {
-                return entry.propertyId === property.propertyId;
-              });
-
-              if (!existingEntry) {
-                entries.push({
-                  propertyId: property.propertyId,
-                  name: property.property.names.name,
-                  quantity: basketItem.quantity,
-                  surcharge: _this.$options.filters.propertySurcharge(basketItem.variation.data.properties, property.propertyId)
-                });
-              } else {
-                existingEntry.quantity += basketItem.quantity;
-              }
-            };
-
-            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-              _loop();
-            }
-          } catch (err) {
-            _iterator2.e(err);
-          } finally {
-            _iterator2.f();
-          }
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-
-      for (var _i = 0, _entries = entries; _i < _entries.length; _i++) {
-        var entry = _entries[_i];
-        entry.price = entry.quantity * entry.surcharge;
-      }
-
-      return entries;
+    subtotal: function subtotal() {
+      var priceToSubtract = 0;
+      this.propertiesCosts.forEach(function (property) {
+        return priceToSubtract += property.price;
+      });
+      return this.basket.basketAmountNet - priceToSubtract;
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_16__["mapState"])({
     basket: function basket(state) {
@@ -1357,6 +1344,67 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     calculateBaseValue: function calculateBaseValue(value, percent) {
       return value / (100 - percent) * 100;
+    },
+    isAddtionalProperty: function isAddtionalProperty(property) {
+      return property.property.isShownAsAdditionalCosts && (!property.property.isOderProperty && !App.useVariationOrderProperties || property.property.isOderProperty && App.useVariationOrderProperties);
+    },
+    setAdditionalCosts: function setAdditionalCosts(newBasketItems) {
+      var _this = this;
+
+      this.propertiesCostsWithTax = [];
+      this.propertiesCosts = [];
+
+      var _iterator = _createForOfIteratorHelper(newBasketItems),
+          _step;
+
+      try {
+        var _loop = function _loop() {
+          var _basketItem$variation;
+
+          var basketItem = _step.value;
+          (_basketItem$variation = basketItem.variation.data.properties) === null || _basketItem$variation === void 0 ? void 0 : _basketItem$variation.forEach(function (property) {
+            if (_this.isAddtionalProperty(property)) {
+              var existsInPropertiesCostsWithTax = _this.propertiesCostsWithTax.find(function (entry) {
+                return entry.propertyId === property.propertyId;
+              });
+
+              var existsInPropertiesCosts = _this.propertiesCosts.find(function (entry) {
+                return entry.propertyId === property.propertyId;
+              });
+
+              var existingProperty = existsInPropertiesCostsWithTax || existsInPropertiesCosts; // if new item gets added and its property already exist update quantity
+
+              if (existingProperty) {
+                existingProperty.quantity += basketItem.quantity;
+              } else {
+                var newProperty = {
+                  propertyId: property.propertyId,
+                  name: property.property.names.name,
+                  quantity: basketItem.quantity,
+                  surcharge: _this.$options.filters.propertySurcharge(basketItem.variation.data.properties, property.propertyId),
+                  vatId: property.property.vatId
+                };
+                newProperty.vatId === 'none' ? _this.propertiesCosts.push(newProperty) : _this.propertiesCostsWithTax.push(newProperty);
+              }
+            }
+          });
+        };
+
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          _loop();
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      this.propertiesCostsWithTax.forEach(function (entry) {
+        entry.price = entry.quantity * entry.surcharge;
+      });
+      this.propertiesCosts.forEach(function (entry) {
+        entry.price = entry.quantity * entry.surcharge;
+      });
     }
   }
 });
@@ -7449,9 +7497,17 @@ __webpack_require__.r(__webpack_exports__);
       return App.config.item.showPleaseSelect && App.isCheapestSorting && state.variationSelect && !state.variationSelect.isVariationSelected && (state.pleaseSelectVariationId === this.currentVariation.variation.id || state.pleaseSelectVariationId === 0);
     },
     propertiesWithAdditionalCostsVisible: function propertiesWithAdditionalCostsVisible() {
-      return this.currentVariation.properties.filter(function (property) {
-        return property.property && property.property.isShownOnItemPage && property.property.isShownAsAdditionalCosts && !property.property.isOderProperty;
+      var _this = this;
+
+      return this.currentVariation.properties.filter(function (entry) {
+        var property = entry.property;
+        return property && property.isShownAsAdditionalCosts && property.isShownOnItemPage && (!property.isOderProperty && !App.useVariationOrderProperties || _this.isVariationOrderPropertyRequiredPreselected(property));
       });
+    }
+  },
+  methods: {
+    isVariationOrderPropertyRequiredPreselected: function isVariationOrderPropertyRequiredPreselected(property) {
+      return property.isRequired && property.isPreSelected && property.isOderProperty && App.useVariationOrderProperties;
     }
   }
 });
@@ -8350,7 +8406,10 @@ __webpack_require__.r(__webpack_exports__);
       return this.$options.filters.propertySurcharge([this.property], this.property.propertyId);
     },
     isPropertyWithAdditionalCosts: function isPropertyWithAdditionalCosts() {
-      return this.property && this.property.property.isShownAtCheckout && this.property.property.isShownAsAdditionalCosts && !this.property.property.isOderProperty;
+      var _this$property;
+
+      var property = (_this$property = this.property) === null || _this$property === void 0 ? void 0 : _this$property.property;
+      return property && property.isShownAsAdditionalCosts && property.isShownAtCheckout && (!property.isOderProperty && !App.useVariationOrderProperties || property.isOderProperty && App.useVariationOrderProperties);
     },
     showColon: function showColon() {
       return this.property && this.property.property.value && this.property.property.valueType !== "empty";
@@ -41566,6 +41625,38 @@ var render = function() {
               _vm._t("before-item-sum"),
               _vm._ssrNode(
                 " " +
+                  ((_vm.visibleFields.includes("additionalCosts") ||
+                    _vm.visibleFields.includes("basket.additional_costs")) &&
+                  _vm.propertiesCostsWithTax.length
+                    ? _vm._ssrList(_vm.propertiesCostsWithTax, function(
+                        property
+                      ) {
+                        return (
+                          "<dt" +
+                          _vm._ssrClass(null, {
+                            "font-weight-bold": _vm.showNetPrices
+                          }) +
+                          ">" +
+                          _vm._ssrEscape(
+                            "\n                        " +
+                              _vm._s(property.name) +
+                              "\n                    "
+                          ) +
+                          "</dt><dd" +
+                          _vm._ssrClass(null, {
+                            "font-weight-bold": _vm.showNetPrices
+                          }) +
+                          ">" +
+                          _vm._ssrEscape(
+                            "\n                        " +
+                              _vm._s(_vm._f("currency")(property.price)) +
+                              "\n                    "
+                          ) +
+                          "</dd>"
+                        )
+                      })
+                    : "<!---->") +
+                  " " +
                   (_vm.visibleFields.includes("basketValueNet") ||
                   _vm.visibleFields.includes("basket.value_of_items_net")
                     ? "<dt" +
@@ -41859,7 +41950,7 @@ var render = function() {
                       _vm._ssrEscape(
                         "\n                    " +
                           _vm._s(
-                            _vm.$translate("Ceres::Template.basketTotalSum")
+                            _vm.$translate("Ceres::Template.basketSubTotal")
                           ) +
                           " " +
                           _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
@@ -41872,9 +41963,7 @@ var render = function() {
                       ">" +
                       _vm._ssrEscape(
                         "\n                    " +
-                          _vm._s(
-                            _vm._f("currency")(_vm.basket.basketAmountNet)
-                          ) +
+                          _vm._s(_vm._f("currency")(_vm.subtotal)) +
                           "\n                "
                       ) +
                       "</dd>"
@@ -41910,29 +41999,58 @@ var render = function() {
               ),
               _vm._t("after-vat"),
               _vm._ssrNode(
-                ' <div class="totalSum"><hr> ' +
+                " " +
                   ((_vm.visibleFields.includes("additionalCosts") ||
                     _vm.visibleFields.includes("basket.additional_costs")) &&
-                  _vm.propertiesWithAdditionalCosts.length
-                    ? _vm._ssrList(_vm.propertiesWithAdditionalCosts, function(
-                        property
-                      ) {
+                  _vm.propertiesCosts.length
+                    ? _vm._ssrList(_vm.propertiesCosts, function(property) {
                         return (
                           '<dt class="font-weight-bold">' +
                           _vm._ssrEscape(
-                            "\n                            " +
+                            "\n                        " +
                               _vm._s(property.name) +
-                              "\n                        "
+                              "\n                    "
                           ) +
                           '</dt><dd class="font-weight-bold">' +
                           _vm._ssrEscape(
-                            "\n                            " +
+                            "\n                        " +
                               _vm._s(_vm._f("currency")(property.price)) +
-                              "\n                        "
+                              "\n                    "
                           ) +
                           "</dd>"
                         )
                       })
+                    : "<!---->") +
+                  ' <div class="totalSum"><hr> ' +
+                  (_vm.visibleFields.includes("totalSumNet") ||
+                  _vm.visibleFields.includes("basket.order_total_net")
+                    ? "<dt" +
+                      _vm._ssrClass(null, {
+                        "font-weight-bold": _vm.showNetPrices
+                      }) +
+                      ">" +
+                      _vm._ssrEscape(
+                        "\n                        " +
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.basketTotalSum")
+                          ) +
+                          " " +
+                          _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
+                          "\n                    "
+                      ) +
+                      '</dt><dd data-testing="basket-amount-net"' +
+                      _vm._ssrClass(null, {
+                        "font-weight-bold": _vm.showNetPrices
+                      }) +
+                      ">" +
+                      _vm._ssrEscape(
+                        "\n                        " +
+                          _vm._s(
+                            _vm._f("currency")(_vm.basket.basketAmountNet)
+                          ) +
+                          "\n                    "
+                      ) +
+                      "</dd>"
                     : "<!---->") +
                   " " +
                   (_vm.visibleFields.includes("totalSumGross") ||
@@ -61500,7 +61618,7 @@ module.exports = __webpack_require__(/*! ./build */ "./node_modules/vue-template
 /*! exports provided: _args, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, browser, bugs, dependencies, description, devDependencies, homepage, jsdelivr, keywords, license, main, name, repository, types, unpkg, version, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"_args\":[[\"vue-template-compiler@2.6.12\",\"/home/runner/work/plugin-ceres/plugin-ceres\"]],\"_from\":\"vue-template-compiler@2.6.12\",\"_id\":\"vue-template-compiler@2.6.12\",\"_inBundle\":false,\"_integrity\":\"sha512-OzzZ52zS41YUbkCBfdXShQTe69j1gQDZ9HIX8miuC9C3rBCk9wIRjLiZZLrmX9V+Ftq/YEyv1JaVr5Y/hNtByg==\",\"_location\":\"/vue-template-compiler\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"vue-template-compiler@2.6.12\",\"name\":\"vue-template-compiler\",\"escapedName\":\"vue-template-compiler\",\"rawSpec\":\"2.6.12\",\"saveSpec\":null,\"fetchSpec\":\"2.6.12\"},\"_requiredBy\":[\"/\"],\"_resolved\":\"https://registry.npmjs.org/vue-template-compiler/-/vue-template-compiler-2.6.12.tgz\",\"_spec\":\"2.6.12\",\"_where\":\"/home/runner/work/plugin-ceres/plugin-ceres\",\"author\":{\"name\":\"Evan You\"},\"browser\":\"browser.js\",\"bugs\":{\"url\":\"https://github.com/vuejs/vue/issues\"},\"dependencies\":{\"de-indent\":\"^1.0.2\",\"he\":\"^1.1.0\"},\"description\":\"template compiler for Vue 2.0\",\"devDependencies\":{\"vue\":\"file:../..\"},\"homepage\":\"https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#readme\",\"jsdelivr\":\"browser.js\",\"keywords\":[\"vue\",\"compiler\"],\"license\":\"MIT\",\"main\":\"index.js\",\"name\":\"vue-template-compiler\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/vuejs/vue.git\"},\"types\":\"types/index.d.ts\",\"unpkg\":\"browser.js\",\"version\":\"2.6.12\"}");
+module.exports = JSON.parse("{\"_args\":[[\"vue-template-compiler@2.6.12\",\"/Users/maximilianroell/workspace/localsystem/plugins/inbox/set_plugins/1/Ceres\"]],\"_from\":\"vue-template-compiler@2.6.12\",\"_id\":\"vue-template-compiler@2.6.12\",\"_inBundle\":false,\"_integrity\":\"sha512-OzzZ52zS41YUbkCBfdXShQTe69j1gQDZ9HIX8miuC9C3rBCk9wIRjLiZZLrmX9V+Ftq/YEyv1JaVr5Y/hNtByg==\",\"_location\":\"/vue-template-compiler\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"vue-template-compiler@2.6.12\",\"name\":\"vue-template-compiler\",\"escapedName\":\"vue-template-compiler\",\"rawSpec\":\"2.6.12\",\"saveSpec\":null,\"fetchSpec\":\"2.6.12\"},\"_requiredBy\":[\"/\"],\"_resolved\":\"https://registry.npmjs.org/vue-template-compiler/-/vue-template-compiler-2.6.12.tgz\",\"_spec\":\"2.6.12\",\"_where\":\"/Users/maximilianroell/workspace/localsystem/plugins/inbox/set_plugins/1/Ceres\",\"author\":{\"name\":\"Evan You\"},\"browser\":\"browser.js\",\"bugs\":{\"url\":\"https://github.com/vuejs/vue/issues\"},\"dependencies\":{\"de-indent\":\"^1.0.2\",\"he\":\"^1.1.0\"},\"description\":\"template compiler for Vue 2.0\",\"devDependencies\":{\"vue\":\"file:../..\"},\"homepage\":\"https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#readme\",\"jsdelivr\":\"browser.js\",\"keywords\":[\"vue\",\"compiler\"],\"license\":\"MIT\",\"main\":\"index.js\",\"name\":\"vue-template-compiler\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/vuejs/vue.git\"},\"types\":\"types/index.d.ts\",\"unpkg\":\"browser.js\",\"version\":\"2.6.12\"}");
 
 /***/ }),
 
@@ -75178,7 +75296,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "cd590b12"
+  "74c117f1"
   
 )
 
@@ -75245,7 +75363,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "35f09196"
+  "459e9c5c"
   
 )
 
@@ -75312,7 +75430,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d9b14c54"
+  "6f7dcb1c"
   
 )
 
@@ -75379,7 +75497,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "43abbade"
+  "77851eea"
   
 )
 
@@ -75446,7 +75564,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "c6ddc3bc"
+  "2eccef9c"
   
 )
 
@@ -75513,7 +75631,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5c436a7f"
+  "7cc2a245"
   
 )
 
@@ -75580,7 +75698,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "13817c09"
+  "3400b3cf"
   
 )
 
@@ -75647,7 +75765,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "a1e10d88"
+  "ebfd43fc"
   
 )
 
@@ -75714,7 +75832,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "9a61c138"
+  "a6ea43ac"
   
 )
 
@@ -75781,7 +75899,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "fbbf239a"
+  "682c3979"
   
 )
 
@@ -75848,7 +75966,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4414b6a7"
+  "1f825421"
   
 )
 
@@ -75915,7 +76033,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "374da5ce"
+  "13a41714"
   
 )
 
@@ -75981,7 +76099,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "f2694264"
+  "0b6de348"
   
 )
 
@@ -76030,7 +76148,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2034f4a7"
+  "b6510dbe"
   
 )
 
@@ -76097,7 +76215,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3957dab8"
+  "cf144204"
   
 )
 
@@ -76164,7 +76282,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5cb9c188"
+  "11f81f4e"
   
 )
 
@@ -76231,7 +76349,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "56eccd1e"
+  "71d2172a"
   
 )
 
@@ -76297,7 +76415,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "789641a1"
+  "2dd49f67"
   
 )
 
@@ -76345,7 +76463,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "fac88ca8"
+  "37da1772"
   
 )
 
@@ -76394,7 +76512,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3cc5ee52"
+  "7fdebb68"
   
 )
 
@@ -76461,7 +76579,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7cc8609a"
+  "f6529dd8"
   
 )
 
@@ -76528,7 +76646,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "83ff1816"
+  "ce1b4e8a"
   
 )
 
@@ -76595,7 +76713,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "26d1623c"
+  "2461c082"
   
 )
 
@@ -76662,7 +76780,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1ff5c484"
+  "10845584"
   
 )
 
@@ -76729,7 +76847,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "bd839c5a"
+  "9e2786ce"
   
 )
 
@@ -76796,7 +76914,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6fce645d"
+  "1e461bd7"
   
 )
 
@@ -76866,7 +76984,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   injectStyles,
   null,
-  "dcd4830c"
+  "6c87a340"
   
 )
 
@@ -76933,7 +77051,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "78009558"
+  "2c7bffd2"
   
 )
 
@@ -77000,7 +77118,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2207c2b0"
+  "5173bf14"
   
 )
 
@@ -77067,7 +77185,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "b1ce2730"
+  "faf2ec3c"
   
 )
 
@@ -77134,7 +77252,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "b64b850a"
+  "5955a7f5"
   
 )
 
@@ -77201,7 +77319,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2a55c34f"
+  "06ac3495"
   
 )
 
@@ -77268,7 +77386,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "295a5414"
+  "26eab25a"
   
 )
 
@@ -77335,7 +77453,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4b50b116"
+  "01ccd810"
   
 )
 
@@ -77402,7 +77520,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0aeea185"
+  "1dfc2102"
   
 )
 
@@ -77469,7 +77587,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "c58fbcfc"
+  "a633a770"
   
 )
 
@@ -77536,7 +77654,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "29fccb64"
+  "06533caa"
   
 )
 
@@ -77603,7 +77721,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "48c8b09d"
+  "117f2fd2"
   
 )
 
@@ -77670,7 +77788,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "8f7f7078"
+  "aa64ba84"
   
 )
 
@@ -77737,7 +77855,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "ea5f8e1c"
+  "cb037890"
   
 )
 
@@ -77804,7 +77922,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "feb22fee"
+  "bdb3c062"
   
 )
 
@@ -77849,14 +77967,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!************************************************************!*\
   !*** ./resources/js/src/app/components/item/ItemPrice.vue ***!
   \************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ItemPrice_vue_vue_type_template_id_27592de8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ItemPrice.vue?vue&type=template&id=27592de8& */ "./resources/js/src/app/components/item/ItemPrice.vue?vue&type=template&id=27592de8&");
 /* harmony import */ var _ItemPrice_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ItemPrice.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/item/ItemPrice.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ItemPrice_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ItemPrice_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -77871,7 +77990,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0065c477"
+  "94b7bb86"
   
 )
 
@@ -77884,7 +78003,7 @@ component.options.__file = "resources/js/src/app/components/item/ItemPrice.vue"
 /*!*************************************************************************************!*\
   !*** ./resources/js/src/app/components/item/ItemPrice.vue?vue&type=script&lang=js& ***!
   \*************************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -77938,7 +78057,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "a2468afc"
+  "61481b70"
   
 )
 
@@ -78005,7 +78124,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3d30cbcd"
+  "7f090072"
   
 )
 
@@ -78072,7 +78191,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d5765996"
+  "7036b7fb"
   
 )
 
@@ -78139,7 +78258,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3267dc0a"
+  "6a16c5f5"
   
 )
 
@@ -78206,7 +78325,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0e59c62e"
+  "765425b0"
   
 )
 
@@ -78273,7 +78392,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2566e380"
+  "3514ee46"
   
 )
 
@@ -78340,7 +78459,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "db52f5d4"
+  "24925690"
   
 )
 
@@ -78407,7 +78526,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6fedb468"
+  "7680dd46"
   
 )
 
@@ -78474,7 +78593,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1ca62dfb"
+  "3d2565c1"
   
 )
 
@@ -78541,7 +78660,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "224826ca"
+  "14d581c4"
   
 )
 
@@ -78608,7 +78727,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6a19b4ec"
+  "18916c66"
   
 )
 
@@ -78675,7 +78794,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4e4badb6"
+  "5c24dd1f"
   
 )
 
@@ -78742,7 +78861,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6bee3719"
+  "2e954e5f"
   
 )
 
@@ -78809,7 +78928,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7c707c30"
+  "58c6ed76"
   
 )
 
@@ -78876,7 +78995,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d0ecb788"
+  "29cfb602"
   
 )
 
@@ -78943,7 +79062,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "77371a7c"
+  "72dc2a3c"
   
 )
 
@@ -79010,7 +79129,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "b05fa528"
+  "e4390934"
   
 )
 
@@ -79077,7 +79196,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1fae8f5c"
+  "57ac0c54"
   
 )
 
@@ -79144,7 +79263,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "00f0cee0"
+  "4a1593ec"
   
 )
 
@@ -79211,7 +79330,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5b2f3161"
+  "36211627"
   
 )
 
@@ -79278,7 +79397,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5db83a9f"
+  "20036736"
   
 )
 
@@ -79345,7 +79464,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "26310e18"
+  "46a595dc"
   
 )
 
@@ -79412,7 +79531,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "442f72e7"
+  "4c3dc361"
   
 )
 
@@ -79479,7 +79598,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "16d81bd0"
+  "2fe0d416"
   
 )
 
@@ -79546,7 +79665,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "641af7f5"
+  "3f88956f"
   
 )
 
@@ -79613,7 +79732,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "410c13b8"
+  "1bfdf87e"
   
 )
 
@@ -79680,7 +79799,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2df9150a"
+  "afbe0e16"
   
 )
 
@@ -79747,7 +79866,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "66e7cc40"
+  "564f8d3a"
   
 )
 
@@ -79814,7 +79933,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "49d4d5f3"
+  "65c0ec26"
   
 )
 
@@ -79881,7 +80000,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6adba9d9"
+  "4eb3925a"
   
 )
 
@@ -79948,7 +80067,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "179fbbd5"
+  "0499ec62"
   
 )
 
@@ -80015,7 +80134,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "67d9342c"
+  "af2c51a0"
   
 )
 
@@ -80082,7 +80201,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5b17d8ee"
+  "4da533e8"
   
 )
 
@@ -80149,7 +80268,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0ecea230"
+  "42b70ba4"
   
 )
 
@@ -80216,7 +80335,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "da8e71c6"
+  "16037b17"
   
 )
 
@@ -80283,7 +80402,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d86d526a"
+  "17140ac5"
   
 )
 
@@ -80350,7 +80469,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "874cc47a"
+  "8c2c07ee"
   
 )
 
@@ -80417,7 +80536,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "76270e3e"
+  "498efd5b"
   
 )
 
@@ -80484,7 +80603,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1468d334"
+  "5e8509a8"
   
 )
 
@@ -80551,7 +80670,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "14c9f602"
+  "0ea3bd45"
   
 )
 
@@ -80618,7 +80737,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4c60eee2"
+  "5df91948"
   
 )
 
@@ -80685,7 +80804,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7af4e5fd"
+  "c917c47a"
   
 )
 
@@ -80752,7 +80871,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "9a5050d6"
+  "614f8f0f"
   
 )
 
@@ -90220,6 +90339,7 @@ var mutations = {
   setVariationOrderProperty: function setVariationOrderProperty(state, _ref) {
     var propertyId = _ref.propertyId,
         value = _ref.value;
+    // TODO vlt überarbeiten
     var properties = state.variation.documents[0].data.properties;
     var index = properties.findIndex(function (property) {
       return property.property.id === propertyId;
@@ -90352,6 +90472,10 @@ var getters = {
         for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
           var property = _step2.value;
 
+          if (property.property.isShownAsAdditionalCosts) {
+            continue;
+          }
+
           if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_24__["isNullOrUndefined"])(property.property.percentage) && property.surcharge <= 0) {
             var surcharge = getters.variationBasePrice * property.property.percentage / 100;
             sum += surcharge;
@@ -90416,7 +90540,7 @@ var getters = {
 
     if (state.variation.documents[0].data.properties) {
       var orderPropertyList = state.variation.documents[0].data.properties.filter(function (property) {
-        return property.property.isShownOnItemPage && property.property.isOderProperty;
+        return property.property.isShownOnItemPage && property.property.isOderProperty && !(property.property.isShownAsAdditionalCosts && property.property.isRequired && property.property.isPreSelected);
       });
 
       var groupIds = _toConsumableArray(new Set(orderPropertyList.map(function (property) {

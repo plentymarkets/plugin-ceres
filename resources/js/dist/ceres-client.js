@@ -71320,6 +71320,7 @@ var mutations = {
   setVariationOrderProperty: function setVariationOrderProperty(state, _ref) {
     var propertyId = _ref.propertyId,
         value = _ref.value;
+    // TODO vlt überarbeiten
     var properties = state.variation.documents[0].data.properties;
     var index = properties.findIndex(function (property) {
       return property.property.id === propertyId;
@@ -71452,6 +71453,10 @@ var getters = {
         for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
           var property = _step2.value;
 
+          if (property.property.isShownAsAdditionalCosts) {
+            continue;
+          }
+
           if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_24__["isNullOrUndefined"])(property.property.percentage) && property.surcharge <= 0) {
             var surcharge = getters.variationBasePrice * property.property.percentage / 100;
             sum += surcharge;
@@ -71516,7 +71521,7 @@ var getters = {
 
     if (state.variation.documents[0].data.properties) {
       var orderPropertyList = state.variation.documents[0].data.properties.filter(function (property) {
-        return property.property.isShownOnItemPage && property.property.isOderProperty;
+        return property.property.isShownOnItemPage && property.property.isOderProperty && !(property.property.isShownAsAdditionalCosts && property.property.isRequired && property.property.isPreSelected);
       });
 
       var groupIds = _toConsumableArray(new Set(orderPropertyList.map(function (property) {

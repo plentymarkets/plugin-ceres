@@ -11,18 +11,18 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
 /* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
 /* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
 /* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
 /* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.array.slice.js */ "./node_modules/core-js/modules/es.array.slice.js");
@@ -254,9 +254,48 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "basket-totals",
+  data: function data() {
+    return {
+      propertiesCostsWithTax: [],
+      propertiesCosts: []
+    };
+  },
+  watch: {
+    basketItems: {
+      deep: true,
+      handler: function handler(newItems) {
+        this.setAdditionalCosts(newItems);
+      }
+    }
+  },
   props: {
     visibleFields: {
       type: Array,
@@ -286,64 +325,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         to: currentShippingCountry
       });
     },
-    propertiesWithAdditionalCosts: function propertiesWithAdditionalCosts() {
-      var _this = this;
-
-      var entries = [];
-
-      var _iterator = _createForOfIteratorHelper(this.basketItems),
-          _step;
-
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var basketItem = _step.value;
-          var matchingProperties = basketItem.variation.data.properties.filter(function (property) {
-            return property.property.isShownAsAdditionalCosts && property.property.isOderProperty === false;
-          });
-
-          var _iterator2 = _createForOfIteratorHelper(matchingProperties),
-              _step2;
-
-          try {
-            var _loop = function _loop() {
-              var property = _step2.value;
-              var existingEntry = entries.find(function (entry) {
-                return entry.propertyId === property.propertyId;
-              });
-
-              if (!existingEntry) {
-                entries.push({
-                  propertyId: property.propertyId,
-                  name: property.property.names.name,
-                  quantity: basketItem.quantity,
-                  surcharge: _this.$options.filters.propertySurcharge(basketItem.variation.data.properties, property.propertyId)
-                });
-              } else {
-                existingEntry.quantity += basketItem.quantity;
-              }
-            };
-
-            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-              _loop();
-            }
-          } catch (err) {
-            _iterator2.e(err);
-          } finally {
-            _iterator2.f();
-          }
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-
-      for (var _i = 0, _entries = entries; _i < _entries.length; _i++) {
-        var entry = _entries[_i];
-        entry.price = entry.quantity * entry.surcharge;
-      }
-
-      return entries;
+    subtotal: function subtotal() {
+      var priceToSubtract = 0;
+      this.propertiesCosts.forEach(function (property) {
+        return priceToSubtract += property.price;
+      });
+      return this.basket.basketAmountNet - priceToSubtract;
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_16__["mapState"])({
     basket: function basket(state) {
@@ -365,6 +352,67 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     calculateBaseValue: function calculateBaseValue(value, percent) {
       return value / (100 - percent) * 100;
+    },
+    isAddtionalProperty: function isAddtionalProperty(property) {
+      return property.property.isShownAsAdditionalCosts && (!property.property.isOderProperty && !App.useVariationOrderProperties || property.property.isOderProperty && App.useVariationOrderProperties);
+    },
+    setAdditionalCosts: function setAdditionalCosts(newBasketItems) {
+      var _this = this;
+
+      this.propertiesCostsWithTax = [];
+      this.propertiesCosts = [];
+
+      var _iterator = _createForOfIteratorHelper(newBasketItems),
+          _step;
+
+      try {
+        var _loop = function _loop() {
+          var _basketItem$variation;
+
+          var basketItem = _step.value;
+          (_basketItem$variation = basketItem.variation.data.properties) === null || _basketItem$variation === void 0 ? void 0 : _basketItem$variation.forEach(function (property) {
+            if (_this.isAddtionalProperty(property)) {
+              var existsInPropertiesCostsWithTax = _this.propertiesCostsWithTax.find(function (entry) {
+                return entry.propertyId === property.propertyId;
+              });
+
+              var existsInPropertiesCosts = _this.propertiesCosts.find(function (entry) {
+                return entry.propertyId === property.propertyId;
+              });
+
+              var existingProperty = existsInPropertiesCostsWithTax || existsInPropertiesCosts; // if new item gets added and its property already exist update quantity
+
+              if (existingProperty) {
+                existingProperty.quantity += basketItem.quantity;
+              } else {
+                var newProperty = {
+                  propertyId: property.propertyId,
+                  name: property.property.names.name,
+                  quantity: basketItem.quantity,
+                  surcharge: _this.$options.filters.propertySurcharge(basketItem.variation.data.properties, property.propertyId),
+                  vatId: property.property.vatId
+                };
+                newProperty.vatId === 'none' ? _this.propertiesCosts.push(newProperty) : _this.propertiesCostsWithTax.push(newProperty);
+              }
+            }
+          });
+        };
+
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          _loop();
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      this.propertiesCostsWithTax.forEach(function (entry) {
+        entry.price = entry.quantity * entry.surcharge;
+      });
+      this.propertiesCosts.forEach(function (entry) {
+        entry.price = entry.quantity * entry.surcharge;
+      });
     }
   }
 });
@@ -402,6 +450,45 @@ var render = function() {
           "dl",
           [
             _vm._t("before-item-sum"),
+            _vm._v(" "),
+            (_vm.visibleFields.includes("additionalCosts") ||
+              _vm.visibleFields.includes("basket.additional_costs")) &&
+            _vm.propertiesCostsWithTax.length
+              ? [
+                  _vm._l(_vm.propertiesCostsWithTax, function(property) {
+                    return [
+                      _c(
+                        "dt",
+                        {
+                          key: "property-name-" + property.propertyId,
+                          class: { "font-weight-bold": _vm.showNetPrices }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(property.name) +
+                              "\n                    "
+                          )
+                        ]
+                      ),
+                      _c(
+                        "dd",
+                        {
+                          key: "property-price-" + property.propertyId,
+                          class: { "font-weight-bold": _vm.showNetPrices }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(_vm._f("currency")(property.price)) +
+                              "\n                    "
+                          )
+                        ]
+                      )
+                    ]
+                  })
+                ]
+              : _vm._e(),
             _vm._v(" "),
             _vm.visibleFields.includes("basketValueNet") ||
             _vm.visibleFields.includes("basket.value_of_items_net")
@@ -725,7 +812,7 @@ var render = function() {
                       _vm._v(
                         "\n                    " +
                           _vm._s(
-                            _vm.$translate("Ceres::Template.basketTotalSum")
+                            _vm.$translate("Ceres::Template.basketSubTotal")
                           ) +
                           " " +
                           _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
@@ -742,9 +829,7 @@ var render = function() {
                     [
                       _vm._v(
                         "\n                    " +
-                          _vm._s(
-                            _vm._f("currency")(_vm.basket.basketAmountNet)
-                          ) +
+                          _vm._s(_vm._f("currency")(_vm.subtotal)) +
                           "\n                "
                       )
                     ]
@@ -780,50 +865,87 @@ var render = function() {
             _vm._v(" "),
             _vm._t("after-vat"),
             _vm._v(" "),
+            (_vm.visibleFields.includes("additionalCosts") ||
+              _vm.visibleFields.includes("basket.additional_costs")) &&
+            _vm.propertiesCosts.length
+              ? [
+                  _vm._l(_vm.propertiesCosts, function(property) {
+                    return [
+                      _c(
+                        "dt",
+                        {
+                          key: "property-name-" + property.propertyId,
+                          staticClass: "font-weight-bold"
+                        },
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(property.name) +
+                              "\n                    "
+                          )
+                        ]
+                      ),
+                      _c(
+                        "dd",
+                        {
+                          key: "property-price-" + property.propertyId,
+                          staticClass: "font-weight-bold"
+                        },
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(_vm._f("currency")(property.price)) +
+                              "\n                    "
+                          )
+                        ]
+                      )
+                    ]
+                  })
+                ]
+              : _vm._e(),
+            _vm._v(" "),
             _c(
               "div",
               { staticClass: "totalSum" },
               [
                 _c("hr"),
                 _vm._v(" "),
-                (_vm.visibleFields.includes("additionalCosts") ||
-                  _vm.visibleFields.includes("basket.additional_costs")) &&
-                _vm.propertiesWithAdditionalCosts.length
+                _vm.visibleFields.includes("totalSumNet") ||
+                _vm.visibleFields.includes("basket.order_total_net")
                   ? [
-                      _vm._l(_vm.propertiesWithAdditionalCosts, function(
-                        property
-                      ) {
-                        return [
-                          _c(
-                            "dt",
-                            {
-                              key: "property-name-" + property.propertyId,
-                              staticClass: "font-weight-bold"
-                            },
-                            [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(property.name) +
-                                  "\n                        "
-                              )
-                            ]
-                          ),
-                          _c(
-                            "dd",
-                            {
-                              key: "property-price-" + property.propertyId,
-                              staticClass: "font-weight-bold"
-                            },
-                            [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(_vm._f("currency")(property.price)) +
-                                  "\n                        "
-                              )
-                            ]
+                      _c(
+                        "dt",
+                        { class: { "font-weight-bold": _vm.showNetPrices } },
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(
+                                _vm.$translate("Ceres::Template.basketTotalSum")
+                              ) +
+                              " " +
+                              _vm._s(
+                                _vm.$translate("Ceres::Template.basketNet")
+                              ) +
+                              "\n                    "
                           )
                         ]
-                      })
+                      ),
+                      _c(
+                        "dd",
+                        {
+                          class: { "font-weight-bold": _vm.showNetPrices },
+                          attrs: { "data-testing": "basket-amount-net" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(
+                                _vm._f("currency")(_vm.basket.basketAmountNet)
+                              ) +
+                              "\n                    "
+                          )
+                        ]
+                      )
                     ]
                   : _vm._e(),
                 _vm._v(" "),

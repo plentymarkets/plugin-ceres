@@ -47,10 +47,10 @@ export default {
 
         isPropertyWithAdditionalCosts()
         {
-            return this.property &&
-                this.property.property.isShownAtCheckout &&
-                this.property.property.isShownAsAdditionalCosts &&
-                !this.property.property.isOderProperty
+            const property = this.property?.property;
+            return property && property.isShownAsAdditionalCosts && property.isShownAtCheckout
+                && ((!property.isOderProperty && !App.useVariationOrderProperties)
+                || (property.isOderProperty && App.useVariationOrderProperties))
         },
 
         showColon()

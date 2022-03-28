@@ -40,6 +40,8 @@ const mutations =
 
         setVariationOrderProperty(state, { propertyId, value })
         {
+
+            // TODO vlt überarbeiten
             const properties = state.variation.documents[0].data.properties;
             const index = properties.findIndex(property => property.property.id === propertyId);
 
@@ -178,6 +180,10 @@ const getters =
 
                 for (const property of addedProperties)
                 {
+                    if (property.property.isShownAsAdditionalCosts)
+                    {
+                        continue;
+                    }
                     if (!isNullOrUndefined(property.property.percentage) && (property.surcharge <= 0))
                     {
                         const surcharge = getters.variationBasePrice * property.property.percentage / 100;
@@ -260,7 +266,11 @@ const getters =
 
             if (state.variation.documents[0].data.properties)
             {
-                const orderPropertyList = state.variation.documents[0].data.properties.filter(property => property.property.isShownOnItemPage && property.property.isOderProperty);
+                const orderPropertyList = state.variation.documents[0].data.properties.filter((property) =>
+                {
+                    return property.property.isShownOnItemPage && property.property.isOderProperty &&
+                           !(property.property.isShownAsAdditionalCosts && property.property.isRequired && property.property.isPreSelected);
+                });
                 const groupIds = [...new Set(orderPropertyList.map(property => property.group && property.group.id))];
                 const groups = [];
 

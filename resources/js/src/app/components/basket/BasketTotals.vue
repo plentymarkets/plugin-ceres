@@ -300,8 +300,8 @@ export default {
         isAddtionalProperty(property)
         {
             return property.property.isShownAsAdditionalCosts 
-                   && (!property.property.isOderProperty && !App.useVariationOrderProperties)
-                   || (property.property.isOderProperty && App.useVariationOrderProperties)
+                   && ((!property.property.isOderProperty && !App.useVariationOrderProperties)
+                   || (property.property.isOderProperty && App.useVariationOrderProperties))
         },
         setAdditionalCosts(newBasketItems)
         {

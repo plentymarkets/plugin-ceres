@@ -106,9 +106,17 @@ __webpack_require__.r(__webpack_exports__);
       return App.config.item.showPleaseSelect && App.isCheapestSorting && state.variationSelect && !state.variationSelect.isVariationSelected && (state.pleaseSelectVariationId === this.currentVariation.variation.id || state.pleaseSelectVariationId === 0);
     },
     propertiesWithAdditionalCostsVisible: function propertiesWithAdditionalCostsVisible() {
-      return this.currentVariation.properties.filter(function (property) {
-        return property.property && property.property.isShownOnItemPage && property.property.isShownAsAdditionalCosts && !property.property.isOderProperty;
+      var _this = this;
+
+      return this.currentVariation.properties.filter(function (entry) {
+        var property = entry.property;
+        return property && property.isShownAsAdditionalCosts && property.isShownOnItemPage && (!property.isOderProperty && !App.useVariationOrderProperties || _this.isVariationOrderPropertyRequiredPreselected(property));
       });
+    }
+  },
+  methods: {
+    isVariationOrderPropertyRequiredPreselected: function isVariationOrderPropertyRequiredPreselected(property) {
+      return property.isRequired && property.isPreSelected && property.isOderProperty && App.useVariationOrderProperties;
     }
   }
 });
@@ -343,14 +351,15 @@ render._withStripped = true
 /*!************************************************************!*\
   !*** ./resources/js/src/app/components/item/ItemPrice.vue ***!
   \************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ItemPrice_vue_vue_type_template_id_27592de8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ItemPrice.vue?vue&type=template&id=27592de8& */ "./resources/js/src/app/components/item/ItemPrice.vue?vue&type=template&id=27592de8&");
 /* harmony import */ var _ItemPrice_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ItemPrice.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/item/ItemPrice.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ItemPrice_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ItemPrice_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -380,7 +389,7 @@ component.options.__file = "resources/js/src/app/components/item/ItemPrice.vue"
 /*!*************************************************************************************!*\
   !*** ./resources/js/src/app/components/item/ItemPrice.vue?vue&type=script&lang=js& ***!
   \*************************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

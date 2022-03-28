@@ -218,7 +218,10 @@ __webpack_require__.r(__webpack_exports__);
       return this.$options.filters.propertySurcharge([this.property], this.property.propertyId);
     },
     isPropertyWithAdditionalCosts: function isPropertyWithAdditionalCosts() {
-      return this.property && this.property.property.isShownAtCheckout && this.property.property.isShownAsAdditionalCosts && !this.property.property.isOderProperty;
+      var _this$property;
+
+      var property = (_this$property = this.property) === null || _this$property === void 0 ? void 0 : _this$property.property;
+      return property && property.isShownAsAdditionalCosts && property.isShownAtCheckout && (!property.isOderProperty && !App.useVariationOrderProperties || property.isOderProperty && App.useVariationOrderProperties);
     },
     showColon: function showColon() {
       return this.property && this.property.property.value && this.property.property.valueType !== "empty";

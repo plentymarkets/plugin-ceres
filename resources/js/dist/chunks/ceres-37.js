@@ -106,9 +106,17 @@ __webpack_require__.r(__webpack_exports__);
       return App.config.item.showPleaseSelect && App.isCheapestSorting && state.variationSelect && !state.variationSelect.isVariationSelected && (state.pleaseSelectVariationId === this.currentVariation.variation.id || state.pleaseSelectVariationId === 0);
     },
     propertiesWithAdditionalCostsVisible: function propertiesWithAdditionalCostsVisible() {
-      return this.currentVariation.properties.filter(function (property) {
-        return property.property && property.property.isShownOnItemPage && property.property.isShownAsAdditionalCosts && !property.property.isOderProperty;
+      var _this = this;
+
+      return this.currentVariation.properties.filter(function (entry) {
+        var property = entry.property;
+        return property && property.isShownAsAdditionalCosts && property.isShownOnItemPage && (!property.isOderProperty && !App.useVariationOrderProperties || _this.isVariationOrderPropertyRequiredPreselected(property));
       });
+    }
+  },
+  methods: {
+    isVariationOrderPropertyRequiredPreselected: function isVariationOrderPropertyRequiredPreselected(property) {
+      return property.isRequired && property.isPreSelected && property.isOderProperty && App.useVariationOrderProperties;
     }
   }
 });
