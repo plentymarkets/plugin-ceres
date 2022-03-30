@@ -6,8 +6,8 @@
                 <slot name="before-item-sum"></slot>
 
                  <!-- AdditionalCosts -->
-                <template v-if="(visibleFields.includes('additionalCosts') || visibleFields.includes('basket.additional_costs')) && propertiesCostsWithTax.length">
-                    <template v-for="property in propertiesCostsWithTax">
+                <template v-if="(visibleFields.includes('additionalCosts') || visibleFields.includes('basket.additional_costs')) && displayedProperties.length">
+                    <template v-for="property in displayedProperties">
                         <dt :class="{ 'font-weight-bold': showNetPrices }" :key="'property-name-' + property.propertyId">
                             {{ property.name }}
                         </dt><!--
@@ -115,7 +115,7 @@
                         {{ $translate("Ceres::Template.basketSubTotal" ) }} {{ $translate("Ceres::Template.basketNet") }}
                     </dt><!--
                     --><dd :class="{ 'font-weight-bold': showNetPrices }" data-testing="basket-amount-net">
-                        {{ subtotal | currency }}
+                        {{ basket.basketAmountNet | currency }}
                     </dd>
                 </template>
                 <!-- Total sum (net) -->
@@ -136,8 +136,8 @@
                 <slot name="after-vat"></slot>
 
                 <!-- AdditionalCosts without tax -->
-                <template v-if="(visibleFields.includes('additionalCosts') || visibleFields.includes('basket.additional_costs')) && propertiesCosts.length">
-                    <template v-for="property in propertiesCosts">
+                <template v-if="(visibleFields.includes('additionalCosts') || visibleFields.includes('basket.additional_costs')) && displayedPropertiesWithoutTax.length">
+                    <template v-for="property in displayedPropertiesWithoutTax">
                         <dt class="font-weight-bold" :key="'property-name-' + property.propertyId">
                             {{ property.name }}
                         </dt><!--
@@ -213,8 +213,8 @@ export default {
     name: "basket-totals",
     data() {
         return {
-            propertiesCostsWithTax: [],
-            propertiesCosts: []
+            displayedProperties: [],
+            displayedPropertiesWithoutTax: []
         }
     },
     watch: {
@@ -224,7 +224,7 @@ export default {
             deep: true,
             handler(newItems)
             {
-                this.setAdditionalCosts(newItems)
+                this.setPropertiesForTotals(newItems)
             }
         }
         
@@ -297,24 +297,45 @@ export default {
         {
             return (value / (100 - percent)) * 100;
         },
+
         isAddtionalProperty(property)
         {
             return property.property.isShownAsAdditionalCosts 
                    && ((!property.property.isOderProperty && !App.useVariationOrderProperties)
                    || (property.property.isOderProperty && App.useVariationOrderProperties))
         },
-        setAdditionalCosts(newBasketItems)
+
+        isVariationProperty(property)
         {
-            this.propertiesCostsWithTax = [];
-            this.propertiesCosts = [];
+            return property.property.isOderProperty && App.useVariationOrderProperties;
+        },
+
+        hasVat(property)
+        {
+            return property.property.vatId !== 'none' && property.property.vatId !== null;
+        },
+
+        isInBasketItemOrderParams(basketItem, propertyId)
+        {
+            return !!basketItem.basketItemOrderParams.find(param => Number(param.propertyId) === Number(propertyId));
+        },
+        
+        /**
+         * 
+         */
+        setPropertiesForTotals(newBasketItems)
+        {
+            this.displayedPropertiesWithoutTax = [];
+            this.displayedProperties = [];
             for (const basketItem of newBasketItems)
             {
                 basketItem.variation.data.properties?.forEach(property => {
-                    if(this.isAddtionalProperty(property))
+                    if(this.isInBasketItemOrderParams(basketItem, property.propertyId) && 
+                      (this.isAddtionalProperty(property) || (this.isVariationProperty(property) && !this.hasVat(property))))
                     {
-                        const existsInPropertiesCostsWithTax = this.propertiesCostsWithTax.find(entry => entry.propertyId === property.propertyId)
-                        const existsInPropertiesCosts = this.propertiesCosts.find(entry => entry.propertyId === property.propertyId)
-                        const existingProperty = existsInPropertiesCostsWithTax || existsInPropertiesCosts;
+                        const existsIndisplayedProperties = this.displayedProperties.find(entry => entry.propertyId === property.propertyId)
+                        const existsIndisplayedPropertiesWithoutTax = this.displayedPropertiesWithoutTax.find(entry => entry.propertyId === property.propertyId)
+                        const existingProperty = existsIndisplayedProperties || existsIndisplayedPropertiesWithoutTax;
 
                         // if new item gets added and its property already exist update quantity
                         if (existingProperty) 
@@ -330,16 +351,16 @@ export default {
                                 surcharge: this.$options.filters.propertySurcharge(basketItem.variation.data.properties, property.propertyId),
                                 vatId: property.property.vatId
                             }
-                            newProperty.vatId === 'none' ? this.propertiesCosts.push(newProperty) : this.propertiesCostsWithTax.push(newProperty);
+                            !this.hasVat(property) ? this.displayedPropertiesWithoutTax.push(newProperty) : this.displayedProperties.push(newProperty);
                         }
                     }
                 });
             }
-            this.propertiesCostsWithTax.forEach((entry) => 
+            this.displayedPropertiesWithoutTax.forEach((entry) => 
             {
                 entry.price = entry.quantity * entry.surcharge;
             })
-            this.propertiesCosts.forEach((entry) => 
+            this.displayedProperties.forEach((entry) => 
             {
                 entry.price = entry.quantity * entry.surcharge;
             })
