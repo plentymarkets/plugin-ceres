@@ -138,7 +138,7 @@ class DefaultHomepagePreset implements ContentPreset
 
         $twoColumnWidgetRight->createChild("second", "Ceres::ImageBoxWidget")
             ->withSetting("appearance", "primary")
-            ->withSetting("style", "inline-caption")
+            ->withSetting("style", "block-caption")
             ->withSetting("aspectRatio", "retain")
             ->withSetting("customImagePath", $this->imagePath . "category-living-1430x.webp")
             ->withSetting("fallbackImagePath", $this->imagePath . "category-living-1430x.jpg")
