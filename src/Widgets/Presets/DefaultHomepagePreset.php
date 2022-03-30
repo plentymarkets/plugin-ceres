@@ -79,10 +79,13 @@ class DefaultHomepagePreset implements ContentPreset
         $this->preset->createWidget("Ceres::ImageCarouselWidget")
             ->withSetting("appearance", "primary")
             ->withSetting("preloadImage", true)
-            ->withSetting("customClass", "widget-fw img-1-offset-md-20-flip-horizontal")
+            ->withSetting("customClass", "img-1-offset-md-20-flip-horizontal")
             ->withSetting("fullHeight", true)
+            ->withSetting("fullWidth", true)
             ->withSetting("slides", $slides)
             ->withSetting("spacing.customMargin", true)
+            ->withSetting("spacing.margin.top.value", -80)
+            ->withSetting("spacing.margin.top.unit", "px")
             ->withSetting("spacing.margin.bottom.value", 3)
             ->withSetting("spacing.margin.bottom.unit", null);
     }
