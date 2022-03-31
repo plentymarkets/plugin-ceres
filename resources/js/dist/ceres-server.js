@@ -8423,11 +8423,15 @@ __webpack_require__.r(__webpack_exports__);
     surcharge: function surcharge() {
       return this.$options.filters.propertySurcharge([this.property], this.property.propertyId);
     },
-    isPropertyWithAdditionalCosts: function isPropertyWithAdditionalCosts() {
+    isAdditionalCosts: function isAdditionalCosts() {
       var _this$property;
 
       var property = (_this$property = this.property) === null || _this$property === void 0 ? void 0 : _this$property.property;
       return property && property.isShownAsAdditionalCosts && property.isShownAtCheckout && (!property.isOderProperty && !App.useVariationOrderProperties || property.isOderProperty && App.useVariationOrderProperties);
+    },
+    isTaxless: function isTaxless() {
+      var hasVat = this.property.property.vatId !== 'none' && this.property.property.vatId !== null;
+      return !hasVat && this.property.property.isOderProperty && App.useVariationOrderProperties;
     },
     showColon: function showColon() {
       return this.property && this.property.property.value && this.property.property.valueType !== "empty";
@@ -50332,7 +50336,7 @@ var render = function() {
             " \n            "
         ) +
         (_vm.surcharge > 0
-          ? _vm.isPropertyWithAdditionalCosts
+          ? _vm.isAdditionalCosts || _vm.isTaxless
             ? _vm._ssrEscape(
                 "\n                    (" +
                   _vm._s(_vm.$translate("Ceres::Template.basketPlusAbbr")) +

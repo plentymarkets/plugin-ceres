@@ -4,7 +4,7 @@
             <strong :class="{ 'colon': showColon }">
                 {{ property.property.names.name }} 
                 <template v-if="surcharge > 0">
-                    <template v-if="isPropertyWithAdditionalCosts">
+                    <template v-if="isAdditionalCosts || isTaxless">
                         ({{ $translate("Ceres::Template.basketPlusAbbr") }} {{ surcharge | currency }})
                     </template>
                     <template v-else>
@@ -45,12 +45,18 @@ export default {
             return this.$options.filters.propertySurcharge([this.property], this.property.propertyId);
         },
 
-        isPropertyWithAdditionalCosts()
+        isAdditionalCosts()
         {
             const property = this.property?.property;
             return property && property.isShownAsAdditionalCosts && property.isShownAtCheckout
-                && ((!property.isOderProperty && !App.useVariationOrderProperties)
-                || (property.isOderProperty && App.useVariationOrderProperties))
+                            && ((!property.isOderProperty && !App.useVariationOrderProperties)
+                            || (property.isOderProperty && App.useVariationOrderProperties))
+        },
+
+        isTaxless()
+        {
+            const hasVat = this.property.property.vatId !== 'none' && this.property.property.vatId !== null;
+            return !hasVat && (this.property.property.isOderProperty && App.useVariationOrderProperties);
         },
 
         showColon()
