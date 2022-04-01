@@ -221,6 +221,7 @@ export default {
         
         basketItems: 
         {
+            // check trigger
             deep: true,
             handler(newItems)
             {

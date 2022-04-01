@@ -1285,6 +1285,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   watch: {
     basketItems: {
+      // check trigger
       deep: true,
       handler: function handler(newItems) {
         this.setPropertiesForTotals(newItems);
@@ -41983,9 +41984,7 @@ var render = function() {
                       ">" +
                       _vm._ssrEscape(
                         "\n                    " +
-                          _vm._s(
-                            _vm._f("currency")(_vm.basket.basketAmountNet)
-                          ) +
+                          _vm._s(_vm._f("currency")(_vm.basket.subAmount)) +
                           "\n                "
                       ) +
                       "</dd>"
