@@ -209,7 +209,17 @@
                             {{ Twig.set("uid", "uid()") }}
                             <div id="collapse-{{ Twig.print('uid') }}" class="collapse row pl-4{% if isPreview %} show{% endif %}">
                                 {{ Twig.for("property", "item.orderProperties") }}
-                                    <strong class="col-12 mt-1 item-word-break">{{ Twig.print('property | propertyName') }} {{ Twig.if("webstoreConfig.useVariationOrderProperties and property.surcharge > 0") }} ({{ Twig.trans("Ceres::Template.basketIncludeAbbr") }} {{ Twig.print("property.surcharge | formatMonetary(itemAmount.currency)") }}) {{ Twig.endif() }}</strong>
+                                    <strong class="col-12 mt-1 item-word-break">
+                                        {{ Twig.print('property | propertyName') }}
+                                        {{ Twig.if("webstoreConfig.useVariationOrderProperties and property.surcharge > 0") }}
+                                            {{ Twig.if("not property.hasTax or property.isAdditionalCosts") }}
+                                                ({{ Twig.trans("Ceres::Template.basketPlusAbbr") }}
+                                            {{ Twig.else() }}
+                                                ({{ Twig.trans("Ceres::Template.basketIncludeAbbr") }}
+                                            {{ Twig.endif() }}
+                                            {{ Twig.print("property.surcharge | formatMonetary(itemAmount.currency)") }})
+                                        {{ Twig.endif() }}
+                                    </strong>
                                     {{ Twig.if("property.type == 'file'") }}
                                         {{ Twig.if("property.fileUrl is not empty") }}
                                             <a class="text-appearance" href="{{ Twig.print("property.fileUrl") }}" target="_blank">

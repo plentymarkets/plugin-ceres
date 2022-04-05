@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { hasVat, isAdditionalCosts } from "../../helper/OrderPropertyHelper";
 export default {
     name: "order-property-value-list-item",
 
@@ -45,18 +46,14 @@ export default {
             return this.$options.filters.propertySurcharge([this.property], this.property.propertyId);
         },
 
-        isAdditionalCosts()
+        isAdditionalCost()
         {
-            const property = this.property?.property;
-            return property && property.isShownAsAdditionalCosts && property.isShownAtCheckout
-                            && ((!property.isOderProperty && !App.useVariationOrderProperties)
-                            || (property.isOderProperty && App.useVariationOrderProperties))
+            isAdditionalCosts(this.property);
         },
 
         isTaxless()
         {
-            const hasVat = this.property.property.vatId !== 'none' && this.property.property.vatId !== null;
-            return !hasVat && (this.property.property.isOderProperty && App.useVariationOrderProperties);
+            return !hasVat(this.property);
         },
 
         showColon()

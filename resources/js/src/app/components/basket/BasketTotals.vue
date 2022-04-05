@@ -208,7 +208,7 @@
 
 <script>
 import { mapState } from "vuex";
-
+import { hasVat, isAdditionalCosts } from "../../helper/OrderPropertyHelper";
 export default {
     name: "basket-totals",
     data() {
@@ -299,21 +299,9 @@ export default {
             return (value / (100 - percent)) * 100;
         },
 
-        isAddtionalProperty(property)
-        {
-            return property.property.isShownAsAdditionalCosts 
-                   && ((!property.property.isOderProperty && !App.useVariationOrderProperties)
-                   || (property.property.isOderProperty && App.useVariationOrderProperties))
-        },
-
         isVariationProperty(property)
         {
             return property.property.isOderProperty && App.useVariationOrderProperties;
-        },
-
-        hasVat(property)
-        {
-            return property.property.vatId !== 'none' && property.property.vatId !== null;
         },
 
         isInBasketItemOrderParams(basketItem, propertyId)
@@ -332,7 +320,7 @@ export default {
             {
                 basketItem.variation.data.properties?.forEach(property => {
                     if(this.isInBasketItemOrderParams(basketItem, property.propertyId) && 
-                      (this.isAddtionalProperty(property) || (this.isVariationProperty(property) && !this.hasVat(property))))
+                      (isAdditionalCosts(property) || (!hasVat(property))))
                     {
                         const existsIndisplayedProperties = this.displayedProperties.find(entry => entry.propertyId === property.propertyId)
                         const existsIndisplayedPropertiesWithoutTax = this.displayedPropertiesWithoutTax.find(entry => entry.propertyId === property.propertyId)
@@ -352,7 +340,7 @@ export default {
                                 surcharge: this.$options.filters.propertySurcharge(basketItem.variation.data.properties, property.propertyId),
                                 vatId: property.property.vatId
                             }
-                            !this.hasVat(property) ? this.displayedPropertiesWithoutTax.push(newProperty) : this.displayedProperties.push(newProperty);
+                            !hasVat(property) ? this.displayedPropertiesWithoutTax.push(newProperty) : this.displayedProperties.push(newProperty);
                         }
                     }
                 });
