@@ -5,7 +5,7 @@
             <dl>
                 <slot name="before-item-sum"></slot>
 
-                 <!-- AdditionalCosts -->
+                 <!--  AdditionalCosts with Tax -->
                 <template v-if="(visibleFields.includes('additionalCosts') || visibleFields.includes('basket.additional_costs')) && displayedProperties.length">
                     <template v-for="property in displayedProperties">
                         <dt :class="{ 'font-weight-bold': showNetPrices }" :key="'property-name-' + property.propertyId">
@@ -16,7 +16,7 @@
                         </dd>
                     </template>
                 </template>
-                <!-- AdditionalCosts -->
+                <!-- AdditionalCosts with Tax -->
 
                 <!-- Basket value (net) -->
                 <template v-if="visibleFields.includes('basketValueNet') || visibleFields.includes('basket.value_of_items_net')">
@@ -109,7 +109,7 @@
                 <hr>
                 <slot name="before-total-sum"></slot>
 
-                <!-- Total sum (net) -->
+                <!-- Subamount (net) -->
                 <template v-if="visibleFields.includes('subAmount') || visibleFields.includes('basket.order_total_net')">
                     <dt :class="{ 'font-weight-bold': showNetPrices }">
                         {{ $translate("Ceres::Template.basketSubAmount" ) }} {{ $translate("Ceres::Template.basketNet") }}
@@ -118,7 +118,7 @@
                         {{ basket.subAmount | currency }}
                     </dd>
                 </template>
-                <!-- Total sum (net) -->
+                <!-- Subamount (net) -->
 
                 <slot name="before-vat"></slot>
 
@@ -135,7 +135,7 @@
 
                 <slot name="after-vat"></slot>
 
-                <!-- AdditionalCosts without tax -->
+                <!-- AdditionalCosts or order properties without tax -->
                 <template v-if="(visibleFields.includes('additionalCosts') || visibleFields.includes('basket.additional_costs')) && displayedPropertiesWithoutTax.length">
                     <template v-for="property in displayedPropertiesWithoutTax">
                         <dt class="font-weight-bold" :key="'property-name-' + property.propertyId">
@@ -146,7 +146,7 @@
                         </dd>
                     </template>
                 </template>
-                <!-- AdditionalCosts without tax -->
+                <!-- AdditionalCosts or order properties without tax -->
 
                 <div class="totalSum">
                     <hr>
