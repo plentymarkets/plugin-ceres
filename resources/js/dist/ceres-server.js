@@ -50329,7 +50329,7 @@ var render = function() {
             " \n            "
         ) +
         (_vm.surcharge > 0
-          ? _vm.isAdditionalCosts || _vm.isTaxless
+          ? _vm.isAdditionalCost || _vm.isTaxless
             ? _vm._ssrEscape(
                 "\n                    (" +
                   _vm._s(_vm.$translate("Ceres::Template.basketPlusAbbr")) +

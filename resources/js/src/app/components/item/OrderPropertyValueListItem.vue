@@ -4,7 +4,7 @@
             <strong :class="{ 'colon': showColon }">
                 {{ property.property.names.name }} 
                 <template v-if="surcharge > 0">
-                    <template v-if="isAdditionalCosts || isTaxless">
+                    <template v-if="isAdditionalCost || isTaxless">
                         ({{ $translate("Ceres::Template.basketPlusAbbr") }} {{ surcharge | currency }})
                     </template>
                     <template v-else>
