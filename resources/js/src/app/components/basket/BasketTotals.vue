@@ -110,7 +110,7 @@
                 <slot name="before-total-sum"></slot>
 
                 <!-- Total sum (net) -->
-                <template v-if="visibleFields.includes('totalSumNet') || visibleFields.includes('basket.order_total_net')">
+                <template v-if="visibleFields.includes('subAmount') || visibleFields.includes('basket.order_total_net')">
                     <dt :class="{ 'font-weight-bold': showNetPrices }">
                         {{ $translate("Ceres::Template.basketSubAmount" ) }} {{ $translate("Ceres::Template.basketNet") }}
                     </dt><!--
@@ -224,7 +224,6 @@ export default {
         
         basketItems: 
         {
-            // check trigger
             deep: true,
             handler(newItems)
             {
@@ -251,7 +250,8 @@ export default {
                 "additionalCosts",
                 "totalSumGross",
                 "salesCoupon",
-                "openAmount"
+                "openAmount",
+                "subAmount"
             ]
         }
     },

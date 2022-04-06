@@ -116,7 +116,8 @@ export default {
                 "additionalCosts",
                 "totalSumGross",
                 "salesCoupon",
-                "openAmount"
+                "openAmount",
+                "subAmount"
             ]
         }
     },

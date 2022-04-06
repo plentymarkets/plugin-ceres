@@ -938,7 +938,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     visibleFields: {
       type: Array,
       default: function _default() {
-        return ["basketValueNet", "basketValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "promotionCoupon", "totalSumNet", "vats", "additionalCosts", "totalSumGross", "salesCoupon", "openAmount"];
+        return ["basketValueNet", "basketValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "promotionCoupon", "totalSumNet", "vats", "additionalCosts", "totalSumGross", "salesCoupon", "openAmount", "subAmount"];
       }
     }
   },
@@ -1290,7 +1290,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   watch: {
     basketItems: {
-      // check trigger
       deep: true,
       handler: function handler(newItems) {
         this.setPropertiesForTotals(newItems);
@@ -1301,7 +1300,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     visibleFields: {
       type: Array,
       default: function _default() {
-        return ["basketValueNet", "basketValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "promotionCoupon", "totalSumNet", "vats", "additionalCosts", "totalSumGross", "salesCoupon", "openAmount"];
+        return ["basketValueNet", "basketValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "promotionCoupon", "totalSumNet", "vats", "additionalCosts", "totalSumGross", "salesCoupon", "openAmount", "subAmount"];
       }
     }
   },
@@ -41947,7 +41946,7 @@ var render = function() {
               _vm._t("before-total-sum"),
               _vm._ssrNode(
                 " " +
-                  (_vm.visibleFields.includes("totalSumNet") ||
+                  (_vm.visibleFields.includes("subAmount") ||
                   _vm.visibleFields.includes("basket.order_total_net")
                     ? "<dt" +
                       _vm._ssrClass(null, {
@@ -90374,7 +90373,6 @@ var mutations = {
   setVariationOrderProperty: function setVariationOrderProperty(state, _ref) {
     var propertyId = _ref.propertyId,
         value = _ref.value;
-    // TODO vlt überarbeiten
     var properties = state.variation.documents[0].data.properties;
     var index = properties.findIndex(function (property) {
       return property.property.id === propertyId;

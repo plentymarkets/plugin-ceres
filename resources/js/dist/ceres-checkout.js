@@ -82084,7 +82084,6 @@ var mutations = {
   setVariationOrderProperty: function setVariationOrderProperty(state, _ref) {
     var propertyId = _ref.propertyId,
         value = _ref.value;
-    // TODO vlt überarbeiten
     var properties = state.variation.documents[0].data.properties;
     var index = properties.findIndex(function (property) {
       return property.property.id === propertyId;

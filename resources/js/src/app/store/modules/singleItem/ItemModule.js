@@ -42,7 +42,6 @@ const mutations =
         setVariationOrderProperty(state, { propertyId, value })
         {
 
-            // TODO vlt überarbeiten
             const properties = state.variation.documents[0].data.properties;
             const index = properties.findIndex(property => property.property.id === propertyId);
 
