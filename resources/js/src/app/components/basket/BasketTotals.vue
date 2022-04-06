@@ -217,6 +217,9 @@ export default {
             displayedPropertiesWithoutTax: []
         }
     },
+    created() {
+        this.setPropertiesForTotals(this.basketItems);
+    },
     watch: {
         
         basketItems: 

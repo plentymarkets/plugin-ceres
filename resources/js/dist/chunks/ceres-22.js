@@ -293,6 +293,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       displayedPropertiesWithoutTax: []
     };
   },
+  created: function created() {
+    this.setPropertiesForTotals(this.basketItems);
+  },
   watch: {
     basketItems: {
       // check trigger
@@ -374,6 +377,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     setPropertiesForTotals: function setPropertiesForTotals(newBasketItems) {
       var _this = this;
 
+      console.log(newBasketItems);
       this.displayedPropertiesWithoutTax = [];
       this.displayedProperties = [];
 
