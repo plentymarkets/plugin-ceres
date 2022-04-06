@@ -112,7 +112,7 @@
                 <!-- Total sum (net) -->
                 <template v-if="visibleFields.includes('totalSumNet') || visibleFields.includes('basket.order_total_net')">
                     <dt :class="{ 'font-weight-bold': showNetPrices }">
-                        {{ $translate("Ceres::Template.basketSubTotal" ) }} {{ $translate("Ceres::Template.basketNet") }}
+                        {{ $translate("Ceres::Template.basketSubAmount" ) }} {{ $translate("Ceres::Template.basketNet") }}
                     </dt><!--
                     --><dd :class="{ 'font-weight-bold': showNetPrices }" data-testing="basket-amount-net">
                         {{ basket.subAmount | currency }}
@@ -280,13 +280,6 @@ export default {
             return this.$translate("Ceres::Template.basketExportDeliveryWarning", { from: shopCountry, to: currentShippingCountry });
         },
 
-        subtotal()
-        {
-            let priceToSubtract = 0;
-            this.propertiesCosts.forEach((property) => priceToSubtract += property.price);
-            return this.basket.basketAmountNet - priceToSubtract;
-        },
-
         ...mapState({
             basket: state => state.basket.data,
             basketItems: state => state.basket.items,
@@ -312,9 +305,6 @@ export default {
             return !!basketItem.basketItemOrderParams.find(param => Number(param.propertyId) === Number(propertyId));
         },
         
-        /**
-         * 
-         */
         setPropertiesForTotals(newBasketItems)
         {
             this.displayedPropertiesWithoutTax = [];
