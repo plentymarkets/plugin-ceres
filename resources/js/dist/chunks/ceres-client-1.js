@@ -220,7 +220,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.$options.filters.propertySurcharge([this.property], this.property.propertyId);
     },
     isAdditionalCost: function isAdditionalCost() {
-      Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_0__["isAdditionalCosts"])(this.property);
+      return Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_0__["isAdditionalCosts"])(this.property);
     },
     isTaxless: function isTaxless() {
       return !Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_0__["hasVat"])(this.property);

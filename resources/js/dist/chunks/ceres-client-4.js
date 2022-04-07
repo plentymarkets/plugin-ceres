@@ -517,6 +517,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
@@ -602,6 +603,19 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     },
     surcharge: function surcharge() {
       return this.property.itemSurcharge || this.property.surcharge;
+    },
+    hasTax: function hasTax() {
+      return this.property.vatId !== "none" && this.property.vatId !== null;
+    },
+    showFootnotes: function showFootnotes() {
+      return this.hasTax && this.surcharge > 0;
+    },
+    inclOrPlus: function inclOrPlus() {
+      if (this.property.isShownAsAdditionalCosts || !this.hasTax) {
+        return this.$translate("Ceres::Template.basketPlusAbbr");
+      }
+
+      return this.$translate("Ceres::Template.basketIncludeAbbr");
     },
     footnotes: function footnotes() {
       if (this.surcharge <= 0) {
@@ -1208,13 +1222,18 @@ var render = function() {
                       _vm.surcharge > 0
                         ? [
                             _vm._v(
-                              "(+ " +
+                              "( " +
+                                _vm._s(_vm.inclOrPlus) +
+                                " " +
                                 _vm._s(_vm._f("currency")(_vm.surcharge)) +
                                 ")"
                             )
                           ]
                         : _vm._e(),
-                      _c("span", [_vm._v(" " + _vm._s(_vm.footnotes))])
+                      _vm._v(" "),
+                      _vm.showFootnotes
+                        ? _c("span", [_vm._v(" " + _vm._s(_vm.footnotes))])
+                        : _vm._e()
                     ],
                     2
                   )

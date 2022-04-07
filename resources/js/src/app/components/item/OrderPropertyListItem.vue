@@ -44,7 +44,8 @@
                     :data-testing="'order-property-label-' + inputType">
                 <span class="text-wrap">{{ property.names.name }}</span>
                 <strong class="ml-1">
-                    <template v-if="surcharge > 0">(+ {{ surcharge | currency }})</template><span> {{ footnotes }}</span>
+                    <template v-if="surcharge > 0">( {{ inclOrPlus }} {{ surcharge | currency }})</template>
+                    <span v-if="showFootnotes"> {{ footnotes }}</span>
                 </strong>
             </label>
         </div>
@@ -227,6 +228,25 @@ export default {
         surcharge()
         {
             return this.property.itemSurcharge || this.property.surcharge;
+        },
+
+        hasTax()
+        {
+            return this.property.vatId !== "none" && this.property.vatId !== null;
+        },
+
+        showFootnotes()
+        {
+            return this.hasTax && this.surcharge > 0;
+        },
+
+        inclOrPlus()
+        {
+            if(this.property.isShownAsAdditionalCosts || !this.hasTax)
+            {
+                return this.$translate("Ceres::Template.basketPlusAbbr")
+            }
+            return this.$translate("Ceres::Template.basketIncludeAbbr");
         },
 
         footnotes()

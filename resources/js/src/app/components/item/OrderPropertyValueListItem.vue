@@ -48,7 +48,7 @@ export default {
 
         isAdditionalCost()
         {
-            isAdditionalCosts(this.property);
+            return isAdditionalCosts(this.property);
         },
 
         isTaxless()

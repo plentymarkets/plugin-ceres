@@ -8037,6 +8037,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
@@ -8122,6 +8123,19 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     },
     surcharge: function surcharge() {
       return this.property.itemSurcharge || this.property.surcharge;
+    },
+    hasTax: function hasTax() {
+      return this.property.vatId !== "none" && this.property.vatId !== null;
+    },
+    showFootnotes: function showFootnotes() {
+      return this.hasTax && this.surcharge > 0;
+    },
+    inclOrPlus: function inclOrPlus() {
+      if (this.property.isShownAsAdditionalCosts || !this.hasTax) {
+        return this.$translate("Ceres::Template.basketPlusAbbr");
+      }
+
+      return this.$translate("Ceres::Template.basketIncludeAbbr");
     },
     footnotes: function footnotes() {
       if (this.surcharge <= 0) {
@@ -8414,7 +8428,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.$options.filters.propertySurcharge([this.property], this.property.propertyId);
     },
     isAdditionalCost: function isAdditionalCost() {
-      Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_0__["isAdditionalCosts"])(this.property);
+      return Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_0__["isAdditionalCosts"])(this.property);
     },
     isTaxless: function isTaxless() {
       return !Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_0__["hasVat"])(this.property);
@@ -49912,14 +49926,20 @@ var render = function() {
                       '</span> <strong class="ml-1">' +
                       (_vm.surcharge > 0
                         ? _vm._ssrEscape(
-                            "(+ " +
+                            "( " +
+                              _vm._s(_vm.inclOrPlus) +
+                              " " +
                               _vm._s(_vm._f("currency")(_vm.surcharge)) +
                               ")"
                           )
                         : "<!---->") +
-                      "<span>" +
-                      _vm._ssrEscape(" " + _vm._s(_vm.footnotes)) +
-                      "</span></strong>"
+                      " " +
+                      (_vm.showFootnotes
+                        ? "<span>" +
+                          _vm._ssrEscape(" " + _vm._s(_vm.footnotes)) +
+                          "</span>"
+                        : "<!---->") +
+                      "</strong>"
                   )
                 ]
               )
