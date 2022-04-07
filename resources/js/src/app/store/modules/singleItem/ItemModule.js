@@ -1,6 +1,6 @@
 import { isNullOrUndefined } from "../../../helper/utils";
 import { setUrlByItem } from "../../../services/UrlService";
-import { hasVat, isAdditionalCosts } from "../../../helper/OrderPropertyHelper";
+import { hasVat, isAdditionalCosts, isOrderProperty } from "../../../helper/OrderPropertyHelper";
 import Vue from "vue";
 
 const ApiService = require("../../../services/ApiService");
@@ -181,7 +181,7 @@ const getters =
                 for (const property of addedProperties)
                 {
 
-                    if (isAdditionalCosts(property) || !hasVat(property))
+                    if (isAdditionalCosts(property) || ( isOrderProperty(property) && !hasVat(property)))
                     {
                         continue;
                     }
