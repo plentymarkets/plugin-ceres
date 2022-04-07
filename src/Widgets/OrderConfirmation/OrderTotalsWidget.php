@@ -53,7 +53,8 @@ class OrderTotalsWidget extends OrderConfirmationBaseWidget
                 "totalSumGross",
                 "salesCoupon",
                 "openAmount",
-                "additionalCosts"
+                "additionalCosts",
+                "subAmount"
             ])
             ->withName("Widget.basketTotalsVisibleFields")
             ->withCheckboxValues(

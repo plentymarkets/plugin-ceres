@@ -132,10 +132,10 @@
                 {{ grossNet }}
             {% else %}
 
-                {% if 'totalSumNet' in shownFields or shownFields == null %}
-                    {# TOTAL SUM NET #}
+                {% if 'subAmount' in shownFields or shownFields == null %}
+                    {# Sub Amount NET #}
                     <dt{% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
-                        {{ trans("Ceres::Template.basketSubTotal") }} {{ trans("Ceres::Template.checkoutNet") }}
+                        {{ trans("Ceres::Template.basketSubAmount") }} {{ trans("Ceres::Template.checkoutNet") }}
                     </dt><!--
                     --><dd{% if highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="basket-amount-net">
                         {{ totals.subAmount | formatMonetary( totals.currency ) }}
@@ -158,16 +158,7 @@
                     {% endif %}
                 {% endif %}
 
-                <div class="totalSum">
-                    {% if
-                        'promotionCoupon' in shownFields or
-                        'totalSumNet' in shownFields or
-                        'vats' in shownFields or
-                        shownFields == null
-                    %}
-                        <hr>
-                    {% endif %}
-                    {% if 'additionalCosts' in shownFields or shownFields == null %}
+                {% if 'additionalCosts' in shownFields or shownFields == null %}
                         {# ADDITIONAL COSTS #}
                         {% for cost in totals.additionalCosts %}
                             <dt class="font-weight-bold">
@@ -177,6 +168,16 @@
                                 {{ cost.formattedTotalPrice }}
                             </dd>
                         {% endfor %}
+                {% endif %}
+
+                <div class="totalSum">
+                    {% if
+                        'promotionCoupon' in shownFields or
+                        'totalSumNet' in shownFields or
+                        'vats' in shownFields or
+                        shownFields == null
+                    %}
+                        <hr>
                     {% endif %}
 
                     {% if 'totalSumNet' in shownFields or shownFields == null %}
