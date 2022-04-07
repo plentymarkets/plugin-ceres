@@ -180,7 +180,6 @@ const getters =
 
                 for (const property of addedProperties)
                 {
-
                     if (isAdditionalCosts(property) || ( isOrderProperty(property) && !hasVat(property)))
                     {
                         continue;
