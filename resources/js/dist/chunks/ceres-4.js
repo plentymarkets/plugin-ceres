@@ -607,9 +607,6 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     hasTax: function hasTax() {
       return this.property.vatId !== "none" && this.property.vatId !== null;
     },
-    showFootnotes: function showFootnotes() {
-      return this.hasTax && this.surcharge > 0;
-    },
     inclOrPlus: function inclOrPlus() {
       if (this.property.isShownAsAdditionalCosts || !this.hasTax) {
         return this.$translate("Ceres::Template.basketPlusAbbr");
@@ -618,16 +615,17 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       return this.$translate("Ceres::Template.basketIncludeAbbr");
     },
     footnotes: function footnotes() {
-      if (this.surcharge <= 0) {
-        if (this.property.isRequired && !this.property.isPreSelected) {
-          return this.$translate("Ceres::Template.singleItemFootnote2");
-        }
-      } else if (this.surcharge > 0) {
-        if (this.property.isRequired && !this.property.isPreSelected) {
+      if (this.surcharge > 0) {
+        if (this.property.isRequired && !this.property.isPreSelected && this.hasTax) {
           return this.$translate("Ceres::Template.singleItemFootnote12");
-        } else {
+        } else if (this.hasTax) {
           return this.$translate("Ceres::Template.singleItemFootnote1");
         }
+      }
+    },
+    requiredFootnotes: function requiredFootnotes() {
+      if (this.property.isRequired && !this.property.isPreSelected && !this.footnotes) {
+        return this.$translate("Ceres::Template.singleItemFootnote2");
       }
     },
     selectedDescription: function selectedDescription() {
@@ -1145,7 +1143,14 @@ var render = function() {
                           )
                         ]
                       : _vm._e(),
-                    _c("span", [_vm._v(" " + _vm._s(_vm.footnotes))])
+                    _c("span", [
+                      _vm._v(
+                        " " +
+                          _vm._s(_vm.footnotes) +
+                          " " +
+                          _vm._s(_vm.requiredFootnotes)
+                      )
+                    ])
                   ],
                   2
                 )
@@ -1231,9 +1236,13 @@ var render = function() {
                           ]
                         : _vm._e(),
                       _vm._v(" "),
-                      _vm.showFootnotes
-                        ? _c("span", [_vm._v(" " + _vm._s(_vm.footnotes))])
-                        : _vm._e()
+                      _c("span", [
+                        _vm._v(
+                          _vm._s(_vm.footnotes) +
+                            " " +
+                            _vm._s(_vm.requiredFootnotes)
+                        )
+                      ])
                     ],
                     2
                   )
@@ -1354,7 +1363,14 @@ var render = function() {
                                 )
                               ]
                             : _vm._e(),
-                          _c("span", [_vm._v(" " + _vm._s(_vm.footnotes))])
+                          _c("span", [
+                            _vm._v(
+                              " " +
+                                _vm._s(_vm.footnotes) +
+                                " " +
+                                _vm._s(_vm.requiredFootnotes)
+                            )
+                          ])
                         ],
                         2
                       )
@@ -1457,7 +1473,14 @@ var render = function() {
                               )
                             ]
                           : _vm._e(),
-                        _c("span", [_vm._v(" " + _vm._s(_vm.footnotes))])
+                        _c("span", [
+                          _vm._v(
+                            " " +
+                              _vm._s(_vm.footnotes) +
+                              " " +
+                              _vm._s(_vm.requiredFootnotes)
+                          )
+                        ])
                       ],
                       2
                     )

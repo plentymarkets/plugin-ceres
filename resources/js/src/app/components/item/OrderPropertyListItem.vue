@@ -12,7 +12,7 @@
             <label class="d-flex">
                 <span class="text-truncate">{{ property.names.name }}</span>
                 <strong class="ml-1">
-                    <template v-if="surcharge > 0">(+ {{ surcharge | currency }})</template><span> {{ footnotes }}</span>
+                    <template v-if="surcharge > 0">(+ {{ surcharge | currency }})</template><span> {{ footnotes }} {{ requiredFootnotes }}</span>
                 </strong>
             </label>
         </div>
@@ -45,7 +45,7 @@
                 <span class="text-wrap">{{ property.names.name }}</span>
                 <strong class="ml-1">
                     <template v-if="surcharge > 0">( {{ inclOrPlus }} {{ surcharge | currency }})</template>
-                    <span v-if="showFootnotes"> {{ footnotes }}</span>
+                    <span>{{ footnotes }} {{ requiredFootnotes }}</span>
                 </strong>
             </label>
         </div>
@@ -64,7 +64,7 @@
                 <label class="d-flex w-100" for="order-property-input-select">
                     <span class="text-truncate">{{ property.names.name }}</span>
                     <strong class="ml-1">
-                        <template v-if="surcharge > 0">(+ {{ surcharge | currency }})</template><span> {{ footnotes }}</span>
+                        <template v-if="surcharge > 0">(+ {{ surcharge | currency }})</template><span> {{ footnotes }} {{ requiredFootnotes }}</span>
                     </strong>
                 </label>
             </div>
@@ -85,7 +85,7 @@
                 <span class="input-unit-label d-flex">
                     <span class="text-truncate">{{ property.names.name }}</span>
                     <strong class="ml-1">
-                        <template v-if="surcharge > 0">(+ {{ surcharge | currency }})</template><span> {{ footnotes }}</span>
+                        <template v-if="surcharge > 0">(+ {{ surcharge | currency }})</template><span> {{ footnotes }} {{ requiredFootnotes }}</span>
                     </strong>
                 </span>
                 <span class="input-unit-btn" v-if="!selectedFile">
@@ -235,11 +235,6 @@ export default {
             return this.property.vatId !== "none" && this.property.vatId !== null;
         },
 
-        showFootnotes()
-        {
-            return this.hasTax && this.surcharge > 0;
-        },
-
         inclOrPlus()
         {
             if(this.property.isShownAsAdditionalCosts || !this.hasTax)
@@ -251,24 +246,24 @@ export default {
 
         footnotes()
         {
-            if (this.surcharge <= 0)
+            if (this.surcharge > 0)
             {
-                if (this.property.isRequired && !this.property.isPreSelected)
-                {
-                    return this.$translate("Ceres::Template.singleItemFootnote2");
-                }
-            }
-
-            else if (this.surcharge > 0)
-            {
-                if (this.property.isRequired && !this.property.isPreSelected)
+                if (this.property.isRequired && !this.property.isPreSelected && this.hasTax)
                 {
                     return this.$translate("Ceres::Template.singleItemFootnote12");
                 }
-                else 
+                else if(this.hasTax)
                 {
                     return this.$translate("Ceres::Template.singleItemFootnote1");
                 }
+            }
+        },
+
+        requiredFootnotes()
+        {
+            if (this.property.isRequired && !this.property.isPreSelected && !this.footnotes)
+            {
+                return this.$translate("Ceres::Template.singleItemFootnote2");
             }
         },
 
