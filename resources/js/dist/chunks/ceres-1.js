@@ -370,7 +370,10 @@ var render = function() {
         _vm._v(" "),
         _c(
           "ul",
-          { staticClass: "ml-1 pl-3" },
+          {
+            staticClass: "ml-1 pl-3",
+            attrs: { "data-testing": "order-property-list" }
+          },
           _vm._l(_vm.shownProperties, function(property) {
             return _c("order-property-value-list-item", {
               key: property.propertyId,

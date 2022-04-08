@@ -209,7 +209,7 @@
                             {{ Twig.set("uid", "uid()") }}
                             <div id="collapse-{{ Twig.print('uid') }}" class="collapse row pl-4{% if isPreview %} show{% endif %}">
                                 {{ Twig.for("property", "item.orderProperties") }}
-                                    <strong class="col-12 mt-1 item-word-break">
+                                    <strong class="col-12 mt-1 item-word-break" data-testing="purchased-order-property">
                                         {{ Twig.print('property | propertyName') }}
                                         {{ Twig.if("webstoreConfig.useVariationOrderProperties and property.surcharge > 0") }}
                                             {{ Twig.if("not property.hasTax or property.isAdditionalCosts") }}

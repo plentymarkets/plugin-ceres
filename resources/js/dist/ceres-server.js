@@ -7408,6 +7408,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
 /* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helper/OrderPropertyHelper */ "./resources/js/src/app/helper/OrderPropertyHelper.js");
 
 //
 //
@@ -7467,6 +7468,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-price",
   props: {
@@ -7514,6 +7517,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     isVariationOrderPropertyRequiredPreselected: function isVariationOrderPropertyRequiredPreselected(property) {
       return property.isRequired && property.isPreSelected && property.isOderProperty && App.useVariationOrderProperties;
+    },
+    hasTax: function hasTax(property) {
+      return Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_1__["hasVat"])(property);
     }
   }
 });
@@ -41650,7 +41656,7 @@ var render = function() {
                   _vm.displayedProperties.length
                     ? _vm._ssrList(_vm.displayedProperties, function(property) {
                         return (
-                          "<dt" +
+                          '<dt data-testing="additionalcost-with-tax"' +
                           _vm._ssrClass(null, {
                             "font-weight-bold": _vm.showNetPrices
                           }) +
@@ -41974,7 +41980,7 @@ var render = function() {
                           _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
                           "\n                "
                       ) +
-                      '</dt><dd data-testing="basket-amount-net"' +
+                      '</dt><dd data-testing="basket-sub-amount"' +
                       _vm._ssrClass(null, {
                         "font-weight-bold": _vm.showNetPrices
                       }) +
@@ -42025,7 +42031,7 @@ var render = function() {
                         property
                       ) {
                         return (
-                          '<dt class="font-weight-bold">' +
+                          '<dt data-testing="additionalcost-without-tax" class="font-weight-bold">' +
                           _vm._ssrEscape(
                             "\n                        " +
                               _vm._s(property.name) +
@@ -49517,6 +49523,14 @@ var render = function() {
                         ")"
                     )
                   : "<!---->") +
+                " " +
+                (_vm.hasTax(property)
+                  ? _vm._ssrEscape(
+                      _vm._s(
+                        _vm.$translate("Ceres::Template.singleItemFootnote1")
+                      )
+                    )
+                  : "<!---->") +
                 "</span></li>"
               )
             }) +
@@ -50305,7 +50319,7 @@ var render = function() {
               "</div> "
           ),
           _vm._ssrNode(
-            '<ul class="ml-1 pl-3">',
+            '<ul data-testing="order-property-list" class="ml-1 pl-3">',
             "</ul>",
             _vm._l(_vm.shownProperties, function(property) {
               return _c("order-property-value-list-item", {

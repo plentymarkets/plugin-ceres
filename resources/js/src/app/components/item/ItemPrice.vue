@@ -32,6 +32,7 @@
             <li v-for="property in propertiesWithAdditionalCostsVisible" :key="property.propertyId">
                 <span class="d-block">
                     {{ property.property.names.name }} <template v-if="$options.filters.propertySurcharge(currentVariation.properties, property.propertyId) > 0">({{ $translate("Ceres::Template.basketPlusAbbr") }} {{ currentVariation.properties | propertySurcharge(property.propertyId) | currency }})</template>
+                    <template v-if="hasTax(property)">{{ $translate("Ceres::Template.singleItemFootnote1") }}</template>
                 </span>
             </li>
         </ul>
@@ -57,6 +58,7 @@
 </template>
 
 <script>
+import { hasVat } from "../../helper/OrderPropertyHelper";
 export default {
     name: "item-price",
 
@@ -129,6 +131,11 @@ export default {
                     && property.isPreSelected 
                     && property.isOderProperty 
                     && App.useVariationOrderProperties
+        },
+
+        hasTax(property)
+        {
+            return hasVat(property);
         }
     }
 }

@@ -8,7 +8,7 @@
                  <!--  AdditionalCosts with Tax -->
                 <template v-if="(visibleFields.includes('additionalCosts') || visibleFields.includes('basket.additional_costs')) && displayedProperties.length">
                     <template v-for="property in displayedProperties">
-                        <dt :class="{ 'font-weight-bold': showNetPrices }" :key="'property-name-' + property.propertyId">
+                        <dt :class="{ 'font-weight-bold': showNetPrices }" :key="'property-name-' + property.propertyId" data-testing="additionalcost-with-tax">
                             {{ property.name }}
                         </dt><!--
                         --><dd :class="{ 'font-weight-bold': showNetPrices }" :key="'property-price-' + property.propertyId">
@@ -138,7 +138,7 @@
                 <!-- AdditionalCosts or order properties without tax -->
                 <template v-if="(visibleFields.includes('additionalCosts') || visibleFields.includes('basket.additional_costs')) && displayedPropertiesWithoutTax.length">
                     <template v-for="property in displayedPropertiesWithoutTax">
-                        <dt class="font-weight-bold" :key="'property-name-' + property.propertyId">
+                        <dt class="font-weight-bold" :key="'property-name-' + property.propertyId" data-testing="additionalcost-without-tax">
                             {{ property.name }}
                         </dt><!--
                         --><dd class="font-weight-bold" :key="'property-price-' + property.propertyId">

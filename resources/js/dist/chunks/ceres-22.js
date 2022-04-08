@@ -467,7 +467,8 @@ var render = function() {
                         "dt",
                         {
                           key: "property-name-" + property.propertyId,
-                          class: { "font-weight-bold": _vm.showNetPrices }
+                          class: { "font-weight-bold": _vm.showNetPrices },
+                          attrs: { "data-testing": "additionalcost-with-tax" }
                         },
                         [
                           _vm._v(
@@ -830,7 +831,7 @@ var render = function() {
                     "dd",
                     {
                       class: { "font-weight-bold": _vm.showNetPrices },
-                      attrs: { "data-testing": "basket-amount-net" }
+                      attrs: { "data-testing": "basket-sub-amount" }
                     },
                     [
                       _vm._v(
@@ -881,7 +882,10 @@ var render = function() {
                         "dt",
                         {
                           key: "property-name-" + property.propertyId,
-                          staticClass: "font-weight-bold"
+                          staticClass: "font-weight-bold",
+                          attrs: {
+                            "data-testing": "additionalcost-without-tax"
+                          }
                         },
                         [
                           _vm._v(

@@ -8,9 +8,9 @@
     <div>
         <dl>
             {% if 'additionalCosts' in shownFields or shownFields == null %}
-                {# ADDITIONAL COSTS #}
+                {# ADDITIONAL COSTS WITH TAX #}
                 {% for cost in totals.additionalCostsWithTax %}
-                    <dt {% if not highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                    <dt {% if not highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="additionalcost-with-tax">
                         {{ cost.name }}
                     </dt><!--
                             --><dd class="font-weight-bold">
@@ -137,7 +137,7 @@
                     <dt{% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
                         {{ trans("Ceres::Template.basketSubAmount") }} {{ trans("Ceres::Template.checkoutNet") }}
                     </dt><!--
-                    --><dd{% if highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="basket-amount-net">
+                    --><dd{% if highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="basket-sub-amount">
                         {{ totals.subAmount | formatMonetary( totals.currency ) }}
                     </dd>
                 {% endif %}
@@ -159,9 +159,9 @@
                 {% endif %}
 
                 {% if 'additionalCosts' in shownFields or shownFields == null %}
-                        {# ADDITIONAL COSTS #}
+                        {# ADDITIONAL COSTS WITHOUT TAX #}
                         {% for cost in totals.additionalCosts %}
-                            <dt class="font-weight-bold">
+                            <dt class="font-weight-bold" data-testing="additionalcost-without-tax">
                                 {{ cost.name }}
                             </dt><!--
                             --><dd class="font-weight-bold">
