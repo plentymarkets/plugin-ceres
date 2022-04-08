@@ -114,7 +114,7 @@
                     <dt :class="{ 'font-weight-bold': showNetPrices }">
                         {{ $translate("Ceres::Template.basketSubAmount" ) }} {{ $translate("Ceres::Template.basketNet") }}
                     </dt><!--
-                    --><dd :class="{ 'font-weight-bold': showNetPrices }" data-testing="basket-amount-net">
+                    --><dd :class="{ 'font-weight-bold': showNetPrices }" data-testing="basket-sub-amount">
                         {{ basket.subAmount | currency }}
                     </dd>
                 </template>
