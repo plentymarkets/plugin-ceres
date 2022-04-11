@@ -235,7 +235,7 @@ export default {
 
         itemGraduatedPricesalableVariationCount()
         {
-            return !!this.item.item && this.item.item.salableVariationCount == 1 && this.item.prices.graduatedPrices.length > 1 && App.config.item.enable_graduated_prices;
+            return !!this.item.item && this.item.item.salableVariationCount == 1 && this.item.prices.graduatedPrices.length > 1 && App.config.item.enableGraduatedPrices;
         },
 
         itemSetPrice()
