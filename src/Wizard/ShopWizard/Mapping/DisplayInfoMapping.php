@@ -51,6 +51,12 @@ class DisplayInfoMapping
             "global"   => false,
             "optional" => true,
         ],
+        "displayInfo_enableGraduatedPrices" => [
+            "field"    => "item.enable_graduated_prices",
+            "type"     => "boolean",
+            "global"   => false,
+            "optional" => true,
+        ],
         "displayInfo_showCarouselDots" => [
             "field"    => "item.category_show_dots",
             "type"     => "boolean",

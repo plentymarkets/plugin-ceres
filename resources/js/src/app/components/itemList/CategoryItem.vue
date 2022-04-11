@@ -77,9 +77,6 @@
                                 <template v-else-if="itemGraduatedPriceisCheapestSorting">
                                     {{ $translate("Ceres::Template.categoryItemFromPrice", { price: itemPriceGraduated }) }} {{ $translate("Ceres::Template.categoryItemFootnote") }}
                                 </template>
-                                <template v-else-if="!!item.item && item.item.salableVariationCount > 1">
-                                    {{ $translate("Ceres::Template.categoryItemFromPrice", { price: itemPrice }) }} {{ $translate("Ceres::Template.categoryItemFootnote") }}
-                                </template>
                                 <template v-else-if="itemGraduatedPricesalableVariationCount">
                                     {{ $translate("Ceres::Template.categoryItemFromPrice", { price: itemPriceGraduated }) }} {{ $translate("Ceres::Template.categoryItemFootnote") }}
                                 </template>
@@ -214,16 +211,20 @@ export default {
 
         basePrice()
         {
-            return this.item.prices.graduatedPrices.length > 0
-                ? this.item.prices.graduatedPrices[0].basePrice
-                : this.item.prices.default.basePrice;
+            return this.item.prices.default.basePrice;
         },
 
         itemPriceGraduated()
         {
-            let unitPrice = this.item.prices.graduatedPrices.length > 0
-                ? this.item.prices.graduatedPrices[0].unitPrice
-                : this.item.prices.default.unitPrice;
+           let unitPrice;
+           if (App.config.item.enableGraduatedPrices) {
+             unitPrice = this.item.prices.graduatedPrices.length > 0
+                 ? this.item.prices.graduatedPrices[0].unitPrice
+                 : this.item.prices.default.unitPrice;
+           } else {
+             unitPrice = this.item.prices.default.unitPrice;
+           }
+
             return this.$options.filters.specialOffer(unitPrice.formatted, this.item.prices, "unitPrice", "formatted" );
         },
 
@@ -234,7 +235,7 @@ export default {
 
         itemGraduatedPricesalableVariationCount()
         {
-            return !!this.item.item && this.item.item.salableVariationCount == 1 && this.item.prices.graduatedPrices.length > 1;
+            return !!this.item.item && this.item.item.salableVariationCount == 1 && this.item.prices.graduatedPrices.length > 1 && App.config.item.enable_graduated_prices;
         },
 
         itemSetPrice()
