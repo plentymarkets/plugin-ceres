@@ -1760,9 +1760,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
 
 
 
@@ -1824,17 +1821,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.$options.filters.specialOffer(this.item.prices.default.unitPrice.formatted, this.item.prices, "unitPrice", "formatted");
     },
     basePrice: function basePrice() {
-      return this.item.prices.graduatedPrices.length > 0 ? this.item.prices.graduatedPrices[0].basePrice : this.item.prices.default.basePrice;
+      return this.item.prices.default.basePrice;
     },
     itemPriceGraduated: function itemPriceGraduated() {
-      var unitPrice = this.item.prices.graduatedPrices.length > 0 ? this.item.prices.graduatedPrices[0].unitPrice : this.item.prices.default.unitPrice;
+      var unitPrice;
+
+      if (App.config.item.enableGraduatedPrices) {
+        unitPrice = this.item.prices.graduatedPrices.length > 0 ? this.item.prices.graduatedPrices[0].unitPrice : this.item.prices.default.unitPrice;
+      } else {
+        unitPrice = this.item.prices.default.unitPrice;
+      }
+
       return this.$options.filters.specialOffer(unitPrice.formatted, this.item.prices, "unitPrice", "formatted");
     },
     itemGraduatedPriceisCheapestSorting: function itemGraduatedPriceisCheapestSorting() {
       return !!this.item.item && this.item.item.salableVariationCount > 1 && !!this.$ceres.isCheapestSorting;
     },
     itemGraduatedPricesalableVariationCount: function itemGraduatedPricesalableVariationCount() {
-      return !!this.item.item && this.item.item.salableVariationCount == 1 && this.item.prices.graduatedPrices.length > 1;
+      return !!this.item.item && this.item.item.salableVariationCount == 1 && this.item.prices.graduatedPrices.length > 1 && App.config.item.enableGraduatedPrices;
     },
     itemSetPrice: function itemSetPrice() {
       return this.$options.filters.currency(this.item.prices.default.price.value, this.item.prices.default.currency);
@@ -38668,26 +38672,6 @@ var render = function() {
                                       _vm.$translate(
                                         "Ceres::Template.categoryItemFromPrice",
                                         { price: _vm.itemPriceGraduated }
-                                      )
-                                    ) +
-                                    " " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.categoryItemFootnote"
-                                      )
-                                    ) +
-                                    "\n                            "
-                                )
-                              ]
-                            : !!_vm.item.item &&
-                              _vm.item.item.salableVariationCount > 1
-                            ? [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.categoryItemFromPrice",
-                                        { price: _vm.itemPrice }
                                       )
                                     ) +
                                     " " +
