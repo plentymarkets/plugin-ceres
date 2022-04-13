@@ -882,7 +882,7 @@ var render = function() {
                         "dt",
                         {
                           key: "property-name-" + property.propertyId,
-                          staticClass: "font-weight-bold",
+                          class: { "font-weight-bold": _vm.showNetPrices },
                           attrs: {
                             "data-testing": "additionalcost-without-tax"
                           }
@@ -899,7 +899,7 @@ var render = function() {
                         "dd",
                         {
                           key: "property-price-" + property.propertyId,
-                          staticClass: "font-weight-bold"
+                          class: { "font-weight-bold": _vm.showNetPrices }
                         },
                         [
                           _vm._v(

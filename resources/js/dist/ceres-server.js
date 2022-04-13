@@ -42035,13 +42035,21 @@ var render = function() {
                         property
                       ) {
                         return (
-                          '<dt data-testing="additionalcost-without-tax" class="font-weight-bold">' +
+                          '<dt data-testing="additionalcost-without-tax"' +
+                          _vm._ssrClass(null, {
+                            "font-weight-bold": _vm.showNetPrices
+                          }) +
+                          ">" +
                           _vm._ssrEscape(
                             "\n                        " +
                               _vm._s(property.name) +
                               "\n                    "
                           ) +
-                          '</dt><dd class="font-weight-bold">' +
+                          "</dt><dd" +
+                          _vm._ssrClass(null, {
+                            "font-weight-bold": _vm.showNetPrices
+                          }) +
+                          ">" +
                           _vm._ssrEscape(
                             "\n                        " +
                               _vm._s(_vm._f("currency")(property.price)) +
