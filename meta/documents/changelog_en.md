@@ -1,5 +1,21 @@
 # Release Notes for plentyShop LTS
 
+## v5.0.49 (2022-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.48...5.0.49" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Changed
+
+- The display of graduated prices in the **From price** in the category view can now be configured. The settings for this can be found in the plentyShop assistant under **Displayed information**. This setting is disabled by default.
+- Characteristics of type "none" with additional costs are now displayed below the item price.
+
+### Fixed
+
+- The base price display on the category view was calculated incorrectly if graduated prices were defined for the article. This has been fixed.
+
+### Changed templates
+
+- In Ceres 5.0.49 we made changes to template files which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
+- [resources/js/src/app/components/itemList/CategoryItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3265/files#diff-4c35af622ef09ba8949eb1c47557e3e6651b088291a0d2e2463c9244007b5516)
+
 ## v5.0.48 (2022-03-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.47...5.0.48" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO

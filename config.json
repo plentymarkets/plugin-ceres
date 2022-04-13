@@ -773,6 +773,14 @@
                         "defaultValue": "false"
                     }
                 },
+                "item.enable_graduated_prices": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.itemEnableGraduatedPricesLabel",
+                    "options": {
+                        "defaultValue": "false"
+                    }
+                },
                 "item.enable_image_carousel": {
                     "type": "checkBox",
                     "required": false,
