@@ -10,10 +10,10 @@
             {% if 'additionalCosts' in shownFields or shownFields == null %}
                 {# ADDITIONAL COSTS WITH TAX #}
                 {% for cost in totals.additionalCostsWithTax %}
-                    <dt {% if not highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="additionalcost-with-tax">
+                    <dt {% if highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="additionalcost-with-tax">
                         {{ cost.name }}
                     </dt><!--
-                            --><dd class="font-weight-bold">
+                            --><dd {% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
                     {{ cost.formattedTotalPrice }}
                 </dd>
                 {% endfor %}
@@ -161,10 +161,10 @@
                 {% if 'additionalCosts' in shownFields or shownFields == null %}
                         {# ADDITIONAL COSTS WITHOUT TAX #}
                         {% for cost in totals.additionalCosts %}
-                            <dt class="font-weight-bold" data-testing="additionalcost-without-tax">
+                            <dt {% if highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="additionalcost-without-tax">
                                 {{ cost.name }}
                             </dt><!--
-                            --><dd class="font-weight-bold">
+                            --><dd {% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
                                 {{ cost.formattedTotalPrice }}
                             </dd>
                         {% endfor %}
