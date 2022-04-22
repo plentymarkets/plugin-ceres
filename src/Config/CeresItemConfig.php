@@ -56,6 +56,11 @@ class CeresItemConfig extends PluginConfig
     public $showPleaseSelect;
 
     /**
+     * @var bool $enableGraduatedPrices Defines if the graduated prices for category item list is enabled.
+     */
+    public $enableGraduatedPrices;
+
+    /**
      * @var bool $enableImageCarousel Defines if the image carousel for category item list is enabled.
      */
     public $enableImageCarousel;
@@ -163,6 +168,7 @@ class CeresItemConfig extends PluginConfig
         $this->showVariationOverDropdown = $this->getBooleanValue('item.show_variation_over_dropdown', false);
         $this->variationShowType = $this->getTextValue('item.variation_show_type', 'all');
         $this->showPleaseSelect = $this->getBooleanValue('item.show_please_select', false);
+        $this->enableGraduatedPrices = $this->getBooleanValue('item.enable_graduated_prices', false);
         $this->enableImageCarousel = $this->getBooleanValue('item.enable_image_carousel', true);
         $this->categoryShowDots = $this->getBooleanValue('item.category_show_dots', true);
         $this->categoryShowNav = $this->getBooleanValue('item.category_show_nav', true);

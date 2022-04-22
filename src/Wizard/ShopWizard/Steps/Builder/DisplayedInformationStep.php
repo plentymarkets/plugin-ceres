@@ -124,6 +124,13 @@ class DisplayedInformationStep extends Step
                         "listBoxValues" => $categoryDescriptionList
                     ]
                 ],
+                "displayInfo_enableGraduatedPrices" => [
+                    "type" => "checkbox",
+                    "defaultValue" => false,
+                    "options" => [
+                        "name" => "Wizard.enableGraduatedPrices",
+                    ]
+                ],
                 "displayInfo_enableImageCarousel" => [
                     "type" => "checkbox",
                     "defaultValue" => true,

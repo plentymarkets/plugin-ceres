@@ -1,5 +1,21 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.49 (2022-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.48...5.0.49" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Das Berücksichtigen von Staffelpreisen in den **Ab Preisen** der Kategorieansicht ist jetzt konfigurierbar. Die Einstellungen hierzu findet sich im Assistenten unter **Angezeigte Informationen**. Diese Einstellung ist standardmäßig deaktiviert.
+- Merkmale vom Typ "kein" mit Zusatzkosten werden jetzt unterhalb vom Artikelpreis angezeigt.
+
+### Behoben
+
+- Die Grundpreisanzeige auf der Kategorieseite wurde falsch berechnet, wenn Staffelpreise am Artikel hinterlegt waren. Dies wurde behoben.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.49 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- [resources/js/src/app/components/itemList/CategoryItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3265/files#diff-4c35af622ef09ba8949eb1c47557e3e6651b088291a0d2e2463c9244007b5516)
+
 ## v5.0.48 (2022-03-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.47...5.0.48" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### ToDo
