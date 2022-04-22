@@ -68,9 +68,9 @@ export default {
 
         tags()
         {
-            let currentVariation = this.$store.getters[`${this.itemId}/currentItemVariation`];
+            const currentVariation = this.$store.getters[`${this.itemId}/currentItemVariation`];
             
-            return currentVariation ? currentVariation.tags.filter((tag) => tag.names.name) : [];
+            return currentVariation.tags ? currentVariation.tags.filter((tag) => tag.names.name) : [];
         }
     },
 
