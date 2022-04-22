@@ -53,7 +53,7 @@ export default {
 
         isTaxless()
         {
-            return !hasVat(this.property);
+            return !hasVat(this.property) && App.useVariationOrderProperties;
         },
 
         showColon()

@@ -1349,9 +1349,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     isVariationProperty: function isVariationProperty(property) {
       return property.property.isOderProperty && App.useVariationOrderProperties;
     },
-    isInBasketItemOrderParams: function isInBasketItemOrderParams(basketItem, propertyId) {
+    isInBasketItemOrderParams: function isInBasketItemOrderParams(basketItem, property) {
+      if (!property.property.isOderProperty && !App.useVariationOrderProperties) {
+        return true;
+      }
+
       return !!basketItem.basketItemOrderParams.find(function (param) {
-        return Number(param.propertyId) === Number(propertyId);
+        return Number(param.propertyId) === Number(property.propertyId);
       });
     },
     setPropertiesForTotals: function setPropertiesForTotals(newBasketItems) {
@@ -1369,7 +1373,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
           var basketItem = _step.value;
           (_basketItem$variation = basketItem.variation.data.properties) === null || _basketItem$variation === void 0 ? void 0 : _basketItem$variation.forEach(function (property) {
-            if (_this.isInBasketItemOrderParams(basketItem, property.propertyId) && (Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_18__["isAdditionalCosts"])(property) || !Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_18__["hasVat"])(property))) {
+            if (_this.isInBasketItemOrderParams(basketItem, property) && (Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_18__["isAdditionalCosts"])(property) || !Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_18__["hasVat"])(property) && App.useVariationOrderProperties)) {
               var existsIndisplayedProperties = _this.displayedProperties.find(function (entry) {
                 return entry.propertyId === property.propertyId;
               });
@@ -8435,7 +8439,7 @@ __webpack_require__.r(__webpack_exports__);
       return Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_0__["isAdditionalCosts"])(this.property);
     },
     isTaxless: function isTaxless() {
-      return !Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_0__["hasVat"])(this.property);
+      return !Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_0__["hasVat"])(this.property) && App.useVariationOrderProperties;
     },
     showColon: function showColon() {
       return this.property && this.property.property.value && this.property.property.valueType !== "empty";

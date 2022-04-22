@@ -300,9 +300,13 @@ export default {
             return property.property.isOderProperty && App.useVariationOrderProperties;
         },
 
-        isInBasketItemOrderParams(basketItem, propertyId)
+        isInBasketItemOrderParams(basketItem, property)
         {
-            return !!basketItem.basketItemOrderParams.find(param => Number(param.propertyId) === Number(propertyId));
+            if (!property.property.isOderProperty && !App.useVariationOrderProperties)
+            {
+                return true;
+            }
+            return !!basketItem.basketItemOrderParams.find(param => Number(param.propertyId) === Number(property.propertyId));
         },
         
         setPropertiesForTotals(newBasketItems)
@@ -312,8 +316,8 @@ export default {
             for (const basketItem of newBasketItems)
             {
                 basketItem.variation.data.properties?.forEach(property => {
-                    if(this.isInBasketItemOrderParams(basketItem, property.propertyId) && 
-                      (isAdditionalCosts(property) || (!hasVat(property))))
+                    if(this.isInBasketItemOrderParams(basketItem, property) && 
+                      (isAdditionalCosts(property) || (!hasVat(property) && App.useVariationOrderProperties )))
                     {
                         const existsIndisplayedProperties = this.displayedProperties.find(entry => entry.propertyId === property.propertyId)
                         const existsIndisplayedPropertiesWithoutTax = this.displayedPropertiesWithoutTax.find(entry => entry.propertyId === property.propertyId)
