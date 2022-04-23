@@ -284,7 +284,10 @@ export default {
                     calculatedPrice = price;
                   }
               });
-              return calculatedPrice.basePrice;
+
+              if (!isNullOrUndefined(calculatedPrice)) {
+                return calculatedPrice.basePrice;
+              }
             }
 
             return this.basketItem.variation.data.prices.default.basePrice;
