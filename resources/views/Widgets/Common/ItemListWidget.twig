@@ -107,92 +107,90 @@
                 </template>
             </intersect>
         {% else %}
-            {{ Twig.do("cacheblock") }}
-                {{ Twig.set("itemList", Twig.call("services.itemList.getItemList", [requestedListType, itemListId, itemSort, maxItems, crossSellingRelationType]) ) }}
-                {{ Twig.if("itemList.documents is not empty or #{ isPreview | json_encode }") }}
+            {{ Twig.set("itemList", Twig.call("services.itemList.getItemList", [requestedListType, itemListId, itemSort, maxItems, crossSellingRelationType]) ) }}
+            {{ Twig.if("itemList.documents is not empty or #{ isPreview | json_encode }") }}
 
-                    {# render static item lists #}
-                    {% if headlineStyle != "no-caption" %}
-                        <div class="widget-caption widget-item-list-caption mb-3 bg-appearance">
-                            {% if headlineStyle == "custom-caption" %}
-                                <div class="widget-item-list-inline-caption" {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-item-list-inline-caption") }}>
-                                    {{ headline | striptags('<p><strong><em><br><span><h1><h2><h3><h4><h5><h6>') | raw }}
-                                </div>
-                            {% else %}
-                                <div>
-                                    <h2>{{ Twig.print("title") }}</h2>
-                                </div>
-                            {% endif %}
-
-                            {{ Twig.if("categoryUrl") }}
-                                <a href="{{ Twig.print("categoryUrl") }}">
-                                    <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ Twig.trans("Ceres::Template.homepageShowAll") }}
-                                </a>
-                            {{ Twig.endif() }}
-                        </div>
-                    {% endif %}
-                    {{ Twig.if("#{ listType | json_encode } != 'cross_selling' or services.template.isItem() == '1'") }}
-                        {% if preloadImage %}
-                            {{ Twig.set("counter", 0) }}
-                            {{ Twig.set("maxPreload", widget.settings.maxPreload.mobile | default(3)) }}
-
-                            {{ Twig.for("item", "itemList.documents") }}
-                                {{ Twig.if("counter < maxPreload") }}
-                                    {{ Twig.set("itemImage", "item.data.images | itemImages('urlMiddle') | orderByKey('position') | first") }}
-                                    {{ Twig.print("add_asset(itemImage.url,'image')") }}
-                                    {{ Twig.do("set counter = counter + 1") }}
-                                {{ Twig.endif() }}
-                            {{ Twig.endfor() }}
+                {# render static item lists #}
+                {% if headlineStyle != "no-caption" %}
+                    <div class="widget-caption widget-item-list-caption mb-3 bg-appearance">
+                        {% if headlineStyle == "custom-caption" %}
+                            <div class="widget-item-list-inline-caption" {{ WidgetHelper.makeEditable("headline", TOOLBAR_LAYOUT.INLINE, isPreview, "widget-item-list-inline-caption") }}>
+                                {{ headline | striptags('<p><strong><em><br><span><h1><h2><h3><h4><h5><h6>') | raw }}
+                            </div>
+                        {% else %}
+                            <div>
+                                <h2>{{ Twig.print("title") }}</h2>
+                            </div>
                         {% endif %}
-                        <intersect>
-                            <carousel :items-per-page="{{ itemsPerPage }}">
-                                {{ Twig.for("item", "itemList.documents") }}
-                                    <template slot="items">
-                                        <category-item
-                                            :item-data="{{ Twig.print("item.data | json_encode") }}"
-                                            :decimal-count="{{ Twig.print("ceresConfig.item.storeSpecial | default(0) | json_encode") }}"
-                                            :disable-carousel-on-mobile="{{ Twig.print("itemList.documents | length") }} > {{ itemsPerPage }}"
-                                            {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
-                                            {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
-                                            <template #before-prices>
-                                                {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::CategoryItem.BeforePrices", Twig.var("item.data")])) }}
-                                            </template>
-                                            <template #after-prices>
-                                                {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::CategoryItem.AfterPrices", Twig.var("item.data")])) }}
-                                            </template>
 
-                                            <a href="{{ Twig.print("item.data | itemURL") }}" class="small">
-                                                <i class="fa fa-image"></i>
-                                                <span>{{ Twig.print("item.data | itemName") }}</span>
-                                            </a>
-                                        </category-item>
-                                    </template>
-                                {{ Twig.endfor() }}
-                            </carousel>
+                        {{ Twig.if("categoryUrl") }}
+                            <a href="{{ Twig.print("categoryUrl") }}">
+                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{ Twig.trans("Ceres::Template.homepageShowAll") }}
+                            </a>
+                        {{ Twig.endif() }}
+                    </div>
+                {% endif %}
+                {{ Twig.if("#{ listType | json_encode } != 'cross_selling' or services.template.isItem() == '1'") }}
+                    {% if preloadImage %}
+                        {{ Twig.set("counter", 0) }}
+                        {{ Twig.set("maxPreload", widget.settings.maxPreload.mobile | default(3)) }}
 
-                            <template #loading>
-                                <div class="row flex-nowrap overflow-x-hidden">
-                                    {{ Twig.for("item", "itemList.documents") }}
-                                    <div class="category-item-placeholder invisible col-12 col-sm-6 col-md-3">
-                                        <a href="{{ Twig.print("item.data | itemURL(buildUrlWithVariationId | json_encode)") }}" class="small">
+                        {{ Twig.for("item", "itemList.documents") }}
+                            {{ Twig.if("counter < maxPreload") }}
+                                {{ Twig.set("itemImage", "item.data.images | itemImages('urlMiddle') | orderByKey('position') | first") }}
+                                {{ Twig.print("add_asset(itemImage.url,'image')") }}
+                                {{ Twig.do("set counter = counter + 1") }}
+                            {{ Twig.endif() }}
+                        {{ Twig.endfor() }}
+                    {% endif %}
+                    <intersect>
+                        <carousel :items-per-page="{{ itemsPerPage }}">
+                            {{ Twig.for("item", "itemList.documents") }}
+                                <template slot="items">
+                                    <category-item
+                                        :item-data="{{ Twig.print("item.data | json_encode") }}"
+                                        :decimal-count="{{ Twig.print("ceresConfig.item.storeSpecial | default(0) | json_encode") }}"
+                                        :disable-carousel-on-mobile="{{ Twig.print("itemList.documents | length") }} > {{ itemsPerPage }}"
+                                        {% if spacingPadding | length > 0 %}padding-classes="{{ spacingPadding }}"{% endif %}
+                                        {% if inlinePadding | length > 0 %}padding-inline-styles="{{ inlinePadding }}"{% endif %}>
+                                        <template #before-prices>
+                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::CategoryItem.BeforePrices", Twig.var("item.data")])) }}
+                                        </template>
+                                        <template #after-prices>
+                                            {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::CategoryItem.AfterPrices", Twig.var("item.data")])) }}
+                                        </template>
+
+                                        <a href="{{ Twig.print("item.data | itemURL") }}" class="small">
                                             <i class="fa fa-image"></i>
                                             <span>{{ Twig.print("item.data | itemName") }}</span>
                                         </a>
-                                    </div>
-                                    {{ Twig.endfor() }}
+                                    </category-item>
+                                </template>
+                            {{ Twig.endfor() }}
+                        </carousel>
+
+                        <template #loading>
+                            <div class="row flex-nowrap overflow-x-hidden">
+                                {{ Twig.for("item", "itemList.documents") }}
+                                <div class="category-item-placeholder invisible col-12 col-sm-6 col-md-3">
+                                    <a href="{{ Twig.print("item.data | itemURL(buildUrlWithVariationId | json_encode)") }}" class="small">
+                                        <i class="fa fa-image"></i>
+                                        <span>{{ Twig.print("item.data | itemName") }}</span>
+                                    </a>
                                 </div>
-                            </template>
-                        </intersect>
-                    {{ Twig.elseif("#{ isPreview | json_encode }") }}
-                        <div class="widget-placeholder prop-3-1 proportional-placeholder">
-                            <div>
-                                <p class="title mb-0">{{ Twig.trans("Ceres::Widget.itemListPlaceholderTitle") }}</p>
-                                <p class="description mt-3">{{ Twig.trans("Ceres::Widget.itemListPlaceholderDescription") }}</p>
+                                {{ Twig.endfor() }}
                             </div>
+                        </template>
+                    </intersect>
+                {{ Twig.elseif("#{ isPreview | json_encode }") }}
+                    <div class="widget-placeholder prop-3-1 proportional-placeholder">
+                        <div>
+                            <p class="title mb-0">{{ Twig.trans("Ceres::Widget.itemListPlaceholderTitle") }}</p>
+                            <p class="description mt-3">{{ Twig.trans("Ceres::Widget.itemListPlaceholderDescription") }}</p>
                         </div>
-                    {{ Twig.endif() }}
+                    </div>
                 {{ Twig.endif() }}
-            {{ Twig.do("endcacheblock") }}
+            {{ Twig.endif() }}
         {% endif %}
     </div>
 </div>
