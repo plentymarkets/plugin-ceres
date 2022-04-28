@@ -94,13 +94,13 @@
             {% endif %}
 
             {% if 'promotionCoupon' in shownFields or shownFields == null %}
-                {% if totals.couponType == 'promotional' and (totals.couponValue | trimNewlines) != 0 %}
+                {% if (totals.promotionalCouponsValue | trimNewlines) != 0 %}
                     {# COUPON #}
                     <dt{% if not highlightNetPrices %} class="font-weight-bold"{% endif %}>
                         {{ trans("Ceres::Template.checkoutCoupon") }}
                     </dt><!--
                     --><dd{% if not highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="promotion-coupon">
-                        {{ totals.couponValue | formatMonetary( totals.currency ) }}
+                        {{ totals.promotionalCouponsValue | formatMonetary( totals.currency ) }}
                     </dd>
                 {% endif %}
             {% endif %}
@@ -181,18 +181,27 @@
                 </div>
             {% endif %}
 
-            {% if totals.couponType == 'sales' and (totals.couponValue | trimNewlines) != 0 %}
+            {% if (totals.giftCardsValue | trimNewlines) != 0 %}
                 {% if 'salesCoupon' in shownFields or shownFields == null %}
                     {# SALES COUPON #}
                     <dt>
                         {{ trans("Ceres::Template.checkoutCoupon") }}
                     </dt><!--
                     --><dd data-testing="sales-coupon">
-                        {{ totals.couponValue | formatMonetary( totals.currency ) }}
+                        {{ totals.giftCardsValue | formatMonetary( totals.currency ) }}
                     </dd>
                 {% endif %}
 
                 {% if 'openAmount' in shownFields or shownFields == null %}
+                    {% if (totals.paidAmount | trimNewlines) != 0 %}
+                        {# PAID AMOUNTS #}
+                        <dt>
+                            <strong>{{ trans("Ceres::Template.checkoutPaidAmount") }}</strong>
+                        </dt><!--
+                        --><dd>
+                            <strong data-testing="open-amount">{{ totals.paidAmount | formatMonetary( totals.currency ) }}</strong>
+                        </dd>
+                    {% endif %}
                     {# OPEN AMOUNTS #}
                     <dt>
                         <strong>{{ trans("Ceres::Template.checkoutOpenAmount") }}</strong>
