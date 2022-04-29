@@ -518,6 +518,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
@@ -1137,16 +1140,18 @@ var render = function() {
                     _vm.surcharge > 0
                       ? [
                           _vm._v(
-                            "(+ " +
+                            "( " +
+                              _vm._s(_vm.inclOrPlus) +
+                              " " +
                               _vm._s(_vm._f("currency")(_vm.surcharge)) +
                               ")"
                           )
                         ]
                       : _vm._e(),
+                    _vm._v(" "),
                     _c("span", [
                       _vm._v(
-                        " " +
-                          _vm._s(_vm.footnotes) +
+                        _vm._s(_vm.footnotes) +
                           " " +
                           _vm._s(_vm.requiredFootnotes)
                       )
@@ -1357,16 +1362,18 @@ var render = function() {
                           _vm.surcharge > 0
                             ? [
                                 _vm._v(
-                                  "(+ " +
+                                  "( " +
+                                    _vm._s(_vm.inclOrPlus) +
+                                    " " +
                                     _vm._s(_vm._f("currency")(_vm.surcharge)) +
                                     ")"
                                 )
                               ]
                             : _vm._e(),
+                          _vm._v(" "),
                           _c("span", [
                             _vm._v(
-                              " " +
-                                _vm._s(_vm.footnotes) +
+                              _vm._s(_vm.footnotes) +
                                 " " +
                                 _vm._s(_vm.requiredFootnotes)
                             )
@@ -1467,16 +1474,18 @@ var render = function() {
                         _vm.surcharge > 0
                           ? [
                               _vm._v(
-                                "(+ " +
+                                "( " +
+                                  _vm._s(_vm.inclOrPlus) +
+                                  " " +
                                   _vm._s(_vm._f("currency")(_vm.surcharge)) +
                                   ")"
                               )
                             ]
                           : _vm._e(),
+                        _vm._v(" "),
                         _c("span", [
                           _vm._v(
-                            " " +
-                              _vm._s(_vm.footnotes) +
+                            _vm._s(_vm.footnotes) +
                               " " +
                               _vm._s(_vm.requiredFootnotes)
                           )

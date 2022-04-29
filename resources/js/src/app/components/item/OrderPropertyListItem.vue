@@ -12,7 +12,8 @@
             <label class="d-flex">
                 <span class="text-truncate">{{ property.names.name }}</span>
                 <strong class="ml-1">
-                    <template v-if="surcharge > 0">(+ {{ surcharge | currency }})</template><span> {{ footnotes }} {{ requiredFootnotes }}</span>
+                    <template v-if="surcharge > 0">( {{ inclOrPlus }} {{ surcharge | currency }})</template>
+                    <span>{{ footnotes }} {{ requiredFootnotes }}</span>
                 </strong>
             </label>
         </div>
@@ -64,7 +65,8 @@
                 <label class="d-flex w-100" for="order-property-input-select">
                     <span class="text-truncate">{{ property.names.name }}</span>
                     <strong class="ml-1">
-                        <template v-if="surcharge > 0">(+ {{ surcharge | currency }})</template><span> {{ footnotes }} {{ requiredFootnotes }}</span>
+                        <template v-if="surcharge > 0">( {{ inclOrPlus }} {{ surcharge | currency }})</template>
+                        <span>{{ footnotes }} {{ requiredFootnotes }}</span>
                     </strong>
                 </label>
             </div>
@@ -85,7 +87,8 @@
                 <span class="input-unit-label d-flex">
                     <span class="text-truncate">{{ property.names.name }}</span>
                     <strong class="ml-1">
-                        <template v-if="surcharge > 0">(+ {{ surcharge | currency }})</template><span> {{ footnotes }} {{ requiredFootnotes }}</span>
+                        <template v-if="surcharge > 0">( {{ inclOrPlus }} {{ surcharge | currency }})</template>
+                        <span>{{ footnotes }} {{ requiredFootnotes }}</span>
                     </strong>
                 </span>
                 <span class="input-unit-btn" v-if="!selectedFile">
