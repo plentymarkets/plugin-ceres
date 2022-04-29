@@ -151,7 +151,7 @@ class PropertyGroupDataFieldProvider extends DataFieldProvider
      */
     private function addProvider()
     {
-        $properties = self::$properties;
+        $properties = self::$properties ?? [];
 
         if (isset($properties[self::$noneGroupId])) {
             /** @var Translator $translator */
