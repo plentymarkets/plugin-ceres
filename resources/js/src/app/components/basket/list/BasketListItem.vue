@@ -272,6 +272,24 @@ export default {
                 return this.basketItem.variation.data.prices.specialOffer.basePrice;
             }
 
+            if (!isNullOrUndefined(this.basketItem.variation.data.prices.graduatedPrices))
+            {
+              let calculatedPrice = null;
+              this.basketItem.variation.data.prices.graduatedPrices.forEach(price =>
+              {
+                  if(isNullOrUndefined(calculatedPrice) && this.basketItem.quantity >= price.minimumOrderQuantity) {
+                    calculatedPrice = price;
+                  }
+                  else if(this.basketItem.quantity >= price.minimumOrderQuantity && price.minimumOrderQuantity >= calculatedPrice.minimumOrderQuantity ) {
+                    calculatedPrice = price;
+                  }
+              });
+
+              if (!isNullOrUndefined(calculatedPrice)) {
+                return calculatedPrice.basePrice;
+              }
+            }
+
             return this.basketItem.variation.data.prices.default.basePrice;
         },
 
