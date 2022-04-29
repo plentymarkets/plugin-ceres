@@ -411,7 +411,10 @@ export default {
          */
         updateQuantity(value)
         {
-            this.quantity = value;
+            if (!isNaN(value))
+            {
+                this.quantity = value;
+            }
         }
     },
 
@@ -430,15 +433,16 @@ export default {
         {
             if (this.quantity !== value)
             {
-                this.quantity = value;
+                this.updateQuantity(value);
             }
         },
 
-        propQuantity(value)
+        propQuantity:
         {
-            if (!isNaN(value))
+            immediate: true,
+            handler(value)
             {
-                this.quantity = value;
+                this.updateQuantity(value);
             }
         }
     }
