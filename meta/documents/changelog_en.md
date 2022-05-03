@@ -1,5 +1,17 @@
 # Release Notes for plentyShop LTS
 
+## v5.0.50 (2022-05-03) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.49...5.0.50" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Changed
+
+- The amount already paid is now displayed on the order confirmation page.
+- The order confirmation page can now display multiple redeemed coupon values.
+- The plentyShop LTS plugin is now compatible with PHP 8.
+
+### Fixed
+
+- When adding an item to the shopping cart, the base price was displayed incorrectly if the item quantity for a graduated price was reached by the addition. This behaviour has been fixed.
+
 ## v5.0.49 (2022-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.48...5.0.49" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Changed

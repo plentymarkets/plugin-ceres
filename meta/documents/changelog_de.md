@@ -1,5 +1,22 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.50 (2022-05-03) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.49...5.0.50" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Auf der Bestellbestätigungsseite wird nun der bereits bezahlte Betrag angezeigt.
+- Auf der Bestellbestätigungsseite können nun mehrere eingelöste Gutscheinwerte aufgelistet werden.
+- Das plentyShop LTS-Plugin ist nun kompatibel mit PHP 8.
+
+### Behoben
+
+- Beim Hinzufügen eines Artikels zum Warenkorb wurde der Grundpreis fehlerhaft angezeigt, wenn durch das Hinzufügen die Artikelmenge für einen Staffelpreis erreicht wurde. Dieses Verhalten wurde behoben.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.50 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- [resources/views/Checkout/Macros/OrderTotals.twig](https://github.com/plentymarkets/plugin-ceres/pull/3246/files#diff-8ea271aa9d97b46230e0f009330b3da0be4020cf00d5e8f214bcfb05425186d2)
+
 ## v5.0.49 (2022-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.48...5.0.49" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Geändert
