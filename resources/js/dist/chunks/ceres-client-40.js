@@ -85,7 +85,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     tags: function tags() {
       var currentVariation = this.$store.getters["".concat(this.itemId, "/currentItemVariation")];
-      return currentVariation.tags ? currentVariation.tags.filter(function (tag) {
+      return currentVariation && currentVariation.tags ? currentVariation.tags.filter(function (tag) {
         return tag.names.name;
       }) : [];
     }
