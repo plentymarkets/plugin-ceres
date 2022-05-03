@@ -7,10 +7,15 @@
 - The amount already paid is now displayed on the order confirmation page.
 - The order confirmation page can now display multiple redeemed coupon values.
 - The plentyShop LTS plugin is now compatible with PHP 8.
+- Order properties and characteristics configured as additional costs are now shown as separate items in the totals.
+- For order properties and characteristics, it is now displayed in the single item view, in the shopping cart, and in the order confirmation whether the costs are inclusive or additional.
+- Required, pre-selected order properties that have been configured as additional costs are now displayed without a checkbox below the item price on the single item view.
 
 ### Fixed
 
 - When adding an item to the shopping cart, the base price was displayed incorrectly if the item quantity for a graduated price was reached by the addition. This behaviour has been fixed.
+- If the tag name for the language selected in the shop was not stored for a tag, Javascript errors could occur in the shop. This has been fixed. 
+
 
 ## v5.0.49 (2022-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.48...5.0.49" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 

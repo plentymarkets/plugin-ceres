@@ -7,10 +7,14 @@
 - Auf der Bestellbestätigungsseite wird nun der bereits bezahlte Betrag angezeigt.
 - Auf der Bestellbestätigungsseite können nun mehrere eingelöste Gutscheinwerte aufgelistet werden.
 - Das plentyShop LTS-Plugin ist nun kompatibel mit PHP 8.
+- Bestelleigenschaften und Merkmale, die als Zusatzkosten konfiguriert wurden, werden jetzt als seperate Posten in den Summen dargestellt.
+- Für Bestelleigenschaften und Merkmale wird nun auf der Artikeleinzelansicht, im Warenkorb und auf der Bestellbestätigung angezeigt, ob es sich um inklusive oder zusätzliche Kosten handelt.
+- Verpflichtende, vorausgewählte Bestelleigenschaften, die als Zusatzkosten konfiguriert wurden, werden nun ohne Checkbox unter dem Artikelpreis auf der Artikeleinzelansicht dargestellt.
 
 ### Behoben
 
 - Beim Hinzufügen eines Artikels zum Warenkorb wurde der Grundpreis fehlerhaft angezeigt, wenn durch das Hinzufügen die Artikelmenge für einen Staffelpreis erreicht wurde. Dieses Verhalten wurde behoben.
+- Wenn bei einem Tag der Tag-Name für die im Shop gewählte Sprache nicht hinterlegt war, konnte es zu Javascript-Fehlern kommen. Dies wurde behoben. 
 
 ### Angepasste Templates
 
