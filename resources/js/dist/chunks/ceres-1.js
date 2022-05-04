@@ -178,6 +178,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helper/OrderPropertyHelper */ "./resources/js/src/app/helper/OrderPropertyHelper.js");
 //
 //
 //
@@ -205,6 +206,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "order-property-value-list-item",
   props: {
@@ -217,8 +219,11 @@ __webpack_require__.r(__webpack_exports__);
     surcharge: function surcharge() {
       return this.$options.filters.propertySurcharge([this.property], this.property.propertyId);
     },
-    isPropertyWithAdditionalCosts: function isPropertyWithAdditionalCosts() {
-      return this.property && this.property.property.isShownAtCheckout && this.property.property.isShownAsAdditionalCosts && !this.property.property.isOderProperty;
+    isAdditionalCost: function isAdditionalCost() {
+      return Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_0__["isAdditionalCosts"])(this.property);
+    },
+    isTaxless: function isTaxless() {
+      return !Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_0__["hasVat"])(this.property) && App.useVariationOrderProperties;
     },
     showColon: function showColon() {
       return this.property && this.property.property.value && this.property.property.valueType !== "empty";
@@ -365,7 +370,10 @@ var render = function() {
         _vm._v(" "),
         _c(
           "ul",
-          { staticClass: "ml-1 pl-3" },
+          {
+            staticClass: "ml-1 pl-3",
+            attrs: { "data-testing": "order-property-list" }
+          },
           _vm._l(_vm.shownProperties, function(property) {
             return _c("order-property-value-list-item", {
               key: property.propertyId,
@@ -412,7 +420,7 @@ var render = function() {
           ),
           _vm.surcharge > 0
             ? [
-                _vm.isPropertyWithAdditionalCosts
+                _vm.isAdditionalCost || _vm.isTaxless
                   ? [
                       _vm._v(
                         "\n                    (" +

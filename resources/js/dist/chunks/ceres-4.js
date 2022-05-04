@@ -517,6 +517,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
@@ -603,17 +607,28 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     surcharge: function surcharge() {
       return this.property.itemSurcharge || this.property.surcharge;
     },
+    hasTax: function hasTax() {
+      return this.property.vatId !== "none" && this.property.vatId !== null;
+    },
+    inclOrPlus: function inclOrPlus() {
+      if (this.property.isShownAsAdditionalCosts || !this.hasTax) {
+        return this.$translate("Ceres::Template.basketPlusAbbr");
+      }
+
+      return this.$translate("Ceres::Template.basketIncludeAbbr");
+    },
     footnotes: function footnotes() {
-      if (this.surcharge <= 0) {
-        if (this.property.isRequired && !this.property.isPreSelected) {
-          return this.$translate("Ceres::Template.singleItemFootnote2");
-        }
-      } else if (this.surcharge > 0) {
-        if (this.property.isRequired && !this.property.isPreSelected) {
+      if (this.surcharge > 0) {
+        if (this.property.isRequired && !this.property.isPreSelected && this.hasTax) {
           return this.$translate("Ceres::Template.singleItemFootnote12");
-        } else {
+        } else if (this.hasTax) {
           return this.$translate("Ceres::Template.singleItemFootnote1");
         }
+      }
+    },
+    requiredFootnotes: function requiredFootnotes() {
+      if (this.property.isRequired && !this.property.isPreSelected && !this.footnotes) {
+        return this.$translate("Ceres::Template.singleItemFootnote2");
       }
     },
     selectedDescription: function selectedDescription() {
@@ -1125,13 +1140,22 @@ var render = function() {
                     _vm.surcharge > 0
                       ? [
                           _vm._v(
-                            "(+ " +
+                            "( " +
+                              _vm._s(_vm.inclOrPlus) +
+                              " " +
                               _vm._s(_vm._f("currency")(_vm.surcharge)) +
                               ")"
                           )
                         ]
                       : _vm._e(),
-                    _c("span", [_vm._v(" " + _vm._s(_vm.footnotes))])
+                    _vm._v(" "),
+                    _c("span", [
+                      _vm._v(
+                        _vm._s(_vm.footnotes) +
+                          " " +
+                          _vm._s(_vm.requiredFootnotes)
+                      )
+                    ])
                   ],
                   2
                 )
@@ -1208,13 +1232,22 @@ var render = function() {
                       _vm.surcharge > 0
                         ? [
                             _vm._v(
-                              "(+ " +
+                              "( " +
+                                _vm._s(_vm.inclOrPlus) +
+                                " " +
                                 _vm._s(_vm._f("currency")(_vm.surcharge)) +
                                 ")"
                             )
                           ]
                         : _vm._e(),
-                      _c("span", [_vm._v(" " + _vm._s(_vm.footnotes))])
+                      _vm._v(" "),
+                      _c("span", [
+                        _vm._v(
+                          _vm._s(_vm.footnotes) +
+                            " " +
+                            _vm._s(_vm.requiredFootnotes)
+                        )
+                      ])
                     ],
                     2
                   )
@@ -1329,13 +1362,22 @@ var render = function() {
                           _vm.surcharge > 0
                             ? [
                                 _vm._v(
-                                  "(+ " +
+                                  "( " +
+                                    _vm._s(_vm.inclOrPlus) +
+                                    " " +
                                     _vm._s(_vm._f("currency")(_vm.surcharge)) +
                                     ")"
                                 )
                               ]
                             : _vm._e(),
-                          _c("span", [_vm._v(" " + _vm._s(_vm.footnotes))])
+                          _vm._v(" "),
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(_vm.footnotes) +
+                                " " +
+                                _vm._s(_vm.requiredFootnotes)
+                            )
+                          ])
                         ],
                         2
                       )
@@ -1432,13 +1474,22 @@ var render = function() {
                         _vm.surcharge > 0
                           ? [
                               _vm._v(
-                                "(+ " +
+                                "( " +
+                                  _vm._s(_vm.inclOrPlus) +
+                                  " " +
                                   _vm._s(_vm._f("currency")(_vm.surcharge)) +
                                   ")"
                               )
                             ]
                           : _vm._e(),
-                        _c("span", [_vm._v(" " + _vm._s(_vm.footnotes))])
+                        _vm._v(" "),
+                        _c("span", [
+                          _vm._v(
+                            _vm._s(_vm.footnotes) +
+                              " " +
+                              _vm._s(_vm.requiredFootnotes)
+                          )
+                        ])
                       ],
                       2
                     )

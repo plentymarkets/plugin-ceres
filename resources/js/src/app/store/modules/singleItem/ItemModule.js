@@ -1,5 +1,6 @@
 import { isNullOrUndefined } from "../../../helper/utils";
 import { setUrlByItem } from "../../../services/UrlService";
+import { hasVat, isAdditionalCosts, isOrderProperty } from "../../../helper/OrderPropertyHelper";
 import Vue from "vue";
 
 const ApiService = require("../../../services/ApiService");
@@ -40,6 +41,7 @@ const mutations =
 
         setVariationOrderProperty(state, { propertyId, value })
         {
+
             const properties = state.variation.documents[0].data.properties;
             const index = properties.findIndex(property => property.property.id === propertyId);
 
@@ -178,6 +180,10 @@ const getters =
 
                 for (const property of addedProperties)
                 {
+                    if (isAdditionalCosts(property) || ( isOrderProperty(property) && !hasVat(property)))
+                    {
+                        continue;
+                    }
                     if (!isNullOrUndefined(property.property.percentage) && (property.surcharge <= 0))
                     {
                         const surcharge = getters.variationBasePrice * property.property.percentage / 100;
@@ -260,7 +266,11 @@ const getters =
 
             if (state.variation.documents[0].data.properties)
             {
-                const orderPropertyList = state.variation.documents[0].data.properties.filter(property => property.property.isShownOnItemPage && property.property.isOderProperty);
+                const orderPropertyList = state.variation.documents[0].data.properties.filter((property) =>
+                {
+                    return property.property.isShownOnItemPage && property.property.isOderProperty &&
+                           !(property.property.isShownAsAdditionalCosts && property.property.isRequired && property.property.isPreSelected);
+                });
                 const groupIds = [...new Set(orderPropertyList.map(property => property.group && property.group.id))];
                 const groups = [];
 

@@ -11,6 +11,7 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
 /* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helper/OrderPropertyHelper */ "./resources/js/src/app/helper/OrderPropertyHelper.js");
 
 //
 //
@@ -70,6 +71,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-price",
   props: {
@@ -106,9 +109,20 @@ __webpack_require__.r(__webpack_exports__);
       return App.config.item.showPleaseSelect && App.isCheapestSorting && state.variationSelect && !state.variationSelect.isVariationSelected && (state.pleaseSelectVariationId === this.currentVariation.variation.id || state.pleaseSelectVariationId === 0);
     },
     propertiesWithAdditionalCostsVisible: function propertiesWithAdditionalCostsVisible() {
-      return this.currentVariation.properties.filter(function (property) {
-        return property.property && property.property.isShownOnItemPage && property.property.isShownAsAdditionalCosts && !property.property.isOderProperty;
+      var _this = this;
+
+      return this.currentVariation.properties.filter(function (entry) {
+        var property = entry.property;
+        return property && property.isShownAsAdditionalCosts && property.isShownOnItemPage && (!property.isOderProperty && !App.useVariationOrderProperties || _this.isVariationOrderPropertyRequiredPreselected(property));
       });
+    }
+  },
+  methods: {
+    isVariationOrderPropertyRequiredPreselected: function isVariationOrderPropertyRequiredPreselected(property) {
+      return property.isRequired && property.isPreSelected && property.isOderProperty && App.useVariationOrderProperties;
+    },
+    hasTax: function hasTax(property) {
+      return Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_1__["hasVat"])(property);
     }
   }
 });
@@ -261,6 +275,18 @@ var render = function() {
                               )
                             ) +
                             ")"
+                        )
+                      ]
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.hasTax(property)
+                    ? [
+                        _vm._v(
+                          _vm._s(
+                            _vm.$translate(
+                              "Ceres::Template.singleItemFootnote1"
+                            )
+                          )
                         )
                       ]
                     : _vm._e()

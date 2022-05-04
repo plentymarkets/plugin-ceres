@@ -7,6 +7,17 @@
     <h3>{{ trans("Ceres::Template.checkoutSum") }}</h3>
     <div>
         <dl>
+            {% if 'additionalCosts' in shownFields or shownFields == null %}
+                {# ADDITIONAL COSTS WITH TAX #}
+                {% for cost in totals.additionalCostsWithTax %}
+                    <dt {% if highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="additionalcost-with-tax">
+                        {{ cost.name }}
+                    </dt><!--
+                            --><dd {% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                    {{ cost.formattedTotalPrice }}
+                </dd>
+                {% endfor %}
+            {% endif %}
             {% if 'orderValueNet' in shownFields or shownFields == null %}
                 {# ORDER VALUE NET #}
                 <dt{% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
@@ -121,13 +132,13 @@
                 {{ grossNet }}
             {% else %}
 
-                {% if 'totalSumNet' in shownFields or shownFields == null %}
-                    {# TOTAL SUM NET #}
+                {% if 'subAmount' in shownFields or shownFields == null %}
+                    {# Sub Amount NET #}
                     <dt{% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
-                        {{ trans("Ceres::Template.checkoutTotalSum") }} {{ trans("Ceres::Template.checkoutNet") }}
+                        {{ trans("Ceres::Template.basketSubAmount") }} {{ trans("Ceres::Template.checkoutNet") }}
                     </dt><!--
-                    --><dd{% if highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="basket-amount-net">
-                        {{ totals.totalNet | formatMonetary( totals.currency ) }}
+                    --><dd{% if highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="basket-sub-amount">
+                        {{ totals.subAmount | formatMonetary( totals.currency ) }}
                     </dd>
                 {% endif %}
 
@@ -147,6 +158,18 @@
                     {% endif %}
                 {% endif %}
 
+                {% if 'additionalCosts' in shownFields or shownFields == null %}
+                        {# ADDITIONAL COSTS WITHOUT TAX #}
+                        {% for cost in totals.additionalCosts %}
+                            <dt {% if highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="additionalcost-without-tax">
+                                {{ cost.name }}
+                            </dt><!--
+                            --><dd {% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                                {{ cost.formattedTotalPrice }}
+                            </dd>
+                        {% endfor %}
+                {% endif %}
+
                 <div class="totalSum">
                     {% if
                         'promotionCoupon' in shownFields or
@@ -157,16 +180,14 @@
                         <hr>
                     {% endif %}
 
-                    {% if 'additionalCosts' in shownFields or shownFields == null %}
-                        {# ADDITIONAL COSTS #}
-                        {% for cost in totals.additionalCosts %}
-                            <dt class="font-weight-bold">
-                                {{ cost.name }}
-                            </dt><!--
-                            --><dd class="font-weight-bold">
-                                {{ cost.formattedTotalPrice }}
-                            </dd>
-                        {% endfor %}
+                    {% if 'totalSumNet' in shownFields or shownFields == null %}
+                        {# TOTAL SUM NET #}
+                        <dt{% if highlightNetPrices %} class="font-weight-bold"{% endif %}>
+                            {{ trans("Ceres::Template.checkoutTotalSum") }} {{ trans("Ceres::Template.checkoutNet") }}
+                        </dt><!--
+                    --><dd{% if highlightNetPrices %} class="font-weight-bold"{% endif %} data-testing="basket-amount-net">
+                        {{ totals.totalNet | formatMonetary( totals.currency ) }}
+                    </dd>
                     {% endif %}
 
                     {% if 'totalSumGross' in shownFields or shownFields == null %}
