@@ -182,12 +182,10 @@
                             <span class="col-6 col-sm-9 col-md-7 text-right">{{ Twig.print('itemPrice | formatMonetary( itemAmount.currency )') }}</span>
                         </div>
 
-
                         <div class="row" {{ Twig.print('set_testing_attr("data-testing", "order-confirmation-quantity")') }}>
                             <strong class="col-6 col-sm-3 col-md-5">{{ Twig.trans("Ceres::Template.orderConfirmationQuantity") }}</strong>
                             <span class="col-6 col-sm-9 col-md-7 text-right">{{ Twig.print('item.quantity') }}</span>
                         </div>
-
 
                         {{ Twig.for("attribute", "item.attributes") }}
                         <div class="row">
@@ -195,7 +193,7 @@
                             <span class="col-6 col-sm-7 col-md-7 text-right">{{ Twig.print("attribute.value") }}</span>
                         </div>
                         {{ Twig.endfor() }}
-                        {{ Twig.if("discountAmount > 0") }}
+                        {{ Twig.if("itemAmount.discount > 0") }}
                             <div class="row rebate-hint">
                                 <strong class="col-6 col-sm-3 col-md-5">{{ Twig.trans("Ceres::Template.orderConfirmationItemDiscount") }}</strong>
                                 <span class="col-6 col-sm-9 col-md-7 text-right">{{ Twig.print('discountAmount | formatMonetary( itemAmount.currency )') }}</span>

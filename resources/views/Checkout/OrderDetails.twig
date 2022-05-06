@@ -195,7 +195,7 @@
                                 <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationQuantity") }}</strong>
                                 <span class="col-6 col-sm-9 col-md-7 text-right">{{ item.quantity }}</span>
                             </div>
-                            {% if discountAmount > 0 %}
+                            {% if itemAmount.discount > 0 %}
                                 <div class="row rebate-hint">
                                     <strong class="col-6 col-sm-3 col-md-5">{{ trans("Ceres::Template.orderConfirmationItemDiscount") }}</strong>
                                     <span class="col-6 col-sm-9 col-md-7 text-right">{{ discountAmount | formatMonetary( itemAmount.currency ) }}</span>

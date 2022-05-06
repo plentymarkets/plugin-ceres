@@ -173,7 +173,7 @@
                                         <span class="flex-fill font-weight-bold">{{ trans("Ceres::Template.orderHistoryPricePerPiece") }}</span>
                                         <span class="flex-fill text-right">{{ itemPrice | formatMonetary( itemAmount.currency ) }}</span>
                                     </div>
-                                    {% if discountAmount > 0 %}
+                                    {% if itemAmount.discount > 0 %}
                                         <div class="d-flex" {{ set_testing_attr("data-testing", "order-history-discount") }}>
                                             <span class="flex-fill font-weight-bold">{{ trans("Ceres::Template.orderHistoryItemDiscount") }}</span>
                                             <span class="flex-fill text-right">{{ discountAmount | formatMonetary( itemAmount.currency ) }}</span>
