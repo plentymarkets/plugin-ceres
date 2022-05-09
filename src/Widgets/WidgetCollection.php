@@ -17,6 +17,7 @@ use Ceres\Widgets\Category\ItemSortingWidget;
 use Ceres\Widgets\Category\ItemsPerPageWidget;
 use Ceres\Widgets\Category\PaginationWidget;
 use Ceres\Widgets\Category\ToolbarWidget;
+use Ceres\Widgets\Checkout\BasketItemConsentWidget;
 use Ceres\Widgets\Checkout\CancelPaymentWidget;
 use Ceres\Widgets\Checkout\ContactWishWidget;
 use Ceres\Widgets\Checkout\CustomerSignWidget;
@@ -122,7 +123,8 @@ class WidgetCollection
         ShippingPrivacyCheckWidget::class,
         ShippingProfileWidget::class,
         SubscribeNewsletterCheckWidget::class,
-        CustomerSignWidget::class
+        CustomerSignWidget::class,
+        BasketItemConsentWidget::class
     ];
 
     const COMMON_WIDGETS = [
