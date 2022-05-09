@@ -7,7 +7,7 @@
         </div> -->
 
 
-        <input class="form-check-input" type="checkbox" :id="'basket-item-consent' + _uid" @change="onValueChanged($event.target.checked)" data-testing="basket-item-consent-check">
+        <input class="form-check-input" type="checkbox" :id="'basket-item-consent' + _uid" @change="value = $event.target.checked" data-testing="basket-item-consent-check">
         <label class="form-check-label" :for="'basket-item-consent' + _uid">
             <span>{{ $translate("Ceres::Template.checkoutBasketItemConsent", {"items": matchingItemNames }) }}</span><!--
             --><sup>*</sup>
@@ -16,9 +16,18 @@
 </template>
 
 <script>
+import NotificationService from "../../services/NotificationService";
+import TranslationService from "../../services/TranslationService";
+
 export default {
     props: {
         propertyIdToConsent: Number
+    },
+
+    data() {
+        return {
+            value: false
+        };
     },
 
     computed: {
@@ -51,16 +60,37 @@ export default {
         },
 
         matchingItemNames() {
-            this.matchingBasketItems.map(item =>
+            return this.matchingBasketItems.map(item =>
             {
                 return item.variation.data.texts.name1;
             }).join(", ");
+        },
+
+        storeAccessor() {
+            return `basketItemConsentCheck_uid_${this._uid}_propertyId_${this.propertyIdToConsent}`;
         }
     },
 
+    created() {
+        this.$store.commit("addDynamicCheckoutValidator",
+        {
+            name: this.storeAccessor,
+            validator: this.validate
+        });
+    },
+
     methods: {
-        onValueChanged(value) {
-            console.log("value changed", value);
+        validate() {
+            const showError = this.value;
+
+            this.$store.commit("setDynamicCheckoutShowErr", { name: this.storeAccessor, showError });
+
+            if (showError)
+            {
+                NotificationService.error(
+                    TranslationService.translate("Ceres::Template.checkoutCheckBasketItemConsent", { items: this.matchingItemNames })
+                );
+            }
         }
     }
 }

@@ -437,7 +437,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       });
     },
     matchingItemNames: function matchingItemNames() {
-      this.matchingBasketItems.map(function (item) {
+      return this.matchingBasketItems.map(function (item) {
         return item.variation.data.texts.name1;
       }).join(", ");
     }
