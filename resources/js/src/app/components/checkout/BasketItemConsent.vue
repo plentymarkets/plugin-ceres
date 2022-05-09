@@ -2,7 +2,9 @@
     <div>
         <p>filteredData:</p>
 
-        <div>{{ filteredData }}</div>
+        <div v-for="item in matchingBasketItems" :key="item.id">
+            {{ item.data.texts.name1 }}
+        </div>
     </div>
 </template>
 
@@ -13,15 +15,16 @@ export default {
     },
 
     computed: {
-        filteredData() {
-            return this.basketItems.filter(item => {
-                const variationPropertyGroups = item.variation.data.variationProperties;
+        matchingBasketItems() {
+            return this.basketItems.filter(item =>
+            {
+                const variationPropertyGroups = item.variation.data.variationProperties || [];
 
-                for (const variationPropertyGroup of variationPropertyGroups)
+                for (const group of variationPropertyGroups)
                 {
-                    for (const variationProperty of variationPropertyGroup.properties)
+                    for (const property of group.properties)
                     {
-                        if (variationProperty.id === this.propertyIdToConsent)
+                        if (property.id === this.propertyIdToConsent)
                         {
                             return true;
                         }
@@ -30,8 +33,9 @@ export default {
             });
         },
 
-        basketItems() {
-            return this.$store.state.basket.items;
+        basketItems()
+        {
+            return this.$store.state.basket.items || [];
         }
     }    
 }
