@@ -372,32 +372,34 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     propertyIdToConsent: Number
   },
   computed: {
-    filteredData: function filteredData() {
+    matchingBasketItems: function matchingBasketItems() {
       var _this = this;
 
       return this.basketItems.filter(function (item) {
-        var variationPropertyGroups = item.variation.data.variationProperties;
+        var variationPropertyGroups = item.variation.data.variationProperties || [];
 
         var _iterator = _createForOfIteratorHelper(variationPropertyGroups),
             _step;
 
         try {
           for (_iterator.s(); !(_step = _iterator.n()).done;) {
-            var variationPropertyGroup = _step.value;
+            var group = _step.value;
 
-            var _iterator2 = _createForOfIteratorHelper(variationPropertyGroup.properties),
+            var _iterator2 = _createForOfIteratorHelper(group.properties),
                 _step2;
 
             try {
               for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-                var variationProperty = _step2.value;
+                var property = _step2.value;
 
-                if (variationProperty.id === _this.propertyIdToConsent) {
+                if (property.id === _this.propertyIdToConsent) {
                   return true;
                 }
               }
@@ -415,7 +417,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       });
     },
     basketItems: function basketItems() {
-      return this.$store.state.basket.items;
+      return this.$store.state.basket.items || [];
     }
   }
 });
@@ -39412,11 +39414,19 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("p", [_vm._v("filteredData:")]),
-    _vm._v(" "),
-    _c("div", [_vm._v(_vm._s(_vm.filteredData))])
-  ])
+  return _c(
+    "div",
+    [
+      _c("p", [_vm._v("filteredData:")]),
+      _vm._v(" "),
+      _vm._l(_vm.matchingBasketItems, function(item) {
+        return _c("div", { key: item.id }, [
+          _vm._v("\n        " + _vm._s(item.data.texts.name1) + "\n    ")
+        ])
+      })
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
