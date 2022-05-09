@@ -127,7 +127,8 @@ class BaseWidget implements DynamicWidget
         $template = '';
         if(isset($widgetSettings['template']))
         {
-            $template = self::$mapTypeToTemplate[$widgetSettings['template']] ?? '';
+            $keyTemplate = is_array($widgetSettings['template']) ? $widgetSettings['template']['mobile'] : $widgetSettings['template'];
+            $template = self::$mapTypeToTemplate[$keyTemplate] ?? '';
             unset($widgetSettings['template']);
         }
 
