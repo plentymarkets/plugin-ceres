@@ -83,7 +83,7 @@ export default {
         validate() {
             const showError = this.value;
 
-            this.$store.commit("setDynamicCheckoutShowErr", { name: this.storeAccessor, showError });
+            this.$store.commit("setDynamicCheckoutShowError", { name: this.storeAccessor, showError });
 
             if (showError)
             {

@@ -466,7 +466,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   methods: {
     validate: function validate() {
       var showError = this.value;
-      this.$store.commit("setDynamicCheckoutShowErr", {
+      this.$store.commit("setDynamicCheckoutShowError", {
         name: this.storeAccessor,
         showError: showError
       });
