@@ -39421,7 +39421,9 @@ var render = function() {
       _vm._v(" "),
       _vm._l(_vm.matchingBasketItems, function(item) {
         return _c("div", { key: item.id }, [
-          _vm._v("\n        " + _vm._s(item.data.texts.name1) + "\n    ")
+          _vm._v(
+            "\n        " + _vm._s(item.variation.data.texts.name1) + "\n    "
+          )
         ])
       })
     ],

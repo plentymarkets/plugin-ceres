@@ -3,7 +3,7 @@
         <p>filteredData:</p>
 
         <div v-for="item in matchingBasketItems" :key="item.id">
-            {{ item.data.texts.name1 }}
+            {{ item.variation.data.texts.name1 }}
         </div>
     </div>
 </template>
