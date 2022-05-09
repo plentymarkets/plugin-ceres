@@ -405,6 +405,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   },
   computed: {
     showError: function showError() {
+      if (this.$store.state.checkout.validation[this.storeAccessor]) {
+        return state.checkout.validation[this.storeAccessor].showError;
+      }
+
       return false;
     },
     basketItems: function basketItems() {
@@ -465,7 +469,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   },
   methods: {
     validate: function validate() {
-      var showError = this.value;
+      var showError = !this.value;
       this.$store.commit("setDynamicCheckoutShowError", {
         name: this.storeAccessor,
         showError: showError

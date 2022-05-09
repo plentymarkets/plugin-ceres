@@ -32,6 +32,11 @@ export default {
 
     computed: {
         showError() {
+            if (this.$store.state.checkout.validation[this.storeAccessor])
+            {
+                return state.checkout.validation[this.storeAccessor].showError;
+            }
+
             return false;
         },
 
@@ -81,7 +86,7 @@ export default {
 
     methods: {
         validate() {
-            const showError = this.value;
+            const showError = !this.value;
 
             this.$store.commit("setDynamicCheckoutShowError", { name: this.storeAccessor, showError });
 
