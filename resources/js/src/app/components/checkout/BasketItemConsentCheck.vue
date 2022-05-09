@@ -34,7 +34,7 @@ export default {
         showError() {
             if (this.$store.state.checkout.validation[this.storeAccessor])
             {
-                return state.checkout.validation[this.storeAccessor].showError;
+                return this.$store.state.checkout.validation[this.storeAccessor].showError;
             }
 
             return false;
