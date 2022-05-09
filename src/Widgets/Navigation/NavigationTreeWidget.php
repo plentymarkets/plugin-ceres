@@ -145,7 +145,6 @@ class NavigationTreeWidget extends BaseWidget
     public function getTemplateData($widgetSettings, $isPreview)
     {
         $customEntries = $widgetSettings['customEntries']['mobile'] ?? [];
-
         usort(
             $customEntries,
             function ($entryA, $entryB) {
