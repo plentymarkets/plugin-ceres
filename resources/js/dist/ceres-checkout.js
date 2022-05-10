@@ -447,7 +447,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     matchingItemNames: function matchingItemNames() {
       if (App.isShopBuilder) {
-        return "Item name";
+        return "[...]";
       }
 
       return this.matchingBasketItems.map(function (item) {
