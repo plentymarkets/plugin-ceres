@@ -58,7 +58,7 @@ export default {
 
         matchingItemNames() {
             if (App.isShopBuilder) {
-                return "Item name";
+                return "[...]";
             }
 
             return this.matchingBasketItems.map(item => {
