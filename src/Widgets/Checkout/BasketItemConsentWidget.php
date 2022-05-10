@@ -39,6 +39,7 @@ class BasketItemConsentWidget extends BaseWidget
         $settings = pluginApp(WidgetSettingsFactory::class);
 
         $settings->createCustomClass();
+        $settings->createAppearance();
 
         $settings->createNumber("propertyId")
             ->withDefaultValue(null)
