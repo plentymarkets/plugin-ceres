@@ -446,12 +446,18 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       });
     },
     matchingItemNames: function matchingItemNames() {
+      var _this2 = this;
+
       if (App.isShopBuilder) {
         return "[...]";
       }
 
       return this.matchingBasketItems.map(function (item) {
-        return item.variation.data.texts.name1;
+        var itemName = _this2.$options.filters.itemName(item.variation.data);
+
+        var itemURL = _this2.$options.filters.itemURL(item.variation.data);
+
+        return "<a class=\"text-appearance\" target=\"_blank\" href=\"".concat(itemURL, "\">\n                            ").concat(itemName, "\n                        </a>");
       }).join(", ");
     },
     storeAccessor: function storeAccessor() {
