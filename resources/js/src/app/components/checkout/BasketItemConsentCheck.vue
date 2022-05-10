@@ -25,8 +25,7 @@ export default {
 
     computed: {
         showError() {
-            if (this.$store.state.checkout.validation[this.storeAccessor])
-            {
+            if (this.$store.state.checkout.validation[this.storeAccessor]) {
                 return this.$store.state.checkout.validation[this.storeAccessor].showError;
             }
 
@@ -40,7 +39,7 @@ export default {
 
         // filter the basket items for owning the property id, matching with propertyIdToConsent
         matchingBasketItems() {
-            return this.basketItems.filter(item =>
+            return this.basketItems.filter(item => 
             {
                 const variationPropertyGroups = item.variation.data.variationProperties || [];
 
@@ -59,15 +58,12 @@ export default {
 
         matchingItemNames() {
             if (App.isShopBuilder) {
-                return "placeholder";
+                return "Item name";
             }
 
-            const itemNames = this.matchingBasketItems.map(item =>
-            {
+            return this.matchingBasketItems.map(item => {
                 return item.variation.data.texts.name1;
             }).join(", ");
-
-            return `<b>${itemNames}</b>`;
         },
 
         storeAccessor() {
@@ -76,8 +72,7 @@ export default {
     },
 
     created() {
-        this.$store.commit("addDynamicCheckoutValidator",
-        {
+        this.$store.commit("addDynamicCheckoutValidator", {
             name: this.storeAccessor,
             validator: this.validate
         });
@@ -89,11 +84,18 @@ export default {
 
             this.$store.commit("setDynamicCheckoutShowError", { name: this.storeAccessor, showError });
 
-            if (showError)
-            {
+            if (showError) {
                 NotificationService.error(
                     TranslationService.translate("Ceres::Template.checkoutCheckBasketItemConsent", { items: this.matchingItemNames })
                 );
+            }
+        }
+    },
+
+    watch: {
+        value() {
+            if (this.showError) {
+                this.validate();
             }
         }
     }
