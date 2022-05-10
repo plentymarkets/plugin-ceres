@@ -449,7 +449,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var _this2 = this;
 
       if (App.isShopBuilder) {
-        return "[...]";
+        return "<a class=\"text-appearance\" target=\"_blank\" href=\"/\">\n                            [...]\n                        </a>";
       }
 
       return this.matchingBasketItems.map(function (item) {
