@@ -385,13 +385,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -453,6 +446,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       });
     },
     matchingItemNames: function matchingItemNames() {
+      if (App.isShopBuilder) {
+        return "Item name";
+      }
+
       return this.matchingBasketItems.map(function (item) {
         return item.variation.data.texts.name1;
       }).join(", ");
@@ -479,6 +476,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         _services_NotificationService__WEBPACK_IMPORTED_MODULE_15__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_16__["default"].translate("Ceres::Template.checkoutCheckBasketItemConsent", {
           items: this.matchingItemNames
         }));
+      }
+    }
+  },
+  watch: {
+    value: function value() {
+      if (this.showError) {
+        this.validate();
       }
     }
   }
@@ -39476,7 +39480,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.matchingBasketItems.length
+  return _vm.$ceres.isShopBuilder || _vm.matchingBasketItems.length
     ? _c(
         "div",
         { staticClass: "form-check", class: { error: _vm.showError } },
@@ -39502,16 +39506,16 @@ var render = function() {
               attrs: { for: "basket-item-consent" + _vm._uid }
             },
             [
-              _c("span", [
-                _vm._v(
-                  _vm._s(
+              _c("span", {
+                domProps: {
+                  innerHTML: _vm._s(
                     _vm.$translate(
                       "Ceres::Template.checkoutBasketItemConsent",
                       { items: _vm.matchingItemNames }
                     )
                   )
-                )
-              ]),
+                }
+              }),
               _c("sup", [_vm._v("*")])
             ]
           )
