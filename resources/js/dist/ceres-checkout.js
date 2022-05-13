@@ -449,7 +449,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var _this2 = this;
 
       if (App.isShopBuilder) {
-        return "<a class=\"text-appearance\" target=\"_blank\" href=\"/\">\n                            [...]\n                        </a>";
+        return "<a class=\"text-appearance\" target=\"_blank\" href=\"/\">\n                            ".concat(_services_TranslationService__WEBPACK_IMPORTED_MODULE_16__["default"].translate("Ceres::Widget.basketItemConsentItemPlaceholder"), "\n                        </a>");
       }
 
       return this.matchingBasketItems.map(function (item) {
@@ -472,7 +472,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   },
   methods: {
     validate: function validate() {
-      var showError = !this.value;
+      var showError = this.matchingBasketItems.length && !this.value;
       this.$store.commit("setDynamicCheckoutShowError", {
         name: this.storeAccessor,
         showError: showError
