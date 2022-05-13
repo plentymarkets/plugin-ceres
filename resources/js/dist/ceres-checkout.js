@@ -385,6 +385,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -447,10 +448,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     matchingItemNames: function matchingItemNames() {
       var _this2 = this;
-
-      if (App.isShopBuilder) {
-        return "<a class=\"text-appearance\" target=\"_blank\" href=\"/\">\n                            ".concat(_services_TranslationService__WEBPACK_IMPORTED_MODULE_16__["default"].translate("Ceres::Widget.basketItemConsentItemPlaceholder"), "\n                        </a>");
-      }
 
       return this.matchingBasketItems.map(function (item) {
         var itemName = _this2.$options.filters.itemName(item.variation.data);
@@ -39512,16 +39509,30 @@ var render = function() {
               attrs: { for: "basket-item-consent" + _vm._uid }
             },
             [
-              _c("span", {
-                domProps: {
-                  innerHTML: _vm._s(
-                    _vm.$translate(
-                      "Ceres::Template.checkoutBasketItemConsent",
-                      { items: _vm.matchingItemNames }
+              _vm.$ceres.isShopBuilder
+                ? _c("span", [
+                    _vm._v(
+                      _vm._s(
+                        _vm.$translate(
+                          "Ceres::Template.checkoutBasketItemConsent"
+                        )
+                      )
                     )
-                  )
-                }
-              }),
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              true
+                ? _c("span", {
+                    domProps: {
+                      innerHTML: _vm._s(
+                        _vm.$translate(
+                          "Ceres::Template.checkoutBasketItemConsent",
+                          { items: _vm.matchingItemNames }
+                        )
+                      )
+                    }
+                  })
+                : undefined,
               _c("sup", [_vm._v("*")])
             ]
           )
