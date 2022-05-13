@@ -2,7 +2,8 @@
     <div v-if="$ceres.isShopBuilder || matchingBasketItems.length" class="form-check" :class="{ 'error': showError }">
         <input class="form-check-input" type="checkbox" :id="'basket-item-consent' + _uid" @change="value = $event.target.checked" data-testing="basket-item-consent-check">
         <label class="form-check-label" :for="'basket-item-consent' + _uid">
-            <span v-html="$translate('Ceres::Template.checkoutBasketItemConsent', {'items': matchingItemNames })"></span><!--
+            <span v-if="$ceres.isShopBuilder" >{{ $translate("Ceres::Template.checkoutBasketItemConsent") }}</span>
+            <span v-if="true" v-html="$translate('Ceres::Template.checkoutBasketItemConsent', {'items': matchingItemNames })"></span><!--
             --><sup>*</sup>
         </label>
     </div>
@@ -57,12 +58,6 @@ export default {
         },
 
         matchingItemNames() {
-            if (App.isShopBuilder) {
-                return `<a class="text-appearance" target="_blank" href="/">
-                            ${TranslationService.translate("Ceres::Widget.basketItemConsentItemPlaceholder")}
-                        </a>`;
-            }
-
             return this.matchingBasketItems.map(item => {
                 const itemName = this.$options.filters.itemName(item.variation.data)
                 const itemURL = this.$options.filters.itemURL(item.variation.data);
