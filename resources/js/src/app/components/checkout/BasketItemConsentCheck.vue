@@ -59,7 +59,7 @@ export default {
         matchingItemNames() {
             if (App.isShopBuilder) {
                 return `<a class="text-appearance" target="_blank" href="/">
-                            [...]
+                            ${TranslationService.translate("Ceres::Widget.basketItemConsentItemPlaceholder")}
                         </a>`;
             }
 
@@ -86,7 +86,7 @@ export default {
 
     methods: {
         validate() {
-            const showError = !this.value;
+            const showError = this.matchingBasketItems.length && !this.value;
 
             this.$store.commit("setDynamicCheckoutShowError", { name: this.storeAccessor, showError });
 
