@@ -39514,15 +39514,12 @@ var render = function() {
                     _vm._v(
                       _vm._s(
                         _vm.$translate(
-                          "Ceres::Template.checkoutBasketItemConsent"
+                          "Ceres::Template.checkoutBasketItemConsentPlaceholder"
                         )
                       )
                     )
                   ])
-                : _vm._e(),
-              _vm._v(" "),
-              true
-                ? _c("span", {
+                : _c("span", {
                     domProps: {
                       innerHTML: _vm._s(
                         _vm.$translate(
@@ -39531,8 +39528,7 @@ var render = function() {
                         )
                       )
                     }
-                  })
-                : undefined,
+                  }),
               _c("sup", [_vm._v("*")])
             ]
           )

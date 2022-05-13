@@ -2,8 +2,8 @@
     <div v-if="$ceres.isShopBuilder || matchingBasketItems.length" class="form-check" :class="{ 'error': showError }">
         <input class="form-check-input" type="checkbox" :id="'basket-item-consent' + _uid" @change="value = $event.target.checked" data-testing="basket-item-consent-check">
         <label class="form-check-label" :for="'basket-item-consent' + _uid">
-            <span v-if="$ceres.isShopBuilder" >{{ $translate("Ceres::Template.checkoutBasketItemConsent") }}</span>
-            <span v-if="true" v-html="$translate('Ceres::Template.checkoutBasketItemConsent', {'items': matchingItemNames })"></span><!--
+            <span v-if="$ceres.isShopBuilder" >{{ $translate("Ceres::Template.checkoutBasketItemConsentPlaceholder") }}</span>
+            <span v-else v-html="$translate('Ceres::Template.checkoutBasketItemConsent', {'items': matchingItemNames })"></span><!--
             --><sup>*</sup>
         </label>
     </div>
