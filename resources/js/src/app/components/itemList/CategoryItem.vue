@@ -89,6 +89,11 @@
 
                     <slot name="after-prices"></slot>
 
+                    <div class="category-lowest-price small" v-if="item.prices.default.lowestPrice.value && hasCrossPrice">
+                        <span>{{ $translate("Ceres::Template.categoryItemLowestPrice") }}</span>
+                        <span>&nbsp;{{ item.prices.default.lowestPrice.formatted }}</span>
+                    </div>
+
                     <div class="category-unit-price small" v-if="!(item.unit.unitOfMeasurement === 'C62' && item.unit.content === 1)">
                         <span>{{ item.unit.content }}</span>
                         <span>&nbsp;{{ item.unit.names.name }}</span>
@@ -249,6 +254,17 @@ export default {
         urlWithVariationId()
         {
             return !this.$ceres.config.item.showPleaseSelect || this.$ceres.initialPleaseSelect == 0 || this.forceUrlWithVariationId;
+        },
+
+        hasCrossPrice() {
+            const hasRrpPrice = !!this.item.prices.rrp &&
+                this.item.prices.rrp.unitPrice.value > this.item.prices.default.unitPrice.value;
+
+            const hasBeforePrice = !!this.item.prices.specialOffer &&
+                !!this.item.prices.default &&
+                this.item.prices.default.unitPrice.value > this.item.prices.specialOffer.unitPrice.value;
+
+            return hasRrpPrice || hasBeforePrice;
         },
 
         ...mapState({

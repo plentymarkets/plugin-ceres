@@ -27,8 +27,8 @@
             </span>
             <sup>{{ $translate("Ceres::Template.singleItemFootnote1") }}</sup>
         </span>
-        
-        <ul class="text-muted pl-0 list-unstyled" v-if="currentVariation.properties && currentVariation.properties.length">
+
+        <ul class="text-muted pl-0 list-unstyled" v-if="propertiesWithAdditionalCostsVisible.length">
             <li v-for="property in propertiesWithAdditionalCostsVisible" :key="property.propertyId">
                 <span class="d-block">
                     {{ property.property.names.name }} <template v-if="$options.filters.propertySurcharge(currentVariation.properties, property.propertyId) > 0">({{ $translate("Ceres::Template.basketPlusAbbr") }} {{ currentVariation.properties | propertySurcharge(property.propertyId) | currency }})</template>
@@ -36,6 +36,14 @@
                 </span>
             </li>
         </ul>
+
+        <!-- lowest price, according to § 11 PAngV -->
+        <div class="lowest-price text-muted mb-3" v-if="currentVariation.prices.default.lowestPrice.value && showCrossPrice && hasCrossPrice">
+            <div>
+                {{ $translate("Ceres::Template.singleItemLowestPrice") }}
+                <span>{{ currentVariation.prices.default.lowestPrice.formatted }} </span>
+            </div>
+        </div>
         
         <!-- class .is-single-piece is added for customers to hide the unit if it is C62 -->
         <div class="base-price text-muted my-3"
