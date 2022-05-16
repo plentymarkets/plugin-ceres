@@ -20,7 +20,7 @@ class BasketItemConsentWidget extends BaseWidget
     {
         return WidgetDataFactory::make("Ceres::BasketItemConsentWidget")
             ->withLabel("Widget.basketItemConsentLabel")
-            ->withPreviewImageUrl("TODO")
+            ->withPreviewImageUrl("/images/widgets/basket-item-consent.svg")
             ->withType(WidgetTypes::CHECKOUT)
             ->withCategory(WidgetCategories::CHECKOUT)
             ->withPosition(600)
