@@ -4,7 +4,7 @@
 
 ## plentyShop LTS einrichten
 
-Wie du plentyShop LTS einrichtest und individualisierst, erfährst du auf [plentyKnowledge](https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten).
+Wie du plentyShop LTS einrichtest und individualisierst, erfährst du auf [plentyKnowledge](https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html).
 
 ## Webshop bei Trusted Shops zertifizieren
 
