@@ -64,7 +64,7 @@
                     <div class="live-shopping-price">
                         <strong>{{ prices.price.unitPrice.formatted }} *</strong>
                     </div>
-                    <span v-if="displaySettings.showCrossPrice && prices.rrp && prices.rrp.unitPrice.value > 0">
+                    <span v-if="isCrossPriceVisible">
                         <span v-if="prices.isRrpDefaultPrice" v-html="oldPriceBefore"></span>
                         <span v-else v-html="oldPriceRrp"></span>
                     </span>
@@ -72,7 +72,12 @@
             </div>
 
             <div class="live-shopping-prices-additional-info">
-                <div v-if="!(liveShoppingData.item.unit.unitOfMeasurement === 'C62' && liveShoppingData.item.unit.content === 1)">
+                <div class="live-shopping-lowest-price" v-if="isCrossPriceVisible && liveShoppingData.item.prices.default.lowestPrice.value">
+                    {{ $translate("Ceres::Template.singleItemLowestPrice") }}
+                    <span>{{ liveShoppingData.item.prices.default.lowestPrice.formatted }}</span>
+                </div>
+
+                <div class="live-shopping-unit-price" v-if="!(liveShoppingData.item.unit.unitOfMeasurement === 'C62' && liveShoppingData.item.unit.content === 1)">
                     <span>{{ liveShoppingData.item.unit.content }}</span>
                     <span>{{ liveShoppingData.item.unit.names.name }}</span>
                     <span v-if="liveShoppingData.item.variation.mayShowUnitPrice">| {{ prices.price.basePrice }}</span>
@@ -88,7 +93,7 @@
             <div>
                 <div class="prices">
                     <div class="price-view-port">
-                        <del class="crossprice" v-if="displaySettings.showCrossPrice && prices.rrp && prices.rrp.price.value > 0">
+                        <del class="crossprice" v-if="isCrossPriceVisible">
                             {{ prices.rrp.price.formatted | itemCrossPrice  }}
                         </del>
                     </div>
@@ -96,6 +101,11 @@
                     <div class="price">
                         {{ prices.price.price.formatted }} *
                     </div>
+                </div>
+
+                <div class="category-lowest-price small" v-if="isCrossPriceVisible && liveShoppingData.item.prices.default.lowestPrice.value">
+                    {{ $translate("Ceres::Template.singleItemLowestPrice") }}
+                    <span>{{ liveShoppingData.item.prices.default.lowestPrice.formatted }}</span>
                 </div>
 
                 <div class="category-unit-price small" v-if="!(liveShoppingData.item.unit.unitOfMeasurement === 'C62' && liveShoppingData.item.unit.content === 1)">
@@ -185,6 +195,11 @@ export default {
         oldPriceRrp()
         {
             return this.$translate('Ceres::Template.liveShoppingRrp', {'price': '<del>' + this.prices.rrp.unitPrice.formatted + '</del>'})
+        },
+
+        isCrossPriceVisible()
+        {
+            return this.displaySettings.showCrossPrice && this.prices.rrp && this.prices.rrp.unitPrice.value > 0;
         }
     },
 
