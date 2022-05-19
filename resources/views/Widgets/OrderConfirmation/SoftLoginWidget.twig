@@ -13,7 +13,7 @@
         {{ Twig.if("isOrderValid") }}
             {{ Twig.do("include \"Ceres::Checkout.Partials.SoftLoginForm\"") }}
         {{ Twig.else() }}
-            {{ "Put regenerate template include here..." }}
+            {{ Twig.do("include \"Ceres::Checkout.Partials.SoftLoginRegenerateForm\"") }}
         {{ Twig.endif() }}
     </div>
 </div>
