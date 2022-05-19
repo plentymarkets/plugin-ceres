@@ -1,0 +1,14 @@
+<h1 class="form-title mb-5">{{ trans("Ceres::Template.softLoginRegenerateTitle") }}</h1>
+
+<form method="POST" action="{{ confirmation_softlogin_regenerate_action() }}">
+    <div class="input-unit">
+        {{ confirmation_softlogin_fields(orderId, orderAccessKey) }}
+        <label for="order_{{ orderInputType }}">
+            {{ trans("Ceres::Template.softLoginRegenerateDescription") }}
+        </label>
+    </div>
+    <button type="submit" class="btn btn-primary btn-appearance btn-medium float-right">
+        {{ trans('Ceres::Template.softLoginRegenerateSubmitLabel') }}
+        <i aria-hidden="true" class="fa fa-user"></i>
+    </button>
+</form>
