@@ -454,7 +454,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
         var itemURL = _this2.$options.filters.itemURL(item.variation.data);
 
-        return "<a class=\"text-appearance\" target=\"_blank\" href=\"".concat(itemURL, "\">\n                            ").concat(itemName, "\n                        </a>");
+        return "<a class=\"text-appearance\" target=\"_blank\" href=\"".concat(itemURL, "\">").concat(itemName, "</a>");
       }).join(", ");
     },
     storeAccessor: function storeAccessor() {

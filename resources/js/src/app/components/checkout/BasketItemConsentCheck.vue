@@ -61,9 +61,7 @@ export default {
             return this.matchingBasketItems.map(item => {
                 const itemName = this.$options.filters.itemName(item.variation.data)
                 const itemURL = this.$options.filters.itemURL(item.variation.data);
-                return `<a class="text-appearance" target="_blank" href="${itemURL}">
-                            ${itemName}
-                        </a>`;
+                return `<a class="text-appearance" target="_blank" href="${itemURL}">${itemName}</a>`;
             }).join(", ");
         },
 
