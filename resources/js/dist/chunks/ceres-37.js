@@ -72,6 +72,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-price",
@@ -240,7 +246,7 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _vm.currentVariation.properties && _vm.currentVariation.properties.length
+    _vm.propertiesWithAdditionalCostsVisible.length
       ? _c(
           "ul",
           { staticClass: "text-muted pl-0 list-unstyled" },
@@ -297,6 +303,23 @@ var render = function() {
           }),
           0
         )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.currentVariation.prices.default.lowestPrice.value &&
+    _vm.showCrossPrice &&
+    _vm.hasCrossPrice
+      ? _c("div", { staticClass: "lowest-price text-muted mb-3" }, [
+          _c("div", {
+            domProps: {
+              innerHTML: _vm._s(
+                _vm.$translate("Ceres::Template.singleItemLowestPrice", {
+                  price:
+                    _vm.currentVariation.prices.default.lowestPrice.formatted
+                })
+              )
+            }
+          })
+        ])
       : _vm._e(),
     _vm._v(" "),
     _vm.currentVariation.unit
