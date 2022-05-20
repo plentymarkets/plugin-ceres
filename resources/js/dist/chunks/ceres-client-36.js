@@ -78,7 +78,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-price",
@@ -310,18 +309,16 @@ var render = function() {
     _vm.showCrossPrice &&
     _vm.hasCrossPrice
       ? _c("div", { staticClass: "lowest-price text-muted mb-3" }, [
-          _c("div", [
-            _vm._v(
-              "\n            " +
-                _vm._s(
-                  _vm.$translate("Ceres::Template.singleItemLowestPrice", {
-                    price:
-                      _vm.currentVariation.prices.default.lowestPrice.formatted
-                  })
-                ) +
-                "\n        "
-            )
-          ])
+          _c("div", {
+            domProps: {
+              innerHTML: _vm._s(
+                _vm.$translate("Ceres::Template.singleItemLowestPrice", {
+                  price:
+                    _vm.currentVariation.prices.default.lowestPrice.formatted
+                })
+              )
+            }
+          })
         ])
       : _vm._e(),
     _vm._v(" "),

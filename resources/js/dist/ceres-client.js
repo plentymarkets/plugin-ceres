@@ -38744,9 +38744,9 @@ var render = function() {
                 _vm._v(" "),
                 _vm.item.prices.default.lowestPrice.value && _vm.hasCrossPrice
                   ? _c("div", { staticClass: "category-lowest-price small" }, [
-                      _c("span", [
-                        _vm._v(
-                          _vm._s(
+                      _c("span", {
+                        domProps: {
+                          innerHTML: _vm._s(
                             _vm.$translate(
                               "Ceres::Template.categoryItemLowestPrice",
                               {
@@ -38755,8 +38755,8 @@ var render = function() {
                               }
                             )
                           )
-                        )
-                      ])
+                        }
+                      })
                     ])
                   : _vm._e(),
                 _vm._v(" "),

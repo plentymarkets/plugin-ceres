@@ -7496,7 +7496,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-price",
@@ -49608,15 +49607,10 @@ var render = function() {
         _vm.showCrossPrice &&
         _vm.hasCrossPrice
           ? '<div class="lowest-price text-muted mb-3"><div>' +
-            _vm._ssrEscape(
-              "\n            " +
-                _vm._s(
-                  _vm.$translate("Ceres::Template.singleItemLowestPrice", {
-                    price:
-                      _vm.currentVariation.prices.default.lowestPrice.formatted
-                  })
-                ) +
-                "\n        "
+            _vm._s(
+              _vm.$translate("Ceres::Template.singleItemLowestPrice", {
+                price: _vm.currentVariation.prices.default.lowestPrice.formatted
+              })
             ) +
             "</div></div>"
           : "<!---->") +
@@ -52664,9 +52658,9 @@ var render = function() {
                 _vm._v(" "),
                 _vm.item.prices.default.lowestPrice.value && _vm.hasCrossPrice
                   ? _c("div", { staticClass: "category-lowest-price small" }, [
-                      _c("span", [
-                        _vm._v(
-                          _vm._s(
+                      _c("span", {
+                        domProps: {
+                          innerHTML: _vm._s(
                             _vm.$translate(
                               "Ceres::Template.categoryItemLowestPrice",
                               {
@@ -52675,8 +52669,8 @@ var render = function() {
                               }
                             )
                           )
-                        )
-                      ])
+                        }
+                      })
                     ])
                   : _vm._e(),
                 _vm._v(" "),
@@ -53595,22 +53589,15 @@ var render = function() {
               '</div></div> <div class="live-shopping-prices-additional-info">' +
               (_vm.isCrossPriceVisible &&
               _vm.liveShoppingData.item.prices.default.lowestPrice.value
-                ? '<div class="live-shopping-lowest-price">' +
-                  _vm._ssrEscape(
-                    "\n                " +
-                      _vm._s(
-                        _vm.$translate(
-                          "Ceres::Template.singleItemLowestPrice",
-                          {
-                            price:
-                              _vm.liveShoppingData.item.prices.default
-                                .lowestPrice.formatted
-                          }
-                        )
-                      ) +
-                      "\n            "
+                ? '<div class="live-shopping-lowest-price"><span>' +
+                  _vm._s(
+                    _vm.$translate("Ceres::Template.singleItemLowestPrice", {
+                      price:
+                        _vm.liveShoppingData.item.prices.default.lowestPrice
+                          .formatted
+                    })
                   ) +
-                  "</div>"
+                  "</span></div>"
                 : "<!---->") +
               " " +
               (!(
@@ -53697,22 +53684,15 @@ var render = function() {
               "</div></div> " +
               (_vm.isCrossPriceVisible &&
               _vm.liveShoppingData.item.prices.default.lowestPrice.value
-                ? '<div class="category-lowest-price small">' +
-                  _vm._ssrEscape(
-                    "\n                " +
-                      _vm._s(
-                        _vm.$translate(
-                          "Ceres::Template.singleItemLowestPrice",
-                          {
-                            price:
-                              _vm.liveShoppingData.item.prices.default
-                                .lowestPrice.formatted
-                          }
-                        )
-                      ) +
-                      "\n            "
+                ? '<div class="category-lowest-price small"><span>' +
+                  _vm._s(
+                    _vm.$translate("Ceres::Template.singleItemLowestPrice", {
+                      price:
+                        _vm.liveShoppingData.item.prices.default.lowestPrice
+                          .formatted
+                    })
                   ) +
-                  "</div>"
+                  "</span></div>"
                 : "<!---->") +
               " " +
               (!(

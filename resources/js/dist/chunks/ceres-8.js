@@ -1026,9 +1026,9 @@ var render = function() {
                 _vm.isCrossPriceVisible &&
                 _vm.liveShoppingData.item.prices.default.lowestPrice.value
                   ? _c("div", { staticClass: "live-shopping-lowest-price" }, [
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(
+                      _c("span", {
+                        domProps: {
+                          innerHTML: _vm._s(
                             _vm.$translate(
                               "Ceres::Template.singleItemLowestPrice",
                               {
@@ -1037,9 +1037,9 @@ var render = function() {
                                     .lowestPrice.formatted
                               }
                             )
-                          ) +
-                          "\n            "
-                      )
+                          )
+                        }
+                      })
                     ])
                   : _vm._e(),
                 _vm._v(" "),
@@ -1160,9 +1160,9 @@ var render = function() {
               _vm.isCrossPriceVisible &&
               _vm.liveShoppingData.item.prices.default.lowestPrice.value
                 ? _c("div", { staticClass: "category-lowest-price small" }, [
-                    _vm._v(
-                      "\n                " +
-                        _vm._s(
+                    _c("span", {
+                      domProps: {
+                        innerHTML: _vm._s(
                           _vm.$translate(
                             "Ceres::Template.singleItemLowestPrice",
                             {
@@ -1171,9 +1171,9 @@ var render = function() {
                                   .lowestPrice.formatted
                             }
                           )
-                        ) +
-                        "\n            "
-                    )
+                        )
+                      }
+                    })
                   ])
                 : _vm._e(),
               _vm._v(" "),
