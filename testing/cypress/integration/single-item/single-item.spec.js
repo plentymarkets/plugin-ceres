@@ -42,6 +42,20 @@ context("Single Item", () =>
         cy.get(".graduated-base-price").should("contain", "0,20");
     });
 
+    it("should check if the item has a lowest price and the values matches the given price", () =>
+    {
+        cy.visit("/wohnzimmer/sofas/testartikel-mit-einem-niedrigsten-preis-der-letzten-30-tage_202_1138/");
+
+        cy.get(".lowest-price").should("contain", "Niedrigster Preis der letzten 30 Tage:");
+    });
+
+    it("should check if the item has a lowest price but it's hidden, because the item has no rrp", () =>
+    {
+        cy.visit("/wohnzimmer/sofas/testartikel-mit-einem-niedrigsten-preis-der-letzten-30-tage_202_1143/");
+
+        cy.get(".lowest-price").should("not.exist");
+    });
+
     it("should check for lowest breadcrumb level", () =>
     {
         cy.get(".breadcrumb-item.active").should("contain", "Loungesessel Herkules");
