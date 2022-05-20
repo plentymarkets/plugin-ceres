@@ -46,7 +46,7 @@ context("Single Item", () =>
     {
         cy.visit("/wohnzimmer/sofas/testartikel-mit-einem-niedrigsten-preis-der-letzten-30-tage_202_1138/");
 
-        cy.get(".lowest-price").should("contain", "Niedrigster Preis der letzten 30 Tage:");
+        cy.get(".lowest-price").should("exist");
     });
 
     it("should check if the item has a lowest price but it's hidden, because the item has no rrp", () =>
