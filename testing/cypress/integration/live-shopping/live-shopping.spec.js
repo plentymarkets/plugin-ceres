@@ -83,7 +83,7 @@ context("Live shopping", () =>
         cy.getByTestingAttr("basket-preview-button").should("contain", ACTIVE_LIVE_SHOPPING_PRICE);
     });
 
-    it.only("Should show the lowest price for active live shopping item", () =>
+    it("Should show the lowest price for active live shopping item", () =>
     {
         cy.visit("/live-shopping-preis-der-letzten-30-tage/");
         cy.wait(500);
@@ -91,7 +91,7 @@ context("Live shopping", () =>
         cy.get("article[data-testing='1138'] .live-shopping-lowest-price").should("exist");
     });
 
-    it.only("Should show the lowest price for inactive live shopping item", () =>
+    it("Should show the lowest price for inactive live shopping item", () =>
     {
         cy.visit("/live-shopping-preis-der-letzten-30-tage/");
         cy.wait(500);
