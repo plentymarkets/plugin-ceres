@@ -90,7 +90,7 @@
                     <slot name="after-prices"></slot>
 
                     <div class="category-lowest-price small" v-if="item.prices.default.lowestPrice.value && hasCrossPrice">
-                        <span>{{ $translate("Ceres::Template.categoryItemLowestPrice", {"price": item.prices.default.lowestPrice.formatted}) }}</span>
+                        <span v-html="$translate('Ceres::Template.categoryItemLowestPrice', {'price': item.prices.default.lowestPrice.formatted})"></span>
                     </div>
 
                     <div class="category-unit-price small" v-if="!(item.unit.unitOfMeasurement === 'C62' && item.unit.content === 1)">

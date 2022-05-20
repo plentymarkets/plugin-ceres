@@ -39,8 +39,7 @@
 
         <!-- lowest price, according to § 11 PAngV -->
         <div class="lowest-price text-muted mb-3" v-if="currentVariation.prices.default.lowestPrice.value && showCrossPrice && hasCrossPrice">
-            <div>
-                {{ $translate("Ceres::Template.singleItemLowestPrice", {"price": currentVariation.prices.default.lowestPrice.formatted}) }}
+            <div v-html="$translate('Ceres::Template.singleItemLowestPrice', {'price': currentVariation.prices.default.lowestPrice.formatted})">
             </div>
         </div>
         

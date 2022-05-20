@@ -73,7 +73,7 @@
 
             <div class="live-shopping-prices-additional-info">
                 <div class="live-shopping-lowest-price" v-if="isCrossPriceVisible && liveShoppingData.item.prices.default.lowestPrice.value">
-                    {{ $translate("Ceres::Template.singleItemLowestPrice", {"price": liveShoppingData.item.prices.default.lowestPrice.formatted}) }}
+                    <span v-html="$translate('Ceres::Template.singleItemLowestPrice', {'price': liveShoppingData.item.prices.default.lowestPrice.formatted})"></span>
                 </div>
 
                 <div class="live-shopping-unit-price" v-if="!(liveShoppingData.item.unit.unitOfMeasurement === 'C62' && liveShoppingData.item.unit.content === 1)">
@@ -103,7 +103,7 @@
                 </div>
 
                 <div class="category-lowest-price small" v-if="isCrossPriceVisible && liveShoppingData.item.prices.default.lowestPrice.value">
-                    {{ $translate("Ceres::Template.singleItemLowestPrice", {"price": liveShoppingData.item.prices.default.lowestPrice.formatted}) }}
+                    <span v-html="$translate('Ceres::Template.singleItemLowestPrice', {'price': liveShoppingData.item.prices.default.lowestPrice.formatted})"></span>
                 </div>
 
                 <div class="category-unit-price small" v-if="!(liveShoppingData.item.unit.unitOfMeasurement === 'C62' && liveShoppingData.item.unit.content === 1)">
