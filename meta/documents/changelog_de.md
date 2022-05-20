@@ -543,14 +543,14 @@
 
 - Die Ceres-Einstellungen und der plentyShop-Assistent enthalten nun im Bereich Performance die neue Einstellung **Vue Server-Side Rendering aktivieren**, mit der Server-Side Rendering aktiviert werden kann, um Markup serverseitig zu generieren. Dies verbessert die Shop-Performance. Diese Einstellung ist standardmäßig inaktiv.
 - Die Ceres-Einstellungen und der plentyShop-Assistent enthalten nun im Bereich Performance die neue Einstellung **State Cloning für Event Propagation in VueX aktivieren**, mit der State Cloning aktiviert und deaktiviert werden kann. Das Deaktivieren des State Clonings erhöht die Shop-Performance, kann aber dazu führen, dass es zu Fehlern in Verbindung mit externen Plugins kommt. Diese Einstellung ist standardmäßig aktiv.
-- Die Widgets Bilderbox, Bilderkarussell, Hintergrundbild und Artikelbild wurden um die Einstellungen **Bild vorladen** erweitert. Diese Einstellung dient dazu, die Shop-Performance in Kombination mit Server-Side Rendering zu verbessern. Weitere Informationen zur Verwendung dieser Einstellung findest du [hier](https://knowledge.plentymarkets.com/webshop/best-practices#_bilder_widgets_optimal_einstellen).
+- Die Widgets Bilderbox, Bilderkarussell, Hintergrundbild und Artikelbild wurden um die Einstellungen **Bild vorladen** erweitert. Diese Einstellung dient dazu, die Shop-Performance in Kombination mit Server-Side Rendering zu verbessern. Weitere Informationen zur Verwendung dieser Einstellung findest du [hier](https://knowledge.plentymarkets.com/de-de/manual/main/webshop/best-practices.html#_bilder_widgets_optimal_einstellen).
 - Zur Verbesserung der Barrierefreiheit der Mengenangabe für Artikel wurden `aria-label` hinzugefügt. Wir möchten uns bei @MaxBentz für diesen Beitrag bedanken!
 - In den SEO-Einstellungen des Ceres-Plugins und im plentyShop-Assistenten kann jetzt das Mapping der Marke (Brand) und des Herstellers (Manufacturer) für die Rich Snippets der Artikelseite aktiviert werden.
 - Die ClientOnly-Komponente wurde hinzugefügt. Diese ermöglicht externen Entwickler:innen Komponenten, die nicht mit Vue Server-Side Rendering kompatibel sind, zu wrappen, damit diese Komponenten nur auf der Client-Seite ausgeführt werden.
 
 ### Geändert
 
-- Bilder im Hintergrundbild-Widget können nun über die Widget-Einstellung **Hintergrundbild nachladen** zu einem späterem Zeitpunkt nachgeladen werden. Weitere Informationen zur Verwendung dieser Einstellung findest du [hier](https://knowledge.plentymarkets.com/webshop/best-practices#_bilder_widgets_optimal_einstellen).
+- Bilder im Hintergrundbild-Widget können nun über die Widget-Einstellung **Hintergrundbild nachladen** zu einem späterem Zeitpunkt nachgeladen werden. Weitere Informationen zur Verwendung dieser Einstellung findest du [hier](https://knowledge.plentymarkets.com/de-de/manual/main/webshop/best-practices.html#_bilder_widgets_optimal_einstellen).
 - Im Mein-Konto-Bereich können Versandadressen an Postfilialen oder Packstationen nur noch dann angelegt werden, wenn mindestens ein Versandprofil mit der jeweiligen Option verfügbar ist.
 - Die Länderauswahl hat nun eine eindeutige ID. Dadurch werden zwei Konsolenwarnungen im Checkout entfernt. Wir möchten uns bei @jvolke für den Beitrag bedanken!
 - Der LazyImg-Komponente wurde ein Slot hinzugefügt, damit zusätzliche Bilderquellen hinzugefügt werden können.
@@ -1279,8 +1279,8 @@
 
 ### Hinzugefügt
 
-- Diese Version unterstützt <a href="https://knowledge.plentymarkets.com/artikel/anwendungsfaelle/multipacks-pakete-sets#3000" target="_blank">Sets</a>. Das Widget **Bestandteile für Artikelsets** wurde zum ShopBuilder hinzugefügt. Dieses Widget dient dazu, Artikelset-Seiten über den ShopBuilder zu bearbeiten. Die Funktion wird als Beta-Version bereitgestellt.
-- Diese Version unterstützt <a href="https://knowledge.plentymarkets.com/auftraege/gutscheine" target="_blank">Mehrzweckgutscheine</a>. Mehrzweckgutscheine können auf der Bestellbestätigungsseite personalisiert und als PDF-Datei heruntergeladen werden.
+- Diese Version unterstützt <a href="https://knowledge.plentymarkets.com/de-de/manual/main/artikel/multipacks-pakete-sets-verwalten.html#3000" target="_blank">Sets</a>. Das Widget **Bestandteile für Artikelsets** wurde zum ShopBuilder hinzugefügt. Dieses Widget dient dazu, Artikelset-Seiten über den ShopBuilder zu bearbeiten. Die Funktion wird als Beta-Version bereitgestellt.
+- Diese Version unterstützt <a href="https://knowledge.plentymarkets.com/de-de/manual/main/auftraege/gutscheine.html" target="_blank">Mehrzweckgutscheine</a>. Mehrzweckgutscheine können auf der Bestellbestätigungsseite personalisiert und als PDF-Datei heruntergeladen werden.
 - Die drei Widgets **Suchvorschläge**, **Suchergebnisse: Kategorien** und **Suchergebnisse: Artikel** wurden zum ShopBuilder hinzugefügt. Diese können im Suchbereich des Top Bar-Widgets im Header platziert werden.
 - Die Schaltfläche für die Suche im Top Bar-Widget kann nun im ShopBuilder geklickt werden, um einen Bereich auszuklappen, in welchem Widgets platziert werden können.
 - Bei falsch geschriebenen Suchbegriffen wird nun eine zusätzliche Suche ausgeführt. Auf der Suchergebnisseite wird nun ein alternativer Suchbegriff unter "Meinten Sie...?" vorgeschlagen.
@@ -2018,7 +2018,7 @@
 ### TODO
 
 - Durch Änderungen am Markup der ShopBuilder-Widgets müssen nach dem Update die ShopBuilder-Seiten neu generiert werden. Die Seiten können im Menü **CMS » ShopBuilder** über den Button **Inhalte neu generieren** links in der Werkzeugleiste generiert werden.
-- Themes, die mit älteren Ceres-Versionen kompatibel waren, müssen ggf. aktualisiert werden. Weitere Informationen zum Aktualisieren von Themes findest du im <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/referenz/ceres-3-update" target="_blank" rel="noopener"><b>Handbuch</b></a>.
+- Themes, die mit älteren Ceres-Versionen kompatibel waren, müssen ggf. aktualisiert werden. Weitere Informationen zum Aktualisieren von Themes findest du im <a href=https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-3-update.html" target="_blank" rel="noopener"><b>Handbuch</b></a>.
 
 ### Hinzugefügt
 
@@ -2030,7 +2030,7 @@
 
 ### Geändert
 
-- Bootstrap wurde auf Version 4.2.1 aktualisiert. Weitere Informationen zu Bootstrap und zum Aktualisieren von Themes findest du im <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/referenz/ceres-3-update" target="_blank" rel="noopener"><b>Handbuch</b></a>.
+- Bootstrap wurde auf Version 4.2.1 aktualisiert. Weitere Informationen zu Bootstrap und zum Aktualisieren von Themes findest du im <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-3-update.html" target="_blank" rel="noopener"><b>Handbuch</b></a>.
 - Die ShopBuilder-Widgets werden ab sofort gruppiert dargestellt.
 - Die dynamische Darstellung von Varianten berücksichtigt jetzt die Einstellung **Gruppierbar in Artikellisten** für Attribute.
 - Das TopBar-Widget wird jetzt auf kleinen Bildschirmgrößen optimiert dargestellt.
@@ -2582,8 +2582,8 @@
 
 - Hinweistexte in der Registrierung und Verwendungszweck wurden hinzugefügt (EHI).
 - Es wurde ein Container auf der OrderConfirmation Seite hinzugefügt, damit Shipping-Plugins zusätzliche Inhalte darstellen können.
-- Die Einstellung **Name of an item to display** wurde auf dem Tab **Item view** hinzugefügt. Mit diesem Wert wird festgelegt, ob im Webshop der Artikelname, der Variantenname (sofern verfügbar) oder eine Kombination aus beiden Namen angezeigt wird. Weitere Informationen unter <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#90" target="_blank">Artikelansicht anpassen</a>.
-- Kategorien vom Typ **Content** können nun in der Navigationsleiste angezeigt werden. Hierfür wurde in der Ceres-Konfiguration die Einstellung **Type of categories rendered in the navigation** im Tab **Header** hinzugefügt. Weitere Informationen unter <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#70" target="_blank">Header und Footer anpassen</a>.
+- Die Einstellung **Name of an item to display** wurde auf dem Tab **Item view** hinzugefügt. Mit diesem Wert wird festgelegt, ob im Webshop der Artikelname, der Variantenname (sofern verfügbar) oder eine Kombination aus beiden Namen angezeigt wird. Weitere Informationen unter <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html#90" target="_blank">Artikelansicht anpassen</a>.
+- Kategorien vom Typ **Content** können nun in der Navigationsleiste angezeigt werden. Hierfür wurde in der Ceres-Konfiguration die Einstellung **Type of categories rendered in the navigation** im Tab **Header** hinzugefügt. Weitere Informationen unter <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html#70" target="_blank">Header und Footer anpassen</a>.
 
 ### Behoben
 
@@ -2612,7 +2612,7 @@
 
 - Es wurde eine Service-Klasse eingeführt, die Übersetzungen nun auch per JavaScript ermöglicht, analog zum Server-seitigen Umgang von Übersetzungen durch Laravel.
 - Texte in unterschiedlichen Sprachen werden nun direkt vom Server geladen. Es ist nicht länger notwendig sprachabhängige JavaScript-Dateien lokal zu kompilieren.
-- Ein Widerrufsformular wurde hinzugefügt. Sie können entweder ein Formular über die rechtlichen Angaben im Backend erstellen oder ein PDF-Dokument zum Download im Tab **Footer** der Ceres-Konfiguration angeben. Weitere Informationen dazu finden Sie unter [Rechtliche Angaben speichern](https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#300).
+- Ein Widerrufsformular wurde hinzugefügt. Sie können entweder ein Formular über die rechtlichen Angaben im Backend erstellen oder ein PDF-Dokument zum Download im Tab **Footer** der Ceres-Konfiguration angeben. Weitere Informationen dazu finden Sie unter [Rechtliche Angaben speichern](https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html#300).
 
 ### Geändert
 
@@ -2709,7 +2709,7 @@
 
 - Im **Checkout** gibt es nun die Möglichkeit, dass ein Bezahl-Plugin sich selbst deaktivieren kann.
 - Wenn man sich mit einer E-Mail registriert, die bereits existiert, bleibt das Overlay nun geöffnet und man sieht die Fehlermeldung besser.
-- Artikel und Varianten können nun dynamisch angezeigt werden. Weitere Informationen unter <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#90" target="_blank">Artikelansicht anpassen</a>.
+- Artikel und Varianten können nun dynamisch angezeigt werden. Weitere Informationen unter <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html#90" target="_blank">Artikelansicht anpassen</a>.
 
 ### Behoben
 
@@ -2745,7 +2745,7 @@
 
 ### Hinzugefügt
 
-- Das Twig-Template `SingleItemWrapper` wurde hinzugefügt. Dieses Template ermöglicht die Nutzung von <a href="https://knowledge.plentymarkets.com/artikel/artikel-verwalten#720" target="_blank"><b>Artikelvorlagen</b></a> in Ceres.
+- Das Twig-Template `SingleItemWrapper` wurde hinzugefügt. Dieses Template ermöglicht die Nutzung von <a href="https://knowledge.plentymarkets.com/de-de/manual/main/artikel/callisto-vorlagen.html" target="_blank"><b>Artikelvorlagen</b></a> in Ceres.
 
 ### Behoben
 
@@ -2764,13 +2764,13 @@
 - Die Technologie VueX wurde in den Webshop integriert.
 - Der Template-Container `SingleItem.AdditionalContentAfterVAT` wurde hinzugefügt, um zusätzlichen Inhalt hinter der Mehrwehrtsteuer in der Einzelansicht eines Artikels anzuzeigen (Vielen Dank <a href="https://github.com/jalie" target="_blank"><b>@jalie</b></a>).
 - Der Template-Container `RegistrationOverlay.ExtendOverlayButtons` wurde hinzugefügt, um zusätzlichen Inhalt im Registrierungs-Overlay anzuzeigen (Vielen Dank <a href="https://github.com/mkreusch" target="_blank"><b>@mkreusch</b></a>).
-- Der Navigation wurde ein Mega-Menü hinzugefügt. Weitere Informationen finden Sie unter <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#80" target="_blank"><b>Header und Footer anpassen</b></a>.
-- In Ceres kann nun eine Standardkundenklasse für B2B-Kunden eingestellt werden. Weitere Informationen finden Sie unter <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#45" target="_blank"><b>Globale Einstellungen vornehmen</b></a>.
-- Über die **Empfohlene Artikelsortierung** können Artikel in der Kategorieansicht nun auch nach Bestand sortiert werden. Weitere Informationen finden Sie unter <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#200" target="_blank"><b>Paginierung und Sortierung anpassen</b></a>.
+- Der Navigation wurde ein Mega-Menü hinzugefügt. Weitere Informationen finden Sie unter <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html#80" target="_blank"><b>Header und Footer anpassen</b></a>.
+- In Ceres kann nun eine Standardkundenklasse für B2B-Kunden eingestellt werden. Weitere Informationen finden Sie unter <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html#45" target="_blank"><b>Globale Einstellungen vornehmen</b></a>.
+- Über die **Empfohlene Artikelsortierung** können Artikel in der Kategorieansicht nun auch nach Bestand sortiert werden. Weitere Informationen finden Sie unter <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html#200" target="_blank"><b>Paginierung und Sortierung anpassen</b></a>.
 - Zahlungsarten können nun auch bei Gastbestellungen auf der Auftragsbestätigungsseite geändert werden.
 - Aufträge können nun auch bei Gastbestellungen nachträglich bezahlt werden, z.B. wenn die Zahlungsart geändert wird.
 - Eine Fehlermeldung wurde hinzugefügt, die angezeigt wird, wenn beim Hinzufügen von Artikeln zum Warenkorb Fehler auftreten.
-- In Ceres können nun Währungseinstellungen vorgenommen werden. Weitere Informationen finden Sie unter <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#203" target="_blank"><b>Währungseinstellungen vornehmen</b></a>.
+- In Ceres können nun Währungseinstellungen vorgenommen werden. Weitere Informationen finden Sie unter <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html#203" target="_blank"><b>Währungseinstellungen vornehmen</b></a>.
 - Es wurden diverse Ladeanimationen auf den Buttons hinzugefügt, um dem Benutzer ein besseres Feedback zu geben, wann etwas geladen wird.
 - Wenn sich innerhalb des Warenkorbs etwas aktualisiert, wird dies nun über eine Aktualisierungsanimation dargestellt.
 - Wenn sich im **Mein Konto**-Bereich die Adressen ändern, dann werden die Eingabefelder deaktiviert, bis die Adressdaten vom Server geladen wurden, um Fehlverhalten auszuschließen.
@@ -2866,7 +2866,7 @@
 
 ### Hinzugefügt
 
-- Meta-Beschreibungen und Robots-Einstellungen können jetzt für statische Seiten des Webshops im Tab **SEO** in der Konfiguration eingegeben werden. Weitere Informationen finden Sie unter <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#201" target="_blank"><b>Einstellungen für Suchmaschinenoptimierung vornehmen</b></a>.
+- Meta-Beschreibungen und Robots-Einstellungen können jetzt für statische Seiten des Webshops im Tab **SEO** in der Konfiguration eingegeben werden. Weitere Informationen finden Sie unter <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html#201" target="_blank"><b>Einstellungen für Suchmaschinenoptimierung vornehmen</b></a>.
 
 ### Geändert
 
@@ -2877,7 +2877,7 @@
 
 ### Hinzugefügt
 
-- Staffelpreise sind nun in Ceres integriert und werden unterhalb der Bestellmerkmale in der Einzelansicht eines Artikels ausgegeben. Weitere Informationen zu Staffelpreisen finden Sie unter <a href="https://knowledge.plentymarkets.com/artikel/artikel-verwalten#870" target="_blank"><b>Verkaufspreise verwalten</b></a>.
+- Staffelpreise sind nun in Ceres integriert und werden unterhalb der Bestellmerkmale in der Einzelansicht eines Artikels ausgegeben. Weitere Informationen zu Staffelpreisen finden Sie unter <a href="https://knowledge.plentymarkets.com/de-de/manual/main/artikel/preise.html" target="_blank"><b>Verkaufspreise verwalten</b></a>.
 
 ### Geändert
 
@@ -2908,7 +2908,7 @@
 
 ### Hinzugefügt
 
-- Im **Mein Konto**-Bereich ist es nun möglich Retouren abzuwickeln. Weitere Informationen finden Sie unter <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#430" target="_blank"><b>Retouren aktivieren</b></a>.
+- Im **Mein Konto**-Bereich ist es nun möglich Retouren abzuwickeln. Weitere Informationen finden Sie unter <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html#430" target="_blank"><b>Retouren aktivieren</b></a>.
 
 ### Behoben
 
@@ -2935,7 +2935,7 @@
 
 - Im Warenkorb werden nun die Attribute (z.B. Größe) angezeigt.
 - In der Kaufabwicklung können nun Auftragsnotizen eingegeben werden.
-- In der Kategorieansicht kann nun auch die Kategoriebeschreibung ausgegeben werden. Aktivieren Sie dafür die Einstellung <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#90" target="_blank"><b>Show category description in category view</b></a>.
+- In der Kategorieansicht kann nun auch die Kategoriebeschreibung ausgegeben werden. Aktivieren Sie dafür die Einstellung <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html#90" target="_blank"><b>Show category description in category view</b></a>.
 - Die Suche nach Variantennummern wurde implementiert.
 
 ## v1.4.5 (2017-09-06)
@@ -3023,17 +3023,17 @@
 
 ### Hinzugefügt
 
-- Für den Warenkorb im Header können nun die angezeigten Informationen eingestellt werden. Es ist möglich den Warenwert, die Anzahl der Artikel oder Warenwert und die Artikelanzahl im Header anzuzeigen. Weitere Informationen dazu finden Sie im <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#80" target="_blank">Handbuch</a>.
-- Ein eigenes Favicon kann für den Webshop hochgeladen werden. Weitere Informationen zum Hochladen des Favicons finden Sie im <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#350" target="_blank">Handbuch</a>.
+- Für den Warenkorb im Header können nun die angezeigten Informationen eingestellt werden. Es ist möglich den Warenwert, die Anzahl der Artikel oder Warenwert und die Artikelanzahl im Header anzuzeigen. Weitere Informationen dazu finden Sie im <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html#80" target="_blank">Handbuch</a>.
+- Ein eigenes Favicon kann für den Webshop hochgeladen werden. Weitere Informationen zum Hochladen des Favicons finden Sie im <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html#350" target="_blank">Handbuch</a>.
 - Jede Seite hat jetzt einen dynamisch generierten Seitentitel.
 - Der Warenbestand von Artikeln wird nun im Webshop berücksichtigt.
 - Die Einstellung **Unsichtbar: in Artikelauflistung** im Tab **Einstellungen** einer Variante wird nun im Webshop berücksichtigt.
-- Varianten ohne Bestand können nun für das Varianten-Dropdown aktiviert werden. Weitere Informationen dazu finden Sie im <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#90" target="_blank">Handbuch</a>.
+- Varianten ohne Bestand können nun für das Varianten-Dropdown aktiviert werden. Weitere Informationen dazu finden Sie im <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html#90" target="_blank">Handbuch</a>.
 - Eine Wunschliste wurde hinzugefügt. **Hinweis:** Um die Wunschliste im Webshop anzuzeigen, muss die Route `/wish-list` im Tab **Routing** in der Konfiguration von **IO** aktiviert werden.
-- Die Kontaktseite und das Kontaktformular wurden hinzugefügt. **Hinweis:** Um die Kontaktseite im Webshop anzuzeigen, muss die Route `/contact` im Tab **Routing** in der Konfiguration von **IO** aktiviert werden. Weitere Informationen zum Einrichten der Kontaktseite finden Sie im <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#370" target="_blank">Handbuch</a>.
+- Die Kontaktseite und das Kontaktformular wurden hinzugefügt. **Hinweis:** Um die Kontaktseite im Webshop anzuzeigen, muss die Route `/contact` im Tab **Routing** in der Konfiguration von **IO** aktiviert werden. Weitere Informationen zum Einrichten der Kontaktseite finden Sie im <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html#370" target="_blank">Handbuch</a>.
 - Serverseitige Fehlermeldungen werden im Frontend richtig ausgegeben.
 - Der Link aus der Bestellbestätigung leitet nun auf die Bestellbestätigungsseite von Ceres weiter.
-- Das Bild einer Kategorie kann nun in der Kategorieansicht anzeigt werden. Weitere Informationen dazu finden Sie im <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#100" target="_blank">Handbuch</a>.
+- Das Bild einer Kategorie kann nun in der Kategorieansicht anzeigt werden. Weitere Informationen dazu finden Sie im <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html#100" target="_blank">Handbuch</a>.
 
 ## Geändert
 
@@ -3072,7 +3072,7 @@
 ### Hinzugefügt
 
 - Das Custom-Event `onVariationChanged` wurde hinzugefügt.
-- Bestellmerkmale vom Typ **Text** können nun mit Artikeln verknüpft werden. Diese werden in der Einzelansicht eines Artikels angezeigt (Hinweis: Zurzeit stehen für die Verwendung im Webshop **Ceres** nur Bestellmerkmale vom Typ **Text** zur Verfügung. Auch die Einordnung von Bestellmerkmalen in Merkmalgruppen ist bisher nicht möglich). Weitere Informationen zur Einrichtung von Bestellmerkmalen finden Sie im <a href="https://knowledge.plentymarkets.com/omni-channel/online-shop/ceres-einrichten#340" target ="_blank">Handbuch</a> und im <a href="https://forum.plentymarkets.com/t/howto-bestellmerkmale-in-ceres-einrichten/63155" target="_blank">Forum</a>.
+- Bestellmerkmale vom Typ **Text** können nun mit Artikeln verknüpft werden. Diese werden in der Einzelansicht eines Artikels angezeigt (Hinweis: Zurzeit stehen für die Verwendung im Webshop **Ceres** nur Bestellmerkmale vom Typ **Text** zur Verfügung. Auch die Einordnung von Bestellmerkmalen in Merkmalgruppen ist bisher nicht möglich). Weitere Informationen zur Einrichtung von Bestellmerkmalen finden Sie im <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html#340" target ="_blank">Handbuch</a> und im <a href="https://forum.plentymarkets.com/t/howto-bestellmerkmale-in-ceres-einrichten/63155" target="_blank">Forum</a>.
 - Beim Anlegen/Editieren von Adressen werden die Felder nun rot markiert, wenn vom Server eine Fehlermeldung für diese Felder kommt. Außerdem werden die Fehler ausgegeben anstatt "Validation errors".
 
 ### Behoben

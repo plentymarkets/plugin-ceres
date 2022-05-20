@@ -169,6 +169,16 @@ const mutations =
             Vue.set(state.validation[`subscribeNewsletter_${emailFolder}`], "showError", showError);
         },
 
+        addDynamicCheckoutValidator(state, { name, validator })
+        {
+            Vue.set(state.validation, `${name}`, { validate: validator, showError: false });
+        },
+
+        setDynamicCheckoutShowError(state, { name, showError })
+        {
+            Vue.set(state.validation[name], "showError", showError);
+        },
+
         setIsCheckoutReadonly(state, readOnly)
         {
             state.readOnly = !!readOnly;
