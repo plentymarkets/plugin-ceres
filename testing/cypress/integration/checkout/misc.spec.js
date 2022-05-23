@@ -1,5 +1,7 @@
 context("Checkout misc", () =>
 {
+    const PRE_PAYMENT_ID = 6000;
+
     it("should show the info that the mail changed for user and hide it again after switching to original address", () =>
     {
         cy.login("mailchange@test.de");
@@ -100,6 +102,7 @@ context("Checkout misc", () =>
 
     function completeOrder()
     {
+        cy.get(`[data-id='${PRE_PAYMENT_ID}']`).click();
         cy.get("input[id^=gtc-accept]").click();
         cy.getByTestingAttr("place-order").click();
         cy.location("pathname").should("eq", "/bestellbestaetigung/");
