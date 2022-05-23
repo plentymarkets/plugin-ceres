@@ -15,7 +15,7 @@
     "keywords"          : ["plentymarkets", "plugins", "layout", "template", "ceres", "plentyshop"],
     "type"              : "template",
     "require"           : {
-        "IO": "5.0.51"
+        "IO": "~5.0.50"
     },
     "namespace"         : "Ceres",
     "serviceProvider"   : "Ceres\\Providers\\TemplateServiceProvider",
