@@ -34,7 +34,7 @@ context("new order properties", () =>
     {
         cy.visit("/wohnzimmer/sofas/couch-purple-dreams_134_1032");
         cy.getByTestingAttr("order-property-label-checkbox").eq(1).parent().find("input").should("be.checked");
-        cy.get(".price").should("contain", "20,01");
+        cy.get(".price").should("contain", "0,01");
     });
 
     it("should only show one '*' when it has surcharge and not required", () =>
