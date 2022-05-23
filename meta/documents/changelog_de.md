@@ -1,5 +1,24 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.51 (2022-05-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.50...5.0.51" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Neu
+
+- Es wurde eine Ausgabe des Preises der letzten 30 Tage hinzugefügt. Die Information wird ausgegeben, wenn ein Artikel einen Preis der letzten 30 Tage hat und ein Streichpreis angezeigt wird.
+- Für die Kasse wurde das Widget **Zustimmung im Checkout** hinzugefügt.
+
+### Behoben
+
+- Die Schaltfläche zum Anzeigen von mehr Artikelinformationen überlagert nicht mehr das Mega-Menü überlagert.
+- Auf der Bestellbestätigungsseite wurde in der Artikelliste teilweise ein Gesamtrabatt von 0,00€ ausgewiesen. Das wurde behoben.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.51 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- [resources/views/Checkout/OrderDetails.twig](https://github.com/plentymarkets/plugin-ceres/pull/3275/files#diff-49e9a28ec33181e8fd3720d39345363b8b0614f2bf29ceb66b403ef22c18bd4d)
+- [resources/views/MyAccount/Partials/OrderHistoryListItemDetails.twig](https://github.com/plentymarkets/plugin-ceres/pull/3275/files#diff-dcc9c181484eba069617434b9c7c20b7906e9ab74907f134720e220a818c968a)
+- [resources/views/Widgets/OrderConfirmation/PurchasedItemsWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3275/files#diff-2cee15b4b8add92d304d2f4cbbb5a5891a5752c533b564f1e1d152982c1e62d0)
+
 ## v5.0.50 (2022-05-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.49...5.0.50" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Geändert
