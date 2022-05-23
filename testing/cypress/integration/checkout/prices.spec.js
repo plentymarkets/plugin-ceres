@@ -17,12 +17,12 @@ context("prices", () =>
 
     });
 
-    it("should change graduated prices for b2b customer", () =>
+    it.only("should change graduated prices for b2b customer", () =>
     {
         cy.login("bernd.business@plentye2etest.de", "Testuser1234");
         cy.visit(url1);
-        cy.get(".graduated-prices-table").children().first().children().first().children().eq(2).should("contain", "0,15");
-        cy.get(".graduated-prices-table").children().first().children().eq(3).children().last().should("contain", "0,03");
+        cy.get(".graduated-prices-table").children().first().children().find(".graduated-price").should("contain", "0,38");
+        cy.get(".graduated-prices-table").children().first().children().eq(2).find(".graduated-price").should("contain", "0,08");
     });
 
     it("should display netto price for b2b class", () =>

@@ -29,7 +29,7 @@ context("Single Item", () =>
 
     it("should check for base price", () =>
     {
-        cy.get(".base-price-value").should("contain", "0,28");
+        cy.get(".base-price-value").should("contain", "2,80");
     });
 
     it("should check if graduated prices are displayed", () =>
@@ -39,7 +39,7 @@ context("Single Item", () =>
 
     it("should check if graduated base prices are displayed", () =>
     {
-        cy.get(".graduated-base-price").should("contain", "0,20");
+        cy.get(".graduated-base-price").should("contain", "2,00");
     });
 
     it("should check if the item has a lowest price and the values matches the given price", () =>
