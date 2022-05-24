@@ -1531,8 +1531,16 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _vm.isTouchDevice && _vm.property.names.description
+              _vm.property.names.description
                 ? _c("popper", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.isTouchDevice,
+                        expression: "isTouchDevice"
+                      }
+                    ],
                     staticClass: "order-property-selection-info-popper",
                     attrs: { placement: "bottom" },
                     scopedSlots: _vm._u(
@@ -1578,11 +1586,18 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _vm.isTouchDevice &&
       _vm.inputType !== "selection" &&
       _vm.inputType !== "file" &&
       _vm.property.names.description
         ? _c("popper", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.isTouchDevice,
+                expression: "isTouchDevice"
+              }
+            ],
             staticClass:
               "order-property-selection-info-popper position-absolute",
             class: {
