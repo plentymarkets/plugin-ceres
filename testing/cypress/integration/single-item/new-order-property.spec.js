@@ -199,7 +199,7 @@ context("new order properties", () =>
         cy.getByTestingAttr("basket-amount").should("contain", "18,99");
     });
 
-    it("should list all order properties for the item at orderconfirmation", () =>
+    it.only("should list all order properties for the item at orderconfirmation", () =>
     {
         // order is valid until 31.12.2026 11:18:00
         cy.visit("/bestellbestaetigung/?orderId=1507&accessKey=KNG0BV6DD");
