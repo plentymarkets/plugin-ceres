@@ -212,7 +212,6 @@
                                         {{ Twig.if("webstoreConfig.useVariationOrderProperties and property.surcharge > 0") }}
                                             <div>
                                                 {{ Twig.print("property.hasTax | json_encode") }}
-                                                {{ dump('property') }}
                                             </div>
                                             
                                             {{ Twig.if("not property.hasTax or property.isAdditionalCosts") }}
