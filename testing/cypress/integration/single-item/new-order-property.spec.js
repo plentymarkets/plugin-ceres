@@ -39,7 +39,7 @@ context("new order properties", () =>
 
     it("should only show one '*' when it has surcharge and not required", () =>
     {
-        cy.visit("/wohnzimmer/sofas/couch-purple-dreams_134_1032");
+        cy.visit("/testartikel/additionalcost-testing_200_1136/");
         cy.getByTestingAttr("order-property-label-checkbox").eq(1).should("contain", "*");
     });
 
@@ -61,7 +61,7 @@ context("new order properties", () =>
         cy.getByTestingAttr("order-property-label-checkbox").eq(2).parent().find("input").check();
         cy.getByTestingAttr("order-property-label-checkbox").eq(3).parent().find("input").check();
         cy.getByTestingAttr("single-add-to-basket-button").click();
-        cy.get("#add-item-to-basket-overlay").should("contain", "30,01");
+        cy.get("#add-item-to-basket-overlay").should("contain", "10,01");
     });
 
     it("should fail to add properties to basket", () =>
@@ -139,17 +139,16 @@ context("new order properties", () =>
         cy.getByTestingAttr("additionalcost-with-tax").eq(0).should("contain", "Additionalcost with Tax from variation");
         cy.getByTestingAttr("additionalcost-with-tax").eq(1).should("contain", "Additionalcost Tax B");
 
-        cy.getByTestingAttr("item-sum-net").should("contain", "87,58");
-        cy.getByTestingAttr("item-sum").should("contain", "104,00");
+        cy.getByTestingAttr("item-sum-net").should("contain", "11,95");
+        cy.getByTestingAttr("item-sum").should("contain", "14,00");
 
-        cy.getByTestingAttr("basket-sub-amount").should("contain", "91,78");
+        cy.getByTestingAttr("basket-sub-amount").should("contain", "14,47");
 
         cy.getByTestingAttr("additionalcost-without-tax").eq(0).should("contain", "Additionalcost no Tax");
-        cy.getByTestingAttr("additionalcost-without-tax").eq(1).should("contain", "Order property no tax");
+        cy.getByTestingAttr("additionalcost-without-tax").eq(1).should("contain", "Order property  no tax");
 
-        cy.getByTestingAttr("basket-amount-net").should("contain", "93,78");
-        cy.getByTestingAttr("basket-amount").should("contain", "110,99");
-
+        cy.getByTestingAttr("basket-amount-net").should("contain", "16,47");
+        cy.getByTestingAttr("basket-amount").should("contain", "18,99");
     });
 
     it("should list all order properties for the item at basket", () =>
@@ -157,63 +156,51 @@ context("new order properties", () =>
         cy.visit("/testartikel/additionalcost-testing_200_1136/");
         addAdditionalItemToBasket();
         cy.visit("/warenkorb/");
-        cy.getByTestingAttr("order-property-list").children().eq(0).should("not.contain", "*");
         cy.getByTestingAttr("order-property-list").children().eq(0).should("contain", "zzgl.");
-
-        cy.getByTestingAttr("order-property-list").children().eq(1).should("contain", "*");
         cy.getByTestingAttr("order-property-list").children().eq(1).should("contain", "zzgl.");
-
-        cy.getByTestingAttr("order-property-list").children().eq(2).should("contain", "*");
         cy.getByTestingAttr("order-property-list").children().eq(2).should("contain", "zzgl.");
-
-        cy.getByTestingAttr("order-property-list").children().eq(3).should("not.contain", "*");
         cy.getByTestingAttr("order-property-list").children().eq(3).should("contain", "zzgl.");
-
-        cy.getByTestingAttr("order-property-list").children().eq(4).should("contain", "*");
         cy.getByTestingAttr("order-property-list").children().eq(4).should("contain", "inkl.");
-
-        cy.getByTestingAttr("order-property-list").children().eq(5).should("contain", "*");
         cy.getByTestingAttr("order-property-list").children().eq(5).should("contain", "inkl.");
     });
 
     it("Should display correct order properties and prices at orderconfirmation", ()=>
     {
-        cy.visit("/bestellbestaetigung/?orderId=xxx");
+        // order is valid until 31.12.2026 11:18:00
+        cy.visit("/bestellbestaetigung/?orderId=1507&accessKey=KNG0BV6DD");
+        cy.get(`input[name="postcode"]`).type("12345");
+        cy.get(`button[type="submit"]`).click();
+
+        cy.get(".btn-collapse > .fa").click();
+
         cy.getByTestingAttr("additionalcost-with-tax").eq(0).should("contain", "Additionalcost with Tax from variation");
         cy.getByTestingAttr("additionalcost-with-tax").eq(1).should("contain", "Additionalcost Tax B");
 
-        cy.getByTestingAttr("item-sum-net").should("contain", "87,58");
-        cy.getByTestingAttr("item-sum").should("contain", "104,00");
+        cy.getByTestingAttr("item-sum-net").should("contain", "11,95");
+        cy.getByTestingAttr("item-sum").should("contain", "14,00");
 
-        cy.getByTestingAttr("basket-sub-amount").should("contain", "91,78");
+        cy.getByTestingAttr("basket-sub-amount").should("contain", "14,47");
 
         cy.getByTestingAttr("additionalcost-without-tax").eq(0).should("contain", "Additionalcost no Tax");
-        cy.getByTestingAttr("additionalcost-without-tax").eq(1).should("contain", "Order property no tax");
+        cy.getByTestingAttr("additionalcost-without-tax").eq(1).should("contain", "Order property  no tax");
 
-        cy.getByTestingAttr("basket-amount-net").should("contain", "93,78");
-        cy.getByTestingAttr("basket-amount").should("contain", "110,99");
+        cy.getByTestingAttr("basket-amount-net").should("contain", "16,47");
+        cy.getByTestingAttr("basket-amount").should("contain", "18,99");
     });
 
     it("should list all order properties for the item at orderconfirmation", () =>
     {
-        cy.visit("/bestellbestaetigung/?orderId=xxx");
+        // order is valid until 31.12.2026 11:18:00
+        cy.visit("/bestellbestaetigung/?orderId=1507&accessKey=KNG0BV6DD");
+        cy.get(`input[name="postcode"]`).type("12345");
+        cy.get(`button[type="submit"]`).click();
+        cy.get(".btn-collapse > .fa").click();
 
-        cy.getByTestingAttr("purchased-order-property").eq(0).should("not.contain", "*");
         cy.getByTestingAttr("purchased-order-property").eq(0).should("contain", "zzgl.");
-
-        cy.getByTestingAttr("purchased-order-property").eq(1).should("contain", "*");
         cy.getByTestingAttr("purchased-order-property").eq(1).should("contain", "zzgl.");
-
-        cy.getByTestingAttr("purchased-order-property").eq(2).should("contain", "*");
         cy.getByTestingAttr("purchased-order-property").eq(2).should("contain", "zzgl.");
-
-        cy.getByTestingAttr("purchased-order-property").eq(3).should("not.contain", "*");
         cy.getByTestingAttr("purchased-order-property").eq(3).should("contain", "zzgl.");
-
-        cy.getByTestingAttr("purchased-order-property").eq(4).should("contain", "*");
         cy.getByTestingAttr("purchased-order-property").eq(4).should("contain", "inkl.");
-
-        cy.getByTestingAttr("purchased-order-property").eq(5).should("contain", "*");
         cy.getByTestingAttr("purchased-order-property").eq(5).should("contain", "inkl.");
     });
 
@@ -226,6 +213,7 @@ context("new order properties", () =>
         cy.getByTestingAttr("order-property-label-checkbox").eq(3).parent().find("input").check();
         cy.getByTestingAttr("order-property-label-checkbox").eq(4).parent().find("input").check();
         cy.getByTestingAttr("order-property-label-checkbox").eq(5).parent().find("input").check();
+        cy.getByTestingAttr("cookie-bar-accept-all").click();
         cy.getByTestingAttr("single-add-to-basket-button").click();
 
     }
