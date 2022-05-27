@@ -210,10 +210,6 @@
                                     <strong class="col-12 mt-1 item-word-break" data-testing="purchased-order-property">
                                         {{ Twig.print('property | propertyName') }}
                                         {{ Twig.if("webstoreConfig.useVariationOrderProperties and property.surcharge > 0") }}
-                                            <div>
-                                                {{ Twig.print("property.hasTax | json_encode") }}
-                                            </div>
-                                            
                                             {{ Twig.if("not property.hasTax or property.isAdditionalCosts") }}
                                                 ({{ Twig.trans("Ceres::Template.basketPlusAbbr") }}
                                             {{ Twig.else() }}
