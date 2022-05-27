@@ -156,22 +156,11 @@ context("new order properties", () =>
         cy.visit("/testartikel/additionalcost-testing_200_1136/");
         addAdditionalItemToBasket();
         cy.visit("/warenkorb/");
-        cy.getByTestingAttr("order-property-list").children().eq(0).should("not.contain", "*");
         cy.getByTestingAttr("order-property-list").children().eq(0).should("contain", "zzgl.");
-
-        cy.getByTestingAttr("order-property-list").children().eq(1).should("contain", "*");
         cy.getByTestingAttr("order-property-list").children().eq(1).should("contain", "zzgl.");
-
-        cy.getByTestingAttr("order-property-list").children().eq(2).should("contain", "*");
         cy.getByTestingAttr("order-property-list").children().eq(2).should("contain", "zzgl.");
-
-        cy.getByTestingAttr("order-property-list").children().eq(3).should("not.contain", "*");
         cy.getByTestingAttr("order-property-list").children().eq(3).should("contain", "zzgl.");
-
-        cy.getByTestingAttr("order-property-list").children().eq(4).should("contain", "*");
         cy.getByTestingAttr("order-property-list").children().eq(4).should("contain", "inkl.");
-
-        cy.getByTestingAttr("order-property-list").children().eq(5).should("contain", "*");
         cy.getByTestingAttr("order-property-list").children().eq(5).should("contain", "inkl.");
     });
 
@@ -199,7 +188,7 @@ context("new order properties", () =>
         cy.getByTestingAttr("basket-amount").should("contain", "18,99");
     });
 
-    it.only("should list all order properties for the item at orderconfirmation", () =>
+    it("should list all order properties for the item at orderconfirmation", () =>
     {
         // order is valid until 31.12.2026 11:18:00
         cy.visit("/bestellbestaetigung/?orderId=1507&accessKey=KNG0BV6DD");
@@ -208,15 +197,10 @@ context("new order properties", () =>
         cy.get(".btn-collapse > .fa").click();
 
         cy.getByTestingAttr("purchased-order-property").eq(0).should("contain", "zzgl.");
-
         cy.getByTestingAttr("purchased-order-property").eq(1).should("contain", "zzgl.");
-
         cy.getByTestingAttr("purchased-order-property").eq(2).should("contain", "zzgl.");
-
         cy.getByTestingAttr("purchased-order-property").eq(3).should("contain", "zzgl.");
-
         cy.getByTestingAttr("purchased-order-property").eq(4).should("contain", "inkl.");
-
         cy.getByTestingAttr("purchased-order-property").eq(5).should("contain", "inkl.");
     });
 
