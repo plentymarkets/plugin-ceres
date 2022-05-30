@@ -31,8 +31,9 @@ trait MigrateTranslations
             "fileName" => $fileName
         ]);
 
+        $oldKeys = array_keys($keysToReplace);
         // filter translations for given translation keys
-        $translations = $translations->whereIn("key", array_keys($keysToReplace));
+        $translations = $translations->whereIn("key", $oldKeys);
 
         /** @var PluginTranslation $translation */
         foreach ($translations as $translation) {
