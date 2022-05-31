@@ -32,7 +32,8 @@ trait MigrateTranslations
         ]);
 
         // filter translations for given translation keys
-        $translations = $translations->whereIn("key", array_keys($keysToReplace));
+        $translations = $translations->whereIn("key", ["categoryItemFootnote", "categoryItemFromPrice", "categoryItemLowestPrice"]);
+//        $translations = $translations->whereIn("key", array_keys($keysToReplace));
 
         /** @var PluginTranslation $translation */
         foreach ($translations as $translation) {
