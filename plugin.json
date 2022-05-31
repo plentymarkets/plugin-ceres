@@ -26,7 +26,7 @@
         "Ceres\\Migrations\\Migration_2018_07_06_001_RebuildShopBuilderHomepage",
         "Ceres\\Wizard\\ShopWizard\\Migrations\\CreateShopWizardPreviewConfigTable",
         "Ceres\\Wizard\\ShopWizard\\Migrations\\UpdateShopWizardPreviewTableWebstoreId",
-        "Ceres\\Migrations\\UpdateTranslationKeysMigration_001"
+        "Ceres\\Migrations\\UpdateTranslationKeysMigration_0_0_1"
     ],
     "dataProviders"     :
     [

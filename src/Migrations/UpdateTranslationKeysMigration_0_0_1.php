@@ -11,7 +11,7 @@ use Ceres\Migrations\Traits\MigrateTranslation;
  * categoryItemFromPrice and categoryItemLowestPrice have changed.
  * @package Ceres\Migrations
  */
-class UpdateTranslationKeysMigration_001
+class UpdateTranslationKeysMigration_0_0_1
 {
     use MigrateTranslation;
 
