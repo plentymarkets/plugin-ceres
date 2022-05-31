@@ -2,7 +2,7 @@
 
 namespace Ceres\Migrations;
 
-use Ceres\Migrations\Traits\MigrateTranslations;
+use Ceres\Migrations\Traits\MigrateTranslation;
 
 /**
  * Class UpdateTranslationKeysMigration_001
@@ -13,7 +13,7 @@ use Ceres\Migrations\Traits\MigrateTranslations;
  */
 class UpdateTranslationKeysMigration_001
 {
-    use MigrateTranslations;
+    use MigrateTranslation;
 
     /**
      * Hook for running the migration.
@@ -27,6 +27,8 @@ class UpdateTranslationKeysMigration_001
             "categoryItemLowestPrice" => "itemLowestPrice"
         ];
 
-        $this->migrateTranslations($pluginSetId, $keysToReplace);
+        foreach ($keysToReplace as $key => $newKey) {
+            $this->migrateTranslation($key, $newKey, $pluginSetId);
+        }
     }
 }
