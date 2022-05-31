@@ -31,23 +31,21 @@ trait MigrateTranslations
             "fileName" => $fileName
         ]);
 
-        // filter translations for given translation keys
-        $translations = $translations->whereIn("key", ["categoryItemFootnote", "categoryItemFromPrice", "categoryItemLowestPrice"]);
-//        $translations = $translations->whereIn("key", array_keys($keysToReplace));
-
-        /** @var PluginTranslation $translation */
         foreach ($translations as $translation) {
-            // create new translation data, based on the old entry
-            $translationData = [
-                'languageCode' => $translation->languageCode,
-                'key'          => $keysToReplace[$translation->key],
-                'value'        => $translation->value,
-                'pluginName'   => $translation->pluginName,
-                'pluginSetId'  => $translation->pluginSetId,
-                'fileName'     => $translation->fileName
-            ];
+            // filter translations for given translation keys
+            if (in_array($translation->key, array_keys($keysToReplace))) {
+                // create new translation data, based on the old entry
+                $translationData = [
+                    "languageCode" => $translation->languageCode,
+                    "key"          => $keysToReplace[$translation->key],
+                    "value"        => $translation->value,
+                    "pluginName"   => $translation->pluginName,
+                    "pluginSetId"  => $translation->pluginSetId,
+                    "fileName"     => $translation->fileName
+                ];
 
-            $pluginTranslationRepository->updateOrCreateTranslation($translationData);
+                $pluginTranslationRepository->updateOrCreateTranslation($translationData);
+            }
         }
     }
 }
