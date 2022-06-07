@@ -62556,16 +62556,16 @@ function CeresMain() {
     if (browser.name) {
       $("html").addClass(browser.name);
     } else {
-      $("html").addClass("unkown-browser");
+      $("html").addClass("unknown-browser");
     }
 
     if (browser.os) {
       $("html").addClass(browser.os.toLowerCase().replace(/[^a-zA-Z0-9\-]/g, "-").replace("windows", "windows windows"));
     } else {
-      $("html").addClass("unkown-os");
+      $("html").addClass("unknown-os");
     }
   } else {
-    $("html").addClass("unkown-detect");
+    $("html").addClass("unknown-detect");
   }
 
   window.onpopstate = function (event) {
