@@ -36,13 +36,28 @@ function CeresMain()
 {
     const browser = browserDetect.detect();
 
-    if (browser && browser.name)
+    if (browser)
     {
-        $("html").addClass(browser.name);
+        if (browser.name)
+        {
+            $("html").addClass(browser.name);
+        }
+        else
+        {
+            $("html").addClass("unkown-browser");
+        }
+        if (browser.os)
+        {
+            $("html").addClass(browser.os.toLowerCase().replace(/[^a-zA-Z0-9\-]/g, '-').replace('windows', 'windows windows'));
+        }
+        else
+        {
+            $("html").addClass("unkown-os");
+        }
     }
     else
     {
-        $("html").addClass("unkown-os");
+        $("html").addClass("unkown-detect");
     }
 
     window.onpopstate = function(event)
