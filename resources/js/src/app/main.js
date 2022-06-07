@@ -48,7 +48,7 @@ function CeresMain()
         }
         if (browser.os)
         {
-            $("html").addClass(browser.os.toLowerCase().replace(/[^a-zA-Z0-9\-]/g, '-').replace('windows', 'windows windows'));
+            $("html").addClass(browser.os.toLowerCase().replace(/[^a-zA-Z0-9\-]/g, "-").replace("windows", "windows windows"));
         }
         else
         {
