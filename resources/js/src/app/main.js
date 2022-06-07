@@ -53,7 +53,9 @@ function CeresMain()
         {
             $("html").addClass("unkown-os");
         }
-    } else {
+    }
+    else
+    {
         $("html").addClass("unkown-detect");
     }
 
