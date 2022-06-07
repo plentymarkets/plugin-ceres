@@ -44,7 +44,7 @@ function CeresMain()
         }
         else
         {
-            $("html").addClass("unkown-browser");
+            $("html").addClass("unknown-browser");
         }
         if (browser.os)
         {
@@ -52,12 +52,12 @@ function CeresMain()
         }
         else
         {
-            $("html").addClass("unkown-os");
+            $("html").addClass("unknown-os");
         }
     }
     else
     {
-        $("html").addClass("unkown-detect");
+        $("html").addClass("unknown-detect");
     }
 
     window.onpopstate = function(event)
