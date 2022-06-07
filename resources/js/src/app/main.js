@@ -38,7 +38,8 @@ function CeresMain()
 
     if (browser)
     {
-        if (browser.name) {
+        if (browser.name)
+        {
             $("html").addClass(browser.name);
         }
         else
