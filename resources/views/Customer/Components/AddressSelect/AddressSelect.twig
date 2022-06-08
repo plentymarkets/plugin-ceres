@@ -70,9 +70,10 @@
                         <recycle-scroller
                             class="scroller"
                             :items="addressList"
+                            :item-size="113"
                             key-field="id"
                             v-slot="{ item }">
-                            <li>
+                            <li style="height:32%">
                                 <input
                                     type="radio"
                                     :name="'shippingAddress' + _uid"
