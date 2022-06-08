@@ -16,7 +16,7 @@ export default Vue.component("address-select", {
     components:
     {
         CreateUpdateAddress,
-        RecycleScroller
+        "recycle-scroller" : RecycleScroller
     },
 
     props:
