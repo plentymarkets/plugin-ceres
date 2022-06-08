@@ -71,8 +71,7 @@
                             class="scroller"
                             :items="addressList"
                             :min-item-size="115"
-                            key-field="id"
-                            v-slot="{ item }">
+                            key-field="id">
                             <template v-slot="{ item, index, active }">
                                 <DynamicScrollerItem
                                     :item="item"
