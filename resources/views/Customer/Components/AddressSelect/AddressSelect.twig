@@ -68,7 +68,7 @@
                 >
                     <ul v-if="!isAddressListEmpty && !(addressType === '2' && addressList.length === 1)">
                         <dynamic-scroller
-                            class="scroller"
+                            class="virtual-scroller"
                             :items="addressList"
                             :min-item-size="115"
                             key-field="id">
