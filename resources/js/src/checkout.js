@@ -24,7 +24,6 @@ import "./app/components/myAccount/MyAccount";
 import "./app/components/myAccount/OrderDocuments";
 
 import { RecycleScroller } from "vue-virtual-scroller";
-import "vue-virtual-scroller/dist/vue-virtual-scroller.css";
 Vue.component("recycle-scroller", RecycleScroller);
 
 // legacy non-shopbuilder components
