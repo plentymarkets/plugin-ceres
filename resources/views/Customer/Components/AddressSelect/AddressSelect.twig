@@ -67,7 +67,7 @@
                     {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-dropdown'\"") | raw }}
                 >
                     <ul v-if="!isAddressListEmpty && !(addressType === '2' && addressList.length === 1)">
-                        <li class="item" v-for="(address, index) in addressList">
+                        <li class="item" v-for="(address, index) in addressList" :key="address.id">
                             <input
                                 type="radio"
                                 :name="'shippingAddress' + _uid"
