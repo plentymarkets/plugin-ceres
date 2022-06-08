@@ -5,9 +5,6 @@ import Vue from "vue";
 import { mapState } from "vuex";
 import CreateUpdateAddress from "./CreateUpdateAddress/CreateUpdateAddress";
 
-import { RecycleScroller } from "vue-virtual-scroller";
-import "vue-virtual-scroller/dist/vue-virtual-scroller.css";
-
 const ApiService = require("../../../services/ApiService");
 const ModalService = require("../../../services/ModalService");
 
@@ -15,8 +12,7 @@ export default Vue.component("address-select", {
 
     components:
     {
-        CreateUpdateAddress,
-        "recycle-scroller" : RecycleScroller
+        CreateUpdateAddress
     },
 
     props:
