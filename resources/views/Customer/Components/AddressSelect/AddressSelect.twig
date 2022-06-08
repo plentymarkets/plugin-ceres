@@ -67,53 +67,70 @@
                     {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-dropdown'\"") | raw }}
                 >
                     <ul v-if="!isAddressListEmpty && !(addressType === '2' && addressList.length === 1)">
-                        <li class="item" v-for="(address, index) in addressList">
-                            <input
-                                type="radio"
-                                :name="'shippingAddress' + _uid"
-                                :id="'addressSelectItem' + _uid + address.id"
-                                :value="address.id"
-                                :checked="selectedAddress && selectedAddress.id === address.id"
-                                @change="onAddressChanged(address)">
-                            <label :for="'addressSelectItem' + _uid + address.id" class="item-inner">
-                            <div v-if="address.id == -99">
-                                <p class="text-muted small font-italic pt-3">{{ trans("Ceres::Template.addressSameAsInvoice") }}</p>
-                            </div>
-                            <div v-else class="item-content small">
-                                <address-header :address="address" :class="paddingClasses" :style="paddingInlineStyles"></address-header>
-                            </div>
-                                <!---->
-                                <div class="item-controls" v-if="address.id != -99">
-                                    <span class="item-edit ml-auto">
-                                        <button
-                                            v-tooltip
-                                            data-toggle="tooltip"
-                                            data-placement="top"
-                                            title="{{ trans("Ceres::Template.addressEditTooltip") }}"
-                                            class="btn btn-primary btn-medium btn-appearance mr-1"
-                                            @click.prevent="showEditModal(address)"
-                                            {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-edit'\"") | raw }}
-                                        >
-                                            <span>{{ trans("Ceres::Template.addressEdit") }}</span>
-                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                        </button>
-                                    </span>
-                                    <span class="item-remove">
-                                        <button
-                                            v-tooltip
-                                            data-toggle="tooltip"
-                                            data-placement="top"
-                                            title="{{ trans("Ceres::Template.addressDelete") }}"
-                                            class="btn btn-danger"
-                                            @click.prevent="showDeleteModal(address)"
-                                            {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-remove'\"") | raw }}
-                                        >
-                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                            </label>
-                        </li>
+                        <dynamic-scroller
+                            class="virtual-scroller"
+                            :items="addressList"
+                            :min-item-size="115"
+                            key-field="id">
+                            <template v-slot="{ item, index, active }">
+                                <DynamicScrollerItem
+                                    :item="item"
+                                    :active="active"
+                                    :data-index="index"
+                                    :watch-data="true"
+                                >
+                                    <li class="item">
+                                        <input
+                                            type="radio"
+                                            :name="'shippingAddress' + _uid"
+                                            :id="'addressSelectItem' + _uid + item.id"
+                                            :value="item.id"
+                                            :checked="selectedAddress && selectedAddress.id === item.id"
+                                            @change="onAddressChanged(item)">
+                                        <label :for="'addressSelectItem' + _uid + item.id" class="item-inner">
+                                        <div v-if="item.id == -99">
+                                            <p class="text-muted small font-italic pt-3">{{ trans("Ceres::Template.addressSameAsInvoice") }}</p>
+                                        </div>
+                                        <div v-else class="item-content small">
+                                            <address-header :address="item" :class="paddingClasses" :style="paddingInlineStyles"></address-header>
+                                        </div>
+                                            <!---->
+                                            <div class="item-controls" v-if="item.id != -99">
+                                                <span class="item-edit ml-auto">
+                                                    <button
+                                                        v-tooltip
+                                                        data-toggle="tooltip"
+                                                        data-placement="top"
+                                                        title="{{ trans("Ceres::Template.addressEditTooltip") }}"
+                                                        class="btn btn-primary btn-medium btn-appearance mr-1"
+                                                        @click.prevent="showEditModal(item)"
+                                                        {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-edit'\"") | raw }}
+                                                    >
+                                                        <span>{{ trans("Ceres::Template.addressEdit") }}</span>
+                                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                    </button>
+                                                </span>
+                                                <span class="item-remove">
+                                                    <button
+                                                        v-tooltip
+                                                        data-toggle="tooltip"
+                                                        data-placement="top"
+                                                        title="{{ trans("Ceres::Template.addressDelete") }}"
+                                                        class="btn btn-danger"
+                                                        @click.prevent="showDeleteModal(item)"
+                                                        {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-remove'\"") | raw }}
+                                                    >
+                                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </label>
+                                    </li>
+                                </DynamicScrollerItem>
+                            </template>
+
+                            
+                        </dynamic-scroller>
                     </ul>
                 </div>
             </div>
