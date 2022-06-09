@@ -7,14 +7,14 @@ const _eventListeners = {};
 
 export function initListener()
 {
-    $(document).ready(() =>
+    /*$(document).ready(() =>
     {
         $.ajaxSetup({
             headers: {
                 "X-CSRF-TOKEN": $("input[id=\"csrf-token\"]").val()
             }
         });
-    });
+    });*/
 
     $(document).ajaxComplete((ajaxEvent, xhr, options) =>
     {
