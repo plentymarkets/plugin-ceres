@@ -7,7 +7,7 @@ const _eventListeners = {};
 
 export function initListener()
 {
-    /*$(document).ready(() =>
+    /* $(document).ready(() =>
     {
         $.ajaxSetup({
             headers: {

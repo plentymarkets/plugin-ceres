@@ -63351,13 +63351,14 @@ var NotificationService = __webpack_require__(/*! ./NotificationService */ "./re
 
 var _eventListeners = {};
 function initListener() {
-  $(document).ready(function () {
-    $.ajaxSetup({
-      headers: {
-        "X-CSRF-TOKEN": $("input[id=\"csrf-token\"]").val()
-      }
-    });
-  });
+  /* $(document).ready(() =>
+  {
+      $.ajaxSetup({
+          headers: {
+              "X-CSRF-TOKEN": $("input[id=\"csrf-token\"]").val()
+          }
+      });
+  });*/
   $(document).ajaxComplete(function (ajaxEvent, xhr, options) {
     var response;
 
