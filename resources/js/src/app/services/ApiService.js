@@ -12,10 +12,12 @@ export function initListener()
         $.ajaxSetup({
             beforeSend: (jqxhr, settings) =>
             {
-                console.log("Running before send..");
-                if (settings.url.includes(document.location.hostname))
+                /*
+                    Setting the csrf token for every ajax call can hinder cross origin rest calls from workinmg.
+                    Using beforeSend makes sure that the header is only set for requests to our backend.
+                 */
+                if (settings.url.includes(document.location.hostname) || settings.url.startsWith("/"))
                 {
-                    console.log("Request to host, add header..");
                     jqxhr.setRequestHeader("X-CSRF-TOKEN", $("input[id=\"csrf-token\"]").val());
                 }
             }
