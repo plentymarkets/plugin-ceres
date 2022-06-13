@@ -85602,13 +85602,11 @@ var _eventListeners = {};
 function initListener() {
   $(document).ready(function () {
     $.ajaxSetup({
-      /* headers: {
-          "X-CSRF-TOKEN": $("input[id=\"csrf-token\"]").val()
-      }*/
       beforeSend: function beforeSend(jqxhr, settings) {
         console.log("Running before send..");
 
         if (settings.url.includes(document.location.hostname)) {
+          console.log("Request to host, add header..");
           jqxhr.setRequestHeader("X-CSRF-TOKEN", $("input[id=\"csrf-token\"]").val());
         }
       }

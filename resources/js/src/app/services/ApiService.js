@@ -10,14 +10,12 @@ export function initListener()
     $(document).ready(() =>
     {
         $.ajaxSetup({
-            /* headers: {
-                "X-CSRF-TOKEN": $("input[id=\"csrf-token\"]").val()
-            }*/
             beforeSend: (jqxhr, settings) =>
             {
                 console.log("Running before send..");
                 if (settings.url.includes(document.location.hostname))
                 {
+                    console.log("Request to host, add header..");
                     jqxhr.setRequestHeader("X-CSRF-TOKEN", $("input[id=\"csrf-token\"]").val());
                 }
             }
