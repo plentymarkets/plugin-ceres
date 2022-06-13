@@ -16,6 +16,10 @@ export function initListener()
             beforeSend: (jqxhr, settings) =>
             {
                 console.log("Running before send..");
+                if (settings.url.includes(document.location.hostname))
+                {
+                    jqxhr.setRequestHeader("X-CSRF-TOKEN", $("input[id=\"csrf-token\"]").val());
+                }
             }
         });
     });

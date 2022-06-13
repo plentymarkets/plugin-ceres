@@ -79604,8 +79604,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "send", function() { return send; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setToken", function() { return setToken; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getToken", function() { return getToken; });
-/* harmony import */ var _helper_url__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helper/url */ "./resources/js/src/app/helper/url.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.includes.js */ "./node_modules/core-js/modules/es.array.includes.js");
+/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.string.includes.js */ "./node_modules/core-js/modules/es.string.includes.js");
+/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _helper_url__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../helper/url */ "./resources/js/src/app/helper/url.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../helper/utils */ "./resources/js/src/app/helper/utils.js");
+
+
 
 
 
@@ -79620,6 +79626,10 @@ function initListener() {
       }*/
       beforeSend: function beforeSend(jqxhr, settings) {
         console.log("Running before send..");
+
+        if (settings.url.includes(document.location.hostname)) {
+          jqxhr.setRequestHeader("X-CSRF-TOKEN", $("input[id=\"csrf-token\"]").val());
+        }
       }
     });
   });
@@ -79659,14 +79669,14 @@ function listen(event, handler) {
   _eventListeners[event].push(handler);
 }
 function before(event, handler) {
-  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_1__["isNullOrUndefined"])(handler) && typeof event === "function") {
+  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isNullOrUndefined"])(handler) && typeof event === "function") {
     listen("_before", event);
   } else {
     listen("_before_" + event, handler);
   }
 }
 function after(event, handler) {
-  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_1__["isNullOrUndefined"])(handler) && typeof event === "function") {
+  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isNullOrUndefined"])(handler) && typeof event === "function") {
     listen("_after", event);
   } else {
     listen("_after_" + event, handler);
@@ -79709,8 +79719,8 @@ function send(url) {
   var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var config = arguments.length > 2 ? arguments[2] : undefined;
   var deferred = $.Deferred();
-  data = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_1__["isDefined"])(data) ? data : {};
-  url = Object(_helper_url__WEBPACK_IMPORTED_MODULE_0__["normalizeUrl"])(url);
+  data = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isDefined"])(data) ? data : {};
+  url = Object(_helper_url__WEBPACK_IMPORTED_MODULE_2__["normalizeUrl"])(url);
   config = config || {};
   config.dataType = config.dataType || "json";
   config.contentType = typeof config.contentType !== "undefined" ? config.contentType : "application/x-www-form-urlencoded; charset=UTF-8";
