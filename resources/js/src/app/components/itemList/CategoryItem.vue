@@ -72,16 +72,16 @@
 
                             <div class="price">
                                 <template v-if="item.item.itemType === 'set'">
-                                    {{ $translate("Ceres::Template.itemSetPrice", { price: itemSetPrice }) }} {{ $translate("Ceres::Template.categoryItemFootnote") }}
+                                    {{ $translate("Ceres::Template.itemSetPrice", { price: itemSetPrice }) }} {{ $translate("Ceres::Template.itemFootnote") }}
                                 </template>
                                 <template v-else-if="itemGraduatedPriceisCheapestSorting">
-                                    {{ $translate("Ceres::Template.categoryItemFromPrice", { price: itemPriceGraduated }) }} {{ $translate("Ceres::Template.categoryItemFootnote") }}
+                                    {{ $translate("Ceres::Template.itemFromPrice", { price: itemPriceGraduated }) }} {{ $translate("Ceres::Template.itemFootnote") }}
                                 </template>
                                 <template v-else-if="itemGraduatedPricesalableVariationCount">
-                                    {{ $translate("Ceres::Template.categoryItemFromPrice", { price: itemPriceGraduated }) }} {{ $translate("Ceres::Template.categoryItemFootnote") }}
+                                    {{ $translate("Ceres::Template.itemFromPrice", { price: itemPriceGraduated }) }} {{ $translate("Ceres::Template.itemFootnote") }}
                                 </template>
                                 <template v-else>
-                                    {{ item.prices.default.unitPrice.formatted | specialOffer(item.prices, "unitPrice", "formatted") }} {{ $translate("Ceres::Template.categoryItemFootnote") }}
+                                    {{ item.prices.default.unitPrice.formatted | specialOffer(item.prices, "unitPrice", "formatted") }} {{ $translate("Ceres::Template.itemFootnote") }}
                                 </template>
                             </div>
                         </div>
@@ -90,7 +90,7 @@
                     <slot name="after-prices"></slot>
 
                     <div class="category-lowest-price small" v-if="item.prices.default.lowestPrice.value && hasCrossPrice">
-                        <span v-html="$translate('Ceres::Template.categoryItemLowestPrice', {'price': item.prices.default.lowestPrice.formatted})"></span>
+                        <span v-html="$translate('Ceres::Template.itemLowestPrice', {'price': item.prices.default.lowestPrice.formatted})"></span>
                     </div>
 
                     <div class="category-unit-price small" v-if="!(item.unit.unitOfMeasurement === 'C62' && item.unit.content === 1)">
@@ -118,7 +118,7 @@
                     </add-to-basket>
 
                     <div class="vat small text-muted">
-                        {{ $translate("Ceres::Template.categoryItemFootnote") }} <span v-if="showNetPrices">{{ $translate("Ceres::Template.itemExclVAT") }}</span>
+                        {{ $translate("Ceres::Template.itemFootnote") }} <span v-if="showNetPrices">{{ $translate("Ceres::Template.itemExclVAT") }}</span>
                         <span v-else>{{ $translate("Ceres::Template.itemInclVAT") }}</span>
                         {{ $translate("Ceres::Template.itemExclusive") }}
                         <a v-if="$ceres.config.global.shippingCostsCategoryId > 0" data-toggle="modal" href="#shippingscosts" class="text-appearance" :title="$translate('Ceres::Template.itemShippingCosts')">{{ $translate("Ceres::Template.itemShippingCosts") }}</a>
