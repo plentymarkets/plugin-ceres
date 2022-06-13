@@ -85594,14 +85594,16 @@ var NotificationService = __webpack_require__(/*! ./NotificationService */ "./re
 
 var _eventListeners = {};
 function initListener() {
-  /* $(document).ready(() =>
-  {
-      $.ajaxSetup({
-          headers: {
-              "X-CSRF-TOKEN": $("input[id=\"csrf-token\"]").val()
-          }
-      });
-  });*/
+  $(document).ready(function () {
+    $.ajaxSetup({
+      /* headers: {
+          "X-CSRF-TOKEN": $("input[id=\"csrf-token\"]").val()
+      }*/
+      beforeSend: function beforeSend(jqxhr, settings) {
+        console.log("Running before send..");
+      }
+    });
+  });
   $(document).ajaxComplete(function (ajaxEvent, xhr, options) {
     var response;
 

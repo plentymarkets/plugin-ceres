@@ -7,14 +7,18 @@ const _eventListeners = {};
 
 export function initListener()
 {
-    /* $(document).ready(() =>
+    $(document).ready(() =>
     {
         $.ajaxSetup({
-            headers: {
+            /* headers: {
                 "X-CSRF-TOKEN": $("input[id=\"csrf-token\"]").val()
+            }*/
+            beforeSend: (jqxhr, settings) =>
+            {
+                console.log("Running before send..");
             }
         });
-    });*/
+    });
 
     $(document).ajaxComplete((ajaxEvent, xhr, options) =>
     {
