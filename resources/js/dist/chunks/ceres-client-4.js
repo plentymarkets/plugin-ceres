@@ -521,6 +521,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
@@ -1531,103 +1535,115 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _vm.isTouchDevice && _vm.property.names.description
-                ? _c("popper", {
-                    staticClass: "order-property-selection-info-popper",
-                    attrs: { placement: "bottom" },
-                    scopedSlots: _vm._u(
-                      [
-                        {
-                          key: "handle",
-                          fn: function() {
-                            return [
-                              _c(
-                                "button",
-                                {
-                                  staticClass:
-                                    "btn btn-icon btn-circle btn-default btn-appearance font-weight-bold"
-                                },
-                                [_vm._v("?")]
-                              )
-                            ]
-                          },
-                          proxy: true
-                        },
-                        {
-                          key: "content",
-                          fn: function() {
-                            return [
-                              _vm._v(
-                                "\n                " +
-                                  _vm._s(_vm.property.names.description) +
-                                  "\n            "
-                              )
-                            ]
-                          },
-                          proxy: true
-                        }
-                      ],
-                      null,
-                      false,
-                      1214237640
-                    )
-                  })
-                : _vm._e()
+              _c(
+                "client-only",
+                [
+                  _vm.isTouchDevice && _vm.property.names.description
+                    ? _c("popper", {
+                        staticClass: "order-property-selection-info-popper",
+                        attrs: { placement: "bottom" },
+                        scopedSlots: _vm._u(
+                          [
+                            {
+                              key: "handle",
+                              fn: function() {
+                                return [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "btn btn-icon btn-circle btn-default btn-appearance font-weight-bold"
+                                    },
+                                    [_vm._v("?")]
+                                  )
+                                ]
+                              },
+                              proxy: true
+                            },
+                            {
+                              key: "content",
+                              fn: function() {
+                                return [
+                                  _vm._v(
+                                    "\n                    " +
+                                      _vm._s(_vm.property.names.description) +
+                                      "\n                "
+                                  )
+                                ]
+                              },
+                              proxy: true
+                            }
+                          ],
+                          null,
+                          false,
+                          1618376136
+                        )
+                      })
+                    : _vm._e()
+                ],
+                1
+              )
             ],
             1
           )
         : _vm._e(),
       _vm._v(" "),
-      _vm.isTouchDevice &&
-      _vm.inputType !== "selection" &&
-      _vm.inputType !== "file" &&
-      _vm.property.names.description
-        ? _c("popper", {
-            staticClass:
-              "order-property-selection-info-popper position-absolute",
-            class: {
-              "checkbox-or-radio":
-                _vm.inputType === "checkbox" || _vm.inputType === "radio"
-            },
-            attrs: { placement: "bottom" },
-            scopedSlots: _vm._u(
-              [
-                {
-                  key: "handle",
-                  fn: function() {
-                    return [
-                      _c(
-                        "button",
-                        {
-                          staticClass:
-                            "btn btn-icon btn-circle btn-default btn-appearance font-weight-bold"
-                        },
-                        [_vm._v("?")]
-                      )
-                    ]
-                  },
-                  proxy: true
+      _c(
+        "client-only",
+        [
+          _vm.isTouchDevice &&
+          _vm.inputType !== "selection" &&
+          _vm.inputType !== "file" &&
+          _vm.property.names.description
+            ? _c("popper", {
+                staticClass:
+                  "order-property-selection-info-popper position-absolute",
+                class: {
+                  "checkbox-or-radio":
+                    _vm.inputType === "checkbox" || _vm.inputType === "radio"
                 },
-                {
-                  key: "content",
-                  fn: function() {
-                    return [
-                      _vm._v(
-                        "\n            " +
-                          _vm._s(_vm.property.names.description) +
-                          "\n        "
-                      )
-                    ]
-                  },
-                  proxy: true
-                }
-              ],
-              null,
-              false,
-              1093542344
-            )
-          })
-        : _vm._e()
+                attrs: { placement: "bottom" },
+                scopedSlots: _vm._u(
+                  [
+                    {
+                      key: "handle",
+                      fn: function() {
+                        return [
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "btn btn-icon btn-circle btn-default btn-appearance font-weight-bold"
+                            },
+                            [_vm._v("?")]
+                          )
+                        ]
+                      },
+                      proxy: true
+                    },
+                    {
+                      key: "content",
+                      fn: function() {
+                        return [
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(_vm.property.names.description) +
+                              "\n            "
+                          )
+                        ]
+                      },
+                      proxy: true
+                    }
+                  ],
+                  null,
+                  false,
+                  1214237640
+                )
+              })
+            : _vm._e()
+        ],
+        1
+      )
     ],
     1
   )
