@@ -17,6 +17,9 @@
     "require"           : {
         "IO": "~5.0.32"
     },
+    "platform": {
+        "php": ">=7.3 <8.1"
+    },
     "namespace"         : "Ceres",
     "serviceProvider"   : "Ceres\\Providers\\TemplateServiceProvider",
     "javaScriptFiles"   : [],
