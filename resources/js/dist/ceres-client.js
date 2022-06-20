@@ -66466,7 +66466,7 @@ function initListener() {
             Using beforeSend makes sure that the header is only set for requests to our backend.
          */
 
-        if (settings.url.includes(document.location.hostname) || settings.url.startsWith("/")) {
+        if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(token) && (settings.url.includes(document.location.hostname) || settings.url.startsWith("/"))) {
           console.log("Setting token... " + token);
           jqxhr.setRequestHeader("X-CSRF-TOKEN", token);
         }
