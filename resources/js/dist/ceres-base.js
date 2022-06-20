@@ -63361,14 +63361,18 @@ var NotificationService = __webpack_require__(/*! ./NotificationService */ "./re
 var _eventListeners = {};
 function initListener() {
   $(document).ready(function () {
+    var token = $("input[id=\"csrf-token\"]").val();
     $.ajaxSetup({
       beforeSend: function beforeSend(jqxhr, settings) {
+        console.log("Running beforeSend... " + settings.url);
         /*
             Setting the csrf token for every ajax call can hinder cross origin rest calls from workinmg.
             Using beforeSend makes sure that the header is only set for requests to our backend.
          */
+
         if (settings.url.includes(document.location.hostname) || settings.url.startsWith("/")) {
-          jqxhr.setRequestHeader("X-CSRF-TOKEN", $("input[id=\"csrf-token\"]").val());
+          console.log("Setting token... " + token);
+          jqxhr.setRequestHeader("X-CSRF-TOKEN", token);
         }
       }
     });
