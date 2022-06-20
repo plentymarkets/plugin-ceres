@@ -7,7 +7,6 @@ use Ceres\Helper\BuildHash;
 use IO\Extensions\Constants\ShopUrls;
 use IO\Helper\ContextInterface;
 use IO\Helper\Utils;
-use IO\Services\BasketService;
 use IO\Services\CategoryService;
 use IO\Services\CheckoutService;
 use IO\Services\NotificationService;
@@ -86,11 +85,6 @@ class GlobalContext implements ContextInterface
      * @var array $notifications List of all notifications stored in the session.
      */
     public $notifications;
-
-    /**
-     * @var array $basket The basket object.
-     */
-    public $basket;
 
     /**
      * @var WebstoreConfiguration $webstoreConfig The webstore configuration.
@@ -177,9 +171,6 @@ class GlobalContext implements ContextInterface
         /** @var WebstoreConfigurationRepositoryContract $webstoreConfigurationRepository */
         $webstoreConfigurationRepository = pluginApp(WebstoreConfigurationRepositoryContract::class);
 
-        /** @var BasketService $basketService */
-        $basketService = pluginApp(BasketService::class);
-
         /** @var CheckoutService $checkoutService */
         $checkoutService = pluginApp(CheckoutService::class);
 
@@ -233,8 +224,6 @@ class GlobalContext implements ContextInterface
         );
 
         $this->notifications = $notificationService->getNotifications();
-
-        $this->basket = $basketService->getBasketForTemplate();
 
         $this->currencyData = $checkoutService->getCurrencyData();
 
