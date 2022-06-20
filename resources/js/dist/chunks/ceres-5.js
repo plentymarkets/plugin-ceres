@@ -302,6 +302,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -387,6 +391,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     urlWithVariationId: function urlWithVariationId() {
       return !this.$ceres.config.item.showPleaseSelect || this.$ceres.initialPleaseSelect == 0 || this.forceUrlWithVariationId;
+    },
+    hasCrossPrice: function hasCrossPrice() {
+      var hasRrpPrice = !!this.item.prices.rrp && this.item.prices.rrp.unitPrice.value > this.item.prices.default.unitPrice.value;
+      var hasBeforePrice = !!this.item.prices.specialOffer && !!this.item.prices.default && this.item.prices.default.unitPrice.value > this.item.prices.specialOffer.unitPrice.value;
+      return hasRrpPrice || hasBeforePrice;
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_7__["mapState"])({
     showNetPrices: function showNetPrices(state) {
@@ -823,7 +832,7 @@ var render = function() {
                                     " " +
                                     _vm._s(
                                       _vm.$translate(
-                                        "Ceres::Template.categoryItemFootnote"
+                                        "Ceres::Template.itemFootnote"
                                       )
                                     ) +
                                     "\n                            "
@@ -835,14 +844,14 @@ var render = function() {
                                   "\n                                " +
                                     _vm._s(
                                       _vm.$translate(
-                                        "Ceres::Template.categoryItemFromPrice",
+                                        "Ceres::Template.itemFromPrice",
                                         { price: _vm.itemPriceGraduated }
                                       )
                                     ) +
                                     " " +
                                     _vm._s(
                                       _vm.$translate(
-                                        "Ceres::Template.categoryItemFootnote"
+                                        "Ceres::Template.itemFootnote"
                                       )
                                     ) +
                                     "\n                            "
@@ -854,14 +863,14 @@ var render = function() {
                                   "\n                                " +
                                     _vm._s(
                                       _vm.$translate(
-                                        "Ceres::Template.categoryItemFromPrice",
+                                        "Ceres::Template.itemFromPrice",
                                         { price: _vm.itemPriceGraduated }
                                       )
                                     ) +
                                     " " +
                                     _vm._s(
                                       _vm.$translate(
-                                        "Ceres::Template.categoryItemFootnote"
+                                        "Ceres::Template.itemFootnote"
                                       )
                                     ) +
                                     "\n                            "
@@ -882,7 +891,7 @@ var render = function() {
                                     " " +
                                     _vm._s(
                                       _vm.$translate(
-                                        "Ceres::Template.categoryItemFootnote"
+                                        "Ceres::Template.itemFootnote"
                                       )
                                     ) +
                                     "\n                            "
@@ -897,6 +906,21 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _vm._t("after-prices"),
+                _vm._v(" "),
+                _vm.item.prices.default.lowestPrice.value && _vm.hasCrossPrice
+                  ? _c("div", { staticClass: "category-lowest-price small" }, [
+                      _c("span", {
+                        domProps: {
+                          innerHTML: _vm._s(
+                            _vm.$translate("Ceres::Template.itemLowestPrice", {
+                              price:
+                                _vm.item.prices.default.lowestPrice.formatted
+                            })
+                          )
+                        }
+                      })
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
                 !(
                   _vm.item.unit.unitOfMeasurement === "C62" &&
@@ -956,9 +980,7 @@ var render = function() {
                 _c("div", { staticClass: "vat small text-muted" }, [
                   _vm._v(
                     "\n                    " +
-                      _vm._s(
-                        _vm.$translate("Ceres::Template.categoryItemFootnote")
-                      ) +
+                      _vm._s(_vm.$translate("Ceres::Template.itemFootnote")) +
                       " "
                   ),
                   _vm.showNetPrices

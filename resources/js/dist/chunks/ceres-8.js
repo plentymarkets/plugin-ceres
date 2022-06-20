@@ -260,6 +260,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -314,6 +322,9 @@ __webpack_require__.r(__webpack_exports__);
       return this.$translate('Ceres::Template.liveShoppingRrp', {
         'price': '<del>' + this.prices.rrp.unitPrice.formatted + '</del>'
       });
+    },
+    isCrossPriceVisible: function isCrossPriceVisible() {
+      return this.displaySettings.showCrossPrice && this.prices.rrp && this.prices.rrp.unitPrice.value > 0;
     }
   },
   created: function created() {
@@ -994,9 +1005,7 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _vm.displaySettings.showCrossPrice &&
-                _vm.prices.rrp &&
-                _vm.prices.rrp.unitPrice.value > 0
+                _vm.isCrossPriceVisible
                   ? _c("span", [
                       _vm.prices.isRrpDefaultPrice
                         ? _c("span", {
@@ -1014,11 +1023,31 @@ var render = function() {
               "div",
               { staticClass: "live-shopping-prices-additional-info" },
               [
+                _vm.isCrossPriceVisible &&
+                _vm.liveShoppingData.item.prices.default.lowestPrice.value
+                  ? _c("div", { staticClass: "live-shopping-lowest-price" }, [
+                      _c("span", {
+                        domProps: {
+                          innerHTML: _vm._s(
+                            _vm.$translate(
+                              "Ceres::Template.singleItemLowestPrice",
+                              {
+                                price:
+                                  _vm.liveShoppingData.item.prices.default
+                                    .lowestPrice.formatted
+                              }
+                            )
+                          )
+                        }
+                      })
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
                 !(
                   _vm.liveShoppingData.item.unit.unitOfMeasurement === "C62" &&
                   _vm.liveShoppingData.item.unit.content === 1
                 )
-                  ? _c("div", [
+                  ? _c("div", { staticClass: "live-shopping-unit-price" }, [
                       _c("span", [
                         _vm._v(_vm._s(_vm.liveShoppingData.item.unit.content))
                       ]),
@@ -1104,9 +1133,7 @@ var render = function() {
             _c("div", [
               _c("div", { staticClass: "prices" }, [
                 _c("div", { staticClass: "price-view-port" }, [
-                  _vm.displaySettings.showCrossPrice &&
-                  _vm.prices.rrp &&
-                  _vm.prices.rrp.price.value > 0
+                  _vm.isCrossPriceVisible
                     ? _c("del", { staticClass: "crossprice" }, [
                         _vm._v(
                           "\n                        " +
@@ -1129,6 +1156,26 @@ var render = function() {
                   )
                 ])
               ]),
+              _vm._v(" "),
+              _vm.isCrossPriceVisible &&
+              _vm.liveShoppingData.item.prices.default.lowestPrice.value
+                ? _c("div", { staticClass: "category-lowest-price small" }, [
+                    _c("span", {
+                      domProps: {
+                        innerHTML: _vm._s(
+                          _vm.$translate(
+                            "Ceres::Template.singleItemLowestPrice",
+                            {
+                              price:
+                                _vm.liveShoppingData.item.prices.default
+                                  .lowestPrice.formatted
+                            }
+                          )
+                        )
+                      }
+                    })
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               !(
                 _vm.liveShoppingData.item.unit.unitOfMeasurement === "C62" &&

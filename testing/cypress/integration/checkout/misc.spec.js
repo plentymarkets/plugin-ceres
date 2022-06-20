@@ -1,5 +1,7 @@
 context("Checkout misc", () =>
 {
+    const PRE_PAYMENT_ID = 6000;
+
     it("should show the info that the mail changed for user and hide it again after switching to original address", () =>
     {
         cy.login("mailchange@test.de");
@@ -49,6 +51,62 @@ context("Checkout misc", () =>
 
         cy.get(".mail-changed-info").should("not.exist");
     });
+
+    it("should not show basket item consent checkbox if no basket item with property is in the basket", () =>
+    {
+        cy.login("mailchange@test.de");
+        cy.addBasketItem(1014);
+        cy.visit("/checkout/");
+        cy.location("pathname").should("eq", "/checkout/");
+
+        cy.getByTestingAttr("basket-item-consent-check").should("not.exist");
+    });
+
+    it("should show basket item consent checkbox if basket item with property is in the basket", () =>
+    {
+        cy.login("mailchange@test.de");
+        cy.addBasketItem(1137);
+        cy.visit("/checkout/");
+        cy.location("pathname").should("eq", "/checkout/");
+
+        cy.getByTestingAttr("basket-item-consent-check").should("exist");
+    });
+
+    it("should fail when basket item consent checkbox is required and not checked", () =>
+    {
+        cy.login("mailchange@test.de");
+        cy.addBasketItem(1137);
+        cy.visit("/checkout/");
+        cy.location("pathname").should("eq", "/checkout/");
+
+        cy.getByTestingAttr("basket-item-consent-check").should("exist");
+
+        cy.get("input[id^=gtc-accept]").click();
+        cy.getByTestingAttr("place-order").click();
+
+        cy.get(".alert-danger").should("exist");
+        cy.getByTestingAttr("basket-item-consent-check").parent().should("have.class", "error");
+    });
+
+    it("should work when basket item consent checkbox is required and checked", () =>
+    {
+        cy.login("mailchange@test.de");
+        cy.addBasketItem(1137);
+        cy.visit("/checkout/");
+        cy.location("pathname").should("eq", "/checkout/");
+
+        cy.getByTestingAttr("basket-item-consent-check").click();
+
+        completeOrder();
+    });
+
+    function completeOrder()
+    {
+        cy.get(`[data-id='${PRE_PAYMENT_ID}']`).click();
+        cy.get("input[id^=gtc-accept]").click();
+        cy.getByTestingAttr("place-order").click();
+        cy.location("pathname").should("eq", "/bestellbestaetigung/");
+    }
 
     function addAddress()
     {

@@ -1760,6 +1760,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -1845,6 +1849,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     urlWithVariationId: function urlWithVariationId() {
       return !this.$ceres.config.item.showPleaseSelect || this.$ceres.initialPleaseSelect == 0 || this.forceUrlWithVariationId;
+    },
+    hasCrossPrice: function hasCrossPrice() {
+      var hasRrpPrice = !!this.item.prices.rrp && this.item.prices.rrp.unitPrice.value > this.item.prices.default.unitPrice.value;
+      var hasBeforePrice = !!this.item.prices.specialOffer && !!this.item.prices.default && this.item.prices.default.unitPrice.value > this.item.prices.specialOffer.unitPrice.value;
+      return hasRrpPrice || hasBeforePrice;
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_7__["mapState"])({
     showNetPrices: function showNetPrices(state) {
@@ -38658,7 +38667,7 @@ var render = function() {
                                     " " +
                                     _vm._s(
                                       _vm.$translate(
-                                        "Ceres::Template.categoryItemFootnote"
+                                        "Ceres::Template.itemFootnote"
                                       )
                                     ) +
                                     "\n                            "
@@ -38670,14 +38679,14 @@ var render = function() {
                                   "\n                                " +
                                     _vm._s(
                                       _vm.$translate(
-                                        "Ceres::Template.categoryItemFromPrice",
+                                        "Ceres::Template.itemFromPrice",
                                         { price: _vm.itemPriceGraduated }
                                       )
                                     ) +
                                     " " +
                                     _vm._s(
                                       _vm.$translate(
-                                        "Ceres::Template.categoryItemFootnote"
+                                        "Ceres::Template.itemFootnote"
                                       )
                                     ) +
                                     "\n                            "
@@ -38689,14 +38698,14 @@ var render = function() {
                                   "\n                                " +
                                     _vm._s(
                                       _vm.$translate(
-                                        "Ceres::Template.categoryItemFromPrice",
+                                        "Ceres::Template.itemFromPrice",
                                         { price: _vm.itemPriceGraduated }
                                       )
                                     ) +
                                     " " +
                                     _vm._s(
                                       _vm.$translate(
-                                        "Ceres::Template.categoryItemFootnote"
+                                        "Ceres::Template.itemFootnote"
                                       )
                                     ) +
                                     "\n                            "
@@ -38717,7 +38726,7 @@ var render = function() {
                                     " " +
                                     _vm._s(
                                       _vm.$translate(
-                                        "Ceres::Template.categoryItemFootnote"
+                                        "Ceres::Template.itemFootnote"
                                       )
                                     ) +
                                     "\n                            "
@@ -38732,6 +38741,21 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _vm._t("after-prices"),
+                _vm._v(" "),
+                _vm.item.prices.default.lowestPrice.value && _vm.hasCrossPrice
+                  ? _c("div", { staticClass: "category-lowest-price small" }, [
+                      _c("span", {
+                        domProps: {
+                          innerHTML: _vm._s(
+                            _vm.$translate("Ceres::Template.itemLowestPrice", {
+                              price:
+                                _vm.item.prices.default.lowestPrice.formatted
+                            })
+                          )
+                        }
+                      })
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
                 !(
                   _vm.item.unit.unitOfMeasurement === "C62" &&
@@ -38791,9 +38815,7 @@ var render = function() {
                 _c("div", { staticClass: "vat small text-muted" }, [
                   _vm._v(
                     "\n                    " +
-                      _vm._s(
-                        _vm.$translate("Ceres::Template.categoryItemFootnote")
-                      ) +
+                      _vm._s(_vm.$translate("Ceres::Template.itemFootnote")) +
                       " "
                   ),
                   _vm.showNetPrices
@@ -65438,18 +65460,24 @@ setJQuery(jquery__WEBPACK_IMPORTED_MODULE_4___default.a);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
-/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_parse_int_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.parse-int.js */ "./node_modules/core-js/modules/es.parse-int.js");
-/* harmony import */ var core_js_modules_es_parse_int_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_parse_int_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _helper_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./helper/dom */ "./resources/js/src/app/helper/dom.js");
-/* harmony import */ var _helper_featureDetect__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./helper/featureDetect */ "./resources/js/src/app/helper/featureDetect.js");
-/* harmony import */ var _helper_HeaderScroller__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./helper/HeaderScroller */ "./resources/js/src/app/helper/HeaderScroller.js");
+/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.string.replace.js */ "./node_modules/core-js/modules/es.string.replace.js");
+/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_parse_int_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.parse-int.js */ "./node_modules/core-js/modules/es.parse-int.js");
+/* harmony import */ var core_js_modules_es_parse_int_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_parse_int_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _helper_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./helper/dom */ "./resources/js/src/app/helper/dom.js");
+/* harmony import */ var _helper_featureDetect__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./helper/featureDetect */ "./resources/js/src/app/helper/featureDetect.js");
+/* harmony import */ var _helper_HeaderScroller__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./helper/HeaderScroller */ "./resources/js/src/app/helper/HeaderScroller.js");
+
+
 
 
 
@@ -65486,10 +65514,20 @@ function HeaderCollapse(selector) {
 function CeresMain() {
   var browser = browserDetect.detect();
 
-  if (browser && browser.name) {
-    $("html").addClass(browser.name);
+  if (browser) {
+    if (browser.name) {
+      $("html").addClass(browser.name);
+    } else {
+      $("html").addClass("unknown-browser");
+    }
+
+    if (browser.os) {
+      $("html").addClass(browser.os.toLowerCase().replace(/[^a-zA-Z0-9\-]/g, "-").replace("windows", "windows windows"));
+    } else {
+      $("html").addClass("unknown-os");
+    }
   } else {
-    $("html").addClass("unkown-os");
+    $("html").addClass("unknown-detect");
   }
 
   window.onpopstate = function (event) {
@@ -65552,7 +65590,7 @@ function CeresMain() {
           $(".back-to-top-center").fadeOut(duration);
         }
       }
-    }, Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_7__["detectPassiveEvents"])() ? {
+    }, Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_9__["detectPassiveEvents"])() ? {
       passive: true
     } : false);
     window.addEventListener("resize", function () {
@@ -65622,14 +65660,14 @@ var showShopNotification = function showShopNotification(event) {
 
 document.addEventListener("showShopNotification", showShopNotification); // fixate the header elements
 
-new _helper_HeaderScroller__WEBPACK_IMPORTED_MODULE_8__["default"]();
+new _helper_HeaderScroller__WEBPACK_IMPORTED_MODULE_10__["default"]();
 $(document).on("shopbuilder.after.drop shopbuilder.after.widget_replace", function (event, eventData, widgetElement) {
   var parent = widgetElement[1];
-  var parentComponent = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["getContainingComponent"])(parent);
-  var compiled = vue__WEBPACK_IMPORTED_MODULE_5___default.a.compile(widgetElement[0].outerHTML, {
+  var parentComponent = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_6__["getContainingComponent"])(parent);
+  var compiled = vue__WEBPACK_IMPORTED_MODULE_7___default.a.compile(widgetElement[0].outerHTML, {
     delimiters: ["${", "}"]
   });
-  var component = new vue__WEBPACK_IMPORTED_MODULE_5___default.a({
+  var component = new vue__WEBPACK_IMPORTED_MODULE_7___default.a({
     store: window.ceresStore,
     render: compiled.render,
     staticRenderFns: compiled.staticRenderFns,
@@ -65650,7 +65688,7 @@ function fixPopperZIndexes() {
   var elements = document.querySelectorAll(".popover.d-none");
   var counter = elements.length;
   elements.forEach(function (el) {
-    var zIndex = parseInt(Object(_helper_dom__WEBPACK_IMPORTED_MODULE_6__["getStyle"])(el, "z-index"));
+    var zIndex = parseInt(Object(_helper_dom__WEBPACK_IMPORTED_MODULE_8__["getStyle"])(el, "z-index"));
 
     if (!isNaN(zIndex)) {
       zIndex += --counter;
@@ -68846,15 +68884,18 @@ function _fillMissingData(state, item) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
 /* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.promise.js */ "./node_modules/core-js/modules/es.promise.js");
-/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.includes.js */ "./node_modules/core-js/modules/es.array.includes.js");
-/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.string.includes.js */ "./node_modules/core-js/modules/es.string.includes.js");
-/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.promise.js */ "./node_modules/core-js/modules/es.promise.js");
+/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.includes.js */ "./node_modules/core-js/modules/es.array.includes.js");
+/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.string.includes.js */ "./node_modules/core-js/modules/es.string.includes.js");
+/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+
 
 
 
@@ -68993,14 +69034,27 @@ var mutations = {
         showError = _ref3.showError;
     Vue.set(state.validation["subscribeNewsletter_".concat(emailFolder)], "showError", showError);
   },
+  addDynamicCheckoutValidator: function addDynamicCheckoutValidator(state, _ref4) {
+    var name = _ref4.name,
+        validator = _ref4.validator;
+    Vue.set(state.validation, "".concat(name), {
+      validate: validator,
+      showError: false
+    });
+  },
+  setDynamicCheckoutShowError: function setDynamicCheckoutShowError(state, _ref5) {
+    var name = _ref5.name,
+        showError = _ref5.showError;
+    Vue.set(state.validation[name], "showError", showError);
+  },
   setIsCheckoutReadonly: function setIsCheckoutReadonly(state, readOnly) {
     state.readOnly = !!readOnly;
   }
 };
 var actions = {
-  setCheckout: function setCheckout(_ref4, checkout) {
-    var commit = _ref4.commit,
-        dispatch = _ref4.dispatch;
+  setCheckout: function setCheckout(_ref6, checkout) {
+    var commit = _ref6.commit,
+        dispatch = _ref6.dispatch;
     commit("setShippingCountryId", checkout.shippingCountryId);
     commit("setShippingProfile", checkout.shippingProfileId);
     commit("setShippingProfileList", checkout.shippingProfileList);
@@ -69012,20 +69066,20 @@ var actions = {
     dispatch("setShippingProfileById", checkout.shippingProfileId);
     dispatch("initProfileAvailabilities");
   },
-  setShippingProfileById: function setShippingProfileById(_ref5, shippingProfileId) {
-    var state = _ref5.state,
-        commit = _ref5.commit;
+  setShippingProfileById: function setShippingProfileById(_ref7, shippingProfileId) {
+    var state = _ref7.state,
+        commit = _ref7.commit;
     var shippingProfile = state.shipping.shippingProfileList.find(function (profile) {
       return profile.parcelServicePresetId === shippingProfileId;
     });
 
-    if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_5__["isNullOrUndefined"])(shippingProfile)) {
+    if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_6__["isNullOrUndefined"])(shippingProfile)) {
       commit("setSelectedShippingProfile", shippingProfile);
     }
   },
-  selectMethodOfPayment: function selectMethodOfPayment(_ref6, methodOfPaymentId) {
-    var commit = _ref6.commit,
-        state = _ref6.state;
+  selectMethodOfPayment: function selectMethodOfPayment(_ref8, methodOfPaymentId) {
+    var commit = _ref8.commit,
+        state = _ref8.state;
     return new Promise(function (resolve, reject) {
       var oldMethodOfPayment = state.payment.methodOfPaymentId;
       commit("setIsBasketLoading", true);
@@ -69042,9 +69096,9 @@ var actions = {
       });
     });
   },
-  selectShippingProfile: function selectShippingProfile(_ref7, shippingProfile) {
-    var commit = _ref7.commit,
-        state = _ref7.state;
+  selectShippingProfile: function selectShippingProfile(_ref9, shippingProfile) {
+    var commit = _ref9.commit,
+        state = _ref9.state;
     return new Promise(function (resolve, reject) {
       var oldShippingProfile = state.shipping.shippingProfileId;
       var params = {
@@ -69077,9 +69131,9 @@ var actions = {
       });
     });
   },
-  refreshCheckout: function refreshCheckout(_ref8) {
-    var commit = _ref8.commit,
-        dispatch = _ref8.dispatch;
+  refreshCheckout: function refreshCheckout(_ref10) {
+    var commit = _ref10.commit,
+        dispatch = _ref10.dispatch;
     return new Promise(function (resolve, reject) {
       ApiService.get("/rest/io/checkout/").done(function (checkout) {
         dispatch("setCheckout", checkout);
@@ -69089,13 +69143,13 @@ var actions = {
       });
     });
   },
-  initProfileAvailabilities: function initProfileAvailabilities(_ref9) {
-    var commit = _ref9.commit,
-        state = _ref9.state;
-    commit("setParcelBoxAvailability", !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_5__["isNullOrUndefined"])(state.shipping.shippingProfileList.find(function (shipping) {
+  initProfileAvailabilities: function initProfileAvailabilities(_ref11) {
+    var commit = _ref11.commit,
+        state = _ref11.state;
+    commit("setParcelBoxAvailability", !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_6__["isNullOrUndefined"])(state.shipping.shippingProfileList.find(function (shipping) {
       return shipping.isParcelBox;
     })));
-    commit("setPostOfficeAvailability", !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_5__["isNullOrUndefined"])(state.shipping.shippingProfileList.find(function (shipping) {
+    commit("setPostOfficeAvailability", !Object(_helper_utils__WEBPACK_IMPORTED_MODULE_6__["isNullOrUndefined"])(state.shipping.shippingProfileList.find(function (shipping) {
       return shipping.isPostOffice;
     })));
   }

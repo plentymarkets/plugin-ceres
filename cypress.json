@@ -11,5 +11,6 @@
     "defaultCommandTimeout": 10000,
     "scrollBehavior": "center",
     "viewportWidth": 1024,
-    "viewportHeight": 768
+    "viewportHeight": 768,
+    "retries": 1
 }

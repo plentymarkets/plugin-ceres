@@ -82,4 +82,20 @@ context("Live shopping", () =>
         cy.get(`[data-testing='1071'] .add-to-basket-lg-container`).click();
         cy.getByTestingAttr("basket-preview-button").should("contain", ACTIVE_LIVE_SHOPPING_PRICE);
     });
+
+    it("Should show the lowest price for active live shopping item", () =>
+    {
+        cy.visit("/live-shopping-preis-der-letzten-30-tage/");
+        cy.wait(500);
+
+        cy.get("article[data-testing='1138'] .live-shopping-lowest-price").should("exist");
+    });
+
+    it("Should show the lowest price for inactive live shopping item", () =>
+    {
+        cy.visit("/live-shopping-preis-der-letzten-30-tage/");
+        cy.wait(500);
+
+        cy.get("article[data-testing='1072'] .category-lowest-price").should("exist");
+    });
 });

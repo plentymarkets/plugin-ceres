@@ -11265,6 +11265,7 @@ body.basket-open {
         color: $gray-600;
     }
 
+    .category-lowest-price,
     .category-unit-price {
         color: $gray-500;
     }
@@ -14606,7 +14607,6 @@ header .widget {
     }
 }
 
-@use "sass:selector";
 // stylelint-disable declaration-no-important
 @each $color, $value in $shop-builder-colors {
   .widget-#{$color} {

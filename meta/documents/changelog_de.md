@@ -1,5 +1,24 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.51 (2022-05-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.50...5.0.51" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Neu
+
+- Es wurde eine Ausgabe des Preises der letzten 30 Tage hinzugefügt. Die Information wird ausgegeben, wenn ein Artikel einen Preis der letzten 30 Tage hat und ein Streichpreis angezeigt wird.
+- Für die Kasse wurde das Widget **Zustimmung im Checkout** hinzugefügt.
+
+### Behoben
+
+- Die Schaltfläche zum Anzeigen von mehr Artikelinformationen überlagert nicht mehr das Mega-Menü überlagert.
+- Auf der Bestellbestätigungsseite wurde in der Artikelliste teilweise ein Gesamtrabatt von 0,00€ ausgewiesen. Das wurde behoben.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.51 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- [resources/views/Checkout/OrderDetails.twig](https://github.com/plentymarkets/plugin-ceres/pull/3275/files#diff-49e9a28ec33181e8fd3720d39345363b8b0614f2bf29ceb66b403ef22c18bd4d)
+- [resources/views/MyAccount/Partials/OrderHistoryListItemDetails.twig](https://github.com/plentymarkets/plugin-ceres/pull/3275/files#diff-dcc9c181484eba069617434b9c7c20b7906e9ab74907f134720e220a818c968a)
+- [resources/views/Widgets/OrderConfirmation/PurchasedItemsWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3275/files#diff-2cee15b4b8add92d304d2f4cbbb5a5891a5752c533b564f1e1d152982c1e62d0)
+
 ## v5.0.50 (2022-05-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.49...5.0.50" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Geändert
@@ -90,13 +109,13 @@
 ### TODO
 
 - Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
-- Standardmäßig werden Staffelpreise auf Kategorieseiten jetzt mit einem "ab" davor angezeigt. Nutzer:innen können das "ab" im Menü **CMS » Mehrsprachigkeit** entfernen. Der entsprechende Übersetzungsschlüssel ist **categoryItemFromPrice**.
+- Standardmäßig werden Staffelpreise auf Kategorieseiten jetzt mit einem "ab" davor angezeigt. Nutzer:innen können das "ab" im Menü **CMS » Mehrsprachigkeit** entfernen. Der entsprechende Übersetzungsschlüssel ist **itemFromPrice**.
 
 ### Hinzugefügt
 
 - ShopBooster unterstützt nun blockweises Cachen von Shop-Inhalten. Im plentyShop LTS-Standard werden Header, Footer und Artikelkacheln (bspw. in Artikellisten) als Blöcke in den Cache geschrieben. Dadurch erhöht sich die Cache-Abdeckung des ShopBoosters. 
 - Die ShopBuilder-Vorlage für die Startseite wurde grundlegend überarbeitet. Sie enthält jetzt Demobilder, Demotexte und eine Zusammenstellung verschiedener Widgets.
-- Die Asterisk-Zeichen für Fußnoten auf der Artikeleinzelansicht, Kategorieseite und Liveshopping-Seite sind jetzt über das Menü **CMS » Mehrsprachigkeit** anpassbar. Die entsprechenden Übersetzungsschlüssel sind **singleItemFootnote1**, **categoryItemFootnote** und **liveShoppingFootnote**.
+- Die Asterisk-Zeichen für Fußnoten auf der Artikeleinzelansicht, Kategorieseite und Liveshopping-Seite sind jetzt über das Menü **CMS » Mehrsprachigkeit** anpassbar. Die entsprechenden Übersetzungsschlüssel sind **singleItemFootnote1**, **itemFootnote** und **liveShoppingFootnote**.
 
 ### Geändert
 
@@ -106,7 +125,7 @@
 
 ### Behoben
 
-- In der Kategorieansicht wird jetzt der hinterlegte Staffelpreis angezeigt und mit einem "ab" gekennzeichnet. Der dazugehörige Übersetzungsschlüssel ist **categoryItemFromPrice**.
+- In der Kategorieansicht wird jetzt der hinterlegte Staffelpreis angezeigt und mit einem "ab" gekennzeichnet. Der dazugehörige Übersetzungsschlüssel ist **itemFromPrice**.
 - Das Template der **Zur Wunschliste**-Komponente wurde von einem `a-tag` in ein `button-tag` geändert.
 - Die Option **Kategorien als Filteroptionen bei Suchergebnissen anzeigen** wurde umbenannt. Weiterhin wurde ein Fehler beim Speichern dieser Option behoben.
 - Unter gewissen Umständen konnte das Sticky-Container-Widget die Warenkorbvorschau überlagern. Dies wurde behoben.
@@ -1289,7 +1308,7 @@
 - Im Auftragshistorie-Widget wurde eine Schaltfläche hinzugefügt, über die man die Bestellbestätigungsseite des jeweiligen Auftrags öffnen kann. Dadurch ist es möglich, Artikel einer Bestellung auch aus dem Mein Konto-Bereich zu bewerten.
 - Auf der Artikeleinzelansicht wird nun das Feld "url" in den Mikrodaten befüllt.
 - Die Sortierung der Varianten auf der Artikelkachel in Artikellisten und der Kategorieansicht kann nun über den Ceres-Assistenten eingestellt werden. 
-- Der Eintrag **categoryItemFromPrice** wurde zur Mehrsprachigkeits-Oberfläche hinzugefügt. Mit diesem kann in Artikellisten ein "ab" vor dem Preis angezeigt werden, wenn die Artikelkachel die billigste Variante anzeigt und es mehr als eine kaufbare Variante gibt. 
+- Der Eintrag **itemFromPrice** wurde zur Mehrsprachigkeits-Oberfläche hinzugefügt. Mit diesem kann in Artikellisten ein "ab" vor dem Preis angezeigt werden, wenn die Artikelkachel die billigste Variante anzeigt und es mehr als eine kaufbare Variante gibt. 
 
 ### Geändert
 
