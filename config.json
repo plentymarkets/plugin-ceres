@@ -2839,14 +2839,6 @@
                         "defaultValue": "true"
                     }
                 },
-                "my_account.confirmation_link_login_redirect": {
-                    "type": "checkBox",
-                    "required": false,
-                    "label": "Config.myAccountConfirmationLinkLoginRedirectLabel",
-                    "options": {
-                        "defaultValue": "false"
-                    }
-                },
                 "checkout.show_all_shipping_profiles": {
                     "type": "checkBox",
                     "required": false,

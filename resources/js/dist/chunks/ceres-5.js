@@ -832,7 +832,7 @@ var render = function() {
                                     " " +
                                     _vm._s(
                                       _vm.$translate(
-                                        "Ceres::Template.categoryItemFootnote"
+                                        "Ceres::Template.itemFootnote"
                                       )
                                     ) +
                                     "\n                            "
@@ -844,14 +844,14 @@ var render = function() {
                                   "\n                                " +
                                     _vm._s(
                                       _vm.$translate(
-                                        "Ceres::Template.categoryItemFromPrice",
+                                        "Ceres::Template.itemFromPrice",
                                         { price: _vm.itemPriceGraduated }
                                       )
                                     ) +
                                     " " +
                                     _vm._s(
                                       _vm.$translate(
-                                        "Ceres::Template.categoryItemFootnote"
+                                        "Ceres::Template.itemFootnote"
                                       )
                                     ) +
                                     "\n                            "
@@ -863,14 +863,14 @@ var render = function() {
                                   "\n                                " +
                                     _vm._s(
                                       _vm.$translate(
-                                        "Ceres::Template.categoryItemFromPrice",
+                                        "Ceres::Template.itemFromPrice",
                                         { price: _vm.itemPriceGraduated }
                                       )
                                     ) +
                                     " " +
                                     _vm._s(
                                       _vm.$translate(
-                                        "Ceres::Template.categoryItemFootnote"
+                                        "Ceres::Template.itemFootnote"
                                       )
                                     ) +
                                     "\n                            "
@@ -891,7 +891,7 @@ var render = function() {
                                     " " +
                                     _vm._s(
                                       _vm.$translate(
-                                        "Ceres::Template.categoryItemFootnote"
+                                        "Ceres::Template.itemFootnote"
                                       )
                                     ) +
                                     "\n                            "
@@ -912,13 +912,10 @@ var render = function() {
                       _c("span", {
                         domProps: {
                           innerHTML: _vm._s(
-                            _vm.$translate(
-                              "Ceres::Template.categoryItemLowestPrice",
-                              {
-                                price:
-                                  _vm.item.prices.default.lowestPrice.formatted
-                              }
-                            )
+                            _vm.$translate("Ceres::Template.itemLowestPrice", {
+                              price:
+                                _vm.item.prices.default.lowestPrice.formatted
+                            })
                           )
                         }
                       })
@@ -983,9 +980,7 @@ var render = function() {
                 _c("div", { staticClass: "vat small text-muted" }, [
                   _vm._v(
                     "\n                    " +
-                      _vm._s(
-                        _vm.$translate("Ceres::Template.categoryItemFootnote")
-                      ) +
+                      _vm._s(_vm.$translate("Ceres::Template.itemFootnote")) +
                       " "
                   ),
                   _vm.showNetPrices

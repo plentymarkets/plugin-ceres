@@ -56,12 +56,7 @@
                 box-shadow: inset 0 0 0 .1rem $primary;
             }
         }
-
-        &:last-of-type {
-            border-bottom: none;
-        }
     }
-
 
     .item-inner {
         display: flex;

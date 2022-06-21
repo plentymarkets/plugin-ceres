@@ -4,6 +4,7 @@ import TranslationService from "../../../services/TranslationService";
 import Vue from "vue";
 import { mapState } from "vuex";
 import CreateUpdateAddress from "./CreateUpdateAddress/CreateUpdateAddress";
+import { DynamicScroller } from "vue-virtual-scroller";
 
 const ApiService = require("../../../services/ApiService");
 const ModalService = require("../../../services/ModalService");
@@ -12,7 +13,8 @@ export default Vue.component("address-select", {
 
     components:
     {
-        CreateUpdateAddress
+        CreateUpdateAddress,
+        DynamicScroller
     },
 
     props:

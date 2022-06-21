@@ -62498,18 +62498,24 @@ setJQuery(jquery__WEBPACK_IMPORTED_MODULE_4___default.a);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
-/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_parse_int_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.parse-int.js */ "./node_modules/core-js/modules/es.parse-int.js");
-/* harmony import */ var core_js_modules_es_parse_int_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_parse_int_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _helper_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./helper/dom */ "./resources/js/src/app/helper/dom.js");
-/* harmony import */ var _helper_featureDetect__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./helper/featureDetect */ "./resources/js/src/app/helper/featureDetect.js");
-/* harmony import */ var _helper_HeaderScroller__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./helper/HeaderScroller */ "./resources/js/src/app/helper/HeaderScroller.js");
+/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.string.replace.js */ "./node_modules/core-js/modules/es.string.replace.js");
+/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_parse_int_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.parse-int.js */ "./node_modules/core-js/modules/es.parse-int.js");
+/* harmony import */ var core_js_modules_es_parse_int_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_parse_int_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _helper_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./helper/dom */ "./resources/js/src/app/helper/dom.js");
+/* harmony import */ var _helper_featureDetect__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./helper/featureDetect */ "./resources/js/src/app/helper/featureDetect.js");
+/* harmony import */ var _helper_HeaderScroller__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./helper/HeaderScroller */ "./resources/js/src/app/helper/HeaderScroller.js");
+
+
 
 
 
@@ -62546,10 +62552,20 @@ function HeaderCollapse(selector) {
 function CeresMain() {
   var browser = browserDetect.detect();
 
-  if (browser && browser.name) {
-    $("html").addClass(browser.name);
+  if (browser) {
+    if (browser.name) {
+      $("html").addClass(browser.name);
+    } else {
+      $("html").addClass("unknown-browser");
+    }
+
+    if (browser.os) {
+      $("html").addClass(browser.os.toLowerCase().replace(/[^a-zA-Z0-9\-]/g, "-").replace("windows", "windows windows"));
+    } else {
+      $("html").addClass("unknown-os");
+    }
   } else {
-    $("html").addClass("unkown-os");
+    $("html").addClass("unknown-detect");
   }
 
   window.onpopstate = function (event) {
@@ -62612,7 +62628,7 @@ function CeresMain() {
           $(".back-to-top-center").fadeOut(duration);
         }
       }
-    }, Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_7__["detectPassiveEvents"])() ? {
+    }, Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_9__["detectPassiveEvents"])() ? {
       passive: true
     } : false);
     window.addEventListener("resize", function () {
@@ -62682,14 +62698,14 @@ var showShopNotification = function showShopNotification(event) {
 
 document.addEventListener("showShopNotification", showShopNotification); // fixate the header elements
 
-new _helper_HeaderScroller__WEBPACK_IMPORTED_MODULE_8__["default"]();
+new _helper_HeaderScroller__WEBPACK_IMPORTED_MODULE_10__["default"]();
 $(document).on("shopbuilder.after.drop shopbuilder.after.widget_replace", function (event, eventData, widgetElement) {
   var parent = widgetElement[1];
-  var parentComponent = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["getContainingComponent"])(parent);
-  var compiled = vue__WEBPACK_IMPORTED_MODULE_5___default.a.compile(widgetElement[0].outerHTML, {
+  var parentComponent = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_6__["getContainingComponent"])(parent);
+  var compiled = vue__WEBPACK_IMPORTED_MODULE_7___default.a.compile(widgetElement[0].outerHTML, {
     delimiters: ["${", "}"]
   });
-  var component = new vue__WEBPACK_IMPORTED_MODULE_5___default.a({
+  var component = new vue__WEBPACK_IMPORTED_MODULE_7___default.a({
     store: window.ceresStore,
     render: compiled.render,
     staticRenderFns: compiled.staticRenderFns,
@@ -62710,7 +62726,7 @@ function fixPopperZIndexes() {
   var elements = document.querySelectorAll(".popover.d-none");
   var counter = elements.length;
   elements.forEach(function (el) {
-    var zIndex = parseInt(Object(_helper_dom__WEBPACK_IMPORTED_MODULE_6__["getStyle"])(el, "z-index"));
+    var zIndex = parseInt(Object(_helper_dom__WEBPACK_IMPORTED_MODULE_8__["getStyle"])(el, "z-index"));
 
     if (!isNaN(zIndex)) {
       zIndex += --counter;
@@ -63326,8 +63342,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "send", function() { return send; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setToken", function() { return setToken; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getToken", function() { return getToken; });
-/* harmony import */ var _helper_url__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helper/url */ "./resources/js/src/app/helper/url.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.includes.js */ "./node_modules/core-js/modules/es.array.includes.js");
+/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.string.includes.js */ "./node_modules/core-js/modules/es.string.includes.js");
+/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_string_starts_with_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.string.starts-with.js */ "./node_modules/core-js/modules/es.string.starts-with.js");
+/* harmony import */ var core_js_modules_es_string_starts_with_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_starts_with_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _helper_url__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../helper/url */ "./resources/js/src/app/helper/url.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../helper/utils */ "./resources/js/src/app/helper/utils.js");
+
+
+
 
 
 
@@ -63336,9 +63361,16 @@ var NotificationService = __webpack_require__(/*! ./NotificationService */ "./re
 var _eventListeners = {};
 function initListener() {
   $(document).ready(function () {
+    var token = $("input[id=\"csrf-token\"]").val();
     $.ajaxSetup({
-      headers: {
-        "X-CSRF-TOKEN": $("input[id=\"csrf-token\"]").val()
+      beforeSend: function beforeSend(jqxhr, settings) {
+        /*
+            Setting the csrf token for every ajax call can hinder cross origin rest calls from workinmg.
+            Using beforeSend makes sure that the header is only set for requests to our backend.
+         */
+        if (token && (settings.url.includes(document.location.hostname) || settings.url.startsWith("/"))) {
+          jqxhr.setRequestHeader("X-CSRF-TOKEN", token);
+        }
       }
     });
   });
@@ -63378,14 +63410,14 @@ function listen(event, handler) {
   _eventListeners[event].push(handler);
 }
 function before(event, handler) {
-  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_1__["isNullOrUndefined"])(handler) && typeof event === "function") {
+  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(handler) && typeof event === "function") {
     listen("_before", event);
   } else {
     listen("_before_" + event, handler);
   }
 }
 function after(event, handler) {
-  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_1__["isNullOrUndefined"])(handler) && typeof event === "function") {
+  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(handler) && typeof event === "function") {
     listen("_after", event);
   } else {
     listen("_after_" + event, handler);
@@ -63428,8 +63460,8 @@ function send(url) {
   var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var config = arguments.length > 2 ? arguments[2] : undefined;
   var deferred = $.Deferred();
-  data = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_1__["isDefined"])(data) ? data : {};
-  url = Object(_helper_url__WEBPACK_IMPORTED_MODULE_0__["normalizeUrl"])(url);
+  data = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isDefined"])(data) ? data : {};
+  url = Object(_helper_url__WEBPACK_IMPORTED_MODULE_3__["normalizeUrl"])(url);
   config = config || {};
   config.dataType = config.dataType || "json";
   config.contentType = typeof config.contentType !== "undefined" ? config.contentType : "application/x-www-form-urlencoded; charset=UTF-8";

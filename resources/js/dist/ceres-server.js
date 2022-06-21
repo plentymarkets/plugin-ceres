@@ -8074,6 +8074,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
@@ -50262,103 +50266,115 @@ var render = function() {
                 ]
               ),
               _vm._ssrNode(" "),
-              _vm.isTouchDevice && _vm.property.names.description
-                ? _c("popper", {
-                    staticClass: "order-property-selection-info-popper",
-                    attrs: { placement: "bottom" },
-                    scopedSlots: _vm._u(
-                      [
-                        {
-                          key: "handle",
-                          fn: function() {
-                            return [
-                              _c(
-                                "button",
-                                {
-                                  staticClass:
-                                    "btn btn-icon btn-circle btn-default btn-appearance font-weight-bold"
-                                },
-                                [_vm._v("?")]
-                              )
-                            ]
-                          },
-                          proxy: true
-                        },
-                        {
-                          key: "content",
-                          fn: function() {
-                            return [
-                              _vm._v(
-                                "\n                " +
-                                  _vm._s(_vm.property.names.description) +
-                                  "\n            "
-                              )
-                            ]
-                          },
-                          proxy: true
-                        }
-                      ],
-                      null,
-                      false,
-                      1214237640
-                    )
-                  })
-                : _vm._e()
+              _c(
+                "client-only",
+                [
+                  _vm.isTouchDevice && _vm.property.names.description
+                    ? _c("popper", {
+                        staticClass: "order-property-selection-info-popper",
+                        attrs: { placement: "bottom" },
+                        scopedSlots: _vm._u(
+                          [
+                            {
+                              key: "handle",
+                              fn: function() {
+                                return [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "btn btn-icon btn-circle btn-default btn-appearance font-weight-bold"
+                                    },
+                                    [_vm._v("?")]
+                                  )
+                                ]
+                              },
+                              proxy: true
+                            },
+                            {
+                              key: "content",
+                              fn: function() {
+                                return [
+                                  _vm._v(
+                                    "\n                    " +
+                                      _vm._s(_vm.property.names.description) +
+                                      "\n                "
+                                  )
+                                ]
+                              },
+                              proxy: true
+                            }
+                          ],
+                          null,
+                          false,
+                          1618376136
+                        )
+                      })
+                    : _vm._e()
+                ],
+                1
+              )
             ],
             2
           )
         : _vm._e(),
       _vm._ssrNode(" "),
-      _vm.isTouchDevice &&
-      _vm.inputType !== "selection" &&
-      _vm.inputType !== "file" &&
-      _vm.property.names.description
-        ? _c("popper", {
-            staticClass:
-              "order-property-selection-info-popper position-absolute",
-            class: {
-              "checkbox-or-radio":
-                _vm.inputType === "checkbox" || _vm.inputType === "radio"
-            },
-            attrs: { placement: "bottom" },
-            scopedSlots: _vm._u(
-              [
-                {
-                  key: "handle",
-                  fn: function() {
-                    return [
-                      _c(
-                        "button",
-                        {
-                          staticClass:
-                            "btn btn-icon btn-circle btn-default btn-appearance font-weight-bold"
-                        },
-                        [_vm._v("?")]
-                      )
-                    ]
-                  },
-                  proxy: true
+      _c(
+        "client-only",
+        [
+          _vm.isTouchDevice &&
+          _vm.inputType !== "selection" &&
+          _vm.inputType !== "file" &&
+          _vm.property.names.description
+            ? _c("popper", {
+                staticClass:
+                  "order-property-selection-info-popper position-absolute",
+                class: {
+                  "checkbox-or-radio":
+                    _vm.inputType === "checkbox" || _vm.inputType === "radio"
                 },
-                {
-                  key: "content",
-                  fn: function() {
-                    return [
-                      _vm._v(
-                        "\n            " +
-                          _vm._s(_vm.property.names.description) +
-                          "\n        "
-                      )
-                    ]
-                  },
-                  proxy: true
-                }
-              ],
-              null,
-              false,
-              1093542344
-            )
-          })
-        : _vm._e()
+                attrs: { placement: "bottom" },
+                scopedSlots: _vm._u(
+                  [
+                    {
+                      key: "handle",
+                      fn: function() {
+                        return [
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "btn btn-icon btn-circle btn-default btn-appearance font-weight-bold"
+                            },
+                            [_vm._v("?")]
+                          )
+                        ]
+                      },
+                      proxy: true
+                    },
+                    {
+                      key: "content",
+                      fn: function() {
+                        return [
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(_vm.property.names.description) +
+                              "\n            "
+                          )
+                        ]
+                      },
+                      proxy: true
+                    }
+                  ],
+                  null,
+                  false,
+                  1214237640
+                )
+              })
+            : _vm._e()
+        ],
+        1
+      )
     ],
     2
   )
@@ -52581,7 +52597,7 @@ var render = function() {
                                     " " +
                                     _vm._s(
                                       _vm.$translate(
-                                        "Ceres::Template.categoryItemFootnote"
+                                        "Ceres::Template.itemFootnote"
                                       )
                                     ) +
                                     "\n                            "
@@ -52593,14 +52609,14 @@ var render = function() {
                                   "\n                                " +
                                     _vm._s(
                                       _vm.$translate(
-                                        "Ceres::Template.categoryItemFromPrice",
+                                        "Ceres::Template.itemFromPrice",
                                         { price: _vm.itemPriceGraduated }
                                       )
                                     ) +
                                     " " +
                                     _vm._s(
                                       _vm.$translate(
-                                        "Ceres::Template.categoryItemFootnote"
+                                        "Ceres::Template.itemFootnote"
                                       )
                                     ) +
                                     "\n                            "
@@ -52612,14 +52628,14 @@ var render = function() {
                                   "\n                                " +
                                     _vm._s(
                                       _vm.$translate(
-                                        "Ceres::Template.categoryItemFromPrice",
+                                        "Ceres::Template.itemFromPrice",
                                         { price: _vm.itemPriceGraduated }
                                       )
                                     ) +
                                     " " +
                                     _vm._s(
                                       _vm.$translate(
-                                        "Ceres::Template.categoryItemFootnote"
+                                        "Ceres::Template.itemFootnote"
                                       )
                                     ) +
                                     "\n                            "
@@ -52640,7 +52656,7 @@ var render = function() {
                                     " " +
                                     _vm._s(
                                       _vm.$translate(
-                                        "Ceres::Template.categoryItemFootnote"
+                                        "Ceres::Template.itemFootnote"
                                       )
                                     ) +
                                     "\n                            "
@@ -52661,13 +52677,10 @@ var render = function() {
                       _c("span", {
                         domProps: {
                           innerHTML: _vm._s(
-                            _vm.$translate(
-                              "Ceres::Template.categoryItemLowestPrice",
-                              {
-                                price:
-                                  _vm.item.prices.default.lowestPrice.formatted
-                              }
-                            )
+                            _vm.$translate("Ceres::Template.itemLowestPrice", {
+                              price:
+                                _vm.item.prices.default.lowestPrice.formatted
+                            })
                           )
                         }
                       })
@@ -52732,9 +52745,7 @@ var render = function() {
                 _c("div", { staticClass: "vat small text-muted" }, [
                   _vm._v(
                     "\n                    " +
-                      _vm._s(
-                        _vm.$translate("Ceres::Template.categoryItemFootnote")
-                      ) +
+                      _vm._s(_vm.$translate("Ceres::Template.itemFootnote")) +
                       " "
                   ),
                   _vm.showNetPrices
@@ -85590,8 +85601,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "send", function() { return send; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setToken", function() { return setToken; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getToken", function() { return getToken; });
-/* harmony import */ var _helper_url__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helper/url */ "./resources/js/src/app/helper/url.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.includes.js */ "./node_modules/core-js/modules/es.array.includes.js");
+/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.string.includes.js */ "./node_modules/core-js/modules/es.string.includes.js");
+/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_string_starts_with_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.string.starts-with.js */ "./node_modules/core-js/modules/es.string.starts-with.js");
+/* harmony import */ var core_js_modules_es_string_starts_with_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_starts_with_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _helper_url__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../helper/url */ "./resources/js/src/app/helper/url.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../helper/utils */ "./resources/js/src/app/helper/utils.js");
+
+
+
 
 
 
@@ -85600,9 +85620,16 @@ var NotificationService = __webpack_require__(/*! ./NotificationService */ "./re
 var _eventListeners = {};
 function initListener() {
   $(document).ready(function () {
+    var token = $("input[id=\"csrf-token\"]").val();
     $.ajaxSetup({
-      headers: {
-        "X-CSRF-TOKEN": $("input[id=\"csrf-token\"]").val()
+      beforeSend: function beforeSend(jqxhr, settings) {
+        /*
+            Setting the csrf token for every ajax call can hinder cross origin rest calls from workinmg.
+            Using beforeSend makes sure that the header is only set for requests to our backend.
+         */
+        if (token && (settings.url.includes(document.location.hostname) || settings.url.startsWith("/"))) {
+          jqxhr.setRequestHeader("X-CSRF-TOKEN", token);
+        }
       }
     });
   });
@@ -85642,14 +85669,14 @@ function listen(event, handler) {
   _eventListeners[event].push(handler);
 }
 function before(event, handler) {
-  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_1__["isNullOrUndefined"])(handler) && typeof event === "function") {
+  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(handler) && typeof event === "function") {
     listen("_before", event);
   } else {
     listen("_before_" + event, handler);
   }
 }
 function after(event, handler) {
-  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_1__["isNullOrUndefined"])(handler) && typeof event === "function") {
+  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(handler) && typeof event === "function") {
     listen("_after", event);
   } else {
     listen("_after_" + event, handler);
@@ -85692,8 +85719,8 @@ function send(url) {
   var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var config = arguments.length > 2 ? arguments[2] : undefined;
   var deferred = $.Deferred();
-  data = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_1__["isDefined"])(data) ? data : {};
-  url = Object(_helper_url__WEBPACK_IMPORTED_MODULE_0__["normalizeUrl"])(url);
+  data = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isDefined"])(data) ? data : {};
+  url = Object(_helper_url__WEBPACK_IMPORTED_MODULE_3__["normalizeUrl"])(url);
   config = config || {};
   config.dataType = config.dataType || "json";
   config.contentType = typeof config.contentType !== "undefined" ? config.contentType : "application/x-www-form-urlencoded; charset=UTF-8";
