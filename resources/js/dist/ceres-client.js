@@ -66460,14 +66460,11 @@ function initListener() {
     var token = $("input[id=\"csrf-token\"]").val();
     $.ajaxSetup({
       beforeSend: function beforeSend(jqxhr, settings) {
-        console.log("Running beforeSend... " + settings.url);
         /*
             Setting the csrf token for every ajax call can hinder cross origin rest calls from workinmg.
             Using beforeSend makes sure that the header is only set for requests to our backend.
          */
-
-        if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(token) && (settings.url.includes(document.location.hostname) || settings.url.startsWith("/"))) {
-          console.log("Setting token... " + token);
+        if (token && (settings.url.includes(document.location.hostname) || settings.url.startsWith("/"))) {
           jqxhr.setRequestHeader("X-CSRF-TOKEN", token);
         }
       }
