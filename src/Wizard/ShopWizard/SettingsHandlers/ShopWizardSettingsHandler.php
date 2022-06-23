@@ -76,7 +76,7 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
             }
 
             //we need to create list of active languages that will be saved into plugin config and system settings
-            $activeLanguagesList = count($data['languages_activeLanguages']) ?
+            $activeLanguagesList = is_array($data['languages_activeLanguages']) && count($data['languages_activeLanguages']) ?
                 implode(", ", $data['languages_activeLanguages']) :
                 "";
 
@@ -179,7 +179,7 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     ];
 
                     foreach ($siteMapConfig as $siteMapKey => $siteMapValue) {
-                        if (in_array($siteMapKey, $data['seo_siteMapConfig'])) {
+                        if (in_array($siteMapKey, $data['seo_siteMapConfig'] ?? [])) {
                             $siteMapConfig[$siteMapKey] = 1;
                         }
                     }
@@ -218,7 +218,7 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     $searchLanguagesSettings = $searchSettingsRepo->getLanguages()->toArray();
 
                     foreach ($searchLanguagesSettings['languages'] as &$searchLanguagesSetting) {
-                        if (in_array($searchLanguagesSetting['lang'], $selectedSearchLanguages)) {
+                        if (in_array($searchLanguagesSetting['lang'], $selectedSearchLanguages ?? [])) {
                             $searchLanguagesSetting['isActive'] = true;
                         } else {
                             $searchLanguagesSetting['isActive'] = false;
@@ -239,7 +239,7 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     foreach ($searchSettings as $searchSetting) {
                         if (!empty($data[$searchSetting['key']]) && !in_array(
                                 $data[$searchSetting['key']],
-                                $completedSettings
+                                $completedSettings ?? []
                             )) {
                             $itemSearchSettingsData[] = [
                                 "key" => $data[$searchSetting['key']],
@@ -286,7 +286,7 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
             $pluginSets = $pluginSetRepo->list();
             $pluginId = '';
 
-            if (count($pluginSets)) {
+            if (is_array($pluginSets) && count($pluginSets)) {
                 foreach ($pluginSets as $pluginSet) {
                     foreach ($pluginSet->pluginSetEntries as $pluginSetEntry) {
                         if ($pluginSetEntry instanceof PluginSetEntry && $pluginSetEntry->plugin->name === 'Ceres' && $pluginSetEntry->pluginSetId == $pluginSetId) {
