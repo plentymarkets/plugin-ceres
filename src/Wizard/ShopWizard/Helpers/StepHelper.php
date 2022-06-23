@@ -18,7 +18,7 @@ class StepHelper
     public static function buildListBoxData($data, $captionColumn = false, $valColumn = false)
     {
         $listBoxValues = [];
-        if(count($data)) {
+        if(is_array($data) && count($data)) {
             foreach($data as $itemKey => $itemVal) {
                 $valData = is_object($itemVal) ? $itemVal->toArray() : $itemVal;
                 $caption = $captionColumn ? $valData[$captionColumn] : $valData;
