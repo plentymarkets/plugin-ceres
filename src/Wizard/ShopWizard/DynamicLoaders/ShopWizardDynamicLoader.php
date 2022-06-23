@@ -83,7 +83,7 @@ class ShopWizardDynamicLoader implements WizardDynamicLoader
     {
         $selectedActiveLanguages = $parameters['languages_activeLanguages'];
 
-        if(count($selectedActiveLanguages)) {
+        if(is_array($selectedActiveLanguages) && count($selectedActiveLanguages)) {
             foreach($selectedActiveLanguages as $selLang) {
                 $activeList[] = [
                     "caption" => $this->languages[$selLang],
