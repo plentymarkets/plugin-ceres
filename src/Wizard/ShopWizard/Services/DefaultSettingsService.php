@@ -159,7 +159,7 @@ class DefaultSettingsService
         $paymentMethodContainer = pluginApp(PaymentMethodContainer::class);
 
         $pluginPaymentMethodsRegistered = [];
-        if (count($paymentMethods)) {
+        if (is_array($paymentMethods) && count($paymentMethods)) {
             foreach ($paymentMethods as $paymentMethod) {
                 $registeringKey = $paymentMethod->pluginKey . '::' . $paymentMethod->paymentKey;
                 if ($paymentMethodContainer->isRegistered($registeringKey)) {
@@ -186,7 +186,7 @@ class DefaultSettingsService
     public function hasShippingCountries(): bool
     {
         $shippingCountries = $this->countryRepository->getActiveCountriesList();
-        return count($shippingCountries) ? true : false;
+        return is_array($shippingCountries) && count($shippingCountries) ? true : false;
     }
 
     /**
@@ -205,7 +205,7 @@ class DefaultSettingsService
         $shippingMethods = [];
         $shippingProfiles = $this->parcelServicePresetRepo->getPresetList(['*'], 'parcelService');
 
-        if (count($shippingProfiles)) {
+        if (is_array($shippingProfiles) && count($shippingProfiles)) {
             foreach ($shippingProfiles as $profile) {
                 $shippingMethod = $profile->parcelService;
                 if($shippingMethod instanceof ParcelService) {
@@ -227,7 +227,7 @@ class DefaultSettingsService
             return $accountingLocationRepo->getAll()->toArray();
         });
 
-        return count($locations) ? true : false;
+        return is_array($locations) && count($locations) ? true : false;
     }
 
     /**
@@ -243,7 +243,7 @@ class DefaultSettingsService
         $pluginSets = $this->pluginSetRepository->list();
         $pluginSetsData = $pluginSets->toArray();
         $pluginSetList = [];
-        if (count($pluginSetsData)) {
+        if (is_array($pluginSetsData) && count($pluginSetsData)) {
             $plugin = $pluginRepo->getPluginByName('Ceres');
             if ($plugin instanceof Plugin) {
                 foreach ($pluginSetsData as $pluginSetData) {
