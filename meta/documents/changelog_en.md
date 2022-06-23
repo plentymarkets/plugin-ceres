@@ -1,5 +1,24 @@
 # Release Notes for plentyShop LTS
 
+## v5.0.51 (2022-05-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.50...5.0.51" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### New
+
+- It's now possible to display the prices of the last 30 days. This information is shown when displaying a strikethrough price and the item has a price from the last 30 days.
+- The **Consent in the checkout** widget has been added to the checkout.
+
+### Fixed
+
+- The item for displaying more item information no longer covers the mega menu.
+- On the order confirmation page, the item list sometimes displayed a total rebate of €0.00. This problem has been resolved.
+
+### Changed templates
+
+- In Ceres 5.0.51 we made changes to template files which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
+- [resources/views/Checkout/OrderDetails.twig](https://github.com/plentymarkets/plugin-ceres/pull/3275/files#diff-49e9a28ec33181e8fd3720d39345363b8b0614f2bf29ceb66b403ef22c18bd4d)
+- [resources/views/MyAccount/Partials/OrderHistoryListItemDetails.twig](https://github.com/plentymarkets/plugin-ceres/pull/3275/files#diff-dcc9c181484eba069617434b9c7c20b7906e9ab74907f134720e220a818c968a)
+- [resources/views/Widgets/OrderConfirmation/PurchasedItemsWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3275/files#diff-2cee15b4b8add92d304d2f4cbbb5a5891a5752c533b564f1e1d152982c1e62d0)
+
 ## v5.0.50 (2022-05-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.49...5.0.50" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Changed
@@ -86,13 +105,13 @@
 ### TODO
 
 - Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
-- Graduated prices in the category view are now labelled with a "from" by default. Users can remove the "from" in the **CMS » Multilingualism** menu. The corresponding translation key is **categoryItemFromPrice**. 
+- Graduated prices in the category view are now labelled with a "from" by default. Users can remove the "from" in the **CMS » Multilingualism** menu. The corresponding translation key is **itemFromPrice**. 
 
 ### Added
 
 - ShopBooster now supports cache blocks. In the default plentyShop LTS, header, footer and item tiles (e.g. in item lists) are cached in blocks. This increases the ShopBooster cache coverage.
 - The ShopBuilder preset for the homepage has been completely overhauled. The preset now contains demo images, sample texts, and a collection of various widgets.
-- The asterisk characters for footnotes in the single item view, the category view, and live shopping pages can now be changed in the **CMS » Multilingualism** menu. The corresponding translation keys are **singleItemFootnote1**, **categoryItemFootnote**, and **liveShoppingFootnote**.
+- The asterisk characters for footnotes in the single item view, the category view, and live shopping pages can now be changed in the **CMS » Multilingualism** menu. The corresponding translation keys are **singleItemFootnote1**, **itemFootnote**, and **liveShoppingFootnote**.
 
 ### Changed
 
@@ -102,7 +121,7 @@
 
 ### Fixed
 
-- Graduated prices are now displayed in the category view, if they exist. The graduated price is now also labelled with "from". The corresponding translation key is **categoryItemFromPrice**.
+- Graduated prices are now displayed in the category view, if they exist. The graduated price is now also labelled with "from". The corresponding translation key is **itemFromPrice**.
 - The template of the **Add to wish list** component was changed from an `a-tag` to a `button-tag`.
 - The setting **Show categories as filter options for search results** has been renamed and an error that occurred during saving was fixed.
 - Under certain circumstances, the sticky container widget and the shopping cart preview overlapped. This has been fixed.
@@ -1287,7 +1306,7 @@
 - We added a button to the order history widget via which users can open the order confirmation of an order. This makes it possible to submit a rating for items of an order from the My Account area.
 - The microdata field "url" is now filled in on the single item view.
 - The sorting of variations on item tiles in item lists and the category view can now be configured via the Ceres assistant.
-- The entry **categoryItemFromPrice** has been added to the multilingualism interface. It is used to display a "from" before the price in item lists if the cheapest variation is displayed on the item tile and the item has more than one purchasable variation.
+- The entry **itemFromPrice** has been added to the multilingualism interface. It is used to display a "from" before the price in item lists if the cheapest variation is displayed on the item tile and the item has more than one purchasable variation.
 
 ### Changed
 

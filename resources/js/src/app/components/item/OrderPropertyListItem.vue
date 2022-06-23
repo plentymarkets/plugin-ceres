@@ -100,7 +100,20 @@
                 <input :disabled="waiting" ref="fileInput" type="file" size="50" @change="setPropertyFile($event)" data-testing="order-property-input-file">
             </label>
 
-            <popper class="order-property-selection-info-popper" v-cloak v-if="isTouchDevice && property.names.description" placement="bottom">
+            <client-only>
+                <popper class="order-property-selection-info-popper" v-cloak v-if="isTouchDevice && property.names.description" placement="bottom">
+                    <template #handle>
+                        <button class="btn btn-icon btn-circle btn-default btn-appearance font-weight-bold">?</button>
+                    </template>
+                    <template #content>
+                        {{ property.names.description }}
+                    </template>
+                </popper>
+            </client-only>
+        </div>
+
+        <client-only>
+            <popper class="order-property-selection-info-popper position-absolute" :class="{ 'checkbox-or-radio': inputType === 'checkbox' || inputType === 'radio'}" v-cloak v-if="isTouchDevice && inputType !== 'selection' && inputType !== 'file' && property.names.description" placement="bottom">
                 <template #handle>
                     <button class="btn btn-icon btn-circle btn-default btn-appearance font-weight-bold">?</button>
                 </template>
@@ -108,16 +121,7 @@
                     {{ property.names.description }}
                 </template>
             </popper>
-        </div>
-
-        <popper class="order-property-selection-info-popper position-absolute" :class="{ 'checkbox-or-radio': inputType === 'checkbox' || inputType === 'radio'}" v-cloak v-if="isTouchDevice && inputType !== 'selection' && inputType !== 'file' && property.names.description" placement="bottom">
-            <template #handle>
-                <button class="btn btn-icon btn-circle btn-default btn-appearance font-weight-bold">?</button>
-            </template>
-            <template #content>
-                {{ property.names.description }}
-            </template>
-        </popper>
+        </client-only>
     </div>
 </template>
 

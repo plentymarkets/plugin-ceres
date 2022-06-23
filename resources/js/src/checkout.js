@@ -10,6 +10,8 @@ import "./app/components/checkout/PlaceOrder";
 import "./app/components/checkout/ShippingPrivacyHintCheck";
 import "./app/components/checkout/ShippingProfileSelect";
 import "./app/components/checkout/SubscribeNewsletterCheck";
+import BasketItemConsentCheck from "./app/components/checkout/BasketItemConsentCheck.vue";
+Vue.component("basket-item-consent-check", BasketItemConsentCheck);
 
 import "./app/components/customer/AddressSelect/AddressHeader";
 import "./app/components/customer/AddressSelect/InvoiceAddressSelect";

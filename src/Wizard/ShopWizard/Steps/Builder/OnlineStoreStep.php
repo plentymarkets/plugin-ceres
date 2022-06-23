@@ -160,13 +160,6 @@ class OnlineStoreStep extends Step
             "title" => "Wizard.emailSettings",
             "description" => "Wizard.emailSettingsDescription",
             "form" => [
-                "onlineStore_confirmationLinkLoginRedirect" => [
-                    "type" => "checkbox",
-                    "defaultValue" => false,
-                    "options" => [
-                        "name" => "Wizard.forward2LoginPage"
-                    ]
-                ],
                 "onlineStore_globalUserDataHashMaxAge" => [
                     "type" => "select",
                     "defaultValue" => $globaUserHashMaxList[0]['value'],
