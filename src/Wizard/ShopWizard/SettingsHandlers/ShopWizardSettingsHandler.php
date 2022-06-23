@@ -76,7 +76,7 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
             }
 
             //we need to create list of active languages that will be saved into plugin config and system settings
-            $activeLanguagesList = count($data['languages_activeLanguages']) ?
+            $activeLanguagesList = is_array($data['languages_activeLanguages']) && count($data['languages_activeLanguages']) ?
                 implode(", ", $data['languages_activeLanguages']) :
                 "";
 
@@ -286,7 +286,7 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
             $pluginSets = $pluginSetRepo->list();
             $pluginId = '';
 
-            if (count($pluginSets)) {
+            if (is_array($pluginSets) && count($pluginSets)) {
                 foreach ($pluginSets as $pluginSet) {
                     foreach ($pluginSet->pluginSetEntries as $pluginSetEntry) {
                         if ($pluginSetEntry instanceof PluginSetEntry && $pluginSetEntry->plugin->name === 'Ceres' && $pluginSetEntry->pluginSetId == $pluginSetId) {
