@@ -69,7 +69,7 @@ class ShopWizardService
                     if (
                         $pluginSetEntry instanceof PluginSetEntry &&
                         $pluginSetEntry->pluginId == $plugin->id &&
-                        !in_array($pluginSetEntry->pluginSetId, $webstoresPluginSetIds) &&
+                        !in_array($pluginSetEntry->pluginSetId, $webstoresPluginSetIds ?? []) &&
                         $previewConfig instanceof ShopWizardPreviewConfiguration && !$previewConfig->deleted
                     ) {
                         $webstores[] = [
@@ -81,7 +81,7 @@ class ShopWizardService
             }
         }
 
-        if (count($webstores)) {
+        if (is_array($webstores) && count($webstores)) {
             foreach ($webstores as $webstore) {
                 if (!empty($webstore['pluginSetId'])) {
                     $pluginSet = $pluginSets->where('id', '=', $webstore['pluginSetId'])->first();
@@ -122,7 +122,7 @@ class ShopWizardService
             $globalData = $this->mappingService->processGlobalMappingData($webstoreConfData);
 
             //we check for shipping country list
-            if (count($webstoreConfData['defaultShippingCountryList'])) {
+            if (is_array($webstoreConfData['defaultShippingCountryList']) && count($webstoreConfData['defaultShippingCountryList'])) {
                 foreach ($webstoreConfData['defaultShippingCountryList'] as $countryLang => $countryId) {
                     $settingsKey = 'defSettings_deliveryCountry_' . $countryLang;
 
@@ -132,7 +132,7 @@ class ShopWizardService
 
             //we check for default currency list
 
-            if (count($webstoreConfData['defaultCurrencyList'])) {
+            if (is_array($webstoreConfData['defaultCurrencyList']) && count($webstoreConfData['defaultCurrencyList'])) {
                 foreach ($webstoreConfData['defaultCurrencyList'] as $currencyCountryCode => $currency) {
                     $settingsKey = 'currencies_defaultCurrency_' . $currencyCountryCode;
 
@@ -140,7 +140,8 @@ class ShopWizardService
                 }
             }
 
-            if (count($globalData['languages_defaultBrowserLang'])) {
+            if (is_array($globalData['languages_defaultBrowserLang']) && count($globalData['languages_defaultBrowserLang'])) {
+
                 $browserLanguage = $globalData['languages_defaultBrowserLang'];
 
                 //now we extract data related from browser language
@@ -193,7 +194,7 @@ class ShopWizardService
                 }
             }
 
-            if (count($enabledLanguages)) {
+            if (is_array($enabledLanguages) && count($enabledLanguages)) {
                 if (isset($enabledLanguages[0])) {
                     $globalData['languages_secondSearchLanguage'] = $enabledLanguages[0];
                 }
@@ -251,8 +252,11 @@ class ShopWizardService
             foreach ($pluginSetEntries as $pluginSetEntry) {
                 if ($pluginSetEntry instanceof PluginSetEntry && $pluginSetEntry->plugin->id === $plugin->id) {
                     $config = $pluginSetEntry->configurations()->getResults();
-                    if (count($config)) {
-                        foreach ($config as $confItem) {
+
+                    if (is_array($config) && count($config))
+                    {
+                        foreach ($config as $confItem)
+                        {
                             $pluginConfData[$confItem->key] = $confItem->value;
                         }
                     }
