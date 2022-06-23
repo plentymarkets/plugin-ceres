@@ -51,7 +51,7 @@ class LanguagesHelper
         $rawLanguages = self::getLanguages();
         $languages = [];
 
-        if(count($rawLanguages)) {
+        if(is_array($rawLanguages) && count($rawLanguages)) {
             foreach($rawLanguages as $lang) {
                 $languages[$lang] = $translator->trans("Ceres::Config.languageActiveLanguages" . ucfirst($lang));
             }
