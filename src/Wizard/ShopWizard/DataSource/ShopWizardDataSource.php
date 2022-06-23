@@ -42,9 +42,7 @@ class ShopWizardDataSource extends BaseWizardDataSource
      */
     public function getIdentifiers()
     {
-        $environments = count($this->wizardService->getWebstoresIdentifiers()) ? array_keys(
-            $this->wizardService->getWebstoresIdentifiers()
-        ) : [];
+        $environments = is_array($this->wizardService->getWebstoresIdentifiers()) && count($this->wizardService->getWebstoresIdentifiers()) ? array_keys($this->wizardService->getWebstoresIdentifiers()) : [];
 
         return $environments;
     }
