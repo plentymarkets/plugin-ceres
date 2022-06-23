@@ -108,7 +108,7 @@ class SearchStep extends Step
         $searchFieldsOptions     = SearchConfig::getSearchFieldsOptions();
         $searchFieldsOptionsList = StepHelper::generateTranslatedListBoxValues($searchFieldsOptions);
 
-        if (count($searchFieldsOptions)) {
+        if (is_array($searchFieldsOptions) && count($searchFieldsOptions)) {
             $i = 1;
             foreach ($searchFieldsOptions as $fieldKey => $fieldValue) {
                 if (empty($fieldValue)) {
