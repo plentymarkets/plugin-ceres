@@ -69,7 +69,7 @@ class ShopWizardService
                     if (
                         $pluginSetEntry instanceof PluginSetEntry &&
                         $pluginSetEntry->pluginId == $plugin->id &&
-                        !in_array($pluginSetEntry->pluginSetId, $webstoresPluginSetIds) &&
+                        !in_array($pluginSetEntry->pluginSetId, $webstoresPluginSetIds ?? []) &&
                         $previewConfig instanceof ShopWizardPreviewConfiguration && !$previewConfig->deleted
                     ) {
                         $webstores[] = [
