@@ -2872,8 +2872,8 @@
                                 "caption": "Config.myAccountConfirmationLinkExpirationThirtyDays"
                             },
                             {
-                                "value": "90",
-                                "caption": "Config.myAccountConfirmationLinkExpirationNinetyDays"
+                                "value": "60",
+                                "caption": "Config.myAccountConfirmationLinkExpirationSixtyDays"
                             }
                         ]
                     }
