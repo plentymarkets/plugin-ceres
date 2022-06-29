@@ -1,5 +1,24 @@
 # Release Notes for plentyShop LTS
 
+## v5.0.52 (2022-06-29) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.51...5.0.52" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### New
+
+- In addition to the browser name, the operating system is now also set as a class to the `<html>` object. If no operating system or browser can be detected, separate classes are set for each. We would like to thank @daniel-mannheimer for their contribution.
+
+### Changed
+
+- The translation keys `categoryItemFootnote`, `categoryItemFromPrice`, and `categoryItemLowestPrice` have been renamed to `itemFootnote`, `itemFromPrice`, and `itemLowestPrice`, respectively. If you've stored custom translations for these keys, your translations are automatically assumed for the renamed translation keys.
+- The component `AddressSelect` has been changed in order to display large amounts of data more performantly. The component `DynamicScroller` now wraps individual addresses.
+- The setting **Forward to login page after clicking link in order confirmation** has been removed from the plentyShop LTS settings and the plentyShop assistant. Now, the default behaviour is that customers are always forwarded to the login page. 
+- The variable for the basket has been removed from the `GlobalContext`. Please read this <a href="https://forum.plentymarkets.com/t/plentyshop-basket-variable-wird-aus-dem-globalcontext-entfernt-basket-variable-is-removed-from-the-globalcontext/685718" target="_blank">forum thread</a> for more information.
+
+### Fixed
+
+- Order properties of the type **File** could cause errors on mobile devices if the order property's description was filled out. This has been fixed. 
+- The CSRF token is now only added to REST calls that are directed to your own plentyShop.
+- In the context of the update to PHP 8, several compatability errors have been fixed.
+
 ## v5.0.51 (2022-05-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.50...5.0.51" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### New

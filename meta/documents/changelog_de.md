@@ -1,5 +1,30 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.52 (2022-06-29) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.51...5.0.52" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Neu
+
+- Zusätzlich zum Browser-Namen wird nun auch das Betriebssystem als Klasse auf das `<html>`-Objekt gesetzt. Kann kein Betriebssystem oder Browser erkannt werden, werden jeweils eigene Klassen dafür gesetzt. Vielen Dank an @daniel-mannheimer für diesen Beitrag.
+
+### Geändert
+
+- Die Übersetzungsschlüssel `categoryItemFootnote`, `categoryItemFromPrice` und `categoryItemLowestPrice` wurden respektive zu `itemFootnote`, `itemFromPrice` und `itemLowestPrice` umbenannt. Bisher angepasste Übersetzungen werden per Migration für die neuen Schlüssel übernommen.
+- Die Komponente `AddressSelect` wurde angepasst, um große Datenmengen performanter anzuzeigen. Die Komponente `DynamicScroller` wrapped nun einzelne Adressen.
+- Die Einstellung **Kunden zur Login-Seite weiterleiten, wenn sie den Link in der Bestellbestätigung klicken** wurde aus den plentyShop LTS-Einstellungen und aus dem plentyShop-Assistenten entfernt. Das Standardverhalten ist zukünftig so, dass Kund:innen immer zuerst auf die Login-Seite geleitet werden.
+- Die Variable für den Warenkorb wurde aus dem `GlobalContext` entfernt. Beachte dazu <a href="https://forum.plentymarkets.com/t/plentyshop-basket-variable-wird-aus-dem-globalcontext-entfernt-basket-variable-is-removed-from-the-globalcontext/685718" target="_blank">diesen Forumsbeitrag</a>. 
+
+### Behoben
+
+- Bei Bestelleigenschaften vom Typ **Datei** konnte es auf mobilen Endgeräten zu Hydration-Fehlern kommen, wenn die Eigenschaft eine Beschreibung hatte. Dies wurde behoben.
+- Das CSRF-Token wird nun nur noch an REST-Calls, die an den eigenen plentyShop gehen, hinzugefügt.
+- Im Kontext des Updates auf PHP 8 wurden einige Kompatibilitätsfehler behoben.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.52 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- [resources/views/Customer/Components/AddressSelect/AddressSelect.twig](https://github.com/plentymarkets/plugin-ceres/pull/3290/files#diff-969624803dfeb696a58e16de0d95c285a458ec83a615026882d9b1e65386935b)
+
+
 ## v5.0.51 (2022-05-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.50...5.0.51" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Neu
