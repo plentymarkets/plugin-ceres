@@ -142,7 +142,7 @@ class DefaultSettingsService
      */
     public function getPluginPaymentMethodsRegistered():array
     {
-        $paymentMethods = $this->paymentRepository->allPluginPaymentMethods()->all();
+        $paymentMethods = $this->paymentRepository->allPluginPaymentMethods();
     
         $paymentMethodIds = [];
         foreach ($paymentMethods as $paymentMethod) {
@@ -155,11 +155,10 @@ class DefaultSettingsService
                 $paymentMethods[] = $this->paymentRepository->findByPaymentMethodId($paymentMethodId);
             }
         }
-        
         $paymentMethodContainer = pluginApp(PaymentMethodContainer::class);
 
         $pluginPaymentMethodsRegistered = [];
-        if (is_array($paymentMethods) && count($paymentMethods)) {
+        if (count($paymentMethods)) {
             foreach ($paymentMethods as $paymentMethod) {
                 $registeringKey = $paymentMethod->pluginKey . '::' . $paymentMethod->paymentKey;
                 if ($paymentMethodContainer->isRegistered($registeringKey)) {
