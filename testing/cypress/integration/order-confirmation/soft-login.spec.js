@@ -21,7 +21,7 @@ context("Order confirmation", () =>
     it("Should enter login when order is older than 90 days", () =>
     {
         cy.visit("/bestellbestaetigung/?orderId=1396&accessKey=AFVS9ZV92");
-        cy.url().should("include", "/login/?backlink=/bestellbestaetigung//1396/AFVS9ZV92");
+        cy.url().should("include", "/login/?backlink=/bestellbestaetigung/?orderId=1396&accessKey=AFVS9ZV92");
     });
 
     it("Should not to be able to access guest order after 90 days", () =>
