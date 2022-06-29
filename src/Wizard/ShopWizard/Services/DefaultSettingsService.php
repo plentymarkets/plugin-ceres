@@ -135,7 +135,7 @@ class DefaultSettingsService
      */
     public function getPluginPaymentMethodsRegistered():array
     {
-        $paymentMethods = $this->paymentRepository->allPluginPaymentMethods()
+        $paymentMethods = $this->paymentRepository->allPluginPaymentMethods();
     
         $paymentMethodIds = [];
         foreach ($paymentMethods as $paymentMethod) {
