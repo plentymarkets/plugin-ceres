@@ -89,7 +89,7 @@ class DefaultSettingsService
      */
     public function getPluginPaymentMethodsRegistered():array
     {
-        $paymentMethods = $this->paymentRepository->allPluginPaymentMethods();
+        $paymentMethods = $this->paymentRepository->allPluginPaymentMethods()->all();
         $paymentMethodContainer = pluginApp(PaymentMethodContainer::class);
 
         $pluginPaymentMethodsRegistered = [];
@@ -119,7 +119,7 @@ class DefaultSettingsService
      */
     public function hasShippingCountries(): bool
     {
-        $shippingCountries = $this->countryRepository->getActiveCountriesList();
+        $shippingCountries = $this->countryRepository->getActiveCountriesList()->all();
         return is_array($shippingCountries) && count($shippingCountries) ? true : false;
     }
 
@@ -137,7 +137,7 @@ class DefaultSettingsService
     public function getShippingMethods(): array
     {
         $shippingMethods = [];
-        $shippingProfiles = $this->parcelServicePresetRepo->getPresetList(['*'], 'parcelService');
+        $shippingProfiles = $this->parcelServicePresetRepo->getPresetList(['*'], 'parcelService')->all();
 
         if (is_array($shippingProfiles) && count($shippingProfiles)) {
             foreach ($shippingProfiles as $profile) {
