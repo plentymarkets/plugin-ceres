@@ -80,6 +80,7 @@ context("Order confirmation", () =>
 
     it("Should check for back-to-homepage link", () =>
     {
+        // class is set in shopbuilder widget as customer class
         cy.get(".homepage a")
             .should("have.attr", "href")
             .and("eq", "/").then((href) =>
@@ -94,6 +95,7 @@ context("Order confirmation", () =>
         cy.login();
         cy.visit("/bestellbestaetigung/?orderId=437");
 
+        // class is set in shopbuilder widget as customer class
         cy.get(".my-account a")
             .should("have.attr", "href")
             .and("eq", "/myaccount/").then((href) =>
