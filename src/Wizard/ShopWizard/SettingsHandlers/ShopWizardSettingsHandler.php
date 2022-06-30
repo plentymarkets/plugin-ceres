@@ -298,7 +298,7 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
             $pluginSets = $pluginSetRepo->list();
             $pluginId = '';
 
-            if (is_array($pluginSets) && count($pluginSets)) {
+            if (count($pluginSets)) {
                 foreach ($pluginSets as $pluginSet) {
                     foreach ($pluginSet->pluginSetEntries as $pluginSetEntry) {
                         if ($pluginSetEntry instanceof PluginSetEntry && $pluginSetEntry->plugin->name === 'Ceres' && $pluginSetEntry->pluginSetId == $pluginSetId) {
