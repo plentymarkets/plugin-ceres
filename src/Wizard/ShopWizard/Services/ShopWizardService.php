@@ -267,7 +267,7 @@ class ShopWizardService
                 if ($pluginSetEntry instanceof PluginSetEntry && $pluginSetEntry->plugin->id === $plugin->id) {
                     $config = $pluginSetEntry->configurations()->getResults();
 
-                    if (is_array($config) && count($config))
+                    if (count($config))
                     {
                         foreach ($config as $confItem)
                         {
