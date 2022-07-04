@@ -39,6 +39,12 @@ class OnlineStoreMapping
             'global'   => false,
             'optional' => false,
         ],
+        'onlineStore_confirmationLinkLoginRedirect' => [
+            'field'    => 'my_account.confirmation_link_login_redirect',
+            'type'     => 'boolean',
+            'global'   => false,
+            'optional' => false,
+        ],
         'onlineStore_confirmationLinkExpiration' => [
             'field'    => 'my_account.confirmation_link_expiration',
             'type'     => 'string',
