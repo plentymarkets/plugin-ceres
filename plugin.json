@@ -1,5 +1,5 @@
 {
-    "version"           : "5.0.52",
+    "version"           : "5.0.53",
     "name"              : "Ceres",
     "marketplaceName"   : {"de": "plentyShop LTS","en": "plentyShop LTS"},
     "description"       : "This is the official plentyShop LTS plugin developed by plentymarkets. plentyShop LTS is the default template plugin for plentymarkets online stores.",
@@ -12,10 +12,10 @@
     "email"             : "sales@plentymarkets.com",
     "phone"             : "+49 561 98 681 100",
     "categories"        : ["3885"],
-    "keywords"          : ["plentymarkets", "plugins", "layout", "template", "ceres", "plentyshop"],
+    "keywords"          : ["plentymarkets", "plugins", "layout", "template", "ceres", "plentyshop", "webshop"],
     "type"              : "template",
     "require"           : {
-        "IO": "~5.0.52"
+        "IO": "~5.0.53"
     },
     "platform": {
         "php": ">=7.3 <8.1"
