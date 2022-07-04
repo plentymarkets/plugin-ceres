@@ -1,5 +1,11 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.53 (2022-07-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.52...5.0.53" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Die Einstellung **Kunden zur Login-Seite weiterleiten, wenn sie den Link in der Bestellbestätigung klicken** wurde wieder zu den plentyShop LTS-Einstellungen und dem plentyShop-Assistenten hinzugefügt. Diese Einstellungen wurden in der Version 5.0.52 entfernt, was dazu führte, dass die Bestellbestätigung von manuell angelegten Aufträgen nicht zugänglich war. Wir haben diese Änderung daher rückgängig gemacht.
+
 ## v5.0.52 (2022-06-29) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.51...5.0.52" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Neu
