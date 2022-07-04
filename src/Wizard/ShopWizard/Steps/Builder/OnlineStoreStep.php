@@ -136,6 +136,13 @@ class OnlineStoreStep extends Step
             "title" => "Wizard.orderconfirmationSetting",
             "description" => "Wizard.orderconfirmationSettingsDescription",
             "form" => [
+                "onlineStore_confirmationLinkLoginRedirect" => [
+                    "type" => "checkbox",
+                    "defaultValue" => false,
+                    "options" => [
+                        "name" => "Wizard.forward2LoginPage"
+                    ]
+                ],
                 "onlineStore_confirmationLinkExpiration" => [
                     "type" => "select",
                     "defaultValue" => $confirmationList[0]['value'],
