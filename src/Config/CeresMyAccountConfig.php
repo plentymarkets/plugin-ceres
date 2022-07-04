@@ -70,7 +70,7 @@ class CeresMyAccountConfig extends PluginConfig
         $this->orderReturnDays              = $this->getIntegerValue( 'my_account.order_return_days', 14 );
         $this->orderReturnInitialStatus     = $this->getTextValue( 'my_account.order_return_initial_status', '9.0' );
         $this->changePayment                = $this->getBooleanValue( 'my_account.change_payment', true );
-        $this->confirmationLinkLoginRedirect= true;
+        $this->confirmationLinkLoginRedirect= $this->confirmationLinkLoginRedirect= $this->getBooleanValue( 'my_account.confirmation_link_login_redirect', false );
         $this->confirmationLinkExpiration   = $this->getTextValue('my_account.confirmation_link_expiration', 'always');
     }
 }
