@@ -106,7 +106,7 @@
                 </template>
                 <!-- Coupon -->
 
-                <hr>
+                <hr v-if="visibleFields.includes('subAmount') || visibleFields.includes('basket.order_total_net') || visibleFields.includes('vats') || visibleFields.includes('basket.vat')">
                 <slot name="before-total-sum"></slot>
 
                 <!-- Subamount (net) -->
