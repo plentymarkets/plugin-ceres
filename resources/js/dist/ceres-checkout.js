@@ -81376,7 +81376,14 @@ var mutations = {
       if (addressIndex) {
         state.billingAddressList.splice(addressIndex, 0, billingAddress);
       } else {
-        state.billingAddressList.push(billingAddress);
+        var indexToUpdate = state.billingAddressList.findIndex(function (entry) {
+          return entry.id === billingAddress.id;
+        });
+
+        if (indexToUpdate === -1) {
+          state.billingAddressList.push(billingAddress);
+        }
+
         state.billingAddressId = billingAddress.id;
         state.billingAddress = billingAddress;
         document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
@@ -81391,7 +81398,14 @@ var mutations = {
       if (addressIndex) {
         state.deliveryAddressList.splice(addressIndex, 0, deliveryAddress);
       } else {
-        state.deliveryAddressList.push(deliveryAddress);
+        var indexToUpdate = state.deliveryAddressList.findIndex(function (entry) {
+          return entry.id === deliveryAddress.id;
+        });
+
+        if (indexToUpdate === -1) {
+          state.deliveryAddressList.push(deliveryAddress);
+        }
+
         state.deliveryAddressId = deliveryAddress.id;
         state.deliveryAddress = deliveryAddress;
         document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
@@ -81607,13 +81621,20 @@ var actions = {
         keepOriginalResponse: true
       }).done(function (response) {
         if (addressType === "1") {
-          commit("updateBillingAddress", address);
-
-          if (addressType === "1" && response.events && response.events.CheckoutChanged && response.events.CheckoutChanged.checkout) {
-            var billingAddressId = response.events.CheckoutChanged.checkout.billingAddressId;
-            commit("selectBillingAddressById", billingAddressId);
+          if (response.events && response.events.CheckoutChanged && response.events.CheckoutChanged.checkout) {
+            address.id = response.events.CheckoutChanged.checkout.billingAddressId;
+            commit("addBillingAddress", {
+              billingAddress: address
+            });
           }
         } else if (addressType === "2") {
+          if (response.events && response.events.CheckoutChanged && response.events.CheckoutChanged.checkout) {
+            address.id = response.events.CheckoutChanged.checkout.deliveryAddressId;
+            commit("addDeliveryAddress", {
+              deliveryAddress: address
+            });
+          }
+
           commit("updateDeliveryAddress", address);
         }
 
