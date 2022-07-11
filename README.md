@@ -49,5 +49,3 @@ This project is licensed under the GNU AFFERO GENERAL PUBLIC LICENSE - see the [
 
 
 TEST BRANCH FOR PLUGIN BUILD 2
-new commit
-commit 2
