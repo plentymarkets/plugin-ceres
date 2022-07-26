@@ -10202,6 +10202,9 @@ html.ie {
 
 .button-order {
     display: grid;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
 }
 .button-order-1 {
     grid-area: first;
