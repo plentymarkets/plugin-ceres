@@ -183,7 +183,7 @@
                                 <div class="container-max">
                                     <div class="row py-3">
                                         <div class="col-12 col-lg-6">
-
+                                            {% cacheslot languageSelect %}
                                             <div class="language-settings">
                                                 <div class="list-title">
                                                     <strong>{{ trans("Ceres::Template.headerSelectLanguage") }}</strong>
@@ -204,6 +204,7 @@
                                                     {% endfor %}
                                                 </ul>
                                             </div>
+                                            {% endcacheslot %}
                                         </div>
                                         <div class="col-12 col-lg-6">
                                             <div class="shipping-settings">

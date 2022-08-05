@@ -5,6 +5,8 @@ const NotificationService = require("./NotificationService");
 
 const _eventListeners = {};
 
+let _initialRestCall = true;
+
 export function initListener()
 {
     $(document).ready(() =>
@@ -116,6 +118,13 @@ export function get(url, data, config)
 {
     config = config || {};
     config.method = "GET";
+    if (_initialRestCall)
+    {
+        data = data || {};
+        data.initialRestCall = true;
+        _initialRestCall = false;
+    }
+
     return send(url, data, config);
 }
 

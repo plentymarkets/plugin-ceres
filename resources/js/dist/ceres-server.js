@@ -85618,6 +85618,7 @@ __webpack_require__.r(__webpack_exports__);
 var NotificationService = __webpack_require__(/*! ./NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
 var _eventListeners = {};
+var _initialRestCall = true;
 function initListener() {
   $(document).ready(function () {
     var token = $("input[id=\"csrf-token\"]").val();
@@ -85698,6 +85699,13 @@ function triggerEvent(event, payload) {
 function get(url, data, config) {
   config = config || {};
   config.method = "GET";
+
+  if (_initialRestCall) {
+    data = data || {};
+    data.initialRestCall = true;
+    _initialRestCall = false;
+  }
+
   return send(url, data, config);
 }
 function put(url, data, config) {
