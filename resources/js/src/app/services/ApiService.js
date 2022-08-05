@@ -5,7 +5,7 @@ const NotificationService = require("./NotificationService");
 
 const _eventListeners = {};
 
-let initialRestCall = true;
+let _initialRestCall = true;
 
 export function initListener()
 {
@@ -118,11 +118,11 @@ export function get(url, data, config)
 {
     config = config || {};
     config.method = "GET";
-    if (initialRestCall)
+    if (_initialRestCall)
     {
         data = data || {};
         data.initialRestCall = true;
-        initialRestCall = false;
+        _initialRestCall = false;
     }
 
     return send(url, data, config);
