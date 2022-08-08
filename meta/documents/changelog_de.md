@@ -1,5 +1,31 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.54 (2022-08-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.53...5.0.54" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Im Plugin IO wurde die neue Route `/contact-mail-api` hinzugefügt. Wenn du das plentyShop Kontaktformular verwendest (egal ob Standard oder per ShopBuilder-Inhalt), stelle sicher, dass diese Route im IO-Plugin aktiviert ist. Öffne dazu die Einstellungen des IO-Plugins in deinem Plugin-Set. Öffne den Reiter **Konfiguration**. Aktiviere in der Einstellung **Routen aktivieren** die Route `/contact-mail-api` und speichere deine Einstellungen. Wenn du das Kontaktformular *nicht* verwendest, stelle sicher, dass diese Route deaktiviert ist.
+
+### Geändert
+
+- Der Standardtext für die Cookiebar wurde angepasst, um der aktuellen Gesetzgebung zu entsprechen. Der Text kann über den Übersetzungsschlüssel `cookieBarHintText` im Menü **CMS » Mehrsprachigkeit** angepasst werden.
+- Die Werte für die Übersetzungschlüssel `checkoutChooseOur` und `checkoutCheckAcceptGtc` wurden angepasst, um den Anforderungen von § 305 b BGB gerecht zu werden. Weitere Informationen dazu findest du <a href="https://www.it-recht-kanzlei.de/Die_wichtigsten_AGB-Regularien.html#abschnitt_9" target="_blank">hier</a>.
+
+### Behoben
+
+- Nach dem Bearbeiten einer nicht ausgewählten Adresse im Mein-Konto- oder Kassenbereich wurde diese Adresse nicht korrekt angezeigt. Dies wurde behoben.
+- Bei aktivierten Cache-Blöcken konnte es zu fehlerhaften Verlinkungen über die Sprachauswahl kommen. Dieses Verhalten wurde behoben.
+- Auf mobilen Geräten konnte es bei der Kombination von Sprachwechsel und ShopBooster dazu kommen, dass die mobile Navigation in der zuvor ausgewählten Sprache angezeigt wurde. Dieses Verhalten wurde behoben.
+- Im Checkout konnte es zu Fehlern kommen, wenn kein Versandprofil ausgewählt war. Dies wurde behoben.
+- Bei Artikelsets mit Set-Komponenten, die Bestellmerkmale enthalten, kam es zu einer fehlerhaften Darstellung des Warenwerts. Dies wurde behoben.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.54 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- [resources/views/PageDesign/Partials/Header/DefaultHeader.twig](https://github.com/plentymarkets/plugin-ceres/pull/3319/files#diff-19f0c0c56118a0d17212318a2cf8c6e113276dc4c61779c2317b2e7a0976db31)
+- [resources/views/Widgets/Header/TopBarWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3319/files#diff-2696f6a2e31a39130c691133b3d6fdf30b218a6bdbbd0717433c835d060c3f66)
+- [resources/views/Widgets/OrderConfirmation/PurchasedItemsWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3318/files#diff-2cee15b4b8add92d304d2f4cbbb5a5891a5752c533b564f1e1d152982c1e62d0)
+
 ## v5.0.53 (2022-07-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.52...5.0.53" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben
