@@ -25,7 +25,6 @@
 - [resources/views/PageDesign/Partials/Header/DefaultHeader.twig](https://github.com/plentymarkets/plugin-ceres/pull/3319/files#diff-19f0c0c56118a0d17212318a2cf8c6e113276dc4c61779c2317b2e7a0976db31)
 - [resources/views/Widgets/Header/TopBarWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3319/files#diff-2696f6a2e31a39130c691133b3d6fdf30b218a6bdbbd0717433c835d060c3f66)
 - [resources/views/Widgets/OrderConfirmation/PurchasedItemsWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3318/files#diff-2cee15b4b8add92d304d2f4cbbb5a5891a5752c533b564f1e1d152982c1e62d0)
-- [resources/views/Category/Item/Partials/Pagination.twig](https://github.com/plentymarkets/plugin-ceres/pull/3313/files#diff-1b8d2c7ce7416f660f89d11ad8e368be614c2b98efc30526e74286c7f180c3b8)
 
 ## v5.0.53 (2022-07-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.52...5.0.53" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
