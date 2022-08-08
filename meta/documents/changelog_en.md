@@ -4,17 +4,17 @@
 
 ### TODO
 
-- The new route `/contact-mail-api` has been added to the IO plugin. If you are using the plentyShop contact form (either the standard template or via a ShopBuilder content), please make sure that this route is activated in the IO plugin. To check this, open the IO setting in your plugin set. Open the tab **Configuration**. In the setting **Activate routes**, activate the route `/contact-mail-api` and save your changes. If you do not use a plentyShop contact form, please make sure that the route `/contact-mail-api` is deactivated.
+- The new route `/contact-mail-api` has been added to the IO plugin. If you are using the plentyShop contact form (either the standard template or via a ShopBuilder content), please make sure that this route is activated in the IO plugin. To check this, open the IO setting in your plugin set. Open the tab **Configuration**. In the setting **Activate routes**, activate the route `/contact-mail-api` and save your changes. If you do *not* use a plentyShop contact form, please make sure that the route `/contact-mail-api` is deactivated.
 
 ### Changed
 
-- The default text for the cookie bar has been adapted to better comply with current legislation. The text can be adapted via the translation key `cookieBarHintText` in the menu **CMS " Multilingualism**.
+- The default text for the cookie bar has been adjusted to better comply with current legislation. The text can be adapted via the translation key `cookieBarHintText` in the menu **CMS » Multilingualism**.
 - The translation keys `checkoutChooseOur` and `checkoutCheckAcceptGtc` have been adjusted in order to adhere to the requirements of § 305 b BGB (German Civil Code). You can find further information <a href="https://www.it-recht-kanzlei.de/Die_wichtigsten_AGB-Regularien.html#abschnitt_9" target="_blank">here</a>. The linked page is German only.
 
 ### Fixed
 
 - After editing an unselected address in the My Account or Checkout area, this address was not displayed correctly. This has been fixed.
-- With activated cache blocks, incorrect links could occur via the language selection. This behaviour has been fixed.
+- If cache blocks were activated, incorrect links could occur via the language selection. This behaviour has been fixed.
 - On mobile devices, the combination of language selection and ShopBooster could result in the mobile navigation being displayed in the previously selected language. This behaviour has been fixed.
 - Errors could occur in the checkout if no shipping profile was selected. This has been fixed.
 - Item sets with set components that contained order characteristics could cause an incorrect display of the value of goods. This has been fixed.

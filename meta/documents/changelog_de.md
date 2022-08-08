@@ -8,15 +8,14 @@
 
 ### Geändert
 
-- Der Standardtext für die Cookiebar wurde angepasst, um der aktuellen Gesetzgebung besser zu entsprechen. Der Text kann über den Übersetzungsschlüssel `cookieBarHintText` im Menü **CMS » Mehrsprachigkeit** angepasst werden.
+- Der Standardtext für die Cookiebar wurde angepasst, um der aktuellen Gesetzgebung zu entsprechen. Der Text kann über den Übersetzungsschlüssel `cookieBarHintText` im Menü **CMS » Mehrsprachigkeit** angepasst werden.
 - Die Werte für die Übersetzungschlüssel `checkoutChooseOur` und `checkoutCheckAcceptGtc` wurden angepasst, um den Anforderungen von § 305 b BGB gerecht zu werden. Weitere Informationen dazu findest du <a href="https://www.it-recht-kanzlei.de/Die_wichtigsten_AGB-Regularien.html#abschnitt_9" target="_blank">hier</a>.
-
 
 ### Behoben
 
 - Nach dem Bearbeiten einer nicht ausgewählten Adresse im Mein-Konto- oder Kassenbereich wurde diese Adresse nicht korrekt angezeigt. Dies wurde behoben.
 - Bei aktivierten Cache-Blöcken konnte es zu fehlerhaften Verlinkungen über die Sprachauswahl kommen. Dieses Verhalten wurde behoben.
-- Auf mobilen Geräten konnte es bei der Kombination von Sprachwechsel und ShopBooster dazukommen, dass die mobile Navigation in der alten Sprache angezeigt wurde. Dieses Verhalten wurde behoben.
+- Auf mobilen Geräten konnte es bei der Kombination von Sprachwechsel und ShopBooster dazu kommen, dass die mobile Navigation in der zuvor ausgewählten Sprache angezeigt wurde. Dieses Verhalten wurde behoben.
 - Im Checkout konnte es zu Fehlern kommen, wenn kein Versandprofil ausgewählt war. Dies wurde behoben.
 - Bei Artikelsets mit Set-Komponenten, die Bestellmerkmale enthalten, kam es zu einer fehlerhaften Darstellung des Warenwerts. Dies wurde behoben.
 
