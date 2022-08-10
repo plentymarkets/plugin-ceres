@@ -13,6 +13,11 @@ module.exports = [
                 base: "./resources/js/src/base.js",
                 checkout: "./resources/js/src/checkout.js",
                 client: "./resources/js/src/entry-client.js"
+            },
+            performance: {
+                hints: false,
+                maxEntrypointSize: 512000,
+                maxAssetSize: 512000
             }
         }
     ),
@@ -33,8 +38,8 @@ module.exports = [
         ServerConfig("production"),
         {
             name: "server",
-            entry: "./resources/js/src/entry-server.js"
-        }
+            entry: "./resources/js/src/entry-server.js",
+        },
     ),
     merge(
         ServerConfig("development"),
@@ -53,7 +58,12 @@ module.exports = [
                 base: "./resources/scss/base.scss",
                 checkout: "./resources/scss/checkout.scss",
                 icons: "./resources/scss/icons.scss",
-                shopbuilder: "./resources/scss/shopbuilder.scss"
+                shopbuilder: "./resources/scss/shopbuilder.scss",
+            },
+            performance: {
+                hints: false,
+                maxEntrypointSize: 512000,
+                maxAssetSize: 512000
             }
         }
     ),
@@ -66,7 +76,8 @@ module.exports = [
                 checkout: "./resources/scss/checkout.scss",
                 icons: "./resources/scss/icons.scss",
                 shopbuilder: "./resources/scss/shopbuilder.scss"
-            }
+            },
+
         }
     )
 ];
