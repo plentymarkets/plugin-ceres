@@ -4,6 +4,8 @@
 *.iml
 home.html
 node_modules
+resources/js
 resources/css/*.css
 resources/css/*.css.map
 sftp-config.json
+.eslintcache
