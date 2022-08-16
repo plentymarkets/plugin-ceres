@@ -1,226 +1,27 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[25],{
-
-/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/common/GoogleMaps.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/common/GoogleMaps.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
 "use strict";
+(self["webpackChunkCeres"] = self["webpackChunkCeres"] || []).push([[25],{
+
+/***/ "./resources/js/src/app/components/customer/login/ForgotPassword.vue":
+/*!***************************************************************************!*\
+  !*** ./resources/js/src/app/components/customer/login/ForgotPassword.vue ***!
+  \***************************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.number.constructor.js */ "./node_modules/core-js/modules/es.number.constructor.js");
-/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.promise.js */ "./node_modules/core-js/modules/es.promise.js");
-/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _helper_whenConsented__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../helper/whenConsented */ "./resources/js/src/app/helper/whenConsented.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-
-
-
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    address: {
-      type: String,
-      required: false
-    },
-    lat: {
-      type: Number,
-      required: false
-    },
-    lng: {
-      type: Number,
-      required: false
-    },
-    zoom: {
-      type: Number,
-      default: 16
-    },
-    maptype: {
-      type: String,
-      default: "roadmap"
-    },
-    aspectRatio: {
-      type: String,
-      default: "3-1"
-    }
-  },
-  data: function data() {
-    return {
-      scriptBlocked: true
-    };
-  },
-  computed: {
-    aspectClass: function aspectClass() {
-      return "prop-" + this.aspectRatio;
-    }
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    this.$nextTick(function () {
-      _this.createScript().then(function () {
-        _this.initializeMap();
-      }).catch(function () {// Do nothing
-      });
-    });
-  },
-  methods: {
-    createScript: function createScript() {
-      var _this2 = this;
-
-      return new Promise(function (resolve, reject) {
-        var script = document.querySelector("script#google-maps-api");
-
-        if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(script)) {
-          // script already injected...
-          _this2.scriptBlocked = false;
-
-          if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(window.google)) {
-            // ...but not loaded yet
-            script.addEventListener("load", function () {
-              return resolve(script);
-            }, false);
-          } else {
-            // ..and fully loaded
-            resolve(script);
-          }
-        } else {
-          // script not loaded
-          Object(_helper_whenConsented__WEBPACK_IMPORTED_MODULE_3__["whenConsented"])("media.googleMaps", function () {
-            _this2.scriptBlocked = false;
-            var script = document.createElement("script");
-            script.type = "text/javascript";
-            script.id = "google-maps-api";
-            script.src = "https://maps.googleapis.com/maps/api/js?key=".concat(App.config.global.googleMapsApiKey);
-            script.addEventListener("load", function () {
-              return resolve(script);
-            }, false);
-            script.addEventListener("error", function () {
-              return reject(script);
-            }, false);
-            document.body.appendChild(script);
-          }, function () {
-            _this2.scriptBlocked = true;
-          });
-        }
-      });
-    },
-    getCoordinates: function getCoordinates() {
-      var _this3 = this;
-
-      var isLatValid = !isNaN(this.lat) && this.lat > -90 && this.lat < 90;
-      var isLngValid = !isNaN(this.lng) && this.lng > -180 && this.lng < 180;
-
-      if (isLatValid && isLngValid) {
-        return Promise.resolve({
-          lat: this.lat,
-          lng: this.lng
-        });
-      } else if (!!this.address && !!window.google) {
-        return new Promise(function (resolve, reject) {
-          var geocoder = new google.maps.Geocoder();
-          geocoder.geocode({
-            address: _this3.address
-          }, function (result, status) {
-            if (!!result && result.length > 0 && !!result[0].geometry) {
-              resolve(result[0].geometry.location);
-            } else {
-              reject();
-            }
-          });
-        });
-      }
-
-      return Promise.reject();
-    },
-    initializeMap: function initializeMap() {
-      var _this4 = this;
-
-      this.getCoordinates().then(function (coordinates) {
-        var map = new google.maps.Map(_this4.$refs.googleMapsContainer, {
-          center: coordinates,
-          zoom: _this4.zoom,
-          mapTypeId: _this4.maptype
-        });
-        new google.maps.Marker({
-          map: map,
-          position: coordinates
-        });
-      });
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/common/GoogleMaps.vue?vue&type=template&id=5bf88bf2&":
-/*!****************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/common/GoogleMaps.vue?vue&type=template&id=5bf88bf2& ***!
-  \****************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      ref: "googleMapsContainer",
-      staticClass: "maps-component position-relative",
-      class: _vm.aspectClass
-    },
-    [_vm.scriptBlocked ? _c("div", [_vm._t("default")], 2) : _vm._e()]
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/common/GoogleMaps.vue":
-/*!***************************************************************!*\
-  !*** ./resources/js/src/app/components/common/GoogleMaps.vue ***!
-  \***************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _GoogleMaps_vue_vue_type_template_id_5bf88bf2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GoogleMaps.vue?vue&type=template&id=5bf88bf2& */ "./resources/js/src/app/components/common/GoogleMaps.vue?vue&type=template&id=5bf88bf2&");
-/* harmony import */ var _GoogleMaps_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GoogleMaps.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/common/GoogleMaps.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _ForgotPassword_vue_vue_type_template_id_7f94eb33___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ForgotPassword.vue?vue&type=template&id=7f94eb33& */ "./resources/js/src/app/components/customer/login/ForgotPassword.vue?vue&type=template&id=7f94eb33&");
+/* harmony import */ var _ForgotPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ForgotPassword.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/customer/login/ForgotPassword.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
 
 
 /* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _GoogleMaps_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _GoogleMaps_vue_vue_type_template_id_5bf88bf2___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _GoogleMaps_vue_vue_type_template_id_5bf88bf2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ForgotPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ForgotPassword_vue_vue_type_template_id_7f94eb33___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ForgotPassword_vue_vue_type_template_id_7f94eb33___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -230,38 +31,454 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/src/app/components/common/GoogleMaps.vue"
+component.options.__file = "resources/js/src/app/components/customer/login/ForgotPassword.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/src/app/components/common/GoogleMaps.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************!*\
-  !*** ./resources/js/src/app/components/common/GoogleMaps.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/src/app/components/customer/login/ForgotPassword.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/src/app/components/customer/login/ForgotPassword.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GoogleMaps_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./GoogleMaps.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/common/GoogleMaps.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GoogleMaps_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
+/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
+/* harmony import */ var _services_ModalService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/ModalService */ "./resources/js/src/app/services/ModalService.js");
+/* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
+/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    name: "forgot-password-modal",
+
+    props: {
+        currentTemplate: String
+    },
+
+    data()
+    {
+        return {
+            username: "",
+            isDisabled: false,
+            honeypot: ""
+        };
+    },
+
+    mounted()
+    {
+        this.$nextTick(() =>
+        {
+            $(this.$refs.pwdModal).on("hidden.bs.modal", () =>
+            {
+                this.username = "";
+            });
+
+            const urlParams = _services_UrlService__WEBPACK_IMPORTED_MODULE_4__["default"].getUrlParams(document.location.search);
+
+            if (!(0,_helper_utils__WEBPACK_IMPORTED_MODULE_5__.isNullOrUndefined)(urlParams.show) && urlParams.show === "forgotPassword")
+            {
+                _services_ModalService__WEBPACK_IMPORTED_MODULE_2__["default"].findModal(this.$refs.pwdModal).show();
+
+                this.username = !(0,_helper_utils__WEBPACK_IMPORTED_MODULE_5__.isNullOrUndefined)(urlParams.email) ? urlParams.email : "";
+            }
+        });
+    },
+
+    watch:
+    {
+        username(val, oldVal)
+        {
+            this.resetError();
+        }
+    },
+
+    methods:
+    {
+        validateResetPwd()
+        {
+            _services_ValidationService__WEBPACK_IMPORTED_MODULE_3__["default"].validate(this.$refs.pwdModal)
+                .done(() =>
+                {
+                    this.sendResetPwd();
+                })
+                .fail(invalidFields =>
+                {
+                    _services_ValidationService__WEBPACK_IMPORTED_MODULE_3__["default"].markInvalidFields(invalidFields, "error");
+                });
+        },
+
+        /**
+         *  Reset password
+         */
+        sendResetPwd()
+        {
+            this.isDisabled = true;
+
+            _services_ApiService__WEBPACK_IMPORTED_MODULE_0__["default"].post("/rest/io/customer/password_reset", { email: this.username, honeypot: this.honeypot })
+                .done(() =>
+                {
+                    _services_ModalService__WEBPACK_IMPORTED_MODULE_2__["default"].findModal(this.$refs.pwdModal).hide();
+                    this.isDisabled = false;
+
+                    _services_NotificationService__WEBPACK_IMPORTED_MODULE_1__["default"].success(
+                        this.$translate("Ceres::Template.loginSendEmailOk")
+                    ).closeAfter(5000);
+
+                })
+                .fail(() =>
+                {
+                    this.isDisabled = false;
+
+                    _services_NotificationService__WEBPACK_IMPORTED_MODULE_1__["default"].error(
+                        this.$translate("Ceres::Template.loginResetPwDErrorOnSendEmail")
+                    ).closeAfter(5000);
+                });
+        },
+
+        cancelResetPwd()
+        {
+            this.resetError();
+
+            _services_ModalService__WEBPACK_IMPORTED_MODULE_2__["default"].findModal(this.$refs.pwdModal)
+                .hide()
+                .then(() =>
+                {
+                    _services_ModalService__WEBPACK_IMPORTED_MODULE_2__["default"].findModal(document.getElementById("login"))
+                        .show();
+                });
+        },
+
+        resetError()
+        {
+            _services_ValidationService__WEBPACK_IMPORTED_MODULE_3__["default"].unmarkAllFields(this.$refs.pwdModal);
+        }
+    }
+});
+
 
 /***/ }),
 
-/***/ "./resources/js/src/app/components/common/GoogleMaps.vue?vue&type=template&id=5bf88bf2&":
-/*!**********************************************************************************************!*\
-  !*** ./resources/js/src/app/components/common/GoogleMaps.vue?vue&type=template&id=5bf88bf2& ***!
-  \**********************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "./resources/js/src/app/components/customer/login/ForgotPassword.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/src/app/components/customer/login/ForgotPassword.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GoogleMaps_vue_vue_type_template_id_5bf88bf2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./GoogleMaps.vue?vue&type=template&id=5bf88bf2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/common/GoogleMaps.vue?vue&type=template&id=5bf88bf2&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GoogleMaps_vue_vue_type_template_id_5bf88bf2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_ForgotPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ForgotPassword.vue?vue&type=script&lang=js& */ "./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/src/app/components/customer/login/ForgotPassword.vue?vue&type=script&lang=js&");
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_ForgotPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GoogleMaps_vue_vue_type_template_id_5bf88bf2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/***/ }),
+
+/***/ "./resources/js/src/app/components/customer/login/ForgotPassword.vue?vue&type=template&id=7f94eb33&":
+/*!**********************************************************************************************************!*\
+  !*** ./resources/js/src/app/components/customer/login/ForgotPassword.vue?vue&type=template&id=7f94eb33& ***!
+  \**********************************************************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": function() { return /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ForgotPassword_vue_vue_type_template_id_7f94eb33___WEBPACK_IMPORTED_MODULE_0__.render; },
+/* harmony export */   "staticRenderFns": function() { return /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ForgotPassword_vue_vue_type_template_id_7f94eb33___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns; }
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ForgotPassword_vue_vue_type_template_id_7f94eb33___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ForgotPassword.vue?vue&type=template&id=7f94eb33& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/src/app/components/customer/login/ForgotPassword.vue?vue&type=template&id=7f94eb33&");
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/src/app/components/customer/login/ForgotPassword.vue?vue&type=template&id=7f94eb33&":
+/*!*************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/src/app/components/customer/login/ForgotPassword.vue?vue&type=template&id=7f94eb33& ***!
+  \*************************************************************************************************************************************************************************************************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": function() { return /* binding */ render; },
+/* harmony export */   "staticRenderFns": function() { return /* binding */ staticRenderFns; }
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      staticClass: "reset-pwd-container login-pwd-reset",
+      attrs: { id: "reset-pwd-form-" + _vm._uid, method: "post" },
+    },
+    [
+      _c(
+        "div",
+        {
+          ref: "pwdModal",
+          staticClass: "modal fade",
+          attrs: { id: "resetPwd", tabindex: "-1", role: "dialog" },
+        },
+        [
+          _c("div", { staticClass: "modal-dialog" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c("div", { staticClass: "modal-title h3" }, [
+                  _vm._v(
+                    _vm._s(
+                      _vm.$translate("Ceres::Template.loginForgotPassword")
+                    )
+                  ),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-hidden": "true",
+                      "aria-label": _vm.$translate("Ceres::Template.closeIcon"),
+                    },
+                  },
+                  [_vm._v("×")]
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c(
+                  "div",
+                  { staticClass: "alert alert-info w-100 pwd-forgot-info" },
+                  [
+                    _c("span", { staticClass: "info-badge" }, [
+                      _vm._v(
+                        _vm._s(
+                          _vm.$translate(
+                            "Ceres::Template.loginForgotPasswordInfo"
+                          )
+                        )
+                      ),
+                    ]),
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-12" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.honeypot,
+                          expression: "honeypot",
+                        },
+                      ],
+                      staticClass: "honey",
+                      attrs: {
+                        type: "text",
+                        name: "username",
+                        autocomplete: "new-password",
+                        tabindex: "-1",
+                      },
+                      domProps: { value: _vm.honeypot },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.honeypot = $event.target.value
+                        },
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "input-unit no-bottom",
+                        attrs: { "data-validate": "mail" },
+                      },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.username,
+                              expression: "username",
+                            },
+                          ],
+                          attrs: {
+                            type: "email",
+                            name: "email",
+                            autocomplete: "email",
+                            id: "mail" + _vm._uid,
+                            "data-autofocus": "",
+                          },
+                          domProps: { value: _vm.username },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.username = $event.target.value
+                            },
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("label", { attrs: { for: "mail" + _vm._uid } }, [
+                          _vm._v(
+                            _vm._s(
+                              _vm.$translate("Ceres::Template.loginEmail")
+                            ) + "*"
+                          ),
+                        ]),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "error-msg" }, [
+                      _vm._v(
+                        _vm._s(
+                          _vm.$translate(
+                            "Ceres::Template.loginEnterConfirmEmail"
+                          )
+                        )
+                      ),
+                    ]),
+                  ]),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "div",
+                  [
+                    _vm._t("extend-overlay-buttons"),
+                    _vm._v(" "),
+                    !!_vm.currentTemplate && _vm.currentTemplate != "tpl.login"
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger btn-medium mr-2",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function ($event) {
+                                $event.preventDefault()
+                                return _vm.cancelResetPwd($event)
+                              },
+                            },
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "fa fa-arrow-left",
+                              attrs: { "aria-hidden": "true" },
+                            }),
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(
+                                  _vm.$translate(
+                                    "Ceres::Template.loginBackToLogin"
+                                  )
+                                ) +
+                                "\n                            "
+                            ),
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary btn-medium",
+                        attrs: { disabled: _vm.isDisabled },
+                        on: {
+                          click: function ($event) {
+                            $event.preventDefault()
+                            return _vm.validateResetPwd($event)
+                          },
+                        },
+                      },
+                      [
+                        _vm._v(
+                          "\n\t\t\t\t\t\t\t\t" +
+                            _vm._s(
+                              _vm.$translate("Ceres::Template.loginSend")
+                            ) +
+                            "\n\t\t\t\t\t\t\t\t"
+                        ),
+                        _c("icon", {
+                          attrs: {
+                            icon: "paper-plane-o",
+                            loading: _vm.isDisabled,
+                          },
+                        }),
+                      ],
+                      1
+                    ),
+                  ],
+                  2
+                ),
+              ]),
+            ]),
+          ]),
+        ]
+      ),
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
 
 
 
