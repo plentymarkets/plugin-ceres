@@ -90,7 +90,7 @@ export default {
 
             }
 
-            return salutations.filter(salutation => salutation.key !== "company" && salutation.key !== "please-select");
+            return salutations.filter(salutation => salutation.key !== "company" && salutation.key !== "please select");
         }
     },
 
