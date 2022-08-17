@@ -102,7 +102,6 @@ export default {
         this.$options.template = this.template;
 
         let selectedSalutation = this.defaultSalutation;
-        console.log('here:' + selectedSalutation)
 
         if (isNullOrUndefined(selectedSalutation))
         {
