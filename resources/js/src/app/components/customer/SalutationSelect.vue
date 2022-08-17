@@ -83,8 +83,10 @@ export default {
                     name: this.$translate("Ceres::Template." + salutation.name)
                 };
             });
+            console.log(this.enabledAddressFields[countryKey]);
+            console.log(addressKey);
 
-            if (this.enabledAddressFields[countryKey].includes(`${addressKey}.name1`))
+            if (this.enabledAddressFields[countryKey].includes(`${addressKey}.name1`) || this.enabledAddressFields[countryKey].includes(`${addressKey}.salutations`))
             {
                 return salutations;
 
