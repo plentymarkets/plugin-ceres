@@ -2884,8 +2884,12 @@
                     "deprecated": true,
                     "label": "Config.addressDefaultSalutation",
                     "options": {
-                        "defaultValue": "male",
+                        "defaultValue": "please select",
                         "selectBoxValues": [
+                            {
+                                "value": "please select",
+                                "caption": "Config.addressDefaultSalutationValuePleaseSelect"
+                            },
                             {
                                 "value": "male",
                                 "caption": "Config.addressDefaultSalutationValueMale"
