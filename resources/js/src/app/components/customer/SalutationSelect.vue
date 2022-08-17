@@ -83,13 +83,10 @@ export default {
                     name: this.$translate("Ceres::Template." + salutation.name)
                 };
             });
-            console.log(this.enabledAddressFields[countryKey]);
-            console.log(addressKey);
 
-            if (this.enabledAddressFields[countryKey].includes(`${addressKey}.name1`) || this.enabledAddressFields[countryKey].includes(`${addressKey}.salutations`))
+            if (this.enabledAddressFields[countryKey].includes(`${addressKey}.name1`) || this.enabledAddressFields[countryKey].includes(`${addressKey}.salutation`))
             {
                 return salutations;
-
             }
 
             return salutations.filter(salutation => salutation.key !== "company" && salutation.key !== "please select");
