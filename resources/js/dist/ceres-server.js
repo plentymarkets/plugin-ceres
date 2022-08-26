@@ -42022,7 +42022,14 @@ var render = function() {
                       ) +
                       "</dd>"
                     : "<!---->") +
-                  " <hr> "
+                  " " +
+                  (_vm.visibleFields.includes("subAmount") ||
+                  _vm.visibleFields.includes("basket.order_total_net") ||
+                  _vm.visibleFields.includes("vats") ||
+                  _vm.visibleFields.includes("basket.vat")
+                    ? "<hr>"
+                    : "<!---->") +
+                  " "
               ),
               _vm._t("before-total-sum"),
               _vm._ssrNode(
