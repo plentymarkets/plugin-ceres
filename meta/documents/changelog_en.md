@@ -1,5 +1,11 @@
 # Release Notes for plentyShop LTS
 
+## v5.0.55 (2022-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.54...5.0.55" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Fixed
+
+- If the cookie bar contained a lot of text, it could partially protrude from the screen. In this situation it will be scrollable from now on 
+
 ## v5.0.54 (2022-08-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.53...5.0.54" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
