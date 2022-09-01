@@ -4,7 +4,8 @@
 
 ### Fixed
 
-- If the cookie bar contained a lot of text, it could partially protrude from the screen. In this situation it will be scrollable from now on 
+- If the cookie bar contained a lot of text, it could partially protrude from the screen. In this situation it will be scrollable from now on.
+- The og:image property contained an incorrect path and caused legal errors at meta data check. The problem was solved by changing parts of the path. 
 
 ## v5.0.54 (2022-08-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.53...5.0.54" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
