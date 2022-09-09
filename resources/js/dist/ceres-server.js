@@ -49967,7 +49967,7 @@ var render = function() {
                   '</span> <strong class="ml-1">' +
                   (_vm.surcharge > 0
                     ? _vm._ssrEscape(
-                        "( " +
+                        "(" +
                           _vm._s(_vm.inclOrPlus) +
                           " " +
                           _vm._s(_vm._f("currency")(_vm.surcharge)) +
@@ -50033,7 +50033,7 @@ var render = function() {
                       '</span> <strong class="ml-1">' +
                       (_vm.surcharge > 0
                         ? _vm._ssrEscape(
-                            "( " +
+                            "(" +
                               _vm._s(_vm.inclOrPlus) +
                               " " +
                               _vm._s(_vm._f("currency")(_vm.surcharge)) +
@@ -50149,7 +50149,7 @@ var render = function() {
                       '</span> <strong class="ml-1">' +
                       (_vm.surcharge > 0
                         ? _vm._ssrEscape(
-                            "( " +
+                            "(" +
                               _vm._s(_vm.inclOrPlus) +
                               " " +
                               _vm._s(_vm._f("currency")(_vm.surcharge)) +
@@ -50247,7 +50247,7 @@ var render = function() {
                       '</span> <strong class="ml-1">' +
                       (_vm.surcharge > 0
                         ? _vm._ssrEscape(
-                            "( " +
+                            "(" +
                               _vm._s(_vm.inclOrPlus) +
                               " " +
                               _vm._s(_vm._f("currency")(_vm.surcharge)) +
