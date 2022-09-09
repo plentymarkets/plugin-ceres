@@ -6,6 +6,13 @@
 
 - Wenn die Cookiebar viel Text enthielt konnte sie teilweise aus dem Bildschirm ragen. In diesem Fall wird sie zukünftig scrollbar
 - Überflüssige Leerzeichen in der OrderPropertyListItem.vue entfernt
+- Auf Kategorienseiten wurde für das og:image eine falsche Bilderurl ausgewählt
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.56 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- [resources/views/PageDesign/Partials/PageMetadata.twig](https://github.com/plentymarkets/plugin-ceres/pull/3329/files#diff-98be1deb08f271fd2d41c05df5d33c20846032e5b77cb7ba59f615dda20d767f)
+
 
 ## v5.0.54 (2022-08-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.53...5.0.54" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
