@@ -136,6 +136,11 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $sku = '';
 
     /**
+     * @var string $conditionOfItem Contains the condition of the current item for structured data.
+     */
+    public $conditionOfItem = '';
+
+    /**
      * @inheritDoc
      */
     public function init($params)
@@ -152,6 +157,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
 
         $this->item = $params['item'];
         $itemData = $this->item['documents'][0]['data'];
+
+        $this->detectConditionString($itemData['item']['condition']);
 
         $availabilityId = $itemData['variation']['availability']['id'];
         $mappedAvailability = $configRepository->get('Ceres.availability.mapping.availability' . $availabilityId);
@@ -268,6 +275,28 @@ class SingleItemContext extends GlobalContext implements ContextInterface
 
         $this->bodyClasses[] = "item-" . $itemData['item']['id'];
         $this->bodyClasses[] = "variation-" . $itemData['variation']['id'];
+    }
+
+
+    /**
+     * @param $condition
+     *
+     */
+    private function detectConditionString($condition)
+    {
+        switch ($condition['id']) {
+            case 0:
+                $this->conditionOfItem = 'new';
+                break;
+            case 1:
+                $this->conditionOfItem = 'used';
+                break;
+            case 4:
+                $this->conditionOfItem = 'refurbished';
+                break;
+            default:
+                $this->conditionOfItem = $condition['names']['name'];
+        }
     }
 
     /**
