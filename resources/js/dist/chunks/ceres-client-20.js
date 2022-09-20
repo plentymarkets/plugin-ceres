@@ -809,7 +809,12 @@ var render = function() {
                 ]
               : _vm._e(),
             _vm._v(" "),
-            _c("hr"),
+            _vm.visibleFields.includes("subAmount") ||
+            _vm.visibleFields.includes("basket.order_total_net") ||
+            _vm.visibleFields.includes("vats") ||
+            _vm.visibleFields.includes("basket.vat")
+              ? _c("hr")
+              : _vm._e(),
             _vm._v(" "),
             _vm._t("before-total-sum"),
             _vm._v(" "),

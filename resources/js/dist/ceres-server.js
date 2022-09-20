@@ -42022,7 +42022,14 @@ var render = function() {
                       ) +
                       "</dd>"
                     : "<!---->") +
-                  " <hr> "
+                  " " +
+                  (_vm.visibleFields.includes("subAmount") ||
+                  _vm.visibleFields.includes("basket.order_total_net") ||
+                  _vm.visibleFields.includes("vats") ||
+                  _vm.visibleFields.includes("basket.vat")
+                    ? "<hr>"
+                    : "<!---->") +
+                  " "
               ),
               _vm._t("before-total-sum"),
               _vm._ssrNode(
@@ -49960,7 +49967,7 @@ var render = function() {
                   '</span> <strong class="ml-1">' +
                   (_vm.surcharge > 0
                     ? _vm._ssrEscape(
-                        "( " +
+                        "(" +
                           _vm._s(_vm.inclOrPlus) +
                           " " +
                           _vm._s(_vm._f("currency")(_vm.surcharge)) +
@@ -50026,7 +50033,7 @@ var render = function() {
                       '</span> <strong class="ml-1">' +
                       (_vm.surcharge > 0
                         ? _vm._ssrEscape(
-                            "( " +
+                            "(" +
                               _vm._s(_vm.inclOrPlus) +
                               " " +
                               _vm._s(_vm._f("currency")(_vm.surcharge)) +
@@ -50142,7 +50149,7 @@ var render = function() {
                       '</span> <strong class="ml-1">' +
                       (_vm.surcharge > 0
                         ? _vm._ssrEscape(
-                            "( " +
+                            "(" +
                               _vm._s(_vm.inclOrPlus) +
                               " " +
                               _vm._s(_vm._f("currency")(_vm.surcharge)) +
@@ -50240,7 +50247,7 @@ var render = function() {
                       '</span> <strong class="ml-1">' +
                       (_vm.surcharge > 0
                         ? _vm._ssrEscape(
-                            "( " +
+                            "(" +
                               _vm._s(_vm.inclOrPlus) +
                               " " +
                               _vm._s(_vm._f("currency")(_vm.surcharge)) +

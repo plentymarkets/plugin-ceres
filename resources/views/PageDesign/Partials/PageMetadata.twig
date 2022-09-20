@@ -48,6 +48,10 @@
 {% endif %}
 {% set title = title ~ trans("Ceres::Template.headerCompanyName") %}
 
+{% if image starts with 'category/' %}
+    {% set image = "/documents/" ~ image %}
+{% endif %}
+
 {% if not (image starts with 'https://' or image starts with 'http://' or image starts with 'layout/'or image starts with '/documents/') %}
     {% set image = plugin_path('Ceres') ~ "/" ~ image %}
 {% endif %}

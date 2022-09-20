@@ -1,5 +1,18 @@
 # Release Notes for plentyShop LTS
 
+## v5.0.55 (2022-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.54...5.0.55" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Fixed
+
+- If the cookie bar contained a lot of text, it could partially protrude from the screen. In this situation it will be scrollable from now on 
+- Removed unnecessary spaces in OrderPropertyListItem.vue
+- On category pages, an incorrect image url was selected for the og:image
+
+### Changed templates
+
+- In Ceres 5.0.55 we made changes to template files which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
+-[resources/views/PageDesign/Partials/PageMetadata.twig](https://github.com/plentymarkets/plugin-ceres/pull/3329/files#diff-98be1deb08f271fd2d41c05df5d33c20846032e5b77cb7ba59f615dda20d767f)
+
 ## v5.0.54 (2022-08-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.53...5.0.54" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
