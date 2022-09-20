@@ -21,6 +21,36 @@ class SeoMapping
             'global'   => false,
             'optional' => true
         ],
+        'seo_itemConditionNew' => [
+            'field'    => 'condition.mapping.condition0',
+            'type'     => 'string',
+            'global'   => false,
+            'optional' => true
+        ],
+        'seo_itemConditionUsed' => [
+            'field'    => 'condition.mapping.condition1',
+            'type'     => 'string',
+            'global'   => false,
+            'optional' => true
+        ],
+        'seo_itemConditionNewBox' => [
+            'field'    => 'condition.mapping.condition2',
+            'type'     => 'string',
+            'global'   => false,
+            'optional' => true
+        ],
+        'seo_itemConditionNewLabel' => [
+            'field'    => 'condition.mapping.condition3',
+            'type'     => 'string',
+            'global'   => false,
+            'optional' => true
+        ],
+        'seo_itemConditionBStock' => [
+            'field'    => 'condition.mapping.condition4',
+            'type'     => 'string',
+            'global'   => false,
+            'optional' => true
+        ],
         'seo_availability1' => [
             'field'    => 'availability.mapping.availability1',
             'type'     => 'string',

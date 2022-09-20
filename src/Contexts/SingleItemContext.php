@@ -158,7 +158,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $this->item = $params['item'];
         $itemData = $this->item['documents'][0]['data'];
 
-        $this->detectConditionString($itemData['item']['condition']);
+
+        $this->conditionOfItem = $this->detectItemCondition($itemData['item']['condition']['id']);
 
         $availabilityId = $itemData['variation']['availability']['id'];
         $mappedAvailability = $configRepository->get('Ceres.availability.mapping.availability' . $availabilityId);
@@ -277,28 +278,36 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $this->bodyClasses[] = "variation-" . $itemData['variation']['id'];
     }
 
-
     /**
-     * @param $condition
+     * Returns schema.org value for the given condition id
      *
+     * @param int $conditionId
+     * @return string
      */
-    private function detectConditionString($condition)
+    private function detectItemCondition(int $conditionId): string
     {
-        switch ($condition['id']) {
+        switch($conditionId)
+        {
             case 0:
-                $this->conditionOfItem = 'new';
+                $conditionString = $this->ceresConfig->seo->itemCondition0;
                 break;
             case 1:
-                $this->conditionOfItem = 'used';
+                $conditionString = $this->ceresConfig->seo->itemCondition1;
+                break;
+            case 2:
+                $conditionString = $this->ceresConfig->seo->itemCondition2;
+                break;
+            case 3:
+                $conditionString = $this->ceresConfig->seo->itemCondition3;
                 break;
             case 4:
-                $this->conditionOfItem = 'refurbished';
+                $conditionString = $this->ceresConfig->seo->itemCondition4;
                 break;
             default:
-                $this->conditionOfItem = $condition['names']['name'];
+                $conditionString = 'https://schema.org/NewCondition';
         }
+        return $conditionString;
     }
-
     /**
      * @param $referrers
      *
