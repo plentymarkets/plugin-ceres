@@ -1,28 +1,29 @@
 # Release Notes für plentyShop LTS
 
-## v5.0.55 (2022-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.54...5.0.55" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.55 (2022-09-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.55...5.0.56" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
 
-- Im Assistenten können für die Artikelzustände ein mapping auf Werte von schema.org gesetzt werden. Prüft ob das Standardmapping für euch passt.
+- Im Schritt **SEO** des plentyShop LTS-Assistenten kann nun für Artikelzustände in den strukturierten Daten ein Mapping auf Werte von schema.org gesetzt werden. Bitte prüfe, ob die Standardeinstellungen des Mappings ausreichen und passe es gegebenenfalls an.
 
 ### Neu
 
-- Es wurde eine Einstellungsmöglichkeit geschaffen für die "itemCondition" im schema.org Format
-- Für die Seitennummerierung auf Artikelkategorien wurden aria-label verbaut, die über die Mehrsprachigkeit verändert werden können.
+- In den Plugin-Einstellungen und im Schritt **SEO** des plentyShop LTS-Assistenten wurde die Möglichkeit geschaffen, die **itemCondition** in den strukturierten Daten im schema.org-Format zu konfigurieren.
+- Für die Seitennummerierung auf Artikelkategorieseiten wurden `aria-label` verbaut, die über das Menü **CMS » Mehrsprachigkeit** angepasst werden können.
 
 ### Behoben
 
-- Wenn die Cookiebar viel Text enthielt konnte sie teilweise aus dem Bildschirm ragen. In diesem Fall wird sie zukünftig scrollbar
-- Überflüssige Leerzeichen in der OrderPropertyListItem.vue entfernt
-- Auf Kategorienseiten wurde für das og:image eine falsche Bilderurl ausgewählt
+- Wenn die Cookiebar viel Text enthielt, konnte sie teilweise aus dem Bildschirm herausragen. Dies wurde behoben. Bei einer großen Menge an Text wird die Cookiebar ab jetzt automatisch scrollbar. 
+- Es wurden überflüssige Leerzeichen in der `OrderPropertyListItem.vue` entfernt.
+- Auf Kategorienseiten wurde für das `og:image` eine falsche Bild-URL ausgewählt. Dies wurde behoben.
+- Artikelnamen, die Buchstaben mit Akzenten enthielten, wurden in Artikellisten-Widgets als HTML-Entitäten erkannt, wenn SSR im System aktiv war. Dies wurde behoben. 
 
 ### Angepasste Templates
 
-- Im Zuge des Releases von Ceres 5.0.56 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- Im Zuge des Releases von Ceres 5.0.55 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
 - [resources/views/PageDesign/Partials/PageMetadata.twig](https://github.com/plentymarkets/plugin-ceres/pull/3329/files#diff-98be1deb08f271fd2d41c05df5d33c20846032e5b77cb7ba59f615dda20d767f)
--[resources/views/Category/Item/Partials/Pagination.twig](https://github.com/plentymarkets/plugin-ceres/pull/3325/files#diff-1b8d2c7ce7416f660f89d11ad8e368be614c2b98efc30526e74286c7f180c3b8)
-
+- [resources/views/Category/Item/Partials/Pagination.twig](https://github.com/plentymarkets/plugin-ceres/pull/3325/files#diff-1b8d2c7ce7416f660f89d11ad8e368be614c2b98efc30526e74286c7f180c3b8)
+- [resources/js/src/app/components/itemList/CategoryItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3265/files#diff-4c35af622ef09ba8949eb1c47557e3e6651b088291a0d2e2463c9244007b5516)
 
 ## v5.0.54 (2022-08-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.53...5.0.54" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
@@ -120,17 +121,6 @@
 
 - Im Zuge des Releases von Ceres 5.0.50 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
 - [resources/views/Checkout/Macros/OrderTotals.twig](https://github.com/plentymarkets/plugin-ceres/pull/3246/files#diff-8ea271aa9d97b46230e0f009330b3da0be4020cf00d5e8f214bcfb05425186d2)
-
-## v5.0.50 (2022-XX-XX) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.49...5.0.50" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
-
-### Behoben
-
-- Artikelnamen mit Accents im Artikellisten-Widget wurden mit aktivem SSR als HTML-Entities angezeigt. Dies wurde behoben.
-
-### Angepasste Templates
-
-- Im Zuge des Releases von Ceres 5.0.49 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
-- [resources/js/src/app/components/itemList/CategoryItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3265/files#diff-4c35af622ef09ba8949eb1c47557e3e6651b088291a0d2e2463c9244007b5516)
 
 ## v5.0.49 (2022-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.48...5.0.49" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
