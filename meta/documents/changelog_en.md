@@ -4,7 +4,7 @@
 
 ### TODO
 
-- In the **SEO** step of the plentyShop LTS assistant, you can now set a mapping for item conditions in the structured data to values from schema.org. Please check whether the default settings of the mapping is suitable for you and adjustit accordingly.
+- In the **SEO** step of the plentyShop LTS assistant, you can now set a mapping for item conditions in the structured data to values from schema.org. Please check whether the default setting of the mapping is suitable for you and adjust it accordingly.
 
 ### New
 
@@ -13,8 +13,8 @@
 
 ### Fixed
 
-- If the cookie bar contained a lot of text, it could be partially displayed beyond the boundaries of the screen. This has been fixed. In the case of a lot of text, the cookie bar will now be atomatically scrollable.
-- Unnecessary white spaces have been removed in `OrderPropertyListItem.vue`.
+- If the cookie bar contained a lot of text, it could be partially displayed beyond the boundaries of the screen. This has been fixed. In the case of an exceedingly high amount of text, the cookie bar will now be scrollable.
+- Unnecessary white spaces have been removed from `OrderPropertyListItem.vue`.
 - On category pages, an incorrect image URL was selected for the `og:image`. This has been fixed.
 - Item names that included characters with accents in item list widgets were detected as HTML entities if SSR was active in the system. This has been fixed.
 

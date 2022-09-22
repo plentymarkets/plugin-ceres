@@ -13,10 +13,10 @@
 
 ### Behoben
 
-- Wenn die Cookiebar viel Text enthielt, konnte sie teilweise aus dem Bildschirm heraus ragen. Dies wurde behoben. Bei einer großen Menge an Text wird die Cookiebar ab jetzt automatisch scrollbar. 
+- Wenn die Cookiebar viel Text enthielt, konnte sie teilweise aus dem Bildschirm herausragen. Dies wurde behoben. Bei einer großen Menge an Text wird die Cookiebar ab jetzt automatisch scrollbar. 
 - Es wurden überflüssige Leerzeichen in der `OrderPropertyListItem.vue` entfernt.
 - Auf Kategorienseiten wurde für das `og:image` eine falsche Bild-URL ausgewählt. Dies wurde behoben.
-- Artikelnamen, die Buchstaben mit Akzenten enthielten, wurden in Artikellisten-Widgets als HTML-Entitäten angezeigt, wenn SSR im System aktiv war. Dies wurde behoben. 
+- Artikelnamen, die Buchstaben mit Akzenten enthielten, wurden in Artikellisten-Widgets als HTML-Entitäten erkannt, wenn SSR im System aktiv war. Dies wurde behoben. 
 
 ### Angepasste Templates
 
