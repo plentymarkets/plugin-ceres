@@ -1,27 +1,29 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.55 (2022-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.54...5.0.55" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.55 (2022-09-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.55...5.0.56" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
 
-- In the assistant, you can set a mapping for the item states to values from schema.org. Check whether the standard mapping is suitable for you.
+- In the **SEO** step of the plentyShop LTS assistant, you can now set a mapping for item conditions in the structured data to values from schema.org. Please check whether the default settings of the mapping is suitable for you and adjustit accordingly.
 
 ### New
 
-- A setting option has been created for the "itemCondition" in schema.org format
-- For the pagination on item categories we are using aria-labels, which can be changed via multilingualism.
+- A new setting has been added to the plugin settings and the **SEO** step of the plentySHop LTS assistant with which you can configure the **itemCondition** of the structured data along the schema.org format.
+- `aria-labels` have been added to the pagination on item category pages. These can be customised in the **CMS » Multilingualism** menu.
 
 ### Fixed
 
-- If the cookie bar contained a lot of text, it could partially protrude from the screen. In this situation it will be scrollable from now on 
-- Removed unnecessary spaces in OrderPropertyListItem.vue
-- On category pages, an incorrect image url was selected for the og:image
+- If the cookie bar contained a lot of text, it could be partially displayed beyond the boundaries of the screen. This has been fixed. In the case of a lot of text, the cookie bar will now be atomatically scrollable.
+- Unnecessary white spaces have been removed in `OrderPropertyListItem.vue`.
+- On category pages, an incorrect image URL was selected for the `og:image`. This has been fixed.
+- Item names that included characters with accents in item list widgets were detected as HTML entities if SSR was active in the system. This has been fixed.
 
 ### Changed templates
 
 - In Ceres 5.0.55 we made changes to template files which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
 -[resources/views/PageDesign/Partials/PageMetadata.twig](https://github.com/plentymarkets/plugin-ceres/pull/3329/files#diff-98be1deb08f271fd2d41c05df5d33c20846032e5b77cb7ba59f615dda20d767f)
 -[resources/views/Category/Item/Partials/Pagination.twig](https://github.com/plentymarkets/plugin-ceres/pull/3325/files#diff-1b8d2c7ce7416f660f89d11ad8e368be614c2b98efc30526e74286c7f180c3b8)
+- [resources/js/src/app/components/itemList/CategoryItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3265/files#diff-4c35af622ef09ba8949eb1c47557e3e6651b088291a0d2e2463c9244007b5516)
 
 ## v5.0.54 (2022-08-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.53...5.0.54" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
