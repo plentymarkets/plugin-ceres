@@ -2,6 +2,10 @@
 
 ## v5.0.55 (2022-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.54...5.0.55" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
+### TODO
+
+- In the assistant, you can set a mapping for the item states to values from schema.org. Check whether the standard mapping is suitable for you.
+
 ### New
 
 - A setting option has been created for the "itemCondition" in schema.org format
