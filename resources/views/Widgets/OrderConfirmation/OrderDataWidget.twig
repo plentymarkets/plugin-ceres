@@ -156,7 +156,7 @@
         {{ Twig.if("shippingDate") }}
             <div class="row" {{ Twig.print('set_testing_attr("data-testing", "order-confirmation-shipping-date")') }}>
                 <strong class="col-6 col-sm-5">{{ Twig.trans("Ceres::Template.orderConfirmationEstimatedShippingDate") }}</strong>
-                <span class="col-6 col-sm-7">{{ Twig.print("shippingDate | date(Twig.trans('Ceres::Template.devDateFormat'))") }}</span>
+                <span class="col-6 col-sm-7">{{ Twig.print("shippingDate | date(trans('Ceres::Template.devDateFormat'))") }}</span>
             </div>
         {{ Twig.endif() }}
 
