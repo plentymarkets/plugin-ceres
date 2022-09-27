@@ -72,7 +72,7 @@
                     <a class="page-link{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                         {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}
                         {% if i != currentPage and not isPreview %}href="{{ baseURL ~ queryString({ 'page': target }) }}"{% endif %}
-                        aria-label="{{ trans("Ceres::Template.paginationGoToPage", {"page": "${ i }" }) }}"
+                        aria-label="{{ trans("Ceres::Template.paginationGoToPage", {"page": i }) }}"
                         {% if i == currentPage %} aria-current="true"{% endif %}>
                         {{ i }}
                     </a>
