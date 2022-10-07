@@ -5,6 +5,12 @@ var postcss = require('postcss');
 var postcssSCSS = require('postcss-scss');
 var glob = require('glob');
 
+// Clean output dir
+glob.sync(path.resolve(__dirname, '../resources/css/*.scss')).forEach(file =>
+    {
+        fs.rmSync(file);
+    })
+
 /*
  CLASS ImportTree
  */
