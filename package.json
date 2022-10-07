@@ -70,6 +70,7 @@
     "bootstrap": "4.4.1",
     "core-js": "^3.6.5",
     "custom-event-polyfill": "^1.0.0",
+    "dart-sass": "^1.25.0",
     "dayjs": "^1.8.26",
     "detect-browser": "^4.8.0",
     "flag-icon-css": "^2.9.0",
