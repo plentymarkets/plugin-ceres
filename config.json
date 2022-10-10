@@ -3892,6 +3892,144 @@
                         ]
                     }
                 },
+                "condition.mapping": {
+                    "type": "verticalContainer",
+                    "label": "Config.conditionMapping",
+                    "options": {
+                        "containerEntries": {
+                            "condition.mapping.condition0": {
+                                "type": "selectBox",
+                                "required": false,
+                                "label": "Config.itemConditionNew",
+                                "options": {
+                                    "defaultValue": "https://schema.org/NewCondition",
+                                    "selectBoxValues": [
+                                        {
+                                            "value": "https://schema.org/NewCondition",
+                                            "caption": "Config.conditionNew"
+                                        },
+                                        {
+                                            "value": "https://schema.org/DamagedCondition",
+                                            "caption": "Config.conditionDamaged"
+                                        },
+                                        {
+                                            "value": "https://schema.org/UsedCondition",
+                                            "caption": "Config.conditionUsed"
+                                        },
+                                        {
+                                            "value": "https://schema.org/RefurbishedCondition",
+                                            "caption": "Config.conditionRefurbished"
+                                        }
+                                    ]
+                                }
+                            },
+                            "condition.mapping.condition1": {
+                                "type": "selectBox",
+                                "required": false,
+                                "label": "Config.itemConditionUsed",
+                                "options": {
+                                    "defaultValue": "https://schema.org/UsedCondition",
+                                    "selectBoxValues": [
+                                        {
+                                            "value": "https://schema.org/NewCondition",
+                                            "caption": "Config.conditionNew"
+                                        },
+                                        {
+                                            "value": "https://schema.org/DamagedCondition",
+                                            "caption": "Config.conditionDamaged"
+                                        },
+                                        {
+                                            "value": "https://schema.org/UsedCondition",
+                                            "caption": "Config.conditionUsed"
+                                        },
+                                        {
+                                            "value": "https://schema.org/RefurbishedCondition",
+                                            "caption": "Config.conditionRefurbished"
+                                        }
+                                    ]
+                                }
+                            },
+                            "condition.mapping.condition2": {
+                                "type": "selectBox",
+                                "required": false,
+                                "label": "Config.itemConditionNewBox",
+                                "options": {
+                                    "defaultValue": "https://schema.org/NewCondition",
+                                    "selectBoxValues": [
+                                        {
+                                            "value": "https://schema.org/NewCondition",
+                                            "caption": "Config.conditionNew"
+                                        },
+                                        {
+                                            "value": "https://schema.org/DamagedCondition",
+                                            "caption": "Config.conditionDamaged"
+                                        },
+                                        {
+                                            "value": "https://schema.org/UsedCondition",
+                                            "caption": "Config.conditionUsed"
+                                        },
+                                        {
+                                            "value": "https://schema.org/RefurbishedCondition",
+                                            "caption": "Config.conditionRefurbished"
+                                        }
+                                    ]
+                                }
+                            },
+                            "condition.mapping.condition3": {
+                                "type": "selectBox",
+                                "required": false,
+                                "label": "Config.itemConditionNewLabel",
+                                "options": {
+                                    "defaultValue": "https://schema.org/NewCondition",
+                                    "selectBoxValues": [
+                                        {
+                                            "value": "https://schema.org/NewCondition",
+                                            "caption": "Config.conditionNew"
+                                        },
+                                        {
+                                            "value": "https://schema.org/DamagedCondition",
+                                            "caption": "Config.conditionDamaged"
+                                        },
+                                        {
+                                            "value": "https://schema.org/UsedCondition",
+                                            "caption": "Config.conditionUsed"
+                                        },
+                                        {
+                                            "value": "https://schema.org/RefurbishedCondition",
+                                            "caption": "Config.conditionRefurbished"
+                                        }
+                                    ]
+                                }
+                            },
+                            "condition.mapping.condition4": {
+                                "type": "selectBox",
+                                "required": false,
+                                "label": "Config.itemConditionBStock",
+                                "options": {
+                                    "defaultValue": "https://schema.org/UsedCondition",
+                                    "selectBoxValues": [
+                                        {
+                                            "value": "https://schema.org/NewCondition",
+                                            "caption": "Config.conditionNew"
+                                        },
+                                        {
+                                            "value": "https://schema.org/DamagedCondition",
+                                            "caption": "Config.conditionDamaged"
+                                        },
+                                        {
+                                            "value": "https://schema.org/UsedCondition",
+                                            "caption": "Config.conditionUsed"
+                                        },
+                                        {
+                                            "value": "https://schema.org/RefurbishedCondition",
+                                            "caption": "Config.conditionRefurbished"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
                 "availability.mapping": {
                     "type": "verticalContainer",
                     "label": "Config.availabilityMapping",
@@ -3909,40 +4047,43 @@
                                             "caption": "Config.availabilityNotSet"
                                         },
                                         {
-                                            "value": "http://schema.org/InStock",
+                                            "value": "https://schema.org/InStock",
                                             "caption": "Config.availabilityInStock"
                                         },
                                         {
-                                            "value": "http://schema.org/OutOfStock",
+                                            "value": "https://schema.org/OutOfStock",
                                             "caption": "Config.availabilityOutOfStock"
                                         },
                                         {
-                                            "value": "http://schema.org/PreOrder",
+                                            "value": "https://schema.org/PreOrder",
                                             "caption": "Config.availabilityPreOrder"
                                         },
                                         {
-                                            "value": "http://schema.org/Discontinued",
+                                            "value": "https://schema.org/Discontinued",
                                             "caption": "Config.availabilityDiscontinued"
                                         },
                                         {
-                                            "value": "http://schema.org/InStoreOnly",
+                                            "value": "https://schema.org/InStoreOnly",
                                             "caption": "Config.availabilityInStoreOnly"
                                         },
                                         {
-                                            "value": "http://schema.org/LimitedAvailability",
+                                            "value": "https://schema.org/LimitedAvailability",
                                             "caption": "Config.availabilityLimitedAvailability"
                                         },
                                         {
-                                            "value": "http://schema.org/OnlineOnly",
+                                            "value": "https://schema.org/OnlineOnly",
                                             "caption": "Config.availabilityOnlineOnly"
                                         },
                                         {
-                                            "value": "http://schema.org/PreSale",
+                                            "value": "https://schema.org/PreSale",
                                             "caption": "Config.availabilityPreSale"
                                         },
                                         {
-                                            "value": "http://schema.org/SoldOut",
+                                            "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
+                                        },                                        {
+                                            "value": "https://schema.org/BackOrder",
+                                            "caption": "Config.availabilityBackOrder"
                                         }
                                     ]
                                 }
@@ -3959,40 +4100,43 @@
                                             "caption": "Config.availabilityNotSet"
                                         },
                                         {
-                                            "value": "http://schema.org/InStock",
+                                            "value": "https://schema.org/InStock",
                                             "caption": "Config.availabilityInStock"
                                         },
                                         {
-                                            "value": "http://schema.org/OutOfStock",
+                                            "value": "https://schema.org/OutOfStock",
                                             "caption": "Config.availabilityOutOfStock"
                                         },
                                         {
-                                            "value": "http://schema.org/PreOrder",
+                                            "value": "https://schema.org/PreOrder",
                                             "caption": "Config.availabilityPreOrder"
                                         },
                                         {
-                                            "value": "http://schema.org/Discontinued",
+                                            "value": "https://schema.org/Discontinued",
                                             "caption": "Config.availabilityDiscontinued"
                                         },
                                         {
-                                            "value": "http://schema.org/InStoreOnly",
+                                            "value": "https://schema.org/InStoreOnly",
                                             "caption": "Config.availabilityInStoreOnly"
                                         },
                                         {
-                                            "value": "http://schema.org/LimitedAvailability",
+                                            "value": "https://schema.org/LimitedAvailability",
                                             "caption": "Config.availabilityLimitedAvailability"
                                         },
                                         {
-                                            "value": "http://schema.org/OnlineOnly",
+                                            "value": "https://schema.org/OnlineOnly",
                                             "caption": "Config.availabilityOnlineOnly"
                                         },
                                         {
-                                            "value": "http://schema.org/PreSale",
+                                            "value": "https://schema.org/PreSale",
                                             "caption": "Config.availabilityPreSale"
                                         },
                                         {
-                                            "value": "http://schema.org/SoldOut",
+                                            "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
+                                        },                                        {
+                                            "value": "https://schema.org/BackOrder",
+                                            "caption": "Config.availabilityInStock"
                                         }
                                     ]
                                 }
@@ -4009,40 +4153,43 @@
                                             "caption": "Config.availabilityNotSet"
                                         },
                                         {
-                                            "value": "http://schema.org/InStock",
+                                            "value": "https://schema.org/InStock",
                                             "caption": "Config.availabilityInStock"
                                         },
                                         {
-                                            "value": "http://schema.org/OutOfStock",
+                                            "value": "https://schema.org/OutOfStock",
                                             "caption": "Config.availabilityOutOfStock"
                                         },
                                         {
-                                            "value": "http://schema.org/PreOrder",
+                                            "value": "https://schema.org/PreOrder",
                                             "caption": "Config.availabilityPreOrder"
                                         },
                                         {
-                                            "value": "http://schema.org/Discontinued",
+                                            "value": "https://schema.org/Discontinued",
                                             "caption": "Config.availabilityDiscontinued"
                                         },
                                         {
-                                            "value": "http://schema.org/InStoreOnly",
+                                            "value": "https://schema.org/InStoreOnly",
                                             "caption": "Config.availabilityInStoreOnly"
                                         },
                                         {
-                                            "value": "http://schema.org/LimitedAvailability",
+                                            "value": "https://schema.org/LimitedAvailability",
                                             "caption": "Config.availabilityLimitedAvailability"
                                         },
                                         {
-                                            "value": "http://schema.org/OnlineOnly",
+                                            "value": "https://schema.org/OnlineOnly",
                                             "caption": "Config.availabilityOnlineOnly"
                                         },
                                         {
-                                            "value": "http://schema.org/PreSale",
+                                            "value": "https://schema.org/PreSale",
                                             "caption": "Config.availabilityPreSale"
                                         },
                                         {
-                                            "value": "http://schema.org/SoldOut",
+                                            "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
+                                        },                                        {
+                                            "value": "https://schema.org/BackOrder",
+                                            "caption": "Config.availabilityInStock"
                                         }
                                     ]
                                 }
@@ -4059,40 +4206,43 @@
                                             "caption": "Config.availabilityNotSet"
                                         },
                                         {
-                                            "value": "http://schema.org/InStock",
+                                            "value": "https://schema.org/InStock",
                                             "caption": "Config.availabilityInStock"
                                         },
                                         {
-                                            "value": "http://schema.org/OutOfStock",
+                                            "value": "https://schema.org/OutOfStock",
                                             "caption": "Config.availabilityOutOfStock"
                                         },
                                         {
-                                            "value": "http://schema.org/PreOrder",
+                                            "value": "https://schema.org/PreOrder",
                                             "caption": "Config.availabilityPreOrder"
                                         },
                                         {
-                                            "value": "http://schema.org/Discontinued",
+                                            "value": "https://schema.org/Discontinued",
                                             "caption": "Config.availabilityDiscontinued"
                                         },
                                         {
-                                            "value": "http://schema.org/InStoreOnly",
+                                            "value": "https://schema.org/InStoreOnly",
                                             "caption": "Config.availabilityInStoreOnly"
                                         },
                                         {
-                                            "value": "http://schema.org/LimitedAvailability",
+                                            "value": "https://schema.org/LimitedAvailability",
                                             "caption": "Config.availabilityLimitedAvailability"
                                         },
                                         {
-                                            "value": "http://schema.org/OnlineOnly",
+                                            "value": "https://schema.org/OnlineOnly",
                                             "caption": "Config.availabilityOnlineOnly"
                                         },
                                         {
-                                            "value": "http://schema.org/PreSale",
+                                            "value": "https://schema.org/PreSale",
                                             "caption": "Config.availabilityPreSale"
                                         },
                                         {
-                                            "value": "http://schema.org/SoldOut",
+                                            "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
+                                        },                                        {
+                                            "value": "https://schema.org/BackOrder",
+                                            "caption": "Config.availabilityInStock"
                                         }
                                     ]
                                 }
@@ -4109,40 +4259,43 @@
                                             "caption": "Config.availabilityNotSet"
                                         },
                                         {
-                                            "value": "http://schema.org/InStock",
+                                            "value": "https://schema.org/InStock",
                                             "caption": "Config.availabilityInStock"
                                         },
                                         {
-                                            "value": "http://schema.org/OutOfStock",
+                                            "value": "https://schema.org/OutOfStock",
                                             "caption": "Config.availabilityOutOfStock"
                                         },
                                         {
-                                            "value": "http://schema.org/PreOrder",
+                                            "value": "https://schema.org/PreOrder",
                                             "caption": "Config.availabilityPreOrder"
                                         },
                                         {
-                                            "value": "http://schema.org/Discontinued",
+                                            "value": "https://schema.org/Discontinued",
                                             "caption": "Config.availabilityDiscontinued"
                                         },
                                         {
-                                            "value": "http://schema.org/InStoreOnly",
+                                            "value": "https://schema.org/InStoreOnly",
                                             "caption": "Config.availabilityInStoreOnly"
                                         },
                                         {
-                                            "value": "http://schema.org/LimitedAvailability",
+                                            "value": "https://schema.org/LimitedAvailability",
                                             "caption": "Config.availabilityLimitedAvailability"
                                         },
                                         {
-                                            "value": "http://schema.org/OnlineOnly",
+                                            "value": "https://schema.org/OnlineOnly",
                                             "caption": "Config.availabilityOnlineOnly"
                                         },
                                         {
-                                            "value": "http://schema.org/PreSale",
+                                            "value": "https://schema.org/PreSale",
                                             "caption": "Config.availabilityPreSale"
                                         },
                                         {
-                                            "value": "http://schema.org/SoldOut",
+                                            "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
+                                        },                                        {
+                                            "value": "https://schema.org/BackOrder",
+                                            "caption": "Config.availabilityInStock"
                                         }
                                     ]
                                 }
@@ -4159,40 +4312,43 @@
                                             "caption": "Config.availabilityNotSet"
                                         },
                                         {
-                                            "value": "http://schema.org/InStock",
+                                            "value": "https://schema.org/InStock",
                                             "caption": "Config.availabilityInStock"
                                         },
                                         {
-                                            "value": "http://schema.org/OutOfStock",
+                                            "value": "https://schema.org/OutOfStock",
                                             "caption": "Config.availabilityOutOfStock"
                                         },
                                         {
-                                            "value": "http://schema.org/PreOrder",
+                                            "value": "https://schema.org/PreOrder",
                                             "caption": "Config.availabilityPreOrder"
                                         },
                                         {
-                                            "value": "http://schema.org/Discontinued",
+                                            "value": "https://schema.org/Discontinued",
                                             "caption": "Config.availabilityDiscontinued"
                                         },
                                         {
-                                            "value": "http://schema.org/InStoreOnly",
+                                            "value": "https://schema.org/InStoreOnly",
                                             "caption": "Config.availabilityInStoreOnly"
                                         },
                                         {
-                                            "value": "http://schema.org/LimitedAvailability",
+                                            "value": "https://schema.org/LimitedAvailability",
                                             "caption": "Config.availabilityLimitedAvailability"
                                         },
                                         {
-                                            "value": "http://schema.org/OnlineOnly",
+                                            "value": "https://schema.org/OnlineOnly",
                                             "caption": "Config.availabilityOnlineOnly"
                                         },
                                         {
-                                            "value": "http://schema.org/PreSale",
+                                            "value": "https://schema.org/PreSale",
                                             "caption": "Config.availabilityPreSale"
                                         },
                                         {
-                                            "value": "http://schema.org/SoldOut",
+                                            "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
+                                        },                                        {
+                                            "value": "https://schema.org/BackOrder",
+                                            "caption": "Config.availabilityInStock"
                                         }
                                     ]
                                 }
@@ -4209,40 +4365,43 @@
                                             "caption": "Config.availabilityNotSet"
                                         },
                                         {
-                                            "value": "http://schema.org/InStock",
+                                            "value": "https://schema.org/InStock",
                                             "caption": "Config.availabilityInStock"
                                         },
                                         {
-                                            "value": "http://schema.org/OutOfStock",
+                                            "value": "https://schema.org/OutOfStock",
                                             "caption": "Config.availabilityOutOfStock"
                                         },
                                         {
-                                            "value": "http://schema.org/PreOrder",
+                                            "value": "https://schema.org/PreOrder",
                                             "caption": "Config.availabilityPreOrder"
                                         },
                                         {
-                                            "value": "http://schema.org/Discontinued",
+                                            "value": "https://schema.org/Discontinued",
                                             "caption": "Config.availabilityDiscontinued"
                                         },
                                         {
-                                            "value": "http://schema.org/InStoreOnly",
+                                            "value": "https://schema.org/InStoreOnly",
                                             "caption": "Config.availabilityInStoreOnly"
                                         },
                                         {
-                                            "value": "http://schema.org/LimitedAvailability",
+                                            "value": "https://schema.org/LimitedAvailability",
                                             "caption": "Config.availabilityLimitedAvailability"
                                         },
                                         {
-                                            "value": "http://schema.org/OnlineOnly",
+                                            "value": "https://schema.org/OnlineOnly",
                                             "caption": "Config.availabilityOnlineOnly"
                                         },
                                         {
-                                            "value": "http://schema.org/PreSale",
+                                            "value": "https://schema.org/PreSale",
                                             "caption": "Config.availabilityPreSale"
                                         },
                                         {
-                                            "value": "http://schema.org/SoldOut",
+                                            "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
+                                        },                                        {
+                                            "value": "https://schema.org/BackOrder",
+                                            "caption": "Config.availabilityInStock"
                                         }
                                     ]
                                 }
@@ -4259,40 +4418,43 @@
                                             "caption": "Config.availabilityNotSet"
                                         },
                                         {
-                                            "value": "http://schema.org/InStock",
+                                            "value": "https://schema.org/InStock",
                                             "caption": "Config.availabilityInStock"
                                         },
                                         {
-                                            "value": "http://schema.org/OutOfStock",
+                                            "value": "https://schema.org/OutOfStock",
                                             "caption": "Config.availabilityOutOfStock"
                                         },
                                         {
-                                            "value": "http://schema.org/PreOrder",
+                                            "value": "https://schema.org/PreOrder",
                                             "caption": "Config.availabilityPreOrder"
                                         },
                                         {
-                                            "value": "http://schema.org/Discontinued",
+                                            "value": "https://schema.org/Discontinued",
                                             "caption": "Config.availabilityDiscontinued"
                                         },
                                         {
-                                            "value": "http://schema.org/InStoreOnly",
+                                            "value": "https://schema.org/InStoreOnly",
                                             "caption": "Config.availabilityInStoreOnly"
                                         },
                                         {
-                                            "value": "http://schema.org/LimitedAvailability",
+                                            "value": "https://schema.org/LimitedAvailability",
                                             "caption": "Config.availabilityLimitedAvailability"
                                         },
                                         {
-                                            "value": "http://schema.org/OnlineOnly",
+                                            "value": "https://schema.org/OnlineOnly",
                                             "caption": "Config.availabilityOnlineOnly"
                                         },
                                         {
-                                            "value": "http://schema.org/PreSale",
+                                            "value": "https://schema.org/PreSale",
                                             "caption": "Config.availabilityPreSale"
                                         },
                                         {
-                                            "value": "http://schema.org/SoldOut",
+                                            "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
+                                        },                                        {
+                                            "value": "https://schema.org/BackOrder",
+                                            "caption": "Config.availabilityInStock"
                                         }
                                     ]
                                 }
@@ -4309,40 +4471,43 @@
                                             "caption": "Config.availabilityNotSet"
                                         },
                                         {
-                                            "value": "http://schema.org/InStock",
+                                            "value": "https://schema.org/InStock",
                                             "caption": "Config.availabilityInStock"
                                         },
                                         {
-                                            "value": "http://schema.org/OutOfStock",
+                                            "value": "https://schema.org/OutOfStock",
                                             "caption": "Config.availabilityOutOfStock"
                                         },
                                         {
-                                            "value": "http://schema.org/PreOrder",
+                                            "value": "https://schema.org/PreOrder",
                                             "caption": "Config.availabilityPreOrder"
                                         },
                                         {
-                                            "value": "http://schema.org/Discontinued",
+                                            "value": "https://schema.org/Discontinued",
                                             "caption": "Config.availabilityDiscontinued"
                                         },
                                         {
-                                            "value": "http://schema.org/InStoreOnly",
+                                            "value": "https://schema.org/InStoreOnly",
                                             "caption": "Config.availabilityInStoreOnly"
                                         },
                                         {
-                                            "value": "http://schema.org/LimitedAvailability",
+                                            "value": "https://schema.org/LimitedAvailability",
                                             "caption": "Config.availabilityLimitedAvailability"
                                         },
                                         {
-                                            "value": "http://schema.org/OnlineOnly",
+                                            "value": "https://schema.org/OnlineOnly",
                                             "caption": "Config.availabilityOnlineOnly"
                                         },
                                         {
-                                            "value": "http://schema.org/PreSale",
+                                            "value": "https://schema.org/PreSale",
                                             "caption": "Config.availabilityPreSale"
                                         },
                                         {
-                                            "value": "http://schema.org/SoldOut",
+                                            "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
+                                        },                                        {
+                                            "value": "https://schema.org/BackOrder",
+                                            "caption": "Config.availabilityInStock"
                                         }
                                     ]
                                 }
@@ -4359,40 +4524,43 @@
                                             "caption": "Config.availabilityNotSet"
                                         },
                                         {
-                                            "value": "http://schema.org/InStock",
+                                            "value": "https://schema.org/InStock",
                                             "caption": "Config.availabilityInStock"
                                         },
                                         {
-                                            "value": "http://schema.org/OutOfStock",
+                                            "value": "https://schema.org/OutOfStock",
                                             "caption": "Config.availabilityOutOfStock"
                                         },
                                         {
-                                            "value": "http://schema.org/PreOrder",
+                                            "value": "https://schema.org/PreOrder",
                                             "caption": "Config.availabilityPreOrder"
                                         },
                                         {
-                                            "value": "http://schema.org/Discontinued",
+                                            "value": "https://schema.org/Discontinued",
                                             "caption": "Config.availabilityDiscontinued"
                                         },
                                         {
-                                            "value": "http://schema.org/InStoreOnly",
+                                            "value": "https://schema.org/InStoreOnly",
                                             "caption": "Config.availabilityInStoreOnly"
                                         },
                                         {
-                                            "value": "http://schema.org/LimitedAvailability",
+                                            "value": "https://schema.org/LimitedAvailability",
                                             "caption": "Config.availabilityLimitedAvailability"
                                         },
                                         {
-                                            "value": "http://schema.org/OnlineOnly",
+                                            "value": "https://schema.org/OnlineOnly",
                                             "caption": "Config.availabilityOnlineOnly"
                                         },
                                         {
-                                            "value": "http://schema.org/PreSale",
+                                            "value": "https://schema.org/PreSale",
                                             "caption": "Config.availabilityPreSale"
                                         },
                                         {
-                                            "value": "http://schema.org/SoldOut",
+                                            "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
+                                        },                                        {
+                                            "value": "https://schema.org/BackOrder",
+                                            "caption": "Config.availabilityInStock"
                                         }
                                     ]
                                 }

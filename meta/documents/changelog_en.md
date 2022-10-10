@@ -1,17 +1,47 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.55 (2022-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.54...5.0.55" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.56 (2022-XX-XX) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.55...5.0.56" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Die Inhalte von ShopBuilder-Bestellbestätigungsseiten müssen neu generiert werden.
 
 ### Fixed
 
-- If the cookie bar contained a lot of text, it could partially protrude from the screen. In this situation it will be scrollable from now on 
-- Removed unnecessary spaces in OrderPropertyListItem.vue
-- On category pages, an incorrect image url was selected for the og:image
+- Für die Seitennummerierung auf Artikelkategorieseiten wurden in Version 5.0.55 `aria-label` verbaut. Hier kam es zu einem Fehler, dieser wurde behoben.
+- Auf Bestellbestätigungsseiten, die über den ShopBuilder erstellt wurden, wurde das voraussichtliche Versanddatum nicht im korrekten Format angezeigt. Dies wurde behoben.
+
+### Changed templates
+
+- In Ceres 5.0.56 we made changes to template files which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
+- [resources/views/Category/Item/Partials/Pagination.twig](https://github.com/plentymarkets/plugin-ceres/pull/3340/files#diff-1b8d2c7ce7416f660f89d11ad8e368be614c2b98efc30526e74286c7f180c3b8)
+- [resources/views/Widgets/OrderConfirmation/OrderDataWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3339/files#diff-82affb09026a21fd94995e057ae7214f6751cf84dfed718216f4760865567c33)
+
+
+## v5.0.55 (2022-09-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.54...5.0.55" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- In the **SEO** step of the plentyShop LTS assistant, you can now set a mapping for item conditions in the structured data to values from schema.org. Please check whether the default setting of the mapping is suitable for you and adjust it accordingly.
+
+### New
+
+- A new setting has been added to the plugin settings and the **SEO** step of the plentySHop LTS assistant with which you can configure the **itemCondition** of the structured data along the schema.org format.
+- `aria-labels` have been added to the pagination on item category pages. These can be customised in the **CMS » Multilingualism** menu.
+
+### Fixed
+
+- If the cookie bar contained a lot of text, it could be partially displayed beyond the boundaries of the screen. This has been fixed. In the case of an exceedingly high amount of text, the cookie bar will now be scrollable.
+- Unnecessary white spaces have been removed from `OrderPropertyListItem.vue`.
+- On category pages, an incorrect image URL was selected for the `og:image`. This has been fixed.
+- Item names that included characters with accents in item list widgets were detected as HTML entities if SSR was active in the system. This has been fixed.
 
 ### Changed templates
 
 - In Ceres 5.0.55 we made changes to template files which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
 -[resources/views/PageDesign/Partials/PageMetadata.twig](https://github.com/plentymarkets/plugin-ceres/pull/3329/files#diff-98be1deb08f271fd2d41c05df5d33c20846032e5b77cb7ba59f615dda20d767f)
+-[resources/views/Category/Item/Partials/Pagination.twig](https://github.com/plentymarkets/plugin-ceres/pull/3325/files#diff-1b8d2c7ce7416f660f89d11ad8e368be614c2b98efc30526e74286c7f180c3b8)
+- [resources/js/src/app/components/itemList/CategoryItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3265/files#diff-4c35af622ef09ba8949eb1c47557e3e6651b088291a0d2e2463c9244007b5516)
 
 ## v5.0.54 (2022-08-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.53...5.0.54" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
