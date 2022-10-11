@@ -31,6 +31,8 @@
 import TranslationService from "../../services/TranslationService";
 import { isNullOrUndefined } from "../../helper/utils";
 import { mapState } from "vuex";
+const ApiService = require("../../services/ApiService");
+
 
 export default {
 
@@ -54,9 +56,9 @@ export default {
             default: () =>
             {}
         },
-        allCountries: {
-            type: Array,
-            default: null
+        isInvoice: {
+            type: Boolean,
+            default: true
         }
     },
 
@@ -64,7 +66,7 @@ export default {
     {
         return {
             stateList  : [],
-            selectedCountry: {}
+            selectedCountry: {},
         };
     },
 
@@ -111,6 +113,13 @@ export default {
     created()
     {
         this.updateSelectedCountry();
+        
+        if (this.isInvoice) {
+            ApiService.get('/rest/io/localization/countries').done(response =>
+            {
+                this.countryList = response.data;
+            });
+        }
     },
 
     methods: {

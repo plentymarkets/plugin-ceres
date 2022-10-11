@@ -1288,6 +1288,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
+var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "country-select",
   props: {
@@ -1304,6 +1307,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     requiredAddressFields: {
       type: Object,
       default: function _default() {}
+    },
+    isInvoice: {
+      type: Boolean,
+      default: true
     }
   },
   data: function data() {
@@ -1340,9 +1347,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     countryList: function countryList(state) {
       return state.localization.shippingCountries;
-    },
-    allCountries: function allCountries(state) {
-      return App.initialData.allShippingCountries;
     }
   })),
 
@@ -1350,7 +1354,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
    * Get the shipping countries
    */
   created: function created() {
+    var _this = this;
+
     this.updateSelectedCountry();
+
+    if (this.isInvoice) {
+      ApiService.get('/rest/io/localization/countries').done(function (response) {
+        _this.countryList = response.data;
+      });
+    }
   },
   methods: {
     /**
@@ -1373,7 +1385,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
      * @returns {*}
      */
     getCountryById: function getCountryById(countryId) {
-      return this.allCountries.find(function (country) {
+      return this.countryList.find(function (country) {
         if (country.id === countryId) {
           return country;
         }
@@ -6267,7 +6279,7 @@ var render = function render() {
         return _vm.countryChanged($event.target.value);
       }
     }
-  }, _vm._l(_vm.allCountries, function (country) {
+  }, _vm._l(_vm.countryList, function (country) {
     return _c("option", {
       key: country.id,
       domProps: {
