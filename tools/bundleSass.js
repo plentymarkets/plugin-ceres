@@ -6,7 +6,7 @@ var postcssSCSS = require('postcss-scss');
 var glob = require('glob');
 
 // Clean output dir
-glob.sync(path.resolve(__dirname, '../resources/css/*.scss')).forEach(file =>
+glob.sync(path.resolve(__dirname, '../resources/css/*.s[a|c]ss')).forEach(file =>
     {
         fs.rmSync(file);
     })
