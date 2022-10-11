@@ -97,7 +97,8 @@ export default {
 
         ...mapState({
             shippingCountryId: state => state.localization.shippingCountryId,
-            countryList: state => state.localization.shippingCountries
+            countryList: state => state.localization.shippingCountries,
+            allCountries: state => App.initialData.allShippingCountries
         })
     },
 

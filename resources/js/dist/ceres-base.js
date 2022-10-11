@@ -66939,6 +66939,7 @@ function createStore() {
 } // TODO: add code comment
 
 function initServerStore(store) {
+  store.commit("setAllShippingCountries", App.initialData.allShippingCountries);
   store.commit("setShippingCountries", App.initialData.shippingCountries);
   store.commit("setShippingCountryId", App.initialData.shippingCountryId);
   store.commit("setShowNetPrices", App.initialData.showNetPrices);
@@ -69334,6 +69335,7 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
 var state = function state() {
   return {
     shippingCountries: [],
+    allShippingCountries: [],
     shippingCountryId: null
   };
 };
@@ -69341,6 +69343,9 @@ var state = function state() {
 var mutations = {
   setShippingCountries: function setShippingCountries(state, shippingCountries) {
     state.shippingCountries = shippingCountries;
+  },
+  setAllShippingCountries: function setAllShippingCountries(state, allShippingCountries) {
+    state.allShippingCountries = allShippingCountries;
   },
   setShippingCountryId: function setShippingCountryId(state, shippingCountryId) {
     if (shippingCountryId !== state.shippingCountryId && !App.isSSR) {
