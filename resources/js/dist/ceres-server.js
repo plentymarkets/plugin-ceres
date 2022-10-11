@@ -2988,7 +2988,7 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
       return this.requiredAddressFields[iso];
     },
     countryList: function countryList() {
-      if (this.allCountries.length <= 0) {
+      if (this.allCountries && this.allCountries.length <= 0) {
         return this.filteredCountryList;
       }
 
