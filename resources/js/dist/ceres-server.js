@@ -3022,7 +3022,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
      * @returns {*}
      */
     getCountryById: function getCountryById(countryId) {
-      return this.countryList.find(function (country) {
+      return this.allCountries.find(function (country) {
         if (country.id === countryId) {
           return country;
         }
@@ -12694,7 +12694,7 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_vm._ssrNode('<div data-validate data-model="countryId" class="input-unit"><select' + _vm._ssrAttr("id", "country-id-select" + _vm._uid) + _vm._ssrAttr("value", _vm.selectedCountryId) + ' class="custom-select">' + _vm._ssrList(_vm.countryList, function (country) {
+  return _c("div", [_vm._ssrNode('<div data-validate data-model="countryId" class="input-unit"><select' + _vm._ssrAttr("id", "country-id-select" + _vm._uid) + _vm._ssrAttr("value", _vm.selectedCountryId) + ' class="custom-select">' + _vm._ssrList(_vm.allCountries, function (country) {
     return "<option" + _vm._ssrAttr("value", country.id) + _vm._ssrAttr("selected", country.id === _vm.selectedCountryId) + ">" + _vm._ssrEscape("\n                " + _vm._s(country.currLangName) + "\n            ") + "</option>";
   }) + "</select> <label" + _vm._ssrAttr("for", "country-id-select" + _vm._uid) + ">" + _vm._ssrEscape(_vm._s(_vm.$translate("Ceres::Template.headerCountry"))) + "</label></div> "), _vm.isInOptionalFields("stateId") ? [_vm.stateList && _vm.stateList.length > 0 ? _c("div", {
     directives: [{

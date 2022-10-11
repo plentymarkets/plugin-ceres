@@ -2,7 +2,7 @@
     <div>
         <div class="input-unit" data-validate="" data-model="countryId">
             <select :id="'country-id-select' + _uid" :value="selectedCountryId" class="custom-select" @change="countryChanged($event.target.value)">
-                <option :value="country.id" :selected="country.id === selectedCountryId" v-for="country in countryList" :key="country.id">
+                <option :value="country.id" :selected="country.id === selectedCountryId" v-for="country in allCountries" :key="country.id">
                     {{ country.currLangName }}
                 </option>
             </select>
@@ -134,7 +134,7 @@ export default {
          */
         getCountryById(countryId)
         {
-            return this.countryList.find(
+            return this.allCountries.find(
                 function(country)
                 {
                     if (country.id === countryId)
