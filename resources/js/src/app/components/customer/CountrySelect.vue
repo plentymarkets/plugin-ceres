@@ -2,7 +2,7 @@
     <div>
         <div class="input-unit" data-validate="" data-model="countryId">
             <select :id="'country-id-select' + _uid" :value="selectedCountryId" class="custom-select" @change="countryChanged($event.target.value)">
-                <option :value="country.id" :selected="country.id === selectedCountryId" v-for="country in allCountries" :key="country.id">
+                <option :value="country.id" :selected="country.id === selectedCountryId" v-for="country in countryList" :key="country.id">
                     {{ country.currLangName }}
                 </option>
             </select>
@@ -53,6 +53,10 @@ export default {
             type: Object,
             default: () =>
             {}
+        },
+        allCountries: {
+            type: Array,
+            default: null
         }
     },
 
@@ -98,7 +102,6 @@ export default {
         ...mapState({
             shippingCountryId: state => state.localization.shippingCountryId,
             countryList: state => state.localization.shippingCountries,
-            allCountries: state => App.initialData.allShippingCountries
         })
     },
 
@@ -134,7 +137,7 @@ export default {
          */
         getCountryById(countryId)
         {
-            return this.allCountries.find(
+            return this.countryList.find(
                 function(country)
                 {
                     if (country.id === countryId)
