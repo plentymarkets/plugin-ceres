@@ -101,9 +101,9 @@ export default {
         countryList()
         {
             if (this.allCountries.length <= 0) {
-                return this.countryList;
+                return this.filteredCountryList;
             }
-            return this.addressType === "1" ? this.allCountries : this.countryList;
+            return this.addressType === "1" ? this.allCountries : this.filteredCountryList;
         },
 
         ...mapState({

@@ -5,7 +5,6 @@ const ApiService = require("../../services/ApiService");
 
 const state = () => ({
     shippingCountries: [],
-    allShippingCountries: [],
     shippingCountryId: null
 });
 

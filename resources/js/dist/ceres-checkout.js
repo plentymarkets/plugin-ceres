@@ -1340,10 +1340,10 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
     },
     countryList: function countryList() {
       if (this.allCountries.length <= 0) {
-        return this.countryList;
+        return this.filteredCountryList;
       }
 
-      return this.addressType === "1" ? this.allCountries : this.countryList;
+      return this.addressType === "1" ? this.allCountries : this.filteredCountryList;
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_16__["mapState"])({
     shippingCountryId: function shippingCountryId(state) {
@@ -81722,7 +81722,6 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
 var state = function state() {
   return {
     shippingCountries: [],
-    allShippingCountries: [],
     shippingCountryId: null
   };
 };

@@ -71572,7 +71572,6 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
 var state = function state() {
   return {
     shippingCountries: [],
-    allShippingCountries: [],
     shippingCountryId: null
   };
 };
