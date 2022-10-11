@@ -16,11 +16,6 @@ const mutations =
             state.shippingCountries = shippingCountries;
         },
 
-        setAllShippingCountries(state, allShippingCountries)
-        {
-            state.allShippingCountries = allShippingCountries;
-        },
-
         setShippingCountryId(state, shippingCountryId)
         {
             if (shippingCountryId !== state.shippingCountryId && !App.isSSR)

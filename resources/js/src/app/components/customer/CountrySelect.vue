@@ -55,10 +55,6 @@ export default {
             type: Object,
             default: () =>
             {}
-        },
-        isInvoice: {
-            type: Boolean,
-            default: true
         }
     },
 
@@ -104,7 +100,10 @@ export default {
 
         countryList()
         {
-            return this.isInvoice ? this.allCountries : countryList;
+            if (this.allCountries.length <= 0) {
+                return this.countryList;
+            }
+            return this.addressType === "1" ? this.allCountries : this.countryList;
         },
 
         ...mapState({
@@ -120,7 +119,7 @@ export default {
     {
         this.updateSelectedCountry();
         
-        if (this.isInvoice) {
+        if (this.addressType === "1") {
             ApiService.get('/rest/io/localization/countries').done(response =>
             {
                 this.allCountries = response.data;

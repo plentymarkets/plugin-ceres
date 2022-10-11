@@ -70,7 +70,6 @@ export function createStore()
 // TODO: add code comment
 export function initServerStore(store)
 {
-    store.commit("setAllShippingCountries", App.initialData.allShippingCountries);
     store.commit("setShippingCountries", App.initialData.shippingCountries);
     store.commit("setShippingCountryId", App.initialData.shippingCountryId);
     store.commit("setShowNetPrices", App.initialData.showNetPrices);

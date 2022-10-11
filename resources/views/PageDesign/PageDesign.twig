@@ -220,7 +220,6 @@
         "isCheapestSorting": "{{ services.template.isCheapestSorting() }}",
         "useVariationOrderProperties": {% if webstoreConfig.useVariationOrderProperties | default(0) %}true{% else %}false{% endif %},
         "initialData": {
-            "allShippingCountries": {{ services.country.getAllCountries() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name", "vatCodes"]) | json_encode | raw }},
             "shippingCountries": {{ services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name", "vatCodes"]) | json_encode | raw }},
             "shippingCountryId": {{ services.checkout.getShippingCountryId() }},
             "showNetPrices": {{ showNetPrices | json_encode }}
