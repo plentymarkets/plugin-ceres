@@ -67,6 +67,7 @@ export default {
         return {
             stateList  : [],
             selectedCountry: {},
+            allCountries : []
         };
     },
 
@@ -101,9 +102,14 @@ export default {
             return this.requiredAddressFields[iso];
         },
 
+        countryList()
+        {
+            return this.isInvoice ? this.allCountries : countryList;
+        },
+
         ...mapState({
             shippingCountryId: state => state.localization.shippingCountryId,
-            countryList: state => state.localization.shippingCountries,
+            filteredCountryList: state => state.localization.shippingCountries,
         })
     },
 
@@ -117,7 +123,7 @@ export default {
         if (this.isInvoice) {
             ApiService.get('/rest/io/localization/countries').done(response =>
             {
-                this.countryList = response.data;
+                this.allCountries = response.data;
             });
         }
     },
