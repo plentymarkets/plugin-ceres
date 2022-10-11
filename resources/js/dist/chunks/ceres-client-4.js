@@ -1144,7 +1144,7 @@ var render = function() {
                     _vm.surcharge > 0
                       ? [
                           _vm._v(
-                            "( " +
+                            "(" +
                               _vm._s(_vm.inclOrPlus) +
                               " " +
                               _vm._s(_vm._f("currency")(_vm.surcharge)) +
@@ -1236,7 +1236,7 @@ var render = function() {
                       _vm.surcharge > 0
                         ? [
                             _vm._v(
-                              "( " +
+                              "(" +
                                 _vm._s(_vm.inclOrPlus) +
                                 " " +
                                 _vm._s(_vm._f("currency")(_vm.surcharge)) +
@@ -1366,7 +1366,7 @@ var render = function() {
                           _vm.surcharge > 0
                             ? [
                                 _vm._v(
-                                  "( " +
+                                  "(" +
                                     _vm._s(_vm.inclOrPlus) +
                                     " " +
                                     _vm._s(_vm._f("currency")(_vm.surcharge)) +
@@ -1478,7 +1478,7 @@ var render = function() {
                         _vm.surcharge > 0
                           ? [
                               _vm._v(
-                                "( " +
+                                "(" +
                                   _vm._s(_vm.inclOrPlus) +
                                   " " +
                                   _vm._s(_vm._f("currency")(_vm.surcharge)) +

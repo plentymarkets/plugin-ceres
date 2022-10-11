@@ -42022,7 +42022,14 @@ var render = function() {
                       ) +
                       "</dd>"
                     : "<!---->") +
-                  " <hr> "
+                  " " +
+                  (_vm.visibleFields.includes("subAmount") ||
+                  _vm.visibleFields.includes("basket.order_total_net") ||
+                  _vm.visibleFields.includes("vats") ||
+                  _vm.visibleFields.includes("basket.vat")
+                    ? "<hr>"
+                    : "<!---->") +
+                  " "
               ),
               _vm._t("before-total-sum"),
               _vm._ssrNode(
@@ -49960,7 +49967,7 @@ var render = function() {
                   '</span> <strong class="ml-1">' +
                   (_vm.surcharge > 0
                     ? _vm._ssrEscape(
-                        "( " +
+                        "(" +
                           _vm._s(_vm.inclOrPlus) +
                           " " +
                           _vm._s(_vm._f("currency")(_vm.surcharge)) +
@@ -50026,7 +50033,7 @@ var render = function() {
                       '</span> <strong class="ml-1">' +
                       (_vm.surcharge > 0
                         ? _vm._ssrEscape(
-                            "( " +
+                            "(" +
                               _vm._s(_vm.inclOrPlus) +
                               " " +
                               _vm._s(_vm._f("currency")(_vm.surcharge)) +
@@ -50142,7 +50149,7 @@ var render = function() {
                       '</span> <strong class="ml-1">' +
                       (_vm.surcharge > 0
                         ? _vm._ssrEscape(
-                            "( " +
+                            "(" +
                               _vm._s(_vm.inclOrPlus) +
                               " " +
                               _vm._s(_vm._f("currency")(_vm.surcharge)) +
@@ -50240,7 +50247,7 @@ var render = function() {
                       '</span> <strong class="ml-1">' +
                       (_vm.surcharge > 0
                         ? _vm._ssrEscape(
-                            "( " +
+                            "(" +
                               _vm._s(_vm.inclOrPlus) +
                               " " +
                               _vm._s(_vm._f("currency")(_vm.surcharge)) +
@@ -85618,6 +85625,7 @@ __webpack_require__.r(__webpack_exports__);
 var NotificationService = __webpack_require__(/*! ./NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
 var _eventListeners = {};
+var _initialRestCall = true;
 function initListener() {
   $(document).ready(function () {
     var token = $("input[id=\"csrf-token\"]").val();
@@ -85698,6 +85706,13 @@ function triggerEvent(event, payload) {
 function get(url, data, config) {
   config = config || {};
   config.method = "GET";
+
+  if (_initialRestCall) {
+    data = data || {};
+    data.initialRestCall = true;
+    _initialRestCall = false;
+  }
+
   return send(url, data, config);
 }
 function put(url, data, config) {
@@ -87373,7 +87388,14 @@ var mutations = {
       if (addressIndex) {
         state.billingAddressList.splice(addressIndex, 0, billingAddress);
       } else {
-        state.billingAddressList.push(billingAddress);
+        var indexToUpdate = state.billingAddressList.findIndex(function (entry) {
+          return entry.id === billingAddress.id;
+        });
+
+        if (indexToUpdate === -1) {
+          state.billingAddressList.push(billingAddress);
+        }
+
         state.billingAddressId = billingAddress.id;
         state.billingAddress = billingAddress;
         document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
@@ -87388,7 +87410,14 @@ var mutations = {
       if (addressIndex) {
         state.deliveryAddressList.splice(addressIndex, 0, deliveryAddress);
       } else {
-        state.deliveryAddressList.push(deliveryAddress);
+        var indexToUpdate = state.deliveryAddressList.findIndex(function (entry) {
+          return entry.id === deliveryAddress.id;
+        });
+
+        if (indexToUpdate === -1) {
+          state.deliveryAddressList.push(deliveryAddress);
+        }
+
         state.deliveryAddressId = deliveryAddress.id;
         state.deliveryAddress = deliveryAddress;
         document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
@@ -87604,13 +87633,20 @@ var actions = {
         keepOriginalResponse: true
       }).done(function (response) {
         if (addressType === "1") {
-          commit("updateBillingAddress", address);
-
-          if (addressType === "1" && response.events && response.events.CheckoutChanged && response.events.CheckoutChanged.checkout) {
-            var billingAddressId = response.events.CheckoutChanged.checkout.billingAddressId;
-            commit("selectBillingAddressById", billingAddressId);
+          if (response.events && response.events.CheckoutChanged && response.events.CheckoutChanged.checkout) {
+            address.id = response.events.CheckoutChanged.checkout.billingAddressId;
+            commit("addBillingAddress", {
+              billingAddress: address
+            });
           }
         } else if (addressType === "2") {
+          if (response.events && response.events.CheckoutChanged && response.events.CheckoutChanged.checkout) {
+            address.id = response.events.CheckoutChanged.checkout.deliveryAddressId;
+            commit("addDeliveryAddress", {
+              deliveryAddress: address
+            });
+          }
+
           commit("updateDeliveryAddress", address);
         }
 

@@ -1,5 +1,104 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.56 (2022-XX-XX) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.55...5.0.56" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Die Inhalte von ShopBuilder-Bestellbestätigungsseiten müssen neu generiert werden.
+
+### Behoben
+
+- Für die Seitennummerierung auf Artikelkategorieseiten wurden in Version 5.0.55 `aria-label` verbaut. Hier kam es zu einem Fehler, dieser wurde behoben.
+- Auf Bestellbestätigungsseiten, die über den ShopBuilder erstellt wurden, wurde das voraussichtliche Versanddatum nicht im korrekten Format angezeigt. Dies wurde behoben.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.56 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- [resources/views/Category/Item/Partials/Pagination.twig](https://github.com/plentymarkets/plugin-ceres/pull/3340/files#diff-1b8d2c7ce7416f660f89d11ad8e368be614c2b98efc30526e74286c7f180c3b8)
+- [resources/views/Widgets/OrderConfirmation/OrderDataWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3339/files#diff-82affb09026a21fd94995e057ae7214f6751cf84dfed718216f4760865567c33)
+
+## v5.0.55 (2022-09-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.54...5.0.55" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Im Schritt **SEO** des plentyShop LTS-Assistenten kann nun für Artikelzustände in den strukturierten Daten ein Mapping auf Werte von schema.org gesetzt werden. Bitte prüfe, ob die Standardeinstellungen des Mappings ausreichen und passe es gegebenenfalls an.
+
+### Neu
+
+- In den Plugin-Einstellungen und im Schritt **SEO** des plentyShop LTS-Assistenten wurde die Möglichkeit geschaffen, die **itemCondition** in den strukturierten Daten im schema.org-Format zu konfigurieren.
+- Für die Seitennummerierung auf Artikelkategorieseiten wurden `aria-label` verbaut, die über das Menü **CMS » Mehrsprachigkeit** angepasst werden können.
+
+### Behoben
+
+- Wenn die Cookiebar viel Text enthielt, konnte sie teilweise aus dem Bildschirm herausragen. Dies wurde behoben. Bei einer großen Menge an Text wird die Cookiebar ab jetzt automatisch scrollbar. 
+- Es wurden überflüssige Leerzeichen in der `OrderPropertyListItem.vue` entfernt.
+- Auf Kategorienseiten wurde für das `og:image` eine falsche Bild-URL ausgewählt. Dies wurde behoben.
+- Artikelnamen, die Buchstaben mit Akzenten enthielten, wurden in Artikellisten-Widgets als HTML-Entitäten erkannt, wenn SSR im System aktiv war. Dies wurde behoben. 
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.55 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- [resources/views/PageDesign/Partials/PageMetadata.twig](https://github.com/plentymarkets/plugin-ceres/pull/3329/files#diff-98be1deb08f271fd2d41c05df5d33c20846032e5b77cb7ba59f615dda20d767f)
+- [resources/views/Category/Item/Partials/Pagination.twig](https://github.com/plentymarkets/plugin-ceres/pull/3325/files#diff-1b8d2c7ce7416f660f89d11ad8e368be614c2b98efc30526e74286c7f180c3b8)
+- [resources/js/src/app/components/itemList/CategoryItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3265/files#diff-4c35af622ef09ba8949eb1c47557e3e6651b088291a0d2e2463c9244007b5516)
+
+## v5.0.54 (2022-08-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.53...5.0.54" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Im Plugin IO wurde die neue Route `/contact-mail-api` hinzugefügt. Wenn du das plentyShop Kontaktformular verwendest (egal ob Standard oder per ShopBuilder-Inhalt), stelle sicher, dass diese Route im IO-Plugin aktiviert ist. Öffne dazu die Einstellungen des IO-Plugins in deinem Plugin-Set. Öffne den Reiter **Konfiguration**. Aktiviere in der Einstellung **Routen aktivieren** die Route `/contact-mail-api` und speichere deine Einstellungen. Wenn du das Kontaktformular *nicht* verwendest, stelle sicher, dass diese Route deaktiviert ist.
+
+### Geändert
+
+- Der Standardtext für die Cookiebar wurde angepasst, um der aktuellen Gesetzgebung zu entsprechen. Der Text kann über den Übersetzungsschlüssel `cookieBarHintText` im Menü **CMS » Mehrsprachigkeit** angepasst werden.
+- Die Werte für die Übersetzungschlüssel `checkoutChooseOur` und `checkoutCheckAcceptGtc` wurden angepasst, um den Anforderungen von § 305 b BGB gerecht zu werden. Weitere Informationen dazu findest du <a href="https://www.it-recht-kanzlei.de/Die_wichtigsten_AGB-Regularien.html#abschnitt_9" target="_blank">hier</a>.
+
+### Behoben
+
+- Nach dem Bearbeiten einer nicht ausgewählten Adresse im Mein-Konto- oder Kassenbereich wurde diese Adresse nicht korrekt angezeigt. Dies wurde behoben.
+- Bei aktivierten Cache-Blöcken konnte es zu fehlerhaften Verlinkungen über die Sprachauswahl kommen. Dieses Verhalten wurde behoben.
+- Auf mobilen Geräten konnte es bei der Kombination von Sprachwechsel und ShopBooster dazu kommen, dass die mobile Navigation in der zuvor ausgewählten Sprache angezeigt wurde. Dieses Verhalten wurde behoben.
+- Im Checkout konnte es zu Fehlern kommen, wenn kein Versandprofil ausgewählt war. Dies wurde behoben.
+- Bei Artikelsets mit Set-Komponenten, die Bestellmerkmale enthalten, kam es zu einer fehlerhaften Darstellung des Warenwerts. Dies wurde behoben.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.54 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- [resources/views/PageDesign/Partials/Header/DefaultHeader.twig](https://github.com/plentymarkets/plugin-ceres/pull/3319/files#diff-19f0c0c56118a0d17212318a2cf8c6e113276dc4c61779c2317b2e7a0976db31)
+- [resources/views/Widgets/Header/TopBarWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3319/files#diff-2696f6a2e31a39130c691133b3d6fdf30b218a6bdbbd0717433c835d060c3f66)
+- [resources/views/Widgets/OrderConfirmation/PurchasedItemsWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3318/files#diff-2cee15b4b8add92d304d2f4cbbb5a5891a5752c533b564f1e1d152982c1e62d0)
+
+## v5.0.53 (2022-07-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.52...5.0.53" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Die Einstellung **Kunden zur Login-Seite weiterleiten, wenn sie den Link in der Bestellbestätigung klicken** wurde wieder zu den plentyShop LTS-Einstellungen und dem plentyShop-Assistenten hinzugefügt. Diese Einstellungen wurden in der Version 5.0.52 entfernt, was dazu führte, dass die Bestellbestätigung von manuell angelegten Aufträgen nicht zugänglich war. Wir haben diese Änderung daher rückgängig gemacht.
+
+## v5.0.52 (2022-06-29) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.51...5.0.52" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Neu
+
+- Zusätzlich zum Browser-Namen wird nun auch das Betriebssystem als Klasse auf das `<html>`-Objekt gesetzt. Kann kein Betriebssystem oder Browser erkannt werden, werden jeweils eigene Klassen dafür gesetzt. Vielen Dank an @daniel-mannheimer für diesen Beitrag.
+
+### Geändert
+
+- Die Übersetzungsschlüssel `categoryItemFootnote`, `categoryItemFromPrice` und `categoryItemLowestPrice` wurden respektive zu `itemFootnote`, `itemFromPrice` und `itemLowestPrice` umbenannt. Bisher angepasste Übersetzungen werden per Migration für die neuen Schlüssel übernommen.
+- Die Komponente `AddressSelect` wurde angepasst, um große Datenmengen performanter anzuzeigen. Die Komponente `DynamicScroller` wrapped nun einzelne Adressen.
+- Die Einstellung **Kunden zur Login-Seite weiterleiten, wenn sie den Link in der Bestellbestätigung klicken** wurde aus den plentyShop LTS-Einstellungen und aus dem plentyShop-Assistenten entfernt. Das Standardverhalten ist zukünftig so, dass Kund:innen immer zuerst auf die Login-Seite geleitet werden.
+- Die Variable für den Warenkorb wurde aus dem `GlobalContext` entfernt. Beachte dazu <a href="https://forum.plentymarkets.com/t/plentyshop-basket-variable-wird-aus-dem-globalcontext-entfernt-basket-variable-is-removed-from-the-globalcontext/685718" target="_blank">diesen Forumsbeitrag</a>. 
+
+### Behoben
+
+- Bei Bestelleigenschaften vom Typ **Datei** konnte es auf mobilen Endgeräten zu Hydration-Fehlern kommen, wenn die Eigenschaft eine Beschreibung hatte. Dies wurde behoben.
+- Das CSRF-Token wird nun nur noch an REST-Calls, die an den eigenen plentyShop gehen, hinzugefügt.
+- Im Kontext des Updates auf PHP 8 wurden einige Kompatibilitätsfehler behoben.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.52 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- [resources/views/Customer/Components/AddressSelect/AddressSelect.twig](https://github.com/plentymarkets/plugin-ceres/pull/3290/files#diff-969624803dfeb696a58e16de0d95c285a458ec83a615026882d9b1e65386935b)
+
+
 ## v5.0.51 (2022-05-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.50...5.0.51" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Neu

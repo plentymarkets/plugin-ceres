@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+
 const ApiService = require("../../services/ApiService");
 
 const state = () => ({
@@ -117,6 +118,7 @@ const mutations =
 
         addBillingAddress(state, { billingAddress, addressIndex })
         {
+
             if (billingAddress)
             {
                 if (addressIndex)
@@ -125,7 +127,12 @@ const mutations =
                 }
                 else
                 {
-                    state.billingAddressList.push(billingAddress);
+                    const indexToUpdate = state.billingAddressList.findIndex(entry => entry.id === billingAddress.id);
+
+                    if (indexToUpdate === -1)
+                    {
+                        state.billingAddressList.push(billingAddress);
+                    }
                     state.billingAddressId = billingAddress.id;
                     state.billingAddress = billingAddress;
                     document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
@@ -143,7 +150,12 @@ const mutations =
                 }
                 else
                 {
-                    state.deliveryAddressList.push(deliveryAddress);
+                    const indexToUpdate = state.deliveryAddressList.findIndex(entry => entry.id === deliveryAddress.id);
+
+                    if (indexToUpdate === -1)
+                    {
+                        state.deliveryAddressList.push(deliveryAddress);
+                    }
                     state.deliveryAddressId = deliveryAddress.id;
                     state.deliveryAddress = deliveryAddress;
                     document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
@@ -368,17 +380,24 @@ const actions =
                     {
                         if (addressType === "1")
                         {
-                            commit("updateBillingAddress", address);
-
-                            if (addressType === "1" && response.events && response.events.CheckoutChanged && response.events.CheckoutChanged.checkout)
+                            if (response.events
+                                && response.events.CheckoutChanged
+                                && response.events.CheckoutChanged.checkout)
                             {
-                                const billingAddressId = response.events.CheckoutChanged.checkout.billingAddressId;
-
-                                commit("selectBillingAddressById", billingAddressId);
+                                address.id = response.events.CheckoutChanged.checkout.billingAddressId;
+                                commit("addBillingAddress", { billingAddress: address });
                             }
                         }
                         else if (addressType === "2")
                         {
+                            if (response.events
+                                && response.events.CheckoutChanged
+                                && response.events.CheckoutChanged.checkout)
+                            {
+                                address.id = response.events.CheckoutChanged.checkout.deliveryAddressId;
+                                commit("addDeliveryAddress", { deliveryAddress: address });
+                            }
+
                             commit("updateDeliveryAddress", address);
                         }
 

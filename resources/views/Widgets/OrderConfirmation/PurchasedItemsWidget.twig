@@ -35,12 +35,14 @@
                                 {{ Twig.print(Twig.call("ItemName.get", ["$item.orderItemName", "$item.bundleType"])) }}
                             </div>
                         </a>
+                        {{ Twig.set("setSurcharge", 0) }}
                         {{ Twig.if("item.setComponents") }}
                             <div class="set-data">
                                 <div class="mb-2"><strong>{{ Twig.trans("Ceres::Template.itemSetContent") }}</strong></div>
                                 {{ Twig.for("setComponent", "item.setComponents") }}
                                     {{ Twig.set("imageData", "data.variations[setComponent.itemVariationId].images | firstItemImage('urlPreview')") }}
                                     {{ Twig.set("altText", "imageData.alternate ? imageData.alternate : setComponent.orderItemName") }}
+                                    {{ Twig.set("setSurcharge", "setSurcharge + setComponent.amounts[0].surcharge") }}
 
                                     <div class="d-flex mb-2">
                                         <span class="text-muted">{{ Twig.print("setComponent.quantity") }}x</span>
@@ -168,13 +170,13 @@
 
                         {{ Twig.set("itemPrice", "0") }}
                         {{ Twig.if("data.highlightNetPrices") }}
-                            {{ Twig.set("itemPrice", "itemAmount.priceOriginalNet") }}
+                            {{ Twig.set("itemPrice", "itemAmount.priceOriginalNet + setSurcharge") }}
                             {{ Twig.set("discountAmount", "item.quantity * (itemAmount.priceOriginalNet - itemAmount.priceNet)") }}
-                            {{ Twig.set("itemPriceTotal", "item.quantity * itemAmount.priceNet") }}
+                            {{ Twig.set("itemPriceTotal", "item.quantity * (itemAmount.priceNet + setSurcharge)") }}
                         {{ Twig.else() }}
-                            {{ Twig.set("itemPrice", "itemAmount.priceOriginalGross") }}
+                            {{ Twig.set("itemPrice", "itemAmount.priceOriginalGross + setSurcharge") }}
                             {{ Twig.set("discountAmount", "item.quantity * (itemAmount.priceOriginalGross - itemAmount.priceGross)") }}
-                            {{ Twig.set("itemPriceTotal", "item.quantity * itemAmount.priceGross") }}
+                            {{ Twig.set("itemPriceTotal", "item.quantity * (itemAmount.priceGross + setSurcharge)") }}
                         {{ Twig.endif() }}
 
                         <div class="row" {{ Twig.print('set_testing_attr("data-testing", "order-confirmation-price-per-piece")') }}>

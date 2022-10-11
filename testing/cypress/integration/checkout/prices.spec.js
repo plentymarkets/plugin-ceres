@@ -17,7 +17,7 @@ context("prices", () =>
 
     });
 
-    it.only("should change graduated prices for b2b customer", () =>
+    it("should change graduated prices for b2b customer", () =>
     {
         cy.login("bernd.business@plentye2etest.de", "Testuser1234");
         cy.visit(url1);

@@ -70053,7 +70053,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
         this.setValue(false);
         $(this.$refs.formCheck).fadeTo(100, 0.1).fadeTo(400, 1.0);
         NotificationService.error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.checkoutShippingPrivacyReseted"));
-      } else if (!value.shippingPrivacyInformation[0].showDataPrivacyAgreementHint) {
+      } else if (value && !value.shippingPrivacyInformation[0].showDataPrivacyAgreementHint) {
         this.setValue(false);
       }
     }
@@ -79621,6 +79621,7 @@ __webpack_require__.r(__webpack_exports__);
 var NotificationService = __webpack_require__(/*! ./NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
 var _eventListeners = {};
+var _initialRestCall = true;
 function initListener() {
   $(document).ready(function () {
     var token = $("input[id=\"csrf-token\"]").val();
@@ -79701,6 +79702,13 @@ function triggerEvent(event, payload) {
 function get(url, data, config) {
   config = config || {};
   config.method = "GET";
+
+  if (_initialRestCall) {
+    data = data || {};
+    data.initialRestCall = true;
+    _initialRestCall = false;
+  }
+
   return send(url, data, config);
 }
 function put(url, data, config) {
@@ -81376,7 +81384,14 @@ var mutations = {
       if (addressIndex) {
         state.billingAddressList.splice(addressIndex, 0, billingAddress);
       } else {
-        state.billingAddressList.push(billingAddress);
+        var indexToUpdate = state.billingAddressList.findIndex(function (entry) {
+          return entry.id === billingAddress.id;
+        });
+
+        if (indexToUpdate === -1) {
+          state.billingAddressList.push(billingAddress);
+        }
+
         state.billingAddressId = billingAddress.id;
         state.billingAddress = billingAddress;
         document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
@@ -81391,7 +81406,14 @@ var mutations = {
       if (addressIndex) {
         state.deliveryAddressList.splice(addressIndex, 0, deliveryAddress);
       } else {
-        state.deliveryAddressList.push(deliveryAddress);
+        var indexToUpdate = state.deliveryAddressList.findIndex(function (entry) {
+          return entry.id === deliveryAddress.id;
+        });
+
+        if (indexToUpdate === -1) {
+          state.deliveryAddressList.push(deliveryAddress);
+        }
+
         state.deliveryAddressId = deliveryAddress.id;
         state.deliveryAddress = deliveryAddress;
         document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
@@ -81607,13 +81629,20 @@ var actions = {
         keepOriginalResponse: true
       }).done(function (response) {
         if (addressType === "1") {
-          commit("updateBillingAddress", address);
-
-          if (addressType === "1" && response.events && response.events.CheckoutChanged && response.events.CheckoutChanged.checkout) {
-            var billingAddressId = response.events.CheckoutChanged.checkout.billingAddressId;
-            commit("selectBillingAddressById", billingAddressId);
+          if (response.events && response.events.CheckoutChanged && response.events.CheckoutChanged.checkout) {
+            address.id = response.events.CheckoutChanged.checkout.billingAddressId;
+            commit("addBillingAddress", {
+              billingAddress: address
+            });
           }
         } else if (addressType === "2") {
+          if (response.events && response.events.CheckoutChanged && response.events.CheckoutChanged.checkout) {
+            address.id = response.events.CheckoutChanged.checkout.deliveryAddressId;
+            commit("addDeliveryAddress", {
+              deliveryAddress: address
+            });
+          }
+
           commit("updateDeliveryAddress", address);
         }
 

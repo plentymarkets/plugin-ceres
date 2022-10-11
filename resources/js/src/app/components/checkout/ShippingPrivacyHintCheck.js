@@ -77,7 +77,7 @@ export default Vue.component("shipping-privacy-hint-check", {
 
                 NotificationService.error(TranslationService.translate("Ceres::Template.checkoutShippingPrivacyReseted"));
             }
-            else if (!value.shippingPrivacyInformation[0].showDataPrivacyAgreementHint)
+            else if (value && !value.shippingPrivacyInformation[0].showDataPrivacyAgreementHint)
             {
                 this.setValue(false);
             }

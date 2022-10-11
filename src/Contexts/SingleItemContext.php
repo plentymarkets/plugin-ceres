@@ -136,6 +136,11 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $sku = '';
 
     /**
+     * @var string $conditionOfItem Contains the condition of the current item for structured data.
+     */
+    public $conditionOfItem = '';
+
+    /**
      * @inheritDoc
      */
     public function init($params)
@@ -152,6 +157,9 @@ class SingleItemContext extends GlobalContext implements ContextInterface
 
         $this->item = $params['item'];
         $itemData = $this->item['documents'][0]['data'];
+
+
+        $this->conditionOfItem = $this->detectItemCondition($itemData['item']['condition']['id']);
 
         $availabilityId = $itemData['variation']['availability']['id'];
         $mappedAvailability = $configRepository->get('Ceres.availability.mapping.availability' . $availabilityId);
@@ -270,6 +278,36 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $this->bodyClasses[] = "variation-" . $itemData['variation']['id'];
     }
 
+    /**
+     * Returns schema.org value for the given condition id
+     *
+     * @param int $conditionId
+     * @return string
+     */
+    private function detectItemCondition(int $conditionId): string
+    {
+        switch($conditionId)
+        {
+            case 0:
+                $conditionString = $this->ceresConfig->seo->itemCondition0;
+                break;
+            case 1:
+                $conditionString = $this->ceresConfig->seo->itemCondition1;
+                break;
+            case 2:
+                $conditionString = $this->ceresConfig->seo->itemCondition2;
+                break;
+            case 3:
+                $conditionString = $this->ceresConfig->seo->itemCondition3;
+                break;
+            case 4:
+                $conditionString = $this->ceresConfig->seo->itemCondition4;
+                break;
+            default:
+                $conditionString = 'https://schema.org/NewCondition';
+        }
+        return $conditionString;
+    }
     /**
      * @param $referrers
      *

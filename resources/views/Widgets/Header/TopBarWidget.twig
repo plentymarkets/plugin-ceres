@@ -294,6 +294,7 @@
                         <div class="row py-3">
                             {% if enableLanguageSelect and not isPreview %}
                                 <div class="col-12 {% if enableShippingCountrySelect %}col-lg-6{% else %}col-lg-12{% endif %}">
+                                    {{ Twig.do("cacheslot languageSelect") }}
                                     <div class="language-settings">
                                         <div class="list-title">
                                             <strong>{{ Twig.print('trans("Ceres::Template.headerSelectLanguage")') }}</strong>
@@ -320,6 +321,7 @@
                                             {{ Twig.endfor() }}
                                         </ul>
                                     </div>
+                                    {{ Twig.do("endcacheslot") }}
                                 </div>
                             {% endif %}
                             {% if enableShippingCountrySelect %}

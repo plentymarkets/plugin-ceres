@@ -1,5 +1,5 @@
 {
-    "version"           : "5.0.51",
+    "version"           : "5.0.55",
     "name"              : "Ceres",
     "marketplaceName"   : {"de": "plentyShop LTS","en": "plentyShop LTS"},
     "description"       : "This is the official plentyShop LTS plugin developed by plentymarkets. plentyShop LTS is the default template plugin for plentymarkets online stores.",
@@ -12,10 +12,13 @@
     "email"             : "sales@plentymarkets.com",
     "phone"             : "+49 561 98 681 100",
     "categories"        : ["3885"],
-    "keywords"          : ["plentymarkets", "plugins", "layout", "template", "ceres", "plentyshop"],
+    "keywords"          : ["plentymarkets", "plugins", "layout", "template", "ceres", "plentyshop", "webshop"],
     "type"              : "template",
     "require"           : {
-        "IO": "~5.0.50"
+        "IO": "~5.0.55"
+    },
+    "platform": {
+        "php": ">=7.3 <8.1"
     },
     "namespace"         : "Ceres",
     "serviceProvider"   : "Ceres\\Providers\\TemplateServiceProvider",
@@ -25,7 +28,8 @@
         "Ceres\\Migrations\\ConfigPropertiesMigration_0_0_1",
         "Ceres\\Migrations\\Migration_2018_07_06_001_RebuildShopBuilderHomepage",
         "Ceres\\Wizard\\ShopWizard\\Migrations\\CreateShopWizardPreviewConfigTable",
-        "Ceres\\Wizard\\ShopWizard\\Migrations\\UpdateShopWizardPreviewTableWebstoreId"
+        "Ceres\\Wizard\\ShopWizard\\Migrations\\UpdateShopWizardPreviewTableWebstoreId",
+        "Ceres\\Migrations\\UpdateTranslationKeysMigration_0_0_1"
     ],
     "dataProviders"     :
     [
