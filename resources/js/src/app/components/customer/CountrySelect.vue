@@ -122,7 +122,7 @@ export default {
         if (this.addressType === "1") {
             ApiService.get('/rest/io/localization/countries').done(response =>
             {
-                this.allCountries = response.data;
+                this.allCountries = response;
             });
         }
     },
