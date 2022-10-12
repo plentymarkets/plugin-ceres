@@ -11,6 +11,7 @@
 - Für die Seitennummerierung auf Artikelkategorieseiten wurden in Version 5.0.55 `aria-label` verbaut. Hier kam es zu einem Fehler, dieser wurde behoben.
 - Auf Bestellbestätigungsseiten, die über den ShopBuilder erstellt wurden, wurde das voraussichtliche Versanddatum nicht im korrekten Format angezeigt. Dies wurde behoben.
 - Das Skript zum Kompilieren von SCSS-Dateien (`bundleSass.js`) entfernt jetzt alte Dateien aus dem Zielordner. Durch diese Anpassungen können einige Import-Fehler beim Bereitstellen von Plugins behoben werden.
+- Bestehende Konfigurationsvorschauen des plentyShop LTS-Assistenten werden jetzt beim Kopieren eines Plugin-Sets in das neue Plugin-Set übernommen.
 
 ### Changed templates
 
