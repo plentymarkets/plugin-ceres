@@ -3013,7 +3013,7 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
 
     if (this.addressType === "1") {
       ApiService.get('/rest/io/localization/countries').done(function (response) {
-        _this.allCountries = response.data;
+        _this.allCountries = response;
       });
     }
   },
