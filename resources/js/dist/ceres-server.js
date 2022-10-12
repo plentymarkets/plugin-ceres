@@ -3024,6 +3024,13 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
     countryChanged: function countryChanged(value) {
       this.$emit("country-changed", this.getCountryById(parseInt(value)));
       this.$emit("state-changed", null);
+      var countryIsAllowed = this.filteredCountryList.find(function (country) {
+        return parseInt(country.id) === parseInt(value);
+      });
+
+      if (!countryIsAllowed) {
+        this.$store.commit('selectDeliveryAddressById', null);
+      }
     },
 
     /**
