@@ -239,7 +239,7 @@ const actions =
             document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));
         },
 
-        initDeliveryAddress({ commit, state }, { id, addressList })
+        initDeliveryAddress({ commit, state, rootState }, { id, addressList })
         {
             addressList.unshift({ id: -99 });
             if (addressList.every(address => address.id !== id))
@@ -249,7 +249,7 @@ const actions =
 
             if (state.billingAddress)
             {
-                const countryAllowed = state.localization.shippingCountries.find(country => state.billingAddress.countryId === country.id);
+                const countryAllowed = rootState.localization.shippingCountries.find(country => state.billingAddress.countryId === country.id);
 
                 if (!countryAllowed)
                 {

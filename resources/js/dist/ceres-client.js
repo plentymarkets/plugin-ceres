@@ -69506,7 +69506,8 @@ var actions = {
   },
   initDeliveryAddress: function initDeliveryAddress(_ref5, _ref6) {
     var commit = _ref5.commit,
-        state = _ref5.state;
+        state = _ref5.state,
+        rootState = _ref5.rootState;
     var id = _ref6.id,
         addressList = _ref6.addressList;
     addressList.unshift({
@@ -69520,7 +69521,7 @@ var actions = {
     }
 
     if (state.billingAddress) {
-      var countryAllowed = state.localization.shippingCountries.find(function (country) {
+      var countryAllowed = rootState.localization.shippingCountries.find(function (country) {
         return state.billingAddress.countryId === country.id;
       });
 
