@@ -135,11 +135,6 @@ export default {
         {
             this.$emit("country-changed", this.getCountryById(parseInt(value)));
             this.$emit("state-changed", null);
-
-            const countryIsAllowed = this.filteredCountryList.find((country) => parseInt(country.id) === parseInt(value));
-            if(!countryIsAllowed) {
-                this.$store.commit('selectDeliveryAddressById', null);
-            }
         },
 
         /**
