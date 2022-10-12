@@ -253,6 +253,12 @@ const actions =
 
                 if (!countryAllowed)
                 {
+                    const list = addressList.filter((address) => address.id !== -99);
+
+                    list.unshift({ id: -100 });
+                    commit("setDeliveryAddressList", list);
+                    commit("selectDeliveryAddress", { id: -100 });
+                    document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
                     return;
                 }
             }
