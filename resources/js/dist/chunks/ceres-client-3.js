@@ -177,6 +177,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
      * @param shippingCountry
      */
     onSelectedCountryChanged: function onSelectedCountryChanged(shippingCountry) {
+      if (!shippingCountry) {
+        return;
+      }
+
       this.selectedCountry = shippingCountry;
 
       if (this.countryLocaleList.indexOf(shippingCountry.isoCode2) >= 0) {

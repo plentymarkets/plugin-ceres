@@ -1129,6 +1129,10 @@ export default {
          */
         onSelectedCountryChanged(shippingCountry)
         {
+            if (!shippingCountry)
+            {
+                return;
+            }
             this.selectedCountry = shippingCountry;
             if (this.countryLocaleList.indexOf(shippingCountry.isoCode2) >= 0)
             {
