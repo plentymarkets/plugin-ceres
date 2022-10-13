@@ -24,7 +24,7 @@ class CopyAssistantPreviewSettings
         $sourcePluginSetId = $copyPluginSetEvent->getSourcePluginSetId();
         $targetPluginSetId = $copyPluginSetEvent->getTargetPluginSetId();
 
-        /** @var ShopWizardConfigRepository $previewConfigRepo */
+        /** @var ShopWizardConfigRepository $previewConfigRepository */
         $previewConfigRepository = pluginApp(ShopWizardConfigRepository::class);
 
         $sourceConfigs = $previewConfigRepository->getConfigsForPluginSet($sourcePluginSetId);
