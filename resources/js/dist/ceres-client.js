@@ -69532,12 +69532,8 @@ var actions = {
         var list = addressList.filter(function (address) {
           return address.id !== -99;
         });
-        list.unshift({
-          id: -100
-        });
         commit("setDeliveryAddressList", list);
         var defaultAddress = rootState.localization.shippingCountries[0];
-        defaultAddress.id = -100;
         commit("selectDeliveryAddress", defaultAddress);
         document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
         return;
