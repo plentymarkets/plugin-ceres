@@ -256,7 +256,7 @@ const actions =
                     const list = addressList.filter((address) => address.id !== -99);
 
                     commit("setDeliveryAddressList", list);
-                    const defaultAddress = rootState.localization.shippingCountries[0];
+                    const defaultAddress = list[0];
 
                     commit("selectDeliveryAddress", defaultAddress);
                     document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));

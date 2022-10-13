@@ -67295,7 +67295,7 @@ var actions = {
           return address.id !== -99;
         });
         commit("setDeliveryAddressList", list);
-        var defaultAddress = rootState.localization.shippingCountries[0];
+        var defaultAddress = list[0];
         commit("selectDeliveryAddress", defaultAddress);
         document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
         return;
