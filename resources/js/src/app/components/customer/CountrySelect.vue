@@ -151,7 +151,7 @@ export default {
          */
         getCountryById(countryId)
         {
-            return this.countryList.find(
+            const country = this.countryList.find(
                 function(country)
                 {
                     if (country.id === countryId)
@@ -161,6 +161,10 @@ export default {
 
                     return null;
                 });
+            if (!country){
+                return this.countryList[0];
+            }
+            return country;
         },
 
         updateSelectedCountry()

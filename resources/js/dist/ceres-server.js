@@ -3042,13 +3042,19 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
      * @returns {*}
      */
     getCountryById: function getCountryById(countryId) {
-      return this.countryList.find(function (country) {
+      var country = this.countryList.find(function (country) {
         if (country.id === countryId) {
           return country;
         }
 
         return null;
       });
+
+      if (!country) {
+        return this.countryList[0];
+      }
+
+      return country;
     },
     updateSelectedCountry: function updateSelectedCountry() {
       var countryId = this.selectedCountryId || this.shippingCountryId;
