@@ -257,7 +257,11 @@ const actions =
 
                     list.unshift({ id: -100 });
                     commit("setDeliveryAddressList", list);
-                    commit("selectDeliveryAddress", { id: -100 });
+
+                    const defaultAddress = rootState.localization.shippingCountries[0];
+
+                    defaultAddress.id = -100;
+                    commit("selectDeliveryAddress", defaultAddress);
                     document.dispatchEvent(new CustomEvent("deliveryAddressChanged", state.deliveryAddress));
                     return;
                 }
