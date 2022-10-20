@@ -5,7 +5,8 @@ const ApiService = require("../../services/ApiService");
 
 const state = () => ({
     shippingCountries: [],
-    shippingCountryId: null
+    shippingCountryId: null,
+    allShippingCountries: []
 });
 
 const mutations =
@@ -13,6 +14,11 @@ const mutations =
         setShippingCountries(state, shippingCountries)
         {
             state.shippingCountries = shippingCountries;
+        },
+
+        setAllShippingCountries(state, allShippingCountries)
+        {
+            state.allShippingCountries = allShippingCountries;
         },
 
         setShippingCountryId(state, shippingCountryId)
