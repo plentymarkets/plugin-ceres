@@ -73,9 +73,9 @@ export function initServerStore(store)
     store.commit("setShippingCountries", App.initialData.shippingCountries);
     store.commit("setShippingCountryId", App.initialData.shippingCountryId);
     store.commit("setShowNetPrices", App.initialData.showNetPrices);
-    if ( App.initialData.allShippingCountries)
+    if ( App.initialData.euShippingCountries)
     {
-        store.commit("setAllShippingCountries", App.initialData.allShippingCountries);
+        store.commit("setEuShippingCountries", App.initialData.euShippingCountries);
     }
 }
 
