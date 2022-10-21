@@ -1,8 +1,8 @@
 import Vue from "vue";
 import { mapState } from "vuex";
+import NotificationService from "../../../services/NotificationService";
+import TranslationService from "../../../services/TranslationService";
 import AddressSelect from "./AddressSelect";
-import TranslationService from "../../services/TranslationService";
-const NotificationService = require("../../services/NotificationService");
 
 export default Vue.component("shipping-address-select", {
 
