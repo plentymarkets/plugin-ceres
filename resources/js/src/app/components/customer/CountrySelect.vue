@@ -104,12 +104,15 @@ export default {
                 const euCountries = this.$store.state.localization.euShippingCountries;
                 const allCountries = [...activeCountries, ...euCountries];
 
-                const combinedCountries = {};
+                let combinedCountries = {};
                 allCountries.forEach(country => {
                     combinedCountries[country.isoCode2] = country;
                 });
 
-                return Object.values(combinedCountries);
+                combinedCountries = Object.values(combinedCountries);
+                combinedCountries = combinedCountries.sort((a, b) => a.currLangName.localeCompare(b.currLangName));
+
+                return combinedCountries;
             }
 
             return this.$store.state.localization.shippingCountries
