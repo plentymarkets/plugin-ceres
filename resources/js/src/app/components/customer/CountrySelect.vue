@@ -95,9 +95,28 @@ export default {
             return this.requiredAddressFields[iso];
         },
 
+        countryList()
+        {
+            // if it's for a billing address we add every eu country to the list due to legal obligations
+            if (this.addressType === "1")
+            {
+                const activeCountries = this.$store.state.localization.shippingCountries;
+                const euCountries = this.$store.state.localization.euShippingCountries;
+                const allCountries = [...activeCountries, ...euCountries];
+
+                const combinedCountries = {};
+                allCountries.forEach(country => {
+                    combinedCountries[country.isoCode2] = country;
+                });
+
+                return Object.values(combinedCountries);
+            }
+
+            return this.$store.state.localization.shippingCountries
+        },
+
         ...mapState({
-            shippingCountryId: state => state.localization.shippingCountryId,
-            countryList: state => state.localization.shippingCountries
+            shippingCountryId: state => state.localization.shippingCountryId
         })
     },
 
