@@ -6,7 +6,7 @@ const ApiService = require("../../services/ApiService");
 const state = () => ({
     shippingCountries: [],
     shippingCountryId: null,
-    allShippingCountries: []
+    euShippingCountries: []
 });
 
 const mutations =
@@ -16,9 +16,9 @@ const mutations =
             state.shippingCountries = shippingCountries;
         },
 
-        setAllShippingCountries(state, allShippingCountries)
+        setEuShippingCountries(state, euShippingCountries)
         {
-            state.allShippingCountries = allShippingCountries;
+            state.euShippingCountries = euShippingCountries;
         },
 
         setShippingCountryId(state, shippingCountryId)
@@ -70,6 +70,7 @@ const getters =
         {
             if (countryId > 0)
             {
+                // TODO do we need to search euShippingCountries as well
                 const country = state.shippingCountries.find(country => country.id === countryId);
 
                 if (!isNullOrUndefined(country))
