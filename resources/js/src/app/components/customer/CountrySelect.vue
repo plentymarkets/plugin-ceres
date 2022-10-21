@@ -106,7 +106,7 @@ export default {
 
                 let combinedCountries = {};
                 allCountries.forEach(country => {
-                    combinedCountries[country.isoCode2] = country;
+                    combinedCountries[country.id] = country;
                 });
 
                 combinedCountries = Object.values(combinedCountries);
