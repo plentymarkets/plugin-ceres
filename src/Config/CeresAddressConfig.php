@@ -14,13 +14,6 @@ use Plenty\Modules\Webshop\Helpers\PluginConfig;
 class CeresAddressConfig extends PluginConfig
 {
     /**
-     * @var string $defaultSalutation Preselected salutation in the address modal.
-     *
-     * @deprecated will be removed in 6.0.0.
-     */
-    public $defaultSalutation;
-
-    /**
      * @var array $billingAddressShow Visible input fields of the billing address.
      *
      * @deprecated will be removed in 6.0.0.
@@ -89,8 +82,6 @@ class CeresAddressConfig extends PluginConfig
      */
     protected function load()
     {
-        $this->defaultSalutation = $this->getTextValue('addresses.defaultSalutation');
-
         $this->billingAddressShow = $this->getMultiSelectValue(
             'billing_address.show',
             [

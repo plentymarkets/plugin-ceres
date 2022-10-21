@@ -14,7 +14,7 @@ class SearchStep extends Step
     /**
      * @return array
      */
-    public function generateStep():array
+    public function generateStep():array   
     {
         return [
             "title" => "Wizard.searchStep",

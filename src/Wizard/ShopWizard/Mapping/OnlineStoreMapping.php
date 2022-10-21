@@ -39,6 +39,12 @@ class OnlineStoreMapping
             'global'   => false,
             'optional' => false,
         ],
+        'onlineStore_defaultGenderSalutation' => [
+            'field'    => 'my_account.default_gender_salutation',
+            'type'      => 'string',
+            'global'    => 'false',
+            'optional'  => 'false'
+        ],
         'onlineStore_confirmationLinkLoginRedirect' => [
             'field'    => 'my_account.confirmation_link_login_redirect',
             'type'     => 'boolean',
