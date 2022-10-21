@@ -9,10 +9,10 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
-/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_string_search_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.string.search.js */ "./node_modules/core-js/modules/es.string.search.js");
-/* harmony import */ var core_js_modules_es_string_search_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_search_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_string_search_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.string.search.js */ "./node_modules/core-js/modules/es.string.search.js");
+/* harmony import */ var core_js_modules_es_string_search_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_search_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 /* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 /* harmony import */ var _services_ModalService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/ModalService */ "./resources/js/src/app/services/ModalService.js");
@@ -21,6 +21,51 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../helper/utils */ "./resources/js/src/app/helper/utils.js");
 
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -103,10 +148,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/customer/login/ForgotPassword.vue?vue&type=template&id=7f94eb33&":
-/*!************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/customer/login/ForgotPassword.vue?vue&type=template&id=7f94eb33& ***!
-  \************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/customer/login/ForgotPassword.vue?vue&type=template&id=7f94eb33&":
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/customer/login/ForgotPassword.vue?vue&type=template&id=7f94eb33& ***!
+  \****************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -114,146 +159,234 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function render() {
-  var _vm = this,
-      _c = _vm._self._c;
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      staticClass: "reset-pwd-container login-pwd-reset",
+      attrs: { id: "reset-pwd-form-" + _vm._uid, method: "post" }
+    },
+    [
+      _c(
+        "div",
+        {
+          ref: "pwdModal",
+          staticClass: "modal fade",
+          attrs: { id: "resetPwd", tabindex: "-1", role: "dialog" }
+        },
+        [
+          _c("div", { staticClass: "modal-dialog" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c("div", { staticClass: "modal-title h3" }, [
+                  _vm._v(
+                    _vm._s(
+                      _vm.$translate("Ceres::Template.loginForgotPassword")
+                    )
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-hidden": "true",
+                      "aria-label": _vm.$translate("Ceres::Template.closeIcon")
+                    }
+                  },
+                  [_vm._v("×")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c(
+                  "div",
+                  { staticClass: "alert alert-info w-100 pwd-forgot-info" },
+                  [
+                    _c("span", { staticClass: "info-badge" }, [
+                      _vm._v(
+                        _vm._s(
+                          _vm.$translate(
+                            "Ceres::Template.loginForgotPasswordInfo"
+                          )
+                        )
+                      )
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-12" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.honeypot,
+                          expression: "honeypot"
+                        }
+                      ],
+                      staticClass: "honey",
+                      attrs: {
+                        type: "text",
+                        name: "username",
+                        autocomplete: "new-password",
+                        tabindex: "-1"
+                      },
+                      domProps: { value: _vm.honeypot },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.honeypot = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "input-unit no-bottom",
+                        attrs: { "data-validate": "mail" }
+                      },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.username,
+                              expression: "username"
+                            }
+                          ],
+                          attrs: {
+                            type: "email",
+                            name: "email",
+                            autocomplete: "email",
+                            id: "mail" + _vm._uid,
+                            "data-autofocus": ""
+                          },
+                          domProps: { value: _vm.username },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.username = $event.target.value
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("label", { attrs: { for: "mail" + _vm._uid } }, [
+                          _vm._v(
+                            _vm._s(
+                              _vm.$translate("Ceres::Template.loginEmail")
+                            ) + "*"
+                          )
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "error-msg" }, [
+                      _vm._v(
+                        _vm._s(
+                          _vm.$translate(
+                            "Ceres::Template.loginEnterConfirmEmail"
+                          )
+                        )
+                      )
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "div",
+                  [
+                    _vm._t("extend-overlay-buttons"),
+                    _vm._v(" "),
+                    !!_vm.currentTemplate && _vm.currentTemplate != "tpl.login"
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger btn-medium mr-2",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.cancelResetPwd($event)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "fa fa-arrow-left",
+                              attrs: { "aria-hidden": "true" }
+                            }),
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(
+                                  _vm.$translate(
+                                    "Ceres::Template.loginBackToLogin"
+                                  )
+                                ) +
+                                "\n                            "
+                            )
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary btn-medium",
+                        attrs: { disabled: _vm.isDisabled },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.validateResetPwd($event)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n\t\t\t\t\t\t\t\t" +
+                            _vm._s(
+                              _vm.$translate("Ceres::Template.loginSend")
+                            ) +
+                            "\n\t\t\t\t\t\t\t\t"
+                        ),
+                        _c("icon", {
+                          attrs: {
+                            icon: "paper-plane-o",
+                            loading: _vm.isDisabled
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  2
+                )
+              ])
+            ])
+          ])
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
 
-  return _c("form", {
-    staticClass: "reset-pwd-container login-pwd-reset",
-    attrs: {
-      id: "reset-pwd-form-" + _vm._uid,
-      method: "post"
-    }
-  }, [_c("div", {
-    ref: "pwdModal",
-    staticClass: "modal fade",
-    attrs: {
-      id: "resetPwd",
-      tabindex: "-1",
-      role: "dialog"
-    }
-  }, [_c("div", {
-    staticClass: "modal-dialog"
-  }, [_c("div", {
-    staticClass: "modal-content"
-  }, [_c("div", {
-    staticClass: "modal-header"
-  }, [_c("div", {
-    staticClass: "modal-title h3"
-  }, [_vm._v(_vm._s(_vm.$translate("Ceres::Template.loginForgotPassword")))]), _vm._v(" "), _c("button", {
-    staticClass: "close",
-    attrs: {
-      type: "button",
-      "data-dismiss": "modal",
-      "aria-hidden": "true",
-      "aria-label": _vm.$translate("Ceres::Template.closeIcon")
-    }
-  }, [_vm._v("×")])]), _vm._v(" "), _c("div", {
-    staticClass: "modal-body"
-  }, [_c("div", {
-    staticClass: "alert alert-info w-100 pwd-forgot-info"
-  }, [_c("span", {
-    staticClass: "info-badge"
-  }, [_vm._v(_vm._s(_vm.$translate("Ceres::Template.loginForgotPasswordInfo")))])]), _vm._v(" "), _c("div", {
-    staticClass: "row"
-  }, [_c("div", {
-    staticClass: "col-12"
-  }, [_c("input", {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: _vm.honeypot,
-      expression: "honeypot"
-    }],
-    staticClass: "honey",
-    attrs: {
-      type: "text",
-      name: "username",
-      autocomplete: "new-password",
-      tabindex: "-1"
-    },
-    domProps: {
-      value: _vm.honeypot
-    },
-    on: {
-      input: function input($event) {
-        if ($event.target.composing) return;
-        _vm.honeypot = $event.target.value;
-      }
-    }
-  }), _vm._v(" "), _c("div", {
-    staticClass: "input-unit no-bottom",
-    attrs: {
-      "data-validate": "mail"
-    }
-  }, [_c("input", {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: _vm.username,
-      expression: "username"
-    }],
-    attrs: {
-      type: "email",
-      name: "email",
-      autocomplete: "email",
-      id: "mail" + _vm._uid,
-      "data-autofocus": ""
-    },
-    domProps: {
-      value: _vm.username
-    },
-    on: {
-      input: function input($event) {
-        if ($event.target.composing) return;
-        _vm.username = $event.target.value;
-      }
-    }
-  }), _vm._v(" "), _c("label", {
-    attrs: {
-      for: "mail" + _vm._uid
-    }
-  }, [_vm._v(_vm._s(_vm.$translate("Ceres::Template.loginEmail")) + "*")])]), _vm._v(" "), _c("span", {
-    staticClass: "error-msg"
-  }, [_vm._v(_vm._s(_vm.$translate("Ceres::Template.loginEnterConfirmEmail")))])])])]), _vm._v(" "), _c("div", {
-    staticClass: "modal-footer"
-  }, [_c("div", [_vm._t("extend-overlay-buttons"), _vm._v(" "), !!_vm.currentTemplate && _vm.currentTemplate != "tpl.login" ? _c("button", {
-    staticClass: "btn btn-danger btn-medium mr-2",
-    attrs: {
-      type: "button"
-    },
-    on: {
-      click: function click($event) {
-        $event.preventDefault();
-        return _vm.cancelResetPwd.apply(null, arguments);
-      }
-    }
-  }, [_c("i", {
-    staticClass: "fa fa-arrow-left",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v("\n                                " + _vm._s(_vm.$translate("Ceres::Template.loginBackToLogin")) + "\n                            ")]) : _vm._e(), _vm._v(" "), _c("button", {
-    staticClass: "btn btn-primary btn-medium",
-    attrs: {
-      disabled: _vm.isDisabled
-    },
-    on: {
-      click: function click($event) {
-        $event.preventDefault();
-        return _vm.validateResetPwd.apply(null, arguments);
-      }
-    }
-  }, [_vm._v("\n\t\t\t\t\t\t\t\t" + _vm._s(_vm.$translate("Ceres::Template.loginSend")) + "\n\t\t\t\t\t\t\t\t"), _c("icon", {
-    attrs: {
-      icon: "paper-plane-o",
-      loading: _vm.isDisabled
-    }
-  })], 1)], 2)])])])])]);
-};
-
-var staticRenderFns = [];
-render._withStripped = true;
 
 
 /***/ }),
@@ -318,10 +451,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_ForgotPassword_vue_vue_type_template_id_7f94eb33___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ForgotPassword.vue?vue&type=template&id=7f94eb33& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/customer/login/ForgotPassword.vue?vue&type=template&id=7f94eb33&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_ForgotPassword_vue_vue_type_template_id_7f94eb33___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ForgotPassword_vue_vue_type_template_id_7f94eb33___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ForgotPassword.vue?vue&type=template&id=7f94eb33& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/customer/login/ForgotPassword.vue?vue&type=template&id=7f94eb33&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ForgotPassword_vue_vue_type_template_id_7f94eb33___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_ForgotPassword_vue_vue_type_template_id_7f94eb33___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ForgotPassword_vue_vue_type_template_id_7f94eb33___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

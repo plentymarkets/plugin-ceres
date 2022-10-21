@@ -11,10 +11,10 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
-/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.string.replace.js */ "./node_modules/core-js/modules/es.string.replace.js");
-/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.string.replace.js */ "./node_modules/core-js/modules/es.string.replace.js");
+/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var core_js_modules_es_number_to_fixed_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.number.to-fixed.js */ "./node_modules/core-js/modules/es.number.to-fixed.js");
 /* harmony import */ var core_js_modules_es_number_to_fixed_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_to_fixed_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
@@ -22,6 +22,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-store-special",
@@ -116,15 +134,140 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_number_to_fixed_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.number.to-fixed.js */ "./node_modules/core-js/modules/es.number.to-fixed.js");
 /* harmony import */ var core_js_modules_es_number_to_fixed_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_to_fixed_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
-/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.string.replace.js */ "./node_modules/core-js/modules/es.string.replace.js");
-/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.string.replace.js */ "./node_modules/core-js/modules/es.string.replace.js");
+/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! dayjs */ "./node_modules/dayjs/dayjs.min.js");
 /* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -295,6 +438,68 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -438,330 +643,6 @@ var TimeEnum = Object.freeze({
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/itemList/ItemStoreSpecial.vue?vue&type=template&id=9410a8b2&":
-/*!********************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/itemList/ItemStoreSpecial.vue?vue&type=template&id=9410a8b2& ***!
-  \********************************************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function render() {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _vm.hasLabel || _vm.isBundle || _vm.isSet ? _c("div", {
-    staticClass: "special-tags p-2"
-  }, [_vm.hasLabel ? _c("span", {
-    staticClass: "badge",
-    class: _vm.tagClass
-  }, [_vm._v("\n        " + _vm._s(_vm.label) + "\n    ")]) : _vm.isBundle ? _c("span", {
-    class: _vm.tagClasses.itemBundle
-  }, [_vm._v("\n        " + _vm._s(_vm.$translate("Ceres::Template.itemBundle")) + "\n    ")]) : _vm.isSet ? _c("span", {
-    class: _vm.tagClasses.itemSet
-  }, [_vm._v("\n        " + _vm._s(_vm.$translate("Ceres::Template.itemSet")) + "\n    ")]) : _vm._e()]) : _vm._e();
-};
-
-var staticRenderFns = [];
-render._withStripped = true;
-
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/liveShopping/LiveShoppingDetails.vue?vue&type=template&id=c760b5b6&":
-/*!***************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/liveShopping/LiveShoppingDetails.vue?vue&type=template&id=c760b5b6& ***!
-  \***************************************************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
-/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0__);
-
-
-var render = function render() {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("div", {
-    staticClass: "live-shopping-details"
-  }, [_c("div", {
-    staticClass: "h3 live-shopping-item-name"
-  }, [_c("a", {
-    attrs: {
-      href: _vm._f("itemURL")(_vm.liveShoppingData.item)
-    }
-  }, [_vm._v("\n            " + _vm._s(_vm._f("itemName")(_vm.liveShoppingData.item)) + "\n        ")])]), _vm._v(" "), _vm._t("after-item-name"), _vm._v(" "), _vm.displaySettings.showTimer || _vm.displaySettings.showStock ? _c("div", {
-    staticClass: "live-shopping-countdown"
-  }, [_c("hr", {
-    staticClass: "live-shopping-countdown-separator"
-  }), _vm._v(" "), _vm.displaySettings.showTimer ? _c("div", {
-    staticClass: "live-shopping-countdown-heading"
-  }, [_vm.hasStarted ? _c("div", [_vm._v("\n                " + _vm._s(_vm.$translate("Ceres::Template.liveShoppingOfferEndsIn")) + "\n            ")]) : _c("div", [_vm._v("\n                " + _vm._s(_vm.$translate("Ceres::Template.liveShoppingOfferBeginsIn")) + "\n            ")])]) : _vm._e(), _vm._v(" "), _vm.displaySettings.showTimer && !!_vm.duration ? _c("div", {
-    staticClass: "live-shopping-countdown-thread-container"
-  }, [_vm.duration.days > 0 ? _c("div", {
-    staticClass: "live-shopping-countdown-thread"
-  }, [_c("div", {
-    staticClass: "live-shopping-countdown-thread-number"
-  }, [_vm._v(_vm._s(_vm.duration.days))]), _vm._v(" "), _c("div", {
-    staticClass: "small"
-  }, [_vm._v(_vm._s(_vm.$translate("Ceres::Template.liveShoppingDays")))])]) : _vm._e(), _vm._v(" "), _c("div", {
-    staticClass: "live-shopping-countdown-thread"
-  }, [_c("div", {
-    staticClass: "live-shopping-countdown-thread-number"
-  }, [_vm._v(_vm._s(_vm.duration.hours))]), _vm._v(" "), _c("div", {
-    staticClass: "small"
-  }, [_vm._v(_vm._s(_vm.$translate("Ceres::Template.liveShoppingHours")))])]), _vm._v(" "), _c("div", {
-    staticClass: "live-shopping-countdown-thread"
-  }, [_c("div", {
-    staticClass: "live-shopping-countdown-thread-number"
-  }, [_vm._v(_vm._s(_vm.duration.minutes))]), _vm._v(" "), _c("div", {
-    staticClass: "small"
-  }, [_vm._v(_vm._s(_vm.$translate("Ceres::Template.liveShoppingMinutes")))])]), _vm._v(" "), _vm.duration.days <= 0 ? _c("div", {
-    staticClass: "live-shopping-countdown-thread"
-  }, [_c("div", {
-    staticClass: "live-shopping-countdown-thread-number"
-  }, [_vm._v(_vm._s(_vm.duration.seconds))]), _vm._v(" "), _c("div", {
-    staticClass: "small"
-  }, [_vm._v(_vm._s(_vm.$translate("Ceres::Template.liveShoppingSeconds")))])]) : _vm._e()]) : _vm._e(), _vm._v(" "), _vm.hasStarted && !_vm.hasClosed ? [_vm.displaySettings.showTimer && _vm.displaySettings.showTimerProgress ? _c("div", {
-    staticClass: "live-shopping-progress"
-  }, [_c("div", {
-    staticClass: "progress"
-  }, [_c("div", {
-    staticClass: "progress-bar",
-    class: "progress-" + Math.round(_vm.timePercentage / 10) * 10,
-    style: "width:" + _vm.timePercentage + "%",
-    attrs: {
-      role: "progressbar",
-      "aria-valuenow": "25",
-      "aria-valuemin": "0",
-      "aria-valuemax": "100"
-    }
-  })])]) : _vm._e(), _vm._v(" "), _vm.displaySettings.showStock ? _c("div", {
-    staticClass: "live-shopping-progress"
-  }, [_c("div", {
-    staticClass: "live-shopping-progress-heading"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$translate("Ceres::Template.liveShoppingRemainingStock", {
-    quantityRemaining: _vm.itemQuantityRemaining,
-    quantityMax: _vm.liveShoppingData.liveShopping.quantityMax
-  })))])]), _vm._v(" "), _vm.displaySettings.showStockProgress ? _c("div", {
-    staticClass: "progress"
-  }, [_c("div", {
-    staticClass: "progress-bar",
-    class: "progress-" + Math.round(_vm.quantitySoldPercentage / 10) * 10,
-    style: "width:" + _vm.quantitySoldPercentage + "%",
-    attrs: {
-      role: "progressbar",
-      "aria-valuenow": "25",
-      "aria-valuemin": "0",
-      "aria-valuemax": "100"
-    }
-  })]) : _vm._e()]) : _vm._e()] : _vm._e()], 2) : _vm._e(), _vm._v(" "), _vm.hasStarted && !_vm.hasClosed ? _c("div", {
-    staticClass: "live-shopping-prices bg-danger"
-  }, [_c("div", {
-    staticClass: "live-shopping-prices-inner"
-  }, [!isNaN(_vm.itemPriceRebatePercentage) && _vm.itemPriceRebatePercentage > 0 ? _c("div", {
-    staticClass: "live-shopping-prices-rebate"
-  }, [_vm._v(_vm._s(_vm.$translate("Ceres::Template.liveShoppingRebate", {
-    rebate: _vm.itemPriceRebatePercentage
-  })))]) : _vm._e(), _vm._v(" "), _c("div", {
-    staticClass: "live-shopping-prices-container"
-  }, [_c("div", {
-    staticClass: "live-shopping-price"
-  }, [_c("strong", [_vm._v(_vm._s(_vm.prices.price.unitPrice.formatted) + " *")])]), _vm._v(" "), _vm.isCrossPriceVisible ? _c("span", [_vm.prices.isRrpDefaultPrice ? _c("span", {
-    domProps: {
-      innerHTML: _vm._s(_vm.oldPriceBefore)
-    }
-  }) : _c("span", {
-    domProps: {
-      innerHTML: _vm._s(_vm.oldPriceRrp)
-    }
-  })]) : _vm._e()])]), _vm._v(" "), _c("div", {
-    staticClass: "live-shopping-prices-additional-info"
-  }, [_vm.isCrossPriceVisible && _vm.liveShoppingData.item.prices.default.lowestPrice.value ? _c("div", {
-    staticClass: "live-shopping-lowest-price"
-  }, [_c("span", {
-    domProps: {
-      innerHTML: _vm._s(_vm.$translate("Ceres::Template.singleItemLowestPrice", {
-        price: _vm.liveShoppingData.item.prices.default.lowestPrice.formatted
-      }))
-    }
-  })]) : _vm._e(), _vm._v(" "), !(_vm.liveShoppingData.item.unit.unitOfMeasurement === "C62" && _vm.liveShoppingData.item.unit.content === 1) ? _c("div", {
-    staticClass: "live-shopping-unit-price"
-  }, [_c("span", [_vm._v(_vm._s(_vm.liveShoppingData.item.unit.content))]), _vm._v(" "), _c("span", [_vm._v(_vm._s(_vm.liveShoppingData.item.unit.names.name))]), _vm._v(" "), _vm.liveShoppingData.item.variation.mayShowUnitPrice ? _c("span", [_vm._v("| " + _vm._s(_vm.prices.price.basePrice))]) : _vm._e()]) : _vm._e(), _vm._v("\n\n            " + _vm._s(_vm.$translate("Ceres::Template.liveShoppingFootnote")) + " "), _vm.showNetPrices ? [_vm._v(_vm._s(_vm.$translate("Ceres::Template.itemExclVAT")))] : [_vm._v(_vm._s(_vm.$translate("Ceres::Template.itemInclVAT")))], _vm._v(" " + _vm._s(_vm.$translate("Ceres::Template.itemExclusive")) + "\n            "), _vm.$ceres.config.global.shippingCostsCategoryId > 0 ? _c("a", {
-    attrs: {
-      "data-toggle": "modal",
-      href: "#shippingscosts",
-      title: _vm.$translate("Ceres::Template.itemShippingCosts")
-    }
-  }, [_vm._v(_vm._s(_vm.$translate("Ceres::Template.itemShippingCosts")))]) : _c("a", {
-    attrs: {
-      title: _vm.$translate("Ceres::Template.itemShippingCosts")
-    }
-  }, [_vm._v(_vm._s(_vm.$translate("Ceres::Template.itemShippingCosts")))])], 2)]) : _c("div", {
-    staticClass: "thumb-content"
-  }, [_c("div", [_c("div", {
-    staticClass: "prices"
-  }, [_c("div", {
-    staticClass: "price-view-port"
-  }, [_vm.isCrossPriceVisible ? _c("del", {
-    staticClass: "crossprice"
-  }, [_vm._v("\n                        " + _vm._s(_vm._f("itemCrossPrice")(_vm.prices.rrp.price.formatted)) + "\n                    ")]) : _vm._e()]), _vm._v(" "), _c("div", {
-    staticClass: "price"
-  }, [_vm._v("\n                    " + _vm._s(_vm.prices.price.price.formatted) + " *\n                ")])]), _vm._v(" "), _vm.isCrossPriceVisible && _vm.liveShoppingData.item.prices.default.lowestPrice.value ? _c("div", {
-    staticClass: "category-lowest-price small"
-  }, [_c("span", {
-    domProps: {
-      innerHTML: _vm._s(_vm.$translate("Ceres::Template.singleItemLowestPrice", {
-        price: _vm.liveShoppingData.item.prices.default.lowestPrice.formatted
-      }))
-    }
-  })]) : _vm._e(), _vm._v(" "), !(_vm.liveShoppingData.item.unit.unitOfMeasurement === "C62" && _vm.liveShoppingData.item.unit.content === 1) ? _c("div", {
-    staticClass: "category-unit-price small"
-  }, [_c("span", [_vm._v(_vm._s(_vm.liveShoppingData.item.unit.content))]), _vm._v(" "), _c("span", [_vm._v(_vm._s(_vm.liveShoppingData.item.unit.names.name))]), _vm._v(" "), _vm.liveShoppingData.item.variation.mayShowUnitPrice ? _c("span", [_vm._v("| " + _vm._s(_vm.prices.price.basePrice))]) : _vm._e()]) : _vm._e(), _vm._v(" "), _c("span", {
-    staticClass: "vat small text-muted"
-  }, [_vm._v("\n                " + _vm._s(_vm.$translate("Ceres::Template.liveShoppingFootnote")) + " "), _vm.showNetPrices ? [_vm._v(_vm._s(_vm.$translate("Ceres::Template.itemExclVAT")))] : [_vm._v(_vm._s(_vm.$translate("Ceres::Template.itemInclVAT")))], _vm._v(" " + _vm._s(_vm.$translate("Ceres::Template.itemExclusive")) + "\n                "), _vm.$ceres.config.global.shippingCostsCategoryId > 0 ? _c("a", {
-    attrs: {
-      "data-toggle": "modal",
-      href: "#shippingscosts",
-      title: _vm.$translate("Ceres::Template.itemShippingCosts")
-    }
-  }, [_vm._v(_vm._s(_vm.$translate("Ceres::Template.itemShippingCosts")))]) : _c("a", {
-    attrs: {
-      title: _vm.$translate("Ceres::Template.itemShippingCosts")
-    }
-  }, [_vm._v(_vm._s(_vm.$translate("Ceres::Template.itemShippingCosts")))])], 2)])])], 2);
-};
-
-var staticRenderFns = [];
-render._withStripped = true;
-
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/liveShopping/LiveShoppingItem.vue?vue&type=template&id=3c96f6c0&":
-/*!************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/liveShopping/LiveShoppingItem.vue?vue&type=template&id=3c96f6c0& ***!
-  \************************************************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1__);
-
-
-
-var render = function render() {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("div", [!!_vm.currentOffer ? _c("category-item", {
-    attrs: {
-      "item-data": _vm.currentOffer.item,
-      "decimal-count": _vm.$ceres.config.item.storeSpecial,
-      "image-url-accessor": "urlMiddle",
-      "padding-classes": _vm.paddingClasses,
-      "padding-inline-styles": _vm.paddingInlineStyles,
-      "force-url-with-variation-id": true
-    },
-    scopedSlots: _vm._u([{
-      key: "store-special",
-      fn: function fn() {
-        return [!!_vm.storeSpecial ? _c("item-store-special", {
-          attrs: {
-            "store-special": _vm.storeSpecial,
-            "recommended-retail-price": _vm.prices.rrp,
-            "variation-retail-price": _vm.prices.price,
-            "decimal-count": _vm.$ceres.config.item.storeSpecial
-          }
-        }) : _vm._e()];
-      },
-      proxy: true
-    }, {
-      key: "item-image",
-      fn: function fn() {
-        return [!!_vm.displaySettings.customImagePath ? _c("a", {
-          attrs: {
-            href: _vm._f("itemURL")(_vm.currentOffer.item)
-          }
-        }, [_c("lazy-img", {
-          attrs: {
-            "image-url": _vm.displaySettings.customImagePath,
-            alt: _vm._f("itemName")(_vm.currentOffer.item),
-            title: _vm._f("itemName")(_vm.currentOffer.item)
-          }
-        })], 1) : _vm._e()];
-      },
-      proxy: true
-    }, !!_vm.currentOffer && _vm.whenIsCurrentOffer() !== 1 && _vm.isActiveByStock ? {
-      key: "item-details",
-      fn: function fn() {
-        return [_c("live-shopping-details", {
-          attrs: {
-            "live-shopping-data": _vm.currentOffer,
-            "display-settings": _vm.displaySettings,
-            prices: _vm.prices,
-            "is-active-by-stock": _vm.isActiveByStock,
-            "show-net-prices": _vm.showNetPrices
-          },
-          on: {
-            "reload-offer": function reloadOffer($event) {
-              return _vm.reloadOffer();
-            }
-          },
-          scopedSlots: _vm._u([{
-            key: "after-item-name",
-            fn: function fn() {
-              return [_c("div", {
-                staticClass: "live-shopping-add-to-basket"
-              }, [_c("add-to-basket", {
-                attrs: {
-                  "variation-id": _vm.currentOffer.item.variation.id,
-                  "is-salable": !!_vm.currentOffer.item.filter && _vm.currentOffer.item.filter.isSalable,
-                  "has-children": !!_vm.currentOffer.item.filter && _vm.currentOffer.item.filter.hasActiveChildren,
-                  "interval-quantity": _vm.currentOffer.item.variation.intervalOrderQuantity || 1,
-                  "minimum-quantity": _vm.currentOffer.item.variation.minimumOrderQuantity,
-                  "maximum-quantity": !!_vm.currentOffer.item.variation.maximumOrderQuantity && _vm.currentOffer.item.variation.maximumOrderQuantity > 0 ? _vm.currentOffer.item.variation.maximumOrderQuantity : null,
-                  "order-properties": _vm.currentOffer.item.properties.filter(function (prop) {
-                    return prop.property.isOderProperty;
-                  }),
-                  "has-order-properties": _vm.currentOffer.item.hasOrderProperties,
-                  "has-required-order-property": _vm.currentOffer.hasRequiredOrderProperty,
-                  "use-large-scale": false,
-                  "show-quantity": false,
-                  "item-url": _vm._f("itemURL")(_vm.currentOffer.item),
-                  "item-type": _vm.currentOffer.item.item.itemType
-                }
-              })], 1)];
-            },
-            proxy: true
-          }], null, false, 883888925)
-        })];
-      },
-      proxy: true
-    } : null], null, true)
-  }) : _c("div", [_vm._t("default")], 2)], 1);
-};
-
-var staticRenderFns = [];
-render._withStripped = true;
-
-
-/***/ }),
-
 /***/ "./node_modules/core-js/modules/es.object.freeze.js":
 /*!**********************************************************!*\
   !*** ./node_modules/core-js/modules/es.object.freeze.js ***!
@@ -775,17 +656,831 @@ var fails = __webpack_require__(/*! ../internals/fails */ "./node_modules/core-j
 var isObject = __webpack_require__(/*! ../internals/is-object */ "./node_modules/core-js/internals/is-object.js");
 var onFreeze = __webpack_require__(/*! ../internals/internal-metadata */ "./node_modules/core-js/internals/internal-metadata.js").onFreeze;
 
-// eslint-disable-next-line es/no-object-freeze -- safe
-var $freeze = Object.freeze;
-var FAILS_ON_PRIMITIVES = fails(function () { $freeze(1); });
+var nativeFreeze = Object.freeze;
+var FAILS_ON_PRIMITIVES = fails(function () { nativeFreeze(1); });
 
 // `Object.freeze` method
 // https://tc39.es/ecma262/#sec-object.freeze
 $({ target: 'Object', stat: true, forced: FAILS_ON_PRIMITIVES, sham: !FREEZING }, {
   freeze: function freeze(it) {
-    return $freeze && isObject(it) ? $freeze(onFreeze(it)) : it;
+    return nativeFreeze && isObject(it) ? nativeFreeze(onFreeze(it)) : it;
   }
 });
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/itemList/ItemStoreSpecial.vue?vue&type=template&id=9410a8b2&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/itemList/ItemStoreSpecial.vue?vue&type=template&id=9410a8b2& ***!
+  \************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.hasLabel || _vm.isBundle || _vm.isSet
+    ? _c("div", { staticClass: "special-tags p-2" }, [
+        _vm.hasLabel
+          ? _c("span", { staticClass: "badge", class: _vm.tagClass }, [
+              _vm._v("\n        " + _vm._s(_vm.label) + "\n    ")
+            ])
+          : _vm.isBundle
+          ? _c("span", { class: _vm.tagClasses.itemBundle }, [
+              _vm._v(
+                "\n        " +
+                  _vm._s(_vm.$translate("Ceres::Template.itemBundle")) +
+                  "\n    "
+              )
+            ])
+          : _vm.isSet
+          ? _c("span", { class: _vm.tagClasses.itemSet }, [
+              _vm._v(
+                "\n        " +
+                  _vm._s(_vm.$translate("Ceres::Template.itemSet")) +
+                  "\n    "
+              )
+            ])
+          : _vm._e()
+      ])
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/liveShopping/LiveShoppingDetails.vue?vue&type=template&id=c760b5b6&":
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/liveShopping/LiveShoppingDetails.vue?vue&type=template&id=c760b5b6& ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "live-shopping-details" },
+    [
+      _c("div", { staticClass: "h3 live-shopping-item-name" }, [
+        _c(
+          "a",
+          { attrs: { href: _vm._f("itemURL")(_vm.liveShoppingData.item) } },
+          [
+            _vm._v(
+              "\n            " +
+                _vm._s(_vm._f("itemName")(_vm.liveShoppingData.item)) +
+                "\n        "
+            )
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _vm._t("after-item-name"),
+      _vm._v(" "),
+      _vm.displaySettings.showTimer || _vm.displaySettings.showStock
+        ? _c(
+            "div",
+            { staticClass: "live-shopping-countdown" },
+            [
+              _c("hr", { staticClass: "live-shopping-countdown-separator" }),
+              _vm._v(" "),
+              _vm.displaySettings.showTimer
+                ? _c(
+                    "div",
+                    { staticClass: "live-shopping-countdown-heading" },
+                    [
+                      _vm.hasStarted
+                        ? _c("div", [
+                            _vm._v(
+                              "\n                " +
+                                _vm._s(
+                                  _vm.$translate(
+                                    "Ceres::Template.liveShoppingOfferEndsIn"
+                                  )
+                                ) +
+                                "\n            "
+                            )
+                          ])
+                        : _c("div", [
+                            _vm._v(
+                              "\n                " +
+                                _vm._s(
+                                  _vm.$translate(
+                                    "Ceres::Template.liveShoppingOfferBeginsIn"
+                                  )
+                                ) +
+                                "\n            "
+                            )
+                          ])
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.displaySettings.showTimer && !!_vm.duration
+                ? _c(
+                    "div",
+                    { staticClass: "live-shopping-countdown-thread-container" },
+                    [
+                      _vm.duration.days > 0
+                        ? _c(
+                            "div",
+                            { staticClass: "live-shopping-countdown-thread" },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "live-shopping-countdown-thread-number"
+                                },
+                                [_vm._v(_vm._s(_vm.duration.days))]
+                              ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "small" }, [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.$translate(
+                                      "Ceres::Template.liveShoppingDays"
+                                    )
+                                  )
+                                )
+                              ])
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "live-shopping-countdown-thread" },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "live-shopping-countdown-thread-number"
+                            },
+                            [_vm._v(_vm._s(_vm.duration.hours))]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "small" }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.liveShoppingHours"
+                                )
+                              )
+                            )
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "live-shopping-countdown-thread" },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "live-shopping-countdown-thread-number"
+                            },
+                            [_vm._v(_vm._s(_vm.duration.minutes))]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "small" }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.liveShoppingMinutes"
+                                )
+                              )
+                            )
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm.duration.days <= 0
+                        ? _c(
+                            "div",
+                            { staticClass: "live-shopping-countdown-thread" },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "live-shopping-countdown-thread-number"
+                                },
+                                [_vm._v(_vm._s(_vm.duration.seconds))]
+                              ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "small" }, [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.$translate(
+                                      "Ceres::Template.liveShoppingSeconds"
+                                    )
+                                  )
+                                )
+                              ])
+                            ]
+                          )
+                        : _vm._e()
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.hasStarted && !_vm.hasClosed
+                ? [
+                    _vm.displaySettings.showTimer &&
+                    _vm.displaySettings.showTimerProgress
+                      ? _c("div", { staticClass: "live-shopping-progress" }, [
+                          _c("div", { staticClass: "progress" }, [
+                            _c("div", {
+                              staticClass: "progress-bar",
+                              class:
+                                "progress-" +
+                                Math.round(_vm.timePercentage / 10) * 10,
+                              style: "width:" + _vm.timePercentage + "%",
+                              attrs: {
+                                role: "progressbar",
+                                "aria-valuenow": "25",
+                                "aria-valuemin": "0",
+                                "aria-valuemax": "100"
+                              }
+                            })
+                          ])
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.displaySettings.showStock
+                      ? _c("div", { staticClass: "live-shopping-progress" }, [
+                          _c(
+                            "div",
+                            { staticClass: "live-shopping-progress-heading" },
+                            [
+                              _c("span", [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.$translate(
+                                      "Ceres::Template.liveShoppingRemainingStock",
+                                      {
+                                        quantityRemaining:
+                                          _vm.itemQuantityRemaining,
+                                        quantityMax:
+                                          _vm.liveShoppingData.liveShopping
+                                            .quantityMax
+                                      }
+                                    )
+                                  )
+                                )
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm.displaySettings.showStockProgress
+                            ? _c("div", { staticClass: "progress" }, [
+                                _c("div", {
+                                  staticClass: "progress-bar",
+                                  class:
+                                    "progress-" +
+                                    Math.round(
+                                      _vm.quantitySoldPercentage / 10
+                                    ) *
+                                      10,
+                                  style:
+                                    "width:" + _vm.quantitySoldPercentage + "%",
+                                  attrs: {
+                                    role: "progressbar",
+                                    "aria-valuenow": "25",
+                                    "aria-valuemin": "0",
+                                    "aria-valuemax": "100"
+                                  }
+                                })
+                              ])
+                            : _vm._e()
+                        ])
+                      : _vm._e()
+                  ]
+                : _vm._e()
+            ],
+            2
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.hasStarted && !_vm.hasClosed
+        ? _c("div", { staticClass: "live-shopping-prices bg-danger" }, [
+            _c("div", { staticClass: "live-shopping-prices-inner" }, [
+              !isNaN(_vm.itemPriceRebatePercentage) &&
+              _vm.itemPriceRebatePercentage > 0
+                ? _c("div", { staticClass: "live-shopping-prices-rebate" }, [
+                    _vm._v(
+                      _vm._s(
+                        _vm.$translate("Ceres::Template.liveShoppingRebate", {
+                          rebate: _vm.itemPriceRebatePercentage
+                        })
+                      )
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("div", { staticClass: "live-shopping-prices-container" }, [
+                _c("div", { staticClass: "live-shopping-price" }, [
+                  _c("strong", [
+                    _vm._v(_vm._s(_vm.prices.price.unitPrice.formatted) + " *")
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm.isCrossPriceVisible
+                  ? _c("span", [
+                      _vm.prices.isRrpDefaultPrice
+                        ? _c("span", {
+                            domProps: { innerHTML: _vm._s(_vm.oldPriceBefore) }
+                          })
+                        : _c("span", {
+                            domProps: { innerHTML: _vm._s(_vm.oldPriceRrp) }
+                          })
+                    ])
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "live-shopping-prices-additional-info" },
+              [
+                _vm.isCrossPriceVisible &&
+                _vm.liveShoppingData.item.prices.default.lowestPrice.value
+                  ? _c("div", { staticClass: "live-shopping-lowest-price" }, [
+                      _c("span", {
+                        domProps: {
+                          innerHTML: _vm._s(
+                            _vm.$translate(
+                              "Ceres::Template.singleItemLowestPrice",
+                              {
+                                price:
+                                  _vm.liveShoppingData.item.prices.default
+                                    .lowestPrice.formatted
+                              }
+                            )
+                          )
+                        }
+                      })
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                !(
+                  _vm.liveShoppingData.item.unit.unitOfMeasurement === "C62" &&
+                  _vm.liveShoppingData.item.unit.content === 1
+                )
+                  ? _c("div", { staticClass: "live-shopping-unit-price" }, [
+                      _c("span", [
+                        _vm._v(_vm._s(_vm.liveShoppingData.item.unit.content))
+                      ]),
+                      _vm._v(" "),
+                      _c("span", [
+                        _vm._v(
+                          _vm._s(_vm.liveShoppingData.item.unit.names.name)
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm.liveShoppingData.item.variation.mayShowUnitPrice
+                        ? _c("span", [
+                            _vm._v("| " + _vm._s(_vm.prices.price.basePrice))
+                          ])
+                        : _vm._e()
+                    ])
+                  : _vm._e(),
+                _vm._v(
+                  "\n\n            " +
+                    _vm._s(
+                      _vm.$translate("Ceres::Template.liveShoppingFootnote")
+                    ) +
+                    " "
+                ),
+                _vm.showNetPrices
+                  ? [
+                      _vm._v(
+                        _vm._s(_vm.$translate("Ceres::Template.itemExclVAT"))
+                      )
+                    ]
+                  : [
+                      _vm._v(
+                        _vm._s(_vm.$translate("Ceres::Template.itemInclVAT"))
+                      )
+                    ],
+                _vm._v(
+                  " " +
+                    _vm._s(_vm.$translate("Ceres::Template.itemExclusive")) +
+                    "\n            "
+                ),
+                _vm.$ceres.config.global.shippingCostsCategoryId > 0
+                  ? _c(
+                      "a",
+                      {
+                        attrs: {
+                          "data-toggle": "modal",
+                          href: "#shippingscosts",
+                          title: _vm.$translate(
+                            "Ceres::Template.itemShippingCosts"
+                          )
+                        }
+                      },
+                      [
+                        _vm._v(
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.itemShippingCosts")
+                          )
+                        )
+                      ]
+                    )
+                  : _c(
+                      "a",
+                      {
+                        attrs: {
+                          title: _vm.$translate(
+                            "Ceres::Template.itemShippingCosts"
+                          )
+                        }
+                      },
+                      [
+                        _vm._v(
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.itemShippingCosts")
+                          )
+                        )
+                      ]
+                    )
+              ],
+              2
+            )
+          ])
+        : _c("div", { staticClass: "thumb-content" }, [
+            _c("div", [
+              _c("div", { staticClass: "prices" }, [
+                _c("div", { staticClass: "price-view-port" }, [
+                  _vm.isCrossPriceVisible
+                    ? _c("del", { staticClass: "crossprice" }, [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(
+                              _vm._f("itemCrossPrice")(
+                                _vm.prices.rrp.price.formatted
+                              )
+                            ) +
+                            "\n                    "
+                        )
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "price" }, [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.prices.price.price.formatted) +
+                      " *\n                "
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _vm.isCrossPriceVisible &&
+              _vm.liveShoppingData.item.prices.default.lowestPrice.value
+                ? _c("div", { staticClass: "category-lowest-price small" }, [
+                    _c("span", {
+                      domProps: {
+                        innerHTML: _vm._s(
+                          _vm.$translate(
+                            "Ceres::Template.singleItemLowestPrice",
+                            {
+                              price:
+                                _vm.liveShoppingData.item.prices.default
+                                  .lowestPrice.formatted
+                            }
+                          )
+                        )
+                      }
+                    })
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              !(
+                _vm.liveShoppingData.item.unit.unitOfMeasurement === "C62" &&
+                _vm.liveShoppingData.item.unit.content === 1
+              )
+                ? _c("div", { staticClass: "category-unit-price small" }, [
+                    _c("span", [
+                      _vm._v(_vm._s(_vm.liveShoppingData.item.unit.content))
+                    ]),
+                    _vm._v(" "),
+                    _c("span", [
+                      _vm._v(_vm._s(_vm.liveShoppingData.item.unit.names.name))
+                    ]),
+                    _vm._v(" "),
+                    _vm.liveShoppingData.item.variation.mayShowUnitPrice
+                      ? _c("span", [
+                          _vm._v("| " + _vm._s(_vm.prices.price.basePrice))
+                        ])
+                      : _vm._e()
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "span",
+                { staticClass: "vat small text-muted" },
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(
+                        _vm.$translate("Ceres::Template.liveShoppingFootnote")
+                      ) +
+                      " "
+                  ),
+                  _vm.showNetPrices
+                    ? [
+                        _vm._v(
+                          _vm._s(_vm.$translate("Ceres::Template.itemExclVAT"))
+                        )
+                      ]
+                    : [
+                        _vm._v(
+                          _vm._s(_vm.$translate("Ceres::Template.itemInclVAT"))
+                        )
+                      ],
+                  _vm._v(
+                    " " +
+                      _vm._s(_vm.$translate("Ceres::Template.itemExclusive")) +
+                      "\n                "
+                  ),
+                  _vm.$ceres.config.global.shippingCostsCategoryId > 0
+                    ? _c(
+                        "a",
+                        {
+                          attrs: {
+                            "data-toggle": "modal",
+                            href: "#shippingscosts",
+                            title: _vm.$translate(
+                              "Ceres::Template.itemShippingCosts"
+                            )
+                          }
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(
+                              _vm.$translate(
+                                "Ceres::Template.itemShippingCosts"
+                              )
+                            )
+                          )
+                        ]
+                      )
+                    : _c(
+                        "a",
+                        {
+                          attrs: {
+                            title: _vm.$translate(
+                              "Ceres::Template.itemShippingCosts"
+                            )
+                          }
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(
+                              _vm.$translate(
+                                "Ceres::Template.itemShippingCosts"
+                              )
+                            )
+                          )
+                        ]
+                      )
+                ],
+                2
+              )
+            ])
+          ])
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/liveShopping/LiveShoppingItem.vue?vue&type=template&id=3c96f6c0&":
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/liveShopping/LiveShoppingItem.vue?vue&type=template&id=3c96f6c0& ***!
+  \****************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      !!_vm.currentOffer
+        ? _c("category-item", {
+            attrs: {
+              "item-data": _vm.currentOffer.item,
+              "decimal-count": _vm.$ceres.config.item.storeSpecial,
+              "image-url-accessor": "urlMiddle",
+              "padding-classes": _vm.paddingClasses,
+              "padding-inline-styles": _vm.paddingInlineStyles,
+              "force-url-with-variation-id": true
+            },
+            scopedSlots: _vm._u(
+              [
+                {
+                  key: "store-special",
+                  fn: function() {
+                    return [
+                      !!_vm.storeSpecial
+                        ? _c("item-store-special", {
+                            attrs: {
+                              "store-special": _vm.storeSpecial,
+                              "recommended-retail-price": _vm.prices.rrp,
+                              "variation-retail-price": _vm.prices.price,
+                              "decimal-count":
+                                _vm.$ceres.config.item.storeSpecial
+                            }
+                          })
+                        : _vm._e()
+                    ]
+                  },
+                  proxy: true
+                },
+                {
+                  key: "item-image",
+                  fn: function() {
+                    return [
+                      !!_vm.displaySettings.customImagePath
+                        ? _c(
+                            "a",
+                            {
+                              attrs: {
+                                href: _vm._f("itemURL")(_vm.currentOffer.item)
+                              }
+                            },
+                            [
+                              _c("lazy-img", {
+                                attrs: {
+                                  "image-url":
+                                    _vm.displaySettings.customImagePath,
+                                  alt: _vm._f("itemName")(
+                                    _vm.currentOffer.item
+                                  ),
+                                  title: _vm._f("itemName")(
+                                    _vm.currentOffer.item
+                                  )
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        : _vm._e()
+                    ]
+                  },
+                  proxy: true
+                },
+                !!_vm.currentOffer &&
+                _vm.whenIsCurrentOffer() !== 1 &&
+                _vm.isActiveByStock
+                  ? {
+                      key: "item-details",
+                      fn: function() {
+                        return [
+                          _c("live-shopping-details", {
+                            attrs: {
+                              "live-shopping-data": _vm.currentOffer,
+                              "display-settings": _vm.displaySettings,
+                              prices: _vm.prices,
+                              "is-active-by-stock": _vm.isActiveByStock,
+                              "show-net-prices": _vm.showNetPrices
+                            },
+                            on: {
+                              "reload-offer": function($event) {
+                                return _vm.reloadOffer()
+                              }
+                            },
+                            scopedSlots: _vm._u(
+                              [
+                                {
+                                  key: "after-item-name",
+                                  fn: function() {
+                                    return [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "live-shopping-add-to-basket"
+                                        },
+                                        [
+                                          _c("add-to-basket", {
+                                            attrs: {
+                                              "variation-id":
+                                                _vm.currentOffer.item.variation
+                                                  .id,
+                                              "is-salable":
+                                                !!_vm.currentOffer.item
+                                                  .filter &&
+                                                _vm.currentOffer.item.filter
+                                                  .isSalable,
+                                              "has-children":
+                                                !!_vm.currentOffer.item
+                                                  .filter &&
+                                                _vm.currentOffer.item.filter
+                                                  .hasActiveChildren,
+                                              "interval-quantity":
+                                                _vm.currentOffer.item.variation
+                                                  .intervalOrderQuantity || 1,
+                                              "minimum-quantity":
+                                                _vm.currentOffer.item.variation
+                                                  .minimumOrderQuantity,
+                                              "maximum-quantity":
+                                                !!_vm.currentOffer.item
+                                                  .variation
+                                                  .maximumOrderQuantity &&
+                                                _vm.currentOffer.item.variation
+                                                  .maximumOrderQuantity > 0
+                                                  ? _vm.currentOffer.item
+                                                      .variation
+                                                      .maximumOrderQuantity
+                                                  : null,
+                                              "order-properties": _vm.currentOffer.item.properties.filter(
+                                                function(prop) {
+                                                  return prop.property
+                                                    .isOderProperty
+                                                }
+                                              ),
+                                              "has-order-properties":
+                                                _vm.currentOffer.item
+                                                  .hasOrderProperties,
+                                              "has-required-order-property":
+                                                _vm.currentOffer
+                                                  .hasRequiredOrderProperty,
+                                              "use-large-scale": false,
+                                              "show-quantity": false,
+                                              "item-url": _vm._f("itemURL")(
+                                                _vm.currentOffer.item
+                                              ),
+                                              "item-type":
+                                                _vm.currentOffer.item.item
+                                                  .itemType
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ]
+                                  },
+                                  proxy: true
+                                }
+                              ],
+                              null,
+                              false,
+                              883888925
+                            )
+                          })
+                        ]
+                      },
+                      proxy: true
+                    }
+                  : null
+              ],
+              null,
+              true
+            )
+          })
+        : _c("div", [_vm._t("default")], 2)
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
 
 
 /***/ }),
@@ -850,10 +1545,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemStoreSpecial_vue_vue_type_template_id_9410a8b2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ItemStoreSpecial.vue?vue&type=template&id=9410a8b2& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/itemList/ItemStoreSpecial.vue?vue&type=template&id=9410a8b2&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemStoreSpecial_vue_vue_type_template_id_9410a8b2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemStoreSpecial_vue_vue_type_template_id_9410a8b2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ItemStoreSpecial.vue?vue&type=template&id=9410a8b2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/itemList/ItemStoreSpecial.vue?vue&type=template&id=9410a8b2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemStoreSpecial_vue_vue_type_template_id_9410a8b2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemStoreSpecial_vue_vue_type_template_id_9410a8b2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemStoreSpecial_vue_vue_type_template_id_9410a8b2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -919,10 +1614,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_LiveShoppingDetails_vue_vue_type_template_id_c760b5b6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./LiveShoppingDetails.vue?vue&type=template&id=c760b5b6& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/liveShopping/LiveShoppingDetails.vue?vue&type=template&id=c760b5b6&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_LiveShoppingDetails_vue_vue_type_template_id_c760b5b6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LiveShoppingDetails_vue_vue_type_template_id_c760b5b6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./LiveShoppingDetails.vue?vue&type=template&id=c760b5b6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/liveShopping/LiveShoppingDetails.vue?vue&type=template&id=c760b5b6&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LiveShoppingDetails_vue_vue_type_template_id_c760b5b6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_LiveShoppingDetails_vue_vue_type_template_id_c760b5b6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LiveShoppingDetails_vue_vue_type_template_id_c760b5b6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -988,10 +1683,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_LiveShoppingItem_vue_vue_type_template_id_3c96f6c0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./LiveShoppingItem.vue?vue&type=template&id=3c96f6c0& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/liveShopping/LiveShoppingItem.vue?vue&type=template&id=3c96f6c0&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_LiveShoppingItem_vue_vue_type_template_id_3c96f6c0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LiveShoppingItem_vue_vue_type_template_id_3c96f6c0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./LiveShoppingItem.vue?vue&type=template&id=3c96f6c0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/liveShopping/LiveShoppingItem.vue?vue&type=template&id=3c96f6c0&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LiveShoppingItem_vue_vue_type_template_id_3c96f6c0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_LiveShoppingItem_vue_vue_type_template_id_3c96f6c0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LiveShoppingItem_vue_vue_type_template_id_3c96f6c0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
