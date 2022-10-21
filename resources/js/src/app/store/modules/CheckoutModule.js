@@ -34,6 +34,10 @@ const state = () => ({
         shippingProfile: {
             showError: false,
             validate: null
+        },
+        deliveryAddress: {
+            showError: false,
+            validate: null
         }
     },
     newsletterSubscription: {},
@@ -137,6 +141,16 @@ const mutations =
         setInvoiceAddressValidator(state, invoiceAddressValidator)
         {
             state.validation.invoiceAddress.validate = invoiceAddressValidator;
+        },
+
+        setDeliveryAddressValidator(state, deliveryAdrressValidator)
+        {
+            state.validation.deliveryAddress.validate = deliveryAdrressValidator;
+        },
+
+        setDeliveryAddressShowError(state, showError)
+        {
+            state.validation.deliveryAddress.showError = showError;
         },
 
         setInvoiceAddressShowError(state, showError)
