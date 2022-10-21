@@ -87232,8 +87232,8 @@ function initServerStore(store) {
   store.commit("setShippingCountryId", App.initialData.shippingCountryId);
   store.commit("setShowNetPrices", App.initialData.showNetPrices);
 
-  if (App.initialData.allShippingCountries) {
-    store.commit("setAllShippingCountries", App.initialData.allShippingCountries);
+  if (App.initialData.euShippingCountries) {
+    store.commit("setEuShippingCountries", App.initialData.euShippingCountries);
   }
 } // TODO: add code comment
 
