@@ -1519,8 +1519,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     updateSelectedCountry: function updateSelectedCountry() {
+      var _this$getCountryById;
+
       var countryId = this.selectedCountryId || this.shippingCountryId;
-      this.selectedCountry = this.getCountryById(countryId);
+      this.selectedCountry = (_this$getCountryById = this.getCountryById(countryId)) !== null && _this$getCountryById !== void 0 ? _this$getCountryById : this.countryList[0];
 
       if (this.selectedCountry) {
         this.stateList = this.selectedCountry.states || [];
