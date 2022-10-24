@@ -83714,10 +83714,15 @@ var getters = {
   getCountryName: function getCountryName(state) {
     return function (countryId) {
       if (countryId > 0) {
-        // TODO do we need to search euShippingCountries as well
         var country = state.shippingCountries.find(function (country) {
           return country.id === countryId;
         });
+
+        if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isNullOrUndefined"])(country)) {
+          country = state.euShippingCountries.find(function (country) {
+            return country.id === countryId;
+          });
+        }
 
         if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isNullOrUndefined"])(country)) {
           return country.currLangName;

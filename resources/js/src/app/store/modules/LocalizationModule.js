@@ -1,4 +1,4 @@
-import { isDefined, isNullOrUndefined } from "../../helper/utils";
+import { isNullOrUndefined } from "../../helper/utils";
 import { setUrlParam } from "../../services/UrlService";
 
 const ApiService = require("../../services/ApiService");
