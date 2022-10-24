@@ -72052,7 +72052,7 @@ __webpack_require__.r(__webpack_exports__);
       var isAllowedForShipping = !!activeShippingCountries.find(function (country) {
         return country.id === countryId;
       });
-      this.$store.commit("setDeliveryAddressShowError", isAllowedForShipping);
+      this.$store.commit("setDeliveryAddressShowError", !isAllowedForShipping);
 
       if (!isAllowedForShipping) {
         _services_NotificationService__WEBPACK_IMPORTED_MODULE_4__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_5__["default"].translate("Ceres::Template.checkoutInvalidShippingCountry"));

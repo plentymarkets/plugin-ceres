@@ -127,7 +127,7 @@ export default Vue.component("shipping-address-select", {
             const countryId = Number(selectedDeliveryAddress.id) === -99 ? selectedBillingAddress.countryId : selectedDeliveryAddress.countryId;
             const isAllowedForShipping = !!activeShippingCountries.find((country) => country.id === countryId);
 
-            this.$store.commit("setDeliveryAddressShowError", isAllowedForShipping);
+            this.$store.commit("setDeliveryAddressShowError", !isAllowedForShipping);
 
             if (!isAllowedForShipping)
             {
