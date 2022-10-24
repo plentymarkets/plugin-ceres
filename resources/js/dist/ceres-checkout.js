@@ -71923,7 +71923,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.commit("setInvoiceAddressShowError", showError);
 
       if (showError) {
-        Object(_services_NotificationService__WEBPACK_IMPORTED_MODULE_3__["error"])(_services_TranslationService__WEBPACK_IMPORTED_MODULE_0__["default"].translate("Ceres::Template.checkoutCheckInvoiceAddress"));
+        Object(_services_NotificationService__WEBPACK_IMPORTED_MODULE_3__["error"])(_services_TranslationService__WEBPACK_IMPORTED_MODULE_0__["default"].translate("Ceres::Template.checkoutInvalidShippingCountry"));
       }
     }
   },
