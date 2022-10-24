@@ -71927,7 +71927,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.commit("setInvoiceAddressShowError", showError);
 
       if (showError) {
-        Object(_services_NotificationService__WEBPACK_IMPORTED_MODULE_3__["error"])(_services_TranslationService__WEBPACK_IMPORTED_MODULE_0__["default"].translate("Ceres::Template.checkoutInvalidShippingCountry"));
+        Object(_services_NotificationService__WEBPACK_IMPORTED_MODULE_3__["error"])(_services_TranslationService__WEBPACK_IMPORTED_MODULE_0__["default"].translate("Ceres::Template.checkoutCheckInvoiceAddress"));
       }
     }
   },
@@ -72055,7 +72055,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.commit("setDeliveryAddressShowError", isAllowedForShipping);
 
       if (!isAllowedForShipping) {
-        _services_NotificationService__WEBPACK_IMPORTED_MODULE_4__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_5__["default"].translate("Ceres::Template.checkoutCheckShippingProfile"));
+        _services_NotificationService__WEBPACK_IMPORTED_MODULE_4__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_5__["default"].translate("Ceres::Template.checkoutInvalidShippingCountry"));
       }
     }
   }
