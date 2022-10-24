@@ -137,7 +137,7 @@ export default {
          */
         countryChanged(value)
         {
-            this.$emit("country-changed", this.getCountryById(parseInt(value)));
+            this.$emit("country-changed", this.getCountryById(parseInt(value)) ?? this.countryList[0]);
             this.$emit("state-changed", null);
         },
 
