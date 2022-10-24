@@ -1,4 +1,4 @@
-import { isNullOrUndefined } from "../../helper/utils";
+import { isDefined, isNullOrUndefined } from "../../helper/utils";
 import { setUrlParam } from "../../services/UrlService";
 
 const ApiService = require("../../services/ApiService");
@@ -70,8 +70,12 @@ const getters =
         {
             if (countryId > 0)
             {
-                // TODO do we need to search euShippingCountries as well
-                const country = state.shippingCountries.find(country => country.id === countryId);
+                let country = state.shippingCountries.find(country => country.id === countryId);
+
+                if (isNullOrUndefined(country))
+                {
+                    country = state.euShippingCountries.find(country => country.id === countryId);
+                }
 
                 if (!isNullOrUndefined(country))
                 {
