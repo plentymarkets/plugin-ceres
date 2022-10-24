@@ -2531,7 +2531,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
      * Method to fire when the country has changed
      */
     countryChanged: function countryChanged(value) {
-      this.$emit("country-changed", this.getCountryById(parseInt(value)));
+      var _this$getCountryById;
+
+      this.$emit("country-changed", (_this$getCountryById = this.getCountryById(parseInt(value))) !== null && _this$getCountryById !== void 0 ? _this$getCountryById : this.countryList[0]);
       this.$emit("state-changed", null);
     },
 
@@ -2556,10 +2558,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     updateSelectedCountry: function updateSelectedCountry() {
-      var _this$getCountryById;
+      var _this$getCountryById2;
 
       var countryId = this.selectedCountryId || this.shippingCountryId;
-      this.selectedCountry = (_this$getCountryById = this.getCountryById(countryId)) !== null && _this$getCountryById !== void 0 ? _this$getCountryById : this.countryList[0];
+      this.selectedCountry = (_this$getCountryById2 = this.getCountryById(countryId)) !== null && _this$getCountryById2 !== void 0 ? _this$getCountryById2 : this.countryList[0];
 
       if (this.selectedCountry) {
         this.stateList = this.selectedCountry.states || [];
