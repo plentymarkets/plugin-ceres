@@ -132,7 +132,7 @@ export default Vue.component("invoice-address-select", {
             if (showError)
             {
                 error(
-                    TranslationService.translate("Ceres::Template.checkoutCheckInvoiceAddress")
+                    TranslationService.translate("Ceres::Template.checkoutInvalidShippingCountry")
                 );
             }
         }
