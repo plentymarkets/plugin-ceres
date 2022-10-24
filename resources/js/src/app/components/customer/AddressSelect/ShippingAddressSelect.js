@@ -132,7 +132,7 @@ export default Vue.component("shipping-address-select", {
             if (!isAllowedForShipping)
             {
                 NotificationService.error(
-                    TranslationService.translate("Ceres::Template.checkoutCheckShippingProfile")
+                    TranslationService.translate("Ceres::Template.checkoutInvalidShippingCountry")
                 );
             }
         }
