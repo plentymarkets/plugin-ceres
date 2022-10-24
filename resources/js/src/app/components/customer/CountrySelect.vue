@@ -171,7 +171,7 @@ export default {
         {
             const countryId = this.selectedCountryId || this.shippingCountryId;
 
-            this.selectedCountry = this.getCountryById(countryId);
+            this.selectedCountry = this.getCountryById(countryId) ?? this.countryList[0];
 
             if (this.selectedCountry)
             {
