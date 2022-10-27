@@ -1,10 +1,15 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.56 (2022-XX-XX) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.55...5.0.56" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.56 (2022-10-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.55...5.0.56" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
 
-- Die Inhalte von ShopBuilder-Bestellbestätigungsseiten müssen neu generiert werden.
+- The contents from the shopbuilder confirmation pages have to be regenerated.
+- To use the link regeneration for guest orders in the Soft-Login widget a dedicated mail template must be created and linked beforehand.
+
+### New
+
+- The link regeneration for guest orders has been added to the Soft-Login widget. In case of setting an expiration date for order confirmation links, a new confirmation link can be generated and sent to the customer by mail.
 
 ### Fixed
 

@@ -1,10 +1,15 @@
 # Release Notes für plentyShop LTS
 
-## v5.0.56 (2022-XX-XX) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.55...5.0.56" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.56 (2022-10-29) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.55...5.0.56" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
 
 - Die Inhalte von ShopBuilder-Bestellbestätigungsseiten müssen neu generiert werden.
+- Möchte man die im Soft-Login Widget enthaltene Fuktion der Linkneugenerierung bei Gastbestellungen nutzen, muss zuvor ein entsprechendes Mailtemplate erstellt und verlinkt werden.
+
+### Neu
+
+- Das Soft-Login Widget wurde um die Funktion der Linkneugenerierung bei Gastbestellungen ergänzt. Im Falle des Setzens einer Ablauffrist für Bestellbestätigungslinks kann nun über einen Button ein neuer Link generiert und per Mail an den Kunden verschickt werden.
 
 ### Behoben
 
