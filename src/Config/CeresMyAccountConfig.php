@@ -77,6 +77,6 @@ class CeresMyAccountConfig extends PluginConfig
         $this->changePayment                = $this->getBooleanValue( 'my_account.change_payment', true );
         $this->confirmationLinkLoginRedirect= $this->confirmationLinkLoginRedirect= $this->getBooleanValue( 'my_account.confirmation_link_login_redirect', false );
         $this->confirmationLinkExpiration   = $this->getTextValue('my_account.confirmation_link_expiration', 'always');
-        $this->addressDefaultSalutation     = $this->getTextValue( 'my_account.default_gender_salutation', 'please select');
+        $this->addressDefaultSalutation     = $this->getTextValue( 'addresses.defaultSalutation', 'please select');
     }
 }

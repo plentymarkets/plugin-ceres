@@ -36,10 +36,10 @@ class OnlineStoreConfig
 
     private static $defaultGenderSalutation = [
         'addressDefaultSalutationValuePleaseSelect' => 'please select',
-        'addressDefaultSalutationValueCompany' => 'company',
-        'addressDefaultSalutationValueDiverse' => 'diverse',
-        'addressDefaultSalutationValueFemale' => 'female',
-        'addressDefaultSalutationValueMale' => 'male'
+        'addressDefaultSalutationValueMale'         => 'male',
+        'addressDefaultSalutationValueFemale'       => 'female',
+        'addressDefaultSalutationValueDiverse'      => 'diverse',
+        'addressDefaultSalutationValueCompany'      => 'company'
     ];
     
     private static $globalMaxAge = [

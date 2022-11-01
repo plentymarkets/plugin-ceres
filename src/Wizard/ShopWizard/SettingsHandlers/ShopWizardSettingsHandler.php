@@ -169,6 +169,10 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     $webstoreData['minimumOrderValue'] = $data['onlineStore_minimumOrderValue'];
                 }
 
+                if (isset($data['onlineStore_defaultGenderSalutation'])) {
+                    $webstoreData['defaultGenderSalutation'] = $data['onlineStore_defaultGenderSalutation'];
+                }
+
                 if (isset($data['displayInfo_attributeSelectDefaultOption'])) {
                     $webstoreData['attributeSelectDefaultOption'] = 0;
                     if ($data['displayInfo_attributeSelectDefaultOption'] !== false) {

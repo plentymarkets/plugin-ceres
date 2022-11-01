@@ -5,9 +5,12 @@ namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 use Ceres\Wizard\ShopWizard\Config\OnlineStoreConfig;
 use Ceres\Wizard\ShopWizard\Helpers\LanguagesHelper;
 use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
+use Ceres\Wizard\ShopWizard\Services\ShopWizardService;
 use Plenty\Modules\Authorization\Services\AuthHelper;
 use Plenty\Modules\Order\Status\Contracts\OrderStatusRepositoryContract;
 use Plenty\Modules\System\Module\Contracts\PlentyModuleRepositoryContract;
+use Ceres\Wizard\ShopWizard\Repositories\ShopWizardConfigRepository;
+use Ceres\Config\CeresMyAccountConfig;
 
 /**
  * Class OnlineStoreStep
@@ -20,6 +23,16 @@ class OnlineStoreStep extends Step
      * @var array Collection of order status.
      */
     private static $orderStatusList = null;
+
+    /**
+     * @var ShopWizardService
+     */
+    private $wizardService;
+
+    public function __construct(ShopWizardService $wizardService)
+    {
+        $this->wizardService = $wizardService;
+    }
 
     /**
      * @return array
@@ -138,7 +151,7 @@ class OnlineStoreStep extends Step
             "form" => [
                 "onlineStore_defaultGenderSalutation" => [
                     "type" => "select",
-                    "defaultValue" => $salutationList[0]['value'],
+                    "defaultValue" => "my_account.default_gender_salutation",
                     "options" => [
                         "name" => "Wizard.addressDefaultSalutationValuePleaseSelect",
                         "listBoxValues" => $salutationList
