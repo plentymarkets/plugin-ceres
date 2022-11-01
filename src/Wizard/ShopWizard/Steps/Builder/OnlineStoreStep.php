@@ -153,7 +153,7 @@ class OnlineStoreStep extends Step
                     "type" => "select",
                     "defaultValue" => "my_account.default_gender_salutation",
                     "options" => [
-                        "name" => "Wizard.addressDefaultSalutationValuePleaseSelect",
+                        "name" => "Wizard.addressDefaultSalutation",
                         "listBoxValues" => $salutationList
                     ]
                 ]
