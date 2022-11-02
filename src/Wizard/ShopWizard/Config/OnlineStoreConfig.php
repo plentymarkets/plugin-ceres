@@ -33,14 +33,6 @@ class OnlineStoreConfig
         'confirmationLinkExpiration30'     => '30',
         'confirmationLinkExpiration90'     => '90'
     ];
-
-    private static $defaultGenderSalutation = [
-        'addressDefaultSalutationValuePleaseSelect' => 'please select',
-        'addressDefaultSalutationValueMale'         => 'male',
-        'addressDefaultSalutationValueFemale'       => 'female',
-        'addressDefaultSalutationValueDiverse'      => 'diverse',
-        'addressDefaultSalutationValueCompany'      => 'company'
-    ];
     
     private static $globalMaxAge = [
         'globalMaxAge1Hour'    => 1,
@@ -84,14 +76,6 @@ class OnlineStoreConfig
     public static function getToTopButtonPosition()
     {
         return self::$toTopButtonPosition;
-    }
-
-    /**
-     * @return array
-     */
-    public static function getDefaultGenderSalutation()
-    {
-        return self::$defaultGenderSalutation;
     }
 
     /**

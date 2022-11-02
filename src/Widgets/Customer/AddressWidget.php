@@ -45,7 +45,7 @@ class AddressWidget extends BaseWidget
         $settingsFactory->createSelect("addressDefaultSalutation")
             ->withName("Widget.addressDefaultSalutation")
             ->withTooltip("Widget.addressDefaultSalutationTooltip")
-            ->withDefaultValue("please select")
+            ->withDefaultValue("male")
             ->withListBoxValues(
                 ValueListFactory::make()
                     ->addEntry("please select", "Widget.addressDefaultSalutationValuePleaseSelect")

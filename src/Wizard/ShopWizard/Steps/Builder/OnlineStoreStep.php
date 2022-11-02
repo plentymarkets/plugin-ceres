@@ -35,7 +35,6 @@ class OnlineStoreStep extends Step
                 $this->buildStoreCategoryTypesStructure(),
                 $this->buildStoreBack2Top(),
                 $this->buildStoreEmailSettings(),
-                $this->buildCheckoutGenderSalutation(),
                 $this->buildOrderconfirmationSettings(),
                 $this->buildVariationOrderPropertiesSettings(),
                 $this->buildStoreOrderSettings(),
@@ -123,30 +122,6 @@ class OnlineStoreStep extends Step
                 ],
             ]
         ];
-    }
-
-    /**
-     * @return array
-     */
-    private function buildCheckoutGenderSalutation(): array
-    {
-        $defaultGenderSalutation = OnlineStoreConfig::getDefaultGenderSalutation();
-        $salutationList = StepHelper::generateTranslatedListBoxValues($defaultGenderSalutation);
-
-        return [
-            "title" => "Wizard.addressDefaultSalutation",
-            "form" => [
-                "onlineStore_defaultGenderSalutation" => [
-                    "type" => "select",
-                    "defaultValue" => "my_account.default_gender_salutation",
-                    "options" => [
-                        "name" => "Wizard.addressDefaultSalutation",
-                        "listBoxValues" => $salutationList
-                    ]
-                ]
-            ]
-        ];
-
     }
 
     /**
