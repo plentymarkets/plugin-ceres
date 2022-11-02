@@ -2884,7 +2884,7 @@
                     "deprecated": true,
                     "label": "Config.addressDefaultSalutation",
                     "options": {
-                        "defaultValue": "please select",
+                        "defaultValue": "male",
                         "selectBoxValues": [
                             {
                                 "value": "please select",
