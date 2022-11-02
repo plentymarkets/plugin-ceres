@@ -69,7 +69,7 @@ class OnlineStoreConfig
     {
         return self::$categoryTreeDepths;
     }
-    
+
     /**
      * @return array
      */
