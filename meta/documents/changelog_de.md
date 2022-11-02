@@ -6,6 +6,10 @@
 
 - Die Inhalte von ShopBuilder-Bestellbestätigungsseiten müssen neu generiert werden.
 
+### Neu
+
+- Für die Anrede bei neuen Adressen in der Kaufabwicklung oder im Mein-Konto-Bereich kann jetzt "Bitte wählen" als Vorauswahl festgelegt werden. Im Standard kann dies über die Plugin-Konfiguration gesteuert werden. Bei den ShopBuilder-Widgets Für Rechnungs- und Lieferadresse kann dies über die Widget-Einstellungen gesteuert werden.
+
 ### Behoben
 
 - Für die Seitennummerierung auf Artikelkategorieseiten wurden in Version 5.0.55 `aria-label` verbaut. Hier kam es zu einem Fehler, dieser wurde behoben.

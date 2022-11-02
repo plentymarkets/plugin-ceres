@@ -69,7 +69,7 @@ class OnlineStoreConfig
     {
         return self::$categoryTreeDepths;
     }
-    
+
     /**
      * @return array
      */
@@ -77,7 +77,7 @@ class OnlineStoreConfig
     {
         return self::$toTopButtonPosition;
     }
-    
+
     /**
      * @return array
      */

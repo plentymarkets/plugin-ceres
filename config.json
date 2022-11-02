@@ -2887,6 +2887,10 @@
                         "defaultValue": "male",
                         "selectBoxValues": [
                             {
+                                "value": "please select",
+                                "caption": "Config.addressDefaultSalutationValuePleaseSelect"
+                            },
+                            {
                                 "value": "male",
                                 "caption": "Config.addressDefaultSalutationValueMale"
                             },

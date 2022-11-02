@@ -6,6 +6,10 @@
 
 - Die Inhalte von ShopBuilder-Bestellbestätigungsseiten müssen neu generiert werden.
 
+### New
+
+- For the salutation for new addresses in the checkout or in the My Account area, "Please select" can now be set as a preselection. For the default, this can be controlled via the plugin configuration. For the ShopBuilder widgets For billing and delivery address, this can be controlled via the widget settings.
+
 ### Fixed
 
 - Für die Seitennummerierung auf Artikelkategorieseiten wurden in Version 5.0.55 `aria-label` verbaut. Hier kam es zu einem Fehler, dieser wurde behoben.

@@ -48,6 +48,7 @@ class AddressWidget extends BaseWidget
             ->withDefaultValue("male")
             ->withListBoxValues(
                 ValueListFactory::make()
+                    ->addEntry("please select", "Widget.addressDefaultSalutationValuePleaseSelect")
                     ->addEntry("male", "Widget.addressDefaultSalutationValueMale")
                     ->addEntry("female", "Widget.addressDefaultSalutationValueFemale")
                     ->addEntry("diverse", "Widget.addressDefaultSalutationValueDiverse")
