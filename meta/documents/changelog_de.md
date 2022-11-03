@@ -16,6 +16,10 @@
 
 - EU-Kund:innen können das Lieferland ab jetzt unabhängig von der Rechnungsadresse wählen. Durch diese Änderung erfüllt plentyShop LTS die Geoblocking-Veordnung VO EU Nr. 2018/302.
 
+### Geändert
+
+- EU-Kunden können das Lieferland ab jetzt unabhängig von der Rechnungsadresse wählen. Durch diese Änderung erfüllt plentyShop LTS die Geoblocking-Veordnung VO EU Nr. 2018/302.
+
 ### Behoben
 
 - In Version 5.0.55 wurden `aria-label` für die Seitennummerierung auf Artikelkategorieseiten verbaut. Bei dieser Änderung kam es zu einem Fehler, der nun behoben wurde.
