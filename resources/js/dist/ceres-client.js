@@ -67644,7 +67644,7 @@ function getInvalidFields(form) {
   });
   var salutationSelect = $form.find("[data-testing='salutation-select']");
 
-  if (!_validateSelect(salutationSelect, "")) {
+  if (salutationSelect.length > 0 && !_validateSelect(salutationSelect, "")) {
     invalidFormControls.push(salutationSelect.parent()[0]);
   }
 
