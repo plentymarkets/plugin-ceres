@@ -64908,6 +64908,10 @@ function initServerStore(store) {
   store.commit("setShippingCountries", App.initialData.shippingCountries);
   store.commit("setShippingCountryId", App.initialData.shippingCountryId);
   store.commit("setShowNetPrices", App.initialData.showNetPrices);
+
+  if (App.initialData.euShippingCountries) {
+    store.commit("setEuShippingCountries", App.initialData.euShippingCountries);
+  }
 } // TODO: add code comment
 
 function initClientListeners(store) {
@@ -65894,6 +65898,10 @@ var state = function state() {
       shippingProfile: {
         showError: false,
         validate: null
+      },
+      deliveryAddress: {
+        showError: false,
+        validate: null
       }
     },
     newsletterSubscription: {},
@@ -65962,6 +65970,12 @@ var mutations = {
   },
   setInvoiceAddressValidator: function setInvoiceAddressValidator(state, invoiceAddressValidator) {
     state.validation.invoiceAddress.validate = invoiceAddressValidator;
+  },
+  setDeliveryAddressValidator: function setDeliveryAddressValidator(state, deliveryAdrressValidator) {
+    state.validation.deliveryAddress.validate = deliveryAdrressValidator;
+  },
+  setDeliveryAddressShowError: function setDeliveryAddressShowError(state, showError) {
+    state.validation.deliveryAddress.showError = showError;
   },
   setInvoiceAddressShowError: function setInvoiceAddressShowError(state, showError) {
     state.validation.invoiceAddress.showError = showError;
@@ -67294,13 +67308,17 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
 var state = function state() {
   return {
     shippingCountries: [],
-    shippingCountryId: null
+    shippingCountryId: null,
+    euShippingCountries: []
   };
 };
 
 var mutations = {
   setShippingCountries: function setShippingCountries(state, shippingCountries) {
     state.shippingCountries = shippingCountries;
+  },
+  setEuShippingCountries: function setEuShippingCountries(state, euShippingCountries) {
+    state.euShippingCountries = euShippingCountries;
   },
   setShippingCountryId: function setShippingCountryId(state, shippingCountryId) {
     if (shippingCountryId !== state.shippingCountryId && !App.isSSR) {
@@ -67349,6 +67367,12 @@ var getters = {
         var country = state.shippingCountries.find(function (country) {
           return country.id === countryId;
         });
+
+        if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isNullOrUndefined"])(country)) {
+          country = state.euShippingCountries.find(function (country) {
+            return country.id === countryId;
+          });
+        }
 
         if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isNullOrUndefined"])(country)) {
           return country.currLangName;

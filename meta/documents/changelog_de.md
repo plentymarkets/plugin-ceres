@@ -15,6 +15,10 @@
 
 - Für die Anrede bei neuen Adressen in der Kaufabwicklung oder im Mein-Konto-Bereich kann jetzt "Bitte wählen" als Vorauswahl festgelegt werden. Im Standard kann dies über die Plugin-Konfiguration gesteuert werden. Bei den ShopBuilder-Widgets Für Rechnungs- und Lieferadresse kann dies über die Widget-Einstellungen gesteuert werden.
 
+### Geändert
+
+- EU-Kunden können das Lieferland ab jetzt unabhängig von der Rechnungsadresse wählen. Durch diese Änderung erfüllt plentyShop LTS die Geoblocking-Veordnung VO EU Nr. 2018/302.
+
 ### Behoben
 
 - Für die Seitennummerierung auf Artikelkategorieseiten wurden in Version 5.0.55 `aria-label` verbaut. Hier kam es zu einem Fehler, dieser wurde behoben.

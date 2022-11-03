@@ -1,5 +1,7 @@
 import Vue from "vue";
 import { mapState } from "vuex";
+import NotificationService from "../../../services/NotificationService";
+import TranslationService from "../../../services/TranslationService";
 import AddressSelect from "./AddressSelect";
 
 export default Vue.component("shipping-address-select", {
@@ -75,6 +77,11 @@ export default Vue.component("shipping-address-select", {
         deliveryAddressId: state => state.address.deliveryAddressId
     }),
 
+    created()
+    {
+        this.$store.commit("setDeliveryAddressValidator", this.validate);
+    },
+
     mounted()
     {
         if (App.templateType === "my-account")
@@ -109,6 +116,25 @@ export default Vue.component("shipping-address-select", {
 
                     }
                 );
+        },
+
+        validate()
+        {
+            const selectedBillingAddress = this.$store.state.address.billingAddress;
+            const selectedDeliveryAddress = this.$store.state.address.deliveryAddress;
+            const activeShippingCountries =  this.$store.state.localization.shippingCountries;
+
+            const countryId = Number(selectedDeliveryAddress.id) === -99 ? selectedBillingAddress.countryId : selectedDeliveryAddress.countryId;
+            const isAllowedForShipping = !!activeShippingCountries.find((country) => country.id === countryId);
+
+            this.$store.commit("setDeliveryAddressShowError", !isAllowedForShipping);
+
+            if (!isAllowedForShipping)
+            {
+                NotificationService.error(
+                    TranslationService.translate("Ceres::Template.checkoutInvalidShippingCountry")
+                );
+            }
         }
     }
 });

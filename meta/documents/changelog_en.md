@@ -15,6 +15,10 @@
 
 - For the salutation for new addresses in the checkout or in the My Account area, "Please select" can now be set as a preselection. For the default, this can be controlled via the plugin configuration. For the ShopBuilder widgets For billing and delivery address, this can be controlled via the widget settings.
 
+### Changed
+
+- EU-Kunden können das Lieferland ab jetzt unabhängig von der Rechnungsadresse wählen. Durch diese Änderung erfüllt plentyShop LTS die Geoblocking-Veordnung VO EU Nr. 2018/302.
+
 ### Fixed
 
 - Für die Seitennummerierung auf Artikelkategorieseiten wurden in Version 5.0.55 `aria-label` verbaut. Hier kam es zu einem Fehler, dieser wurde behoben.

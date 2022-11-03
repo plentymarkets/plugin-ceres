@@ -5,7 +5,8 @@ const ApiService = require("../../services/ApiService");
 
 const state = () => ({
     shippingCountries: [],
-    shippingCountryId: null
+    shippingCountryId: null,
+    euShippingCountries: []
 });
 
 const mutations =
@@ -13,6 +14,11 @@ const mutations =
         setShippingCountries(state, shippingCountries)
         {
             state.shippingCountries = shippingCountries;
+        },
+
+        setEuShippingCountries(state, euShippingCountries)
+        {
+            state.euShippingCountries = euShippingCountries;
         },
 
         setShippingCountryId(state, shippingCountryId)
@@ -64,7 +70,12 @@ const getters =
         {
             if (countryId > 0)
             {
-                const country = state.shippingCountries.find(country => country.id === countryId);
+                let country = state.shippingCountries.find(country => country.id === countryId);
+
+                if (isNullOrUndefined(country))
+                {
+                    country = state.euShippingCountries.find(country => country.id === countryId);
+                }
 
                 if (!isNullOrUndefined(country))
                 {
