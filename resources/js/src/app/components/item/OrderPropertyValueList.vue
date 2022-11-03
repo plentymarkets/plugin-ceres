@@ -59,7 +59,7 @@ export default {
                 }
             });
 
-            return shownProperties;
+            return shownProperties.sort((a, b) => (a.propertyId > b.propertyId ? 1 : -1));
         }
     },
 
