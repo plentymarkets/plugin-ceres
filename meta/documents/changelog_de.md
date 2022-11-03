@@ -5,6 +5,11 @@
 ### TODO
 
 - Die Inhalte von ShopBuilder-Bestellbestätigungsseiten müssen neu generiert werden.
+- Möchte man die im Soft-Login Widget enthaltene Fuktion der Linkneugenerierung bei Gastbestellungen nutzen, muss zuvor ein entsprechendes Mailtemplate erstellt und verlinkt werden. (gff. Link zur Doku)
+
+### Neu
+
+- Das Soft-Login Widget wurde um die Funktion der Linkneugenerierung bei Gastbestellungen ergänzt. Im Falle des Setzens einer Ablauffrist für Bestellbestätigungslinks kann nun über einen Button ein neuer Link generiert und per Mail an den Kunden verschickt werden.
 
 ### Neu
 

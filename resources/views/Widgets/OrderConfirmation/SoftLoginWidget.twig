@@ -10,7 +10,11 @@
 
 <div class="widget widget-softlogin widget-{{ appearance | default('primary') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"{% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
     <div class="widget-inner{% if hasSpacing %} m-0 p-0{% endif %}">
-        {{ Twig.do("include \"Ceres::Checkout.Partials.SoftLoginForm\"") }}
+        {{ Twig.if("isOrderValid") }}
+            {{ Twig.do("include \"Ceres::Checkout.Partials.SoftLoginForm\"") }}
+        {{ Twig.else() }}
+            {{ Twig.do("include \"Ceres::Checkout.Partials.SoftLoginRegenerateForm\"") }}
+        {{ Twig.endif() }}
     </div>
 </div>
 
