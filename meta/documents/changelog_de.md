@@ -1,22 +1,28 @@
 # Release Notes für plentyShop LTS
 
-## v5.0.56 (2022-XX-XX) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.55...5.0.56" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.56 (2022-11-03) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.55...5.0.56" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
 
-- Die Inhalte von ShopBuilder-Bestellbestätigungsseiten müssen neu generiert werden.
+- Die ShopBuilder-Inhalte für Bestellbestätigungsseiten müssen im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+- Falls du Gastkund:innen die Möglichkeit geben willst, einen neuen Auftragsbestätigungslink anzufordern, musst du dafür eine neue E-Mail-Vorlage erstellen und verknüpfen. Weitere Informationen findest du auf der <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/shop-builder.html#softlogin" target="_blank">ShopBuilder-Handbuchseite</a>.
 
-### Neu
+### Hinzugefügt
 
-- Für die Anrede bei neuen Adressen in der Kaufabwicklung oder im Mein-Konto-Bereich kann jetzt "Bitte wählen" als Vorauswahl festgelegt werden. Im Standard kann dies über die Plugin-Konfiguration gesteuert werden. Bei den ShopBuilder-Widgets Für Rechnungs- und Lieferadresse kann dies über die Widget-Einstellungen gesteuert werden.
+- Die Softlogin-Funktionalität wurde überarbeitet. Falls die Gültigkeit des Auftragsbestätigungslinks im PlentyShop LTS-Assistenten auf **Immer** gesetzt ist, können Gastkund:innen nun nach 90 Tagen einen neuen Auftragsbestätigungslink anfordern, indem sie den ursprünglichen Auftragsbestätigungslink öffnen. Kund:innen erhalten den neuen Auftragsbestätigungslink per E-Mail. Bitte beachte auch das TODO. Weitere Informationen findest du auf der <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/shop-builder.html#softlogin" target="_blank">ShopBuilder-Handbuchseite</a>.
+- Für die Anrede bei neuen Adressen in der Kaufabwicklung oder im Mein-Konto-Bereich kann jetzt die Option **Bitte auswählen** als Vorauswahl festgelegt werden. Bei den ShopBuilder-Widgets für Rechnungs- und Lieferadressen kannst du die Vorauswahl über die Einstellung **Vorausgewählte Anrede** in den Widget-Einstellungen steuern. Falls du keine ShopBuilder-Seiten verwendest, kannst du die Vorauswahl der Anrede über die Einstellung **Vorausgewählte Anrede** im Tab **Kaufabwicklung und Mein Konto** der plentyShop LTS-Einstellungen steuern. 
+
+### Geändert
+
+- EU-Kund:innen können das Lieferland ab jetzt unabhängig von der Rechnungsadresse wählen. Durch diese Änderung erfüllt plentyShop LTS die Geoblocking-Veordnung VO EU Nr. 2018/302.
 
 ### Behoben
 
-- Für die Seitennummerierung auf Artikelkategorieseiten wurden in Version 5.0.55 `aria-label` verbaut. Hier kam es zu einem Fehler, dieser wurde behoben.
-- Auf Bestellbestätigungsseiten, die über den ShopBuilder erstellt wurden, wurde das voraussichtliche Versanddatum nicht im korrekten Format angezeigt. Dies wurde behoben.
-- Das Skript zum Kompilieren von SCSS-Dateien (`bundleSass.js`) entfernt jetzt alte Dateien aus dem Zielordner. Durch diese Anpassungen können einige Import-Fehler beim Bereitstellen von Plugins behoben werden.
-- Bestehende Konfigurationsvorschauen des plentyShop LTS-Assistenten werden jetzt beim Kopieren eines Plugin-Sets in das neue Plugin-Set übernommen.
-- Der fehlende Übersetzungsschlüssel `checkoutChangedMail` wurde für alle nicht deutschen Sprachen ergänzt.
+- In Version 5.0.55 wurden `aria-label` für die Seitennummerierung auf Artikelkategorieseiten verbaut. Bei dieser Änderung kam es zu einem Fehler, der nun behoben wurde.
+- Auf Auftragsbestätigungsseiten, die über den ShopBuilder erstellt wurden, wurde das voraussichtliche Versanddatum nicht im korrekten Format angezeigt. Dies wurde behoben.
+- Das Skript zum Kompilieren von SCSS-Dateien (`bundleSass.js`) entfernt jetzt alte Dateien aus dem Zielordner. Durch diese Anpassungen werden einige Import-Fehler beim Bereitstellen von Plugins behoben.
+- Bestehende Konfigurationsvorschauen des plentyShop LTS-Assistenten werden jetzt beim Kopieren eines Plugin-Sets in das neue Plugin-Set übernommen. Durch einen Fehler wurden zuvor keine Kacheln für die Assistentenkonfigurationen in der Konfigurationsübersicht des plentyShop LTS-Assistenten angezeigt.
+- Es wurden fehlende Übersetzungsschlüssel ergänzt, die nur in den Sprachen Deutsch und Englisch verfügbar waren.
 
 ### Angepasste Templates
 
