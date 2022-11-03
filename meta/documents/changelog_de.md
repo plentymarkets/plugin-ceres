@@ -5,6 +5,15 @@
 ### TODO
 
 - Die Inhalte von ShopBuilder-Bestellbestätigungsseiten müssen neu generiert werden.
+- Möchte man die im Soft-Login Widget enthaltene Fuktion der Linkneugenerierung bei Gastbestellungen nutzen, muss zuvor ein entsprechendes Mailtemplate erstellt und verlinkt werden. (gff. Link zur Doku)
+
+### Neu
+
+- Das Soft-Login Widget wurde um die Funktion der Linkneugenerierung bei Gastbestellungen ergänzt. Im Falle des Setzens einer Ablauffrist für Bestellbestätigungslinks kann nun über einen Button ein neuer Link generiert und per Mail an den Kunden verschickt werden.
+
+### Neu
+
+- Für die Anrede bei neuen Adressen in der Kaufabwicklung oder im Mein-Konto-Bereich kann jetzt "Bitte wählen" als Vorauswahl festgelegt werden. Im Standard kann dies über die Plugin-Konfiguration gesteuert werden. Bei den ShopBuilder-Widgets Für Rechnungs- und Lieferadresse kann dies über die Widget-Einstellungen gesteuert werden.
 
 ### Geändert
 
@@ -16,6 +25,7 @@
 - Auf Bestellbestätigungsseiten, die über den ShopBuilder erstellt wurden, wurde das voraussichtliche Versanddatum nicht im korrekten Format angezeigt. Dies wurde behoben.
 - Das Skript zum Kompilieren von SCSS-Dateien (`bundleSass.js`) entfernt jetzt alte Dateien aus dem Zielordner. Durch diese Anpassungen können einige Import-Fehler beim Bereitstellen von Plugins behoben werden.
 - Bestehende Konfigurationsvorschauen des plentyShop LTS-Assistenten werden jetzt beim Kopieren eines Plugin-Sets in das neue Plugin-Set übernommen.
+- Der fehlende Übersetzungsschlüssel `checkoutChangedMail` wurde für alle nicht deutschen Sprachen ergänzt.
 
 ### Angepasste Templates
 

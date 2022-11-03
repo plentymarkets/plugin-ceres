@@ -2020,6 +2020,9 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       salutations: [{
+        key: "please select",
+        name: "addressSalutationPleaseSelect"
+      }, {
         key: "male",
         name: "addressSalutationMale"
       }, {
@@ -2048,12 +2051,12 @@ __webpack_require__.r(__webpack_exports__);
         };
       });
 
-      if (this.enabledAddressFields[countryKey].includes("".concat(addressKey, ".name1"))) {
+      if (this.enabledAddressFields[countryKey].includes("".concat(addressKey, ".name1")) || this.enabledAddressFields[countryKey].includes("".concat(addressKey, ".salutation"))) {
         return salutations;
       }
 
       return salutations.filter(function (salutation) {
-        return salutation.key !== "company";
+        return salutation.key !== "company" && salutation.key !== "please select";
       });
     }
   },

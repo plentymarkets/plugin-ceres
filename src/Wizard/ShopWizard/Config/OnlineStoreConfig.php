@@ -31,7 +31,7 @@ class OnlineStoreConfig
     private static $confirmationLinkExpiration = [
         'confirmationLinkExpirationAlways' => 'always',
         'confirmationLinkExpiration30'     => '30',
-        'confirmationLinkExpiration90'     => '90'
+        'confirmationLinkExpiration60'     => '60'
     ];
     
     private static $globalMaxAge = [
@@ -69,7 +69,7 @@ class OnlineStoreConfig
     {
         return self::$categoryTreeDepths;
     }
-    
+
     /**
      * @return array
      */
@@ -77,7 +77,7 @@ class OnlineStoreConfig
     {
         return self::$toTopButtonPosition;
     }
-    
+
     /**
      * @return array
      */

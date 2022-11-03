@@ -1,10 +1,19 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.56 (2022-XX-XX) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.55...5.0.56" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.56 (2022-XX-XX) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.55...5.0.56" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
 
-- Die Inhalte von ShopBuilder-Bestellbestätigungsseiten müssen neu generiert werden.
+- The contents from the shopbuilder confirmation pages have to be regenerated.
+- To use the link regeneration for guest orders in the Soft-Login widget a dedicated mail template must be created and linked beforehand. (Link to documentation)
+
+### New
+
+- The link regeneration for guest orders has been added to the Soft-Login widget. In case of setting an expiration date for order confirmation links, a new confirmation link can be generated and sent to the customer by mail.
+
+### New
+
+- For the salutation for new addresses in the checkout or in the My Account area, "Please select" can now be set as a preselection. For the default, this can be controlled via the plugin configuration. For the ShopBuilder widgets For billing and delivery address, this can be controlled via the widget settings.
 
 ### Changed
 
@@ -16,6 +25,7 @@
 - Auf Bestellbestätigungsseiten, die über den ShopBuilder erstellt wurden, wurde das voraussichtliche Versanddatum nicht im korrekten Format angezeigt. Dies wurde behoben.
 - Das Skript zum Kompilieren von SCSS-Dateien (`bundleSass.js`) entfernt jetzt alte Dateien aus dem Zielordner. Durch diese Anpassungen können einige Import-Fehler beim Bereitstellen von Plugins behoben werden.
 - Bestehende Konfigurationsvorschauen des plentyShop LTS-Assistenten werden jetzt beim Kopieren eines Plugin-Sets in das neue Plugin-Set übernommen.
+- Der fehlende Übersetzungsschlüssel `checkoutChangedMail` wurde für alle nicht deutschen Sprachen ergänzt.
 
 ### Changed templates
 

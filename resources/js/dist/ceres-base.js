@@ -64546,6 +64546,12 @@ function getInvalidFields(form) {
       invalidFormControls.push(elem);
     }
   });
+  var salutationSelect = $form.find("[data-testing='salutation-select']");
+
+  if (!_validateSelect(salutationSelect, "")) {
+    invalidFormControls.push(salutationSelect.parent()[0]);
+  }
+
   return invalidFormControls;
 }
 function markInvalidFields(fields, errorClass) {
@@ -64675,8 +64681,9 @@ function _validateGroup($formControl, validationKey, requiredCount) {
 }
 
 function _validateSelect($formControl, validationKey) {
-  var selectedOption = $formControl.children("option:selected").text();
-  return $.trim(selectedOption) != "";
+  var selectedOptionText = $formControl.children("option:selected").text();
+  var selectedOptionVal = $formControl.children("option:selected").val();
+  return $.trim(selectedOptionText) != "" && $.trim(selectedOptionVal) != "please select";
 }
 
 function _validateInput($formControl, validationKey) {
