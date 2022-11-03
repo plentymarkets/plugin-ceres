@@ -1,19 +1,20 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.56 (2022-XX-XX) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.55...5.0.56" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.56 (2022-11-03) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.55...5.0.56" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
 
-- The contents from the shopbuilder confirmation pages have to be regenerated.
-- To use the link regeneration for guest orders in the Soft-Login widget a dedicated mail template must be created and linked beforehand. (Link to documentation)
+- The ShopBuilder contents for order confirmation pages must be updated in the **CMS » ShopBuilder** menu via the **Regenerate contents** button.
+- If you want to give guest customers the possibility to request a new order confirmation link, you have to create and link a new email template. You can find further information on the <a href="https://knowledge.plentymarkets.com/en-gb/manual/main/online-store/shop-builder.html#softlogin" target="_blank">ShopBuilder manual page</a>.
 
-### New
+### Added
 
-- The link regeneration for guest orders has been added to the Soft-Login widget. In case of setting an expiration date for order confirmation links, a new confirmation link can be generated and sent to the customer by mail.
+- The softlogin functionality has been revised. If the validity of the order confirmation link in the PlentyShop LTS assistent is set to **Always**, guest customers can now request a new order confirmation link after 90 days by opening the original order confirmation link. Customers will receive the new order confirmation link by email. Please note the TODO in this changelog. You can find further information on the <a href="https://knowledge.plentymarkets.com/en-gb/manual/main/online-store/shop-builder.html#softlogin" target="_blank">ShopBuilder manual page</a>.
+- For the salutation for new addresses in the checkout and the My Account area, the option **Please select** can now be set as the preselected option. For the ShopBuilder billing and shipping address widgets, you can set the preselection via the **Preselected salutation** setting in the widget settings. If you do not use ShopBuilder pages, you can set the presselection of the salutation via the **Preselected salutation** setting in the **Checkout and My Account** tab of the plentyShop LTS plugin settings. 
 
-### New
+### Changed
 
-- For the salutation for new addresses in the checkout or in the My Account area, "Please select" can now be set as a preselection. For the default, this can be controlled via the plugin configuration. For the ShopBuilder widgets For billing and delivery address, this can be controlled via the widget settings.
+- EU customers can now select the delivery country independently of the billing address. By implementing this change, plentyShop LTS complies with the Geo-Blocking Regulation (EU) No. 2018/302.
 
 ### Changed
 
@@ -21,11 +22,11 @@
 
 ### Fixed
 
-- Für die Seitennummerierung auf Artikelkategorieseiten wurden in Version 5.0.55 `aria-label` verbaut. Hier kam es zu einem Fehler, dieser wurde behoben.
-- Auf Bestellbestätigungsseiten, die über den ShopBuilder erstellt wurden, wurde das voraussichtliche Versanddatum nicht im korrekten Format angezeigt. Dies wurde behoben.
-- Das Skript zum Kompilieren von SCSS-Dateien (`bundleSass.js`) entfernt jetzt alte Dateien aus dem Zielordner. Durch diese Anpassungen können einige Import-Fehler beim Bereitstellen von Plugins behoben werden.
-- Bestehende Konfigurationsvorschauen des plentyShop LTS-Assistenten werden jetzt beim Kopieren eines Plugin-Sets in das neue Plugin-Set übernommen.
-- Der fehlende Übersetzungsschlüssel `checkoutChangedMail` wurde für alle nicht deutschen Sprachen ergänzt.
+- In version 5.0.55 `aria-label` were added for the pagination on item category pages. This change resulted in an error that has now been fixed.
+- On order confirmation pages created via ShopBuilder, the estimated shipping date was not displayed in the correct format. This has been fixed.
+- The script for compiling SCSS files (`bundleSass.js`) now removes old files from the target folder. This adjustment fixes some import errors when deploying plugins.
+- Existing configuration previews of the plentyShop LTS assistent are now transferred to the new plugin set when copying a plugin set. Due to an error, no tiles for the assistent configurations were previously displayed in the plentyShop LTS assistent configuration overview.
+- Missing translation keys were added, which were only available in German and English.
 
 ### Changed templates
 
