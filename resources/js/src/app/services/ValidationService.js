@@ -35,7 +35,7 @@ export function getInvalidFields(form)
 
     const salutationSelect = $form.find("[data-testing='salutation-select']");
 
-    if (!_validateSelect(salutationSelect, ""))
+    if (salutationSelect.length > 0 && !_validateSelect(salutationSelect, ""))
     {
         invalidFormControls.push(salutationSelect.parent()[0]);
     }
