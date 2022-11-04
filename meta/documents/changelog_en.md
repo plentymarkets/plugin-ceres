@@ -16,10 +16,6 @@
 
 - EU customers can now select the delivery country independently of the billing address. By implementing this change, plentyShop LTS complies with the Geo-Blocking Regulation (EU) No. 2018/302.
 
-### Changed
-
-- EU-Kunden können das Lieferland ab jetzt unabhängig von der Rechnungsadresse wählen. Durch diese Änderung erfüllt plentyShop LTS die Geoblocking-Veordnung VO EU Nr. 2018/302.
-
 ### Fixed
 
 - In version 5.0.55 `aria-label` were added for the pagination on item category pages. This change resulted in an error that has now been fixed.
@@ -27,6 +23,7 @@
 - The script for compiling SCSS files (`bundleSass.js`) now removes old files from the target folder. This adjustment fixes some import errors when deploying plugins.
 - Existing configuration previews of the plentyShop LTS assistent are now transferred to the new plugin set when copying a plugin set. Due to an error, no tiles for the assistent configurations were previously displayed in the plentyShop LTS assistent configuration overview.
 - Missing translation keys were added, which were only available in German and English.
+- In the widget "Item sorting", the selection "Relevance" was added to the sorting options for ShopBuilder contents of the type "Item search result".
 
 ### Changed templates
 

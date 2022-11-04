@@ -2,6 +2,7 @@
 
 namespace Ceres\Widgets\Helper\Factories\Settings;
 
+use Plenty\Modules\ShopBuilder\Helper\ShopBuilderRequest;
 use Plenty\Modules\Webshop\Contracts\WebstoreConfigurationRepositoryContract;
 use Plenty\Modules\ShopBuilder\Factories\Settings\ValueListFactory;
 
@@ -13,7 +14,15 @@ class ItemSortValueListFactory extends ValueListFactory
         $webstoreConfigurationRepository = pluginApp(WebstoreConfigurationRepositoryContract::class);
         $sortBySales = $webstoreConfigurationRepository->getWebstoreConfiguration()->itemSortByMonthlySales === 1;
 
-        $list = parent::make()
+        $list = parent::make();
+
+        /** @var ShopBuilderRequest $shopBuilderRequest */
+        $shopBuilderRequest = pluginApp(ShopBuilderRequest::class);
+        if($shopBuilderRequest->getPreviewContentType() === 'itemsearch') {
+            $list->addEntry('item.score', 'Widget.itemRelevance');
+        }
+
+        $list
             ->addEntry('default.recommended_sorting', 'Widget.itemRecommendedSorting')
             ->addEntry('texts.name1_asc', 'Widget.itemName_asc')
             ->addEntry('texts.name1_desc', 'Widget.itemName_desc')
