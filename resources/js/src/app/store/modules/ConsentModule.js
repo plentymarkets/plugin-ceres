@@ -19,6 +19,7 @@ function _setConsent(state, { key, value })
 
 function setStateForConsents(state, changeTo)
 {
+    console.log("setStateForConsents", state)
     Object.keys((state.consents || {})).forEach((groupKey) =>
     {
         if (typeof state.consents[groupKey] === "object")
@@ -55,6 +56,7 @@ const mutations =
         },
         setConsent(state, key, value)
         {
+            console.log("setConsent", "state", state, "key", key, "value", value)
             _setConsent(state, { key, value });
         },
         acceptAll(state)
@@ -75,6 +77,7 @@ const mutations =
         },
         storeConsents(state)
         {
+            console.log("storeConsents", state);
             if (window.ConsentManager)
             {
                 window.ConsentManager.setResponse(state.consents);
