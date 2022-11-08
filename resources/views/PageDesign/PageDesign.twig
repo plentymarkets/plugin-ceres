@@ -220,7 +220,7 @@
         "isCheapestSorting": "{{ services.template.isCheapestSorting() }}",
         "useVariationOrderProperties": {% if webstoreConfig.useVariationOrderProperties | default(0) %}true{% else %}false{% endif %},
         "initialData": {
-            {% if assetName == 'ceres-checkout' %}
+            {% if assetName == 'ceres-checkout' and services.country.hasEUShippingCountry() %}
                "euShippingCountries": {{ services.country.getEUCountriesList() | json_encode | raw }},
             {% endif %}
             "shippingCountries": {{ services.country.getActiveCountriesList() | filterFields(["id", "currLangName", "isoCode2", "states.id", "states.name", "vatCodes"]) | json_encode | raw }},
