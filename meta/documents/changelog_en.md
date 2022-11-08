@@ -23,6 +23,7 @@
 - The script for compiling SCSS files (`bundleSass.js`) now removes old files from the target folder. This adjustment fixes some import errors when deploying plugins.
 - Existing configuration previews of the plentyShop LTS assistent are now transferred to the new plugin set when copying a plugin set. Due to an error, no tiles for the assistent configurations were previously displayed in the plentyShop LTS assistent configuration overview.
 - Missing translation keys were added, which were only available in German and English.
+- For ShopBuilder contents of the type **Item search result**, the sorting option **Relevance** has been added to the **Item sorting** widget.
 
 ### Changed templates
 

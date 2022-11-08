@@ -10,7 +10,7 @@
 ### Hinzugefügt
 
 - Die Softlogin-Funktionalität wurde überarbeitet. Falls die Gültigkeit des Auftragsbestätigungslinks im PlentyShop LTS-Assistenten auf **Immer** gesetzt ist, können Gastkund:innen nun nach 90 Tagen einen neuen Auftragsbestätigungslink anfordern, indem sie den ursprünglichen Auftragsbestätigungslink öffnen. Kund:innen erhalten den neuen Auftragsbestätigungslink per E-Mail. Bitte beachte auch das TODO. Weitere Informationen findest du auf der <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/shop-builder.html#softlogin" target="_blank">ShopBuilder-Handbuchseite</a>.
-- Für die Anrede bei neuen Adressen in der Kaufabwicklung oder im Mein-Konto-Bereich kann jetzt die Option **Bitte auswählen** als Vorauswahl festgelegt werden. Bei den ShopBuilder-Widgets für Rechnungs- und Lieferadressen kannst du die Vorauswahl über die Einstellung **Vorausgewählte Anrede** in den Widget-Einstellungen steuern. Falls du keine ShopBuilder-Seiten verwendest, kannst du die Vorauswahl der Anrede über die Einstellung **Vorausgewählte Anrede** im Tab **Kaufabwicklung und Mein Konto** der plentyShop LTS-Einstellungen steuern. 
+- Für die Anrede bei neuen Adressen in der Kaufabwicklung oder im Mein-Konto-Bereich kann jetzt die Option **Bitte auswählen** als Vorauswahl festgelegt werden. Bei den ShopBuilder-Widgets für Rechnungs- und Lieferadressen kannst du die Vorauswahl über die Einstellung **Vorausgewählte Anrede** in den Widget-Einstellungen steuern. Falls du keine ShopBuilder-Seiten verwendest, kannst du die Vorauswahl der Anrede über die Einstellung **Vorausgewählte Anrede** im Tab **Kaufabwicklung und Mein Konto** der plentyShop LTS-Einstellungen steuern.
 
 ### Geändert
 
@@ -23,6 +23,7 @@
 - Das Skript zum Kompilieren von SCSS-Dateien (`bundleSass.js`) entfernt jetzt alte Dateien aus dem Zielordner. Durch diese Anpassungen werden einige Import-Fehler beim Bereitstellen von Plugins behoben.
 - Bestehende Konfigurationsvorschauen des plentyShop LTS-Assistenten werden jetzt beim Kopieren eines Plugin-Sets in das neue Plugin-Set übernommen. Durch einen Fehler wurden zuvor keine Kacheln für die Assistentenkonfigurationen in der Konfigurationsübersicht des plentyShop LTS-Assistenten angezeigt.
 - Es wurden fehlende Übersetzungsschlüssel ergänzt, die nur in den Sprachen Deutsch und Englisch verfügbar waren.
+- Für ShopBuilder-Inhalte vom Typ "Artikelsuchergebnis" wurde die Sortieroption **Relevanz** für das Widget **Artikelsortierung** hinzugefügt.
 
 ### Angepasste Templates
 
