@@ -23,7 +23,7 @@
 - Das Skript zum Kompilieren von SCSS-Dateien (`bundleSass.js`) entfernt jetzt alte Dateien aus dem Zielordner. Durch diese Anpassungen werden einige Import-Fehler beim Bereitstellen von Plugins behoben.
 - Bestehende Konfigurationsvorschauen des plentyShop LTS-Assistenten werden jetzt beim Kopieren eines Plugin-Sets in das neue Plugin-Set übernommen. Durch einen Fehler wurden zuvor keine Kacheln für die Assistentenkonfigurationen in der Konfigurationsübersicht des plentyShop LTS-Assistenten angezeigt.
 - Es wurden fehlende Übersetzungsschlüssel ergänzt, die nur in den Sprachen Deutsch und Englisch verfügbar waren.
-- Beim Widget "Artikelsortierung" wurde bei den Sortieroptionen für ShopBuilder-Inhalte vom Typ "Artikelsuchergebnis" die Auswahl "Relevanz" ergänzt.
+- Für ShopBuilder-Inhalte vom Typ "Artikelsuchergebnis" wurde die Sortieroption **Relevanz** für das Widget **Artikelsortierung** hinzugefügt.
 
 ### Angepasste Templates
 
