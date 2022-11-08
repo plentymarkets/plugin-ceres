@@ -1,6 +1,6 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.56 (2022-11-03) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.55...5.0.56" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.56 (2022-11-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.55...5.0.56" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
 
@@ -14,7 +14,7 @@
 
 ### Changed
 
-- EU customers can now select the delivery country independently of the billing address. By implementing this change, plentyShop LTS complies with the Geo-Blocking Regulation (EU) No. 2018/302.
+- If an EU country can be selected as a delivery country in plentyShop, all EU countries are now available for the billing address. By implementing this change, plentyShop LTS complies with the Geo-Blocking Regulation (EU) No. 2018/302.
 
 ### Fixed
 
