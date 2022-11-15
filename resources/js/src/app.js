@@ -36,6 +36,7 @@ import SingleItemSetComponent from "./app/components/item/SingleItemSetComponent
 import LazyHydrate from "vue-lazy-hydration";
 import ClientOnly from "./app/components/common/ClientOnly.vue";
 import script2 from "./app/plugins/script2";
+import VueContentPlaceholders from "vue-content-placeholders";
 
 
 // =========================
@@ -173,6 +174,7 @@ export function beforeCreate(context)
     // EXTERNAL
     Vue.component("lazy-hydrate", LazyHydrate);
     Vue.use(script2);
+    Vue.use(VueContentPlaceholders);
 
     Vue.prototype.$translate = TranslationService.translate;
     Vue.prototype.$ceres = App;

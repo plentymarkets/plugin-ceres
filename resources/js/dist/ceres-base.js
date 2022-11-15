@@ -1297,6 +1297,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -36494,6 +36496,16 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _vm._t("tag-list"),
+                      _vm._v(" "),
+                      _c(
+                        "content-placeholders",
+                        [
+                          _c("content-placeholders-text", {
+                            attrs: { lines: 3 }
+                          })
+                        ],
+                        1
+                      ),
                       _vm._v(" "),
                       _vm.isShortDescriptionActive &&
                       _vm.currentVariation.texts.shortDescription !== ""

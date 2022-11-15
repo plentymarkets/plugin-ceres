@@ -22,7 +22,9 @@
                             </h1>
 
                             <slot name="tag-list"></slot>
-
+                            <content-placeholders>
+                                <content-placeholders-text :lines="3" />
+                            </content-placeholders>
                             <p class="single-description"
                                v-if="isShortDescriptionActive && currentVariation.texts.shortDescription !== ''"
                                v-html="currentVariation.texts.shortDescription"></p>
