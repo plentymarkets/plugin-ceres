@@ -23,6 +23,8 @@
 <div class="widget widget-item-image widget-{{ appearance | default("primary") }}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}">
     {{ Twig.if("ImageCarouselOverride | trim is empty") }}
+    <content-placeholders>
+        <content-placeholders-img />
         <item-image-carousel
             :max-quantity="{{ maxQuantity }}"
             image-url-accessor="{{ imageSize }}"
@@ -31,6 +33,7 @@
             animation-style="{{ animationStyle }}"
             plugin-path="{{ Twig.print("plugin_path('Ceres')") }}">
         </item-image-carousel>
+    </content-placeholders>
     {{ Twig.else() }}
         {{ Twig.print("ImageCarouselOverride") }}
     {{ Twig.endif() }}
