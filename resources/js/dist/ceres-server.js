@@ -9369,6 +9369,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -51001,35 +51002,35 @@ var render = function() {
                         : _vm._e(),
                       _vm._v(" "),
                       _c(
-                        "h1",
-                        {
-                          staticClass: "h2 title",
-                          attrs: { "data-testing": "item-name" }
-                        },
-                        [
-                          _c("span", [
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(
-                                  _vm._f("itemName")(_vm.currentVariation)
-                                ) +
-                                "\n                            "
-                            )
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _vm._t("tag-list"),
-                      _vm._v(" "),
-                      _c(
                         "content-placeholders",
                         [
                           _c("content-placeholders-text", {
-                            attrs: { lines: 3 }
-                          })
+                            attrs: { lines: 2 }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "h1",
+                            {
+                              staticClass: "h2 title",
+                              attrs: { "data-testing": "item-name" }
+                            },
+                            [
+                              _c("span", [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(
+                                      _vm._f("itemName")(_vm.currentVariation)
+                                    ) +
+                                    "\n                                "
+                                )
+                              ])
+                            ]
+                          )
                         ],
                         1
                       ),
+                      _vm._v(" "),
+                      _vm._t("tag-list"),
                       _vm._v(" "),
                       _vm.isShortDescriptionActive &&
                       _vm.currentVariation.texts.shortDescription !== ""

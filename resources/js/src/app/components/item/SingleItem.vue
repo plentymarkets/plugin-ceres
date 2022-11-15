@@ -15,16 +15,17 @@
                                 {{ currentVariation.item.manufacturer.externalName }}
                             </div>
 
-                            <h1 class="h2 title" data-testing="item-name">
-                                <span>
-                                    {{ currentVariation | itemName }}
-                                </span>
-                            </h1>
+                            <content-placeholders>
+                                <content-placeholders-text :lines="2" />
+                                <h1 class="h2 title" data-testing="item-name">
+                                    <span>
+                                        {{ currentVariation | itemName }}
+                                    </span>
+                                </h1>
+                            </content-placeholders>
+                            
 
                             <slot name="tag-list"></slot>
-                            <content-placeholders>
-                                <content-placeholders-text :lines="3" />
-                            </content-placeholders>
                             <p class="single-description"
                                v-if="isShortDescriptionActive && currentVariation.texts.shortDescription !== ''"
                                v-html="currentVariation.texts.shortDescription"></p>
