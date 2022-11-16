@@ -132,6 +132,8 @@ import ClientOnly from "./app/components/common/ClientOnly.vue";
 Vue.component("client-only", ClientOnly);
 import BackgroundImg from "./app/components/common/BackgroundImg.vue";
 Vue.component("background-img", BackgroundImg);
+import { ContentLoader } from "vue-content-loader";
+Vue.component("content-loader", ContentLoader);
 
 // =========================
 // DIRECTIVES
