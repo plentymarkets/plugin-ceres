@@ -40702,17 +40702,6 @@ module.exports=function(modules){function __webpack_require__(moduleId){if(insta
 
 /***/ }),
 
-/***/ "./node_modules/vue-content-placeholders/dist/vue-content-placeholders.css":
-/*!*********************************************************************************!*\
-  !*** ./node_modules/vue-content-placeholders/dist/vue-content-placeholders.css ***!
-  \*********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-throw new Error("Module parse failed: Unexpected character '@' (2:0)\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\n| \n> @keyframes vueContentPlaceholdersAnimation {\n| 0% {\n|     transform: translate3d(-30%, 0, 0);");
-
-/***/ }),
-
 /***/ "./node_modules/vue-content-placeholders/index.js":
 /*!********************************************************!*\
   !*** ./node_modules/vue-content-placeholders/index.js ***!
@@ -40726,11 +40715,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _dist_vue_content_placeholders_common__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_dist_vue_content_placeholders_common__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (default from non-harmony) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _dist_vue_content_placeholders_common__WEBPACK_IMPORTED_MODULE_0___default.a; });
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _dist_vue_content_placeholders_common__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _dist_vue_content_placeholders_common__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _dist_vue_content_placeholders_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dist/vue-content-placeholders.css */ "./node_modules/vue-content-placeholders/dist/vue-content-placeholders.css");
-/* harmony import */ var _dist_vue_content_placeholders_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_dist_vue_content_placeholders_css__WEBPACK_IMPORTED_MODULE_1__);
 
 
-
+// import './dist/vue-content-placeholders.css'
 
 
 /***/ }),
