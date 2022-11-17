@@ -37,6 +37,7 @@ class AlreadyPaidPaymentMethod extends PaymentMethodBaseService
      */
     public function isActive(): bool
     {
+        //TODO general active check from assistant config
         return $this->basketRepository->load()->basketAmount <= 0;
     }
 
