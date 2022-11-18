@@ -54,7 +54,7 @@
             <slot name="item-details">
                 <div class="thumb-content">
                     <a :href="item | itemURL(urlWithVariationId)" class="thumb-title small" :class="{ 'stretched-link': $ceres.config.global.shippingCostsCategoryId == 0 }">
-                        {{ item | itemName }}<!--
+                        {{ item | itemName | decodeHtmlEntities }}<!--
                     --><span v-for="attribute in item.groupedAttributes">{{ "Ceres::Template.itemGroupedAttribute" | translate(attribute) }}</span>
                     </a>
                     <div class="thumb-meta mt-2">

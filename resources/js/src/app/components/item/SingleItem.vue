@@ -17,7 +17,7 @@
 
                             <h1 class="h2 title" data-testing="item-name">
                                 <span>
-                                    {{ currentVariation | itemName }}
+                                    {{ currentVariation | itemName | decodeHtmlEntities }}
                                 </span>
                             </h1>
 

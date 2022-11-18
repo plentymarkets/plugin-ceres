@@ -2,7 +2,7 @@
     <div class="live-shopping-details">
         <div class="h3 live-shopping-item-name">
             <a :href="liveShoppingData.item | itemURL">
-                {{ liveShoppingData.item | itemName }}
+                {{ liveShoppingData.item | itemName | decodeHtmlEntities }}
             </a>
         </div>
 

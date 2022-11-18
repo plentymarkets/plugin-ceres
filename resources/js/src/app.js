@@ -78,6 +78,7 @@ import "./app/filters/arrayFirst.filter";
 import "./app/filters/attachText.filter";
 import "./app/filters/currency.filter";
 import "./app/filters/date.filter";
+import "./app/filters/decodeHtmlEntities.filter";
 import "./app/filters/fileName.filter";
 import "./app/filters/fileUploadPath.filter";
 import "./app/filters/graduatedPrice.filter";
