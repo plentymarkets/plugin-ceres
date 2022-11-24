@@ -4,6 +4,7 @@ namespace Ceres\Wizard\ShopWizard\Services;
 
 use Ceres\Wizard\ShopWizard\Models\ShopWizardPreviewConfiguration;
 use Ceres\Wizard\ShopWizard\Repositories\ShopWizardConfigRepository;
+use Ceres\Wizard\ShopWizard\Services\SettingsHandlerService;
 use Plenty\Modules\ContentCache\ContentCacheSettings\ContentCacheSettings;
 use Plenty\Modules\ContentCache\Contracts\ContentCacheSettingsRepositoryContract;
 use Plenty\Modules\Item\Search\Contracts\VariationElasticSearchSettingsRepositoryContract;
@@ -335,6 +336,17 @@ class ShopWizardService
 
         if ($hasShippingMethod && $hasShippingProfile && $hasPaymentMethod && $hasShippingCountry) {
             $data['setAllRequiredAssistants'] = 'true';
+        }
+
+        if (!empty($plentyId)) {
+            /** @var SettingsHandlerService $settingsHandlerService */
+            $settingsHandlerService = pluginApp(SettingsHandlerService::class);
+            $data['onlineStore_alreadyPaidShippingCountries'] = $settingsHandlerService->getAlreadyPaidShippingCountries($plentyId);
+        }
+
+        if (isset($webstoreConfData['alreadyPaidLogoTypeExternal']) && $webstoreConfData['alreadyPaidLogoTypeExternal']) {
+            $data['onlineStore_alreadyPaidLogoTypeExternal'] = $webstoreConfData['alreadyPaidLogoTypeExternal'];
+            $data['onlineStore_alreadyPaidLogoUrl'] = $webstoreConfData['alreadyPaidLogoUrl'];
         }
 
         return $data;

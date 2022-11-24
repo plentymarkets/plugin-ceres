@@ -147,6 +147,26 @@ class OnlineStoreMapping
             'global'    => true,
             'optional'  => false
         ],
+
+        'onlineStore_alreadyPaidShippingCountries' => [
+            'field'    => 'already_paid_shipping_countries',
+            'type'     => 'concatenated',
+            'global'   => false,
+            'optional' => false,
+        ],
+        'onlineStore_alreadyPaidLogoTypeExternal' => [
+            'field'    => 'already_paid_logo_type_external',
+            'type'      => 'boolean',
+            'global'    => false,
+            'optional'  => false
+        ],
+        'onlineStore_alreadyPaidLogoUrl' => [
+            'field'    => 'already_paid_logo_url',
+            'type'      => 'string',
+            'global'    => false,
+            'optional'  => false,
+        ],
+
         'onlineStore_loginMode' => [
             'field'     => 'loginMode',
             'type'      => 'integer',

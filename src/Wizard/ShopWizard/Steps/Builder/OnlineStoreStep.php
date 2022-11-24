@@ -8,7 +8,7 @@ use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
 use Plenty\Modules\Authorization\Services\AuthHelper;
 use Plenty\Modules\Order\Status\Contracts\OrderStatusRepositoryContract;
 use Plenty\Modules\System\Module\Contracts\PlentyModuleRepositoryContract;
-
+use Plenty\Modules\Order\Shipping\Countries\Contracts\CountryRepositoryContract;
 /**
  * Class OnlineStoreStep
  *
@@ -20,6 +20,16 @@ class OnlineStoreStep extends Step
      * @var array Collection of order status.
      */
     private static $orderStatusList = null;
+
+    /**
+     * @var array
+     */
+    private $deliveryCountries;
+
+    /**
+     * @var string
+     */
+    private $language;
 
     /**
      * @return array
@@ -44,6 +54,8 @@ class OnlineStoreStep extends Step
                 $this->buildSessionLifeTimeSection(),
                 $this->buildStoreCallistoSettings(),
                 $this->buildExternalVatIdCheckSettings(),
+                $this->buildAlreadyPaidSettings(),
+                $this->buildAlreadyPaidLogoSettings(),
                 $this->buildLoginModeSettings()
             ]
         ];
@@ -485,6 +497,51 @@ class OnlineStoreStep extends Step
         return $orderStatusList;
     }
 
+    private function buildAlreadyPaidSettings()
+    {
+        return [
+            "title" => 'Wizard.alreadyPaidShippingCountriesTitle',
+            "description" => 'Wizard.alreadyPaidShippingCountriesDescription',
+            "form" => [
+                "onlineStore_alreadyPaidShippingCountries" => [
+                    'type' => 'checkboxGroup',
+                    'defaultValue' => [],
+                    'options' => [
+                        'name' => 'Wizard.alreadyPaidShippingCountries',
+                        'checkboxValues' => $this->getCountriesListForm(),
+                    ],
+                ],
+                "onlineStore_alreadyPaidLogoTypeExternal" => [
+                    'type' => 'toggle',
+                    'defaultValue' => false,
+                    'options' => [
+                        'name' => 'Wizard.alreadyPaidLogoTypeToggle',
+                    ],
+                ],
+            ],
+
+        ];
+    }
+
+    private function buildAlreadyPaidLogoSettings()
+    {
+        return  [
+            "title" => '',
+            "description" => 'Wizard.alreadyPaidLogoUrlDescription',
+            "condition" => 'onlineStore_alreadyPaidLogoTypeExternal',
+            "form" => [
+                "onlineStore_alreadyPaidLogoUrl" => [
+                    'type' => 'file',
+                    'defaultValue' => '',
+                    'showPreview' => true,
+                    'options' => [
+                        'name' => 'Wizard.alreadyPaidLogoUrl'
+                    ]
+                ],
+            ],
+        ];
+    }
+
     private function buildLoginModeSettings()
     {
         return [
@@ -511,5 +568,39 @@ class OnlineStoreStep extends Step
                 ]
             ]
         ];
+    }
+
+    /**
+     * @return array
+     */
+    private function getCountriesListForm()
+    {
+        if ($this->deliveryCountries === null) {
+            /** @var CountryRepositoryContract $countryRepository */
+            $countryRepository = pluginApp(CountryRepositoryContract::class);
+            $countries = $countryRepository->getCountriesList(true, ['names']);
+            $this->deliveryCountries = [];
+            $systemLanguage = $this->getLanguage();
+            foreach($countries as $country) {
+                $name = $country->names->where('lang', $systemLanguage)->first()->name;
+                $this->deliveryCountries[] = [
+                    'caption' => $name ?? $country->name,
+                    'value' => $country->id
+                ];
+            }
+        }
+        return $this->deliveryCountries;
+    }
+
+    /**
+     * @return string
+     */
+    private function getLanguage()
+    {
+        if ($this->language === null) {
+            $this->language =  \Locale::getDefault();
+        }
+
+        return $this->language;
     }
 }

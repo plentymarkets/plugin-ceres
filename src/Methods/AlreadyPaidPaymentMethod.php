@@ -2,6 +2,7 @@
 
 namespace Ceres\Methods;
 
+use Ceres\Wizard\ShopWizard\Services\SettingsHandlerService;
 use Plenty\Modules\Basket\Contracts\BasketRepositoryContract;
 use Plenty\Modules\Frontend\Contracts\Checkout;
 use Plenty\Modules\Frontend\Session\Storage\Contracts\FrontendSessionStorageFactoryContract;
@@ -17,6 +18,9 @@ class AlreadyPaidPaymentMethod extends PaymentMethodBaseService
     /** @var  Checkout */
     private $checkout;
 
+    /** @var SettingsHandlerService */
+    private $settingsHandlerService;
+
     /**
      * CashInAdvancePaymentMethod constructor.
      * @param BasketRepositoryContract $basketRepository
@@ -24,10 +28,12 @@ class AlreadyPaidPaymentMethod extends PaymentMethodBaseService
      */
     public function __construct(
         BasketRepositoryContract $basketRepository,
-        Checkout $checkout
+        Checkout $checkout,
+        SettingsHandlerService $settingsHandlerService
     ) {
         $this->basketRepository = $basketRepository;
         $this->checkout = $checkout;
+        $this->settingsHandlerService = $settingsHandlerService;
     }
 
     /**
@@ -37,7 +43,14 @@ class AlreadyPaidPaymentMethod extends PaymentMethodBaseService
      */
     public function isActive(): bool
     {
-        //TODO general active check from assistant config
+        $app = pluginApp(Application::class);
+        $shippingCountries = $this->settingsHandlerService->getAlreadyPaidShippingCountries($app->getPlentyId());
+
+        if(!in_array($this->checkout->getShippingCountryId(), $shippingCountries))
+        {
+            return false;
+        }
+
         return $this->basketRepository->load()->basketAmount <= 0;
     }
 
