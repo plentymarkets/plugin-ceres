@@ -30,7 +30,8 @@
         "Ceres\\Wizard\\ShopWizard\\Migrations\\CreateShopWizardPreviewConfigTable",
         "Ceres\\Wizard\\ShopWizard\\Migrations\\UpdateShopWizardPreviewTableWebstoreId",
         "Ceres\\Migrations\\UpdateTranslationKeysMigration_0_0_1",
-        "Ceres\\Migrations\\Migration_2022_11_18_001_CreateAlreadyPaidPaymentMethod"
+        "Ceres\\Migrations\\Migration_2022_11_18_001_CreateAlreadyPaidPaymentMethod",
+        "Ceres\\Migrations\\Migration_2022_11_22_001_CreateAlreadyPaidShippingCountrySettings"
     ],
     "dataProviders"     :
     [
