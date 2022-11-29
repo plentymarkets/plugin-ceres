@@ -88,7 +88,16 @@ class AlreadyPaidPaymentMethod extends PaymentMethodBaseService
      */
     public function getIcon(string $lang = 'de'): string
     {
-        return '';
+        $app = pluginApp(Application::class);
+        $settings = $this->settingsHandlerService->getSetting($app->getPlentyId());
+        if(isset($settings['alreadyPaidLogoTypeExternal']) &&
+            $settings['alreadyPaidLogoTypeExternal'] &&
+            ($settings['alreadyPaidLogoUrl'] !== '')
+        ) {
+            return $settings['alreadyPaidLogoUrl'];
+        }
+
+        return $app->getUrlPath("Ceres") . "/images/logos/icon.svg";
     }
 
     /**
