@@ -63,12 +63,9 @@ class AlreadyPaidPaymentMethod extends PaymentMethodBaseService
      */
     public function getName(string $lang = 'de'): string
     {
-        return 'Already paid';
-
-        //TODO trans
         /** @var Translator $translator */
-        //$translator = pluginApp(Translator::class);
-        //return $translator->trans('PrePayment::PaymentMethod.paymentMethodName',[],$lang);
+        $translator = pluginApp(Translator::class);
+        return $translator->trans('Ceres::AlreadyPaid.paymentMethodName', [], $lang);
     }
 
     /**
@@ -117,8 +114,13 @@ class AlreadyPaidPaymentMethod extends PaymentMethodBaseService
      */
     public function getDescription(string $lang = 'de'): string
     {
-        //TODO trans
-        return 'No payment needed';
+        /** @var Translator $translator */
+        $translator = pluginApp(Translator::class);
+        return $translator->trans(
+            'Ceres::AlreadyPaid.paymentMethodDescription',
+            [],
+            $lang
+        ) . ' ' . $this->checkout->getCurrency();
     }
 
     /**
