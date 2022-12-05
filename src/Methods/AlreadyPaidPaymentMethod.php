@@ -9,6 +9,7 @@ use Plenty\Modules\Frontend\Session\Storage\Contracts\FrontendSessionStorageFact
 use Plenty\Modules\Payment\Method\Services\PaymentMethodBaseService;
 use Plenty\Plugin\Application;
 use Plenty\Plugin\Translation\Translator;
+use Ceres\Config\CeresConfig;
 
 class AlreadyPaidPaymentMethod extends PaymentMethodBaseService
 {
@@ -89,12 +90,9 @@ class AlreadyPaidPaymentMethod extends PaymentMethodBaseService
     public function getIcon(string $lang = 'de'): string
     {
         $app = pluginApp(Application::class);
-        $settings = $this->settingsHandlerService->getSetting($app->getPlentyId());
-        if(isset($settings['alreadyPaidLogoTypeExternal']) &&
-            $settings['alreadyPaidLogoTypeExternal'] &&
-            ($settings['alreadyPaidLogoUrl'] !== '')
-        ) {
-            return $settings['alreadyPaidLogoUrl'];
+        $config = pluginApp(CeresConfig::class);
+        if ($config->checkout->alreadyPaidLogoUrl !== '') {
+            return $config->checkout->alreadyPaidLogoUrl;
         }
 
         return $app->getUrlPath("Ceres") . "/images/logos/icon.svg";

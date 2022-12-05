@@ -55,7 +55,6 @@ class OnlineStoreStep extends Step
                 $this->buildStoreCallistoSettings(),
                 $this->buildExternalVatIdCheckSettings(),
                 $this->buildAlreadyPaidSettings(),
-                $this->buildAlreadyPaidLogoSettings(),
                 $this->buildLoginModeSettings()
             ]
         ];
@@ -511,25 +510,6 @@ class OnlineStoreStep extends Step
                         'checkboxValues' => $this->getCountriesListForm(),
                     ],
                 ],
-                "onlineStore_alreadyPaidLogoTypeExternal" => [
-                    'type' => 'toggle',
-                    'defaultValue' => false,
-                    'options' => [
-                        'name' => 'Wizard.alreadyPaidLogoTypeToggle',
-                    ],
-                ],
-            ],
-
-        ];
-    }
-
-    private function buildAlreadyPaidLogoSettings()
-    {
-        return  [
-            "title" => '',
-            "description" => 'Wizard.alreadyPaidLogoUrlDescription',
-            "condition" => 'onlineStore_alreadyPaidLogoTypeExternal',
-            "form" => [
                 "onlineStore_alreadyPaidLogoUrl" => [
                     'type' => 'file',
                     'defaultValue' => '',
@@ -539,8 +519,10 @@ class OnlineStoreStep extends Step
                     ]
                 ],
             ],
+
         ];
     }
+
 
     private function buildLoginModeSettings()
     {

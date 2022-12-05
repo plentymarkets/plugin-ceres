@@ -154,16 +154,6 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     $webstoreData['loginMode'] = $data['onlineStore_loginMode'];
                 }
 
-                if (isset($data['onlineStore_alreadyPaidLogoTypeExternal'])) {
-                    $webstoreData['alreadyPaidLogoTypeExternal'] = $data['onlineStore_alreadyPaidLogoTypeExternal'];
-                }
-
-                if (isset($data['onlineStore_alreadyPaidLogoUrl']) && $data['onlineStore_alreadyPaidLogoTypeExternal']) {
-                    $webstoreData['alreadyPaidLogoUrl'] = $data['onlineStore_alreadyPaidLogoUrl'];
-                } else {
-                    $webstoreData['alreadyPaidLogoUrl'] = '';
-                }
-
                 if (isset($data['onlineStore_externalVatIdCheckServiceUnavailableFallbackStatus'])) {
                     $webstoreData['externalVatCheckServiceUnavailableFallbackStatus'] = (float)$data['onlineStore_externalVatIdCheckServiceUnavailableFallbackStatus'];
                 }

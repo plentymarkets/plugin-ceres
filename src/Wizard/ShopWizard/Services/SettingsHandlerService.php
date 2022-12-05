@@ -4,7 +4,6 @@ namespace Ceres\Wizard\ShopWizard\Services;
 
 use Plenty\Modules\System\Contracts\WebstoreRepositoryContract;
 use Ceres\Wizard\ShopWizard\Repositories\AlreadyPaidShippingCountryRepository;
-use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
 
 /**
  * Class SettingsHandlerService
@@ -37,15 +36,4 @@ class SettingsHandlerService
         return $shippingcountryRepository->getShippingCountryIds($plentyId);
     }
 
-    /**
-     * @param $plentyId
-     * @return \Plenty\Modules\System\Models\WebstoreConfiguration
-     */
-    public function getSetting($plentyId)
-    {
-        /** @var WebstoreConfigurationRepositoryContract $webstoreConfigRepo */
-        $webstoreConfigRepo = pluginApp(WebstoreConfigurationRepositoryContract::class);
-
-        return $webstoreConfigRepo->findByPlentyId($plentyId)->toArray();
-    }
 }
