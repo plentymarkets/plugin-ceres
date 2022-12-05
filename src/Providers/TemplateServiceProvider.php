@@ -136,7 +136,7 @@ class TemplateServiceProvider extends ServiceProvider
         }
 
         //Register the AlreadyPaid payment method
-        $paymentMethodContainer->register('plenty::ALREADY_PAID', AlreadyPaidPaymentMethod::class,
+        $paymentMethodContainer->register('Ceres::ALREADY_PAID', AlreadyPaidPaymentMethod::class,
             [AfterBasketChanged::class, AfterBasketCreate::class]   );
 
         $this->registerConfigValues();
