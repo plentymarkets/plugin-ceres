@@ -3336,7 +3336,7 @@
                 "checkout.already_paid_logo_url": {
                     "type": "inputFile",
                     "required": false,
-                    "label": "Wizard.alreadyPaidLogoUrl",
+                    "label": "Config.checkoutLogoUrl",
                     "options": {
                         "defaultValue": ""
                     }

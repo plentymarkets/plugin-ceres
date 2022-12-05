@@ -499,14 +499,14 @@ class OnlineStoreStep extends Step
     private function buildAlreadyPaidSettings()
     {
         return [
-            "title" => 'Wizard.alreadyPaidShippingCountriesTitle',
-            "description" => 'Wizard.alreadyPaidShippingCountriesDescription',
+            "title" => 'AlreadyPaid.shippingCountriesTitle',
+            "description" => 'AlreadyPaid.shippingCountriesDescription',
             "form" => [
                 "onlineStore_alreadyPaidShippingCountries" => [
                     'type' => 'checkboxGroup',
                     'defaultValue' => [],
                     'options' => [
-                        'name' => 'Wizard.alreadyPaidShippingCountries',
+                        'name' => 'AlreadyPaid.shippingCountries',
                         'checkboxValues' => $this->getCountriesListForm(),
                     ],
                 ],
@@ -515,7 +515,7 @@ class OnlineStoreStep extends Step
                     'defaultValue' => '',
                     'showPreview' => true,
                     'options' => [
-                        'name' => 'Wizard.alreadyPaidLogoUrl'
+                        'name' => 'AlreadyPaid.logoUrl'
                     ]
                 ],
             ],
