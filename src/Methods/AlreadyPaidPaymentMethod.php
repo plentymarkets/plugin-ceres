@@ -4,6 +4,7 @@ namespace Ceres\Methods;
 
 use Ceres\Wizard\ShopWizard\Services\SettingsHandlerService;
 use Plenty\Modules\Basket\Contracts\BasketRepositoryContract;
+use Plenty\Modules\Frontend\Session\Storage\Contracts\FrontendSessionStorageFactoryContract;
 use Plenty\Modules\Frontend\Contracts\Checkout;
 use Plenty\Modules\Payment\Method\Services\PaymentMethodBaseService;
 use Plenty\Plugin\Application;
@@ -118,6 +119,9 @@ class AlreadyPaidPaymentMethod extends PaymentMethodBaseService
      */
     public function getDescription(string $lang = 'de'): string
     {
+        /** @var FrontendSessionStorageFactoryContract $session */
+        $session = pluginApp(FrontendSessionStorageFactoryContract::class);
+        $lang = $session->getLocaleSettings()->language;
         return $this->translator
             ->trans(
                 'Ceres::Template.alreadyPaidPaymentMethodDescription',
