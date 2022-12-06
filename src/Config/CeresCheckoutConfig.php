@@ -23,7 +23,7 @@ class CeresCheckoutConfig extends PluginConfig
 
 
     /**
-     * @var string $alreadyPaidLogoUrl
+     * @var string $alreadyPaidIconUrl
      */
     public $alreadyPaidIconUrl;
 
