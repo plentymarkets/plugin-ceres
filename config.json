@@ -3333,10 +3333,10 @@
                         ]
                     }
                 },
-                "checkout.already_paid_logo_url": {
+                "checkout.already_paid_icon_url": {
                     "type": "inputFile",
                     "required": false,
-                    "label": "Config.checkoutLogoUrl",
+                    "label": "Config.checkoutIconUrl",
                     "options": {
                         "defaultValue": ""
                     }

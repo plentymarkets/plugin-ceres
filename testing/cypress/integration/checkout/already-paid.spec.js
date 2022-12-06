@@ -1,7 +1,7 @@
 // / <reference types="cypress" />
 context("already paid payment", () =>
 {
-    const ALREADY_PAID_PAYMENT = "Already paid";
+    const ALREADY_PAID_PAYMENT = "Bereits bezahlt";
     const VOUCHER_CODE = "2ZSX7H"
     const ZERO_PRICE = "0,00EUR"
 

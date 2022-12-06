@@ -154,8 +154,8 @@ class OnlineStoreMapping
             'global'   => false,
             'optional' => false,
         ],
-        'onlineStore_alreadyPaidLogoUrl' => [
-            'field'    => 'checkout.already_paid_logo_url',
+        'onlineStore_alreadyPaidIconUrl' => [
+            'field'    => 'checkout.already_paid_icon_url',
             'type'      => 'string',
             'global'    => false,
             'optional'  => false,

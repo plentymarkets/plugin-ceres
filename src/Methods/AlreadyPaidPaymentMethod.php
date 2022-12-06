@@ -5,7 +5,6 @@ namespace Ceres\Methods;
 use Ceres\Wizard\ShopWizard\Services\SettingsHandlerService;
 use Plenty\Modules\Basket\Contracts\BasketRepositoryContract;
 use Plenty\Modules\Frontend\Contracts\Checkout;
-use Plenty\Modules\Frontend\Session\Storage\Contracts\FrontendSessionStorageFactoryContract;
 use Plenty\Modules\Payment\Method\Services\PaymentMethodBaseService;
 use Plenty\Plugin\Application;
 use Plenty\Plugin\Translation\Translator;
@@ -22,6 +21,12 @@ class AlreadyPaidPaymentMethod extends PaymentMethodBaseService
     /** @var SettingsHandlerService */
     private $settingsHandlerService;
 
+    /** @var Application */
+    private $app;
+
+    /** @var Translator */
+    private $translator;
+
     /**
      * CashInAdvancePaymentMethod constructor.
      * @param BasketRepositoryContract $basketRepository
@@ -30,11 +35,15 @@ class AlreadyPaidPaymentMethod extends PaymentMethodBaseService
     public function __construct(
         BasketRepositoryContract $basketRepository,
         Checkout $checkout,
-        SettingsHandlerService $settingsHandlerService
+        SettingsHandlerService $settingsHandlerService,
+        Application $app,
+        Translator $translator
     ) {
         $this->basketRepository = $basketRepository;
         $this->checkout = $checkout;
         $this->settingsHandlerService = $settingsHandlerService;
+        $this->app = $app;
+        $this->translator = $translator;
     }
 
     /**
@@ -44,9 +53,7 @@ class AlreadyPaidPaymentMethod extends PaymentMethodBaseService
      */
     public function isActive(): bool
     {
-        $app = pluginApp(Application::class);
-        $shippingCountries = $this->settingsHandlerService->getAlreadyPaidShippingCountries($app->getPlentyId());
-
+        $shippingCountries = $this->settingsHandlerService->getAlreadyPaidShippingCountries($this->app->getPlentyId());
         if(!in_array($this->checkout->getShippingCountryId(), $shippingCountries))
         {
             return false;
@@ -63,9 +70,7 @@ class AlreadyPaidPaymentMethod extends PaymentMethodBaseService
      */
     public function getName(string $lang = 'de'): string
     {
-        /** @var Translator $translator */
-        $translator = pluginApp(Translator::class);
-        return $translator->trans('Ceres::AlreadyPaid.paymentMethodName', [], $lang);
+        return $this->translator->trans('Ceres::Template.alreadyPaidPaymentMethodName', [], $lang);
     }
 
     /**
@@ -86,13 +91,12 @@ class AlreadyPaidPaymentMethod extends PaymentMethodBaseService
      */
     public function getIcon(string $lang = 'de'): string
     {
-        $app = pluginApp(Application::class);
         $config = pluginApp(CeresConfig::class);
-        if ($config->checkout->alreadyPaidLogoUrl !== '') {
-            return $config->checkout->alreadyPaidLogoUrl;
+        if (!empty($config->checkout->alreadyPaidIconUrl)) {
+            return $config->checkout->alreadyPaidIconUrl;
         }
 
-        return $app->getUrlPath("Ceres") . "/images/logos/icon.svg";
+        return $this->app->getUrlPath("Ceres") . "/images/logos/icon.svg";
     }
 
     /**
@@ -114,13 +118,12 @@ class AlreadyPaidPaymentMethod extends PaymentMethodBaseService
      */
     public function getDescription(string $lang = 'de'): string
     {
-        /** @var Translator $translator */
-        $translator = pluginApp(Translator::class);
-        return $translator->trans(
-            'Ceres::AlreadyPaid.paymentMethodDescription',
-            [],
-            $lang
-        ) . ' ' . $this->checkout->getCurrency();
+        return $this->translator
+            ->trans(
+                'Ceres::Template.alreadyPaidPaymentMethodDescription',
+                ["currency" => $this->checkout->getCurrency()],
+                $lang
+        );
     }
 
     /**
@@ -191,10 +194,6 @@ class AlreadyPaidPaymentMethod extends PaymentMethodBaseService
      */
     public function getBackendIcon(): string
     {
-        //TODO real icon
-        return '';
-        //$app = pluginApp(Application::class);
-        //$icon = $app->getUrlPath('prepayment').'/images/logos/prepayment_plus_backend_icon.svg';
-        //return $icon;
+        return $this->getIcon();
     }
 }
