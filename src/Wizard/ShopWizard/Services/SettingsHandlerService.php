@@ -35,4 +35,5 @@ class SettingsHandlerService
 
         return $shippingcountryRepository->getShippingCountryIds($plentyId);
     }
+
 }

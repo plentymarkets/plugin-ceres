@@ -344,11 +344,6 @@ class ShopWizardService
             $data['onlineStore_alreadyPaidShippingCountries'] = $settingsHandlerService->getAlreadyPaidShippingCountries($plentyId);
         }
 
-        if (isset($webstoreConfData['alreadyPaidLogoTypeExternal']) && $webstoreConfData['alreadyPaidLogoTypeExternal']) {
-            $data['onlineStore_alreadyPaidLogoTypeExternal'] = $webstoreConfData['alreadyPaidLogoTypeExternal'];
-            $data['onlineStore_alreadyPaidLogoUrl'] = $webstoreConfData['alreadyPaidLogoUrl'];
-        }
-
         return $data;
     }
 
