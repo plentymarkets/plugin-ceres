@@ -32,7 +32,6 @@ class SettingsHandlerService
     {
         /** @var AlreadyPaidShippingCountryRepository $shippingcountryRepository */
         $shippingcountryRepository = pluginApp(AlreadyPaidShippingCountryRepository::class);
-
         return $shippingcountryRepository->getShippingCountryIds($plentyId);
     }
 

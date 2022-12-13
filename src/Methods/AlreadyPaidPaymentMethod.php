@@ -55,12 +55,7 @@ class AlreadyPaidPaymentMethod extends PaymentMethodBaseService
     public function isActive(): bool
     {
         $shippingCountries = $this->settingsHandlerService->getAlreadyPaidShippingCountries($this->app->getPlentyId());
-        if(!in_array($this->checkout->getShippingCountryId(), $shippingCountries))
-        {
-            return false;
-        }
-
-        return $this->basketRepository->load()->basketAmount <= 0;
+        return in_array($this->checkout->getShippingCountryId(), $shippingCountries, false) && $this->basketRepository->load()->basketAmount <= 0.0;
     }
 
     /**
@@ -119,9 +114,6 @@ class AlreadyPaidPaymentMethod extends PaymentMethodBaseService
      */
     public function getDescription(string $lang = 'de'): string
     {
-        /** @var FrontendSessionStorageFactoryContract $session */
-        $session = pluginApp(FrontendSessionStorageFactoryContract::class);
-        $lang = $session->getLocaleSettings()->language;
         return $this->translator
             ->trans(
                 'Ceres::Template.alreadyPaidPaymentMethodDescription',
