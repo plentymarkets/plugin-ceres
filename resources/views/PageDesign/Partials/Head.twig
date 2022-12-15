@@ -36,7 +36,7 @@
     {{ add_asset(customFont.regular, 'font', 'preload', {'crossorigin': true}) }}
     @font-face {
         font-family: "Custom-Font";
-        src: url("{{ customFont.regular }}");
+        src: url("{{ customFont.regular }}") format("truetype");
         font-display: optional;
     }
     {% endif %}
@@ -44,7 +44,7 @@
     {{ add_asset(customFont.bold, 'font', 'preload', {'crossorigin': true}) }}
     @font-face {
         font-family: "Custom-Font";
-        src: url("{{ customFont.bold }}");
+        src: url("{{ customFont.bold }}") format("truetype");
         font-display: optional;
         font-weight: bold;
     }
@@ -53,7 +53,7 @@
     {{ add_asset(customFont.italic, 'font', 'preload', {'crossorigin': true}) }}
     @font-face {
         font-family: "Custom-Font";
-        src: url("{{ customFont.italic }}");
+        src: url("{{ customFont.italic }}") format("truetype");
         font-display: optional;
         font-style: italic;
     }
@@ -62,7 +62,7 @@
     {{ add_asset(customFont.boldItalic, 'font', 'preload', {'crossorigin': true}) }}
     @font-face {
         font-family: "Custom-Font";
-        src: url("{{ customFont.boldItalic }}");
+        src: url("{{ customFont.boldItalic }}") format("truetype");
         font-display: optional;
         font-weight: bold;
         font-style: italic;
