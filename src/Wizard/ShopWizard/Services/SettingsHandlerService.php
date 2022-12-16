@@ -25,14 +25,14 @@ class SettingsHandlerService
     }
 
     /**
-     * @param $plentyId
+     * @param int $plentyId
      * @return array
      */
-    public function getAlreadyPaidShippingCountries($plentyId)
+    public function getAlreadyPaidShippingCountries(int $plentyId): array
     {
         /** @var AlreadyPaidShippingCountryRepository $shippingcountryRepository */
-        $shippingcountryRepository = pluginApp(AlreadyPaidShippingCountryRepository::class);
-        return $shippingcountryRepository->getShippingCountryIds($plentyId);
+        $shippingCountryRepository = pluginApp(AlreadyPaidShippingCountryRepository::class);
+        return $shippingCountryRepository->getShippingCountryIds($plentyId);
     }
 
 }

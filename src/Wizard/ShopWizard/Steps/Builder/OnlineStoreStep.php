@@ -562,9 +562,8 @@ class OnlineStoreStep extends Step
             $countryRepository = pluginApp(CountryRepositoryContract::class);
             $countries = $countryRepository->getCountriesList(true, ['names']);
             $this->deliveryCountries = [];
-            $systemLanguage = $this->getLanguage();
             foreach($countries as $country) {
-                $name = $country->names->where('lang', $systemLanguage)->first()->name;
+                $name = $country->names->where('lang', $this->language)->first()->name ?? $country->names->first()->name;
                 $this->deliveryCountries[] = [
                     'caption' => $name ?? $country->name,
                     'value' => $country->id
@@ -572,17 +571,5 @@ class OnlineStoreStep extends Step
             }
         }
         return $this->deliveryCountries;
-    }
-
-    /**
-     * @return string
-     */
-    private function getLanguage()
-    {
-        if ($this->language === null) {
-            $this->language =  \Locale::getDefault();
-        }
-
-        return $this->language;
     }
 }

@@ -16,10 +16,10 @@ class AlreadyPaidShippingCountryRepository implements AlreadyPaidShippingCountry
     use Loggable;
 
     /**
-     * @param $plentyId
+     * @param int $plentyId
      * @return bool
      */
-    public function deleteShippingCountries(int $plentyId)
+    public function deleteShippingCountries(int $plentyId): bool
     {
         try {
             $database = pluginApp(DataBase::class);
@@ -42,7 +42,7 @@ class AlreadyPaidShippingCountryRepository implements AlreadyPaidShippingCountry
      * @param $shippingCountryIds
      * @return bool
      */
-    public function saveShippingCountries(int $plentyId, array $shippingCountryIds)
+    public function saveShippingCountries(int $plentyId, array $shippingCountryIds): bool
     {
         try {
             $database = pluginApp(DataBase::class);
@@ -63,7 +63,11 @@ class AlreadyPaidShippingCountryRepository implements AlreadyPaidShippingCountry
         return false;
     }
 
-    public function getShippingCountryIds(int $plentyId)
+    /**
+     * @param int $plentyId
+     * @return array
+     */
+    public function getShippingCountryIds(int $plentyId): array
     {
         $ids = [];
         try {
