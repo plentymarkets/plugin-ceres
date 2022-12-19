@@ -1,5 +1,11 @@
 # Release Notes for plentyShop LTS
 
+## v5.0.57 (2022-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.56...5.0.57" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Added
+
+- In the assistant, the placeholder payment method "Already paid" can now be activated for orders with a shopping cart total of zero.
+
 ## v5.0.56 (2022-11-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.55...5.0.56" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO

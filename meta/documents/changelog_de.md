@@ -1,5 +1,11 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.57 (2022-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.56...5.0.57" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Im Assistenten kann nun die Platzhalter-Zahlungsart "Bereits bezahlt" für Bestellungen mit einer Warenkorbsumme von null aktiviert werden.
+
 ## v5.0.56 (2022-11-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.55...5.0.56" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
