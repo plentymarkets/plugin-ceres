@@ -498,16 +498,21 @@ class OnlineStoreStep extends Step
 
     private function buildAlreadyPaidSettings()
     {
+        $countriesListForm = $this->getCountriesListForm();
+        $defaultValues = array_map(function($country) {
+            return $country['value'];
+        }, $countriesListForm);
+
         return [
             "title" => 'Wizard.alreadyPaidShippingCountriesTitle',
             "description" => 'Wizard.alreadyPaidShippingCountriesDescription',
             "form" => [
                 "onlineStore_alreadyPaidShippingCountries" => [
                     'type' => 'checkboxGroup',
-                    'defaultValue' => [],
+                    'defaultValue' => $defaultValues,
                     'options' => [
                         'name' => 'Wizard.alreadyPaidShippingCountries',
-                        'checkboxValues' => $this->getCountriesListForm(),
+                        'checkboxValues' => $countriesListForm,
                     ],
                 ],
                 "onlineStore_alreadyPaidIconUrl" => [
