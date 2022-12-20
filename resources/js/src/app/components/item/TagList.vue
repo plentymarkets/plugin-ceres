@@ -98,8 +98,13 @@ export default {
             return {};
         },
         getTagLink(tag)
-        {
-            return "/" + encodeURIComponent(tag.names.name.toLowerCase()) + "_t" + tag.id;
+        { 
+            let url = "/" + encodeURIComponent(tag.names.name.toLowerCase().trim()) + "_t" + tag.id;
+            if (App.defaultLanguage != App.language)
+            {
+                url = "/" + App.language + url;
+            }
+            return url;
         }
     }
 }
