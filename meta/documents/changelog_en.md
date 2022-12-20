@@ -2,9 +2,14 @@
 
 ## v5.0.57 (2022-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.56...5.0.57" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
+### TODO
+
+- In case you want to activate the placeholder payment method “Already paid” for specific orders that have for example been paid via a multipurpose coupon, you need to activate them for your delivery countries in the plentyShop LTS assistant and afterwards link them to the customer classes you want them to be available for. Further information can be found on the <a href="https://knowledge.plentymarkets.com/en-gb/manual/main/online-store/setting-up-ceres.html" target="_blank">plentyShop LTS manual page</a>.
+
+
 ### Added
 
-- In the assistant, the placeholder payment method "Already paid" can now be activated for orders with a shopping cart total of zero.
+- In the plentyShop LTS assistant, you can now activate the placeholder payment method “Already paid” for orders with a shopping cart sum of 0.
 
 ## v5.0.56 (2022-11-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.55...5.0.56" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
