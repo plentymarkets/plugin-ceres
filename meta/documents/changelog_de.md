@@ -4,11 +4,11 @@
 
 ### TODO
 
-- Falls du die Platzhalter-Zahlungsart "Bereits bezahlt" für Bestellungen die z.B. durch einen Mehrzweckgutschein bezahlt wurden aktivieren willst musst du sie im plentyShop LTS Assistenten für deine Lieferländer aktivieren und danach mit Kundenklassen verbinden für die du sie zur Verfügung stellen willst. Weitere Informationen findest du auf der <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html" target="_blank">Handbuchseite zu plentyShop LTS</a>.
+- Falls du die Platzhalter-Zahlungsart "Bereits bezahlt" für Bestellungen aktivieren möchtest, die z.B. durch einen Mehrzweckgutschein bezahlt wurden, musst du sie im plentyShop LTS Assistenten für deine Lieferländer aktivieren und anschließend mit den Kundenklassen verbinden, für die du sie zur Verfügung stellen möchtest. Weitere Informationen findest du auf der <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html" target="_blank">Handbuchseite zum plentyShop LTS</a>.
 
 ### Hinzugefügt
 
-- Im Assistenten kann nun die Platzhalter-Zahlungsart "Bereits bezahlt" für Bestellungen mit einer Warenkorbsumme von 0 aktiviert werden.
+- Im plentyShop LTS Assistenten kann nun die Platzhalter-Zahlungsart "Bereits bezahlt" für Bestellungen mit einer Warenkorbsumme von 0 aktiviert werden.
 
 ## v5.0.56 (2022-11-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.55...5.0.56" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
