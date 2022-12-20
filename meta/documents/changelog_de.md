@@ -4,7 +4,7 @@
 
 ### TODO
 
-- Falls du die Platzhalter-Zahlungsart "Bereits bezahlt" für Bestellungen aktivieren möchtest, die z.B. durch einen Mehrzweckgutschein bezahlt wurden, musst du sie im plentyShop LTS Assistenten für deine Lieferländer aktivieren und anschließend mit den Kundenklassen verbinden, für die du sie zur Verfügung stellen möchtest. Weitere Informationen findest du auf der <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html" target="_blank">Handbuchseite zum plentyShop LTS</a>.
+- Falls du die Platzhalter-Zahlungsart "Bereits bezahlt" für Bestellungen aktivieren möchtest, die z.B. durch einen Mehrzweckgutschein bezahlt wurden, musst du sie im plentyShop LTS Assistenten für deine Lieferländer aktivieren und anschließend mit den Kundenklassen verbinden, für die du sie zur Verfügung stellen möchtest. Weitere Informationen findest du auf der <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html#lts-assistent-zahlungsart" target="_blank">Handbuchseite zum plentyShop LTS</a>.
 
 ### Hinzugefügt
 

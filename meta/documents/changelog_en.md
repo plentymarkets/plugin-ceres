@@ -4,7 +4,7 @@
 
 ### TODO
 
-- In case you want to activate the placeholder payment method “Already paid” for specific orders that have for example been paid via a multipurpose coupon, you need to activate them for your delivery countries in the plentyShop LTS assistant and afterwards link them to the customer classes you want them to be available for. Further information can be found on the <a href="https://knowledge.plentymarkets.com/en-gb/manual/main/online-store/setting-up-ceres.html" target="_blank">plentyShop LTS manual page</a>.
+- In case you want to activate the placeholder payment method “Already paid” for specific orders that have for example been paid via a multipurpose coupon, you need to activate them for your delivery countries in the plentyShop LTS assistant and afterwards link them to the customer classes you want them to be available for. Further information can be found on the <a href="https://knowledge.plentymarkets.com/en-gb/manual/main/online-store/setting-up-ceres.html#295" target="_blank">plentyShop LTS manual page</a>.
 
 
 ### Added
