@@ -99,7 +99,7 @@ export default {
         },
         getTagLink(tag)
         { 
-            let url = "/" + encodeURIComponent(tag.names.name.toLowerCase().trim()) + "_t" + tag.id;
+            let url = "/" + encodeURIComponent(tag.names.name.toLowerCase().replace(/\s+/g,'_')) + "_t" + tag.id;
             if (App.defaultLanguage != App.language)
             {
                 url = "/" + App.language + url;
