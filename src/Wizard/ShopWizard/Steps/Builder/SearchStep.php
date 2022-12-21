@@ -109,7 +109,13 @@ class SearchStep extends Step
         /** @var SearchSettings $searchSettings */
         $searchSettings = pluginApp(SearchSettings::class);
 
-        $searchFieldsOptions = $searchSettings->getDefaultFields(true);
+        $searchFieldsOptions = [];
+
+        foreach ($searchSettings->getDefaultFields() as $field) {
+            $fieldName = $field['key'];
+            $searchFieldsOptions['searchField'.ucfirst($fieldName)] = $fieldName;
+        }
+
         $searchFieldsOptionsList = StepHelper::generateTranslatedListBoxValues($searchFieldsOptions);
 
         if (is_array($searchFieldsOptions) && count($searchFieldsOptions)) {

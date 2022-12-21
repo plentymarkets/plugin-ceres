@@ -20,6 +20,7 @@ class SearchConfig
         "searchFieldCategories"       => "category",
         "searchFieldKeywords"         => "keywords",
         "searchFieldFacets"           => "facet",
+        "searchFieldName"             => "name",
         "searchFieldName1"            => "name1",
         "searchFieldName2"            => "name2",
         "searchFieldName3"            => "name3",
