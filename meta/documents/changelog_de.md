@@ -11,8 +11,8 @@
 - Im Assistenten kann nun die Platzhalter-Zahlungsart "Bereits bezahlt" für Bestellungen mit einer Warenkorbsumme von null aktiviert werden.
 
 ### Behoben
-- Die Tag Url berücksichtigt jetzt die ausgewählte Shop-Sprache.
-- Die Tag Url enthält nun keine Leerzeichen mehr.
+- Tag-URLs berücksichtigen jetzt die Shop-Sprache.
+- Tag-URLs die aus mehreren Wörtern bestehen enthalten nun keine Leerzeichen mehr.
 
 ### Angepasste Templates
 

@@ -12,8 +12,8 @@
 
 ### Fixed
 
-- The tag url now takes the selected shop language into account.
-- The tag url no longer contains spaces.
+- Tag URLs now consider the store language.
+- Tag URLs that consist of multiple words no longer contain spaces.
 
 ### Changed templates
 
