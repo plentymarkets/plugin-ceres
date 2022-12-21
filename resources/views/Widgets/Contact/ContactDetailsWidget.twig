@@ -34,7 +34,7 @@
             {% if phone | trim is not empty %}
                 <p class="my-0">
                     <i class="fa fa-fw fa-phone mr-2" aria-hidden="true"></i>
-                    <a class="text-dark text-appearance" href="tel:{{ phone | replace('/[^0-9+]/',' ') | trimNewlines }}">
+                    <a class="text-dark text-appearance" href="tel:{{ phone | replace('/[^0-9+]/',' ') | trimNewlines | replace('/\s+/g','-') | replace('/[()]*$/', '') }}">
                         <span class="d-inline-block">{{ phone }}</span>
                     </a>
                 </p>
@@ -43,7 +43,7 @@
             {% if fax | trim is not empty %}
                 <p class="my-0">
                     <i class="fa fa-fw fa-fax mr-2" aria-hidden="true"></i>
-                    <a class="text-dark text-appearance" href="fax:{{ fax | replace('/[^0-9+]/',' ') | trimNewlines }}">
+                    <a class="text-dark text-appearance" href="fax:{{ fax | replace('/[^0-9+]/',' ') | trimNewlines | replace('/\s+/g','-') | replace('/[()]*$/', '') }}">
                       <span class="d-inline-block">{{ fax }}</span>
                     </a>
                 </p>
