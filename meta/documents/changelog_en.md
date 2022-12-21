@@ -2,9 +2,23 @@
 
 ## v5.0.57 (2022-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.56...5.0.57" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
+### TODO
+
+- The ShopBuilder contents for order confirmation pages must be updated in the **CMS » ShopBuilder** menu via the **Regenerate contents** button.
+
 ### Added
 
 - In the assistant, the placeholder payment method "Already paid" can now be activated for orders with a shopping cart total of zero.
+
+### Fixed
+
+- Tag URLs now consider the store language.
+- Tag URLs that consist of multiple words no longer contain spaces.
+
+### Changed templates
+
+- In Ceres 5.0.57 we made changes to template files which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
+- [resources/views/Category/Item/CategoryItem.twig](https://github.com/plentymarkets/plugin-ceres/pull/3372/files#diff-6e3fe08ffe8086b5176c1c0451cb0c0034b99195843630994e5e79347f8d1158)
 
 ## v5.0.56 (2022-11-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.55...5.0.56" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
