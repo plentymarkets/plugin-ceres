@@ -2,7 +2,7 @@
 context("already paid payment", () =>
 {
     const ALREADY_PAID_PAYMENT = "Bereits bezahlt";
-    const VOUCHER_CODE = "2ZSX7H"
+    const VOUCHER_CODE = "4CDSQS"
     const ZERO_PRICE = "0,00EUR"
 
     it("should enter voucher and show already paid payment option", () =>
