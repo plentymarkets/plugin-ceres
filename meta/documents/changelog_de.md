@@ -2,9 +2,23 @@
 
 ## v5.0.57 (2022-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.56...5.0.57" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
+### ToDo
+
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+
 ### Hinzugefügt
 
 - Im Assistenten kann nun die Platzhalter-Zahlungsart "Bereits bezahlt" für Bestellungen mit einer Warenkorbsumme von null aktiviert werden.
+
+### Behoben
+- Die Tag Url berücksichtigt jetzt die ausgewählte Shop-Sprache.
+- Die Tag Url enthält nun keine Leerzeichen mehr.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.57 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+
+- [resources/views/Category/Item/CategoryItem.twig](https://github.com/plentymarkets/plugin-ceres/pull/3372/files#diff-6e3fe08ffe8086b5176c1c0451cb0c0034b99195843630994e5e79347f8d1158)
 
 ## v5.0.56 (2022-11-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.55...5.0.56" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
