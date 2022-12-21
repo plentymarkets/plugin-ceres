@@ -12,7 +12,7 @@
 
 ### Behoben
 - Tag-URLs berücksichtigen jetzt die Shop-Sprache.
-- Tag-URLs die aus mehreren Wörtern bestehen enthalten nun keine Leerzeichen mehr.
+- Tag-URLs, die aus mehreren Wörtern bestehen, enthalten keine Leerzeichen mehr.
 
 ### Angepasste Templates
 
