@@ -4,7 +4,6 @@ namespace Ceres\Wizard\ShopWizard\Steps\Builder;
 
 use Ceres\Wizard\ShopWizard\Config\SearchConfig;
 use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
-use Plenty\Modules\Item\Search\Models\SearchSettings;
 
 /**
  * Class SearchStep
@@ -106,16 +105,7 @@ class SearchStep extends Step
     {
         $formFields = [];
 
-        /** @var SearchSettings $searchSettings */
-        $searchSettings = pluginApp(SearchSettings::class);
-
-        $searchFieldsOptions = [];
-
-        foreach ($searchSettings->getDefaultFields() as $field) {
-            $fieldName = $field['key'];
-            $searchFieldsOptions['searchField'.ucfirst($fieldName)] = $fieldName;
-        }
-
+        $searchFieldsOptions     = SearchConfig::getSearchFieldsOptions();
         $searchFieldsOptionsList = StepHelper::generateTranslatedListBoxValues($searchFieldsOptions);
 
         if (is_array($searchFieldsOptions) && count($searchFieldsOptions)) {
