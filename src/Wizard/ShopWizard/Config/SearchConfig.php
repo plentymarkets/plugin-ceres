@@ -104,7 +104,9 @@ class SearchConfig
         /** @var SearchSettings $searchSettings */
         $searchSettings = pluginApp(SearchSettings::class);
 
-        $searchFieldsOptions = [];
+        $searchFieldsOptions = [
+            'searchFieldSelectParameter' => ''
+        ];
 
         foreach ($searchSettings->getDefaultFields() as $field) {
             $fieldName = $field['key'];
