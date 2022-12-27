@@ -54,6 +54,8 @@ function _createQueryString(params)
         }
         else
         {
+            prefix = prefix.replaceAll("+", "%20");
+            params = params.replaceAll("+", "%20");
             result.push(
                 encodeURIComponent(prefix) + "=" + encodeURIComponent(params)
             );
