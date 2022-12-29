@@ -54,8 +54,6 @@ function _createQueryString(params)
         }
         else
         {
-            prefix = prefix.replaceAll("+", "%20");
-            params = params.replaceAll("+", "%20");
             result.push(
                 encodeURIComponent(prefix) + "=" + encodeURIComponent(params)
             );
@@ -80,6 +78,9 @@ export function getUrlParams(urlParams)
     {
         urlParams = document.location.search;
     }
+
+    // decodeURIComponent does not decode raw + signs to spaces. This leads to ambiguous URL decoding, if not done manually.
+    urlParams = urlParams.replaceAll("+", "%20");
 
     const regex = /[\\?&]([^=&#]+)=([^&#]*)/gm;
 

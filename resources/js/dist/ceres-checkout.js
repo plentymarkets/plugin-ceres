@@ -80683,8 +80683,6 @@ function _createQueryString(params) {
         }
       }
     } else {
-      prefix = prefix.replaceAll("+", "%20");
-      params = params.replaceAll("+", "%20");
       result.push(encodeURIComponent(prefix) + "=" + encodeURIComponent(params));
     }
 
@@ -80703,8 +80701,10 @@ function _createQueryString(params) {
 function getUrlParams(urlParams) {
   if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_18__["isNullOrUndefined"])(urlParams) && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_18__["isDefined"])(document.location.search)) {
     urlParams = document.location.search;
-  }
+  } // decodeURIComponent does not decode raw + signs to spaces. This leads to ambiguous URL decoding, if not done manually.
 
+
+  urlParams = urlParams.replaceAll("+", "%20");
   var regex = /[\\?&]([^=&#]+)=([^&#]*)/gm;
   var result = {};
   var match;
