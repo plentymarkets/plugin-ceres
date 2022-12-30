@@ -2,32 +2,14 @@
 
 namespace Ceres\Wizard\ShopWizard\Config;
 
+use Plenty\Modules\Item\Search\Models\SearchSettings;
+
 /**
  * Class SearchConfig
  * @package Ceres\Wizard\ShopWizard\Config
  */
 class SearchConfig
 {
-    public static $searchFieldsOptions = [
-        "searchFieldSelectParameter"  => "",
-        "searchFieldItemId"           => "itemId",
-        "searchFieldVariationId"      => "variationId",
-        "searchFieldVariationNumber"  => "variationNumber",
-        "searchFieldVariationName"    => "variationName",
-        "searchFieldManufacturer"     => "manufacturer",
-        "searchFieldModel"            => "model",
-        "searchFieldBarcodes"         => "barcode",
-        "searchFieldCategories"       => "category",
-        "searchFieldKeywords"         => "keywords",
-        "searchFieldFacets"           => "facet",
-        "searchFieldName1"            => "name1",
-        "searchFieldName2"            => "name2",
-        "searchFieldName3"            => "name3",
-        "searchFieldDescription"      => "description",
-        "searchFieldShortDescription" => "shortDescription",
-        "searchFieldTechnicalData"    => "technicalData",
-    ];
-
     private static $sortingSearchDefaultOptions = [
         "sortDataItemScore"              => "item.score",
         "sortDataRecommendedSorting"     => "default.recommended_sorting",
@@ -119,7 +101,19 @@ class SearchConfig
      */
     public static function getSearchFieldsOptions()
     {
-        return self::$searchFieldsOptions;
+        /** @var SearchSettings $searchSettings */
+        $searchSettings = pluginApp(SearchSettings::class);
+
+        $searchFieldsOptions = [
+            'searchFieldSelectParameter' => ''
+        ];
+
+        foreach ($searchSettings->getDefaultFields() as $field) {
+            $fieldName = $field['key'];
+            $searchFieldsOptions['searchField'.ucfirst($fieldName)] = $fieldName;
+        }
+
+        return $searchFieldsOptions;
     }
 
     /**
