@@ -79,6 +79,9 @@ export function getUrlParams(urlParams)
         urlParams = document.location.search;
     }
 
+    // decodeURIComponent does not decode raw + signs to spaces. This leads to ambiguous URL decoding, if not done manually.
+    urlParams = urlParams.replaceAll("+", "%20");
+
     const regex = /[\\?&]([^=&#]+)=([^&#]*)/gm;
 
     let result = {};
