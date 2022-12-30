@@ -10,6 +10,11 @@
 
 - Im plentyShop LTS Assistenten kann nun die Platzhalter-Zahlungsart "Bereits bezahlt" für Bestellungen mit einer Warenkorbsumme von 0 aktiviert werden.
 
+### Behoben
+
+- Bei bestimmten Bedingungen kam es bei der Kodierung von Plus-Zeichen in den Query-Parametern zu unerwarteten Verhalten. Dies wurde behoben.
+
+
 ## v5.0.56 (2022-11-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.55...5.0.56" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
