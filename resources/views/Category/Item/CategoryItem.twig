@@ -117,7 +117,7 @@
                                     <category-item :decimal-count="{{ ceresConfig.item.storeSpecial }}">
                                         <template #before-prices>{{ LayoutContainer.show("Ceres::CategoryItem.BeforePrices", item.data) }}</template>
                                         <template #after-prices>{{ LayoutContainer.show("Ceres::CategoryItem.AfterPrices", item.data) }}</template>
-                                        <template #item-data>{{ item.data | json_encode | e }}</template>
+                                        <template #item-data>{{ item.data | json_encode | e('html_attr') }}</template>
 
                                         <a href="{{ item.data | itemURL }}" class="small">
                                             <i class="fa fa-image"></i>
