@@ -4,14 +4,16 @@
 
 ### TODO
 
+- In case you want to activate the placeholder payment method “Already paid” for specific orders that have for example been paid via a multipurpose coupon, you need to activate them for your delivery countries in the plentyShop LTS assistant and afterwards link them to the customer classes you want them to be available for. Further information can be found on the <a href="https://knowledge.plentymarkets.com/en-gb/manual/main/online-store/setting-up-ceres.html#295" target="_blank">plentyShop LTS manual page</a>.
 - The ShopBuilder contents for order confirmation pages must be updated in the **CMS » ShopBuilder** menu via the **Regenerate contents** button.
 
 ### Added
 
-- In the assistant, the placeholder payment method "Already paid" can now be activated for orders with a shopping cart total of zero.
+- In the plentyShop LTS assistant, you can now activate the placeholder payment method “Already paid” for orders with a shopping cart sum of 0.
 
 ### Fixed
 
+- Under special circumstances, plus signs were incorrectly encoded which lead to unwanted behaviour. This has been fixed.
 - Tag URLs now consider the store language.
 - Tag URLs that consist of multiple words no longer contain spaces.
 
