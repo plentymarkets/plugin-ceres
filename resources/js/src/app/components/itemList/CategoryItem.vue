@@ -234,11 +234,22 @@ export default {
 
         itemGraduatedPriceisCheapestSorting()
         {
+          console.log("=== itemGraduatedPriceisCheapestSorting ===");
+          console.log(this.item.item);
+          console.log("salableVariationCount: ", this.item.item.salableVariationCount > 1);
+          console.log("isCheapestSorting: ", !!this.$ceres.isCheapestSorting)
+
             return !!this.item.item && this.item.item.salableVariationCount > 1 && !!this.$ceres.isCheapestSorting;
         },
 
         itemGraduatedPricesalableVariationCount()
         {
+          console.log("=== itemGraduatedPricesalableVariationCount ===");
+          console.log(this.item.item)
+          console.log("salableVariationCount: ", this.item.item.salableVariationCount == 1);
+          console.log("graduatedPrices.length: ", this.item.prices.graduatedPrices.length > 1);
+          console.log("enableGraduatedPrices: ", App.config.item.enableGraduatedPrices);
+
             return !!this.item.item && this.item.item.salableVariationCount == 1 && this.item.prices.graduatedPrices.length > 1 && App.config.item.enableGraduatedPrices;
         },
 
