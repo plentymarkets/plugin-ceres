@@ -1,3 +1,5 @@
+{% import "Ceres::Customer.Macros.SanitizePhoneNumber" as sanitize_phone_number %}
+
 {% set name =           config("system.company.name") %}
 {% set ceo =            config("system.company.ceo") %}
 {% set city =           config("system.company.city") %}
