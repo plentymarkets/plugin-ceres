@@ -7,7 +7,7 @@
 {% set inlineSpacings   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set spacingClasses   = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
-{% set showRejectAll    = widget.settings.showRejectAll.mobile | default(true) %}
+{% set showRejectAll    = widget.settings.showRejectAll.mobile %}
 
 {% if showRejectAll %}
     {% set buttonOrder = widget.settings.buttonOrder.mobile %}
