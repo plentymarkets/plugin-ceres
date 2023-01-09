@@ -22,7 +22,10 @@ module.exports = env =>
                 vue: "vue/dist/vue" + (env.prod ? ".min" : "") + ".js"
             }
         },
-        devtool: "source-map",
+        cache: {
+            type: "filesystem"
+        },
+        devtool: "eval-source-map",
         module: {
             rules: [
                 {

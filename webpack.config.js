@@ -38,8 +38,8 @@ module.exports = [
         ServerConfig("production"),
         {
             name: "server",
-            entry: "./resources/js/src/entry-server.js",
-        },
+            entry: "./resources/js/src/entry-server.js"
+        }
     ),
     merge(
         ServerConfig("development"),
@@ -58,7 +58,7 @@ module.exports = [
                 base: "./resources/scss/base.scss",
                 checkout: "./resources/scss/checkout.scss",
                 icons: "./resources/scss/icons.scss",
-                shopbuilder: "./resources/scss/shopbuilder.scss",
+                shopbuilder: "./resources/scss/shopbuilder.scss"
             },
             performance: {
                 hints: false,
@@ -76,8 +76,7 @@ module.exports = [
                 checkout: "./resources/scss/checkout.scss",
                 icons: "./resources/scss/icons.scss",
                 shopbuilder: "./resources/scss/shopbuilder.scss"
-            },
-
+            }
         }
     )
 ];

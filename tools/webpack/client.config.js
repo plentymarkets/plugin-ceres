@@ -1,19 +1,23 @@
 const path = require("path");
 const WebpackRequireFrom = require("webpack-require-from");
 const ESLintPlugin = require("eslint-webpack-plugin");
-const { merge } = require('webpack-merge');
-const CommonConfig = require('./common.config');
+const { merge } = require("webpack-merge");
+const CommonConfig = require("./common.config");
 
-module.exports = (mode) => {
+module.exports = (mode) =>
+{
     return merge(
         CommonConfig(mode),
         {
+            output: {
+                chunkFilename: "chunks/ceres-client-[name]"+ (mode === "production" ? ".min" : "") + ".js"
+            },
             plugins: [
                 new ESLintPlugin({
-                    extensions: ['js'],
+                    extensions: ["js"],
                     // extensions: ['js', 'vue'],
                     context: path.resolve(__dirname, "../../resources/js/src/"),
-                    exclude: '/node_modules/*',
+                    exclude: "/node_modules/*",
                     fix: true,
                     cache: true
                 }),
@@ -23,4 +27,4 @@ module.exports = (mode) => {
             ]
         }
     );
-}
+};

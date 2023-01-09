@@ -78,6 +78,7 @@ export function initServerStore(store)
 // TODO: add code comment
 export function initClientListeners(store)
 {
+    console.log("hello webpack!");
     ApiService.listen("LocalizationChanged", data =>
     {
         store.commit("setShippingCountries", data.localization.activeShippingCountries);
