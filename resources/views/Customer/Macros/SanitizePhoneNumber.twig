@@ -1,7 +1,7 @@
 {% macro sanitize_phone_number(phoneNumber) %}
-    {% set phoneNumber = phoneNumber | replace(/[^0-9+]/,' ')  %}
+    {% set phoneNumber = phoneNumber | replace('/[^0-9+]/',' ')  %}
     {% set phoneNumber = phoneNumber | trimNewlines %}
-    {% set phoneNumber = phoneNumber | replace(/\s+/g,'-')  %}
-    {% set phoneNumber = phoneNumber | replace(/[()]*$/, '')  %}
+    {% set phoneNumber = phoneNumber | replace('/\s+/g','-')  %}
+    {% set phoneNumber = phoneNumber | replace('/[()]*$/', '')  %}
     {{ phoneNumber }}
 {% endmacro %}
