@@ -1,4 +1,4 @@
-{% import "Ceres::Customer.Macros.SanitizePhoneNumber" as sanitize_phone_number %}
+{% import "Ceres::Customer.Macros.SanitizePhoneNumber" as PhoneMacro %}
 
 {% set name =           config("system.company.name") %}
 {% set ceo =            config("system.company.ceo") %}
@@ -53,7 +53,7 @@
     {% endif %}
     {% if "fon" in showData or showData == 'all' %}
 		<p class="my-0">
-            <a class="text-dark" href="tel:{{ sanitize_phone_number(fon) }}">
+            <a class="text-dark" href="tel:{{ PhoneMacro.sanitize_phone_number(fon) }}">
                 <i class="fa fa-fw fa-phone mr-2" aria-hidden="true"></i>
                 <span class="d-inline-block">{{ fon }}</span>
             </a>
@@ -62,7 +62,7 @@
 
     {% if "hotline" in showData or showData == 'all' %}
 		<p class="my-0">
-            <a class="text-dark" href="tel:{{ sanitize_phone_number(hotline) }}">
+            <a class="text-dark" href="tel:{{ PhoneMacro.sanitize_phone_number(hotline) }}">
                 <i class="fa fa-fw fa-phone mr-2" aria-hidden="true"></i>
                 <span class="d-inline-block">{{ hotline }}</span>
             </a>

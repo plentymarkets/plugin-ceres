@@ -1,6 +1,6 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
-{% import "Ceres::Customer.Macros.SanitizePhoneNumber" as sanitize_phone_number %}
+{% import "Ceres::Customer.Macros.SanitizePhoneNumber" as PhoneMacro %}
 
 
 {% set emptyInlineEditingContent = "<p><br></p>" %}
@@ -36,7 +36,7 @@
             {% if phone | trim is not empty %}
                 <p class="my-0">
                     <i class="fa fa-fw fa-phone mr-2" aria-hidden="true"></i>
-                    <a class="text-dark text-appearance" href="tel:{{ sanitize_phone_number(phone) }}">
+                    <a class="text-dark text-appearance" href="tel:{{ PhoneMacro.sanitize_phone_number(phone) }}">
                         <span class="d-inline-block">{{ phone }}</span>
                     </a>
                 </p>
@@ -45,7 +45,7 @@
             {% if fax | trim is not empty %}
                 <p class="my-0">
                     <i class="fa fa-fw fa-fax mr-2" aria-hidden="true"></i>
-                    <a class="text-dark text-appearance" href="fax:{{ sanitize_phone_number(fax) }}">
+                    <a class="text-dark text-appearance" href="fax:{{ PhoneMacro.sanitize_phone_number(fax) }}">
                       <span class="d-inline-block">{{ fax }}</span>
                     </a>
                 </p>
