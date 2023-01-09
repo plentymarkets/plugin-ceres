@@ -1,5 +1,82 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.57 (2022-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.56...5.0.57" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Falls du die Platzhalter-Zahlungsart "Bereits bezahlt" für Bestellungen aktivieren möchtest, die z.B. durch einen Mehrzweckgutschein bezahlt wurden, musst du sie im plentyShop LTS Assistenten für deine Lieferländer aktivieren und anschließend mit den Kundenklassen verbinden, für die du sie zur Verfügung stellen möchtest. Weitere Informationen findest du auf der <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html#lts-assistent-zahlungsart" target="_blank">Handbuchseite zum plentyShop LTS</a>.
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden. 
+
+### Hinzugefügt
+
+- Im plentyShop LTS Assistenten kann nun die Platzhalter-Zahlungsart "Bereits bezahlt" für Bestellungen mit einer Warenkorbsumme von 0 aktiviert werden.
+
+### Behoben
+- Bei bestimmten Bedingungen kam es bei der Kodierung von Plus-Zeichen in den Query-Parametern zu unerwarteten Verhalten. Dies wurde behoben.
+- Tag-URLs berücksichtigen jetzt die Shop-Sprache.
+- Tag-URLs, die aus mehreren Wörtern bestehen, enthalten keine Leerzeichen mehr.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.57 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- [resources/views/Category/Item/CategoryItem.twig](https://github.com/plentymarkets/plugin-ceres/pull/3372/files#diff-6e3fe08ffe8086b5176c1c0451cb0c0034b99195843630994e5e79347f8d1158)
+
+## v5.0.56 (2022-11-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.55...5.0.56" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Die ShopBuilder-Inhalte für Bestellbestätigungsseiten müssen im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+- Falls du Gastkund:innen die Möglichkeit geben willst, einen neuen Auftragsbestätigungslink anzufordern, musst du dafür eine neue E-Mail-Vorlage erstellen und verknüpfen. Weitere Informationen findest du auf der <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/shop-builder.html#softlogin" target="_blank">ShopBuilder-Handbuchseite</a>.
+
+### Hinzugefügt
+
+- Die Softlogin-Funktionalität wurde überarbeitet. Falls die Gültigkeit des Auftragsbestätigungslinks im PlentyShop LTS-Assistenten auf **Immer** gesetzt ist, können Gastkund:innen nun nach 90 Tagen einen neuen Auftragsbestätigungslink anfordern, indem sie den ursprünglichen Auftragsbestätigungslink öffnen. Kund:innen erhalten den neuen Auftragsbestätigungslink per E-Mail. Bitte beachte auch das TODO. Weitere Informationen findest du auf der <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/shop-builder.html#softlogin" target="_blank">ShopBuilder-Handbuchseite</a>.
+- Für die Anrede bei neuen Adressen in der Kaufabwicklung oder im Mein-Konto-Bereich kann jetzt die Option **Bitte auswählen** als Vorauswahl festgelegt werden. Bei den ShopBuilder-Widgets für Rechnungs- und Lieferadressen kannst du die Vorauswahl über die Einstellung **Vorausgewählte Anrede** in den Widget-Einstellungen steuern. Falls du keine ShopBuilder-Seiten verwendest, kannst du die Vorauswahl der Anrede über die Einstellung **Vorausgewählte Anrede** im Tab **Kaufabwicklung und Mein Konto** der plentyShop LTS-Einstellungen steuern.
+
+### Geändert
+
+- Wenn ein EU-Land als Lieferland im plentyShop ausgewählt werden kann, stehen jetzt alle EU-Länder für die Rechnungsadresse zur Verfügung. Durch diese Änderung erfüllt plentyShop LTS die Geoblocking-Veordnung VO EU Nr. 2018/302.
+
+### Behoben
+
+- In Version 5.0.55 wurden `aria-label` für die Seitennummerierung auf Artikelkategorieseiten verbaut. Bei dieser Änderung kam es zu einem Fehler, der nun behoben wurde.
+- Auf Auftragsbestätigungsseiten, die über den ShopBuilder erstellt wurden, wurde das voraussichtliche Versanddatum nicht im korrekten Format angezeigt. Dies wurde behoben.
+- Das Skript zum Kompilieren von SCSS-Dateien (`bundleSass.js`) entfernt jetzt alte Dateien aus dem Zielordner. Durch diese Anpassungen werden einige Import-Fehler beim Bereitstellen von Plugins behoben.
+- Bestehende Konfigurationsvorschauen des plentyShop LTS-Assistenten werden jetzt beim Kopieren eines Plugin-Sets in das neue Plugin-Set übernommen. Durch einen Fehler wurden zuvor keine Kacheln für die Assistentenkonfigurationen in der Konfigurationsübersicht des plentyShop LTS-Assistenten angezeigt.
+- Es wurden fehlende Übersetzungsschlüssel ergänzt, die nur in den Sprachen Deutsch und Englisch verfügbar waren.
+- Für ShopBuilder-Inhalte vom Typ "Artikelsuchergebnis" wurde die Sortieroption **Relevanz** für das Widget **Artikelsortierung** hinzugefügt.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.56 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- [resources/views/Category/Item/Partials/Pagination.twig](https://github.com/plentymarkets/plugin-ceres/pull/3340/files#diff-1b8d2c7ce7416f660f89d11ad8e368be614c2b98efc30526e74286c7f180c3b8)
+- [resources/views/Widgets/OrderConfirmation/OrderDataWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3339/files#diff-82affb09026a21fd94995e057ae7214f6751cf84dfed718216f4760865567c33)
+
+## v5.0.55 (2022-09-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.54...5.0.55" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Im Schritt **SEO** des plentyShop LTS-Assistenten kann nun für Artikelzustände in den strukturierten Daten ein Mapping auf Werte von schema.org gesetzt werden. Bitte prüfe, ob die Standardeinstellungen des Mappings ausreichen und passe es gegebenenfalls an.
+
+### Neu
+
+- In den Plugin-Einstellungen und im Schritt **SEO** des plentyShop LTS-Assistenten wurde die Möglichkeit geschaffen, die **itemCondition** in den strukturierten Daten im schema.org-Format zu konfigurieren.
+- Für die Seitennummerierung auf Artikelkategorieseiten wurden `aria-label` verbaut, die über das Menü **CMS » Mehrsprachigkeit** angepasst werden können.
+
+### Behoben
+
+- Wenn die Cookiebar viel Text enthielt, konnte sie teilweise aus dem Bildschirm herausragen. Dies wurde behoben. Bei einer großen Menge an Text wird die Cookiebar ab jetzt automatisch scrollbar. 
+- Es wurden überflüssige Leerzeichen in der `OrderPropertyListItem.vue` entfernt.
+- Auf Kategorienseiten wurde für das `og:image` eine falsche Bild-URL ausgewählt. Dies wurde behoben.
+- Artikelnamen, die Buchstaben mit Akzenten enthielten, wurden in Artikellisten-Widgets als HTML-Entitäten erkannt, wenn SSR im System aktiv war. Dies wurde behoben. 
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.55 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- [resources/views/PageDesign/Partials/PageMetadata.twig](https://github.com/plentymarkets/plugin-ceres/pull/3329/files#diff-98be1deb08f271fd2d41c05df5d33c20846032e5b77cb7ba59f615dda20d767f)
+- [resources/views/Category/Item/Partials/Pagination.twig](https://github.com/plentymarkets/plugin-ceres/pull/3325/files#diff-1b8d2c7ce7416f660f89d11ad8e368be614c2b98efc30526e74286c7f180c3b8)
+- [resources/js/src/app/components/itemList/CategoryItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3265/files#diff-4c35af622ef09ba8949eb1c47557e3e6651b088291a0d2e2463c9244007b5516)
+
 ## v5.0.54 (2022-08-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.53...5.0.54" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO

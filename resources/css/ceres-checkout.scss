@@ -10198,6 +10198,11 @@ html.ie {
         right: auto;
         left: 15px;
     }
+
+    .container-max {
+        max-height: 100vh;
+        overflow-y: auto;
+    }
 }
 
 .button-order {

@@ -82,7 +82,7 @@ class ItemSearchPreset implements ContentPreset
     <div class="col-12">
         <h1 class="h2">
             {% if isTag %}
-                {{ trans("Ceres::Template.tagSearchResults", {"searchString": searchString}) }}
+                {{ trans("Ceres::Template.tagSearchResults", {"searchString": searchString|replace({"_": " "}) }) }}
             {% elseif itemCountTotal > 0 and suggestionString | length > 0 %}
                 <p class="text-muted">{{ trans("Ceres::Template.itemSearchNoResults", {"searchString": searchString}) }}</p>
                 <p>

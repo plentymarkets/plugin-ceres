@@ -27,12 +27,18 @@ export function getInvalidFields(form)
 
     $form.find("[data-validate]").each(function(i, elem)
     {
-
         if (!_validateElement($(elem)))
         {
             invalidFormControls.push(elem);
         }
     });
+
+    const salutationSelect = $form.find("[data-testing='salutation-select']");
+
+    if (salutationSelect.length > 0 && !_validateSelect(salutationSelect, ""))
+    {
+        invalidFormControls.push(salutationSelect.parent()[0]);
+    }
 
     return invalidFormControls;
 }
@@ -203,9 +209,10 @@ function _validateGroup($formControl, validationKey, requiredCount)
 
 function _validateSelect($formControl, validationKey)
 {
-    const selectedOption = $formControl.children("option:selected").text();
+    const selectedOptionText = $formControl.children("option:selected").text();
+    const selectedOptionVal = $formControl.children("option:selected").val();
 
-    return $.trim(selectedOption) != "";
+    return $.trim(selectedOptionText) != "" && $.trim(selectedOptionVal) != "please select";
 }
 
 function _validateInput($formControl, validationKey)

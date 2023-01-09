@@ -26,6 +26,7 @@ class SeoStep extends Step
                 $this->generateRobotSettingsSection(),
                 $this->generateRobotsTxtSection(),
                 $this->generateSiteMapSection(),
+                $this->generateItemConditionSection(),
                 $this->generateAvailabilitiesSection(),
                 $this->generateItemMetaTitleSection(),
                 $this->generateBrandMappingSection(),
@@ -75,6 +76,27 @@ class SeoStep extends Step
     /**
      * @return array
      */
+    private function generateItemConditionSection():array
+    {
+        $conditions = [
+            "itemConditionNew",
+            "itemConditionUsed",
+            "itemConditionNewBox",
+            "itemConditionNewLabel",
+            "itemConditionBStock"
+        ];
+
+        return [
+            "title" => "Wizard.conditionsSearchEngines",
+            "description" => "Wizard.conditionsSearchEnginesDescription",
+            "condition" => $this->globalsCondition,
+            "form" => $this->generateConditionsFormFields($conditions)
+        ];
+    }
+
+    /**
+     * @return array
+     */
     private function generateAvailabilitiesSection():array
     {
         $availabilities = [
@@ -96,6 +118,33 @@ class SeoStep extends Step
             "condition" => $this->globalsCondition,
             "form" => $this->generateAvailabilitiesFormFields($availabilities)
         ];
+    }
+
+    /**
+     * @param $conditions
+     *
+     * @return array
+     */
+    private function generateConditionsFormFields($conditions):array
+    {
+        $formFields = [];
+
+        $conditionOptions     = SeoConfig::getConditionOptions();
+        $conditionsListOptions = StepHelper::generateTranslatedListBoxValues($conditionOptions);
+
+        foreach ($conditions as $conditionField) {
+            $fieldKey = "seo_{$conditionField}";
+            $formFields[$fieldKey] = [
+                "type" =>  "select",
+                "defaultValue" => "",
+                "options" => [
+                    "name" => "Wizard.{$conditionField}",
+                    "listBoxValues" => $conditionsListOptions
+                ]
+            ];
+        }
+
+        return $formFields;
     }
 
     /**

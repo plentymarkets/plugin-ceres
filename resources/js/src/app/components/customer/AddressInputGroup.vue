@@ -1130,7 +1130,7 @@ export default {
         onSelectedCountryChanged(shippingCountry)
         {
             this.selectedCountry = shippingCountry;
-            if (this.countryLocaleList.indexOf(shippingCountry.isoCode2) >= 0)
+            if (shippingCountry && this.countryLocaleList.indexOf(shippingCountry.isoCode2) >= 0)
             {
                 this.localeToShow = shippingCountry.isoCode2;
             }

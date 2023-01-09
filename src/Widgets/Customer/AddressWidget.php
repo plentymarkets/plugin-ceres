@@ -48,6 +48,7 @@ class AddressWidget extends BaseWidget
             ->withDefaultValue("male")
             ->withListBoxValues(
                 ValueListFactory::make()
+                    ->addEntry("please select", "Widget.addressDefaultSalutationValuePleaseSelect")
                     ->addEntry("male", "Widget.addressDefaultSalutationValueMale")
                     ->addEntry("female", "Widget.addressDefaultSalutationValueFemale")
                     ->addEntry("diverse", "Widget.addressDefaultSalutationValueDiverse")
@@ -123,7 +124,6 @@ class AddressWidget extends BaseWidget
             ->addEntry($fieldPrefix."email", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."EMail")
             ->addEntry($fieldPrefix."vatNumber", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."VatNumber")
             ->addEntry($fieldPrefix."contactPerson", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."ContactPerson")
-            ->addEntry($fieldPrefix."salutation", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."Salutation")
             ->addEntry($fieldPrefix."title", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."Title");
 
         if($fieldPrefix === 'billing_address.') {

@@ -53,6 +53,11 @@ class CeresMyAccountConfig extends PluginConfig
     public $confirmationLinkExpiration;
 
     /**
+     * @var string $addressDefaultSalutation Preselected Salutation in Webshop Checkout.
+     */
+    public $addressDefaultSalutation;
+
+    /**
      * @inheritDoc
      */
     protected function getPluginName() :string
@@ -72,5 +77,6 @@ class CeresMyAccountConfig extends PluginConfig
         $this->changePayment                = $this->getBooleanValue( 'my_account.change_payment', true );
         $this->confirmationLinkLoginRedirect= $this->confirmationLinkLoginRedirect= $this->getBooleanValue( 'my_account.confirmation_link_login_redirect', false );
         $this->confirmationLinkExpiration   = $this->getTextValue('my_account.confirmation_link_expiration', 'always');
+        $this->addressDefaultSalutation     = $this->getTextValue( 'addresses.defaultSalutation', 'male');
     }
 }
