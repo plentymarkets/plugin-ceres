@@ -80,7 +80,7 @@ export function getUrlParams(urlParams)
     }
 
     // decodeURIComponent does not decode raw + signs to spaces. This leads to ambiguous URL decoding, if not done manually.
-    urlParams = urlParams.replace(new RegExp("\\+", 'g'), "%20")
+    urlParams = urlParams.replace(new RegExp("\\+", "g"), "%20");
 
     const regex = /[\\?&]([^=&#]+)=([^&#]*)/gm;
 
