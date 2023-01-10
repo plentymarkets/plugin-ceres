@@ -9,9 +9,6 @@ module.exports = (mode) =>
     return merge(
         CommonConfig(mode),
         {
-            output: {
-                chunkFilename: "chunks/ceres-client-[name]"+ (mode === "production" ? ".min" : "") + ".js"
-            },
             plugins: [
                 new ESLintPlugin({
                     extensions: ["js"],
