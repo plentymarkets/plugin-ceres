@@ -1,11 +1,17 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.57 (2022-01-09) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.56...5.0.57" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.58 (2023-01-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.57...5.0.58" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- A javascript function, that was incompatible with iOS 14 and higher, was used. This has been fixed.
+
+## v5.0.57 (2023-01-09) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.56...5.0.57" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
 
-- In case you want to activate the placeholder payment method “Already paid” for specific orders that have for example been paid via a multipurpose coupon, you need to activate them for your delivery countries in the plentyShop LTS assistant and afterwards link them to the customer classes you want them to be available for. Further information can be found on the <a href="https://knowledge.plentymarkets.com/en-gb/manual/main/online-store/setting-up-ceres.html#295" target="_blank">plentyShop LTS manual page</a>.
-- The ShopBuilder contents for order confirmation pages must be updated in the **CMS » ShopBuilder** menu via the **Regenerate contents** button.
+- In case you want to activate the placeholder payment method “Already paid” for specific orders that have for example been paid via a multipurpose coupon, you need to activate them for your delivery countries in the plentyShop LTS assistant and afterwards link them to the customer classes you want them to be available for. Further information can be found on the <a href="https://www.bit.ly/3X11knt" target="_blank">plentyShop LTS manual page</a>.
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
 
 ### Added
 

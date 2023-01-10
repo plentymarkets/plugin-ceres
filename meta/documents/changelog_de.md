@@ -1,11 +1,17 @@
 # Release Notes für plentyShop LTS
 
-## v5.0.57 (2022-01-09) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.56...5.0.57" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.58 (2023-01-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.57...5.0.58" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+- Es wurde eine Javascript-Funktion benutzt, die nicht mit iOS 14 und höher kompatibel war. Dies wurde behoben.
+
+
+## v5.0.57 (2023-01-09) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.56...5.0.57" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
 
-- Falls du die Platzhalter-Zahlungsart "Bereits bezahlt" für Bestellungen aktivieren möchtest, die z.B. durch einen Mehrzweckgutschein bezahlt wurden, musst du sie im plentyShop LTS Assistenten für deine Lieferländer aktivieren und anschließend mit den Kundenklassen verbinden, für die du sie zur Verfügung stellen möchtest. Weitere Informationen findest du auf der <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html#lts-assistent-zahlungsart" target="_blank">Handbuchseite zum plentyShop LTS</a>.
-- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden. 
+- Falls du die Platzhalter-Zahlungsart "Bereits bezahlt" für Bestellungen aktivieren möchtest, die z.B. durch einen Mehrzweckgutschein bezahlt wurden, musst du sie im plentyShop LTS Assistenten für deine Lieferländer aktivieren und anschließend mit den Kundenklassen verbinden, für die du sie zur Verfügung stellen möchtest. Weitere Informationen findest du auf der <a href="https://www.bit.ly/3X11knt" target="_blank">Handbuchseite zum plentyShop LTS</a>.
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
 
 ### Hinzugefügt
 
