@@ -4,7 +4,6 @@ const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = (mode) =>
 {
-    console.log("common.config.js", mode);
     return {
         mode: mode,
         output: {
