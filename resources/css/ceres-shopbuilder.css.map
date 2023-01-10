@@ -1,0 +1,1 @@
+{"version":3,"file":"../../css/ceres-shopbuilder.css","mappings":";;;AACA,4BACI,wBAEA,2B","sources":["webpack://Ceres/./resources/scss/shopbuilder.scss"],"sourcesContent":["// stylelint-disable\n.sb-no-animation.collapsing {\n    display: none !important;\n    -webkit-transition: none !important;\n    transition: none !important;\n}"],"names":[],"sourceRoot":""}
