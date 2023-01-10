@@ -9,6 +9,10 @@
 
 {% set showRejectAll    = widget.settings.showRejectAll.mobile is same as (true) %}
 
+{% if showRejectAll is not defined or showRejectAll is null %}
+    {% set showRejectAll = true %}
+{% endif %}
+
 {% if showRejectAll %}
     {% set buttonOrder = widget.settings.buttonOrder.mobile %}
 {% else %}
