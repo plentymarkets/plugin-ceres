@@ -77771,7 +77771,14 @@ function _createQueryString(params) {
 function getUrlParams(urlParams) {
   if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_18__["isNullOrUndefined"])(urlParams) && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_18__["isDefined"])(document.location.search)) {
     urlParams = document.location.search;
+<<<<<<< HEAD
   }
+=======
+  } // decodeURIComponent does not decode raw + signs to spaces. This leads to ambiguous URL decoding, if not done manually.
+
+
+  urlParams = urlParams.replaceAll("+", "%20");
+>>>>>>> stable
   var regex = /[\\?&]([^=&#]+)=([^&#]*)/gm;
   var result = {};
   var match;

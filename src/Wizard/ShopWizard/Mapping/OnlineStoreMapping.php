@@ -147,6 +147,20 @@ class OnlineStoreMapping
             'global'    => true,
             'optional'  => false
         ],
+
+        'onlineStore_alreadyPaidShippingCountries' => [
+            'field'    => 'already_paid_shipping_countries',
+            'type'     => 'concatenated',
+            'global'   => false,
+            'optional' => false,
+        ],
+        'onlineStore_alreadyPaidIconUrl' => [
+            'field'    => 'checkout.already_paid_icon_url',
+            'type'      => 'string',
+            'global'    => false,
+            'optional'  => false,
+        ],
+
         'onlineStore_loginMode' => [
             'field'     => 'loginMode',
             'type'      => 'integer',
