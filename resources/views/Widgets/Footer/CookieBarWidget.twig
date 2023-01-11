@@ -9,13 +9,17 @@
 
 {% set showRejectAll    = widget.settings.showRejectAll.mobile %}
 
+{% if showRejectAll is not defined or showRejectAll is null %}
+    {% set showRejectAll = true %}
+{% endif %}
+
 {% if showRejectAll %}
     {% set buttonOrder = widget.settings.buttonOrder.mobile %}
 {% else %}
     {% set buttonOrder = widget.settings.buttonOrderWithoutRejectAll.mobile %}
 {% endif %}
 
-<div class="widget-cookie-bar widget-{{ appearance }} order-{{ buttonOrder }}
+<div class="widget-cookie-bar widget-{{ appearance }} order-{{ buttonOrder | default('1-2-3') }}
     {%- if customClass | length > 0 %} {{ customClass }}{% endif -%}
     {%- if isPreview %} widget-fw{% endif %}">
     <div class="widget-inner">

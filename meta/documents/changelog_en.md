@@ -1,10 +1,15 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.58 (2023-01-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.57...5.0.58" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.58 (2023-01-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.57...5.0.58" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
 
 ### Fixed
 
-- A javascript function, that was incompatible with iOS 14 and higher, was used. This has been fixed.
+- The buttons for consent in the cookie bar were not displayed correctly in certain cases.
+- A javascript function was used that was not compatible with iOS version lower than 13.4. This has been fixed.
 
 ## v5.0.57 (2023-01-09) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.56...5.0.57" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
@@ -33,11 +38,11 @@
 ### TODO
 
 - The ShopBuilder contents for order confirmation pages must be updated in the **CMS » ShopBuilder** menu via the **Regenerate contents** button.
-- If you want to give guest customers the possibility to request a new order confirmation link, you have to create and link a new email template. You can find further information on the <a href="https://knowledge.plentymarkets.com/en-gb/manual/main/online-store/shop-builder.html#softlogin" target="_blank">ShopBuilder manual page</a>.
+- If you want to give guest customers the possibility to request a new order confirmation link, you have to create and link a new email template. You can find further information on the <a href="https://www.bit.ly/3CDrAfI" target="_blank">ShopBuilder manual page</a>.
 
 ### Added
 
-- The softlogin functionality has been revised. If the validity of the order confirmation link in the PlentyShop LTS assistent is set to **Always**, guest customers can now request a new order confirmation link after 90 days by opening the original order confirmation link. Customers will receive the new order confirmation link by email. Please note the TODO in this changelog. You can find further information on the <a href="https://knowledge.plentymarkets.com/en-gb/manual/main/online-store/shop-builder.html#softlogin" target="_blank">ShopBuilder manual page</a>.
+- The softlogin functionality has been revised. If the validity of the order confirmation link in the PlentyShop LTS assistent is set to **Always**, guest customers can now request a new order confirmation link after 90 days by opening the original order confirmation link. Customers will receive the new order confirmation link by email. Please note the TODO in this changelog. You can find further information on the <a href="https://www.bit.ly/3CDrAfI" target="_blank">ShopBuilder manual page</a>.
 - For the salutation for new addresses in the checkout and the My Account area, the option **Please select** can now be set as the preselected option. For the ShopBuilder billing and shipping address widgets, you can set the preselection via the **Preselected salutation** setting in the widget settings. If you do not use ShopBuilder pages, you can set the presselection of the salutation via the **Preselected salutation** setting in the **Checkout and My Account** tab of the plentyShop LTS plugin settings. 
 
 ### Changed
