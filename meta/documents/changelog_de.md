@@ -1,6 +1,6 @@
 # Release Notes für plentyShop LTS
 
-## v5.0.58 (2023-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.57...5.0.58" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.58 (2023-01-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.57...5.0.58" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
 
@@ -9,6 +9,7 @@
 ### Behoben
 
 - Die Buttons für die Zustimmung in der Cookiebar wurden in bestimmten Fällen nicht korrekt angezeigt.
+- Es wurde eine Javascript-Funktion verwendet, die mit iOS-Versionen kleiner als 13.4 nicht kompatibel war. Dies wurde behoben.
 
 ## v5.0.57 (2023-01-09) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.56...5.0.57" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
