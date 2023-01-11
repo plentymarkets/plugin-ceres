@@ -6,7 +6,7 @@
 
 - Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden. 
 
-### Fixed
+### Behoben
 
 - Die Buttons für die Zustimmung in der Cookiebar wurden in bestimmten Fällen nicht korrekt angezeigt.
 
