@@ -2158,8 +2158,7 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
     &:focus,
     &.focus {
       outline: 0;
-      -webkit-box-shadow: 0 0 0 $badge-focus-width rgba($bg, .5);
-              box-shadow: 0 0 0 $badge-focus-width rgba($bg, .5);
+      box-shadow: 0 0 0 $badge-focus-width rgba($bg, .5);
     }
   }
 }
@@ -2320,11 +2319,9 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
     border-color: $hover-border;
     // Avoid using mixin so we can pass custom focus shadow properly
     @if $enable-shadows {
-      -webkit-box-shadow: $btn-box-shadow, 0 0 0 $btn-focus-width rgba(mix(color-yiq($background), $border, 15%), .5);
-              box-shadow: $btn-box-shadow, 0 0 0 $btn-focus-width rgba(mix(color-yiq($background), $border, 15%), .5);
+      box-shadow: $btn-box-shadow, 0 0 0 $btn-focus-width rgba(mix(color-yiq($background), $border, 15%), .5);
     } @else {
-      -webkit-box-shadow: 0 0 0 $btn-focus-width rgba(mix(color-yiq($background), $border, 15%), .5);
-              box-shadow: 0 0 0 $btn-focus-width rgba(mix(color-yiq($background), $border, 15%), .5);
+      box-shadow: 0 0 0 $btn-focus-width rgba(mix(color-yiq($background), $border, 15%), .5);
     }
   }
 
@@ -2353,11 +2350,9 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
     &:focus {
       // Avoid using mixin so we can pass custom focus shadow properly
       @if $enable-shadows and $btn-active-box-shadow != none {
-        -webkit-box-shadow: $btn-active-box-shadow, 0 0 0 $btn-focus-width rgba(mix(color-yiq($background), $border, 15%), .5);
-                box-shadow: $btn-active-box-shadow, 0 0 0 $btn-focus-width rgba(mix(color-yiq($background), $border, 15%), .5);
+        box-shadow: $btn-active-box-shadow, 0 0 0 $btn-focus-width rgba(mix(color-yiq($background), $border, 15%), .5);
       } @else {
-        -webkit-box-shadow: 0 0 0 $btn-focus-width rgba(mix(color-yiq($background), $border, 15%), .5);
-                box-shadow: 0 0 0 $btn-focus-width rgba(mix(color-yiq($background), $border, 15%), .5);
+        box-shadow: 0 0 0 $btn-focus-width rgba(mix(color-yiq($background), $border, 15%), .5);
       }
     }
   }
@@ -2375,8 +2370,7 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
 
   &:focus,
   &.focus {
-    -webkit-box-shadow: 0 0 0 $btn-focus-width rgba($color, .5);
-            box-shadow: 0 0 0 $btn-focus-width rgba($color, .5);
+    box-shadow: 0 0 0 $btn-focus-width rgba($color, .5);
   }
 
   &.disabled,
@@ -2395,11 +2389,9 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
     &:focus {
       // Avoid using mixin so we can pass custom focus shadow properly
       @if $enable-shadows and $btn-active-box-shadow != none {
-        -webkit-box-shadow: $btn-active-box-shadow, 0 0 0 $btn-focus-width rgba($color, .5);
-                box-shadow: $btn-active-box-shadow, 0 0 0 $btn-focus-width rgba($color, .5);
+        box-shadow: $btn-active-box-shadow, 0 0 0 $btn-focus-width rgba($color, .5);
       } @else {
-        -webkit-box-shadow: 0 0 0 $btn-focus-width rgba($color, .5);
-                box-shadow: 0 0 0 $btn-focus-width rgba($color, .5);
+        box-shadow: 0 0 0 $btn-focus-width rgba($color, .5);
       }
     }
   }
@@ -2562,11 +2554,9 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
     outline: 0;
     // Avoid using mixin so we can pass custom focus shadow properly
     @if $enable-shadows {
-      -webkit-box-shadow: $input-box-shadow, $input-focus-box-shadow;
-              box-shadow: $input-box-shadow, $input-focus-box-shadow;
+      box-shadow: $input-box-shadow, $input-focus-box-shadow;
     } @else {
-      -webkit-box-shadow: $input-focus-box-shadow;
-              box-shadow: $input-focus-box-shadow;
+      box-shadow: $input-focus-box-shadow;
     }
   }
   @include deprecate("The `form-control-focus()` mixin", "v4.4.0", "v5", $ignore-warning);
@@ -2632,8 +2622,7 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
 
       &:focus {
         border-color: $color;
-        -webkit-box-shadow: 0 0 0 $input-focus-width rgba($color, .25);
-                box-shadow: 0 0 0 $input-focus-width rgba($color, .25);
+        box-shadow: 0 0 0 $input-focus-width rgba($color, .25);
       }
     }
   }
@@ -2659,8 +2648,7 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
 
       &:focus {
         border-color: $color;
-        -webkit-box-shadow: 0 0 0 $input-focus-width rgba($color, .25);
-                box-shadow: 0 0 0 $input-focus-width rgba($color, .25);
+        box-shadow: 0 0 0 $input-focus-width rgba($color, .25);
       }
     }
   }
@@ -2697,8 +2685,7 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
 
       &:focus {
         ~ .custom-control-label::before {
-          -webkit-box-shadow: 0 0 0 $input-focus-width rgba($color, .25);
-                  box-shadow: 0 0 0 $input-focus-width rgba($color, .25);
+          box-shadow: 0 0 0 $input-focus-width rgba($color, .25);
         }
 
         &:not(:checked) ~ .custom-control-label::before {
@@ -2718,8 +2705,7 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
       &:focus {
         ~ .custom-file-label {
           border-color: $color;
-          -webkit-box-shadow: 0 0 0 $input-focus-width rgba($color, .25);
-                  box-shadow: 0 0 0 $input-focus-width rgba($color, .25);
+          box-shadow: 0 0 0 $input-focus-width rgba($color, .25);
         }
       }
     }
@@ -2787,7 +2773,6 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
 
 @mixin bg-gradient-variant($parent, $color) {
   #{$parent} {
-    background: $color -webkit-gradient(linear, left top, left bottom, from(mix($body-bg, $color, 15%)), to($color)) repeat-x !important;
     background: $color linear-gradient(180deg, mix($body-bg, $color, 15%), $color) repeat-x !important;
   }
 }
@@ -2872,8 +2857,7 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
       }
     }
     @if (length($result) > 0) {
-      -webkit-box-shadow: $result;
-              box-shadow: $result;
+      box-shadow: $result;
     }
   }
 }
@@ -2882,7 +2866,6 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
 
 @mixin gradient-bg($color) {
   @if $enable-gradients {
-    background: $color -webkit-gradient(linear, left top, left bottom, from(mix($body-bg, $color, 15%)), to($color)) repeat-x;
     background: $color linear-gradient(180deg, mix($body-bg, $color, 15%), $color) repeat-x;
   } @else {
     background-color: $color;
@@ -2893,7 +2876,6 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
 //
 // Creates two color stops, start and end, by specifying a color and position for each color stop.
 @mixin gradient-x($start-color: $gray-700, $end-color: $gray-800, $start-percent: 0%, $end-percent: 100%) {
-  background-image: -webkit-gradient(linear, left top, right top, color-stop($start-percent, $start-color), color-stop($end-percent, $end-color));
   background-image: linear-gradient(to right, $start-color $start-percent, $end-color $end-percent);
   background-repeat: repeat-x;
 }
@@ -2902,7 +2884,6 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
 //
 // Creates two color stops, start and end, by specifying a color and position for each color stop.
 @mixin gradient-y($start-color: $gray-700, $end-color: $gray-800, $start-percent: 0%, $end-percent: 100%) {
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop($start-percent, $start-color), color-stop($end-percent, $end-color));
   background-image: linear-gradient(to bottom, $start-color $start-percent, $end-color $end-percent);
   background-repeat: repeat-x;
 }
@@ -2912,12 +2893,10 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
   background-repeat: repeat-x;
 }
 @mixin gradient-x-three-colors($start-color: $blue, $mid-color: $purple, $color-stop: 50%, $end-color: $red) {
-  background-image: -webkit-gradient(linear, left top, right top, from($start-color), color-stop($color-stop, $mid-color), to($end-color));
   background-image: linear-gradient(to right, $start-color, $mid-color $color-stop, $end-color);
   background-repeat: no-repeat;
 }
 @mixin gradient-y-three-colors($start-color: $blue, $mid-color: $purple, $color-stop: 50%, $end-color: $red) {
-  background-image: -webkit-gradient(linear, left top, left bottom, from($start-color), color-stop($color-stop, $mid-color), to($end-color));
   background-image: linear-gradient($start-color, $mid-color $color-stop, $end-color);
   background-repeat: no-repeat;
 }
@@ -2926,7 +2905,6 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
   background-repeat: no-repeat;
 }
 @mixin gradient-striped($color: rgba($white, .15), $angle: 45deg) {
-  background-image: -webkit-gradient(linear, left top, left bottom, from($angle), color-stop(25%, $color), color-stop(25%, transparent), color-stop(50%, transparent), color-stop(50%, $color), color-stop(75%, $color), color-stop(75%, transparent), to(transparent));
   background-image: linear-gradient($angle, $color 25%, transparent 25%, transparent 50%, $color 50%, $color 75%, transparent 75%, transparent);
 }
 
@@ -2934,17 +2912,14 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
 @mixin transition($transition...) {
   @if $enable-transitions {
     @if length($transition) == 0 {
-      -webkit-transition: $transition-base;
       transition: $transition-base;
     } @else {
-      -webkit-transition: $transition;
       transition: $transition;
     }
   }
 
   @if $enable-prefers-reduced-motion-media-query {
     @media (prefers-reduced-motion: reduce) {
-      -webkit-transition: none;
       transition: none;
     }
   }
@@ -2991,11 +2966,8 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
     @include media-breakpoint-up($breakpoint, $breakpoints) {
       // Provide basic `.col-{bp}` classes for equal-width flexbox columns
       .col#{$infix} {
-        -ms-flex-preferred-size: 0;
-            flex-basis: 0;
-        -webkit-box-flex: 1;
-            -ms-flex-positive: 1;
-                flex-grow: 1;
+        flex-basis: 0;
+        flex-grow: 1;
         max-width: 100%;
       }
 
@@ -3015,12 +2987,12 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
         }
       }
 
-      .order#{$infix}-first { -webkit-box-ordinal-group: 0; -ms-flex-order: -1; order: -1; }
+      .order#{$infix}-first { order: -1; }
 
-      .order#{$infix}-last { -webkit-box-ordinal-group: NaN; -ms-flex-order: $columns + 1; order: $columns + 1; }
+      .order#{$infix}-last { order: $columns + 1; }
 
       @for $i from 0 through $columns {
-        .order#{$infix}-#{$i} { -webkit-box-ordinal-group: $i; -ms-flex-order: $i; order: $i; }
+        .order#{$infix}-#{$i} { order: $i; }
       }
 
       // `$columns - 1` because offsetting by the width of an entire row isn't possible
@@ -3058,11 +3030,8 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
 }
 
 @mixin make-row($gutter: $grid-gutter-width) {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   margin-right: -$gutter / 2;
   margin-left: -$gutter / 2;
 }
@@ -3078,9 +3047,7 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
 }
 
 @mixin make-col($size, $columns: $grid-columns) {
-  -webkit-box-flex: 0;
-      -ms-flex: 0 0 percentage($size / $columns);
-          flex: 0 0 percentage($size / $columns);
+  flex: 0 0 percentage($size / $columns);
   // Add a `max-width` to ensure content within each column does not blow out
   // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
   // do not appear to require this.
@@ -3088,9 +3055,7 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
 }
 
 @mixin make-col-auto() {
-  -webkit-box-flex: 0;
-      -ms-flex: 0 0 auto;
-          flex: 0 0 auto;
+  flex: 0 0 auto;
   width: auto;
   max-width: 100%; // Reset earlier grid tiers
 }
@@ -3107,9 +3072,7 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
 // style grid.
 @mixin row-cols($count) {
   & > * {
-    -webkit-box-flex: 0;
-        -ms-flex: 0 0 100% / $count;
-            flex: 0 0 100% / $count;
+    flex: 0 0 100% / $count;
     max-width: 100% / $count;
   }
 }
@@ -3172,8 +3135,7 @@ $rfs-breakpoint-unit-cache: unit($rfs-breakpoint);
 *,
 *::before,
 *::after {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box; // 1
+  box-sizing: border-box; // 1
 }
 
 html {
@@ -3228,8 +3190,7 @@ body {
 // 2. Show the overflow in Edge and IE.
 
 hr {
-  -webkit-box-sizing: content-box;
-          box-sizing: content-box; // 1
+  box-sizing: content-box; // 1
   height: 0; // 1
   overflow: visible; // 2
 }
@@ -3273,7 +3234,8 @@ abbr[data-original-title] { // 1
           text-decoration: underline dotted; // 2
   cursor: help; // 3
   border-bottom: 0; // 4
-  text-decoration-skip-ink: none; // 5
+  -webkit-text-decoration-skip-ink: none;
+          text-decoration-skip-ink: none; // 5
 }
 
 address {
@@ -3529,8 +3491,7 @@ button::-moz-focus-inner,
 
 input[type="radio"],
 input[type="checkbox"] {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box; // 1. Add the correct box sizing in IE 10-
+  box-sizing: border-box; // 1. Add the correct box sizing in IE 10-
   padding: 0; // 2. Remove the padding in IE 10-
 }
 
@@ -4161,12 +4122,7 @@ pre {
     // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
     opacity: 1;
   }
-  &::-moz-placeholder {
-    color: $input-placeholder-color;
-    // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
-    opacity: 1;
-  }
-  &::-ms-input-placeholder {
+  &:-ms-input-placeholder {
     color: $input-placeholder-color;
     // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
     opacity: 1;
@@ -4319,11 +4275,8 @@ textarea.form-control {
 // Special replacement for our grid system's `.row` for tighter form layouts.
 
 .form-row {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   margin-right: -$form-grid-gutter-width / 2;
   margin-left: -$form-grid-gutter-width / 2;
 
@@ -4362,12 +4315,8 @@ textarea.form-control {
 }
 
 .form-check-inline {
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   padding-left: 0; // Override base .form-check
   margin-right: $form-check-inline-margin-x;
 
@@ -4402,16 +4351,9 @@ textarea.form-control {
 // default HTML form controls and our custom form controls (e.g., input groups).
 
 .form-inline {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-flow: row wrap;
-          flex-flow: row wrap;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center; // Prevent shorter elements from growing to same height as others (e.g., small buttons growing to normal sized button height)
+  flex-flow: row wrap;
+  align-items: center; // Prevent shorter elements from growing to same height as others (e.g., small buttons growing to normal sized button height)
 
   // Because we use flex, the initial sizing of checkboxes is collapsed and
   // doesn't occupy the full-width (which is what we want for xs grid tier),
@@ -4423,33 +4365,18 @@ textarea.form-control {
   // Kick in the inline
   @include media-breakpoint-up(sm) {
     label {
-      display: -webkit-box;
-      display: -ms-flexbox;
       display: flex;
-      -webkit-box-align: center;
-          -ms-flex-align: center;
-              align-items: center;
-      -webkit-box-pack: center;
-          -ms-flex-pack: center;
-              justify-content: center;
+      align-items: center;
+      justify-content: center;
       margin-bottom: 0;
     }
 
     // Inline-block all the things for "inline"
     .form-group {
-      display: -webkit-box;
-      display: -ms-flexbox;
       display: flex;
-      -webkit-box-flex: 0;
-          -ms-flex: 0 0 auto;
-              flex: 0 0 auto;
-      -webkit-box-orient: horizontal;
-      -webkit-box-direction: normal;
-          -ms-flex-flow: row wrap;
-              flex-flow: row wrap;
-      -webkit-box-align: center;
-          -ms-flex-align: center;
-              align-items: center;
+      flex: 0 0 auto;
+      flex-flow: row wrap;
+      align-items: center;
       margin-bottom: 0;
     }
 
@@ -4473,34 +4400,23 @@ textarea.form-control {
     // Remove default margin on radios/checkboxes that were used for stacking, and
     // then undo the floating of radios and checkboxes to match.
     .form-check {
-      display: -webkit-box;
-      display: -ms-flexbox;
       display: flex;
-      -webkit-box-align: center;
-          -ms-flex-align: center;
-              align-items: center;
-      -webkit-box-pack: center;
-          -ms-flex-pack: center;
-              justify-content: center;
+      align-items: center;
+      justify-content: center;
       width: auto;
       padding-left: 0;
     }
     .form-check-input {
       position: relative;
-      -ms-flex-negative: 0;
-          flex-shrink: 0;
+      flex-shrink: 0;
       margin-top: 0;
       margin-right: $form-check-input-margin-x;
       margin-left: 0;
     }
 
     .custom-control {
-      -webkit-box-align: center;
-          -ms-flex-align: center;
-              align-items: center;
-      -webkit-box-pack: center;
-          -ms-flex-pack: center;
-              justify-content: center;
+      align-items: center;
+      justify-content: center;
     }
     .custom-control-label {
       margin-bottom: 0;
@@ -4524,7 +4440,6 @@ textarea.form-control {
   vertical-align: middle;
   cursor: if($enable-pointer-cursor-for-buttons, pointer, null);
   -webkit-user-select: none;
-     -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   background-color: transparent;
@@ -4540,8 +4455,7 @@ textarea.form-control {
   &:focus,
   &.focus {
     outline: 0;
-    -webkit-box-shadow: $btn-focus-box-shadow;
-            box-shadow: $btn-focus-box-shadow;
+    box-shadow: $btn-focus-box-shadow;
   }
 
   // Disabled comes first so active can properly restyle
@@ -4606,8 +4520,7 @@ fieldset:disabled a.btn {
   &.focus {
     -webkit-text-decoration: $link-hover-decoration;
             text-decoration: $link-hover-decoration;
-    -webkit-box-shadow: none;
-            box-shadow: none;
+    box-shadow: none;
   }
 
   &:disabled,
@@ -4875,16 +4788,12 @@ input[type="button"] {
 .btn-group,
 .btn-group-vertical {
   position: relative;
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
   display: inline-flex;
   vertical-align: middle; // match .btn alignment given font-size hack above
 
   > .btn {
     position: relative;
-    -webkit-box-flex: 1;
-        -ms-flex: 1 1 auto;
-            flex: 1 1 auto;
+    flex: 1 1 auto;
 
     // Bring the hover, focused, and "active" buttons to the front to overlay
     // the borders properly
@@ -4901,14 +4810,9 @@ input[type="button"] {
 
 // Optional: Group multiple button groups together for a toolbar
 .btn-toolbar {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 
   .input-group {
     width: auto;
@@ -4989,16 +4893,9 @@ input[type="button"] {
 //
 
 .btn-group-vertical {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
 
   > .btn,
   > .btn-group {
@@ -5057,14 +4954,9 @@ input[type="button"] {
 
 .input-group {
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap; // For form validation feedback
-  -webkit-box-align: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
+  flex-wrap: wrap; // For form validation feedback
+  align-items: stretch;
   width: 100%;
 
   > .form-control,
@@ -5072,9 +4964,7 @@ input[type="button"] {
   > .custom-select,
   > .custom-file {
     position: relative; // For focus state's z-index
-    -webkit-box-flex: 1;
-        -ms-flex: 1 1 0%;
-            flex: 1 1 0%;
+    flex: 1 1 0%;
     min-width: 0; // https://stackoverflow.com/questions/36247140/why-dont-flex-items-shrink-past-content-size
     margin-bottom: 0;
 
@@ -5106,12 +4996,8 @@ input[type="button"] {
   // Custom file inputs have more complex markup, thus requiring different
   // border-radius overrides.
   > .custom-file {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    align-items: center;
 
     &:not(:last-child) .custom-file-label,
     &:not(:last-child) .custom-file-label::after { @include border-right-radius(0); }
@@ -5128,8 +5014,6 @@ input[type="button"] {
 
 .input-group-prepend,
 .input-group-append {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 
   // Ensure buttons are always above inputs for more visually pleasing borders.
@@ -5162,12 +5046,8 @@ input[type="button"] {
 // to prepend or append to an input.
 
 .input-group-text {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   padding: $input-padding-y $input-padding-x;
   margin-bottom: 0; // Allow use of <label> elements by overriding our default margin-bottom
   @include font-size($input-font-size); // Match inputs
@@ -5275,8 +5155,6 @@ input[type="button"] {
 }
 
 .custom-control-inline {
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
   display: inline-flex;
   margin-right: $custom-control-spacer-x;
 }
@@ -5299,11 +5177,9 @@ input[type="button"] {
   &:focus ~ .custom-control-label::before {
     // the mixin is not used here to make sure there is feedback
     @if $enable-shadows {
-      -webkit-box-shadow: $input-box-shadow, $input-focus-box-shadow;
-              box-shadow: $input-box-shadow, $input-focus-box-shadow;
+      box-shadow: $input-box-shadow, $input-focus-box-shadow;
     } @else {
-      -webkit-box-shadow: $custom-control-indicator-focus-box-shadow;
-              box-shadow: $custom-control-indicator-focus-box-shadow;
+      box-shadow: $custom-control-indicator-focus-box-shadow;
     }
   }
 
@@ -5497,18 +5373,15 @@ input[type="button"] {
   @include border-radius($custom-select-border-radius, 0);
   @include box-shadow($custom-select-box-shadow);
   -webkit-appearance: none;
-     -moz-appearance: none;
           appearance: none;
 
   &:focus {
     border-color: $custom-select-focus-border-color;
     outline: 0;
     @if $enable-shadows {
-      -webkit-box-shadow: $custom-select-box-shadow, $custom-select-focus-box-shadow;
-              box-shadow: $custom-select-box-shadow, $custom-select-focus-box-shadow;
+      box-shadow: $custom-select-box-shadow, $custom-select-focus-box-shadow;
     } @else {
-      -webkit-box-shadow: $custom-select-focus-box-shadow;
-              box-shadow: $custom-select-focus-box-shadow;
+      box-shadow: $custom-select-focus-box-shadow;
     }
 
     &::-ms-value {
@@ -5585,8 +5458,7 @@ input[type="button"] {
 
   &:focus ~ .custom-file-label {
     border-color: $custom-file-focus-border-color;
-    -webkit-box-shadow: $custom-file-focus-box-shadow;
-            box-shadow: $custom-file-focus-box-shadow;
+    box-shadow: $custom-file-focus-box-shadow;
   }
 
   // Use [disabled] and :disabled to work around https://github.com/twbs/bootstrap/issues/28247
@@ -5653,7 +5525,6 @@ input[type="button"] {
   padding: 0; // Need to reset padding
   background-color: transparent;
   -webkit-appearance: none;
-     -moz-appearance: none;
           appearance: none;
 
   &:focus {
@@ -5661,7 +5532,7 @@ input[type="button"] {
 
     // Pseudo-elements must be split across multiple rulesets to have an effect.
     // No box-shadow() mixin for focus accessibility.
-    &::-webkit-slider-thumb { -webkit-box-shadow: $custom-range-thumb-focus-box-shadow; box-shadow: $custom-range-thumb-focus-box-shadow; }
+    &::-webkit-slider-thumb { box-shadow: $custom-range-thumb-focus-box-shadow; }
     &::-moz-range-thumb     { box-shadow: $custom-range-thumb-focus-box-shadow; }
     &::-ms-thumb            { box-shadow: $custom-range-thumb-focus-box-shadow; }
   }
@@ -5706,8 +5577,7 @@ input[type="button"] {
     @include border-radius($custom-range-thumb-border-radius);
     @include box-shadow($custom-range-thumb-box-shadow);
     @include transition($custom-forms-transition);
-    -moz-appearance: none;
-         appearance: none;
+    appearance: none;
 
     &:active {
       @include gradient-bg($custom-range-thumb-active-bg);
@@ -5800,11 +5670,8 @@ input[type="button"] {
 // `<nav>`s, `<ul>`s or `<ol>`s.
 
 .nav {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   padding-left: 0;
   margin-bottom: 0;
   list-style: none;
@@ -5891,20 +5758,15 @@ input[type="button"] {
 
 .nav-fill {
   .nav-item {
-    -webkit-box-flex: 1;
-        -ms-flex: 1 1 auto;
-            flex: 1 1 auto;
+    flex: 1 1 auto;
     text-align: center;
   }
 }
 
 .nav-justified {
   .nav-item {
-    -ms-flex-preferred-size: 0;
-        flex-basis: 0;
-    -webkit-box-flex: 1;
-        -ms-flex-positive: 1;
-            flex-grow: 1;
+    flex-basis: 0;
+    flex-grow: 1;
     text-align: center;
   }
 }
@@ -5942,33 +5804,19 @@ input[type="button"] {
 
 .navbar {
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap; // allow us to do the line break for collapsing content
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between; // space out brand from logo
+  flex-wrap: wrap; // allow us to do the line break for collapsing content
+  align-items: center;
+  justify-content: space-between; // space out brand from logo
   padding: $navbar-padding-y $navbar-padding-x;
 
   // Because flex properties aren't inherited, we need to redeclare these first
   // few properties so that content nested within behave properly.
   %container-flex-properties {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .container,
@@ -6008,13 +5856,8 @@ input[type="button"] {
 // Custom navbar navigation (doesn't require `.nav`, but does make use of `.nav-link`).
 
 .navbar-nav {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column; // cannot use `inherit` to get the `.navbar`s value
+  flex-direction: column; // cannot use `inherit` to get the `.navbar`s value
   padding-left: 0;
   margin-bottom: 0;
   list-style: none;
@@ -6051,16 +5894,11 @@ input[type="button"] {
 // the default flexbox row orientation. Requires the use of `flex-wrap: wrap`
 // on the `.navbar` parent.
 .navbar-collapse {
-  -ms-flex-preferred-size: 100%;
-      flex-basis: 100%;
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
+  flex-basis: 100%;
+  flex-grow: 1;
   // For always expanded or extra full navbars, ensure content aligns itself
   // properly vertically. Can be easily overridden with flex utilities.
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
 }
 
 // Button for toggling the navbar when in its collapsed state
@@ -6116,19 +5954,11 @@ input[type="button"] {
       }
 
       @include media-breakpoint-up($next) {
-        -webkit-box-orient: horizontal;
-        -webkit-box-direction: normal;
-            -ms-flex-flow: row nowrap;
-                flex-flow: row nowrap;
-        -webkit-box-pack: start;
-            -ms-flex-pack: start;
-                justify-content: flex-start;
+        flex-flow: row nowrap;
+        justify-content: flex-start;
 
         .navbar-nav {
-          -webkit-box-orient: horizontal;
-          -webkit-box-direction: normal;
-              -ms-flex-direction: row;
-                  flex-direction: row;
+          flex-direction: row;
 
           .dropdown-menu {
             position: absolute;
@@ -6142,8 +5972,7 @@ input[type="button"] {
 
         // For nesting containers, have to redeclare for alignment purposes
         %container-nesting-#{$breakpoint} {
-          -ms-flex-wrap: nowrap;
-              flex-wrap: nowrap;
+          flex-wrap: nowrap;
         }
 
         > .container,
@@ -6158,13 +5987,10 @@ input[type="button"] {
         }
 
         .navbar-collapse {
-          display: -webkit-box !important;
-          display: -ms-flexbox !important;
           display: flex !important; // stylelint-disable-line declaration-no-important
 
           // Changes flex-bases to auto because of an IE10 bug
-          -ms-flex-preferred-size: auto;
-              flex-basis: auto;
+          flex-basis: auto;
         }
 
         .navbar-toggler {
@@ -6290,13 +6116,8 @@ input[type="button"] {
 
 .card {
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   min-width: 0; // See https://github.com/twbs/bootstrap/pull/22740#issuecomment-305868106
   height: $card-height;
   word-wrap: break-word;
@@ -6326,9 +6147,7 @@ input[type="button"] {
 .card-body {
   // Enable `flex-grow: 1` for decks and groups so that card blocks take up
   // as much space as possible, ensuring footers are aligned to the bottom.
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
+  flex: 1 1 auto;
   // Workaround for the image size bug in IE
   // See: https://github.com/twbs/bootstrap/pull/28855
   min-height: 1px;
@@ -6421,8 +6240,7 @@ input[type="button"] {
 .card-img,
 .card-img-top,
 .card-img-bottom {
-  -ms-flex-negative: 0;
-      flex-shrink: 0; // For IE: https://github.com/twbs/bootstrap/issues/29396
+  flex-shrink: 0; // For IE: https://github.com/twbs/bootstrap/issues/29396
   width: 100%; // Required because we use flexbox and this inherently applies align-self: stretch
 }
 
@@ -6445,21 +6263,14 @@ input[type="button"] {
   }
 
   @include media-breakpoint-up(sm) {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-flow: row wrap;
-            flex-flow: row wrap;
+    flex-flow: row wrap;
     margin-right: -$card-deck-margin;
     margin-left: -$card-deck-margin;
 
     .card {
       // Flexbugs #4: https://github.com/philipwalton/flexbugs#flexbug-4
-      -webkit-box-flex: 1;
-          -ms-flex: 1 0 0%;
-              flex: 1 0 0%;
+      flex: 1 0 0%;
       margin-right: $card-deck-margin;
       margin-bottom: 0; // Override the default
       margin-left: $card-deck-margin;
@@ -6480,20 +6291,13 @@ input[type="button"] {
   }
 
   @include media-breakpoint-up(sm) {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-flow: row wrap;
-            flex-flow: row wrap;
+    flex-flow: row wrap;
     // The child selector allows nested `.card` within `.card-group`
     // to display properly.
     > .card {
       // Flexbugs #4: https://github.com/philipwalton/flexbugs#flexbug-4
-      -webkit-box-flex: 1;
-          -ms-flex: 1 0 0%;
-              flex: 1 0 0%;
+      flex: 1 0 0%;
       margin-bottom: 0;
 
       + .card {
@@ -6549,10 +6353,8 @@ input[type="button"] {
 
   @include media-breakpoint-up(sm) {
     -webkit-column-count: $card-columns-count;
-       -moz-column-count: $card-columns-count;
             column-count: $card-columns-count;
     -webkit-column-gap: $card-columns-gap;
-       -moz-column-gap: $card-columns-gap;
             column-gap: $card-columns-gap;
     orphans: 1;
     widows: 1;
@@ -6590,11 +6392,8 @@ input[type="button"] {
 }
 
 .breadcrumb {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   padding: $breadcrumb-padding-y $breadcrumb-padding-x;
   margin-bottom: $breadcrumb-margin-bottom;
   @include font-size($breadcrumb-font-size);
@@ -6636,8 +6435,6 @@ input[type="button"] {
 }
 
 .pagination {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   @include list-unstyled();
   @include border-radius();
@@ -6664,8 +6461,7 @@ input[type="button"] {
   &:focus {
     z-index: 3;
     outline: $pagination-focus-outline;
-    -webkit-box-shadow: $pagination-focus-box-shadow;
-            box-shadow: $pagination-focus-box-shadow;
+    box-shadow: $pagination-focus-box-shadow;
   }
 }
 
@@ -6850,8 +6646,6 @@ input[type="button"] {
 }
 
 .progress {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   height: $progress-height;
   overflow: hidden; // force rounded corners by cropping it
@@ -6862,16 +6656,9 @@ input[type="button"] {
 }
 
 .progress-bar {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  flex-direction: column;
+  justify-content: center;
   overflow: hidden;
   color: $progress-bar-color;
   text-align: center;
@@ -6900,18 +6687,12 @@ input[type="button"] {
 }
 
 .media {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  align-items: flex-start;
 }
 
 .media-body {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  flex: 1;
 }
 
 // Base class
@@ -6919,13 +6700,8 @@ input[type="button"] {
 // Easily usable on <ul>, <ol>, or <div>.
 
 .list-group {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
 
   // No need to set list-style: none; since .list-group-item is block level
   padding-left: 0; // reset padding because ul and ol
@@ -7013,10 +6789,7 @@ input[type="button"] {
     $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
     .list-group-horizontal#{$infix} {
-      -webkit-box-orient: horizontal;
-      -webkit-box-direction: normal;
-          -ms-flex-direction: row;
-              flex-direction: row;
+      flex-direction: row;
 
       .list-group-item {
         &:first-child {
@@ -7114,7 +6887,6 @@ button.close {
   background-color: transparent;
   border: 0;
   -webkit-appearance: none;
-     -moz-appearance: none;
           appearance: none;
 }
 
@@ -7133,8 +6905,7 @@ a.close.disabled {
   background-color: $toast-background-color;
   background-clip: padding-box;
   border: $toast-border-width solid $toast-border-color;
-  -webkit-box-shadow: $toast-box-shadow;
-          box-shadow: $toast-box-shadow;
+  box-shadow: $toast-box-shadow;
   -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
   opacity: 0;
@@ -7159,12 +6930,8 @@ a.close.disabled {
 }
 
 .toast-header {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   padding: $toast-padding-y $toast-padding-x;
   color: $toast-header-color;
   background-color: $toast-header-background-color;
@@ -7237,8 +7004,6 @@ a.close.disabled {
 }
 
 .modal-dialog-scrollable {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex; // IE10/11
   max-height: subtract(100%, $modal-dialog-margin * 2);
 
@@ -7249,8 +7014,7 @@ a.close.disabled {
 
   .modal-header,
   .modal-footer {
-    -ms-flex-negative: 0;
-        flex-shrink: 0;
+    flex-shrink: 0;
   }
 
   .modal-body {
@@ -7259,12 +7023,8 @@ a.close.disabled {
 }
 
 .modal-dialog-centered {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   min-height: subtract(100%, $modal-dialog-margin * 2);
 
   // Ensure `modal-dialog-centered` extends the full height of the view (IE10/11)
@@ -7276,13 +7036,8 @@ a.close.disabled {
 
   // Ensure `.modal-body` shows scrollbar (IE10/11)
   &.modal-dialog-scrollable {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    flex-direction: column;
+    justify-content: center;
     height: 100%;
 
     .modal-content {
@@ -7298,13 +7053,8 @@ a.close.disabled {
 // Actual modal
 .modal-content {
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   width: 100%; // Ensure `.modal-content` extends the full width of the parent `.modal-dialog`
   // counteract the pointer-events: none; in the .modal-dialog
   color: $modal-content-color;
@@ -7336,15 +7086,9 @@ a.close.disabled {
 // Modal header
 // Top section of the modal w/ title and dismiss
 .modal-header {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start; // so the close btn always stays on the upper right corner
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between; // Put modal header elements (title and dismiss) on opposite ends
+  align-items: flex-start; // so the close btn always stays on the upper right corner
+  justify-content: space-between; // Put modal header elements (title and dismiss) on opposite ends
   padding: $modal-header-padding;
   border-bottom: $modal-header-border-width solid $modal-header-border-color;
   @include border-top-radius($modal-content-inner-border-radius);
@@ -7368,25 +7112,16 @@ a.close.disabled {
   position: relative;
   // Enable `flex-grow: 1` so that the body take up as much space as possible
   // when there should be a fixed height on `.modal-dialog`.
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
+  flex: 1 1 auto;
   padding: $modal-inner-padding;
 }
 
 // Footer (for actions)
 .modal-footer {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center; // vertically center
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end; // Right align buttons with flex property because text-align doesn't work on flex items
+  flex-wrap: wrap;
+  align-items: center; // vertically center
+  justify-content: flex-end; // Right align buttons with flex property because text-align doesn't work on flex items
   padding: $modal-inner-padding - $modal-footer-margin-between / 2;
   border-top: $modal-footer-border-width solid $modal-footer-border-color;
   @include border-bottom-radius($modal-content-inner-border-radius);
@@ -7756,8 +7491,7 @@ a.close.disabled {
 }
 
 .carousel.pointer-event {
-  -ms-touch-action: pan-y;
-      touch-action: pan-y;
+  touch-action: pan-y;
 }
 
 .carousel-inner {
@@ -7804,7 +7538,6 @@ a.close.disabled {
 .carousel-fade {
   .carousel-item {
     opacity: 0;
-    -webkit-transition-property: opacity;
     transition-property: opacity;
     -webkit-transform: none;
             transform: none;
@@ -7837,15 +7570,9 @@ a.close.disabled {
   bottom: 0;
   z-index: 1;
   // Use flex for alignment (1-3)
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex; // 1. allow flex styles
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center; // 2. vertically center contents
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center; // 3. horizontally center contents
+  align-items: center; // 2. vertically center contents
+  justify-content: center; // 3. horizontally center contents
   width: $carousel-control-width;
   color: $carousel-control-color;
   text-align: center;
@@ -7863,14 +7590,12 @@ a.close.disabled {
 .carousel-control-prev {
   left: 0;
   @if $enable-gradients {
-    background-image: -webkit-gradient(linear, left top, right top, from(rgba($black, .25)), to(rgba($black, .001)));
     background-image: linear-gradient(90deg, rgba($black, .25), rgba($black, .001));
   }
 }
 .carousel-control-next {
   right: 0;
   @if $enable-gradients {
-    background-image: -webkit-gradient(linear, right top, left top, from(rgba($black, .25)), to(rgba($black, .001)));
     background-image: linear-gradient(270deg, rgba($black, .25), rgba($black, .001));
   }
 }
@@ -7902,12 +7627,8 @@ a.close.disabled {
   bottom: 0;
   left: 0;
   z-index: 15;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
   padding-left: 0; // override <ol> default
   // Use the .carousel-control's width as margin so we don't overlay those
   margin-right: $carousel-control-width;
@@ -7915,11 +7636,8 @@ a.close.disabled {
   list-style: none;
 
   li {
-    -webkit-box-sizing: content-box;
-            box-sizing: content-box;
-    -webkit-box-flex: 0;
-        -ms-flex: 0 1 auto;
-            flex: 0 1 auto;
+    box-sizing: content-box;
+    flex: 0 1 auto;
     width: $carousel-indicator-width;
     height: $carousel-indicator-height;
     margin-right: $carousel-indicator-spacer;
@@ -8216,45 +7934,45 @@ a.close.disabled {
   @include media-breakpoint-up($breakpoint) {
     $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
-    .flex#{$infix}-row            { -webkit-box-orient: horizontal !important; -webkit-box-direction: normal !important; -ms-flex-direction: row !important; flex-direction: row !important; }
-    .flex#{$infix}-column         { -webkit-box-orient: vertical !important; -webkit-box-direction: normal !important; -ms-flex-direction: column !important; flex-direction: column !important; }
-    .flex#{$infix}-row-reverse    { -webkit-box-orient: horizontal !important; -webkit-box-direction: reverse !important; -ms-flex-direction: row-reverse !important; flex-direction: row-reverse !important; }
-    .flex#{$infix}-column-reverse { -webkit-box-orient: vertical !important; -webkit-box-direction: reverse !important; -ms-flex-direction: column-reverse !important; flex-direction: column-reverse !important; }
+    .flex#{$infix}-row            { flex-direction: row !important; }
+    .flex#{$infix}-column         { flex-direction: column !important; }
+    .flex#{$infix}-row-reverse    { flex-direction: row-reverse !important; }
+    .flex#{$infix}-column-reverse { flex-direction: column-reverse !important; }
 
-    .flex#{$infix}-wrap         { -ms-flex-wrap: wrap !important; flex-wrap: wrap !important; }
-    .flex#{$infix}-nowrap       { -ms-flex-wrap: nowrap !important; flex-wrap: nowrap !important; }
-    .flex#{$infix}-wrap-reverse { -ms-flex-wrap: wrap-reverse !important; flex-wrap: wrap-reverse !important; }
-    .flex#{$infix}-fill         { -webkit-box-flex: 1 !important; -ms-flex: 1 1 auto !important; flex: 1 1 auto !important; }
-    .flex#{$infix}-grow-0       { -webkit-box-flex: 0 !important; -ms-flex-positive: 0 !important; flex-grow: 0 !important; }
-    .flex#{$infix}-grow-1       { -webkit-box-flex: 1 !important; -ms-flex-positive: 1 !important; flex-grow: 1 !important; }
-    .flex#{$infix}-shrink-0     { -ms-flex-negative: 0 !important; flex-shrink: 0 !important; }
-    .flex#{$infix}-shrink-1     { -ms-flex-negative: 1 !important; flex-shrink: 1 !important; }
+    .flex#{$infix}-wrap         { flex-wrap: wrap !important; }
+    .flex#{$infix}-nowrap       { flex-wrap: nowrap !important; }
+    .flex#{$infix}-wrap-reverse { flex-wrap: wrap-reverse !important; }
+    .flex#{$infix}-fill         { flex: 1 1 auto !important; }
+    .flex#{$infix}-grow-0       { flex-grow: 0 !important; }
+    .flex#{$infix}-grow-1       { flex-grow: 1 !important; }
+    .flex#{$infix}-shrink-0     { flex-shrink: 0 !important; }
+    .flex#{$infix}-shrink-1     { flex-shrink: 1 !important; }
 
-    .justify-content#{$infix}-start   { -webkit-box-pack: start !important; -ms-flex-pack: start !important; justify-content: flex-start !important; }
-    .justify-content#{$infix}-end     { -webkit-box-pack: end !important; -ms-flex-pack: end !important; justify-content: flex-end !important; }
-    .justify-content#{$infix}-center  { -webkit-box-pack: center !important; -ms-flex-pack: center !important; justify-content: center !important; }
-    .justify-content#{$infix}-between { -webkit-box-pack: justify !important; -ms-flex-pack: justify !important; justify-content: space-between !important; }
-    .justify-content#{$infix}-around  { -ms-flex-pack: distribute !important; justify-content: space-around !important; }
+    .justify-content#{$infix}-start   { justify-content: flex-start !important; }
+    .justify-content#{$infix}-end     { justify-content: flex-end !important; }
+    .justify-content#{$infix}-center  { justify-content: center !important; }
+    .justify-content#{$infix}-between { justify-content: space-between !important; }
+    .justify-content#{$infix}-around  { justify-content: space-around !important; }
 
-    .align-items#{$infix}-start    { -webkit-box-align: start !important; -ms-flex-align: start !important; align-items: flex-start !important; }
-    .align-items#{$infix}-end      { -webkit-box-align: end !important; -ms-flex-align: end !important; align-items: flex-end !important; }
-    .align-items#{$infix}-center   { -webkit-box-align: center !important; -ms-flex-align: center !important; align-items: center !important; }
-    .align-items#{$infix}-baseline { -webkit-box-align: baseline !important; -ms-flex-align: baseline !important; align-items: baseline !important; }
-    .align-items#{$infix}-stretch  { -webkit-box-align: stretch !important; -ms-flex-align: stretch !important; align-items: stretch !important; }
+    .align-items#{$infix}-start    { align-items: flex-start !important; }
+    .align-items#{$infix}-end      { align-items: flex-end !important; }
+    .align-items#{$infix}-center   { align-items: center !important; }
+    .align-items#{$infix}-baseline { align-items: baseline !important; }
+    .align-items#{$infix}-stretch  { align-items: stretch !important; }
 
-    .align-content#{$infix}-start   { -ms-flex-line-pack: start !important; align-content: flex-start !important; }
-    .align-content#{$infix}-end     { -ms-flex-line-pack: end !important; align-content: flex-end !important; }
-    .align-content#{$infix}-center  { -ms-flex-line-pack: center !important; align-content: center !important; }
-    .align-content#{$infix}-between { -ms-flex-line-pack: justify !important; align-content: space-between !important; }
-    .align-content#{$infix}-around  { -ms-flex-line-pack: distribute !important; align-content: space-around !important; }
-    .align-content#{$infix}-stretch { -ms-flex-line-pack: stretch !important; align-content: stretch !important; }
+    .align-content#{$infix}-start   { align-content: flex-start !important; }
+    .align-content#{$infix}-end     { align-content: flex-end !important; }
+    .align-content#{$infix}-center  { align-content: center !important; }
+    .align-content#{$infix}-between { align-content: space-between !important; }
+    .align-content#{$infix}-around  { align-content: space-around !important; }
+    .align-content#{$infix}-stretch { align-content: stretch !important; }
 
-    .align-self#{$infix}-auto     { -ms-flex-item-align: auto !important; align-self: auto !important; }
-    .align-self#{$infix}-start    { -ms-flex-item-align: start !important; align-self: flex-start !important; }
-    .align-self#{$infix}-end      { -ms-flex-item-align: end !important; align-self: flex-end !important; }
-    .align-self#{$infix}-center   { -ms-flex-item-align: center !important; align-self: center !important; }
-    .align-self#{$infix}-baseline { -ms-flex-item-align: baseline !important; align-self: baseline !important; }
-    .align-self#{$infix}-stretch  { -ms-flex-item-align: stretch !important; align-self: stretch !important; }
+    .align-self#{$infix}-auto     { align-self: auto !important; }
+    .align-self#{$infix}-start    { align-self: flex-start !important; }
+    .align-self#{$infix}-end      { align-self: flex-end !important; }
+    .align-self#{$infix}-center   { align-self: center !important; }
+    .align-self#{$infix}-baseline { align-self: baseline !important; }
+    .align-self#{$infix}-stretch  { align-self: stretch !important; }
   }
 }
 
@@ -8302,7 +8020,8 @@ a.close.disabled {
 }
 
 .sticky-top {
-  @supports (position: sticky) {
+  @supports ((position: -webkit-sticky) or (position: sticky)) {
+    position: -webkit-sticky;
     position: sticky;
     top: 0;
     z-index: $zindex-sticky;
@@ -8323,10 +8042,10 @@ a.close.disabled {
 
 // stylelint-disable declaration-no-important
 
-.shadow-sm { -webkit-box-shadow: $box-shadow-sm !important; box-shadow: $box-shadow-sm !important; }
-.shadow { -webkit-box-shadow: $box-shadow !important; box-shadow: $box-shadow !important; }
-.shadow-lg { -webkit-box-shadow: $box-shadow-lg !important; box-shadow: $box-shadow-lg !important; }
-.shadow-none { -webkit-box-shadow: none !important; box-shadow: none !important; }
+.shadow-sm { box-shadow: $box-shadow-sm !important; }
+.shadow { box-shadow: $box-shadow !important; }
+.shadow-lg { box-shadow: $box-shadow-lg !important; }
+.shadow-none { box-shadow: none !important; }
 
 // stylelint-disable declaration-no-important
 
@@ -8550,8 +8269,7 @@ a.close.disabled {
       //color: $black !important; // Black prints faster
       text-shadow: none !important;
       //background: transparent !important;
-      -webkit-box-shadow: none !important;
-              box-shadow: none !important;
+      box-shadow: none !important;
     }
 
     a {
@@ -8836,21 +8554,16 @@ a.close.disabled {
 
 button:focus {
     outline: none;
-    -webkit-box-shadow: none;
-            box-shadow: none;
+    box-shadow: none;
 }
 
 // button combinations
 .btn-group.extended,
 .input-group.extended {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
 
     .extended {
-        -webkit-box-flex: 1;
-            -ms-flex: 1;
-                flex: 1;
+        flex: 1;
 
         .btn {
             width: 100%;
@@ -9067,21 +8780,13 @@ button:focus {
 }
 
 .center-xy {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-flow: row nowrap;
-            flex-flow: row nowrap;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center; // center on the x axys
+    flex-flow: row nowrap;
+    justify-content: center; // center on the x axys
 
     img,
     .owl-stage-outer {
-        -ms-flex-item-align: center;
-            align-self: center; // center on the y axys
+        align-self: center; // center on the y axys
     }
 }
 
@@ -9162,9 +8867,7 @@ tab-list {
 }
 
 .modal-header {
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    align-items: center;
 }
 
 // stylelint-disable
@@ -9256,12 +8959,8 @@ html.ios { // stylelint-disable-line selector-no-qualifying-type
 }
 
 .autocomplete-suggestion {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    align-items: center;
     overflow: hidden;
     white-space: nowrap;
     cursor: pointer;
@@ -9272,9 +8971,7 @@ html.ios { // stylelint-disable-line selector-no-qualifying-type
     }
 
     .label {
-        -webkit-box-flex: 1;
-            -ms-flex: 1;
-                flex: 1;
+        flex: 1;
         color: $gray-900;
 
         .small {
@@ -9288,8 +8985,6 @@ html.ios { // stylelint-disable-line selector-no-qualifying-type
 
     .image {
         position: relative;
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
         width: 40px;
         height: 40px;
@@ -9341,12 +9036,8 @@ html.ios { // stylelint-disable-line selector-no-qualifying-type
 
 .search-permanent {
     @include media-breakpoint-up(md) {
-        -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
-        -webkit-box-pack: justify;
-            -ms-flex-pack: justify;
-                justify-content: space-between;
+        align-items: center;
+        justify-content: space-between;
 
         .controls {
             .nav-link {
@@ -9512,7 +9203,6 @@ html.ie .always-visible-search { // stylelint-disable-line selector-no-qualifyin
     cursor: pointer;
     cursor: hand;
     -webkit-user-select: none;
-       -moz-user-select: none;
         -ms-user-select: none;
             user-select: none;
 }
@@ -9549,14 +9239,12 @@ html.ie .always-visible-search { // stylelint-disable-line selector-no-qualifyin
 
 .owl-carousel.owl-drag .owl-item {
     -webkit-user-select: none;
-       -moz-user-select: none;
         -ms-user-select: none;
             user-select: none;
 }
 
 .owl-carousel.owl-grab {
     cursor: move;
-    cursor: -webkit-grab;
     cursor: grab;
 }
 
@@ -9833,19 +9521,12 @@ html.ie {
 }
 
 .anicon {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    align-items: center;
+    justify-content: center;
     width: 40px;
     cursor: pointer;
     -webkit-user-select: none;
-       -moz-user-select: none;
         -ms-user-select: none;
             user-select: none;
     background: transparent;
@@ -9853,7 +9534,6 @@ html.ie {
     outline: none;
     @include transition(.3s);
     -webkit-appearance: none;
-       -moz-appearance: none;
             appearance: none;
     -webkit-tap-highlight-color: transparent;
 
@@ -9873,7 +9553,6 @@ html.ie {
         margin-bottom: 3px;
         background: transparent;
         border-radius: 0; // stylelint-disable-line property-blacklist
-        -webkit-transition: .3s;
         transition: .3s; // stylelint-disable-line property-blacklist
         -webkit-transform: rotateZ(225deg);
                 transform: rotateZ(225deg);
@@ -9890,7 +9569,6 @@ html.ie {
             content: "";
             background: $white;
             border-radius: 2.85714px; // stylelint-disable-line property-blacklist
-            -webkit-transition: .3s;
             transition: .3s; // stylelint-disable-line property-blacklist
         }
 
@@ -9907,7 +9585,6 @@ html.ie {
             background: $top-bar-bg;
             border: 1px solid $white;
             border-radius: 50%; // stylelint-disable-line property-blacklist
-            -webkit-transition: .3s;
             transition: .3s; // stylelint-disable-line property-blacklist
             -webkit-transform-origin: 50% 50%;
                     transform-origin: 50% 50%;
@@ -10062,8 +9739,6 @@ html.ie {
 }
 
 .live-shopping-countdown-thread-container {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
 
     &:not(:last-child) {
@@ -10368,10 +10043,7 @@ $border-width: 1px;
         border: none;
         // text-align: right;
         outline: none !important;
-        -webkit-box-shadow: none;
-                box-shadow: none; //inset 0 1px 0 rgba(255,255,255,.15), 0 1px 1px rgba(0,0,0,.075);
-
-        -webkit-transition: all .2s;
+        box-shadow: none; //inset 0 1px 0 rgba(255,255,255,.15), 0 1px 1px rgba(0,0,0,.075);
 
         transition: all .2s;
 
@@ -10399,8 +10071,6 @@ $border-width: 1px;
             top: $border-width;
             right: $border-width;
             color: $gray-600;
-
-            -webkit-transition: all .2s;
 
             transition: all .2s;
         }
@@ -10437,7 +10107,6 @@ $border-width: 1px;
         letter-spacing: .1px;
         white-space: nowrap;
         cursor: pointer;
-        -webkit-transition: color .15s;
         transition: color .15s;
 
         /* Better Font Rendering =========== */
@@ -10575,13 +10244,8 @@ $border-width: 1px;
 }
 
 .input-unit.multiple {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-flow: row nowrap;
-            flex-flow: row nowrap;
+    flex-flow: row nowrap;
 
     & > input {
         width: 70%;
@@ -10602,7 +10266,6 @@ $border-width: 1px;
 
 .form-check {
     margin-bottom: .75rem;
-    -webkit-transition: all .3s ease;
     transition: all .3s ease;
 
     &.error {
@@ -10610,7 +10273,6 @@ $border-width: 1px;
         color: $white !important;
         background: $danger !important;
         border-radius: .1rem;
-        -webkit-transition: all .3s ease;
         transition: all .3s ease;
 
         a {
@@ -10808,29 +10470,18 @@ textarea.no-resize {
     }
 
     .footer-services {
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-            -ms-flex-flow: column nowrap;
-                flex-flow: column nowrap;
+        flex-flow: column nowrap;
 
         div {
-            display: -webkit-inline-box;
-            display: -ms-inline-flexbox;
             display: inline-flex;
-            -webkit-box-orient: horizontal;
-            -webkit-box-direction: normal;
-                -ms-flex-flow: row wrap;
-                    flex-flow: row wrap;
+            flex-flow: row wrap;
         }
         img {
             max-height: 4rem;
         }
 
         @include media-breakpoint-up(sm) {
-            -webkit-box-orient: horizontal;
-            -webkit-box-direction: normal;
-                -ms-flex-flow: row nowrap;
-                    flex-flow: row nowrap;
+            flex-flow: row nowrap;
         }
     }
 }
@@ -10845,8 +10496,7 @@ textarea.no-resize {
 
     > header {
         background-color: $navbar-background-color;
-        -webkit-box-shadow: 0 0 7px 0 rgba(0, 0, 0, .5);
-                box-shadow: 0 0 7px 0 rgba(0, 0, 0, .5);
+        box-shadow: 0 0 7px 0 rgba(0, 0, 0, .5);
         -webkit-backface-visibility: hidden;
                 backface-visibility: hidden;
 
@@ -10857,8 +10507,7 @@ textarea.no-resize {
         }
 
         @include media-breakpoint-up(md) {
-            -webkit-box-shadow: none;
-                    box-shadow: none;
+            box-shadow: none;
         }
     }
 }
@@ -10899,8 +10548,7 @@ textarea.no-resize {
     }
 
     .image-container {
-        -ms-flex-negative: 0;
-            flex-shrink: 0;
+        flex-shrink: 0;
         width: 75px;
         margin-right: 10px;
 
@@ -10931,8 +10579,6 @@ textarea.no-resize {
     }
 
     .meta-container-wrapper-inner {
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
 
         html.ie & { // stylelint-disable-line selector-no-qualifying-type
@@ -10962,8 +10608,6 @@ textarea.no-resize {
         margin-left: auto;
 
         @include media-breakpoint-down(lg) {
-            display: -webkit-box;
-            display: -ms-flexbox;
             display: flex;
             width: 100%;
         }
@@ -11028,10 +10672,7 @@ textarea.no-resize {
 }
 
 .basket-preview-content {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    flex-direction: column;
     overflow-x: hidden;
     overflow-y: auto;
 
@@ -11042,13 +10683,10 @@ textarea.no-resize {
 }
 
 .basket-preview-footer {
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    flex-wrap: wrap;
 
     > * {
-        -webkit-box-flex: 1;
-            -ms-flex: 1 0 40%;
-                flex: 1 0 40%;
+        flex: 1 0 40%;
         margin-top: $spacer * .5;
     }
 
@@ -11060,20 +10698,15 @@ textarea.no-resize {
 @include media-breakpoint-between(sm, md) {
     // horizontal view on small devices
     .basket-preview-content {
-        -webkit-box-orient: horizontal;
-        -webkit-box-direction: normal;
-            -ms-flex-direction: row;
-                flex-direction: row;
+        flex-direction: row;
 
         .item-list {
-            -ms-flex-preferred-size: 55%;
-                flex-basis: 55%;
+            flex-basis: 55%;
             max-width: 55%;
         }
 
         .totals {
-            -ms-flex-preferred-size: 45%;
-                flex-basis: 45%;
+            flex-basis: 45%;
             max-width: 45%;
             background-color: $white;
             border-top: none;
@@ -11177,8 +10810,6 @@ body.basket-open {
     background-color: $white;
 
     .prices {
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
     }
 
@@ -11189,9 +10820,7 @@ body.basket-open {
     }
 
     .price-view-port {
-        -webkit-box-flex: 1;
-            -ms-flex: 1 0 0px;
-                flex: 1 0 0;
+        flex: 1 0 0;
     }
 
     .thumb-title {
@@ -11244,8 +10873,7 @@ body.basket-open {
         .badge {
             font-size: .9rem;
             font-weight: 300;
-            -webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, .4);
-                    box-shadow: 0 0 3px 0 rgba(0, 0, 0, .4);
+            box-shadow: 0 0 3px 0 rgba(0, 0, 0, .4);
         }
     }
 
@@ -11359,15 +10987,9 @@ body.basket-open {
             bottom: 50%;
             left: 50%;
             z-index: 10;
-            display: -webkit-box;
-            display: -ms-flexbox;
             display: flex;
-            -webkit-box-align: center;
-                -ms-flex-align: center;
-                    align-items: center;
-            -webkit-box-pack: center;
-                -ms-flex-pack: center;
-                    justify-content: center;
+            align-items: center;
+            justify-content: center;
             width: auto;
             height: auto;
             font-family: FontAwesome; // stylelint-disable-line font-family-no-missing-generic-family-keyword
@@ -11440,13 +11062,10 @@ body.basket-open {
     @include border-radius(0 $border-radius $border-radius 0);
 
     .qty-btn {
-        -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center; /* FF */
+        align-items: center; /* FF */
         background-color: $qty-box-bg;
         border: 1px solid $qty-box-border;
-        -webkit-box-shadow: none;
-                box-shadow: none;
+        box-shadow: none;
         @include border-radius(0 $border-radius 0 0);
 
         + .qty-btn {
@@ -11467,35 +11086,19 @@ body.basket-open {
 
 // Pages
 .page-infos {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-flow: row nowrap;
-            flex-flow: row nowrap;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    flex-flow: row nowrap;
+    align-items: center;
 
     .product-count {
-        -webkit-box-flex: 1;
-            -ms-flex: 1;
-                flex: 1;
+        flex: 1;
     }
 }
 
 .product-list {
 
-    display: -webkit-box;
-
-    display: -ms-flexbox;
-
     display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-flow: row wrap;
-            flex-flow: row wrap;
+    flex-flow: row wrap;
     padding: 0;
     margin-bottom: 0;
     list-style-type: none;
@@ -11547,8 +11150,6 @@ category-item,
 @include media-breakpoint-up(sm) {
     .product-list {
         li {
-            display: -webkit-box;
-            display: -ms-flexbox;
             display: flex;
         }
     }
@@ -11556,11 +11157,8 @@ category-item,
     .product-list.grid {
 
         li {
-            display: -webkit-box;
-            display: -ms-flexbox;
             display: flex;
-            -webkit-box-shadow: none;
-                    box-shadow: none;
+            box-shadow: none;
         }
 
     }
@@ -11570,8 +11168,6 @@ category-item,
     .product-list.grid {
 
         li {
-            display: -webkit-box;
-            display: -ms-flexbox;
             display: flex;
         }
     }
@@ -11581,8 +11177,6 @@ category-item,
     .product-list.grid {
 
         li {
-            display: -webkit-box;
-            display: -ms-flexbox;
             display: flex;
         }
     }
@@ -11990,13 +11584,8 @@ html.crios {
 }
 
 .item-filter-price {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
+    flex-direction: row;
 
     > .input-group {
         margin-right: $spacer;
@@ -12288,19 +11877,12 @@ html.crios {
     }
 
     .order-property-slider-controls {
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-orient: horizontal;
-        -webkit-box-direction: normal;
-            -ms-flex-direction: row;
-                flex-direction: row;
+        flex-direction: row;
     }
 
     .slider-nav {
-        -webkit-box-flex: 1;
-            -ms-flex: 1;
-                flex: 1;
+        flex: 1;
         text-align: center;
 
         span {
@@ -12344,8 +11926,6 @@ html.crios {
 }
 
 .add-to-basket-container {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
 
     .quantity-input-container {
@@ -12354,26 +11934,15 @@ html.crios {
 }
 
 .v-s-boxes {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-flow: row wrap;
-            flex-flow: row wrap;
+    flex-flow: row wrap;
     margin-right: -.5rem;
     margin-left: -.5rem;
 
     .v-s-box {
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
-        -webkit-box-pack: center;
-            -ms-flex-pack: center;
-                justify-content: center;
+        align-items: center;
+        justify-content: center;
         min-width: 40px;
         min-height: 40px;
         margin: .5rem;
@@ -12628,10 +12197,7 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
                 margin-left: 0;
             }
             .prices {
-                -webkit-box-orient: vertical;
-                -webkit-box-direction: normal;
-                    -ms-flex-flow: column;
-                        flex-flow: column;
+                flex-flow: column;
             }
         }
     }
@@ -12693,13 +12259,8 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
 
 .widget-step-by-step-navigation {
     .nav-item {
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-            -ms-flex-direction: column;
-                flex-direction: column;
-        -webkit-box-pack: center;
-            -ms-flex-pack: center;
-                justify-content: center;
+        flex-direction: column;
+        justify-content: center;
         height: 100%;
         min-height: 75px;
         cursor: pointer;
@@ -12715,9 +12276,7 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
     }
 
     .nav-text {
-        -webkit-box-flex: 1;
-            -ms-flex: auto;
-                flex: auto;
+        flex: auto;
         background-color: $gray-200;
     }
 
@@ -12740,8 +12299,7 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
     }
 
     span {
-        -ms-flex-item-align: center;
-            align-self: center;
+        align-self: center;
     }
 }
 
@@ -12781,7 +12339,6 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
     .collapse-container {
         .widget-grid {
             -webkit-column-span: all;
-               -moz-column-span: all;
                     column-span: all;
         }
     }
@@ -12791,8 +12348,7 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
     @each $color, $value in $shop-builder-colors {
         &.widget-#{$color} {
             input:checked + .provider-select-label {
-                -webkit-box-shadow: inset 0 0 0 .1rem $value;
-                        box-shadow: inset 0 0 0 .1rem $value;
+                box-shadow: inset 0 0 0 .1rem $value;
             }
         }
     }
@@ -12815,9 +12371,7 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
 
     &.align-items-end {
         .container-max {
-            -webkit-box-align: end;
-                -ms-flex-align: end;
-                    align-items: flex-end;
+            align-items: flex-end;
         }
     }
 
@@ -12892,10 +12446,8 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
                 top: -4px;
                 right: 0;
                 font-size: 1.5rem;
-                -webkit-transition-timing-function: ease;
-                        transition-timing-function: ease;
-                -webkit-transition-duration: .35s;
-                        transition-duration: .35s;
+                transition-timing-function: ease;
+                transition-duration: .35s;
                 -webkit-transform: scaleY(-1);
                         transform: scaleY(-1);
                 -webkit-transform-origin: 50% 60%;
@@ -12950,8 +12502,6 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
     }
 
     > .widget-inner {
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
         padding: 1.5rem;
 
@@ -12970,12 +12520,8 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
     &.widget-image-box-fullwidth {
         > .widget-inner {
             .widget-caption {
-                display: -webkit-box;
-                display: -ms-flexbox;
                 display: flex;
-                -webkit-box-align: center;
-                    -ms-flex-align: center;
-                        align-items: center;
+                align-items: center;
                 width: 100%;
                 padding: 1rem;
 
@@ -12989,9 +12535,7 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
 
     &.widget-image-box-inline-caption {
         > .widget-inner {
-            -webkit-box-align: end;
-                -ms-flex-align: end;
-                    align-items: flex-end;
+            align-items: flex-end;
 
             .widget-caption {
                 padding: 0 1.5rem;
@@ -13183,15 +12727,9 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
     position: absolute;
     top: 0;
     bottom: 0;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    align-items: center;
+    justify-content: center;
     width: 15%;
     color: #fff;
     text-align: center;
@@ -13270,8 +12808,6 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
         }
 
         .carousel-inner {
-            display: -webkit-box;
-            display: -ms-flexbox;
             display: flex;
             height: 100%;
         }
@@ -13306,8 +12842,7 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
 
             li {
                 /* Bootstrap override */
-                -webkit-box-sizing: border-box;
-                        box-sizing: border-box;
+                box-sizing: border-box;
                 width: .8rem;
                 height: .8rem;
                 margin: 2px;
@@ -13394,18 +12929,12 @@ html.ie {
     }
 
     .widget-caption {
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
+        align-items: center;
         padding: .25rem 1.5rem;
 
         > div {
-            -webkit-box-flex: 1;
-                -ms-flex: 1;
-                    flex: 1;
+            flex: 1;
         }
 
     }
@@ -13441,13 +12970,8 @@ html.ie {
     }
 
     @include media-breakpoint-down(sm) {
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-            -ms-flex-direction: column;
-                flex-direction: column;
-        -webkit-box-align: inherit !important;
-            -ms-flex-align: inherit !important;
-                align-items: inherit !important; // stylelint-disable-line declaration-no-important
+        flex-direction: column;
+        align-items: inherit !important; // stylelint-disable-line declaration-no-important
 
         h1 {
             font-size: 1.4rem;
@@ -13584,14 +13108,10 @@ html.ie {
 
 .widget-grid {
     > .widget-inner {
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
 
         > div {
-            -webkit-box-flex: 1;
-                -ms-flex: 1;
-                    flex: 1;
+            flex: 1;
             max-width: 100%;
         }
     }
@@ -13606,13 +13126,8 @@ html.ie {
     }
 
     .widget-inner-stacked {
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-            -ms-flex-direction: column;
-                flex-direction: column;
+        flex-direction: column;
 
         > .widget-inner {
             max-width: none;
@@ -13641,8 +13156,7 @@ html.ie .widget-grid .widget-inner-stacked { // stylelint-disable-line selector-
 }
 
 html.safari .widget-grid .widget-inner-stacked .widget-inner { // stylelint-disable-line selector-no-qualifying-type
-    -ms-flex-preferred-size: auto !important;
-        flex-basis: auto !important; // stylelint-disable-line declaration-no-important
+    flex-basis: auto !important; // stylelint-disable-line declaration-no-important
 }
 
 .nav-link.text-appearance.active {
@@ -13669,11 +13183,8 @@ $normalmenu-color: $primary !default;
 
     > .container-max {
         > .row {
-            -ms-flex-wrap: nowrap;
-                flex-wrap: nowrap;
-            -webkit-box-align: center;
-                -ms-flex-align: center;
-                    align-items: center;
+            flex-wrap: nowrap;
+            align-items: center;
         }
     }
 
@@ -13769,16 +13280,12 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
         overflow-x: auto;
         overflow-y: hidden;
         -webkit-column-count: 5;
-           -moz-column-count: 5;
                 column-count: 5;
         -webkit-column-fill: balance;
-           -moz-column-fill: balance;
                 column-fill: balance;
         -webkit-column-gap: .5em;
-           -moz-column-gap: .5em;
                 column-gap: .5em;
         -webkit-column-rule: 1px solid $gray-300;
-           -moz-column-rule: 1px solid $gray-300;
                 column-rule: 1px solid $gray-300;
         word-wrap: break-word;
         background-color: color-yiq($megamenu-color);
@@ -13827,11 +13334,8 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
 
 // normalmenu & megamenu
 .main-navbar-collapsable {
-    -webkit-box-flex: 1;
-        -ms-flex: 1 1 auto;
-            flex: 1 1 auto;
-    -ms-flex-item-align: stretch;
-        align-self: stretch;
+    flex: 1 1 auto;
+    align-self: stretch;
     font-size: 1rem;
 
     ul {
@@ -13848,11 +13352,8 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
     }
 
     .mainmenu {
-        -ms-flex-flow: wrap;
-            flex-flow: wrap;
-        -webkit-box-pack: end;
-            -ms-flex-pack: end;
-                justify-content: flex-end;
+        flex-flow: wrap;
+        justify-content: flex-end;
         height: 100%;
 
         > li {
@@ -13923,9 +13424,7 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
     }
 
     .nav-direction {
-        -webkit-box-flex: 1;
-            -ms-flex: 1 0 20%;
-                flex: 1 0 20%;
+        flex: 1 0 20%;
         padding: 1rem;
         text-align: center;
     }
@@ -13983,28 +13482,21 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
         }
 
         .btn-up {
-            -webkit-box-flex: 0 !important;
-                -ms-flex: none !important;
-                    flex: none !important; // stylelint-disable-line declaration-no-important
+            flex: none !important; // stylelint-disable-line declaration-no-important
             -webkit-transform: rotateY(180deg);
                     transform: rotateY(180deg);
         }
 
         li {
-            display: -webkit-box;
-            display: -ms-flexbox;
             display: flex;
-            -ms-flex-wrap: wrap;
-                flex-wrap: wrap;
+            flex-wrap: wrap;
             float: left;
             width: 100%;
             cursor: pointer;
 
             a {
                 display: inline-block;
-                -webkit-box-flex: 1;
-                    -ms-flex: 1 0 80%;
-                        flex: 1 0 80%;
+                flex: 1 0 80%;
                 padding: 1rem;
                 color: inherit;
 
@@ -14149,14 +13641,10 @@ html.ie { // stylelint-disable-line selector-no-qualifying-type
     .mobile-navigation { // stylelint-disable-line selector-no-qualifying-type
         .mainmenu { // stylelint-disable-line selector-no-qualifying-type
             a {
-                -webkit-box-flex: 1;
-                    -ms-flex: 1 0 75%;
-                        flex: 1 0 75%;
+                flex: 1 0 75%;
             }
             .nav-direction { // stylelint-disable-line selector-no-qualifying-type
-                -webkit-box-flex: 1;
-                    -ms-flex: 1 0 10%;
-                        flex: 1 0 10%;
+                flex: 1 0 10%;
             }
         }
     }
@@ -14233,9 +13721,7 @@ html.ie { // stylelint-disable-line selector-no-qualifying-type
 }
 
 .control-user {
-    -webkit-box-flex: 1;
-        -ms-flex: 1 0 auto;
-            flex: 1 0 auto;
+    flex: 1 0 auto;
 
     .dropdown {
 
@@ -14596,22 +14082,14 @@ header .widget {
 
 .widget-alignment-center {
     .widget-alignment {
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-pack: center;
-            -ms-flex-pack: center;
-                justify-content: center;
+        justify-content: center;
     }
 }
 .widget-alignment-right {
     .widget-alignment {
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-pack: end;
-            -ms-flex-pack: end;
-                justify-content: flex-end;
+        justify-content: flex-end;
     }
 }
 
@@ -14665,12 +14143,10 @@ header .widget {
 
     a.text-appearance,
     .btn-appearance {
-      -webkit-text-decoration-color: $value;
-              text-decoration-color: $value;
+      text-decoration-color: $value;
 
       @include hover-focus() {
-        -webkit-text-decoration-color: darken($value, 7.5);
-                text-decoration-color: darken($value, 7.5);
+        text-decoration-color: darken($value, 7.5);
       }
     }
 
@@ -14762,13 +14238,8 @@ header .widget {
 .page-wish-list {
     .category-list-view-port {
         button {
-            display: -webkit-box;
-            display: -ms-flexbox;
             display: flex;
-            -webkit-box-orient: horizontal;
-            -webkit-box-direction: reverse;
-                -ms-flex-direction: row-reverse;
-                    flex-direction: row-reverse;
+            flex-direction: row-reverse;
             white-space: nowrap;
 
             .fa {
@@ -14898,7 +14369,6 @@ body.lb-disable-scrolling {
     float: left;
     background: url(../images/prev.png) left 48% no-repeat;
     opacity: 0;
-    -webkit-transition: opacity 0.6s;
     transition: opacity 0.6s;
 }
 
@@ -14912,7 +14382,6 @@ body.lb-disable-scrolling {
     float: right;
     background: url(../images/next.png) right 48% no-repeat;
     opacity: 0;
-    -webkit-transition: opacity 0.6s;
     transition: opacity 0.6s;
 }
 
@@ -14974,7 +14443,6 @@ body.lb-disable-scrolling {
     text-align: right;
     outline: none;
     opacity: 0.7;
-    -webkit-transition: opacity 0.2s;
     transition: opacity 0.2s;
 }
 

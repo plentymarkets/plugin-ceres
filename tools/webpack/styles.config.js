@@ -28,10 +28,12 @@ module.exports = (mode) =>
                             {
                                 loader: "postcss-loader",
                                 options: {
-                                    sourceMap: mode !== "production",
-                                    plugins: [
-                                        require("autoprefixer")()
-                                    ]
+                                    postcssOptions: {
+                                        sourceMap: mode !== "production",
+                                        plugins: [
+                                            require("autoprefixer")()
+                                        ]
+                                    }
                                 }
                             },
                             {
