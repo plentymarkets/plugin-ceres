@@ -130,7 +130,7 @@ export default {
         showRejectAll: {
             type: Boolean,
             default: true
-        },
+        }
     },
 
     mixins: [ComponentIdMixin], // Experimental mixin, may be removed in the future.
