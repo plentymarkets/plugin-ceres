@@ -13015,14 +13015,6 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
         }
     }
 
-    &.widget-image-box-no-caption {
-        > .widget-inner {
-            .widget-caption {
-                display: none;
-            }
-        }
-    }
-
     &.widget-retain-aspect-ratio {
         position: relative;
 
