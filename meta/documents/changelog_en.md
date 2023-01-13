@@ -9,7 +9,7 @@
 ### Fixed
 
 - The image box widget rendered the inserted text even if "Image without box" was selected in the "Box style" option. The inserted text is now removed instead of being made invisible.
-- Under some conditions, the sticky container widget on the article view could wobble. This was fixed.
+- Under some conditions, the sticky container widget on the article view could shake. This was fixed.
 
 ### Changed templates
 
