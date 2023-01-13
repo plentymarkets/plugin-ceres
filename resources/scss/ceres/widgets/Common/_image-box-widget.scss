@@ -77,14 +77,6 @@
         }
     }
 
-    &.widget-image-box-no-caption {
-        > .widget-inner {
-            .widget-caption {
-                display: none;
-            }
-        }
-    }
-
     &.widget-retain-aspect-ratio {
         position: relative;
 
