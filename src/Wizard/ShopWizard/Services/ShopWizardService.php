@@ -323,17 +323,6 @@ class ShopWizardService
         $data['settingsSelection_search'] = $this->checkSelectionEnabled('search', $data);
         $data['settingsSelection_seo'] = $this->checkSelectionEnabled('seo', $data);
 
-        //get shop booster cache
-        if (!empty($plentyId)) {
-            $cacheRepository = pluginApp(ContentCacheSettingsRepositoryContract::class);
-            $shopBooster = $cacheRepository->getSettings($plentyId);
-
-            if ($shopBooster instanceOf ContentCacheSettings) {
-                $shopBoosterData = $shopBooster->toArray();
-                $data['performance_shopBooster'] = (bool)$shopBoosterData['contentCacheActive'];
-            }
-        }
-
         if ($hasShippingMethod && $hasShippingProfile && $hasPaymentMethod && $hasShippingCountry) {
             $data['setAllRequiredAssistants'] = 'true';
         }

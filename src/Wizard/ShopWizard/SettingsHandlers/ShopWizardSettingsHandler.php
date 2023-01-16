@@ -215,13 +215,6 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     $siteMapRepo->updateByWebstoreId($webstoreId, $siteMapConfig);
                 }
 
-                //we handle settings for shopping booster
-
-                if (isset($data["performance_shopBooster"])) {
-                    $cacheRepo = pluginApp(ContentCacheSettingsRepositoryContract::class);
-                    $cacheRepo->saveSettings($plentyId, (bool)$data["performance_shopBooster"]);
-                }
-
                 //save search languages settings
                 if (
                     isset($data["languages_firstSearchLanguage"]) ||

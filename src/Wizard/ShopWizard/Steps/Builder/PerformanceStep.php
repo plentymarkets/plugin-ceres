@@ -32,32 +32,7 @@ class PerformanceStep extends Step
             ]
         ];
         
-        if ($this->isModuleS3Active()) {
-            array_unshift($step["sections"], $this->generateShopBoosterSection());
-        }
-        
         return $step;
-    }
-
-    /**
-     * @return array
-     */
-    private function generateShopBoosterSection():array
-    {
-        return [
-            "title" => "Wizard.shopBooster",
-            "description" => "Wizard.shopBoosterDescription",
-            "condition" => $this->globalsCondition,
-            "form" => [
-                "performance_shopBooster" => [
-                    "type" => "toggle",
-                    "defaultValue" => false,
-                    "options" => [
-                        "name" =>  "Wizard.activateShopBooster"
-                    ]
-                ]
-            ]
-        ];
     }
     
     private function generateSsrSection():array
@@ -154,12 +129,5 @@ class PerformanceStep extends Step
                 ]
             ]
         ];
-    }
-    
-    private function isModuleS3Active()
-    {
-        /** @var PlentyModuleRepositoryContract $moduleRepo */
-        $moduleRepo = pluginApp(PlentyModuleRepositoryContract::class);
-        return $moduleRepo->isActive('cdn.contentCache.s3');
     }
 }
