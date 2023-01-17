@@ -212,7 +212,7 @@ function _validateSelect($formControl, validationKey)
     const selectedOptionText = $formControl.children("option:selected").text();
     const selectedOptionVal = $formControl.children("option:selected").val();
 
-    return $.trim(selectedOptionText) != "" && $.trim(selectedOptionVal) != "please select";
+    return $.trim(selectedOptionText) !== "" && !isNaN(Number($.trim(selectedOptionVal)));
 }
 
 function _validateInput($formControl, validationKey)
