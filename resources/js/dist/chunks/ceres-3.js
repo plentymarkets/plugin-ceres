@@ -1409,6 +1409,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -7406,7 +7407,10 @@ var render = function() {
                       }
                     ],
                     staticClass: "input-unit",
-                    attrs: { "data-model": "stateId" }
+                    attrs: {
+                      "data-model": "stateId",
+                      "data-validate": "please-select"
+                    }
                   },
                   [
                     _c(

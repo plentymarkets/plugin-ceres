@@ -14,7 +14,8 @@
                 class="input-unit"
                 v-if="stateList && stateList.length > 0"
                 v-validate="isInRequiredFields('stateId')"
-                data-model="stateId">
+                data-model="stateId"
+                data-validate="please-select">
                 <select :id="'state-id-select' + _uid" :value="selectedStateId" class="custom-select" @change="stateChanged($event.target.value)">
                     <option :selected="selectedStateId === null">{{ $translate("Ceres::Template.addressPleaseSelect") }}</option>
                     <option :value="state.id" :selected="state.id === selectedStateId" v-for="state in stateList" :key="state.id">
