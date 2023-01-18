@@ -35,12 +35,14 @@ module.exports = (mode) =>
                 },
                 {
                     test: /\.m?js$/,
-                    exclude: /node_modules/,
-                    include: "/resources/js/src/",
-                    loader: "babel-loader",
-                    options: {
-                        cacheCompression: false,
-                        cacheDirectory: true
+                    exclude: /(node_modules|bower_components)/,
+                    use: {
+                        loader: "babel-loader",
+                        options: {
+                            presets: ["@babel/preset-env"],
+                            cacheCompression: false,
+                            cacheDirectory: true
+                        }
                     }
                 }
             ]

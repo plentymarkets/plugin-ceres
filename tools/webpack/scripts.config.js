@@ -57,9 +57,14 @@ module.exports = env =>
                 },
                 {
                     test: /\.m?js$/,
-                    exclude: /node_modules/,
+                    exclude: /(node_modules|bower_components)/,
                     use: {
-                        loader: "babel-loader"
+                        loader: "babel-loader",
+                        options: {
+                            presets: ["@babel/preset-env"],
+                            cacheCompression: false,
+                            cacheDirectory: true
+                        }
                     }
                 }
             ]
