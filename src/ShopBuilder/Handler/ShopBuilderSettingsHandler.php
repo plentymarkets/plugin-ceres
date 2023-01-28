@@ -109,7 +109,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
      */
     public function readRouting_HomeEnableRoute()
     {
-        return in_array( RouteConfig::HOME, RouteConfig::getEnabledRoutes());
+        return in_array( RouteConfig::HOME, RouteConfig::getEnabledRoutes(true));
     }
 
     /**
@@ -128,7 +128,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
      */
     public function readRouting_BasketEnableRoute()
     {
-        return in_array( RouteConfig::BASKET, RouteConfig::getEnabledRoutes());
+        return in_array( RouteConfig::BASKET, RouteConfig::getEnabledRoutes(true));
     }
 
     /**
@@ -147,7 +147,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
      */
     public function readRouting_CheckoutEnableRoute()
     {
-        return in_array( RouteConfig::CHECKOUT, RouteConfig::getEnabledRoutes());
+        return in_array( RouteConfig::CHECKOUT, RouteConfig::getEnabledRoutes(true));
     }
 
     /**
@@ -166,7 +166,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
      */
     public function readRouting_MyAccountEnableRoute()
     {
-        return in_array( RouteConfig::MY_ACCOUNT, RouteConfig::getEnabledRoutes());
+        return in_array( RouteConfig::MY_ACCOUNT, RouteConfig::getEnabledRoutes(true));
     }
 
     /**
@@ -185,7 +185,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
      */
     public function readRouting_searchEnableRoute(): bool
     {
-        return in_array(RouteConfig::SEARCH, RouteConfig::getEnabledRoutes());
+        return in_array(RouteConfig::SEARCH, RouteConfig::getEnabledRoutes(true));
     }
 
     /**
@@ -204,7 +204,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
      */
     public function readRouting_ConfirmationEnableRoute()
     {
-        return in_array( RouteConfig::CONFIRMATION, RouteConfig::getEnabledRoutes());
+        return in_array( RouteConfig::CONFIRMATION, RouteConfig::getEnabledRoutes(true));
     }
 
     /**
@@ -223,7 +223,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
      */
     public function readRouting_LoginEnableRoute()
     {
-        return in_array( RouteConfig::LOGIN, RouteConfig::getEnabledRoutes());
+        return in_array( RouteConfig::LOGIN, RouteConfig::getEnabledRoutes(true));
     }
 
     /**
@@ -242,7 +242,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
      */
     public function readRouting_RegisterEnableRoute()
     {
-        return in_array( RouteConfig::REGISTER, RouteConfig::getEnabledRoutes());
+        return in_array( RouteConfig::REGISTER, RouteConfig::getEnabledRoutes(true));
     }
 
     /**
@@ -261,7 +261,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
      */
     public function readRouting_CancellationRightsEnableRoute()
     {
-        return in_array( RouteConfig::CANCELLATION_RIGHTS, RouteConfig::getEnabledRoutes());
+        return in_array( RouteConfig::CANCELLATION_RIGHTS, RouteConfig::getEnabledRoutes(true));
     }
 
     /**
@@ -280,7 +280,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
      */
     public function readRouting_CancellationFormEnableRoute()
     {
-        return in_array( RouteConfig::CANCELLATION_FORM, RouteConfig::getEnabledRoutes());
+        return in_array( RouteConfig::CANCELLATION_FORM, RouteConfig::getEnabledRoutes(true));
     }
 
     /**
@@ -299,7 +299,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
      */
     public function readRouting_LegalDisclosureEnableRoute()
     {
-        return in_array( RouteConfig::LEGAL_DISCLOSURE, RouteConfig::getEnabledRoutes());
+        return in_array( RouteConfig::LEGAL_DISCLOSURE, RouteConfig::getEnabledRoutes(true));
     }
 
     /**
@@ -318,7 +318,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
      */
     public function readRouting_PrivacyPolicyEnableRoute()
     {
-        return in_array( RouteConfig::PRIVACY_POLICY, RouteConfig::getEnabledRoutes());
+        return in_array( RouteConfig::PRIVACY_POLICY, RouteConfig::getEnabledRoutes(true));
     }
 
     /**
@@ -337,7 +337,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
      */
     public function readRouting_GtcEnableRoute()
     {
-        return in_array( RouteConfig::TERMS_CONDITIONS, RouteConfig::getEnabledRoutes());
+        return in_array( RouteConfig::TERMS_CONDITIONS, RouteConfig::getEnabledRoutes(true));
     }
 
     /**
@@ -356,7 +356,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
      */
     public function readRouting_ContactEnableRoute()
     {
-        return in_array( RouteConfig::CONTACT, RouteConfig::getEnabledRoutes());
+        return in_array( RouteConfig::CONTACT, RouteConfig::getEnabledRoutes(true));
     }
 
     /**
@@ -375,7 +375,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
      */
     public function readRouting_WishListEnableRoute()
     {
-        return in_array( RouteConfig::WISH_LIST, RouteConfig::getEnabledRoutes());
+        return in_array( RouteConfig::WISH_LIST, RouteConfig::getEnabledRoutes(true));
     }
 
     /**
@@ -394,7 +394,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
      */
     public function readRouting_ChangeMailEnableRoute()
     {
-        return in_array( RouteConfig::CHANGE_MAIL, RouteConfig::getEnabledRoutes());
+        return in_array( RouteConfig::CHANGE_MAIL, RouteConfig::getEnabledRoutes(true));
     }
 
     /**
@@ -413,7 +413,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
      */
     public function readRouting_PasswordResetEnableRoute()
     {
-        return in_array( RouteConfig::PASSWORD_RESET, RouteConfig::getEnabledRoutes());
+        return in_array( RouteConfig::PASSWORD_RESET, RouteConfig::getEnabledRoutes(true));
     }
 
     /**
@@ -432,7 +432,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
      */
     public function readRouting_NewsletterOptOutEnableRoute()
     {
-        return in_array( RouteConfig::NEWSLETTER_OPT_OUT, RouteConfig::getEnabledRoutes());
+        return in_array( RouteConfig::NEWSLETTER_OPT_OUT, RouteConfig::getEnabledRoutes(true));
     }
 
     /**
@@ -451,7 +451,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
      */
     public function readRouting_OrderReturnEnableRoute()
     {
-        return in_array( RouteConfig::ORDER_RETURN, RouteConfig::getEnabledRoutes());
+        return in_array( RouteConfig::ORDER_RETURN, RouteConfig::getEnabledRoutes(true));
     }
 
     /**
@@ -470,7 +470,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
      */
     public function readRouting_PageNotFoundEnableRoute()
     {
-        return in_array( RouteConfig::PAGE_NOT_FOUND, RouteConfig::getEnabledRoutes());
+        return in_array( RouteConfig::PAGE_NOT_FOUND, RouteConfig::getEnabledRoutes(true));
     }
 
     /**
@@ -493,7 +493,7 @@ class ShopBuilderSettingsHandler extends MappableSettingsHandler
     {
         if(is_null($this->enabledRoutes))
         {
-            $this->enabledRoutes = RouteConfig::getEnabledRoutes();
+            $this->enabledRoutes = RouteConfig::getEnabledRoutes(true);
         }
 
         if( $value && !in_array($key, $this->enabledRoutes) )
