@@ -1409,7 +1409,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -7401,16 +7400,14 @@ var render = function() {
                     directives: [
                       {
                         name: "validate",
-                        rawName: "v-validate",
+                        rawName: "v-validate:number",
                         value: _vm.isInRequiredFields("stateId"),
-                        expression: "isInRequiredFields('stateId')"
+                        expression: "isInRequiredFields('stateId')",
+                        arg: "number"
                       }
                     ],
                     staticClass: "input-unit",
-                    attrs: {
-                      "data-model": "stateId",
-                      "data-validate": "please-select"
-                    }
+                    attrs: { "data-model": "stateId" }
                   },
                   [
                     _c(

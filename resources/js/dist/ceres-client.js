@@ -67793,7 +67793,12 @@ function _validateGroup($formControl, validationKey, requiredCount) {
 function _validateSelect($formControl, validationKey) {
   var selectedOptionText = $formControl.children("option:selected").text();
   var selectedOptionVal = $formControl.children("option:selected").val();
-  return $.trim(selectedOptionText) !== "" && !isNaN(Number($.trim(selectedOptionVal)));
+
+  if (validationKey === "number") {
+    return $.trim(selectedOptionText) !== "" && !isNaN(Number($.trim(selectedOptionVal)));
+  }
+
+  return $.trim(selectedOptionText) !== "" && $.trim(selectedOptionVal) !== "please select";
 }
 
 function _validateInput($formControl, validationKey) {

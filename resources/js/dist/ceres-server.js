@@ -4814,7 +4814,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -47650,16 +47649,14 @@ var render = function() {
                     directives: [
                       {
                         name: "validate",
-                        rawName: "v-validate",
+                        rawName: "v-validate:number",
                         value: _vm.isInRequiredFields("stateId"),
-                        expression: "isInRequiredFields('stateId')"
+                        expression: "isInRequiredFields('stateId')",
+                        arg: "number"
                       }
                     ],
                     staticClass: "input-unit",
-                    attrs: {
-                      "data-model": "stateId",
-                      "data-validate": "please-select"
-                    }
+                    attrs: { "data-model": "stateId" }
                   },
                   [
                     _vm._ssrNode(
@@ -87050,7 +87047,12 @@ function _validateGroup($formControl, validationKey, requiredCount) {
 function _validateSelect($formControl, validationKey) {
   var selectedOptionText = $formControl.children("option:selected").text();
   var selectedOptionVal = $formControl.children("option:selected").val();
-  return $.trim(selectedOptionText) !== "" && !isNaN(Number($.trim(selectedOptionVal)));
+
+  if (validationKey === "number") {
+    return $.trim(selectedOptionText) !== "" && !isNaN(Number($.trim(selectedOptionVal)));
+  }
+
+  return $.trim(selectedOptionText) !== "" && $.trim(selectedOptionVal) !== "please select";
 }
 
 function _validateInput($formControl, validationKey) {
