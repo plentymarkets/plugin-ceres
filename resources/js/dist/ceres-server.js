@@ -11124,10 +11124,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     });
   },
   methods: {
-    showAutocompleteResults: function showAutocompleteResults() {
-      console.log(this.searchString.length, this.searchMinLength, this.hasInitialInput);
-      return this.searchString.length >= this.searchMinLength && this.hasInitialInput;
-    },
     search: function search() {
       if (this.$refs.searchInput.value.length) {
         if (Object(_helper_url__WEBPACK_IMPORTED_MODULE_12__["pathnameEquals"])(App.urls.search)) {
@@ -53001,8 +52997,7 @@ var render = function() {
                   "<div" +
                     _vm._ssrStyle(null, null, {
                       display:
-                        _vm.showAutocompleteResults() ||
-                        _vm.$ceres.isShopBuilder
+                        _vm.hasInitialInput || _vm.$ceres.isShopBuilder
                           ? ""
                           : "none"
                     }) +
