@@ -1671,8 +1671,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: {
     showAutocompleteResults: function showAutocompleteResults() {
-      console.log(this.searchString.length, this.searchMinLength, this.hasInitialInput, this.$ceres.isShopBuilder());
-      return this.searchString.length >= this.searchMinLength && this.hasInitialInput || this.$ceres.isShopBuilder();
+      console.log(this.searchString.length, this.searchMinLength, this.hasInitialInput);
+      return this.searchString.length >= this.searchMinLength && this.hasInitialInput;
     },
     search: function search() {
       if (this.$refs.searchInput.value.length) {
@@ -37522,8 +37522,11 @@ var render = function() {
                       {
                         name: "show",
                         rawName: "v-show",
-                        value: _vm.showAutocompleteResults(),
-                        expression: "showAutocompleteResults()"
+                        value:
+                          _vm.showAutocompleteResults() ||
+                          _vm.$ceres.isShopBuilder,
+                        expression:
+                          "showAutocompleteResults() || $ceres.isShopBuilder"
                       }
                     ]
                   },

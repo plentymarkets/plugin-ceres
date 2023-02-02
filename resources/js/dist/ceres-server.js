@@ -11125,8 +11125,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: {
     showAutocompleteResults: function showAutocompleteResults() {
-      console.log(this.searchString.length, this.searchMinLength, this.hasInitialInput, this.$ceres.isShopBuilder());
-      return this.searchString.length >= this.searchMinLength && this.hasInitialInput || this.$ceres.isShopBuilder();
+      console.log(this.searchString.length, this.searchMinLength, this.hasInitialInput);
+      return this.searchString.length >= this.searchMinLength && this.hasInitialInput;
     },
     search: function search() {
       if (this.$refs.searchInput.value.length) {
@@ -53000,7 +53000,11 @@ var render = function() {
                 _vm._ssrNode(
                   "<div" +
                     _vm._ssrStyle(null, null, {
-                      display: _vm.showAutocompleteResults() ? "" : "none"
+                      display:
+                        _vm.showAutocompleteResults() ||
+                        _vm.$ceres.isShopBuilder
+                          ? ""
+                          : "none"
                     }) +
                     ">",
                   "</div>",

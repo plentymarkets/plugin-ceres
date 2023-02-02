@@ -13,7 +13,7 @@
             </div>
 
             <template v-if="isSearchFocused">
-                <div v-show="showAutocompleteResults()">
+                <div v-show="showAutocompleteResults() || $ceres.isShopBuilder">
                     <slot name="autocomplete-suggestions">
                         <div class="autocomplete-suggestions shadow bg-white w-100">
                             <search-suggestion-item
@@ -115,8 +115,8 @@ export default {
     {
         showAutocompleteResults()
         {
-          console.log(this.searchString.length, this.searchMinLength, this.hasInitialInput, this.$ceres.isShopBuilder())
-          return (this.searchString.length >= this.searchMinLength && this.hasInitialInput) || this.$ceres.isShopBuilder()
+          console.log(this.searchString.length, this.searchMinLength, this.hasInitialInput)
+          return this.searchString.length >= this.searchMinLength && this.hasInitialInput
         },
         search()
         {
