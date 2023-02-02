@@ -115,8 +115,8 @@ export default {
     {
         showAutocompleteResults()
         {
-          console.log(this.searchString.length, this.searchMinLength, this.hasInitialInput, $ceres.isShopBuilder)
-          return (this.searchString.length >= this.searchMinLength && this.hasInitialInput) || $ceres.isShopBuilder
+          console.log(this.searchString.length, this.searchMinLength, this.hasInitialInput, this.$ceres.isShopBuilder)
+          return (this.searchString.length >= this.searchMinLength && this.hasInitialInput) || this.$ceres.isShopBuilder
         },
         search()
         {
