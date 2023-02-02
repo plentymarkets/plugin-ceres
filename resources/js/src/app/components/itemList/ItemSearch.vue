@@ -96,9 +96,10 @@ export default {
 
     mounted()
     {
+        const thisOne = this
         this.onValueChanged = debounce(searchString =>
         {
-            this.autocomplete(searchString);
+            thisOne.autocomplete(searchString);
         }, defaultValue(this.timeout, 200));
 
         this.$nextTick(() =>
