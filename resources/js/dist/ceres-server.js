@@ -11112,9 +11112,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     var _this = this;
 
-    var thisOne = this;
     this.onValueChanged = Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_14__["debounce"])(function (searchString) {
-      thisOne.autocomplete(searchString);
+      _this.autocomplete(searchString);
     }, Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["defaultValue"])(this.timeout, 200));
     this.$nextTick(function () {
       var urlParams = _services_UrlService__WEBPACK_IMPORTED_MODULE_10__["default"].getUrlParams(document.location.search);
@@ -11125,6 +11124,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     });
   },
   methods: {
+    showAutocompleteResults: function showAutocompleteResults() {
+      console.log(this.searchString.length, this.searchMinLength, this.hasInitialInput, $ceres.isShopBuilder);
+      return this.searchString.length >= this.searchMinLength && this.hasInitialInput || $ceres.isShopBuilder;
+    },
     search: function search() {
       if (this.$refs.searchInput.value.length) {
         if (Object(_helper_url__WEBPACK_IMPORTED_MODULE_12__["pathnameEquals"])(App.urls.search)) {
@@ -52997,12 +53000,7 @@ var render = function() {
                 _vm._ssrNode(
                   "<div" +
                     _vm._ssrStyle(null, null, {
-                      display:
-                        (_vm.searchString.length >= _vm.searchMinLength &&
-                          _vm.hasInitialInput) ||
-                        _vm.$ceres.isShopBuilder
-                          ? ""
-                          : "none"
+                      display: _vm.showAutocompleteResults() ? "" : "none"
                     }) +
                     ">",
                   "</div>",

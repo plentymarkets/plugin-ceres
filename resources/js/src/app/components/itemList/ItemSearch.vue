@@ -13,7 +13,7 @@
             </div>
 
             <template v-if="isSearchFocused">
-                <div v-show="(searchString.length >= searchMinLength && hasInitialInput) || $ceres.isShopBuilder">
+                <div v-show="showAutocompleteResults()">
                     <slot name="autocomplete-suggestions">
                         <div class="autocomplete-suggestions shadow bg-white w-100">
                             <search-suggestion-item
@@ -96,10 +96,9 @@ export default {
 
     mounted()
     {
-        const thisOne = this
         this.onValueChanged = debounce(searchString =>
         {
-            thisOne.autocomplete(searchString);
+            this.autocomplete(searchString);
         }, defaultValue(this.timeout, 200));
 
         this.$nextTick(() =>
@@ -114,6 +113,11 @@ export default {
 
     methods:
     {
+        showAutocompleteResults()
+        {
+          console.log(this.searchString.length, this.searchMinLength, this.hasInitialInput, $ceres.isShopBuilder)
+          return (this.searchString.length >= this.searchMinLength && this.hasInitialInput) || $ceres.isShopBuilder
+        },
         search()
         {
             if (this.$refs.searchInput.value.length)
