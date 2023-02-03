@@ -1,5 +1,15 @@
 # Release Notes for plentyShop LTS
 
+## v5.0.60 (2023-02-03) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.59...5.0.60" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- Search preview does not show results on Android mobile devices
+
+### Fixed
+
+- Updating right conditions for displaying the autocomplete box
+
 ## v5.0.59 (2023-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.58...5.0.59" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
