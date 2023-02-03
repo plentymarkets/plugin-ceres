@@ -39018,12 +39018,8 @@ var render = function() {
                       {
                         name: "show",
                         rawName: "v-show",
-                        value:
-                          (_vm.searchString.length >= _vm.searchMinLength &&
-                            _vm.hasInitialInput) ||
-                          _vm.$ceres.isShopBuilder,
-                        expression:
-                          "(searchString.length >= searchMinLength && hasInitialInput) || $ceres.isShopBuilder"
+                        value: _vm.hasInitialInput || _vm.$ceres.isShopBuilder,
+                        expression: "hasInitialInput || $ceres.isShopBuilder"
                       }
                     ]
                   },
