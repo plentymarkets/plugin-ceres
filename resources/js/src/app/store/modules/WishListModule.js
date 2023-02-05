@@ -3,6 +3,7 @@ const ApiService = require("../../services/ApiService");
 const state = () => ({
     wishListIds: [],
     wishListItems: [],
+    inactiveVariationIds: [],
     isWishListInitiallyLoading: false,
     isLoading: false
 });
@@ -17,6 +18,11 @@ const mutations =
         setWishListIds(state, wishListIds)
         {
             state.wishListIds = wishListIds.map(Number);
+        },
+
+        setInactiveVariationIds(state, inactiveVariationIds)
+        {
+            state.inactiveVariationIds = inactiveVariationIds?.map(Number);
         },
 
         removeWishListItem(state, wishListItem)
@@ -64,8 +70,9 @@ const actions =
                     ApiService.get("/rest/io/itemWishList")
                         .done(response =>
                         {
+                            commit("setInactiveVariationIds", response.inactiveVariationIds);
                             commit("setWishListItems", response.documents);
-                            resolve(response.documents);
+                            resolve(response);
                         })
                         .fail(error =>
                         {
@@ -91,7 +98,6 @@ const actions =
                 {
                     commit("removeWishListItem", wishListItem);
                 }
-
                 ApiService.del("/rest/io/itemWishList/" + id)
                     .done(data =>
                     {
