@@ -35,6 +35,11 @@ const mutations =
             state.wishListIds = state.wishListIds.filter(wishListId => wishListId !== id);
         },
 
+        removeInactiveVariationId(state, id)
+        {
+            state.inactiveVariationIds = state.inactiveVariationIds.filter(inactiveVarationId => inactiveVarationId !== id);
+        },
+
         addWishListItemToIndex(state, wishListItem, index)
         {
             state.wishListItems.splice(index, 0, wishListItem);
@@ -87,6 +92,28 @@ const actions =
                 {
                     resolve(state.wishListItems);
                 }
+            });
+        },
+
+        removeInactiveWishListItem({ commit }, { id })
+        {
+            return new Promise((resolve, reject) =>
+            {
+                ApiService.del("/rest/io/itemWishList/" + id)
+                    .done(data =>
+                    {
+                        commit("removeWishListId", id);
+                        commit("removeInactiveVariationId", id);
+                        resolve(data);
+                    })
+                    .fail(error =>
+                    {
+                        reject(error);
+                    })
+                    .always(() =>
+                    {
+                        commit("setIsWishListLoading", false);
+                    });
             });
         },
 

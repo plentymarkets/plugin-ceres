@@ -3,7 +3,7 @@
     <div class="basket-item component-loading with-icon d-flex">
       <div class="meta-container-wrapper">
         <div class="meta-container-wrapper-inner mb-2 ml-1">
-          <div class="position-relative w-100">
+          <div class="position-relative w-75">
             <div class="small">
               <strong>{{ $translate("Ceres::Template.wishListInactiveItemId")}}:</strong>
               <span>{{ wishListInactiveItem }}</span>
@@ -16,11 +16,11 @@
           </div>
         </div>
       </div>
-      <div class="basket-item-container-right">
-        <div class="btn btn-sm text-danger p-0" @click="removeInactiveItem()" data-testing="remove-wlist-item">
-          {{ $translate("Ceres::Template.wishListDelete") }}
-          <i v-waiting-animation-infinite class="fa fa-trash-o default-float" aria-hidden="true"></i>
-        </div>
+      <div class="basket-item-container-right w-25">
+          <div class="btn btn-sm text-danger p-0 float-right" @click="removeInactiveItem()" data-testing="remove-wlist-item">
+            {{ $translate("Ceres::Template.wishListDelete") }}
+            <i v-waiting-animation-infinite class="fa fa-trash-o default-float" aria-hidden="true"></i>
+          </div>
       </div>
     </div>
   </div>
@@ -68,18 +68,16 @@ export default {
 
   methods:
       {
-        removeInactiveItem() {
-          const id =
-              ['id: this.wishListInactiveItemRaw'];
-
-          this.removeWishListItem(id)
+        removeInactiveItem()
+        {
+          this.removeInactiveWishListItem({ id: this.wishListInactiveItem})
               .then(() => NotificationService.success(
                   this.$translate("Ceres::Template.wishListRemoved")
               ).closeAfter(3000));
         },
 
         ...mapActions([
-          "removeWishListItem"
+          "removeInactiveWishListItem"
         ])
       }
 }

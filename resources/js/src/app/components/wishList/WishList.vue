@@ -7,6 +7,11 @@
           :wish-list-item-raw="wishListItem"
           :item-details-data="itemDetailsData">
       </wish-list-item>
+    </transition-group>
+    <div class="mt-5 mb-0">
+      <p class="h4" v-if="inactiveVariationIds.length !== 0">{{ $translate("Ceres::Template.wishListInactiveItems") }}</p>
+    </div>
+    <transition-group name="list-transition" tag="div">
       <wish-list-inactive-item
           v-for="wishListInactiveItem in inactiveVariationIds"
           :key="wishListInactiveItem"
