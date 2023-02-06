@@ -1,15 +1,4 @@
-.page-infos {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-
-    .product-count {
-        flex: 1;
-    }
-}
-
 .product-list {
-
     display: flex;
     flex-flow: row wrap;
     padding: 0;
@@ -57,46 +46,6 @@ category-item,
 }
 
 .lazy {
-    display: none;
-}
-
-@include media-breakpoint-up(sm) {
-    .product-list {
-        li {
-            display: flex;
-        }
-    }
-
-    .product-list.grid {
-
-        li {
-            display: flex;
-            box-shadow: none;
-        }
-
-    }
-}
-
-@include media-breakpoint-up(md) {
-    .product-list.grid {
-
-        li {
-            display: flex;
-        }
-    }
-}
-
-@include media-breakpoint-up(lg) {
-    .product-list.grid {
-
-        li {
-            display: flex;
-        }
-    }
-
-}
-
-.item-list-frame.loading:not(.blur-effect) > ul {
     display: none;
 }
 
