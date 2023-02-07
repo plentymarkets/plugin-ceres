@@ -79,7 +79,6 @@ class DefaultHomepagePreset implements ContentPreset
         $this->preset->createWidget("Ceres::ImageCarouselWidget")
             ->withSetting("appearance", "primary")
             ->withSetting("preloadImage", true)
-            ->withSetting("customClass", "img-1-offset-md-20-flip-horizontal")
             ->withSetting("fullHeight", true)
             ->withSetting("fullWidth", true)
             ->withSetting("slides", $slides)

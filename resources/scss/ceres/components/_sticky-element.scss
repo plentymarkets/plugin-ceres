@@ -6,7 +6,7 @@
     }
 
     // Needed for elements below not to overlap sticky
-    .sticky-element.is-sticky {
+    &.is-sticky {
         z-index: $zindex-sticky !important; // stylelint-disable-line declaration-no-important
     }
 }

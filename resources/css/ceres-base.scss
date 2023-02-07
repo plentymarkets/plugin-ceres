@@ -10296,7 +10296,7 @@ html.ie {
     }
 
     // Needed for elements below not to overlap sticky
-    .sticky-element.is-sticky {
+    &.is-sticky {
         z-index: $zindex-sticky !important; // stylelint-disable-line declaration-no-important
     }
 }
@@ -11466,31 +11466,9 @@ body.basket-open {
 
 
 // Pages
-.page-infos {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-flow: row nowrap;
-            flex-flow: row nowrap;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-
-    .product-count {
-        -webkit-box-flex: 1;
-            -ms-flex: 1;
-                flex: 1;
-    }
-}
-
 .product-list {
-
     display: -webkit-box;
-
     display: -ms-flexbox;
-
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
@@ -11541,55 +11519,6 @@ category-item,
 }
 
 .lazy {
-    display: none;
-}
-
-@include media-breakpoint-up(sm) {
-    .product-list {
-        li {
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-        }
-    }
-
-    .product-list.grid {
-
-        li {
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-shadow: none;
-                    box-shadow: none;
-        }
-
-    }
-}
-
-@include media-breakpoint-up(md) {
-    .product-list.grid {
-
-        li {
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-        }
-    }
-}
-
-@include media-breakpoint-up(lg) {
-    .product-list.grid {
-
-        li {
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-        }
-    }
-
-}
-
-.item-list-frame.loading:not(.blur-effect) > ul {
     display: none;
 }
 
@@ -12587,30 +12516,6 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
             .thumb-image {
                 background-color: $gray-100;
             }
-        }
-    }
-    .product-list {
-        > .col-12 {
-            padding-right: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important
-            padding-left: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important
-        }
-        > .col-6:nth-child(odd) {
-            padding-left: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important
-        }
-        > .col-6:nth-child(even) {
-            padding-right: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important
-        }
-        > .col-4:nth-child(3n+1) {
-            padding-left: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important
-        }
-        > .col-4:nth-child(3n+3) {
-            padding-right: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important
-        }
-        > .col-3:nth-child(4n+1) {
-            padding-left: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important
-        }
-        > .col-3:nth-child(4n+4) {
-            padding-right: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important
         }
     }
 

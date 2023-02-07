@@ -115,7 +115,7 @@ class AddressWidget extends BaseWidget
     {
         $fieldList = ValueListFactory::make();
 
-        if(!$requiredFields) {
+        if (!$requiredFields) {
             // Field "company" will be required on dynamic conditions
             $fieldList->addEntry($fieldPrefix."name1", "Widget.addressFieldName1");
         }
@@ -123,7 +123,14 @@ class AddressWidget extends BaseWidget
         $fieldList
             ->addEntry($fieldPrefix."email", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."EMail")
             ->addEntry($fieldPrefix."vatNumber", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."VatNumber")
-            ->addEntry($fieldPrefix."contactPerson", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."ContactPerson")
+            ->addEntry($fieldPrefix."contactPerson", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."ContactPerson");
+
+        if (!$requiredFields) {
+            $fieldList
+                ->addEntry($fieldPrefix."salutation", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."Salutation");
+        }
+
+        $fieldList
             ->addEntry($fieldPrefix."title", "Widget.addressField".($addressLayout === 'GB' ? 'En' : '')."Title");
 
         if($fieldPrefix === 'billing_address.') {

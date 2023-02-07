@@ -52998,9 +52998,7 @@ var render = function() {
                   "<div" +
                     _vm._ssrStyle(null, null, {
                       display:
-                        (_vm.searchString.length >= _vm.searchMinLength &&
-                          _vm.hasInitialInput) ||
-                        _vm.$ceres.isShopBuilder
+                        _vm.hasInitialInput || _vm.$ceres.isShopBuilder
                           ? ""
                           : "none"
                     }) +

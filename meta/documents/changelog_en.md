@@ -10,6 +10,13 @@
 
 - The image box widget rendered the inserted text even if "Image without box" was selected in the "Box style" option. The inserted text is now removed instead of being made invisible.
 - Under some conditions, the sticky container widget on the article view could shake. This was fixed.
+- Fixed a bug in the address selection widget where the salutation could not be activated as a visible field in the widget settings.
+- Fixed an Autocomplete search bug that occurred on certain Android devices.
+
+### Removed
+
+- Removed unused CSS of the item grid
+- Removed unused SCSS files (_legacy.scss, _home.scss)
 
 ### Changed templates
 
