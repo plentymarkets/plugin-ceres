@@ -13,6 +13,11 @@
 - Es wurde ein Fehler beim Adressauswahl-Widget behoben, durch welchen die Anrede nicht in den Widget-Einstellungen als sichtbares Feld aktiviert werden konnte.
 - Es wurde ein Fehler bei der Autocomplete-Suche behoben, welcher auf bestimmten Android-Geräten auftrat.
 
+### Entfernt
+
+- Es wurde ungenutztes CSS des Item-Grid entfernt
+- Ungenutzte SCSS Dateien wurden entfernt (_legacy.scss, _home.scss)
+
 ### Angepasste Templates
 
 - Im Zuge des Releases von Ceres 5.0.59 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.

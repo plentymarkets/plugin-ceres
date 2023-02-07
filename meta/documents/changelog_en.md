@@ -13,6 +13,11 @@
 - Fixed a bug in the address selection widget where the salutation could not be activated as a visible field in the widget settings.
 - Fixed an Autocomplete search bug that occurred on certain Android devices.
 
+### Removed
+
+- Removed unused CSS of the item grid
+- Removed unused SCSS files (_legacy.scss, _home.scss)
+
 ### Changed templates
 
 - In Ceres 5.0.59 we made changes to template files which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
