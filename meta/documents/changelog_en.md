@@ -12,6 +12,12 @@
 - Under some conditions, the sticky container widget on the article view could shake. This was fixed.
 - Fixed a bug in the address selection widget where the salutation could not be activated as a visible field in the widget settings.
 - Items that are no longer available are now listed separately on the wish list.
+- Fixed an Autocomplete search bug that occurred on certain Android devices.
+
+### Removed
+
+- Removed unused CSS of the item grid
+- Removed unused SCSS files (_legacy.scss, _home.scss)
 
 ### Changed templates
 
