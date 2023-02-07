@@ -1,15 +1,5 @@
 # Release Notes für plentyShop LTS
 
-## v5.0.60 (2023-02-03) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.59...5.0.60" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
-
-### TODO
-
-- Die Suchvorschau zeigt auf Android-Mobilgeräten keine Ergebnisse an
-
-### Fixed
-
-- Aktualisieren der richtigen Bedingungen für die Anzeige des Autocomplete-Felds
-
 ## v5.0.59 (2023-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.58...5.0.59" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
@@ -21,6 +11,7 @@
 - Das Bilderbox-Widget hat den hinterlegten Text gerendert auch wenn "Bild ohne Box" der Option "Stil der Box" ausgewählt wurde. Der hinterlegte Text wird jetzt nicht mehr unsichtbar gemacht sondern entfernt.
 - Unter bestimmten Umständen konnte das Sticky-Container-Widget in der Artikelansicht wackeln. Dies wurde behoben.
 - Es wurde ein Fehler beim Adressauswahl-Widget behoben, durch welchen die Anrede nicht in den Widget-Einstellungen als sichtbares Feld aktiviert werden konnte.
+- Es wurde ein Fehler bei der Autocomplete-Suche behoben, welcher auf bestimmten Android-Geräten auftrat.
 
 ### Angepasste Templates
 
