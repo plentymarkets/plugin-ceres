@@ -30,7 +30,8 @@ export default Vue.component("address-header", {
                     "address4",
                     "postalCode",
                     "town",
-                    "country"
+                    "country",
+                    "state"
                 ];
             }
         }
@@ -41,6 +42,11 @@ export default Vue.component("address-header", {
         getCountryName(countryId)
         {
             return this.$store.getters.getCountryName(countryId);
+        },
+
+        getStateName(countryId, stateId)
+        {
+            return this.$store.getters.getStateName(countryId, stateId);
         },
 
         isAddressFieldEnabled(fieldName)
