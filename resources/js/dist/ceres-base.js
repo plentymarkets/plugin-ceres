@@ -67888,6 +67888,7 @@ var state = function state() {
   return {
     wishListIds: [],
     wishListItems: [],
+    inactiveVariationIds: [],
     isWishListInitiallyLoading: false,
     isLoading: false
   };
@@ -67900,6 +67901,9 @@ var mutations = {
   setWishListIds: function setWishListIds(state, wishListIds) {
     state.wishListIds = wishListIds.map(Number);
   },
+  setInactiveVariationIds: function setInactiveVariationIds(state, inactiveVariationIds) {
+    state.inactiveVariationIds = inactiveVariationIds === null || inactiveVariationIds === void 0 ? void 0 : inactiveVariationIds.map(Number);
+  },
   removeWishListItem: function removeWishListItem(state, wishListItem) {
     state.wishListItems = state.wishListItems.filter(function (item) {
       return item !== wishListItem;
@@ -67908,6 +67912,11 @@ var mutations = {
   removeWishListId: function removeWishListId(state, id) {
     state.wishListIds = state.wishListIds.filter(function (wishListId) {
       return wishListId !== id;
+    });
+  },
+  removeInactiveVariationId: function removeInactiveVariationId(state, id) {
+    state.inactiveVariationIds = state.inactiveVariationIds.filter(function (inactiveVarationId) {
+      return inactiveVarationId !== id;
     });
   },
   addWishListItemToIndex: function addWishListItemToIndex(state, wishListItem, index) {
@@ -67932,8 +67941,9 @@ var actions = {
         commit("setIsWishListInitiallyLoading");
         commit("setIsWishListLoading", true);
         ApiService.get("/rest/io/itemWishList").done(function (response) {
+          commit("setInactiveVariationIds", response.inactiveVariationIds);
           commit("setWishListItems", response.documents);
-          resolve(response.documents);
+          resolve(response);
         }).fail(function (error) {
           reject(error);
         }).always(function () {
@@ -67944,11 +67954,26 @@ var actions = {
       }
     });
   },
-  removeWishListItem: function removeWishListItem(_ref2, _ref3) {
+  removeInactiveWishListItem: function removeInactiveWishListItem(_ref2, _ref3) {
     var commit = _ref2.commit;
-    var id = _ref3.id,
-        wishListItem = _ref3.wishListItem,
-        index = _ref3.index;
+    var id = _ref3.id;
+    return new Promise(function (resolve, reject) {
+      ApiService.del("/rest/io/itemWishList/" + id).done(function (data) {
+        commit("removeWishListId", id);
+        commit("removeInactiveVariationId", id);
+        resolve(data);
+      }).fail(function (error) {
+        reject(error);
+      }).always(function () {
+        commit("setIsWishListLoading", false);
+      });
+    });
+  },
+  removeWishListItem: function removeWishListItem(_ref4, _ref5) {
+    var commit = _ref4.commit;
+    var id = _ref5.id,
+        wishListItem = _ref5.wishListItem,
+        index = _ref5.index;
     return new Promise(function (resolve, reject) {
       if (wishListItem) {
         commit("removeWishListItem", wishListItem);
@@ -67966,8 +67991,8 @@ var actions = {
       });
     });
   },
-  addToWishList: function addToWishList(_ref4, id) {
-    var commit = _ref4.commit;
+  addToWishList: function addToWishList(_ref6, id) {
+    var commit = _ref6.commit;
     return new Promise(function (resolve, reject) {
       commit("addWishListId", id);
       ApiService.post("/rest/io/itemWishList", {
@@ -69284,7 +69309,7 @@ vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("loading-animation", functi
   return __webpack_require__.e(/*! import() */ 45).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/LoadingAnimation.vue */ "./resources/js/src/app/components/pageDesign/LoadingAnimation.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("wish-list", function () {
-  return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ./app/components/wishList/WishList.vue */ "./resources/js/src/app/components/wishList/WishList.vue"));
+  return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./app/components/wishList/WishList.vue */ "./resources/js/src/app/components/wishList/WishList.vue"));
 });
 
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("wish-list-count", _app_components_wishList_WishListCount_vue__WEBPACK_IMPORTED_MODULE_26__["default"]);
@@ -69297,7 +69322,7 @@ vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("graduated-prices", functio
   return __webpack_require__.e(/*! import() */ 33).then(__webpack_require__.bind(null, /*! ./app/components/item/GraduatedPrices.vue */ "./resources/js/src/app/components/item/GraduatedPrices.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("item-data-table", function () {
-  return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./app/components/item/ItemDataTable.vue */ "./resources/js/src/app/components/item/ItemDataTable.vue"));
+  return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./app/components/item/ItemDataTable.vue */ "./resources/js/src/app/components/item/ItemDataTable.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("item-image-carousel", function () {
   return __webpack_require__.e(/*! import() */ 36).then(__webpack_require__.bind(null, /*! ./app/components/item/ItemImageCarousel.vue */ "./resources/js/src/app/components/item/ItemImageCarousel.vue"));
@@ -69318,7 +69343,7 @@ vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("item-availability", functi
   return __webpack_require__.e(/*! import() */ 34).then(__webpack_require__.bind(null, /*! ./app/components/item/ItemAvailability.vue */ "./resources/js/src/app/components/item/ItemAvailability.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("single-item-bundle", function () {
-  return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./app/components/item/SingleItemBundle.vue */ "./resources/js/src/app/components/item/SingleItemBundle.vue"));
+  return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ./app/components/item/SingleItemBundle.vue */ "./resources/js/src/app/components/item/SingleItemBundle.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("single-add-to-basket", function () {
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(40)]).then(__webpack_require__.bind(null, /*! ./app/components/item/SingleAddToBasket.vue */ "./resources/js/src/app/components/item/SingleAddToBasket.vue"));
