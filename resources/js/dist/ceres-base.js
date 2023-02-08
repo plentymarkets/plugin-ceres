@@ -67302,8 +67302,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
 /* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
+
 
 
 
@@ -67349,9 +67352,9 @@ var actions = {
       ApiService.post("/rest/io/shipping/country", {
         "shippingCountryId": shippingCountryId
       }).done(function (data) {
-        if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isNullOrUndefined"])(oldShippingCountryId) || oldShippingCountryId !== data) {
+        if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(oldShippingCountryId) || oldShippingCountryId !== data) {
           if (openBasketPreview) {
-            Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_4__["setUrlParam"])({
+            Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_5__["setUrlParam"])({
               openBasketPreview: 1
             });
           }
@@ -67375,15 +67378,36 @@ var getters = {
           return country.id === countryId;
         });
 
-        if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isNullOrUndefined"])(country)) {
+        if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(country)) {
           country = state.euShippingCountries.find(function (country) {
             return country.id === countryId;
           });
         }
 
-        if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isNullOrUndefined"])(country)) {
+        if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(country)) {
           return country.currLangName;
         }
+      }
+
+      return "";
+    };
+  },
+  getStateName: function getStateName(state) {
+    return function (countryId, stateId) {
+      if (stateId > 0 && countryId > 0) {
+        var country = state.shippingCountries.find(function (country) {
+          return country.id === countryId;
+        });
+
+        if (country) {
+          var _state = country.states.find(function (countryState) {
+            return countryState.id === stateId;
+          });
+
+          return _state.name;
+        }
+
+        return "";
       }
 
       return "";
