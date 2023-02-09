@@ -65,7 +65,10 @@ export default Vue.component("address-select", {
             default: null
         },
         email: String,
-        isValidShippingCountry: Boolean
+        isValidShippingCountry: {
+            type: Boolean,
+            default: true
+        }
     },
 
     data()
