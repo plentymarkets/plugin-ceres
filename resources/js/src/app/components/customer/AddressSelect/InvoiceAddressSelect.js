@@ -68,10 +68,11 @@ export default Vue.component("invoice-address-select", {
         email: String
     },
 
-    data() {
+    data()
+    {
         return {
             isValidShippingCountry: true
-        }
+        };
     },
 
     computed: mapState({
@@ -134,11 +135,16 @@ export default Vue.component("invoice-address-select", {
             }
         },
 
-        showBillingAddressError(countryId) {
+        showBillingAddressError(countryId)
+        {
             const status = this.shippingCountryList.find((country) => country.id === countryId);
-            if (status) {
+
+            if (status)
+            {
                 this.isValidShippingCountry = true;
-            } else {
+            }
+            else
+            {
                 this.isValidShippingCountry = false;
             }
         },

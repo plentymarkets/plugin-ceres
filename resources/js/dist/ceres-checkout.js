@@ -71115,7 +71115,11 @@ var ModalService = __webpack_require__(/*! ../../../services/ModalService */ "./
       type: String,
       default: null
     },
-    email: String
+    email: String,
+    isValidShippingCountry: {
+      type: Boolean,
+      default: true
+    }
   },
   data: function data() {
     return {
@@ -71820,22 +71824,25 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
-/* harmony import */ var _AddressSelect__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AddressSelect */ "./resources/js/src/app/components/customer/AddressSelect/AddressSelect.js");
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
+/* harmony import */ var _AddressSelect__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./AddressSelect */ "./resources/js/src/app/components/customer/AddressSelect/AddressSelect.js");
 
 
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_1___default.a.component("invoice-address-select", {
+
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_2___default.a.component("invoice-address-select", {
   components: {
-    AddressSelect: _AddressSelect__WEBPACK_IMPORTED_MODULE_4__["default"]
+    AddressSelect: _AddressSelect__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
-  template: "\n        <address-select \n            ref=\"invoice\"\n            @address-changed=\"addressChanged\"\n            address-type=\"1\"\n            :show-error=\"showError\"\n            :optional-address-fields=\"optionalAddressFields\"\n            :required-address-fields=\"requiredAddressFields\"\n            :default-salutation=\"defaultSalutation\"\n            :padding-classes=\"paddingClasses\"\n            :padding-inline-styles=\"paddingInlineStyles\"\n            data-testing=\"billing-address-select\"\n            :email=\"email\">\n        </address-select>\n    ",
+  template: "\n        <address-select \n            ref=\"invoice\"\n            @address-changed=\"addressChanged\"\n            address-type=\"1\"\n            :show-error=\"showError\"\n            :optional-address-fields=\"optionalAddressFields\"\n            :required-address-fields=\"requiredAddressFields\"\n            :default-salutation=\"defaultSalutation\"\n            :padding-classes=\"paddingClasses\"\n            :padding-inline-styles=\"paddingInlineStyles\" \n            :is-valid-shipping-country=\"isValidShippingCountry\"\n            data-testing=\"billing-address-select\"\n            :email=\"email\">\n        </address-select>\n    ",
   props: {
     optionalAddressFields: {
       type: Object,
@@ -71867,7 +71874,18 @@ __webpack_require__.r(__webpack_exports__);
     },
     email: String
   },
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])({
+  data: function data() {
+    return {
+      isValidShippingCountry: true
+    };
+  },
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])({
+    shippingCountryList: function shippingCountryList(state) {
+      return state.localization.shippingCountries;
+    },
+    billingAddress: function billingAddress(state) {
+      return state.address.billingAddress;
+    },
     billingAddressId: function billingAddressId(state) {
       return state.address.billingAddressId;
     },
@@ -71898,6 +71916,8 @@ __webpack_require__.r(__webpack_exports__);
       if (!App.isShopBuilder && App.isCheckoutView && _this.billingAddressList && _this.billingAddressList.length <= 0) {
         _this.$refs.invoice.showAddModal("initial");
       }
+
+      _this.showBillingAddressError(_this.billingAddress.countryId);
     });
   },
   methods: {
@@ -71915,10 +71935,23 @@ __webpack_require__.r(__webpack_exports__);
         document.dispatchEvent(new CustomEvent("afterInvoiceAddressChanged", {
           detail: _this2.billingAddressId
         }));
+
+        _this2.showBillingAddressError(selectedAddress.countryId);
       }, function (error) {});
 
       if (this.hasToValidate) {
         this.validate();
+      }
+    },
+    showBillingAddressError: function showBillingAddressError(countryId) {
+      var status = this.shippingCountryList.find(function (country) {
+        return country.id === countryId;
+      });
+
+      if (status) {
+        this.isValidShippingCountry = true;
+      } else {
+        this.isValidShippingCountry = false;
       }
     },
     validate: function validate() {
@@ -71926,7 +71959,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.commit("setInvoiceAddressShowError", showError);
 
       if (showError) {
-        Object(_services_NotificationService__WEBPACK_IMPORTED_MODULE_3__["error"])(_services_TranslationService__WEBPACK_IMPORTED_MODULE_0__["default"].translate("Ceres::Template.checkoutCheckInvoiceAddress"));
+        Object(_services_NotificationService__WEBPACK_IMPORTED_MODULE_4__["error"])(_services_TranslationService__WEBPACK_IMPORTED_MODULE_1__["default"].translate("Ceres::Template.checkoutCheckInvoiceAddress"));
       }
     }
   },
