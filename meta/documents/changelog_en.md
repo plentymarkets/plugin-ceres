@@ -13,6 +13,7 @@
 - Fixed a bug in the address selection widget where the salutation could not be activated as a visible field in the widget settings.
 - Items that are no longer available are now listed separately on the wish list.
 - Fixed an Autocomplete search bug that occurred on certain Android devices.
+- Added logic to remove shopping cart items that are no longer compatible with the updated customer class when the customer class is changed.
 
 ### Removed
 
