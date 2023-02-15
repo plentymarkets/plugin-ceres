@@ -70934,13 +70934,16 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     addressFields: {
       type: Array,
       default: function _default() {
-        return ["email", "title", "contactPerson", "name1", "name2", "name3", "name4", "address1", "address2", "address3", "address4", "postalCode", "town", "country"];
+        return ["email", "title", "contactPerson", "name1", "name2", "name3", "name4", "address1", "address2", "address3", "address4", "postalCode", "town", "country", "state"];
       }
     }
   },
   methods: {
     getCountryName: function getCountryName(countryId) {
       return this.$store.getters.getCountryName(countryId);
+    },
+    getStateName: function getStateName(countryId, stateId) {
+      return this.$store.getters.getStateName(countryId, stateId);
     },
     isAddressFieldEnabled: function isAddressFieldEnabled(fieldName) {
       return this.addressFields.includes(fieldName);
@@ -75544,7 +75547,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var exceptionMap = new Map([["0", "errorActionIsNotExecuted"], ["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["11", "notificationsNoEmailEntered"], ["12", "notificationsWarningOverselling"], ["13", "consentReCaptchaCookieNotSet"], ["14", "notificationsBasketItemsRemovedForCurrency"], ["15", "notificationsBasketItemsRemovedForShippingCountry"], ["110", "errorBasketItemVariationNotFound"], ["111", "errorBasketItemNotEnoughStockForVariation"], ["112", "errorBasketItemMaximumQuantityReachedForItem"], ["113", "errorBasketItemMaximumQuantityReachedForVariation"], ["114", "errorBasketItemMinimumQuantityNotReachedForVariation"], ["115", "errorCreateOrderRetryTimeNotReached"], ["210", "errorVatService"], ["211", "errorVatNumberValidation"], ["212", "errorVatServiceFallback"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["302", "couponNoMatchingItemInBasket"], ["401", "notificationsCalculateShippingFailed"], ["501", "couponPromotionRequired"], ["502", "errorGiftCardReturnQuantity"], ["1018", "couponMinOrderValueNotReached"], ["1051", "couponnotUsableForSpecialOffer"], ["1070", "couponAlreadyUsedOrInvalidCouponCode"], ["1078", "couponCampaignExpired"], ["1126", "couponNoMatchingItemInBasket"], ["1329", "couponOnlySubscription"], ["1330", "couponOnlySingleUsage"], ["1331", "couponNoOpenAmount"], ["1332", "couponExpired"], ["1334", "couponOnlyForNewCustomers"], ["1335", "couponOnlyForExistingCustomers"], ["1336", "couponWrongCustomerGroup"], ["1337", "couponWrongCustomerType"], ["1338", "couponNoCustomerTypeProvided"], ["1339", "couponNoCustomerTypeActivated"], ["1340", "couponNoCustomerGroupActivated"], ["1341", "couponCampaignNoWebstoreActivated"], ["1342", "couponCampaignWrongWebstoreId"], ["1343", "couponCampaignNoWebstoreIdGiven"], ["1400", "csrfTokenMismatch"], ["1401", "accessKeyMailSent"], ["1402", "accessKeyMailFailed"]]);
+var exceptionMap = new Map([["0", "errorActionIsNotExecuted"], ["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["11", "notificationsNoEmailEntered"], ["12", "notificationsWarningOverselling"], ["13", "consentReCaptchaCookieNotSet"], ["14", "notificationsBasketItemsRemovedForCurrency"], ["15", "notificationsBasketItemsRemovedForShippingCountry"], ["16", "notificationsBasketItemsRemovedForContactClass"], ["110", "errorBasketItemVariationNotFound"], ["111", "errorBasketItemNotEnoughStockForVariation"], ["112", "errorBasketItemMaximumQuantityReachedForItem"], ["113", "errorBasketItemMaximumQuantityReachedForVariation"], ["114", "errorBasketItemMinimumQuantityNotReachedForVariation"], ["115", "errorCreateOrderRetryTimeNotReached"], ["210", "errorVatService"], ["211", "errorVatNumberValidation"], ["212", "errorVatServiceFallback"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["302", "couponNoMatchingItemInBasket"], ["401", "notificationsCalculateShippingFailed"], ["501", "couponPromotionRequired"], ["502", "errorGiftCardReturnQuantity"], ["1018", "couponMinOrderValueNotReached"], ["1051", "couponnotUsableForSpecialOffer"], ["1070", "couponAlreadyUsedOrInvalidCouponCode"], ["1078", "couponCampaignExpired"], ["1126", "couponNoMatchingItemInBasket"], ["1329", "couponOnlySubscription"], ["1330", "couponOnlySingleUsage"], ["1331", "couponNoOpenAmount"], ["1332", "couponExpired"], ["1334", "couponOnlyForNewCustomers"], ["1335", "couponOnlyForExistingCustomers"], ["1336", "couponWrongCustomerGroup"], ["1337", "couponWrongCustomerType"], ["1338", "couponNoCustomerTypeProvided"], ["1339", "couponNoCustomerTypeActivated"], ["1340", "couponNoCustomerGroupActivated"], ["1341", "couponCampaignNoWebstoreActivated"], ["1342", "couponCampaignWrongWebstoreId"], ["1343", "couponCampaignNoWebstoreIdGiven"], ["1400", "csrfTokenMismatch"], ["1401", "accessKeyMailSent"], ["1402", "accessKeyMailFailed"]]);
 /* harmony default export */ __webpack_exports__["default"] = (exceptionMap);
 
 /***/ }),
@@ -83671,8 +83674,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
 /* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
+
 
 
 
@@ -83718,9 +83724,9 @@ var actions = {
       ApiService.post("/rest/io/shipping/country", {
         "shippingCountryId": shippingCountryId
       }).done(function (data) {
-        if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isNullOrUndefined"])(oldShippingCountryId) || oldShippingCountryId !== data) {
+        if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(oldShippingCountryId) || oldShippingCountryId !== data) {
           if (openBasketPreview) {
-            Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_4__["setUrlParam"])({
+            Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_5__["setUrlParam"])({
               openBasketPreview: 1
             });
           }
@@ -83744,15 +83750,36 @@ var getters = {
           return country.id === countryId;
         });
 
-        if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isNullOrUndefined"])(country)) {
+        if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(country)) {
           country = state.euShippingCountries.find(function (country) {
             return country.id === countryId;
           });
         }
 
-        if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isNullOrUndefined"])(country)) {
+        if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_4__["isNullOrUndefined"])(country)) {
           return country.currLangName;
         }
+      }
+
+      return "";
+    };
+  },
+  getStateName: function getStateName(state) {
+    return function (countryId, stateId) {
+      if (countryId > 0 && stateId > 0) {
+        var country = state.shippingCountries.find(function (country) {
+          return country.id === countryId;
+        });
+
+        if (country) {
+          var _state = country.states.find(function (countryState) {
+            return countryState.id === stateId;
+          });
+
+          return _state.name;
+        }
+
+        return "";
       }
 
       return "";
