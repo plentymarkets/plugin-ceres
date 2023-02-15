@@ -87,7 +87,7 @@ const getters =
         },
         getStateName: state => (countryId, stateId) =>
         {
-            if (stateId > 0 && countryId > 0)
+            if (countryId > 0 && stateId > 0)
             {
                 const country = state.shippingCountries.find(country => country.id === countryId);
 
