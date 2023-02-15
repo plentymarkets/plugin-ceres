@@ -7400,10 +7400,10 @@ var render = function() {
                     directives: [
                       {
                         name: "validate",
-                        rawName: "v-validate:number",
+                        rawName: "v-validate:StateSelect",
                         value: _vm.isInRequiredFields("stateId"),
                         expression: "isInRequiredFields('stateId')",
-                        arg: "number"
+                        arg: "StateSelect"
                       }
                     ],
                     staticClass: "input-unit",

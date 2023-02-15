@@ -47781,10 +47781,10 @@ var render = function() {
                     directives: [
                       {
                         name: "validate",
-                        rawName: "v-validate:number",
+                        rawName: "v-validate:StateSelect",
                         value: _vm.isInRequiredFields("stateId"),
                         expression: "isInRequiredFields('stateId')",
-                        arg: "number"
+                        arg: "StateSelect"
                       }
                     ],
                     staticClass: "input-unit",
@@ -87360,7 +87360,7 @@ function _validateSelect($formControl, validationKey) {
   var selectedOptionText = $formControl.children("option:selected").text();
   var selectedOptionVal = $formControl.children("option:selected").val();
 
-  if (validationKey === "number") {
+  if (validationKey === "StateSelect") {
     return $.trim(selectedOptionText) !== "" && !isNaN(Number($.trim(selectedOptionVal)));
   }
 

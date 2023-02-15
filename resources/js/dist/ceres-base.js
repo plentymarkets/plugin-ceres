@@ -64694,7 +64694,7 @@ function _validateSelect($formControl, validationKey) {
   var selectedOptionText = $formControl.children("option:selected").text();
   var selectedOptionVal = $formControl.children("option:selected").val();
 
-  if (validationKey === "number") {
+  if (validationKey === "StateSelect") {
     return $.trim(selectedOptionText) !== "" && !isNaN(Number($.trim(selectedOptionVal)));
   }
 
