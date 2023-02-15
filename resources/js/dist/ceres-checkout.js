@@ -75546,7 +75546,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var exceptionMap = new Map([["0", "errorActionIsNotExecuted"], ["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["11", "notificationsNoEmailEntered"], ["12", "notificationsWarningOverselling"], ["13", "consentReCaptchaCookieNotSet"], ["14", "notificationsBasketItemsRemovedForCurrency"], ["15", "notificationsBasketItemsRemovedForShippingCountry"], ["110", "errorBasketItemVariationNotFound"], ["111", "errorBasketItemNotEnoughStockForVariation"], ["112", "errorBasketItemMaximumQuantityReachedForItem"], ["113", "errorBasketItemMaximumQuantityReachedForVariation"], ["114", "errorBasketItemMinimumQuantityNotReachedForVariation"], ["115", "errorCreateOrderRetryTimeNotReached"], ["210", "errorVatService"], ["211", "errorVatNumberValidation"], ["212", "errorVatServiceFallback"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["302", "couponNoMatchingItemInBasket"], ["401", "notificationsCalculateShippingFailed"], ["501", "couponPromotionRequired"], ["502", "errorGiftCardReturnQuantity"], ["1018", "couponMinOrderValueNotReached"], ["1051", "couponnotUsableForSpecialOffer"], ["1070", "couponAlreadyUsedOrInvalidCouponCode"], ["1078", "couponCampaignExpired"], ["1126", "couponNoMatchingItemInBasket"], ["1329", "couponOnlySubscription"], ["1330", "couponOnlySingleUsage"], ["1331", "couponNoOpenAmount"], ["1332", "couponExpired"], ["1334", "couponOnlyForNewCustomers"], ["1335", "couponOnlyForExistingCustomers"], ["1336", "couponWrongCustomerGroup"], ["1337", "couponWrongCustomerType"], ["1338", "couponNoCustomerTypeProvided"], ["1339", "couponNoCustomerTypeActivated"], ["1340", "couponNoCustomerGroupActivated"], ["1341", "couponCampaignNoWebstoreActivated"], ["1342", "couponCampaignWrongWebstoreId"], ["1343", "couponCampaignNoWebstoreIdGiven"], ["1400", "csrfTokenMismatch"], ["1401", "accessKeyMailSent"], ["1402", "accessKeyMailFailed"]]);
+var exceptionMap = new Map([["0", "errorActionIsNotExecuted"], ["1", "notificationsItemNotAdded"], ["2", "notificationsNotEnoughStockItem"], ["3", "notificationsInvalidResetPasswordUrl"], ["4", "notificationsCheckPassword"], ["5", "notificationsItemBundleSplitted"], ["6", "notificationsItemOutOfStock"], ["7", "newsletterOptOutSuccessMessage"], ["8", "newsletterOptInMessage"], ["9", "notificationsBasketItemsRemoved"], ["10", "notificationsBasketItemsRemovedForLanguage"], ["11", "notificationsNoEmailEntered"], ["12", "notificationsWarningOverselling"], ["13", "consentReCaptchaCookieNotSet"], ["14", "notificationsBasketItemsRemovedForCurrency"], ["15", "notificationsBasketItemsRemovedForShippingCountry"], ["16", "notificationsBasketItemsRemovedForContactClass"], ["110", "errorBasketItemVariationNotFound"], ["111", "errorBasketItemNotEnoughStockForVariation"], ["112", "errorBasketItemMaximumQuantityReachedForItem"], ["113", "errorBasketItemMaximumQuantityReachedForVariation"], ["114", "errorBasketItemMinimumQuantityNotReachedForVariation"], ["115", "errorCreateOrderRetryTimeNotReached"], ["210", "errorVatService"], ["211", "errorVatNumberValidation"], ["212", "errorVatServiceFallback"], ["301", "notificationRemoveCouponMinimumOrderValueIsNotReached"], ["302", "couponNoMatchingItemInBasket"], ["401", "notificationsCalculateShippingFailed"], ["501", "couponPromotionRequired"], ["502", "errorGiftCardReturnQuantity"], ["1018", "couponMinOrderValueNotReached"], ["1051", "couponnotUsableForSpecialOffer"], ["1070", "couponAlreadyUsedOrInvalidCouponCode"], ["1078", "couponCampaignExpired"], ["1126", "couponNoMatchingItemInBasket"], ["1329", "couponOnlySubscription"], ["1330", "couponOnlySingleUsage"], ["1331", "couponNoOpenAmount"], ["1332", "couponExpired"], ["1334", "couponOnlyForNewCustomers"], ["1335", "couponOnlyForExistingCustomers"], ["1336", "couponWrongCustomerGroup"], ["1337", "couponWrongCustomerType"], ["1338", "couponNoCustomerTypeProvided"], ["1339", "couponNoCustomerTypeActivated"], ["1340", "couponNoCustomerGroupActivated"], ["1341", "couponCampaignNoWebstoreActivated"], ["1342", "couponCampaignWrongWebstoreId"], ["1343", "couponCampaignNoWebstoreIdGiven"], ["1400", "csrfTokenMismatch"], ["1401", "accessKeyMailSent"], ["1402", "accessKeyMailFailed"]]);
 /* harmony default export */ __webpack_exports__["default"] = (exceptionMap);
 
 /***/ }),
@@ -83757,7 +83757,7 @@ var getters = {
   },
   getStateName: function getStateName(state) {
     return function (countryId, stateId) {
-      if (stateId > 0 && countryId > 0) {
+      if (countryId > 0 && stateId > 0) {
         var country = state.shippingCountries.find(function (country) {
           return country.id === countryId;
         });
@@ -84275,6 +84275,7 @@ var state = function state() {
   return {
     wishListIds: [],
     wishListItems: [],
+    inactiveVariationIds: [],
     isWishListInitiallyLoading: false,
     isLoading: false
   };
@@ -84287,6 +84288,9 @@ var mutations = {
   setWishListIds: function setWishListIds(state, wishListIds) {
     state.wishListIds = wishListIds.map(Number);
   },
+  setInactiveVariationIds: function setInactiveVariationIds(state, inactiveVariationIds) {
+    state.inactiveVariationIds = inactiveVariationIds === null || inactiveVariationIds === void 0 ? void 0 : inactiveVariationIds.map(Number);
+  },
   removeWishListItem: function removeWishListItem(state, wishListItem) {
     state.wishListItems = state.wishListItems.filter(function (item) {
       return item !== wishListItem;
@@ -84295,6 +84299,11 @@ var mutations = {
   removeWishListId: function removeWishListId(state, id) {
     state.wishListIds = state.wishListIds.filter(function (wishListId) {
       return wishListId !== id;
+    });
+  },
+  removeInactiveVariationId: function removeInactiveVariationId(state, id) {
+    state.inactiveVariationIds = state.inactiveVariationIds.filter(function (inactiveVarationId) {
+      return inactiveVarationId !== id;
     });
   },
   addWishListItemToIndex: function addWishListItemToIndex(state, wishListItem, index) {
@@ -84319,8 +84328,9 @@ var actions = {
         commit("setIsWishListInitiallyLoading");
         commit("setIsWishListLoading", true);
         ApiService.get("/rest/io/itemWishList").done(function (response) {
+          commit("setInactiveVariationIds", response.inactiveVariationIds);
           commit("setWishListItems", response.documents);
-          resolve(response.documents);
+          resolve(response);
         }).fail(function (error) {
           reject(error);
         }).always(function () {
@@ -84331,11 +84341,26 @@ var actions = {
       }
     });
   },
-  removeWishListItem: function removeWishListItem(_ref2, _ref3) {
+  removeInactiveWishListItem: function removeInactiveWishListItem(_ref2, _ref3) {
     var commit = _ref2.commit;
-    var id = _ref3.id,
-        wishListItem = _ref3.wishListItem,
-        index = _ref3.index;
+    var id = _ref3.id;
+    return new Promise(function (resolve, reject) {
+      ApiService.del("/rest/io/itemWishList/" + id).done(function (data) {
+        commit("removeWishListId", id);
+        commit("removeInactiveVariationId", id);
+        resolve(data);
+      }).fail(function (error) {
+        reject(error);
+      }).always(function () {
+        commit("setIsWishListLoading", false);
+      });
+    });
+  },
+  removeWishListItem: function removeWishListItem(_ref4, _ref5) {
+    var commit = _ref4.commit;
+    var id = _ref5.id,
+        wishListItem = _ref5.wishListItem,
+        index = _ref5.index;
     return new Promise(function (resolve, reject) {
       if (wishListItem) {
         commit("removeWishListItem", wishListItem);
@@ -84353,8 +84378,8 @@ var actions = {
       });
     });
   },
-  addToWishList: function addToWishList(_ref4, id) {
-    var commit = _ref4.commit;
+  addToWishList: function addToWishList(_ref6, id) {
+    var commit = _ref6.commit;
     return new Promise(function (resolve, reject) {
       commit("addWishListId", id);
       ApiService.post("/rest/io/itemWishList", {
@@ -85671,7 +85696,7 @@ vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("loading-animation", functi
   return __webpack_require__.e(/*! import() */ 45).then(__webpack_require__.bind(null, /*! ./app/components/pageDesign/LoadingAnimation.vue */ "./resources/js/src/app/components/pageDesign/LoadingAnimation.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("wish-list", function () {
-  return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ./app/components/wishList/WishList.vue */ "./resources/js/src/app/components/wishList/WishList.vue"));
+  return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./app/components/wishList/WishList.vue */ "./resources/js/src/app/components/wishList/WishList.vue"));
 });
 
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("wish-list-count", _app_components_wishList_WishListCount_vue__WEBPACK_IMPORTED_MODULE_26__["default"]);
@@ -85684,7 +85709,7 @@ vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("graduated-prices", functio
   return __webpack_require__.e(/*! import() */ 33).then(__webpack_require__.bind(null, /*! ./app/components/item/GraduatedPrices.vue */ "./resources/js/src/app/components/item/GraduatedPrices.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("item-data-table", function () {
-  return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./app/components/item/ItemDataTable.vue */ "./resources/js/src/app/components/item/ItemDataTable.vue"));
+  return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./app/components/item/ItemDataTable.vue */ "./resources/js/src/app/components/item/ItemDataTable.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("item-image-carousel", function () {
   return __webpack_require__.e(/*! import() */ 36).then(__webpack_require__.bind(null, /*! ./app/components/item/ItemImageCarousel.vue */ "./resources/js/src/app/components/item/ItemImageCarousel.vue"));
@@ -85705,7 +85730,7 @@ vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("item-availability", functi
   return __webpack_require__.e(/*! import() */ 34).then(__webpack_require__.bind(null, /*! ./app/components/item/ItemAvailability.vue */ "./resources/js/src/app/components/item/ItemAvailability.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("single-item-bundle", function () {
-  return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./app/components/item/SingleItemBundle.vue */ "./resources/js/src/app/components/item/SingleItemBundle.vue"));
+  return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ./app/components/item/SingleItemBundle.vue */ "./resources/js/src/app/components/item/SingleItemBundle.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("single-add-to-basket", function () {
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(40)]).then(__webpack_require__.bind(null, /*! ./app/components/item/SingleAddToBasket.vue */ "./resources/js/src/app/components/item/SingleAddToBasket.vue"));
