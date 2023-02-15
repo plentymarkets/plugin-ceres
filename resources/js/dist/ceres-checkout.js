@@ -44801,9 +44801,10 @@ var render = function() {
                     directives: [
                       {
                         name: "validate",
-                        rawName: "v-validate",
+                        rawName: "v-validate:StateSelect",
                         value: _vm.isInRequiredFields("stateId"),
-                        expression: "isInRequiredFields('stateId')"
+                        expression: "isInRequiredFields('stateId')",
+                        arg: "StateSelect"
                       }
                     ],
                     staticClass: "input-unit",
@@ -80874,14 +80875,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_string_starts_with_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_starts_with_js__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
 /* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_regexp_constructor_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.regexp.constructor.js */ "./node_modules/core-js/modules/es.regexp.constructor.js");
-/* harmony import */ var core_js_modules_es_regexp_constructor_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_constructor_js__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string.js */ "./node_modules/core-js/modules/es.regexp.to-string.js");
-/* harmony import */ var core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_string_match_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.string.match.js */ "./node_modules/core-js/modules/es.string.match.js");
-/* harmony import */ var core_js_modules_es_string_match_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_match_js__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _helper_strings__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../helper/strings */ "./resources/js/src/app/helper/strings.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.number.constructor.js */ "./node_modules/core-js/modules/es.number.constructor.js");
+/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_regexp_constructor_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.regexp.constructor.js */ "./node_modules/core-js/modules/es.regexp.constructor.js");
+/* harmony import */ var core_js_modules_es_regexp_constructor_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_constructor_js__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string.js */ "./node_modules/core-js/modules/es.regexp.to-string.js");
+/* harmony import */ var core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_es_string_match_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.string.match.js */ "./node_modules/core-js/modules/es.string.match.js");
+/* harmony import */ var core_js_modules_es_string_match_js__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_match_js__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _helper_strings__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../helper/strings */ "./resources/js/src/app/helper/strings.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../helper/utils */ "./resources/js/src/app/helper/utils.js");
+
 
 
 
@@ -81053,7 +81057,12 @@ function _validateGroup($formControl, validationKey, requiredCount) {
 function _validateSelect($formControl, validationKey) {
   var selectedOptionText = $formControl.children("option:selected").text();
   var selectedOptionVal = $formControl.children("option:selected").val();
-  return $.trim(selectedOptionText) != "" && $.trim(selectedOptionVal) != "please select";
+
+  if (validationKey === "StateSelect") {
+    return $.trim(selectedOptionText) !== "" && !isNaN(Number($.trim(selectedOptionVal)));
+  }
+
+  return $.trim(selectedOptionText) !== "" && $.trim(selectedOptionVal) !== "please select";
 }
 
 function _validateInput($formControl, validationKey) {
@@ -81107,7 +81116,7 @@ function _isValidDate($formControl) {
   var string = $formControl.val();
   var match = string.match(/^(?:(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{4}))|(?:(\d{4})[.\/-](\d{1,2})[.\/-](\d{1,2}))$/); // If match is null date is not valid
 
-  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isNull"])(match)) {
+  if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isNull"])(match)) {
     return false;
   }
 
@@ -81128,7 +81137,7 @@ function _isValidDate($formControl) {
 
 
 function _isMail($formControl) {
-  return Object(_helper_strings__WEBPACK_IMPORTED_MODULE_11__["isMail"])($formControl.val());
+  return Object(_helper_strings__WEBPACK_IMPORTED_MODULE_12__["isMail"])($formControl.val());
 }
 /**
  * Minimum eight characters, at least one letter and one number
