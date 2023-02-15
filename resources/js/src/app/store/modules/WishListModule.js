@@ -3,6 +3,7 @@ const ApiService = require("../../services/ApiService");
 const state = () => ({
     wishListIds: [],
     wishListItems: [],
+    inactiveVariationIds: [],
     isWishListInitiallyLoading: false,
     isLoading: false
 });
@@ -19,6 +20,11 @@ const mutations =
             state.wishListIds = wishListIds.map(Number);
         },
 
+        setInactiveVariationIds(state, inactiveVariationIds)
+        {
+            state.inactiveVariationIds = inactiveVariationIds?.map(Number);
+        },
+
         removeWishListItem(state, wishListItem)
         {
             state.wishListItems = state.wishListItems.filter(item => item !== wishListItem);
@@ -27,6 +33,11 @@ const mutations =
         removeWishListId(state, id)
         {
             state.wishListIds = state.wishListIds.filter(wishListId => wishListId !== id);
+        },
+
+        removeInactiveVariationId(state, id)
+        {
+            state.inactiveVariationIds = state.inactiveVariationIds.filter(inactiveVarationId => inactiveVarationId !== id);
         },
 
         addWishListItemToIndex(state, wishListItem, index)
@@ -64,8 +75,9 @@ const actions =
                     ApiService.get("/rest/io/itemWishList")
                         .done(response =>
                         {
+                            commit("setInactiveVariationIds", response.inactiveVariationIds);
                             commit("setWishListItems", response.documents);
-                            resolve(response.documents);
+                            resolve(response);
                         })
                         .fail(error =>
                         {
@@ -83,6 +95,28 @@ const actions =
             });
         },
 
+        removeInactiveWishListItem({ commit }, { id })
+        {
+            return new Promise((resolve, reject) =>
+            {
+                ApiService.del("/rest/io/itemWishList/" + id)
+                    .done(data =>
+                    {
+                        commit("removeWishListId", id);
+                        commit("removeInactiveVariationId", id);
+                        resolve(data);
+                    })
+                    .fail(error =>
+                    {
+                        reject(error);
+                    })
+                    .always(() =>
+                    {
+                        commit("setIsWishListLoading", false);
+                    });
+            });
+        },
+
         removeWishListItem({ commit }, { id, wishListItem, index })
         {
             return new Promise((resolve, reject) =>
@@ -91,7 +125,6 @@ const actions =
                 {
                     commit("removeWishListItem", wishListItem);
                 }
-
                 ApiService.del("/rest/io/itemWishList/" + id)
                     .done(data =>
                     {

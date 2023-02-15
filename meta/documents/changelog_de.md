@@ -11,6 +11,7 @@
 - Das Bilderbox-Widget hat den hinterlegten Text gerendert auch wenn "Bild ohne Box" der Option "Stil der Box" ausgewählt wurde. Der hinterlegte Text wird jetzt nicht mehr unsichtbar gemacht sondern entfernt.
 - Unter bestimmten Umständen konnte das Sticky-Container-Widget in der Artikelansicht wackeln. Dies wurde behoben.
 - Es wurde ein Fehler beim Adressauswahl-Widget behoben, durch welchen die Anrede nicht in den Widget-Einstellungen als sichtbares Feld aktiviert werden konnte.
+- Auf der Wunschliste werden nicht mehr verfügbare Artikel jetzt gesondert gelistet.
 - Es wurde ein Fehler bei der Autocomplete-Suche behoben, welcher auf bestimmten Android-Geräten auftrat.
 
 ### Entfernt
