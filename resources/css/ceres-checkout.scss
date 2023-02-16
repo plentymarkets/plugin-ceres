@@ -10291,6 +10291,10 @@ html.ie {
 .sticky-element {
     display: inline-block; // Fix sticky-container height miscalculation and resulting shaking
 
+    .widget-inner {
+        display: inline-block; // Fix sticky-container height miscalculation and resulting shaking
+    }
+
     p:empty {
         margin-bottom: 0; // remove margin of empty paragraph for correct height detection
     }
