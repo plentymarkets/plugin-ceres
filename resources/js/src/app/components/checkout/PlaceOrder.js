@@ -87,7 +87,6 @@ export default Vue.component("place-order", {
             isBasketInitiallyLoaded: state => state.basket.isBasketInitiallyLoaded,
             shippingPrivacyHintAccepted: state => state.checkout.shippingPrivacyHintAccepted,
             newsletterSubscription: state => state.checkout.newsletterSubscription,
-
             billingAddress: state => state.address.billingAddress,
             shippingCountryList: state => state.localization.shippingCountries,
         })
@@ -226,21 +225,13 @@ export default Vue.component("place-order", {
                 this.isInvalidShippingCountry = true;
             }
         },
-
-        showTooltip() {
-            console.log('entered the button');
-            console.log(this.$refs.btnTooltip);
-        }
     },
 
     watch: {
         billingAddress() {
-            console.log("billingAddress changed from the placeOrder pov");
-
             if (this.billingAddress != null) {
                 this.checkShippingCountry(this.billingAddress.countryId);
             }
-
         }
     }
 });

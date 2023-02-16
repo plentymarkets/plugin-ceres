@@ -83,7 +83,6 @@ export default Vue.component("shipping-address-select", {
 
     computed: mapState({
         deliveryAddressId: state => state.address.deliveryAddressId,
-
         shippingCountryList: state => state.localization.shippingCountries,
         billingAddress: state => state.address.billingAddress,
     }),
@@ -171,8 +170,6 @@ export default Vue.component("shipping-address-select", {
     watch:
         {
             billingAddress() {
-                console.log("billingAddress changed");
-                console.log(this.billingAddress);
                 if (this.billingAddress !== null) {
                     this.showBillingAddressError(this.billingAddress.countryId);
                 }
