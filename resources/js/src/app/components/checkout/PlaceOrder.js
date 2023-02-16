@@ -37,7 +37,8 @@ export default Vue.component("place-order", {
     data()
     {
         return {
-            waiting: false
+            waiting: false,
+            isInvalidShippingCountry: false
         };
     },
 
@@ -85,13 +86,27 @@ export default Vue.component("place-order", {
             basketItemQuantity: state => state.basket.data.itemQuantity,
             isBasketInitiallyLoaded: state => state.basket.isBasketInitiallyLoaded,
             shippingPrivacyHintAccepted: state => state.checkout.shippingPrivacyHintAccepted,
-            newsletterSubscription: state => state.checkout.newsletterSubscription
+            newsletterSubscription: state => state.checkout.newsletterSubscription,
+
+            billingAddress: state => state.address.billingAddress,
+            shippingCountryList: state => state.localization.shippingCountries,
         })
+    },
+
+    mounted()
+    {
+        if (this.billingAddress != null) {
+            this.checkShippingCountry(this.billingAddress.countryId);
+        }
     },
 
     methods: {
         placeOrder()
         {
+            if (this.isInvalidShippingCountry) {
+                return false;
+            }
+
             if (this.validateCheckout())
             {
                 this.waiting = true;
@@ -201,6 +216,31 @@ export default Vue.component("place-order", {
             {
                 this.$emit("payment-response", content);
             }
+        },
+
+        checkShippingCountry(countryId) {
+            const status = this.shippingCountryList.find((country) => country.id === countryId);
+            if (status) {
+                this.isInvalidShippingCountry = false;
+            } else {
+                this.isInvalidShippingCountry = true;
+            }
+        },
+
+        showTooltip() {
+            console.log('entered the button');
+            console.log(this.$refs.btnTooltip);
+        }
+    },
+
+    watch: {
+        billingAddress() {
+            console.log("billingAddress changed from the placeOrder pov");
+
+            if (this.billingAddress != null) {
+                this.checkShippingCountry(this.billingAddress.countryId);
+            }
+
         }
     }
 });

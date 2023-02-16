@@ -227,10 +227,10 @@
         </div>
 
         {% if trans("Ceres::Template.checkoutInvalidShippingCountryGeoblocking") is not empty %}
-            <div class="cmp-method-list mb-4" v-if="addressType == '1' && !isValidShippingCountry">
+            <div class="cmp-method-list mb-4" v-if="addressType == '2' && !isValidShippingCountry" >
                 <div class="method-list-item has-error w-100">
                     <div class="label">
-                        <div class="content">
+                        <div class="content" data-testing="message-invalid-shipping-country">
                             {{ trans("Ceres::Template.checkoutInvalidShippingCountryGeoblocking") }}
                         </div>
                     </div>

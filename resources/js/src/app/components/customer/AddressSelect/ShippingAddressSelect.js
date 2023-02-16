@@ -22,6 +22,7 @@ export default Vue.component("shipping-address-select", {
             :default-salutation="defaultSalutation"
             :padding-classes="paddingClasses"
             :padding-inline-styles="paddingInlineStyles"
+            :is-valid-shipping-country="isValidShippingCountry"
             data-testing="delivery-address-select"
             :email="email">
         </address-select>
@@ -73,8 +74,18 @@ export default Vue.component("shipping-address-select", {
         email: String
     },
 
+    data()
+    {
+        return {
+            isValidShippingCountry: true
+        };
+    },
+
     computed: mapState({
-        deliveryAddressId: state => state.address.deliveryAddressId
+        deliveryAddressId: state => state.address.deliveryAddressId,
+
+        shippingCountryList: state => state.localization.shippingCountries,
+        billingAddress: state => state.address.billingAddress,
     }),
 
     created()
@@ -95,6 +106,10 @@ export default Vue.component("shipping-address-select", {
                 this.$store.commit("setPostOfficeAvailability", true);
             }
         }
+
+        if (this.billingAddress != null) {
+            this.showBillingAddressError(this.billingAddress.countryId);
+        }
     },
 
     methods:
@@ -110,6 +125,7 @@ export default Vue.component("shipping-address-select", {
                     response =>
                     {
                         document.dispatchEvent(new CustomEvent("afterDeliveryAddressChanged", { detail: this.deliveryAddressId }));
+                        this.showBillingAddressError(selectedAddress.countryId);
                     },
                     error =>
                     {
@@ -135,6 +151,31 @@ export default Vue.component("shipping-address-select", {
                     TranslationService.translate("Ceres::Template.checkoutInvalidShippingCountry")
                 );
             }
+        },
+
+        showBillingAddressError(countryId)
+        {
+            const status = this.shippingCountryList.find((country) => country.id === countryId);
+
+            if (status)
+            {
+                this.isValidShippingCountry = true;
+            }
+            else
+            {
+                this.isValidShippingCountry = false;
+            }
+        },
+    },
+
+    watch:
+        {
+            billingAddress() {
+                console.log("billingAddress changed");
+                console.log(this.billingAddress);
+                if (this.billingAddress !== null) {
+                    this.showBillingAddressError(this.billingAddress.countryId);
+                }
+            }
         }
-    }
 });

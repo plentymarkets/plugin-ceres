@@ -22,7 +22,6 @@ export default Vue.component("invoice-address-select", {
             :default-salutation="defaultSalutation"
             :padding-classes="paddingClasses"
             :padding-inline-styles="paddingInlineStyles"
-            :is-valid-shipping-country="isValidShippingCountry"
             data-testing="billing-address-select"
             :email="email">
         </address-select>
@@ -68,16 +67,7 @@ export default Vue.component("invoice-address-select", {
         email: String
     },
 
-    data()
-    {
-        return {
-            isValidShippingCountry: true
-        };
-    },
-
     computed: mapState({
-        shippingCountryList: state => state.localization.shippingCountries,
-        billingAddress: state => state.address.billingAddress,
         billingAddressId: state => state.address.billingAddressId,
         billingAddressList: state => state.address.billingAddressList,
         showError: state => state.checkout.validation.invoiceAddress.showError
@@ -105,7 +95,6 @@ export default Vue.component("invoice-address-select", {
             {
                 this.$refs.invoice.showAddModal("initial");
             }
-            this.showBillingAddressError(this.billingAddress.countryId);
         });
     },
 
@@ -122,7 +111,6 @@ export default Vue.component("invoice-address-select", {
                     response =>
                     {
                         document.dispatchEvent(new CustomEvent("afterInvoiceAddressChanged", { detail: this.billingAddressId }));
-                        this.showBillingAddressError(selectedAddress.countryId);
                     },
                     error =>
                     {
@@ -132,20 +120,6 @@ export default Vue.component("invoice-address-select", {
             if (this.hasToValidate)
             {
                 this.validate();
-            }
-        },
-
-        showBillingAddressError(countryId)
-        {
-            const status = this.shippingCountryList.find((country) => country.id === countryId);
-
-            if (status)
-            {
-                this.isValidShippingCountry = true;
-            }
-            else
-            {
-                this.isValidShippingCountry = false;
             }
         },
 
