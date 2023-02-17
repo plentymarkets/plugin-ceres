@@ -6,8 +6,6 @@
         {% if buttonReplacement|trim is not empty %}
             {{ buttonReplacement }}
         {% else %}
-
-
                 <button
                     v-tooltip="isInvalidShippingCountry"
                     data-placement="top"
@@ -22,8 +20,6 @@
                     <icon icon="arrow-right" :loading="waiting"></icon>
                     {{ trans("Ceres::Template.checkoutBuyNow") }}
                 </button>
-
-
         {% endif %}
     </div>
 </script>

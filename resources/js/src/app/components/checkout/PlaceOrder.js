@@ -88,13 +88,14 @@ export default Vue.component("place-order", {
             shippingPrivacyHintAccepted: state => state.checkout.shippingPrivacyHintAccepted,
             newsletterSubscription: state => state.checkout.newsletterSubscription,
             billingAddress: state => state.address.billingAddress,
-            shippingCountryList: state => state.localization.shippingCountries,
+            shippingCountryList: state => state.localization.shippingCountries
         })
     },
 
     mounted()
     {
-        if (this.billingAddress != null) {
+        if (this.billingAddress !== null)
+        {
             this.checkShippingCountry(this.billingAddress.countryId);
         }
     },
@@ -102,9 +103,7 @@ export default Vue.component("place-order", {
     methods: {
         placeOrder()
         {
-            if (this.isInvalidShippingCountry) {
-                return false;
-            }
+
 
             if (this.validateCheckout())
             {
@@ -151,6 +150,10 @@ export default Vue.component("place-order", {
 
         validateCheckout()
         {
+            if (this.isInvalidShippingCountry)
+            {
+                return false;
+            }
             let isValid = true;
 
             for (const index in this.checkoutValidation)
@@ -217,19 +220,26 @@ export default Vue.component("place-order", {
             }
         },
 
-        checkShippingCountry(countryId) {
+        checkShippingCountry(countryId)
+        {
             const status = this.shippingCountryList.find((country) => country.id === countryId);
-            if (status) {
+
+            if (status)
+            {
                 this.isInvalidShippingCountry = false;
-            } else {
+            }
+            else
+            {
                 this.isInvalidShippingCountry = true;
             }
-        },
+        }
     },
 
     watch: {
-        billingAddress() {
-            if (this.billingAddress != null) {
+        billingAddress()
+        {
+            if (this.billingAddress !== null)
+            {
                 this.checkShippingCountry(this.billingAddress.countryId);
             }
         }

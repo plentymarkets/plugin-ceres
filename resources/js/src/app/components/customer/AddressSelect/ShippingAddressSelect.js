@@ -84,7 +84,7 @@ export default Vue.component("shipping-address-select", {
     computed: mapState({
         deliveryAddressId: state => state.address.deliveryAddressId,
         shippingCountryList: state => state.localization.shippingCountries,
-        billingAddress: state => state.address.billingAddress,
+        billingAddress: state => state.address.billingAddress
     }),
 
     created()
@@ -106,7 +106,8 @@ export default Vue.component("shipping-address-select", {
             }
         }
 
-        if (this.billingAddress != null) {
+        if (this.billingAddress !== null)
+        {
             this.showBillingAddressError(this.billingAddress.countryId);
         }
     },
@@ -164,13 +165,15 @@ export default Vue.component("shipping-address-select", {
             {
                 this.isValidShippingCountry = false;
             }
-        },
+        }
     },
 
     watch:
         {
-            billingAddress() {
-                if (this.billingAddress !== null) {
+            billingAddress()
+            {
+                if (this.billingAddress !== null)
+                {
                     this.showBillingAddressError(this.billingAddress.countryId);
                 }
             }
