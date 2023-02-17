@@ -176,6 +176,10 @@ export default Vue.component("shipping-address-select", {
                 {
                     this.showBillingAddressError(this.billingAddress.countryId);
                 }
+                else
+                {
+                    this.isValidShippingCountry = true;
+                }
             }
         }
 });

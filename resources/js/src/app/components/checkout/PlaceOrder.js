@@ -242,6 +242,10 @@ export default Vue.component("place-order", {
             {
                 this.checkShippingCountry(this.billingAddress.countryId);
             }
+            else
+            {
+                this.isInvalidShippingCountry = false;
+            }
         }
     }
 });
