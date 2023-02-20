@@ -8569,27 +8569,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var core_js_modules_es_parse_float_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.parse-float.js */ "./node_modules/core-js/modules/es.parse-float.js");
 /* harmony import */ var core_js_modules_es_parse_float_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_parse_float_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _helper_number__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../helper/number */ "./resources/js/src/app/helper/number.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var _helper_debounce__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../helper/debounce */ "./resources/js/src/app/helper/debounce.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var core_js_modules_es_number_is_integer_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.number.is-integer.js */ "./node_modules/core-js/modules/es.number.is-integer.js");
+/* harmony import */ var core_js_modules_es_number_is_integer_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_is_integer_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _helper_number__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../helper/number */ "./resources/js/src/app/helper/number.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var _helper_debounce__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../helper/debounce */ "./resources/js/src/app/helper/debounce.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -8693,16 +8696,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     var _this = this;
 
-    this.compInterval = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["defaultValue"])(this.compInterval, 1);
+    this.compInterval = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["defaultValue"])(this.compInterval, 1);
     this.compInterval = this.compInterval === 0 ? 1 : this.compInterval;
-    var minDecimals = Object(_helper_number__WEBPACK_IMPORTED_MODULE_11__["floatLength"])(this.min);
-    var intervalDecimals = Object(_helper_number__WEBPACK_IMPORTED_MODULE_11__["floatLength"])(this.compInterval);
+    var minDecimals = Object(_helper_number__WEBPACK_IMPORTED_MODULE_12__["floatLength"])(this.min);
+    var intervalDecimals = Object(_helper_number__WEBPACK_IMPORTED_MODULE_12__["floatLength"])(this.compInterval);
     this.compDecimals = Math.max(minDecimals, intervalDecimals);
-    this.onValueChanged = Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_13__["debounce"])(function () {
+    this.onValueChanged = Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_14__["debounce"])(function () {
       _this.$emit("quantity-change", _this.compValue);
-    }, Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["defaultValue"])(this.timeout, 500));
+    }, Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["defaultValue"])(this.timeout, 500));
 
-    if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isNullOrUndefined"])(this.variationId)) {
+    if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isNullOrUndefined"])(this.variationId)) {
       this.fetchQuantityFromBasket();
     }
   },
@@ -8710,7 +8713,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     variationBasketQuantity: function variationBasketQuantity() {
       var _this2 = this;
 
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isNullOrUndefined"])(this.variationId)) {
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isNullOrUndefined"])(this.variationId)) {
         return 0;
       }
 
@@ -8724,10 +8727,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return 0;
     },
     isMinimum: function isMinimum() {
-      return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isDefined"])(this.compMin) && this.compValue - this.compInterval < this.compMin;
+      return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isDefined"])(this.compMin) && this.compValue - this.compInterval < this.compMin;
     },
     isMaximum: function isMaximum() {
-      return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isDefined"])(this.compMax) && this.compValue + this.compInterval > this.compMax;
+      return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isDefined"])(this.compMax) && this.compValue + this.compInterval > this.compMax;
     },
     minimumHint: function minimumHint() {
       return this.$translate("Ceres::Template.singleItemQuantityMin", {
@@ -8749,20 +8752,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       return 0;
     }
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_14__["mapState"])({
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_15__["mapState"])({
     basketItems: function basketItems(state) {
       return state.basket.items;
     }
   })),
   watch: {
     variationId: function variationId(newValue) {
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isDefined"])(newValue)) {
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isDefined"])(newValue)) {
         this.fetchQuantityFromBasket();
       }
     },
     basketItems: {
       handler: function handler(newValue, oldValue) {
-        if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isDefined"])(this.variationId)) {
+        if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isDefined"])(this.variationId)) {
           this.fetchQuantityFromBasket();
         }
       },
@@ -8782,21 +8785,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     interval: function interval(newInterval) {
-      this.compInterval = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["defaultValue"])(newInterval, 1);
+      this.compInterval = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["defaultValue"])(newInterval, 1);
     }
   },
   methods: {
     increaseValue: function increaseValue() {
-      var newValue = Object(_helper_number__WEBPACK_IMPORTED_MODULE_11__["formatFloat"])(this.compValue + this.compInterval, this.compDecimals);
+      var newValue = Object(_helper_number__WEBPACK_IMPORTED_MODULE_12__["formatFloat"])(this.compValue + this.compInterval, this.compDecimals);
 
-      if ((Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isNullOrUndefined"])(this.compMax) || newValue <= this.compMax) && !this.waiting) {
+      if ((Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isNullOrUndefined"])(this.compMax) || newValue <= this.compMax) && !this.waiting) {
         this.setValue(newValue);
       }
     },
     decreaseValue: function decreaseValue() {
-      var newValue = Object(_helper_number__WEBPACK_IMPORTED_MODULE_11__["formatFloat"])(this.compValue - this.compInterval, this.compDecimals);
+      var newValue = Object(_helper_number__WEBPACK_IMPORTED_MODULE_12__["formatFloat"])(this.compValue - this.compInterval, this.compDecimals);
 
-      if ((Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isNullOrUndefined"])(this.compMin) || newValue >= this.compMin) && !this.waiting) {
+      if ((Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isNullOrUndefined"])(this.compMin) || newValue >= this.compMin) && !this.waiting) {
         this.setValue(newValue);
       }
     },
@@ -8809,18 +8812,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       value = parseFloat(value);
 
       if (isNaN(value)) {
-        value = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["defaultValue"])(this.compMin, 1);
+        value = Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["defaultValue"])(this.compMin, 1);
       } // limit new value to min/ max value
 
 
-      value = Object(_helper_number__WEBPACK_IMPORTED_MODULE_11__["limit"])(value, this.compMin, this.compMax); // make sure, new value is an even multiple of interval
+      value = Object(_helper_number__WEBPACK_IMPORTED_MODULE_12__["limit"])(value, this.compMin, this.compMax); // make sure, new value is an even multiple of interval
 
       var diff;
 
       if (this.variationBasketQuantity === 0 && this.min !== 0) {
-        diff = Object(_helper_number__WEBPACK_IMPORTED_MODULE_11__["formatFloat"])((value - this.min) % this.compInterval, this.compDecimals, true);
+        diff = Object(_helper_number__WEBPACK_IMPORTED_MODULE_12__["formatFloat"])((value - this.min) % this.compInterval, this.compDecimals, true);
       } else {
-        diff = Object(_helper_number__WEBPACK_IMPORTED_MODULE_11__["formatFloat"])(value % this.compInterval, this.compDecimals, true);
+        diff = Object(_helper_number__WEBPACK_IMPORTED_MODULE_12__["formatFloat"])(value % this.compInterval, this.compDecimals, false);
       }
 
       if (diff > 0 && diff !== this.compInterval) {
@@ -8830,29 +8833,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           value += this.compInterval - diff;
         }
 
-        value = Object(_helper_number__WEBPACK_IMPORTED_MODULE_11__["limit"])(value, this.compMin, this.compMax);
+        value = Object(_helper_number__WEBPACK_IMPORTED_MODULE_12__["limit"])(value, this.compMin, this.compMax);
       } // cut fraction
 
 
-      value = Object(_helper_number__WEBPACK_IMPORTED_MODULE_11__["formatFloat"])(value, this.compDecimals);
+      value = Object(_helper_number__WEBPACK_IMPORTED_MODULE_12__["formatFloat"])(value, this.compDecimals, false);
 
       if (value !== this.compValue) {
         this.compValue = value;
         this.onValueChanged();
-      } else if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isNullOrUndefined"])(this.$refs.quantityInputField)) {
+      } else if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isNullOrUndefined"])(this.$refs.quantityInputField)) {
         this.$refs.quantityInputField.value = this.displayValue;
       }
     },
     fetchQuantityFromBasket: function fetchQuantityFromBasket() {
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isNullOrUndefined"])(this.min) && this.variationBasketQuantity >= this.min && this.variationBasketQuantity !== 0) {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isNullOrUndefined"])(this.min) && this.variationBasketQuantity >= this.min && this.variationBasketQuantity !== 0) {
         // set the minimum value to the interval, if the item is already in the basket
-        this.compMin = this.compInterval;
+        if (Number.isInteger(this.compMin)) {
+          this.compMin = this.compInterval;
+        }
       } else if (this.variationBasketQuantity === 0) {
         // reset the minimum, when item is not in the basket
         this.compMin = this.min;
       }
 
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isNullOrUndefined"])(this.max)) {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_13__["isNullOrUndefined"])(this.max)) {
         // decrease maximum quantity by quantity of variations already in basket
         this.compMax = this.max - this.variationBasketQuantity;
 
@@ -17449,6 +17454,26 @@ module.exports = isForced;
 
 /***/ }),
 
+/***/ "./node_modules/core-js/internals/is-integer.js":
+/*!******************************************************!*\
+  !*** ./node_modules/core-js/internals/is-integer.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__(/*! ../internals/is-object */ "./node_modules/core-js/internals/is-object.js");
+
+var floor = Math.floor;
+
+// `Number.isInteger` method implementation
+// https://tc39.es/ecma262/#sec-number.isinteger
+module.exports = function isInteger(it) {
+  return !isObject(it) && isFinite(it) && floor(it) === it;
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/core-js/internals/is-object.js":
 /*!*****************************************************!*\
   !*** ./node_modules/core-js/internals/is-object.js ***!
@@ -20173,6 +20198,25 @@ if (isForced(NUMBER, !NativeNumber(' 0o1') || !NativeNumber('0b1') || NativeNumb
   NumberPrototype.constructor = NumberWrapper;
   redefine(global, NUMBER, NumberWrapper);
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/core-js/modules/es.number.is-integer.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.number.is-integer.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var $ = __webpack_require__(/*! ../internals/export */ "./node_modules/core-js/internals/export.js");
+var isInteger = __webpack_require__(/*! ../internals/is-integer */ "./node_modules/core-js/internals/is-integer.js");
+
+// `Number.isInteger` method
+// https://tc39.es/ecma262/#sec-number.isinteger
+$({ target: 'Number', stat: true }, {
+  isInteger: isInteger
+});
 
 
 /***/ }),
@@ -62118,10 +62162,10 @@ module.exports = __webpack_require__(/*! ./build */ "./node_modules/vue-template
 /*!*********************************************************!*\
   !*** ./node_modules/vue-template-compiler/package.json ***!
   \*********************************************************/
-/*! exports provided: _args, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, browser, bugs, dependencies, description, devDependencies, homepage, jsdelivr, keywords, license, main, name, repository, types, unpkg, version, default */
+/*! exports provided: name, version, description, main, unpkg, jsdelivr, browser, types, repository, keywords, author, license, bugs, homepage, dependencies, devDependencies, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"_args\":[[\"vue-template-compiler@2.6.12\",\"/home/runner/work/plugin-ceres/plugin-ceres\"]],\"_from\":\"vue-template-compiler@2.6.12\",\"_id\":\"vue-template-compiler@2.6.12\",\"_inBundle\":false,\"_integrity\":\"sha512-OzzZ52zS41YUbkCBfdXShQTe69j1gQDZ9HIX8miuC9C3rBCk9wIRjLiZZLrmX9V+Ftq/YEyv1JaVr5Y/hNtByg==\",\"_location\":\"/vue-template-compiler\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"vue-template-compiler@2.6.12\",\"name\":\"vue-template-compiler\",\"escapedName\":\"vue-template-compiler\",\"rawSpec\":\"2.6.12\",\"saveSpec\":null,\"fetchSpec\":\"2.6.12\"},\"_requiredBy\":[\"/\"],\"_resolved\":\"https://registry.npmjs.org/vue-template-compiler/-/vue-template-compiler-2.6.12.tgz\",\"_spec\":\"2.6.12\",\"_where\":\"/home/runner/work/plugin-ceres/plugin-ceres\",\"author\":{\"name\":\"Evan You\"},\"browser\":\"browser.js\",\"bugs\":{\"url\":\"https://github.com/vuejs/vue/issues\"},\"dependencies\":{\"de-indent\":\"^1.0.2\",\"he\":\"^1.1.0\"},\"description\":\"template compiler for Vue 2.0\",\"devDependencies\":{\"vue\":\"file:../..\"},\"homepage\":\"https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#readme\",\"jsdelivr\":\"browser.js\",\"keywords\":[\"vue\",\"compiler\"],\"license\":\"MIT\",\"main\":\"index.js\",\"name\":\"vue-template-compiler\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/vuejs/vue.git\"},\"types\":\"types/index.d.ts\",\"unpkg\":\"browser.js\",\"version\":\"2.6.12\"}");
+module.exports = JSON.parse("{\"name\":\"vue-template-compiler\",\"version\":\"2.6.12\",\"description\":\"template compiler for Vue 2.0\",\"main\":\"index.js\",\"unpkg\":\"browser.js\",\"jsdelivr\":\"browser.js\",\"browser\":\"browser.js\",\"types\":\"types/index.d.ts\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/vuejs/vue.git\"},\"keywords\":[\"vue\",\"compiler\"],\"author\":\"Evan You\",\"license\":\"MIT\",\"bugs\":{\"url\":\"https://github.com/vuejs/vue/issues\"},\"homepage\":\"https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#readme\",\"dependencies\":{\"he\":\"^1.1.0\",\"de-indent\":\"^1.0.2\"},\"devDependencies\":{\"vue\":\"file:../..\"}}");
 
 /***/ }),
 
@@ -75799,7 +75843,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "cd590b12"
+  "44350f66"
   
 )
 
@@ -75866,7 +75910,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "35f09196"
+  "0ff2dd80"
   
 )
 
@@ -75933,7 +75977,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d9b14c54"
+  "14735980"
   
 )
 
@@ -76000,7 +76044,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "43abbade"
+  "447153e7"
   
 )
 
@@ -76067,7 +76111,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "c6ddc3bc"
+  "4f1587f8"
   
 )
 
@@ -76134,7 +76178,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5c436a7f"
+  "d9ec9d2e"
   
 )
 
@@ -76201,7 +76245,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "13817c09"
+  "4a47c2f3"
   
 )
 
@@ -76268,7 +76312,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "a1e10d88"
+  "0bb789b4"
   
 )
 
@@ -76335,7 +76379,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "9a61c138"
+  "6fbf5164"
   
 )
 
@@ -76402,7 +76446,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "fbbf239a"
+  "5b0c5d9d"
   
 )
 
@@ -76469,7 +76513,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4414b6a7"
+  "eeb29706"
   
 )
 
@@ -76536,7 +76580,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "374da5ce"
+  "cc26c190"
   
 )
 
@@ -76602,7 +76646,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "f2694264"
+  "2abaeda4"
   
 )
 
@@ -76651,7 +76695,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2034f4a7"
+  "77b6f906"
   
 )
 
@@ -76718,7 +76762,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3957dab8"
+  "78701922"
   
 )
 
@@ -76785,7 +76829,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5cb9c188"
+  "0a7adb1c"
   
 )
 
@@ -76852,7 +76896,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "56eccd1e"
+  "10ca3472"
   
 )
 
@@ -76918,7 +76962,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "789641a1"
+  "169f128b"
   
 )
 
@@ -76966,7 +77010,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "fac88ca8"
+  "20a48a96"
   
 )
 
@@ -77015,7 +77059,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3cc5ee52"
+  "544969a8"
   
 )
 
@@ -77082,7 +77126,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7cc8609a"
+  "09db8370"
   
 )
 
@@ -77149,7 +77193,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "83ff1816"
+  "091535df"
   
 )
 
@@ -77216,7 +77260,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "26d1623c"
+  "75bcd2b4"
   
 )
 
@@ -77283,7 +77327,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1ff5c484"
+  "26cb64a8"
   
 )
 
@@ -77350,7 +77394,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "bd839c5a"
+  "7b407dbd"
   
 )
 
@@ -77417,7 +77461,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6fce645d"
+  "610e9833"
   
 )
 
@@ -77487,7 +77531,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   injectStyles,
   null,
-  "dcd4830c"
+  "46aaff38"
   
 )
 
@@ -77554,7 +77598,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "78009558"
+  "b89223a4"
   
 )
 
@@ -77621,7 +77665,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2207c2b0"
+  "7fded8cc"
   
 )
 
@@ -77688,7 +77732,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "b1ce2730"
+  "28aa2b84"
   
 )
 
@@ -77755,7 +77799,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "b64b850a"
+  "5eded35e"
   
 )
 
@@ -77822,7 +77866,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2a55c34f"
+  "e616868e"
   
 )
 
@@ -77889,7 +77933,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "295a5414"
+  "70aaef04"
   
 )
 
@@ -77956,7 +78000,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4b50b116"
+  "994add28"
   
 )
 
@@ -78023,7 +78067,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0aeea185"
+  "7135d2db"
   
 )
 
@@ -78090,7 +78134,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "c58fbcfc"
+  "773a6d6c"
   
 )
 
@@ -78157,7 +78201,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "29fccb64"
+  "e6c87664"
   
 )
 
@@ -78224,7 +78268,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "48c8b09d"
+  "3a08e473"
   
 )
 
@@ -78291,7 +78335,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "8f7f7078"
+  "495cd7cc"
   
 )
 
@@ -78358,7 +78402,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "ea5f8e1c"
+  "64d284dc"
   
 )
 
@@ -78425,7 +78469,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "feb22fee"
+  "9125a21a"
   
 )
 
@@ -78492,7 +78536,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0065c477"
+  "c322d53e"
   
 )
 
@@ -78559,7 +78603,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "a2468afc"
+  "34b9fd28"
   
 )
 
@@ -78626,7 +78670,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3d30cbcd"
+  "54b44723"
   
 )
 
@@ -78693,7 +78737,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d5765996"
+  "3f4cd5c2"
   
 )
 
@@ -78760,7 +78804,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3267dc0a"
+  "0360e55e"
   
 )
 
@@ -78827,7 +78871,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0e59c62e"
+  "7663a684"
   
 )
 
@@ -78894,7 +78938,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2566e380"
+  "012da12c"
   
 )
 
@@ -78961,7 +79005,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "db52f5d4"
+  "44daeeec"
   
 )
 
@@ -79028,7 +79072,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6fedb468"
+  "8d6d4cbc"
   
 )
 
@@ -79095,7 +79139,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1ca62dfb"
+  "536c74e5"
   
 )
 
@@ -79162,7 +79206,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "224826ca"
+  "45597320"
   
 )
 
@@ -79229,7 +79273,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6a19b4ec"
+  "5b59e8c2"
   
 )
 
@@ -79296,7 +79340,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4e4badb6"
+  "1f44b70a"
   
 )
 
@@ -79363,7 +79407,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6bee3719"
+  "58ea3a83"
   
 )
 
@@ -79430,7 +79474,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7c707c30"
+  "41e114cc"
   
 )
 
@@ -79497,7 +79541,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d0ecb788"
+  "35913db4"
   
 )
 
@@ -79564,7 +79608,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "77371a7c"
+  "94b6b2d0"
   
 )
 
@@ -79631,7 +79675,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "b05fa528"
+  "0e175ec2"
   
 )
 
@@ -79698,7 +79742,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1fae8f5c"
+  "4b64e832"
   
 )
 
@@ -79765,7 +79809,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "00f0cee0"
+  "44199666"
   
 )
 
@@ -79832,7 +79876,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5b2f3161"
+  "b378196a"
   
 )
 
@@ -79899,7 +79943,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5db83a9f"
+  "a93410ee"
   
 )
 
@@ -79966,7 +80010,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "26310e18"
+  "e38a2324"
   
 )
 
@@ -80033,7 +80077,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "442f72e7"
+  "5d7ad486"
   
 )
 
@@ -80100,7 +80144,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "16d81bd0"
+  "9feb738c"
   
 )
 
@@ -80167,7 +80211,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "641af7f5"
+  "aea6146a"
   
 )
 
@@ -80234,7 +80278,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "410c13b8"
+  "e7be54bc"
   
 )
 
@@ -80301,7 +80345,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2df9150a"
+  "c105855e"
   
 )
 
@@ -80368,7 +80412,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "66e7cc40"
+  "08ea6296"
   
 )
 
@@ -80435,7 +80479,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "49d4d5f3"
+  "61585149"
   
 )
 
@@ -80502,7 +80546,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6adba9d9"
+  "6a02d42f"
   
 )
 
@@ -80569,7 +80613,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "179fbbd5"
+  "7de6ed2b"
   
 )
 
@@ -80636,7 +80680,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "67d9342c"
+  "2eb25f54"
   
 )
 
@@ -80703,7 +80747,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5b17d8ee"
+  "7e292544"
   
 )
 
@@ -80770,7 +80814,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0ecea230"
+  "5cf6c35c"
   
 )
 
@@ -80837,7 +80881,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "da8e71c6"
+  "ab877b1a"
   
 )
 
@@ -80904,7 +80948,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d86d526a"
+  "a9665bbe"
   
 )
 
@@ -80971,7 +81015,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "874cc47a"
+  "5aa9d22d"
   
 )
 
@@ -81038,7 +81082,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "76270e3e"
+  "68dc07b7"
   
 )
 
@@ -81105,7 +81149,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1468d334"
+  "40e05850"
   
 )
 
@@ -81172,7 +81216,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "14c9f602"
+  "e265a12e"
   
 )
 
@@ -81239,7 +81283,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4c60eee2"
+  "1f5f0490"
   
 )
 
@@ -81306,7 +81350,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7af4e5fd"
+  "9c89a632"
   
 )
 
@@ -81373,7 +81417,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "f33819c0"
+  "6a141e14"
   
 )
 
@@ -81440,7 +81484,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "9a5050d6"
+  "b7cfe92a"
   
 )
 
@@ -84592,6 +84636,7 @@ function formatFloat(value, decimals, round) {
     return 1 / 0;
   }
 
+  value = Math.floor(value * 100) / 100;
   return parseFloat(value.toFixed(decimals));
 }
 
