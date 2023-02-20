@@ -1,8 +1,7 @@
 .sticky-element {
-    display: inline-block; // Fix sticky-container height miscalculation and resulting shaking
-
-    .widget-inner {
+    > .widget-inner {
         display: inline-block; // Fix sticky-container height miscalculation and resulting shaking
+        width: 100%;
     }
 
     p:empty {
