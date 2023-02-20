@@ -28,7 +28,8 @@
     "test:monetaryFormatter": "node -r esm tools/testMonetaryFormatter.js"
   },
   "browserslist": [
-    "> .25%"
+    "> 0.2%",
+    "iOS >= 10.3"
   ],
   "devDependencies": {
     "@babel/core": "^7.10.5",
