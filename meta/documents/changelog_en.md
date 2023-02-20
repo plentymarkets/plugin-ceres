@@ -1,6 +1,6 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.59 (2023-02-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.58...5.0.59" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.59 (2023-02-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.58...5.0.59" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
 
@@ -9,19 +9,20 @@
 ### Added
 
 - Items that are no longer available are now listed separately on the wish list.
+- As part of the geo-blocking policy, a warning message has been added to the checkout. If customers have selected a delivery country in their delivery address that is not activated for this plentyShop, the warning message informs them that they must select a different delivery country. Furthermore, the buy button is now deactivated and greyed out until customers have selected a valid delivery country for their delivery address. The texts of the warning message and the tooltip that is displayed when hovering over the greyed-out buy button can be changed in the **CMS » Multilingualism** menu. The translation keys are `checkoutInvalidShippingCountryGeoblocking` and `checkoutBuyNowTooltip`, respectively.
 
 ### Fixed
 
-- The image box widget rendered the inserted text even if "Image without box" was selected in the "Box style" option. The inserted text is now removed instead of being made invisible.
-- Under some conditions, the sticky container widget on the article view could shake. This was fixed.
-- Fixed a bug in the address selection widget where the salutation could not be activated as a visible field in the widget settings.
-- Fixed an Autocomplete search bug that occurred on certain Android devices.
-- Added logic to remove shopping cart items that are no longer compatible with the updated customer class when the customer class is changed.
+- The image box widget rendered the inserted text even if the option **Image without box** was selected for the **Box style** setting. The inserted text is now removed instead of being made invisible.
+- Under some conditions, the sticky container widget on the item view could shake visibly. This was fixed.
+- Fixed a bug in the address selection widget due to which the salutation could not be activated as a visible field in the widget settings.
+- Fixed an autocomplete search bug that occurred on certain Android devices.
+- Added logic that removes shopping cart items that are no longer compatible with the updated customer class when the customer class is changed.
 
 ### Removed
 
-- Removed unused CSS of the item grid
-- Removed unused SCSS files (_legacy.scss, _home.scss)
+- Removed unused CSS of the item grid.
+- Removed unused SCSS files (_legacy.scss, _home.scss).
 
 ### Changed templates
 
