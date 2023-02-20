@@ -1,17 +1,20 @@
 # Release Notes für plentyShop LTS
 
-## v5.0.59 (2023-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.58...5.0.59" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.59 (2023-02-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.58...5.0.59" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
 
 - Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+
+### Hinzugefügt
+
+- Auf der Wunschliste werden nicht mehr verfügbare Artikel jetzt gesondert gelistet.
 
 ### Behoben
 
 - Das Bilderbox-Widget hat den hinterlegten Text gerendert auch wenn "Bild ohne Box" der Option "Stil der Box" ausgewählt wurde. Der hinterlegte Text wird jetzt nicht mehr unsichtbar gemacht sondern entfernt.
 - Unter bestimmten Umständen konnte das Sticky-Container-Widget in der Artikelansicht wackeln. Dies wurde behoben.
 - Es wurde ein Fehler beim Adressauswahl-Widget behoben, durch welchen die Anrede nicht in den Widget-Einstellungen als sichtbares Feld aktiviert werden konnte.
-- Auf der Wunschliste werden nicht mehr verfügbare Artikel jetzt gesondert gelistet.
 - Es wurde ein Fehler bei der Autocomplete-Suche behoben, welcher auf bestimmten Android-Geräten auftrat.
 - Es wurde eine Logik ergänzt, der bei Änderung der Kundenklasse Warenkorbartikel entfernt, welche nicht mehr mit der aktualisierten Kundenklasse kompatibel sind.
 
@@ -24,6 +27,7 @@
 
 - Im Zuge des Releases von Ceres 5.0.59 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
 - [resources/views/Widgets/Common/ImageBoxWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3387/files#diff-9f438954b9f177761379a8b382eea014077ec743060583796ac4f9aaed3d3003)
+- [resources/views/Widgets/Grid/StickyContainerWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3413/files#diff-12c97f285dad5dd4b6489225a42ae079a96ff8f6245ed5274d25df7ebd3b1a0c)
 
 ## v5.0.58 (2023-01-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.57...5.0.58" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
