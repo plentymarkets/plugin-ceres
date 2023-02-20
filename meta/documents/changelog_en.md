@@ -28,7 +28,6 @@
 
 - In Ceres 5.0.59 we made changes to template files which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
 - [resources/views/Widgets/Common/ImageBoxWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3387/files#diff-9f438954b9f177761379a8b382eea014077ec743060583796ac4f9aaed3d3003)
-- [resources/views/Widgets/Grid/StickyContainerWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3413/files#diff-12c97f285dad5dd4b6489225a42ae079a96ff8f6245ed5274d25df7ebd3b1a0c)
 
 ## v5.0.58 (2023-01-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.57...5.0.58" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
