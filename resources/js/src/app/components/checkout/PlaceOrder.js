@@ -38,7 +38,7 @@ export default Vue.component("place-order", {
     {
         return {
             waiting: false,
-            isInvalidShippingCountry: false
+            isValidShippingCountry: false
         };
     },
 
@@ -88,16 +88,15 @@ export default Vue.component("place-order", {
             shippingPrivacyHintAccepted: state => state.checkout.shippingPrivacyHintAccepted,
             newsletterSubscription: state => state.checkout.newsletterSubscription,
             billingAddress: state => state.address.billingAddress,
+            deliveryAddress: state => state.address.deliveryAddress,
+            deliveryAddressId: state => state.address.deliveryAddressId,
             shippingCountryList: state => state.localization.shippingCountries
         })
     },
 
     mounted()
     {
-        if (this.billingAddress !== null)
-        {
-            this.checkShippingCountry(this.billingAddress.countryId);
-        }
+        this.checkDeliveryAddressError()
     },
 
     methods: {
@@ -150,7 +149,7 @@ export default Vue.component("place-order", {
 
         validateCheckout()
         {
-            if (this.isInvalidShippingCountry)
+            if (this.isValidShippingCountry)
             {
                 return false;
             }
@@ -220,17 +219,23 @@ export default Vue.component("place-order", {
             }
         },
 
-        checkShippingCountry(countryId)
-        {
-            const status = this.shippingCountryList.find((country) => country.id === countryId);
+        checkDeliveryAddressError() {
+            const selectedBillingAddress = this.$store.state.address.billingAddress;
+            const selectedDeliveryAddress = this.$store.state.address.deliveryAddress;
+            const activeShippingCountries =  this.$store.state.localization.shippingCountries;
 
-            if (status)
-            {
-                this.isInvalidShippingCountry = false;
-            }
-            else
-            {
-                this.isInvalidShippingCountry = true;
+            if (this.billingAddress === null && this.deliveryAddressId === -99) {
+                this.isValidShippingCountry = true;
+            } else {
+                const countryId = Number(selectedDeliveryAddress.id) === -99 ? selectedBillingAddress.countryId : selectedDeliveryAddress.countryId;
+                const validShippingCountry = !!activeShippingCountries.find((country) => country.id === countryId);
+                console.log("validShippingCountry: ", validShippingCountry);
+
+                if (!validShippingCountry) {
+                    this.isValidShippingCountry = false;
+                } else {
+                    this.isValidShippingCountry = true;
+                }
             }
         }
     },
@@ -238,14 +243,15 @@ export default Vue.component("place-order", {
     watch: {
         billingAddress()
         {
-            if (this.billingAddress !== null)
-            {
-                this.checkShippingCountry(this.billingAddress.countryId);
+            //if a delivery address exists do not take into account the billingAddress
+            if (Number(this.deliveryAddressId) === -99) {
+                this.checkDeliveryAddressError();
             }
-            else
-            {
-                this.isInvalidShippingCountry = false;
-            }
+        },
+
+        deliveryAddress()
+        {
+            this.checkDeliveryAddressError();
         }
     }
 });

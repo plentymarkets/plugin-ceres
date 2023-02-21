@@ -82,9 +82,11 @@ export default Vue.component("shipping-address-select", {
     },
 
     computed: mapState({
-        deliveryAddressId: state => state.address.deliveryAddressId,
         shippingCountryList: state => state.localization.shippingCountries,
-        billingAddress: state => state.address.billingAddress
+        billingAddress: state => state.address.billingAddress,
+        billingAddressId: state => state.address.billingAddressId,
+        deliveryAddress: state => state.address.deliveryAddress,
+        deliveryAddressId: state => state.address.deliveryAddressId
     }),
 
     created()
@@ -106,10 +108,7 @@ export default Vue.component("shipping-address-select", {
             }
         }
 
-        if (this.billingAddress !== null)
-        {
-            this.showBillingAddressError(this.billingAddress.countryId);
-        }
+        this.checkDeliveryAddressError();
     },
 
     methods:
@@ -125,7 +124,7 @@ export default Vue.component("shipping-address-select", {
                     response =>
                     {
                         document.dispatchEvent(new CustomEvent("afterDeliveryAddressChanged", { detail: this.deliveryAddressId }));
-                        this.showBillingAddressError(selectedAddress.countryId);
+                        this.checkDeliveryAddressError();
                     },
                     error =>
                     {
@@ -153,17 +152,22 @@ export default Vue.component("shipping-address-select", {
             }
         },
 
-        showBillingAddressError(countryId)
-        {
-            const status = this.shippingCountryList.find((country) => country.id === countryId);
+        checkDeliveryAddressError() {
+            const selectedBillingAddress = this.$store.state.address.billingAddress;
+            const selectedDeliveryAddress = this.$store.state.address.deliveryAddress;
+            const activeShippingCountries =  this.$store.state.localization.shippingCountries;
 
-            if (status)
-            {
+            if (this.billingAddress === null && this.deliveryAddressId === -99) {
                 this.isValidShippingCountry = true;
-            }
-            else
-            {
-                this.isValidShippingCountry = false;
+            } else {
+                const countryId = Number(selectedDeliveryAddress.id) === -99 ? selectedBillingAddress.countryId : selectedDeliveryAddress.countryId;
+                const validShippingCountry = !!activeShippingCountries.find((country) => country.id === countryId);
+
+                if (!validShippingCountry) {
+                    this.isValidShippingCountry = false;
+                } else {
+                    this.isValidShippingCountry = true;
+                }
             }
         }
     },
@@ -172,14 +176,15 @@ export default Vue.component("shipping-address-select", {
         {
             billingAddress()
             {
-                if (this.billingAddress !== null)
-                {
-                    this.showBillingAddressError(this.billingAddress.countryId);
+                //if a delivery address exists do not take into account the billingAddress
+                if (Number(this.deliveryAddressId) === -99) {
+                    this.checkDeliveryAddressError();
                 }
-                else
-                {
-                    this.isValidShippingCountry = true;
-                }
+            },
+
+            deliveryAddress()
+            {
+                this.checkDeliveryAddressError();
             }
         }
 });
