@@ -1,5 +1,15 @@
 # Release Notes for plentyShop LTS
 
+## v5.0.60 (2023-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.59...5.0.60" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- If you use the standard header and not the ShopBuilder header please check the selected options for the setting in the plentyShop LTS wizard under **Displayed information » Which item information do you want to display in the shopping cart? » Check the boxes of the item information you want to display in the shopping cart preview.** to ensure that the information selected there is desired.
+
+### Added
+
+- Die Option **Check the boxes of the item information you want to display in the shopping cart preview.** in the plentyShop LTS wizard now also works for the standard header and not only for the Shopbuilder header.
+
 ## v5.0.59 (2023-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.58...5.0.59" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO

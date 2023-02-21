@@ -1,5 +1,15 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.60 (2023-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.59...5.0.60" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Falls du den Standard-Header und nicht den ShopBuilder-Header benutzt prüfe bitte die ausgewählten Optionen für die Einstellung im plentyShop LTS Assistenten unter **Angezeigte Informationen » Welche Artikelinformationen möchtest du im Warenkorb anzeigen? » Hake die Artikelinformationen an, die du in der Warenkorbvorschau anzeigen möchtest.** um sicherzustellen das die dort ausgewählten Informationen gewünscht sind.
+
+### Hinzugefügt
+
+- Die Option **Hake die Artikelinformationen an, die du in der Warenkorbvorschau anzeigen möchtest.** im plentyShop LTS Assistenten funktioniert jetzt auch für den Standard-Header und nicht nur für den Shopbuilder-Header.
+
 ## v5.0.59 (2023-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.58...5.0.59" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
