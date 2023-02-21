@@ -153,9 +153,9 @@ export default Vue.component("shipping-address-select", {
         },
 
         checkDeliveryAddressError() {
-            const selectedBillingAddress = this.$store.state.address.billingAddress;
-            const selectedDeliveryAddress = this.$store.state.address.deliveryAddress;
-            const activeShippingCountries =  this.$store.state.localization.shippingCountries;
+            const selectedBillingAddress = this.billingAddress;
+            const selectedDeliveryAddress = this.deliveryAddress;
+            const activeShippingCountries =  this.shippingCountryList;
 
             if (this.billingAddress === null && this.deliveryAddressId === -99) {
                 this.isValidShippingCountry = true;
