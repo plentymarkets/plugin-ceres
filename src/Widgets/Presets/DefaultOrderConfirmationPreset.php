@@ -125,7 +125,7 @@ class DefaultOrderConfirmationPreset implements ContentPreset
     {
         $this->twoColumnWidget->createChild("first", "Ceres::OrderDataWidget")
                               ->withSetting("customClass", "order-data")
-                              ->withSetting("addressFields", ["title", "contactPerson", "name1", "name2", "name3", "name4", "address1", "address2", "address3", "address4", "postalCode", "town", "country"])
+                              ->withSetting("addressFields", ["title", "contactPerson", "name1", "name2", "name3", "name4", "address1", "address2", "address3", "address4", "postalCode", "town", "country", "state"])
                               ->withSetting("spacing.customMargin", true)
                               ->withSetting("spacing.margin.bottom.value", 4)
                               ->withSetting("spacing.margin.bottom.unit", null);
