@@ -1,4 +1,5 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
 {% set visibleFields = ceresConfig.basket.previewData %}
 
 <header id="page-header" class="default-header d-print-none">
@@ -88,12 +89,7 @@
                                                 {% endif %}
                                             </a>
 
-                                            <div>Test</div>
-                                            <div>{{ visibleFields | json_encode }}</div>
-                                            <div>{{ visibleFields }}</div>
-                                            <div>Test</div>
-
-                                            <basket-preview v-if="$store.state.lazyComponent.components['basket-preview']" :show-net-prices="{{ showNetPrices | json_encode }}">
+                                            <basket-preview v-if="$store.state.lazyComponent.components['basket-preview']" :show-net-prices="{{ showNetPrices | json_encode }}" :visible-fields="{{ visibleFields | json_encode }}">
                                                 <template #before-basket-item>
                                                     {{ LayoutContainer.show("Ceres::BasketList.BeforeItem") }}
                                                 </template>
