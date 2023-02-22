@@ -152,20 +152,27 @@ export default Vue.component("shipping-address-select", {
             }
         },
 
-        checkDeliveryAddressError() {
+        checkDeliveryAddressError()
+        {
             const selectedBillingAddress = this.billingAddress;
             const selectedDeliveryAddress = this.deliveryAddress;
             const activeShippingCountries =  this.shippingCountryList;
 
-            if (this.billingAddress === null && this.deliveryAddressId === -99) {
+            if (this.billingAddress === null && this.deliveryAddressId === -99)
+            {
                 this.isValidShippingCountry = true;
-            } else {
+            }
+            else
+            {
                 const countryId = Number(selectedDeliveryAddress.id) === -99 ? selectedBillingAddress.countryId : selectedDeliveryAddress.countryId;
                 const validShippingCountry = !!activeShippingCountries.find((country) => country.id === countryId);
 
-                if (!validShippingCountry) {
+                if (!validShippingCountry)
+                {
                     this.isValidShippingCountry = false;
-                } else {
+                }
+                else
+                {
                     this.isValidShippingCountry = true;
                 }
             }
@@ -176,7 +183,7 @@ export default Vue.component("shipping-address-select", {
         {
             billingAddress()
             {
-                //if a delivery address exists do not take into account the billingAddress
+                // if a delivery address exists do not take into account the billingAddress
                 if (Number(this.deliveryAddressId) === -99) {
                     this.checkDeliveryAddressError();
                 }
