@@ -18,6 +18,8 @@
 - Fixed a bug in the address selection widget due to which the salutation could not be activated as a visible field in the widget settings.
 - Fixed an autocomplete search bug that occurred on certain Android devices.
 - Added logic that removes shopping cart items that are no longer compatible with the updated customer class when the customer class is changed.
+- Properties of type **File**, which are included on the single item view via ShopBuilder, now only contain the file name without a preceding ID.
+- Under certain circumstances, the correct meta title was not output for the single item view. This has been fixed.
 
 ### Removed
 
