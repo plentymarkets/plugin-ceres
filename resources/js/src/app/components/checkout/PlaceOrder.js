@@ -219,28 +219,9 @@ export default Vue.component("place-order", {
 
         checkDeliveryAddressError()
         {
-            const selectedBillingAddress = this.billingAddress;
-            const selectedDeliveryAddress = this.deliveryAddress;
-            const activeShippingCountries =  this.shippingCountryList;
-
-            if (this.billingAddress === null && this.deliveryAddressId === -99)
-            {
-                this.isInvalidShippingCountry = true;
-            }
-            else
-            {
-                const countryId = Number(selectedDeliveryAddress.id) === -99 ? selectedBillingAddress.countryId : selectedDeliveryAddress.countryId;
-                const validShippingCountry = !!activeShippingCountries.find((country) => country.id === countryId);
-
-                if (!validShippingCountry)
-                {
-                    this.isInvalidShippingCountry = false;
-                }
-                else
-                {
-                    this.isInvalidShippingCountry = true;
-                }
-            }
+            const countryId = Number(this.deliveryAddress.id) === -99 ? this.billingAddress.countryId : this.deliveryAddress.countryId;
+            const validShippingCountry = this.shippingCountryList.find((country) => country.id === countryId);
+            this.isInvalidShippingCountry = !validShippingCountry;
         }
     },
 
