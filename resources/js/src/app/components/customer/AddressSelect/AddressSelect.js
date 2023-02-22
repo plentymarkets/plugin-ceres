@@ -93,7 +93,8 @@ export default Vue.component("address-select", {
                 9: "birthday",
                 11: "title",
                 12: "contactPerson"
-            }
+            },
+            isShopBuilder: App.isShopBuilder
         };
     },
 
