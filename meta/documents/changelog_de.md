@@ -18,8 +18,8 @@
 - Durch einen Fehler im Adressauswahl-Widget konnte die Anrede in den Widget-Einstellungen nicht als sichtbares Feld aktiviert werden. Dies wurde behoben.
 - Bei der Autocomplete-Suche auf bestimmten Android-Geräten konnte es zu Fehlern kommen. Dies wurde behoben.
 - Es wurde eine Logik ergänzt, die bei einer Änderung der Kundenklasse nun Warenkorbartikel entfernt, welche nicht mehr mit der aktualisierten Kundenklasse kompatibel sind.
-- Eigenschaften von Typ Datei, die über den ShopBuilder auf der Artikeldetailseite eingebunden sind, enthalten nur noch den Dateinamen ohne vorrangehender ID.
-- Auf der Artikeldetailseite wurde unter Umständen nicht der eingestellte Wert berücksichtigt der als Metatitel ausgegeben wird.
+- Eigenschaften von Typ **Datei**, die über den ShopBuilder auf der Artikeldetailseite eingebunden sind, enthalten nur noch den Dateinamen ohne vorangestellte ID.
+- Unter bestimmten Umständen wurde nicht der korrekte Metatitel für die Artikeldetailseite ausgegeben. Dies wurde behoben.
 
 ### Entfernt
 
