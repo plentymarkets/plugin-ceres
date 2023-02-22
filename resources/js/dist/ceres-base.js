@@ -65399,8 +65399,6 @@ var actions = {
               billingAddress: address
             });
           }
-
-          commit("updateBillingAddress", address);
         } else if (addressType === "2") {
           if (response.events && response.events.CheckoutChanged && response.events.CheckoutChanged.checkout) {
             address.id = response.events.CheckoutChanged.checkout.deliveryAddressId;
