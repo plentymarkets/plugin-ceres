@@ -221,7 +221,6 @@ export default Vue.component("place-order", {
         {
             const countryId = Number(this.deliveryAddress.id) === -99 ? this.billingAddress.countryId : this.deliveryAddress.countryId;
             const validShippingCountry = this.shippingCountryList.find((country) => country.id === countryId);
-
             this.isInvalidShippingCountry = !validShippingCountry;
         }
     },
