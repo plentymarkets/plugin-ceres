@@ -184,7 +184,8 @@ export default Vue.component("shipping-address-select", {
             billingAddress()
             {
                 // if a delivery address exists do not take into account the billingAddress
-                if (Number(this.deliveryAddressId) === -99) {
+                if (Number(this.deliveryAddressId) === -99)
+                {
                     this.checkDeliveryAddressError();
                 }
             },

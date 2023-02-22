@@ -96,7 +96,7 @@ export default Vue.component("place-order", {
 
     mounted()
     {
-        this.checkDeliveryAddressError()
+        this.checkDeliveryAddressError();
     },
 
     methods: {
