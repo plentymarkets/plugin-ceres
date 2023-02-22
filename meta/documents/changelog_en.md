@@ -15,6 +15,10 @@
 - Fixed an Autocomplete search bug that occurred on certain Android devices.
 - Added logic to remove shopping cart items that are no longer compatible with the updated customer class when the customer class is changed.
 
+## Added
+
+- An error message is now displayed in the order process if "Delivery address equals billing address" was selected, but the selected country is not a valid delivery country.
+
 ### Removed
 
 - Removed unused CSS of the item grid
@@ -24,6 +28,8 @@
 
 - In Ceres 5.0.59 we made changes to template files which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
 - [resources/views/Widgets/Common/ImageBoxWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3387/files#diff-9f438954b9f177761379a8b382eea014077ec743060583796ac4f9aaed3d3003)
+- [resources/views/Customer/Components/AddressSelect/AddressSelect.twig](https://github.com/plentymarkets/plugin-ceres/pull/3417/files/#diff-969624803dfeb696a58e16de0d95c285a458ec83a615026882d9b1e65386935b)
+- [resources/views/Checkout/Components/PlaceOrder.twig](https://github.com/plentymarkets/plugin-ceres/pull/3417/files/#diff-ac3499fe39e67fd08b24086c79be769096e1ab58885fd4a233847c502b94b317)
 
 ## v5.0.58 (2023-01-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.57...5.0.58" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
