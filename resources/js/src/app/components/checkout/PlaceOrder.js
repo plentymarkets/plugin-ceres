@@ -38,7 +38,7 @@ export default Vue.component("place-order", {
     {
         return {
             waiting: false,
-            isValidShippingCountry: false
+            isInvalidShippingCountry: false
         };
     },
 
@@ -96,14 +96,12 @@ export default Vue.component("place-order", {
 
     mounted()
     {
-        this.checkDeliveryAddressError()
+        this.checkDeliveryAddressError();
     },
 
     methods: {
         placeOrder()
         {
-
-
             if (this.validateCheckout())
             {
                 this.waiting = true;
@@ -149,7 +147,7 @@ export default Vue.component("place-order", {
 
         validateCheckout()
         {
-            if (this.isValidShippingCountry)
+            if (this.isInvalidShippingCountry)
             {
                 return false;
             }
@@ -227,7 +225,7 @@ export default Vue.component("place-order", {
 
             if (this.billingAddress === null && this.deliveryAddressId === -99)
             {
-                this.isValidShippingCountry = true;
+                this.isInvalidShippingCountry = true;
             }
             else
             {
@@ -236,11 +234,11 @@ export default Vue.component("place-order", {
 
                 if (!validShippingCountry)
                 {
-                    this.isValidShippingCountry = false;
+                    this.isInvalidShippingCountry = false;
                 }
                 else
                 {
-                    this.isValidShippingCountry = true;
+                    this.isInvalidShippingCountry = true;
                 }
             }
         }

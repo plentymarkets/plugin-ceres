@@ -7,12 +7,12 @@
             {{ buttonReplacement }}
         {% else %}
                 <button
-                    v-tooltip="!isValidShippingCountry"
+                    v-tooltip="!isInvalidShippingCountry"
                     data-placement="top"
                     data-toggle="tooltip"
                     title="{{ trans('Ceres::Template.checkoutBuyNowTooltip') }}"
                     class="btn btn-block btn-primary btn-appearance "
-                    :class="[!isValidShippingCountry ? 'disabled' : '', buttonClasses]"
+                    :class="[!isInvalidShippingCountry ? 'disabled' : '', buttonClasses]"
                     :style="paddingInlineStyles"
                     @click="placeOrder()"
                     :disabled="waiting || isBasketLoading || !isBasketInitiallyLoaded"
