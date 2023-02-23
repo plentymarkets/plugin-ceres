@@ -55,19 +55,13 @@ context("geoblocking-regulation", () =>
         loginAsUser();
         cy.getByTestingAttr("billing-address-select-add").click();
 
-        cy.intercept("POST", "/rest/io/customer/address?typeId=1").as("createAddress");
-
         addAddress("Reykjavik", "Island");
 
-        cy.wait("@createAddress").then((res) => {
-            cy.getByTestingAttr("message-invalid-shipping-country").then(($element) => {
-                expect($element.text().trim()).to.eql(ERROR_MSG);
-            });
-
-            cy.getByTestingAttr("place-order").should('have.attr', 'disabled');
+        cy.getByTestingAttr("message-invalid-shipping-country").then(($element) => {
+            expect($element.text().trim()).to.eql(ERROR_MSG);
         });
 
-
+        cy.getByTestingAttr("place-order").should('have.attr', 'disabled');
     });
 
 
@@ -79,16 +73,15 @@ context("geoblocking-regulation", () =>
 
         cy.getByTestingAttr("billing-address-select-add").click();
         cy.wait(1000);
-        cy.intercept("POST", "/rest/io/customer/address?typeId=1").as("createAddress");
+
         addAddress("Reykjavik", "Island");
 
-        cy.wait("@createAddress").then((res) => {
-            cy.getByTestingAttr("billing-address-select-open").click();
-            cy.get('li.item').first().click();
+        cy.getByTestingAttr("billing-address-select-open").click();
+        cy.wait(1000)
+        cy.get('li.item').first().click();
 
-            cy.getByTestingAttr("message-invalid-shipping-country").should("not.exist");
-            cy.getByTestingAttr("place-order").should("not.have.attr", "disabled")
-        });
+        cy.getByTestingAttr("message-invalid-shipping-country").should("not.exist");
+        cy.getByTestingAttr("place-order").should("not.have.attr", "disabled")
     });
 
     it("should show error message and disable buy button upon changing a billing address with an invalid delivery country for a Logged user", () =>
@@ -98,25 +91,18 @@ context("geoblocking-regulation", () =>
         addAddress();
 
         cy.getByTestingAttr("billing-address-select-add").click();
-        cy.intercept("POST", CREATE_ADDRESS_URL).as("createAddress");
         addAddress("Reykjavik", "Island");
+        cy.getByTestingAttr("billing-address-select-open").click();
 
-        cy.wait("@createAddress").then((res) => {
-            cy.getByTestingAttr("billing-address-select-open").click();
+        cy.get('li.item').first().children().first().invoke("val").then((addressId) => {
+            cy.get('li.item').first().click();
+        })
 
-            cy.get('li.item').first().children().first().invoke("val").then((addressId) => {
-                cy.intercept("PUT", "/rest/io/customer/address/"+addressId+"?typeId=1").as("updateAddress");
-                cy.get('li.item').first().click();
-            })
+        cy.getByTestingAttr("billing-address-select-open").click();
+        cy.get('li.item').eq(1).click();
 
-            cy.wait("@updateAddress").then((res) => {
-                cy.getByTestingAttr("billing-address-select-open").click();
-                cy.get('li.item').eq(1).click();
-
-                cy.getByTestingAttr("message-invalid-shipping-country").should("exist");
-                cy.getByTestingAttr("place-order").should("have.attr", "disabled")
-            });
-        });
+        cy.getByTestingAttr("message-invalid-shipping-country").should("exist");
+        cy.getByTestingAttr("place-order").should("have.attr", "disabled")
     });
 
 
