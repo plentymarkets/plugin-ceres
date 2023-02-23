@@ -15,10 +15,6 @@
 - Fixed an Autocomplete search bug that occurred on certain Android devices.
 - Added logic to remove shopping cart items that are no longer compatible with the updated customer class when the customer class is changed.
 
-## Added
-
-- An error message is now displayed in the order process if "Delivery address equals billing address" was selected, but the selected country is not a valid delivery country.
-
 ### Removed
 
 - Removed unused CSS of the item grid

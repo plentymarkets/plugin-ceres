@@ -15,10 +15,6 @@
 - Es wurde ein Fehler bei der Autocomplete-Suche behoben, welcher auf bestimmten Android-Geräten auftrat.
 - Es wurde eine Logik ergänzt, der bei Änderung der Kundenklasse Warenkorbartikel entfernt, welche nicht mehr mit der aktualisierten Kundenklasse kompatibel sind.
 
-### Hinzugefügt
-
-- Im Bestellvorgang wird nun eine Fehlermeldung angezeigt, wenn "Lieferadresse gleich Rechnungsadresse" ausgewählt wurde, das Ausgewählte Land jedoch kein gültiges Lieferland ist.
-
 ### Entfernt
 
 - Es wurde ungenutztes CSS des Item-Grid entfernt
