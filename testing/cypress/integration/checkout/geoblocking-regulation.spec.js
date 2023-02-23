@@ -15,7 +15,7 @@ context("geoblocking-regulation", () =>
             expect($element.text().trim()).to.eql(ERROR_MSG);
         });
 
-        cy.getByTestingAttr("place-order").should('have.class', 'disabled');
+        cy.getByTestingAttr("place-order").should('have.attr', 'disabled');
 
     });
 
@@ -25,7 +25,7 @@ context("geoblocking-regulation", () =>
         addAddress();
 
         cy.getByTestingAttr("message-invalid-shipping-country").should("not.exist")
-        cy.getByTestingAttr("place-order").should("not.have.class", "disabled")
+        cy.getByTestingAttr("place-order").should("not.have.attr", "disabled")
     });
 
 
@@ -46,7 +46,7 @@ context("geoblocking-regulation", () =>
         addAddress();
 
         cy.getByTestingAttr("message-invalid-shipping-country").should("not.exist");
-        cy.getByTestingAttr("place-order").should("not.have.class", "disabled")
+        cy.getByTestingAttr("place-order").should("not.have.attr", "disabled")
     });
 
 
@@ -64,7 +64,7 @@ context("geoblocking-regulation", () =>
                 expect($element.text().trim()).to.eql(ERROR_MSG);
             });
 
-            cy.getByTestingAttr("place-order").should('have.class', 'disabled');
+            cy.getByTestingAttr("place-order").should('have.attr', 'disabled');
         });
 
 
@@ -87,7 +87,7 @@ context("geoblocking-regulation", () =>
             cy.get('li.item').first().click();
 
             cy.getByTestingAttr("message-invalid-shipping-country").should("not.exist");
-            cy.getByTestingAttr("place-order").should("not.have.class", "disabled")
+            cy.getByTestingAttr("place-order").should("not.have.attr", "disabled")
         });
     });
 
@@ -114,7 +114,7 @@ context("geoblocking-regulation", () =>
                 cy.get('li.item').eq(1).click();
 
                 cy.getByTestingAttr("message-invalid-shipping-country").should("exist");
-                cy.getByTestingAttr("place-order").should("have.class", "disabled")
+                cy.getByTestingAttr("place-order").should("have.attr", "disabled")
             });
         });
     });
