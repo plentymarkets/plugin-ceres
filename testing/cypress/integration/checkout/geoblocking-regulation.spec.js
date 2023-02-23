@@ -2,7 +2,7 @@
 context("geoblocking-regulation", () =>
 {
 
-    const ERROR_MSG = "Wir versenden nicht in das ausgewählte Lieferland. Bitte wählen Sie eines der verfügbaren Länder in der Lieferadresse aus.";
+    const ERROR_MSG = "Wir versenden nicht in das ausgewählte Lieferland. Bitte wählen Sie eines der verfügbaren Länder für die Lieferadresse aus."
     const CREATE_ADDRESS_URL = "/rest/io/customer/address?typeId=1";
 
 
