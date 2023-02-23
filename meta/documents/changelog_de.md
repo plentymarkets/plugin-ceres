@@ -24,6 +24,8 @@
 
 - Im Zuge des Releases von Ceres 5.0.59 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
 - [resources/views/Widgets/Common/ImageBoxWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3387/files#diff-9f438954b9f177761379a8b382eea014077ec743060583796ac4f9aaed3d3003)
+- [resources/views/Customer/Components/AddressSelect/AddressSelect.twig](https://github.com/plentymarkets/plugin-ceres/pull/3417/files/#diff-969624803dfeb696a58e16de0d95c285a458ec83a615026882d9b1e65386935b)
+- [resources/views/Checkout/Components/PlaceOrder.twig](https://github.com/plentymarkets/plugin-ceres/pull/3417/files/#diff-ac3499fe39e67fd08b24086c79be769096e1ab58885fd4a233847c502b94b317)
 
 ## v5.0.58 (2023-01-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.57...5.0.58" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 

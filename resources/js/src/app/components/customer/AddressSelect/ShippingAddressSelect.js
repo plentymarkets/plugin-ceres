@@ -22,6 +22,7 @@ export default Vue.component("shipping-address-select", {
             :default-salutation="defaultSalutation"
             :padding-classes="paddingClasses"
             :padding-inline-styles="paddingInlineStyles"
+            :is-invalid-shipping-country="isInvalidShippingCountry"
             data-testing="delivery-address-select"
             :email="email">
         </address-select>
@@ -73,7 +74,18 @@ export default Vue.component("shipping-address-select", {
         email: String
     },
 
+    data()
+    {
+        return {
+            isInvalidShippingCountry: false
+        };
+    },
+
     computed: mapState({
+        shippingCountryList: state => state.localization.shippingCountries,
+        billingAddress: state => state.address.billingAddress,
+        billingAddressId: state => state.address.billingAddressId,
+        deliveryAddress: state => state.address.deliveryAddress,
         deliveryAddressId: state => state.address.deliveryAddressId
     }),
 
@@ -95,6 +107,8 @@ export default Vue.component("shipping-address-select", {
                 this.$store.commit("setPostOfficeAvailability", true);
             }
         }
+
+        this.checkDeliveryAddressError();
     },
 
     methods:
@@ -110,6 +124,7 @@ export default Vue.component("shipping-address-select", {
                     response =>
                     {
                         document.dispatchEvent(new CustomEvent("afterDeliveryAddressChanged", { detail: this.deliveryAddressId }));
+                        this.checkDeliveryAddressError();
                     },
                     error =>
                     {
@@ -135,6 +150,29 @@ export default Vue.component("shipping-address-select", {
                     TranslationService.translate("Ceres::Template.checkoutInvalidShippingCountry")
                 );
             }
+        },
+
+        checkDeliveryAddressError()
+        {
+            const countryId = Number(this.deliveryAddress.id) === -99 ? this.billingAddress.countryId : this.deliveryAddress.countryId;
+            const validShippingCountry = this.shippingCountryList.find((country) => country.id === countryId);
+            this.isInvalidShippingCountry = !validShippingCountry;
         }
-    }
+    },
+
+    watch:
+        {
+            billingAddress()
+            {
+                // if a delivery address exists do not take into account the billingAddress
+                if (Number(this.deliveryAddressId) === -99) {
+                    this.checkDeliveryAddressError();
+                }
+            },
+
+            deliveryAddress()
+            {
+                this.checkDeliveryAddressError();
+            }
+        }
 });

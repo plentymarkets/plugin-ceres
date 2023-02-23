@@ -7,12 +7,12 @@
             {{ buttonReplacement }}
         {% else %}
             <button
-                class="btn btn-block btn-primary btn-appearance"
-                :class="buttonClasses"
-                :style="paddingInlineStyles"
-                @click="placeOrder()"
-                :disabled="waiting || isBasketLoading || !isBasketInitiallyLoaded"
-                {{ set_testing_attr("data-testing", "place-order") }}>
+                    class="btn btn-block btn-primary btn-appearance"
+                    :class="buttonClasses"
+                    :style="paddingInlineStyles"
+                    @click="placeOrder()"
+                    :disabled="waiting || isBasketLoading || !isBasketInitiallyLoaded || isInvalidShippingCountry"
+                    {{ set_testing_attr("data-testing", "place-order") }}>
                 <icon icon="arrow-right" :loading="waiting"></icon>
                 {{ trans("Ceres::Template.checkoutBuyNow") }}
             </button>
