@@ -108,7 +108,7 @@ context("geoblocking-regulation", () =>
 
     function loginAsUser()
     {
-        cy.login()
+        cy.login("plentygeoblockingtest@plenty.de")
         cy.wait(2000);
         cy.addBasketItem(1014);
         cy.visit("/checkout/");
