@@ -37,7 +37,8 @@ export default Vue.component("place-order", {
     data()
     {
         return {
-            waiting: false
+            waiting: false,
+            isInvalidShippingCountry: false
         };
     },
 
@@ -85,8 +86,17 @@ export default Vue.component("place-order", {
             basketItemQuantity: state => state.basket.data.itemQuantity,
             isBasketInitiallyLoaded: state => state.basket.isBasketInitiallyLoaded,
             shippingPrivacyHintAccepted: state => state.checkout.shippingPrivacyHintAccepted,
-            newsletterSubscription: state => state.checkout.newsletterSubscription
+            newsletterSubscription: state => state.checkout.newsletterSubscription,
+            billingAddress: state => state.address.billingAddress,
+            deliveryAddress: state => state.address.deliveryAddress,
+            deliveryAddressId: state => state.address.deliveryAddressId,
+            shippingCountryList: state => state.localization.shippingCountries
         })
+    },
+
+    mounted()
+    {
+        this.checkDeliveryAddressError();
     },
 
     methods: {
@@ -137,6 +147,10 @@ export default Vue.component("place-order", {
 
         validateCheckout()
         {
+            if (this.isInvalidShippingCountry)
+            {
+                return false;
+            }
             let isValid = true;
 
             for (const index in this.checkoutValidation)
@@ -201,6 +215,30 @@ export default Vue.component("place-order", {
             {
                 this.$emit("payment-response", content);
             }
+        },
+
+        checkDeliveryAddressError()
+        {
+            const countryId = Number(this.deliveryAddress.id) === -99 ? this.billingAddress.countryId : this.deliveryAddress.countryId;
+            const validShippingCountry = this.shippingCountryList.find((country) => country.id === countryId);
+
+            this.isInvalidShippingCountry = !validShippingCountry;
+        }
+    },
+
+    watch: {
+        billingAddress()
+        {
+            // if a delivery address exists do not take into account the billingAddress
+            if (Number(this.deliveryAddressId) === -99)
+            {
+                this.checkDeliveryAddressError();
+            }
+        },
+
+        deliveryAddress()
+        {
+            this.checkDeliveryAddressError();
         }
     }
 });

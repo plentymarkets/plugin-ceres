@@ -9964,14 +9964,17 @@ html.ie {
 }
 
 .sticky-element {
-    padding-bottom: .1px; // force disable margin collapse
+    > .widget-inner {
+        display: inline-block; // Fix sticky-container height miscalculation and resulting shaking
+        width: 100%;
+    }
 
     p:empty {
         margin-bottom: 0; // remove margin of empty paragraph for correct height detection
     }
 
     // Needed for elements below not to overlap sticky
-    .sticky-element.is-sticky {
+    &.is-sticky {
         z-index: $zindex-sticky !important; // stylelint-disable-line declaration-no-important
     }
 }
@@ -11085,18 +11088,7 @@ body.basket-open {
 
 
 // Pages
-.page-infos {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-
-    .product-count {
-        flex: 1;
-    }
-}
-
 .product-list {
-
     display: flex;
     flex-flow: row wrap;
     padding: 0;
@@ -11144,46 +11136,6 @@ category-item,
 }
 
 .lazy {
-    display: none;
-}
-
-@include media-breakpoint-up(sm) {
-    .product-list {
-        li {
-            display: flex;
-        }
-    }
-
-    .product-list.grid {
-
-        li {
-            display: flex;
-            box-shadow: none;
-        }
-
-    }
-}
-
-@include media-breakpoint-up(md) {
-    .product-list.grid {
-
-        li {
-            display: flex;
-        }
-    }
-}
-
-@include media-breakpoint-up(lg) {
-    .product-list.grid {
-
-        li {
-            display: flex;
-        }
-    }
-
-}
-
-.item-list-frame.loading:not(.blur-effect) > ul {
     display: none;
 }
 
@@ -12158,30 +12110,6 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
             }
         }
     }
-    .product-list {
-        > .col-12 {
-            padding-right: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important
-            padding-left: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important
-        }
-        > .col-6:nth-child(odd) {
-            padding-left: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important
-        }
-        > .col-6:nth-child(even) {
-            padding-right: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important
-        }
-        > .col-4:nth-child(3n+1) {
-            padding-left: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important
-        }
-        > .col-4:nth-child(3n+3) {
-            padding-right: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important
-        }
-        > .col-3:nth-child(4n+1) {
-            padding-left: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important
-        }
-        > .col-3:nth-child(4n+4) {
-            padding-right: $grid-gutter-width / 2 !important; // stylelint-disable-line declaration-no-important
-        }
-    }
 
     > .widget-inner > li {
         padding-bottom: $grid-gutter-width;
@@ -12555,14 +12483,6 @@ html.ie .v-s-boxes .v-s-box.invalid { // stylelint-disable-line selector-no-qual
                 width: 100%;
                 max-height: 100%;
                 padding: 1rem;
-            }
-        }
-    }
-
-    &.widget-image-box-no-caption {
-        > .widget-inner {
-            .widget-caption {
-                display: none;
             }
         }
     }

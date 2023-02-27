@@ -1,10 +1,54 @@
 # Release Notes für plentyShop LTS
 
-## v5.0.57 (2022-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.56...5.0.57" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.59 (2023-02-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.58...5.0.59" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
 
-- Falls du die Platzhalter-Zahlungsart "Bereits bezahlt" für Bestellungen aktivieren möchtest, die z.B. durch einen Mehrzweckgutschein bezahlt wurden, musst du sie im plentyShop LTS Assistenten für deine Lieferländer aktivieren und anschließend mit den Kundenklassen verbinden, für die du sie zur Verfügung stellen möchtest. Weitere Informationen findest du auf der <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html#lts-assistent-zahlungsart" target="_blank">Handbuchseite zum plentyShop LTS</a>.
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+
+### Hinzugefügt
+
+- Auf der Wunschliste werden nicht mehr verfügbare Artikel jetzt gesondert gelistet.
+- Im Zuge der Geoblocking-Richtlinie wurde eine Warnmeldung im Checkout hinzugefügt. Falls Kund:innen in ihrer Lieferadresse ein Lieferland ausgewählt haben, das für diesen plentyShop nicht aktiviert ist, weist die Warnmeldung sie darauf hin, ein anderes Lieferland auswählen zu müssen. Weiterhin wird die Kaufen-Schaltfläche nun deaktiviert und ausgegraut, bis Kund:innen ein valides Lieferland für ihre Lieferadresse ausgewählt haben. Die Texte der Warnmeldung und des Tooltips, der beim Mouseover über der ausgegrauten Kaufen-Schaltfläche angezeigt wird, können im Menü **CMS » Mehrsprachigkeit** angepasst werden. Die Übersetzungsschlüssel dafür sind `checkoutInvalidShippingCountryGeoblocking` und `checkoutBuyNowTooltip`.
+
+### Behoben
+
+- Das Bilderbox-Widget hat den hinterlegten Text gerendert, auch wenn die Option **Bild ohne Box** für die Einstellung **Stil der Box** ausgewählt wurde. Der hinterlegte Text wird jetzt nicht mehr unsichtbar gemacht, sondern entfernt.
+- Unter bestimmten Umständen konnte das Sticky-Container-Widget in der Artikelansicht wackeln. Dies wurde behoben.
+- Durch einen Fehler im Adressauswahl-Widget konnte die Anrede in den Widget-Einstellungen nicht als sichtbares Feld aktiviert werden. Dies wurde behoben.
+- Bei der Autocomplete-Suche auf bestimmten Android-Geräten konnte es zu Fehlern kommen. Dies wurde behoben.
+- Es wurde eine Logik ergänzt, die bei einer Änderung der Kundenklasse nun Warenkorbartikel entfernt, welche nicht mehr mit der aktualisierten Kundenklasse kompatibel sind.
+- Eigenschaften von Typ **Datei**, die über den ShopBuilder auf der Artikeldetailseite eingebunden sind, enthalten nur noch den Dateinamen ohne vorangestellte ID.
+- Unter bestimmten Umständen wurde nicht der korrekte Metatitel für die Artikeldetailseite ausgegeben. Dies wurde behoben.
+
+### Entfernt
+
+- Es wurde ungenutztes CSS des Artikelrasters entfernt.
+- Es wurden ungenutzte SCSS Dateien entfernt (_legacy.scss, _home.scss).
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.59 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- [resources/views/Widgets/Common/ImageBoxWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3387/files#diff-9f438954b9f177761379a8b382eea014077ec743060583796ac4f9aaed3d3003)
+- [resources/views/Customer/Components/AddressSelect/AddressSelect.twig](https://github.com/plentymarkets/plugin-ceres/pull/3417/files/#diff-969624803dfeb696a58e16de0d95c285a458ec83a615026882d9b1e65386935b)
+- [resources/views/Checkout/Components/PlaceOrder.twig](https://github.com/plentymarkets/plugin-ceres/pull/3417/files/#diff-ac3499fe39e67fd08b24086c79be769096e1ab58885fd4a233847c502b94b317)
+
+## v5.0.58 (2023-01-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.57...5.0.58" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden. 
+
+### Behoben
+
+- Die Buttons für die Zustimmung in der Cookiebar wurden in bestimmten Fällen nicht korrekt angezeigt.
+- Es wurde eine Javascript-Funktion verwendet, die mit iOS-Versionen kleiner als 13.4 nicht kompatibel war. Dies wurde behoben.
+
+## v5.0.57 (2023-01-09) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.56...5.0.57" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Falls du die Platzhalter-Zahlungsart "Bereits bezahlt" für Bestellungen aktivieren möchtest, die z.B. durch einen Mehrzweckgutschein bezahlt wurden, musst du sie im plentyShop LTS Assistenten für deine Lieferländer aktivieren und anschließend mit den Kundenklassen verbinden, für die du sie zur Verfügung stellen möchtest. Weitere Informationen findest du auf der <a href="https://www.bit.ly/3X11knt" target="_blank">Handbuchseite zum plentyShop LTS</a>.
 - Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden. 
 
 ### Hinzugefügt
@@ -26,11 +70,11 @@
 ### TODO
 
 - Die ShopBuilder-Inhalte für Bestellbestätigungsseiten müssen im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
-- Falls du Gastkund:innen die Möglichkeit geben willst, einen neuen Auftragsbestätigungslink anzufordern, musst du dafür eine neue E-Mail-Vorlage erstellen und verknüpfen. Weitere Informationen findest du auf der <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/shop-builder.html#softlogin" target="_blank">ShopBuilder-Handbuchseite</a>.
+- Falls du Gastkund:innen die Möglichkeit geben willst, einen neuen Auftragsbestätigungslink anzufordern, musst du dafür eine neue E-Mail-Vorlage erstellen und verknüpfen. Weitere Informationen findest du auf der <a href="https://www.bit.ly/3CDrAfI" target="_blank">ShopBuilder-Handbuchseite</a>.
 
 ### Hinzugefügt
 
-- Die Softlogin-Funktionalität wurde überarbeitet. Falls die Gültigkeit des Auftragsbestätigungslinks im PlentyShop LTS-Assistenten auf **Immer** gesetzt ist, können Gastkund:innen nun nach 90 Tagen einen neuen Auftragsbestätigungslink anfordern, indem sie den ursprünglichen Auftragsbestätigungslink öffnen. Kund:innen erhalten den neuen Auftragsbestätigungslink per E-Mail. Bitte beachte auch das TODO. Weitere Informationen findest du auf der <a href="https://knowledge.plentymarkets.com/de-de/manual/main/webshop/shop-builder.html#softlogin" target="_blank">ShopBuilder-Handbuchseite</a>.
+- Die Softlogin-Funktionalität wurde überarbeitet. Falls die Gültigkeit des Auftragsbestätigungslinks im PlentyShop LTS-Assistenten auf **Immer** gesetzt ist, können Gastkund:innen nun nach 90 Tagen einen neuen Auftragsbestätigungslink anfordern, indem sie den ursprünglichen Auftragsbestätigungslink öffnen. Kund:innen erhalten den neuen Auftragsbestätigungslink per E-Mail. Bitte beachte auch das TODO. Weitere Informationen findest du auf der <a href="https://www.bit.ly/3CDrAfI" target="_blank">ShopBuilder-Handbuchseite</a>.
 - Für die Anrede bei neuen Adressen in der Kaufabwicklung oder im Mein-Konto-Bereich kann jetzt die Option **Bitte auswählen** als Vorauswahl festgelegt werden. Bei den ShopBuilder-Widgets für Rechnungs- und Lieferadressen kannst du die Vorauswahl über die Einstellung **Vorausgewählte Anrede** in den Widget-Einstellungen steuern. Falls du keine ShopBuilder-Seiten verwendest, kannst du die Vorauswahl der Anrede über die Einstellung **Vorausgewählte Anrede** im Tab **Kaufabwicklung und Mein Konto** der plentyShop LTS-Einstellungen steuern.
 
 ### Geändert

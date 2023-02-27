@@ -12,7 +12,7 @@
         {% set robotsValue = 'ALL' %}
     {% endif %}
     {% embed getPartial('page-metadata') %}
-        {% block title          ItemName.get(itemData | itemName(webstoreConfig.urlTitleItemName - 1), itemData.variation.bundleType) %}
+        {% block title          ItemName.get(itemData | itemName(webstoreConfig.urlTitleItemName - 1, ""), itemData.variation.bundleType) %}
         {% block description    itemData.texts.metaDescription %}
         {% block keywords       itemData.texts.keywords %}
         {% block image          itemData.images.all[0].url %}

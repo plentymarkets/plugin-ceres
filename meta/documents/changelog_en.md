@@ -1,11 +1,55 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.57 (2022-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.56...5.0.57" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.59 (2023-02-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.58...5.0.59" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
 
-- In case you want to activate the placeholder payment method “Already paid” for specific orders that have for example been paid via a multipurpose coupon, you need to activate them for your delivery countries in the plentyShop LTS assistant and afterwards link them to the customer classes you want them to be available for. Further information can be found on the <a href="https://knowledge.plentymarkets.com/en-gb/manual/main/online-store/setting-up-ceres.html#295" target="_blank">plentyShop LTS manual page</a>.
-- The ShopBuilder contents for order confirmation pages must be updated in the **CMS » ShopBuilder** menu via the **Regenerate contents** button.
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
+
+### Added
+
+- Items that are no longer available are now listed separately on the wish list.
+- As part of the geo-blocking policy, a warning message has been added to the checkout. If customers have selected a delivery country in their delivery address that is not activated for this plentyShop, the warning message informs them that they must select a different delivery country. Furthermore, the buy button is now deactivated and greyed out until customers have selected a valid delivery country for their delivery address. The texts of the warning message and the tooltip that is displayed when hovering over the greyed-out buy button can be changed in the **CMS » Multilingualism** menu. The translation keys are `checkoutInvalidShippingCountryGeoblocking` and `checkoutBuyNowTooltip`, respectively.
+
+### Fixed
+
+- The image box widget rendered the inserted text even if the option **Image without box** was selected for the **Box style** setting. The inserted text is now removed instead of being made invisible.
+- Under some conditions, the sticky container widget on the item view could shake visibly. This was fixed.
+- Fixed a bug in the address selection widget due to which the salutation could not be activated as a visible field in the widget settings.
+- Fixed an autocomplete search bug that occurred on certain Android devices.
+- Added logic that removes shopping cart items that are no longer compatible with the updated customer class when the customer class is changed.
+- Properties of type **File**, which are included on the single item view via ShopBuilder, now only contain the file name without a preceding ID.
+- Under certain circumstances, the correct meta title was not output for the single item view. This has been fixed.
+
+### Removed
+
+- Removed unused CSS of the item grid.
+- Removed unused SCSS files (_legacy.scss, _home.scss).
+
+### Changed templates
+
+- In Ceres 5.0.59 we made changes to template files which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
+- [resources/views/Widgets/Common/ImageBoxWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3387/files#diff-9f438954b9f177761379a8b382eea014077ec743060583796ac4f9aaed3d3003)
+- [resources/views/Customer/Components/AddressSelect/AddressSelect.twig](https://github.com/plentymarkets/plugin-ceres/pull/3417/files/#diff-969624803dfeb696a58e16de0d95c285a458ec83a615026882d9b1e65386935b)
+- [resources/views/Checkout/Components/PlaceOrder.twig](https://github.com/plentymarkets/plugin-ceres/pull/3417/files/#diff-ac3499fe39e67fd08b24086c79be769096e1ab58885fd4a233847c502b94b317)
+
+## v5.0.58 (2023-01-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.57...5.0.58" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
+
+### Fixed
+
+- The buttons for consent in the cookie bar were not displayed correctly in certain cases.
+- A javascript function was used that was not compatible with iOS version lower than 13.4. This has been fixed.
+
+## v5.0.57 (2023-01-09) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.56...5.0.57" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- In case you want to activate the placeholder payment method “Already paid” for specific orders that have for example been paid via a multipurpose coupon, you need to activate them for your delivery countries in the plentyShop LTS assistant and afterwards link them to the customer classes you want them to be available for. Further information can be found on the <a href="https://www.bit.ly/3X11knt" target="_blank">plentyShop LTS manual page</a>.
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
 
 ### Added
 
@@ -27,11 +71,11 @@
 ### TODO
 
 - The ShopBuilder contents for order confirmation pages must be updated in the **CMS » ShopBuilder** menu via the **Regenerate contents** button.
-- If you want to give guest customers the possibility to request a new order confirmation link, you have to create and link a new email template. You can find further information on the <a href="https://knowledge.plentymarkets.com/en-gb/manual/main/online-store/shop-builder.html#softlogin" target="_blank">ShopBuilder manual page</a>.
+- If you want to give guest customers the possibility to request a new order confirmation link, you have to create and link a new email template. You can find further information on the <a href="https://www.bit.ly/3CDrAfI" target="_blank">ShopBuilder manual page</a>.
 
 ### Added
 
-- The softlogin functionality has been revised. If the validity of the order confirmation link in the PlentyShop LTS assistent is set to **Always**, guest customers can now request a new order confirmation link after 90 days by opening the original order confirmation link. Customers will receive the new order confirmation link by email. Please note the TODO in this changelog. You can find further information on the <a href="https://knowledge.plentymarkets.com/en-gb/manual/main/online-store/shop-builder.html#softlogin" target="_blank">ShopBuilder manual page</a>.
+- The softlogin functionality has been revised. If the validity of the order confirmation link in the PlentyShop LTS assistent is set to **Always**, guest customers can now request a new order confirmation link after 90 days by opening the original order confirmation link. Customers will receive the new order confirmation link by email. Please note the TODO in this changelog. You can find further information on the <a href="https://www.bit.ly/3CDrAfI" target="_blank">ShopBuilder manual page</a>.
 - For the salutation for new addresses in the checkout and the My Account area, the option **Please select** can now be set as the preselected option. For the ShopBuilder billing and shipping address widgets, you can set the preselection via the **Preselected salutation** setting in the widget settings. If you do not use ShopBuilder pages, you can set the presselection of the salutation via the **Preselected salutation** setting in the **Checkout and My Account** tab of the plentyShop LTS plugin settings. 
 
 ### Changed

@@ -1,12 +1,4 @@
 "use strict";
-/*
- * ATTENTION: An "eval-source-map" devtool has been used.
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
 (self["webpackChunkCeres"] = self["webpackChunkCeres"] || []).push([[22],{
 
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/src/app/components/customer/ChangeEmailForm.vue?vue&type=script&lang=js&":
@@ -15,7 +7,56 @@
   \************************************************************************************************************************************************************************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.number.constructor.js */ \"./node_modules/core-js/modules/es.number.constructor.js\");\n/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/NotificationService */ \"./resources/js/src/app/services/NotificationService.js\");\n/* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/ApiService */ \"./resources/js/src/app/services/ApiService.js\");\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  props: {\n    contactId: {\n      type: Number,\n      required: true\n    },\n    hash: {\n      type: String,\n      required: true\n    },\n    newMail: {\n      type: String,\n      required: true\n    }\n  },\n  data: function data() {\n    return {\n      password: \"\",\n      isDisabled: false\n    };\n  },\n  methods: {\n    /**\n     * Send the login data\n     */\n    submit: function submit() {\n      var _this = this;\n      this.isDisabled = true;\n      _services_ApiService__WEBPACK_IMPORTED_MODULE_2__[\"default\"].put(\"/rest/io/customer/mail/\" + this.contactId, {\n        password: this.password,\n        hash: this.hash\n      }).done(function (response) {\n        _services_NotificationService__WEBPACK_IMPORTED_MODULE_1__[\"default\"].success(_this.$translate(\"Ceres::Template.myAccountChangeEmailSuccessful\")).closeAfter(3000);\n        window.location.assign(window.location.origin);\n      }).fail(function () {\n        _services_NotificationService__WEBPACK_IMPORTED_MODULE_1__[\"default\"].error(_this.$translate(\"Ceres::Template.myAccountChangeEmailFailed\")).closeAfter(10000);\n      }).always(function () {\n        _this.isDisabled = false;\n      });\n    }\n  }\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9ub2RlX21vZHVsZXMvYmFiZWwtbG9hZGVyL2xpYi9pbmRleC5qcz8/Y2xvbmVkUnVsZVNldC01LnVzZSEuL25vZGVfbW9kdWxlcy92dWUtbG9hZGVyL2xpYi9pbmRleC5qcz8/dnVlLWxvYWRlci1vcHRpb25zIS4vcmVzb3VyY2VzL2pzL3NyYy9hcHAvY29tcG9uZW50cy9jdXN0b21lci9DaGFuZ2VFbWFpbEZvcm0udnVlP3Z1ZSZ0eXBlPXNjcmlwdCZsYW5nPWpzJi5qcyIsIm1hcHBpbmdzIjoiOzs7Ozs7QUFvQnFFO0FBQ2xCO0FBRW5ELCtEQUFlO0VBRWZBO0lBQ0FDLFdBQ0E7TUFDQUM7TUFDQUM7SUFDQTtJQUNBQyxNQUNBO01BQ0FGO01BQ0FDO0lBQ0E7SUFDQUUsU0FDQTtNQUNBSDtNQUNBQztJQUNBO0VBQ0E7RUFDQUcsc0JBQ0E7SUFDQTtNQUNBQztNQUNBQztJQUNBO0VBQ0E7RUFFQUM7SUFDQTtBQUNBO0FBQ0E7SUFDQUMsMEJBQ0E7TUFBQTtNQUNBO01BRUFDLGdFQUFBQTtRQUFBSjtRQUFBSDtNQUFBLEdBQ0FRLHlCQUNBO1FBQ0FDLDZFQUFBQSxDQUNBLG1FQUNBO1FBQ0FDO01BQ0EsR0FDQUMsaUJBQ0E7UUFDQUYsMkVBQUFBLENBQ0EsK0RBQ0E7TUFDQSxHQUNBRyxtQkFDQTtRQUNBO01BQ0E7SUFDQTtFQUNBO0FBQ0EsQ0FBQyIsInNvdXJjZXMiOlsid2VicGFjazovL0NlcmVzL3Jlc291cmNlcy9qcy9zcmMvYXBwL2NvbXBvbmVudHMvY3VzdG9tZXIvQ2hhbmdlRW1haWxGb3JtLnZ1ZT82YjYwIl0sInNvdXJjZXNDb250ZW50IjpbIjx0ZW1wbGF0ZT5cbiAgICA8Zm9ybSBtZXRob2Q9XCJwb3N0XCIgQHN1Ym1pdC5wcmV2ZW50PVwic3VibWl0KClcIiBjbGFzcz1cImNsZWFyZml4XCI+XG4gICAgICAgIDxkaXYgY2xhc3M9XCJpbnB1dC11bml0IG10LTNcIj5cbiAgICAgICAgICAgIDxsYWJlbCA6Zm9yPVwiJ25ldy1tYWlsJyArIF91aWRcIiBjbGFzcz1cImRpc2FibGVkXCI+e3sgJHRyYW5zbGF0ZShcIkNlcmVzOjpUZW1wbGF0ZS5teUFjY291bnROZXdFbWFpbFwiKSB9fTwvbGFiZWw+XG4gICAgICAgICAgICA8aW5wdXQgdHlwZT1cImVtYWlsXCIgbmFtZT1cImVtYWlsXCIgY2xhc3M9XCJmb3JtLWNvbnRyb2xcIiA6aWQ9XCInbmV3LW1haWwnICsgX3VpZFwiIDp2YWx1ZT1cIm5ld01haWxcIiBkaXNhYmxlZD5cbiAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgPGRpdiBjbGFzcz1cImlucHV0LXVuaXRcIj5cbiAgICAgICAgICAgIDxsYWJlbCA6Zm9yPVwiJ3Bhc3N3b3JkJyArIF91aWRcIj57eyAkdHJhbnNsYXRlKFwiQ2VyZXM6OlRlbXBsYXRlLmxvZ2luUGFzc3dvcmRcIikgfX08L2xhYmVsPlxuICAgICAgICAgICAgPGlucHV0IHR5cGU9XCJwYXNzd29yZFwiIG5hbWU9XCJwYXNzd29yZFwiIGF1dG9jb21wbGV0ZT1cImN1cnJlbnQtcGFzc3dvcmRcIiBjbGFzcz1cImZvcm0tY29udHJvbFwiIDppZD1cIidwYXNzd29yZCcgKyBfdWlkXCIgdi1tb2RlbD1cInBhc3N3b3JkXCI+XG4gICAgICAgIDwvZGl2PlxuXG4gICAgICAgIDxidXR0b24gdHlwZT1cInN1Ym1pdFwiIDpkaXNhYmxlZD1cImlzRGlzYWJsZWRcIiBjbGFzcz1cImJ0biBidG4tcHJpbWFyeSBidG4tYXBwZWFyYW5jZSBmbG9hdC1yaWdodCBidG4tbWVkaXVtIGJ0bi14cy1tYXgtd2lkdGhcIj5cbiAgICAgICAgICAgIDxzcGFuPnt7ICR0cmFuc2xhdGUoXCJDZXJlczo6VGVtcGxhdGUubXlBY2NvdW50Q2hhbmdlRW1haWxcIikgfX08L3NwYW4+XG4gICAgICAgICAgICA8aWNvbiBpY29uPVwiZW52ZWxvcGVcIiA6bG9hZGluZz1cImlzRGlzYWJsZWRcIj48L2ljb24+XG4gICAgICAgIDwvYnV0dG9uPlxuICAgIDwvZm9ybT5cbjwvdGVtcGxhdGU+XG5cbjxzY3JpcHQ+XG5pbXBvcnQgTm90aWZpY2F0aW9uU2VydmljZSBmcm9tIFwiLi4vLi4vc2VydmljZXMvTm90aWZpY2F0aW9uU2VydmljZVwiO1xuaW1wb3J0IEFwaVNlcnZpY2UgZnJvbSBcIi4uLy4uL3NlcnZpY2VzL0FwaVNlcnZpY2VcIjtcblxuZXhwb3J0IGRlZmF1bHQge1xuXG4gICAgcHJvcHM6IHtcbiAgICAgICAgY29udGFjdElkOlxuICAgICAgICB7XG4gICAgICAgICAgICB0eXBlOiBOdW1iZXIsXG4gICAgICAgICAgICByZXF1aXJlZDogdHJ1ZVxuICAgICAgICB9LFxuICAgICAgICBoYXNoOlxuICAgICAgICB7XG4gICAgICAgICAgICB0eXBlOiBTdHJpbmcsXG4gICAgICAgICAgICByZXF1aXJlZDogdHJ1ZVxuICAgICAgICB9LFxuICAgICAgICBuZXdNYWlsOlxuICAgICAgICB7XG4gICAgICAgICAgICB0eXBlOiBTdHJpbmcsXG4gICAgICAgICAgICByZXF1aXJlZDogdHJ1ZVxuICAgICAgICB9XG4gICAgfSxcbiAgICBkYXRhKClcbiAgICB7XG4gICAgICAgIHJldHVybiB7XG4gICAgICAgICAgICBwYXNzd29yZDogXCJcIixcbiAgICAgICAgICAgIGlzRGlzYWJsZWQ6IGZhbHNlXG4gICAgICAgIH07XG4gICAgfSxcblxuICAgIG1ldGhvZHM6IHtcbiAgICAgICAgLyoqXG4gICAgICAgICAqIFNlbmQgdGhlIGxvZ2luIGRhdGFcbiAgICAgICAgICovXG4gICAgICAgIHN1Ym1pdCgpXG4gICAgICAgIHtcbiAgICAgICAgICAgIHRoaXMuaXNEaXNhYmxlZCA9IHRydWU7XG5cbiAgICAgICAgICAgIEFwaVNlcnZpY2UucHV0KFwiL3Jlc3QvaW8vY3VzdG9tZXIvbWFpbC9cIiArIHRoaXMuY29udGFjdElkLCB7IHBhc3N3b3JkOiB0aGlzLnBhc3N3b3JkLCBoYXNoOiB0aGlzLmhhc2ggfSlcbiAgICAgICAgICAgICAgICAuZG9uZShyZXNwb25zZSA9PlxuICAgICAgICAgICAgICAgIHtcbiAgICAgICAgICAgICAgICAgICAgTm90aWZpY2F0aW9uU2VydmljZS5zdWNjZXNzKFxuICAgICAgICAgICAgICAgICAgICAgICAgdGhpcy4kdHJhbnNsYXRlKFwiQ2VyZXM6OlRlbXBsYXRlLm15QWNjb3VudENoYW5nZUVtYWlsU3VjY2Vzc2Z1bFwiKVxuICAgICAgICAgICAgICAgICAgICApLmNsb3NlQWZ0ZXIoMzAwMCk7XG4gICAgICAgICAgICAgICAgICAgIHdpbmRvdy5sb2NhdGlvbi5hc3NpZ24od2luZG93LmxvY2F0aW9uLm9yaWdpbik7XG4gICAgICAgICAgICAgICAgfSlcbiAgICAgICAgICAgICAgICAuZmFpbCgoKSA9PlxuICAgICAgICAgICAgICAgIHtcbiAgICAgICAgICAgICAgICAgICAgTm90aWZpY2F0aW9uU2VydmljZS5lcnJvcihcbiAgICAgICAgICAgICAgICAgICAgICAgIHRoaXMuJHRyYW5zbGF0ZShcIkNlcmVzOjpUZW1wbGF0ZS5teUFjY291bnRDaGFuZ2VFbWFpbEZhaWxlZFwiKVxuICAgICAgICAgICAgICAgICAgICApLmNsb3NlQWZ0ZXIoMTAwMDApO1xuICAgICAgICAgICAgICAgIH0pXG4gICAgICAgICAgICAgICAgLmFsd2F5cygoKSA9PlxuICAgICAgICAgICAgICAgIHtcbiAgICAgICAgICAgICAgICAgICAgdGhpcy5pc0Rpc2FibGVkID0gZmFsc2U7XG4gICAgICAgICAgICAgICAgfSk7XG4gICAgICAgIH1cbiAgICB9XG59XG48L3NjcmlwdD4iXSwibmFtZXMiOlsicHJvcHMiLCJjb250YWN0SWQiLCJ0eXBlIiwicmVxdWlyZWQiLCJoYXNoIiwibmV3TWFpbCIsImRhdGEiLCJwYXNzd29yZCIsImlzRGlzYWJsZWQiLCJtZXRob2RzIiwic3VibWl0IiwiQXBpU2VydmljZSIsImRvbmUiLCJOb3RpZmljYXRpb25TZXJ2aWNlIiwid2luZG93IiwiZmFpbCIsImFsd2F5cyJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/src/app/components/customer/ChangeEmailForm.vue?vue&type=script&lang=js&\n");
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.number.constructor.js */ "./node_modules/core-js/modules/es.number.constructor.js");
+/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
+/* harmony import */ var _services_ApiService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    contactId: {
+      type: Number,
+      required: true
+    },
+    hash: {
+      type: String,
+      required: true
+    },
+    newMail: {
+      type: String,
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      password: "",
+      isDisabled: false
+    };
+  },
+  methods: {
+    /**
+     * Send the login data
+     */
+    submit: function submit() {
+      var _this = this;
+      this.isDisabled = true;
+      _services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].put("/rest/io/customer/mail/" + this.contactId, {
+        password: this.password,
+        hash: this.hash
+      }).done(function (response) {
+        _services_NotificationService__WEBPACK_IMPORTED_MODULE_1__["default"].success(_this.$translate("Ceres::Template.myAccountChangeEmailSuccessful")).closeAfter(3000);
+        window.location.assign(window.location.origin);
+      }).fail(function () {
+        _services_NotificationService__WEBPACK_IMPORTED_MODULE_1__["default"].error(_this.$translate("Ceres::Template.myAccountChangeEmailFailed")).closeAfter(10000);
+      }).always(function () {
+        _this.isDisabled = false;
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -25,7 +66,88 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var core
   \***********************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"render\": function() { return /* binding */ render; },\n/* harmony export */   \"staticRenderFns\": function() { return /* binding */ staticRenderFns; }\n/* harmony export */ });\nvar render = function render() {\n  var _vm = this,\n    _c = _vm._self._c;\n  return _c(\"form\", {\n    staticClass: \"clearfix\",\n    attrs: {\n      method: \"post\"\n    },\n    on: {\n      submit: function submit($event) {\n        $event.preventDefault();\n        return _vm.submit();\n      }\n    }\n  }, [_c(\"div\", {\n    staticClass: \"input-unit mt-3\"\n  }, [_c(\"label\", {\n    staticClass: \"disabled\",\n    attrs: {\n      for: \"new-mail\" + _vm._uid\n    }\n  }, [_vm._v(_vm._s(_vm.$translate(\"Ceres::Template.myAccountNewEmail\")))]), _vm._v(\" \"), _c(\"input\", {\n    staticClass: \"form-control\",\n    attrs: {\n      type: \"email\",\n      name: \"email\",\n      id: \"new-mail\" + _vm._uid,\n      disabled: \"\"\n    },\n    domProps: {\n      value: _vm.newMail\n    }\n  })]), _vm._v(\" \"), _c(\"div\", {\n    staticClass: \"input-unit\"\n  }, [_c(\"label\", {\n    attrs: {\n      for: \"password\" + _vm._uid\n    }\n  }, [_vm._v(_vm._s(_vm.$translate(\"Ceres::Template.loginPassword\")))]), _vm._v(\" \"), _c(\"input\", {\n    directives: [{\n      name: \"model\",\n      rawName: \"v-model\",\n      value: _vm.password,\n      expression: \"password\"\n    }],\n    staticClass: \"form-control\",\n    attrs: {\n      type: \"password\",\n      name: \"password\",\n      autocomplete: \"current-password\",\n      id: \"password\" + _vm._uid\n    },\n    domProps: {\n      value: _vm.password\n    },\n    on: {\n      input: function input($event) {\n        if ($event.target.composing) return;\n        _vm.password = $event.target.value;\n      }\n    }\n  })]), _vm._v(\" \"), _c(\"button\", {\n    staticClass: \"btn btn-primary btn-appearance float-right btn-medium btn-xs-max-width\",\n    attrs: {\n      type: \"submit\",\n      disabled: _vm.isDisabled\n    }\n  }, [_c(\"span\", [_vm._v(_vm._s(_vm.$translate(\"Ceres::Template.myAccountChangeEmail\")))]), _vm._v(\" \"), _c(\"icon\", {\n    attrs: {\n      icon: \"envelope\",\n      loading: _vm.isDisabled\n    }\n  })], 1)]);\n};\nvar staticRenderFns = [];\nrender._withStripped = true;\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9ub2RlX21vZHVsZXMvYmFiZWwtbG9hZGVyL2xpYi9pbmRleC5qcz8/Y2xvbmVkUnVsZVNldC01LnVzZSEuL25vZGVfbW9kdWxlcy92dWUtbG9hZGVyL2xpYi9sb2FkZXJzL3RlbXBsYXRlTG9hZGVyLmpzPz9ydWxlU2V0WzFdLnJ1bGVzWzJdIS4vbm9kZV9tb2R1bGVzL3Z1ZS1sb2FkZXIvbGliL2luZGV4LmpzPz92dWUtbG9hZGVyLW9wdGlvbnMhLi9yZXNvdXJjZXMvanMvc3JjL2FwcC9jb21wb25lbnRzL2N1c3RvbWVyL0NoYW5nZUVtYWlsRm9ybS52dWU/dnVlJnR5cGU9dGVtcGxhdGUmaWQ9MGJjM2RlZGUmLmpzIiwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsSUFBSUEsTUFBTSxHQUFHLFNBQVNBLE1BQU0sR0FBRztFQUM3QixJQUFJQyxHQUFHLEdBQUcsSUFBSTtJQUNaQyxFQUFFLEdBQUdELEdBQUcsQ0FBQ0UsS0FBSyxDQUFDRCxFQUFFO0VBQ25CLE9BQU9BLEVBQUUsQ0FDUCxNQUFNLEVBQ047SUFDRUUsV0FBVyxFQUFFLFVBQVU7SUFDdkJDLEtBQUssRUFBRTtNQUFFQyxNQUFNLEVBQUU7SUFBTyxDQUFDO0lBQ3pCQyxFQUFFLEVBQUU7TUFDRkMsTUFBTSxFQUFFLGdCQUFVQyxNQUFNLEVBQUU7UUFDeEJBLE1BQU0sQ0FBQ0MsY0FBYyxFQUFFO1FBQ3ZCLE9BQU9ULEdBQUcsQ0FBQ08sTUFBTSxFQUFFO01BQ3JCO0lBQ0Y7RUFDRixDQUFDLEVBQ0QsQ0FDRU4sRUFBRSxDQUFDLEtBQUssRUFBRTtJQUFFRSxXQUFXLEVBQUU7RUFBa0IsQ0FBQyxFQUFFLENBQzVDRixFQUFFLENBQ0EsT0FBTyxFQUNQO0lBQUVFLFdBQVcsRUFBRSxVQUFVO0lBQUVDLEtBQUssRUFBRTtNQUFFTSxHQUFHLEVBQUUsVUFBVSxHQUFHVixHQUFHLENBQUNXO0lBQUs7RUFBRSxDQUFDLEVBQ2xFLENBQUNYLEdBQUcsQ0FBQ1ksRUFBRSxDQUFDWixHQUFHLENBQUNhLEVBQUUs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QWEsR0FBRyxJQUFJIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vQ2VyZXMvLi9yZXNvdXJjZXMvanMvc3JjL2FwcC9jb21wb25lbnRzL2N1c3RvbWVyL0NoYW5nZUVtYWlsRm9ybS52dWU/MTU2MiJdLCJzb3VyY2VzQ29udGVudCI6WyJ2YXIgcmVuZGVyID0gZnVuY3Rpb24gcmVuZGVyKCkge1xuICB2YXIgX3ZtID0gdGhpcyxcbiAgICBfYyA9IF92bS5fc2VsZi5fY1xuICByZXR1cm4gX2MoXG4gICAgXCJmb3JtXCIsXG4gICAge1xuICAgICAgc3RhdGljQ2xhc3M6IFwiY2xlYXJmaXhcIixcbiAgICAgIGF0dHJzOiB7IG1ldGhvZDogXCJwb3N0XCIgfSxcbiAgICAgIG9uOiB7XG4gICAgICAgIHN1Ym1pdDogZnVuY3Rpb24gKCRldmVudCkge1xuICAgICAgICAgICRldmVudC5wcmV2ZW50RGVmYXVsdCgpXG4gICAgICAgICAgcmV0dXJuIF92bS5zdWJtaXQoKVxuICAgICAgICB9LFxuICAgICAgfSxcbiAgICB9LFxuICAgIFtcbiAgICAgIF9jKFwiZGl2XCIsIHsgc3RhdGljQ2xhc3M6IFwiaW5wdXQtdW5pdCBtdC0zXCIgfSwgW1xuICAgICAgICBfYyhcbiAgICAgICAgICBcImxhYmVsXCIsXG4gICAgICAgICAgeyBzdGF0aWNDbGFzczogXCJkaXNhYmxlZFwiLCBhdHRyczogeyBmb3I6IFwibmV3LW1haWxcIiArIF92bS5fdWlkIH0gfSxcbiAgICAgICAgICBbX3ZtLl92KF92bS5fcyhfdm0uJHRyYW5zbGF0ZShcIkNlcmVzOjpUZW1wbGF0ZS5teUFjY291bnROZXdFbWFpbFwiKSkpXVxuICAgICAgICApLFxuICAgICAgICBfdm0uX3YoXCIgXCIpLFxuICAgICAgICBfYyhcImlucHV0XCIsIHtcbiAgICAgICAgICBzdGF0aWNDbGFzczogXCJmb3JtLWNvbnRyb2xcIixcbiAgICAgICAgICBhdHRyczoge1xuICAgICAgICAgICAgdHlwZTogXCJlbWFpbFwiLFxuICAgICAgICAgICAgbmFtZTogXCJlbWFpbFwiLFxuICAgICAgICAgICAgaWQ6IFwibmV3LW1haWxcIiArIF92bS5fdWlkLFxuICAgICAgICAgICAgZGlzYWJsZWQ6IFwiXCIsXG4gICAgICAgICAgfSxcbiAgICAgICAgICBkb21Qcm9wczogeyB2YWx1ZTogX3ZtLm5ld01haWwgfSxcbiAgICAgICAgfSksXG4gICAgICBdKSxcbiAgICAgIF92bS5fdihcIiBcIiksXG4gICAgICBfYyhcImRpdlwiLCB7IHN0YXRpY0NsYXNzOiBcImlucHV0LXVuaXRcIiB9LCBbXG4gICAgICAgIF9jKFwibGFiZWxcIiwgeyBhdHRyczogeyBmb3I6IFwicGFzc3dvcmRcIiArIF92bS5fdWlkIH0gfSwgW1xuICAgICAgICAgIF92bS5fdihfdm0uX3MoX3ZtLiR0cmFuc2xhdGUoXCJDZXJlczo6VGVtcGxhdGUubG9naW5QYXNzd29yZFwiKSkpLFxuICAgICAgICBdKSxcbiAgICAgICAgX3ZtLl92KFwiIFwiKSxcbiAgICAgICAgX2MoXCJpbnB1dFwiLCB7XG4gICAgICAgICAgZGlyZWN0aXZlczogW1xuICAgICAgICAgICAge1xuICAgICAgICAgICAgICBuYW1lOiBcIm1vZGVsXCIsXG4gICAgICAgICAgICAgIHJhd05hbWU6IFwidi1tb2RlbFwiLFxuICAgICAgICAgICAgICB2YWx1ZTogX3ZtLnBhc3N3b3JkLFxuICAgICAgICAgICAgICBleHByZXNzaW9uOiBcInBhc3N3b3JkXCIsXG4gICAgICAgICAgICB9LFxuICAgICAgICAgIF0sXG4gICAgICAgICAgc3RhdGljQ2xhc3M6IFwiZm9ybS1jb250cm9sXCIsXG4gICAgICAgICAgYXR0cnM6IHtcbiAgICAgICAgICAgIHR5cGU6IFwicGFzc3dvcmRcIixcbiAgICAgICAgICAgIG5hbWU6IFwicGFzc3dvcmRcIixcbiAgICAgICAgICAgIGF1dG9jb21wbGV0ZTogXCJjdXJyZW50LXBhc3N3b3JkXCIsXG4gICAgICAgICAgICBpZDogXCJwYXNzd29yZFwiICsgX3ZtLl91aWQsXG4gICAgICAgICAgfSxcbiAgICAgICAgICBkb21Qcm9wczogeyB2YWx1ZTogX3ZtLnBhc3N3b3JkIH0sXG4gICAgICAgICAgb246IHtcbiAgICAgICAgICAgIGlucHV0OiBmdW5jdGlvbiAoJGV2ZW50KSB7XG4gICAgICAgICAgICAgIGlmICgkZXZlbnQudGFyZ2V0LmNvbXBvc2luZykgcmV0dXJuXG4gICAgICAgICAgICAgIF92bS5wYXNzd29yZCA9ICRldmVudC50YXJnZXQudmFsdWVcbiAgICAgICAgICAgIH0sXG4gICAgICAgICAgfSxcbiAgICAgICAgfSksXG4gICAgICBdKSxcbiAgICAgIF92bS5fdihcIiBcIiksXG4gICAgICBfYyhcbiAgICAgICAgXCJidXR0b25cIixcbiAgICAgICAge1xuICAgICAgICAgIHN0YXRpY0NsYXNzOlxuICAgICAgICAgICAgXCJidG4gYnRuLXByaW1hcnkgYnRuLWFwcGVhcmFuY2UgZmxvYXQtcmlnaHQgYnRuLW1lZGl1bSBidG4teHMtbWF4LXdpZHRoXCIsXG4gICAgICAgICAgYXR0cnM6IHsgdHlwZTogXCJzdWJtaXRcIiwgZGlzYWJsZWQ6IF92bS5pc0Rpc2FibGVkIH0sXG4gICAgICAgIH0sXG4gICAgICAgIFtcbiAgICAgICAgICBfYyhcInNwYW5cIiwgW1xuICAgICAgICAgICAgX3ZtLl92KFxuICAgICAgICAgICAgICBfdm0uX3MoX3ZtLiR0cmFuc2xhdGUoXCJDZXJlczo6VGVtcGxhdGUubXlBY2NvdW50Q2hhbmdlRW1haWxcIikpXG4gICAgICAgICAgICApLFxuICAgICAgICAgIF0pLFxuICAgICAgICAgIF92bS5fdihcIiBcIiksXG4gICAgICAgICAgX2MoXCJpY29uXCIsIHsgYXR0cnM6IHsgaWNvbjogXCJlbnZlbG9wZVwiLCBsb2FkaW5nOiBfdm0uaXNEaXNhYmxlZCB9IH0pLFxuICAgICAgICBdLFxuICAgICAgICAxXG4gICAgICApLFxuICAgIF1cbiAgKVxufVxudmFyIHN0YXRpY1JlbmRlckZucyA9IFtdXG5yZW5kZXIuX3dpdGhTdHJpcHBlZCA9IHRydWVcblxuZXhwb3J0IHsgcmVuZGVyLCBzdGF0aWNSZW5kZXJGbnMgfSJdLCJuYW1lcyI6WyJyZW5kZXIiLCJfdm0iLCJfYyIsIl9zZWxmIiwic3RhdGljQ2xhc3MiLCJhdHRycyIsIm1ldGhvZCIsIm9uIiwic3VibWl0IiwiJGV2ZW50IiwicHJldmVudERlZmF1bHQiLCJmb3IiLCJfdWlkIiwiX3YiLCJfcyIsIiR0cmFuc2xhdGUiLCJ0eXBlIiwibmFtZSIsImlkIiwiZGlzYWJsZWQiLCJkb21Qcm9wcyIsInZhbHVlIiwibmV3TWFpbCIsImRpcmVjdGl2ZXMiLCJyYXdOYW1lIiwicGFzc3dvcmQiLCJleHByZXNzaW9uIiwiYXV0b2NvbXBsZXRlIiwiaW5wdXQiLCJ0YXJnZXQiLCJjb21wb3NpbmciLCJpc0Rpc2FibGVkIiwiaWNvbiIsImxvYWRpbmciLCJzdGF0aWNSZW5kZXJGbnMiLCJfd2l0aFN0cmlwcGVkIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/src/app/components/customer/ChangeEmailForm.vue?vue&type=template&id=0bc3dede&\n");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": function() { return /* binding */ render; },
+/* harmony export */   "staticRenderFns": function() { return /* binding */ staticRenderFns; }
+/* harmony export */ });
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("form", {
+    staticClass: "clearfix",
+    attrs: {
+      method: "post"
+    },
+    on: {
+      submit: function submit($event) {
+        $event.preventDefault();
+        return _vm.submit();
+      }
+    }
+  }, [_c("div", {
+    staticClass: "input-unit mt-3"
+  }, [_c("label", {
+    staticClass: "disabled",
+    attrs: {
+      for: "new-mail" + _vm._uid
+    }
+  }, [_vm._v(_vm._s(_vm.$translate("Ceres::Template.myAccountNewEmail")))]), _vm._v(" "), _c("input", {
+    staticClass: "form-control",
+    attrs: {
+      type: "email",
+      name: "email",
+      id: "new-mail" + _vm._uid,
+      disabled: ""
+    },
+    domProps: {
+      value: _vm.newMail
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "input-unit"
+  }, [_c("label", {
+    attrs: {
+      for: "password" + _vm._uid
+    }
+  }, [_vm._v(_vm._s(_vm.$translate("Ceres::Template.loginPassword")))]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.password,
+      expression: "password"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "password",
+      name: "password",
+      autocomplete: "current-password",
+      id: "password" + _vm._uid
+    },
+    domProps: {
+      value: _vm.password
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.password = $event.target.value;
+      }
+    }
+  })]), _vm._v(" "), _c("button", {
+    staticClass: "btn btn-primary btn-appearance float-right btn-medium btn-xs-max-width",
+    attrs: {
+      type: "submit",
+      disabled: _vm.isDisabled
+    }
+  }, [_c("span", [_vm._v(_vm._s(_vm.$translate("Ceres::Template.myAccountChangeEmail")))]), _vm._v(" "), _c("icon", {
+    attrs: {
+      icon: "envelope",
+      loading: _vm.isDisabled
+    }
+  })], 1)]);
+};
+var staticRenderFns = [];
+render._withStripped = true;
+
 
 /***/ }),
 
@@ -35,7 +157,32 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _ChangeEmailForm_vue_vue_type_template_id_0bc3dede___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ChangeEmailForm.vue?vue&type=template&id=0bc3dede& */ \"./resources/js/src/app/components/customer/ChangeEmailForm.vue?vue&type=template&id=0bc3dede&\");\n/* harmony import */ var _ChangeEmailForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChangeEmailForm.vue?vue&type=script&lang=js& */ \"./resources/js/src/app/components/customer/ChangeEmailForm.vue?vue&type=script&lang=js&\");\n/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n;\nvar component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _ChangeEmailForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _ChangeEmailForm_vue_vue_type_template_id_0bc3dede___WEBPACK_IMPORTED_MODULE_0__.render,\n  _ChangeEmailForm_vue_vue_type_template_id_0bc3dede___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"resources/js/src/app/components/customer/ChangeEmailForm.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9yZXNvdXJjZXMvanMvc3JjL2FwcC9jb21wb25lbnRzL2N1c3RvbWVyL0NoYW5nZUVtYWlsRm9ybS52dWUuanMiLCJtYXBwaW5ncyI6Ijs7OztBQUE4RjtBQUMzQjtBQUNMOzs7QUFHOUQ7QUFDQSxDQUFzRztBQUN0RyxnQkFBZ0IsdUdBQVU7QUFDMUIsRUFBRSxxRkFBTTtBQUNSLEVBQUUsdUZBQU07QUFDUixFQUFFLGdHQUFlO0FBQ2pCO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQTtBQUNBLElBQUksS0FBVSxFQUFFLFlBaUJmO0FBQ0Q7QUFDQSwrREFBZSIsInNvdXJjZXMiOlsid2VicGFjazovL0NlcmVzLy4vcmVzb3VyY2VzL2pzL3NyYy9hcHAvY29tcG9uZW50cy9jdXN0b21lci9DaGFuZ2VFbWFpbEZvcm0udnVlPzBjYjYiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgcmVuZGVyLCBzdGF0aWNSZW5kZXJGbnMgfSBmcm9tIFwiLi9DaGFuZ2VFbWFpbEZvcm0udnVlP3Z1ZSZ0eXBlPXRlbXBsYXRlJmlkPTBiYzNkZWRlJlwiXG5pbXBvcnQgc2NyaXB0IGZyb20gXCIuL0NoYW5nZUVtYWlsRm9ybS52dWU/dnVlJnR5cGU9c2NyaXB0Jmxhbmc9anMmXCJcbmV4cG9ydCAqIGZyb20gXCIuL0NoYW5nZUVtYWlsRm9ybS52dWU/dnVlJnR5cGU9c2NyaXB0Jmxhbmc9anMmXCJcblxuXG4vKiBub3JtYWxpemUgY29tcG9uZW50ICovXG5pbXBvcnQgbm9ybWFsaXplciBmcm9tIFwiIS4uLy4uLy4uLy4uLy4uLy4uL25vZGVfbW9kdWxlcy92dWUtbG9hZGVyL2xpYi9ydW50aW1lL2NvbXBvbmVudE5vcm1hbGl6ZXIuanNcIlxudmFyIGNvbXBvbmVudCA9IG5vcm1hbGl6ZXIoXG4gIHNjcmlwdCxcbiAgcmVuZGVyLFxuICBzdGF0aWNSZW5kZXJGbnMsXG4gIGZhbHNlLFxuICBudWxsLFxuICBudWxsLFxuICBudWxsXG4gIFxuKVxuXG4vKiBob3QgcmVsb2FkICovXG5pZiAobW9kdWxlLmhvdCkge1xuICB2YXIgYXBpID0gcmVxdWlyZShcIi9Vc2Vycy9sdWthc21hdHplbi93b3Jrc3BhY2UyL3BsdWdpbnMvQ2VyZXMvbm9kZV9tb2R1bGVzL3Z1ZS1ob3QtcmVsb2FkLWFwaS9kaXN0L2luZGV4LmpzXCIpXG4gIGFwaS5pbnN0YWxsKHJlcXVpcmUoJ3Z1ZScpKVxuICBpZiAoYXBpLmNvbXBhdGlibGUpIHtcbiAgICBtb2R1bGUuaG90LmFjY2VwdCgpXG4gICAgaWYgKCFhcGkuaXNSZWNvcmRlZCgnMGJjM2RlZGUnKSkge1xuICAgICAgYXBpLmNyZWF0ZVJlY29yZCgnMGJjM2RlZGUnLCBjb21wb25lbnQub3B0aW9ucylcbiAgICB9IGVsc2Uge1xuICAgICAgYXBpLnJlbG9hZCgnMGJjM2RlZGUnLCBjb21wb25lbnQub3B0aW9ucylcbiAgICB9XG4gICAgbW9kdWxlLmhvdC5hY2NlcHQoXCIuL0NoYW5nZUVtYWlsRm9ybS52dWU/dnVlJnR5cGU9dGVtcGxhdGUmaWQ9MGJjM2RlZGUmXCIsIGZ1bmN0aW9uICgpIHtcbiAgICAgIGFwaS5yZXJlbmRlcignMGJjM2RlZGUnLCB7XG4gICAgICAgIHJlbmRlcjogcmVuZGVyLFxuICAgICAgICBzdGF0aWNSZW5kZXJGbnM6IHN0YXRpY1JlbmRlckZuc1xuICAgICAgfSlcbiAgICB9KVxuICB9XG59XG5jb21wb25lbnQub3B0aW9ucy5fX2ZpbGUgPSBcInJlc291cmNlcy9qcy9zcmMvYXBwL2NvbXBvbmVudHMvY3VzdG9tZXIvQ2hhbmdlRW1haWxGb3JtLnZ1ZVwiXG5leHBvcnQgZGVmYXVsdCBjb21wb25lbnQuZXhwb3J0cyJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./resources/js/src/app/components/customer/ChangeEmailForm.vue\n");
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ChangeEmailForm_vue_vue_type_template_id_0bc3dede___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ChangeEmailForm.vue?vue&type=template&id=0bc3dede& */ "./resources/js/src/app/components/customer/ChangeEmailForm.vue?vue&type=template&id=0bc3dede&");
+/* harmony import */ var _ChangeEmailForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChangeEmailForm.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/customer/ChangeEmailForm.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ChangeEmailForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ChangeEmailForm_vue_vue_type_template_id_0bc3dede___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ChangeEmailForm_vue_vue_type_template_id_0bc3dede___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/src/app/components/customer/ChangeEmailForm.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
@@ -45,7 +192,9 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Cha
   \***********************************************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_node_modules_vue_loader_lib_index_js_vue_loader_options_ChangeEmailForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use!../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ChangeEmailForm.vue?vue&type=script&lang=js& */ \"./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/src/app/components/customer/ChangeEmailForm.vue?vue&type=script&lang=js&\");\n /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_node_modules_vue_loader_lib_index_js_vue_loader_options_ChangeEmailForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); //# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9yZXNvdXJjZXMvanMvc3JjL2FwcC9jb21wb25lbnRzL2N1c3RvbWVyL0NoYW5nZUVtYWlsRm9ybS52dWU/dnVlJnR5cGU9c2NyaXB0Jmxhbmc9anMmLmpzIiwibWFwcGluZ3MiOiI7O0FBQTROLENBQUMsK0RBQWUsd01BQUcsRUFBQyIsInNvdXJjZXMiOlsid2VicGFjazovL0NlcmVzLy4vcmVzb3VyY2VzL2pzL3NyYy9hcHAvY29tcG9uZW50cy9jdXN0b21lci9DaGFuZ2VFbWFpbEZvcm0udnVlPzE3MjYiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IG1vZCBmcm9tIFwiLSEuLi8uLi8uLi8uLi8uLi8uLi9ub2RlX21vZHVsZXMvYmFiZWwtbG9hZGVyL2xpYi9pbmRleC5qcz8/Y2xvbmVkUnVsZVNldC01LnVzZSEuLi8uLi8uLi8uLi8uLi8uLi9ub2RlX21vZHVsZXMvdnVlLWxvYWRlci9saWIvaW5kZXguanM/P3Z1ZS1sb2FkZXItb3B0aW9ucyEuL0NoYW5nZUVtYWlsRm9ybS52dWU/dnVlJnR5cGU9c2NyaXB0Jmxhbmc9anMmXCI7IGV4cG9ydCBkZWZhdWx0IG1vZDsgZXhwb3J0ICogZnJvbSBcIi0hLi4vLi4vLi4vLi4vLi4vLi4vbm9kZV9tb2R1bGVzL2JhYmVsLWxvYWRlci9saWIvaW5kZXguanM/P2Nsb25lZFJ1bGVTZXQtNS51c2UhLi4vLi4vLi4vLi4vLi4vLi4vbm9kZV9tb2R1bGVzL3Z1ZS1sb2FkZXIvbGliL2luZGV4LmpzPz92dWUtbG9hZGVyLW9wdGlvbnMhLi9DaGFuZ2VFbWFpbEZvcm0udnVlP3Z1ZSZ0eXBlPXNjcmlwdCZsYW5nPWpzJlwiIl0sIm5hbWVzIjpbXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./resources/js/src/app/components/customer/ChangeEmailForm.vue?vue&type=script&lang=js&\n");
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_node_modules_vue_loader_lib_index_js_vue_loader_options_ChangeEmailForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use!../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ChangeEmailForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/src/app/components/customer/ChangeEmailForm.vue?vue&type=script&lang=js&");
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_node_modules_vue_loader_lib_index_js_vue_loader_options_ChangeEmailForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -66,3 +215,4 @@ __webpack_require__.r(__webpack_exports__);
 /***/ })
 
 }]);
+//# sourceMappingURL=ceres-22.js.map

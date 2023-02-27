@@ -84,6 +84,22 @@ const getters =
             }
 
             return "";
+        },
+        getStateName: state => (countryId, stateId) =>
+        {
+            if (countryId > 0 && stateId > 0)
+            {
+                const country = state.shippingCountries.find(country => country.id === countryId);
+
+                if (country)
+                {
+                    const state = country.states.find((countryState) => countryState.id === stateId);
+
+                    return state.name;
+                }
+                return "";
+            }
+            return "";
         }
     };
 

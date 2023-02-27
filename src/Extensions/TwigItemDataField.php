@@ -149,7 +149,7 @@ class TwigItemDataField extends Twig_Extension
         if ($linkType === 'file') {
             $additionalAttributes['v-if'] = $vueDirectiveValue;
             $additionalAttributes['target'] = '_blank';
-
+            $additionalAttributes['v-text'] = $vueDirectiveValue . ".split('/').slice(-1).toString()";
             $propertyFileService = pluginApp(PropertyFileService::class);
             $vueDirectiveValue = "'{$propertyFileService->getPropertyFileUrl()}' + $vueDirectiveValue";
         }
