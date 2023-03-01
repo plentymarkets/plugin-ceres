@@ -3366,24 +3366,64 @@
                                 "caption": "Config.languageActiveLanguagesBg"
                             },
                             {
-                                "value": "fr",
-                                "caption": "Config.languageActiveLanguagesFr"
+                                "value": "cn",
+                                "caption": "Config.languageActiveLanguagesCn"
                             },
                             {
-                                "value": "it",
-                                "caption": "Config.languageActiveLanguagesIt"
+                                "value": "hr",
+                                "caption": "Config.languageActiveLanguagesHr"
+                            },
+                            {
+                                "value": "cz",
+                                "caption": "Config.languageActiveLanguagesCz"
+                            },
+                            {
+                                "value": "da",
+                                "caption": "Config.languageActiveLanguagesDa"
+                            },
+                            {
+                                "value": "ee",
+                                "caption": "Config.languageActiveLanguagesEe"
                             },
                             {
                                 "value": "es",
                                 "caption": "Config.languageActiveLanguagesEs"
                             },
                             {
-                                "value": "tr",
-                                "caption": "Config.languageActiveLanguagesTr"
+                                "value": "fi",
+                                "caption": "Config.languageActiveLanguagesFi"
+                            },
+                            {
+                                "value": "fr",
+                                "caption": "Config.languageActiveLanguagesFr"
+                            },
+                            {
+                                "value": "hu",
+                                "caption": "Config.languageActiveLanguagesHu"
+                            },
+                            {
+                                "value": "ie",
+                                "caption": "Config.languageActiveLanguagesIe"
+                            },
+                            {
+                                "value": "it",
+                                "caption": "Config.languageActiveLanguagesIt"
+                            },
+                            {
+                                "value": "lt",
+                                "caption": "Config.languageActiveLanguagesLt"
+                            },
+                            {
+                                "value": "lv",
+                                "caption": "Config.languageActiveLanguagesLv"
                             },
                             {
                                 "value": "nl",
                                 "caption": "Config.languageActiveLanguagesNl"
+                            },
+                            {
+                                "value": "no",
+                                "caption": "Config.languageActiveLanguagesNo"
                             },
                             {
                                 "value": "pl",
@@ -3394,36 +3434,24 @@
                                 "caption": "Config.languageActiveLanguagesPt"
                             },
                             {
-                                "value": "nn",
-                                "caption": "Config.languageActiveLanguagesNn"
-                            },
-                            {
                                 "value": "ro",
                                 "caption": "Config.languageActiveLanguagesRo"
-                            },
-                            {
-                                "value": "da",
-                                "caption": "Config.languageActiveLanguagesDa"
-                            },
-                            {
-                                "value": "se",
-                                "caption": "Config.languageActiveLanguagesSe"
-                            },
-                            {
-                                "value": "cz",
-                                "caption": "Config.languageActiveLanguagesCz"
                             },
                             {
                                 "value": "ru",
                                 "caption": "Config.languageActiveLanguagesRu"
                             },
                             {
+                                "value": "se",
+                                "caption": "Config.languageActiveLanguagesSe"
+                            },
+                            {
                                 "value": "sk",
                                 "caption": "Config.languageActiveLanguagesSk"
                             },
                             {
-                                "value": "cn",
-                                "caption": "Config.languageActiveLanguagesCn"
+                                "value": "tr",
+                                "caption": "Config.languageActiveLanguagesTr"
                             },
                             {
                                 "value": "vn",
