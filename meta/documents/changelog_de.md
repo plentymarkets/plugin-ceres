@@ -4,36 +4,44 @@
 
 ### TODO
 
-- Falls du den Standard-Header und nicht den ShopBuilder-Header benutzt prüfe bitte die ausgewählten Optionen für die Einstellung im plentyShop LTS Assistenten unter **Angezeigte Informationen » Welche Artikelinformationen möchtest du im Warenkorb anzeigen? » Hake die Artikelinformationen an, die du in der Warenkorbvorschau anzeigen möchtest.** um sicherzustellen das die dort ausgewählten Informationen gewünscht sind.
+- Falls du den Standard-Header und nicht den ShopBuilder-Header benutzt, prüfe bitte die ausgewählten Optionen für die Einstellung im plentyShop LTS Assistenten unter **Angezeigte Informationen » Welche Artikelinformationen möchtest du im Warenkorb anzeigen? » Hake die Artikelinformationen an, die du in der Warenkorbvorschau anzeigen möchtest.** um sicherzustellen das die dort ausgewählten Informationen gewünscht sind.
 
 ### Hinzugefügt
 
 - Die Option **Hake die Artikelinformationen an, die du in der Warenkorbvorschau anzeigen möchtest.** im plentyShop LTS Assistenten funktioniert jetzt auch für den Standard-Header und nicht nur für den Shopbuilder-Header.
 
-## v5.0.59 (2023-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.58...5.0.59" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.59 (2023-02-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.58...5.0.59" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
 
 - Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
 
+### Hinzugefügt
+
+- Auf der Wunschliste werden nicht mehr verfügbare Artikel jetzt gesondert gelistet.
+- Im Zuge der Geoblocking-Richtlinie wurde eine Warnmeldung im Checkout hinzugefügt. Falls Kund:innen in ihrer Lieferadresse ein Lieferland ausgewählt haben, das für diesen plentyShop nicht aktiviert ist, weist die Warnmeldung sie darauf hin, ein anderes Lieferland auswählen zu müssen. Weiterhin wird die Kaufen-Schaltfläche nun deaktiviert und ausgegraut, bis Kund:innen ein valides Lieferland für ihre Lieferadresse ausgewählt haben. Die Texte der Warnmeldung und des Tooltips, der beim Mouseover über der ausgegrauten Kaufen-Schaltfläche angezeigt wird, können im Menü **CMS » Mehrsprachigkeit** angepasst werden. Die Übersetzungsschlüssel dafür sind `checkoutInvalidShippingCountryGeoblocking` und `checkoutBuyNowTooltip`.
+
 ### Behoben
 
-- Das Bilderbox-Widget hat den hinterlegten Text gerendert auch wenn "Bild ohne Box" der Option "Stil der Box" ausgewählt wurde. Der hinterlegte Text wird jetzt nicht mehr unsichtbar gemacht sondern entfernt.
+- Das Bilderbox-Widget hat den hinterlegten Text gerendert, auch wenn die Option **Bild ohne Box** für die Einstellung **Stil der Box** ausgewählt wurde. Der hinterlegte Text wird jetzt nicht mehr unsichtbar gemacht, sondern entfernt.
 - Unter bestimmten Umständen konnte das Sticky-Container-Widget in der Artikelansicht wackeln. Dies wurde behoben.
-- Es wurde ein Fehler beim Adressauswahl-Widget behoben, durch welchen die Anrede nicht in den Widget-Einstellungen als sichtbares Feld aktiviert werden konnte.
-- Auf der Wunschliste werden nicht mehr verfügbare Artikel jetzt gesondert gelistet.
-- Es wurde ein Fehler bei der Autocomplete-Suche behoben, welcher auf bestimmten Android-Geräten auftrat.
-- Es wurde eine Logik ergänzt, der bei Änderung der Kundenklasse Warenkorbartikel entfernt, welche nicht mehr mit der aktualisierten Kundenklasse kompatibel sind.
+- Durch einen Fehler im Adressauswahl-Widget konnte die Anrede in den Widget-Einstellungen nicht als sichtbares Feld aktiviert werden. Dies wurde behoben.
+- Bei der Autocomplete-Suche auf bestimmten Android-Geräten konnte es zu Fehlern kommen. Dies wurde behoben.
+- Es wurde eine Logik ergänzt, die bei einer Änderung der Kundenklasse nun Warenkorbartikel entfernt, welche nicht mehr mit der aktualisierten Kundenklasse kompatibel sind.
+- Eigenschaften von Typ **Datei**, die über den ShopBuilder auf der Artikeldetailseite eingebunden sind, enthalten nur noch den Dateinamen ohne vorangestellte ID.
+- Unter bestimmten Umständen wurde nicht der korrekte Metatitel für die Artikeldetailseite ausgegeben. Dies wurde behoben.
 
 ### Entfernt
 
-- Es wurde ungenutztes CSS des Item-Grid entfernt
-- Ungenutzte SCSS Dateien wurden entfernt (_legacy.scss, _home.scss)
+- Es wurde ungenutztes CSS des Artikelrasters entfernt.
+- Es wurden ungenutzte SCSS Dateien entfernt (_legacy.scss, _home.scss).
 
 ### Angepasste Templates
 
 - Im Zuge des Releases von Ceres 5.0.59 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
 - [resources/views/Widgets/Common/ImageBoxWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3387/files#diff-9f438954b9f177761379a8b382eea014077ec743060583796ac4f9aaed3d3003)
+- [resources/views/Customer/Components/AddressSelect/AddressSelect.twig](https://github.com/plentymarkets/plugin-ceres/pull/3417/files/#diff-969624803dfeb696a58e16de0d95c285a458ec83a615026882d9b1e65386935b)
+- [resources/views/Checkout/Components/PlaceOrder.twig](https://github.com/plentymarkets/plugin-ceres/pull/3417/files/#diff-ac3499fe39e67fd08b24086c79be769096e1ab58885fd4a233847c502b94b317)
 
 ## v5.0.58 (2023-01-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.57...5.0.58" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 

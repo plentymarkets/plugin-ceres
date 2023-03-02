@@ -10,30 +10,38 @@
 
 - Die Option **Check the boxes of the item information you want to display in the shopping cart preview.** in the plentyShop LTS wizard now also works for the standard header and not only for the Shopbuilder header.
 
-## v5.0.59 (2023-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.58...5.0.59" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.59 (2023-02-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.58...5.0.59" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
 
 - Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
 
+### Added
+
+- Items that are no longer available are now listed separately on the wish list.
+- As part of the geo-blocking policy, a warning message has been added to the checkout. If customers have selected a delivery country in their delivery address that is not activated for this plentyShop, the warning message informs them that they must select a different delivery country. Furthermore, the buy button is now deactivated and greyed out until customers have selected a valid delivery country for their delivery address. The texts of the warning message and the tooltip that is displayed when hovering over the greyed-out buy button can be changed in the **CMS » Multilingualism** menu. The translation keys are `checkoutInvalidShippingCountryGeoblocking` and `checkoutBuyNowTooltip`, respectively.
+
 ### Fixed
 
-- The image box widget rendered the inserted text even if "Image without box" was selected in the "Box style" option. The inserted text is now removed instead of being made invisible.
-- Under some conditions, the sticky container widget on the article view could shake. This was fixed.
-- Fixed a bug in the address selection widget where the salutation could not be activated as a visible field in the widget settings.
-- Items that are no longer available are now listed separately on the wish list.
-- Fixed an Autocomplete search bug that occurred on certain Android devices.
-- Added logic to remove shopping cart items that are no longer compatible with the updated customer class when the customer class is changed.
+- The image box widget rendered the inserted text even if the option **Image without box** was selected for the **Box style** setting. The inserted text is now removed instead of being made invisible.
+- Under some conditions, the sticky container widget on the item view could shake visibly. This was fixed.
+- Fixed a bug in the address selection widget due to which the salutation could not be activated as a visible field in the widget settings.
+- Fixed an autocomplete search bug that occurred on certain Android devices.
+- Added logic that removes shopping cart items that are no longer compatible with the updated customer class when the customer class is changed.
+- Properties of type **File**, which are included on the single item view via ShopBuilder, now only contain the file name without a preceding ID.
+- Under certain circumstances, the correct meta title was not output for the single item view. This has been fixed.
 
 ### Removed
 
-- Removed unused CSS of the item grid
-- Removed unused SCSS files (_legacy.scss, _home.scss)
+- Removed unused CSS of the item grid.
+- Removed unused SCSS files (_legacy.scss, _home.scss).
 
 ### Changed templates
 
 - In Ceres 5.0.59 we made changes to template files which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
 - [resources/views/Widgets/Common/ImageBoxWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3387/files#diff-9f438954b9f177761379a8b382eea014077ec743060583796ac4f9aaed3d3003)
+- [resources/views/Customer/Components/AddressSelect/AddressSelect.twig](https://github.com/plentymarkets/plugin-ceres/pull/3417/files/#diff-969624803dfeb696a58e16de0d95c285a458ec83a615026882d9b1e65386935b)
+- [resources/views/Checkout/Components/PlaceOrder.twig](https://github.com/plentymarkets/plugin-ceres/pull/3417/files/#diff-ac3499fe39e67fd08b24086c79be769096e1ab58885fd4a233847c502b94b317)
 
 ## v5.0.58 (2023-01-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.57...5.0.58" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
