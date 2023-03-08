@@ -351,7 +351,6 @@ export default {
 
     mounted()
     {
-        console.log("hello single item!");
         this.$nextTick(() =>
         {
             this.$store.dispatch(`${this.itemId}/variationSelect/setVariationSelect`, {
