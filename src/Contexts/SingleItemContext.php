@@ -6,6 +6,7 @@ use IO\Helper\Utils;
 use IO\Helper\ContextInterface;
 use IO\Services\CategoryService;
 use IO\Services\CustomerService;
+use Plenty\Modules\Webshop\Helpers\UrlQuery;
 use Plenty\Plugin\ConfigRepository;
 use Plenty\Modules\Webshop\Contracts\ContactRepositoryContract;
 use Plenty\Modules\Category\Models\Category;
@@ -258,7 +259,9 @@ class SingleItemContext extends GlobalContext implements ContextInterface
 
         $this->setComponents = $params['setComponents'];
         $this->setAttributeMap = $params['setAttributeMap'];
-        $this->requestedVariationUrl = explode('?', $this->request->getUri())[0];
+        /** @var UrlQuery $urlQuery */
+        $urlQuery = pluginApp(UrlQuery::class, ['path' => $this->request->getRequestUri(), 'lang' => Utils::getLang()]);
+        $this->requestedVariationUrl = $urlQuery->toAbsoluteUrl(Utils::getLang() !== $this->webstoreConfig->defaultLanguage);
         $defaultCategoryId = 0;
         $plentyId = Utils::getPlentyId();
         foreach ($this->item['documents'][0]['data']['defaultCategories'] as $category) {
@@ -365,7 +368,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     /**
      * @param $barcodes
      * @param $barcodeMappingId
-     * 
+     *
      * @return string
      */
     private function getBarcodeWithId($barcodes, $barcodeMappingId){
