@@ -1,5 +1,5 @@
 ![plentymarkets Logo](http://www.plentymarkets.eu/layout/pm/images/logo/plentymarkets-logo.jpg)
-
+e
 # plentyShop LTS ![Travis Build Stable](https://img.shields.io/travis/plentymarkets/plugin-ceres/stable?label=build)
 
 This is the official **plentyShop LTS** plugin developed by plentymarkets. **plentyShop LTS** is the default template plugin for [plentymarkets](https://www.plentymarkets.eu/tour/) online stores.

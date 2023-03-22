@@ -88,6 +88,8 @@ class TemplateServiceProvider extends ServiceProvider
             'tpl.contact' => ['Customer.Contact', GlobalContext::class],
             'tpl.search' => ['Category.Item.CategoryItem', ItemSearchContext::class],
             'tpl.wish-list' => ['WishList.WishListView', GlobalContext::class],
+            'tpl.wish-list.detail' => ['WishList.WishListDetailView', GlobalContext::class],
+            'tpl.wish-list.access-code' => ['WishList.WishListAccessKeyView', GlobalContext::class],
             'tpl.order.return' => ['OrderReturn.OrderReturnView', OrderReturnContext::class],
             'tpl.order.return.confirmation' => ['OrderReturn.OrderReturnConfirmation', GlobalContext::class],
             'tpl.cancellation-rights' => ['StaticPages.CancellationRights', GlobalContext::class],
