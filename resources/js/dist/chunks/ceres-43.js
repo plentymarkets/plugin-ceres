@@ -46,7 +46,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -110,43 +109,36 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "selected-filters clearfix" },
+    { staticClass: "selected-filters clearfix bkr-cc" },
     [
       _vm._l(_vm.tagList, function(tag) {
-        return _c(
-          "span",
-          {
-            class:
-              "text-appearance selected-filter filter-" +
-              tag.id +
-              " " +
-              _vm.marginClasses,
-            style: _vm.marginInlineStyles,
-            on: {
-              click: function($event) {
-                return _vm.removeTag(tag)
-              }
-            }
-          },
-          [
-            _c("i", {
-              staticClass: "fa fa-times",
-              attrs: { "aria-hidden": "true" }
-            }),
-            _vm._v(" " + _vm._s(tag.name) + "\n    ")
-          ]
-        )
+        return tag.id != 123
+          ? _c(
+              "span",
+              {
+                class: "selected-filter filter-" + tag.id,
+                on: {
+                  click: function($event) {
+                    return _vm.removeTag(tag)
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "fa fa-times",
+                  attrs: { "aria-hidden": "true" }
+                }),
+                _vm._v(" ${ tag.name }\n        ")
+              ]
+            )
+          : _vm._e()
       }),
       _vm._v(" "),
       _vm.tagList.length >= 2
         ? _c(
             "span",
             {
-              class:
-                "bg-appearance selected-filter reset-all" +
-                " " +
-                _vm.marginClasses,
-              style: _vm.marginInlineStyles,
+              staticClass: "selected-filter reset-all",
               on: {
                 click: function($event) {
                   return _vm.resetAllTags()
@@ -157,7 +149,7 @@ var render = function() {
               _vm._v(
                 "\n        " +
                   _vm._s(_vm.$translate("Ceres::Template.itemFilterReset")) +
-                  "\n    "
+                  "\n        "
               )
             ]
           )

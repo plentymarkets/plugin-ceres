@@ -191,6 +191,19 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -890,17 +903,20 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "row" },
-    [
-      _vm.attributes.length ||
-      (_vm.possibleUnitCombinationIds.length > 1 && _vm.isContentVisible)
-        ? [
-            _vm._l(_vm.attributes, function(attribute, index) {
+  return _c("div", [
+    _vm.attributes.length ||
+    (_vm.possibleUnitCombinationIds.length > 1 && _vm.isContentVisible)
+      ? _c(
+          "div",
+          { staticClass: "row" },
+          [
+            _vm._l(_vm.attributes, function(attribute) {
               return _c(
                 "div",
-                { key: index, staticClass: "col-12 variation-select" },
+                {
+                  staticClass: "col-12 variation-select",
+                  class: "attribute_" + attribute.attributeId
+                },
                 [
                   attribute.type === "dropdown"
                     ? _c(
@@ -915,10 +931,6 @@ var render = function() {
                             "select",
                             {
                               staticClass: "custom-select",
-                              attrs: {
-                                id: "custom-select_" + attribute.name,
-                                "data-testing": "variation-select-dropdown"
-                              },
                               on: {
                                 change: function($event) {
                                   return _vm.selectAttribute(
@@ -971,7 +983,6 @@ var render = function() {
                                 return _c(
                                   "option",
                                   {
-                                    key: value.attributeValueId,
                                     domProps: {
                                       value: value.attributeValueId,
                                       selected:
@@ -989,9 +1000,9 @@ var render = function() {
                                     )
                                       ? [
                                           _vm._v(
-                                            "\n                            " +
+                                            "\n                                " +
                                               _vm._s(value.name) +
-                                              "\n                        "
+                                              "\n                            "
                                           )
                                         ]
                                       : _vm.isAttributeSelectionValid(
@@ -1001,26 +1012,26 @@ var render = function() {
                                         )
                                       ? [
                                           _vm._v(
-                                            "\n                            " +
+                                            "\n                                " +
                                               _vm._s(
                                                 _vm.$translate(
                                                   "Ceres::Template.singleItemNotSalableAttribute",
                                                   { name: value.name }
                                                 )
                                               ) +
-                                              "\n                        "
+                                              "\n                            "
                                           )
                                         ]
                                       : [
                                           _vm._v(
-                                            "\n                            " +
+                                            "\n                                " +
                                               _vm._s(
                                                 _vm.$translate(
                                                   "Ceres::Template.singleItemInvalidAttribute",
                                                   { name: value.name }
                                                 )
                                               ) +
-                                              "\n                        "
+                                              "\n                            "
                                           )
                                         ]
                                   ],
@@ -1043,12 +1054,9 @@ var render = function() {
                                 }
                               ],
                               attrs: {
-                                for: "custom-select_" + attribute.name,
                                 "data-toggle": "tooltip",
                                 "data-placement": "top",
-                                title: attribute.name,
-                                "data-testing":
-                                  "variation-select-dropdown-label"
+                                title: attribute.name
                               }
                             },
                             [_vm._v(_vm._s(attribute.name))]
@@ -1056,32 +1064,104 @@ var render = function() {
                         ]
                       )
                     : attribute.type === "box" || attribute.type === "image"
-                    ? _c("div", [
-                        _c(
-                          "span",
-                          {
-                            staticClass: "text-muted",
-                            attrs: { "data-testing": "attribute-name" }
-                          },
-                          [_vm._v(_vm._s(attribute.name) + ":")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "b",
-                          { attrs: { "data-testing": "attribute-value" } },
-                          [
-                            _vm._v(
-                              _vm._s(
-                                _vm.getSelectedAttributeValueName(attribute)
-                              )
-                            )
-                          ]
-                        ),
+                    ? _c("div", { class: "attr" + attribute.attributeId }, [
+                        _vm.currentVariation.item.id == 27645
+                          ? _c("div", { staticClass: "row attributeName" }, [
+                              attribute.attributeId == 3
+                                ? _c(
+                                    "div",
+                                    { staticClass: "col-4 text-muted" },
+                                    [_vm._v("Farbe oberes Bett:")]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              attribute.attributeId == 9
+                                ? _c(
+                                    "div",
+                                    { staticClass: "col-4 text-muted" },
+                                    [_vm._v("Farbe unteres Bett:")]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-8" }, [
+                                _c("b", [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.getSelectedAttributeValueName(
+                                        attribute
+                                      )
+                                    )
+                                  )
+                                ])
+                              ])
+                            ])
+                          : _vm.currentVariation.item.id == 28013
+                          ? _c("div", { staticClass: "row attributeName" }, [
+                              attribute.attributeId == 3
+                                ? _c(
+                                    "div",
+                                    { staticClass: "col-4 text-muted" },
+                                    [_vm._v("Farbe Motivstecker:")]
+                                  )
+                                : attribute.attributeId == 9
+                                ? _c(
+                                    "div",
+                                    { staticClass: "col-4 text-muted" },
+                                    [_vm._v("Farbe Garderobe:")]
+                                  )
+                                : _c(
+                                    "div",
+                                    { staticClass: "col-4 text-muted" },
+                                    [_vm._v(_vm._s(attribute.name) + ":")]
+                                  ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-8" }, [
+                                _c("b", [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.getSelectedAttributeValueName(
+                                        attribute
+                                      )
+                                    )
+                                  )
+                                ])
+                              ])
+                            ])
+                          : attribute.attributeId != 40
+                          ? _c("div", { staticClass: "row attributeName" }, [
+                              attribute.attributeId == 3 &&
+                              _vm.attributes.filter(function(attr) {
+                                return attr.attributeId == 9
+                              })[0]
+                                ? _c(
+                                    "div",
+                                    { staticClass: "col-4 text-muted" },
+                                    [_vm._v("Farbe der Front:")]
+                                  )
+                                : _c(
+                                    "div",
+                                    { staticClass: "col-4 text-muted" },
+                                    [_vm._v(_vm._s(attribute.name) + ":")]
+                                  ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-8" }, [
+                                _c("b", [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.getSelectedAttributeValueName(
+                                        attribute
+                                      )
+                                    )
+                                  )
+                                ])
+                              ])
+                            ])
+                          : _c("div", [_vm._m(0, true)]),
                         _vm._v(" "),
                         _c(
                           "div",
                           {
-                            staticClass: "v-s-boxes py-3",
+                            staticClass: "v-s-boxes pt-1 pb-3",
                             class: { images: attribute.type === "image" }
                           },
                           [
@@ -1100,9 +1180,6 @@ var render = function() {
                                         attribute.attributeId,
                                         -1
                                       )
-                                    },
-                                    attrs: {
-                                      "data-testing": "variation-select-box"
                                     },
                                     on: {
                                       click: function($event) {
@@ -1144,9 +1221,6 @@ var render = function() {
                                         true
                                       )
                                     },
-                                    attrs: {
-                                      "data-testing": "variation-select-box"
-                                    },
                                     on: {
                                       click: function($event) {
                                         return _vm.selectAttribute(
@@ -1182,22 +1256,23 @@ var render = function() {
                                       expression: "true"
                                     }
                                   ],
-                                  key: value.attributeValueId,
                                   staticClass: "v-s-box bg-white",
-                                  class: {
-                                    active:
-                                      value.attributeValueId ===
-                                      _vm.selectedAttributes[
-                                        attribute.attributeId
-                                      ],
-                                    invalid: !_vm.isAttributeSelectionValid(
-                                      attribute.attributeId,
-                                      value.attributeValueId,
-                                      true
-                                    )
-                                  },
+                                  class: [
+                                    "attrval" + value.attributeValueId,
+                                    {
+                                      active:
+                                        value.attributeValueId ===
+                                        _vm.selectedAttributes[
+                                          attribute.attributeId
+                                        ],
+                                      invalid: !_vm.isAttributeSelectionValid(
+                                        attribute.attributeId,
+                                        value.attributeValueId,
+                                        true
+                                      )
+                                    }
+                                  ],
                                   attrs: {
-                                    "data-testing": "variation-select-box",
                                     "data-html": "true",
                                     "data-toggle": "tooltip",
                                     "data-placement": "top",
@@ -1221,12 +1296,17 @@ var render = function() {
                                         _vm._v(_vm._s(value.name))
                                       ])
                                     : _c("img", {
-                                        staticClass: "p-1",
                                         attrs: {
                                           src: value.imageUrl,
                                           alt: value.name
                                         }
-                                      })
+                                      }),
+                                  _vm._v(" "),
+                                  attribute.attributeId == 40
+                                    ? _c("span", { staticClass: "caption" }, [
+                                        _vm._v(_vm._s(value.name))
+                                      ])
+                                    : _vm._e()
                                 ]
                               )
                             })
@@ -1246,10 +1326,6 @@ var render = function() {
                       "select",
                       {
                         staticClass: "custom-select",
-                        attrs: {
-                          id: "unit-combination-ids-select",
-                          "data-testing": "variation-select-unit"
-                        },
                         on: {
                           change: function($event) {
                             return _vm.selectUnit($event.target.value)
@@ -1262,7 +1338,6 @@ var render = function() {
                         return _c(
                           "option",
                           {
-                            key: unitCombinationId,
                             domProps: {
                               value: unitCombinationId,
                               selected:
@@ -1273,16 +1348,16 @@ var render = function() {
                             _vm.isUnitSelectionValid(unitCombinationId)
                               ? [
                                   _vm._v(
-                                    "\n                            " +
+                                    "\n                                  " +
                                       _vm._s(
                                         _vm.possibleUnits[unitCombinationId]
                                       ) +
-                                      "\n                        "
+                                      "\n                              "
                                   )
                                 ]
                               : [
                                   _vm._v(
-                                    "\n                            " +
+                                    "\n                                  " +
                                       _vm._s(
                                         _vm.$translate(
                                           "Ceres::Template.singleItemInvalidAttribute",
@@ -1294,7 +1369,7 @@ var render = function() {
                                           }
                                         )
                                       ) +
-                                      "\n                        "
+                                      "\n                              "
                                   )
                                 ]
                           ],
@@ -1304,32 +1379,32 @@ var render = function() {
                       0
                     ),
                     _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        attrs: {
-                          for: "unit-combination-ids-select",
-                          "data-testing": "variation-select-unit-label"
-                        }
-                      },
-                      [
-                        _vm._v(
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.singleItemContent")
-                          )
+                    _c("label", [
+                      _vm._v(
+                        _vm._s(
+                          _vm.$translate("Ceres::Template.singleItemContent")
                         )
-                      ]
-                    )
+                      )
+                    ])
                   ])
                 ])
               : _vm._e()
-          ]
-        : [_vm._t("default")]
-    ],
-    2
-  )
+          ],
+          2
+        )
+      : _c("div", [_vm._t("default")], 2)
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12 text-muted" }, [_vm._v("Set wählen:")])
+    ])
+  }
+]
 render._withStripped = true
 
 

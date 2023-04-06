@@ -250,7 +250,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -308,16 +307,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helper/OrderPropertyHelper */ "./resources/js/src/app/helper/OrderPropertyHelper.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -589,20 +578,10 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm.shownProperties && _vm.shownProperties.length
-    ? _c("div", { staticClass: "small" }, [
-        _c("div", { staticClass: "font-weight-bold my-1" }, [
-          _vm._v(
-            _vm._s(_vm.$translate("Ceres::Template.basketAdditionalCosts")) +
-              ":"
-          )
-        ]),
-        _vm._v(" "),
+    ? _c("div", { staticClass: "small smallProp" }, [
         _c(
           "ul",
-          {
-            staticClass: "ml-1 pl-3",
-            attrs: { "data-testing": "order-property-list" }
-          },
+          { staticClass: "ml-0 pl-0" },
           _vm._l(_vm.shownProperties, function(property) {
             return _c("order-property-value-list-item", {
               key: property.propertyId,
@@ -637,75 +616,38 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("li", [
-    _c("span", { staticClass: "d-block" }, [
-      _c(
-        "strong",
-        { class: { colon: _vm.showColon } },
-        [
-          _vm._v(
-            "\n            " +
-              _vm._s(_vm.property.property.names.name) +
-              " \n            "
-          ),
-          _vm.surcharge > 0
-            ? [
-                _vm.isAdditionalCost || _vm.isTaxless
-                  ? [
-                      _vm._v(
-                        "\n                    (" +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.basketPlusAbbr")
-                          ) +
-                          " " +
-                          _vm._s(_vm._f("currency")(_vm.surcharge)) +
-                          ")\n                "
-                      )
-                    ]
-                  : [
-                      _vm._v(
-                        "\n                    (" +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.basketIncludeAbbr")
-                          ) +
-                          " " +
-                          _vm._s(_vm._f("currency")(_vm.surcharge)) +
-                          ")\n                "
-                      )
-                    ]
+    _c("strong", { class: { colon: _vm.showColon } }, [
+      _c("i", { staticClass: "fa fa-check" }),
+      _vm._v(" " + _vm._s(_vm.property.property.names.name) + "\n      ")
+    ]),
+    _vm._v(" "),
+    _c("span", [
+      _vm.property.property.valueType === "file"
+        ? _c("span", [
+            _c(
+              "a",
+              {
+                attrs: {
+                  href: _vm._f("fileUploadPath")(_vm.property.property.value),
+                  target: "_blank"
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "fa fa-external-link",
+                  attrs: { "aria-hidden": "true" }
+                }),
+                _vm._v(
+                  "\n                  " +
+                    _vm._s(_vm._f("fileName")(_vm.property.property.value)) +
+                    "\n              "
+                )
               ]
-            : _vm._e()
-        ],
-        2
-      ),
-      _vm._v(" "),
-      _c("span", [
-        _vm.property.property.valueType === "file"
-          ? _c("span", [
-              _c(
-                "a",
-                {
-                  attrs: {
-                    href: _vm._f("fileUploadPath")(_vm.property.property.value),
-                    target: "_blank"
-                  }
-                },
-                [
-                  _c("i", {
-                    staticClass: "fa fa-external-link",
-                    attrs: { "aria-hidden": "true" }
-                  }),
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(_vm._f("fileName")(_vm.property.property.value)) +
-                      "\n                "
-                  )
-                ]
-              )
-            ])
-          : _vm.property.property.valueType !== "empty"
-          ? _c("span", [_vm._v(_vm._s(_vm.property.property.value))])
-          : _vm._e()
-      ])
+            )
+          ])
+        : _vm.property.property.valueType !== "empty"
+        ? _c("span", [_vm._v(_vm._s(_vm.property.property.value))])
+        : _vm._e()
     ])
   ])
 }

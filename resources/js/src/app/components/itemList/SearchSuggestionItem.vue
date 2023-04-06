@@ -1,39 +1,36 @@
 <template>
     <div>
-        <template v-if="autocompleteResult && autocompleteResult.length">
-            <div data-testing="autocomplete-list">
-                <a
-                    v-for="(item, index) in autocompleteResult"
-                    class="autocomplete-suggestion"
-                    :class="paddingClasses"
-                    :style="paddingInlineStyles"
-                    :key="index"
-                    :href="getTargetUrl(item)"
-                    tabindex="0">
-
-                    <div class="image flex-shrink-0 mr-3" v-if="showImages">
-                        <img v-if="item.image" :src="item.image">
-                    </div>
-
-                    <div class="label overflow-hidden" :class="{ 'compact': showAdditionalInformation && item.beforeLabel && item.afterLabel }">
-                        <p class="small mb-0 text-truncate" v-if="showAdditionalInformation && item.beforeLabel">{{ item.beforeLabel }}</p>
-                        <p class="mb-0 text-truncate" v-html="getHighlightedLabel(item.label)"></p>
-                        <p class="small mb-0 text-truncate" v-if="showAdditionalInformation && item.afterLabel">{{ item.afterLabel }}</p>
-                    </div>
-
-                    <div class="count" v-if="showCount && item.count > 0">
-                        <span>{{ item.count }}</span>
-                    </div>
-                </a>
-            </div>
-        </template>
-
-        <template v-else>
-            <p class="text-muted" :class="paddingClasses" :style="paddingInlineStyles">
-                {{ $translate("Ceres::Template.itemSearchSuggestionNoResults") }}
-            </p>
-        </template>
-    </div>
+          <template v-if="autocompleteResult && autocompleteResult.length">
+              <div :class="'suggestion-result-' + suggestionType">
+                  <a v-for="(item, index) in autocompleteResult"
+                      class="autocomplete-suggestion"
+                      :class="paddingClasses"
+                      :style="paddingInlineStyles"
+                      :key="index"
+                      :href="getTargetUrl(item)"
+                      tabindex="0">
+                      <div class="image flex-shrink-0 mr-3" v-if="showImages && suggestionType == 'item'">
+                          <img v-if="item.image" :src="item.image">
+                      </div>
+                      <div class="label overflow-hidden" :class="{ 'compact': showAdditionalInformation && item.beforeLabel && item.afterLabel }">
+                          <p class="small mb-0 text-truncate" v-if="showAdditionalInformation && item.beforeLabel" v-html="item.beforeLabel"></p>
+                          <p class="mb-0 text-truncate" v-html="getHighlightedLabel(item.label)"></p>
+                          <p class="small mb-0 text-truncate" v-if="showAdditionalInformation && item.afterLabel" v-html="item.afterLabel"></p>
+                      </div>
+                      <div class="count" v-if="showCount && item.count > 0">
+                          <span v-html="item.count"></span>
+                      </div>
+                  </a>
+              </div>
+          </template>
+          <template v-else>
+              <p class="text-muted"
+                 :class="paddingClasses"
+                 :style="paddingInlineStyles"
+                 v-html="$translate('Ceres::Template.itemSearchSuggestionNoResults')">
+              </p>
+          </template>
+      </div>
 </template>
 
 <script>

@@ -90,6 +90,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -128,7 +152,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       type: Number,
       required: false
     },
-    useAppearance: Boolean
+    useAppearance: {
+      type: Boolean,
+      default: false
+    }
   },
   data: function data() {
     return {
@@ -339,105 +366,169 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "qty-box d-flex h-100" }, [
-    _c("input", {
-      ref: "quantityInputField",
-      staticClass: "qty-input text-center",
-      attrs: {
-        type: "text",
-        disabled: _vm.waiting,
-        "aria-label": _vm.$translate("Ceres::Template.itemQuantityInput")
-      },
-      domProps: { value: _vm.displayValue },
-      on: {
-        change: function($event) {
-          return _vm.setValue($event.target.value)
-        }
-      }
-    }),
-    _vm._v(" "),
-    _c("div", { staticClass: "qty-btn-container d-flex flex-column" }, [
-      _c(
-        "button",
-        {
-          directives: [
+  return _vm.useAppearance
+    ? _c("div", { staticClass: "bkr-cc input-group qty-box-small" }, [
+        _c("div", { staticClass: "qty-btn-container input-group-btn left" }, [
+          _c(
+            "div",
             {
-              name: "tooltip",
-              rawName: "v-tooltip",
-              value: _vm.isMaximum && _vm.compMax !== 0,
-              expression: "isMaximum && compMax !== 0"
-            }
-          ],
-          staticClass:
-            "btn qty-btn flex-fill d-flex justify-content-center p-0",
-          class: {
-            disabled: _vm.isMaximum || _vm.waiting,
-            "btn-appearance": _vm.useAppearance
-          },
-          attrs: {
-            "data-toggle": "tooltip",
-            "data-placement": "top",
-            "data-testing": "quantity-btn-increase",
-            title: _vm.maximumHint,
-            "aria-label": _vm.$translate(
-              "Ceres::Template.itemQuantityInputIncrease"
-            )
-          },
+              directives: [
+                {
+                  name: "tooltip",
+                  rawName: "v-tooltip",
+                  value: _vm.isMinimum,
+                  expression: "isMinimum"
+                }
+              ],
+              staticClass: "qty-btn",
+              class: { disabled: _vm.isMinimum || _vm.waiting },
+              attrs: {
+                "data-toggle": "tooltip",
+                "data-placement": "bottom",
+                title: _vm.minimumHint
+              },
+              on: {
+                click: function($event) {
+                  return _vm.decreaseValue()
+                }
+              }
+            },
+            [
+              _c("i", {
+                staticClass: "fa fa-minus qty-sign",
+                attrs: { "aria-hidden": "true" }
+              })
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          ref: "quantityInputField",
+          staticClass: "qty-input form-control",
+          attrs: { type: "text", disabled: _vm.waiting },
+          domProps: { value: _vm.displayValue },
           on: {
-            click: function($event) {
-              return _vm.increaseValue()
+            change: function($event) {
+              return _vm.setValue($event.target.value)
             }
           }
-        },
-        [
-          _c("i", {
-            staticClass: "fa fa-plus default-float",
-            attrs: { "aria-hidden": "true" }
-          })
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          directives: [
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "qty-btn-container  input-group-btn right" }, [
+          _c(
+            "div",
             {
-              name: "tooltip",
-              rawName: "v-tooltip",
-              value: _vm.isMinimum && _vm.compMax !== 0,
-              expression: "isMinimum && compMax !== 0"
-            }
-          ],
-          staticClass:
-            "btn qty-btn flex-fill d-flex justify-content-center p-0",
-          class: {
-            disabled: _vm.isMinimum || _vm.waiting,
-            "btn-appearance": _vm.useAppearance
-          },
-          attrs: {
-            "data-toggle": "tooltip",
-            "data-placement": "bottom",
-            "data-testing": "quantity-btn-decrease",
-            title: _vm.minimumHint,
-            "aria-label": _vm.$translate(
-              "Ceres::Template.itemQuantityInputDecrease"
-            )
-          },
+              directives: [
+                {
+                  name: "tooltip",
+                  rawName: "v-tooltip",
+                  value: _vm.isMaximum && _vm.compMax !== 0,
+                  expression: "isMaximum && compMax !== 0"
+                }
+              ],
+              staticClass: "qty-btn",
+              class: { disabled: _vm.isMaximum || _vm.waiting },
+              attrs: {
+                "data-toggle": "tooltip",
+                "data-placement": "top",
+                title: _vm.maximumHint
+              },
+              on: {
+                click: function($event) {
+                  return _vm.increaseValue()
+                }
+              }
+            },
+            [
+              _c("i", {
+                staticClass: "fa fa-plus qty-sign",
+                attrs: { "aria-hidden": "true" }
+              })
+            ]
+          )
+        ])
+      ])
+    : _c("div", { staticClass: "qty-box h-100 d-flex" }, [
+        _c("input", {
+          ref: "quantityInputField",
+          staticClass: "qty-input",
+          attrs: { type: "text", disabled: _vm.waiting },
+          domProps: { value: _vm.displayValue },
           on: {
-            click: function($event) {
-              return _vm.decreaseValue()
+            change: function($event) {
+              return _vm.setValue($event.target.value)
             }
           }
-        },
-        [
-          _c("i", {
-            staticClass: "fa fa-minus default-float",
-            attrs: { "aria-hidden": "true" }
-          })
-        ]
-      )
-    ])
-  ])
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "qty-btn-container" }, [
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "tooltip",
+                  rawName: "v-tooltip",
+                  value: _vm.isMaximum && _vm.compMax !== 0,
+                  expression: "isMaximum && compMax !== 0"
+                }
+              ],
+              staticClass: "qty-btn",
+              class: { disabled: _vm.isMaximum || _vm.waiting },
+              attrs: {
+                "data-toggle": "tooltip",
+                "data-placement": "top",
+                title: _vm.maximumHint
+              },
+              on: {
+                click: function($event) {
+                  return _vm.increaseValue()
+                }
+              }
+            },
+            [
+              _c("i", {
+                staticClass: "fa fa-plus qty-sign",
+                attrs: { "aria-hidden": "true" }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "qty-btn-seperator" }),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "tooltip",
+                  rawName: "v-tooltip",
+                  value: _vm.isMinimum,
+                  expression: "isMinimum"
+                }
+              ],
+              staticClass: "qty-btn",
+              class: { disabled: _vm.isMinimum || _vm.waiting },
+              attrs: {
+                "data-toggle": "tooltip",
+                "data-placement": "bottom",
+                title: _vm.minimumHint
+              },
+              on: {
+                click: function($event) {
+                  return _vm.decreaseValue()
+                }
+              }
+            },
+            [
+              _c("i", {
+                staticClass: "fa fa-minus qty-sign",
+                attrs: { "aria-hidden": "true" }
+              })
+            ]
+          )
+        ])
+      ])
 }
 var staticRenderFns = []
 render._withStripped = true

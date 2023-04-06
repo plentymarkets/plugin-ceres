@@ -1,66 +1,65 @@
 <template>
-    <div :class="{ 'has-crossprice': hasCrossPrice }">
-        <div class="crossprice" v-if="showCrossPrice && hasCrossPrice" :class="{ 'is-special-offer': hasSpecialOffer }">
-            <del class="text-muted small text-appearance">
-                <template v-if="hasSpecialOffer">
-                    {{ currentVariation.prices.default.unitPrice.formatted | itemCrossPrice(true) }}
-                </template>
-                <template v-else>
-                    {{ currentVariation.prices.rrp.unitPrice.formatted | itemCrossPrice }}
-                </template>
-            </del>
-        </div>
-
-        <span class="price h1" :class="{ 'is-special-offer': hasSpecialOffer }">
-            <span>
-                <template v-if="showDynamicPrice">
-                    {{ $translate("Ceres::Template.dynamicVariationPrice",
-                        {
-                            price: $options.filters.currency(variationTotalPrice, currentVariation.prices.default.currency)
-                        }
-                    ) }}
-                </template>
-
-                <template v-else>
-                    {{ variationTotalPrice | currency(currentVariation.prices.default.currency) }}
-                </template>
+    <div class="variationPrices bkr-cc" :class="{ 'has-crossprice': hasCrossPrice }">
+            <span
+              v-if="currentVariation.prices.default.price.value > 0 && currentVariation.prices.rrp.price.value > 0 && currentVariation.prices.default.price.value < currentVariation.prices.rrp.price.value"
+              class="percent">
+              Sie sparen {{ ((1 - currentVariation.prices.default.price.value / currentVariation.prices.rrp.price.value) * 100) | numberFormat(2, ',') }}%
             </span>
-            <sup>{{ $translate("Ceres::Template.singleItemFootnote1") }}</sup>
-        </span>
 
-        <ul class="text-muted pl-0 list-unstyled" v-if="propertiesWithAdditionalCostsVisible.length">
-            <li v-for="property in propertiesWithAdditionalCostsVisible" :key="property.propertyId">
-                <span class="d-block">
-                    {{ property.property.names.name }} <template v-if="$options.filters.propertySurcharge(currentVariation.properties, property.propertyId) > 0">({{ $translate("Ceres::Template.basketPlusAbbr") }} {{ currentVariation.properties | propertySurcharge(property.propertyId) | currency }})</template>
-                    <template v-if="hasTax(property)">{{ $translate("Ceres::Template.singleItemFootnote1") }}</template>
+            <span id="itemmrp" class="text-muted" v-if="(showCrossPrice && hasCrossPrice)" :class="{ 'is-special-offer': hasSpecialOffer }">
+                {{ $translate("biokinderDesign::Template.itemInstedOf") }}
+                <del class="small text-appearance">
+                    <template v-if="hasSpecialOffer">
+                        {{ currentVariation.prices.default.unitPrice.formatted | itemCrossPrice(true) }}
+                    </template>
+                    <template v-else>
+                        {{ currentVariation.prices.rrp.unitPrice.formatted | itemCrossPrice }}
+                    </template>
+                </del>
+            </span>
+
+            <span class="singleprice" :class="{ 'colorred': hasCrossPrice }">
+                <span>
+                    <template v-if="showDynamicPrice">
+                        {{ $translate("Ceres::Template.dynamicVariationPrice",
+                            {
+                                price: $options.filters.currency(variationTotalPrice, currentVariation.prices.default.currency)
+                            }
+                        ) }}
+                    </template>
+
+                    <template v-else>
+                        {{ variationTotalPrice | currency(currentVariation.prices.default.currency) }}
+                    </template>
                 </span>
-            </li>
-        </ul>
+            </span>
 
-        <!-- lowest price, according to § 11 PAngV -->
-        <div class="lowest-price text-muted mb-3" v-if="currentVariation.prices.default.lowestPrice.value && showCrossPrice && hasCrossPrice">
-            <div v-html="$translate('Ceres::Template.singleItemLowestPrice', {'price': currentVariation.prices.default.lowestPrice.formatted})">
+            <div class="clearer"></div>
+
+            <div class="base-price text-muted my-1"
+                v-if="currentVariation.unit && currentVariation.variation.mayShowUnitPrice"
+                :class="{ 'is-single-piece': currentVariation.unit && currentVariation.unit.content === 1 && currentVariation.unit.unitOfMeasurement === 'C62' }">
+
+                    {{ $translate("Ceres::Template.singleItemContent") }}:
+                    <span>{{ currentVariation.unit.content | numberFormat }} </span>
+                    <span>{{ currentVariation.unit.names.name }}</span>
+                    &nbsp;|&nbsp;
+                    <span class="base-price-value">
+                        {{ variationGraduatedPrice.basePrice | specialOffer(currentVariation.prices, "basePrice") }}
+                    </span>
+
+            </div>
+
+            <div class="shippinginfo">
+              {{ $translate("Ceres::Template.singleItemInclVAT") }},
+              {{ $translate("Ceres::Template.singleItemExclusive") }}
+              <a data-toggle="modal" href="#shippingscosts" :title="$translate('Ceres::Template.singleItemShippingCosts')" class="openPorto">CO<sub>2</sub> neutraler Versand</a>
+              <slot name="additional-content-after-vat"></slot>
+              <span v-if="(showCrossPrice && hasCrossPrice)">
+                <br />Zuletzt niedrigster Preis {{ currentVariation.prices.default.lowestPrice.formatted }}
+              </span>
             </div>
         </div>
-        
-        <!-- class .is-single-piece is added for customers to hide the unit if it is C62 -->
-        <div class="base-price text-muted my-3"
-            v-if="currentVariation.unit"
-            :class="{ 'is-single-piece': currentVariation.unit && currentVariation.unit.content === 1 && currentVariation.unit.unitOfMeasurement === 'C62' }">
-            <div>
-                {{ $translate("Ceres::Template.singleItemContent") }}
-                <span>{{ currentVariation.unit.content | numberFormat }} </span>
-                <span>{{ currentVariation.unit.names.name }}</span>
-            </div>
-            <div v-if="currentVariation.variation.mayShowUnitPrice">
-                {{ $translate("Ceres::Template.singleItemUnitPrice") }}
-                <span class="base-price-value">
-                    {{ variationGraduatedPrice.basePrice | specialOffer(currentVariation.prices, "basePrice") }}
-                </span>
-            </div>
-        </div>
-
-    </div>
 </template>
 
 <script>

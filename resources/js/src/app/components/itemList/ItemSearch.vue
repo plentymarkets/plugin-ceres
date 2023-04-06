@@ -1,31 +1,42 @@
 <template>
-    <div class="container-max" :class="{'p-0' : $ceres.isShopBuilder}"> 
-        <div class="position-relative">
-            <div class="d-flex flex-grow-1 position-relative my-2">
-                <input type="search" class="search-input flex-grow-1 px-3 py-2" ref="searchInput" v-model="searchString" @input="onValueChanged($event.target.value)"
-                    @keyup.enter="search()" @focus="isSearchFocused = true" @blur="onBlurSearchField($event)" :autofocus="isShopBuilder" :placeholder="$translate('Ceres::Template.headerSearchPlaceholder')" :aria-label="$translate('Ceres::Template.headerSearchTerm')">
+    <div class="bkr-cc" id="search_and_porto_holder" :class="{ wide: isSearchFocused, notwide: !isSearchFocused }">
+        <div class="input-group">
+          <input
+            type="search"
+            class="search-input flex-grow-1 px-2 py-2 bkmSearchbox"
+            ref="searchInput"
+            value=""
+            v-model="searchString"
+            @keyup.enter="search()"
+            @focus="isSearchFocused = true"
+            @blur="onBlurSearchField($event)"
+            :autofocus="isShopBuilder"
+            :aria-label="$translate('Ceres::Template.headerSearchTerm')"
+            @input="onValueChanged($event.target.value)"
+            placeholder="Suchbegriff eingeben..." />
+            <span class="input-group-append">
+              <button class="search-submit btn btn-bkm bkmSearchbutton" aria-label="Suchen" type="submit" @click="search()">
+                <icon class="fa-fw" icon="search" :loading="autocompleteIsLoading"></icon>
+              </button>
+            </span>
+        </div><!--
 
-                <slot name="search-button">
-                    <button class="search-submit px-3" type="submit" @click="search()" :aria-label="$translate('Ceres::Template.headerSearch')">
-                        <icon class="fa-fw" icon="search" :loading="autocompleteIsLoading"></icon>
-                    </button>
-                </slot>
-            </div>
-
-            <template v-if="isSearchFocused">
-                <div v-show="hasInitialInput || $ceres.isShopBuilder">
-                    <slot name="autocomplete-suggestions">
-                        <div class="autocomplete-suggestions shadow bg-white w-100">
-                            <search-suggestion-item
-                                :show-images="showItemImages"
-                                suggestion-type="item">
-                            </search-suggestion-item>
-                        </div>
-                    </slot>
+  --><template v-if="isSearchFocused"><div> <!--v-show="(searchString.length >= searchMinLength && hasInitialInput) || $ceres.isShopBuilder" -->
+            <slot name="autocomplete-suggestions">
+              <div class="autocomplete-suggestions bg-white w-100">
+                <div class="row">
+                  <div class="col-md-7">
+                    <search-suggestion-item padding-classes="p-1" :show-images="true" suggestion-type="item" :show-additional-information="false" :show-count="false"></search-suggestion-item>
+                  </div>
+                  <div class="col-md-5 suggestions">
+                    <search-suggestion-item suggestion-type="category" :show-additional-information="true" :show-count="false"></search-suggestion-item>
+                  </div>
                 </div>
-            </template>
-        </div>
-    </div>
+              </div>
+            </slot>
+          </div>
+          </template>
+      </div>
 </template>
 
 <script>

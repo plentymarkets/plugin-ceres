@@ -1,120 +1,46 @@
 <template>
     <!-- v-show is required to prevent CLS for ssr -->
-    <div
-        v-show="!$ceres.isSSR"   
-        class="cookie-bar"
-        :class="{
-            'out': !isVisible,
-            'border-top bg-white': isVisible,
-            'fixed-bottom': !isShopBuilder || false
-        }"
-    >
-        <div class="container-max" v-if="isVisible">
-            <div class="row py-3" v-show="!isExpanded" :class="classes" :style="styles">
-                <div class="col-12 col-md-8">
-
-                    <p v-html="text"></p>
-
-                    <div>
-                        <template v-for="consentGroup in consentGroups">
-                            <span v-if="consentGroup.consents.length > 0"
-                                  class="custom-control custom-switch custom-control-appearance d-md-inline-block mr-3"
-                                  :key="consentGroup.key">
-                                <input type="checkbox"
-                                       class="custom-control-input"
-                                       :id="_cid + '-group-' + consentGroup.key"
-                                       :disabled="consentGroup.necessary"
-                                       :checked="isConsented(consentGroup.key) || consentGroup.necessary"
-                                       @change="toggleConsent(consentGroup.key)">
-                                <label class="custom-control-label" :for="_cid + '-group-' + consentGroup.key">
-                                    <template v-if="consentGroup.label.length > 0">
-                                        {{ consentGroup.label }}
-                                    </template>
-                                    <template v-else>
-                                        {{ $translate("Ceres::Template.privacySettingsDefaultGroup") }}
-                                    </template>
-                                </label>
-                            </span>
-                        </template>
-                        
-                        <a href="#" class="text-primary text-appearance d-block d-md-inline-block" data-testing="cookie-bar-show-more-information" @click.prevent.stop="isExpanded=true">{{ $translate("Ceres::Template.cookieBarMoreSettings") }}</a>
+    <div class="cookie-bar out bkr-cc" :class="{ 'in': isVisible }">
+            <div class="container" v-if="isVisible">
+                <div class="row p-3" v-show="!isExpanded" :class="classes" :style="styles">
+                    <div class="col-12 px-4 col-md-12 text-center">
+                        <p class="cookieBeaverContainer mt-4">
+                          <img class="cookieBeaver" src="https://cdn.bio-kinder.de/frontend/images/biokindertheme/icons/cookie_biber.png" />
+                        </p>
+                        <h2>Cookies akzeptieren</h2>
+                        <p>
+                          Wir nutzen Cookies auf unserer Website. Einige von diesen sind essenziell, während andere uns helfen, diese Website und Ihre Erfahrung zu verbessern.
+                          Sie haben die Möglichkeit, die Einstellungen der Cookies anzupassen.
+                          Weitere Informationen zu den von uns verwendeten Cookies und Ihren Rechten als Nutzer finden Sie in unserer <a class="d-inline-block read_more" href="/privacy-policy/">Daten­schutz­erklärung</a> und unserem <a class="d-inline-block read_more" href="/legal-disclosure/">{{ $translate("Ceres::Template.legalDisclosure") }}</a>.
+                        </p>
+                    </div>
+                    <div class="col-12 col-md-12 text-center py-4 py-md-4">
+                        <button @click.prevent.stop="isExpanded = true" class="btn btn-default btn-appearance d-inline-block">Einstellungen</button>
+                        <button onclick="consentGiven(window.ConsentManager.hasResponse())" class="btn btn-primary btn-appearance d-inline-block" @click="acceptAll(); close()" v-html="'Einverstanden, zum Shop &rarr;'"></button>
                     </div>
 
                 </div>
-                <div class="button-order col-12 col-md-4 pt-3 pt-md-0">
-                    <button
-                        class="btn btn-block btn-default btn-appearance button-order-1 mb-2 mt-0"
-                        @click="acceptAll(); close()"
-                        data-testing="cookie-bar-accept-all">
-                        {{ $translate("Ceres::Template.cookieBarAcceptAll") }}
-                    </button>
-                    <button
-                        v-if="showRejectAll"
-                        class="btn btn-block btn-default btn-appearance button-order-2 mb-2 mt-0"
-                        @click="denyAll(); close()"
-                        data-testing="cookie-bar-deny-all">
-                        {{ $translate("Ceres::Template.cookieBarDenyAll") }}
-                    </button>
-                    <button
-                        class="btn btn-block btn-default button-order-3 mb-2 mt-0"
-                        @click="storeConsents(); close()"
-                        data-testing="cookie-bar-save">
-                        {{ $translate("Ceres::Template.cookieBarSave") }}
-                    </button>
-                </div>
-
-            </div>
-            <div class="row py-3" v-if="isExpanded" :class="classes" :style="styles">
-                <div class="col-12 mb-3">
-                    <privacy-settings :consent-groups="consentGroups"></privacy-settings>
-                </div>
-                <div class="col-12 col-md-3">
-                    <a
-                        href="#"
-                        class="text-primary text-appearance d-inline-block mb-3"
-                        data-testing="cookie-bar-hide-more-information"
-                        @click.prevent.stop="isExpanded = false">
-                        {{ $translate("Ceres::Template.cookieBarBack") }}
-                    </a>
-                </div>
-                <div class="col-12 col-md-9">
-                    <div class="row">
-                        <div class="col-12 col-md-4 mt-2 mt-md-0">
-                           <button
-                                class="btn btn-block btn-default btn-appearance"
-                                @click="acceptAll(); close()"
-                                data-testing="cookie-bar-expanded-accept-all">
-                                {{ $translate("Ceres::Template.cookieBarAcceptAll") }}
-                            </button>
-                        </div>
-                        <div v-if="showRejectAll" class="col-12 col-md-4 mt-2 mt-md-0">
-                            <button
-                                class="btn btn-block btn-default btn-appearance"
-                                @click="denyAll(); close()"
-                                data-testing="cookie-bar-expanded-deny-all">
-                                {{ $translate("Ceres::Template.cookieBarDenyAll") }}
-                            </button>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <button
-                                class="btn btn-block btn-default"
-                                @click="storeConsents(); close()"
-                                data-testing="cookie-bar-expanded-save">
-                                {{ $translate("Ceres::Template.cookieBarSave") }}
-                            </button>
-                        </div>
+                <div class="row p-3" v-if="isExpanded" :class="classes" :style="styles">
+                    <div class="col-12 mb-3">
+                        <privacy-settings :consent-groups="consentGroups"></privacy-settings>
                     </div>
-                </div>  
+                    <div class="col-12 col-md-12 text-center">
+                        <button onclick="consentGiven(window.ConsentManager.hasResponse())" v-html="$translate('Ceres::Template.cookieBarSave')" class="btn btn-default mr-2" @click="storeConsents(); close()"></button>
+                        <button onclick="consentGiven(window.ConsentManager.hasResponse())" class="btn btn-primary btn-appearance cookiesAccept" v-html='$translate("Ceres::Template.cookieBarAcceptAll")' @click="acceptAll(); close()"></button>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <a class="text-appearance d-inline-block mb-3" v-html="$translate('Ceres::Template.cookieBarBack')" @click.prevent.stop="isExpanded = false"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div v-else>
+                <a @click.prevent.stop="isCollapsed = false" :aria-label="$translate('Ceres::Template.cookieBarPrivacySettings')">
+                    <i class="fa fa-shield float-none"></i>
+                    <span class="d-inline-block" v-html="$translate('Ceres::Template.cookieBarPrivacySettings')"></span>
+                </a>
             </div>
         </div>
-
-        <div v-else>
-            <button class="btn btn-primary btn-appearance" @click.prevent.stop="isCollapsed = false" :aria-label="$translate('Ceres::Template.cookieBarPrivacySettings')">
-                <i class="fa fa-shield float-none"></i>
-                <span class="d-none d-sm-inline-block">{{ $translate("Ceres::Template.cookieBarPrivacySettings") }}</span>
-            </button>
-        </div>
-    </div>
 </template>
 
 <script>

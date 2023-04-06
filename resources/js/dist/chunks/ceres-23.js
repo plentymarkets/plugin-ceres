@@ -204,7 +204,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "cmp" }, [
+  return _c("div", { staticClass: "cmp bkr-cc" }, [
     _vm.isCheckoutReadonly &&
     !!_vm.$translate("Ceres::Template.couponReadonlyInfoText")
       ? _c("p", [
@@ -263,7 +263,7 @@ var render = function() {
             ? _c(
                 "button",
                 {
-                  staticClass: "btn btn-medium btn-primary btn-appearance",
+                  staticClass: "btn btn-medium btn-bkm btn-appearance",
                   attrs: {
                     type: "button",
                     disabled: _vm.waiting || _vm.isCheckoutReadonly,

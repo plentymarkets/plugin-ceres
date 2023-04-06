@@ -59,20 +59,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -126,24 +112,24 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return !_vm.basketSelect
-    ? _c(
-        "ul",
-        { staticClass: "row" },
-        _vm._l(_vm.localization.shippingCountries, function(shippingCountry) {
-          return _c(
-            "li",
+  return _c("div", { staticClass: "bkr-cc w-100" }, [
+    _vm.localization.shippingCountries.length > 1
+      ? _c("div", { staticClass: "input-unit" }, [
+          _c(
+            "select",
             {
-              key: shippingCountry.id,
-              staticClass: "col-6 col-sm-4 px-0",
-              class: {
-                active: _vm.basket.shippingCountryId == shippingCountry.id,
-                "is-disabled": _vm.isDisabled
+              staticClass: "custom-select form-control",
+              on: {
+                change: function($event) {
+                  return _vm.setShippingCountry($event.target.value)
+                }
               }
             },
-            [
-              _c(
-                "a",
+            _vm._l(_vm.localization.shippingCountries, function(
+              shippingCountry
+            ) {
+              return _c(
+                "option",
                 {
                   directives: [
                     {
@@ -153,98 +139,41 @@ var render = function() {
                       expression: "isDisabled"
                     }
                   ],
-                  staticClass: "nav-link",
-                  attrs: {
-                    "data-toggle": "collapse",
-                    href: "#countrySettings",
-                    disabled: _vm.isDisabled,
-                    "data-boundary": "window",
-                    "data-title": _vm.$translate(
-                      "Ceres::Template.headerChangeDeliveryCountry"
-                    ),
-                    "aria-label": _vm.$translate(
-                      "Ceres::Template.headerChangeDeliveryCountry"
-                    )
-                  },
-                  on: {
-                    click: function($event) {
-                      return _vm.setShippingCountry(shippingCountry.id)
-                    }
+                  class: { "is-disabled": _vm.isDisabled },
+                  attrs: { disabled: _vm.isDisabled },
+                  domProps: {
+                    value: shippingCountry.id,
+                    selected: _vm.basket.shippingCountryId == shippingCountry.id
                   }
                 },
                 [
-                  _c("i", {
-                    class:
-                      "flag-icon flag-icon-" +
-                      shippingCountry.isoCode2.toLowerCase()
-                  }),
                   _vm._v(
-                    "\n            " +
+                    "\n                    " +
                       _vm._s(shippingCountry.currLangName) +
-                      "\n        "
+                      "\n                "
                   )
                 ]
               )
-            ]
-          )
-        }),
-        0
-      )
-    : _c("div", [
-        _c("div", { staticClass: "h3" }, [
-          _vm._v(
-            _vm._s(
-              _vm.$translate("Ceres::Template.headerSelectShippingCountry")
-            )
-          )
-        ]),
-        _vm._v(" "),
-        _vm.localization.shippingCountries.length > 1
-          ? _c(
-              "select",
-              {
-                staticClass: "form-control",
-                on: {
-                  change: function($event) {
-                    return _vm.setShippingCountry($event.target.value)
-                  }
-                }
-              },
-              _vm._l(_vm.localization.shippingCountries, function(
-                shippingCountry
-              ) {
-                return _c(
-                  "option",
-                  {
-                    key: shippingCountry.id,
-                    attrs: { disabled: _vm.isDisabled },
-                    domProps: {
-                      value: shippingCountry.id,
-                      selected:
-                        _vm.basket.shippingCountryId == shippingCountry.id
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n            " +
-                        _vm._s(shippingCountry.currLangName) +
-                        "\n        "
-                    )
-                  ]
-                )
-              }),
-              0
-            )
-          : _c("div", [
-              _vm._v(
-                "\n        " +
-                  _vm._s(
-                    _vm.getCountryName(_vm.localization.shippingCountryId)
-                  ) +
-                  "\n    "
+            }),
+            0
+          ),
+          _vm._v(" "),
+          _c("label", [
+            _vm._v(
+              _vm._s(
+                _vm.$translate("Ceres::Template.headerSelectShippingCountry")
               )
-            ])
-      ])
+            )
+          ])
+        ])
+      : _c("div", [
+          _vm._v(
+            "\n            " +
+              _vm._s(_vm.getCountryName(_vm.localization.shippingCountryId)) +
+              "\n        "
+          )
+        ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

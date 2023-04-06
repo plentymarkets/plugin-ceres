@@ -493,6 +493,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -677,7 +678,8 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
           variationId: this.variationId,
           quantity: this.quantity,
           basketItemOrderParams: orderParamsAndSurcharge.orderParams,
-          totalOrderParamsMarkup: orderParamsAndSurcharge.totalSurcharge
+          totalOrderParamsMarkup: orderParamsAndSurcharge.totalSurcharge,
+          isWishList: this.isWishList
         };
 
         if (this.isSet) {
@@ -894,38 +896,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1067,64 +1037,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -1699,8 +1611,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1824,15 +1734,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -4289,162 +4190,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -5138,16 +4883,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -6239,6 +5974,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -6547,6 +6285,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -6558,9 +6315,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     showLogin: {
       type: Boolean,
       default: true
+    },
+    viewMethod: {
+      type: String,
+      default: 'default'
     }
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_7__["mapGetters"])(["username", "isLoggedIn"])),
+  computed: _objectSpread({
+    viewModeClass: function viewModeClass() {
+      switch (this.viewMode) {
+        case 'mobile':
+          return 'myAccount';
+          break;
+
+        case 'wishlist':
+          return 'row';
+          break;
+
+        default:
+          return 'd-inline';
+      }
+    }
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_7__["mapGetters"])(["username", "isLoggedIn"])),
   data: function data() {
     return {
       isLogin: App.templateType === "login",
@@ -7362,13 +7138,21 @@ __webpack_require__.r(__webpack_exports__);
     var _this2 = this;
 
     this.$nextTick(function () {
-      _this2.loadLightbox().then(function () {
-        _this2.initCarousel();
+      _this2.initCarousel();
 
-        _this2.initThumbCarousel();
-      }).catch(function (event) {
-        console.log("error while loading lightbox", event);
-      });
+      _this2.initThumbCarousel();
+      /* disable lightbox
+      this.loadLightbox().then(() =>
+          {
+              this.initCarousel();
+              this.initThumbCarousel();
+          })
+          .catch(event =>
+          {
+              console.log("error while loading lightbox", event);
+          });
+      */
+
     });
   },
   methods: {
@@ -7502,7 +7286,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helper/OrderPropertyHelper */ "./resources/js/src/app/helper/OrderPropertyHelper.js");
 
-//
 //
 //
 //
@@ -8114,41 +7897,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
@@ -8438,7 +8186,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -8496,16 +8243,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helper/OrderPropertyHelper */ "./resources/js/src/app/helper/OrderPropertyHelper.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -8640,6 +8377,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -8678,7 +8439,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       type: Number,
       required: false
     },
-    useAppearance: Boolean
+    useAppearance: {
+      type: Boolean,
+      default: false
+    }
   },
   data: function data() {
     return {
@@ -9971,6 +9735,19 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -10876,6 +10653,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 
@@ -10911,6 +10691,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     forceUrlWithVariationId: {
       type: Boolean,
       default: false
+    },
+    viewMode: {
+      type: String,
+      default: 'vertical'
     }
   },
   jsonDataFields: ["itemDataRef"],
@@ -10938,6 +10722,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     basePrice: function basePrice() {
       return this.item.prices.default.basePrice;
+    },
+    mode: function mode() {
+      switch (this.viewMode) {
+        case 'vertical':
+          return 1;
+
+        case 'horizontal':
+          return 2;
+
+        case 'cart':
+          return 3;
+
+        default:
+          return 1;
+      }
     },
     itemPriceGraduated: function itemPriceGraduated() {
       var unitPrice;
@@ -11026,6 +10825,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -11393,9 +11203,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -11520,6 +11327,11 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -11692,7 +11504,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -11828,13 +11639,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -11912,7 +11716,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
 //
 //
 //
@@ -13425,80 +13228,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -14705,20 +14434,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -41311,6 +41026,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "bkr-cc" },
     [
       !_vm.showQuantity && _vm.useLargeScale && _vm.canBeAddedToBasket
         ? _c(
@@ -41366,217 +41082,203 @@ var render = function() {
         : _vm._e(),
       _vm._ssrNode(" "),
       _vm.showQuantity && !_vm.useLargeScale
-        ? _vm._ssrNode(
-            "<div" +
-              _vm._ssrClass("d-inline", {
-                "d-lg-none": !_vm.$ceres.isItemView
-              }) +
-              ">",
-            "</div>",
-            [
+        ? _vm._ssrNode('<div class="category-list-view-port">', "</div>", [
+            _vm._ssrNode("<span>", "</span>", [
               _vm._ssrNode(
-                '<div class="add-to-basket-container">',
+                '<div class="col-12 col-sm-7 col-md-12 my-3 px-0">',
                 "</div>",
                 [
                   _vm._ssrNode(
-                    '<div class="quantity-input-container">',
+                    '<div class="add-to-basket-container">',
                     "</div>",
                     [
-                      _c("quantity-input", {
-                        attrs: {
-                          value: _vm.quantity,
-                          timeout: 0,
-                          min: _vm.minimumQuantity,
-                          max: _vm.maximumQuantity,
-                          interval: _vm.intervalQuantity,
-                          "variation-id": _vm.variationId,
-                          waiting:
-                            _vm.isLoading ||
-                            !_vm.isSalable ||
-                            !_vm.allVariationsSelected
-                        },
-                        on: {
-                          "quantity-change": _vm.updateQuantity,
-                          "out-of-stock": _vm.handleButtonState
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._ssrNode(" "),
-                  !_vm.allVariationsSelected || !_vm.isSalable
-                    ? _c(
-                        "button",
-                        {
-                          directives: [
-                            { name: "tooltip", rawName: "v-tooltip" }
-                          ],
-                          staticClass:
-                            "btn btn-block btn-primary btn-appearance disabled",
-                          class: _vm.buttonClasses,
-                          style: _vm.paddingInlineStyles,
-                          attrs: {
-                            "data-toggle": "tooltip",
-                            "data-placement": "top",
-                            title: _vm.tooltipText
-                          }
-                        },
+                      _vm._ssrNode(
+                        '<div class="quantity-input-container">',
+                        "</div>",
                         [
-                          _vm._ssrNode(
-                            '<i aria-hidden="true" class="fa fa-shopping-cart"></i>' +
+                          _c("quantity-input", {
+                            attrs: {
+                              value: _vm.quantity,
+                              timeout: 0,
+                              min: _vm.minimumQuantity,
+                              max: _vm.maximumQuantity,
+                              interval: _vm.intervalQuantity,
+                              "variation-id": _vm.variationId,
+                              waiting:
+                                _vm.isLoading ||
+                                !_vm.isSalable ||
+                                !_vm.allVariationsSelected
+                            },
+                            on: {
+                              "quantity-change": _vm.updateQuantity,
+                              "out-of-stock": _vm.handleButtonState
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._ssrNode(" "),
+                      !_vm.allVariationsSelected || !_vm.isSalable
+                        ? _c(
+                            "button",
+                            {
+                              directives: [
+                                { name: "tooltip", rawName: "v-tooltip" }
+                              ],
+                              staticClass: "btn btn-block btn-bkm disabled",
+                              class: _vm.buttonClasses,
+                              style: _vm.paddingInlineStyles,
+                              attrs: {
+                                "data-toggle": "tooltip",
+                                "data-placement": "top",
+                                title: _vm.$translate(
+                                  "Ceres::Template.singleItemPleaseSelectValidVariation"
+                                )
+                              }
+                            },
+                            [
+                              _vm._ssrNode(
+                                '<i aria-hidden="true" class="fa fa-shopping-cart"></i>' +
+                                  _vm._ssrEscape(
+                                    "\n                        " +
+                                      _vm._s(
+                                        _vm.$translate(
+                                          "Ceres::Template.singleItemAddToBasket"
+                                        )
+                                      ) +
+                                      "\n                    "
+                                  )
+                              )
+                            ],
+                            2
+                          )
+                        : !_vm.buttonLockState
+                        ? _vm._ssrNode(
+                            "<button" +
+                              _vm._ssrAttr(
+                                "disabled",
+                                _vm.isLoading || !_vm.hasPrice
+                              ) +
+                              _vm._ssrClass(
+                                "btn btn-block btn-bkm",
+                                _vm.buttonClasses
+                              ) +
+                              _vm._ssrStyle(
+                                null,
+                                _vm.paddingInlineStyles,
+                                null
+                              ) +
+                              '><i aria-hidden="true" class="fa fa-shopping-cart"></i> <span>' +
                               _vm._ssrEscape(
-                                "\n                " +
+                                "\n                        " +
                                   _vm._s(
                                     _vm.$translate(
                                       "Ceres::Template.singleItemAddToBasket"
                                     )
                                   ) +
-                                  "\n            "
+                                  "\n                        "
+                              ) +
+                              "</span></button>"
+                          )
+                        : _c(
+                            "button",
+                            {
+                              directives: [
+                                { name: "tooltip", rawName: "v-tooltip" }
+                              ],
+                              staticClass: "btn btn-block btn-bkm disabled",
+                              class: _vm.buttonClasses,
+                              style: _vm.paddingInlineStyles,
+                              attrs: {
+                                "data-toggle": "tooltip",
+                                "data-placement": "top",
+                                title: _vm._f(
+                                  "translate"
+                                )("Ceres::Template.singleItemQuantityMax", {
+                                  max: _vm.item.variation.maximumOrderQuantity
+                                })
+                              }
+                            },
+                            [
+                              _vm._ssrNode(
+                                '<i aria-hidden="true" class="fa fa-shopping-cart"></i>' +
+                                  _vm._ssrEscape(
+                                    "\n                        " +
+                                      _vm._s(
+                                        _vm.$translate(
+                                          "Ceres::Template.singleItemAddToBasket"
+                                        )
+                                      ) +
+                                      "\n                    "
+                                  )
                               )
+                            ]
                           )
-                        ],
-                        2
-                      )
-                    : !_vm.buttonLockState
-                    ? _vm._ssrNode(
-                        "<button" +
-                          _vm._ssrAttr(
-                            "disabled",
-                            _vm.isLoading || !_vm.hasPrice
-                          ) +
-                          _vm._ssrClass(
-                            "btn btn-block btn-primary btn-appearance",
-                            _vm.buttonClasses
-                          ) +
-                          _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
-                          ">",
-                        "</button>",
-                        [
-                          _c("icon", {
-                            attrs: {
-                              icon: "shopping-cart",
-                              loading: _vm.isLoading
-                            }
-                          }),
-                          _vm._ssrNode(
-                            _vm._ssrEscape(
-                              "\n                " +
-                                _vm._s(
-                                  _vm.$translate(
-                                    "Ceres::Template.singleItemAddToBasket"
-                                  )
-                                ) +
-                                "\n            "
-                            )
-                          )
-                        ],
-                        2
-                      )
-                    : _c(
-                        "button",
-                        {
-                          directives: [
-                            { name: "tooltip", rawName: "v-tooltip" }
-                          ],
-                          staticClass:
-                            "btn btn-block btn-primary btn-appearance disabled",
-                          class: _vm.buttonClasses,
-                          style: _vm.paddingInlineStyles,
-                          attrs: {
-                            "data-toggle": "tooltip",
-                            "data-placement": "top",
-                            title: _vm._f(
-                              "translate"
-                            )("Ceres::Template.singleItemQuantityMax", {
-                              max: _vm.maximumQuantity
-                            })
-                          }
-                        },
-                        [
-                          _c("icon", {
-                            attrs: {
-                              icon: "shopping-cart",
-                              waiting: _vm.isLoading
-                            }
-                          }),
-                          _vm._ssrNode(
-                            _vm._ssrEscape(
-                              "\n                " +
-                                _vm._s(
-                                  _vm.$translate(
-                                    "Ceres::Template.singleItemAddToBasket"
-                                  )
-                                ) +
-                                "\n            "
-                            )
-                          )
-                        ],
-                        2
-                      )
-                ],
-                2
+                    ],
+                    2
+                  )
+                ]
               )
-            ]
-          )
+            ])
+          ])
         : _vm._e(),
       _vm._ssrNode(" "),
       !_vm.showQuantity && !_vm.useLargeScale
-        ? _vm._ssrNode(
-            "<div" +
-              _vm._ssrClass("d-inline", { "d-lg-none": !_vm.isWishList }) +
-              ">",
-            "</div>",
-            [
-              _vm._ssrNode(
-                '<div role="group" aria-label="Thumb Control" class="btn-group">',
-                "</div>",
-                [
-                  _vm.canBeAddedToBasket
-                    ? _vm._ssrNode(
-                        '<button type="button"' +
-                          _vm._ssrClass(
-                            "btn btn-primary btn-appearance mobile-width-button",
-                            { "no-pointer-events": _vm.isLoading }
-                          ) +
-                          ">",
-                        "</button>",
-                        [
-                          _c("icon", {
-                            staticClass: "fa-lg mobile-icon-right",
-                            attrs: {
-                              icon: "shopping-cart",
-                              loading: _vm.isLoading
-                            }
-                          }),
-                          _vm._ssrNode(
-                            _vm._ssrEscape(
-                              "\n                " +
-                                _vm._s(
-                                  _vm.$translate(
-                                    "Ceres::Template.singleItemAddToBasket"
-                                  )
-                                ) +
-                                "\n            "
-                            )
-                          )
-                        ],
-                        2
-                      )
-                    : _vm._ssrNode(
-                        '<button type="button" class="btn btn-primary btn-appearance mobile-width-button"><i aria-hidden="true" class="fa fa-arrow-right fa-lg d-none d-sm-block"></i>' +
+        ? _vm._ssrNode('<div class="d-inline">', "</div>", [
+            _vm._ssrNode(
+              '<div role="group" aria-label="Thumb Control" class="btn-group">',
+              "</div>",
+              [
+                _vm.canBeAddedToBasket
+                  ? _vm._ssrNode(
+                      '<button type="button"' +
+                        _vm._ssrClass(
+                          "btn btn-bkm-inverted btn-appearance mobile-width-button",
+                          { "no-pointer-events": _vm.isLoading }
+                        ) +
+                        ">",
+                      "</button>",
+                      [
+                        _c("icon", {
+                          staticClass: "fa-lg mobile-icon-right",
+                          attrs: {
+                            icon: "shopping-cart",
+                            loading: _vm.isLoading
+                          }
+                        }),
+                        _vm._ssrNode(
                           _vm._ssrEscape(
-                            "\n                " +
+                            "\n                    " +
                               _vm._s(
-                                _vm.$translate("Ceres::Template.itemShowItem")
+                                _vm.$translate(
+                                  "Ceres::Template.singleItemAddToBasket"
+                                )
                               ) +
-                              "\n            "
-                          ) +
-                          "</button>"
-                      )
-                ]
-              )
-            ]
-          )
+                              "\n                "
+                          )
+                        )
+                      ],
+                      2
+                    )
+                  : _vm._e(),
+                _vm._ssrNode(
+                  " " +
+                    (!_vm.canBeAddedToBasket
+                      ? '<button type="button" class="btn btn-bkm-inverted btn-appearance mobile-width-button"><i aria-hidden="true" class="fa fa-arrow-right fa-lg d-none d-sm-block"></i>' +
+                        _vm._ssrEscape(
+                          "\n                    " +
+                            _vm._s(
+                              _vm.$translate("Ceres::Template.itemShowItem")
+                            ) +
+                            "\n                "
+                        ) +
+                        "</button>"
+                      : "<!---->")
+                )
+              ],
+              2
+            )
+          ])
         : _vm._e()
     ],
     2
@@ -41607,7 +41309,7 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "basket-preview-wrapper h-100",
+      staticClass: "basket-preview-wrapper bkr-cc h-100",
       class: {
         empty: !_vm.basketItems.length,
         "open-hover": _vm.hover,
@@ -41621,7 +41323,7 @@ var render = function() {
           "</div>",
           [
             _vm._ssrNode(
-              '<header class="basket-preview-header border-bottom p-3">',
+              '<header class="basket-preview-header p-2">',
               "</header>",
               [
                 _vm._ssrNode(
@@ -41641,10 +41343,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "close",
-                    attrs: {
-                      type: "button",
-                      "aria-label": _vm.$translate("Ceres::Template.closeIcon")
-                    }
+                    attrs: { type: "button", "aria-label": "Close" }
                   },
                   [_vm._ssrNode('<span aria-hidden="true">×</span>')]
                 )
@@ -41672,114 +41371,67 @@ var render = function() {
               '<div class="basket-preview-content d-flex flex-fill">',
               "</div>",
               [
-                _c("basket-list", {
-                  staticClass:
-                    "item-list d-flex flex-fill flex-nowrap flex-column overflow-auto px-3",
-                  attrs: { "is-preview": true },
-                  scopedSlots: _vm._u(
-                    [
-                      {
-                        key: "before-basket-item",
-                        fn: function() {
-                          return [_vm._t("before-basket-item")]
-                        },
-                        proxy: true
-                      },
-                      {
-                        key: "after-basket-item",
-                        fn: function() {
-                          return [_vm._t("after-basket-item")]
-                        },
-                        proxy: true
+                _c(
+                  "basket-list",
+                  _vm._b(
+                    {
+                      staticClass:
+                        "item-list d-flex flex-fill flex-nowrap flex-column overflow-auto px-3 py-2",
+                      attrs: {
+                        cdoy: _vm.$attrs.cdoy,
+                        v: _vm.basket.itemSum,
+                        cc: _vm.$store.state.basket.data.couponCode,
+                        "is-preview": true
                       }
-                    ],
-                    null,
-                    true
+                    },
+                    "basket-list",
+                    _vm.$attrs,
+                    false
                   )
-                }),
+                ),
                 _vm._ssrNode(" "),
                 _vm._ssrNode(
                   '<div class="totals d-flex flex-nowrap flex-column px-3 pt-3">',
                   "</div>",
                   [
-                    _vm.showShippingCountrySelect
-                      ? _c("shipping-country-select", {
+                    _c("coupon", { staticClass: "mb-3" }),
+                    _vm._ssrNode(" "),
+                    _vm._ssrNode(
+                      '<div class="toggleSelect w-100">',
+                      "</div>",
+                      [
+                        _vm.showShippingCountrySelect
+                          ? _c("shipping-country-select", {
+                              attrs: {
+                                "basket-select": true,
+                                "open-basket-preview": true
+                              }
+                            })
+                          : _vm._e()
+                      ],
+                      1
+                    ),
+                    _vm._ssrNode(" "),
+                    _vm._ssrNode(
+                      "<div>",
+                      "</div>",
+                      [
+                        _c("basket-totals", {
                           attrs: {
-                            "basket-select": true,
-                            "open-basket-preview": true
+                            preview: "true",
+                            "visible-fields": [
+                              "basketValueGross",
+                              "promotionCoupon",
+                              "shippingCostsGross",
+                              "additionalCosts",
+                              "salesCoupon",
+                              "totalSumGross"
+                            ]
                           }
                         })
-                      : _vm._e(),
-                    _vm._ssrNode(" <hr> "),
-                    _vm._t("before-basket-totals"),
-                    _vm._ssrNode(" "),
-                    _c("basket-totals", {
-                      attrs: { "visible-fields": _vm.visibleFields },
-                      scopedSlots: _vm._u(
-                        [
-                          {
-                            key: "before-item-sum",
-                            fn: function() {
-                              return [_vm._t("before-item-sum")]
-                            },
-                            proxy: true
-                          },
-                          {
-                            key: "after-item-sum",
-                            fn: function() {
-                              return [_vm._t("after-item-sum")]
-                            },
-                            proxy: true
-                          },
-                          {
-                            key: "before-shipping-costs",
-                            fn: function() {
-                              return [_vm._t("before-shipping-costs")]
-                            },
-                            proxy: true
-                          },
-                          {
-                            key: "after-shipping-costs",
-                            fn: function() {
-                              return [_vm._t("after-shipping-costs")]
-                            },
-                            proxy: true
-                          },
-                          {
-                            key: "before-total-sum",
-                            fn: function() {
-                              return [_vm._t("before-total-sum")]
-                            },
-                            proxy: true
-                          },
-                          {
-                            key: "before-vat",
-                            fn: function() {
-                              return [_vm._t("before-vat")]
-                            },
-                            proxy: true
-                          },
-                          {
-                            key: "after-vat",
-                            fn: function() {
-                              return [_vm._t("after-vat")]
-                            },
-                            proxy: true
-                          },
-                          {
-                            key: "after-total-sum",
-                            fn: function() {
-                              return [_vm._t("after-total-sum")]
-                            },
-                            proxy: true
-                          }
-                        ],
-                        null,
-                        true
-                      )
-                    }),
-                    _vm._ssrNode(" "),
-                    _vm._t("after-basket-totals"),
+                      ],
+                      1
+                    ),
                     _vm._ssrNode(" "),
                     _vm._ssrNode(
                       '<div class="basket-preview-footer d-flex pb-3">',
@@ -41794,7 +41446,7 @@ var render = function() {
                                 rawName: "v-waiting-animation-infinite"
                               }
                             ],
-                            staticClass: "btn btn-outline-primary btn-block",
+                            staticClass: "btn btn-bkm-inverted btn-block",
                             attrs: {
                               href: _vm.$ceres.urls.basket,
                               rel: "nofollow",
@@ -41805,11 +41457,11 @@ var render = function() {
                             _vm._ssrNode(
                               '<i class="fa fa-shopping-cart"></i>' +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                               " +
                                     _vm._s(
                                       _vm.$translate("Ceres::Template.basket")
                                     ) +
-                                    "\n                        "
+                                    "\n                           "
                                 )
                             )
                           ]
@@ -41826,7 +41478,7 @@ var render = function() {
                                 rawName: "v-waiting-animation-infinite"
                               }
                             ],
-                            staticClass: "btn btn-primary btn-block",
+                            staticClass: "btn btn-bkm btn-block",
                             attrs: {
                               href: _vm.$ceres.urls.checkout,
                               rel: "nofollow",
@@ -41839,13 +41491,13 @@ var render = function() {
                             _vm._ssrNode(
                               '<i aria-hidden="true" class="fa fa-arrow-right"></i>' +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                               " +
                                     _vm._s(
                                       _vm.$translate(
                                         "Ceres::Template.basketCheckout"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                           "
                                 )
                             )
                           ]
@@ -41907,18 +41559,31 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "cmp-totals" },
+    {
+      staticClass: "bkr-cc cmp cmp-totals basketTotals",
+      class: { preview: _vm.$attrs.preview }
+    },
     [
       _vm._ssrNode(
-        '<div class="h3">' +
-          _vm._ssrEscape(_vm._s(_vm.$translate("Ceres::Template.basketSum"))) +
-          "</div> "
+        (!_vm.$attrs.preview
+          ? '<div class="h3">' +
+            _vm._ssrEscape(
+              _vm._s(_vm.$translate("Ceres::Template.basketSum"))
+            ) +
+            "</div>"
+          : "<!---->") +
+          " " +
+          (!_vm.$attrs.preview
+            ? '<button onclick="$(\'.net\').slideToggle();" class="btn btn-xs btn-default">Details</button>'
+            : "<!---->") +
+          " "
       ),
       _vm._ssrNode(
         "<div" +
-          _vm._ssrClass("component-loading with-icon refreshing", {
-            "is-loading": _vm.isBasketLoading
-          }) +
+          _vm._ssrClass(
+            "component-loading with-icon refreshing split-totals-height",
+            { isLoading: _vm.isBasketLoading }
+          ) +
           ">",
         "</div>",
         [
@@ -41929,59 +41594,20 @@ var render = function() {
               _vm._t("before-item-sum"),
               _vm._ssrNode(
                 " " +
-                  ((_vm.visibleFields.includes("additionalCosts") ||
-                    _vm.visibleFields.includes("basket.additional_costs")) &&
-                  _vm.displayedProperties.length
-                    ? _vm._ssrList(_vm.displayedProperties, function(property) {
-                        return (
-                          '<dt data-testing="additionalcost-with-tax"' +
-                          _vm._ssrClass(null, {
-                            "font-weight-bold": _vm.showNetPrices
-                          }) +
-                          ">" +
-                          _vm._ssrEscape(
-                            "\n                        " +
-                              _vm._s(property.name) +
-                              "\n                    "
-                          ) +
-                          "</dt><dd" +
-                          _vm._ssrClass(null, {
-                            "font-weight-bold": _vm.showNetPrices
-                          }) +
-                          ">" +
-                          _vm._ssrEscape(
-                            "\n                        " +
-                              _vm._s(_vm._f("currency")(property.price)) +
-                              "\n                    "
-                          ) +
-                          "</dd>"
-                        )
-                      })
-                    : "<!---->") +
-                  " " +
-                  (_vm.visibleFields.includes("basketValueNet") ||
-                  _vm.visibleFields.includes("basket.value_of_items_net")
-                    ? "<dt" +
-                      _vm._ssrClass(null, {
-                        "font-weight-bold": _vm.showNetPrices
-                      }) +
-                      ">" +
+                  (_vm.visibleFields.includes("basketValueNet")
+                    ? '<div class="net"><dt>' +
                       _vm._ssrEscape(
-                        "\n                    " +
+                        "\n                        " +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketValue")
                           ) +
-                          " " +
+                          " (" +
                           _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          "\n                "
+                          ")\n                    "
                       ) +
-                      '</dt><dd data-testing="item-sum-net"' +
-                      _vm._ssrClass(null, {
-                        "font-weight-bold": _vm.showNetPrices
-                      }) +
-                      ">" +
+                      "</dt><dd>" +
                       _vm._ssrEscape(
-                        "\n                    " +
+                        "\n                        " +
                           _vm._s(
                             _vm._f("currency")(
                               _vm.calculateBaseValue(
@@ -41990,34 +41616,25 @@ var render = function() {
                               )
                             )
                           ) +
-                          "\n                "
+                          "\n                    "
                       ) +
-                      "</dd>"
+                      "</dd></div>"
                     : "<!---->") +
                   " " +
-                  (_vm.visibleFields.includes("basketValueGross") ||
-                  _vm.visibleFields.includes("basket.value_of_items_gross")
-                    ? "<dt" +
-                      _vm._ssrClass(null, {
-                        "font-weight-bold": !_vm.showNetPrices
-                      }) +
-                      ">" +
+                  (_vm.visibleFields.includes("basketValueGross")
+                    ? "<dt>" +
                       _vm._ssrEscape(
                         "\n                    " +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketValue")
                           ) +
-                          " " +
+                          " (" +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketGross")
                           ) +
-                          "\n                "
+                          ")\n                "
                       ) +
-                      '</dt><dd data-testing="item-sum"' +
-                      _vm._ssrClass(null, {
-                        "font-weight-bold": !_vm.showNetPrices
-                      }) +
-                      ">" +
+                      "</dt><dd>" +
                       _vm._ssrEscape(
                         "\n                    " +
                           _vm._s(
@@ -42033,8 +41650,31 @@ var render = function() {
                       "</dd>"
                     : "<!---->") +
                   " " +
-                  ((_vm.visibleFields.includes("rebate") ||
-                    _vm.visibleFields.includes("basket.rebate")) &&
+                  ((_vm.visibleFields.includes("additionalCosts") ||
+                    _vm.visibleFields.includes("basket.additional_costs")) &&
+                  _vm.displayedProperties.length
+                    ? _vm._ssrList(_vm.displayedProperties, function(property) {
+                        return (
+                          '<dt data-testing="additionalcost-with-tax"' +
+                          _vm._ssrClass("muted-properties", {
+                            "font-weight-bold": _vm.showNetPrices
+                          }) +
+                          ">\n                     <i>" +
+                          _vm._ssrEscape("davon " + _vm._s(property.name)) +
+                          "</i></dt><dd" +
+                          _vm._ssrClass("muted-properties", {
+                            "font-weight-bold": _vm.showNetPrices
+                          }) +
+                          "><i>" +
+                          _vm._ssrEscape(
+                            _vm._s(_vm._f("currency")(property.price))
+                          ) +
+                          "</i></dd>"
+                        )
+                      })
+                    : "<!---->") +
+                  " " +
+                  (_vm.visibleFields.includes("rebate") &&
                   _vm.basket.basketRebate
                     ? '<dt class="rebate-hint">' +
                       _vm._ssrEscape(
@@ -42050,11 +41690,6 @@ var render = function() {
                           _vm._ssrEscape(
                             "\n                    " +
                               _vm._s(
-                                _vm.$translate(
-                                  "Ceres::Template.basketRebateSign"
-                                )
-                              ) +
-                              _vm._s(
                                 _vm._f("currency")(
                                   _vm.calculateBaseValue(
                                     _vm.basket.itemSum,
@@ -42069,11 +41704,6 @@ var render = function() {
                           _vm._ssrEscape(
                             "\n                    " +
                               _vm._s(
-                                _vm.$translate(
-                                  "Ceres::Template.basketRebateSign"
-                                )
-                              ) +
-                              _vm._s(
                                 _vm._f("currency")(
                                   _vm.calculateBaseValue(
                                     _vm.basket.itemSumNet,
@@ -42084,51 +41714,35 @@ var render = function() {
                               "\n                "
                           ) +
                           "</dd>") +
-                      " <dt" +
-                      _vm._ssrClass(null, {
-                        "font-weight-bold": _vm.showNetPrices
-                      }) +
-                      ">" +
+                      " <dt>" +
                       _vm._ssrEscape(
                         "\n                    " +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketSubTotal")
                           ) +
-                          " " +
+                          " (" +
                           _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          "\n                "
+                          ")\n                "
                       ) +
-                      "</dt><dd" +
-                      _vm._ssrClass(null, {
-                        "font-weight-bold": _vm.showNetPrices
-                      }) +
-                      ">" +
+                      "</dt><dd>" +
                       _vm._ssrEscape(
                         "\n                    " +
                           _vm._s(_vm._f("currency")(_vm.basket.itemSumNet)) +
                           "\n                "
                       ) +
-                      "</dd> <dt" +
-                      _vm._ssrClass(null, {
-                        "font-weight-bold": !_vm.showNetPrices
-                      }) +
-                      ">" +
+                      "</dd> <dt>" +
                       _vm._ssrEscape(
                         "\n                    " +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketSubTotal")
                           ) +
-                          " " +
+                          " (" +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketGross")
                           ) +
-                          "\n                "
+                          ")\n                "
                       ) +
-                      "</dt><dd" +
-                      _vm._ssrClass(null, {
-                        "font-weight-bold": !_vm.showNetPrices
-                      }) +
-                      ">" +
+                      "</dt><dd>" +
                       _vm._ssrEscape(
                         "\n                    " +
                           _vm._s(_vm._f("currency")(_vm.basket.itemSum)) +
@@ -42143,13 +41757,8 @@ var render = function() {
               _vm._t("before-shipping-costs"),
               _vm._ssrNode(
                 " " +
-                  (_vm.visibleFields.includes("shippingCostsNet") ||
-                  _vm.visibleFields.includes("basket.shipping_costs_net")
-                    ? "<dt" +
-                      _vm._ssrClass(null, {
-                        "font-weight-bold": _vm.showNetPrices
-                      }) +
-                      ">" +
+                  (_vm.visibleFields.includes("shippingCostsNet")
+                    ? '<div class="net"><dt>' +
                       _vm._ssrEscape(
                         "\n                    " +
                           _vm._s(
@@ -42157,15 +41766,11 @@ var render = function() {
                               "Ceres::Template.basketShippingCosts"
                             )
                           ) +
-                          " " +
+                          " (" +
                           _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          "\n                "
+                          ")\n                "
                       ) +
-                      '</dt><dd data-testing="shipping-amount-net"' +
-                      _vm._ssrClass(null, {
-                        "font-weight-bold": _vm.showNetPrices
-                      }) +
-                      ">" +
+                      "</dt><dd>" +
                       _vm._ssrEscape(
                         "\n                    " +
                           _vm._s(
@@ -42173,16 +41778,11 @@ var render = function() {
                           ) +
                           "\n                "
                       ) +
-                      "</dd>"
+                      "</dd></div>"
                     : "<!---->") +
                   " " +
-                  (_vm.visibleFields.includes("shippingCostsGross") ||
-                  _vm.visibleFields.includes("basket.shipping_costs_gross")
-                    ? "<dt" +
-                      _vm._ssrClass(null, {
-                        "font-weight-bold": !_vm.showNetPrices
-                      }) +
-                      ">" +
+                  (_vm.visibleFields.includes("shippingCostsGross")
+                    ? "<dt>" +
                       _vm._ssrEscape(
                         "\n                    " +
                           _vm._s(
@@ -42190,17 +41790,13 @@ var render = function() {
                               "Ceres::Template.basketShippingCosts"
                             )
                           ) +
-                          " " +
+                          " (" +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketGross")
                           ) +
-                          "\n                "
+                          ")\n                "
                       ) +
-                      '</dt><dd data-testing="shipping-amount"' +
-                      _vm._ssrClass(null, {
-                        "font-weight-bold": !_vm.showNetPrices
-                      }) +
-                      ">" +
+                      "</dt><dd>" +
                       _vm._ssrEscape(
                         "\n                    " +
                           _vm._s(
@@ -42215,11 +41811,10 @@ var render = function() {
               _vm._t("after-shipping-costs"),
               _vm._ssrNode(
                 " " +
-                  ((_vm.visibleFields.includes("promotionCoupon") ||
-                    _vm.visibleFields.includes("basket.promotion_coupon")) &&
+                  (_vm.visibleFields.includes("promotionCoupon") &&
                   _vm.basket.couponCode &&
                   _vm.basket.couponCampaignType === "promotion"
-                    ? '<dt class="font-weight-bold">' +
+                    ? "<hr> <dt>" +
                       _vm._ssrEscape(
                         "\n                    " +
                           _vm._s(
@@ -42227,7 +41822,7 @@ var render = function() {
                           ) +
                           "\n                "
                       ) +
-                      '</dt><dd data-testing="promotion-coupon" class="font-weight-bold">' +
+                      "</dt><dd>" +
                       _vm._ssrEscape(
                         "\n                    " +
                           _vm._s(
@@ -42237,164 +41832,87 @@ var render = function() {
                       ) +
                       "</dd>"
                     : "<!---->") +
-                  " " +
-                  (_vm.visibleFields.includes("subAmount") ||
-                  _vm.visibleFields.includes("basket.order_total_net") ||
-                  _vm.visibleFields.includes("vats") ||
-                  _vm.visibleFields.includes("basket.vat")
-                    ? "<hr>"
-                    : "<!---->") +
                   " "
               ),
-              _vm._t("before-total-sum"),
               _vm._ssrNode(
-                " " +
-                  (_vm.visibleFields.includes("subAmount") ||
-                  _vm.visibleFields.includes("basket.order_total_net")
-                    ? "<dt" +
-                      _vm._ssrClass(null, {
-                        "font-weight-bold": _vm.showNetPrices
-                      }) +
-                      ">" +
-                      _vm._ssrEscape(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.basketSubAmount")
-                          ) +
-                          " " +
-                          _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          "\n                "
-                      ) +
-                      '</dt><dd data-testing="basket-sub-amount"' +
-                      _vm._ssrClass(null, {
-                        "font-weight-bold": _vm.showNetPrices
-                      }) +
-                      ">" +
-                      _vm._ssrEscape(
-                        "\n                    " +
-                          _vm._s(_vm._f("currency")(_vm.basket.subAmount)) +
-                          "\n                "
-                      ) +
-                      "</dd>"
-                    : "<!---->") +
-                  " "
-              ),
-              _vm._t("before-vat"),
-              _vm._ssrNode(
-                " " +
-                  _vm._ssrList(_vm.basket.totalVats, function(totalVat) {
-                    return _vm.visibleFields.includes("vats") ||
-                      _vm.visibleFields.includes("basket.vat")
-                      ? "<dt>" +
+                '<div class="net">',
+                "</div>",
+                [
+                  _vm._ssrNode("<hr> "),
+                  _vm._t("before-total-sum"),
+                  _vm._ssrNode(
+                    " " +
+                      (_vm.visibleFields.includes("totalSumNet")
+                        ? "<dt>" +
                           _vm._ssrEscape(
-                            "\n                    " +
+                            "\n                        " +
                               _vm._s(
-                                _vm.$translate("Ceres::Template.basketVAT")
+                                _vm.$translate("Ceres::Template.basketTotalSum")
                               ) +
-                              " " +
-                              _vm._s(totalVat.vatValue) +
-                              "%\n                "
+                              " (" +
+                              _vm._s(
+                                _vm.$translate("Ceres::Template.basketNet")
+                              ) +
+                              ")\n                    "
                           ) +
-                          '</dt><dd data-testing="vat-amount">' +
-                          _vm._ssrEscape(
-                            "\n                    " +
-                              _vm._s(_vm._f("currency")(totalVat.vatAmount)) +
-                              "\n                "
-                          ) +
-                          "</dd>"
-                      : "<!---->"
-                  }) +
-                  " "
-              ),
-              _vm._t("after-vat"),
-              _vm._ssrNode(
-                " " +
-                  ((_vm.visibleFields.includes("additionalCosts") ||
-                    _vm.visibleFields.includes("basket.additional_costs")) &&
-                  _vm.displayedPropertiesWithoutTax.length
-                    ? _vm._ssrList(_vm.displayedPropertiesWithoutTax, function(
-                        property
-                      ) {
-                        return (
-                          '<dt data-testing="additionalcost-without-tax"' +
-                          _vm._ssrClass(null, {
-                            "font-weight-bold": _vm.showNetPrices
-                          }) +
-                          ">" +
+                          "</dt><dd>" +
                           _vm._ssrEscape(
                             "\n                        " +
-                              _vm._s(property.name) +
-                              "\n                    "
-                          ) +
-                          "</dt><dd" +
-                          _vm._ssrClass(null, {
-                            "font-weight-bold": _vm.showNetPrices
-                          }) +
-                          ">" +
-                          _vm._ssrEscape(
-                            "\n                        " +
-                              _vm._s(_vm._f("currency")(property.price)) +
+                              _vm._s(
+                                _vm._f("currency")(_vm.basket.basketAmountNet)
+                              ) +
                               "\n                    "
                           ) +
                           "</dd>"
-                        )
+                        : "<!---->") +
+                      " "
+                  ),
+                  _vm._t("before-vat"),
+                  _vm._ssrNode(
+                    " " +
+                      _vm._ssrList(_vm.basket.totalVats, function(totalVat) {
+                        return _vm.visibleFields.includes("vats")
+                          ? '<div class="vatTotals"><dt>' +
+                              _vm._ssrEscape(
+                                "\n                        " +
+                                  _vm._s(
+                                    _vm.$translate("Ceres::Template.basketVAT")
+                                  ) +
+                                  " " +
+                                  _vm._s(totalVat.vatValue) +
+                                  "%\n                    "
+                              ) +
+                              "</dt><dd>" +
+                              _vm._ssrEscape(
+                                "\n                        " +
+                                  _vm._s(
+                                    _vm._f("currency")(totalVat.vatAmount)
+                                  ) +
+                                  "\n                    "
+                              ) +
+                              "</dd></div>"
+                          : "<!---->"
                       })
-                    : "<!---->") +
-                  ' <div class="totalSum"><hr> ' +
-                  (_vm.visibleFields.includes("totalSumNet") ||
-                  _vm.visibleFields.includes("basket.order_total_net")
-                    ? "<dt" +
-                      _vm._ssrClass(null, {
-                        "font-weight-bold": _vm.showNetPrices
-                      }) +
-                      ">" +
+                  )
+                ],
+                2
+              ),
+              _vm._ssrNode(
+                ' <div class="totalSum"><hr> ' +
+                  (_vm.visibleFields.includes("totalSumGross")
+                    ? "<dt>" +
                       _vm._ssrEscape(
                         "\n                        " +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketTotalSum")
                           ) +
-                          " " +
-                          _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          "\n                    "
-                      ) +
-                      '</dt><dd data-testing="basket-amount-net"' +
-                      _vm._ssrClass(null, {
-                        "font-weight-bold": _vm.showNetPrices
-                      }) +
-                      ">" +
-                      _vm._ssrEscape(
-                        "\n                        " +
-                          _vm._s(
-                            _vm._f("currency")(_vm.basket.basketAmountNet)
-                          ) +
-                          "\n                    "
-                      ) +
-                      "</dd>"
-                    : "<!---->") +
-                  " " +
-                  (_vm.visibleFields.includes("totalSumGross") ||
-                  _vm.visibleFields.includes("basket.order_total_gross")
-                    ? "<dt" +
-                      _vm._ssrClass(null, {
-                        "font-weight-bold": !_vm.showNetPrices
-                      }) +
-                      ">" +
-                      _vm._ssrEscape(
-                        "\n                        " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.basketTotalSum")
-                          ) +
-                          " " +
+                          " (" +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketGross")
                           ) +
-                          "\n                    "
+                          ")\n                    "
                       ) +
-                      '</dt><dd data-testing="basket-amount"' +
-                      _vm._ssrClass(null, {
-                        "font-weight-bold": !_vm.showNetPrices
-                      }) +
-                      ">" +
+                      "</dt><dd>" +
                       _vm._ssrEscape(
                         "\n                        " +
                           _vm._s(_vm._f("currency")(_vm.basket.basketAmount)) +
@@ -42403,19 +41921,15 @@ var render = function() {
                       "</dd>"
                     : "<!---->") +
                   " " +
-                  ((_vm.visibleFields.includes("salesCoupon") ||
-                    _vm.visibleFields.includes("basket.sales_coupon")) &&
+                  (_vm.visibleFields.includes("salesCoupon") &&
                   _vm.basket.couponCode &&
                   _vm.basket.couponCampaignType === "sales"
-                    ? '<dt class="font-weight-bold">' +
+                    ? "<dt>" +
                       _vm._ssrEscape(
                         "\n                        " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.basketCoupon")
-                          ) +
-                          "\n                    "
+                          _vm._s(_vm.$translate("Ceres::Template.basketCoupon"))
                       ) +
-                      '</dt><dd data-testing="sales-coupon" class="font-weight-bold">' +
+                      "</dt><dd>" +
                       _vm._ssrEscape(
                         "\n                        " +
                           _vm._s(
@@ -42426,10 +41940,9 @@ var render = function() {
                       "</dd>"
                     : "<!---->") +
                   " " +
-                  ((_vm.visibleFields.includes("openAmount") ||
-                    _vm.visibleFields.includes("basket.open_amount")) &&
+                  (_vm.visibleFields.includes("openAmount") &&
                   _vm.basket.couponCampaignType === "sales"
-                    ? '<dt class="font-weight-bold">' +
+                    ? "<dt>" +
                       _vm._ssrEscape(
                         "\n                        " +
                           _vm._s(
@@ -42437,7 +41950,7 @@ var render = function() {
                           ) +
                           "\n                    "
                       ) +
-                      '</dt><dd data-testing="open-amount" class="font-weight-bold">' +
+                      "</dt><dd>" +
                       _vm._ssrEscape(
                         "\n                        " +
                           _vm._s(_vm._f("currency")(_vm.basket.openAmount)) +
@@ -42452,16 +41965,6 @@ var render = function() {
             2
           )
         ]
-      ),
-      _vm._ssrNode(
-        " " +
-          (_vm.basket.isExportDelivery && _vm.deliveryExportTranslation
-            ? '<div class="alert alert-info w-100">' +
-              _vm._ssrEscape(
-                "\n        " + _vm._s(_vm.deliveryExportTranslation) + "\n    "
-              ) +
-              "</div>"
-            : "<!---->")
       )
     ],
     2
@@ -42491,7 +41994,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "cmp" },
+    { staticClass: "cmp bkr-cc" },
     [
       _vm._ssrNode(
         (_vm.isCheckoutReadonly &&
@@ -42532,7 +42035,7 @@ var render = function() {
                       "disabled",
                       _vm.waiting || _vm.isCheckoutReadonly
                     ) +
-                    ' data-testing="coupon-redeem" class="btn btn-medium btn-primary btn-appearance">',
+                    ' data-testing="coupon-redeem" class="btn btn-medium btn-bkm btn-appearance">',
                   "</button>",
                   [
                     _c("icon", {
@@ -42645,6 +42148,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "bkr-cc" },
     [
       _vm._ssrNode(
         "<div>",
@@ -42733,7 +42237,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "basket-list-item py-3" },
+    {
+      staticClass: "basket-list-item py-3 bkr-cc",
+      class: "item_" + _vm.basketItem.variation.data.item.id
+    },
     [
       _vm._t("before-basket-item"),
       _vm._ssrNode(" "),
@@ -42762,8 +42269,7 @@ var render = function() {
                         "picture-class": "d-block mw-100 mh-100",
                         "image-url": _vm.image,
                         alt: _vm.altText,
-                        title: _vm.itemName,
-                        "data-testing": "basket-item-img"
+                        title: _vm.itemName
                       }
                     })
                   : _vm._e()
@@ -42780,225 +42286,252 @@ var render = function() {
                 '<div class="meta-container-wrapper-inner">',
                 "</div>",
                 [
-                  _vm._ssrNode('<div class="meta-container">', "</div>", [
-                    _vm._ssrNode(
-                      '<div class="position-relative w-100">',
-                      "</div>",
-                      [
-                        _vm._ssrNode(
-                          "<a" +
-                            _vm._ssrAttr(
-                              "href",
-                              _vm._f("itemURL")(_vm.basketItem.variation.data)
-                            ) +
-                            ' data-testing="basket-item-name" class="item-name text-primary text-appearance small font-weight-bold text-break">' +
-                            _vm._ssrEscape(
-                              "\n                            " +
-                                _vm._s(
-                                  _vm._f("itemName")(
-                                    _vm.basketItem.variation.data
-                                  )
-                                ) +
-                                "\n                        "
-                            ) +
-                            '</a> <div class="item-base-price small">' +
-                            _vm._ssrEscape(
-                              "\n                            " +
-                                _vm._s(_vm._f("currency")(_vm.unitPrice)) +
-                                "\n                        "
-                            ) +
-                            "</div> "
-                        ),
-                        _c("item-bundle", {
-                          attrs: {
-                            "bundle-type":
-                              _vm.basketItem.variation.data.variation
-                                .bundleType,
-                            "bundle-components":
-                              _vm.basketItem.variation.data.bundleComponents
-                          }
-                        }),
-                        _vm._ssrNode(
-                          " " +
-                            (!(
-                              _vm.basketItem.variation.data.unit
-                                .unitOfMeasurement === "C62" &&
-                              _vm.basketItem.variation.data.unit.content === 1
-                            ) &&
-                            _vm.basketItem.variation.data.variation
-                              .mayShowUnitPrice
-                              ? '<div class="text-muted small"><div>' +
-                                _vm._ssrEscape(
-                                  "\n                                " +
-                                    _vm._s(_vm.basePrice) +
-                                    "\n                            "
-                                ) +
-                                "</div> <div><strong>" +
-                                _vm._ssrEscape(
-                                  _vm._s(
-                                    _vm.$translate(
-                                      "Ceres::Template.basketContent"
-                                    )
-                                  ) + ": "
-                                ) +
-                                "</strong>" +
-                                _vm._ssrEscape(
-                                  "\n                                " +
-                                    _vm._s(
-                                      _vm.basketItem.variation.data.unit.content
-                                    ) +
-                                    " " +
-                                    _vm._s(
-                                      _vm.basketItem.variation.data.unit.names
-                                        .name
-                                    ) +
-                                    "\n                            "
-                                ) +
-                                "</div></div>"
-                              : "<!---->") +
-                            " " +
-                            (_vm.basketItem.inputLength > 0 ||
-                            _vm.basketItem.inputWidth > 0
-                              ? '<div class="small"><div><strong>' +
-                                _vm._ssrEscape(
-                                  _vm._s(
-                                    _vm.$translate("Ceres::Template.itemInput")
-                                  ) +
-                                    " " +
-                                    _vm._s(
-                                      _vm._f("inputUnit")(_vm.basketItem, true)
-                                    ) +
-                                    ": "
-                                ) +
-                                "</strong>" +
-                                _vm._ssrEscape(
-                                  "\n                                " +
-                                    _vm._s(
-                                      _vm._f("inputUnit")(_vm.basketItem)
-                                    ) +
-                                    "\n                            "
-                                ) +
-                                "</div></div>"
-                              : "<!---->") +
-                            ' <div class="small">' +
-                            _vm._ssrList(
-                              _vm.basketItem.variation.data.attributes,
-                              function(attribute) {
-                                return (
-                                  "<div><strong>" +
-                                  _vm._ssrEscape(
-                                    _vm._s(attribute.attribute.names.name) +
-                                      ": "
-                                  ) +
-                                  "</strong> <span>" +
-                                  _vm._ssrEscape(
-                                    _vm._s(attribute.value.names.name)
-                                  ) +
-                                  "</span></div>"
-                                )
-                              }
-                            ) +
-                            '</div> <div class="text-muted small">' +
-                            _vm._ssrList(
-                              _vm.basketItem.variation.data.variationProperties,
-                              function(propertyGroup) {
-                                return _vm._ssrList(
-                                  propertyGroup.properties,
-                                  function(property) {
-                                    return (
-                                      "<div>" +
-                                      (propertyGroup.name
-                                        ? "<strong>" +
-                                          _vm._ssrEscape(
-                                            _vm._s(propertyGroup.name) + ": "
-                                          ) +
-                                          "</strong>"
-                                        : "<!---->") +
-                                      " <span>" +
-                                      _vm._ssrEscape(
-                                        _vm._s(property.names.name)
-                                      ) +
-                                      "</span> " +
-                                      (property.cast === "file"
-                                        ? "<span><a" +
-                                          _vm._ssrAttr(
-                                            "href",
-                                            _vm._f("propertyFileUrl")(
-                                              property.values.value
-                                            )
-                                          ) +
-                                          ' target="_blank">' +
-                                          _vm._s(property.values.value) +
-                                          "</a></span>"
-                                        : property.cast === "multiSelection" &&
-                                          property.values[0] !== undefined
-                                        ? '<ul class="pl-3">' +
-                                          _vm._ssrList(
-                                            property.values,
-                                            function(multiSelectProperty) {
-                                              return (
-                                                "<li>" +
-                                                _vm._ssrEscape(
-                                                  _vm._s(
-                                                    multiSelectProperty.value
-                                                  )
-                                                ) +
-                                                "</li>"
-                                              )
-                                            }
-                                          ) +
-                                          "</ul>"
-                                        : "<span>" +
-                                          _vm._s(property.values.value) +
-                                          "</span>") +
-                                      "</div>"
-                                    )
-                                  }
-                                )
-                              }
-                            ) +
-                            "</div>"
-                        )
-                      ],
-                      2
-                    )
-                  ]),
-                  _vm._ssrNode(" "),
                   _vm._ssrNode(
-                    '<div class="basket-item-container-right">',
+                    '<div class="meta-container d-flex">',
                     "</div>",
                     [
                       _vm._ssrNode(
-                        '<div class="qty-box-container">',
-                        "</div>",
-                        [
-                          _c("quantity-input", {
-                            attrs: {
-                              value: _vm.basketItem.quantity,
-                              waiting:
-                                _vm.isInputLocked || _vm.isCheckoutReadonly,
-                              min:
-                                _vm.basketItem.variation.data.variation
-                                  .minimumOrderQuantity,
-                              max:
-                                _vm.basketItem.variation.data.variation
-                                  .maximumOrderQuantity,
-                              interval:
-                                _vm.basketItem.variation.data.variation
-                                  .intervalOrderQuantity
-                            },
-                            on: { "quantity-change": _vm.updateQuantity }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._ssrNode(" "),
-                      _vm._ssrNode(
-                        '<div class="price-box text-right ml-2 mt-1">',
+                        '<div class="position-relative w-100">',
                         "</div>",
                         [
                           _vm._ssrNode(
-                            '<div class="item-total-price font-weight-bold text-nowrap">' +
+                            "<a" +
+                              _vm._ssrAttr(
+                                "href",
+                                _vm._f("itemURL")(_vm.basketItem.variation.data)
+                              ) +
+                              ' class="item-name text-primary text-appearance small font-weight-bold">' +
+                              _vm._ssrEscape(
+                                "\n                                " +
+                                  _vm._s(
+                                    _vm._f("itemName")(
+                                      _vm.basketItem.variation.data
+                                    )
+                                  ) +
+                                  "\n                            "
+                              ) +
+                              "</a> <div>" +
+                              (_vm.basketItem.variation.data.item.id == 500
+                                ? "<strong>Preis pro Baum: </strong>"
+                                : "<strong>Einzelpreis: </strong>") +
+                              " <span>" +
+                              _vm._ssrEscape(
+                                _vm._s(_vm._f("currency")(_vm.unitPrice))
+                              ) +
+                              "</span></div> " +
+                              (!(
+                                _vm.basketItem.variation.data.unit
+                                  .unitOfMeasurement === "C62" &&
+                                _vm.basketItem.variation.data.unit.content === 1
+                              ) &&
+                              _vm.basketItem.variation.data.variation
+                                .mayShowUnitPrice
+                                ? '<div class="text-muted small smallContent"><div><strong>' +
+                                  _vm._ssrEscape(
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.basketContent"
+                                      )
+                                    ) + ": "
+                                  ) +
+                                  "</strong>" +
+                                  _vm._ssrEscape(
+                                    "\n                                  " +
+                                      _vm._s(
+                                        _vm.basketItem.variation.data.unit
+                                          .content
+                                      ) +
+                                      " " +
+                                      _vm._s(
+                                        _vm.basketItem.variation.data.unit.names
+                                          .name
+                                      ) +
+                                      "\n                              "
+                                  ) +
+                                  "</div> <div>" +
+                                  _vm._ssrEscape(
+                                    "\n                                  " +
+                                      _vm._s(_vm.basePrice) +
+                                      "\n                              "
+                                  ) +
+                                  "</div></div>"
+                                : "<!---->") +
+                              " " +
+                              (_vm.basketItem.inputLength > 0 ||
+                              _vm.basketItem.inputWidth > 0
+                                ? '<div class="small smallUnit"><div><strong>' +
+                                  _vm._ssrEscape(
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.itemInput"
+                                      )
+                                    ) +
+                                      " " +
+                                      _vm._s(
+                                        _vm._f("inputUnit")(
+                                          _vm.basketItem,
+                                          true
+                                        )
+                                      ) +
+                                      ": "
+                                  ) +
+                                  "</strong>" +
+                                  _vm._ssrEscape(
+                                    "\n                                  " +
+                                      _vm._s(
+                                        _vm._f("inputUnit")(_vm.basketItem)
+                                      ) +
+                                      "\n                              "
+                                  ) +
+                                  "</div></div>"
+                                : "<!---->") +
+                              " " +
+                              (_vm.basketItem.variation.data.item.id == 500
+                                ? '<div class="small smallUnit"><strong>Wir sagen danke!</strong> Mit Ihrer Unterstützung pflanzen wir gemeinsam mit HessenForst einen Baum im Taunus. Dieser bindet im Schnitt 12,5 kg CO<sub>2</sub> pro Jahr.\n                          </div>'
+                                : "<!---->") +
+                              ' <div class="small smallAttr">' +
+                              (_vm.basketItem.variation.data.item.id == 27645
+                                ? _vm._ssrList(
+                                    _vm.basketItem.variation.data.attributes,
+                                    function(attribute) {
+                                      return (
+                                        '<div class="attrBed">' +
+                                        (attribute.attributeId == 3
+                                          ? "<strong>Farbe oberes Bett: </strong>"
+                                          : "<!---->") +
+                                        " " +
+                                        (attribute.attributeId == 9
+                                          ? "<strong>Farbe unteres Bett: </strong>"
+                                          : "<!---->") +
+                                        " <span>" +
+                                        _vm._ssrEscape(
+                                          _vm._s(attribute.value.names.name)
+                                        ) +
+                                        "</span></div>"
+                                      )
+                                    }
+                                  )
+                                : _vm.basketItem.variation.data.item.id == 28013
+                                ? _vm._ssrList(
+                                    _vm.basketItem.variation.data.attributes,
+                                    function(attribute) {
+                                      return (
+                                        '<div class="attrBed">' +
+                                        (attribute.attributeId == 3
+                                          ? "<strong>Farbe Motiv: </strong>"
+                                          : attribute.attributeId == 9
+                                          ? "<strong>Farbe Garderobe: </strong>"
+                                          : "<strong>" +
+                                            _vm._ssrEscape(
+                                              _vm._s(
+                                                attribute.attribute.names.name
+                                              ) + ": "
+                                            ) +
+                                            "</strong>") +
+                                        " <span>" +
+                                        _vm._ssrEscape(
+                                          _vm._s(attribute.value.names.name)
+                                        ) +
+                                        "</span></div>"
+                                      )
+                                    }
+                                  )
+                                : _vm._ssrList(
+                                    _vm.basketItem.variation.data.attributes,
+                                    function(attribute) {
+                                      return (
+                                        '<div class="attrAttr">' +
+                                        (attribute.attributeId == 3 &&
+                                        _vm.basketItem.variation.data.attributes.filter(
+                                          function(attr) {
+                                            return attr.attributeId == 9
+                                          }
+                                        )[0]
+                                          ? "<strong>Farbe Vorderseite: </strong>"
+                                          : "<strong>" +
+                                            _vm._ssrEscape(
+                                              _vm._s(
+                                                attribute.attribute.names.name
+                                              ) + ": "
+                                            ) +
+                                            "</strong>") +
+                                        " <span>" +
+                                        _vm._ssrEscape(
+                                          _vm._s(attribute.value.names.name)
+                                        ) +
+                                        "</span></div>"
+                                      )
+                                    }
+                                  )) +
+                              "</div> "
+                          ),
+                          _c("order-property-value-list", {
+                            attrs: { "basket-item": _vm.basketItem }
+                          })
+                        ],
+                        2
+                      ),
+                      _vm._ssrNode(" "),
+                      _vm._ssrNode(
+                        '<div class="basket-item-container-right">',
+                        "</div>",
+                        [
+                          _vm._ssrNode(
+                            '<div class="qty-box-container">',
+                            "</div>",
+                            [
+                              _vm._ssrNode(
+                                "<button" +
+                                  _vm._ssrAttr(
+                                    "title",
+                                    _vm.$translate(
+                                      "Ceres::Template.basketDelete"
+                                    )
+                                  ) +
+                                  _vm._ssrClass("btn text-danger p-0 mr-2", {
+                                    disabled:
+                                      _vm.waiting ||
+                                      _vm.isBasketLoading ||
+                                      _vm.isCheckoutReadonly ||
+                                      _vm.waitingForDelete
+                                  }) +
+                                  ">",
+                                "</button>",
+                                [
+                                  _c("icon", {
+                                    staticClass: "default-float",
+                                    attrs: {
+                                      icon: "trash-o",
+                                      loading: _vm.waitingForDelete
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._ssrNode(" "),
+                              _c("quantity-input", {
+                                attrs: {
+                                  "use-appearance": true,
+                                  value: _vm.basketItem.quantity,
+                                  waiting:
+                                    _vm.isInputLocked || _vm.isCheckoutReadonly,
+                                  min:
+                                    _vm.basketItem.variation.data.variation
+                                      .minimumOrderQuantity,
+                                  max:
+                                    _vm.basketItem.variation.data.variation
+                                      .maximumOrderQuantity,
+                                  interval:
+                                    _vm.basketItem.variation.data.variation
+                                      .intervalOrderQuantity
+                                },
+                                on: { "quantity-change": _vm.updateQuantity }
+                              })
+                            ],
+                            2
+                          ),
+                          _vm._ssrNode(
+                            ' <div class="font-weight-bold my-2 text-right">' +
                               _vm._ssrEscape(
                                 _vm._s(
                                   _vm._f("currency")(
@@ -43008,40 +42541,7 @@ var render = function() {
                                   )
                                 )
                               ) +
-                              "</div> "
-                          ),
-                          _vm._ssrNode(
-                            '<button data-testing="basket-item-delete"' +
-                              _vm._ssrClass("btn btn-sm text-danger p-0", {
-                                disabled:
-                                  _vm.waiting ||
-                                  _vm.isBasketLoading ||
-                                  _vm.isCheckoutReadonly ||
-                                  _vm.waitingForDelete
-                              }) +
-                              ">",
-                            "</button>",
-                            [
-                              _vm._ssrNode(
-                                _vm._ssrEscape(
-                                  "\n                            " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.basketDelete"
-                                      )
-                                    ) +
-                                    "\n                            "
-                                )
-                              ),
-                              _c("icon", {
-                                staticClass: "default-float",
-                                attrs: {
-                                  icon: "trash-o",
-                                  loading: _vm.waitingForDelete
-                                }
-                              })
-                            ],
-                            2
+                              "</div>"
                           )
                         ],
                         2
@@ -43049,8 +42549,7 @@ var render = function() {
                     ],
                     2
                   )
-                ],
-                2
+                ]
               ),
               _vm._ssrNode(" "),
               _vm.basketItem.setComponents
@@ -43061,10 +42560,6 @@ var render = function() {
                     }
                   })
                 : _vm._e(),
-              _vm._ssrNode(" "),
-              _c("order-property-value-list", {
-                attrs: { "basket-item": _vm.basketItem }
-              }),
               _vm._ssrNode(
                 " " +
                   (_vm.showMoreInformation
@@ -43820,96 +43315,96 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "row" },
+    { staticClass: "row bkr-cc" },
     [
       _vm.value.showPickupStation &&
       _vm.selectedCountry.isoCode2 === "DE" &&
       _vm.addressType === "2"
         ? [
             _vm._ssrNode('<div class="col-12">', "</div>", [
-              _vm._ssrNode('<div class="row">', "</div>", [
-                _vm.isInOptionalFields("de", "delivery_address.salutation")
-                  ? _vm._ssrNode('<div class="col-12 col-sm-4">', "</div>", [
-                      _c(
-                        "div",
-                        {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: _vm.isInRequiredFields(
-                                "de",
-                                "delivery_address.salutation"
-                              ),
-                              expression:
-                                "isInRequiredFields('de', 'delivery_address.salutation')"
-                            }
-                          ],
-                          staticClass: "input-unit"
-                        },
-                        [
-                          _c("salutation-select", {
-                            attrs: {
-                              id: "txtSalutation" + _vm._uid,
-                              "address-type": _vm.addressType,
-                              "address-data": _vm.value,
-                              "enabled-address-fields":
-                                _vm.optionalAddressFields
-                            },
-                            on: {
-                              input: function($event) {
-                                return _vm.emitInputEvent(
-                                  $event.field,
-                                  $event.value
-                                )
+              _vm._ssrNode(
+                '<div class="row">',
+                "</div>",
+                [
+                  _vm.isInOptionalFields("de", "delivery_address.salutation")
+                    ? _vm._ssrNode('<div class="col-12 col-sm-4">', "</div>", [
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "validate",
+                                rawName: "v-validate",
+                                value: _vm.isInRequiredFields(
+                                  "de",
+                                  "delivery_address.salutation"
+                                ),
+                                expression:
+                                  "isInRequiredFields('de', 'delivery_address.salutation')"
                               }
-                            }
-                          }),
-                          _vm._ssrNode(
-                            " <label" +
-                              _vm._ssrAttr("for", "txtSalutation" + _vm._uid) +
-                              ">" +
-                              _vm._ssrEscape(
-                                "\n                            " +
-                                  _vm._s(
-                                    _vm.transformTranslation(
-                                      "Ceres::Template.addressSalutation",
-                                      "de",
-                                      "delivery_address.salutation"
-                                    )
-                                  ) +
-                                  "\n                        "
-                              ) +
-                              "</label>"
-                          )
-                        ],
-                        2
-                      )
-                    ])
-                  : _vm._e()
-              ])
+                            ],
+                            staticClass: "input-unit"
+                          },
+                          [
+                            _c("salutation-select", {
+                              attrs: {
+                                "address-type": _vm.addressType,
+                                "address-data": _vm.value,
+                                "enabled-address-fields":
+                                  _vm.optionalAddressFields
+                              },
+                              on: {
+                                input: function($event) {
+                                  return _vm.emitInputEvent(
+                                    $event.field,
+                                    $event.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._ssrNode(
+                              " <label" +
+                                _vm._ssrAttr(
+                                  "for",
+                                  "txtSalutation" + _vm._uid
+                                ) +
+                                ">" +
+                                _vm._ssrEscape(
+                                  "\n                              " +
+                                    _vm._s(
+                                      _vm.transformTranslation(
+                                        "Ceres::Template.addressSalutation",
+                                        "de",
+                                        "delivery_address.salutation"
+                                      )
+                                    ) +
+                                    "\n                          "
+                                ) +
+                                "</label>"
+                            )
+                          ],
+                          2
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._ssrNode(
+                    ' <div class="col-12 col-sm-6"><div data-model="name1" data-validate="text" class="input-unit"><input type="text" name="company"' +
+                      _vm._ssrAttr("id", "txtCompany" + _vm._uid) +
+                      ' data-testing="packing-station-de-company"' +
+                      _vm._ssrAttr("value", _vm.value.name1) +
+                      "> <label" +
+                      _vm._ssrAttr("for", "txtCompany" + _vm._uid) +
+                      ">" +
+                      _vm._ssrEscape(
+                        _vm._s(_vm.$translate("Ceres::Template.addressCompany"))
+                      ) +
+                      "</label></div></div>"
+                  )
+                ],
+                2
+              )
             ]),
-            _vm._ssrNode(
-              ' <div class="col-12"><div class="row">' +
-                ((_vm.isInOptionalFields("de", "delivery_address.salutation") &&
-                  _vm.value.gender === "company") ||
-                (_vm.isInOptionalFields("de", "delivery_address.name1") &&
-                  !_vm.isInOptionalFields("de", "delivery_address.salutation"))
-                  ? '<div class="col-12 col-sm-6"><div data-model="name1" data-validate="text" class="input-unit"><input type="text" name="company"' +
-                    _vm._ssrAttr("id", "txtCompany" + _vm._uid) +
-                    ' data-testing="packing-station-de-company"' +
-                    _vm._ssrAttr("value", _vm.value.name1) +
-                    "> <label" +
-                    _vm._ssrAttr("for", "txtCompany" + _vm._uid) +
-                    ">" +
-                    _vm._ssrEscape(
-                      _vm._s(_vm.$translate("Ceres::Template.addressCompany")) +
-                        "*"
-                    ) +
-                    "</label></div></div>"
-                  : "<!---->") +
-                "</div></div> "
-            ),
+            _vm._ssrNode(" "),
             _vm._ssrNode('<div class="col-12">', "</div>", [
               _vm._ssrNode(
                 '<div class="row">',
@@ -43945,7 +43440,7 @@ var render = function() {
                                 _vm._ssrAttr("for", "txtTitle" + _vm._uid) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressTitle",
@@ -43953,7 +43448,7 @@ var render = function() {
                                         "delivery_address.title"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
@@ -44115,7 +43610,7 @@ var render = function() {
                                 ) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressContactPerson",
@@ -44123,7 +43618,7 @@ var render = function() {
                                         "delivery_address.contactPerson"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
@@ -44167,7 +43662,7 @@ var render = function() {
                                 ) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressAdditionalName",
@@ -44175,7 +43670,7 @@ var render = function() {
                                         "delivery_address.name4"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
@@ -44214,7 +43709,7 @@ var render = function() {
                                 _vm._ssrAttr("for", "txtTelephone" + _vm._uid) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressTelephone",
@@ -44222,7 +43717,7 @@ var render = function() {
                                         "delivery_address.phoneNumber"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
@@ -44234,163 +43729,62 @@ var render = function() {
                 2
               )
             ]),
-            _vm._ssrNode(
-              " " +
-                (_vm.isParcelOrOfficeAvailable
-                  ? '<div class="col-12"><div class="row"><div class="col-12"><input type="checkbox" name="togglePickup"' +
-                    _vm._ssrAttr("id", "showPickup" + _vm._uid) +
-                    _vm._ssrAttr("checked", _vm.value.showPickupStation) +
-                    "> <label" +
-                    _vm._ssrAttr("for", "showPickup" + _vm._uid) +
-                    ">" +
-                    _vm._ssrEscape(
-                      _vm._s(
-                        _vm.$translate("Ceres::Template.addressToPickupStation")
-                      )
-                    ) +
-                    "</label></div></div></div>"
-                  : "<!---->") +
-                ' <div class="col-12"><div class="row"><div class="col-12 col-sm-8"><div data-validate data-model="address1" class="input-unit"><select' +
-                _vm._ssrAttr("id", "address1" + _vm._uid) +
-                _vm._ssrAttr("value", _vm.value.address1) +
-                ' class="custom-select">' +
-                (_vm.isParcelBoxAvailable
-                  ? '<option value="PACKSTATION"' +
-                    _vm._ssrAttr("selected", _vm.isPickupStation) +
-                    ">" +
-                    _vm._ssrEscape(
-                      _vm._s(
-                        _vm.$translate("Ceres::Template.addressPackingStation")
-                      )
-                    ) +
-                    "</option>"
-                  : "<!---->") +
-                " " +
-                (_vm.isPostOfficeAvailable
-                  ? '<option value="POSTFILIALE"' +
-                    _vm._ssrAttr("selected", _vm.isPostOffice) +
-                    ">" +
-                    _vm._ssrEscape(
-                      _vm._s(
-                        _vm.$translate("Ceres::Template.addressPostOffice")
-                      )
-                    ) +
-                    "</option>"
-                  : "<!---->") +
-                "</select> <label for=\"'address1' + _uid\">" +
-                _vm._ssrEscape(
-                  _vm._s(
-                    _vm.$translate("Ceres::Template.addressPickupLocation")
-                  )
-                ) +
-                '</label></div></div> <div class="col-12 col-sm-4"><div data-validate="text" data-model="address2" class="input-unit"><input type="text" name="housenumber" autocomplete="address-line2"' +
-                _vm._ssrAttr("id", "txtNumber" + _vm._uid) +
-                _vm._ssrAttr("value", _vm.value.address2) +
-                "> " +
-                (_vm.isPickupStation
-                  ? "<label" +
-                    _vm._ssrAttr("for", "txtNumber" + _vm._uid) +
-                    ">" +
-                    _vm._ssrEscape(
-                      _vm._s(
-                        _vm.$translate(
-                          "Ceres::Template.addressPackingStationNumber"
-                        )
-                      ) + "*"
-                    ) +
-                    "</label>"
-                  : "<!---->") +
-                " " +
-                (_vm.isPostOffice
-                  ? "<label" +
-                    _vm._ssrAttr("for", "txtNumber" + _vm._uid) +
-                    ">" +
-                    _vm._ssrEscape(
-                      _vm._s(
-                        _vm.$translate(
-                          "Ceres::Template.addressPostOfficeNumber"
-                        )
-                      ) + "*"
-                    ) +
-                    "</label>"
-                  : "<!---->") +
-                "</div></div></div></div> "
-            ),
+            _vm._ssrNode(" "),
             _vm._ssrNode('<div class="col-12">', "</div>", [
-              _vm._ssrNode(
-                '<div class="row">',
-                "</div>",
-                [
-                  _vm._ssrNode(
-                    '<div class="col-12 col-sm-6"><div data-validate="text" data-model="postNumber" class="input-unit"><input type="text" name="postnumber"' +
-                      _vm._ssrAttr("id", "postnumber" + _vm._uid) +
-                      ' data-testing="packing-station-de-postnumber"' +
-                      _vm._ssrAttr("value", _vm.value.postNumber) +
-                      "> <label" +
-                      _vm._ssrAttr("for", "postnumber" + _vm._uid) +
-                      ">" +
-                      _vm._ssrEscape(
-                        _vm._s(
-                          _vm.$translate("Ceres::Template.addressPostNummer")
-                        ) + "*"
-                      ) +
-                      "</label></div></div> "
-                  ),
-                  _vm.isInOptionalFields("de", "delivery_address.address4")
-                    ? _vm._ssrNode('<div class="col-12 col-sm-6">', "</div>", [
-                        _c(
-                          "div",
-                          {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate:text",
-                                value: _vm.isInRequiredFields(
-                                  "de",
-                                  "delivery_address.address4"
-                                ),
-                                expression:
-                                  "isInRequiredFields('de', 'delivery_address.address4')",
-                                arg: "text"
-                              }
-                            ],
-                            staticClass: "input-unit",
-                            attrs: { "data-model": "address4" }
-                          },
-                          [
-                            _vm._ssrNode(
-                              '<input type="text" name="decorateAddress"' +
-                                _vm._ssrAttr(
-                                  "id",
-                                  "decorateAddress1" + _vm._uid
-                                ) +
-                                _vm._ssrAttr("value", _vm.value.address4) +
-                                "> <label" +
-                                _vm._ssrAttr(
-                                  "for",
-                                  "decorateAddress1" + _vm._uid
-                                ) +
-                                ">" +
-                                _vm._ssrEscape(
-                                  "\n                            " +
-                                    _vm._s(
-                                      _vm.transformTranslation(
-                                        "Ceres::Template.addressAdditionalAddress2",
-                                        "de",
-                                        "delivery_address.address4"
-                                      )
-                                    ) +
-                                    "\n                        "
-                                ) +
-                                "</label>"
-                            )
-                          ]
-                        )
-                      ])
-                    : _vm._e()
-                ],
-                2
-              )
+              _vm._ssrNode('<div class="row">', "</div>", [
+                _vm.isInOptionalFields("de", "delivery_address.address4")
+                  ? _vm._ssrNode('<div class="col-12 col-sm-6">', "</div>", [
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate:text",
+                              value: _vm.isInRequiredFields(
+                                "de",
+                                "delivery_address.address4"
+                              ),
+                              expression:
+                                "isInRequiredFields('de', 'delivery_address.address4')",
+                              arg: "text"
+                            }
+                          ],
+                          staticClass: "input-unit",
+                          attrs: { "data-model": "address4" }
+                        },
+                        [
+                          _vm._ssrNode(
+                            '<input type="text" name="decorateAddress"' +
+                              _vm._ssrAttr(
+                                "id",
+                                "decorateAddress1" + _vm._uid
+                              ) +
+                              _vm._ssrAttr("value", _vm.value.address4) +
+                              "> <label" +
+                              _vm._ssrAttr(
+                                "for",
+                                "decorateAddress1" + _vm._uid
+                              ) +
+                              ">" +
+                              _vm._ssrEscape(
+                                "\n                              " +
+                                  _vm._s(
+                                    _vm.transformTranslation(
+                                      "Ceres::Template.addressAdditionalAddress2",
+                                      "de",
+                                      "delivery_address.address4"
+                                    )
+                                  ) +
+                                  "\n                          "
+                              ) +
+                              "</label>"
+                          )
+                        ]
+                      )
+                    ])
+                  : _vm._e()
+              ])
             ]),
             _vm._ssrNode(
               ' <div class="col-12 col-sm-4"><div data-validate="text" data-model="postalCode" class="input-unit"><input type="text" name="zip"' +
@@ -44415,234 +43809,150 @@ var render = function() {
                 ) +
                 "</label></div></div> "
             ),
-            _vm._ssrNode(
-              '<div data-testing="address-country-select" class="col-12 col-sm-4">',
-              "</div>",
-              [
-                _c("country-select", {
-                  attrs: {
-                    "selected-country-id": _vm.value.countryId,
-                    "selected-state-id": _vm.value.stateId,
-                    "address-type": _vm.addressType,
-                    "optional-address-fields": _vm.optionalAddressFields,
-                    "required-address-fields": _vm.requiredAddressFields
-                  },
-                  on: {
-                    "country-changed": function($event) {
-                      return _vm.onSelectedCountryChanged($event)
-                    },
-                    "state-changed": function($event) {
-                      return _vm.emitInputEvent("stateId", $event)
-                    }
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._ssrNode(" "),
-            _vm._t("custom-address-fields"),
-            _vm._ssrNode(" "),
-            _vm._ssrNode(
-              '<div class="col-12">',
-              "</div>",
-              [
-                _vm._ssrNode('<hr class="mt-0"> '),
-                _vm._ssrNode('<div class="row">', "</div>", [
-                  _vm.isInOptionalFields("de", "delivery_address.email")
-                    ? _vm._ssrNode('<div class="col-12">', "</div>", [
+            _vm._t("custom-address-fields")
+          ]
+        : _vm.localeToShow == "DE" && _vm.addressType === "1"
+        ? [
+            _vm._ssrNode('<div class="col-12">', "</div>", [
+              _vm._ssrNode(
+                '<div class="row">',
+                "</div>",
+                [
+                  _vm.isInOptionalFields("de", "billing_address.salutation")
+                    ? _vm._ssrNode('<div class="col-12 col-sm-4">', "</div>", [
                         _c(
                           "div",
                           {
                             directives: [
                               {
                                 name: "validate",
-                                rawName: "v-validate:text",
+                                rawName: "v-validate",
                                 value: _vm.isInRequiredFields(
                                   "de",
-                                  "delivery_address.email"
+                                  "billing_address.salutation"
                                 ),
                                 expression:
-                                  "isInRequiredFields('de', 'delivery_address.email')",
-                                arg: "text"
+                                  "isInRequiredFields('de', 'billing_address.salutation')"
                               }
                             ],
-                            staticClass: "input-unit",
-                            attrs: { "data-model": "email" }
+                            staticClass: "input-unit"
                           },
                           [
+                            _c("salutation-select", {
+                              attrs: {
+                                "address-type": _vm.addressType,
+                                "address-data": _vm.value,
+                                "enabled-address-fields":
+                                  _vm.optionalAddressFields,
+                                "default-salutation": _vm.defaultSalutation
+                              },
+                              on: {
+                                input: function($event) {
+                                  return _vm.emitInputEvent(
+                                    $event.field,
+                                    $event.value
+                                  )
+                                }
+                              }
+                            }),
                             _vm._ssrNode(
-                              '<input type="mail" name="email"' +
-                                _vm._ssrAttr("id", "email" + _vm._uid) +
-                                ' data-testing="packing-station-de-email-input"' +
-                                _vm._ssrAttr("value", _vm.value.email) +
-                                "> <label" +
-                                _vm._ssrAttr("for", "email" + _vm._uid) +
+                              " <label" +
+                                _vm._ssrAttr(
+                                  "for",
+                                  "txtSalutation" + _vm._uid
+                                ) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  _vm._s(
-                                    _vm.transformTranslation(
-                                      "Ceres::Template.addressMail",
-                                      "de",
-                                      "delivery_address.email"
-                                    )
-                                  )
+                                  "\n                              " +
+                                    _vm._s(
+                                      _vm.transformTranslation(
+                                        "Ceres::Template.addressSalutation",
+                                        "de",
+                                        "billing_address.salutation"
+                                      )
+                                    ) +
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
-                          ]
+                          ],
+                          2
                         )
                       ])
-                    : _vm._e()
-                ])
-              ],
-              2
-            )
-          ]
-        : _vm.localeToShow == "DE" && _vm.addressType === "1"
-        ? [
+                    : _vm._e(),
+                  _vm._ssrNode(
+                    ' <div class="col-12 col-sm-8"><div data-model="name1" class="input-unit"><input type="text" name="company"' +
+                      _vm._ssrAttr("id", "txtCompany" + _vm._uid) +
+                      ' data-autofocus data-testing="billing-address-de-company"' +
+                      _vm._ssrAttr("value", _vm.value.name1) +
+                      "> <label" +
+                      _vm._ssrAttr("for", "txtCompany" + _vm._uid) +
+                      ">" +
+                      _vm._ssrEscape(
+                        _vm._s(_vm.$translate("Ceres::Template.addressCompany"))
+                      ) +
+                      "</label></div></div>"
+                  )
+                ],
+                2
+              )
+            ]),
+            _vm._ssrNode(" "),
             _vm._ssrNode('<div class="col-12">', "</div>", [
               _vm._ssrNode('<div class="row">', "</div>", [
-                _vm.isInOptionalFields("de", "billing_address.salutation")
-                  ? _vm._ssrNode('<div class="col-12 col-sm-4">', "</div>", [
+                (_vm.isInOptionalFields("de", "billing_address.salutation") &&
+                  _vm.value.gender === "company" &&
+                  _vm.isInOptionalFields("de", "billing_address.vatNumber")) ||
+                (!_vm.isInOptionalFields("de", "billing_address.salutation") &&
+                  _vm.isInOptionalFields("de", "billing_address.name1") &&
+                  _vm.isInOptionalFields("de", "billing_address.vatNumber"))
+                  ? _vm._ssrNode('<div class="col-12 col-sm-6">', "</div>", [
                       _c(
                         "div",
                         {
                           directives: [
                             {
                               name: "validate",
-                              rawName: "v-validate",
+                              rawName: "v-validate:text",
                               value: _vm.isInRequiredFields(
                                 "de",
-                                "billing_address.salutation"
+                                "billing_address.vatNumber"
                               ),
                               expression:
-                                "isInRequiredFields('de', 'billing_address.salutation')"
+                                "isInRequiredFields('de', 'billing_address.vatNumber')",
+                              arg: "text"
                             }
                           ],
-                          staticClass: "input-unit"
+                          staticClass: "input-unit",
+                          attrs: { "data-model": "vatNumber" }
                         },
                         [
-                          _c("salutation-select", {
-                            attrs: {
-                              id: "txtSalutation" + _vm._uid,
-                              "address-type": _vm.addressType,
-                              "address-data": _vm.value,
-                              "enabled-address-fields":
-                                _vm.optionalAddressFields,
-                              "default-salutation": _vm.defaultSalutation
-                            },
-                            on: {
-                              input: function($event) {
-                                return _vm.emitInputEvent(
-                                  $event.field,
-                                  $event.value
-                                )
-                              }
-                            }
-                          }),
                           _vm._ssrNode(
-                            " <label" +
-                              _vm._ssrAttr("for", "txtSalutation" + _vm._uid) +
+                            '<input type="text" name="vatNumber"' +
+                              _vm._ssrAttr("id", "txtVatNumber" + _vm._uid) +
+                              " data-autofocus" +
+                              _vm._ssrAttr("value", _vm.value.vatNumber) +
+                              "> <label" +
+                              _vm._ssrAttr("for", "txtVatNumber" + _vm._uid) +
                               ">" +
                               _vm._ssrEscape(
-                                "\n                            " +
+                                "\n                              " +
                                   _vm._s(
                                     _vm.transformTranslation(
-                                      "Ceres::Template.addressSalutation",
+                                      "Ceres::Template.addressVatNumber",
                                       "de",
-                                      "billing_address.salutation"
+                                      "billing_address.vatNumber"
                                     )
                                   ) +
-                                  "\n                        "
+                                  "\n                          "
                               ) +
                               "</label>"
                           )
-                        ],
-                        2
+                        ]
                       )
                     ])
                   : _vm._e()
               ])
-            ]),
-            _vm._ssrNode(" "),
-            _vm._ssrNode('<div class="col-12">', "</div>", [
-              _vm._ssrNode(
-                '<div class="row">',
-                "</div>",
-                [
-                  _vm._ssrNode(
-                    ((_vm.isInOptionalFields(
-                      "de",
-                      "billing_address.salutation"
-                    ) &&
-                      _vm.value.gender === "company") ||
-                    (_vm.isInOptionalFields("de", "billing_address.name1") &&
-                      !_vm.isInOptionalFields(
-                        "de",
-                        "billing_address.salutation"
-                      ))
-                      ? '<div class="col-12 col-sm-6"><div data-validate="text" data-model="name1" class="input-unit"><input type="text" name="company"' +
-                        _vm._ssrAttr("id", "txtCompany" + _vm._uid) +
-                        ' data-autofocus data-testing="billing-address-de-company"' +
-                        _vm._ssrAttr("value", _vm.value.name1) +
-                        "> <label" +
-                        _vm._ssrAttr("for", "txtCompany" + _vm._uid) +
-                        ">" +
-                        _vm._ssrEscape(
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.addressCompany")
-                          ) + "*"
-                        ) +
-                        "</label></div></div>"
-                      : "<!---->") + " "
-                  ),
-                  _vm._ssrNode(
-                    '<div class="col-12 col-sm-6">',
-                    "</div>",
-                    [
-                      _c("vat-id", {
-                        attrs: {
-                          "is-required": _vm.isInRequiredFields(
-                            "de",
-                            "billing_address.vatNumber"
-                          ),
-                          "selected-country-id": _vm.value.countryId,
-                          value: _vm.value.vatNumber || "",
-                          "show-input":
-                            (_vm.isInOptionalFields(
-                              "de",
-                              "billing_address.salutation"
-                            ) &&
-                              _vm.value.gender === "company" &&
-                              _vm.isInOptionalFields(
-                                "de",
-                                "billing_address.vatNumber"
-                              )) ||
-                            (!_vm.isInOptionalFields(
-                              "de",
-                              "billing_address.salutation"
-                            ) &&
-                              _vm.isInOptionalFields(
-                                "de",
-                                "billing_address.name1"
-                              ) &&
-                              _vm.isInOptionalFields(
-                                "de",
-                                "billing_address.vatNumber"
-                              ))
-                        },
-                        on: {
-                          input: function($event) {
-                            return _vm.emitInputEvent("vatNumber", $event)
-                          }
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                2
-              )
             ]),
             _vm._ssrNode(" "),
             _vm._ssrNode(
@@ -44687,7 +43997,7 @@ var render = function() {
                                     _vm._ssrAttr("for", "txtTitle" + _vm._uid) +
                                     ">" +
                                     _vm._ssrEscape(
-                                      "\n                            " +
+                                      "\n                              " +
                                         _vm._s(
                                           _vm.transformTranslation(
                                             "Ceres::Template.addressTitle",
@@ -44695,7 +44005,7 @@ var render = function() {
                                             "billing_address.title"
                                           )
                                         ) +
-                                        "\n                        "
+                                        "\n                          "
                                     ) +
                                     "</label>"
                                 )
@@ -44864,7 +44174,7 @@ var render = function() {
                                     ) +
                                     ">" +
                                     _vm._ssrEscape(
-                                      "\n                            " +
+                                      "\n                              " +
                                         _vm._s(
                                           _vm.transformTranslation(
                                             "Ceres::Template.addressContactPerson",
@@ -44872,7 +44182,7 @@ var render = function() {
                                             "billing_address.contactPerson"
                                           )
                                         ) +
-                                        "\n                        "
+                                        "\n                          "
                                     ) +
                                     "</label>"
                                 )
@@ -44920,7 +44230,7 @@ var render = function() {
                                     ) +
                                     ">" +
                                     _vm._ssrEscape(
-                                      "\n                            " +
+                                      "\n                              " +
                                         _vm._s(
                                           _vm.transformTranslation(
                                             "Ceres::Template.addressAdditionalName",
@@ -44928,7 +44238,7 @@ var render = function() {
                                             "billing_address.name4"
                                           )
                                         ) +
-                                        "\n                        "
+                                        "\n                          "
                                     ) +
                                     "</label>"
                                 )
@@ -44967,23 +44277,18 @@ var render = function() {
                               },
                               [
                                 _vm._ssrNode(
-                                  '<input type="date" min="1901-12-14"' +
-                                    _vm._ssrAttr(
-                                      "max",
-                                      new Date().toISOString().split("T")[0]
-                                    ) +
-                                    ' name="birthday"' +
+                                  '<input type="tel" name="birthday"' +
                                     _vm._ssrAttr(
                                       "placeholder",
                                       _vm.$translate(
                                         "Ceres::Template.addressBirthdatePlaceholder"
                                       )
                                     ) +
+                                    ' id="txtBirthdate"' +
                                     _vm._ssrAttr(
-                                      "id",
-                                      "txtBirthdate" + _vm._uid
+                                      "birthday",
+                                      _vm.value.birthday
                                     ) +
-                                    _vm._ssrAttr("value", _vm.value.birthday) +
                                     "> <label" +
                                     _vm._ssrAttr(
                                       "for",
@@ -44991,7 +44296,7 @@ var render = function() {
                                     ) +
                                     ">" +
                                     _vm._ssrEscape(
-                                      "\n                            " +
+                                      "\n                              " +
                                         _vm._s(
                                           _vm.transformTranslation(
                                             "Ceres::Template.addressBirthdate",
@@ -44999,7 +44304,7 @@ var render = function() {
                                             "billing_address.birthday"
                                           )
                                         ) +
-                                        "\n                        "
+                                        "\n                          "
                                     ) +
                                     "</label>"
                                 )
@@ -45048,7 +44353,7 @@ var render = function() {
                                     ) +
                                     ">" +
                                     _vm._ssrEscape(
-                                      "\n                            " +
+                                      "\n                              " +
                                         _vm._s(
                                           _vm.transformTranslation(
                                             "Ceres::Template.addressTelephone",
@@ -45056,7 +44361,7 @@ var render = function() {
                                             "billing_address.phoneNumber"
                                           )
                                         ) +
-                                        "\n                        "
+                                        "\n                          "
                                     ) +
                                     "</label>"
                                 )
@@ -45134,7 +44439,7 @@ var render = function() {
                                 ) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressAdditionalAddress1",
@@ -45142,7 +44447,7 @@ var render = function() {
                                         "billing_address.address3"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
@@ -45187,7 +44492,7 @@ var render = function() {
                                 ) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressAdditionalAddress2",
@@ -45195,7 +44500,7 @@ var render = function() {
                                         "billing_address.address4"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
@@ -45230,88 +44535,7 @@ var render = function() {
                 ) +
                 "</label></div></div> "
             ),
-            _vm._ssrNode(
-              '<div data-testing="address-country-select" class="col-12 col-sm-4">',
-              "</div>",
-              [
-                _c("country-select", {
-                  attrs: {
-                    "selected-country-id": _vm.value.countryId,
-                    "selected-state-id": _vm.value.stateId,
-                    "address-type": _vm.addressType,
-                    "optional-address-fields": _vm.optionalAddressFields,
-                    "required-address-fields": _vm.requiredAddressFields
-                  },
-                  on: {
-                    "country-changed": function($event) {
-                      return _vm.onSelectedCountryChanged($event)
-                    },
-                    "state-changed": function($event) {
-                      return _vm.emitInputEvent("stateId", $event)
-                    }
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._ssrNode(" "),
-            _vm._t("custom-address-fields"),
-            _vm._ssrNode(" "),
-            _vm._ssrNode(
-              '<div class="col-12">',
-              "</div>",
-              [
-                _vm._ssrNode('<hr class="mt-0"> '),
-                _vm._ssrNode('<div class="row">', "</div>", [
-                  _vm.isInOptionalFields("de", "billing_address.email")
-                    ? _vm._ssrNode('<div class="col-12">', "</div>", [
-                        _c(
-                          "div",
-                          {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate:text",
-                                value: _vm.isInRequiredFields(
-                                  "de",
-                                  "billing_address.email"
-                                ),
-                                expression:
-                                  "isInRequiredFields('de', 'billing_address.email')",
-                                arg: "text"
-                              }
-                            ],
-                            staticClass: "input-unit",
-                            attrs: { "data-model": "email" }
-                          },
-                          [
-                            _vm._ssrNode(
-                              '<input type="mail" name="email"' +
-                                _vm._ssrAttr("id", "email" + _vm._uid) +
-                                ' data-testing="billing-address-de-email-input"' +
-                                _vm._ssrAttr("value", _vm.value.email) +
-                                "> <label" +
-                                _vm._ssrAttr("for", "email" + _vm._uid) +
-                                ">" +
-                                _vm._ssrEscape(
-                                  _vm._s(
-                                    _vm.transformTranslation(
-                                      "Ceres::Template.addressMail",
-                                      "de",
-                                      "billing_address.email"
-                                    )
-                                  )
-                                ) +
-                                "</label>"
-                            )
-                          ]
-                        )
-                      ])
-                    : _vm._e()
-                ])
-              ],
-              2
-            )
+            _vm._t("custom-address-fields")
           ]
         : _vm.localeToShow == "GB" && _vm.addressType === "1"
         ? [
@@ -45339,7 +44563,6 @@ var render = function() {
                         [
                           _c("salutation-select", {
                             attrs: {
-                              id: "txtSalutation" + _vm._uid,
                               "address-type": _vm.addressType,
                               "address-data": _vm.value,
                               "enabled-address-fields":
@@ -45359,7 +44582,7 @@ var render = function() {
                               _vm._ssrAttr("for", "txtSalutation" + _vm._uid) +
                               ">" +
                               _vm._ssrEscape(
-                                "\n                            " +
+                                "\n                              " +
                                   _vm._s(
                                     _vm.transformTranslation(
                                       "Ceres::Template.addressSalutation",
@@ -45367,7 +44590,7 @@ var render = function() {
                                       "billing_address.salutation"
                                     )
                                   ) +
-                                  "\n                        "
+                                  "\n                          "
                               ) +
                               "</label>"
                           )
@@ -45410,50 +44633,64 @@ var render = function() {
                         "</label></div></div>"
                       : "<!---->") + " "
                   ),
-                  _vm._ssrNode(
-                    '<div class="col-12 col-sm-6">',
-                    "</div>",
-                    [
-                      _c("vat-id", {
-                        attrs: {
-                          "is-required": _vm.isInRequiredFields(
-                            "gb",
-                            "billing_address.vatNumber"
-                          ),
-                          "selected-country-id": _vm.value.countryId,
-                          value: _vm.value.vatNumber || "",
-                          "show-input":
-                            (_vm.isInOptionalFields(
-                              "gb",
-                              "billing_address.salutation"
-                            ) &&
-                              _vm.value.gender === "company" &&
-                              _vm.isInOptionalFields(
-                                "gb",
-                                "billing_address.vatNumber"
-                              )) ||
-                            (!_vm.isInOptionalFields(
-                              "gb",
-                              "billing_address.salutation"
-                            ) &&
-                              _vm.isInOptionalFields(
-                                "gb",
-                                "billing_address.name1"
-                              ) &&
-                              _vm.isInOptionalFields(
-                                "gb",
-                                "billing_address.vatNumber"
-                              ))
-                        },
-                        on: {
-                          input: function($event) {
-                            return _vm.emitInputEvent("vatNumber", $event)
-                          }
-                        }
-                      })
-                    ],
-                    1
-                  )
+                  (_vm.isInOptionalFields("gb", "billing_address.salutation") &&
+                    _vm.value.gender === "company" &&
+                    _vm.isInOptionalFields(
+                      "gb",
+                      "billing_address.vatNumber"
+                    )) ||
+                  (!_vm.isInOptionalFields(
+                    "gb",
+                    "billing_address.salutation"
+                  ) &&
+                    _vm.isInOptionalFields("gb", "billing_address.name1") &&
+                    _vm.isInOptionalFields("gb", "billing_address.vatNumber"))
+                    ? _vm._ssrNode('<div class="col-12 col-sm-6">', "</div>", [
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "validate",
+                                rawName: "v-validate:text",
+                                value: _vm.isInRequiredFields(
+                                  "gb",
+                                  "billing_address.vatNumber"
+                                ),
+                                expression:
+                                  "isInRequiredFields('gb', 'billing_address.vatNumber')",
+                                arg: "text"
+                              }
+                            ],
+                            staticClass: "input-unit",
+                            attrs: { "data-model": "vatNumber" }
+                          },
+                          [
+                            _vm._ssrNode(
+                              '<input type="text" name="vatNumber"' +
+                                _vm._ssrAttr("id", "txtVatNumber" + _vm._uid) +
+                                " data-autofocus" +
+                                _vm._ssrAttr("value", _vm.value.vatNumber) +
+                                "> <label" +
+                                _vm._ssrAttr("for", "txtVatNumber" + _vm._uid) +
+                                ">" +
+                                _vm._ssrEscape(
+                                  "\n                              " +
+                                    _vm._s(
+                                      _vm.transformTranslation(
+                                        "Ceres::Template.addressVatNumber",
+                                        "gb",
+                                        "billing_address.vatNumber"
+                                      )
+                                    ) +
+                                    "\n                          "
+                                ) +
+                                "</label>"
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e()
                 ],
                 2
               )
@@ -45495,7 +44732,7 @@ var render = function() {
                                 _vm._ssrAttr("for", "txtTitle" + _vm._uid) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressTitle",
@@ -45503,7 +44740,7 @@ var render = function() {
                                         "billing_address.title"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
@@ -45665,7 +44902,7 @@ var render = function() {
                                 ) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressContactPerson",
@@ -45673,7 +44910,7 @@ var render = function() {
                                         "billing_address.contactPerson"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
@@ -45717,7 +44954,7 @@ var render = function() {
                                 ) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressGBNameAffix",
@@ -45725,7 +44962,7 @@ var render = function() {
                                         "billing_address.name4"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
@@ -45778,7 +45015,7 @@ var render = function() {
                                 _vm._ssrAttr("for", "txtBirthdate" + _vm._uid) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressBirthdate",
@@ -45786,7 +45023,7 @@ var render = function() {
                                         "billing_address.birthday"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
@@ -45825,7 +45062,7 @@ var render = function() {
                                 _vm._ssrAttr("for", "txtTelephone" + _vm._uid) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressTelephone",
@@ -45833,7 +45070,7 @@ var render = function() {
                                         "billing_address.phoneNumber"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
@@ -45906,7 +45143,7 @@ var render = function() {
                                     ) +
                                     ">" +
                                     _vm._ssrEscape(
-                                      "\n                            " +
+                                      "\n                              " +
                                         _vm._s(
                                           _vm.transformTranslation(
                                             "Ceres::Template.addressENAddressLine2",
@@ -45914,7 +45151,7 @@ var render = function() {
                                             "billing_address.address2"
                                           )
                                         ) +
-                                        "\n                        "
+                                        "\n                          "
                                     ) +
                                     "</label>"
                                 )
@@ -45970,7 +45207,7 @@ var render = function() {
                                 ) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressENAddressLine3",
@@ -45978,7 +45215,7 @@ var render = function() {
                                         "billing_address.address3"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
@@ -46023,7 +45260,7 @@ var render = function() {
                                 ) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressENAddressLine4",
@@ -46031,7 +45268,7 @@ var render = function() {
                                         "billing_address.address4"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
@@ -46064,233 +45301,157 @@ var render = function() {
                 ) +
                 "</label></div></div> "
             ),
-            _vm._ssrNode(
-              '<div data-testing="address-country-select" class="col-12 col-sm-4">',
-              "</div>",
-              [
-                _c("country-select", {
-                  attrs: {
-                    "selected-country-id": _vm.value.countryId,
-                    "selected-state-id": _vm.value.stateId,
-                    "address-type": _vm.addressType,
-                    "optional-address-fields": _vm.optionalAddressFields,
-                    "required-address-fields": _vm.requiredAddressFields
-                  },
-                  on: {
-                    "country-changed": function($event) {
-                      return _vm.onSelectedCountryChanged($event)
-                    },
-                    "state-changed": function($event) {
-                      return _vm.emitInputEvent("stateId", $event)
-                    }
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._ssrNode(" "),
-            _vm._t("custom-address-fields"),
-            _vm._ssrNode(" "),
-            _vm._ssrNode(
-              '<div class="col-12">',
-              "</div>",
-              [
-                _vm._ssrNode('<hr class="mt-0"> '),
-                _vm._ssrNode('<div class="row">', "</div>", [
-                  _vm.isInOptionalFields("gb", "billing_address.email")
-                    ? _vm._ssrNode('<div class="col-12">', "</div>", [
+            _vm._t("custom-address-fields")
+          ]
+        : _vm.localeToShow == "DE" && _vm.addressType === "2"
+        ? [
+            _vm._ssrNode('<div class="col-12">', "</div>", [
+              _vm._ssrNode(
+                '<div class="row">',
+                "</div>",
+                [
+                  _vm.isInOptionalFields("de", "delivery_address.salutation")
+                    ? _vm._ssrNode('<div class="col-12 col-sm-4">', "</div>", [
                         _c(
                           "div",
                           {
                             directives: [
                               {
                                 name: "validate",
-                                rawName: "v-validate:text",
+                                rawName: "v-validate",
                                 value: _vm.isInRequiredFields(
-                                  "gb",
-                                  "billing_address.email"
+                                  "de",
+                                  "delivery_address.salutation"
                                 ),
                                 expression:
-                                  "isInRequiredFields('gb', 'billing_address.email')",
-                                arg: "text"
+                                  "isInRequiredFields('de', 'delivery_address.salutation')"
                               }
                             ],
-                            staticClass: "input-unit",
-                            attrs: { "data-model": "email" }
+                            staticClass: "input-unit"
                           },
                           [
+                            _c("salutation-select", {
+                              attrs: {
+                                "address-type": _vm.addressType,
+                                "address-data": _vm.value,
+                                "enabled-address-fields":
+                                  _vm.optionalAddressFields
+                              },
+                              on: {
+                                input: function($event) {
+                                  return _vm.emitInputEvent(
+                                    $event.field,
+                                    $event.value
+                                  )
+                                }
+                              }
+                            }),
                             _vm._ssrNode(
-                              '<input type="mail" name="email"' +
-                                _vm._ssrAttr("id", "email" + _vm._uid) +
-                                ' data-testing="billing-address-gb-email-input"' +
-                                _vm._ssrAttr("value", _vm.value.email) +
-                                "> <label" +
-                                _vm._ssrAttr("for", "email" + _vm._uid) +
+                              " <label" +
+                                _vm._ssrAttr(
+                                  "for",
+                                  "txtSalutation" + _vm._uid
+                                ) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  _vm._s(
-                                    _vm.transformTranslation(
-                                      "Ceres::Template.addressMail",
-                                      "gb",
-                                      "billing_address.email"
-                                    )
-                                  )
+                                  "\n                              " +
+                                    _vm._s(
+                                      _vm.transformTranslation(
+                                        "Ceres::Template.addressSalutation",
+                                        "de",
+                                        "delivery_address.salutation"
+                                      )
+                                    ) +
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
-                          ]
+                          ],
+                          2
                         )
                       ])
-                    : _vm._e()
-                ])
-              ],
-              2
-            )
-          ]
-        : _vm.localeToShow == "DE" && _vm.addressType === "2"
-        ? [
+                    : _vm._e(),
+                  _vm._ssrNode(
+                    " " +
+                      (_vm.isInOptionalFields(
+                        "de",
+                        "delivery_address.salutation"
+                      )
+                        ? '<div class="col-12 col-sm-6"><div data-model="name1" class="input-unit"><input type="text" name="company"' +
+                          _vm._ssrAttr("id", "txtCompany" + _vm._uid) +
+                          " data-autofocus" +
+                          _vm._ssrAttr("value", _vm.value.name1) +
+                          "> <label" +
+                          _vm._ssrAttr("for", "txtCompany" + _vm._uid) +
+                          ">" +
+                          _vm._ssrEscape(
+                            _vm._s(
+                              _vm.$translate("Ceres::Template.addressCompany")
+                            )
+                          ) +
+                          "</label></div></div>"
+                        : "<!---->")
+                  )
+                ],
+                2
+              )
+            ]),
+            _vm._ssrNode(" "),
             _vm._ssrNode('<div class="col-12">', "</div>", [
               _vm._ssrNode('<div class="row">', "</div>", [
-                _vm.isInOptionalFields("de", "delivery_address.salutation")
-                  ? _vm._ssrNode('<div class="col-12 col-sm-4">', "</div>", [
+                (_vm.isInOptionalFields("de", "delivery_address.salutation") &&
+                  _vm.value.gender === "company" &&
+                  _vm.isInOptionalFields("de", "delivery_address.vatNumber")) ||
+                (!_vm.isInOptionalFields("de", "delivery_address.salutation") &&
+                  _vm.isInOptionalFields("de", "delivery_address.name1") &&
+                  _vm.isInOptionalFields("de", "delivery_address.vatNumber"))
+                  ? _vm._ssrNode('<div class="col-12 col-sm-6">', "</div>", [
                       _c(
                         "div",
                         {
                           directives: [
                             {
                               name: "validate",
-                              rawName: "v-validate",
+                              rawName: "v-validate:text",
                               value: _vm.isInRequiredFields(
                                 "de",
-                                "delivery_address.salutation"
+                                "delivery_address.vatNumber"
                               ),
                               expression:
-                                "isInRequiredFields('de', 'delivery_address.salutation')"
+                                "isInRequiredFields('de', 'delivery_address.vatNumber')",
+                              arg: "text"
                             }
                           ],
-                          staticClass: "input-unit"
+                          staticClass: "input-unit",
+                          attrs: { "data-model": "vatNumber" }
                         },
                         [
-                          _c("salutation-select", {
-                            attrs: {
-                              id: "txtSalutation" + _vm._uid,
-                              "address-type": _vm.addressType,
-                              "address-data": _vm.value,
-                              "enabled-address-fields":
-                                _vm.optionalAddressFields
-                            },
-                            on: {
-                              input: function($event) {
-                                return _vm.emitInputEvent(
-                                  $event.field,
-                                  $event.value
-                                )
-                              }
-                            }
-                          }),
                           _vm._ssrNode(
-                            " <label" +
-                              _vm._ssrAttr("for", "txtSalutation" + _vm._uid) +
+                            '<input type="text" name="vatNumber"' +
+                              _vm._ssrAttr("id", "txtVatNumber" + _vm._uid) +
+                              " data-autofocus" +
+                              _vm._ssrAttr("value", _vm.value.vatNumber) +
+                              "> <label" +
+                              _vm._ssrAttr("for", "txtVatNumber" + _vm._uid) +
                               ">" +
                               _vm._ssrEscape(
-                                "\n                            " +
+                                "\n                              " +
                                   _vm._s(
                                     _vm.transformTranslation(
-                                      "Ceres::Template.addressSalutation",
+                                      "Ceres::Template.addressVatNumber",
                                       "de",
-                                      "delivery_address.salutation"
+                                      "delivery_address.vatNumber"
                                     )
                                   ) +
-                                  "\n                        "
+                                  "\n                          "
                               ) +
                               "</label>"
                           )
-                        ],
-                        2
+                        ]
                       )
                     ])
                   : _vm._e()
               ])
-            ]),
-            _vm._ssrNode(" "),
-            _vm._ssrNode('<div class="col-12">', "</div>", [
-              _vm._ssrNode(
-                '<div class="row">',
-                "</div>",
-                [
-                  _vm._ssrNode(
-                    ((_vm.isInOptionalFields(
-                      "de",
-                      "delivery_address.salutation"
-                    ) &&
-                      _vm.value.gender === "company") ||
-                    (_vm.isInOptionalFields("de", "delivery_address.name1") &&
-                      !_vm.isInOptionalFields(
-                        "de",
-                        "delivery_address.salutation"
-                      ))
-                      ? '<div class="col-12 col-sm-6"><div data-validate="text" data-model="name1" class="input-unit"><input type="text" name="company"' +
-                        _vm._ssrAttr("id", "txtCompany" + _vm._uid) +
-                        " data-autofocus" +
-                        _vm._ssrAttr("value", _vm.value.name1) +
-                        "> <label" +
-                        _vm._ssrAttr("for", "txtCompany" + _vm._uid) +
-                        ">" +
-                        _vm._ssrEscape(
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.addressCompany")
-                          ) + "*"
-                        ) +
-                        "</label></div></div>"
-                      : "<!---->") + " "
-                  ),
-                  _vm._ssrNode(
-                    '<div class="col-12 col-sm-6">',
-                    "</div>",
-                    [
-                      _c("vat-id", {
-                        attrs: {
-                          "is-required": _vm.isInRequiredFields(
-                            "de",
-                            "delivery_address.vatNumber"
-                          ),
-                          "selected-country-id": _vm.value.countryId,
-                          value: _vm.value.vatNumber || "",
-                          "show-input":
-                            (_vm.isInOptionalFields(
-                              "de",
-                              "delivery_address.salutation"
-                            ) &&
-                              _vm.value.gender === "company" &&
-                              _vm.isInOptionalFields(
-                                "de",
-                                "delivery_address.vatNumber"
-                              )) ||
-                            (!_vm.isInOptionalFields(
-                              "de",
-                              "delivery_address.salutation"
-                            ) &&
-                              _vm.isInOptionalFields(
-                                "de",
-                                "delivery_address.name1"
-                              ) &&
-                              _vm.isInOptionalFields(
-                                "de",
-                                "delivery_address.vatNumber"
-                              ))
-                        },
-                        on: {
-                          input: function($event) {
-                            return _vm.emitInputEvent("vatNumber", $event)
-                          }
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                2
-              )
             ]),
             _vm._ssrNode(" "),
             _vm._ssrNode('<div class="col-12">', "</div>", [
@@ -46329,7 +45490,7 @@ var render = function() {
                                 _vm._ssrAttr("for", "txtTitle" + _vm._uid) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressTitle",
@@ -46337,7 +45498,7 @@ var render = function() {
                                         "delivery_address.title"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
@@ -46499,7 +45660,7 @@ var render = function() {
                                 ) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressContactPerson",
@@ -46507,7 +45668,7 @@ var render = function() {
                                         "delivery_address.contactPerson"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
@@ -46551,7 +45712,7 @@ var render = function() {
                                 ) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressAdditionalName",
@@ -46559,7 +45720,7 @@ var render = function() {
                                         "delivery_address.name4"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
@@ -46598,7 +45759,7 @@ var render = function() {
                                 _vm._ssrAttr("for", "txtTelephone" + _vm._uid) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressTelephone",
@@ -46606,7 +45767,7 @@ var render = function() {
                                         "delivery_address.phoneNumber"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
@@ -46619,22 +45780,7 @@ var render = function() {
               )
             ]),
             _vm._ssrNode(
-              " " +
-                (_vm.isParcelOrOfficeAvailable
-                  ? '<div class="col-12"><div class="row"><div class="col-12"><input type="checkbox" name="togglePickup"' +
-                    _vm._ssrAttr("id", "showPickup" + _vm._uid) +
-                    _vm._ssrAttr("checked", _vm.value.showPickupStation) +
-                    "> <label" +
-                    _vm._ssrAttr("for", "showPickup" + _vm._uid) +
-                    ">" +
-                    _vm._ssrEscape(
-                      _vm._s(
-                        _vm.$translate("Ceres::Template.addressToPickupStation")
-                      )
-                    ) +
-                    "</label></div></div></div>"
-                  : "<!---->") +
-                ' <div class="col-12"><div class="row"><div class="col-12 col-sm-8"><div data-validate="text" data-model="address1" class="input-unit"><input type="text" name="street" autocomplete="address-line1"' +
+              ' <div class="col-12"><div class="row"><div class="col-12 col-sm-8"><div data-validate="text" data-model="address1" class="input-unit"><input type="text" name="street" autocomplete="address-line1"' +
                 _vm._ssrAttr("id", "txtStreet" + _vm._uid) +
                 ' data-testing="delivery-address-de-street"' +
                 _vm._ssrAttr("value", _vm.value.address1) +
@@ -46697,7 +45843,7 @@ var render = function() {
                                 ) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressAdditionalAddress1",
@@ -46705,7 +45851,7 @@ var render = function() {
                                         "delivery_address.address3"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
@@ -46750,7 +45896,7 @@ var render = function() {
                                 ) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressAdditionalAddress2",
@@ -46758,7 +45904,7 @@ var render = function() {
                                         "delivery_address.address4"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
@@ -46793,88 +45939,7 @@ var render = function() {
                 ) +
                 "</label></div></div> "
             ),
-            _vm._ssrNode(
-              '<div data-testing="address-country-select" class="col-12 col-sm-4">',
-              "</div>",
-              [
-                _c("country-select", {
-                  attrs: {
-                    "selected-country-id": _vm.value.countryId,
-                    "selected-state-id": _vm.value.stateId,
-                    "address-type": _vm.addressType,
-                    "optional-address-fields": _vm.optionalAddressFields,
-                    "required-address-fields": _vm.requiredAddressFields
-                  },
-                  on: {
-                    "country-changed": function($event) {
-                      return _vm.onSelectedCountryChanged($event)
-                    },
-                    "state-changed": function($event) {
-                      return _vm.emitInputEvent("stateId", $event)
-                    }
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._ssrNode(" "),
-            _vm._t("custom-address-fields"),
-            _vm._ssrNode(" "),
-            _vm._ssrNode(
-              '<div class="col-12">',
-              "</div>",
-              [
-                _vm._ssrNode('<hr class="mt-0"> '),
-                _vm._ssrNode('<div class="row">', "</div>", [
-                  _vm.isInOptionalFields("de", "delivery_address.email")
-                    ? _vm._ssrNode('<div class="col-12">', "</div>", [
-                        _c(
-                          "div",
-                          {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate:text",
-                                value: _vm.isInRequiredFields(
-                                  "de",
-                                  "delivery_address.email"
-                                ),
-                                expression:
-                                  "isInRequiredFields('de', 'delivery_address.email')",
-                                arg: "text"
-                              }
-                            ],
-                            staticClass: "input-unit",
-                            attrs: { "data-model": "email" }
-                          },
-                          [
-                            _vm._ssrNode(
-                              '<input type="mail" name="email"' +
-                                _vm._ssrAttr("id", "email" + _vm._uid) +
-                                ' data-testing="delivery-address-de-email-input"' +
-                                _vm._ssrAttr("value", _vm.value.email) +
-                                "> <label" +
-                                _vm._ssrAttr("for", "email" + _vm._uid) +
-                                ">" +
-                                _vm._ssrEscape(
-                                  _vm._s(
-                                    _vm.transformTranslation(
-                                      "Ceres::Template.addressMail",
-                                      "de",
-                                      "delivery_address.email"
-                                    )
-                                  )
-                                ) +
-                                "</label>"
-                            )
-                          ]
-                        )
-                      ])
-                    : _vm._e()
-                ])
-              ],
-              2
-            )
+            _vm._t("custom-address-fields")
           ]
         : _vm.localeToShow == "GB" && _vm.addressType === "2"
         ? [
@@ -46902,7 +45967,6 @@ var render = function() {
                         [
                           _c("salutation-select", {
                             attrs: {
-                              id: "txtSalutation" + _vm._uid,
                               "address-type": _vm.addressType,
                               "address-data": _vm.value,
                               "enabled-address-fields":
@@ -46922,7 +45986,7 @@ var render = function() {
                               _vm._ssrAttr("for", "txtSalutation" + _vm._uid) +
                               ">" +
                               _vm._ssrEscape(
-                                "\n                            " +
+                                "\n                              " +
                                   _vm._s(
                                     _vm.transformTranslation(
                                       "Ceres::Template.addressSalutation",
@@ -46930,7 +45994,7 @@ var render = function() {
                                       "delivery_address.salutation"
                                     )
                                   ) +
-                                  "\n                        "
+                                  "\n                          "
                               ) +
                               "</label>"
                           )
@@ -46973,50 +46037,67 @@ var render = function() {
                         "</label></div></div>"
                       : "<!---->") + " "
                   ),
-                  _vm._ssrNode(
-                    '<div class="col-12 col-sm-6">',
-                    "</div>",
-                    [
-                      _c("vat-id", {
-                        attrs: {
-                          "is-required": _vm.isInRequiredFields(
-                            "gb",
-                            "delivery_address.vatNumber"
-                          ),
-                          "selected-country-id": _vm.value.countryId,
-                          value: _vm.value.vatNumber || "",
-                          "show-input":
-                            (_vm.isInOptionalFields(
-                              "gb",
-                              "delivery_address.salutation"
-                            ) &&
-                              _vm.value.gender === "company" &&
-                              _vm.isInOptionalFields(
-                                "gb",
-                                "delivery_address.vatNumber"
-                              )) ||
-                            (!_vm.isInOptionalFields(
-                              "gb",
-                              "delivery_address.salutation"
-                            ) &&
-                              _vm.isInOptionalFields(
-                                "gb",
-                                "delivery_address.name1"
-                              ) &&
-                              _vm.isInOptionalFields(
-                                "gb",
-                                "delivery_address.vatNumber"
-                              ))
-                        },
-                        on: {
-                          input: function($event) {
-                            return _vm.emitInputEvent("vatNumber", $event)
-                          }
-                        }
-                      })
-                    ],
-                    1
-                  )
+                  (_vm.isInOptionalFields(
+                    "gb",
+                    "delivery_address.salutation"
+                  ) &&
+                    _vm.value.gender === "company" &&
+                    _vm.isInOptionalFields(
+                      "gb",
+                      "delivery_address.vatNumber"
+                    )) ||
+                  (!_vm.isInOptionalFields(
+                    "gb",
+                    "delivery_address.salutation"
+                  ) &&
+                    _vm.isInOptionalFields("gb", "delivery_address.name1") &&
+                    _vm.isInOptionalFields("gb", "delivery_address.vatNumber"))
+                    ? _vm._ssrNode('<div class="col-12 col-sm-6">', "</div>", [
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "validate",
+                                rawName: "v-validate:text",
+                                value: _vm.isInRequiredFields(
+                                  "gb",
+                                  "delivery_address.vatNumber"
+                                ),
+                                expression:
+                                  "isInRequiredFields('gb', 'delivery_address.vatNumber')",
+                                arg: "text"
+                              }
+                            ],
+                            staticClass: "input-unit",
+                            attrs: { "data-model": "vatNumber" }
+                          },
+                          [
+                            _vm._ssrNode(
+                              '<input type="text" name="vatNumber"' +
+                                _vm._ssrAttr("id", "txtVatNumber" + _vm._uid) +
+                                " data-autofocus" +
+                                _vm._ssrAttr("value", _vm.value.vatNumber) +
+                                "> <label" +
+                                _vm._ssrAttr("for", "txtVatNumber" + _vm._uid) +
+                                ">" +
+                                _vm._ssrEscape(
+                                  "\n                              " +
+                                    _vm._s(
+                                      _vm.transformTranslation(
+                                        "Ceres::Template.addressVatNumber",
+                                        "gb",
+                                        "delivery_address.vatNumber"
+                                      )
+                                    ) +
+                                    "\n                          "
+                                ) +
+                                "</label>"
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e()
                 ],
                 2
               )
@@ -47058,7 +46139,7 @@ var render = function() {
                                 _vm._ssrAttr("for", "txtTitle" + _vm._uid) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressTitle",
@@ -47066,7 +46147,7 @@ var render = function() {
                                         "delivery_address.title"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
@@ -47227,7 +46308,7 @@ var render = function() {
                                 ) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressContactPerson",
@@ -47235,7 +46316,7 @@ var render = function() {
                                         "delivery_address.contactPerson"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
@@ -47279,7 +46360,7 @@ var render = function() {
                                 ) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressGBNameAffix",
@@ -47287,7 +46368,7 @@ var render = function() {
                                         "delivery_address.name4"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
@@ -47326,7 +46407,7 @@ var render = function() {
                                 _vm._ssrAttr("for", "txtTelephone" + _vm._uid) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressTelephone",
@@ -47334,7 +46415,7 @@ var render = function() {
                                         "delivery_address.phoneNumber"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
@@ -47398,7 +46479,7 @@ var render = function() {
                                 _vm._ssrAttr("for", "txtNumber" + _vm._uid) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressENAddressLine2",
@@ -47406,7 +46487,7 @@ var render = function() {
                                         "delivery_address.address2"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
@@ -47460,7 +46541,7 @@ var render = function() {
                                 ) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressENAddressLine3",
@@ -47468,7 +46549,7 @@ var render = function() {
                                         "delivery_address.address3"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
@@ -47513,7 +46594,7 @@ var render = function() {
                                 ) +
                                 ">" +
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressENAddressLine4",
@@ -47521,7 +46602,7 @@ var render = function() {
                                         "delivery_address.address4"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 ) +
                                 "</label>"
                             )
@@ -47554,90 +46635,34 @@ var render = function() {
                 ) +
                 "</label></div></div> "
             ),
-            _vm._ssrNode(
-              '<div data-testing="address-country-select" class="col-12 col-sm-4">',
-              "</div>",
-              [
-                _c("country-select", {
-                  attrs: {
-                    "selected-country-id": _vm.value.countryId,
-                    "selected-state-id": _vm.value.stateId,
-                    "address-type": _vm.addressType,
-                    "optional-address-fields": _vm.optionalAddressFields,
-                    "required-address-fields": _vm.requiredAddressFields
-                  },
-                  on: {
-                    "country-changed": function($event) {
-                      return _vm.onSelectedCountryChanged($event)
-                    },
-                    "state-changed": function($event) {
-                      return _vm.emitInputEvent("stateId", $event)
-                    }
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._ssrNode(" "),
-            _vm._t("custom-address-fields"),
-            _vm._ssrNode(" "),
-            _vm._ssrNode(
-              '<div class="col-12">',
-              "</div>",
-              [
-                _vm._ssrNode('<hr class="mt-0"> '),
-                _vm._ssrNode('<div class="row">', "</div>", [
-                  _vm.isInOptionalFields("gb", "delivery_address.email")
-                    ? _vm._ssrNode('<div class="col-12">', "</div>", [
-                        _c(
-                          "div",
-                          {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate:text",
-                                value: _vm.isInRequiredFields(
-                                  "gb",
-                                  "delivery_address.email"
-                                ),
-                                expression:
-                                  "isInRequiredFields('gb', 'delivery_address.email')",
-                                arg: "text"
-                              }
-                            ],
-                            staticClass: "input-unit",
-                            attrs: { "data-model": "email" }
-                          },
-                          [
-                            _vm._ssrNode(
-                              '<input type="mail" name="email"' +
-                                _vm._ssrAttr("id", "email" + _vm._uid) +
-                                ' data-testing="delivery-address-gb-email-input"' +
-                                _vm._ssrAttr("value", _vm.value.email) +
-                                "> <label" +
-                                _vm._ssrAttr("for", "email" + _vm._uid) +
-                                ">" +
-                                _vm._ssrEscape(
-                                  _vm._s(
-                                    _vm.transformTranslation(
-                                      "Ceres::Template.addressMail",
-                                      "gb",
-                                      "delivery_address.email"
-                                    )
-                                  )
-                                ) +
-                                "</label>"
-                            )
-                          ]
-                        )
-                      ])
-                    : _vm._e()
-                ])
-              ],
-              2
-            )
+            _vm._t("custom-address-fields")
           ]
-        : _vm._e()
+        : _vm._e(),
+      _vm._ssrNode(" "),
+      _vm._ssrNode(
+        '<div data-testing="address-country-select" class="col-12 col-sm-4">',
+        "</div>",
+        [
+          _c("country-select", {
+            attrs: {
+              "selected-country-id": _vm.value.countryId,
+              "selected-state-id": _vm.value.stateId,
+              "address-type": _vm.addressType,
+              "optional-address-fields": _vm.optionalAddressFields,
+              "required-address-fields": _vm.requiredAddressFields
+            },
+            on: {
+              "country-changed": function($event) {
+                return _vm.onSelectedCountryChanged($event)
+              },
+              "state-changed": function($event) {
+                return _vm.emitInputEvent("stateId", $event)
+              }
+            }
+          })
+        ],
+        1
+      )
     ],
     2
   )
@@ -47895,7 +46920,7 @@ var render = function() {
     "form",
     {
       ref: "registrationForm",
-      staticClass: "w-100",
+      staticClass: "w-100 bkr-cc",
       attrs: { autocomplete: "on", method: "post" },
       on: {
         submit: function($event) {
@@ -47910,7 +46935,7 @@ var render = function() {
         "</div>",
         [
           _vm._ssrNode(
-            '<div class="col-sm-12"><div data-validate="mail" class="input-unit"><input data-testing="mail-register" type="email" name="email" autocomplete="email"' +
+            '<div class="col-sm-12"><div data-validate="mail" class="input-unit"><input type="email" name="email" autocomplete="email"' +
               _vm._ssrAttr("id", "email" + _vm._uid) +
               " data-autofocus" +
               _vm._ssrAttr("value", _vm.username) +
@@ -47923,13 +46948,9 @@ var render = function() {
               "</label></div></div> "
           ),
           !_vm.guestMode
-            ? _vm._ssrNode('<div class="col-sm-6">', "</div>", [
+            ? _vm._ssrNode('<div class="col-sm-12">', "</div>", [
                 _vm._ssrNode(
-                  '<div data-validate="password"' +
-                    _vm._ssrClass("input-unit", {
-                      "no-bottom media-xs-d": _vm.modalElement
-                    }) +
-                    ">",
+                  '<div data-validate="password" class="input-unit">',
                   "</div>",
                   [
                     _c("popper", {
@@ -47951,7 +46972,6 @@ var render = function() {
                                     }
                                   ],
                                   attrs: {
-                                    "data-testing": "password-register",
                                     type: "password",
                                     name: "password",
                                     autocomplete: "new-password",
@@ -48032,7 +47052,7 @@ var render = function() {
                         ],
                         null,
                         false,
-                        303377206
+                        4086647824
                       )
                     }),
                     _vm._ssrNode(
@@ -48054,7 +47074,7 @@ var render = function() {
           _vm._ssrNode(
             " " +
               (!_vm.guestMode
-                ? '<div class="col-sm-6 input-unit-group"><div data-validate="ref"' +
+                ? '<div class="col-sm-12 input-unit-group"><div data-validate="ref"' +
                   _vm._ssrClass("input-unit", {
                     "no-bottom": _vm.modalElement
                   }) +
@@ -48064,10 +47084,9 @@ var render = function() {
                     "data-validate-ref",
                     "#new-password-" + _vm._uid
                   ) +
-                  ' data-testing="repeat-password-register"' +
                   _vm._ssrAttr("value", _vm.passwordRepeat) +
                   "> <label" +
-                  _vm._ssrAttr("for", "new-password-repeat-" + _vm._uid) +
+                  _vm._ssrAttr("for", "new-password-repeat" + _vm._uid) +
                   ">" +
                   _vm._ssrEscape(
                     _vm._s(
@@ -48076,9 +47095,7 @@ var render = function() {
                   ) +
                   "</label></div></div>"
                 : "<!---->") +
-              ' <input type="text" name="username" autocomplete="new-password" tabindex="-1"' +
-              _vm._ssrAttr("value", _vm.honeypot) +
-              ' class="honey"> '
+              " "
           ),
           _vm._ssrNode(
             '<div class="col-12">',
@@ -48148,7 +47165,7 @@ var render = function() {
       ),
       _vm._ssrNode(" "),
       _vm._ssrNode(
-        '<div class="border-top mt-2 text-right">',
+        '<div class="mt-2 text-right">',
         "</div>",
         [
           _vm._t("extend-overlay-buttons"),
@@ -48156,25 +47173,24 @@ var render = function() {
           _vm._ssrNode(
             "<button" +
               _vm._ssrAttr("disabled", _vm.isDisabled) +
-              ' data-testing="register-submit"' +
               _vm._ssrClass(
-                "btn btn-appearance btn-primary btn-medium mt-3",
+                "btn btn-appearance btn-bkm btn-medium mt-3",
                 _vm.buttonSizeClass
               ) +
               ">",
             "</button>",
             [
+              _c("icon", {
+                staticClass: "default-float",
+                attrs: { icon: "user-plus", loading: _vm.isDisabled }
+              }),
               _vm._ssrNode(
                 _vm._ssrEscape(
                   "\n            " +
                     _vm._s(_vm.$translate("Ceres::Template.regRegister")) +
-                    "\n            "
+                    "\n        "
                 )
-              ),
-              _c("icon", {
-                staticClass: "default-float",
-                attrs: { icon: "user-plus", loading: _vm.isDisabled }
-              })
+              )
             ],
             2
           )
@@ -48782,7 +47798,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "login-pwd-reset" }, [
+  return _c("div", { staticClass: "login-pwd-reset bkr-cc" }, [
     _vm._ssrNode(
       "<form" +
         _vm._ssrAttr("id", "login-form-" + _vm._uid) +
@@ -48792,87 +47808,107 @@ var render = function() {
         _vm._ssrNode(
           "<div" +
             _vm._ssrClass(null, { "modal-body": _vm.modalElement }) +
-            '><div class="row"><div class="col-12"><div data-validate="mail" class="input-unit"><input data-testing="email-login" type="email" name="email" autocomplete="email"' +
-            _vm._ssrAttr("id", "email" + _vm._uid) +
-            " data-autofocus" +
-            _vm._ssrAttr("value", _vm.username) +
-            "> <label" +
-            _vm._ssrAttr("for", "email" + _vm._uid) +
-            ">" +
-            _vm._ssrEscape(
-              _vm._s(_vm.$translate("Ceres::Template.loginEmail")) + "*"
-            ) +
-            '</label></div> <span class="error-msg">' +
-            _vm._ssrEscape(
-              _vm._s(_vm.$translate("Ceres::Template.loginEnterConfirmEmail"))
-            ) +
-            '</span></div> <div class="col-12"><div data-validate="text"' +
-            _vm._ssrClass("input-unit", { "no-bottom": _vm.modalElement }) +
-            '><input data-testing="password-login" type="password" name="password" autocomplete="current-password"' +
-            _vm._ssrAttr("id", "password" + _vm._uid) +
-            _vm._ssrAttr("value", _vm.password) +
-            "> <label" +
-            _vm._ssrAttr("for", "password" + _vm._uid) +
-            ">" +
-            _vm._ssrEscape(
-              _vm._s(_vm.$translate("Ceres::Template.loginPassword")) + "*"
-            ) +
-            '</label></div> <span class="error-msg">' +
-            _vm._ssrEscape(
-              _vm._s(_vm.$translate("Ceres::Template.loginEmptyPassword"))
-            ) +
-            "</span></div></div></div> "
-        ),
-        _vm._ssrNode(
-          "<div" +
-            _vm._ssrClass(null, {
-              "modal-footer justify-content-between": _vm.modalElement,
-              row: !_vm.modalElement
-            }) +
             ">",
           "</div>",
           [
             _vm._ssrNode(
-              "<div" +
-                _vm._ssrClass(null, { "col-7 col-sm-4": !_vm.modalElement }) +
-                '><a href="javascript:void(0)" class="small text-appearance">' +
+              (_vm.modalElement
+                ? '<div class="h4">' +
+                  _vm._ssrEscape(
+                    "\n                " +
+                      _vm._s(_vm.$translate("Ceres::Template.login")) +
+                      "\n            "
+                  ) +
+                  "</div>"
+                : "<!---->") +
+                ' <div class="row"><div class="col-12"><div data-validate="mail" class="input-unit"><input data-testing="email-login" type="email" name="email" autocomplete="email"' +
+                _vm._ssrAttr("id", "email" + _vm._uid) +
+                " data-autofocus" +
+                _vm._ssrAttr("value", _vm.username) +
+                "> <label" +
+                _vm._ssrAttr("for", "email" + _vm._uid) +
+                ">" +
+                _vm._ssrEscape(
+                  _vm._s(_vm.$translate("Ceres::Template.loginEmail")) + "*"
+                ) +
+                '</label></div> <span class="error-msg">' +
                 _vm._ssrEscape(
                   _vm._s(
-                    _vm.$translate("Ceres::Template.loginForgotPassword")
-                  ) + "?"
+                    _vm.$translate("Ceres::Template.loginEnterConfirmEmail")
+                  )
                 ) +
-                "</a></div> "
+                '</span></div> <div class="col-12"><div data-validate="text"' +
+                _vm._ssrClass("input-unit", { "no-bottom": _vm.modalElement }) +
+                '><input data-testing="password-login" type="password" name="password" autocomplete="current-password"' +
+                _vm._ssrAttr("id", "password" + _vm._uid) +
+                _vm._ssrAttr("value", _vm.password) +
+                "> <label" +
+                _vm._ssrAttr("for", "password" + _vm._uid) +
+                ">" +
+                _vm._ssrEscape(
+                  _vm._s(_vm.$translate("Ceres::Template.loginPassword")) + "*"
+                ) +
+                '</label></div> <span class="error-msg">' +
+                _vm._ssrEscape(
+                  _vm._s(_vm.$translate("Ceres::Template.loginEmptyPassword"))
+                ) +
+                "</span></div></div> "
             ),
             _vm._ssrNode(
-              "<div" +
-                _vm._ssrClass(null, {
-                  "col-5 col-sm-8 text-sm-right": !_vm.modalElement
-                }) +
-                ">",
+              '<div class="row mt-2">',
               "</div>",
               [
-                _vm._t("extend-overlay-buttons"),
-                _vm._ssrNode(" "),
                 _vm._ssrNode(
-                  '<button data-testing="submit-login"' +
-                    _vm._ssrAttr("disabled", _vm.isDisabled) +
-                    _vm._ssrClass("btn btn-primary btn-appearance btn-medium", [
-                      { "float-right": !_vm.modalElement },
-                      _vm.buttonSizeClass
-                    ]) +
+                  "<div" +
+                    _vm._ssrClass(null, {
+                      "col-7 col-sm-4": !_vm.modalElement,
+                      "col-12": _vm.modalElement
+                    }) +
+                    '><a href="javascript:void(0)" class="small text-appearance">' +
+                    _vm._ssrEscape(
+                      _vm._s(
+                        _vm.$translate("Ceres::Template.loginForgotPassword")
+                      ) + "?"
+                    ) +
+                    "</a></div> "
+                ),
+                _vm._ssrNode(
+                  "<div" +
+                    _vm._ssrClass("mt-3", {
+                      "col-5 col-sm-8 text-sm-right": !_vm.modalElement,
+                      "col-12": _vm.modalElement
+                    }) +
                     ">",
-                  "</button>",
+                  "</div>",
                   [
+                    _vm._t("extend-overlay-buttons"),
+                    _vm._ssrNode(" "),
                     _vm._ssrNode(
-                      _vm._ssrEscape(
-                        "\n                    " +
-                          _vm._s(_vm.$translate("Ceres::Template.login")) +
-                          "\n                    "
-                      )
-                    ),
-                    _c("icon", {
-                      attrs: { icon: "user", loading: _vm.isDisabled }
-                    })
+                      '<button data-testing="submit-login"' +
+                        _vm._ssrAttr("disabled", _vm.isDisabled) +
+                        _vm._ssrClass(
+                          "btn btn-primary btn-appearance btn-medium",
+                          [
+                            { "float-right": !_vm.modalElement },
+                            _vm.buttonSizeClass
+                          ]
+                        ) +
+                        ">",
+                      "</button>",
+                      [
+                        _vm._ssrNode(
+                          _vm._ssrEscape(
+                            "\n                        " +
+                              _vm._s(_vm.$translate("Ceres::Template.login")) +
+                              "\n                        "
+                          )
+                        ),
+                        _c("icon", {
+                          attrs: { icon: "user", loading: _vm.isDisabled }
+                        })
+                      ],
+                      2
+                    )
                   ],
                   2
                 )
@@ -48882,8 +47918,7 @@ var render = function() {
           ],
           2
         )
-      ],
-      2
+      ]
     )
   ])
 }
@@ -49056,125 +48091,60 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "position-relative" },
-    [
-      _vm.isLoggedIn
-        ? _vm._ssrNode(
-            '<div class="dropdown">',
-            "</div>",
-            [
-              _vm._ssrNode(
-                '<a href="#" id="accountMenuList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-boundary="window" class="dropdown-toggle nav-link"><i aria-hidden="true" class="fa fa-user mr-1 d-sm-none"></i> <span class="d-none d-sm-inline">' +
-                  _vm._ssrEscape(
-                    _vm._s(
-                      _vm.$translate("Ceres::Template.loginHello", {
-                        username: _vm.username
-                      })
-                    )
-                  ) +
-                  "</span></a> "
-              ),
-              _vm._ssrNode(
-                '<div class="dropdown-menu small m-0 p-0 mw-100">',
-                "</div>",
-                [
-                  _vm._ssrNode(
-                    '<div aria-labelledby="accountMenuList" class="list-group">',
-                    "</div>",
-                    [
-                      _vm._ssrNode(
-                        "<a" +
-                          _vm._ssrAttr("href", _vm.$ceres.urls.myAccount) +
-                          ' class="list-group-item small"><i class="fa fa-user"></i>' +
-                          _vm._ssrEscape(
-                            " " +
-                              _vm._s(
-                                _vm.$translate("Ceres::Template.loginMyAccount")
-                              )
-                          ) +
-                          "</a> "
-                      ),
-                      _c(
-                        "a",
-                        {
-                          directives: [{ name: "logout", rawName: "v-logout" }],
-                          staticClass: "list-group-item small",
-                          attrs: { href: "#" }
-                        },
-                        [
-                          _vm._ssrNode(
-                            '<i class="fa fa-sign-out"></i>' +
-                              _vm._ssrEscape(
-                                " " +
-                                  _vm._s(
-                                    _vm.$translate(
-                                      "Ceres::Template.loginLogout"
-                                    )
-                                  )
-                              )
-                          )
-                        ]
-                      )
-                    ],
-                    2
-                  )
-                ]
-              )
-            ],
-            2
-          )
-        : _vm._e(),
-      _vm._ssrNode(
-        " " +
-          (!_vm.isLoggedIn
-            ? "<div>" +
-              (_vm.showLogin
-                ? '<a data-testing="login-select"' +
-                  _vm._ssrAttr(
-                    "href",
-                    _vm.isLogin ? "javascript:void(0)" : "#login"
-                  ) +
-                  _vm._ssrAttr("data-toggle", _vm.isLogin ? false : "modal") +
-                  _vm._ssrAttr(
-                    "aria-label",
-                    _vm.$translate("Ceres::Template.login")
-                  ) +
-                  ' class="nav-link"><i aria-hidden="true" class="fa fa-user mr-1"></i> <span class="d-none d-sm-inline">' +
-                  _vm._ssrEscape(
-                    _vm._s(_vm.$translate("Ceres::Template.login"))
-                  ) +
-                  "</span></a>"
-                : "<!---->") +
-              " " +
-              (_vm.showRegistration
-                ? (!_vm.showLogin ? '<span class="pipe"></span>' : "<!---->") +
-                  ' <a data-testing="register-select"' +
-                  _vm._ssrAttr(
-                    "href",
-                    _vm.isRegister ? "javascript:void(0)" : "#registration"
-                  ) +
-                  _vm._ssrAttr(
-                    "data-toggle",
-                    _vm.isRegister ? false : "modal"
-                  ) +
-                  _vm._ssrAttr(
-                    "aria-label",
-                    _vm.$translate("Ceres::Template.loginRegister")
-                  ) +
-                  ' class="nav-link"><i aria-hidden="true" class="fa fa-user-plus mr-1"></i> <span class="d-none d-sm-inline">' +
-                  _vm._ssrEscape(
-                    _vm._s(_vm.$translate("Ceres::Template.loginRegister"))
-                  ) +
-                  "</span></a>"
-                : "<!---->") +
-              "</div>"
-            : "<!---->")
-      )
-    ],
-    2
-  )
+  return _c("div", { class: _vm.viewModeClass }, [
+    _vm._ssrNode(
+      _vm.viewMethod == "default"
+        ? "<span" +
+            _vm._ssrClass("icon", { loggedin: _vm.isLoggedIn }) +
+            '><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> ' +
+            (!_vm.isLoggedIn
+              ? "<a" +
+                _vm._ssrAttr(
+                  "href",
+                  _vm.isLogin ? "javascript:void(0)" : "#login"
+                ) +
+                _vm._ssrAttr("data-toggle", _vm.isLogin ? false : "modal") +
+                _vm._ssrAttr(
+                  "aria-label",
+                  _vm.$translate("Ceres::Template.login")
+                ) +
+                ' class="nav-link">' +
+                _vm._s(_vm.$translate("Ceres::Template.login")) +
+                "</a>"
+              : "<a" +
+                _vm._ssrAttr("href", _vm.$ceres.urls.myAccount) +
+                ">" +
+                _vm._s("Mein Konto") +
+                "</a>") +
+            "</span>" +
+            (!_vm.isLogin
+              ? '<span class="icon"></span>'
+              : '<span class="d-none"></span>')
+        : _vm.viewMethod == "mobile"
+        ? !_vm.isLoggedIn
+          ? '<a href="#login"' +
+            _vm._ssrAttr("data-toggle", _vm.isLogin ? false : "modal") +
+            '><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> <span nologin class="mini">' +
+            _vm._s(_vm.$translate("Ceres::Template.login")) +
+            "</span></a>"
+          : "<a" +
+            _vm._ssrAttr("href", _vm.$ceres.urls.myAccount) +
+            ' class="loggedin"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> <span loggedin class="mini">' +
+            _vm._s("Mein Konto") +
+            "</span></a>"
+        : _vm.viewMethod == "wishlist"
+        ? '<div class="col-4 offset-2"><a href="#login"' +
+          _vm._ssrAttr("data-toggle", _vm.isLogin ? false : "modal") +
+          ' class="btn btn-bkm btn-sm btn-block">' +
+          _vm._s(_vm.$translate("Ceres::Template.login")) +
+          '</a></div><div class="col-4"><a href="#registration"' +
+          _vm._ssrAttr("data-toggle", _vm.isRegister ? false : "modal") +
+          ' class="btn btn-bkm-inverted btn-sm btn-block">' +
+          _vm._s(_vm.$translate("Ceres::Template.loginRegister")) +
+          "</a></div>"
+        : "<!---->"
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -49639,29 +48609,53 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { itemscope: "", itemtype: "http://schema.org/Thing" } },
+    {
+      staticClass: "bkr-cc",
+      attrs: { itemscope: "", itemtype: "http://schema.org/Thing" }
+    },
     [
-      [
-        _vm._ssrNode(
-          '<div class="single-carousel owl-carousel owl-theme owl-single-item mt-0">' +
-            _vm._ssrList(_vm.singleImages, function(image) {
-              return (
-                '<div class="prop-1-1"><a' +
-                _vm._ssrAttr("href", image.url) +
-                _vm._ssrAttr("data-lightbox", "single-item-image" + _vm._uid) +
-                "><img" +
-                _vm._ssrAttr("data-src", image.url) +
-                _vm._ssrAttr("alt", _vm.getAltText(image)) +
-                _vm._ssrAttr("title", _vm.getImageName(image)) +
-                ' class="owl-lazy"></a></div>'
-              )
-            }) +
-            "</div> "
-        ),
-        _vm.showThumbs
-          ? _vm._ssrNode(
-              '<div id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item">',
-              "</div>",
+      _vm._ssrNode(
+        '<div id="imageGallery" class="bkr-cc single-carousel owl-carousel owl-theme owl-single-item mt-0">' +
+          _vm._ssrList(_vm.singleImages, function(image) {
+            return (
+              '<div class="prop-1-1"><a' +
+              _vm._ssrAttr("href", image.url) +
+              _vm._ssrAttr("data-fancybox", "single-item-image" + _vm._uid) +
+              "><img" +
+              _vm._ssrAttr("data-src", image.url) +
+              _vm._ssrAttr("alt", _vm.getAltText(image)) +
+              _vm._ssrAttr("title", _vm.getImageName(image)) +
+              ' class="owl-lazy"><div class="magnifier"></div></a></div>'
+            )
+          }) +
+          "</div> "
+      ),
+      _vm.showThumbs
+        ? _vm._ssrNode(
+            '<div id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item">',
+            "</div>",
+            [
+              _vm._ssrNode(
+                (_vm.currentVariation.variationProperties &&
+                _vm.currentVariation.variationProperties.filter(function(prop) {
+                  return prop.id == 4
+                })[0]
+                  ? _vm._ssrList(
+                      _vm.currentVariation.variationProperties
+                        .filter(function(prop) {
+                          return prop.id == 4
+                        })[0]
+                        .properties.filter(function(prop) {
+                          return prop.id == 192
+                        }),
+                      function(property) {
+                        return property.values.value != ""
+                          ? '<div class="prop-1-1"><div class="image-container"><a data-toggle="modal" data-target="#videoModal" class="videoButton text-center"><img src="https://cdn.bio-kinder.de/frontend/images/static/playbtn.svg" alt="Video wiedergeben"> <span>Video <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></span></a></div></div>'
+                          : "<!---->"
+                      }
+                    )
+                  : "<!---->") + " "
+              ),
               _vm._l(_vm.carouselImages, function(imagePreview, index) {
                 return _vm._ssrNode('<div class="prop-1-1">', "</div>", [
                   _vm._ssrNode(
@@ -49681,21 +48675,11 @@ var render = function() {
                     1
                   )
                 ])
-              }),
-              0
-            )
-          : _vm._e()
-      ],
-      _vm._ssrNode(
-        " " +
-          (!_vm.initialized
-            ? '<div class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0"><div class="prop-1-1"><img' +
-              _vm._ssrAttr("src", _vm.singleImages[0].url) +
-              _vm._ssrAttr("alt", _vm.getAltText(_vm.singleImages[0].url)) +
-              _vm._ssrAttr("title", _vm.getImageName(_vm.singleImages[0].url)) +
-              ' class="owl-placeholder"></div></div>'
-            : "<!---->")
-      )
+              })
+            ],
+            2
+          )
+        : _vm._e()
     ],
     2
   )
@@ -49722,176 +48706,180 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { class: { "has-crossprice": _vm.hasCrossPrice } }, [
-    _vm._ssrNode(
-      (_vm.showCrossPrice && _vm.hasCrossPrice
-        ? "<div" +
-          _vm._ssrClass("crossprice", {
-            "is-special-offer": _vm.hasSpecialOffer
-          }) +
-          '><del class="text-muted small text-appearance">' +
-          (_vm.hasSpecialOffer
-            ? _vm._ssrEscape(
-                "\n                " +
+  return _c(
+    "div",
+    {
+      staticClass: "variationPrices bkr-cc",
+      class: { "has-crossprice": _vm.hasCrossPrice }
+    },
+    [
+      _vm._ssrNode(
+        (_vm.currentVariation.prices.default.price.value > 0 &&
+        _vm.currentVariation.prices.rrp.price.value > 0 &&
+        _vm.currentVariation.prices.default.price.value <
+          _vm.currentVariation.prices.rrp.price.value
+          ? '<span class="percent">' +
+            _vm._ssrEscape(
+              "\n          Sie sparen " +
+                _vm._s(
+                  _vm._f("numberFormat")(
+                    (1 -
+                      _vm.currentVariation.prices.default.price.value /
+                        _vm.currentVariation.prices.rrp.price.value) *
+                      100,
+                    2,
+                    ","
+                  )
+                ) +
+                "%\n        "
+            ) +
+            "</span>"
+          : "<!---->") +
+          " " +
+          (_vm.showCrossPrice && _vm.hasCrossPrice
+            ? '<span id="itemmrp"' +
+              _vm._ssrClass("text-muted", {
+                "is-special-offer": _vm.hasSpecialOffer
+              }) +
+              ">" +
+              _vm._ssrEscape(
+                "\n            " +
                   _vm._s(
-                    _vm._f("itemCrossPrice")(
-                      _vm.currentVariation.prices.default.unitPrice.formatted,
-                      true
-                    )
+                    _vm.$translate("biokinderDesign::Template.itemInstedOf")
                   ) +
                   "\n            "
+              ) +
+              '<del class="small text-appearance">' +
+              (_vm.hasSpecialOffer
+                ? _vm._ssrEscape(
+                    "\n                    " +
+                      _vm._s(
+                        _vm._f("itemCrossPrice")(
+                          _vm.currentVariation.prices.default.unitPrice
+                            .formatted,
+                          true
+                        )
+                      ) +
+                      "\n                "
+                  )
+                : _vm._ssrEscape(
+                    "\n                    " +
+                      _vm._s(
+                        _vm._f("itemCrossPrice")(
+                          _vm.currentVariation.prices.rrp.unitPrice.formatted
+                        )
+                      ) +
+                      "\n                "
+                  )) +
+              "</del></span>"
+            : "<!---->") +
+          " <span" +
+          _vm._ssrClass("singleprice", { colorred: _vm.hasCrossPrice }) +
+          "><span>" +
+          (_vm.showDynamicPrice
+            ? _vm._ssrEscape(
+                "\n                    " +
+                  _vm._s(
+                    _vm.$translate("Ceres::Template.dynamicVariationPrice", {
+                      price: _vm.$options.filters.currency(
+                        _vm.variationTotalPrice,
+                        _vm.currentVariation.prices.default.currency
+                      )
+                    })
+                  ) +
+                  "\n                "
               )
             : _vm._ssrEscape(
-                "\n                " +
+                "\n                    " +
                   _vm._s(
-                    _vm._f("itemCrossPrice")(
-                      _vm.currentVariation.prices.rrp.unitPrice.formatted
-                    )
-                  ) +
-                  "\n            "
-              )) +
-          "</del></div>"
-        : "<!---->") +
-        " <span" +
-        _vm._ssrClass("price h1", { "is-special-offer": _vm.hasSpecialOffer }) +
-        "><span>" +
-        (_vm.showDynamicPrice
-          ? _vm._ssrEscape(
-              "\n                " +
-                _vm._s(
-                  _vm.$translate("Ceres::Template.dynamicVariationPrice", {
-                    price: _vm.$options.filters.currency(
+                    _vm._f("currency")(
                       _vm.variationTotalPrice,
                       _vm.currentVariation.prices.default.currency
                     )
-                  })
-                ) +
-                "\n            "
-            )
-          : _vm._ssrEscape(
-              "\n                " +
+                  ) +
+                  "\n                "
+              )) +
+          '</span></span> <div class="clearer"></div> ' +
+          (_vm.currentVariation.unit &&
+          _vm.currentVariation.variation.mayShowUnitPrice
+            ? "<div" +
+              _vm._ssrClass("base-price text-muted my-1", {
+                "is-single-piece":
+                  _vm.currentVariation.unit &&
+                  _vm.currentVariation.unit.content === 1 &&
+                  _vm.currentVariation.unit.unitOfMeasurement === "C62"
+              }) +
+              ">" +
+              _vm._ssrEscape(
+                "\n\n                " +
+                  _vm._s(_vm.$translate("Ceres::Template.singleItemContent")) +
+                  ":\n                "
+              ) +
+              "<span>" +
+              _vm._ssrEscape(
                 _vm._s(
-                  _vm._f("currency")(
-                    _vm.variationTotalPrice,
-                    _vm.currentVariation.prices.default.currency
-                  )
-                ) +
-                "\n            "
-            )) +
-        "</span> <sup>" +
-        _vm._ssrEscape(
-          _vm._s(_vm.$translate("Ceres::Template.singleItemFootnote1"))
-        ) +
-        "</sup></span> " +
-        (_vm.propertiesWithAdditionalCostsVisible.length
-          ? '<ul class="text-muted pl-0 list-unstyled">' +
-            _vm._ssrList(_vm.propertiesWithAdditionalCostsVisible, function(
-              property
-            ) {
-              return (
-                '<li><span class="d-block">' +
-                _vm._ssrEscape(
-                  "\n                " +
-                    _vm._s(property.property.names.name) +
-                    " "
-                ) +
-                (_vm.$options.filters.propertySurcharge(
-                  _vm.currentVariation.properties,
-                  property.propertyId
-                ) > 0
-                  ? _vm._ssrEscape(
-                      "(" +
-                        _vm._s(
-                          _vm.$translate("Ceres::Template.basketPlusAbbr")
-                        ) +
-                        " " +
-                        _vm._s(
-                          _vm._f("currency")(
-                            _vm._f("propertySurcharge")(
-                              _vm.currentVariation.properties,
-                              property.propertyId
-                            )
-                          )
-                        ) +
-                        ")"
+                  _vm._f("numberFormat")(_vm.currentVariation.unit.content)
+                ) + " "
+              ) +
+              "</span> <span>" +
+              _vm._ssrEscape(_vm._s(_vm.currentVariation.unit.names.name)) +
+              '</span>\n                 | \n                <span class="base-price-value">' +
+              _vm._ssrEscape(
+                "\n                    " +
+                  _vm._s(
+                    _vm._f("specialOffer")(
+                      _vm.variationGraduatedPrice.basePrice,
+                      _vm.currentVariation.prices,
+                      "basePrice"
                     )
-                  : "<!---->") +
-                " " +
-                (_vm.hasTax(property)
-                  ? _vm._ssrEscape(
+                  ) +
+                  "\n                "
+              ) +
+              "</span></div>"
+            : "<!---->") +
+          " "
+      ),
+      _vm._ssrNode(
+        '<div class="shippinginfo">',
+        "</div>",
+        [
+          _vm._ssrNode(
+            _vm._ssrEscape(
+              "\n          " +
+                _vm._s(_vm.$translate("Ceres::Template.singleItemInclVAT")) +
+                ",\n          " +
+                _vm._s(_vm.$translate("Ceres::Template.singleItemExclusive")) +
+                "\n          "
+            ) +
+              '<a data-toggle="modal" href="#shippingscosts"' +
+              _vm._ssrAttr(
+                "title",
+                _vm.$translate("Ceres::Template.singleItemShippingCosts")
+              ) +
+              ' class="openPorto">CO<sub>2</sub> neutraler Versand</a> '
+          ),
+          _vm._t("additional-content-after-vat"),
+          _vm._ssrNode(
+            " " +
+              (_vm.showCrossPrice && _vm.hasCrossPrice
+                ? "<span><br>" +
+                  _vm._ssrEscape(
+                    "Zuletzt niedrigster Preis " +
                       _vm._s(
-                        _vm.$translate("Ceres::Template.singleItemFootnote1")
-                      )
-                    )
-                  : "<!---->") +
-                "</span></li>"
-              )
-            }) +
-            "</ul>"
-          : "<!---->") +
-        " " +
-        (_vm.currentVariation.prices.default.lowestPrice.value &&
-        _vm.showCrossPrice &&
-        _vm.hasCrossPrice
-          ? '<div class="lowest-price text-muted mb-3"><div>' +
-            _vm._s(
-              _vm.$translate("Ceres::Template.singleItemLowestPrice", {
-                price: _vm.currentVariation.prices.default.lowestPrice.formatted
-              })
-            ) +
-            "</div></div>"
-          : "<!---->") +
-        " " +
-        (_vm.currentVariation.unit
-          ? "<div" +
-            _vm._ssrClass("base-price text-muted my-3", {
-              "is-single-piece":
-                _vm.currentVariation.unit &&
-                _vm.currentVariation.unit.content === 1 &&
-                _vm.currentVariation.unit.unitOfMeasurement === "C62"
-            }) +
-            "><div>" +
-            _vm._ssrEscape(
-              "\n            " +
-                _vm._s(_vm.$translate("Ceres::Template.singleItemContent")) +
-                "\n            "
-            ) +
-            "<span>" +
-            _vm._ssrEscape(
-              _vm._s(
-                _vm._f("numberFormat")(_vm.currentVariation.unit.content)
-              ) + " "
-            ) +
-            "</span> <span>" +
-            _vm._ssrEscape(_vm._s(_vm.currentVariation.unit.names.name)) +
-            "</span></div> " +
-            (_vm.currentVariation.variation.mayShowUnitPrice
-              ? "<div>" +
-                _vm._ssrEscape(
-                  "\n            " +
-                    _vm._s(
-                      _vm.$translate("Ceres::Template.singleItemUnitPrice")
-                    ) +
-                    "\n            "
-                ) +
-                '<span class="base-price-value">' +
-                _vm._ssrEscape(
-                  "\n                " +
-                    _vm._s(
-                      _vm._f("specialOffer")(
-                        _vm.variationGraduatedPrice.basePrice,
-                        _vm.currentVariation.prices,
-                        "basePrice"
-                      )
-                    ) +
-                    "\n            "
-                ) +
-                "</span></div>"
-              : "<!---->") +
-            "</div>"
-          : "<!---->")
-    )
-  ])
+                        _vm.currentVariation.prices.default.lowestPrice
+                          .formatted
+                      ) +
+                      "\n          "
+                  ) +
+                  "</span>"
+                : "<!---->")
+          )
+        ],
+        2
+      )
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -50126,481 +49114,302 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "position-relative" },
-    [
-      _vm.inputType === "text" ||
-      _vm.inputType === "float" ||
-      _vm.inputType === "int"
-        ? _vm._ssrNode(
-            '<div data-validate="text"' +
-              _vm._ssrClass("input-unit order-property-input", {
-                active: _vm.property.value,
-                error: _vm.hasError
-              }) +
-              ">",
-            "</div>",
-            [
-              _c(
-                "input",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.inputValue,
-                      expression: "inputValue"
-                    },
-                    { name: "tooltip", rawName: "v-tooltip" }
-                  ],
-                  attrs: {
-                    type: "text",
-                    "data-toggle": "tooltip",
-                    title: _vm.property.names.description,
-                    "data-testing": "order-property-input-" + _vm.inputType
+  return _c("div", [
+    _vm.inputType === "text" ||
+    _vm.inputType === "float" ||
+    _vm.inputType === "int"
+      ? _vm._ssrNode(
+          '<div data-validate="text"' +
+            _vm._ssrClass("input-unit order-property-input", {
+              active: _vm.property.value,
+              error: _vm.hasError
+            }) +
+            ">",
+          "</div>",
+          [
+            _c(
+              "input",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.inputValue,
+                    expression: "inputValue"
                   },
-                  domProps: { value: _vm.inputValue },
-                  on: {
-                    input: [
-                      function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.inputValue = $event.target.value
-                      },
-                      function($event) {
-                        return _vm.onInputValueChanged($event.target.value)
+                  { name: "tooltip", rawName: "v-tooltip" }
+                ],
+                attrs: {
+                  type: "text",
+                  "data-toggle": "tooltip",
+                  title: _vm.property.names.description,
+                  "data-testing": "order-property-input-" + _vm.inputType
+                },
+                domProps: { value: _vm.inputValue },
+                on: {
+                  input: [
+                    function($event) {
+                      if ($event.target.composing) {
+                        return
                       }
-                    ]
-                  }
-                },
-                []
-              ),
-              _vm._ssrNode(
-                ' <label class="d-flex"><span class="text-truncate">' +
-                  _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
-                  '</span> <strong class="ml-1">' +
-                  (_vm.surcharge > 0
-                    ? _vm._ssrEscape(
-                        "(" +
-                          _vm._s(_vm.inclOrPlus) +
-                          " " +
-                          _vm._s(_vm._f("currency")(_vm.surcharge)) +
-                          ")"
-                      )
-                    : "<!---->") +
-                  " <span>" +
-                  _vm._ssrEscape(
-                    _vm._s(_vm.footnotes) + " " + _vm._s(_vm.requiredFootnotes)
-                  ) +
-                  "</span></strong></label>"
-              )
-            ],
-            2
-          )
-        : _vm.inputType === "checkbox" || _vm.inputType === "radio"
-        ? _vm._ssrNode(
-            "<div" + _vm._ssrClass("form-check", { error: _vm.hasError }) + ">",
-            "</div>",
-            [
-              _vm._ssrNode(
-                (_vm.inputType === "checkbox" &&
-                !(_vm.property.isRequired && _vm.property.isPreSelected)
-                  ? '<input type="checkbox"' +
-                    _vm._ssrAttr(
-                      "name",
-                      _vm.group ? _vm.group.id : "check" + _vm._uid
-                    ) +
-                    _vm._ssrAttr("id", "check" + _vm._uid) +
-                    ' data-testing="order-property-input-checkbox"' +
-                    _vm._ssrAttr("value", _vm.property.id) +
-                    _vm._ssrAttr("checked", _vm.property.value) +
-                    ' class="form-check-input">'
-                  : _vm.inputType === "radio"
-                  ? '<input type="radio"' +
-                    _vm._ssrAttr(
-                      "name",
-                      _vm.group ? _vm.group.id : "check" + _vm._uid
-                    ) +
-                    _vm._ssrAttr("id", "check" + _vm._uid) +
-                    ' data-testing="order-property-input-radio"' +
-                    _vm._ssrAttr("value", _vm.property.id) +
-                    _vm._ssrAttr("checked", _vm.property.value) +
-                    ' class="form-check-input">'
-                  : "<!---->") + " "
-              ),
-              _c(
-                "label",
-                {
-                  directives: [{ name: "tooltip", rawName: "v-tooltip" }],
-                  staticClass: "form-check-label text-appearance d-flex",
-                  attrs: {
-                    for: "check" + _vm._uid,
-                    "data-toggle": "tooltip",
-                    title: _vm.property.names.description,
-                    "data-testing": "order-property-label-" + _vm.inputType
-                  }
-                },
-                [
-                  _vm._ssrNode(
-                    '<span class="text-wrap">' +
-                      _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
-                      '</span> <strong class="ml-1">' +
-                      (_vm.surcharge > 0
-                        ? _vm._ssrEscape(
-                            "(" +
-                              _vm._s(_vm.inclOrPlus) +
-                              " " +
-                              _vm._s(_vm._f("currency")(_vm.surcharge)) +
-                              ")"
-                          )
-                        : "<!---->") +
-                      " <span>" +
-                      _vm._ssrEscape(
-                        _vm._s(_vm.footnotes) +
-                          " " +
-                          _vm._s(_vm.requiredFootnotes)
-                      ) +
-                      "</span></strong>"
-                  )
-                ]
-              )
-            ],
-            2
-          )
-        : _vm.inputType === "selection"
-        ? _vm._ssrNode(
-            "<div" +
-              _vm._ssrClass(null, { "d-flex": _vm.selectedDescription }) +
-              ">",
-            "</div>",
-            [
-              _c(
-                "div",
-                {
-                  directives: [{ name: "tooltip", rawName: "v-tooltip" }],
-                  staticClass: "input-unit order-property-input",
-                  class: { active: _vm.property.value, error: _vm.hasError },
-                  attrs: {
-                    "data-toggle": "tooltip",
-                    title: _vm.property.names.description
-                  }
-                },
-                [
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.selectionValue,
-                          expression: "selectionValue"
-                        }
-                      ],
-                      staticClass: "custom-select",
-                      attrs: {
-                        id: "order-property-input-select",
-                        "data-testing": "order-property-selection"
-                      },
-                      on: {
-                        change: [
-                          function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.selectionValue = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          },
-                          function($event) {
-                            return _vm.onInputValueChanged($event.target.value)
-                          }
-                        ]
-                      }
+                      _vm.inputValue = $event.target.value
                     },
-                    [
-                      _c(
-                        "option",
-                        { domProps: { selected: true, value: null } },
-                        [
-                          _vm._v(
-                            _vm._s(
-                              _vm.$translate(
-                                "Ceres::Template.singleItemPleaseSelect"
-                              )
+                    function($event) {
+                      return _vm.onInputValueChanged($event.target.value)
+                    }
+                  ]
+                }
+              },
+              []
+            ),
+            _vm._ssrNode(
+              ' <label class="d-flex"><span class="text-truncate">' +
+                _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
+                "</span> " +
+                (_vm.surcharge > 0
+                  ? '<strong class="ml-1">' +
+                    _vm._ssrEscape(
+                      "(+ " + _vm._s(_vm._f("currency")(_vm.surcharge)) + ") *"
+                    ) +
+                    "</strong>"
+                  : "<!---->") +
+                "</label>"
+            )
+          ],
+          2
+        )
+      : _vm.inputType === "checkbox" || _vm.inputType === "radio"
+      ? _vm._ssrNode(
+          "<div" +
+            _vm._ssrClass(
+              "form-check order-property-checkbox mb-0",
+              "order-property-" + _vm.property.id
+            ) +
+            ">",
+          "</div>",
+          [
+            _vm._ssrNode(
+              (_vm.inputType === "checkbox"
+                ? '<input type="checkbox"' +
+                  _vm._ssrAttr(
+                    "name",
+                    _vm.group ? _vm.group.id : "check" + _vm._uid
+                  ) +
+                  _vm._ssrAttr("id", "check" + _vm._uid) +
+                  ' data-testing="order-property-input-checkbox"' +
+                  _vm._ssrAttr("value", _vm.property.id) +
+                  _vm._ssrAttr("checked", _vm.property.value) +
+                  _vm._ssrClass(
+                    "form-check-input",
+                    "checkbox_" + _vm.property.id
+                  ) +
+                  ">"
+                : '<input type="radio"' +
+                  _vm._ssrAttr(
+                    "name",
+                    _vm.group ? _vm.group.id : "check" + _vm._uid
+                  ) +
+                  _vm._ssrAttr("id", "check" + _vm._uid) +
+                  ' data-testing="order-property-input-radio"' +
+                  _vm._ssrAttr("value", _vm.property.id) +
+                  _vm._ssrAttr("checked", _vm.property.value) +
+                  ' class="form-check-input">') + " "
+            ),
+            _c(
+              "label",
+              {
+                directives: [{ name: "tooltip", rawName: "v-tooltip" }],
+                staticClass: "form-check-label text-appearance d-flex",
+                class: { "text-danger": _vm.hasError },
+                attrs: {
+                  for: "check" + _vm._uid,
+                  "data-toggle": "tooltip",
+                  title: _vm.property.names.description
+                }
+              },
+              [
+                _vm._ssrNode(
+                  '<span class="text-wrap"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>' +
+                    _vm._ssrEscape(
+                      "\n                    " +
+                        _vm._s(_vm.property.names.name) +
+                        "\n                  "
+                    ) +
+                    '<a data-toggle="modal" href="#aufbauserviceModal">Details</a></span> ' +
+                    (_vm.surcharge > 0
+                      ? '<span class="ml-1 surcharge">' +
+                        _vm._ssrEscape(
+                          "+ " + _vm._s(_vm._f("currency")(_vm.surcharge))
+                        ) +
+                        "</span>"
+                      : "<!---->")
+                )
+              ]
+            )
+          ],
+          2
+        )
+      : _vm.inputType === "selection"
+      ? _vm._ssrNode(
+          "<div" +
+            _vm._ssrClass(null, { "d-flex": _vm.selectedDescription }) +
+            ">",
+          "</div>",
+          [
+            _c(
+              "div",
+              {
+                directives: [{ name: "tooltip", rawName: "v-tooltip" }],
+                staticClass: "input-unit order-property-input",
+                class: { active: _vm.property.value, error: _vm.hasError },
+                attrs: {
+                  "data-toggle": "tooltip",
+                  title: _vm.property.names.description
+                }
+              },
+              [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.selectionValue,
+                        expression: "selectionValue"
+                      }
+                    ],
+                    staticClass: "custom-select",
+                    attrs: {
+                      id: "order-property-input-select",
+                      "data-testing": "order-property-selection"
+                    },
+                    on: {
+                      change: [
+                        function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.selectionValue = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        },
+                        function($event) {
+                          return _vm.onInputValueChanged($event.target.value)
+                        }
+                      ]
+                    }
+                  },
+                  [
+                    _c(
+                      "option",
+                      { domProps: { selected: true, value: null } },
+                      [
+                        _vm._v(
+                          _vm._s(
+                            _vm.$translate(
+                              "Ceres::Template.singleItemPleaseSelect"
                             )
                           )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _vm._l(_vm.property.selectionValues, function(value, id) {
-                        return _c(
-                          "option",
-                          {
-                            key: id,
-                            attrs: {
-                              "data-testing": "order-property-selection-option"
-                            },
-                            domProps: {
-                              selected: _vm.property.id === id,
-                              value: id
-                            }
-                          },
-                          [_vm._v(_vm._s(value.name))]
                         )
-                      })
-                    ],
-                    2
-                  ),
-                  _vm._ssrNode(
-                    ' <label for="order-property-input-select" class="d-flex w-100"><span class="text-truncate">' +
-                      _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
-                      '</span> <strong class="ml-1">' +
-                      (_vm.surcharge > 0
-                        ? _vm._ssrEscape(
-                            "(" +
-                              _vm._s(_vm.inclOrPlus) +
-                              " " +
-                              _vm._s(_vm._f("currency")(_vm.surcharge)) +
-                              ")"
-                          )
-                        : "<!---->") +
-                      " <span>" +
-                      _vm._ssrEscape(
-                        _vm._s(_vm.footnotes) +
-                          " " +
-                          _vm._s(_vm.requiredFootnotes)
-                      ) +
-                      "</span></strong></label>"
-                  )
-                ],
-                2
-              ),
-              _vm._ssrNode(" "),
-              _vm.selectedDescription
-                ? _c("popper", {
-                    staticClass: "order-property-selection-info-popper",
-                    attrs: { placement: "bottom" },
-                    scopedSlots: _vm._u(
-                      [
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._l(_vm.property.selectionValues, function(value, id) {
+                      return _c(
+                        "option",
                         {
-                          key: "handle",
-                          fn: function() {
-                            return [
-                              _c(
-                                "button",
-                                {
-                                  staticClass:
-                                    "btn btn-icon btn-circle btn-default btn-appearance font-weight-bold"
-                                },
-                                [_vm._v("?")]
-                              )
-                            ]
+                          key: id,
+                          attrs: {
+                            "data-testing": "order-property-selection-option"
                           },
-                          proxy: true
+                          domProps: {
+                            selected: _vm.property.id === id,
+                            value: id
+                          }
                         },
-                        {
-                          key: "content",
-                          fn: function() {
-                            return [
-                              _vm._v(
-                                "\n                " +
-                                  _vm._s(_vm.selectedDescription) +
-                                  "\n            "
-                              )
-                            ]
-                          },
-                          proxy: true
-                        }
-                      ],
-                      null,
-                      false,
-                      2730731730
-                    )
-                  })
-                : _vm._e()
-            ],
-            2
-          )
-        : _vm.inputType === "file"
-        ? _vm._ssrNode(
-            '<div class="d-flex">',
-            "</div>",
-            [
-              _c(
-                "label",
-                {
-                  directives: [{ name: "tooltip", rawName: "v-tooltip" }],
-                  staticClass:
-                    "input-unit file-input order-property-input component-loading with-icon sending",
-                  class: {
-                    active: _vm.property.value,
-                    "is-loading": _vm.waiting,
-                    error: _vm.hasError
-                  },
-                  attrs: {
-                    "data-toggle": "tooltip",
-                    title: _vm.property.names.description
-                  }
-                },
-                [
-                  _vm._ssrNode(
-                    "<span" +
-                      _vm._ssrClass("input-unit-preview", {
-                        disabled: _vm.waiting
-                      }) +
-                      ">" +
-                      _vm._ssrEscape(_vm._s(_vm.selectedFileName)) +
-                      '</span> <span class="input-unit-label d-flex"><span class="text-truncate">' +
-                      _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
-                      '</span> <strong class="ml-1">' +
-                      (_vm.surcharge > 0
-                        ? _vm._ssrEscape(
-                            "(" +
-                              _vm._s(_vm.inclOrPlus) +
-                              " " +
-                              _vm._s(_vm._f("currency")(_vm.surcharge)) +
-                              ")"
-                          )
-                        : "<!---->") +
-                      " <span>" +
-                      _vm._ssrEscape(
-                        _vm._s(_vm.footnotes) +
-                          " " +
-                          _vm._s(_vm.requiredFootnotes)
-                      ) +
-                      "</span></strong></span> " +
-                      (!_vm.selectedFile
-                        ? '<span class="input-unit-btn"><i class="fa fa-ellipsis-h"></i></span>'
-                        : "<span" +
-                          _vm._ssrAttr("disabled", _vm.waiting) +
-                          ' class="input-unit-btn"><i class="fa fa-times"></i></span>') +
-                      " <input" +
-                      _vm._ssrAttr("disabled", _vm.waiting) +
-                      ' type="file" size="50" data-testing="order-property-input-file">'
-                  )
-                ]
-              ),
-              _vm._ssrNode(" "),
-              _c(
-                "client-only",
-                [
-                  _vm.isTouchDevice && _vm.property.names.description
-                    ? _c("popper", {
-                        staticClass: "order-property-selection-info-popper",
-                        attrs: { placement: "bottom" },
-                        scopedSlots: _vm._u(
-                          [
-                            {
-                              key: "handle",
-                              fn: function() {
-                                return [
-                                  _c(
-                                    "button",
-                                    {
-                                      staticClass:
-                                        "btn btn-icon btn-circle btn-default btn-appearance font-weight-bold"
-                                    },
-                                    [_vm._v("?")]
-                                  )
-                                ]
-                              },
-                              proxy: true
-                            },
-                            {
-                              key: "content",
-                              fn: function() {
-                                return [
-                                  _vm._v(
-                                    "\n                    " +
-                                      _vm._s(_vm.property.names.description) +
-                                      "\n                "
-                                  )
-                                ]
-                              },
-                              proxy: true
-                            }
-                          ],
-                          null,
-                          false,
-                          1618376136
-                        )
-                      })
-                    : _vm._e()
-                ],
-                1
-              )
-            ],
-            2
-          )
-        : _vm._e(),
-      _vm._ssrNode(" "),
-      _c(
-        "client-only",
-        [
-          _vm.isTouchDevice &&
-          _vm.inputType !== "selection" &&
-          _vm.inputType !== "file" &&
-          _vm.property.names.description
-            ? _c("popper", {
-                staticClass:
-                  "order-property-selection-info-popper position-absolute",
-                class: {
-                  "checkbox-or-radio":
-                    _vm.inputType === "checkbox" || _vm.inputType === "radio"
-                },
-                attrs: { placement: "bottom" },
-                scopedSlots: _vm._u(
-                  [
-                    {
-                      key: "handle",
-                      fn: function() {
-                        return [
-                          _c(
-                            "button",
-                            {
-                              staticClass:
-                                "btn btn-icon btn-circle btn-default btn-appearance font-weight-bold"
-                            },
-                            [_vm._v("?")]
-                          )
-                        ]
-                      },
-                      proxy: true
-                    },
-                    {
-                      key: "content",
-                      fn: function() {
-                        return [
-                          _vm._v(
-                            "\n                " +
-                              _vm._s(_vm.property.names.description) +
-                              "\n            "
-                          )
-                        ]
-                      },
-                      proxy: true
-                    }
+                        [_vm._v("${ value.name }")]
+                      )
+                    })
                   ],
-                  null,
-                  false,
-                  1214237640
+                  2
+                ),
+                _vm._ssrNode(
+                  ' <label for="order-property-input-select" class="d-flex w-100"><span class="text-truncate">' +
+                    _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
+                    "</span> " +
+                    (_vm.surcharge > 0
+                      ? '<span class="ml-1">' +
+                        _vm._ssrEscape(
+                          _vm._s(_vm._f("currency")(_vm.surcharge))
+                        ) +
+                        "</span>"
+                      : "<!---->") +
+                    "</label>"
                 )
-              })
-            : _vm._e()
-        ],
-        1
-      )
-    ],
-    2
-  )
+              ],
+              2
+            )
+          ]
+        )
+      : _vm.inputType === "file"
+      ? _vm._ssrNode("<div>", "</div>", [
+          _c(
+            "label",
+            {
+              directives: [{ name: "tooltip", rawName: "v-tooltip" }],
+              staticClass:
+                "input-unit file-input order-property-input component-loading with-icon sending",
+              class: {
+                active: _vm.property.value,
+                "is-loading": _vm.waiting,
+                error: _vm.hasError
+              },
+              attrs: {
+                "data-toggle": "tooltip",
+                title: _vm.property.names.description
+              }
+            },
+            [
+              _vm._ssrNode(
+                "<span" +
+                  _vm._ssrClass("input-unit-preview", {
+                    disabled: _vm.waiting
+                  }) +
+                  ">" +
+                  _vm._ssrEscape(_vm._s(_vm.selectedFileName)) +
+                  '</span> <span class="input-unit-label d-flex"><span class="text-truncate">' +
+                  _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
+                  "</span> " +
+                  (_vm.surcharge > 0
+                    ? '<strong class="ml-1">' +
+                      _vm._ssrEscape(
+                        "(+ " +
+                          _vm._s(_vm._f("currency")(_vm.surcharge)) +
+                          ") *"
+                      ) +
+                      "</strong>"
+                    : "<!---->") +
+                  "</span> " +
+                  (!_vm.selectedFile
+                    ? '<span class="input-unit-btn"><i class="fa fa-ellipsis-h"></i></span>'
+                    : "<span" +
+                      _vm._ssrAttr("disabled", _vm.waiting) +
+                      ' class="input-unit-btn"><i class="fa fa-times"></i></span>') +
+                  " <input" +
+                  _vm._ssrAttr("disabled", _vm.waiting) +
+                  ' type="file" size="50" accept="image/*" data-testing="order-property-input-file">'
+              )
+            ]
+          )
+        ])
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -50625,33 +49434,19 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm.shownProperties && _vm.shownProperties.length
-    ? _c(
-        "div",
-        { staticClass: "small" },
-        [
-          _vm._ssrNode(
-            '<div class="font-weight-bold my-1">' +
-              _vm._ssrEscape(
-                _vm._s(
-                  _vm.$translate("Ceres::Template.basketAdditionalCosts")
-                ) + ":"
-              ) +
-              "</div> "
-          ),
-          _vm._ssrNode(
-            '<ul data-testing="order-property-list" class="ml-1 pl-3">',
-            "</ul>",
-            _vm._l(_vm.shownProperties, function(property) {
-              return _c("order-property-value-list-item", {
-                key: property.propertyId,
-                attrs: { property: property }
-              })
-            }),
-            1
-          )
-        ],
-        2
-      )
+    ? _c("div", { staticClass: "small smallProp" }, [
+        _vm._ssrNode(
+          '<ul class="ml-0 pl-0">',
+          "</ul>",
+          _vm._l(_vm.shownProperties, function(property) {
+            return _c("order-property-value-list-item", {
+              key: property.propertyId,
+              attrs: { property: property }
+            })
+          }),
+          1
+        )
+      ])
     : _vm._e()
 }
 var staticRenderFns = []
@@ -50678,31 +49473,12 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("li", [
     _vm._ssrNode(
-      '<span class="d-block"><strong' +
+      "<strong" +
         _vm._ssrClass(null, { colon: _vm.showColon }) +
-        ">" +
+        '><i class="fa fa-check"></i>' +
         _vm._ssrEscape(
-          "\n            " +
-            _vm._s(_vm.property.property.names.name) +
-            " \n            "
+          " " + _vm._s(_vm.property.property.names.name) + "\n      "
         ) +
-        (_vm.surcharge > 0
-          ? _vm.isAdditionalCost || _vm.isTaxless
-            ? _vm._ssrEscape(
-                "\n                    (" +
-                  _vm._s(_vm.$translate("Ceres::Template.basketPlusAbbr")) +
-                  " " +
-                  _vm._s(_vm._f("currency")(_vm.surcharge)) +
-                  ")\n                "
-              )
-            : _vm._ssrEscape(
-                "\n                    (" +
-                  _vm._s(_vm.$translate("Ceres::Template.basketIncludeAbbr")) +
-                  " " +
-                  _vm._s(_vm._f("currency")(_vm.surcharge)) +
-                  ")\n                "
-              )
-          : "<!---->") +
         "</strong> <span>" +
         (_vm.property.property.valueType === "file"
           ? "<span><a" +
@@ -50712,9 +49488,9 @@ var render = function() {
             ) +
             ' target="_blank"><i aria-hidden="true" class="fa fa-external-link"></i>' +
             _vm._ssrEscape(
-              "\n                    " +
+              "\n                  " +
                 _vm._s(_vm._f("fileName")(_vm.property.property.value)) +
-                "\n                "
+                "\n              "
             ) +
             "</a></span>"
           : _vm.property.property.valueType !== "empty"
@@ -50722,7 +49498,7 @@ var render = function() {
             _vm._ssrEscape(_vm._s(_vm.property.property.value)) +
             "</span>"
           : "<!---->") +
-        "</span></span>"
+        "</span>"
     )
   ])
 }
@@ -50748,107 +49524,173 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "qty-box d-flex h-100" },
-    [
-      _vm._ssrNode(
-        '<input type="text"' +
-          _vm._ssrAttr("disabled", _vm.waiting) +
-          _vm._ssrAttr(
-            "aria-label",
-            _vm.$translate("Ceres::Template.itemQuantityInput")
-          ) +
-          _vm._ssrAttr("value", _vm.displayValue) +
-          ' class="qty-input text-center"> '
-      ),
-      _vm._ssrNode(
-        '<div class="qty-btn-container d-flex flex-column">',
-        "</div>",
+  return _vm.useAppearance
+    ? _c(
+        "div",
+        { staticClass: "bkr-cc input-group qty-box-small" },
         [
-          _c(
-            "button",
-            {
-              directives: [
-                {
-                  name: "tooltip",
-                  rawName: "v-tooltip",
-                  value: _vm.isMaximum && _vm.compMax !== 0,
-                  expression: "isMaximum && compMax !== 0"
-                }
-              ],
-              staticClass:
-                "btn qty-btn flex-fill d-flex justify-content-center p-0",
-              class: {
-                disabled: _vm.isMaximum || _vm.waiting,
-                "btn-appearance": _vm.useAppearance
-              },
-              attrs: {
-                "data-toggle": "tooltip",
-                "data-placement": "top",
-                "data-testing": "quantity-btn-increase",
-                title: _vm.maximumHint,
-                "aria-label": _vm.$translate(
-                  "Ceres::Template.itemQuantityInputIncrease"
-                )
-              },
-              on: {
-                click: function($event) {
-                  return _vm.increaseValue()
-                }
-              }
-            },
+          _vm._ssrNode(
+            '<div class="qty-btn-container input-group-btn left">',
+            "</div>",
             [
-              _vm._ssrNode(
-                '<i aria-hidden="true" class="fa fa-plus default-float"></i>'
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "tooltip",
+                      rawName: "v-tooltip",
+                      value: _vm.isMinimum,
+                      expression: "isMinimum"
+                    }
+                  ],
+                  staticClass: "qty-btn",
+                  class: { disabled: _vm.isMinimum || _vm.waiting },
+                  attrs: {
+                    "data-toggle": "tooltip",
+                    "data-placement": "bottom",
+                    title: _vm.minimumHint
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.decreaseValue()
+                    }
+                  }
+                },
+                [
+                  _vm._ssrNode(
+                    '<i aria-hidden="true" class="fa fa-minus qty-sign"></i>'
+                  )
+                ]
               )
             ]
           ),
-          _vm._ssrNode(" "),
-          _c(
-            "button",
-            {
-              directives: [
-                {
-                  name: "tooltip",
-                  rawName: "v-tooltip",
-                  value: _vm.isMinimum && _vm.compMax !== 0,
-                  expression: "isMinimum && compMax !== 0"
-                }
-              ],
-              staticClass:
-                "btn qty-btn flex-fill d-flex justify-content-center p-0",
-              class: {
-                disabled: _vm.isMinimum || _vm.waiting,
-                "btn-appearance": _vm.useAppearance
-              },
-              attrs: {
-                "data-toggle": "tooltip",
-                "data-placement": "bottom",
-                "data-testing": "quantity-btn-decrease",
-                title: _vm.minimumHint,
-                "aria-label": _vm.$translate(
-                  "Ceres::Template.itemQuantityInputDecrease"
-                )
-              },
-              on: {
-                click: function($event) {
-                  return _vm.decreaseValue()
-                }
-              }
-            },
+          _vm._ssrNode(
+            ' <input type="text"' +
+              _vm._ssrAttr("disabled", _vm.waiting) +
+              _vm._ssrAttr("value", _vm.displayValue) +
+              ' class="qty-input form-control"> '
+          ),
+          _vm._ssrNode(
+            '<div class="qty-btn-container  input-group-btn right">',
+            "</div>",
             [
-              _vm._ssrNode(
-                '<i aria-hidden="true" class="fa fa-minus default-float"></i>'
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "tooltip",
+                      rawName: "v-tooltip",
+                      value: _vm.isMaximum && _vm.compMax !== 0,
+                      expression: "isMaximum && compMax !== 0"
+                    }
+                  ],
+                  staticClass: "qty-btn",
+                  class: { disabled: _vm.isMaximum || _vm.waiting },
+                  attrs: {
+                    "data-toggle": "tooltip",
+                    "data-placement": "top",
+                    title: _vm.maximumHint
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.increaseValue()
+                    }
+                  }
+                },
+                [
+                  _vm._ssrNode(
+                    '<i aria-hidden="true" class="fa fa-plus qty-sign"></i>'
+                  )
+                ]
               )
             ]
           )
         ],
         2
       )
-    ],
-    2
-  )
+    : _c(
+        "div",
+        { staticClass: "qty-box h-100 d-flex" },
+        [
+          _vm._ssrNode(
+            '<input type="text"' +
+              _vm._ssrAttr("disabled", _vm.waiting) +
+              _vm._ssrAttr("value", _vm.displayValue) +
+              ' class="qty-input"> '
+          ),
+          _vm._ssrNode(
+            '<div class="qty-btn-container">',
+            "</div>",
+            [
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "tooltip",
+                      rawName: "v-tooltip",
+                      value: _vm.isMaximum && _vm.compMax !== 0,
+                      expression: "isMaximum && compMax !== 0"
+                    }
+                  ],
+                  staticClass: "qty-btn",
+                  class: { disabled: _vm.isMaximum || _vm.waiting },
+                  attrs: {
+                    "data-toggle": "tooltip",
+                    "data-placement": "top",
+                    title: _vm.maximumHint
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.increaseValue()
+                    }
+                  }
+                },
+                [
+                  _vm._ssrNode(
+                    '<i aria-hidden="true" class="fa fa-plus qty-sign"></i>'
+                  )
+                ]
+              ),
+              _vm._ssrNode(' <div class="qty-btn-seperator"></div> '),
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "tooltip",
+                      rawName: "v-tooltip",
+                      value: _vm.isMinimum,
+                      expression: "isMinimum"
+                    }
+                  ],
+                  staticClass: "qty-btn",
+                  class: { disabled: _vm.isMinimum || _vm.waiting },
+                  attrs: {
+                    "data-toggle": "tooltip",
+                    "data-placement": "bottom",
+                    title: _vm.minimumHint
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.decreaseValue()
+                    }
+                  }
+                },
+                [
+                  _vm._ssrNode(
+                    '<i aria-hidden="true" class="fa fa-minus qty-sign"></i>'
+                  )
+                ]
+              )
+            ],
+            2
+          )
+        ],
+        2
+      )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -52160,16 +51002,21 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "row" },
-    [
-      _vm.attributes.length ||
-      (_vm.possibleUnitCombinationIds.length > 1 && _vm.isContentVisible)
-        ? [
-            _vm._l(_vm.attributes, function(attribute, index) {
+  return _c("div", [
+    _vm.attributes.length ||
+    (_vm.possibleUnitCombinationIds.length > 1 && _vm.isContentVisible)
+      ? _vm._ssrNode(
+          '<div class="row">',
+          "</div>",
+          [
+            _vm._l(_vm.attributes, function(attribute) {
               return _vm._ssrNode(
-                '<div class="col-12 variation-select">',
+                "<div" +
+                  _vm._ssrClass(
+                    "col-12 variation-select",
+                    "attribute_" + attribute.attributeId
+                  ) +
+                  ">",
                 "</div>",
                 [
                   attribute.type === "dropdown"
@@ -52178,12 +51025,7 @@ var render = function() {
                         "</div>",
                         [
                           _vm._ssrNode(
-                            "<select" +
-                              _vm._ssrAttr(
-                                "id",
-                                "custom-select_" + attribute.name
-                              ) +
-                              ' data-testing="variation-select-dropdown" class="custom-select">' +
+                            '<select class="custom-select">' +
                               (_vm.addPleaseSelectOption || !_vm.hasSelection
                                 ? "<option" +
                                   _vm._ssrAttr("value", -1) +
@@ -52241,9 +51083,9 @@ var render = function() {
                                     true
                                   )
                                     ? _vm._ssrEscape(
-                                        "\n                            " +
+                                        "\n                                " +
                                           _vm._s(value.name) +
-                                          "\n                        "
+                                          "\n                            "
                                       )
                                     : _vm.isAttributeSelectionValid(
                                         attribute.attributeId,
@@ -52251,24 +51093,24 @@ var render = function() {
                                         false
                                       )
                                     ? _vm._ssrEscape(
-                                        "\n                            " +
+                                        "\n                                " +
                                           _vm._s(
                                             _vm.$translate(
                                               "Ceres::Template.singleItemNotSalableAttribute",
                                               { name: value.name }
                                             )
                                           ) +
-                                          "\n                        "
+                                          "\n                            "
                                       )
                                     : _vm._ssrEscape(
-                                        "\n                            " +
+                                        "\n                                " +
                                           _vm._s(
                                             _vm.$translate(
                                               "Ceres::Template.singleItemInvalidAttribute",
                                               { name: value.name }
                                             )
                                           ) +
-                                          "\n                        "
+                                          "\n                            "
                                       )) +
                                   "</option>"
                                 )
@@ -52287,12 +51129,9 @@ var render = function() {
                                 }
                               ],
                               attrs: {
-                                for: "custom-select_" + attribute.name,
                                 "data-toggle": "tooltip",
                                 "data-placement": "top",
-                                title: attribute.name,
-                                "data-testing":
-                                  "variation-select-dropdown-label"
+                                title: attribute.name
                               }
                             },
                             [
@@ -52306,23 +51145,71 @@ var render = function() {
                       )
                     : attribute.type === "box" || attribute.type === "image"
                     ? _vm._ssrNode(
-                        "<div>",
+                        "<div" +
+                          _vm._ssrClass(null, "attr" + attribute.attributeId) +
+                          ">",
                         "</div>",
                         [
                           _vm._ssrNode(
-                            '<span data-testing="attribute-name" class="text-muted">' +
-                              _vm._ssrEscape(_vm._s(attribute.name) + ":") +
-                              '</span> <b data-testing="attribute-value">' +
-                              _vm._ssrEscape(
-                                _vm._s(
-                                  _vm.getSelectedAttributeValueName(attribute)
-                                )
-                              ) +
-                              "</b> "
+                            (_vm.currentVariation.item.id == 27645
+                              ? '<div class="row attributeName">' +
+                                (attribute.attributeId == 3
+                                  ? '<div class="col-4 text-muted">Farbe oberes Bett:</div>'
+                                  : "<!---->") +
+                                " " +
+                                (attribute.attributeId == 9
+                                  ? '<div class="col-4 text-muted">Farbe unteres Bett:</div>'
+                                  : "<!---->") +
+                                ' <div class="col-8"><b>' +
+                                _vm._ssrEscape(
+                                  _vm._s(
+                                    _vm.getSelectedAttributeValueName(attribute)
+                                  )
+                                ) +
+                                "</b></div></div>"
+                              : _vm.currentVariation.item.id == 28013
+                              ? '<div class="row attributeName">' +
+                                (attribute.attributeId == 3
+                                  ? '<div class="col-4 text-muted">Farbe Motivstecker:</div>'
+                                  : attribute.attributeId == 9
+                                  ? '<div class="col-4 text-muted">Farbe Garderobe:</div>'
+                                  : '<div class="col-4 text-muted">' +
+                                    _vm._ssrEscape(
+                                      _vm._s(attribute.name) + ":"
+                                    ) +
+                                    "</div>") +
+                                ' <div class="col-8"><b>' +
+                                _vm._ssrEscape(
+                                  _vm._s(
+                                    _vm.getSelectedAttributeValueName(attribute)
+                                  )
+                                ) +
+                                "</b></div></div>"
+                              : attribute.attributeId != 40
+                              ? '<div class="row attributeName">' +
+                                (attribute.attributeId == 3 &&
+                                _vm.attributes.filter(function(attr) {
+                                  return attr.attributeId == 9
+                                })[0]
+                                  ? '<div class="col-4 text-muted">Farbe der Front:</div>'
+                                  : '<div class="col-4 text-muted">' +
+                                    _vm._ssrEscape(
+                                      _vm._s(attribute.name) + ":"
+                                    ) +
+                                    "</div>") +
+                                ' <div class="col-8"><b>' +
+                                _vm._ssrEscape(
+                                  _vm._s(
+                                    _vm.getSelectedAttributeValueName(attribute)
+                                  )
+                                ) +
+                                "</b></div></div>"
+                              : '<div><div class="row"><div class="col-12 text-muted">Set wählen:</div></div></div>') +
+                              " "
                           ),
                           _vm._ssrNode(
                             "<div" +
-                              _vm._ssrClass("v-s-boxes py-3", {
+                              _vm._ssrClass("v-s-boxes pt-1 pb-3", {
                                 images: attribute.type === "image"
                               }) +
                               ">",
@@ -52330,7 +51217,7 @@ var render = function() {
                             [
                               _vm._ssrNode(
                                 (_vm.addPleaseSelectOption
-                                  ? '<div data-testing="variation-select-box"' +
+                                  ? "<div" +
                                     _vm._ssrClass(
                                       "v-s-box bg-white empty-option",
                                       {
@@ -52356,7 +51243,7 @@ var render = function() {
                                   : "<!---->") +
                                   " " +
                                   (_vm.hasEmptyOption
-                                    ? '<div data-testing="variation-select-box"' +
+                                    ? "<div" +
                                       _vm._ssrClass(
                                         "v-s-box bg-white empty-option",
                                         {
@@ -52395,22 +51282,23 @@ var render = function() {
                                         expression: "true"
                                       }
                                     ],
-                                    key: value.attributeValueId,
                                     staticClass: "v-s-box bg-white",
-                                    class: {
-                                      active:
-                                        value.attributeValueId ===
-                                        _vm.selectedAttributes[
-                                          attribute.attributeId
-                                        ],
-                                      invalid: !_vm.isAttributeSelectionValid(
-                                        attribute.attributeId,
-                                        value.attributeValueId,
-                                        true
-                                      )
-                                    },
+                                    class: [
+                                      "attrval" + value.attributeValueId,
+                                      {
+                                        active:
+                                          value.attributeValueId ===
+                                          _vm.selectedAttributes[
+                                            attribute.attributeId
+                                          ],
+                                        invalid: !_vm.isAttributeSelectionValid(
+                                          attribute.attributeId,
+                                          value.attributeValueId,
+                                          true
+                                        )
+                                      }
+                                    ],
                                     attrs: {
-                                      "data-testing": "variation-select-box",
                                       "data-html": "true",
                                       "data-toggle": "tooltip",
                                       "data-placement": "top",
@@ -52430,17 +51318,20 @@ var render = function() {
                                   },
                                   [
                                     _vm._ssrNode(
-                                      attribute.type === "box"
+                                      (attribute.type === "box"
                                         ? '<span class="mx-3">' +
+                                          _vm._ssrEscape(_vm._s(value.name)) +
+                                          "</span>"
+                                        : "<img" +
+                                          _vm._ssrAttr("src", value.imageUrl) +
+                                          _vm._ssrAttr("alt", value.name) +
+                                          ">") +
+                                        " " +
+                                        (attribute.attributeId == 40
+                                          ? '<span class="caption">' +
                                             _vm._ssrEscape(_vm._s(value.name)) +
                                             "</span>"
-                                        : "<img" +
-                                            _vm._ssrAttr(
-                                              "src",
-                                              value.imageUrl
-                                            ) +
-                                            _vm._ssrAttr("alt", value.name) +
-                                            ' class="p-1">'
+                                          : "<!---->")
                                     )
                                   ]
                                 )
@@ -52459,7 +51350,7 @@ var render = function() {
               " " +
                 (_vm.possibleUnitCombinationIds.length > 1 &&
                 _vm.isContentVisible
-                  ? '<div class="col-12 variation-select"><div class="input-unit"><select id="unit-combination-ids-select" data-testing="variation-select-unit" class="custom-select">' +
+                  ? '<div class="col-12 variation-select"><div class="input-unit"><select class="custom-select">' +
                     _vm._ssrList(_vm.possibleUnitCombinationIds, function(
                       unitCombinationId
                     ) {
@@ -52473,12 +51364,12 @@ var render = function() {
                         ">" +
                         (_vm.isUnitSelectionValid(unitCombinationId)
                           ? _vm._ssrEscape(
-                              "\n                            " +
+                              "\n                                  " +
                                 _vm._s(_vm.possibleUnits[unitCombinationId]) +
-                                "\n                        "
+                                "\n                              "
                             )
                           : _vm._ssrEscape(
-                              "\n                            " +
+                              "\n                                  " +
                                 _vm._s(
                                   _vm.$translate(
                                     "Ceres::Template.singleItemInvalidAttribute",
@@ -52487,12 +51378,12 @@ var render = function() {
                                     }
                                   )
                                 ) +
-                                "\n                        "
+                                "\n                              "
                             )) +
                         "</option>"
                       )
                     }) +
-                    '</select> <label for="unit-combination-ids-select" data-testing="variation-select-unit-label">' +
+                    "</select> <label>" +
                     _vm._ssrEscape(
                       _vm._s(
                         _vm.$translate("Ceres::Template.singleItemContent")
@@ -52501,11 +51392,11 @@ var render = function() {
                     "</label></div></div>"
                   : "<!---->")
             )
-          ]
-        : [_vm._t("default")]
-    ],
-    2
-  )
+          ],
+          2
+        )
+      : _vm._ssrNode("<div>", "</div>", [_vm._t("default")], 2)
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -52632,412 +51523,290 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "article",
-    {
-      staticClass: "cmp cmp-product-thumb",
-      attrs: { "data-testing": _vm.item.variation.id }
-    },
+    "div",
+    { staticClass: "bkr-cc h-100" },
     [
-      _vm._ssrNode(
-        "<div" +
-          _vm._ssrClass(null, _vm.paddingClasses) +
-          _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
-          ">",
-        "</div>",
-        [
-          _c("add-to-basket", {
-            attrs: {
-              "data-testing": "item-add-to-basket",
-              "variation-id": _vm.item.variation.id,
-              "is-salable": !!_vm.item.filter && _vm.item.filter.isSalable,
-              "has-children":
-                !!_vm.item.item && _vm.item.item.salableVariationCount > 1,
-              "interval-quantity":
-                _vm.item.variation.intervalOrderQuantity || 1,
-              "minimum-quantity": _vm.item.variation.minimumOrderQuantity,
-              "maximum-quantity":
-                !!_vm.item.variation.maximumOrderQuantity &&
-                _vm.item.variation.maximumOrderQuantity > 0
-                  ? _vm.item.variation.maximumOrderQuantity
-                  : null,
-              "order-properties": _vm.item.properties.filter(function(prop) {
-                return prop.property.isOderProperty
+      _vm.viewMode == "vertical"
+        ? _vm._ssrNode(
+            '<article class="itemCategoryProduct">',
+            "</article>",
+            [
+              _c("bkAddToWishlist", {
+                attrs: { "variation-id": _vm.item.variation.id }
               }),
-              "has-order-properties": _vm.item.hasOrderProperties,
-              "has-required-order-property": _vm.item.hasRequiredOrderProperty,
-              "use-large-scale": true,
-              "show-quantity": false,
-              "item-url": _vm._f("itemURL")(_vm.item, _vm.urlWithVariationId),
-              "has-price": _vm._f("hasItemDefaultPrice")(_vm.item),
-              "has-graduated-price":
-                _vm.itemGraduatedPriceisCheapestSorting ||
-                _vm.itemGraduatedPricesalableVariationCount,
-              "item-type": _vm.item.item.itemType
-            }
-          }),
-          _vm._ssrNode(" "),
-          _vm._ssrNode('<div class="thumb-image">', "</div>", [
-            _vm._ssrNode(
-              '<div class="prop-1-1">',
-              "</div>",
-              [
-                _vm._t("item-image", [
-                  _c("category-image-carousel", {
-                    ref: "categoryImageCarousel",
-                    attrs: {
-                      "image-urls-data": _vm._f("itemImages")(
-                        _vm.item.images,
-                        _vm.imageUrlAccessor
-                      ),
-                      alt: _vm._f("itemName")(_vm.item),
-                      title: _vm._f("itemName")(_vm.item),
-                      "item-url": _vm._f("itemURL")(
-                        _vm.item,
-                        _vm.urlWithVariationId
-                      ),
-                      "enable-carousel":
-                        _vm.$ceres.config.item.enableImageCarousel,
-                      "disable-carousel-on-mobile": _vm.disableCarouselOnMobile
-                    }
-                  })
-                ])
-              ],
-              2
-            )
-          ]),
-          _vm._ssrNode(" "),
-          _vm._t("store-special", [
-            _vm.storeSpecial ||
-            _vm.item.variation.bundleType === "bundle" ||
-            _vm.item.item.itemType === "set"
-              ? _c("item-store-special", {
-                  attrs: {
-                    "store-special": _vm.storeSpecial,
-                    "recommended-retail-price": _vm.item.prices.rrp,
-                    "variation-retail-price": _vm.item.prices.default,
-                    "special-offer-price": _vm.item.prices.specialOffer,
-                    "decimal-count": _vm.decimalCount,
-                    "bundle-type": _vm.item.variation.bundleType,
-                    "item-type": _vm.item.item.itemType
-                  }
-                })
-              : _vm._e()
-          ]),
-          _vm._ssrNode(" "),
-          _vm._t("item-details", [
-            _c(
-              "div",
-              { staticClass: "thumb-content" },
-              [
-                _c(
-                  "a",
-                  {
-                    staticClass: "thumb-title small",
-                    class: {
-                      "stretched-link":
-                        _vm.$ceres.config.global.shippingCostsCategoryId == 0
-                    },
-                    attrs: {
-                      href: _vm._f("itemURL")(_vm.item, _vm.urlWithVariationId)
-                    }
-                  },
+              _vm._ssrNode(" "),
+              _vm._ssrNode('<div class="produkt_picture">', "</div>", [
+                _vm._ssrNode(
+                  "<a" +
+                    _vm._ssrAttr("href", _vm._f("itemURL")(_vm.item)) +
+                    _vm._ssrAttr("aria-label", _vm.texts.name1) +
+                    ">",
+                  "</a>",
                   [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(_vm._f("itemName")(_vm.item))
-                    ),
-                    _vm._l(_vm.item.groupedAttributes, function(attribute) {
-                      return _c("span", [
-                        _vm._v(
-                          _vm._s(
-                            _vm._f("translate")(
-                              "Ceres::Template.itemGroupedAttribute",
-                              attribute
-                            )
+                    _c("lazy-img", {
+                      ref: "itemLazyImage",
+                      attrs: {
+                        "picture-class": "img-fluid",
+                        "aria-label": _vm.texts.name1,
+                        alt: _vm.texts.name1,
+                        "image-url": _vm._f("itemImage")(
+                          _vm._f("itemImages")(
+                            _vm.item.images,
+                            "urlSecondPreview"
                           )
                         )
-                      ])
+                      }
                     })
                   ],
-                  2
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "thumb-meta mt-2" },
-                  [
-                    _vm._t("before-prices"),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "prices" }, [
+                  1
+                )
+              ]),
+              _vm._ssrNode(
+                ' <div class="productInfoContainer"><div class="tagLine">' +
+                  (_vm.item.prices.rrp &&
+                  _vm.item.prices.rrp.price.value >
+                    _vm.item.prices.default.unitPrice.value
+                    ? '<span class="itemTag red">' +
+                      _vm._s(
+                        this.$options.filters.numberFormat(
+                          (1 -
+                            _vm.item.prices.default.unitPrice.value /
+                              _vm.item.prices.rrp.price.value) *
+                            -100,
+                          0,
+                          ""
+                        ) + " %"
+                      ) +
+                      "</span>"
+                    : "<!---->") +
+                  " " +
+                  (_vm.storeSpecial && _vm.storeSpecial.id == 2
+                    ? '<div class="itemTag"><span>' +
+                      _vm._s("NEU") +
+                      "</span></div>"
+                    : "<!---->") +
+                  " " +
+                  (_vm.item.tags &&
+                  _vm.item.tags.filter(function(tag) {
+                    return tag.id == 105
+                  }).length > 0
+                    ? '<span class="tag tagFavorit">Bestseller</span>'
+                    : "<!---->") +
+                  '</div> <div class="productName"><a' +
+                  _vm._ssrAttr("href", _vm._f("itemURL")(_vm.item)) +
+                  ' class="thumb-title small">' +
+                  _vm._s(_vm.texts.name1) +
+                  "</a></div> " +
+                  (!_vm.item.variation.isMain
+                    ? '<p class="variationHint">' +
+                      (_vm.item.attributes.length == 1 &&
+                      [3, 7, 16, 18].includes(
+                        _vm.item.attributes[0].attributeId
+                      )
+                        ? '<span class="variationImages">' +
+                          _vm._ssrList(_vm.item.groupedAttributes, function(
+                            attribute
+                          ) {
+                            return (
+                              "<span>" +
+                              _vm._s(attribute.name + ": " + attribute.value) +
+                              "</span>"
+                            )
+                          }) +
+                          "</span>"
+                        : [2].includes(_vm.item.attributes[0].attributeId)
+                        ? "<span>" +
+                          _vm._s("In verschiedenen Größen") +
+                          "</span>"
+                        : _vm.item.attributes.length == 2 &&
+                          _vm.item.attributes.filter(function(attr) {
+                            return attr.attributeId == 3
+                          })[0] &&
+                          _vm.item.attributes.filter(function(attr) {
+                            return attr.attributeId == 9
+                          })[0]
+                        ? _vm._ssrList(_vm.item.attributes, function(
+                            attribute
+                          ) {
+                            return (
+                              "<span" +
+                              _vm._ssrClass(null, {
+                                corpusFront: [3, 9].includes(
+                                  attribute.attributeId
+                                )
+                              }) +
+                              ">" +
+                              _vm._ssrEscape(
+                                "\n                " +
+                                  _vm._s(attribute.value.names.name) +
+                                  "\n                "
+                              ) +
+                              "</span>"
+                            )
+                          })
+                        : "<span>" +
+                          _vm._s("In verschiedenen Varianten") +
+                          "</span>") +
+                      "</p>"
+                    : "<div></div>") +
+                  ' <div class="itemPrice"><div class="prices">' +
+                  (_vm.item.prices.rrp &&
+                  _vm.item.prices.rrp.price.value >
+                    _vm.item.prices.default.unitPrice.value
+                    ? '<div class="price-view-port"><del class="crossprice">' +
+                      _vm._s(
+                        "statt " + _vm.item.prices.rrp.unitPrice.formatted
+                      ) +
+                      "</del></div>"
+                    : "<!---->") +
+                  " <div" +
+                  _vm._ssrClass("price", {
+                    redPrice:
                       _vm.item.prices.rrp &&
-                      _vm.item.prices.rrp.price.value > 0 &&
                       _vm.item.prices.rrp.price.value >
                         _vm.item.prices.default.unitPrice.value
-                        ? _c("div", { staticClass: "price-view-port" }, [
-                            _vm.item.prices.specialOffer
-                              ? _c("del", { staticClass: "crossprice" }, [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(
-                                        _vm._f("itemCrossPrice")(
-                                          _vm.item.prices.default.unitPrice
-                                            .formatted,
-                                          true
-                                        )
-                                      ) +
-                                      "\n                            "
-                                  )
-                                ])
-                              : _c("del", { staticClass: "crossprice" }, [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(
-                                        _vm._f("itemCrossPrice")(
-                                          _vm.item.prices.rrp.unitPrice
-                                            .formatted
-                                        )
-                                      ) +
-                                      "\n                            "
-                                  )
-                                ])
-                          ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "price" },
-                        [
-                          _vm.item.item.itemType === "set"
-                            ? [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.itemSetPrice",
-                                        { price: _vm.itemSetPrice }
-                                      )
-                                    ) +
-                                    " " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.itemFootnote"
-                                      )
-                                    ) +
-                                    "\n                            "
-                                )
-                              ]
-                            : _vm.itemGraduatedPriceisCheapestSorting
-                            ? [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.itemFromPrice",
-                                        { price: _vm.itemPriceGraduated }
-                                      )
-                                    ) +
-                                    " " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.itemFootnote"
-                                      )
-                                    ) +
-                                    "\n                            "
-                                )
-                              ]
-                            : _vm.itemGraduatedPricesalableVariationCount
-                            ? [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.itemFromPrice",
-                                        { price: _vm.itemPriceGraduated }
-                                      )
-                                    ) +
-                                    " " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.itemFootnote"
-                                      )
-                                    ) +
-                                    "\n                            "
-                                )
-                              ]
-                            : [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(
-                                      _vm._f("specialOffer")(
-                                        _vm.item.prices.default.unitPrice
-                                          .formatted,
-                                        _vm.item.prices,
-                                        "unitPrice",
-                                        "formatted"
-                                      )
-                                    ) +
-                                    " " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.itemFootnote"
-                                      )
-                                    ) +
-                                    "\n                            "
-                                )
-                              ]
-                        ],
-                        2
-                      )
-                    ])
+                  }) +
+                  ">" +
+                  _vm._s(_vm.item.prices.default.unitPrice.formatted) +
+                  "</div></div> " +
+                  (!(
+                    _vm.item.unit.unitOfMeasurement === "C62" &&
+                    _vm.item.unit.content === 1
+                  )
+                    ? '<div class="category-unit-price small">' +
+                      (_vm.item.variation.mayShowUnitPrice
+                        ? "<span>" +
+                          _vm._s(_vm.item.prices.default.basePrice) +
+                          "</span>"
+                        : "<!---->") +
+                      "</div>"
+                    : "<!---->") +
+                  "</div></div>"
+              )
+            ],
+            2
+          )
+        : _vm.viewMode == "horizontal"
+        ? _vm._ssrNode(
+            '<article class="itemCategoryProduct horizontal">',
+            "</article>",
+            [
+              _vm._ssrNode('<div class="produkt_picture">', "</div>", [
+                _vm._ssrNode(
+                  "<a" +
+                    _vm._ssrAttr("href", _vm._f("itemURL")(_vm.item)) +
+                    ">",
+                  "</a>",
+                  [
+                    _c("lazy-img", {
+                      ref: "itemLazyImage",
+                      attrs: {
+                        "picture-class": "img-fluid",
+                        "image-url": _vm._f("itemImage")(
+                          _vm._f("itemImages")(
+                            _vm.item.images,
+                            "urlSecondPreview"
+                          )
+                        )
+                      }
+                    })
                   ],
-                  2
-                ),
-                _vm._v(" "),
-                _vm._t("after-prices"),
-                _vm._v(" "),
-                _vm.item.prices.default.lowestPrice.value && _vm.hasCrossPrice
-                  ? _c("div", { staticClass: "category-lowest-price small" }, [
-                      _c("span", {
-                        domProps: {
-                          innerHTML: _vm._s(
-                            _vm.$translate("Ceres::Template.itemLowestPrice", {
-                              price:
-                                _vm.item.prices.default.lowestPrice.formatted
-                            })
-                          )
-                        }
-                      })
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                !(
-                  _vm.item.unit.unitOfMeasurement === "C62" &&
-                  _vm.item.unit.content === 1
+                  1
                 )
-                  ? _c("div", { staticClass: "category-unit-price small" }, [
-                      _c("span", [_vm._v(_vm._s(_vm.item.unit.content))]),
-                      _vm._v(" "),
-                      _c("span", [
-                        _vm._v(" " + _vm._s(_vm.item.unit.names.name))
-                      ]),
-                      _vm._v(" "),
-                      _vm.item.variation.mayShowUnitPrice
-                        ? _c("span", [_vm._v(" | " + _vm._s(_vm.basePrice))])
-                        : _vm._e()
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("add-to-basket", {
-                  attrs: {
-                    "variation-id": _vm.item.variation.id,
-                    "is-salable":
-                      !!_vm.item.filter && _vm.item.filter.isSalable,
-                    "has-children":
-                      !!_vm.item.item &&
-                      _vm.item.item.salableVariationCount > 1,
-                    "interval-quantity":
-                      _vm.item.variation.intervalOrderQuantity || 1,
-                    "minimum-quantity": _vm.item.variation.minimumOrderQuantity,
-                    "maximum-quantity":
-                      !!_vm.item.variation.maximumOrderQuantity &&
-                      _vm.item.variation.maximumOrderQuantity > 0
-                        ? _vm.item.variation.maximumOrderQuantity
-                        : null,
-                    "order-properties": _vm.item.properties.filter(function(
-                      prop
-                    ) {
-                      return prop.property.isOderProperty
-                    }),
-                    "has-order-properties": _vm.item.hasOrderProperties,
-                    "has-required-order-property":
-                      _vm.item.hasRequiredOrderProperty,
-                    "use-large-scale": false,
-                    "show-quantity": false,
-                    "item-url": _vm._f("itemURL")(
-                      _vm.item,
-                      _vm.urlWithVariationId
-                    ),
-                    "has-price": _vm._f("hasItemDefaultPrice")(_vm.item),
-                    "has-graduated-price":
-                      _vm.itemGraduatedPriceisCheapestSorting ||
-                      _vm.itemGraduatedPricesalableVariationCount,
-                    "item-type": _vm.item.item.itemType
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "vat small text-muted" }, [
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(_vm.$translate("Ceres::Template.itemFootnote")) +
-                      " "
-                  ),
-                  _vm.showNetPrices
-                    ? _c("span", [
-                        _vm._v(
-                          _vm._s(_vm.$translate("Ceres::Template.itemExclVAT"))
-                        )
-                      ])
-                    : _c("span", [
-                        _vm._v(
-                          _vm._s(_vm.$translate("Ceres::Template.itemInclVAT"))
-                        )
-                      ]),
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(_vm.$translate("Ceres::Template.itemExclusive")) +
-                      "\n                    "
-                  ),
-                  _vm.$ceres.config.global.shippingCostsCategoryId > 0
-                    ? _c(
-                        "a",
-                        {
-                          staticClass: "text-appearance",
-                          attrs: {
-                            "data-toggle": "modal",
-                            href: "#shippingscosts",
-                            title: _vm.$translate(
-                              "Ceres::Template.itemShippingCosts"
-                            )
-                          }
-                        },
-                        [
-                          _vm._v(
-                            _vm._s(
-                              _vm.$translate(
-                                "Ceres::Template.itemShippingCosts"
-                              )
-                            )
+              ]),
+              _vm._ssrNode(
+                ' <div class="productInfoContainer"><div class="productName"><a' +
+                  _vm._ssrAttr("href", _vm._f("itemURL")(_vm.item)) +
+                  ' class="thumb-title small">' +
+                  _vm._s(_vm.texts.name1) +
+                  '</a></div> <div class="itemPrice"><div class="prices">' +
+                  (_vm.item.prices.rrp &&
+                  _vm.item.prices.rrp.price.value >
+                    _vm.item.prices.default.unitPrice.value
+                    ? '<div class="price-view-port"><del class="crossprice">' +
+                      _vm._s(_vm.item.prices.rrp.unitPrice.formatted) +
+                      "</del></div>"
+                    : "<!---->") +
+                  " <div" +
+                  _vm._ssrClass("price", {
+                    redPrice:
+                      _vm.item.prices.rrp &&
+                      _vm.item.prices.rrp.price.value >
+                        _vm.item.prices.default.unitPrice.value
+                  }) +
+                  ">" +
+                  _vm._s(_vm.item.prices.default.unitPrice.formatted) +
+                  "</div></div></div></div>"
+              )
+            ],
+            2
+          )
+        : _vm._e(),
+      _vm._ssrNode(" "),
+      _vm.viewMode == "cart"
+        ? _vm._ssrNode(
+            '<article class="itemCategoryProduct cartCrossSellingItem">',
+            "</article>",
+            [
+              _vm._ssrNode('<div class="produkt_picture">', "</div>", [
+                _vm._ssrNode(
+                  "<a" +
+                    _vm._ssrAttr("href", _vm._f("itemURL")(_vm.item)) +
+                    ' aria-label="Empfehlung: Das passt dazu" click-count>',
+                  "</a>",
+                  [
+                    _c("lazy-img", {
+                      ref: "itemLazyImage",
+                      attrs: {
+                        "picture-class": "img-fluid",
+                        "image-url": _vm._f("itemImage")(
+                          _vm._f("itemImages")(
+                            _vm.item.images,
+                            "urlSecondPreview"
                           )
-                        ]
-                      )
-                    : _c(
-                        "a",
-                        {
-                          attrs: {
-                            title: _vm.$translate(
-                              "Ceres::Template.itemShippingCosts"
-                            )
-                          }
-                        },
-                        [
-                          _vm._v(
-                            _vm._s(
-                              _vm.$translate(
-                                "Ceres::Template.itemShippingCosts"
-                              )
-                            )
-                          )
-                        ]
-                      )
-                ])
-              ],
-              2
-            )
-          ])
-        ],
-        2
-      )
-    ]
+                        )
+                      }
+                    })
+                  ],
+                  1
+                )
+              ]),
+              _vm._ssrNode(
+                ' <div class="productInfoContainer"><div class="productName"><a' +
+                  _vm._ssrAttr("href", _vm._f("itemURL")(_vm.item)) +
+                  ' aria-label="Empfehlung: Das passt dazu" click-count class="thumb-title small">' +
+                  _vm._s(_vm.texts.name1) +
+                  "</a></div> " +
+                  (_vm.texts.shortDescription
+                    ? '<p class="bulletPoints">' +
+                      _vm._s(_vm.texts.shortDescription) +
+                      "</p>"
+                    : "<!---->") +
+                  ' <div class="itemPrice"><div class="prices">' +
+                  (_vm.item.prices.rrp &&
+                  _vm.item.prices.rrp.price.value >
+                    _vm.item.prices.default.unitPrice.value
+                    ? '<div class="price-view-port"><del class="crossprice">' +
+                      _vm._s(_vm.item.prices.rrp.unitPrice.formatted) +
+                      "</del></div>"
+                    : "<!---->") +
+                  " <div" +
+                  _vm._ssrClass("price", {
+                    redPrice:
+                      _vm.item.prices.rrp &&
+                      _vm.item.prices.rrp.price.value >
+                        _vm.item.prices.default.unitPrice.value
+                  }) +
+                  ">" +
+                  _vm._s(_vm.item.prices.default.unitPrice.formatted) +
+                  "</div></div></div></div>"
+              )
+            ],
+            2
+          )
+        : _vm._e()
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -53065,105 +51834,94 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "container-max",
-      class: { "p-0": _vm.$ceres.isShopBuilder }
+      staticClass: "bkr-cc",
+      class: { wide: _vm.isSearchFocused, notwide: !_vm.isSearchFocused },
+      attrs: { id: "search_and_porto_holder" }
     },
     [
       _vm._ssrNode(
-        '<div class="position-relative">',
+        '<div class="input-group">',
         "</div>",
         [
           _vm._ssrNode(
-            '<div class="d-flex flex-grow-1 position-relative my-2">',
-            "</div>",
-            [
-              _vm._ssrNode(
-                '<input type="search"' +
-                  _vm._ssrAttr("autofocus", _vm.isShopBuilder) +
-                  _vm._ssrAttr(
-                    "placeholder",
-                    _vm.$translate("Ceres::Template.headerSearchPlaceholder")
-                  ) +
-                  _vm._ssrAttr(
-                    "aria-label",
-                    _vm.$translate("Ceres::Template.headerSearchTerm")
-                  ) +
-                  _vm._ssrAttr("value", _vm.searchString) +
-                  ' class="search-input flex-grow-1 px-3 py-2"> '
-              ),
-              _vm._t("search-button", [
-                _c(
-                  "button",
-                  {
-                    staticClass: "search-submit px-3",
-                    attrs: {
-                      type: "submit",
-                      "aria-label": _vm.$translate(
-                        "Ceres::Template.headerSearch"
-                      )
-                    },
-                    on: {
-                      click: function($event) {
-                        return _vm.search()
-                      }
-                    }
-                  },
-                  [
-                    _c("icon", {
-                      staticClass: "fa-fw",
-                      attrs: {
-                        icon: "search",
-                        loading: _vm.autocompleteIsLoading
-                      }
-                    })
-                  ],
-                  1
-                )
-              ])
-            ],
-            2
+            '<input type="search" value' +
+              _vm._ssrAttr("autofocus", _vm.isShopBuilder) +
+              _vm._ssrAttr(
+                "aria-label",
+                _vm.$translate("Ceres::Template.headerSearchTerm")
+              ) +
+              ' placeholder="Suchbegriff eingeben..." class="search-input flex-grow-1 px-2 py-2 bkmSearchbox"> '
           ),
-          _vm._ssrNode(" "),
-          _vm.isSearchFocused
-            ? [
-                _vm._ssrNode(
-                  "<div" +
-                    _vm._ssrStyle(null, null, {
-                      display:
-                        _vm.hasInitialInput || _vm.$ceres.isShopBuilder
-                          ? ""
-                          : "none"
-                    }) +
-                    ">",
-                  "</div>",
-                  [
-                    _vm._t("autocomplete-suggestions", [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "autocomplete-suggestions shadow bg-white w-100"
-                        },
-                        [
-                          _c("search-suggestion-item", {
-                            attrs: {
-                              "show-images": _vm.showItemImages,
-                              "suggestion-type": "item"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ])
-                  ],
-                  2
-                )
-              ]
-            : _vm._e()
+          _vm._ssrNode('<span class="input-group-append">', "</span>", [
+            _vm._ssrNode(
+              '<button aria-label="Suchen" type="submit" class="search-submit btn btn-bkm bkmSearchbutton">',
+              "</button>",
+              [
+                _c("icon", {
+                  staticClass: "fa-fw",
+                  attrs: { icon: "search", loading: _vm.autocompleteIsLoading }
+                })
+              ],
+              1
+            )
+          ])
         ],
         2
-      )
-    ]
+      ),
+      _vm.isSearchFocused
+        ? [
+            _vm._ssrNode(
+              "<div>",
+              "</div>",
+              [
+                _vm._t("autocomplete-suggestions", [
+                  _c(
+                    "div",
+                    { staticClass: "autocomplete-suggestions bg-white w-100" },
+                    [
+                      _c("div", { staticClass: "row" }, [
+                        _c(
+                          "div",
+                          { staticClass: "col-md-7" },
+                          [
+                            _c("search-suggestion-item", {
+                              attrs: {
+                                "padding-classes": "p-1",
+                                "show-images": true,
+                                "suggestion-type": "item",
+                                "show-additional-information": false,
+                                "show-count": false
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "col-md-5 suggestions" },
+                          [
+                            _c("search-suggestion-item", {
+                              attrs: {
+                                "suggestion-type": "category",
+                                "show-additional-information": true,
+                                "show-count": false
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ])
+                    ]
+                  )
+                ])
+              ],
+              2
+            )
+          ]
+        : _vm._e()
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -53247,7 +52005,9 @@ var render = function() {
   return _c("div", [
     _vm._ssrNode(
       _vm.autocompleteResult && _vm.autocompleteResult.length
-        ? '<div data-testing="autocomplete-list">' +
+        ? "<div" +
+            _vm._ssrClass(null, "suggestion-result-" + _vm.suggestionType) +
+            ">" +
             _vm._ssrList(_vm.autocompleteResult, function(item, index) {
               return (
                 "<a" +
@@ -53256,7 +52016,7 @@ var render = function() {
                 _vm._ssrClass("autocomplete-suggestion", _vm.paddingClasses) +
                 _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
                 ">" +
-                (_vm.showImages
+                (_vm.showImages && _vm.suggestionType == "item"
                   ? '<div class="image flex-shrink-0 mr-3">' +
                     (item.image
                       ? "<img" + _vm._ssrAttr("src", item.image) + ">"
@@ -53273,7 +52033,7 @@ var render = function() {
                 ">" +
                 (_vm.showAdditionalInformation && item.beforeLabel
                   ? '<p class="small mb-0 text-truncate">' +
-                    _vm._ssrEscape(_vm._s(item.beforeLabel)) +
+                    _vm._s(item.beforeLabel) +
                     "</p>"
                   : "<!---->") +
                 ' <p class="mb-0 text-truncate">' +
@@ -53281,13 +52041,13 @@ var render = function() {
                 "</p> " +
                 (_vm.showAdditionalInformation && item.afterLabel
                   ? '<p class="small mb-0 text-truncate">' +
-                    _vm._ssrEscape(_vm._s(item.afterLabel)) +
+                    _vm._s(item.afterLabel) +
                     "</p>"
                   : "<!---->") +
                 "</div> " +
                 (_vm.showCount && item.count > 0
                   ? '<div class="count"><span>' +
-                    _vm._ssrEscape(_vm._s(item.count)) +
+                    _vm._s(item.count) +
                     "</span></div>"
                   : "<!---->") +
                 "</a>"
@@ -53298,14 +52058,8 @@ var render = function() {
             _vm._ssrClass("text-muted", _vm.paddingClasses) +
             _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
             ">" +
-            _vm._ssrEscape(
-              "\n            " +
-                _vm._s(
-                  _vm.$translate(
-                    "Ceres::Template.itemSearchSuggestionNoResults"
-                  )
-                ) +
-                "\n        "
+            _vm._s(
+              _vm.$translate("Ceres::Template.itemSearchSuggestionNoResults")
             ) +
             "</p>"
     )
@@ -53336,44 +52090,85 @@ var render = function() {
   return _vm.facet.name
     ? _c(
         "div",
-        { staticClass: "card pt-4 border-0", class: _vm.facet.cssClass },
+        {
+          staticClass: "facet bkr-cc",
+          class: { deliveryFacet: _vm.facet.id == 11 }
+        },
         [
-          _vm._ssrNode(
-            '<div class="h3 title py-0">' +
-              _vm._ssrEscape(_vm._s(_vm.facetName)) +
-              "</div> "
-          ),
-          _vm.facet.type === "price"
-            ? _vm._ssrNode("<div>", "</div>", [_c("item-filter-price")], 1)
-            : _vm._l(_vm.facets, function(value) {
-                return _vm._ssrNode(
-                  "<div" +
-                    _vm._ssrClass("form-check-wrapper", value.cssClass) +
-                    '><div class="form-check mb-0 pl-0"><input' +
-                    _vm._ssrAttr("id", "option-" + value.id + "-" + _vm._uid) +
-                    ' type="checkbox"' +
-                    _vm._ssrAttr(
-                      "disabled",
-                      _vm.isLoading || value.count <= 0
-                    ) +
-                    _vm._ssrAttr("checked", _vm.isSelected(value.id)) +
-                    ' class="form-check-input d-none"> <label' +
-                    _vm._ssrAttr("for", "option-" + value.id + "-" + _vm._uid) +
-                    _vm._ssrClass("form-check-label", [
-                      _vm.paddingClasses,
-                      _vm.isSelected(value.id) ? "bg-appearance" : "",
-                      "option-" + value.id
-                    ]) +
-                    _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
-                    '><div class="d-flex"><span class="flex-grow-1">' +
-                    _vm._ssrEscape(_vm._s(value.name)) +
-                    '</span> <div class="filter-badge">' +
-                    _vm._ssrEscape(_vm._s(value.count)) +
-                    "</div></div></label></div></div>"
-                )
-              })
-        ],
-        2
+          _vm.facet.id != 11
+            ? _vm._ssrNode(
+                "<div>",
+                "</div>",
+                [
+                  _vm._ssrNode(
+                    '<div class="h3">' + _vm._s(_vm.facetName) + "</div> "
+                  ),
+                  _vm.facet.type === "price"
+                    ? _vm._ssrNode(
+                        '<div class="facetValues">',
+                        "</div>",
+                        [_c("item-filter-price")],
+                        1
+                      )
+                    : _vm._ssrNode(
+                        '<div class="facetValues">' +
+                          _vm._ssrList(_vm.facets, function(value) {
+                            return (
+                              '<div class="facetValue"><input' +
+                              _vm._ssrAttr(
+                                "id",
+                                "option-" + value.id + "-" + _vm._uid
+                              ) +
+                              ' type="checkbox"' +
+                              _vm._ssrAttr(
+                                "disabled",
+                                _vm.isLoading || value.count <= 0
+                              ) +
+                              _vm._ssrAttr(
+                                "checked",
+                                _vm.isSelected(value.id)
+                              ) +
+                              ' class="form-check-input d-none"> <label' +
+                              _vm._ssrAttr(
+                                "for",
+                                "option-" + value.id + "-" + _vm._uid
+                              ) +
+                              _vm._ssrClass("form-check-label", [
+                                _vm.paddingClasses,
+                                _vm.isSelected(value.id) ? "bg-appearance" : "",
+                                "option-" + value.id
+                              ]) +
+                              _vm._ssrStyle(
+                                null,
+                                _vm.paddingInlineStyles,
+                                null
+                              ) +
+                              ">" +
+                              _vm._s(value.name) +
+                              "</label></div>"
+                            )
+                          }) +
+                          "</div>"
+                      )
+                ],
+                2
+              )
+            : _vm._ssrNode(
+                '<div class="deliverySwitchContainer"><div' +
+                  _vm._ssrClass("deliverySwitch btn btn-sm btn-bkm-delivery", {
+                    active: _vm.isSelected(123)
+                  }) +
+                  ">" +
+                  (!_vm.isLoading
+                    ? '<label for="instantDeliverySwitch"><span>Sofort lieferbar</span></label>'
+                    : '<label for="instantDeliverySwitch">' +
+                      _vm._s("Wird geladen...") +
+                      "</label>") +
+                  ' <input type="checkbox" id="instantDeliverySwitch"' +
+                  _vm._ssrAttr("checked", _vm.isSelected(123)) +
+                  ' class="switch"></div></div>'
+              )
+        ]
       )
     : _vm._e()
 }
@@ -53399,103 +52194,115 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.filterListBulk
-    ? _c(
-        "div",
-        _vm._l(_vm.facets, function(facet) {
-          return _c("item-filter", {
-            key: facet.id,
-            attrs: {
-              facet: facet,
-              "padding-classes": _vm.paddingClasses,
-              "padding-inline-styles": _vm.paddingInlineStyles
-            }
-          })
-        }),
-        1
-      )
-    : _c(
-        "div",
+  return _c(
+    "div",
+    {
+      directives: [
         {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.facets && _vm.facets.length > 0,
-              expression: "facets && facets.length > 0"
-            }
-          ],
-          staticClass: "filter-wrapper"
-        },
-        [
-          _vm._ssrNode(
-            '<a data-toggle="collapse"' +
-              _vm._ssrAttr("href", "#filter-collapse_" + _vm._cid) +
-              ' aria-expanded="false"' +
-              _vm._ssrAttr("aria-controls", "filter-collapse_" + _vm._cid) +
-              ' class="btn btn-link filter-toggle"><i aria-hidden="true" class="fa fa-sliders default-float"></i>' +
-              _vm._ssrEscape(
-                " " +
-                  _vm._s(_vm.$translate("Ceres::Template.itemFilter")) +
-                  "\n    "
-              ) +
-              "</a> "
-          ),
-          _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "open-filter-toolbar",
-                  rawName: "v-open-filter-toolbar"
-                }
-              ],
-              staticClass: "filter-collapse collapse",
-              attrs: { id: "filter-collapse_" + _vm._cid }
-            },
-            [
-              _vm._ssrNode(
-                "<div" +
-                  _vm._ssrClass(
-                    "container-max page-content component-loading",
-                    { "is-loading": _vm.isLoading }
-                  ) +
-                  ">",
-                "</div>",
-                [
-                  _vm._ssrNode(
-                    '<div class="card-columns">',
-                    "</div>",
+          name: "show",
+          rawName: "v-show",
+          value: _vm.facets && _vm.facets.length > 0,
+          expression: "facets && facets.length > 0"
+        }
+      ],
+      staticClass: "bkFilters bkr-cc"
+    },
+    [
+      _vm._l(
+        _vm.facets.filter(function(facet) {
+          return facet.id == 11
+        }),
+        function(facet) {
+          return _c("item-filter", { key: facet.id, attrs: { facet: facet } })
+        }
+      ),
+      _vm._ssrNode(
+        ' <a data-toggle="collapse"' +
+          _vm._ssrAttr("href", "#filter-collapse_" + _vm._uid) +
+          ' aria-expanded="false"' +
+          _vm._ssrAttr("aria-controls", "filter-collapse_" + _vm._uid) +
+          ' class="btn btn-sm btn-bkm-inverted facetToggleButton"><i aria-hidden="true" class="fa fa-sliders default-float"></i>' +
+          _vm._ssrEscape(
+            " " +
+              _vm._s(_vm.$translate("Ceres::Template.itemFilter")) +
+              "\n    "
+          ) +
+          "</a> "
+      ),
+      _vm._ssrNode('<div class="filter-wrapper">', "</div>", [
+        _vm._ssrNode(
+          "<div" +
+            _vm._ssrAttr("id", "filter-collapse_" + _vm._uid) +
+            ' class="filter-collapse collapse">',
+          "</div>",
+          [
+            _vm._ssrNode(
+              "<div" +
+                _vm._ssrClass("container-max page-content component-loading", {
+                  isLoading: _vm.isLoading
+                }) +
+                ">",
+              "</div>",
+              [
+                _vm._ssrNode(
+                  "<div" +
+                    _vm._ssrAttr("selectedFactes", _vm.selectedFacets.length) +
+                    ' class="facetOutter">',
+                  "</div>",
+                  [
                     _vm._l(_vm.facets, function(facet) {
-                      return _c("item-filter", {
-                        key: facet.id,
-                        attrs: { facet: facet }
-                      })
+                      return facet.id != 11
+                        ? _c("item-filter", {
+                            key: facet.id,
+                            attrs: { facet: facet }
+                          })
+                        : _vm._e()
                     }),
-                    1
-                  ),
-                  _vm._ssrNode(
-                    ' <div class="row"><div class="col-12 text-right"><button type="button" data-toggle="collapse"' +
-                      _vm._ssrAttr("href", "#filter-collapse_" + _vm._cid) +
-                      _vm._ssrAttr(
-                        "aria-controls",
-                        "filter-collapse_" + _vm._cid
-                      ) +
-                      ' class="btn btn-primary btn-medium-large"><i aria-hidden="true" class="fa fa-times"></i> <span>' +
-                      _vm._ssrEscape(
-                        _vm._s(_vm.$translate("Ceres::Template.itemClose")) +
-                          " "
-                      ) +
-                      "</span></button></div></div>"
-                  )
-                ],
-                2
-              )
-            ]
-          )
-        ],
-        2
-      )
+                    _vm._ssrNode(" "),
+                    _vm._ssrNode(
+                      '<div class="facet">',
+                      "</div>",
+                      [
+                        _vm._ssrNode(
+                          '<div class="h3">' +
+                            _vm._ssrEscape(
+                              _vm._s(
+                                _vm.$translate(
+                                  "biokinderDesign::Template.itemListSort"
+                                )
+                              )
+                            ) +
+                            "</div> "
+                        ),
+                        _vm._t("sorting-box")
+                      ],
+                      2
+                    )
+                  ],
+                  2
+                ),
+                _vm._ssrNode(
+                  ' <div class="row filterBtnRow"><div class="col-12 text-right"><button type="button" data-toggle="collapse"' +
+                    _vm._ssrAttr("href", "#filter-collapse_" + _vm._uid) +
+                    _vm._ssrAttr(
+                      "aria-controls",
+                      "filter-collapse_" + _vm._uid
+                    ) +
+                    ' class="btn btn-bkm btn-medium-large applyFilterButton"><i aria-hidden="true" class="fa fa-times"></i> <span>' +
+                    _vm._ssrEscape(
+                      _vm._s(_vm.$translate("Ceres::Template.itemClose")) + " "
+                    ) +
+                    "</span></button></div></div>"
+                )
+              ],
+              2
+            )
+          ]
+        )
+      ])
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -53519,54 +52326,52 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "item-filter-price" },
-    [
-      _vm._ssrNode(
-        '<div class="input-group"><div class="input-group-prepend"><span class="input-group-text">' +
-          _vm._ssrEscape(_vm._s(_vm.currency)) +
-          '</span></div> <input type="number" placeholder="Min"' +
-          _vm._ssrAttr(
-            "aria-label",
-            _vm.$translate("Ceres::Template.itemFilterPriceMin")
-          ) +
-          _vm._ssrAttr("value", _vm.priceMin) +
-          ' class="form-control"></div> <div class="input-group"><div class="input-group-prepend"><span class="input-group-text">' +
-          _vm._ssrEscape(_vm._s(_vm.currency)) +
-          '</span></div> <input type="number" placeholder="Max"' +
-          _vm._ssrAttr(
-            "aria-label",
-            _vm.$translate("Ceres::Template.itemFilterPriceMax")
-          ) +
-          _vm._ssrAttr("value", _vm.priceMax) +
-          ' class="form-control"></div> '
-      ),
-      _c(
-        "button",
-        {
-          directives: [{ name: "tooltip", rawName: "v-tooltip" }],
-          staticClass: "btn btn-primary btn-appearance",
-          class: { disabled: _vm.isDisabled },
-          attrs: {
-            type: "button",
-            "data-toggle": "tooltip",
-            "data-placement": "top",
-            title: _vm.$translate("Ceres::Template.itemApply"),
-            "aria-label": _vm.$translate("Ceres::Template.itemFilterButton")
-          },
-          on: {
-            click: function($event) {
-              return _vm.triggerFilter()
-            }
-          }
-        },
-        [_c("icon", { attrs: { icon: "check", loading: _vm.isLoading } })],
-        1
-      )
-    ],
-    2
-  )
+  return _c("div", { staticClass: "facetValue priceFacet bkr-cc" }, [
+    _vm._ssrNode(
+      '<div class="row">',
+      "</div>",
+      [
+        _vm._ssrNode(
+          '<div class="input-group col-lg-6 pb-3"><input type="number" placeholder="Min"' +
+            _vm._ssrAttr("value", _vm.priceMin) +
+            ' class="form-control"></div> <div class="input-group col-lg-6 pb-3"><input type="number" placeholder="Max"' +
+            _vm._ssrAttr("value", _vm.priceMax) +
+            ' class="form-control"></div> '
+        ),
+        _vm._ssrNode('<div class="col-lg-12">', "</div>", [
+          _c(
+            "button",
+            {
+              directives: [{ name: "tooltip", rawName: "v-tooltip" }],
+              staticClass: "btn btn-bkm-inverted btn-block btn-sm",
+              class: { disabled: _vm.isDisabled },
+              attrs: {
+                type: "button",
+                "data-toggle": "tooltip",
+                "data-placement": "top",
+                title: _vm.$translate("Ceres::Template.itemApply")
+              },
+              on: {
+                click: function($event) {
+                  return _vm.triggerFilter()
+                }
+              }
+            },
+            [
+              _vm._ssrNode(
+                "<span>" +
+                  _vm._s(_vm.$translate("Ceres::Template.itemApply")) +
+                  "</span> "
+              ),
+              _c("icon", { attrs: { icon: "check", loading: _vm.isLoading } })
+            ],
+            2
+          )
+        ])
+      ],
+      2
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -53590,39 +52395,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "selected-filters clearfix" }, [
+  return _c("div", { staticClass: "selected-filters clearfix bkr-cc" }, [
     _vm._ssrNode(
       _vm._ssrList(_vm.tagList, function(tag) {
-        return (
-          "<span" +
-          _vm._ssrClass(
-            null,
-            "text-appearance selected-filter filter-" +
-              tag.id +
-              " " +
-              _vm.marginClasses
-          ) +
-          _vm._ssrStyle(null, _vm.marginInlineStyles, null) +
-          '><i aria-hidden="true" class="fa fa-times"></i>' +
-          _vm._ssrEscape(" " + _vm._s(tag.name) + "\n    ") +
-          "</span>"
-        )
+        return tag.id != 123
+          ? "<span" +
+              _vm._ssrClass(null, "selected-filter filter-" + tag.id) +
+              '><i aria-hidden="true" class="fa fa-times"></i> ${ tag.name }\n        </span>'
+          : "<!---->"
       }) +
         " " +
         (_vm.tagList.length >= 2
-          ? "<span" +
-            _vm._ssrClass(
-              null,
-              "bg-appearance selected-filter reset-all" +
-                " " +
-                _vm.marginClasses
-            ) +
-            _vm._ssrStyle(null, _vm.marginInlineStyles, null) +
-            ">" +
+          ? '<span class="selected-filter reset-all">' +
             _vm._ssrEscape(
               "\n        " +
                 _vm._s(_vm.$translate("Ceres::Template.itemFilterReset")) +
-                "\n    "
+                "\n        "
             ) +
             "</span>"
           : "<!---->")
@@ -55050,112 +53838,31 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      directives: [
-        {
-          name: "show",
-          rawName: "v-show",
-          value: !_vm.$ceres.isSSR,
-          expression: "!$ceres.isSSR"
-        }
-      ],
-      staticClass: "cookie-bar",
-      class: {
-        out: !_vm.isVisible,
-        "border-top bg-white": _vm.isVisible,
-        "fixed-bottom": !_vm.isShopBuilder || false
-      }
-    },
+    { staticClass: "cookie-bar out bkr-cc", class: { in: _vm.isVisible } },
     [
       _vm.isVisible
         ? _vm._ssrNode(
-            '<div class="container-max">',
+            '<div class="container">',
             "</div>",
             [
               _vm._ssrNode(
                 "<div" +
-                  _vm._ssrClass("row py-3", _vm.classes) +
+                  _vm._ssrClass("row p-3", _vm.classes) +
                   _vm._ssrStyle(null, _vm.styles, {
                     display: !_vm.isExpanded ? "" : "none"
                   }) +
-                  '><div class="col-12 col-md-8"><p>' +
-                  _vm._s(_vm.text) +
-                  "</p> <div>" +
-                  _vm._ssrList(_vm.consentGroups, function(consentGroup) {
-                    return consentGroup.consents.length > 0
-                      ? '<span class="custom-control custom-switch custom-control-appearance d-md-inline-block mr-3"><input type="checkbox"' +
-                          _vm._ssrAttr(
-                            "id",
-                            _vm._cid + "-group-" + consentGroup.key
-                          ) +
-                          _vm._ssrAttr("disabled", consentGroup.necessary) +
-                          _vm._ssrAttr(
-                            "checked",
-                            _vm.isConsented(consentGroup.key) ||
-                              consentGroup.necessary
-                          ) +
-                          ' class="custom-control-input"> <label' +
-                          _vm._ssrAttr(
-                            "for",
-                            _vm._cid + "-group-" + consentGroup.key
-                          ) +
-                          ' class="custom-control-label">' +
-                          (consentGroup.label.length > 0
-                            ? _vm._ssrEscape(
-                                "\n                                    " +
-                                  _vm._s(consentGroup.label) +
-                                  "\n                                "
-                              )
-                            : _vm._ssrEscape(
-                                "\n                                    " +
-                                  _vm._s(
-                                    _vm.$translate(
-                                      "Ceres::Template.privacySettingsDefaultGroup"
-                                    )
-                                  ) +
-                                  "\n                                "
-                              )) +
-                          "</label></span>"
-                      : "<!---->"
-                  }) +
-                  ' <a href="#" data-testing="cookie-bar-show-more-information" class="text-primary text-appearance d-block d-md-inline-block">' +
+                  '><div class="col-12 px-4 col-md-12 text-center"><p class="cookieBeaverContainer mt-4"><img src="https://cdn.bio-kinder.de/frontend/images/biokindertheme/icons/cookie_biber.png" class="cookieBeaver"></p> <h2>Cookies akzeptieren</h2> <p>\n                      Wir nutzen Cookies auf unserer Website. Einige von diesen sind essenziell, während andere uns helfen, diese Website und Ihre Erfahrung zu verbessern.\n                      Sie haben die Möglichkeit, die Einstellungen der Cookies anzupassen.\n                      Weitere Informationen zu den von uns verwendeten Cookies und Ihren Rechten als Nutzer finden Sie in unserer <a href="/privacy-policy/" class="d-inline-block read_more">Daten­schutz­erklärung</a> und unserem <a href="/legal-disclosure/" class="d-inline-block read_more">' +
                   _vm._ssrEscape(
-                    _vm._s(
-                      _vm.$translate("Ceres::Template.cookieBarMoreSettings")
-                    )
+                    _vm._s(_vm.$translate("Ceres::Template.legalDisclosure"))
                   ) +
-                  '</a></div></div> <div class="button-order col-12 col-md-4 pt-3 pt-md-0"><button data-testing="cookie-bar-accept-all" class="btn btn-block btn-default btn-appearance button-order-1 mb-2 mt-0">' +
-                  _vm._ssrEscape(
-                    "\n                    " +
-                      _vm._s(
-                        _vm.$translate("Ceres::Template.cookieBarAcceptAll")
-                      ) +
-                      "\n                "
-                  ) +
-                  "</button> " +
-                  (_vm.showRejectAll
-                    ? '<button data-testing="cookie-bar-deny-all" class="btn btn-block btn-default btn-appearance button-order-2 mb-2 mt-0">' +
-                      _vm._ssrEscape(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.cookieBarDenyAll")
-                          ) +
-                          "\n                "
-                      ) +
-                      "</button>"
-                    : "<!---->") +
-                  ' <button data-testing="cookie-bar-save" class="btn btn-block btn-default button-order-3 mb-2 mt-0">' +
-                  _vm._ssrEscape(
-                    "\n                    " +
-                      _vm._s(_vm.$translate("Ceres::Template.cookieBarSave")) +
-                      "\n                "
-                  ) +
+                  '</a>.\n                    </p></div> <div class="col-12 col-md-12 text-center py-4 py-md-4"><button class="btn btn-default btn-appearance d-inline-block">Einstellungen</button> <button onclick="consentGiven(window.ConsentManager.hasResponse())" class="btn btn-primary btn-appearance d-inline-block">' +
+                  _vm._s("Einverstanden, zum Shop &rarr;") +
                   "</button></div></div> "
               ),
               _vm.isExpanded
                 ? _vm._ssrNode(
                     "<div" +
-                      _vm._ssrClass("row py-3", _vm.classes) +
+                      _vm._ssrClass("row p-3", _vm.classes) +
                       _vm._ssrStyle(null, _vm.styles, null) +
                       ">",
                     "</div>",
@@ -55171,47 +53878,19 @@ var render = function() {
                         1
                       ),
                       _vm._ssrNode(
-                        ' <div class="col-12 col-md-3"><a href="#" data-testing="cookie-bar-hide-more-information" class="text-primary text-appearance d-inline-block mb-3">' +
-                          _vm._ssrEscape(
-                            "\n                    " +
-                              _vm._s(
-                                _vm.$translate("Ceres::Template.cookieBarBack")
-                              ) +
-                              "\n                "
+                        ' <div class="col-12 col-md-12 text-center"><button onclick="consentGiven(window.ConsentManager.hasResponse())" class="btn btn-default mr-2">' +
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.cookieBarSave")
                           ) +
-                          '</a></div> <div class="col-12 col-md-9"><div class="row"><div class="col-12 col-md-4 mt-2 mt-md-0"><button data-testing="cookie-bar-expanded-accept-all" class="btn btn-block btn-default btn-appearance">' +
-                          _vm._ssrEscape(
-                            "\n                            " +
-                              _vm._s(
-                                _vm.$translate(
-                                  "Ceres::Template.cookieBarAcceptAll"
-                                )
-                              ) +
-                              "\n                        "
+                          '</button> <button onclick="consentGiven(window.ConsentManager.hasResponse())" class="btn btn-primary btn-appearance cookiesAccept">' +
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.cookieBarAcceptAll")
                           ) +
-                          "</button></div> " +
-                          (_vm.showRejectAll
-                            ? '<div class="col-12 col-md-4 mt-2 mt-md-0"><button data-testing="cookie-bar-expanded-deny-all" class="btn btn-block btn-default btn-appearance">' +
-                              _vm._ssrEscape(
-                                "\n                            " +
-                                  _vm._s(
-                                    _vm.$translate(
-                                      "Ceres::Template.cookieBarDenyAll"
-                                    )
-                                  ) +
-                                  "\n                        "
-                              ) +
-                              "</button></div>"
-                            : "<!---->") +
-                          ' <div class="col-12 col-md-4"><button data-testing="cookie-bar-expanded-save" class="btn btn-block btn-default">' +
-                          _vm._ssrEscape(
-                            "\n                            " +
-                              _vm._s(
-                                _vm.$translate("Ceres::Template.cookieBarSave")
-                              ) +
-                              "\n                        "
+                          '</button></div> <div class="col-12 col-md-6"><a class="text-appearance d-inline-block mb-3">' +
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.cookieBarBack")
                           ) +
-                          "</button></div></div></div>"
+                          "</a></div>"
                       )
                     ],
                     2
@@ -55221,18 +53900,16 @@ var render = function() {
             2
           )
         : _vm._ssrNode(
-            "<div><button" +
+            "<div><a" +
               _vm._ssrAttr(
                 "aria-label",
                 _vm.$translate("Ceres::Template.cookieBarPrivacySettings")
               ) +
-              ' class="btn btn-primary btn-appearance"><i class="fa fa-shield float-none"></i> <span class="d-none d-sm-inline-block">' +
-              _vm._ssrEscape(
-                _vm._s(
-                  _vm.$translate("Ceres::Template.cookieBarPrivacySettings")
-                )
+              '><i class="fa fa-shield float-none"></i> <span class="d-inline-block">' +
+              _vm._s(
+                _vm.$translate("Ceres::Template.cookieBarPrivacySettings")
               ) +
-              "</span></button></div>"
+              "</span></a></div>"
           )
     ]
   )
@@ -55878,115 +54555,74 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return !_vm.basketSelect
-    ? _c(
-        "ul",
-        { staticClass: "row" },
-        _vm._l(_vm.localization.shippingCountries, function(shippingCountry) {
-          return _vm._ssrNode(
-            "<li" +
-              _vm._ssrClass("col-6 col-sm-4 px-0", {
-                active: _vm.basket.shippingCountryId == shippingCountry.id,
-                "is-disabled": _vm.isDisabled
-              }) +
-              ">",
-            "</li>",
-            [
-              _c(
-                "a",
-                {
-                  directives: [
-                    {
-                      name: "tooltip",
-                      rawName: "v-tooltip",
-                      value: _vm.isDisabled,
-                      expression: "isDisabled"
+  return _c("div", { staticClass: "bkr-cc w-100" }, [
+    _vm.localization.shippingCountries.length > 1
+      ? _vm._ssrNode(
+          '<div class="input-unit">',
+          "</div>",
+          [
+            _vm._ssrNode(
+              '<select class="custom-select form-control">',
+              "</select>",
+              _vm._l(_vm.localization.shippingCountries, function(
+                shippingCountry
+              ) {
+                return _c(
+                  "option",
+                  {
+                    directives: [
+                      {
+                        name: "tooltip",
+                        rawName: "v-tooltip",
+                        value: _vm.isDisabled,
+                        expression: "isDisabled"
+                      }
+                    ],
+                    class: { "is-disabled": _vm.isDisabled },
+                    attrs: { disabled: _vm.isDisabled },
+                    domProps: {
+                      value: shippingCountry.id,
+                      selected:
+                        _vm.basket.shippingCountryId == shippingCountry.id
                     }
-                  ],
-                  staticClass: "nav-link",
-                  attrs: {
-                    "data-toggle": "collapse",
-                    href: "#countrySettings",
-                    disabled: _vm.isDisabled,
-                    "data-boundary": "window",
-                    "data-title": _vm.$translate(
-                      "Ceres::Template.headerChangeDeliveryCountry"
-                    ),
-                    "aria-label": _vm.$translate(
-                      "Ceres::Template.headerChangeDeliveryCountry"
-                    )
                   },
-                  on: {
-                    click: function($event) {
-                      return _vm.setShippingCountry(shippingCountry.id)
-                    }
-                  }
-                },
-                [
-                  _vm._ssrNode(
-                    "<i" +
-                      _vm._ssrClass(
-                        null,
-                        "flag-icon flag-icon-" +
-                          shippingCountry.isoCode2.toLowerCase()
-                      ) +
-                      "></i>" +
+                  [
+                    _vm._ssrNode(
                       _vm._ssrEscape(
-                        "\n            " +
+                        "\n                    " +
                           _vm._s(shippingCountry.currLangName) +
-                          "\n        "
+                          "\n                "
                       )
-                  )
-                ]
-              )
-            ]
-          )
-        }),
-        0
-      )
-    : _c("div", [
-        _vm._ssrNode(
-          '<div class="h3">' +
-            _vm._ssrEscape(
-              _vm._s(
-                _vm.$translate("Ceres::Template.headerSelectShippingCountry")
-              )
-            ) +
-            "</div> " +
-            (_vm.localization.shippingCountries.length > 1
-              ? '<select class="form-control">' +
-                _vm._ssrList(_vm.localization.shippingCountries, function(
-                  shippingCountry
-                ) {
-                  return (
-                    "<option" +
-                    _vm._ssrAttr("disabled", _vm.isDisabled) +
-                    _vm._ssrAttr("value", shippingCountry.id) +
-                    _vm._ssrAttr(
-                      "selected",
-                      _vm.basket.shippingCountryId == shippingCountry.id
-                    ) +
-                    ">" +
-                    _vm._ssrEscape(
-                      "\n            " +
-                        _vm._s(shippingCountry.currLangName) +
-                        "\n        "
-                    ) +
-                    "</option>"
-                  )
-                }) +
-                "</select>"
-              : "<div>" +
+                    )
+                  ]
+                )
+              }),
+              0
+            ),
+            _vm._ssrNode(
+              " <label>" +
                 _vm._ssrEscape(
-                  "\n        " +
-                    _vm._s(
-                      _vm.getCountryName(_vm.localization.shippingCountryId)
-                    ) +
-                    "\n    "
+                  _vm._s(
+                    _vm.$translate(
+                      "Ceres::Template.headerSelectShippingCountry"
+                    )
+                  )
                 ) +
-                "</div>")
+                "</label>"
+            )
+          ],
+          2
         )
-      ])
+      : _vm._ssrNode(
+          "<div>" +
+            _vm._ssrEscape(
+              "\n            " +
+                _vm._s(_vm.getCountryName(_vm.localization.shippingCountryId)) +
+                "\n        "
+            ) +
+            "</div>"
+        )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -62118,10 +60754,10 @@ module.exports = __webpack_require__(/*! ./build */ "./node_modules/vue-template
 /*!*********************************************************!*\
   !*** ./node_modules/vue-template-compiler/package.json ***!
   \*********************************************************/
-/*! exports provided: _args, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, browser, bugs, dependencies, description, devDependencies, homepage, jsdelivr, keywords, license, main, name, repository, types, unpkg, version, default */
+/*! exports provided: name, version, description, main, unpkg, jsdelivr, browser, types, repository, keywords, author, license, bugs, homepage, dependencies, devDependencies, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"_args\":[[\"vue-template-compiler@2.6.12\",\"/home/runner/work/plugin-ceres/plugin-ceres\"]],\"_from\":\"vue-template-compiler@2.6.12\",\"_id\":\"vue-template-compiler@2.6.12\",\"_inBundle\":false,\"_integrity\":\"sha512-OzzZ52zS41YUbkCBfdXShQTe69j1gQDZ9HIX8miuC9C3rBCk9wIRjLiZZLrmX9V+Ftq/YEyv1JaVr5Y/hNtByg==\",\"_location\":\"/vue-template-compiler\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"vue-template-compiler@2.6.12\",\"name\":\"vue-template-compiler\",\"escapedName\":\"vue-template-compiler\",\"rawSpec\":\"2.6.12\",\"saveSpec\":null,\"fetchSpec\":\"2.6.12\"},\"_requiredBy\":[\"/\"],\"_resolved\":\"https://registry.npmjs.org/vue-template-compiler/-/vue-template-compiler-2.6.12.tgz\",\"_spec\":\"2.6.12\",\"_where\":\"/home/runner/work/plugin-ceres/plugin-ceres\",\"author\":{\"name\":\"Evan You\"},\"browser\":\"browser.js\",\"bugs\":{\"url\":\"https://github.com/vuejs/vue/issues\"},\"dependencies\":{\"de-indent\":\"^1.0.2\",\"he\":\"^1.1.0\"},\"description\":\"template compiler for Vue 2.0\",\"devDependencies\":{\"vue\":\"file:../..\"},\"homepage\":\"https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#readme\",\"jsdelivr\":\"browser.js\",\"keywords\":[\"vue\",\"compiler\"],\"license\":\"MIT\",\"main\":\"index.js\",\"name\":\"vue-template-compiler\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/vuejs/vue.git\"},\"types\":\"types/index.d.ts\",\"unpkg\":\"browser.js\",\"version\":\"2.6.12\"}");
+module.exports = JSON.parse("{\"name\":\"vue-template-compiler\",\"version\":\"2.6.12\",\"description\":\"template compiler for Vue 2.0\",\"main\":\"index.js\",\"unpkg\":\"browser.js\",\"jsdelivr\":\"browser.js\",\"browser\":\"browser.js\",\"types\":\"types/index.d.ts\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/vuejs/vue.git\"},\"keywords\":[\"vue\",\"compiler\"],\"author\":\"Evan You\",\"license\":\"MIT\",\"bugs\":{\"url\":\"https://github.com/vuejs/vue/issues\"},\"homepage\":\"https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#readme\",\"dependencies\":{\"he\":\"^1.1.0\",\"de-indent\":\"^1.0.2\"},\"devDependencies\":{\"vue\":\"file:../..\"}}");
 
 /***/ }),
 
@@ -75799,7 +74435,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "cd590b12"
+  "3be83637"
   
 )
 
@@ -75866,7 +74502,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "35f09196"
+  "28fbadd6"
   
 )
 
@@ -75933,7 +74569,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d9b14c54"
+  "204733d4"
   
 )
 
@@ -76000,7 +74636,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "43abbade"
+  "4c828e51"
   
 )
 
@@ -76067,7 +74703,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "c6ddc3bc"
+  "219559e2"
   
 )
 
@@ -76134,7 +74770,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5c436a7f"
+  "5fe666bf"
   
 )
 
@@ -76201,7 +74837,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "13817c09"
+  "17247849"
   
 )
 
@@ -76268,7 +74904,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "a1e10d88"
+  "174b5508"
   
 )
 
@@ -76335,7 +74971,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "9a61c138"
+  "22cc88b8"
   
 )
 
@@ -76402,7 +75038,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "fbbf239a"
+  "bfb58b1a"
   
 )
 
@@ -76469,7 +75105,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4414b6a7"
+  "32ad1b32"
   
 )
 
@@ -76536,7 +75172,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "374da5ce"
+  "d7fa9be4"
   
 )
 
@@ -76602,7 +75238,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "f2694264"
+  "33cbba8e"
   
 )
 
@@ -76651,7 +75287,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2034f4a7"
+  "65955f32"
   
 )
 
@@ -76718,7 +75354,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3957dab8"
+  "fe05f210"
   
 )
 
@@ -76785,7 +75421,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5cb9c188"
+  "783cfdc8"
   
 )
 
@@ -76852,7 +75488,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "56eccd1e"
+  "296de531"
   
 )
 
@@ -76918,7 +75554,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "789641a1"
+  "d7cd043e"
   
 )
 
@@ -76966,7 +75602,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "fac88ca8"
+  "c3c21428"
   
 )
 
@@ -77015,7 +75651,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3cc5ee52"
+  "be52cbdc"
   
 )
 
@@ -77082,7 +75718,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7cc8609a"
+  "0b193c5a"
   
 )
 
@@ -77149,7 +75785,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "83ff1816"
+  "034b5035"
   
 )
 
@@ -77216,7 +75852,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "26d1623c"
+  "64b36308"
   
 )
 
@@ -77283,7 +75919,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1ff5c484"
+  "18afcc04"
   
 )
 
@@ -77350,7 +75986,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "bd839c5a"
+  "d76d63da"
   
 )
 
@@ -77417,7 +76053,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6fce645d"
+  "ac8a3fc6"
   
 )
 
@@ -77487,7 +76123,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   injectStyles,
   null,
-  "dcd4830c"
+  "523eca8c"
   
 )
 
@@ -77554,7 +76190,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "78009558"
+  "a86d9dd0"
   
 )
 
@@ -77621,7 +76257,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2207c2b0"
+  "3d8afef0"
   
 )
 
@@ -77688,7 +76324,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "b1ce2730"
+  "49ada828"
   
 )
 
@@ -77755,7 +76391,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "b64b850a"
+  "4eba4d8a"
   
 )
 
@@ -77822,7 +76458,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2a55c34f"
+  "f1ea60e2"
   
 )
 
@@ -77889,7 +76525,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "295a5414"
+  "5fa17f58"
   
 )
 
@@ -77956,7 +76592,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4b50b116"
+  "c8b50654"
   
 )
 
@@ -78023,7 +76659,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0aeea185"
+  "79470d45"
   
 )
 
@@ -78090,7 +76726,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "c58fbcfc"
+  "df79847c"
   
 )
 
@@ -78157,7 +76793,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "29fccb64"
+  "f29c50b8"
   
 )
 
@@ -78224,7 +76860,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "48c8b09d"
+  "fa95a746"
   
 )
 
@@ -78291,7 +76927,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "8f7f7078"
+  "0d249384"
   
 )
 
@@ -78358,7 +76994,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "ea5f8e1c"
+  "7ddb5532"
   
 )
 
@@ -78425,7 +77061,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "feb22fee"
+  "f76c376e"
   
 )
 
@@ -78492,7 +77128,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0065c477"
+  "1be900b7"
   
 )
 
@@ -78559,7 +77195,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "a2468afc"
+  "9b00927c"
   
 )
 
@@ -78626,7 +77262,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3d30cbcd"
+  "bd7d10e6"
   
 )
 
@@ -78693,7 +77329,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d5765996"
+  "4ae0a116"
   
 )
 
@@ -78760,7 +77396,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3267dc0a"
+  "4adcbdbb"
   
 )
 
@@ -78827,7 +77463,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0e59c62e"
+  "5eae91ee"
   
 )
 
@@ -78894,7 +77530,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2566e380"
+  "1871ffc0"
   
 )
 
@@ -78961,7 +77597,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "db52f5d4"
+  "175ac0d6"
   
 )
 
@@ -79028,7 +77664,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6fedb468"
+  "01f5a18c"
   
 )
 
@@ -79095,7 +77731,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1ca62dfb"
+  "20492a3b"
   
 )
 
@@ -79162,7 +77798,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "224826ca"
+  "772c728a"
   
 )
 
@@ -79229,7 +77865,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6a19b4ec"
+  "b7f39ea8"
   
 )
 
@@ -79296,7 +77932,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4e4badb6"
+  "3cead4e5"
   
 )
 
@@ -79363,7 +77999,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6bee3719"
+  "48d8f94e"
   
 )
 
@@ -79430,7 +78066,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7c707c30"
+  "4db4ef20"
   
 )
 
@@ -79497,7 +78133,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d0ecb788"
+  "478c607c"
   
 )
 
@@ -79564,7 +78200,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "77371a7c"
+  "035e22fc"
   
 )
 
@@ -79631,7 +78267,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "b05fa528"
+  "1628992c"
   
 )
 
@@ -79698,7 +78334,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1fae8f5c"
+  "53772b1c"
   
 )
 
@@ -79765,7 +78401,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "00f0cee0"
+  "bbc75760"
   
 )
 
@@ -79832,7 +78468,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5b2f3161"
+  "bf0be4be"
   
 )
 
@@ -79899,7 +78535,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5db83a9f"
+  "0dbaf6df"
   
 )
 
@@ -79966,7 +78602,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "26310e18"
+  "7685d9d8"
   
 )
 
@@ -80033,7 +78669,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "442f72e7"
+  "5aff62b2"
   
 )
 
@@ -80100,7 +78736,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "16d81bd0"
+  "5dc66fe0"
   
 )
 
@@ -80167,7 +78803,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "641af7f5"
+  "06afb3b5"
   
 )
 
@@ -80234,7 +78870,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "410c13b8"
+  "f3522010"
   
 )
 
@@ -80301,7 +78937,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2df9150a"
+  "2fff1d8a"
   
 )
 
@@ -80368,7 +79004,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "66e7cc40"
+  "50b75000"
   
 )
 
@@ -80435,7 +79071,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "49d4d5f3"
+  "a434fc9a"
   
 )
 
@@ -80502,7 +79138,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6adba9d9"
+  "c2ee94ce"
   
 )
 
@@ -80569,7 +79205,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "179fbbd5"
+  "f40fb0d6"
   
 )
 
@@ -80636,7 +79272,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "67d9342c"
+  "28c8722a"
   
 )
 
@@ -80703,7 +79339,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5b17d8ee"
+  "a007b6a4"
   
 )
 
@@ -80770,7 +79406,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0ecea230"
+  "169d7b28"
   
 )
 
@@ -80837,7 +79473,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "da8e71c6"
+  "126d1a46"
   
 )
 
@@ -80904,7 +79540,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d86d526a"
+  "104bfaea"
   
 )
 
@@ -80971,7 +79607,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "874cc47a"
+  "632e8a03"
   
 )
 
@@ -81038,7 +79674,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "76270e3e"
+  "71ecd4a1"
   
 )
 
@@ -81105,7 +79741,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1468d334"
+  "3b1672a6"
   
 )
 
@@ -81172,7 +79808,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "14c9f602"
+  "a0409d82"
   
 )
 
@@ -81239,7 +79875,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4c60eee2"
+  "0d3d6abc"
   
 )
 
@@ -81306,7 +79942,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7af4e5fd"
+  "7e97e23d"
   
 )
 
@@ -81373,7 +80009,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "f33819c0"
+  "28f8aee0"
   
 )
 
@@ -81440,7 +80076,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "9a5050d6"
+  "26775956"
   
 )
 
@@ -87521,13 +86157,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_NavigationModule__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./modules/NavigationModule */ "./resources/js/src/app/store/modules/NavigationModule.js");
 /* harmony import */ var _modules_OrderReturnModule__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./modules/OrderReturnModule */ "./resources/js/src/app/store/modules/OrderReturnModule.js");
 /* harmony import */ var _modules_UserModule__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./modules/UserModule */ "./resources/js/src/app/store/modules/UserModule.js");
-/* harmony import */ var _modules_WishListModule__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./modules/WishListModule */ "./resources/js/src/app/store/modules/WishListModule.js");
-/* harmony import */ var _modules_singleItem_BaseItemModule__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./modules/singleItem/BaseItemModule */ "./resources/js/src/app/store/modules/singleItem/BaseItemModule.js");
-/* harmony import */ var _plugins_EventPropagationPlugin__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./plugins/EventPropagationPlugin */ "./resources/js/src/app/store/plugins/EventPropagationPlugin.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
+/* harmony import */ var _modules_singleItem_BaseItemModule__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./modules/singleItem/BaseItemModule */ "./resources/js/src/app/store/modules/singleItem/BaseItemModule.js");
+/* harmony import */ var _plugins_EventPropagationPlugin__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./plugins/EventPropagationPlugin */ "./resources/js/src/app/store/plugins/EventPropagationPlugin.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
+/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
 
 
@@ -87544,7 +86179,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
+ // import wishList from "./modules/WishListModule";
 
 
 
@@ -87569,7 +86204,7 @@ function createStore() {
       consents: _modules_ConsentModule__WEBPACK_IMPORTED_MODULE_6__["default"],
       contactForm: _modules_ContactFormModule__WEBPACK_IMPORTED_MODULE_7__["default"],
       itemList: _modules_ItemListModule__WEBPACK_IMPORTED_MODULE_8__["default"],
-      items: _modules_singleItem_BaseItemModule__WEBPACK_IMPORTED_MODULE_18__["default"],
+      items: _modules_singleItem_BaseItemModule__WEBPACK_IMPORTED_MODULE_17__["default"],
       itemSearch: _modules_ItemSearchModule__WEBPACK_IMPORTED_MODULE_9__["default"],
       lastSeen: _modules_LastSeenModule__WEBPACK_IMPORTED_MODULE_10__["default"],
       lazyComponent: _modules_LazyComponentModule__WEBPACK_IMPORTED_MODULE_11__["default"],
@@ -87577,10 +86212,10 @@ function createStore() {
       localization: _modules_LocalizationModule__WEBPACK_IMPORTED_MODULE_13__["default"],
       navigation: _modules_NavigationModule__WEBPACK_IMPORTED_MODULE_14__["default"],
       orderReturn: _modules_OrderReturnModule__WEBPACK_IMPORTED_MODULE_15__["default"],
-      user: _modules_UserModule__WEBPACK_IMPORTED_MODULE_16__["default"],
-      wishList: _modules_WishListModule__WEBPACK_IMPORTED_MODULE_17__["default"]
+      user: _modules_UserModule__WEBPACK_IMPORTED_MODULE_16__["default"] // wishList
+
     },
-    plugins: !App.isSSR ? [_plugins_EventPropagationPlugin__WEBPACK_IMPORTED_MODULE_19__["default"]] : []
+    plugins: !App.isSSR ? [_plugins_EventPropagationPlugin__WEBPACK_IMPORTED_MODULE_18__["default"]] : []
   });
   return store;
 } // TODO: add code comment
@@ -87603,8 +86238,7 @@ function initClientListeners(store) {
   _services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].listen("AfterBasketChanged", function (data) {
     store.commit("setBasket", data.basket);
     store.commit("setShowNetPrices", data.showNetPrices);
-    store.commit("updateBasketItems", data.basketItems);
-    store.commit("setWishListIds", data.basket.itemWishListIds);
+    store.commit("updateBasketItems", data.basketItems); // store.commit("setWishListIds", data.basket.itemWishListIds);
   });
   _services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].listen("AfterBasketItemAdd", function (data) {
     store.commit("addBasketItem", data.basketItems);
@@ -87637,7 +86271,7 @@ function initClientStore(store) {
 
 
   document.addEventListener("DOMContentLoaded", function () {
-    var urlParams = Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_21__["getUrlParams"])();
+    var urlParams = Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_20__["getUrlParams"])();
 
     if (store.getters.currentItemVariation) {
       urlParams.lastSeenVariationId = store.getters.currentItemVariation.variation.id;
@@ -87647,14 +86281,13 @@ function initClientStore(store) {
       cache: false,
       keepOriginalResponse: true
     }).done(function (response) {
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_20__["isDefined"])(response.data.customer)) {
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isDefined"])(response.data.customer)) {
         store.commit("setUserData", response.data.customer);
       }
 
       if (!response.events.hasOwnProperty("AfterBasketChanged")) {
         // only set basket if not change event is emitted. In this case, the basket will be set by the event listener.
-        store.commit("setBasket", response.data.basket);
-        store.commit("setWishListIds", response.data.basket.itemWishListIds);
+        store.commit("setBasket", response.data.basket); // store.commit("setWishListIds", response.data.basket.itemWishListIds);
       }
 
       store.commit("setIsBasketInitiallyLoaded");
@@ -87663,7 +86296,7 @@ function initClientStore(store) {
       console.log(error, status);
 
       if (status > 0) {
-        _services_NotificationService__WEBPACK_IMPORTED_MODULE_23__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_22__["default"].translate("Ceres::Template.basketOops")).closeAfter(10000);
+        _services_NotificationService__WEBPACK_IMPORTED_MODULE_22__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_21__["default"].translate("Ceres::Template.basketOops")).closeAfter(10000);
       }
     });
   });
@@ -90549,172 +89182,6 @@ var getters = {
 /* harmony default export */ __webpack_exports__["default"] = ({
   state: state,
   mutations: mutations,
-  getters: getters
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/store/modules/WishListModule.js":
-/*!**************************************************************!*\
-  !*** ./resources/js/src/app/store/modules/WishListModule.js ***!
-  \**************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.map.js */ "./node_modules/core-js/modules/es.array.map.js");
-/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.number.constructor.js */ "./node_modules/core-js/modules/es.number.constructor.js");
-/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_splice_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.splice.js */ "./node_modules/core-js/modules/es.array.splice.js");
-/* harmony import */ var core_js_modules_es_array_splice_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_splice_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.promise.js */ "./node_modules/core-js/modules/es.promise.js");
-/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5__);
-
-
-
-
-
-
-
-var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
-
-var state = function state() {
-  return {
-    wishListIds: [],
-    wishListItems: [],
-    inactiveVariationIds: [],
-    isWishListInitiallyLoading: false,
-    isLoading: false
-  };
-};
-
-var mutations = {
-  setWishListItems: function setWishListItems(state, wishListItems) {
-    state.wishListItems = wishListItems;
-  },
-  setWishListIds: function setWishListIds(state, wishListIds) {
-    state.wishListIds = wishListIds.map(Number);
-  },
-  setInactiveVariationIds: function setInactiveVariationIds(state, inactiveVariationIds) {
-    state.inactiveVariationIds = inactiveVariationIds === null || inactiveVariationIds === void 0 ? void 0 : inactiveVariationIds.map(Number);
-  },
-  removeWishListItem: function removeWishListItem(state, wishListItem) {
-    state.wishListItems = state.wishListItems.filter(function (item) {
-      return item !== wishListItem;
-    });
-  },
-  removeWishListId: function removeWishListId(state, id) {
-    state.wishListIds = state.wishListIds.filter(function (wishListId) {
-      return wishListId !== id;
-    });
-  },
-  removeInactiveVariationId: function removeInactiveVariationId(state, id) {
-    state.inactiveVariationIds = state.inactiveVariationIds.filter(function (inactiveVarationId) {
-      return inactiveVarationId !== id;
-    });
-  },
-  addWishListItemToIndex: function addWishListItemToIndex(state, wishListItem, index) {
-    state.wishListItems.splice(index, 0, wishListItem);
-  },
-  addWishListId: function addWishListId(state, id) {
-    state.wishListIds.push(id);
-  },
-  setIsWishListInitiallyLoading: function setIsWishListInitiallyLoading(state) {
-    state.isWishListInitiallyLoading = true;
-  },
-  setIsWishListLoading: function setIsWishListLoading(state, isLoading) {
-    state.isLoading = !!isLoading;
-  }
-};
-var actions = {
-  initWishListItems: function initWishListItems(_ref) {
-    var commit = _ref.commit,
-        state = _ref.state;
-    return new Promise(function (resolve, reject) {
-      if (!state.isWishListInitiallyLoading) {
-        commit("setIsWishListInitiallyLoading");
-        commit("setIsWishListLoading", true);
-        ApiService.get("/rest/io/itemWishList").done(function (response) {
-          commit("setInactiveVariationIds", response.inactiveVariationIds);
-          commit("setWishListItems", response.documents);
-          resolve(response);
-        }).fail(function (error) {
-          reject(error);
-        }).always(function () {
-          commit("setIsWishListLoading", false);
-        });
-      } else {
-        resolve(state.wishListItems);
-      }
-    });
-  },
-  removeInactiveWishListItem: function removeInactiveWishListItem(_ref2, _ref3) {
-    var commit = _ref2.commit;
-    var id = _ref3.id;
-    return new Promise(function (resolve, reject) {
-      ApiService.del("/rest/io/itemWishList/" + id).done(function (data) {
-        commit("removeWishListId", id);
-        commit("removeInactiveVariationId", id);
-        resolve(data);
-      }).fail(function (error) {
-        reject(error);
-      }).always(function () {
-        commit("setIsWishListLoading", false);
-      });
-    });
-  },
-  removeWishListItem: function removeWishListItem(_ref4, _ref5) {
-    var commit = _ref4.commit;
-    var id = _ref5.id,
-        wishListItem = _ref5.wishListItem,
-        index = _ref5.index;
-    return new Promise(function (resolve, reject) {
-      if (wishListItem) {
-        commit("removeWishListItem", wishListItem);
-      }
-
-      ApiService.del("/rest/io/itemWishList/" + id).done(function (data) {
-        commit("removeWishListId", id);
-        resolve(data);
-      }).fail(function (error) {
-        if (index) {
-          commit("addWishListItemToIndex", wishListItem, index);
-        }
-
-        reject(error);
-      });
-    });
-  },
-  addToWishList: function addToWishList(_ref6, id) {
-    var commit = _ref6.commit;
-    return new Promise(function (resolve, reject) {
-      commit("addWishListId", id);
-      ApiService.post("/rest/io/itemWishList", {
-        variationId: id
-      }).done(function (data) {
-        resolve(data);
-      }).fail(function (error) {
-        commit("removeWishListId", id);
-        reject(error);
-      });
-    });
-  }
-};
-var getters = {
-  wishListCount: function wishListCount(state) {
-    return state.wishListIds.length;
-  }
-};
-/* harmony default export */ __webpack_exports__["default"] = ({
-  state: state,
-  mutations: mutations,
-  actions: actions,
   getters: getters
 });
 

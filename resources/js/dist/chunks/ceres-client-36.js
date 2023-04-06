@@ -77,7 +77,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-price",
@@ -150,196 +149,151 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { class: { "has-crossprice": _vm.hasCrossPrice } }, [
-    _vm.showCrossPrice && _vm.hasCrossPrice
-      ? _c(
-          "div",
-          {
-            staticClass: "crossprice",
-            class: { "is-special-offer": _vm.hasSpecialOffer }
-          },
-          [
-            _c(
-              "del",
-              { staticClass: "text-muted small text-appearance" },
-              [
-                _vm.hasSpecialOffer
-                  ? [
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(
-                            _vm._f("itemCrossPrice")(
-                              _vm.currentVariation.prices.default.unitPrice
-                                .formatted,
-                              true
-                            )
-                          ) +
-                          "\n            "
-                      )
-                    ]
-                  : [
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(
-                            _vm._f("itemCrossPrice")(
-                              _vm.currentVariation.prices.rrp.unitPrice
-                                .formatted
-                            )
-                          ) +
-                          "\n            "
-                      )
-                    ]
-              ],
-              2
+  return _c(
+    "div",
+    {
+      staticClass: "variationPrices bkr-cc",
+      class: { "has-crossprice": _vm.hasCrossPrice }
+    },
+    [
+      _vm.currentVariation.prices.default.price.value > 0 &&
+      _vm.currentVariation.prices.rrp.price.value > 0 &&
+      _vm.currentVariation.prices.default.price.value <
+        _vm.currentVariation.prices.rrp.price.value
+        ? _c("span", { staticClass: "percent" }, [
+            _vm._v(
+              "\n          Sie sparen " +
+                _vm._s(
+                  _vm._f("numberFormat")(
+                    (1 -
+                      _vm.currentVariation.prices.default.price.value /
+                        _vm.currentVariation.prices.rrp.price.value) *
+                      100,
+                    2,
+                    ","
+                  )
+                ) +
+                "%\n        "
             )
-          ]
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _c(
-      "span",
-      {
-        staticClass: "price h1",
-        class: { "is-special-offer": _vm.hasSpecialOffer }
-      },
-      [
-        _c(
-          "span",
-          [
-            _vm.showDynamicPrice
-              ? [
-                  _vm._v(
-                    "\n                " +
-                      _vm._s(
-                        _vm.$translate(
-                          "Ceres::Template.dynamicVariationPrice",
-                          {
-                            price: _vm.$options.filters.currency(
-                              _vm.variationTotalPrice,
-                              _vm.currentVariation.prices.default.currency
-                            )
-                          }
-                        )
-                      ) +
-                      "\n            "
-                  )
-                ]
-              : [
-                  _vm._v(
-                    "\n                " +
-                      _vm._s(
-                        _vm._f("currency")(
-                          _vm.variationTotalPrice,
-                          _vm.currentVariation.prices.default.currency
-                        )
-                      ) +
-                      "\n            "
-                  )
-                ]
-          ],
-          2
-        ),
-        _vm._v(" "),
-        _c("sup", [
-          _vm._v(_vm._s(_vm.$translate("Ceres::Template.singleItemFootnote1")))
-        ])
-      ]
-    ),
-    _vm._v(" "),
-    _vm.propertiesWithAdditionalCostsVisible.length
-      ? _c(
-          "ul",
-          { staticClass: "text-muted pl-0 list-unstyled" },
-          _vm._l(_vm.propertiesWithAdditionalCostsVisible, function(property) {
-            return _c("li", { key: property.propertyId }, [
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.showCrossPrice && _vm.hasCrossPrice
+        ? _c(
+            "span",
+            {
+              staticClass: "text-muted",
+              class: { "is-special-offer": _vm.hasSpecialOffer },
+              attrs: { id: "itemmrp" }
+            },
+            [
+              _vm._v(
+                "\n            " +
+                  _vm._s(
+                    _vm.$translate("biokinderDesign::Template.itemInstedOf")
+                  ) +
+                  "\n            "
+              ),
               _c(
-                "span",
-                { staticClass: "d-block" },
+                "del",
+                { staticClass: "small text-appearance" },
                 [
-                  _vm._v(
-                    "\n                " +
-                      _vm._s(property.property.names.name) +
-                      " "
-                  ),
-                  _vm.$options.filters.propertySurcharge(
-                    _vm.currentVariation.properties,
-                    property.propertyId
-                  ) > 0
+                  _vm.hasSpecialOffer
                     ? [
                         _vm._v(
-                          "(" +
+                          "\n                    " +
                             _vm._s(
-                              _vm.$translate("Ceres::Template.basketPlusAbbr")
-                            ) +
-                            " " +
-                            _vm._s(
-                              _vm._f("currency")(
-                                _vm._f("propertySurcharge")(
-                                  _vm.currentVariation.properties,
-                                  property.propertyId
-                                )
+                              _vm._f("itemCrossPrice")(
+                                _vm.currentVariation.prices.default.unitPrice
+                                  .formatted,
+                                true
                               )
                             ) +
-                            ")"
+                            "\n                "
                         )
                       ]
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.hasTax(property)
-                    ? [
+                    : [
                         _vm._v(
-                          _vm._s(
-                            _vm.$translate(
-                              "Ceres::Template.singleItemFootnote1"
-                            )
-                          )
+                          "\n                    " +
+                            _vm._s(
+                              _vm._f("itemCrossPrice")(
+                                _vm.currentVariation.prices.rrp.unitPrice
+                                  .formatted
+                              )
+                            ) +
+                            "\n                "
                         )
                       ]
-                    : _vm._e()
                 ],
                 2
               )
-            ])
-          }),
-          0
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.currentVariation.prices.default.lowestPrice.value &&
-    _vm.showCrossPrice &&
-    _vm.hasCrossPrice
-      ? _c("div", { staticClass: "lowest-price text-muted mb-3" }, [
-          _c("div", {
-            domProps: {
-              innerHTML: _vm._s(
-                _vm.$translate("Ceres::Template.singleItemLowestPrice", {
-                  price:
-                    _vm.currentVariation.prices.default.lowestPrice.formatted
-                })
-              )
-            }
-          })
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.currentVariation.unit
-      ? _c(
-          "div",
-          {
-            staticClass: "base-price text-muted my-3",
-            class: {
-              "is-single-piece":
-                _vm.currentVariation.unit &&
-                _vm.currentVariation.unit.content === 1 &&
-                _vm.currentVariation.unit.unitOfMeasurement === "C62"
-            }
-          },
-          [
-            _c("div", [
+            ]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "span",
+        { staticClass: "singleprice", class: { colorred: _vm.hasCrossPrice } },
+        [
+          _c(
+            "span",
+            [
+              _vm.showDynamicPrice
+                ? [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(
+                          _vm.$translate(
+                            "Ceres::Template.dynamicVariationPrice",
+                            {
+                              price: _vm.$options.filters.currency(
+                                _vm.variationTotalPrice,
+                                _vm.currentVariation.prices.default.currency
+                              )
+                            }
+                          )
+                        ) +
+                        "\n                "
+                    )
+                  ]
+                : [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(
+                          _vm._f("currency")(
+                            _vm.variationTotalPrice,
+                            _vm.currentVariation.prices.default.currency
+                          )
+                        ) +
+                        "\n                "
+                    )
+                  ]
+            ],
+            2
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "clearer" }),
+      _vm._v(" "),
+      _vm.currentVariation.unit &&
+      _vm.currentVariation.variation.mayShowUnitPrice
+        ? _c(
+            "div",
+            {
+              staticClass: "base-price text-muted my-1",
+              class: {
+                "is-single-piece":
+                  _vm.currentVariation.unit &&
+                  _vm.currentVariation.unit.content === 1 &&
+                  _vm.currentVariation.unit.unitOfMeasurement === "C62"
+              }
+            },
+            [
               _vm._v(
-                "\n            " +
+                "\n\n                " +
                   _vm._s(_vm.$translate("Ceres::Template.singleItemContent")) +
-                  "\n            "
+                  ":\n                "
               ),
               _c("span", [
                 _vm._v(
@@ -349,37 +303,74 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _c("span", [_vm._v(_vm._s(_vm.currentVariation.unit.names.name))])
-            ]),
-            _vm._v(" "),
-            _vm.currentVariation.variation.mayShowUnitPrice
-              ? _c("div", [
-                  _vm._v(
-                    "\n            " +
-                      _vm._s(
-                        _vm.$translate("Ceres::Template.singleItemUnitPrice")
-                      ) +
-                      "\n            "
-                  ),
-                  _c("span", { staticClass: "base-price-value" }, [
-                    _vm._v(
-                      "\n                " +
-                        _vm._s(
-                          _vm._f("specialOffer")(
-                            _vm.variationGraduatedPrice.basePrice,
-                            _vm.currentVariation.prices,
-                            "basePrice"
-                          )
-                        ) +
-                        "\n            "
-                    )
-                  ])
-                ])
-              : _vm._e()
-          ]
-        )
-      : _vm._e()
-  ])
+              _c("span", [
+                _vm._v(_vm._s(_vm.currentVariation.unit.names.name))
+              ]),
+              _vm._v("\n                 | \n                "),
+              _c("span", { staticClass: "base-price-value" }, [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(
+                      _vm._f("specialOffer")(
+                        _vm.variationGraduatedPrice.basePrice,
+                        _vm.currentVariation.prices,
+                        "basePrice"
+                      )
+                    ) +
+                    "\n                "
+                )
+              ])
+            ]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "shippinginfo" },
+        [
+          _vm._v(
+            "\n          " +
+              _vm._s(_vm.$translate("Ceres::Template.singleItemInclVAT")) +
+              ",\n          " +
+              _vm._s(_vm.$translate("Ceres::Template.singleItemExclusive")) +
+              "\n          "
+          ),
+          _c(
+            "a",
+            {
+              staticClass: "openPorto",
+              attrs: {
+                "data-toggle": "modal",
+                href: "#shippingscosts",
+                title: _vm.$translate("Ceres::Template.singleItemShippingCosts")
+              }
+            },
+            [
+              _vm._v("CO"),
+              _c("sub", [_vm._v("2")]),
+              _vm._v(" neutraler Versand")
+            ]
+          ),
+          _vm._v(" "),
+          _vm._t("additional-content-after-vat"),
+          _vm._v(" "),
+          _vm.showCrossPrice && _vm.hasCrossPrice
+            ? _c("span", [
+                _c("br"),
+                _vm._v(
+                  "Zuletzt niedrigster Preis " +
+                    _vm._s(
+                      _vm.currentVariation.prices.default.lowestPrice.formatted
+                    ) +
+                    "\n          "
+                )
+              ])
+            : _vm._e()
+        ],
+        2
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

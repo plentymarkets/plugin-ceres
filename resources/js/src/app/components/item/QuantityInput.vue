@@ -1,41 +1,65 @@
 <template>
-    <div class="qty-box d-flex h-100">
-        <input class="qty-input text-center"
-               type="text"
-               :value="displayValue"
-               @change="setValue($event.target.value)"
-               :disabled="waiting"
-               ref="quantityInputField"
-               :aria-label="$translate('Ceres::Template.itemQuantityInput')">
+<div class="bkr-cc input-group qty-box-small" v-if="useAppearance">  <!-- useAppearance: showSmallQtySelect -->
+    <div class="qty-btn-container input-group-btn left">
+        <div class="qty-btn"
+                @click="decreaseValue()"
+                :class="{ 'disabled': isMinimum || waiting }"
+                v-tooltip="isMinimum"
+                data-toggle="tooltip"
+                data-placement="bottom"
+                :title="minimumHint">
+            <i class="fa fa-minus qty-sign" aria-hidden="true"></i>
+        </div>
+    </div>
+    <input class="qty-input form-control"
+            type="text"
+            :value="displayValue"
+            @change="setValue($event.target.value)"
+            :disabled="waiting"
+            ref="quantityInputField">
 
-        <div class="qty-btn-container d-flex flex-column">
-            <button class="btn qty-btn flex-fill d-flex justify-content-center p-0"
-                 @click="increaseValue()"
-                 :class="{ 'disabled': isMaximum || waiting, 'btn-appearance': useAppearance }"
-                 v-tooltip="isMaximum && compMax !== 0"
-                 data-toggle="tooltip"
-                 data-placement="top"
-                 data-testing="quantity-btn-increase"
-                 :title="maximumHint"
-                 :aria-label="$translate('Ceres::Template.itemQuantityInputIncrease')">
-                <i class="fa fa-plus default-float" aria-hidden="true"></i>
-            </button>
-
-            <button class="btn qty-btn flex-fill d-flex justify-content-center p-0"
-                 @click="decreaseValue()"
-                 :class="{ 'disabled': isMinimum || waiting, 'btn-appearance': useAppearance }"
-                 v-tooltip="isMinimum && compMax !== 0"
-                 data-toggle="tooltip"
-                 data-placement="bottom"
-                 data-testing="quantity-btn-decrease"
-                 :title="minimumHint"
-                 :aria-label="$translate('Ceres::Template.itemQuantityInputDecrease')">
-                <i class="fa fa-minus default-float" aria-hidden="true"></i>
-            </button>
+    <div class="qty-btn-container  input-group-btn right">
+        <div class="qty-btn"
+                @click="increaseValue()"
+                :class="{ 'disabled': isMaximum || waiting }"
+                v-tooltip="isMaximum && compMax !== 0"
+                data-toggle="tooltip"
+                data-placement="top"
+                :title="maximumHint">
+            <i class="fa fa-plus qty-sign" aria-hidden="true"></i>
+        </div>
+    </div>
+</div>
+<div v-else class="qty-box h-100 d-flex">
+        <input class="qty-input"
+                type="text"
+                :value="displayValue"
+                @change="setValue($event.target.value)"
+                :disabled="waiting"
+                ref="quantityInputField">
+        <div class="qty-btn-container">
+            <div class="qty-btn"
+                @click="increaseValue()"
+                :class="{ 'disabled': isMaximum || waiting }"
+                v-tooltip="isMaximum && compMax !== 0"
+                data-toggle="tooltip"
+                data-placement="top"
+                :title="maximumHint">
+                <i class="fa fa-plus qty-sign" aria-hidden="true"></i>
+            </div>
+            <div class="qty-btn-seperator"></div>
+            <div class="qty-btn"
+                @click="decreaseValue()"
+                :class="{ 'disabled': isMinimum || waiting }"
+                v-tooltip="isMinimum"
+                data-toggle="tooltip"
+                data-placement="bottom"
+                :title="minimumHint">
+                <i class="fa fa-minus qty-sign" aria-hidden="true"></i>
+            </div>
         </div>
     </div>
 </template>
-
 <script>
 import { floatLength, formatFloat, limit } from "../../helper/number";
 import { defaultValue, isDefined, isNullOrUndefined } from "../../helper/utils";
@@ -77,7 +101,10 @@ export default {
             type: Number,
             required: false
         },
-        useAppearance: Boolean
+        useAppearance: {
+            type: Boolean,
+            default: false
+        }
     },
 
     data()

@@ -1,36 +1,29 @@
 <template>
-    <div class="item-filter-price">
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text">{{ currency }}</span>
-            </div>
-
-            <input type="number"
-                   class="form-control"
-                   @focus="selectAll($event)"
-                   placeholder="Min"
-                   v-model="priceMin"
-                   :aria-label="$translate('Ceres::Template.itemFilterPriceMin')">
-        </div>
-
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text">{{ currency }}</span>
-            </div>
-
-            <input type="number"
-                   class="form-control"
-                   @focus="selectAll($event)"
-                   placeholder="Max"
-                   v-model="priceMax"
-                   :aria-label="$translate('Ceres::Template.itemFilterPriceMax')">
-        </div>
-
-        <button type="button" class="btn btn-primary btn-appearance" :class="{'disabled': isDisabled}" v-tooltip
-                data-toggle="tooltip" data-placement="top" @click="triggerFilter()" :title="$translate('Ceres::Template.itemApply')" :aria-label="$translate('Ceres::Template.itemFilterButton')">
-            <icon icon="check" :loading="isLoading"></icon>
-        </button>
-    </div>
+    <div class="facetValue priceFacet bkr-cc">
+        <div class="row">
+      		<div class="input-group col-lg-6 pb-3">
+      			<input type="number"
+      				   class="form-control"
+      				   @focus="selectAll($event)"
+      				   placeholder="Min"
+      				   v-model="priceMin">
+      		</div>
+      		<div class="input-group col-lg-6 pb-3">
+      			<input type="number"
+      				   class="form-control"
+      				   @focus="selectAll($event)"
+      				   placeholder="Max"
+      				   v-model="priceMax">
+      		</div>
+      		<div class="col-lg-12">
+      			<button type="button" class="btn btn-bkm-inverted btn-block btn-sm" :class="{ 'disabled': isDisabled }" v-tooltip
+      					data-toggle="tooltip" data-placement="top" @click="triggerFilter()" :title="$translate('Ceres::Template.itemApply')">
+                <span v-html="$translate('Ceres::Template.itemApply')"></span>
+                <icon icon="check" :loading="isLoading"></icon>
+      			</button>
+      		</div>
+      	</div>
+      </div>
 </template>
 
 <script>

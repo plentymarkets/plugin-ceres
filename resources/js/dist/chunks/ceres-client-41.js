@@ -97,9 +97,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -174,7 +171,7 @@ var render = function() {
         ? [
             _c(
               "div",
-              { attrs: { "data-testing": "autocomplete-list" } },
+              { class: "suggestion-result-" + _vm.suggestionType },
               _vm._l(_vm.autocompleteResult, function(item, index) {
                 return _c(
                   "a",
@@ -186,7 +183,7 @@ var render = function() {
                     attrs: { href: _vm.getTargetUrl(item), tabindex: "0" }
                   },
                   [
-                    _vm.showImages
+                    _vm.showImages && _vm.suggestionType == "item"
                       ? _c("div", { staticClass: "image flex-shrink-0 mr-3" }, [
                           item.image
                             ? _c("img", { attrs: { src: item.image } })
@@ -207,11 +204,10 @@ var render = function() {
                       },
                       [
                         _vm.showAdditionalInformation && item.beforeLabel
-                          ? _c(
-                              "p",
-                              { staticClass: "small mb-0 text-truncate" },
-                              [_vm._v(_vm._s(item.beforeLabel))]
-                            )
+                          ? _c("p", {
+                              staticClass: "small mb-0 text-truncate",
+                              domProps: { innerHTML: _vm._s(item.beforeLabel) }
+                            })
                           : _vm._e(),
                         _vm._v(" "),
                         _c("p", {
@@ -224,18 +220,19 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _vm.showAdditionalInformation && item.afterLabel
-                          ? _c(
-                              "p",
-                              { staticClass: "small mb-0 text-truncate" },
-                              [_vm._v(_vm._s(item.afterLabel))]
-                            )
+                          ? _c("p", {
+                              staticClass: "small mb-0 text-truncate",
+                              domProps: { innerHTML: _vm._s(item.afterLabel) }
+                            })
                           : _vm._e()
                       ]
                     ),
                     _vm._v(" "),
                     _vm.showCount && item.count > 0
                       ? _c("div", { staticClass: "count" }, [
-                          _c("span", [_vm._v(_vm._s(item.count))])
+                          _c("span", {
+                            domProps: { innerHTML: _vm._s(item.count) }
+                          })
                         ])
                       : _vm._e()
                   ]
@@ -245,25 +242,18 @@ var render = function() {
             )
           ]
         : [
-            _c(
-              "p",
-              {
-                staticClass: "text-muted",
-                class: _vm.paddingClasses,
-                style: _vm.paddingInlineStyles
-              },
-              [
-                _vm._v(
-                  "\n            " +
-                    _vm._s(
-                      _vm.$translate(
-                        "Ceres::Template.itemSearchSuggestionNoResults"
-                      )
-                    ) +
-                    "\n        "
+            _c("p", {
+              staticClass: "text-muted",
+              class: _vm.paddingClasses,
+              style: _vm.paddingInlineStyles,
+              domProps: {
+                innerHTML: _vm._s(
+                  _vm.$translate(
+                    "Ceres::Template.itemSearchSuggestionNoResults"
+                  )
                 )
-              ]
-            )
+              }
+            })
           ]
     ],
     2

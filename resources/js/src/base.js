@@ -101,14 +101,14 @@ Vue.component("popper", () => import("./app/components/pageDesign/Popper.vue"));
 Vue.component("shipping-country-select", () => import("./app/components/pageDesign/ShippingCountrySelect.vue"));
 Vue.component("loading-animation", () => import("./app/components/pageDesign/LoadingAnimation.vue"));
 
-Vue.component("wish-list", () => import("./app/components/wishList/WishList.vue"));
-import WishListCount from "./app/components/wishList/WishListCount.vue";
-Vue.component("wish-list-count", WishListCount);
+// Vue.component("wish-list", () => import("./app/components/wishList/WishList.vue"));
+// import WishListCount from "./app/components/wishList/WishListCount.vue";
+// Vue.component("wish-list-count", WishListCount);
 
 import LazyLoad from "./app/components/common/LazyLoad.vue";
 Vue.component("lazy-load", LazyLoad);
 
-Vue.component("add-to-wish-list", () => import("./app/components/item/AddToWishList.vue"));
+// Vue.component("add-to-wish-list", () => import("./app/components/item/AddToWishList.vue"));
 Vue.component("graduated-prices", () => import("./app/components/item/GraduatedPrices.vue"));
 Vue.component("item-data-table", () => import("./app/components/item/ItemDataTable.vue"));
 Vue.component("item-image-carousel", () => import("./app/components/item/ItemImageCarousel.vue"));

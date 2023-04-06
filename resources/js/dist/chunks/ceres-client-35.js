@@ -134,13 +134,21 @@ __webpack_require__.r(__webpack_exports__);
     var _this2 = this;
 
     this.$nextTick(function () {
-      _this2.loadLightbox().then(function () {
-        _this2.initCarousel();
+      _this2.initCarousel();
 
-        _this2.initThumbCarousel();
-      }).catch(function (event) {
-        console.log("error while loading lightbox", event);
-      });
+      _this2.initThumbCarousel();
+      /* disable lightbox
+      this.loadLightbox().then(() =>
+          {
+              this.initCarousel();
+              this.initThumbCarousel();
+          })
+          .catch(event =>
+          {
+              console.log("error while loading lightbox", event);
+          });
+      */
+
     });
   },
   methods: {
@@ -278,51 +286,128 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { itemscope: "", itemtype: "http://schema.org/Thing" } },
+    {
+      staticClass: "bkr-cc",
+      attrs: { itemscope: "", itemtype: "http://schema.org/Thing" }
+    },
     [
-      [
-        _c(
-          "div",
-          {
-            ref: "single",
-            staticClass:
-              "single-carousel owl-carousel owl-theme owl-single-item mt-0"
-          },
-          _vm._l(_vm.singleImages, function(image) {
-            return _c("div", { staticClass: "prop-1-1" }, [
-              _c(
-                "a",
-                {
-                  attrs: {
-                    href: image.url,
-                    "data-lightbox": "single-item-image" + _vm._uid
-                  }
-                },
-                [
-                  _c("img", {
-                    staticClass: "owl-lazy",
-                    attrs: {
-                      "data-src": image.url,
-                      alt: _vm.getAltText(image),
-                      title: _vm.getImageName(image)
-                    }
-                  })
-                ]
-              )
-            ])
-          }),
-          0
-        ),
-        _vm._v(" "),
-        _vm.showThumbs
-          ? _c(
-              "div",
+      _c(
+        "div",
+        {
+          ref: "single",
+          staticClass:
+            "bkr-cc single-carousel owl-carousel owl-theme owl-single-item mt-0",
+          attrs: { id: "imageGallery" }
+        },
+        _vm._l(_vm.singleImages, function(image) {
+          return _c("div", { staticClass: "prop-1-1" }, [
+            _c(
+              "a",
               {
-                ref: "thumbs",
-                staticClass:
-                  "owl-thumbs owl-carousel owl-theme owl-single-item",
-                attrs: { id: "thumb-carousel" }
+                attrs: {
+                  href: image.url,
+                  "data-fancybox": "single-item-image" + _vm._uid
+                }
               },
+              [
+                _c("img", {
+                  staticClass: "owl-lazy",
+                  attrs: {
+                    "data-src": image.url,
+                    alt: _vm.getAltText(image),
+                    title: _vm.getImageName(image)
+                  }
+                }),
+                _c("div", { staticClass: "magnifier" })
+              ]
+            )
+          ])
+        }),
+        0
+      ),
+      _vm._v(" "),
+      _vm.showThumbs
+        ? _c(
+            "div",
+            {
+              ref: "thumbs",
+              staticClass: "owl-thumbs owl-carousel owl-theme owl-single-item",
+              attrs: { id: "thumb-carousel" }
+            },
+            [
+              _vm.currentVariation.variationProperties &&
+              _vm.currentVariation.variationProperties.filter(function(prop) {
+                return prop.id == 4
+              })[0]
+                ? [
+                    _vm._l(
+                      _vm.currentVariation.variationProperties
+                        .filter(function(prop) {
+                          return prop.id == 4
+                        })[0]
+                        .properties.filter(function(prop) {
+                          return prop.id == 192
+                        }),
+                      function(property) {
+                        return [
+                          property.values.value != ""
+                            ? _c("div", { staticClass: "prop-1-1" }, [
+                                _c("div", { staticClass: "image-container" }, [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "videoButton text-center",
+                                      attrs: {
+                                        "data-toggle": "modal",
+                                        "data-target": "#videoModal"
+                                      }
+                                    },
+                                    [
+                                      _c("img", {
+                                        attrs: {
+                                          src:
+                                            "https://cdn.bio-kinder.de/frontend/images/static/playbtn.svg",
+                                          alt: "Video wiedergeben"
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("span", [
+                                        _vm._v("Video "),
+                                        _c(
+                                          "svg",
+                                          {
+                                            staticClass: "css-i6dzq1",
+                                            attrs: {
+                                              viewBox: "0 0 24 24",
+                                              width: "24",
+                                              height: "24",
+                                              stroke: "currentColor",
+                                              "stroke-width": "2",
+                                              fill: "none",
+                                              "stroke-linecap": "round",
+                                              "stroke-linejoin": "round"
+                                            }
+                                          },
+                                          [
+                                            _c("polygon", {
+                                              attrs: {
+                                                points: "5 3 19 12 5 21 5 3"
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      ])
+                                    ]
+                                  )
+                                ])
+                              ])
+                            : _vm._e()
+                        ]
+                      }
+                    )
+                  ]
+                : _vm._e(),
+              _vm._v(" "),
               _vm._l(_vm.carouselImages, function(imagePreview, index) {
                 return _c("div", { staticClass: "prop-1-1" }, [
                   _c(
@@ -349,35 +434,12 @@ var render = function() {
                     1
                   )
                 ])
-              }),
-              0
-            )
-          : _vm._e()
-      ],
-      _vm._v(" "),
-      !_vm.initialized
-        ? _c(
-            "div",
-            {
-              staticClass:
-                "single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0"
-            },
-            [
-              _c("div", { staticClass: "prop-1-1" }, [
-                _c("img", {
-                  staticClass: "owl-placeholder",
-                  attrs: {
-                    src: _vm.singleImages[0].url,
-                    alt: _vm.getAltText(_vm.singleImages[0].url),
-                    title: _vm.getImageName(_vm.singleImages[0].url)
-                  }
-                })
-              ])
-            ]
+              })
+            ],
+            2
           )
         : _vm._e()
-    ],
-    2
+    ]
   )
 }
 var staticRenderFns = []

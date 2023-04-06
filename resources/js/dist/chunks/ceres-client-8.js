@@ -94,6 +94,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -211,7 +216,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
 //
 //
 //
@@ -380,13 +384,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -447,69 +444,100 @@ var render = function() {
   return _vm.facet.name
     ? _c(
         "div",
-        { staticClass: "card pt-4 border-0", class: _vm.facet.cssClass },
+        {
+          staticClass: "facet bkr-cc",
+          class: { deliveryFacet: _vm.facet.id == 11 }
+        },
         [
-          _c("div", { staticClass: "h3 title py-0" }, [
-            _vm._v(_vm._s(_vm.facetName))
-          ]),
-          _vm._v(" "),
-          _vm.facet.type === "price"
-            ? _c("div", [_c("item-filter-price")], 1)
-            : _vm._l(_vm.facets, function(value) {
-                return _c(
+          _vm.facet.id != 11
+            ? _c("div", [
+                _c("div", {
+                  staticClass: "h3",
+                  domProps: { innerHTML: _vm._s(_vm.facetName) }
+                }),
+                _vm._v(" "),
+                _vm.facet.type === "price"
+                  ? _c(
+                      "div",
+                      { staticClass: "facetValues" },
+                      [_c("item-filter-price")],
+                      1
+                    )
+                  : _c(
+                      "div",
+                      { staticClass: "facetValues" },
+                      _vm._l(_vm.facets, function(value) {
+                        return _c(
+                          "div",
+                          { key: value.id, staticClass: "facetValue" },
+                          [
+                            _c("input", {
+                              staticClass: "form-check-input d-none",
+                              attrs: {
+                                id: "option-" + value.id + "-" + _vm._uid,
+                                type: "checkbox",
+                                disabled: _vm.isLoading || value.count <= 0
+                              },
+                              domProps: { checked: _vm.isSelected(value.id) },
+                              on: {
+                                change: function($event) {
+                                  return _vm.updateFacet(value)
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("label", {
+                              staticClass: "form-check-label",
+                              class: [
+                                _vm.paddingClasses,
+                                _vm.isSelected(value.id) ? "bg-appearance" : "",
+                                "option-" + value.id
+                              ],
+                              style: _vm.paddingInlineStyles,
+                              attrs: {
+                                for: "option-" + value.id + "-" + _vm._uid
+                              },
+                              domProps: { innerHTML: _vm._s(value.name) }
+                            })
+                          ]
+                        )
+                      }),
+                      0
+                    )
+              ])
+            : _c("div", { staticClass: "deliverySwitchContainer" }, [
+                _c(
                   "div",
                   {
-                    key: value.id,
-                    staticClass: "form-check-wrapper",
-                    class: value.cssClass
+                    staticClass: "deliverySwitch btn btn-sm btn-bkm-delivery",
+                    class: { active: _vm.isSelected(123) }
                   },
                   [
-                    _c("div", { staticClass: "form-check mb-0 pl-0" }, [
-                      _c("input", {
-                        staticClass: "form-check-input d-none",
-                        attrs: {
-                          id: "option-" + value.id + "-" + _vm._uid,
-                          type: "checkbox",
-                          disabled: _vm.isLoading || value.count <= 0
-                        },
-                        domProps: { checked: _vm.isSelected(value.id) },
-                        on: {
-                          change: function($event) {
-                            return _vm.updateFacet(value)
-                          }
+                    !_vm.isLoading
+                      ? _c(
+                          "label",
+                          { attrs: { for: "instantDeliverySwitch" } },
+                          [_c("span", [_vm._v("Sofort lieferbar")])]
+                        )
+                      : _c("label", {
+                          attrs: { for: "instantDeliverySwitch" },
+                          domProps: { innerHTML: _vm._s("Wird geladen...") }
+                        }),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "switch",
+                      attrs: { type: "checkbox", id: "instantDeliverySwitch" },
+                      domProps: { checked: _vm.isSelected(123) },
+                      on: {
+                        change: function($event) {
+                          return _vm.updateFacet({ id: 123 })
                         }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          staticClass: "form-check-label",
-                          class: [
-                            _vm.paddingClasses,
-                            _vm.isSelected(value.id) ? "bg-appearance" : "",
-                            "option-" + value.id
-                          ],
-                          style: _vm.paddingInlineStyles,
-                          attrs: { for: "option-" + value.id + "-" + _vm._uid }
-                        },
-                        [
-                          _c("div", { staticClass: "d-flex" }, [
-                            _c("span", { staticClass: "flex-grow-1" }, [
-                              _vm._v(_vm._s(value.name))
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "filter-badge" }, [
-                              _vm._v(_vm._s(value.count))
-                            ])
-                          ])
-                        ]
-                      )
-                    ])
+                      }
+                    })
                   ]
                 )
-              })
-        ],
-        2
+              ])
+        ]
       )
     : _vm._e()
 }
@@ -535,127 +563,145 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.filterListBulk
-    ? _c(
-        "div",
-        _vm._l(_vm.facets, function(facet) {
-          return _c("item-filter", {
-            key: facet.id,
-            attrs: {
-              facet: facet,
-              "padding-classes": _vm.paddingClasses,
-              "padding-inline-styles": _vm.paddingInlineStyles
-            }
-          })
-        }),
-        1
-      )
-    : _c(
-        "div",
+  return _c(
+    "div",
+    {
+      directives: [
         {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.facets && _vm.facets.length > 0,
-              expression: "facets && facets.length > 0"
-            }
-          ],
-          staticClass: "filter-wrapper"
+          name: "show",
+          rawName: "v-show",
+          value: _vm.facets && _vm.facets.length > 0,
+          expression: "facets && facets.length > 0"
+        }
+      ],
+      staticClass: "bkFilters bkr-cc"
+    },
+    [
+      _vm._l(
+        _vm.facets.filter(function(facet) {
+          return facet.id == 11
+        }),
+        function(facet) {
+          return _c("item-filter", { key: facet.id, attrs: { facet: facet } })
+        }
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-sm btn-bkm-inverted facetToggleButton",
+          attrs: {
+            "data-toggle": "collapse",
+            href: "#filter-collapse_" + _vm._uid,
+            "aria-expanded": "false",
+            "aria-controls": "filter-collapse_" + _vm._uid
+          }
         },
         [
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-link filter-toggle",
-              attrs: {
-                "data-toggle": "collapse",
-                href: "#filter-collapse_" + _vm._cid,
-                "aria-expanded": "false",
-                "aria-controls": "filter-collapse_" + _vm._cid
-              }
-            },
-            [
-              _c("i", {
-                staticClass: "fa fa-sliders default-float",
-                attrs: { "aria-hidden": "true" }
-              }),
-              _vm._v(
-                " " +
-                  _vm._s(_vm.$translate("Ceres::Template.itemFilter")) +
-                  "\n    "
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "open-filter-toolbar",
-                  rawName: "v-open-filter-toolbar"
-                }
-              ],
-              staticClass: "filter-collapse collapse",
-              attrs: { id: "filter-collapse_" + _vm._cid }
-            },
-            [
-              _c(
-                "div",
-                {
-                  staticClass: "container-max page-content component-loading",
-                  class: { "is-loading": _vm.isLoading }
-                },
-                [
-                  _c(
-                    "div",
-                    { staticClass: "card-columns" },
-                    _vm._l(_vm.facets, function(facet) {
-                      return _c("item-filter", {
-                        key: facet.id,
-                        attrs: { facet: facet }
-                      })
-                    }),
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-12 text-right" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-primary btn-medium-large",
-                          attrs: {
-                            type: "button",
-                            "data-toggle": "collapse",
-                            href: "#filter-collapse_" + _vm._cid,
-                            "aria-controls": "filter-collapse_" + _vm._cid
-                          }
-                        },
-                        [
-                          _c("i", {
-                            staticClass: "fa fa-times",
-                            attrs: { "aria-hidden": "true" }
-                          }),
-                          _vm._v(" "),
-                          _c("span", [
-                            _vm._v(
-                              _vm._s(
-                                _vm.$translate("Ceres::Template.itemClose")
-                              ) + " "
-                            )
-                          ])
-                        ]
-                      )
-                    ])
-                  ])
-                ]
-              )
-            ]
+          _c("i", {
+            staticClass: "fa fa-sliders default-float",
+            attrs: { "aria-hidden": "true" }
+          }),
+          _vm._v(
+            " " +
+              _vm._s(_vm.$translate("Ceres::Template.itemFilter")) +
+              "\n    "
           )
         ]
-      )
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "filter-wrapper" }, [
+        _c(
+          "div",
+          {
+            staticClass: "filter-collapse collapse",
+            attrs: { id: "filter-collapse_" + _vm._uid }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "container-max page-content component-loading",
+                class: { isLoading: _vm.isLoading }
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "facetOutter",
+                    attrs: { selectedFactes: _vm.selectedFacets.length }
+                  },
+                  [
+                    _vm._l(_vm.facets, function(facet) {
+                      return facet.id != 11
+                        ? _c("item-filter", {
+                            key: facet.id,
+                            attrs: { facet: facet }
+                          })
+                        : _vm._e()
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "facet" },
+                      [
+                        _c("div", { staticClass: "h3" }, [
+                          _vm._v(
+                            _vm._s(
+                              _vm.$translate(
+                                "biokinderDesign::Template.itemListSort"
+                              )
+                            )
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _vm._t("sorting-box")
+                      ],
+                      2
+                    )
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "row filterBtnRow" }, [
+                  _c("div", { staticClass: "col-12 text-right" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "btn btn-bkm btn-medium-large applyFilterButton",
+                        attrs: {
+                          type: "button",
+                          "data-toggle": "collapse",
+                          href: "#filter-collapse_" + _vm._uid,
+                          "aria-controls": "filter-collapse_" + _vm._uid
+                        }
+                      },
+                      [
+                        _c("i", {
+                          staticClass: "fa fa-times",
+                          attrs: { "aria-hidden": "true" }
+                        }),
+                        _vm._v(" "),
+                        _c("span", [
+                          _vm._v(
+                            _vm._s(
+                              _vm.$translate("Ceres::Template.itemClose")
+                            ) + " "
+                          )
+                        ])
+                      ]
+                    )
+                  ])
+                ])
+              ]
+            )
+          ]
+        )
+      ])
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -679,103 +725,94 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "item-filter-price" }, [
-    _c("div", { staticClass: "input-group" }, [
-      _c("div", { staticClass: "input-group-prepend" }, [
-        _c("span", { staticClass: "input-group-text" }, [
-          _vm._v(_vm._s(_vm.currency))
-        ])
+  return _c("div", { staticClass: "facetValue priceFacet bkr-cc" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "input-group col-lg-6 pb-3" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.priceMin,
+              expression: "priceMin"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "number", placeholder: "Min" },
+          domProps: { value: _vm.priceMin },
+          on: {
+            focus: function($event) {
+              return _vm.selectAll($event)
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.priceMin = $event.target.value
+            }
+          }
+        })
       ]),
       _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.priceMin,
-            expression: "priceMin"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: {
-          type: "number",
-          placeholder: "Min",
-          "aria-label": _vm.$translate("Ceres::Template.itemFilterPriceMin")
-        },
-        domProps: { value: _vm.priceMin },
-        on: {
-          focus: function($event) {
-            return _vm.selectAll($event)
-          },
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+      _c("div", { staticClass: "input-group col-lg-6 pb-3" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.priceMax,
+              expression: "priceMax"
             }
-            _vm.priceMin = $event.target.value
+          ],
+          staticClass: "form-control",
+          attrs: { type: "number", placeholder: "Max" },
+          domProps: { value: _vm.priceMax },
+          on: {
+            focus: function($event) {
+              return _vm.selectAll($event)
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.priceMax = $event.target.value
+            }
           }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "input-group" }, [
-      _c("div", { staticClass: "input-group-prepend" }, [
-        _c("span", { staticClass: "input-group-text" }, [
-          _vm._v(_vm._s(_vm.currency))
-        ])
+        })
       ]),
       _vm._v(" "),
-      _c("input", {
-        directives: [
+      _c("div", { staticClass: "col-lg-12" }, [
+        _c(
+          "button",
           {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.priceMax,
-            expression: "priceMax"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: {
-          type: "number",
-          placeholder: "Max",
-          "aria-label": _vm.$translate("Ceres::Template.itemFilterPriceMax")
-        },
-        domProps: { value: _vm.priceMax },
-        on: {
-          focus: function($event) {
-            return _vm.selectAll($event)
-          },
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+            directives: [{ name: "tooltip", rawName: "v-tooltip" }],
+            staticClass: "btn btn-bkm-inverted btn-block btn-sm",
+            class: { disabled: _vm.isDisabled },
+            attrs: {
+              type: "button",
+              "data-toggle": "tooltip",
+              "data-placement": "top",
+              title: _vm.$translate("Ceres::Template.itemApply")
+            },
+            on: {
+              click: function($event) {
+                return _vm.triggerFilter()
+              }
             }
-            _vm.priceMax = $event.target.value
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        directives: [{ name: "tooltip", rawName: "v-tooltip" }],
-        staticClass: "btn btn-primary btn-appearance",
-        class: { disabled: _vm.isDisabled },
-        attrs: {
-          type: "button",
-          "data-toggle": "tooltip",
-          "data-placement": "top",
-          title: _vm.$translate("Ceres::Template.itemApply"),
-          "aria-label": _vm.$translate("Ceres::Template.itemFilterButton")
-        },
-        on: {
-          click: function($event) {
-            return _vm.triggerFilter()
-          }
-        }
-      },
-      [_c("icon", { attrs: { icon: "check", loading: _vm.isLoading } })],
-      1
-    )
+          },
+          [
+            _c("span", {
+              domProps: {
+                innerHTML: _vm._s(_vm.$translate("Ceres::Template.itemApply"))
+              }
+            }),
+            _vm._v(" "),
+            _c("icon", { attrs: { icon: "check", loading: _vm.isLoading } })
+          ],
+          1
+        )
+      ])
+    ])
   ])
 }
 var staticRenderFns = []

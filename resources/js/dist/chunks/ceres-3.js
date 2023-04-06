@@ -965,162 +965,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -1620,16 +1464,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2424,7 +2258,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "row" },
+    { staticClass: "row bkr-cc" },
     [
       _vm.value.showPickupStation &&
       _vm.selectedCountry.isoCode2 === "DE" &&
@@ -2454,7 +2288,6 @@ var render = function() {
                         [
                           _c("salutation-select", {
                             attrs: {
-                              id: "txtSalutation" + _vm._uid,
                               "address-type": _vm.addressType,
                               "address-data": _vm.value,
                               "enabled-address-fields":
@@ -2475,7 +2308,7 @@ var render = function() {
                             { attrs: { for: "txtSalutation" + _vm._uid } },
                             [
                               _vm._v(
-                                "\n                            " +
+                                "\n                              " +
                                   _vm._s(
                                     _vm.transformTranslation(
                                       "Ceres::Template.addressSalutation",
@@ -2483,7 +2316,7 @@ var render = function() {
                                       "delivery_address.salutation"
                                     )
                                   ) +
-                                  "\n                        "
+                                  "\n                          "
                               )
                             ]
                           )
@@ -2491,62 +2324,44 @@ var render = function() {
                         1
                       )
                     ])
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-12" }, [
-              _c("div", { staticClass: "row" }, [
-                (_vm.isInOptionalFields("de", "delivery_address.salutation") &&
-                  _vm.value.gender === "company") ||
-                (_vm.isInOptionalFields("de", "delivery_address.name1") &&
-                  !_vm.isInOptionalFields("de", "delivery_address.salutation"))
-                  ? _c("div", { staticClass: "col-12 col-sm-6" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "input-unit",
-                          attrs: {
-                            "data-model": "name1",
-                            "data-validate": "text"
-                          }
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-12 col-sm-6" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "input-unit",
+                      attrs: { "data-model": "name1", "data-validate": "text" }
+                    },
+                    [
+                      _c("input", {
+                        attrs: {
+                          type: "text",
+                          name: "company",
+                          id: "txtCompany" + _vm._uid,
+                          "data-testing": "packing-station-de-company"
                         },
-                        [
-                          _c("input", {
-                            attrs: {
-                              type: "text",
-                              name: "company",
-                              id: "txtCompany" + _vm._uid,
-                              "data-testing": "packing-station-de-company"
-                            },
-                            domProps: { value: _vm.value.name1 },
-                            on: {
-                              input: function($event) {
-                                return _vm.emitInputEvent(
-                                  "name1",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "label",
-                            { attrs: { for: "txtCompany" + _vm._uid } },
-                            [
-                              _vm._v(
-                                _vm._s(
-                                  _vm.$translate(
-                                    "Ceres::Template.addressCompany"
-                                  )
-                                ) + "*"
-                              )
-                            ]
+                        domProps: { value: _vm.value.name1 },
+                        on: {
+                          input: function($event) {
+                            return _vm.emitInputEvent(
+                              "name1",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("label", { attrs: { for: "txtCompany" + _vm._uid } }, [
+                        _vm._v(
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.addressCompany")
                           )
-                        ]
-                      )
-                    ])
-                  : _vm._e()
+                        )
+                      ])
+                    ]
+                  )
+                ])
               ])
             ]),
             _vm._v(" "),
@@ -2599,7 +2414,7 @@ var render = function() {
                               { attrs: { for: "txtTitle" + _vm._uid } },
                               [
                                 _vm._v(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressTitle",
@@ -2607,7 +2422,7 @@ var render = function() {
                                         "delivery_address.title"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 )
                               ]
                             )
@@ -2787,7 +2602,7 @@ var render = function() {
                               { attrs: { for: "txtContactPerson" + _vm._uid } },
                               [
                                 _vm._v(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressContactPerson",
@@ -2795,7 +2610,7 @@ var render = function() {
                                         "delivery_address.contactPerson"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 )
                               ]
                             )
@@ -2849,7 +2664,7 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressAdditionalName",
@@ -2857,7 +2672,7 @@ var render = function() {
                                         "delivery_address.name4"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 )
                               ]
                             )
@@ -2910,7 +2725,7 @@ var render = function() {
                               { attrs: { for: "txtTelephone" + _vm._uid } },
                               [
                                 _vm._v(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressTelephone",
@@ -2918,7 +2733,7 @@ var render = function() {
                                         "delivery_address.phoneNumber"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 )
                               ]
                             )
@@ -2931,227 +2746,8 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _vm.isParcelOrOfficeAvailable
-              ? _c("div", { staticClass: "col-12" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-12" }, [
-                      _c("input", {
-                        attrs: {
-                          type: "checkbox",
-                          name: "togglePickup",
-                          id: "showPickup" + _vm._uid
-                        },
-                        domProps: { checked: _vm.value.showPickupStation },
-                        on: {
-                          change: function($event) {
-                            return _vm.togglePickupStation(
-                              $event.target.checked
-                            )
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("label", { attrs: { for: "showPickup" + _vm._uid } }, [
-                        _vm._v(
-                          _vm._s(
-                            _vm.$translate(
-                              "Ceres::Template.addressToPickupStation"
-                            )
-                          )
-                        )
-                      ])
-                    ])
-                  ])
-                ])
-              : _vm._e(),
-            _vm._v(" "),
             _c("div", { staticClass: "col-12" }, [
               _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-12 col-sm-8" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "input-unit",
-                      attrs: { "data-validate": "", "data-model": "address1" }
-                    },
-                    [
-                      _c(
-                        "select",
-                        {
-                          staticClass: "custom-select",
-                          attrs: { id: "address1" + _vm._uid },
-                          domProps: { value: _vm.value.address1 },
-                          on: {
-                            change: function($event) {
-                              return _vm.emitInputEvent(
-                                "address1",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        },
-                        [
-                          _vm.isParcelBoxAvailable
-                            ? _c(
-                                "option",
-                                {
-                                  attrs: { value: "PACKSTATION" },
-                                  domProps: { selected: _vm.isPickupStation }
-                                },
-                                [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.addressPackingStation"
-                                      )
-                                    )
-                                  )
-                                ]
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.isPostOfficeAvailable
-                            ? _c(
-                                "option",
-                                {
-                                  attrs: { value: "POSTFILIALE" },
-                                  domProps: { selected: _vm.isPostOffice }
-                                },
-                                [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.addressPostOffice"
-                                      )
-                                    )
-                                  )
-                                ]
-                              )
-                            : _vm._e()
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("label", { attrs: { for: "'address1' + _uid" } }, [
-                        _vm._v(
-                          _vm._s(
-                            _vm.$translate(
-                              "Ceres::Template.addressPickupLocation"
-                            )
-                          )
-                        )
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-12 col-sm-4" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "input-unit",
-                      attrs: {
-                        "data-validate": "text",
-                        "data-model": "address2"
-                      }
-                    },
-                    [
-                      _c("input", {
-                        attrs: {
-                          type: "text",
-                          name: "housenumber",
-                          autocomplete: "address-line2",
-                          id: "txtNumber" + _vm._uid
-                        },
-                        domProps: { value: _vm.value.address2 },
-                        on: {
-                          input: function($event) {
-                            return _vm.emitInputEvent(
-                              "address2",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.isPickupStation
-                        ? _c(
-                            "label",
-                            { attrs: { for: "txtNumber" + _vm._uid } },
-                            [
-                              _vm._v(
-                                _vm._s(
-                                  _vm.$translate(
-                                    "Ceres::Template.addressPackingStationNumber"
-                                  )
-                                ) + "*"
-                              )
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.isPostOffice
-                        ? _c(
-                            "label",
-                            { attrs: { for: "txtNumber" + _vm._uid } },
-                            [
-                              _vm._v(
-                                _vm._s(
-                                  _vm.$translate(
-                                    "Ceres::Template.addressPostOfficeNumber"
-                                  )
-                                ) + "*"
-                              )
-                            ]
-                          )
-                        : _vm._e()
-                    ]
-                  )
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-12" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-12 col-sm-6" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "input-unit",
-                      attrs: {
-                        "data-validate": "text",
-                        "data-model": "postNumber"
-                      }
-                    },
-                    [
-                      _c("input", {
-                        attrs: {
-                          type: "text",
-                          name: "postnumber",
-                          id: "postnumber" + _vm._uid,
-                          "data-testing": "packing-station-de-postnumber"
-                        },
-                        domProps: { value: _vm.value.postNumber },
-                        on: {
-                          input: function($event) {
-                            return _vm.emitInputEvent(
-                              "postNumber",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("label", { attrs: { for: "postnumber" + _vm._uid } }, [
-                        _vm._v(
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.addressPostNummer")
-                          ) + "*"
-                        )
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
                 _vm.isInOptionalFields("de", "delivery_address.address4")
                   ? _c("div", { staticClass: "col-12 col-sm-6" }, [
                       _c(
@@ -3196,7 +2792,7 @@ var render = function() {
                             { attrs: { for: "decorateAddress1" + _vm._uid } },
                             [
                               _vm._v(
-                                "\n                            " +
+                                "\n                              " +
                                   _vm._s(
                                     _vm.transformTranslation(
                                       "Ceres::Template.addressAdditionalAddress2",
@@ -3204,7 +2800,7 @@ var render = function() {
                                       "delivery_address.address4"
                                     )
                                   ) +
-                                  "\n                        "
+                                  "\n                          "
                               )
                             ]
                           )
@@ -3283,97 +2879,7 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "col-12 col-sm-4",
-                attrs: { "data-testing": "address-country-select" }
-              },
-              [
-                _c("country-select", {
-                  attrs: {
-                    "selected-country-id": _vm.value.countryId,
-                    "selected-state-id": _vm.value.stateId,
-                    "address-type": _vm.addressType,
-                    "optional-address-fields": _vm.optionalAddressFields,
-                    "required-address-fields": _vm.requiredAddressFields
-                  },
-                  on: {
-                    "country-changed": function($event) {
-                      return _vm.onSelectedCountryChanged($event)
-                    },
-                    "state-changed": function($event) {
-                      return _vm.emitInputEvent("stateId", $event)
-                    }
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _vm._t("custom-address-fields"),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-12" }, [
-              _c("hr", { staticClass: "mt-0" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _vm.isInOptionalFields("de", "delivery_address.email")
-                  ? _c("div", { staticClass: "col-12" }, [
-                      _c(
-                        "div",
-                        {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate:text",
-                              value: _vm.isInRequiredFields(
-                                "de",
-                                "delivery_address.email"
-                              ),
-                              expression:
-                                "isInRequiredFields('de', 'delivery_address.email')",
-                              arg: "text"
-                            }
-                          ],
-                          staticClass: "input-unit",
-                          attrs: { "data-model": "email" }
-                        },
-                        [
-                          _c("input", {
-                            attrs: {
-                              type: "mail",
-                              name: "email",
-                              id: "email" + _vm._uid,
-                              "data-testing": "packing-station-de-email-input"
-                            },
-                            domProps: { value: _vm.value.email },
-                            on: {
-                              input: function($event) {
-                                return _vm.emitInputEvent(
-                                  "email",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("label", { attrs: { for: "email" + _vm._uid } }, [
-                            _vm._v(
-                              _vm._s(
-                                _vm.transformTranslation(
-                                  "Ceres::Template.addressMail",
-                                  "de",
-                                  "delivery_address.email"
-                                )
-                              )
-                            )
-                          ])
-                        ]
-                      )
-                    ])
-                  : _vm._e()
-              ])
-            ])
+            _vm._t("custom-address-fields")
           ]
         : _vm.localeToShow == "DE" && _vm.addressType === "1"
         ? [
@@ -3401,7 +2907,6 @@ var render = function() {
                         [
                           _c("salutation-select", {
                             attrs: {
-                              id: "txtSalutation" + _vm._uid,
                               "address-type": _vm.addressType,
                               "address-data": _vm.value,
                               "enabled-address-fields":
@@ -3423,7 +2928,7 @@ var render = function() {
                             { attrs: { for: "txtSalutation" + _vm._uid } },
                             [
                               _vm._v(
-                                "\n                            " +
+                                "\n                              " +
                                   _vm._s(
                                     _vm.transformTranslation(
                                       "Ceres::Template.addressSalutation",
@@ -3431,7 +2936,7 @@ var render = function() {
                                       "billing_address.salutation"
                                     )
                                   ) +
-                                  "\n                        "
+                                  "\n                          "
                               )
                             ]
                           )
@@ -3439,40 +2944,89 @@ var render = function() {
                         1
                       )
                     ])
-                  : _vm._e()
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-12 col-sm-8" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "input-unit",
+                      attrs: { "data-model": "name1" }
+                    },
+                    [
+                      _c("input", {
+                        attrs: {
+                          type: "text",
+                          name: "company",
+                          id: "txtCompany" + _vm._uid,
+                          "data-autofocus": "",
+                          "data-testing": "billing-address-de-company"
+                        },
+                        domProps: { value: _vm.value.name1 },
+                        on: {
+                          input: function($event) {
+                            return _vm.emitInputEvent(
+                              "name1",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("label", { attrs: { for: "txtCompany" + _vm._uid } }, [
+                        _vm._v(
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.addressCompany")
+                          )
+                        )
+                      ])
+                    ]
+                  )
+                ])
               ])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-12" }, [
               _c("div", { staticClass: "row" }, [
                 (_vm.isInOptionalFields("de", "billing_address.salutation") &&
-                  _vm.value.gender === "company") ||
-                (_vm.isInOptionalFields("de", "billing_address.name1") &&
-                  !_vm.isInOptionalFields("de", "billing_address.salutation"))
+                  _vm.value.gender === "company" &&
+                  _vm.isInOptionalFields("de", "billing_address.vatNumber")) ||
+                (!_vm.isInOptionalFields("de", "billing_address.salutation") &&
+                  _vm.isInOptionalFields("de", "billing_address.name1") &&
+                  _vm.isInOptionalFields("de", "billing_address.vatNumber"))
                   ? _c("div", { staticClass: "col-12 col-sm-6" }, [
                       _c(
                         "div",
                         {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate:text",
+                              value: _vm.isInRequiredFields(
+                                "de",
+                                "billing_address.vatNumber"
+                              ),
+                              expression:
+                                "isInRequiredFields('de', 'billing_address.vatNumber')",
+                              arg: "text"
+                            }
+                          ],
                           staticClass: "input-unit",
-                          attrs: {
-                            "data-validate": "text",
-                            "data-model": "name1"
-                          }
+                          attrs: { "data-model": "vatNumber" }
                         },
                         [
                           _c("input", {
                             attrs: {
                               type: "text",
-                              name: "company",
-                              id: "txtCompany" + _vm._uid,
-                              "data-autofocus": "",
-                              "data-testing": "billing-address-de-company"
+                              name: "vatNumber",
+                              id: "txtVatNumber" + _vm._uid,
+                              "data-autofocus": ""
                             },
-                            domProps: { value: _vm.value.name1 },
+                            domProps: { value: _vm.value.vatNumber },
                             on: {
                               input: function($event) {
                                 return _vm.emitInputEvent(
-                                  "name1",
+                                  "vatNumber",
                                   $event.target.value
                                 )
                               }
@@ -3481,66 +3035,25 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "label",
-                            { attrs: { for: "txtCompany" + _vm._uid } },
+                            { attrs: { for: "txtVatNumber" + _vm._uid } },
                             [
                               _vm._v(
-                                _vm._s(
-                                  _vm.$translate(
-                                    "Ceres::Template.addressCompany"
-                                  )
-                                ) + "*"
+                                "\n                              " +
+                                  _vm._s(
+                                    _vm.transformTranslation(
+                                      "Ceres::Template.addressVatNumber",
+                                      "de",
+                                      "billing_address.vatNumber"
+                                    )
+                                  ) +
+                                  "\n                          "
                               )
                             ]
                           )
                         ]
                       )
                     ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "col-12 col-sm-6" },
-                  [
-                    _c("vat-id", {
-                      attrs: {
-                        "is-required": _vm.isInRequiredFields(
-                          "de",
-                          "billing_address.vatNumber"
-                        ),
-                        "selected-country-id": _vm.value.countryId,
-                        value: _vm.value.vatNumber || "",
-                        "show-input":
-                          (_vm.isInOptionalFields(
-                            "de",
-                            "billing_address.salutation"
-                          ) &&
-                            _vm.value.gender === "company" &&
-                            _vm.isInOptionalFields(
-                              "de",
-                              "billing_address.vatNumber"
-                            )) ||
-                          (!_vm.isInOptionalFields(
-                            "de",
-                            "billing_address.salutation"
-                          ) &&
-                            _vm.isInOptionalFields(
-                              "de",
-                              "billing_address.name1"
-                            ) &&
-                            _vm.isInOptionalFields(
-                              "de",
-                              "billing_address.vatNumber"
-                            ))
-                      },
-                      on: {
-                        input: function($event) {
-                          return _vm.emitInputEvent("vatNumber", $event)
-                        }
-                      }
-                    })
-                  ],
-                  1
-                )
+                  : _vm._e()
               ])
             ]),
             _vm._v(" "),
@@ -3601,7 +3114,7 @@ var render = function() {
                                 { attrs: { for: "txtTitle" + _vm._uid } },
                                 [
                                   _vm._v(
-                                    "\n                            " +
+                                    "\n                              " +
                                       _vm._s(
                                         _vm.transformTranslation(
                                           "Ceres::Template.addressTitle",
@@ -3609,7 +3122,7 @@ var render = function() {
                                           "billing_address.title"
                                         )
                                       ) +
-                                      "\n                        "
+                                      "\n                          "
                                   )
                                 ]
                               )
@@ -3794,7 +3307,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                            " +
+                                    "\n                              " +
                                       _vm._s(
                                         _vm.transformTranslation(
                                           "Ceres::Template.addressContactPerson",
@@ -3802,7 +3315,7 @@ var render = function() {
                                           "billing_address.contactPerson"
                                         )
                                       ) +
-                                      "\n                        "
+                                      "\n                          "
                                   )
                                 ]
                               )
@@ -3856,7 +3369,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                            " +
+                                    "\n                              " +
                                       _vm._s(
                                         _vm.transformTranslation(
                                           "Ceres::Template.addressAdditionalName",
@@ -3864,7 +3377,7 @@ var render = function() {
                                           "billing_address.name4"
                                         )
                                       ) +
-                                      "\n                        "
+                                      "\n                          "
                                   )
                                 ]
                               )
@@ -3900,21 +3413,22 @@ var render = function() {
                             [
                               _c("input", {
                                 attrs: {
-                                  type: "date",
-                                  min: "1901-12-14",
-                                  max: new Date().toISOString().split("T")[0],
+                                  type: "tel",
                                   name: "birthday",
                                   placeholder: _vm.$translate(
                                     "Ceres::Template.addressBirthdatePlaceholder"
                                   ),
-                                  id: "txtBirthdate" + _vm._uid
+                                  id: "txtBirthdate",
+                                  birthday: _vm.value.birthday
                                 },
-                                domProps: { value: _vm.value.birthday },
                                 on: {
-                                  input: function($event) {
-                                    return _vm.emitInputEvent(
+                                  change: function($event) {
+                                    _vm.emitInputEvent(
                                       "birthday",
-                                      $event.target.value
+                                      $event.target.value.replace(
+                                        /(.*)\.(.*)\.(.*)/,
+                                        "$3-$2-$1"
+                                      )
                                     )
                                   }
                                 }
@@ -3925,7 +3439,7 @@ var render = function() {
                                 { attrs: { for: "txtBirthdate" + _vm._uid } },
                                 [
                                   _vm._v(
-                                    "\n                            " +
+                                    "\n                              " +
                                       _vm._s(
                                         _vm.transformTranslation(
                                           "Ceres::Template.addressBirthdate",
@@ -3933,7 +3447,7 @@ var render = function() {
                                           "billing_address.birthday"
                                         )
                                       ) +
-                                      "\n                        "
+                                      "\n                          "
                                   )
                                 ]
                               )
@@ -3986,7 +3500,7 @@ var render = function() {
                                 { attrs: { for: "txtTelephone" + _vm._uid } },
                                 [
                                   _vm._v(
-                                    "\n                            " +
+                                    "\n                              " +
                                       _vm._s(
                                         _vm.transformTranslation(
                                           "Ceres::Template.addressTelephone",
@@ -3994,7 +3508,7 @@ var render = function() {
                                           "billing_address.phoneNumber"
                                         )
                                       ) +
-                                      "\n                        "
+                                      "\n                          "
                                   )
                                 ]
                               )
@@ -4155,7 +3669,7 @@ var render = function() {
                             { attrs: { for: "decorateAddress0" + _vm._uid } },
                             [
                               _vm._v(
-                                "\n                            " +
+                                "\n                              " +
                                   _vm._s(
                                     _vm.transformTranslation(
                                       "Ceres::Template.addressAdditionalAddress1",
@@ -4163,7 +3677,7 @@ var render = function() {
                                       "billing_address.address3"
                                     )
                                   ) +
-                                  "\n                        "
+                                  "\n                          "
                               )
                             ]
                           )
@@ -4216,7 +3730,7 @@ var render = function() {
                             { attrs: { for: "decorateAddress1" + _vm._uid } },
                             [
                               _vm._v(
-                                "\n                            " +
+                                "\n                              " +
                                   _vm._s(
                                     _vm.transformTranslation(
                                       "Ceres::Template.addressAdditionalAddress2",
@@ -4224,7 +3738,7 @@ var render = function() {
                                       "billing_address.address4"
                                     )
                                   ) +
-                                  "\n                        "
+                                  "\n                          "
                               )
                             ]
                           )
@@ -4303,97 +3817,7 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "col-12 col-sm-4",
-                attrs: { "data-testing": "address-country-select" }
-              },
-              [
-                _c("country-select", {
-                  attrs: {
-                    "selected-country-id": _vm.value.countryId,
-                    "selected-state-id": _vm.value.stateId,
-                    "address-type": _vm.addressType,
-                    "optional-address-fields": _vm.optionalAddressFields,
-                    "required-address-fields": _vm.requiredAddressFields
-                  },
-                  on: {
-                    "country-changed": function($event) {
-                      return _vm.onSelectedCountryChanged($event)
-                    },
-                    "state-changed": function($event) {
-                      return _vm.emitInputEvent("stateId", $event)
-                    }
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _vm._t("custom-address-fields"),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-12" }, [
-              _c("hr", { staticClass: "mt-0" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _vm.isInOptionalFields("de", "billing_address.email")
-                  ? _c("div", { staticClass: "col-12" }, [
-                      _c(
-                        "div",
-                        {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate:text",
-                              value: _vm.isInRequiredFields(
-                                "de",
-                                "billing_address.email"
-                              ),
-                              expression:
-                                "isInRequiredFields('de', 'billing_address.email')",
-                              arg: "text"
-                            }
-                          ],
-                          staticClass: "input-unit",
-                          attrs: { "data-model": "email" }
-                        },
-                        [
-                          _c("input", {
-                            attrs: {
-                              type: "mail",
-                              name: "email",
-                              id: "email" + _vm._uid,
-                              "data-testing": "billing-address-de-email-input"
-                            },
-                            domProps: { value: _vm.value.email },
-                            on: {
-                              input: function($event) {
-                                return _vm.emitInputEvent(
-                                  "email",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("label", { attrs: { for: "email" + _vm._uid } }, [
-                            _vm._v(
-                              _vm._s(
-                                _vm.transformTranslation(
-                                  "Ceres::Template.addressMail",
-                                  "de",
-                                  "billing_address.email"
-                                )
-                              )
-                            )
-                          ])
-                        ]
-                      )
-                    ])
-                  : _vm._e()
-              ])
-            ])
+            _vm._t("custom-address-fields")
           ]
         : _vm.localeToShow == "GB" && _vm.addressType === "1"
         ? [
@@ -4421,7 +3845,6 @@ var render = function() {
                         [
                           _c("salutation-select", {
                             attrs: {
-                              id: "txtSalutation" + _vm._uid,
                               "address-type": _vm.addressType,
                               "address-data": _vm.value,
                               "enabled-address-fields":
@@ -4442,7 +3865,7 @@ var render = function() {
                             { attrs: { for: "txtSalutation" + _vm._uid } },
                             [
                               _vm._v(
-                                "\n                            " +
+                                "\n                              " +
                                   _vm._s(
                                     _vm.transformTranslation(
                                       "Ceres::Template.addressSalutation",
@@ -4450,7 +3873,7 @@ var render = function() {
                                       "billing_address.salutation"
                                     )
                                   ) +
-                                  "\n                        "
+                                  "\n                          "
                               )
                             ]
                           )
@@ -4515,50 +3938,72 @@ var render = function() {
                     ])
                   : _vm._e(),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "col-12 col-sm-6" },
-                  [
-                    _c("vat-id", {
-                      attrs: {
-                        "is-required": _vm.isInRequiredFields(
-                          "gb",
-                          "billing_address.vatNumber"
-                        ),
-                        "selected-country-id": _vm.value.countryId,
-                        value: _vm.value.vatNumber || "",
-                        "show-input":
-                          (_vm.isInOptionalFields(
-                            "gb",
-                            "billing_address.salutation"
-                          ) &&
-                            _vm.value.gender === "company" &&
-                            _vm.isInOptionalFields(
-                              "gb",
-                              "billing_address.vatNumber"
-                            )) ||
-                          (!_vm.isInOptionalFields(
-                            "gb",
-                            "billing_address.salutation"
-                          ) &&
-                            _vm.isInOptionalFields(
-                              "gb",
-                              "billing_address.name1"
-                            ) &&
-                            _vm.isInOptionalFields(
-                              "gb",
-                              "billing_address.vatNumber"
-                            ))
-                      },
-                      on: {
-                        input: function($event) {
-                          return _vm.emitInputEvent("vatNumber", $event)
-                        }
-                      }
-                    })
-                  ],
-                  1
-                )
+                (_vm.isInOptionalFields("gb", "billing_address.salutation") &&
+                  _vm.value.gender === "company" &&
+                  _vm.isInOptionalFields("gb", "billing_address.vatNumber")) ||
+                (!_vm.isInOptionalFields("gb", "billing_address.salutation") &&
+                  _vm.isInOptionalFields("gb", "billing_address.name1") &&
+                  _vm.isInOptionalFields("gb", "billing_address.vatNumber"))
+                  ? _c("div", { staticClass: "col-12 col-sm-6" }, [
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate:text",
+                              value: _vm.isInRequiredFields(
+                                "gb",
+                                "billing_address.vatNumber"
+                              ),
+                              expression:
+                                "isInRequiredFields('gb', 'billing_address.vatNumber')",
+                              arg: "text"
+                            }
+                          ],
+                          staticClass: "input-unit",
+                          attrs: { "data-model": "vatNumber" }
+                        },
+                        [
+                          _c("input", {
+                            attrs: {
+                              type: "text",
+                              name: "vatNumber",
+                              id: "txtVatNumber" + _vm._uid,
+                              "data-autofocus": ""
+                            },
+                            domProps: { value: _vm.value.vatNumber },
+                            on: {
+                              input: function($event) {
+                                return _vm.emitInputEvent(
+                                  "vatNumber",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            { attrs: { for: "txtVatNumber" + _vm._uid } },
+                            [
+                              _vm._v(
+                                "\n                              " +
+                                  _vm._s(
+                                    _vm.transformTranslation(
+                                      "Ceres::Template.addressVatNumber",
+                                      "gb",
+                                      "billing_address.vatNumber"
+                                    )
+                                  ) +
+                                  "\n                          "
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ])
+                  : _vm._e()
               ])
             ]),
             _vm._v(" "),
@@ -4612,7 +4057,7 @@ var render = function() {
                               { attrs: { for: "txtTitle" + _vm._uid } },
                               [
                                 _vm._v(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressTitle",
@@ -4620,7 +4065,7 @@ var render = function() {
                                         "billing_address.title"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 )
                               ]
                             )
@@ -4801,7 +4246,7 @@ var render = function() {
                               { attrs: { for: "txtContactPerson" + _vm._uid } },
                               [
                                 _vm._v(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressContactPerson",
@@ -4809,7 +4254,7 @@ var render = function() {
                                         "billing_address.contactPerson"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 )
                               ]
                             )
@@ -4863,7 +4308,7 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressGBNameAffix",
@@ -4871,7 +4316,7 @@ var render = function() {
                                         "billing_address.name4"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 )
                               ]
                             )
@@ -4932,7 +4377,7 @@ var render = function() {
                               { attrs: { for: "txtBirthdate" + _vm._uid } },
                               [
                                 _vm._v(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressBirthdate",
@@ -4940,7 +4385,7 @@ var render = function() {
                                         "billing_address.birthday"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 )
                               ]
                             )
@@ -4993,7 +4438,7 @@ var render = function() {
                               { attrs: { for: "txtTelephone" + _vm._uid } },
                               [
                                 _vm._v(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressTelephone",
@@ -5001,7 +4446,7 @@ var render = function() {
                                         "billing_address.phoneNumber"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 )
                               ]
                             )
@@ -5113,7 +4558,7 @@ var render = function() {
                               { attrs: { for: "txtNumber" + _vm._uid } },
                               [
                                 _vm._v(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressENAddressLine2",
@@ -5121,7 +4566,7 @@ var render = function() {
                                         "billing_address.address2"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 )
                               ]
                             )
@@ -5179,7 +4624,7 @@ var render = function() {
                             { attrs: { for: "decorateAddress0" + _vm._uid } },
                             [
                               _vm._v(
-                                "\n                            " +
+                                "\n                              " +
                                   _vm._s(
                                     _vm.transformTranslation(
                                       "Ceres::Template.addressENAddressLine3",
@@ -5187,7 +4632,7 @@ var render = function() {
                                       "billing_address.address3"
                                     )
                                   ) +
-                                  "\n                        "
+                                  "\n                          "
                               )
                             ]
                           )
@@ -5240,7 +4685,7 @@ var render = function() {
                             { attrs: { for: "decorateAddress0" + _vm._uid } },
                             [
                               _vm._v(
-                                "\n                            " +
+                                "\n                              " +
                                   _vm._s(
                                     _vm.transformTranslation(
                                       "Ceres::Template.addressENAddressLine4",
@@ -5248,7 +4693,7 @@ var render = function() {
                                       "billing_address.address4"
                                     )
                                   ) +
-                                  "\n                        "
+                                  "\n                          "
                               )
                             ]
                           )
@@ -5325,97 +4770,7 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "col-12 col-sm-4",
-                attrs: { "data-testing": "address-country-select" }
-              },
-              [
-                _c("country-select", {
-                  attrs: {
-                    "selected-country-id": _vm.value.countryId,
-                    "selected-state-id": _vm.value.stateId,
-                    "address-type": _vm.addressType,
-                    "optional-address-fields": _vm.optionalAddressFields,
-                    "required-address-fields": _vm.requiredAddressFields
-                  },
-                  on: {
-                    "country-changed": function($event) {
-                      return _vm.onSelectedCountryChanged($event)
-                    },
-                    "state-changed": function($event) {
-                      return _vm.emitInputEvent("stateId", $event)
-                    }
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _vm._t("custom-address-fields"),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-12" }, [
-              _c("hr", { staticClass: "mt-0" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _vm.isInOptionalFields("gb", "billing_address.email")
-                  ? _c("div", { staticClass: "col-12" }, [
-                      _c(
-                        "div",
-                        {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate:text",
-                              value: _vm.isInRequiredFields(
-                                "gb",
-                                "billing_address.email"
-                              ),
-                              expression:
-                                "isInRequiredFields('gb', 'billing_address.email')",
-                              arg: "text"
-                            }
-                          ],
-                          staticClass: "input-unit",
-                          attrs: { "data-model": "email" }
-                        },
-                        [
-                          _c("input", {
-                            attrs: {
-                              type: "mail",
-                              name: "email",
-                              id: "email" + _vm._uid,
-                              "data-testing": "billing-address-gb-email-input"
-                            },
-                            domProps: { value: _vm.value.email },
-                            on: {
-                              input: function($event) {
-                                return _vm.emitInputEvent(
-                                  "email",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("label", { attrs: { for: "email" + _vm._uid } }, [
-                            _vm._v(
-                              _vm._s(
-                                _vm.transformTranslation(
-                                  "Ceres::Template.addressMail",
-                                  "gb",
-                                  "billing_address.email"
-                                )
-                              )
-                            )
-                          ])
-                        ]
-                      )
-                    ])
-                  : _vm._e()
-              ])
-            ])
+            _vm._t("custom-address-fields")
           ]
         : _vm.localeToShow == "DE" && _vm.addressType === "2"
         ? [
@@ -5443,7 +4798,6 @@ var render = function() {
                         [
                           _c("salutation-select", {
                             attrs: {
-                              id: "txtSalutation" + _vm._uid,
                               "address-type": _vm.addressType,
                               "address-data": _vm.value,
                               "enabled-address-fields":
@@ -5464,7 +4818,7 @@ var render = function() {
                             { attrs: { for: "txtSalutation" + _vm._uid } },
                             [
                               _vm._v(
-                                "\n                            " +
+                                "\n                              " +
                                   _vm._s(
                                     _vm.transformTranslation(
                                       "Ceres::Template.addressSalutation",
@@ -5472,7 +4826,7 @@ var render = function() {
                                       "delivery_address.salutation"
                                     )
                                   ) +
-                                  "\n                        "
+                                  "\n                          "
                               )
                             ]
                           )
@@ -5480,25 +4834,15 @@ var render = function() {
                         1
                       )
                     ])
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-12" }, [
-              _c("div", { staticClass: "row" }, [
-                (_vm.isInOptionalFields("de", "delivery_address.salutation") &&
-                  _vm.value.gender === "company") ||
-                (_vm.isInOptionalFields("de", "delivery_address.name1") &&
-                  !_vm.isInOptionalFields("de", "delivery_address.salutation"))
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.isInOptionalFields("de", "delivery_address.salutation")
                   ? _c("div", { staticClass: "col-12 col-sm-6" }, [
                       _c(
                         "div",
                         {
                           staticClass: "input-unit",
-                          attrs: {
-                            "data-validate": "text",
-                            "data-model": "name1"
-                          }
+                          attrs: { "data-model": "name1" }
                         },
                         [
                           _c("input", {
@@ -5528,59 +4872,85 @@ var render = function() {
                                   _vm.$translate(
                                     "Ceres::Template.addressCompany"
                                   )
-                                ) + "*"
+                                )
                               )
                             ]
                           )
                         ]
                       )
                     ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "col-12 col-sm-6" },
-                  [
-                    _c("vat-id", {
-                      attrs: {
-                        "is-required": _vm.isInRequiredFields(
-                          "de",
-                          "delivery_address.vatNumber"
-                        ),
-                        "selected-country-id": _vm.value.countryId,
-                        value: _vm.value.vatNumber || "",
-                        "show-input":
-                          (_vm.isInOptionalFields(
-                            "de",
-                            "delivery_address.salutation"
-                          ) &&
-                            _vm.value.gender === "company" &&
-                            _vm.isInOptionalFields(
-                              "de",
-                              "delivery_address.vatNumber"
-                            )) ||
-                          (!_vm.isInOptionalFields(
-                            "de",
-                            "delivery_address.salutation"
-                          ) &&
-                            _vm.isInOptionalFields(
-                              "de",
-                              "delivery_address.name1"
-                            ) &&
-                            _vm.isInOptionalFields(
-                              "de",
-                              "delivery_address.vatNumber"
-                            ))
-                      },
-                      on: {
-                        input: function($event) {
-                          return _vm.emitInputEvent("vatNumber", $event)
-                        }
-                      }
-                    })
-                  ],
-                  1
-                )
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "row" }, [
+                (_vm.isInOptionalFields("de", "delivery_address.salutation") &&
+                  _vm.value.gender === "company" &&
+                  _vm.isInOptionalFields("de", "delivery_address.vatNumber")) ||
+                (!_vm.isInOptionalFields("de", "delivery_address.salutation") &&
+                  _vm.isInOptionalFields("de", "delivery_address.name1") &&
+                  _vm.isInOptionalFields("de", "delivery_address.vatNumber"))
+                  ? _c("div", { staticClass: "col-12 col-sm-6" }, [
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate:text",
+                              value: _vm.isInRequiredFields(
+                                "de",
+                                "delivery_address.vatNumber"
+                              ),
+                              expression:
+                                "isInRequiredFields('de', 'delivery_address.vatNumber')",
+                              arg: "text"
+                            }
+                          ],
+                          staticClass: "input-unit",
+                          attrs: { "data-model": "vatNumber" }
+                        },
+                        [
+                          _c("input", {
+                            attrs: {
+                              type: "text",
+                              name: "vatNumber",
+                              id: "txtVatNumber" + _vm._uid,
+                              "data-autofocus": ""
+                            },
+                            domProps: { value: _vm.value.vatNumber },
+                            on: {
+                              input: function($event) {
+                                return _vm.emitInputEvent(
+                                  "vatNumber",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            { attrs: { for: "txtVatNumber" + _vm._uid } },
+                            [
+                              _vm._v(
+                                "\n                              " +
+                                  _vm._s(
+                                    _vm.transformTranslation(
+                                      "Ceres::Template.addressVatNumber",
+                                      "de",
+                                      "delivery_address.vatNumber"
+                                    )
+                                  ) +
+                                  "\n                          "
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ])
+                  : _vm._e()
               ])
             ]),
             _vm._v(" "),
@@ -5634,7 +5004,7 @@ var render = function() {
                               { attrs: { for: "txtTitle" + _vm._uid } },
                               [
                                 _vm._v(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressTitle",
@@ -5642,7 +5012,7 @@ var render = function() {
                                         "delivery_address.title"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 )
                               ]
                             )
@@ -5824,7 +5194,7 @@ var render = function() {
                               { attrs: { for: "txtContactPerson" + _vm._uid } },
                               [
                                 _vm._v(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressContactPerson",
@@ -5832,7 +5202,7 @@ var render = function() {
                                         "delivery_address.contactPerson"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 )
                               ]
                             )
@@ -5886,7 +5256,7 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressAdditionalName",
@@ -5894,7 +5264,7 @@ var render = function() {
                                         "delivery_address.name4"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 )
                               ]
                             )
@@ -5947,7 +5317,7 @@ var render = function() {
                               { attrs: { for: "txtTelephone" + _vm._uid } },
                               [
                                 _vm._v(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressTelephone",
@@ -5955,7 +5325,7 @@ var render = function() {
                                         "delivery_address.phoneNumber"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 )
                               ]
                             )
@@ -5967,40 +5337,6 @@ var render = function() {
                 2
               )
             ]),
-            _vm._v(" "),
-            _vm.isParcelOrOfficeAvailable
-              ? _c("div", { staticClass: "col-12" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-12" }, [
-                      _c("input", {
-                        attrs: {
-                          type: "checkbox",
-                          name: "togglePickup",
-                          id: "showPickup" + _vm._uid
-                        },
-                        domProps: { checked: _vm.value.showPickupStation },
-                        on: {
-                          change: function($event) {
-                            return _vm.togglePickupStation(
-                              $event.target.checked
-                            )
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("label", { attrs: { for: "showPickup" + _vm._uid } }, [
-                        _vm._v(
-                          _vm._s(
-                            _vm.$translate(
-                              "Ceres::Template.addressToPickupStation"
-                            )
-                          )
-                        )
-                      ])
-                    ])
-                  ])
-                ])
-              : _vm._e(),
             _vm._v(" "),
             _c("div", { staticClass: "col-12" }, [
               _c("div", { staticClass: "row" }, [
@@ -6134,7 +5470,7 @@ var render = function() {
                             { attrs: { for: "decorateAddress0" + _vm._uid } },
                             [
                               _vm._v(
-                                "\n                            " +
+                                "\n                              " +
                                   _vm._s(
                                     _vm.transformTranslation(
                                       "Ceres::Template.addressAdditionalAddress1",
@@ -6142,7 +5478,7 @@ var render = function() {
                                       "delivery_address.address3"
                                     )
                                   ) +
-                                  "\n                        "
+                                  "\n                          "
                               )
                             ]
                           )
@@ -6195,7 +5531,7 @@ var render = function() {
                             { attrs: { for: "decorateAddress1" + _vm._uid } },
                             [
                               _vm._v(
-                                "\n                            " +
+                                "\n                              " +
                                   _vm._s(
                                     _vm.transformTranslation(
                                       "Ceres::Template.addressAdditionalAddress2",
@@ -6203,7 +5539,7 @@ var render = function() {
                                       "delivery_address.address4"
                                     )
                                   ) +
-                                  "\n                        "
+                                  "\n                          "
                               )
                             ]
                           )
@@ -6282,97 +5618,7 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "col-12 col-sm-4",
-                attrs: { "data-testing": "address-country-select" }
-              },
-              [
-                _c("country-select", {
-                  attrs: {
-                    "selected-country-id": _vm.value.countryId,
-                    "selected-state-id": _vm.value.stateId,
-                    "address-type": _vm.addressType,
-                    "optional-address-fields": _vm.optionalAddressFields,
-                    "required-address-fields": _vm.requiredAddressFields
-                  },
-                  on: {
-                    "country-changed": function($event) {
-                      return _vm.onSelectedCountryChanged($event)
-                    },
-                    "state-changed": function($event) {
-                      return _vm.emitInputEvent("stateId", $event)
-                    }
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _vm._t("custom-address-fields"),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-12" }, [
-              _c("hr", { staticClass: "mt-0" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _vm.isInOptionalFields("de", "delivery_address.email")
-                  ? _c("div", { staticClass: "col-12" }, [
-                      _c(
-                        "div",
-                        {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate:text",
-                              value: _vm.isInRequiredFields(
-                                "de",
-                                "delivery_address.email"
-                              ),
-                              expression:
-                                "isInRequiredFields('de', 'delivery_address.email')",
-                              arg: "text"
-                            }
-                          ],
-                          staticClass: "input-unit",
-                          attrs: { "data-model": "email" }
-                        },
-                        [
-                          _c("input", {
-                            attrs: {
-                              type: "mail",
-                              name: "email",
-                              id: "email" + _vm._uid,
-                              "data-testing": "delivery-address-de-email-input"
-                            },
-                            domProps: { value: _vm.value.email },
-                            on: {
-                              input: function($event) {
-                                return _vm.emitInputEvent(
-                                  "email",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("label", { attrs: { for: "email" + _vm._uid } }, [
-                            _vm._v(
-                              _vm._s(
-                                _vm.transformTranslation(
-                                  "Ceres::Template.addressMail",
-                                  "de",
-                                  "delivery_address.email"
-                                )
-                              )
-                            )
-                          ])
-                        ]
-                      )
-                    ])
-                  : _vm._e()
-              ])
-            ])
+            _vm._t("custom-address-fields")
           ]
         : _vm.localeToShow == "GB" && _vm.addressType === "2"
         ? [
@@ -6400,7 +5646,6 @@ var render = function() {
                         [
                           _c("salutation-select", {
                             attrs: {
-                              id: "txtSalutation" + _vm._uid,
                               "address-type": _vm.addressType,
                               "address-data": _vm.value,
                               "enabled-address-fields":
@@ -6421,7 +5666,7 @@ var render = function() {
                             { attrs: { for: "txtSalutation" + _vm._uid } },
                             [
                               _vm._v(
-                                "\n                            " +
+                                "\n                              " +
                                   _vm._s(
                                     _vm.transformTranslation(
                                       "Ceres::Template.addressSalutation",
@@ -6429,7 +5674,7 @@ var render = function() {
                                       "delivery_address.salutation"
                                     )
                                   ) +
-                                  "\n                        "
+                                  "\n                          "
                               )
                             ]
                           )
@@ -6494,50 +5739,72 @@ var render = function() {
                     ])
                   : _vm._e(),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "col-12 col-sm-6" },
-                  [
-                    _c("vat-id", {
-                      attrs: {
-                        "is-required": _vm.isInRequiredFields(
-                          "gb",
-                          "delivery_address.vatNumber"
-                        ),
-                        "selected-country-id": _vm.value.countryId,
-                        value: _vm.value.vatNumber || "",
-                        "show-input":
-                          (_vm.isInOptionalFields(
-                            "gb",
-                            "delivery_address.salutation"
-                          ) &&
-                            _vm.value.gender === "company" &&
-                            _vm.isInOptionalFields(
-                              "gb",
-                              "delivery_address.vatNumber"
-                            )) ||
-                          (!_vm.isInOptionalFields(
-                            "gb",
-                            "delivery_address.salutation"
-                          ) &&
-                            _vm.isInOptionalFields(
-                              "gb",
-                              "delivery_address.name1"
-                            ) &&
-                            _vm.isInOptionalFields(
-                              "gb",
-                              "delivery_address.vatNumber"
-                            ))
-                      },
-                      on: {
-                        input: function($event) {
-                          return _vm.emitInputEvent("vatNumber", $event)
-                        }
-                      }
-                    })
-                  ],
-                  1
-                )
+                (_vm.isInOptionalFields("gb", "delivery_address.salutation") &&
+                  _vm.value.gender === "company" &&
+                  _vm.isInOptionalFields("gb", "delivery_address.vatNumber")) ||
+                (!_vm.isInOptionalFields("gb", "delivery_address.salutation") &&
+                  _vm.isInOptionalFields("gb", "delivery_address.name1") &&
+                  _vm.isInOptionalFields("gb", "delivery_address.vatNumber"))
+                  ? _c("div", { staticClass: "col-12 col-sm-6" }, [
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate:text",
+                              value: _vm.isInRequiredFields(
+                                "gb",
+                                "delivery_address.vatNumber"
+                              ),
+                              expression:
+                                "isInRequiredFields('gb', 'delivery_address.vatNumber')",
+                              arg: "text"
+                            }
+                          ],
+                          staticClass: "input-unit",
+                          attrs: { "data-model": "vatNumber" }
+                        },
+                        [
+                          _c("input", {
+                            attrs: {
+                              type: "text",
+                              name: "vatNumber",
+                              id: "txtVatNumber" + _vm._uid,
+                              "data-autofocus": ""
+                            },
+                            domProps: { value: _vm.value.vatNumber },
+                            on: {
+                              input: function($event) {
+                                return _vm.emitInputEvent(
+                                  "vatNumber",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            { attrs: { for: "txtVatNumber" + _vm._uid } },
+                            [
+                              _vm._v(
+                                "\n                              " +
+                                  _vm._s(
+                                    _vm.transformTranslation(
+                                      "Ceres::Template.addressVatNumber",
+                                      "gb",
+                                      "delivery_address.vatNumber"
+                                    )
+                                  ) +
+                                  "\n                          "
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ])
+                  : _vm._e()
               ])
             ]),
             _vm._v(" "),
@@ -6591,7 +5858,7 @@ var render = function() {
                               { attrs: { for: "txtTitle" + _vm._uid } },
                               [
                                 _vm._v(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressTitle",
@@ -6599,7 +5866,7 @@ var render = function() {
                                         "delivery_address.title"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 )
                               ]
                             )
@@ -6778,7 +6045,7 @@ var render = function() {
                               { attrs: { for: "txtContactPerson" + _vm._uid } },
                               [
                                 _vm._v(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressContactPerson",
@@ -6786,7 +6053,7 @@ var render = function() {
                                         "delivery_address.contactPerson"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 )
                               ]
                             )
@@ -6840,7 +6107,7 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressGBNameAffix",
@@ -6848,7 +6115,7 @@ var render = function() {
                                         "delivery_address.name4"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 )
                               ]
                             )
@@ -6901,7 +6168,7 @@ var render = function() {
                               { attrs: { for: "txtTelephone" + _vm._uid } },
                               [
                                 _vm._v(
-                                  "\n                            " +
+                                  "\n                              " +
                                     _vm._s(
                                       _vm.transformTranslation(
                                         "Ceres::Template.addressTelephone",
@@ -6909,7 +6176,7 @@ var render = function() {
                                         "delivery_address.phoneNumber"
                                       )
                                     ) +
-                                    "\n                        "
+                                    "\n                          "
                                 )
                               ]
                             )
@@ -7011,7 +6278,7 @@ var render = function() {
                             { attrs: { for: "txtNumber" + _vm._uid } },
                             [
                               _vm._v(
-                                "\n                            " +
+                                "\n                              " +
                                   _vm._s(
                                     _vm.transformTranslation(
                                       "Ceres::Template.addressENAddressLine2",
@@ -7019,7 +6286,7 @@ var render = function() {
                                       "delivery_address.address2"
                                     )
                                   ) +
-                                  "\n                        "
+                                  "\n                          "
                               )
                             ]
                           )
@@ -7076,7 +6343,7 @@ var render = function() {
                             { attrs: { for: "decorateAddress0" + _vm._uid } },
                             [
                               _vm._v(
-                                "\n                            " +
+                                "\n                              " +
                                   _vm._s(
                                     _vm.transformTranslation(
                                       "Ceres::Template.addressENAddressLine3",
@@ -7084,7 +6351,7 @@ var render = function() {
                                       "delivery_address.address3"
                                     )
                                   ) +
-                                  "\n                        "
+                                  "\n                          "
                               )
                             ]
                           )
@@ -7137,7 +6404,7 @@ var render = function() {
                             { attrs: { for: "decorateAddress1" + _vm._uid } },
                             [
                               _vm._v(
-                                "\n                            " +
+                                "\n                              " +
                                   _vm._s(
                                     _vm.transformTranslation(
                                       "Ceres::Template.addressENAddressLine4",
@@ -7145,7 +6412,7 @@ var render = function() {
                                       "delivery_address.address4"
                                     )
                                   ) +
-                                  "\n                        "
+                                  "\n                          "
                               )
                             ]
                           )
@@ -7222,99 +6489,37 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "col-12 col-sm-4",
-                attrs: { "data-testing": "address-country-select" }
-              },
-              [
-                _c("country-select", {
-                  attrs: {
-                    "selected-country-id": _vm.value.countryId,
-                    "selected-state-id": _vm.value.stateId,
-                    "address-type": _vm.addressType,
-                    "optional-address-fields": _vm.optionalAddressFields,
-                    "required-address-fields": _vm.requiredAddressFields
-                  },
-                  on: {
-                    "country-changed": function($event) {
-                      return _vm.onSelectedCountryChanged($event)
-                    },
-                    "state-changed": function($event) {
-                      return _vm.emitInputEvent("stateId", $event)
-                    }
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _vm._t("custom-address-fields"),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-12" }, [
-              _c("hr", { staticClass: "mt-0" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _vm.isInOptionalFields("gb", "delivery_address.email")
-                  ? _c("div", { staticClass: "col-12" }, [
-                      _c(
-                        "div",
-                        {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate:text",
-                              value: _vm.isInRequiredFields(
-                                "gb",
-                                "delivery_address.email"
-                              ),
-                              expression:
-                                "isInRequiredFields('gb', 'delivery_address.email')",
-                              arg: "text"
-                            }
-                          ],
-                          staticClass: "input-unit",
-                          attrs: { "data-model": "email" }
-                        },
-                        [
-                          _c("input", {
-                            attrs: {
-                              type: "mail",
-                              name: "email",
-                              id: "email" + _vm._uid,
-                              "data-testing": "delivery-address-gb-email-input"
-                            },
-                            domProps: { value: _vm.value.email },
-                            on: {
-                              input: function($event) {
-                                return _vm.emitInputEvent(
-                                  "email",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("label", { attrs: { for: "email" + _vm._uid } }, [
-                            _vm._v(
-                              _vm._s(
-                                _vm.transformTranslation(
-                                  "Ceres::Template.addressMail",
-                                  "gb",
-                                  "delivery_address.email"
-                                )
-                              )
-                            )
-                          ])
-                        ]
-                      )
-                    ])
-                  : _vm._e()
-              ])
-            ])
+            _vm._t("custom-address-fields")
           ]
-        : _vm._e()
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "col-12 col-sm-4",
+          attrs: { "data-testing": "address-country-select" }
+        },
+        [
+          _c("country-select", {
+            attrs: {
+              "selected-country-id": _vm.value.countryId,
+              "selected-state-id": _vm.value.stateId,
+              "address-type": _vm.addressType,
+              "optional-address-fields": _vm.optionalAddressFields,
+              "required-address-fields": _vm.requiredAddressFields
+            },
+            on: {
+              "country-changed": function($event) {
+                return _vm.onSelectedCountryChanged($event)
+              },
+              "state-changed": function($event) {
+                return _vm.emitInputEvent("stateId", $event)
+              }
+            }
+          })
+        ],
+        1
+      )
     ],
     2
   )
@@ -7511,7 +6716,7 @@ var render = function() {
     "form",
     {
       ref: "registrationForm",
-      staticClass: "w-100",
+      staticClass: "w-100 bkr-cc",
       attrs: { autocomplete: "on", method: "post" },
       on: {
         submit: function($event) {
@@ -7537,7 +6742,6 @@ var render = function() {
                   }
                 ],
                 attrs: {
-                  "data-testing": "mail-register",
                   type: "email",
                   name: "email",
                   autocomplete: "email",
@@ -7563,13 +6767,12 @@ var render = function() {
         ]),
         _vm._v(" "),
         !_vm.guestMode
-          ? _c("div", { staticClass: "col-sm-6" }, [
+          ? _c("div", { staticClass: "col-sm-12" }, [
               _c(
                 "div",
                 {
                   ref: "passwordInput",
                   staticClass: "input-unit",
-                  class: { "no-bottom media-xs-d": _vm.modalElement },
                   attrs: { "data-validate": "password" }
                 },
                 [
@@ -7592,7 +6795,6 @@ var render = function() {
                                   }
                                 ],
                                 attrs: {
-                                  "data-testing": "password-register",
                                   type: "password",
                                   name: "password",
                                   autocomplete: "new-password",
@@ -7673,7 +6875,7 @@ var render = function() {
                       ],
                       null,
                       false,
-                      303377206
+                      4086647824
                     )
                   }),
                   _vm._v(" "),
@@ -7690,7 +6892,7 @@ var render = function() {
           : _vm._e(),
         _vm._v(" "),
         !_vm.guestMode
-          ? _c("div", { staticClass: "col-sm-6 input-unit-group" }, [
+          ? _c("div", { staticClass: "col-sm-12 input-unit-group" }, [
               _c(
                 "div",
                 {
@@ -7713,8 +6915,7 @@ var render = function() {
                       name: "password-repeat",
                       autocomplete: "new-password",
                       id: "new-password-repeat-" + _vm._uid,
-                      "data-validate-ref": "#new-password-" + _vm._uid,
-                      "data-testing": "repeat-password-register"
+                      "data-validate-ref": "#new-password-" + _vm._uid
                     },
                     domProps: { value: _vm.passwordRepeat },
                     on: {
@@ -7729,7 +6930,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "label",
-                    { attrs: { for: "new-password-repeat-" + _vm._uid } },
+                    { attrs: { for: "new-password-repeat" + _vm._uid } },
                     [
                       _vm._v(
                         _vm._s(
@@ -7742,33 +6943,6 @@ var render = function() {
               )
             ])
           : _vm._e(),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.honeypot,
-              expression: "honeypot"
-            }
-          ],
-          staticClass: "honey",
-          attrs: {
-            type: "text",
-            name: "username",
-            autocomplete: "new-password",
-            tabindex: "-1"
-          },
-          domProps: { value: _vm.honeypot },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.honeypot = $event.target.value
-            }
-          }
-        }),
         _vm._v(" "),
         _c(
           "div",
@@ -7837,30 +7011,27 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "border-top mt-2 text-right" },
+        { staticClass: "mt-2 text-right" },
         [
           _vm._t("extend-overlay-buttons"),
           _vm._v(" "),
           _c(
             "button",
             {
-              staticClass: "btn btn-appearance btn-primary btn-medium mt-3",
+              staticClass: "btn btn-appearance btn-bkm btn-medium mt-3",
               class: _vm.buttonSizeClass,
-              attrs: {
-                disabled: _vm.isDisabled,
-                "data-testing": "register-submit"
-              }
+              attrs: { disabled: _vm.isDisabled }
             },
             [
-              _vm._v(
-                "\n            " +
-                  _vm._s(_vm.$translate("Ceres::Template.regRegister")) +
-                  "\n            "
-              ),
               _c("icon", {
                 staticClass: "default-float",
                 attrs: { icon: "user-plus", loading: _vm.isDisabled }
-              })
+              }),
+              _vm._v(
+                "\n            " +
+                  _vm._s(_vm.$translate("Ceres::Template.regRegister")) +
+                  "\n        "
+              )
             ],
             1
           )

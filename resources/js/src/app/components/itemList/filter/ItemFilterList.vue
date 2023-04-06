@@ -1,35 +1,34 @@
 <template>
-    <div v-if="filterListBulk">
-        <item-filter v-for="facet in facets"
-            :facet="facet"
-            :key="facet.id"
-            :padding-classes="paddingClasses"
-            :padding-inline-styles="paddingInlineStyles">
-        </item-filter>
-    </div>
+    <div class="bkFilters bkr-cc" v-show="facets && facets.length > 0">
+        <item-filter v-for="facet in facets.filter(function (facet) { return (facet.id == 11) })" :facet="facet" :key="facet.id"></item-filter>
 
-    <div v-else class="filter-wrapper" v-show="facets && facets.length > 0">
-        <a class="btn btn-link filter-toggle" data-toggle="collapse" :href="'#filter-collapse_' + _cid" aria-expanded="false" :aria-controls="'filter-collapse_' + _cid">
-            <i class="fa fa-sliders default-float" aria-hidden="true"></i> {{ $translate("Ceres::Template.itemFilter") }}
+        <a class="btn btn-sm btn-bkm-inverted facetToggleButton" data-toggle="collapse" :href="'#filter-collapse_' + _uid" aria-expanded="false" :aria-controls="'filter-collapse_' + _uid">
+          <i class="fa fa-sliders default-float" aria-hidden="true"></i> {{ $translate("Ceres::Template.itemFilter") }}
         </a>
 
-        <div v-open-filter-toolbar class="filter-collapse collapse" :id="'filter-collapse_' + _cid">
-            <div class="container-max page-content component-loading" :class="{ 'is-loading': isLoading }">
-                <div class="card-columns">
-                    <item-filter v-for="facet in facets" :facet="facet" :key="facet.id"></item-filter>
-                </div>
+        <div class="filter-wrapper">
 
-                <div class="row">
-                    <div class="col-12 text-right">
-                        <button type="button" class="btn btn-primary btn-medium-large" data-toggle="collapse" :href="'#filter-collapse_' + _cid" :aria-controls="'filter-collapse_' + _cid">
+            <div class="filter-collapse collapse" :id="'filter-collapse_' + _uid">
+              <div class="container-max page-content component-loading" :class="{ 'isLoading': isLoading }">
+                  <div class="facetOutter" :selectedFactes="selectedFacets.length">
+                      <item-filter v-for="facet in facets" :facet="facet" :key="facet.id" v-if="facet.id != 11"></item-filter>
+                      <div class="facet">
+                          <div class="h3">{{ $translate("biokinderDesign::Template.itemListSort") }}</div>
+                          <slot name="sorting-box"></slot>
+                      </div>
+                  </div>
+                  <div class="row filterBtnRow">
+                      <div class="col-12 text-right">
+                          <button type="button" class="btn btn-bkm btn-medium-large applyFilterButton" data-toggle="collapse" :href="'#filter-collapse_' + _uid" :aria-controls="'filter-collapse_' + _uid">
                             <i class="fa fa-times" aria-hidden="true"></i>
                             <span>{{ $translate("Ceres::Template.itemClose") }}&nbsp;</span>
-                        </button>
-                    </div>
-                </div>
+                          </button>
+                      </div>
+                  </div>
+              </div>
             </div>
         </div>
-    </div>
+      </div>
 </template>
 
 <script>

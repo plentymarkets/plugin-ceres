@@ -930,6 +930,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -941,9 +960,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     showLogin: {
       type: Boolean,
       default: true
+    },
+    viewMethod: {
+      type: String,
+      default: 'default'
     }
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_7__["mapGetters"])(["username", "isLoggedIn"])),
+  computed: _objectSpread({
+    viewModeClass: function viewModeClass() {
+      switch (this.viewMode) {
+        case 'mobile':
+          return 'myAccount';
+          break;
+
+        case 'wishlist':
+          return 'row';
+          break;
+
+        default:
+          return 'd-inline';
+      }
+    }
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_7__["mapGetters"])(["username", "isLoggedIn"])),
   data: function data() {
     return {
       isLogin: App.templateType === "login",
@@ -1764,6 +1802,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 
@@ -1799,6 +1840,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     forceUrlWithVariationId: {
       type: Boolean,
       default: false
+    },
+    viewMode: {
+      type: String,
+      default: 'vertical'
     }
   },
   jsonDataFields: ["itemDataRef"],
@@ -1826,6 +1871,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     basePrice: function basePrice() {
       return this.item.prices.default.basePrice;
+    },
+    mode: function mode() {
+      switch (this.viewMode) {
+        case 'vertical':
+          return 1;
+
+        case 'horizontal':
+          return 2;
+
+        case 'cart':
+          return 3;
+
+        default:
+          return 1;
+      }
     },
     itemPriceGraduated: function itemPriceGraduated() {
       var unitPrice;
@@ -1914,6 +1974,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2329,80 +2400,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -3503,7 +3500,7 @@ __webpack_require__.r(__webpack_exports__);
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-   true ? factory(exports, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")) :
+   true ? factory(exports, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?28a1"), __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")) :
   undefined;
 }(this, (function (exports, $, Popper) { 'use strict';
 
@@ -15065,12 +15062,12 @@ function createVersionParts(count) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["jQuery"] = __webpack_require__(/*! -!./jquery.js */ "./node_modules/jquery/dist/jquery.js");
+/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["jQuery"] = __webpack_require__(/*! -!./jquery.js */ "./node_modules/jquery/dist/jquery.js?1157");
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
-/***/ "./node_modules/jquery/dist/jquery.js":
+/***/ "./node_modules/jquery/dist/jquery.js?1157":
 /*!********************************************!*\
   !*** ./node_modules/jquery/dist/jquery.js ***!
   \********************************************/
@@ -25954,10 +25951,10 @@ return jQuery;
 
 /***/ }),
 
-/***/ "./node_modules/jquery/dist/jquery.js-exposed":
-/*!****************************************************!*\
-  !*** ./node_modules/jquery/dist/jquery.js-exposed ***!
-  \****************************************************/
+/***/ "./node_modules/jquery/dist/jquery.js?28a1":
+/*!********************************************!*\
+  !*** ./node_modules/jquery/dist/jquery.js ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37210,168 +37207,214 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "position-relative" }, [
-    _vm.isLoggedIn
-      ? _c("div", { staticClass: "dropdown" }, [
-          _c(
-            "a",
-            {
-              staticClass: "dropdown-toggle nav-link",
-              attrs: {
-                href: "#",
-                id: "accountMenuList",
-                "data-toggle": "dropdown",
-                "aria-haspopup": "true",
-                "aria-expanded": "false",
-                "data-boundary": "window"
-              }
-            },
-            [
-              _c("i", {
-                staticClass: "fa fa-user mr-1 d-sm-none",
-                attrs: { "aria-hidden": "true" }
-              }),
-              _vm._v(" "),
-              _c("span", { staticClass: "d-none d-sm-inline" }, [
-                _vm._v(
-                  _vm._s(
-                    _vm.$translate("Ceres::Template.loginHello", {
-                      username: _vm.username
-                    })
-                  )
-                )
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-menu small m-0 p-0 mw-100" }, [
+  return _c(
+    "div",
+    { class: _vm.viewModeClass },
+    [
+      _vm.viewMethod == "default"
+        ? [
             _c(
-              "div",
-              {
-                staticClass: "list-group",
-                attrs: { "aria-labelledby": "accountMenuList" }
-              },
+              "span",
+              { staticClass: "icon", class: { loggedin: _vm.isLoggedIn } },
               [
                 _c(
-                  "a",
+                  "svg",
                   {
-                    staticClass: "list-group-item small",
-                    attrs: { href: _vm.$ceres.urls.myAccount }
+                    attrs: {
+                      xmlns: "http://www.w3.org/2000/svg",
+                      width: "16",
+                      height: "16",
+                      viewBox: "0 0 24 24",
+                      fill: "none",
+                      stroke: "#000000",
+                      "stroke-width": "2",
+                      "stroke-linecap": "butt",
+                      "stroke-linejoin": "round"
+                    }
                   },
                   [
-                    _c("i", { staticClass: "fa fa-user" }),
-                    _vm._v(
-                      " " +
-                        _vm._s(_vm.$translate("Ceres::Template.loginMyAccount"))
-                    )
+                    _c("path", {
+                      attrs: { d: "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" }
+                    }),
+                    _c("circle", { attrs: { cx: "12", cy: "7", r: "4" } })
                   ]
                 ),
                 _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    directives: [{ name: "logout", rawName: "v-logout" }],
-                    staticClass: "list-group-item small",
-                    attrs: { href: "#" }
-                  },
-                  [
-                    _c("i", { staticClass: "fa fa-sign-out" }),
-                    _vm._v(
-                      " " +
-                        _vm._s(_vm.$translate("Ceres::Template.loginLogout"))
-                    )
-                  ]
-                )
+                !_vm.isLoggedIn
+                  ? _c("a", {
+                      staticClass: "nav-link",
+                      attrs: {
+                        href: _vm.isLogin ? "javascript:void(0)" : "#login",
+                        "data-toggle": _vm.isLogin ? false : "modal",
+                        "aria-label": _vm.$translate("Ceres::Template.login")
+                      },
+                      domProps: {
+                        innerHTML: _vm._s(
+                          _vm.$translate("Ceres::Template.login")
+                        )
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.createLoginModal()
+                          _vm.createRegisterModal()
+                          _vm.unmarkInputFields()
+                        }
+                      }
+                    })
+                  : _c("a", {
+                      attrs: { href: _vm.$ceres.urls.myAccount },
+                      domProps: { innerHTML: _vm._s("Mein Konto") }
+                    })
               ]
-            )
-          ])
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    !_vm.isLoggedIn
-      ? _c(
-          "div",
-          [
-            _vm.showLogin
+            ),
+            !_vm.isLogin
+              ? _c("span", { staticClass: "icon" })
+              : _c("span", { staticClass: "d-none" })
+          ]
+        : _vm.viewMethod == "mobile"
+        ? [
+            !_vm.isLoggedIn
               ? _c(
                   "a",
                   {
-                    staticClass: "nav-link",
                     attrs: {
-                      "data-testing": "login-select",
-                      href: _vm.isLogin ? "javascript:void(0)" : "#login",
-                      "data-toggle": _vm.isLogin ? false : "modal",
-                      "aria-label": _vm.$translate("Ceres::Template.login")
+                      href: "#login",
+                      "data-toggle": _vm.isLogin ? false : "modal"
                     },
                     on: {
                       click: function($event) {
                         _vm.createLoginModal()
+                        _vm.createRegisterModal()
                         _vm.unmarkInputFields()
                       }
                     }
                   },
                   [
-                    _c("i", {
-                      staticClass: "fa fa-user mr-1",
-                      attrs: { "aria-hidden": "true" }
-                    }),
+                    _c(
+                      "svg",
+                      {
+                        staticClass: "feather feather-user",
+                        attrs: {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          width: "16",
+                          height: "16",
+                          viewBox: "0 0 24 24",
+                          fill: "none",
+                          stroke: "currentColor",
+                          "stroke-width": "2",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round"
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            d: "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                          }
+                        }),
+                        _c("circle", { attrs: { cx: "12", cy: "7", r: "4" } })
+                      ]
+                    ),
                     _vm._v(" "),
-                    _c("span", { staticClass: "d-none d-sm-inline" }, [
-                      _vm._v(_vm._s(_vm.$translate("Ceres::Template.login")))
-                    ])
+                    _c("span", {
+                      staticClass: "mini",
+                      attrs: { nologin: "" },
+                      domProps: {
+                        innerHTML: _vm._s(
+                          _vm.$translate("Ceres::Template.login")
+                        )
+                      }
+                    })
                   ]
                 )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.showRegistration
-              ? [
-                  !_vm.showLogin
-                    ? _c("span", { staticClass: "pipe" })
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link",
-                      attrs: {
-                        "data-testing": "register-select",
-                        href: _vm.isRegister
-                          ? "javascript:void(0)"
-                          : "#registration",
-                        "data-toggle": _vm.isRegister ? false : "modal",
-                        "aria-label": _vm.$translate(
-                          "Ceres::Template.loginRegister"
-                        )
-                      },
-                      on: {
-                        click: function($event) {
-                          _vm.createRegisterModal()
-                          _vm.unmarkInputFields()
+              : _c(
+                  "a",
+                  {
+                    staticClass: "loggedin",
+                    attrs: { href: _vm.$ceres.urls.myAccount }
+                  },
+                  [
+                    _c(
+                      "svg",
+                      {
+                        staticClass: "feather feather-user",
+                        attrs: {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          width: "16",
+                          height: "16",
+                          viewBox: "0 0 24 24",
+                          fill: "none",
+                          stroke: "currentColor",
+                          "stroke-width": "2",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round"
                         }
-                      }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "fa fa-user-plus mr-1",
-                        attrs: { "aria-hidden": "true" }
-                      }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "d-none d-sm-inline" }, [
-                        _vm._v(
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.loginRegister")
-                          )
-                        )
-                      ])
-                    ]
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            d: "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                          }
+                        }),
+                        _c("circle", { attrs: { cx: "12", cy: "7", r: "4" } })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("span", {
+                      staticClass: "mini",
+                      attrs: { loggedin: "" },
+                      domProps: { innerHTML: _vm._s("Mein Konto") }
+                    })
+                  ]
+                )
+          ]
+        : _vm.viewMethod == "wishlist"
+        ? [
+            _c("div", { staticClass: "col-4 offset-2" }, [
+              _c("a", {
+                staticClass: "btn btn-bkm btn-sm btn-block",
+                attrs: {
+                  href: "#login",
+                  "data-toggle": _vm.isLogin ? false : "modal"
+                },
+                domProps: {
+                  innerHTML: _vm._s(_vm.$translate("Ceres::Template.login"))
+                },
+                on: {
+                  click: function($event) {
+                    _vm.createLoginModal()
+                    _vm.createRegisterModal()
+                    _vm.unmarkInputFields()
+                  }
+                }
+              })
+            ]),
+            _c("div", { staticClass: "col-4" }, [
+              _c("a", {
+                staticClass: "btn btn-bkm-inverted btn-sm btn-block",
+                attrs: {
+                  href: "#registration",
+                  "data-toggle": _vm.isRegister ? false : "modal"
+                },
+                domProps: {
+                  innerHTML: _vm._s(
+                    _vm.$translate("Ceres::Template.loginRegister")
                   )
-                ]
-              : _vm._e()
-          ],
-          2
-        )
-      : _vm._e()
-  ])
+                },
+                on: {
+                  click: function($event) {
+                    _vm.createLoginModal()
+                    _vm.createRegisterModal()
+                    _vm.unmarkInputFields()
+                  }
+                }
+              })
+            ])
+          ]
+        : _vm._e()
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -38481,411 +38524,377 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "article",
-    {
-      staticClass: "cmp cmp-product-thumb",
-      attrs: { "data-testing": _vm.item.variation.id }
-    },
-    [
-      _c(
-        "div",
-        { class: _vm.paddingClasses, style: _vm.paddingInlineStyles },
-        [
-          _c("add-to-basket", {
-            attrs: {
-              "data-testing": "item-add-to-basket",
-              "variation-id": _vm.item.variation.id,
-              "is-salable": !!_vm.item.filter && _vm.item.filter.isSalable,
-              "has-children":
-                !!_vm.item.item && _vm.item.item.salableVariationCount > 1,
-              "interval-quantity":
-                _vm.item.variation.intervalOrderQuantity || 1,
-              "minimum-quantity": _vm.item.variation.minimumOrderQuantity,
-              "maximum-quantity":
-                !!_vm.item.variation.maximumOrderQuantity &&
-                _vm.item.variation.maximumOrderQuantity > 0
-                  ? _vm.item.variation.maximumOrderQuantity
-                  : null,
-              "order-properties": _vm.item.properties.filter(function(prop) {
-                return prop.property.isOderProperty
-              }),
-              "has-order-properties": _vm.item.hasOrderProperties,
-              "has-required-order-property": _vm.item.hasRequiredOrderProperty,
-              "use-large-scale": true,
-              "show-quantity": false,
-              "item-url": _vm._f("itemURL")(_vm.item, _vm.urlWithVariationId),
-              "has-price": _vm._f("hasItemDefaultPrice")(_vm.item),
-              "has-graduated-price":
-                _vm.itemGraduatedPriceisCheapestSorting ||
-                _vm.itemGraduatedPricesalableVariationCount,
-              "item-type": _vm.item.item.itemType
-            }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "thumb-image" }, [
-            _c(
-              "div",
-              { staticClass: "prop-1-1" },
-              [
-                _vm._t("item-image", [
-                  _c("category-image-carousel", {
-                    ref: "categoryImageCarousel",
+  return _c("div", { staticClass: "bkr-cc h-100" }, [
+    _vm.viewMode == "vertical"
+      ? _c(
+          "article",
+          { staticClass: "itemCategoryProduct" },
+          [
+            _c("bkAddToWishlist", {
+              attrs: { "variation-id": _vm.item.variation.id }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "produkt_picture" }, [
+              _c(
+                "a",
+                {
+                  attrs: {
+                    href: _vm._f("itemURL")(_vm.item),
+                    "aria-label": _vm.texts.name1
+                  }
+                },
+                [
+                  _c("lazy-img", {
+                    ref: "itemLazyImage",
                     attrs: {
-                      "image-urls-data": _vm._f("itemImages")(
-                        _vm.item.images,
-                        _vm.imageUrlAccessor
-                      ),
-                      alt: _vm._f("itemName")(_vm.item),
-                      title: _vm._f("itemName")(_vm.item),
-                      "item-url": _vm._f("itemURL")(
-                        _vm.item,
-                        _vm.urlWithVariationId
-                      ),
-                      "enable-carousel":
-                        _vm.$ceres.config.item.enableImageCarousel,
-                      "disable-carousel-on-mobile": _vm.disableCarouselOnMobile
+                      "picture-class": "img-fluid",
+                      "aria-label": _vm.texts.name1,
+                      alt: _vm.texts.name1,
+                      "image-url": _vm._f("itemImage")(
+                        _vm._f("itemImages")(
+                          _vm.item.images,
+                          "urlSecondPreview"
+                        )
+                      )
                     }
                   })
-                ])
-              ],
-              2
-            )
-          ]),
-          _vm._v(" "),
-          _vm._t("store-special", [
-            _vm.storeSpecial ||
-            _vm.item.variation.bundleType === "bundle" ||
-            _vm.item.item.itemType === "set"
-              ? _c("item-store-special", {
-                  attrs: {
-                    "store-special": _vm.storeSpecial,
-                    "recommended-retail-price": _vm.item.prices.rrp,
-                    "variation-retail-price": _vm.item.prices.default,
-                    "special-offer-price": _vm.item.prices.specialOffer,
-                    "decimal-count": _vm.decimalCount,
-                    "bundle-type": _vm.item.variation.bundleType,
-                    "item-type": _vm.item.item.itemType
-                  }
-                })
-              : _vm._e()
-          ]),
-          _vm._v(" "),
-          _vm._t("item-details", [
-            _c(
-              "div",
-              { staticClass: "thumb-content" },
-              [
-                _c(
-                  "a",
-                  {
-                    staticClass: "thumb-title small",
-                    class: {
-                      "stretched-link":
-                        _vm.$ceres.config.global.shippingCostsCategoryId == 0
-                    },
-                    attrs: {
-                      href: _vm._f("itemURL")(_vm.item, _vm.urlWithVariationId)
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(_vm._f("itemName")(_vm.item))
-                    ),
-                    _vm._l(_vm.item.groupedAttributes, function(attribute) {
-                      return _c("span", [
-                        _vm._v(
-                          _vm._s(
-                            _vm._f("translate")(
-                              "Ceres::Template.itemGroupedAttribute",
-                              attribute
-                            )
-                          )
-                        )
-                      ])
-                    })
-                  ],
-                  2
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "thumb-meta mt-2" },
-                  [
-                    _vm._t("before-prices"),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "prices" }, [
-                      _vm.item.prices.rrp &&
-                      _vm.item.prices.rrp.price.value > 0 &&
-                      _vm.item.prices.rrp.price.value >
-                        _vm.item.prices.default.unitPrice.value
-                        ? _c("div", { staticClass: "price-view-port" }, [
-                            _vm.item.prices.specialOffer
-                              ? _c("del", { staticClass: "crossprice" }, [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(
-                                        _vm._f("itemCrossPrice")(
-                                          _vm.item.prices.default.unitPrice
-                                            .formatted,
-                                          true
-                                        )
-                                      ) +
-                                      "\n                            "
-                                  )
-                                ])
-                              : _c("del", { staticClass: "crossprice" }, [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(
-                                        _vm._f("itemCrossPrice")(
-                                          _vm.item.prices.rrp.unitPrice
-                                            .formatted
-                                        )
-                                      ) +
-                                      "\n                            "
-                                  )
-                                ])
-                          ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "price" },
-                        [
-                          _vm.item.item.itemType === "set"
-                            ? [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.itemSetPrice",
-                                        { price: _vm.itemSetPrice }
-                                      )
-                                    ) +
-                                    " " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.itemFootnote"
-                                      )
-                                    ) +
-                                    "\n                            "
-                                )
-                              ]
-                            : _vm.itemGraduatedPriceisCheapestSorting
-                            ? [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.itemFromPrice",
-                                        { price: _vm.itemPriceGraduated }
-                                      )
-                                    ) +
-                                    " " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.itemFootnote"
-                                      )
-                                    ) +
-                                    "\n                            "
-                                )
-                              ]
-                            : _vm.itemGraduatedPricesalableVariationCount
-                            ? [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.itemFromPrice",
-                                        { price: _vm.itemPriceGraduated }
-                                      )
-                                    ) +
-                                    " " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.itemFootnote"
-                                      )
-                                    ) +
-                                    "\n                            "
-                                )
-                              ]
-                            : [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(
-                                      _vm._f("specialOffer")(
-                                        _vm.item.prices.default.unitPrice
-                                          .formatted,
-                                        _vm.item.prices,
-                                        "unitPrice",
-                                        "formatted"
-                                      )
-                                    ) +
-                                    " " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.itemFootnote"
-                                      )
-                                    ) +
-                                    "\n                            "
-                                )
-                              ]
-                        ],
-                        2
-                      )
-                    ])
-                  ],
-                  2
-                ),
-                _vm._v(" "),
-                _vm._t("after-prices"),
-                _vm._v(" "),
-                _vm.item.prices.default.lowestPrice.value && _vm.hasCrossPrice
-                  ? _c("div", { staticClass: "category-lowest-price small" }, [
-                      _c("span", {
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "productInfoContainer" }, [
+              _c(
+                "div",
+                { staticClass: "tagLine" },
+                [
+                  _vm.item.prices.rrp &&
+                  _vm.item.prices.rrp.price.value >
+                    _vm.item.prices.default.unitPrice.value
+                    ? _c("span", {
+                        staticClass: "itemTag red",
                         domProps: {
                           innerHTML: _vm._s(
-                            _vm.$translate("Ceres::Template.itemLowestPrice", {
-                              price:
-                                _vm.item.prices.default.lowestPrice.formatted
-                            })
+                            this.$options.filters.numberFormat(
+                              (1 -
+                                _vm.item.prices.default.unitPrice.value /
+                                  _vm.item.prices.rrp.price.value) *
+                                -100,
+                              0,
+                              ""
+                            ) + " %"
                           )
                         }
                       })
-                    ])
-                  : _vm._e(),
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.storeSpecial && _vm.storeSpecial.id == 2
+                    ? _c("div", { staticClass: "itemTag" }, [
+                        _c("span", { domProps: { innerHTML: _vm._s("NEU") } })
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.item.tags &&
+                  _vm.item.tags.filter(function(tag) {
+                    return tag.id == 105
+                  }).length > 0
+                    ? [
+                        _c("span", { staticClass: "tag tagFavorit" }, [
+                          _vm._v("Bestseller")
+                        ])
+                      ]
+                    : _vm._e()
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "productName" }, [
+                _c("a", {
+                  staticClass: "thumb-title small",
+                  attrs: { href: _vm._f("itemURL")(_vm.item) },
+                  domProps: { innerHTML: _vm._s(_vm.texts.name1) }
+                })
+              ]),
+              _vm._v(" "),
+              !_vm.item.variation.isMain
+                ? _c(
+                    "p",
+                    { staticClass: "variationHint" },
+                    [
+                      _vm.item.attributes.length == 1 &&
+                      [3, 7, 16, 18].includes(
+                        _vm.item.attributes[0].attributeId
+                      )
+                        ? _c(
+                            "span",
+                            { staticClass: "variationImages" },
+                            _vm._l(_vm.item.groupedAttributes, function(
+                              attribute
+                            ) {
+                              return _c("span", {
+                                domProps: {
+                                  innerHTML: _vm._s(
+                                    attribute.name + ": " + attribute.value
+                                  )
+                                }
+                              })
+                            }),
+                            0
+                          )
+                        : [2].includes(_vm.item.attributes[0].attributeId)
+                        ? _c("span", {
+                            domProps: {
+                              innerHTML: _vm._s("In verschiedenen Größen")
+                            }
+                          })
+                        : _vm.item.attributes.length == 2 &&
+                          _vm.item.attributes.filter(function(attr) {
+                            return attr.attributeId == 3
+                          })[0] &&
+                          _vm.item.attributes.filter(function(attr) {
+                            return attr.attributeId == 9
+                          })[0]
+                        ? _vm._l(_vm.item.attributes, function(attribute) {
+                            return _c(
+                              "span",
+                              {
+                                class: {
+                                  corpusFront: [3, 9].includes(
+                                    attribute.attributeId
+                                  )
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                " +
+                                    _vm._s(attribute.value.names.name) +
+                                    "\n                "
+                                )
+                              ]
+                            )
+                          })
+                        : _c("span", {
+                            domProps: {
+                              innerHTML: _vm._s("In verschiedenen Varianten")
+                            }
+                          })
+                    ],
+                    2
+                  )
+                : _c("div"),
+              _vm._v(" "),
+              _c("div", { staticClass: "itemPrice" }, [
+                _c("div", { staticClass: "prices" }, [
+                  _vm.item.prices.rrp &&
+                  _vm.item.prices.rrp.price.value >
+                    _vm.item.prices.default.unitPrice.value
+                    ? _c("div", { staticClass: "price-view-port" }, [
+                        _c("del", {
+                          staticClass: "crossprice",
+                          domProps: {
+                            innerHTML: _vm._s(
+                              "statt " + _vm.item.prices.rrp.unitPrice.formatted
+                            )
+                          }
+                        })
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", {
+                    staticClass: "price",
+                    class: {
+                      redPrice:
+                        _vm.item.prices.rrp &&
+                        _vm.item.prices.rrp.price.value >
+                          _vm.item.prices.default.unitPrice.value
+                    },
+                    domProps: {
+                      innerHTML: _vm._s(
+                        _vm.item.prices.default.unitPrice.formatted
+                      )
+                    }
+                  })
+                ]),
                 _vm._v(" "),
                 !(
                   _vm.item.unit.unitOfMeasurement === "C62" &&
                   _vm.item.unit.content === 1
                 )
                   ? _c("div", { staticClass: "category-unit-price small" }, [
-                      _c("span", [_vm._v(_vm._s(_vm.item.unit.content))]),
-                      _vm._v(" "),
-                      _c("span", [
-                        _vm._v(" " + _vm._s(_vm.item.unit.names.name))
-                      ]),
-                      _vm._v(" "),
                       _vm.item.variation.mayShowUnitPrice
-                        ? _c("span", [_vm._v(" | " + _vm._s(_vm.basePrice))])
+                        ? _c("span", {
+                            domProps: {
+                              innerHTML: _vm._s(
+                                _vm.item.prices.default.basePrice
+                              )
+                            }
+                          })
                         : _vm._e()
+                    ])
+                  : _vm._e()
+              ])
+            ])
+          ],
+          1
+        )
+      : _vm.viewMode == "horizontal"
+      ? _c("article", { staticClass: "itemCategoryProduct horizontal" }, [
+          _c("div", { staticClass: "produkt_picture" }, [
+            _c(
+              "a",
+              { attrs: { href: _vm._f("itemURL")(_vm.item) } },
+              [
+                _c("lazy-img", {
+                  ref: "itemLazyImage",
+                  attrs: {
+                    "picture-class": "img-fluid",
+                    "image-url": _vm._f("itemImage")(
+                      _vm._f("itemImages")(_vm.item.images, "urlSecondPreview")
+                    )
+                  }
+                })
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "productInfoContainer" }, [
+            _c("div", { staticClass: "productName" }, [
+              _c("a", {
+                staticClass: "thumb-title small",
+                attrs: { href: _vm._f("itemURL")(_vm.item) },
+                domProps: { innerHTML: _vm._s(_vm.texts.name1) }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "itemPrice" }, [
+              _c("div", { staticClass: "prices" }, [
+                _vm.item.prices.rrp &&
+                _vm.item.prices.rrp.price.value >
+                  _vm.item.prices.default.unitPrice.value
+                  ? _c("div", { staticClass: "price-view-port" }, [
+                      _c("del", {
+                        staticClass: "crossprice",
+                        domProps: {
+                          innerHTML: _vm._s(
+                            _vm.item.prices.rrp.unitPrice.formatted
+                          )
+                        }
+                      })
                     ])
                   : _vm._e(),
                 _vm._v(" "),
-                _c("add-to-basket", {
-                  attrs: {
-                    "variation-id": _vm.item.variation.id,
-                    "is-salable":
-                      !!_vm.item.filter && _vm.item.filter.isSalable,
-                    "has-children":
-                      !!_vm.item.item &&
-                      _vm.item.item.salableVariationCount > 1,
-                    "interval-quantity":
-                      _vm.item.variation.intervalOrderQuantity || 1,
-                    "minimum-quantity": _vm.item.variation.minimumOrderQuantity,
-                    "maximum-quantity":
-                      !!_vm.item.variation.maximumOrderQuantity &&
-                      _vm.item.variation.maximumOrderQuantity > 0
-                        ? _vm.item.variation.maximumOrderQuantity
-                        : null,
-                    "order-properties": _vm.item.properties.filter(function(
-                      prop
-                    ) {
-                      return prop.property.isOderProperty
-                    }),
-                    "has-order-properties": _vm.item.hasOrderProperties,
-                    "has-required-order-property":
-                      _vm.item.hasRequiredOrderProperty,
-                    "use-large-scale": false,
-                    "show-quantity": false,
-                    "item-url": _vm._f("itemURL")(
-                      _vm.item,
-                      _vm.urlWithVariationId
-                    ),
-                    "has-price": _vm._f("hasItemDefaultPrice")(_vm.item),
-                    "has-graduated-price":
-                      _vm.itemGraduatedPriceisCheapestSorting ||
-                      _vm.itemGraduatedPricesalableVariationCount,
-                    "item-type": _vm.item.item.itemType
+                _c("div", {
+                  staticClass: "price",
+                  class: {
+                    redPrice:
+                      _vm.item.prices.rrp &&
+                      _vm.item.prices.rrp.price.value >
+                        _vm.item.prices.default.unitPrice.value
+                  },
+                  domProps: {
+                    innerHTML: _vm._s(
+                      _vm.item.prices.default.unitPrice.formatted
+                    )
                   }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "vat small text-muted" }, [
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(_vm.$translate("Ceres::Template.itemFootnote")) +
-                      " "
-                  ),
-                  _vm.showNetPrices
-                    ? _c("span", [
-                        _vm._v(
-                          _vm._s(_vm.$translate("Ceres::Template.itemExclVAT"))
-                        )
-                      ])
-                    : _c("span", [
-                        _vm._v(
-                          _vm._s(_vm.$translate("Ceres::Template.itemInclVAT"))
-                        )
-                      ]),
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(_vm.$translate("Ceres::Template.itemExclusive")) +
-                      "\n                    "
-                  ),
-                  _vm.$ceres.config.global.shippingCostsCategoryId > 0
-                    ? _c(
-                        "a",
-                        {
-                          staticClass: "text-appearance",
-                          attrs: {
-                            "data-toggle": "modal",
-                            href: "#shippingscosts",
-                            title: _vm.$translate(
-                              "Ceres::Template.itemShippingCosts"
-                            )
-                          }
-                        },
-                        [
-                          _vm._v(
-                            _vm._s(
-                              _vm.$translate(
-                                "Ceres::Template.itemShippingCosts"
-                              )
-                            )
-                          )
-                        ]
-                      )
-                    : _c(
-                        "a",
-                        {
-                          attrs: {
-                            title: _vm.$translate(
-                              "Ceres::Template.itemShippingCosts"
-                            )
-                          }
-                        },
-                        [
-                          _vm._v(
-                            _vm._s(
-                              _vm.$translate(
-                                "Ceres::Template.itemShippingCosts"
-                              )
-                            )
-                          )
-                        ]
-                      )
-                ])
-              ],
-              2
-            )
+                })
+              ])
+            ])
           ])
-        ],
-        2
-      )
-    ]
-  )
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.viewMode == "cart"
+      ? _c(
+          "article",
+          { staticClass: "itemCategoryProduct cartCrossSellingItem" },
+          [
+            _c("div", { staticClass: "produkt_picture" }, [
+              _c(
+                "a",
+                {
+                  attrs: {
+                    href: _vm._f("itemURL")(_vm.item),
+                    "aria-label": "Empfehlung: Das passt dazu",
+                    "click-count": ""
+                  }
+                },
+                [
+                  _c("lazy-img", {
+                    ref: "itemLazyImage",
+                    attrs: {
+                      "picture-class": "img-fluid",
+                      "image-url": _vm._f("itemImage")(
+                        _vm._f("itemImages")(
+                          _vm.item.images,
+                          "urlSecondPreview"
+                        )
+                      )
+                    }
+                  })
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "productInfoContainer" }, [
+              _c("div", { staticClass: "productName" }, [
+                _c("a", {
+                  staticClass: "thumb-title small",
+                  attrs: {
+                    href: _vm._f("itemURL")(_vm.item),
+                    "aria-label": "Empfehlung: Das passt dazu",
+                    "click-count": ""
+                  },
+                  domProps: { innerHTML: _vm._s(_vm.texts.name1) }
+                })
+              ]),
+              _vm._v(" "),
+              _vm.texts.shortDescription
+                ? _c("p", {
+                    staticClass: "bulletPoints",
+                    domProps: { innerHTML: _vm._s(_vm.texts.shortDescription) }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _c("div", { staticClass: "itemPrice" }, [
+                _c("div", { staticClass: "prices" }, [
+                  _vm.item.prices.rrp &&
+                  _vm.item.prices.rrp.price.value >
+                    _vm.item.prices.default.unitPrice.value
+                    ? _c("div", { staticClass: "price-view-port" }, [
+                        _c("del", {
+                          staticClass: "crossprice",
+                          domProps: {
+                            innerHTML: _vm._s(
+                              _vm.item.prices.rrp.unitPrice.formatted
+                            )
+                          }
+                        })
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", {
+                    staticClass: "price",
+                    class: {
+                      redPrice:
+                        _vm.item.prices.rrp &&
+                        _vm.item.prices.rrp.price.value >
+                          _vm.item.prices.default.unitPrice.value
+                    },
+                    domProps: {
+                      innerHTML: _vm._s(
+                        _vm.item.prices.default.unitPrice.formatted
+                      )
+                    }
+                  })
+                ])
+              ])
+            ])
+          ]
+        )
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -38912,145 +38921,136 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "container-max",
-      class: { "p-0": _vm.$ceres.isShopBuilder }
+      staticClass: "bkr-cc",
+      class: { wide: _vm.isSearchFocused, notwide: !_vm.isSearchFocused },
+      attrs: { id: "search_and_porto_holder" }
     },
     [
-      _c(
-        "div",
-        { staticClass: "position-relative" },
-        [
-          _c(
-            "div",
-            { staticClass: "d-flex flex-grow-1 position-relative my-2" },
-            [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.searchString,
-                    expression: "searchString"
-                  }
-                ],
-                ref: "searchInput",
-                staticClass: "search-input flex-grow-1 px-3 py-2",
-                attrs: {
-                  type: "search",
-                  autofocus: _vm.isShopBuilder,
-                  placeholder: _vm.$translate(
-                    "Ceres::Template.headerSearchPlaceholder"
-                  ),
-                  "aria-label": _vm.$translate(
-                    "Ceres::Template.headerSearchTerm"
-                  )
-                },
-                domProps: { value: _vm.searchString },
-                on: {
-                  input: [
-                    function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.searchString = $event.target.value
-                    },
-                    function($event) {
-                      return _vm.onValueChanged($event.target.value)
-                    }
-                  ],
-                  keyup: function($event) {
-                    if (
-                      !$event.type.indexOf("key") &&
-                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                    ) {
-                      return null
-                    }
-                    return _vm.search()
-                  },
-                  focus: function($event) {
-                    _vm.isSearchFocused = true
-                  },
-                  blur: function($event) {
-                    return _vm.onBlurSearchField($event)
-                  }
+      _c("div", { staticClass: "input-group" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.searchString,
+              expression: "searchString"
+            }
+          ],
+          ref: "searchInput",
+          staticClass: "search-input flex-grow-1 px-2 py-2 bkmSearchbox",
+          attrs: {
+            type: "search",
+            value: "",
+            autofocus: _vm.isShopBuilder,
+            "aria-label": _vm.$translate("Ceres::Template.headerSearchTerm"),
+            placeholder: "Suchbegriff eingeben..."
+          },
+          domProps: { value: _vm.searchString },
+          on: {
+            keyup: function($event) {
+              if (
+                !$event.type.indexOf("key") &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              return _vm.search()
+            },
+            focus: function($event) {
+              _vm.isSearchFocused = true
+            },
+            blur: function($event) {
+              return _vm.onBlurSearchField($event)
+            },
+            input: [
+              function($event) {
+                if ($event.target.composing) {
+                  return
                 }
-              }),
-              _vm._v(" "),
-              _vm._t("search-button", [
-                _c(
-                  "button",
-                  {
-                    staticClass: "search-submit px-3",
-                    attrs: {
-                      type: "submit",
-                      "aria-label": _vm.$translate(
-                        "Ceres::Template.headerSearch"
-                      )
-                    },
-                    on: {
-                      click: function($event) {
-                        return _vm.search()
-                      }
-                    }
-                  },
-                  [
-                    _c("icon", {
-                      staticClass: "fa-fw",
-                      attrs: {
-                        icon: "search",
-                        loading: _vm.autocompleteIsLoading
-                      }
-                    })
-                  ],
-                  1
-                )
-              ])
+                _vm.searchString = $event.target.value
+              },
+              function($event) {
+                return _vm.onValueChanged($event.target.value)
+              }
+            ]
+          }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "input-group-append" }, [
+          _c(
+            "button",
+            {
+              staticClass: "search-submit btn btn-bkm bkmSearchbutton",
+              attrs: { "aria-label": "Suchen", type: "submit" },
+              on: {
+                click: function($event) {
+                  return _vm.search()
+                }
+              }
+            },
+            [
+              _c("icon", {
+                staticClass: "fa-fw",
+                attrs: { icon: "search", loading: _vm.autocompleteIsLoading }
+              })
             ],
-            2
-          ),
-          _vm._v(" "),
-          _vm.isSearchFocused
-            ? [
-                _c(
-                  "div",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.hasInitialInput || _vm.$ceres.isShopBuilder,
-                        expression: "hasInitialInput || $ceres.isShopBuilder"
-                      }
+            1
+          )
+        ])
+      ]),
+      _vm.isSearchFocused
+        ? [
+            _c(
+              "div",
+              [
+                _vm._t("autocomplete-suggestions", [
+                  _c(
+                    "div",
+                    { staticClass: "autocomplete-suggestions bg-white w-100" },
+                    [
+                      _c("div", { staticClass: "row" }, [
+                        _c(
+                          "div",
+                          { staticClass: "col-md-7" },
+                          [
+                            _c("search-suggestion-item", {
+                              attrs: {
+                                "padding-classes": "p-1",
+                                "show-images": true,
+                                "suggestion-type": "item",
+                                "show-additional-information": false,
+                                "show-count": false
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "col-md-5 suggestions" },
+                          [
+                            _c("search-suggestion-item", {
+                              attrs: {
+                                "suggestion-type": "category",
+                                "show-additional-information": true,
+                                "show-count": false
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ])
                     ]
-                  },
-                  [
-                    _vm._t("autocomplete-suggestions", [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "autocomplete-suggestions shadow bg-white w-100"
-                        },
-                        [
-                          _c("search-suggestion-item", {
-                            attrs: {
-                              "show-images": _vm.showItemImages,
-                              "suggestion-type": "item"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ])
-                  ],
-                  2
-                )
-              ]
-            : _vm._e()
-        ],
-        2
-      )
-    ]
+                  )
+                ])
+              ],
+              2
+            )
+          ]
+        : _vm._e()
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -39181,25 +39181,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      directives: [
-        {
-          name: "show",
-          rawName: "v-show",
-          value: !_vm.$ceres.isSSR,
-          expression: "!$ceres.isSSR"
-        }
-      ],
-      staticClass: "cookie-bar",
-      class: {
-        out: !_vm.isVisible,
-        "border-top bg-white": _vm.isVisible,
-        "fixed-bottom": !_vm.isShopBuilder || false
-      }
-    },
+    { staticClass: "cookie-bar out bkr-cc", class: { in: _vm.isVisible } },
     [
       _vm.isVisible
-        ? _c("div", { staticClass: "container-max" }, [
+        ? _c("div", { staticClass: "container" }, [
             _c(
               "div",
               {
@@ -39211,203 +39196,88 @@ var render = function() {
                     expression: "!isExpanded"
                   }
                 ],
-                staticClass: "row py-3",
+                staticClass: "row p-3",
                 class: _vm.classes,
                 style: _vm.styles
               },
               [
-                _c("div", { staticClass: "col-12 col-md-8" }, [
-                  _c("p", { domProps: { innerHTML: _vm._s(_vm.text) } }),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    [
-                      _vm._l(_vm.consentGroups, function(consentGroup) {
-                        return [
-                          consentGroup.consents.length > 0
-                            ? _c(
-                                "span",
-                                {
-                                  key: consentGroup.key,
-                                  staticClass:
-                                    "custom-control custom-switch custom-control-appearance d-md-inline-block mr-3"
-                                },
-                                [
-                                  _c("input", {
-                                    staticClass: "custom-control-input",
-                                    attrs: {
-                                      type: "checkbox",
-                                      id:
-                                        _vm._cid + "-group-" + consentGroup.key,
-                                      disabled: consentGroup.necessary
-                                    },
-                                    domProps: {
-                                      checked:
-                                        _vm.isConsented(consentGroup.key) ||
-                                        consentGroup.necessary
-                                    },
-                                    on: {
-                                      change: function($event) {
-                                        return _vm.toggleConsent(
-                                          consentGroup.key
-                                        )
-                                      }
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "label",
-                                    {
-                                      staticClass: "custom-control-label",
-                                      attrs: {
-                                        for:
-                                          _vm._cid +
-                                          "-group-" +
-                                          consentGroup.key
-                                      }
-                                    },
-                                    [
-                                      consentGroup.label.length > 0
-                                        ? [
-                                            _vm._v(
-                                              "\n                                    " +
-                                                _vm._s(consentGroup.label) +
-                                                "\n                                "
-                                            )
-                                          ]
-                                        : [
-                                            _vm._v(
-                                              "\n                                    " +
-                                                _vm._s(
-                                                  _vm.$translate(
-                                                    "Ceres::Template.privacySettingsDefaultGroup"
-                                                  )
-                                                ) +
-                                                "\n                                "
-                                            )
-                                          ]
-                                    ],
-                                    2
-                                  )
-                                ]
-                              )
-                            : _vm._e()
-                        ]
-                      }),
-                      _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-12 px-4 col-md-12 text-center" },
+                  [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c("h2", [_vm._v("Cookies akzeptieren")]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "\n                      Wir nutzen Cookies auf unserer Website. Einige von diesen sind essenziell, während andere uns helfen, diese Website und Ihre Erfahrung zu verbessern.\n                      Sie haben die Möglichkeit, die Einstellungen der Cookies anzupassen.\n                      Weitere Informationen zu den von uns verwendeten Cookies und Ihren Rechten als Nutzer finden Sie in unserer "
+                      ),
                       _c(
                         "a",
                         {
-                          staticClass:
-                            "text-primary text-appearance d-block d-md-inline-block",
-                          attrs: {
-                            href: "#",
-                            "data-testing": "cookie-bar-show-more-information"
-                          },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              $event.stopPropagation()
-                              _vm.isExpanded = true
-                            }
-                          }
+                          staticClass: "d-inline-block read_more",
+                          attrs: { href: "/privacy-policy/" }
+                        },
+                        [_vm._v("Daten­schutz­erklärung")]
+                      ),
+                      _vm._v(" und unserem "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "d-inline-block read_more",
+                          attrs: { href: "/legal-disclosure/" }
                         },
                         [
                           _vm._v(
                             _vm._s(
-                              _vm.$translate(
-                                "Ceres::Template.cookieBarMoreSettings"
-                              )
+                              _vm.$translate("Ceres::Template.legalDisclosure")
                             )
                           )
                         ]
-                      )
-                    ],
-                    2
-                  )
-                ]),
+                      ),
+                      _vm._v(".\n                    ")
+                    ])
+                  ]
+                ),
                 _vm._v(" "),
                 _c(
                   "div",
-                  { staticClass: "button-order col-12 col-md-4 pt-3 pt-md-0" },
+                  { staticClass: "col-12 col-md-12 text-center py-4 py-md-4" },
                   [
                     _c(
                       "button",
                       {
                         staticClass:
-                          "btn btn-block btn-default btn-appearance button-order-1 mb-2 mt-0",
-                        attrs: { "data-testing": "cookie-bar-accept-all" },
+                          "btn btn-default btn-appearance d-inline-block",
                         on: {
                           click: function($event) {
-                            _vm.acceptAll()
-                            _vm.close()
+                            $event.preventDefault()
+                            $event.stopPropagation()
+                            _vm.isExpanded = true
                           }
                         }
                       },
-                      [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(
-                              _vm.$translate(
-                                "Ceres::Template.cookieBarAcceptAll"
-                              )
-                            ) +
-                            "\n                "
-                        )
-                      ]
+                      [_vm._v("Einstellungen")]
                     ),
                     _vm._v(" "),
-                    _vm.showRejectAll
-                      ? _c(
-                          "button",
-                          {
-                            staticClass:
-                              "btn btn-block btn-default btn-appearance button-order-2 mb-2 mt-0",
-                            attrs: { "data-testing": "cookie-bar-deny-all" },
-                            on: {
-                              click: function($event) {
-                                _vm.denyAll()
-                                _vm.close()
-                              }
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                    " +
-                                _vm._s(
-                                  _vm.$translate(
-                                    "Ceres::Template.cookieBarDenyAll"
-                                  )
-                                ) +
-                                "\n                "
-                            )
-                          ]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "btn btn-block btn-default button-order-3 mb-2 mt-0",
-                        attrs: { "data-testing": "cookie-bar-save" },
-                        on: {
-                          click: function($event) {
-                            _vm.storeConsents()
-                            _vm.close()
-                          }
-                        }
+                    _c("button", {
+                      staticClass:
+                        "btn btn-primary btn-appearance d-inline-block",
+                      attrs: {
+                        onclick:
+                          "consentGiven(window.ConsentManager.hasResponse())"
                       },
-                      [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(
-                              _vm.$translate("Ceres::Template.cookieBarSave")
-                            ) +
-                            "\n                "
-                        )
-                      ]
-                    )
+                      domProps: {
+                        innerHTML: _vm._s("Einverstanden, zum Shop &rarr;")
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.acceptAll()
+                          _vm.close()
+                        }
+                      }
+                    })
                   ]
                 )
               ]
@@ -39417,7 +39287,7 @@ var render = function() {
               ? _c(
                   "div",
                   {
-                    staticClass: "row py-3",
+                    staticClass: "row p-3",
                     class: _vm.classes,
                     style: _vm.styles
                   },
@@ -39433,139 +39303,63 @@ var render = function() {
                       1
                     ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-12 col-md-3" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass:
-                            "text-primary text-appearance d-inline-block mb-3",
-                          attrs: {
-                            href: "#",
-                            "data-testing": "cookie-bar-hide-more-information"
-                          },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              $event.stopPropagation()
-                              _vm.isExpanded = false
-                            }
-                          }
+                    _c("div", { staticClass: "col-12 col-md-12 text-center" }, [
+                      _c("button", {
+                        staticClass: "btn btn-default mr-2",
+                        attrs: {
+                          onclick:
+                            "consentGiven(window.ConsentManager.hasResponse())"
                         },
-                        [
-                          _vm._v(
-                            "\n                    " +
-                              _vm._s(
-                                _vm.$translate("Ceres::Template.cookieBarBack")
-                              ) +
-                              "\n                "
+                        domProps: {
+                          innerHTML: _vm._s(
+                            _vm.$translate("Ceres::Template.cookieBarSave")
                           )
-                        ]
-                      )
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.storeConsents()
+                            _vm.close()
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("button", {
+                        staticClass:
+                          "btn btn-primary btn-appearance cookiesAccept",
+                        attrs: {
+                          onclick:
+                            "consentGiven(window.ConsentManager.hasResponse())"
+                        },
+                        domProps: {
+                          innerHTML: _vm._s(
+                            _vm.$translate("Ceres::Template.cookieBarAcceptAll")
+                          )
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.acceptAll()
+                            _vm.close()
+                          }
+                        }
+                      })
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-12 col-md-9" }, [
-                      _c("div", { staticClass: "row" }, [
-                        _c(
-                          "div",
-                          { staticClass: "col-12 col-md-4 mt-2 mt-md-0" },
-                          [
-                            _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "btn btn-block btn-default btn-appearance",
-                                attrs: {
-                                  "data-testing":
-                                    "cookie-bar-expanded-accept-all"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    _vm.acceptAll()
-                                    _vm.close()
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                            " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.cookieBarAcceptAll"
-                                      )
-                                    ) +
-                                    "\n                        "
-                                )
-                              ]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _vm.showRejectAll
-                          ? _c(
-                              "div",
-                              { staticClass: "col-12 col-md-4 mt-2 mt-md-0" },
-                              [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass:
-                                      "btn btn-block btn-default btn-appearance",
-                                    attrs: {
-                                      "data-testing":
-                                        "cookie-bar-expanded-deny-all"
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        _vm.denyAll()
-                                        _vm.close()
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                            " +
-                                        _vm._s(
-                                          _vm.$translate(
-                                            "Ceres::Template.cookieBarDenyAll"
-                                          )
-                                        ) +
-                                        "\n                        "
-                                    )
-                                  ]
-                                )
-                              ]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-12 col-md-4" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-block btn-default",
-                              attrs: {
-                                "data-testing": "cookie-bar-expanded-save"
-                              },
-                              on: {
-                                click: function($event) {
-                                  _vm.storeConsents()
-                                  _vm.close()
-                                }
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(
-                                    _vm.$translate(
-                                      "Ceres::Template.cookieBarSave"
-                                    )
-                                  ) +
-                                  "\n                        "
-                              )
-                            ]
+                    _c("div", { staticClass: "col-12 col-md-6" }, [
+                      _c("a", {
+                        staticClass: "text-appearance d-inline-block mb-3",
+                        domProps: {
+                          innerHTML: _vm._s(
+                            _vm.$translate("Ceres::Template.cookieBarBack")
                           )
-                        ])
-                      ])
+                        },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            $event.stopPropagation()
+                            _vm.isExpanded = false
+                          }
+                        }
+                      })
                     ])
                   ]
                 )
@@ -39573,9 +39367,8 @@ var render = function() {
           ])
         : _c("div", [
             _c(
-              "button",
+              "a",
               {
-                staticClass: "btn btn-primary btn-appearance",
                 attrs: {
                   "aria-label": _vm.$translate(
                     "Ceres::Template.cookieBarPrivacySettings"
@@ -39592,20 +39385,36 @@ var render = function() {
               [
                 _c("i", { staticClass: "fa fa-shield float-none" }),
                 _vm._v(" "),
-                _c("span", { staticClass: "d-none d-sm-inline-block" }, [
-                  _vm._v(
-                    _vm._s(
+                _c("span", {
+                  staticClass: "d-inline-block",
+                  domProps: {
+                    innerHTML: _vm._s(
                       _vm.$translate("Ceres::Template.cookieBarPrivacySettings")
                     )
-                  )
-                ])
+                  }
+                })
               ]
             )
           ])
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "cookieBeaverContainer mt-4" }, [
+      _c("img", {
+        staticClass: "cookieBeaver",
+        attrs: {
+          src:
+            "https://cdn.bio-kinder.de/frontend/images/biokindertheme/icons/cookie_biber.png"
+        }
+      })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -65384,7 +65193,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_object_define_getter_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_getter_js__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var core_js_modules_es_object_define_setter_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.object.define-setter.js */ "./node_modules/core-js/modules/es.object.define-setter.js");
 /* harmony import */ var core_js_modules_es_object_define_setter_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_setter_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?28a1");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_4__);
 
 
@@ -67173,7 +66982,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../helper/utils */ "./resources/js/src/app/helper/utils.js");
 /* harmony import */ var _helper_strings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../helper/strings */ "./resources/js/src/app/helper/strings.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js?28a1");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_6__);
 
 
@@ -67951,13 +67760,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_NavigationModule__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./modules/NavigationModule */ "./resources/js/src/app/store/modules/NavigationModule.js");
 /* harmony import */ var _modules_OrderReturnModule__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./modules/OrderReturnModule */ "./resources/js/src/app/store/modules/OrderReturnModule.js");
 /* harmony import */ var _modules_UserModule__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./modules/UserModule */ "./resources/js/src/app/store/modules/UserModule.js");
-/* harmony import */ var _modules_WishListModule__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./modules/WishListModule */ "./resources/js/src/app/store/modules/WishListModule.js");
-/* harmony import */ var _modules_singleItem_BaseItemModule__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./modules/singleItem/BaseItemModule */ "./resources/js/src/app/store/modules/singleItem/BaseItemModule.js");
-/* harmony import */ var _plugins_EventPropagationPlugin__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./plugins/EventPropagationPlugin */ "./resources/js/src/app/store/plugins/EventPropagationPlugin.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
+/* harmony import */ var _modules_singleItem_BaseItemModule__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./modules/singleItem/BaseItemModule */ "./resources/js/src/app/store/modules/singleItem/BaseItemModule.js");
+/* harmony import */ var _plugins_EventPropagationPlugin__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./plugins/EventPropagationPlugin */ "./resources/js/src/app/store/plugins/EventPropagationPlugin.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var _services_UrlService__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../services/UrlService */ "./resources/js/src/app/services/UrlService.js");
+/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
 
 
@@ -67974,7 +67782,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
+ // import wishList from "./modules/WishListModule";
 
 
 
@@ -67999,7 +67807,7 @@ function createStore() {
       consents: _modules_ConsentModule__WEBPACK_IMPORTED_MODULE_6__["default"],
       contactForm: _modules_ContactFormModule__WEBPACK_IMPORTED_MODULE_7__["default"],
       itemList: _modules_ItemListModule__WEBPACK_IMPORTED_MODULE_8__["default"],
-      items: _modules_singleItem_BaseItemModule__WEBPACK_IMPORTED_MODULE_18__["default"],
+      items: _modules_singleItem_BaseItemModule__WEBPACK_IMPORTED_MODULE_17__["default"],
       itemSearch: _modules_ItemSearchModule__WEBPACK_IMPORTED_MODULE_9__["default"],
       lastSeen: _modules_LastSeenModule__WEBPACK_IMPORTED_MODULE_10__["default"],
       lazyComponent: _modules_LazyComponentModule__WEBPACK_IMPORTED_MODULE_11__["default"],
@@ -68007,10 +67815,10 @@ function createStore() {
       localization: _modules_LocalizationModule__WEBPACK_IMPORTED_MODULE_13__["default"],
       navigation: _modules_NavigationModule__WEBPACK_IMPORTED_MODULE_14__["default"],
       orderReturn: _modules_OrderReturnModule__WEBPACK_IMPORTED_MODULE_15__["default"],
-      user: _modules_UserModule__WEBPACK_IMPORTED_MODULE_16__["default"],
-      wishList: _modules_WishListModule__WEBPACK_IMPORTED_MODULE_17__["default"]
+      user: _modules_UserModule__WEBPACK_IMPORTED_MODULE_16__["default"] // wishList
+
     },
-    plugins: !App.isSSR ? [_plugins_EventPropagationPlugin__WEBPACK_IMPORTED_MODULE_19__["default"]] : []
+    plugins: !App.isSSR ? [_plugins_EventPropagationPlugin__WEBPACK_IMPORTED_MODULE_18__["default"]] : []
   });
   return store;
 } // TODO: add code comment
@@ -68033,8 +67841,7 @@ function initClientListeners(store) {
   _services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].listen("AfterBasketChanged", function (data) {
     store.commit("setBasket", data.basket);
     store.commit("setShowNetPrices", data.showNetPrices);
-    store.commit("updateBasketItems", data.basketItems);
-    store.commit("setWishListIds", data.basket.itemWishListIds);
+    store.commit("updateBasketItems", data.basketItems); // store.commit("setWishListIds", data.basket.itemWishListIds);
   });
   _services_ApiService__WEBPACK_IMPORTED_MODULE_2__["default"].listen("AfterBasketItemAdd", function (data) {
     store.commit("addBasketItem", data.basketItems);
@@ -68067,7 +67874,7 @@ function initClientStore(store) {
 
 
   document.addEventListener("DOMContentLoaded", function () {
-    var urlParams = Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_21__["getUrlParams"])();
+    var urlParams = Object(_services_UrlService__WEBPACK_IMPORTED_MODULE_20__["getUrlParams"])();
 
     if (store.getters.currentItemVariation) {
       urlParams.lastSeenVariationId = store.getters.currentItemVariation.variation.id;
@@ -68077,14 +67884,13 @@ function initClientStore(store) {
       cache: false,
       keepOriginalResponse: true
     }).done(function (response) {
-      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_20__["isDefined"])(response.data.customer)) {
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_19__["isDefined"])(response.data.customer)) {
         store.commit("setUserData", response.data.customer);
       }
 
       if (!response.events.hasOwnProperty("AfterBasketChanged")) {
         // only set basket if not change event is emitted. In this case, the basket will be set by the event listener.
-        store.commit("setBasket", response.data.basket);
-        store.commit("setWishListIds", response.data.basket.itemWishListIds);
+        store.commit("setBasket", response.data.basket); // store.commit("setWishListIds", response.data.basket.itemWishListIds);
       }
 
       store.commit("setIsBasketInitiallyLoaded");
@@ -68093,7 +67899,7 @@ function initClientStore(store) {
       console.log(error, status);
 
       if (status > 0) {
-        _services_NotificationService__WEBPACK_IMPORTED_MODULE_23__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_22__["default"].translate("Ceres::Template.basketOops")).closeAfter(10000);
+        _services_NotificationService__WEBPACK_IMPORTED_MODULE_22__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_21__["default"].translate("Ceres::Template.basketOops")).closeAfter(10000);
       }
     });
   });
@@ -70979,172 +70785,6 @@ var getters = {
 /* harmony default export */ __webpack_exports__["default"] = ({
   state: state,
   mutations: mutations,
-  getters: getters
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/store/modules/WishListModule.js":
-/*!**************************************************************!*\
-  !*** ./resources/js/src/app/store/modules/WishListModule.js ***!
-  \**************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.map.js */ "./node_modules/core-js/modules/es.array.map.js");
-/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.number.constructor.js */ "./node_modules/core-js/modules/es.number.constructor.js");
-/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_splice_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.splice.js */ "./node_modules/core-js/modules/es.array.splice.js");
-/* harmony import */ var core_js_modules_es_array_splice_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_splice_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.promise.js */ "./node_modules/core-js/modules/es.promise.js");
-/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5__);
-
-
-
-
-
-
-
-var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
-
-var state = function state() {
-  return {
-    wishListIds: [],
-    wishListItems: [],
-    inactiveVariationIds: [],
-    isWishListInitiallyLoading: false,
-    isLoading: false
-  };
-};
-
-var mutations = {
-  setWishListItems: function setWishListItems(state, wishListItems) {
-    state.wishListItems = wishListItems;
-  },
-  setWishListIds: function setWishListIds(state, wishListIds) {
-    state.wishListIds = wishListIds.map(Number);
-  },
-  setInactiveVariationIds: function setInactiveVariationIds(state, inactiveVariationIds) {
-    state.inactiveVariationIds = inactiveVariationIds === null || inactiveVariationIds === void 0 ? void 0 : inactiveVariationIds.map(Number);
-  },
-  removeWishListItem: function removeWishListItem(state, wishListItem) {
-    state.wishListItems = state.wishListItems.filter(function (item) {
-      return item !== wishListItem;
-    });
-  },
-  removeWishListId: function removeWishListId(state, id) {
-    state.wishListIds = state.wishListIds.filter(function (wishListId) {
-      return wishListId !== id;
-    });
-  },
-  removeInactiveVariationId: function removeInactiveVariationId(state, id) {
-    state.inactiveVariationIds = state.inactiveVariationIds.filter(function (inactiveVarationId) {
-      return inactiveVarationId !== id;
-    });
-  },
-  addWishListItemToIndex: function addWishListItemToIndex(state, wishListItem, index) {
-    state.wishListItems.splice(index, 0, wishListItem);
-  },
-  addWishListId: function addWishListId(state, id) {
-    state.wishListIds.push(id);
-  },
-  setIsWishListInitiallyLoading: function setIsWishListInitiallyLoading(state) {
-    state.isWishListInitiallyLoading = true;
-  },
-  setIsWishListLoading: function setIsWishListLoading(state, isLoading) {
-    state.isLoading = !!isLoading;
-  }
-};
-var actions = {
-  initWishListItems: function initWishListItems(_ref) {
-    var commit = _ref.commit,
-        state = _ref.state;
-    return new Promise(function (resolve, reject) {
-      if (!state.isWishListInitiallyLoading) {
-        commit("setIsWishListInitiallyLoading");
-        commit("setIsWishListLoading", true);
-        ApiService.get("/rest/io/itemWishList").done(function (response) {
-          commit("setInactiveVariationIds", response.inactiveVariationIds);
-          commit("setWishListItems", response.documents);
-          resolve(response);
-        }).fail(function (error) {
-          reject(error);
-        }).always(function () {
-          commit("setIsWishListLoading", false);
-        });
-      } else {
-        resolve(state.wishListItems);
-      }
-    });
-  },
-  removeInactiveWishListItem: function removeInactiveWishListItem(_ref2, _ref3) {
-    var commit = _ref2.commit;
-    var id = _ref3.id;
-    return new Promise(function (resolve, reject) {
-      ApiService.del("/rest/io/itemWishList/" + id).done(function (data) {
-        commit("removeWishListId", id);
-        commit("removeInactiveVariationId", id);
-        resolve(data);
-      }).fail(function (error) {
-        reject(error);
-      }).always(function () {
-        commit("setIsWishListLoading", false);
-      });
-    });
-  },
-  removeWishListItem: function removeWishListItem(_ref4, _ref5) {
-    var commit = _ref4.commit;
-    var id = _ref5.id,
-        wishListItem = _ref5.wishListItem,
-        index = _ref5.index;
-    return new Promise(function (resolve, reject) {
-      if (wishListItem) {
-        commit("removeWishListItem", wishListItem);
-      }
-
-      ApiService.del("/rest/io/itemWishList/" + id).done(function (data) {
-        commit("removeWishListId", id);
-        resolve(data);
-      }).fail(function (error) {
-        if (index) {
-          commit("addWishListItemToIndex", wishListItem, index);
-        }
-
-        reject(error);
-      });
-    });
-  },
-  addToWishList: function addToWishList(_ref6, id) {
-    var commit = _ref6.commit;
-    return new Promise(function (resolve, reject) {
-      commit("addWishListId", id);
-      ApiService.post("/rest/io/itemWishList", {
-        variationId: id
-      }).done(function (data) {
-        resolve(data);
-      }).fail(function (error) {
-        commit("removeWishListId", id);
-        reject(error);
-      });
-    });
-  }
-};
-var getters = {
-  wishListCount: function wishListCount(state) {
-    return state.wishListIds.length;
-  }
-};
-/* harmony default export */ __webpack_exports__["default"] = ({
-  state: state,
-  mutations: mutations,
-  actions: actions,
   getters: getters
 });
 

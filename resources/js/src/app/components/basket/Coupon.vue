@@ -1,5 +1,5 @@
 <template>
-    <div class="cmp">
+    <div class="cmp bkr-cc">
         <p v-if="isCheckoutReadonly && !!$translate('Ceres::Template.couponReadonlyInfoText')">
             {{ couponReadonlyInfoText }}
         </p>
@@ -15,7 +15,7 @@
             >
             <span class="input-group-btn">
                 <button
-                    class="btn btn-medium btn-primary btn-appearance"
+                    class="btn btn-medium btn-bkm btn-appearance"
                     type="button"
                     @click="redeemCode()"
                     :disabled="waiting || isCheckoutReadonly" v-if="!disabled"

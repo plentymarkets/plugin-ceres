@@ -56,6 +56,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -211,7 +214,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "login-pwd-reset" }, [
+  return _c("div", { staticClass: "login-pwd-reset bkr-cc" }, [
     _c(
       "form",
       {
@@ -220,6 +223,16 @@ var render = function() {
       },
       [
         _c("div", { class: { "modal-body": _vm.modalElement } }, [
+          _vm.modalElement
+            ? _c("div", { staticClass: "h4" }, [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.$translate("Ceres::Template.login")) +
+                    "\n            "
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-12" }, [
               _c(
@@ -325,39 +338,45 @@ var render = function() {
                 )
               ])
             ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            class: {
-              "modal-footer justify-content-between": _vm.modalElement,
-              row: !_vm.modalElement
-            }
-          },
-          [
-            _c("div", { class: { "col-7 col-sm-4": !_vm.modalElement } }, [
-              _c(
-                "a",
-                {
-                  staticClass: "small text-appearance",
-                  attrs: { href: "javascript:void(0)" },
-                  on: { click: _vm.showResetPwdView }
-                },
-                [
-                  _vm._v(
-                    _vm._s(
-                      _vm.$translate("Ceres::Template.loginForgotPassword")
-                    ) + "?"
-                  )
-                ]
-              )
-            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row mt-2" }, [
+            _c(
+              "div",
+              {
+                class: {
+                  "col-7 col-sm-4": !_vm.modalElement,
+                  "col-12": _vm.modalElement
+                }
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "small text-appearance",
+                    attrs: { href: "javascript:void(0)" },
+                    on: { click: _vm.showResetPwdView }
+                  },
+                  [
+                    _vm._v(
+                      _vm._s(
+                        _vm.$translate("Ceres::Template.loginForgotPassword")
+                      ) + "?"
+                    )
+                  ]
+                )
+              ]
+            ),
             _vm._v(" "),
             _c(
               "div",
-              { class: { "col-5 col-sm-8 text-sm-right": !_vm.modalElement } },
+              {
+                staticClass: "mt-3",
+                class: {
+                  "col-5 col-sm-8 text-sm-right": !_vm.modalElement,
+                  "col-12": _vm.modalElement
+                }
+              },
               [
                 _vm._t("extend-overlay-buttons"),
                 _vm._v(" "),
@@ -382,9 +401,9 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                    " +
+                      "\n                        " +
                         _vm._s(_vm.$translate("Ceres::Template.login")) +
-                        "\n                    "
+                        "\n                        "
                     ),
                     _c("icon", {
                       attrs: { icon: "user", loading: _vm.isDisabled }
@@ -395,8 +414,8 @@ var render = function() {
               ],
               2
             )
-          ]
-        )
+          ])
+        ])
       ]
     )
   ])

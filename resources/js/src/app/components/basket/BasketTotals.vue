@@ -1,207 +1,149 @@
 <template>
-    <div class="cmp-totals">
-        <div class="h3">{{ $translate("Ceres::Template.basketSum") }}</div>
-        <div class="component-loading with-icon refreshing" :class="{ 'is-loading': isBasketLoading }">
+    <div class="bkr-cc cmp cmp-totals basketTotals" :class="{preview : $attrs.preview}">
+        <div class="h3" v-if="!$attrs.preview">{{ $translate("Ceres::Template.basketSum") }}</div>
+        <button v-if="!$attrs.preview" class="btn btn-xs btn-default" onclick="$('.net').slideToggle();">Details</button>
+
+        <div class="component-loading with-icon refreshing split-totals-height" :class="{ 'isLoading': isBasketLoading }">
             <dl>
                 <slot name="before-item-sum"></slot>
 
-                 <!--  AdditionalCosts with Tax -->
+                <template v-if="visibleFields.includes('basketValueNet')">
+                    <div class="net">
+                        <dt>
+                            {{ $translate("Ceres::Template.basketValue") }} ({{ $translate("Ceres::Template.basketNet") }})
+                        </dt><!--
+                        --><dd>
+                            {{ calculateBaseValue(basket.itemSumNet, basket.basketRebate) | currency }}
+                        </dd>
+                    </div>
+                </template>
+                <template v-if="visibleFields.includes('basketValueGross')">
+                    <dt>
+                        {{ $translate("Ceres::Template.basketValue") }} ({{ $translate("Ceres::Template.basketGross") }})
+                    </dt><!--
+                    --><dd>
+                        {{ calculateBaseValue(basket.itemSum, basket.basketRebate)| currency  }}
+                    </dd>
+                </template>
+            
+                <!-- AdditionalCosts with Tax -->
                 <template v-if="(visibleFields.includes('additionalCosts') || visibleFields.includes('basket.additional_costs')) && displayedProperties.length">
                     <template v-for="property in displayedProperties">
-                        <dt :class="{ 'font-weight-bold': showNetPrices }" :key="'property-name-' + property.propertyId" data-testing="additionalcost-with-tax">
-                            {{ property.name }}
-                        </dt><!--
-                        --><dd :class="{ 'font-weight-bold': showNetPrices }" :key="'property-price-' + property.propertyId">
-                            {{ property.price | currency }}
-                        </dd>
+                    <dt class="muted-properties" :class="{ 'font-weight-bold': showNetPrices }" :key="'property-name-' + property.propertyId" data-testing="additionalcost-with-tax">
+                        &nbsp;<i>davon {{ property.name }}</i>
+                    </dt><!-- --><dd class="muted-properties" :class="{ 'font-weight-bold': showNetPrices }" :key="'property-price-' + property.propertyId">
+                        <i>{{ property.price | currency }}</i>
+                    </dd>
                     </template>
                 </template>
                 <!-- AdditionalCosts with Tax -->
 
-                <!-- Basket value (net) -->
-                <template v-if="visibleFields.includes('basketValueNet') || visibleFields.includes('basket.value_of_items_net')">
-                    <dt :class="{ 'font-weight-bold': showNetPrices }">
-                        {{ $translate("Ceres::Template.basketValue") }} {{ $translate("Ceres::Template.basketNet") }}
-                    </dt><!--
-                    --><dd :class="{ 'font-weight-bold': showNetPrices }" data-testing="item-sum-net">
-                        {{ calculateBaseValue(basket.itemSumNet, basket.basketRebate) | currency }}
-                    </dd>
-                </template>
-                <!-- Basket value (net) -->
-
-                <!-- Basket value (gross) -->
-                <template v-if="visibleFields.includes('basketValueGross') || visibleFields.includes('basket.value_of_items_gross')">
-                    <dt :class="{ 'font-weight-bold': !showNetPrices }">
-                        {{ $translate("Ceres::Template.basketValue") }} {{ $translate("Ceres::Template.basketGross") }}
-                    </dt><!--
-                    --><dd :class="{ 'font-weight-bold': !showNetPrices }" data-testing="item-sum">
-                        {{ calculateBaseValue(basket.itemSum, basket.basketRebate)| currency  }}
-                    </dd>
-                </template>
-                <!-- Basket value (gross) -->
-
-                <!-- Rebate -->
-                <template v-if="(visibleFields.includes('rebate') || visibleFields.includes('basket.rebate')) && basket.basketRebate">
+                <template v-if="visibleFields.includes('rebate') && basket.basketRebate">
                     <dt class="rebate-hint">
                         {{ $translate("Ceres::Template.basketRebate") }}
                     </dt><!--
                 --><dd class="rebate-hint" v-if="!showNetPrices">
-                        {{ $translate("Ceres::Template.basketRebateSign") }}{{calculateBaseValue(basket.itemSum, basket.basketRebate) - basket.itemSum | currency }}
+                        {{ calculateBaseValue(basket.itemSum, basket.basketRebate) - basket.itemSum | currency  }}
                     </dd><!--
                 --><dd class="rebate-hint" v-else>
-                        {{ $translate("Ceres::Template.basketRebateSign") }}{{ calculateBaseValue(basket.itemSumNet, basket.basketRebate) - basket.itemSumNet | currency  }}
+                        {{ calculateBaseValue(basket.itemSumNet, basket.basketRebate) - basket.itemSumNet | currency  }}
                     </dd>
-                    <dt :class="{ 'font-weight-bold': showNetPrices }">
-                        {{ $translate("Ceres::Template.basketSubTotal") }} {{ $translate("Ceres::Template.basketNet") }}
+                    <dt>
+                        {{ $translate("Ceres::Template.basketSubTotal") }} ({{ $translate("Ceres::Template.basketNet") }})
                     </dt><!--
-                --><dd :class="{ 'font-weight-bold': showNetPrices }">
+                --><dd>
                         {{ basket.itemSumNet | currency }}
                     </dd>
-                    <dt :class="{ 'font-weight-bold': !showNetPrices }">
-                        {{ $translate("Ceres::Template.basketSubTotal") }} {{ $translate("Ceres::Template.basketGross") }}
+                    <dt>
+                        {{ $translate("Ceres::Template.basketSubTotal") }} ({{ $translate("Ceres::Template.basketGross") }})
                     </dt><!--
-                --><dd :class="{ 'font-weight-bold': !showNetPrices }">
+                --><dd>
                         {{ basket.itemSum | currency }}
                     </dd>
                 </template>
-                <!-- Rebate -->
-
-
                 <slot name="after-item-sum"></slot>
 
                 <slot name="before-shipping-costs"></slot>
-
-                <!-- Shipping (net) -->
-                <template v-if="visibleFields.includes('shippingCostsNet') || visibleFields.includes('basket.shipping_costs_net')">
-                    <dt :class="{ 'font-weight-bold': showNetPrices }">
-                        {{ $translate("Ceres::Template.basketShippingCosts") }} {{ $translate("Ceres::Template.basketNet") }}
+                <template v-if="visibleFields.includes('shippingCostsNet')">
+                    <div class="net">
+                    <dt>
+                        {{ $translate("Ceres::Template.basketShippingCosts") }} ({{ $translate("Ceres::Template.basketNet") }})
                     </dt><!--
-                    --><dd :class="{ 'font-weight-bold': showNetPrices }" data-testing="shipping-amount-net">
+                    --><dd>
                         {{ basket.shippingAmountNet | currency }}
                     </dd>
+                    </div>
                 </template>
-                <!-- Shipping (net) -->
-
-                <!-- Shipping (gross) -->
-                <template v-if="visibleFields.includes('shippingCostsGross') || visibleFields.includes('basket.shipping_costs_gross')">
-                    <dt :class="{ 'font-weight-bold': !showNetPrices }">
-                        {{ $translate("Ceres::Template.basketShippingCosts") }} {{ $translate("Ceres::Template.basketGross") }}
+                <template v-if="visibleFields.includes('shippingCostsGross')">
+                    <dt>
+                        {{ $translate("Ceres::Template.basketShippingCosts") }} ({{ $translate("Ceres::Template.basketGross") }})
                     </dt><!--
-                    --><dd :class="{ 'font-weight-bold': !showNetPrices }" data-testing="shipping-amount">
+                    --><dd>
                         {{ basket.shippingAmount | currency }}
                     </dd>
                 </template>
-                <!-- Shipping (gross) -->
-
-                <slot name="after-shipping-costs"></slot>
-
-                <!-- Coupon -->
-                <template v-if="(visibleFields.includes('promotionCoupon') || visibleFields.includes('basket.promotion_coupon')) && basket.couponCode && basket.couponCampaignType === 'promotion'">
-                    <dt class="font-weight-bold">
+               <slot name="after-shipping-costs"></slot>
+                <template v-if="visibleFields.includes('promotionCoupon') && basket.couponCode && basket.couponCampaignType === 'promotion'">
+                <hr>
+                    <dt>
                         {{ $translate("Ceres::Template.basketCoupon") }}
                     </dt><!--
-                --><dd class="font-weight-bold" data-testing="promotion-coupon">
+                --><dd>
                         {{ basket.couponDiscount | currency }}
                     </dd>
+                </hr>
                 </template>
-                <!-- Coupon -->
-
-                <hr v-if="visibleFields.includes('subAmount') || visibleFields.includes('basket.order_total_net') || visibleFields.includes('vats') || visibleFields.includes('basket.vat')">
-                <slot name="before-total-sum"></slot>
-
-                <!-- Subamount (net) -->
-                <template v-if="visibleFields.includes('subAmount') || visibleFields.includes('basket.order_total_net')">
-                    <dt :class="{ 'font-weight-bold': showNetPrices }">
-                        {{ $translate("Ceres::Template.basketSubAmount" ) }} {{ $translate("Ceres::Template.basketNet") }}
-                    </dt><!--
-                    --><dd :class="{ 'font-weight-bold': showNetPrices }" data-testing="basket-sub-amount">
-                        {{ basket.subAmount | currency }}
-                    </dd>
-                </template>
-                <!-- Subamount (net) -->
-
-                <slot name="before-vat"></slot>
-
-                <!-- VAT -->
-                <template v-if="visibleFields.includes('vats') || visibleFields.includes('basket.vat')" class="vatTotals" v-for="totalVat in basket.totalVats">
-                    <dt>
-                        {{ $translate("Ceres::Template.basketVAT") }} {{ totalVat.vatValue }}%
-                    </dt><!--
-                    --><dd data-testing="vat-amount">
-                        {{ totalVat.vatAmount | currency }}
-                    </dd>
-                </template>
-                <!-- VAT -->
-
-                <slot name="after-vat"></slot>
-
-                <!-- AdditionalCosts or order properties without tax -->
-                <template v-if="(visibleFields.includes('additionalCosts') || visibleFields.includes('basket.additional_costs')) && displayedPropertiesWithoutTax.length">
-                    <template v-for="property in displayedPropertiesWithoutTax">
-                        <dt :class="{ 'font-weight-bold': showNetPrices }" :key="'property-name-' + property.propertyId" data-testing="additionalcost-without-tax">
-                            {{ property.name }}
-                        </dt><!--
-                        --><dd :class="{ 'font-weight-bold': showNetPrices }" :key="'property-price-' + property.propertyId">
-                            {{ property.price | currency }}
-                        </dd>
-                    </template>
-                </template>
-                <!-- AdditionalCosts or order properties without tax -->
-
-                <div class="totalSum">
+                <div class="net">
                     <hr>
-
-                    <!-- Total sum (net) -->
-                    <template v-if="visibleFields.includes('totalSumNet') || visibleFields.includes('basket.order_total_net')">
-                        <dt :class="{ 'font-weight-bold': showNetPrices }">
-                            {{ $translate("Ceres::Template.basketTotalSum") }} {{ $translate("Ceres::Template.basketNet") }}
+                    <slot name="before-total-sum"></slot>
+                    <template v-if="visibleFields.includes('totalSumNet')">
+                        <dt>
+                            {{ $translate("Ceres::Template.basketTotalSum") }} ({{ $translate("Ceres::Template.basketNet") }})
                         </dt><!--
-                        --><dd :class="{ 'font-weight-bold': showNetPrices }" data-testing="basket-amount-net">
+                        --><dd>
                             {{ basket.basketAmountNet | currency }}
                         </dd>
                     </template>
-                    <!-- Total sum (net) -->
+                     <slot name="before-vat"></slot>
 
-                    <!-- Total sum (gross) -->
-                    <template v-if="visibleFields.includes('totalSumGross') || visibleFields.includes('basket.order_total_gross')">
-                        <dt :class="{ 'font-weight-bold': !showNetPrices }">
-                            {{ $translate("Ceres::Template.basketTotalSum") }} {{ $translate("Ceres::Template.basketGross") }}
+                    <div v-if="visibleFields.includes('vats')" class="vatTotals" v-for="totalVat in basket.totalVats">
+                        <dt>
+                            {{ $translate("Ceres::Template.basketVAT") }} {{ totalVat.vatValue }}%
                         </dt><!--
-                        --><dd :class="{ 'font-weight-bold': !showNetPrices }" data-testing="basket-amount">
+                        --><dd>
+                            {{ totalVat.vatAmount | currency }}
+                        </dd>
+                    </div>
+                </div>
+                <div class="totalSum">
+                    <hr>
+                    <template v-if="visibleFields.includes('totalSumGross')">
+                        <dt>
+                            {{ $translate("Ceres::Template.basketTotalSum") }} ({{ $translate("Ceres::Template.basketGross") }})
+                        </dt><!--
+                        --><dd>
                             {{ basket.basketAmount | currency }}
                         </dd>
                     </template>
-                    <!-- Total sum (gross) -->
-
-                    <!-- Coupon -->
-                    <template v-if="(visibleFields.includes('salesCoupon') || visibleFields.includes('basket.sales_coupon')) && basket.couponCode && basket.couponCampaignType === 'sales'">
-                        <dt class="font-weight-bold">
-                            {{ $translate("Ceres::Template.basketCoupon") }}
+                    <template v-if="visibleFields.includes('salesCoupon') && basket.couponCode && basket.couponCampaignType === 'sales'">
+                        <dt>
+                            {{ $translate("Ceres::Template.basketCoupon") }}</strong>
                         </dt><!--
-                     --><dd class="font-weight-bold" data-testing="sales-coupon">
+                        --><dd>
                             {{ basket.couponDiscount | currency }}
                         </dd>
                     </template>
-                    <!-- Coupon -->
-
-                    <!-- Coupon open amount -->
-                    <template v-if="(visibleFields.includes('openAmount') || visibleFields.includes('basket.open_amount')) && basket.couponCampaignType === 'sales'">
-                        <dt class="font-weight-bold">
+                    <template v-if="visibleFields.includes('openAmount') && basket.couponCampaignType === 'sales'">
+                        <dt>
                             {{ $translate("Ceres::Template.basketOpenAmount") }}
                         </dt><!--
-                    --><dd class="font-weight-bold" data-testing="open-amount">
+                    --><dd>
                             {{ basket.openAmount | currency }}
                         </dd>
                     </template>
-                    <!-- Coupon open amount -->
                 </div>
-
-                <slot name="after-total-sum"></slot>
+                  <slot name="after-total-sum"></slot>
             </dl>
-        </div>
-
-        <div v-if="basket.isExportDelivery && deliveryExportTranslation" class="alert alert-info w-100">
-            {{ deliveryExportTranslation }}
         </div>
     </div>
 </template>

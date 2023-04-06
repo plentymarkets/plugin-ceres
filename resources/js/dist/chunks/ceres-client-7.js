@@ -40,8 +40,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -165,15 +163,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -575,6 +564,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "bkr-cc" },
     [
       _c(
         "div",
@@ -663,7 +653,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "basket-list-item py-3" },
+    {
+      staticClass: "basket-list-item py-3 bkr-cc",
+      class: "item_" + _vm.basketItem.variation.data.item.id
+    },
     [
       _vm._t("before-basket-item"),
       _vm._v(" "),
@@ -692,8 +685,7 @@ var render = function() {
                         "picture-class": "d-block mw-100 mh-100",
                         "image-url": _vm.image,
                         alt: _vm.altText,
-                        title: _vm.itemName,
-                        "data-testing": "basket-item-img"
+                        title: _vm.itemName
                       }
                     })
                   : _vm._e()
@@ -707,7 +699,7 @@ var render = function() {
             { staticClass: "meta-container-wrapper" },
             [
               _c("div", { staticClass: "meta-container-wrapper-inner" }, [
-                _c("div", { staticClass: "meta-container" }, [
+                _c("div", { staticClass: "meta-container d-flex" }, [
                   _c(
                     "div",
                     { staticClass: "position-relative w-100" },
@@ -716,43 +708,35 @@ var render = function() {
                         "a",
                         {
                           staticClass:
-                            "item-name text-primary text-appearance small font-weight-bold text-break",
+                            "item-name text-primary text-appearance small font-weight-bold",
                           attrs: {
                             href: _vm._f("itemURL")(
                               _vm.basketItem.variation.data
-                            ),
-                            "data-testing": "basket-item-name"
+                            )
                           }
                         },
                         [
                           _vm._v(
-                            "\n                            " +
+                            "\n                                " +
                               _vm._s(
                                 _vm._f("itemName")(
                                   _vm.basketItem.variation.data
                                 )
                               ) +
-                              "\n                        "
+                              "\n                            "
                           )
                         ]
                       ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "item-base-price small" }, [
-                        _vm._v(
-                          "\n                            " +
-                            _vm._s(_vm._f("currency")(_vm.unitPrice)) +
-                            "\n                        "
-                        )
+                      _c("div", [
+                        _vm.basketItem.variation.data.item.id == 500
+                          ? _c("strong", [_vm._v("Preis pro Baum: ")])
+                          : _c("strong", [_vm._v("Einzelpreis: ")]),
+                        _vm._v(" "),
+                        _c("span", [
+                          _vm._v(_vm._s(_vm._f("currency")(_vm.unitPrice)))
+                        ])
                       ]),
-                      _vm._v(" "),
-                      _c("item-bundle", {
-                        attrs: {
-                          "bundle-type":
-                            _vm.basketItem.variation.data.variation.bundleType,
-                          "bundle-components":
-                            _vm.basketItem.variation.data.bundleComponents
-                        }
-                      }),
                       _vm._v(" "),
                       !(
                         _vm.basketItem.variation.data.unit.unitOfMeasurement ===
@@ -760,44 +744,48 @@ var render = function() {
                         _vm.basketItem.variation.data.unit.content === 1
                       ) &&
                       _vm.basketItem.variation.data.variation.mayShowUnitPrice
-                        ? _c("div", { staticClass: "text-muted small" }, [
-                            _c("div", [
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(_vm.basePrice) +
-                                  "\n                            "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", [
-                              _c("strong", [
+                        ? _c(
+                            "div",
+                            { staticClass: "text-muted small smallContent" },
+                            [
+                              _c("div", [
+                                _c("strong", [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.basketContent"
+                                      )
+                                    ) + ": "
+                                  )
+                                ]),
                                 _vm._v(
-                                  _vm._s(
-                                    _vm.$translate(
-                                      "Ceres::Template.basketContent"
-                                    )
-                                  ) + ": "
+                                  "\n                                  " +
+                                    _vm._s(
+                                      _vm.basketItem.variation.data.unit.content
+                                    ) +
+                                    " " +
+                                    _vm._s(
+                                      _vm.basketItem.variation.data.unit.names
+                                        .name
+                                    ) +
+                                    "\n                              "
                                 )
                               ]),
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(
-                                    _vm.basketItem.variation.data.unit.content
-                                  ) +
-                                  " " +
-                                  _vm._s(
-                                    _vm.basketItem.variation.data.unit.names
-                                      .name
-                                  ) +
-                                  "\n                            "
-                              )
-                            ])
-                          ])
+                              _vm._v(" "),
+                              _c("div", [
+                                _vm._v(
+                                  "\n                                  " +
+                                    _vm._s(_vm.basePrice) +
+                                    "\n                              "
+                                )
+                              ])
+                            ]
+                          )
                         : _vm._e(),
                       _vm._v(" "),
                       _vm.basketItem.inputLength > 0 ||
                       _vm.basketItem.inputWidth > 0
-                        ? _c("div", { staticClass: "small" }, [
+                        ? _c("div", { staticClass: "small smallUnit" }, [
                             _c("div", [
                               _c("strong", [
                                 _vm._v(
@@ -812,150 +800,181 @@ var render = function() {
                                 )
                               ]),
                               _vm._v(
-                                "\n                                " +
+                                "\n                                  " +
                                   _vm._s(_vm._f("inputUnit")(_vm.basketItem)) +
-                                  "\n                            "
+                                  "\n                              "
                               )
                             ])
                           ])
                         : _vm._e(),
                       _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "small" },
-                        _vm._l(
-                          _vm.basketItem.variation.data.attributes,
-                          function(attribute) {
-                            return _c("div", [
-                              _c("strong", [
-                                _vm._v(
-                                  _vm._s(attribute.attribute.names.name) + ": "
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("span", [
-                                _vm._v(_vm._s(attribute.value.names.name))
-                              ])
-                            ])
-                          }
-                        ),
-                        0
-                      ),
+                      _vm.basketItem.variation.data.item.id == 500
+                        ? _c("div", { staticClass: "small smallUnit" }, [
+                            _c("strong", [_vm._v("Wir sagen danke!")]),
+                            _vm._v(
+                              " Mit Ihrer Unterstützung pflanzen wir gemeinsam mit HessenForst einen Baum im Taunus. Dieser bindet im Schnitt 12,5 kg CO"
+                            ),
+                            _c("sub", [_vm._v("2")]),
+                            _vm._v(" pro Jahr.\n                          ")
+                          ])
+                        : _vm._e(),
                       _vm._v(" "),
                       _c(
                         "div",
-                        { staticClass: "text-muted small" },
+                        { staticClass: "small smallAttr" },
                         [
-                          _vm._l(
-                            _vm.basketItem.variation.data.variationProperties,
-                            function(propertyGroup) {
-                              return _vm._l(propertyGroup.properties, function(
-                                property
-                              ) {
-                                return _c(
-                                  "div",
-                                  [
-                                    propertyGroup.name
+                          _vm.basketItem.variation.data.item.id == 27645
+                            ? _vm._l(
+                                _vm.basketItem.variation.data.attributes,
+                                function(attribute) {
+                                  return _c("div", { staticClass: "attrBed" }, [
+                                    attribute.attributeId == 3
                                       ? _c("strong", [
-                                          _vm._v(
-                                            _vm._s(propertyGroup.name) + ": "
-                                          )
+                                          _vm._v("Farbe oberes Bett: ")
+                                        ])
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    attribute.attributeId == 9
+                                      ? _c("strong", [
+                                          _vm._v("Farbe unteres Bett: ")
                                         ])
                                       : _vm._e(),
                                     _vm._v(" "),
                                     _c("span", [
-                                      _vm._v(_vm._s(property.names.name))
-                                    ]),
-                                    _vm._v(" "),
-                                    property.cast === "file"
-                                      ? _c("span", [
-                                          _c("a", {
-                                            attrs: {
-                                              href: _vm._f("propertyFileUrl")(
-                                                property.values.value
-                                              ),
-                                              target: "_blank"
-                                            },
-                                            domProps: {
-                                              innerHTML: _vm._s(
-                                                property.values.value
-                                              )
-                                            }
-                                          })
+                                      _vm._v(_vm._s(attribute.value.names.name))
+                                    ])
+                                  ])
+                                }
+                              )
+                            : _vm.basketItem.variation.data.item.id == 28013
+                            ? _vm._l(
+                                _vm.basketItem.variation.data.attributes,
+                                function(attribute) {
+                                  return _c("div", { staticClass: "attrBed" }, [
+                                    attribute.attributeId == 3
+                                      ? _c("strong", [_vm._v("Farbe Motiv: ")])
+                                      : attribute.attributeId == 9
+                                      ? _c("strong", [
+                                          _vm._v("Farbe Garderobe: ")
                                         ])
-                                      : property.cast === "multiSelection" &&
-                                        property.values[0] !== undefined
-                                      ? [
-                                          _c(
-                                            "ul",
-                                            { staticClass: "pl-3" },
-                                            _vm._l(property.values, function(
-                                              multiSelectProperty
-                                            ) {
-                                              return _c("li", [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    multiSelectProperty.value
-                                                  )
-                                                )
-                                              ])
-                                            }),
-                                            0
+                                      : _c("strong", [
+                                          _vm._v(
+                                            _vm._s(
+                                              attribute.attribute.names.name
+                                            ) + ": "
                                           )
-                                        ]
-                                      : _c("span", {
-                                          domProps: {
-                                            innerHTML: _vm._s(
-                                              property.values.value
+                                        ]),
+                                    _vm._v(" "),
+                                    _c("span", [
+                                      _vm._v(_vm._s(attribute.value.names.name))
+                                    ])
+                                  ])
+                                }
+                              )
+                            : _vm._l(
+                                _vm.basketItem.variation.data.attributes,
+                                function(attribute) {
+                                  return _c(
+                                    "div",
+                                    { staticClass: "attrAttr" },
+                                    [
+                                      attribute.attributeId == 3 &&
+                                      _vm.basketItem.variation.data.attributes.filter(
+                                        function(attr) {
+                                          return attr.attributeId == 9
+                                        }
+                                      )[0]
+                                        ? _c("strong", [
+                                            _vm._v("Farbe Vorderseite: ")
+                                          ])
+                                        : _c("strong", [
+                                            _vm._v(
+                                              _vm._s(
+                                                attribute.attribute.names.name
+                                              ) + ": "
                                             )
-                                          }
-                                        })
-                                  ],
-                                  2
-                                )
-                              })
-                            }
-                          )
+                                          ]),
+                                      _vm._v(" "),
+                                      _c("span", [
+                                        _vm._v(
+                                          _vm._s(attribute.value.names.name)
+                                        )
+                                      ])
+                                    ]
+                                  )
+                                }
+                              )
                         ],
                         2
-                      )
-                    ],
-                    1
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "basket-item-container-right" }, [
-                  _c(
-                    "div",
-                    { staticClass: "qty-box-container" },
-                    [
-                      _c("quantity-input", {
-                        attrs: {
-                          value: _vm.basketItem.quantity,
-                          waiting: _vm.isInputLocked || _vm.isCheckoutReadonly,
-                          min:
-                            _vm.basketItem.variation.data.variation
-                              .minimumOrderQuantity,
-                          max:
-                            _vm.basketItem.variation.data.variation
-                              .maximumOrderQuantity,
-                          interval:
-                            _vm.basketItem.variation.data.variation
-                              .intervalOrderQuantity
-                        },
-                        on: { "quantity-change": _vm.updateQuantity }
+                      ),
+                      _vm._v(" "),
+                      _c("order-property-value-list", {
+                        attrs: { "basket-item": _vm.basketItem }
                       })
                     ],
                     1
                   ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "price-box text-right ml-2 mt-1" }, [
+                  _c("div", { staticClass: "basket-item-container-right" }, [
                     _c(
                       "div",
-                      {
-                        staticClass:
-                          "item-total-price font-weight-bold text-nowrap"
-                      },
+                      { staticClass: "qty-box-container" },
+                      [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn text-danger p-0 mr-2",
+                            class: {
+                              disabled:
+                                _vm.waiting ||
+                                _vm.isBasketLoading ||
+                                _vm.isCheckoutReadonly ||
+                                _vm.waitingForDelete
+                            },
+                            attrs: {
+                              title: _vm.$translate(
+                                "Ceres::Template.basketDelete"
+                              )
+                            },
+                            on: { click: _vm.deleteItem }
+                          },
+                          [
+                            _c("icon", {
+                              staticClass: "default-float",
+                              attrs: {
+                                icon: "trash-o",
+                                loading: _vm.waitingForDelete
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("quantity-input", {
+                          attrs: {
+                            "use-appearance": true,
+                            value: _vm.basketItem.quantity,
+                            waiting:
+                              _vm.isInputLocked || _vm.isCheckoutReadonly,
+                            min:
+                              _vm.basketItem.variation.data.variation
+                                .minimumOrderQuantity,
+                            max:
+                              _vm.basketItem.variation.data.variation
+                                .maximumOrderQuantity,
+                            interval:
+                              _vm.basketItem.variation.data.variation
+                                .intervalOrderQuantity
+                          },
+                          on: { "quantity-change": _vm.updateQuantity }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "font-weight-bold my-2 text-right" },
                       [
                         _vm._v(
                           _vm._s(
@@ -967,39 +986,6 @@ var render = function() {
                           )
                         )
                       ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-sm text-danger p-0",
-                        class: {
-                          disabled:
-                            _vm.waiting ||
-                            _vm.isBasketLoading ||
-                            _vm.isCheckoutReadonly ||
-                            _vm.waitingForDelete
-                        },
-                        attrs: { "data-testing": "basket-item-delete" },
-                        on: { click: _vm.deleteItem }
-                      },
-                      [
-                        _vm._v(
-                          "\n                            " +
-                            _vm._s(
-                              _vm.$translate("Ceres::Template.basketDelete")
-                            ) +
-                            "\n                            "
-                        ),
-                        _c("icon", {
-                          staticClass: "default-float",
-                          attrs: {
-                            icon: "trash-o",
-                            loading: _vm.waitingForDelete
-                          }
-                        })
-                      ],
-                      1
                     )
                   ])
                 ])
@@ -1013,10 +999,6 @@ var render = function() {
                     }
                   })
                 : _vm._e(),
-              _vm._v(" "),
-              _c("order-property-value-list", {
-                attrs: { "basket-item": _vm.basketItem }
-              }),
               _vm._v(" "),
               _vm.showMoreInformation
                 ? _c(

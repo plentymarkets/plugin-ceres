@@ -1,35 +1,21 @@
 <template>
-    <ul class="row" v-if="!basketSelect">
-        <li class="col-6 col-sm-4 px-0" :class="{'active': basket.shippingCountryId == shippingCountry.id, 'is-disabled': isDisabled}" v-for="shippingCountry in localization.shippingCountries" :key="shippingCountry.id">
-            <a class="nav-link"
-                data-toggle="collapse"
-                href="#countrySettings"
-                @click="setShippingCountry(shippingCountry.id)"
-                :disabled="isDisabled"
-                v-tooltip="isDisabled"
-                data-boundary="window"
-                :data-title="$translate('Ceres::Template.headerChangeDeliveryCountry')"
-                :aria-label="$translate('Ceres::Template.headerChangeDeliveryCountry')">
-
-                <i :class="'flag-icon flag-icon-' + shippingCountry.isoCode2.toLowerCase()"></i>
-                {{ shippingCountry.currLangName }}
-            </a>
-        </li>
-    </ul>
-    <div v-else>
-        <div class="h3">{{ $translate('Ceres::Template.headerSelectShippingCountry') }}</div>
-        <select v-if="localization.shippingCountries.length > 1" class="form-control" @change="setShippingCountry($event.target.value)">
-            <option v-for="shippingCountry in localization.shippingCountries"
-                    :value="shippingCountry.id"
-                    :disabled="isDisabled"
-                    :selected="basket.shippingCountryId == shippingCountry.id"
-                    :key="shippingCountry.id">
-                {{shippingCountry.currLangName}}
-            </option>
-        </select>
-        <div v-else>
-            {{ getCountryName(localization.shippingCountryId) }}
-        </div>
+    <div class="bkr-cc w-100">
+            <div class="input-unit" v-if="localization.shippingCountries.length > 1" >
+                <select class="custom-select form-control" @change="setShippingCountry($event.target.value)">
+                    <option v-for="shippingCountry in localization.shippingCountries"
+                            :value="shippingCountry.id"
+                            :class="{ 'is-disabled': isDisabled }"
+                            :disabled="isDisabled"
+                            v-tooltip="isDisabled"
+                            :selected="basket.shippingCountryId == shippingCountry.id">
+                        {{ shippingCountry.currLangName }}
+                    </option>
+                </select>
+                <label>{{ $translate('Ceres::Template.headerSelectShippingCountry') }}</label>
+            </div>
+            <div v-else>
+                {{ getCountryName(localization.shippingCountryId) }}
+            </div>
     </div>
 </template>
 

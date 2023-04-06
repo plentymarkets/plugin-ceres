@@ -1,7 +1,10 @@
 <template>
-    <div class="login-pwd-reset">
+    <div class="login-pwd-reset bkr-cc">
         <form ref="loginForm" :id="'login-form-' + _uid" method="post">
             <div :class="{'modal-body': modalElement}">
+                <div class="h4" v-if="modalElement">
+                    {{ $translate("Ceres::Template.login") }}
+                </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="input-unit" data-validate="mail">
@@ -18,17 +21,17 @@
                         <span class="error-msg">{{ $translate("Ceres::Template.loginEmptyPassword") }}</span>
                     </div>
                 </div>
-            </div>
-            <div :class="{'modal-footer justify-content-between': modalElement, 'row': !modalElement}">
-                <div :class="{'col-7 col-sm-4': !modalElement}">
-                    <a href="javascript:void(0)" @click="showResetPwdView" class="small text-appearance">{{ $translate("Ceres::Template.loginForgotPassword") }}?</a>
-                </div>
-                <div :class="{'col-5 col-sm-8 text-sm-right': !modalElement}">
-                    <slot name="extend-overlay-buttons"></slot>
-                    <button data-testing="submit-login" @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-primary btn-appearance btn-medium" :class="[{'float-right': !modalElement}, buttonSizeClass]">
-                        {{ $translate("Ceres::Template.login") }}
-                        <icon icon="user" :loading="isDisabled"></icon>
-                    </button>
+                <div class="row mt-2">
+                    <div :class="{'col-7 col-sm-4': !modalElement, 'col-12': modalElement}">
+                        <a href="javascript:void(0)" @click="showResetPwdView" class="small text-appearance">{{ $translate("Ceres::Template.loginForgotPassword") }}?</a>
+                    </div>
+                    <div class="mt-3" :class="{'col-5 col-sm-8 text-sm-right': !modalElement, 'col-12': modalElement }">
+                        <slot name="extend-overlay-buttons"></slot>
+                        <button data-testing="submit-login" @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-primary btn-appearance btn-medium" :class="[{'float-right': !modalElement}, buttonSizeClass]">
+                            {{ $translate("Ceres::Template.login") }}
+                            <icon icon="user" :loading="isDisabled"></icon>
+                        </button>
+                    </div>
                 </div>
             </div>
         </form>

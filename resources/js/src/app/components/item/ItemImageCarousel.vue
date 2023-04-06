@@ -1,38 +1,38 @@
 <template>
-    <div itemscope itemtype="http://schema.org/Thing">
-        <template>
-            <div class="single-carousel owl-carousel owl-theme owl-single-item mt-0" ref="single">
-                <div v-for="image in singleImages" class="prop-1-1">
-                    <a :href="image.url" :data-lightbox="'single-item-image' + _uid">
-                        <img class="owl-lazy" :data-src="image.url" :alt="getAltText(image)" :title="getImageName(image)">
+    <div itemscope itemtype="http://schema.org/Thing" class="bkr-cc">
+          <div class="bkr-cc single-carousel owl-carousel owl-theme owl-single-item mt-0" id="imageGallery" ref="single">
+              <div v-for="image in singleImages" class="prop-1-1">
+                  <a :href="image.url" :data-fancybox="'single-item-image' + _uid">
+                      <img class="owl-lazy" :data-src="image.url" :alt="getAltText(image)" :title="getImageName(image)"><div class="magnifier"></div>
+                  </a>
+              </div>
+          </div>
+          <div v-if="showThumbs" id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item" ref="thumbs">
+            <template v-if="currentVariation.variationProperties && currentVariation.variationProperties.filter(function (prop) { return (prop.id == 4) })[0]">
+            <template v-for="property in currentVariation.variationProperties.filter(function (prop) { return (prop.id == 4) })[0].properties.filter(function (prop) { return (prop.id == 192) })">
+                <div class="prop-1-1" v-if="property.values.value != ''">
+                  <div class="image-container">
+                    <a data-toggle="modal" class="videoButton text-center" data-target="#videoModal">
+                      <img src="https://cdn.bio-kinder.de/frontend/images/static/playbtn.svg" alt="Video wiedergeben" />
+                      <span>Video <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></span>
                     </a>
+                  </div>
+                </div>
+            </template>
+            </template>
+            <div class="prop-1-1" v-for="(imagePreview, index) in carouselImages">
+                <div class="image-container" @click="goTo(index)">
+                    <lazy-img
+                        picture-class="owl-thumb border-appearance"
+                        v-bind:class="{ 'active': currentItem === index }"
+                        :image-url="imagePreview.url"
+                        :alt="getAltText(imagePreview)"
+                        :title="getImageName(imagePreview)">
+                    </lazy-img>
                 </div>
             </div>
-            <div v-if="showThumbs" id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item" ref="thumbs">
-                <div class="prop-1-1" v-for="(imagePreview, index) in carouselImages">
-                    <div class="image-container" @click="goTo(index)">
-                        <lazy-img
-                            picture-class="owl-thumb border-appearance"
-                            v-bind:class="{ 'active': currentItem === index}"
-                            :image-url="imagePreview.url"
-                            :alt="getAltText(imagePreview)"
-                            :title="getImageName(imagePreview)">
-                        </lazy-img>
-                    </div>
-                </div>
-            </div>
-        </template>
-        <div v-if="!initialized" class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0">
-            <div class="prop-1-1">
-                <img
-                    class="owl-placeholder"
-                    :src="singleImages[0].url"
-                    :alt="getAltText(singleImages[0].url)"
-                    :title="getImageName(singleImages[0].url)"
-                >
-            </div>
-        </div>
-    </div>
+          </div>
+      </div>
 </template>
 
 <script>
@@ -133,6 +133,10 @@ export default {
     {
         this.$nextTick(() =>
         {
+            this.initCarousel();
+            this.initThumbCarousel();
+            
+            /* disable lightbox
             this.loadLightbox().then(() =>
                 {
                     this.initCarousel();
@@ -142,6 +146,7 @@ export default {
                 {
                     console.log("error while loading lightbox", event);
                 });
+            */
         });
     },
 

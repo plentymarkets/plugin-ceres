@@ -1,30 +1,49 @@
 <template>
-    <div class="position-relative">
-        <div class="dropdown" v-if="isLoggedIn">
-            <a href="#" class="dropdown-toggle nav-link" id="accountMenuList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-boundary="window">
-                <i class="fa fa-user mr-1 d-sm-none" aria-hidden="true"></i>
-                <span class="d-none d-sm-inline">{{ $translate("Ceres::Template.loginHello", {"username": username }) }}</span>
+    <div :class="viewModeClass">
+        <template v-if="viewMethod == 'default'">
+          <span class="icon" :class="{ loggedin: isLoggedIn }">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            <a class="nav-link"
+               v-if="!isLoggedIn"
+               :href="isLogin ? 'javascript:void(0)' : '#login'"
+               :data-toggle="isLogin ? false : 'modal'"
+               @click="createLoginModal(); createRegisterModal(); unmarkInputFields();"
+               :aria-label="$translate('Ceres::Template.login')"
+               v-html="$translate('Ceres::Template.login')"></a>
+            <a v-else :href="$ceres.urls.myAccount" v-html="'Mein Konto'"></a></span><!--
+      --><span class="icon" v-if="!isLogin"></span><span class="d-none" v-else></span>
+        </template>
+
+        <template v-else-if="viewMethod == 'mobile'">
+            <a
+                v-if="!isLoggedIn"
+                href="#login"
+                :data-toggle="isLogin ? false : 'modal'"
+                @click="createLoginModal(); createRegisterModal(); unmarkInputFields();">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <span class="mini" v-html="$translate('Ceres::Template.login')" nologin></span>
             </a>
-            <div class="dropdown-menu small m-0 p-0 mw-100">
-                <div class="list-group" aria-labelledby="accountMenuList" >
-                    <a :href="$ceres.urls.myAccount" class="list-group-item small"><i class="fa fa-user"></i> {{ $translate("Ceres::Template.loginMyAccount") }}</a>
-                    <a href="#" class="list-group-item small" v-logout><i class="fa fa-sign-out"></i> {{ $translate("Ceres::Template.loginLogout") }}</a>
+            <a v-else class="loggedin" :href="$ceres.urls.myAccount">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <span class="mini" v-html="'Mein Konto'" loggedin></span>
+            </a>
+        </template>
+        <template v-else-if="viewMethod == 'wishlist'">
+            <div class="col-4 offset-2">
+                  <a href="#login"
+                    class="btn btn-bkm btn-sm btn-block"
+                    :data-toggle="isLogin ? false : 'modal'"
+                    @click="createLoginModal(); createRegisterModal(); unmarkInputFields();"
+                    v-html="$translate('Ceres::Template.login')"></a><!--
+            --></div><!--
+            --><div class="col-4">
+                  <a href="#registration"
+                    class="btn btn-bkm-inverted btn-sm btn-block"
+                    :data-toggle="isRegister ? false : 'modal'"
+                    @click="createLoginModal(); createRegisterModal(); unmarkInputFields();"
+                    v-html="$translate('Ceres::Template.loginRegister')"></a>
                 </div>
-            </div>
-        </div>
-        <div v-if="!isLoggedIn">
-            <a class="nav-link" data-testing="login-select" v-if="showLogin" :href="isLogin ? 'javascript:void(0)' : '#login'" :data-toggle="isLogin ? false : 'modal'" @click="createLoginModal(); unmarkInputFields();" :aria-label="$translate('Ceres::Template.login')">
-                <i class="fa fa-user mr-1" aria-hidden="true"></i>
-                <span class="d-none d-sm-inline">{{ $translate("Ceres::Template.login") }}</span>
-            </a>
-            <template v-if="showRegistration">
-                <span class="pipe" v-if="!showLogin"></span>
-                <a class="nav-link" data-testing="register-select" :href="isRegister ? 'javascript:void(0)' : '#registration'" :data-toggle="isRegister ? false : 'modal'"  @click="createRegisterModal(); unmarkInputFields();" :aria-label="$translate('Ceres::Template.loginRegister')">
-                    <i class="fa fa-user-plus mr-1" aria-hidden="true"></i>
-                    <span class="d-none d-sm-inline">{{ $translate("Ceres::Template.loginRegister") }}</span>
-                </a>
-            </template>
-        </div>
+        </template>
     </div>
 </template>
 
@@ -41,10 +60,21 @@ export default {
         showLogin: {
             type: Boolean,
             default: true
-        } 
+        },
+        viewMethod: {
+            type: String,
+            default: 'default'
+        }
     },
 
     computed: {
+        viewModeClass() {
+            switch (this.viewMode) {
+                case 'mobile': return 'myAccount'; break;
+                case 'wishlist': return 'row'; break;
+                default: return 'd-inline'
+            }
+        },
         ...mapGetters([
            "username",
            "isLoggedIn"
@@ -65,7 +95,6 @@ export default {
             ValidationService.unmarkAllFields($("#login"));
             ValidationService.unmarkAllFields($("#registration"));
         },
-
         createLoginModal()
         {
             this.loadComponent("login-modal");

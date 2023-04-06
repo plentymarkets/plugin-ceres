@@ -1,128 +1,93 @@
 <template>
-    <div class="position-relative">
-        <div v-if="inputType === 'text' || inputType === 'float' || inputType === 'int'" class="input-unit order-property-input" :class="{ 'active': property.value, 'error': hasError }" data-validate="text">
-            <input
-                type="text"
-                @input="onInputValueChanged($event.target.value)"
-                v-model="inputValue"
-                v-tooltip
-                data-toggle="tooltip"
-                :title="property.names.description"
-                :data-testing="'order-property-input-' + inputType">
-            <label class="d-flex">
-                <span class="text-truncate">{{ property.names.name }}</span>
-                <strong class="ml-1">
-                    <template v-if="surcharge > 0">({{ inclOrPlus }} {{ surcharge | currency }})</template>
-                    <span>{{ footnotes }} {{ requiredFootnotes }}</span>
-                </strong>
-            </label>
-        </div>
-
-        <div v-else-if="inputType === 'checkbox' || inputType === 'radio'" class="form-check" :class="{ 'error': hasError }">
-            <input v-if="inputType === 'checkbox' && !(property.isRequired && property.isPreSelected)"
-                   type="checkbox"
-                   :name="group ? group.id : 'check' + _uid"
-                   :id="'check' + _uid"
-                   :value="property.id"
-                   :checked="property.value"
-                   @change="onInputValueChanged($event.target.checked)"
-                   class="form-check-input"
-                   data-testing="order-property-input-checkbox">
-            <input v-else-if="inputType === 'radio'"
-                   type="radio"
-                   :name="group ? group.id : 'check' + _uid"
-                   :id="'check' + _uid"
-                   :value="property.id"
-                   @change="onInputValueChanged($event.target.value)"
-                   class="form-check-input"
-                   :checked="property.value"
-                   data-testing="order-property-input-radio">
-
-            <label class="form-check-label text-appearance d-flex"
-                   :for="'check' + _uid"
-                   v-tooltip data-toggle="tooltip"
-                   :title="property.names.description"
-                    :data-testing="'order-property-label-' + inputType">
-                <span class="text-wrap">{{ property.names.name }}</span>
-                <strong class="ml-1">
-                    <template v-if="surcharge > 0">({{ inclOrPlus }} {{ surcharge | currency }})</template>
-                    <span>{{ footnotes }} {{ requiredFootnotes }}</span>
-                </strong>
-            </label>
-        </div>
-
-        <div v-else-if="inputType === 'selection'" :class="{ 'd-flex': selectedDescription }">
-            <div
-                class="input-unit order-property-input"
-                :class="{ 'active': property.value, 'error': hasError }"
-                v-tooltip
-                data-toggle="tooltip"
-                :title="property.names.description">
-                <select id="order-property-input-select" v-model="selectionValue" @change="onInputValueChanged($event.target.value)" class="custom-select" data-testing="order-property-selection">
-                    <option :selected="true" :value="null">{{ $translate("Ceres::Template.singleItemPleaseSelect") }}</option>
-                    <option :selected="property.id === id" :value="id" v-for="(value, id) in property.selectionValues" :key="id" data-testing="order-property-selection-option">{{ value.name }}</option>
-                </select>
-                <label class="d-flex w-100" for="order-property-input-select">
-                    <span class="text-truncate">{{ property.names.name }}</span>
-                    <strong class="ml-1">
-                        <template v-if="surcharge > 0">({{ inclOrPlus }} {{ surcharge | currency }})</template>
-                        <span>{{ footnotes }} {{ requiredFootnotes }}</span>
-                    </strong>
+    <div>
+            <div v-if="inputType === 'text' || inputType === 'float' || inputType === 'int'" class="input-unit order-property-input" :class="{ 'active': property.value, 'error': hasError }" data-validate="text">
+                <input
+                    type="text"
+                    @input="onInputValueChanged($event.target.value)"
+                    v-model="inputValue"
+                    v-tooltip
+                    data-toggle="tooltip"
+                    :title="property.names.description"
+                    :data-testing="'order-property-input-' + inputType">
+                <label class="d-flex">
+                    <span class="text-truncate">{{ property.names.name}}</span>
+                    <strong class="ml-1" v-if="surcharge > 0">(+ {{ surcharge|currency }}) *</strong>
                 </label>
             </div>
 
-            <popper class="order-property-selection-info-popper" v-cloak v-if="selectedDescription" placement="bottom">
-                <template #handle>
-                    <button class="btn btn-icon btn-circle btn-default btn-appearance font-weight-bold">?</button>
-                </template>
-                <template #content>
-                    {{ selectedDescription }}
-                </template>
-            </popper>
+            <div v-else-if="inputType === 'checkbox' || inputType === 'radio'" :class="'order-property-' + property.id" class="form-check order-property-checkbox mb-0">
+                <input v-if="inputType === 'checkbox'"
+                       type="checkbox"
+                       :name="group ? group.id : 'check' + _uid"
+                       :id="'check' + _uid"
+                       :value="property.id"
+                       :checked="property.value"
+                       @change="onInputValueChanged($event.target.checked)"
+                       class="form-check-input"
+                       :class="'checkbox_' + property.id"
+                       data-testing="order-property-input-checkbox">
+                <input v-else
+                       type="radio"
+                       :name="group ? group.id : 'check' + _uid"
+                       :id="'check' + _uid"
+                       :value="property.id"
+                       @change="onInputValueChanged($event.target.value)"
+                       class="form-check-input"
+                       :checked="property.value"
+                       data-testing="order-property-input-radio">
+
+                <label class="form-check-label text-appearance d-flex"
+                       :for="'check' + _uid"
+                       :class="{ 'text-danger': hasError }"
+                       v-tooltip data-toggle="tooltip"
+                       :title="property.names.description">
+
+                    <span class="text-wrap">
+                      <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                        {{ property.names.name }}
+                      <a data-toggle="modal" href="#aufbauserviceModal">Details</a>
+                    </span>
+
+                    <span class="ml-1 surcharge" v-if="surcharge > 0">+ {{ surcharge | currency }}</span>
+                </label>
+            </div>
+
+            <div v-else-if="inputType === 'selection'" :class="{ 'd-flex': selectedDescription }">
+                <div
+                    class="input-unit order-property-input"
+                    :class="{ 'active': property.value, 'error': hasError }"
+                    v-tooltip
+                    data-toggle="tooltip"
+                    :title="property.names.description">
+                    <select id="order-property-input-select" v-model="selectionValue" @change="onInputValueChanged($event.target.value)" class="custom-select" data-testing="order-property-selection">
+                        <option :selected="true" :value="null">{{ $translate("Ceres::Template.singleItemPleaseSelect") }}</option>
+                        <option :selected="property.id === id" :value="id" v-for="(value, id) in property.selectionValues" :key="id" data-testing="order-property-selection-option">${ value.name }</option>
+                    </select>
+                    <label class="d-flex w-100" for="order-property-input-select">
+                        <span class="text-truncate">{{ property.names.name }}</span>
+                        <span class="ml-1" v-if="surcharge > 0">{{ surcharge | currency }}</span>
+                    </label>
+                </div>
+
+            </div>
+
+            <div v-else-if="inputType === 'file'">
+                <label class="input-unit file-input order-property-input component-loading with-icon sending" :class="{ 'active': property.value, 'is-loading': waiting, 'error': hasError }" v-tooltip data-toggle="tooltip" :title="property.names.description">
+                    <span class="input-unit-preview" :class="{ 'disabled': waiting }">{{selectedFileName}}</span>
+                    <span class="input-unit-label d-flex">
+                        <span class="text-truncate">{{ property.names.name }}</span>
+                        <strong class="ml-1" v-if="surcharge > 0">(+ {{ surcharge | currency }}) *</strong>
+                    </span>
+                    <span class="input-unit-btn" v-if="!selectedFile">
+                        <i class="fa fa-ellipsis-h"></i>
+                    </span>
+                    <span class="input-unit-btn" v-else :disabled="waiting" @click.prevent="clearSelectedFile()">
+                        <i class="fa fa-times"></i>
+                    </span>
+                    <input :disabled="waiting" ref="fileInput" type="file" size="50" accept="image/*" @change="setPropertyFile($event)" data-testing="order-property-input-file">
+                </label>
+            </div>
         </div>
-
-        <div v-else-if="inputType === 'file'" class="d-flex">
-            <label class="input-unit file-input order-property-input component-loading with-icon sending" :class="{ 'active': property.value, 'is-loading': waiting, 'error': hasError }" v-tooltip data-toggle="tooltip" :title="property.names.description">
-                <span class="input-unit-preview" :class="{ 'disabled': waiting }">{{selectedFileName}}</span>
-                <span class="input-unit-label d-flex">
-                    <span class="text-truncate">{{ property.names.name }}</span>
-                    <strong class="ml-1">
-                        <template v-if="surcharge > 0">({{ inclOrPlus }} {{ surcharge | currency }})</template>
-                        <span>{{ footnotes }} {{ requiredFootnotes }}</span>
-                    </strong>
-                </span>
-                <span class="input-unit-btn" v-if="!selectedFile">
-                    <i class="fa fa-ellipsis-h"></i>
-                </span>
-                <span class="input-unit-btn" v-else :disabled="waiting" @click.prevent="clearSelectedFile()">
-                    <i class="fa fa-times"></i>
-                </span>
-                <input :disabled="waiting" ref="fileInput" type="file" size="50" @change="setPropertyFile($event)" data-testing="order-property-input-file">
-            </label>
-
-            <client-only>
-                <popper class="order-property-selection-info-popper" v-cloak v-if="isTouchDevice && property.names.description" placement="bottom">
-                    <template #handle>
-                        <button class="btn btn-icon btn-circle btn-default btn-appearance font-weight-bold">?</button>
-                    </template>
-                    <template #content>
-                        {{ property.names.description }}
-                    </template>
-                </popper>
-            </client-only>
-        </div>
-
-        <client-only>
-            <popper class="order-property-selection-info-popper position-absolute" :class="{ 'checkbox-or-radio': inputType === 'checkbox' || inputType === 'radio'}" v-cloak v-if="isTouchDevice && inputType !== 'selection' && inputType !== 'file' && property.names.description" placement="bottom">
-                <template #handle>
-                    <button class="btn btn-icon btn-circle btn-default btn-appearance font-weight-bold">?</button>
-                </template>
-                <template #content>
-                    {{ property.names.description }}
-                </template>
-            </popper>
-        </client-only>
-    </div>
 </template>
 
 <script>

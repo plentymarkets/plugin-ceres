@@ -1,95 +1,108 @@
 <template>
-    <div class="row">
-        <template v-if="attributes.length || (possibleUnitCombinationIds.length > 1 && isContentVisible)">
-            <div class="col-12 variation-select" v-for="(attribute, index) in attributes" :key="index">
-                <!-- dropdown -->
-                <div class="input-unit" ref="attributesContaner" v-if="attribute.type === 'dropdown'">
-                    <select :id="'custom-select_' + attribute.name" class="custom-select" @change="selectAttribute(attribute.attributeId, $event.target.value)" data-testing="variation-select-dropdown">
-                        <option :value="-1" v-if="addPleaseSelectOption || !hasSelection">{{ $translate("Ceres::Template.singleItemPleaseSelect") }}</option>
-                        <option
-                                :value="null" v-if="hasEmptyOption || selectedAttributes[attribute.attributeId] === null"
-                                :selected="selectedAttributes[attribute.attributeId] === null">{{ $translate("Ceres::Template.singleItemNoSelection") }}</option>
-                        <option
-                                v-for="value in attribute.values"
-                                :value="value.attributeValueId"
-                                :selected="value.attributeValueId === selectedAttributes[attribute.attributeId]"
-                                :key="value.attributeValueId">
-                            <template v-if="isAttributeSelectionValid(attribute.attributeId, value.attributeValueId, true)">
-                                {{ value.name }}
-                            </template>
-                            <template v-else-if="isAttributeSelectionValid(attribute.attributeId, value.attributeValueId, false)">
-                                {{ $translate("Ceres::Template.singleItemNotSalableAttribute", { "name": value.name }) }}
-                            </template>
-                            <template v-else>
-                                {{ $translate("Ceres::Template.singleItemInvalidAttribute", { "name": value.name }) }}
-                            </template>
-                        </option>
-                    </select>
-                    <label :for="'custom-select_' + attribute.name" v-tooltip="isTextCut(attribute.name)" data-toggle="tooltip" data-placement="top" :title="attribute.name" data-testing="variation-select-dropdown-label">{{ attribute.name }}</label>
-                </div>
-                <!-- /dropdown -->
+    <div>
+        <div v-if="attributes.length || (possibleUnitCombinationIds.length > 1 && isContentVisible)" class="row">
+              <div class="col-12 variation-select" v-for="attribute in attributes" :class="'attribute_' + attribute.attributeId">
+                    <!-- dropdown -->
+                    <div class="input-unit" ref="attributesContaner" v-if="attribute.type === 'dropdown'">
+                         <select class="custom-select" @change="selectAttribute(attribute.attributeId, $event.target.value)">
+                         <option :value="-1" v-if="addPleaseSelectOption || !hasSelection">{{ $translate("Ceres::Template.singleItemPleaseSelect") }}</option>
+                            <option
+                                    :value="null" v-if="hasEmptyOption || selectedAttributes[attribute.attributeId] === null"
+                                    :selected="selectedAttributes[attribute.attributeId] === null">{{ $translate("Ceres::Template.singleItemNoSelection") }}</option>
+                            <option
+                                    v-for="value in attribute.values"
+                                    :value="value.attributeValueId"
+                                    :selected="value.attributeValueId === selectedAttributes[attribute.attributeId]">
+                                <template v-if="isAttributeSelectionValid(attribute.attributeId, value.attributeValueId, true)">
+                                    {{ value.name }}
+                                </template>
+                                <template v-else-if="isAttributeSelectionValid(attribute.attributeId, value.attributeValueId, false)">
+                                    {{ $translate("Ceres::Template.singleItemNotSalableAttribute", { "name": value.name }) }}
+                                </template>
+                                <template v-else>
+                                    {{ $translate("Ceres::Template.singleItemInvalidAttribute", { "name": value.name }) }}
+                                </template>
 
-                <!-- box and image -->
-                <div v-else-if="attribute.type === 'box' || attribute.type === 'image'">
-                    <span class="text-muted" data-testing="attribute-name">{{ attribute.name }}:</span> <b data-testing="attribute-value">{{ getSelectedAttributeValueName(attribute) }}</b>
-                    <div class="v-s-boxes py-3" :class="{ 'images': attribute.type === 'image' }">
-                        <div class="v-s-box bg-white empty-option"
-                             data-testing="variation-select-box"
-                             v-if="addPleaseSelectOption"
-                             @click="selectAttribute(attribute.attributeId, -1)"
-                             :class="{ 'active': selectedAttributes[attribute.attributeId] === -1, 'invalid': !isAttributeSelectionValid(attribute.attributeId, -1) }">
-                            <span class="mx-3">{{ $translate("Ceres::Template.singleItemPleaseSelect") }}</span>
+                            </option>
+                        </select>
+                        <label v-tooltip="isTextCut(attribute.name)" data-toggle="tooltip" data-placement="top" :title="attribute.name">{{ attribute.name }}</label>
+                    </div>
+                    <!-- /dropdown -->
+                    <!-- box and image -->
+                    <div v-else-if="(attribute.type === 'box' || attribute.type === 'image')" :class="'attr' + attribute.attributeId">
+                        <div class="row attributeName" v-if="currentVariation.item.id == 27645">
+                          <div class="col-4 text-muted" v-if="attribute.attributeId == 3">Farbe oberes Bett:</div>
+                          <div class="col-4 text-muted" v-if="attribute.attributeId == 9">Farbe unteres Bett:</div>
+                          <div class="col-8"><b>{{ getSelectedAttributeValueName(attribute) }}</b></div>
                         </div>
-                        <div class="v-s-box bg-white empty-option"
-                             data-testing="variation-select-box"
-                             v-if="hasEmptyOption"
-                             @click="selectAttribute(attribute.attributeId, null)"
-                             :class="{ 'active': selectedAttributes[attribute.attributeId] === null, 'invalid': !isAttributeSelectionValid(attribute.attributeId, null, true) }">
-                            <span class="mx-3">{{ $translate("Ceres::Template.singleItemNoSelection") }}</span>
+                        <div class="row attributeName" v-else-if="currentVariation.item.id == 28013">
+                          <div class="col-4 text-muted" v-if="attribute.attributeId == 3">Farbe Motivstecker:</div>
+                          <div class="col-4 text-muted" v-else-if="attribute.attributeId == 9">Farbe Garderobe:</div>
+                          <div class="col-4 text-muted" v-else>{{ attribute.name }}:</div>
+                          <div class="col-8"><b>{{ getSelectedAttributeValueName(attribute) }}</b></div>
                         </div>
+                        <div class="row attributeName" v-else-if="attribute.attributeId != 40">
+                          <div class="col-4 text-muted" v-if="attribute.attributeId == 3 && attributes.filter(function (attr) { return (attr.attributeId == 9) })[0]">Farbe der Front:</div>
+                          <div class="col-4 text-muted" v-else>{{ attribute.name }}:</div>
+                          <div class="col-8"><b>{{ getSelectedAttributeValueName(attribute) }}</b></div>
+                        </div>
+                        <div v-else>
+                        <div class="row">
+                          <div class="col-12 text-muted">Set w&auml;hlen:</div> 
+                        </div>
+                        </div>
+                        <div class="v-s-boxes pt-1 pb-3" :class="{ 'images': attribute.type === 'image' }">
+                            <div class="v-s-box bg-white empty-option"
+                                 v-if="addPleaseSelectOption"
+                                 @click="selectAttribute(attribute.attributeId, -1)"
+                                 :class="{ 'active': selectedAttributes[attribute.attributeId] === -1, 'invalid': !isAttributeSelectionValid(attribute.attributeId, -1) }">
+                                <span class="mx-3">{{ $translate("Ceres::Template.singleItemPleaseSelect") }}</span>
+                            </div>
+                            <div class="v-s-box bg-white empty-option"
+                                 v-if="hasEmptyOption"
+                                 @click="selectAttribute(attribute.attributeId, null)"
+                                 :class="{ 'active': selectedAttributes[attribute.attributeId] === null, 'invalid': !isAttributeSelectionValid(attribute.attributeId, null, true) }">
+                                <span class="mx-3">{{ $translate("Ceres::Template.singleItemNoSelection") }}</span>
+                            </div>
 
-                        <div class="v-s-box bg-white"
-                             data-testing="variation-select-box"
-                             v-for="value in attribute.values"
-                             @click="selectAttribute(attribute.attributeId, value.attributeValueId)"
-                             :class="{ 'active': value.attributeValueId === selectedAttributes[attribute.attributeId], 'invalid': !isAttributeSelectionValid(attribute.attributeId, value.attributeValueId, true) }"
-                             v-tooltip="true" data-html="true" data-toggle="tooltip" data-placement="top" :data-original-title="getTooltip(attribute, value)"
-                             :key="value.attributeValueId">
-                            <span class="mx-3" v-if="attribute.type === 'box'">{{ value.name }}</span>
-                            <img class="p-1" v-else :src="value.imageUrl" :alt="value.name">
+                            <div class="v-s-box bg-white"
+                                 v-for="value in attribute.values"
+                                 @click="selectAttribute(attribute.attributeId, value.attributeValueId)"
+                                 :class="['attrval' + value.attributeValueId, { 'active': value.attributeValueId === selectedAttributes[attribute.attributeId], 'invalid': !isAttributeSelectionValid(attribute.attributeId, value.attributeValueId, true) }]"
+                                 v-tooltip="true" data-html="true" data-toggle="tooltip" data-placement="top" :data-original-title="getTooltip(attribute, value)">
+                                <span class="mx-3" v-if="attribute.type === 'box'">{{ value.name }}</span>
+                                <img v-else :src="value.imageUrl" :alt="value.name" />
+                                <span v-if="attribute.attributeId == 40" class="caption">{{ value.name }}</span>
+                            </div>
                         </div>
                     </div>
+                    <!-- /box and image -->
                 </div>
-                <!-- /box and image -->
+                <!-- units -->
+                  <div class="col-12 variation-select" v-if="possibleUnitCombinationIds.length > 1 && isContentVisible">
+                      <div class="input-unit">
+                          <select class="custom-select" @change="selectUnit($event.target.value)">
+                              <option
+                                      v-for="unitCombinationId in possibleUnitCombinationIds"
+                                      :value="unitCombinationId"
+                                      :selected="parseInt(unitCombinationId) === selectedUnit">
+                                  <template v-if="isUnitSelectionValid(unitCombinationId)">
+                                      {{ possibleUnits[unitCombinationId] }}
+                                  </template>
+                                  <template v-else>
+                                      {{ $translate("Ceres::Template.singleItemInvalidAttribute", { "name": possibleUnits[unitCombinationId] }) }}
+                                  </template>
+                              </option>
+                          </select>
+                          <label>{{ $translate("Ceres::Template.singleItemContent") }}</label>
+                      </div>
+                  </div>
+                  <!-- /units -->
             </div>
-
-            <!-- units -->
-            <div class="col-12 variation-select" v-if="possibleUnitCombinationIds.length > 1 && isContentVisible">
-                <div class="input-unit">
-                    <select id="unit-combination-ids-select" class="custom-select" @change="selectUnit($event.target.value)" data-testing="variation-select-unit">
-                        <option
-                                v-for="unitCombinationId in possibleUnitCombinationIds"
-                                :value="unitCombinationId"
-                                :selected="parseInt(unitCombinationId) === selectedUnit"
-                                :key="unitCombinationId">
-                            <template v-if="isUnitSelectionValid(unitCombinationId)">
-                                {{ possibleUnits[unitCombinationId] }}
-                            </template>
-                            <template v-else>
-                                {{ $translate("Ceres::Template.singleItemInvalidAttribute", { "name": possibleUnits[unitCombinationId] }) }}
-                            </template>
-                        </option>
-                    </select>
-                    <label for="unit-combination-ids-select" data-testing="variation-select-unit-label">{{ $translate("Ceres::Template.singleItemContent") }}</label>
-                </div>
+            <div v-else>
+                <slot></slot>
             </div>
-            <!-- /units -->
-        </template>
-
-        <template v-else>
-            <slot></slot>
-        </template>
-    </div>
+        </div>
 </template>
 
 <script>

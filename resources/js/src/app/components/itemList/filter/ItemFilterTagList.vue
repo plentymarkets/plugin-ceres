@@ -1,13 +1,12 @@
 <template>
-    <div class="selected-filters clearfix">
-        <span :class="'text-appearance selected-filter filter-' + tag.id + ' ' + marginClasses" :style="marginInlineStyles" v-for="tag in tagList" @click="removeTag(tag)">
-            <i class="fa fa-times" aria-hidden="true"></i> {{ tag.name }}
-        </span>
-
-        <span :class="'bg-appearance selected-filter reset-all' + ' '+ marginClasses" :style="marginInlineStyles" v-if="tagList.length >= 2" @click="resetAllTags()">
+    <div class="selected-filters clearfix bkr-cc">
+            <span :class="'selected-filter filter-' + tag.id" v-if="tag.id != 123" v-for="tag in tagList" @click="removeTag(tag)">
+                <i class="fa fa-times" aria-hidden="true"></i> ${ tag.name }
+            </span>
+            <span class="selected-filter reset-all" v-if="tagList.length >= 2" @click="resetAllTags()">
             {{ $translate("Ceres::Template.itemFilterReset") }}
-        </span>
-    </div>
+            </span>
+        </div>
 </template>
 
 <script>

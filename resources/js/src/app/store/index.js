@@ -17,7 +17,7 @@ import localization from "./modules/LocalizationModule";
 import navigation from "./modules/NavigationModule";
 import orderReturn from "./modules/OrderReturnModule";
 import user from "./modules/UserModule";
-import wishList from "./modules/WishListModule";
+// import wishList from "./modules/WishListModule";
 import items from "./modules/singleItem/BaseItemModule";
 
 import eventPropagation from "./plugins/EventPropagationPlugin";
@@ -57,8 +57,8 @@ export function createStore()
                 localization,
                 navigation,
                 orderReturn,
-                user,
-                wishList
+                user
+                // wishList
             },
 
             plugins: !App.isSSR ? [eventPropagation] : []
@@ -93,7 +93,7 @@ export function initClientListeners(store)
         store.commit("setBasket", data.basket);
         store.commit("setShowNetPrices", data.showNetPrices);
         store.commit("updateBasketItems", data.basketItems);
-        store.commit("setWishListIds", data.basket.itemWishListIds);
+        // store.commit("setWishListIds", data.basket.itemWishListIds);
     });
 
     ApiService.listen("AfterBasketItemAdd", data =>
@@ -157,7 +157,7 @@ export function initClientStore(store)
                 {
                     // only set basket if not change event is emitted. In this case, the basket will be set by the event listener.
                     store.commit("setBasket", response.data.basket);
-                    store.commit("setWishListIds", response.data.basket.itemWishListIds);
+                    // store.commit("setWishListIds", response.data.basket.itemWishListIds);
                 }
 
                 store.commit("setIsBasketInitiallyLoaded");

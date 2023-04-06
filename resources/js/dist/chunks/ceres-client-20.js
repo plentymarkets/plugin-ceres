@@ -225,64 +225,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -444,132 +386,93 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "cmp-totals" }, [
-    _c("div", { staticClass: "h3" }, [
-      _vm._v(_vm._s(_vm.$translate("Ceres::Template.basketSum")))
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "component-loading with-icon refreshing",
-        class: { "is-loading": _vm.isBasketLoading }
-      },
-      [
-        _c(
-          "dl",
-          [
-            _vm._t("before-item-sum"),
-            _vm._v(" "),
-            (_vm.visibleFields.includes("additionalCosts") ||
-              _vm.visibleFields.includes("basket.additional_costs")) &&
-            _vm.displayedProperties.length
-              ? [
-                  _vm._l(_vm.displayedProperties, function(property) {
-                    return [
-                      _c(
-                        "dt",
-                        {
-                          key: "property-name-" + property.propertyId,
-                          class: { "font-weight-bold": _vm.showNetPrices },
-                          attrs: { "data-testing": "additionalcost-with-tax" }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(property.name) +
-                              "\n                    "
-                          )
-                        ]
-                      ),
-                      _c(
-                        "dd",
-                        {
-                          key: "property-price-" + property.propertyId,
-                          class: { "font-weight-bold": _vm.showNetPrices }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(_vm._f("currency")(property.price)) +
-                              "\n                    "
-                          )
-                        ]
-                      )
-                    ]
-                  })
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.visibleFields.includes("basketValueNet") ||
-            _vm.visibleFields.includes("basket.value_of_items_net")
-              ? [
-                  _c(
-                    "dt",
-                    { class: { "font-weight-bold": _vm.showNetPrices } },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.basketValue")
-                          ) +
-                          " " +
-                          _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          "\n                "
-                      )
-                    ]
-                  ),
-                  _c(
-                    "dd",
-                    {
-                      class: { "font-weight-bold": _vm.showNetPrices },
-                      attrs: { "data-testing": "item-sum-net" }
-                    },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm._f("currency")(
-                              _vm.calculateBaseValue(
-                                _vm.basket.itemSumNet,
-                                _vm.basket.basketRebate
+  return _c(
+    "div",
+    {
+      staticClass: "bkr-cc cmp cmp-totals basketTotals",
+      class: { preview: _vm.$attrs.preview }
+    },
+    [
+      !_vm.$attrs.preview
+        ? _c("div", { staticClass: "h3" }, [
+            _vm._v(_vm._s(_vm.$translate("Ceres::Template.basketSum")))
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.$attrs.preview
+        ? _c(
+            "button",
+            {
+              staticClass: "btn btn-xs btn-default",
+              attrs: { onclick: "$('.net').slideToggle();" }
+            },
+            [_vm._v("Details")]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "component-loading with-icon refreshing split-totals-height",
+          class: { isLoading: _vm.isBasketLoading }
+        },
+        [
+          _c(
+            "dl",
+            [
+              _vm._t("before-item-sum"),
+              _vm._v(" "),
+              _vm.visibleFields.includes("basketValueNet")
+                ? [
+                    _c("div", { staticClass: "net" }, [
+                      _c("dt", [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(
+                              _vm.$translate("Ceres::Template.basketValue")
+                            ) +
+                            " (" +
+                            _vm._s(
+                              _vm.$translate("Ceres::Template.basketNet")
+                            ) +
+                            ")\n                    "
+                        )
+                      ]),
+                      _c("dd", [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(
+                              _vm._f("currency")(
+                                _vm.calculateBaseValue(
+                                  _vm.basket.itemSumNet,
+                                  _vm.basket.basketRebate
+                                )
                               )
-                            )
-                          ) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.visibleFields.includes("basketValueGross") ||
-            _vm.visibleFields.includes("basket.value_of_items_gross")
-              ? [
-                  _c(
-                    "dt",
-                    { class: { "font-weight-bold": !_vm.showNetPrices } },
-                    [
+                            ) +
+                            "\n                    "
+                        )
+                      ])
+                    ])
+                  ]
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.visibleFields.includes("basketValueGross")
+                ? [
+                    _c("dt", [
                       _vm._v(
                         "\n                    " +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketValue")
                           ) +
-                          " " +
+                          " (" +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketGross")
                           ) +
-                          "\n                "
+                          ")\n                "
                       )
-                    ]
-                  ),
-                  _c(
-                    "dd",
-                    {
-                      class: { "font-weight-bold": !_vm.showNetPrices },
-                      attrs: { "data-testing": "item-sum" }
-                    },
-                    [
+                    ]),
+                    _c("dd", [
                       _vm._v(
                         "\n                    " +
                           _vm._s(
@@ -582,127 +485,168 @@ var render = function() {
                           ) +
                           "\n                "
                       )
-                    ]
-                  )
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            (_vm.visibleFields.includes("rebate") ||
-              _vm.visibleFields.includes("basket.rebate")) &&
-            _vm.basket.basketRebate
-              ? [
-                  _c("dt", { staticClass: "rebate-hint" }, [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(_vm.$translate("Ceres::Template.basketRebate")) +
-                        "\n                "
-                    )
-                  ]),
-                  !_vm.showNetPrices
-                    ? _c("dd", { staticClass: "rebate-hint" }, [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(
-                              _vm.$translate("Ceres::Template.basketRebateSign")
-                            ) +
-                            _vm._s(
-                              _vm._f("currency")(
-                                _vm.calculateBaseValue(
-                                  _vm.basket.itemSum,
-                                  _vm.basket.basketRebate
-                                ) - _vm.basket.itemSum
-                              )
-                            ) +
-                            "\n                "
+                    ])
+                  ]
+                : _vm._e(),
+              _vm._v(" "),
+              (_vm.visibleFields.includes("additionalCosts") ||
+                _vm.visibleFields.includes("basket.additional_costs")) &&
+              _vm.displayedProperties.length
+                ? [
+                    _vm._l(_vm.displayedProperties, function(property) {
+                      return [
+                        _c(
+                          "dt",
+                          {
+                            key: "property-name-" + property.propertyId,
+                            staticClass: "muted-properties",
+                            class: { "font-weight-bold": _vm.showNetPrices },
+                            attrs: { "data-testing": "additionalcost-with-tax" }
+                          },
+                          [
+                            _vm._v("\n                     "),
+                            _c("i", [_vm._v("davon " + _vm._s(property.name))])
+                          ]
+                        ),
+                        _c(
+                          "dd",
+                          {
+                            key: "property-price-" + property.propertyId,
+                            staticClass: "muted-properties",
+                            class: { "font-weight-bold": _vm.showNetPrices }
+                          },
+                          [
+                            _c("i", [
+                              _vm._v(_vm._s(_vm._f("currency")(property.price)))
+                            ])
+                          ]
                         )
-                      ])
-                    : _c("dd", { staticClass: "rebate-hint" }, [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(
-                              _vm.$translate("Ceres::Template.basketRebateSign")
-                            ) +
-                            _vm._s(
-                              _vm._f("currency")(
-                                _vm.calculateBaseValue(
-                                  _vm.basket.itemSumNet,
-                                  _vm.basket.basketRebate
-                                ) - _vm.basket.itemSumNet
-                              )
-                            ) +
-                            "\n                "
-                        )
-                      ]),
-                  _vm._v(" "),
-                  _c(
-                    "dt",
-                    { class: { "font-weight-bold": _vm.showNetPrices } },
-                    [
+                      ]
+                    })
+                  ]
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.visibleFields.includes("rebate") && _vm.basket.basketRebate
+                ? [
+                    _c("dt", { staticClass: "rebate-hint" }, [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.basketRebate")
+                          ) +
+                          "\n                "
+                      )
+                    ]),
+                    !_vm.showNetPrices
+                      ? _c("dd", { staticClass: "rebate-hint" }, [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(
+                                _vm._f("currency")(
+                                  _vm.calculateBaseValue(
+                                    _vm.basket.itemSum,
+                                    _vm.basket.basketRebate
+                                  ) - _vm.basket.itemSum
+                                )
+                              ) +
+                              "\n                "
+                          )
+                        ])
+                      : _c("dd", { staticClass: "rebate-hint" }, [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(
+                                _vm._f("currency")(
+                                  _vm.calculateBaseValue(
+                                    _vm.basket.itemSumNet,
+                                    _vm.basket.basketRebate
+                                  ) - _vm.basket.itemSumNet
+                                )
+                              ) +
+                              "\n                "
+                          )
+                        ]),
+                    _vm._v(" "),
+                    _c("dt", [
                       _vm._v(
                         "\n                    " +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketSubTotal")
                           ) +
-                          " " +
+                          " (" +
                           _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          "\n                "
+                          ")\n                "
                       )
-                    ]
-                  ),
-                  _c(
-                    "dd",
-                    { class: { "font-weight-bold": _vm.showNetPrices } },
-                    [
+                    ]),
+                    _c("dd", [
                       _vm._v(
                         "\n                    " +
                           _vm._s(_vm._f("currency")(_vm.basket.itemSumNet)) +
                           "\n                "
                       )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "dt",
-                    { class: { "font-weight-bold": !_vm.showNetPrices } },
-                    [
+                    ]),
+                    _vm._v(" "),
+                    _c("dt", [
                       _vm._v(
                         "\n                    " +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketSubTotal")
                           ) +
-                          " " +
+                          " (" +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketGross")
                           ) +
-                          "\n                "
+                          ")\n                "
                       )
-                    ]
-                  ),
-                  _c(
-                    "dd",
-                    { class: { "font-weight-bold": !_vm.showNetPrices } },
-                    [
+                    ]),
+                    _c("dd", [
                       _vm._v(
                         "\n                    " +
                           _vm._s(_vm._f("currency")(_vm.basket.itemSum)) +
                           "\n                "
                       )
-                    ]
-                  )
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            _vm._t("after-item-sum"),
-            _vm._v(" "),
-            _vm._t("before-shipping-costs"),
-            _vm._v(" "),
-            _vm.visibleFields.includes("shippingCostsNet") ||
-            _vm.visibleFields.includes("basket.shipping_costs_net")
-              ? [
-                  _c(
-                    "dt",
-                    { class: { "font-weight-bold": _vm.showNetPrices } },
-                    [
+                    ])
+                  ]
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._t("after-item-sum"),
+              _vm._v(" "),
+              _vm._t("before-shipping-costs"),
+              _vm._v(" "),
+              _vm.visibleFields.includes("shippingCostsNet")
+                ? [
+                    _c("div", { staticClass: "net" }, [
+                      _c("dt", [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(
+                              _vm.$translate(
+                                "Ceres::Template.basketShippingCosts"
+                              )
+                            ) +
+                            " (" +
+                            _vm._s(
+                              _vm.$translate("Ceres::Template.basketNet")
+                            ) +
+                            ")\n                "
+                        )
+                      ]),
+                      _c("dd", [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(
+                              _vm._f("currency")(_vm.basket.shippingAmountNet)
+                            ) +
+                            "\n                "
+                        )
+                      ])
+                    ])
+                  ]
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.visibleFields.includes("shippingCostsGross")
+                ? [
+                    _c("dt", [
                       _vm._v(
                         "\n                    " +
                           _vm._s(
@@ -710,60 +654,14 @@ var render = function() {
                               "Ceres::Template.basketShippingCosts"
                             )
                           ) +
-                          " " +
-                          _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          "\n                "
-                      )
-                    ]
-                  ),
-                  _c(
-                    "dd",
-                    {
-                      class: { "font-weight-bold": _vm.showNetPrices },
-                      attrs: { "data-testing": "shipping-amount-net" }
-                    },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm._f("currency")(_vm.basket.shippingAmountNet)
-                          ) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.visibleFields.includes("shippingCostsGross") ||
-            _vm.visibleFields.includes("basket.shipping_costs_gross")
-              ? [
-                  _c(
-                    "dt",
-                    { class: { "font-weight-bold": !_vm.showNetPrices } },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.$translate(
-                              "Ceres::Template.basketShippingCosts"
-                            )
-                          ) +
-                          " " +
+                          " (" +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketGross")
                           ) +
-                          "\n                "
+                          ")\n                "
                       )
-                    ]
-                  ),
-                  _c(
-                    "dd",
-                    {
-                      class: { "font-weight-bold": !_vm.showNetPrices },
-                      attrs: { "data-testing": "shipping-amount" }
-                    },
-                    [
+                    ]),
+                    _c("dd", [
                       _vm._v(
                         "\n                    " +
                           _vm._s(
@@ -771,32 +669,28 @@ var render = function() {
                           ) +
                           "\n                "
                       )
-                    ]
-                  )
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            _vm._t("after-shipping-costs"),
-            _vm._v(" "),
-            (_vm.visibleFields.includes("promotionCoupon") ||
-              _vm.visibleFields.includes("basket.promotion_coupon")) &&
-            _vm.basket.couponCode &&
-            _vm.basket.couponCampaignType === "promotion"
-              ? [
-                  _c("dt", { staticClass: "font-weight-bold" }, [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(_vm.$translate("Ceres::Template.basketCoupon")) +
-                        "\n                "
-                    )
-                  ]),
-                  _c(
-                    "dd",
-                    {
-                      staticClass: "font-weight-bold",
-                      attrs: { "data-testing": "promotion-coupon" }
-                    },
-                    [
+                    ])
+                  ]
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._t("after-shipping-costs"),
+              _vm._v(" "),
+              _vm.visibleFields.includes("promotionCoupon") &&
+              _vm.basket.couponCode &&
+              _vm.basket.couponCampaignType === "promotion"
+                ? [
+                    _c("hr"),
+                    _vm._v(" "),
+                    _c("dt", [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.basketCoupon")
+                          ) +
+                          "\n                "
+                      )
+                    ]),
+                    _c("dd", [
                       _vm._v(
                         "\n                    " +
                           _vm._s(
@@ -804,158 +698,34 @@ var render = function() {
                           ) +
                           "\n                "
                       )
-                    ]
-                  )
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.visibleFields.includes("subAmount") ||
-            _vm.visibleFields.includes("basket.order_total_net") ||
-            _vm.visibleFields.includes("vats") ||
-            _vm.visibleFields.includes("basket.vat")
-              ? _c("hr")
-              : _vm._e(),
-            _vm._v(" "),
-            _vm._t("before-total-sum"),
-            _vm._v(" "),
-            _vm.visibleFields.includes("subAmount") ||
-            _vm.visibleFields.includes("basket.order_total_net")
-              ? [
-                  _c(
-                    "dt",
-                    { class: { "font-weight-bold": _vm.showNetPrices } },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.basketSubAmount")
-                          ) +
-                          " " +
-                          _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          "\n                "
-                      )
-                    ]
-                  ),
-                  _c(
-                    "dd",
-                    {
-                      class: { "font-weight-bold": _vm.showNetPrices },
-                      attrs: { "data-testing": "basket-sub-amount" }
-                    },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm._f("currency")(_vm.basket.subAmount)) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            _vm._t("before-vat"),
-            _vm._v(" "),
-            _vm._l(_vm.basket.totalVats, function(totalVat) {
-              return _vm.visibleFields.includes("vats") ||
-                _vm.visibleFields.includes("basket.vat")
-                ? [
-                    _c("dt", [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm.$translate("Ceres::Template.basketVAT")) +
-                          " " +
-                          _vm._s(totalVat.vatValue) +
-                          "%\n                "
-                      )
-                    ]),
-                    _c("dd", { attrs: { "data-testing": "vat-amount" } }, [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm._f("currency")(totalVat.vatAmount)) +
-                          "\n                "
-                      )
                     ])
                   ]
-                : _vm._e()
-            }),
-            _vm._v(" "),
-            _vm._t("after-vat"),
-            _vm._v(" "),
-            (_vm.visibleFields.includes("additionalCosts") ||
-              _vm.visibleFields.includes("basket.additional_costs")) &&
-            _vm.displayedPropertiesWithoutTax.length
-              ? [
-                  _vm._l(_vm.displayedPropertiesWithoutTax, function(property) {
-                    return [
-                      _c(
-                        "dt",
-                        {
-                          key: "property-name-" + property.propertyId,
-                          class: { "font-weight-bold": _vm.showNetPrices },
-                          attrs: {
-                            "data-testing": "additionalcost-without-tax"
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(property.name) +
-                              "\n                    "
-                          )
-                        ]
-                      ),
-                      _c(
-                        "dd",
-                        {
-                          key: "property-price-" + property.propertyId,
-                          class: { "font-weight-bold": _vm.showNetPrices }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(_vm._f("currency")(property.price)) +
-                              "\n                    "
-                          )
-                        ]
-                      )
-                    ]
-                  })
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "totalSum" },
-              [
-                _c("hr"),
-                _vm._v(" "),
-                _vm.visibleFields.includes("totalSumNet") ||
-                _vm.visibleFields.includes("basket.order_total_net")
-                  ? [
-                      _c(
-                        "dt",
-                        { class: { "font-weight-bold": _vm.showNetPrices } },
-                        [
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "net" },
+                [
+                  _c("hr"),
+                  _vm._v(" "),
+                  _vm._t("before-total-sum"),
+                  _vm._v(" "),
+                  _vm.visibleFields.includes("totalSumNet")
+                    ? [
+                        _c("dt", [
                           _vm._v(
                             "\n                        " +
                               _vm._s(
                                 _vm.$translate("Ceres::Template.basketTotalSum")
                               ) +
-                              " " +
+                              " (" +
                               _vm._s(
                                 _vm.$translate("Ceres::Template.basketNet")
                               ) +
-                              "\n                    "
+                              ")\n                    "
                           )
-                        ]
-                      ),
-                      _c(
-                        "dd",
-                        {
-                          class: { "font-weight-bold": _vm.showNetPrices },
-                          attrs: { "data-testing": "basket-amount-net" }
-                        },
-                        [
+                        ]),
+                        _c("dd", [
                           _vm._v(
                             "\n                        " +
                               _vm._s(
@@ -963,38 +733,62 @@ var render = function() {
                               ) +
                               "\n                    "
                           )
-                        ]
-                      )
-                    ]
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.visibleFields.includes("totalSumGross") ||
-                _vm.visibleFields.includes("basket.order_total_gross")
-                  ? [
-                      _c(
-                        "dt",
-                        { class: { "font-weight-bold": !_vm.showNetPrices } },
-                        [
+                        ])
+                      ]
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm._t("before-vat"),
+                  _vm._v(" "),
+                  _vm._l(_vm.basket.totalVats, function(totalVat) {
+                    return _vm.visibleFields.includes("vats")
+                      ? _c("div", { staticClass: "vatTotals" }, [
+                          _c("dt", [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(
+                                  _vm.$translate("Ceres::Template.basketVAT")
+                                ) +
+                                " " +
+                                _vm._s(totalVat.vatValue) +
+                                "%\n                    "
+                            )
+                          ]),
+                          _c("dd", [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(_vm._f("currency")(totalVat.vatAmount)) +
+                                "\n                    "
+                            )
+                          ])
+                        ])
+                      : _vm._e()
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "totalSum" },
+                [
+                  _c("hr"),
+                  _vm._v(" "),
+                  _vm.visibleFields.includes("totalSumGross")
+                    ? [
+                        _c("dt", [
                           _vm._v(
                             "\n                        " +
                               _vm._s(
                                 _vm.$translate("Ceres::Template.basketTotalSum")
                               ) +
-                              " " +
+                              " (" +
                               _vm._s(
                                 _vm.$translate("Ceres::Template.basketGross")
                               ) +
-                              "\n                    "
+                              ")\n                    "
                           )
-                        ]
-                      ),
-                      _c(
-                        "dd",
-                        {
-                          class: { "font-weight-bold": !_vm.showNetPrices },
-                          attrs: { "data-testing": "basket-amount" }
-                        },
-                        [
+                        ]),
+                        _c("dd", [
                           _vm._v(
                             "\n                        " +
                               _vm._s(
@@ -1002,32 +796,23 @@ var render = function() {
                               ) +
                               "\n                    "
                           )
-                        ]
-                      )
-                    ]
-                  : _vm._e(),
-                _vm._v(" "),
-                (_vm.visibleFields.includes("salesCoupon") ||
-                  _vm.visibleFields.includes("basket.sales_coupon")) &&
-                _vm.basket.couponCode &&
-                _vm.basket.couponCampaignType === "sales"
-                  ? [
-                      _c("dt", { staticClass: "font-weight-bold" }, [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(
-                              _vm.$translate("Ceres::Template.basketCoupon")
-                            ) +
-                            "\n                    "
-                        )
-                      ]),
-                      _c(
-                        "dd",
-                        {
-                          staticClass: "font-weight-bold",
-                          attrs: { "data-testing": "sales-coupon" }
-                        },
-                        [
+                        ])
+                      ]
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.visibleFields.includes("salesCoupon") &&
+                  _vm.basket.couponCode &&
+                  _vm.basket.couponCampaignType === "sales"
+                    ? [
+                        _c("dt", [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(
+                                _vm.$translate("Ceres::Template.basketCoupon")
+                              )
+                          )
+                        ]),
+                        _c("dd", [
                           _vm._v(
                             "\n                        " +
                               _vm._s(
@@ -1035,31 +820,25 @@ var render = function() {
                               ) +
                               "\n                    "
                           )
-                        ]
-                      )
-                    ]
-                  : _vm._e(),
-                _vm._v(" "),
-                (_vm.visibleFields.includes("openAmount") ||
-                  _vm.visibleFields.includes("basket.open_amount")) &&
-                _vm.basket.couponCampaignType === "sales"
-                  ? [
-                      _c("dt", { staticClass: "font-weight-bold" }, [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(
-                              _vm.$translate("Ceres::Template.basketOpenAmount")
-                            ) +
-                            "\n                    "
-                        )
-                      ]),
-                      _c(
-                        "dd",
-                        {
-                          staticClass: "font-weight-bold",
-                          attrs: { "data-testing": "open-amount" }
-                        },
-                        [
+                        ])
+                      ]
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.visibleFields.includes("openAmount") &&
+                  _vm.basket.couponCampaignType === "sales"
+                    ? [
+                        _c("dt", [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.basketOpenAmount"
+                                )
+                              ) +
+                              "\n                    "
+                          )
+                        ]),
+                        _c("dd", [
                           _vm._v(
                             "\n                        " +
                               _vm._s(
@@ -1067,29 +846,21 @@ var render = function() {
                               ) +
                               "\n                    "
                           )
-                        ]
-                      )
-                    ]
-                  : _vm._e()
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _vm._t("after-total-sum")
-          ],
-          2
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _vm.basket.isExportDelivery && _vm.deliveryExportTranslation
-      ? _c("div", { staticClass: "alert alert-info w-100" }, [
-          _vm._v(
-            "\n        " + _vm._s(_vm.deliveryExportTranslation) + "\n    "
+                        ])
+                      ]
+                    : _vm._e()
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _vm._t("after-total-sum")
+            ],
+            2
           )
-        ])
-      : _vm._e()
-  ])
+        ]
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

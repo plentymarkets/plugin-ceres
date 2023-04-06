@@ -490,41 +490,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
@@ -1085,568 +1050,360 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "position-relative" },
-    [
-      _vm.inputType === "text" ||
-      _vm.inputType === "float" ||
-      _vm.inputType === "int"
-        ? _c(
-            "div",
-            {
-              staticClass: "input-unit order-property-input",
-              class: { active: _vm.property.value, error: _vm.hasError },
-              attrs: { "data-validate": "text" }
-            },
-            [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.inputValue,
-                    expression: "inputValue"
-                  },
-                  { name: "tooltip", rawName: "v-tooltip" }
-                ],
-                attrs: {
-                  type: "text",
-                  "data-toggle": "tooltip",
-                  title: _vm.property.names.description,
-                  "data-testing": "order-property-input-" + _vm.inputType
+  return _c("div", [
+    _vm.inputType === "text" ||
+    _vm.inputType === "float" ||
+    _vm.inputType === "int"
+      ? _c(
+          "div",
+          {
+            staticClass: "input-unit order-property-input",
+            class: { active: _vm.property.value, error: _vm.hasError },
+            attrs: { "data-validate": "text" }
+          },
+          [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.inputValue,
+                  expression: "inputValue"
                 },
-                domProps: { value: _vm.inputValue },
-                on: {
-                  input: [
-                    function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.inputValue = $event.target.value
-                    },
-                    function($event) {
+                { name: "tooltip", rawName: "v-tooltip" }
+              ],
+              attrs: {
+                type: "text",
+                "data-toggle": "tooltip",
+                title: _vm.property.names.description,
+                "data-testing": "order-property-input-" + _vm.inputType
+              },
+              domProps: { value: _vm.inputValue },
+              on: {
+                input: [
+                  function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.inputValue = $event.target.value
+                  },
+                  function($event) {
+                    return _vm.onInputValueChanged($event.target.value)
+                  }
+                ]
+              }
+            }),
+            _vm._v(" "),
+            _c("label", { staticClass: "d-flex" }, [
+              _c("span", { staticClass: "text-truncate" }, [
+                _vm._v(_vm._s(_vm.property.names.name))
+              ]),
+              _vm._v(" "),
+              _vm.surcharge > 0
+                ? _c("strong", { staticClass: "ml-1" }, [
+                    _vm._v(
+                      "(+ " + _vm._s(_vm._f("currency")(_vm.surcharge)) + ") *"
+                    )
+                  ])
+                : _vm._e()
+            ])
+          ]
+        )
+      : _vm.inputType === "checkbox" || _vm.inputType === "radio"
+      ? _c(
+          "div",
+          {
+            staticClass: "form-check order-property-checkbox mb-0",
+            class: "order-property-" + _vm.property.id
+          },
+          [
+            _vm.inputType === "checkbox"
+              ? _c("input", {
+                  staticClass: "form-check-input",
+                  class: "checkbox_" + _vm.property.id,
+                  attrs: {
+                    type: "checkbox",
+                    name: _vm.group ? _vm.group.id : "check" + _vm._uid,
+                    id: "check" + _vm._uid,
+                    "data-testing": "order-property-input-checkbox"
+                  },
+                  domProps: {
+                    value: _vm.property.id,
+                    checked: _vm.property.value
+                  },
+                  on: {
+                    change: function($event) {
+                      return _vm.onInputValueChanged($event.target.checked)
+                    }
+                  }
+                })
+              : _c("input", {
+                  staticClass: "form-check-input",
+                  attrs: {
+                    type: "radio",
+                    name: _vm.group ? _vm.group.id : "check" + _vm._uid,
+                    id: "check" + _vm._uid,
+                    "data-testing": "order-property-input-radio"
+                  },
+                  domProps: {
+                    value: _vm.property.id,
+                    checked: _vm.property.value
+                  },
+                  on: {
+                    change: function($event) {
                       return _vm.onInputValueChanged($event.target.value)
                     }
-                  ]
+                  }
+                }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                directives: [{ name: "tooltip", rawName: "v-tooltip" }],
+                staticClass: "form-check-label text-appearance d-flex",
+                class: { "text-danger": _vm.hasError },
+                attrs: {
+                  for: "check" + _vm._uid,
+                  "data-toggle": "tooltip",
+                  title: _vm.property.names.description
                 }
-              }),
+              },
+              [
+                _c("span", { staticClass: "text-wrap" }, [
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "css-i6dzq1",
+                      attrs: {
+                        viewBox: "0 0 24 24",
+                        width: "16",
+                        height: "16",
+                        stroke: "currentColor",
+                        "stroke-width": "2",
+                        fill: "none",
+                        "stroke-linecap": "round",
+                        "stroke-linejoin": "round"
+                      }
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
+                        }
+                      })
+                    ]
+                  ),
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.property.names.name) +
+                      "\n                  "
+                  ),
+                  _c(
+                    "a",
+                    {
+                      attrs: {
+                        "data-toggle": "modal",
+                        href: "#aufbauserviceModal"
+                      }
+                    },
+                    [_vm._v("Details")]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm.surcharge > 0
+                  ? _c("span", { staticClass: "ml-1 surcharge" }, [
+                      _vm._v("+ " + _vm._s(_vm._f("currency")(_vm.surcharge)))
+                    ])
+                  : _vm._e()
+              ]
+            )
+          ]
+        )
+      : _vm.inputType === "selection"
+      ? _c("div", { class: { "d-flex": _vm.selectedDescription } }, [
+          _c(
+            "div",
+            {
+              directives: [{ name: "tooltip", rawName: "v-tooltip" }],
+              staticClass: "input-unit order-property-input",
+              class: { active: _vm.property.value, error: _vm.hasError },
+              attrs: {
+                "data-toggle": "tooltip",
+                title: _vm.property.names.description
+              }
+            },
+            [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.selectionValue,
+                      expression: "selectionValue"
+                    }
+                  ],
+                  staticClass: "custom-select",
+                  attrs: {
+                    id: "order-property-input-select",
+                    "data-testing": "order-property-selection"
+                  },
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.selectionValue = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      },
+                      function($event) {
+                        return _vm.onInputValueChanged($event.target.value)
+                      }
+                    ]
+                  }
+                },
+                [
+                  _c("option", { domProps: { selected: true, value: null } }, [
+                    _vm._v(
+                      _vm._s(
+                        _vm.$translate("Ceres::Template.singleItemPleaseSelect")
+                      )
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.property.selectionValues, function(value, id) {
+                    return _c(
+                      "option",
+                      {
+                        key: id,
+                        attrs: {
+                          "data-testing": "order-property-selection-option"
+                        },
+                        domProps: {
+                          selected: _vm.property.id === id,
+                          value: id
+                        }
+                      },
+                      [_vm._v("${ value.name }")]
+                    )
+                  })
+                ],
+                2
+              ),
               _vm._v(" "),
-              _c("label", { staticClass: "d-flex" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "d-flex w-100",
+                  attrs: { for: "order-property-input-select" }
+                },
+                [
+                  _c("span", { staticClass: "text-truncate" }, [
+                    _vm._v(_vm._s(_vm.property.names.name))
+                  ]),
+                  _vm._v(" "),
+                  _vm.surcharge > 0
+                    ? _c("span", { staticClass: "ml-1" }, [
+                        _vm._v(_vm._s(_vm._f("currency")(_vm.surcharge)))
+                      ])
+                    : _vm._e()
+                ]
+              )
+            ]
+          )
+        ])
+      : _vm.inputType === "file"
+      ? _c("div", [
+          _c(
+            "label",
+            {
+              directives: [{ name: "tooltip", rawName: "v-tooltip" }],
+              staticClass:
+                "input-unit file-input order-property-input component-loading with-icon sending",
+              class: {
+                active: _vm.property.value,
+                "is-loading": _vm.waiting,
+                error: _vm.hasError
+              },
+              attrs: {
+                "data-toggle": "tooltip",
+                title: _vm.property.names.description
+              }
+            },
+            [
+              _c(
+                "span",
+                {
+                  staticClass: "input-unit-preview",
+                  class: { disabled: _vm.waiting }
+                },
+                [_vm._v(_vm._s(_vm.selectedFileName))]
+              ),
+              _vm._v(" "),
+              _c("span", { staticClass: "input-unit-label d-flex" }, [
                 _c("span", { staticClass: "text-truncate" }, [
                   _vm._v(_vm._s(_vm.property.names.name))
                 ]),
                 _vm._v(" "),
-                _c(
-                  "strong",
-                  { staticClass: "ml-1" },
-                  [
-                    _vm.surcharge > 0
-                      ? [
-                          _vm._v(
-                            "(" +
-                              _vm._s(_vm.inclOrPlus) +
-                              " " +
-                              _vm._s(_vm._f("currency")(_vm.surcharge)) +
-                              ")"
-                          )
-                        ]
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c("span", [
+                _vm.surcharge > 0
+                  ? _c("strong", { staticClass: "ml-1" }, [
                       _vm._v(
-                        _vm._s(_vm.footnotes) +
-                          " " +
-                          _vm._s(_vm.requiredFootnotes)
+                        "(+ " +
+                          _vm._s(_vm._f("currency")(_vm.surcharge)) +
+                          ") *"
                       )
                     ])
-                  ],
-                  2
-                )
-              ])
-            ]
-          )
-        : _vm.inputType === "checkbox" || _vm.inputType === "radio"
-        ? _c(
-            "div",
-            { staticClass: "form-check", class: { error: _vm.hasError } },
-            [
-              _vm.inputType === "checkbox" &&
-              !(_vm.property.isRequired && _vm.property.isPreSelected)
-                ? _c("input", {
-                    staticClass: "form-check-input",
-                    attrs: {
-                      type: "checkbox",
-                      name: _vm.group ? _vm.group.id : "check" + _vm._uid,
-                      id: "check" + _vm._uid,
-                      "data-testing": "order-property-input-checkbox"
-                    },
-                    domProps: {
-                      value: _vm.property.id,
-                      checked: _vm.property.value
-                    },
-                    on: {
-                      change: function($event) {
-                        return _vm.onInputValueChanged($event.target.checked)
-                      }
-                    }
-                  })
-                : _vm.inputType === "radio"
-                ? _c("input", {
-                    staticClass: "form-check-input",
-                    attrs: {
-                      type: "radio",
-                      name: _vm.group ? _vm.group.id : "check" + _vm._uid,
-                      id: "check" + _vm._uid,
-                      "data-testing": "order-property-input-radio"
-                    },
-                    domProps: {
-                      value: _vm.property.id,
-                      checked: _vm.property.value
-                    },
-                    on: {
-                      change: function($event) {
-                        return _vm.onInputValueChanged($event.target.value)
-                      }
-                    }
-                  })
-                : _vm._e(),
+                  : _vm._e()
+              ]),
               _vm._v(" "),
-              _c(
-                "label",
-                {
-                  directives: [{ name: "tooltip", rawName: "v-tooltip" }],
-                  staticClass: "form-check-label text-appearance d-flex",
-                  attrs: {
-                    for: "check" + _vm._uid,
-                    "data-toggle": "tooltip",
-                    title: _vm.property.names.description,
-                    "data-testing": "order-property-label-" + _vm.inputType
-                  }
-                },
-                [
-                  _c("span", { staticClass: "text-wrap" }, [
-                    _vm._v(_vm._s(_vm.property.names.name))
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "strong",
-                    { staticClass: "ml-1" },
-                    [
-                      _vm.surcharge > 0
-                        ? [
-                            _vm._v(
-                              "(" +
-                                _vm._s(_vm.inclOrPlus) +
-                                " " +
-                                _vm._s(_vm._f("currency")(_vm.surcharge)) +
-                                ")"
-                            )
-                          ]
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("span", [
-                        _vm._v(
-                          _vm._s(_vm.footnotes) +
-                            " " +
-                            _vm._s(_vm.requiredFootnotes)
-                        )
-                      ])
-                    ],
-                    2
-                  )
-                ]
-              )
-            ]
-          )
-        : _vm.inputType === "selection"
-        ? _c(
-            "div",
-            { class: { "d-flex": _vm.selectedDescription } },
-            [
-              _c(
-                "div",
-                {
-                  directives: [{ name: "tooltip", rawName: "v-tooltip" }],
-                  staticClass: "input-unit order-property-input",
-                  class: { active: _vm.property.value, error: _vm.hasError },
-                  attrs: {
-                    "data-toggle": "tooltip",
-                    title: _vm.property.names.description
-                  }
-                },
-                [
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.selectionValue,
-                          expression: "selectionValue"
-                        }
-                      ],
-                      staticClass: "custom-select",
-                      attrs: {
-                        id: "order-property-input-select",
-                        "data-testing": "order-property-selection"
-                      },
-                      on: {
-                        change: [
-                          function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.selectionValue = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          },
-                          function($event) {
-                            return _vm.onInputValueChanged($event.target.value)
-                          }
-                        ]
-                      }
-                    },
-                    [
-                      _c(
-                        "option",
-                        { domProps: { selected: true, value: null } },
-                        [
-                          _vm._v(
-                            _vm._s(
-                              _vm.$translate(
-                                "Ceres::Template.singleItemPleaseSelect"
-                              )
-                            )
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _vm._l(_vm.property.selectionValues, function(value, id) {
-                        return _c(
-                          "option",
-                          {
-                            key: id,
-                            attrs: {
-                              "data-testing": "order-property-selection-option"
-                            },
-                            domProps: {
-                              selected: _vm.property.id === id,
-                              value: id
-                            }
-                          },
-                          [_vm._v(_vm._s(value.name))]
-                        )
-                      })
-                    ],
-                    2
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "d-flex w-100",
-                      attrs: { for: "order-property-input-select" }
-                    },
-                    [
-                      _c("span", { staticClass: "text-truncate" }, [
-                        _vm._v(_vm._s(_vm.property.names.name))
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "strong",
-                        { staticClass: "ml-1" },
-                        [
-                          _vm.surcharge > 0
-                            ? [
-                                _vm._v(
-                                  "(" +
-                                    _vm._s(_vm.inclOrPlus) +
-                                    " " +
-                                    _vm._s(_vm._f("currency")(_vm.surcharge)) +
-                                    ")"
-                                )
-                              ]
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _c("span", [
-                            _vm._v(
-                              _vm._s(_vm.footnotes) +
-                                " " +
-                                _vm._s(_vm.requiredFootnotes)
-                            )
-                          ])
-                        ],
-                        2
-                      )
-                    ]
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _vm.selectedDescription
-                ? _c("popper", {
-                    staticClass: "order-property-selection-info-popper",
-                    attrs: { placement: "bottom" },
-                    scopedSlots: _vm._u(
-                      [
-                        {
-                          key: "handle",
-                          fn: function() {
-                            return [
-                              _c(
-                                "button",
-                                {
-                                  staticClass:
-                                    "btn btn-icon btn-circle btn-default btn-appearance font-weight-bold"
-                                },
-                                [_vm._v("?")]
-                              )
-                            ]
-                          },
-                          proxy: true
-                        },
-                        {
-                          key: "content",
-                          fn: function() {
-                            return [
-                              _vm._v(
-                                "\n                " +
-                                  _vm._s(_vm.selectedDescription) +
-                                  "\n            "
-                              )
-                            ]
-                          },
-                          proxy: true
-                        }
-                      ],
-                      null,
-                      false,
-                      2730731730
-                    )
-                  })
-                : _vm._e()
-            ],
-            1
-          )
-        : _vm.inputType === "file"
-        ? _c(
-            "div",
-            { staticClass: "d-flex" },
-            [
-              _c(
-                "label",
-                {
-                  directives: [{ name: "tooltip", rawName: "v-tooltip" }],
-                  staticClass:
-                    "input-unit file-input order-property-input component-loading with-icon sending",
-                  class: {
-                    active: _vm.property.value,
-                    "is-loading": _vm.waiting,
-                    error: _vm.hasError
-                  },
-                  attrs: {
-                    "data-toggle": "tooltip",
-                    title: _vm.property.names.description
-                  }
-                },
-                [
-                  _c(
+              !_vm.selectedFile
+                ? _c("span", { staticClass: "input-unit-btn" }, [
+                    _c("i", { staticClass: "fa fa-ellipsis-h" })
+                  ])
+                : _c(
                     "span",
                     {
-                      staticClass: "input-unit-preview",
-                      class: { disabled: _vm.waiting }
-                    },
-                    [_vm._v(_vm._s(_vm.selectedFileName))]
-                  ),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "input-unit-label d-flex" }, [
-                    _c("span", { staticClass: "text-truncate" }, [
-                      _vm._v(_vm._s(_vm.property.names.name))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "strong",
-                      { staticClass: "ml-1" },
-                      [
-                        _vm.surcharge > 0
-                          ? [
-                              _vm._v(
-                                "(" +
-                                  _vm._s(_vm.inclOrPlus) +
-                                  " " +
-                                  _vm._s(_vm._f("currency")(_vm.surcharge)) +
-                                  ")"
-                              )
-                            ]
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _c("span", [
-                          _vm._v(
-                            _vm._s(_vm.footnotes) +
-                              " " +
-                              _vm._s(_vm.requiredFootnotes)
-                          )
-                        ])
-                      ],
-                      2
-                    )
-                  ]),
-                  _vm._v(" "),
-                  !_vm.selectedFile
-                    ? _c("span", { staticClass: "input-unit-btn" }, [
-                        _c("i", { staticClass: "fa fa-ellipsis-h" })
-                      ])
-                    : _c(
-                        "span",
-                        {
-                          staticClass: "input-unit-btn",
-                          attrs: { disabled: _vm.waiting },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              return _vm.clearSelectedFile()
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "fa fa-times" })]
-                      ),
-                  _vm._v(" "),
-                  _c("input", {
-                    ref: "fileInput",
-                    attrs: {
-                      disabled: _vm.waiting,
-                      type: "file",
-                      size: "50",
-                      "data-testing": "order-property-input-file"
-                    },
-                    on: {
-                      change: function($event) {
-                        return _vm.setPropertyFile($event)
+                      staticClass: "input-unit-btn",
+                      attrs: { disabled: _vm.waiting },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.clearSelectedFile()
+                        }
                       }
-                    }
-                  })
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "client-only",
-                [
-                  _vm.isTouchDevice && _vm.property.names.description
-                    ? _c("popper", {
-                        staticClass: "order-property-selection-info-popper",
-                        attrs: { placement: "bottom" },
-                        scopedSlots: _vm._u(
-                          [
-                            {
-                              key: "handle",
-                              fn: function() {
-                                return [
-                                  _c(
-                                    "button",
-                                    {
-                                      staticClass:
-                                        "btn btn-icon btn-circle btn-default btn-appearance font-weight-bold"
-                                    },
-                                    [_vm._v("?")]
-                                  )
-                                ]
-                              },
-                              proxy: true
-                            },
-                            {
-                              key: "content",
-                              fn: function() {
-                                return [
-                                  _vm._v(
-                                    "\n                    " +
-                                      _vm._s(_vm.property.names.description) +
-                                      "\n                "
-                                  )
-                                ]
-                              },
-                              proxy: true
-                            }
-                          ],
-                          null,
-                          false,
-                          1618376136
-                        )
-                      })
-                    : _vm._e()
-                ],
-                1
-              )
-            ],
-            1
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "client-only",
-        [
-          _vm.isTouchDevice &&
-          _vm.inputType !== "selection" &&
-          _vm.inputType !== "file" &&
-          _vm.property.names.description
-            ? _c("popper", {
-                staticClass:
-                  "order-property-selection-info-popper position-absolute",
-                class: {
-                  "checkbox-or-radio":
-                    _vm.inputType === "checkbox" || _vm.inputType === "radio"
-                },
-                attrs: { placement: "bottom" },
-                scopedSlots: _vm._u(
-                  [
-                    {
-                      key: "handle",
-                      fn: function() {
-                        return [
-                          _c(
-                            "button",
-                            {
-                              staticClass:
-                                "btn btn-icon btn-circle btn-default btn-appearance font-weight-bold"
-                            },
-                            [_vm._v("?")]
-                          )
-                        ]
-                      },
-                      proxy: true
                     },
-                    {
-                      key: "content",
-                      fn: function() {
-                        return [
-                          _vm._v(
-                            "\n                " +
-                              _vm._s(_vm.property.names.description) +
-                              "\n            "
-                          )
-                        ]
-                      },
-                      proxy: true
-                    }
-                  ],
-                  null,
-                  false,
-                  1214237640
-                )
+                    [_c("i", { staticClass: "fa fa-times" })]
+                  ),
+              _vm._v(" "),
+              _c("input", {
+                ref: "fileInput",
+                attrs: {
+                  disabled: _vm.waiting,
+                  type: "file",
+                  size: "50",
+                  accept: "image/*",
+                  "data-testing": "order-property-input-file"
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.setPropertyFile($event)
+                  }
+                }
               })
-            : _vm._e()
-        ],
-        1
-      )
-    ],
-    1
-  )
+            ]
+          )
+        ])
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
