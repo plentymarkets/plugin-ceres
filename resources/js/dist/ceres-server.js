@@ -10865,7 +10865,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -51844,13 +51843,15 @@ var render = function() {
         "</div>",
         [
           _vm._ssrNode(
-            '<input type="search" value' +
+            '<input type="search"' +
               _vm._ssrAttr("autofocus", _vm.isShopBuilder) +
               _vm._ssrAttr(
                 "aria-label",
                 _vm.$translate("Ceres::Template.headerSearchTerm")
               ) +
-              ' placeholder="Suchbegriff eingeben..." class="search-input flex-grow-1 px-2 py-2 bkmSearchbox"> '
+              ' placeholder="Suchbegriff eingeben..."' +
+              _vm._ssrAttr("value", _vm.searchString) +
+              ' class="search-input flex-grow-1 px-2 py-2 bkmSearchbox"> '
           ),
           _vm._ssrNode('<span class="input-group-append">', "</span>", [
             _vm._ssrNode(
@@ -52401,7 +52402,9 @@ var render = function() {
         return tag.id != 123
           ? "<span" +
               _vm._ssrClass(null, "selected-filter filter-" + tag.id) +
-              '><i aria-hidden="true" class="fa fa-times"></i> ${ tag.name }\n        </span>'
+              '><i aria-hidden="true" class="fa fa-times"></i>' +
+              _vm._ssrEscape(" " + _vm._s(tag.name) + "\n        ") +
+              "</span>"
           : "<!---->"
       }) +
         " " +

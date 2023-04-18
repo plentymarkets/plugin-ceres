@@ -1,7 +1,7 @@
 <template>
     <div class="selected-filters clearfix bkr-cc">
             <span :class="'selected-filter filter-' + tag.id" v-if="tag.id != 123" v-for="tag in tagList" @click="removeTag(tag)">
-                <i class="fa fa-times" aria-hidden="true"></i> ${ tag.name }
+                <i class="fa fa-times" aria-hidden="true"></i> {{ tag.name }}
             </span>
             <span class="selected-filter reset-all" v-if="tagList.length >= 2" @click="resetAllTags()">
             {{ $translate("Ceres::Template.itemFilterReset") }}

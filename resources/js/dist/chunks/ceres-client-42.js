@@ -128,7 +128,7 @@ var render = function() {
                   staticClass: "fa fa-times",
                   attrs: { "aria-hidden": "true" }
                 }),
-                _vm._v(" ${ tag.name }\n        ")
+                _vm._v(" " + _vm._s(tag.name) + "\n        ")
               ]
             )
           : _vm._e()

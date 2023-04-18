@@ -5,14 +5,13 @@
             type="search"
             class="search-input flex-grow-1 px-2 py-2 bkmSearchbox"
             ref="searchInput"
-            value=""
             v-model="searchString"
+            @input="onValueChanged($event.target.value)"
             @keyup.enter="search()"
             @focus="isSearchFocused = true"
             @blur="onBlurSearchField($event)"
             :autofocus="isShopBuilder"
             :aria-label="$translate('Ceres::Template.headerSearchTerm')"
-            @input="onValueChanged($event.target.value)"
             placeholder="Suchbegriff eingeben..." />
             <span class="input-group-append">
               <button class="search-submit btn btn-bkm bkmSearchbutton" aria-label="Suchen" type="submit" @click="search()">
