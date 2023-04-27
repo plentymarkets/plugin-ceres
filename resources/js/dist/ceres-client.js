@@ -943,12 +943,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -968,7 +962,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: _objectSpread({
     viewModeClass: function viewModeClass() {
-      switch (this.viewMode) {
+      switch (this.viewMethod) {
         case 'mobile':
           return 'myAccount';
           break;
@@ -37216,59 +37210,81 @@ var render = function() {
               "span",
               { staticClass: "icon", class: { loggedin: _vm.isLoggedIn } },
               [
-                _c(
-                  "svg",
-                  {
-                    attrs: {
-                      xmlns: "http://www.w3.org/2000/svg",
-                      width: "16",
-                      height: "16",
-                      viewBox: "0 0 24 24",
-                      fill: "none",
-                      stroke: "#000000",
-                      "stroke-width": "2",
-                      "stroke-linecap": "butt",
-                      "stroke-linejoin": "round"
-                    }
-                  },
-                  [
-                    _c("path", {
-                      attrs: { d: "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" }
-                    }),
-                    _c("circle", { attrs: { cx: "12", cy: "7", r: "4" } })
-                  ]
-                ),
-                _vm._v(" "),
                 !_vm.isLoggedIn
-                  ? _c("a", {
-                      staticClass: "nav-link",
-                      attrs: {
-                        href: _vm.isLogin ? "javascript:void(0)" : "#login",
-                        "data-toggle": _vm.isLogin ? false : "modal",
-                        "aria-label": _vm.$translate("Ceres::Template.login")
-                      },
-                      domProps: {
-                        innerHTML: _vm._s(
-                          _vm.$translate("Ceres::Template.login")
-                        )
-                      },
-                      on: {
-                        click: function($event) {
-                          _vm.createLoginModal()
-                          _vm.createRegisterModal()
-                          _vm.unmarkInputFields()
+                  ? _c(
+                      "a",
+                      {
+                        staticClass: "nav-link",
+                        attrs: {
+                          href: _vm.isLogin ? "javascript:void(0)" : "#login",
+                          "data-toggle": _vm.isLogin ? false : "modal",
+                          "aria-label": _vm.$translate("Ceres::Template.login")
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.createLoginModal()
+                            _vm.createRegisterModal()
+                            _vm.unmarkInputFields()
+                          }
                         }
-                      }
-                    })
-                  : _c("a", {
-                      attrs: { href: _vm.$ceres.urls.myAccount },
-                      domProps: { innerHTML: _vm._s("Mein Konto") }
-                    })
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              width: "16",
+                              height: "16",
+                              viewBox: "0 0 24 24",
+                              fill: "none",
+                              stroke: "#000000",
+                              "stroke-width": "2",
+                              "stroke-linecap": "butt",
+                              "stroke-linejoin": "round"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d: "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                              }
+                            }),
+                            _c("circle", {
+                              attrs: { cx: "12", cy: "7", r: "4" }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  : _c("a", { attrs: { href: _vm.$ceres.urls.myAccount } }, [
+                      _c(
+                        "svg",
+                        {
+                          attrs: {
+                            xmlns: "http://www.w3.org/2000/svg",
+                            width: "16",
+                            height: "16",
+                            viewBox: "0 0 24 24",
+                            fill: "none",
+                            stroke: "#000000",
+                            "stroke-width": "2",
+                            "stroke-linecap": "butt",
+                            "stroke-linejoin": "round"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d: "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                            }
+                          }),
+                          _c("circle", { attrs: { cx: "12", cy: "7", r: "4" } })
+                        ]
+                      )
+                    ])
               ]
-            ),
-            !_vm.isLogin
-              ? _c("span", { staticClass: "icon" })
-              : _c("span", { staticClass: "d-none" })
+            )
           ]
         : _vm.viewMethod == "mobile"
         ? [
@@ -37369,45 +37385,26 @@ var render = function() {
           ]
         : _vm.viewMethod == "wishlist"
         ? [
-            _c("div", { staticClass: "col-4 offset-2" }, [
-              _c("a", {
-                staticClass: "btn btn-bkm btn-sm btn-block",
-                attrs: {
-                  href: "#login",
-                  "data-toggle": _vm.isLogin ? false : "modal"
-                },
-                domProps: {
-                  innerHTML: _vm._s(_vm.$translate("Ceres::Template.login"))
-                },
-                on: {
-                  click: function($event) {
-                    _vm.createLoginModal()
-                    _vm.createRegisterModal()
-                    _vm.unmarkInputFields()
+            _c("span", { staticClass: "icon" }, [
+              _c("i", { attrs: { "data-feather": "heart" } }),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  attrs: {
+                    href: "#login",
+                    "data-toggle": _vm.isLogin ? false : "modal"
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.createLoginModal()
+                      _vm.createRegisterModal()
+                      _vm.unmarkInputFields()
+                    }
                   }
-                }
-              })
-            ]),
-            _c("div", { staticClass: "col-4" }, [
-              _c("a", {
-                staticClass: "btn btn-bkm-inverted btn-sm btn-block",
-                attrs: {
-                  href: "#registration",
-                  "data-toggle": _vm.isRegister ? false : "modal"
                 },
-                domProps: {
-                  innerHTML: _vm._s(
-                    _vm.$translate("Ceres::Template.loginRegister")
-                  )
-                },
-                on: {
-                  click: function($event) {
-                    _vm.createLoginModal()
-                    _vm.createRegisterModal()
-                    _vm.unmarkInputFields()
-                  }
-                }
-              })
+                [_vm._v("Anmelden")]
+              )
             ])
           ]
         : _vm._e()
@@ -38919,11 +38916,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      staticClass: "bkr-cc",
-      class: { wide: _vm.isSearchFocused, notwide: !_vm.isSearchFocused },
-      attrs: { id: "search_and_porto_holder" }
-    },
+    { staticClass: "bkr-cc", attrs: { id: "search_and_porto_holder" } },
     [
       _c("div", { staticClass: "input-group" }, [
         _c("input", {
@@ -38978,7 +38971,7 @@ var render = function() {
           _c(
             "button",
             {
-              staticClass: "search-submit btn btn-bkm bkmSearchbutton",
+              staticClass: "search-submit btn btn-bkm bkmSearchbutton d-none",
               attrs: { "aria-label": "Suchen", type: "submit" },
               on: {
                 click: function($event) {
@@ -39004,7 +38997,7 @@ var render = function() {
                 _vm._t("autocomplete-suggestions", [
                   _c(
                     "div",
-                    { staticClass: "autocomplete-suggestions bg-white w-100" },
+                    { staticClass: "autocomplete-suggestions bg-white" },
                     [
                       _c("div", { staticClass: "row" }, [
                         _c(
@@ -39179,7 +39172,18 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "cookie-bar out bkr-cc", class: { in: _vm.isVisible } },
+    {
+      directives: [
+        {
+          name: "show",
+          rawName: "v-show",
+          value: !_vm.$ceres.isSSR,
+          expression: "!$ceres.isSSR"
+        }
+      ],
+      staticClass: "cookie-bar out bk_cc bkr-cc",
+      class: { in: _vm.isVisible }
+    },
     [
       _vm.isVisible
         ? _c("div", { staticClass: "container" }, [

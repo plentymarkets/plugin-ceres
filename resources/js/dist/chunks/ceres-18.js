@@ -158,7 +158,18 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "cookie-bar out bkr-cc", class: { in: _vm.isVisible } },
+    {
+      directives: [
+        {
+          name: "show",
+          rawName: "v-show",
+          value: !_vm.$ceres.isSSR,
+          expression: "!$ceres.isSSR"
+        }
+      ],
+      staticClass: "cookie-bar out bk_cc bkr-cc",
+      class: { in: _vm.isVisible }
+    },
     [
       _vm.isVisible
         ? _c("div", { staticClass: "container" }, [

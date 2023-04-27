@@ -17,17 +17,15 @@
                    </div>
             
                    <div class="basket-preview-content d-flex flex-fill">
-                        <basket-list v-bind="$attrs" :cdoy="$attrs.cdoy" :v="basket.itemSum" :cc="$store.state.basket.data.couponCode" class="item-list d-flex flex-fill flex-nowrap flex-column overflow-auto px-3 py-2" :is-preview="true"></basket-list>
-                       <div class="totals d-flex flex-nowrap flex-column px-3 pt-3">
+                        <basket-list class="item-list d-flex flex-fill flex-nowrap flex-column overflow-auto px-3 py-2" :is-preview="true"></basket-list>
+                        <div class="totals d-flex flex-nowrap flex-column px-3 pt-3">
                           <coupon class="mb-3"></coupon>
                          <div class="toggleSelect w-100">
-
                               <shipping-country-select
                                       v-if="showShippingCountrySelect"
                                       :basket-select="true"
                                       :open-basket-preview="true">
                               </shipping-country-select>
-
                           </div>
                           <div>
                           <basket-totals

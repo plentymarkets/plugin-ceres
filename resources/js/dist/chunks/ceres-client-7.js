@@ -36,10 +36,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -562,72 +558,61 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "bkr-cc" },
-    [
-      _c(
-        "div",
-        [
-          !_vm.basketItems.length > 0
-            ? _c("div", [
-                _c("div", { staticClass: "h5 py-3" }, [
-                  _vm._v(
-                    _vm._s(_vm.$translate("Ceres::Template.basketNoItems"))
-                  )
-                ])
+  return _c("div", [
+    _c(
+      "div",
+      [
+        !_vm.basketItems.length > 0
+          ? _c("div", [
+              _c("div", { staticClass: "h5 py-3" }, [
+                _vm._v(_vm._s(_vm.$translate("Ceres::Template.basketNoItems")))
               ])
-            : _vm._e(),
-          _vm._v(" "),
-          _c(
-            "transition-group",
-            { attrs: { name: "list-transition", tag: "div" } },
-            [
-              _vm._l(_vm.basketItems, function(basketItem) {
-                return [
-                  _c("basket-list-item", {
-                    key: basketItem.id,
-                    attrs: {
-                      "basket-item": basketItem,
-                      "is-preview": _vm.isPreview,
-                      "basket-details-data": _vm.basketDetailsData
-                    },
-                    scopedSlots: _vm._u(
-                      [
-                        {
-                          key: "before-basket-item",
-                          fn: function() {
-                            return [_vm._t("before-basket-item")]
-                          },
-                          proxy: true
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c(
+          "transition-group",
+          { attrs: { name: "list-transition", tag: "div" } },
+          [
+            _vm._l(_vm.basketItems, function(basketItem) {
+              return [
+                _c("basket-list-item", {
+                  key: basketItem.id,
+                  attrs: {
+                    "basket-item": basketItem,
+                    "is-preview": _vm.isPreview,
+                    "basket-details-data": _vm.basketDetailsData
+                  },
+                  scopedSlots: _vm._u(
+                    [
+                      {
+                        key: "before-basket-item",
+                        fn: function() {
+                          return [_vm._t("before-basket-item")]
                         },
-                        {
-                          key: "after-basket-item",
-                          fn: function() {
-                            return [_vm._t("after-basket-item")]
-                          },
-                          proxy: true
-                        }
-                      ],
-                      null,
-                      true
-                    )
-                  })
-                ]
-              })
-            ],
-            2
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      !_vm.isBasketInitiallyLoaded
-        ? _c("loading-animation", { staticClass: "d-table w-100" })
-        : _vm._e()
-    ],
-    1
-  )
+                        proxy: true
+                      },
+                      {
+                        key: "after-basket-item",
+                        fn: function() {
+                          return [_vm._t("after-basket-item")]
+                        },
+                        proxy: true
+                      }
+                    ],
+                    null,
+                    true
+                  )
+                })
+              ]
+            })
+          ],
+          2
+        )
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

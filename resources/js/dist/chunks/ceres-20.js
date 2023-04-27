@@ -91,8 +91,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -239,24 +237,11 @@ var render = function() {
               "div",
               { staticClass: "basket-preview-content d-flex flex-fill" },
               [
-                _c(
-                  "basket-list",
-                  _vm._b(
-                    {
-                      staticClass:
-                        "item-list d-flex flex-fill flex-nowrap flex-column overflow-auto px-3 py-2",
-                      attrs: {
-                        cdoy: _vm.$attrs.cdoy,
-                        v: _vm.basket.itemSum,
-                        cc: _vm.$store.state.basket.data.couponCode,
-                        "is-preview": true
-                      }
-                    },
-                    "basket-list",
-                    _vm.$attrs,
-                    false
-                  )
-                ),
+                _c("basket-list", {
+                  staticClass:
+                    "item-list d-flex flex-fill flex-nowrap flex-column overflow-auto px-3 py-2",
+                  attrs: { "is-preview": true }
+                }),
                 _vm._v(" "),
                 _c(
                   "div",

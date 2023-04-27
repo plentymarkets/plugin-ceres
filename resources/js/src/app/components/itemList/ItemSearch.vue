@@ -1,5 +1,5 @@
 <template>
-    <div class="bkr-cc" id="search_and_porto_holder" :class="{ wide: isSearchFocused, notwide: !isSearchFocused }">
+    <div class="bkr-cc" id="search_and_porto_holder">
         <div class="input-group">
           <input
             type="search"
@@ -14,7 +14,7 @@
             :aria-label="$translate('Ceres::Template.headerSearchTerm')"
             placeholder="Suchbegriff eingeben..." />
             <span class="input-group-append">
-              <button class="search-submit btn btn-bkm bkmSearchbutton" aria-label="Suchen" type="submit" @click="search()">
+              <button class="search-submit btn btn-bkm bkmSearchbutton d-none" aria-label="Suchen" type="submit" @click="search()">
                 <icon class="fa-fw" icon="search" :loading="autocompleteIsLoading"></icon>
               </button>
             </span>
@@ -22,7 +22,7 @@
 
   --><template v-if="isSearchFocused"><div> <!--v-show="(searchString.length >= searchMinLength && hasInitialInput) || $ceres.isShopBuilder" -->
             <slot name="autocomplete-suggestions">
-              <div class="autocomplete-suggestions bg-white w-100">
+              <div class="autocomplete-suggestions bg-white">
                 <div class="row">
                   <div class="col-md-7">
                     <search-suggestion-item padding-classes="p-1" :show-images="true" suggestion-type="item" :show-additional-information="false" :show-count="false"></search-suggestion-item>

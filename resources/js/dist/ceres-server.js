@@ -894,8 +894,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1582,10 +1580,6 @@ var ADDRESS_EMAIL_TYPE_ID = 5;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _BasketListItem_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BasketListItem.vue */ "./resources/js/src/app/components/basket/list/BasketListItem.vue");
-//
-//
-//
-//
 //
 //
 //
@@ -6298,12 +6292,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -6323,7 +6311,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: _objectSpread({
     viewModeClass: function viewModeClass() {
-      switch (this.viewMode) {
+      switch (this.viewMethod) {
         case 'mobile':
           return 'myAccount';
           break;
@@ -41370,24 +41358,11 @@ var render = function() {
               '<div class="basket-preview-content d-flex flex-fill">',
               "</div>",
               [
-                _c(
-                  "basket-list",
-                  _vm._b(
-                    {
-                      staticClass:
-                        "item-list d-flex flex-fill flex-nowrap flex-column overflow-auto px-3 py-2",
-                      attrs: {
-                        cdoy: _vm.$attrs.cdoy,
-                        v: _vm.basket.itemSum,
-                        cc: _vm.$store.state.basket.data.couponCode,
-                        "is-preview": true
-                      }
-                    },
-                    "basket-list",
-                    _vm.$attrs,
-                    false
-                  )
-                ),
+                _c("basket-list", {
+                  staticClass:
+                    "item-list d-flex flex-fill flex-nowrap flex-column overflow-auto px-3 py-2",
+                  attrs: { "is-preview": true }
+                }),
                 _vm._ssrNode(" "),
                 _vm._ssrNode(
                   '<div class="totals d-flex flex-nowrap flex-column px-3 pt-3">',
@@ -42145,72 +42120,63 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "bkr-cc" },
-    [
-      _vm._ssrNode(
-        "<div>",
-        "</div>",
-        [
-          _vm._ssrNode(
-            (!_vm.basketItems.length > 0
-              ? '<div><div class="h5 py-3">' +
-                _vm._ssrEscape(
-                  _vm._s(_vm.$translate("Ceres::Template.basketNoItems"))
-                ) +
-                "</div></div>"
-              : "<!---->") + " "
-          ),
-          _c(
-            "transition-group",
-            { attrs: { name: "list-transition", tag: "div" } },
-            [
-              _vm._l(_vm.basketItems, function(basketItem) {
-                return [
-                  _c("basket-list-item", {
-                    key: basketItem.id,
-                    attrs: {
-                      "basket-item": basketItem,
-                      "is-preview": _vm.isPreview,
-                      "basket-details-data": _vm.basketDetailsData
-                    },
-                    scopedSlots: _vm._u(
-                      [
-                        {
-                          key: "before-basket-item",
-                          fn: function() {
-                            return [_vm._t("before-basket-item")]
-                          },
-                          proxy: true
+  return _c("div", [
+    _vm._ssrNode(
+      "<div>",
+      "</div>",
+      [
+        _vm._ssrNode(
+          (!_vm.basketItems.length > 0
+            ? '<div><div class="h5 py-3">' +
+              _vm._ssrEscape(
+                _vm._s(_vm.$translate("Ceres::Template.basketNoItems"))
+              ) +
+              "</div></div>"
+            : "<!---->") + " "
+        ),
+        _c(
+          "transition-group",
+          { attrs: { name: "list-transition", tag: "div" } },
+          [
+            _vm._l(_vm.basketItems, function(basketItem) {
+              return [
+                _c("basket-list-item", {
+                  key: basketItem.id,
+                  attrs: {
+                    "basket-item": basketItem,
+                    "is-preview": _vm.isPreview,
+                    "basket-details-data": _vm.basketDetailsData
+                  },
+                  scopedSlots: _vm._u(
+                    [
+                      {
+                        key: "before-basket-item",
+                        fn: function() {
+                          return [_vm._t("before-basket-item")]
                         },
-                        {
-                          key: "after-basket-item",
-                          fn: function() {
-                            return [_vm._t("after-basket-item")]
-                          },
-                          proxy: true
-                        }
-                      ],
-                      null,
-                      true
-                    )
-                  })
-                ]
-              })
-            ],
-            2
-          )
-        ],
-        2
-      ),
-      _vm._ssrNode(" "),
-      !_vm.isBasketInitiallyLoaded
-        ? _c("loading-animation", { staticClass: "d-table w-100" })
-        : _vm._e()
-    ],
-    2
-  )
+                        proxy: true
+                      },
+                      {
+                        key: "after-basket-item",
+                        fn: function() {
+                          return [_vm._t("after-basket-item")]
+                        },
+                        proxy: true
+                      }
+                    ],
+                    null,
+                    true
+                  )
+                })
+              ]
+            })
+          ],
+          2
+        )
+      ],
+      2
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -48095,7 +48061,7 @@ var render = function() {
       _vm.viewMethod == "default"
         ? "<span" +
             _vm._ssrClass("icon", { loggedin: _vm.isLoggedIn }) +
-            '><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> ' +
+            ">" +
             (!_vm.isLoggedIn
               ? "<a" +
                 _vm._ssrAttr(
@@ -48107,18 +48073,11 @@ var render = function() {
                   "aria-label",
                   _vm.$translate("Ceres::Template.login")
                 ) +
-                ' class="nav-link">' +
-                _vm._s(_vm.$translate("Ceres::Template.login")) +
-                "</a>"
+                ' class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></a>'
               : "<a" +
                 _vm._ssrAttr("href", _vm.$ceres.urls.myAccount) +
-                ">" +
-                _vm._s("Mein Konto") +
-                "</a>") +
-            "</span>" +
-            (!_vm.isLogin
-              ? '<span class="icon"></span>'
-              : '<span class="d-none"></span>')
+                '><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></a>') +
+            "</span>"
         : _vm.viewMethod == "mobile"
         ? !_vm.isLoggedIn
           ? '<a href="#login"' +
@@ -48132,15 +48091,9 @@ var render = function() {
             _vm._s("Mein Konto") +
             "</span></a>"
         : _vm.viewMethod == "wishlist"
-        ? '<div class="col-4 offset-2"><a href="#login"' +
+        ? '<span class="icon"><i data-feather="heart"></i> <a href="#login"' +
           _vm._ssrAttr("data-toggle", _vm.isLogin ? false : "modal") +
-          ' class="btn btn-bkm btn-sm btn-block">' +
-          _vm._s(_vm.$translate("Ceres::Template.login")) +
-          '</a></div><div class="col-4"><a href="#registration"' +
-          _vm._ssrAttr("data-toggle", _vm.isRegister ? false : "modal") +
-          ' class="btn btn-bkm-inverted btn-sm btn-block">' +
-          _vm._s(_vm.$translate("Ceres::Template.loginRegister")) +
-          "</a></div>"
+          ">Anmelden</a></span>"
         : "<!---->"
     )
   ])
@@ -51832,11 +51785,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      staticClass: "bkr-cc",
-      class: { wide: _vm.isSearchFocused, notwide: !_vm.isSearchFocused },
-      attrs: { id: "search_and_porto_holder" }
-    },
+    { staticClass: "bkr-cc", attrs: { id: "search_and_porto_holder" } },
     [
       _vm._ssrNode(
         '<div class="input-group">',
@@ -51855,7 +51804,7 @@ var render = function() {
           ),
           _vm._ssrNode('<span class="input-group-append">', "</span>", [
             _vm._ssrNode(
-              '<button aria-label="Suchen" type="submit" class="search-submit btn btn-bkm bkmSearchbutton">',
+              '<button aria-label="Suchen" type="submit" class="search-submit btn btn-bkm bkmSearchbutton d-none">',
               "</button>",
               [
                 _c("icon", {
@@ -51878,7 +51827,7 @@ var render = function() {
                 _vm._t("autocomplete-suggestions", [
                   _c(
                     "div",
-                    { staticClass: "autocomplete-suggestions bg-white w-100" },
+                    { staticClass: "autocomplete-suggestions bg-white" },
                     [
                       _c("div", { staticClass: "row" }, [
                         _c(
@@ -53841,7 +53790,18 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "cookie-bar out bkr-cc", class: { in: _vm.isVisible } },
+    {
+      directives: [
+        {
+          name: "show",
+          rawName: "v-show",
+          value: !_vm.$ceres.isSSR,
+          expression: "!$ceres.isSSR"
+        }
+      ],
+      staticClass: "cookie-bar out bk_cc bkr-cc",
+      class: { in: _vm.isVisible }
+    },
     [
       _vm.isVisible
         ? _vm._ssrNode(

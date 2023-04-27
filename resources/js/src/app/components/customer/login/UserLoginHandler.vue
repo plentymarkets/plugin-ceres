@@ -2,16 +2,18 @@
     <div :class="viewModeClass">
         <template v-if="viewMethod == 'default'">
           <span class="icon" :class="{ loggedin: isLoggedIn }">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
             <a class="nav-link"
                v-if="!isLoggedIn"
                :href="isLogin ? 'javascript:void(0)' : '#login'"
                :data-toggle="isLogin ? false : 'modal'"
                @click="createLoginModal(); createRegisterModal(); unmarkInputFields();"
                :aria-label="$translate('Ceres::Template.login')"
-               v-html="$translate('Ceres::Template.login')"></a>
-            <a v-else :href="$ceres.urls.myAccount" v-html="'Mein Konto'"></a></span><!--
-      --><span class="icon" v-if="!isLogin"></span><span class="d-none" v-else></span>
+               >            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                </a>
+                <a v-else :href="$ceres.urls.myAccount">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                </a>
+            </span>
         </template>
 
         <template v-else-if="viewMethod == 'mobile'">
@@ -29,20 +31,12 @@
             </a>
         </template>
         <template v-else-if="viewMethod == 'wishlist'">
-            <div class="col-4 offset-2">
-                  <a href="#login"
-                    class="btn btn-bkm btn-sm btn-block"
-                    :data-toggle="isLogin ? false : 'modal'"
-                    @click="createLoginModal(); createRegisterModal(); unmarkInputFields();"
-                    v-html="$translate('Ceres::Template.login')"></a><!--
-            --></div><!--
-            --><div class="col-4">
-                  <a href="#registration"
-                    class="btn btn-bkm-inverted btn-sm btn-block"
-                    :data-toggle="isRegister ? false : 'modal'"
-                    @click="createLoginModal(); createRegisterModal(); unmarkInputFields();"
-                    v-html="$translate('Ceres::Template.loginRegister')"></a>
-                </div>
+            <span class="icon">
+                <i data-feather="heart"></i>
+                <a href="#login"
+                   :data-toggle="isLogin ? false : 'modal'"
+                   @click="createLoginModal(); createRegisterModal(); unmarkInputFields();">Anmelden</a>
+            </span>
         </template>
     </div>
 </template>
@@ -69,7 +63,7 @@ export default {
 
     computed: {
         viewModeClass() {
-            switch (this.viewMode) {
+            switch (this.viewMethod) {
                 case 'mobile': return 'myAccount'; break;
                 case 'wishlist': return 'row'; break;
                 default: return 'd-inline'

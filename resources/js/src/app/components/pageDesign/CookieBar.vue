@@ -1,6 +1,6 @@
 <template>
     <!-- v-show is required to prevent CLS for ssr -->
-    <div class="cookie-bar out bkr-cc" :class="{ 'in': isVisible }">
+    <div class="cookie-bar out bk_cc bkr-cc" v-show="!$ceres.isSSR"  :class="{ 'in': isVisible }">
             <div class="container" v-if="isVisible">
                 <div class="row p-3" v-show="!isExpanded" :class="classes" :style="styles">
                     <div class="col-12 px-4 col-md-12 text-center">

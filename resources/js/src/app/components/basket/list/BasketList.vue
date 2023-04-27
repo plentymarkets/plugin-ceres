@@ -1,17 +1,15 @@
 <template>
-    <div class="bkr-cc">
+    <div>
+
+
         <div>
             <div v-if="!basketItems.length > 0">
                 <div class="h5 py-3">{{ $translate("Ceres::Template.basketNoItems") }}</div>
             </div>
             <transition-group name="list-transition" tag="div">
                 <template v-for="basketItem in basketItems">
-                    <basket-list-item
-                        :key="basketItem.id"
-                        :basket-item="basketItem"
-                        :is-preview="isPreview"
-                        :basket-details-data="basketDetailsData"
-                    >
+                    <basket-list-item :key="basketItem.id" :basket-item="basketItem" :is-preview="isPreview"
+                        :basket-details-data="basketDetailsData">
                         <template #before-basket-item>
                             <slot name="before-basket-item"></slot>
                         </template>
@@ -22,8 +20,6 @@
                 </template>
             </transition-group>
         </div>
-
-        <loading-animation v-if="!isBasketInitiallyLoaded" class="d-table w-100"></loading-animation>
     </div>
 </template>
 
