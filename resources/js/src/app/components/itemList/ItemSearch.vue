@@ -1,5 +1,5 @@
 <template>
-    <div class="bkr-cc" id="search_and_porto_holder">
+    <div class="bkr-cc">
         <div class="input-group">
           <input
             type="search"
@@ -24,11 +24,14 @@
             <slot name="autocomplete-suggestions">
               <div class="autocomplete-suggestions bg-white">
                 <div class="row">
-                  <div class="col-md-7">
-                    <search-suggestion-item padding-classes="p-1" :show-images="true" suggestion-type="item" :show-additional-information="false" :show-count="false"></search-suggestion-item>
+                    <div class="col-md-12">
+                    <search-suggestion-item padding-classes="px-2" :show-images="true" suggestion-type="item" :show-additional-information="true" :show-count="false"></search-suggestion-item>
+                    </div>
+                  <div class="col-md-6">
+                    <search-suggestion-item padding-classes="px-2" :show-images="true" suggestion-type="suggestion" :show-additional-information="true" :show-count="false"></search-suggestion-item>
                   </div>
-                  <div class="col-md-5 suggestions">
-                    <search-suggestion-item suggestion-type="category" :show-additional-information="true" :show-count="false"></search-suggestion-item>
+                  <div class="col-md-6 suggestions">
+                    <search-suggestion-item padding-classes="px-2" suggestion-type="category" :show-additional-information="true" :show-count="false"></search-suggestion-item>
                   </div>
                 </div>
               </div>

@@ -2008,6 +2008,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 
@@ -38916,7 +38919,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "bkr-cc", attrs: { id: "search_and_porto_holder" } },
+    { staticClass: "bkr-cc" },
     [
       _c("div", { staticClass: "input-group" }, [
         _c("input", {
@@ -39002,14 +39005,14 @@ var render = function() {
                       _c("div", { staticClass: "row" }, [
                         _c(
                           "div",
-                          { staticClass: "col-md-7" },
+                          { staticClass: "col-md-12" },
                           [
                             _c("search-suggestion-item", {
                               attrs: {
-                                "padding-classes": "p-1",
+                                "padding-classes": "px-2",
                                 "show-images": true,
                                 "suggestion-type": "item",
-                                "show-additional-information": false,
+                                "show-additional-information": true,
                                 "show-count": false
                               }
                             })
@@ -39019,10 +39022,28 @@ var render = function() {
                         _vm._v(" "),
                         _c(
                           "div",
-                          { staticClass: "col-md-5 suggestions" },
+                          { staticClass: "col-md-6" },
                           [
                             _c("search-suggestion-item", {
                               attrs: {
+                                "padding-classes": "px-2",
+                                "show-images": true,
+                                "suggestion-type": "suggestion",
+                                "show-additional-information": true,
+                                "show-count": false
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "col-md-6 suggestions" },
+                          [
+                            _c("search-suggestion-item", {
+                              attrs: {
+                                "padding-classes": "px-2",
                                 "suggestion-type": "category",
                                 "show-additional-information": true,
                                 "show-count": false
