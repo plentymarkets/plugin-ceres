@@ -14,6 +14,11 @@
 
 - Auf der Artikeldetailseite in der nicht Standardsprache wurde in den schema.org Angaben das Sprackürzel in der URL nicht angezeigt. Das wurde behoben.
 
+### Angepasste Templates
+
+- Im Zuge des Releases von plentyShop LTS 5.0.60 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- [resources/views/PageDesign/Partials/Header/DefaultHeader.twig](https://github.com/plentymarkets/plugin-ceres/pull/3416/files#diff-19f0c0c56118a0d17212318a2cf8c6e113276dc4c61779c2317b2e7a0976db31)
+
 ## v5.0.59 (2023-02-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.58...5.0.59" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
