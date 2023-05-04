@@ -47,6 +47,8 @@ import LazyImg from "./app/components/common/LazyImg.vue";
 Vue.component("lazy-img", LazyImg);
 import Intersect from "./app/components/common/Intersect.vue";
 Vue.component("intersect", Intersect);
+import Donate from "./app/components/common/Donate.vue";
+Vue.component("donate", Donate);
 import TabList from "./app/components/common/TabList.vue";
 Vue.component("tab-list", TabList);
 import TabItem from "./app/components/common/TabItem.vue";

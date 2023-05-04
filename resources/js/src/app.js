@@ -37,6 +37,8 @@ import LazyHydrate from "vue-lazy-hydration";
 import ClientOnly from "./app/components/common/ClientOnly.vue";
 import script2 from "./app/plugins/script2";
 
+// Custom
+import Donate from "./app/components/common/Donate.vue";
 
 // =========================
 // SERVICES
@@ -115,6 +117,7 @@ export function beforeCreate(context)
     Vue.component("google-maps-widget", () => import("./app/components/common/GoogleMaps.vue"));
     Vue.component("lazy-img", LazyImg);
     Vue.component("intersect", Intersect);
+    Vue.component("donate", Donate);    
     Vue.component("tab-list", TabList);
     Vue.component("tab-item", TabItem);
     Vue.component("last-seen-item-list", () => import("./app/components/containers/LastSeenItemList.vue"));

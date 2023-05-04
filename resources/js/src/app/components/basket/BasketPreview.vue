@@ -18,8 +18,9 @@
             
                    <div class="basket-preview-content d-flex flex-fill">
                         <basket-list class="item-list d-flex flex-fill flex-nowrap flex-column overflow-auto px-3 py-2" :is-preview="true"></basket-list>
+                        <donate :box-size="'small'"></donate>
                         <div class="totals d-flex flex-nowrap flex-column px-3 pt-3">
-                          <coupon class="mb-3"></coupon>
+                        <coupon class="mb-3"></coupon>
                          <div class="toggleSelect w-100">
                               <shipping-country-select
                                       v-if="showShippingCountrySelect"

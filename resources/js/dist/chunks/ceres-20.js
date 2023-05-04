@@ -91,6 +91,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -242,6 +243,8 @@ var render = function() {
                     "item-list d-flex flex-fill flex-nowrap flex-column overflow-auto px-3 py-2",
                   attrs: { "is-preview": true }
                 }),
+                _vm._v(" "),
+                _c("donate", { attrs: { "box-size": "small" } }),
                 _vm._v(" "),
                 _c(
                   "div",
