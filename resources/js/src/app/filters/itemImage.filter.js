@@ -19,3 +19,18 @@ Vue.filter("itemImage", function(itemImages, highestPosition)
 
     return itemImages.reduce((prev, current) => (prev.position < current.position) ? prev : current).url;
 });
+
+Vue.filter("itemSecondImage", function(itemImages, highestPosition)
+{
+    if (itemImages.length <= 1)
+    {
+        return "";
+    }
+
+    if (itemImages.length === 2)
+    {
+        return itemImages[0].url;
+    }
+
+    return itemImages.sort((prev, current) => (prev.position > current.position) ? prev : current)[1].url;
+});

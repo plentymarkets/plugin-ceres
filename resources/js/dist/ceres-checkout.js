@@ -75840,12 +75840,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_array_reduce_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.reduce.js */ "./node_modules/core-js/modules/es.array.reduce.js");
 /* harmony import */ var core_js_modules_es_array_reduce_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_reduce_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_array_sort_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.sort.js */ "./node_modules/core-js/modules/es.array.sort.js");
+/* harmony import */ var core_js_modules_es_array_sort_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_sort_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.filter("itemImage", function (itemImages, highestPosition) {
+
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.filter("itemImage", function (itemImages, highestPosition) {
   if (itemImages.length === 0) {
     return "";
   }
@@ -75863,6 +75866,19 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.filter("itemImage", function (itemIma
   return itemImages.reduce(function (prev, current) {
     return prev.position < current.position ? prev : current;
   }).url;
+});
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.filter("itemSecondImage", function (itemImages, highestPosition) {
+  if (itemImages.length <= 1) {
+    return "";
+  }
+
+  if (itemImages.length === 2) {
+    return itemImages[0].url;
+  }
+
+  return itemImages.sort(function (prev, current) {
+    return prev.position > current.position ? prev : current;
+  })[1].url;
 });
 
 /***/ }),

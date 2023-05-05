@@ -27,6 +27,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "category-image-carousel",
   props: {
@@ -66,12 +67,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      $_enableCarousel: false
+      $_isMobileView_CarouselEnabled: false
     };
   },
   computed: {
     imageUrls: function imageUrls() {
       return this.imageUrlsData;
+    },
+    hasSecondImage: function hasSecondImage() {
+      var filtered = this.$options.filters.itemSecondImage(this.imageUrls);
+      return filtered !== '';
     }
   },
   mounted: function mounted() {
@@ -79,9 +84,9 @@ __webpack_require__.r(__webpack_exports__);
 
     var isMobile = window.matchMedia("(max-width: 768px)").matches;
     var shouldCarouselBeEnabled = this.enableCarousel && this.imageUrls.length > 1;
-    this.$data.$_enableCarousel = this.disableCarouselOnMobile && isMobile ? false : shouldCarouselBeEnabled;
+    this.$data.$_isMobileView_CarouselEnabled = isMobile && shouldCarouselBeEnabled ? true : false;
     this.$nextTick(function () {
-      if (_this.$data.$_enableCarousel) {
+      if (_this.$data.$_isMobileView_CarouselEnabled) {
         _this.initializeCarousel();
       }
     });
@@ -173,7 +178,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-//
 //
 //
 //
@@ -566,7 +570,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.$data.$_enableCarousel
+  return _vm.$data.$_isMobileView_CarouselEnabled
     ? _c(
         "a",
         {
@@ -624,24 +628,25 @@ var render = function() {
         "a",
         { attrs: { href: _vm.itemUrl } },
         [
-          !_vm.disableLazyLoad
+          _c("lazy-img", {
+            ref: "itemLazyImage",
+            attrs: {
+              "picture-class": "img-fluid image1",
+              "image-url": _vm._f("itemImage")(_vm.imageUrls),
+              alt: _vm.getAltText(_vm.imageUrls[0]),
+              title: _vm.getTitleText(_vm.imageUrls[0])
+            }
+          }),
+          _vm._v(" "),
+          _vm.hasSecondImage
             ? _c("lazy-img", {
                 ref: "itemLazyImage",
                 attrs: {
-                  "picture-class": "img-fluid",
-                  "image-url": _vm._f("itemImage")(_vm.imageUrls),
-                  alt: _vm.getAltText(_vm.imageUrls[0]),
-                  title: _vm.getTitleText(_vm.imageUrls[0])
+                  "picture-class": "img-fluid image2",
+                  "image-url": _vm._f("itemSecondImage")(_vm.imageUrls)
                 }
               })
-            : _c("img", {
-                staticClass: "img-fluid",
-                attrs: {
-                  src: _vm._f("itemImage")(_vm.imageUrls),
-                  alt: _vm.getAltText(_vm.imageUrls[0]),
-                  title: _vm.getTitleText(_vm.imageUrls[0])
-                }
-              })
+            : _vm._e()
         ],
         1
       )
@@ -678,34 +683,31 @@ var render = function() {
               attrs: { "variation-id": _vm.item.variation.id }
             }),
             _vm._v(" "),
-            _c("div", { staticClass: "produkt_picture" }, [
-              _c(
-                "a",
-                {
+            _c(
+              "div",
+              { staticClass: "produkt_picture" },
+              [
+                _c("category-image-carousel", {
+                  ref: "categoryImageCarousel",
                   attrs: {
-                    href: _vm._f("itemURL")(_vm.item),
-                    "aria-label": _vm.texts.name1
+                    "image-urls-data": _vm._f("itemImages")(
+                      _vm.item.images,
+                      "urlSecondPreview"
+                    ),
+                    alt: _vm._f("itemName")(_vm.item),
+                    title: _vm._f("itemName")(_vm.item),
+                    "item-url": _vm._f("itemURL")(
+                      _vm.item,
+                      _vm.urlWithVariationId
+                    ),
+                    "enable-carousel":
+                      _vm.$ceres.config.item.enableImageCarousel,
+                    "disable-carousel-on-mobile": _vm.disableCarouselOnMobile
                   }
-                },
-                [
-                  _c("lazy-img", {
-                    ref: "itemLazyImage",
-                    attrs: {
-                      "picture-class": "img-fluid",
-                      "aria-label": _vm.texts.name1,
-                      alt: _vm.texts.name1,
-                      "image-url": _vm._f("itemImage")(
-                        _vm._f("itemImages")(
-                          _vm.item.images,
-                          "urlSecondPreview"
-                        )
-                      )
-                    }
-                  })
-                ],
-                1
-              )
-            ]),
+                })
+              ],
+              1
+            ),
             _vm._v(" "),
             _c("div", { staticClass: "productInfoContainer" }, [
               _c(

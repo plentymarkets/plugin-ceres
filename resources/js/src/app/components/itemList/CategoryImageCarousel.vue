@@ -1,5 +1,5 @@
 <template>
-    <a :id="'owl-carousel-' + _uid" v-if="$data.$_enableCarousel" class="owl-carousel owl-theme" :href="itemUrl" role="listbox" :aria-label="$translate('Ceres::Template.itemImageCarousel')">
+    <a :id="'owl-carousel-' + _uid" v-if="$data.$_isMobileView_CarouselEnabled" class="owl-carousel owl-theme" :href="itemUrl" role="listbox" :aria-label="$translate('Ceres::Template.itemImageCarousel')">
         <div v-for="(imageUrl, index) in imageUrls" :key="index">
             <lazy-img v-if="index === 0 && !disableLazyLoad" ref="itemLazyImage" picture-class="img-fluid" :image-url="imageUrl.url" :alt="getAltText(imageUrl)" :title="getTitleText(imageUrl)" role="option"></lazy-img>
             <img v-else-if="index !== 0 && !disableLazyLoad" class="img-fluid owl-lazy" :data-src="imageUrl.url" :alt="getAltText(imageUrl)" :title="getTitleText(imageUrl)" role="option">
@@ -7,9 +7,10 @@
         </div>
     </a>
 
+    <!-- Desktop view -->
     <a v-else :href="itemUrl">
-        <lazy-img v-if="!disableLazyLoad" ref="itemLazyImage" picture-class="img-fluid" :image-url="imageUrls | itemImage" :alt="getAltText(imageUrls[0])" :title="getTitleText(imageUrls[0])"></lazy-img>
-        <img v-else class="img-fluid" :src="imageUrls | itemImage" :alt="getAltText(imageUrls[0])" :title="getTitleText(imageUrls[0])">
+        <lazy-img ref="itemLazyImage" picture-class="img-fluid image1" :image-url="imageUrls | itemImage" :alt="getAltText(imageUrls[0])" :title="getTitleText(imageUrls[0])"></lazy-img>
+        <lazy-img v-if="hasSecondImage" ref="itemLazyImage" picture-class="img-fluid image2" :image-url="imageUrls | itemSecondImage"></lazy-img>
     </a>
 </template>
 
@@ -67,7 +68,7 @@ export default {
     data()
     {
         return {
-            $_enableCarousel: false
+            $_isMobileView_CarouselEnabled: false
         };
     },
 
@@ -76,6 +77,11 @@ export default {
         imageUrls()
         {
             return this.imageUrlsData;
+        },
+
+        hasSecondImage() {
+            const filtered = this.$options.filters.itemSecondImage(this.imageUrls);
+            return filtered !== '';
         }
     },
 
@@ -84,11 +90,11 @@ export default {
         const isMobile = window.matchMedia("(max-width: 768px)").matches;
         const shouldCarouselBeEnabled = this.enableCarousel && this.imageUrls.length > 1;
 
-        this.$data.$_enableCarousel = this.disableCarouselOnMobile && isMobile ? false : shouldCarouselBeEnabled;
+        this.$data.$_isMobileView_CarouselEnabled = (isMobile && shouldCarouselBeEnabled) ? true : false;
 
         this.$nextTick(() =>
         {
-            if (this.$data.$_enableCarousel)
+            if (this.$data.$_isMobileView_CarouselEnabled)
             {
                 this.initializeCarousel();
             }

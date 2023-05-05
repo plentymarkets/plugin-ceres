@@ -10602,6 +10602,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "category-image-carousel",
   props: {
@@ -10641,12 +10642,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      $_enableCarousel: false
+      $_isMobileView_CarouselEnabled: false
     };
   },
   computed: {
     imageUrls: function imageUrls() {
       return this.imageUrlsData;
+    },
+    hasSecondImage: function hasSecondImage() {
+      var filtered = this.$options.filters.itemSecondImage(this.imageUrls);
+      return filtered !== '';
     }
   },
   mounted: function mounted() {
@@ -10654,9 +10659,9 @@ __webpack_require__.r(__webpack_exports__);
 
     var isMobile = window.matchMedia("(max-width: 768px)").matches;
     var shouldCarouselBeEnabled = this.enableCarousel && this.imageUrls.length > 1;
-    this.$data.$_enableCarousel = this.disableCarouselOnMobile && isMobile ? false : shouldCarouselBeEnabled;
+    this.$data.$_isMobileView_CarouselEnabled = isMobile && shouldCarouselBeEnabled ? true : false;
     this.$nextTick(function () {
-      if (_this.$data.$_enableCarousel) {
+      if (_this.$data.$_isMobileView_CarouselEnabled) {
         _this.initializeCarousel();
       }
     });
@@ -10748,7 +10753,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-//
 //
 //
 //
@@ -51661,7 +51665,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.$data.$_enableCarousel
+  return _vm.$data.$_isMobileView_CarouselEnabled
     ? _c(
         "a",
         {
@@ -51719,26 +51723,27 @@ var render = function() {
         "a",
         { attrs: { href: _vm.itemUrl } },
         [
-          !_vm.disableLazyLoad
+          _c("lazy-img", {
+            ref: "itemLazyImage",
+            attrs: {
+              "picture-class": "img-fluid image1",
+              "image-url": _vm._f("itemImage")(_vm.imageUrls),
+              alt: _vm.getAltText(_vm.imageUrls[0]),
+              title: _vm.getTitleText(_vm.imageUrls[0])
+            }
+          }),
+          _vm._ssrNode(" "),
+          _vm.hasSecondImage
             ? _c("lazy-img", {
                 ref: "itemLazyImage",
                 attrs: {
-                  "picture-class": "img-fluid",
-                  "image-url": _vm._f("itemImage")(_vm.imageUrls),
-                  alt: _vm.getAltText(_vm.imageUrls[0]),
-                  title: _vm.getTitleText(_vm.imageUrls[0])
+                  "picture-class": "img-fluid image2",
+                  "image-url": _vm._f("itemSecondImage")(_vm.imageUrls)
                 }
               })
-            : _c("img", {
-                staticClass: "img-fluid",
-                attrs: {
-                  src: _vm._f("itemImage")(_vm.imageUrls),
-                  alt: _vm.getAltText(_vm.imageUrls[0]),
-                  title: _vm.getTitleText(_vm.imageUrls[0])
-                }
-              })
+            : _vm._e()
         ],
-        1
+        2
       )
 }
 var staticRenderFns = []
@@ -51776,32 +51781,31 @@ var render = function() {
                 attrs: { "variation-id": _vm.item.variation.id }
               }),
               _vm._ssrNode(" "),
-              _vm._ssrNode('<div class="produkt_picture">', "</div>", [
-                _vm._ssrNode(
-                  "<a" +
-                    _vm._ssrAttr("href", _vm._f("itemURL")(_vm.item)) +
-                    _vm._ssrAttr("aria-label", _vm.texts.name1) +
-                    ">",
-                  "</a>",
-                  [
-                    _c("lazy-img", {
-                      ref: "itemLazyImage",
-                      attrs: {
-                        "picture-class": "img-fluid",
-                        "aria-label": _vm.texts.name1,
-                        alt: _vm.texts.name1,
-                        "image-url": _vm._f("itemImage")(
-                          _vm._f("itemImages")(
-                            _vm.item.images,
-                            "urlSecondPreview"
-                          )
-                        )
-                      }
-                    })
-                  ],
-                  1
-                )
-              ]),
+              _vm._ssrNode(
+                '<div class="produkt_picture">',
+                "</div>",
+                [
+                  _c("category-image-carousel", {
+                    ref: "categoryImageCarousel",
+                    attrs: {
+                      "image-urls-data": _vm._f("itemImages")(
+                        _vm.item.images,
+                        "urlSecondPreview"
+                      ),
+                      alt: _vm._f("itemName")(_vm.item),
+                      title: _vm._f("itemName")(_vm.item),
+                      "item-url": _vm._f("itemURL")(
+                        _vm.item,
+                        _vm.urlWithVariationId
+                      ),
+                      "enable-carousel":
+                        _vm.$ceres.config.item.enableImageCarousel,
+                      "disable-carousel-on-mobile": _vm.disableCarouselOnMobile
+                    }
+                  })
+                ],
+                1
+              ),
               _vm._ssrNode(
                 ' <div class="productInfoContainer"><div class="tagLine">' +
                   (_vm.item.prices.rrp &&
@@ -81763,12 +81767,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_array_reduce_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.reduce.js */ "./node_modules/core-js/modules/es.array.reduce.js");
 /* harmony import */ var core_js_modules_es_array_reduce_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_reduce_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_array_sort_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.sort.js */ "./node_modules/core-js/modules/es.array.sort.js");
+/* harmony import */ var core_js_modules_es_array_sort_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_sort_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_2___default.a.filter("itemImage", function (itemImages, highestPosition) {
+
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.filter("itemImage", function (itemImages, highestPosition) {
   if (itemImages.length === 0) {
     return "";
   }
@@ -81786,6 +81793,19 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.filter("itemImage", function (itemIma
   return itemImages.reduce(function (prev, current) {
     return prev.position < current.position ? prev : current;
   }).url;
+});
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.filter("itemSecondImage", function (itemImages, highestPosition) {
+  if (itemImages.length <= 1) {
+    return "";
+  }
+
+  if (itemImages.length === 2) {
+    return itemImages[0].url;
+  }
+
+  return itemImages.sort(function (prev, current) {
+    return prev.position > current.position ? prev : current;
+  })[1].url;
 });
 
 /***/ }),

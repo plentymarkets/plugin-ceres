@@ -3,15 +3,14 @@
         <article class="itemCategoryProduct" v-if="viewMode == 'vertical'">
             <bkAddToWishlist :variation-id="item.variation.id"></bkAddToWishlist>
             <div class="produkt_picture">
-            <a :href="item | itemURL" :aria-label="texts.name1">
-                <lazy-img
-                    ref="itemLazyImage"
-                    picture-class="img-fluid"
-                    :aria-label="texts.name1"
-                    :alt="texts.name1"
-                    :image-url="item.images | itemImages('urlSecondPreview') | itemImage" >
-                </lazy-img>
-            </a>
+                <category-image-carousel :image-urls-data="item.images | itemImages('urlSecondPreview')"
+                                            :alt="item | itemName"
+                                            :title="item | itemName"
+                                            :item-url="item | itemURL(urlWithVariationId)"
+                                            :enable-carousel="$ceres.config.item.enableImageCarousel"
+                                            :disable-carousel-on-mobile="disableCarouselOnMobile"
+                                            ref="categoryImageCarousel">
+                    </category-image-carousel>
             </div>
             <div class="productInfoContainer">
             <div class="tagLine" >
