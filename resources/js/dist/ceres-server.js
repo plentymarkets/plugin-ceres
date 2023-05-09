@@ -10602,7 +10602,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "category-image-carousel",
   props: {
@@ -10631,7 +10630,8 @@ __webpack_require__.r(__webpack_exports__);
       default: false
     },
     disableCarouselOnMobile: {
-      type: Boolean
+      type: Boolean,
+      default: false
     },
     enableCarousel: {
       type: Boolean
@@ -10642,16 +10642,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      $_isMobileView_CarouselEnabled: false
+      $_enableCarousel: false
     };
   },
   computed: {
     imageUrls: function imageUrls() {
       return this.imageUrlsData;
-    },
-    hasSecondImage: function hasSecondImage() {
-      var filtered = this.$options.filters.itemSecondImage(this.imageUrls);
-      return filtered !== '';
     }
   },
   mounted: function mounted() {
@@ -10659,9 +10655,9 @@ __webpack_require__.r(__webpack_exports__);
 
     var isMobile = window.matchMedia("(max-width: 768px)").matches;
     var shouldCarouselBeEnabled = this.enableCarousel && this.imageUrls.length > 1;
-    this.$data.$_isMobileView_CarouselEnabled = isMobile && shouldCarouselBeEnabled ? true : false;
+    this.$data.$_enableCarousel = this.disableCarouselOnMobile && isMobile ? false : shouldCarouselBeEnabled;
     this.$nextTick(function () {
-      if (_this.$data.$_isMobileView_CarouselEnabled) {
+      if (_this.$data.$_enableCarousel) {
         _this.initializeCarousel();
       }
     });
@@ -10673,10 +10669,9 @@ __webpack_require__.r(__webpack_exports__);
       $("#owl-carousel-" + this._uid).owlCarousel({
         dots: !!this.showDots,
         items: 1,
-        mouseDrag: false,
+        mouseDrag: true,
         loop: this.imageUrls.length > 1,
         lazyLoad: !this.disableLazyLoad,
-        margin: 10,
         nav: !!this.showNav,
         navText: ["<i id=\"owl-nav-text-left-".concat(this._uid, "\" class='fa fa-chevron-left' aria-hidden='true'></i>"), "<i id=\"owl-nav-text-right-".concat(this._uid, "\" class='fa fa-chevron-right' aria-hidden='true'></i>")],
         onTranslated: function onTranslated(event) {
@@ -10753,7 +10748,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-//
 //
 //
 //
@@ -51665,7 +51659,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.$data.$_isMobileView_CarouselEnabled
+  return _vm.$data.$_enableCarousel
     ? _c(
         "a",
         {
@@ -51723,27 +51717,26 @@ var render = function() {
         "a",
         { attrs: { href: _vm.itemUrl } },
         [
-          _c("lazy-img", {
-            ref: "itemLazyImage",
-            attrs: {
-              "picture-class": "img-fluid image1",
-              "image-url": _vm._f("itemImage")(_vm.imageUrls),
-              alt: _vm.getAltText(_vm.imageUrls[0]),
-              title: _vm.getTitleText(_vm.imageUrls[0])
-            }
-          }),
-          _vm._ssrNode(" "),
-          _vm.hasSecondImage
+          !_vm.disableLazyLoad
             ? _c("lazy-img", {
                 ref: "itemLazyImage",
                 attrs: {
-                  "picture-class": "img-fluid image2",
-                  "image-url": _vm._f("itemSecondImage")(_vm.imageUrls)
+                  "picture-class": "img-fluid",
+                  "image-url": _vm._f("itemImage")(_vm.imageUrls),
+                  alt: _vm.getAltText(_vm.imageUrls[0]),
+                  title: _vm.getTitleText(_vm.imageUrls[0])
                 }
               })
-            : _vm._e()
+            : _c("img", {
+                staticClass: "img-fluid",
+                attrs: {
+                  src: _vm._f("itemImage")(_vm.imageUrls),
+                  alt: _vm.getAltText(_vm.imageUrls[0]),
+                  title: _vm.getTitleText(_vm.imageUrls[0])
+                }
+              })
         ],
-        2
+        1
       )
 }
 var staticRenderFns = []
@@ -51799,8 +51792,7 @@ var render = function() {
                         _vm.urlWithVariationId
                       ),
                       "enable-carousel":
-                        _vm.$ceres.config.item.enableImageCarousel,
-                      "disable-carousel-on-mobile": _vm.disableCarouselOnMobile
+                        _vm.$ceres.config.item.enableImageCarousel
                     }
                   })
                 ],

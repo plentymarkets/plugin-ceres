@@ -4,12 +4,11 @@
             <bkAddToWishlist :variation-id="item.variation.id"></bkAddToWishlist>
             <div class="produkt_picture">
                 <category-image-carousel :image-urls-data="item.images | itemImages('urlSecondPreview')"
-                                            :alt="item | itemName"
-                                            :title="item | itemName"
-                                            :item-url="item | itemURL(urlWithVariationId)"
-                                            :enable-carousel="$ceres.config.item.enableImageCarousel"
-                                            :disable-carousel-on-mobile="disableCarouselOnMobile"
-                                            ref="categoryImageCarousel">
+                                        :alt="item | itemName"
+                                        :title="item | itemName"
+                                        :item-url="item | itemURL(urlWithVariationId)"
+                                        :enable-carousel="$ceres.config.item.enableImageCarousel"
+                                        ref="categoryImageCarousel">
                     </category-image-carousel>
             </div>
             <div class="productInfoContainer">
