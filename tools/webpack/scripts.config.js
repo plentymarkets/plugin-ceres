@@ -1,5 +1,5 @@
 const path = require("path");
-const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const { VueLoaderPlugin } = require("vue-loader");
 const WebpackRequireFrom = require("webpack-require-from");
 
 module.exports = env =>
@@ -21,6 +21,9 @@ module.exports = env =>
             alias: {
                 vue: "vue/dist/vue" + (env.prod ? ".min" : "") + ".js"
             }
+        },
+        cache: {
+            type: "filesystem"
         },
         devtool: "source-map",
         module: {
@@ -54,9 +57,13 @@ module.exports = env =>
                 },
                 {
                     test: /\.m?js$/,
-                    exclude: /node_modules/,
+                    exclude: /(node_modules)/,
                     use: {
-                        loader: "babel-loader"
+                        loader: "babel-loader",
+                        options: {
+                            cacheCompression: false,
+                            cacheDirectory: true
+                        }
                     }
                 }
             ]
