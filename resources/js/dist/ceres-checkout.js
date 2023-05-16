@@ -69987,7 +69987,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       }
     },
     checkDeliveryAddressError: function checkDeliveryAddressError() {
-      var countryId = Number(this.deliveryAddress.id) === -99 && Number(this.billingAddress.id) === NULL ? this.billingAddress.countryId : this.deliveryAddress.countryId;
+      var countryId = Number(this.deliveryAddress.id) === -99 ? this.billingAddress.countryId : this.deliveryAddress.countryId;
       var validShippingCountry = this.shippingCountryList.find(function (country) {
         return country.id === countryId;
       });
@@ -69996,8 +69996,8 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
   },
   watch: {
     billingAddress: function billingAddress() {
-      // if a delivery address exists do not take into account the billingAddress
-      if (Number(this.deliveryAddressId) === -99) {
+      // if there only exists a billing address but no delivery address check for delivery address error.
+      if (Number(this.deliveryAddressId) === -99 && this.billingAddressId !== null) {
         this.checkDeliveryAddressError();
       }
     },

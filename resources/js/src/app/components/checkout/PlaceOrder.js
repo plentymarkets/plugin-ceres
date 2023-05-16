@@ -219,7 +219,7 @@ export default Vue.component("place-order", {
 
         checkDeliveryAddressError()
         {
-            const countryId = Number(this.deliveryAddress.id) === -99 && Number(this.billingAddress.id) === NULL ? this.billingAddress.countryId : this.deliveryAddress.countryId;
+            const countryId = Number(this.deliveryAddress.id) === -99 ? this.billingAddress.countryId : this.deliveryAddress.countryId;
             const validShippingCountry = this.shippingCountryList.find((country) => country.id === countryId);
 
             this.isInvalidShippingCountry = !validShippingCountry;
@@ -229,8 +229,8 @@ export default Vue.component("place-order", {
     watch: {
         billingAddress()
         {
-            // if a delivery address exists do not take into account the billingAddress
-            if (Number(this.deliveryAddressId) === -99)
+            // if there only exists a billing address but no delivery address check for delivery address error.
+            if (Number(this.deliveryAddressId) === -99 && this.billingAddressId !== null)
             {
                 this.checkDeliveryAddressError();
             }
