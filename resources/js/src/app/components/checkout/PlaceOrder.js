@@ -88,7 +88,6 @@ export default Vue.component("place-order", {
             shippingPrivacyHintAccepted: state => state.checkout.shippingPrivacyHintAccepted,
             newsletterSubscription: state => state.checkout.newsletterSubscription,
             billingAddress: state => state.address.billingAddress,
-            billingAddressId: state => state.address.billingAddressId,
             deliveryAddress: state => state.address.deliveryAddress,
             deliveryAddressId: state => state.address.deliveryAddressId,
             shippingCountryList: state => state.localization.shippingCountries
@@ -220,16 +219,22 @@ export default Vue.component("place-order", {
 
         checkAddressError()
         {
-            const countryId = Number(this.deliveryAddress.id) === -99 ? this.billingAddress.countryId : this.deliveryAddress.countryId;
-            const validShippingCountry = this.shippingCountryList.find((country) => country.id === countryId);
+            const countryId = Number(this.deliveryAddress.id) === -99 ? this.billingAddress?.countryId : this.deliveryAddress?.countryId;
 
-            this.isInvalidShippingCountry = !validShippingCountry;
+            if (countryId)
+            {
+                const validShippingCountry = this.shippingCountryList.find((country) => country.id === countryId);
+
+                this.isInvalidShippingCountry = !validShippingCountry;
+            }
+        }
+
     },
 
     watch: {
         billingAddress()
         {
-            if (Number(this.deliveryAddressId) === -99 && Number(this.billingAddressId) !== null)
+            if (Number(this.deliveryAddress.id) === -99)
             {
                 this.checkAddressError();
             }

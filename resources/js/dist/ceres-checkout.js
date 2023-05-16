@@ -69874,9 +69874,6 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     billingAddress: function billingAddress(state) {
       return state.address.billingAddress;
     },
-    billingAddressId: function billingAddressId(state) {
-      return state.address.billingAddressId;
-    },
     deliveryAddress: function deliveryAddress(state) {
       return state.address.deliveryAddress;
     },
@@ -69989,23 +69986,27 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
         this.$emit("payment-response", content);
       }
     },
-    checkDeliveryAddressError: function checkDeliveryAddressError() {
-      var countryId = Number(this.deliveryAddress.id) === -99 ? this.billingAddress.countryId : this.deliveryAddress.countryId;
-      var validShippingCountry = this.shippingCountryList.find(function (country) {
-        return country.id === countryId;
-      });
-      this.isInvalidShippingCountry = !validShippingCountry;
+    checkAddressError: function checkAddressError() {
+      var _this$billingAddress, _this$deliveryAddress;
+
+      var countryId = Number(this.deliveryAddress.id) === -99 ? (_this$billingAddress = this.billingAddress) === null || _this$billingAddress === void 0 ? void 0 : _this$billingAddress.countryId : (_this$deliveryAddress = this.deliveryAddress) === null || _this$deliveryAddress === void 0 ? void 0 : _this$deliveryAddress.countryId;
+
+      if (countryId) {
+        var validShippingCountry = this.shippingCountryList.find(function (country) {
+          return country.id === countryId;
+        });
+        this.isInvalidShippingCountry = !validShippingCountry;
+      }
     }
   },
   watch: {
     billingAddress: function billingAddress() {
-      // if there only exists a billing address but no delivery address check for delivery address error.
-      if (Number(this.deliveryAddressId) === -99 && Number(this.billingAddressId) !== null) {
-        this.checkDeliveryAddressError();
+      if (Number(this.deliveryAddress.id) === -99) {
+        this.checkAddressError();
       }
     },
     deliveryAddress: function deliveryAddress() {
-      this.checkDeliveryAddressError();
+      this.checkAddressError();
     }
   }
 }));
@@ -72134,23 +72135,28 @@ __webpack_require__.r(__webpack_exports__);
         _services_NotificationService__WEBPACK_IMPORTED_MODULE_4__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_5__["default"].translate("Ceres::Template.checkoutInvalidShippingCountry"));
       }
     },
-    checkDeliveryAddressError: function checkDeliveryAddressError() {
-      var countryId = Number(this.deliveryAddress.id) === -99 ? this.billingAddress.countryId : this.deliveryAddress.countryId;
-      var validShippingCountry = this.shippingCountryList.find(function (country) {
-        return country.id === countryId;
-      });
-      this.isInvalidShippingCountry = !validShippingCountry;
+    checkAddressError: function checkAddressError() {
+      var _this$billingAddress, _this$deliveryAddress;
+
+      var countryId = Number(this.deliveryAddress.id) === -99 ? (_this$billingAddress = this.billingAddress) === null || _this$billingAddress === void 0 ? void 0 : _this$billingAddress.countryId : (_this$deliveryAddress = this.deliveryAddress) === null || _this$deliveryAddress === void 0 ? void 0 : _this$deliveryAddress.countryId;
+
+      if (countryId) {
+        var validShippingCountry = this.shippingCountryList.find(function (country) {
+          return country.id === countryId;
+        });
+        this.isInvalidShippingCountry = !validShippingCountry;
+      }
     }
   },
   watch: {
     billingAddress: function billingAddress() {
       // if a delivery address exists do not take into account the billingAddress
-      if (Number(this.deliveryAddressId) === -99) {
-        this.checkDeliveryAddressError();
+      if (Number(this.deliveryAddress.id) === -99) {
+        this.checkAddressError();
       }
     },
     deliveryAddress: function deliveryAddress() {
-      this.checkDeliveryAddressError();
+      this.checkAddressError();
     }
   }
 }));
