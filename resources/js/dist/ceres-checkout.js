@@ -69874,6 +69874,9 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     billingAddress: function billingAddress(state) {
       return state.address.billingAddress;
     },
+    billingAddressId: function billingAddressId(state) {
+      return state.address.billingAddressId;
+    },
     deliveryAddress: function deliveryAddress(state) {
       return state.address.deliveryAddress;
     },
@@ -69997,7 +70000,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
   watch: {
     billingAddress: function billingAddress() {
       // if there only exists a billing address but no delivery address check for delivery address error.
-      if (Number(this.deliveryAddressId) === -99 && this.billingAddressId !== null) {
+      if (Number(this.deliveryAddressId) === -99 && Number(this.billingAddressId) !== null) {
         this.checkDeliveryAddressError();
       }
     },

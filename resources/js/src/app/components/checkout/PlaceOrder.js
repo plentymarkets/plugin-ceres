@@ -88,6 +88,7 @@ export default Vue.component("place-order", {
             shippingPrivacyHintAccepted: state => state.checkout.shippingPrivacyHintAccepted,
             newsletterSubscription: state => state.checkout.newsletterSubscription,
             billingAddress: state => state.address.billingAddress,
+            billingAddressId: state => state.address.billingAddressId,
             deliveryAddress: state => state.address.deliveryAddress,
             deliveryAddressId: state => state.address.deliveryAddressId,
             shippingCountryList: state => state.localization.shippingCountries
@@ -230,7 +231,7 @@ export default Vue.component("place-order", {
         billingAddress()
         {
             // if there only exists a billing address but no delivery address check for delivery address error.
-            if (Number(this.deliveryAddressId) === -99 && this.billingAddressId !== null)
+            if (Number(this.deliveryAddressId) === -99 && Number(this.billingAddressId) !== null)
             {
                 this.checkDeliveryAddressError();
             }
