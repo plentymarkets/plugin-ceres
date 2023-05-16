@@ -5,6 +5,7 @@
 ### Behoben
 
 - Auf der Artikeldetailseite in der nicht Standardsprache wurde in den schema.org Angaben das Sprackürzel in der URL nicht angezeigt. Das wurde behoben.
+- Im Checkout wurde ein Javascript Fehler aufgrund einer unbefüllten Variable in der Funktion CheckDeliveryAddressError() behoben.
 
 ## v5.0.59 (2023-02-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.58...5.0.59" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
