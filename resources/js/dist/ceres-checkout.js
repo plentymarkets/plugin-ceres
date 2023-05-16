@@ -69987,7 +69987,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       }
     },
     checkDeliveryAddressError: function checkDeliveryAddressError() {
-      var countryId = Number(this.deliveryAddress.id) === -99 ? this.billingAddress.countryId : this.deliveryAddress.countryId;
+      var countryId = Number(this.deliveryAddress.id) === -99 && Number(this.billingAddress.id) === NULL ? this.billingAddress.countryId : this.deliveryAddress.countryId;
       var validShippingCountry = this.shippingCountryList.find(function (country) {
         return country.id === countryId;
       });
