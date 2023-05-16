@@ -217,7 +217,7 @@ export default Vue.component("place-order", {
             }
         },
 
-        checkAddressError()
+        checkDeliveryAddressError()
         {
             const countryId = Number(this.deliveryAddress.id) === -99 ? this.billingAddress?.countryId : this.deliveryAddress?.countryId;
 
@@ -236,13 +236,13 @@ export default Vue.component("place-order", {
         {
             if (Number(this.deliveryAddress.id) === -99)
             {
-                this.checkAddressError();
+                this.checkDeliveryAddressError();
             }
         },
 
         deliveryAddress()
         {
-            this.checkAddressError();
+            this.checkDeliveryAddressError();
         }
     }
 });

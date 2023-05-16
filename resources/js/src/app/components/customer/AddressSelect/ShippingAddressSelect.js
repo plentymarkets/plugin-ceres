@@ -152,7 +152,7 @@ export default Vue.component("shipping-address-select", {
             }
         },
 
-        checkAddressError()
+        checkDeliveryAddressError()
         {
             const countryId = Number(this.deliveryAddress.id) === -99 ? this.billingAddress?.countryId : this.deliveryAddress?.countryId;
 
@@ -173,13 +173,13 @@ export default Vue.component("shipping-address-select", {
                 // if a delivery address exists do not take into account the billingAddress
                 if (Number(this.deliveryAddress.id) === -99)
                 {
-                    this.checkAddressError();
+                    this.checkDeliveryAddressError();
                 }
             },
 
             deliveryAddress()
             {
-                this.checkAddressError();
+                this.checkDeliveryAddressError();
             }
         }
 });

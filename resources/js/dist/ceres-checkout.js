@@ -69986,7 +69986,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
         this.$emit("payment-response", content);
       }
     },
-    checkAddressError: function checkAddressError() {
+    checkDeliveryAddressError: function checkDeliveryAddressError() {
       var _this$billingAddress, _this$deliveryAddress;
 
       var countryId = Number(this.deliveryAddress.id) === -99 ? (_this$billingAddress = this.billingAddress) === null || _this$billingAddress === void 0 ? void 0 : _this$billingAddress.countryId : (_this$deliveryAddress = this.deliveryAddress) === null || _this$deliveryAddress === void 0 ? void 0 : _this$deliveryAddress.countryId;
@@ -70002,11 +70002,11 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
   watch: {
     billingAddress: function billingAddress() {
       if (Number(this.deliveryAddress.id) === -99) {
-        this.checkAddressError();
+        this.checkDeliveryAddressError();
       }
     },
     deliveryAddress: function deliveryAddress() {
-      this.checkAddressError();
+      this.checkDeliveryAddressError();
     }
   }
 }));
@@ -72135,7 +72135,7 @@ __webpack_require__.r(__webpack_exports__);
         _services_NotificationService__WEBPACK_IMPORTED_MODULE_4__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_5__["default"].translate("Ceres::Template.checkoutInvalidShippingCountry"));
       }
     },
-    checkAddressError: function checkAddressError() {
+    checkDeliveryAddressError: function checkDeliveryAddressError() {
       var _this$billingAddress, _this$deliveryAddress;
 
       var countryId = Number(this.deliveryAddress.id) === -99 ? (_this$billingAddress = this.billingAddress) === null || _this$billingAddress === void 0 ? void 0 : _this$billingAddress.countryId : (_this$deliveryAddress = this.deliveryAddress) === null || _this$deliveryAddress === void 0 ? void 0 : _this$deliveryAddress.countryId;
@@ -72152,11 +72152,11 @@ __webpack_require__.r(__webpack_exports__);
     billingAddress: function billingAddress() {
       // if a delivery address exists do not take into account the billingAddress
       if (Number(this.deliveryAddress.id) === -99) {
-        this.checkAddressError();
+        this.checkDeliveryAddressError();
       }
     },
     deliveryAddress: function deliveryAddress() {
-      this.checkAddressError();
+      this.checkDeliveryAddressError();
     }
   }
 }));
