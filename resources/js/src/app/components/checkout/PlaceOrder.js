@@ -218,28 +218,26 @@ export default Vue.component("place-order", {
             }
         },
 
-        checkDeliveryAddressError()
+        checkAddressError()
         {
             const countryId = Number(this.deliveryAddress.id) === -99 ? this.billingAddress.countryId : this.deliveryAddress.countryId;
             const validShippingCountry = this.shippingCountryList.find((country) => country.id === countryId);
 
             this.isInvalidShippingCountry = !validShippingCountry;
-        }
     },
 
     watch: {
         billingAddress()
         {
-            // if there only exists a billing address but no delivery address check for delivery address error.
             if (Number(this.deliveryAddressId) === -99 && Number(this.billingAddressId) !== null)
             {
-                this.checkDeliveryAddressError();
+                this.checkAddressError();
             }
         },
 
         deliveryAddress()
         {
-            this.checkDeliveryAddressError();
+            this.checkAddressError();
         }
     }
 });
