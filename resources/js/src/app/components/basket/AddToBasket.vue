@@ -220,9 +220,12 @@ export default {
 
         requiresProperties()
         {
-            return (App.config.item.requireOrderProperties && 
-                (this.hasOrderProperties || this.orderProperties.filter(property => property.property.isShownOnItemPage).length > 0)) ||
-                this.hasRequiredOrderProperty;
+          // TODO: revert after testing
+          return false;
+
+          // return (App.config.item.requireOrderProperties &&
+          //       (this.hasOrderProperties || this.orderProperties.filter(property => property.property.isShownOnItemPage).length > 0)) ||
+          //       this.hasRequiredOrderProperty;
         },
 
         buttonClasses()
