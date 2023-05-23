@@ -156,6 +156,7 @@ export default {
                         }
                         else
                         {
+                            document.dispatchEvent(new CustomEvent('subscribeToNewsletter', { detail: { emailFolder: this.emailFolder } }))
                             NotificationService.success(
                                 this.$translate("Ceres::Template.newsletterSuccessMessage")
                             ).closeAfter(3000);

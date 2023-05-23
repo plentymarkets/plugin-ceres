@@ -168,6 +168,11 @@ __webpack_require__.r(__webpack_exports__);
           if (!!data.containsHoneypot) {
             _services_NotificationService__WEBPACK_IMPORTED_MODULE_6__["default"].warn(_this2.$translate("Ceres::Template.newsletterHoneypotWarning"));
           } else {
+            document.dispatchEvent(new CustomEvent('subscribeToNewsletter', {
+              detail: {
+                emailFolder: _this2.emailFolder
+              }
+            }));
             _services_NotificationService__WEBPACK_IMPORTED_MODULE_6__["default"].success(_this2.$translate("Ceres::Template.newsletterSuccessMessage")).closeAfter(3000);
           }
 
