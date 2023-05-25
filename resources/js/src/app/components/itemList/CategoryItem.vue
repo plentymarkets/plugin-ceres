@@ -61,7 +61,7 @@
                         <slot name="before-prices"></slot>
 
                         <div class="prices">
-                            <div v-if="item.prices.rrp && item.prices.rrp.price.value > 0 && item.prices.rrp.price.value > item.prices.default.unitPrice.value" class="price-view-port">
+                            <div v-if="item.prices.rrp && item.prices.rrp.price.value > 0 && item.prices.rrp.price.value > item.prices.default.price.value" class="price-view-port">
                                 <del class="crossprice" v-if="item.prices.specialOffer">
                                     {{ item.prices.default.unitPrice.formatted | itemCrossPrice(true) }}
                                 </del>
