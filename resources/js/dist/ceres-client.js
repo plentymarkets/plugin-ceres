@@ -38619,7 +38619,7 @@ var render = function() {
                       _vm.item.prices.rrp &&
                       _vm.item.prices.rrp.price.value > 0 &&
                       _vm.item.prices.rrp.price.value >
-                        _vm.item.prices.default.price.value
+                        _vm.item.prices.default.unitPrice.value
                         ? _c("div", { staticClass: "price-view-port" }, [
                             _vm.item.prices.specialOffer
                               ? _c("del", { staticClass: "crossprice" }, [
