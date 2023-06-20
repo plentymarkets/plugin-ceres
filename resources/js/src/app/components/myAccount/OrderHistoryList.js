@@ -75,6 +75,11 @@ export default Vue.component("order-history-list", {
 
                 this.orderList.page = page;
 
+                if(this.ordersPerPage === 0 || isNullOrUndefined(this.ordersPerPage))
+                {
+                    this.ordersPerPage = 5;
+                }
+
                 ApiService.get("/rest/io/customer/order/list", { page: page, items: this.ordersPerPage })
                     .done(response =>
                     {
