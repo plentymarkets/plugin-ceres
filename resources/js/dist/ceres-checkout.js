@@ -73893,6 +73893,11 @@ var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resourc
         this.waiting = true;
         var lastPage = this.orderList.page;
         this.orderList.page = page;
+
+        if (this.ordersPerPage === 0 || Object(_helper_utils__WEBPACK_IMPORTED_MODULE_3__["isNullOrUndefined"])(this.ordersPerPage)) {
+          this.ordersPerPage = 5;
+        }
+
         ApiService.get("/rest/io/customer/order/list", {
           page: page,
           items: this.ordersPerPage

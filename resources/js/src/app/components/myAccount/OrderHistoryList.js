@@ -75,7 +75,7 @@ export default Vue.component("order-history-list", {
 
                 this.orderList.page = page;
 
-                if(this.ordersPerPage === 0 || isNullOrUndefined(this.ordersPerPage))
+                if (this.ordersPerPage === 0 || isNullOrUndefined(this.ordersPerPage))
                 {
                     this.ordersPerPage = 5;
                 }
