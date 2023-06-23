@@ -90,8 +90,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -192,7 +190,7 @@ var render = function() {
               "basket-preview d-flex flex-column flex-nowrap bg-white shadow w-100"
           },
           [
-            _c("header", { staticClass: "basket-preview-header p-2" }, [
+            _c("header", { staticClass: "basket-preview-header" }, [
               _c("span", { staticClass: "h3 mb-0" }, [
                 _vm._v(_vm._s(_vm.$translate("Ceres::Template.basketPreview")))
               ]),

@@ -2,14 +2,12 @@
     <div class="basket-preview-wrapper bkr-cc h-100" :class="{ 'empty': !basketItems.length, 'open-hover': hover, 'open-right': !hover }">
            <div class="position-relative h-100">
                <div class="basket-preview d-flex flex-column flex-nowrap bg-white shadow w-100">
-
-                   <header class="basket-preview-header p-2">
+                   <header class="basket-preview-header">
                        <span class="h3 mb-0">{{ $translate("Ceres::Template.basketPreview") }}</span>
                        <button v-toggle-basket-preview type="button" class="close" aria-label="Close">
                            <span aria-hidden="true">&times;</span>
                        </button>
                    </header>
-
                    <div v-if="basketNotifications.length > 0">
                        <div class="w-100 alert alert-danger" v-for="notification in basketNotifications" :key="notification.id">
                            <div>{{ notification.message }}</div>

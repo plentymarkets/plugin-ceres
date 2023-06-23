@@ -5,6 +5,7 @@ namespace Ceres\Contexts;
 use Ceres\Config\CeresConfig;
 use Ceres\Helper\BuildHash;
 use IO\Extensions\Constants\ShopUrls;
+use IO\Helper\RouteConfig;
 use IO\Helper\ContextInterface;
 use IO\Helper\Utils;
 use IO\Services\CategoryService;
@@ -144,6 +145,8 @@ class GlobalContext implements ContextInterface
      */
     public $assetName = "ceres-checkout";
 
+    public $isCheckoutView = false;
+
     /**
      * @inheritDoc
      */
@@ -241,6 +244,8 @@ class GlobalContext implements ContextInterface
         }
 
         $this->isSafeMode = $app->isTemplateSafeMode();
+
+        $this->isCheckoutView = ($shopUrls->is(RouteConfig::LOGIN) || $shopUrls->is(RouteConfig::CHECKOUT));
 
         $this->bodyClasses = [];
         $templateClass = str_replace('tpl', 'page', $this->templateEvent);

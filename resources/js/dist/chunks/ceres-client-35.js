@@ -300,7 +300,7 @@ var render = function() {
           attrs: { id: "imageGallery" }
         },
         _vm._l(_vm.singleImages, function(image) {
-          return _c("div", { staticClass: "prop-1-1" }, [
+          return _c("div", { staticClass: "prop-1-1 slide-owl-wrap" }, [
             _c(
               "a",
               {

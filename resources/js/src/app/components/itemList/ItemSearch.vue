@@ -20,7 +20,8 @@
             </span>
         </div><!--
 
-  --><template v-if="isSearchFocused"><div> <!--v-show="(searchString.length >= searchMinLength && hasInitialInput) || $ceres.isShopBuilder" -->
+  --><template v-if="isSearchFocused">
+            <div v-show="(searchString.length >= searchMinLength && hasInitialInput) || $ceres.isShopBuilder">
             <slot name="autocomplete-suggestions">
               <div class="autocomplete-suggestions bg-white">
                 <div class="row">
