@@ -87,7 +87,7 @@
 {% if shippingDetails | length  > 0 %}
                     ,"shippingDetails": "{{ shippingDetails | raw }}"
 {% endif %}
-                %},
+                },
                 "depth": {
                     "@type"         : "QuantitativeValue",
                     "value"         : "{{ itemData.variation.lengthMM }}"
