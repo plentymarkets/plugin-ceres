@@ -100,7 +100,7 @@ class CeresSeoConfig extends PluginConfig
     public $itemCondition4;
 
     public string $returnPolicy = '';
-    public string $returnPolicyExpert = '';
+    public string $returnPolicyTextInput = '';
 
     public string $shippingDetails = '';
     public string $shippingDetailsExpert = '';
@@ -141,7 +141,7 @@ class CeresSeoConfig extends PluginConfig
         $this->itemCondition4 = $this->getTextValue('condition.mapping.condition4', 'https://schema.org/UsedCondition');
 
         $this->returnPolicy = $this->getTextValue('returnPolicy.mapping.returnPolicy', '');
-        $this->returnPolicyExpert = $this->getTextValue('returnPolicy.mapping.returnPolicyExpert', '');
+        $this->returnPolicyTextInput = $this->getTextValue('returnPolicy.mapping.returnPolicyTextInput', '');
 
         $this->shippingDetails = $this->getTextValue('shippingDetails.mapping.shippingDetails', '');
         $this->shippingDetailsExpert = $this->getTextValue('shippingDetails.mapping.shippingDetailsExpert', '');

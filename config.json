@@ -4873,13 +4873,13 @@
                 },
                 "returnPolicy.mapping": {
                     "type": "verticalContainer",
-                    "label": "Config.returnPolicy",
+                    "label": "Config.returnPolicyHeadline",
                     "options": {
                         "containerEntries": {
                             "returnPolicy.mapping.returnPolicy": {
                                 "type": "selectBox",
                                 "required": false,
-                                "label": "Config.policy",
+                                "label": "Config.returnPolicySetting",
                                 "options":{
                                     "defaultValue": "",
                                     "selectBoxValues": [
@@ -4890,12 +4890,12 @@
                                         },
                                         {
                                             "value": "1",
-                                            "caption": "Config.returnPolicyExpert",
+                                            "caption": "Config.returnPolicyTextInput",
                                             "position": 1
                                         },
                                         {
                                             "value": "2",
-                                            "caption": "Config.returnPolicyBasic",
+                                            "caption": "Config.returnPolicyIndividual",
                                             "position": 2
                                         }
                                     ]
@@ -4904,7 +4904,7 @@
                             "returnPolicy.mapping.expert": {
                                 "type": "inputText",
                                 "required": false,
-                                "label": "Config.returnPolicyExpert",
+                                "label": "Config.returnPolicyTextInputHeadline",
                                 "options": {
                                     "defaultValue": ""
                                 }
@@ -4914,38 +4914,44 @@
                                 "label": "Config.returnPolicyBasic",
                                 "options": {
                                     "containerEntries": {
-                                        "returnPolicy.mapping.basicReturnPolicyCategory": {
+                                        "returnPolicy.mapping.individualReturnPolicyCategory": {
                                             "type": "selectBox",
                                             "required": false,
-                                            "label": "Config.basicReturnPolicyCategory",
+                                            "label": "Config.returnPolicyIndividualCategoryHeadline",
                                             "options":{
                                                 "defaultValue": "",
                                                 "selectBoxValues": [
                                                     {
                                                         "value": "",
-                                                        "caption": "Config.basicReturnPolicyCategoryNone",
+                                                        "caption": "Config.returnPolicyCategoryNone",
                                                         "position": 0
                                                     },
                                                     {
                                                         "value": "https://schema.org/MerchantReturnFiniteReturnWindow",
-                                                        "caption": "Config.basicReturnPolicyCategoryFiniteReturnWindow",
+                                                        "caption": "Config.returnPolicyCategoryFiniteReturnWindow",
                                                         "position": 1
                                                     },
                                                     {
                                                         "value": "https://schema.org/MerchantReturnNotPermitted",
-                                                        "caption": "Config.basicReturnPolicyCategoryNotPermitted",
+                                                        "caption": "Config.returnPolicyCategoryNotPermitted",
                                                         "position": 2
                                                     },
                                                     {
                                                         "value": "https://schema.org/MerchantReturnUnlimitedWindow",
-                                                        "caption": "Config.basicReturnPolicyCategoryUnlimitedWindow",
+                                                        "caption": "Config.returnPolicyCategoryUnlimitedWindow",
                                                         "position": 3
                                                     },
                                                     {
                                                         "value": "https://schema.org/MerchantReturnUnspecified",
-                                                        "caption": "Config.basicReturnPolicyCategoryUnspecified",
+                                                        "caption": "Config.returnPolicyCategoryUnspecified",
+                                                        "position": 4
+                                                    },
+                                                    {
+                                                        "value": "propertyId",
+                                                        "caption": "Config.returnPolicyCategoryIndividual",
                                                         "position": 4
                                                     }
+
                                                 ]
                                             }
                                         }
