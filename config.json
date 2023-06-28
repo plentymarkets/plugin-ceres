@@ -4911,7 +4911,7 @@
                             },
                             "returnPolicy.mapping.individual": {
                                 "type": "verticalContainer",
-                                "label": "Config.returnPolicyBasic",
+                                "label": "Config.returnPolicyIndividual",
                                 "options": {
                                     "containerEntries": {
                                         "returnPolicy.mapping.returnPolicyCategory": {
@@ -4967,7 +4967,7 @@
                                             "type": "selectBox",
                                             "required": false,
                                             "label": "Config.returnPolicyMethodHeadline",
-                                            "options":{
+                                            "options": {
                                                 "defaultValue": "",
                                                 "selectBoxValues": [
                                                     {
@@ -4994,6 +4994,81 @@
                                                         "value": "propertyId",
                                                         "caption": "Config.returnPolicyMethodIndividual",
                                                         "position": 4
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        "returnPolicy.mapping.returnPolicyDays": {
+                                            "type": "selectBox",
+                                            "required": false,
+                                            "label": "Config.returnPolicyDaysHeadline",
+                                            "options":{
+                                                "defaultValue": "",
+                                                "selectBoxValues": [
+                                                    {
+                                                        "value": "",
+                                                        "caption": "Config.returnPolicyDaysNone",
+                                                        "position": 0
+                                                    },
+                                                    {
+                                                        "value": "policyDays",
+                                                        "caption": "Config.returnPolicyDaysInput",
+                                                        "position": 1
+                                                    },
+                                                    {
+                                                        "value": "propertyId",
+                                                        "caption": "Config.returnPolicyDaysIndividual",
+                                                        "position": 2
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        "returnPolicy.mapping.returnPolicyApplicableCountries": {
+                                            "type": "selectBox",
+                                            "required": false,
+                                            "label": "Config.returnPolicyApplicableCountriesHeadline",
+                                            "options":{
+                                                "defaultValue": "",
+                                                "selectBoxValues": [
+                                                    {
+                                                        "value": "",
+                                                        "caption": "Config.returnPolicyApplicableCountriesNone",
+                                                        "position": 0
+                                                    },
+                                                    {
+                                                        "value": "policyApplicableCountries",
+                                                        "caption": "Config.returnPolicyApplicableCountriesInput",
+                                                        "position": 1
+                                                    },
+                                                    {
+                                                        "value": "propertyId",
+                                                        "caption": "Config.returnPolicyApplicableCountriesIndividual",
+                                                        "position": 2
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        "returnPolicy.mapping.returnPolicyFees": {
+                                            "type": "selectBox",
+                                            "required": false,
+                                            "label": "Config.returnPolicyFeesHeadline",
+                                            "options":{
+                                                "defaultValue": "",
+                                                "selectBoxValues": [
+                                                    {
+                                                        "value": "",
+                                                        "caption": "Config.returnPolicyFeesNone",
+                                                        "position": 0
+                                                    },
+                                                    {
+                                                        "value": "policyFees",
+                                                        "caption": "Config.returnPolicyFeesInput",
+                                                        "position": 1
+                                                    },
+                                                    {
+                                                        "value": "propertyId",
+                                                        "caption": "Config.returnPolicyFeesIndividual",
+                                                        "position": 2
                                                     }
                                                 ]
                                             }
