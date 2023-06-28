@@ -4901,7 +4901,7 @@
                                     ]
                                 }
                             },
-                            "returnPolicy.mapping.expert": {
+                            "returnPolicy.mapping.textInput": {
                                 "type": "inputText",
                                 "required": false,
                                 "label": "Config.returnPolicyTextInputHeadline",
@@ -4909,12 +4909,12 @@
                                     "defaultValue": ""
                                 }
                             },
-                            "returnPolicy.mapping.basic": {
+                            "returnPolicy.mapping.individual": {
                                 "type": "verticalContainer",
                                 "label": "Config.returnPolicyBasic",
                                 "options": {
                                     "containerEntries": {
-                                        "returnPolicy.mapping.individualReturnPolicyCategory": {
+                                        "returnPolicy.mapping.returnPolicyCategory": {
                                             "type": "selectBox",
                                             "required": false,
                                             "label": "Config.returnPolicyIndividualCategoryHeadline",
@@ -4949,9 +4949,44 @@
                                                     {
                                                         "value": "propertyId",
                                                         "caption": "Config.returnPolicyCategoryIndividual",
-                                                        "position": 4
+                                                        "position": 5
                                                     }
 
+                                                ]
+                                            }
+                                        },
+                                        "returnPolicy.mapping.returnPolicyMethod": {
+                                            "type": "selectBox",
+                                            "required": false,
+                                            "label": "Config.returnPolicyMethodHeadline",
+                                            "options":{
+                                                "defaultValue": "",
+                                                "selectBoxValues": [
+                                                    {
+                                                        "value": "",
+                                                        "caption": "Config.returnPolicyMethodNone",
+                                                        "position": 0
+                                                    },
+                                                    {
+                                                        "value": "https://schema.org/ReturnAtKiosk",
+                                                        "caption": "Config.returnPolicyMethodKiosk",
+                                                        "position": 1
+                                                    },
+                                                    {
+                                                        "value": "https://schema.org/ReturnByMail",
+                                                        "caption": "Config.returnPolicyMethodMail",
+                                                        "position": 2
+                                                    },
+                                                    {
+                                                        "value": "https://schema.org/ReturnInStore",
+                                                        "caption": "Config.returnPolicyMethodStore",
+                                                        "position": 3
+                                                    },
+                                                    {
+                                                        "value": "propertyId",
+                                                        "caption": "Config.returnPolicyMethodIndividual",
+                                                        "position": 4
+                                                    }
                                                 ]
                                             }
                                         }
