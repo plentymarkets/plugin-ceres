@@ -82,10 +82,10 @@
                     "availability"  : "{{ itemData.variation.availability.mappedAvailability }}",
                     "itemCondition" : "{{ conditionOfItem }}"
 {% if hasMerchantReturnPolicy | length  > 0 %}
-                    ,"hasMerchantReturnPolicy": "{{ hasMerchantReturnPolicy | raw }}"
+                    ,"hasMerchantReturnPolicy": {{ hasMerchantReturnPolicy | raw }}
 {% endif %}
 {% if shippingDetails | length  > 0 %}
-                    ,"shippingDetails": "{{ shippingDetails | raw }}"
+                    ,"shippingDetails": {{ shippingDetails | raw }}
 {% endif %}
                 },
                 "depth": {
