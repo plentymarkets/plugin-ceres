@@ -4871,47 +4871,85 @@
                         }
                     }
                 },
-                "sku.mapping": {
+                "returnPolicy.mapping": {
                     "type": "verticalContainer",
-                    "label": "Config.skuMapping",
+                    "label": "Config.returnPolicy",
                     "options": {
                         "containerEntries": {
-                            "sku.mapping.sku": {
+                            "returnPolicy.mapping.returnPolicy": {
                                 "type": "selectBox",
                                 "required": false,
-                                "label": "Config.sku",
-                                "options": {
+                                "label": "Config.policy",
+                                "options":{
                                     "defaultValue": "",
                                     "selectBoxValues": [
                                         {
-                                            "value": "1",
-                                            "caption": "Config.skuVariationID",
+                                            "value": "",
+                                            "caption": "Config.returnPolicyNone",
                                             "position": 0
                                         },
                                         {
-                                            "value": "2",
-                                            "caption": "Config.skuVariationNr",
+                                            "value": "1",
+                                            "caption": "Config.returnPolicyExpert",
                                             "position": 1
                                         },
                                         {
-                                            "value": "3",
-                                            "caption": "Config.skuVarPropSet",
+                                            "value": "2",
+                                            "caption": "Config.returnPolicyBasic",
                                             "position": 2
-                                        },
-                                        {
-                                            "value": "4",
-                                            "caption": "Config.skuItemID",
-                                            "position": 3
                                         }
                                     ]
                                 }
                             },
-                            "sku.mapping.skuID": {
+                            "returnPolicy.mapping.expert": {
                                 "type": "inputText",
                                 "required": false,
-                                "label": "Config.skuID",
+                                "label": "Config.returnPolicyExpert",
                                 "options": {
                                     "defaultValue": ""
+                                }
+                            },
+                            "returnPolicy.mapping.basic": {
+                                "type": "verticalContainer",
+                                "label": "Config.returnPolicyBasic",
+                                "options": {
+                                    "containerEntries": {
+                                        "returnPolicy.mapping.basicReturnPolicyCategory": {
+                                            "type": "selectBox",
+                                            "required": false,
+                                            "label": "Config.basicReturnPolicyCategory",
+                                            "options":{
+                                                "defaultValue": "",
+                                                "selectBoxValues": [
+                                                    {
+                                                        "value": "",
+                                                        "caption": "Config.basicReturnPolicyCategoryNone",
+                                                        "position": 0
+                                                    },
+                                                    {
+                                                        "value": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                                                        "caption": "Config.basicReturnPolicyCategoryFiniteReturnWindow",
+                                                        "position": 1
+                                                    },
+                                                    {
+                                                        "value": "https://schema.org/MerchantReturnNotPermitted",
+                                                        "caption": "Config.basicReturnPolicyCategoryNotPermitted",
+                                                        "position": 2
+                                                    },
+                                                    {
+                                                        "value": "https://schema.org/MerchantReturnUnlimitedWindow",
+                                                        "caption": "Config.basicReturnPolicyCategoryUnlimitedWindow",
+                                                        "position": 3
+                                                    },
+                                                    {
+                                                        "value": "https://schema.org/MerchantReturnUnspecified",
+                                                        "caption": "Config.basicReturnPolicyCategoryUnspecified",
+                                                        "position": 4
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
