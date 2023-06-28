@@ -4901,7 +4901,7 @@
                                     ]
                                 }
                             },
-                            "returnPolicy.mapping.textInput": {
+                            "returnPolicy.mapping.returnPolicyTextInput": {
                                 "type": "inputText",
                                 "required": false,
                                 "label": "Config.returnPolicyTextInputHeadline",
