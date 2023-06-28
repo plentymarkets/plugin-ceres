@@ -99,6 +99,11 @@ class CeresSeoConfig extends PluginConfig
     public $itemCondition3;
     public $itemCondition4;
 
+    public string $returnPolicy = '';
+    public string $returnPolicyExpert = '';
+
+    public string $shippingDetails = '';
+    public string $shippingDetailsExpert = '';
 
     /**
      * @inheritDoc
@@ -134,6 +139,13 @@ class CeresSeoConfig extends PluginConfig
         $this->itemCondition2 = $this->getTextValue('condition.mapping.condition2', 'https://schema.org/NewCondition');
         $this->itemCondition3 = $this->getTextValue('condition.mapping.condition3', 'https://schema.org/NewCondition');
         $this->itemCondition4 = $this->getTextValue('condition.mapping.condition4', 'https://schema.org/UsedCondition');
+
+        $this->returnPolicy = $this->getTextValue('returnPolicy.mapping.returnPolicy', '');
+        $this->returnPolicyExpert = $this->getTextValue('returnPolicy.mapping.returnPolicyExpert', '');
+
+        $this->shippingDetails = $this->getTextValue('shippingDetails.mapping.shippingDetails', '');
+        $this->shippingDetailsExpert = $this->getTextValue('shippingDetails.mapping.shippingDetailsExpert', '');
+
 
     }
 }

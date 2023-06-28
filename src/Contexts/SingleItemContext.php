@@ -11,7 +11,6 @@ use Plenty\Plugin\ConfigRepository;
 use Plenty\Modules\Webshop\Contracts\ContactRepositoryContract;
 use Plenty\Modules\Category\Models\Category;
 
-
 /**
  * Class SingleItemContext
  *
@@ -142,9 +141,19 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $conditionOfItem = '';
 
     /**
+     * @var string $hasMerchantReturnPolicy
+     */
+    public string $hasMerchantReturnPolicy = '';
+
+    /**
+     * @var string $shippingDetails
+     */
+    public string $shippingDetails = '';
+
+    /**
      * @inheritDoc
      */
-    public function init($params)
+    public function init($params): void
     {
         parent::init($params);
 
@@ -158,7 +167,6 @@ class SingleItemContext extends GlobalContext implements ContextInterface
 
         $this->item = $params['item'];
         $itemData = $this->item['documents'][0]['data'];
-
 
         $this->conditionOfItem = $this->detectItemCondition($itemData['item']['condition']['id']);
 
@@ -277,6 +285,43 @@ class SingleItemContext extends GlobalContext implements ContextInterface
             $this->defaultCategory = $categoryService->get($defaultCategoryId);
         }
 
+        $returnPolicy = $this->ceresConfig->seo->returnPolicy;
+        if ($returnPolicy !== '') {
+            if ($returnPolicy === 'basic') {
+                $returnPolicyData = [];
+                $returnPolicyData["@type"] = "MerchantReturnPolicy";
+                $returnPolicyData["returnPolicyCategory"] = $this->ceresConfig->seo->returnPolicyCategory;
+                $returnPolicyData["merchantReturnLink"] = $this->ceresConfig->seo->returnPolicyLink;
+                if ($this->ceresConfig->seo->returnPolicyCategory === 'https://schema.org/MerchantReturnFiniteReturnWindow') {
+                    $returnPolicyData["merchantReturnDays"] = $this->ceresConfig->seo->returnPolicyReturnDays;
+                }
+                $returnPolicyData["applicableCountry"] = $this->ceresConfig->seo->returnPolicyApplicableCountry;
+                $returnPolicyData["returnMethod"] = $this->ceresConfig->seo->returnPolicyMethod;
+                if ($this->ceresConfig->seo->returnPolicyFee === 'https://schema.org/FreeReturn') {
+                    $returnPolicyData["returnFees"] = $this->ceresConfig->seo->returnPolicyFee;
+                } else {
+                    $returnPolicyData["returnShippingFeesAmount"]["@type"] = "MonetaryAmount";
+                    //TODO dynamic values
+                    $returnPolicyData["returnShippingFeesAmount"]["value"] = "0";
+                    $returnPolicyData["returnShippingFeesAmount"]["currency"] = "EUR";
+                }
+                $this->hasMerchantReturnPolicy = json_encode($returnPolicyData);
+            } else {
+                $this->hasMerchantReturnPolicy = $this->ceresConfig->seo->returnPolicyExpert;
+            }
+        }
+
+        $shippingDetails = $this->ceresConfig->seo->shippingDetails;
+        if ($shippingDetails === '') {
+            $this->shippingDetails = '';
+        } elseif ($shippingDetails === 'basic') {
+            //TODO fill with life
+            $shippingDetailsData = [];
+            $this->shippingDetails = json_encode($shippingDetailsData);
+        } else {
+            $this->shippingDetails = $this->ceresConfig->seo->shippingDetailsExpert;
+        }
+
         $this->bodyClasses[] = "item-" . $itemData['item']['id'];
         $this->bodyClasses[] = "variation-" . $itemData['variation']['id'];
     }
@@ -316,7 +361,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
      *
      * @return bool
      */
-    private function isWebshopReferrer($referrers)
+    private function isWebshopReferrer($referrers): bool
     {
         if($referrers[0] == -1) {
             return true;
@@ -335,7 +380,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
      *
      * @return string
      */
-    private function getVariationProperty($variationPropertyGroups, $mappingPropertyId) {
+    private function getVariationProperty($variationPropertyGroups, $mappingPropertyId): string
+    {
         $variationProperty = '';
         foreach ($variationPropertyGroups as $propertyGroup) {
             foreach ($propertyGroup['properties'] as $property) {
@@ -354,7 +400,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
      *
      * @return string
      */
-    private function getFirstBarcode($barcodes, $barcodeType){
+    private function getFirstBarcode($barcodes, $barcodeType): string
+    {
         $barcode = '';
         foreach ($barcodes as $property) {
             if (strpos($property['type'], $barcodeType) === 0 && $this->isWebshopReferrer($property['referrers'])) {
@@ -371,7 +418,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
      *
      * @return string
      */
-    private function getBarcodeWithId($barcodes, $barcodeMappingId){
+    private function getBarcodeWithId($barcodes, $barcodeMappingId): string
+    {
         $barcode = '';
         foreach ($barcodes as $property) {
             if ($property['id'] == $barcodeMappingId) {
