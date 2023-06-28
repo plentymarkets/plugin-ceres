@@ -4889,12 +4889,12 @@
                                             "position": 0
                                         },
                                         {
-                                            "value": "1",
+                                            "value": "basic",
                                             "caption": "Config.returnPolicyTextInput",
                                             "position": 1
                                         },
                                         {
-                                            "value": "2",
+                                            "value": "individual",
                                             "caption": "Config.returnPolicyIndividual",
                                             "position": 2
                                         }
@@ -4953,6 +4953,14 @@
                                                     }
 
                                                 ]
+                                            }
+                                        },
+                                        "returnPolicy.mapping.returnPolicyLink": {
+                                            "type": "inputText",
+                                            "required": false,
+                                            "label": "Config.returnPolicyLinkHeadline",
+                                            "options": {
+                                                "defaultValue": ""
                                             }
                                         },
                                         "returnPolicy.mapping.returnPolicyMethod": {

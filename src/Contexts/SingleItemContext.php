@@ -287,16 +287,22 @@ class SingleItemContext extends GlobalContext implements ContextInterface
 
         $returnPolicy = $this->ceresConfig->seo->returnPolicy;
         if ($returnPolicy !== '') {
-            if ($returnPolicy === 'basic') {
+            if ($returnPolicy === 'individual') {
                 $returnPolicyData = [];
                 $returnPolicyData["@type"] = "MerchantReturnPolicy";
                 $returnPolicyData["returnPolicyCategory"] = $this->ceresConfig->seo->returnPolicyCategory;
-                $returnPolicyData["merchantReturnLink"] = $this->ceresConfig->seo->returnPolicyLink;
+                if (strlen($this->ceresConfig->seo->returnPolicyLink)) {
+                    $returnPolicyData["merchantReturnLink"] = $this->ceresConfig->seo->returnPolicyLink;
+                }
                 if ($this->ceresConfig->seo->returnPolicyCategory === 'https://schema.org/MerchantReturnFiniteReturnWindow') {
                     $returnPolicyData["merchantReturnDays"] = $this->ceresConfig->seo->returnPolicyReturnDays;
                 }
                 $returnPolicyData["applicableCountry"] = $this->ceresConfig->seo->returnPolicyApplicableCountry;
-                $returnPolicyData["returnMethod"] = $this->ceresConfig->seo->returnPolicyMethod;
+
+                if (strlen($this->ceresConfig->seo->returnPolicyMethod)) {
+                    $returnPolicyData["returnMethod"] = $this->ceresConfig->seo->returnPolicyMethod;
+                }
+
                 if ($this->ceresConfig->seo->returnPolicyFee === 'https://schema.org/FreeReturn') {
                     $returnPolicyData["returnFees"] = $this->ceresConfig->seo->returnPolicyFee;
                 } else {
@@ -307,7 +313,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
                 }
                 $this->hasMerchantReturnPolicy = json_encode($returnPolicyData);
             } else {
-                $this->hasMerchantReturnPolicy = $this->ceresConfig->seo->returnPolicyExpert;
+                $this->hasMerchantReturnPolicy = $this->ceresConfig->seo->returnPolicyTextInput;
             }
         }
 

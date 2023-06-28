@@ -102,6 +102,10 @@ class CeresSeoConfig extends PluginConfig
     public string $returnPolicy = '';
     public string $returnPolicyTextInput = '';
 
+    public string $returnPolicyLink = '';
+
+    public string $returnPolicyMethod = '';
+
     public string $shippingDetails = '';
     public string $shippingDetailsExpert = '';
 
@@ -142,6 +146,9 @@ class CeresSeoConfig extends PluginConfig
 
         $this->returnPolicy = $this->getTextValue('returnPolicy.mapping.returnPolicy', '');
         $this->returnPolicyTextInput = $this->getTextValue('returnPolicy.mapping.returnPolicyTextInput', '');
+        $this->returnPolicyLink = $this->getTextValue('returnPolicy.mapping.returnPolicyLink', '');
+        $this->returnPolicyMethod = $this->getTextValue('returnPolicy.mapping.returnPolicyMethod', '');
+
 
         $this->shippingDetails = $this->getTextValue('shippingDetails.mapping.shippingDetails', '');
         $this->shippingDetailsExpert = $this->getTextValue('shippingDetails.mapping.shippingDetailsExpert', '');
