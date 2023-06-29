@@ -7,6 +7,10 @@
 - On the item detail page in the non-standard language, the language abbreviation was not displayed in the schema.org details in the URL. This has been fixed.
 - Fixed a Javascript error in the checkout due to an unfilled variable in the CheckDeliveryAddressError() function.
 
+### Changed
+
+- For the Image Box widget, if **Maintain Aspect Ratio** is selected for the **Aspect Ratio** setting, a minimum height for the image is no longer specified on mobile devices.
+
 ## v5.0.59 (2023-02-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.58...5.0.59" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
