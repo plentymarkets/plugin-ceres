@@ -2,6 +2,10 @@
     @include media-breakpoint-only(xs) {
         min-height: 10rem;
         padding-bottom: 0;
+
+        &.widget-retain-aspect-ratio {
+            min-height: auto !important;
+        }
     }
 
     img {
