@@ -6,6 +6,22 @@
 
 - Auf der Artikeldetailseite in der nicht Standardsprache wurde in den schema.org Angaben das Sprackürzel in der URL nicht angezeigt. Das wurde behoben.
 - Im Checkout wurde ein Javascript-Fehler behoben, der aufgrund einer unbefüllten Variable in der Funktion CheckDeliveryAddressError() auftrat.
+- In der Kategorieansicht wurden unter bestimmten Umständeb der UVP nicht angezeigt.
+- Bei Aufruf von Kategorieseiten konnte mit sehr hoher Seitenzahl konnte es Out Of Memory Exception kommen.
+  
+### Geändert
+
+- Wenn beim Bilderbox-Widget für die Einstellung **Seitenverhältnis** die Option **Seitenverhältnis beibehalten** ausgewählt ist, wird auf mobilen Geräten keine Mindesthöhe mehr für das Bild angegeben.
+
+### Entfernt
+
+- Es wurden ungenutzte SCSS Dateien entfernt (_featured-category.scss, _featured-sale-new.scss)
+
+### Angepasste Templates
+
+- Im Zuge des Releases von Ceres 5.0.60 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- [resources/views/Category/Item/Partials/Pagination.twig](https://github.com/plentymarkets/plugin-ceres/pull/3421/files#diff-1b8d2c7ce7416f660f89d11ad8e368be614c2b98efc30526e74286c7f180c3b8)
+
 
 ## v5.0.59 (2023-02-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.58...5.0.59" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
