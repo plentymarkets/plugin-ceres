@@ -11,6 +11,15 @@
 
 - For the Image Box widget, if **Maintain Aspect Ratio** is selected for the **Aspect Ratio** setting, a minimum height for the image is no longer specified on mobile devices.
 
+### Removed
+
+- Removed unused SCSS files (_featured-category.scss, _featured-sale-new.scss)
+
+### Changed templates
+
+- In Ceres 5.0.60 we made changes to template files which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
+- [resources/views/Category/Item/Partials/Pagination.twig](https://github.com/plentymarkets/plugin-ceres/pull/3421/files#diff-1b8d2c7ce7416f660f89d11ad8e368be614c2b98efc30526e74286c7f180c3b8)
+
 ## v5.0.59 (2023-02-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.58...5.0.59" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
