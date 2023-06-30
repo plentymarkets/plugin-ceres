@@ -6,7 +6,9 @@
 
 - Auf der Artikeldetailseite in der nicht Standardsprache wurde in den schema.org Angaben das Sprackürzel in der URL nicht angezeigt. Das wurde behoben.
 - Im Checkout wurde ein Javascript-Fehler behoben, der aufgrund einer unbefüllten Variable in der Funktion CheckDeliveryAddressError() auftrat.
-
+- In der Kategorieansicht wurden unter bestimmten Umständeb der UVP nicht angezeigt.
+- Bei Aufruf von Kategorieseiten konnte mit sehr hoher Seitenzahl konnte es Out Of Memory Exception kommen.
+  
 ### Geändert
 
 - Wenn beim Bilderbox-Widget für die Einstellung **Seitenverhältnis** die Option **Seitenverhältnis beibehalten** ausgewählt ist, wird auf mobilen Geräten keine Mindesthöhe mehr für das Bild angegeben.
