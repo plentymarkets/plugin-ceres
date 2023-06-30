@@ -11,6 +11,10 @@
 
 - Wenn beim Bilderbox-Widget für die Einstellung **Seitenverhältnis** die Option **Seitenverhältnis beibehalten** ausgewählt ist, wird auf mobilen Geräten keine Mindesthöhe mehr für das Bild angegeben.
 
+### Entfernt
+
+- Es wurden ungenutzte SCSS Dateien entfernt (_featured-category.scss, _featured-sale-new.scss)
+
 ## v5.0.59 (2023-02-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.58...5.0.59" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO

@@ -11,6 +11,10 @@
 
 - For the Image Box widget, if **Maintain Aspect Ratio** is selected for the **Aspect Ratio** setting, a minimum height for the image is no longer specified on mobile devices.
 
+### Removed
+
+- Removed unused SCSS files (_featured-category.scss, _featured-sale-new.scss)
+
 ## v5.0.59 (2023-02-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.58...5.0.59" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
