@@ -286,34 +286,45 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         }
 
         $returnPolicy = $this->ceresConfig->seo->returnPolicy;
-        if ($returnPolicy !== '') {
-            if ($returnPolicy === 'individual') {
+        if ($returnPolicy === 'basic') {
+            $this->hasMerchantReturnPolicy = $this->ceresConfig->seo->returnPolicyTextInput;
+        } elseif ($returnPolicy === 'individual') {
+
+            $returnPolicyCategory = $this->getReturnPolicy($itemData);
+            if (strlen($returnPolicyCategory)) {
                 $returnPolicyData = [];
                 $returnPolicyData["@type"] = "MerchantReturnPolicy";
-                $returnPolicyData["returnPolicyCategory"] = $this->ceresConfig->seo->returnPolicyCategory;
+                $returnPolicyData["returnPolicyCategory"] = $returnPolicyCategory;
+
                 if (strlen($this->ceresConfig->seo->returnPolicyLink)) {
                     $returnPolicyData["merchantReturnLink"] = $this->ceresConfig->seo->returnPolicyLink;
                 }
-                if ($this->ceresConfig->seo->returnPolicyCategory === 'https://schema.org/MerchantReturnFiniteReturnWindow') {
-                    $returnPolicyData["merchantReturnDays"] = $this->ceresConfig->seo->returnPolicyReturnDays;
-                }
-                $returnPolicyData["applicableCountry"] = $this->ceresConfig->seo->returnPolicyApplicableCountry;
 
-                if (strlen($this->ceresConfig->seo->returnPolicyMethod)) {
-                    $returnPolicyData["returnMethod"] = $this->ceresConfig->seo->returnPolicyMethod;
+                $returnPolicyDays = $this->getReturnPolicyDays($itemData);
+                if ($returnPolicyCategory === 'https://schema.org/MerchantReturnFiniteReturnWindow' && strlen($returnPolicyDays) ) {
+                    $returnPolicyData["merchantReturnDays"] = $returnPolicyDays;
                 }
 
-                if ($this->ceresConfig->seo->returnPolicyFee === 'https://schema.org/FreeReturn') {
-                    $returnPolicyData["returnFees"] = $this->ceresConfig->seo->returnPolicyFee;
-                } else {
+                $returnPolicyApplicableCountries = $this->getReturnApplicableCountries($itemData);
+                if ($returnPolicyApplicableCountries) {
+                    $returnPolicyData["applicableCountry"] = $returnPolicyApplicableCountries;
+                }
+
+                $returnPolicyMethod = $this->getReturnPolicyMethod($itemData);
+
+                if (strlen($returnPolicyMethod)) {
+                    $returnPolicyData["returnMethod"] = $returnPolicyMethod;
+                }
+
+                $returnPolicyFee = $this->getReturnPolicyFee($itemData);
+                if ($returnPolicyFee === 'https://schema.org/FreeReturn') {
+                    $returnPolicyData["returnFees"] = $returnPolicyFee;
+                } elseif (strlen($returnPolicyFee)) {
                     $returnPolicyData["returnShippingFeesAmount"]["@type"] = "MonetaryAmount";
-                    //TODO dynamic values
-                    $returnPolicyData["returnShippingFeesAmount"]["value"] = "0";
+                    $returnPolicyData["returnShippingFeesAmount"]["value"] = $returnPolicyFee;
                     $returnPolicyData["returnShippingFeesAmount"]["currency"] = "EUR";
                 }
                 $this->hasMerchantReturnPolicy = json_encode($returnPolicyData);
-            } else {
-                $this->hasMerchantReturnPolicy = $this->ceresConfig->seo->returnPolicyTextInput;
             }
         }
 
@@ -434,5 +445,57 @@ class SingleItemContext extends GlobalContext implements ContextInterface
             }
         }
         return $barcode;
+    }
+
+    private function getReturnPolicy(array $itemData): string
+    {
+        if ($this->ceresConfig->seo->returnPolicyCategory === 'propertyId') {
+            $returnPolicyCategory = $this->getVariationProperty($itemData['variationProperties'], $this->ceresConfig->seo->returnPolicyCategoryId);
+        } else {
+            $returnPolicyCategory = $this->ceresConfig->seo->returnPolicyCategory;
+        }
+        return $returnPolicyCategory;
+    }
+
+    private function getReturnPolicyDays(array $itemData):string
+    {
+        $returnPolicyDays = '';
+        if ($this->ceresConfig->seo->returnPolicyDays === 'propertyId') {
+            $returnPolicyDays = $this->getVariationProperty($itemData['variationProperties'], $this->ceresConfig->seo->returnPolicyDaysId);
+        } elseif ( $this->ceresConfig->seo->returnPolicyDays === 'policyDays') {
+            $returnPolicyDays = $this->ceresConfig->seo->returnPolicyDaysInput;
+        }
+        return $returnPolicyDays;
+    }
+
+    private function getReturnApplicableCountries(array $itemData): string
+    {
+        $returnPolicyApplicableCountries = '';
+        if ($this->ceresConfig->seo->returnPolicyApplicableCountries === 'propertyId') {
+            $returnPolicyApplicableCountries = $this->getVariationProperty($itemData['variationProperties'], $this->ceresConfig->seo->returnPolicyApplicableCountriesId);
+        } elseif ( $this->ceresConfig->seo->returnPolicyApplicableCountry === 'policyApplicableCountries') {
+            $returnPolicyApplicableCountries = $this->ceresConfig->seo->returnPolicyApplicableCountriesInput;
+        }
+        return $returnPolicyApplicableCountries;
+    }
+
+    private function getReturnPolicyMethod(array $itemData): string
+    {
+        if ($this->ceresConfig->seo->returnPolicyMethod === 'propertyId') {
+            $returnPolicyMethod = $this->getVariationProperty($itemData['variationProperties'], $this->ceresConfig->seo->returnPolicyMethodId);
+        } else {
+            $returnPolicyMethod = $this->ceresConfig->seo->returnPolicyMethod;
+        }
+        return $returnPolicyMethod;
+    }
+
+    private function getReturnPolicyFee(array $itemData): string|array
+    {
+        if ($this->ceresConfig->seo->returnPolicyMethod === 'propertyId') {
+            $returnPolicyMethod = $this->getVariationProperty($itemData['variationProperties'], $this->ceresConfig->seo->returnPolicyMethodId);
+        } else {
+            $returnPolicyMethod = $this->ceresConfig->seo->returnPolicyMethod;
+        }
+        return $returnPolicyMethod;
     }
 }

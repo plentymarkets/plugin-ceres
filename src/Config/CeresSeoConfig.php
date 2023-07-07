@@ -102,9 +102,34 @@ class CeresSeoConfig extends PluginConfig
     public string $returnPolicy = '';
     public string $returnPolicyTextInput = '';
 
+    public string $returnPolicyCategory = '';
+
+    public string $returnPolicyCategoryId = '';
+
     public string $returnPolicyLink = '';
 
+    public string $returnPolicyDays = '';
+
+    public string $returnPolicyDaysInput = '';
+
+    public string $returnPolicyDaysId = '';
+
+    public string $returnPolicyApplicableCountries = '';
+
+    public string $returnPolicyApplicableCountriesInput = '';
+
+    public string $returnPolicyApplicableCountriesId = '';
+
     public string $returnPolicyMethod = '';
+
+    public string $returnPolicyMethodId = '';
+
+    public string $returnPolicyFees = '';
+
+    public string $returnPolicyFeesInput = '';
+
+    public string $returnPolicyFeesId = '';
+
 
     public string $shippingDetails = '';
     public string $shippingDetailsExpert = '';
@@ -146,13 +171,23 @@ class CeresSeoConfig extends PluginConfig
 
         $this->returnPolicy = $this->getTextValue('returnPolicy.mapping.returnPolicy', '');
         $this->returnPolicyTextInput = $this->getTextValue('returnPolicy.mapping.returnPolicyTextInput', '');
+        $this->returnPolicyCategory = $this->getTextValue('returnPolicy.mapping.returnPolicyCategory', '');
+        $this->returnPolicyCategoryId = $this->getTextValue('returnPolicy.mapping.returnPolicyCategoryId', '');
         $this->returnPolicyLink = $this->getTextValue('returnPolicy.mapping.returnPolicyLink', '');
+        $this->returnPolicyDays = $this->getTextValue('returnPolicy.mapping.returnPolicyDays', '');
+        $this->returnPolicyDaysInput = $this->getTextValue('returnPolicy.mapping.returnPolicyDaysInput', '');
+        $this->returnPolicyDaysId = $this->getTextValue('returnPolicy.mapping.returnPolicyDaysId', '');
+        $this->returnPolicyApplicableCountries = $this->getTextValue('returnPolicy.mapping.returnPolicyApplicableCountries', '');
+        $this->returnPolicyApplicableCountriesInput = $this->getTextValue('returnPolicy.mapping.returnPolicyApplicableCountriesInput', '');
+        $this->returnPolicyApplicableCountriesId = $this->getTextValue('returnPolicy.mapping.returnPolicyApplicableCountriesId', '');
         $this->returnPolicyMethod = $this->getTextValue('returnPolicy.mapping.returnPolicyMethod', '');
+        $this->returnPolicyMethodId = $this->getTextValue('returnPolicy.mapping.returnPolicyMethodId', '');
+        $this->returnPolicFees = $this->getTextValue('returnPolicy.mapping.returnPolicyFees', '');
+        $this->returnPolicyFeesInput = $this->getTextValue('returnPolicy.mapping.returnPolicyFeesInput', '');
+        $this->returnPolicyFeesId = $this->getTextValue('returnPolicy.mapping.returnPolicyFeesId', '');
 
 
         $this->shippingDetails = $this->getTextValue('shippingDetails.mapping.shippingDetails', '');
         $this->shippingDetailsExpert = $this->getTextValue('shippingDetails.mapping.shippingDetailsExpert', '');
-
-
     }
 }

@@ -4955,6 +4955,14 @@
                                                 ]
                                             }
                                         },
+                                        "returnPolicy.mapping.returnPolicyCategoryId": {
+                                            "type": "inputText",
+                                            "required": false,
+                                            "label": "Config.returnPolicyCategoryId",
+                                            "options": {
+                                                "defaultValue": ""
+                                            }
+                                        },
                                         "returnPolicy.mapping.returnPolicyLink": {
                                             "type": "inputText",
                                             "required": false,
@@ -4998,6 +5006,14 @@
                                                 ]
                                             }
                                         },
+                                        "returnPolicy.mapping.returnPolicyMethodId": {
+                                            "type": "inputText",
+                                            "required": false,
+                                            "label": "Config.returnPolicyDaysId",
+                                            "options": {
+                                                "defaultValue": ""
+                                            }
+                                        },
                                         "returnPolicy.mapping.returnPolicyDays": {
                                             "type": "selectBox",
                                             "required": false,
@@ -5021,6 +5037,22 @@
                                                         "position": 2
                                                     }
                                                 ]
+                                            }
+                                        },
+                                        "returnPolicy.mapping.returnPolicyDaysInput": {
+                                            "type": "inputText",
+                                            "required": false,
+                                            "label": "Config.returnPolicyDaysInput",
+                                            "options": {
+                                                "defaultValue": ""
+                                            }
+                                        },
+                                        "returnPolicy.mapping.returnPolicyDaysId": {
+                                            "type": "inputText",
+                                            "required": false,
+                                            "label": "Config.returnPolicyDaysId",
+                                            "options": {
+                                                "defaultValue": ""
                                             }
                                         },
                                         "returnPolicy.mapping.returnPolicyApplicableCountries": {
@@ -5048,6 +5080,22 @@
                                                 ]
                                             }
                                         },
+                                        "returnPolicy.mapping.returnPolicyApplicableCountriesInput": {
+                                            "type": "inputText",
+                                            "required": false,
+                                            "label": "Config.returnPolicyApplicableCountriesInput",
+                                            "options": {
+                                                "defaultValue": ""
+                                            }
+                                        },
+                                        "returnPolicy.mapping.returnPolicyApplicableCountriesId": {
+                                            "type": "inputText",
+                                            "required": false,
+                                            "label": "Config.returnPolicyApplicableCountriesId",
+                                            "options": {
+                                                "defaultValue": ""
+                                            }
+                                        },
                                         "returnPolicy.mapping.returnPolicyFees": {
                                             "type": "selectBox",
                                             "required": false,
@@ -5061,16 +5109,37 @@
                                                         "position": 0
                                                     },
                                                     {
+                                                        "value": "https://schema.org/FreeReturn",
+                                                        "caption": "Config.returnPolicyFeesFree",
+                                                        "position": 1
+                                                    },
+                                                    {
                                                         "value": "policyFees",
                                                         "caption": "Config.returnPolicyFeesInput",
-                                                        "position": 1
+                                                        "position": 2
                                                     },
                                                     {
                                                         "value": "propertyId",
                                                         "caption": "Config.returnPolicyFeesIndividual",
-                                                        "position": 2
+                                                        "position": 3
                                                     }
                                                 ]
+                                            }
+                                        },
+                                        "returnPolicy.mapping.returnPolicyFeesInput": {
+                                            "type": "inputText",
+                                            "required": false,
+                                            "label": "Config.returnPolicyFeesInput",
+                                            "options": {
+                                                "defaultValue": ""
+                                            }
+                                        },
+                                        "returnPolicy.mapping.returnPolicyFeesId": {
+                                            "type": "inputText",
+                                            "required": false,
+                                            "label": "Config.returnPolicyFeesId",
+                                            "options": {
+                                                "defaultValue": ""
                                             }
                                         }
                                     }
