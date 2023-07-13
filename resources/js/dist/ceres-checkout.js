@@ -82019,7 +82019,7 @@ var state = function state() {
 
 var mutations = {
   setBasket: function setBasket(state, basket) {
-    if (state.data.id && JSON.stringify(basket) !== JSON.stringify(state.data)) {
+    if (state.data.sessionId && JSON.stringify(basket) !== JSON.stringify(state.data)) {
       document.dispatchEvent(new CustomEvent("afterBasketChanged", {
         detail: basket
       }));
