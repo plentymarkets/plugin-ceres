@@ -3325,14 +3325,14 @@ var render = function() {
                           directives: [
                             {
                               name: "validate",
-                              rawName: "v-validate:text",
+                              rawName: "v-validate:mail",
                               value: _vm.isInRequiredFields(
                                 "de",
                                 "delivery_address.email"
                               ),
                               expression:
                                 "isInRequiredFields('de', 'delivery_address.email')",
-                              arg: "text"
+                              arg: "mail"
                             }
                           ],
                           staticClass: "input-unit",
@@ -4345,14 +4345,14 @@ var render = function() {
                           directives: [
                             {
                               name: "validate",
-                              rawName: "v-validate:text",
+                              rawName: "v-validate:mail",
                               value: _vm.isInRequiredFields(
                                 "de",
                                 "billing_address.email"
                               ),
                               expression:
                                 "isInRequiredFields('de', 'billing_address.email')",
-                              arg: "text"
+                              arg: "mail"
                             }
                           ],
                           staticClass: "input-unit",
@@ -5367,14 +5367,14 @@ var render = function() {
                           directives: [
                             {
                               name: "validate",
-                              rawName: "v-validate:text",
+                              rawName: "v-validate:mail",
                               value: _vm.isInRequiredFields(
                                 "gb",
                                 "billing_address.email"
                               ),
                               expression:
                                 "isInRequiredFields('gb', 'billing_address.email')",
-                              arg: "text"
+                              arg: "mail"
                             }
                           ],
                           staticClass: "input-unit",
@@ -6324,14 +6324,14 @@ var render = function() {
                           directives: [
                             {
                               name: "validate",
-                              rawName: "v-validate:text",
+                              rawName: "v-validate:mail",
                               value: _vm.isInRequiredFields(
                                 "de",
                                 "delivery_address.email"
                               ),
                               expression:
                                 "isInRequiredFields('de', 'delivery_address.email')",
-                              arg: "text"
+                              arg: "mail"
                             }
                           ],
                           staticClass: "input-unit",
@@ -7264,14 +7264,14 @@ var render = function() {
                           directives: [
                             {
                               name: "validate",
-                              rawName: "v-validate:text",
+                              rawName: "v-validate:mail",
                               value: _vm.isInRequiredFields(
                                 "gb",
                                 "delivery_address.email"
                               ),
                               expression:
                                 "isInRequiredFields('gb', 'delivery_address.email')",
-                              arg: "text"
+                              arg: "mail"
                             }
                           ],
                           staticClass: "input-unit",
