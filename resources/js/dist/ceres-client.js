@@ -65136,7 +65136,9 @@ function capitalize(input) {
   return ("" + input).charAt(0).toUpperCase() + ("" + input).substr(1);
 }
 function isMail(input) {
-  var mailRegEx = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+  var mailRegEx = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/); // eslint-disable-next-line no-console
+
+  console.log("isMail", input, mailRegEx.test(input));
   return mailRegEx.test(input);
 }
 
@@ -67869,6 +67871,7 @@ function _isValidDate($formControl) {
 
 
 function _isMail($formControl) {
+  console.log("_isMail", $formControl.val());
   return Object(_helper_strings__WEBPACK_IMPORTED_MODULE_12__["isMail"])($formControl.val());
 }
 /**

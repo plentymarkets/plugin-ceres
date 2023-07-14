@@ -38,6 +38,7 @@ export function isMail(input)
 {
     const mailRegEx = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     // eslint-disable-next-line no-console
+
     console.log("isMail", input, mailRegEx.test(input));
     return mailRegEx.test(input);
 }
