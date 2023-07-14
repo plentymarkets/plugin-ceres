@@ -5,6 +5,7 @@
 ### Behoben
 
 - Auf der Artikeldetailseite in der nicht Standardsprache wurde in den schema.org Angaben das Sprackürzel in der URL nicht angezeigt. Das wurde behoben.
+- In den schema.org-Daten der Artikeldetailseite sind jetzt sowohl (SalePrice)[https://schema.org/SalePrice] als auch (ListPrice)[https://schema.org/ListPrice] hinterlegt.
 - Im Checkout wurde ein Javascript-Fehler behoben, der aufgrund einer unbefüllten Variable in der Funktion CheckDeliveryAddressError() auftrat.
 - In der Kategorieansicht wurden unter bestimmten Umständeb der UVP nicht angezeigt.
 - Bei Aufruf von Kategorieseiten konnte mit sehr hoher Seitenzahl konnte es Out Of Memory Exception kommen.
