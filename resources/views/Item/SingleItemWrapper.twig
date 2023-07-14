@@ -80,17 +80,19 @@
                                 "unitCode": "{{ itemData.unit.unitOfMeasurement }}"
                             }
                         },
-                        {
-                            "@type": "UnitPriceSpecification",
-                            "price": "{{ itemData.prices.rrp.price.value | number_format(2, '.', '') }}",
-                            "priceCurrency": "{{ item.documents[0].data.prices.rrp.currency }}",
-                            "priceType": "ListPrice",
-                            "referenceQuantity": {
-                                "@type": "QuantitativeValue",
-                                "value": "{{ itemData.unit.content }}",
-                                "unitCode": "{{ itemData.unit.unitOfMeasurement }}"
+                        {% if itemData.prices.rrp %}
+                            {
+                                "@type": "UnitPriceSpecification",
+                                "price": "{{ itemData.prices.rrp.price.value | number_format(2, '.', '') }}",
+                                "priceCurrency": "{{ item.documents[0].data.prices.rrp.currency }}",
+                                "priceType": "ListPrice",
+                                "referenceQuantity": {
+                                    "@type": "QuantitativeValue",
+                                    "value": "{{ itemData.unit.content }}",
+                                    "unitCode": "{{ itemData.unit.unitOfMeasurement }}"
+                                }
                             }
-                        }
+                        {% endif %}
                     ],
 {% endif %}
                     "availability"  : "{{ itemData.variation.availability.mappedAvailability }}",
