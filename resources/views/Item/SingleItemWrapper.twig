@@ -69,17 +69,6 @@
                     "url"           : "{{ requestedVariationUrl }}",
 {% if itemData.prices.default.baseLot > 0 %}
                     "priceSpecification":[
-                        {
-                            "@type": "UnitPriceSpecification",
-                            "price": "{{ itemData.prices.default.price.value | number_format(2, '.', '') }}",
-                            "priceCurrency": "{{ item.documents[0].data.prices.default.currency }}",
-                            "priceType": "SalePrice",
-                            "referenceQuantity": {
-                                "@type": "QuantitativeValue",
-                                "value": "{{ itemData.unit.content }}",
-                                "unitCode": "{{ itemData.unit.unitOfMeasurement }}"
-                            }
-                        },
                         {% if itemData.prices.rrp %}
                             {
                                 "@type": "UnitPriceSpecification",
@@ -91,8 +80,20 @@
                                     "value": "{{ itemData.unit.content }}",
                                     "unitCode": "{{ itemData.unit.unitOfMeasurement }}"
                                 }
-                            }
+                            },
                         {% endif %}
+                        {
+                            "@type": "UnitPriceSpecification",
+                            "price": "{{ itemData.prices.default.price.value | number_format(2, '.', '') }}",
+                            "priceCurrency": "{{ item.documents[0].data.prices.default.currency }}",
+                            "priceType": "SalePrice",
+                            "referenceQuantity": {
+                                "@type": "QuantitativeValue",
+                                "value": "{{ itemData.unit.content }}",
+                                "unitCode": "{{ itemData.unit.unitOfMeasurement }}"
+                            }
+                        }
+
                     ],
 {% endif %}
                     "availability"  : "{{ itemData.variation.availability.mappedAvailability }}",
