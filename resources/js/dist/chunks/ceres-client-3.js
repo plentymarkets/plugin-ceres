@@ -3341,7 +3341,7 @@ var render = function() {
                         [
                           _c("input", {
                             attrs: {
-                              type: "mail",
+                              type: "email",
                               name: "email",
                               id: "email" + _vm._uid,
                               "data-testing": "packing-station-de-email-input"
@@ -4361,7 +4361,7 @@ var render = function() {
                         [
                           _c("input", {
                             attrs: {
-                              type: "mail",
+                              type: "email",
                               name: "email",
                               id: "email" + _vm._uid,
                               "data-testing": "billing-address-de-email-input"
@@ -5383,7 +5383,7 @@ var render = function() {
                         [
                           _c("input", {
                             attrs: {
-                              type: "mail",
+                              type: "email",
                               name: "email",
                               id: "email" + _vm._uid,
                               "data-testing": "billing-address-gb-email-input"
@@ -6340,7 +6340,7 @@ var render = function() {
                         [
                           _c("input", {
                             attrs: {
-                              type: "mail",
+                              type: "email",
                               name: "email",
                               id: "email" + _vm._uid,
                               "data-testing": "delivery-address-de-email-input"
@@ -7280,7 +7280,7 @@ var render = function() {
                         [
                           _c("input", {
                             attrs: {
-                              type: "mail",
+                              type: "email",
                               name: "email",
                               id: "email" + _vm._uid,
                               "data-testing": "delivery-address-gb-email-input"
