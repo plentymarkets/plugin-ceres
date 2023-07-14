@@ -44467,7 +44467,10 @@ var render = function() {
                               }
                             ],
                             staticClass: "input-unit",
-                            attrs: { "data-model": "email" }
+                            attrs: {
+                              "data-validate": "mail",
+                              "data-model": "email"
+                            }
                           },
                           [
                             _vm._ssrNode(
@@ -45282,7 +45285,10 @@ var render = function() {
                               }
                             ],
                             staticClass: "input-unit",
-                            attrs: { "data-model": "email" }
+                            attrs: {
+                              "data-validate": "mail",
+                              "data-model": "email"
+                            }
                           },
                           [
                             _vm._ssrNode(
@@ -46116,7 +46122,10 @@ var render = function() {
                               }
                             ],
                             staticClass: "input-unit",
-                            attrs: { "data-model": "email" }
+                            attrs: {
+                              "data-validate": "mail",
+                              "data-model": "email"
+                            }
                           },
                           [
                             _vm._ssrNode(
@@ -46845,7 +46854,10 @@ var render = function() {
                               }
                             ],
                             staticClass: "input-unit",
-                            attrs: { "data-model": "email" }
+                            attrs: {
+                              "data-validate": "mail",
+                              "data-model": "email"
+                            }
                           },
                           [
                             _vm._ssrNode(
@@ -47606,7 +47618,10 @@ var render = function() {
                               }
                             ],
                             staticClass: "input-unit",
-                            attrs: { "data-model": "email" }
+                            attrs: {
+                              "data-validate": "mail",
+                              "data-model": "email"
+                            }
                           },
                           [
                             _vm._ssrNode(

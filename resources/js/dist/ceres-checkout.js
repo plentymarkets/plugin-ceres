@@ -40737,7 +40737,10 @@ var render = function() {
                             }
                           ],
                           staticClass: "input-unit",
-                          attrs: { "data-model": "email" }
+                          attrs: {
+                            "data-validate": "mail",
+                            "data-model": "email"
+                          }
                         },
                         [
                           _c("input", {
@@ -41757,7 +41760,10 @@ var render = function() {
                             }
                           ],
                           staticClass: "input-unit",
-                          attrs: { "data-model": "email" }
+                          attrs: {
+                            "data-validate": "mail",
+                            "data-model": "email"
+                          }
                         },
                         [
                           _c("input", {
@@ -42779,7 +42785,10 @@ var render = function() {
                             }
                           ],
                           staticClass: "input-unit",
-                          attrs: { "data-model": "email" }
+                          attrs: {
+                            "data-validate": "mail",
+                            "data-model": "email"
+                          }
                         },
                         [
                           _c("input", {
@@ -43736,7 +43745,10 @@ var render = function() {
                             }
                           ],
                           staticClass: "input-unit",
-                          attrs: { "data-model": "email" }
+                          attrs: {
+                            "data-validate": "mail",
+                            "data-model": "email"
+                          }
                         },
                         [
                           _c("input", {
@@ -44676,7 +44688,10 @@ var render = function() {
                             }
                           ],
                           staticClass: "input-unit",
-                          attrs: { "data-model": "email" }
+                          attrs: {
+                            "data-validate": "mail",
+                            "data-model": "email"
+                          }
                         },
                         [
                           _c("input", {
