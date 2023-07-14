@@ -193,7 +193,7 @@
                 <hr class="mt-0">
                 <div class="row">
                     <div class="col-12" v-if="isInOptionalFields('de', 'delivery_address.email')">
-                        <div class="input-unit" data-model="email" v-validate:text="isInRequiredFields('de', 'delivery_address.email')">
+                        <div class="input-unit" data-model="email" v-validate:mail="isInRequiredFields('de', 'delivery_address.email')">
                             <input type="mail" name="email" :id="'email' + _uid" :value="value.email" @input="emitInputEvent('email', $event.target.value)" data-testing="packing-station-de-email-input">
                             <label :for="'email' + _uid">{{ transformTranslation("Ceres::Template.addressMail", "de", "delivery_address.email") }}</label>
                         </div>
