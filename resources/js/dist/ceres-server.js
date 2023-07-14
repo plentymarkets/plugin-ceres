@@ -44457,20 +44457,17 @@ var render = function() {
                               {
                                 name: "validate",
                                 rawName: "v-validate:mail",
-                                value: _vm.isInRequiredFields(
+                                value: _vm.isInOptionalFields(
                                   "de",
                                   "delivery_address.email"
                                 ),
                                 expression:
-                                  "isInRequiredFields('de', 'delivery_address.email')",
+                                  "isInOptionalFields('de', 'delivery_address.email')",
                                 arg: "mail"
                               }
                             ],
                             staticClass: "input-unit",
-                            attrs: {
-                              "data-validate": "mail",
-                              "data-model": "email"
-                            }
+                            attrs: { "data-model": "email" }
                           },
                           [
                             _vm._ssrNode(
@@ -45275,20 +45272,17 @@ var render = function() {
                               {
                                 name: "validate",
                                 rawName: "v-validate:mail",
-                                value: _vm.isInRequiredFields(
+                                value: _vm.isInOptionalFields(
                                   "de",
                                   "billing_address.email"
                                 ),
                                 expression:
-                                  "isInRequiredFields('de', 'billing_address.email')",
+                                  "isInOptionalFields('de', 'billing_address.email')",
                                 arg: "mail"
                               }
                             ],
                             staticClass: "input-unit",
-                            attrs: {
-                              "data-validate": "mail",
-                              "data-model": "email"
-                            }
+                            attrs: { "data-model": "email" }
                           },
                           [
                             _vm._ssrNode(
@@ -46112,20 +46106,17 @@ var render = function() {
                               {
                                 name: "validate",
                                 rawName: "v-validate:mail",
-                                value: _vm.isInRequiredFields(
+                                value: _vm.isInOptionalFields(
                                   "gb",
                                   "billing_address.email"
                                 ),
                                 expression:
-                                  "isInRequiredFields('gb', 'billing_address.email')",
+                                  "isInOptionalFields('gb', 'billing_address.email')",
                                 arg: "mail"
                               }
                             ],
                             staticClass: "input-unit",
-                            attrs: {
-                              "data-validate": "mail",
-                              "data-model": "email"
-                            }
+                            attrs: { "data-model": "email" }
                           },
                           [
                             _vm._ssrNode(
@@ -46844,20 +46835,17 @@ var render = function() {
                               {
                                 name: "validate",
                                 rawName: "v-validate:mail",
-                                value: _vm.isInRequiredFields(
+                                value: _vm.isInOptionalFields(
                                   "de",
                                   "delivery_address.email"
                                 ),
                                 expression:
-                                  "isInRequiredFields('de', 'delivery_address.email')",
+                                  "isInOptionalFields('de', 'delivery_address.email')",
                                 arg: "mail"
                               }
                             ],
                             staticClass: "input-unit",
-                            attrs: {
-                              "data-validate": "mail",
-                              "data-model": "email"
-                            }
+                            attrs: { "data-model": "email" }
                           },
                           [
                             _vm._ssrNode(
@@ -47608,20 +47596,17 @@ var render = function() {
                               {
                                 name: "validate",
                                 rawName: "v-validate:mail",
-                                value: _vm.isInRequiredFields(
+                                value: _vm.isInOptionalFields(
                                   "gb",
                                   "delivery_address.email"
                                 ),
                                 expression:
-                                  "isInRequiredFields('gb', 'delivery_address.email')",
+                                  "isInOptionalFields('gb', 'delivery_address.email')",
                                 arg: "mail"
                               }
                             ],
                             staticClass: "input-unit",
-                            attrs: {
-                              "data-validate": "mail",
-                              "data-model": "email"
-                            }
+                            attrs: { "data-model": "email" }
                           },
                           [
                             _vm._ssrNode(
