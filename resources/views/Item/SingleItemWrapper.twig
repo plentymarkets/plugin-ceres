@@ -81,8 +81,8 @@
                     },
                     "priceSpecification": {
                         "@type": "UnitPriceSpecification",
-                        "price": "{{ itemData.prices.default.price.value | number_format(2, '.', '') }}",
-                        "priceCurrency": "{{ item.documents[0].data.prices.default.currency }}",
+                        "price": "{{ itemData.prices.rrp.price.value | number_format(2, '.', '') }}",
+                        "priceCurrency": "{{ item.documents[0].data.prices.rrp.currency }}",
                         "priceType": "ListPrice",
                         "referenceQuantity": {
                             "@type": "QuantitativeValue",
