@@ -3325,14 +3325,14 @@ var render = function() {
                           directives: [
                             {
                               name: "validate",
-                              rawName: "v-validate:text",
+                              rawName: "v-validate:mail",
                               value: _vm.isInOptionalFields(
                                 "de",
                                 "delivery_address.email"
                               ),
                               expression:
                                 "isInOptionalFields('de', 'delivery_address.email')",
-                              arg: "text"
+                              arg: "mail"
                             }
                           ],
                           staticClass: "input-unit",
@@ -4345,14 +4345,14 @@ var render = function() {
                           directives: [
                             {
                               name: "validate",
-                              rawName: "v-validate:text",
+                              rawName: "v-validate:mail",
                               value: _vm.isInOptionalFields(
                                 "de",
                                 "billing_address.email"
                               ),
                               expression:
                                 "isInOptionalFields('de', 'billing_address.email')",
-                              arg: "text"
+                              arg: "mail"
                             }
                           ],
                           staticClass: "input-unit",
@@ -5367,14 +5367,14 @@ var render = function() {
                           directives: [
                             {
                               name: "validate",
-                              rawName: "v-validate:text",
+                              rawName: "v-validate:mail",
                               value: _vm.isInOptionalFields(
                                 "gb",
                                 "billing_address.email"
                               ),
                               expression:
                                 "isInOptionalFields('gb', 'billing_address.email')",
-                              arg: "text"
+                              arg: "mail"
                             }
                           ],
                           staticClass: "input-unit",
@@ -6324,14 +6324,14 @@ var render = function() {
                           directives: [
                             {
                               name: "validate",
-                              rawName: "v-validate:text",
+                              rawName: "v-validate:mail",
                               value: _vm.isInOptionalFields(
                                 "de",
                                 "delivery_address.email"
                               ),
                               expression:
                                 "isInOptionalFields('de', 'delivery_address.email')",
-                              arg: "text"
+                              arg: "mail"
                             }
                           ],
                           staticClass: "input-unit",
@@ -7264,14 +7264,14 @@ var render = function() {
                           directives: [
                             {
                               name: "validate",
-                              rawName: "v-validate:text",
+                              rawName: "v-validate:mail",
                               value: _vm.isInOptionalFields(
                                 "gb",
                                 "delivery_address.email"
                               ),
                               expression:
                                 "isInOptionalFields('gb', 'delivery_address.email')",
-                              arg: "text"
+                              arg: "mail"
                             }
                           ],
                           staticClass: "input-unit",
