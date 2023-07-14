@@ -72,6 +72,18 @@
                         "@type": "UnitPriceSpecification",
                         "price": "{{ itemData.prices.default.price.value | number_format(2, '.', '') }}",
                         "priceCurrency": "{{ item.documents[0].data.prices.default.currency }}",
+                        "priceType": "SalePrice",
+                        "referenceQuantity": {
+                            "@type": "QuantitativeValue",
+                            "value": "{{ itemData.unit.content }}",
+                            "unitCode": "{{ itemData.unit.unitOfMeasurement }}"
+                        }
+                    },
+                    "priceSpecification": {
+                        "@type": "UnitPriceSpecification",
+                        "price": "{{ itemData.prices.default.price.value | number_format(2, '.', '') }}",
+                        "priceCurrency": "{{ item.documents[0].data.prices.default.currency }}",
+                        "priceType": "ListPrice",
                         "referenceQuantity": {
                             "@type": "QuantitativeValue",
                             "value": "{{ itemData.unit.content }}",
