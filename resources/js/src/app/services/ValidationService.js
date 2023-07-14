@@ -292,6 +292,7 @@ function _isValidDate($formControl)
  */
 function _isMail($formControl)
 {
+    console.log('_isMail', $formControl.val());
     return isMail($formControl.val());
 }
 
