@@ -8,6 +8,7 @@
 - Im Checkout wurde ein Javascript-Fehler behoben, der aufgrund einer unbefüllten Variable in der Funktion CheckDeliveryAddressError() auftrat.
 - In der Kategorieansicht wurden unter bestimmten Umständeb der UVP nicht angezeigt.
 - Bei Aufruf von Kategorieseiten konnte mit sehr hoher Seitenzahl konnte es Out Of Memory Exception kommen.
+- Im Checkout wird die E-Mail-Adresse jetzt auch validiert, wenn sie nach der Ersteingabe erneut bearbeitet wird.
   
 ### Geändert
 
