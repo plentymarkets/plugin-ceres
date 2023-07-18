@@ -6,6 +6,7 @@
 
 - On the item detail page in the non-standard language, the language abbreviation was not displayed in the schema.org details in the URL. This has been fixed.
 - Fixed a Javascript error in the checkout due to an unfilled variable in the CheckDeliveryAddressError() function.
+- During checkout, the email address is now validated even when updating an already submited address.
 
 ### Changed
 
