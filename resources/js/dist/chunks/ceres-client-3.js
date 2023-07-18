@@ -3325,14 +3325,14 @@ var render = function() {
                           directives: [
                             {
                               name: "validate",
-                              rawName: "v-validate:text",
-                              value: _vm.isInRequiredFields(
+                              rawName: "v-validate:mail",
+                              value: _vm.isInOptionalFields(
                                 "de",
                                 "delivery_address.email"
                               ),
                               expression:
-                                "isInRequiredFields('de', 'delivery_address.email')",
-                              arg: "text"
+                                "isInOptionalFields('de', 'delivery_address.email')",
+                              arg: "mail"
                             }
                           ],
                           staticClass: "input-unit",
@@ -3341,7 +3341,7 @@ var render = function() {
                         [
                           _c("input", {
                             attrs: {
-                              type: "mail",
+                              type: "email",
                               name: "email",
                               id: "email" + _vm._uid,
                               "data-testing": "packing-station-de-email-input"
@@ -4345,14 +4345,14 @@ var render = function() {
                           directives: [
                             {
                               name: "validate",
-                              rawName: "v-validate:text",
-                              value: _vm.isInRequiredFields(
+                              rawName: "v-validate:mail",
+                              value: _vm.isInOptionalFields(
                                 "de",
                                 "billing_address.email"
                               ),
                               expression:
-                                "isInRequiredFields('de', 'billing_address.email')",
-                              arg: "text"
+                                "isInOptionalFields('de', 'billing_address.email')",
+                              arg: "mail"
                             }
                           ],
                           staticClass: "input-unit",
@@ -4361,7 +4361,7 @@ var render = function() {
                         [
                           _c("input", {
                             attrs: {
-                              type: "mail",
+                              type: "email",
                               name: "email",
                               id: "email" + _vm._uid,
                               "data-testing": "billing-address-de-email-input"
@@ -5367,14 +5367,14 @@ var render = function() {
                           directives: [
                             {
                               name: "validate",
-                              rawName: "v-validate:text",
-                              value: _vm.isInRequiredFields(
+                              rawName: "v-validate:mail",
+                              value: _vm.isInOptionalFields(
                                 "gb",
                                 "billing_address.email"
                               ),
                               expression:
-                                "isInRequiredFields('gb', 'billing_address.email')",
-                              arg: "text"
+                                "isInOptionalFields('gb', 'billing_address.email')",
+                              arg: "mail"
                             }
                           ],
                           staticClass: "input-unit",
@@ -5383,7 +5383,7 @@ var render = function() {
                         [
                           _c("input", {
                             attrs: {
-                              type: "mail",
+                              type: "email",
                               name: "email",
                               id: "email" + _vm._uid,
                               "data-testing": "billing-address-gb-email-input"
@@ -6324,14 +6324,14 @@ var render = function() {
                           directives: [
                             {
                               name: "validate",
-                              rawName: "v-validate:text",
-                              value: _vm.isInRequiredFields(
+                              rawName: "v-validate:mail",
+                              value: _vm.isInOptionalFields(
                                 "de",
                                 "delivery_address.email"
                               ),
                               expression:
-                                "isInRequiredFields('de', 'delivery_address.email')",
-                              arg: "text"
+                                "isInOptionalFields('de', 'delivery_address.email')",
+                              arg: "mail"
                             }
                           ],
                           staticClass: "input-unit",
@@ -6340,7 +6340,7 @@ var render = function() {
                         [
                           _c("input", {
                             attrs: {
-                              type: "mail",
+                              type: "email",
                               name: "email",
                               id: "email" + _vm._uid,
                               "data-testing": "delivery-address-de-email-input"
@@ -7264,14 +7264,14 @@ var render = function() {
                           directives: [
                             {
                               name: "validate",
-                              rawName: "v-validate:text",
-                              value: _vm.isInRequiredFields(
+                              rawName: "v-validate:mail",
+                              value: _vm.isInOptionalFields(
                                 "gb",
                                 "delivery_address.email"
                               ),
                               expression:
-                                "isInRequiredFields('gb', 'delivery_address.email')",
-                              arg: "text"
+                                "isInOptionalFields('gb', 'delivery_address.email')",
+                              arg: "mail"
                             }
                           ],
                           staticClass: "input-unit",
@@ -7280,7 +7280,7 @@ var render = function() {
                         [
                           _c("input", {
                             attrs: {
-                              type: "mail",
+                              type: "email",
                               name: "email",
                               id: "email" + _vm._uid,
                               "data-testing": "delivery-address-gb-email-input"
