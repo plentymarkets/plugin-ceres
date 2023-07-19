@@ -1,15 +1,16 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.60 (2023-XX-X) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.59...5.0.60" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.60 (2023-07-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.59...5.0.60" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed
 
 - On the item detail page in the non-standard language, the language abbreviation was not displayed in the schema.org details in the URL. This has been fixed.
 - The schema.org data on the item details page now includes both the (SalePrice)[https://schema.org/SalePrice] and (ListPrice)[https://schema.org/ListPrice].
-- Fixed a Javascript error in the checkout due to an unfilled variable in the CheckDeliveryAddressError() function.
+- Fixed a Javascript error in the checkout due to an unfilled variable in the `CheckDeliveryAddressError()` function.
 - In the category view, the MSRP was not displayed under certain circumstances.
 - When calling category pages with very high page count, Out Of Memory Exception could occur.
 - The tiles for displaying payment providers in Checkout were displayed too large on older iOS devices. This has been fixed.
+- Calling the REST-Route /rest/io/customer/order/list with 0 `orderPerPage` resulted in an error. This was fixed. We would like to thank @MaxBentz for their contribution.
 
 ### Changed
 
@@ -23,6 +24,8 @@
 
 - In Ceres 5.0.60 we made changes to template files which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
 - [resources/views/Category/Item/Partials/Pagination.twig](https://github.com/plentymarkets/plugin-ceres/pull/3421/files#diff-1b8d2c7ce7416f660f89d11ad8e368be614c2b98efc30526e74286c7f180c3b8)
+- [resources/views/Item/SingleItemWrapper.twig](https://github.com/plentymarkets/plugin-ceres/pull/3433/files#diff-192a8837dba88964356b7ecd49003fe083ed719e2c601b9623e6dd4b24be9326)
+- [resources/js/src/app/components/itemList/CategoryItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3427/files#diff-4c35af622ef09ba8949eb1c47557e3e6651b088291a0d2e2463c9244007b5516)
 
 ## v5.0.59 (2023-02-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.58...5.0.59" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
