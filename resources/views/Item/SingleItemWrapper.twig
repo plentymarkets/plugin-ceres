@@ -59,6 +59,34 @@
 {% if mpn | length  > 0 %}
                 "mpn"           : "{{ mpn }}",
 {% endif %}
+{% if itemData.variation.lengthMM > 0 %}
+                "depth": {
+                    "@type"         : "QuantitativeValue",
+                    "value"         : "{{ itemData.variation.lengthMM }}",
+                    "unitCode"      : "MMT"
+                },
+{% endif %}
+{% if itemData.variation.widthMM > 0 %}
+                "width": {
+                    "@type"         : "QuantitativeValue",
+                    "value"         : "{{ itemData.variation.widthMM }}",
+                    "unitCode"      : "MMT"
+                },
+{% endif %}
+{% if itemData.variation.heightMM > 0 %}
+                "height": {
+                    "@type"         : "QuantitativeValue",
+                    "value"         : "{{ itemData.variation.heightMM }}",
+                    "unitCode"      : "MMT"
+                },
+{% endif %}
+{% if itemData.variation.weightNetG > 0 %}
+                "weight": {
+                    "@type"         : "QuantitativeValue",
+                    "value"         : "{{ itemData.variation.weightNetG }}",
+                    "unitCode"      : "GRM"
+                },
+{% endif %}
                 "offers": {
                     "@type"         : "Offer",
                     "priceCurrency" : "{{ itemData.prices.default.currency }}",
@@ -98,22 +126,6 @@
 {% endif %}
                     "availability"  : "{{ itemData.variation.availability.mappedAvailability }}",
                     "itemCondition" : "{{ conditionOfItem }}"
-                },
-                "depth": {
-                    "@type"         : "QuantitativeValue",
-                    "value"         : "{{ itemData.variation.lengthMM }}"
-                },
-                "width": {
-                    "@type"         : "QuantitativeValue",
-                    "value"         : "{{ itemData.variation.widthMM }}"
-                },
-                "height": {
-                    "@type"         : "QuantitativeValue",
-                    "value"         : "{{ itemData.variation.heightMM }}"
-                },
-                "weight": {
-                    "@type"         : "QuantitativeValue",
-                    "value"         : "{{ itemData.variation.weightG }}"
                 }
             }
         {% endblock %}
