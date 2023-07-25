@@ -1,5 +1,11 @@
 # Release Notes for plentyShop LTS
 
+## v5.0.61 (2023-XX-XX) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.60...5.0.61" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- On devices with iOS versions <= 12.x, certain elements were not loaded when SSR was disabled and ShopBuilder contents were used.
+
 ## v5.0.60 (2023-07-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.59...5.0.60" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed

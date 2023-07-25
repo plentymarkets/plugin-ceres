@@ -355,7 +355,7 @@ var IntersectorComponent = {
     },
     intersectionObserverOptions: function intersectionObserverOptions() {
       return {
-        root: document.body,
+        root: null,
         rootMargin: this.margin,
         threshold: this.threshold
       };
