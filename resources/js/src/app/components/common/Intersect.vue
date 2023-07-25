@@ -8,10 +8,6 @@
     <intersector v-else-if="isIntersectorEnabled">
         <slot></slot>
     </intersector>
-
-    <div v-else>
-        <slot></slot>
-    </div>
 </template>
 
 <script>
@@ -100,7 +96,7 @@ export default {
 
         intersectionObserverOptions() {
             return {
-                root: null,
+                root: document.body,
                 rootMargin: this.margin,
                 threshold: this.threshold
             };

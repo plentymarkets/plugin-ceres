@@ -346,10 +346,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
  // the intersector component for not server side rendered views
 
 var IntersectorComponent = {
@@ -418,7 +414,7 @@ var IntersectorComponent = {
     },
     intersectionObserverOptions: function intersectionObserverOptions() {
       return {
-        root: null,
+        root: document.body,
         rootMargin: this.margin,
         threshold: this.threshold
       };
@@ -36116,7 +36112,7 @@ var render = function() {
       )
     : _vm.isIntersectorEnabled
     ? _c("intersector", [_vm._t("default")], 2)
-    : _c("div", [_vm._t("default")], 2)
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
