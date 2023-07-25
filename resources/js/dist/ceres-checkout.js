@@ -620,9 +620,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
  // the intersector component for not server side rendered views
 
 var IntersectorComponent = {
@@ -39721,16 +39718,12 @@ var render = function() {
     ? _c(
         "lazy-hydrate",
         { attrs: { "when-visible": _vm.intersectionObserverOptions } },
-        [_vm._v("\n    SSR is enabled\n    "), _vm._t("default")],
+        [_vm._t("default")],
         2
       )
     : _vm.isIntersectorEnabled
-    ? _c(
-        "intersector",
-        [_vm._v("\n    Intersector enabled\n    "), _vm._t("default")],
-        2
-      )
-    : _c("div", [_vm._v("\n    Else\n    "), _vm._t("default")], 2)
+    ? _c("intersector", [_vm._t("default")], 2)
+    : _c("div", [_vm._t("default")], 2)
 }
 var staticRenderFns = []
 render._withStripped = true
