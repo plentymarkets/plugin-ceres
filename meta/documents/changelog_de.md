@@ -1,11 +1,17 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.61 (2023-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.60...5.0.61" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Um die schema.org-Daten [SalesPrice](https://schema.org/SalePrice) und [ListPrice](https://schema.org/ListPrice) auf der Artikeldetailseite auszugeben ist es nicht mehr notwendig, an der Variante die Option **Grundpreis anzeigen** zu aktivieren.
+
 ## v5.0.60 (2023-07-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.59...5.0.60" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben
 
 - Auf der Artikeldetailseite in der nicht Standardsprache wurde in den schema.org Angaben das Sprackürzel in der URL nicht angezeigt. Das wurde behoben.
-- In den schema.org-Daten der Artikeldetailseite sind jetzt sowohl (SalePrice)[https://schema.org/SalePrice] als auch (ListPrice)[https://schema.org/ListPrice] hinterlegt.
+- In den schema.org-Daten der Artikeldetailseite sind jetzt sowohl [SalesPrice](https://schema.org/SalePrice) als auch [ListPrice](https://schema.org/ListPrice) hinterlegt.
 - Im Checkout wurde ein Javascript-Fehler behoben, der aufgrund einer unbefüllten Variable in der Funktion `CheckDeliveryAddressError()` auftrat.
 - In der Kategorieansicht wurden unter bestimmten Umständen der UVP nicht angezeigt.
 - Bei Aufruf von Kategorieseiten konnte mit sehr hoher Seitenzahl konnte es Out Of Memory Exception kommen.

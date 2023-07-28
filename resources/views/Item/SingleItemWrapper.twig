@@ -67,7 +67,6 @@
                     "priceValidUntil": "{{ priceValidUntil }}",
 {% endif %}
                     "url"           : "{{ requestedVariationUrl }}",
-{% if itemData.prices.default.baseLot > 0 %}
                     "priceSpecification":[
                         {% if itemData.prices.rrp %}
                             {
@@ -95,7 +94,6 @@
                         }
 
                     ],
-{% endif %}
                     "availability"  : "{{ itemData.variation.availability.mappedAvailability }}",
                     "itemCondition" : "{{ conditionOfItem }}"
                 },
