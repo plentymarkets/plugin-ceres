@@ -2,6 +2,10 @@
 
 ## v5.0.61 (2023-XX-XX) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.60...5.0.61" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
+### Changed
+
+- To show the schema.org data for [SalesPrice](https://schema.org/SalePrice) and [ListPrice](https://schema.org/ListPrice), it's no longer necessary to activate the **Show unit price** option of the variation.
+
 ### Fixed
 
 - On devices with iOS versions <= 12.x, certain elements were not loaded when SSR was disabled and ShopBuilder contents were used. We would like to thank @KarolKski for the contribution.
@@ -11,7 +15,7 @@
 ### Fixed
 
 - On the item detail page in the non-standard language, the language abbreviation was not displayed in the schema.org details in the URL. This has been fixed.
-- The schema.org data on the item details page now includes both the (SalePrice)[https://schema.org/SalePrice] and (ListPrice)[https://schema.org/ListPrice].
+- The schema.org data on the item details page now includes both the [SalesPrice](https://schema.org/SalePrice) and [ListPrice](https://schema.org/ListPrice).
 - Fixed a Javascript error in the checkout due to an unfilled variable in the `CheckDeliveryAddressError()` function.
 - In the category view, the MSRP was not displayed under certain circumstances.
 - When calling category pages with very high page count, Out Of Memory Exception could occur.
