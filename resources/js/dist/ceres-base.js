@@ -58490,6 +58490,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.directive("toggle-basket-preview", {
 
       setTimeout(function () {
         document.body.classList.toggle("basket-open");
+        window.location.hash = "basket-open";
       }, timeout);
       event.preventDefault();
       event.stopPropagation();
