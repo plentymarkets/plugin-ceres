@@ -21,7 +21,14 @@ Vue.directive("toggle-basket-preview",
                 setTimeout(() =>
                 {
                     document.body.classList.toggle("basket-open");
-                    window.location.hash = "basket-open";
+                    if (window.location.hash === "basket-open")
+                    {
+                        window.location.hash = "";
+                    }
+                    else
+                    {
+                        window.location.hash = "basket-open";
+                    }
                 }, timeout);
 
                 event.preventDefault();
