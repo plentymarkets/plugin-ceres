@@ -5,6 +5,7 @@
 ### Changed
 
 - To show the schema.org data for [SalesPrice](https://schema.org/SalePrice) and [ListPrice](https://schema.org/ListPrice), it's no longer necessary to activate the **Show unit price** option of the variation.
+- The English translation for the translation key `checkoutBuyNow` has been changed from "Order now" to "Buy".
 
 ### Fixed
 

@@ -5,6 +5,7 @@
 ### Geändert
 
 - Um die schema.org-Daten [SalesPrice](https://schema.org/SalePrice) und [ListPrice](https://schema.org/ListPrice) auf der Artikeldetailseite auszugeben ist es nicht mehr notwendig, an der Variante die Option **Grundpreis anzeigen** zu aktivieren.
+- Die Englische Übersetzung für den Übersetzungsschlüssel `checkoutBuyNow` wurde von "Order now" zu "Buy" geändert.
 
 ### Behoben
 
