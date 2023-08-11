@@ -51,13 +51,19 @@
             </div>
 
             <div class="shippinginfo">
-              {{ $translate("Ceres::Template.singleItemInclVAT") }},
-              {{ $translate("Ceres::Template.singleItemExclusive") }}
-              <a data-toggle="modal" href="#shippingscosts" :title="$translate('Ceres::Template.singleItemShippingCosts')" class="openPorto">CO<sub>2</sub> neutraler Versand</a>
-              <slot name="additional-content-after-vat"></slot>
-              <span v-if="(showCrossPrice && hasCrossPrice)">
-                <br />Zuletzt niedrigster Preis {{ currentVariation.prices.default.lowestPrice.formatted }}
-              </span>
+                <span @click="toggleDetails">
+                    {{ $translate("Ceres::Template.singleItemInclVAT") }}
+                    <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                </span>
+                <transition name="slide">
+                    <div v-if="showDetails" class="details">
+                        {{ $translate("Ceres::Template.singleItemExclusive") }}  <a data-toggle="modal" href="#shippingscosts" :title="$translate('Ceres::Template.singleItemShippingCosts')" class="openPorto">CO<sub>2</sub> neutraler Versand</a>
+                        <slot name="additional-content-after-vat"></slot>
+                        <span v-if="(showCrossPrice && hasCrossPrice)">
+                            <br />Zuletzt niedrigster Preis {{ currentVariation.prices.default.lowestPrice.formatted }}
+                        </span>
+                    </div>
+                </transition>
             </div>
         </div>
 </template>
@@ -75,7 +81,11 @@ export default {
             default: true
         }
     },
-
+    data() {
+        return {
+            showDetails: false
+        };
+    },
     inject: {
         itemId: {
             default: null
@@ -141,6 +151,10 @@ export default {
         hasTax(property)
         {
             return hasVat(property);
+        },
+
+        toggleDetails() {
+            this.showDetails = !this.showDetails;
         }
     }
 }
