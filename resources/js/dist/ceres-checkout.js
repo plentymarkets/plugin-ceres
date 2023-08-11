@@ -3404,16 +3404,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.string.includes.js */ "./node_modules/core-js/modules/es.string.includes.js");
 /* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.symbol.description.js */ "./node_modules/core-js/modules/es.symbol.description.js");
-/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
-/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _helper_get__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../helper/get */ "./resources/js/src/app/helper/get.js");
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.iterator.js */ "./node_modules/core-js/modules/es.array.iterator.js");
+/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator.js */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.array.slice.js */ "./node_modules/core-js/modules/es.array.slice.js");
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.array.from.js */ "./node_modules/core-js/modules/es.array.from.js");
+/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.string.iterator.js */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.symbol.description.js */ "./node_modules/core-js/modules/es.symbol.description.js");
+/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator.js */ "./node_modules/core-js/modules/es.symbol.iterator.js");
+/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _helper_get__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../helper/get */ "./resources/js/src/app/helper/get.js");
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 
 
@@ -3421,6 +3442,217 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3693,20 +3925,11 @@ __webpack_require__.r(__webpack_exports__);
     itemConfig: function itemConfig() {
       return App.config.item.itemData;
     },
-    isDescriptionTabActive: function isDescriptionTabActive() {
-      return (App.config.item.itemData.includes("item.description") || App.config.item.itemData.includes("all")) && !!this.currentVariation.texts.description.length;
-    },
     isRecommendedPriceActive: function isRecommendedPriceActive() {
       return App.config.item.itemData.includes("item.recommendedPrice") || App.config.item.itemData.includes("all");
     },
-    isShortDescriptionActive: function isShortDescriptionActive() {
-      return App.config.item.itemData.includes("item.shortDescription") || App.config.item.itemData.includes("all");
-    },
     hasShippingCostsCategoryId: function hasShippingCostsCategoryId() {
       return App.config.global.shippingCostsCategoryId > 0;
-    },
-    isTechnicalDataTabActive: function isTechnicalDataTabActive() {
-      return (App.config.item.itemData.includes("item.technical_data") || App.config.item.itemData.includes("all")) && !!this.currentVariation.texts.technicalData.length;
     },
     variationGroupedProperties: function variationGroupedProperties() {
       return this.$store.getters["".concat(this.itemId, "/variationGroupedProperties")];
@@ -3715,19 +3938,52 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.getters["".concat(this.itemId, "/variationMissingProperties")];
     },
     currentVariation: function currentVariation() {
-      return Object(_helper_get__WEBPACK_IMPORTED_MODULE_7__["get"])(this.$store.state, "items[".concat(this.itemId, "].variation.documents[0].data"));
+      return Object(_helper_get__WEBPACK_IMPORTED_MODULE_15__["get"])(this.$store.state, "items[".concat(this.itemId, "].variation.documents[0].data"));
     },
     isVariationSelected: function isVariationSelected() {
-      return Object(_helper_get__WEBPACK_IMPORTED_MODULE_7__["get"])(this.$store.state, "items[".concat(this.itemId, "].variationSelect.isVariationSelected"));
+      return Object(_helper_get__WEBPACK_IMPORTED_MODULE_15__["get"])(this.$store.state, "items[".concat(this.itemId, "].variationSelect.isVariationSelected"));
     },
     attributes: function attributes() {
-      return Object(_helper_get__WEBPACK_IMPORTED_MODULE_7__["get"])(this.$store.state, "items[".concat(this.itemId, "].variationSelect.attributes"));
+      return Object(_helper_get__WEBPACK_IMPORTED_MODULE_15__["get"])(this.$store.state, "items[".concat(this.itemId, "].variationSelect.attributes"));
     },
     units: function units() {
-      return Object(_helper_get__WEBPACK_IMPORTED_MODULE_7__["get"])(this.$store.state, "items[".concat(this.itemId, "].variationSelect.units"));
+      return Object(_helper_get__WEBPACK_IMPORTED_MODULE_15__["get"])(this.$store.state, "items[".concat(this.itemId, "].variationSelect.units"));
     },
     isItemSet: function isItemSet() {
       return this.$store.state.items.isItemSet;
+    },
+    showBundleComponents: function showBundleComponents() {
+      return this.hasProperty(235) && this.currentVariation.bundleType === 'bundle' && this.currentVariation.bundleComponents.length;
+    },
+    color1: function color1() {
+      var valueId = this.getFurnitureColor(3); // Front
+
+      var valueMap = {
+        119: 'alder',
+        110: 'white',
+        802: 'gray',
+        803: 'rose',
+        109: 'lilac',
+        107: 'green',
+        90: 'blue'
+      };
+      return valueMap[valueId] || null;
+    },
+    color2: function color2() {
+      var valueId = this.getFurnitureColor(9); // Korpus
+
+      var valueMap = {
+        804: 'alder',
+        806: 'white',
+        816: 'gray'
+      };
+      return valueMap[valueId] || null;
+    },
+    availableCareSets: function availableCareSets() {
+      var retVal = [];
+      if (this.color1 !== null && this.getCareData(this.color1) !== null) retVal.push(this.getCareData(this.color1));
+      if (this.color2 !== null && this.getCareData(this.color2) !== null && this.color1 != this.color2) retVal.push(this.getCareData(this.color2));
+      return retVal;
     }
   },
   created: function created() {
@@ -3758,14 +4014,143 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getDataField: function getDataField(field) {
-      return Object(_helper_get__WEBPACK_IMPORTED_MODULE_7__["get"])(this.currentVariation, field);
+      return Object(_helper_get__WEBPACK_IMPORTED_MODULE_15__["get"])(this.currentVariation, field);
     },
     getFilteredDataField: function getFilteredDataField(field, filter) {
-      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_8__["isNullOrUndefined"])(this.$options.filters[filter])) {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_16__["isNullOrUndefined"])(this.$options.filters[filter])) {
         return this.$options.filters[filter](this.getDataField(field));
       }
 
       return this.getDataField(field);
+    },
+    hasProperty: function hasProperty(propertyId) {
+      if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_16__["isNullOrUndefined"])(this.currentVariation.variationProperties)) return false;
+
+      var _iterator = _createForOfIteratorHelper(this.currentVariation.variationProperties),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var item = _step.value;
+
+          var _iterator2 = _createForOfIteratorHelper(item.properties),
+              _step2;
+
+          try {
+            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+              var prop = _step2.value;
+              if (prop.id === propertyId) return true;
+            }
+          } catch (err) {
+            _iterator2.e(err);
+          } finally {
+            _iterator2.f();
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      return false;
+    },
+    getProperty: function getProperty(propertyId) {
+      // returns array with one element
+      if (!this.hasProperty(propertyId)) return [];
+
+      var _iterator3 = _createForOfIteratorHelper(this.currentVariation.variationProperties),
+          _step3;
+
+      try {
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var item = _step3.value;
+
+          var _iterator4 = _createForOfIteratorHelper(item.properties),
+              _step4;
+
+          try {
+            for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+              var prop = _step4.value;
+              if (prop.id === propertyId) return [prop];
+            }
+          } catch (err) {
+            _iterator4.e(err);
+          } finally {
+            _iterator4.f();
+          }
+        }
+      } catch (err) {
+        _iterator3.e(err);
+      } finally {
+        _iterator3.f();
+      }
+    },
+    hasPropertySelection: function hasPropertySelection(propertyId, propertySelectionId) {
+      if (!this.hasProperty(propertyId)) return false;
+      if (this.getProperty(propertyId)[0].values.find(function (value) {
+        return value.selectionId == propertySelectionId;
+      }) === undefined) return false;
+      return true;
+    },
+    getFurnitureColor: function getFurnitureColor(attributeId) {
+      if (this.currentVariation.attributes.length == 0) return null;
+
+      var _iterator5 = _createForOfIteratorHelper(this.currentVariation.attributes),
+          _step5;
+
+      try {
+        for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+          var item = _step5.value;
+
+          if (item.attributeId == attributeId) {
+            return item.valueId;
+          }
+        }
+      } catch (err) {
+        _iterator5.e(err);
+      } finally {
+        _iterator5.f();
+      }
+
+      return null;
+    },
+    getCareData: function getCareData(colorString) {
+      var _dataMap$colorString;
+
+      var dataMap = {
+        'alder': {
+          'name': 'bioola® nature Pflegeset',
+          'url': '/bioola-pflegeset-naturholz_22505_17402/',
+          'image': 'https://cdn.bio-kinder.de/item/images/22505/secondPreview/22505-bioola---Pflegeset-Naturholz-Pflegeset-Leinoel-Firnis-web.jpg'
+        },
+        'white': {
+          'name': 'bioola® colour Pflegeset',
+          'url': '/bioola-pflegeset-lasur_22506_17407/',
+          'image': 'https://cdn.bio-kinder.de/item/images/22506/secondPreview/22506-bioola---Pflegeset-Lasur-Pflegeset-Naturweiss-web.jpg'
+        },
+        'gray': {
+          'name': 'bioola® colour Pflegeset',
+          'url': '/bioola-pflegeset-lasur_22506_17408/',
+          'image': 'https://cdn.bio-kinder.de/item/images/22506/secondPreview/22506-bioola---Pflegeset-Lasur-Pflegeset-Elefantengrau-web.jpg'
+        },
+        'rose': {
+          'name': 'bioola® colour Pflegeset',
+          'url': '/bioola-pflegeset-lasur_22506_17409/',
+          'image': 'https://cdn.bio-kinder.de/item/images/22506/secondPreview/22506-bioola---Pflegeset-Lasur-Pflegeset-Steinrose-web.jpg'
+        },
+        'lilac': {
+          'name': 'bioola® colour Pflegeset',
+          'url': '/bioola-pflegeset-lasur_22506_17406/',
+          'image': 'https://cdn.bio-kinder.de/item/images/22506/secondPreview/22506-bioola---Pflegeset-Lasur-Pflegeset-Flieder-web.jpg'
+        },
+        'green': {
+          'name': 'bioola® colour Pflegeset',
+          'url': '/bioola-pflegeset-lasur_22506_17404/',
+          'image': 'https://cdn.bio-kinder.de/item/images/22506/secondPreview/22506-bioola---Pflegeset-Lasur-Pflegeset-Ozeanblau-web.jpg'
+        }
+      };
+      return (_dataMap$colorString = dataMap[colorString]) !== null && _dataMap$colorString !== void 0 ? _dataMap$colorString : null;
     },
     // iterate recursively the children components and call their hydrate method, if it is a lazy-hydrate component
     hydrateChildren: function hydrateChildren(nodes) {
@@ -45261,909 +45646,1791 @@ var render = function() {
         [
           _c(
             "div",
-            { staticClass: "single container-max page-content" },
+            { staticClass: "single singleItem container-flex page-content" },
             [
-              _c("div", { staticClass: "row position-relative" }, [
-                _c(
-                  "div",
-                  { staticClass: "col-12 col-md-7 mt-5" },
-                  [_vm._t("image-carousel")],
-                  2
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-12 col-md-5 mt-md-5" }, [
+              _vm.$store.state.items.isAddToBasketLoading != 0
+                ? _c(
+                    "div",
+                    { staticClass: "item-loading-splash-screen" },
+                    [
+                      _c("icon", {
+                        attrs: {
+                          icon: "spinner",
+                          loading:
+                            _vm.$store.state.items.isAddToBasketLoading != 0
+                        }
+                      })
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c("div", { staticClass: "bg-white" }, [
+                _c("div", { staticClass: "container-max" }, [
                   _c(
                     "div",
-                    {
-                      directives: [
-                        {
-                          name: "stick-in-parent",
-                          rawName: "v-stick-in-parent"
-                        }
-                      ]
-                    },
+                    { staticClass: "row position-relative" },
                     [
-                      _vm.currentVariation.filter.hasManufacturer
-                        ? _c(
-                            "div",
-                            {
-                              staticClass: "producertag h6 producer text-muted"
-                            },
-                            [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(
-                                    _vm.currentVariation.item.manufacturer
-                                      .externalName
-                                  ) +
-                                  "\n                        "
-                              )
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c(
-                        "h1",
-                        {
-                          staticClass: "h2 title",
-                          attrs: { "data-testing": "item-name" }
-                        },
-                        [
-                          _c("span", [
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(
-                                  _vm._f("itemName")(_vm.currentVariation)
-                                ) +
-                                "\n                            "
-                            )
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _vm._t("tag-list"),
-                      _vm._v(" "),
-                      _vm.isShortDescriptionActive &&
-                      _vm.currentVariation.texts.shortDescription !== ""
-                        ? _c("p", {
-                            staticClass: "single-description",
-                            domProps: {
-                              innerHTML: _vm._s(
-                                _vm.currentVariation.texts.shortDescription
-                              )
-                            }
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "mb-5" }, [
-                        _c(
-                          "span",
-                          { staticClass: "articlenumber small text-muted" },
-                          [
-                            _c("b", [
-                              _vm._v(
-                                _vm._s(
-                                  _vm.$translate(
-                                    "Ceres::Template.singleItemNumber"
-                                  )
-                                ) + " "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("span", [
-                              _vm._v(
-                                _vm._s(_vm.currentVariation.variation.number)
-                              )
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _vm.attributes.length || Object.keys(_vm.units).length
-                        ? _c(
-                            "div",
-                            { staticClass: "mb-3" },
-                            [_c("variation-select")],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.currentVariation.variation.bundleType === "bundle"
-                        ? _c("item-bundle", {
-                            attrs: {
-                              "bundle-type":
-                                _vm.currentVariation.variation.bundleType,
-                              "bundle-components":
-                                _vm.currentVariation.bundleComponents
-                            }
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm._t("before-price"),
-                      _vm._v(" "),
-                      _vm.currentVariation.filter.isSalable &&
-                      _vm.variationGroupedProperties.length
-                        ? _c("div", [_c("order-property-list")], 1)
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("graduated-prices"),
-                      _vm._v(" "),
-                      _c("item-price", {
+                      _c("bkAddToWishlist", {
                         attrs: {
-                          "show-cross-price": _vm.isRecommendedPriceActive
+                          "variation-id": _vm.currentVariation.variation.id
                         }
                       }),
                       _vm._v(" "),
-                      _vm._t("after-price"),
-                      _vm._v(" "),
-                      _c("item-availability"),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "my-3" }, [
-                        _c(
-                          "div",
-                          { staticClass: "w-100" },
-                          [_vm._t("before-add-to-basket")],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _vm.currentVariation.item.itemType === "set"
-                          ? _c(
-                              "div",
-                              { staticClass: "alert alert-info w-100" },
-                              [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.singleItemSetInfo"
-                                      )
-                                    ) +
-                                    "\n                            "
-                                )
-                              ]
-                            )
-                          : _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "col-12 col-sm-7 col-md-12 col-lg-8 my-3"
-                              },
-                              [
-                                _c("add-to-basket", {
-                                  attrs: {
-                                    "variation-id":
-                                      _vm.currentVariation.variation.id,
-                                    "is-salable":
-                                      !!_vm.currentVariation.filter &&
-                                      _vm.currentVariation.filter.isSalable,
-                                    "has-children":
-                                      !!_vm.currentVariation.filter &&
-                                      _vm.currentVariation.filter
-                                        .hasActiveChildren,
-                                    "interval-quantity":
-                                      _vm.currentVariation.variation
-                                        .intervalOrderQuantity || 1,
-                                    "minimum-quantity":
-                                      _vm.currentVariation.variation
-                                        .minimumOrderQuantity,
-                                    "maximum-quantity":
-                                      !!_vm.currentVariation.variation
-                                        .maximumOrderQuantity &&
-                                      _vm.currentVariation.variation
-                                        .maximumOrderQuantity > 0
-                                        ? _vm.currentVariation.variation
-                                            .maximumOrderQuantity
-                                        : null,
-                                    "order-properties": _vm.currentVariation.properties.filter(
-                                      function(prop) {
-                                        return prop.property.isOderProperty
-                                      }
-                                    ),
-                                    "has-order-properties":
-                                      _vm.currentVariation.hasOrderProperties,
-                                    "has-required-order-property":
-                                      _vm.currentVariation
-                                        .hasRequiredOrderProperty,
-                                    "use-large-scale": false,
-                                    "show-quantity": true,
-                                    "item-url": _vm._f("itemURL")(
-                                      _vm.currentVariation
-                                    ),
-                                    "is-variation-selected":
-                                      _vm.isVariationSelected &&
-                                      _vm.currentVariation.filter.isSalable,
-                                    "has-price": _vm._f("hasItemDefaultPrice")(
-                                      _vm.currentVariation
-                                    )
-                                  }
-                                })
-                              ],
-                              1
-                            ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "w-100" },
-                          [_vm._t("after-add-to-basket")],
-                          2
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _vm.isWishListEnabled
-                        ? _c("div", { staticClass: "row" }, [
-                            _c(
-                              "div",
-                              { staticClass: "col-12" },
-                              [
-                                _c("add-to-wish-list", {
-                                  attrs: {
-                                    "variation-id":
-                                      _vm.currentVariation.variation.id
-                                  }
-                                })
-                              ],
-                              1
-                            )
-                          ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm._t("additional-content-after-add-to-basket"),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
                       _c(
-                        "span",
-                        { staticClass: "vat small text-muted" },
+                        "div",
+                        {
+                          staticClass:
+                            "col-md-7 singleItemImage text-center mb-2"
+                        },
                         [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(
-                                _vm.$translate(
-                                  "Ceres::Template.singleItemFootnote1"
-                                )
-                              ) +
-                              " "
-                          ),
-                          _vm.showNetPrices
-                            ? [
-                                _vm._v(
-                                  _vm._s(
-                                    _vm.$translate(
-                                      "Ceres::Template.singleItemExclVAT"
-                                    )
-                                  )
-                                )
-                              ]
-                            : [
-                                _vm._v(
-                                  _vm._s(
-                                    _vm.$translate(
-                                      "Ceres::Template.singleItemInclVAT"
-                                    )
-                                  )
-                                )
-                              ],
-                          _vm._v(
-                            " " +
-                              _vm._s(
-                                _vm.$translate(
-                                  "Ceres::Template.singleItemExclusive"
-                                )
-                              ) +
-                              "\n                        "
-                          ),
-                          _vm.hasShippingCostsCategoryId
-                            ? _c(
-                                "a",
+                          _vm._t("image-carousel"),
+                          _vm._v(" "),
+                          _vm._l(_vm.getProperty(192), function(property) {
+                            return [
+                              _c(
+                                "div",
                                 {
+                                  staticClass: "modal fade",
                                   attrs: {
-                                    "data-toggle": "modal",
-                                    href: "#shippingscosts",
-                                    title: _vm.$translate(
-                                      "Ceres::Template.singleItemShippingCosts"
-                                    )
+                                    id: "videoModal",
+                                    tabindex: "-1",
+                                    "aria-labelledby": "exampleModalLabel",
+                                    "aria-hidden": "true"
                                   }
                                 },
                                 [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.singleItemShippingCosts"
-                                      )
+                                  _c("div", { staticClass: "modal-dialog" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "modal-content" },
+                                      [
+                                        _c(
+                                          "div",
+                                          { staticClass: "modal-body" },
+                                          [
+                                            _c("iframe", {
+                                              attrs: {
+                                                id: "videoFrame",
+                                                src:
+                                                  "https://www.youtube.com/embed/" +
+                                                  property.values.value +
+                                                  "?rel=0;controls=0;showinfo=0;theme=light",
+                                                allowfullscreen: "",
+                                                width: "100%",
+                                                height: "400px",
+                                                frameborder: "0"
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      ]
                                     )
-                                  )
+                                  ])
                                 ]
                               )
-                            : _c(
-                                "a",
-                                {
-                                  attrs: {
-                                    title: _vm.$translate(
-                                      "Ceres::Template.singleItemShippingCosts"
-                                    )
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.singleItemShippingCosts"
-                                      )
-                                    )
-                                  )
-                                ]
-                              )
+                            ]
+                          })
                         ],
                         2
                       ),
                       _vm._v(" "),
-                      _vm._t("additional-content-after-vat")
-                    ],
-                    2
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-12 col-md-7" }, [
-                  _c("div", { staticClass: "my-5" }, [
-                    _c(
-                      "ul",
-                      {
-                        staticClass: "nav nav-tabs",
-                        attrs: { role: "tablist" }
-                      },
-                      [
-                        _vm.isDescriptionTabActive
-                          ? _c("li", { staticClass: "nav-item" }, [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "nav-link active",
-                                  attrs: {
-                                    "data-toggle": "tab",
-                                    href:
-                                      "#details-" +
-                                      _vm.currentVariation.variation.id,
-                                    role: "tab"
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.singleItemDescription"
-                                      )
-                                    )
-                                  )
-                                ]
-                              )
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.isTechnicalDataTabActive
-                          ? _c("li", { staticClass: "nav-item" }, [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "nav-link",
-                                  class: {
-                                    active:
-                                      !_vm.isDescriptionTabActive &&
-                                      _vm.isTechnicalDataTabActive
-                                  },
-                                  attrs: {
-                                    "data-toggle": "tab",
-                                    href:
-                                      "#data-" +
-                                      _vm.currentVariation.variation.id,
-                                    role: "tab"
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.singleItemTechnicalData"
-                                      )
-                                    )
-                                  )
-                                ]
-                              )
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "nav-item" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "nav-link",
-                              class: {
-                                active:
-                                  !_vm.isDescriptionTabActive &&
-                                  !_vm.isTechnicalDataTabActive
-                              },
-                              attrs: {
-                                "data-toggle": "tab",
-                                href: "#assessments-details",
-                                role: "tab"
-                              }
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(
-                                  _vm.$translate(
-                                    "Ceres::Template.singleItemMoreDetails"
-                                  )
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "col-md-5 singleItemDetails single-rightside mb-4"
+                        },
+                        [
+                          _c("h1", {
+                            domProps: {
+                              innerHTML: _vm._s(
+                                this.$options.filters.itemName(
+                                  _vm.currentVariation
                                 )
                               )
-                            ]
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            [
+                              _c(
+                                "div",
+                                { staticClass: "feedbackTags" },
+                                [
+                                  _c("feedback-average", {
+                                    staticClass: "box-feedback",
+                                    attrs: {
+                                      "show-empty-ratings": false,
+                                      "size-of-stars": "small",
+                                      "show-ratings-amount": true
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _vm.hasPropertySelection(166, 397)
+                                    ? _c(
+                                        "span",
+                                        { staticClass: "tag tagFavorit" },
+                                        [_vm._v("Bestseller")]
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.hasPropertySelection(166, 393)
+                                    ? _c(
+                                        "span",
+                                        { staticClass: "tag tagVegan" },
+                                        [_vm._v("Vegan")]
+                                      )
+                                    : _vm._e()
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  class:
+                                    "availabilityRow availabilityRow_" +
+                                    _vm.currentVariation.variation.availability
+                                      .id
+                                },
+                                [
+                                  _c(
+                                    "client-only",
+                                    [
+                                      _c("biokinder-availability", {
+                                        attrs: {
+                                          avd: _vm.$attrs.availabilitydata,
+                                          variation:
+                                            _vm.currentVariation.variation
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _vm.attributes.length
+                                ? _c(
+                                    "div",
+                                    { staticClass: "mb-3 variationSelect" },
+                                    [_c("variation-select")],
+                                    1
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.currentVariation.filter.isSalable &&
+                              _vm.variationGroupedProperties.length
+                                ? _c(
+                                    "div",
+                                    { staticClass: "row" },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "col-12 mt-2" },
+                                        [_c("order-property-list")],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _vm._t("aufbauservice")
+                                    ],
+                                    2
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm._t("before-price"),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "singleartprice my-2",
+                                  attrs: {
+                                    itemprop: "offerDetails",
+                                    itemscope: "",
+                                    itemtype: "http://data-vocabulary.org/Offer"
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "variationManufacturer",
+                                      attrs: {
+                                        "data-toggle": "collapse",
+                                        "aria-expanded": "false",
+                                        "data-target": "#manufacturer"
+                                      }
+                                    },
+                                    [
+                                      _vm.currentVariation.item.manufacturer
+                                        .id &&
+                                      _vm.currentVariation.item.manufacturer
+                                        .logo
+                                        ? _c("img", {
+                                            attrs: {
+                                              src:
+                                                _vm.currentVariation.item
+                                                  .manufacturer.logo,
+                                              alt:
+                                                "Marken-Logo-" +
+                                                _vm.currentVariation.item
+                                                  .manufacturer.externalName
+                                            }
+                                          })
+                                        : _vm._e()
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "variationPrice" },
+                                    [
+                                      _c("graduated-prices"),
+                                      _vm._v(" "),
+                                      _c("item-price", {
+                                        attrs: {
+                                          "template-override":
+                                            "#item-price-tpl",
+                                          "show-cross-price":
+                                            _vm.isRecommendedPriceActive
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        attrs: {
+                                          type: "hidden",
+                                          id: "stdShippingCosts"
+                                        },
+                                        domProps: {
+                                          value:
+                                            _vm.currentVariation.variation
+                                              .defaultShippingCosts
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _vm.currentVariation.prices.default
+                                        .price &&
+                                      _vm.currentVariation.prices.default.price
+                                        .value > 200
+                                        ? _vm._t("before-add-to-basket")
+                                        : _vm._e()
+                                    ],
+                                    2
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("add-to-basket", {
+                                attrs: {
+                                  "variation-id":
+                                    _vm.currentVariation.variation.id,
+                                  "is-salable":
+                                    !!_vm.currentVariation.filter &&
+                                    _vm.currentVariation.filter.isSalable,
+                                  "has-children":
+                                    !!_vm.currentVariation.filter &&
+                                    _vm.currentVariation.filter
+                                      .hasActiveChildren,
+                                  "interval-quantity":
+                                    _vm.currentVariation.variation
+                                      .intervalOrderQuantity || 1,
+                                  "minimum-quantity":
+                                    _vm.currentVariation.variation
+                                      .minimumOrderQuantity,
+                                  "maximum-quantity":
+                                    !!_vm.currentVariation.variation
+                                      .maximumOrderQuantity &&
+                                    _vm.currentVariation.variation
+                                      .maximumOrderQuantity > 0
+                                      ? _vm.currentVariation.variation
+                                          .maximumOrderQuantity
+                                      : null,
+                                  "order-properties": _vm.currentVariation.properties.filter(
+                                    function(prop) {
+                                      return prop.property.isOderProperty
+                                    }
+                                  ),
+                                  "use-large-scale": false,
+                                  "show-quantity": true,
+                                  "item-url": _vm._f("itemURL")(
+                                    _vm.currentVariation
+                                  ),
+                                  "is-variation-selected":
+                                    _vm.isVariationSelected &&
+                                    _vm.currentVariation.filter.isSalable,
+                                  "has-price": _vm._f("hasItemDefaultPrice")(
+                                    _vm.currentVariation
+                                  )
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                [
+                                  _vm._t("cross-selling-cart"),
+                                  _vm._v(" "),
+                                  _vm._t(
+                                    "additional-content-after-add-to-basket"
+                                  ),
+                                  _vm._v(" "),
+                                  _vm.hasProperty(193)
+                                    ? [
+                                        _vm._l(_vm.getProperty(193), function(
+                                          prop
+                                        ) {
+                                          return prop.values.value != ""
+                                            ? _c(
+                                                "div",
+                                                { staticClass: "title" },
+                                                [
+                                                  _c("span", {
+                                                    domProps: {
+                                                      innerHTML: _vm._s(
+                                                        prop.values.value
+                                                      )
+                                                    }
+                                                  })
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        }),
+                                        _vm._v(" "),
+                                        _vm._m(0),
+                                        _vm._v(" "),
+                                        _vm._m(1),
+                                        _vm._v(" "),
+                                        _vm._m(2),
+                                        _vm._v(" "),
+                                        _vm._l(_vm.getProperty(194), function(
+                                          prop
+                                        ) {
+                                          return prop.values.value != ""
+                                            ? _c(
+                                                "audio",
+                                                {
+                                                  attrs: { id: "audioPlayer" }
+                                                },
+                                                [
+                                                  _c("source", {
+                                                    attrs: {
+                                                      src: prop.values.value,
+                                                      type: "audio/mp3"
+                                                    }
+                                                  })
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        })
+                                      ]
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm._t("beaver")
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _vm.hasProperty(166)
+                                ? _c(
+                                    "div",
+                                    { staticClass: "siegelContainer" },
+                                    [
+                                      _vm.hasPropertySelection(166, 346)
+                                        ? _c(
+                                            "a",
+                                            {
+                                              attrs: {
+                                                href:
+                                                  "/textseiten/natuerliche-rohstoffe/",
+                                                alt: "Natürliche Rohstoffe",
+                                                "aria-label":
+                                                  "Natürliche Rohstoffe",
+                                                "click-count": ""
+                                              }
+                                            },
+                                            [
+                                              _c("img", {
+                                                attrs: {
+                                                  src:
+                                                    "https://cdn.bio-kinder.de/frontend/seals/natural.svg",
+                                                  alt: "Natürliche Rohstoffe"
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _vm.hasPropertySelection(166, 275)
+                                        ? _c(
+                                            "a",
+                                            {
+                                              attrs: {
+                                                href:
+                                                  "/textseiten/bio-erlenholzmoebel-kindermoebel-fuer-babys-und-kinder/",
+                                                "aria-label": "Bio-Erlenholz",
+                                                alt: "Bio-Erlenholz",
+                                                "click-count": ""
+                                              }
+                                            },
+                                            [
+                                              _c("img", {
+                                                attrs: {
+                                                  src:
+                                                    "https://cdn.bio-kinder.de/frontend/seals/alderwood.svg",
+                                                  alt: "100% Bio-Erlenholz"
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _vm.hasPropertySelection(166, 449)
+                                        ? _c("img", {
+                                            attrs: {
+                                              src:
+                                                "https://cdn.bio-kinder.de/frontend/seals/oak.svg",
+                                              alt: "Bio-Eichenholz"
+                                            }
+                                          })
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _vm.hasPropertySelection(166, 276)
+                                        ? _c(
+                                            "a",
+                                            {
+                                              attrs: {
+                                                href:
+                                                  "/textseiten/bio-kiefernholz-von-bio-kinder/",
+                                                "aria-label": "Bio-Kiefernholz",
+                                                alt: "Bio-Kiefernholz",
+                                                "click-count": ""
+                                              }
+                                            },
+                                            [
+                                              _c("img", {
+                                                attrs: {
+                                                  src:
+                                                    "https://cdn.bio-kinder.de/frontend/seals/pinewood.svg",
+                                                  alt: "100% Bio-Kiefernholz"
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _vm.hasPropertySelection(166, 345)
+                                        ? _c(
+                                            "a",
+                                            {
+                                              attrs: {
+                                                href:
+                                                  "/content/10-jahre-garantie/",
+                                                "aria-label": "Möbelgarantie",
+                                                alt: "Möbelgarantie",
+                                                "click-count": ""
+                                              }
+                                            },
+                                            [
+                                              _c("img", {
+                                                attrs: {
+                                                  src:
+                                                    "https://cdn.bio-kinder.de/frontend/seals/guarantee.svg",
+                                                  alt: "10 Jahre Möbel-Garantie"
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _vm.hasPropertySelection(166, 344)
+                                        ? _c(
+                                            "a",
+                                            {
+                                              attrs: {
+                                                href:
+                                                  "/content/100-fair-produziert/",
+                                                "aria-label": "Fair produziert",
+                                                alt: "Fair produziert",
+                                                "click-count": ""
+                                              }
+                                            },
+                                            [
+                                              _c("img", {
+                                                attrs: {
+                                                  src:
+                                                    "https://cdn.bio-kinder.de/frontend/seals/fair.svg",
+                                                  alt: "Fair produziert"
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _vm.hasPropertySelection(166, 403)
+                                        ? _c("img", {
+                                            attrs: {
+                                              src:
+                                                "https://cdn.bio-kinder.de/frontend/seals/organictreewool.svg",
+                                              alt: "kbA Baumwolle"
+                                            }
+                                          })
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _vm.hasPropertySelection(166, 404)
+                                        ? _c("img", {
+                                            attrs: {
+                                              src:
+                                                "https://cdn.bio-kinder.de/frontend/seals/sheepwool.svg",
+                                              alt: "100% Schurwolle"
+                                            }
+                                          })
+                                        : _vm._e()
+                                    ]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.hasProperty(166)
+                                ? _c(
+                                    "div",
+                                    { staticClass: "siegelContainer" },
+                                    [
+                                      _vm.hasPropertySelection(166, 274)
+                                        ? _c("img", {
+                                            staticClass: "bioolaLogo",
+                                            attrs: {
+                                              "data-toggle": "modal",
+                                              "data-target": "#bioola",
+                                              src:
+                                                "https://cdn.bio-kinder.de/frontend/assets/bioola/bioola.svg",
+                                              alt: "bioola Lasur"
+                                            }
+                                          })
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _vm.hasPropertySelection(166, 622)
+                                        ? _c("img", {
+                                            staticClass: "softCloseLogo",
+                                            attrs: {
+                                              src:
+                                                "https://cdn.bio-kinder.de/frontend/seals/soft_close.svg",
+                                              alt: "Soft-Close"
+                                            }
+                                          })
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _vm.hasPropertySelection(166, 617)
+                                        ? _c("img", {
+                                            attrs: {
+                                              src:
+                                                "https://cdn.bio-kinder.de/frontend/seals/din1729.svg",
+                                              alt: "DIN geprueft"
+                                            }
+                                          })
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _vm.hasPropertySelection(166, 652)
+                                        ? _c("img", {
+                                            staticStyle: {
+                                              "max-height": "80px"
+                                            },
+                                            attrs: {
+                                              src:
+                                                "https://cdn.bio-kinder.de/frontend/images/icons/made_in_germany.svg",
+                                              alt: "Hergestellt in Deutschland"
+                                            }
+                                          })
+                                        : _vm._e()
+                                    ]
+                                  )
+                                : _vm._e()
+                            ],
+                            2
                           )
-                        ]),
-                        _vm._v(" "),
-                        _vm._t("add-detail-tabs")
-                      ],
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "container-max" },
+                [
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col-md-7" },
+                      [_vm._t("item-description")],
                       2
                     ),
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "tab-content overflow-hidden" },
+                      { staticClass: "col-md-5", attrs: { id: "rightSide" } },
                       [
-                        _vm.isDescriptionTabActive
+                        _c(
+                          "div",
+                          { staticClass: "descriptionContainer shippingInfo" },
+                          [
+                            _c(
+                              "client-only",
+                              [
+                                _c("biokinder-shipping-icon", {
+                                  attrs: {
+                                    variation: _vm.currentVariation.variation,
+                                    avd: _vm.$attrs.availabilitydata,
+                                    availability:
+                                      _vm.currentVariation.variation
+                                        .availabilityId,
+                                    shipping:
+                                      _vm.currentVariation.variation
+                                        .defaultShippingCosts
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _vm.hasProperty(197)
+                          ? [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "descriptionContainer instagram"
+                                },
+                                [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "btn btn-block text-left descriptionButton collapsed",
+                                      attrs: {
+                                        "data-toggle": "modal",
+                                        "data-target": "#instagramModal",
+                                        "aria-label": "Instagram Gallerie",
+                                        "click-count": ""
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "svg",
+                                        {
+                                          staticClass: "css-i6dzq1",
+                                          attrs: {
+                                            viewBox: "0 0 24 24",
+                                            width: "32",
+                                            height: "32",
+                                            stroke: "currentColor",
+                                            "stroke-width": "2",
+                                            fill: "none",
+                                            "stroke-linecap": "round",
+                                            "stroke-linejoin": "round"
+                                          }
+                                        },
+                                        [
+                                          _c("rect", {
+                                            attrs: {
+                                              x: "2",
+                                              y: "2",
+                                              width: "20",
+                                              height: "20",
+                                              rx: "5",
+                                              ry: "5"
+                                            }
+                                          }),
+                                          _c("path", {
+                                            attrs: {
+                                              d:
+                                                "M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                                            }
+                                          }),
+                                          _c("line", {
+                                            attrs: {
+                                              x1: "17.5",
+                                              y1: "6.5",
+                                              x2: "17.51",
+                                              y2: "6.5"
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("div", [
+                                        _c("span", {
+                                          staticClass: "small",
+                                          domProps: {
+                                            innerHTML: _vm._s(
+                                              _vm.currentVariation.texts.name1
+                                            )
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("span", {
+                                          domProps: {
+                                            innerHTML: _vm._s(
+                                              "Beiträge aus der Community"
+                                            )
+                                          }
+                                        })
+                                      ])
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "modal fade",
+                                      attrs: {
+                                        variationId:
+                                          _vm.currentVariation.variation.id,
+                                        id: "instagramModal",
+                                        tabindex: "-1",
+                                        role: "dialog",
+                                        "aria-labelledby":
+                                          "Beiträge aus der Community",
+                                        "aria-hidden": "true"
+                                      }
+                                    },
+                                    [_vm._m(3), _vm._v(" "), _vm._m(4)]
+                                  )
+                                ]
+                              )
+                            ]
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.currentVariation.item.manufacturer.id &&
+                        _vm.currentVariation.item.manufacturer.logo
                           ? _c(
                               "div",
                               {
-                                staticClass: "tab-pane active overflow-auto",
-                                attrs: {
-                                  id:
-                                    "details-" +
-                                    _vm.currentVariation.variation.id,
-                                  role: "tabpanel"
-                                }
+                                staticClass: "descriptionContainer",
+                                attrs: { id: "manufacturerDetail" }
                               },
                               [
-                                _c("div", {
-                                  staticClass: "my-4",
-                                  domProps: {
-                                    innerHTML: _vm._s(
-                                      _vm.currentVariation.texts.description
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-block text-left descriptionButton collapsed",
+                                    attrs: {
+                                      "data-toggle": "collapse",
+                                      "data-target": "#manufacturer",
+                                      "aria-expanded": "false",
+                                      "aria-controls": "manufacturer"
+                                    }
+                                  },
+                                  [
+                                    _c("img", {
+                                      attrs: {
+                                        src:
+                                          _vm.currentVariation.item.manufacturer
+                                            .logo,
+                                        alt:
+                                          "Marken-Logo-" +
+                                          _vm.currentVariation.item.manufacturer
+                                            .externalName
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("span", {
+                                      domProps: {
+                                        innerHTML: _vm._s(
+                                          _vm.currentVariation.item.manufacturer
+                                            .externalName
+                                        )
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("i", {
+                                      attrs: { "data-feather": "plus" }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "collapse mt-1",
+                                    attrs: {
+                                      id: "manufacturer",
+                                      "aria-labelledby": "manufacturer",
+                                      "data-parent": "#rightSide"
+                                    }
+                                  },
+                                  [
+                                    _c("img", {
+                                      staticClass:
+                                        "producerlogo_article col-md-8 offset-md-2",
+                                      attrs: {
+                                        src:
+                                          _vm.currentVariation.item.manufacturer
+                                            .logo,
+                                        alt:
+                                          "Marken-Logo-" +
+                                          _vm.currentVariation.item.manufacturer
+                                            .externalName
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("div", {
+                                      domProps: {
+                                        innerHTML: _vm._s(
+                                          _vm.currentVariation.item.manufacturer
+                                            .comment
+                                        )
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass:
+                                          "btn btn-block btn-sm btn-bkm",
+                                        attrs: {
+                                          href:
+                                            "/markenwelt/?marke=" +
+                                            _vm.currentVariation.item
+                                              .manufacturer.id,
+                                          "aria-label":
+                                            "Mehr Artikel von " +
+                                            _vm.currentVariation.item
+                                              .manufacturer.externalName,
+                                          "click-count": ""
+                                        }
+                                      },
+                                      [
+                                        _vm._v("Weiteres Sortiment entdecken "),
+                                        _c("i", {
+                                          attrs: {
+                                            "data-feather": "chevron-right"
+                                          }
+                                        })
+                                      ]
                                     )
-                                  }
-                                })
+                                  ]
+                                )
                               ]
                             )
                           : _vm._e(),
                         _vm._v(" "),
-                        _vm.isTechnicalDataTabActive
-                          ? _c(
-                              "div",
-                              {
-                                staticClass: "tab-pane overflow-auto",
-                                class: {
-                                  active:
-                                    !_vm.isDescriptionTabActive &&
-                                    _vm.isTechnicalDataTabActive
+                        _vm.showBundleComponents
+                          ? [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "descriptionContainer",
+                                  attrs: { id: "bundleDetail" }
                                 },
+                                [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "btn btn-block text-left descriptionButton collapsed",
+                                      attrs: {
+                                        "data-toggle": "collapse",
+                                        "data-target": "#bundleComponents",
+                                        "aria-expanded": "false",
+                                        "aria-controls": "bundleComponents",
+                                        "aria-label":
+                                          "Paketbestandteile anzeigen",
+                                        "click-count": ""
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "svg",
+                                        {
+                                          staticClass: "icon-bundle",
+                                          attrs: {
+                                            viewBox: "0 0 24 24",
+                                            width: "22",
+                                            height: "22",
+                                            stroke: "currentColor",
+                                            "stroke-width": "1.5",
+                                            fill: "none",
+                                            "stroke-linecap": "round",
+                                            "stroke-linejoin": "round"
+                                          }
+                                        },
+                                        [
+                                          _c("line", {
+                                            attrs: {
+                                              x1: "16.5",
+                                              y1: "9.4",
+                                              x2: "7.5",
+                                              y2: "4.21"
+                                            }
+                                          }),
+                                          _c("path", {
+                                            attrs: {
+                                              d:
+                                                "M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+                                            }
+                                          }),
+                                          _c("polyline", {
+                                            attrs: {
+                                              points:
+                                                "3.27 6.96 12 12.01 20.73 6.96"
+                                            }
+                                          }),
+                                          _c("line", {
+                                            attrs: {
+                                              x1: "12",
+                                              y1: "22.08",
+                                              x2: "12",
+                                              y2: "12"
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("span", [
+                                        _vm._v("In diesem Set enthalten")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("i", {
+                                        attrs: { "data-feather": "plus" }
+                                      })
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "collapse mt-1",
+                                      attrs: {
+                                        id: "bundleComponents",
+                                        "aria-labelledby": "bundleComponents",
+                                        "data-parent": "#rightSide"
+                                      }
+                                    },
+                                    _vm._l(
+                                      _vm.currentVariation.bundleComponents,
+                                      function(bundleComponent) {
+                                        return _c(
+                                          "article",
+                                          {
+                                            staticClass:
+                                              "itemCategoryProduct horizontal"
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass: "produkt_picture"
+                                              },
+                                              [
+                                                _c(
+                                                  "a",
+                                                  {
+                                                    attrs: {
+                                                      href:
+                                                        bundleComponent.data
+                                                          .texts.urlPath +
+                                                        "_" +
+                                                        bundleComponent.data
+                                                          .variation.itemId +
+                                                        "_" +
+                                                        bundleComponent.data
+                                                          .variation.id +
+                                                        "/",
+                                                      "aria-label":
+                                                        "Paketbestandteil",
+                                                      "click-count": ""
+                                                    }
+                                                  },
+                                                  [
+                                                    bundleComponent.data.images
+                                                      .variation[0]
+                                                      ? _c(
+                                                          "picture",
+                                                          {
+                                                            attrs: {
+                                                              "data-picture-class":
+                                                                "img-fluid",
+                                                              "data-loaded":
+                                                                "true"
+                                                            }
+                                                          },
+                                                          [
+                                                            _c("source", {
+                                                              attrs: {
+                                                                srcset:
+                                                                  bundleComponent
+                                                                    .data.images
+                                                                    .variation[0]
+                                                                    .urlPreview
+                                                              }
+                                                            }),
+                                                            _vm._v(" "),
+                                                            _c("img", {
+                                                              staticClass:
+                                                                "img-fluid"
+                                                            })
+                                                          ]
+                                                        )
+                                                      : _vm._e()
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "productInfoContainer"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass: "productName"
+                                                  },
+                                                  [
+                                                    _c("a", {
+                                                      staticClass:
+                                                        "thumb-title small",
+                                                      attrs: {
+                                                        href:
+                                                          bundleComponent.data
+                                                            .texts.urlPath +
+                                                          "_" +
+                                                          bundleComponent.data
+                                                            .variation.itemId +
+                                                          "_" +
+                                                          bundleComponent.data
+                                                            .variation.id +
+                                                          "/"
+                                                      },
+                                                      domProps: {
+                                                        innerHTML: _vm._s(
+                                                          bundleComponent.quantity +
+                                                            "x&nbsp;" +
+                                                            bundleComponent.data
+                                                              .texts.name1
+                                                        )
+                                                      }
+                                                    }),
+                                                    _vm._v(" "),
+                                                    bundleComponent.data
+                                                      .attributes
+                                                      ? _c(
+                                                          "p",
+                                                          {
+                                                            staticClass:
+                                                              "variationHint"
+                                                          },
+                                                          _vm._l(
+                                                            bundleComponent.data
+                                                              .attributes,
+                                                            function(
+                                                              attribute
+                                                            ) {
+                                                              return _c(
+                                                                "span",
+                                                                {
+                                                                  staticClass:
+                                                                    "text-left"
+                                                                },
+                                                                [
+                                                                  _c("span", {
+                                                                    domProps: {
+                                                                      innerHTML: _vm._s(
+                                                                        attribute
+                                                                          .attribute
+                                                                          .names
+                                                                          .name +
+                                                                          ": " +
+                                                                          attribute
+                                                                            .value
+                                                                            .names
+                                                                            .name
+                                                                      )
+                                                                    }
+                                                                  })
+                                                                ]
+                                                              )
+                                                            }
+                                                          ),
+                                                          0
+                                                        )
+                                                      : _vm._e()
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      }
+                                    ),
+                                    0
+                                  )
+                                ]
+                              )
+                            ]
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "descriptionContainer" }, [
+                          _c("div", { attrs: { id: "application" } }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "btn btn-block text-left descriptionButton collapsed",
                                 attrs: {
-                                  id:
-                                    "data-" + _vm.currentVariation.variation.id,
-                                  role: "tabpanel"
+                                  "data-toggle": "collapse",
+                                  "data-target": "#applicationContainer",
+                                  "aria-expanded": "false",
+                                  "aria-controls": "applicationContainer",
+                                  "aria-label": "Technische Daten",
+                                  "click-count": ""
                                 }
                               },
                               [
+                                _c(
+                                  "svg",
+                                  {
+                                    staticClass: "icon-technicaldata",
+                                    attrs: {
+                                      viewBox: "0 0 24 24",
+                                      width: "22",
+                                      height: "22",
+                                      stroke: "currentColor",
+                                      "stroke-width": "1.5",
+                                      fill: "none",
+                                      "stroke-linecap": "round",
+                                      "stroke-linejoin": "round"
+                                    }
+                                  },
+                                  [
+                                    _c("circle", {
+                                      attrs: { cx: "12", cy: "12", r: "3" }
+                                    }),
+                                    _c("path", {
+                                      attrs: {
+                                        d:
+                                          "M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+                                      }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("span", {
+                                  domProps: {
+                                    innerHTML: _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.singleItemTechnicalData"
+                                      )
+                                    )
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("i", { attrs: { "data-feather": "plus" } })
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "collapse",
+                              attrs: {
+                                id: "applicationContainer",
+                                "aria-labelledby": "more_details",
+                                "data-parent": "#rightSide"
+                              }
+                            },
+                            [
+                              _c("div", { staticClass: "descriptionContent" }, [
+                                _c(
+                                  "table",
+                                  {
+                                    staticClass:
+                                      "table table-borderless table-sm"
+                                  },
+                                  [
+                                    _c(
+                                      "tbody",
+                                      [
+                                        _c("tr", [
+                                          _c("th", [_vm._v("Artikelnummer")]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.currentVariation.item.id
+                                              ) +
+                                                "-" +
+                                                _vm._s(
+                                                  _vm.currentVariation.variation
+                                                    .id
+                                                )
+                                            )
+                                          ])
+                                        ]),
+                                        _vm._v(" "),
+                                        _vm.currentVariation.filter
+                                          .hasManufacturer &&
+                                        _vm.currentVariation.item.manufacturer
+                                          .externalName !== ""
+                                          ? _c("tr", [
+                                              _c("th", [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    _vm.$translate(
+                                                      "Ceres::Template.singleItemManufacturer"
+                                                    )
+                                                  )
+                                                )
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("td", [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    _vm.currentVariation.item
+                                                      .manufacturer.externalName
+                                                  )
+                                                )
+                                              ])
+                                            ])
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        _vm.currentVariation.variation.weightG >
+                                        0
+                                          ? _c("tr", [
+                                              _c("th", [_vm._v("Gewicht")]),
+                                              _vm._v(" "),
+                                              _c("td", [
+                                                _vm._v(
+                                                  "ca. " +
+                                                    _vm._s(
+                                                      _vm._f("numberFormat")(
+                                                        _vm.currentVariation
+                                                          .variation.weightG /
+                                                          1000,
+                                                        2,
+                                                        ","
+                                                      )
+                                                    ) +
+                                                    " kg"
+                                                )
+                                              ])
+                                            ])
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        _c("tr", [
+                                          _c("th", [_vm._v("Pakete")]),
+                                          _vm._v(" "),
+                                          _vm.currentVariation.variation
+                                            .packingUnits > 0
+                                            ? _c("td", [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    _vm.currentVariation
+                                                      .variation.packingUnits
+                                                  )
+                                                )
+                                              ])
+                                            : _c("td", [_vm._v("1")])
+                                        ]),
+                                        _vm._v(" "),
+                                        _vm.$store.getters.currentItemVariation
+                                          .variationProperties &&
+                                        _vm.$store.getters.currentItemVariation.variationProperties.filter(
+                                          function(prop) {
+                                            return prop.id == 4
+                                          }
+                                        )[0]
+                                          ? _vm._l(
+                                              _vm.$store.getters.currentItemVariation.variationProperties.filter(
+                                                function(prop) {
+                                                  return prop.id == 4
+                                                }
+                                              )[0].properties,
+                                              function(vProperty) {
+                                                return vProperty &&
+                                                  vProperty.id != 166 &&
+                                                  vProperty.id != 246 &&
+                                                  vProperty.id != 191 &&
+                                                  vProperty.id != 197 &&
+                                                  vProperty.id != 192 &&
+                                                  vProperty.id != 235 &&
+                                                  vProperty.values.value != 0 &&
+                                                  vProperty.values.value != ""
+                                                  ? _c("tr", [
+                                                      _c("th", {
+                                                        domProps: {
+                                                          innerHTML: _vm._s(
+                                                            vProperty.names.name
+                                                          )
+                                                        }
+                                                      }),
+                                                      _vm._v(" "),
+                                                      _c("td", {
+                                                        attrs: { v: "" },
+                                                        domProps: {
+                                                          innerHTML: _vm._s(
+                                                            vProperty.values
+                                                              .value
+                                                          )
+                                                        }
+                                                      })
+                                                    ])
+                                                  : _vm._e()
+                                              }
+                                            )
+                                          : _vm._e()
+                                      ],
+                                      2
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
                                 _c("div", {
-                                  staticClass: "my-4",
                                   domProps: {
                                     innerHTML: _vm._s(
                                       _vm.currentVariation.texts.technicalData
                                     )
                                   }
                                 })
-                              ]
+                              ])
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _vm._t("cross-selling-accessory"),
+                        _vm._v(" "),
+                        _vm.$store.getters.currentItemVariation
+                          .variationProperties &&
+                        _vm.$store.getters.currentItemVariation.variationProperties.filter(
+                          function(prop) {
+                            return prop.id == 4
+                          }
+                        )[0]
+                          ? _vm._l(
+                              _vm.$store.getters.currentItemVariation.variationProperties
+                                .filter(function(prop) {
+                                  return prop.id == 4
+                                })[0]
+                                .properties.filter(function(prop) {
+                                  return prop.id == 191
+                                }),
+                              function(vProperty) {
+                                return _c(
+                                  "div",
+                                  { staticClass: "descriptionContainer" },
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "btn btn-block text-left descriptionButton collapsed",
+                                        attrs: {
+                                          "data-toggle": "collapse",
+                                          "data-target": "#careTaking",
+                                          "aria-expanded": "false",
+                                          "aria-controls": "careTaking",
+                                          "aria-label": "Pflegehinweise",
+                                          "click-count": ""
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "svg",
+                                          {
+                                            staticClass: "icon-care",
+                                            attrs: {
+                                              viewBox: "0 0 24 24",
+                                              width: "22",
+                                              height: "22",
+                                              stroke: "currentColor",
+                                              "stroke-width": "1.5",
+                                              fill: "none",
+                                              "stroke-linecap": "round",
+                                              "stroke-linejoin": "round"
+                                            }
+                                          },
+                                          [
+                                            _c("path", {
+                                              attrs: {
+                                                d:
+                                                  "M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"
+                                              }
+                                            })
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("span", {
+                                          domProps: {
+                                            innerHTML: _vm._s(
+                                              "Pflegehinweis & Anwendung"
+                                            )
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "svg",
+                                          {
+                                            staticClass: "feather feather-plus",
+                                            attrs: {
+                                              xmlns:
+                                                "http://www.w3.org/2000/svg",
+                                              width: "24",
+                                              height: "24",
+                                              viewBox: "0 0 24 24",
+                                              fill: "none",
+                                              stroke: "currentColor",
+                                              "stroke-width": "2",
+                                              "stroke-linecap": "round",
+                                              "stroke-linejoin": "round"
+                                            }
+                                          },
+                                          [
+                                            _c("line", {
+                                              attrs: {
+                                                x1: "12",
+                                                y1: "5",
+                                                x2: "12",
+                                                y2: "19"
+                                              }
+                                            }),
+                                            _c("line", {
+                                              attrs: {
+                                                x1: "5",
+                                                y1: "12",
+                                                x2: "19",
+                                                y2: "12"
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "collapse",
+                                        attrs: {
+                                          id: "careTaking",
+                                          "aria-labelledby": "more_details",
+                                          "data-parent": "#rightSide"
+                                        }
+                                      },
+                                      [
+                                        _c("div", {
+                                          staticClass: "descriptionContent",
+                                          domProps: {
+                                            innerHTML: _vm._s(
+                                              vProperty.values.value
+                                            )
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _vm.$attrs.availabilitydata
+                                          .ourFurniture &&
+                                        (_vm.color1 !== null ||
+                                          _vm.color2 !== null)
+                                          ? [
+                                              _c(
+                                                "div",
+                                                { staticClass: "row" },
+                                                _vm._l(
+                                                  _vm.availableCareSets,
+                                                  function(careSet) {
+                                                    return _c(
+                                                      "div",
+                                                      { staticClass: "col-6" },
+                                                      [
+                                                        _c(
+                                                          "a",
+                                                          {
+                                                            staticClass:
+                                                              "careSet",
+                                                            attrs: {
+                                                              href: careSet.url
+                                                            }
+                                                          },
+                                                          [
+                                                            _c("img", {
+                                                              attrs: {
+                                                                src:
+                                                                  careSet.image
+                                                              }
+                                                            }),
+                                                            _vm._v(
+                                                              "\n                            " +
+                                                                _vm._s(
+                                                                  careSet.name
+                                                                ) +
+                                                                "\n                        "
+                                                            )
+                                                          ]
+                                                        )
+                                                      ]
+                                                    )
+                                                  }
+                                                ),
+                                                0
+                                              )
+                                            ]
+                                          : _vm._e()
+                                      ],
+                                      2
+                                    )
+                                  ]
+                                )
+                              }
                             )
                           : _vm._e(),
                         _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "tab-pane overflow-auto",
-                            class: {
-                              active:
-                                !_vm.isDescriptionTabActive &&
-                                !_vm.isTechnicalDataTabActive
+                        _c("div", { staticClass: "descriptionContainer" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "btn btn-block text-left descriptionButton collapsed",
+                              attrs: {
+                                "data-toggle": "collapse",
+                                "data-target": "#supportBox",
+                                "aria-expanded": "false",
+                                "aria-controls": "supportBox",
+                                "aria-label": "Sie haben Fragen?",
+                                "click-count": ""
+                              }
                             },
-                            attrs: {
-                              id: "assessments-details",
-                              role: "tabpanel"
-                            }
-                          },
-                          [
-                            _c("div", { staticClass: "my-4" }, [
+                            [
+                              _c("i", {
+                                staticClass: "icon-care",
+                                attrs: { "data-feather": "help-circle" }
+                              }),
+                              _vm._v(" "),
+                              _c("span", {
+                                domProps: {
+                                  innerHTML: _vm._s("Sie haben Fragen?")
+                                }
+                              }),
+                              _vm._v(" "),
                               _c(
-                                "table",
+                                "svg",
                                 {
-                                  staticClass:
-                                    "table table-striped table-hover table-sm"
+                                  staticClass: "feather feather-plus",
+                                  attrs: {
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    width: "24",
+                                    height: "24",
+                                    viewBox: "0 0 24 24",
+                                    fill: "none",
+                                    stroke: "currentColor",
+                                    "stroke-width": "2",
+                                    "stroke-linecap": "round",
+                                    "stroke-linejoin": "round"
+                                  }
                                 },
                                 [
-                                  _c("tbody", [
-                                    _vm.itemConfig.includes("item.id") ||
-                                    _vm.itemConfig.includes("all")
-                                      ? _c("tr", [
-                                          _c("td", [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.$translate(
-                                                  "Ceres::Template.singleItemId"
-                                                )
-                                              )
-                                            )
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("td", [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.currentVariation.item.id
-                                              )
-                                            )
-                                          ])
-                                        ])
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    _vm.currentVariation.item.condition &&
-                                    _vm.currentVariation.item.condition.names
-                                      .name !== "" &&
-                                    (_vm.itemConfig.includes(
-                                      "item.condition"
-                                    ) ||
-                                      _vm.itemConfig.includes("all"))
-                                      ? _c("tr", [
-                                          _c("td", [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.$translate(
-                                                  "Ceres::Template.singleItemCondition"
-                                                )
-                                              )
-                                            )
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("td", [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.currentVariation.item
-                                                  .condition.names.name
-                                              )
-                                            )
-                                          ])
-                                        ])
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    _vm.itemConfig.includes(
-                                      "item.age_rating"
-                                    ) || _vm.itemConfig.includes("all")
-                                      ? _c("tr", [
-                                          _c("td", [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.$translate(
-                                                  "Ceres::Template.singleItemAge"
-                                                )
-                                              )
-                                            )
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("td", [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm._f("ageRestriction")(
-                                                  _vm.currentVariation.item
-                                                    .ageRestriction
-                                                )
-                                              )
-                                            )
-                                          ])
-                                        ])
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    _vm.currentVariation.variation
-                                      .externalId !== "" &&
-                                    (_vm.itemConfig.includes(
-                                      "item.external_id"
-                                    ) ||
-                                      _vm.itemConfig.includes("all"))
-                                      ? _c("tr", [
-                                          _c("td", [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.$translate(
-                                                  "Ceres::Template.singleItemExternalVariationId"
-                                                )
-                                              )
-                                            )
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("td", [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.currentVariation.variation
-                                                  .externalId
-                                              )
-                                            )
-                                          ])
-                                        ])
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    _vm.currentVariation.variation.model !==
-                                      "" &&
-                                    (_vm.itemConfig.includes(
-                                      "item.variation_model"
-                                    ) ||
-                                      _vm.itemConfig.includes("all"))
-                                      ? _c("tr", [
-                                          _c("td", [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.$translate(
-                                                  "Ceres::Template.singleItemModel"
-                                                )
-                                              )
-                                            )
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("td", [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.currentVariation.variation
-                                                  .model
-                                              )
-                                            )
-                                          ])
-                                        ])
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    _vm.currentVariation.filter
-                                      .hasManufacturer &&
-                                    _vm.currentVariation.item.manufacturer
-                                      .externalName !== "" &&
-                                    (_vm.itemConfig.includes(
-                                      "item.manufacturer"
-                                    ) ||
-                                      _vm.itemConfig.includes("all"))
-                                      ? _c("tr", [
-                                          _c("td", [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.$translate(
-                                                  "Ceres::Template.singleItemManufacturer"
-                                                )
-                                              )
-                                            )
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("td", [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.currentVariation.item
-                                                  .manufacturer.externalName
-                                              )
-                                            )
-                                          ])
-                                        ])
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    _vm.currentVariation.item
-                                      .producingCountry &&
-                                    _vm.currentVariation.item.producingCountry
-                                      .names.name !== "" &&
-                                    (_vm.itemConfig.includes(
-                                      "item.producerCountry"
-                                    ) ||
-                                      _vm.itemConfig.includes("all"))
-                                      ? _c("tr", [
-                                          _c("td", [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.$translate(
-                                                  "Ceres::Template.singleItemManufacturingCountry"
-                                                )
-                                              )
-                                            )
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("td", [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.currentVariation.item
-                                                  .producingCountry.names.name
-                                              )
-                                            )
-                                          ])
-                                        ])
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    _vm.currentVariation.unit &&
-                                    (_vm.itemConfig.includes(
-                                      "item.variationBase_content"
-                                    ) ||
-                                      _vm.itemConfig.includes("all"))
-                                      ? _c("tr", [
-                                          _c("td", [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.$translate(
-                                                  "Ceres::Template.singleItemContent"
-                                                )
-                                              )
-                                            )
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("td", [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.currentVariation.unit
-                                                  .content
-                                              ) +
-                                                " " +
-                                                _vm._s(
-                                                  _vm.currentVariation.unit
-                                                    .names.name
-                                                )
-                                            )
-                                          ])
-                                        ])
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    _vm.currentVariation.variation.weightG !==
-                                      "" &&
-                                    (_vm.itemConfig.includes("item.weightG") ||
-                                      _vm.itemConfig.includes("all"))
-                                      ? _c("tr", [
-                                          _c("td", [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.$translate(
-                                                  "Ceres::Template.singleItemWeight"
-                                                )
-                                              )
-                                            )
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("td", [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.currentVariation.variation
-                                                  .weightG
-                                              ) + " g"
-                                            )
-                                          ])
-                                        ])
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    _vm.currentVariation.variation
-                                      .weightNetG !== "" &&
-                                    (_vm.itemConfig.includes(
-                                      "item.weightNetG"
-                                    ) ||
-                                      _vm.itemConfig.includes("all"))
-                                      ? _c("tr", [
-                                          _c("td", [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.$translate(
-                                                  "Ceres::Template.singleItemNetWeight"
-                                                )
-                                              )
-                                            )
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("td", [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.currentVariation.variation
-                                                  .weightNetG
-                                              ) + " g"
-                                            )
-                                          ])
-                                        ])
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    _vm.itemConfig.includes(
-                                      "item.variation_dimensions"
-                                    ) || _vm.itemConfig.includes("all")
-                                      ? _c("tr", [
-                                          _c("td", [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.$translate(
-                                                  "Ceres::Template.singleItemDimensions"
-                                                )
-                                              )
-                                            )
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("td", [
-                                            _c("span", [
-                                              _vm._v(
-                                                _vm._s(
-                                                  _vm.currentVariation.variation
-                                                    .lengthMM
-                                                )
-                                              )
-                                            ]),
-                                            _vm._v("×"),
-                                            _c("span", [
-                                              _vm._v(
-                                                _vm._s(
-                                                  _vm.currentVariation.variation
-                                                    .widthMM
-                                                )
-                                              )
-                                            ]),
-                                            _vm._v("×"),
-                                            _c("span", [
-                                              _vm._v(
-                                                _vm._s(
-                                                  _vm.currentVariation.variation
-                                                    .heightMM
-                                                )
-                                              )
-                                            ]),
-                                            _vm._v(
-                                              " mm\n                                            "
-                                            )
-                                          ])
-                                        ])
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    _vm.currentVariation.variation
-                                      .customsTariffNumber !== "" &&
-                                    (_vm.itemConfig.includes(
-                                      "variation.customs_tariff_number"
-                                    ) ||
-                                      _vm.itemConfig.includes("all"))
-                                      ? _c("tr", [
-                                          _c("td", [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.$translate(
-                                                  "Ceres::Template.singleItemCustomsTariffNumber"
-                                                )
-                                              )
-                                            )
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("td", [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.currentVariation.variation
-                                                  .customsTariffNumber
-                                              )
-                                            )
-                                          ])
-                                        ])
-                                      : _vm._e()
-                                  ])
+                                  _c("line", {
+                                    attrs: {
+                                      x1: "12",
+                                      y1: "5",
+                                      x2: "12",
+                                      y2: "19"
+                                    }
+                                  }),
+                                  _c("line", {
+                                    attrs: {
+                                      x1: "5",
+                                      y1: "12",
+                                      x2: "19",
+                                      y2: "12"
+                                    }
+                                  })
                                 ]
                               )
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _vm._t("add-detail-tabs-content")
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "collapse",
+                              attrs: {
+                                id: "supportBox",
+                                "aria-labelledby": "more_details",
+                                "data-parent": "#rightSide"
+                              }
+                            },
+                            [
+                              _c("div", { staticClass: "descriptionContent" }, [
+                                _c("p", [
+                                  _vm._v(
+                                    "Wir helfen Ihnen gerne! Rufen Sie uns an oder schreiben Sie uns eine Nachricht. Wir stehen Ihnen Montags bis Freitags von 8:00 bis 16:00 Uhr zur Verfügung und beraten Sie gerne."
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _vm._m(5),
+                                _vm._v(" "),
+                                _vm._m(6),
+                                _vm._v(" "),
+                                _c(
+                                  "form",
+                                  {
+                                    staticClass: "row",
+                                    attrs: { id: "12fd", method: "post" },
+                                    on: {
+                                      submit: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.$store.dispatch(
+                                          "sendContactForm",
+                                          $event
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("input", {
+                                      attrs: {
+                                        type: "hidden",
+                                        "data-mail": "recipient",
+                                        value: "info@bio-kinder.de"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      attrs: {
+                                        type: "hidden",
+                                        "data-mail": "subject",
+                                        value: "Frage zu Produkt"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "col-12 cmp-contact" },
+                                      [
+                                        _vm._m(7),
+                                        _vm._v(" "),
+                                        _vm._m(8),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "input-unit" },
+                                          [
+                                            _c("input", {
+                                              attrs: {
+                                                name: "product",
+                                                disabled: "disabled",
+                                                type: "text",
+                                                id: "product"
+                                              },
+                                              domProps: {
+                                                value:
+                                                  _vm.currentVariation.item.id +
+                                                  "-" +
+                                                  _vm.currentVariation.variation
+                                                    .id +
+                                                  " " +
+                                                  this.$options.filters.itemName(
+                                                    _vm.currentVariation
+                                                  )
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c(
+                                              "label",
+                                              { attrs: { for: "product" } },
+                                              [
+                                                _vm._v(
+                                                  "\n                          Produkt\n                        "
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _vm._m(9)
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      staticClass: "honey",
+                                      attrs: {
+                                        type: "text",
+                                        name: "username",
+                                        autocomplete: "new-password",
+                                        tabindex: "-1"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "col-12 text-right" },
+                                      [
+                                        _c("recaptcha"),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          staticClass: "btn btn-bkm btn-sm",
+                                          attrs: {
+                                            type: "submit",
+                                            value: "Anfrage senden"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ]
+                                )
+                              ])
+                            ]
+                          )
+                        ])
                       ],
                       2
                     )
+                  ]),
+                  _vm._v(" "),
+                  _vm._t("additional-beaver-content"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row " }, [
+                    _c(
+                      "div",
+                      { staticClass: "col-12" },
+                      [
+                        _vm._t("item-list-container"),
+                        _vm._v(" "),
+                        _vm._t("series-slide"),
+                        _vm._v(" "),
+                        _vm.currentVariation.variation.id != 8802
+                          ? _vm._t("cross-selling-similar")
+                          : _vm._e()
+                      ],
+                      2
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "widget col-12",
+                        attrs: { "data-feedback": "" }
+                      },
+                      [_vm._t("feedback-container")],
+                      2
+                    )
                   ])
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._t("item-list-container"),
-              _vm._v(" "),
-              _vm._t("feedback-container")
-            ],
-            2
+                ],
+                2
+              )
+            ]
           )
         ],
         {
@@ -46175,7 +47442,185 @@ var render = function() {
     2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "button" }, [
+      _c("i", { staticClass: "fa fa-play", attrs: { id: "playBtn" } }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fa fa-undo", attrs: { id: "resetBtn" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "contents" }, [
+      _c("div", { staticClass: "time" }, [
+        _c("span", { staticClass: "elapsed", attrs: { id: "elapsedTime" } }, [
+          _vm._v("0:00")
+        ]),
+        _vm._v(" "),
+        _c("span", { staticClass: "seperator" }, [_vm._v(" / ")]),
+        _vm._v(" "),
+        _c(
+          "span",
+          { staticClass: "totalLength", attrs: { id: "totalLength" } },
+          [_vm._v("0:00")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "playLine" }, [
+      _c("div", {
+        staticClass: "playLineActive",
+        attrs: { id: "playLineActive" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "closeModal",
+        attrs: { "data-dismiss": "modal", "aria-label": "Schliessen" }
+      },
+      [_c("i", { attrs: { "data-feather": "x" } })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "modal-dialog", attrs: { role: "document" } },
+      [
+        _c("div", { staticClass: "modal-content" }, [
+          _c(
+            "div",
+            {
+              staticClass: "modal-body",
+              attrs: { id: "instagramImageSlider" }
+            },
+            [_c("i", [_vm._v("Beiträge werden geladen...")])]
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "contactBox" }, [
+      _c("p", [
+        _c(
+          "a",
+          { attrs: { id: "phoneNumberLink", href: "tel:+4960814456315" } },
+          [_vm._v("+49 (0) 6081 - 44 563 15")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("span", [_vm._v("Mo. - Fr., 8:00 - 16:00 Uhr")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "numItemsCol my-4 text-right" }, [
+      _c("span", { staticClass: "numItems bg-white" }, [
+        _vm._v("Anfrage per Mail:")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "input-unit mb-1 required",
+        attrs: { "data-validate": "text" }
+      },
+      [
+        _c("input", { attrs: { name: "name12", type: "text", id: "name12" } }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "name12" } }, [
+          _vm._v("\n                        Name *\n                          ")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "widget-mail-input" }, [
+      _c(
+        "div",
+        {
+          staticClass: "input-unit mb-1 required",
+          attrs: { "data-validate": "mail" }
+        },
+        [
+          _c("input", {
+            attrs: { name: "mail12", type: "email", id: "mail12" }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            attrs: {
+              type: "hidden",
+              "data-mail": "reply-to-address",
+              value: "mail12"
+            }
+          }),
+          _vm._v(" "),
+          _c("label", { attrs: { for: "mail12" } }, [
+            _vm._v(
+              "\n                            Ihre E-Mail Adrresse *\n                          "
+            )
+          ])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "input-unit mb-1 required textarea",
+        attrs: { "data-validate": "text" }
+      },
+      [
+        _c("textarea", {
+          staticClass: "no-resize",
+          attrs: { name: "text12", id: "text12", rows: "4" }
+        }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "text12" } }, [
+          _vm._v(
+            "\n                          Ihre Anfrage *\n                        "
+          )
+        ])
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 

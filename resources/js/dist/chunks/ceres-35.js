@@ -77,6 +77,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-price",
@@ -85,6 +91,11 @@ __webpack_require__.r(__webpack_exports__);
       type: Boolean,
       default: true
     }
+  },
+  data: function data() {
+    return {
+      showDetails: false
+    };
   },
   inject: {
     itemId: {
@@ -128,6 +139,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     hasTax: function hasTax(property) {
       return Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_1__["hasVat"])(property);
+    },
+    toggleDetails: function toggleDetails() {
+      this.showDetails = !this.showDetails;
     }
   }
 });
@@ -328,46 +342,93 @@ var render = function() {
         "div",
         { staticClass: "shippinginfo" },
         [
-          _vm._v(
-            "\n          " +
-              _vm._s(_vm.$translate("Ceres::Template.singleItemInclVAT")) +
-              ",\n          " +
-              _vm._s(_vm.$translate("Ceres::Template.singleItemExclusive")) +
-              "\n          "
-          ),
-          _c(
-            "a",
-            {
-              staticClass: "openPorto",
-              attrs: {
-                "data-toggle": "modal",
-                href: "#shippingscosts",
-                title: _vm.$translate("Ceres::Template.singleItemShippingCosts")
-              }
-            },
-            [
-              _vm._v("CO"),
-              _c("sub", [_vm._v("2")]),
-              _vm._v(" neutraler Versand")
-            ]
-          ),
+          _c("span", { on: { click: _vm.toggleDetails } }, [
+            _vm._v(
+              "\n                " +
+                _vm._s(_vm.$translate("Ceres::Template.singleItemInclVAT")) +
+                "\n                "
+            ),
+            _c(
+              "svg",
+              {
+                staticClass: "css-i6dzq1",
+                attrs: {
+                  viewBox: "0 0 24 24",
+                  width: "14",
+                  height: "14",
+                  stroke: "currentColor",
+                  "stroke-width": "2",
+                  fill: "none",
+                  "stroke-linecap": "round",
+                  "stroke-linejoin": "round"
+                }
+              },
+              [
+                _c("circle", { attrs: { cx: "12", cy: "12", r: "10" } }),
+                _c("line", {
+                  attrs: { x1: "12", y1: "16", x2: "12", y2: "12" }
+                }),
+                _c("line", {
+                  attrs: { x1: "12", y1: "8", x2: "12.01", y2: "8" }
+                })
+              ]
+            )
+          ]),
           _vm._v(" "),
-          _vm._t("additional-content-after-vat"),
-          _vm._v(" "),
-          _vm.showCrossPrice && _vm.hasCrossPrice
-            ? _c("span", [
-                _c("br"),
-                _vm._v(
-                  "Zuletzt niedrigster Preis " +
-                    _vm._s(
-                      _vm.currentVariation.prices.default.lowestPrice.formatted
-                    ) +
-                    "\n          "
+          _c("transition", { attrs: { name: "slide" } }, [
+            _vm.showDetails
+              ? _c(
+                  "div",
+                  { staticClass: "details" },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(
+                          _vm.$translate("Ceres::Template.singleItemExclusive")
+                        ) +
+                        "  "
+                    ),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "openPorto",
+                        attrs: {
+                          "data-toggle": "modal",
+                          href: "#shippingscosts",
+                          title: _vm.$translate(
+                            "Ceres::Template.singleItemShippingCosts"
+                          )
+                        }
+                      },
+                      [
+                        _vm._v("CO"),
+                        _c("sub", [_vm._v("2")]),
+                        _vm._v(" neutraler Versand")
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._t("additional-content-after-vat"),
+                    _vm._v(" "),
+                    _vm.showCrossPrice && _vm.hasCrossPrice
+                      ? _c("span", [
+                          _c("br"),
+                          _vm._v(
+                            "Zuletzt niedrigster Preis " +
+                              _vm._s(
+                                _vm.currentVariation.prices.default.lowestPrice
+                                  .formatted
+                              ) +
+                              "\n                    "
+                          )
+                        ])
+                      : _vm._e()
+                  ],
+                  2
                 )
-              ])
-            : _vm._e()
+              : _vm._e()
+          ])
         ],
-        2
+        1
       )
     ]
   )
