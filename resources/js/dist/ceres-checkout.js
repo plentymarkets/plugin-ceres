@@ -2646,7 +2646,7 @@ var gRecaptchaApiLoaded;
           return _this2.initializeV3();
         });
       }, function () {// remove recaptcha when previously consented
-      });
+      }, true);
     },
     createScript: function createScript() {
       var _this3 = this;
@@ -78764,7 +78764,9 @@ function _call(callback) {
 }
 
 function whenConsented(key, onConsent, onDecline) {
-  if (!App.config.global.blockCookies || App.isShopBuilder) {
+  var forceConsent = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
+  if (!App.config.global.blockCookies && !forceConsent || App.isShopBuilder) {
     _call(onConsent);
 
     return;
