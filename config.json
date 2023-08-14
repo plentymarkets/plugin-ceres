@@ -106,25 +106,25 @@
                 "global.google_recaptcha_consentGroup": {
                     "type": "selectBox",
                     "required": false,
-                    "label": "Config.consentGroupLabel",
+                    "label": "Config.globalGoogleRecaptchaConsentGroupLabel",
                     "options": {
                         "defaultValue": "media",
                         "selectBoxValues": [
                             {
                                 "value": "necessary",
-                                "caption": "Config.consentGroupNecessary"
+                                "caption": "Config.globalGoogleRecaptchaConsentGroupNecessary"
                             },
                             {
                                 "value": "tracking",
-                                "caption": "Config.consentGroupTracking"
+                                "caption": "Config.globalGoogleRecaptchaConsentGroupTracking"
                             },
                             {
                                 "value": "marketing",
-                                "caption": "Config.consentGroupMarketing"
+                                "caption": "Config.globalGoogleRecaptchaConsentGroupMarketing"
                             },
                             {
                                 "value": "media",
-                                "caption": "Config.consentGroupMedia"
+                                "caption": "Config.globalGoogleRecaptchaConsentGroupMedia"
                             }
                         ]
                     }
@@ -132,7 +132,7 @@
                 "global.google_recaptcha_consentNecessary": {
                     "type": "checkBox",
                     "required": false,
-                    "label": "Config.consentNecessaryLabel",
+                    "label": "Config.globalGoogleRecaptchaConsentNecessaryLabel",
                     "options": {
                         "defaultValue": "false"
                     }
@@ -140,7 +140,7 @@
                 "global.google_recaptcha_consentOptOut": {
                     "type": "checkBox",
                     "required": false,
-                    "label": "Config.consentOptOutLabel",
+                    "label": "Config.globalGoogleRecaptchaConsentOptOutLabel",
                     "options": {
                         "defaultValue": "false"
                     }
