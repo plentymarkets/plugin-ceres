@@ -43,7 +43,7 @@ export default {
                 () =>
                 {
                     // remove recaptcha when previously consented
-                }, 
+                },
                 true
             );
         },
