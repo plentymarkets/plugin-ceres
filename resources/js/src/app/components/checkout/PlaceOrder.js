@@ -129,7 +129,7 @@ export default Vue.component("place-order", {
 
             if (this.basketItemQuantity > 0)
             {
-                ApiService.post("/rest/io/checkout/payment")
+                ApiService.post("/rest/storefront/checkout/payment")
                     .done(response =>
                     {
                         this.afterPreparePayment(response);

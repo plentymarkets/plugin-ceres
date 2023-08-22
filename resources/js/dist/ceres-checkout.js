@@ -69919,7 +69919,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       this.waiting = true;
 
       if (this.basketItemQuantity > 0) {
-        ApiService.post("/rest/io/checkout/payment").done(function (response) {
+        ApiService.post("/rest/storefront/checkout/payment").done(function (response) {
           _this2.afterPreparePayment(response);
         }).fail(function (error) {
           _this2.waiting = false;
