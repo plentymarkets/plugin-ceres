@@ -528,7 +528,7 @@ export default {
         },
         showBundleComponents()
         {
-            return (this.hasProperty(235) && this.currentVariation.bundleType === 'bundle' && this.currentVariation.bundleComponents.length)
+            return (this.hasProperty(235) && this.currentVariation.variation.bundleType === 'bundle' && this.currentVariation.bundleComponents.length)
         },
         color1() {
             const valueId = this.getFurnitureColor(3); // Front

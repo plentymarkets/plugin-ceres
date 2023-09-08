@@ -3953,7 +3953,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       return this.$store.state.items.isItemSet;
     },
     showBundleComponents: function showBundleComponents() {
-      return this.hasProperty(235) && this.currentVariation.bundleType === 'bundle' && this.currentVariation.bundleComponents.length;
+      return this.hasProperty(235) && this.currentVariation.variation.bundleType === 'bundle' && this.currentVariation.bundleComponents.length;
     },
     color1: function color1() {
       var valueId = this.getFurnitureColor(3); // Front
