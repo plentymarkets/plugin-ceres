@@ -509,7 +509,7 @@ var render = function() {
                 _c(
                   "div",
                   {
-                    staticClass: "deliverySwitch btn btn-sm btn-bkm-delivery",
+                    staticClass: "deliverySwitch btn btn-sm btn-bkm delivery",
                     class: { active: _vm.isSelected(123) }
                   },
                   [
@@ -621,7 +621,7 @@ var render = function() {
             _c(
               "div",
               {
-                staticClass: "container-max page-content component-loading",
+                staticClass: "page-content component-loading",
                 class: { isLoading: _vm.isLoading }
               },
               [

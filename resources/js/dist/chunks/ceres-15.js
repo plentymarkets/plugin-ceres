@@ -383,7 +383,7 @@ var render = function() {
                 _c(
                   "button",
                   {
-                    staticClass: "btn btn-primary btn-appearance btn-medium",
+                    staticClass: "btn btn-bkm btn-appearance btn-medium",
                     class: [
                       { "float-right": !_vm.modalElement },
                       _vm.buttonSizeClass

@@ -204,7 +204,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "cmp bkr-cc" }, [
+  return _c("div", { staticClass: "cmp bkr-cc coupon-input" }, [
     _vm.isCheckoutReadonly &&
     !!_vm.$translate("Ceres::Template.couponReadonlyInfoText")
       ? _c("p", [

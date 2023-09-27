@@ -1,5 +1,5 @@
 <template>
-    <div class="cmp bkr-cc">
+    <div class="cmp bkr-cc coupon-input">
         <p v-if="isCheckoutReadonly && !!$translate('Ceres::Template.couponReadonlyInfoText')">
             {{ couponReadonlyInfoText }}
         </p>

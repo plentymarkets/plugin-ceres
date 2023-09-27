@@ -490,6 +490,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 var render = function() {
+  var _obj
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -688,7 +689,7 @@ var render = function() {
             "div",
             {
               staticClass: "btn-group",
-              attrs: { role: "group", "aria-label": "Thumb Control" }
+              attrs: { role: "group", "aria-label": "thumb control" }
             },
             [
               _vm.canBeAddedToBasket
@@ -696,8 +697,11 @@ var render = function() {
                     "button",
                     {
                       staticClass:
-                        "btn btn-bkm-inverted btn-appearance mobile-width-button",
-                      class: { "no-pointer-events": _vm.isLoading },
+                        "btn btn-bkm-inverted btn-sm btn-appearance mobile-width-button",
+                      class:
+                        ((_obj = { "no-pointer-events": _vm.isLoading }),
+                        (_obj[_vm.buttonClasses] = true),
+                        _obj),
                       attrs: { type: "button" },
                       on: {
                         click: function($event) {
@@ -729,7 +733,8 @@ var render = function() {
                     "button",
                     {
                       staticClass:
-                        "btn btn-bkm-inverted btn-appearance mobile-width-button",
+                        "btn btn-bkm-inverted btn-sm btn-appearance mobile-width-button",
+                      class: _vm.buttonClasses,
                       attrs: { type: "button" },
                       on: {
                         click: function($event) {

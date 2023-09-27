@@ -13,7 +13,7 @@
           </div>
         </div>
         <div v-else class="deliverySwitchContainer">
-          <div class="deliverySwitch btn btn-sm btn-bkm-delivery" :class="{ 'active': isSelected(123) }">
+          <div class="deliverySwitch btn btn-sm btn-bkm delivery" :class="{ 'active': isSelected(123) }">
             <label v-if="!isLoading"  for="instantDeliverySwitch">
               <span>Sofort lieferbar</span>
             </label>

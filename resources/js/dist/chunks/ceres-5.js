@@ -307,6 +307,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -905,39 +923,82 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "itemPrice" }, [
-              _c("div", { staticClass: "prices" }, [
-                _vm.item.prices.rrp &&
-                _vm.item.prices.rrp.price.value >
-                  _vm.item.prices.default.unitPrice.value
-                  ? _c("div", { staticClass: "price-view-port" }, [
-                      _c("del", {
-                        staticClass: "crossprice",
-                        domProps: {
-                          innerHTML: _vm._s(
-                            _vm.item.prices.rrp.unitPrice.formatted
-                          )
-                        }
-                      })
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("div", {
-                  staticClass: "price",
-                  class: {
-                    redPrice:
-                      _vm.item.prices.rrp &&
-                      _vm.item.prices.rrp.price.value >
-                        _vm.item.prices.default.unitPrice.value
-                  },
-                  domProps: {
-                    innerHTML: _vm._s(
-                      _vm.item.prices.default.unitPrice.formatted
-                    )
+            _c(
+              "div",
+              { staticClass: "itemPrice" },
+              [
+                _c("add-to-basket", {
+                  attrs: {
+                    "variation-id": _vm.item.variation.id,
+                    "is-salable":
+                      !!_vm.item.filter && _vm.item.filter.isSalable,
+                    "has-children":
+                      !!_vm.item.item &&
+                      _vm.item.item.salableVariationCount > 1,
+                    "interval-quantity":
+                      _vm.item.variation.intervalOrderQuantity || 1,
+                    "minimum-quantity": _vm.item.variation.minimumOrderQuantity,
+                    "maximum-quantity":
+                      !!_vm.item.variation.maximumOrderQuantity &&
+                      _vm.item.variation.maximumOrderQuantity > 0
+                        ? _vm.item.variation.maximumOrderQuantity
+                        : null,
+                    "order-properties": _vm.item.properties.filter(function(
+                      prop
+                    ) {
+                      return prop.property.isOderProperty
+                    }),
+                    "has-order-properties": _vm.item.hasOrderProperties,
+                    "has-required-order-property":
+                      _vm.item.hasRequiredOrderProperty,
+                    "use-large-scale": false,
+                    "show-quantity": false,
+                    "item-url": _vm._f("itemURL")(
+                      _vm.item,
+                      _vm.urlWithVariationId
+                    ),
+                    "has-price": _vm._f("hasItemDefaultPrice")(_vm.item),
+                    "has-graduated-price":
+                      _vm.itemGraduatedPriceisCheapestSorting ||
+                      _vm.itemGraduatedPricesalableVariationCount,
+                    "item-type": _vm.item.item.itemType
                   }
-                })
-              ])
-            ])
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "prices ml-auto" }, [
+                  _vm.item.prices.rrp &&
+                  _vm.item.prices.rrp.price.value >
+                    _vm.item.prices.default.unitPrice.value
+                    ? _c("div", { staticClass: "price-view-port" }, [
+                        _c("del", {
+                          staticClass: "crossprice",
+                          domProps: {
+                            innerHTML: _vm._s(
+                              _vm.item.prices.rrp.unitPrice.formatted
+                            )
+                          }
+                        })
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", {
+                    staticClass: "price",
+                    class: {
+                      redPrice:
+                        _vm.item.prices.rrp &&
+                        _vm.item.prices.rrp.price.value >
+                          _vm.item.prices.default.unitPrice.value
+                    },
+                    domProps: {
+                      innerHTML: _vm._s(
+                        _vm.item.prices.default.unitPrice.formatted
+                      )
+                    }
+                  })
+                ])
+              ],
+              1
+            )
           ])
         ])
       : _vm._e(),

@@ -83,7 +83,25 @@
                 <a :href="item | itemURL" v-html="texts.name1" class="thumb-title small"></a>
             </div>
             <div class="itemPrice">
-                <div class="prices">
+                <add-to-basket
+                    :variation-id="item.variation.id"
+                    :is-salable="!!item.filter && item.filter.isSalable"
+                    :has-children="!!item.item && item.item.salableVariationCount > 1"
+                    :interval-quantity="item.variation.intervalOrderQuantity || 1"
+                    :minimum-quantity="item.variation.minimumOrderQuantity"
+                    :maximum-quantity="!!item.variation.maximumOrderQuantity && item.variation.maximumOrderQuantity > 0 ? item.variation.maximumOrderQuantity : null"
+                    :order-properties="item.properties.filter(function (prop) { return prop.property.isOderProperty })"
+                    :has-order-properties="item.hasOrderProperties"
+                    :has-required-order-property="item.hasRequiredOrderProperty"
+                    :use-large-scale="false"
+                    :show-quantity="false"
+                    :item-url="item | itemURL(urlWithVariationId)"
+                    :has-price="item | hasItemDefaultPrice"
+                    :has-graduated-price="itemGraduatedPriceisCheapestSorting || itemGraduatedPricesalableVariationCount"
+                    :item-type="item.item.itemType">
+                </add-to-basket>
+
+                <div class="prices ml-auto">
                 <div v-if="item.prices.rrp && item.prices.rrp.price.value > item.prices.default.unitPrice.value" class="price-view-port">
                     <del class="crossprice"
                     v-html="item.prices.rrp.unitPrice.formatted"></del>

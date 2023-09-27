@@ -27,7 +27,7 @@
                     </div>
                     <div class="mt-3" :class="{'col-5 col-sm-8 text-sm-right': !modalElement, 'col-12': modalElement }">
                         <slot name="extend-overlay-buttons"></slot>
-                        <button data-testing="submit-login" @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-primary btn-appearance btn-medium" :class="[{'float-right': !modalElement}, buttonSizeClass]">
+                        <button data-testing="submit-login" @click.prevent="validateLogin" :disabled="isDisabled" class="btn btn-bkm btn-appearance btn-medium" :class="[{'float-right': !modalElement}, buttonSizeClass]">
                             {{ $translate("Ceres::Template.login") }}
                             <icon icon="user" :loading="isDisabled"></icon>
                         </button>

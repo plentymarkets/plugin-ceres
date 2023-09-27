@@ -11279,6 +11279,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -41652,6 +41670,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 var render = function() {
+  var _obj
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -41857,15 +41876,17 @@ var render = function() {
       !_vm.showQuantity && !_vm.useLargeScale
         ? _vm._ssrNode('<div class="d-inline">', "</div>", [
             _vm._ssrNode(
-              '<div role="group" aria-label="Thumb Control" class="btn-group">',
+              '<div role="group" aria-label="thumb control" class="btn-group">',
               "</div>",
               [
                 _vm.canBeAddedToBasket
                   ? _vm._ssrNode(
                       '<button type="button"' +
                         _vm._ssrClass(
-                          "btn btn-bkm-inverted btn-appearance mobile-width-button",
-                          { "no-pointer-events": _vm.isLoading }
+                          "btn btn-bkm-inverted btn-sm btn-appearance mobile-width-button",
+                          ((_obj = { "no-pointer-events": _vm.isLoading }),
+                          (_obj[_vm.buttonClasses] = true),
+                          _obj)
                         ) +
                         ">",
                       "</button>",
@@ -41895,7 +41916,12 @@ var render = function() {
                 _vm._ssrNode(
                   " " +
                     (!_vm.canBeAddedToBasket
-                      ? '<button type="button" class="btn btn-bkm-inverted btn-appearance mobile-width-button"><i aria-hidden="true" class="fa fa-arrow-right fa-lg d-none d-sm-block"></i>' +
+                      ? '<button type="button"' +
+                        _vm._ssrClass(
+                          "btn btn-bkm-inverted btn-sm btn-appearance mobile-width-button",
+                          _vm.buttonClasses
+                        ) +
+                        '><i aria-hidden="true" class="fa fa-arrow-right fa-lg d-none d-sm-block"></i>' +
                         _vm._ssrEscape(
                           "\n                    " +
                             _vm._s(
@@ -42614,7 +42640,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "cmp bkr-cc" },
+    { staticClass: "cmp bkr-cc coupon-input" },
     [
       _vm._ssrNode(
         (_vm.isCheckoutReadonly &&
@@ -47820,7 +47846,7 @@ var render = function() {
       ),
       _vm._ssrNode(" "),
       _vm._ssrNode(
-        '<div class="mt-2 text-right">',
+        '<div class="mt-2">',
         "</div>",
         [
           _vm._t("extend-overlay-buttons"),
@@ -48541,13 +48567,10 @@ var render = function() {
                     _vm._ssrNode(
                       '<button data-testing="submit-login"' +
                         _vm._ssrAttr("disabled", _vm.isDisabled) +
-                        _vm._ssrClass(
-                          "btn btn-primary btn-appearance btn-medium",
-                          [
-                            { "float-right": !_vm.modalElement },
-                            _vm.buttonSizeClass
-                          ]
-                        ) +
+                        _vm._ssrClass("btn btn-bkm btn-appearance btn-medium", [
+                          { "float-right": !_vm.modalElement },
+                          _vm.buttonSizeClass
+                        ]) +
                         ">",
                       "</button>",
                       [
@@ -53480,29 +53503,85 @@ var render = function() {
                   1
                 )
               ]),
+              _vm._ssrNode(" "),
               _vm._ssrNode(
-                ' <div class="productInfoContainer"><div class="productName"><a' +
-                  _vm._ssrAttr("href", _vm._f("itemURL")(_vm.item)) +
-                  ' class="thumb-title small">' +
-                  _vm._s(_vm.texts.name1) +
-                  '</a></div> <div class="itemPrice"><div class="prices">' +
-                  (_vm.item.prices.rrp &&
-                  _vm.item.prices.rrp.price.value >
-                    _vm.item.prices.default.unitPrice.value
-                    ? '<div class="price-view-port"><del class="crossprice">' +
-                      _vm._s(_vm.item.prices.rrp.unitPrice.formatted) +
-                      "</del></div>"
-                    : "<!---->") +
-                  " <div" +
-                  _vm._ssrClass("price", {
-                    redPrice:
-                      _vm.item.prices.rrp &&
-                      _vm.item.prices.rrp.price.value >
-                        _vm.item.prices.default.unitPrice.value
-                  }) +
-                  ">" +
-                  _vm._s(_vm.item.prices.default.unitPrice.formatted) +
-                  "</div></div></div></div>"
+                '<div class="productInfoContainer">',
+                "</div>",
+                [
+                  _vm._ssrNode(
+                    '<div class="productName"><a' +
+                      _vm._ssrAttr("href", _vm._f("itemURL")(_vm.item)) +
+                      ' class="thumb-title small">' +
+                      _vm._s(_vm.texts.name1) +
+                      "</a></div> "
+                  ),
+                  _vm._ssrNode(
+                    '<div class="itemPrice">',
+                    "</div>",
+                    [
+                      _c("add-to-basket", {
+                        attrs: {
+                          "variation-id": _vm.item.variation.id,
+                          "is-salable":
+                            !!_vm.item.filter && _vm.item.filter.isSalable,
+                          "has-children":
+                            !!_vm.item.item &&
+                            _vm.item.item.salableVariationCount > 1,
+                          "interval-quantity":
+                            _vm.item.variation.intervalOrderQuantity || 1,
+                          "minimum-quantity":
+                            _vm.item.variation.minimumOrderQuantity,
+                          "maximum-quantity":
+                            !!_vm.item.variation.maximumOrderQuantity &&
+                            _vm.item.variation.maximumOrderQuantity > 0
+                              ? _vm.item.variation.maximumOrderQuantity
+                              : null,
+                          "order-properties": _vm.item.properties.filter(
+                            function(prop) {
+                              return prop.property.isOderProperty
+                            }
+                          ),
+                          "has-order-properties": _vm.item.hasOrderProperties,
+                          "has-required-order-property":
+                            _vm.item.hasRequiredOrderProperty,
+                          "use-large-scale": false,
+                          "show-quantity": false,
+                          "item-url": _vm._f("itemURL")(
+                            _vm.item,
+                            _vm.urlWithVariationId
+                          ),
+                          "has-price": _vm._f("hasItemDefaultPrice")(_vm.item),
+                          "has-graduated-price":
+                            _vm.itemGraduatedPriceisCheapestSorting ||
+                            _vm.itemGraduatedPricesalableVariationCount,
+                          "item-type": _vm.item.item.itemType
+                        }
+                      }),
+                      _vm._ssrNode(
+                        ' <div class="prices ml-auto">' +
+                          (_vm.item.prices.rrp &&
+                          _vm.item.prices.rrp.price.value >
+                            _vm.item.prices.default.unitPrice.value
+                            ? '<div class="price-view-port"><del class="crossprice">' +
+                              _vm._s(_vm.item.prices.rrp.unitPrice.formatted) +
+                              "</del></div>"
+                            : "<!---->") +
+                          " <div" +
+                          _vm._ssrClass("price", {
+                            redPrice:
+                              _vm.item.prices.rrp &&
+                              _vm.item.prices.rrp.price.value >
+                                _vm.item.prices.default.unitPrice.value
+                          }) +
+                          ">" +
+                          _vm._s(_vm.item.prices.default.unitPrice.formatted) +
+                          "</div></div>"
+                      )
+                    ],
+                    2
+                  )
+                ],
+                2
               )
             ],
             2
@@ -53946,7 +54025,7 @@ var render = function() {
               )
             : _vm._ssrNode(
                 '<div class="deliverySwitchContainer"><div' +
-                  _vm._ssrClass("deliverySwitch btn btn-sm btn-bkm-delivery", {
+                  _vm._ssrClass("deliverySwitch btn btn-sm btn-bkm delivery", {
                     active: _vm.isSelected(123)
                   }) +
                   ">" +
@@ -54029,7 +54108,7 @@ var render = function() {
           [
             _vm._ssrNode(
               "<div" +
-                _vm._ssrClass("container-max page-content component-loading", {
+                _vm._ssrClass("page-content component-loading", {
                   isLoading: _vm.isLoading
                 }) +
                 ">",

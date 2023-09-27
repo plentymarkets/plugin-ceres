@@ -9,7 +9,7 @@
         <div class="filter-wrapper">
 
             <div class="filter-collapse collapse" :id="'filter-collapse_' + _uid">
-              <div class="container-max page-content component-loading" :class="{ 'isLoading': isLoading }">
+              <div class="page-content component-loading" :class="{ 'isLoading': isLoading }">
                   <div class="facetOutter" :selectedFactes="selectedFacets.length">
                       <item-filter v-for="facet in facets" :facet="facet" :key="facet.id" v-if="facet.id != 11"></item-filter>
                       <div class="facet">

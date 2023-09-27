@@ -63,12 +63,12 @@
         </span>
     </div>
     <div class="d-inline" v-if="!showQuantity && !useLargeScale">
-            <div class="btn-group" role="group" aria-label="Thumb Control">
-                <button type="button" :class="{ 'no-pointer-events': isLoading }" v-if="canBeAddedToBasket" class="btn btn-bkm-inverted btn-appearance mobile-width-button" @click="addToBasket()">
+            <div class="btn-group" role="group" aria-label="thumb control">
+                <button type="button" v-if="canBeAddedToBasket" class="btn btn-bkm-inverted btn-sm btn-appearance mobile-width-button" :class="{ 'no-pointer-events': isLoading, [buttonClasses]: true }" @click="addToBasket()">
                     <icon icon="shopping-cart" class="fa-lg mobile-icon-right" :loading="isLoading"></icon>
                     {{ $translate("Ceres::Template.singleItemAddToBasket") }}
                 </button>
-                <button type="button" v-if="!canBeAddedToBasket" class="btn btn-bkm-inverted btn-appearance mobile-width-button" @click="directToItem()">
+                <button type="button" v-if="!canBeAddedToBasket" class="btn btn-bkm-inverted btn-sm btn-appearance mobile-width-button" :class="buttonClasses" @click="directToItem()">
                     <i class="fa fa-arrow-right fa-lg d-none d-sm-block" aria-hidden="true"></i>
                     {{ $translate("Ceres::Template.itemShowItem") }}
                 </button>

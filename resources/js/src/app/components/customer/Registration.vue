@@ -59,7 +59,7 @@
                 </accept-privacy-policy-check>
             </div>
         </div>
-        <div class="mt-2 text-right">
+        <div class="mt-2">
             <slot name="extend-overlay-buttons"></slot>
 
             <button :disabled="isDisabled" class="btn btn-appearance btn-bkm btn-medium mt-3" :class="buttonSizeClass">

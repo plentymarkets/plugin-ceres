@@ -7011,7 +7011,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "mt-2 text-right" },
+        { staticClass: "mt-2" },
         [
           _vm._t("extend-overlay-buttons"),
           _vm._v(" "),
