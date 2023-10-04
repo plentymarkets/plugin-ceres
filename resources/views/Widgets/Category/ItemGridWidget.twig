@@ -23,10 +23,20 @@
 {{ Twig.set("buildUrlWithVariationId", "not ceresConfig.item.showPleaseSelect or webstoreConfig.attributeSelectDefaultOption == 0") }}
 
 <div class="widget widget-item-grid widget-{{ appearance }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if noVat %} item-vat-hidden{% endif %}{% if grayBackground %} item-bg-gray{% endif %}{% if outline %} btn-outline{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-    {{ Twig.if( "itemList is not empty" ) }}
+{{ Twig.if( "itemList is not empty" ) }}
+{{ Twig.set( "adTileCounter", "(currentPage - 1) * 60 + 1" ) }}
+
         <ul class="widget-inner row product-list grid">
             {{ Twig.for("item", "itemList") }}
-                <li class="col-{{ 12 / numberOfColumnsMobile }} col-md-{{ 12 / numberOfColumnsTablet }} col-lg-{{ 12 / numberOfColumnsDesktop }}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+                {{ Twig.for("tile", "adTiles") }}
+                    {{ Twig.if( "tile.position == adTileCounter and tile.public == 1" ) }}
+                        <li class="adTile biokinderCategoryItem col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-3" tileno="{{ Twig.print("adTileCounter") }}">
+                            <a {{ Twig.if( "tile.destinationUrl != '#'" ) }} href="{{ Twig.print("tile.destinationUrl") }}" {{ Twig.endif() }} class="adTile" tileid="{{ Twig.print("tile.id") }}" style="background-color:{{ Twig.print("tile.hexColor") }};background-image: url({{ Twig.print("tile.imageUrl") }});" aria-label="{{ Twig.print("tile.imageAlt") }}"></a>
+                        </li>
+                    {{ Twig.endif() }}
+                {{ Twig.endfor() }}
+
+                <li pos="{{ Twig.print("adTileCounter") }}" class="biokinderCategoryItem col-{{ 12 / numberOfColumnsMobile }} col-md-{{ 12 / numberOfColumnsTablet }} col-lg-{{ 12 / numberOfColumnsDesktop }}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                 {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
                     <intersect>
                         <category-item v-cloak
@@ -54,6 +64,7 @@
                         </template>
                     </intersect>
                 </li>
+                {{ Twig.set( "adTileCounter", "adTileCounter + 1" ) }}
             {{ Twig.endfor() }}
         </ul>
     {{ Twig.endif() }}
