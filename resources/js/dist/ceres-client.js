@@ -61428,11 +61428,18 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.directive("basket-item-sum", {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.string.split.js */ "./node_modules/core-js/modules/es.string.split.js");
+/* harmony import */ var core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+
+
 
 var BASKET_PREVIEW_COMPONENT_NAME = "basket-preview";
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.directive("toggle-basket-preview", {
+var BASKET_OPEN = "basket-open";
+vue__WEBPACK_IMPORTED_MODULE_2___default.a.directive("toggle-basket-preview", {
   bind: function bind(el) {
     el.addEventListener("click", function (event) {
       var timeout = 0; // trigger the lazyloading of the basket-preview
@@ -61444,7 +61451,13 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.directive("toggle-basket-preview", {
 
 
       setTimeout(function () {
-        document.body.classList.toggle("basket-open");
+        document.body.classList.toggle(BASKET_OPEN);
+
+        if (window.location.hash === "#" + BASKET_OPEN) {
+          history.replaceState(null, null, window.location.href.split("#")[0]);
+        } else {
+          window.location.hash = BASKET_OPEN;
+        }
       }, timeout);
       event.preventDefault();
       event.stopPropagation();

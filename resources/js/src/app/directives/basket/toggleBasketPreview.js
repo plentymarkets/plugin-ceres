@@ -1,6 +1,7 @@
 import Vue from "vue";
 
 const BASKET_PREVIEW_COMPONENT_NAME = "basket-preview";
+const BASKET_OPEN = "basket-open";
 
 Vue.directive("toggle-basket-preview",
     {
@@ -20,7 +21,15 @@ Vue.directive("toggle-basket-preview",
                 // postpone the opening for 100ms, to prevent markup jumps
                 setTimeout(() =>
                 {
-                    document.body.classList.toggle("basket-open");
+                    document.body.classList.toggle(BASKET_OPEN);
+                    if (window.location.hash === "#" + BASKET_OPEN)
+                    {
+                        history.replaceState(null, null, window.location.href.split("#")[0]);
+                    }
+                    else
+                    {
+                        window.location.hash = BASKET_OPEN;
+                    }
                 }, timeout);
 
                 event.preventDefault();
