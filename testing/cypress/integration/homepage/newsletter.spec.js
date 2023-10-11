@@ -4,6 +4,8 @@ context("Newsletter", () =>
     it("should register newsletter with first and last name", () =>
     {
         cy.visit("/newsletter-with-name");
+        cy.getByTestingAttr("cookie-bar-accept-all").click();
+
         cy.get(".widget-newsletter").should("exist");
         cy.intercept("POST", "/rest/io/customer/newsletter").as("nlRegister");
 
@@ -24,6 +26,8 @@ context("Newsletter", () =>
     it("should register newsletter", () =>
     {
         cy.visit("/newsletter");
+        cy.getByTestingAttr("cookie-bar-accept-all").click();
+
         cy.get(".widget-newsletter").should("exist");
         cy.intercept("POST", "/rest/io/customer/newsletter").as("nlRegister");
 
@@ -44,6 +48,8 @@ context("Newsletter", () =>
     it("should validate first and last name input", () =>
     {
         cy.visit("/newsletter-with-name");
+        cy.getByTestingAttr("cookie-bar-accept-all").click();
+
         cy.get(".widget-newsletter").should("exist");
         cy.getByTestingAttr("nl-first-name").type("Visit", { delay: 40 });
         cy.getByTestingAttr("nl-last-name").type("https://spamsite.de", { delay: 40 });
@@ -57,6 +63,8 @@ context("Newsletter", () =>
     it("should validate mail input", () =>
     {
         cy.visit("/newsletter-with-name");
+        cy.getByTestingAttr("cookie-bar-accept-all").click();
+
         cy.get(".widget-newsletter").should("exist");
         cy.getByTestingAttr("nl-first-name").type("Max", { delay: 40 });
         cy.getByTestingAttr("nl-last-name").type("Mustermann", { delay: 40 });
@@ -69,6 +77,8 @@ context("Newsletter", () =>
     it("should validate policy", () =>
     {
         cy.visit("/newsletter");
+        cy.getByTestingAttr("cookie-bar-accept-all").click();
+
         cy.get(".widget-newsletter").should("exist");
         cy.getByTestingAttr("nl-mail").type("max.mustermann@plentymarkets.com", { delay: 40 });
         cy.getByTestingAttr("nl-send").click();
@@ -91,8 +101,10 @@ context("Newsletter", () =>
     it("should unsubscribe", () =>
     {
         cy.visit("/newsletter-unsubscribe");
+        cy.getByTestingAttr("cookie-bar-accept-all").click();
+
         cy.intercept("DELETE", " /rest/io/customer/newsletter/**").as("unsubscribe");
-       
+
         cy.get(".widget-newsletter-unsubscribe").should("exist");
         cy.getByTestingAttr("unsub-nl-mail").type("max.mustermann@plentymarkets.com", { delay: 40 });
         cy.getByTestingAttr("unsub-nl-send").click();

@@ -4,6 +4,7 @@ context("Contact Page", () =>
     beforeEach(() =>
     {
         cy.visit("/kontakt/");
+        cy.getByTestingAttr("cookie-bar-accept-all").click();
     });
 
     it("should check for page title", () =>
@@ -18,7 +19,6 @@ context("Contact Page", () =>
 
     it("should check for Google Maps iFrame", () =>
     {
-        cy.getByTestingAttr("cookie-bar-accept-all").click();
         cy.get(".widget-google-maps iframe").its("0.contentDocument").should("exist");
     });
 

@@ -282,6 +282,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
  // the intersector component for not server side rendered views
 
 var IntersectorComponent = {
@@ -37082,7 +37087,7 @@ var render = function() {
       )
     : _vm.isIntersectorEnabled
     ? _c("intersector", [_vm._t("default")], 2)
-    : _vm._e()
+    : _c("div", [_vm._t("default")], 2)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -68648,7 +68653,7 @@ var state = function state() {
 
 var mutations = {
   setBasket: function setBasket(state, basket) {
-    if (state.data.id && JSON.stringify(basket) !== JSON.stringify(state.data)) {
+    if (state.data.sessionId && JSON.stringify(basket) !== JSON.stringify(state.data)) {
       document.dispatchEvent(new CustomEvent("afterBasketChanged", {
         detail: basket
       }));
