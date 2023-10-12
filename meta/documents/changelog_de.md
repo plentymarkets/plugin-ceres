@@ -6,6 +6,15 @@
 
 - Um die schema.org-Daten [SalesPrice](https://schema.org/SalePrice) und [ListPrice](https://schema.org/ListPrice) auf der Artikeldetailseite auszugeben ist es nicht mehr notwendig, an der Variante die Option **Grundpreis anzeigen** zu aktivieren.
 
+- Google Recaptcha wird nicht ohne Cookie Einwilligung geladen.
+
+### Hinzugefügt
+
+- Das Google Recaptcha Cookie hat neue Einstellungsoptionen:
+    - Setzen in einer bestimmten Cookie-Gruppe: Essenziell, Statistik, Marketing oder Externe Medien.
+    - "Als notwendigen Cookie registrieren": kann vom User nicht abgewählt werden.
+    - "Als Opt-Out registrieren": Cookie ist vorausgewählt und muss aktiv abgewählt werden.
+
 ### Behoben
 
 - Auf Geräten mit iOS Versionen <= 12.x wurden bei deaktiviertem SSR und Verwendung von ShopBuilder-Inhalten bestimmte Elemente nicht geladen. Wir möchten uns bei @KarolKski für den Beitrag bedanken.

@@ -6,6 +6,15 @@
 
 - To show the schema.org data for [SalesPrice](https://schema.org/SalePrice) and [ListPrice](https://schema.org/ListPrice), it's no longer necessary to activate the **Show unit price** option of the variation.
 
+- Google Recaptcha will not be loaded without cookie consent.
+
+### Added
+
+- The Google Recaptcha cookie has new setting options:
+     - Set in a specific cookie group: Essential, Statistical, Marketing or External Media.
+     - “Register as a necessary cookie”: cannot be deselected by the user.
+     - "Register as opt-out": Cookie is preselected and must be actively deselected.
+
 ### Fixed
 
 - On devices with iOS versions <= 12.x, certain elements were not loaded when SSR was disabled and ShopBuilder contents were used. We would like to thank @KarolKski for the contribution.
