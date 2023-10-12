@@ -140,7 +140,6 @@
                 "global.google_recaptcha_consentOptOut": {
                     "type": "checkBox",
                     "required": false,
-                    "isVisible": "!!global.google_recaptcha_consentNecessary",
                     "label": "Config.globalGoogleRecaptchaConsentOptOutLabel",
                     "options": {
                         "defaultValue": "false"
