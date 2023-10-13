@@ -28,7 +28,8 @@ class PerformanceStep extends Step
                 $this->generateSsrSection(),
                 $this->generateLoggingOptionsSection(),
                 $this->generatePerformanceSection(),
-                $this->generatePerformanceEventPropagationSection()
+                $this->generatePerformanceEventPropagationSection(),
+                $this->generateWebpConversionSection()
             ]
         ];
         
@@ -125,6 +126,26 @@ class PerformanceStep extends Step
                     "default" => true,
                     "options" => [
                         "name" => "Wizard.performanceEventPropagation"
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generateWebpConversionSection():array
+    {
+        return [
+            "title" => "Wizard.webpConversionTitle",
+            "description" => "Wizard.webpConversionDescription",
+            "form" => [
+                "performance_webpConversion" => [
+                    "type" => "toggle",
+                    "defaultValue" => false,
+                    "options" => [
+                        "name" =>  "Wizard.webpConversionName"
                     ]
                 ]
             ]
