@@ -12,9 +12,7 @@ Thanks a lot for being a part of our community!
 Whether you're planning to contribute a feature or fix a bug, we will have to assess your code and decide whether or not we can include it in a future release. We don't want you to invest a lot of time and effort into a contribution that we cannot accept. However, there are certain limitations to which contributions we can implement: In some cases, internal dependencies to the plentymarkets core may impede the inclusion of a feature; in other cases, our LTS (long-term support)
 promise for plentyShop LTS 5.0.X prevents us from accepting your contribution, because it may lead to breaking changes for external plugins.
 
-That is why you should talk to us before you begin working on a larger contribution to plentyShop LTS. We're offering regular office hours with our developers, in which you can present and discuss your ideas with our developers. Visit [our forum thread](https://forum.plentymarkets.com/t/regelmaessige-entwicklersprechstunden-regular-developers-talks/637295) for more information.
-
-If you can't make time for the office hours, just open a new thread [in the plentyShop category in the forum](https://forum.plentymarkets.com/c/plentyshop/). Tag the new post with the tag **Contribution**. Briefly explain what you're planning to do and how you would go about. Our developers will have a look at your input and contact you to discuss whether it's possible or not.
+That is why you should talk to us before you begin working on a larger contribution to plentyShop LTS. Just open a new thread [in the plentyShop category in the forum](https://forum.plentymarkets.com/c/plentyshop/). Tag the new post with the tag **Contribution**. Briefly explain what you're planning to do and how you would go about. Our developers will have a look at your input and contact you to discuss whether it's possible or not.
 
 ## Which contributions will not be accepted?
 
