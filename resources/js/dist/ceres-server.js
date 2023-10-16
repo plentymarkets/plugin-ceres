@@ -5005,11 +5005,17 @@ var gRecaptchaApiLoaded;
       });
     });
   },
+  computed: {
+    consentGroupKey: function consentGroupKey() {
+      var consentGroup = App.config.global.googleRecaptchaConsentGroup;
+      return consentGroup ? "".concat(consentGroup, ".reCaptcha") : 'media.reCaptcha';
+    }
+  },
   methods: {
     checkConsent: function checkConsent() {
       var _this2 = this;
 
-      Object(_helper_whenConsented__WEBPACK_IMPORTED_MODULE_2__["whenConsented"])(App.config.global.googleRecaptchaConsentGroup, function () {
+      Object(_helper_whenConsented__WEBPACK_IMPORTED_MODULE_2__["whenConsented"])(this.consentGroupKey, function () {
         _this2.createScript().then(function () {
           return _this2.initializeV3();
         });

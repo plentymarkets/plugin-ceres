@@ -30,12 +30,20 @@ export default {
         });
     },
 
+    computed: {
+        consentGroupKey() {
+            const consentGroup = App.config.global.googleRecaptchaConsentGroup;
+
+            return  consentGroup ?  `${consentGroup}.reCaptcha` : 'media.reCaptcha'
+        }
+    },
+
     methods:
     {
         checkConsent()
         {
             whenConsented(
-                App.config.global.googleRecaptchaConsentGroup,
+                this.consentGroupKey,
                 () =>
                 {
                     this.createScript().then(() => this.initializeV3());
