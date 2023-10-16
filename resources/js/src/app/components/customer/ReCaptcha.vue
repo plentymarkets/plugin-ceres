@@ -35,7 +35,7 @@ export default {
         checkConsent()
         {
             whenConsented(
-                "media.reCaptcha",
+                App.config.global.googleRecaptchaConsentGroup,
                 () =>
                 {
                     this.createScript().then(() => this.initializeV3());
