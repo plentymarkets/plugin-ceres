@@ -5009,7 +5009,7 @@ var gRecaptchaApiLoaded;
     checkConsent: function checkConsent() {
       var _this2 = this;
 
-      Object(_helper_whenConsented__WEBPACK_IMPORTED_MODULE_2__["whenConsented"])("media.reCaptcha", function () {
+      Object(_helper_whenConsented__WEBPACK_IMPORTED_MODULE_2__["whenConsented"])(App.config.global.googleRecaptchaConsentGroup, function () {
         _this2.createScript().then(function () {
           return _this2.initializeV3();
         });
