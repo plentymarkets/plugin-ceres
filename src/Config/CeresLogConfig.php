@@ -39,11 +39,6 @@ class CeresLogConfig extends PluginConfig
     public $performanceEventPropagation;
 
     /**
-     * @var bool $performanceWebpConversion Activates the WebP conversion.
-     */
-    public $performanceWebpConversion;
-
-    /**
      * @inheritDoc
      */
     protected function getPluginName() :string
@@ -76,6 +71,5 @@ class CeresLogConfig extends PluginConfig
         $this->checkSyntax = $this->getBooleanValue('log.check_syntax', true);
         $this->performanceSsr = $this->getBooleanValue('log.performance.ssr', false);
         $this->performanceEventPropagation = $this->getBooleanValue('log.performance.eventPropagation', true);
-        $this->performanceWebpConversion = $this->getBooleanValue('log.performance.webpConversion', false);
     }
 }
