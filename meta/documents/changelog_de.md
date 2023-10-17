@@ -6,6 +6,7 @@
 
 - Um die schema.org-Daten [SalesPrice](https://schema.org/SalePrice) und [ListPrice](https://schema.org/ListPrice) auf der Artikeleinzelansicht auszugeben, ist es nun nicht mehr notwendig, an der Variante die Option **Grundpreis anzeigen** zu aktivieren.
 - Google reCAPTCHA wird nicht mehr ohne die entsprechende Cookie-Einwilligung geladen.
+- Die Englische Übersetzung für den Übersetzungsschlüssel `checkoutBuyNow` wurde von "Order now" zu "Buy" geändert.
 
 ### Hinzugefügt
 

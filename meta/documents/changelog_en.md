@@ -6,6 +6,7 @@
 
 - To show the schema.org data for [SalesPrice](https://schema.org/SalePrice) and [ListPrice](https://schema.org/ListPrice), it is no longer necessary to activate the **Show unit price** setting of the variation.
 - Google reCAPTCHA will not be loaded without the corresponding cookie consent.
+- The English translation for the translation key `checkoutBuyNow` has been changed from "Order now" to "Buy".
 
 ### Added
 
