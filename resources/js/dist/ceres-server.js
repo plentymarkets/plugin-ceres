@@ -5697,7 +5697,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return salutations.filter(function (salutation) {
-        return salutation.key !== "company";
+        return salutation.key !== "company" && salutation.key !== "please select";
       });
     }
   },
@@ -5755,7 +5755,7 @@ __webpack_require__.r(__webpack_exports__);
       return true;
     },
     getIsGenderPersonal: function getIsGenderPersonal(gender) {
-      return ["male", "female", "diverse"].includes(gender);
+      return ["male", "female", "diverse", "please select"].includes(gender);
     }
   },
   watch: {
