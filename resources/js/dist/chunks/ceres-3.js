@@ -2056,7 +2056,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return salutations.filter(function (salutation) {
-        return salutation.key !== "company" && salutation.key !== "please select";
+        return salutation.key !== "company";
       });
     }
   },
