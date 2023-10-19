@@ -89,7 +89,7 @@ export default {
                 return salutations;
             }
 
-            return salutations.filter(salutation => salutation.key !== "company");
+            return salutations.filter(salutation => salutation.key !== "company" && salutation.key !== "please select");
         }
     },
 
@@ -141,7 +141,7 @@ export default {
 
         getIsGenderPersonal(gender)
         {
-            return ["male", "female", "diverse"].includes(gender);
+            return ["male", "female", "diverse", "please select"].includes(gender);
         }
     },
 
