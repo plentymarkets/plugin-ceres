@@ -10,7 +10,7 @@
 ### Behoben
 
 - Auf Geräten mit iOS Versionen <= 12.x wurden bei deaktiviertem SSR und Verwendung von ShopBuilder-Inhalten bestimmte Elemente nicht geladen. Wir möchten uns bei @KarolKski für den Beitrag bedanken.
-- Bei der Eingabe einer Adresse wurden durch Ändern der Anrede von, oder zu der Option "Bitte auswählen" alle anderen Adressfelder zurückgesetzt. Dies wurde behoben. 
+- Bei der Eingabe einer Adresse wurden durch Ändern der Anrede von der Option "Bitte auswählen" alle anderen Adressfelder zurückgesetzt. Dies wurde behoben. 
 
 ## v5.0.60 (2023-07-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.59...5.0.60" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
