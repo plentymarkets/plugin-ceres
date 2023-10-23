@@ -131,7 +131,7 @@ const actions =
             const btnClassName = event.submitter.className;
             const btnAdditionalInfo = "btn-additional-info";
 
-            if (event.target.tagName !== "FORM" || btnClassName.search(btnAdditionalInfo))
+            if (event.target.tagName !== "FORM" || btnClassName.includes(btnAdditionalInfo))
             {
                 return;
             }
