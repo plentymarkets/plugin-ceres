@@ -131,7 +131,7 @@ const actions =
             const btnClassName = event.submitter.className;
             const btnSendContactForm = "btn-send-contact-form";
 
-            if (event.target.tagName !== "FORM" || !btnClassName.includes(btnAdditionalInfo))
+            if (event.target.tagName !== "FORM" || !btnClassName.includes(btnSendContactForm))
             {
                 return;
             }
