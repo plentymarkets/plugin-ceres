@@ -128,7 +128,10 @@ const actions =
             event.preventDefault();
             event.stopPropagation();
 
-            if (event.target.tagName !== "FORM")
+            const btnClassName = event.submitter.className;
+            const btnAdditionalInfo = "btn-additional-info";
+
+            if (event.target.tagName !== "FORM" || btnClassName.search(btnAdditionalInfo))
             {
                 return;
             }
