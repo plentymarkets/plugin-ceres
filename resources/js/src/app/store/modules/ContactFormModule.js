@@ -129,7 +129,7 @@ const actions =
             event.stopPropagation();
 
             const btnClassName = event.submitter.className;
-            const btnAdditionalInfo = "btn-send-contact-form";
+            const btnSendContactForm = "btn-send-contact-form";
 
             if (event.target.tagName !== "FORM" || !btnClassName.includes(btnAdditionalInfo))
             {
