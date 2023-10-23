@@ -22,7 +22,7 @@
                 {%- if paddingClasses | length > 0 %} body-class="{{ paddingClasses }}"{% endif -%}
                 {%- if inlinePadding | length > 0 %} body-style="{{ inlinePadding }}"{% endif %}>
             <template #handle>
-                <button class="btn btn-icon btn-{{ appearance }} {{ buttonSize }}" {{ WidgetHelper.makeClickable(isPreview) }}>
+                <button class="btn-additional-info btn btn-icon btn-{{ appearance }} {{ buttonSize }}" {{ WidgetHelper.makeClickable(isPreview) }}>
                     <i class="fa fa-fw {{ icon }}"></i>
                 </button>
             </template>
