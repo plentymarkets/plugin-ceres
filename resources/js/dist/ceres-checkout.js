@@ -82962,9 +82962,9 @@ var actions = {
     event.preventDefault();
     event.stopPropagation();
     var btnClassName = event.submitter.className;
-    var btnAdditionalInfo = "btn-additional-info";
+    var btnSendContactForm = "btn-send-contact-form";
 
-    if (event.target.tagName !== "FORM" || btnClassName.includes(btnAdditionalInfo)) {
+    if (event.target.tagName !== "FORM" || !btnClassName.includes(btnSendContactForm)) {
       return;
     }
 

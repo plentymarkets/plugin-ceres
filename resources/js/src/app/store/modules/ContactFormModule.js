@@ -129,9 +129,9 @@ const actions =
             event.stopPropagation();
 
             const btnClassName = event.submitter.className;
-            const btnAdditionalInfo = "btn-additional-info";
+            const btnSendContactForm = "btn-send-contact-form";
 
-            if (event.target.tagName !== "FORM" || btnClassName.includes(btnAdditionalInfo))
+            if (event.target.tagName !== "FORM" || !btnClassName.includes(btnSendContactForm))
             {
                 return;
             }
