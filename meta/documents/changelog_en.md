@@ -1,5 +1,11 @@
 # Release Notes for plentyShop LTS
 
+## v5.0.62 (2023-10-24) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...5.0.62" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Changed
+
+- Added capability to toggle WebP conversion in the Assistant **Performance** step.
+
 ## v5.0.61 (2023-XX-XX) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.60...5.0.61" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Changed
