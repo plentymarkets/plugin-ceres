@@ -62129,10 +62129,10 @@ module.exports = __webpack_require__(/*! ./build */ "./node_modules/vue-template
 /*!*********************************************************!*\
   !*** ./node_modules/vue-template-compiler/package.json ***!
   \*********************************************************/
-/*! exports provided: name, version, description, main, unpkg, jsdelivr, browser, types, repository, keywords, author, license, bugs, homepage, dependencies, devDependencies, default */
+/*! exports provided: _args, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, browser, bugs, dependencies, description, devDependencies, homepage, jsdelivr, keywords, license, main, name, repository, types, unpkg, version, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"vue-template-compiler\",\"version\":\"2.6.12\",\"description\":\"template compiler for Vue 2.0\",\"main\":\"index.js\",\"unpkg\":\"browser.js\",\"jsdelivr\":\"browser.js\",\"browser\":\"browser.js\",\"types\":\"types/index.d.ts\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/vuejs/vue.git\"},\"keywords\":[\"vue\",\"compiler\"],\"author\":\"Evan You\",\"license\":\"MIT\",\"bugs\":{\"url\":\"https://github.com/vuejs/vue/issues\"},\"homepage\":\"https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#readme\",\"dependencies\":{\"he\":\"^1.1.0\",\"de-indent\":\"^1.0.2\"},\"devDependencies\":{\"vue\":\"file:../..\"}}");
+module.exports = JSON.parse("{\"_args\":[[\"vue-template-compiler@2.6.12\",\"/home/runner/work/plugin-ceres/plugin-ceres\"]],\"_from\":\"vue-template-compiler@2.6.12\",\"_id\":\"vue-template-compiler@2.6.12\",\"_inBundle\":false,\"_integrity\":\"sha512-OzzZ52zS41YUbkCBfdXShQTe69j1gQDZ9HIX8miuC9C3rBCk9wIRjLiZZLrmX9V+Ftq/YEyv1JaVr5Y/hNtByg==\",\"_location\":\"/vue-template-compiler\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"vue-template-compiler@2.6.12\",\"name\":\"vue-template-compiler\",\"escapedName\":\"vue-template-compiler\",\"rawSpec\":\"2.6.12\",\"saveSpec\":null,\"fetchSpec\":\"2.6.12\"},\"_requiredBy\":[\"/\"],\"_resolved\":\"https://registry.npmjs.org/vue-template-compiler/-/vue-template-compiler-2.6.12.tgz\",\"_spec\":\"2.6.12\",\"_where\":\"/home/runner/work/plugin-ceres/plugin-ceres\",\"author\":{\"name\":\"Evan You\"},\"browser\":\"browser.js\",\"bugs\":{\"url\":\"https://github.com/vuejs/vue/issues\"},\"dependencies\":{\"de-indent\":\"^1.0.2\",\"he\":\"^1.1.0\"},\"description\":\"template compiler for Vue 2.0\",\"devDependencies\":{\"vue\":\"file:../..\"},\"homepage\":\"https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#readme\",\"jsdelivr\":\"browser.js\",\"keywords\":[\"vue\",\"compiler\"],\"license\":\"MIT\",\"main\":\"index.js\",\"name\":\"vue-template-compiler\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/vuejs/vue.git\"},\"types\":\"types/index.d.ts\",\"unpkg\":\"browser.js\",\"version\":\"2.6.12\"}");
 
 /***/ }),
 
@@ -75810,7 +75810,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "e3650dfa"
+  "cd590b12"
   
 )
 
@@ -75877,7 +75877,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "68779aec"
+  "35f09196"
   
 )
 
@@ -75944,7 +75944,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "02968dca"
+  "d9b14c54"
   
 )
 
@@ -76011,7 +76011,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "02caa01d"
+  "43abbade"
   
 )
 
@@ -76078,7 +76078,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "26dc96a4"
+  "c6ddc3bc"
   
 )
 
@@ -76145,7 +76145,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "a6951d1a"
+  "5c436a7f"
   
 )
 
@@ -76212,7 +76212,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "63f382fd"
+  "13817c09"
   
 )
 
@@ -76279,7 +76279,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4f0633a0"
+  "a1e10d88"
   
 )
 
@@ -76346,7 +76346,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4f4a5858"
+  "9a61c138"
   
 )
 
@@ -76413,7 +76413,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "05e66e27"
+  "fbbf239a"
   
 )
 
@@ -76480,7 +76480,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "390eb533"
+  "4414b6a7"
   
 )
 
@@ -76547,7 +76547,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "b2864c7c"
+  "374da5ce"
   
 )
 
@@ -76613,7 +76613,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2045cf5a"
+  "f2694264"
   
 )
 
@@ -76662,7 +76662,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "8ca1359a"
+  "2034f4a7"
   
 )
 
@@ -76729,7 +76729,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2dc728ac"
+  "3957dab8"
   
 )
 
@@ -76796,7 +76796,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0ccbfc7c"
+  "5cb9c188"
   
 )
 
@@ -76863,7 +76863,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "26bebcfd"
+  "56eccd1e"
   
 )
 
@@ -76929,7 +76929,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "28a87c95"
+  "789641a1"
   
 )
 
@@ -76977,7 +76977,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "32adf4a0"
+  "fac88ca8"
   
 )
 
@@ -77026,7 +77026,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "41061fde"
+  "3cc5ee52"
   
 )
 
@@ -77093,7 +77093,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "50483926"
+  "7cc8609a"
   
 )
 
@@ -77160,7 +77160,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "31243e2e"
+  "83ff1816"
   
 )
 
@@ -77227,7 +77227,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "22dd7c30"
+  "26d1623c"
   
 )
 
@@ -77294,7 +77294,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "407724b2"
+  "1ff5c484"
   
 )
 
@@ -77361,7 +77361,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3711d2c7"
+  "bd839c5a"
   
 )
 
@@ -77428,7 +77428,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2374a22e"
+  "6fce645d"
   
 )
 
@@ -77498,7 +77498,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   injectStyles,
   null,
-  "89f9a924"
+  "dcd4830c"
   
 )
 
@@ -77565,7 +77565,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "05108c38"
+  "78009558"
   
 )
 
@@ -77632,7 +77632,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5bcc04b8"
+  "2207c2b0"
   
 )
 
@@ -77699,7 +77699,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "c7da2a18"
+  "b1ce2730"
   
 )
 
@@ -77766,7 +77766,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2a516207"
+  "b64b850a"
   
 )
 
@@ -77833,7 +77833,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "cc76117a"
+  "2a55c34f"
   
 )
 
@@ -77900,7 +77900,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "25666e08"
+  "295a5414"
   
 )
 
@@ -77967,7 +77967,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2c7586bc"
+  "4b50b116"
   
 )
 
@@ -78034,7 +78034,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2f8f1f11"
+  "0aeea185"
   
 )
 
@@ -78101,7 +78101,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "330bc276"
+  "c58fbcfc"
   
 )
 
@@ -78168,7 +78168,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "cd280150"
+  "29fccb64"
   
 )
 
@@ -78235,7 +78235,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "718009ae"
+  "48c8b09d"
   
 )
 
@@ -78302,7 +78302,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0a756b50"
+  "8f7f7078"
   
 )
 
@@ -78369,7 +78369,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "20a3d9e6"
+  "ea5f8e1c"
   
 )
 
@@ -78436,7 +78436,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5dce2206"
+  "feb22fee"
   
 )
 
@@ -78503,7 +78503,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "9f10012a"
+  "0065c477"
   
 )
 
@@ -78570,7 +78570,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "01627d14"
+  "a2468afc"
   
 )
 
@@ -78637,7 +78637,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4170fd59"
+  "3d30cbcd"
   
 )
 
@@ -78704,7 +78704,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "829b7fae"
+  "d5765996"
   
 )
 
@@ -78771,7 +78771,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "29e778f2"
+  "3267dc0a"
   
 )
 
@@ -78838,7 +78838,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "a6635c8c"
+  "0e59c62e"
   
 )
 
@@ -78905,7 +78905,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "898af718"
+  "2566e380"
   
 )
 
@@ -78972,7 +78972,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3b51c8bc"
+  "db52f5d4"
   
 )
 
@@ -79039,7 +79039,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "46807058"
+  "6fedb468"
   
 )
 
@@ -79106,7 +79106,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6d1834ef"
+  "1ca62dfb"
   
 )
 
@@ -79173,7 +79173,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "747d4a56"
+  "224826ca"
   
 )
 
@@ -79240,7 +79240,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2ede0110"
+  "6a19b4ec"
   
 )
 
@@ -79307,7 +79307,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "45cb4a9e"
+  "4e4badb6"
   
 )
 
@@ -79374,7 +79374,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4d7a9f0d"
+  "6bee3719"
   
 )
 
@@ -79441,7 +79441,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "28409fb8"
+  "7c707c30"
   
 )
 
@@ -79508,7 +79508,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "41cf7730"
+  "d0ecb788"
   
 )
 
@@ -79575,7 +79575,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "42dbbd4e"
+  "77371a7c"
   
 )
 
@@ -79642,7 +79642,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "671eaa10"
+  "b05fa528"
   
 )
 
@@ -79709,7 +79709,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "b5b49830"
+  "1fae8f5c"
   
 )
 
@@ -79776,7 +79776,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "16fcd1c8"
+  "00f0cee0"
   
 )
 
@@ -79843,7 +79843,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "f6c6c356"
+  "5b2f3161"
   
 )
 
@@ -79910,7 +79910,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "07fe0d93"
+  "5db83a9f"
   
 )
 
@@ -79977,7 +79977,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "76b4ccb8"
+  "26310e18"
   
 )
 
@@ -80044,7 +80044,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "17af4b73"
+  "442f72e7"
   
 )
 
@@ -80111,7 +80111,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "46f501c4"
+  "16d81bd0"
   
 )
 
@@ -80178,7 +80178,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5914f681"
+  "641af7f5"
   
 )
 
@@ -80245,7 +80245,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6a7980ac"
+  "410c13b8"
   
 )
 
@@ -80312,7 +80312,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5ee7aff2"
+  "2df9150a"
   
 )
 
@@ -80379,7 +80379,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "24b6a3cc"
+  "66e7cc40"
   
 )
 
@@ -80446,7 +80446,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4e15077f"
+  "49d4d5f3"
   
 )
 
@@ -80513,7 +80513,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d9fc2d36"
+  "6adba9d9"
   
 )
 
@@ -80580,7 +80580,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3c403961"
+  "179fbbd5"
   
 )
 
@@ -80647,7 +80647,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3b8299de"
+  "67d9342c"
   
 )
 
@@ -80714,7 +80714,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "a566070c"
+  "5b17d8ee"
   
 )
 
@@ -80781,7 +80781,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7c5eaedc"
+  "0ecea230"
   
 )
 
@@ -80848,7 +80848,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d20e0eae"
+  "da8e71c6"
   
 )
 
@@ -80915,7 +80915,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "cfecef52"
+  "d86d526a"
   
 )
 
@@ -80982,7 +80982,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "8f349092"
+  "874cc47a"
   
 )
 
@@ -81049,7 +81049,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5e66e96d"
+  "76270e3e"
   
 )
 
@@ -81116,7 +81116,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1f39035a"
+  "1468d334"
   
 )
 
@@ -81183,7 +81183,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "25b7eaf3"
+  "14c9f602"
   
 )
 
@@ -81250,7 +81250,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "34494124"
+  "4c60eee2"
   
 )
 
@@ -81317,7 +81317,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6932261e"
+  "7af4e5fd"
   
 )
 
@@ -81384,7 +81384,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7b5df1ac"
+  "f33819c0"
   
 )
 
@@ -81451,7 +81451,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "314f2221"
+  "9a5050d6"
   
 )
 
@@ -88995,32 +88995,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.slice.js */ "./node_modules/core-js/modules/es.array.slice.js");
 /* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.join.js */ "./node_modules/core-js/modules/es.array.join.js");
-/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.promise.js */ "./node_modules/core-js/modules/es.promise.js");
-/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.array.from.js */ "./node_modules/core-js/modules/es.array.from.js");
-/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.string.iterator.js */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.symbol.description.js */ "./node_modules/core-js/modules/es.symbol.description.js");
-/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator.js */ "./node_modules/core-js/modules/es.symbol.iterator.js");
-/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.array.iterator.js */ "./node_modules/core-js/modules/es.array.iterator.js");
-/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator.js */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
-/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var _helper_serializeForm__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../helper/serializeForm */ "./resources/js/src/app/helper/serializeForm.js");
-/* harmony import */ var _helper_strings__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../helper/strings */ "./resources/js/src/app/helper/strings.js");
-/* harmony import */ var _helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../helper/executeReCaptcha */ "./resources/js/src/app/helper/executeReCaptcha.js");
+/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.includes.js */ "./node_modules/core-js/modules/es.array.includes.js");
+/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.string.includes.js */ "./node_modules/core-js/modules/es.string.includes.js");
+/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.join.js */ "./node_modules/core-js/modules/es.array.join.js");
+/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.promise.js */ "./node_modules/core-js/modules/es.promise.js");
+/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.array.from.js */ "./node_modules/core-js/modules/es.array.from.js");
+/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.string.iterator.js */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.symbol.description.js */ "./node_modules/core-js/modules/es.symbol.description.js");
+/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator.js */ "./node_modules/core-js/modules/es.symbol.iterator.js");
+/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.array.iterator.js */ "./node_modules/core-js/modules/es.array.iterator.js");
+/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator.js */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
+/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
+/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+/* harmony import */ var _helper_serializeForm__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../helper/serializeForm */ "./resources/js/src/app/helper/serializeForm.js");
+/* harmony import */ var _helper_strings__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../helper/strings */ "./resources/js/src/app/helper/strings.js");
+/* harmony import */ var _helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../helper/executeReCaptcha */ "./resources/js/src/app/helper/executeReCaptcha.js");
+
+
 
 
 
@@ -89074,9 +89080,9 @@ function readFormOptions(form, formData) {
         switch (element.dataset.mail) {
           case "cc":
             if (element.value) {
-              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_17__["isMail"])(element.value)) {
+              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(element.value)) {
                 formOptions.cc.push(element.value);
-              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_17__["isMail"])(formData[element.value].value)) {
+              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(formData[element.value].value)) {
                 formOptions.cc.push(formData[element.value].value);
               }
             }
@@ -89085,9 +89091,9 @@ function readFormOptions(form, formData) {
 
           case "bcc":
             if (element.value) {
-              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_17__["isMail"])(element.value)) {
+              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(element.value)) {
                 formOptions.bcc.push(element.value);
-              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_17__["isMail"])(formData[element.value].value)) {
+              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(formData[element.value].value)) {
                 formOptions.bcc.push(formData[element.value].value);
               }
             }
@@ -89096,9 +89102,9 @@ function readFormOptions(form, formData) {
 
           case "reply-to-address":
             if (element.value) {
-              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_17__["isMail"])(element.value)) {
+              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(element.value)) {
                 formOptions.replyTo.mail = element.value;
-              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_17__["isMail"])(formData[element.value].value)) {
+              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(formData[element.value].value)) {
                 formOptions.replyTo.mail = formData[element.value].value;
               }
             }
@@ -89162,26 +89168,28 @@ var actions = {
   sendContactForm: function sendContactForm(state, event) {
     event.preventDefault();
     event.stopPropagation();
+    var btnClassName = event.submitter.className;
+    var btnSendContactForm = "btn-send-contact-form";
 
-    if (event.target.tagName !== "FORM") {
+    if (event.target.tagName !== "FORM" || !btnClassName.includes(btnSendContactForm)) {
       return;
     }
 
     var recaptchaEl = event.target.querySelector("[data-recaptcha]");
 
     if (App.config.global.googleRecaptchaApiKey && (!window.grecaptcha || !recaptchaEl)) {
-      _services_NotificationService__WEBPACK_IMPORTED_MODULE_14__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_15__["default"].translate("Ceres::Template.contactAcceptRecaptchaCookie"));
+      _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactAcceptRecaptchaCookie"));
       return;
     }
 
-    Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_18__["executeReCaptcha"])(event.target).then(function (recaptchaResponse) {
-      _services_ValidationService__WEBPACK_IMPORTED_MODULE_13__["default"].validate(event.target).done(function () {
+    Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_20__["executeReCaptcha"])(event.target).then(function (recaptchaResponse) {
+      _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__["default"].validate(event.target).done(function () {
         disableForm(event.target, true);
-        var formData = Object(_helper_serializeForm__WEBPACK_IMPORTED_MODULE_16__["serializeForm"])(event.target);
+        var formData = Object(_helper_serializeForm__WEBPACK_IMPORTED_MODULE_18__["serializeForm"])(event.target);
         var formOptions = readFormOptions(event.target, formData);
         sendFile(event, recaptchaResponse).then(function (response) {
           resetRecaptcha(recaptchaEl);
-          Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_18__["executeReCaptcha"])(event.target).then(function (recaptchaToken2) {
+          Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_20__["executeReCaptcha"])(event.target).then(function (recaptchaToken2) {
             ApiService.post("/rest/io/customer/contact/mail", {
               data: formData,
               recipient: formOptions.recipient,
@@ -89195,21 +89203,21 @@ var actions = {
               resetRecaptcha(recaptchaEl);
               event.target.reset();
               disableForm(event.target, false);
-              _services_NotificationService__WEBPACK_IMPORTED_MODULE_14__["default"].success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_15__["default"].translate("Ceres::Template.contactSendSuccess")).closeAfter(3000);
+              _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactSendSuccess")).closeAfter(3000);
               document.dispatchEvent(new CustomEvent("contactFormSent", {
                 detail: formData
               }));
             }).fail(function (response) {
               resetRecaptcha(recaptchaEl);
               disableForm(event.target, false);
-              _services_NotificationService__WEBPACK_IMPORTED_MODULE_14__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_15__["default"].translate("Ceres::Template.contactSendFail"));
+              _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactSendFail"));
             });
           });
         }, function (response) {
           resetRecaptcha(recaptchaEl);
           disableForm(event.target, false);
-          response.error.message = response.error.message || _services_TranslationService__WEBPACK_IMPORTED_MODULE_15__["default"].translate("Ceres::Template.contactFileUploadFail");
-          _services_NotificationService__WEBPACK_IMPORTED_MODULE_14__["default"].error(response.error);
+          response.error.message = response.error.message || _services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactFileUploadFail");
+          _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(response.error);
         });
       }).fail(function (invalidFields) {
         resetRecaptcha(recaptchaEl);
@@ -89221,7 +89229,7 @@ var actions = {
         try {
           for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
             var field = _step2.value;
-            fieldNames.push(Object(_helper_serializeForm__WEBPACK_IMPORTED_MODULE_16__["getLabel"])(field));
+            fieldNames.push(Object(_helper_serializeForm__WEBPACK_IMPORTED_MODULE_18__["getLabel"])(field));
           }
         } catch (err) {
           _iterator2.e(err);
@@ -89229,13 +89237,13 @@ var actions = {
           _iterator2.f();
         }
 
-        _services_ValidationService__WEBPACK_IMPORTED_MODULE_13__["default"].markInvalidFields(invalidFields, "error");
-        _services_NotificationService__WEBPACK_IMPORTED_MODULE_14__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_15__["default"].translate("Ceres::Template.checkoutCheckAddressFormFields", {
+        _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__["default"].markInvalidFields(invalidFields, "error");
+        _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.checkoutCheckAddressFormFields", {
           fields: fieldNames.join(", ")
         }));
       });
     }).catch(function (error) {
-      _services_NotificationService__WEBPACK_IMPORTED_MODULE_14__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_15__["default"].translate("Ceres::Template.contactReCaptchaFailed"));
+      _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactReCaptchaFailed"));
     });
   }
 };
