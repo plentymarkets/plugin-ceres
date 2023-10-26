@@ -2,6 +2,10 @@
 
 ## v5.0.61 (2023-10-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.60...5.0.61" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
+### TODO
+
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+
 ### Geändert
 
 - Um die schema.org-Daten [SalesPrice](https://schema.org/SalePrice) und [ListPrice](https://schema.org/ListPrice) auf der Artikeleinzelansicht auszugeben, ist es nun nicht mehr notwendig, an der Variante die Option **Grundpreis anzeigen** zu aktivieren.

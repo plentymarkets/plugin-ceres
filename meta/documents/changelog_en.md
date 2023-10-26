@@ -2,6 +2,10 @@
 
 ## v5.0.61 (2023-10-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.60...5.0.61" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
+### TODO
+
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
+
 ### Changed
 
 - To show the schema.org data for [SalesPrice](https://schema.org/SalePrice) and [ListPrice](https://schema.org/ListPrice), it is no longer necessary to activate the **Show unit price** setting of the variation.
