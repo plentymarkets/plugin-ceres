@@ -5,6 +5,7 @@
 ### TODO
 
 - Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+- Nachdem Inhalte durch **Inhalte neu generieren** erneuert wurden muss für dieses Update einmalig zusätzlich der Content Cache invalidiert werden. Die Schaltfläche zum invalidieren findet man unter **Einrichtung » Mandant » Mandant wählen » Webshop » ShopBooster**.
 
 ### Geändert
 

@@ -5,6 +5,7 @@
 ### TODO
 
 - Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
+- After content has been renewed by **Regenerate contents**, the content cache must also be invalidated once for this update. The invalidate button can be found under **Setup » Client » Select client » Webshop » ShopBooster**. 
 
 ### Changed
 
