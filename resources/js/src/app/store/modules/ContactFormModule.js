@@ -128,7 +128,10 @@ const actions =
             event.preventDefault();
             event.stopPropagation();
 
-            if (event.target.tagName !== "FORM")
+            const btnClassName = event.submitter.className;
+            const btnSendContactForm = "btn-send-contact-form";
+
+            if (event.target.tagName !== "FORM" || !btnClassName.includes(btnSendContactForm))
             {
                 return;
             }
