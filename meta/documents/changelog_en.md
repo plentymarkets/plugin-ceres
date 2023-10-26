@@ -4,8 +4,16 @@
 
 ### Changed
 
-- To show the schema.org data for [SalesPrice](https://schema.org/SalePrice) and [ListPrice](https://schema.org/ListPrice), it's no longer necessary to activate the **Show unit price** option of the variation.
+- To show the schema.org data for [SalesPrice](https://schema.org/SalePrice) and [ListPrice](https://schema.org/ListPrice), it is no longer necessary to activate the **Show unit price** setting of the variation.
+- Google reCAPTCHA will not be loaded without the corresponding cookie consent.
 - The English translation for the translation key `checkoutBuyNow` has been changed from "Order now" to "Buy".
+
+### Added
+
+- The Google reCAPTCHA cookie has the following new settings:
+     - Set in a specific cookie group: Essential, Statistics, Marketing or External Media.
+     - “Register as a necessary cookie”: The cookie cannot be deselected by the user.
+     - "Register as opt-out": Cookie is preselected and must be actively deselected.
 
 ### Fixed
 

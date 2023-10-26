@@ -103,6 +103,48 @@
                         "defaultValue": 0.5
                     }
                 },
+                "global.google_recaptcha_consentGroup": {
+                    "type": "selectBox",
+                    "required": false,
+                    "label": "Config.globalGoogleRecaptchaConsentGroupLabel",
+                    "options": {
+                        "defaultValue": "media",
+                        "selectBoxValues": [
+                            {
+                                "value": "necessary",
+                                "caption": "Config.globalGoogleRecaptchaConsentGroupNecessary"
+                            },
+                            {
+                                "value": "tracking",
+                                "caption": "Config.globalGoogleRecaptchaConsentGroupTracking"
+                            },
+                            {
+                                "value": "marketing",
+                                "caption": "Config.globalGoogleRecaptchaConsentGroupMarketing"
+                            },
+                            {
+                                "value": "media",
+                                "caption": "Config.globalGoogleRecaptchaConsentGroupMedia"
+                            }
+                        ]
+                    }
+                },
+                "global.google_recaptcha_consentNecessary": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.globalGoogleRecaptchaConsentNecessaryLabel",
+                    "options": {
+                        "defaultValue": "false"
+                    }
+                },
+                "global.google_recaptcha_consentOptOut": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.globalGoogleRecaptchaConsentOptOutLabel",
+                    "options": {
+                        "defaultValue": "false"
+                    }
+                },
                 "global.user_data_hash_max_age": {
                     "type": "selectBox",
                     "required": false,
@@ -4089,7 +4131,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityBackOrder"
                                         }
@@ -4142,7 +4185,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }
@@ -4195,7 +4239,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }
@@ -4248,7 +4293,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }
@@ -4301,7 +4347,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }
@@ -4354,7 +4401,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }
@@ -4407,7 +4455,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }
@@ -4460,7 +4509,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }
@@ -4513,7 +4563,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }
@@ -4566,7 +4617,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }

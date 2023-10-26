@@ -6,9 +6,9 @@ function _call(callback)
     }
 }
 
-export function whenConsented(key, onConsent, onDecline)
+export function whenConsented(key, onConsent, onDecline, forceConsent = false)
 {
-    if (!App.config.global.blockCookies || App.isShopBuilder)
+    if ((!App.config.global.blockCookies && !forceConsent) || App.isShopBuilder)
     {
         _call(onConsent);
         return;

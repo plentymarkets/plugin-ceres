@@ -2637,16 +2637,22 @@ var gRecaptchaApiLoaded;
       });
     });
   },
+  computed: {
+    consentGroupKey: function consentGroupKey() {
+      var consentGroup = App.config.global.googleRecaptchaConsentGroup;
+      return consentGroup ? "".concat(consentGroup, ".reCaptcha") : 'media.reCaptcha';
+    }
+  },
   methods: {
     checkConsent: function checkConsent() {
       var _this2 = this;
 
-      Object(_helper_whenConsented__WEBPACK_IMPORTED_MODULE_2__["whenConsented"])("media.reCaptcha", function () {
+      Object(_helper_whenConsented__WEBPACK_IMPORTED_MODULE_2__["whenConsented"])(this.consentGroupKey, function () {
         _this2.createScript().then(function () {
           return _this2.initializeV3();
         });
       }, function () {// remove recaptcha when previously consented
-      });
+      }, true);
     },
     createScript: function createScript() {
       var _this3 = this;
@@ -78764,7 +78770,9 @@ function _call(callback) {
 }
 
 function whenConsented(key, onConsent, onDecline) {
-  if (!App.config.global.blockCookies || App.isShopBuilder) {
+  var forceConsent = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
+  if (!App.config.global.blockCookies && !forceConsent || App.isShopBuilder) {
     _call(onConsent);
 
     return;

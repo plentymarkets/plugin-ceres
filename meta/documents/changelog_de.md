@@ -4,8 +4,16 @@
 
 ### Geändert
 
-- Um die schema.org-Daten [SalesPrice](https://schema.org/SalePrice) und [ListPrice](https://schema.org/ListPrice) auf der Artikeldetailseite auszugeben ist es nicht mehr notwendig, an der Variante die Option **Grundpreis anzeigen** zu aktivieren.
+- Um die schema.org-Daten [SalesPrice](https://schema.org/SalePrice) und [ListPrice](https://schema.org/ListPrice) auf der Artikeleinzelansicht auszugeben, ist es nun nicht mehr notwendig, an der Variante die Option **Grundpreis anzeigen** zu aktivieren.
+- Google reCAPTCHA wird nicht mehr ohne die entsprechende Cookie-Einwilligung geladen.
 - Die Englische Übersetzung für den Übersetzungsschlüssel `checkoutBuyNow` wurde von "Order now" zu "Buy" geändert.
+
+### Hinzugefügt
+
+- Das Google reCAPTCHA Cookie hat neue Einstellungsoptionen:
+    - Setzen in einer bestimmten Cookie-Gruppe: Essenziell, Statistik, Marketing oder Externe Medien.
+    - "Als notwendigen Cookie registrieren": Das Cookie kann vom User nicht abgewählt werden.
+    - "Als Opt-Out registrieren": Cookie ist vorausgewählt und muss aktiv abgewählt werden.
 
 ### Behoben
 
