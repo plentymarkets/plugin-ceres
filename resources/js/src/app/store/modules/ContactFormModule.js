@@ -128,9 +128,7 @@ const actions =
             event.preventDefault();
             event.stopPropagation();
 
-            const submitType = "submit";
-
-            if (event.target.tagName !== "FORM" || event.submitter.type !== submitType)
+            if (event.target.tagName !== "FORM" || event.submitter.type !== "submit")
             {
                 return;
             }
