@@ -1,11 +1,10 @@
 # Release Notes für plentyShop LTS
 
-## v5.0.61 (2023-10-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.60...5.0.61" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.61 (2023-10-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.60...5.0.61" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
 
 - Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
-- Nachdem Inhalte durch **Inhalte neu generieren** erneuert wurden muss für dieses Update einmalig zusätzlich der Content Cache invalidiert werden. Die Schaltfläche zum invalidieren findet man unter **Einrichtung » Mandant » Mandant wählen » Webshop » ShopBooster**.
 
 ### Geändert
 
