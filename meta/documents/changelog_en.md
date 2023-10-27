@@ -1,6 +1,11 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.61 (2023-XX-XX) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.60...5.0.61" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.61 (2023-10-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.60...5.0.61" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
+- After content has been renewed by **Regenerate contents**, the content cache must also be invalidated once for this update. The invalidate button can be found under **Setup » Client » Select client » Webshop » ShopBooster**. 
 
 ### Changed
 
@@ -11,9 +16,9 @@
 ### Added
 
 - The Google reCAPTCHA cookie has the following new settings:
-     - Set in a specific cookie group: Essential or External Media.
-     - “Register as a necessary cookie”: The cookie cannot be deselected by the user.
-     - "Register as opt-out": Cookie is preselected and must be actively deselected.
+    - Set in a specific cookie group: Essential or External Media.
+    - "Register as a necessary cookie": The cookie cannot be deselected by the user.
+    - "Register as opt-out": Cookie is preselected and must be actively deselected.
 
 ### Fixed
 
@@ -25,6 +30,9 @@
 
 - In plentyShop LTS 5.0.61 we made changes to template files which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
 - [resources/views/Widgets/Form/MailFormWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3449/files#diff-0ab65328e036fc01116c458f2462d07bddf7a652c3ebe2e62c61538bf10e4f37)
+- [resources/js/src/app/components/common/Intersect.vue](https://github.com/plentymarkets/plugin-ceres/pull/3438/files#diff-035b8ec0b7f59651b154b66fc84d9a44a6af8525fe4f03e403b0be46e4ab2750)
+- [resources/views/Item/SingleItemWrapper.twig](https://github.com/plentymarkets/plugin-ceres/pull/3439/files#diff-192a8837dba88964356b7ecd49003fe083ed719e2c601b9623e6dd4b24be9326)
+- [resources/views/Widgets/Customer/ChangePasswordWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3445/files#diff-bb8668e53e2addea7047614e5fd28d1b66cfa20e91d445dd8d1b9911ca21e43e)
 
 ## v5.0.60 (2023-07-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.59...5.0.60" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
