@@ -1,11 +1,10 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.61 (2023-10-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.60...5.0.61" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.61 (2023-10-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.60...5.0.61" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
 
 - Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
-- After content has been renewed by **Regenerate contents**, the content cache must also be invalidated once for this update. The invalidate button can be found under **Setup » Client » Select client » Webshop » ShopBooster**. 
 
 ### Changed
 
