@@ -115,14 +115,6 @@
                                 "caption": "Config.globalGoogleRecaptchaConsentGroupNecessary"
                             },
                             {
-                                "value": "tracking",
-                                "caption": "Config.globalGoogleRecaptchaConsentGroupTracking"
-                            },
-                            {
-                                "value": "marketing",
-                                "caption": "Config.globalGoogleRecaptchaConsentGroupMarketing"
-                            },
-                            {
                                 "value": "media",
                                 "caption": "Config.globalGoogleRecaptchaConsentGroupMedia"
                             }
