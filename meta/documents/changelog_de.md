@@ -16,7 +16,7 @@
 ### Hinzugefügt
 
 - Das Google reCAPTCHA Cookie hat neue Einstellungsoptionen:
-    - Setzen in einer bestimmten Cookie-Gruppe: Essenziell, Statistik, Marketing oder Externe Medien.
+    - Setzen in einer bestimmten Cookie-Gruppe: Essenziell oder Externe Medien.
     - "Als notwendigen Cookie registrieren": Das Cookie kann vom User nicht abgewählt werden.
     - "Als Opt-Out registrieren": Cookie ist vorausgewählt und muss aktiv abgewählt werden.
 
