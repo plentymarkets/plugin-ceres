@@ -11,7 +11,7 @@
 ### Added
 
 - The Google reCAPTCHA cookie has the following new settings:
-     - Set in a specific cookie group: Essential, Statistics, Marketing or External Media.
+     - Set in a specific cookie group: Essential or External Media.
      - “Register as a necessary cookie”: The cookie cannot be deselected by the user.
      - "Register as opt-out": Cookie is preselected and must be actively deselected.
 
