@@ -1184,6 +1184,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1233,6 +1243,34 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         from: shopCountry,
         to: currentShippingCountry
       });
+    },
+    rrpCalc: function rrpCalc() {
+      return this.basket.itemSum + this.youSave;
+    },
+    youSave: function youSave() {
+      var youSave = 0;
+
+      var _iterator = _createForOfIteratorHelper(this.basketItems),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var basketItem = _step.value;
+          var itemQuantity = basketItem.quantity;
+          var itemPrice = basketItem.price;
+          var rrp = basketItem.variation.data.prices.rrp.price.value || 0;
+
+          if (rrp > itemPrice) {
+            youSave += (rrp - itemPrice) * itemQuantity;
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      return youSave;
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_17__["mapState"])({
     basket: function basket(state) {
@@ -1273,14 +1311,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.displayedPropertiesWithoutTax = [];
       this.displayedProperties = [];
 
-      var _iterator = _createForOfIteratorHelper(newBasketItems),
-          _step;
+      var _iterator2 = _createForOfIteratorHelper(newBasketItems),
+          _step2;
 
       try {
         var _loop = function _loop() {
           var _basketItem$variation;
 
-          var basketItem = _step.value;
+          var basketItem = _step2.value;
           (_basketItem$variation = basketItem.variation.data.properties) === null || _basketItem$variation === void 0 ? void 0 : _basketItem$variation.forEach(function (property) {
             if (_this.isInBasketItemOrderParams(basketItem, property) && (Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_18__["isAdditionalCosts"])(property) || !Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_18__["hasVat"])(property) && App.useVariationOrderProperties)) {
               var existsIndisplayedProperties = _this.displayedProperties.find(function (entry) {
@@ -1309,13 +1347,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           });
         };
 
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
           _loop();
         }
       } catch (err) {
-        _iterator.e(err);
+        _iterator2.e(err);
       } finally {
-        _iterator.f();
+        _iterator2.f();
       }
 
       this.displayedPropertiesWithoutTax.forEach(function (entry) {
@@ -1873,6 +1911,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -1917,6 +1960,9 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
     image: function image() {
       var itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
       return this.$options.filters.itemImage(itemImages);
+    },
+    hasCrossPrice: function hasCrossPrice() {
+      return this.basketItem.variation.data.prices.rrp && this.basketItem.variation.data.prices.rrp.price.value > this.basketItem.variation.data.prices.default.unitPrice.value;
     },
     altText: function altText() {
       var images = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
@@ -42251,7 +42297,7 @@ var render = function() {
                           _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
                           ")\n                    "
                       ) +
-                      "</dt><dd>" +
+                      '</dt><dd class="k1">' +
                       _vm._ssrEscape(
                         "\n                        " +
                           _vm._s(
@@ -42280,13 +42326,13 @@ var render = function() {
                           ) +
                           ")\n                "
                       ) +
-                      "</dt><dd>" +
+                      '</dt><dd class="k2">' +
                       _vm._ssrEscape(
                         "\n                    " +
                           _vm._s(
                             _vm._f("currency")(
                               _vm.calculateBaseValue(
-                                _vm.basket.itemSum,
+                                _vm.rrpCalc,
                                 _vm.basket.basketRebate
                               )
                             )
@@ -42308,7 +42354,7 @@ var render = function() {
                           ">\n                     <i>" +
                           _vm._ssrEscape("davon " + _vm._s(property.name)) +
                           "</i></dt><dd" +
-                          _vm._ssrClass("muted-properties", {
+                          _vm._ssrClass("muted-properties k3", {
                             "font-weight-bold": _vm.showNetPrices
                           }) +
                           "><i>" +
@@ -42332,7 +42378,7 @@ var render = function() {
                       ) +
                       "</dt>" +
                       (!_vm.showNetPrices
-                        ? '<dd class="rebate-hint">' +
+                        ? '<dd class="k4 rebate-hint">' +
                           _vm._ssrEscape(
                             "\n                    " +
                               _vm._s(
@@ -42346,7 +42392,7 @@ var render = function() {
                               "\n                "
                           ) +
                           "</dd>"
-                        : '<dd class="rebate-hint">' +
+                        : '<dd class="k5 rebate-hint">' +
                           _vm._ssrEscape(
                             "\n                    " +
                               _vm._s(
@@ -42370,7 +42416,7 @@ var render = function() {
                           _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
                           ")\n                "
                       ) +
-                      "</dt><dd>" +
+                      '</dt><dd class="k6">' +
                       _vm._ssrEscape(
                         "\n                    " +
                           _vm._s(_vm._f("currency")(_vm.basket.itemSumNet)) +
@@ -42388,10 +42434,10 @@ var render = function() {
                           ) +
                           ")\n                "
                       ) +
-                      "</dt><dd>" +
+                      '</dt><dd class="k7">' +
                       _vm._ssrEscape(
                         "\n                    " +
-                          _vm._s(_vm._f("currency")(_vm.basket.itemSum)) +
+                          _vm._s(_vm._f("currency")(_vm.rrpCalc)) +
                           "\n                "
                       ) +
                       "</dd>"
@@ -42416,7 +42462,7 @@ var render = function() {
                           _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
                           ")\n                "
                       ) +
-                      "</dt><dd>" +
+                      '</dt><dd class="k8">' +
                       _vm._ssrEscape(
                         "\n                    " +
                           _vm._s(
@@ -42442,7 +42488,7 @@ var render = function() {
                           ) +
                           ")\n                "
                       ) +
-                      "</dt><dd>" +
+                      '</dt><dd class="k9">' +
                       _vm._ssrEscape(
                         "\n                    " +
                           _vm._s(
@@ -42468,12 +42514,29 @@ var render = function() {
                           ) +
                           "\n                "
                       ) +
-                      "</dt><dd>" +
+                      '</dt><dd class="k10">' +
                       _vm._ssrEscape(
                         "\n                    " +
                           _vm._s(
                             _vm._f("currency")(_vm.basket.couponDiscount)
                           ) +
+                          "\n                "
+                      ) +
+                      "</dd>"
+                    : "<!---->") +
+                  " " +
+                  (_vm.youSave > 0
+                    ? (!(
+                        _vm.visibleFields.includes("promotionCoupon") &&
+                        _vm.basket.couponCode &&
+                        _vm.basket.couponCampaignType === "promotion"
+                      )
+                        ? "<hr>"
+                        : "<!---->") +
+                      ' <dt>\n                    Aktionsrabatt\n                </dt><dd class="k11">' +
+                      _vm._ssrEscape(
+                        "\n                    - " +
+                          _vm._s(_vm._f("currency")(_vm.youSave)) +
                           "\n                "
                       ) +
                       "</dd>"
@@ -42501,7 +42564,7 @@ var render = function() {
                               ) +
                               ")\n                    "
                           ) +
-                          "</dt><dd>" +
+                          '</dt><dd class="k12">' +
                           _vm._ssrEscape(
                             "\n                        " +
                               _vm._s(
@@ -42528,7 +42591,7 @@ var render = function() {
                                   _vm._s(totalVat.vatValue) +
                                   "%\n                    "
                               ) +
-                              "</dt><dd>" +
+                              '</dt><dd class="k13">' +
                               _vm._ssrEscape(
                                 "\n                        " +
                                   _vm._s(
@@ -42558,7 +42621,7 @@ var render = function() {
                           ) +
                           ")\n                    "
                       ) +
-                      "</dt><dd>" +
+                      '</dt><dd class="k14">' +
                       _vm._ssrEscape(
                         "\n                        " +
                           _vm._s(_vm._f("currency")(_vm.basket.basketAmount)) +
@@ -42573,9 +42636,12 @@ var render = function() {
                     ? "<dt>" +
                       _vm._ssrEscape(
                         "\n                        " +
-                          _vm._s(_vm.$translate("Ceres::Template.basketCoupon"))
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.basketCoupon")
+                          ) +
+                          "\n                    "
                       ) +
-                      "</dt><dd>" +
+                      '</dt><dd class="k15">' +
                       _vm._ssrEscape(
                         "\n                        " +
                           _vm._s(
@@ -42596,7 +42662,7 @@ var render = function() {
                           ) +
                           "\n                    "
                       ) +
-                      "</dt><dd>" +
+                      '</dt><dd class="k16">' +
                       _vm._ssrEscape(
                         "\n                        " +
                           _vm._s(_vm._f("currency")(_vm.basket.openAmount)) +
@@ -43168,15 +43234,39 @@ var render = function() {
                             2
                           ),
                           _vm._ssrNode(
-                            ' <div class="font-weight-bold my-2 text-right">' +
+                            " <div" +
+                              _vm._ssrClass(
+                                "font-weight-bold my-2 text-right prices",
+                                { crossPrice: _vm.hasCrossPrice }
+                              ) +
+                              ">" +
+                              (_vm.hasCrossPrice
+                                ? '<del class="crossprice">' +
+                                  _vm._ssrEscape(
+                                    "\n                                statt " +
+                                      _vm._s(
+                                        _vm._f("currency")(
+                                          _vm.basketItem.quantity *
+                                            _vm.basketItem.variation.data.prices
+                                              .rrp.price.value,
+                                          _vm.basketItem.variation.data.prices
+                                            .default.currency
+                                        )
+                                      ) +
+                                      "\n                            "
+                                  ) +
+                                  "</del>"
+                                : "<!---->") +
                               _vm._ssrEscape(
-                                _vm._s(
-                                  _vm._f("currency")(
-                                    _vm.basketItem.quantity * _vm.unitPrice,
-                                    _vm.basketItem.variation.data.prices.default
-                                      .currency
-                                  )
-                                )
+                                "\n                            " +
+                                  _vm._s(
+                                    _vm._f("currency")(
+                                      _vm.basketItem.quantity * _vm.unitPrice,
+                                      _vm.basketItem.variation.data.prices
+                                        .default.currency
+                                    )
+                                  ) +
+                                  "\n                        "
                               ) +
                               "</div>"
                           )

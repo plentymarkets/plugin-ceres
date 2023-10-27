@@ -12,7 +12,7 @@
                         <dt>
                             {{ $translate("Ceres::Template.basketValue") }} ({{ $translate("Ceres::Template.basketNet") }})
                         </dt><!--
-                        --><dd>
+                        --><dd class="k1">
                             {{ calculateBaseValue(basket.itemSumNet, basket.basketRebate) | currency }}
                         </dd>
                     </div>
@@ -21,8 +21,8 @@
                     <dt>
                         {{ $translate("Ceres::Template.basketValue") }} ({{ $translate("Ceres::Template.basketGross") }})
                     </dt><!--
-                    --><dd>
-                        {{ calculateBaseValue(basket.itemSum, basket.basketRebate)| currency  }}
+                    --><dd class="k2">
+                        {{ calculateBaseValue(rrpCalc, basket.basketRebate)| currency  }}
                     </dd>
                 </template>
             
@@ -31,7 +31,7 @@
                     <template v-for="property in displayedProperties">
                     <dt class="muted-properties" :class="{ 'font-weight-bold': showNetPrices }" :key="'property-name-' + property.propertyId" data-testing="additionalcost-with-tax">
                         &nbsp;<i>davon {{ property.name }}</i>
-                    </dt><!-- --><dd class="muted-properties" :class="{ 'font-weight-bold': showNetPrices }" :key="'property-price-' + property.propertyId">
+                    </dt><!-- --><dd class="muted-properties k3" :class="{ 'font-weight-bold': showNetPrices }" :key="'property-price-' + property.propertyId">
                         <i>{{ property.price | currency }}</i>
                     </dd>
                     </template>
@@ -42,23 +42,23 @@
                     <dt class="rebate-hint">
                         {{ $translate("Ceres::Template.basketRebate") }}
                     </dt><!--
-                --><dd class="rebate-hint" v-if="!showNetPrices">
+                --><dd class="k4 rebate-hint" v-if="!showNetPrices">
                         {{ calculateBaseValue(basket.itemSum, basket.basketRebate) - basket.itemSum | currency  }}
                     </dd><!--
-                --><dd class="rebate-hint" v-else>
+                --><dd class="k5 rebate-hint" v-else>
                         {{ calculateBaseValue(basket.itemSumNet, basket.basketRebate) - basket.itemSumNet | currency  }}
                     </dd>
                     <dt>
                         {{ $translate("Ceres::Template.basketSubTotal") }} ({{ $translate("Ceres::Template.basketNet") }})
                     </dt><!--
-                --><dd>
+                --><dd class="k6">
                         {{ basket.itemSumNet | currency }}
                     </dd>
                     <dt>
                         {{ $translate("Ceres::Template.basketSubTotal") }} ({{ $translate("Ceres::Template.basketGross") }})
                     </dt><!--
-                --><dd>
-                        {{ basket.itemSum | currency }}
+                --><dd class="k7">
+                        {{ rrpCalc | currency }}
                     </dd>
                 </template>
                 <slot name="after-item-sum"></slot>
@@ -69,7 +69,7 @@
                     <dt>
                         {{ $translate("Ceres::Template.basketShippingCosts") }} ({{ $translate("Ceres::Template.basketNet") }})
                     </dt><!--
-                    --><dd>
+                    --><dd class="k8">
                         {{ basket.shippingAmountNet | currency }}
                     </dd>
                     </div>
@@ -78,21 +78,30 @@
                     <dt>
                         {{ $translate("Ceres::Template.basketShippingCosts") }} ({{ $translate("Ceres::Template.basketGross") }})
                     </dt><!--
-                    --><dd>
+                    --><dd class="k9">
                         {{ basket.shippingAmount | currency }}
                     </dd>
                 </template>
                <slot name="after-shipping-costs"></slot>
                 <template v-if="visibleFields.includes('promotionCoupon') && basket.couponCode && basket.couponCampaignType === 'promotion'">
-                <hr>
+                <hr />
                     <dt>
                         {{ $translate("Ceres::Template.basketCoupon") }}
                     </dt><!--
-                --><dd>
+                --><dd class="k10">
                         {{ basket.couponDiscount | currency }}
                     </dd>
-                </hr>
                 </template>
+                 <template v-if="youSave > 0">
+                 <hr v-if="!(visibleFields.includes('promotionCoupon') && basket.couponCode && basket.couponCampaignType === 'promotion')" />
+                    <dt>
+                        Aktionsrabatt
+                    </dt><!--
+                    --><dd class="k11">
+                        - {{ youSave | currency }}
+                    </dd>
+                </template>
+
                 <div class="net">
                     <hr>
                     <slot name="before-total-sum"></slot>
@@ -100,7 +109,7 @@
                         <dt>
                             {{ $translate("Ceres::Template.basketTotalSum") }} ({{ $translate("Ceres::Template.basketNet") }})
                         </dt><!--
-                        --><dd>
+                        --><dd class="k12">
                             {{ basket.basketAmountNet | currency }}
                         </dd>
                     </template>
@@ -110,7 +119,7 @@
                         <dt>
                             {{ $translate("Ceres::Template.basketVAT") }} {{ totalVat.vatValue }}%
                         </dt><!--
-                        --><dd>
+                        --><dd class="k13">
                             {{ totalVat.vatAmount | currency }}
                         </dd>
                     </div>
@@ -121,15 +130,16 @@
                         <dt>
                             {{ $translate("Ceres::Template.basketTotalSum") }} ({{ $translate("Ceres::Template.basketGross") }})
                         </dt><!--
-                        --><dd>
+                        --><dd class="k14">
                             {{ basket.basketAmount | currency }}
                         </dd>
                     </template>
+                   
                     <template v-if="visibleFields.includes('salesCoupon') && basket.couponCode && basket.couponCampaignType === 'sales'">
                         <dt>
-                            {{ $translate("Ceres::Template.basketCoupon") }}</strong>
+                            {{ $translate("Ceres::Template.basketCoupon") }}
                         </dt><!--
-                        --><dd>
+                        --><dd class="k15">
                             {{ basket.couponDiscount | currency }}
                         </dd>
                     </template>
@@ -137,7 +147,7 @@
                         <dt>
                             {{ $translate("Ceres::Template.basketOpenAmount") }}
                         </dt><!--
-                    --><dd>
+                    --><dd class="k16">
                             {{ basket.openAmount | currency }}
                         </dd>
                     </template>
@@ -220,6 +230,23 @@ export default {
             const currentShippingCountry = this.currentShippingCountry && this.currentShippingCountry.currLangName;
 
             return this.$translate("Ceres::Template.basketExportDeliveryWarning", { from: shopCountry, to: currentShippingCountry });
+        },
+
+        rrpCalc() {
+            return this.basket.itemSum + this.youSave;
+        },
+
+        youSave() {
+            let youSave = 0;
+            for (let basketItem of this.basketItems) {
+                let itemQuantity = basketItem.quantity;
+                let itemPrice = basketItem.price;
+                let rrp = basketItem.variation.data.prices.rrp.price.value || 0;
+                if (rrp > itemPrice) {
+                    youSave += (rrp - itemPrice) * itemQuantity;
+                }
+            }
+            return youSave;
         },
 
         ...mapState({

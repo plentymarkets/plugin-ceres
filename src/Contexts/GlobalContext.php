@@ -49,6 +49,8 @@ class GlobalContext implements ContextInterface
      */
     public $lang;
 
+    public $plentyId;
+
     /**
      * @var string $metaLang
      * @deprecated since 5.0.20 will be removed in 6.0.0
@@ -201,6 +203,7 @@ class GlobalContext implements ContextInterface
         $this->request = pluginApp(Request::class);
 
         $this->lang = Utils::getLang();
+        $this->plentyId = Utils::getPlentyId();
 
         $this->homepageURL = $shopUrls->home;
         $this->metaLang = 'de';

@@ -225,6 +225,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -274,6 +284,34 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         from: shopCountry,
         to: currentShippingCountry
       });
+    },
+    rrpCalc: function rrpCalc() {
+      return this.basket.itemSum + this.youSave;
+    },
+    youSave: function youSave() {
+      var youSave = 0;
+
+      var _iterator = _createForOfIteratorHelper(this.basketItems),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var basketItem = _step.value;
+          var itemQuantity = basketItem.quantity;
+          var itemPrice = basketItem.price;
+          var rrp = basketItem.variation.data.prices.rrp.price.value || 0;
+
+          if (rrp > itemPrice) {
+            youSave += (rrp - itemPrice) * itemQuantity;
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      return youSave;
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_17__["mapState"])({
     basket: function basket(state) {
@@ -314,14 +352,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.displayedPropertiesWithoutTax = [];
       this.displayedProperties = [];
 
-      var _iterator = _createForOfIteratorHelper(newBasketItems),
-          _step;
+      var _iterator2 = _createForOfIteratorHelper(newBasketItems),
+          _step2;
 
       try {
         var _loop = function _loop() {
           var _basketItem$variation;
 
-          var basketItem = _step.value;
+          var basketItem = _step2.value;
           (_basketItem$variation = basketItem.variation.data.properties) === null || _basketItem$variation === void 0 ? void 0 : _basketItem$variation.forEach(function (property) {
             if (_this.isInBasketItemOrderParams(basketItem, property) && (Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_18__["isAdditionalCosts"])(property) || !Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_18__["hasVat"])(property) && App.useVariationOrderProperties)) {
               var existsIndisplayedProperties = _this.displayedProperties.find(function (entry) {
@@ -350,13 +388,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           });
         };
 
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
           _loop();
         }
       } catch (err) {
-        _iterator.e(err);
+        _iterator2.e(err);
       } finally {
-        _iterator.f();
+        _iterator2.f();
       }
 
       this.displayedPropertiesWithoutTax.forEach(function (entry) {
@@ -439,7 +477,7 @@ var render = function() {
                             ")\n                    "
                         )
                       ]),
-                      _c("dd", [
+                      _c("dd", { staticClass: "k1" }, [
                         _vm._v(
                           "\n                        " +
                             _vm._s(
@@ -472,13 +510,13 @@ var render = function() {
                           ")\n                "
                       )
                     ]),
-                    _c("dd", [
+                    _c("dd", { staticClass: "k2" }, [
                       _vm._v(
                         "\n                    " +
                           _vm._s(
                             _vm._f("currency")(
                               _vm.calculateBaseValue(
-                                _vm.basket.itemSum,
+                                _vm.rrpCalc,
                                 _vm.basket.basketRebate
                               )
                             )
@@ -512,7 +550,7 @@ var render = function() {
                           "dd",
                           {
                             key: "property-price-" + property.propertyId,
-                            staticClass: "muted-properties",
+                            staticClass: "muted-properties k3",
                             class: { "font-weight-bold": _vm.showNetPrices }
                           },
                           [
@@ -538,7 +576,7 @@ var render = function() {
                       )
                     ]),
                     !_vm.showNetPrices
-                      ? _c("dd", { staticClass: "rebate-hint" }, [
+                      ? _c("dd", { staticClass: "k4 rebate-hint" }, [
                           _vm._v(
                             "\n                    " +
                               _vm._s(
@@ -552,7 +590,7 @@ var render = function() {
                               "\n                "
                           )
                         ])
-                      : _c("dd", { staticClass: "rebate-hint" }, [
+                      : _c("dd", { staticClass: "k5 rebate-hint" }, [
                           _vm._v(
                             "\n                    " +
                               _vm._s(
@@ -578,7 +616,7 @@ var render = function() {
                           ")\n                "
                       )
                     ]),
-                    _c("dd", [
+                    _c("dd", { staticClass: "k6" }, [
                       _vm._v(
                         "\n                    " +
                           _vm._s(_vm._f("currency")(_vm.basket.itemSumNet)) +
@@ -599,10 +637,10 @@ var render = function() {
                           ")\n                "
                       )
                     ]),
-                    _c("dd", [
+                    _c("dd", { staticClass: "k7" }, [
                       _vm._v(
                         "\n                    " +
-                          _vm._s(_vm._f("currency")(_vm.basket.itemSum)) +
+                          _vm._s(_vm._f("currency")(_vm.rrpCalc)) +
                           "\n                "
                       )
                     ])
@@ -631,7 +669,7 @@ var render = function() {
                             ")\n                "
                         )
                       ]),
-                      _c("dd", [
+                      _c("dd", { staticClass: "k8" }, [
                         _vm._v(
                           "\n                    " +
                             _vm._s(
@@ -661,7 +699,7 @@ var render = function() {
                           ")\n                "
                       )
                     ]),
-                    _c("dd", [
+                    _c("dd", { staticClass: "k9" }, [
                       _vm._v(
                         "\n                    " +
                           _vm._s(
@@ -690,12 +728,37 @@ var render = function() {
                           "\n                "
                       )
                     ]),
-                    _c("dd", [
+                    _c("dd", { staticClass: "k10" }, [
                       _vm._v(
                         "\n                    " +
                           _vm._s(
                             _vm._f("currency")(_vm.basket.couponDiscount)
                           ) +
+                          "\n                "
+                      )
+                    ])
+                  ]
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.youSave > 0
+                ? [
+                    !(
+                      _vm.visibleFields.includes("promotionCoupon") &&
+                      _vm.basket.couponCode &&
+                      _vm.basket.couponCampaignType === "promotion"
+                    )
+                      ? _c("hr")
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("dt", [
+                      _vm._v(
+                        "\n                    Aktionsrabatt\n                "
+                      )
+                    ]),
+                    _c("dd", { staticClass: "k11" }, [
+                      _vm._v(
+                        "\n                    - " +
+                          _vm._s(_vm._f("currency")(_vm.youSave)) +
                           "\n                "
                       )
                     ])
@@ -725,7 +788,7 @@ var render = function() {
                               ")\n                    "
                           )
                         ]),
-                        _c("dd", [
+                        _c("dd", { staticClass: "k12" }, [
                           _vm._v(
                             "\n                        " +
                               _vm._s(
@@ -753,7 +816,7 @@ var render = function() {
                                 "%\n                    "
                             )
                           ]),
-                          _c("dd", [
+                          _c("dd", { staticClass: "k13" }, [
                             _vm._v(
                               "\n                        " +
                                 _vm._s(_vm._f("currency")(totalVat.vatAmount)) +
@@ -788,7 +851,7 @@ var render = function() {
                               ")\n                    "
                           )
                         ]),
-                        _c("dd", [
+                        _c("dd", { staticClass: "k14" }, [
                           _vm._v(
                             "\n                        " +
                               _vm._s(
@@ -809,10 +872,11 @@ var render = function() {
                             "\n                        " +
                               _vm._s(
                                 _vm.$translate("Ceres::Template.basketCoupon")
-                              )
+                              ) +
+                              "\n                    "
                           )
                         ]),
-                        _c("dd", [
+                        _c("dd", { staticClass: "k15" }, [
                           _vm._v(
                             "\n                        " +
                               _vm._s(
@@ -838,7 +902,7 @@ var render = function() {
                               "\n                    "
                           )
                         ]),
-                        _c("dd", [
+                        _c("dd", { staticClass: "k16" }, [
                           _vm._v(
                             "\n                        " +
                               _vm._s(

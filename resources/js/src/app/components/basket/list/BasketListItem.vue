@@ -73,7 +73,7 @@
                                       <strong v-else>{{ attribute.attribute.names.name }}: </strong>
                                       <span>{{ attribute.value.names.name }}</span>
                                   </div>
-                                </template>
+                                </template> 
                               </div>
                               <order-property-value-list :basket-item="basketItem"></order-property-value-list>
                         </div>
@@ -92,7 +92,12 @@
                                         :interval="basketItem.variation.data.variation.intervalOrderQuantity">
                                 </quantity-input>
                             </div>
-                            <div class="font-weight-bold my-2 text-right">{{ basketItem.quantity * unitPrice | currency(basketItem.variation.data.prices.default.currency) }}</div>
+                            <div class="font-weight-bold my-2 text-right prices" :class="{'crossPrice': hasCrossPrice}">
+                                <del v-if="hasCrossPrice" class="crossprice">
+                                    statt {{ basketItem.quantity * basketItem.variation.data.prices.rrp.price.value | currency(basketItem.variation.data.prices.default.currency) }}
+                                </del>
+                                {{ basketItem.quantity * unitPrice | currency(basketItem.variation.data.prices.default.currency) }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -201,6 +206,11 @@ export default {
             const itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
 
             return this.$options.filters.itemImage(itemImages);
+        },
+
+        hasCrossPrice()
+        {
+            return this.basketItem.variation.data.prices.rrp && (this.basketItem.variation.data.prices.rrp.price.value > this.basketItem.variation.data.prices.default.unitPrice.value);
         },
 
         altText()

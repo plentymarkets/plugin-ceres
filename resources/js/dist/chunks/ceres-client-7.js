@@ -305,6 +305,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -349,6 +354,9 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
     image: function image() {
       var itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
       return this.$options.filters.itemImage(itemImages);
+    },
+    hasCrossPrice: function hasCrossPrice() {
+      return this.basketItem.variation.data.prices.rrp && this.basketItem.variation.data.prices.rrp.price.value > this.basketItem.variation.data.prices.default.unitPrice.value;
     },
     altText: function altText() {
       var images = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
@@ -959,16 +967,38 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "font-weight-bold my-2 text-right" },
+                      {
+                        staticClass: "font-weight-bold my-2 text-right prices",
+                        class: { crossPrice: _vm.hasCrossPrice }
+                      },
                       [
+                        _vm.hasCrossPrice
+                          ? _c("del", { staticClass: "crossprice" }, [
+                              _vm._v(
+                                "\n                                statt " +
+                                  _vm._s(
+                                    _vm._f("currency")(
+                                      _vm.basketItem.quantity *
+                                        _vm.basketItem.variation.data.prices.rrp
+                                          .price.value,
+                                      _vm.basketItem.variation.data.prices
+                                        .default.currency
+                                    )
+                                  ) +
+                                  "\n                            "
+                              )
+                            ])
+                          : _vm._e(),
                         _vm._v(
-                          _vm._s(
-                            _vm._f("currency")(
-                              _vm.basketItem.quantity * _vm.unitPrice,
-                              _vm.basketItem.variation.data.prices.default
-                                .currency
-                            )
-                          )
+                          "\n                            " +
+                            _vm._s(
+                              _vm._f("currency")(
+                                _vm.basketItem.quantity * _vm.unitPrice,
+                                _vm.basketItem.variation.data.prices.default
+                                  .currency
+                              )
+                            ) +
+                            "\n                        "
                         )
                       ]
                     )
