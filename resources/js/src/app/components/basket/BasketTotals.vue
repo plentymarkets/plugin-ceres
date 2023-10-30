@@ -13,7 +13,7 @@
                             {{ $translate("Ceres::Template.basketValue") }} ({{ $translate("Ceres::Template.basketNet") }})
                         </dt><!--
                         --><dd class="k1">
-                            {{ calculateBaseValue(basket.itemSumNet, basket.basketRebate) | currency }}
+                            {{ calculateBaseValue(rrpNetCalc, basket.basketRebate) | currency }}
                         </dd>
                     </div>
                 </template>
@@ -233,9 +233,44 @@ export default {
         },
 
         rrpCalc() {
-            return this.basket.itemSum + this.youSave;
+            // gross / brutto
+            let totalRrp = 0;
+            for (let basketItem of this.basketItems) {
+                let itemQuantity = basketItem.quantity;
+                let itemPriceNet = basketItem.variation.data.prices.default.price.value || 0;
+                let rrpNet = basketItem.variation.data.prices.rrp.price.value || 0;
+                if (rrpNet > itemPriceNet) {
+                    totalRrp += rrpNet * itemQuantity;
+                } else {
+                    totalRrp += itemPriceNet * itemQuantity;
+                }
+                // OrderProperties
+                for(let itemOrderProperty of basketItem.basketItemOrderParams)
+                {
+                    totalRrp += itemQuantity * itemOrderProperty.price;
+                }
+            }
+            return totalRrp;
         },
-
+        rrpNetCalc() {
+            let totalRrpNet = 0;
+            for (let basketItem of this.basketItems) {
+                let itemQuantity = basketItem.quantity;
+                let itemPriceNet = basketItem.variation.data.prices.default.data.priceNet || 0;
+                let rrpNet = basketItem.variation.data.prices.rrp.data.priceNet || 0;
+                if (rrpNet > itemPriceNet) {
+                    totalRrpNet += rrpNet * itemQuantity;
+                } else {
+                    totalRrpNet += itemPriceNet * itemQuantity;
+                }
+                // OrderProperties
+                for(let itemOrderProperty of basketItem.basketItemOrderParams)
+                {
+                    totalRrpNet += (itemQuantity * itemOrderProperty.price) / 1.19; // @WARNING: HardCode VAT 
+                }
+            }
+            return totalRrpNet;
+        },
         youSave() {
             let youSave = 0;
             for (let basketItem of this.basketItems) {

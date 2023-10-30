@@ -1245,10 +1245,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     rrpCalc: function rrpCalc() {
-      return this.basket.itemSum + this.youSave;
-    },
-    youSave: function youSave() {
-      var youSave = 0;
+      // gross / brutto
+      var totalRrp = 0;
 
       var _iterator = _createForOfIteratorHelper(this.basketItems),
           _step;
@@ -1256,6 +1254,90 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var basketItem = _step.value;
+          var itemQuantity = basketItem.quantity;
+          var itemPriceNet = basketItem.variation.data.prices.default.price.value || 0;
+          var rrpNet = basketItem.variation.data.prices.rrp.price.value || 0;
+
+          if (rrpNet > itemPriceNet) {
+            totalRrp += rrpNet * itemQuantity;
+          } else {
+            totalRrp += itemPriceNet * itemQuantity;
+          } // OrderProperties
+
+
+          var _iterator2 = _createForOfIteratorHelper(basketItem.basketItemOrderParams),
+              _step2;
+
+          try {
+            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+              var itemOrderProperty = _step2.value;
+              totalRrp += itemQuantity * itemOrderProperty.price;
+            }
+          } catch (err) {
+            _iterator2.e(err);
+          } finally {
+            _iterator2.f();
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      return totalRrp;
+    },
+    rrpNetCalc: function rrpNetCalc() {
+      var totalRrpNet = 0;
+
+      var _iterator3 = _createForOfIteratorHelper(this.basketItems),
+          _step3;
+
+      try {
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var basketItem = _step3.value;
+          var itemQuantity = basketItem.quantity;
+          var itemPriceNet = basketItem.variation.data.prices.default.data.priceNet || 0;
+          var rrpNet = basketItem.variation.data.prices.rrp.data.priceNet || 0;
+
+          if (rrpNet > itemPriceNet) {
+            totalRrpNet += rrpNet * itemQuantity;
+          } else {
+            totalRrpNet += itemPriceNet * itemQuantity;
+          } // OrderProperties
+
+
+          var _iterator4 = _createForOfIteratorHelper(basketItem.basketItemOrderParams),
+              _step4;
+
+          try {
+            for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+              var itemOrderProperty = _step4.value;
+              totalRrpNet += itemQuantity * itemOrderProperty.price / 1.19; // @WARNING: HardCode VAT 
+            }
+          } catch (err) {
+            _iterator4.e(err);
+          } finally {
+            _iterator4.f();
+          }
+        }
+      } catch (err) {
+        _iterator3.e(err);
+      } finally {
+        _iterator3.f();
+      }
+
+      return totalRrpNet;
+    },
+    youSave: function youSave() {
+      var youSave = 0;
+
+      var _iterator5 = _createForOfIteratorHelper(this.basketItems),
+          _step5;
+
+      try {
+        for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+          var basketItem = _step5.value;
           var itemQuantity = basketItem.quantity;
           var itemPrice = basketItem.price;
           var rrp = basketItem.variation.data.prices.rrp.price.value || 0;
@@ -1265,9 +1347,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
         }
       } catch (err) {
-        _iterator.e(err);
+        _iterator5.e(err);
       } finally {
-        _iterator.f();
+        _iterator5.f();
       }
 
       return youSave;
@@ -1311,14 +1393,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.displayedPropertiesWithoutTax = [];
       this.displayedProperties = [];
 
-      var _iterator2 = _createForOfIteratorHelper(newBasketItems),
-          _step2;
+      var _iterator6 = _createForOfIteratorHelper(newBasketItems),
+          _step6;
 
       try {
         var _loop = function _loop() {
           var _basketItem$variation;
 
-          var basketItem = _step2.value;
+          var basketItem = _step6.value;
           (_basketItem$variation = basketItem.variation.data.properties) === null || _basketItem$variation === void 0 ? void 0 : _basketItem$variation.forEach(function (property) {
             if (_this.isInBasketItemOrderParams(basketItem, property) && (Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_18__["isAdditionalCosts"])(property) || !Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_18__["hasVat"])(property) && App.useVariationOrderProperties)) {
               var existsIndisplayedProperties = _this.displayedProperties.find(function (entry) {
@@ -1347,13 +1429,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           });
         };
 
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
           _loop();
         }
       } catch (err) {
-        _iterator2.e(err);
+        _iterator6.e(err);
       } finally {
-        _iterator2.f();
+        _iterator6.f();
       }
 
       this.displayedPropertiesWithoutTax.forEach(function (entry) {
@@ -42303,7 +42385,7 @@ var render = function() {
                           _vm._s(
                             _vm._f("currency")(
                               _vm.calculateBaseValue(
-                                _vm.basket.itemSumNet,
+                                _vm.rrpNetCalc,
                                 _vm.basket.basketRebate
                               )
                             )
