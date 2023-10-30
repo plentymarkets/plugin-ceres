@@ -18,7 +18,8 @@
     - Setzen in einer bestimmten Cookie-Gruppe: Essenziell oder Externe Medien.
     - "Als notwendigen Cookie registrieren": Das Cookie kann vom User nicht abgewählt werden.
     - "Als Opt-Out registrieren": Cookie ist vorausgewählt und muss aktiv abgewählt werden.
-
+    - Beachte, dass diese Einstellungen gegebenenfalls Änderungen an deiner Datenschutzerklärung notwendig machen, um plentyShop rechtssicher zu betreiben. 
+    
 ### Behoben
 
 - Auf Geräten mit iOS Versionen <= 12.x wurden bei deaktiviertem SSR und Verwendung von ShopBuilder-Inhalten bestimmte Elemente nicht geladen. Wir möchten uns bei @KarolKski für den Beitrag bedanken.
