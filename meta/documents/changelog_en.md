@@ -18,6 +18,7 @@
     - Set in a specific cookie group: Essential or External Media.
     - "Register as a necessary cookie": The cookie cannot be deselected by the user.
     - "Register as opt-out": Cookie is preselected and must be actively deselected.
+    - Note that these settings may require you to change your privacy policy in order to operate your plentyShop in a legally compliant manner.
 
 ### Fixed
 
