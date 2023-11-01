@@ -8,6 +8,11 @@
     <intersector v-else-if="isIntersectorEnabled">
         <slot></slot>
     </intersector>
+
+    <!-- no SSR && iOS Fallback -->
+    <div v-else>
+        <slot></slot>
+    </div>
 </template>
 
 <script>

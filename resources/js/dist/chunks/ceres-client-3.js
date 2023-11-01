@@ -1023,6 +1023,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     isPostOffice: function isPostOffice() {
       return this.value && this.value.address1 === "POSTFILIALE" && this.isPostOfficeAvailable;
     },
+    formattedBirthday: function formattedBirthday() {
+      if (this.value) {
+        var jsDate = new Date(this.value.birthday);
+        var formattedDate = jsDate.toLocaleDateString("de-DE", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit"
+        });
+        return formattedDate;
+      }
+    },
     isParcelOrOfficeAvailable: function isParcelOrOfficeAvailable() {
       return (this.isParcelBoxAvailable || this.isPostOfficeAvailable) && this.selectedCountry && this.selectedCountry.isoCode2 === "DE" && this.addressType === "2";
     }
@@ -1918,18 +1929,9 @@ __webpack_require__.r(__webpack_exports__);
       }); // just reset the input fields, when switching the gender between a personal one and company
 
       if (isNewGenderPersonal !== isOldGenderPersonal) {
-        this.$emit("input", {
-          field: "name1",
-          value: ""
-        });
-        this.$emit("input", {
-          field: "name2",
-          value: ""
-        });
-        this.$emit("input", {
-          field: "name3",
-          value: ""
-        });
+        // this.$emit("input", { field: "name1", value: "" });
+        // this.$emit("input", { field: "name2", value: "" });
+        // this.$emit("input", { field: "name3", value: "" });
         this.$emit("input", {
           field: "vatNumber",
           value: ""
@@ -3418,9 +3420,9 @@ var render = function() {
                                   placeholder: _vm.$translate(
                                     "Ceres::Template.addressBirthdatePlaceholder"
                                   ),
-                                  id: "txtBirthdate",
-                                  birthday: _vm.value.birthday
+                                  id: "txtBirthdate"
                                 },
+                                domProps: { value: _vm.formattedBirthday },
                                 on: {
                                   change: function($event) {
                                     _vm.emitInputEvent(

@@ -389,7 +389,9 @@ class TemplateServiceProvider extends ServiceProvider
                     'provider' => 'Ceres::Template.consentReCaptchaProvider',
                     'lifespan' => $webstoreConfig->sessionLifetime > 0 ? 'Ceres::Template.consentLifespan100Days' : 'Ceres::Template.consentLifespanSession',
                     'policyUrl' => 'Ceres::Template.consentReCaptchaPolicyUrl',
-                    'group' => 'media'
+                    'group' => $config->get('Ceres.global.google_recaptcha_consentGroup', 'media'),
+                    'necessary' => $config->get('Ceres.global.google_recaptcha_consentNecessary') === 'true',
+                    'isOptOut' => $config->get('Ceres.global.google_recaptcha_consentOptOut') === 'true'
                 ]
             );
         }

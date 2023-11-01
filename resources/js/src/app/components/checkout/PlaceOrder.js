@@ -219,10 +219,14 @@ export default Vue.component("place-order", {
 
         checkDeliveryAddressError()
         {
-            const countryId = Number(this.deliveryAddress.id) === -99 ? this.billingAddress.countryId : this.deliveryAddress.countryId;
-            const validShippingCountry = this.shippingCountryList.find((country) => country.id === countryId);
+            const countryId = Number(this.deliveryAddress.id) === -99 ? this.billingAddress?.countryId : this.deliveryAddress?.countryId;
 
-            this.isInvalidShippingCountry = !validShippingCountry;
+            if (countryId)
+            {
+                const validShippingCountry = this.shippingCountryList.find((country) => country.id === countryId);
+
+                this.isInvalidShippingCountry = !validShippingCountry;
+            }
         }
     },
 

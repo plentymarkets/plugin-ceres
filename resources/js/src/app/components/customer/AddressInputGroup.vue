@@ -228,7 +228,7 @@
                           class="input-unit"
                           data-model="birthday"
                           v-validate:date="isInRequiredFields('de', 'billing_address.birthday') || !!value.birthday && !!value.birthday.length">
-                          <input type="tel" name="birthday" :placeholder="$translate('Ceres::Template.addressBirthdatePlaceholder')" :id="'txtBirthdate'" :birthday="value.birthday" @change="emitInputEvent('birthday', $event.target.value.replace(/(.*)\.(.*)\.(.*)/, '$3-$2-$1'))">
+                          <input type="tel" name="birthday" :placeholder="$translate('Ceres::Template.addressBirthdatePlaceholder')" :id="'txtBirthdate'" :value="formattedBirthday" @change="emitInputEvent('birthday', $event.target.value.replace(/(.*)\.(.*)\.(.*)/, '$3-$2-$1'))">
                           <label :for="'txtBirthdate' + _uid">
                               {{ transformTranslation("Ceres::Template.addressBirthdate", "de", "billing_address.birthday") }}
                           </label>
@@ -942,6 +942,20 @@ export default {
         isPostOffice()
         {
             return this.value && this.value.address1 === "POSTFILIALE" && this.isPostOfficeAvailable;
+        },
+
+        formattedBirthday()
+        {
+            if(this.value)
+            {
+                var jsDate = new Date(this.value.birthday);
+                const formattedDate = jsDate.toLocaleDateString("de-DE", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                });
+                return formattedDate;
+            }
         },
 
         isParcelOrOfficeAvailable()
