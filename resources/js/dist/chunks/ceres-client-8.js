@@ -599,7 +599,7 @@ var render = function() {
         },
         [
           _c("i", {
-            staticClass: "fa fa-sliders default-float",
+            staticClass: "fa fa-sliders default-float mr-2",
             attrs: { "aria-hidden": "true" }
           }),
           _vm._v(
@@ -678,18 +678,18 @@ var render = function() {
                         }
                       },
                       [
-                        _c("i", {
-                          staticClass: "fa fa-times",
-                          attrs: { "aria-hidden": "true" }
-                        }),
-                        _vm._v(" "),
                         _c("span", [
                           _vm._v(
                             _vm._s(
                               _vm.$translate("Ceres::Template.itemClose")
                             ) + " "
                           )
-                        ])
+                        ]),
+                        _vm._v(" "),
+                        _c("i", {
+                          staticClass: "fa fa-times ml-2",
+                          attrs: { "aria-hidden": "true" }
+                        })
                       ]
                     )
                   ])

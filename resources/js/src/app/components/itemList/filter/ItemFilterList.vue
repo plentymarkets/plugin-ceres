@@ -3,7 +3,7 @@
         <item-filter v-for="facet in facets.filter(function (facet) { return (facet.id == 11) })" :facet="facet" :key="facet.id"></item-filter>
 
         <a class="btn btn-sm btn-bkm-inverted facetToggleButton" data-toggle="collapse" :href="'#filter-collapse_' + _uid" aria-expanded="false" :aria-controls="'filter-collapse_' + _uid">
-          <i class="fa fa-sliders default-float" aria-hidden="true"></i> {{ $translate("Ceres::Template.itemFilter") }}
+          <i class="fa fa-sliders default-float mr-2" aria-hidden="true"></i> {{ $translate("Ceres::Template.itemFilter") }}
         </a>
 
         <div class="filter-wrapper">
@@ -20,8 +20,8 @@
                   <div class="row filterBtnRow">
                       <div class="col-12 text-right">
                           <button type="button" class="btn btn-bkm btn-medium-large applyFilterButton" data-toggle="collapse" :href="'#filter-collapse_' + _uid" :aria-controls="'filter-collapse_' + _uid">
-                            <i class="fa fa-times" aria-hidden="true"></i>
                             <span>{{ $translate("Ceres::Template.itemClose") }}&nbsp;</span>
+                            <i class="fa fa-times ml-2" aria-hidden="true"></i>
                           </button>
                       </div>
                   </div>

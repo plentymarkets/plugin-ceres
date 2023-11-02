@@ -54276,7 +54276,7 @@ var render = function() {
           _vm._ssrAttr("href", "#filter-collapse_" + _vm._uid) +
           ' aria-expanded="false"' +
           _vm._ssrAttr("aria-controls", "filter-collapse_" + _vm._uid) +
-          ' class="btn btn-sm btn-bkm-inverted facetToggleButton"><i aria-hidden="true" class="fa fa-sliders default-float"></i>' +
+          ' class="btn btn-sm btn-bkm-inverted facetToggleButton"><i aria-hidden="true" class="fa fa-sliders default-float mr-2"></i>' +
           _vm._ssrEscape(
             " " +
               _vm._s(_vm.$translate("Ceres::Template.itemFilter")) +
@@ -54343,11 +54343,11 @@ var render = function() {
                       "aria-controls",
                       "filter-collapse_" + _vm._uid
                     ) +
-                    ' class="btn btn-bkm btn-medium-large applyFilterButton"><i aria-hidden="true" class="fa fa-times"></i> <span>' +
+                    ' class="btn btn-bkm btn-medium-large applyFilterButton"><span>' +
                     _vm._ssrEscape(
                       _vm._s(_vm.$translate("Ceres::Template.itemClose")) + " "
                     ) +
-                    "</span></button></div></div>"
+                    '</span> <i aria-hidden="true" class="fa fa-times ml-2"></i></button></div></div>'
                 )
               ],
               2
