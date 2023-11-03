@@ -86,7 +86,7 @@
                             </span>
                             <div class="variationPrice">
                               <graduated-prices></graduated-prices>
-                              <item-price template-override="#item-price-tpl" :show-cross-price="isRecommendedPriceActive"></item-price>
+                              <item-price></item-price>
                               <input type="hidden" id="stdShippingCosts" :value="currentVariation.variation.defaultShippingCosts" />
 
                               <slot v-if="currentVariation.prices.default.price && currentVariation.prices.default.price.value > 200" name="before-add-to-basket" class="mt-2"></slot>

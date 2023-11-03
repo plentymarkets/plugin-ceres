@@ -78,11 +78,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-price",
@@ -104,12 +99,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     currentVariation: function currentVariation() {
+      console.log("Var loaded");
       return this.$store.getters["".concat(this.itemId, "/currentItemVariation")];
     },
     hasCrossPrice: function hasCrossPrice() {
-      var hasRrpPrice = !!this.currentVariation.prices.rrp && this.currentVariation.prices.rrp.unitPrice.value > this.currentVariation.prices.default.unitPrice.value;
-      var hasBeforePrice = this.hasSpecialOffer && !!this.currentVariation.prices.default && this.currentVariation.prices.default.unitPrice.value > this.currentVariation.prices.specialOffer.unitPrice.value;
-      return hasRrpPrice || hasBeforePrice;
+      var hasRrpPrice = !!this.currentVariation.prices.rrp && this.currentVariation.prices.rrp !== null && this.currentVariation.prices.rrp.unitPrice.value > this.currentVariation.prices.default.unitPrice.value;
+      return hasRrpPrice;
+    },
+    savePercent: function savePercent() {
+      if (this.currentVariation.prices.rrp === null || this.currentVariation.prices.default === null) return 0;
+      if (this.currentVariation.prices.default.price.value >= this.currentVariation.prices.rrp.price.value) return 0;
+      return (1 - this.currentVariation.prices.default.price.value / this.currentVariation.prices.rrp.price.value) * 100;
     },
     hasSpecialOffer: function hasSpecialOffer() {
       return !!this.currentVariation.prices.specialOffer;
@@ -170,23 +170,11 @@ var render = function() {
       class: { "has-crossprice": _vm.hasCrossPrice }
     },
     [
-      _vm.currentVariation.prices.default.price.value > 0 &&
-      _vm.currentVariation.prices.rrp.price.value > 0 &&
-      _vm.currentVariation.prices.default.price.value <
-        _vm.currentVariation.prices.rrp.price.value
+      _vm.savePercent > 0
         ? _c("span", { staticClass: "percent" }, [
             _vm._v(
               "\n          Sie sparen " +
-                _vm._s(
-                  _vm._f("numberFormat")(
-                    (1 -
-                      _vm.currentVariation.prices.default.price.value /
-                        _vm.currentVariation.prices.rrp.price.value) *
-                      100,
-                    2,
-                    ","
-                  )
-                ) +
+                _vm._s(_vm._f("numberFormat")(_vm.savePercent, 2, ",")) +
                 "%\n        "
             )
           ])
@@ -208,39 +196,17 @@ var render = function() {
                   ) +
                   "\n            "
               ),
-              _c(
-                "del",
-                { staticClass: "small text-appearance" },
-                [
-                  _vm.hasSpecialOffer
-                    ? [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(
-                              _vm._f("itemCrossPrice")(
-                                _vm.currentVariation.prices.default.unitPrice
-                                  .formatted,
-                                true
-                              )
-                            ) +
-                            "\n                "
-                        )
-                      ]
-                    : [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(
-                              _vm._f("itemCrossPrice")(
-                                _vm.currentVariation.prices.rrp.unitPrice
-                                  .formatted
-                              )
-                            ) +
-                            "\n                "
-                        )
-                      ]
-                ],
-                2
-              )
+              _c("del", { staticClass: "small text-appearance" }, [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(
+                      _vm._f("itemCrossPrice")(
+                        _vm.currentVariation.prices.rrp.unitPrice.formatted
+                      )
+                    ) +
+                    "\n            "
+                )
+              ])
             ]
           )
         : _vm._e(),

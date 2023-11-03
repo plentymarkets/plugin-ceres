@@ -237,8 +237,8 @@ export default {
             let totalRrp = 0;
             for (let basketItem of this.basketItems) {
                 let itemQuantity = basketItem.quantity;
-                let itemPriceNet = basketItem.variation.data.prices.default.price.value || 0;
-                let rrpNet = basketItem.variation.data.prices.rrp.price.value || 0;
+                let itemPriceNet = basketItem.variation.data.prices?.default?.price.value || 0;
+                let rrpNet = basketItem.variation.data.prices?.rrp?.price.value || 0;
                 if (rrpNet > itemPriceNet) {
                     totalRrp += rrpNet * itemQuantity;
                 } else {
@@ -256,8 +256,8 @@ export default {
             let totalRrpNet = 0;
             for (let basketItem of this.basketItems) {
                 let itemQuantity = basketItem.quantity;
-                let itemPriceNet = basketItem.variation.data.prices.default.data.priceNet || 0;
-                let rrpNet = basketItem.variation.data.prices.rrp.data.priceNet || 0;
+                let itemPriceNet = basketItem.variation.data.prices.default?.data.priceNet || 0;
+                let rrpNet = basketItem.variation.data.prices.rrp?.data.priceNet || 0;
                 if (rrpNet > itemPriceNet) {
                     totalRrpNet += rrpNet * itemQuantity;
                 } else {
@@ -276,7 +276,7 @@ export default {
             for (let basketItem of this.basketItems) {
                 let itemQuantity = basketItem.quantity;
                 let itemPrice = basketItem.price;
-                let rrp = basketItem.variation.data.prices.rrp.price.value || 0;
+                let rrp = basketItem.variation.data.prices?.rrp?.price.value || 0;
                 if (rrp > itemPrice) {
                     youSave += (rrp - itemPrice) * itemQuantity;
                 }

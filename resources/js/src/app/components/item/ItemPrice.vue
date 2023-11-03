@@ -1,20 +1,15 @@
 <template>
     <div class="variationPrices bkr-cc" :class="{ 'has-crossprice': hasCrossPrice }">
             <span
-              v-if="currentVariation.prices.default.price.value > 0 && currentVariation.prices.rrp.price.value > 0 && currentVariation.prices.default.price.value < currentVariation.prices.rrp.price.value"
+              v-if="savePercent > 0"
               class="percent">
-              Sie sparen {{ ((1 - currentVariation.prices.default.price.value / currentVariation.prices.rrp.price.value) * 100) | numberFormat(2, ',') }}%
+              Sie sparen {{ savePercent | numberFormat(2, ',') }}%
             </span>
 
             <span id="itemmrp" class="text-muted" v-if="(showCrossPrice && hasCrossPrice)" :class="{ 'is-special-offer': hasSpecialOffer }">
                 {{ $translate("biokinderDesign::Template.itemInstedOf") }}
                 <del class="small text-appearance">
-                    <template v-if="hasSpecialOffer">
-                        {{ currentVariation.prices.default.unitPrice.formatted | itemCrossPrice(true) }}
-                    </template>
-                    <template v-else>
-                        {{ currentVariation.prices.rrp.unitPrice.formatted | itemCrossPrice }}
-                    </template>
+                    {{ currentVariation.prices.rrp.unitPrice.formatted | itemCrossPrice }}
                 </del>
             </span>
 
@@ -95,18 +90,26 @@ export default {
     computed:
     {
         currentVariation() {
+            console.log("Var loaded");
             return this.$store.getters[`${this.itemId}/currentItemVariation`]
         },
 
         hasCrossPrice() {
-            const hasRrpPrice = !!this.currentVariation.prices.rrp &&
+            const hasRrpPrice = !!this.currentVariation.prices.rrp && this.currentVariation.prices.rrp !== null &&
                 this.currentVariation.prices.rrp.unitPrice.value > this.currentVariation.prices.default.unitPrice.value;
 
-            const hasBeforePrice = this.hasSpecialOffer &&
-                !!this.currentVariation.prices.default &&
-                this.currentVariation.prices.default.unitPrice.value > this.currentVariation.prices.specialOffer.unitPrice.value;
+            return hasRrpPrice;
+        },
 
-            return hasRrpPrice || hasBeforePrice;
+        savePercent()
+        {
+            if(this.currentVariation.prices.rrp === null || this.currentVariation.prices.default === null)
+                return 0;
+            
+            if(this.currentVariation.prices.default.price.value >= this.currentVariation.prices.rrp.price.value)
+                return 0;
+        
+            return ((1 - this.currentVariation.prices.default.price.value / this.currentVariation.prices.rrp.price.value) * 100);
         },
 
         hasSpecialOffer() {

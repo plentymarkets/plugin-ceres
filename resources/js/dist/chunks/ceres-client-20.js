@@ -294,10 +294,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var _basketItem$variation, _basketItem$variation2, _basketItem$variation3, _basketItem$variation4;
+
           var basketItem = _step.value;
           var itemQuantity = basketItem.quantity;
-          var itemPriceNet = basketItem.variation.data.prices.default.price.value || 0;
-          var rrpNet = basketItem.variation.data.prices.rrp.price.value || 0;
+          var itemPriceNet = ((_basketItem$variation = basketItem.variation.data.prices) === null || _basketItem$variation === void 0 ? void 0 : (_basketItem$variation2 = _basketItem$variation.default) === null || _basketItem$variation2 === void 0 ? void 0 : _basketItem$variation2.price.value) || 0;
+          var rrpNet = ((_basketItem$variation3 = basketItem.variation.data.prices) === null || _basketItem$variation3 === void 0 ? void 0 : (_basketItem$variation4 = _basketItem$variation3.rrp) === null || _basketItem$variation4 === void 0 ? void 0 : _basketItem$variation4.price.value) || 0;
 
           if (rrpNet > itemPriceNet) {
             totalRrp += rrpNet * itemQuantity;
@@ -336,10 +338,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       try {
         for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var _basketItem$variation5, _basketItem$variation6;
+
           var basketItem = _step3.value;
           var itemQuantity = basketItem.quantity;
-          var itemPriceNet = basketItem.variation.data.prices.default.data.priceNet || 0;
-          var rrpNet = basketItem.variation.data.prices.rrp.data.priceNet || 0;
+          var itemPriceNet = ((_basketItem$variation5 = basketItem.variation.data.prices.default) === null || _basketItem$variation5 === void 0 ? void 0 : _basketItem$variation5.data.priceNet) || 0;
+          var rrpNet = ((_basketItem$variation6 = basketItem.variation.data.prices.rrp) === null || _basketItem$variation6 === void 0 ? void 0 : _basketItem$variation6.data.priceNet) || 0;
 
           if (rrpNet > itemPriceNet) {
             totalRrpNet += rrpNet * itemQuantity;
@@ -378,10 +382,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       try {
         for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+          var _basketItem$variation7, _basketItem$variation8;
+
           var basketItem = _step5.value;
           var itemQuantity = basketItem.quantity;
           var itemPrice = basketItem.price;
-          var rrp = basketItem.variation.data.prices.rrp.price.value || 0;
+          var rrp = ((_basketItem$variation7 = basketItem.variation.data.prices) === null || _basketItem$variation7 === void 0 ? void 0 : (_basketItem$variation8 = _basketItem$variation7.rrp) === null || _basketItem$variation8 === void 0 ? void 0 : _basketItem$variation8.price.value) || 0;
 
           if (rrp > itemPrice) {
             youSave += (rrp - itemPrice) * itemQuantity;
@@ -439,10 +445,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       try {
         var _loop = function _loop() {
-          var _basketItem$variation;
+          var _basketItem$variation9;
 
           var basketItem = _step6.value;
-          (_basketItem$variation = basketItem.variation.data.properties) === null || _basketItem$variation === void 0 ? void 0 : _basketItem$variation.forEach(function (property) {
+          (_basketItem$variation9 = basketItem.variation.data.properties) === null || _basketItem$variation9 === void 0 ? void 0 : _basketItem$variation9.forEach(function (property) {
             if (_this.isInBasketItemOrderParams(basketItem, property) && (Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_18__["isAdditionalCosts"])(property) || !Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_18__["hasVat"])(property) && App.useVariationOrderProperties)) {
               var existsIndisplayedProperties = _this.displayedProperties.find(function (entry) {
                 return entry.propertyId === property.propertyId;

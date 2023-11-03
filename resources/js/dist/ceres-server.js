@@ -1253,10 +1253,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var _basketItem$variation, _basketItem$variation2, _basketItem$variation3, _basketItem$variation4;
+
           var basketItem = _step.value;
           var itemQuantity = basketItem.quantity;
-          var itemPriceNet = basketItem.variation.data.prices.default.price.value || 0;
-          var rrpNet = basketItem.variation.data.prices.rrp.price.value || 0;
+          var itemPriceNet = ((_basketItem$variation = basketItem.variation.data.prices) === null || _basketItem$variation === void 0 ? void 0 : (_basketItem$variation2 = _basketItem$variation.default) === null || _basketItem$variation2 === void 0 ? void 0 : _basketItem$variation2.price.value) || 0;
+          var rrpNet = ((_basketItem$variation3 = basketItem.variation.data.prices) === null || _basketItem$variation3 === void 0 ? void 0 : (_basketItem$variation4 = _basketItem$variation3.rrp) === null || _basketItem$variation4 === void 0 ? void 0 : _basketItem$variation4.price.value) || 0;
 
           if (rrpNet > itemPriceNet) {
             totalRrp += rrpNet * itemQuantity;
@@ -1295,10 +1297,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       try {
         for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var _basketItem$variation5, _basketItem$variation6;
+
           var basketItem = _step3.value;
           var itemQuantity = basketItem.quantity;
-          var itemPriceNet = basketItem.variation.data.prices.default.data.priceNet || 0;
-          var rrpNet = basketItem.variation.data.prices.rrp.data.priceNet || 0;
+          var itemPriceNet = ((_basketItem$variation5 = basketItem.variation.data.prices.default) === null || _basketItem$variation5 === void 0 ? void 0 : _basketItem$variation5.data.priceNet) || 0;
+          var rrpNet = ((_basketItem$variation6 = basketItem.variation.data.prices.rrp) === null || _basketItem$variation6 === void 0 ? void 0 : _basketItem$variation6.data.priceNet) || 0;
 
           if (rrpNet > itemPriceNet) {
             totalRrpNet += rrpNet * itemQuantity;
@@ -1337,10 +1341,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       try {
         for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+          var _basketItem$variation7, _basketItem$variation8;
+
           var basketItem = _step5.value;
           var itemQuantity = basketItem.quantity;
           var itemPrice = basketItem.price;
-          var rrp = basketItem.variation.data.prices.rrp.price.value || 0;
+          var rrp = ((_basketItem$variation7 = basketItem.variation.data.prices) === null || _basketItem$variation7 === void 0 ? void 0 : (_basketItem$variation8 = _basketItem$variation7.rrp) === null || _basketItem$variation8 === void 0 ? void 0 : _basketItem$variation8.price.value) || 0;
 
           if (rrp > itemPrice) {
             youSave += (rrp - itemPrice) * itemQuantity;
@@ -1398,10 +1404,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       try {
         var _loop = function _loop() {
-          var _basketItem$variation;
+          var _basketItem$variation9;
 
           var basketItem = _step6.value;
-          (_basketItem$variation = basketItem.variation.data.properties) === null || _basketItem$variation === void 0 ? void 0 : _basketItem$variation.forEach(function (property) {
+          (_basketItem$variation9 = basketItem.variation.data.properties) === null || _basketItem$variation9 === void 0 ? void 0 : _basketItem$variation9.forEach(function (property) {
             if (_this.isInBasketItemOrderParams(basketItem, property) && (Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_18__["isAdditionalCosts"])(property) || !Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_18__["hasVat"])(property) && App.useVariationOrderProperties)) {
               var existsIndisplayedProperties = _this.displayedProperties.find(function (entry) {
                 return entry.propertyId === property.propertyId;
@@ -7718,11 +7724,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-price",
@@ -7744,12 +7745,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     currentVariation: function currentVariation() {
+      console.log("Var loaded");
       return this.$store.getters["".concat(this.itemId, "/currentItemVariation")];
     },
     hasCrossPrice: function hasCrossPrice() {
-      var hasRrpPrice = !!this.currentVariation.prices.rrp && this.currentVariation.prices.rrp.unitPrice.value > this.currentVariation.prices.default.unitPrice.value;
-      var hasBeforePrice = this.hasSpecialOffer && !!this.currentVariation.prices.default && this.currentVariation.prices.default.unitPrice.value > this.currentVariation.prices.specialOffer.unitPrice.value;
-      return hasRrpPrice || hasBeforePrice;
+      var hasRrpPrice = !!this.currentVariation.prices.rrp && this.currentVariation.prices.rrp !== null && this.currentVariation.prices.rrp.unitPrice.value > this.currentVariation.prices.default.unitPrice.value;
+      return hasRrpPrice;
+    },
+    savePercent: function savePercent() {
+      if (this.currentVariation.prices.rrp === null || this.currentVariation.prices.default === null) return 0;
+      if (this.currentVariation.prices.default.price.value >= this.currentVariation.prices.rrp.price.value) return 0;
+      return (1 - this.currentVariation.prices.default.price.value / this.currentVariation.prices.rrp.price.value) * 100;
     },
     hasSpecialOffer: function hasSpecialOffer() {
       return !!this.currentVariation.prices.specialOffer;
@@ -11544,7 +11550,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return !this.$ceres.config.item.showPleaseSelect || this.$ceres.initialPleaseSelect == 0 || this.forceUrlWithVariationId;
     },
     hasCrossPrice: function hasCrossPrice() {
-      var hasRrpPrice = !!this.item.prices.rrp && this.item.prices.rrp.unitPrice.value > this.item.prices.default.unitPrice.value;
+      var hasRrpPrice = !!this.item.prices.rrp && this.item.prices.rrp !== null && this.item.prices.rrp.unitPrice.value > this.item.prices.default.unitPrice.value;
       var hasBeforePrice = !!this.item.prices.specialOffer && !!this.item.prices.default && this.item.prices.default.unitPrice.value > this.item.prices.specialOffer.unitPrice.value;
       return hasRrpPrice || hasBeforePrice;
     }
@@ -49564,23 +49570,11 @@ var render = function() {
     },
     [
       _vm._ssrNode(
-        (_vm.currentVariation.prices.default.price.value > 0 &&
-        _vm.currentVariation.prices.rrp.price.value > 0 &&
-        _vm.currentVariation.prices.default.price.value <
-          _vm.currentVariation.prices.rrp.price.value
+        (_vm.savePercent > 0
           ? '<span class="percent">' +
             _vm._ssrEscape(
               "\n          Sie sparen " +
-                _vm._s(
-                  _vm._f("numberFormat")(
-                    (1 -
-                      _vm.currentVariation.prices.default.price.value /
-                        _vm.currentVariation.prices.rrp.price.value) *
-                      100,
-                    2,
-                    ","
-                  )
-                ) +
+                _vm._s(_vm._f("numberFormat")(_vm.savePercent, 2, ",")) +
                 "%\n        "
             ) +
             "</span>"
@@ -49600,27 +49594,15 @@ var render = function() {
                   "\n            "
               ) +
               '<del class="small text-appearance">' +
-              (_vm.hasSpecialOffer
-                ? _vm._ssrEscape(
-                    "\n                    " +
-                      _vm._s(
-                        _vm._f("itemCrossPrice")(
-                          _vm.currentVariation.prices.default.unitPrice
-                            .formatted,
-                          true
-                        )
-                      ) +
-                      "\n                "
-                  )
-                : _vm._ssrEscape(
-                    "\n                    " +
-                      _vm._s(
-                        _vm._f("itemCrossPrice")(
-                          _vm.currentVariation.prices.rrp.unitPrice.formatted
-                        )
-                      ) +
-                      "\n                "
-                  )) +
+              _vm._ssrEscape(
+                "\n                " +
+                  _vm._s(
+                    _vm._f("itemCrossPrice")(
+                      _vm.currentVariation.prices.rrp.unitPrice.formatted
+                    )
+                  ) +
+                  "\n            "
+              ) +
               "</del></span>"
             : "<!---->") +
           " <span" +
@@ -51024,14 +51006,7 @@ var render = function() {
                                     [
                                       _c("graduated-prices"),
                                       _vm._v(" "),
-                                      _c("item-price", {
-                                        attrs: {
-                                          "template-override":
-                                            "#item-price-tpl",
-                                          "show-cross-price":
-                                            _vm.isRecommendedPriceActive
-                                        }
-                                      }),
+                                      _c("item-price"),
                                       _vm._v(" "),
                                       _c("input", {
                                         attrs: {
@@ -53537,7 +53512,7 @@ var render = function() {
               ),
               _vm._ssrNode(
                 ' <div class="productInfoContainer"><div class="tagLine">' +
-                  (_vm.item.prices.rrp &&
+                  (_vm.item.prices.rrp !== null &&
                   _vm.item.prices.rrp.price.value >
                     _vm.item.prices.default.unitPrice.value
                     ? '<span class="itemTag red">' +
@@ -53624,7 +53599,7 @@ var render = function() {
                       "</p>"
                     : "<div></div>") +
                   ' <div class="itemPrice"><div class="prices">' +
-                  (_vm.item.prices.rrp &&
+                  (_vm.item.prices.rrp !== null &&
                   _vm.item.prices.rrp.price.value >
                     _vm.item.prices.default.unitPrice.value
                     ? '<div class="price-view-port"><del class="crossprice">' +
@@ -53636,7 +53611,7 @@ var render = function() {
                   " <div" +
                   _vm._ssrClass("price", {
                     redPrice:
-                      _vm.item.prices.rrp &&
+                      _vm.item.prices.rrp !== null &&
                       _vm.item.prices.rrp.price.value >
                         _vm.item.prices.default.unitPrice.value
                   }) +
@@ -53744,7 +53719,7 @@ var render = function() {
                       }),
                       _vm._ssrNode(
                         ' <div class="prices ml-auto">' +
-                          (_vm.item.prices.rrp &&
+                          (_vm.item.prices.rrp !== null &&
                           _vm.item.prices.rrp.price.value >
                             _vm.item.prices.default.unitPrice.value
                             ? '<div class="price-view-port"><del class="crossprice">' +
@@ -53754,7 +53729,7 @@ var render = function() {
                           " <div" +
                           _vm._ssrClass("price", {
                             redPrice:
-                              _vm.item.prices.rrp &&
+                              _vm.item.prices.rrp !== null &&
                               _vm.item.prices.rrp.price.value >
                                 _vm.item.prices.default.unitPrice.value
                           }) +
@@ -53813,7 +53788,7 @@ var render = function() {
                       "</p>"
                     : "<!---->") +
                   ' <div class="itemPrice"><div class="prices">' +
-                  (_vm.item.prices.rrp &&
+                  (_vm.item.prices.rrp !== null &&
                   _vm.item.prices.rrp.price.value >
                     _vm.item.prices.default.unitPrice.value
                     ? '<div class="price-view-port"><del class="crossprice">' +
@@ -53823,7 +53798,7 @@ var render = function() {
                   " <div" +
                   _vm._ssrClass("price", {
                     redPrice:
-                      _vm.item.prices.rrp &&
+                      _vm.item.prices.rrp !== null &&
                       _vm.item.prices.rrp.price.value >
                         _vm.item.prices.default.unitPrice.value
                   }) +

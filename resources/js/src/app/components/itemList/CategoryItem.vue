@@ -14,7 +14,7 @@
             <div class="productInfoContainer">
             <div class="tagLine" >
                 <span class="itemTag red"
-                v-if="(item.prices.rrp && item.prices.rrp.price.value > item.prices.default.unitPrice.value)"
+                v-if="(item.prices.rrp !== null && item.prices.rrp.price.value > item.prices.default.unitPrice.value)"
                 v-html="this.$options.filters.numberFormat(((1 - item.prices.default.unitPrice.value / item.prices.rrp.price.value) * -100), 0, '') + ' %'">
                 </span>
                 <div class="itemTag" v-if="storeSpecial && storeSpecial.id == 2">
@@ -52,12 +52,12 @@
 
             <div class="itemPrice">
                 <div class="prices">
-                <div v-if="item.prices.rrp && item.prices.rrp.price.value > item.prices.default.unitPrice.value" class="price-view-port">
+                <div v-if="item.prices.rrp !== null && item.prices.rrp.price.value > item.prices.default.unitPrice.value" class="price-view-port">
                     <del class="crossprice"
                     v-html="'statt ' + item.prices.rrp.unitPrice.formatted"></del>
                 </div>
                 <div class="price"
-                    :class="{ redPrice: (item.prices.rrp && item.prices.rrp.price.value > item.prices.default.unitPrice.value) }"
+                    :class="{ redPrice: (item.prices.rrp !== null && item.prices.rrp.price.value > item.prices.default.unitPrice.value) }"
                     v-html="item.prices.default.unitPrice.formatted">
                 </div>
                 </div>
@@ -102,13 +102,13 @@
                 </add-to-basket>
 
                 <div class="prices ml-auto">
-                <div v-if="item.prices.rrp && item.prices.rrp.price.value > item.prices.default.unitPrice.value" class="price-view-port">
+                <div v-if="item.prices.rrp !== null && item.prices.rrp.price.value > item.prices.default.unitPrice.value" class="price-view-port">
                     <del class="crossprice"
                     v-html="item.prices.rrp.unitPrice.formatted"></del>
                 </div>
                 <div
                     class="price"
-                    :class="{ redPrice: (item.prices.rrp && item.prices.rrp.price.value > item.prices.default.unitPrice.value) }"
+                    :class="{ redPrice: (item.prices.rrp !== null && item.prices.rrp.price.value > item.prices.default.unitPrice.value) }"
                     v-html="item.prices.default.unitPrice.formatted"
                     ></div>
                 </div>
@@ -134,13 +134,13 @@
 
           <div class="itemPrice">
             <div class="prices">
-              <div v-if="item.prices.rrp && item.prices.rrp.price.value > item.prices.default.unitPrice.value" class="price-view-port">
+              <div v-if="item.prices.rrp !== null && item.prices.rrp.price.value > item.prices.default.unitPrice.value" class="price-view-port">
                 <del class="crossprice"
                 v-html="item.prices.rrp.unitPrice.formatted"></del>
               </div>
               <div
                 class="price"
-                :class="{ redPrice: (item.prices.rrp && item.prices.rrp.price.value > item.prices.default.unitPrice.value) }"
+                :class="{ redPrice: (item.prices.rrp !== null && item.prices.rrp.price.value > item.prices.default.unitPrice.value) }"
                 v-html="item.prices.default.unitPrice.formatted"
                 ></div>
             </div>
@@ -291,7 +291,7 @@ export default {
         },
 
         hasCrossPrice() {
-            const hasRrpPrice = !!this.item.prices.rrp &&
+            const hasRrpPrice = !!this.item.prices.rrp && this.item.prices.rrp !== null &&
                 this.item.prices.rrp.unitPrice.value > this.item.prices.default.unitPrice.value;
 
             const hasBeforePrice = !!this.item.prices.specialOffer &&

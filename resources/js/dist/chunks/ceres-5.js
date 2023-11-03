@@ -431,7 +431,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return !this.$ceres.config.item.showPleaseSelect || this.$ceres.initialPleaseSelect == 0 || this.forceUrlWithVariationId;
     },
     hasCrossPrice: function hasCrossPrice() {
-      var hasRrpPrice = !!this.item.prices.rrp && this.item.prices.rrp.unitPrice.value > this.item.prices.default.unitPrice.value;
+      var hasRrpPrice = !!this.item.prices.rrp && this.item.prices.rrp !== null && this.item.prices.rrp.unitPrice.value > this.item.prices.default.unitPrice.value;
       var hasBeforePrice = !!this.item.prices.specialOffer && !!this.item.prices.default && this.item.prices.default.unitPrice.value > this.item.prices.specialOffer.unitPrice.value;
       return hasRrpPrice || hasBeforePrice;
     }
@@ -724,7 +724,7 @@ var render = function() {
                 "div",
                 { staticClass: "tagLine" },
                 [
-                  _vm.item.prices.rrp &&
+                  _vm.item.prices.rrp !== null &&
                   _vm.item.prices.rrp.price.value >
                     _vm.item.prices.default.unitPrice.value
                     ? _c("span", {
@@ -841,7 +841,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "itemPrice" }, [
                 _c("div", { staticClass: "prices" }, [
-                  _vm.item.prices.rrp &&
+                  _vm.item.prices.rrp !== null &&
                   _vm.item.prices.rrp.price.value >
                     _vm.item.prices.default.unitPrice.value
                     ? _c("div", { staticClass: "price-view-port" }, [
@@ -860,7 +860,7 @@ var render = function() {
                     staticClass: "price",
                     class: {
                       redPrice:
-                        _vm.item.prices.rrp &&
+                        _vm.item.prices.rrp !== null &&
                         _vm.item.prices.rrp.price.value >
                           _vm.item.prices.default.unitPrice.value
                     },
@@ -966,7 +966,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("div", { staticClass: "prices ml-auto" }, [
-                  _vm.item.prices.rrp &&
+                  _vm.item.prices.rrp !== null &&
                   _vm.item.prices.rrp.price.value >
                     _vm.item.prices.default.unitPrice.value
                     ? _c("div", { staticClass: "price-view-port" }, [
@@ -985,7 +985,7 @@ var render = function() {
                     staticClass: "price",
                     class: {
                       redPrice:
-                        _vm.item.prices.rrp &&
+                        _vm.item.prices.rrp !== null &&
                         _vm.item.prices.rrp.price.value >
                           _vm.item.prices.default.unitPrice.value
                     },
@@ -1058,7 +1058,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "itemPrice" }, [
                 _c("div", { staticClass: "prices" }, [
-                  _vm.item.prices.rrp &&
+                  _vm.item.prices.rrp !== null &&
                   _vm.item.prices.rrp.price.value >
                     _vm.item.prices.default.unitPrice.value
                     ? _c("div", { staticClass: "price-view-port" }, [
@@ -1077,7 +1077,7 @@ var render = function() {
                     staticClass: "price",
                     class: {
                       redPrice:
-                        _vm.item.prices.rrp &&
+                        _vm.item.prices.rrp !== null &&
                         _vm.item.prices.rrp.price.value >
                           _vm.item.prices.default.unitPrice.value
                     },
