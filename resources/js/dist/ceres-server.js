@@ -4621,7 +4621,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     formattedBirthday: function formattedBirthday() {
       if (this.value) {
-        var jsDate = new Date(this.value.birthday);
+        var _this$value$birthday;
+
+        var existingBirthday = (_this$value$birthday = this.value.birthday) !== null && _this$value$birthday !== void 0 ? _this$value$birthday : null;
+        if (existingBirthday === null) return '';
+        var jsDate = new Date();
         var formattedDate = jsDate.toLocaleDateString("de-DE", {
           year: "numeric",
           month: "2-digit",
@@ -4629,6 +4633,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         });
         return formattedDate;
       }
+
+      return '';
     },
     isParcelOrOfficeAvailable: function isParcelOrOfficeAvailable() {
       return (this.isParcelBoxAvailable || this.isPostOfficeAvailable) && this.selectedCountry && this.selectedCountry.isoCode2 === "DE" && this.addressType === "2";

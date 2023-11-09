@@ -948,7 +948,12 @@ export default {
         {
             if(this.value)
             {
-                var jsDate = new Date(this.value.birthday);
+                let existingBirthday = this.value.birthday ?? null;
+
+                if(existingBirthday === null)
+                    return '';
+
+                var jsDate = new Date();
                 const formattedDate = jsDate.toLocaleDateString("de-DE", {
                     year: "numeric",
                     month: "2-digit",
@@ -956,6 +961,7 @@ export default {
                 });
                 return formattedDate;
             }
+            return '';
         },
 
         isParcelOrOfficeAvailable()
