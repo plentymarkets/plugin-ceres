@@ -1029,7 +1029,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
         var existingBirthday = (_this$value$birthday = this.value.birthday) !== null && _this$value$birthday !== void 0 ? _this$value$birthday : null;
         if (existingBirthday === null) return '';
-        var jsDate = new Date();
+        var jsDate = new Date(existingBirthday);
         var formattedDate = jsDate.toLocaleDateString("de-DE", {
           year: "numeric",
           month: "2-digit",

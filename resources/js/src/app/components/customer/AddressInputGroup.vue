@@ -949,11 +949,10 @@ export default {
             if(this.value)
             {
                 let existingBirthday = this.value.birthday ?? null;
-
                 if(existingBirthday === null)
                     return '';
 
-                var jsDate = new Date();
+                var jsDate = new Date(existingBirthday);
                 const formattedDate = jsDate.toLocaleDateString("de-DE", {
                     year: "numeric",
                     month: "2-digit",
