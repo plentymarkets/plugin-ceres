@@ -25,6 +25,8 @@
 
     "bundleComponents.*",
 
+    "feedback.*",
+
     "defaultCategories",
 
     "variation.availability.averageDays",
