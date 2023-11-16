@@ -17,6 +17,8 @@
     "item.manufacturer.externalName",
     "item.manufacturer.position",
     "item.storeSpecial",
+    "item.feedback",
+    "item.feedbackCount",
 
     "texts.lang",
     "texts.name1",
@@ -24,8 +26,6 @@
     "texts.name3",
 
     "bundleComponents.*",
-
-    "feedback.*",
 
     "defaultCategories",
 
