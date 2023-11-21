@@ -300,7 +300,13 @@ export default Vue.component("address-select", {
                     }
                 );
         },
-
+        /**
+         * Set the current address as the primary
+         */
+        setPrimaryAddress(address)
+        {
+            console.log(address);
+        },
         /**
          * Close the current create/update address modal
          */

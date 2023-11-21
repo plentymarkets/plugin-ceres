@@ -123,6 +123,13 @@
                                                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                     </button>
                                                 </span>
+                                                <div
+                                                    class="mt-2 primaryAddress"
+                                                    v-if="item.pivot.isPrimary !== '1'"
+                                                    @click="setPrimaryAddress(item)"
+                                                >
+                                                    <span>Set primary</span>
+                                                </div>
                                             </div>
                                         </label>
                                     </li>
