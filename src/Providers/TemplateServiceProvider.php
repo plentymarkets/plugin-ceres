@@ -23,6 +23,7 @@ use Ceres\Extensions\TwigStyleScriptTagFilter;
 use Ceres\Hooks\CeresAfterBuildPlugins;
 use Ceres\Hooks\CopyAssistantPreviewSettings;
 use Ceres\Hooks\UploadFavicon;
+use Ceres\Methods\AlreadyPaidPaymentMethod;
 use Ceres\Widgets\WidgetCollection;
 use Ceres\Wizard\ShopWizard\Services\DefaultSettingsService;
 use Ceres\Wizard\ShopWizard\ShopWizard;
@@ -30,6 +31,9 @@ use IO\Extensions\Constants\ShopUrls;
 use IO\Extensions\Functions\Partial;
 use IO\Helper\RouteConfig;
 use IO\Helper\TemplateContainer;
+use Plenty\Modules\Basket\Events\Basket\AfterBasketChanged;
+use Plenty\Modules\Basket\Events\Basket\AfterBasketCreate;
+use Plenty\Modules\Payment\Method\Contracts\PaymentMethodContainer;
 use Plenty\Modules\Plugin\Events\AfterBuildPlugins;
 use Plenty\Modules\Plugin\Events\CopyPluginSet;
 use Plenty\Modules\ShopBuilder\Contracts\ContentWidgetRepositoryContract;
@@ -114,8 +118,9 @@ class TemplateServiceProvider extends ServiceProvider
      * @param Twig $twig
      * @param Dispatcher $eventDispatcher
      * @param ConfigRepository $config
+     * @param PaymentMethodContainer $paymentMethodContainer
      */
-    public function boot(Twig $twig, Dispatcher $eventDispatcher, ConfigRepository $config)
+    public function boot(Twig $twig, Dispatcher $eventDispatcher, ConfigRepository $config, PaymentMethodContainer $paymentMethodContainer)
     {
         //register plentyShop LTS assistant
         /** @var WizardContainerContract $wizardContainer */
@@ -129,6 +134,10 @@ class TemplateServiceProvider extends ServiceProvider
         foreach ($widgetClasses as $widgetClass) {
             $widgetRepository->registerWidget($widgetClass);
         }
+
+        //Register the AlreadyPaid payment method
+        $paymentMethodContainer->register('Ceres::ALREADY_PAID', AlreadyPaidPaymentMethod::class,
+            [AfterBasketChanged::class, AfterBasketCreate::class]   );
 
         $this->registerConfigValues();
         $this->registerConsents();
@@ -378,7 +387,9 @@ class TemplateServiceProvider extends ServiceProvider
                     'provider' => 'Ceres::Template.consentReCaptchaProvider',
                     'lifespan' => $webstoreConfig->sessionLifetime > 0 ? 'Ceres::Template.consentLifespan100Days' : 'Ceres::Template.consentLifespanSession',
                     'policyUrl' => 'Ceres::Template.consentReCaptchaPolicyUrl',
-                    'group' => 'media'
+                    'group' => $config->get('Ceres.global.google_recaptcha_consentGroup', 'media'),
+                    'necessary' => $config->get('Ceres.global.google_recaptcha_consentNecessary') === 'true',
+                    'isOptOut' => $config->get('Ceres.global.google_recaptcha_consentOptOut') === 'true'
                 ]
             );
         }

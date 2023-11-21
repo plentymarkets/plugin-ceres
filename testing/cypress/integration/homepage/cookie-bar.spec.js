@@ -94,7 +94,7 @@ context("Cookiebar", () =>
     it("Should consent group on toggle", () =>
     {
         cy.getByTestingAttr("cookie-bar-show-more-information").click();
-        cy.getByTestingAttr("cookie-bar").find(".privacy-settings .custom-control").eq(2).click();
+        cy.getByTestingAttr("cookie-bar").find(".privacy-settings .custom-control").eq(1).click();
 
         cy.getStore().then((store) =>
         {
@@ -127,8 +127,8 @@ context("Cookiebar", () =>
     it("Should consent a single privacy setting entry", () =>
     {
         cy.getByTestingAttr("cookie-bar-show-more-information").click();
-        cy.get(".consent-group").eq(2).find("[data-testing=privacy-settings-show-more-information]").click();
-        cy.get(".consent-group").eq(2).find(".consent .custom-control").click();
+        cy.get(".consent-group").eq(3).find("[data-testing=privacy-settings-show-more-information]").click();
+        cy.get(".consent-group").eq(3).find(".consent .custom-control").click();
 
         cy.getStore().then((store) =>
         {
@@ -139,8 +139,8 @@ context("Cookiebar", () =>
     it("Should withdraw the consent for paypal cookie", () =>
     {
         cy.getByTestingAttr("cookie-bar-show-more-information").click();
-        cy.get(".consent-group").eq(3).find("[data-testing=privacy-settings-show-more-information]").click();
-        cy.get(".consent-group").eq(3).find(".consent .custom-control").click();
+        cy.get(".consent-group").eq(2).find("[data-testing=privacy-settings-show-more-information]").click();
+        cy.get(".consent-group").eq(2).find(".consent .custom-control").click();
 
         cy.getStore().then((store) =>
         {

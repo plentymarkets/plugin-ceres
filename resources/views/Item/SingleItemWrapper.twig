@@ -12,7 +12,7 @@
         {% set robotsValue = 'ALL' %}
     {% endif %}
     {% embed getPartial('page-metadata') %}
-        {% block title          ItemName.get(itemData | itemName(webstoreConfig.urlTitleItemName - 1), itemData.variation.bundleType) %}
+        {% block title          ItemName.get(itemData | itemName(webstoreConfig.urlTitleItemName - 1, ""), itemData.variation.bundleType) %}
         {% block description    itemData.texts.metaDescription %}
         {% block keywords       itemData.texts.keywords %}
         {% block image          itemData.images.all[0].url %}
@@ -67,18 +67,33 @@
                     "priceValidUntil": "{{ priceValidUntil }}",
 {% endif %}
                     "url"           : "{{ requestedVariationUrl }}",
-{% if itemData.prices.default.baseLot > 0 %}
-                    "priceSpecification": {
-                        "@type": "UnitPriceSpecification",
-                        "price": "{{ itemData.prices.default.price.value | number_format(2, '.', '') }}",
-                        "priceCurrency": "{{ item.documents[0].data.prices.default.currency }}",
-                        "referenceQuantity": {
-                            "@type": "QuantitativeValue",
-                            "value": "{{ itemData.unit.content }}",
-                            "unitCode": "{{ itemData.unit.unitOfMeasurement }}"
+                    "priceSpecification":[
+                        {% if itemData.prices.rrp %}
+                            {
+                                "@type": "UnitPriceSpecification",
+                                "price": "{{ itemData.prices.rrp.price.value | number_format(2, '.', '') }}",
+                                "priceCurrency": "{{ item.documents[0].data.prices.rrp.currency }}",
+                                "priceType": "ListPrice",
+                                "referenceQuantity": {
+                                    "@type": "QuantitativeValue",
+                                    "value": "{{ itemData.unit.content }}",
+                                    "unitCode": "{{ itemData.unit.unitOfMeasurement }}"
+                                }
+                            },
+                        {% endif %}
+                        {
+                            "@type": "UnitPriceSpecification",
+                            "price": "{{ itemData.prices.default.price.value | number_format(2, '.', '') }}",
+                            "priceCurrency": "{{ item.documents[0].data.prices.default.currency }}",
+                            "priceType": "SalePrice",
+                            "referenceQuantity": {
+                                "@type": "QuantitativeValue",
+                                "value": "{{ itemData.unit.content }}",
+                                "unitCode": "{{ itemData.unit.unitOfMeasurement }}"
+                            }
                         }
-                    },
-{% endif %}
+
+                    ],
                     "availability"  : "{{ itemData.variation.availability.mappedAvailability }}",
                     "itemCondition" : "{{ conditionOfItem }}"
                 },

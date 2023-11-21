@@ -8,6 +8,7 @@ use Ceres\Wizard\ShopWizard\Models\ShopWizardPreviewConfiguration;
 use Ceres\Wizard\ShopWizard\Repositories\ShopWizardConfigRepository;
 use Ceres\Wizard\ShopWizard\Services\MappingService;
 use Ceres\Wizard\ShopWizard\Services\SettingsHandlerService;
+use Ceres\Wizard\ShopWizard\Services\AlreadyPaidShippingCountriesService;
 use Plenty\Modules\ContentCache\Contracts\ContentCacheInvalidationRepositoryContract;
 use Plenty\Modules\ContentCache\Contracts\ContentCacheSettingsRepositoryContract;
 use Plenty\Modules\Item\Search\Contracts\VariationElasticSearchSettingsRepositoryContract;
@@ -214,13 +215,6 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     $siteMapRepo->updateByWebstoreId($webstoreId, $siteMapConfig);
                 }
 
-                //we handle settings for shopping booster
-
-                if (isset($data["performance_shopBooster"])) {
-                    $cacheRepo = pluginApp(ContentCacheSettingsRepositoryContract::class);
-                    $cacheRepo->saveSettings($plentyId, (bool)$data["performance_shopBooster"]);
-                }
-
                 //save search languages settings
                 if (
                     isset($data["languages_firstSearchLanguage"]) ||
@@ -291,6 +285,15 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
 
                     $searchSettingsRepo->saveSearchSettings(["fields" => $itemSearchSettingsData]);
                 }
+
+                if (!isset($data['onlineStore_alreadyPaidShippingCountries'])) {
+                    $data['onlineStore_alreadyPaidShippingCountries'] = [];
+                }
+                $alreadyPaidShippingCountriesService = pluginApp(AlreadyPaidShippingCountriesService::class);
+                $alreadyPaidShippingCountriesService->execute(
+                    $plentyId,
+                    $data['onlineStore_alreadyPaidShippingCountries']
+                );
 
                 $previewConfData = [
                     'pluginSetId' => $pluginSetId,

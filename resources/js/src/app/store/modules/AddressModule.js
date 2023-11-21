@@ -387,6 +387,8 @@ const actions =
                                 address.id = response.events.CheckoutChanged.checkout.billingAddressId;
                                 commit("addBillingAddress", { billingAddress: address });
                             }
+
+                            commit("updateBillingAddress", address);
                         }
                         else if (addressType === "2")
                         {

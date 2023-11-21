@@ -1,12 +1,15 @@
 .sticky-element {
-    padding-bottom: .1px; // force disable margin collapse
+    > .widget-inner {
+        display: inline-block; // Fix sticky-container height miscalculation and resulting shaking
+        width: 100%;
+    }
 
     p:empty {
         margin-bottom: 0; // remove margin of empty paragraph for correct height detection
     }
 
     // Needed for elements below not to overlap sticky
-    .sticky-element.is-sticky {
+    &.is-sticky {
         z-index: $zindex-sticky !important; // stylelint-disable-line declaration-no-important
     }
 }

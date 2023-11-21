@@ -56,7 +56,8 @@ class OrderDataWidget extends OrderConfirmationBaseWidget
                     "address4",
                     "postalCode",
                     "town",
-                    "country"
+                    "country",
+                    "state"
                 ]
             )
             ->withName("Widget.orderDataAddressFields")
@@ -74,6 +75,7 @@ class OrderDataWidget extends OrderConfirmationBaseWidget
                     ->addEntry("postalCode", "Widget.addressFieldPostalCode")
                     ->addEntry("town", "Widget.addressFieldTown")
                     ->addEntry("country", "Widget.addressFieldCountry")
+                    ->addEntry("state", "Widget.addressFieldStateId")
                     ->toArray()
             );
 

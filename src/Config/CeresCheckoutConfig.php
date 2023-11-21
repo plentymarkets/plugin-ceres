@@ -21,6 +21,12 @@ class CeresCheckoutConfig extends PluginConfig
      */
     public $showAllShippingProfiles;
 
+
+    /**
+     * @var string $alreadyPaidIconUrl
+     */
+    public $alreadyPaidIconUrl;
+
     /**
      * @inheritDoc
      */
@@ -35,5 +41,6 @@ class CeresCheckoutConfig extends PluginConfig
     protected function load()
     {
         $this->showAllShippingProfiles = $this->getBooleanValue('checkout.show_all_shipping_profiles', false);
+        $this->alreadyPaidIconUrl = $this->getTextValue('checkout.already_paid_icon_url', '');
     }
 }

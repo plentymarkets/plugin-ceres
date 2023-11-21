@@ -13,7 +13,7 @@
             <div
                 class="input-unit"
                 v-if="stateList && stateList.length > 0"
-                v-validate="isInRequiredFields('stateId')"
+                v-validate:StateSelect="isInRequiredFields('stateId')"
                 data-model="stateId">
                 <select :id="'state-id-select' + _uid" :value="selectedStateId" class="custom-select" @change="stateChanged($event.target.value)">
                     <option :selected="selectedStateId === null">{{ $translate("Ceres::Template.addressPleaseSelect") }}</option>
@@ -95,9 +95,31 @@ export default {
             return this.requiredAddressFields[iso];
         },
 
+        countryList()
+        {
+            // if it's for a billing address we add every eu country to the list due to legal obligations
+            if (this.addressType === "1")
+            {
+                const activeCountries = this.$store.state.localization.shippingCountries;
+                const euCountries = this.$store.state.localization.euShippingCountries;
+                const allCountries = [...activeCountries, ...euCountries];
+
+                let combinedCountries = {};
+                allCountries.forEach(country => {
+                    combinedCountries[country.id] = country;
+                });
+
+                combinedCountries = Object.values(combinedCountries);
+                combinedCountries = combinedCountries.sort((a, b) => a.currLangName.localeCompare(b.currLangName));
+
+                return combinedCountries;
+            }
+
+            return this.$store.state.localization.shippingCountries
+        },
+
         ...mapState({
-            shippingCountryId: state => state.localization.shippingCountryId,
-            countryList: state => state.localization.shippingCountries
+            shippingCountryId: state => state.localization.shippingCountryId
         })
     },
 
@@ -115,7 +137,7 @@ export default {
          */
         countryChanged(value)
         {
-            this.$emit("country-changed", this.getCountryById(parseInt(value)));
+            this.$emit("country-changed", this.getCountryById(parseInt(value)) ?? this.countryList[0]);
             this.$emit("state-changed", null);
         },
 
@@ -149,7 +171,7 @@ export default {
         {
             const countryId = this.selectedCountryId || this.shippingCountryId;
 
-            this.selectedCountry = this.getCountryById(countryId);
+            this.selectedCountry = this.getCountryById(countryId) ?? this.countryList[0];
 
             if (this.selectedCountry)
             {
