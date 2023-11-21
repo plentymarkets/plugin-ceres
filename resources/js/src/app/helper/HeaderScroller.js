@@ -131,7 +131,7 @@ export default class HeaderScroller
             const elemHeight = this.allHeaderChildrenHeights[i];
 
             offset = absolutePos - window.pageYOffset;
-            elem.style.position = "absolute";
+            elem.style.position = "sticky";
 
             // Element should not be considerd in height calculation of following elements
             if (elem.dataset.hasOwnProperty("scrollVoid"))
