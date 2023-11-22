@@ -306,8 +306,10 @@ export default Vue.component("address-select", {
          * @param address
          * @param addressType
          */
-        setPrimaryAddress(address, addressType = 1)
+        setPrimaryAddress(address, addressType = 1, event)
         {
+            event.preventDefault();
+            event.stopPropagation();
             const addressTypeClassElement = document.getElementsByClassName("addressType" + addressType);
 
             for (let i = 0; i < addressTypeClassElement.length; i++)

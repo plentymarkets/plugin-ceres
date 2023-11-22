@@ -71405,6 +71405,9 @@ var ModalService = __webpack_require__(/*! ../../../services/ModalService */ "./
       var _this4 = this;
 
       var addressType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+      var event = arguments.length > 2 ? arguments[2] : undefined;
+      event.preventDefault();
+      event.stopPropagation();
       var addressTypeClassElement = document.getElementsByClassName("addressType" + addressType);
 
       for (var i = 0; i < addressTypeClassElement.length; i++) {
