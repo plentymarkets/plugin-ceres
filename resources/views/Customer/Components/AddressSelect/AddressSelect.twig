@@ -124,6 +124,7 @@
                                                     </button>
                                                 </span>
                                                 <div
+                                                    :isPrimary="item.pivot.isPrimary"
                                                     class="mt-2 primaryAddress"
                                                     :class="item.pivot.isPrimary !== 1 ? 'addressType' + addressType : 'd-none addressType' + addressType"
                                                     @click="setPrimaryAddress(item, addressType)"
