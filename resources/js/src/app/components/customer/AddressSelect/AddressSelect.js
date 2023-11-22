@@ -305,7 +305,18 @@ export default Vue.component("address-select", {
          */
         setPrimaryAddress(address)
         {
-            console.log(address);
+            address.pivot.isPrimary = 1;
+            this.$store.dispatch("updateAddress", { address: address, addressType: 1 })
+                .then(
+                    () =>
+                    {
+                        console.log("Primary address was set!");
+                    },
+                    error =>
+                    {
+                        this._handleError(error.error);
+                    }
+                );
         },
         /**
          * Close the current create/update address modal
