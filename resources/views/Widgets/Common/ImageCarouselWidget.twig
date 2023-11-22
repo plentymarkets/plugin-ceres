@@ -155,28 +155,28 @@
                             {{ Twig.endif() }}
                         {% endif %}
 
-                        {% if widget.settings.lazyLoading.mobile %}
-                            <lazy-img
-                                picture-class="img-cover"
-                                height="{{imgHeight}}"
-                                width="{{imgWidth}}"
-                                image-url="{{ Twig.print("slide.imageUrl") }}"
-                                fallback-url="{{ Twig.print("slide.fallbackImageUrl") }}"
-                                alt="{{ Twig.print("altText") }}"
-                                title="{{ Twig.print("imgTitle") }}"
-                                role="option">
-                            </lazy-img>
-                            <noscript v-if="false">
-                                <img src="{{ Twig.print("fallbackUrl") }}"
-                                     height="{{imgHeight}}"
-                                     width="{{imgWidth}}"
-                                    class="img-cover"
-                                    alt="{{ Twig.print("altText") }}"
-                                    title="{{ Twig.print("imgTitle") }}">
-                            </noscript>
-                        {% else %}
-                            <picture>
-                                <source srcset="{{ Twig.print("slide.imageUrl") }}" {{ Twig.if("slide.imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>
+{#                        {% if widget.settings.lazyLoading.mobile %}#}
+{#                            <lazy-img#}
+{#                                picture-class="img-cover"#}
+{#                                height="{{imgHeight}}"#}
+{#                                width="{{imgWidth}}"#}
+{#                                image-url="{{ Twig.print("slide.imageUrl") }}"#}
+{#                                fallback-url="{{ Twig.print("slide.fallbackImageUrl") }}"#}
+{#                                alt="{{ Twig.print("altText") }}"#}
+{#                                title="{{ Twig.print("imgTitle") }}"#}
+{#                                role="option">#}
+{#                            </lazy-img>#}
+{#                            <noscript v-if="false">#}
+{#                                <img src="{{ Twig.print("fallbackUrl") }}"#}
+{#                                     height="{{imgHeight}}"#}
+{#                                     width="{{imgWidth}}"#}
+{#                                    class="img-cover"#}
+{#                                    alt="{{ Twig.print("altText") }}"#}
+{#                                    title="{{ Twig.print("imgTitle") }}">#}
+{#                            </noscript>#}
+{#                        {% else %}#}
+{#                            <picture>#}
+{#                                <source srcset="{{ Twig.print("slide.imageUrl") }}" {{ Twig.if("slide.imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>#}
 {#                                <img#}
 {#                                    class="img-cover"#}
 {#                                    height="{{imgHeight}}"#}
@@ -186,9 +186,9 @@
 {#                                    title="{{ Twig.print("imgTitle") }}"#}
 {#                                    role="option"#}
 {#                                />#}
-                            </picture>
-                        {% endif %}
-                    {{ Twig.endif() }}
+{#                            </picture>#}
+{#                        {% endif %}#}
+{#                    {{ Twig.endif() }}#}
 
                     {{ Twig.if("slide.name is not empty and slide.headlineStyle != 'no-caption'") }}
                     <div class="widget-caption">
