@@ -314,7 +314,6 @@ export default Vue.component("address-select", {
             {
                 addressTypeClassElement[i].classList.remove("d-none");
             }
-            addressTypeClassElement.classList.remove("d-none");
             address.pivot.isPrimary = 1;
             this.$store.dispatch("updateAddress", { address: address, addressType: addressType })
                 .then(

@@ -71411,7 +71411,6 @@ var ModalService = __webpack_require__(/*! ../../../services/ModalService */ "./
         addressTypeClassElement[i].classList.remove("d-none");
       }
 
-      addressTypeClassElement.classList.remove("d-none");
       address.pivot.isPrimary = 1;
       this.$store.dispatch("updateAddress", {
         address: address,
