@@ -129,7 +129,7 @@
                                                     :class="item.pivot.isPrimary !== 1 ? 'addressType' + addressType : 'd-none addressType' + addressType"
                                                     @click="setPrimaryAddress(item, addressType)"
                                                 >
-                                                    <span>Set primary</span>
+                                                    <span>{{ trans("Ceres::Template.addressSetPrimary") }}</span>
                                                 </div>
                                             </div>
                                         </label>

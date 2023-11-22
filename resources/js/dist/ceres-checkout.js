@@ -71416,7 +71416,7 @@ var ModalService = __webpack_require__(/*! ../../../services/ModalService */ "./
         address: address,
         addressType: addressType
       }).then(function () {
-        console.log("Primary address has been set!");
+        document.querySelector(".cmp-address-list .item input:checked+.item-inner .addressType" + addressType).classList.add("d-none");
       }, function (error) {
         _this4._handleError(error.error);
       });

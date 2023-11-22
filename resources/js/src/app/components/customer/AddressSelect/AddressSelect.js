@@ -319,7 +319,7 @@ export default Vue.component("address-select", {
                 .then(
                     () =>
                     {
-                        console.log("Primary address has been set!");
+                        document.querySelector(".cmp-address-list .item input:checked+.item-inner .addressType" + addressType).classList.add("d-none");
                     },
                     error =>
                     {
