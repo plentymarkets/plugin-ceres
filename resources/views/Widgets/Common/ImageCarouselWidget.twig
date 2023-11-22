@@ -13,6 +13,8 @@
 {% set inlineMargin = WidgetHelper.getInlineSpacings(spacingSettings,"", spacingSettings.customMargin.mobile) %}
 {% set margin = WidgetHelper.getSpacingClasses(spacingSettings,"", spacingSettings.customMargin.mobile) %}
 {% set preloadImage    = widget.settings.preloadImage.mobile %}
+{% set imgWidth    = '1920' %}
+{% set imgHeight    = '1080' %}
 
 
 {{ Twig.import("ItemName", "Ceres::PageDesign.Macros.ItemName") }}
@@ -156,7 +158,8 @@
                         {% if widget.settings.lazyLoading.mobile %}
                             <lazy-img
                                 picture-class="img-cover"
-                                width="400" height="400"
+                                height="{{imgHeight}}"
+                                width="{{imgWidth}}"
                                 image-url="{{ Twig.print("slide.imageUrl") }}"
                                 fallback-url="{{ Twig.print("slide.fallbackImageUrl") }}"
                                 alt="{{ Twig.print("altText") }}"
@@ -165,7 +168,8 @@
                             </lazy-img>
                             <noscript v-if="false">
                                 <img src="{{ Twig.print("fallbackUrl") }}"
-                                     width="400" height="400"
+                                     height="{{imgHeight}}"
+                                     width="{{imgWidth}}"
                                     class="img-cover"
                                     alt="{{ Twig.print("altText") }}"
                                     title="{{ Twig.print("imgTitle") }}">
@@ -175,7 +179,8 @@
                                 <source srcset="{{ Twig.print("slide.imageUrl") }}" {{ Twig.if("slide.imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>
                                 <img
                                     class="img-cover"
-                                    width="400" height="400"
+                                    height="{{imgHeight}}"
+                                    width="{{imgWidth}}"
                                     src="{{ Twig.print("fallbackUrl") }}"
                                     alt="{{ Twig.print("altText") }}"
                                     title="{{ Twig.print("imgTitle") }}"
