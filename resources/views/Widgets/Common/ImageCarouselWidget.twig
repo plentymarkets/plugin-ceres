@@ -177,8 +177,8 @@
                                 <source srcset="{{ Twig.print("slide.imageUrl") }}" {{ Twig.if("slide.imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>
                                 <img
                                     class="img-cover"
-                                    width="1920"
-                                    height="1080"
+                                    width="600"
+                                    height="400"
                                     src="{{ Twig.print("fallbackUrl") }}"
                                     alt="{{ Twig.print("altText") }}"
                                     title="{{ Twig.print("imgTitle") }}"
