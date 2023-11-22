@@ -71398,16 +71398,26 @@ var ModalService = __webpack_require__(/*! ../../../services/ModalService */ "./
 
     /**
      * Set the current address as the primary
+     * @param address
+     * @param addressType
      */
     setPrimaryAddress: function setPrimaryAddress(address) {
       var _this4 = this;
 
+      var addressType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+      var addressTypeClassElement = document.getElementsByClassName("addressType" + addressType);
+
+      for (var i = 0; i < addressTypeClassElement.length; i++) {
+        addressTypeClassElement[i].classList.remove("d-none");
+      }
+
+      addressTypeClassElement.classList.remove("d-none");
       address.pivot.isPrimary = 1;
       this.$store.dispatch("updateAddress", {
         address: address,
-        addressType: 1
+        addressType: addressType
       }).then(function () {
-        console.log("Primary address was set!");
+        console.log("Primary address has been set!");
       }, function (error) {
         _this4._handleError(error.error);
       });

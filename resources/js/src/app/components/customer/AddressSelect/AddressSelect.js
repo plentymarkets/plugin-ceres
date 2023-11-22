@@ -300,17 +300,27 @@ export default Vue.component("address-select", {
                     }
                 );
         },
+
         /**
          * Set the current address as the primary
+         * @param address
+         * @param addressType
          */
-        setPrimaryAddress(address)
+        setPrimaryAddress(address, addressType = 1)
         {
+            const addressTypeClassElement = document.getElementsByClassName("addressType" + addressType);
+
+            for (let i = 0; i < addressTypeClassElement.length; i++)
+            {
+                addressTypeClassElement[i].classList.remove("d-none");
+            }
+            addressTypeClassElement.classList.remove("d-none");
             address.pivot.isPrimary = 1;
-            this.$store.dispatch("updateAddress", { address: address, addressType: 1 })
+            this.$store.dispatch("updateAddress", { address: address, addressType: addressType })
                 .then(
                     () =>
                     {
-                        console.log("Primary address was set!");
+                        console.log("Primary address has been set!");
                     },
                     error =>
                     {
