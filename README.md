@@ -1,6 +1,6 @@
 ![plentymarkets Logo](http://www.plentymarkets.eu/layout/pm/images/logo/plentymarkets-logo.jpg)
 
-CLS Push Test 1
+CLS Push Test 2
 
 # plentyShop LTS ![Travis Build Stable](https://img.shields.io/travis/plentymarkets/plugin-ceres/stable?label=build)
 
