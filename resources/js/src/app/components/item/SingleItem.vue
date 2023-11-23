@@ -401,7 +401,7 @@
                         <input class="honey" type="text" name="username" autocomplete="new-password" tabindex="-1">
                         <div class="col-12 text-right">
                           <recaptcha></recaptcha>
-                          <input type="submit" value="Anfrage senden" class="btn btn-bkm btn-sm" />
+                          <input type="submit" value="Anfrage senden" class="btn btn-bkm btn-sm btn-send-contact-form" />
                         </div>
                       </form>
 

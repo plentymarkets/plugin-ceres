@@ -11474,6 +11474,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     disableCarouselOnMobile: {
       type: Boolean
     },
+    disableCarousel: {
+      type: Boolean,
+      default: false
+    },
     paddingClasses: {
       type: String,
       default: null
@@ -11495,6 +11499,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread({
     item: function item() {
       return this.itemData || this.itemSlotData || this.itemDataRef;
+    },
+    carouselEnabled: function carouselEnabled() {
+      var configVal = App.config.item.enableImageCarousel;
+      if (this.disableCarousel) return false;
+      return configVal;
     },
     itemSlotData: Object(_helper_getSlotData__WEBPACK_IMPORTED_MODULE_10__["getSlotData"])('item-data'),
 
@@ -52706,7 +52715,8 @@ var render = function() {
                                         _c("recaptcha"),
                                         _vm._v(" "),
                                         _c("input", {
-                                          staticClass: "btn btn-bkm btn-sm",
+                                          staticClass:
+                                            "btn btn-bkm btn-sm btn-send-contact-form",
                                           attrs: {
                                             type: "submit",
                                             value: "Anfrage senden"
@@ -53509,8 +53519,7 @@ var render = function() {
                         _vm.item,
                         _vm.urlWithVariationId
                       ),
-                      "enable-carousel":
-                        _vm.$ceres.config.item.enableImageCarousel
+                      "enable-carousel": _vm.carouselEnabled
                     }
                   })
                 ],

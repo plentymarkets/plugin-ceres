@@ -4,12 +4,12 @@
             <bkAddToWishlist :variation-id="item.variation.id"></bkAddToWishlist>
             <div class="produkt_picture">
                 <category-image-carousel :image-urls-data="item.images | itemImages('urlSecondPreview')"
-                                        :alt="item | itemName"
-                                        :title="item | itemName"
-                                        :item-url="item | itemURL(urlWithVariationId)"
-                                        :enable-carousel="$ceres.config.item.enableImageCarousel"
-                                        ref="categoryImageCarousel">
-                    </category-image-carousel>
+                                    :alt="item | itemName"
+                                    :title="item | itemName"
+                                    :item-url="item | itemURL(urlWithVariationId)"
+                                    :enable-carousel="carouselEnabled"
+                                    ref="categoryImageCarousel">
+                </category-image-carousel>
             </div>
             <div class="productInfoContainer">
             <div class="tagLine" >
@@ -181,6 +181,11 @@ export default {
         {
             type: Boolean
         },
+        disableCarousel:
+        {
+            type: Boolean,
+            default: false
+        },
         paddingClasses:
         {
             type: String,
@@ -212,6 +217,14 @@ export default {
         item()
         {
             return this.itemData || this.itemSlotData || this.itemDataRef;
+        },
+
+        carouselEnabled()
+        {
+            let configVal = App.config.item.enableImageCarousel;
+            if(this.disableCarousel)
+                return false;
+            return configVal;
         },
 
         itemSlotData: getSlotData('item-data'),

@@ -47389,7 +47389,8 @@ var render = function() {
                                         _c("recaptcha"),
                                         _vm._v(" "),
                                         _c("input", {
-                                          staticClass: "btn btn-bkm btn-sm",
+                                          staticClass:
+                                            "btn btn-bkm btn-sm btn-send-contact-form",
                                           attrs: {
                                             type: "submit",
                                             value: "Anfrage senden"
