@@ -60353,7 +60353,7 @@ var HeaderScroller = /*#__PURE__*/function () {
         var elem = this.headerParent.children[i];
         var elemHeight = this.allHeaderChildrenHeights[i];
         offset = absolutePos - window.pageYOffset;
-        elem.style.position = "absolute"; // Element should not be considerd in height calculation of following elements
+        elem.style.position = "sticky"; // Element should not be considerd in height calculation of following elements
 
         if (elem.dataset.hasOwnProperty("scrollVoid")) {
           continue;
@@ -60468,7 +60468,7 @@ var HeaderScroller = /*#__PURE__*/function () {
     value: function fixateHeader() {
       var _document$querySelect;
 
-      (_document$querySelect = document.querySelector("#page-header")) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.classList.add("fixed-top");
+      (_document$querySelect = document.querySelector("#page-header")) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.classList.add("sticky-top");
     } // Remove the class .fixed-top from the header element.
 
   }, {
@@ -60476,7 +60476,7 @@ var HeaderScroller = /*#__PURE__*/function () {
     value: function unfixHeader() {
       var _document$querySelect2;
 
-      (_document$querySelect2 = document.querySelector("#page-header")) === null || _document$querySelect2 === void 0 ? void 0 : _document$querySelect2.classList.remove("fixed-top");
+      (_document$querySelect2 = document.querySelector("#page-header")) === null || _document$querySelect2 === void 0 ? void 0 : _document$querySelect2.classList.remove("sticky-top");
     }
   }]);
 
