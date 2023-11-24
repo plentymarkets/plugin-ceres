@@ -14894,10 +14894,14 @@ header .widget {
 
         .primaryAddress {
             position: absolute;
-            right: 14px;
-            top: 50px;
+            width: 100%;
+            top: 30px;
             color: $primary;
             font-size: 13px;
+
+            .btn {
+              width: 100% !important;
+            }
         }
     }
 
@@ -14922,6 +14926,7 @@ header .widget {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
+        position: relative;
 
         .fa {
             float: none;
