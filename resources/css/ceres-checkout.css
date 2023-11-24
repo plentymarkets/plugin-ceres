@@ -17887,10 +17887,13 @@ header .widget {
 }
 .cmp-address-list .item .primaryAddress {
   position: absolute;
-  right: 14px;
-  top: 50px;
+  width: 100%;
+  top: 30px;
   color: #008ebd;
   font-size: 13px;
+}
+.cmp-address-list .item .primaryAddress .btn {
+  width: 100% !important;
 }
 .cmp-address-list .item-inner {
   display: flex;
@@ -17906,6 +17909,7 @@ header .widget {
 }
 .cmp-address-list .item-controls {
   display: flex;
+  position: relative;
 }
 .cmp-address-list .item-controls .fa {
   float: none;
