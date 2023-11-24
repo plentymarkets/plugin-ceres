@@ -123,14 +123,20 @@
                                                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                     </button>
                                                 </span>
-                                                <div
-                                                    :isPrimary="item.pivot.isPrimary"
+
+                                                <span
                                                     class="mt-2 primaryAddress"
                                                     :class="item.pivot.isPrimary !== 1 ? 'addressType' + addressType : 'd-none addressType' + addressType"
-                                                    @click="setPrimaryAddress(item, addressType, $event)"
-                                                >
-                                                    <span>{{ trans("Ceres::Template.addressSetPrimary") }}</span>
-                                                </div>
+                                                    >
+                                                    <button
+                                                        data-placement="top"
+                                                        title="{{ trans("Ceres::Template.addressSetPrimary") }}"
+                                                        class="btn btn-primary btn-medium btn-appearance mr-1"
+                                                        @click="setPrimaryAddress(item, addressType, $event)"
+                                                    >
+                                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                    </button>
+                                                </span>
                                             </div>
                                         </label>
                                     </li>
