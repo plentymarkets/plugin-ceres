@@ -71766,6 +71766,10 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
 
       this._syncOptionTypesAddressData();
 
+      if (this.addressType === "1" && document.querySelector(".page-content").dataset.nrofbillingaddresses === "0" || this.addressType === "2" && document.querySelector(".page-content").dataset.nrofdeliveryaddresses === "0") {
+        this.addressData.pivot.isPrimary = 1;
+      }
+
       this.$store.dispatch("createAddress", {
         address: this.addressData,
         addressType: this.addressType

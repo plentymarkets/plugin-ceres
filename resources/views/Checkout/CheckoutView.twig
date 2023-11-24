@@ -7,6 +7,9 @@
 {% set primaryDeliveryAddress = 0 %}
 {% set primaryBillingAddress = 0 %}
 
+{% set nrOfDeliveryAddresses = deliveryAddresses|length %}
+{% set nrOfBillingAddresses = billingAddresses|length %}
+
 {% for deliveryAddress in deliveryAddresses %}
     {% if deliveryAddress.pivot.isPrimary == "1" %}
         {% set primaryDeliveryAddress = deliveryAddress.id %}
@@ -59,7 +62,7 @@
         "gb": ceresConfig.addresses.billingAddressRequire_en
         }
     %}
-    <div class="page-content checkout container-max pt-3" :test-data1="{{primaryBillingAddress}}" :test-data2="{{primaryDeliveryAddress}}">
+    <div class="page-content checkout container-max pt-3" :data-nrOfDeliveryAddresses="{{nrOfDeliveryAddresses}}" :data-nrOfBillingAddresses="{{nrOfBillingAddresses}}">
         {% set overrideCheckout = LayoutContainer.show("Ceres::Checkout") %}
         {% if overrideCheckout | trim is empty %}
             <div class="row mt-3">
