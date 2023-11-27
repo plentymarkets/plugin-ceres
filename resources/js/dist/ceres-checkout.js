@@ -71781,11 +71781,13 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
         _this3.waiting = false;
 
         if (setAsPrimary === 1) {
-          console.log(_this3.addressData); // const theNewSavedAddress = response.data;
-          //
-          // theNewSavedAddress.pivot.isPrimary = 1;
-          // this.updateAddress();
-          // console.log(response.data);
+          var theNewSavedAddress = response.data;
+          theNewSavedAddress.pivot.isPrimary = 1;
+
+          _this3.$store.dispatch("updateAddress", {
+            address: theNewSavedAddress,
+            addressType: _this3.addressType
+          });
         }
       }, function (error) {
         _this3.waiting = false;

@@ -217,12 +217,10 @@ export default Vue.component("create-update-address", {
                         this.waiting = false;
                         if (setAsPrimary === 1)
                         {
-                            console.log(this.addressData);
-                            // const theNewSavedAddress = response.data;
-                            //
-                            // theNewSavedAddress.pivot.isPrimary = 1;
-                            // this.updateAddress();
-                            // console.log(response.data);
+                            const theNewSavedAddress = response.data;
+
+                            theNewSavedAddress.pivot.isPrimary = 1;
+                            this.$store.dispatch("updateAddress", { address: theNewSavedAddress, addressType: this.addressType });
                         }
                     },
                     error =>
