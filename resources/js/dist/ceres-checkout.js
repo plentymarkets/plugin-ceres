@@ -71775,13 +71775,19 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
         _this3.waiting = false;
         console.log("billing addresses", document.querySelector(".page-content").dataset.nrofbillingaddresses);
 
-        if (_this3.addressType === "1" && document.querySelector(".page-content").dataset.nrofbillingaddresses === "1" || _this3.addressType === "2" && document.querySelector(".page-content").dataset.nrofdeliveryaddresses === "1") {
+        if (_this3.addressType === "1" && document.querySelector(".page-content").dataset.nrofbillingaddresses === "0" || _this3.addressType === "2" && document.querySelector(".page-content").dataset.nrofdeliveryaddresses === "0") {
           var theNewSavedAddress = response;
           theNewSavedAddress.pivot.isPrimary = 1;
 
           _this3.$store.dispatch("updateAddress", {
             address: theNewSavedAddress,
             addressType: _this3.addressType
+          }).then(function () {
+            if (_this3.addressType === "1") {
+              document.querySelector(".page-content").dataset.nrofbillingaddresses = "1";
+            } else if (_this3.addressType === "2") {
+              document.querySelector(".page-content").dataset.nrofdeliveryaddresses = "1";
+            }
           });
         }
       }, function (error) {

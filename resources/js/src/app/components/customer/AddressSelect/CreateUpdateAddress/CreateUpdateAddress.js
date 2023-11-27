@@ -206,15 +206,26 @@ export default Vue.component("create-update-address", {
                         this.waiting = false;
                         console.log("billing addresses", document.querySelector(".page-content").dataset.nrofbillingaddresses);
                         if (
-                            (this.addressType === "1" && document.querySelector(".page-content").dataset.nrofbillingaddresses === "1")
+                            (this.addressType === "1" && document.querySelector(".page-content").dataset.nrofbillingaddresses === "0")
                             ||
-                            (this.addressType === "2" && document.querySelector(".page-content").dataset.nrofdeliveryaddresses === "1")
+                            (this.addressType === "2" && document.querySelector(".page-content").dataset.nrofdeliveryaddresses === "0")
                         )
                         {
                             const theNewSavedAddress = response;
 
                             theNewSavedAddress.pivot.isPrimary = 1;
-                            this.$store.dispatch("updateAddress", { address: theNewSavedAddress, addressType: this.addressType });
+                            this.$store.dispatch("updateAddress", { address: theNewSavedAddress, addressType: this.addressType })
+                                .then(() =>
+                                {
+                                    if (this.addressType === "1")
+                                    {
+                                        document.querySelector(".page-content").dataset.nrofbillingaddresses = "1";
+                                    }
+                                    else if (this.addressType === "2")
+                                    {
+                                        document.querySelector(".page-content").dataset.nrofdeliveryaddresses = "1";
+                                    }
+                                });
                         }
                     },
                     error =>
