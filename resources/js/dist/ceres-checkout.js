@@ -71773,6 +71773,7 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
         _this3.addressModal.hide();
 
         _this3.waiting = false;
+        console.log("billing addresses", document.querySelector(".page-content").dataset.nrofbillingaddresses);
 
         if (_this3.addressType === "1" && document.querySelector(".page-content").dataset.nrofbillingaddresses === "1" || _this3.addressType === "2" && document.querySelector(".page-content").dataset.nrofdeliveryaddresses === "1") {
           var theNewSavedAddress = response;

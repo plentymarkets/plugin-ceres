@@ -204,6 +204,7 @@ export default Vue.component("create-update-address", {
                     {
                         this.addressModal.hide();
                         this.waiting = false;
+                        console.log("billing addresses", document.querySelector(".page-content").dataset.nrofbillingaddresses);
                         if (
                             (this.addressType === "1" && document.querySelector(".page-content").dataset.nrofbillingaddresses === "1")
                             ||
