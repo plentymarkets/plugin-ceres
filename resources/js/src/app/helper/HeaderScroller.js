@@ -131,7 +131,7 @@ export default class HeaderScroller
             const elemHeight = this.allHeaderChildrenHeights[i];
 
             offset = absolutePos - window.pageYOffset;
-            elem.style.position = "sticky";
+            elem.style.position = "absolute";
 
             // Element should not be considerd in height calculation of following elements
             if (elem.dataset.hasOwnProperty("scrollVoid"))
@@ -251,12 +251,12 @@ export default class HeaderScroller
     // Add the class .fixed-top to the header element.
     fixateHeader()
     {
-        document.querySelector("#page-header")?.classList.add("sticky-top");
+        document.querySelector("#page-header")?.classList.add("fixed-top");
     }
 
     // Remove the class .fixed-top from the header element.
     unfixHeader()
     {
-        document.querySelector("#page-header")?.classList.remove("sticky-top");
+        document.querySelector("#page-header")?.classList.remove("fixed-top");
     }
 }
