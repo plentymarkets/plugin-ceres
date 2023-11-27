@@ -71766,12 +71766,6 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
 
       this._syncOptionTypesAddressData();
 
-      var setAsPrimary = 0;
-
-      if (this.addressType === "1" && document.querySelector(".page-content").dataset.nrofbillingaddresses === "0" || this.addressType === "2" && document.querySelector(".page-content").dataset.nrofdeliveryaddresses === "0") {
-        setAsPrimary = 1;
-      }
-
       this.$store.dispatch("createAddress", {
         address: this.addressData,
         addressType: this.addressType
@@ -71780,7 +71774,7 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
 
         _this3.waiting = false;
 
-        if (setAsPrimary === 1) {
+        if (_this3.addressType === "1" && document.querySelector(".page-content").dataset.nrofbillingaddresses === "1" || _this3.addressType === "2" && document.querySelector(".page-content").dataset.nrofdeliveryaddresses === "1") {
           var theNewSavedAddress = response;
           theNewSavedAddress.pivot.isPrimary = 1;
 

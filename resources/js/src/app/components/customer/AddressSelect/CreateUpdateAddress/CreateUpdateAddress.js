@@ -198,24 +198,17 @@ export default Vue.component("create-update-address", {
             this.waiting = true;
             this._syncOptionTypesAddressData();
 
-            let setAsPrimary = 0;
-
-            if (
-                (this.addressType === "1" && document.querySelector(".page-content").dataset.nrofbillingaddresses === "0")
-                ||
-                (this.addressType === "2" && document.querySelector(".page-content").dataset.nrofdeliveryaddresses === "0")
-            )
-            {
-                setAsPrimary = 1;
-            }
-
             this.$store.dispatch("createAddress", { address: this.addressData, addressType: this.addressType })
                 .then(
                     (response) =>
                     {
                         this.addressModal.hide();
                         this.waiting = false;
-                        if (setAsPrimary === 1)
+                        if (
+                            (this.addressType === "1" && document.querySelector(".page-content").dataset.nrofbillingaddresses === "1")
+                            ||
+                            (this.addressType === "2" && document.querySelector(".page-content").dataset.nrofdeliveryaddresses === "1")
+                        )
                         {
                             const theNewSavedAddress = response;
 
