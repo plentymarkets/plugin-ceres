@@ -71781,7 +71781,7 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
         _this3.waiting = false;
 
         if (setAsPrimary === 1) {
-          var theNewSavedAddress = response.data;
+          var theNewSavedAddress = response;
           theNewSavedAddress.pivot.isPrimary = 1;
 
           _this3.$store.dispatch("updateAddress", {

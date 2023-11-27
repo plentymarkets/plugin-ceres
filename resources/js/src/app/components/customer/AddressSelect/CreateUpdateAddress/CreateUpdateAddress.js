@@ -217,7 +217,7 @@ export default Vue.component("create-update-address", {
                         this.waiting = false;
                         if (setAsPrimary === 1)
                         {
-                            const theNewSavedAddress = response.data;
+                            const theNewSavedAddress = response;
 
                             theNewSavedAddress.pivot.isPrimary = 1;
                             this.$store.dispatch("updateAddress", { address: theNewSavedAddress, addressType: this.addressType });
