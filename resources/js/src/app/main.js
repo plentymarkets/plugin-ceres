@@ -7,6 +7,7 @@ const AutoFocusService = require("./services/AutoFocusService");
 import Vue from "vue";
 import { getStyle } from "./helper/dom";
 import { detectPassiveEvents } from "./helper/featureDetect";
+import HeaderScroller from "./helper/HeaderScroller";
 
 // Frontend end scripts
 // eslint-disable-next-line
@@ -225,7 +226,7 @@ const showShopNotification = function(event)
 document.addEventListener("showShopNotification", showShopNotification);
 
 // fixate the header elements
-
+new HeaderScroller();
 
 $(document).on("shopbuilder.after.drop shopbuilder.after.widget_replace", function(event, eventData, widgetElement)
 {
