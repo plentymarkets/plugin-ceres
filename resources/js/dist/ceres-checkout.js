@@ -71766,18 +71766,27 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
 
       this._syncOptionTypesAddressData();
 
+      var setAsPrimary = 0;
+
       if (this.addressType === "1" && document.querySelector(".page-content").dataset.nrofbillingaddresses === "0" || this.addressType === "2" && document.querySelector(".page-content").dataset.nrofdeliveryaddresses === "0") {
-        this.addressData.pivot = {};
-        this.addressData.pivot.isPrimary = 1;
+        setAsPrimary = 1;
       }
 
       this.$store.dispatch("createAddress", {
         address: this.addressData,
         addressType: this.addressType
-      }).then(function () {
+      }).then(function (response) {
         _this3.addressModal.hide();
 
         _this3.waiting = false;
+
+        if (setAsPrimary === 1) {
+          console.log(_this3.addressData); // const theNewSavedAddress = response.data;
+          //
+          // theNewSavedAddress.pivot.isPrimary = 1;
+          // this.updateAddress();
+          // console.log(response.data);
+        }
       }, function (error) {
         _this3.waiting = false;
 
