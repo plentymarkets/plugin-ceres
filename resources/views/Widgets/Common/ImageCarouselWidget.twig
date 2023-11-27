@@ -156,6 +156,8 @@
                         {% if widget.settings.lazyLoading.mobile %}
                             <lazy-img
                                 picture-class="img-cover"
+                                height="108"
+                                width="192"
                                 image-url="{{ Twig.print("slide.imageUrl") }}"
                                 fallback-url="{{ Twig.print("slide.fallbackImageUrl") }}"
                                 alt="{{ Twig.print("altText") }}"
@@ -164,6 +166,8 @@
                             </lazy-img>
                             <noscript v-if="false">
                                 <img src="{{ Twig.print("fallbackUrl") }}"
+                                     height="1080"
+                                     width="1920"
                                     class="img-cover"
                                     alt="{{ Twig.print("altText") }}"
                                     title="{{ Twig.print("imgTitle") }}">
@@ -173,6 +177,8 @@
                                 <source srcset="{{ Twig.print("slide.imageUrl") }}" {{ Twig.if("slide.imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>
                                 <img
                                     class="img-cover"
+                                    height="1080"
+                                    width="1920"
                                     src="{{ Twig.print("fallbackUrl") }}"
                                     alt="{{ Twig.print("altText") }}"
                                     title="{{ Twig.print("imgTitle") }}"
