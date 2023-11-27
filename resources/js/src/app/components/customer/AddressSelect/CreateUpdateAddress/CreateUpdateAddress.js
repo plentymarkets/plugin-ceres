@@ -204,9 +204,9 @@ export default Vue.component("create-update-address", {
                 (this.addressType === "2" && document.querySelector(".page-content").dataset.nrofdeliveryaddresses === "0")
             )
             {
+                this.addressData.pivot = {};
                 this.addressData.pivot.isPrimary = 1;
             }
-
 
             this.$store.dispatch("createAddress", { address: this.addressData, addressType: this.addressType })
                 .then(
