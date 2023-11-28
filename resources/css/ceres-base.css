@@ -7318,7 +7318,7 @@ button.bg-dark:focus {
 }
 
 .fixed-top {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   left: 0;
@@ -15312,7 +15312,7 @@ html.ie .navbar-brand img[src*=svg] {
   outline: none;
 }
 .top-bar.fixed-top {
-  position: absolute;
+  position: fixed;
 }
 .top-bar .cmp {
   position: fixed;
