@@ -63321,20 +63321,24 @@ var HeaderScroller = /*#__PURE__*/function () {
       window.addEventListener("resize", Object(_debounce__WEBPACK_IMPORTED_MODULE_9__["debounce"])(function () {
         return _this2.initialize();
       }, 50)); // The listener for user scrolling. If this class is not fully initialized, call the initialize method on scroll.
-
-      window.addEventListener("scroll", function () {
-        if (_this2.initialized) {
-          if (_this2.animationFrameTimeout) {
-            window.cancelAnimationFrame(_this2.animationFrameTimeout);
-          }
-
-          _this2.animationFrameTimeout = window.requestAnimationFrame(_this2.scrollHeaderElements.bind(_this2));
-        } else {
-          _this2.initialize();
-        }
-      }, Object(_featureDetect__WEBPACK_IMPORTED_MODULE_10__["detectPassiveEvents"])() ? {
-        passive: true
-      } : false);
+      // window.addEventListener("scroll", () =>
+      // {
+      //     if (this.initialized)
+      //     {
+      //         if (this.animationFrameTimeout)
+      //         {
+      //             window.cancelAnimationFrame(this.animationFrameTimeout);
+      //         }
+      //
+      //         this.animationFrameTimeout = window.requestAnimationFrame(
+      //             this.scrollHeaderElements.bind(this)
+      //         );
+      //     }
+      //     else
+      //     {
+      //         this.initialize();
+      //     }
+      // }, detectPassiveEvents() ? { passive: true } : false);
     } // Register event listeners for the shopbuilder environment.
 
   }, {

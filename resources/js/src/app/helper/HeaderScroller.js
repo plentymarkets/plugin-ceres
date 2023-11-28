@@ -174,24 +174,24 @@ export default class HeaderScroller
         window.addEventListener("resize", debounce(() => this.initialize(), 50));
 
         // The listener for user scrolling. If this class is not fully initialized, call the initialize method on scroll.
-        window.addEventListener("scroll", () =>
-        {
-            if (this.initialized)
-            {
-                if (this.animationFrameTimeout)
-                {
-                    window.cancelAnimationFrame(this.animationFrameTimeout);
-                }
-
-                this.animationFrameTimeout = window.requestAnimationFrame(
-                    this.scrollHeaderElements.bind(this)
-                );
-            }
-            else
-            {
-                this.initialize();
-            }
-        }, detectPassiveEvents() ? { passive: true } : false);
+        // window.addEventListener("scroll", () =>
+        // {
+        //     if (this.initialized)
+        //     {
+        //         if (this.animationFrameTimeout)
+        //         {
+        //             window.cancelAnimationFrame(this.animationFrameTimeout);
+        //         }
+        //
+        //         this.animationFrameTimeout = window.requestAnimationFrame(
+        //             this.scrollHeaderElements.bind(this)
+        //         );
+        //     }
+        //     else
+        //     {
+        //         this.initialize();
+        //     }
+        // }, detectPassiveEvents() ? { passive: true } : false);
     }
 
     // Register event listeners for the shopbuilder environment.
