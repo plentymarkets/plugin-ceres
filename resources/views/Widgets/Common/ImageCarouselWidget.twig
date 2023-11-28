@@ -10,7 +10,6 @@
 {% set carouselId  = uid() %}
 {% set placeholder = "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_163165fc73f%20text%20%7B%20fill%3A%23555%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_163165fc73f%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22285.921875%22%20y%3D%22218.45%22%3E%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" %}
 {% set spacingSettings = widget.settings.spacing %}
-{% set inlineMargin = WidgetHelper.getInlineSpacings(spacingSettings,"", spacingSettings.customMargin.mobile) %}
 {% set margin = WidgetHelper.getSpacingClasses(spacingSettings,"", spacingSettings.customMargin.mobile) %}
 {% set preloadImage    = widget.settings.preloadImage.mobile %}
 
@@ -123,7 +122,7 @@
 
 {{ Twig.endif() }}
 
-<div class="widget widget-image-carousel widget-{{ appearance | default('primary') }} widget-proportional{% if aspectRatio != 'auto' and fullHeight != true %} widget-prop-{{ aspectRatio }}{% endif %}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if margin | length > 0 %} {{ margin }}{% endif %}{% if stylingClasses | length > 0 %} {{ stylingClasses }}{% endif %}{% if fullHeight %} vh-100{% endif %}{% if fullWidth %} widget-fw{% endif %}"{% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+<div class="widget widget-image-carousel widget-{{ appearance | default('primary') }} widget-proportional{% if aspectRatio != 'auto' and fullHeight != true %} widget-prop-{{ aspectRatio }}{% endif %}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if margin | length > 0 %} {{ margin }}{% endif %}{% if stylingClasses | length > 0 %} {{ stylingClasses }}{% endif %}{% if fullHeight %} vh-100{% endif %}{% if fullWidth %} widget-fw{% endif %}">
     <div id="image-carousel_{{ carouselId }}" class="widget-inner carousel slide{% if animationStyle == 'fade' %} carousel-fade{% endif %}" data-ride="carousel">
         <div class="carousel-inner" role="listbox" aria-label="{{ trans("Ceres::Template.itemImageCarousel") }}">
             {{ Twig.for("slide", "slides") }}
