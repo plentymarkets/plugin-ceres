@@ -4,4 +4,6 @@
 *.iml
 home.html
 node_modules
+resources/css/*.css
+resources/css/*.css.map
 sftp-config.json
