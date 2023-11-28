@@ -5845,7 +5845,7 @@ button.bg-dark:focus {
   position: sticky !important; }
 
 .fixed-top {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   left: 0;
@@ -14236,7 +14236,7 @@ html.ie .single-carousel .owl-item > div {
   .top-bar .account-menu {
     min-width: 100%; }
   .top-bar.fixed-top {
-    position: fixed; }
+    position: absolute; }
   .top-bar .controls-list {
     width: 100%;
     margin-bottom: 0;
