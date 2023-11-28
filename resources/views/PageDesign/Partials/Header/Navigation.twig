@@ -9,7 +9,7 @@
             <div class="brand-wrapper px-lg-3 d-flex flex-fill{% if showHeaderNavBar == "side" %} position-relative{% endif %}">
                 {% if companyLogo | trim | length > 0 %}
                     <a class="navbar-brand py-2" href="{{ homepageURL }}">
-                        <img alt="{{ companyName }}" src="{{ companyLogo }}" class="img-fluid" />
+                        <img width="181" height="49" alt="{{ companyName }}" src="{{ companyLogo }}" class="img-fluid" />
                     </a>
                 {% endif %} 
                 <button v-open-mobile-navigation class="navbar-toggler d-lg-none p-3" type="button">
