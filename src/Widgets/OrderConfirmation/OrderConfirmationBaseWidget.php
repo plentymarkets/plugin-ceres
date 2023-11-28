@@ -16,10 +16,10 @@ class OrderConfirmationBaseWidget extends BaseWidget
         $orderResultFactory = pluginApp(OrderResultFactory::class);
         $order = $orderResultFactory->fillOrderResult();
 
-        return [
+        return json_decode(json_encode([
             'data' => $order,
             'totals' => $order['totals'],
             'showAdditionalPaymentInformation' => true
-        ];
+        ]));
     }
 }
