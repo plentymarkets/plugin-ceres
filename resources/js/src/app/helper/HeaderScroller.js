@@ -54,8 +54,8 @@ export default class HeaderScroller
      */
     initialize()
     {
-        this.collectHeaderElementHeights();
-        this.updateZIndexes();
+        // this.collectHeaderElementHeights();
+        // this.updateZIndexes();
 
         // Initialize only, if the user has scrolled down from the top and is not in the shopbuilder.
         if (!App.isShopBuilder && window.pageYOffset > 0)
