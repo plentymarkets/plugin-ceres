@@ -54,17 +54,17 @@ export default class HeaderScroller
      */
     initialize()
     {
-        // this.collectHeaderElementHeights();
-        // this.updateZIndexes();
+        this.collectHeaderElementHeights();
+        this.updateZIndexes();
 
         // Initialize only, if the user has scrolled down from the top and is not in the shopbuilder.
         if (!App.isShopBuilder && window.pageYOffset > 0)
         {
-        //     this.calculateBodyOffset();
-        //     this.scrollHeaderElements();
-        //     // If the header content gets active in the shopbuilder, the event listener for 'shopbuilder.after.activate-container' will fixate the header.
-        //     // this.fixateHeader();
-        //
+            this.calculateBodyOffset();
+            this.scrollHeaderElements();
+            // If the header content gets active in the shopbuilder, the event listener for 'shopbuilder.after.activate-container' will fixate the header.
+            this.fixateHeader();
+
             this.initialized = true;
         }
     }
@@ -174,24 +174,24 @@ export default class HeaderScroller
         window.addEventListener("resize", debounce(() => this.initialize(), 50));
 
         // The listener for user scrolling. If this class is not fully initialized, call the initialize method on scroll.
-        // window.addEventListener("scroll", () =>
-        // {
-        //     if (this.initialized)
-        //     {
-        //         if (this.animationFrameTimeout)
-        //         {
-        //             window.cancelAnimationFrame(this.animationFrameTimeout);
-        //         }
-        //
-        //         this.animationFrameTimeout = window.requestAnimationFrame(
-        //             this.scrollHeaderElements.bind(this)
-        //         );
-        //     }
-        //     else
-        //     {
-        //         this.initialize();
-        //     }
-        // }, detectPassiveEvents() ? { passive: true } : false);
+        window.addEventListener("scroll", () =>
+        {
+            if (this.initialized)
+            {
+                if (this.animationFrameTimeout)
+                {
+                    window.cancelAnimationFrame(this.animationFrameTimeout);
+                }
+
+                this.animationFrameTimeout = window.requestAnimationFrame(
+                    this.scrollHeaderElements.bind(this)
+                );
+            }
+            else
+            {
+                this.initialize();
+            }
+        }, detectPassiveEvents() ? { passive: true } : false);
     }
 
     // Register event listeners for the shopbuilder environment.

@@ -60284,15 +60284,14 @@ var HeaderScroller = /*#__PURE__*/function () {
   }, {
     key: "initialize",
     value: function initialize() {
-      // this.collectHeaderElementHeights();
-      // this.updateZIndexes();
-      // Initialize only, if the user has scrolled down from the top and is not in the shopbuilder.
+      this.collectHeaderElementHeights();
+      this.updateZIndexes(); // Initialize only, if the user has scrolled down from the top and is not in the shopbuilder.
+
       if (!App.isShopBuilder && window.pageYOffset > 0) {
-        //     this.calculateBodyOffset();
-        //     this.scrollHeaderElements();
-        //     // If the header content gets active in the shopbuilder, the event listener for 'shopbuilder.after.activate-container' will fixate the header.
-        //     // this.fixateHeader();
-        //
+        this.calculateBodyOffset();
+        this.scrollHeaderElements(); // If the header content gets active in the shopbuilder, the event listener for 'shopbuilder.after.activate-container' will fixate the header.
+
+        this.fixateHeader();
         this.initialized = true;
       }
     } // Collect heights of header elements for later use
@@ -60397,24 +60396,20 @@ var HeaderScroller = /*#__PURE__*/function () {
       window.addEventListener("resize", Object(_debounce__WEBPACK_IMPORTED_MODULE_9__["debounce"])(function () {
         return _this2.initialize();
       }, 50)); // The listener for user scrolling. If this class is not fully initialized, call the initialize method on scroll.
-      // window.addEventListener("scroll", () =>
-      // {
-      //     if (this.initialized)
-      //     {
-      //         if (this.animationFrameTimeout)
-      //         {
-      //             window.cancelAnimationFrame(this.animationFrameTimeout);
-      //         }
-      //
-      //         this.animationFrameTimeout = window.requestAnimationFrame(
-      //             this.scrollHeaderElements.bind(this)
-      //         );
-      //     }
-      //     else
-      //     {
-      //         this.initialize();
-      //     }
-      // }, detectPassiveEvents() ? { passive: true } : false);
+
+      window.addEventListener("scroll", function () {
+        if (_this2.initialized) {
+          if (_this2.animationFrameTimeout) {
+            window.cancelAnimationFrame(_this2.animationFrameTimeout);
+          }
+
+          _this2.animationFrameTimeout = window.requestAnimationFrame(_this2.scrollHeaderElements.bind(_this2));
+        } else {
+          _this2.initialize();
+        }
+      }, Object(_featureDetect__WEBPACK_IMPORTED_MODULE_10__["detectPassiveEvents"])() ? {
+        passive: true
+      } : false);
     } // Register event listeners for the shopbuilder environment.
 
   }, {
