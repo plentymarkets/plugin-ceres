@@ -164,17 +164,18 @@
                                 role="option">
                             </lazy-img>
                             <noscript v-if="false">
-                                <img src="{{ Twig.print("fallbackUrl") }}"
-                                     height="1080"
-                                     width="1920"
-                                    class="img-cover"
-                                    alt="{{ Twig.print("altText") }}"
-                                    title="{{ Twig.print("imgTitle") }}">
+                                <lazy-img src="{{ Twig.print("fallbackUrl") }}"
+                                      height="1080"
+                                      width="1920"
+                                      class="img-cover"
+                                      alt="{{ Twig.print("altText") }}"
+                                      title="{{ Twig.print("imgTitle") }}">
+                                </lazy-img>
                             </noscript>
                         {% else %}
                             <picture>
                                 <source srcset="{{ Twig.print("slide.imageUrl") }}" {{ Twig.if("slide.imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>
-                                <img
+                                <lazy-img
                                     class="img-cover"
                                     height="1080"
                                     width="1920"
@@ -182,7 +183,7 @@
                                     alt="{{ Twig.print("altText") }}"
                                     title="{{ Twig.print("imgTitle") }}"
                                     role="option"
-                                />
+                                > </lazy-img>
                             </picture>
                         {% endif %}
                     {{ Twig.endif() }}

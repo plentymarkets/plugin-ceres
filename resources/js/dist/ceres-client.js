@@ -63217,7 +63217,6 @@ var HeaderScroller = /*#__PURE__*/function () {
 
         this.fixateHeader();
         this.initialized = true;
-        console.log("aici");
       }
     } // Collect heights of header elements for later use
 
