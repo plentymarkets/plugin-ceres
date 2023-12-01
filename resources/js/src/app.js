@@ -113,7 +113,7 @@ export function beforeCreate(context)
     Vue.component("mail-changed-info", () => import("./app/components/basket/MailChangedInfo.vue"));
     Vue.component("coupon", () => import("./app/components/basket/Coupon.vue"));
     Vue.component("basket-list", () => import("./app/components/basket/list/BasketList.vue"));
-    Vue.component("step-by-step-navigation", () => import("./app/components/category/StepByStepNavigation.vue"));
+    // Vue.component("step-by-step-navigation", () => import("./app/components/category/StepByStepNavigation.vue"));
     Vue.component("google-maps-widget", () => import("./app/components/common/GoogleMaps.vue"));
     Vue.component("lazy-img", LazyImg);
     Vue.component("intersect", Intersect);
@@ -138,6 +138,7 @@ export function beforeCreate(context)
     Vue.component("search-suggestion-item", () => import("./app/components/itemList/SearchSuggestionItem.vue"));
     Vue.component("item-filter-list", () => import("./app/components/itemList/filter/ItemFilterList.vue"));
     Vue.component("item-filter-tag-list", () => import("./app/components/itemList/filter/ItemFilterTagList.vue"));
+    Vue.component("facet-value-filter", () => import("./app/components/itemList/filter/FacetValueFilter.vue"));
     Vue.component("live-shopping-item", () => import("./app/components/liveShopping/LiveShoppingItem.vue"));
     Vue.component("newsletter-input", () => import("./app/components/newsletter/NewsletterInput.vue"));
     Vue.component("newsletter-unsubscribe-input", () => import("./app/components/newsletter/NewsletterUnsubscribeInput.vue"));

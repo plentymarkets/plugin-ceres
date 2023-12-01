@@ -2,13 +2,12 @@
     <div class="bkFilters bkr-cc" v-show="facets && facets.length > 0">
         <item-filter v-for="facet in facets.filter(function (facet) { return (facet.id == 11) })" :facet="facet" :key="facet.id"></item-filter>
 
-        <a class="btn btn-sm btn-bkm-inverted facetToggleButton" data-toggle="collapse" :href="'#filter-collapse_' + _uid" aria-expanded="false" :aria-controls="'filter-collapse_' + _uid">
+        <a class="btn btn-sm btn-bkm-inverted facetToggleButton" data-toggle="collapse" href="#filter-collapse__item-filter-list_" aria-expanded="false" aria-controls="filter-collapse__item-filter-list_">
           <i class="fa fa-sliders default-float mr-2" aria-hidden="true"></i> {{ $translate("Ceres::Template.itemFilter") }}
         </a>
 
         <div class="filter-wrapper">
-
-            <div class="filter-collapse collapse" :id="'filter-collapse_' + _uid">
+            <div v-open-filter-toolbar class="filter-collapse collapse" id="filter-collapse__item-filter-list_">
               <div class="page-content component-loading" :class="{ 'isLoading': isLoading }">
                   <div class="facetOutter" :selectedFactes="selectedFacets.length">
                       <item-filter v-for="facet in facets" :facet="facet" :key="facet.id" v-if="facet.id != 11"></item-filter>
@@ -19,7 +18,7 @@
                   </div>
                   <div class="row filterBtnRow">
                       <div class="col-12 text-right">
-                          <button type="button" class="btn btn-bkm btn-medium-large applyFilterButton" data-toggle="collapse" :href="'#filter-collapse_' + _uid" :aria-controls="'filter-collapse_' + _uid">
+                          <button type="button" class="btn btn-bkm btn-medium-large applyFilterButton" data-toggle="collapse" href="#filter-collapse__item-filter-list_" aria-controls="filter-collapse__item-filter-list_">
                             <span>{{ $translate("Ceres::Template.itemClose") }}&nbsp;</span>
                             <i class="fa fa-times ml-2" aria-hidden="true"></i>
                           </button>
@@ -28,7 +27,7 @@
               </div>
             </div>
         </div>
-      </div>
+    </div>
 </template>
 
 <script>

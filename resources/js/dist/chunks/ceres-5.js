@@ -325,6 +325,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -758,16 +759,22 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.item.tags &&
-                  _vm.item.tags.filter(function(tag) {
-                    return tag.id == 105
-                  }).length > 0
-                    ? [
-                        _c("span", { staticClass: "tag tagFavorit" }, [
-                          _vm._v("Bestseller")
-                        ])
-                      ]
-                    : _vm._e()
+                  _vm._l(_vm.item.tags, function(tag) {
+                    return [
+                      [130, 131, 132, 133].includes(tag.id)
+                        ? _c("span", {
+                            class: "ct tag tagSize" + (parseInt(tag.id) - 129),
+                            domProps: { innerHTML: _vm._s(tag.names.name) }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      tag.id == 105
+                        ? _c("span", { staticClass: "tag tagFavorit" }, [
+                            _vm._v("Bestseller")
+                          ])
+                        : _vm._e()
+                    ]
+                  })
                 ],
                 2
               ),

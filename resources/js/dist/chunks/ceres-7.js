@@ -140,7 +140,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   })),
   methods: {
     updateFacet: function updateFacet(facetValue) {
-      var toolbarElements = document.getElementsByClassName("widget-toolbar");
+      var toolbarElements = document.getElementsByClassName("bkFilters");
 
       var _iterator = _createForOfIteratorHelper(toolbarElements),
           _step;
@@ -151,6 +151,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
           if (toolbarElement.contains(this.$vnode.elm)) {
             window.localStorage.setItem("openFilterToolbar", true);
+            console.log("LOCSTORAGE updated open");
           }
         }
       } catch (err) {
@@ -216,7 +217,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
 //
 //
 //
@@ -592,9 +592,9 @@ var render = function() {
           staticClass: "btn btn-sm btn-bkm-inverted facetToggleButton",
           attrs: {
             "data-toggle": "collapse",
-            href: "#filter-collapse_" + _vm._uid,
+            href: "#filter-collapse__item-filter-list_",
             "aria-expanded": "false",
-            "aria-controls": "filter-collapse_" + _vm._uid
+            "aria-controls": "filter-collapse__item-filter-list_"
           }
         },
         [
@@ -614,8 +614,11 @@ var render = function() {
         _c(
           "div",
           {
+            directives: [
+              { name: "open-filter-toolbar", rawName: "v-open-filter-toolbar" }
+            ],
             staticClass: "filter-collapse collapse",
-            attrs: { id: "filter-collapse_" + _vm._uid }
+            attrs: { id: "filter-collapse__item-filter-list_" }
           },
           [
             _c(
@@ -673,8 +676,8 @@ var render = function() {
                         attrs: {
                           type: "button",
                           "data-toggle": "collapse",
-                          href: "#filter-collapse_" + _vm._uid,
-                          "aria-controls": "filter-collapse_" + _vm._uid
+                          href: "#filter-collapse__item-filter-list_",
+                          "aria-controls": "filter-collapse__item-filter-list_"
                         }
                       },
                       [
@@ -727,7 +730,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "facetValue priceFacet bkr-cc" }, [
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "input-group col-lg-6 pb-3" }, [
+      _c("div", { staticClass: "input-group col-6 pb-3" }, [
         _c("input", {
           directives: [
             {
@@ -754,7 +757,7 @@ var render = function() {
         })
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "input-group col-lg-6 pb-3" }, [
+      _c("div", { staticClass: "input-group col-6 pb-3" }, [
         _c("input", {
           directives: [
             {
@@ -786,7 +789,7 @@ var render = function() {
           "button",
           {
             directives: [{ name: "tooltip", rawName: "v-tooltip" }],
-            staticClass: "btn btn-bkm-inverted btn-block btn-sm",
+            staticClass: "btn btn-bkm btn-block btn-sm",
             class: { disabled: _vm.isDisabled },
             attrs: {
               type: "button",

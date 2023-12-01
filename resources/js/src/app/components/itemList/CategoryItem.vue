@@ -21,8 +21,9 @@
                 <span v-html="'NEU'"></span>
                 </div>
 
-                <template v-if="item.tags && item.tags.filter(function (tag) { return (tag.id == 105) }).length > 0">
-                    <span class="tag tagFavorit">Bestseller</span>
+                <template v-for="tag in item.tags">
+                    <span :class="'ct tag tagSize' + (parseInt(tag.id) - 129)" v-if="[130, 131, 132, 133].includes(tag.id)" v-html="tag.names.name"></span>
+                    <span class="tag tagFavorit" v-if="tag.id == 105">Bestseller</span>
                 </template>
             </div>
             <div class="productName">

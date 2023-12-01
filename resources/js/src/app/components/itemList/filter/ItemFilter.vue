@@ -83,13 +83,14 @@ export default {
     {
         updateFacet(facetValue)
         {
-            const toolbarElements = document.getElementsByClassName("widget-toolbar");
+            const toolbarElements = document.getElementsByClassName("bkFilters");
 
             for (const toolbarElement of toolbarElements)
             {
                 if (toolbarElement.contains(this.$vnode.elm))
                 {
                     window.localStorage.setItem("openFilterToolbar", true);
+                    console.log("LOCSTORAGE updated open");
                 }
             }
 

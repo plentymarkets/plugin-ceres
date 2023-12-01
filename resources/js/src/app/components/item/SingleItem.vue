@@ -54,7 +54,9 @@
 
                                 <span class="tag tagFavorit" v-if="hasPropertySelection(166, 397)">Bestseller</span>
                                 <span class="tag tagVegan" v-if="hasPropertySelection(166, 393)">Vegan</span>
-                                    
+                                <template v-for="tag in currentVariation.tags" v-if="[130,131,132,133].includes(tag.id)">
+                                  <span target="#sizeTable" :class="'scrollTo tag tagSize' + (parseInt(tag.id) - 129)" v-html="tag.names.name"></span>
+                                </template>
                             </div>
 
                           <div :class="'availabilityRow availabilityRow_' + currentVariation.variation.availability.id">
@@ -222,7 +224,7 @@
 
                 <!-- Manufacturer -->
                 <div id="manufacturerDetail" class="descriptionContainer" v-if="currentVariation.item.manufacturer.id && currentVariation.item.manufacturer.logo">
-                  <button class="btn btn-block text-left descriptionButton collapsed" data-toggle="collapse" data-target="#manufacturer" aria-expanded="false" aria-controls="manufacturer">
+                  <button class="btn btn-block text-left descriptionButton collapsed" data-toggle="collapse" data-target="#manufacturer" aria-expanded="false" aria-controls="manufacturer" :aria-label="'Hersteller-Details: ' + currentVariation.item.manufacturer.externalName" click-count>
                     <img :src="currentVariation.item.manufacturer.logo" :alt="'Marken-Logo-' + currentVariation.item.manufacturer.externalName" />
                     <span v-html="currentVariation.item.manufacturer.externalName"></span>
                     <i data-feather="plus"></i>
@@ -416,7 +418,10 @@
               <!-- beaver content -->
               <slot name="additional-beaver-content"></slot>
 
-              <div class="row ">
+              <!-- size guide tables and chairs -->
+              <slot v-if="showChairTableSizeGuide" name="table-chair-size-guide"></slot>
+
+              <div class="row">
                 <div class="col-12">
                   <slot name="item-list-container"></slot>
                   <slot name="series-slide"></slot>
@@ -529,6 +534,13 @@ export default {
         showBundleComponents()
         {
             return (this.hasProperty(235) && this.currentVariation.variation.bundleType === 'bundle' && this.currentVariation.bundleComponents.length)
+        },
+        showChairTableSizeGuide() {
+          // Check if any of the values are included in the array
+          if(!this.currentVariation.tags || this.currentVariation.tags.length <= 0)
+            return false;
+
+          return this.currentVariation.tags.some(tag => [130, 131, 132, 133].includes(tag.id));
         },
         color1() {
             const valueId = this.getFurnitureColor(3); // Front

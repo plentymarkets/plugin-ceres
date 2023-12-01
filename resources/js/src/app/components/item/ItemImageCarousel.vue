@@ -135,18 +135,6 @@ export default {
         {
             this.initCarousel();
             this.initThumbCarousel();
-            
-            /* disable lightbox
-            this.loadLightbox().then(() =>
-                {
-                    this.initCarousel();
-                    this.initThumbCarousel();
-                })
-                .catch(event =>
-                {
-                    console.log("error while loading lightbox", event);
-                });
-            */
         });
     },
 
@@ -219,14 +207,6 @@ export default {
 
             $(this.$refs.single).owlCarousel(carouselSettings);
 
-            if (!isNullOrUndefined(window.lightbox))
-            {
-                lightbox.option({
-                    wrapAround: true,
-                    albumLabel: this.$translate("Ceres::Template.singleItemLightboxImageShown")
-                });
-            }
-
             $(this.$refs.single).on("changed.owl.carousel", event =>
             {
                 this.currentItem = event.page.index;
@@ -276,32 +256,6 @@ export default {
         getImageName(image)
         {
             return image && image.name ? image.name : this.$options.filters.itemName(this.currentVariation);
-        },
-
-        loadLightbox()
-        {
-            return new Promise((resolve, reject) =>
-            {
-                const script = document.querySelector("script#lightboxscript");
-
-                if (!isNullOrUndefined(script))
-                {
-                    resolve();
-                }
-                else
-                {
-                    const script = document.createElement("script");
-
-                    script.type = "text/javascript";
-                    script.id = "lightboxscript";
-                    script.src = `${ this.pluginPath }/js/dist/lightbox.min.js`;
-
-                    script.addEventListener("load", () => resolve(), false);
-                    script.addEventListener("error", event => reject(event), false);
-
-                    document.body.appendChild(script);
-                }
-            });
         }
     }
 }

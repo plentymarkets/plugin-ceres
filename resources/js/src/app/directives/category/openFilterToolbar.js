@@ -8,6 +8,7 @@ Vue.directive("open-filter-toolbar",
 
             if (openFilterToolbar)
             {
+                console.log("FilterToolbarOpen");
                 window.localStorage.removeItem("openFilterToolbar");
 
                 Vue.nextTick(() =>
