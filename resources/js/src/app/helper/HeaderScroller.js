@@ -63,7 +63,7 @@ export default class HeaderScroller
             this.calculateBodyOffset();
             //   this.scrollHeaderElements();
             // If the header content gets active in the shopbuilder, the event listener for 'shopbuilder.after.activate-container' will fixate the header.
-            this.fixateHeader();
+            // this.fixateHeader();
 
             this.initialized = true;
         }

@@ -60290,8 +60290,8 @@ var HeaderScroller = /*#__PURE__*/function () {
       if (!App.isShopBuilder && window.pageYOffset > 0) {
         this.calculateBodyOffset(); //   this.scrollHeaderElements();
         // If the header content gets active in the shopbuilder, the event listener for 'shopbuilder.after.activate-container' will fixate the header.
+        // this.fixateHeader();
 
-        this.fixateHeader();
         this.initialized = true;
       }
     } // Collect heights of header elements for later use
