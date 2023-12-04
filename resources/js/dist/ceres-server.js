@@ -43656,9 +43656,46 @@ var render = function() {
           : '<div class="card-body flex-row"><label><input type="checkbox"' +
             _vm._ssrAttr("disabled", _vm.waiting || !_vm.basketFullyLoaded) +
             ' class="mr-2"> <span>Ich möchte für 5,00€ einen<br>Baum im Taunus pflanzen.</span></label> <a href="/aufforstung-mit-biokinder/">Mehr Informationen</a></div>') +
-          ' <div id="donateModal" tabindex="-1" role="dialog" aria-labelledby="aufforsten-headline" aria-hidden="true" class="modal fade"><div role="document" class="modal-dialog"><div class="modal-content"><div class="modal-body text-center"><img src="https://cdn.bio-kinder.de/frontend/images/forest/hf-bk-2.svg" class="hessenforst_biokinder_banner"> <p>\n                        In den vergangenen Jahren ist uns immer deutlicher geworden, wie sich zu trockene Bedingungen\n                        im Sommer negativ auf unsere Wälder ausgewirkt haben. Immer häufiger sind große,\n                        leere Flächen zu sehen, wo früher einmal ein dichter Wald gewachsen ist.\n                    </p> <p>\n                        In Zusammenarbeit mit HessenForst haben wir eine transparente Kooperation auf die Beine gestellt,\n                        bei der die Spenden bis auf den letzten Cent dafür eingesetzt werden, wofür sie gedacht sind:\n                        <b>Das Pflanzen neuer Bäume</b>!\n                    </p> <ul class="list-group cleanList text-left"><li class="list-group-item"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><polyline points="20 6 9 17 4 12"></polyline></svg>\n                            100%-Spende – Keine versteckten Gebühren, kein Kleingedrucktes\n                        </li> <li class="list-group-item"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><polyline points="20 6 9 17 4 12"></polyline></svg>\n                            Heimische Bäume für einen gesunden Mischwald\n                        </li> <li class="list-group-item"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><polyline points="20 6 9 17 4 12"></polyline></svg>\n                            Wir pflanzen im Herzen des schönen Taunus\n                        </li> <li class="list-group-item"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><polyline points="20 6 9 17 4 12"></polyline></svg>\n                            Betreuung durch HessenForst vom Setzling bis zum Baum\n                        </li></ul></div> <div class="modal-footer"><a href="/aufforstung-mit-biokinder/" class="btn btn-bkm btn-sm mr-auto">Noch mehr erfahren &gt;</a> <button type="button" data-dismiss="modal" class="btn btn-bkm-inverted btn-sm ml-auto">Schließen</button></div></div></div></div>'
+          " "
+      ),
+      _vm._ssrNode(
+        '<div id="donateModal" tabindex="-1" role="dialog" aria-labelledby="aufforsten-headline" aria-hidden="true" class="modal fade">',
+        "</div>",
+        [
+          _vm._ssrNode('<div role="document" class="modal-dialog">', "</div>", [
+            _vm._ssrNode(
+              '<div class="modal-content">',
+              "</div>",
+              [
+                _vm._ssrNode(
+                  '<div class="modal-body text-center">',
+                  "</div>",
+                  [
+                    _c("lazy-img", {
+                      attrs: {
+                        "image-url":
+                          "https://cdn.bio-kinder.de/frontend/images/forest/hf-bk-2.svg",
+                        alt: "BioKinder und HessenForst",
+                        "picture-class": "hessenforst_biokinder_banner"
+                      }
+                    }),
+                    _vm._ssrNode(
+                      ' <p>\n                        In den vergangenen Jahren ist uns immer deutlicher geworden, wie sich zu trockene Bedingungen\n                        im Sommer negativ auf unsere Wälder ausgewirkt haben. Immer häufiger sind große,\n                        leere Flächen zu sehen, wo früher einmal ein dichter Wald gewachsen ist.\n                    </p> <p>\n                        In Zusammenarbeit mit HessenForst haben wir eine transparente Kooperation auf die Beine gestellt,\n                        bei der die Spenden bis auf den letzten Cent dafür eingesetzt werden, wofür sie gedacht sind:\n                        <b>Das Pflanzen neuer Bäume</b>!\n                    </p> <ul class="list-group cleanList text-left"><li class="list-group-item"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><polyline points="20 6 9 17 4 12"></polyline></svg>\n                            100%-Spende – Keine versteckten Gebühren, kein Kleingedrucktes\n                        </li> <li class="list-group-item"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><polyline points="20 6 9 17 4 12"></polyline></svg>\n                            Heimische Bäume für einen gesunden Mischwald\n                        </li> <li class="list-group-item"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><polyline points="20 6 9 17 4 12"></polyline></svg>\n                            Wir pflanzen im Herzen des schönen Taunus\n                        </li> <li class="list-group-item"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><polyline points="20 6 9 17 4 12"></polyline></svg>\n                            Betreuung durch HessenForst vom Setzling bis zum Baum\n                        </li></ul>'
+                    )
+                  ],
+                  2
+                ),
+                _vm._ssrNode(
+                  ' <div class="modal-footer"><a href="/aufforstung-mit-biokinder/" class="btn btn-bkm btn-sm mr-auto">Noch mehr erfahren &gt;</a> <button type="button" data-dismiss="modal" class="btn btn-bkm-inverted btn-sm ml-auto">Schließen</button></div>'
+                )
+              ],
+              2
+            )
+          ])
+        ]
       )
-    ]
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -55791,14 +55828,49 @@ var render = function() {
                   _vm._ssrStyle(null, _vm.styles, {
                     display: !_vm.isExpanded ? "" : "none"
                   }) +
-                  '><div class="col-12 px-2 col-md-12 text-center"><p class="cookieBeaverContainer mt-4"><img src="https://cdn.bio-kinder.de/frontend/images/biokindertheme/icons/cookie_biber.png" class="cookieBeaver"></p> <h2>Cookies akzeptieren</h2> <p>\n                      Wir nutzen Cookies auf unserer Website. Einige von diesen sind essenziell, während andere uns helfen, diese Website und Ihre Erfahrung zu verbessern.\n                      Sie haben die Möglichkeit, die Einstellungen der Cookies anzupassen.\n                      Weitere Informationen zu den von uns verwendeten Cookies und Ihren Rechten als Nutzer finden Sie in unserer <a href="/privacy-policy/" class="d-inline-block read_more">Daten­schutz­erklärung</a> und unserem <a href="/legal-disclosure/" class="d-inline-block read_more">' +
-                  _vm._ssrEscape(
-                    _vm._s(_vm.$translate("Ceres::Template.legalDisclosure"))
-                  ) +
-                  '</a>.\n                    </p></div> <div class="col-12 col-md-12 text-center py-4 py-md-4"><button class="btn btn-default btn-appearance d-inline-block">Einstellungen</button> <button onclick="consentGiven(window.ConsentManager.hasResponse())" class="btn btn-primary btn-appearance d-inline-block">' +
-                  _vm._s("Einverstanden, zum Shop &rarr;") +
-                  "</button></div></div> "
+                  ">",
+                "</div>",
+                [
+                  _vm._ssrNode(
+                    '<div class="col-12 px-2 col-md-12 text-center">',
+                    "</div>",
+                    [
+                      _vm._ssrNode(
+                        '<p class="cookieBeaverContainer mt-4">',
+                        "</p>",
+                        [
+                          _c("lazy-img", {
+                            attrs: {
+                              "picture-class": "lzy cookieBeaver",
+                              alt: "Biber Bruno",
+                              "image-url":
+                                "https://cdn.bio-kinder.de/frontend/images/biokindertheme/icons/cookie_biber.png"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._ssrNode(
+                        ' <h2>Cookies akzeptieren</h2> <p>\n                      Wir nutzen Cookies auf unserer Website. Einige von diesen sind essenziell, während andere uns helfen, diese Website und Ihre Erfahrung zu verbessern.\n                      Sie haben die Möglichkeit, die Einstellungen der Cookies anzupassen.\n                      Weitere Informationen zu den von uns verwendeten Cookies und Ihren Rechten als Nutzer finden Sie in unserer <a href="/privacy-policy/" class="d-inline-block read_more">Daten­schutz­erklärung</a> und unserem <a href="/legal-disclosure/" class="d-inline-block read_more">' +
+                          _vm._ssrEscape(
+                            _vm._s(
+                              _vm.$translate("Ceres::Template.legalDisclosure")
+                            )
+                          ) +
+                          "</a>.\n                    </p>"
+                      )
+                    ],
+                    2
+                  ),
+                  _vm._ssrNode(
+                    ' <div class="col-12 col-md-12 text-center py-4 py-md-4"><button class="btn btn-default btn-appearance d-inline-block">Einstellungen</button> <button onclick="consentGiven(window.ConsentManager.hasResponse())" class="btn btn-primary btn-appearance d-inline-block">' +
+                      _vm._s("Einverstanden, zum Shop &rarr;") +
+                      "</button></div>"
+                  )
+                ],
+                2
               ),
+              _vm._ssrNode(" "),
               _vm.isExpanded
                 ? _vm._ssrNode(
                     "<div" +

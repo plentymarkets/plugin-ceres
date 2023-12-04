@@ -193,7 +193,21 @@ var render = function() {
                   "div",
                   { staticClass: "col-12 px-2 col-md-12 text-center" },
                   [
-                    _vm._m(0),
+                    _c(
+                      "p",
+                      { staticClass: "cookieBeaverContainer mt-4" },
+                      [
+                        _c("lazy-img", {
+                          attrs: {
+                            "picture-class": "lzy cookieBeaver",
+                            alt: "Biber Bruno",
+                            "image-url":
+                              "https://cdn.bio-kinder.de/frontend/images/biokindertheme/icons/cookie_biber.png"
+                          }
+                        })
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
                     _c("h2", [_vm._v("Cookies akzeptieren")]),
                     _vm._v(" "),
@@ -387,22 +401,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "cookieBeaverContainer mt-4" }, [
-      _c("img", {
-        staticClass: "cookieBeaver",
-        attrs: {
-          src:
-            "https://cdn.bio-kinder.de/frontend/images/biokindertheme/icons/cookie_biber.png"
-        }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
