@@ -3,7 +3,7 @@
     <div class="cookie-bar out bk_cc bkr-cc" v-show="!$ceres.isSSR"  :class="{ 'in': isVisible }">
             <div class="container" v-if="isVisible">
                 <div class="row p-3" v-show="!isExpanded" :class="classes" :style="styles">
-                    <div class="col-12 px-4 col-md-12 text-center">
+                    <div class="col-12 px-2 col-md-12 text-center">
                         <p class="cookieBeaverContainer mt-4">
                           <img class="cookieBeaver" src="https://cdn.bio-kinder.de/frontend/images/biokindertheme/icons/cookie_biber.png" />
                         </p>

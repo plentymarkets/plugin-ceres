@@ -41363,7 +41363,7 @@ var render = function() {
               [
                 _c(
                   "div",
-                  { staticClass: "col-12 px-4 col-md-12 text-center" },
+                  { staticClass: "col-12 px-2 col-md-12 text-center" },
                   [
                     _vm._m(0),
                     _vm._v(" "),
