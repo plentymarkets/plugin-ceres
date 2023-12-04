@@ -63352,8 +63352,7 @@ var HeaderScroller = /*#__PURE__*/function () {
 
       $(document).on("shopbuilder.after.activate-container", function (event, data) {
         if ((data === null || data === void 0 ? void 0 : data.container) === "Ceres::Header") {
-          _this3.fixateHeader();
-
+          // this.fixateHeader();
           _this3.calculateBodyOffset();
 
           _this3.isShopBuilderHeaderFixated = true;

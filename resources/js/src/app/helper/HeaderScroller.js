@@ -211,7 +211,7 @@ export default class HeaderScroller
         {
             if (data?.container === "Ceres::Header")
             {
-                this.fixateHeader();
+                // this.fixateHeader();
                 this.calculateBodyOffset();
                 this.isShopBuilderHeaderFixated = true;
             }
