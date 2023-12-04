@@ -5,7 +5,7 @@
                 <div class="row p-3" v-show="!isExpanded" :class="classes" :style="styles">
                     <div class="col-12 px-2 col-md-12 text-center">
                         <p class="cookieBeaverContainer mt-4">
-                          <lazy-img picture-class="lzy cookieBeaver" alt="Biber Bruno" image-url="https://cdn.bio-kinder.de/frontend/images/biokindertheme/icons/cookie_biber.png"></lazy-img>
+                          <img class="cookieBeaver" loading="lazy"  src="https://cdn.bio-kinder.de/frontend/images/biokindertheme/icons/cookie_biber.png" />
                         </p>
                         <h2>Cookies akzeptieren</h2>
                         <p>

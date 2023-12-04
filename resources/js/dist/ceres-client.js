@@ -390,7 +390,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -37833,143 +37832,135 @@ var render = function() {
             { staticClass: "modal-dialog", attrs: { role: "document" } },
             [
               _c("div", { staticClass: "modal-content" }, [
-                _c(
-                  "div",
-                  { staticClass: "modal-body text-center" },
-                  [
-                    _c("lazy-img", {
-                      attrs: {
-                        "image-url":
-                          "https://cdn.bio-kinder.de/frontend/images/forest/hf-bk-2.svg",
-                        alt: "BioKinder und HessenForst",
-                        "picture-class": "hessenforst_biokinder_banner"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("p", [
+                _c("div", { staticClass: "modal-body text-center" }, [
+                  _c("img", {
+                    staticClass: "hessenforst_biokinder_banner",
+                    attrs: {
+                      loading: "lazy",
+                      src:
+                        "https://cdn.bio-kinder.de/frontend/images/forest/hf-bk-2.svg",
+                      alt: "BioKinder & HessenForst"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(
+                      "\n                        In den vergangenen Jahren ist uns immer deutlicher geworden, wie sich zu trockene Bedingungen\n                        im Sommer negativ auf unsere Wälder ausgewirkt haben. Immer häufiger sind große,\n                        leere Flächen zu sehen, wo früher einmal ein dichter Wald gewachsen ist.\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _c("ul", { staticClass: "list-group cleanList text-left" }, [
+                    _c("li", { staticClass: "list-group-item" }, [
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "css-i6dzq1",
+                          attrs: {
+                            viewBox: "0 0 24 24",
+                            width: "24",
+                            height: "24",
+                            stroke: "currentColor",
+                            "stroke-width": "2",
+                            fill: "none",
+                            "stroke-linecap": "round",
+                            "stroke-linejoin": "round"
+                          }
+                        },
+                        [
+                          _c("polyline", {
+                            attrs: { points: "20 6 9 17 4 12" }
+                          })
+                        ]
+                      ),
                       _vm._v(
-                        "\n                        In den vergangenen Jahren ist uns immer deutlicher geworden, wie sich zu trockene Bedingungen\n                        im Sommer negativ auf unsere Wälder ausgewirkt haben. Immer häufiger sind große,\n                        leere Flächen zu sehen, wo früher einmal ein dichter Wald gewachsen ist.\n                    "
+                        "\n                            100%-Spende – Keine versteckten Gebühren, kein Kleingedrucktes\n                        "
                       )
                     ]),
                     _vm._v(" "),
-                    _vm._m(3),
+                    _c("li", { staticClass: "list-group-item" }, [
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "css-i6dzq1",
+                          attrs: {
+                            viewBox: "0 0 24 24",
+                            width: "24",
+                            height: "24",
+                            stroke: "currentColor",
+                            "stroke-width": "2",
+                            fill: "none",
+                            "stroke-linecap": "round",
+                            "stroke-linejoin": "round"
+                          }
+                        },
+                        [
+                          _c("polyline", {
+                            attrs: { points: "20 6 9 17 4 12" }
+                          })
+                        ]
+                      ),
+                      _vm._v(
+                        "\n                            Heimische Bäume für einen gesunden Mischwald\n                        "
+                      )
+                    ]),
                     _vm._v(" "),
-                    _c(
-                      "ul",
-                      { staticClass: "list-group cleanList text-left" },
-                      [
-                        _c("li", { staticClass: "list-group-item" }, [
-                          _c(
-                            "svg",
-                            {
-                              staticClass: "css-i6dzq1",
-                              attrs: {
-                                viewBox: "0 0 24 24",
-                                width: "24",
-                                height: "24",
-                                stroke: "currentColor",
-                                "stroke-width": "2",
-                                fill: "none",
-                                "stroke-linecap": "round",
-                                "stroke-linejoin": "round"
-                              }
-                            },
-                            [
-                              _c("polyline", {
-                                attrs: { points: "20 6 9 17 4 12" }
-                              })
-                            ]
-                          ),
-                          _vm._v(
-                            "\n                            100%-Spende – Keine versteckten Gebühren, kein Kleingedrucktes\n                        "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "list-group-item" }, [
-                          _c(
-                            "svg",
-                            {
-                              staticClass: "css-i6dzq1",
-                              attrs: {
-                                viewBox: "0 0 24 24",
-                                width: "24",
-                                height: "24",
-                                stroke: "currentColor",
-                                "stroke-width": "2",
-                                fill: "none",
-                                "stroke-linecap": "round",
-                                "stroke-linejoin": "round"
-                              }
-                            },
-                            [
-                              _c("polyline", {
-                                attrs: { points: "20 6 9 17 4 12" }
-                              })
-                            ]
-                          ),
-                          _vm._v(
-                            "\n                            Heimische Bäume für einen gesunden Mischwald\n                        "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "list-group-item" }, [
-                          _c(
-                            "svg",
-                            {
-                              staticClass: "css-i6dzq1",
-                              attrs: {
-                                viewBox: "0 0 24 24",
-                                width: "24",
-                                height: "24",
-                                stroke: "currentColor",
-                                "stroke-width": "2",
-                                fill: "none",
-                                "stroke-linecap": "round",
-                                "stroke-linejoin": "round"
-                              }
-                            },
-                            [
-                              _c("polyline", {
-                                attrs: { points: "20 6 9 17 4 12" }
-                              })
-                            ]
-                          ),
-                          _vm._v(
-                            "\n                            Wir pflanzen im Herzen des schönen Taunus\n                        "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "list-group-item" }, [
-                          _c(
-                            "svg",
-                            {
-                              staticClass: "css-i6dzq1",
-                              attrs: {
-                                viewBox: "0 0 24 24",
-                                width: "24",
-                                height: "24",
-                                stroke: "currentColor",
-                                "stroke-width": "2",
-                                fill: "none",
-                                "stroke-linecap": "round",
-                                "stroke-linejoin": "round"
-                              }
-                            },
-                            [
-                              _c("polyline", {
-                                attrs: { points: "20 6 9 17 4 12" }
-                              })
-                            ]
-                          ),
-                          _vm._v(
-                            "\n                            Betreuung durch HessenForst vom Setzling bis zum Baum\n                        "
-                          )
-                        ])
-                      ]
-                    )
-                  ],
-                  1
-                ),
+                    _c("li", { staticClass: "list-group-item" }, [
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "css-i6dzq1",
+                          attrs: {
+                            viewBox: "0 0 24 24",
+                            width: "24",
+                            height: "24",
+                            stroke: "currentColor",
+                            "stroke-width": "2",
+                            fill: "none",
+                            "stroke-linecap": "round",
+                            "stroke-linejoin": "round"
+                          }
+                        },
+                        [
+                          _c("polyline", {
+                            attrs: { points: "20 6 9 17 4 12" }
+                          })
+                        ]
+                      ),
+                      _vm._v(
+                        "\n                            Wir pflanzen im Herzen des schönen Taunus\n                        "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "list-group-item" }, [
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "css-i6dzq1",
+                          attrs: {
+                            viewBox: "0 0 24 24",
+                            width: "24",
+                            height: "24",
+                            stroke: "currentColor",
+                            "stroke-width": "2",
+                            fill: "none",
+                            "stroke-linecap": "round",
+                            "stroke-linejoin": "round"
+                          }
+                        },
+                        [
+                          _c("polyline", {
+                            attrs: { points: "20 6 9 17 4 12" }
+                          })
+                        ]
+                      ),
+                      _vm._v(
+                        "\n                            Betreuung durch HessenForst vom Setzling bis zum Baum\n                        "
+                      )
+                    ])
+                  ])
+                ]),
                 _vm._v(" "),
                 _vm._m(4)
               ])
@@ -41375,21 +41366,7 @@ var render = function() {
                   "div",
                   { staticClass: "col-12 px-2 col-md-12 text-center" },
                   [
-                    _c(
-                      "p",
-                      { staticClass: "cookieBeaverContainer mt-4" },
-                      [
-                        _c("lazy-img", {
-                          attrs: {
-                            "picture-class": "lzy cookieBeaver",
-                            alt: "Biber Bruno",
-                            "image-url":
-                              "https://cdn.bio-kinder.de/frontend/images/biokindertheme/icons/cookie_biber.png"
-                          }
-                        })
-                      ],
-                      1
-                    ),
+                    _vm._m(0),
                     _vm._v(" "),
                     _c("h2", [_vm._v("Cookies akzeptieren")]),
                     _vm._v(" "),
@@ -41583,7 +41560,23 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "cookieBeaverContainer mt-4" }, [
+      _c("img", {
+        staticClass: "cookieBeaver",
+        attrs: {
+          loading: "lazy",
+          src:
+            "https://cdn.bio-kinder.de/frontend/images/biokindertheme/icons/cookie_biber.png"
+        }
+      })
+    ])
+  }
+]
 render._withStripped = true
 
 

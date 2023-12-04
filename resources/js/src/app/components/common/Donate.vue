@@ -44,8 +44,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-body text-center">
-                        <lazy-img image-url="https://cdn.bio-kinder.de/frontend/images/forest/hf-bk-2.svg" alt="BioKinder und HessenForst" picture-class="hessenforst_biokinder_banner"></lazy-img>
-
+                        <img loading="lazy" src="https://cdn.bio-kinder.de/frontend/images/forest/hf-bk-2.svg" alt="BioKinder & HessenForst" class="hessenforst_biokinder_banner" />
                         <p>
                             In den vergangenen Jahren ist uns immer deutlicher geworden, wie sich zu trockene Bedingungen
                             im Sommer negativ auf unsere Wälder ausgewirkt haben. Immer häufiger sind große,
