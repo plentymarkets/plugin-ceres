@@ -71274,7 +71274,7 @@ var ModalService = __webpack_require__(/*! ../../../services/ModalService */ "./
 
     this.$nextTick(function () {
       _this.addressModal = ModalService.findModal(_this.$refs.addressModal);
-      _this.deleteModal = ModalService.findModal(_this.$refs.deleteModal);
+      _this.Modal = ModalService.findModal(_this.$refs.deleteModal);
     });
   },
   methods: {
@@ -71773,9 +71773,8 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
         _this3.addressModal.hide();
 
         _this3.waiting = false;
-        console.log("billing addresses", document.querySelector(".page-content").dataset.nrofbillingaddresses);
 
-        if (_this3.addressType === "1" && document.querySelector(".page-content").dataset.nrofbillingaddresses === "0" || _this3.addressType === "2" && document.querySelector(".page-content").dataset.nrofdeliveryaddresses === "0") {
+        if (_this3.addressType === "1" && _this3.getNumberOfActiveAddresses(document.querySelectorAll(".invoice-addresses-select .vue-recycle-scroller__item-view")) === 0 || _this3.addressType === "2" && _this3.getNumberOfActiveAddresses(document.querySelectorAll(".shipping-addresses-select .vue-recycle-scroller__item-view")) === 1) {
           var theNewSavedAddress = response;
           theNewSavedAddress.pivot.isPrimary = 1;
 
@@ -71920,6 +71919,24 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
       if (genderCondition || countryCondition || pickupCondition) {
         _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__["default"].unmarkAllFields(this.$refs.addressForm);
       }
+    },
+    getNumberOfActiveAddresses: function getNumberOfActiveAddresses(theNodes) {
+      var number = 0;
+
+      if (theNodes.length === 0) {
+        return number;
+      }
+
+      for (var con = 0; con < theNodes.length; con++) {
+        var style = window.getComputedStyle(theNodes[con]);
+        var matrix = new DOMMatrixReadOnly(style.transform).m42;
+
+        if (matrix >= 0) {
+          number++;
+        }
+      }
+
+      return number;
     }
   }
 }));

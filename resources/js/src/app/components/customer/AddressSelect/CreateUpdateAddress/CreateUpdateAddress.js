@@ -204,11 +204,10 @@ export default Vue.component("create-update-address", {
                     {
                         this.addressModal.hide();
                         this.waiting = false;
-                        console.log("billing addresses", document.querySelector(".page-content").dataset.nrofbillingaddresses);
                         if (
-                            (this.addressType === "1" && document.querySelector(".page-content").dataset.nrofbillingaddresses === "0")
+                            (this.addressType === "1" && this.getNumberOfActiveAddresses(document.querySelectorAll(".invoice-addresses-select .vue-recycle-scroller__item-view")) === 0)
                             ||
-                            (this.addressType === "2" && document.querySelector(".page-content").dataset.nrofdeliveryaddresses === "0")
+                            (this.addressType === "2" && this.getNumberOfActiveAddresses(document.querySelectorAll(".shipping-addresses-select .vue-recycle-scroller__item-view")) === 1)
                         )
                         {
                             const theNewSavedAddress = response;
@@ -363,6 +362,27 @@ export default Vue.component("create-update-address", {
             {
                 ValidationService.unmarkAllFields(this.$refs.addressForm);
             }
+        },
+        getNumberOfActiveAddresses(theNodes)
+        {
+            let number = 0;
+
+            if (theNodes.length === 0)
+            {
+                return number;
+            }
+            for (let con=0; con < theNodes.length; con++)
+            {
+                const style= window.getComputedStyle(theNodes[con]);
+                const matrix = new DOMMatrixReadOnly(style.transform).m42;
+
+                if (matrix >= 0)
+                {
+                    number++;
+                }
+            }
+
+            return number;
         }
     }
 });
