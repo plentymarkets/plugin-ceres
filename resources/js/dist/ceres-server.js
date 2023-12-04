@@ -50673,9 +50673,7 @@ var render = function() {
                           _c("h1", {
                             domProps: {
                               innerHTML: _vm._s(
-                                this.$options.filters.itemName(
-                                  _vm.currentVariation
-                                )
+                                this.currentVariation.texts.name1
                               )
                             }
                           }),
@@ -83579,15 +83577,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.concat.js */ "./node_modules/core-js/modules/es.array.concat.js");
 /* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
 
-
-vue__WEBPACK_IMPORTED_MODULE_4___default.a.filter("itemName", function (_ref) {
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.filter("itemName", function (_ref) {
   var _ref$texts = _ref.texts,
       name1 = _ref$texts.name1,
       name2 = _ref$texts.name2,
@@ -83613,12 +83609,6 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.filter("itemName", function (_ref) {
 
   if (itemDisplayName === "variationName" && name && name.length) {
     itemName = name;
-  }
-
-  if (bundleType === "bundle") {
-    itemName = _services_TranslationService__WEBPACK_IMPORTED_MODULE_3__["default"].translate("Ceres::Template.itemBundleName", {
-      itemName: itemName
-    });
   }
 
   return itemName;

@@ -40,7 +40,7 @@
 
                     <div class="col-md-5 singleItemDetails single-rightside mb-4">
 
-                        <h1 v-html="this.$options.filters.itemName(currentVariation)"></h1>
+                        <h1 v-html="this.currentVariation.texts.name1"></h1>
 
                         <div><!-- v-stick-in-parent -->
                             
