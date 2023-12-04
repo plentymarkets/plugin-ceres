@@ -60,7 +60,7 @@ export default class HeaderScroller
         // Initialize only, if the user has scrolled down from the top and is not in the shopbuilder.
         if (!App.isShopBuilder && window.pageYOffset > 0)
         {
-            this.calculateBodyOffset();
+            //  this.calculateBodyOffset();
             //   this.scrollHeaderElements();
             // If the header content gets active in the shopbuilder, the event listener for 'shopbuilder.after.activate-container' will fixate the header.
             // this.fixateHeader();
@@ -202,7 +202,7 @@ export default class HeaderScroller
             if (this.isShopBuilderHeaderFixated)
             {
                 this.collectHeaderElementHeights();
-                this.calculateBodyOffset();
+                //   this.calculateBodyOffset();
             }
         });
 
@@ -212,13 +212,13 @@ export default class HeaderScroller
             if (data?.container === "Ceres::Header")
             {
                 // this.fixateHeader();
-                this.calculateBodyOffset();
+                //   this.calculateBodyOffset();
                 this.isShopBuilderHeaderFixated = true;
             }
             else
             {
                 this.unfixHeader();
-                this.calculateBodyOffset(true);
+                //  this.calculateBodyOffset(true);
                 this.isShopBuilderHeaderFixated = false;
             }
         });

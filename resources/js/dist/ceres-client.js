@@ -63212,10 +63212,10 @@ var HeaderScroller = /*#__PURE__*/function () {
       this.updateZIndexes(); // Initialize only, if the user has scrolled down from the top and is not in the shopbuilder.
 
       if (!App.isShopBuilder && window.pageYOffset > 0) {
-        this.calculateBodyOffset(); //   this.scrollHeaderElements();
+        //  this.calculateBodyOffset();
+        //   this.scrollHeaderElements();
         // If the header content gets active in the shopbuilder, the event listener for 'shopbuilder.after.activate-container' will fixate the header.
         // this.fixateHeader();
-
         this.initialized = true;
       }
     } // Collect heights of header elements for later use
@@ -63344,22 +63344,19 @@ var HeaderScroller = /*#__PURE__*/function () {
 
       $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", function () {
         if (_this3.isShopBuilderHeaderFixated) {
-          _this3.collectHeaderElementHeights();
+          _this3.collectHeaderElementHeights(); //   this.calculateBodyOffset();
 
-          _this3.calculateBodyOffset();
         }
       }); // when the active dropzone in the shopbuilder changes
 
       $(document).on("shopbuilder.after.activate-container", function (event, data) {
         if ((data === null || data === void 0 ? void 0 : data.container) === "Ceres::Header") {
           // this.fixateHeader();
-          _this3.calculateBodyOffset();
-
+          //   this.calculateBodyOffset();
           _this3.isShopBuilderHeaderFixated = true;
         } else {
-          _this3.unfixHeader();
+          _this3.unfixHeader(); //  this.calculateBodyOffset(true);
 
-          _this3.calculateBodyOffset(true);
 
           _this3.isShopBuilderHeaderFixated = false;
         }
