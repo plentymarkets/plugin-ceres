@@ -205,9 +205,9 @@ export default Vue.component("create-update-address", {
                         this.addressModal.hide();
                         this.waiting = false;
                         if (
-                            (this.addressType === "1" && this.getNumberOfActiveAddresses(document.querySelectorAll(".invoice-addresses-select .vue-recycle-scroller__item-view")) === 0)
+                            (this.addressType === "1" && this.getNumberOfActiveAddresses(document.querySelectorAll(".invoice-addresses-select .vue-recycle-scroller__item-view")) === 1)
                             ||
-                            (this.addressType === "2" && this.getNumberOfActiveAddresses(document.querySelectorAll(".shipping-addresses-select .vue-recycle-scroller__item-view")) === 1)
+                            (this.addressType === "2" && this.getNumberOfActiveAddresses(document.querySelectorAll(".shipping-addresses-select .vue-recycle-scroller__item-view")) === 2)
                         )
                         {
                             const theNewSavedAddress = response;
