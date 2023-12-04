@@ -3,7 +3,7 @@
 {% set companyName  = trans("Ceres::Template.headerCompanyName") %}
 {% set useMegaMenu  = config("Ceres.header.megamenu_levels") > 1 %}
 
-<nav class="navbar header-fw p-0 border-bottom{% if useMegaMenu %} megamenu{% else %} normalmenu{% endif %}">
+<nav class="navbar header-fw p-0 border-bottom{% if useMegaMenu %} megamenu{% else %} normalmenu{% endif %}" style="z-index: 99">
     <div class="container-max d-block">
         <div class="row mx-0 position-relative d-flex">
             <div class="brand-wrapper px-lg-3 d-flex flex-fill{% if showHeaderNavBar == "side" %} position-relative{% endif %}">
