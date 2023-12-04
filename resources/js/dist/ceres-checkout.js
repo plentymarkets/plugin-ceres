@@ -71274,7 +71274,7 @@ var ModalService = __webpack_require__(/*! ../../../services/ModalService */ "./
 
     this.$nextTick(function () {
       _this.addressModal = ModalService.findModal(_this.$refs.addressModal);
-      _this.Modal = ModalService.findModal(_this.$refs.deleteModal);
+      _this.deleteModal = ModalService.findModal(_this.$refs.deleteModal);
     });
   },
   methods: {

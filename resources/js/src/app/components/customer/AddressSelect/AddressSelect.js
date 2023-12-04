@@ -175,7 +175,7 @@ export default Vue.component("address-select", {
         this.$nextTick(() =>
         {
             this.addressModal = ModalService.findModal(this.$refs.addressModal);
-            this. Modal = ModalService.findModal(this.$refs.deleteModal);
+            this.deleteModal = ModalService.findModal(this.$refs.deleteModal);
         });
     },
 
