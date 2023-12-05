@@ -55,31 +55,23 @@ export default class HeaderScroller
     initialize()
     {
 
-
         const headerElement = document.querySelector("#page-header").classList.contains("default-header");
-
-        console.log("Test", headerElement);
 
         if (!headerElement)
         {
-            console.log("Inside Shopbuilder header ");
             this.collectHeaderElementHeights();
             this.updateZIndexes();
 
             // Initialize only, if the user has scrolled down from the top and is not in the shopbuilder.
             if (!App.isShopBuilder && window.pageYOffset > 0)
             {
-                //  this.calculateBodyOffset();
-                //   this.scrollHeaderElements();
+                this.calculateBodyOffset();
+                this.scrollHeaderElements();
                 // If the header content gets active in the shopbuilder, the event listener for 'shopbuilder.after.activate-container' will fixate the header.
-                // this.fixateHeader();
+                this.fixateHeader();
 
                 this.initialized = true;
             }
-        }
-        else
-        {
-            console.log("Default");
         }
     }
 
@@ -196,10 +188,10 @@ export default class HeaderScroller
                 {
                     window.cancelAnimationFrame(this.animationFrameTimeout);
                 }
-
-                // this.animationFrameTimeout = window.requestAnimationFrame(
-                //     this.scrollHeaderElements.bind(this)
-                // );
+                // We removed this
+                this.animationFrameTimeout = window.requestAnimationFrame(
+                    this.scrollHeaderElements.bind(this)
+                );
             }
             else
             {
@@ -216,7 +208,8 @@ export default class HeaderScroller
             if (this.isShopBuilderHeaderFixated)
             {
                 this.collectHeaderElementHeights();
-                //   this.calculateBodyOffset();
+                // We removed this
+                this.calculateBodyOffset();
             }
         });
 
@@ -225,14 +218,16 @@ export default class HeaderScroller
         {
             if (data?.container === "Ceres::Header")
             {
-                // this.fixateHeader();
-                //   this.calculateBodyOffset();
+                // We removed this
+                this.fixateHeader();
+                this.calculateBodyOffset();
                 this.isShopBuilderHeaderFixated = true;
             }
             else
             {
                 this.unfixHeader();
-                //  this.calculateBodyOffset(true);
+                // We removed this
+                this.calculateBodyOffset(true);
                 this.isShopBuilderHeaderFixated = false;
             }
         });

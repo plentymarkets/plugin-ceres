@@ -63209,22 +63209,18 @@ var HeaderScroller = /*#__PURE__*/function () {
     key: "initialize",
     value: function initialize() {
       var headerElement = document.querySelector("#page-header").classList.contains("default-header");
-      console.log("Test", headerElement);
 
       if (!headerElement) {
-        console.log("Inside Shopbuilder header ");
         this.collectHeaderElementHeights();
         this.updateZIndexes(); // Initialize only, if the user has scrolled down from the top and is not in the shopbuilder.
 
         if (!App.isShopBuilder && window.pageYOffset > 0) {
-          //  this.calculateBodyOffset();
-          //   this.scrollHeaderElements();
-          // If the header content gets active in the shopbuilder, the event listener for 'shopbuilder.after.activate-container' will fixate the header.
-          // this.fixateHeader();
+          this.calculateBodyOffset();
+          this.scrollHeaderElements(); // If the header content gets active in the shopbuilder, the event listener for 'shopbuilder.after.activate-container' will fixate the header.
+
+          this.fixateHeader();
           this.initialized = true;
         }
-      } else {
-        console.log("Default");
       }
     } // Collect heights of header elements for later use
 
@@ -63333,10 +63329,10 @@ var HeaderScroller = /*#__PURE__*/function () {
         if (_this2.initialized) {
           if (_this2.animationFrameTimeout) {
             window.cancelAnimationFrame(_this2.animationFrameTimeout);
-          } // this.animationFrameTimeout = window.requestAnimationFrame(
-          //     this.scrollHeaderElements.bind(this)
-          // );
+          } // We removed this
 
+
+          _this2.animationFrameTimeout = window.requestAnimationFrame(_this2.scrollHeaderElements.bind(_this2));
         } else {
           _this2.initialize();
         }
@@ -63352,19 +63348,26 @@ var HeaderScroller = /*#__PURE__*/function () {
 
       $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", function () {
         if (_this3.isShopBuilderHeaderFixated) {
-          _this3.collectHeaderElementHeights(); //   this.calculateBodyOffset();
+          _this3.collectHeaderElementHeights(); // We removed this
 
+
+          _this3.calculateBodyOffset();
         }
       }); // when the active dropzone in the shopbuilder changes
 
       $(document).on("shopbuilder.after.activate-container", function (event, data) {
         if ((data === null || data === void 0 ? void 0 : data.container) === "Ceres::Header") {
-          // this.fixateHeader();
-          //   this.calculateBodyOffset();
+          // We removed this
+          _this3.fixateHeader();
+
+          _this3.calculateBodyOffset();
+
           _this3.isShopBuilderHeaderFixated = true;
         } else {
-          _this3.unfixHeader(); //  this.calculateBodyOffset(true);
+          _this3.unfixHeader(); // We removed this
 
+
+          _this3.calculateBodyOffset(true);
 
           _this3.isShopBuilderHeaderFixated = false;
         }
