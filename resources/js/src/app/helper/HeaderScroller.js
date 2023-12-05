@@ -54,8 +54,10 @@ export default class HeaderScroller
      */
     initialize()
     {
+        console.log("Test", this._headerParent.classList.contains("default-header"));
         if (!this._headerParent.classList.contains("default-header"))
         {
+            console.log("Inside Shopbuilder header ");
             this.collectHeaderElementHeights();
             this.updateZIndexes();
 
@@ -72,7 +74,7 @@ export default class HeaderScroller
         }
         else
         {
-            console.log("This will be reached");
+            console.log("Default");
         }
     }
 

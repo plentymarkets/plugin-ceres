@@ -76661,7 +76661,10 @@ var HeaderScroller = /*#__PURE__*/function () {
   }, {
     key: "initialize",
     value: function initialize() {
+      console.log("Test", this._headerParent.classList.contains("default-header"));
+
       if (!this._headerParent.classList.contains("default-header")) {
+        console.log("Inside Shopbuilder header ");
         this.collectHeaderElementHeights();
         this.updateZIndexes(); // Initialize only, if the user has scrolled down from the top and is not in the shopbuilder.
 
@@ -76673,7 +76676,7 @@ var HeaderScroller = /*#__PURE__*/function () {
           this.initialized = true;
         }
       } else {
-        console.log("This will be reached");
+        console.log("Default");
       }
     } // Collect heights of header elements for later use
 
