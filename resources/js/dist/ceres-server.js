@@ -11486,6 +11486,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -53694,7 +53695,7 @@ var render = function() {
         "</div>",
         [
           _vm._ssrNode(
-            '<input type="search"' +
+            '<input type="search" id="bk-searchbox-1"' +
               _vm._ssrAttr("autofocus", _vm.isShopBuilder) +
               _vm._ssrAttr(
                 "aria-label",

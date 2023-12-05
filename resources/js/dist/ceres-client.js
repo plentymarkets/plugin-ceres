@@ -2684,6 +2684,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -41057,6 +41058,7 @@ var render = function() {
           staticClass: "search-input flex-grow-1 px-2 py-2 bkmSearchbox",
           attrs: {
             type: "search",
+            id: "bk-searchbox-1",
             autofocus: _vm.isShopBuilder,
             "aria-label": _vm.$translate("Ceres::Template.headerSearchTerm"),
             placeholder: "Suchbegriff eingeben..."
