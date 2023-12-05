@@ -55,6 +55,7 @@ export default class HeaderScroller
     initialize()
     {
         console.log("Test", this._headerParent.classList.contains("default-header"));
+        console.log("Test", this._headerParent.classList);
         if (!this._headerParent.classList.contains("default-header"))
         {
             console.log("Inside Shopbuilder header ");

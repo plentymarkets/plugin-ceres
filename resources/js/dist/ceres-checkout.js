@@ -76662,6 +76662,7 @@ var HeaderScroller = /*#__PURE__*/function () {
     key: "initialize",
     value: function initialize() {
       console.log("Test", this._headerParent.classList.contains("default-header"));
+      console.log("Test", this._headerParent.classList);
 
       if (!this._headerParent.classList.contains("default-header")) {
         console.log("Inside Shopbuilder header ");
