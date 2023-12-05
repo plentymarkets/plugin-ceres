@@ -76661,10 +76661,10 @@ var HeaderScroller = /*#__PURE__*/function () {
   }, {
     key: "initialize",
     value: function initialize() {
-      console.log("Test", this._headerParent.classList.contains("default-header"));
-      console.log("Test", this._headerParent.classList);
+      var headerElement = document.querySelector("#page-header").classList.contains("default-header");
+      console.log("Test", headerElement);
 
-      if (!this._headerParent.classList.contains("default-header")) {
+      if (!headerElement) {
         console.log("Inside Shopbuilder header ");
         this.collectHeaderElementHeights();
         this.updateZIndexes(); // Initialize only, if the user has scrolled down from the top and is not in the shopbuilder.

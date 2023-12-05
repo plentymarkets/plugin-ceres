@@ -54,9 +54,13 @@ export default class HeaderScroller
      */
     initialize()
     {
-        console.log("Test", this._headerParent.classList.contains("default-header"));
-        console.log("Test", this._headerParent.classList);
-        if (!this._headerParent.classList.contains("default-header"))
+
+
+        const headerElement = document.querySelector("#page-header").classList.contains("default-header");
+
+        console.log("Test", headerElement);
+
+        if (!headerElement)
         {
             console.log("Inside Shopbuilder header ");
             this.collectHeaderElementHeights();
