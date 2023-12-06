@@ -95,21 +95,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     currentFacet: function currentFacet() {
       var _this = this;
 
-      if (this.facets.length) return this.facets.find(function (facet) {
+      if (this.facets) return this.facets.find(function (facet) {
         return facet.id == _this.facetId;
       });
-      return null;
     },
     currentValue: function currentValue() {
       var _this2 = this;
 
-      if (this.currentFacet === undefined || this.currentFacet === null) return null;
-      return this.currentFacet.values.find(function (value) {
+      if (this.currentFacet) return this.currentFacet.values.find(function (value) {
         return value.id == _this2.valueId;
       });
     },
     showFacetValue: function showFacetValue() {
-      return this.currentFacet !== null && this.currentValue !== null;
+      return this.currentFacet && this.currentValue;
     },
     btnText: function btnText() {
       if (this.isSelected(this.valueId)) return this.resetText;
@@ -157,39 +155,44 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.currentValue
-    ? _c("div", { staticClass: "facet-value-box" }, [
-        _c("div", { staticClass: "btn-container" }, [
-          _c("input", {
-            staticClass: "form-check-input d-none",
-            attrs: {
-              id: "fvb-option-" + _vm.valueId,
-              type: "checkbox",
-              disabled: _vm.isLoading
-            },
-            domProps: { checked: _vm.isSelected(_vm.valueId) },
-            on: {
-              change: function($event) {
-                return _vm.updateFacet(_vm.currentValue)
+  return _c(
+    "div",
+    {
+      staticClass: "facet-value-box",
+      style: { "min-width:50px;min-height:20px;": _vm.isShopBuilder }
+    },
+    [
+      _vm.facets || _vm.isShopBuilder
+        ? [
+            _c("input", {
+              staticClass: "form-check-input d-none",
+              attrs: {
+                id: "fvb-option-" + _vm.valueId,
+                type: "checkbox",
+                disabled: _vm.isLoading
+              },
+              domProps: { checked: _vm.isSelected(_vm.valueId) },
+              on: {
+                change: function($event) {
+                  return _vm.updateFacet(_vm.currentValue)
+                }
               }
-            }
-          }),
-          _c(
-            "label",
-            {
+            }),
+            _c("label", {
               staticClass: "form-check-label",
               class: [
                 _vm.isSelected(_vm.valueId) ? "selected" : "",
                 "option-" + _vm.valueId,
                 _vm.className
               ],
-              attrs: { for: "fvb-option-" + _vm.valueId }
-            },
-            [_vm._v(_vm._s(_vm.btnText))]
-          )
-        ])
-      ])
-    : _vm._e()
+              attrs: { for: "fvb-option-" + _vm.valueId },
+              domProps: { innerHTML: _vm._s(_vm.btnText) }
+            })
+          ]
+        : _vm._e()
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

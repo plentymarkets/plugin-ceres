@@ -1,12 +1,12 @@
 <template>
-    <div class="facet-value-box" v-if="currentValue">
-            <div class="btn-container"><!--
-            --><input :id="'fvb-option-' + valueId" class="form-check-input d-none" type="checkbox"
-                    :checked="isSelected(valueId)" @change="updateFacet(currentValue)" :disabled="isLoading"><!--
-            --><label :for="'fvb-option-' + valueId" class="form-check-label"
-                    :class="[isSelected(valueId) ? 'selected' : '', 'option-' + valueId, className]"
-                    >{{ btnText }}</label><!--
-        --></div>
+    <div class="facet-value-box" :style="{ 'min-width:50px;min-height:20px;': isShopBuilder }">
+        <template v-if="facets || isShopBuilder">
+            <input :id="'fvb-option-' + valueId" class="form-check-input d-none" type="checkbox"
+                :checked="isSelected(valueId)" @change="updateFacet(currentValue)" :disabled="isLoading"><!--
+        --><label :for="'fvb-option-' + valueId" class="form-check-label"
+                :class="[isSelected(valueId) ? 'selected' : '', 'option-' + valueId, className]"
+                v-html="btnText"></label>
+        </template>
     </div>
 </template>
 
@@ -44,36 +44,27 @@ export default {
     },
     computed:
     {
-        isShopBuilder()
-        {
+        isShopBuilder() {
             return App.isShopBuilder;
         },
-        currentFacet()
-        {
-            if(this.facets.length)
+        currentFacet() {
+            if (this.facets)
                 return this.facets.find(facet => facet.id == this.facetId);
-            return null
         },
-        currentValue()
-        {
-            if(this.currentFacet === undefined || this.currentFacet === null)
-                return null;
-
-            return this.currentFacet.values.find(value => value.id == this.valueId);
+        currentValue() {
+            if (this.currentFacet)
+                return this.currentFacet.values.find(value => value.id == this.valueId);
         },
-        showFacetValue()
-        {
-            return (this.currentFacet !== null && this.currentValue !== null);
+        showFacetValue() {
+            return (this.currentFacet && this.currentValue);
         },
         btnText() {
-            if(this.isSelected(this.valueId))
+            if (this.isSelected(this.valueId))
                 return this.resetText;
             return this.buttonText;
         },
         ...mapState({
-            facets(state) {
-                return state.itemList.facets;
-            },
+            facets: state => state.itemList.facets,
             isLoading: state => state.itemList.isLoading,
             selectedFacets: state => state.itemList.selectedFacets
         })
@@ -84,8 +75,7 @@ export default {
         updateFacet(facetValue) {
             this.$store.dispatch("selectFacet", { facetValue });
         },
-        isSelected(facetValueId)
-        {
+        isSelected(facetValueId) {
             return this.selectedFacets.findIndex(selectedFacet => selectedFacet.id === facetValueId) > -1;
         }
     }
