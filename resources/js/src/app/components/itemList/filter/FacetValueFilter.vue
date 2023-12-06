@@ -1,6 +1,6 @@
 <template>
     <div class="facet-value-box" :style="{ 'min-width:50px;min-height:20px;': isShopBuilder }">
-        <template v-if="facets || isShopBuilder">
+        <template v-if="(facets && !isItem) || isShopBuilder">
             <input :id="'fvb-option-' + valueId" class="form-check-input d-none" type="checkbox"
                 :checked="isSelected(valueId)" @change="updateFacet(currentValue)" :disabled="isLoading"><!--
         --><label :for="'fvb-option-' + valueId" class="form-check-label"
@@ -20,6 +20,11 @@ export default {
         {
             type: Number,
             default: 278
+        },
+        isItem:
+        {
+            type: Boolean,
+            default: true
         },
         facetId:
         {
@@ -54,9 +59,6 @@ export default {
         currentValue() {
             if (this.currentFacet)
                 return this.currentFacet.values.find(value => value.id == this.valueId);
-        },
-        showFacetValue() {
-            return (this.currentFacet && this.currentValue);
         },
         btnText() {
             if (this.isSelected(this.valueId))

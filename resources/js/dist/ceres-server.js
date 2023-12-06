@@ -11947,6 +11947,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       type: Number,
       default: 278
     },
+    isItem: {
+      type: Boolean,
+      default: true
+    },
     facetId: {
       type: Number,
       default: 16
@@ -11981,9 +11985,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (this.currentFacet) return this.currentFacet.values.find(function (value) {
         return value.id == _this2.valueId;
       });
-    },
-    showFacetValue: function showFacetValue() {
-      return this.currentFacet && this.currentValue;
     },
     btnText: function btnText() {
       if (this.isSelected(this.valueId)) return this.resetText;
@@ -53972,7 +53973,7 @@ var render = function() {
     },
     [
       _vm._ssrNode(
-        _vm.facets || _vm.isShopBuilder
+        (_vm.facets && !_vm.isItem) || _vm.isShopBuilder
           ? "<input" +
               _vm._ssrAttr("id", "fvb-option-" + _vm.valueId) +
               ' type="checkbox"' +
