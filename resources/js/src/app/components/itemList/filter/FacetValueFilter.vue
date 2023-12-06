@@ -1,9 +1,12 @@
 <template>
-    <div class="facet-value-box" :style="{'min-width:50px;min-height:20px;': isShopBuilder}">
-        <template v-if="showFacetValue || isShopBuilder">
-            <input :id="'fvb-option-' + currentValue.id" class="form-check-input d-none" type="checkbox" :checked="isSelected(currentValue.id)" @change="updateFacet(currentValue)" :disabled="isLoading">
-            <label :for="'fvb-option-' + currentValue.id" class="form-check-label" :class="[isSelected(currentValue.id) ? 'selected' : '', 'option-' + currentValue.id, className]" v-html="btnText"></label>
-        </template>
+    <div class="facet-value-box" v-if="currentValue">
+            <div class="btn-container"><!--
+            --><input :id="'fvb-option-' + valueId" class="form-check-input d-none" type="checkbox"
+                    :checked="isSelected(valueId)" @change="updateFacet(currentValue)" :disabled="isLoading"><!--
+            --><label :for="'fvb-option-' + valueId" class="form-check-label"
+                    :class="[isSelected(valueId) ? 'selected' : '', 'option-' + valueId, className]"
+                    >{{ btnText }}</label><!--
+        --></div>
     </div>
 </template>
 
@@ -32,43 +35,39 @@ export default {
         {
             type: String,
             default: "Filtern"
+        },
+        resetText:
+        {
+            type: String,
+            default: "Filter entfernen"
         }
     },
-
     computed:
     {
-        currentFacet() 
-        {
-            return this.facets.find(facet => facet.id == this.facetId);
-        },
         isShopBuilder()
         {
             return App.isShopBuilder;
         },
+        currentFacet()
+        {
+            if(this.facets.length)
+                return this.facets.find(facet => facet.id == this.facetId);
+            return null
+        },
         currentValue()
         {
-            if(this.currentFacet === undefined)
-                return undefined;
+            if(this.currentFacet === undefined || this.currentFacet === null)
+                return null;
 
             return this.currentFacet.values.find(value => value.id == this.valueId);
         },
         showFacetValue()
         {
-            return (this.currentFacet !== undefined && this.currentValue !== undefined);
-        },
-        facetValueText()
-        {
-            if(this.buttonTex !== "")
-                return this.labelText;
-
-            if(this.currentValue === undefined)
-                return "FacetValue";
-
-            return this.currentValue.name;
+            return (this.currentFacet !== null && this.currentValue !== null);
         },
         btnText() {
             if(this.isSelected(this.valueId))
-                return "Filter entfernen";
+                return this.resetText;
             return this.buttonText;
         },
         ...mapState({
@@ -83,7 +82,6 @@ export default {
     methods:
     {
         updateFacet(facetValue) {
-            console.log("Selected Facet value", facetValue);
             this.$store.dispatch("selectFacet", { facetValue });
         },
         isSelected(facetValueId)
