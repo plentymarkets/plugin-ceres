@@ -8658,7 +8658,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.compDecimals = Math.max(minDecimals, intervalDecimals);
     this.onValueChanged = Object(_helper_debounce__WEBPACK_IMPORTED_MODULE_13__["debounce"])(function () {
       _this.$emit("quantity-change", _this.compValue);
-    }, Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["defaultValue"])(this.timeout, 500));
+    }, Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["defaultValue"])(this.timeout, 250));
 
     if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_12__["isNullOrUndefined"])(this.variationId)) {
       this.fetchQuantityFromBasket();

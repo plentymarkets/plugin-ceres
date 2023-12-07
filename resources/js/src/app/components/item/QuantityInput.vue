@@ -132,7 +132,7 @@ export default {
         this.onValueChanged = debounce(() =>
         {
             this.$emit("quantity-change", this.compValue);
-        }, defaultValue(this.timeout, 500));
+        }, defaultValue(this.timeout, 250));
 
         if (!isNullOrUndefined(this.variationId))
         {
