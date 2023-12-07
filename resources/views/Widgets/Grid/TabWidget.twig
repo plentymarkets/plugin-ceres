@@ -12,12 +12,11 @@
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
-<pre>{{ tabs | json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
-
 {% if renderContent %}
 <div class="widget widget-tab{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" 
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <tab-list class="widget-inner" appearance="{{ appearance | default("primary") }}" :render-empty="{{ isPreview | json_encode }}">
+        <pre>{{ tabs | json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
         {% for tab in tabs if children[tab.uuid] | raw is not empty or isPreview and tab.title | trim is not empty %}
             <tab-item class="{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" 
                 {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %} 
