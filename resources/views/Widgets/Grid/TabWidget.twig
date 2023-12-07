@@ -12,6 +12,7 @@
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
+<pre>{{ tabs | json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
 
 {% if renderContent %}
 <div class="widget widget-tab{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" 
