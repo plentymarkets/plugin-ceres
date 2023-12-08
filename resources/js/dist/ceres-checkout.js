@@ -71774,7 +71774,11 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
 
         _this3.waiting = false;
 
-        if (_this3.addressType === "1" && _this3.getNumberOfActiveAddresses(document.querySelectorAll(".invoice-addresses-select .vue-recycle-scroller__item-view")) === 1 || _this3.addressType === "2" && _this3.getNumberOfActiveAddresses(document.querySelectorAll(".shipping-addresses-select .vue-recycle-scroller__item-view")) === 2) {
+        var totalNrOfBillingAddresses = _this3.getNumberOfActiveAddresses(document.querySelectorAll(".invoice-addresses-select .vue-recycle-scroller__item-view"));
+
+        var totalNrOfShippingAddresses = _this3.getNumberOfActiveAddresses(document.querySelectorAll(".shipping-addresses-select .vue-recycle-scroller__item-view"));
+
+        if (_this3.addressType === "1" && (totalNrOfBillingAddresses === 0 || totalNrOfBillingAddresses === 1) || _this3.addressType === "2" && (totalNrOfShippingAddresses === 0 || totalNrOfShippingAddresses === 1)) {
           var theNewSavedAddress = response;
           theNewSavedAddress.pivot.isPrimary = 1;
 

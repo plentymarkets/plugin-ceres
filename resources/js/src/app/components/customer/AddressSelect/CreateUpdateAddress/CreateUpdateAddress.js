@@ -204,10 +204,13 @@ export default Vue.component("create-update-address", {
                     {
                         this.addressModal.hide();
                         this.waiting = false;
+                        const totalNrOfBillingAddresses = this.getNumberOfActiveAddresses(document.querySelectorAll(".invoice-addresses-select .vue-recycle-scroller__item-view"));
+                        const totalNrOfShippingAddresses = this.getNumberOfActiveAddresses(document.querySelectorAll(".shipping-addresses-select .vue-recycle-scroller__item-view"));
+
                         if (
-                            (this.addressType === "1" && this.getNumberOfActiveAddresses(document.querySelectorAll(".invoice-addresses-select .vue-recycle-scroller__item-view")) === 1)
+                            (this.addressType === "1" && (totalNrOfBillingAddresses === 0 || totalNrOfBillingAddresses === 1))
                             ||
-                            (this.addressType === "2" && this.getNumberOfActiveAddresses(document.querySelectorAll(".shipping-addresses-select .vue-recycle-scroller__item-view")) === 2)
+                            (this.addressType === "2" && (totalNrOfShippingAddresses === 0 || totalNrOfShippingAddresses === 1))
                         )
                         {
                             const theNewSavedAddress = response;
