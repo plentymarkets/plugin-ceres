@@ -127,6 +127,7 @@
                                                 <span
                                                     class="mt-2 primaryAddress"
                                                     :class="item.pivot.isPrimary !== 1 ? 'addressType' + addressType : 'd-none addressType' + addressType"
+                                                    v-if="$store.getters.isLoggedIn"
                                                     >
                                                     <button
                                                         v-tooltip
