@@ -71774,24 +71774,26 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
 
         _this3.waiting = false;
 
-        var totalNrOfBillingAddresses = _this3.getNumberOfActiveAddresses(document.querySelectorAll(".invoice-addresses-select .vue-recycle-scroller__item-view"));
+        if (_this3.$store.getters.isLoggedIn) {
+          var totalNrOfBillingAddresses = _this3.getNumberOfActiveAddresses(document.querySelectorAll(".invoice-addresses-select .vue-recycle-scroller__item-view"));
 
-        var totalNrOfShippingAddresses = _this3.getNumberOfActiveAddresses(document.querySelectorAll(".shipping-addresses-select .vue-recycle-scroller__item-view"));
+          var totalNrOfShippingAddresses = _this3.getNumberOfActiveAddresses(document.querySelectorAll(".shipping-addresses-select .vue-recycle-scroller__item-view"));
 
-        if (_this3.addressType === "1" && (totalNrOfBillingAddresses === 0 || totalNrOfBillingAddresses === 1) || _this3.addressType === "2" && (totalNrOfShippingAddresses === 0 || totalNrOfShippingAddresses === 1)) {
-          var theNewSavedAddress = response;
-          theNewSavedAddress.pivot.isPrimary = 1;
+          if (_this3.addressType === "1" && (totalNrOfBillingAddresses === 0 || totalNrOfBillingAddresses === 1) || _this3.addressType === "2" && (totalNrOfShippingAddresses === 0 || totalNrOfShippingAddresses === 1)) {
+            var theNewSavedAddress = response;
+            theNewSavedAddress.pivot.isPrimary = 1;
 
-          _this3.$store.dispatch("updateAddress", {
-            address: theNewSavedAddress,
-            addressType: _this3.addressType
-          }).then(function () {
-            if (_this3.addressType === "1") {
-              document.querySelector(".page-content").dataset.nrofbillingaddresses = "1";
-            } else if (_this3.addressType === "2") {
-              document.querySelector(".page-content").dataset.nrofdeliveryaddresses = "1";
-            }
-          });
+            _this3.$store.dispatch("updateAddress", {
+              address: theNewSavedAddress,
+              addressType: _this3.addressType
+            }).then(function () {
+              if (_this3.addressType === "1") {
+                document.querySelector(".page-content").dataset.nrofbillingaddresses = "1";
+              } else if (_this3.addressType === "2") {
+                document.querySelector(".page-content").dataset.nrofdeliveryaddresses = "1";
+              }
+            });
+          }
         }
       }, function (error) {
         _this3.waiting = false;

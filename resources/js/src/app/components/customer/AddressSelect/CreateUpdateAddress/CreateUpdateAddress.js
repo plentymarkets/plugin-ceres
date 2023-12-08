@@ -204,30 +204,36 @@ export default Vue.component("create-update-address", {
                     {
                         this.addressModal.hide();
                         this.waiting = false;
-                        const totalNrOfBillingAddresses = this.getNumberOfActiveAddresses(document.querySelectorAll(".invoice-addresses-select .vue-recycle-scroller__item-view"));
-                        const totalNrOfShippingAddresses = this.getNumberOfActiveAddresses(document.querySelectorAll(".shipping-addresses-select .vue-recycle-scroller__item-view"));
-
-                        if (
-                            (this.addressType === "1" && (totalNrOfBillingAddresses === 0 || totalNrOfBillingAddresses === 1))
-                            ||
-                            (this.addressType === "2" && (totalNrOfShippingAddresses === 0 || totalNrOfShippingAddresses === 1))
-                        )
+                        if (this.$store.getters.isLoggedIn)
                         {
-                            const theNewSavedAddress = response;
+                            const totalNrOfBillingAddresses = this.getNumberOfActiveAddresses(document.querySelectorAll(".invoice-addresses-select .vue-recycle-scroller__item-view"));
+                            const totalNrOfShippingAddresses = this.getNumberOfActiveAddresses(document.querySelectorAll(".shipping-addresses-select .vue-recycle-scroller__item-view"));
 
-                            theNewSavedAddress.pivot.isPrimary = 1;
-                            this.$store.dispatch("updateAddress", { address: theNewSavedAddress, addressType: this.addressType })
-                                .then(() =>
-                                {
-                                    if (this.addressType === "1")
+                            if (
+                                (this.addressType === "1" && (totalNrOfBillingAddresses === 0 || totalNrOfBillingAddresses === 1))
+                                ||
+                                (this.addressType === "2" && (totalNrOfShippingAddresses === 0 || totalNrOfShippingAddresses === 1))
+                            )
+                            {
+                                const theNewSavedAddress = response;
+
+                                theNewSavedAddress.pivot.isPrimary = 1;
+                                this.$store.dispatch("updateAddress", {
+                                    address: theNewSavedAddress,
+                                    addressType: this.addressType
+                                })
+                                    .then(() =>
                                     {
-                                        document.querySelector(".page-content").dataset.nrofbillingaddresses = "1";
-                                    }
-                                    else if (this.addressType === "2")
-                                    {
-                                        document.querySelector(".page-content").dataset.nrofdeliveryaddresses = "1";
-                                    }
-                                });
+                                        if (this.addressType === "1")
+                                        {
+                                            document.querySelector(".page-content").dataset.nrofbillingaddresses = "1";
+                                        }
+                                        else if (this.addressType === "2")
+                                        {
+                                            document.querySelector(".page-content").dataset.nrofdeliveryaddresses = "1";
+                                        }
+                                    });
+                            }
                         }
                     },
                     error =>
