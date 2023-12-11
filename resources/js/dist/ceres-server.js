@@ -3102,10 +3102,11 @@ var TabNavItem = {
 
     var tabListElements = [];
     var tabs = this.getVisibleTabs();
+    console.log('Tabs from render (getVisibleTabs)', tabs);
 
     if (tabs.length > 0) {
       var navElements = tabs.map(function (tab, index) {
-        var element = createElement(TabNavItem, {
+        return createElement(TabNavItem, {
           props: {
             tab: tab,
             tabIndex: index
@@ -3118,9 +3119,8 @@ var TabNavItem = {
             }
           }
         });
-        console.log(element);
-        return element;
       });
+      console.log('navElements', navElements);
       var nav = createElement("ul", {
         staticClass: "nav nav-tabs",
         class: ["widget-" + this.appearance],
@@ -3128,6 +3128,7 @@ var TabNavItem = {
           role: "tablist"
         }
       }, [navElements]);
+      console.log('nav', nav);
       tabListElements.push(nav);
     }
 
@@ -3137,6 +3138,7 @@ var TabNavItem = {
       return !!tab.componentOptions;
     })]);
     tabListElements.push(content);
+    console.log('tabListElements', tabListElements);
     return createElement("div", {}, tabListElements);
   },
   props: {

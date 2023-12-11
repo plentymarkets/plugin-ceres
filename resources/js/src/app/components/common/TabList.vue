@@ -68,11 +68,13 @@ export default {
         const tabListElements = [];
         const tabs = this.getVisibleTabs();
 
+        console.log('Tabs from render (getVisibleTabs)', tabs);
+
         if (tabs.length > 0)
         {
             const navElements = tabs.map((tab, index) =>
             {
-                let element = createElement(
+                return createElement(
                     TabNavItem,
                     {
                         props: {
@@ -89,9 +91,9 @@ export default {
                             }
                         }
                     });
-                console.log(element);
-                return element;
             });
+
+            console.log('navElements', navElements);
 
             const nav = createElement(
                 "ul",
@@ -104,6 +106,8 @@ export default {
                 },
                 [navElements]
             );
+
+            console.log('nav', nav);
 
             tabListElements.push(nav);
         }
@@ -118,6 +122,8 @@ export default {
         );
 
         tabListElements.push(content);
+
+        console.log('tabListElements', tabListElements);
 
         return createElement(
             "div",
