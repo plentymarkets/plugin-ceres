@@ -646,7 +646,7 @@ var TabNavItem = {
 
     if (tabs.length > 0) {
       var navElements = tabs.map(function (tab, index) {
-        return createElement(TabNavItem, {
+        var element = createElement(TabNavItem, {
           props: {
             tab: tab,
             tabIndex: index
@@ -659,6 +659,8 @@ var TabNavItem = {
             }
           }
         });
+        console.log(element);
+        return element;
       });
       var nav = createElement("ul", {
         staticClass: "nav nav-tabs",

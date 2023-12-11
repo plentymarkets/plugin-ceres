@@ -72,7 +72,7 @@ export default {
         {
             const navElements = tabs.map((tab, index) =>
             {
-                return createElement(
+                let element = createElement(
                     TabNavItem,
                     {
                         props: {
@@ -89,6 +89,8 @@ export default {
                             }
                         }
                     });
+                console.log(element);
+                return element;
             });
 
             const nav = createElement(
