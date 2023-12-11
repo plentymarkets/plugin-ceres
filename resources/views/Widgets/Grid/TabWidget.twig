@@ -17,8 +17,8 @@
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <tab-list class="widget-inner" appearance="{{ appearance | default("primary") }}" :render-empty="{{ isPreview | json_encode }}">
         {% for tab in tabs if children[tab.uuid] | raw is not empty or isPreview and tab.title | trim is not empty %}
-            <h1>{{ tab | json_encode() }}</h1>
-            <h1>{{ children | json_encode() }}</h1>
+            <h1>{{ tab | json_encode }}</h1>
+            <h1>{{ children | json_encode }}</h1>
             <tab-item class="{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                 {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %} 
                 title="{{ tab.title }}"
