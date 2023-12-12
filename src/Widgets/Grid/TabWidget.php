@@ -40,7 +40,7 @@ class TabWidget extends GridWidget
         $settings->createCustomClass();
         $settings->createAppearance();
 
-        $container = $settings->createVerticalContainer("tabs")
+        $settings->createVerticalContainer("tabs")
             ->withList(1)
             ->withDefaultValue(
                 [
@@ -64,9 +64,9 @@ class TabWidget extends GridWidget
             )
             ->withName("Widget.tabNewTabLabel");
 
-        $container->children->createText("title")
-            ->withName("Widget.tabNewTabInputName")
-            ->withTooltip("Widget.tabNewTabInputTooltip");
+//        $container->children->createText("title")
+//            ->withName("Widget.tabNewTabInputName")
+//            ->withTooltip("Widget.tabNewTabInputTooltip");
 
 //        $container->children->createUUID("uuid");
 
