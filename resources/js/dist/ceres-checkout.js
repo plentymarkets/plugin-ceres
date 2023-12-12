@@ -4152,7 +4152,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         'alder': {
           'name': 'bioola® nature Pflegeset',
           'url': '/bioola-pflegeset-naturholz_22505_17402/',
-          'image': 'https://cdn.bio-kinder.de/item/images/22505/secondPreview/22505-bioola---Pflegeset-Naturholz-Pflegeset-Leinoel-Firnis-web.jpg'
+          'image': 'https://cdn.bio-kinder.de/item/images/22505/secondPreview/22505-bioola---nature-Pflegeset-Naturholz-27900-16802-bioola-Leinoel-Firnis-Pflegeset.jpg'
         },
         'white': {
           'name': 'bioola® colour Pflegeset',
