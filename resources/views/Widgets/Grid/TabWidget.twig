@@ -13,7 +13,6 @@
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
 {% if renderContent %}
-<h1>{{ children | json_encode }}</h1>
 <div class="widget widget-tab{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}" 
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <tab-list class="widget-inner" appearance="{{ appearance | default("primary") }}" :render-empty="{{ isPreview | json_encode }}">
@@ -27,4 +26,5 @@
         {% endfor %}
     </tab-list>
 </div>
+<small>{{ children | json_encode }}</small>
 {% endif %}
