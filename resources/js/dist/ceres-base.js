@@ -60284,6 +60284,7 @@ var HeaderScroller = /*#__PURE__*/function () {
   }, {
     key: "initialize",
     value: function initialize() {
+      this.addBrowserClass();
       var headerElement = document.querySelector("#page-header").classList.contains("default-header");
 
       if (!headerElement) {
@@ -60297,6 +60298,16 @@ var HeaderScroller = /*#__PURE__*/function () {
           this.fixateHeader();
           this.initialized = true;
         }
+      }
+    }
+  }, {
+    key: "addBrowserClass",
+    value: function addBrowserClass() {
+      var browser = window.navigator.userAgent;
+      var isIE11 = /Trident.*rv[ :]*11\./.test(browser);
+
+      if (isIE11) {
+        document.body.classList.add("ie11");
       }
     } // Collect heights of header elements for later use
 
