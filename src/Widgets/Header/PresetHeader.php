@@ -30,19 +30,19 @@ class PresetHeaderWidget extends BaseWidget
     /**
      * @inheritDoc
      */
-    public function getSettings()
-    {
-        /** @var WidgetSettingsFactory $settingsFactory */
-        $settingsFactory = pluginApp(WidgetSettingsFactory::class);
-
-        $settingsFactory->createCustomClass();
-        $settingsFactory->createCheckbox("isFixed")
-            ->withName("Widget.presetHeaderFixed")
-            ->withDefaultValue(true);
-
-        $settingsFactory->createCheckbox("showOnHomepage")
-            ->withName("Widget.breadcrumbShowOnHomepageLabel")
-            ->withDefaultValue(true);
+//    public function getSettings()
+//    {
+//        /** @var WidgetSettingsFactory $settingsFactory */
+//        $settingsFactory = pluginApp(WidgetSettingsFactory::class);
+//
+//        $settingsFactory->createCustomClass();
+//        $settingsFactory->createCheckbox("isFixed")
+//            ->withName("Widget.presetHeaderFixed")
+//            ->withDefaultValue(true);
+//
+//        $settingsFactory->createCheckbox("showOnHomepage")
+//            ->withName("Widget.breadcrumbShowOnHomepageLabel")
+//            ->withDefaultValue(true);
 
 //         $settingsFactory->createCheckbox("showOnMyAccount")
 //             ->withName("Widget.breadcrumbShowOnMyAccountLabel")
@@ -60,6 +60,6 @@ class PresetHeaderWidget extends BaseWidget
 //             ->withName("Widget.breadcrumbShowOnLegalPagesLabel")
 //             ->withDefaultValue(false);
 
-        return $settingsFactory->toArray();
-    }
+//        return $settingsFactory->toArray();
+//    }
 }
