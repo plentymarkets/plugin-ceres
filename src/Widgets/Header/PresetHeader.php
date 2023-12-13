@@ -18,7 +18,7 @@ class PresetHeaderWidget extends BaseWidget
      */
     public function getData()
     {
-        return WidgetDataFactory::make("Ceres::PresetHeaderWidget")
+        return WidgetDataFactory::make("Ceres::PresetHeader")
             ->withLabel("Widget.presetHeader")
             ->withPreviewImageUrl("/images/widgets/breadcrumb.svg")
             ->withType(WidgetTypes::HEADER)
