@@ -6,7 +6,7 @@ use Ceres\Widgets\Basket\BasketTotalsWidget;
 use Ceres\Widgets\Basket\BasketWidget;
 use Ceres\Widgets\Basket\CouponWidget;
 use Ceres\Widgets\Basket\ShippingCountryWidget;
-use Ceres\Widgets\Category\Filter\PAttributesPropertiesCharacteristicsFilterWidget;
+use Ceres\Widgets\Category\Filter\AttributesPropertiesCharacteristicsFilterWidget;
 use Ceres\Widgets\Category\Filter\AvailabilityFilterWidget;
 use Ceres\Widgets\Category\Filter\CategoryFilterWidget;
 use Ceres\Widgets\Category\Filter\ManufacturerFilterWidget;
