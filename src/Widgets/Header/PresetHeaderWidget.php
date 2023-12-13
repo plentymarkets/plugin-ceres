@@ -10,8 +10,8 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class PresetHeaderWidget extends BaseWidget
 {
-    protected $template = "Ceres::Widgets.Header.PresetHeader";
-
+  //  protected $template = "Ceres::Widgets.Header.PresetHeader";
+    protected $template = "Ceres::Widgets.Header.BreadcrumbWidget";
     /**
      * @inheritDoc
      */
