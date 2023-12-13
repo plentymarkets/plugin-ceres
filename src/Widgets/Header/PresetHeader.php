@@ -20,13 +20,10 @@ class PresetHeaderWidget extends BaseWidget
     {
         return WidgetDataFactory::make("Ceres::PresetHeader")
             ->withLabel("Widget.presetHeader")
-            ->withPreviewImageUrl("/images/widgets/breadcrumb.svg")
+            ->withPreviewImageUrl("/images/widgets/top-bar.svg")
             ->withType(WidgetTypes::HEADER)
             ->withCategory(WidgetCategories::HEADER)
             ->withPosition(0)
-            ->withSearchKeyWords([
-                "header", "presetHeader"
-            ])
             ->toArray();
     }
 
@@ -47,21 +44,21 @@ class PresetHeaderWidget extends BaseWidget
             ->withName("Widget.breadcrumbShowOnHomepageLabel")
             ->withDefaultValue(true);
 
-        $settingsFactory->createCheckbox("showOnMyAccount")
-            ->withName("Widget.breadcrumbShowOnMyAccountLabel")
-            ->withDefaultValue(true);
-
-        $settingsFactory->createCheckbox("showOnCheckout")
-            ->withName("Widget.breadcrumbShowOnCheckoutLabel")
-            ->withDefaultValue(true);
-
-        $settingsFactory->createCheckbox("showOnContentCategory")
-            ->withName("Widget.breadcrumbShowOnContentCategoryLabel")
-            ->withDefaultValue(true);
-
-        $settingsFactory->createCheckbox("showOnLegalPages")
-            ->withName("Widget.breadcrumbShowOnLegalPagesLabel")
-            ->withDefaultValue(false);
+//         $settingsFactory->createCheckbox("showOnMyAccount")
+//             ->withName("Widget.breadcrumbShowOnMyAccountLabel")
+//             ->withDefaultValue(true);
+//
+//         $settingsFactory->createCheckbox("showOnCheckout")
+//             ->withName("Widget.breadcrumbShowOnCheckoutLabel")
+//             ->withDefaultValue(true);
+//
+//         $settingsFactory->createCheckbox("showOnContentCategory")
+//             ->withName("Widget.breadcrumbShowOnContentCategoryLabel")
+//             ->withDefaultValue(true);
+//
+//         $settingsFactory->createCheckbox("showOnLegalPages")
+//             ->withName("Widget.breadcrumbShowOnLegalPagesLabel")
+//             ->withDefaultValue(false);
 
         return $settingsFactory->toArray();
     }
