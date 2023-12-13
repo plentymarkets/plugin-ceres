@@ -11,14 +11,14 @@ use Ceres\Widgets\Helper\WidgetTypes;
 class PresetHeaderWidget extends BaseWidget
 {
     /** @inheritDoc */
-    protected $template = "Ceres::Widgets.Header.PresetHeader";
+    protected $template = "Ceres::Widgets.Header.PresetHeaderWidget";
 
     /**
      * @inheritDoc
      */
     public function getData()
     {
-        return WidgetDataFactory::make("Ceres::PresetHeader")
+        return WidgetDataFactory::make("Ceres::PresetHeaderWidget")
             ->withLabel("Widget.presetHeader")
             ->withPreviewImageUrl("/images/widgets/top-bar.svg")
             ->withType(WidgetTypes::HEADER)
@@ -30,36 +30,36 @@ class PresetHeaderWidget extends BaseWidget
     /**
      * @inheritDoc
      */
-//    public function getSettings()
-//    {
-//        /** @var WidgetSettingsFactory $settingsFactory */
-//        $settingsFactory = pluginApp(WidgetSettingsFactory::class);
-//
-//        $settingsFactory->createCustomClass();
-//        $settingsFactory->createCheckbox("isFixed")
-//            ->withName("Widget.presetHeaderFixed")
-//            ->withDefaultValue(true);
-//
-//        $settingsFactory->createCheckbox("showOnHomepage")
-//            ->withName("Widget.breadcrumbShowOnHomepageLabel")
-//            ->withDefaultValue(true);
+   public function getSettings()
+   {
+       /** @var WidgetSettingsFactory $settingsFactory */
+       $settingsFactory = pluginApp(WidgetSettingsFactory::class);
 
-//         $settingsFactory->createCheckbox("showOnMyAccount")
-//             ->withName("Widget.breadcrumbShowOnMyAccountLabel")
-//             ->withDefaultValue(true);
-//
-//         $settingsFactory->createCheckbox("showOnCheckout")
-//             ->withName("Widget.breadcrumbShowOnCheckoutLabel")
-//             ->withDefaultValue(true);
-//
-//         $settingsFactory->createCheckbox("showOnContentCategory")
-//             ->withName("Widget.breadcrumbShowOnContentCategoryLabel")
-//             ->withDefaultValue(true);
-//
-//         $settingsFactory->createCheckbox("showOnLegalPages")
-//             ->withName("Widget.breadcrumbShowOnLegalPagesLabel")
-//             ->withDefaultValue(false);
+       $settingsFactory->createCustomClass();
+       $settingsFactory->createCheckbox("isFixed")
+           ->withName("Widget.presetHeaderFixed")
+           ->withDefaultValue(true);
 
-//        return $settingsFactory->toArray();
-//    }
+       $settingsFactory->createCheckbox("showOnHomepage")
+           ->withName("Widget.breadcrumbShowOnHomepageLabel")
+           ->withDefaultValue(true);
+
+        $settingsFactory->createCheckbox("showOnMyAccount")
+            ->withName("Widget.breadcrumbShowOnMyAccountLabel")
+            ->withDefaultValue(true);
+
+        $settingsFactory->createCheckbox("showOnCheckout")
+            ->withName("Widget.breadcrumbShowOnCheckoutLabel")
+            ->withDefaultValue(true);
+
+        $settingsFactory->createCheckbox("showOnContentCategory")
+            ->withName("Widget.breadcrumbShowOnContentCategoryLabel")
+            ->withDefaultValue(true);
+
+        $settingsFactory->createCheckbox("showOnLegalPages")
+            ->withName("Widget.breadcrumbShowOnLegalPagesLabel")
+            ->withDefaultValue(false);
+
+       return $settingsFactory->toArray();
+   }
 }
