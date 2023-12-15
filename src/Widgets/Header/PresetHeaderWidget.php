@@ -34,28 +34,28 @@ class PresetHeaderWidget extends BaseWidget
      * @inheritDoc
      */
 
-    private function createHeadline()
-    {
-        $this->preset = pluginApp(PresetHelper::class);
-        $this->preset->createWidget('Ceres::InlineTextWidget')
-            ->withSetting('text', '<h2>Top bar configuration</h2>')
-            ->withSetting('appearance', 'none')
-            ->withSetting('spacing.customPadding', true)
-            ->withSetting('spacing.padding.top.value', 5)
-            ->withSetting('spacing.padding.top.unit', null)
-            ->withSetting('spacing.padding.bottom.value', 0)
-            ->withSetting('spacing.padding.bottom.unit', null)
-            ->withSetting('spacing.padding.left.value', 0)
-            ->withSetting('spacing.padding.left.unit', null)
-            ->withSetting('spacing.padding.right.value', 0)
-            ->withSetting('spacing.padding.right.unit', null)
-            ->withSetting('spacing.customMargin', true)
-            ->withSetting('spacing.margin.top.value', 3)
-            ->withSetting('spacing.margin.top.unit', null);
-
-        $this->preset->createWidget('Ceres::SeparatorWidget')
-            ->withSetting('customClass', '');
-    }
+//     private function createHeadline()
+//     {
+//         $this->preset = pluginApp(PresetHelper::class);
+//         $this->preset->createWidget('Ceres::InlineTextWidget')
+//             ->withSetting('text', '<h2>Top bar configuration</h2>')
+//             ->withSetting('appearance', 'none')
+//             ->withSetting('spacing.customPadding', true)
+//             ->withSetting('spacing.padding.top.value', 5)
+//             ->withSetting('spacing.padding.top.unit', null)
+//             ->withSetting('spacing.padding.bottom.value', 0)
+//             ->withSetting('spacing.padding.bottom.unit', null)
+//             ->withSetting('spacing.padding.left.value', 0)
+//             ->withSetting('spacing.padding.left.unit', null)
+//             ->withSetting('spacing.padding.right.value', 0)
+//             ->withSetting('spacing.padding.right.unit', null)
+//             ->withSetting('spacing.customMargin', true)
+//             ->withSetting('spacing.margin.top.value', 3)
+//             ->withSetting('spacing.margin.top.unit', null);
+//
+//         $this->preset->createWidget('Ceres::SeparatorWidget')
+//             ->withSetting('customClass', '');
+//     }
 
 
     public function getSettings()
@@ -66,12 +66,19 @@ class PresetHeaderWidget extends BaseWidget
         // default header
         $settingsFactory->createCustomClass();
 
-        $this->createHeadline();
-        $settingsFactory->createCheckbox("isFixed")
+
+
+//         $this->createHeadline();
+
+        $maxItemsContainer = $settingsFactory->createVerticalContainer('megaMenuMaxItems')
+            ->withName('Top Bar')
+            ->children;
+
+         $maxItemsContainer->$settingsFactory->createCheckbox("isFixed")
             ->withName("Widget.topBarIsFixedLabel")
             ->withDefaultValue(true);
 //
-        $settingsFactory->createSelect("searchStyle")
+          $maxItemsContainer->$settingsFactory->createSelect("searchStyle")
             ->withName("Widget.topBarSearchStyleLabel")
             ->withTooltip("Widget.topBarSearchStyleTooltip")
             ->withDefaultValue("onDemand")
@@ -83,35 +90,35 @@ class PresetHeaderWidget extends BaseWidget
                     ->toArray()
             );
 //
-        $settingsFactory->createCheckbox("enableLogin")
+          $maxItemsContainer->$settingsFactory->createCheckbox("enableLogin")
             ->withName("Widget.topBarEnableLoginLabel")
             ->withDefaultValue(true);
 
-        $settingsFactory->createCheckbox("enableRegistration")
+          $maxItemsContainer->$settingsFactory->createCheckbox("enableRegistration")
             ->withName("Widget.topBarEnableRegistrationLabel")
             ->withDefaultValue(true);
 
-        $settingsFactory->createCheckbox("enableLanguageSelect")
+          $maxItemsContainer->$settingsFactory->createCheckbox("enableLanguageSelect")
             ->withName("Widget.topBarEnableLanguageSelectLabel")
             ->withDefaultValue(true);
 
-        $settingsFactory->createCheckbox("enableShippingCountrySelect")
+          $maxItemsContainer->$settingsFactory->createCheckbox("enableShippingCountrySelect")
             ->withName("Widget.topBarEnableShippingCountrySelectLabel")
             ->withDefaultValue(true);
 
-        $settingsFactory->createCheckbox("enableCurrencySelect")
+          $maxItemsContainer->$settingsFactory->createCheckbox("enableCurrencySelect")
             ->withName("Widget.topBarEnableCurrencySelectLabel")
             ->withDefaultValue(true);
 
-        $settingsFactory->createCheckbox("enableWishList")
+          $maxItemsContainer->$settingsFactory->createCheckbox("enableWishList")
             ->withName("Widget.topBarEnableWishListLabel")
             ->withDefaultValue(true);
 
-        $settingsFactory->createCheckbox("enableBasketPreview")
+          $maxItemsContainer->$settingsFactory->createCheckbox("enableBasketPreview")
             ->withName("Widget.topBarEnableBasketPreviewLabel")
             ->withDefaultValue(true);
 
-        $settingsFactory->createSelect("basketValues")
+          $maxItemsContainer->$settingsFactory->createSelect("basketValues")
             ->withName("Widget.topBarBasketValuesLabel")
             ->withTooltip("Widget.topBarBasketValuesTooltip")
             ->withDefaultValue("sum")
