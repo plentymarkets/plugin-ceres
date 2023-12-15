@@ -28,28 +28,27 @@
             </div>
             <div class="productName">
                 <a :href="item | itemURL" v-html="texts.name1" class="thumb-title small"></a>
+                <p class="variationHint" v-if="!item.variation.isMain">
+                    <!-- Attr-Name: Attr-Val -->
+                    <span class="variationImages" v-if="item.attributes.length == 1 && [3, 7, 16, 18].includes(item.attributes[0].attributeId)">
+                        <span v-for="attribute in item.groupedAttributes" v-html="attribute.name + ': ' + attribute.value"></span>
+                    </span>
+
+                    <!-- different sizes -->
+                    <span v-else-if="[2].includes(item.attributes[0].attributeId)" v-html="'In verschiedenen Größen'"></span>
+
+                    <!-- Corpus / Front -->
+                    <span v-else-if="item.attributes.length == 2 && item.attributes.filter(function (attr) { return (attr.attributeId == 3) })[0] && item.attributes.filter(function (attr) { return (attr.attributeId == 9) })[0]"
+                        v-for="attribute in item.attributes"
+                        :class="{ corpusFront: ([3, 9].includes(attribute.attributeId)) }">
+                    {{ attribute.value.names.name }}
+                    </span>
+
+                    <!-- default fallback -->
+                    <span v-else="v-else" v-html="'In verschiedenen Varianten'"></span>
+
+                </p><div v-else="v-else"></div>
             </div>
-            <p class="variationHint" v-if="!item.variation.isMain">
-                <!-- Attr-Name: Attr-Val -->
-                <span class="variationImages" v-if="item.attributes.length == 1 && [3, 7, 16, 18].includes(item.attributes[0].attributeId)">
-                <span v-for="attribute in item.groupedAttributes" v-html="attribute.name + ': ' + attribute.value"></span>
-                </span>
-
-                <!-- different sizes -->
-                <span v-else-if="[2].includes(item.attributes[0].attributeId)" v-html="'In verschiedenen Größen'"></span>
-
-                <!-- Corpus / Front -->
-                <span
-                v-else-if="item.attributes.length == 2 && item.attributes.filter(function (attr) { return (attr.attributeId == 3) })[0] && item.attributes.filter(function (attr) { return (attr.attributeId == 9) })[0]"
-                v-for="attribute in item.attributes"
-                :class="{ corpusFront: ([3, 9].includes(attribute.attributeId)) }">
-                {{ attribute.value.names.name }}
-                </span>
-
-                <!-- default fallback -->
-                <span v-else="v-else" v-html="'In verschiedenen Varianten'"></span>
-
-            </p><div v-else="v-else"></div>
 
             <div class="itemPrice">
                 <div class="prices">

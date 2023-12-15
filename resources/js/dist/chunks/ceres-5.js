@@ -325,7 +325,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -784,75 +783,75 @@ var render = function() {
                   staticClass: "thumb-title small",
                   attrs: { href: _vm._f("itemURL")(_vm.item) },
                   domProps: { innerHTML: _vm._s(_vm.texts.name1) }
-                })
-              ]),
-              _vm._v(" "),
-              !_vm.item.variation.isMain
-                ? _c(
-                    "p",
-                    { staticClass: "variationHint" },
-                    [
-                      _vm.item.attributes.length == 1 &&
-                      [3, 7, 16, 18].includes(
-                        _vm.item.attributes[0].attributeId
-                      )
-                        ? _c(
-                            "span",
-                            { staticClass: "variationImages" },
-                            _vm._l(_vm.item.groupedAttributes, function(
-                              attribute
-                            ) {
-                              return _c("span", {
-                                domProps: {
-                                  innerHTML: _vm._s(
-                                    attribute.name + ": " + attribute.value
-                                  )
-                                }
-                              })
-                            }),
-                            0
-                          )
-                        : [2].includes(_vm.item.attributes[0].attributeId)
-                        ? _c("span", {
-                            domProps: {
-                              innerHTML: _vm._s("In verschiedenen Größen")
-                            }
-                          })
-                        : _vm.item.attributes.length == 2 &&
-                          _vm.item.attributes.filter(function(attr) {
-                            return attr.attributeId == 3
-                          })[0] &&
-                          _vm.item.attributes.filter(function(attr) {
-                            return attr.attributeId == 9
-                          })[0]
-                        ? _vm._l(_vm.item.attributes, function(attribute) {
-                            return _c(
+                }),
+                _vm._v(" "),
+                !_vm.item.variation.isMain
+                  ? _c(
+                      "p",
+                      { staticClass: "variationHint" },
+                      [
+                        _vm.item.attributes.length == 1 &&
+                        [3, 7, 16, 18].includes(
+                          _vm.item.attributes[0].attributeId
+                        )
+                          ? _c(
                               "span",
-                              {
-                                class: {
-                                  corpusFront: [3, 9].includes(
-                                    attribute.attributeId
-                                  )
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                " +
-                                    _vm._s(attribute.value.names.name) +
-                                    "\n                "
-                                )
-                              ]
+                              { staticClass: "variationImages" },
+                              _vm._l(_vm.item.groupedAttributes, function(
+                                attribute
+                              ) {
+                                return _c("span", {
+                                  domProps: {
+                                    innerHTML: _vm._s(
+                                      attribute.name + ": " + attribute.value
+                                    )
+                                  }
+                                })
+                              }),
+                              0
                             )
-                          })
-                        : _c("span", {
-                            domProps: {
-                              innerHTML: _vm._s("In verschiedenen Varianten")
-                            }
-                          })
-                    ],
-                    2
-                  )
-                : _c("div"),
+                          : [2].includes(_vm.item.attributes[0].attributeId)
+                          ? _c("span", {
+                              domProps: {
+                                innerHTML: _vm._s("In verschiedenen Größen")
+                              }
+                            })
+                          : _vm.item.attributes.length == 2 &&
+                            _vm.item.attributes.filter(function(attr) {
+                              return attr.attributeId == 3
+                            })[0] &&
+                            _vm.item.attributes.filter(function(attr) {
+                              return attr.attributeId == 9
+                            })[0]
+                          ? _vm._l(_vm.item.attributes, function(attribute) {
+                              return _c(
+                                "span",
+                                {
+                                  class: {
+                                    corpusFront: [3, 9].includes(
+                                      attribute.attributeId
+                                    )
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                    " +
+                                      _vm._s(attribute.value.names.name) +
+                                      "\n                    "
+                                  )
+                                ]
+                              )
+                            })
+                          : _c("span", {
+                              domProps: {
+                                innerHTML: _vm._s("In verschiedenen Varianten")
+                              }
+                            })
+                      ],
+                      2
+                    )
+                  : _c("div")
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "itemPrice" }, [
                 _c("div", { staticClass: "prices" }, [

@@ -11263,7 +11263,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -53393,7 +53392,7 @@ var render = function() {
                   _vm._ssrAttr("href", _vm._f("itemURL")(_vm.item)) +
                   ' class="thumb-title small">' +
                   _vm._s(_vm.texts.name1) +
-                  "</a></div> " +
+                  "</a> " +
                   (!_vm.item.variation.isMain
                     ? '<p class="variationHint">' +
                       (_vm.item.attributes.length == 1 &&
@@ -53434,9 +53433,9 @@ var render = function() {
                               }) +
                               ">" +
                               _vm._ssrEscape(
-                                "\n                " +
+                                "\n                    " +
                                   _vm._s(attribute.value.names.name) +
-                                  "\n                "
+                                  "\n                    "
                               ) +
                               "</span>"
                             )
@@ -53446,7 +53445,7 @@ var render = function() {
                           "</span>") +
                       "</p>"
                     : "<div></div>") +
-                  ' <div class="itemPrice"><div class="prices">' +
+                  '</div> <div class="itemPrice"><div class="prices">' +
                   (_vm.item.prices.rrp !== null &&
                   _vm.item.prices.rrp.price.value >
                     _vm.item.prices.default.unitPrice.value
