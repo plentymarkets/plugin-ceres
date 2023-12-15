@@ -30,33 +30,18 @@ class PresetHeaderWidget extends BaseWidget
             ->toArray();
     }
 
+    public function makeHeader(){
+        $text =  '<h2>TEst</h2>';
+    }
+
+    public function getString(){
+        return $this->makeHeader();
+    }
+
+
     /**
      * @inheritDoc
      */
-//
-//     private function createHeadline()
-//     {
-//         $this->preset = pluginApp(PresetHelper::class);
-//         $this->preset->createWidget('Ceres::InlineTextWidget')
-//             ->withSetting('text', '<h2>Top bar configuration</h2>')
-//             ->withSetting('appearance', 'none')
-//             ->withSetting('spacing.customPadding', true)
-//             ->withSetting('spacing.padding.top.value', 5)
-//             ->withSetting('spacing.padding.top.unit', null)
-//             ->withSetting('spacing.padding.bottom.value', 0)
-//             ->withSetting('spacing.padding.bottom.unit', null)
-//             ->withSetting('spacing.padding.left.value', 0)
-//             ->withSetting('spacing.padding.left.unit', null)
-//             ->withSetting('spacing.padding.right.value', 0)
-//             ->withSetting('spacing.padding.right.unit', null)
-//             ->withSetting('spacing.customMargin', true)
-//             ->withSetting('spacing.margin.top.value', 3)
-//             ->withSetting('spacing.margin.top.unit', null);
-//
-//         $this->preset->createWidget('Ceres::SeparatorWidget')
-//             ->withSetting('customClass', '');
-//     }
-
 
     public function getSettings()
     {
@@ -64,12 +49,12 @@ class PresetHeaderWidget extends BaseWidget
         $settingsFactory = pluginApp(WidgetSettingsFactory::class);
 
         // default header
+        $this->getString();
         $settingsFactory->createCustomClass();
 
 
 
-//         $this->createHeadline();
-
+//         $this->createHeadline(); $headline;
      $settingsFactory->createText("title")
     ->withName("TOP BAR")
     ->withTooltip("Widget.tabNewTabInputTooltip");
@@ -229,8 +214,6 @@ class PresetHeaderWidget extends BaseWidget
 //            ->withName("Widget.breadcrumbShowOnLegalPagesLabel")
 //            ->withDefaultValue(false);
 //
-
-
 
 
 
