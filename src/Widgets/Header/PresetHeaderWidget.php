@@ -33,7 +33,7 @@ class PresetHeaderWidget extends BaseWidget
     /**
      * @inheritDoc
      */
-
+//
 //     private function createHeadline()
 //     {
 //         $this->preset = pluginApp(PresetHelper::class);
@@ -70,15 +70,15 @@ class PresetHeaderWidget extends BaseWidget
 
 //         $this->createHeadline();
 
-        $maxItemsContainer = $settingsFactory->createVerticalContainer('megaMenuMaxItems')
-            ->withName('Top Bar')
-            ->children;
+     $settingsFactory->createText("title")
+    ->withName("TOP BAR")
+    ->withTooltip("Widget.tabNewTabInputTooltip");
 
-         $maxItemsContainer->$settingsFactory->createCheckbox("isFixed")
+        $settingsFactory->createCheckbox("isFixed")
             ->withName("Widget.topBarIsFixedLabel")
             ->withDefaultValue(true);
 //
-          $maxItemsContainer->$settingsFactory->createSelect("searchStyle")
+        $settingsFactory->createSelect("searchStyle")
             ->withName("Widget.topBarSearchStyleLabel")
             ->withTooltip("Widget.topBarSearchStyleTooltip")
             ->withDefaultValue("onDemand")
@@ -90,35 +90,35 @@ class PresetHeaderWidget extends BaseWidget
                     ->toArray()
             );
 //
-          $maxItemsContainer->$settingsFactory->createCheckbox("enableLogin")
+        $settingsFactory->createCheckbox("enableLogin")
             ->withName("Widget.topBarEnableLoginLabel")
             ->withDefaultValue(true);
 
-          $maxItemsContainer->$settingsFactory->createCheckbox("enableRegistration")
+        $settingsFactory->createCheckbox("enableRegistration")
             ->withName("Widget.topBarEnableRegistrationLabel")
             ->withDefaultValue(true);
 
-          $maxItemsContainer->$settingsFactory->createCheckbox("enableLanguageSelect")
+        $settingsFactory->createCheckbox("enableLanguageSelect")
             ->withName("Widget.topBarEnableLanguageSelectLabel")
             ->withDefaultValue(true);
 
-          $maxItemsContainer->$settingsFactory->createCheckbox("enableShippingCountrySelect")
+        $settingsFactory->createCheckbox("enableShippingCountrySelect")
             ->withName("Widget.topBarEnableShippingCountrySelectLabel")
             ->withDefaultValue(true);
 
-          $maxItemsContainer->$settingsFactory->createCheckbox("enableCurrencySelect")
+        $settingsFactory->createCheckbox("enableCurrencySelect")
             ->withName("Widget.topBarEnableCurrencySelectLabel")
             ->withDefaultValue(true);
 
-          $maxItemsContainer->$settingsFactory->createCheckbox("enableWishList")
+        $settingsFactory->createCheckbox("enableWishList")
             ->withName("Widget.topBarEnableWishListLabel")
             ->withDefaultValue(true);
 
-          $maxItemsContainer->$settingsFactory->createCheckbox("enableBasketPreview")
+        $settingsFactory->createCheckbox("enableBasketPreview")
             ->withName("Widget.topBarEnableBasketPreviewLabel")
             ->withDefaultValue(true);
 
-          $maxItemsContainer->$settingsFactory->createSelect("basketValues")
+        $settingsFactory->createSelect("basketValues")
             ->withName("Widget.topBarBasketValuesLabel")
             ->withTooltip("Widget.topBarBasketValuesTooltip")
             ->withDefaultValue("sum")
