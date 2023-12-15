@@ -6,13 +6,16 @@ use Ceres\Widgets\Helper\BaseWidget;
 use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\Factories\Settings\ValueListFactory;
+use Ceres\Widgets\Helper\PresetHelper;
 use Ceres\Widgets\Helper\WidgetCategories;
 use Ceres\Widgets\Helper\WidgetTypes;
 
 class PresetHeaderWidget extends BaseWidget
 {
+    /** @var PresetHelper */
+      private $preset;
       protected $template = "Ceres::Widgets.Header.PresetHeaderWidget";
-  //    protected $template = "Ceres::Widgets.Header.BreadcrumbWidget";
+
     /**
      * @inheritDoc
      */
@@ -31,15 +34,39 @@ class PresetHeaderWidget extends BaseWidget
      * @inheritDoc
      */
 
+    private function createHeadline()
+    {
+        $this->preset = pluginApp(PresetHelper::class);
+        $this->preset->createWidget('Ceres::InlineTextWidget')
+            ->withSetting('text', '<h2>Top bar configuration</h2>')
+            ->withSetting('appearance', 'none')
+            ->withSetting('spacing.customPadding', true)
+            ->withSetting('spacing.padding.top.value', 5)
+            ->withSetting('spacing.padding.top.unit', null)
+            ->withSetting('spacing.padding.bottom.value', 0)
+            ->withSetting('spacing.padding.bottom.unit', null)
+            ->withSetting('spacing.padding.left.value', 0)
+            ->withSetting('spacing.padding.left.unit', null)
+            ->withSetting('spacing.padding.right.value', 0)
+            ->withSetting('spacing.padding.right.unit', null)
+            ->withSetting('spacing.customMargin', true)
+            ->withSetting('spacing.margin.top.value', 3)
+            ->withSetting('spacing.margin.top.unit', null);
+
+        $this->preset->createWidget('Ceres::SeparatorWidget')
+            ->withSetting('customClass', '');
+    }
+
+
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settingsFactory */
         $settingsFactory = pluginApp(WidgetSettingsFactory::class);
 
-        // default
-
-        //  Top Bar Configuration
+        // default header
         $settingsFactory->createCustomClass();
+
+        $this->createHeadline();
         $settingsFactory->createCheckbox("isFixed")
             ->withName("Widget.topBarIsFixedLabel")
             ->withDefaultValue(true);
