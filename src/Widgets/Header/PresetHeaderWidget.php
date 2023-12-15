@@ -35,6 +35,8 @@ class PresetHeaderWidget extends BaseWidget
         /** @var WidgetSettingsFactory $settingsFactory */
         $settingsFactory = pluginApp(WidgetSettingsFactory::class);
 
+
+        //  Top Bar Configuration
         $settingsFactory->createCustomClass();
 
         $settingsFactory->createCheckbox("isFixed")
@@ -96,8 +98,8 @@ class PresetHeaderWidget extends BaseWidget
 
 
 
-
- $settingsFactory->createCustomClass();
+        //  Navigation Configuration
+        $settingsFactory->createCustomClass();
 
         $settingsFactory->createCheckbox('isFixed')
             ->withName('Widget.navigationIsFixedLabel')
@@ -166,7 +168,7 @@ class PresetHeaderWidget extends BaseWidget
 
 
 
-
+        //  BreadCrumb Configuration
         $settingsFactory->createCustomClass();
         $settingsFactory->createCheckbox("isFixed")
             ->withName("Widget.breadcrumbIsFixedLabel")
