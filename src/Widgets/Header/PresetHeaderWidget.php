@@ -99,101 +99,101 @@ class PresetHeaderWidget extends BaseWidget
 
 
         //  Navigation Configuration
-        $settingsFactory->createCustomClass();
+//        $settingsFactory->createCustomClass();
+//
+//        $settingsFactory->createCheckbox('isFixed')
+//            ->withName('Widget.navigationIsFixedLabel')
+//            ->withDefaultValue(true);
+//
+//        $settingsFactory->createSelect('navigationStyle')
+//            ->withName('Widget.navigationNavigationStyleLabel')
+//            ->withTooltip('Widget.navigationNavigationStyleTooltip')
+//            ->withDefaultValue('normal')
+//            ->withListBoxValues(
+//                ValueListFactory::make()
+//                    ->addEntry('normal', 'Widget.navigationNavigationStyleNormal')
+//                    ->addEntry('megaMenu', 'Widget.navigationNavigationStyleMegaMenu')
+//                    ->toArray()
+//            );
 
-        $settingsFactory->createCheckbox('isFixed')
-            ->withName('Widget.navigationIsFixedLabel')
-            ->withDefaultValue(true);
-
-        $settingsFactory->createSelect('navigationStyle')
-            ->withName('Widget.navigationNavigationStyleLabel')
-            ->withTooltip('Widget.navigationNavigationStyleTooltip')
-            ->withDefaultValue('normal')
-            ->withListBoxValues(
-                ValueListFactory::make()
-                    ->addEntry('normal', 'Widget.navigationNavigationStyleNormal')
-                    ->addEntry('megaMenu', 'Widget.navigationNavigationStyleMegaMenu')
-                    ->toArray()
-            );
-
-        $settingsFactory->createSelect('megaMenuLevels')
-            ->withName('Widget.navigationMegaMenuLevelsLabel')
-            ->withTooltip('Widget.navigationMegaMenuLevelsTooltip')
-            ->withDefaultValue(2)
-            ->withCondition("navigationStyle === 'megaMenu'")
-            ->withListBoxValues(
-                ValueListFactory::make()
-                    ->addEntry(2, 'Widget.navigationMegaMenuLevels2')
-                    ->addEntry(3, 'Widget.navigationMegaMenuLevels3')
-                    ->addEntry(4, 'Widget.navigationMegaMenuLevels4')
-                    ->toArray()
-            );
-
-        $maxItemsContainer = $settingsFactory->createVerticalContainer('megaMenuMaxItems')
-            ->withName('Widget.navigationMegaMenuMaxItemsLabel')
-            ->children;
-
-        $maxItemsContainer->createNumber('stage1')
-            ->withName('Widget.navigationMegaMenuMaxItemsStage1Label')
-            ->withTooltip('Widget.navigationMegaMenuMaxItemsStage1Tooltip')
-            ->withDefaultValue(30);
-
-        $maxItemsContainer->createNumber('stage2')
-            ->withName('Widget.navigationMegaMenuMaxItemsStage2Label')
-            ->withTooltip('Widget.navigationMegaMenuMaxItemsStage2Tooltip')
-            ->withDefaultValue(3)
-            ->withCondition('navigationStyle === "megaMenu" && megaMenuLevels >= 3');
-
-        $maxItemsContainer->createNumber('stage3')
-            ->withName('Widget.navigationMegaMenuMaxItemsStage3Label')
-            ->withTooltip('Widget.navigationMegaMenuMaxItemsStage3Tooltip')
-            ->withDefaultValue(2)
-            ->withCondition('navigationStyle === "megaMenu" && megaMenuLevels >= 4');
-
-        $settingsFactory->createFile('companyLogoUrl')
-            ->withName('Widget.navigationCompanyLogoUrlLabel')
-            ->withTooltip('Widget.navigationCompanyLogoUrlTooltip')
-            ->withDefaultValue('')
-            ->withAllowedExtensions(array_merge(ImageBoxWidget::IMAGE_EXTENSIONS, ImageBoxWidget::MODERN_IMAGE_EXTENSIONS));
-
-        $settingsFactory->createFile('fallbackImagePath')
-            ->withCondition('!!companyLogoUrl && /.?(\.webp)(?:$|\?)/.test(companyLogoUrl)')
-            ->withName('Widget.navigationFallbackImagePathLabel')
-            ->withTooltip('Widget.navigationFallbackImagePathTooltip')
-            ->withDefaultValue('')
-            ->withAllowedExtensions(ImageBoxWidget::IMAGE_EXTENSIONS);
-
-        $settingsFactory->createSpacing();
+//        $settingsFactory->createSelect('megaMenuLevels')
+//            ->withName('Widget.navigationMegaMenuLevelsLabel')
+//            ->withTooltip('Widget.navigationMegaMenuLevelsTooltip')
+//            ->withDefaultValue(2)
+//            ->withCondition("navigationStyle === 'megaMenu'")
+//            ->withListBoxValues(
+//                ValueListFactory::make()
+//                    ->addEntry(2, 'Widget.navigationMegaMenuLevels2')
+//                    ->addEntry(3, 'Widget.navigationMegaMenuLevels3')
+//                    ->addEntry(4, 'Widget.navigationMegaMenuLevels4')
+//                    ->toArray()
+//            );
+//
+//        $maxItemsContainer = $settingsFactory->createVerticalContainer('megaMenuMaxItems')
+//            ->withName('Widget.navigationMegaMenuMaxItemsLabel')
+//            ->children;
+//
+//        $maxItemsContainer->createNumber('stage1')
+//            ->withName('Widget.navigationMegaMenuMaxItemsStage1Label')
+//            ->withTooltip('Widget.navigationMegaMenuMaxItemsStage1Tooltip')
+//            ->withDefaultValue(30);
+//
+//        $maxItemsContainer->createNumber('stage2')
+//            ->withName('Widget.navigationMegaMenuMaxItemsStage2Label')
+//            ->withTooltip('Widget.navigationMegaMenuMaxItemsStage2Tooltip')
+//            ->withDefaultValue(3)
+//            ->withCondition('navigationStyle === "megaMenu" && megaMenuLevels >= 3');
+//
+//        $maxItemsContainer->createNumber('stage3')
+//            ->withName('Widget.navigationMegaMenuMaxItemsStage3Label')
+//            ->withTooltip('Widget.navigationMegaMenuMaxItemsStage3Tooltip')
+//            ->withDefaultValue(2)
+//            ->withCondition('navigationStyle === "megaMenu" && megaMenuLevels >= 4');
+//
+//        $settingsFactory->createFile('companyLogoUrl')
+//            ->withName('Widget.navigationCompanyLogoUrlLabel')
+//            ->withTooltip('Widget.navigationCompanyLogoUrlTooltip')
+//            ->withDefaultValue('')
+//            ->withAllowedExtensions(array_merge(ImageBoxWidget::IMAGE_EXTENSIONS, ImageBoxWidget::MODERN_IMAGE_EXTENSIONS));
+//
+//        $settingsFactory->createFile('fallbackImagePath')
+//            ->withCondition('!!companyLogoUrl && /.?(\.webp)(?:$|\?)/.test(companyLogoUrl)')
+//            ->withName('Widget.navigationFallbackImagePathLabel')
+//            ->withTooltip('Widget.navigationFallbackImagePathTooltip')
+//            ->withDefaultValue('')
+//            ->withAllowedExtensions(ImageBoxWidget::IMAGE_EXTENSIONS);
+//
+//        $settingsFactory->createSpacing();
 
 
 
 
         //  BreadCrumb Configuration
-        $settingsFactory->createCustomClass();
-        $settingsFactory->createCheckbox("isFixed")
-            ->withName("Widget.breadcrumbIsFixedLabel")
-            ->withDefaultValue(true);
-
-        $settingsFactory->createCheckbox("showOnHomepage")
-            ->withName("Widget.breadcrumbShowOnHomepageLabel")
-            ->withDefaultValue(true);
-
-        $settingsFactory->createCheckbox("showOnMyAccount")
-            ->withName("Widget.breadcrumbShowOnMyAccountLabel")
-            ->withDefaultValue(true);
-
-        $settingsFactory->createCheckbox("showOnCheckout")
-            ->withName("Widget.breadcrumbShowOnCheckoutLabel")
-            ->withDefaultValue(true);
-
-        $settingsFactory->createCheckbox("showOnContentCategory")
-            ->withName("Widget.breadcrumbShowOnContentCategoryLabel")
-            ->withDefaultValue(true);
-
-        $settingsFactory->createCheckbox("showOnLegalPages")
-            ->withName("Widget.breadcrumbShowOnLegalPagesLabel")
-            ->withDefaultValue(false);
-
+//        $settingsFactory->createCustomClass();
+//        $settingsFactory->createCheckbox("isFixed")
+//            ->withName("Widget.breadcrumbIsFixedLabel")
+//            ->withDefaultValue(true);
+//
+//        $settingsFactory->createCheckbox("showOnHomepage")
+//            ->withName("Widget.breadcrumbShowOnHomepageLabel")
+//            ->withDefaultValue(true);
+//
+//        $settingsFactory->createCheckbox("showOnMyAccount")
+//            ->withName("Widget.breadcrumbShowOnMyAccountLabel")
+//            ->withDefaultValue(true);
+//
+//        $settingsFactory->createCheckbox("showOnCheckout")
+//            ->withName("Widget.breadcrumbShowOnCheckoutLabel")
+//            ->withDefaultValue(true);
+//
+//        $settingsFactory->createCheckbox("showOnContentCategory")
+//            ->withName("Widget.breadcrumbShowOnContentCategoryLabel")
+//            ->withDefaultValue(true);
+//
+//        $settingsFactory->createCheckbox("showOnLegalPages")
+//            ->withName("Widget.breadcrumbShowOnLegalPagesLabel")
+//            ->withDefaultValue(false);
+//
 
 
 
