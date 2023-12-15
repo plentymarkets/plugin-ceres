@@ -51,14 +51,6 @@ class TabWidget extends GridWidget
                     [
                         "title" => "Tab 2",
                         "uuid" => "ac25da98-b0f4-4db3-bc8b-4c5a0fcf3150"
-                    ],
-                    [
-                        "title" => "Tab 3",
-                        "uuid" => "83f8acd4-8dcf-11ee-b9d1-0242ac120002"
-                    ],
-                    [
-                        "title" => "",
-                        "uuid" => "b92657bc-98f1-11ee-b9d1-0242ac120002"
                     ]
                 ]
             )
@@ -68,7 +60,7 @@ class TabWidget extends GridWidget
             ->withName("Widget.tabNewTabInputName")
             ->withTooltip("Widget.tabNewTabInputTooltip");
 
-//        $container->children->createUUID("uuid");
+        $container->children->createUUID("uuid");
 
         $settings->createSpacing();
 
