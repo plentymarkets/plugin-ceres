@@ -42,8 +42,7 @@ class PresetHeaderWidget extends BaseWidget
 
 
         $navigationContainers = $settingsFactory->createVerticalContainer('NavigationContainers')
-            ->withName('Testare widget')
-            ->children;
+            ->withName('Testare widget');
 
         $navigationContainers->children->createCheckbox("isFixed")
             ->withName("Widget.topBarIsFixedLabel")
