@@ -10,8 +10,8 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class PresetHeaderWidget extends BaseWidget
 {
-    //  protected $template = "Ceres::Widgets.Header.PresetHeaderWidget";
-   protected $template = "Ceres::Widgets.Header.BreadcrumbWidget";
+      protected $template = "Ceres::Widgets.Header.PresetHeaderWidget";
+  //    protected $template = "Ceres::Widgets.Header.BreadcrumbWidget";
     /**
      * @inheritDoc
      */
@@ -35,66 +35,94 @@ class PresetHeaderWidget extends BaseWidget
         /** @var WidgetSettingsFactory $settingsFactory */
         $settingsFactory = pluginApp(WidgetSettingsFactory::class);
 
+        // default
+
+        $settingsFactory->createCustomClass();
+        $settingsFactory->createCheckbox("isFixed")
+            ->withName("Widget.breadcrumbIsFixedLabel")
+            ->withDefaultValue(true);
+
+        $settingsFactory->createCheckbox("showOnHomepage")
+            ->withName("Widget.breadcrumbShowOnHomepageLabel")
+            ->withDefaultValue(true);
+
+        $settingsFactory->createCheckbox("showOnMyAccount")
+            ->withName("Widget.breadcrumbShowOnMyAccountLabel")
+            ->withDefaultValue(true);
+
+        $settingsFactory->createCheckbox("showOnCheckout")
+            ->withName("Widget.breadcrumbShowOnCheckoutLabel")
+            ->withDefaultValue(true);
+
+        $settingsFactory->createCheckbox("showOnContentCategory")
+            ->withName("Widget.breadcrumbShowOnContentCategoryLabel")
+            ->withDefaultValue(true);
+
+        $settingsFactory->createCheckbox("showOnLegalPages")
+            ->withName("Widget.breadcrumbShowOnLegalPagesLabel")
+            ->withDefaultValue(false);
+
+
 
         //  Top Bar Configuration
-        $settingsFactory->createCustomClass();
-
-        $settingsFactory->createCheckbox("isFixed")
-            ->withName("Widget.topBarIsFixedLabel")
-            ->withDefaultValue(true);
-
-        $settingsFactory->createSelect("searchStyle")
-            ->withName("Widget.topBarSearchStyleLabel")
-            ->withTooltip("Widget.topBarSearchStyleTooltip")
-            ->withDefaultValue("onDemand")
-            ->withListBoxValues(
-                ValueListFactory::make()
-                    ->addEntry("hidden", "Widget.topBarSearchStyleHidden")
-                    ->addEntry("onDemand", "Widget.topBarSearchStyleOnDemand")
-                    ->addEntry("permanent", "Widget.topBarSearchStylePermanent")
-                    ->toArray()
-            );
-
-        $settingsFactory->createCheckbox("enableLogin")
-            ->withName("Widget.topBarEnableLoginLabel")
-            ->withDefaultValue(true);
-
-        $settingsFactory->createCheckbox("enableRegistration")
-            ->withName("Widget.topBarEnableRegistrationLabel")
-            ->withDefaultValue(true);
-
-        $settingsFactory->createCheckbox("enableLanguageSelect")
-            ->withName("Widget.topBarEnableLanguageSelectLabel")
-            ->withDefaultValue(true);
-
-        $settingsFactory->createCheckbox("enableShippingCountrySelect")
-            ->withName("Widget.topBarEnableShippingCountrySelectLabel")
-            ->withDefaultValue(true);
-
-        $settingsFactory->createCheckbox("enableCurrencySelect")
-            ->withName("Widget.topBarEnableCurrencySelectLabel")
-            ->withDefaultValue(true);
-
-        $settingsFactory->createCheckbox("enableWishList")
-            ->withName("Widget.topBarEnableWishListLabel")
-            ->withDefaultValue(true);
-
-        $settingsFactory->createCheckbox("enableBasketPreview")
-            ->withName("Widget.topBarEnableBasketPreviewLabel")
-            ->withDefaultValue(true);
-
-        $settingsFactory->createSelect("basketValues")
-            ->withName("Widget.topBarBasketValuesLabel")
-            ->withTooltip("Widget.topBarBasketValuesTooltip")
-            ->withDefaultValue("sum")
-            ->withCondition("enableBasketPreview")
-            ->withListBoxValues(
-                ValueListFactory::make()
-                    ->addEntry("sum", "Widget.topBarBasketValuesSum")
-                    ->addEntry("quantity", "Widget.topBarBasketValuesQuantity")
-                    ->addEntry("both", "Widget.topBarBasketValuesBoth")
-                    ->toArray()
-            );
+//        $settingsFactory->createCustomClass();
+//
+//        $settingsFactory->createCheckbox("isFixed")
+//            ->withName("Widget.topBarIsFixedLabel")
+//            ->withDefaultValue(true);
+//
+//        $settingsFactory->createSelect("searchStyle")
+//            ->withName("Widget.topBarSearchStyleLabel")
+//            ->withTooltip("Widget.topBarSearchStyleTooltip")
+//            ->withDefaultValue("onDemand")
+//            ->withListBoxValues(
+//                ValueListFactory::make()
+//                    ->addEntry("hidden", "Widget.topBarSearchStyleHidden")
+//                    ->addEntry("onDemand", "Widget.topBarSearchStyleOnDemand")
+//                    ->addEntry("permanent", "Widget.topBarSearchStylePermanent")
+//                    ->toArray()
+//            );
+//
+//        $settingsFactory->createCheckbox("enableLogin")
+//            ->withName("Widget.topBarEnableLoginLabel")
+//            ->withDefaultValue(true);
+//
+//        $settingsFactory->createCheckbox("enableRegistration")
+//            ->withName("Widget.topBarEnableRegistrationLabel")
+//            ->withDefaultValue(true);
+//
+//        $settingsFactory->createCheckbox("enableLanguageSelect")
+//            ->withName("Widget.topBarEnableLanguageSelectLabel")
+//            ->withDefaultValue(true);
+//
+//        $settingsFactory->createCheckbox("enableShippingCountrySelect")
+//            ->withName("Widget.topBarEnableShippingCountrySelectLabel")
+//            ->withDefaultValue(true);
+//
+//        $settingsFactory->createCheckbox("enableCurrencySelect")
+//            ->withName("Widget.topBarEnableCurrencySelectLabel")
+//            ->withDefaultValue(true);
+//
+//        $settingsFactory->createCheckbox("enableWishList")
+//            ->withName("Widget.topBarEnableWishListLabel")
+//            ->withDefaultValue(true);
+//
+//        $settingsFactory->createCheckbox("enableBasketPreview")
+//            ->withName("Widget.topBarEnableBasketPreviewLabel")
+//            ->withDefaultValue(true);
+//
+//        $settingsFactory->createSelect("basketValues")
+//            ->withName("Widget.topBarBasketValuesLabel")
+//            ->withTooltip("Widget.topBarBasketValuesTooltip")
+//            ->withDefaultValue("sum")
+//            ->withCondition("enableBasketPreview")
+//            ->withListBoxValues(
+//                ValueListFactory::make()
+//                    ->addEntry("sum", "Widget.topBarBasketValuesSum")
+//                    ->addEntry("quantity", "Widget.topBarBasketValuesQuantity")
+//                    ->addEntry("both", "Widget.topBarBasketValuesBoth")
+//                    ->toArray()
+//            );
 
 
 
