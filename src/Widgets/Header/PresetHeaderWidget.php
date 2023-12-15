@@ -47,7 +47,7 @@ class PresetHeaderWidget extends BaseWidget
         $navigationContainers->children->createCheckbox("isFixed")
             ->withName("Widget.topBarIsFixedLabel")
             ->withDefaultValue(true);
-//
+
         $navigationContainers->children->createSelect("searchStyle")
             ->withName("Widget.topBarSearchStyleLabel")
             ->withTooltip("Widget.topBarSearchStyleTooltip")
@@ -59,7 +59,7 @@ class PresetHeaderWidget extends BaseWidget
                     ->addEntry("permanent", "Widget.topBarSearchStylePermanent")
                     ->toArray()
             );
-//
+
         $navigationContainers->children->createCheckbox("enableLogin")
             ->withName("Widget.topBarEnableLoginLabel")
             ->withDefaultValue(true);
