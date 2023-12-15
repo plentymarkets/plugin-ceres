@@ -26,5 +26,7 @@
         {% endfor %}
     </tab-list>
 </div>
+<small>{{ tabs | json_encode }}</small>
+<br>
 <small>{{ children | json_encode }}</small>
 {% endif %}
