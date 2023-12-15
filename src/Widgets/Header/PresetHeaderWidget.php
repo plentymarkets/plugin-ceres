@@ -29,7 +29,7 @@ class PresetHeaderWidget extends BaseWidget
     /**
      * @inheritDoc
      */
-     */
+
     public function getSettings()
     {
         /** @var WidgetSettingsFactory $settingsFactory */
