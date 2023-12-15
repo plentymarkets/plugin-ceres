@@ -30,14 +30,6 @@ class PresetHeaderWidget extends BaseWidget
             ->toArray();
     }
 
-    public function makeHeader(){
-        $text =  '<h2>TEst</h2>';
-    }
-
-    public function getString(){
-        return $this->makeHeader();
-    }
-
 
     /**
      * @inheritDoc
@@ -48,22 +40,16 @@ class PresetHeaderWidget extends BaseWidget
         /** @var WidgetSettingsFactory $settingsFactory */
         $settingsFactory = pluginApp(WidgetSettingsFactory::class);
 
-        // default header
-        $this->getString();
-        $settingsFactory->createCustomClass();
 
+        $navigationContainers = $settingsFactory->createVerticalContainer('NavigationContainers')
+            ->withName('Testare widget')
+            ->children;
 
-
-//         $this->createHeadline(); $headline;
-     $settingsFactory->createText("title")
-    ->withName("TOP BAR")
-    ->withTooltip("Widget.tabNewTabInputTooltip");
-
-        $settingsFactory->createCheckbox("isFixed")
+        $navigationContainers->children->createCheckbox("isFixed")
             ->withName("Widget.topBarIsFixedLabel")
             ->withDefaultValue(true);
 //
-        $settingsFactory->createSelect("searchStyle")
+        $navigationContainers->children->createSelect("searchStyle")
             ->withName("Widget.topBarSearchStyleLabel")
             ->withTooltip("Widget.topBarSearchStyleTooltip")
             ->withDefaultValue("onDemand")
@@ -75,35 +61,35 @@ class PresetHeaderWidget extends BaseWidget
                     ->toArray()
             );
 //
-        $settingsFactory->createCheckbox("enableLogin")
+        $navigationContainers->children->createCheckbox("enableLogin")
             ->withName("Widget.topBarEnableLoginLabel")
             ->withDefaultValue(true);
 
-        $settingsFactory->createCheckbox("enableRegistration")
+        $navigationContainers->children->createCheckbox("enableRegistration")
             ->withName("Widget.topBarEnableRegistrationLabel")
             ->withDefaultValue(true);
 
-        $settingsFactory->createCheckbox("enableLanguageSelect")
+        $navigationContainers->children->createCheckbox("enableLanguageSelect")
             ->withName("Widget.topBarEnableLanguageSelectLabel")
             ->withDefaultValue(true);
 
-        $settingsFactory->createCheckbox("enableShippingCountrySelect")
+        $navigationContainers->children->createCheckbox("enableShippingCountrySelect")
             ->withName("Widget.topBarEnableShippingCountrySelectLabel")
             ->withDefaultValue(true);
 
-        $settingsFactory->createCheckbox("enableCurrencySelect")
+        $navigationContainers->children->createCheckbox("enableCurrencySelect")
             ->withName("Widget.topBarEnableCurrencySelectLabel")
             ->withDefaultValue(true);
 
-        $settingsFactory->createCheckbox("enableWishList")
+        $navigationContainers->children->createCheckbox("enableWishList")
             ->withName("Widget.topBarEnableWishListLabel")
             ->withDefaultValue(true);
 
-        $settingsFactory->createCheckbox("enableBasketPreview")
+        $navigationContainers->children->createCheckbox("enableBasketPreview")
             ->withName("Widget.topBarEnableBasketPreviewLabel")
             ->withDefaultValue(true);
 
-        $settingsFactory->createSelect("basketValues")
+        $navigationContainers->children->createSelect("basketValues")
             ->withName("Widget.topBarBasketValuesLabel")
             ->withTooltip("Widget.topBarBasketValuesTooltip")
             ->withDefaultValue("sum")
