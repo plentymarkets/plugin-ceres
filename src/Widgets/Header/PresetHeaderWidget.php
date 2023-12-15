@@ -3,22 +3,21 @@
 namespace Ceres\Widgets\Header;
 
 use Ceres\Widgets\Helper\BaseWidget;
+use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetCategories;
-use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
 
 class PresetHeaderWidget extends BaseWidget
 {
-    /** @inheritDoc */
-    protected $template = "Ceres::Widgets.Header.PresetHeaderWidget";
-
+      protected $template = "Ceres::Widgets.Header.PresetHeaderWidget";
+  //  protected $template = "Ceres::Widgets.Header.BreadcrumbWidget";
     /**
      * @inheritDoc
      */
     public function getData()
     {
-        return WidgetDataFactory::make("Ceres::PresetHeaderWidget")
+        return WidgetDataFactory::make("Ceres::PresetHeader")
             ->withLabel("Widget.presetHeader")
             ->withPreviewImageUrl("/images/widgets/top-bar.svg")
             ->withType(WidgetTypes::HEADER)
