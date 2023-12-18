@@ -1,5 +1,5 @@
-import { debounce } from "./debounce";
-import { detectPassiveEvents } from "./featureDetect";
+// import { debounce } from "./debounce";
+// import { detectPassiveEvents } from "./featureDetect";
 import { isDefined } from "./utils";
 
 /**

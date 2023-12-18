@@ -63116,29 +63116,21 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.filter("truncate", function (string, 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return HeaderScroller; });
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.from.js */ "./node_modules/core-js/modules/es.array.from.js");
-/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.promise.js */ "./node_modules/core-js/modules/es.promise.js");
+/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.string.iterator.js */ "./node_modules/core-js/modules/es.string.iterator.js");
 /* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.promise.js */ "./node_modules/core-js/modules/es.promise.js");
-/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.iterator.js */ "./node_modules/core-js/modules/es.array.iterator.js");
-/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator.js */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.array.map.js */ "./node_modules/core-js/modules/es.array.map.js");
-/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.array.slice.js */ "./node_modules/core-js/modules/es.array.slice.js");
-/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _debounce__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./debounce */ "./resources/js/src/app/helper/debounce.js");
-/* harmony import */ var _featureDetect__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./featureDetect */ "./resources/js/src/app/helper/featureDetect.js");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./utils */ "./resources/js/src/app/helper/utils.js");
-
-
+/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.iterator.js */ "./node_modules/core-js/modules/es.array.iterator.js");
+/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator.js */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.map.js */ "./node_modules/core-js/modules/es.array.map.js");
+/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.array.slice.js */ "./node_modules/core-js/modules/es.array.slice.js");
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./utils */ "./resources/js/src/app/helper/utils.js");
 
 
 
@@ -63153,8 +63145,8 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-
-
+// import { debounce } from "./debounce";
+// import { detectPassiveEvents } from "./featureDetect";
 
 /**
  * This class is used to fixate the shop header when scrolling.
@@ -63179,7 +63171,7 @@ var HeaderScroller = /*#__PURE__*/function () {
 
     this.isShopBuilderHeaderFixated = false;
 
-    if (Object(_utils__WEBPACK_IMPORTED_MODULE_11__["isDefined"])(this.headerParent)) {
+    if (Object(_utils__WEBPACK_IMPORTED_MODULE_7__["isDefined"])(this.headerParent)) {
       if (!App.isShopBuilder) {
         this.registerEventsListeners();
       } else {
@@ -63219,152 +63211,154 @@ var HeaderScroller = /*#__PURE__*/function () {
         this.initialized = true;
       }
     } // Collect heights of header elements for later use
-
-  }, {
-    key: "collectHeaderElementHeights",
-    value: function collectHeaderElementHeights() {
-      var _this$headerParent,
-          _this = this;
-
-      this.headerHeight = 0;
-      this.allHeaderChildrenHeights = [];
-      Array.from((_this$headerParent = this.headerParent) === null || _this$headerParent === void 0 ? void 0 : _this$headerParent.children).forEach(function (element) {
-        var elementHeight = 0; // skip elements with the data attribute "data-scroll-void" and interpret their height as zero
-
-        if (!element.dataset.hasOwnProperty("scrollVoid")) {
-          elementHeight = element.getBoundingClientRect().height;
-        }
-
-        _this.allHeaderChildrenHeights.push(elementHeight);
-
-        _this.headerHeight += elementHeight;
-      });
-    } // Set descending z-index for all header elements and create list of elements with unfixed class for later use.
-
-  }, {
-    key: "updateZIndexes",
-    value: function updateZIndexes() {
-      if (!App.isShopBuilder) {
-        var _this$headerParent2;
-
-        var zIndex = 100;
-        Array.from((_this$headerParent2 = this.headerParent) === null || _this$headerParent2 === void 0 ? void 0 : _this$headerParent2.children).forEach(function (element) {
-          element.style.zIndex = zIndex--;
-        });
-      }
-    } // Calculate top offset for vue-app node because header is not part of document flow.
-
-  }, {
-    key: "calculateBodyOffset",
-    value: function calculateBodyOffset() {
-      var unset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
-      if (this.headerParent) {
-        var app = document.getElementById("vue-app");
-        app.style.marginTop = unset ? null : this.headerHeight + "px";
-        app.style.minHeight = unset ? null : window.innerHeight - this.headerHeight + "px";
-      }
-    } // Scroll header elements depending on if they are unfixed or not
-
-  }, {
-    key: "scrollHeaderElements",
-    value: function scrollHeaderElements() {
-      var absolutePos = 0;
-      var fixedElementsHeight = 0;
-      var offset = 0;
-
-      for (var i = 0; i < this.headerParent.children.length; i++) {
-        var elem = this.headerParent.children[i];
-        var elemHeight = this.allHeaderChildrenHeights[i];
-        offset = absolutePos - window.pageYOffset;
-        elem.style.position = "absolute"; // Element should not be considerd in height calculation of following elements
-
-        if (elem.dataset.hasOwnProperty("scrollVoid")) {
-          continue;
-        } // Element is unfixed and should scroll indefinetly
-        else if (elem.classList.contains("unfixed")) {
-            elem.style.top = offset + "px";
-          } // Element is fixed and should scroll until it hits top of header or next fixed element
-          else {
-              elem.style.top = offset < 0 ? 0 : offset + "px";
-
-              if (fixedElementsHeight > 0 && offset < fixedElementsHeight) {
-                elem.style.top = fixedElementsHeight + "px";
-              }
-
-              fixedElementsHeight = fixedElementsHeight + elemHeight;
-            }
-
-        absolutePos = absolutePos + elemHeight;
-      }
-    } // Register all the event listeners, to realize the header scrolling behavior.
-
-  }, {
-    key: "registerEventsListeners",
-    value: function registerEventsListeners() {
-      var _this2 = this;
-
-      window.addEventListener("load", function () {
-        return _this2.initialize();
-      });
-
-      if (document.fonts) {
-        document.fonts.onloadingdone = function () {
-          return _this2.initialize();
-        };
-      }
-
-      this.checkForHeaderImages().then(function () {
-        return _this2.initialize();
-      });
-      window.addEventListener("resize", Object(_debounce__WEBPACK_IMPORTED_MODULE_9__["debounce"])(function () {
-        return _this2.initialize();
-      }, 50)); // The listener for user scrolling. If this class is not fully initialized, call the initialize method on scroll.
-
-      window.addEventListener("scroll", function () {
-        if (_this2.initialized) {
-          if (_this2.animationFrameTimeout) {
-            window.cancelAnimationFrame(_this2.animationFrameTimeout);
-          }
-
-          _this2.animationFrameTimeout = window.requestAnimationFrame(_this2.scrollHeaderElements.bind(_this2));
-        } else {
-          _this2.initialize();
-        }
-      }, Object(_featureDetect__WEBPACK_IMPORTED_MODULE_10__["detectPassiveEvents"])() ? {
-        passive: true
-      } : false);
-    } // Register event listeners for the shopbuilder environment.
-
-  }, {
-    key: "registerSBEventsListeners",
-    value: function registerSBEventsListeners() {
-      var _this3 = this;
-
-      $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", function () {
-        if (_this3.isShopBuilderHeaderFixated) {
-          _this3.collectHeaderElementHeights();
-
-          _this3.calculateBodyOffset();
-        }
-      }); // when the active dropzone in the shopbuilder changes
-
-      $(document).on("shopbuilder.after.activate-container", function (event, data) {
-        if ((data === null || data === void 0 ? void 0 : data.container) === "Ceres::Header") {
-          _this3.fixateHeader();
-
-          _this3.calculateBodyOffset();
-
-          _this3.isShopBuilderHeaderFixated = true;
-        } else {
-          _this3.unfixHeader();
-
-          _this3.calculateBodyOffset(true);
-
-          _this3.isShopBuilderHeaderFixated = false;
-        }
-      });
-    } // Check all the images present in the header, and recalculate header height, when needed.
+    // collectHeaderElementHeights()
+    // {
+    //     this.headerHeight = 0;
+    //     this.allHeaderChildrenHeights = [];
+    //
+    //     Array.from(this.headerParent?.children).forEach(element =>
+    //     {
+    //         let elementHeight = 0;
+    //
+    //         // skip elements with the data attribute "data-scroll-void" and interpret their height as zero
+    //         if (!element.dataset.hasOwnProperty("scrollVoid"))
+    //         {
+    //             elementHeight = element.getBoundingClientRect().height;
+    //         }
+    //
+    //         this.allHeaderChildrenHeights.push(elementHeight);
+    //         this.headerHeight += elementHeight;
+    //     });
+    // }
+    // Set descending z-index for all header elements and create list of elements with unfixed class for later use.
+    // updateZIndexes()
+    // {
+    //     if (!App.isShopBuilder)
+    //     {
+    //         let zIndex = 100;
+    //
+    //         Array.from(this.headerParent?.children).forEach(element =>
+    //         {
+    //             element.style.zIndex = zIndex--;
+    //         });
+    //     }
+    // }
+    // Calculate top offset for vue-app node because header is not part of document flow.
+    // calculateBodyOffset(unset = false)
+    // {
+    //     if (this.headerParent)
+    //     {
+    //         const app = document.getElementById("vue-app");
+    //
+    //         app.style.marginTop = unset ? null : this.headerHeight + "px";
+    //         app.style.minHeight = unset ? null : window.innerHeight - this.headerHeight + "px";
+    //     }
+    // }
+    // Scroll header elements depending on if they are unfixed or not
+    // scrollHeaderElements()
+    // {
+    //     let absolutePos = 0;
+    //
+    //     let fixedElementsHeight = 0;
+    //
+    //     let offset = 0;
+    //
+    //     for (let i = 0; i < this.headerParent.children.length; i++)
+    //     {
+    //         const elem = this.headerParent.children[i];
+    //         const elemHeight = this.allHeaderChildrenHeights[i];
+    //
+    //         offset = absolutePos - window.pageYOffset;
+    //         elem.style.position = "absolute";
+    //
+    //         // Element should not be considerd in height calculation of following elements
+    //         if (elem.dataset.hasOwnProperty("scrollVoid"))
+    //         {
+    //             continue;
+    //         }
+    //         // Element is unfixed and should scroll indefinetly
+    //         else if (elem.classList.contains("unfixed"))
+    //         {
+    //             elem.style.top = offset + "px";
+    //         }
+    //         // Element is fixed and should scroll until it hits top of header or next fixed element
+    //         else
+    //         {
+    //             elem.style.top = offset < 0 ? 0 : offset + "px";
+    //
+    //             if (fixedElementsHeight > 0 && offset < fixedElementsHeight)
+    //             {
+    //                 elem.style.top = fixedElementsHeight + "px";
+    //             }
+    //
+    //             fixedElementsHeight = fixedElementsHeight + elemHeight;
+    //         }
+    //         absolutePos = absolutePos + elemHeight;
+    //     }
+    // }
+    // Register all the event listeners, to realize the header scrolling behavior.
+    // registerEventsListeners()
+    // {
+    //     window.addEventListener("load", () => this.initialize());
+    //
+    //     if (document.fonts)
+    //     {
+    //         document.fonts.onloadingdone = () => this.initialize();
+    //     }
+    //
+    //     this.checkForHeaderImages().then(() => this.initialize());
+    //
+    //     window.addEventListener("resize", debounce(() => this.initialize(), 50));
+    //
+    //     // The listener for user scrolling. If this class is not fully initialized, call the initialize method on scroll.
+    //     window.addEventListener("scroll", () =>
+    //     {
+    //         if (this.initialized)
+    //         {
+    //             if (this.animationFrameTimeout)
+    //             {
+    //                 window.cancelAnimationFrame(this.animationFrameTimeout);
+    //             }
+    //
+    //             this.animationFrameTimeout = window.requestAnimationFrame(
+    //                 this.scrollHeaderElements.bind(this)
+    //             );
+    //         }
+    //         else
+    //         {
+    //             this.initialize();
+    //         }
+    //     }, detectPassiveEvents() ? { passive: true } : false);
+    // }
+    // Register event listeners for the shopbuilder environment.
+    // registerSBEventsListeners()
+    // {
+    //     $(document).on("shopbuilder.before.viewUpdate shopbuilder.after.viewUpdate", () =>
+    //     {
+    //         if (this.isShopBuilderHeaderFixated)
+    //         {
+    //             this.collectHeaderElementHeights();
+    //             this.calculateBodyOffset();
+    //         }
+    //     });
+    // when the active dropzone in the shopbuilder changes
+    //     $(document).on("shopbuilder.after.activate-container", (event, data) =>
+    //     {
+    //         if (data?.container === "Ceres::Header")
+    //         {
+    //             this.fixateHeader();
+    //             this.calculateBodyOffset();
+    //             this.isShopBuilderHeaderFixated = true;
+    //         }
+    //         else
+    //         {
+    //             this.unfixHeader();
+    //             this.calculateBodyOffset(true);
+    //             this.isShopBuilderHeaderFixated = false;
+    //         }
+    //     });
+    // }
+    // Check all the images present in the header, and recalculate header height, when needed.
 
   }, {
     key: "checkForHeaderImages",
