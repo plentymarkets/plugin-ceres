@@ -136,15 +136,15 @@ class PresetHeaderWidget extends BaseWidget
                     ->toArray()
             );
 
-//        $maxItemsContainer = $navigationContainer->children->createVerticalContainer('megaMenuMaxItems')
-//            ->withName('Widget.navigationMegaMenuMaxItemsLabel')
-//            ->children;
-//
-//        $maxItemsContainer->createNumber('stage1')
-//            ->withName('Widget.navigationMegaMenuMaxItemsStage1Label')
-//            ->withTooltip('Widget.navigationMegaMenuMaxItemsStage1Tooltip')
-//            ->withDefaultValue(30);
-//
+        $maxItemsContainer = $navigationContainer->children->createVerticalContainer('megaMenuMaxItems')
+            ->withName('Widget.navigationMegaMenuMaxItemsLabel')
+            ->children;
+
+        $maxItemsContainer->createNumber('stage1')
+            ->withName('Widget.navigationMegaMenuMaxItemsStage1Label')
+            ->withTooltip('Widget.navigationMegaMenuMaxItemsStage1Tooltip')
+            ->withDefaultValue(30);
+
 //        $maxItemsContainer->createNumber('stage2')
 //            ->withName('Widget.navigationMegaMenuMaxItemsStage2Label')
 //            ->withTooltip('Widget.navigationMegaMenuMaxItemsStage2Tooltip')
