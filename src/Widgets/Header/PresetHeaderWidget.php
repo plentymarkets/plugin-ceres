@@ -40,6 +40,8 @@ class PresetHeaderWidget extends BaseWidget
         $topBarContainer = $settingsFactory->createVerticalContainer('TopBarContainer')
             ->withName('Top Bar Settings');
 
+        $topBarContainer->children->createCustomClass();
+
         $topBarContainer->children->createCheckbox("isFixed")
             ->withName("Widget.topBarIsFixedLabel")
             ->withDefaultValue(true);
