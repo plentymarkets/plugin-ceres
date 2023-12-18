@@ -1,9 +1,6 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
-<header id="page-header" class="default-header d-print-none">
-    <div class="container-max sticky-top">
-{#        <div class="row flex-row-reverse position-relative">#}
-{#            <div id="page-header-parent" class="col-12 header-container">#}
+        <div class="sticky-top">
                 <div class="top-bar header-fw">
                     <div class="container-max px-0 pr-lg-3">
                         <div class="row mx-0 flex-row-reverse position-relative">
@@ -228,14 +225,10 @@
                 </div>
 
                 {% include "Ceres::PageDesign.Partials.Header.Navigation" %}
-
+</div>
                 {% cacheslot breadcrumbs %}
                     breadcrumbs are related to every single page so they need to be wrapped in a cache slot
                     {% if not services.template.isHome() and not services.template.isMyAccount() and not services.template.isCheckout() %}
                         {% include "Ceres::PageDesign.Partials.Header.Breadcrumb" %}
                     {% endif %}
                 {% endcacheslot %}
-            </div>
-{#        </div>#}
-{#    </div>#}
-</header>
