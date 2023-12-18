@@ -145,17 +145,17 @@ class PresetHeaderWidget extends BaseWidget
             ->withTooltip('Widget.navigationMegaMenuMaxItemsStage1Tooltip')
             ->withDefaultValue(30);
 
-//        $maxItemsContainer->createNumber('stage2')
-//            ->withName('Widget.navigationMegaMenuMaxItemsStage2Label')
-//            ->withTooltip('Widget.navigationMegaMenuMaxItemsStage2Tooltip')
-//            ->withDefaultValue(3)
-//            ->withCondition('navigationStyle === "megaMenu" && megaMenuLevels >= 3');
-//
-//        $maxItemsContainer->createNumber('stage3')
-//            ->withName('Widget.navigationMegaMenuMaxItemsStage3Label')
-//            ->withTooltip('Widget.navigationMegaMenuMaxItemsStage3Tooltip')
-//            ->withDefaultValue(2)
-//            ->withCondition('navigationStyle === "megaMenu" && megaMenuLevels >= 4');
+        $maxItemsContainer->createNumber('stage2')
+            ->withName('Widget.navigationMegaMenuMaxItemsStage2Label')
+            ->withTooltip('Widget.navigationMegaMenuMaxItemsStage2Tooltip')
+            ->withDefaultValue(3)
+            ->withCondition('navigationStyle === "megaMenu" && megaMenuLevels >= 3');
+
+        $maxItemsContainer->createNumber('stage3')
+            ->withName('Widget.navigationMegaMenuMaxItemsStage3Label')
+            ->withTooltip('Widget.navigationMegaMenuMaxItemsStage3Tooltip')
+            ->withDefaultValue(2)
+            ->withCondition('navigationStyle === "megaMenu" && megaMenuLevels >= 4');
 
 //        $navigationContainer->children->createFile('companyLogoUrl')
 //            ->withName('Widget.navigationCompanyLogoUrlLabel')
