@@ -2,6 +2,7 @@
 
 namespace Ceres\Widgets\Header;
 
+use Ceres\Widgets\Common\ImageBoxWidget;
 use Ceres\Widgets\Helper\BaseWidget;
 use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
@@ -163,14 +164,14 @@ class PresetHeaderWidget extends BaseWidget
             ->withDefaultValue('')
             ->withAllowedExtensions(array_merge(ImageBoxWidget::IMAGE_EXTENSIONS, ImageBoxWidget::MODERN_IMAGE_EXTENSIONS));
 
-//        $navigationContainer->children->createFile('fallbackImagePath')
-//            ->withCondition('!!companyLogoUrl && /.?(\.webp)(?:$|\?)/.test(companyLogoUrl)')
-//            ->withName('Widget.navigationFallbackImagePathLabel')
-//            ->withTooltip('Widget.navigationFallbackImagePathTooltip')
-//            ->withDefaultValue('')
-//            ->withAllowedExtensions(ImageBoxWidget::IMAGE_EXTENSIONS);
-//
-//        $navigationContainer->children->createSpacing();
+        $navigationContainer->children->createFile('fallbackImagePath')
+            ->withCondition('!!companyLogoUrl && /.?(\.webp)(?:$|\?)/.test(companyLogoUrl)')
+            ->withName('Widget.navigationFallbackImagePathLabel')
+            ->withTooltip('Widget.navigationFallbackImagePathTooltip')
+            ->withDefaultValue('')
+            ->withAllowedExtensions(ImageBoxWidget::IMAGE_EXTENSIONS);
+
+        $navigationContainer->children->createSpacing();
 
 
 
