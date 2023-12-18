@@ -12,7 +12,7 @@ use Ceres\Widgets\Helper\WidgetTypes;
 
 class PresetHeaderWidget extends BaseWidget
 {
-      protected $template = "Ceres::Widgets.Header.PresetHeaderWidget";
+      protected $template = "Ceres::Widgets.Header.PresetHeader.PresetHeaderWidget";
 
     /**
      * @inheritDoc
