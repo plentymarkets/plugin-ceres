@@ -31,7 +31,6 @@ class PresetHeaderWidget extends BaseWidget
             ->toArray();
     }
 
-
     /**
      * @inheritDoc
      */
@@ -41,8 +40,7 @@ class PresetHeaderWidget extends BaseWidget
         /** @var WidgetSettingsFactory $settingsFactory */
         $settingsFactory = pluginApp(WidgetSettingsFactory::class);
 
-
-        $topBarContainer = $settingsFactory->createVerticalContainer('TopBarContainers')
+        $topBarContainer = $settingsFactory->createVerticalContainer('TopBarContainer')
             ->withName('Top Bar Settings');
 
         $topBarContainer->children->createCheckbox("isFixed")
@@ -102,10 +100,8 @@ class PresetHeaderWidget extends BaseWidget
                     ->toArray()
             );
 
-
-
         //  Navigation Configuration
-        $navigationContainer = $settingsFactory->createVerticalContainer('NavigationContainers')
+        $navigationContainer = $settingsFactory->createVerticalContainer('NavigationContainer')
             ->withName('Navigation Settings');
 
         $navigationContainer->children->createCustomClass();
@@ -173,37 +169,34 @@ class PresetHeaderWidget extends BaseWidget
 
         $navigationContainer->children->createSpacing();
 
-
-
-
         //  BreadCrumb Configuration
-//        $settingsFactory->createCustomClass();
-//        $settingsFactory->createCheckbox("isFixed")
-//            ->withName("Widget.breadcrumbIsFixedLabel")
-//            ->withDefaultValue(true);
-//
-//        $settingsFactory->createCheckbox("showOnHomepage")
-//            ->withName("Widget.breadcrumbShowOnHomepageLabel")
-//            ->withDefaultValue(true);
-//
-//        $settingsFactory->createCheckbox("showOnMyAccount")
-//            ->withName("Widget.breadcrumbShowOnMyAccountLabel")
-//            ->withDefaultValue(true);
-//
-//        $settingsFactory->createCheckbox("showOnCheckout")
-//            ->withName("Widget.breadcrumbShowOnCheckoutLabel")
-//            ->withDefaultValue(true);
-//
-//        $settingsFactory->createCheckbox("showOnContentCategory")
-//            ->withName("Widget.breadcrumbShowOnContentCategoryLabel")
-//            ->withDefaultValue(true);
-//
-//        $settingsFactory->createCheckbox("showOnLegalPages")
-//            ->withName("Widget.breadcrumbShowOnLegalPagesLabel")
-//            ->withDefaultValue(false);
-//
+        $breadCrumbContainer = $settingsFactory->createVerticalContainer('BreadCrumbContainer')
+            ->withName('BreadCrumb Settings');
 
+        $breadCrumbContainer->children->createCustomClass();
+        $breadCrumbContainer->children->createCheckbox("isFixed")
+            ->withName("Widget.breadcrumbIsFixedLabel")
+            ->withDefaultValue(true);
 
+        $breadCrumbContainer->children->createCheckbox("showOnHomepage")
+            ->withName("Widget.breadcrumbShowOnHomepageLabel")
+            ->withDefaultValue(true);
+
+        $breadCrumbContainer->children->createCheckbox("showOnMyAccount")
+            ->withName("Widget.breadcrumbShowOnMyAccountLabel")
+            ->withDefaultValue(true);
+
+        $breadCrumbContainer->children->createCheckbox("showOnCheckout")
+            ->withName("Widget.breadcrumbShowOnCheckoutLabel")
+            ->withDefaultValue(true);
+
+        $breadCrumbContainer->children->createCheckbox("showOnContentCategory")
+            ->withName("Widget.breadcrumbShowOnContentCategoryLabel")
+            ->withDefaultValue(true);
+
+        $breadCrumbContainer->children->createCheckbox("showOnLegalPages")
+            ->withName("Widget.breadcrumbShowOnLegalPagesLabel")
+            ->withDefaultValue(false);
 
         return $settingsFactory->toArray();
     }
