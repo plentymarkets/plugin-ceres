@@ -60462,22 +60462,17 @@ var HeaderScroller = /*#__PURE__*/function () {
         });
       }));
     } // Add the class .fixed-top to the header element.
+    // fixateHeader()
+    // {
+    //     document.querySelector("#page-header")?.classList.add("fixed-top");
+    // }
+    //
+    // // Remove the class .fixed-top from the header element.
+    // unfixHeader()
+    // {
+    //     document.querySelector("#page-header")?.classList.remove("fixed-top");
+    // }
 
-  }, {
-    key: "fixateHeader",
-    value: function fixateHeader() {
-      var _document$querySelect;
-
-      (_document$querySelect = document.querySelector("#page-header")) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.classList.add("fixed-top");
-    } // Remove the class .fixed-top from the header element.
-
-  }, {
-    key: "unfixHeader",
-    value: function unfixHeader() {
-      var _document$querySelect2;
-
-      (_document$querySelect2 = document.querySelector("#page-header")) === null || _document$querySelect2 === void 0 ? void 0 : _document$querySelect2.classList.remove("fixed-top");
-    }
   }]);
 
   return HeaderScroller;

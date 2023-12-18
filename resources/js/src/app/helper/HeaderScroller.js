@@ -249,14 +249,14 @@ export default class HeaderScroller
     }
 
     // Add the class .fixed-top to the header element.
-    fixateHeader()
-    {
-        document.querySelector("#page-header")?.classList.add("fixed-top");
-    }
-
-    // Remove the class .fixed-top from the header element.
-    unfixHeader()
-    {
-        document.querySelector("#page-header")?.classList.remove("fixed-top");
-    }
+    // fixateHeader()
+    // {
+    //     document.querySelector("#page-header")?.classList.add("fixed-top");
+    // }
+    //
+    // // Remove the class .fixed-top from the header element.
+    // unfixHeader()
+    // {
+    //     document.querySelector("#page-header")?.classList.remove("fixed-top");
+    // }
 }
