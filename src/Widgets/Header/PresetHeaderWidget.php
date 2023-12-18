@@ -157,20 +157,20 @@ class PresetHeaderWidget extends BaseWidget
 //            ->withDefaultValue(2)
 //            ->withCondition('navigationStyle === "megaMenu" && megaMenuLevels >= 4');
 
-        $navigationContainer->children->createFile('companyLogoUrl')
-            ->withName('Widget.navigationCompanyLogoUrlLabel')
-            ->withTooltip('Widget.navigationCompanyLogoUrlTooltip')
-            ->withDefaultValue('')
-            ->withAllowedExtensions(array_merge(ImageBoxWidget::IMAGE_EXTENSIONS, ImageBoxWidget::MODERN_IMAGE_EXTENSIONS));
-
-        $navigationContainer->children->createFile('fallbackImagePath')
-            ->withCondition('!!companyLogoUrl && /.?(\.webp)(?:$|\?)/.test(companyLogoUrl)')
-            ->withName('Widget.navigationFallbackImagePathLabel')
-            ->withTooltip('Widget.navigationFallbackImagePathTooltip')
-            ->withDefaultValue('')
-            ->withAllowedExtensions(ImageBoxWidget::IMAGE_EXTENSIONS);
-
-        $navigationContainer->children->createSpacing();
+//        $navigationContainer->children->createFile('companyLogoUrl')
+//            ->withName('Widget.navigationCompanyLogoUrlLabel')
+//            ->withTooltip('Widget.navigationCompanyLogoUrlTooltip')
+//            ->withDefaultValue('')
+//            ->withAllowedExtensions(array_merge(ImageBoxWidget::IMAGE_EXTENSIONS, ImageBoxWidget::MODERN_IMAGE_EXTENSIONS));
+//
+//        $navigationContainer->children->createFile('fallbackImagePath')
+//            ->withCondition('!!companyLogoUrl && /.?(\.webp)(?:$|\?)/.test(companyLogoUrl)')
+//            ->withName('Widget.navigationFallbackImagePathLabel')
+//            ->withTooltip('Widget.navigationFallbackImagePathTooltip')
+//            ->withDefaultValue('')
+//            ->withAllowedExtensions(ImageBoxWidget::IMAGE_EXTENSIONS);
+//
+//        $navigationContainer->children->createSpacing();
 
 
 
