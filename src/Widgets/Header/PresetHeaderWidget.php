@@ -41,14 +41,14 @@ class PresetHeaderWidget extends BaseWidget
         $settingsFactory = pluginApp(WidgetSettingsFactory::class);
 
 
-        $navigationContainers = $settingsFactory->createVerticalContainer('NavigationContainers')
-            ->withName('Testare widget');
+        $topBarContainer = $settingsFactory->createVerticalContainer('TopBarContainers')
+            ->withName('Top Bar Settings');
 
-        $navigationContainers->children->createCheckbox("isFixed")
+        $topBarContainer->children->createCheckbox("isFixed")
             ->withName("Widget.topBarIsFixedLabel")
             ->withDefaultValue(true);
 
-        $navigationContainers->children->createSelect("searchStyle")
+        $topBarContainer->children->createSelect("searchStyle")
             ->withName("Widget.topBarSearchStyleLabel")
             ->withTooltip("Widget.topBarSearchStyleTooltip")
             ->withDefaultValue("onDemand")
@@ -60,35 +60,35 @@ class PresetHeaderWidget extends BaseWidget
                     ->toArray()
             );
 
-        $navigationContainers->children->createCheckbox("enableLogin")
+        $topBarContainer->children->createCheckbox("enableLogin")
             ->withName("Widget.topBarEnableLoginLabel")
             ->withDefaultValue(true);
 
-        $navigationContainers->children->createCheckbox("enableRegistration")
+        $topBarContainer->children->createCheckbox("enableRegistration")
             ->withName("Widget.topBarEnableRegistrationLabel")
             ->withDefaultValue(true);
 
-        $navigationContainers->children->createCheckbox("enableLanguageSelect")
+        $topBarContainer->children->createCheckbox("enableLanguageSelect")
             ->withName("Widget.topBarEnableLanguageSelectLabel")
             ->withDefaultValue(true);
 
-        $navigationContainers->children->createCheckbox("enableShippingCountrySelect")
+        $topBarContainer->children->createCheckbox("enableShippingCountrySelect")
             ->withName("Widget.topBarEnableShippingCountrySelectLabel")
             ->withDefaultValue(true);
 
-        $navigationContainers->children->createCheckbox("enableCurrencySelect")
+        $topBarContainer->children->createCheckbox("enableCurrencySelect")
             ->withName("Widget.topBarEnableCurrencySelectLabel")
             ->withDefaultValue(true);
 
-        $navigationContainers->children->createCheckbox("enableWishList")
+        $topBarContainer->children->createCheckbox("enableWishList")
             ->withName("Widget.topBarEnableWishListLabel")
             ->withDefaultValue(true);
 
-        $navigationContainers->children->createCheckbox("enableBasketPreview")
+        $topBarContainer->children->createCheckbox("enableBasketPreview")
             ->withName("Widget.topBarEnableBasketPreviewLabel")
             ->withDefaultValue(true);
 
-        $navigationContainers->children->createSelect("basketValues")
+        $topBarContainer->children->createSelect("basketValues")
             ->withName("Widget.topBarBasketValuesLabel")
             ->withTooltip("Widget.topBarBasketValuesTooltip")
             ->withDefaultValue("sum")
@@ -104,71 +104,73 @@ class PresetHeaderWidget extends BaseWidget
 
 
         //  Navigation Configuration
-//        $settingsFactory->createCustomClass();
-//
-//        $settingsFactory->createCheckbox('isFixed')
-//            ->withName('Widget.navigationIsFixedLabel')
-//            ->withDefaultValue(true);
-//
-//        $settingsFactory->createSelect('navigationStyle')
-//            ->withName('Widget.navigationNavigationStyleLabel')
-//            ->withTooltip('Widget.navigationNavigationStyleTooltip')
-//            ->withDefaultValue('normal')
-//            ->withListBoxValues(
-//                ValueListFactory::make()
-//                    ->addEntry('normal', 'Widget.navigationNavigationStyleNormal')
-//                    ->addEntry('megaMenu', 'Widget.navigationNavigationStyleMegaMenu')
-//                    ->toArray()
-//            );
+        $navigationContainer = $settingsFactory->createVerticalContainer('NavigationContainers')
+            ->withName('Navigation Settings');
 
-//        $settingsFactory->createSelect('megaMenuLevels')
-//            ->withName('Widget.navigationMegaMenuLevelsLabel')
-//            ->withTooltip('Widget.navigationMegaMenuLevelsTooltip')
-//            ->withDefaultValue(2)
-//            ->withCondition("navigationStyle === 'megaMenu'")
-//            ->withListBoxValues(
-//                ValueListFactory::make()
-//                    ->addEntry(2, 'Widget.navigationMegaMenuLevels2')
-//                    ->addEntry(3, 'Widget.navigationMegaMenuLevels3')
-//                    ->addEntry(4, 'Widget.navigationMegaMenuLevels4')
-//                    ->toArray()
-//            );
-//
-//        $maxItemsContainer = $settingsFactory->createVerticalContainer('megaMenuMaxItems')
-//            ->withName('Widget.navigationMegaMenuMaxItemsLabel')
-//            ->children;
-//
-//        $maxItemsContainer->createNumber('stage1')
-//            ->withName('Widget.navigationMegaMenuMaxItemsStage1Label')
-//            ->withTooltip('Widget.navigationMegaMenuMaxItemsStage1Tooltip')
-//            ->withDefaultValue(30);
-//
-//        $maxItemsContainer->createNumber('stage2')
-//            ->withName('Widget.navigationMegaMenuMaxItemsStage2Label')
-//            ->withTooltip('Widget.navigationMegaMenuMaxItemsStage2Tooltip')
-//            ->withDefaultValue(3)
-//            ->withCondition('navigationStyle === "megaMenu" && megaMenuLevels >= 3');
-//
-//        $maxItemsContainer->createNumber('stage3')
-//            ->withName('Widget.navigationMegaMenuMaxItemsStage3Label')
-//            ->withTooltip('Widget.navigationMegaMenuMaxItemsStage3Tooltip')
-//            ->withDefaultValue(2)
-//            ->withCondition('navigationStyle === "megaMenu" && megaMenuLevels >= 4');
-//
-//        $settingsFactory->createFile('companyLogoUrl')
-//            ->withName('Widget.navigationCompanyLogoUrlLabel')
-//            ->withTooltip('Widget.navigationCompanyLogoUrlTooltip')
-//            ->withDefaultValue('')
-//            ->withAllowedExtensions(array_merge(ImageBoxWidget::IMAGE_EXTENSIONS, ImageBoxWidget::MODERN_IMAGE_EXTENSIONS));
-//
-//        $settingsFactory->createFile('fallbackImagePath')
-//            ->withCondition('!!companyLogoUrl && /.?(\.webp)(?:$|\?)/.test(companyLogoUrl)')
-//            ->withName('Widget.navigationFallbackImagePathLabel')
-//            ->withTooltip('Widget.navigationFallbackImagePathTooltip')
-//            ->withDefaultValue('')
-//            ->withAllowedExtensions(ImageBoxWidget::IMAGE_EXTENSIONS);
-//
-//        $settingsFactory->createSpacing();
+        $navigationContainer->children->createCustomClass();
+        $navigationContainer->children->createCheckbox('isFixed')
+            ->withName('Widget.navigationIsFixedLabel')
+            ->withDefaultValue(true);
+
+        $navigationContainer->children->createSelect('navigationStyle')
+            ->withName('Widget.navigationNavigationStyleLabel')
+            ->withTooltip('Widget.navigationNavigationStyleTooltip')
+            ->withDefaultValue('normal')
+            ->withListBoxValues(
+                ValueListFactory::make()
+                    ->addEntry('normal', 'Widget.navigationNavigationStyleNormal')
+                    ->addEntry('megaMenu', 'Widget.navigationNavigationStyleMegaMenu')
+                    ->toArray()
+            );
+
+        $navigationContainer->children->createSelect('megaMenuLevels')
+            ->withName('Widget.navigationMegaMenuLevelsLabel')
+            ->withTooltip('Widget.navigationMegaMenuLevelsTooltip')
+            ->withDefaultValue(2)
+            ->withCondition("navigationStyle === 'megaMenu'")
+            ->withListBoxValues(
+                ValueListFactory::make()
+                    ->addEntry(2, 'Widget.navigationMegaMenuLevels2')
+                    ->addEntry(3, 'Widget.navigationMegaMenuLevels3')
+                    ->addEntry(4, 'Widget.navigationMegaMenuLevels4')
+                    ->toArray()
+            );
+
+        $maxItemsContainer = $navigationContainer->children->createVerticalContainer('megaMenuMaxItems')
+            ->withName('Widget.navigationMegaMenuMaxItemsLabel')
+            ->children;
+
+        $maxItemsContainer->createNumber('stage1')
+            ->withName('Widget.navigationMegaMenuMaxItemsStage1Label')
+            ->withTooltip('Widget.navigationMegaMenuMaxItemsStage1Tooltip')
+            ->withDefaultValue(30);
+
+        $maxItemsContainer->createNumber('stage2')
+            ->withName('Widget.navigationMegaMenuMaxItemsStage2Label')
+            ->withTooltip('Widget.navigationMegaMenuMaxItemsStage2Tooltip')
+            ->withDefaultValue(3)
+            ->withCondition('navigationStyle === "megaMenu" && megaMenuLevels >= 3');
+
+        $maxItemsContainer->createNumber('stage3')
+            ->withName('Widget.navigationMegaMenuMaxItemsStage3Label')
+            ->withTooltip('Widget.navigationMegaMenuMaxItemsStage3Tooltip')
+            ->withDefaultValue(2)
+            ->withCondition('navigationStyle === "megaMenu" && megaMenuLevels >= 4');
+
+        $navigationContainer->children->createFile('companyLogoUrl')
+            ->withName('Widget.navigationCompanyLogoUrlLabel')
+            ->withTooltip('Widget.navigationCompanyLogoUrlTooltip')
+            ->withDefaultValue('')
+            ->withAllowedExtensions(array_merge(ImageBoxWidget::IMAGE_EXTENSIONS, ImageBoxWidget::MODERN_IMAGE_EXTENSIONS));
+
+        $navigationContainer->children->createFile('fallbackImagePath')
+            ->withCondition('!!companyLogoUrl && /.?(\.webp)(?:$|\?)/.test(companyLogoUrl)')
+            ->withName('Widget.navigationFallbackImagePathLabel')
+            ->withTooltip('Widget.navigationFallbackImagePathTooltip')
+            ->withDefaultValue('')
+            ->withAllowedExtensions(ImageBoxWidget::IMAGE_EXTENSIONS);
+
+        $navigationContainer->children->createSpacing();
 
 
 
