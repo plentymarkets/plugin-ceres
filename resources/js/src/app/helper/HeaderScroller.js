@@ -67,6 +67,7 @@ export default class HeaderScroller
 
         //    this.initialized = true;
         }
+        // eslint-disable-next-line no-console
         console.log("Removed");
     }
 
