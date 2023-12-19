@@ -6,7 +6,10 @@ const ApiService = require("../../services/ApiService");
 const state = () => ({
     shippingCountries: [],
     shippingCountryId: null,
-    euShippingCountries: []
+    euShippingCountries: [],
+    localeLoading: false,
+    // for AT and DE
+    localeClient: "DE"
 });
 
 const mutations =
@@ -15,7 +18,10 @@ const mutations =
         {
             state.shippingCountries = shippingCountries;
         },
-
+        setLocaleClient(state, localeClient)
+        {
+            state.localeClient = localeClient;
+        },
         setEuShippingCountries(state, euShippingCountries)
         {
             state.euShippingCountries = euShippingCountries;
@@ -29,6 +35,10 @@ const mutations =
             }
 
             state.shippingCountryId = shippingCountryId;
+        },
+        setIsLocaleLoading(state, isLocaleLoading)
+        {
+            state.localeLoading = !!isLocaleLoading;
         }
     };
 
@@ -38,6 +48,7 @@ const actions =
         {
             return new Promise((resolve, reject) =>
             {
+                commit("setIsLocaleLoading", true);
                 const oldShippingCountryId = state.shippingCountryId;
 
                 commit("setShippingCountryId", shippingCountryId);
@@ -50,13 +61,14 @@ const actions =
                             {
                                 setUrlParam({ openBasketPreview: 1 });
                             }
-
-                            window.location.reload();
+                            commit("setIsLocaleLoading", false);
+                            // window.location.reload();
                         }
                         resolve(data);
                     })
                     .fail(error =>
                     {
+                        commit("setIsLocaleLoading", false);
                         commit("setShippingCountryId", oldShippingCountryId);
                         reject(error);
                     });

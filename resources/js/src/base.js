@@ -33,10 +33,10 @@ window.ceresEnv = getUrlParams()["env"];
 // COMPONENTS
 // =========================
 Vue.component("add-item-to-basket-overlay", () => import("./app/components/basket/AddItemToBasketOverlay.vue"));
-
 Vue.component("add-to-basket", () => import("./app/components/basket/AddToBasket.vue"));
 Vue.component("basket-preview", () => import("./app/components/basket/BasketPreview.vue"));
 Vue.component("basket-totals", () => import("./app/components/basket/BasketTotals.vue"));
+Vue.component("shipping-costs", () => import("./app/components/basket/ShippingCosts.vue"));
 Vue.component("mail-changed-info", () => import("./app/components/basket/MailChangedInfo.vue"));
 Vue.component("coupon", () => import("./app/components/basket/Coupon.vue"));
 Vue.component("basket-list", () => import("./app/components/basket/list/BasketList.vue"));

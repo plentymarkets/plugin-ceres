@@ -1,46 +1,27 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[34],{
 
-/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/ItemPrice.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/item/ItemPrice.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/ItemImageCarousel.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/item/ItemImageCarousel.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helper/OrderPropertyHelper */ "./resources/js/src/app/helper/OrderPropertyHelper.js");
+/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.number.constructor.js */ "./node_modules/core-js/modules/es.number.constructor.js");
+/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.slice.js */ "./node_modules/core-js/modules/es.array.slice.js");
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
+
 //
 //
 //
@@ -80,78 +61,165 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "item-price",
+  name: "item-image-carousel",
   props: {
-    showCrossPrice: {
+    maxQuantity: {
+      type: Number,
+      default: 10
+    },
+    imageUrlAccessor: {
+      type: String,
+      default: "url"
+    },
+    showThumbs: {
       type: Boolean,
       default: true
+    },
+    showDots: {
+      type: Boolean,
+      default: true
+    },
+    animationStyle: {
+      type: String,
+      default: "standard"
+    },
+    pluginPath: {
+      type: String,
+      default: ""
     }
-  },
-  data: function data() {
-    return {
-      showDetails: false
-    };
   },
   inject: {
     itemId: {
       default: null
     }
   },
+  data: function data() {
+    return {
+      currentItem: 0,
+      initialized: false
+    };
+  },
   computed: {
     currentVariation: function currentVariation() {
-      console.log("Var loaded");
       return this.$store.getters["".concat(this.itemId, "/currentItemVariation")];
     },
-    hasCrossPrice: function hasCrossPrice() {
-      var hasRrpPrice = !!this.currentVariation.prices.rrp && this.currentVariation.prices.rrp !== null && this.currentVariation.prices.rrp.unitPrice.value > this.currentVariation.prices.default.unitPrice.value;
-      return hasRrpPrice;
+    carouselImages: function carouselImages() {
+      return this.$options.filters.itemImages(this.currentVariation.images, "urlPreview").slice(0, this.maxQuantity);
     },
-    savePercent: function savePercent() {
-      if (this.currentVariation.prices.rrp === null || this.currentVariation.prices.default === null) return 0;
-      if (this.currentVariation.prices.default.price.value >= this.currentVariation.prices.rrp.price.value) return 0;
-      return (1 - this.currentVariation.prices.default.price.value / this.currentVariation.prices.rrp.price.value) * 100;
-    },
-    hasSpecialOffer: function hasSpecialOffer() {
-      return !!this.currentVariation.prices.specialOffer;
-    },
-    variationGraduatedPrice: function variationGraduatedPrice() {
-      return this.$store.getters["".concat(this.itemId, "/variationGraduatedPrice")];
-    },
-    variationTotalPrice: function variationTotalPrice() {
-      return this.$store.getters["".concat(this.itemId, "/variationTotalPrice")];
-    },
-    showDynamicPrice: function showDynamicPrice() {
-      var state = this.$store.state.items[this.itemId];
-      return App.config.item.showPleaseSelect && App.isCheapestSorting && state.variationSelect && !state.variationSelect.isVariationSelected && (state.pleaseSelectVariationId === this.currentVariation.variation.id || state.pleaseSelectVariationId === 0);
-    },
-    propertiesWithAdditionalCostsVisible: function propertiesWithAdditionalCostsVisible() {
-      var _this = this;
-
-      return this.currentVariation.properties.filter(function (entry) {
-        var property = entry.property;
-        return property && property.isShownAsAdditionalCosts && property.isShownOnItemPage && (!property.isOderProperty && !App.useVariationOrderProperties || _this.isVariationOrderPropertyRequiredPreselected(property));
-      });
+    singleImages: function singleImages() {
+      return this.$options.filters.itemImages(this.currentVariation.images, this.imageUrlAccessor).slice(0, this.maxQuantity);
     }
   },
+  watch: {
+    currentVariation: {
+      handler: function handler(val, oldVal) {
+        var _this = this;
+
+        if (val !== oldVal) {
+          setTimeout(function () {
+            _this.reInitialize();
+          }, 1);
+        }
+      },
+      deep: true
+    }
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    this.$nextTick(function () {
+      _this2.initCarousel();
+
+      _this2.initThumbCarousel();
+    });
+  },
   methods: {
-    isVariationOrderPropertyRequiredPreselected: function isVariationOrderPropertyRequiredPreselected(property) {
-      return property.isRequired && property.isPreSelected && property.isOderProperty && App.useVariationOrderProperties;
+    getImageCount: function getImageCount() {
+      return this.carouselImages.length > this.maxQuantity ? this.maxQuantity : this.carouselImages.length;
     },
-    hasTax: function hasTax(property) {
-      return Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_1__["hasVat"])(property);
+    reInitialize: function reInitialize() {
+      var $owl = $(this.$refs.single);
+      $owl.trigger("destroy.owl.carousel");
+      $owl.html($owl.find(".owl-stage-outer").html()).removeClass("owl-loaded");
+      $owl.find(".owl-item").remove();
+      var $thumbs = $(this.$refs.thumbs);
+      $thumbs.trigger("destroy.owl.carousel");
+      $thumbs.html($thumbs.find(".owl-stage-outer").html()).removeClass("owl-loaded");
+      $thumbs.find(".owl-item").remove();
+      this.initCarousel();
+      this.initThumbCarousel();
     },
-    toggleDetails: function toggleDetails() {
-      this.showDetails = !this.showDetails;
+    initCarousel: function initCarousel() {
+      var _this3 = this;
+
+      var imageCount = this.getImageCount();
+      var carouselSettings = {
+        autoHeight: true,
+        dots: this.showDots,
+        items: 1,
+        lazyLoad: true,
+        rewind: true,
+        margin: 10,
+        mouseDrag: imageCount > 1,
+        nav: imageCount > 1,
+        navClass: ["owl-single-item-nav left carousel-control", "owl-single-item-nav right carousel-control"],
+        navContainerClass: "",
+        navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
+        smartSpeed: 350,
+        onChanged: function onChanged(event) {
+          var $thumb = $(_this3.$refs.thumbs);
+          $thumb.trigger("to.owl.carousel", [event.page.index, 350]);
+        },
+        onInitialized: function onInitialized(event) {
+          _this3.initialized = true;
+        }
+      };
+
+      if (this.animationStyle !== "standard") {
+        carouselSettings.animateOut = this.animationStyle;
+      }
+
+      $(this.$refs.single).owlCarousel(carouselSettings);
+      $(this.$refs.single).on("changed.owl.carousel", function (event) {
+        _this3.currentItem = event.page.index;
+      });
+    },
+    initThumbCarousel: function initThumbCarousel() {
+      $(this.$refs.thumbs).owlCarousel({
+        autoHeight: true,
+        dots: false,
+        items: 5,
+        lazyLoad: true,
+        loop: false,
+        margin: 10,
+        mouseDrag: false,
+        center: false,
+        nav: true,
+        navClass: ["owl-single-item-nav left carousel-control", "owl-single-item-nav right carousel-control"],
+        navContainerClass: "",
+        navText: ["<i class=\"owl-single-item-control fa fa-chevron-left\" aria-hidden=\"true\"></i>", "<i class=\"owl-single-item-control fa fa-chevron-right\" aria-hidden=\"true\"></i>"],
+        smartSpeed: 350
+      });
+    },
+    goTo: function goTo(index) {
+      var $owl = $(this.$refs.single);
+      $owl.trigger("to.owl.carousel", [index, 350]);
+    },
+    getAltText: function getAltText(image) {
+      return image && image.alternate ? image.alternate : this.$options.filters.itemName(this.currentVariation);
+    },
+    getImageName: function getImageName(image) {
+      return image && image.name ? image.name : this.$options.filters.itemName(this.currentVariation);
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/ItemPrice.vue?vue&type=template&id=27592de8&":
-/*!*************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/item/ItemPrice.vue?vue&type=template&id=27592de8& ***!
-  \*************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/ItemImageCarousel.vue?vue&type=template&id=5285279e&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/item/ItemImageCarousel.vue?vue&type=template&id=5285279e& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -166,236 +234,158 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "variationPrices bkr-cc",
-      class: { "has-crossprice": _vm.hasCrossPrice }
+      staticClass: "bkr-cc",
+      attrs: { itemscope: "", itemtype: "http://schema.org/Thing" }
     },
     [
-      _vm.savePercent > 0
-        ? _c("span", { staticClass: "percent" }, [
-            _vm._v(
-              "\n          Sie sparen " +
-                _vm._s(_vm._f("numberFormat")(_vm.savePercent, 2, ",")) +
-                "%\n        "
-            )
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.showCrossPrice && _vm.hasCrossPrice
-        ? _c(
-            "span",
-            {
-              staticClass: "text-muted",
-              class: { "is-special-offer": _vm.hasSpecialOffer },
-              attrs: { id: "itemmrp" }
-            },
-            [
-              _vm._v(
-                "\n            " +
-                  _vm._s(
-                    _vm.$translate("biokinderDesign::Template.itemInstedOf")
-                  ) +
-                  "\n            "
-              ),
-              _c("del", { staticClass: "small text-appearance" }, [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(
-                      _vm._f("itemCrossPrice")(
-                        _vm.currentVariation.prices.rrp.unitPrice.formatted
-                      )
-                    ) +
-                    "\n            "
-                )
-              ])
-            ]
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "span",
-        { staticClass: "singleprice", class: { colorred: _vm.hasCrossPrice } },
-        [
-          _c(
-            "span",
-            [
-              _vm.showDynamicPrice
-                ? [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(
-                          _vm.$translate(
-                            "Ceres::Template.dynamicVariationPrice",
-                            {
-                              price: _vm.$options.filters.currency(
-                                _vm.variationTotalPrice,
-                                _vm.currentVariation.prices.default.currency
-                              )
-                            }
-                          )
-                        ) +
-                        "\n                "
-                    )
-                  ]
-                : [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(
-                          _vm._f("currency")(
-                            _vm.variationTotalPrice,
-                            _vm.currentVariation.prices.default.currency
-                          )
-                        ) +
-                        "\n                "
-                    )
-                  ]
-            ],
-            2
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "clearer" }),
-      _vm._v(" "),
-      _vm.currentVariation.unit &&
-      _vm.currentVariation.variation.mayShowUnitPrice
-        ? _c(
-            "div",
-            {
-              staticClass: "base-price text-muted my-1",
-              class: {
-                "is-single-piece":
-                  _vm.currentVariation.unit &&
-                  _vm.currentVariation.unit.content === 1 &&
-                  _vm.currentVariation.unit.unitOfMeasurement === "C62"
-              }
-            },
-            [
-              _vm._v(
-                "\n\n                " +
-                  _vm._s(_vm.$translate("Ceres::Template.singleItemContent")) +
-                  ":\n                "
-              ),
-              _c("span", [
-                _vm._v(
-                  _vm._s(
-                    _vm._f("numberFormat")(_vm.currentVariation.unit.content)
-                  ) + " "
-                )
-              ]),
-              _vm._v(" "),
-              _c("span", [
-                _vm._v(_vm._s(_vm.currentVariation.unit.names.name))
-              ]),
-              _vm._v("\n                 | \n                "),
-              _c("span", { staticClass: "base-price-value" }, [
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(
-                      _vm._f("specialOffer")(
-                        _vm.variationGraduatedPrice.basePrice,
-                        _vm.currentVariation.prices,
-                        "basePrice"
-                      )
-                    ) +
-                    "\n                "
-                )
-              ])
-            ]
-          )
-        : _vm._e(),
-      _vm._v(" "),
       _c(
         "div",
-        { staticClass: "shippinginfo" },
-        [
-          _c("span", { on: { click: _vm.toggleDetails } }, [
-            _vm._v(
-              "\n                " +
-                _vm._s(_vm.$translate("Ceres::Template.singleItemInclVAT")) +
-                "\n                "
-            ),
+        {
+          ref: "single",
+          staticClass:
+            "bkr-cc single-carousel owl-carousel owl-theme owl-single-item mt-0",
+          attrs: { id: "imageGallery" }
+        },
+        _vm._l(_vm.singleImages, function(image) {
+          return _c("div", { staticClass: "prop-1-1 slide-owl-wrap" }, [
             _c(
-              "svg",
+              "a",
               {
-                staticClass: "css-i6dzq1",
                 attrs: {
-                  viewBox: "0 0 24 24",
-                  width: "14",
-                  height: "14",
-                  stroke: "currentColor",
-                  "stroke-width": "2",
-                  fill: "none",
-                  "stroke-linecap": "round",
-                  "stroke-linejoin": "round"
+                  href: image.url,
+                  "data-fancybox": "single-item-image" + _vm._uid
                 }
               },
               [
-                _c("circle", { attrs: { cx: "12", cy: "12", r: "10" } }),
-                _c("line", {
-                  attrs: { x1: "12", y1: "16", x2: "12", y2: "12" }
+                _c("img", {
+                  staticClass: "owl-lazy",
+                  attrs: {
+                    "data-src": image.url,
+                    alt: _vm.getAltText(image),
+                    title: _vm.getImageName(image)
+                  }
                 }),
-                _c("line", {
-                  attrs: { x1: "12", y1: "8", x2: "12.01", y2: "8" }
-                })
+                _c("div", { staticClass: "magnifier" })
               ]
             )
-          ]),
-          _vm._v(" "),
-          _c("transition", { attrs: { name: "slide" } }, [
-            _vm.showDetails
-              ? _c(
-                  "div",
-                  { staticClass: "details" },
-                  [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(
-                          _vm.$translate("Ceres::Template.singleItemExclusive")
-                        ) +
-                        "  "
-                    ),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "openPorto",
-                        attrs: {
-                          "data-toggle": "modal",
-                          href: "#shippingscosts",
-                          title: _vm.$translate(
-                            "Ceres::Template.singleItemShippingCosts"
-                          )
-                        }
-                      },
-                      [
-                        _vm._v("CO"),
-                        _c("sub", [_vm._v("2")]),
-                        _vm._v(" neutraler Versand")
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _vm._t("additional-content-after-vat"),
-                    _vm._v(" "),
-                    _vm.showCrossPrice && _vm.hasCrossPrice
-                      ? _c("span", [
-                          _c("br"),
-                          _vm._v(
-                            "Zuletzt niedrigster Preis " +
-                              _vm._s(
-                                _vm.currentVariation.prices.default.lowestPrice
-                                  .formatted
-                              ) +
-                              "\n                    "
-                          )
-                        ])
-                      : _vm._e()
-                  ],
-                  2
-                )
-              : _vm._e()
           ])
-        ],
-        1
-      )
+        }),
+        0
+      ),
+      _vm._v(" "),
+      _vm.showThumbs
+        ? _c(
+            "div",
+            {
+              ref: "thumbs",
+              staticClass: "owl-thumbs owl-carousel owl-theme owl-single-item",
+              attrs: { id: "thumb-carousel" }
+            },
+            [
+              _vm.currentVariation.variationProperties &&
+              _vm.currentVariation.variationProperties.filter(function(prop) {
+                return prop.id == 4
+              })[0]
+                ? [
+                    _vm._l(
+                      _vm.currentVariation.variationProperties
+                        .filter(function(prop) {
+                          return prop.id == 4
+                        })[0]
+                        .properties.filter(function(prop) {
+                          return prop.id == 192
+                        }),
+                      function(property) {
+                        return [
+                          property.values.value != ""
+                            ? _c("div", { staticClass: "prop-1-1" }, [
+                                _c("div", { staticClass: "image-container" }, [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "videoButton text-center",
+                                      attrs: {
+                                        "data-toggle": "modal",
+                                        "data-target": "#videoModal"
+                                      }
+                                    },
+                                    [
+                                      _c("img", {
+                                        attrs: {
+                                          src:
+                                            "https://cdn.bio-kinder.de/frontend/images/static/playbtn.svg",
+                                          alt: "Video wiedergeben"
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("span", [
+                                        _vm._v("Video "),
+                                        _c(
+                                          "svg",
+                                          {
+                                            staticClass: "css-i6dzq1",
+                                            attrs: {
+                                              viewBox: "0 0 24 24",
+                                              width: "24",
+                                              height: "24",
+                                              stroke: "currentColor",
+                                              "stroke-width": "2",
+                                              fill: "none",
+                                              "stroke-linecap": "round",
+                                              "stroke-linejoin": "round"
+                                            }
+                                          },
+                                          [
+                                            _c("polygon", {
+                                              attrs: {
+                                                points: "5 3 19 12 5 21 5 3"
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      ])
+                                    ]
+                                  )
+                                ])
+                              ])
+                            : _vm._e()
+                        ]
+                      }
+                    )
+                  ]
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.carouselImages, function(imagePreview, index) {
+                return _c("div", { staticClass: "prop-1-1" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "image-container",
+                      on: {
+                        click: function($event) {
+                          return _vm.goTo(index)
+                        }
+                      }
+                    },
+                    [
+                      _c("lazy-img", {
+                        class: { active: _vm.currentItem === index },
+                        attrs: {
+                          "picture-class": "owl-thumb border-appearance",
+                          "image-url": imagePreview.url,
+                          alt: _vm.getAltText(imagePreview),
+                          title: _vm.getImageName(imagePreview)
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ])
+              })
+            ],
+            2
+          )
+        : _vm._e()
     ]
   )
 }
@@ -406,17 +396,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/src/app/components/item/ItemPrice.vue":
-/*!************************************************************!*\
-  !*** ./resources/js/src/app/components/item/ItemPrice.vue ***!
-  \************************************************************/
+/***/ "./resources/js/src/app/components/item/ItemImageCarousel.vue":
+/*!********************************************************************!*\
+  !*** ./resources/js/src/app/components/item/ItemImageCarousel.vue ***!
+  \********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ItemPrice_vue_vue_type_template_id_27592de8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ItemPrice.vue?vue&type=template&id=27592de8& */ "./resources/js/src/app/components/item/ItemPrice.vue?vue&type=template&id=27592de8&");
-/* harmony import */ var _ItemPrice_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ItemPrice.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/item/ItemPrice.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ItemImageCarousel_vue_vue_type_template_id_5285279e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ItemImageCarousel.vue?vue&type=template&id=5285279e& */ "./resources/js/src/app/components/item/ItemImageCarousel.vue?vue&type=template&id=5285279e&");
+/* harmony import */ var _ItemImageCarousel_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ItemImageCarousel.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/item/ItemImageCarousel.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -426,9 +416,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ItemPrice_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ItemPrice_vue_vue_type_template_id_27592de8___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ItemPrice_vue_vue_type_template_id_27592de8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ItemImageCarousel_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ItemImageCarousel_vue_vue_type_template_id_5285279e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ItemImageCarousel_vue_vue_type_template_id_5285279e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -438,38 +428,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/src/app/components/item/ItemPrice.vue"
+component.options.__file = "resources/js/src/app/components/item/ItemImageCarousel.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/src/app/components/item/ItemPrice.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************!*\
-  !*** ./resources/js/src/app/components/item/ItemPrice.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************/
+/***/ "./resources/js/src/app/components/item/ItemImageCarousel.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/src/app/components/item/ItemImageCarousel.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemPrice_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ItemPrice.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/ItemPrice.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemPrice_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemImageCarousel_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ItemImageCarousel.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/ItemImageCarousel.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemImageCarousel_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/src/app/components/item/ItemPrice.vue?vue&type=template&id=27592de8&":
-/*!*******************************************************************************************!*\
-  !*** ./resources/js/src/app/components/item/ItemPrice.vue?vue&type=template&id=27592de8& ***!
-  \*******************************************************************************************/
+/***/ "./resources/js/src/app/components/item/ItemImageCarousel.vue?vue&type=template&id=5285279e&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/src/app/components/item/ItemImageCarousel.vue?vue&type=template&id=5285279e& ***!
+  \***************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemPrice_vue_vue_type_template_id_27592de8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ItemPrice.vue?vue&type=template&id=27592de8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/ItemPrice.vue?vue&type=template&id=27592de8&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemPrice_vue_vue_type_template_id_27592de8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemImageCarousel_vue_vue_type_template_id_5285279e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ItemImageCarousel.vue?vue&type=template&id=5285279e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/ItemImageCarousel.vue?vue&type=template&id=5285279e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemImageCarousel_vue_vue_type_template_id_5285279e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemPrice_vue_vue_type_template_id_27592de8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemImageCarousel_vue_vue_type_template_id_5285279e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
