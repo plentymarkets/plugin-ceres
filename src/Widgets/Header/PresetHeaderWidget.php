@@ -25,6 +25,14 @@ class PresetHeaderWidget extends BaseWidget
             ->withType(WidgetTypes::HEADER)
             ->withCategory(WidgetCategories::HEADER)
             ->withPosition(0)
+              ->withAllowedNestingTypes(
+                            [
+                                WidgetTypes::STRUCTURE,
+                                WidgetTypes::STATIC,
+                                WidgetTypes::DEFAULT,
+                                WidgetTypes::ITEM_SEARCH
+                            ]
+                        )
             ->toArray();
     }
 
