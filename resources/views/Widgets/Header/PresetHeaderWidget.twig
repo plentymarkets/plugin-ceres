@@ -50,7 +50,42 @@
                                 </div>
                             {% endif %}
                             {{ Twig.print(Twig.call("LayoutContainer.show", ["Ceres::Header.LeftSide"])) }}
-                            <div class="top-bar-items">
+                            <div class="top-bar-items {% if searchStyle == "permanent" %}search-permanent d-flex flex-grow-1 flex-column-reverse flex-md-row{% endif %}">
+                                {% if searchStyle == "permanent" %}
+                                    {{ Twig.if("overrideSearchBar | trim is empty") }}
+                                    <div class="always-visible-search flex-grow-1">
+                                        {% if not isPreview %}<lazy-hydrate when-idle>{% endif %}
+                                            <item-search>
+                                                <div class="position-relative d-flex flex-grow-1">
+                                                    <input type="search" class="search-input px-3 py-2 flex-grow-1" aria-label="{{ Twig.print('trans("Ceres::Template.headerSearchTerm", [], "de_DE")') }}">
+                                                    <button class="search-submit px-3" type="submit" aria-label="{{ Twig.print('trans("Ceres::Template.headerSearch")') }}">
+                                                        <i class="fa fa-search"></i>
+                                                    </button>
+                                                </div>
+
+                                                {% if isPreview %}
+                                                    <template #search-button>
+                                                        <button class="search-submit px-3" type="submit" {{ WidgetHelper.makeClickable(isPreview) }} data-toggle="collapse" href="#search-suggestions_{{ uid }}" role="button">
+                                                            <i class="fa fa-search"></i>
+                                                        </button>
+                                                    </template>
+                                                {% endif %}
+
+                                                {% if isPreview or children is defined and children.suggestions | trim is not empty %}
+                                                    <template #autocomplete-suggestions>
+                                                        <div class="autocomplete-suggestions shadow bg-white w-100{% if isPreview %} collapse position-relative mh-100{% endif %}"
+                                                                {% if isPreview %} data-builder-child-container="suggestions" id="search-suggestions_{{ uid }}"{% endif %}>
+                                                            {{ children.suggestions | raw }}
+                                                        </div>
+                                                    </template>
+                                                {% endif %}
+                                            </item-search>
+                                            {% if not isPreview %}</lazy-hydrate>{% endif %}
+                                    </div>
+                                    {{ Twig.else() }}
+                                    {{ Twig.print("overrideSearchBar | raw") }}
+                                    {{ Twig.endif() }}
+                                {% endif %}
                                 <div class="controls">
                                     <ul id="controlsList" class="controls-list mb-0 d-flex list-inline pl-2 pl-sm-1 pl-md-0">
                                         <li class="list-inline-item control-user">
