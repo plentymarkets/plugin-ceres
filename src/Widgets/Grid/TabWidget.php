@@ -41,7 +41,7 @@ class TabWidget extends GridWidget
         $settings->createAppearance();
 
         $container = $settings->createVerticalContainer("tabs")
-            ->withList(1)
+            ->withList(1,10)
             ->withDefaultValue(
                 [
                     [
