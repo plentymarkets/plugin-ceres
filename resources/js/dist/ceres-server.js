@@ -1785,13 +1785,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -43158,139 +43151,59 @@ var render = function() {
     },
     [
       _vm._ssrNode(
-        '<div id="shippingscosts" role="dialog" aria-modal="true" tabindex="-1" class="modal fade">',
-        "</div>",
-        [
-          _vm._ssrNode('<div class="modal-dialog">', "</div>", [
-            _vm._ssrNode(
-              '<div class="modal-content">',
-              "</div>",
-              [
-                _vm._ssrNode(
-                  '<div class="modal-header"><div class="modal-title h3">Versandkosten</div> <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button></div> '
-                ),
-                _vm._ssrNode(
-                  '<div class="modal-body">',
-                  "</div>",
-                  [
-                    _vm._ssrNode(
-                      "<div" +
-                        _vm._ssrClass(
-                          null,
-                          "buttonHolder loc_" + _vm.localization.localeClient
-                        ) +
-                        ">" +
-                        _vm._ssrList(_vm.regions, function(region, index) {
-                          return (
-                            "<button" +
-                            _vm._ssrClass(null, [
-                              "btn",
-                              "btn-bkm-white",
-                              region.class,
-                              { active: _vm.activeRegion === index }
-                            ]) +
-                            ">" +
-                            _vm._ssrEscape(
-                              "\n                            " +
-                                _vm._s(region.label) +
-                                "\n                        "
-                            ) +
-                            "</button>"
-                          )
-                        }) +
-                        "</div> "
-                    ),
-                    _vm._ssrNode(
-                      "<div" +
-                        _vm._ssrClass("contentHolder", {
-                          loading: _vm.isLoading
-                        }) +
-                        ">",
-                      "</div>",
-                      [
-                        _vm._ssrNode(
-                          '<div class="table">' +
-                            _vm._ssrList(_vm.shippingServices, function(
-                              service
-                            ) {
-                              return (
-                                "<div" +
-                                _vm._ssrClass("line", {
-                                  active: _vm.shippingProvider == service.type
-                                }) +
-                                '><span class="nameLogo">' +
-                                (service.gogreen
-                                  ? '<img src="https://cdn.bio-kinder.de/frontend/resources/img/footer/gogreen.svg" class="gogreen">'
-                                  : "<!---->") +
-                                ' <span class="serviceName">' +
-                                _vm._ssrEscape(_vm._s(service.name)) +
-                                '</span></span> <span class="cost">' +
-                                _vm._ssrEscape(_vm._s(service.cost)) +
-                                "</span> " +
-                                (service.details
-                                  ? '<ul class="optionalDetails">' +
-                                    _vm._ssrList(service.details, function(
-                                      detail
-                                    ) {
-                                      return "<li>" + _vm._s(detail) + "</li>"
-                                    }) +
-                                    "</ul>"
-                                  : "<!---->") +
-                                "</div>"
-                              )
-                            }) +
-                            "</div> "
-                        ),
-                        _vm.basket.itemQuantity > 0
-                          ? _vm._ssrNode(
-                              '<div class="currentShippingCosts">',
-                              "</div>",
-                              [
-                                _vm._ssrNode(
-                                  '<div class="d-flex flex-column">',
-                                  "</div>",
-                                  [
-                                    _vm._ssrNode(
-                                      '<span class="nameLogo">Versandkosten für Ihren Warenkorb</span> '
-                                    ),
-                                    _c("shipping-country-select", {
-                                      attrs: {
-                                        disabled: _vm.isLoading,
-                                        "basket-select": true
-                                      }
-                                    })
-                                  ],
-                                  2
-                                ),
-                                _vm._ssrNode(
-                                  _vm._ssrEscape(
-                                    "\n                            " +
-                                      _vm._s(
-                                        _vm._f("currency")(
-                                          _vm.basket.shippingAmount
-                                        )
-                                      ) +
-                                      "\n                        "
-                                  )
-                                )
-                              ],
-                              2
-                            )
-                          : _vm._e(),
-                        _vm._ssrNode(
-                          ' <div class="details"><p>\n                                * Die Versandkosten variieren, je nach Größe und Gewicht der bestellten Artikel.\n                                Es fallen pro Bestellung einmalig die höchsten Versandkosten je nach Artikel an.\n                                Auf Anfrage senden wir Ihnen alle Paketsendung gerne auch mit unseren\n                                Speditions-Services zu.\n                            </p></div>'
-                        )
-                      ],
-                      2
-                    )
-                  ],
-                  2
-                )
-              ],
-              2
+        '<div id="shippingscosts" role="dialog" aria-modal="true" tabindex="-1" class="modal fade"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><div class="modal-title h3">Versandkosten</div> <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button></div> <div class="modal-body"><div' +
+          _vm._ssrClass(
+            null,
+            "buttonHolder loc_" + _vm.localization.localeClient
+          ) +
+          ">" +
+          _vm._ssrList(_vm.regions, function(region, index) {
+            return (
+              "<button" +
+              _vm._ssrClass(null, [
+                "btn",
+                "btn-bkm-white",
+                region.class,
+                { active: _vm.activeRegion === index }
+              ]) +
+              ">" +
+              _vm._ssrEscape(
+                "\n                            " +
+                  _vm._s(region.label) +
+                  "\n                        "
+              ) +
+              "</button>"
             )
-          ])
-        ]
+          }) +
+          "</div> <div" +
+          _vm._ssrClass("contentHolder", { loading: _vm.isLoading }) +
+          '><div class="table">' +
+          _vm._ssrList(_vm.shippingServices, function(service) {
+            return (
+              "<div" +
+              _vm._ssrClass("line", {
+                active: _vm.shippingProvider == service.type
+              }) +
+              '><span class="nameLogo">' +
+              (service.gogreen
+                ? '<img src="https://cdn.bio-kinder.de/frontend/resources/img/footer/gogreen.svg" class="gogreen">'
+                : "<!---->") +
+              ' <span class="serviceName">' +
+              _vm._ssrEscape(_vm._s(service.name)) +
+              '</span></span> <span class="cost">' +
+              _vm._ssrEscape(_vm._s(service.cost)) +
+              "</span> " +
+              (service.details
+                ? '<ul class="optionalDetails">' +
+                  _vm._ssrList(service.details, function(detail) {
+                    return "<li>" + _vm._s(detail) + "</li>"
+                  }) +
+                  "</ul>"
+                : "<!---->") +
+              "</div>"
+            )
+          }) +
+          '</div> <div class="details"><p>\n                                * Die Versandkosten variieren, je nach Größe und Gewicht der bestellten Artikel.\n                                Es fallen pro Bestellung einmalig die höchsten Versandkosten je nach Artikel an.\n                                Auf Anfrage senden wir Ihnen alle Paketsendung gerne auch mit unseren\n                                Speditions-Services zu.\n                            </p></div></div></div></div></div></div>'
       )
     ]
   )

@@ -91,13 +91,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -399,35 +392,6 @@ var render = function() {
                       }),
                       0
                     ),
-                    _vm._v(" "),
-                    _vm.basket.itemQuantity > 0
-                      ? _c("div", { staticClass: "currentShippingCosts" }, [
-                          _c(
-                            "div",
-                            { staticClass: "d-flex flex-column" },
-                            [
-                              _c("span", { staticClass: "nameLogo" }, [
-                                _vm._v("Versandkosten für Ihren Warenkorb")
-                              ]),
-                              _vm._v(" "),
-                              _c("shipping-country-select", {
-                                attrs: {
-                                  disabled: _vm.isLoading,
-                                  "basket-select": true
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(
-                                _vm._f("currency")(_vm.basket.shippingAmount)
-                              ) +
-                              "\n                        "
-                          )
-                        ])
-                      : _vm._e(),
                     _vm._v(" "),
                     _vm._m(1)
                   ]

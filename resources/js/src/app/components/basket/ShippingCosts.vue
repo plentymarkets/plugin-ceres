@@ -30,13 +30,6 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="currentShippingCosts" v-if="basket.itemQuantity > 0">
-                                <div class="d-flex flex-column">
-                                    <span class="nameLogo">Versandkosten für Ihren Warenkorb</span>
-                                    <shipping-country-select :disabled="isLoading" :basket-select="true"></shipping-country-select>
-                                </div>
-                                {{ basket.shippingAmount | currency }}
-                            </div>
                             <div class="details">
                                 <p>
                                     * Die Versandkosten variieren, je nach Größe und Gewicht der bestellten Artikel.
