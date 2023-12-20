@@ -1833,11 +1833,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     shippingProvider: function shippingProvider() {
-      if ([28, 50, 13, 20, 21, 15, 41, 57].includes(this.systemShippingProfile) && this.basket.shippingAmount > 0) return 'parcel';
+      if ([28, 50, 13, 20, 21, 15, 41, 57].includes(this.systemShippingProfile) && this.basket.itemQuantity > 0) return 'parcel';
       if ([7, 22, 23, 43, 44, 45].includes(this.systemShippingProfile)) return 'freight';
       if ([11, 46, 53].includes(this.systemShippingProfile)) return 'letter';
       if ([13].includes(this.systemShippingProfile)) return 'pickup';
-      return 'parcel';
+      return 'none';
     },
     shippingServices: function shippingServices() {
       var _services$this$active;

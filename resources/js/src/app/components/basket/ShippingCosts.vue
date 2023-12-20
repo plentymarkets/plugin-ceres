@@ -90,7 +90,7 @@ export default {
             return !!this.localization.euShippingCountries.find((country) => { return country.id === this.selectedCountryId });
         },
         shippingProvider() {
-            if ([28, 50, 13, 20, 21, 15, 41, 57].includes(this.systemShippingProfile) && this.basket.shippingAmount > 0) 
+            if ([28, 50, 13, 20, 21, 15, 41, 57].includes(this.systemShippingProfile) && this.basket.itemQuantity > 0) 
                 return 'parcel';
             
             if ([7, 22, 23, 43, 44, 45].includes(this.systemShippingProfile)) 
@@ -102,7 +102,7 @@ export default {
             if ([13].includes(this.systemShippingProfile)) 
                 return 'pickup';
             
-            return 'parcel';
+            return 'none';
         },
         shippingServices()
         {
