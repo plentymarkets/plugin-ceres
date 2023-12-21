@@ -15,11 +15,15 @@
 
 
 
-    <header id="page-header" class="sticky-top">
-
-                    {{ headerContainer | raw }}
-
-    </header>
+        <header style="display: contents;">
+            <div class="container-max" style="display: contents;">
+                <div class="row flex-row-reverse position-relative" style="display: contents;">
+                    <div id="page-header-parent" class="col-12 header-container" style="display: contents;" data-header-offset>
+                        {{ headerContainer | raw }}
+                    </div>
+                </div>
+            </div>
+        </header>
 
 
     {% endif %}
