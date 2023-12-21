@@ -63,6 +63,26 @@ class TabWidget extends GridWidget
                     [
                         "title" => null,
                         "uuid" => "4d679cf7-dede-48d5-bfb6-2f5365d1a915"
+                    ],
+                    [
+                        "title" => null,
+                        "uuid" => "1284bd65-a384-44b3-9cdc-63818f64a0f6"
+                    ],
+                    [
+                        "title" => null,
+                        "uuid" => "e38d6747-89c2-4af6-9376-8e5023099af7"
+                    ],
+                    [
+                        "title" => null,
+                        "uuid" => "de621509-43c1-48b8-a08f-529a1f9dff54"
+                    ],
+                    [
+                        "title" => null,
+                        "uuid" => "7d05fb0a-2c59-4a9e-9584-7be3dcf64ef6"
+                    ],
+                    [
+                        "title" => null,
+                        "uuid" => "4380b519-5387-4002-bb31-959244868e51"
                     ]
                 ]
             )
