@@ -1,34 +1,7 @@
-{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
-{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
-{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-{#{% set uid = uid() %}#}
-
-{#{% set customClass                  = widget.settings.customClass.mobile %}#}
-{#{% set isFixed                      = widget.settings.isFixed.mobile %}#}
-{#{% set enableLogin                  = widget.settings.enableLogin.mobile %}#}
-{#{% set enableRegistration           = widget.settings.enableRegistration.mobile %}#}
-{#{% set enableLanguageSelect         = widget.settings.enableLanguageSelect.mobile %}#}
-{#{% set enableShippingCountrySelect  = widget.settings.enableShippingCountrySelect.mobile %}#}
-{#{% set enableCurrencySelect         = widget.settings.enableCurrencySelect.mobile %}#}
-{#{% set searchStyle                  = widget.settings.searchStyle.mobile %}#}
-{#{% set enableWishList               = widget.settings.enableWishList.mobile %}#}
-{#{% set enableBasketPreview          = widget.settings.enableBasketPreview.mobile %}#}
-{#{% set basketValues                 = widget.settings.basketValues.mobile %}#}
-
-{#{{ Twig.import("LayoutContainer", "Ceres::PageDesign.Macros.LayoutContainer") }}#}
-{#{{ Twig.set("currencyFormat", Twig.call("config", ["Ceres.currency.format"])) }}#}
-{#{{ Twig.set("currencyFormatSelect", Twig.call("config", ["Ceres.currency.format_selection"])) }}#}
-{#{{ Twig.set("currencyData", Twig.call("services.checkout.getCurrencyData") ~ "[currencyFormat]") }}#}
-{#{{ Twig.set("activeCurrencies", Twig.call("config", ["Ceres.currency.available_currencies"]) ~ " | split(\", \")") }}#}
-{#{{ Twig.set("defaultLanguage", "webstoreConfig.defaultLanguage" ) }}#}
-{#{{ Twig.set("overrideSearchBar", Twig.call("LayoutContainer.show", ["Ceres::Search.SearchBar"])) }}#}
-{#{{ Twig.set("visibleFields", "ceresConfig.basket.previewData") }}#}
 
             <div class="sticky-top">
-
                 {% include "Ceres::Widgets.Header.TopBarWidget" %}
-
                 {% include "Ceres::PageDesign.Partials.Header.Navigation" %}
             </div>
                 {% cacheslot breadcrumbs %}
