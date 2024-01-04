@@ -14272,27 +14272,6 @@ html.safari { // stylelint-disable-next-line selector-no-qualifying-type
     }
 }
 
-html[data-framework="vue"] {
-  header {
-    display: contents;
-
-    .container-max {
-      display: inherit;
-
-      .row {
-        display: inherit;
-      }
-
-      .header-container {
-        display: inherit;
-      }
-
-      .parent-preset-container {
-        display: inherit;
-      }
-    }
-  }
-}
 .widget {
     margin-bottom: 2rem;
 
