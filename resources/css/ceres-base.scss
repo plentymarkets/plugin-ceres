@@ -9062,10 +9062,6 @@ button:focus {
     }
 }
 
-.app {
-    overflow-x: hidden;
-}
-
 .center-xy {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -14276,6 +14272,22 @@ html.safari { // stylelint-disable-next-line selector-no-qualifying-type
     }
 }
 
+header{
+  display: contents;
+
+  .container-max{
+    display: inherit;
+    .row{
+      display: inherit;
+    }
+    .header-container{
+      display: inherit;
+    }
+    .parent-preset-container{
+      display: inherit;
+    }
+  }
+}
 .widget {
     margin-bottom: 2rem;
 
