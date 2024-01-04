@@ -60,7 +60,7 @@
 
 {{ Twig.import("Tree", "Ceres::Category.Macros.CategoryTree") }}
 
-<!-- Start Top Bar -->
+<div class="parent-preset-container">
 <div class="top-bar header-fw{% if customClass | length > 0 %} {{ customClass }}{% endif %}">
     <div class="container-max px-0 pr-lg-3">
         <div class="row mx-0 flex-row-reverse position-relative">
@@ -384,9 +384,7 @@
         </div>
     </div>
 </div>
-<!-- End Top Bar -->
 
-<!-- Start Nav Bar -->
 <nav class="navbar header-fw p-0 border-bottom{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if navigationStyle == 'megaMenu' %} megamenu{% else %} normalmenu{%endif%}">
     <div class="container-max d-block{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
             {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
@@ -419,4 +417,4 @@
         </div>
     </div>
 </nav>
-<!-- End Nav Bar -->
+</div>
