@@ -39,7 +39,7 @@
 {{ Twig.set("overrideSearchBar", Twig.call("LayoutContainer.show", ["Ceres::Search.SearchBar"])) }}
 {{ Twig.set("visibleFields", "ceresConfig.basket.previewData") }}
 
-<div class="top-bar header-fw{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if widget.settings.customClass.mobile and not isFixed %} unfixed{% endif %}">
+<div class="top-bar header-fw{% if customClass | length > 0 %} {{ customClass }}{% endif %}">
 	<div class="container-max px-0 pr-lg-3">
 		<div class="row mx-0 flex-row-reverse position-relative">
 			{% if isPreview and not
