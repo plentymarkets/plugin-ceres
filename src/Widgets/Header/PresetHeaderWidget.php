@@ -42,10 +42,6 @@ class PresetHeaderWidget extends BaseWidget
 
         $topBarContainer->children->createCustomClass();
 
-        $topBarContainer->children->createCheckbox("isFixed")
-            ->withName("Widget.topBarIsFixedLabel")
-            ->withDefaultValue(true);
-
         $topBarContainer->children->createSelect("searchStyle")
             ->withName("Widget.topBarSearchStyleLabel")
             ->withTooltip("Widget.topBarSearchStyleTooltip")
@@ -104,9 +100,6 @@ class PresetHeaderWidget extends BaseWidget
             ->withName('Navigation Settings');
 
         $navigationContainer->children->createCustomClass();
-        $navigationContainer->children->createCheckbox('isFixed')
-            ->withName('Widget.navigationIsFixedLabel')
-            ->withDefaultValue(true);
 
         $navigationContainer->children->createSelect('navigationStyle')
             ->withName('Widget.navigationNavigationStyleLabel')
@@ -173,9 +166,6 @@ class PresetHeaderWidget extends BaseWidget
             ->withName('BreadCrumb Settings');
 
         $breadCrumbContainer->children->createCustomClass();
-        $breadCrumbContainer->children->createCheckbox("isFixed")
-            ->withName("Widget.breadcrumbIsFixedLabel")
-            ->withDefaultValue(true);
 
         $breadCrumbContainer->children->createCheckbox("showOnHomepage")
             ->withName("Widget.breadcrumbShowOnHomepageLabel")
