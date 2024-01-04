@@ -24,6 +24,42 @@
 {{ Twig.set("overrideSearchBar", Twig.call("LayoutContainer.show", ["Ceres::Search.SearchBar"])) }}
 {{ Twig.set("visibleFields", "ceresConfig.basket.previewData") }}
 
+
+
+{% set customClass = widget.settings.NavigationContainer.customClass.mobile %}
+{% set spacingSettings = widget.settings.NavigationContainer.spacing %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+
+
+{% set navigationStyle      = widget.settings.NavigationContainer.navigationStyle.mobile %}
+{% set companyLogoUrl       = widget.settings.NavigationContainer.companyLogoUrl.mobile %}
+{% set fallbackImagePath    = widget.settings.NavigationContainer.fallbackImagePath.mobile %}
+
+{% set megaMenuMaxItems1    = widget.settings.NavigationContainer.megaMenuMaxItems.stage1.mobile | default(30) %}
+{% set megaMenuMaxItems2    = widget.settings.NavigationContainer.megaMenuMaxItems.stage2.mobile | default(3) %}
+{% set megaMenuMaxItems3    = widget.settings.NavigationContainer.megaMenuMaxItems.stage3.mobile | default(2) %}
+{% set megaMenuMaxItems     = { "1": megaMenuMaxItems1, "2": megaMenuMaxItems2, "3": megaMenuMaxItems3 } %}
+
+{% if navigationStyle == 'megaMenu' %}
+    {% set megaMenuLevels       = widget.settings.NavigationContainer.megaMenuLevels.mobile | default(2) %}
+{% else %}
+    {% set megaMenuLevels = 2 %}
+{% endif %}
+
+{% if companyLogoUrl is empty %}
+    {% set companyLogoUrl = ceresConfig.header.companyLogo %}
+{% endif %}
+
+{% if fallbackImagePath | trim is empty %}
+    {% set fallbackImagePath = companyLogoUrl %}
+{% endif %}
+
+{{ Twig.set("logoUrl", companyLogoUrl | json_encode) }}
+{{ Twig.print("add_asset(logoUrl,'image')") }}
+
+{{ Twig.import("Tree", "Ceres::Category.Macros.CategoryTree") }}
+
 <!-- Start Top Bar -->
 <div class="top-bar header-fw{% if customClass | length > 0 %} {{ customClass }}{% endif %}">
     <div class="container-max px-0 pr-lg-3">
@@ -350,44 +386,8 @@
 </div>
 <!-- End Top Bar -->
 
-
-
-{% set customClass = widget.settings.NavigationContainer.customClass.mobile %}
-{% set spacingSettings = widget.settings.NavigationContainer.spacing %}
-{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
-{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
-
-{% set isFixed              = widget.settings.NavigationContainer.isFixed.mobile %}
-{% set navigationStyle      = widget.settings.NavigationContainer.navigationStyle.mobile %}
-{% set companyLogoUrl       = widget.settings.NavigationContainer.companyLogoUrl.mobile %}
-{% set fallbackImagePath    = widget.settings.NavigationContainer.fallbackImagePath.mobile %}
-
-{% set megaMenuMaxItems1    = widget.settings.NavigationContainer.megaMenuMaxItems.stage1.mobile | default(30) %}
-{% set megaMenuMaxItems2    = widget.settings.NavigationContainer.megaMenuMaxItems.stage2.mobile | default(3) %}
-{% set megaMenuMaxItems3    = widget.settings.NavigationContainer.megaMenuMaxItems.stage3.mobile | default(2) %}
-{% set megaMenuMaxItems     = { "1": megaMenuMaxItems1, "2": megaMenuMaxItems2, "3": megaMenuMaxItems3 } %}
-
-{% if navigationStyle == 'megaMenu' %}
-    {% set megaMenuLevels       = widget.settings.NavigationContainer.megaMenuLevels.mobile | default(2) %}
-{% else %}
-    {% set megaMenuLevels = 2 %}
-{% endif %}
-
-{% if companyLogoUrl is empty %}
-    {% set companyLogoUrl = ceresConfig.header.companyLogo %}
-{% endif %}
-
-{% if fallbackImagePath | trim is empty %}
-    {% set fallbackImagePath = companyLogoUrl %}
-{% endif %}
-
-{{ Twig.set("logoUrl", companyLogoUrl | json_encode) }}
-{{ Twig.print("add_asset(logoUrl,'image')") }}
-
-{{ Twig.import("Tree", "Ceres::Category.Macros.CategoryTree") }}
-
 <!-- Start Nav Bar -->
-<nav class="navbar header-fw p-0 border-bottom{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if navigationStyle == 'megaMenu' %} megamenu{% else %} normalmenu{%endif%}{% if not isFixed %} unfixed{% endif %}">
+<nav class="navbar header-fw p-0 border-bottom{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if navigationStyle == 'megaMenu' %} megamenu{% else %} normalmenu{%endif%}">
     <div class="container-max d-block{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
             {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
         <div class="row mx-0 position-relative d-flex">
