@@ -73,29 +73,7 @@
 {% set showOnContentCategory = widget.settings.BreadCrumbContainer.showOnContentCategory.mobile %}
 {% set showOnLegalPages      = widget.settings.BreadCrumbContainer.showOnLegalPages.mobile %}
 
-{{ Twig.do("cacheslot breadcrumbs") }}
 
-{% if not isPreview %}
-    {% if not showOnHomepage %}
-        {{ Twig.if("not services.template.isCurrentTemplate('tpl.home') and not services.template.isCurrentTemplate('tpl.home.category')") }}
-    {% endif %}
-
-    {% if not showOnMyAccount %}
-        {{ Twig.if("not services.template.isCurrentTemplate('tpl.my-account')") }}
-    {% endif %}
-
-    {% if not showOnCheckout %}
-        {{ Twig.if("not services.template.isCurrentTemplate('tpl.checkout')") }}
-    {% endif %}
-
-    {% if not showOnContentCategory %}
-        {{ Twig.if("not services.template.isCurrentTemplate('tpl.category.content')") }}
-    {% endif %}
-
-    {% if not showOnLegalPages %}
-        {{ Twig.if("not urls.isLegalPage()") }}
-    {% endif %}
-{% endif %}
 
 <div class="parent-preset-container sticky-top">
 <div class="top-bar header-fw{% if customClass | length > 0 %} {{ customClass }}{% endif %}">
@@ -455,7 +433,29 @@
     </div>
 </nav>
 
+    {{ Twig.do("cacheslot breadcrumbs") }}
 
+    {% if not isPreview %}
+        {% if not showOnHomepage %}
+            {{ Twig.if("not services.template.isCurrentTemplate('tpl.home') and not services.template.isCurrentTemplate('tpl.home.category')") }}
+        {% endif %}
+
+        {% if not showOnMyAccount %}
+            {{ Twig.if("not services.template.isCurrentTemplate('tpl.my-account')") }}
+        {% endif %}
+
+        {% if not showOnCheckout %}
+            {{ Twig.if("not services.template.isCurrentTemplate('tpl.checkout')") }}
+        {% endif %}
+
+        {% if not showOnContentCategory %}
+            {{ Twig.if("not services.template.isCurrentTemplate('tpl.category.content')") }}
+        {% endif %}
+
+        {% if not showOnLegalPages %}
+            {{ Twig.if("not urls.isLegalPage()") }}
+        {% endif %}
+    {% endif %}
     <div class="breadcrumbs header-fw{% if customClass | length > 0 %} {{ customClass }}{% endif %}">
         <nav class="small d-none d-md-block px-0" data-component="breadcrumbs" data-renderer="twig">
             {{ Twig.set('crumbs', '[]') }}
@@ -561,7 +561,6 @@
         </nav>
     </div>
 
-
     {% if not isPreview %}
         {% if not showOnHomepage %}
             {{ Twig.endif() }}
@@ -585,8 +584,6 @@
     {% endif %}
     {{ Twig.do("endcacheslot") }}
 
-
 </div>
-
 
 
