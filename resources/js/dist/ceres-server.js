@@ -1784,6 +1784,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -43158,7 +43159,7 @@ var render = function() {
           ">" +
           _vm._ssrList(_vm.regions, function(region, index) {
             return (
-              "<span" +
+              "<button" +
               _vm._ssrClass(null, [
                 "btn",
                 "btn-bkm-white",
@@ -43171,7 +43172,7 @@ var render = function() {
                   _vm._s(region.label) +
                   "\n                        "
               ) +
-              "</span>"
+              "</button>"
             )
           }) +
           "</div> <div" +
@@ -43179,7 +43180,11 @@ var render = function() {
           '><div class="table">' +
           _vm._ssrList(_vm.shippingServices, function(service) {
             return (
-              '<div class="line"><span class="nameLogo">' +
+              "<div" +
+              _vm._ssrClass("line", {
+                active: _vm.shippingProvider == service.type
+              }) +
+              '><span class="nameLogo">' +
               (service.gogreen
                 ? '<img src="https://cdn.bio-kinder.de/frontend/resources/img/footer/gogreen.svg" class="gogreen">'
                 : "<!---->") +
@@ -43198,7 +43203,7 @@ var render = function() {
               "</div>"
             )
           }) +
-          '</div> <div class="details"><p> * Die Versandkosten variieren, je nach Größe und Gewicht der bestellten Artikel.\n                                Es fallen pro Bestellung einmalig die höchsten Versandkosten je nach Artikel an.\n                                Auf Anfrage senden wir Ihnen alle Paketsendungen gerne auch mit unseren\n                                Speditions-Services zu.\n                            </p></div></div></div></div></div></div>'
+          '</div> <div class="details"><p>\n                                * Die Versandkosten variieren, je nach Größe und Gewicht der bestellten Artikel.\n                                Es fallen pro Bestellung einmalig die höchsten Versandkosten je nach Artikel an.\n                                Auf Anfrage senden wir Ihnen alle Paketsendungen gerne auch mit unseren\n                                Speditions-Services zu.\n                            </p></div></div></div></div></div></div>'
       )
     ]
   )

@@ -90,6 +90,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -307,7 +308,7 @@ var render = function() {
                   },
                   _vm._l(_vm.regions, function(region, index) {
                     return _c(
-                      "span",
+                      "button",
                       {
                         key: index,
                         class: [
@@ -318,7 +319,6 @@ var render = function() {
                         ],
                         on: {
                           click: function($event) {
-                            $event.preventDefault()
                             return _vm.setActiveRegion(index)
                           }
                         }
@@ -346,40 +346,49 @@ var render = function() {
                       "div",
                       { staticClass: "table" },
                       _vm._l(_vm.shippingServices, function(service) {
-                        return _c("div", { staticClass: "line" }, [
-                          _c("span", { staticClass: "nameLogo" }, [
-                            service.gogreen
-                              ? _c("img", {
-                                  staticClass: "gogreen",
-                                  attrs: {
-                                    src:
-                                      "https://cdn.bio-kinder.de/frontend/resources/img/footer/gogreen.svg"
-                                  }
-                                })
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _c("span", { staticClass: "serviceName" }, [
-                              _vm._v(_vm._s(service.name))
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "cost" }, [
-                            _vm._v(_vm._s(service.cost))
-                          ]),
-                          _vm._v(" "),
-                          service.details
-                            ? _c(
-                                "ul",
-                                { staticClass: "optionalDetails" },
-                                _vm._l(service.details, function(detail) {
-                                  return _c("li", {
-                                    domProps: { innerHTML: _vm._s(detail) }
+                        return _c(
+                          "div",
+                          {
+                            staticClass: "line",
+                            class: {
+                              active: _vm.shippingProvider == service.type
+                            }
+                          },
+                          [
+                            _c("span", { staticClass: "nameLogo" }, [
+                              service.gogreen
+                                ? _c("img", {
+                                    staticClass: "gogreen",
+                                    attrs: {
+                                      src:
+                                        "https://cdn.bio-kinder.de/frontend/resources/img/footer/gogreen.svg"
+                                    }
                                   })
-                                }),
-                                0
-                              )
-                            : _vm._e()
-                        ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "serviceName" }, [
+                                _vm._v(_vm._s(service.name))
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "cost" }, [
+                              _vm._v(_vm._s(service.cost))
+                            ]),
+                            _vm._v(" "),
+                            service.details
+                              ? _c(
+                                  "ul",
+                                  { staticClass: "optionalDetails" },
+                                  _vm._l(service.details, function(detail) {
+                                    return _c("li", {
+                                      domProps: { innerHTML: _vm._s(detail) }
+                                    })
+                                  }),
+                                  0
+                                )
+                              : _vm._e()
+                          ]
+                        )
                       }),
                       0
                     ),
@@ -424,7 +433,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "details" }, [
       _c("p", [
         _vm._v(
-          " * Die Versandkosten variieren, je nach Größe und Gewicht der bestellten Artikel.\n                                Es fallen pro Bestellung einmalig die höchsten Versandkosten je nach Artikel an.\n                                Auf Anfrage senden wir Ihnen alle Paketsendungen gerne auch mit unseren\n                                Speditions-Services zu.\n                            "
+          "\n                                * Die Versandkosten variieren, je nach Größe und Gewicht der bestellten Artikel.\n                                Es fallen pro Bestellung einmalig die höchsten Versandkosten je nach Artikel an.\n                                Auf Anfrage senden wir Ihnen alle Paketsendungen gerne auch mit unseren\n                                Speditions-Services zu.\n                            "
         )
       ])
     ])

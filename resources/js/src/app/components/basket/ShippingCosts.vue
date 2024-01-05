@@ -5,21 +5,21 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="modal-title h3">Versandkosten</div>
-                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
                     </div>
                     <div class="modal-body">
                         <div :class="'buttonHolder loc_' + localization.localeClient">
-                             <span
+                             <button
                                 v-for="(region, index) in regions"
                                 :key="index"
                                 :class="['btn', 'btn-bkm-white', region.class, { 'active': activeRegion === index }]"
-                                @click.prevent="setActiveRegion(index)">
+                                @click="setActiveRegion(index)">
                                 {{ region.label }}
-                            </span>
+                            </button>
                         </div>
                         <div class="contentHolder" :class="{'loading': isLoading }">
                             <div class="table">
-                                <div class="line" v-for="service in shippingServices">
+                                <div class="line" v-for="service in shippingServices" :class="{'active': shippingProvider == service.type}">
                                     <span class="nameLogo">
                                         <img v-if="service.gogreen" class="gogreen" src="https://cdn.bio-kinder.de/frontend/resources/img/footer/gogreen.svg" />
                                         <span class="serviceName">{{ service.name }}</span>
@@ -31,7 +31,8 @@
                                 </div>
                             </div>
                             <div class="details">
-                                <p> * Die Versandkosten variieren, je nach Größe und Gewicht der bestellten Artikel.
+                                <p>
+                                    * Die Versandkosten variieren, je nach Größe und Gewicht der bestellten Artikel.
                                     Es fallen pro Bestellung einmalig die höchsten Versandkosten je nach Artikel an.
                                     Auf Anfrage senden wir Ihnen alle Paketsendungen gerne auch mit unseren
                                     Speditions-Services zu.
