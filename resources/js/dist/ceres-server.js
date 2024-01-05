@@ -1924,6 +1924,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   })),
   methods: {
     setActiveRegion: function setActiveRegion(index) {
+      console.log("Setting active Region", index);
       this.activeRegion = index;
     },
     initModalEventListeners: function initModalEventListeners() {
@@ -43151,7 +43152,7 @@ var render = function() {
     },
     [
       _vm._ssrNode(
-        '<div id="shippingscosts" role="dialog" aria-modal="true" tabindex="-1" class="modal fade"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><div class="modal-title h3">Versandkosten</div> <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button></div> <div class="modal-body"><div' +
+        '<div id="shippingscosts" role="dialog" aria-modal="true" tabindex="-1" class="modal fade"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><div class="modal-title h3">Versandkosten</div> <a data-dismiss="modal" aria-hidden="true" class="close">×</a></div> <div class="modal-body"><div' +
           _vm._ssrClass(
             null,
             "buttonHolder loc_" + _vm.localization.localeClient
@@ -43180,11 +43181,7 @@ var render = function() {
           '><div class="table">' +
           _vm._ssrList(_vm.shippingServices, function(service) {
             return (
-              "<div" +
-              _vm._ssrClass("line", {
-                active: _vm.shippingProvider == service.type
-              }) +
-              '><span class="nameLogo">' +
+              '<div class="line"><span class="nameLogo">' +
               (service.gogreen
                 ? '<img src="https://cdn.bio-kinder.de/frontend/resources/img/footer/gogreen.svg" class="gogreen">'
                 : "<!---->") +
@@ -43203,7 +43200,7 @@ var render = function() {
               "</div>"
             )
           }) +
-          '</div> <div class="details"><p>\n                                * Die Versandkosten variieren, je nach Größe und Gewicht der bestellten Artikel.\n                                Es fallen pro Bestellung einmalig die höchsten Versandkosten je nach Artikel an.\n                                Auf Anfrage senden wir Ihnen alle Paketsendung gerne auch mit unseren\n                                Speditions-Services zu.\n                            </p></div></div></div></div></div></div>'
+          '</div> <div class="details"><p>\n                                * Die Versandkosten variieren, je nach Größe und Gewicht der bestellten Artikel.\n                                Es fallen pro Bestellung einmalig die höchsten Versandkosten je nach Artikel an.\n                                Auf Anfrage senden wir Ihnen alle Paketsendungen gerne auch mit unseren\n                                Speditions-Services zu.\n                            </p></div></div></div></div></div></div>'
       )
     ]
   )
@@ -76727,7 +76724,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "39f35c12"
+  "b39803ae"
   
 )
 
@@ -76794,7 +76791,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "e0cd2bd4"
+  "1ffd6924"
   
 )
 
@@ -76861,7 +76858,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "25fc1256"
+  "2d5c85e4"
   
 )
 
@@ -76928,7 +76925,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "8cc74bde"
+  "35b83cc3"
   
 )
 
@@ -76995,7 +76992,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "ac3a14bc"
+  "52f97458"
   
 )
 
@@ -77062,7 +77059,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "e667fa02"
+  "3dddcb0d"
   
 )
 
@@ -77129,7 +77126,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "13c7996c"
+  "1b280cfa"
   
 )
 
@@ -77196,7 +77193,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "440a1489"
+  "15c846d2"
   
 )
 
@@ -77263,7 +77260,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7ed05c88"
+  "f76a3a6c"
   
 )
 
@@ -77330,7 +77327,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "64b6f7e4"
+  "6c871af2"
   
 )
 
@@ -77397,7 +77394,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "52f4a6b3"
+  "13b0a77e"
   
 )
 
@@ -77464,7 +77461,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6bbb4364"
+  "5cfa5c48"
   
 )
 
@@ -77530,7 +77527,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6065764e"
+  "b1c34500"
   
 )
 
@@ -77579,7 +77576,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "27bf9226"
+  "545fe258"
   
 )
 
@@ -77646,7 +77643,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0c61e7b2"
+  "4087f359"
   
 )
 
@@ -77713,7 +77710,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "405cd338"
+  "74313dc6"
   
 )
 
@@ -77780,7 +77777,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0cba4bf0"
+  "610c9016"
   
 )
 
@@ -77847,7 +77844,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5678de1e"
+  "5a909ca3"
   
 )
 
@@ -77913,7 +77910,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "157f5a21"
+  "7ce9102f"
   
 )
 
@@ -77961,7 +77958,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1f84d22c"
+  "f222ef8c"
   
 )
 
@@ -78010,7 +78007,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5c48a5d2"
+  "0ef7b684"
   
 )
 
@@ -78077,7 +78074,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7a43781a"
+  "597bbb4c"
   
 )
 
@@ -78144,7 +78141,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "60ee6716"
+  "d98844fa"
   
 )
 
@@ -78211,7 +78208,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5795dabc"
+  "0b55d74a"
   
 )
 
@@ -78278,7 +78275,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "208db63e"
+  "5cc10368"
   
 )
 
@@ -78345,7 +78342,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0a31eb5a"
+  "e969ed3e"
   
 )
 
@@ -78412,7 +78409,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3790bbdd"
+  "1c3eba0f"
   
 )
 
@@ -78482,7 +78479,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   injectStyles,
   null,
-  "b9c3d20c"
+  "66d12808"
   
 )
 
@@ -78549,7 +78546,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5fcb2cd8"
+  "240ac20a"
   
 )
 
@@ -78616,7 +78613,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "821e49a0"
+  "265a913e"
   
 )
 
@@ -78683,7 +78680,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1e687830"
+  "980d1fcc"
   
 )
 
@@ -78750,7 +78747,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "e6b6560a"
+  "50e46a2d"
   
 )
 
@@ -78817,7 +78814,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "85ab0862"
+  "76ea2146"
   
 )
 
@@ -78884,7 +78881,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5a1ecc94"
+  "0ddec922"
   
 )
 
@@ -78951,7 +78948,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "18a8aed4"
+  "bbc1df70"
   
 )
 
@@ -79018,7 +79015,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "333e4df6"
+  "627cbbb7"
   
 )
 
@@ -79085,7 +79082,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "123e0bfc"
+  "f1760de0"
   
 )
 
@@ -79152,7 +79149,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "865cf838"
+  "779c111c"
   
 )
 
@@ -79219,7 +79216,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "108b081d"
+  "158df362"
   
 )
 
@@ -79286,7 +79283,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "8f0b8178"
+  "3e474af6"
   
 )
 
@@ -79353,7 +79350,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "370ddd1c"
+  "74dd1080"
   
 )
 
@@ -79420,7 +79417,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "9da0feee"
+  "62414897"
   
 )
 
@@ -79487,7 +79484,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "c5624612"
+  "04b89305"
   
 )
 
@@ -79554,7 +79551,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "413559fc"
+  "df11c9e0"
   
 )
 
@@ -79621,7 +79618,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5cb3834d"
+  "0f6293ff"
   
 )
 
@@ -79688,7 +79685,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "b265a896"
+  "6a803cc3"
   
 )
 
@@ -79755,7 +79752,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "064ec97b"
+  "8e044ba6"
   
 )
 
@@ -79822,7 +79819,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "929684a4"
+  "65282560"
   
 )
 
@@ -79889,7 +79886,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7f0fbc00"
+  "0f73bb0e"
   
 )
 
@@ -79956,7 +79953,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "c0af46d4"
+  "676ea670"
   
 )
 
@@ -80023,7 +80020,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "e0690568"
+  "74797b7e"
   
 )
 
@@ -80090,7 +80087,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4d2ec67b"
+  "037ee2ee"
   
 )
 
@@ -80157,7 +80154,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "22821e4a"
+  "af61ac08"
   
 )
 
@@ -80224,7 +80221,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "31dc0c6c"
+  "168a0a9e"
   
 )
 
@@ -80291,7 +80288,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0f463eb6"
+  "a9e81d52"
   
 )
 
@@ -80358,7 +80355,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "09436f99"
+  "8fc15db2"
   
 )
 
@@ -80425,7 +80422,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0f4534b0"
+  "16a5a83e"
   
 )
 
@@ -80492,7 +80489,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "f79c8688"
+  "26b996ca"
   
 )
 
@@ -80559,7 +80556,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "e7b26b7c"
+  "70d4c874"
   
 )
 
@@ -80626,7 +80623,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "f97b3628"
+  "014370c4"
   
 )
 
@@ -80693,7 +80690,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "077926dc"
+  "688e87e4"
   
 )
 
@@ -80760,7 +80757,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "493a7010"
+  "0c681c42"
   
 )
 
@@ -80827,7 +80824,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d1f37cf0"
+  "92005fd4"
   
 )
 
@@ -80894,7 +80891,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6cb789e1"
+  "306a9aef"
   
 )
 
@@ -80961,7 +80958,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4a60531f"
+  "262fa5a6"
   
 )
 
@@ -81028,7 +81025,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "62e7f4d0"
+  "7cff6d4a"
   
 )
 
@@ -81095,7 +81092,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "41aa8a67"
+  "20e2cd99"
   
 )
 
@@ -81162,7 +81159,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "79dc1450"
+  "cc54ba44"
   
 )
 
@@ -81229,7 +81226,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "a4646116"
+  "70fb7ba7"
   
 )
 
@@ -81296,7 +81293,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "52946c38"
+  "16477d46"
   
 )
 
@@ -81363,7 +81360,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "07b2660a"
+  "3246272d"
   
 )
 
@@ -81430,7 +81427,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "477243c0"
+  "8ecd051c"
   
 )
 
@@ -81497,7 +81494,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "69578d73"
+  "1c069e25"
   
 )
 
@@ -81564,7 +81561,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "42872159"
+  "6e38b70b"
   
 )
 
@@ -81631,7 +81628,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "19dc1956"
+  "6f2dd607"
   
 )
 
@@ -81698,7 +81695,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5ee81e6a"
+  "664891f8"
   
 )
 
@@ -81765,7 +81762,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5b51d06e"
+  "3dc247c0"
   
 )
 
@@ -81832,7 +81829,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6d263130"
+  "6c9fecf6"
   
 )
 
@@ -81899,7 +81896,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "9b8902c6"
+  "64ea8f4f"
   
 )
 
@@ -81966,7 +81963,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "9967e36a"
+  "65fb1efd"
   
 )
 
@@ -82033,7 +82030,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "25c3d37a"
+  "be43da5e"
   
 )
 
@@ -82100,7 +82097,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "c2f2df3e"
+  "358110da"
   
 )
 
@@ -82167,7 +82164,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0753eee6"
+  "69f20018"
   
 )
 
@@ -82234,7 +82231,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "589efd7f"
+  "78988c0d"
   
 )
 
@@ -82301,7 +82298,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "25fb0662"
+  "6cb3ed94"
   
 )
 
@@ -82368,7 +82365,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "a9050306"
+  "5c8f468b"
   
 )
 
@@ -82435,7 +82432,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5fd26ac0"
+  "d977125c"
   
 )
 
@@ -82502,7 +82499,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7a9a2f15"
+  "5f482d47"
   
 )
 

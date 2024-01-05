@@ -5,7 +5,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="modal-title h3">Versandkosten</div>
-                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
+                        <a data-dismiss="modal" aria-hidden="true" class="close">×</a>
                     </div>
                     <div class="modal-body">
                         <div :class="'buttonHolder loc_' + localization.localeClient">
@@ -13,13 +13,13 @@
                                 v-for="(region, index) in regions"
                                 :key="index"
                                 :class="['btn', 'btn-bkm-white', region.class, { 'active': activeRegion === index }]"
-                                @click="setActiveRegion(index)">
+                                @click.prevent="setActiveRegion(index)">
                                 {{ region.label }}
                             </button>
                         </div>
                         <div class="contentHolder" :class="{'loading': isLoading }">
                             <div class="table">
-                                <div class="line" v-for="service in shippingServices" :class="{'active': shippingProvider == service.type}">
+                                <div class="line" v-for="service in shippingServices">
                                     <span class="nameLogo">
                                         <img v-if="service.gogreen" class="gogreen" src="https://cdn.bio-kinder.de/frontend/resources/img/footer/gogreen.svg" />
                                         <span class="serviceName">{{ service.name }}</span>
@@ -34,7 +34,7 @@
                                 <p>
                                     * Die Versandkosten variieren, je nach Größe und Gewicht der bestellten Artikel.
                                     Es fallen pro Bestellung einmalig die höchsten Versandkosten je nach Artikel an.
-                                    Auf Anfrage senden wir Ihnen alle Paketsendung gerne auch mit unseren
+                                    Auf Anfrage senden wir Ihnen alle Paketsendungen gerne auch mit unseren
                                     Speditions-Services zu.
                                 </p>
                             </div>
@@ -154,6 +154,7 @@ export default {
     },
     methods: {
         setActiveRegion(index) {
+            console.log("Setting active Region", index)
             this.activeRegion = index;
         },
         initModalEventListeners() {
