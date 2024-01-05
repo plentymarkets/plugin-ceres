@@ -1784,7 +1784,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -1924,7 +1923,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   })),
   methods: {
     setActiveRegion: function setActiveRegion(index) {
-      console.log("Setting active Region", index);
       this.activeRegion = index;
     },
     initModalEventListeners: function initModalEventListeners() {
@@ -43152,7 +43150,7 @@ var render = function() {
     },
     [
       _vm._ssrNode(
-        '<div id="shippingscosts" role="dialog" aria-modal="true" tabindex="-1" class="modal fade"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><div class="modal-title h3">Versandkosten</div> <a data-dismiss="modal" aria-hidden="true" class="close">×</a></div> <div class="modal-body"><div' +
+        '<div id="shippingscosts" role="dialog" aria-modal="true" tabindex="-1" class="modal fade"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><div class="modal-title h3">Versandkosten</div> <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button></div> <div class="modal-body"><div' +
           _vm._ssrClass(
             null,
             "buttonHolder loc_" + _vm.localization.localeClient
@@ -43200,7 +43198,7 @@ var render = function() {
               "</div>"
             )
           }) +
-          '</div> <div class="details"><p>\n                                * Die Versandkosten variieren, je nach Größe und Gewicht der bestellten Artikel.\n                                Es fallen pro Bestellung einmalig die höchsten Versandkosten je nach Artikel an.\n                                Auf Anfrage senden wir Ihnen alle Paketsendungen gerne auch mit unseren\n                                Speditions-Services zu.\n                            </p></div></div></div></div></div></div>'
+          '</div> <div class="details"><p> * Die Versandkosten variieren, je nach Größe und Gewicht der bestellten Artikel.\n                                Es fallen pro Bestellung einmalig die höchsten Versandkosten je nach Artikel an.\n                                Auf Anfrage senden wir Ihnen alle Paketsendungen gerne auch mit unseren\n                                Speditions-Services zu.\n                            </p></div></div></div></div></div></div>'
       )
     ]
   )

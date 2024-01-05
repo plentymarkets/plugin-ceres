@@ -90,7 +90,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -230,7 +229,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   })),
   methods: {
     setActiveRegion: function setActiveRegion(index) {
-      console.log("Setting active Region", index);
       this.activeRegion = index;
     },
     initModalEventListeners: function initModalEventListeners() {
@@ -406,10 +404,14 @@ var staticRenderFns = [
       _c("div", { staticClass: "modal-title h3" }, [_vm._v("Versandkosten")]),
       _vm._v(" "),
       _c(
-        "a",
+        "button",
         {
           staticClass: "close",
-          attrs: { "data-dismiss": "modal", "aria-hidden": "true" }
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-hidden": "true"
+          }
         },
         [_vm._v("×")]
       )
@@ -422,7 +424,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "details" }, [
       _c("p", [
         _vm._v(
-          "\n                                * Die Versandkosten variieren, je nach Größe und Gewicht der bestellten Artikel.\n                                Es fallen pro Bestellung einmalig die höchsten Versandkosten je nach Artikel an.\n                                Auf Anfrage senden wir Ihnen alle Paketsendungen gerne auch mit unseren\n                                Speditions-Services zu.\n                            "
+          " * Die Versandkosten variieren, je nach Größe und Gewicht der bestellten Artikel.\n                                Es fallen pro Bestellung einmalig die höchsten Versandkosten je nach Artikel an.\n                                Auf Anfrage senden wir Ihnen alle Paketsendungen gerne auch mit unseren\n                                Speditions-Services zu.\n                            "
         )
       ])
     ])

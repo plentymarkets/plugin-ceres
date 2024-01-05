@@ -5,7 +5,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="modal-title h3">Versandkosten</div>
-                        <a data-dismiss="modal" aria-hidden="true" class="close">×</a>
+                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
                     </div>
                     <div class="modal-body">
                         <div :class="'buttonHolder loc_' + localization.localeClient">
@@ -31,8 +31,7 @@
                                 </div>
                             </div>
                             <div class="details">
-                                <p>
-                                    * Die Versandkosten variieren, je nach Größe und Gewicht der bestellten Artikel.
+                                <p> * Die Versandkosten variieren, je nach Größe und Gewicht der bestellten Artikel.
                                     Es fallen pro Bestellung einmalig die höchsten Versandkosten je nach Artikel an.
                                     Auf Anfrage senden wir Ihnen alle Paketsendungen gerne auch mit unseren
                                     Speditions-Services zu.
@@ -154,7 +153,6 @@ export default {
     },
     methods: {
         setActiveRegion(index) {
-            console.log("Setting active Region", index)
             this.activeRegion = index;
         },
         initModalEventListeners() {
