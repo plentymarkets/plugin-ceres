@@ -307,7 +307,7 @@ var render = function() {
                   },
                   _vm._l(_vm.regions, function(region, index) {
                     return _c(
-                      "button",
+                      "span",
                       {
                         key: index,
                         class: [

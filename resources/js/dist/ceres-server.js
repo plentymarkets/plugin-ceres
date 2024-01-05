@@ -43158,7 +43158,7 @@ var render = function() {
           ">" +
           _vm._ssrList(_vm.regions, function(region, index) {
             return (
-              "<button" +
+              "<span" +
               _vm._ssrClass(null, [
                 "btn",
                 "btn-bkm-white",
@@ -43171,7 +43171,7 @@ var render = function() {
                   _vm._s(region.label) +
                   "\n                        "
               ) +
-              "</button>"
+              "</span>"
             )
           }) +
           "</div> <div" +

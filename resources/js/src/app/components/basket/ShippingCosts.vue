@@ -9,13 +9,13 @@
                     </div>
                     <div class="modal-body">
                         <div :class="'buttonHolder loc_' + localization.localeClient">
-                             <button
+                             <span
                                 v-for="(region, index) in regions"
                                 :key="index"
                                 :class="['btn', 'btn-bkm-white', region.class, { 'active': activeRegion === index }]"
                                 @click.prevent="setActiveRegion(index)">
                                 {{ region.label }}
-                            </button>
+                            </span>
                         </div>
                         <div class="contentHolder" :class="{'loading': isLoading }">
                             <div class="table">
