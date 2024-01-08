@@ -13,24 +13,9 @@
         {% include "Ceres::PageDesign.Partials.Header.DefaultHeader" %}
     {% else %}
 
-        <header>
-
+        <header style="display: contents">
                         {{ headerContainer | raw }}
-
         </header>
-
-
-{#        <header>#}
-
-{#                <div class="top-bar"></div>#}
-{#                <div class="nav-bar"></div>#}
-
-{#            <div class="breadcrumb">#}
-
-{#            </div>#}
-{#            </div>#}
-{#        </header>#}
-
 
     {% endif %}
 {% endcacheblock %}
