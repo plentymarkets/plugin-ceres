@@ -353,6 +353,16 @@
                         ]
                     }
                 },
+
+                "header.low_cls_mode": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Make header sticky",
+                    "options": {
+                        "defaultValue": "false"
+                    }
+                },
+
                 "header.fixed_navbar": {
                     "type": "checkBox",
                     "required": false,
