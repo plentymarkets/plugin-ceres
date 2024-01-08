@@ -76633,11 +76633,9 @@ var HeaderScroller = /*#__PURE__*/function () {
     this.isShopBuilderHeaderFixated = false;
 
     if (Object(_utils__WEBPACK_IMPORTED_MODULE_11__["isDefined"])(this.headerParent)) {
-      if (!App.isShopBuilder) {
-        this.registerEventsListeners();
-      } else {
-        this.registerSBEventsListeners();
-      }
+      if (!App.isShopBuilder) {//     this.registerEventsListeners();
+      } else {//       this.registerSBEventsListeners();
+        }
     }
   } // The header parent element.
 
@@ -76660,17 +76658,19 @@ var HeaderScroller = /*#__PURE__*/function () {
 
   }, {
     key: "initialize",
-    value: function initialize() {
-      this.collectHeaderElementHeights();
-      this.updateZIndexes(); // Initialize only, if the user has scrolled down from the top and is not in the shopbuilder.
-
-      if (!App.isShopBuilder && window.pageYOffset > 0) {
-        this.calculateBodyOffset();
-        this.scrollHeaderElements(); // If the header content gets active in the shopbuilder, the event listener for 'shopbuilder.after.activate-container' will fixate the header.
-
-        this.fixateHeader();
-        this.initialized = true;
-      }
+    value: function initialize() {// this.collectHeaderElementHeights();
+      // this.updateZIndexes();
+      //
+      // // Initialize only, if the user has scrolled down from the top and is not in the shopbuilder.
+      // if (!App.isShopBuilder && window.pageYOffset > 0)
+      // {
+      //     this.calculateBodyOffset();
+      //     this.scrollHeaderElements();
+      //     // If the header content gets active in the shopbuilder, the event listener for 'shopbuilder.after.activate-container' will fixate the header.
+      //     this.fixateHeader();
+      //
+      //     this.initialized = true;
+      // }
     } // Collect heights of header elements for later use
 
   }, {
