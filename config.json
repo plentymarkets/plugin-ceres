@@ -335,7 +335,7 @@
                 "header.low_cls_mode": {
                     "type": "checkbox",
                     "required": false,
-                    "label": "Config.headerShowNavbarsLabel",
+                    "label": "Low cls mode ",
                     "options": {
                         "defaultValue": "false"
                     }
