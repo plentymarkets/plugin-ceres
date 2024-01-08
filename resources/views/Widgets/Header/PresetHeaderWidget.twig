@@ -76,7 +76,7 @@
 
 
 <div class="parent-preset-container">
-    <div class="sticky-top">
+
 <div class="top-bar header-fw{% if customClass | length > 0 %} {{ customClass }}{% endif %}">
     <div class="container-max px-0 pr-lg-3">
         <div class="row mx-0 flex-row-reverse position-relative">
@@ -435,7 +435,7 @@
         </div>
     </div>
 </nav>
-    </div>
+
     {{ Twig.do("cacheslot breadcrumbs") }}
 
     {% if not isPreview %}
