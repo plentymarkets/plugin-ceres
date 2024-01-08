@@ -63180,9 +63180,11 @@ var HeaderScroller = /*#__PURE__*/function () {
     this.isShopBuilderHeaderFixated = false;
 
     if (Object(_utils__WEBPACK_IMPORTED_MODULE_11__["isDefined"])(this.headerParent)) {
-      if (!App.isShopBuilder) {//  this.registerEventsListeners();
-      } else {//   this.registerSBEventsListeners();
-        }
+      if (!App.isShopBuilder) {
+        this.registerEventsListeners();
+      } else {
+        this.registerSBEventsListeners();
+      }
     }
   } // The header parent element.
 

@@ -26,11 +26,11 @@ export default class HeaderScroller
         {
             if (!App.isShopBuilder)
             {
-                //  this.registerEventsListeners();
+                this.registerEventsListeners();
             }
             else
             {
-                //   this.registerSBEventsListeners();
+                this.registerSBEventsListeners();
             }
         }
     }
