@@ -58,6 +58,10 @@ export default class HeaderScroller
         this.updateZIndexes();
 
         // Initialize only, if the user has scrolled down from the top and is not in the shopbuilder.
+        const headerElement = document.querySelector("#page-header");
+        const headerVersion = headerElement.classList.contains("default-header") || headerElement.classList.contains("sticky-top");
+
+
         if (!App.isShopBuilder && window.pageYOffset > 0)
         {
             this.calculateBodyOffset();
