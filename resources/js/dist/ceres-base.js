@@ -60287,6 +60287,13 @@ var HeaderScroller = /*#__PURE__*/function () {
       this.collectHeaderElementHeights();
       this.updateZIndexes(); // Initialize only, if the user has scrolled down from the top and is not in the shopbuilder.
 
+      var headerNames = ["default-header", "sticky-top"];
+      var headerElement = document.querySelector("#page-header").classList;
+      var found = headerNames.some(function (el) {
+        return headerElement.contains(el);
+      });
+      if (found) return;
+
       if (!App.isShopBuilder && window.pageYOffset > 0) {
         this.calculateBodyOffset();
         this.scrollHeaderElements(); // If the header content gets active in the shopbuilder, the event listener for 'shopbuilder.after.activate-container' will fixate the header.
