@@ -331,6 +331,16 @@
         "Config.HeaderTab": {
             "label": "Config.headerTab",
             "formFields": {
+
+                "header.low_cls_mode": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Make header sticky",
+                    "options": {
+                        "defaultValue": "false"
+                    }
+                },
+
                 "header.show_navbars": {
                     "type": "selectBox",
                     "required": false,
@@ -351,15 +361,6 @@
                                 "caption": "Config.headerShowNavbarsBoth"
                             }
                         ]
-                    }
-                },
-
-                "header.low_cls_mode": {
-                    "type": "checkBox",
-                    "required": false,
-                    "label": "Make header sticky",
-                    "options": {
-                        "defaultValue": "false"
                     }
                 },
 
