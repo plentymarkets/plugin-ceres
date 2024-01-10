@@ -69,6 +69,17 @@ export default class HeaderScroller
         }
     }
 
+    addBrowserClass()
+    {
+        const browser = window.navigator.userAgent;
+        const isIE11 = /Trident.*rv[ :]*11\./.test(browser);
+
+        if (isIE11)
+        {
+            document.body.classList.add("ie11");
+        }
+    }
+
     // Collect heights of header elements for later use
     collectHeaderElementHeights()
     {
