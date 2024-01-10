@@ -1,5 +1,16 @@
 # Release Notes for plentyShop LTS
 
+##v5.0.62 (2024-01-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...5.0.62" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Changed
+
+- Added average rating `feedbackDecimal` and number of feedbacks `feedbackCount` in item list result fields.
+
+### Changed Templates
+
+- In plentyShop LTS 5.0.62 we made changes to template files relating the feedback plugin which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
+- [resources/views/ResultFields/ListItem.fields.json](https://github.com/plentymarkets/plugin-ceres/pull/3459/files#diff)
+
 ## v5.0.61 (2023-10-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.60...5.0.61" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
