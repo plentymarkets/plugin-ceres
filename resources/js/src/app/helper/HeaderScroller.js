@@ -54,18 +54,31 @@ export default class HeaderScroller
      */
     initialize()
     {
-        this.collectHeaderElementHeights();
-        this.updateZIndexes();
 
-        // Initialize only, if the user has scrolled down from the top and is not in the shopbuilder.
-        if (!App.isShopBuilder && window.pageYOffset > 0)
+
+        this.addBrowserClass();
+        const headerNames = ["default-header", "sticky-top"];
+        const headerElement = document.querySelector("#page-header").classList;
+
+        const found = headerNames.some(el => headerElement.contains(el));
+
+        if (found)return;
+
+        if (!found)
         {
-            this.calculateBodyOffset();
-            this.scrollHeaderElements();
-            // If the header content gets active in the shopbuilder, the event listener for 'shopbuilder.after.activate-container' will fixate the header.
-            this.fixateHeader();
+            this.collectHeaderElementHeights();
+            this.updateZIndexes();
 
-            this.initialized = true;
+            // Initialize only, if the user has scrolled down from the top and is not in the shopbuilder.
+            if (!App.isShopBuilder && window.pageYOffset > 0)
+            {
+                this.calculateBodyOffset();
+                this.scrollHeaderElements();
+                // If the header content gets active in the shopbuilder, the event listener for 'shopbuilder.after.activate-container' will fixate the header.
+                this.fixateHeader();
+
+                this.initialized = true;
+            }
         }
     }
 
@@ -79,7 +92,6 @@ export default class HeaderScroller
             document.body.classList.add("ie11");
         }
     }
-
     // Collect heights of header elements for later use
     collectHeaderElementHeights()
     {

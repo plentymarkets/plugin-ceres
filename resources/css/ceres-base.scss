@@ -9062,10 +9062,6 @@ button:focus {
     }
 }
 
-.app {
-    overflow-x: hidden;
-}
-
 .center-xy {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -10866,6 +10862,12 @@ textarea.no-resize {
     }
 }
 
+.ie11 .default-header {
+    position: fixed;
+    top:0;
+    width: 100%;
+    z-index: 1000;
+}
 
 // Templates
 // transitions for item lists
