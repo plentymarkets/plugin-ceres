@@ -54,31 +54,23 @@ export default class HeaderScroller
      */
     initialize()
     {
-
-
         this.addBrowserClass();
-        const headerNames = ["default-header", "sticky-top"];
-        const headerElement = document.querySelector("#page-header").classList;
+        const hasStickyTop = document.querySelector("#page-header").classList.contains("sticky-top");
 
-        const found = headerNames.some(el => headerElement.contains(el));
+        if (hasStickyTop)return;
 
-        if (found)return;
+        this.collectHeaderElementHeights();
+        this.updateZIndexes();
 
-        if (!found)
+        // Initialize only, if the user has scrolled down from the top and is not in the shopbuilder.
+        if (!App.isShopBuilder && window.pageYOffset > 0)
         {
-            this.collectHeaderElementHeights();
-            this.updateZIndexes();
+            this.calculateBodyOffset();
+            this.scrollHeaderElements();
+            // If the header content gets active in the shopbuilder, the event listener for 'shopbuilder.after.activate-container' will fixate the header.
+            this.fixateHeader();
 
-            // Initialize only, if the user has scrolled down from the top and is not in the shopbuilder.
-            if (!App.isShopBuilder && window.pageYOffset > 0)
-            {
-                this.calculateBodyOffset();
-                this.scrollHeaderElements();
-                // If the header content gets active in the shopbuilder, the event listener for 'shopbuilder.after.activate-container' will fixate the header.
-                this.fixateHeader();
-
-                this.initialized = true;
-            }
+            this.initialized = true;
         }
     }
 

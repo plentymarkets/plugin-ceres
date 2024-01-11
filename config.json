@@ -337,7 +337,7 @@
                     "required": false,
                     "label": "Config.headerSticky",
                     "options": {
-                        "defaultValue": "false"
+                        "defaultValue": "true"
                     }
                 },
 
