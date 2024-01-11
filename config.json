@@ -331,16 +331,14 @@
         "Config.HeaderTab": {
             "label": "Config.headerTab",
             "formFields": {
-
                 "header.low_cls_mode": {
                     "type": "checkBox",
                     "required": false,
-                    "label": "Config.headerSticky",
+                    "label": "Config.headerStickyLabel",
                     "options": {
                         "defaultValue": "true"
                     }
                 },
-
                 "header.show_navbars": {
                     "type": "selectBox",
                     "required": false,
