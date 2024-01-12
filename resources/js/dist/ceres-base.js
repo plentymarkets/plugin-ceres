@@ -60284,6 +60284,9 @@ var HeaderScroller = /*#__PURE__*/function () {
   }, {
     key: "initialize",
     value: function initialize() {
+      this.addBrowserClass();
+      var hasStickyTop = document.querySelector("#page-header").classList.contains("sticky-top");
+      if (hasStickyTop) return;
       this.collectHeaderElementHeights();
       this.updateZIndexes(); // Initialize only, if the user has scrolled down from the top and is not in the shopbuilder.
 
@@ -60293,6 +60296,16 @@ var HeaderScroller = /*#__PURE__*/function () {
 
         this.fixateHeader();
         this.initialized = true;
+      }
+    }
+  }, {
+    key: "addBrowserClass",
+    value: function addBrowserClass() {
+      var browser = window.navigator.userAgent;
+      var isIE11 = /Trident.*rv[ :]*11\./.test(browser);
+
+      if (isIE11) {
+        document.body.classList.add("ie11");
       }
     } // Collect heights of header elements for later use
 

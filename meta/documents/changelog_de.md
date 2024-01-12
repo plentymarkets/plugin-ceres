@@ -1,6 +1,11 @@
 # Release Notes für plentyShop LTS
 
-##v5.0.62 (2024-01-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...5.0.62" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.62 (2024-X-XX) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...5.0.62" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- In den Plugin-Einstellungen gibt es eine neue Einstellung im Bereich **Header**. Wenn du die Einstellung **Header oben fixieren** aktivierst, wird der Header beim Scrollen oben am Seitenanfang fixiert. Diese Einstellung hat Auswirkungen sowohl auf den Standard-Header als auch auf den ShopBuilder-Header. Durch das Aktivieren der Einstellung reduziert sich [Content Layout Shift](https://web.dev/articles/cls) deutlich, weil somit eine teure Berechnung ersetzt wird.
+    - ***Wichtig:*** Die Einstellung betrifft den gesamten Header. Das bedeutet, dass sie für das Fixieren von Header-Elementen die Einstellungen einzelner ShopBuilder-Widgets überschreibt.
 
 ### Geändert
 
