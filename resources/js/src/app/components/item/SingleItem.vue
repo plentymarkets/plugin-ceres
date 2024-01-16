@@ -191,7 +191,12 @@
                 <div class="col-md-5" id="rightSide">
                   <div class="descriptionContainer shippingInfo">
                       <client-only>
-                          <biokinder-shipping-icon :variation="currentVariation.variation" :avd="$attrs.availabilitydata" :availability="currentVariation.variation.availabilityId" :shipping="currentVariation.variation.defaultShippingCosts"></biokinder-shipping-icon>
+                          <biokinder-shipping-icon 
+                            :variation="currentVariation.variation" 
+                            :avd="$attrs.availabilitydata" 
+                            :availability="currentVariation.variation.availabilityId" 
+                            :shipping="calcDefaultShippingCosts"
+                            :countryId="shippingCountryId"></biokinder-shipping-icon>
                       </client-only>
                   </div>
 
@@ -443,6 +448,7 @@
 <script>
 import { get } from "../../helper/get";
 import { isNullOrUndefined } from "../../helper/utils";
+import { mapState } from "vuex";
 
 export default {
 
@@ -573,6 +579,14 @@ export default {
                 retVal.push(this.getCareData(this.color2))
             return retVal;
         },
+        calcDefaultShippingCosts() {
+          return this.$attrs.atshippingcost !== ""
+            ? parseFloat(this.$attrs.atshippingcost)
+            : this.currentVariation.variation.defaultShippingCosts;          
+        },
+         ...mapState({
+          shippingCountryId: state => state.basket.data.shippingCountryId
+        })
     },
 
     created()

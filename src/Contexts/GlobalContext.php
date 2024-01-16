@@ -52,6 +52,12 @@ class GlobalContext implements ContextInterface
     public $plentyId;
 
     /**
+     * @const int PlentyIDs for DE and AT Stores
+     */
+    public const PLENTYID_DE = 17831;
+    public const PLENTYID_AT = 66452;
+
+    /**
      * @var string $metaLang
      * @deprecated since 5.0.20 will be removed in 6.0.0
      */
@@ -260,6 +266,7 @@ class GlobalContext implements ContextInterface
         }
 
         $this->bodyClasses[] = $templateClass;
+        $this->bodyClasses[] = 'p-' . $this->plentyId;
 
         $this->buildHash = BuildHash::get();
     }

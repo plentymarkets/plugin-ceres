@@ -7,7 +7,6 @@ use IO\Helper\ContextInterface;
 use IO\Services\CategoryService;
 use IO\Services\CustomerService;
 use Plenty\Plugin\ConfigRepository;
-use Plenty\Modules\Webshop\Contracts\ContactRepositoryContract;
 use Plenty\Modules\Category\Models\Category;
 use Plenty\Modules\Webshop\Helpers\UrlQuery;
 
@@ -140,7 +139,6 @@ class SingleItemContext extends GlobalContext implements ContextInterface
      * @var string $conditionOfItem Contains the condition of the current item for structured data.
      */
     public $conditionOfItem = '';
-
     /**
      * @inheritDoc
      */
@@ -263,9 +261,9 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $urlQuery = pluginApp(UrlQuery::class, ['path' => $this->request->getRequestUri(), 'lang' => Utils::getLang()]);
         $this->requestedVariationUrl = $urlQuery->toAbsoluteUrl(Utils::getLang() !== $this->webstoreConfig->defaultLanguage);
         $defaultCategoryId = 0;
-        $plentyId = Utils::getPlentyId();
+
         foreach ($this->item['documents'][0]['data']['defaultCategories'] as $category) {
-            if ($category['plentyId'] == $plentyId) {
+            if ($category['plentyId'] == $this->plentyId) {
                 $defaultCategoryId = $category['id'];
                 break;
             }
