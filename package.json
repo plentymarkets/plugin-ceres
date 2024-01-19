@@ -73,6 +73,7 @@
     "dayjs": "^1.8.26",
     "detect-browser": "^4.8.0",
     "feather-icons": "^4.29.1",
+    "feiertagejs": "^1.4.0",
     "flag-icon-css": "^2.9.0",
     "font-awesome": "^4.6.3",
     "jquery": "^3.5.1",

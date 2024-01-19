@@ -7103,6 +7103,326 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/BKAvailability.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/item/BKAvailability.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.includes.js */ "./node_modules/core-js/modules/es.array.includes.js");
+/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var feiertagejs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! feiertagejs */ "./node_modules/feiertagejs/build/feiertage.js");
+
+
+
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "biokinder-availability",
+  data: function data() {
+    return {
+      txt1to3Days: this.$translate("biokinderDesign::Template.availabilityDisplayTxt1to3Days"),
+      txt3to5Days: this.$translate("biokinderDesign::Template.availabilityDisplayTxt3to5Days"),
+      txt5to8Days: this.$translate("biokinderDesign::Template.availabilityDisplayTxt5to8Days"),
+      txt1to2Weeks: this.$translate("biokinderDesign::Template.availabilityDisplayTxt1to2Weeks"),
+      txt2to4Weeks: this.$translate("biokinderDesign::Template.availabilityDisplayTxt2to4Weeks"),
+      txt4to6Weeks: this.$translate("biokinderDesign::Template.availabilityDisplayTxt4to6Weeks"),
+      txt6to8Weeks: this.$translate("biokinderDesign::Template.availabilityDisplayTxt6to8Weeks"),
+      txt8to10Weeks: this.$translate("biokinderDesign::Template.availabilityDisplayTxt8to10Weeks"),
+      txtDefaultDelivery: this.$translate("biokinderDesign::Template.availabilityDisplayTxtDefaultDelivery"),
+      txtShipsToday: this.$translate("biokinderDesign::Template.availabilityDisplayTxtShipsToday"),
+      txtChristmasHint: "<span class='christmas'><i class='fa fa-gift' aria-hidden='true'></i> Pünktlich zu Weihnachten!</span>",
+      txtShipsTomorrow: this.$translate("biokinderDesign::Template.availabilityDisplayTxtShipsTomorrow"),
+      txtShipsMondays: this.$translate("biokinderDesign::Template.availabilityDisplayTxtShipsMondays"),
+      // txtFrightShipsFriday: this.$translate("biokinderDesign::Template.availabilityDisplayTxtFrightShipsFriday"),
+      txtFrightShipsTomorow: this.$translate("biokinderDesign::Template.availabilityDisplayTxtFrightShipsTomorow"),
+      txtFrightNextFriday: this.$translate("biokinderDesign::Template.availabilityDisplayTxtFrightNextFriday"),
+      isLoading: true,
+      requestLoading: false
+    };
+  },
+  props: {
+    variation: {
+      type: Object
+    },
+    avd: {
+      type: Object
+    },
+    short: {
+      type: Boolean,
+      default: false
+    }
+  },
+  methods: {
+    requestAvailabilityData: function requestAvailabilityData() {
+      var _this = this;
+
+      this.isLoading = true; // Already requested this variation
+
+      if (this.$store.erid.some(function (e) {
+        if (e && e.id == _this.variation.id) return true;
+      })) {
+        this.isLoading = false;
+        return;
+      }
+
+      if (this.variation.availabilityId == 1) {
+        var avd = {
+          'id': variationId,
+          'd': 0
+        };
+        this.$store.erid.push(avd);
+        this.isLoading = false;
+        return;
+      }
+
+      var variationId = this.variation.id;
+
+      if (this.variation.availabilityId != 1 && !this.requestLoading) {
+        this.requestLoading = true;
+        $.ajax({
+          method: 'GET',
+          context: this,
+          url: 'availabilities/' + variationId + '/',
+          success: function success(intDays) {
+            var avd = {
+              'id': variationId,
+              'd': intDays
+            };
+            this.$store.erid.push(avd);
+            this.requestLoading = false;
+            this.isLoading = false;
+          }
+        });
+      }
+    }
+  },
+  computed: {
+    availabilityDisplay: function availabilityDisplay() {
+      var _this2 = this;
+
+      // availability != 1
+      if (this.isLoading) return "...";
+
+      if (this.variation.availability.id > 1) {
+        var tage = this.$store.erid.find(function (e) {
+          if (e && e.id == _this2.variation.id) return e;
+        }).d; // days not set properly
+
+        if (999 == tage || null == tage || 0 == tage || 5 != this.variation.availability.id) return this.variation.availability.names.name;
+
+        switch (!0) {
+          case tage < 3:
+            return this.txt1to3Days;
+
+          case tage < 6:
+            return this.txt3to5Days;
+
+          case tage < 11:
+            return this.txt5to8Days;
+
+          case tage < 14:
+            return this.txt1to2Weeks;
+
+          case tage < 28:
+            return this.txt2to4Weeks;
+
+          case tage < 42:
+            return this.txt4to6Weeks;
+
+          case tage < 56:
+          case tage < 70:
+            return this.txt6to8Weeks;
+
+          default:
+            return this.txtDefaultDelivery;
+        }
+      } // availability = 1
+      // check for holidays
+
+
+      var dateTodayNow = new Date(1000 * this.avd.time.now);
+      var dateTomorrow = new Date(1000 * this.avd.time.now + 86400000);
+      var currentWeekDay = new Date(1000 * this.avd.time.now).getDay();
+
+      if (this.avd.isSped) {
+        // today is friday before 10 and no holiday, ships today!
+        if (currentWeekDay == 5 && !Object(feiertagejs__WEBPACK_IMPORTED_MODULE_3__["isHoliday"])(dateTodayNow, "HE") && dateTodayNow.getHours() < 10) return this.txtShipsToday;
+        var nextFriday = new Date(this.avd.time.now * 1000);
+        var add = 0;
+        if (dateTodayNow.getDay() == 5) var add = 7;
+        nextFriday.setDate(dateTodayNow.getDate() + (5 + 7 - dateTodayNow.getDay()) % 7 + add); // today is friday after 10, or not friday or friday + holiday 
+        // next friday is (also) a holiday 
+        // lost -> show default value
+
+        if (Object(feiertagejs__WEBPACK_IMPORTED_MODULE_3__["isHoliday"])(nextFriday, "HE")) return this.variation.availability.names.name; // we now know, next friday is not a holiday
+        // we also know, it's thursday
+        // so we will ship tomorrow
+
+        if (currentWeekDay == 4) return this.txtFrightShipsTomorow; // today is not friday or its friday and too late 
+        // it is also not thursday
+        // next friday, shipping is possible. so output that.
+
+        return this.txtFrightNextFriday;
+      } // product is available
+      // product is not freight
+      // check for holiday on monday
+
+
+      var daysUntilMonday = 8 - currentWeekDay % 7; // 8 - 5 % 7 = 3 --> friday + 3 days =) monday
+
+      var timestampMonday = 1000 * this.avd.time.now + 86400000 * daysUntilMonday;
+      var dateMonday = new Date(timestampMonday);
+      var mondayIsHoliday = Object(feiertagejs__WEBPACK_IMPORTED_MODULE_3__["isHoliday"])(dateMonday, "HE"); // <<--
+
+      if (this.avd.time.now < this.avd.time.until && currentWeekDay > 0 && currentWeekDay <= 5 && !Object(feiertagejs__WEBPACK_IMPORTED_MODULE_3__["isHoliday"])(dateTodayNow, "HE")) // mo - fr, 0 - ~14h
+        return this.txtShipsToday;
+      if (this.avd.time.now > this.avd.time.until && currentWeekDay > 0 && currentWeekDay <= 4 && !Object(feiertagejs__WEBPACK_IMPORTED_MODULE_3__["isHoliday"])(dateTomorrow, "HE")) // mo - do, 14 - 0
+        return this.txtShipsTomorrow; // Friday afternoon, saturday, sunday 00:00 - 23:59 -> ships on monday
+
+      if ([5, 6, 0].includes(currentWeekDay) && !mondayIsHoliday) return this.txtShipsMondays; // if we forgot any case, default
+
+      console.info("BKAvailability", "default");
+      return this.variation.availability.names.name;
+    }
+  },
+  mounted: function mounted() {
+    var _this3 = this;
+
+    this.$nextTick(function () {
+      if (_this3.$store.erid === undefined) _this3.$store.erid = [];
+
+      _this3.requestAvailabilityData();
+    });
+  },
+  watch: {
+    variation: function variation() {
+      this.requestAvailabilityData();
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/BKShippingIcon.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/item/BKShippingIcon.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.number.constructor.js */ "./node_modules/core-js/modules/es.number.constructor.js");
+/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string.js */ "./node_modules/core-js/modules/es.regexp.to-string.js");
+/* harmony import */ var core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.string.replace.js */ "./node_modules/core-js/modules/es.string.replace.js");
+/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_number_to_fixed_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.number.to-fixed.js */ "./node_modules/core-js/modules/es.number.to-fixed.js");
+/* harmony import */ var core_js_modules_es_number_to_fixed_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_to_fixed_js__WEBPACK_IMPORTED_MODULE_5__);
+
+
+
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "biokinder-shipping-icon",
+  data: function data() {
+    return {
+      freightExpress: 'https://cdn.bio-kinder.de/frontend/seals/spedition_sl.svg',
+      packageExpress: 'https://cdn.bio-kinder.de/frontend/seals/paket_sl.svg',
+      freightStd: 'https://cdn.bio-kinder.de/frontend/seals/truck.svg',
+      packageStd: 'https://cdn.bio-kinder.de/frontend/seals/package.svg',
+      easterPackage: 'https://cdn.bio-kinder.de/frontend/seals/lieferbar-ostern.svg'
+    };
+  },
+  props: {
+    avd: {
+      type: Object
+    },
+    variation: {
+      type: Object
+    },
+    availability: {
+      type: Number,
+      default: 1
+    },
+    shipping: {
+      float: Object,
+      default: 5.95
+    },
+    countryId: {
+      type: Number,
+      default: 1
+    }
+  },
+  computed: {
+    shippingCosts: function shippingCosts() {
+      if (this.shipping !== null) return this.formatFloat(this.shipping) + ' €';else return '0,00 €';
+    },
+    countryName: function countryName() {
+      if (this.countryId == 2) return "&Ouml;sterreichs";
+      return "Deutschlands";
+    },
+    shippingIconUrl: function shippingIconUrl() {
+      if (this.availability == 1) return this.freightExpress;
+      if (this.avd.isSped) return this.freightStd;
+      return this.packageStd;
+    },
+    shippingName: function shippingName() {
+      if (this.avd.isSped) return "Spedition";
+      return "DHL Paket";
+    },
+    middleLlistElement: function middleLlistElement() {
+      if (this.avd.isSped) return 'Lieferung mit 2-Mann-Spedition bis ins Zimmer';
+      return 'online Tracking via DHL-Paket';
+    }
+  },
+  methods: {
+    formatFloat: function formatFloat(e) {
+      return e.toFixed(2).replace(".", ",").toString();
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/GraduatedPrices.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/item/GraduatedPrices.vue?vue&type=script&lang=js& ***!
@@ -9404,10 +9724,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-//
-//
-//
-//
 //
 //
 //
@@ -22922,6 +23238,494 @@ function count (line, type) {
   }
   return i
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/feiertagejs/build/feiertage.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/feiertagejs/build/feiertage.js ***!
+  \*****************************************************/
+/*! exports provided: addTranslation, getHolidayByDate, getHolidays, getLanguage, isHoliday, isSpecificHoliday, isSunOrHoliday, setLanguage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addTranslation", function() { return addTranslation; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getHolidayByDate", function() { return getHolidayByDate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getHolidays", function() { return getHolidays; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLanguage", function() { return getLanguage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isHoliday", function() { return isHoliday; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isSpecificHoliday", function() { return isSpecificHoliday; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isSunOrHoliday", function() { return isSunOrHoliday; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setLanguage", function() { return setLanguage; });
+const germanTranslations = {
+    NEUJAHRSTAG: 'Neujahrstag',
+    HEILIGEDREIKOENIGE: 'Heilige Drei Könige',
+    KARFREITAG: 'Karfreitag',
+    OSTERSONNTAG: 'Ostersonntag',
+    OSTERMONTAG: 'Ostermontag',
+    TAG_DER_ARBEIT: 'Tag der Arbeit',
+    CHRISTIHIMMELFAHRT: 'Christi Himmelfahrt',
+    PFINGSTSONNTAG: 'Pfingstsonntag',
+    PFINGSTMONTAG: 'Pfingstmontag',
+    FRONLEICHNAM: 'Fronleichnam',
+    MARIAHIMMELFAHRT: 'Mariä Himmelfahrt',
+    DEUTSCHEEINHEIT: 'Tag der Deutschen Einheit',
+    REFORMATIONSTAG: 'Reformationstag',
+    ALLERHEILIGEN: 'Allerheiligen',
+    BUBETAG: 'Buß- und Bettag',
+    ERSTERWEIHNACHTSFEIERTAG: '1. Weihnachtstag',
+    ZWEITERWEIHNACHTSFEIERTAG: '2. Weihnachtstag',
+    WELTKINDERTAG: 'Weltkindertag',
+    WELTFRAUENTAG: 'Weltfrauentag',
+    AUGSBURGER_FRIEDENSFEST: 'Augsburger Friedensfest',
+};
+
+const allHolidays = [
+    'NEUJAHRSTAG',
+    'HEILIGEDREIKOENIGE',
+    'KARFREITAG',
+    'OSTERSONNTAG',
+    'OSTERMONTAG',
+    'TAG_DER_ARBEIT',
+    'CHRISTIHIMMELFAHRT',
+    'MARIAHIMMELFAHRT',
+    'PFINGSTSONNTAG',
+    'PFINGSTMONTAG',
+    'FRONLEICHNAM',
+    'DEUTSCHEEINHEIT',
+    'REFORMATIONSTAG',
+    'ALLERHEILIGEN',
+    'BUBETAG',
+    'ERSTERWEIHNACHTSFEIERTAG',
+    'ZWEITERWEIHNACHTSFEIERTAG',
+    'WELTKINDERTAG',
+    'WELTFRAUENTAG',
+    'AUGSBURGER_FRIEDENSFEST',
+];
+
+const allRegions = [
+    'BW',
+    'BY',
+    'BE',
+    'BB',
+    'HB',
+    'HE',
+    'HH',
+    'MV',
+    'NI',
+    'NW',
+    'RP',
+    'SL',
+    'SN',
+    'ST',
+    'SH',
+    'TH',
+    'BUND',
+    'AUGSBURG',
+    'ALL',
+];
+
+/*!
+ * feiertage.js
+ * @repository https://github.com/sfakir/feiertagejs
+ * @docs https://github.com/sfakir/feiertagejs/blob/master/docs.md
+ *
+ * Copyright 2015-2021 Simon Fakir
+ * Released under the MIT license
+ */
+// translations
+const defaultLanguage = 'de';
+let currentLanguage = defaultLanguage;
+const translations = {
+    de: germanTranslations,
+};
+/**
+ * adds a translation for the holidays (e.g. english).
+ * This also allows to override the German names.
+ * Hint: Interpolates German for missing translations
+ * @param {string} isoCode of the new language
+ * @param {TranslationTable} newTranslation  map of {HolidayType} to translation stringg
+ */
+function addTranslation(isoCode, newTranslation) {
+    const code = isoCode.toLowerCase();
+    const defaultTranslation = translations[defaultLanguage];
+    let missingFields = false;
+    // fill new Translation with default Language
+    for (const holiday of allHolidays) {
+        if (!newTranslation[holiday]) {
+            missingFields = true;
+            newTranslation[holiday] = defaultTranslation[holiday];
+        }
+    }
+    if (missingFields) {
+        console.warn('[feiertagejs] addTranslation: you did not add all holidays in your translation! Took German as fallback');
+    }
+    translations[code] = newTranslation;
+}
+/**
+ * Set a language to default language
+ * @param {string} isoCode
+ */
+function setLanguage(isoCode) {
+    const code = isoCode.toLowerCase();
+    if (!translations[code]) {
+        throw new TypeError(`[feiertagejs] tried to set language to ${code} but the translation is missing. Please use addTranslation(isoCode,object) first`);
+    }
+    currentLanguage = isoCode;
+}
+/**
+ * Get currently set language
+ * @returns {string}
+ */
+function getLanguage() {
+    return currentLanguage;
+}
+// holidays api
+/**
+ * Checks if a specific date is sunday or holiday.
+ * @param date
+ * @param region
+ * @returns {boolean}
+ */
+function isSunOrHoliday(date, region) {
+    checkRegion(region);
+    return date.getDay() === 0 || isHoliday(date, region);
+}
+/**
+ * Check is specific date is holiday.
+ * @param date
+ * @param {Region} region two character {@link Region} code
+ * @returns {boolean}
+ */
+function isHoliday(date, region) {
+    checkRegion(region);
+    const year = date.getFullYear();
+    const internalDate = toUtcTimestamp(date);
+    const holidays = getHolidaysAsUtcTimestamps(year, region);
+    return holidays.indexOf(internalDate) !== -1;
+}
+function getHolidayByDate(date, region = 'ALL') {
+    checkRegion(region);
+    const holidays = getHolidaysOfYear(date.getFullYear(), region);
+    return holidays.find((holiday) => holiday.equals(date));
+}
+// additional runtime checks
+/**
+ * Checks if the given region is a valid {@link Region}.
+ *
+ * @param region {@link Region} to check
+ * @throws {Error}
+ * @private
+ */
+function checkRegion(region) {
+    if (region === null || region === undefined) {
+        throw new Error(`Region must not be undefined or null`);
+    }
+    if (allRegions.indexOf(region) === -1) {
+        throw new Error(`Invalid region: ${region}! Must be one of ${allRegions.toString()}`);
+    }
+}
+/**
+ * Checks if the given holidayName is a valid {@link HolidayType}.
+ * @param holidayName {@link HolidayType} to check
+ * @throws {Error}
+ * @private
+ */
+function checkHolidayType(holidayName) {
+    if (holidayName === null || holidayName === undefined) {
+        throw new TypeError('holidayName must not be null or undefined');
+    }
+    if (allHolidays.indexOf(holidayName) === -1) {
+        throw new Error(`feiertage.js: invalid holiday type "${holidayName}"! Must be one of ${allHolidays.toString()}`);
+    }
+}
+function isSpecificHoliday(date, holidayName, region = 'ALL') {
+    checkRegion(region);
+    checkHolidayType(holidayName);
+    const holidays = getHolidaysOfYear(date.getFullYear(), region);
+    const foundHoliday = holidays.find((holiday) => holiday.equals(date));
+    if (!foundHoliday) {
+        return false;
+    }
+    return foundHoliday.name === holidayName;
+}
+/**
+ * Returns all holidays of a year in a {@link Region}.
+ * @param year
+ * @param region
+ * @returns {Array.<Holiday>}
+ */
+function getHolidays(year, region) {
+    let y;
+    if (typeof year === 'string') {
+        y = parseInt(year, 10);
+    }
+    else {
+        y = year;
+    }
+    checkRegion(region);
+    return getHolidaysOfYear(y, region);
+}
+/**
+ *
+ * @param {number} year
+ * @param region
+ * @returns {number[]}
+ * @private
+ */
+function getHolidaysAsUtcTimestamps(year, region) {
+    const holidays = getHolidaysOfYear(year, region);
+    return holidays.map((holiday) => toUtcTimestamp(holiday.date));
+}
+/**
+ *
+ * @param {number} year
+ * @param region
+ * @returns {{objects: Array.<Holiday>, integers}}
+ * @private
+ */
+function getHolidaysOfYear(year, region) {
+    const easterDate = getEasterDate(year);
+    const karfreitag = addDays(new Date(easterDate.getTime()), -2);
+    const ostermontag = addDays(new Date(easterDate.getTime()), 1);
+    const christiHimmelfahrt = addDays(new Date(easterDate.getTime()), 39);
+    const pfingstsonntag = addDays(new Date(easterDate.getTime()), 49);
+    const pfingstmontag = addDays(new Date(easterDate.getTime()), 50);
+    const holidays = [
+        ...getCommonHolidays(year),
+        newHoliday('KARFREITAG', karfreitag, ['ALL']),
+        newHoliday('OSTERMONTAG', ostermontag, ['ALL']),
+        newHoliday('CHRISTIHIMMELFAHRT', christiHimmelfahrt, ['ALL']),
+        newHoliday('PFINGSTMONTAG', pfingstmontag, ['ALL']),
+    ];
+    addHeiligeDreiKoenige(year, region, holidays);
+    addEasterAndPfingsten(year, region, easterDate, pfingstsonntag, holidays);
+    addFronleichnam(region, easterDate, holidays);
+    addMariaeHimmelfahrt(year, region, holidays);
+    addReformationstag(year, region, holidays);
+    addAllerheiligen(year, region, holidays);
+    addBussUndBetttag(year, region, holidays);
+    addWeltkindertag(year, region, holidays);
+    addWeltfrauenTag(year, region, holidays);
+    addRegionalHolidays(year, region, holidays);
+    return holidays.sort((a, b) => a.date.getTime() - b.date.getTime());
+}
+function getCommonHolidays(year) {
+    return [
+        newHoliday('NEUJAHRSTAG', makeDate(year, 1, 1), ['ALL']),
+        newHoliday('TAG_DER_ARBEIT', makeDate(year, 5, 1), ['ALL']),
+        newHoliday('DEUTSCHEEINHEIT', makeDate(year, 10, 3), ['ALL']),
+        newHoliday('ERSTERWEIHNACHTSFEIERTAG', makeDate(year, 12, 25), ['ALL']),
+        newHoliday('ZWEITERWEIHNACHTSFEIERTAG', makeDate(year, 12, 26), ['ALL']),
+    ];
+}
+function addRegionalHolidays(year, region, feiertageObjects) {
+    if (region === 'AUGSBURG') {
+        feiertageObjects.push(newHoliday('AUGSBURGER_FRIEDENSFEST', makeDate(year, 8, 8), ['ALL']));
+    }
+}
+function addHeiligeDreiKoenige(year, region, feiertageObjects) {
+    const validRegions = ['BW', 'BY', 'AUGSBURG', 'ST'];
+    if (validRegions.includes(region) || region === 'ALL') {
+        feiertageObjects.push(newHoliday('HEILIGEDREIKOENIGE', makeDate(year, 1, 6), validRegions));
+    }
+}
+function addEasterAndPfingsten(year, region, easterDate, pfingstsonntag, feiertageObjects) {
+    const validRegions = ['BB'];
+    if (validRegions.includes(region) || region === 'ALL') {
+        feiertageObjects.push(newHoliday('OSTERSONNTAG', easterDate, validRegions), newHoliday('PFINGSTSONNTAG', pfingstsonntag, validRegions));
+    }
+}
+function addFronleichnam(region, easterDate, holidays) {
+    const validRegions = ['BW', 'BY', 'AUGSBURG', 'HE', 'NW', 'RP', 'SL'];
+    if (validRegions.includes(region) || region === 'ALL') {
+        const fronleichnam = addDays(new Date(easterDate.getTime()), 60);
+        holidays.push(newHoliday('FRONLEICHNAM', fronleichnam, validRegions));
+    }
+}
+function addMariaeHimmelfahrt(year, region, holidays) {
+    const validRegions = ['SL', 'BY', 'AUGSBURG'];
+    if (validRegions.includes(region) || region === 'ALL') {
+        holidays.push(newHoliday('MARIAHIMMELFAHRT', makeDate(year, 8, 15), validRegions));
+    }
+}
+function addReformationstag(year, region, holidays) {
+    const validRegions = [
+        'NI',
+        'BB',
+        'MV',
+        'SN',
+        'ST',
+        'TH',
+        'HB',
+        'HH',
+        'NI',
+        'SH',
+    ];
+    if (year === 2017 || validRegions.includes(region) || region === 'ALL') {
+        holidays.push(newHoliday('REFORMATIONSTAG', makeDate(year, 10, 31), validRegions));
+    }
+}
+function addAllerheiligen(year, region, holidays) {
+    const validRegions = ['BW', 'BY', 'NW', 'RP', 'SL', 'AUGSBURG'];
+    if (validRegions.includes(region) || region === 'ALL') {
+        holidays.push(newHoliday('ALLERHEILIGEN', makeDate(year, 11, 1), validRegions));
+    }
+}
+function addBussUndBetttag(year, region, holidays) {
+    const validRegions = ['SN'];
+    if (region === 'SN' || region === 'ALL') {
+        // @todo write test
+        const bussbettag = getBussBettag(year);
+        holidays.push(newHoliday('BUBETAG', makeDate(bussbettag.getUTCFullYear(), bussbettag.getUTCMonth() + 1, bussbettag.getUTCDate()), validRegions));
+    }
+}
+function addWeltkindertag(year, region, holidays) {
+    if (year >= 2019 && (region === 'TH' || region === 'ALL')) {
+        holidays.push(newHoliday('WELTKINDERTAG', makeDate(year, 9, 20), ['ALL']));
+    }
+}
+function addWeltfrauenTag(year, region, feiertageObjects) {
+    if (year <= 2018) {
+        return;
+    }
+    if (region === 'BE' || region === 'ALL') {
+        // in Berlin ist der Weltfrauentag ein Feiertag seit 2018
+        feiertageObjects.push(newHoliday('WELTFRAUENTAG', makeDate(year, 3, 8), ['ALL']));
+    }
+    if (region === 'MV' && year >= 2023) {
+        // in MV wird der Weltfrauentag erst ab 2023 eingeführt
+        feiertageObjects.push(newHoliday('WELTFRAUENTAG', makeDate(year, 3, 8), ['ALL']));
+    }
+}
+/**
+ * Calculates the Easter date of a given year.
+ * @param year {number}
+ * @returns {Date} Easter date
+ * @private
+ */
+function getEasterDate(year) {
+    const C = Math.floor(year / 100);
+    // tslint:disable:binary-expression-operand-order
+    // tslint generates false positives in the following blocks
+    const N = year - 19 * Math.floor(year / 19);
+    const K = Math.floor((C - 17) / 25);
+    let I = C - Math.floor(C / 4) - Math.floor((C - K) / 3) + 19 * N + 15;
+    I -= 30 * Math.floor(I / 30);
+    I -=
+        Math.floor(I / 28) *
+            (1 -
+                Math.floor(I / 28) *
+                    Math.floor(29 / (I + 1)) *
+                    Math.floor((21 - N) / 11));
+    let J = year + Math.floor(year / 4) + I + 2 - C + Math.floor(C / 4);
+    J -= 7 * Math.floor(J / 7);
+    const L = I - J;
+    const M = 3 + Math.floor((L + 40) / 44);
+    const D = L + 28 - 31 * Math.floor(M / 4);
+    // tslint:enable:binary-expression-operand-order
+    return new Date(year, M - 1, D);
+}
+/**
+ * Computes the "Buss- und Bettag"'s date.
+ * @param jahr {number}
+ * @returns {Date} the year's "Buss- und Bettag" date
+ * @private
+ */
+function getBussBettag(jahr) {
+    const weihnachten = new Date(jahr, 11, 25, 12, 0, 0);
+    const ersterAdventOffset = 32;
+    let wochenTagOffset = weihnachten.getDay() % 7;
+    if (wochenTagOffset === 0) {
+        wochenTagOffset = 7;
+    }
+    const tageVorWeihnachten = wochenTagOffset + ersterAdventOffset;
+    let bbtag = new Date(weihnachten.getTime());
+    bbtag = addDays(bbtag, -tageVorWeihnachten);
+    return bbtag;
+}
+/**
+ * Adds {@code days} days to the given {@link Date}.
+ * @param date
+ * @param days
+ * @returns {Date}
+ * @private
+ */
+function addDays(date, days) {
+    const changedDate = new Date(date);
+    changedDate.setDate(date.getDate() + days);
+    return changedDate;
+}
+/**
+ * Creates a new {@link Date}.
+ * @param year
+ * @param naturalMonth month (1-12)
+ * @param day
+ * @returns {Date}
+ * @private
+ */
+function makeDate(year, naturalMonth, day) {
+    return new Date(year, naturalMonth - 1, day);
+}
+/**
+ *
+ * @param name
+ * @param date
+ * @returns {Holiday}
+ * @private
+ */
+function newHoliday(name, date, regions) {
+    if (regions.length === 1 && regions[0] === 'ALL') {
+        regions = allRegions;
+    }
+    return {
+        name,
+        date,
+        dateString: localeDateObjectToDateString(date),
+        regions,
+        trans(lang = currentLanguage) {
+            throw new Error('Method deprecated. Please replace trans() with translate(). This method will be removed in the next major release.');
+        },
+        translate(lang = currentLanguage) {
+            return lang === undefined || lang === null
+                ? undefined
+                : translations[lang][this.name];
+        },
+        getNormalizedDate() {
+            return toUtcTimestamp(this.date);
+        },
+        equals(otherDate) {
+            const dateString = localeDateObjectToDateString(otherDate);
+            return this.dateString === dateString;
+        },
+    };
+}
+/**
+ *
+ * @param date
+ * @returns {string}
+ * @private
+ */
+function localeDateObjectToDateString(date) {
+    const normalizedDate = new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000);
+    normalizedDate.setUTCHours(0, 0, 0, 0);
+    return normalizedDate.toISOString().slice(0, 10);
+}
+/**
+ * Returns the UTC timestamp of the given date with hours, minutes, seconds, and milliseconds set to zero.
+ * @param date
+ * @returns {number} UTC timestamp
+ */
+function toUtcTimestamp(date) {
+    const internalDate = new Date(date);
+    internalDate.setHours(0, 0, 0, 0);
+    return internalDate.getTime();
+}
+
+
+//# sourceMappingURL=feiertage.js.map
 
 
 /***/ }),
@@ -49321,6 +50125,140 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/BKAvailability.vue?vue&type=template&id=b40fd004&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/item/BKAvailability.vue?vue&type=template&id=b40fd004& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { class: { row: !_vm.short } }, [
+    _vm._ssrNode(
+      (!_vm.short
+        ? '<div class="col-4">' +
+          _vm._ssrEscape(
+            _vm._s(_vm.$translate("biokinderDesign::Template.itemAvailability"))
+          ) +
+          "</div>"
+        : "<!---->") +
+        " <div" +
+        _vm._ssrClass(null, {
+          "col-8": !_vm.short,
+          liveShippingInfo: _vm.short
+        }) +
+        ">" +
+        _vm._s(_vm.availabilityDisplay) +
+        "</div>"
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/BKShippingIcon.vue?vue&type=template&id=797f982c&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/item/BKShippingIcon.vue?vue&type=template&id=797f982c& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "descriptionContent row" },
+    [
+      _vm._ssrNode(
+        '<div class="col-4"><img' +
+          _vm._ssrAttr("src", _vm.shippingIconUrl) +
+          _vm._ssrAttr("alt", _vm.shippingName) +
+          ' class="openPorto"></div> '
+      ),
+      _vm._ssrNode(
+        '<div class="detail col-8">',
+        "</div>",
+        [
+          _vm._ssrNode(
+            "<span>" +
+              _vm._ssrEscape("Versand per " + _vm._s(_vm.shippingName)) +
+              "</span> "
+          ),
+          _vm._ssrNode(
+            '<ul class="ship">',
+            "</ul>",
+            [
+              _vm._ssrNode(
+                "<li>" +
+                  _vm._s(_vm.shippingCosts + " innerhalb " + _vm.countryName) +
+                  "</li> "
+              ),
+              _vm._ssrNode(
+                "<li>",
+                "</li>",
+                [
+                  _c("biokinder-availability", {
+                    attrs: {
+                      short: true,
+                      avd: _vm.avd,
+                      variation: _vm.variation
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._ssrNode(
+                " <li>" +
+                  _vm._s(_vm.middleLlistElement) +
+                  '</li> <li>... <a data-toggle="modal" href="#shippingscosts"' +
+                  _vm._ssrAttr(
+                    "title",
+                    _vm.$translate("Ceres::Template.singleItemShippingCosts")
+                  ) +
+                  ' class="openPorto">' +
+                  _vm._ssrEscape(
+                    _vm._s(
+                      _vm.$translate(
+                        "biokinderDesign::Template.itemMoreInformation"
+                      )
+                    )
+                  ) +
+                  "</a></li>"
+              )
+            ],
+            2
+          )
+        ],
+        2
+      )
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/GraduatedPrices.vue?vue&type=template&id=0fc0278e&":
 /*!*******************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/item/GraduatedPrices.vue?vue&type=template&id=0fc0278e& ***!
@@ -51122,19 +52060,12 @@ var render = function() {
                                       .id
                                 },
                                 [
-                                  _c(
-                                    "client-only",
-                                    [
-                                      _c("biokinder-availability", {
-                                        attrs: {
-                                          avd: _vm.$attrs.availabilitydata,
-                                          variation:
-                                            _vm.currentVariation.variation
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  )
+                                  _c("biokinder-availability", {
+                                    attrs: {
+                                      avd: _vm.$attrs.availabilitydata,
+                                      variation: _vm.currentVariation.variation
+                                    }
+                                  })
                                 ],
                                 1
                               ),
@@ -51636,23 +52567,16 @@ var render = function() {
                           "div",
                           { staticClass: "descriptionContainer shippingInfo" },
                           [
-                            _c(
-                              "client-only",
-                              [
-                                _c("biokinder-shipping-icon", {
-                                  attrs: {
-                                    variation: _vm.currentVariation.variation,
-                                    avd: _vm.$attrs.availabilitydata,
-                                    availability:
-                                      _vm.currentVariation.variation
-                                        .availabilityId,
-                                    shipping: _vm.calcDefaultShippingCosts,
-                                    countryId: _vm.shippingCountryId
-                                  }
-                                })
-                              ],
-                              1
-                            )
+                            _c("biokinder-shipping-icon", {
+                              attrs: {
+                                variation: _vm.currentVariation.variation,
+                                avd: _vm.$attrs.availabilitydata,
+                                availability:
+                                  _vm.currentVariation.variation.availabilityId,
+                                shipping: _vm.calcDefaultShippingCosts,
+                                countryId: _vm.shippingCountryId
+                              }
+                            })
                           ],
                           1
                         ),
@@ -76700,6 +77624,12 @@ function beforeCreate(context) {
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("item-availability", function () {
     return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./app/components/item/ItemAvailability.vue */ "./resources/js/src/app/components/item/ItemAvailability.vue"));
   });
+  vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("biokinder-availability", function () {
+    return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./app/components/item/BKAvailability.vue */ "./resources/js/src/app/components/item/BKAvailability.vue"));
+  });
+  vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("biokinder-shipping-icon", function () {
+    return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./app/components/item/BKShippingIcon.vue */ "./resources/js/src/app/components/item/BKShippingIcon.vue"));
+  });
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("single-item-bundle", function () {
     return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./app/components/item/SingleItemBundle.vue */ "./resources/js/src/app/components/item/SingleItemBundle.vue"));
   });
@@ -79155,6 +80085,140 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddToWishList_vue_vue_type_template_id_4c3118d2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddToWishList_vue_vue_type_template_id_4c3118d2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/src/app/components/item/BKAvailability.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/js/src/app/components/item/BKAvailability.vue ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _BKAvailability_vue_vue_type_template_id_b40fd004___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BKAvailability.vue?vue&type=template&id=b40fd004& */ "./resources/js/src/app/components/item/BKAvailability.vue?vue&type=template&id=b40fd004&");
+/* harmony import */ var _BKAvailability_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BKAvailability.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/item/BKAvailability.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _BKAvailability_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BKAvailability_vue_vue_type_template_id_b40fd004___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _BKAvailability_vue_vue_type_template_id_b40fd004___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  "282f5ef3"
+  
+)
+
+component.options.__file = "resources/js/src/app/components/item/BKAvailability.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/src/app/components/item/BKAvailability.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/src/app/components/item/BKAvailability.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_BKAvailability_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./BKAvailability.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/BKAvailability.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_BKAvailability_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/src/app/components/item/BKAvailability.vue?vue&type=template&id=b40fd004&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/src/app/components/item/BKAvailability.vue?vue&type=template&id=b40fd004& ***!
+  \************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BKAvailability_vue_vue_type_template_id_b40fd004___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./BKAvailability.vue?vue&type=template&id=b40fd004& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/BKAvailability.vue?vue&type=template&id=b40fd004&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BKAvailability_vue_vue_type_template_id_b40fd004___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BKAvailability_vue_vue_type_template_id_b40fd004___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/src/app/components/item/BKShippingIcon.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/js/src/app/components/item/BKShippingIcon.vue ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _BKShippingIcon_vue_vue_type_template_id_797f982c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BKShippingIcon.vue?vue&type=template&id=797f982c& */ "./resources/js/src/app/components/item/BKShippingIcon.vue?vue&type=template&id=797f982c&");
+/* harmony import */ var _BKShippingIcon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BKShippingIcon.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/item/BKShippingIcon.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _BKShippingIcon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BKShippingIcon_vue_vue_type_template_id_797f982c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _BKShippingIcon_vue_vue_type_template_id_797f982c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  "45777adf"
+  
+)
+
+component.options.__file = "resources/js/src/app/components/item/BKShippingIcon.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/src/app/components/item/BKShippingIcon.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/src/app/components/item/BKShippingIcon.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_BKShippingIcon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./BKShippingIcon.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/BKShippingIcon.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_BKShippingIcon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/src/app/components/item/BKShippingIcon.vue?vue&type=template&id=797f982c&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/src/app/components/item/BKShippingIcon.vue?vue&type=template&id=797f982c& ***!
+  \************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BKShippingIcon_vue_vue_type_template_id_797f982c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./BKShippingIcon.vue?vue&type=template&id=797f982c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/BKShippingIcon.vue?vue&type=template&id=797f982c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BKShippingIcon_vue_vue_type_template_id_797f982c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BKShippingIcon_vue_vue_type_template_id_797f982c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

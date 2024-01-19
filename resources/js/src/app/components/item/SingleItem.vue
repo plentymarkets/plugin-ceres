@@ -60,9 +60,7 @@
                             </div>
 
                           <div :class="'availabilityRow availabilityRow_' + currentVariation.variation.availability.id">
-                            <client-only>
                               <biokinder-availability :avd="$attrs.availabilitydata" :variation="currentVariation.variation" ></biokinder-availability>
-                            </client-only>
                           </div>
 
                           <!-- Variation -->
@@ -190,14 +188,12 @@
 
                 <div class="col-md-5" id="rightSide">
                   <div class="descriptionContainer shippingInfo">
-                      <client-only>
                           <biokinder-shipping-icon 
                             :variation="currentVariation.variation" 
                             :avd="$attrs.availabilitydata" 
                             :availability="currentVariation.variation.availabilityId" 
                             :shipping="calcDefaultShippingCosts"
                             :countryId="shippingCountryId"></biokinder-shipping-icon>
-                      </client-only>
                   </div>
 
                   <!-- instagram -->
