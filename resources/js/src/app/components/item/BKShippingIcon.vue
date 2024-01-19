@@ -45,7 +45,7 @@ export default {
         },
         countryId: {
             type: Number,
-            default: 1
+            default: -1
         }
     },
     computed: {
@@ -56,8 +56,12 @@ export default {
                 return '0,00 €';
         },
         countryName() {
+            if(this.countryId < 0)
+                return "...";
+
             if (this.countryId == 2)
                 return "&Ouml;sterreichs";
+            
             return "Deutschlands";
         },
         shippingIconUrl() {

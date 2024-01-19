@@ -7389,7 +7389,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     countryId: {
       type: Number,
-      default: 1
+      default: -1
     }
   },
   computed: {
@@ -7397,6 +7397,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.shipping !== null) return this.formatFloat(this.shipping) + ' €';else return '0,00 €';
     },
     countryName: function countryName() {
+      if (this.countryId < 0) return "...";
       if (this.countryId == 2) return "&Ouml;sterreichs";
       return "Deutschlands";
     },
