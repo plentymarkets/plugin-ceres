@@ -10862,11 +10862,15 @@ textarea.no-resize {
     }
 }
 
+// If header is sticky, it takes priority over other sticky page elements
+header#page-header {
+    z-index: 1030;
+}
+
 .ie11 .default-header {
     position: fixed;
     top:0;
     width: 100%;
-    z-index: 1000;
 }
 
 // Templates
