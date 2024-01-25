@@ -10864,7 +10864,7 @@ textarea.no-resize {
 
 // If header is sticky, it takes priority over other sticky page elements
 header#page-header {
-    z-index: 1030;
+    z-index: $zindex-fixed;
 }
 
 .ie11 .default-header {
@@ -13785,7 +13785,7 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
 
                     visibility: visible;
                     opacity: 1;
-                    z-index: 1030;
+                    z-index: $zindex-fixed;
                 }
             }
         }

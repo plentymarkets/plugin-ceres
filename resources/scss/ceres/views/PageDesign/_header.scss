@@ -23,9 +23,9 @@
     }
 }
 
-// If header is sticky, it takes priority over other sticky page elements
+// If header is sticky, it takes priority over sticky container widget
 header#page-header {
-    z-index: 1030;
+    z-index: $zindex-fixed;
 }
 
 .ie11 .default-header {
