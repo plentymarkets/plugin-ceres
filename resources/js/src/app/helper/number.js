@@ -71,5 +71,8 @@ export function formatFloat(value, decimals, round)
         // return NaN
         return 1 / 0;
     }
+
+    value = Math.floor(value * 100) / 100;
+
     return parseFloat(value.toFixed(decimals));
 }

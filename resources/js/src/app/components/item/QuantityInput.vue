@@ -277,7 +277,7 @@ export default {
             }
             else
             {
-                diff = formatFloat(value % this.compInterval, this.compDecimals, true);
+                diff = formatFloat(value % this.compInterval, this.compDecimals, false);
             }
 
             if (diff > 0 && diff !== this.compInterval)
@@ -294,7 +294,7 @@ export default {
             }
 
             // cut fraction
-            value = formatFloat(value, this.compDecimals);
+            value = formatFloat(value, this.compDecimals, false);
 
             if (value !== this.compValue)
             {
@@ -312,7 +312,9 @@ export default {
             if (!isNullOrUndefined(this.min) && this.variationBasketQuantity >= this.min && this.variationBasketQuantity !== 0)
             {
                 // set the minimum value to the interval, if the item is already in the basket
-                this.compMin = this.compInterval;
+                if (Number.isInteger(this.compMin)) {
+                  this.compMin = this.compInterval;
+                }
             }
             else if (this.variationBasketQuantity === 0)
             {
