@@ -138,6 +138,6 @@ class CeresSeoConfig extends PluginConfig
         $this->itemCondition2 = $this->getTextValue('condition.mapping.condition2', 'https://schema.org/NewCondition');
         $this->itemCondition3 = $this->getTextValue('condition.mapping.condition3', 'https://schema.org/NewCondition');
         $this->itemCondition4 = $this->getTextValue('condition.mapping.condition4', 'https://schema.org/UsedCondition');
-        $this->imageSeo = $this->getTextValue('imageSeo', 'url');
+        $this->imageSeo = $this->getTextValue('imageSeo.mapping.image', 'url');
     }
 }
