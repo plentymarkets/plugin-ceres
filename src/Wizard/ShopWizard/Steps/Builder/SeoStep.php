@@ -542,7 +542,7 @@ class SeoStep extends Step
                     "type"         => "select",
                     "defaultValue" => "1",
                     "options"      => [
-                        "name" => "Wizard.imageChoose",
+                        "name" => "Wizard.imageSeoChoose",
                         "listBoxValues" => $options,
                     ]
                 ]
