@@ -4969,30 +4969,38 @@
                         }
                     }
                 },
-                "imageSeo": {
-                    "type": "selectBox",
-                    "required": false,
-                    "label": "Config.imageSeo",
+                "imageSeo.mapping": {
+                    "type": "verticalContainer",
+                    "label": "Config.imageSeoMapping",
                     "options": {
-                        "defaultValue": "url",
-                        "selectBoxValues": [
-                            {
-                                "value": "url",
-                                "caption": "Config.imageSeoUrl"
-                            },
-                            {
-                                "value": "urlPreview",
-                                "caption": "Config.imageSeoUrlPreview"
-                            },
-                            {
-                                "value": "urlSecondPreview",
-                                "caption": "Config.imageSeoUrlSecondPreview"
-                            },
-                            {
-                                "value": "urlMiddle",
-                                "caption": "Config.imageSeoUrlMiddle"
+                        "containerEntries": {
+                            "imageSeo.mapping.image": {
+                                "type": "selectBox",
+                                "required": false,
+                                "label": "Config.imageSeo",
+                                "options": {
+                                    "defaultValue": "url",
+                                    "selectBoxValues": [
+                                        {
+                                            "value": "url",
+                                            "caption": "Config.imageSeoUrl"
+                                        },
+                                        {
+                                            "value": "urlPreview",
+                                            "caption": "Config.imageSeoUrlPreview"
+                                        },
+                                        {
+                                            "value": "urlSecondPreview",
+                                            "caption": "Config.imageSeoUrlSecondPreview"
+                                        },
+                                        {
+                                            "value": "urlMiddle",
+                                            "caption": "Config.imageSeoUrlMiddle"
+                                        }
+                                    ]
+                                }
                             }
-                        ]
+                        }
                     }
                 }
             }
