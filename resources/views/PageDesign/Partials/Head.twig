@@ -16,11 +16,9 @@
     <link rel="canonical" href="{{ canonicalUrl  ~ services.url.getCanonicalQueryString() }}">
 {% endif %}
 
-{% if services.url.isCanonical() or request.get('env') == "testing" %}
     {% for language, url in languageUrls %}
         <link rel="alternate" hreflang="{{language}}" href="{{url}}"/>
     {% endfor %}
-{% endif %}
 
 <style data-font="Custom-Font">
     {% set customFont =
