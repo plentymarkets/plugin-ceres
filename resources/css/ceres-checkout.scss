@@ -10862,7 +10862,7 @@ textarea.no-resize {
     }
 }
 
-// If header is sticky, it takes priority over other sticky page elements
+// If header is sticky, it takes priority over sticky container widget
 header#page-header {
     z-index: $zindex-fixed;
 }
@@ -13785,7 +13785,7 @@ body.menu-is-visible { // stylelint-disable-line selector-no-qualifying-type
 
                     visibility: visible;
                     opacity: 1;
-                    z-index: $zindex-fixed;
+                    z-index: $zindex-9;
                 }
             }
         }
