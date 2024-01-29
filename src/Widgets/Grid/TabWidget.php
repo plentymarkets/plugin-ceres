@@ -60,6 +60,10 @@ class TabWidget extends GridWidget
             ->withName("Widget.tabNewTabInputName")
             ->withTooltip("Widget.tabNewTabInputTooltip");
 
+        $container->children->createText("uuid")
+            ->withName("Widget.tabNewTabInputUuid")
+            ->withTooltip("Widget.tabNewTabInputUuidTooltip");
+
         $container->children->createUUID("uuid");
 
         $settings->createSpacing();
