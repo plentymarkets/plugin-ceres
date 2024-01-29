@@ -310,7 +310,7 @@ export default Vue.component("address-select", {
         {
             event.preventDefault();
             event.stopPropagation();
-            const addressRefs = Object.keys(this.$refs).filter(ref => ref.startsWith("Address_"));
+            const addressRefs = Object.keys(this.$refs).filter(ref => ref.startsWith("Address_" + addressType));
 
             addressRefs.forEach(ref =>
             {

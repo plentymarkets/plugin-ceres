@@ -71412,7 +71412,7 @@ var ModalService = __webpack_require__(/*! ../../../services/ModalService */ "./
       event.preventDefault();
       event.stopPropagation();
       var addressRefs = Object.keys(this.$refs).filter(function (ref) {
-        return ref.startsWith("Address_");
+        return ref.startsWith("Address_" + addressType);
       });
       addressRefs.forEach(function (ref) {
         _this4.$refs[ref].classList.remove("d-none");
