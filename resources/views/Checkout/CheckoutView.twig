@@ -62,7 +62,7 @@
         "gb": ceresConfig.addresses.billingAddressRequire_en
         }
     %}
-    <div class="page-content ref="pageContent" checkout container-max pt-3" :data-nrOfDeliveryAddresses="{{nrOfDeliveryAddresses}}" :data-nrOfBillingAddresses="{{nrOfBillingAddresses}}">
+    <div class="page-content checkout container-max pt-3" ref="pageContent" :data-nrOfDeliveryAddresses="{{nrOfDeliveryAddresses}}" :data-nrOfBillingAddresses="{{nrOfBillingAddresses}}">
         {% set overrideCheckout = LayoutContainer.show("Ceres::Checkout") %}
         {% if overrideCheckout | trim is empty %}
             <div class="row mt-3">
