@@ -71769,7 +71769,7 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
 
       this._syncOptionTypesAddressData();
 
-      var theRefs = this.$refs;
+      var theRefs = this.$root.$refs;
       this.$store.dispatch("createAddress", {
         address: this.addressData,
         addressType: this.addressType

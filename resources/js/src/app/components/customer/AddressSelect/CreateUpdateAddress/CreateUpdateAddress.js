@@ -198,7 +198,7 @@ export default Vue.component("create-update-address", {
             this.waiting = true;
             this._syncOptionTypesAddressData();
 
-            const theRefs = this.$refs;
+            const theRefs = this.$root.$refs;
 
             this.$store.dispatch("createAddress", { address: this.addressData, addressType: this.addressType })
                 .then(
