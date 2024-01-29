@@ -71408,18 +71408,12 @@ var ModalService = __webpack_require__(/*! ../../../services/ModalService */ "./
       var event = arguments.length > 2 ? arguments[2] : undefined;
       event.preventDefault();
       event.stopPropagation();
-      var addressTypeClassElement = document.getElementsByClassName("addressType" + addressType);
-
-      for (var i = 0; i < addressTypeClassElement.length; i++) {
-        addressTypeClassElement[i].classList.remove("d-none");
-      }
-
       address.pivot.isPrimary = 1;
       this.$store.dispatch("updateAddress", {
         address: address,
         addressType: addressType
       }).then(function () {
-        document.querySelector(".cmp-address-list .item input:checked+.item-inner .addressType" + addressType).classList.add("d-none");
+        _this4.$refs[addressType + address.id].classList.add("d-none");
       }, function (error) {
         _this4._handleError(error.error);
       });
@@ -71775,9 +71769,9 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
         _this3.waiting = false;
 
         if (_this3.$store.getters.isLoggedIn) {
-          var totalNrOfBillingAddresses = _this3.getNumberOfActiveAddresses(document.querySelectorAll(".invoice-addresses-select .vue-recycle-scroller__item-view"));
+          var totalNrOfBillingAddresses = _this3.getNumberOfActiveAddresses(_this3.$refs.invoiceAddressesSelect.querySelectorAll(".vue-recycle-scroller__item-view"));
 
-          var totalNrOfShippingAddresses = _this3.getNumberOfActiveAddresses(document.querySelectorAll(".shipping-addresses-select .vue-recycle-scroller__item-view"));
+          var totalNrOfShippingAddresses = _this3.getNumberOfActiveAddresses(_this3.$refs.shippingAddressesSelect.querySelectorAll(".shipping-addresses-select .vue-recycle-scroller__item-view"));
 
           if (_this3.addressType === "1" && (totalNrOfBillingAddresses === 0 || totalNrOfBillingAddresses === 1) || _this3.addressType === "2" && (totalNrOfShippingAddresses === 0 || totalNrOfShippingAddresses === 1)) {
             var theNewSavedAddress = response;
@@ -71788,9 +71782,9 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
               addressType: _this3.addressType
             }).then(function () {
               if (_this3.addressType === "1") {
-                document.querySelector(".page-content").dataset.nrofbillingaddresses = "1";
+                _this3.$refs.pageContent.setAttribute("data-nrOfBillingAddresses", "1");
               } else if (_this3.addressType === "2") {
-                document.querySelector(".page-content").dataset.nrofdeliveryaddresses = "1";
+                _this3.$refs.pageContent.setAttribute("data-nrOfDeliveryAddresses", "1");
               }
             });
           }
