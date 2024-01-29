@@ -18,6 +18,7 @@
 ### Changed Templates
 
 - In plentyShop LTS 5.0.62 we made changes to template files relating the feedback plugin which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
+- We've updated the `z-index` in `resources/scss/ceres/views/PageDesign/_header.scss` and `resources/scss/ceres/widgets/Header/_navigation-widget.scss` to account for the new fixed header configuration. [View the changes in details.](https://github.com/plentymarkets/plugin-ceres/pull/3467/files?file-filters%5B%5D=.scss&show-viewed-files=true)
 - [resources/views/ResultFields/ListItem.fields.json](https://github.com/plentymarkets/plugin-ceres/pull/3459/files#diff)
 
 ## v5.0.61 (2023-10-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.60...5.0.61" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
