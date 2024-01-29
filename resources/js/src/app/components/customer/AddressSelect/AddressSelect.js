@@ -310,13 +310,18 @@ export default Vue.component("address-select", {
         {
             event.preventDefault();
             event.stopPropagation();
+            const addressRefs = Object.keys(this.$refs).filter(ref => ref.startsWith("Address_"));
 
+            addressRefs.forEach(ref =>
+            {
+                this.$refs[ref].classList.remove("d-none");
+            });
             address.pivot.isPrimary = 1;
             this.$store.dispatch("updateAddress", { address: address, addressType: addressType })
                 .then(
                     () =>
                     {
-                        this.$refs[addressType + address.id].classList.add("d-none");
+                        this.$refs["Address_" + addressType + "_" + address.id].classList.add("d-none");
                     },
                     error =>
                     {
