@@ -310,18 +310,13 @@ export default Vue.component("address-select", {
         {
             event.preventDefault();
             event.stopPropagation();
-            const addressTypeClassElement = document.getElementsByClassName("addressType" + addressType);
 
-            for (let i = 0; i < addressTypeClassElement.length; i++)
-            {
-                addressTypeClassElement[i].classList.remove("d-none");
-            }
             address.pivot.isPrimary = 1;
             this.$store.dispatch("updateAddress", { address: address, addressType: addressType })
                 .then(
                     () =>
                     {
-                        document.querySelector(".cmp-address-list .item input:checked+.item-inner .addressType" + addressType).classList.add("d-none");
+                        this.$refs[addressType + address.id].classList.add("d-none");
                     },
                     error =>
                     {

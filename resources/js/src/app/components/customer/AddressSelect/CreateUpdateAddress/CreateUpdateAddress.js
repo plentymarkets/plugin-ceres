@@ -206,8 +206,8 @@ export default Vue.component("create-update-address", {
                         this.waiting = false;
                         if (this.$store.getters.isLoggedIn)
                         {
-                            const totalNrOfBillingAddresses = this.getNumberOfActiveAddresses(document.querySelectorAll(".invoice-addresses-select .vue-recycle-scroller__item-view"));
-                            const totalNrOfShippingAddresses = this.getNumberOfActiveAddresses(document.querySelectorAll(".shipping-addresses-select .vue-recycle-scroller__item-view"));
+                            const totalNrOfBillingAddresses = this.getNumberOfActiveAddresses(this.$refs.invoiceAddressesSelect.querySelectorAll(".vue-recycle-scroller__item-view"));
+                            const totalNrOfShippingAddresses = this.getNumberOfActiveAddresses(this.$refs.shippingAddressesSelect.querySelectorAll(".shipping-addresses-select .vue-recycle-scroller__item-view"));
 
                             if (
                                 (this.addressType === "1" && (totalNrOfBillingAddresses === 0 || totalNrOfBillingAddresses === 1))
@@ -226,11 +226,11 @@ export default Vue.component("create-update-address", {
                                     {
                                         if (this.addressType === "1")
                                         {
-                                            document.querySelector(".page-content").dataset.nrofbillingaddresses = "1";
+                                            this.$refs.pageContent.setAttribute("data-nrOfBillingAddresses", "1");
                                         }
                                         else if (this.addressType === "2")
                                         {
-                                            document.querySelector(".page-content").dataset.nrofdeliveryaddresses = "1";
+                                            this.$refs.pageContent.setAttribute("data-nrOfDeliveryAddresses", "1");
                                         }
                                     });
                             }

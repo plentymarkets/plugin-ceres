@@ -62,7 +62,7 @@
         "gb": ceresConfig.addresses.billingAddressRequire_en
         }
     %}
-    <div class="page-content checkout container-max pt-3" :data-nrOfDeliveryAddresses="{{nrOfDeliveryAddresses}}" :data-nrOfBillingAddresses="{{nrOfBillingAddresses}}">
+    <div class="page-content ref="pageContent" checkout container-max pt-3" :data-nrOfDeliveryAddresses="{{nrOfDeliveryAddresses}}" :data-nrOfBillingAddresses="{{nrOfBillingAddresses}}">
         {% set overrideCheckout = LayoutContainer.show("Ceres::Checkout") %}
         {% if overrideCheckout | trim is empty %}
             <div class="row mt-3">
@@ -104,7 +104,7 @@
                                         </header>
 
                                         {{ LayoutContainer.show("Ceres::Checkout.BeforeBillingAddress") }}
-                                        <div class="invoice-addresses-select">
+                                        <div class="invoice-addresses-select" ref="invoiceAddressesSelect">
                                             <invoice-address-select
                                                 :has-to-validate="true"
                                                 :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
@@ -125,7 +125,7 @@
                                         </header>
 
                                         {{ LayoutContainer.show("Ceres::Checkout.BeforeShippingAddress") }}
-                                        <div class="shipping-addresses-select">
+                                        <div class="shipping-addresses-select" ref="shippingAddressesSelect">
                                             <shipping-address-select
                                                 :optional-address-fields="{{ optionalShippingAddressFields | json_encode }}"
                                                 :required-address-fields="{{ requiredShippingAddressFields | json_encode }}"
