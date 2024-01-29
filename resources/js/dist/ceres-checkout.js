@@ -71769,6 +71769,7 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
 
       this._syncOptionTypesAddressData();
 
+      var theRefs = this.$refs;
       this.$store.dispatch("createAddress", {
         address: this.addressData,
         addressType: this.addressType
@@ -71778,9 +71779,9 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
         _this3.waiting = false;
 
         if (_this3.$store.getters.isLoggedIn) {
-          var totalNrOfBillingAddresses = _this3.getNumberOfActiveAddresses(_this3.$refs.invoiceAddressesSelect.querySelectorAll(".vue-recycle-scroller__item-view"));
+          var totalNrOfBillingAddresses = _this3.getNumberOfActiveAddresses(theRefs.invoiceAddressesSelect.querySelectorAll(".vue-recycle-scroller__item-view"));
 
-          var totalNrOfShippingAddresses = _this3.getNumberOfActiveAddresses(_this3.$refs.shippingAddressesSelect.querySelectorAll(".shipping-addresses-select .vue-recycle-scroller__item-view"));
+          var totalNrOfShippingAddresses = _this3.getNumberOfActiveAddresses(theRefs.shippingAddressesSelect.querySelectorAll(".shipping-addresses-select .vue-recycle-scroller__item-view"));
 
           if (_this3.addressType === "1" && (totalNrOfBillingAddresses === 0 || totalNrOfBillingAddresses === 1) || _this3.addressType === "2" && (totalNrOfShippingAddresses === 0 || totalNrOfShippingAddresses === 1)) {
             var theNewSavedAddress = response;

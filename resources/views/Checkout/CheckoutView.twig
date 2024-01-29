@@ -104,7 +104,7 @@
                                         </header>
 
                                         {{ LayoutContainer.show("Ceres::Checkout.BeforeBillingAddress") }}
-                                        <div class="invoice-addresses-select" ref="invoiceAddressesSelect">
+                                        <div ref="invoiceAddressesSelect" class="invoice-addresses-select">
                                             <invoice-address-select
                                                 :has-to-validate="true"
                                                 :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"

@@ -198,6 +198,8 @@ export default Vue.component("create-update-address", {
             this.waiting = true;
             this._syncOptionTypesAddressData();
 
+            const theRefs = this.$refs;
+
             this.$store.dispatch("createAddress", { address: this.addressData, addressType: this.addressType })
                 .then(
                     (response) =>
@@ -206,8 +208,8 @@ export default Vue.component("create-update-address", {
                         this.waiting = false;
                         if (this.$store.getters.isLoggedIn)
                         {
-                            const totalNrOfBillingAddresses = this.getNumberOfActiveAddresses(this.$refs.invoiceAddressesSelect.querySelectorAll(".vue-recycle-scroller__item-view"));
-                            const totalNrOfShippingAddresses = this.getNumberOfActiveAddresses(this.$refs.shippingAddressesSelect.querySelectorAll(".shipping-addresses-select .vue-recycle-scroller__item-view"));
+                            const totalNrOfBillingAddresses = this.getNumberOfActiveAddresses(theRefs.invoiceAddressesSelect.querySelectorAll(".vue-recycle-scroller__item-view"));
+                            const totalNrOfShippingAddresses = this.getNumberOfActiveAddresses(theRefs.shippingAddressesSelect.querySelectorAll(".shipping-addresses-select .vue-recycle-scroller__item-view"));
 
                             if (
                                 (this.addressType === "1" && (totalNrOfBillingAddresses === 0 || totalNrOfBillingAddresses === 1))
