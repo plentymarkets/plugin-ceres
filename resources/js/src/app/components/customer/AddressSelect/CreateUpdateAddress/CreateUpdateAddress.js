@@ -228,11 +228,11 @@ export default Vue.component("create-update-address", {
                                     {
                                         if (this.addressType === "1")
                                         {
-                                            this.$refs.pageContent.setAttribute("data-nrOfBillingAddresses", "1");
+                                            theRefs.pageContent.setAttribute("data-nrOfBillingAddresses", "1");
                                         }
                                         else if (this.addressType === "2")
                                         {
-                                            this.$refs.pageContent.setAttribute("data-nrOfDeliveryAddresses", "1");
+                                            theRefs.pageContent.setAttribute("data-nrOfDeliveryAddresses", "1");
                                         }
                                     });
                             }

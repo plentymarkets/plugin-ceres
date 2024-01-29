@@ -71792,9 +71792,9 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
               addressType: _this3.addressType
             }).then(function () {
               if (_this3.addressType === "1") {
-                _this3.$refs.pageContent.setAttribute("data-nrOfBillingAddresses", "1");
+                theRefs.pageContent.setAttribute("data-nrOfBillingAddresses", "1");
               } else if (_this3.addressType === "2") {
-                _this3.$refs.pageContent.setAttribute("data-nrOfDeliveryAddresses", "1");
+                theRefs.pageContent.setAttribute("data-nrOfDeliveryAddresses", "1");
               }
             });
           }
