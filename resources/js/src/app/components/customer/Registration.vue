@@ -232,7 +232,7 @@ export default {
             const userObject = this.getUserObject();
 
             userObject.recaptcha = recaptchaToken;
-
+            userObject.billingAddress.pivot.isPrimary = 1;
             this.isDisabled = true;
 
             ApiService.post("/rest/io/customer", userObject)
