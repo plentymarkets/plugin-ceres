@@ -332,7 +332,8 @@ export default {
 
             if (!this.isSimpleRegistration)
             {
-                this.billingAddress.pivot = 1;
+                this.billingAddress.pivot = {};
+                this.billingAddress.pivot.isPrimary = 1;
                 userObject.billingAddress = this.billingAddress;
             }
 
