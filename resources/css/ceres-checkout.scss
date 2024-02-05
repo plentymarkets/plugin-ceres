@@ -14902,6 +14902,11 @@ header .widget {
             .btn {
                 width: 100% !important;
             }
+
+            @include media-breakpoint-down(xs) {
+                width: auto;
+                top: -7px;
+            }
         }
     }
 
