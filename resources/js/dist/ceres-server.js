@@ -5372,10 +5372,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
       var userObject = this.getUserObject();
       userObject.recaptcha = recaptchaToken;
-      userObject.billingAddress.pivot = [];
-      userObject.billingAddress.pivot.isPrimary = 1;
-      this.billingAddress.pivot = [];
-      this.billingAddress.pivot.isPrimary = 1;
       this.isDisabled = true;
       _services_ApiService__WEBPACK_IMPORTED_MODULE_20__["default"].post("/rest/io/customer", userObject).done(function (response) {
         _services_ApiService__WEBPACK_IMPORTED_MODULE_20__["default"].setToken(response);
@@ -5453,6 +5449,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }
 
       if (!this.isSimpleRegistration) {
+        this.billingAddress.pivot = [];
+        this.billingAddress.pivot.isPrimary = 1;
         userObject.billingAddress = this.billingAddress;
       }
 

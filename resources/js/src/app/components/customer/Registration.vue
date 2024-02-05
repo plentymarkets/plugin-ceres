@@ -232,10 +232,7 @@ export default {
             const userObject = this.getUserObject();
 
             userObject.recaptcha = recaptchaToken;
-            userObject.billingAddress.pivot = [];
-            userObject.billingAddress.pivot.isPrimary = 1;
-            this.billingAddress.pivot = [];
-            this.billingAddress.pivot.isPrimary = 1;
+
             this.isDisabled = true;
 
             ApiService.post("/rest/io/customer", userObject)
@@ -335,6 +332,8 @@ export default {
 
             if (!this.isSimpleRegistration)
             {
+                this.billingAddress.pivot = [];
+                this.billingAddress.pivot.isPrimary = 1;
                 userObject.billingAddress = this.billingAddress;
             }
 
