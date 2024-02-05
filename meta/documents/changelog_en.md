@@ -8,7 +8,8 @@
 
 ### Added
 
-- The plugin configuration contains a new setting in the **Header** section. By activating the setting **Fix header at the top of the page**, the header is fixed at the top of the page when scrolling. This setting applies to both the default header and the ShopBuilder header. Activating this setting significantly decreases [Content Layout Shift](https://web.dev/articles/cls) because it replaces an expensive calculation.
+- The plugin configuration contains a new setting in the **Header** section. By activating the setting **Fix header at the top of the page**, the header is fixed at the top of the page when scrolling. This setting applies to both the default header and the ShopBuilder header. Activating this setting significantly decreases [Cumulative Layout Shift](https://web.dev/articles/cls) because it replaces an expensive calculation.
+    - The plentyShop LTS assistant contains the same configuration in the **Performance** step.
     - ***Important:*** This setting always applies to the whole header. This means that, as far as fixating header elements is concerned, it takes precedent over the configuration of any individual ShopBuilder widget.
 
 ### Changed
