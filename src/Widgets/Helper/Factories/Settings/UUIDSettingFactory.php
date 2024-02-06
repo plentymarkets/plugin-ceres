@@ -9,5 +9,6 @@ class UUIDSettingFactory extends BaseSettingFactory
     public function __construct()
     {
         $this->withType('uuid');
+        $this->withDefaultValue('test');
     }
 }
