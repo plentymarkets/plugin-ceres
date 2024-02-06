@@ -3273,7 +3273,8 @@ abbr[data-original-title] { // 1
           text-decoration: underline dotted; // 2
   cursor: help; // 3
   border-bottom: 0; // 4
-  text-decoration-skip-ink: none; // 5
+  -webkit-text-decoration-skip-ink: none;
+          text-decoration-skip-ink: none; // 5
 }
 
 address {
@@ -4162,6 +4163,11 @@ pre {
     opacity: 1;
   }
   &::-moz-placeholder {
+    color: $input-placeholder-color;
+    // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
+    opacity: 1;
+  }
+  &:-ms-input-placeholder {
     color: $input-placeholder-color;
     // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
     opacity: 1;
@@ -14569,12 +14575,10 @@ header .widget {
 
     a.text-appearance,
     .btn-appearance {
-      -webkit-text-decoration-color: $value;
-              text-decoration-color: $value;
+      text-decoration-color: $value;
 
       @include hover-focus() {
-        -webkit-text-decoration-color: darken($value, 7.5);
-                text-decoration-color: darken($value, 7.5);
+        text-decoration-color: darken($value, 7.5);
       }
     }
 
