@@ -238,7 +238,7 @@ export default {
             ApiService.post("/rest/io/customer", userObject)
                 .done(response =>
                 {
-                  console.log(reponse);
+                    console.log(response);
                     ApiService.setToken(response);
 
                     if (!response.code)
