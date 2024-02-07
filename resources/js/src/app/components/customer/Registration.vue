@@ -238,7 +238,6 @@ export default {
             ApiService.post("/rest/io/customer", userObject)
                 .done(response =>
                 {
-                    console.log(response);
                     ApiService.setToken(response);
 
                     if (!response.code)
@@ -333,8 +332,7 @@ export default {
 
             if (!this.isSimpleRegistration)
             {
-                this.billingAddress.pivot = {};
-                this.billingAddress.pivot.isPrimary = 1;
+                this.billingAddress.isPrimary = 1;
                 userObject.billingAddress = this.billingAddress;
             }
 
