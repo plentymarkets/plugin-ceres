@@ -17919,6 +17919,9 @@ header .widget {
   .cmp-address-list .item-controls {
     justify-content: end;
   }
+  .cmp-address-list .item-controls .btn.btn-medium {
+    min-width: 8rem;
+  }
 }
 .cmp-address-list .item-content {
   display: inline-block;

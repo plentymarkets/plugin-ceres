@@ -14927,6 +14927,9 @@ header .widget {
         }
 
         @include media-breakpoint-down(xs) {
+            .btn.btn-medium {
+                min-width: 8rem;
+            }
             -webkit-box-pack: end;
                 -ms-flex-pack: end;
                     justify-content: end;
