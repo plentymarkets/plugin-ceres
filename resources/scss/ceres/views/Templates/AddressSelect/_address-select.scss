@@ -56,23 +56,6 @@
                 box-shadow: inset 0 0 0 .1rem $primary;
             }
         }
-
-        .primaryAddress {
-            position: absolute;
-            width: 100%;
-            top: 28px;
-            color: $primary;
-            font-size: 13px;
-
-            .btn {
-                width: 100% !important;
-            }
-
-            @include media-breakpoint-down(xs) {
-                width: auto;
-                top: -7px;
-            }
-        }
     }
 
     .item-inner {
@@ -89,7 +72,7 @@
 
     .item-controls {
         display: flex;
-        position: relative;
+        gap: 2px;
 
         .fa {
             float: none;
@@ -99,6 +82,13 @@
             width: 2.2rem;
             height: 2.2rem;
             padding: 0;
+        }
+
+        @include media-breakpoint-down(xs) {
+            flex-direction: column;
+            .primary-select-text {
+                display: none;
+            }
         }
     }
 

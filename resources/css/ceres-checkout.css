@@ -17885,22 +17885,6 @@ header .widget {
   background-color: #d9edf7;
   box-shadow: inset 0 0 0 0.1rem #008ebd;
 }
-.cmp-address-list .item .primaryAddress {
-  position: absolute;
-  width: 100%;
-  top: 28px;
-  color: #008ebd;
-  font-size: 13px;
-}
-.cmp-address-list .item .primaryAddress .btn {
-  width: 100% !important;
-}
-@media (max-width: 575.98px) {
-  .cmp-address-list .item .primaryAddress {
-    width: auto;
-    top: -7px;
-  }
-}
 .cmp-address-list .item-inner {
   display: flex;
   flex-direction: row;
@@ -17915,7 +17899,7 @@ header .widget {
 }
 .cmp-address-list .item-controls {
   display: flex;
-  position: relative;
+  gap: 2px;
 }
 .cmp-address-list .item-controls .fa {
   float: none;
@@ -17930,6 +17914,14 @@ header .widget {
   width: 2.2rem;
   height: 2.2rem;
   padding: 0;
+}
+@media (max-width: 575.98px) {
+  .cmp-address-list .item-controls {
+    flex-direction: column;
+  }
+  .cmp-address-list .item-controls .primary-select-text {
+    display: none;
+  }
 }
 .cmp-address-list .item-content {
   display: inline-block;

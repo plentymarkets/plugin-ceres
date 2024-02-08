@@ -3273,8 +3273,7 @@ abbr[data-original-title] { // 1
           text-decoration: underline dotted; // 2
   cursor: help; // 3
   border-bottom: 0; // 4
-  -webkit-text-decoration-skip-ink: none;
-          text-decoration-skip-ink: none; // 5
+  text-decoration-skip-ink: none; // 5
 }
 
 address {
@@ -4163,11 +4162,6 @@ pre {
     opacity: 1;
   }
   &::-moz-placeholder {
-    color: $input-placeholder-color;
-    // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
-    opacity: 1;
-  }
-  &:-ms-input-placeholder {
     color: $input-placeholder-color;
     // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
     opacity: 1;
@@ -14575,10 +14569,12 @@ header .widget {
 
     a.text-appearance,
     .btn-appearance {
-      text-decoration-color: $value;
+      -webkit-text-decoration-color: $value;
+              text-decoration-color: $value;
 
       @include hover-focus() {
-        text-decoration-color: darken($value, 7.5);
+        -webkit-text-decoration-color: darken($value, 7.5);
+                text-decoration-color: darken($value, 7.5);
       }
     }
 
@@ -14895,23 +14891,6 @@ header .widget {
                         box-shadow: inset 0 0 0 .1rem $primary;
             }
         }
-
-        .primaryAddress {
-            position: absolute;
-            width: 100%;
-            top: 28px;
-            color: $primary;
-            font-size: 13px;
-
-            .btn {
-                width: 100% !important;
-            }
-
-            @include media-breakpoint-down(xs) {
-                width: auto;
-                top: -7px;
-            }
-        }
     }
 
     .item-inner {
@@ -14935,7 +14914,7 @@ header .widget {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
-        position: relative;
+        gap: 2px;
 
         .fa {
             float: none;
@@ -14945,6 +14924,16 @@ header .widget {
             width: 2.2rem;
             height: 2.2rem;
             padding: 0;
+        }
+
+        @include media-breakpoint-down(xs) {
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                    flex-direction: column;
+            .primary-select-text {
+                display: none;
+            }
         }
     }
 
