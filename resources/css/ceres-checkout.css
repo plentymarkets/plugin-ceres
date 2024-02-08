@@ -17916,9 +17916,6 @@ header .widget {
   padding: 0;
 }
 @media (max-width: 575.98px) {
-  .cmp-address-list .item-controls {
-    flex-direction: column;
-  }
   .cmp-address-list .item-controls .primary-select-text {
     display: none;
   }
