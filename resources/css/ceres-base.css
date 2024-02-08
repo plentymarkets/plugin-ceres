@@ -10354,10 +10354,6 @@ button:focus {
   margin: 0 !important;
 }
 
-.app {
-  overflow-x: hidden;
-}
-
 .center-xy {
   display: flex;
   flex-flow: row nowrap;
@@ -12468,6 +12464,16 @@ textarea.no-resize {
   .wrapper-main > header {
     box-shadow: none;
   }
+}
+
+header#page-header {
+  z-index: 1030;
+}
+
+.ie11 .default-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 .list-transition-enter-active,
@@ -15044,6 +15050,7 @@ body.menu-is-visible {
   overflow-y: auto;
   visibility: visible;
   opacity: 1;
+  z-index: 1090;
 }
 .main-navbar-collapsable .ddown > a::after {
   padding-left: 0.5em;
