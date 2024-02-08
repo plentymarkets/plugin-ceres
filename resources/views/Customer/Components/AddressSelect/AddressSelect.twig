@@ -98,6 +98,7 @@
                                             <div class="item-controls mt-2 mt-md-0" v-if="item.id != -99">
                                              <span
                                                     v-if="$store.getters.isLoggedIn"
+                                                    class="primaryAddress"
                                                     :class="item.pivot.isPrimary !== 1 ? 'addressType' + addressType : 'd-none addressType' + addressType"
                                                     :ref="'Address_' + addressType + '_' + item.id"
                                                     >
