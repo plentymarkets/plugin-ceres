@@ -1,5 +1,28 @@
 # Release Notes for plentyShop LTS
 
+## v5.0.62 (2024-XX-XX) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...5.0.62" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- To improve the CLS of your shop with the new header option (see **Added**), open the plugin configuration of plentyShop LTS after updating. Then, open the **Header** section and activate **Fix header at the top of the page**. To check if CLS in your shop can be improved, you can use public services like [PageSpeed Insights](https://pagespeed.web.dev/).
+
+### Added
+
+- The plugin configuration contains a new setting in the **Header** section. By activating the setting **Fix header at the top of the page**, the header is fixed at the top of the page when scrolling. This setting applies to both the default header and the ShopBuilder header. Activating this setting significantly decreases [Cumulative Layout Shift](https://web.dev/articles/cls) because it replaces an expensive calculation.
+    - The plentyShop LTS assistant contains the same configuration in the **Performance** step.
+    - ***Important:*** This setting always applies to the whole header. This means that, as far as fixating header elements is concerned, it takes precedent over the configuration of any individual ShopBuilder widget.
+    - ***Important:*** It may take time until Google Search Console reflects the improved CLS. Google Search Console uses a rolling average of the past 28 days. This means Google Search Console may only reflect the full impact of this change after high CLS values no longer contribute to the rolling average.
+
+### Changed
+
+- Added average rating `feedbackDecimal` and number of feedbacks `feedbackCount` in item list result fields.
+
+### Changed Templates
+
+- In plentyShop LTS 5.0.62 we made changes to template files relating the feedback plugin which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
+- We've updated the `z-index` in `resources/scss/ceres/views/PageDesign/_header.scss` and `resources/scss/ceres/widgets/Header/_navigation-widget.scss` to account for the new fixed header configuration. [View the changes in details.](https://github.com/plentymarkets/plugin-ceres/pull/3467/files?file-filters%5B%5D=.scss&show-viewed-files=true)
+- [resources/views/ResultFields/ListItem.fields.json](https://github.com/plentymarkets/plugin-ceres/pull/3459/files#diff)
+
 ## v5.0.61 (2023-10-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.60...5.0.61" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO

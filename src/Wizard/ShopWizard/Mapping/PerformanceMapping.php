@@ -15,6 +15,12 @@ class PerformanceMapping
             "global"   => false,
             "optional" => true,
         ],
+        "performance_headerOptions" => [
+            "field"    => "header.low_cls_mode",
+            "type"     => "boolean",
+            "global"   => false,
+            "optional" => true,
+        ],
         "performance_loggingOptions" => [
             "field"    => "log.data",
             "type"     => "concatenated",
