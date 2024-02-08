@@ -85,9 +85,7 @@
         }
 
         @include media-breakpoint-down(xs) {
-            .primary-select-text {
-                display: none;
-            }
+            justify-content: end;
         }
     }
 
