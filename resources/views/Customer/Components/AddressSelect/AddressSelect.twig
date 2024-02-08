@@ -95,7 +95,7 @@
                                             <address-header :address="item" :class="paddingClasses" :style="paddingInlineStyles"></address-header>
                                         </div>
                                             <!---->
-                                            <div class="item-controls" v-if="item.id != -99">
+                                            <div class="item-controls mt-2 mt-md-0" v-if="item.id != -99">
                                              <span
                                                     v-if="$store.getters.isLoggedIn"
                                                     :class="item.pivot.isPrimary !== 1 ? 'addressType' + addressType : 'd-none addressType' + addressType"
