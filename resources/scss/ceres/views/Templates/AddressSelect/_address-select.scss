@@ -79,15 +79,12 @@
             @include transition(all .2s ease-in-out);
         }
         .btn {
-            width: 2.2rem;
+            width: 100% !important;
             height: 2.2rem;
             padding: 0;
         }
 
-        @include media-breakpoint-down(xs) {
-            .btn {
-                width: 100% !important;
-            }
+        @include media-breakpoint-up(md) {
             justify-content: end;
         }
     }

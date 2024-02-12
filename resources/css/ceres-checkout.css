@@ -17918,16 +17918,13 @@ header .widget {
   }
 }
 .cmp-address-list .item-controls .btn {
-  width: 2.2rem;
+  width: 100% !important;
   height: 2.2rem;
   padding: 0;
 }
-@media (max-width: 575.98px) {
+@media (min-width: 768px) {
   .cmp-address-list .item-controls {
     justify-content: end;
-  }
-  .cmp-address-list .item-controls .btn {
-    width: 100% !important;
   }
 }
 .cmp-address-list .item-content {
