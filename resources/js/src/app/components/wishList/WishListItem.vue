@@ -3,7 +3,7 @@
         <div class="basket-item component-loading with-icon d-flex">
             <div class="image-container">
               <a :href="wishListItem | itemURL">
-                <img class="d-block mw-100 mh-100" v-if="image" :src="image" :title="wishListItem | itemName">
+                <img class="d-block mw-100 mh-100" v-if="image" :src="image + '.webp'" :alt="wishListItem | itemName" :title="wishListItem | itemName">
               </a>
             </div>
 
