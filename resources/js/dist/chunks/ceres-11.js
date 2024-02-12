@@ -673,7 +673,8 @@ var render = function() {
               ? _c("img", {
                   staticClass: "d-block mw-100 mh-100",
                   attrs: {
-                    src: _vm.image,
+                    src: _vm.image + ".webp",
+                    alt: _vm._f("itemName")(_vm.wishListItem),
                     title: _vm._f("itemName")(_vm.wishListItem)
                   }
                 })
