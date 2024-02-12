@@ -17924,10 +17924,10 @@ header .widget {
 }
 @media (max-width: 575.98px) {
   .cmp-address-list .item-controls {
-    /* .btn.btn-medium {
-        min-width: 8rem;
-    } */
     justify-content: end;
+  }
+  .cmp-address-list .item-controls .btn {
+    width: 100% !important;
   }
 }
 .cmp-address-list .item-content {

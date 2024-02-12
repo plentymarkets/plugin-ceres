@@ -95,10 +95,10 @@
                                             <address-header :address="item" :class="paddingClasses" :style="paddingInlineStyles"></address-header>
                                         </div>
                                             <!---->
-                                            <div class="item-controls mt-2 mt-md-0" v-if="item.id != -99">
+                                            <div class="item-controls row mt-2 mt-md-0" v-if="item.id != -99">
                                              <span
                                                     v-if="$store.getters.isLoggedIn"
-                                                    class="primaryAddress"
+                                                    class="primaryAddress col-12"
                                                     :class="item.pivot.isPrimary !== 1 ? 'addressType' + addressType : 'd-none addressType' + addressType"
                                                     :ref="'Address_' + addressType + '_' + item.id"
                                                     >
@@ -114,7 +114,7 @@
                                                         <i class="fa fa-star-o" aria-hidden="true"></i>
                                                     </button>
                                                 </span>
-                                                <span class="item-edit">
+                                                <span class="item-edit col-12">
                                                     <button
                                                         v-tooltip
                                                         data-toggle="tooltip"
@@ -128,7 +128,7 @@
                                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                     </button>
                                                 </span>
-                                                <span class="item-remove">
+                                                <span class="item-remove col-12">
                                                     <button
                                                         v-tooltip
                                                         data-toggle="tooltip"
