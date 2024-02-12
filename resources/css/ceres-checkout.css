@@ -17906,7 +17906,7 @@ header .widget {
 }
 .cmp-address-list .item-controls {
   display: flex;
-  gap: 2px;
+  gap: 0.5rem;
 }
 .cmp-address-list .item-controls .fa {
   float: none;
