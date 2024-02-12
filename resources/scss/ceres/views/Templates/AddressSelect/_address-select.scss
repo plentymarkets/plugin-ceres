@@ -85,9 +85,9 @@
         }
 
         @include media-breakpoint-down(xs) {
-            .btn.btn-medium {
+            /* .btn.btn-medium {
                 min-width: 8rem;
-            }
+            } */
             justify-content: end;
         }
     }
