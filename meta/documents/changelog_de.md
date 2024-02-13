@@ -11,6 +11,7 @@
 - In den Plugin-Einstellungen gibt es eine neue Einstellung im Bereich **Header**. Wenn du die Einstellung **Header oben fixieren** aktivierst, wird der Header beim Scrollen oben am Seitenanfang fixiert. Diese Einstellung hat Auswirkungen sowohl auf den Standard-Header als auch auf den ShopBuilder-Header. Durch das Aktivieren der Einstellung reduziert sich [Cumulative Layout Shift](https://web.dev/articles/cls) deutlich, weil somit eine teure Berechnung ersetzt wird.
     - Im Assistenten von plentyShop LTS befindet sich dieselbe Einstellung im Schritt **Performance**.
     - ***Wichtig:*** Die Einstellung betrifft den gesamten Header. Das bedeutet, dass sie für das Fixieren von Header-Elementen die Einstellungen einzelner ShopBuilder-Widgets überschreibt.
+    - ***Wichtig:*** Es kann einige Zeit dauern bis die verbesserten CLS-Werte in Google Search Console reflektiert werden. Die Auswertung in Google Search Console bezieht sich auf den gleitenden Durchschnitt der vergangenen 28 Tage. Das bedeutet, dass die tatsächlichen Auswirkungen dieser Änderung erst in Google Search Console reflektiert werden, wenn hohe CLS-Werte nicht mehr Teil des gleitenden Durchschnitts sind.
 
 ### Geändert
 
