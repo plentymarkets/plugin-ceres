@@ -15213,6 +15213,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -56243,19 +56249,28 @@ var render = function() {
       '<div class="basket-item component-loading with-icon d-flex">',
       "</div>",
       [
-        _vm._ssrNode(
-          '<div class="image-container"><a' +
-            _vm._ssrAttr("href", _vm._f("itemURL")(_vm.wishListItem)) +
-            ">" +
-            (_vm.image
-              ? "<img" +
-                _vm._ssrAttr("src", _vm.image + ".webp") +
-                _vm._ssrAttr("alt", _vm._f("itemName")(_vm.wishListItem)) +
-                _vm._ssrAttr("title", _vm._f("itemName")(_vm.wishListItem)) +
-                ' class="d-block mw-100 mh-100">'
-              : "<!---->") +
-            "</a></div> "
-        ),
+        _vm._ssrNode('<div class="image-container">', "</div>", [
+          _vm._ssrNode(
+            "<a" +
+              _vm._ssrAttr("href", _vm._f("itemURL")(_vm.wishListItem)) +
+              ">",
+            "</a>",
+            [
+              _vm.image
+                ? _c("lazy-img", {
+                    attrs: {
+                      "picture-class": "d-block mw-100 mh-100",
+                      "image-url": _vm.image + ".webp",
+                      alt: _vm._f("itemName")(_vm.wishListItem),
+                      title: _vm._f("itemName")(_vm.wishListItem)
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ]),
+        _vm._ssrNode(" "),
         _vm._ssrNode(
           '<div class="meta-container-wrapper">',
           "</div>",

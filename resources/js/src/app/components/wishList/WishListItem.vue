@@ -3,7 +3,13 @@
         <div class="basket-item component-loading with-icon d-flex">
             <div class="image-container">
               <a :href="wishListItem | itemURL">
-                <img class="d-block mw-100 mh-100" v-if="image" :src="image + '.webp'" :alt="wishListItem | itemName" :title="wishListItem | itemName">
+                <lazy-img
+                    picture-class="d-block mw-100 mh-100"
+                    v-if="image"
+                    :image-url="image + '.webp'"
+                    :alt="wishListItem | itemName"
+                    :title="wishListItem | itemName">
+                </lazy-img>
               </a>
             </div>
 
@@ -12,7 +18,7 @@
                     <div class="meta-container">
                         <div class="position-relative w-100">
                             <a :href="wishListItem | itemURL" class="item-name text-primary text-appearance small font-weight-bold text-break">
-                                {{ wishListItem | itemName }}
+                                {{ wishListItem | itemName }}
                             </a>
 
                             <div class="item-base-price small">
