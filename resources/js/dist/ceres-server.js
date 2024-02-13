@@ -2897,7 +2897,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.$nextTick(function () {
-        _this2.$el.setAttribute("data-loaded", false);
+        _this2.$el.setAttribute("data-loaded", 'false');
 
         Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_2__["default"])(_this2.$el).triggerLoad(_this2.$el);
       });
@@ -15079,6 +15079,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -56261,6 +56262,7 @@ var render = function() {
                     attrs: {
                       "picture-class": "d-block mw-100 mh-100",
                       "image-url": _vm.image + ".webp",
+                      "fallback-url": _vm.image,
                       alt: _vm._f("itemName")(_vm.wishListItem),
                       title: _vm._f("itemName")(_vm.wishListItem)
                     }

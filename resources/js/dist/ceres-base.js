@@ -502,7 +502,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.$nextTick(function () {
-        _this2.$el.setAttribute("data-loaded", false);
+        _this2.$el.setAttribute("data-loaded", 'false');
 
         Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_2__["default"])(_this2.$el).triggerLoad(_this2.$el);
       });

@@ -7,6 +7,7 @@
                     picture-class="d-block mw-100 mh-100"
                     v-if="image"
                     :image-url="image + '.webp'"
+                    :fallback-url="image"
                     :alt="wishListItem | itemName"
                     :title="wishListItem | itemName">
                 </lazy-img>

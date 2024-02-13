@@ -52,7 +52,7 @@ export default {
         {
             this.$nextTick(() =>
             {
-                this.$el.setAttribute("data-loaded", false);
+                this.$el.setAttribute("data-loaded", 'false');
                 lozad(this.$el).triggerLoad(this.$el);
             });
         }
