@@ -402,6 +402,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 
@@ -708,18 +711,18 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                            " +
+                      "\n              " +
                         _vm._s(_vm._f("itemName")(_vm.wishListItem)) +
-                        "\n                        "
+                        "\n            "
                     )
                   ]
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "item-base-price small" }, [
                   _vm._v(
-                    "\n                            " +
+                    "\n              " +
                       _vm._s(_vm._f("currency")(_vm.unitPrice)) +
-                      "\n                        "
+                      "\n            "
                   )
                 ]),
                 _vm._v(" "),
@@ -733,9 +736,9 @@ var render = function() {
                       [
                         _c("div", [
                           _vm._v(
-                            "\n                                " +
+                            "\n                " +
                               _vm._s(_vm.basePrice) +
-                              "\n                            "
+                              "\n              "
                           )
                         ]),
                         _vm._v(" "),
@@ -750,11 +753,11 @@ var render = function() {
                             )
                           ]),
                           _vm._v(
-                            "\n                                " +
+                            "\n                " +
                               _vm._s(_vm.wishListItem.unit.content) +
                               " " +
                               _vm._s(_vm.wishListItem.unit.names.name) +
-                              "\n                            "
+                              "\n              "
                           )
                         ])
                       ]
@@ -860,11 +863,11 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                            " +
+                      "\n              " +
                         _vm._s(
                           _vm._f("currency")(_vm.quantity * _vm.unitPrice)
                         ) +
-                        "\n                        "
+                        "\n            "
                     )
                   ]
                 ),
@@ -882,11 +885,11 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                            " +
+                      "\n              " +
                         _vm._s(
                           _vm.$translate("Ceres::Template.wishListDelete")
                         ) +
-                        "\n                            "
+                        "\n              "
                     ),
                     _c("i", {
                       directives: [

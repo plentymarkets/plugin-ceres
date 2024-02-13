@@ -1979,6 +1979,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -7267,6 +7268,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -15079,6 +15086,9 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
 //
 //
 //
@@ -42778,7 +42788,8 @@ var render = function() {
                   ? _c("lazy-img", {
                       attrs: {
                         "picture-class": "d-block mw-100 mh-100",
-                        "image-url": _vm.image,
+                        "image-url": _vm.image + ".webp",
+                        "fallback-url": _vm.image,
                         alt: _vm.altText,
                         title: _vm.itemName,
                         "data-testing": "basket-item-img"
@@ -42811,19 +42822,19 @@ var render = function() {
                             ) +
                             ' data-testing="basket-item-name" class="item-name text-primary text-appearance small font-weight-bold text-break">' +
                             _vm._ssrEscape(
-                              "\n                            " +
+                              "\n              " +
                                 _vm._s(
                                   _vm._f("itemName")(
                                     _vm.basketItem.variation.data
                                   )
                                 ) +
-                                "\n                        "
+                                "\n            "
                             ) +
                             '</a> <div class="item-base-price small">' +
                             _vm._ssrEscape(
-                              "\n                            " +
+                              "\n              " +
                                 _vm._s(_vm._f("currency")(_vm.unitPrice)) +
-                                "\n                        "
+                                "\n            "
                             ) +
                             "</div> "
                         ),
@@ -42847,9 +42858,9 @@ var render = function() {
                               .mayShowUnitPrice
                               ? '<div class="text-muted small"><div>' +
                                 _vm._ssrEscape(
-                                  "\n                                " +
+                                  "\n                " +
                                     _vm._s(_vm.basePrice) +
-                                    "\n                            "
+                                    "\n              "
                                 ) +
                                 "</div> <div><strong>" +
                                 _vm._ssrEscape(
@@ -42861,7 +42872,7 @@ var render = function() {
                                 ) +
                                 "</strong>" +
                                 _vm._ssrEscape(
-                                  "\n                                " +
+                                  "\n                " +
                                     _vm._s(
                                       _vm.basketItem.variation.data.unit.content
                                     ) +
@@ -42870,7 +42881,7 @@ var render = function() {
                                       _vm.basketItem.variation.data.unit.names
                                         .name
                                     ) +
-                                    "\n                            "
+                                    "\n              "
                                 ) +
                                 "</div></div>"
                               : "<!---->") +
@@ -42890,11 +42901,11 @@ var render = function() {
                                 ) +
                                 "</strong>" +
                                 _vm._ssrEscape(
-                                  "\n                                " +
+                                  "\n                " +
                                     _vm._s(
                                       _vm._f("inputUnit")(_vm.basketItem)
                                     ) +
-                                    "\n                            "
+                                    "\n              "
                                 ) +
                                 "</div></div>"
                               : "<!---->") +
@@ -43042,13 +43053,13 @@ var render = function() {
                             [
                               _vm._ssrNode(
                                 _vm._ssrEscape(
-                                  "\n                            " +
+                                  "\n              " +
                                     _vm._s(
                                       _vm.$translate(
                                         "Ceres::Template.basketDelete"
                                       )
                                     ) +
-                                    "\n                            "
+                                    "\n              "
                                 )
                               ),
                               _c("icon", {
@@ -49657,25 +49668,41 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { itemscope: "", itemtype: "http://schema.org/Thing" } },
+    { attrs: { itemscope: "", itemtype: "https://schema.org/Thing" } },
     [
       [
         _vm._ssrNode(
-          '<div class="single-carousel owl-carousel owl-theme owl-single-item mt-0">' +
-            _vm._ssrList(_vm.singleImages, function(image) {
-              return (
-                '<div class="prop-1-1"><a' +
-                _vm._ssrAttr("href", image.url) +
-                _vm._ssrAttr("data-lightbox", "single-item-image" + _vm._uid) +
-                "><img" +
-                _vm._ssrAttr("data-src", image.url) +
-                _vm._ssrAttr("alt", _vm.getAltText(image)) +
-                _vm._ssrAttr("title", _vm.getImageName(image)) +
-                ' class="owl-lazy"></a></div>'
+          '<div class="single-carousel owl-carousel owl-theme owl-single-item mt-0">',
+          "</div>",
+          _vm._l(_vm.singleImages, function(image) {
+            return _vm._ssrNode('<div class="prop-1-1">', "</div>", [
+              _vm._ssrNode(
+                "<a" +
+                  _vm._ssrAttr(
+                    "data-lightbox",
+                    "single-item-image" + _vm._uid
+                  ) +
+                  _vm._ssrAttr("href", image.url) +
+                  ">",
+                "</a>",
+                [
+                  _c("lazy-img", {
+                    attrs: {
+                      alt: _vm.getAltText(image),
+                      "fallback-url": image.url,
+                      "image-url": image.url + ".webp",
+                      title: _vm.getImageName(image),
+                      "picture-class": "owl-lazy"
+                    }
+                  })
+                ],
+                1
               )
-            }) +
-            "</div> "
+            ])
+          }),
+          0
         ),
+        _vm._ssrNode(" "),
         _vm.showThumbs
           ? _vm._ssrNode(
               '<div id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item">',
@@ -49689,10 +49716,10 @@ var render = function() {
                       _c("lazy-img", {
                         class: { active: _vm.currentItem === index },
                         attrs: {
-                          "picture-class": "owl-thumb border-appearance",
-                          "image-url": imagePreview.url,
                           alt: _vm.getAltText(imagePreview),
-                          title: _vm.getImageName(imagePreview)
+                          "image-url": imagePreview.url,
+                          title: _vm.getImageName(imagePreview),
+                          "picture-class": "owl-thumb border-appearance"
                         }
                       })
                     ],
@@ -49708,8 +49735,8 @@ var render = function() {
         " " +
           (!_vm.initialized
             ? '<div class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0"><div class="prop-1-1"><img' +
-              _vm._ssrAttr("src", _vm.singleImages[0].url) +
               _vm._ssrAttr("alt", _vm.getAltText(_vm.singleImages[0].url)) +
+              _vm._ssrAttr("src", _vm.singleImages[0].url) +
               _vm._ssrAttr("title", _vm.getImageName(_vm.singleImages[0].url)) +
               ' class="owl-placeholder"></div></div>'
             : "<!---->")
@@ -56286,15 +56313,15 @@ var render = function() {
                     _vm._ssrAttr("href", _vm._f("itemURL")(_vm.wishListItem)) +
                     ' class="item-name text-primary text-appearance small font-weight-bold text-break">' +
                     _vm._ssrEscape(
-                      "\n                            " +
+                      "\n              " +
                         _vm._s(_vm._f("itemName")(_vm.wishListItem)) +
-                        "\n                        "
+                        "\n            "
                     ) +
                     '</a> <div class="item-base-price small">' +
                     _vm._ssrEscape(
-                      "\n                            " +
+                      "\n              " +
                         _vm._s(_vm._f("currency")(_vm.unitPrice)) +
-                        "\n                        "
+                        "\n            "
                     ) +
                     "</div> " +
                     (!(
@@ -56303,9 +56330,9 @@ var render = function() {
                     ) && _vm.wishListItem.variation.mayShowUnitPrice
                       ? '<div class="item-small-prices text-muted small"><div>' +
                         _vm._ssrEscape(
-                          "\n                                " +
+                          "\n                " +
                             _vm._s(_vm.basePrice) +
-                            "\n                            "
+                            "\n              "
                         ) +
                         "</div> <div><strong>" +
                         _vm._ssrEscape(
@@ -56315,11 +56342,11 @@ var render = function() {
                         ) +
                         "</strong>" +
                         _vm._ssrEscape(
-                          "\n                                " +
+                          "\n                " +
                             _vm._s(_vm.wishListItem.unit.content) +
                             " " +
                             _vm._s(_vm.wishListItem.unit.names.name) +
-                            "\n                            "
+                            "\n              "
                         ) +
                         "</div></div>"
                       : "<!---->") +
@@ -56414,13 +56441,13 @@ var render = function() {
                         _vm._ssrNode(
                           '<div class="item-total-price font-weight-bold text-nowrap">' +
                             _vm._ssrEscape(
-                              "\n                            " +
+                              "\n              " +
                                 _vm._s(
                                   _vm._f("currency")(
                                     _vm.quantity * _vm.unitPrice
                                   )
                                 ) +
-                                "\n                        "
+                                "\n            "
                             ) +
                             "</div> "
                         ),
@@ -56430,13 +56457,13 @@ var render = function() {
                           [
                             _vm._ssrNode(
                               _vm._ssrEscape(
-                                "\n                            " +
+                                "\n              " +
                                   _vm._s(
                                     _vm.$translate(
                                       "Ceres::Template.wishListDelete"
                                     )
                                   ) +
-                                  "\n                            "
+                                  "\n              "
                               )
                             ),
                             _c(
