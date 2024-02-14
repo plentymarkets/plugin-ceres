@@ -1,7 +1,10 @@
 <template>
   <picture v-if="!isBackgroundImage" :data-iesrc="fallbackUrl || imageUrl" :data-picture-class="pictureClass" :data-alt="alt" :data-title="title">
     <slot name="additionalimages"></slot>
-    <source :srcset="imageUrl" :type="mimeType">
+    <template v-if="mimeType === webpMimeType && webpImagesEnabled">
+      <source :src="imageUrl" :type="mimeType">
+    </template>
+
     <source v-if="fallbackUrl" :srcset="fallbackUrl">
   </picture>
   <div v-else :data-background-image="backgroundSource" :class="pictureClass">
@@ -26,6 +29,7 @@ export default {
   data() {
     return {
       webpImagesEnabled: App.config.global.webpImagesEnabled,
+      webpMimeType: 'image/webp',
       supported: undefined
     }
   },
@@ -70,7 +74,7 @@ export default {
       const matches = this.imageUrl?.match(/.?(\.\w+)(?:$|\?)/);
 
       if (matches) {
-        return matches[1] === ".webp" ? "image/webp" : null;
+        return matches[1] === ".webp" ? this.webpMimeType : null;
       }
 
       return null;

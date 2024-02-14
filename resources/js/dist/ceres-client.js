@@ -402,6 +402,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -416,6 +419,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       webpImagesEnabled: App.config.global.webpImagesEnabled,
+      webpMimeType: 'image/webp',
       supported: undefined
     };
   },
@@ -466,7 +470,7 @@ __webpack_require__.r(__webpack_exports__);
       var matches = (_this$imageUrl = this.imageUrl) === null || _this$imageUrl === void 0 ? void 0 : _this$imageUrl.match(/.?(\.\w+)(?:$|\?)/);
 
       if (matches) {
-        return matches[1] === ".webp" ? "image/webp" : null;
+        return matches[1] === ".webp" ? this.webpMimeType : null;
       }
 
       return null;
@@ -37132,7 +37136,13 @@ var render = function() {
         [
           _vm._t("additionalimages"),
           _vm._v(" "),
-          _c("source", { attrs: { srcset: _vm.imageUrl, type: _vm.mimeType } }),
+          _vm.mimeType === _vm.webpMimeType && _vm.webpImagesEnabled
+            ? [
+                _c("source", {
+                  attrs: { src: _vm.imageUrl, type: _vm.mimeType }
+                })
+              ]
+            : _vm._e(),
           _vm._v(" "),
           _vm.fallbackUrl
             ? _c("source", { attrs: { srcset: _vm.fallbackUrl } })
