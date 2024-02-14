@@ -59,20 +59,13 @@ export default {
 
   computed: {
     backgroundSource() {
-      if (this.imageUrl && this.mimeTypeWebp) {
-        return this.webpBrowserSupport ? this.imageUrl : this.fallbackUrl;
-      } else {
-        return this.imageUrl || this.fallbackUrl;
-      }
+      return this.imageUrl && this.mimeTypeWebp
+        ? this.webpBrowserSupport ? this.imageUrl : this.fallbackUrl
+        : this.imageUrl || this.fallbackUrl;
     },
     mimeTypeWebp() {
       const matches = this.imageUrl?.match(/.?(\.\w+)(?:$|\?)/);
-
-      if (matches) {
-        return matches[1] === ".webp" ? this.webpMimeType : null;
-      }
-
-      return null;
+      return matches && (matches[1] === '.webp') ? this.webpMimeType : null;
     },
     pictureSource() {
       return this.mimeTypeWebp === this.webpMimeType

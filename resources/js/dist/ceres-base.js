@@ -517,22 +517,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     backgroundSource: function backgroundSource() {
-      if (this.imageUrl && this.mimeTypeWebp) {
-        return this.webpBrowserSupport ? this.imageUrl : this.fallbackUrl;
-      } else {
-        return this.imageUrl || this.fallbackUrl;
-      }
+      return this.imageUrl && this.mimeTypeWebp ? this.webpBrowserSupport ? this.imageUrl : this.fallbackUrl : this.imageUrl || this.fallbackUrl;
     },
     mimeTypeWebp: function mimeTypeWebp() {
       var _this$imageUrl;
 
       var matches = (_this$imageUrl = this.imageUrl) === null || _this$imageUrl === void 0 ? void 0 : _this$imageUrl.match(/.?(\.\w+)(?:$|\?)/);
-
-      if (matches) {
-        return matches[1] === ".webp" ? this.webpMimeType : null;
-      }
-
-      return null;
+      return matches && matches[1] === '.webp' ? this.webpMimeType : null;
     },
     pictureSource: function pictureSource() {
       return this.mimeTypeWebp === this.webpMimeType ? this.webpImagesEnabled && this.webpBrowserSupport ? this.imageUrl : this.fallbackUrl : this.fallbackUrl;
