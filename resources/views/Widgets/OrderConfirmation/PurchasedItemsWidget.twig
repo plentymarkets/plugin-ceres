@@ -26,7 +26,7 @@
 
         <article class="cmp cmp-order-item mb-0 border-bottom-0">
             <a href="{{ Twig.print('data.itemURLs | getObjectValue(currentVariationId)') }}" class="item-image">
-                aaa
+                <img src="{{ Twig.print('data.itemImages | getObjectValue(currentVariationId)') }}" alt="{{ Twig.print('item.orderItemName') }}" title="{{ Twig.print('item.orderItemName') }}">
             </a>
 
             <div class="item-details mt-0">

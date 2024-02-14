@@ -55,7 +55,8 @@ class OnlineStoreStep extends Step
                 $this->buildStoreCallistoSettings(),
                 $this->buildExternalVatIdCheckSettings(),
                 $this->buildAlreadyPaidSettings(),
-                $this->buildLoginModeSettings()
+                $this->buildLoginModeSettings(),
+                $this->buildWebpImageSettings()
             ]
         ];
     }
@@ -375,6 +376,24 @@ class OnlineStoreStep extends Step
                     "defaultValue" => true,
                     "options" => [
                         "name" => "Wizard.blockCookies"
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    private function buildWebpImageSettings(): array
+    {
+        return [
+            "title" => "Config.globalWebpImagesEnabledLabel",
+            "description" => "Config.globalWebpImagesEnabledLabel",
+            "condition" => $this->globalsCondition,
+            "form" => [
+                "onlineStore_webpEnabled" => [
+                    "type" => "checkbox",
+                    "defaultValue" => true,
+                    "options" => [
+                        "name" => "Config.globalWebpImagesEnabledLabel"
                     ]
                 ]
             ]
