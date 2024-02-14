@@ -1,12 +1,10 @@
 <template>
-  <picture v-if="!isBackgroundImage" :data-iesrc="fallbackUrl || imageUrl" :data-picture-class="pictureClass" :data-alt="alt" :data-title="title">
+  <picture v-if="!isBackgroundImage" :data-iesrc="pictureSource" :data-picture-class="pictureClass" :data-alt="alt" :data-title="title">
     <slot name="additionalimages"></slot>
-    <template v-if="mimeType === webpMimeType && webpImagesEnabled">
-      <source :src="imageUrl" :type="mimeType">
-    </template>
-
-    <source v-if="fallbackUrl" :srcset="fallbackUrl">
+      <source v-if="imageUrl" :srcset="imageUrl" :type="mimeTypeWebp">
+      <source v-if="fallbackUrl" :srcset="fallbackUrl">
   </picture>
+
   <div v-else :data-background-image="backgroundSource" :class="pictureClass">
     <slot></slot>
   </div>
@@ -56,21 +54,14 @@ export default {
   },
 
   computed: {
-    /**
-     *  Determine appropriate image url to use as background source
-     */
     backgroundSource() {
-      if (this.imageUrl && this.mimeType) {
+      if (this.imageUrl && this.mimeTypeWebp) {
         return this.supported ? this.imageUrl : this.fallbackUrl;
       } else {
         return this.imageUrl || this.fallbackUrl;
       }
     },
-
-    /**
-     * Check if url points to a .webp image and return appropriate mime-type
-     */
-    mimeType() {
+    mimeTypeWebp() {
       const matches = this.imageUrl?.match(/.?(\.\w+)(?:$|\?)/);
 
       if (matches) {
@@ -78,6 +69,11 @@ export default {
       }
 
       return null;
+    },
+    pictureSource() {
+      return this.mimeTypeWebp === this.webpMimeType
+        ? (this.webpImagesEnabled && this.supported) ? this.imageUrl : this.fallbackUrl
+        : this.fallbackUrl;
     }
   }
 }

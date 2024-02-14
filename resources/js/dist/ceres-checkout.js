@@ -737,8 +737,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -784,21 +782,14 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
-    /**
-     *  Determine appropriate image url to use as background source
-     */
     backgroundSource: function backgroundSource() {
-      if (this.imageUrl && this.mimeType) {
+      if (this.imageUrl && this.mimeTypeWebp) {
         return this.supported ? this.imageUrl : this.fallbackUrl;
       } else {
         return this.imageUrl || this.fallbackUrl;
       }
     },
-
-    /**
-     * Check if url points to a .webp image and return appropriate mime-type
-     */
-    mimeType: function mimeType() {
+    mimeTypeWebp: function mimeTypeWebp() {
       var _this$imageUrl;
 
       var matches = (_this$imageUrl = this.imageUrl) === null || _this$imageUrl === void 0 ? void 0 : _this$imageUrl.match(/.?(\.\w+)(?:$|\?)/);
@@ -808,6 +799,9 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return null;
+    },
+    pictureSource: function pictureSource() {
+      return this.mimeTypeWebp === this.webpMimeType ? this.webpImagesEnabled && this.supported ? this.imageUrl : this.fallbackUrl : this.fallbackUrl;
     }
   }
 });
@@ -39764,7 +39758,7 @@ var render = function() {
         "picture",
         {
           attrs: {
-            "data-iesrc": _vm.fallbackUrl || _vm.imageUrl,
+            "data-iesrc": _vm.pictureSource,
             "data-picture-class": _vm.pictureClass,
             "data-alt": _vm.alt,
             "data-title": _vm.title
@@ -39773,12 +39767,10 @@ var render = function() {
         [
           _vm._t("additionalimages"),
           _vm._v(" "),
-          _vm.mimeType === _vm.webpMimeType && _vm.webpImagesEnabled
-            ? [
-                _c("source", {
-                  attrs: { src: _vm.imageUrl, type: _vm.mimeType }
-                })
-              ]
+          _vm.imageUrl
+            ? _c("source", {
+                attrs: { srcset: _vm.imageUrl, type: _vm.mimeTypeWebp }
+              })
             : _vm._e(),
           _vm._v(" "),
           _vm.fallbackUrl
