@@ -120,13 +120,13 @@ class OnlineStoreMapping
         'onlineStore_blockCookies' => [
             'field'     => 'global.block_cookies',
             'type'      => 'boolean',
-            'global'    => false,
+            'global'    => true,
             'optional'  => false
         ],
         'onlineStore_webpEnabled' => [
             'field'     => 'global.webp_images_enabled',
             'type'      => 'boolean',
-            'global'    => false,
+            'global'    => true,
             'optional'  => false
         ],
         'onlineStore_shippingProfiles' => [
