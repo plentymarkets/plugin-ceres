@@ -1,8 +1,12 @@
 <template>
-  <picture v-if="!isBackgroundImage" :data-iesrc="pictureSource" :data-picture-class="pictureClass" :data-alt="alt" :data-title="title">
+  <picture v-if="!isBackgroundImage"
+           :data-iesrc="pictureSource"
+           :data-picture-class="pictureClass"
+           :data-alt="alt"
+           :data-title="title">
     <slot name="additionalimages"></slot>
-      <source v-if="imageUrl" :srcset="imageUrl" :type="mimeTypeWebp">
-      <source v-if="fallbackUrl" :srcset="fallbackUrl">
+    <source v-if="imageUrl" :srcset="imageUrl" :type="mimeTypeWebp">
+    <source v-if="fallbackUrl" :srcset="fallbackUrl">
   </picture>
 
   <div v-else :data-background-image="backgroundSource" :class="pictureClass">
@@ -28,13 +32,13 @@ export default {
     return {
       webpImagesEnabled: App.config.global.webpImagesEnabled,
       webpMimeType: 'image/webp',
-      supported: undefined
+      webpBrowserSupport: false
     }
   },
 
   mounted() {
     detectWebP(((supported) => {
-      this.supported = supported;
+      this.webpBrowserSupport = supported;
       this.$nextTick(() => {
         if(!this.isBackgroundImage) {
           this.$el.classList.toggle("lozad");
@@ -56,7 +60,7 @@ export default {
   computed: {
     backgroundSource() {
       if (this.imageUrl && this.mimeTypeWebp) {
-        return this.supported ? this.imageUrl : this.fallbackUrl;
+        return this.webpBrowserSupport ? this.imageUrl : this.fallbackUrl;
       } else {
         return this.imageUrl || this.fallbackUrl;
       }
@@ -72,7 +76,7 @@ export default {
     },
     pictureSource() {
       return this.mimeTypeWebp === this.webpMimeType
-        ? (this.webpImagesEnabled && this.supported) ? this.imageUrl : this.fallbackUrl
+        ? (this.webpImagesEnabled && this.webpBrowserSupport) ? this.imageUrl : this.fallbackUrl
         : this.fallbackUrl;
     }
   }

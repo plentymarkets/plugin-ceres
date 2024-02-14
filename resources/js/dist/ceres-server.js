@@ -2863,6 +2863,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2878,14 +2882,14 @@ __webpack_require__.r(__webpack_exports__);
     return {
       webpImagesEnabled: App.config.global.webpImagesEnabled,
       webpMimeType: 'image/webp',
-      supported: undefined
+      webpBrowserSupport: false
     };
   },
   mounted: function mounted() {
     var _this = this;
 
     Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_3__["detectWebP"])(function (supported) {
-      _this.supported = supported;
+      _this.webpBrowserSupport = supported;
 
       _this.$nextTick(function () {
         if (!_this.isBackgroundImage) {
@@ -2910,7 +2914,7 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     backgroundSource: function backgroundSource() {
       if (this.imageUrl && this.mimeTypeWebp) {
-        return this.supported ? this.imageUrl : this.fallbackUrl;
+        return this.webpBrowserSupport ? this.imageUrl : this.fallbackUrl;
       } else {
         return this.imageUrl || this.fallbackUrl;
       }
@@ -2927,7 +2931,7 @@ __webpack_require__.r(__webpack_exports__);
       return null;
     },
     pictureSource: function pictureSource() {
-      return this.mimeTypeWebp === this.webpMimeType ? this.webpImagesEnabled && this.supported ? this.imageUrl : this.fallbackUrl : this.fallbackUrl;
+      return this.mimeTypeWebp === this.webpMimeType ? this.webpImagesEnabled && this.webpBrowserSupport ? this.imageUrl : this.fallbackUrl : this.fallbackUrl;
     }
   }
 });
