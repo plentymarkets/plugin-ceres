@@ -308,8 +308,8 @@ var render = function() {
                   _c("lazy-img", {
                     attrs: {
                       alt: _vm.getAltText(image),
-                      "fallback-url": image.url,
                       "image-url": image.url + ".webp",
+                      "fallback-url": image.url,
                       title: _vm.getImageName(image),
                       "picture-class": "owl-lazy"
                     }
