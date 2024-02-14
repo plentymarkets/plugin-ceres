@@ -52,11 +52,11 @@ class OnlineStoreStep extends Step
                 $this->buildGoogleMapsSettings(),
                 $this->buildGoogleRecaptchaSettings(),
                 $this->buildSessionLifeTimeSection(),
+                $this->buildWebpImageSettings(),
                 $this->buildStoreCallistoSettings(),
                 $this->buildExternalVatIdCheckSettings(),
                 $this->buildAlreadyPaidSettings(),
-                $this->buildLoginModeSettings(),
-                $this->buildWebpImageSettings()
+                $this->buildLoginModeSettings()
             ]
         ];
     }
