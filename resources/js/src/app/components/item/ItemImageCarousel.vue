@@ -6,8 +6,8 @@
           <a :data-lightbox="'single-item-image' + _uid" :href="image.url">
             <lazy-img
                 :alt="getAltText(image)"
-                :fallback-url="image.url"
                 :image-url="`${image.url}.webp`"
+                :fallback-url="image.url"
                 :title="getImageName(image)"
                 picture-class="owl-lazy">
             </lazy-img>
