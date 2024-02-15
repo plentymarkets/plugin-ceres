@@ -198,12 +198,45 @@ export default Vue.component("create-update-address", {
             this.waiting = true;
             this._syncOptionTypesAddressData();
 
+            const theRefs = this.$root.$refs;
+
             this.$store.dispatch("createAddress", { address: this.addressData, addressType: this.addressType })
                 .then(
-                    () =>
+                    (response) =>
                     {
                         this.addressModal.hide();
                         this.waiting = false;
+                        if (this.$store.getters.isLoggedIn)
+                        {
+                            const totalNrOfBillingAddresses = this.getNumberOfActiveAddresses(theRefs.invoiceAddressesSelect.querySelectorAll(".vue-recycle-scroller__item-view"));
+                            const totalNrOfShippingAddresses = this.getNumberOfActiveAddresses(theRefs.shippingAddressesSelect.querySelectorAll(".shipping-addresses-select .vue-recycle-scroller__item-view"));
+
+                            if (
+                                (this.addressType === "1" && (totalNrOfBillingAddresses === 0 || totalNrOfBillingAddresses === 1))
+                                ||
+                                (this.addressType === "2" && (totalNrOfShippingAddresses === 0 || totalNrOfShippingAddresses === 1))
+                            )
+                            {
+                                const theNewSavedAddress = response;
+
+                                theNewSavedAddress.pivot.isPrimary = 1;
+                                this.$store.dispatch("updateAddress", {
+                                    address: theNewSavedAddress,
+                                    addressType: this.addressType
+                                })
+                                    .then(() =>
+                                    {
+                                        if (this.addressType === "1")
+                                        {
+                                            theRefs.pageContent.setAttribute("data-nrOfBillingAddresses", "1");
+                                        }
+                                        else if (this.addressType === "2")
+                                        {
+                                            theRefs.pageContent.setAttribute("data-nrOfDeliveryAddresses", "1");
+                                        }
+                                    });
+                            }
+                        }
                     },
                     error =>
                     {
@@ -340,6 +373,27 @@ export default Vue.component("create-update-address", {
             {
                 ValidationService.unmarkAllFields(this.$refs.addressForm);
             }
+        },
+        getNumberOfActiveAddresses(theNodes)
+        {
+            let number = 0;
+
+            if (theNodes.length === 0)
+            {
+                return number;
+            }
+            for (let con=0; con < theNodes.length; con++)
+            {
+                const style= window.getComputedStyle(theNodes[con]);
+                const matrix = new DOMMatrixReadOnly(style.transform).m42;
+
+                if (matrix >= 0)
+                {
+                    number++;
+                }
+            }
+
+            return number;
         }
     }
 });

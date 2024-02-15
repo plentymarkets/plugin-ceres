@@ -1,5 +1,26 @@
 {% extends getPartial('page-design') %}
 
+{% set deliveryAddresses = services.customer.getAddresses(2) %}
+{% set billingAddresses = services.customer.getAddresses(1) %}
+
+{% set primaryDeliveryAddress = 0 %}
+{% set primaryBillingAddress = 0 %}
+
+{% set nrOfDeliveryAddresses = deliveryAddresses|length %}
+{% set nrOfBillingAddresses = billingAddresses|length %}
+
+{% for deliveryAddress in deliveryAddresses %}
+    {% if deliveryAddress.pivot.isPrimary == "1" %}
+        {% set primaryDeliveryAddress = deliveryAddress.id %}
+    {% endif %}
+{% endfor %}
+
+{% for billingAddress in billingAddresses %}
+    {% if billingAddress.pivot.isPrimary == "1" %}
+        {% set primaryBillingAddress = billingAddress.id %}
+    {% endif %}
+{% endfor %}
+
 {% block PartialHead %}
     {% embed getPartial('page-metadata') %}
         {% block title trans("Ceres::Template.myAccount") %}
@@ -41,12 +62,12 @@
     %}
 
     <my-account
-        :delivery-address-list="{{ services.customer.getAddresses(2) | json_encode }}"
-        :selected-delivery-address="{{ services.checkout.getDeliveryAddressId() | json_encode }}"
-        :billing-address-list="{{ services.customer.getAddresses(1) | json_encode }}"
-        :selected-billing-address="{{ services.checkout.getBillingAddressId() | json_encode }}">
+        :delivery-address-list="{{ deliveryAddresses | json_encode }}"
+        :selected-delivery-address="{{ primaryDeliveryAddress != 0 ? primaryDeliveryAddress : services.checkout.getDeliveryAddressId() | json_encode }}"
+        :billing-address-list="{{ billingAddresses | json_encode }}"
+        :selected-billing-address="{{ primaryBillingAddress != 0 ? primaryBillingAddress : services.checkout.getBillingAddressId() | json_encode }}">
         <div>
-            <div class="page-content myaccount container-max mb-5 mt-3 pt-3 bg-white">
+            <div class="page-content myaccount container-max mb-5 mt-3 pt-3 bg-white" ref="pageContent" :data-nrOfDeliveryAddresses="{{nrOfDeliveryAddresses}}" :data-nrOfBillingAddresses="{{nrOfBillingAddresses}}">
                 <!-- HEADER -->
                 <div class="row mb-5">
                     <div class="col-sm-9">
@@ -78,7 +99,7 @@
                             {{ trans("Ceres::Template.myAccountInvoiceAddresses") }}
                         </h4>
                         <p class="text-muted small font-italic">{{ trans("Ceres::Template.myAccountAll") }} {{ trans("Ceres::Template.myAccountInvoiceAddresses") }}</p>
-                        <div class="invoice-addresses-select">
+                        <div class="invoice-addresses-select" ref="invoiceAddressesSelect">
                             <invoice-address-select
                                 :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
                                 :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}"
@@ -92,7 +113,7 @@
                             {{ trans("Ceres::Template.myAccountShippingAddresses") }}
                         </h4>
                         <p class="text-muted small font-italic">{{ trans("Ceres::Template.myAccountAll") }} {{ trans("Ceres::Template.myAccountShippingAddresses") }}</p>
-                        <div class="shipping-addresses-select">
+                        <div class="shipping-addresses-select" ref="shippingAddressesSelect">
                             <shipping-address-select
                                 :optional-address-fields="{{ optionalShippingAddressFields | json_encode }}"
                                 :required-address-fields="{{ requiredShippingAddressFields | json_encode }}"

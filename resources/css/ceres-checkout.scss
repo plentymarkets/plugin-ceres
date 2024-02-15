@@ -14921,15 +14921,22 @@ header .widget {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
+        gap: .5rem;
 
         .fa {
             float: none;
             @include transition(all .2s ease-in-out);
         }
         .btn {
-            width: 2.2rem;
+            width: 100% !important;
             height: 2.2rem;
             padding: 0;
+        }
+
+        @include media-breakpoint-up(md) {
+            -webkit-box-pack: end;
+                -ms-flex-pack: end;
+                    justify-content: end;
         }
     }
 

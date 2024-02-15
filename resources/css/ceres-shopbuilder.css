@@ -1,0 +1,4 @@
+.sb-no-animation.collapsing {
+  display: none !important;
+  transition: none !important;
+}
