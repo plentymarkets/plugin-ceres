@@ -26,6 +26,7 @@ class PerformanceStep extends Step
                           . $this->hasRequiredSettings(),
             "sections" => [
                 $this->generateSsrSection(),
+                $this->generateHeaderSection(),
                 $this->generateLoggingOptionsSection(),
                 $this->generatePerformanceSection(),
                 $this->generatePerformanceEventPropagationSection(),
@@ -47,6 +48,26 @@ class PerformanceStep extends Step
                     "defaultValue" => false,
                     "options" => [
                         "name" =>  "Wizard.activateSsr"
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generateHeaderSection():array
+    {
+        return [
+            "title" => "Wizard.fixedHeaderOptions",
+            "description" => "Wizard.fixedHeaderOptionsDescription",
+            "form" => [
+                "performance_headerOptions" => [
+                    "type" => "checkbox",
+                    "default" => true,
+                    "options" => [
+                        "name" => "Wizard.performanceHeaderOptionsCheck"
                     ]
                 ]
             ]

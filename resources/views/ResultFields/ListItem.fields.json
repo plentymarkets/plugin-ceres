@@ -17,6 +17,8 @@
     "item.manufacturer.externalName",
     "item.manufacturer.position",
     "item.storeSpecial",
+    "item.feedbackDecimal",
+    "item.feedbackCount",
 
     "texts.lang",
     "texts.name1",
