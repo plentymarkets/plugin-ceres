@@ -1785,6 +1785,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -1826,7 +1827,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     shippingProvider: function shippingProvider() {
-      if ([28, 50, 13, 20, 21, 15, 41, 57].includes(this.systemShippingProfile) && this.basket.itemQuantity > 0) return 'parcel';
+      if ([28, 50, 13, 20, 21, 15, 41, 57, 61].includes(this.systemShippingProfile) && this.basket.itemQuantity > 0) return 'parcel';
       if ([7, 22, 23, 43, 44, 45].includes(this.systemShippingProfile)) return 'freight';
       if ([11, 46, 53].includes(this.systemShippingProfile)) return 'letter';
       if ([13].includes(this.systemShippingProfile)) return 'pickup';
@@ -1837,35 +1838,41 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       var services = [[// DE
       {
-        name: 'DHL Kleinpaket',
-        gogreen: true,
+        name: 'Kleinpaket',
+        gogreen: false,
+        co2neutral: true,
         cost: "2,45 €",
         type: "letter"
       }, {
-        name: 'DHL Paket',
-        gogreen: true,
+        name: 'Paket',
+        gogreen: false,
+        co2neutral: true,
         cost: "5,95 € - 29,95 € *",
         type: "parcel"
       }, {
         name: 'DHL Spedition',
         gogreen: true,
+        co2neutral: false,
         cost: "39,95 € - 59,95 € *",
         type: "freight",
         details: ['telefonische Terminvereinbarung zur Lieferung', 'Lieferung mit einem 2-Mann-Team bis zum Aufstellort im Wohnraum', 'Auf Wunsch: fachgerechte Entsorgung der Verpackung']
       }], [// AT
       {
-        name: 'DHL Kleinpaket',
-        gogreen: true,
+        name: 'Kleinpaket',
+        gogreen: false,
+        co2neutral: true,
         cost: "8,95 €",
         type: "letter"
       }, {
-        name: 'DHL Paket',
-        gogreen: true,
+        name: 'Paket',
+        gogreen: false,
+        co2neutral: true,
         cost: "12,95 € - 49,95 *",
         type: "parcel"
       }, {
         name: 'DHL Spedition',
         gogreen: true,
+        co2neutral: false,
         cost: "99,95 € - 129,95 € *",
         type: "freight",
         details: ['telefonische Terminvereinbarung zur Lieferung', 'Lieferung mit einem 2-Mann-Team bis zum Aufstellort im Wohnraum', 'Auf Wunsch: fachgerechte Entsorgung der Verpackung']
@@ -1873,16 +1880,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       {
         name: 'Abholung in Wehrheim',
         gogreen: false,
+        co2neutral: true,
         cost: "0,00 €",
         type: "pickup"
       }, {
-        name: 'DHL Paket',
-        gogreen: true,
+        name: 'Paket',
+        gogreen: false,
+        co2neutral: true,
         cost: "ab 12,95 € *",
         type: "parcel"
       }, {
         name: 'Spedition',
         gogreen: false,
+        co2neutral: false,
         cost: "ab 249,95 € *",
         type: "freight",
         details: ['telefonische Terminvereinbarung zur Lieferung', 'Lieferung bis zur Bordsteinkante']
@@ -1890,16 +1900,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       {
         name: 'Abholung in Wehrheim',
         gogreen: false,
+        co2neutral: true,
         cost: "0,00 €",
         type: "pickup"
       }, {
-        name: 'DHL Paket',
-        gogreen: true,
+        name: 'Paket',
+        gogreen: false,
+        co2neutral: true,
         cost: "auf Anfrage",
         type: "parcel"
       }, {
         name: 'Spedition',
         gogreen: false,
+        co2neutral: false,
         cost: "auf Anfrage",
         type: "freight"
       }]];
@@ -44026,7 +44039,11 @@ var render = function() {
               }) +
               '><span class="nameLogo">' +
               (service.gogreen
-                ? '<img src="https://cdn.bio-kinder.de/frontend/resources/img/footer/gogreen.svg" class="gogreen">'
+                ? '<img alt="DHL GoGreen" src="https://cdn.bio-kinder.de/frontend/resources/img/footer/gogreen.svg" class="gogreen">'
+                : "<!---->") +
+              " " +
+              (service.co2neutral
+                ? '<img alt="CO2-neutraler Versand" src="https://cdn.bio-kinder.de/frontend/resources/img/footer/co2neutral-paket.svg" class="gogreen">'
                 : "<!---->") +
               ' <span class="serviceName">' +
               _vm._ssrEscape(_vm._s(service.name)) +

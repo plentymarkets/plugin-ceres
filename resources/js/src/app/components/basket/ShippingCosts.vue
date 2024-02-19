@@ -21,7 +21,8 @@
                             <div class="table">
                                 <div class="line" v-for="service in shippingServices" :class="{'active': shippingProvider == service.type}">
                                     <span class="nameLogo">
-                                        <img v-if="service.gogreen" class="gogreen" src="https://cdn.bio-kinder.de/frontend/resources/img/footer/gogreen.svg" />
+                                        <img v-if="service.gogreen" class="gogreen" alt="DHL GoGreen" src="https://cdn.bio-kinder.de/frontend/resources/img/footer/gogreen.svg" />
+                                        <img v-if="service.co2neutral" class="gogreen" alt="CO2-neutraler Versand" src="https://cdn.bio-kinder.de/frontend/resources/img/footer/co2neutral-paket.svg" />
                                         <span class="serviceName">{{ service.name }}</span>
                                     </span>
                                     <span class="cost">{{ service.cost }}</span>
@@ -83,7 +84,7 @@ export default {
             return !!this.localization.euShippingCountries.find((country) => { return country.id === this.selectedCountryId });
         },
         shippingProvider() {
-            if ([28, 50, 13, 20, 21, 15, 41, 57].includes(this.systemShippingProfile) && this.basket.itemQuantity > 0) 
+            if ([28, 50, 13, 20, 21, 15, 41, 57, 61].includes(this.systemShippingProfile) && this.basket.itemQuantity > 0) 
                 return 'parcel';
             
             if ([7, 22, 23, 43, 44, 45].includes(this.systemShippingProfile)) 
@@ -101,10 +102,10 @@ export default {
         {
             let services = [
                 [ // DE
-                    { name: 'DHL Kleinpaket', gogreen: true, cost: "2,45 €", type: "letter" },
-                    { name: 'DHL Paket', gogreen: true, cost: "5,95 € - 29,95 € *", type: "parcel" },
+                    { name: 'Kleinpaket', gogreen: false, co2neutral: true, cost: "2,45 €", type: "letter" },
+                    { name: 'Paket', gogreen: false, co2neutral: true, cost: "5,95 € - 29,95 € *", type: "parcel" },
                     {
-                        name: 'DHL Spedition', gogreen: true, cost: "39,95 € - 59,95 € *", type: "freight",
+                        name: 'DHL Spedition', gogreen: true, co2neutral: false, cost: "39,95 € - 59,95 € *", type: "freight",
                         details: [
                             'telefonische Terminvereinbarung zur Lieferung',
                             'Lieferung mit einem 2-Mann-Team bis zum Aufstellort im Wohnraum',
@@ -113,10 +114,10 @@ export default {
                     }
                 ],
                 [ // AT
-                    { name: 'DHL Kleinpaket', gogreen: true, cost: "8,95 €", type: "letter" },
-                    { name: 'DHL Paket', gogreen: true, cost: "12,95 € - 49,95 *", type: "parcel" },
+                    { name: 'Kleinpaket', gogreen: false, co2neutral: true, cost: "8,95 €", type: "letter" },
+                    { name: 'Paket', gogreen: false, co2neutral: true, cost: "12,95 € - 49,95 *", type: "parcel" },
                     {
-                        name: 'DHL Spedition', gogreen: true, cost: "99,95 € - 129,95 € *", type: "freight",
+                        name: 'DHL Spedition', gogreen: true, co2neutral: false, cost: "99,95 € - 129,95 € *", type: "freight",
                         details: [
                             'telefonische Terminvereinbarung zur Lieferung',
                             'Lieferung mit einem 2-Mann-Team bis zum Aufstellort im Wohnraum',
@@ -125,10 +126,10 @@ export default {
                     }
                 ],
                 [ // EU & CH
-                    { name: 'Abholung in Wehrheim', gogreen: false, cost: "0,00 €", type: "pickup" },
-                    { name: 'DHL Paket', gogreen: true, cost: "ab 12,95 € *", type: "parcel" },
+                    { name: 'Abholung in Wehrheim', gogreen: false, co2neutral: true, cost: "0,00 €", type: "pickup" },
+                    { name: 'Paket', gogreen: false, co2neutral: true, cost: "ab 12,95 € *", type: "parcel" },
                     {
-                        name: 'Spedition', gogreen: false, cost: "ab 249,95 € *", type: "freight",
+                        name: 'Spedition', gogreen: false, co2neutral: false, cost: "ab 249,95 € *", type: "freight",
                         details: [
                             'telefonische Terminvereinbarung zur Lieferung',
                             'Lieferung bis zur Bordsteinkante'
@@ -136,9 +137,9 @@ export default {
                     }
                 ],
                 [ // WW
-                    { name: 'Abholung in Wehrheim', gogreen: false, cost: "0,00 €", type: "pickup" },
-                    { name: 'DHL Paket', gogreen: true, cost: "auf Anfrage", type: "parcel" },
-                    { name: 'Spedition', gogreen: false, cost: "auf Anfrage", type: "freight" }
+                    { name: 'Abholung in Wehrheim', gogreen: false, co2neutral: true, cost: "0,00 €", type: "pickup" },
+                    { name: 'Paket', gogreen: false, co2neutral: true, cost: "auf Anfrage", type: "parcel" },
+                    { name: 'Spedition', gogreen: false, co2neutral: false, cost: "auf Anfrage", type: "freight" }
                 ]
             ]
 
