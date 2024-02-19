@@ -7303,7 +7303,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-image-carousel",
@@ -49691,7 +49690,7 @@ var render = function() {
           return _vm._ssrNode('<div class="prop-1-1">', "</div>", [
             _vm._ssrNode(
               "<a" +
-                _vm._ssrAttr("href", image.url) +
+                _vm._ssrAttr("href", image.url + ".webp") +
                 _vm._ssrAttr("data-lightbox", "single-item-image" + _vm._uid) +
                 ">",
               "</a>",
@@ -49701,8 +49700,7 @@ var render = function() {
                     alt: _vm.getAltText(image),
                     "image-url": image.url + ".webp",
                     "fallback-url": image.url,
-                    title: _vm.getImageName(image),
-                    "picture-class": "owl-lazy"
+                    title: _vm.getImageName(image)
                   }
                 })
               ],

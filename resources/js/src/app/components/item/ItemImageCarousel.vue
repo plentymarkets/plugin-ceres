@@ -2,13 +2,12 @@
   <div itemscope itemtype="https://schema.org/Thing">
     <div ref="single" class="single-carousel owl-carousel owl-theme owl-single-item mt-0">
       <div v-for="(image, index) in singleImages" :key="index" class="prop-1-1">
-        <a :href="image.url" :data-lightbox="`single-item-image${_uid}`">
+        <a :href="`${image.url}.webp`" :data-lightbox="`single-item-image${_uid}`">
           <lazy-img
               :alt="getAltText(image)"
               :image-url="`${image.url}.webp`"
               :fallback-url="image.url"
-              :title="getImageName(image)"
-              picture-class="owl-lazy" />
+              :title="getImageName(image)" />
         </a>
       </div>
     </div>
