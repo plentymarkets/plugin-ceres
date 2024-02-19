@@ -186,6 +186,14 @@
                     "options": {
                         "defaultValue": "true"
                     }
+                },
+                "global.webp_images_enabled": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.globalWebpImagesEnabledLabel",
+                    "options": {
+                        "defaultValue": "true"
+                    }
                 }
             }
         },

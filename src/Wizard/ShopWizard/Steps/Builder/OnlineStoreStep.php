@@ -52,6 +52,7 @@ class OnlineStoreStep extends Step
                 $this->buildGoogleMapsSettings(),
                 $this->buildGoogleRecaptchaSettings(),
                 $this->buildSessionLifeTimeSection(),
+                $this->buildWebpImageSettings(),
                 $this->buildStoreCallistoSettings(),
                 $this->buildExternalVatIdCheckSettings(),
                 $this->buildAlreadyPaidSettings(),
@@ -375,6 +376,24 @@ class OnlineStoreStep extends Step
                     "defaultValue" => true,
                     "options" => [
                         "name" => "Wizard.blockCookies"
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    private function buildWebpImageSettings(): array
+    {
+        return [
+            "title" => "Config.globalWebpImagesEnabledLabel",
+            "description" => "Config.globalWebpImagesEnabledLabel",
+            "condition" => $this->globalsCondition,
+            "form" => [
+                "onlineStore_webpEnabled" => [
+                    "type" => "checkbox",
+                    "defaultValue" => true,
+                    "options" => [
+                        "name" => "Config.globalWebpImagesEnabledLabel"
                     ]
                 ]
             ]
