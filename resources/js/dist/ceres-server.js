@@ -1979,7 +1979,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -7263,12 +7262,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -42801,8 +42794,7 @@ var render = function() {
                   ? _c("lazy-img", {
                       attrs: {
                         "picture-class": "d-block mw-100 mh-100",
-                        "image-url": _vm.image + ".webp",
-                        "fallback-url": _vm.image,
+                        "image-url": _vm.image,
                         alt: _vm.altText,
                         title: _vm.itemName,
                         "data-testing": "basket-item-img"
@@ -49685,41 +49677,25 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { itemscope: "", itemtype: "https://schema.org/Thing" } },
+    { attrs: { itemscope: "", itemtype: "http://schema.org/Thing" } },
     [
       [
         _vm._ssrNode(
-          '<div class="single-carousel owl-carousel owl-theme owl-single-item mt-0">',
-          "</div>",
-          _vm._l(_vm.singleImages, function(image, index) {
-            return _vm._ssrNode('<div class="prop-1-1">', "</div>", [
-              _vm._ssrNode(
-                "<a" +
-                  _vm._ssrAttr(
-                    "data-lightbox",
-                    "single-item-image" + _vm._uid
-                  ) +
-                  _vm._ssrAttr("href", image.url) +
-                  ">",
-                "</a>",
-                [
-                  _c("lazy-img", {
-                    attrs: {
-                      alt: _vm.getAltText(image),
-                      "image-url": image.url + ".webp",
-                      "fallback-url": image.url,
-                      title: _vm.getImageName(image),
-                      "picture-class": "owl-lazy"
-                    }
-                  })
-                ],
-                1
+          '<div class="single-carousel owl-carousel owl-theme owl-single-item mt-0">' +
+            _vm._ssrList(_vm.singleImages, function(image) {
+              return (
+                '<div class="prop-1-1"><a' +
+                _vm._ssrAttr("href", image.url) +
+                _vm._ssrAttr("data-lightbox", "single-item-image" + _vm._uid) +
+                "><img" +
+                _vm._ssrAttr("data-src", image.url) +
+                _vm._ssrAttr("alt", _vm.getAltText(image)) +
+                _vm._ssrAttr("title", _vm.getImageName(image)) +
+                ' class="owl-lazy"></a></div>'
               )
-            ])
-          }),
-          0
+            }) +
+            "</div> "
         ),
-        _vm._ssrNode(" "),
         _vm.showThumbs
           ? _vm._ssrNode(
               '<div id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item">',
@@ -49733,11 +49709,10 @@ var render = function() {
                       _c("lazy-img", {
                         class: { active: _vm.currentItem === index },
                         attrs: {
+                          "picture-class": "owl-thumb border-appearance",
+                          "image-url": imagePreview.url,
                           alt: _vm.getAltText(imagePreview),
-                          "image-url": imagePreview.url + ".webp",
-                          "fallback-url": imagePreview.url,
-                          title: _vm.getImageName(imagePreview),
-                          "picture-class": "owl-thumb border-appearance"
+                          title: _vm.getImageName(imagePreview)
                         }
                       })
                     ],
@@ -49749,31 +49724,16 @@ var render = function() {
             )
           : _vm._e()
       ],
-      _vm._ssrNode(" "),
-      !_vm.initialized
-        ? _vm._ssrNode(
-            '<div class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0">',
-            "</div>",
-            [
-              _vm._ssrNode(
-                '<div class="prop-1-1">',
-                "</div>",
-                [
-                  _c("lazy-img", {
-                    attrs: {
-                      alt: _vm.getAltText(_vm.singleImages[0].url),
-                      "image-url": _vm.singleImages[0].url + ".webp",
-                      "fallback-url": _vm.singleImages[0].url,
-                      title: _vm.getImageName(_vm.singleImages[0].url),
-                      "picture-class": "owl-placeholder"
-                    }
-                  })
-                ],
-                1
-              )
-            ]
-          )
-        : _vm._e()
+      _vm._ssrNode(
+        " " +
+          (!_vm.initialized
+            ? '<div class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0"><div class="prop-1-1"><img' +
+              _vm._ssrAttr("src", _vm.singleImages[0].url) +
+              _vm._ssrAttr("alt", _vm.getAltText(_vm.singleImages[0].url)) +
+              _vm._ssrAttr("title", _vm.getImageName(_vm.singleImages[0].url)) +
+              ' class="owl-placeholder"></div></div>'
+            : "<!---->")
+      )
     ],
     2
   )
