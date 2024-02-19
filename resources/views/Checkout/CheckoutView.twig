@@ -1,6 +1,29 @@
 {% extends getPartial('page-design') %}
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
+{% set deliveryAddresses = services.customer.getAddresses(2) %}
+{% set billingAddresses = services.customer.getAddresses(1) %}
+
+{% set primaryDeliveryAddress = 0 %}
+{% set primaryBillingAddress = 0 %}
+
+{% set nrOfDeliveryAddresses = deliveryAddresses|length %}
+{% set nrOfBillingAddresses = billingAddresses|length %}
+
+{% for deliveryAddress in deliveryAddresses %}
+    {% if deliveryAddress.pivot.isPrimary == "1" %}
+        {% set primaryDeliveryAddress = deliveryAddress.id %}
+    {% endif %}
+{% endfor %}
+
+{% for billingAddress in billingAddresses %}
+    {% if billingAddress.pivot.isPrimary == "1" %}
+        {% set primaryBillingAddress = billingAddress.id %}
+    {% endif %}
+{% endfor %}
+
+
+
 {% block PartialHead %}
     {% embed getPartial('page-metadata') %}
         {% block title trans("Ceres::Template.checkout") %}
@@ -39,8 +62,7 @@
         "gb": ceresConfig.addresses.billingAddressRequire_en
         }
     %}
-
-    <div class="page-content checkout container-max pt-3">
+    <div class="page-content checkout container-max pt-3" ref="pageContent" :data-nrOfDeliveryAddresses="{{nrOfDeliveryAddresses}}" :data-nrOfBillingAddresses="{{nrOfBillingAddresses}}">
         {% set overrideCheckout = LayoutContainer.show("Ceres::Checkout") %}
         {% if overrideCheckout | trim is empty %}
             <div class="row mt-3">
@@ -64,10 +86,10 @@
             <checkout
                 v-cloak
                 :initial-checkout="{{ checkout | json_encode() }}"
-                :delivery-address-list="{{ services.customer.getAddresses(2) | json_encode }}"
-                :selected-delivery-address="{{ services.checkout.getDeliveryAddressId() | json_encode }}"
-                :billing-address-list="{{ services.customer.getAddresses(1) | json_encode }}"
-                :selected-billing-address="{{ services.checkout.getBillingAddressId() | json_encode }}">
+                :delivery-address-list="{{ deliveryAddresses | json_encode }}"
+                :selected-delivery-address="{{ primaryDeliveryAddress != 0 ? primaryDeliveryAddress : services.checkout.getDeliveryAddressId() | json_encode }}"
+                :billing-address-list="{{ billingAddresses | json_encode }}"
+                :selected-billing-address="{{ primaryBillingAddress != 0 ? primaryBillingAddress : services.checkout.getBillingAddressId() | json_encode }}">
                 <div class="row" slot-scope="checkoutComp">
                     <!-- ADDRESS SELECT -->
                     <div class="col-md-7">
@@ -82,7 +104,7 @@
                                         </header>
 
                                         {{ LayoutContainer.show("Ceres::Checkout.BeforeBillingAddress") }}
-                                        <div class="invoice-addresses-select">
+                                        <div ref="invoiceAddressesSelect" class="invoice-addresses-select">
                                             <invoice-address-select
                                                 :has-to-validate="true"
                                                 :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
@@ -103,7 +125,7 @@
                                         </header>
 
                                         {{ LayoutContainer.show("Ceres::Checkout.BeforeShippingAddress") }}
-                                        <div class="shipping-addresses-select">
+                                        <div class="shipping-addresses-select" ref="shippingAddressesSelect">
                                             <shipping-address-select
                                                 :optional-address-fields="{{ optionalShippingAddressFields | json_encode }}"
                                                 :required-address-fields="{{ requiredShippingAddressFields | json_encode }}"

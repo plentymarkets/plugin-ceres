@@ -12,6 +12,7 @@
     - The plentyShop LTS assistant contains the same configuration in the **Performance** step.
     - ***Important:*** This setting always applies to the whole header. This means that, as far as fixating header elements is concerned, it takes precedent over the configuration of any individual ShopBuilder widget.
     - ***Important:*** It may take time until Google Search Console reflects the improved CLS. Google Search Console uses a rolling average of the past 28 days. This means Google Search Console may only reflect the full impact of this change after high CLS values no longer contribute to the rolling average.
+- An option has been added to set addresses as the primary address.
 
 ### Changed
 
@@ -22,6 +23,10 @@
 - In plentyShop LTS 5.0.62 we made changes to template files relating the feedback plugin which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
 - We've updated the `z-index` in `resources/scss/ceres/views/PageDesign/_header.scss` and `resources/scss/ceres/widgets/Header/_navigation-widget.scss` to account for the new fixed header configuration. [View the changes in details.](https://github.com/plentymarkets/plugin-ceres/pull/3467/files?file-filters%5B%5D=.scss&show-viewed-files=true)
 - [resources/views/ResultFields/ListItem.fields.json](https://github.com/plentymarkets/plugin-ceres/pull/3459/files#diff)
+- [resources/scss/ceres/views/Templates/AddressSelect/_address-select.scss](https://github.com/plentymarkets/plugin-ceres/pull/3457/files#diff-f1d52ee4809b03e32c2b5f28327ad58460d32aab9a7ca789e4955cb82b063298)
+- [resources/views/Checkout/CheckoutView.twig](https://github.com/plentymarkets/plugin-ceres/pull/3457/files#diff-c74596cdf6d6196e3b9c8563916151e3a08a5edfa026845503c9169a0fcd8252)
+- [resources/views/Customer/Components/AddressSelect/AddressSelect.twig](https://github.com/plentymarkets/plugin-ceres/pull/3457/files#diff-969624803dfeb696a58e16de0d95c285a458ec83a615026882d9b1e65386935b)
+- [resources/views/MyAccount/MyAccountView.twig](https://github.com/plentymarkets/plugin-ceres/pull/3457/files#diff-dbc71118894a6415be3f82e4ee31dc1e6b7c3160b45b887ccce71f6620824d7c)
 
 ## v5.0.61 (2023-10-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.60...5.0.61" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 

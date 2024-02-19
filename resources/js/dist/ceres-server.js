@@ -5444,6 +5444,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }
 
       if (!this.isSimpleRegistration) {
+        this.billingAddress.isPrimary = 1;
         userObject.billingAddress = this.billingAddress;
       }
 
