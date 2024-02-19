@@ -7305,6 +7305,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-image-carousel",
@@ -49685,57 +49686,30 @@ var render = function() {
     "div",
     { attrs: { itemscope: "", itemtype: "https://schema.org/Thing" } },
     [
-      [
-        _vm._ssrNode(
-          '<div class="single-carousel owl-carousel owl-theme owl-single-item mt-0">',
-          "</div>",
-          _vm._l(_vm.singleImages, function(image, index) {
-            return _vm._ssrNode('<div class="prop-1-1">', "</div>", [
-              _vm._ssrNode(
-                "<a" +
-                  _vm._ssrAttr(
-                    "data-lightbox",
-                    "single-item-image" + _vm._uid
-                  ) +
-                  _vm._ssrAttr("href", image.url) +
-                  ">",
-                "</a>",
-                [
-                  _c("lazy-img", {
-                    attrs: {
-                      alt: _vm.getAltText(image),
-                      "image-url": image.url + ".webp",
-                      "fallback-url": image.url,
-                      title: _vm.getImageName(image),
-                      "picture-class": "owl-lazy"
-                    }
-                  })
-                ],
-                1
-              )
-            ])
-          }),
-          0
-        ),
-        _vm._ssrNode(" "),
-        _vm.showThumbs
-          ? _vm._ssrNode(
-              '<div id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item">',
+      _vm.initialized
+        ? [
+            _vm._ssrNode(
+              '<div class="single-carousel owl-carousel owl-theme owl-single-item mt-0">',
               "</div>",
-              _vm._l(_vm.carouselImages, function(imagePreview, index) {
+              _vm._l(_vm.singleImages, function(image, index) {
                 return _vm._ssrNode('<div class="prop-1-1">', "</div>", [
                   _vm._ssrNode(
-                    '<div class="image-container">',
-                    "</div>",
+                    "<a" +
+                      _vm._ssrAttr(
+                        "data-lightbox",
+                        "single-item-image" + _vm._uid
+                      ) +
+                      _vm._ssrAttr("href", image.url) +
+                      ">",
+                    "</a>",
                     [
                       _c("lazy-img", {
-                        class: { active: _vm.currentItem === index },
                         attrs: {
-                          alt: _vm.getAltText(imagePreview),
-                          "image-url": imagePreview.url + ".webp",
-                          "fallback-url": imagePreview.url,
-                          title: _vm.getImageName(imagePreview),
-                          "picture-class": "owl-thumb border-appearance"
+                          alt: _vm.getAltText(image),
+                          "image-url": image.url + ".webp",
+                          "fallback-url": image.url,
+                          title: _vm.getImageName(image),
+                          "picture-class": "owl-lazy"
                         }
                       })
                     ],
@@ -49744,12 +49718,38 @@ var render = function() {
                 ])
               }),
               0
-            )
-          : _vm._e()
-      ],
-      _vm._ssrNode(" "),
-      !_vm.initialized
-        ? _vm._ssrNode(
+            ),
+            _vm._ssrNode(" "),
+            _vm.showThumbs
+              ? _vm._ssrNode(
+                  '<div id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item">',
+                  "</div>",
+                  _vm._l(_vm.carouselImages, function(imagePreview, index) {
+                    return _vm._ssrNode('<div class="prop-1-1">', "</div>", [
+                      _vm._ssrNode(
+                        '<div class="image-container">',
+                        "</div>",
+                        [
+                          _c("lazy-img", {
+                            class: { active: _vm.currentItem === index },
+                            attrs: {
+                              alt: _vm.getAltText(imagePreview),
+                              "image-url": imagePreview.url + ".webp",
+                              "fallback-url": imagePreview.url,
+                              title: _vm.getImageName(imagePreview),
+                              "picture-class": "owl-thumb border-appearance"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ])
+                  }),
+                  0
+                )
+              : _vm._e()
+          ]
+        : _vm._ssrNode(
             '<div class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0">',
             "</div>",
             [
@@ -49771,7 +49771,6 @@ var render = function() {
               )
             ]
           )
-        : _vm._e()
     ],
     2
   )
