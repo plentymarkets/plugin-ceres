@@ -8,8 +8,7 @@
           <lazy-img
               picture-class="d-block mw-100 mh-100"
               v-if="image"
-              :image-url="`${image}.webp`"
-              :fallback-url="image"
+              :image-url="image"
               :alt="altText"
               :title="itemName"
               data-testing="basket-item-img">
@@ -22,7 +21,7 @@
           <div class="meta-container">
             <div class="position-relative w-100">
               <a :href="basketItem.variation.data | itemURL" class="item-name text-primary text-appearance small font-weight-bold text-break" data-testing="basket-item-name">
-                {{ basketItem.variation.data | itemName }}
+                {{ basketItem.variation.data | itemName }}
               </a>
 
               <div class="item-base-price small">
@@ -64,8 +63,8 @@
                     <strong v-if="propertyGroup.name">{{ propertyGroup.name }}: </strong>
                     <span>{{ property.names.name }}</span>
                     <span v-if="property.cast === 'file'">
-                      <a :href="property.values.value | propertyFileUrl" v-html="property.values.value" target="_blank"></a>
-                    </span>
+                                            <a :href="property.values.value | propertyFileUrl" v-html="property.values.value" target="_blank"></a>
+                                        </span>
                     <template v-else-if="property.cast === 'multiSelection' && property.values[0] !== undefined">
                       <ul class="pl-3">
                         <li v-for="multiSelectProperty in property.values">{{ multiSelectProperty.value }}</li>
@@ -168,28 +167,34 @@ import OrderPropertyValueList from "../../item/OrderPropertyValueList.vue"
 export default {
   name: "basket-list-item",
 
-  components: {
-    BasketSetComponentList,
-    OrderPropertyValueList
-  },
+  components:
+      {
+        BasketSetComponentList,
+        OrderPropertyValueList
+      },
 
-  props: {
-    template: {
-      type: String,
-      default: "#vue-basket-list-item"
-    },
-    basketItem: Object,
-    basketDetailsData: {
-      type: Array,
-      default: () => []
-    },
-    isPreview: {
-      type: Boolean,
-      default: false
-    }
-  },
+  props:
+      {
+        template:
+            {
+              type: String,
+              default: "#vue-basket-list-item"
+            },
+        basketItem: Object,
+        basketDetailsData:
+            {
+              type: Array,
+              default: () => []
+            },
+        isPreview:
+            {
+              type: Boolean,
+              default: false
+            }
+      },
 
-  data() {
+  data()
+  {
     return {
       waiting: false,
       waitingForDelete: false,
@@ -198,114 +203,134 @@ export default {
     };
   },
 
-  computed: {
-    image() {
-      const itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
+  computed:
+      {
+        image()
+        {
+          const itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
 
-      return this.$options.filters.itemImage(itemImages);
-    },
+          return this.$options.filters.itemImage(itemImages);
+        },
 
-    altText() {
-      const images = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
-      const altText =  this.$options.filters.itemImageAlternativeText(images);
+        altText()
+        {
+          const images = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
+          const altText =  this.$options.filters.itemImageAlternativeText(images);
 
-      if (altText) {
-        return altText;
-      }
-
-      return this.itemName;
-    },
-
-    itemName() {
-      return this.$options.filters.itemName(this.basketItem.variation.data);
-    },
-
-    isInputLocked() {
-      return this.waiting || this.isBasketLoading;
-    },
-
-    propertySurchargeSum() {
-      let sum = 0;
-
-      for (const property of this.basketItem.basketItemOrderParams) {
-        sum += this.$options.filters.propertySurcharge(this.basketItem.variation.data.properties, property.propertyId);
-      }
-
-      return sum;
-    },
-
-    unitPrice() {
-      let setComponentsParamSurcharge = 0;
-      if (isDefined(this.basketItem.setComponents)) {
-        setComponentsParamSurcharge = this.basketItem.setComponents
-            .map(component => component.quantity * component.attributeTotalMarkup)
-            .reduce((sum, i) => sum + i, 0);
-      }
-      return this.basketItem.price + setComponentsParamSurcharge;
-    },
-
-    basePrice() {
-      // if the 'AfterBasketItemUpdate' event contains a new base price for the item, return it
-      if (!isNullOrUndefined(this.basketItem.updatedBasePrice)) {
-        return this.basketItem.updatedBasePrice;
-      }
-
-      if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer)) {
-        return this.basketItem.variation.data.prices.specialOffer.basePrice;
-      }
-
-      if (!isNullOrUndefined(this.basketItem.variation.data.prices.graduatedPrices)) {
-        let calculatedPrice = null;
-        this.basketItem.variation.data.prices.graduatedPrices.forEach(price => {
-          if (isNullOrUndefined(calculatedPrice) && this.basketItem.quantity >= price.minimumOrderQuantity) {
-            calculatedPrice = price;
+          if (altText)
+          {
+            return altText;
           }
-          else if(this.basketItem.quantity >= price.minimumOrderQuantity && price.minimumOrderQuantity >= calculatedPrice.minimumOrderQuantity ) {
-            calculatedPrice = price;
+
+          return this.itemName;
+        },
+
+        itemName()
+        {
+          return this.$options.filters.itemName(this.basketItem.variation.data);
+        },
+
+        isInputLocked()
+        {
+          return this.waiting || this.isBasketLoading;
+        },
+
+        propertySurchargeSum()
+        {
+          let sum = 0;
+
+          for (const property of this.basketItem.basketItemOrderParams)
+          {
+            sum += this.$options.filters.propertySurcharge(this.basketItem.variation.data.properties, property.propertyId);
           }
-        });
 
-        if (!isNullOrUndefined(calculatedPrice)) {
-          return calculatedPrice.basePrice;
-        }
-      }
+          return sum;
+        },
 
-      return this.basketItem.variation.data.prices.default.basePrice;
-    },
+        unitPrice()
+        {
+          let setComponentsParamSurcharge = 0;
+          if(isDefined(this.basketItem.setComponents))
+          {
+            setComponentsParamSurcharge = this.basketItem.setComponents
+                .map(component => component.quantity * component.attributeTotalMarkup)
+                .reduce((sum, i) => sum + i, 0);
+          }
+          return this.basketItem.price + setComponentsParamSurcharge;
+        },
 
-    // eslint-disable-next-line complexity
-    isMoreButtonVisible() {
-      return this.isDataFieldVisible("basket.item.item_id") && this.basketItem.variation.data.item.id ||
-          this.isDataFieldVisible("basket.item.customNumber") && this.basketItem.variation.data.variation.number ||
-          this.isDataFieldVisible("basket.item.availability") && this.basketItem.variation.data.variation.availability.names.name ||
-          this.isDataFieldVisible("basket.item.description_long") && this.basketItem.variation.data.texts.description ||
-          this.isDataFieldVisible("basket.item.description_short") && this.basketItem.variation.data.texts.shortDescription;
-    },
+        basePrice()
+        {
+          // if the 'AfterBasketItemUpdate' event contains a new base price for the item, return it
+          if (!isNullOrUndefined(this.basketItem.updatedBasePrice))
+          {
+            return this.basketItem.updatedBasePrice;
+          }
 
-    ...mapState({
-      isBasketLoading: state => state.basket.isBasketLoading,
-      isCheckoutReadonly: state => state.checkout.readOnly,
-      showNetPrice: state => state.basket.showNetPrices
-    })
-  },
+          if (!isNullOrUndefined(this.basketItem.variation.data.prices.specialOffer))
+          {
+            return this.basketItem.variation.data.prices.specialOffer.basePrice;
+          }
+
+          if (!isNullOrUndefined(this.basketItem.variation.data.prices.graduatedPrices))
+          {
+            let calculatedPrice = null;
+            this.basketItem.variation.data.prices.graduatedPrices.forEach(price =>
+            {
+              if(isNullOrUndefined(calculatedPrice) && this.basketItem.quantity >= price.minimumOrderQuantity) {
+                calculatedPrice = price;
+              }
+              else if(this.basketItem.quantity >= price.minimumOrderQuantity && price.minimumOrderQuantity >= calculatedPrice.minimumOrderQuantity ) {
+                calculatedPrice = price;
+              }
+            });
+
+            if (!isNullOrUndefined(calculatedPrice)) {
+              return calculatedPrice.basePrice;
+            }
+          }
+
+          return this.basketItem.variation.data.prices.default.basePrice;
+        },
+
+        // eslint-disable-next-line complexity
+        isMoreButtonVisible()
+        {
+          return this.isDataFieldVisible("basket.item.item_id") && this.basketItem.variation.data.item.id ||
+              this.isDataFieldVisible("basket.item.customNumber") && this.basketItem.variation.data.variation.number ||
+              this.isDataFieldVisible("basket.item.availability") && this.basketItem.variation.data.variation.availability.names.name ||
+              this.isDataFieldVisible("basket.item.description_long") && this.basketItem.variation.data.texts.description ||
+              this.isDataFieldVisible("basket.item.description_short") && this.basketItem.variation.data.texts.shortDescription;
+        },
+
+        ...mapState({
+          isBasketLoading: state => state.basket.isBasketLoading,
+          isCheckoutReadonly: state => state.checkout.readOnly,
+          showNetPrice: state => state.basket.showNetPrices
+        })
+      },
 
   methods: {
 
     /**
      * Delete item from basket
      */
-    deleteItem() {
-      if (!this.waiting && !this.waitingForDelete && !this.isBasketLoading) {
+    deleteItem()
+    {
+      if (!this.waiting && !this.waitingForDelete && !this.isBasketLoading)
+      {
         this.waitingForDelete = true;
 
         this.$store.dispatch("removeBasketItem", this.basketItem.id).then(
-          response => {
-            document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", { detail: this.basketItem }));
-            this.waitingForDelete = false;
-          },
-          error => {
-            this.waitingForDelete = false;
-          });
+            response =>
+            {
+              document.dispatchEvent(new CustomEvent("afterBasketItemRemoved", { detail: this.basketItem }));
+              this.waitingForDelete = false;
+            },
+            error =>
+            {
+              this.waitingForDelete = false;
+            });
       }
     },
 
@@ -313,46 +338,54 @@ export default {
      * Update item quantity in basket
      * @param quantity
      */
-    updateQuantity(quantity) {
-      if (this.basketItem.quantity !== quantity) {
+    updateQuantity(quantity)
+    {
+      if (this.basketItem.quantity !== quantity)
+      {
         this.waiting = true;
 
         const origQty = this.basketItem.quantity;
 
         this.$store.dispatch("updateBasketItemQuantity", { id: this.basketItem.id, variationId: this.basketItem.variation.id, quantity: quantity }).then(
-          response => {
-            document.dispatchEvent(new CustomEvent("afterBasketItemQuantityUpdated", { detail: this.basketItem }));
-            this.waiting = false;
-          },
-          error => {
-            this.basketItem.quantity = origQty;
+            response =>
+            {
+              document.dispatchEvent(new CustomEvent("afterBasketItemQuantityUpdated", { detail: this.basketItem }));
+              this.waiting = false;
+            },
+            error =>
+            {
+              this.basketItem.quantity = origQty;
 
-            if (this.isPreview) {
-              this.$store.dispatch(
-                "addBasketNotification",
-                {
-                  type: "error",
-                  message: TranslationService.translate(
-                      "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString()),
-                      error.data.placeholder
-                  )
-                }
-              );
-            } else {
-              NotificationService.error(
-                TranslationService.translate(
-                  "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString()),
-                  error.data.placeholder
-                )
-              ).closeAfter(5000);
-            }
+              if (this.isPreview)
+              {
+                this.$store.dispatch(
+                    "addBasketNotification",
+                    {
+                      type: "error",
+                      message: TranslationService.translate(
+                          "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString()),
+                          error.data.placeholder
+                      )
+                    }
+                );
+              }
+              else
+              {
+                NotificationService.error(
+                    TranslationService.translate(
+                        "Ceres::Template." + ExceptionMap.get(error.data.exceptionCode.toString()),
+                        error.data.placeholder
+                    )
+                ).closeAfter(5000);
+              }
 
-            this.waiting = false;
-          });
+              this.waiting = false;
+            });
       }
     },
 
-    isDataFieldVisible(value) {
+    isDataFieldVisible(value)
+    {
       return this.basketDetailsData.includes(value);
     }
   }
