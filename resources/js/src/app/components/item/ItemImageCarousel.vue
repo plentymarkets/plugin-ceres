@@ -2,8 +2,8 @@
   <div itemscope itemtype="https://schema.org/Thing">
     <template>
       <div ref="single" class="single-carousel owl-carousel owl-theme owl-single-item mt-0">
-        <div v-for="image in singleImages" class="prop-1-1">
-          <a :data-lightbox="'single-item-image' + _uid" :href="image.url">
+        <div v-for="(image, index) in singleImages" :key="index" class="prop-1-1">
+          <a :data-lightbox="`single-item-image${_uid}`" :href="image.url">
             <lazy-img
                 :alt="getAltText(image)"
                 :image-url="`${image.url}.webp`"
@@ -14,12 +14,14 @@
           </a>
         </div>
       </div>
+
       <div v-if="showThumbs" id="thumb-carousel" ref="thumbs" class="owl-thumbs owl-carousel owl-theme owl-single-item">
-        <div v-for="(imagePreview, index) in carouselImages" class="prop-1-1">
+        <div v-for="(imagePreview, index) in carouselImages" :key="index" class="prop-1-1">
           <div class="image-container" @click="goTo(index)">
             <lazy-img
                 :alt="getAltText(imagePreview)"
-                :image-url="imagePreview.url"
+                :image-url="`${imagePreview.url}.webp`"
+                :fallback-url="imagePreview.url"
                 :title="getImageName(imagePreview)"
                 picture-class="owl-thumb border-appearance"
                 v-bind:class="{ 'active': currentItem === index}">
