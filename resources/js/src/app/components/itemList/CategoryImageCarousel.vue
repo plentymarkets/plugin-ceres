@@ -78,7 +78,7 @@ export default {
       return this.imageUrlsData;
     },
     imageOrItemImage() {
-      const selectedImg = this.imageUrls | this.itemImage;
+      const selectedImg = this.imageUrls.length ? this.imageUrls[0] : this.itemImage;
 
       return `${selectedImg}`;
     }

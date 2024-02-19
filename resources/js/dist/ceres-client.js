@@ -1552,7 +1552,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.imageUrlsData;
     },
     imageOrItemImage: function imageOrItemImage() {
-      var selectedImg = this.imageUrls | this.itemImage;
+      var selectedImg = this.imageUrls.length ? this.imageUrls[0] : this.itemImage;
       return "".concat(selectedImg);
     }
   },
