@@ -9,8 +9,7 @@
                 :image-url="`${image.url}.webp`"
                 :fallback-url="image.url"
                 :title="getImageName(image)"
-                picture-class="owl-lazy">
-            </lazy-img>
+                picture-class="owl-lazy" />
           </a>
         </div>
       </div>
@@ -24,20 +23,19 @@
                 :fallback-url="imagePreview.url"
                 :title="getImageName(imagePreview)"
                 picture-class="owl-thumb border-appearance"
-                v-bind:class="{ 'active': currentItem === index}">
-            </lazy-img>
+                v-bind:class="{ 'active': currentItem === index}" />
           </div>
         </div>
       </div>
     </template>
     <div v-if="!initialized" class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0">
       <div class="prop-1-1">
-        <img
+        <lazy-img
             :alt="getAltText(singleImages[0].url)"
-            :src="singleImages[0].url"
+            :image-url="`${singleImages[0].url}.webp`"
+            :fallback-url="singleImages[0].url"
             :title="getImageName(singleImages[0].url)"
-            class="owl-placeholder"
-        >
+            picture-class="owl-placeholder" />
       </div>
     </div>
   </div>
