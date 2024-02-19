@@ -49,10 +49,10 @@
                         <div class="image-container flex-shrink-0 mx-1">
                             {{ Twig.if("imageData") }}
                             <lazy-img
-                                picture-class="d-block mw-100 mh-100"
-                                :image-url="{{ Twig.print("imageData.url | json_encode") }}"
-                                :alt="{{ Twig.print("altText | json_encode") }}"
-                                :title="{{ Twig.print("setComponent.orderItemName | json_encode") }}">
+                                    picture-class="d-block mw-100 mh-100"
+                                    :image-url="{{ Twig.print("imageData.url | json_encode") }}"
+                                    :alt="{{ Twig.print("altText | json_encode") }}"
+                                    :title="{{ Twig.print("setComponent.orderItemName | json_encode") }}">
                             </lazy-img>
                             {{ Twig.endif() }}
                         </div>
@@ -95,34 +95,34 @@
                                         {{ Twig.endif() }}
                                         {{ Twig.endfor() }}
 
-                                        <a class="text-appearance" href="{{ Twig.print('urls.orderPropertyFile(path)') }}?filename={{ Twig.print('filename') }}{{ Twig.if("services.customer.getContactId() == 0") }}&orderId={{ Twig.print('data.order.id') }}{{ Twig.endif() }}"
-                                           target="_blank">
-                                            <i class="fa fa-external-link" aria-hidden="true"></i>
-                                            {{ Twig.print('splitPath | last') }}
-                                        </a>
-                                    </span>
+                                                                            <a class="text-appearance" href="{{ Twig.print('urls.orderPropertyFile(path)') }}?filename={{ Twig.print('filename') }}{{ Twig.if("services.customer.getContactId() == 0") }}&orderId={{ Twig.print('data.order.id') }}{{ Twig.endif() }}"
+                                                                               target="_blank">
+                                                                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                                                {{ Twig.print('splitPath | last') }}
+                                                                            </a>
+                                                                        </span>
                                     {{ Twig.endif() }}
                                     {{ Twig.elseif("property.type == 'selection'") }}
                                     <span class="item-word-break">
-                                        {{ Twig.print('property | propertySelectionValueName') }}
-                                    </span>
+                                                                    {{ Twig.print('property | propertySelectionValueName') }}
+                                                                </span>
                                     {{ Twig.elseif("property.type | length > 0") }}
                                     <span class="item-word-break">
-                                        {{ Twig.print('property.value') }}
-                                    </span>
+                                                                    {{ Twig.print('property.value') }}
+                                                                </span>
                                     {{ Twig.endif() }}
                                 </div>
                                 {{ Twig.endfor() }}
                             </div>
 
                             <label
-                                class="btn-collapse mb-0 collapsed"
-                                data-toggle="collapse"
-                                data-target="#collapseOrderProperties"
-                                aria-expanded="false"
-                                aria-controls="collapseOrderProperties"
-                                data-show-more="{{ Twig.trans("Ceres::Template.basketShowMore") }}"
-                                data-show-less="{{ Twig.trans("Ceres::Template.basketShowLess") }}">
+                                    class="btn-collapse mb-0 collapsed"
+                                    data-toggle="collapse"
+                                    data-target="#collapseOrderProperties"
+                                    aria-expanded="false"
+                                    aria-controls="collapseOrderProperties"
+                                    data-show-more="{{ Twig.trans("Ceres::Template.basketShowMore") }}"
+                                    data-show-less="{{ Twig.trans("Ceres::Template.basketShowLess") }}">
                                 <i class="fa fa-caret-down fa-lg"></i>
                             </label>
 
@@ -135,12 +135,12 @@
                                     <strong>{{ Twig.print("propertyGroup.name") }}</strong>
                                     <span>{{ Twig.print("property.names.name") }}</span>
                                     <span>
-                                        {{ Twig.if('property.cast == "file"') }}
-                                            <a :href="'{{ Twig.print("property.values.value") }}' | propertyFileUrl" v-html="'{{ Twig.print("property.values.value") }}'" target="_blank"></a>
-                                        {{ Twig.else() }}
+                                                                {{ Twig.if('property.cast == "file"') }}
+                                                                    <a :href="'{{ Twig.print("property.values.value") }}' | propertyFileUrl" v-html="'{{ Twig.print("property.values.value") }}'" target="_blank"></a>
+                                                                {{ Twig.else() }}
                                         {{ Twig.print("property.values.value | raw") }}
                                         {{ Twig.endif() }}
-                                    </span>
+                                                            </span>
                                 </div>
                                 {{ Twig.endfor() }}
                             </div>
@@ -242,33 +242,33 @@
                         {{ Twig.endif() }}
                         {{ Twig.endfor() }}
 
-                        <a class="text-appearance" href="{{ Twig.print('urls.orderPropertyFile(path)') }}?filename={{ Twig.print('filename') }}{{ Twig.if("services.customer.getContactId() == 0") }}&orderId={{ Twig.print('data.order.id') }}{{ Twig.endif() }}"
-                           target="_blank">
-                            <i class="fa fa-external-link" aria-hidden="true"></i>
-                            {{ Twig.print('splitPath | last') }}
-                        </a>
-                    </span>
+                                                <a class="text-appearance" href="{{ Twig.print('urls.orderPropertyFile(path)') }}?filename={{ Twig.print('filename') }}{{ Twig.if("services.customer.getContactId() == 0") }}&orderId={{ Twig.print('data.order.id') }}{{ Twig.endif() }}"
+                                                   target="_blank">
+                                                    <i class="fa fa-external-link" aria-hidden="true"></i>
+                                                    {{ Twig.print('splitPath | last') }}
+                                                </a>
+                                            </span>
                     {{ Twig.endif() }}
                     {{ Twig.elseif("property.type == 'selection'") }}
                     <span class="col-12 item-word-break">
-                        {{ Twig.print('property | propertySelectionValueName') }}
-                    </span>
+                                        {{ Twig.print('property | propertySelectionValueName') }}
+                                    </span>
                     {{ Twig.elseif("property.type | length > 0") }}
                     <span class="col-12 item-word-break">
-                        {{ Twig.print('property.value') }}
-                    </span>
+                                        {{ Twig.print('property.value') }}
+                                    </span>
                     {{ Twig.endif() }}
                     {{ Twig.endfor() }}
                 </div>
 
                 <label
-                    class="btn-collapse mb-0 collapsed"
-                    data-toggle="collapse"
-                    data-target="#collapse-{{ Twig.print('uid') }}"
-                    aria-expanded="false"
-                    aria-controls="collapse-{{ Twig.print('uid') }}"
-                    data-show-more="{{ Twig.trans("Ceres::Template.basketShowMore") }}"
-                    data-show-less="{{ Twig.trans("Ceres::Template.basketShowLess") }}">
+                        class="btn-collapse mb-0 collapsed"
+                        data-toggle="collapse"
+                        data-target="#collapse-{{ Twig.print('uid') }}"
+                        aria-expanded="false"
+                        aria-controls="collapse-{{ Twig.print('uid') }}"
+                        data-show-more="{{ Twig.trans("Ceres::Template.basketShowMore") }}"
+                        data-show-less="{{ Twig.trans("Ceres::Template.basketShowLess") }}">
                     <i class="fa fa-caret-down fa-lg"></i>
                 </label>
 
@@ -306,9 +306,9 @@
 
         {{ Twig.if("item.giftCard.isGiftCard") }}
         <edit-coupon-overlay
-            :order-item="{{ Twig.print("item | json_encode") }}"
-            order-access-key="{{ Twig.print("request.get('accessKey')") }}"
-            payment-status="{{ Twig.print("data.paymentStatus") }}">
+                :order-item="{{ Twig.print("item | json_encode") }}"
+                order-access-key="{{ Twig.print("request.get('accessKey')") }}"
+                payment-status="{{ Twig.print("data.paymentStatus") }}">
         </edit-coupon-overlay>
         {{ Twig.endif() }}
 

@@ -65,12 +65,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-image-carousel",
@@ -284,7 +278,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { itemscope: "", itemtype: "https://schema.org/Thing" } },
+    { attrs: { itemscope: "", itemtype: "http://schema.org/Thing" } },
     [
       [
         _c(
@@ -300,22 +294,20 @@ var render = function() {
                 "a",
                 {
                   attrs: {
-                    "data-lightbox": "single-item-image" + _vm._uid,
-                    href: image.url
+                    href: image.url,
+                    "data-lightbox": "single-item-image" + _vm._uid
                   }
                 },
                 [
-                  _c("lazy-img", {
+                  _c("img", {
+                    staticClass: "owl-lazy",
                     attrs: {
+                      "data-src": image.url,
                       alt: _vm.getAltText(image),
-                      "image-url": image.url + ".webp",
-                      "fallback-url": image.url,
-                      title: _vm.getImageName(image),
-                      "picture-class": "owl-lazy"
+                      title: _vm.getImageName(image)
                     }
                   })
-                ],
-                1
+                ]
               )
             ])
           }),
@@ -347,10 +339,10 @@ var render = function() {
                       _c("lazy-img", {
                         class: { active: _vm.currentItem === index },
                         attrs: {
-                          alt: _vm.getAltText(imagePreview),
+                          "picture-class": "owl-thumb border-appearance",
                           "image-url": imagePreview.url,
-                          title: _vm.getImageName(imagePreview),
-                          "picture-class": "owl-thumb border-appearance"
+                          alt: _vm.getAltText(imagePreview),
+                          title: _vm.getImageName(imagePreview)
                         }
                       })
                     ],
@@ -375,8 +367,8 @@ var render = function() {
                 _c("img", {
                   staticClass: "owl-placeholder",
                   attrs: {
-                    alt: _vm.getAltText(_vm.singleImages[0].url),
                     src: _vm.singleImages[0].url,
+                    alt: _vm.getAltText(_vm.singleImages[0].url),
                     title: _vm.getImageName(_vm.singleImages[0].url)
                   }
                 })
