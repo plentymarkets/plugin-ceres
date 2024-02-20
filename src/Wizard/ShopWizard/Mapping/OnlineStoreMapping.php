@@ -126,7 +126,7 @@ class OnlineStoreMapping
         'onlineStore_webpImages' => [
             'field'     => 'global.webp_images',
             'type'      => 'boolean',
-            'global'    => false,
+            'global'    => true,
             'optional'  => false
         ],
         'onlineStore_shippingProfiles' => [
