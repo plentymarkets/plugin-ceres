@@ -425,7 +425,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_3__["detectWebP"])(function (supported) {
-      _this.supported = supported;
+      _this.webpBrowserSupport = supported;
 
       _this.$nextTick(function () {
         if (!_this.isBackgroundImage) {

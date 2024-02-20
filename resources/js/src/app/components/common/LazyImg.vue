@@ -37,7 +37,7 @@ export default {
     {
         detectWebP(((supported) =>
         {
-            this.supported = supported;
+            this.webpBrowserSupport = supported;
             this.$nextTick(() =>
             {
                 if(!this.isBackgroundImage)
