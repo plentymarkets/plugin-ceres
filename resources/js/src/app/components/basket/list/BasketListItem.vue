@@ -4,16 +4,15 @@
 
         <div class="basket-item component-loading with-icon d-flex" :class="{ 'sending is-loading': waiting, 'is-loading': isCheckoutReadonly }">
             <div class="image-container">
-              <a :href="basketItem.variation.data | itemURL">
-                <lazy-img
-                    picture-class="d-block mw-100 mh-100"
-                    v-if="image"
-                    :image-url="image"
-                    :alt="altText"
-                    :title="itemName"
-                    data-testing="basket-item-img">
-                </lazy-img>
-              </a>
+                <a :href="basketItem.variation.data | itemURL">
+                    <lazy-img
+                        picture-class="d-block mw-100 mh-100"
+                        v-if="image"
+                        :image-url="image"
+                        :alt="altText"
+                        :title="itemName"
+                        data-testing="basket-item-img" />
+                </a>
             </div>
 
             <div class="meta-container-wrapper">
