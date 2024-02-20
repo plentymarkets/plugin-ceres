@@ -737,10 +737,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -754,7 +750,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      webpImagesEnabled: App.config.global.webpImagesEnabled,
+      webpImagesEnabled: App.config.global.webpImages,
       webpMimeType: 'image/webp',
       webpBrowserSupport: false
     };
@@ -779,16 +775,23 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.$nextTick(function () {
-        _this2.$el.setAttribute("data-loaded", 'false');
+        _this2.$el.setAttribute("data-loaded", false);
 
         Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_2__["default"])(_this2.$el).triggerLoad(_this2.$el);
       });
     }
   },
   computed: {
+    /**
+     *  Determine appropriate image url to use as background source
+     */
     backgroundSource: function backgroundSource() {
       return this.imageUrl && this.mimeTypeWebp ? this.webpBrowserSupport ? this.imageUrl : this.fallbackUrl : this.imageUrl || this.fallbackUrl;
     },
+
+    /**
+    * Check if url points to a .webp image and return appropriate mime-type
+    */
     mimeTypeWebp: function mimeTypeWebp() {
       var _this$imageUrl;
 
@@ -39762,7 +39765,7 @@ var render = function() {
         [
           _vm._t("additionalimages"),
           _vm._v(" "),
-          _vm.imageUrl
+          _vm.imageUrl === _vm.pictureSource
             ? _c("source", {
                 attrs: { srcset: _vm.imageUrl, type: _vm.mimeTypeWebp }
               })

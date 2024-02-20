@@ -726,22 +726,22 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n              " +
+                            "\n                            " +
                               _vm._s(
                                 _vm._f("itemName")(
                                   _vm.basketItem.variation.data
                                 )
                               ) +
-                              "\n            "
+                              "\n                        "
                           )
                         ]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "item-base-price small" }, [
                         _vm._v(
-                          "\n              " +
+                          "\n                            " +
                             _vm._s(_vm._f("currency")(_vm.unitPrice)) +
-                            "\n            "
+                            "\n                        "
                         )
                       ]),
                       _vm._v(" "),
@@ -763,9 +763,9 @@ var render = function() {
                         ? _c("div", { staticClass: "text-muted small" }, [
                             _c("div", [
                               _vm._v(
-                                "\n                " +
+                                "\n                                " +
                                   _vm._s(_vm.basePrice) +
-                                  "\n              "
+                                  "\n                            "
                               )
                             ]),
                             _vm._v(" "),
@@ -780,7 +780,7 @@ var render = function() {
                                 )
                               ]),
                               _vm._v(
-                                "\n                " +
+                                "\n                                " +
                                   _vm._s(
                                     _vm.basketItem.variation.data.unit.content
                                   ) +
@@ -789,7 +789,7 @@ var render = function() {
                                     _vm.basketItem.variation.data.unit.names
                                       .name
                                   ) +
-                                  "\n              "
+                                  "\n                            "
                               )
                             ])
                           ])
@@ -812,9 +812,9 @@ var render = function() {
                                 )
                               ]),
                               _vm._v(
-                                "\n                " +
+                                "\n                                " +
                                   _vm._s(_vm._f("inputUnit")(_vm.basketItem)) +
-                                  "\n              "
+                                  "\n                            "
                               )
                             ])
                           ])
@@ -985,11 +985,11 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n              " +
+                          "\n                            " +
                             _vm._s(
                               _vm.$translate("Ceres::Template.basketDelete")
                             ) +
-                            "\n              "
+                            "\n                            "
                         ),
                         _c("icon", {
                           staticClass: "default-float",

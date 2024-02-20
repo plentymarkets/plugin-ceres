@@ -2862,10 +2862,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2879,7 +2875,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      webpImagesEnabled: App.config.global.webpImagesEnabled,
+      webpImagesEnabled: App.config.global.webpImages,
       webpMimeType: 'image/webp',
       webpBrowserSupport: false
     };
@@ -2904,16 +2900,23 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.$nextTick(function () {
-        _this2.$el.setAttribute("data-loaded", 'false');
+        _this2.$el.setAttribute("data-loaded", false);
 
         Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_2__["default"])(_this2.$el).triggerLoad(_this2.$el);
       });
     }
   },
   computed: {
+    /**
+     *  Determine appropriate image url to use as background source
+     */
     backgroundSource: function backgroundSource() {
       return this.imageUrl && this.mimeTypeWebp ? this.webpBrowserSupport ? this.imageUrl : this.fallbackUrl : this.imageUrl || this.fallbackUrl;
     },
+
+    /**
+    * Check if url points to a .webp image and return appropriate mime-type
+    */
     mimeTypeWebp: function mimeTypeWebp() {
       var _this$imageUrl;
 
@@ -15092,16 +15095,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -42827,19 +42820,19 @@ var render = function() {
                             ) +
                             ' data-testing="basket-item-name" class="item-name text-primary text-appearance small font-weight-bold text-break">' +
                             _vm._ssrEscape(
-                              "\n              " +
+                              "\n                            " +
                                 _vm._s(
                                   _vm._f("itemName")(
                                     _vm.basketItem.variation.data
                                   )
                                 ) +
-                                "\n            "
+                                "\n                        "
                             ) +
                             '</a> <div class="item-base-price small">' +
                             _vm._ssrEscape(
-                              "\n              " +
+                              "\n                            " +
                                 _vm._s(_vm._f("currency")(_vm.unitPrice)) +
-                                "\n            "
+                                "\n                        "
                             ) +
                             "</div> "
                         ),
@@ -42863,9 +42856,9 @@ var render = function() {
                               .mayShowUnitPrice
                               ? '<div class="text-muted small"><div>' +
                                 _vm._ssrEscape(
-                                  "\n                " +
+                                  "\n                                " +
                                     _vm._s(_vm.basePrice) +
-                                    "\n              "
+                                    "\n                            "
                                 ) +
                                 "</div> <div><strong>" +
                                 _vm._ssrEscape(
@@ -42877,7 +42870,7 @@ var render = function() {
                                 ) +
                                 "</strong>" +
                                 _vm._ssrEscape(
-                                  "\n                " +
+                                  "\n                                " +
                                     _vm._s(
                                       _vm.basketItem.variation.data.unit.content
                                     ) +
@@ -42886,7 +42879,7 @@ var render = function() {
                                       _vm.basketItem.variation.data.unit.names
                                         .name
                                     ) +
-                                    "\n              "
+                                    "\n                            "
                                 ) +
                                 "</div></div>"
                               : "<!---->") +
@@ -42906,11 +42899,11 @@ var render = function() {
                                 ) +
                                 "</strong>" +
                                 _vm._ssrEscape(
-                                  "\n                " +
+                                  "\n                                " +
                                     _vm._s(
                                       _vm._f("inputUnit")(_vm.basketItem)
                                     ) +
-                                    "\n              "
+                                    "\n                            "
                                 ) +
                                 "</div></div>"
                               : "<!---->") +
@@ -43058,13 +43051,13 @@ var render = function() {
                             [
                               _vm._ssrNode(
                                 _vm._ssrEscape(
-                                  "\n              " +
+                                  "\n                            " +
                                     _vm._s(
                                       _vm.$translate(
                                         "Ceres::Template.basketDelete"
                                       )
                                     ) +
-                                    "\n              "
+                                    "\n                            "
                                 )
                               ),
                               _c("icon", {
@@ -43621,7 +43614,7 @@ var render = function() {
           _vm._t("additionalimages"),
           _vm._ssrNode(
             " " +
-              (_vm.imageUrl
+              (_vm.imageUrl === _vm.pictureSource
                 ? "<source" +
                   _vm._ssrAttr("srcset", _vm.imageUrl) +
                   _vm._ssrAttr("type", _vm.mimeTypeWebp) +
@@ -56254,11 +56247,11 @@ var render = function() {
               _vm.image
                 ? _c("lazy-img", {
                     attrs: {
-                      "picture-class": "d-block mw-100 mh-100",
                       "image-url": _vm.image + ".webp",
                       "fallback-url": _vm.image,
                       alt: _vm._f("itemName")(_vm.wishListItem),
-                      title: _vm._f("itemName")(_vm.wishListItem)
+                      title: _vm._f("itemName")(_vm.wishListItem),
+                      "picture-class": "d-block mw-100 mh-100"
                     }
                   })
                 : _vm._e()
@@ -56280,15 +56273,15 @@ var render = function() {
                     _vm._ssrAttr("href", _vm._f("itemURL")(_vm.wishListItem)) +
                     ' class="item-name text-primary text-appearance small font-weight-bold text-break">' +
                     _vm._ssrEscape(
-                      "\n              " +
+                      "\n                            " +
                         _vm._s(_vm._f("itemName")(_vm.wishListItem)) +
-                        "\n            "
+                        "\n                        "
                     ) +
                     '</a> <div class="item-base-price small">' +
                     _vm._ssrEscape(
-                      "\n              " +
+                      "\n                            " +
                         _vm._s(_vm._f("currency")(_vm.unitPrice)) +
-                        "\n            "
+                        "\n                        "
                     ) +
                     "</div> " +
                     (!(
@@ -56297,9 +56290,9 @@ var render = function() {
                     ) && _vm.wishListItem.variation.mayShowUnitPrice
                       ? '<div class="item-small-prices text-muted small"><div>' +
                         _vm._ssrEscape(
-                          "\n                " +
+                          "\n                                " +
                             _vm._s(_vm.basePrice) +
-                            "\n              "
+                            "\n                            "
                         ) +
                         "</div> <div><strong>" +
                         _vm._ssrEscape(
@@ -56309,11 +56302,11 @@ var render = function() {
                         ) +
                         "</strong>" +
                         _vm._ssrEscape(
-                          "\n                " +
+                          "\n                                " +
                             _vm._s(_vm.wishListItem.unit.content) +
                             " " +
                             _vm._s(_vm.wishListItem.unit.names.name) +
-                            "\n              "
+                            "\n                            "
                         ) +
                         "</div></div>"
                       : "<!---->") +
@@ -56408,13 +56401,13 @@ var render = function() {
                         _vm._ssrNode(
                           '<div class="item-total-price font-weight-bold text-nowrap">' +
                             _vm._ssrEscape(
-                              "\n              " +
+                              "\n                            " +
                                 _vm._s(
                                   _vm._f("currency")(
                                     _vm.quantity * _vm.unitPrice
                                   )
                                 ) +
-                                "\n            "
+                                "\n                        "
                             ) +
                             "</div> "
                         ),
@@ -56424,13 +56417,13 @@ var render = function() {
                           [
                             _vm._ssrNode(
                               _vm._ssrEscape(
-                                "\n              " +
+                                "\n                            " +
                                   _vm._s(
                                     _vm.$translate(
                                       "Ceres::Template.wishListDelete"
                                     )
                                   ) +
-                                  "\n              "
+                                  "\n                            "
                               )
                             ),
                             _c(
