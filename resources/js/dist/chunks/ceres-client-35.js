@@ -91,7 +91,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       currentItem: 0,
-      initialized: false
+      initialized: false,
+      webpImagesEnabled: App.config.global.webpImages
     };
   },
   computed: {
@@ -282,7 +283,7 @@ var render = function() {
               "a",
               {
                 attrs: {
-                  href: image.url + ".webp",
+                  href: _vm.webpImagesEnabled ? image.url + ".webp" : image.url,
                   "data-lightbox": "single-item-image" + _vm._uid
                 }
               },
