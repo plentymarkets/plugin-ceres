@@ -105,7 +105,7 @@
                 </div>
 
                 <basket-set-component-list v-if="basketItem.setComponents" :set-components="basketItem.setComponents" :set-item="basketItem"></basket-set-component-list>
-                
+
                 <order-property-value-list :basket-item="basketItem"></order-property-value-list>
 
                 <div class="small" v-if="showMoreInformation">
@@ -166,7 +166,7 @@ import OrderPropertyValueList from "../../item/OrderPropertyValueList.vue"
 
 export default {
     name: "basket-list-item",
-    
+
     components:
     {
         BasketSetComponentList,
@@ -262,7 +262,7 @@ export default {
         basePrice()
         {
             // if the 'AfterBasketItemUpdate' event contains a new base price for the item, return it
-            if (!isNullOrUndefined(this.basketItem.updatedBasePrice)) 
+            if (!isNullOrUndefined(this.basketItem.updatedBasePrice))
             {
                 return this.basketItem.updatedBasePrice;
             }
