@@ -38432,7 +38432,7 @@ var render = function() {
         { attrs: { href: _vm.itemUrl } },
         [
           _c("lazy-img", {
-            ref: !_vm.disableLazyLoad ? "itemLazyImage" : "",
+            ref: { itemLazyImage: !_vm.disableLazyLoad },
             attrs: {
               "image-url": _vm.imageOrItemImage + ".webp",
               "fallback-url": _vm.imageOrItemImage,

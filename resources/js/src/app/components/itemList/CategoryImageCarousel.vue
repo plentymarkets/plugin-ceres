@@ -6,7 +6,7 @@
   </a>
 
   <a v-else :href="itemUrl">
-    <lazy-img :ref="!disableLazyLoad ? 'itemLazyImage' : ''" :image-url="`${imageOrItemImage}.webp`" :fallback-url="imageOrItemImage" :alt="getAltText(imageUrls[0])" :title="getTitleText(imageUrls[0])" picture-class="img-fluid" />
+    <lazy-img :ref="{ 'itemLazyImage': !disableLazyLoad }" :image-url="`${imageOrItemImage}.webp`" :fallback-url="imageOrItemImage" :alt="getAltText(imageUrls[0])" :title="getTitleText(imageUrls[0])" picture-class="img-fluid" />
   </a>
 </template>
 
