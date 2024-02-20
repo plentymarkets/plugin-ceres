@@ -1978,6 +1978,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -42757,10 +42758,11 @@ var render = function() {
                 _vm.image
                   ? _c("lazy-img", {
                       attrs: {
-                        "picture-class": "d-block mw-100 mh-100",
-                        "image-url": _vm.image,
+                        "image-url": _vm.image + ".webp",
+                        "fallback-url": _vm.image,
                         alt: _vm.altText,
                         title: _vm.itemName,
+                        "picture-class": "d-block mw-100 mh-100",
                         "data-testing": "basket-item-img"
                       }
                     })
