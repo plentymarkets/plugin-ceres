@@ -24,7 +24,8 @@ export default {
         title: String
     },
 
-    data() {
+    data()
+    {
         return {
             webpImagesEnabled: App.config.global.webpImagesEnabled,
             webpMimeType: 'image/webp',
@@ -61,11 +62,17 @@ export default {
     },
 
     computed: {
+        /**
+         *  Determine appropriate image url to use as background source
+         */
         backgroundSource() {
             return this.imageUrl && this.mimeTypeWebp
                 ? this.webpBrowserSupport ? this.imageUrl : this.fallbackUrl
                 : this.imageUrl || this.fallbackUrl;
         },
+        /**
+        * Check if url points to a .webp image and return appropriate mime-type
+        */
         mimeTypeWebp() {
             const matches = this.imageUrl?.match(/.?(\.\w+)(?:$|\?)/);
             return matches && (matches[1] === '.webp') ? this.webpMimeType : null;

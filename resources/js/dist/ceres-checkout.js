@@ -782,9 +782,16 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
+    /**
+     *  Determine appropriate image url to use as background source
+     */
     backgroundSource: function backgroundSource() {
       return this.imageUrl && this.mimeTypeWebp ? this.webpBrowserSupport ? this.imageUrl : this.fallbackUrl : this.imageUrl || this.fallbackUrl;
     },
+
+    /**
+    * Check if url points to a .webp image and return appropriate mime-type
+    */
     mimeTypeWebp: function mimeTypeWebp() {
       var _this$imageUrl;
 
