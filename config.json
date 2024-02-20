@@ -187,7 +187,7 @@
                         "defaultValue": "true"
                     }
                 },
-                "global.webp_images_enabled": {
+                "global.webp_images": {
                     "type": "checkBox",
                     "required": false,
                     "label": "Config.globalWebpImagesEnabledLabel",

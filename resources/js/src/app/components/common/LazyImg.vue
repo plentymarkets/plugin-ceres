@@ -27,7 +27,7 @@ export default {
     data()
     {
         return {
-            webpImagesEnabled: App.config.global.webpImagesEnabled,
+            webpImagesEnabled: App.config.global.webpImages,
             webpMimeType: 'image/webp',
             webpBrowserSupport: false
         }
