@@ -389,7 +389,7 @@ class OnlineStoreStep extends Step
             "description" => "Config.globalWebpImagesEnabledLabel",
             "condition" => $this->globalsCondition,
             "form" => [
-                "onlineStore_webpEnabled" => [
+                "onlineStore_webpImages" => [
                     "type" => "checkbox",
                     "defaultValue" => true,
                     "options" => [

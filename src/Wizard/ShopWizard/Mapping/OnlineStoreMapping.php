@@ -123,8 +123,8 @@ class OnlineStoreMapping
             'global'    => false,
             'optional'  => false
         ],
-        'onlineStore_webpEnabled' => [
-            'field'     => 'global.webp_images_enabled',
+        'onlineStore_webpImages' => [
+            'field'     => 'global.webp_images',
             'type'      => 'boolean',
             'global'    => false,
             'optional'  => false
