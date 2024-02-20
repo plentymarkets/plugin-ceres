@@ -467,10 +467,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -493,7 +489,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_3__["detectWebP"])(function (supported) {
-      _this.webpBrowserSupport = supported;
+      _this.supported = supported;
 
       _this.$nextTick(function () {
         if (!_this.isBackgroundImage) {
@@ -509,7 +505,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.$nextTick(function () {
-        _this2.$el.setAttribute("data-loaded", 'false');
+        _this2.$el.setAttribute("data-loaded", false);
 
         Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_2__["default"])(_this2.$el).triggerLoad(_this2.$el);
       });
