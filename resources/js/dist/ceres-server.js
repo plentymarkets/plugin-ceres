@@ -43596,7 +43596,7 @@ var render = function() {
           _vm._t("additionalimages"),
           _vm._ssrNode(
             " " +
-              (_vm.imageUrl
+              (_vm.imageUrl === _vm.pictureSource
                 ? "<source" +
                   _vm._ssrAttr("srcset", _vm.imageUrl) +
                   _vm._ssrAttr("type", _vm.mimeTypeWebp) +

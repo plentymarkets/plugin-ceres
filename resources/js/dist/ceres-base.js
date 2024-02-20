@@ -36158,7 +36158,7 @@ var render = function() {
         [
           _vm._t("additionalimages"),
           _vm._v(" "),
-          _vm.imageUrl
+          _vm.imageUrl === _vm.pictureSource
             ? _c("source", {
                 attrs: { srcset: _vm.imageUrl, type: _vm.mimeTypeWebp }
               })

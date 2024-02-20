@@ -1,7 +1,7 @@
 <template>
     <picture v-if="!isBackgroundImage" :data-iesrc="pictureSource" :data-picture-class="pictureClass" :data-alt="alt" :data-title="title">
         <slot name="additionalimages"></slot>
-        <source v-if="imageUrl" :srcset="imageUrl" :type="mimeTypeWebp">
+        <source v-if="imageUrl === pictureSource" :srcset="imageUrl" :type="mimeTypeWebp">
         <source v-if="fallbackUrl" :srcset="fallbackUrl">
     </picture>
 
