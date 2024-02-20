@@ -49681,7 +49681,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { itemscope: "", itemtype: "https://schema.org/Thing" } },
+    { attrs: { itemscope: "", itemtype: "'https://schema.org/Thing'" } },
     [
       _vm._ssrNode(
         '<div class="single-carousel owl-carousel owl-theme owl-single-item mt-0">',
