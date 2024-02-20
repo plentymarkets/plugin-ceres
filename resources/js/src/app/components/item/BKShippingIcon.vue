@@ -76,7 +76,7 @@ export default {
         shippingName() {
             if (this.avd.isSped)
                 return "Spedition";
-            return "DHL Paket";
+            return "Paket";
         },
         middleLlistElement() {
             if (this.avd.isSped)

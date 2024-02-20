@@ -91,7 +91,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     shippingName: function shippingName() {
       if (this.avd.isSped) return "Spedition";
-      return "DHL Paket";
+      return "Paket";
     },
     middleLlistElement: function middleLlistElement() {
       if (this.avd.isSped) return 'Lieferung mit 2-Mann-Spedition bis ins Zimmer';
