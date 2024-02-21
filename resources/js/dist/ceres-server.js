@@ -41166,7 +41166,7 @@ var render = function() {
                         "</div>",
                         [
                           _c("lazy-img", {
-                            staticStyle: { "max-height": "140px" },
+                            style: { maxHeight: "140px" },
                             attrs: {
                               "image-url": _vm.imageUrl + ".webp",
                               "fallback-url": _vm.imageUrl,

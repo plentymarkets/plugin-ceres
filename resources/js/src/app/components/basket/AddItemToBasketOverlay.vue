@@ -23,7 +23,7 @@
                                     :fallback-url="imageUrl"
                                     :alt="imageAlternativeText || itemName"
                                     :title="itemName"
-                                    style="max-height: 140px;"
+                                    :style="{ maxHeight: '140px' }"
                                     picture-class="img-fluid mx-auto" />
                             </div>
                             <div class="col-md-8">
