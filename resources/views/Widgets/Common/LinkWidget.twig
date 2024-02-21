@@ -43,19 +43,20 @@
 {{ Twig.if("real_url or #{ isPreview | json_encode }") }}
 <div class="widget widget-link widget-{{ appearance | default('primary') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}{% if outline %} btn-outline{% endif %}">
     {% if url.value.mobile == 'tracking' %}
-        <a class="btn btn-appearance {{ buttonSize }}{% if block %} btn-block text-truncate{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
-            {% if linkRel != "none" %}rel="{{ linkRel }}"{% endif %}
-            {% if url.openInNewTab.mobile %} target="_blank"{% endif %}
-            style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %} {% if inlinePadding | length > 0 %}{{ inlinePadding }}{% endif %}"
-            v-tooltip
-            v-for="trackingURL in {{ real_url }}"
-            :href="trackingURL"
-            title="{{ linkTitle }}">
-                {%- if icon != "none" -%}
-                    <i class="fa {{ icon }} ml-1" aria-hidden="true" style="line-height: inherit"></i>
-                {%- endif -%}
-               {{- text -}}
-        </a>
+        {% realurl in real_url %}
+            <a class="btn btn-appearance {{ buttonSize }}{% if block %} btn-block text-truncate{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+                {% if linkRel != "none" %}rel="{{ linkRel }}"{% endif %}
+                {% if url.openInNewTab.mobile %} target="_blank"{% endif %}
+                style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %} {% if inlinePadding | length > 0 %}{{ inlinePadding }}{% endif %}"
+                v-tooltip
+                href="{{ realurl }}"
+                title="{{ linkTitle }}">
+                    {%- if icon != "none" -%}
+                        <i class="fa {{ icon }} ml-1" aria-hidden="true" style="line-height: inherit"></i>
+                    {%- endif -%}
+                   {{- text -}}
+            </a>
+        {% endfor %}
     {% else %}
         <a class="btn btn-appearance {{ buttonSize }}{% if block %} btn-block text-truncate{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
         {% if linkRel != "none" %}rel="{{ linkRel }}"{% endif %}
