@@ -53,7 +53,7 @@
                     <i class="fa {{ icon }} ml-1" aria-hidden="true" style="line-height: inherit"></i>
                 {%- endif -%}
                {{- text -}}
-                {{ order.trackingURLs | json_encode }}
+                {{ orderData | json_encode }}
         </a>
 
     {% else %}
