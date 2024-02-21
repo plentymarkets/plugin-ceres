@@ -29,10 +29,10 @@
                 <article class="cmp cmp-order-item mb-0 border-bottom-0">
                     <a href="{{ Twig.print('data.itemURLs | getObjectValue(currentVariationId)') }}" class="item-image">
                         <lazy-img
-                                image-url="{{ imagePath }}"
-                                fallback-url="{{ fallbackPath }}"
-                                alt="{{ Twig.print('item.orderItemName') }}"
-                                title="{{ Twig.print('item.orderItemName') }}">
+                                :image-url="{{ Twig.print("imagePath | json_encode") }}"
+                                :fallback-url="{{ Twig.print("fallbackPath | json_encode") }}"
+                                :alt="{{ Twig.print("item.orderItemName | json_encode") }}"
+                                :title="{{ Twig.print("item.orderItemName | json_encode") }}">
                         </lazy-img>
                     </a>
 
@@ -50,6 +50,8 @@
                                     {{ Twig.set("imageData", "data.variations[setComponent.itemVariationId].images | firstItemImage('urlPreview')") }}
                                     {{ Twig.set("altText", "imageData.alternate ? imageData.alternate : setComponent.orderItemName") }}
                                     {{ Twig.set("setSurcharge", "setSurcharge + setComponent.amounts[0].surcharge") }}
+                                    {{ Twig.set("itemFallbackImg", "imageData.url") }}
+                                    {{ Twig.set("itemImg", "#{itemFallbackImg}.webp") }}
 
                                     <div class="d-flex mb-2">
                                         <span class="text-muted">{{ Twig.print("setComponent.quantity") }}x</span>
@@ -57,7 +59,8 @@
                                             {{ Twig.if("imageData") }}
                                                 <lazy-img
                                                     picture-class="d-block mw-100 mh-100"
-                                                    :image-url="{{ Twig.print("imageData.url | json_encode") }}"
+                                                    :image-url="{{ Twig.print("itemImg | json_encode") }}"
+                                                    :fallback-url="{{ Twig.print("itemFallbackImg | json_encode") }}"
                                                     :alt="{{ Twig.print("altText | json_encode") }}"
                                                     :title="{{ Twig.print("setComponent.orderItemName | json_encode") }}">
                                                 </lazy-img>
