@@ -55,7 +55,7 @@
                         <i class="fa {{ icon }} ml-1" aria-hidden="true" style="line-height: inherit"></i>
                     {%- endif -%}
                    {{- text -}}
-                   {{ dump(real_url) }}
+                   ER {{ Twig.call("urls.tracking", [Twig.var('data.order.id')]) | json_encode }}
             </a>
 
     {% else %}
