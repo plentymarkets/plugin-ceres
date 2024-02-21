@@ -24,7 +24,7 @@
     {% if url.type.mobile == 'internalLink' %}
         {% if url.value.mobile == 'tracking' %}
             {{ Twig.if("data") }}
-                {{ Twig.set('real_url', Twig.call("urls.tracking", [Twig.var('data.order.id')])  ~ ' | json_encode' ) }}
+                {{ Twig.set('real_url', Twig.call("urls.tracking", [Twig.var('data.order.id')])) }}
             {{ Twig.elseif("orderData") }}
                 {{ Twig.set('real_url', Twig.call("urls.tracking", [Twig.var('orderData.order.id')])) }}
             {{ Twig.endif() }}
@@ -43,19 +43,20 @@
 {{ Twig.if("real_url or #{ isPreview | json_encode }") }}
 <div class="widget widget-link widget-{{ appearance | default('primary') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}{% if outline %} btn-outline{% endif %}">
     {% if url.value.mobile == 'tracking' %}
-
+            {% for item in real_url %}
+                <span class="theitem">{{ item }}</span>
+            {% endfor %}
             <a class="btn btn-appearance {{ buttonSize }}{% if block %} btn-block text-truncate{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                 {% if linkRel != "none" %}rel="{{ linkRel }}"{% endif %}
                 {% if url.openInNewTab.mobile %} target="_blank"{% endif %}
                 style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %} {% if inlinePadding | length > 0 %}{{ inlinePadding }}{% endif %}"
                 v-tooltip
-                href="{{ Twig.print("real_url")}}"
+                href="{{ Twig.print("real_url") | json_encode }}"
                 title="{{ linkTitle }}">
                     {%- if icon != "none" -%}
                         <i class="fa {{ icon }} ml-1" aria-hidden="true" style="line-height: inherit"></i>
                     {%- endif -%}
                    {{- text -}}
-                   ER {{ real_url }}
             </a>
 
     {% else %}
