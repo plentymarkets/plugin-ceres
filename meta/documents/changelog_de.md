@@ -4,7 +4,7 @@
 
 ### Hinzugefügt
 
-- In der Datei `views/Resultfields/ListItem` wurden zwei Zeilen hinzugefügt, um die Anzeige von Tags in der Response zu ermöglichen.
+- Die Ergebnisfelder für Artikel wurde um Tags erweitert.
 
 
 ### TODO

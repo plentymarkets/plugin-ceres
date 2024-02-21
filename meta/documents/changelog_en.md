@@ -4,7 +4,7 @@
 
 ### Added
 
-- Added two lines in the `views/ResultFields/ListItem` file to enable the display of tags in response data.
+- The result fields for articles have been expanded to include tags.
 
 
 ### TODO
