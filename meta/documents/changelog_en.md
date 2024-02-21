@@ -4,7 +4,8 @@
 
 ### Added
 
-- added tags on ListItem for Tags on Product.
+- Added two lines in the `views/ResultFields/ListItem` file to enable the display of tags in response data.
+
 
 ### TODO
 

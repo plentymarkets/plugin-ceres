@@ -4,7 +4,8 @@
 
 ### Hinzugefügt
 
-- Für die Tags am Product wurden in ListItem die Tags ergänzt.
+- In der Datei `views/Resultfields/ListItem` wurden zwei Zeilen hinzugefügt, um die Anzeige von Tags in der Response zu ermöglichen.
+
 
 ### TODO
 
