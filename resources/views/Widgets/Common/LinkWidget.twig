@@ -44,7 +44,7 @@
 <div class="widget widget-link widget-{{ appearance | default('primary') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}{% if outline %} btn-outline{% endif %}">
     {% if url.value.mobile == 'tracking' %}
     {{ Twig.if("data") }}
-        <span>Data: {{ real_url | json_encode }}</span>
+        <span>Data: {{ data.order.trackingURLs | json_encode }}</span>
     {{ Twig.elseif("orderData") }}
         <span>Order Data: {{ real_url | json_encode }}</span>
     {{ Twig.endif() }}
