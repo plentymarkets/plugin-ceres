@@ -23,10 +23,17 @@
         {{ Twig.for("item", "data.order.orderItems") }}
             {{ Twig.if("item.itemVariationId > 0 and not services.order.containsComponentPrefix(item.orderItemName)") }}
                 {{ Twig.set("currentVariationId", "item.itemVariationId | trimNewlines") }}
+                {{ Twig.set("fallbackPath", "data.itemImages | getObjectValue(currentVariationId)") }}
+                {{ Twig.set("imagePath", "#{fallbackPath}.webp") }}
 
                 <article class="cmp cmp-order-item mb-0 border-bottom-0">
                     <a href="{{ Twig.print('data.itemURLs | getObjectValue(currentVariationId)') }}" class="item-image">
-                        <img src="{{ Twig.print('data.itemImages | getObjectValue(currentVariationId)') }}" alt="{{ Twig.print('item.orderItemName') }}" title="{{ Twig.print('item.orderItemName') }}">
+                        <lazy-img
+                                image-url="{{ imagePath }}"
+                                fallback-url="{{ fallbackPath }}"
+                                alt="{{ Twig.print('item.orderItemName') }}"
+                                title="{{ Twig.print('item.orderItemName') }}">
+                        </lazy-img>
                     </a>
 
                     <div class="item-details mt-0">
