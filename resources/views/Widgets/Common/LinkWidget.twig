@@ -46,7 +46,7 @@
         <a class="btn btn-appearance {{ buttonSize }}{% if block %} btn-block text-truncate{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
             {% if linkRel != "none" %}rel="{{ linkRel }}"{% endif %}
              v-if="!!order.trackingURLs"
-            v-for="trackingURL in order.trackingURLs"
+            v-for="trackingURL in {{ Twig.print("real_url") }}"
             :href="trackingURL"
             {% if url.openInNewTab.mobile %} target="_blank"{% endif %}
             style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %} {% if inlinePadding | length > 0 %}{{ inlinePadding }}{% endif %}"
