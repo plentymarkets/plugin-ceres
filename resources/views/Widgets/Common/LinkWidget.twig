@@ -56,7 +56,7 @@
                     {%- endif -%}
                    {{- text -}}
                    - OO -
-                   {{ dump(Twig.call("urls.tracking", [Twig.var('data.order.id')])) }}
+                   {{ Twig.call("urls.tracking", [Twig.var('data.order.id')]) | json_encode }}
             </a>
 
     {% else %}
