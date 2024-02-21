@@ -43,9 +43,7 @@
 {{ Twig.if("real_url or #{ isPreview | json_encode }") }}
 <div class="widget widget-link widget-{{ appearance | default('primary') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}{% if outline %} btn-outline{% endif %}">
     {% if url.value.mobile == 'tracking' %}
-            {% for item in real_url %}
-                <span class="theitem">{{ item }}</span>
-            {% endfor %}
+
             <a class="btn btn-appearance {{ buttonSize }}{% if block %} btn-block text-truncate{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                 {% if linkRel != "none" %}rel="{{ linkRel }}"{% endif %}
                 {% if url.openInNewTab.mobile %} target="_blank"{% endif %}
@@ -57,6 +55,8 @@
                         <i class="fa {{ icon }} ml-1" aria-hidden="true" style="line-height: inherit"></i>
                     {%- endif -%}
                    {{- text -}}
+                   - OO -
+                   {{ dump(Twig.call("urls.tracking", [Twig.var('data.order.id')])) }}
             </a>
 
     {% else %}
