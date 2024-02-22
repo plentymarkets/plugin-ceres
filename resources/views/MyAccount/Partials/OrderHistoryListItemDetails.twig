@@ -65,7 +65,7 @@
                                                     <span class="text-muted">{{ setComponent.quantity }}x</span>
                                                     <div class="image-container mx-1">
                                                         {% if imageData %}
-                                                            {% set imagePath = "#{imageData.url}.webp") %}
+                                                            {% set imagePath = imageData.url ~ '.webp' %}
                                                             <lazy-img
                                                                 :image-url="{{ imagePath | json_encode }}"
                                                                 :fallback-url="{{ imageData.url | json_encode }}"
