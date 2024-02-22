@@ -219,6 +219,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -41156,15 +41162,23 @@ var render = function() {
                     "</div>",
                     [
                       _vm._ssrNode(
-                        '<div class="col-md-4" style="min-height: 80px;"><img' +
-                          _vm._ssrAttr("src", _vm.imageUrl) +
-                          _vm._ssrAttr(
-                            "alt",
-                            _vm.imageAlternativeText || _vm.itemName
-                          ) +
-                          _vm._ssrAttr("title", _vm.itemName) +
-                          ' class="img-fluid mx-auto" style="max-height: 140px;"></div> '
+                        '<div class="col-md-4" style="min-height: 80px;">',
+                        "</div>",
+                        [
+                          _c("lazy-img", {
+                            style: { maxHeight: "140px" },
+                            attrs: {
+                              "image-url": _vm.imageUrl + ".webp",
+                              "fallback-url": _vm.imageUrl,
+                              alt: _vm.imageAlternativeText || _vm.itemName,
+                              title: _vm.itemName,
+                              "picture-class": "img-fluid mx-auto"
+                            }
+                          })
+                        ],
+                        1
                       ),
+                      _vm._ssrNode(" "),
                       _vm._ssrNode(
                         '<div class="col-md-8">',
                         "</div>",
