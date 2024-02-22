@@ -53286,21 +53286,23 @@ var render = function() {
                     ">",
                   "</a>",
                   [
-                    _vm._ssrNode(
-                      '<div class="image flex-shrink-0 mr-3">',
-                      "</div>",
-                      [
-                        item.image
-                          ? _c("lazy-img", {
-                              attrs: {
-                                "image-url": item.image + ".webp",
-                                "fallback-url": item.image
-                              }
-                            })
-                          : _vm._e()
-                      ],
-                      1
-                    ),
+                    _vm.showImages
+                      ? _vm._ssrNode(
+                          '<div class="image flex-shrink-0 mr-3">',
+                          "</div>",
+                          [
+                            item.image
+                              ? _c("lazy-img", {
+                                  attrs: {
+                                    "image-url": item.image + ".webp",
+                                    "fallback-url": item.image
+                                  }
+                                })
+                              : _vm._e()
+                          ],
+                          1
+                        )
+                      : _vm._e(),
                     _vm._ssrNode(
                       " <div" +
                         _vm._ssrClass("label overflow-hidden", {

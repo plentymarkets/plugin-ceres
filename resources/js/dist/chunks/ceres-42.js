@@ -186,21 +186,23 @@ var render = function() {
                     attrs: { href: _vm.getTargetUrl(item), tabindex: "0" }
                   },
                   [
-                    _c(
-                      "div",
-                      { staticClass: "image flex-shrink-0 mr-3" },
-                      [
-                        item.image
-                          ? _c("lazy-img", {
-                              attrs: {
-                                "image-url": item.image + ".webp",
-                                "fallback-url": item.image
-                              }
-                            })
-                          : _vm._e()
-                      ],
-                      1
-                    ),
+                    _vm.showImages
+                      ? _c(
+                          "div",
+                          { staticClass: "image flex-shrink-0 mr-3" },
+                          [
+                            item.image
+                              ? _c("lazy-img", {
+                                  attrs: {
+                                    "image-url": item.image + ".webp",
+                                    "fallback-url": item.image
+                                  }
+                                })
+                              : _vm._e()
+                          ],
+                          1
+                        )
+                      : _vm._e(),
                     _vm._v(" "),
                     _c(
                       "div",
