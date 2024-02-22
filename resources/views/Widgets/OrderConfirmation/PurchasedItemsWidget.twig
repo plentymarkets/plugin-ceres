@@ -29,10 +29,10 @@
                     {{ Twig.set("imagePath", "fallbackPath ~ '.webp'") }}
                     <a href="{{ Twig.print('data.itemURLs | getObjectValue(currentVariationId)') }}" class="item-image">
                         <lazy-img
-                                :image-url="{{ imagePath | json_encode }}"
-                                :fallback-url="{{ fallbackPath | json_encode }}"
-                                :alt="{{ item.orderItemName | json_encode }}"
-                                :title="{{ item.orderItemName | json_encode }}">
+                                image-url="{{ Twig.print("imagePath") }}"
+                                fallback-url="{{ Twig.print("fallbackPath") }}"
+                                alt="{{ Twig.print("item.orderItemName") }}"
+                                title="{{ Twig.print("item.orderItemName") }}">
                         </lazy-img>
                     </a>
 
