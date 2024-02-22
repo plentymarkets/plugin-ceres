@@ -36,11 +36,19 @@
                             {% set discountAmount = itemAmount.priceOriginalGross - itemAmount.priceGross %}
                             {% set itemPriceTotal = item.quantity * itemAmount.priceGross %}
                         {% endif %}
+                        {% set fallbackPath = orderData.itemImages | getObjectValue(currentVariationId) %}
+                        {% set imagePath = "#{fallbackPath}.webp") %}
 
                         <div class="col-sm-12 item">
                             <div class="py-3 d-flex{% if not loop.first %} border-top{% endif %}">
                                 <a href="{{ orderData.itemURLs | getObjectValue(currentVariationId) }}">
-                                    <img class="d-inline-block" src="{{ orderData.itemImages | getObjectValue(currentVariationId) }}" alt="{{ item.orderItemName }}" title="{{ item.orderItemName }}">
+                                    <lazy-img
+                                            :image-url="{{ imagePath | json_encode }}"
+                                            :fallback-url="{{ fallbackPath | json_encode }}"
+                                            :alt="{{ item.orderItemName | json_encode }}"
+                                            :title="{{ item.orderItemName | json_encode }}"
+                                            picture-class="d-inline-block">
+                                    </lazy-img>
                                 </a>
 
                                 <div class="flex-fill item-description pl-3">
@@ -57,11 +65,13 @@
                                                     <span class="text-muted">{{ setComponent.quantity }}x</span>
                                                     <div class="image-container mx-1">
                                                         {% if imageData %}
+                                                            {% set imagePath = "#{imageData.url}.webp") %}
                                                             <lazy-img
-                                                                picture-class="d-block mw-100 mh-100"
-                                                                :image-url="{{ imageData.url | json_encode }}"
+                                                                :image-url="{{ imagePath | json_encode }}"
+                                                                :fallback-url="{{ imageData.url | json_encode }}"
                                                                 :alt="{{ altText | json_encode }}"
-                                                                :title="{{ setComponent.orderItemName | json_encode }}">
+                                                                :title="{{ setComponent.orderItemName | json_encode }}"
+                                                                picture-class="d-block mw-100 mh-100">
                                                             </lazy-img>
                                                         {% endif %}
                                                     </div>
