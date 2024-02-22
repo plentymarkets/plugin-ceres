@@ -43,6 +43,8 @@
     "variation.name",
     "variation.releasedAt",
     "variation.vatId",
+    "variation.tags",
+    "tags.*",
 
     "filter.hasChildren",
     "filter.isSalable",
