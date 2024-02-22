@@ -37,7 +37,7 @@
                             {% set itemPriceTotal = item.quantity * itemAmount.priceGross %}
                         {% endif %}
                         {% set fallbackPath = orderData.itemImages | getObjectValue(currentVariationId) %}
-                        {% set imagePath = fallbackPath ~ '.webp') %}
+                        {% set imagePath = fallbackPath ~ '.webp' %}
 
                         <div class="col-sm-12 item">
                             <div class="py-3 d-flex{% if not loop.first %} border-top{% endif %}">
