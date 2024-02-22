@@ -23,16 +23,16 @@
         {{ Twig.for("item", "data.order.orderItems") }}
             {{ Twig.if("item.itemVariationId > 0 and not services.order.containsComponentPrefix(item.orderItemName)") }}
                 {{ Twig.set("currentVariationId", "item.itemVariationId | trimNewlines") }}
-                {{ Twig.set("fallbackPath", "data.itemImages | getObjectValue(currentVariationId)") }}
-                {{ Twig.set("imagePath", "#{fallbackPath}.webp") }}
 
                 <article class="cmp cmp-order-item mb-0 border-bottom-0">
+                    {% set fallbackPath = data.itemImages | getObjectValue(currentVariationId) %}
+                    {% set imagePath = fallbackPath ~ '.webp' %}
                     <a href="{{ Twig.print('data.itemURLs | getObjectValue(currentVariationId)') }}" class="item-image">
                         <lazy-img
-                                :image-url="{{ Twig.print("imagePath | json_encode") }}"
-                                :fallback-url="{{ Twig.print("fallbackPath | json_encode") }}"
-                                :alt="{{ Twig.print("item.orderItemName | json_encode") }}"
-                                :title="{{ Twig.print("item.orderItemName | json_encode") }}">
+                                :image-url="{{ imagePath | json_encode }}"
+                                :fallback-url="{{ fallbackPath | json_encode }}"
+                                :alt="{{ item.orderItemName | json_encode }}"
+                                :title="{{ item.orderItemName | json_encode }}">
                         </lazy-img>
                     </a>
 
@@ -50,19 +50,18 @@
                                     {{ Twig.set("imageData", "data.variations[setComponent.itemVariationId].images | firstItemImage('urlPreview')") }}
                                     {{ Twig.set("altText", "imageData.alternate ? imageData.alternate : setComponent.orderItemName") }}
                                     {{ Twig.set("setSurcharge", "setSurcharge + setComponent.amounts[0].surcharge") }}
-                                    {{ Twig.set("itemFallbackImg", "imageData.url") }}
-                                    {{ Twig.set("itemImg", "#{itemFallbackImg}.webp") }}
 
                                     <div class="d-flex mb-2">
                                         <span class="text-muted">{{ Twig.print("setComponent.quantity") }}x</span>
                                         <div class="image-container flex-shrink-0 mx-1">
                                             {{ Twig.if("imageData") }}
+                                                {% set itemImg = imageData.url ~ '.webp' %}
                                                 <lazy-img
                                                     picture-class="d-block mw-100 mh-100"
-                                                    :image-url="{{ Twig.print("itemImg | json_encode") }}"
-                                                    :fallback-url="{{ Twig.print("itemFallbackImg | json_encode") }}"
-                                                    :alt="{{ Twig.print("altText | json_encode") }}"
-                                                    :title="{{ Twig.print("setComponent.orderItemName | json_encode") }}">
+                                                    :image-url="{{ itemImg | json_encode }}"
+                                                    :fallback-url="{{ imageData.url | json_encode }}"
+                                                    :alt="{{ altText | json_encode }}"
+                                                    :title="{{ setComponent.orderItemName | json_encode }}">
                                                 </lazy-img>
                                             {{ Twig.endif() }}
                                         </div>
