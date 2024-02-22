@@ -81,7 +81,7 @@ export default {
         middleLlistElement() {
             if (this.avd.isSped)
                 return 'Lieferung mit 2-Mann-Spedition bis ins Zimmer';
-            return 'online Tracking via DHL-Paket';
+            return 'CO<sub>2</sub>-neutraler Paketversand';
         }
     },
     methods: {
