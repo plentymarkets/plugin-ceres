@@ -27,6 +27,7 @@
                 <article class="cmp cmp-order-item mb-0 border-bottom-0">
                     <a href="{{ Twig.print('data.itemURLs | getObjectValue(currentVariationId)') }}" class="item-image">
                         {{ Twig.print("data.itemImages | getObjectValue(currentVariationId)") }}
+                        {{ dump(data.itemImages | getObjectValue(currentVariationId)) }}
                         <lazy-img
                                 image-url="{{ Twig.print("data.itemImages | getObjectValue(currentVariationId)") }}.webp"
                                 fallback-url="{{ Twig.print("data.itemImages | getObjectValue(currentVariationId)") }}"
