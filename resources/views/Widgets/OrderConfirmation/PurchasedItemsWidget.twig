@@ -25,12 +25,10 @@
                 {{ Twig.set("currentVariationId", "item.itemVariationId | trimNewlines") }}
 
                 <article class="cmp cmp-order-item mb-0 border-bottom-0">
-                    {{ Twig.set("fallbackPath", "data.itemImages | getObjectValue(currentVariationId)") }}
-                    {{ Twig.set("imagePath", "fallbackPath ~ '.webp'") }}
                     <a href="{{ Twig.print('data.itemURLs | getObjectValue(currentVariationId)') }}" class="item-image">
                         <lazy-img
-                                image-url="{{ Twig.print("imagePath") }}"
-                                fallback-url="{{ Twig.print("fallbackPath") }}"
+                                image-url="{{ Twig.print("data.itemImages | getObjectValue(currentVariationId)") }}.webp"
+                                fallback-url="{{ Twig.print("data.itemImages | getObjectValue(currentVariationId)") }}"
                                 alt="{{ Twig.print("item.orderItemName") }}"
                                 title="{{ Twig.print("item.orderItemName") }}">
                         </lazy-img>
