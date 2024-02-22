@@ -24,7 +24,7 @@
     {% if url.type.mobile == 'internalLink' %}
         {% if url.value.mobile == 'tracking' %}
             {{ Twig.if("data") }}
-                {{ Twig.set('real_url', Twig.call("urls.tracking", [Twig.var('data.order.id')])) }}
+                {{ set real_url = Twig.call("urls.tracking", [Twig.var('data.order.id')]) }}
             {{ Twig.elseif("orderData") }}
                 {{ Twig.set('real_url', Twig.call("urls.tracking", [Twig.var('orderData.order.id')])) }}
             {{ Twig.endif() }}
