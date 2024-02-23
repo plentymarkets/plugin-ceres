@@ -148,16 +148,9 @@
             {% for item in orderData.order.orderItems %}
                 {% if item.itemVariationId > 0 and not services.order.containsComponentPrefix(item.orderItemName) %}
                     {% set currentVariationId = item.itemVariationId | trimNewlines %}
-                    {% set fallbackPath = orderData.itemImages | getObjectValue(currentVariationId) %}
-                    {% set imagePath = "#{fallbackPath}.webp" %}
                     <article class="cmp cmp-order-item">
                         <a href="{{ orderData.itemURLs | getObjectValue(currentVariationId) }}" class="item-image">
-                            <lazy-img
-                                    :image-url="{{ imagePath | json_encode }}"
-                                    :fallback-url="{{ fallbackPath | json_encode }}"
-                                    :alt="{{ item.orderItemName | json_encode }}"
-                                    :title="{{ item.orderItemName | json_encode }}">
-                            </lazy-img>
+                            <img src="{{ orderData.itemImages | getObjectValue(currentVariationId) }}" alt="{{ item.orderItemName }}" title="{{ item.orderItemName }}">
                         </a>
                         <div class="item-details small">
                             <a href="{{ orderData.itemURLs | getObjectValue(currentVariationId)  }}" class="clearfix">
