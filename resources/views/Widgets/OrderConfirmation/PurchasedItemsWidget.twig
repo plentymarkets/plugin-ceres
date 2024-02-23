@@ -26,12 +26,7 @@
 
                 <article class="cmp cmp-order-item mb-0 border-bottom-0">
                     <a href="{{ Twig.print('data.itemURLs | getObjectValue(currentVariationId)') }}" class="item-image">
-                        <lazy-img
-                                :image-url="{{ Twig.print("(data.itemImages | getObjectValue(currentVariationId)) | json_encode") }}"
-                                :fallback-url="{{ Twig.print("(data.itemImages | getObjectValue(currentVariationId)) | json_encode") }}"
-                                :alt="{{ Twig.print("item.orderItemName | json_encode") }}"
-                                :title="{{ Twig.print("item.orderItemName | json_encode") }}">
-                        </lazy-img>
+                        <img src="{{ Twig.print('data.itemImages | getObjectValue(currentVariationId)') }}" alt="{{ Twig.print('item.orderItemName') }}" title="{{ Twig.print('item.orderItemName') }}">
                     </a>
 
                     <div class="item-details mt-0">
@@ -53,11 +48,9 @@
                                         <span class="text-muted">{{ Twig.print("setComponent.quantity") }}x</span>
                                         <div class="image-container flex-shrink-0 mx-1">
                                             {{ Twig.if("imageData") }}
-                                                {{ Twig.set("itemImg", "#{imageData.url}.webp") }}
                                                 <lazy-img
                                                     picture-class="d-block mw-100 mh-100"
-                                                    :image-url="{{ Twig.print("itemImg | json_encode") }}"
-                                                    :fallback-url="{{ Twig.print("imageData.url | json_encode") }}"
+                                                    :image-url="{{ Twig.print("imageData.url | json_encode") }}"
                                                     :alt="{{ Twig.print("altText | json_encode") }}"
                                                     :title="{{ Twig.print("setComponent.orderItemName | json_encode") }}">
                                                 </lazy-img>
