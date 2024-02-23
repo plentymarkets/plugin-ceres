@@ -149,14 +149,14 @@
                 {% if item.itemVariationId > 0 and not services.order.containsComponentPrefix(item.orderItemName) %}
                     {% set currentVariationId = item.itemVariationId | trimNewlines %}
                     {% set fallbackPath = orderData.itemImages | getObjectValue(currentVariationId) %}
-                    {% set imagePath = fallbackPath ~ '.webp' %}
+                    {% set imagePath = "#{fallbackPath}.webp" %}
                     <article class="cmp cmp-order-item">
                         <a href="{{ orderData.itemURLs | getObjectValue(currentVariationId) }}" class="item-image">
                             <lazy-img
-                                    image-url="{{ Twig.print("orderData.itemImages | getObjectValue(currentVariationId)") }}.webp"
-                                    fallback-url="{{ Twig.print("orderData.itemImages | getObjectValue(currentVariationId)") }}"
-                                    alt="{{ Twig.print("item.orderItemName") }}"
-                                    title="{{ Twig.print("item.orderItemName") }}">
+                                    :image-url="{{ imagePath | json_encode }}"
+                                    :fallback-url="{{ fallbackPath | json_encode }}"
+                                    :alt="{{ item.orderItemName | json_encode }}"
+                                    :title="{{ item.orderItemName | json_encode }}">
                             </lazy-img>
                         </a>
                         <div class="item-details small">
