@@ -103,6 +103,10 @@ class CeresSeoConfig extends PluginConfig
     public $itemCondition3;
     public $itemCondition4;
 
+    public $itemRobotsMapping;
+
+    public $itemRobotsMappingId;
+
 
     /**
      * @inheritDoc
@@ -139,5 +143,7 @@ class CeresSeoConfig extends PluginConfig
         $this->itemCondition3 = $this->getTextValue('condition.mapping.condition3', 'https://schema.org/NewCondition');
         $this->itemCondition4 = $this->getTextValue('condition.mapping.condition4', 'https://schema.org/UsedCondition');
         $this->imageSeo = $this->getTextValue('imageSeo.mapping.image', 'url');
+        $this->itemRobotsMapping = $this->getTextValue('itemRobots.mapping.robots','1');
+        $this->itemRobotsMappingId = $this->getTextValue('itemRobots.mapping.robotsID','');
     }
 }

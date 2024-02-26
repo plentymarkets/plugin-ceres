@@ -526,6 +526,36 @@ class SeoStep extends Step
         ];
     }
 
+    private function generateItemRobotsMappingSection():array
+    {
+        $itemRobotsOptions = SeoConfig::getMetaRobotsOptions();
+        $itemRobotsOptions['itemRobotsVarPropSet'] = 'varProp';
+        $options = StepHelper::generateTranslatedListBoxValues($itemRobotsOptions);
+
+        return [
+            "title"       => "Wizard.itemRobotsMapping",
+            "description" => "Wizard.itemRobotsMappingDescription",
+            "form"        => [
+                "seo_itemRobots" => [
+                    "type"         => "select",
+                    "defaultValue" => "all",
+                    "options"      => [
+                        "name" => "Wizard.itemRobotsChoose",
+                        "listBoxValues" => $options,
+                    ]
+                ],
+                "seo_itemRobotsID" => [
+                    "type"         => "text",
+                    "isVisible"    => "seo_itemRobots === 'varProp'",
+                    "defaultValue" => "",
+                    "options"      => [
+                        "name"          => "Wizard.itemRobotsID",
+                    ]
+                ]
+            ]
+        ];
+    }
+
     /**
      * @return array
      */

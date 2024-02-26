@@ -142,6 +142,11 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $imageSeo = '';
 
     /**
+     * @var string $robots Contains a robots value for a specific variation
+     */
+    public $robots = '';
+
+    /**
      * @var string $conditionOfItem Contains the condition of the current item for structured data.
      */
     public $conditionOfItem = '';
@@ -253,6 +258,29 @@ class SingleItemContext extends GlobalContext implements ContextInterface
                 break;
             case 4:
                 $this->sku = $itemData['item']['id'];
+        }
+
+        $robotsMapping = $this->ceresConfig->seo->itemRobotsMapping;
+        $robotsMappingId = $this->ceresConfig->seo->itemRobotsMappingId;
+        switch ($robotsMapping) {
+            case 1:
+                $this->robots = "all";
+                break;
+            case 2:
+                $this->robots = "index";
+                break;
+            case 3:
+                $this->robots = "nofollow";
+                break;
+            case 4:
+                $this->robots = "noindex";
+                break;
+            case 5:
+                $this->robots = "noindex, nofollow";
+                break;
+            case 6:
+                $this->robots = $this->getVariationProperty($itemData['variationProperties'], $robotsMappingId);
+                break;
         }
 
         $this->imageSeo = $itemData['images']['all'][0][$this->ceresConfig->seo->imageSeo] ?? '';

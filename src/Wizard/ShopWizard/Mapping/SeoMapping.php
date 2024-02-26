@@ -201,7 +201,7 @@ class SeoMapping
             'global'   => false,
             'optional' => true
         ],
-         'seo_sku' => [
+        'seo_sku' => [
             'field'    => 'sku.mapping.sku',
             'type'     => 'string',
             'global'   => false,
@@ -216,6 +216,18 @@ class SeoMapping
         'seo_image' => [
             'field'    => 'imageSeo.mapping.image',
             'type'     => 'string',
+            'global'   => false,
+            'optional' => true
+        ],
+        'seo_itemRobots' => [
+            'field'    => 'itemRobots.mapping.robots',
+            'type'     => 'string',
+            'global'   => false,
+            'optional' => true
+        ],
+        'seo_itemRobotsID' => [
+            'field'    => 'itemRobots.mapping.robotsID',
+            'type'     => 'integer',
             'global'   => false,
             'optional' => true
         ],
