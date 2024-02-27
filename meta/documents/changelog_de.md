@@ -10,6 +10,7 @@
 ### TODO
 
 - Um die CLS-Werte deines Shops durch die neue Header-Option (s. **Hinzugefügt**) zu verbessern, öffne nach dem Update die Konfiguration des Plugins plentyShop-LTS. Öffne den Bereich **Header** und aktiviere die Einstellung **Header oben fixieren**. Wenn du prüfen möchtest, ob bei deinem Shop Verbesserungen der CLS-Werte möglich sind, kannst du öffentliche Dienste wie z.B. [PageSpeed Insights](https://pagespeed.web.dev/) verwenden.
+- Falls externe Suchanbieter genutzt werden, müssen Kategorie- und Suchseiten geprüft werden.
 
 ### Hinzugefügt
 
@@ -24,6 +25,7 @@
 ### Geändert
 
 - Durchschnittswert `feedbackDecimal` und Anzahl der Feedbacks `feedbackCount` in itemList- Ergebnisfeldern ergänzt.
+- Beim ausführen von Suchen über externe Suchanbieter werden jetzt die normalen Resultfields für Listen benutzt.
 
 ### Angepasste Templates
 
