@@ -4975,7 +4975,7 @@
                     "label": "Config.itemRobotsMapping",
                     "options": {
                         "containerEntries": {
-                            "itemRobot.mapping.robots": {
+                            "itemRobots.mapping.robots": {
                                 "type": "selectBox",
                                 "required": false,
                                 "label": "Config.itemRobots",
