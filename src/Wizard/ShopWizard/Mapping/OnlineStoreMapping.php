@@ -123,6 +123,12 @@ class OnlineStoreMapping
             'global'    => false,
             'optional'  => false
         ],
+        'onlineStore_webpImages' => [
+            'field'     => 'global.webp_images',
+            'type'      => 'boolean',
+            'global'    => false,
+            'optional'  => false
+        ],
         'onlineStore_shippingProfiles' => [
             'field'     => 'checkout.show_all_shipping_profiles',
             'type'      => 'boolean',
