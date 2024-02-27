@@ -13,7 +13,7 @@
     - ***Important:*** This setting always applies to the whole header. This means that, as far as fixating header elements is concerned, it takes precedent over the configuration of any individual ShopBuilder widget.
     - ***Important:*** It may take time until Google Search Console reflects the improved CLS. Google Search Console uses a rolling average of the past 28 days. This means Google Search Console may only reflect the full impact of this change after high CLS values no longer contribute to the rolling average.
 - An option has been added to set addresses as the primary address.
-- Added capability to toggle WebP conversion in the Assistant **Performance** step.
+- Added the capability to activate the conversion of images to the WebP format in the **Performance** step of the plentyShop assistant.
 
 ### Changed
 
