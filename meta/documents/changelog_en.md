@@ -16,6 +16,7 @@
 - The plugin configuration now contains the new setting **Select source for image in Rich Snippets of the item page** in the **Header** section. You can use this setting to select the image size that is delivered via the Rich Snippets.
 - An option has been added to set addresses as the primary address.
 - The result fields for articles have been expanded to include tags.
+- The possibility to display multiple tracking links, if the option to split shipping urls is active
 
 ### Changed
 
