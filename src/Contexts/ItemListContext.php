@@ -144,7 +144,8 @@ trait ItemListContext
                     $externalSearchFactory = VariationList::getSearchFactory(
                         [
                             'variationIds' => $variationIds,
-                            'excludeFromCache' => $scope === SearchOptions::SCOPE_SEARCH
+                            'excludeFromCache' => $scope === SearchOptions::SCOPE_SEARCH,
+                            'withoutAdditionalResultFields'  => true
                         ]
                     );
                     $searchResults = $itemSearchService->getResults($externalSearchFactory);
