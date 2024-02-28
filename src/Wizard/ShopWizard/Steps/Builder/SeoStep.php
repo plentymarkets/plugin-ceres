@@ -25,7 +25,6 @@ class SeoStep extends Step
             "sections" => [
                 $this->generateRobotSettingsSection(),
                 $this->generateRobotsTxtSection(),
-                $this->generateItemRobotsMappingSection(),
                 $this->generateSiteMapSection(),
                 $this->generateItemConditionSection(),
                 $this->generateAvailabilitiesSection(),
@@ -39,7 +38,8 @@ class SeoStep extends Step
                 $this->generateMpnMappingSection(),
                 $this->generatePriceValidUntilMappingSection(),
                 $this->generateSkuMappingSection(),
-                $this->generateImageSeoMappingSection()
+                $this->generateImageSeoMappingSection(),
+                $this->generateItemRobotsMappingSection()
             ]
         ];
     }
@@ -530,7 +530,7 @@ class SeoStep extends Step
     private function generateItemRobotsMappingSection():array
     {
         $itemRobotsOptions = SeoConfig::getMetaRobotsOptions();
-        $itemRobotsOptions['itemRobotsVarPropSet'] = 'varProp';
+        $itemRobotsOptions['itemRobotsVarProp'] = 'varProp';
         $options = StepHelper::generateTranslatedListBoxValues($itemRobotsOptions);
 
         return [
