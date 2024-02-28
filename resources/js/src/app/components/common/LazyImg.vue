@@ -83,7 +83,7 @@ export default {
         pictureSource() {
             return this.mimeType === this.webpMimeType
                 ? (this.webpImagesEnabled && this.webpBrowserSupport) ? this.defaultUrl : this.fallbackUrl
-                : this.fallbackUrl;
+                : this.defaultUrl || this.fallbackUrl;
         }
     }
 }
