@@ -1920,6 +1920,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }
 
       if (!this.isSimpleRegistration) {
+        this.billingAddress.isPrimary = 1;
         userObject.billingAddress = this.billingAddress;
       }
 
@@ -2114,7 +2115,7 @@ __webpack_require__.r(__webpack_exports__);
       return true;
     },
     getIsGenderPersonal: function getIsGenderPersonal(gender) {
-      return ["male", "female", "diverse"].includes(gender);
+      return ["male", "female", "diverse", "please select"].includes(gender);
     }
   },
   watch: {

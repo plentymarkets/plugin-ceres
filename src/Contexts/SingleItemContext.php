@@ -137,6 +137,11 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $sku = '';
 
     /**
+     * @var string $imageSeo Contains the image path for SEO attribute
+     */
+    public $imageSeo = '';
+
+    /**
      * @var string $conditionOfItem Contains the condition of the current item for structured data.
      */
     public $conditionOfItem = '';
@@ -250,6 +255,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
                 $this->sku = $itemData['item']['id'];
         }
 
+        $this->imageSeo = $itemData['images']['all'][0][$this->ceresConfig->seo->imageSeo] ?? '';
         $this->isItemSet = $params['isItemSet'];
 
         $this->attributes = $params['variationAttributeMap']['attributes'];

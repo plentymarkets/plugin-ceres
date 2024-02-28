@@ -103,6 +103,40 @@
                         "defaultValue": 0.5
                     }
                 },
+                "global.google_recaptcha_consentGroup": {
+                    "type": "selectBox",
+                    "required": false,
+                    "label": "Config.globalGoogleRecaptchaConsentGroupLabel",
+                    "options": {
+                        "defaultValue": "media",
+                        "selectBoxValues": [
+                            {
+                                "value": "necessary",
+                                "caption": "Config.globalGoogleRecaptchaConsentGroupNecessary"
+                            },
+                            {
+                                "value": "media",
+                                "caption": "Config.globalGoogleRecaptchaConsentGroupMedia"
+                            }
+                        ]
+                    }
+                },
+                "global.google_recaptcha_consentNecessary": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.globalGoogleRecaptchaConsentNecessaryLabel",
+                    "options": {
+                        "defaultValue": "false"
+                    }
+                },
+                "global.google_recaptcha_consentOptOut": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.globalGoogleRecaptchaConsentOptOutLabel",
+                    "options": {
+                        "defaultValue": "false"
+                    }
+                },
                 "global.user_data_hash_max_age": {
                     "type": "selectBox",
                     "required": false,
@@ -151,6 +185,14 @@
                     "label": "Config.globalBlockCookies",
                     "options": {
                         "defaultValue": "true"
+                    }
+                },
+                "global.webp_images": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.globalWebpImagesEnabledLabel",
+                    "options": {
+                        "defaultValue": "false"
                     }
                 }
             }
@@ -297,6 +339,14 @@
         "Config.HeaderTab": {
             "label": "Config.headerTab",
             "formFields": {
+                "header.low_cls_mode": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.headerStickyLabel",
+                    "options": {
+                        "defaultValue": "true"
+                    }
+                },
                 "header.show_navbars": {
                     "type": "selectBox",
                     "required": false,
@@ -4089,7 +4139,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityBackOrder"
                                         }
@@ -4142,7 +4193,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }
@@ -4195,7 +4247,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }
@@ -4248,7 +4301,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }
@@ -4301,7 +4355,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }
@@ -4354,7 +4409,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }
@@ -4407,7 +4463,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }
@@ -4460,7 +4517,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }
@@ -4513,7 +4571,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }
@@ -4566,7 +4625,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }
@@ -4912,6 +4972,40 @@
                                 "label": "Config.skuID",
                                 "options": {
                                     "defaultValue": ""
+                                }
+                            }
+                        }
+                    }
+                },
+                "imageSeo.mapping": {
+                    "type": "verticalContainer",
+                    "label": "Config.imageSeoMapping",
+                    "options": {
+                        "containerEntries": {
+                            "imageSeo.mapping.image": {
+                                "type": "selectBox",
+                                "required": false,
+                                "label": "Config.imageSeo",
+                                "options": {
+                                    "defaultValue": "url",
+                                    "selectBoxValues": [
+                                        {
+                                            "value": "url",
+                                            "caption": "Config.imageSeoUrl"
+                                        },
+                                        {
+                                            "value": "urlPreview",
+                                            "caption": "Config.imageSeoUrlPreview"
+                                        },
+                                        {
+                                            "value": "urlSecondPreview",
+                                            "caption": "Config.imageSeoUrlSecondPreview"
+                                        },
+                                        {
+                                            "value": "urlMiddle",
+                                            "caption": "Config.imageSeoUrlMiddle"
+                                        }
+                                    ]
                                 }
                             }
                         }

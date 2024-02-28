@@ -17,6 +17,8 @@
     "item.manufacturer.externalName",
     "item.manufacturer.position",
     "item.storeSpecial",
+    "item.feedbackDecimal",
+    "item.feedbackCount",
 
     "texts.lang",
     "texts.name1",
@@ -41,6 +43,8 @@
     "variation.name",
     "variation.releasedAt",
     "variation.vatId",
+    "variation.tags",
+    "tags.*",
 
     "filter.hasChildren",
     "filter.isSalable",

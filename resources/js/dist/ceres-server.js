@@ -219,6 +219,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2861,6 +2867,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2874,14 +2881,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      supported: undefined
+      webpImagesEnabled: App.config.global.webpImages,
+      webpMimeType: 'image/webp',
+      webpBrowserSupport: false
     };
   },
   mounted: function mounted() {
     var _this = this;
 
     Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_3__["detectWebP"])(function (supported) {
-      _this.supported = supported;
+      _this.webpBrowserSupport = supported;
 
       _this.$nextTick(function () {
         if (!_this.isBackgroundImage) {
@@ -2908,26 +2917,20 @@ __webpack_require__.r(__webpack_exports__);
      *  Determine appropriate image url to use as background source
      */
     backgroundSource: function backgroundSource() {
-      if (this.imageUrl && this.mimeType) {
-        return this.supported ? this.imageUrl : this.fallbackUrl;
-      } else {
-        return this.imageUrl || this.fallbackUrl;
-      }
+      return this.imageUrl && this.mimeTypeWebp ? this.webpBrowserSupport ? this.imageUrl : this.fallbackUrl : this.imageUrl || this.fallbackUrl;
     },
 
     /**
-     * Check if url points to a .webp image and return appropriate mime-type
-     */
-    mimeType: function mimeType() {
+    * Check if url points to a .webp image and return appropriate mime-type
+    */
+    mimeTypeWebp: function mimeTypeWebp() {
       var _this$imageUrl;
 
       var matches = (_this$imageUrl = this.imageUrl) === null || _this$imageUrl === void 0 ? void 0 : _this$imageUrl.match(/.?(\.\w+)(?:$|\?)/);
-
-      if (matches) {
-        return matches[1] === ".webp" ? "image/webp" : null;
-      }
-
-      return null;
+      return matches && matches[1] === '.webp' ? this.webpMimeType : null;
+    },
+    pictureSource: function pictureSource() {
+      return this.mimeTypeWebp === this.webpMimeType ? this.webpImagesEnabled && this.webpBrowserSupport ? this.imageUrl : this.fallbackUrl : this.fallbackUrl;
     }
   }
 });
@@ -5005,16 +5008,22 @@ var gRecaptchaApiLoaded;
       });
     });
   },
+  computed: {
+    consentGroupKey: function consentGroupKey() {
+      var consentGroup = App.config.global.googleRecaptchaConsentGroup;
+      return consentGroup ? "".concat(consentGroup, ".reCaptcha") : 'media.reCaptcha';
+    }
+  },
   methods: {
     checkConsent: function checkConsent() {
       var _this2 = this;
 
-      Object(_helper_whenConsented__WEBPACK_IMPORTED_MODULE_2__["whenConsented"])("media.reCaptcha", function () {
+      Object(_helper_whenConsented__WEBPACK_IMPORTED_MODULE_2__["whenConsented"])(this.consentGroupKey, function () {
         _this2.createScript().then(function () {
           return _this2.initializeV3();
         });
       }, function () {// remove recaptcha when previously consented
-      });
+      }, true);
     },
     createScript: function createScript() {
       var _this3 = this;
@@ -5443,6 +5452,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }
 
       if (!this.isSimpleRegistration) {
+        this.billingAddress.isPrimary = 1;
         userObject.billingAddress = this.billingAddress;
       }
 
@@ -5755,7 +5765,7 @@ __webpack_require__.r(__webpack_exports__);
       return true;
     },
     getIsGenderPersonal: function getIsGenderPersonal(gender) {
-      return ["male", "female", "diverse"].includes(gender);
+      return ["male", "female", "diverse", "please select"].includes(gender);
     }
   },
   watch: {
@@ -7287,17 +7297,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-image-carousel",
@@ -7335,7 +7334,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       currentItem: 0,
-      initialized: false
+      initialized: false,
+      webpImagesEnabled: App.config.global.webpImages
     };
   },
   computed: {
@@ -10599,9 +10599,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "category-image-carousel",
   props: {
@@ -10647,6 +10644,9 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     imageUrls: function imageUrls() {
       return this.imageUrlsData;
+    },
+    imageOrItemImage: function imageOrItemImage() {
+      return this.imageUrls.length ? this.imageUrls[0].url : this.itemImage;
     }
   },
   mounted: function mounted() {
@@ -13000,6 +13000,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+//
+//
 //
 //
 //
@@ -41152,15 +41154,23 @@ var render = function() {
                     "</div>",
                     [
                       _vm._ssrNode(
-                        '<div class="col-md-4" style="min-height: 80px;"><img' +
-                          _vm._ssrAttr("src", _vm.imageUrl) +
-                          _vm._ssrAttr(
-                            "alt",
-                            _vm.imageAlternativeText || _vm.itemName
-                          ) +
-                          _vm._ssrAttr("title", _vm.itemName) +
-                          ' class="img-fluid mx-auto" style="max-height: 140px;"></div> '
+                        '<div class="col-md-4" style="min-height: 80px;">',
+                        "</div>",
+                        [
+                          _c("lazy-img", {
+                            style: { maxHeight: "140px" },
+                            attrs: {
+                              "image-url": _vm.imageUrl + ".webp",
+                              "fallback-url": _vm.imageUrl,
+                              alt: _vm.imageAlternativeText || _vm.itemName,
+                              title: _vm.itemName,
+                              "picture-class": "img-fluid mx-auto"
+                            }
+                          })
+                        ],
+                        1
                       ),
+                      _vm._ssrNode(" "),
                       _vm._ssrNode(
                         '<div class="col-md-8">',
                         "</div>",
@@ -42764,10 +42774,11 @@ var render = function() {
                 _vm.image
                   ? _c("lazy-img", {
                       attrs: {
-                        "picture-class": "d-block mw-100 mh-100",
-                        "image-url": _vm.image,
+                        "image-url": _vm.image + ".webp",
+                        "fallback-url": _vm.image,
                         alt: _vm.altText,
                         title: _vm.itemName,
+                        "picture-class": "d-block mw-100 mh-100",
                         "data-testing": "basket-item-img"
                       }
                     })
@@ -43582,7 +43593,7 @@ var render = function() {
         "picture",
         {
           attrs: {
-            "data-iesrc": _vm.fallbackUrl || _vm.imageUrl,
+            "data-iesrc": _vm.pictureSource,
             "data-picture-class": _vm.pictureClass,
             "data-alt": _vm.alt,
             "data-title": _vm.title
@@ -43591,10 +43602,14 @@ var render = function() {
         [
           _vm._t("additionalimages"),
           _vm._ssrNode(
-            " <source" +
-              _vm._ssrAttr("srcset", _vm.imageUrl) +
-              _vm._ssrAttr("type", _vm.mimeType) +
-              "> " +
+            " " +
+              (_vm.imageUrl === _vm.pictureSource
+                ? "<source" +
+                  _vm._ssrAttr("srcset", _vm.imageUrl) +
+                  _vm._ssrAttr("type", _vm.mimeTypeWebp) +
+                  ">"
+                : "<!---->") +
+              " " +
               (_vm.fallbackUrl
                 ? "<source" + _vm._ssrAttr("srcset", _vm.fallbackUrl) + ">"
                 : "<!---->")
@@ -49644,63 +49659,92 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { itemscope: "", itemtype: "http://schema.org/Thing" } },
+    { attrs: { itemscope: "", itemtype: "'https://schema.org/Thing'" } },
     [
-      [
-        _vm._ssrNode(
-          '<div class="single-carousel owl-carousel owl-theme owl-single-item mt-0">' +
-            _vm._ssrList(_vm.singleImages, function(image) {
-              return (
-                '<div class="prop-1-1"><a' +
-                _vm._ssrAttr("href", image.url) +
-                _vm._ssrAttr("data-lightbox", "single-item-image" + _vm._uid) +
-                "><img" +
-                _vm._ssrAttr("data-src", image.url) +
-                _vm._ssrAttr("alt", _vm.getAltText(image)) +
-                _vm._ssrAttr("title", _vm.getImageName(image)) +
-                ' class="owl-lazy"></a></div>'
-              )
-            }) +
-            "</div> "
-        ),
-        _vm.showThumbs
-          ? _vm._ssrNode(
-              '<div id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item">',
-              "</div>",
-              _vm._l(_vm.carouselImages, function(imagePreview, index) {
-                return _vm._ssrNode('<div class="prop-1-1">', "</div>", [
-                  _vm._ssrNode(
-                    '<div class="image-container">',
-                    "</div>",
-                    [
-                      _c("lazy-img", {
-                        class: { active: _vm.currentItem === index },
-                        attrs: {
-                          "picture-class": "owl-thumb border-appearance",
-                          "image-url": imagePreview.url,
-                          alt: _vm.getAltText(imagePreview),
-                          title: _vm.getImageName(imagePreview)
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ])
-              }),
-              0
-            )
-          : _vm._e()
-      ],
       _vm._ssrNode(
-        " " +
-          (!_vm.initialized
-            ? '<div class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0"><div class="prop-1-1"><img' +
-              _vm._ssrAttr("src", _vm.singleImages[0].url) +
-              _vm._ssrAttr("alt", _vm.getAltText(_vm.singleImages[0].url)) +
-              _vm._ssrAttr("title", _vm.getImageName(_vm.singleImages[0].url)) +
-              ' class="owl-placeholder"></div></div>'
-            : "<!---->")
-      )
+        '<div class="single-carousel owl-carousel owl-theme owl-single-item mt-0">',
+        "</div>",
+        _vm._l(_vm.singleImages, function(image, index) {
+          return _vm._ssrNode('<div class="prop-1-1">', "</div>", [
+            _vm._ssrNode(
+              "<a" +
+                _vm._ssrAttr(
+                  "href",
+                  _vm.webpImagesEnabled ? image.url + ".webp" : image.url
+                ) +
+                _vm._ssrAttr("data-lightbox", "single-item-image" + _vm._uid) +
+                ">",
+              "</a>",
+              [
+                _c("lazy-img", {
+                  attrs: {
+                    alt: _vm.getAltText(image),
+                    "image-url": image.url + ".webp",
+                    "fallback-url": image.url,
+                    title: _vm.getImageName(image)
+                  }
+                })
+              ],
+              1
+            )
+          ])
+        }),
+        0
+      ),
+      _vm._ssrNode(" "),
+      _vm.showThumbs
+        ? _vm._ssrNode(
+            '<div id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item">',
+            "</div>",
+            _vm._l(_vm.carouselImages, function(imagePreview, index) {
+              return _vm._ssrNode('<div class="prop-1-1">', "</div>", [
+                _vm._ssrNode(
+                  '<div class="image-container">',
+                  "</div>",
+                  [
+                    _c("lazy-img", {
+                      class: { active: _vm.currentItem === index },
+                      attrs: {
+                        alt: _vm.getAltText(imagePreview),
+                        "image-url": imagePreview.url + ".webp",
+                        "fallback-url": imagePreview.url,
+                        title: _vm.getImageName(imagePreview),
+                        "picture-class": "owl-thumb border-appearance"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ])
+            }),
+            0
+          )
+        : _vm._e(),
+      _vm._ssrNode(" "),
+      !_vm.initialized
+        ? _vm._ssrNode(
+            '<div class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0">',
+            "</div>",
+            [
+              _vm._ssrNode(
+                '<div class="prop-1-1">',
+                "</div>",
+                [
+                  _c("lazy-img", {
+                    attrs: {
+                      alt: _vm.getAltText(_vm.singleImages[0].url),
+                      "image-url": _vm.singleImages[0].url + ".webp",
+                      "fallback-url": _vm.singleImages[0].url,
+                      title: _vm.getImageName(_vm.singleImages[0].url),
+                      "picture-class": "owl-placeholder"
+                    }
+                  })
+                ],
+                1
+              )
+            ]
+          )
+        : _vm._e()
     ],
     2
   )
@@ -52542,8 +52586,8 @@ var render = function() {
           attrs: {
             id: "owl-carousel-" + _vm._uid,
             href: _vm.itemUrl,
-            role: "listbox",
-            "aria-label": _vm.$translate("Ceres::Template.itemImageCarousel")
+            "aria-label": _vm.$translate("Ceres::Template.itemImageCarousel"),
+            role: "listbox"
           }
         },
         _vm._l(_vm.imageUrls, function(imageUrl, index) {
@@ -52551,37 +52595,19 @@ var render = function() {
             "<div>",
             "</div>",
             [
-              index === 0 && !_vm.disableLazyLoad
-                ? _c("lazy-img", {
-                    ref: "itemLazyImage",
-                    refInFor: true,
-                    attrs: {
-                      "picture-class": "img-fluid",
-                      "image-url": imageUrl.url,
-                      alt: _vm.getAltText(imageUrl),
-                      title: _vm.getTitleText(imageUrl),
-                      role: "option"
-                    }
-                  })
-                : index !== 0 && !_vm.disableLazyLoad
-                ? _c("img", {
-                    staticClass: "img-fluid owl-lazy",
-                    attrs: {
-                      "data-src": imageUrl.url,
-                      alt: _vm.getAltText(imageUrl),
-                      title: _vm.getTitleText(imageUrl),
-                      role: "option"
-                    }
-                  })
-                : _c("img", {
-                    staticClass: "img-fluid",
-                    attrs: {
-                      src: imageUrl.url,
-                      alt: _vm.getAltText(imageUrl),
-                      title: _vm.getAltText(imageUrl),
-                      role: "option"
-                    }
-                  })
+              _c("lazy-img", {
+                ref: index === 0 ? "itemLazyImage" : "",
+                refInFor: true,
+                attrs: {
+                  "image-url": imageUrl.url + ".webp",
+                  "fallback-url": imageUrl.url,
+                  alt: _vm.getAltText(imageUrl),
+                  title: _vm.getTitleText(imageUrl),
+                  "picture-class":
+                    index === 0 ? "img-fluid" : "img-fluid owl-lazy",
+                  role: "option"
+                }
+              })
             ],
             1
           )
@@ -52592,24 +52618,16 @@ var render = function() {
         "a",
         { attrs: { href: _vm.itemUrl } },
         [
-          !_vm.disableLazyLoad
-            ? _c("lazy-img", {
-                ref: "itemLazyImage",
-                attrs: {
-                  "picture-class": "img-fluid",
-                  "image-url": _vm._f("itemImage")(_vm.imageUrls),
-                  alt: _vm.getAltText(_vm.imageUrls[0]),
-                  title: _vm.getTitleText(_vm.imageUrls[0])
-                }
-              })
-            : _c("img", {
-                staticClass: "img-fluid",
-                attrs: {
-                  src: _vm._f("itemImage")(_vm.imageUrls),
-                  alt: _vm.getAltText(_vm.imageUrls[0]),
-                  title: _vm.getTitleText(_vm.imageUrls[0])
-                }
-              })
+          _c("lazy-img", {
+            ref: { itemLazyImage: !_vm.disableLazyLoad },
+            attrs: {
+              "image-url": _vm.imageOrItemImage + ".webp",
+              "fallback-url": _vm.imageOrItemImage,
+              alt: _vm.getAltText(_vm.imageUrls[0]),
+              title: _vm.getTitleText(_vm.imageUrls[0]),
+              "picture-class": "img-fluid"
+            }
+          })
         ],
         1
       )
@@ -53249,72 +53267,99 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm._ssrNode(
+  return _c(
+    "div",
+    [
       _vm.autocompleteResult && _vm.autocompleteResult.length
-        ? '<div data-testing="autocomplete-list">' +
-            _vm._ssrList(_vm.autocompleteResult, function(item, index) {
-              return (
-                "<a" +
-                _vm._ssrAttr("href", _vm.getTargetUrl(item)) +
-                ' tabindex="0"' +
-                _vm._ssrClass("autocomplete-suggestion", _vm.paddingClasses) +
-                _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
-                ">" +
-                (_vm.showImages
-                  ? '<div class="image flex-shrink-0 mr-3">' +
-                    (item.image
-                      ? "<img" + _vm._ssrAttr("src", item.image) + ">"
-                      : "<!---->") +
-                    "</div>"
-                  : "<!---->") +
-                " <div" +
-                _vm._ssrClass("label overflow-hidden", {
-                  compact:
-                    _vm.showAdditionalInformation &&
-                    item.beforeLabel &&
-                    item.afterLabel
-                }) +
-                ">" +
-                (_vm.showAdditionalInformation && item.beforeLabel
-                  ? '<p class="small mb-0 text-truncate">' +
-                    _vm._ssrEscape(_vm._s(item.beforeLabel)) +
-                    "</p>"
-                  : "<!---->") +
-                ' <p class="mb-0 text-truncate">' +
-                _vm._s(_vm.getHighlightedLabel(item.label)) +
-                "</p> " +
-                (_vm.showAdditionalInformation && item.afterLabel
-                  ? '<p class="small mb-0 text-truncate">' +
-                    _vm._ssrEscape(_vm._s(item.afterLabel)) +
-                    "</p>"
-                  : "<!---->") +
-                "</div> " +
-                (_vm.showCount && item.count > 0
-                  ? '<div class="count"><span>' +
-                    _vm._ssrEscape(_vm._s(item.count)) +
-                    "</span></div>"
-                  : "<!---->") +
-                "</a>"
-              )
-            }) +
-            "</div>"
-        : "<p" +
-            _vm._ssrClass("text-muted", _vm.paddingClasses) +
-            _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
-            ">" +
-            _vm._ssrEscape(
-              "\n            " +
-                _vm._s(
-                  _vm.$translate(
-                    "Ceres::Template.itemSearchSuggestionNoResults"
-                  )
-                ) +
-                "\n        "
-            ) +
-            "</p>"
-    )
-  ])
+        ? [
+            _vm._ssrNode(
+              '<div data-testing="autocomplete-list">',
+              "</div>",
+              _vm._l(_vm.autocompleteResult, function(item, index) {
+                return _vm._ssrNode(
+                  "<a" +
+                    _vm._ssrAttr("href", _vm.getTargetUrl(item)) +
+                    ' tabindex="0"' +
+                    _vm._ssrClass(
+                      "autocomplete-suggestion",
+                      _vm.paddingClasses
+                    ) +
+                    _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
+                    ">",
+                  "</a>",
+                  [
+                    _vm.showImages
+                      ? _vm._ssrNode(
+                          '<div class="image flex-shrink-0 mr-3">',
+                          "</div>",
+                          [
+                            item.image
+                              ? _c("lazy-img", {
+                                  attrs: {
+                                    "image-url": item.image + ".webp",
+                                    "fallback-url": item.image
+                                  }
+                                })
+                              : _vm._e()
+                          ],
+                          1
+                        )
+                      : _vm._e(),
+                    _vm._ssrNode(
+                      " <div" +
+                        _vm._ssrClass("label overflow-hidden", {
+                          compact:
+                            _vm.showAdditionalInformation &&
+                            item.beforeLabel &&
+                            item.afterLabel
+                        }) +
+                        ">" +
+                        (_vm.showAdditionalInformation && item.beforeLabel
+                          ? '<p class="small mb-0 text-truncate">' +
+                            _vm._ssrEscape(_vm._s(item.beforeLabel)) +
+                            "</p>"
+                          : "<!---->") +
+                        ' <p class="mb-0 text-truncate">' +
+                        _vm._s(_vm.getHighlightedLabel(item.label)) +
+                        "</p> " +
+                        (_vm.showAdditionalInformation && item.afterLabel
+                          ? '<p class="small mb-0 text-truncate">' +
+                            _vm._ssrEscape(_vm._s(item.afterLabel)) +
+                            "</p>"
+                          : "<!---->") +
+                        "</div> " +
+                        (_vm.showCount && item.count > 0
+                          ? '<div class="count"><span>' +
+                            _vm._ssrEscape(_vm._s(item.count)) +
+                            "</span></div>"
+                          : "<!---->")
+                    )
+                  ],
+                  2
+                )
+              }),
+              0
+            )
+          ]
+        : _vm._ssrNode(
+            "<p" +
+              _vm._ssrClass("text-muted", _vm.paddingClasses) +
+              _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
+              ">" +
+              _vm._ssrEscape(
+                "\n            " +
+                  _vm._s(
+                    _vm.$translate(
+                      "Ceres::Template.itemSearchSuggestionNoResults"
+                    )
+                  ) +
+                  "\n        "
+              ) +
+              "</p>"
+          )
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -54645,16 +54690,24 @@ var render = function() {
       "</div>",
       [
         _vm._ssrNode(
-          '<div class="image-container">' +
-            (_vm.orderItemImage
-              ? "<img" +
-                _vm._ssrAttr("src", _vm.orderItemImage) +
-                _vm._ssrAttr("alt", _vm._f("itemBundleName")(_vm.orderItem)) +
-                _vm._ssrAttr("title", _vm._f("itemBundleName")(_vm.orderItem)) +
-                ' class="d-block mw-100 mh-100">'
-              : "<!---->") +
-            "</div> "
+          '<div class="image-container">',
+          "</div>",
+          [
+            _vm.orderItemImage
+              ? _c("lazy-img", {
+                  attrs: {
+                    "image-url": _vm.orderItemImage + ".webp",
+                    "fallback-url": _vm.orderItemImage,
+                    alt: _vm._f("itemBundleName")(_vm.orderItem),
+                    title: _vm._f("itemBundleName")(_vm.orderItem),
+                    "picture-class": "d-block mw-100 mh-100"
+                  }
+                })
+              : _vm._e()
+          ],
+          1
         ),
+        _vm._ssrNode(" "),
         _vm._ssrNode(
           '<div class="meta-container-wrapper">',
           "</div>",
@@ -56237,18 +56290,29 @@ var render = function() {
       '<div class="basket-item component-loading with-icon d-flex">',
       "</div>",
       [
-        _vm._ssrNode(
-          '<div class="image-container"><a' +
-            _vm._ssrAttr("href", _vm._f("itemURL")(_vm.wishListItem)) +
-            ">" +
-            (_vm.image
-              ? "<img" +
-                _vm._ssrAttr("src", _vm.image) +
-                _vm._ssrAttr("title", _vm._f("itemName")(_vm.wishListItem)) +
-                ' class="d-block mw-100 mh-100">'
-              : "<!---->") +
-            "</a></div> "
-        ),
+        _vm._ssrNode('<div class="image-container">', "</div>", [
+          _vm._ssrNode(
+            "<a" +
+              _vm._ssrAttr("href", _vm._f("itemURL")(_vm.wishListItem)) +
+              ">",
+            "</a>",
+            [
+              _vm.image
+                ? _c("lazy-img", {
+                    attrs: {
+                      "image-url": _vm.image + ".webp",
+                      "fallback-url": _vm.image,
+                      alt: _vm._f("itemName")(_vm.wishListItem),
+                      title: _vm._f("itemName")(_vm.wishListItem),
+                      "picture-class": "d-block mw-100 mh-100"
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ]),
+        _vm._ssrNode(" "),
         _vm._ssrNode(
           '<div class="meta-container-wrapper">',
           "</div>",
@@ -85169,7 +85233,9 @@ function _call(callback) {
 }
 
 function whenConsented(key, onConsent, onDecline) {
-  if (!App.config.global.blockCookies || App.isShopBuilder) {
+  var forceConsent = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
+  if (!App.config.global.blockCookies && !forceConsent || App.isShopBuilder) {
     _call(onConsent);
 
     return;
@@ -88987,32 +89053,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.slice.js */ "./node_modules/core-js/modules/es.array.slice.js");
 /* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.join.js */ "./node_modules/core-js/modules/es.array.join.js");
-/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.promise.js */ "./node_modules/core-js/modules/es.promise.js");
-/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.array.from.js */ "./node_modules/core-js/modules/es.array.from.js");
-/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.string.iterator.js */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.symbol.description.js */ "./node_modules/core-js/modules/es.symbol.description.js");
-/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator.js */ "./node_modules/core-js/modules/es.symbol.iterator.js");
-/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.array.iterator.js */ "./node_modules/core-js/modules/es.array.iterator.js");
-/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator.js */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
-/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var _helper_serializeForm__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../helper/serializeForm */ "./resources/js/src/app/helper/serializeForm.js");
-/* harmony import */ var _helper_strings__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../helper/strings */ "./resources/js/src/app/helper/strings.js");
-/* harmony import */ var _helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../helper/executeReCaptcha */ "./resources/js/src/app/helper/executeReCaptcha.js");
+/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.includes.js */ "./node_modules/core-js/modules/es.array.includes.js");
+/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.string.includes.js */ "./node_modules/core-js/modules/es.string.includes.js");
+/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.join.js */ "./node_modules/core-js/modules/es.array.join.js");
+/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.promise.js */ "./node_modules/core-js/modules/es.promise.js");
+/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.array.from.js */ "./node_modules/core-js/modules/es.array.from.js");
+/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.string.iterator.js */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.symbol.description.js */ "./node_modules/core-js/modules/es.symbol.description.js");
+/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator.js */ "./node_modules/core-js/modules/es.symbol.iterator.js");
+/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.array.iterator.js */ "./node_modules/core-js/modules/es.array.iterator.js");
+/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator.js */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
+/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
+/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+/* harmony import */ var _helper_serializeForm__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../helper/serializeForm */ "./resources/js/src/app/helper/serializeForm.js");
+/* harmony import */ var _helper_strings__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../helper/strings */ "./resources/js/src/app/helper/strings.js");
+/* harmony import */ var _helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../helper/executeReCaptcha */ "./resources/js/src/app/helper/executeReCaptcha.js");
+
+
 
 
 
@@ -89066,9 +89138,9 @@ function readFormOptions(form, formData) {
         switch (element.dataset.mail) {
           case "cc":
             if (element.value) {
-              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_17__["isMail"])(element.value)) {
+              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(element.value)) {
                 formOptions.cc.push(element.value);
-              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_17__["isMail"])(formData[element.value].value)) {
+              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(formData[element.value].value)) {
                 formOptions.cc.push(formData[element.value].value);
               }
             }
@@ -89077,9 +89149,9 @@ function readFormOptions(form, formData) {
 
           case "bcc":
             if (element.value) {
-              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_17__["isMail"])(element.value)) {
+              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(element.value)) {
                 formOptions.bcc.push(element.value);
-              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_17__["isMail"])(formData[element.value].value)) {
+              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(formData[element.value].value)) {
                 formOptions.bcc.push(formData[element.value].value);
               }
             }
@@ -89088,9 +89160,9 @@ function readFormOptions(form, formData) {
 
           case "reply-to-address":
             if (element.value) {
-              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_17__["isMail"])(element.value)) {
+              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(element.value)) {
                 formOptions.replyTo.mail = element.value;
-              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_17__["isMail"])(formData[element.value].value)) {
+              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(formData[element.value].value)) {
                 formOptions.replyTo.mail = formData[element.value].value;
               }
             }
@@ -89154,26 +89226,28 @@ var actions = {
   sendContactForm: function sendContactForm(state, event) {
     event.preventDefault();
     event.stopPropagation();
+    var btnClassName = event.submitter.className;
+    var btnSendContactForm = "btn-send-contact-form";
 
-    if (event.target.tagName !== "FORM") {
+    if (event.target.tagName !== "FORM" || !btnClassName.includes(btnSendContactForm)) {
       return;
     }
 
     var recaptchaEl = event.target.querySelector("[data-recaptcha]");
 
     if (App.config.global.googleRecaptchaApiKey && (!window.grecaptcha || !recaptchaEl)) {
-      _services_NotificationService__WEBPACK_IMPORTED_MODULE_14__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_15__["default"].translate("Ceres::Template.contactAcceptRecaptchaCookie"));
+      _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactAcceptRecaptchaCookie"));
       return;
     }
 
-    Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_18__["executeReCaptcha"])(event.target).then(function (recaptchaResponse) {
-      _services_ValidationService__WEBPACK_IMPORTED_MODULE_13__["default"].validate(event.target).done(function () {
+    Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_20__["executeReCaptcha"])(event.target).then(function (recaptchaResponse) {
+      _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__["default"].validate(event.target).done(function () {
         disableForm(event.target, true);
-        var formData = Object(_helper_serializeForm__WEBPACK_IMPORTED_MODULE_16__["serializeForm"])(event.target);
+        var formData = Object(_helper_serializeForm__WEBPACK_IMPORTED_MODULE_18__["serializeForm"])(event.target);
         var formOptions = readFormOptions(event.target, formData);
         sendFile(event, recaptchaResponse).then(function (response) {
           resetRecaptcha(recaptchaEl);
-          Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_18__["executeReCaptcha"])(event.target).then(function (recaptchaToken2) {
+          Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_20__["executeReCaptcha"])(event.target).then(function (recaptchaToken2) {
             ApiService.post("/rest/io/customer/contact/mail", {
               data: formData,
               recipient: formOptions.recipient,
@@ -89187,21 +89261,21 @@ var actions = {
               resetRecaptcha(recaptchaEl);
               event.target.reset();
               disableForm(event.target, false);
-              _services_NotificationService__WEBPACK_IMPORTED_MODULE_14__["default"].success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_15__["default"].translate("Ceres::Template.contactSendSuccess")).closeAfter(3000);
+              _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactSendSuccess")).closeAfter(3000);
               document.dispatchEvent(new CustomEvent("contactFormSent", {
                 detail: formData
               }));
             }).fail(function (response) {
               resetRecaptcha(recaptchaEl);
               disableForm(event.target, false);
-              _services_NotificationService__WEBPACK_IMPORTED_MODULE_14__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_15__["default"].translate("Ceres::Template.contactSendFail"));
+              _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactSendFail"));
             });
           });
         }, function (response) {
           resetRecaptcha(recaptchaEl);
           disableForm(event.target, false);
-          response.error.message = response.error.message || _services_TranslationService__WEBPACK_IMPORTED_MODULE_15__["default"].translate("Ceres::Template.contactFileUploadFail");
-          _services_NotificationService__WEBPACK_IMPORTED_MODULE_14__["default"].error(response.error);
+          response.error.message = response.error.message || _services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactFileUploadFail");
+          _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(response.error);
         });
       }).fail(function (invalidFields) {
         resetRecaptcha(recaptchaEl);
@@ -89213,7 +89287,7 @@ var actions = {
         try {
           for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
             var field = _step2.value;
-            fieldNames.push(Object(_helper_serializeForm__WEBPACK_IMPORTED_MODULE_16__["getLabel"])(field));
+            fieldNames.push(Object(_helper_serializeForm__WEBPACK_IMPORTED_MODULE_18__["getLabel"])(field));
           }
         } catch (err) {
           _iterator2.e(err);
@@ -89221,13 +89295,13 @@ var actions = {
           _iterator2.f();
         }
 
-        _services_ValidationService__WEBPACK_IMPORTED_MODULE_13__["default"].markInvalidFields(invalidFields, "error");
-        _services_NotificationService__WEBPACK_IMPORTED_MODULE_14__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_15__["default"].translate("Ceres::Template.checkoutCheckAddressFormFields", {
+        _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__["default"].markInvalidFields(invalidFields, "error");
+        _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.checkoutCheckAddressFormFields", {
           fields: fieldNames.join(", ")
         }));
       });
     }).catch(function (error) {
-      _services_NotificationService__WEBPACK_IMPORTED_MODULE_14__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_15__["default"].translate("Ceres::Template.contactReCaptchaFailed"));
+      _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactReCaptchaFailed"));
     });
   }
 };
