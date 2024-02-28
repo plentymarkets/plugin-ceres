@@ -5,7 +5,7 @@
 {% block PartialHead %}
 
     {% set itemData = item.documents[0].data %}
-
+    <!-- {{ forceRobotsValue }} -->
     {% if forceRobotsValue is same as (false) and queryString() | length > 0 %}
         {% set robotsValue = 'noindex' %}
     {% else %}
