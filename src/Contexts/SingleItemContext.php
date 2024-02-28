@@ -263,22 +263,22 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $robotsMapping = $this->ceresConfig->seo->itemRobotsMapping;
         $robotsMappingId = $this->ceresConfig->seo->itemRobotsMappingId;
         switch ($robotsMapping) {
-            case 1:
+            case "all":
                 $this->robots = "all";
                 break;
-            case 2:
+            case "index":
                 $this->robots = "index";
                 break;
-            case 3:
+            case "nofollow":
                 $this->robots = "nofollow";
                 break;
-            case 4:
+            case "noindex":
                 $this->robots = "noindex";
                 break;
-            case 5:
+            case "noindex, nofollow":
                 $this->robots = "noindex, nofollow";
                 break;
-            case 6:
+            case "varProp":
                 $this->robots = $this->getVariationProperty($itemData['variationProperties'], $robotsMappingId);
                 break;
         }
