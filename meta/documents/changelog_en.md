@@ -5,6 +5,7 @@
 ### TODO
 
 - To improve the CLS of your shop with the new header option (see **Added**), open the plugin configuration of plentyShop LTS after updating. Then, open the **Header** section and activate **Fix header at the top of the page**. To check if CLS in your shop can be improved, you can use public services like [PageSpeed Insights](https://pagespeed.web.dev/).
+- If you use an external search provider in your shop, you should check whether your category and search pages are still displayed correctly due to the adjustments made to the result fields (see entry in the **Changed** section).
 
 ### Added
 
@@ -19,6 +20,7 @@
 ### Changed
 
 - Added average rating `feedbackDecimal` and number of feedbacks `feedbackCount` in item list result fields.
+- When executing a search via an external search provider, the normal result fields of the category are now used for lists.
 
 ### Changed Templates
 
