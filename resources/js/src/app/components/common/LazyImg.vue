@@ -77,7 +77,7 @@ export default {
                 : this.defaultUrl || this.fallbackUrl;
         },
         mimeType() {
-            const imgExtension = this.defaultUrl?.match(this.imgRegex);
+            const imgExtension = this.pictureSource?.match(this.imgRegex);
             return 'image/' + imgExtension[1]?.substring(1);
         },
         pictureSource() {

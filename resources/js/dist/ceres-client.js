@@ -463,9 +463,9 @@ __webpack_require__.r(__webpack_exports__);
       return this.defaultUrl && this.mimeType === this.webpMimeType ? this.webpBrowserSupport ? this.defaultUrl : this.fallbackUrl : this.defaultUrl || this.fallbackUrl;
     },
     mimeType: function mimeType() {
-      var _this$defaultUrl, _imgExtension$;
+      var _this$pictureSource, _imgExtension$;
 
-      var imgExtension = (_this$defaultUrl = this.defaultUrl) === null || _this$defaultUrl === void 0 ? void 0 : _this$defaultUrl.match(this.imgRegex);
+      var imgExtension = (_this$pictureSource = this.pictureSource) === null || _this$pictureSource === void 0 ? void 0 : _this$pictureSource.match(this.imgRegex);
       return 'image/' + ((_imgExtension$ = imgExtension[1]) === null || _imgExtension$ === void 0 ? void 0 : _imgExtension$.substring(1));
     },
     pictureSource: function pictureSource() {
