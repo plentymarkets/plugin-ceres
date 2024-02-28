@@ -89,6 +89,10 @@ class CeresSeoConfig extends PluginConfig
     public $skuMapping;
 
     /**
+     * @var string $imageSeo Selected option value for image in rich snippet.
+     */
+    public $imageSeo;
+    /**
      * @var string $skuMappingId Property ID for SKU rich snippet.
      */
     public $skuMappingId;
@@ -134,6 +138,6 @@ class CeresSeoConfig extends PluginConfig
         $this->itemCondition2 = $this->getTextValue('condition.mapping.condition2', 'https://schema.org/NewCondition');
         $this->itemCondition3 = $this->getTextValue('condition.mapping.condition3', 'https://schema.org/NewCondition');
         $this->itemCondition4 = $this->getTextValue('condition.mapping.condition4', 'https://schema.org/UsedCondition');
-
+        $this->imageSeo = $this->getTextValue('imageSeo.mapping.image', 'url');
     }
 }
