@@ -533,6 +533,12 @@ class SeoStep extends Step
         $itemRobotsOptions['itemRobotsVarProp'] = 'varProp';
         $options = StepHelper::generateTranslatedListBoxValues($itemRobotsOptions);
 
+        $itemRobotsOptionsParameter = [
+            "no" => "Wizard.itemRobotsNo",
+            "yes" => "Wizard.itemRobotsYes"
+        ];
+
+        $optionParameter =  StepHelper::generateTranslatedListBoxValues($itemRobotsOptionsParameter);
         return [
             "title"       => "Wizard.itemRobotsMapping",
             "description" => "Wizard.itemRobotsMappingDescription",
@@ -558,10 +564,7 @@ class SeoStep extends Step
                     "defaultValue" => "no",
                     "options"      => [
                         "name"          => "Wizard.itemRobotsChoose",
-                        "listBoxValues" => [
-                            "no" => "Wizard.no",
-                            "yes" => "Wizard.yes"
-                        ],
+                        "listBoxValues" => $optionParameter
                     ]
                 ]
             ]
