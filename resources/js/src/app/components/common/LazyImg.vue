@@ -79,7 +79,11 @@ export default {
         mimeType() {
             const imgExtension = this.pictureSource?.match(this.imgRegex);
             return 'image/' + imgExtension[1]?.substring(1);
-        },
+        }
+    },
+
+    methods:
+    {
         pictureSource() {
             return this.mimeType === this.webpMimeType
                 ? (this.webpImagesEnabled && this.webpBrowserSupport) ? this.defaultUrl : this.fallbackUrl

@@ -2932,7 +2932,9 @@ __webpack_require__.r(__webpack_exports__);
 
       var imgExtension = (_this$pictureSource = this.pictureSource) === null || _this$pictureSource === void 0 ? void 0 : _this$pictureSource.match(this.imgRegex);
       return 'image/' + ((_imgExtension$ = imgExtension[1]) === null || _imgExtension$ === void 0 ? void 0 : _imgExtension$.substring(1));
-    },
+    }
+  },
+  methods: {
     pictureSource: function pictureSource() {
       return this.mimeType === this.webpMimeType ? this.webpImagesEnabled && this.webpBrowserSupport ? this.defaultUrl : this.fallbackUrl : this.defaultUrl || this.fallbackUrl;
     }
