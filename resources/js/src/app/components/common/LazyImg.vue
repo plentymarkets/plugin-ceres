@@ -38,7 +38,10 @@ export default {
     {
         if (this.webpImagesEnabled) {
             const imgExtension = this.fallbackUrl?.match(this.imgRegex);
-            this.defaultUrl = imgExtension[1] === '.webp' ? this.fallbackUrl : this.imageUrl;
+
+            if (imgExtension[1] === '.webp') {
+                this.defaultUrl = this.fallbackUrl;
+            }
         }
 
         detectWebP(((supported) =>

@@ -429,7 +429,10 @@ __webpack_require__.r(__webpack_exports__);
       var _this$fallbackUrl;
 
       var imgExtension = (_this$fallbackUrl = this.fallbackUrl) === null || _this$fallbackUrl === void 0 ? void 0 : _this$fallbackUrl.match(this.imgRegex);
-      this.defaultUrl = imgExtension[1] === '.webp' ? this.fallbackUrl : this.imageUrl;
+
+      if (imgExtension[1] === '.webp') {
+        this.defaultUrl = this.fallbackUrl;
+      }
     }
 
     Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_3__["detectWebP"])(function (supported) {
