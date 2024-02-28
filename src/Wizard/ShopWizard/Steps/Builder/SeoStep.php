@@ -534,8 +534,8 @@ class SeoStep extends Step
         $options = StepHelper::generateTranslatedListBoxValues($itemRobotsOptions);
 
         $itemRobotsOptionsParameter = [
-            "no" => "Wizard.itemRobotsNo",
-            "yes" => "Wizard.itemRobotsYes"
+            "itemRobotsNo" => "no",
+            "itemRobotsYes" => "yes"
         ];
 
         $optionParameter =  StepHelper::generateTranslatedListBoxValues($itemRobotsOptionsParameter);
