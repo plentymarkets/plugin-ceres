@@ -294,7 +294,12 @@ class SingleItemContext extends GlobalContext implements ContextInterface
                 break;
         }
 
-        $this->forcedCanonicalUrl = 'https://www.plentymarkets.com';
+        $canonicalPropertyId = $this->ceresConfig->seo->itemCanonicalID;
+        $canonicalUrl = $this->getVariationProperty($itemData['variationProperties'], $canonicalPropertyId);
+
+        if(!empty($canonicalUrl)){
+            $this->forcedCanonicalUrl = $canonicalUrl;
+        }
 
         $this->imageSeo = $itemData['images']['all'][0][$this->ceresConfig->seo->imageSeo] ?? '';
         $this->isItemSet = $params['isItemSet'];
