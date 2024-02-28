@@ -50,7 +50,7 @@ export default {
             this.webpBrowserSupport = supported;
             this.$nextTick(() =>
             {
-                if (!this.isBackgroundImage)
+                if(!this.isBackgroundImage)
                 {
                     this.$el.classList.toggle("lozad");
                 }
