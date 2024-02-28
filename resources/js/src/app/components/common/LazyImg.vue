@@ -31,14 +31,15 @@ export default {
             webpImagesEnabled: App.config.global.webpImages,
             webpImageType: '.webp',
             webpMimeType: 'image/webp',
-            webpBrowserSupport: false
+            webpBrowserSupport: false,
+            imgRegex: /.?(\.\w+)(?:$|\?)/
         }
     },
 
     mounted()
     {
         if (this.webpImagesEnabled) {
-            const matches = this.fallbackUrl?.match(/.?(\.\w+)(?:$|\?)/);
+            const matches = this.fallbackUrl?.match(this.imgRegex);
             if (matches && (matches[1] === this.webpImageType)) {
                 this.defaultImage = this.fallbackUrl;
             }
@@ -81,7 +82,7 @@ export default {
          * Check if url points to a .webp image and return appropriate mime-type
          */
         mimeTypeWebp() {
-            const matches = this.defaultImage?.match(/.?(\.\w+)(?:$|\?)/);
+            const matches = this.defaultImage?.match(this.imgRegex);
             return matches && (matches[1] === this.webpImageType) ? this.webpMimeType : null;
         },
         pictureSource() {

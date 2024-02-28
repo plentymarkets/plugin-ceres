@@ -2885,7 +2885,8 @@ __webpack_require__.r(__webpack_exports__);
       webpImagesEnabled: App.config.global.webpImages,
       webpImageType: '.webp',
       webpMimeType: 'image/webp',
-      webpBrowserSupport: false
+      webpBrowserSupport: false,
+      imgRegex: /.?(\.\w+)(?:$|\?)/
     };
   },
   mounted: function mounted() {
@@ -2894,7 +2895,7 @@ __webpack_require__.r(__webpack_exports__);
     if (this.webpImagesEnabled) {
       var _this$fallbackUrl;
 
-      var matches = (_this$fallbackUrl = this.fallbackUrl) === null || _this$fallbackUrl === void 0 ? void 0 : _this$fallbackUrl.match(/.?(\.\w+)(?:$|\?)/);
+      var matches = (_this$fallbackUrl = this.fallbackUrl) === null || _this$fallbackUrl === void 0 ? void 0 : _this$fallbackUrl.match(this.imgRegex);
 
       if (matches && matches[1] === this.webpImageType) {
         this.defaultImage = this.fallbackUrl;
@@ -2938,7 +2939,7 @@ __webpack_require__.r(__webpack_exports__);
     mimeTypeWebp: function mimeTypeWebp() {
       var _this$defaultImage;
 
-      var matches = (_this$defaultImage = this.defaultImage) === null || _this$defaultImage === void 0 ? void 0 : _this$defaultImage.match(/.?(\.\w+)(?:$|\?)/);
+      var matches = (_this$defaultImage = this.defaultImage) === null || _this$defaultImage === void 0 ? void 0 : _this$defaultImage.match(this.imgRegex);
       return matches && matches[1] === this.webpImageType ? this.webpMimeType : null;
     },
     pictureSource: function pictureSource() {
