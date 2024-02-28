@@ -3,6 +3,7 @@
 namespace Ceres\Config;
 
 use Plenty\Modules\Webshop\Helpers\PluginConfig;
+use Plenty\Plugin\Log\Loggable;
 
 /**
  * Class CeresSeoConfig
@@ -13,6 +14,7 @@ use Plenty\Modules\Webshop\Helpers\PluginConfig;
  */
 class CeresSeoConfig extends PluginConfig
 {
+    use Loggable;
     /**
      * @var string $brandMapping Selected option value for brand in rich snippet.
      */
@@ -102,11 +104,8 @@ class CeresSeoConfig extends PluginConfig
     public $itemCondition2;
     public $itemCondition3;
     public $itemCondition4;
-
     public $itemRobotsMapping;
-
     public $itemRobotsMappingId;
-
     public $itemRobotsMappingParameter;
 
 
@@ -147,6 +146,8 @@ class CeresSeoConfig extends PluginConfig
         $this->imageSeo = $this->getTextValue('imageSeo.mapping.image', 'url');
         $this->itemRobotsMapping = $this->getTextValue('itemRobots.mapping.itemRobots','all');
         $this->itemRobotsMappingId = $this->getTextValue('itemRobots.mapping.itemRobotsID','');
-        $this->itemRobotsMappingParameter = $this->getTextValue('itemRobots.mapping.itemRobotsParameter','false') == true;
+        $value = $this->getTextValue('itemRobots.mapping.itemRobotsParameter','false');
+        $this->getLogger(__METHOD__)->error('Config', ['value' => $value, 'result' => $value == false]);
+        $this->itemRobotsMappingParameter = $value == true;
     }
 }
