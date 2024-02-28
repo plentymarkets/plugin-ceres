@@ -187,11 +187,21 @@ var render = function() {
                   },
                   [
                     _vm.showImages
-                      ? _c("div", { staticClass: "image flex-shrink-0 mr-3" }, [
-                          item.image
-                            ? _c("img", { attrs: { src: item.image } })
-                            : _vm._e()
-                        ])
+                      ? _c(
+                          "div",
+                          { staticClass: "image flex-shrink-0 mr-3" },
+                          [
+                            item.image
+                              ? _c("lazy-img", {
+                                  attrs: {
+                                    "image-url": item.image + ".webp",
+                                    "fallback-url": item.image
+                                  }
+                                })
+                              : _vm._e()
+                          ],
+                          1
+                        )
                       : _vm._e(),
                     _vm._v(" "),
                     _c(

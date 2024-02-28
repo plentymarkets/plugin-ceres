@@ -402,6 +402,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -415,14 +416,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      supported: undefined
+      webpImagesEnabled: App.config.global.webpImages,
+      webpMimeType: 'image/webp',
+      webpBrowserSupport: false
     };
   },
   mounted: function mounted() {
     var _this = this;
 
     Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_3__["detectWebP"])(function (supported) {
-      _this.supported = supported;
+      _this.webpBrowserSupport = supported;
 
       _this.$nextTick(function () {
         if (!_this.isBackgroundImage) {
@@ -449,26 +452,20 @@ __webpack_require__.r(__webpack_exports__);
      *  Determine appropriate image url to use as background source
      */
     backgroundSource: function backgroundSource() {
-      if (this.imageUrl && this.mimeType) {
-        return this.supported ? this.imageUrl : this.fallbackUrl;
-      } else {
-        return this.imageUrl || this.fallbackUrl;
-      }
+      return this.imageUrl && this.mimeTypeWebp ? this.webpBrowserSupport ? this.imageUrl : this.fallbackUrl : this.imageUrl || this.fallbackUrl;
     },
 
     /**
-     * Check if url points to a .webp image and return appropriate mime-type
-     */
-    mimeType: function mimeType() {
+    * Check if url points to a .webp image and return appropriate mime-type
+    */
+    mimeTypeWebp: function mimeTypeWebp() {
       var _this$imageUrl;
 
       var matches = (_this$imageUrl = this.imageUrl) === null || _this$imageUrl === void 0 ? void 0 : _this$imageUrl.match(/.?(\.\w+)(?:$|\?)/);
-
-      if (matches) {
-        return matches[1] === ".webp" ? "image/webp" : null;
-      }
-
-      return null;
+      return matches && matches[1] === '.webp' ? this.webpMimeType : null;
+    },
+    pictureSource: function pictureSource() {
+      return this.mimeTypeWebp === this.webpMimeType ? this.webpImagesEnabled && this.webpBrowserSupport ? this.imageUrl : this.fallbackUrl : this.fallbackUrl;
     }
   }
 });
@@ -1493,9 +1490,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "category-image-carousel",
   props: {
@@ -1541,6 +1535,9 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     imageUrls: function imageUrls() {
       return this.imageUrlsData;
+    },
+    imageOrItemImage: function imageOrItemImage() {
+      return this.imageUrls.length ? this.imageUrls[0].url : this.itemImage;
     }
   },
   mounted: function mounted() {
@@ -37122,7 +37119,7 @@ var render = function() {
         "picture",
         {
           attrs: {
-            "data-iesrc": _vm.fallbackUrl || _vm.imageUrl,
+            "data-iesrc": _vm.pictureSource,
             "data-picture-class": _vm.pictureClass,
             "data-alt": _vm.alt,
             "data-title": _vm.title
@@ -37131,7 +37128,11 @@ var render = function() {
         [
           _vm._t("additionalimages"),
           _vm._v(" "),
-          _c("source", { attrs: { srcset: _vm.imageUrl, type: _vm.mimeType } }),
+          _vm.imageUrl === _vm.pictureSource
+            ? _c("source", {
+                attrs: { srcset: _vm.imageUrl, type: _vm.mimeTypeWebp }
+              })
+            : _vm._e(),
           _vm._v(" "),
           _vm.fallbackUrl
             ? _c("source", { attrs: { srcset: _vm.fallbackUrl } })
@@ -38398,8 +38399,8 @@ var render = function() {
           attrs: {
             id: "owl-carousel-" + _vm._uid,
             href: _vm.itemUrl,
-            role: "listbox",
-            "aria-label": _vm.$translate("Ceres::Template.itemImageCarousel")
+            "aria-label": _vm.$translate("Ceres::Template.itemImageCarousel"),
+            role: "listbox"
           }
         },
         _vm._l(_vm.imageUrls, function(imageUrl, index) {
@@ -38407,37 +38408,19 @@ var render = function() {
             "div",
             { key: index },
             [
-              index === 0 && !_vm.disableLazyLoad
-                ? _c("lazy-img", {
-                    ref: "itemLazyImage",
-                    refInFor: true,
-                    attrs: {
-                      "picture-class": "img-fluid",
-                      "image-url": imageUrl.url,
-                      alt: _vm.getAltText(imageUrl),
-                      title: _vm.getTitleText(imageUrl),
-                      role: "option"
-                    }
-                  })
-                : index !== 0 && !_vm.disableLazyLoad
-                ? _c("img", {
-                    staticClass: "img-fluid owl-lazy",
-                    attrs: {
-                      "data-src": imageUrl.url,
-                      alt: _vm.getAltText(imageUrl),
-                      title: _vm.getTitleText(imageUrl),
-                      role: "option"
-                    }
-                  })
-                : _c("img", {
-                    staticClass: "img-fluid",
-                    attrs: {
-                      src: imageUrl.url,
-                      alt: _vm.getAltText(imageUrl),
-                      title: _vm.getAltText(imageUrl),
-                      role: "option"
-                    }
-                  })
+              _c("lazy-img", {
+                ref: index === 0 ? "itemLazyImage" : "",
+                refInFor: true,
+                attrs: {
+                  "image-url": imageUrl.url + ".webp",
+                  "fallback-url": imageUrl.url,
+                  alt: _vm.getAltText(imageUrl),
+                  title: _vm.getTitleText(imageUrl),
+                  "picture-class":
+                    index === 0 ? "img-fluid" : "img-fluid owl-lazy",
+                  role: "option"
+                }
+              })
             ],
             1
           )
@@ -38448,24 +38431,16 @@ var render = function() {
         "a",
         { attrs: { href: _vm.itemUrl } },
         [
-          !_vm.disableLazyLoad
-            ? _c("lazy-img", {
-                ref: "itemLazyImage",
-                attrs: {
-                  "picture-class": "img-fluid",
-                  "image-url": _vm._f("itemImage")(_vm.imageUrls),
-                  alt: _vm.getAltText(_vm.imageUrls[0]),
-                  title: _vm.getTitleText(_vm.imageUrls[0])
-                }
-              })
-            : _c("img", {
-                staticClass: "img-fluid",
-                attrs: {
-                  src: _vm._f("itemImage")(_vm.imageUrls),
-                  alt: _vm.getAltText(_vm.imageUrls[0]),
-                  title: _vm.getTitleText(_vm.imageUrls[0])
-                }
-              })
+          _c("lazy-img", {
+            ref: { itemLazyImage: !_vm.disableLazyLoad },
+            attrs: {
+              "image-url": _vm.imageOrItemImage + ".webp",
+              "fallback-url": _vm.imageOrItemImage,
+              alt: _vm.getAltText(_vm.imageUrls[0]),
+              title: _vm.getTitleText(_vm.imageUrls[0]),
+              "picture-class": "img-fluid"
+            }
+          })
         ],
         1
       )

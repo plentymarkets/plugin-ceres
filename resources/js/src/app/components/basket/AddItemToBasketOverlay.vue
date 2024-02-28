@@ -18,7 +18,13 @@
                     <div class="modal-body">
                         <div class="row is-table-row">
                             <div class="col-md-4" style="min-height: 80px;">
-                                <img style="max-height: 140px;" class="img-fluid mx-auto" :src="imageUrl" :alt="imageAlternativeText || itemName" :title="itemName"/>
+                                <lazy-img
+                                    :image-url="`${imageUrl}.webp`"
+                                    :fallback-url="imageUrl"
+                                    :alt="imageAlternativeText || itemName"
+                                    :title="itemName"
+                                    :style="{ maxHeight: '140px' }"
+                                    picture-class="img-fluid mx-auto" />
                             </div>
                             <div class="col-md-8">
                                 <p>
