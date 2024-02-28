@@ -2,11 +2,6 @@
 
 ## v5.0.62 (2024-XX-XX) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...5.0.62" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
-### Added
-
-- The result fields for articles have been expanded to include tags.
-
-
 ### TODO
 
 - To improve the CLS of your shop with the new header option (see **Added**), open the plugin configuration of plentyShop LTS after updating. Then, open the **Header** section and activate **Fix header at the top of the page**. To check if CLS in your shop can be improved, you can use public services like [PageSpeed Insights](https://pagespeed.web.dev/).
@@ -19,6 +14,7 @@
     - ***Important:*** It may take time until Google Search Console reflects the improved CLS. Google Search Console uses a rolling average of the past 28 days. This means Google Search Console may only reflect the full impact of this change after high CLS values no longer contribute to the rolling average.
 - The plugin configuration now contains the new setting **Select source for image in Rich Snippets of the item page** in the **Header** section. You can use this setting to select the image size that is delivered via the Rich Snippets.
 - An option has been added to set addresses as the primary address.
+- The result fields for articles have been expanded to include tags.
 
 ### Changed
 
