@@ -152,6 +152,11 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $forceRobotsValue = false;
 
     /**
+     * @var string forcedCanonicalUrl Contains a string with a canonical url
+     */
+    public $forcedCanonicalUrl = '';
+
+    /**
      * @var string $conditionOfItem Contains the condition of the current item for structured data.
      */
     public $conditionOfItem = '';
@@ -288,6 +293,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
                 $this->robots = $this->getVariationProperty($itemData['variationProperties'], $robotsMappingId);
                 break;
         }
+
+        $this->forcedCanonicalUrl = 'https://www.plentymarkets.com';
 
         $this->imageSeo = $itemData['images']['all'][0][$this->ceresConfig->seo->imageSeo] ?? '';
         $this->isItemSet = $params['isItemSet'];
