@@ -5030,14 +5030,14 @@
                                 "required": false,
                                 "label": "Config.itemRobotsParameter",
                                 "options": {
-                                    "defaultValue": "yes",
+                                    "defaultValue": "false",
                                     "selectBoxValues": [
                                         {
-                                            "value": "no",
-                                            "caption": "Config.No"
+                                            "value": "false",
+                                            "caption": "Config.no"
                                         },
                                         {
-                                            "value": "yes",
+                                            "value": "true",
                                             "caption": "Config.yes"
                                         }
                                     ]

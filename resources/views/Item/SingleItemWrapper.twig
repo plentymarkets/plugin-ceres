@@ -5,7 +5,7 @@
 {% block PartialHead %}
 
     {% set itemData = item.documents[0].data %}
-    <!-- {{ forceRobotsValue }} -->
+
     {% if forceRobotsValue is same as (false) and queryString() | length > 0 %}
         {% set robotsValue = 'noindex' %}
     {% else %}
@@ -20,7 +20,7 @@
         {% block robots         robotsValue %}
         {% block schemaOrg %}
             {
-                "@context"      : "http://schema.org/",
+                "@context"      : "https://schema.org/",
                 "@type"         : "Product",
                 "@id"           : "{{ itemData.variation.id }}",
                 "name"          : "{{ ItemName.get(itemData | itemName, itemData.variation.bundleType) | trim }}",
