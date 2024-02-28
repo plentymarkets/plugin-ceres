@@ -552,6 +552,17 @@ class SeoStep extends Step
                     "options"      => [
                         "name"          => "Wizard.itemRobotsID",
                     ]
+                ],
+                "seo_itemRobotsParameter" => [
+                    "type"         => "text",
+                    "defaultValue" => "no",
+                    "options"      => [
+                        "name"          => "Wizard.itemRobotsChoose",
+                        "listBoxValues" => [
+                            "no" => "Wizard.no",
+                            "yes" => "Wizard.yes"
+                        ],
+                    ]
                 ]
             ]
         ];

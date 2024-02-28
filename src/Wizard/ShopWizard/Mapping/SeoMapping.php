@@ -231,6 +231,12 @@ class SeoMapping
             'global'   => false,
             'optional' => true
         ],
+        'seo_itemRobotsParameter' => [
+            'field'    => 'itemRobots.mapping.itemRobotsParameter',
+            'type'     => 'string',
+            'global'   => false,
+            'optional' => true
+        ],
     ];
 
     /**

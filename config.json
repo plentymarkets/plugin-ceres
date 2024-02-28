@@ -5016,6 +5016,24 @@
                                 "options": {
                                     "defaultValue": ""
                                 }
+                            },
+                            "itemRobots.mapping.itemRobotsParameter": {
+                                "type": "selectBox",
+                                "required": false,
+                                "label": "Config.itemRobotsParameter",
+                                "options": {
+                                    "defaultValue": "yes",
+                                    "selectBoxValues": [
+                                        {
+                                            "value": "no",
+                                            "caption": "Config.no"
+                                        },
+                                        {
+                                            "value": "yes",
+                                            "caption": "Config.yes"
+                                        }
+                                    ]
+                                }
                             }
                         }
                     }
