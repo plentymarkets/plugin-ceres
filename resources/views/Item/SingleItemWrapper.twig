@@ -6,7 +6,7 @@
 
     {% set itemData = item.documents[0].data %}
 
-    {% if queryString() | length > 0 %}
+    {% if forceRobotsValue is not true and queryString() | length > 0 %}
         {% set robotsValue = 'noindex' %}
     {% else %}
         {% set robotsValue = robots %}

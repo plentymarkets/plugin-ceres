@@ -147,6 +147,11 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $robots = '';
 
     /**
+     * @var bool $forceRobotsValue Contains a bool if the robots setting should also be used whith parameter
+     */
+    public $forceRobotsValue = false;
+
+    /**
      * @var string $conditionOfItem Contains the condition of the current item for structured data.
      */
     public $conditionOfItem = '';
@@ -168,7 +173,6 @@ class SingleItemContext extends GlobalContext implements ContextInterface
 
         $this->item = $params['item'];
         $itemData = $this->item['documents'][0]['data'];
-
 
         $this->conditionOfItem = $this->detectItemCondition($itemData['item']['condition']['id']);
 
@@ -262,6 +266,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
 
         $robotsMapping = $this->ceresConfig->seo->itemRobotsMapping;
         $robotsMappingId = $this->ceresConfig->seo->itemRobotsMappingId;
+        $this->forceRobotsValue = $this->ceresConfig->seo->itemRobotsMappingParameter;
+
         switch ($robotsMapping) {
             case "all":
                 $this->robots = "all";
