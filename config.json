@@ -5026,7 +5026,7 @@
                                     "selectBoxValues": [
                                         {
                                             "value": "no",
-                                            "caption": "Config.no"
+                                            "caption": "Config.No"
                                         },
                                         {
                                             "value": "yes",
