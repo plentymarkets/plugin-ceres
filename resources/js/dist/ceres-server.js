@@ -53267,72 +53267,99 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm._ssrNode(
+  return _c(
+    "div",
+    [
       _vm.autocompleteResult && _vm.autocompleteResult.length
-        ? '<div data-testing="autocomplete-list">' +
-            _vm._ssrList(_vm.autocompleteResult, function(item, index) {
-              return (
-                "<a" +
-                _vm._ssrAttr("href", _vm.getTargetUrl(item)) +
-                ' tabindex="0"' +
-                _vm._ssrClass("autocomplete-suggestion", _vm.paddingClasses) +
-                _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
-                ">" +
-                (_vm.showImages
-                  ? '<div class="image flex-shrink-0 mr-3">' +
-                    (item.image
-                      ? "<img" + _vm._ssrAttr("src", item.image) + ">"
-                      : "<!---->") +
-                    "</div>"
-                  : "<!---->") +
-                " <div" +
-                _vm._ssrClass("label overflow-hidden", {
-                  compact:
-                    _vm.showAdditionalInformation &&
-                    item.beforeLabel &&
-                    item.afterLabel
-                }) +
-                ">" +
-                (_vm.showAdditionalInformation && item.beforeLabel
-                  ? '<p class="small mb-0 text-truncate">' +
-                    _vm._ssrEscape(_vm._s(item.beforeLabel)) +
-                    "</p>"
-                  : "<!---->") +
-                ' <p class="mb-0 text-truncate">' +
-                _vm._s(_vm.getHighlightedLabel(item.label)) +
-                "</p> " +
-                (_vm.showAdditionalInformation && item.afterLabel
-                  ? '<p class="small mb-0 text-truncate">' +
-                    _vm._ssrEscape(_vm._s(item.afterLabel)) +
-                    "</p>"
-                  : "<!---->") +
-                "</div> " +
-                (_vm.showCount && item.count > 0
-                  ? '<div class="count"><span>' +
-                    _vm._ssrEscape(_vm._s(item.count)) +
-                    "</span></div>"
-                  : "<!---->") +
-                "</a>"
-              )
-            }) +
-            "</div>"
-        : "<p" +
-            _vm._ssrClass("text-muted", _vm.paddingClasses) +
-            _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
-            ">" +
-            _vm._ssrEscape(
-              "\n            " +
-                _vm._s(
-                  _vm.$translate(
-                    "Ceres::Template.itemSearchSuggestionNoResults"
-                  )
-                ) +
-                "\n        "
-            ) +
-            "</p>"
-    )
-  ])
+        ? [
+            _vm._ssrNode(
+              '<div data-testing="autocomplete-list">',
+              "</div>",
+              _vm._l(_vm.autocompleteResult, function(item, index) {
+                return _vm._ssrNode(
+                  "<a" +
+                    _vm._ssrAttr("href", _vm.getTargetUrl(item)) +
+                    ' tabindex="0"' +
+                    _vm._ssrClass(
+                      "autocomplete-suggestion",
+                      _vm.paddingClasses
+                    ) +
+                    _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
+                    ">",
+                  "</a>",
+                  [
+                    _vm.showImages
+                      ? _vm._ssrNode(
+                          '<div class="image flex-shrink-0 mr-3">',
+                          "</div>",
+                          [
+                            item.image
+                              ? _c("lazy-img", {
+                                  attrs: {
+                                    "image-url": item.image + ".webp",
+                                    "fallback-url": item.image
+                                  }
+                                })
+                              : _vm._e()
+                          ],
+                          1
+                        )
+                      : _vm._e(),
+                    _vm._ssrNode(
+                      " <div" +
+                        _vm._ssrClass("label overflow-hidden", {
+                          compact:
+                            _vm.showAdditionalInformation &&
+                            item.beforeLabel &&
+                            item.afterLabel
+                        }) +
+                        ">" +
+                        (_vm.showAdditionalInformation && item.beforeLabel
+                          ? '<p class="small mb-0 text-truncate">' +
+                            _vm._ssrEscape(_vm._s(item.beforeLabel)) +
+                            "</p>"
+                          : "<!---->") +
+                        ' <p class="mb-0 text-truncate">' +
+                        _vm._s(_vm.getHighlightedLabel(item.label)) +
+                        "</p> " +
+                        (_vm.showAdditionalInformation && item.afterLabel
+                          ? '<p class="small mb-0 text-truncate">' +
+                            _vm._ssrEscape(_vm._s(item.afterLabel)) +
+                            "</p>"
+                          : "<!---->") +
+                        "</div> " +
+                        (_vm.showCount && item.count > 0
+                          ? '<div class="count"><span>' +
+                            _vm._ssrEscape(_vm._s(item.count)) +
+                            "</span></div>"
+                          : "<!---->")
+                    )
+                  ],
+                  2
+                )
+              }),
+              0
+            )
+          ]
+        : _vm._ssrNode(
+            "<p" +
+              _vm._ssrClass("text-muted", _vm.paddingClasses) +
+              _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
+              ">" +
+              _vm._ssrEscape(
+                "\n            " +
+                  _vm._s(
+                    _vm.$translate(
+                      "Ceres::Template.itemSearchSuggestionNoResults"
+                    )
+                  ) +
+                  "\n        "
+              ) +
+              "</p>"
+          )
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
