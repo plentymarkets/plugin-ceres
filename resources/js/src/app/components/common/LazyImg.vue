@@ -1,8 +1,5 @@
 <template>
-    <picture v-if="!isBackgroundImage"
-             :data-iesrc="pictureSource"
-             :data-picture-class="pictureClass"
-             :data-alt="alt" :data-title="title">
+    <picture v-if="!isBackgroundImage" :data-iesrc="pictureSource" :data-picture-class="pictureClass" :data-alt="alt" :data-title="title">
         <slot name="additionalimages"></slot>
         <source :srcset="pictureSource" :type="mimeType">
     </picture>
@@ -31,7 +28,6 @@ export default {
         return {
             defaultImage: '',
             webpImagesEnabled: App.config.global.webpImages,
-            webpImageType: '.webp',
             webpMimeType: 'image/webp',
             webpBrowserSupport: false
         }
@@ -41,10 +37,7 @@ export default {
     {
         if (this.webpImagesEnabled) {
             const imgExtension = this.fallbackUrl?.match(/.?(\.\w+)(?:$|\?)/);
-
-            this.defaultImage = imgExtension && (imgExtension[1] === this.webpImageType)
-                ? this.fallbackUrl
-                : this.imageUrl;
+            this.defaultImage = imgExtension[1] === '.webp' ? this.fallbackUrl : this.imageUrl;
         }
 
         detectWebP(((supported) =>
@@ -81,14 +74,7 @@ export default {
         },
         mimeType() {
             const imgExtension = this.defaultImage?.match(/.?(\.\w+)(?:$|\?)/);
-
-            if (imgExtension) {
-                return imgExtension[1] === this.webpImageType
-                    ? this.webpMimeType
-                    : 'image/' + imgExtension[1].substring(1);
-            }
-
-            return '';
+            return 'image/' + imgExtension[1]?.substring(1);
         },
         pictureSource() {
             return this.mimeType === this.webpMimeType

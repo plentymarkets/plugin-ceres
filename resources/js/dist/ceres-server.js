@@ -2867,9 +2867,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2885,7 +2882,6 @@ __webpack_require__.r(__webpack_exports__);
     return {
       defaultImage: '',
       webpImagesEnabled: App.config.global.webpImages,
-      webpImageType: '.webp',
       webpMimeType: 'image/webp',
       webpBrowserSupport: false
     };
@@ -2897,7 +2893,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this$fallbackUrl;
 
       var imgExtension = (_this$fallbackUrl = this.fallbackUrl) === null || _this$fallbackUrl === void 0 ? void 0 : _this$fallbackUrl.match(/.?(\.\w+)(?:$|\?)/);
-      this.defaultImage = imgExtension && imgExtension[1] === this.webpImageType ? this.fallbackUrl : this.imageUrl;
+      this.defaultImage = imgExtension[1] === '.webp' ? this.fallbackUrl : this.imageUrl;
     }
 
     Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_3__["detectWebP"])(function (supported) {
@@ -2928,15 +2924,10 @@ __webpack_require__.r(__webpack_exports__);
       return this.defaultImage && this.mimeType === this.webpMimeType ? this.webpBrowserSupport ? this.defaultImage : this.fallbackUrl : this.defaultImage || this.fallbackUrl;
     },
     mimeType: function mimeType() {
-      var _this$defaultImage;
+      var _this$defaultImage, _imgExtension$;
 
       var imgExtension = (_this$defaultImage = this.defaultImage) === null || _this$defaultImage === void 0 ? void 0 : _this$defaultImage.match(/.?(\.\w+)(?:$|\?)/);
-
-      if (imgExtension) {
-        return imgExtension[1] === this.webpImageType ? this.webpMimeType : 'image/' + imgExtension[1].substring(1);
-      }
-
-      return '';
+      return 'image/' + ((_imgExtension$ = imgExtension[1]) === null || _imgExtension$ === void 0 ? void 0 : _imgExtension$.substring(1));
     },
     pictureSource: function pictureSource() {
       return this.mimeType === this.webpMimeType ? this.webpImagesEnabled && this.webpBrowserSupport ? this.defaultImage : this.fallbackUrl : this.fallbackUrl;
