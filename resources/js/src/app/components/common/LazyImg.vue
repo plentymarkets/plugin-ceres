@@ -48,8 +48,10 @@ export default {
         detectWebP(((supported) =>
         {
             this.webpBrowserSupport = supported;
-            this.$nextTick(() => {
-                if (!this.isBackgroundImage) {
+            this.$nextTick(() =>
+            {
+                if (!this.isBackgroundImage)
+                {
                     this.$el.classList.toggle("lozad");
                 }
                 lozad(this.$el).observe();
@@ -79,8 +81,8 @@ export default {
                 : this.defaultImage || this.fallbackUrl;
         },
         /**
-         * Check if url points to a .webp image and return appropriate mime-type
-         */
+        * Check if url points to a .webp image and return appropriate mime-type
+        */
         mimeTypeWebp() {
             const matches = this.defaultImage?.match(this.imgRegex);
             return matches && (matches[1] === this.webpImageType) ? this.webpMimeType : null;

@@ -803,8 +803,8 @@ __webpack_require__.r(__webpack_exports__);
     },
 
     /**
-     * Check if url points to a .webp image and return appropriate mime-type
-     */
+    * Check if url points to a .webp image and return appropriate mime-type
+    */
     mimeTypeWebp: function mimeTypeWebp() {
       var _this$defaultImage;
 
