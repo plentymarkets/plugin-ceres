@@ -213,6 +213,12 @@ class SeoMapping
             'global'   => false,
             'optional' => true
         ],
+        'seo_image' => [
+            'field'    => 'imageSeo.mapping.image',
+            'type'     => 'string',
+            'global'   => false,
+            'optional' => true
+        ],
     ];
 
     /**

@@ -37,7 +37,8 @@ class SeoStep extends Step
                 $this->generateIsbnMappingSection(),
                 $this->generateMpnMappingSection(),
                 $this->generatePriceValidUntilMappingSection(),
-                $this->generateSkuMappingSection()
+                $this->generateSkuMappingSection(),
+                $this->generateImageSeoMappingSection()
             ]
         ];
     }
@@ -519,6 +520,30 @@ class SeoStep extends Step
                     "defaultValue" => "",
                     "options"      => [
                         "name"          => "Wizard.skuID",
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generateImageSeoMappingSection():array
+    {
+        $imageSeoOptions = SeoConfig::getImageSeoOtions();
+        $options = StepHelper::generateTranslatedListBoxValues($imageSeoOptions);
+
+        return [
+            "title"       => "Wizard.imageSeoMapping",
+            "description" => "Wizard.imageSeoMappingDescription",
+            "form"        => [
+                "seo_image" => [
+                    "type"         => "select",
+                    "defaultValue" => "1",
+                    "options"      => [
+                        "name" => "Wizard.imageSeoChoose",
+                        "listBoxValues" => $options,
                     ]
                 ]
             ]
