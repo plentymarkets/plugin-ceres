@@ -9,17 +9,22 @@
 {% set defaultFavicon = '/tpl/favicon_' ~ webstoreConfig.webstoreId ~ '.ico' %}
 <link rel="icon" type="img/ico" href="{{ webstoreConfig.faviconPath | default(ceresConfig.global.favicon) | default(defaultFavicon) }}">
 
+
 {% set canonicalUrl = services.url.getCanonicalURL() %}
 {% set languageUrls = services.url.getLanguageURLs() %}
 
-{% if canonicalUrl is not null %}
-    <link rel="canonical" href="{{ canonicalUrl  ~ services.url.getCanonicalQueryString() }}">
-{% endif %}
+{% if singleItemCanonical is defined %}
+    <link rel="canonical" href="{{ singleItemCanonical }}">
+{% else %}
+    {% if canonicalUrl is not null %}
+        <link rel="canonical" href="{{ canonicalUrl  ~ services.url.getCanonicalQueryString() }}">
+    {% endif %}
 
-{% if services.url.isCanonical() or request.get('env') == "testing" %}
-    {% for language, url in languageUrls %}
-        <link rel="alternate" hreflang="{{language}}" href="{{url}}"/>
-    {% endfor %}
+    {% if services.url.isCanonical() or request.get('env') == "testing" %}
+        {% for language, url in languageUrls %}
+            <link rel="alternate" hreflang="{{language}}" href="{{url}}"/>
+        {% endfor %}
+    {% endif %}
 {% endif %}
 
 <style data-font="Custom-Font">
@@ -203,7 +208,7 @@
         else {
             w.loadCSS = loadCSS;
         }
-    }( typeof global !== "undefined" ? global : this ) );
+    %}( typeof global !== "undefined" ? global : this ) );
 
     (function() {
         var checkIconFont = function() {
