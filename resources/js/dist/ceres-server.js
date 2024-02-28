@@ -13117,6 +13117,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "order-return-item",
@@ -54661,16 +54663,24 @@ var render = function() {
       "</div>",
       [
         _vm._ssrNode(
-          '<div class="image-container">' +
-            (_vm.orderItemImage
-              ? "<img" +
-                _vm._ssrAttr("src", _vm.orderItemImage) +
-                _vm._ssrAttr("alt", _vm._f("itemBundleName")(_vm.orderItem)) +
-                _vm._ssrAttr("title", _vm._f("itemBundleName")(_vm.orderItem)) +
-                ' class="d-block mw-100 mh-100">'
-              : "<!---->") +
-            "</div> "
+          '<div class="image-container">',
+          "</div>",
+          [
+            _vm.orderItemImage
+              ? _c("lazy-img", {
+                  attrs: {
+                    "image-url": _vm.orderItemImage + ".webp",
+                    "fallback-url": _vm.orderItemImage,
+                    alt: _vm._f("itemBundleName")(_vm.orderItem),
+                    title: _vm._f("itemBundleName")(_vm.orderItem),
+                    "picture-class": "d-block mw-100 mh-100"
+                  }
+                })
+              : _vm._e()
+          ],
+          1
         ),
+        _vm._ssrNode(" "),
         _vm._ssrNode(
           '<div class="meta-container-wrapper">',
           "</div>",

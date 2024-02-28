@@ -16,6 +16,7 @@
 - The plugin configuration contains a new setting in the **Header** section. By activating the setting **Fix header at the top of the page**, the header is fixed at the top of the page when scrolling. This setting applies to both the default header and the ShopBuilder header. Activating this setting significantly decreases [Cumulative Layout Shift](https://web.dev/articles/cls) because it replaces an expensive calculation.
     - The plentyShop LTS assistant contains the same configuration in the **Performance** step.
     - ***Important:*** This setting always applies to the whole header. This means that, as far as fixating header elements is concerned, it takes precedent over the configuration of any individual ShopBuilder widget.
+- The plugin configuration now contains the new setting **Select source for image in Rich Snippets of the item page** in the **Header** section. You can use this setting to select the image size that is delivered via the Rich Snippets.
     - ***Important:*** It may take time until Google Search Console reflects the improved CLS. Google Search Console uses a rolling average of the past 28 days. This means Google Search Console may only reflect the full impact of this change after high CLS values no longer contribute to the rolling average.
 - An option has been added to set addresses as the primary address.
 
