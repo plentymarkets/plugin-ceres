@@ -5,22 +5,33 @@
 ### TODO
 
 - Um die CLS-Werte deines Shops durch die neue Header-Option (s. **Hinzugefügt**) zu verbessern, öffne nach dem Update die Konfiguration des Plugins plentyShop-LTS. Öffne den Bereich **Header** und aktiviere die Einstellung **Header oben fixieren**. Wenn du prüfen möchtest, ob bei deinem Shop Verbesserungen der CLS-Werte möglich sind, kannst du öffentliche Dienste wie z.B. [PageSpeed Insights](https://pagespeed.web.dev/) verwenden.
+- Falls du externe Suchanbieter in deinem Shop nutzt, solltest du aufgrund der Anpassungen der Result Fields (s. **Geändert**) überprüfen, ob deine Kategorie- und Suchseiten weiterhin wie gewünscht angezeigt werden.
 
 ### Hinzugefügt
 
-- In den Plugin-Einstellungen gibt es eine neue Einstellung im Bereich **Header**. Wenn du die Einstellung **Header oben fixieren** aktivierst, wird der Header beim Scrollen oben am Seitenanfang fixiert. Diese Einstellung hat Auswirkungen sowohl auf den Standard-Header als auch auf den ShopBuilder-Header. Durch das Aktivieren der Einstellung reduziert sich [Content Layout Shift](https://web.dev/articles/cls) deutlich, weil somit eine teure Berechnung ersetzt wird.
+- In den Plugin-Einstellungen gibt es eine neue Einstellung im Bereich **Header**. Wenn du die Einstellung **Header oben fixieren** aktivierst, wird der Header beim Scrollen oben am Seitenanfang fixiert. Diese Einstellung hat Auswirkungen sowohl auf den Standard-Header als auch auf den ShopBuilder-Header. Durch das Aktivieren der Einstellung reduziert sich [Cumulative Layout Shift](https://web.dev/articles/cls) deutlich, weil somit eine teure Berechnung ersetzt wird.
+    - Im Assistenten von plentyShop LTS befindet sich dieselbe Einstellung im Schritt **Performance**.
     - ***Wichtig:*** Die Einstellung betrifft den gesamten Header. Das bedeutet, dass sie für das Fixieren von Header-Elementen die Einstellungen einzelner ShopBuilder-Widgets überschreibt.
+    - ***Wichtig:*** Es kann einige Zeit dauern bis die verbesserten CLS-Werte in Google Search Console reflektiert werden. Die Auswertung in Google Search Console bezieht sich auf den gleitenden Durchschnitt der vergangenen 28 Tage. Das bedeutet, dass die tatsächlichen Auswirkungen dieser Änderung erst in Google Search Console reflektiert werden, wenn hohe CLS-Werte nicht mehr Teil des gleitenden Durchschnitts sind.
+- In den Plugin-Einstellungen wurde die neue Einstellung **Quelle für das Bild in Rich Snippets für die Artikelseite wählen** im Bereich **SEO** hinzugefügt. Mit dieser Einstellung ist es nun möglich, die Bildergröße einzustellen, die über die Rich Snippets ausgeliefert wird.
+- Es wurde eine Möglichkeit hinzugefügt, Adressen als primäre Adresse festzulegen.
+- Die Ergebnisfelder für Artikel wurde um Tags erweitert.
 
-- In den Plugin-Einstellungen gibt es eine neue Einstellung im Bereich **Seo**. Mit der Einstellung könnt ihr die Bildergröße einstellen, die über die Rich Snippets ausgeliefert werden.
 
 ### Geändert
 
 - Durchschnittswert `feedbackDecimal` und Anzahl der Feedbacks `feedbackCount` in itemList- Ergebnisfeldern ergänzt.
+- Beim Ausführen von Suchen über externe Suchanbieter werden jetzt die normalen Resultfields der Kategorie für Listen benutzt.
 
 ### Angepasste Templates
 
 - Im Zuge des Releases von plentyShop LTS 5.0.62 gab es Änderungen an Template-Dateien, die das Feedback Plugin betreffen und für Theme-Entwickler relevant sind.  Die Verlinkung führt direkt zu der umgesetzten Änderung in der entsprechenden Datei.
+- Um die neue Einstellung zum Fixieren des Headers zu unterstützen, wurde in den Dateien `resources/scss/ceres/views/PageDesign/_header.scss` und `resources/scss/ceres/widgets/Header/_navigation-widget.scss` der Wert von `z-index` angepasst. [Übersicht der Änderungen in den entsprechenden Dateien.](https://github.com/plentymarkets/plugin-ceres/pull/3467/files?file-filters%5B%5D=.scss&show-viewed-files=true)
 - [resources/views/ResultFields/ListItem.fields.json](https://github.com/plentymarkets/plugin-ceres/pull/3459/files#diff)
+- [resources/scss/ceres/views/Templates/AddressSelect/_address-select.scss](https://github.com/plentymarkets/plugin-ceres/pull/3457/files#diff-f1d52ee4809b03e32c2b5f28327ad58460d32aab9a7ca789e4955cb82b063298)
+- [resources/views/Checkout/CheckoutView.twig](https://github.com/plentymarkets/plugin-ceres/pull/3457/files#diff-c74596cdf6d6196e3b9c8563916151e3a08a5edfa026845503c9169a0fcd8252)
+- [resources/views/Customer/Components/AddressSelect/AddressSelect.twig](https://github.com/plentymarkets/plugin-ceres/pull/3457/files#diff-969624803dfeb696a58e16de0d95c285a458ec83a615026882d9b1e65386935b)
+- [resources/views/MyAccount/MyAccountView.twig](https://github.com/plentymarkets/plugin-ceres/pull/3457/files#diff-dbc71118894a6415be3f82e4ee31dc1e6b7c3160b45b887ccce71f6620824d7c)
 
 ## v5.0.61 (2023-10-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.60...5.0.61" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 

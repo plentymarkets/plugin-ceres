@@ -12,7 +12,7 @@
                     tabindex="0">
 
                     <div class="image flex-shrink-0 mr-3" v-if="showImages">
-                        <img v-if="item.image" :src="item.image">
+                        <lazy-img v-if="item.image" :image-url="`${item.image}.webp`" :fallback-url="item.image" />
                     </div>
 
                     <div class="label overflow-hidden" :class="{ 'compact': showAdditionalInformation && item.beforeLabel && item.afterLabel }">

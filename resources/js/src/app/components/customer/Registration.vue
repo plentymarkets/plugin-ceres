@@ -332,6 +332,7 @@ export default {
 
             if (!this.isSimpleRegistration)
             {
+                this.billingAddress.isPrimary = 1;
                 userObject.billingAddress = this.billingAddress;
             }
 

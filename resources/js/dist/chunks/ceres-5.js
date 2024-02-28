@@ -24,9 +24,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "category-image-carousel",
   props: {
@@ -72,6 +69,9 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     imageUrls: function imageUrls() {
       return this.imageUrlsData;
+    },
+    imageOrItemImage: function imageOrItemImage() {
+      return this.imageUrls.length ? this.imageUrls[0].url : this.itemImage;
     }
   },
   mounted: function mounted() {
@@ -552,8 +552,8 @@ var render = function() {
           attrs: {
             id: "owl-carousel-" + _vm._uid,
             href: _vm.itemUrl,
-            role: "listbox",
-            "aria-label": _vm.$translate("Ceres::Template.itemImageCarousel")
+            "aria-label": _vm.$translate("Ceres::Template.itemImageCarousel"),
+            role: "listbox"
           }
         },
         _vm._l(_vm.imageUrls, function(imageUrl, index) {
@@ -561,37 +561,19 @@ var render = function() {
             "div",
             { key: index },
             [
-              index === 0 && !_vm.disableLazyLoad
-                ? _c("lazy-img", {
-                    ref: "itemLazyImage",
-                    refInFor: true,
-                    attrs: {
-                      "picture-class": "img-fluid",
-                      "image-url": imageUrl.url,
-                      alt: _vm.getAltText(imageUrl),
-                      title: _vm.getTitleText(imageUrl),
-                      role: "option"
-                    }
-                  })
-                : index !== 0 && !_vm.disableLazyLoad
-                ? _c("img", {
-                    staticClass: "img-fluid owl-lazy",
-                    attrs: {
-                      "data-src": imageUrl.url,
-                      alt: _vm.getAltText(imageUrl),
-                      title: _vm.getTitleText(imageUrl),
-                      role: "option"
-                    }
-                  })
-                : _c("img", {
-                    staticClass: "img-fluid",
-                    attrs: {
-                      src: imageUrl.url,
-                      alt: _vm.getAltText(imageUrl),
-                      title: _vm.getAltText(imageUrl),
-                      role: "option"
-                    }
-                  })
+              _c("lazy-img", {
+                ref: index === 0 ? "itemLazyImage" : "",
+                refInFor: true,
+                attrs: {
+                  "image-url": imageUrl.url + ".webp",
+                  "fallback-url": imageUrl.url,
+                  alt: _vm.getAltText(imageUrl),
+                  title: _vm.getTitleText(imageUrl),
+                  "picture-class":
+                    index === 0 ? "img-fluid" : "img-fluid owl-lazy",
+                  role: "option"
+                }
+              })
             ],
             1
           )
@@ -602,24 +584,16 @@ var render = function() {
         "a",
         { attrs: { href: _vm.itemUrl } },
         [
-          !_vm.disableLazyLoad
-            ? _c("lazy-img", {
-                ref: "itemLazyImage",
-                attrs: {
-                  "picture-class": "img-fluid",
-                  "image-url": _vm._f("itemImage")(_vm.imageUrls),
-                  alt: _vm.getAltText(_vm.imageUrls[0]),
-                  title: _vm.getTitleText(_vm.imageUrls[0])
-                }
-              })
-            : _c("img", {
-                staticClass: "img-fluid",
-                attrs: {
-                  src: _vm._f("itemImage")(_vm.imageUrls),
-                  alt: _vm.getAltText(_vm.imageUrls[0]),
-                  title: _vm.getTitleText(_vm.imageUrls[0])
-                }
-              })
+          _c("lazy-img", {
+            ref: { itemLazyImage: !_vm.disableLazyLoad },
+            attrs: {
+              "image-url": _vm.imageOrItemImage + ".webp",
+              "fallback-url": _vm.imageOrItemImage,
+              alt: _vm.getAltText(_vm.imageUrls[0]),
+              title: _vm.getTitleText(_vm.imageUrls[0]),
+              "picture-class": "img-fluid"
+            }
+          })
         ],
         1
       )
