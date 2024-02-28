@@ -26,18 +26,19 @@ export default {
     data()
     {
         return {
-            defaultImage: this.imageUrl,
+            defaultUrl: this.imageUrl,
             webpImagesEnabled: App.config.global.webpImages,
             webpMimeType: 'image/webp',
-            webpBrowserSupport: false
+            webpBrowserSupport: false,
+            imgRegex: /.?(\.\w+)(?:$|\?)/
         }
     },
 
     mounted()
     {
         if (this.webpImagesEnabled) {
-            const imgExtension = this.fallbackUrl?.match(/.?(\.\w+)(?:$|\?)/);
-            this.defaultImage = imgExtension[1] === '.webp' ? this.fallbackUrl : this.imageUrl;
+            const imgExtension = this.fallbackUrl?.match(this.imgRegex);
+            this.defaultUrl = imgExtension[1] === '.webp' ? this.fallbackUrl : this.imageUrl;
         }
 
         detectWebP(((supported) =>
@@ -56,7 +57,7 @@ export default {
 
     watch:
     {
-        defaultImage()
+        defaultUrl()
         {
             this.$nextTick(() =>
             {
@@ -68,17 +69,17 @@ export default {
 
     computed: {
         backgroundSource() {
-            return this.defaultImage && (this.mimeType === this.webpMimeType)
-                ? this.webpBrowserSupport ? this.defaultImage : this.fallbackUrl
-                : this.defaultImage || this.fallbackUrl;
+            return this.defaultUrl && (this.mimeType === this.webpMimeType)
+                ? this.webpBrowserSupport ? this.defaultUrl : this.fallbackUrl
+                : this.defaultUrl || this.fallbackUrl;
         },
         mimeType() {
-            const imgExtension = this.defaultImage?.match(/.?(\.\w+)(?:$|\?)/);
+            const imgExtension = this.defaultUrl?.match(this.imgRegex);
             return 'image/' + imgExtension[1]?.substring(1);
         },
         pictureSource() {
             return this.mimeType === this.webpMimeType
-                ? (this.webpImagesEnabled && this.webpBrowserSupport) ? this.defaultImage : this.fallbackUrl
+                ? (this.webpImagesEnabled && this.webpBrowserSupport) ? this.defaultUrl : this.fallbackUrl
                 : this.fallbackUrl;
         }
     }

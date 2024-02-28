@@ -749,10 +749,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      defaultImage: this.imageUrl,
+      defaultUrl: this.imageUrl,
       webpImagesEnabled: App.config.global.webpImages,
       webpMimeType: 'image/webp',
-      webpBrowserSupport: false
+      webpBrowserSupport: false,
+      imgRegex: /.?(\.\w+)(?:$|\?)/
     };
   },
   mounted: function mounted() {
@@ -761,8 +762,8 @@ __webpack_require__.r(__webpack_exports__);
     if (this.webpImagesEnabled) {
       var _this$fallbackUrl;
 
-      var imgExtension = (_this$fallbackUrl = this.fallbackUrl) === null || _this$fallbackUrl === void 0 ? void 0 : _this$fallbackUrl.match(/.?(\.\w+)(?:$|\?)/);
-      this.defaultImage = imgExtension[1] === '.webp' ? this.fallbackUrl : this.imageUrl;
+      var imgExtension = (_this$fallbackUrl = this.fallbackUrl) === null || _this$fallbackUrl === void 0 ? void 0 : _this$fallbackUrl.match(this.imgRegex);
+      this.defaultUrl = imgExtension[1] === '.webp' ? this.fallbackUrl : this.imageUrl;
     }
 
     Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_3__["detectWebP"])(function (supported) {
@@ -778,7 +779,7 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   watch: {
-    defaultImage: function defaultImage() {
+    defaultUrl: function defaultUrl() {
       var _this2 = this;
 
       this.$nextTick(function () {
@@ -790,16 +791,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     backgroundSource: function backgroundSource() {
-      return this.defaultImage && this.mimeType === this.webpMimeType ? this.webpBrowserSupport ? this.defaultImage : this.fallbackUrl : this.defaultImage || this.fallbackUrl;
+      return this.defaultUrl && this.mimeType === this.webpMimeType ? this.webpBrowserSupport ? this.defaultUrl : this.fallbackUrl : this.defaultUrl || this.fallbackUrl;
     },
     mimeType: function mimeType() {
-      var _this$defaultImage, _imgExtension$;
+      var _this$defaultUrl, _imgExtension$;
 
-      var imgExtension = (_this$defaultImage = this.defaultImage) === null || _this$defaultImage === void 0 ? void 0 : _this$defaultImage.match(/.?(\.\w+)(?:$|\?)/);
+      var imgExtension = (_this$defaultUrl = this.defaultUrl) === null || _this$defaultUrl === void 0 ? void 0 : _this$defaultUrl.match(this.imgRegex);
       return 'image/' + ((_imgExtension$ = imgExtension[1]) === null || _imgExtension$ === void 0 ? void 0 : _imgExtension$.substring(1));
     },
     pictureSource: function pictureSource() {
-      return this.mimeType === this.webpMimeType ? this.webpImagesEnabled && this.webpBrowserSupport ? this.defaultImage : this.fallbackUrl : this.fallbackUrl;
+      return this.mimeType === this.webpMimeType ? this.webpImagesEnabled && this.webpBrowserSupport ? this.defaultUrl : this.fallbackUrl : this.fallbackUrl;
     }
   }
 });
