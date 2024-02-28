@@ -736,6 +736,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -749,11 +750,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      defaultUrl: this.imageUrl,
+      defaultImage: this.imageUrl,
       webpImagesEnabled: App.config.global.webpImages,
+      webpImageType: '.webp',
       webpMimeType: 'image/webp',
-      webpBrowserSupport: false,
-      imgRegex: /.?(\.\w+)(?:$|\?)/
+      webpBrowserSupport: false
     };
   },
   mounted: function mounted() {
@@ -762,10 +763,10 @@ __webpack_require__.r(__webpack_exports__);
     if (this.webpImagesEnabled) {
       var _this$fallbackUrl;
 
-      var imgExtension = (_this$fallbackUrl = this.fallbackUrl) === null || _this$fallbackUrl === void 0 ? void 0 : _this$fallbackUrl.match(this.imgRegex);
+      var matches = (_this$fallbackUrl = this.fallbackUrl) === null || _this$fallbackUrl === void 0 ? void 0 : _this$fallbackUrl.match(/.?(\.\w+)(?:$|\?)/);
 
-      if (imgExtension[1] === '.webp') {
-        this.defaultUrl = this.fallbackUrl;
+      if (matches && matches[1] === this.webpImageType) {
+        this.defaultImage = this.fallbackUrl;
       }
     }
 
@@ -782,7 +783,7 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   watch: {
-    defaultUrl: function defaultUrl() {
+    defaultImage: function defaultImage() {
       var _this2 = this;
 
       this.$nextTick(function () {
@@ -793,19 +794,24 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
+    /**
+     *  Determine appropriate image url to use as background source
+     */
     backgroundSource: function backgroundSource() {
-      return this.defaultUrl && this.mimeType === this.webpMimeType ? this.webpBrowserSupport ? this.defaultUrl : this.fallbackUrl : this.defaultUrl || this.fallbackUrl;
+      return this.defaultImage && this.mimeTypeWebp ? this.webpBrowserSupport ? this.defaultImage : this.fallbackUrl : this.defaultImage || this.fallbackUrl;
     },
-    mimeType: function mimeType() {
-      var _this$pictureSource, _imgExtension$;
 
-      var imgExtension = (_this$pictureSource = this.pictureSource) === null || _this$pictureSource === void 0 ? void 0 : _this$pictureSource.match(this.imgRegex);
-      return 'image/' + ((_imgExtension$ = imgExtension[1]) === null || _imgExtension$ === void 0 ? void 0 : _imgExtension$.substring(1));
-    }
-  },
-  methods: {
+    /**
+     * Check if url points to a .webp image and return appropriate mime-type
+     */
+    mimeTypeWebp: function mimeTypeWebp() {
+      var _this$defaultImage;
+
+      var matches = (_this$defaultImage = this.defaultImage) === null || _this$defaultImage === void 0 ? void 0 : _this$defaultImage.match(/.?(\.\w+)(?:$|\?)/);
+      return matches && matches[1] === this.webpImageType ? this.webpMimeType : null;
+    },
     pictureSource: function pictureSource() {
-      return this.mimeType === this.webpMimeType ? this.webpImagesEnabled && this.webpBrowserSupport ? this.defaultUrl : this.fallbackUrl : this.defaultUrl || this.fallbackUrl;
+      return this.mimeTypeWebp === this.webpMimeType ? this.webpImagesEnabled && this.webpBrowserSupport ? this.defaultImage : this.fallbackUrl : this.fallbackUrl;
     }
   }
 });
@@ -39771,9 +39777,15 @@ var render = function() {
         [
           _vm._t("additionalimages"),
           _vm._v(" "),
-          _c("source", {
-            attrs: { srcset: _vm.pictureSource, type: _vm.mimeType }
-          })
+          _vm.defaultImage === _vm.pictureSource
+            ? _c("source", {
+                attrs: { srcset: _vm.defaultImage, type: _vm.mimeTypeWebp }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.fallbackUrl
+            ? _c("source", { attrs: { srcset: _vm.fallbackUrl } })
+            : _vm._e()
         ],
         2
       )
