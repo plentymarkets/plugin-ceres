@@ -220,13 +220,13 @@ class SeoMapping
             'optional' => true
         ],
         'seo_itemRobots' => [
-            'field'    => 'itemRobots.mapping.robots',
+            'field'    => 'itemRobots.mapping.itemRobots',
             'type'     => 'string',
             'global'   => false,
             'optional' => true
         ],
         'seo_itemRobotsID' => [
-            'field'    => 'itemRobots.mapping.robotsID',
+            'field'    => 'itemRobots.mapping.itemRobotsID',
             'type'     => 'integer',
             'global'   => false,
             'optional' => true

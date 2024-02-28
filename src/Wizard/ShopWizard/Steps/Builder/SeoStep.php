@@ -25,6 +25,7 @@ class SeoStep extends Step
             "sections" => [
                 $this->generateRobotSettingsSection(),
                 $this->generateRobotsTxtSection(),
+                $this->generateItemRobotsMappingSection(),
                 $this->generateSiteMapSection(),
                 $this->generateItemConditionSection(),
                 $this->generateAvailabilitiesSection(),
