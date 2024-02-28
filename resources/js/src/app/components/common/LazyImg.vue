@@ -1,8 +1,10 @@
 <template>
-    <picture v-if="!isBackgroundImage" :data-iesrc="pictureSource" :data-picture-class="pictureClass" :data-alt="alt" :data-title="title">
+    <picture v-if="!isBackgroundImage"
+             :data-iesrc="pictureSource"
+             :data-picture-class="pictureClass"
+             :data-alt="alt" :data-title="title">
         <slot name="additionalimages"></slot>
-        <source v-if="defaultImage === pictureSource" :srcset="defaultImage" :type="mimeTypeWebp">
-        <source v-else :srcset="fallbackUrl">
+        <source :srcset="pictureSource" :type="mimeType">
     </picture>
 
     <div v-else :data-background-image="backgroundSource" :class="pictureClass">
@@ -38,8 +40,11 @@ export default {
     mounted()
     {
         if (this.webpImagesEnabled) {
-            const matches = this.fallbackUrl?.match(/.?(\.\w+)(?:$|\?)/);
-            this.defaultImage = matches && (matches[1] === this.webpImageType) ? this.fallbackUrl : this.imageUrl;
+            const imgExtension = this.fallbackUrl?.match(/.?(\.\w+)(?:$|\?)/);
+
+            this.defaultImage = imgExtension && (imgExtension[1] === this.webpImageType)
+                ? this.fallbackUrl
+                : this.imageUrl;
         }
 
         detectWebP(((supported) =>
@@ -69,23 +74,24 @@ export default {
     },
 
     computed: {
-        /**
-         *  Determine appropriate image url to use as background source
-         */
         backgroundSource() {
-            return this.defaultImage && this.mimeTypeWebp
+            return this.defaultImage && (this.mimeType === this.webpMimeType)
                 ? this.webpBrowserSupport ? this.defaultImage : this.fallbackUrl
                 : this.defaultImage || this.fallbackUrl;
         },
-        /**
-        * Check if url points to a .webp image and return appropriate mime-type
-        */
-        mimeTypeWebp() {
-            const matches = this.defaultImage?.match(/.?(\.\w+)(?:$|\?)/);
-            return matches && (matches[1] === this.webpImageType) ? this.webpMimeType : null;
+        mimeType() {
+            const imgExtension = this.defaultImage?.match(/.?(\.\w+)(?:$|\?)/);
+
+            if (imgExtension) {
+                return imgExtension[1] === this.webpImageType
+                    ? this.webpMimeType
+                    : 'image/' + imgExtension[1].substring(1);
+            }
+
+            return '';
         },
         pictureSource() {
-            return this.mimeTypeWebp === this.webpMimeType
+            return this.mimeType === this.webpMimeType
                 ? (this.webpImagesEnabled && this.webpBrowserSupport) ? this.defaultImage : this.fallbackUrl
                 : this.fallbackUrl;
         }
