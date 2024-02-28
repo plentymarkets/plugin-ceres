@@ -13,7 +13,7 @@
 {% set canonicalUrl = services.url.getCanonicalURL() %}
 {% set languageUrls = services.url.getLanguageURLs() %}
 
-{% if forcedCanonicalUrl is defined %}
+{% if forcedCanonicalUrl is defined and forcedCanonical is not empty %}
     <link rel="canonical" href="{{ forcedCanonicalUrl }}">
 {% else %}
     {% if canonicalUrl is not null %}
