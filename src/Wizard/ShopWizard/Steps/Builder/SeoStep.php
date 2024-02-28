@@ -563,7 +563,7 @@ class SeoStep extends Step
                     "type"         => "select",
                     "defaultValue" => "false",
                     "options"      => [
-                        "name"          => "Wizard.itemRobotsChoose",
+                        "name"          => "Wizard.itemRobotsParameterChoose",
                         "listBoxValues" => $optionParameter
                     ]
                 ]
