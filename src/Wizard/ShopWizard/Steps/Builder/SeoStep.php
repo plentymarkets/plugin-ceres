@@ -39,7 +39,8 @@ class SeoStep extends Step
                 $this->generatePriceValidUntilMappingSection(),
                 $this->generateSkuMappingSection(),
                 $this->generateImageSeoMappingSection(),
-                $this->generateItemRobotsMappingSection()
+                $this->generateItemRobotsMappingSection(),
+                $this->generateItemCanonicalSection()
             ]
         ];
     }
@@ -565,6 +566,23 @@ class SeoStep extends Step
                     "options"      => [
                         "name"          => "Wizard.itemRobotsParameterChoose",
                         "listBoxValues" => $optionParameter
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    private function generateItemCanonicalSection():array
+    {
+        return [
+            "title"       => "Wizard.itemRobotsMapping",
+            "description" => "Wizard.itemRobotsMappingDescription",
+            "form"        => [
+                "seo_itemCanonical" => [
+                    "type"         => "text",
+                    "defaultValue" => "",
+                    "options"      => [
+                        "name"          => "Wizard.itemRobotsID",
                     ]
                 ]
             ]

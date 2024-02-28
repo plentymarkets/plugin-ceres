@@ -5046,6 +5046,22 @@
                         }
                     }
                 },
+                "itemCanonical.mapping": {
+                    "type": "verticalContainer",
+                    "label": "Config.itemCanonicalMapping",
+                    "options": {
+                        "containerEntries": {
+                            "itemCanonical.mapping.itemCanonicalID": {
+                                "type": "inputText",
+                                "required": false,
+                                "label": "Config.itemCanonicalID",
+                                "options": {
+                                    "defaultValue": ""
+                                }
+                            },
+                        }
+                    }
+                },
                 "imageSeo.mapping": {
                     "type": "verticalContainer",
                     "label": "Config.imageSeoMapping",

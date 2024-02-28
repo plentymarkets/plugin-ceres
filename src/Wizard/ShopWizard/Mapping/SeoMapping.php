@@ -237,6 +237,12 @@ class SeoMapping
             'global'   => false,
             'optional' => true
         ],
+        'seo_itemCanonical' => [
+            'field'    => 'itemCanonical.mapping.itemCanonicalID',
+            'type'     => 'string',
+            'global'   => false,
+            'optional' => true
+        ],
     ];
 
     /**

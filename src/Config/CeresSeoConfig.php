@@ -146,6 +146,6 @@ class CeresSeoConfig extends PluginConfig
         $this->itemRobotsMappingId = $this->getTextValue('itemRobots.mapping.itemRobotsID','');
         $value = $this->getTextValue('itemRobots.mapping.itemRobotsParameter','false');
         $this->itemRobotsMappingParameter = $value === 'true';
-        $this->itemCanonicalID = $this->getTextValue('item.itemCanonicalID','');
+        $this->itemCanonicalID = $this->getTextValue('itemCanonical.mapping.itemCanonicalID','');
     }
 }
