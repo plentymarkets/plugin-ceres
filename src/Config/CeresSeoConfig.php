@@ -145,5 +145,6 @@ class CeresSeoConfig extends PluginConfig
         $this->imageSeo = $this->getTextValue('imageSeo.mapping.image', 'url');
         $this->itemRobotsMapping = $this->getTextValue('itemRobots.mapping.itemRobots','all');
         $this->itemRobotsMappingId = $this->getTextValue('itemRobots.mapping.itemRobotsID','');
+        $this->itemRobotsMappingParameter = $this->getTextValue('itemRobots.mapping.itemRobotsParameter','no');
     }
 }
