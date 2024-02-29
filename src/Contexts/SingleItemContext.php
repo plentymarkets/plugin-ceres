@@ -307,6 +307,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
 
         $this->getLogger(__METHOD__)->error('debug', $data);
         if(!empty($canonicalUrl)){
+            $this->getLogger(__METHOD__)->error('debug2', $data);
             $this->forcedCanonicalUrl = $canonicalUrl;
         }
 
