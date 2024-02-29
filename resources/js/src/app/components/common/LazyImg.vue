@@ -60,18 +60,19 @@ export default {
     },
 
     watch:
+    {
+        defaultImage()
         {
-            defaultImage()
+            this.$nextTick(() =>
             {
-                this.$nextTick(() =>
-                {
-                    this.$el.setAttribute("data-loaded", 'false');
-                    lozad(this.$el).triggerLoad(this.$el);
-                });
-            }
-        },
+                this.$el.setAttribute("data-loaded", 'false');
+                lozad(this.$el).triggerLoad(this.$el);
+            });
+        }
+    },
 
-    computed: {
+    computed:
+    {
         /**
          *  Determine appropriate image url to use as background source
          */
