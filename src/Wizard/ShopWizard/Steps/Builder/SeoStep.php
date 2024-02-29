@@ -557,7 +557,7 @@ class SeoStep extends Step
                     "isVisible"    => "seo_itemRobots === 'varProp'",
                     "defaultValue" => "",
                     "options"      => [
-                        "name"          => "Wizard.itemRobotsID",
+                        "name"          => "Wizard.itemID",
                     ]
                 ],
                 "seo_itemRobotsParameter" => [
@@ -575,14 +575,14 @@ class SeoStep extends Step
     private function generateItemCanonicalSection():array
     {
         return [
-            "title"       => "Wizard.itemRobotsMapping",
-            "description" => "Wizard.itemRobotsMappingDescription",
+            "title"       => "Wizard.itemCanonicalMapping",
+            "description" => "Wizard.itemCanonicalMappingDescription",
             "form"        => [
                 "seo_itemCanonical" => [
                     "type"         => "text",
                     "defaultValue" => "",
                     "options"      => [
-                        "name"          => "Wizard.itemRobotsID",
+                        "name"          => "Wizard.itemID",
                     ]
                 ]
             ]
