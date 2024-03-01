@@ -10,7 +10,6 @@ use Plenty\Modules\Webshop\Helpers\UrlQuery;
 use Plenty\Plugin\ConfigRepository;
 use Plenty\Modules\Webshop\Contracts\ContactRepositoryContract;
 use Plenty\Modules\Category\Models\Category;
-use Plenty\Plugin\Log\Loggable;
 
 /**
  * Class SingleItemContext
@@ -21,7 +20,6 @@ use Plenty\Plugin\Log\Loggable;
  */
 class SingleItemContext extends GlobalContext implements ContextInterface
 {
-    use Loggable;
     /**
      * @var array $item Item data of the current item.
      */
@@ -298,16 +296,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $canonicalPropertyId = $this->ceresConfig->seo->itemCanonicalID;
         $canonicalUrl = $this->getVariationProperty($itemData['variationProperties'], $canonicalPropertyId);
 
-
-        $data = [
-            'propertyId' => $canonicalPropertyId,
-            'canonicalUrl' => $canonicalUrl,
-            'isEmpty' => empty($canonicalUrl)
-        ];
-
-        $this->getLogger(__METHOD__)->error('debug', $data);
         if(!empty($canonicalUrl)){
-            $this->getLogger(__METHOD__)->error('debug2', $data);
             $this->forcedCanonicalUrl = $canonicalUrl;
         }
 
