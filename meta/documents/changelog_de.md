@@ -16,7 +16,7 @@
 - In den Plugin-Einstellungen wurde die neue Einstellung **Quelle für das Bild in Rich Snippets für die Artikelseite wählen** im Bereich **SEO** hinzugefügt. Mit dieser Einstellung ist es nun möglich, die Bildergröße einzustellen, die über die Rich Snippets ausgeliefert wird.
 - Es wurde eine Möglichkeit hinzugefügt, Adressen als primäre Adresse festzulegen.
 - Die Ergebnisfelder für Artikel wurde um Tags erweitert.
-- Die Möglichkeit, mehrere Tracking-Links anzuzeigen, wenn die Option zum Aufteilen von Versandurls aktiviert ist
+- Die ShopBuilder-Widgets **Link** und **Auftragshistorie** bieten nun die Möglichkeit, mehrere Tracking-Links anzuzeigen, wenn die Einstellung **URLs splitten** im Menü **Einrichtung » Aufträge » Versand » Optionen** aktiviert ist.
 
 ### Geändert
 
