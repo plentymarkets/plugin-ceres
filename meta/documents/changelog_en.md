@@ -14,8 +14,8 @@
     - ***Important:*** This setting always applies to the whole header. This means that, as far as fixating header elements is concerned, it takes precedent over the configuration of any individual ShopBuilder widget.
     - ***Important:*** It may take time until Google Search Console reflects the improved CLS. Google Search Console uses a rolling average of the past 28 days. This means Google Search Console may only reflect the full impact of this change after high CLS values no longer contribute to the rolling average.
 - The plugin configuration now contains the new setting **Select source for image in Rich Snippets of the item page** in the **Header** section. You can use this setting to select the image size that is delivered via the Rich Snippets.
-- In den Plugin-Einstellungen wurden neue Einstellung für die **Robots** Angaben auf der Artikelseite im Bereich **SEO** hinzugefügt. Mit dieser Einstellung ist es nun möglich, das Robots Verhalten einzustellen.
-- In den Plugin-Einstellungen wurde die neue Einstellung **Quelle für eine Individuelle Canonical Url für die Artikelseite wählen** im Bereich **SEO** hinzugefügt. Mit dieser Einstellung ist es nun möglich, die Varianten auf eine andere Canonical zeigen zu lassen.
+- In the **SEO** section of the plentyShop LTS settings, a new setting has been added for the **Robots** on the single item page. With this setting it is now possible to set the robots behaviour for the single item view.
+- In the **SEO** section of the plentyShop LTS settings, the new setting **Select source for an individual canonical URL for the item page** has been added. With this setting, it is possible to have the variations point to a different canonical URL.
 - An option has been added to set addresses as the primary address.
 - The result fields for articles have been expanded to include tags.
 
