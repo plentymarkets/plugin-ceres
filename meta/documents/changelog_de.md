@@ -14,11 +14,10 @@
     - ***Wichtig:*** Die Einstellung betrifft den gesamten Header. Das bedeutet, dass sie für das Fixieren von Header-Elementen die Einstellungen einzelner ShopBuilder-Widgets überschreibt.
     - ***Wichtig:*** Es kann einige Zeit dauern bis die verbesserten CLS-Werte in Google Search Console reflektiert werden. Die Auswertung in Google Search Console bezieht sich auf den gleitenden Durchschnitt der vergangenen 28 Tage. Das bedeutet, dass die tatsächlichen Auswirkungen dieser Änderung erst in Google Search Console reflektiert werden, wenn hohe CLS-Werte nicht mehr Teil des gleitenden Durchschnitts sind.
 - In den Plugin-Einstellungen wurde die neue Einstellung **Quelle für das Bild in Rich Snippets für die Artikelseite wählen** im Bereich **SEO** hinzugefügt. Mit dieser Einstellung ist es nun möglich, die Bildergröße einzustellen, die über die Rich Snippets ausgeliefert wird.
-- In den Plugin-Einstellungen wurden neue Einstellung für die **Robots** Angaben auf der Artikelseite im Bereich **SEO** hinzugefügt. Mit dieser Einstellung ist es nun möglich, das Robots Verhalten einzustellen.
-- In den Plugin-Einstellungen wurde die neue Einstellung **Quelle für eine Individuelle Canonical Url für die Artikelseite wählen** im Bereich **SEO** hinzugefügt. Mit dieser Einstellung ist es nun möglich, die Varianten auf eine andere Canonical zeigen zu lassen.
+- Im Bereich **SEO** der plentyShop LTS-Einstellungen wurde eine neue Einstellung für die **Robots**-Angaben auf der Artikelseite hinzugefügt. Mit dieser Einstellung ist es nun möglich, das Robots-Verhalten einzustellen.
+- Im Bereich **SEO** der plentyShop LTS-Einstellungen wurde die neue Einstellung **Quelle für eine individuelle Canonical URL für die Artikelseite wählen** hinzugefügt. Mit dieser Einstellung ist es nun möglich, die Varianten auf eine andere Canonical URL zeigen zu lassen.
 - Es wurde eine Möglichkeit hinzugefügt, Adressen als primäre Adresse festzulegen.
 - Die Ergebnisfelder für Artikel wurde um Tags erweitert.
-
 
 ### Geändert
 
