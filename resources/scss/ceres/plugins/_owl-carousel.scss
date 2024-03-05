@@ -11,6 +11,7 @@
     /* position relative and z-index fix webkit rendering fonts issue */
     position: relative;
     display: none;
+    touch-action: manipulation; 
     width: 100%;
     -webkit-tap-highlight-color: transparent;
 

@@ -12,6 +12,7 @@
               <div class="container-max">
                 <div class="row position-relative">
             
+                    <slot name="breadcrumb"></slot>
 
                     <bkAddToWishlist :variation-id="currentVariation.variation.id"></bkAddToWishlist>
 

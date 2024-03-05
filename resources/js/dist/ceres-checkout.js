@@ -3934,6 +3934,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -45735,6 +45736,8 @@ var render = function() {
                     "div",
                     { staticClass: "row position-relative" },
                     [
+                      _vm._t("breadcrumb"),
+                      _vm._v(" "),
                       _c("bkAddToWishlist", {
                         attrs: {
                           "variation-id": _vm.currentVariation.variation.id
@@ -46317,7 +46320,7 @@ var render = function() {
                         ]
                       )
                     ],
-                    1
+                    2
                   )
                 ])
               ]),

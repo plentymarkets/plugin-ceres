@@ -9375,6 +9375,8 @@ html.ie .always-visible-search { // stylelint-disable-line selector-no-qualifyin
     /* position relative and z-index fix webkit rendering fonts issue */
     position: relative;
     display: none;
+    -ms-touch-action: manipulation;
+        touch-action: manipulation; 
     width: 100%;
     -webkit-tap-highlight-color: transparent;
 
