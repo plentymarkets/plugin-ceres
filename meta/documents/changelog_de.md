@@ -5,6 +5,7 @@
 ### TODO
 
 - Um die CLS-Werte deines Shops durch die neue Header-Option (s. **Hinzugefügt**) zu verbessern, öffne nach dem Update die Konfiguration des Plugins plentyShop-LTS. Öffne den Bereich **Header** und aktiviere die Einstellung **Header oben fixieren**. Wenn du prüfen möchtest, ob bei deinem Shop Verbesserungen der CLS-Werte möglich sind, kannst du öffentliche Dienste wie z.B. [PageSpeed Insights](https://pagespeed.web.dev/) verwenden.
+- Falls du externe Suchanbieter in deinem Shop nutzt, solltest du aufgrund der Anpassungen der Result Fields (s. **Geändert**) überprüfen, ob deine Kategorie- und Suchseiten weiterhin wie gewünscht angezeigt werden.
 
 ### Hinzugefügt
 
@@ -12,12 +13,16 @@
     - Im Assistenten von plentyShop LTS befindet sich dieselbe Einstellung im Schritt **Performance**.
     - ***Wichtig:*** Die Einstellung betrifft den gesamten Header. Das bedeutet, dass sie für das Fixieren von Header-Elementen die Einstellungen einzelner ShopBuilder-Widgets überschreibt.
     - ***Wichtig:*** Es kann einige Zeit dauern bis die verbesserten CLS-Werte in Google Search Console reflektiert werden. Die Auswertung in Google Search Console bezieht sich auf den gleitenden Durchschnitt der vergangenen 28 Tage. Das bedeutet, dass die tatsächlichen Auswirkungen dieser Änderung erst in Google Search Console reflektiert werden, wenn hohe CLS-Werte nicht mehr Teil des gleitenden Durchschnitts sind.
+- In den Plugin-Einstellungen wurde die neue Einstellung **Quelle für das Bild in Rich Snippets für die Artikelseite wählen** im Bereich **SEO** hinzugefügt. Mit dieser Einstellung ist es nun möglich, die Bildergröße einzustellen, die über die Rich Snippets ausgeliefert wird.
 - Es wurde eine Möglichkeit hinzugefügt, Adressen als primäre Adresse festzulegen.
 - Im Schritt **Performance** des plentyShop-Assistenten wurde die Möglichkeit hinzugefügt, das Umwandeln von Bildern in das WebP-Format zu aktivieren.
+- Die Ergebnisfelder für Artikel wurde um Tags erweitert.
+- Die ShopBuilder-Widgets **Link** und **Auftragshistorie** bieten nun die Möglichkeit, mehrere Tracking-Links anzuzeigen, wenn die Einstellung **URLs splitten** im Menü **Einrichtung » Aufträge » Versand » Optionen** aktiviert ist.
 
 ### Geändert
 
 - Durchschnittswert `feedbackDecimal` und Anzahl der Feedbacks `feedbackCount` in itemList- Ergebnisfeldern ergänzt.
+- Beim Ausführen von Suchen über externe Suchanbieter werden jetzt die normalen Resultfields der Kategorie für Listen benutzt.
 
 ### Angepasste Templates
 
@@ -28,6 +33,8 @@
 - [resources/views/Checkout/CheckoutView.twig](https://github.com/plentymarkets/plugin-ceres/pull/3457/files#diff-c74596cdf6d6196e3b9c8563916151e3a08a5edfa026845503c9169a0fcd8252)
 - [resources/views/Customer/Components/AddressSelect/AddressSelect.twig](https://github.com/plentymarkets/plugin-ceres/pull/3457/files#diff-969624803dfeb696a58e16de0d95c285a458ec83a615026882d9b1e65386935b)
 - [resources/views/MyAccount/MyAccountView.twig](https://github.com/plentymarkets/plugin-ceres/pull/3457/files#diff-dbc71118894a6415be3f82e4ee31dc1e6b7c3160b45b887ccce71f6620824d7c)
+- [resources/views/MyAccount/Components/OrderHistoryListItem.twig](https://github.com/plentymarkets/plugin-ceres/pull/3444/files#diff-5fe1a8ad88eb65339901273251de979410bc15369c08e8b9fcb687412c4d28ea)
+- [resources/views/Widgets/Common/LinkWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3444/files#diff-374f59a54ec3fcbe1d2444facbddd25c4f8a114e71b7576c9c34d7a20a2d122b)
 
 ## v5.0.61 (2023-10-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.60...5.0.61" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 

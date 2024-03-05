@@ -93,6 +93,13 @@ class SeoConfig
         "skuItemID"                   => "4",
     ];
 
+    private static $imageSeoOptions = [
+        "imageSeoUrl"                         => "url",
+        "imageSeoUrlPreview"                  => "urlPreview",
+        "imageSeoUrlSecondPreview"            => "urlSecondPreview",
+        "imageSeoUrlMiddle"                   => "urlMiddle",
+    ];
+
     /**
      * @return array
      */
@@ -187,5 +194,13 @@ class SeoConfig
     public static function getSkuOptions()
     {
         return self::$skuOptions;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getImageSeoOtions()
+    {
+        return self::$imageSeoOptions;
     }
 }

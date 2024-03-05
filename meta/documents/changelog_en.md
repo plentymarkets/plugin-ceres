@@ -5,6 +5,7 @@
 ### TODO
 
 - To improve the CLS of your shop with the new header option (see **Added**), open the plugin configuration of plentyShop LTS after updating. Then, open the **Header** section and activate **Fix header at the top of the page**. To check if CLS in your shop can be improved, you can use public services like [PageSpeed Insights](https://pagespeed.web.dev/).
+- If you use an external search provider in your shop, you should check whether your category and search pages are still displayed correctly due to the adjustments made to the result fields (see entry in the **Changed** section).
 
 ### Added
 
@@ -12,12 +13,16 @@
     - The plentyShop LTS assistant contains the same configuration in the **Performance** step.
     - ***Important:*** This setting always applies to the whole header. This means that, as far as fixating header elements is concerned, it takes precedent over the configuration of any individual ShopBuilder widget.
     - ***Important:*** It may take time until Google Search Console reflects the improved CLS. Google Search Console uses a rolling average of the past 28 days. This means Google Search Console may only reflect the full impact of this change after high CLS values no longer contribute to the rolling average.
+- The plugin configuration now contains the new setting **Select source for image in Rich Snippets of the item page** in the **Header** section. You can use this setting to select the image size that is delivered via the Rich Snippets.
 - An option has been added to set addresses as the primary address.
 - Added the capability to activate the conversion of images to the WebP format in the **Performance** step of the plentyShop assistant.
+- The result fields for articles have been expanded to include tags.
+- The ShopBuilder widgets **Link** and **Order history** now offer the possibility to display multiple tracking links if the **Split URLs** setting is activated in the **Setup » Orders » Shipping » Options** menu.
 
 ### Changed
 
 - Added average rating `feedbackDecimal` and number of feedbacks `feedbackCount` in item list result fields.
+- When executing a search via an external search provider, the normal result fields of the category are now used for lists.
 
 ### Changed Templates
 
@@ -28,6 +33,8 @@
 - [resources/views/Checkout/CheckoutView.twig](https://github.com/plentymarkets/plugin-ceres/pull/3457/files#diff-c74596cdf6d6196e3b9c8563916151e3a08a5edfa026845503c9169a0fcd8252)
 - [resources/views/Customer/Components/AddressSelect/AddressSelect.twig](https://github.com/plentymarkets/plugin-ceres/pull/3457/files#diff-969624803dfeb696a58e16de0d95c285a458ec83a615026882d9b1e65386935b)
 - [resources/views/MyAccount/MyAccountView.twig](https://github.com/plentymarkets/plugin-ceres/pull/3457/files#diff-dbc71118894a6415be3f82e4ee31dc1e6b7c3160b45b887ccce71f6620824d7c)
+- [resources/views/MyAccount/Components/OrderHistoryListItem.twig](https://github.com/plentymarkets/plugin-ceres/pull/3444/files#diff-5fe1a8ad88eb65339901273251de979410bc15369c08e8b9fcb687412c4d28ea)
+- [resources/views/Widgets/Common/LinkWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3444/files#diff-374f59a54ec3fcbe1d2444facbddd25c4f8a114e71b7576c9c34d7a20a2d122b)
 
 ## v5.0.61 (2023-10-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.60...5.0.61" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 

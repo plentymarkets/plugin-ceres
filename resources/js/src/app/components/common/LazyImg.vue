@@ -1,9 +1,10 @@
 <template>
-    <picture v-if="!isBackgroundImage" :data-iesrc="fallbackUrl || imageUrl" :data-picture-class="pictureClass" :data-alt="alt" :data-title="title">
+    <picture v-if="!isBackgroundImage" :data-iesrc="pictureSource" :data-picture-class="pictureClass" :data-alt="alt" :data-title="title">
         <slot name="additionalimages"></slot>
-        <source :srcset="imageUrl" :type="mimeType">
+        <source v-if="defaultImage === pictureSource" :srcset="defaultImage" :type="mimeTypeWebp">
         <source v-if="fallbackUrl" :srcset="fallbackUrl">
     </picture>
+
     <div v-else :data-background-image="backgroundSource" :class="pictureClass">
         <slot></slot>
     </div>
@@ -26,15 +27,27 @@ export default {
     data()
     {
         return {
-            supported: undefined
+            defaultImage: this.imageUrl,
+            webpImagesEnabled: App.config.global.webpImages,
+            webpImageType: '.webp',
+            webpMimeType: 'image/webp',
+            webpBrowserSupport: false,
+            imgRegex: /.?(\.\w+)(?:$|\?)/
         }
     },
 
     mounted()
     {
+        if (this.webpImagesEnabled) {
+            const matches = this.fallbackUrl?.match(this.imgRegex);
+            if (matches && (matches[1] === this.webpImageType)) {
+                this.defaultImage = this.fallbackUrl;
+            }
+        }
+
         detectWebP(((supported) =>
         {
-            this.supported = supported;
+            this.webpBrowserSupport = supported;
             this.$nextTick(() =>
             {
                 if(!this.isBackgroundImage)
@@ -48,40 +61,37 @@ export default {
 
     watch:
     {
-        imageUrl()
+        defaultImage()
         {
             this.$nextTick(() =>
             {
-                this.$el.setAttribute("data-loaded", false);
+                this.$el.setAttribute("data-loaded", 'false');
                 lozad(this.$el).triggerLoad(this.$el);
             });
         }
     },
 
-    computed: {
+    computed:
+    {
         /**
          *  Determine appropriate image url to use as background source
          */
         backgroundSource() {
-            if(this.imageUrl && this.mimeType){
-                return this.supported ? this.imageUrl : this.fallbackUrl;
-            } else {
-                return this.imageUrl || this.fallbackUrl;
-            }
+            return this.defaultImage && this.mimeTypeWebp
+                ? this.webpBrowserSupport ? this.defaultImage : this.fallbackUrl
+                : this.defaultImage || this.fallbackUrl;
         },
-
         /**
-         * Check if url points to a .webp image and return appropriate mime-type
-         */
-        mimeType() {
-            const matches = this.imageUrl?.match(/.?(\.\w+)(?:$|\?)/);
-
-            if(matches)
-            {
-                return matches[1] === ".webp" ? "image/webp" : null;
-            }
-
-            return null;
+        * Check if url points to a .webp image and return appropriate mime-type
+        */
+        mimeTypeWebp() {
+            const matches = this.defaultImage?.match(this.imgRegex);
+            return matches && (matches[1] === this.webpImageType) ? this.webpMimeType : null;
+        },
+        pictureSource() {
+            return this.mimeTypeWebp === this.webpMimeType
+                ? (this.webpImagesEnabled && this.webpBrowserSupport) ? this.defaultImage : this.fallbackUrl
+                : this.fallbackUrl;
         }
     }
 }
