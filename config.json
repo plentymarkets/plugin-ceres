@@ -5196,7 +5196,7 @@
                 "log.performance.webpConversion": {
                     "type": "checkBox",
                     "required": false,
-                    "label": "Config.logPerformanceWebpImagesEnabledLabel",
+                    "label": "Config.logPerformanceWebpConversionLabel",
                     "options": {
                         "defaultValue": "false"
                     }
