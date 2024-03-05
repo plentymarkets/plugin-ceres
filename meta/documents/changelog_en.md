@@ -5,6 +5,7 @@
 ### TODO
 
 - To improve the CLS of your shop with the new header option (see **Added**), open the plugin configuration of plentyShop LTS after updating. Then, open the **Header** section and activate **Fix header at the top of the page**. To check if CLS in your shop can be improved, you can use public services like [PageSpeed Insights](https://pagespeed.web.dev/).
+- To enable the automatic conversion of item images to WebP and use the converted images in the online shop, open the plentyShop LTS assistant, go to the **Performance** step and activate **Automatic conversion into modern image formats**.
 - If you use an external search provider in your shop, you should check whether your category and search pages are still displayed correctly due to the adjustments made to the result fields (see entry in the **Changed** section).
 
 ### Added

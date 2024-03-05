@@ -5,6 +5,7 @@
 ### TODO
 
 - Um die CLS-Werte deines Shops durch die neue Header-Option (s. **Hinzugefügt**) zu verbessern, öffne nach dem Update die Konfiguration des Plugins plentyShop-LTS. Öffne den Bereich **Header** und aktiviere die Einstellung **Header oben fixieren**. Wenn du prüfen möchtest, ob bei deinem Shop Verbesserungen der CLS-Werte möglich sind, kannst du öffentliche Dienste wie z.B. [PageSpeed Insights](https://pagespeed.web.dev/) verwenden.
+- Um die automatische WebP-Konvertierung zu aktivieren und damit WebP-Artikelbilder im Webshop zu nutzen, öffne den plentyShop LTS-Assistenten und aktiviere im Schritt **Performance** die Option **Automatische Konvertierung in moderne Bildformate aktivieren**.
 - Falls du externe Suchanbieter in deinem Shop nutzt, solltest du aufgrund der Anpassungen der Result Fields (s. **Geändert**) überprüfen, ob deine Kategorie- und Suchseiten weiterhin wie gewünscht angezeigt werden.
 
 ### Hinzugefügt
