@@ -5193,7 +5193,7 @@
                         "defaultValue": "true"
                     }
                 },
-                "log.performance.webp_images": {
+                "log.performance.webpConversion": {
                     "type": "checkBox",
                     "required": false,
                     "label": "Config.logPerformanceWebpImagesEnabledLabel",
