@@ -48,7 +48,7 @@ class PerformanceMapping
         "performance_webpConversion" => [
             "field"    => "log.performance.webpConversion",
             "type"     => "boolean",
-            "global"   => true,
+            "global"   => false,
             "optional" => true,
         ],
     ];

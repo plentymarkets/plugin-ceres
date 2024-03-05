@@ -110,6 +110,6 @@ class CeresGlobalConfig extends PluginConfig
         $this->registrationRequirePrivacyPolicyConfirmation = $this->getBooleanValue( 'global.registration_require_privacy_policy_confirmation', true );
         $this->blockCookies                = $this->getBooleanValue( 'global.block_cookies', true );
         $this->userDataHashMaxAge          = $this->getIntegerValue('global.user_data_hash_max_age', 24);
-        $this->webpImages                  = $this->getBooleanValue( 'global.webp_images', true );
+        $this->webpImages                  = $this->getBooleanValue( 'log.performance.webp_images', true );
     }
 }
