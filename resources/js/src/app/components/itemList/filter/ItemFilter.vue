@@ -1,27 +1,20 @@
 <template>
-     <div class="facet bkr-cc" :class="{ 'deliveryFacet': (facet.id == 11) }" v-if="facet.name">
-        <div v-if="facet.id != 11">
-          <div class="h3" v-html="facetName"></div>
-          <div class="facetValues" v-if="facet.type === 'price'">
+     <div class="facet" v-if="facet.name">
+        <div class="h3" @click="toggleFacet">
+            <span>{{ facetName }}<span v-if="activeValues > 0" v-html="' (' + activeValues + ')'"></span></span>
+            <svg :class="{'active': facetOpen }" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" class="toggleIcon"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+        <slide-up-down :duration="500" :active="facetOpen">
+          <div class="facetValues" :class="{'open': facetOpen }" v-if="facet.type === 'price'">
               <item-filter-price></item-filter-price>
           </div>
-          <div v-else class="facetValues">
-            <div class="facetValue" v-for="value in facets" :key="value.id">
-              <input :id="'option-' + value.id + '-' + _uid" class="form-check-input d-none" type="checkbox" :checked="isSelected(value.id)" @change="updateFacet(value)" :disabled="isLoading || value.count <= 0">
-              <label :for="'option-' + value.id + '-' + _uid" class="form-check-label" :class="[paddingClasses, isSelected(value.id) ? 'bg-appearance' : '', 'option-' + value.id]" :style="paddingInlineStyles" v-html="value.name"></label>
+          <div class="facetValues" :class="{'open': facetOpen }" v-else>
+            <div class="facetValue" :class="{'selected': value.selected}" v-for="value in facets" :key="value.id">
+              <input :id="'option-' + value.id + '-' + _uid" class="facet-value-input d-none" type="checkbox" :checked="isSelected(value.id)" @change="updateFacet(value)" :disabled="isLoading || value.count <= 0">
+              <label :for="'option-' + value.id + '-' + _uid" class="facet-value-label" :class="[paddingClasses, isSelected(value.id) ? 'bg-appearance' : '', 'option-' + value.id]" :style="paddingInlineStyles" v-html="value.name"></label>
             </div>
           </div>
-        </div>
-        <div v-else class="deliverySwitchContainer">
-          <div class="deliverySwitch btn btn-sm btn-bkm delivery" :class="{ 'active': isSelected(123) }">
-            <label v-if="!isLoading"  for="instantDeliverySwitch">
-              <span>Sofort lieferbar</span>
-            </label>
-            <label v-else for="instantDeliverySwitch" v-html="'Wird geladen...'"></label>
-            <input type="checkbox" :checked="isSelected(123)" @change="updateFacet({ id: 123 })" class="switch" id="instantDeliverySwitch">
-          </div>
-          <!-- info link hidden for now -->
-        </div>
+        </slide-up-down>
       </div>
 </template>
 
@@ -36,6 +29,13 @@ export default {
     components:
     {
         ItemFilterPrice
+    },
+
+    data()
+    {
+        return {
+            facetOpen: false,
+        };
     },
 
     props:
@@ -73,6 +73,11 @@ export default {
             return this.facet.name;
         },
 
+        activeValues()
+        {
+            return this.facets.filter(facet => facet.selected).length;
+        },
+
         ...mapState({
             selectedFacets: state => state.itemList.selectedFacets,
             isLoading: state => state.itemList.isLoading
@@ -82,7 +87,9 @@ export default {
     methods:
     {
         updateFacet(facetValue)
-        {
+        {   
+            facetValue.selected = true;
+
             const toolbarElements = document.getElementsByClassName("bkFilters");
 
             for (const toolbarElement of toolbarElements)
@@ -90,17 +97,29 @@ export default {
                 if (toolbarElement.contains(this.$vnode.elm))
                 {
                     window.localStorage.setItem("openFilterToolbar", true);
-                    console.log("LOCSTORAGE updated open");
                 }
             }
 
             this.$store.dispatch("selectFacet", { facetValue });
         },
 
+        toggleFacet() 
+        {
+            this.facetOpen = !this.facetOpen;
+        },
+
         isSelected(facetValueId)
         {
             return this.selectedFacets.findIndex(selectedFacet => selectedFacet.id === facetValueId) > -1;
         }
+    },
+    
+    mounted: function () {
+        this.$nextTick(function () {
+            if(this.activeValues > 0) {
+                this.facetOpen = true;
+            }
+        })
     }
 }
 </script>

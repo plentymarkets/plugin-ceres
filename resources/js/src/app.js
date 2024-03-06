@@ -34,6 +34,7 @@ import SingleItemSetComponent from "./app/components/item/SingleItemSetComponent
 
 // EXTERNAL
 import LazyHydrate from "vue-lazy-hydration";
+import SlideUpDown from 'vue-slide-up-down'
 import ClientOnly from "./app/components/common/ClientOnly.vue";
 import script2 from "./app/plugins/script2";
 
@@ -179,6 +180,7 @@ export function beforeCreate(context)
 
     // EXTERNAL
     Vue.component("lazy-hydrate", LazyHydrate);
+    Vue.component("slide-up-down", SlideUpDown)
     Vue.use(script2);
 
     Vue.prototype.$translate = TranslationService.translate;

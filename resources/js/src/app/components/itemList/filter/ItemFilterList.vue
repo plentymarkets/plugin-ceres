@@ -1,28 +1,32 @@
 <template>
     <div class="bkFilters bkr-cc" v-show="facets && facets.length > 0">
-        <item-filter v-for="facet in facets.filter(function (facet) { return (facet.id == 11) })" :facet="facet" :key="facet.id"></item-filter>
 
-        <a class="btn btn-sm btn-bkm-inverted facetToggleButton" data-toggle="collapse" href="#filter-collapse__item-filter-list_" aria-expanded="false" aria-controls="filter-collapse__item-filter-list_">
-          <i class="fa fa-sliders default-float mr-2" aria-hidden="true"></i> {{ $translate("Ceres::Template.itemFilter") }}
+        <div class="filterShadow" @click="toggleFilter" v-if="filterOpen"></div>
+
+        <a class="btn btn-sm btn-bkm-inverted facetToggleButton" :class="{'active': activeFacets > 0 }" @click="toggleFilter">
+          <i class="fa fa-sliders default-float mr-2" aria-hidden="true"></i> {{ $translate("Ceres::Template.itemFilter") }} <span v-if="activeFacets > 0" v-html="' (' + activeFacets + ')'"></span>
         </a>
 
         <div class="filter-wrapper">
-            <div v-open-filter-toolbar class="filter-collapse collapse" id="filter-collapse__item-filter-list_">
+            <div @defaultOpen="toggleFilter" class="filter-collapse" :class="{'show': filterOpen}">
+                <div class="filterLoading" v-if="isLoading">
+                    <div class="bkLoading"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                </div>
               <div class="page-content component-loading" :class="{ 'isLoading': isLoading }">
+                  <span class="filterHeading">Filtern</span>
                   <div class="facetOutter" :selectedFactes="selectedFacets.length">
-                      <item-filter v-for="facet in facets" :facet="facet" :key="facet.id" v-if="facet.id != 11"></item-filter>
-                      <div class="facet">
-                          <div class="h3">{{ $translate("biokinderDesign::Template.itemListSort") }}</div>
-                          <slot name="sorting-box"></slot>
-                      </div>
+                      <item-filter v-for="facet in facets" :facet="facet" :key="facet.id"></item-filter>
                   </div>
-                  <div class="row filterBtnRow">
-                      <div class="col-12 text-right">
-                          <button type="button" class="btn btn-bkm btn-medium-large applyFilterButton" data-toggle="collapse" href="#filter-collapse__item-filter-list_" aria-controls="filter-collapse__item-filter-list_">
-                            <span>{{ $translate("Ceres::Template.itemClose") }}&nbsp;</span>
-                            <i class="fa fa-times ml-2" aria-hidden="true"></i>
-                          </button>
-                      </div>
+                  <div class="filterBtnRow">
+                        <button type="button" class="btn btn-bkm mb-2 applyFilterButton" @click="toggleFilter">
+                            <span>Suchergebnis</span>
+                            <i class="fa fa-arrow-right ml-2" aria-hidden="true"></i>
+                        </button>
+
+                        <button type="button" class="btn btn-bkm-inverted btn-sm applyFilterButton" @click="resetAllTags">
+                            <span>Zurücksetzen</span>
+                            <i class="fa fa-refresh ml-2" aria-hidden="true"></i>
+                        </button>
                   </div>
               </div>
             </div>
@@ -31,7 +35,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 import ItemFilter from "./ItemFilter.vue";
 import { ComponentIdMixin } from "../../../mixins/componentId.mixin";
 
@@ -45,6 +49,13 @@ export default {
     },
 
     mixins: [ComponentIdMixin], // Experimental mixin, may be removed in the future.
+    
+    data()
+    {
+        return {
+            filterOpen: false,
+        };
+    },
 
     props: {
         filterListBulk: Boolean,
@@ -75,6 +86,11 @@ export default {
 
     computed:
     {
+        activeFacets() 
+        {
+            return this.selectedFacets.length;
+        },
+
         ...mapState({
             facets(state)
             {
@@ -89,6 +105,26 @@ export default {
             isLoading: state => state.itemList.isLoading,
             selectedFacets: state => state.itemList.selectedFacets
         })
+    },
+
+    methods: {
+        toggleFilter()
+        {
+            this.filterOpen = !this.filterOpen;
+        },
+        resetAllTags()
+        {
+            this.resetAllSelectedFacets();
+            this.loadItemList();
+        },
+        ...mapMutations([
+            "resetAllSelectedFacets"
+        ]),
+
+        ...mapActions([
+            "selectFacet",
+            "loadItemList"
+        ])
     },
 
     created()

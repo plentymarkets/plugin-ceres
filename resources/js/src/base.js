@@ -132,6 +132,8 @@ Vue.component("single-item-set-component", SingleItemSetComponent);
 
 import LazyHydrate from "vue-lazy-hydration";
 Vue.component("lazy-hydrate", LazyHydrate);
+import SlideUpDown from "vue-slide-up-down";
+Vue.component("slide-up-down", SlideUpDown);
 import ClientOnly from "./app/components/common/ClientOnly.vue";
 Vue.component("client-only", ClientOnly);
 import BackgroundImg from "./app/components/common/BackgroundImg.vue";

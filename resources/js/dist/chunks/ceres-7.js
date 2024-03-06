@@ -17,14 +17,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_array_find_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.find-index.js */ "./node_modules/core-js/modules/es.array.find-index.js");
-/* harmony import */ var core_js_modules_es_array_find_index_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_index_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_array_find_index_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.find-index.js */ "./node_modules/core-js/modules/es.array.find-index.js");
+/* harmony import */ var core_js_modules_es_array_find_index_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_index_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
 /* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
@@ -92,19 +92,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-filter",
   components: {
     ItemFilterPrice: _ItemFilterPrice_vue__WEBPACK_IMPORTED_MODULE_17__["default"]
+  },
+  data: function data() {
+    return {
+      facetOpen: false
+    };
   },
   props: {
     facet: {
@@ -129,6 +127,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       return this.facet.name;
+    },
+    activeValues: function activeValues() {
+      return this.facets.filter(function (facet) {
+        return facet.selected;
+      }).length;
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_16__["mapState"])({
     selectedFacets: function selectedFacets(state) {
@@ -140,6 +143,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   })),
   methods: {
     updateFacet: function updateFacet(facetValue) {
+      facetValue.selected = true;
       var toolbarElements = document.getElementsByClassName("bkFilters");
 
       var _iterator = _createForOfIteratorHelper(toolbarElements),
@@ -151,7 +155,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
           if (toolbarElement.contains(this.$vnode.elm)) {
             window.localStorage.setItem("openFilterToolbar", true);
-            console.log("LOCSTORAGE updated open");
           }
         }
       } catch (err) {
@@ -164,11 +167,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         facetValue: facetValue
       });
     },
+    toggleFacet: function toggleFacet() {
+      this.facetOpen = !this.facetOpen;
+    },
     isSelected: function isSelected(facetValueId) {
       return this.selectedFacets.findIndex(function (selectedFacet) {
         return selectedFacet.id === facetValueId;
       }) > -1;
     }
+  },
+  mounted: function mounted() {
+    this.$nextTick(function () {
+      if (this.activeValues > 0) {
+        this.facetOpen = true;
+      }
+    });
   }
 });
 
@@ -249,6 +262,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -259,6 +276,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   mixins: [_mixins_componentId_mixin__WEBPACK_IMPORTED_MODULE_10__["ComponentIdMixin"]],
   // Experimental mixin, may be removed in the future.
+  data: function data() {
+    return {
+      filterOpen: false
+    };
+  },
   props: {
     filterListBulk: Boolean,
     facetData: {
@@ -282,7 +304,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       default: null
     }
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapState"])({
+  computed: _objectSpread({
+    activeFacets: function activeFacets() {
+      return this.selectedFacets.length;
+    }
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapState"])({
     facets: function facets(state) {
       var _this = this;
 
@@ -301,6 +327,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return state.itemList.selectedFacets;
     }
   })),
+  methods: _objectSpread(_objectSpread({
+    toggleFilter: function toggleFilter() {
+      this.filterOpen = !this.filterOpen;
+    },
+    resetAllTags: function resetAllTags() {
+      this.resetAllSelectedFacets();
+      this.loadItemList();
+    }
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapMutations"])(["resetAllSelectedFacets"])), Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapActions"])(["selectFacet", "loadItemList"])),
   created: function created() {
     var _this$$store$state$it;
 
@@ -444,100 +479,106 @@ var render = function() {
   return _vm.facet.name
     ? _c(
         "div",
-        {
-          staticClass: "facet bkr-cc",
-          class: { deliveryFacet: _vm.facet.id == 11 }
-        },
+        { staticClass: "facet" },
         [
-          _vm.facet.id != 11
-            ? _c("div", [
-                _c("div", {
-                  staticClass: "h3",
-                  domProps: { innerHTML: _vm._s(_vm.facetName) }
-                }),
-                _vm._v(" "),
-                _vm.facet.type === "price"
-                  ? _c(
-                      "div",
-                      { staticClass: "facetValues" },
-                      [_c("item-filter-price")],
-                      1
-                    )
-                  : _c(
-                      "div",
-                      { staticClass: "facetValues" },
-                      _vm._l(_vm.facets, function(value) {
-                        return _c(
-                          "div",
-                          { key: value.id, staticClass: "facetValue" },
-                          [
-                            _c("input", {
-                              staticClass: "form-check-input d-none",
-                              attrs: {
-                                id: "option-" + value.id + "-" + _vm._uid,
-                                type: "checkbox",
-                                disabled: _vm.isLoading || value.count <= 0
-                              },
-                              domProps: { checked: _vm.isSelected(value.id) },
-                              on: {
-                                change: function($event) {
-                                  return _vm.updateFacet(value)
-                                }
+          _c("div", { staticClass: "h3", on: { click: _vm.toggleFacet } }, [
+            _c("span", [
+              _vm._v(_vm._s(_vm.facetName)),
+              _vm.activeValues > 0
+                ? _c("span", {
+                    domProps: {
+                      innerHTML: _vm._s(" (" + _vm.activeValues + ")")
+                    }
+                  })
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c(
+              "svg",
+              {
+                staticClass: "toggleIcon",
+                class: { active: _vm.facetOpen },
+                attrs: {
+                  viewBox: "0 0 24 24",
+                  width: "24",
+                  height: "24",
+                  stroke: "currentColor",
+                  "stroke-width": "3",
+                  fill: "none",
+                  "stroke-linecap": "round",
+                  "stroke-linejoin": "round"
+                }
+              },
+              [_c("polyline", { attrs: { points: "6 9 12 15 18 9" } })]
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "slide-up-down",
+            { attrs: { duration: 500, active: _vm.facetOpen } },
+            [
+              _vm.facet.type === "price"
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "facetValues",
+                      class: { open: _vm.facetOpen }
+                    },
+                    [_c("item-filter-price")],
+                    1
+                  )
+                : _c(
+                    "div",
+                    {
+                      staticClass: "facetValues",
+                      class: { open: _vm.facetOpen }
+                    },
+                    _vm._l(_vm.facets, function(value) {
+                      return _c(
+                        "div",
+                        {
+                          key: value.id,
+                          staticClass: "facetValue",
+                          class: { selected: value.selected }
+                        },
+                        [
+                          _c("input", {
+                            staticClass: "facet-value-input d-none",
+                            attrs: {
+                              id: "option-" + value.id + "-" + _vm._uid,
+                              type: "checkbox",
+                              disabled: _vm.isLoading || value.count <= 0
+                            },
+                            domProps: { checked: _vm.isSelected(value.id) },
+                            on: {
+                              change: function($event) {
+                                return _vm.updateFacet(value)
                               }
-                            }),
-                            _vm._v(" "),
-                            _c("label", {
-                              staticClass: "form-check-label",
-                              class: [
-                                _vm.paddingClasses,
-                                _vm.isSelected(value.id) ? "bg-appearance" : "",
-                                "option-" + value.id
-                              ],
-                              style: _vm.paddingInlineStyles,
-                              attrs: {
-                                for: "option-" + value.id + "-" + _vm._uid
-                              },
-                              domProps: { innerHTML: _vm._s(value.name) }
-                            })
-                          ]
-                        )
-                      }),
-                      0
-                    )
-              ])
-            : _c("div", { staticClass: "deliverySwitchContainer" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "deliverySwitch btn btn-sm btn-bkm delivery",
-                    class: { active: _vm.isSelected(123) }
-                  },
-                  [
-                    !_vm.isLoading
-                      ? _c(
-                          "label",
-                          { attrs: { for: "instantDeliverySwitch" } },
-                          [_c("span", [_vm._v("Sofort lieferbar")])]
-                        )
-                      : _c("label", {
-                          attrs: { for: "instantDeliverySwitch" },
-                          domProps: { innerHTML: _vm._s("Wird geladen...") }
-                        }),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "switch",
-                      attrs: { type: "checkbox", id: "instantDeliverySwitch" },
-                      domProps: { checked: _vm.isSelected(123) },
-                      on: {
-                        change: function($event) {
-                          return _vm.updateFacet({ id: 123 })
-                        }
-                      }
-                    })
-                  ]
-                )
-              ])
-        ]
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("label", {
+                            staticClass: "facet-value-label",
+                            class: [
+                              _vm.paddingClasses,
+                              _vm.isSelected(value.id) ? "bg-appearance" : "",
+                              "option-" + value.id
+                            ],
+                            style: _vm.paddingInlineStyles,
+                            attrs: {
+                              for: "option-" + value.id + "-" + _vm._uid
+                            },
+                            domProps: { innerHTML: _vm._s(value.name) }
+                          })
+                        ]
+                      )
+                    }),
+                    0
+                  )
+            ]
+          )
+        ],
+        1
       )
     : _vm._e()
 }
@@ -577,25 +618,19 @@ var render = function() {
       staticClass: "bkFilters bkr-cc"
     },
     [
-      _vm._l(
-        _vm.facets.filter(function(facet) {
-          return facet.id == 11
-        }),
-        function(facet) {
-          return _c("item-filter", { key: facet.id, attrs: { facet: facet } })
-        }
-      ),
+      _vm.filterOpen
+        ? _c("div", {
+            staticClass: "filterShadow",
+            on: { click: _vm.toggleFilter }
+          })
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "a",
         {
           staticClass: "btn btn-sm btn-bkm-inverted facetToggleButton",
-          attrs: {
-            "data-toggle": "collapse",
-            href: "#filter-collapse__item-filter-list_",
-            "aria-expanded": "false",
-            "aria-controls": "filter-collapse__item-filter-list_"
-          }
+          class: { active: _vm.activeFacets > 0 },
+          on: { click: _vm.toggleFilter }
         },
         [
           _c("i", {
@@ -603,10 +638,13 @@ var render = function() {
             attrs: { "aria-hidden": "true" }
           }),
           _vm._v(
-            " " +
-              _vm._s(_vm.$translate("Ceres::Template.itemFilter")) +
-              "\n    "
-          )
+            " " + _vm._s(_vm.$translate("Ceres::Template.itemFilter")) + " "
+          ),
+          _vm.activeFacets > 0
+            ? _c("span", {
+                domProps: { innerHTML: _vm._s(" (" + _vm.activeFacets + ")") }
+              })
+            : _vm._e()
         ]
       ),
       _vm._v(" "),
@@ -614,13 +652,15 @@ var render = function() {
         _c(
           "div",
           {
-            directives: [
-              { name: "open-filter-toolbar", rawName: "v-open-filter-toolbar" }
-            ],
-            staticClass: "filter-collapse collapse",
-            attrs: { id: "filter-collapse__item-filter-list_" }
+            staticClass: "filter-collapse",
+            class: { show: _vm.filterOpen },
+            on: { defaultOpen: _vm.toggleFilter }
           },
           [
+            _vm.isLoading
+              ? _c("div", { staticClass: "filterLoading" }, [_vm._m(0)])
+              : _vm._e(),
+            _vm._v(" "),
             _c(
               "div",
               {
@@ -628,85 +668,86 @@ var render = function() {
                 class: { isLoading: _vm.isLoading }
               },
               [
+                _c("span", { staticClass: "filterHeading" }, [
+                  _vm._v("Filtern")
+                ]),
+                _vm._v(" "),
                 _c(
                   "div",
                   {
                     staticClass: "facetOutter",
                     attrs: { selectedFactes: _vm.selectedFacets.length }
                   },
-                  [
-                    _vm._l(_vm.facets, function(facet) {
-                      return facet.id != 11
-                        ? _c("item-filter", {
-                            key: facet.id,
-                            attrs: { facet: facet }
-                          })
-                        : _vm._e()
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "facet" },
-                      [
-                        _c("div", { staticClass: "h3" }, [
-                          _vm._v(
-                            _vm._s(
-                              _vm.$translate(
-                                "biokinderDesign::Template.itemListSort"
-                              )
-                            )
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _vm._t("sorting-box")
-                      ],
-                      2
-                    )
-                  ],
-                  2
+                  _vm._l(_vm.facets, function(facet) {
+                    return _c("item-filter", {
+                      key: facet.id,
+                      attrs: { facet: facet }
+                    })
+                  }),
+                  1
                 ),
                 _vm._v(" "),
-                _c("div", { staticClass: "row filterBtnRow" }, [
-                  _c("div", { staticClass: "col-12 text-right" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "btn btn-bkm btn-medium-large applyFilterButton",
-                        attrs: {
-                          type: "button",
-                          "data-toggle": "collapse",
-                          href: "#filter-collapse__item-filter-list_",
-                          "aria-controls": "filter-collapse__item-filter-list_"
-                        }
-                      },
-                      [
-                        _c("span", [
-                          _vm._v(
-                            _vm._s(
-                              _vm.$translate("Ceres::Template.itemClose")
-                            ) + " "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("i", {
-                          staticClass: "fa fa-times ml-2",
-                          attrs: { "aria-hidden": "true" }
-                        })
-                      ]
-                    )
-                  ])
+                _c("div", { staticClass: "filterBtnRow" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-bkm mb-2 applyFilterButton",
+                      attrs: { type: "button" },
+                      on: { click: _vm.toggleFilter }
+                    },
+                    [
+                      _c("span", [_vm._v("Suchergebnis")]),
+                      _vm._v(" "),
+                      _c("i", {
+                        staticClass: "fa fa-arrow-right ml-2",
+                        attrs: { "aria-hidden": "true" }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "btn btn-bkm-inverted btn-sm applyFilterButton",
+                      attrs: { type: "button" },
+                      on: { click: _vm.resetAllTags }
+                    },
+                    [
+                      _c("span", [_vm._v("Zurücksetzen")]),
+                      _vm._v(" "),
+                      _c("i", {
+                        staticClass: "fa fa-refresh ml-2",
+                        attrs: { "aria-hidden": "true" }
+                      })
+                    ]
+                  )
                 ])
               ]
             )
           ]
         )
       ])
-    ],
-    2
+    ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "bkLoading" }, [
+      _c("div"),
+      _c("div"),
+      _c("div"),
+      _c("div"),
+      _c("div"),
+      _c("div"),
+      _c("div"),
+      _c("div")
+    ])
+  }
+]
 render._withStripped = true
 
 
