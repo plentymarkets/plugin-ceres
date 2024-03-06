@@ -5,6 +5,7 @@
 ### TODO
 
 - To improve the CLS of your shop with the new header option (see **Added**), open the plugin configuration of plentyShop LTS after updating. Then, open the **Header** section and activate **Fix header at the top of the page**. To check if CLS in your shop can be improved, you can use public services like [PageSpeed Insights](https://pagespeed.web.dev/).
+- To enable the automatic conversion of item images to WebP and use the converted images in the online shop, open the plentyShop LTS assistant, go to the **Performance** step and activate **Automatic conversion into modern image formats**.
 - If you use an external search provider in your shop, you should check whether your category and search pages are still displayed correctly due to the adjustments made to the result fields (see entry in the **Changed** section).
 
 ### Added
@@ -15,6 +16,7 @@
     - ***Important:*** It may take time until Google Search Console reflects the improved CLS. Google Search Console uses a rolling average of the past 28 days. This means Google Search Console may only reflect the full impact of this change after high CLS values no longer contribute to the rolling average.
 - The plugin configuration now contains the new setting **Select source for image in Rich Snippets of the item page** in the **Header** section. You can use this setting to select the image size that is delivered via the Rich Snippets.
 - An option has been added to set addresses as the primary address.
+- Added the capability to activate the conversion of images to the WebP format in the **Performance** step of the plentyShop assistant.
 - The result fields for articles have been expanded to include tags.
 - The ShopBuilder widgets **Link** and **Order history** now offer the possibility to display multiple tracking links if the **Split URLs** setting is activated in the **Setup » Orders » Shipping » Options** menu.
 
