@@ -186,14 +186,6 @@
                     "options": {
                         "defaultValue": "true"
                     }
-                },
-                "global.webp_images": {
-                    "type": "checkBox",
-                    "required": false,
-                    "label": "Config.globalWebpImagesEnabledLabel",
-                    "options": {
-                        "defaultValue": "false"
-                    }
                 }
             }
         },
@@ -5284,6 +5276,14 @@
                     "label": "Config.logPerformanceEventPropagation",
                     "options": {
                         "defaultValue": "true"
+                    }
+                },
+                "log.performance.webpConversion": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.logPerformanceWebpConversionLabel",
+                    "options": {
+                        "defaultValue": "false"
                     }
                 }
             }

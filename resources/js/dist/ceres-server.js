@@ -2881,13 +2881,26 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      defaultImage: this.imageUrl,
       webpImagesEnabled: App.config.global.webpImages,
+      webpImageType: '.webp',
       webpMimeType: 'image/webp',
-      webpBrowserSupport: false
+      webpBrowserSupport: false,
+      imgRegex: /.?(\.\w+)(?:$|\?)/
     };
   },
   mounted: function mounted() {
     var _this = this;
+
+    if (this.webpImagesEnabled) {
+      var _this$fallbackUrl;
+
+      var matches = (_this$fallbackUrl = this.fallbackUrl) === null || _this$fallbackUrl === void 0 ? void 0 : _this$fallbackUrl.match(this.imgRegex);
+
+      if (matches && matches[1] === this.webpImageType) {
+        this.defaultImage = this.fallbackUrl;
+      }
+    }
 
     Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_3__["detectWebP"])(function (supported) {
       _this.webpBrowserSupport = supported;
@@ -2902,11 +2915,11 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   watch: {
-    imageUrl: function imageUrl() {
+    defaultImage: function defaultImage() {
       var _this2 = this;
 
       this.$nextTick(function () {
-        _this2.$el.setAttribute("data-loaded", false);
+        _this2.$el.setAttribute("data-loaded", 'false');
 
         Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_2__["default"])(_this2.$el).triggerLoad(_this2.$el);
       });
@@ -2917,20 +2930,20 @@ __webpack_require__.r(__webpack_exports__);
      *  Determine appropriate image url to use as background source
      */
     backgroundSource: function backgroundSource() {
-      return this.imageUrl && this.mimeTypeWebp ? this.webpBrowserSupport ? this.imageUrl : this.fallbackUrl : this.imageUrl || this.fallbackUrl;
+      return this.defaultImage && this.mimeTypeWebp ? this.webpBrowserSupport ? this.defaultImage : this.fallbackUrl : this.defaultImage || this.fallbackUrl;
     },
 
     /**
     * Check if url points to a .webp image and return appropriate mime-type
     */
     mimeTypeWebp: function mimeTypeWebp() {
-      var _this$imageUrl;
+      var _this$defaultImage;
 
-      var matches = (_this$imageUrl = this.imageUrl) === null || _this$imageUrl === void 0 ? void 0 : _this$imageUrl.match(/.?(\.\w+)(?:$|\?)/);
-      return matches && matches[1] === '.webp' ? this.webpMimeType : null;
+      var matches = (_this$defaultImage = this.defaultImage) === null || _this$defaultImage === void 0 ? void 0 : _this$defaultImage.match(this.imgRegex);
+      return matches && matches[1] === this.webpImageType ? this.webpMimeType : null;
     },
     pictureSource: function pictureSource() {
-      return this.mimeTypeWebp === this.webpMimeType ? this.webpImagesEnabled && this.webpBrowserSupport ? this.imageUrl : this.fallbackUrl : this.fallbackUrl;
+      return this.mimeTypeWebp === this.webpMimeType ? this.webpImagesEnabled && this.webpBrowserSupport ? this.defaultImage : this.fallbackUrl : this.fallbackUrl;
     }
   }
 });
@@ -43603,9 +43616,9 @@ var render = function() {
           _vm._t("additionalimages"),
           _vm._ssrNode(
             " " +
-              (_vm.imageUrl === _vm.pictureSource
+              (_vm.defaultImage === _vm.pictureSource
                 ? "<source" +
-                  _vm._ssrAttr("srcset", _vm.imageUrl) +
+                  _vm._ssrAttr("srcset", _vm.defaultImage) +
                   _vm._ssrAttr("type", _vm.mimeTypeWebp) +
                   ">"
                 : "<!---->") +

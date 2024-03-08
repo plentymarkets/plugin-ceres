@@ -42,7 +42,12 @@
             </div>
             <div class="col-md-2">
                 <div class="icons d-none d-md-block">
-                    <a v-if="!!order.trackingURL" :href="order.trackingURL" @click.stop target="_blank" rel="noopener">
+                    <a
+                        v-if="!!order.trackingURLs"
+                        v-for="trackingURL in order.trackingURLs"
+                        :href="trackingURL"
+                        @click.stop target="_blank" rel="noopener"
+                    >
                         <i class="fa fa-truck fa-flip-horizontal text-primary text-appearance" aria-hidden="true" v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans('Ceres::Template.orderHistoryTracking') }}"></i>
                     </a>
                     <a v-if="!!order.confirmationURL" :href="order.confirmationURL" @click.stop target="_blank" rel="noopener">
@@ -56,7 +61,15 @@
                     #}
                 </div>
                 <div class="buttons d-block d-md-none mt-2">
-                    <a v-if="!!order.trackingURL" :href="order.trackingURL" @click.stop target="_blank" rel="noopener" class="btn btn-block btn-primary btn-appearance">
+                    <a
+                        v-if="!!order.trackingURLs"
+                        v-for="trackingURL in order.trackingURLs"
+                        :href="trackingURL"
+                        @click.stop
+                        target="_blank"
+                        rel="noopener"
+                        class="btn btn-block btn-primary btn-appearance"
+                     >
                         <span>{{ trans("Ceres::Template.orderHistoryTracking") }}</span>
                         <i class="fa fa-truck fa-flip-horizontal" aria-hidden="true"></i>
                     </a>

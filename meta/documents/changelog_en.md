@@ -5,6 +5,7 @@
 ### TODO
 
 - To improve the CLS of your shop with the new header option (see **Added**), open the plugin configuration of plentyShop LTS after updating. Then, open the **Header** section and activate **Fix header at the top of the page**. To check if CLS in your shop can be improved, you can use public services like [PageSpeed Insights](https://pagespeed.web.dev/).
+- To enable the automatic conversion of item images to WebP and use the converted images in the online shop, open the plentyShop LTS assistant, go to the **Performance** step and activate **Automatic conversion into modern image formats**.
 - If you use an external search provider in your shop, you should check whether your category and search pages are still displayed correctly due to the adjustments made to the result fields (see entry in the **Changed** section).
 
 ### Added
@@ -17,7 +18,9 @@
 - In the **SEO** section of the plentyShop LTS settings, a new setting has been added for the **Robots** on the single item page. With this setting it is now possible to set the robots behaviour for the single item view.
 - In the **SEO** section of the plentyShop LTS settings, the new setting **Select source for an individual canonical URL for the item page** has been added. With this setting, it is possible to have the variations point to a different canonical URL.
 - An option has been added to set addresses as the primary address.
+- Added the capability to activate the conversion of images to the WebP format in the **Performance** step of the plentyShop assistant.
 - The result fields for articles have been expanded to include tags.
+- The ShopBuilder widgets **Link** and **Order history** now offer the possibility to display multiple tracking links if the **Split URLs** setting is activated in the **Setup » Orders » Shipping » Options** menu.
 
 ### Changed
 
@@ -35,6 +38,8 @@
 - [resources/views/MyAccount/MyAccountView.twig](https://github.com/plentymarkets/plugin-ceres/pull/3457/files#diff-dbc71118894a6415be3f82e4ee31dc1e6b7c3160b45b887ccce71f6620824d7c)
 - [resources/views/Item/SingleItemWrapper.twig](https://github.com/plentymarkets/plugin-ceres/pull/3483/files#diff-192a8837dba88964356b7ecd49003fe083ed719e2c601b9623e6dd4b24be9326)
 - [resources/views/PageDesign/Partials/Head.twig](https://github.com/plentymarkets/plugin-ceres/pull/3483/files#diff-33a10158d672d50c9bc1c0e8a46fbd8edb701925dcb3f619c6ff6f8ca11e45ee)
+- [resources/views/MyAccount/Components/OrderHistoryListItem.twig](https://github.com/plentymarkets/plugin-ceres/pull/3444/files#diff-5fe1a8ad88eb65339901273251de979410bc15369c08e8b9fcb687412c4d28ea)
+- [resources/views/Widgets/Common/LinkWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3444/files#diff-374f59a54ec3fcbe1d2444facbddd25c4f8a114e71b7576c9c34d7a20a2d122b)
 
 ## v5.0.61 (2023-10-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.60...5.0.61" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
