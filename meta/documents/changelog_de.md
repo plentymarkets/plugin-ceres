@@ -19,6 +19,7 @@
 - Im Schritt **Performance** des plentyShop-Assistenten wurde die Möglichkeit hinzugefügt, das Umwandeln von Bildern in das WebP-Format zu aktivieren.
 - Die Ergebnisfelder für Artikel wurde um Tags erweitert.
 - Die ShopBuilder-Widgets **Link** und **Auftragshistorie** bieten nun die Möglichkeit, mehrere Tracking-Links anzuzeigen, wenn die Einstellung **URLs splitten** im Menü **Einrichtung » Aufträge » Versand » Optionen** aktiviert ist.
+- Der Übersetzungschlüssel `checkoutPaidAmount` wurde in die Mehrsprachigkeit hinzugefügt.
 
 ### Geändert
 
