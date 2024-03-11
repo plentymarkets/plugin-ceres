@@ -19,6 +19,7 @@
 - Added the capability to activate the conversion of images to the WebP format in the **Performance** step of the plentyShop assistant.
 - The result fields for articles have been expanded to include tags.
 - The ShopBuilder widgets **Link** and **Order history** now offer the possibility to display multiple tracking links if the **Split URLs** setting is activated in the **Setup » Orders » Shipping » Options** menu.
+- The translation key `checkoutPaidAmount` has been added to the multilingualism.
 
 ### Changed
 
