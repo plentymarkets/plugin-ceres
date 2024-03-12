@@ -398,7 +398,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var regenerator_runtime_runtime_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! regenerator-runtime/runtime.js */ "./node_modules/regenerator-runtime/runtime.js");
 /* harmony import */ var regenerator_runtime_runtime_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime_js__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _plugins_lozad__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../plugins/lozad */ "./resources/js/src/app/plugins/lozad.js");
-/* harmony import */ var _helper_featureDetect__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../helper/featureDetect */ "./resources/js/src/app/helper/featureDetect.js");
 
 
 
@@ -429,7 +428,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     imageUrl: String,
@@ -452,32 +450,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   mounted: function mounted() {
     var _this = this;
 
-    this.browserSupportedImgExtension = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_8__["browserSupportedImageExtension"])();
+              return _this.browserSupportedImageExtension();
 
             case 2:
-              return _context.abrupt("return", _context.sent);
+              _this.browserSupportedImgExtension = _context.sent;
+              console.log(_this.browserSupportedImgExtension);
 
-            case 3:
+              _this.setDefaultImage();
+
+              _this.$nextTick(function () {
+                if (!_this.isBackgroundImage) {
+                  _this.$el.classList.toggle('lozad');
+                }
+
+                Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_7__["default"])(_this.$el).observe();
+              });
+
+            case 6:
             case "end":
               return _context.stop();
           }
         }
       }, _callee);
-    }));
-    this.setDefaultImage();
-    this.$nextTick(function () {
-      if (!_this.isBackgroundImage) {
-        _this.$el.classList.toggle('lozad');
-      }
-
-      Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_7__["default"])(_this.$el).observe();
-    });
+    }))();
   },
   watch: {
     defaultImage: function defaultImage() {
@@ -517,6 +518,71 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return null;
+    },
+    browserSupportedImageExtension: function browserSupportedImageExtension() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+        var fallbackClass, avifData, webpData, avifblob;
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                fallbackClass = "jpeg";
+
+                if (_this3.createImageBitmap) {
+                  _context3.next = 3;
+                  break;
+                }
+
+                return _context3.abrupt("return", fallbackClass);
+
+              case 3:
+                avifData = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUEAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAABYAAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgSAAAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAAB5tZGF0EgAKBzgADlAgIGkyCR/wAABAAACvcA==";
+                webpData = "data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=";
+                _context3.next = 7;
+                return fetch(avifData).then(function (response) {
+                  return response.blob();
+                });
+
+              case 7:
+                avifblob = _context3.sent;
+                return _context3.abrupt("return", createImageBitmap(avifblob).then(function () {
+                  return "avif";
+                }).catch( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                  var webpblob;
+                  return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                    while (1) {
+                      switch (_context2.prev = _context2.next) {
+                        case 0:
+                          _context2.next = 2;
+                          return fetch(webpData).then(function (response) {
+                            return response.blob();
+                          });
+
+                        case 2:
+                          webpblob = _context2.sent;
+                          return _context2.abrupt("return", createImageBitmap(webpblob).then(function () {
+                            return "webp";
+                          }));
+
+                        case 4:
+                        case "end":
+                          return _context2.stop();
+                      }
+                    }
+                  }, _callee2);
+                }))).catch(function () {
+                  return fallbackClass;
+                }));
+
+              case 9:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
     },
     setDefaultImage: function setDefaultImage() {
       var receivedImageExtension = this.receivedImageExtension();
@@ -65363,24 +65429,19 @@ function _browserSupportedImageExtension() {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            fallbackClass = "jpeg";
+            fallbackClass = "jpeg"; // if (!createImageBitmap)
+            // {
+            //     return fallbackClass;
+            // }
 
-            if (createImageBitmap) {
-              _context2.next = 3;
-              break;
-            }
-
-            return _context2.abrupt("return", fallbackClass);
-
-          case 3:
             avifData = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUEAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAABYAAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgSAAAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAAB5tZGF0EgAKBzgADlAgIGkyCR/wAABAAACvcA==";
             webpData = "data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=";
-            _context2.next = 7;
+            _context2.next = 5;
             return fetch(avifData).then(function (response) {
               return response.blob();
             });
 
-          case 7:
+          case 5:
             avifblob = _context2.sent;
             return _context2.abrupt("return", createImageBitmap(avifblob).then(function () {
               return "avif";
@@ -65411,7 +65472,7 @@ function _browserSupportedImageExtension() {
               return fallbackClass;
             }));
 
-          case 9:
+          case 7:
           case "end":
             return _context2.stop();
         }

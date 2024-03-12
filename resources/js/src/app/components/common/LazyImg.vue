@@ -17,7 +17,6 @@
 
 <script>
 import lozad from "../../plugins/lozad";
-import { browserSupportedImageExtension } from "../../helper/featureDetect";
 
 export default {
     props: {
@@ -41,20 +40,18 @@ export default {
         }
     },
 
-    mounted()
-    {
-        this.browserSupportedImgExtension = async () => await browserSupportedImageExtension();
-        this.setDefaultImage();
+    async mounted() {
+      this.browserSupportedImgExtension = await this.browserSupportedImageExtension();
+      console.log(this.browserSupportedImgExtension);
+      this.setDefaultImage();
 
-        this.$nextTick(() =>
-        {
-            if (!this.isBackgroundImage)
-            {
-                this.$el.classList.toggle('lozad');
-            }
+      this.$nextTick(() => {
+        if (!this.isBackgroundImage) {
+          this.$el.classList.toggle('lozad');
+        }
 
-            lozad(this.$el).observe();
-        });
+        lozad(this.$el).observe();
+      });
     },
 
     watch:
@@ -98,6 +95,26 @@ export default {
             }
 
             return null;
+        },
+        async browserSupportedImageExtension()
+        {
+          const fallbackClass = "jpeg";
+
+          if (!this.createImageBitmap) return fallbackClass;
+
+          const avifData = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUEAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAABYAAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgSAAAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAAB5tZGF0EgAKBzgADlAgIGkyCR/wAABAAACvcA==";
+          const webpData = "data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=";
+          const avifblob = await fetch(avifData).then((response) => response.blob());
+
+          return createImageBitmap(avifblob)
+              .then(() => "avif")
+              .catch(async () =>
+              {
+                const webpblob = await fetch(webpData).then((response) => response.blob());
+
+                return createImageBitmap(webpblob).then(() => "webp");
+              })
+              .catch(() => fallbackClass);
         },
         setDefaultImage()
         {
