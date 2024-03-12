@@ -85249,14 +85249,23 @@ function _browserSupportedImageExtension() {
         switch (_context2.prev = _context2.next) {
           case 0:
             fallbackClass = "jpeg";
+
+            if (createImageBitmap) {
+              _context2.next = 3;
+              break;
+            }
+
+            return _context2.abrupt("return", fallbackClass);
+
+          case 3:
             avifData = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUEAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAABYAAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgSAAAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAAB5tZGF0EgAKBzgADlAgIGkyCR/wAABAAACvcA==";
             webpData = "data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=";
-            _context2.next = 5;
+            _context2.next = 7;
             return fetch(avifData).then(function (response) {
               return response.blob();
             });
 
-          case 5:
+          case 7:
             avifblob = _context2.sent;
             return _context2.abrupt("return", createImageBitmap(avifblob).then(function () {
               return "avif";
@@ -85287,7 +85296,7 @@ function _browserSupportedImageExtension() {
               return fallbackClass;
             }));
 
-          case 7:
+          case 9:
           case "end":
             return _context2.stop();
         }
