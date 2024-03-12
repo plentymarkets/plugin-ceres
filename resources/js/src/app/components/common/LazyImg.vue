@@ -43,7 +43,7 @@ export default {
 
     mounted()
     {
-        this.browserSupportedImgExtension = browserSupportedImageExtension();
+        this.browserSupportedImgExtension = async () => await browserSupportedImageExtension();
         this.setDefaultImage();
 
         this.$nextTick(() =>
