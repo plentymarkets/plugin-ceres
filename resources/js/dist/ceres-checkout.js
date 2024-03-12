@@ -763,7 +763,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       modernImgFormatEnabled: App.config.global.webpImages,
       browserSupportedImgExtension: null,
-      defaultImage: '',
+      defaultImage: null,
       avifExtension: 'avif',
       webpExtension: 'webp',
       imgRegex: /.?(\.\w+)(?:$|\?)/
@@ -804,6 +804,9 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return null;
+    },
+    imageConversion: function imageConversion() {
+      return "".concat(this.imageUrl, ".").concat(this.browserSupportedImgExtension);
     }
   },
   methods: {
@@ -822,13 +825,13 @@ __webpack_require__.r(__webpack_exports__);
       var receivedImageExtension = this.receivedImageExtension();
 
       if (receivedImageExtension === this.avifExtension) {
-        this.defaultImage = this.browserSupportedImgExtension === this.avifExtension ? this.imageUrl : "".concat(this.imageUrl, ".").concat(this.browserSupportedImgExtension);
+        this.defaultImage = this.browserSupportedImgExtension === this.avifExtension ? this.imageUrl : this.imageConversion;
         return;
       }
 
       if (receivedImageExtension === this.webpExtension) {
         if (this.browserSupportedImgExtension === this.avifExtension) {
-          this.defaultImage = "".concat(this.imageUrl, ".").concat(this.browserSupportedImgExtension);
+          this.defaultImage = this.imageConversion;
           return;
         }
 
@@ -837,12 +840,12 @@ __webpack_require__.r(__webpack_exports__);
           return;
         }
 
-        this.defaultImage = "".concat(this.imageUrl, ".").concat(this.browserSupportedImgExtension);
+        this.defaultImage = this.imageConversion;
         return;
       }
 
       if (receivedImageExtension !== this.avifExtension && receivedImageExtension !== this.webpExtension && this.modernImgFormatEnabled) {
-        this.defaultImage = this.browserSupportedImgExtension !== 'jpeg' ? "".concat(this.imageUrl, ".").concat(this.browserSupportedImgExtension) : this.imageUrl;
+        this.defaultImage = this.browserSupportedImgExtension !== 'jpeg' ? this.imageConversion : this.imageUrl;
       }
     }
   }
@@ -78861,12 +78864,12 @@ function browserSupportedImageExtension() {
 
 function _browserSupportedImageExtension() {
   _browserSupportedImageExtension = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-    var fallbackclass, avifData, webpData, avifblob;
+    var fallbackClass, avifData, webpData, avifblob;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            fallbackclass = "jpeg";
+            fallbackClass = "jpeg";
             avifData = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUEAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAABYAAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgSAAAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAAB5tZGF0EgAKBzgADlAgIGkyCR/wAABAAACvcA==";
             webpData = "data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=";
             _context2.next = 5;
@@ -78902,7 +78905,7 @@ function _browserSupportedImageExtension() {
                 }
               }, _callee);
             }))).catch(function () {
-              return fallbackclass;
+              return fallbackClass;
             }));
 
           case 7:

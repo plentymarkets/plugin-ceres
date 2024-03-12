@@ -34,7 +34,7 @@ export default {
         return {
             modernImgFormatEnabled: App.config.global.webpImages,
             browserSupportedImgExtension: null,
-            defaultImage: '',
+            defaultImage: null,
             avifExtension: 'avif',
             webpExtension: 'webp',
             imgRegex: /.?(\.\w+)(?:$|\?)/
@@ -71,7 +71,8 @@ export default {
 
     computed:
     {
-        mimeType() {
+        mimeType()
+        {
             const matches = this.defaultImage?.match(this.imgRegex);
 
             if (matches) {
@@ -79,6 +80,10 @@ export default {
             }
 
             return null;
+        },
+        imageConversion()
+        {
+            return `${this.imageUrl}.${this.browserSupportedImgExtension}`;
         }
     },
 
@@ -101,14 +106,13 @@ export default {
             if (receivedImageExtension === this.avifExtension) {
                 this.defaultImage = this.browserSupportedImgExtension === this.avifExtension
                     ? this.imageUrl
-                    : `${this.imageUrl}.${this.browserSupportedImgExtension}`;
-
+                    : this.imageConversion;
                 return;
             }
 
             if (receivedImageExtension === this.webpExtension) {
                 if (this.browserSupportedImgExtension === this.avifExtension) {
-                    this.defaultImage = `${this.imageUrl}.${this.browserSupportedImgExtension}`;
+                    this.defaultImage = this.imageConversion;
                     return;
                 }
 
@@ -117,13 +121,13 @@ export default {
                     return;
                 }
 
-                this.defaultImage = `${this.imageUrl}.${this.browserSupportedImgExtension}`;
+                this.defaultImage = this.imageConversion;
                 return;
             }
 
             if (receivedImageExtension !== this.avifExtension && receivedImageExtension !== this.webpExtension && this.modernImgFormatEnabled) {
                 this.defaultImage = this.browserSupportedImgExtension !== 'jpeg'
-                    ? `${this.imageUrl}.${this.browserSupportedImgExtension}`
+                    ? this.imageConversion
                     : this.imageUrl;
             }
         }
