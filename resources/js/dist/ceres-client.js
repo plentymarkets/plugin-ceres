@@ -524,37 +524,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return new Promise(function (resolve) {
         var avifImage = new Image();
         avifImage.src = avifData;
-        avifImage.onload = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-          return regeneratorRuntime.wrap(function _callee2$(_context2) {
-            while (1) {
-              switch (_context2.prev = _context2.next) {
-                case 0:
-                  return _context2.abrupt("return", resolve("avif"));
 
-                case 1:
-                case "end":
-                  return _context2.stop();
-              }
-            }
-          }, _callee2);
-        }));
+        avifImage.onload = function () {
+          return resolve("avif");
+        };
 
         avifImage.onerror = function () {
           var webpImage = new Image();
           webpImage.src = webpData;
-          webpImage.onload = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-            return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          webpImage.onload = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+            return regeneratorRuntime.wrap(function _callee2$(_context2) {
               while (1) {
-                switch (_context3.prev = _context3.next) {
+                switch (_context2.prev = _context2.next) {
                   case 0:
-                    return _context3.abrupt("return", resolve("webp"));
+                    return _context2.abrupt("return", resolve("webp"));
 
                   case 1:
                   case "end":
-                    return _context3.stop();
+                    return _context2.stop();
                 }
               }
-            }, _callee3);
+            }, _callee2);
           }));
 
           webpImage.onerror = function () {

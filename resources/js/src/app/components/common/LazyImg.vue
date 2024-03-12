@@ -105,12 +105,11 @@ export default {
           return new Promise((resolve) => {
             let avifImage = new Image();
             avifImage.src = avifData;
-            avifImage.onload = async () => resolve("avif");
+            avifImage.onload = () => resolve("avif");
             avifImage.onerror = () => {
               const webpImage = new Image();
               webpImage.src = webpData;
               webpImage.onload = async () => resolve("webp");
-
               webpImage.onerror = () => fallbackClass;
             };
           });
