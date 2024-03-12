@@ -40,8 +40,8 @@ export default {
         }
     },
 
-    async mounted() {
-      this.browserSupportedImgExtension = await this.browserSupportedImageExtension();
+    mounted() {
+      this.browserSupportedImgExtension = async () => await this.browserSupportedImageExtension();
       console.log(this.browserSupportedImgExtension);
       this.setDefaultImage();
 
@@ -99,9 +99,6 @@ export default {
         async browserSupportedImageExtension()
         {
           const fallbackClass = "jpeg";
-
-          if (!this.createImageBitmap) return fallbackClass;
-
           const avifData = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUEAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAABYAAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgSAAAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAAB5tZGF0EgAKBzgADlAgIGkyCR/wAABAAACvcA==";
           const webpData = "data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=";
           const avifblob = await fetch(avifData).then((response) => response.blob());

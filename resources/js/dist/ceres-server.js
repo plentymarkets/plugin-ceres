@@ -2913,7 +2913,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   mounted: function mounted() {
     var _this = this;
 
-    return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    this.browserSupportedImgExtension = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -2922,26 +2922,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return _this.browserSupportedImageExtension();
 
             case 2:
-              _this.browserSupportedImgExtension = _context.sent;
-              console.log(_this.browserSupportedImgExtension);
+              return _context.abrupt("return", _context.sent);
 
-              _this.setDefaultImage();
-
-              _this.$nextTick(function () {
-                if (!_this.isBackgroundImage) {
-                  _this.$el.classList.toggle('lozad');
-                }
-
-                Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_7__["default"])(_this.$el).observe();
-              });
-
-            case 6:
+            case 3:
             case "end":
               return _context.stop();
           }
         }
       }, _callee);
-    }))();
+    }));
+    console.log(this.browserSupportedImgExtension);
+    this.setDefaultImage();
+    this.$nextTick(function () {
+      if (!_this.isBackgroundImage) {
+        _this.$el.classList.toggle('lozad');
+      }
+
+      Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_7__["default"])(_this.$el).observe();
+    });
   },
   watch: {
     defaultImage: function defaultImage() {
@@ -2983,8 +2981,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return null;
     },
     browserSupportedImageExtension: function browserSupportedImageExtension() {
-      var _this3 = this;
-
       return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
         var fallbackClass, avifData, webpData, avifblob;
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
@@ -2992,23 +2988,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context3.prev = _context3.next) {
               case 0:
                 fallbackClass = "jpeg";
-
-                if (_this3.createImageBitmap) {
-                  _context3.next = 3;
-                  break;
-                }
-
-                return _context3.abrupt("return", fallbackClass);
-
-              case 3:
                 avifData = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUEAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAABYAAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgSAAAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAAB5tZGF0EgAKBzgADlAgIGkyCR/wAABAAACvcA==";
                 webpData = "data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=";
-                _context3.next = 7;
+                _context3.next = 5;
                 return fetch(avifData).then(function (response) {
                   return response.blob();
                 });
 
-              case 7:
+              case 5:
                 avifblob = _context3.sent;
                 return _context3.abrupt("return", createImageBitmap(avifblob).then(function () {
                   return "avif";
@@ -3039,7 +3026,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   return fallbackClass;
                 }));
 
-              case 9:
+              case 7:
               case "end":
                 return _context3.stop();
             }
