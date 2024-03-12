@@ -450,7 +450,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   mounted: function mounted() {
     var _this = this;
 
-    this.browserSupportedImgExtension = this.browserSupportedImageExtension;
+    this.browserSupportedImgExtension = this.browserSupportedImageExtension();
     console.log(this.browserSupportedImgExtension);
     this.setDefaultImage();
     this.$nextTick(function () {
@@ -519,30 +519,37 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 avifblob = _context2.sent;
                 return _context2.abrupt("return", createImageBitmap(avifblob).then(function () {
                   return "avif";
-                }).catch( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                  var webpblob;
-                  return regeneratorRuntime.wrap(function _callee$(_context) {
-                    while (1) {
-                      switch (_context.prev = _context.next) {
-                        case 0:
-                          _context.next = 2;
-                          return fetch(webpData).then(function (response) {
-                            return response.blob();
-                          });
+                }).catch( /*#__PURE__*/function () {
+                  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
+                    var webpblob;
+                    return regeneratorRuntime.wrap(function _callee$(_context) {
+                      while (1) {
+                        switch (_context.prev = _context.next) {
+                          case 0:
+                            console.log('avif failed:', event);
+                            _context.next = 3;
+                            return fetch(webpData).then(function (response) {
+                              return response.blob();
+                            });
 
-                        case 2:
-                          webpblob = _context.sent;
-                          return _context.abrupt("return", createImageBitmap(webpblob).then(function () {
-                            return "webp";
-                          }));
+                          case 3:
+                            webpblob = _context.sent;
+                            return _context.abrupt("return", createImageBitmap(webpblob).then(function () {
+                              return "webp";
+                            }));
 
-                        case 4:
-                        case "end":
-                          return _context.stop();
+                          case 5:
+                          case "end":
+                            return _context.stop();
+                        }
                       }
-                    }
-                  }, _callee);
-                }))).catch(function () {
+                    }, _callee);
+                  }));
+
+                  return function (_x) {
+                    return _ref.apply(this, arguments);
+                  };
+                }()).catch(function () {
                   return fallbackClass;
                 }));
 

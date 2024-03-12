@@ -41,7 +41,7 @@ export default {
     },
 
     mounted() {
-      this.browserSupportedImgExtension = this.browserSupportedImageExtension;
+      this.browserSupportedImgExtension = this.browserSupportedImageExtension();
       console.log(this.browserSupportedImgExtension);
       this.setDefaultImage();
 
@@ -105,8 +105,9 @@ export default {
 
           return createImageBitmap(avifblob)
               .then(() => "avif")
-              .catch(async () =>
+              .catch(async (event) =>
               {
+                console.log('avif failed:', event);
                 const webpblob = await fetch(webpData).then((response) => response.blob());
 
                 return createImageBitmap(webpblob).then(() => "webp");
