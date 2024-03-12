@@ -96,23 +96,24 @@ export default {
 
             return null;
         },
-        async browserSupportedImageExtension()
+        browserSupportedImageExtension()
         {
           const fallbackClass = "jpeg";
           const avifData = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUEAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAABYAAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgSAAAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAAB5tZGF0EgAKBzgADlAgIGkyCR/wAABAAACvcA==";
           const webpData = "data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=";
-          const avifblob = await fetch(avifData).then((response) => response.blob());
 
-          return createImageBitmap(avifblob)
-              .then(() => "avif")
-              .catch(async (event) =>
-              {
-                console.log('avif failed:', event);
-                const webpblob = await fetch(webpData).then((response) => response.blob());
+          return new Promise((resolve) => {
+            let avifImage = new Image();
+            avifImage.src = avifData;
+            avifImage.onload = async () => resolve("avif");
+            avifImage.onerror = () => {
+              const webpImage = new Image();
+              webpImage.src = webpData;
+              webpImage.onload = async () => resolve("webp");
 
-                return createImageBitmap(webpblob).then(() => "webp");
-              })
-              .catch(() => fallbackClass);
+              webpImage.onerror = () => fallbackClass;
+            };
+          });
         },
         setDefaultImage()
         {

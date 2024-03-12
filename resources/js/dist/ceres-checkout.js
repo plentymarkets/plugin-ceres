@@ -852,65 +852,50 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return null;
     },
     browserSupportedImageExtension: function browserSupportedImageExtension() {
-      return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-        var fallbackClass, avifData, webpData, avifblob;
-        return regeneratorRuntime.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                fallbackClass = "jpeg";
-                avifData = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUEAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAABYAAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgSAAAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAAB5tZGF0EgAKBzgADlAgIGkyCR/wAABAAACvcA==";
-                webpData = "data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=";
-                _context3.next = 5;
-                return fetch(avifData).then(function (response) {
-                  return response.blob();
-                });
+      var fallbackClass = "jpeg";
+      var avifData = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUEAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAABYAAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgSAAAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAAB5tZGF0EgAKBzgADlAgIGkyCR/wAABAAACvcA==";
+      var webpData = "data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=";
+      return new Promise(function (resolve) {
+        var avifImage = new Image();
+        avifImage.src = avifData;
+        avifImage.onload = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+          return regeneratorRuntime.wrap(function _callee2$(_context2) {
+            while (1) {
+              switch (_context2.prev = _context2.next) {
+                case 0:
+                  return _context2.abrupt("return", resolve("avif"));
 
-              case 5:
-                avifblob = _context3.sent;
-                return _context3.abrupt("return", createImageBitmap(avifblob).then(function () {
-                  return "avif";
-                }).catch( /*#__PURE__*/function () {
-                  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(event) {
-                    var webpblob;
-                    return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                      while (1) {
-                        switch (_context2.prev = _context2.next) {
-                          case 0:
-                            console.log('avif failed:', event);
-                            _context2.next = 3;
-                            return fetch(webpData).then(function (response) {
-                              return response.blob();
-                            });
-
-                          case 3:
-                            webpblob = _context2.sent;
-                            return _context2.abrupt("return", createImageBitmap(webpblob).then(function () {
-                              return "webp";
-                            }));
-
-                          case 5:
-                          case "end":
-                            return _context2.stop();
-                        }
-                      }
-                    }, _callee2);
-                  }));
-
-                  return function (_x) {
-                    return _ref2.apply(this, arguments);
-                  };
-                }()).catch(function () {
-                  return fallbackClass;
-                }));
-
-              case 7:
-              case "end":
-                return _context3.stop();
+                case 1:
+                case "end":
+                  return _context2.stop();
+              }
             }
-          }
-        }, _callee3);
-      }))();
+          }, _callee2);
+        }));
+
+        avifImage.onerror = function () {
+          var webpImage = new Image();
+          webpImage.src = webpData;
+          webpImage.onload = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+            return regeneratorRuntime.wrap(function _callee3$(_context3) {
+              while (1) {
+                switch (_context3.prev = _context3.next) {
+                  case 0:
+                    return _context3.abrupt("return", resolve("webp"));
+
+                  case 1:
+                  case "end":
+                    return _context3.stop();
+                }
+              }
+            }, _callee3);
+          }));
+
+          webpImage.onerror = function () {
+            return fallbackClass;
+          };
+        };
+      });
     },
     setDefaultImage: function setDefaultImage() {
       var receivedImageExtension = this.receivedImageExtension();
