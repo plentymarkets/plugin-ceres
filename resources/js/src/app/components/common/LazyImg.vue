@@ -41,8 +41,8 @@ export default {
     },
 
     mounted() {
-      this.browserSupportedImgExtension = async () => await this.browserSupportedImageExtension();
-      console.log(this.browserSupportedImgExtension);
+      const browserSupported = async () => await this.browserSupportedImageExtension();
+      console.log(browserSupported);
       this.setDefaultImage();
 
       this.$nextTick(() => {
@@ -103,7 +103,7 @@ export default {
           const webpData = "data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=";
 
           return new Promise((resolve) => {
-            let avifImage = new Image();
+            const avifImage = new Image();
             avifImage.src = avifData;
             avifImage.onload = () => resolve("avif");
             avifImage.onerror = () => {

@@ -514,25 +514,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   mounted: function mounted() {
     var _this = this;
 
-    this.browserSupportedImgExtension = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return _this.browserSupportedImageExtension();
+    var browserSupported = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _this.browserSupportedImageExtension();
 
-            case 2:
-              return _context.abrupt("return", _context.sent);
+              case 2:
+                return _context.abrupt("return", _context.sent);
 
-            case 3:
-            case "end":
-              return _context.stop();
+              case 3:
+              case "end":
+                return _context.stop();
+            }
           }
-        }
-      }, _callee);
-    }));
-    console.log(this.browserSupportedImgExtension);
+        }, _callee);
+      }));
+
+      return function browserSupported() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+
+    console.log(browserSupported);
     this.setDefaultImage();
     this.$nextTick(function () {
       if (!_this.isBackgroundImage) {
