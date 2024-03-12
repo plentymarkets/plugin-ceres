@@ -41,7 +41,7 @@ export default {
     },
 
     mounted() {
-      this.browserSupportedImgExtension = async () => await this.browserSupportedImageExtension();
+      this.browserSupportedImgExtension = this.browserSupportedImageExtension;
       console.log(this.browserSupportedImgExtension);
       this.setDefaultImage();
 
