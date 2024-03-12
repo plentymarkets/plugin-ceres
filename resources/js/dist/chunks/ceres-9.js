@@ -118,7 +118,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -432,8 +431,7 @@ var render = function() {
                         _c("lazy-img", {
                           style: { maxHeight: "140px" },
                           attrs: {
-                            "image-url": _vm.imageUrl + ".webp",
-                            "fallback-url": _vm.imageUrl,
+                            "image-url": _vm.imageUrl,
                             alt: _vm.imageAlternativeText || _vm.itemName,
                             title: _vm.itemName,
                             "picture-class": "img-fluid mx-auto"

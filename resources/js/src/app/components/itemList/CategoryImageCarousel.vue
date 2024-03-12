@@ -1,13 +1,30 @@
 <template>
-  <a v-if="$data.$_enableCarousel" :id="`owl-carousel-${_uid}`" :href="itemUrl" :aria-label="$translate('Ceres::Template.itemImageCarousel')" role="listbox" class="owl-carousel owl-theme">
-    <div v-for="(imageUrl, index) in imageUrls" :key="index">
-      <lazy-img :image-url="`${imageUrl.url}.webp`" :fallback-url="imageUrl.url" :alt="getAltText(imageUrl)" :title="getTitleText(imageUrl)" :ref="index === 0 ? 'itemLazyImage' : ''" :picture-class="index === 0 ? 'img-fluid' : 'img-fluid owl-lazy'" role="option" />
-    </div>
-  </a>
+    <a
+        v-if="$data.$_enableCarousel"
+        :id="`owl-carousel-${_uid}`"
+        :href="itemUrl"
+        :aria-label="$translate('Ceres::Template.itemImageCarousel')"
+        role="listbox"
+        class="owl-carousel owl-theme">
+        <div v-for="(imageUrl, index) in imageUrls" :key="index">
+            <lazy-img
+                :image-url="imageUrl.url"
+                :alt="getAltText(imageUrl)"
+                :title="getTitleText(imageUrl)"
+                :ref="{ 'itemLazyImage' : index === 0 }"
+                :picture-class="index === 0 ? 'img-fluid' : 'img-fluid owl-lazy'"
+                role="option" />
+        </div>
+    </a>
 
-  <a v-else :href="itemUrl">
-    <lazy-img :ref="{ 'itemLazyImage': !disableLazyLoad }" :image-url="`${imageOrItemImage}.webp`" :fallback-url="imageOrItemImage" :alt="getAltText(imageUrls[0])" :title="getTitleText(imageUrls[0])" picture-class="img-fluid" />
-  </a>
+    <a v-else :href="itemUrl">
+        <lazy-img
+            :ref="{ 'itemLazyImage': !disableLazyLoad }"
+            :image-url="imageOrItemImage"
+            :alt="getAltText(imageUrls[0])"
+            :title="getTitleText(imageUrls[0])"
+            picture-class="img-fluid" />
+    </a>
 </template>
 
 <script>

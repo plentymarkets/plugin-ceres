@@ -1,18 +1,23 @@
 <template>
-    <picture v-if="!isBackgroundImage" :data-iesrc="pictureSource" :data-picture-class="pictureClass" :data-alt="alt" :data-title="title">
+    <picture
+        v-if="!isBackgroundImage"
+        :data-iesrc="defaultImage || fallbackUrl"
+        :data-picture-class="pictureClass"
+        :data-alt="alt"
+        :data-title="title">
         <slot name="additionalimages"></slot>
-        <source v-if="defaultImage === pictureSource" :srcset="defaultImage" :type="mimeTypeWebp">
+        <source :srcset="defaultImage" :type="mimeType">
         <source v-if="fallbackUrl" :srcset="fallbackUrl">
     </picture>
 
-    <div v-else :data-background-image="backgroundSource" :class="pictureClass">
+    <div v-else :data-background-image="defaultImage || fallbackUrl" :class="pictureClass">
         <slot></slot>
     </div>
 </template>
 
 <script>
 import lozad from "../../plugins/lozad";
-import { detectWebP } from "../../helper/featureDetect";
+import { browserSupportedImageExtension } from "../../helper/featureDetect";
 
 export default {
     props: {
@@ -27,36 +32,29 @@ export default {
     data()
     {
         return {
-            defaultImage: this.imageUrl,
-            webpImagesEnabled: App.config.global.webpImages,
-            webpImageType: '.webp',
-            webpMimeType: 'image/webp',
-            webpBrowserSupport: false,
+            modernImgFormatEnabled: App.config.global.webpImages,
+            browserSupportedImgExtension: null,
+            defaultImage: '',
+            avifExtension: 'avif',
+            webpExtension: 'webp',
             imgRegex: /.?(\.\w+)(?:$|\?)/
         }
     },
 
     mounted()
     {
-        if (this.webpImagesEnabled) {
-            const matches = this.fallbackUrl?.match(this.imgRegex);
-            if (matches && (matches[1] === this.webpImageType)) {
-                this.defaultImage = this.fallbackUrl;
-            }
-        }
+        this.browserSupportedImgExtension = browserSupportedImageExtension();
+        this.setDefaultImage();
 
-        detectWebP(((supported) =>
+        this.$nextTick(() =>
         {
-            this.webpBrowserSupport = supported;
-            this.$nextTick(() =>
+            if (!this.isBackgroundImage)
             {
-                if(!this.isBackgroundImage)
-                {
-                    this.$el.classList.toggle("lozad");
-                }
-                lozad(this.$el).observe();
-            });
-        }));
+                this.$el.classList.toggle('lozad');
+            }
+
+            lozad(this.$el).observe();
+        });
     },
 
     watch:
@@ -65,7 +63,7 @@ export default {
         {
             this.$nextTick(() =>
             {
-                this.$el.setAttribute("data-loaded", 'false');
+                this.$el.setAttribute('data-loaded', 'false');
                 lozad(this.$el).triggerLoad(this.$el);
             });
         }
@@ -73,25 +71,61 @@ export default {
 
     computed:
     {
-        /**
-         *  Determine appropriate image url to use as background source
-         */
-        backgroundSource() {
-            return this.defaultImage && this.mimeTypeWebp
-                ? this.webpBrowserSupport ? this.defaultImage : this.fallbackUrl
-                : this.defaultImage || this.fallbackUrl;
-        },
-        /**
-        * Check if url points to a .webp image and return appropriate mime-type
-        */
-        mimeTypeWebp() {
+        mimeType() {
             const matches = this.defaultImage?.match(this.imgRegex);
-            return matches && (matches[1] === this.webpImageType) ? this.webpMimeType : null;
+
+            if (matches) {
+                return `image/${matches[1].split('.').pop()}`;
+            }
+
+            return null;
+        }
+    },
+
+    methods:
+    {
+        receivedImageExtension()
+        {
+            const matches = this.imageUrl?.match(this.imgRegex);
+
+            if (matches) {
+              return matches[1].split('.').pop();
+            }
+
+            return null;
         },
-        pictureSource() {
-            return this.mimeTypeWebp === this.webpMimeType
-                ? (this.webpImagesEnabled && this.webpBrowserSupport) ? this.defaultImage : this.fallbackUrl
-                : this.fallbackUrl;
+        setDefaultImage()
+        {
+            const receivedImageExtension = this.receivedImageExtension();
+
+            if (receivedImageExtension === this.avifExtension) {
+                this.defaultImage = this.browserSupportedImgExtension === this.avifExtension
+                    ? this.imageUrl
+                    : `${this.imageUrl}.${this.browserSupportedImgExtension}`;
+
+                return;
+            }
+
+            if (receivedImageExtension === this.webpExtension) {
+                if (this.browserSupportedImgExtension === this.avifExtension) {
+                    this.defaultImage = `${this.imageUrl}.${this.browserSupportedImgExtension}`;
+                    return;
+                }
+
+                if (this.browserSupportedImgExtension === this.webpExtension) {
+                    this.defaultImage = this.imageUrl;
+                    return;
+                }
+
+                this.defaultImage = `${this.imageUrl}.${this.browserSupportedImgExtension}`;
+                return;
+            }
+
+            if (receivedImageExtension !== this.avifExtension && receivedImageExtension !== this.webpExtension && this.modernImgFormatEnabled) {
+                this.defaultImage = this.browserSupportedImgExtension !== 'jpeg'
+                    ? `${this.imageUrl}.${this.browserSupportedImgExtension}`
+                    : this.imageUrl;
+            }
         }
     }
 }

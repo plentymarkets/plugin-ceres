@@ -224,7 +224,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -1984,7 +1983,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -2852,10 +2850,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_string_match_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_match_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
 /* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _plugins_lozad__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../plugins/lozad */ "./resources/js/src/app/plugins/lozad.js");
-/* harmony import */ var _helper_featureDetect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../helper/featureDetect */ "./resources/js/src/app/helper/featureDetect.js");
+/* harmony import */ var core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.string.split.js */ "./node_modules/core-js/modules/es.string.split.js");
+/* harmony import */ var core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.concat.js */ "./node_modules/core-js/modules/es.array.concat.js");
+/* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _plugins_lozad__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../plugins/lozad */ "./resources/js/src/app/plugins/lozad.js");
+/* harmony import */ var _helper_featureDetect__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../helper/featureDetect */ "./resources/js/src/app/helper/featureDetect.js");
 
 
+
+
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2881,37 +2890,25 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      defaultImage: this.imageUrl,
-      webpImagesEnabled: App.config.global.webpImages,
-      webpImageType: '.webp',
-      webpMimeType: 'image/webp',
-      webpBrowserSupport: false,
+      modernImgFormatEnabled: App.config.global.webpImages,
+      browserSupportedImgExtension: null,
+      defaultImage: '',
+      avifExtension: 'avif',
+      webpExtension: 'webp',
       imgRegex: /.?(\.\w+)(?:$|\?)/
     };
   },
   mounted: function mounted() {
     var _this = this;
 
-    if (this.webpImagesEnabled) {
-      var _this$fallbackUrl;
-
-      var matches = (_this$fallbackUrl = this.fallbackUrl) === null || _this$fallbackUrl === void 0 ? void 0 : _this$fallbackUrl.match(this.imgRegex);
-
-      if (matches && matches[1] === this.webpImageType) {
-        this.defaultImage = this.fallbackUrl;
+    this.browserSupportedImgExtension = Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_5__["browserSupportedImageExtension"])();
+    this.setDefaultImage();
+    this.$nextTick(function () {
+      if (!_this.isBackgroundImage) {
+        _this.$el.classList.toggle('lozad');
       }
-    }
 
-    Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_3__["detectWebP"])(function (supported) {
-      _this.webpBrowserSupport = supported;
-
-      _this.$nextTick(function () {
-        if (!_this.isBackgroundImage) {
-          _this.$el.classList.toggle("lozad");
-        }
-
-        Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_2__["default"])(_this.$el).observe();
-      });
+      Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this.$el).observe();
     });
   },
   watch: {
@@ -2919,31 +2916,63 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.$nextTick(function () {
-        _this2.$el.setAttribute("data-loaded", 'false');
+        _this2.$el.setAttribute('data-loaded', 'false');
 
-        Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_2__["default"])(_this2.$el).triggerLoad(_this2.$el);
+        Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this2.$el).triggerLoad(_this2.$el);
       });
     }
   },
   computed: {
-    /**
-     *  Determine appropriate image url to use as background source
-     */
-    backgroundSource: function backgroundSource() {
-      return this.defaultImage && this.mimeTypeWebp ? this.webpBrowserSupport ? this.defaultImage : this.fallbackUrl : this.defaultImage || this.fallbackUrl;
-    },
-
-    /**
-    * Check if url points to a .webp image and return appropriate mime-type
-    */
-    mimeTypeWebp: function mimeTypeWebp() {
+    mimeType: function mimeType() {
       var _this$defaultImage;
 
       var matches = (_this$defaultImage = this.defaultImage) === null || _this$defaultImage === void 0 ? void 0 : _this$defaultImage.match(this.imgRegex);
-      return matches && matches[1] === this.webpImageType ? this.webpMimeType : null;
+
+      if (matches) {
+        return "image/".concat(matches[1].split('.').pop());
+      }
+
+      return null;
+    }
+  },
+  methods: {
+    receivedImageExtension: function receivedImageExtension() {
+      var _this$imageUrl;
+
+      var matches = (_this$imageUrl = this.imageUrl) === null || _this$imageUrl === void 0 ? void 0 : _this$imageUrl.match(this.imgRegex);
+
+      if (matches) {
+        return matches[1].split('.').pop();
+      }
+
+      return null;
     },
-    pictureSource: function pictureSource() {
-      return this.mimeTypeWebp === this.webpMimeType ? this.webpImagesEnabled && this.webpBrowserSupport ? this.defaultImage : this.fallbackUrl : this.fallbackUrl;
+    setDefaultImage: function setDefaultImage() {
+      var receivedImageExtension = this.receivedImageExtension();
+
+      if (receivedImageExtension === this.avifExtension) {
+        this.defaultImage = this.browserSupportedImgExtension === this.avifExtension ? this.imageUrl : "".concat(this.imageUrl, ".").concat(this.browserSupportedImgExtension);
+        return;
+      }
+
+      if (receivedImageExtension === this.webpExtension) {
+        if (this.browserSupportedImgExtension === this.avifExtension) {
+          this.defaultImage = "".concat(this.imageUrl, ".").concat(this.browserSupportedImgExtension);
+          return;
+        }
+
+        if (this.browserSupportedImgExtension === this.webpExtension) {
+          this.defaultImage = this.imageUrl;
+          return;
+        }
+
+        this.defaultImage = "".concat(this.imageUrl, ".").concat(this.browserSupportedImgExtension);
+        return;
+      }
+
+      if (receivedImageExtension !== this.avifExtension && receivedImageExtension !== this.webpExtension && this.modernImgFormatEnabled) {
+        this.defaultImage = this.browserSupportedImgExtension !== 'jpeg' ? "".concat(this.imageUrl, ".").concat(this.browserSupportedImgExtension) : this.imageUrl;
+      }
     }
   }
 });
@@ -7310,6 +7339,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-image-carousel",
@@ -7347,8 +7385,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       currentItem: 0,
-      initialized: false,
-      webpImagesEnabled: App.config.global.webpImages
+      initialized: false
     };
   },
   computed: {
@@ -10612,6 +10649,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "category-image-carousel",
   props: {
@@ -13131,7 +13185,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "order-return-item",
@@ -15088,6 +15141,11 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -41932,8 +41990,7 @@ var render = function() {
                           _c("lazy-img", {
                             style: { maxHeight: "140px" },
                             attrs: {
-                              "image-url": _vm.imageUrl + ".webp",
-                              "fallback-url": _vm.imageUrl,
+                              "image-url": _vm.imageUrl,
                               alt: _vm.imageAlternativeText || _vm.itemName,
                               title: _vm.itemName,
                               "picture-class": "img-fluid mx-auto"
@@ -43546,8 +43603,7 @@ var render = function() {
                 _vm.image
                   ? _c("lazy-img", {
                       attrs: {
-                        "image-url": _vm.image + ".webp",
-                        "fallback-url": _vm.image,
+                        "image-url": _vm.image,
                         alt: _vm.altText,
                         title: _vm.itemName,
                         "picture-class": "d-block mw-100 mh-100",
@@ -44365,7 +44421,7 @@ var render = function() {
         "picture",
         {
           attrs: {
-            "data-iesrc": _vm.pictureSource,
+            "data-iesrc": _vm.defaultImage || _vm.fallbackUrl,
             "data-picture-class": _vm.pictureClass,
             "data-alt": _vm.alt,
             "data-title": _vm.title
@@ -44374,14 +44430,10 @@ var render = function() {
         [
           _vm._t("additionalimages"),
           _vm._ssrNode(
-            " " +
-              (_vm.defaultImage === _vm.pictureSource
-                ? "<source" +
-                  _vm._ssrAttr("srcset", _vm.defaultImage) +
-                  _vm._ssrAttr("type", _vm.mimeTypeWebp) +
-                  ">"
-                : "<!---->") +
-              " " +
+            " <source" +
+              _vm._ssrAttr("srcset", _vm.defaultImage) +
+              _vm._ssrAttr("type", _vm.mimeType) +
+              "> " +
               (_vm.fallbackUrl
                 ? "<source" + _vm._ssrAttr("srcset", _vm.fallbackUrl) + ">"
                 : "<!---->")
@@ -44393,7 +44445,9 @@ var render = function() {
         "div",
         {
           class: _vm.pictureClass,
-          attrs: { "data-background-image": _vm.backgroundSource }
+          attrs: {
+            "data-background-image": _vm.defaultImage || _vm.fallbackUrl
+          }
         },
         [_vm._t("default")],
         2
@@ -50440,10 +50494,7 @@ var render = function() {
           return _vm._ssrNode('<div class="prop-1-1">', "</div>", [
             _vm._ssrNode(
               "<a" +
-                _vm._ssrAttr(
-                  "href",
-                  _vm.webpImagesEnabled ? image.url + ".webp" : image.url
-                ) +
+                _vm._ssrAttr("href", image.url) +
                 _vm._ssrAttr("data-lightbox", "single-item-image" + _vm._uid) +
                 ">",
               "</a>",
@@ -50451,8 +50502,7 @@ var render = function() {
                 _c("lazy-img", {
                   attrs: {
                     alt: _vm.getAltText(image),
-                    "image-url": image.url + ".webp",
-                    "fallback-url": image.url,
+                    "image-url": image.url,
                     title: _vm.getImageName(image)
                   }
                 })
@@ -50478,8 +50528,7 @@ var render = function() {
                       class: { active: _vm.currentItem === index },
                       attrs: {
                         alt: _vm.getAltText(imagePreview),
-                        "image-url": imagePreview.url + ".webp",
-                        "fallback-url": imagePreview.url,
+                        "image-url": imagePreview.url,
                         title: _vm.getImageName(imagePreview),
                         "picture-class": "owl-thumb border-appearance"
                       }
@@ -50505,8 +50554,7 @@ var render = function() {
                   _c("lazy-img", {
                     attrs: {
                       alt: _vm.getAltText(_vm.singleImages[0].url),
-                      "image-url": _vm.singleImages[0].url + ".webp",
-                      "fallback-url": _vm.singleImages[0].url,
+                      "image-url": _vm.singleImages[0].url,
                       title: _vm.getImageName(_vm.singleImages[0].url),
                       "picture-class": "owl-placeholder"
                     }
@@ -53368,11 +53416,10 @@ var render = function() {
             "</div>",
             [
               _c("lazy-img", {
-                ref: index === 0 ? "itemLazyImage" : "",
+                ref: { itemLazyImage: index === 0 },
                 refInFor: true,
                 attrs: {
-                  "image-url": imageUrl.url + ".webp",
-                  "fallback-url": imageUrl.url,
+                  "image-url": imageUrl.url,
                   alt: _vm.getAltText(imageUrl),
                   title: _vm.getTitleText(imageUrl),
                   "picture-class":
@@ -53393,8 +53440,7 @@ var render = function() {
           _c("lazy-img", {
             ref: { itemLazyImage: !_vm.disableLazyLoad },
             attrs: {
-              "image-url": _vm.imageOrItemImage + ".webp",
-              "fallback-url": _vm.imageOrItemImage,
+              "image-url": _vm.imageOrItemImage,
               alt: _vm.getAltText(_vm.imageUrls[0]),
               title: _vm.getTitleText(_vm.imageUrls[0]),
               "picture-class": "img-fluid"
@@ -54067,10 +54113,7 @@ var render = function() {
                           [
                             item.image
                               ? _c("lazy-img", {
-                                  attrs: {
-                                    "image-url": item.image + ".webp",
-                                    "fallback-url": item.image
-                                  }
+                                  attrs: { "image-url": item.image }
                                 })
                               : _vm._e()
                           ],
@@ -55468,8 +55511,7 @@ var render = function() {
             _vm.orderItemImage
               ? _c("lazy-img", {
                   attrs: {
-                    "image-url": _vm.orderItemImage + ".webp",
-                    "fallback-url": _vm.orderItemImage,
+                    "image-url": _vm.orderItemImage,
                     alt: _vm._f("itemBundleName")(_vm.orderItem),
                     title: _vm._f("itemBundleName")(_vm.orderItem),
                     "picture-class": "d-block mw-100 mh-100"
@@ -57072,8 +57114,7 @@ var render = function() {
               _vm.image
                 ? _c("lazy-img", {
                     attrs: {
-                      "image-url": _vm.image + ".webp",
-                      "fallback-url": _vm.image,
+                      "image-url": _vm.image,
                       alt: _vm._f("itemName")(_vm.wishListItem),
                       title: _vm._f("itemName")(_vm.wishListItem),
                       "picture-class": "d-block mw-100 mh-100"
@@ -85096,12 +85137,12 @@ function executeReCaptcha(form) {
 /*!******************************************************!*\
   !*** ./resources/js/src/app/helper/featureDetect.js ***!
   \******************************************************/
-/*! exports provided: browserSupportedImageFormat, detectWebP, detectPassiveEvents, detectIntersectionObserver */
+/*! exports provided: browserSupportedImageExtension, detectWebP, detectPassiveEvents, detectIntersectionObserver */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "browserSupportedImageFormat", function() { return browserSupportedImageFormat; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "browserSupportedImageExtension", function() { return browserSupportedImageExtension; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "detectWebP", function() { return detectWebP; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "detectPassiveEvents", function() { return detectPassiveEvents; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "detectIntersectionObserver", function() { return detectIntersectionObserver; });
@@ -85158,26 +85199,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var _supportsPassive;
 
-function browserSupportedImageFormat() {
-  return _browserSupportedImageFormat.apply(this, arguments);
+function browserSupportedImageExtension() {
+  return _browserSupportedImageExtension.apply(this, arguments);
 }
 /**
  * Asynchronous function to detect webP support
  * @param callback
  */
 
-function _browserSupportedImageFormat() {
-  _browserSupportedImageFormat = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+function _browserSupportedImageExtension() {
+  _browserSupportedImageExtension = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
     var fallbackclass, avifData, webpData, avifblob;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            fallbackclass = "jpeg"; // if (!createImageBitmap)
-            // {
-            //     return fallbackclass;
-            // }
-
+            fallbackclass = "jpeg";
             avifData = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUEAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAABYAAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgSAAAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAAB5tZGF0EgAKBzgADlAgIGkyCR/wAABAAACvcA==";
             webpData = "data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=";
             _context2.next = 5;
@@ -85223,7 +85260,7 @@ function _browserSupportedImageFormat() {
       }
     }, _callee2);
   }));
-  return _browserSupportedImageFormat.apply(this, arguments);
+  return _browserSupportedImageExtension.apply(this, arguments);
 }
 
 function detectWebP(callback) {

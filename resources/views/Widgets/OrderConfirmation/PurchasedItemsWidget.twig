@@ -27,8 +27,7 @@
                 <article class="cmp cmp-order-item mb-0 border-bottom-0">
                     <a href="{{ Twig.print('data.itemURLs | getObjectValue(currentVariationId)') }}" class="item-image">
                         <lazy-img
-                                image-url="{{ Twig.print("data.itemImages | getObjectValue(currentVariationId)") }}.webp"
-                                fallback-url="{{ Twig.print("data.itemImages | getObjectValue(currentVariationId)") }}"
+                                image-url="{{ Twig.print("data.itemImages | getObjectValue(currentVariationId)") }}"
                                 alt="{{ Twig.print("item.orderItemName") }}"
                                 title="{{ Twig.print("item.orderItemName") }}">
                         </lazy-img>
@@ -55,8 +54,7 @@
                                             {{ Twig.if("imageData") }}
                                                 <lazy-img
                                                     picture-class="d-block mw-100 mh-100"
-                                                    image-url="{{ Twig.print("imageData.url") }}.webp"
-                                                    fallback-url="{{ Twig.print("imageData.url") }}"
+                                                    image-url="{{ Twig.print("imageData.url") }}"
                                                     alt="{{ Twig.print("altText") }}"
                                                     title="{{ Twig.print("setComponent.orderItemName") }}">
                                                 </lazy-img>

@@ -7,8 +7,7 @@
                 <a :href="basketItem.variation.data | itemURL">
                     <lazy-img
                         v-if="image"
-                        :image-url="`${image}.webp`"
-                        :fallback-url="image"
+                        :image-url="image"
                         :alt="altText"
                         :title="itemName"
                         picture-class="d-block mw-100 mh-100"

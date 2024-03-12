@@ -24,6 +24,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "category-image-carousel",
   props: {
@@ -562,11 +579,10 @@ var render = function() {
             { key: index },
             [
               _c("lazy-img", {
-                ref: index === 0 ? "itemLazyImage" : "",
+                ref: { itemLazyImage: index === 0 },
                 refInFor: true,
                 attrs: {
-                  "image-url": imageUrl.url + ".webp",
-                  "fallback-url": imageUrl.url,
+                  "image-url": imageUrl.url,
                   alt: _vm.getAltText(imageUrl),
                   title: _vm.getTitleText(imageUrl),
                   "picture-class":
@@ -587,8 +603,7 @@ var render = function() {
           _c("lazy-img", {
             ref: { itemLazyImage: !_vm.disableLazyLoad },
             attrs: {
-              "image-url": _vm.imageOrItemImage + ".webp",
-              "fallback-url": _vm.imageOrItemImage,
+              "image-url": _vm.imageOrItemImage,
               alt: _vm.getAltText(_vm.imageUrls[0]),
               title: _vm.getTitleText(_vm.imageUrls[0]),
               "picture-class": "img-fluid"
