@@ -2,6 +2,30 @@ import { isNullOrUndefined, isDefined } from "./utils";
 
 let _supportsPassive;
 
+export async function browserSupportedImageFormat()
+{
+    const fallbackclass = "jpeg";
+
+    // if (!createImageBitmap)
+    // {
+    //     return fallbackclass;
+    // }
+
+    const avifData = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUEAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAABYAAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgSAAAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAAB5tZGF0EgAKBzgADlAgIGkyCR/wAABAAACvcA==";
+    const webpData = "data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=";
+    const avifblob = await fetch(avifData).then((response) => response.blob());
+
+    return createImageBitmap(avifblob)
+        .then(() => "avif")
+        .catch(async () =>
+        {
+            const webpblob = await fetch(webpData).then((response) => response.blob());
+
+            return createImageBitmap(webpblob).then(() => "webp");
+        })
+        .catch(() => fallbackclass);
+}
+
 /**
  * Asynchronous function to detect webP support
  * @param callback
