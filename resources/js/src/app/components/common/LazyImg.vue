@@ -1,16 +1,16 @@
 <template>
     <picture
         v-if="!isBackgroundImage"
-        :data-iesrc="defaultImage || fallbackUrl"
+        :data-iesrc="defaultImageUrl || fallbackUrl"
         :data-picture-class="pictureClass"
         :data-alt="alt"
         :data-title="title">
         <slot name="additionalimages"></slot>
-        <source :srcset="defaultImage" :type="mimeType">
+        <source :srcset="defaultImageUrl" :type="mimeType">
         <source v-if="fallbackUrl" :srcset="fallbackUrl">
     </picture>
 
-    <div v-else :data-background-image="defaultImage || fallbackUrl" :class="pictureClass">
+    <div v-else :data-background-image="defaultImageUrl || fallbackUrl" :class="pictureClass">
         <slot></slot>
     </div>
 </template>
@@ -19,7 +19,8 @@
 import lozad from "../../plugins/lozad";
 
 export default {
-    props: {
+    props:
+    {
         imageUrl: String,
         fallbackUrl: String,
         isBackgroundImage: Boolean,
@@ -27,36 +28,38 @@ export default {
         alt: String,
         title: String
     },
-
     data()
     {
         return {
             modernImgFormatEnabled: App.config.global.webpImages,
             browserSupportedImgExtension: null,
-            defaultImage: null,
+            defaultImageUrl: null,
+            avifSupported: false,
             avifExtension: 'avif',
+            webpSupported: false,
             webpExtension: 'webp',
+            fallbackExtension: 'jpeg',
             imgRegex: /.?(\.\w+)(?:$|\?)/
         }
     },
-
-    mounted() {
-      const browserSupported = async () => await this.browserSupportedImageExtension();
-      console.log(browserSupported);
-      this.setDefaultImage();
-
-      this.$nextTick(() => {
-        if (!this.isBackgroundImage) {
-          this.$el.classList.toggle('lozad');
-        }
-
-        lozad(this.$el).observe();
-      });
+    created()
+    {
+        this.browserSupportedImgExtension = this.browserSupportedImageExtension();
     },
+    mounted() {
+        this.setDefaultImageUrl();
 
+        this.$nextTick(() => {
+            if (!this.isBackgroundImage) {
+              this.$el.classList.toggle('lozad');
+            }
+
+            lozad(this.$el).observe();
+        });
+    },
     watch:
     {
-        defaultImage()
+        defaultImageUrl()
         {
             this.$nextTick(() =>
             {
@@ -65,12 +68,11 @@ export default {
             });
         }
     },
-
     computed:
     {
         mimeType()
         {
-            const matches = this.defaultImage?.match(this.imgRegex);
+            const matches = this.defaultImageUrl?.match(this.imgRegex);
 
             if (matches) {
                 return `image/${matches[1].split('.').pop()}`;
@@ -78,71 +80,78 @@ export default {
 
             return null;
         },
-        imageConversion()
+        convertedImageUrl()
         {
             return `${this.imageUrl}.${this.browserSupportedImgExtension}`;
         }
     },
-
     methods:
     {
+        checkAvifSupport() {
+            const img = new Image();
+
+            img.onload = () => this.avifSupported = true;
+            img.onerror = () => this.avifSupported = false;
+
+            img.src = 'data:image/avif;base64,AAAAFGZ0eXBhdmlmAAAAAG1pZjEAAACgbWV0YQAAAAAAAAAOcGl0bQAAAAAAAQAAAB5pbG9jAAAAAEQAAAEAAQAAAAEAAAC8AAAAGwAAACNpaW5mAAAAAAABAAAAFWluZmUCAAAAAAEAAGF2MDEAAAAARWlwcnAAAAAoaXBjbwAAABRpc3BlAAAAAAAAAAQAAAAEAAAADGF2MUOBAAAAAAAAFWlwbWEAAAAAAAAAAQABAgECAAAAI21kYXQSAAoIP8R8hAQ0BUAyDWeeUy0JG+QAACANEkA=';
+        },
+        checkWebPSupport() {
+            const img = new Image();
+
+            img.onload = () => this.webpSupported = true;
+            img.onerror = () => this.webpSupported = false;
+
+            img.src = 'data:image/webp;base64,UklGRhoAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAgA0JaQAA3AA/vv9UAA==';
+        },
+        browserSupportedImageExtension()
+        {
+            this.checkAvifSupport();
+            if (this.avifSupported) return this.avifExtension;
+
+            this.checkWebPSupport();
+            if (this.webpSupported) return this.webpExtension;
+
+            return this.fallbackExtension;
+        },
         receivedImageExtension()
         {
             const matches = this.imageUrl?.match(this.imgRegex);
 
             if (matches) {
-              return matches[1].split('.').pop();
+                return matches[1].split('.').pop();
             }
 
             return null;
         },
-        browserSupportedImageExtension()
-        {
-          const fallbackClass = "jpeg";
-          const avifData = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUEAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAABYAAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgSAAAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAAB5tZGF0EgAKBzgADlAgIGkyCR/wAABAAACvcA==";
-          const webpData = "data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=";
-
-          return new Promise((resolve) => {
-            const avifImage = new Image();
-            avifImage.src = avifData;
-            avifImage.onload = () => resolve("avif");
-            avifImage.onerror = () => {
-              const webpImage = new Image();
-              webpImage.src = webpData;
-              webpImage.onload = async () => resolve("webp");
-              webpImage.onerror = () => fallbackClass;
-            };
-          });
-        },
-        setDefaultImage()
+        setDefaultImageUrl()
         {
             const receivedImageExtension = this.receivedImageExtension();
 
             if (receivedImageExtension === this.avifExtension) {
-                this.defaultImage = this.browserSupportedImgExtension === this.avifExtension
+                this.defaultImageUrl = this.browserSupportedImgExtension === this.avifExtension
                     ? this.imageUrl
-                    : this.imageConversion;
+                    : this.convertedImageUrl;
                 return;
             }
 
             if (receivedImageExtension === this.webpExtension) {
                 if (this.browserSupportedImgExtension === this.avifExtension) {
-                    this.defaultImage = this.imageConversion;
+                    this.defaultImageUrl = this.convertedImageUrl;
                     return;
                 }
 
                 if (this.browserSupportedImgExtension === this.webpExtension) {
-                    this.defaultImage = this.imageUrl;
+                    this.defaultImageUrl = this.imageUrl;
                     return;
                 }
 
-                this.defaultImage = this.imageConversion;
+                this.defaultImageUrl = this.convertedImageUrl;
                 return;
             }
 
             if (receivedImageExtension !== this.avifExtension && receivedImageExtension !== this.webpExtension && this.modernImgFormatEnabled) {
-                this.defaultImage = this.browserSupportedImgExtension !== 'jpeg'
-                    ? this.imageConversion
+                this.defaultImageUrl = this.browserSupportedImgExtension !== this.fallbackExtension
+                    ? this.convertedImageUrl
                     : this.imageUrl;
             }
         }

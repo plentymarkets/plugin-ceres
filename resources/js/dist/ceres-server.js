@@ -2854,24 +2854,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.concat.js */ "./node_modules/core-js/modules/es.array.concat.js");
 /* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.promise.js */ "./node_modules/core-js/modules/es.promise.js");
-/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var regenerator_runtime_runtime_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! regenerator-runtime/runtime.js */ "./node_modules/regenerator-runtime/runtime.js");
-/* harmony import */ var regenerator_runtime_runtime_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime_js__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _plugins_lozad__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../plugins/lozad */ "./resources/js/src/app/plugins/lozad.js");
+/* harmony import */ var _plugins_lozad__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../plugins/lozad */ "./resources/js/src/app/plugins/lozad.js");
 
 
 
-
-
-
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 //
 //
@@ -2904,66 +2890,46 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       modernImgFormatEnabled: App.config.global.webpImages,
       browserSupportedImgExtension: null,
-      defaultImage: null,
+      defaultImageUrl: null,
+      avifSupported: false,
       avifExtension: 'avif',
+      webpSupported: false,
       webpExtension: 'webp',
+      fallbackExtension: 'jpeg',
       imgRegex: /.?(\.\w+)(?:$|\?)/
     };
+  },
+  created: function created() {
+    this.browserSupportedImgExtension = this.browserSupportedImageExtension();
   },
   mounted: function mounted() {
     var _this = this;
 
-    var browserSupported = /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return _this.browserSupportedImageExtension();
-
-              case 2:
-                return _context.abrupt("return", _context.sent);
-
-              case 3:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }));
-
-      return function browserSupported() {
-        return _ref.apply(this, arguments);
-      };
-    }();
-
-    console.log(browserSupported);
-    this.setDefaultImage();
+    this.setDefaultImageUrl();
     this.$nextTick(function () {
       if (!_this.isBackgroundImage) {
         _this.$el.classList.toggle('lozad');
       }
 
-      Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_7__["default"])(_this.$el).observe();
+      Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this.$el).observe();
     });
   },
   watch: {
-    defaultImage: function defaultImage() {
+    defaultImageUrl: function defaultImageUrl() {
       var _this2 = this;
 
       this.$nextTick(function () {
         _this2.$el.setAttribute('data-loaded', 'false');
 
-        Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_7__["default"])(_this2.$el).triggerLoad(_this2.$el);
+        Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this2.$el).triggerLoad(_this2.$el);
       });
     }
   },
   computed: {
     mimeType: function mimeType() {
-      var _this$defaultImage;
+      var _this$defaultImageUrl;
 
-      var matches = (_this$defaultImage = this.defaultImage) === null || _this$defaultImage === void 0 ? void 0 : _this$defaultImage.match(this.imgRegex);
+      var matches = (_this$defaultImageUrl = this.defaultImageUrl) === null || _this$defaultImageUrl === void 0 ? void 0 : _this$defaultImageUrl.match(this.imgRegex);
 
       if (matches) {
         return "image/".concat(matches[1].split('.').pop());
@@ -2971,11 +2937,48 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return null;
     },
-    imageConversion: function imageConversion() {
+    convertedImageUrl: function convertedImageUrl() {
       return "".concat(this.imageUrl, ".").concat(this.browserSupportedImgExtension);
     }
   },
   methods: {
+    checkAvifSupport: function checkAvifSupport() {
+      var _this3 = this;
+
+      var img = new Image();
+
+      img.onload = function () {
+        return _this3.avifSupported = true;
+      };
+
+      img.onerror = function () {
+        return _this3.avifSupported = false;
+      };
+
+      img.src = 'data:image/avif;base64,AAAAFGZ0eXBhdmlmAAAAAG1pZjEAAACgbWV0YQAAAAAAAAAOcGl0bQAAAAAAAQAAAB5pbG9jAAAAAEQAAAEAAQAAAAEAAAC8AAAAGwAAACNpaW5mAAAAAAABAAAAFWluZmUCAAAAAAEAAGF2MDEAAAAARWlwcnAAAAAoaXBjbwAAABRpc3BlAAAAAAAAAAQAAAAEAAAADGF2MUOBAAAAAAAAFWlwbWEAAAAAAAAAAQABAgECAAAAI21kYXQSAAoIP8R8hAQ0BUAyDWeeUy0JG+QAACANEkA=';
+    },
+    checkWebPSupport: function checkWebPSupport() {
+      var _this4 = this;
+
+      var img = new Image();
+
+      img.onload = function () {
+        return _this4.webpSupported = true;
+      };
+
+      img.onerror = function () {
+        return _this4.webpSupported = false;
+      };
+
+      img.src = 'data:image/webp;base64,UklGRhoAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAgA0JaQAA3AA/vv9UAA==';
+    },
+    browserSupportedImageExtension: function browserSupportedImageExtension() {
+      this.checkAvifSupport();
+      if (this.avifSupported) return this.avifExtension;
+      this.checkWebPSupport();
+      if (this.webpSupported) return this.webpExtension;
+      return this.fallbackExtension;
+    },
     receivedImageExtension: function receivedImageExtension() {
       var _this$imageUrl;
 
@@ -2987,67 +2990,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return null;
     },
-    browserSupportedImageExtension: function browserSupportedImageExtension() {
-      var fallbackClass = "jpeg";
-      var avifData = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUEAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAABYAAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgSAAAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAAB5tZGF0EgAKBzgADlAgIGkyCR/wAABAAACvcA==";
-      var webpData = "data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=";
-      return new Promise(function (resolve) {
-        var avifImage = new Image();
-        avifImage.src = avifData;
-
-        avifImage.onload = function () {
-          return resolve("avif");
-        };
-
-        avifImage.onerror = function () {
-          var webpImage = new Image();
-          webpImage.src = webpData;
-          webpImage.onload = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-            return regeneratorRuntime.wrap(function _callee2$(_context2) {
-              while (1) {
-                switch (_context2.prev = _context2.next) {
-                  case 0:
-                    return _context2.abrupt("return", resolve("webp"));
-
-                  case 1:
-                  case "end":
-                    return _context2.stop();
-                }
-              }
-            }, _callee2);
-          }));
-
-          webpImage.onerror = function () {
-            return fallbackClass;
-          };
-        };
-      });
-    },
-    setDefaultImage: function setDefaultImage() {
+    setDefaultImageUrl: function setDefaultImageUrl() {
       var receivedImageExtension = this.receivedImageExtension();
 
       if (receivedImageExtension === this.avifExtension) {
-        this.defaultImage = this.browserSupportedImgExtension === this.avifExtension ? this.imageUrl : this.imageConversion;
+        this.defaultImageUrl = this.browserSupportedImgExtension === this.avifExtension ? this.imageUrl : this.convertedImageUrl;
         return;
       }
 
       if (receivedImageExtension === this.webpExtension) {
         if (this.browserSupportedImgExtension === this.avifExtension) {
-          this.defaultImage = this.imageConversion;
+          this.defaultImageUrl = this.convertedImageUrl;
           return;
         }
 
         if (this.browserSupportedImgExtension === this.webpExtension) {
-          this.defaultImage = this.imageUrl;
+          this.defaultImageUrl = this.imageUrl;
           return;
         }
 
-        this.defaultImage = this.imageConversion;
+        this.defaultImageUrl = this.convertedImageUrl;
         return;
       }
 
       if (receivedImageExtension !== this.avifExtension && receivedImageExtension !== this.webpExtension && this.modernImgFormatEnabled) {
-        this.defaultImage = this.browserSupportedImgExtension !== 'jpeg' ? this.imageConversion : this.imageUrl;
+        this.defaultImageUrl = this.browserSupportedImgExtension !== this.fallbackExtension ? this.convertedImageUrl : this.imageUrl;
       }
     }
   }
@@ -44497,7 +44464,7 @@ var render = function() {
         "picture",
         {
           attrs: {
-            "data-iesrc": _vm.defaultImage || _vm.fallbackUrl,
+            "data-iesrc": _vm.defaultImageUrl || _vm.fallbackUrl,
             "data-picture-class": _vm.pictureClass,
             "data-alt": _vm.alt,
             "data-title": _vm.title
@@ -44507,7 +44474,7 @@ var render = function() {
           _vm._t("additionalimages"),
           _vm._ssrNode(
             " <source" +
-              _vm._ssrAttr("srcset", _vm.defaultImage) +
+              _vm._ssrAttr("srcset", _vm.defaultImageUrl) +
               _vm._ssrAttr("type", _vm.mimeType) +
               "> " +
               (_vm.fallbackUrl
@@ -44522,7 +44489,7 @@ var render = function() {
         {
           class: _vm.pictureClass,
           attrs: {
-            "data-background-image": _vm.defaultImage || _vm.fallbackUrl
+            "data-background-image": _vm.defaultImageUrl || _vm.fallbackUrl
           }
         },
         [_vm._t("default")],
