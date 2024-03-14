@@ -52,21 +52,15 @@ export default {
         this.setBrowserSupportedImageExtension();
         this.setDefaultImageUrl();
 
-        this.$nextTick(() =>
-        {
-            if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-            lozad(this.$el).observe();
-        });
+        if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
+        lozad(this.$el).observe();
     },
     watch:
     {
         defaultImageUrl()
         {
-            this.$nextTick(() =>
-            {
-                this.$el.setAttribute('data-loaded', 'false');
-                lozad(this.$el).triggerLoad(this.$el);
-            });
+            this.$el.setAttribute('data-loaded', 'false');
+            lozad(this.$el).triggerLoad(this.$el);
         }
     },
     computed:

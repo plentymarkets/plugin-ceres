@@ -784,20 +784,13 @@ __webpack_require__.r(__webpack_exports__);
     this.setReceivedImageExtension();
     this.setBrowserSupportedImageExtension();
     this.setDefaultImageUrl();
-    this.$nextTick(function () {
-      if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
-      Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this.$el).observe();
-    });
+    if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
+    Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(this.$el).observe();
   },
   watch: {
     defaultImageUrl: function defaultImageUrl() {
-      var _this2 = this;
-
-      this.$nextTick(function () {
-        _this2.$el.setAttribute('data-loaded', 'false');
-
-        Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this2.$el).triggerLoad(_this2.$el);
-      });
+      this.$el.setAttribute('data-loaded', 'false');
+      Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(this.$el).triggerLoad(this.$el);
     }
   },
   computed: {
