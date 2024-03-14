@@ -583,7 +583,7 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      this.browserSupportedImgExtension = this.receivedImageExtension;
+      this.browserSupportedImgExtension = this.receivedImageExtension !== this.avifExtension && this.receivedImageExtension !== this.webpExtension ? this.receivedImageExtension : 'jpeg';
     },
     setDefaultImageUrl: function setDefaultImageUrl() {
       if (this.receivedImageExtension === this.avifExtension) {

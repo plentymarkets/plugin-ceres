@@ -126,7 +126,9 @@ export default {
                 return;
             }
 
-            this.browserSupportedImgExtension = this.receivedImageExtension;
+            this.browserSupportedImgExtension = this.receivedImageExtension !== this.avifExtension && this.receivedImageExtension !== this.webpExtension
+                ? this.receivedImageExtension
+                : 'jpeg';
         },
         setDefaultImageUrl()
         {
