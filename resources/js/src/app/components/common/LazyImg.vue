@@ -44,22 +44,20 @@ export default {
         }
     },
     mounted() {
-        (async () => {
-          await detectAvif(((avifSupported) => {
-              console.log('avifSupported', avifSupported);
-              this.avifSupported = avifSupported;
-              console.log('this.avifSupported', this.avifSupported);
+        detectAvif(((avifSupported) => {
+          console.log('avifSupported', avifSupported);
+          this.avifSupported = avifSupported;
+          console.log('this.avifSupported', this.avifSupported);
 
-              if (!avifSupported) {
-                  console.log('avif not supported');
-                  (async () => await detectWebP(((webpSupported) => {
-                      console.log('webpSupported', webpSupported);
-                      this.webpSupported = webpSupported;
-                      console.log('this.webpSupported', this.webpSupported);
-                  })))();
-              }
-          }));
-        })();
+          if (!avifSupported) {
+            console.log('avif not supported');
+            detectWebP(((webpSupported) => {
+              console.log('webpSupported', webpSupported);
+              this.webpSupported = webpSupported;
+              console.log('this.webpSupported', this.webpSupported);
+            }))
+          }
+        }));
 
         this.setReceivedImageExtension();
         this.setBrowserSupportedImageExtension();

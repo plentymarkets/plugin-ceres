@@ -3,10 +3,10 @@ import { isNullOrUndefined, isDefined } from "./utils";
 let _supportsPassive;
 
 /**
- * Asynchronous function to detect avif support
+ * Function to detect avif support
  * @param callback
  */
-export async function detectAvif(callback)
+export function detectAvif(callback)
 {
     if (!isNullOrUndefined(App.features.avif))
     {
@@ -45,10 +45,10 @@ export async function detectAvif(callback)
 }
 
 /**
- * Asynchronous function to detect webP support
+ * Function to detect webP support
  * @param callback
  */
-export async function detectWebP(callback)
+export function detectWebP(callback)
 {
     if (!isNullOrUndefined(App.features.webp))
     {
