@@ -44,12 +44,15 @@ export default {
         }
     },
     mounted() {
-        (async () => await detectAvif(((avifSupported) => this.avifSupported = avifSupported)))();
-
-        if (!this.avifSupported) {
-          console.log('avif not supported');
-          (async () => await detectWebP(((webpSupported) => this.webpSupported = webpSupported)))();
-        }
+        (async () => {
+          await detectAvif(((avifSupported) => this.avifSupported = avifSupported))
+              .then(() => {
+                  if (!this.avifSupported) {
+                      console.log('avif not supported');
+                      (async () => await detectWebP(((webpSupported) => this.webpSupported = webpSupported)))();
+                  }
+              })
+        })();
 
         this.setReceivedImageExtension();
         this.setBrowserSupportedImageExtension();

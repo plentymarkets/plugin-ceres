@@ -455,51 +455,48 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   mounted: function mounted() {
     var _this = this;
 
-    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      return regeneratorRuntime.wrap(function _callee$(_context) {
+    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
-              _context.next = 2;
+              _context2.next = 2;
               return Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_8__["detectAvif"])(function (avifSupported) {
                 return _this.avifSupported = avifSupported;
+              }).then(function () {
+                if (!_this.avifSupported) {
+                  console.log('avif not supported');
+
+                  _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                    return regeneratorRuntime.wrap(function _callee$(_context) {
+                      while (1) {
+                        switch (_context.prev = _context.next) {
+                          case 0:
+                            _context.next = 2;
+                            return Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_8__["detectWebP"])(function (webpSupported) {
+                              return _this.webpSupported = webpSupported;
+                            });
+
+                          case 2:
+                            return _context.abrupt("return", _context.sent);
+
+                          case 3:
+                          case "end":
+                            return _context.stop();
+                        }
+                      }
+                    }, _callee);
+                  }))();
+                }
               });
 
             case 2:
-              return _context.abrupt("return", _context.sent);
-
-            case 3:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee);
+      }, _callee2);
     }))();
-
-    if (!this.avifSupported) {
-      console.log('avif not supported');
-
-      _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_8__["detectWebP"])(function (webpSupported) {
-                  return _this.webpSupported = webpSupported;
-                });
-
-              case 2:
-                return _context2.abrupt("return", _context2.sent);
-
-              case 3:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }))();
-    }
 
     this.setReceivedImageExtension();
     this.setBrowserSupportedImageExtension();
