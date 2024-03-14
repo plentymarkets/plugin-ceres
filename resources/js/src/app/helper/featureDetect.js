@@ -57,7 +57,7 @@ export function detectWebP(callback)
     }
 
     const testUris = {
-        "webp" : "UklGRuUAAABXRUJQVlA4ICAAAAAhEAAESsAAEAAAABAAEAAAICTAEAOw=="
+        "webp": "UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA=="
     };
 
     const promises = [];
@@ -92,7 +92,7 @@ function _detectModernImageSupport(targetExtension, uri, resolve)
 
     img.onload = function()
     {
-        resolve((img.width > 0) && (img.height > 0));
+        resolve(true);
     };
 
     img.onerror = function()

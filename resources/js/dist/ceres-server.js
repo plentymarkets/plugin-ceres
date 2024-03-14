@@ -84506,7 +84506,7 @@ function detectWebP(callback) {
   }
 
   var testUris = {
-    "webp": "UklGRuUAAABXRUJQVlA4ICAAAAAhEAAESsAAEAAAABAAEAAAICTAEAOw=="
+    "webp": "UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA=="
   };
   var promises = [];
 
@@ -84545,7 +84545,7 @@ function _detectModernImageSupport(targetExtension, uri, resolve) {
   var img = new Image();
 
   img.onload = function () {
-    resolve(img.width > 0 && img.height > 0);
+    resolve(true);
   };
 
   img.onerror = function () {
