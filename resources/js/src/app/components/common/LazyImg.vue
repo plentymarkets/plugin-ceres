@@ -44,8 +44,12 @@ export default {
         }
     },
     mounted() {
+      this.browserSupportedImageExtension1();
         (async () => {
-          await detectAvif(((avifSupported) => this.avifSupported = avifSupported))
+          await detectAvif(((avifSupported) => {
+              console.log('avifSupported', avifSupported);
+              this.avifSupported = avifSupported;
+          }))
               .then(() => {
                   if (!this.avifSupported) {
                       console.log('avif not supported');
@@ -88,6 +92,53 @@ export default {
     },
     methods:
     {
+
+
+
+
+      async checkAvifSupport() {
+        const img = new Image();
+
+        img.onload = () => this.avifSupported = true;
+        img.onerror = () => this.avifSupported = false;
+
+        img.src = 'data:image/avif;base64,AAAAFGZ0eXBhdmlmAAAAAG1pZjEAAACgbWV0YQAAAAAAAAAOcGl0bQAAAAAAAQAAAB5pbG9jAAAAAEQAAAEAAQAAAAEAAAC8AAAAGwAAACNpaW5mAAAAAAABAAAAFWluZmUCAAAAAAEAAGF2MDEAAAAARWlwcnAAAAAoaXBjbwAAABRpc3BlAAAAAAAAAAQAAAAEAAAADGF2MUOBAAAAAAAAFWlwbWEAAAAAAAAAAQABAgECAAAAI21kYXQSAAoIP8R8hAQ0BUAyDWeeUy0JG+QAACANEkA=';
+      },
+      async checkWebPSupport() {
+        const img = new Image();
+
+        img.onload = () => this.webpSupported = true;
+        img.onerror = () => this.webpSupported = false;
+
+        img.src = 'data:image/webp;base64,UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA==';
+      },
+      browserSupportedImageExtension1()
+      {
+        (async () => {
+          await this.checkAvifSupport()
+        })()
+
+        if (this.avifSupported) console.log('this.avifExtension 1');
+
+        (async () => {
+          await this.checkWebPSupport()
+        })()
+
+        if (this.webpSupported) console.log('this.webpExtension 1');
+
+        // return this.fallbackExtension;
+      },
+
+
+
+
+
+
+
+
+
+
+
         setReceivedImageExtension()
         {
             const matches = this.imageUrl?.match(this.imgRegex);
