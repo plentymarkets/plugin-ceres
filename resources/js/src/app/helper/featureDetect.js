@@ -2,28 +2,66 @@ import { isNullOrUndefined, isDefined } from "./utils";
 
 let _supportsPassive;
 
-export async function browserSupportedImageExtension()
+// export async function browserSupportedImageExtension()
+// {
+//     const fallbackClass = "jpeg";
+//
+//     // if (!createImageBitmap)
+//     // {
+//     //     return fallbackClass;
+//     // }
+//
+//     const avifData = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUEAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAABYAAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgSAAAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAAB5tZGF0EgAKBzgADlAgIGkyCR/wAABAAACvcA==";
+//     const webpData = "data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=";
+//     const avifblob = await fetch(avifData).then((response) => response.blob());
+//
+//     return createImageBitmap(avifblob)
+//         .then(() => "avif")
+//         .catch(async () =>
+//         {
+//             const webpblob = await fetch(webpData).then((response) => response.blob());
+//
+//             return createImageBitmap(webpblob).then(() => "webp");
+//         })
+//         .catch(() => fallbackClass);
+// }
+
+export function detectAvif(callback)
 {
-    const fallbackClass = "jpeg";
+    if (!isNullOrUndefined(App.features.avif))
+    {
+        callback(App.features.avif);
+        return;
+    }
 
-    // if (!createImageBitmap)
-    // {
-    //     return fallbackClass;
-    // }
+    const testUris = {
+        "avif" : "AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUEAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAABYAAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgSAAAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAAB5tZGF0EgAKBzgADlAgIGkyCR/wAABAAACvcA=="
+    };
 
-    const avifData = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUEAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAABYAAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgSAAAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAAB5tZGF0EgAKBzgADlAgIGkyCR/wAABAAACvcA==";
-    const webpData = "data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=";
-    const avifblob = await fetch(avifData).then((response) => response.blob());
+    const promises = [];
 
-    return createImageBitmap(avifblob)
-        .then(() => "avif")
-        .catch(async () =>
+    for (const uri in testUris)
+    {
+        promises.push(new Promise((resolve, reject) =>
         {
-            const webpblob = await fetch(webpData).then((response) => response.blob());
+            detectModernImageSupport(testUris[uri], resolve);
+        }));
+    }
 
-            return createImageBitmap(webpblob).then(() => "webp");
-        })
-        .catch(() => fallbackClass);
+    let isSupported = true;
+
+    Promise.all(promises)
+        .then(values =>
+        {
+            for (const value of values)
+            {
+                isSupported = isSupported && value;
+            }
+
+            App.features.avif = isSupported;
+
+            callback(isSupported);
+        });
 }
 
 /**
@@ -51,7 +89,7 @@ export function detectWebP(callback)
     {
         promises.push(new Promise((resolve, reject) =>
         {
-            _detectWebPSupport(testUris[uri], resolve);
+            detectModernImageSupport(testUris[uri], resolve);
         }));
     }
 
@@ -71,7 +109,7 @@ export function detectWebP(callback)
         });
 }
 
-function _detectWebPSupport(uri, resolve)
+function detectModernImageSupport(uri, resolve)
 {
     const img = new Image();
 

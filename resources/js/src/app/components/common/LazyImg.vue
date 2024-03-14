@@ -17,6 +17,7 @@
 
 <script>
 import lozad from "../../plugins/lozad";
+import {detectAvif, detectWebP} from "../../helper/featureDetect";
 
 export default {
     props:
@@ -43,16 +44,44 @@ export default {
         }
     },
     mounted() {
+        detectAvif(((supported) =>
+        {
+            this.avifSupported = supported;
+            this.$nextTick(() =>
+            {
+                if(!this.isBackgroundImage)
+                {
+                    this.$el.classList.toggle('lozad');
+                }
+                lozad(this.$el).observe();
+            });
+        }));
+
+        if (this.avifSupported) {
+            detectWebP(((supported) =>
+            {
+                this.webpSupported = supported;
+                this.$nextTick(() =>
+                {
+                    if(!this.isBackgroundImage)
+                    {
+                        this.$el.classList.toggle('lozad');
+                    }
+                    lozad(this.$el).observe();
+                });
+            }));
+        }
+
         this.browserSupportedImgExtension = this.browserSupportedImageExtension();
         this.setDefaultImageUrl();
 
-        this.$nextTick(() => {
-            if (!this.isBackgroundImage) {
-              this.$el.classList.toggle('lozad');
-            }
-
-            lozad(this.$el).observe();
-        });
+        // this.$nextTick(() => {
+        //     if (!this.isBackgroundImage) {
+        //       this.$el.classList.toggle('lozad');
+        //     }
+        //
+        //     lozad(this.$el).observe();
+        // });
     },
     watch:
     {
@@ -102,11 +131,11 @@ export default {
         },
         browserSupportedImageExtension()
         {
-            this.checkAvifSupport();
+            // this.checkAvifSupport();
             console.log('avifSupported', this.avifSupported);
             if (this.avifSupported) return this.avifExtension;
 
-            this.checkWebPSupport();
+            // this.checkWebPSupport();
             console.log('webpSupported', this.webpSupported);
             if (this.webpSupported) return this.webpExtension;
 
