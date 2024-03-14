@@ -2899,12 +2899,10 @@ __webpack_require__.r(__webpack_exports__);
       imgRegex: /.?(\.\w+)(?:$|\?)/
     };
   },
-  created: function created() {
-    this.browserSupportedImgExtension = this.browserSupportedImageExtension();
-  },
   mounted: function mounted() {
     var _this = this;
 
+    this.browserSupportedImgExtension = this.browserSupportedImageExtension();
     this.setDefaultImageUrl();
     this.$nextTick(function () {
       if (!_this.isBackgroundImage) {

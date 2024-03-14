@@ -42,11 +42,8 @@ export default {
             imgRegex: /.?(\.\w+)(?:$|\?)/
         }
     },
-    created()
-    {
-        this.browserSupportedImgExtension = this.browserSupportedImageExtension();
-    },
     mounted() {
+        this.browserSupportedImgExtension = this.browserSupportedImageExtension();
         this.setDefaultImageUrl();
 
         this.$nextTick(() => {
