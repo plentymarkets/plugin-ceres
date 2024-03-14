@@ -438,7 +438,7 @@ __webpack_require__.r(__webpack_exports__);
       imgRegex: /.?(\.\w+)(?:$|\?)/
     };
   },
-  mounted: function mounted() {
+  created: function created() {
     var _this = this;
 
     Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_5__["detectAvif"])(function (avifSupported) {
@@ -458,22 +458,26 @@ __webpack_require__.r(__webpack_exports__);
     this.setReceivedImageExtension();
     this.setBrowserSupportedImageExtension();
     this.setDefaultImageUrl();
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
     this.$nextTick(function () {
       console.log('mounted nextTick');
-      if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
-      Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this.$el).observe();
+      if (!_this2.isBackgroundImage) _this2.$el.classList.toggle('lozad');
+      Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this2.$el).observe();
     });
   },
   watch: {
     defaultImageUrl: function defaultImageUrl() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.$nextTick(function () {
         console.log('watcher nextTick');
 
-        _this2.$el.setAttribute('data-loaded', 'false');
+        _this3.$el.setAttribute('data-loaded', 'false');
 
-        Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this2.$el).triggerLoad(_this2.$el);
+        Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this3.$el).triggerLoad(_this3.$el);
       });
     }
   },
