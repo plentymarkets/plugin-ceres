@@ -492,9 +492,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     }, _callee);
                   }))();
                 }
-              }).then(function () {
-                if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
-                Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_7__["default"])(_this.$el).observe();
               });
 
             case 2:
@@ -508,6 +505,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.setReceivedImageExtension();
     this.setBrowserSupportedImageExtension();
     this.setDefaultImageUrl();
+    this.$nextTick(function () {
+      console.log('nextTick');
+      if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
+      Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_7__["default"])(_this.$el).observe();
+    });
   },
   watch: {
     defaultImageUrl: function defaultImageUrl() {

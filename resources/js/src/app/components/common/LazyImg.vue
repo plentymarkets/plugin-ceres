@@ -58,16 +58,18 @@ export default {
                       console.log('this.webpSupported', this.webpSupported);
                   })))();
               }
-          }))
-          .then(() => {
-            if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-            lozad(this.$el).observe();
-          })
+          }));
         })();
 
         this.setReceivedImageExtension();
         this.setBrowserSupportedImageExtension();
         this.setDefaultImageUrl();
+
+        this.$nextTick(() => {
+            console.log('nextTick');
+            if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
+            lozad(this.$el).observe();
+        });
     },
     watch:
     {
