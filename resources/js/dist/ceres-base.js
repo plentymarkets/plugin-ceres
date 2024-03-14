@@ -492,8 +492,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       modernImgFormatEnabled: App.config.global.webpImages,
-      browserSupportedImgExtension: null,
       receivedImageExtension: null,
+      browserSupportedImgExtension: null,
       defaultImageUrl: null,
       avifSupported: false,
       avifExtension: 'avif',
@@ -61668,7 +61668,7 @@ function detectAvif(callback) {
 
   var _loop = function _loop(uri) {
     promises.push(new Promise(function (resolve, reject) {
-      _detectModernImageSupport(testUris[uri], resolve);
+      _detectModernImageSupport("avif", testUris[uri], resolve);
     }));
   };
 
@@ -61708,16 +61708,13 @@ function detectWebP(callback) {
   }
 
   var testUris = {
-    "lossy": "UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA",
-    "lossless": "UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==",
-    "alpha": "UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA==",
-    "animation": "UklGRlIAAABXRUJQVlA4WAoAAAASAAAAAAAAAAAAQU5JTQYAAAD/////AABBTk1GJgAAAAAAAAAAAAAAAAAAAGQAAABWUDhMDQAAAC8AAAAQBxAREYiI/gcA"
+    "webp": "UklGRuUAAABXRUJQVlA4ICAAAAAhEAAESsAAEAAAABAAEAAAICTAEAOw=="
   };
   var promises = [];
 
   var _loop2 = function _loop2(uri) {
     promises.push(new Promise(function (resolve, reject) {
-      _detectModernImageSupport(testUris[uri], resolve);
+      _detectModernImageSupport("avif", testUris[uri], resolve);
     }));
   };
 
@@ -61746,7 +61743,7 @@ function detectWebP(callback) {
   });
 }
 
-function _detectModernImageSupport(uri, resolve) {
+function _detectModernImageSupport(targetExtension, uri, resolve) {
   var img = new Image();
 
   img.onload = function () {
@@ -61757,7 +61754,7 @@ function _detectModernImageSupport(uri, resolve) {
     resolve(false);
   };
 
-  img.src = "data:image/webp;base64," + uri;
+  img.src = "data:image/" + targetExtension + ";base64," + uri;
 }
 /**
  * Detect if the parameter passive is supported for the method addEventListener (MSIE is not)

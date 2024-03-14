@@ -33,8 +33,8 @@ export default {
     {
         return {
             modernImgFormatEnabled: App.config.global.webpImages,
-            browserSupportedImgExtension: null,
             receivedImageExtension: null,
+            browserSupportedImgExtension: null,
             defaultImageUrl: null,
             avifSupported: false,
             avifExtension: 'avif',

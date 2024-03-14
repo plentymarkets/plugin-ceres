@@ -24,7 +24,7 @@ export function detectAvif(callback)
     {
         promises.push(new Promise((resolve, reject) =>
         {
-            _detectModernImageSupport(testUris[uri], resolve);
+            _detectModernImageSupport("avif", testUris[uri], resolve);
         }));
     }
 
@@ -57,10 +57,7 @@ export function detectWebP(callback)
     }
 
     const testUris = {
-        "lossy" : "UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA",
-        "lossless": "UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==",
-        "alpha": "UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA==",
-        "animation": "UklGRlIAAABXRUJQVlA4WAoAAAASAAAAAAAAAAAAQU5JTQYAAAD/////AABBTk1GJgAAAAAAAAAAAAAAAAAAAGQAAABWUDhMDQAAAC8AAAAQBxAREYiI/gcA"
+        "webp" : "UklGRuUAAABXRUJQVlA4ICAAAAAhEAAESsAAEAAAABAAEAAAICTAEAOw=="
     };
 
     const promises = [];
@@ -69,7 +66,7 @@ export function detectWebP(callback)
     {
         promises.push(new Promise((resolve, reject) =>
         {
-            _detectModernImageSupport(testUris[uri], resolve);
+            _detectModernImageSupport("avif", testUris[uri], resolve);
         }));
     }
 
@@ -89,7 +86,7 @@ export function detectWebP(callback)
         });
 }
 
-function _detectModernImageSupport(uri, resolve)
+function _detectModernImageSupport(targetExtension, uri, resolve)
 {
     const img = new Image();
 
@@ -103,7 +100,7 @@ function _detectModernImageSupport(uri, resolve)
         resolve(false);
     };
 
-    img.src = "data:image/webp;base64," + uri;
+    img.src = "data:image/" + targetExtension + ";base64," + uri;
 }
 
 /**
