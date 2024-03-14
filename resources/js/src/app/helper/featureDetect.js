@@ -66,7 +66,7 @@ export function detectWebP(callback)
     {
         promises.push(new Promise((resolve, reject) =>
         {
-            _detectModernImageSupport("avif", testUris[uri], resolve);
+            _detectModernImageSupport("webp", testUris[uri], resolve);
         }));
     }
 

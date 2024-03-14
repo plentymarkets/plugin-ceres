@@ -64627,7 +64627,7 @@ function detectWebP(callback) {
 
   var _loop2 = function _loop2(uri) {
     promises.push(new Promise(function (resolve, reject) {
-      _detectModernImageSupport("avif", testUris[uri], resolve);
+      _detectModernImageSupport("webp", testUris[uri], resolve);
     }));
   };
 
