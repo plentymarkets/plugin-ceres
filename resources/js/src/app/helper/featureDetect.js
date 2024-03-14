@@ -2,30 +2,10 @@ import { isNullOrUndefined, isDefined } from "./utils";
 
 let _supportsPassive;
 
-// export async function browserSupportedImageExtension()
-// {
-//     const fallbackClass = "jpeg";
-//
-//     // if (!createImageBitmap)
-//     // {
-//     //     return fallbackClass;
-//     // }
-//
-//     const avifData = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUEAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAABYAAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgSAAAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAAB5tZGF0EgAKBzgADlAgIGkyCR/wAABAAACvcA==";
-//     const webpData = "data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=";
-//     const avifblob = await fetch(avifData).then((response) => response.blob());
-//
-//     return createImageBitmap(avifblob)
-//         .then(() => "avif")
-//         .catch(async () =>
-//         {
-//             const webpblob = await fetch(webpData).then((response) => response.blob());
-//
-//             return createImageBitmap(webpblob).then(() => "webp");
-//         })
-//         .catch(() => fallbackClass);
-// }
-
+/**
+ * Asynchronous function to detect avif support
+ * @param callback
+ */
 export function detectAvif(callback)
 {
     if (!isNullOrUndefined(App.features.avif))
@@ -44,7 +24,7 @@ export function detectAvif(callback)
     {
         promises.push(new Promise((resolve, reject) =>
         {
-            detectModernImageSupport(testUris[uri], resolve);
+            _detectModernImageSupport(testUris[uri], resolve);
         }));
     }
 
@@ -89,7 +69,7 @@ export function detectWebP(callback)
     {
         promises.push(new Promise((resolve, reject) =>
         {
-            detectModernImageSupport(testUris[uri], resolve);
+            _detectModernImageSupport(testUris[uri], resolve);
         }));
     }
 
@@ -109,7 +89,7 @@ export function detectWebP(callback)
         });
 }
 
-function detectModernImageSupport(uri, resolve)
+function _detectModernImageSupport(uri, resolve)
 {
     const img = new Image();
 

@@ -34,12 +34,12 @@ export default {
         return {
             modernImgFormatEnabled: App.config.global.webpImages,
             browserSupportedImgExtension: null,
+            receivedImageExtension: null,
             defaultImageUrl: null,
             avifSupported: false,
             avifExtension: 'avif',
             webpSupported: false,
             webpExtension: 'webp',
-            fallbackExtension: 'jpeg',
             imgRegex: /.?(\.\w+)(?:$|\?)/
         }
     },
@@ -72,16 +72,9 @@ export default {
             }));
         }
 
-        this.browserSupportedImgExtension = this.browserSupportedImageExtension();
+        this.setReceivedImageExtension();
+        this.setBrowserSupportedImageExtension();
         this.setDefaultImageUrl();
-
-        // this.$nextTick(() => {
-        //     if (!this.isBackgroundImage) {
-        //       this.$el.classList.toggle('lozad');
-        //     }
-        //
-        //     lozad(this.$el).observe();
-        // });
     },
     watch:
     {
@@ -113,56 +106,38 @@ export default {
     },
     methods:
     {
-        checkAvifSupport() {
-            const avifImg = new Image();
-
-            avifImg.onload  = () => this.avifSupported = avifImg.width > 0 && avifImg.height > 0;
-            avifImg.onerror = () => this.avifSupported = false;
-
-            avifImg.src = 'data:image/avif;base64,AAAAFGZ0eXBhdmlmAAAAAG1pZjEAAACgbWV0YQAAAAAAAAAOcGl0bQAAAAAAAQAAAB5pbG9jAAAAAEQAAAEAAQAAAAEAAAC8AAAAGwAAACNpaW5mAAAAAAABAAAAFWluZmUCAAAAAAEAAGF2MDEAAAAARWlwcnAAAAAoaXBjbwAAABRpc3BlAAAAAAAAAAQAAAAEAAAADGF2MUOBAAAAAAAAFWlwbWEAAAAAAAAAAQABAgECAAAAI21kYXQSAAoIP8R8hAQ0BUAyDWeeUy0JG+QAACANEkA=';
-        },
-        checkWebPSupport() {
-            const webpImg = new Image();
-
-            webpImg.onload = () => this.webpSupported = webpImg.width > 0 && webpImg.height > 0;
-            webpImg.onerror = () => this.webpSupported = false;
-
-            webpImg.src = 'data:image/webp;base64,UklGRhoAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAgA0JaQAA3AA/vv9UAA==';
-        },
-        browserSupportedImageExtension()
-        {
-            // this.checkAvifSupport();
-            console.log('avifSupported', this.avifSupported);
-            if (this.avifSupported) return this.avifExtension;
-
-            // this.checkWebPSupport();
-            console.log('webpSupported', this.webpSupported);
-            if (this.webpSupported) return this.webpExtension;
-
-            return this.fallbackExtension;
-        },
-        receivedImageExtension()
+        setReceivedImageExtension()
         {
             const matches = this.imageUrl?.match(this.imgRegex);
 
             if (matches) {
-                return matches[1].split('.').pop();
+              this.receivedImageExtension = matches[1].split('.').pop();
+            }
+        },
+        setBrowserSupportedImageExtension()
+        {
+            if (this.avifSupported) {
+                this.browserSupportedImgExtension = this.avifExtension;
+                return;
             }
 
-            return null;
+            if (this.webpSupported) {
+                this.browserSupportedImgExtension = this.webpExtension;
+                return;
+            }
+
+            this.browserSupportedImgExtension = this.receivedImageExtension;
         },
         setDefaultImageUrl()
         {
-            const receivedImageExtension = this.receivedImageExtension();
-
-            if (receivedImageExtension === this.avifExtension) {
+            if (this.receivedImageExtension === this.avifExtension) {
                 this.defaultImageUrl = this.browserSupportedImgExtension === this.avifExtension
                     ? this.imageUrl
                     : this.convertedImageUrl;
                 return;
             }
 
-            if (receivedImageExtension === this.webpExtension) {
+            if (this.receivedImageExtension === this.webpExtension) {
                 if (this.browserSupportedImgExtension === this.avifExtension) {
                     this.defaultImageUrl = this.convertedImageUrl;
                     return;
@@ -177,11 +152,9 @@ export default {
                 return;
             }
 
-            if (receivedImageExtension !== this.avifExtension && receivedImageExtension !== this.webpExtension && this.modernImgFormatEnabled) {
-                this.defaultImageUrl = this.browserSupportedImgExtension !== this.fallbackExtension
-                    ? this.convertedImageUrl
-                    : this.imageUrl;
-            }
+            this.defaultImageUrl = this.modernImgFormatEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension
+                ? this.convertedImageUrl
+                : this.imageUrl;
         }
     }
 }

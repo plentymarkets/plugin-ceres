@@ -429,12 +429,12 @@ __webpack_require__.r(__webpack_exports__);
     return {
       modernImgFormatEnabled: App.config.global.webpImages,
       browserSupportedImgExtension: null,
+      receivedImageExtension: null,
       defaultImageUrl: null,
       avifSupported: false,
       avifExtension: 'avif',
       webpSupported: false,
       webpExtension: 'webp',
-      fallbackExtension: 'jpeg',
       imgRegex: /.?(\.\w+)(?:$|\?)/
     };
   },
@@ -467,14 +467,9 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
 
-    this.browserSupportedImgExtension = this.browserSupportedImageExtension();
-    this.setDefaultImageUrl(); // this.$nextTick(() => {
-    //     if (!this.isBackgroundImage) {
-    //       this.$el.classList.toggle('lozad');
-    //     }
-    //
-    //     lozad(this.$el).observe();
-    // });
+    this.setReceivedImageExtension();
+    this.setBrowserSupportedImageExtension();
+    this.setDefaultImageUrl();
   },
   watch: {
     defaultImageUrl: function defaultImageUrl() {
@@ -504,65 +499,35 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    checkAvifSupport: function checkAvifSupport() {
-      var _this3 = this;
-
-      var avifImg = new Image();
-
-      avifImg.onload = function () {
-        return _this3.avifSupported = avifImg.width > 0 && avifImg.height > 0;
-      };
-
-      avifImg.onerror = function () {
-        return _this3.avifSupported = false;
-      };
-
-      avifImg.src = 'data:image/avif;base64,AAAAFGZ0eXBhdmlmAAAAAG1pZjEAAACgbWV0YQAAAAAAAAAOcGl0bQAAAAAAAQAAAB5pbG9jAAAAAEQAAAEAAQAAAAEAAAC8AAAAGwAAACNpaW5mAAAAAAABAAAAFWluZmUCAAAAAAEAAGF2MDEAAAAARWlwcnAAAAAoaXBjbwAAABRpc3BlAAAAAAAAAAQAAAAEAAAADGF2MUOBAAAAAAAAFWlwbWEAAAAAAAAAAQABAgECAAAAI21kYXQSAAoIP8R8hAQ0BUAyDWeeUy0JG+QAACANEkA=';
-    },
-    checkWebPSupport: function checkWebPSupport() {
-      var _this4 = this;
-
-      var webpImg = new Image();
-
-      webpImg.onload = function () {
-        return _this4.webpSupported = webpImg.width > 0 && webpImg.height > 0;
-      };
-
-      webpImg.onerror = function () {
-        return _this4.webpSupported = false;
-      };
-
-      webpImg.src = 'data:image/webp;base64,UklGRhoAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAgA0JaQAA3AA/vv9UAA==';
-    },
-    browserSupportedImageExtension: function browserSupportedImageExtension() {
-      // this.checkAvifSupport();
-      console.log('avifSupported', this.avifSupported);
-      if (this.avifSupported) return this.avifExtension; // this.checkWebPSupport();
-
-      console.log('webpSupported', this.webpSupported);
-      if (this.webpSupported) return this.webpExtension;
-      return this.fallbackExtension;
-    },
-    receivedImageExtension: function receivedImageExtension() {
+    setReceivedImageExtension: function setReceivedImageExtension() {
       var _this$imageUrl;
 
       var matches = (_this$imageUrl = this.imageUrl) === null || _this$imageUrl === void 0 ? void 0 : _this$imageUrl.match(this.imgRegex);
 
       if (matches) {
-        return matches[1].split('.').pop();
+        this.receivedImageExtension = matches[1].split('.').pop();
+      }
+    },
+    setBrowserSupportedImageExtension: function setBrowserSupportedImageExtension() {
+      if (this.avifSupported) {
+        this.browserSupportedImgExtension = this.avifExtension;
+        return;
       }
 
-      return null;
+      if (this.webpSupported) {
+        this.browserSupportedImgExtension = this.webpExtension;
+        return;
+      }
+
+      this.browserSupportedImgExtension = this.receivedImageExtension;
     },
     setDefaultImageUrl: function setDefaultImageUrl() {
-      var receivedImageExtension = this.receivedImageExtension();
-
-      if (receivedImageExtension === this.avifExtension) {
+      if (this.receivedImageExtension === this.avifExtension) {
         this.defaultImageUrl = this.browserSupportedImgExtension === this.avifExtension ? this.imageUrl : this.convertedImageUrl;
         return;
       }
 
-      if (receivedImageExtension === this.webpExtension) {
+      if (this.receivedImageExtension === this.webpExtension) {
         if (this.browserSupportedImgExtension === this.avifExtension) {
           this.defaultImageUrl = this.convertedImageUrl;
           return;
@@ -577,9 +542,7 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      if (receivedImageExtension !== this.avifExtension && receivedImageExtension !== this.webpExtension && this.modernImgFormatEnabled) {
-        this.defaultImageUrl = this.browserSupportedImgExtension !== this.fallbackExtension ? this.convertedImageUrl : this.imageUrl;
-      }
+      this.defaultImageUrl = this.modernImgFormatEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension ? this.convertedImageUrl : this.imageUrl;
     }
   }
 });
@@ -64614,29 +64577,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 
-var _supportsPassive; // export async function browserSupportedImageExtension()
-// {
-//     const fallbackClass = "jpeg";
-//
-//     // if (!createImageBitmap)
-//     // {
-//     //     return fallbackClass;
-//     // }
-//
-//     const avifData = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUEAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAABYAAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgSAAAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAAB5tZGF0EgAKBzgADlAgIGkyCR/wAABAAACvcA==";
-//     const webpData = "data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=";
-//     const avifblob = await fetch(avifData).then((response) => response.blob());
-//
-//     return createImageBitmap(avifblob)
-//         .then(() => "avif")
-//         .catch(async () =>
-//         {
-//             const webpblob = await fetch(webpData).then((response) => response.blob());
-//
-//             return createImageBitmap(webpblob).then(() => "webp");
-//         })
-//         .catch(() => fallbackClass);
-// }
+var _supportsPassive;
+/**
+ * Asynchronous function to detect avif support
+ * @param callback
+ */
 
 
 function detectAvif(callback) {
@@ -64652,7 +64597,7 @@ function detectAvif(callback) {
 
   var _loop = function _loop(uri) {
     promises.push(new Promise(function (resolve, reject) {
-      detectModernImageSupport(testUris[uri], resolve);
+      _detectModernImageSupport(testUris[uri], resolve);
     }));
   };
 
@@ -64701,7 +64646,7 @@ function detectWebP(callback) {
 
   var _loop2 = function _loop2(uri) {
     promises.push(new Promise(function (resolve, reject) {
-      detectModernImageSupport(testUris[uri], resolve);
+      _detectModernImageSupport(testUris[uri], resolve);
     }));
   };
 
@@ -64730,7 +64675,7 @@ function detectWebP(callback) {
   });
 }
 
-function detectModernImageSupport(uri, resolve) {
+function _detectModernImageSupport(uri, resolve) {
   var img = new Image();
 
   img.onload = function () {
