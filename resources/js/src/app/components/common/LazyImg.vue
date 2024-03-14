@@ -57,7 +57,7 @@ export default {
             });
         }));
 
-        if (this.avifSupported) {
+        if (!this.avifSupported) {
             detectWebP(((supported) =>
             {
                 this.webpSupported = supported;
@@ -111,7 +111,7 @@ export default {
             const matches = this.imageUrl?.match(this.imgRegex);
 
             if (matches) {
-              this.receivedImageExtension = matches[1].split('.').pop();
+                this.receivedImageExtension = matches[1].split('.').pop();
             }
         },
         setBrowserSupportedImageExtension()

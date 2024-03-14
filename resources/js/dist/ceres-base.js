@@ -517,7 +517,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     });
 
-    if (this.avifSupported) {
+    if (!this.avifSupported) {
       Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_5__["detectWebP"])(function (supported) {
         _this.webpSupported = supported;
 
