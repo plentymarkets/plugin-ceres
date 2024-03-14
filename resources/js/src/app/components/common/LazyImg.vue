@@ -44,19 +44,19 @@ export default {
         }
     },
     mounted() {
-      this.browserSupportedImageExtension1();
-        (async () => {
-          await detectAvif(((avifSupported) => {
-              console.log('avifSupported', avifSupported);
-              this.avifSupported = avifSupported;
-          }))
-              .then(() => {
-                  if (!this.avifSupported) {
-                      console.log('avif not supported');
-                      (async () => await detectWebP(((webpSupported) => this.webpSupported = webpSupported)))();
-                  }
-              })
-        })();
+        this.browserSupportedImageExtension1();
+        // (async () => {
+        //   await detectAvif(((avifSupported) => {
+        //       console.log('avifSupported', avifSupported);
+        //       this.avifSupported = avifSupported;
+        //   }))
+        //       .then(() => {
+        //           if (!this.avifSupported) {
+        //               console.log('avif not supported');
+        //               (async () => await detectWebP(((webpSupported) => this.webpSupported = webpSupported)))();
+        //           }
+        //       })
+        // })();
 
         this.setReceivedImageExtension();
         this.setBrowserSupportedImageExtension();
@@ -115,18 +115,16 @@ export default {
       browserSupportedImageExtension1()
       {
         (async () => {
-          await this.checkAvifSupport()
-        })()
-
-        if (this.avifSupported) console.log('this.avifExtension 1');
+          await this.checkAvifSupport().then(() => {
+            console.log('this.avifExtension', this.avifSupported);
+          })
+        })();
 
         (async () => {
-          await this.checkWebPSupport()
+          await this.checkWebPSupport().then(() => {
+            console.log('this.webpExtension', this.webpSupported);
+          })
         })()
-
-        if (this.webpSupported) console.log('this.webpExtension 1');
-
-        // return this.fallbackExtension;
       },
 
 
