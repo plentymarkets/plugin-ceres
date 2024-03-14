@@ -1,7 +1,7 @@
 <template>
     <picture
         v-if="!isBackgroundImage"
-        :data-iesrc="defaultImageUrl || fallbackUrl"
+        :data-iesrc="fallbackUrl || defaultImageUrl"
         :data-picture-class="pictureClass"
         :data-alt="alt"
         :data-title="title">
@@ -66,7 +66,7 @@ export default {
         this.setDefaultImageUrl();
 
         this.$nextTick(() => {
-            console.log('nextTick');
+            console.log('mounted nextTick');
             if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
             lozad(this.$el).observe();
         });
@@ -77,6 +77,7 @@ export default {
         {
           this.$nextTick(() =>
           {
+            console.log('watcher nextTick')
             this.$el.setAttribute('data-loaded', 'false');
             lozad(this.$el).triggerLoad(this.$el);
           });

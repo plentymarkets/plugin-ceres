@@ -840,7 +840,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.setBrowserSupportedImageExtension();
     this.setDefaultImageUrl();
     this.$nextTick(function () {
-      console.log('nextTick');
+      console.log('mounted nextTick');
       if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
       Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_7__["default"])(_this.$el).observe();
     });
@@ -850,6 +850,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       this.$nextTick(function () {
+        console.log('watcher nextTick');
+
         _this2.$el.setAttribute('data-loaded', 'false');
 
         Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_7__["default"])(_this2.$el).triggerLoad(_this2.$el);
@@ -40632,7 +40634,7 @@ var render = function() {
         "picture",
         {
           attrs: {
-            "data-iesrc": _vm.defaultImageUrl || _vm.fallbackUrl,
+            "data-iesrc": _vm.fallbackUrl || _vm.defaultImageUrl,
             "data-picture-class": _vm.pictureClass,
             "data-alt": _vm.alt,
             "data-title": _vm.title
