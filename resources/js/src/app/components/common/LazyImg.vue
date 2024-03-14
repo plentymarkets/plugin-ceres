@@ -44,19 +44,28 @@ export default {
         }
     },
     mounted() {
-        this.browserSupportedImageExtension1();
-        // (async () => {
-        //   await detectAvif(((avifSupported) => {
-        //       console.log('avifSupported', avifSupported);
-        //       this.avifSupported = avifSupported;
-        //   }))
-        //       .then(() => {
-        //           if (!this.avifSupported) {
-        //               console.log('avif not supported');
-        //               (async () => await detectWebP(((webpSupported) => this.webpSupported = webpSupported)))();
-        //           }
-        //       })
-        // })();
+        (async () => {
+          await detectAvif(((avifSupported) => {
+              console.log('avifSupported', avifSupported);
+              this.avifSupported = avifSupported;
+              console.log('this.avifSupported', this.avifSupported);
+
+              if (!avifSupported) {
+                  console.log('avif not supported');
+                  (async () => await detectWebP(((webpSupported) => {
+                      console.log('webpSupported', webpSupported);
+                      this.webpSupported = webpSupported;
+                      console.log('this.webpSupported', this.webpSupported);
+                  })))();
+              }
+          }));
+              // .then(() => {
+              //     if (!this.avifSupported) {
+              //         console.log('avif not supported');
+              //         (async () => await detectWebP(((webpSupported) => this.webpSupported = webpSupported)))();
+              //     }
+              // })
+        })();
 
         this.setReceivedImageExtension();
         this.setBrowserSupportedImageExtension();
@@ -92,51 +101,6 @@ export default {
     },
     methods:
     {
-
-
-
-
-      async checkAvifSupport() {
-        const img = new Image();
-
-        img.onload = () => this.avifSupported = true;
-        img.onerror = () => this.avifSupported = false;
-
-        img.src = 'data:image/avif;base64,AAAAFGZ0eXBhdmlmAAAAAG1pZjEAAACgbWV0YQAAAAAAAAAOcGl0bQAAAAAAAQAAAB5pbG9jAAAAAEQAAAEAAQAAAAEAAAC8AAAAGwAAACNpaW5mAAAAAAABAAAAFWluZmUCAAAAAAEAAGF2MDEAAAAARWlwcnAAAAAoaXBjbwAAABRpc3BlAAAAAAAAAAQAAAAEAAAADGF2MUOBAAAAAAAAFWlwbWEAAAAAAAAAAQABAgECAAAAI21kYXQSAAoIP8R8hAQ0BUAyDWeeUy0JG+QAACANEkA=';
-      },
-      async checkWebPSupport() {
-        const img = new Image();
-
-        img.onload = () => this.webpSupported = true;
-        img.onerror = () => this.webpSupported = false;
-
-        img.src = 'data:image/webp;base64,UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA==';
-      },
-      browserSupportedImageExtension1()
-      {
-        (async () => {
-          await this.checkAvifSupport().then(() => {
-            console.log('this.avifExtension', this.avifSupported);
-          })
-        })();
-
-        (async () => {
-          await this.checkWebPSupport().then(() => {
-            console.log('this.webpExtension', this.webpSupported);
-          })
-        })()
-      },
-
-
-
-
-
-
-
-
-
-
-
         setReceivedImageExtension()
         {
             const matches = this.imageUrl?.match(this.imgRegex);
