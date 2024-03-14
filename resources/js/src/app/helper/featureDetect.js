@@ -6,7 +6,7 @@ let _supportsPassive;
  * Asynchronous function to detect avif support
  * @param callback
  */
-export function detectAvif(callback)
+export async function detectAvif(callback)
 {
     if (!isNullOrUndefined(App.features.avif))
     {
@@ -48,7 +48,7 @@ export function detectAvif(callback)
  * Asynchronous function to detect webP support
  * @param callback
  */
-export function detectWebP(callback)
+export async function detectWebP(callback)
 {
     if (!isNullOrUndefined(App.features.webp))
     {
