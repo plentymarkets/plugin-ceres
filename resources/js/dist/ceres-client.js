@@ -482,37 +482,39 @@ __webpack_require__.r(__webpack_exports__);
     checkAvifSupport: function checkAvifSupport() {
       var _this3 = this;
 
-      var img = new Image();
+      var avifImg = new Image();
 
-      img.onload = function () {
-        return _this3.avifSupported = true;
+      avifImg.onload = function () {
+        return _this3.avifSupported = avifImg.width > 0 && avifImg.height > 0;
       };
 
-      img.onerror = function () {
+      avifImg.onerror = function () {
         return _this3.avifSupported = false;
       };
 
-      img.src = 'data:image/avif;base64,AAAAFGZ0eXBhdmlmAAAAAG1pZjEAAACgbWV0YQAAAAAAAAAOcGl0bQAAAAAAAQAAAB5pbG9jAAAAAEQAAAEAAQAAAAEAAAC8AAAAGwAAACNpaW5mAAAAAAABAAAAFWluZmUCAAAAAAEAAGF2MDEAAAAARWlwcnAAAAAoaXBjbwAAABRpc3BlAAAAAAAAAAQAAAAEAAAADGF2MUOBAAAAAAAAFWlwbWEAAAAAAAAAAQABAgECAAAAI21kYXQSAAoIP8R8hAQ0BUAyDWeeUy0JG+QAACANEkA=';
+      avifImg.src = 'data:image/avif;base64,AAAAFGZ0eXBhdmlmAAAAAG1pZjEAAACgbWV0YQAAAAAAAAAOcGl0bQAAAAAAAQAAAB5pbG9jAAAAAEQAAAEAAQAAAAEAAAC8AAAAGwAAACNpaW5mAAAAAAABAAAAFWluZmUCAAAAAAEAAGF2MDEAAAAARWlwcnAAAAAoaXBjbwAAABRpc3BlAAAAAAAAAAQAAAAEAAAADGF2MUOBAAAAAAAAFWlwbWEAAAAAAAAAAQABAgECAAAAI21kYXQSAAoIP8R8hAQ0BUAyDWeeUy0JG+QAACANEkA=';
     },
     checkWebPSupport: function checkWebPSupport() {
       var _this4 = this;
 
-      var img = new Image();
+      var webpImg = new Image();
 
-      img.onload = function () {
-        return _this4.webpSupported = true;
+      webpImg.onload = function () {
+        return _this4.webpSupported = webpImg.width > 0 && webpImg.height > 0;
       };
 
-      img.onerror = function () {
+      webpImg.onerror = function () {
         return _this4.webpSupported = false;
       };
 
-      img.src = 'data:image/webp;base64,UklGRhoAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAgA0JaQAA3AA/vv9UAA==';
+      webpImg.src = 'data:image/webp;base64,UklGRhoAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAgA0JaQAA3AA/vv9UAA==';
     },
     browserSupportedImageExtension: function browserSupportedImageExtension() {
       this.checkAvifSupport();
+      console.log('avifSupported', this.avifSupported);
       if (this.avifSupported) return this.avifExtension;
       this.checkWebPSupport();
+      console.log('webpSupported', this.webpSupported);
       if (this.webpSupported) return this.webpExtension;
       return this.fallbackExtension;
     },

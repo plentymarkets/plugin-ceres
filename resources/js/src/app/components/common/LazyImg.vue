@@ -88,27 +88,29 @@ export default {
     methods:
     {
         checkAvifSupport() {
-            const img = new Image();
+            const avifImg = new Image();
 
-            img.onload = () => this.avifSupported = true;
-            img.onerror = () => this.avifSupported = false;
+            avifImg.onload  = () => this.avifSupported = avifImg.width > 0 && avifImg.height > 0;
+            avifImg.onerror = () => this.avifSupported = false;
 
-            img.src = 'data:image/avif;base64,AAAAFGZ0eXBhdmlmAAAAAG1pZjEAAACgbWV0YQAAAAAAAAAOcGl0bQAAAAAAAQAAAB5pbG9jAAAAAEQAAAEAAQAAAAEAAAC8AAAAGwAAACNpaW5mAAAAAAABAAAAFWluZmUCAAAAAAEAAGF2MDEAAAAARWlwcnAAAAAoaXBjbwAAABRpc3BlAAAAAAAAAAQAAAAEAAAADGF2MUOBAAAAAAAAFWlwbWEAAAAAAAAAAQABAgECAAAAI21kYXQSAAoIP8R8hAQ0BUAyDWeeUy0JG+QAACANEkA=';
+            avifImg.src = 'data:image/avif;base64,AAAAFGZ0eXBhdmlmAAAAAG1pZjEAAACgbWV0YQAAAAAAAAAOcGl0bQAAAAAAAQAAAB5pbG9jAAAAAEQAAAEAAQAAAAEAAAC8AAAAGwAAACNpaW5mAAAAAAABAAAAFWluZmUCAAAAAAEAAGF2MDEAAAAARWlwcnAAAAAoaXBjbwAAABRpc3BlAAAAAAAAAAQAAAAEAAAADGF2MUOBAAAAAAAAFWlwbWEAAAAAAAAAAQABAgECAAAAI21kYXQSAAoIP8R8hAQ0BUAyDWeeUy0JG+QAACANEkA=';
         },
         checkWebPSupport() {
-            const img = new Image();
+            const webpImg = new Image();
 
-            img.onload = () => this.webpSupported = true;
-            img.onerror = () => this.webpSupported = false;
+            webpImg.onload = () => this.webpSupported = webpImg.width > 0 && webpImg.height > 0;
+            webpImg.onerror = () => this.webpSupported = false;
 
-            img.src = 'data:image/webp;base64,UklGRhoAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAgA0JaQAA3AA/vv9UAA==';
+            webpImg.src = 'data:image/webp;base64,UklGRhoAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAgA0JaQAA3AA/vv9UAA==';
         },
         browserSupportedImageExtension()
         {
             this.checkAvifSupport();
+            console.log('avifSupported', this.avifSupported);
             if (this.avifSupported) return this.avifExtension;
 
             this.checkWebPSupport();
+            console.log('webpSupported', this.webpSupported);
             if (this.webpSupported) return this.webpExtension;
 
             return this.fallbackExtension;
