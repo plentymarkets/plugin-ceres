@@ -58,28 +58,26 @@ export default {
                       console.log('this.webpSupported', this.webpSupported);
                   })))();
               }
-          }));
-              // .then(() => {
-              //     if (!this.avifSupported) {
-              //         console.log('avif not supported');
-              //         (async () => await detectWebP(((webpSupported) => this.webpSupported = webpSupported)))();
-              //     }
-              // })
+          }))
+          .then(() => {
+            if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
+            lozad(this.$el).observe();
+          })
         })();
 
         this.setReceivedImageExtension();
         this.setBrowserSupportedImageExtension();
         this.setDefaultImageUrl();
-
-        if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-        lozad(this.$el).observe();
     },
     watch:
     {
         defaultImageUrl()
         {
+          this.$nextTick(() =>
+          {
             this.$el.setAttribute('data-loaded', 'false');
             lozad(this.$el).triggerLoad(this.$el);
+          });
         }
     },
     computed:

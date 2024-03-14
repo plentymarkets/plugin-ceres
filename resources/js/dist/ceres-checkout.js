@@ -826,6 +826,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     }, _callee);
                   }))();
                 }
+              }).then(function () {
+                if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
+                Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_7__["default"])(_this.$el).observe();
               });
 
             case 2:
@@ -839,13 +842,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.setReceivedImageExtension();
     this.setBrowserSupportedImageExtension();
     this.setDefaultImageUrl();
-    if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-    Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_7__["default"])(this.$el).observe();
   },
   watch: {
     defaultImageUrl: function defaultImageUrl() {
-      this.$el.setAttribute('data-loaded', 'false');
-      Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_7__["default"])(this.$el).triggerLoad(this.$el);
+      var _this2 = this;
+
+      this.$nextTick(function () {
+        _this2.$el.setAttribute('data-loaded', 'false');
+
+        Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_7__["default"])(_this2.$el).triggerLoad(_this2.$el);
+      });
     }
   },
   computed: {
