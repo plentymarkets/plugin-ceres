@@ -44,51 +44,29 @@ export default {
         }
     },
     mounted() {
-        detectAvif(((supported) =>
-        {
-            this.avifSupported = supported;
-            this.$nextTick(() =>
-            {
-                if(!this.isBackgroundImage)
-                {
-                    this.$el.classList.toggle('lozad');
-                }
-                lozad(this.$el).observe();
-            });
-        }));
+        detectAvif(((supported) => this.avifSupported = supported));
 
-        if (!this.avifSupported) {
-            detectWebP(((supported) =>
-            {
-                this.webpSupported = supported;
-                this.$nextTick(() =>
-                {
-                    if(!this.isBackgroundImage)
-                    {
-                        this.$el.classList.toggle('lozad');
-                    }
-                    lozad(this.$el).observe();
-                });
-            }));
-        }
+        if (!this.avifSupported) detectWebP(((supported) => this.webpSupported = supported));
 
         this.setReceivedImageExtension();
         this.setBrowserSupportedImageExtension();
         this.setDefaultImageUrl();
+
+        this.$nextTick(() =>
+        {
+            if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
+            lozad(this.$el).observe();
+        });
     },
     watch:
     {
-        defaultImageUrl:
+        defaultImageUrl()
         {
-            immediate: true,
-            handler()
+            this.$nextTick(() =>
             {
-                this.$nextTick(() =>
-                {
-                    this.$el.setAttribute('data-loaded', 'false');
-                    lozad(this.$el).triggerLoad(this.$el);
-                });
-            }
+                this.$el.setAttribute('data-loaded', 'false');
+                lozad(this.$el).triggerLoad(this.$el);
+            });
         }
     },
     computed:

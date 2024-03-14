@@ -442,47 +442,28 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_5__["detectAvif"])(function (supported) {
-      _this.avifSupported = supported;
-
-      _this.$nextTick(function () {
-        if (!_this.isBackgroundImage) {
-          _this.$el.classList.toggle('lozad');
-        }
-
-        Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this.$el).observe();
-      });
+      return _this.avifSupported = supported;
     });
-
-    if (!this.avifSupported) {
-      Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_5__["detectWebP"])(function (supported) {
-        _this.webpSupported = supported;
-
-        _this.$nextTick(function () {
-          if (!_this.isBackgroundImage) {
-            _this.$el.classList.toggle('lozad');
-          }
-
-          Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this.$el).observe();
-        });
-      });
-    }
-
+    if (!this.avifSupported) Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_5__["detectWebP"])(function (supported) {
+      return _this.webpSupported = supported;
+    });
     this.setReceivedImageExtension();
     this.setBrowserSupportedImageExtension();
     this.setDefaultImageUrl();
+    this.$nextTick(function () {
+      if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
+      Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this.$el).observe();
+    });
   },
   watch: {
-    defaultImageUrl: {
-      immediate: true,
-      handler: function handler() {
-        var _this2 = this;
+    defaultImageUrl: function defaultImageUrl() {
+      var _this2 = this;
 
-        this.$nextTick(function () {
-          _this2.$el.setAttribute('data-loaded', 'false');
+      this.$nextTick(function () {
+        _this2.$el.setAttribute('data-loaded', 'false');
 
-          Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this2.$el).triggerLoad(_this2.$el);
-        });
-      }
+        Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this2.$el).triggerLoad(_this2.$el);
+      });
     }
   },
   computed: {
