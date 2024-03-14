@@ -11,7 +11,6 @@ use Plenty\Plugin\ConfigRepository;
 use Plenty\Modules\Webshop\Contracts\ContactRepositoryContract;
 use Plenty\Modules\Category\Models\Category;
 
-
 /**
  * Class SingleItemContext
  *
@@ -142,6 +141,21 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $imageSeo = '';
 
     /**
+     * @var string $robots Contains a robots value for a specific variation
+     */
+    public $robots = '';
+
+    /**
+     * @var bool $forceRobotsValue Contains a bool if the robots setting should also be used whith parameter
+     */
+    public $forceRobotsValue = false;
+
+    /**
+     * @var string forcedCanonicalUrl Contains a string with a canonical url
+     */
+    public $forcedCanonicalUrl = '';
+
+    /**
      * @var string $conditionOfItem Contains the condition of the current item for structured data.
      */
     public $conditionOfItem = '';
@@ -163,7 +177,6 @@ class SingleItemContext extends GlobalContext implements ContextInterface
 
         $this->item = $params['item'];
         $itemData = $this->item['documents'][0]['data'];
-
 
         $this->conditionOfItem = $this->detectItemCondition($itemData['item']['condition']['id']);
 
@@ -253,6 +266,38 @@ class SingleItemContext extends GlobalContext implements ContextInterface
                 break;
             case 4:
                 $this->sku = $itemData['item']['id'];
+        }
+
+        $robotsMapping = $this->ceresConfig->seo->itemRobotsMapping;
+        $robotsMappingId = $this->ceresConfig->seo->itemRobotsMappingId;
+        $this->forceRobotsValue = $this->ceresConfig->seo->itemRobotsMappingParameter;
+
+        switch ($robotsMapping) {
+            case "all":
+                $this->robots = "all";
+                break;
+            case "index":
+                $this->robots = "index";
+                break;
+            case "nofollow":
+                $this->robots = "nofollow";
+                break;
+            case "noindex":
+                $this->robots = "noindex";
+                break;
+            case "noindex, nofollow":
+                $this->robots = "noindex, nofollow";
+                break;
+            case "varProp":
+                $this->robots = $this->getVariationProperty($itemData['variationProperties'], $robotsMappingId);
+                break;
+        }
+
+        $canonicalPropertyId = $this->ceresConfig->seo->itemCanonicalID;
+        $canonicalUrl = $this->getVariationProperty($itemData['variationProperties'], $canonicalPropertyId);
+
+        if(!empty($canonicalUrl)){
+            $this->forcedCanonicalUrl = $canonicalUrl;
         }
 
         $this->imageSeo = $itemData['images']['all'][0][$this->ceresConfig->seo->imageSeo] ?? '';

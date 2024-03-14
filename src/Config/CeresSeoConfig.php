@@ -102,7 +102,10 @@ class CeresSeoConfig extends PluginConfig
     public $itemCondition2;
     public $itemCondition3;
     public $itemCondition4;
-
+    public $itemRobotsMapping;
+    public $itemRobotsMappingId;
+    public $itemRobotsMappingParameter;
+    public $itemCanonicalID;
 
     /**
      * @inheritDoc
@@ -139,5 +142,10 @@ class CeresSeoConfig extends PluginConfig
         $this->itemCondition3 = $this->getTextValue('condition.mapping.condition3', 'https://schema.org/NewCondition');
         $this->itemCondition4 = $this->getTextValue('condition.mapping.condition4', 'https://schema.org/UsedCondition');
         $this->imageSeo = $this->getTextValue('imageSeo.mapping.image', 'url');
+        $this->itemRobotsMapping = $this->getTextValue('itemRobots.mapping.itemRobots','all');
+        $this->itemRobotsMappingId = $this->getTextValue('itemRobots.mapping.itemRobotsID','');
+        $value = $this->getTextValue('itemRobots.mapping.itemRobotsParameter','false');
+        $this->itemRobotsMappingParameter = $value === 'true';
+        $this->itemCanonicalID = $this->getTextValue('itemCanonical.mapping.itemCanonicalID','');
     }
 }

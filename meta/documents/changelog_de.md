@@ -15,6 +15,8 @@
     - ***Wichtig:*** Die Einstellung betrifft den gesamten Header. Das bedeutet, dass sie für das Fixieren von Header-Elementen die Einstellungen einzelner ShopBuilder-Widgets überschreibt.
     - ***Wichtig:*** Es kann einige Zeit dauern bis die verbesserten CLS-Werte in Google Search Console reflektiert werden. Die Auswertung in Google Search Console bezieht sich auf den gleitenden Durchschnitt der vergangenen 28 Tage. Das bedeutet, dass die tatsächlichen Auswirkungen dieser Änderung erst in Google Search Console reflektiert werden, wenn hohe CLS-Werte nicht mehr Teil des gleitenden Durchschnitts sind.
 - In den Plugin-Einstellungen wurde die neue Einstellung **Quelle für das Bild in Rich Snippets für die Artikelseite wählen** im Bereich **SEO** hinzugefügt. Mit dieser Einstellung ist es nun möglich, die Bildergröße einzustellen, die über die Rich Snippets ausgeliefert wird.
+- Im Bereich **SEO** der plentyShop LTS-Einstellungen wurde eine neue Einstellung für die **Robots**-Angaben auf der Artikelseite hinzugefügt. Mit dieser Einstellung ist es nun möglich, das Robots-Verhalten einzustellen.
+- Im Bereich **SEO** der plentyShop LTS-Einstellungen wurde die neue Einstellung **Quelle für eine individuelle Canonical URL für die Artikelseite wählen** hinzugefügt. Mit dieser Einstellung ist es nun möglich, die Varianten auf eine andere Canonical URL zeigen zu lassen.
 - Es wurde eine Möglichkeit hinzugefügt, Adressen als primäre Adresse festzulegen.
 - Im Schritt **Performance** des plentyShop-Assistenten wurde die Möglichkeit hinzugefügt, das Umwandeln von Bildern in das WebP-Format zu aktivieren.
 - Die Ergebnisfelder für Artikel wurde um Tags erweitert.
@@ -35,6 +37,8 @@
 - [resources/views/Checkout/CheckoutView.twig](https://github.com/plentymarkets/plugin-ceres/pull/3457/files#diff-c74596cdf6d6196e3b9c8563916151e3a08a5edfa026845503c9169a0fcd8252)
 - [resources/views/Customer/Components/AddressSelect/AddressSelect.twig](https://github.com/plentymarkets/plugin-ceres/pull/3457/files#diff-969624803dfeb696a58e16de0d95c285a458ec83a615026882d9b1e65386935b)
 - [resources/views/MyAccount/MyAccountView.twig](https://github.com/plentymarkets/plugin-ceres/pull/3457/files#diff-dbc71118894a6415be3f82e4ee31dc1e6b7c3160b45b887ccce71f6620824d7c)
+- [resources/views/Item/SingleItemWrapper.twig](https://github.com/plentymarkets/plugin-ceres/pull/3483/files#diff-192a8837dba88964356b7ecd49003fe083ed719e2c601b9623e6dd4b24be9326)
+- [resources/views/PageDesign/Partials/Head.twig](https://github.com/plentymarkets/plugin-ceres/pull/3483/files#diff-33a10158d672d50c9bc1c0e8a46fbd8edb701925dcb3f619c6ff6f8ca11e45ee)
 - [resources/views/MyAccount/Components/OrderHistoryListItem.twig](https://github.com/plentymarkets/plugin-ceres/pull/3444/files#diff-5fe1a8ad88eb65339901273251de979410bc15369c08e8b9fcb687412c4d28ea)
 - [resources/views/Widgets/Common/LinkWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3444/files#diff-374f59a54ec3fcbe1d2444facbddd25c4f8a114e71b7576c9c34d7a20a2d122b)
 
