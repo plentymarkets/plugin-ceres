@@ -4969,6 +4969,91 @@
                         }
                     }
                 },
+
+                "itemRobots.mapping": {
+                    "type": "verticalContainer",
+                    "label": "Config.itemRobotsMapping",
+                    "options": {
+                        "containerEntries": {
+                            "itemRobots.mapping.itemRobots": {
+                                "type": "selectBox",
+                                "required": false,
+                                "label": "Config.itemRobots",
+                                "options": {
+                                    "defaultValue": "all",
+                                    "selectBoxValues": [
+                                        {
+                                            "value": "all",
+                                            "caption": "Config.metaRobotsAll"
+                                        },
+                                        {
+                                            "value": "index",
+                                            "caption": "Config.metaRobotsIndex"
+                                        },
+                                        {
+                                            "value": "nofollow",
+                                            "caption": "Config.metaRobotsNofollow"
+                                        },
+                                        {
+                                            "value": "noindex",
+                                            "caption": "Config.metaRobotsNoindex"
+                                        },
+                                        {
+                                            "value": "noindex, nofollow",
+                                            "caption": "Config.metaRobotsNoindexNofollow"
+                                        },
+                                        {
+                                            "value": "varProp",
+                                            "caption": "Config.metaRobotsVariationProperty"
+                                        }
+                                    ]
+                                }
+                            },
+                            "itemRobots.mapping.itemRobotsID": {
+                                "type": "inputText",
+                                "required": false,
+                                "label": "Config.itemRobotsID",
+                                "options": {
+                                    "defaultValue": ""
+                                }
+                            },
+                            "itemRobots.mapping.itemRobotsParameter": {
+                                "type": "selectBox",
+                                "required": false,
+                                "label": "Config.itemRobotsParameter",
+                                "options": {
+                                    "defaultValue": "false",
+                                    "selectBoxValues": [
+                                        {
+                                            "value": "false",
+                                            "caption": "Config.no"
+                                        },
+                                        {
+                                            "value": "true",
+                                            "caption": "Config.yes"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "itemCanonical.mapping": {
+                    "type": "verticalContainer",
+                    "label": "Config.itemCanonicalMapping",
+                    "options": {
+                        "containerEntries": {
+                            "itemCanonical.mapping.itemCanonicalID": {
+                                "type": "inputText",
+                                "required": false,
+                                "label": "Config.itemCanonicalID",
+                                "options": {
+                                    "defaultValue": ""
+                                }
+                            }
+                        }
+                    }
+                },
                 "imageSeo.mapping": {
                     "type": "verticalContainer",
                     "label": "Config.imageSeoMapping",
