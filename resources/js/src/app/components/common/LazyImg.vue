@@ -43,27 +43,29 @@ export default {
             imgRegex: /.?(\.\w+)(?:$|\?)/
         }
     },
-  created() {
-    detectAvif(((avifSupported) => {
-      console.log('avifSupported', avifSupported);
-      this.avifSupported = avifSupported;
-      console.log('this.avifSupported', this.avifSupported);
+    created()
+    {
+        detectAvif(((avifSupported) => {
+            console.log('avifSupported', avifSupported);
+            this.avifSupported = avifSupported;
+            console.log('this.avifSupported', this.avifSupported);
 
-      if (!avifSupported) {
-        console.log('avif not supported');
-        detectWebP(((webpSupported) => {
-          console.log('webpSupported', webpSupported);
-          this.webpSupported = webpSupported;
-          console.log('this.webpSupported', this.webpSupported);
-        }))
-      }
-    }));
+            if (!avifSupported) {
+                console.log('avif not supported');
+                detectWebP(((webpSupported) => {
+                    console.log('webpSupported', webpSupported);
+                    this.webpSupported = webpSupported;
+                    console.log('this.webpSupported', this.webpSupported);
+                }))
+            }
+        }));
 
-    this.setReceivedImageExtension();
-    this.setBrowserSupportedImageExtension();
-    this.setDefaultImageUrl();
-  },
-  mounted() {
+        this.setReceivedImageExtension();
+        this.setBrowserSupportedImageExtension();
+        this.setDefaultImageUrl();
+    },
+    mounted()
+    {
         this.$nextTick(() => {
             console.log('mounted nextTick');
             if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
@@ -74,12 +76,12 @@ export default {
     {
         defaultImageUrl()
         {
-          this.$nextTick(() =>
-          {
-            console.log('watcher nextTick')
-            this.$el.setAttribute('data-loaded', 'false');
-            lozad(this.$el).triggerLoad(this.$el);
-          });
+            this.$nextTick(() =>
+            {
+                console.log('watcher nextTick')
+                this.$el.setAttribute('data-loaded', 'false');
+                lozad(this.$el).triggerLoad(this.$el);
+            });
         }
     },
     computed:
