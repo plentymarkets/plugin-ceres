@@ -491,7 +491,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      modernImgFormatEnabled: App.config.global.webpImages,
+      // modernImgFormatEnabled: App.config.global.webpImages,
+      modernImgFormatEnabled: true,
       receivedImageExtension: null,
       browserSupportedImgExtension: null,
       defaultImageUrl: null,

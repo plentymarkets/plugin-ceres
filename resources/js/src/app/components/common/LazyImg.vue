@@ -32,7 +32,8 @@ export default {
     data()
     {
         return {
-            modernImgFormatEnabled: App.config.global.webpImages,
+            // modernImgFormatEnabled: App.config.global.webpImages,
+            modernImgFormatEnabled: true,
             receivedImageExtension: null,
             browserSupportedImgExtension: null,
             defaultImageUrl: null,
