@@ -5283,7 +5283,7 @@
                     "required": false,
                     "label": "Config.logPerformanceWebpConversionLabel",
                     "options": {
-                        "defaultValue": "false"
+                        "defaultValue": "true"
                     }
                 }
             }

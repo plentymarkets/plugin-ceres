@@ -32,7 +32,7 @@ export default {
     data()
     {
         return {
-            // modernImgFormatEnabled: App.config.global.webpImages,
+            modernImgaFormatEnabled: App.config.log.performance.webpConversion,
             modernImgFormatEnabled: true,
             receivedImageExtension: null,
             browserSupportedImgExtension: null,
@@ -111,18 +111,14 @@ export default {
         setBrowserSupportedImageExtension()
         {
             if (this.avifSupported) {
-                console.log('setBrowserSupportedImageExtension 1');
                 this.browserSupportedImgExtension = this.avifExtension;
                 return;
             }
 
             if (this.webpSupported) {
-                console.log('setBrowserSupportedImageExtension 2');
                 this.browserSupportedImgExtension = this.webpExtension;
                 return;
             }
-
-            console.log('setBrowserSupportedImageExtension 3');
 
             this.browserSupportedImgExtension = this.receivedImageExtension !== this.avifExtension && this.receivedImageExtension !== this.webpExtension
                 ? this.receivedImageExtension

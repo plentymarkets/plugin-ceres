@@ -427,7 +427,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      // modernImgFormatEnabled: App.config.global.webpImages,
+      modernImgaFormatEnabled: App.config.log.performance.webpConversion,
       modernImgFormatEnabled: true,
       receivedImageExtension: null,
       browserSupportedImgExtension: null,
@@ -502,18 +502,15 @@ __webpack_require__.r(__webpack_exports__);
     },
     setBrowserSupportedImageExtension: function setBrowserSupportedImageExtension() {
       if (this.avifSupported) {
-        console.log('setBrowserSupportedImageExtension 1');
         this.browserSupportedImgExtension = this.avifExtension;
         return;
       }
 
       if (this.webpSupported) {
-        console.log('setBrowserSupportedImageExtension 2');
         this.browserSupportedImgExtension = this.webpExtension;
         return;
       }
 
-      console.log('setBrowserSupportedImageExtension 3');
       this.browserSupportedImgExtension = this.receivedImageExtension !== this.avifExtension && this.receivedImageExtension !== this.webpExtension ? this.receivedImageExtension : 'jpeg';
     },
     setDefaultImageUrl: function setDefaultImageUrl() {
