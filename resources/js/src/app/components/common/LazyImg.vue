@@ -49,18 +49,27 @@ export default {
         detectAvif(((avifSupported) => {
             this.avifSupported = avifSupported;
 
+            if (avifSupported === true) {
+                this.propagateImageFormat();
+            }
+
             if (!avifSupported) {
                 detectWebP(((webpSupported) => {
                     this.webpSupported = webpSupported;
+
+                    if (webpSupported === true) {
+                        this.propagateImageFormat();
+                    }
                 }));
             }
         })).then(() => {
+            console.log('then');
             if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
             lozad(this.$el).observe();
 
-            this.setReceivedImageExtension();
-            this.setBrowserSupportedImageExtension();
-            this.setDefaultImageUrl();
+            // this.setReceivedImageExtension();
+            // this.setBrowserSupportedImageExtension();
+            // this.setDefaultImageUrl();
         });
     },
     watch:
@@ -90,6 +99,12 @@ export default {
     },
     methods:
     {
+        propagateImageFormat()
+        {
+            this.setReceivedImageExtension();
+            this.setBrowserSupportedImageExtension();
+            this.setDefaultImageUrl();
+        },
         setReceivedImageExtension()
         {
             const matches = this.imageUrl?.match(this.imgRegex);

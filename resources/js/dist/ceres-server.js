@@ -2908,20 +2908,25 @@ __webpack_require__.r(__webpack_exports__);
     Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_5__["detectAvif"])(function (avifSupported) {
       _this.avifSupported = avifSupported;
 
+      if (avifSupported === true) {
+        _this.propagateImageFormat();
+      }
+
       if (!avifSupported) {
         Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_5__["detectWebP"])(function (webpSupported) {
           _this.webpSupported = webpSupported;
+
+          if (webpSupported === true) {
+            _this.propagateImageFormat();
+          }
         });
       }
     }).then(function () {
+      console.log('then');
       if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
-      Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this.$el).observe();
-
-      _this.setReceivedImageExtension();
-
-      _this.setBrowserSupportedImageExtension();
-
-      _this.setDefaultImageUrl();
+      Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this.$el).observe(); // this.setReceivedImageExtension();
+      // this.setBrowserSupportedImageExtension();
+      // this.setDefaultImageUrl();
     });
   },
   watch: {
@@ -2947,6 +2952,11 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    propagateImageFormat: function propagateImageFormat() {
+      this.setReceivedImageExtension();
+      this.setBrowserSupportedImageExtension();
+      this.setDefaultImageUrl();
+    },
     setReceivedImageExtension: function setReceivedImageExtension() {
       var _this$imageUrl;
 
