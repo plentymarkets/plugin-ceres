@@ -1,7 +1,7 @@
 <template>
     <picture
         v-if="!isBackgroundImage"
-        :data-iesrc="fallbackUrl || defaultImageUrl"
+        :data-iesrc="defaultImageUrl || fallbackUrl"
         :data-picture-class="pictureClass"
         :data-alt="alt"
         :data-title="title">
