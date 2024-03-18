@@ -49,37 +49,26 @@ export default {
         detectAvif(((avifSupported) => {
             this.avifSupported = avifSupported;
 
-            this.$nextTick(() => {
-              if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-              lozad(this.$el).observe();
-            });
-
             if (!avifSupported) {
                 detectWebP(((webpSupported) => {
                     this.webpSupported = webpSupported;
-
-                  this.$nextTick(() => {
-                    if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-                    lozad(this.$el).observe();
-                  });
                 }));
             }
-        }));
+        })).then(() => {
+            if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
+            lozad(this.$el).observe();
 
-        this.setReceivedImageExtension();
-        this.setBrowserSupportedImageExtension();
-        this.setDefaultImageUrl();
+            this.setReceivedImageExtension();
+            this.setBrowserSupportedImageExtension();
+            this.setDefaultImageUrl();
+        });
     },
     watch:
     {
         defaultImageUrl()
         {
-            this.$nextTick(() =>
-            {
-                console.log('watcher nextTick')
-                this.$el.setAttribute('data-loaded', 'false');
-                lozad(this.$el).triggerLoad(this.$el);
-            });
+            this.$el.setAttribute('data-loaded', 'false');
+            lozad(this.$el).triggerLoad(this.$el);
         }
     },
     computed:
