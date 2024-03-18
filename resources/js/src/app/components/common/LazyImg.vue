@@ -1,7 +1,7 @@
 <template>
     <picture
         v-if="!isBackgroundImage"
-        :data-iesrc="defaultImageUrl || fallbackUrl"
+        :data-iesrc="defaultImageUrl"
         :data-picture-class="pictureClass"
         :data-alt="alt"
         :data-title="title">
@@ -63,13 +63,8 @@ export default {
                 }));
             }
         })).then(() => {
-            console.log('then');
             if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
             lozad(this.$el).observe();
-
-            // this.setReceivedImageExtension();
-            // this.setBrowserSupportedImageExtension();
-            // this.setDefaultImageUrl();
         });
     },
     watch:
@@ -159,7 +154,7 @@ export default {
 
             this.defaultImageUrl = this.modernImgFormatEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension
                 ? this.convertedImageUrl
-                : this.imageUrl;
+                : this.imageUrl || this.fallbackUrl;
         }
     }
 }
