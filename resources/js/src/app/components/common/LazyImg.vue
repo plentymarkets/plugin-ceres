@@ -32,7 +32,7 @@ export default {
     data()
     {
         return {
-            modernImgaFormatEnabled: App.config.log.performance.webpConversion,
+            modernImgaFormatEnabled: App.config.logPerformanceWebpConversion,
             modernImgFormatEnabled: true,
             receivedImageExtension: null,
             browserSupportedImgExtension: null,
