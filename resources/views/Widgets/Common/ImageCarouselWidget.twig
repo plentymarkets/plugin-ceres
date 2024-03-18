@@ -95,8 +95,6 @@
 
     {% if slideSettings.fallbackImagePath | trim is not empty %}
         {{ Twig.set("slide", "slide | merge({ fallbackImageUrl: #{ slideSettings.fallbackImagePath | json_encode } })") }}
-    {% else %}
-        {{ Twig.set("slide", "slide | merge({ fallbackImageUrl: #{ slide.imageUrl | json_encode } })") }}
     {% endif %}
 
     {% if slideSettings.headline | trim is not empty and slideSettings.headlineStyle == "custom-caption" %}

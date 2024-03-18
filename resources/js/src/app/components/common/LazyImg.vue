@@ -89,9 +89,12 @@ export default {
             return matches && (matches[1] === this.webpImageType) ? this.webpMimeType : null;
         },
         pictureSource() {
+            const useModernFormat = this.webpImagesEnabled && this.webpBrowserSupport;
+            const fallbackImageUrl = this.fallbackUrl || this.imageUrl;
+            const modernUrl = useModernFormat ? this.defaultImage : fallbackImageUrl;
             return this.mimeTypeWebp === this.webpMimeType
-                ? (this.webpImagesEnabled && this.webpBrowserSupport) ? this.defaultImage : this.fallbackUrl
-                : this.fallbackUrl;
+                ? modernUrl
+                : fallbackImageUrl
         }
     }
 }
