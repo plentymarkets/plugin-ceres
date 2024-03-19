@@ -156,19 +156,13 @@
                         {% if widget.settings.lazyLoading.mobile %}
                             <lazy-img
                                 convert-image="{{ Twig.print(false) }}"
-                                picture-class="img-cover cristi-1"
+                                picture-class="'img-cover cristi-1'"
                                 image-url="{{ Twig.print("slide.imageUrl") }}"
                                 fallback-url="{{ Twig.print("slide.fallbackImageUrl") }}"
                                 alt="{{ Twig.print("altText") }}"
                                 title="{{ Twig.print("imgTitle") }}"
                                 role="option">
                             </lazy-img>
-                            <noscript v-if="false">
-                                <img src="{{ Twig.print("fallbackUrl") }}"
-                                    class="img-cover"
-                                    alt="{{ Twig.print("altText") }}"
-                                    title="{{ Twig.print("imgTitle") }}">
-                            </noscript>
                         {% else %}
                             <picture>
                                 <source srcset="{{ Twig.print("slide.imageUrl") }}" {{ Twig.if("slide.imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>
