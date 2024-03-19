@@ -229,6 +229,12 @@ export default {
                 return this.variationMissingProperties.find(property => property.property.id === this.property.id);
             }
 
+            const isTextNumberInput = this.inputType === "int" || this.inputType === "float" || this.inputType === "text";
+
+            if (isTextNumberInput && this.property?.value?.length > 128) {
+                return true;
+            }
+
             return isRequired && this.variationMarkInvalidProperties && !this.property.value;
         },
 
