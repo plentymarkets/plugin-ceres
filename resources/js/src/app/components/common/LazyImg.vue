@@ -7,10 +7,10 @@
         :data-title="title">
         <slot name="additionalimages"></slot>
         <source :srcset="defaultImageUrl" :type="mimeType">
-        <source v-if="fallbackUrl" :srcset="fallbackUrl">
+        <source v-if="backupImageUrl" :srcset="backupImageUrl">
     </picture>
 
-    <div v-else :data-background-image="defaultImageUrl || fallbackUrl" :class="pictureClass">
+    <div v-else :data-background-image="defaultImageUrl || backupImageUrl" :class="pictureClass">
         <slot></slot>
     </div>
 </template>
@@ -54,6 +54,7 @@ export default {
             receivedImageExtension: null,
             browserSupportedImgExtension: null,
             defaultImageUrl: null,
+            backupImageUrl: this.fallbackUrl,
             avifSupported: false,
             avifExtension: 'avif',
             webpSupported: false,
@@ -159,7 +160,7 @@ export default {
 
             if (this.modernImgFormatEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension) {
                 this.defaultImageUrl = this.convertedImageUrl;
-                if (!this.fallbackUrl) this.fallbackUrl = this.imageUrl;
+                if (!this.fallbackUrl) this.backupImageUrl = this.imageUrl;
                 return;
             }
 

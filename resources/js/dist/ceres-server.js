@@ -2912,6 +2912,7 @@ __webpack_require__.r(__webpack_exports__);
       receivedImageExtension: null,
       browserSupportedImgExtension: null,
       defaultImageUrl: null,
+      backupImageUrl: this.fallbackUrl,
       avifSupported: false,
       avifExtension: 'avif',
       webpSupported: false,
@@ -3004,7 +3005,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.modernImgFormatEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension) {
         this.defaultImageUrl = this.convertedImageUrl;
-        if (!this.fallbackUrl) this.fallbackUrl = this.imageUrl;
+        if (!this.fallbackUrl) this.backupImageUrl = this.imageUrl;
         return;
       }
 
@@ -44470,8 +44471,8 @@ var render = function() {
               _vm._ssrAttr("srcset", _vm.defaultImageUrl) +
               _vm._ssrAttr("type", _vm.mimeType) +
               "> " +
-              (_vm.fallbackUrl
-                ? "<source" + _vm._ssrAttr("srcset", _vm.fallbackUrl) + ">"
+              (_vm.backupImageUrl
+                ? "<source" + _vm._ssrAttr("srcset", _vm.backupImageUrl) + ">"
                 : "<!---->")
           )
         ],
@@ -44482,7 +44483,7 @@ var render = function() {
         {
           class: _vm.pictureClass,
           attrs: {
-            "data-background-image": _vm.defaultImageUrl || _vm.fallbackUrl
+            "data-background-image": _vm.defaultImageUrl || _vm.backupImageUrl
           }
         },
         [_vm._t("default")],
