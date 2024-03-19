@@ -585,8 +585,7 @@ var render = function() {
                   "image-url": imageUrl.url,
                   alt: _vm.getAltText(imageUrl),
                   title: _vm.getTitleText(imageUrl),
-                  "picture-class":
-                    index === 0 ? "img-fluid" : "img-fluid owl-lazy",
+                  "picture-class": "img-fluid",
                   role: "option"
                 }
               })

@@ -12,7 +12,7 @@
                 :alt="getAltText(imageUrl)"
                 :title="getTitleText(imageUrl)"
                 :ref="{ 'itemLazyImage' : index === 0 }"
-                :picture-class="index === 0 ? 'img-fluid' : 'img-fluid owl-lazy'"
+                picture-class="img-fluid"
                 role="option" />
         </div>
     </a>
