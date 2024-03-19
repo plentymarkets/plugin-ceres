@@ -1,16 +1,16 @@
 <template>
     <picture
         v-if="!isBackgroundImage"
-        :data-iesrc="defaultImageUrl || backupImageUrl"
+        :data-iesrc="defaultImageUrl"
         :data-picture-class="pictureClass"
         :data-alt="alt"
         :data-title="title">
         <slot name="additionalimages"></slot>
         <source :srcset="defaultImageUrl" :type="mimeType">
-        <source v-if="backupImageUrl" :srcset="backupImageUrl">
+        <source v-if="fallbackUrl" :srcset="fallbackUrl">
     </picture>
 
-    <div v-else :data-background-image="defaultImageUrl || backupImageUrl" :class="pictureClass">
+    <div v-else :data-background-image="defaultImageUrl || fallbackUrl" :class="pictureClass">
         <slot></slot>
     </div>
 </template>
@@ -22,6 +22,10 @@ import {detectAvif, detectWebP} from "../../helper/featureDetect";
 export default {
     props:
     {
+        convertImage: {
+            type: Boolean,
+            default: true
+        },
         imageUrl: {
             type: String,
             default: null
@@ -54,7 +58,6 @@ export default {
             receivedImageExtension: null,
             browserSupportedImgExtension: null,
             defaultImageUrl: null,
-            backupImageUrl: this.fallbackUrl,
             avifSupported: false,
             avifExtension: 'avif',
             webpSupported: false,
@@ -158,13 +161,9 @@ export default {
                 return;
             }
 
-            if (this.modernImgFormatEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension) {
-                this.defaultImageUrl = this.convertedImageUrl;
-                if (!this.fallbackUrl) this.backupImageUrl = this.imageUrl;
-                return;
-            }
-
-            this.defaultImageUrl = this.imageUrl || this.fallbackUrl;
+            this.defaultImageUrl = this.convertImage && this.modernImgFormatEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension
+                ? this.convertedImageUrl
+                : this.imageUrl || this.fallbackUrl;
         }
     }
 }

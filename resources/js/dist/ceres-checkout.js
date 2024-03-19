@@ -752,6 +752,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
+    convertImage: {
+      type: Boolean,
+      default: true
+    },
     imageUrl: {
       type: String,
       default: null
@@ -783,7 +787,6 @@ __webpack_require__.r(__webpack_exports__);
       receivedImageExtension: null,
       browserSupportedImgExtension: null,
       defaultImageUrl: null,
-      backupImageUrl: this.fallbackUrl,
       avifSupported: false,
       avifExtension: 'avif',
       webpSupported: false,
@@ -874,13 +877,7 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      if (this.modernImgFormatEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension) {
-        this.defaultImageUrl = this.convertedImageUrl;
-        if (!this.fallbackUrl) this.backupImageUrl = this.imageUrl;
-        return;
-      }
-
-      this.defaultImageUrl = this.imageUrl || this.fallbackUrl;
+      this.defaultImageUrl = this.convertImage && this.modernImgFormatEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension ? this.convertedImageUrl : this.imageUrl || this.fallbackUrl;
     }
   }
 });
@@ -40596,7 +40593,7 @@ var render = function() {
         "picture",
         {
           attrs: {
-            "data-iesrc": _vm.defaultImageUrl || _vm.backupImageUrl,
+            "data-iesrc": _vm.defaultImageUrl,
             "data-picture-class": _vm.pictureClass,
             "data-alt": _vm.alt,
             "data-title": _vm.title
@@ -40609,8 +40606,8 @@ var render = function() {
             attrs: { srcset: _vm.defaultImageUrl, type: _vm.mimeType }
           }),
           _vm._v(" "),
-          _vm.backupImageUrl
-            ? _c("source", { attrs: { srcset: _vm.backupImageUrl } })
+          _vm.fallbackUrl
+            ? _c("source", { attrs: { srcset: _vm.fallbackUrl } })
             : _vm._e()
         ],
         2
@@ -40620,7 +40617,7 @@ var render = function() {
         {
           class: _vm.pictureClass,
           attrs: {
-            "data-background-image": _vm.defaultImageUrl || _vm.backupImageUrl
+            "data-background-image": _vm.defaultImageUrl || _vm.fallbackUrl
           }
         },
         [_vm._t("default")],
