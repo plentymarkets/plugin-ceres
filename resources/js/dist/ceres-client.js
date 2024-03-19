@@ -539,7 +539,13 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      this.defaultImageUrl = this.modernImgFormatEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension ? this.convertedImageUrl : this.imageUrl || this.fallbackUrl;
+      if (this.modernImgFormatEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension) {
+        this.defaultImageUrl = this.convertedImageUrl;
+        if (!this.fallbackUrl) this.fallbackUrl = this.imageUrl;
+        return;
+      }
+
+      this.defaultImageUrl = this.imageUrl || this.fallbackUrl;
     }
   }
 });
