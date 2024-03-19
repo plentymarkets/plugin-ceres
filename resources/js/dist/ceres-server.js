@@ -2890,7 +2890,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      configImagesFormatEnabled: App.config.log.performanceWebpConversion,
+      configImagesFormatEnabled: App.config.log.performance.modernImagesConversion,
       modernImgFormatEnabled: true,
       receivedImageExtension: null,
       browserSupportedImgExtension: null,

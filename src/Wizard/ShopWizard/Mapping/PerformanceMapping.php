@@ -45,8 +45,8 @@ class PerformanceMapping
             "global"   => false,
             "optional" => true,
         ],
-        "performance_webpConversion" => [
-            "field"    => "log.performance.webpConversion",
+        "performance_modernImagesConversion" => [
+            "field"    => "log.performance.modernImagesConversion",
             "type"     => "boolean",
             "global"   => false,
             "optional" => true,
