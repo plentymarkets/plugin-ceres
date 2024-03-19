@@ -64,7 +64,7 @@ export default {
     },
     mounted()
     {
-        this.configImagesFormatEnabled = App.config.log.performanceModernImagesConversion;
+        // this.configImagesFormatEnabled = App.config.log.performanceModernImagesConversion;
 
         detectAvif(((avifSupported) => {
             this.avifSupported = avifSupported;
