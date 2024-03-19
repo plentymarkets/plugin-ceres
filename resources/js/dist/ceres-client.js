@@ -427,7 +427,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      configImagesFormatEnabled: App.config.global.log.performance.modernImagesConversion,
+      // configImagesFormatEnabled: App.config.global.log.performance.modernImagesConversion,
       modernImgFormatEnabled: true,
       receivedImageExtension: null,
       browserSupportedImgExtension: null,
