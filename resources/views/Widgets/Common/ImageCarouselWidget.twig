@@ -155,8 +155,8 @@
 
                         {% if widget.settings.lazyLoading.mobile %}
                             <lazy-img
-                                convert-image="{{ Twig.print(false) }}"
-                                picture-class="'img-cover cristi-1'"
+                                convert-image="false"
+                                picture-class="img-cover cristi-1"
                                 image-url="{{ Twig.print("slide.imageUrl") }}"
                                 fallback-url="{{ Twig.print("slide.fallbackImageUrl") }}"
                                 alt="{{ Twig.print("altText") }}"
