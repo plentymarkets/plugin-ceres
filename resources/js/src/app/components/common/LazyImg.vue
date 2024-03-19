@@ -1,7 +1,7 @@
 <template>
     <picture
         v-if="!isBackgroundImage"
-        :data-iesrc="defaultImageUrl"
+        :data-iesrc="defaultImageUrl || backupImageUrl"
         :data-picture-class="pictureClass"
         :data-alt="alt"
         :data-title="title">

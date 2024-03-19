@@ -44458,7 +44458,7 @@ var render = function() {
         "picture",
         {
           attrs: {
-            "data-iesrc": _vm.defaultImageUrl,
+            "data-iesrc": _vm.defaultImageUrl || _vm.backupImageUrl,
             "data-picture-class": _vm.pictureClass,
             "data-alt": _vm.alt,
             "data-title": _vm.title
