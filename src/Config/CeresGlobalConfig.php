@@ -78,11 +78,6 @@ class CeresGlobalConfig extends PluginConfig
     public $userDataHashMaxAge;
 
     /**
-     * @var bool $modernImagesConversion Flag for enabling avif, webp images loading
-     */
-    public $modernImagesConversion;
-
-    /**
      * @inheritDoc
      */
     protected function getPluginName() :string
@@ -110,6 +105,5 @@ class CeresGlobalConfig extends PluginConfig
         $this->registrationRequirePrivacyPolicyConfirmation = $this->getBooleanValue( 'global.registration_require_privacy_policy_confirmation', true );
         $this->blockCookies                = $this->getBooleanValue( 'global.block_cookies', true );
         $this->userDataHashMaxAge          = $this->getIntegerValue('global.user_data_hash_max_age', 24);
-        $this->modernImagesConversion      = $this->getBooleanValue( 'log.performance.modernImagesConversion', true );
     }
 }

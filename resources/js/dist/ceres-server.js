@@ -2912,7 +2912,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      modernImgFormatEnabled: true,
+      modernImgFormatEnabled: App.config.log.performanceModernImagesConversion,
       receivedImageExtension: null,
       browserSupportedImgExtension: null,
       defaultImageUrl: null,
@@ -2926,7 +2926,6 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    // this.modernImgFormatEnabled = App.config.log.performanceModernImagesConversion;
     Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_5__["detectAvif"])(function (avifSupported) {
       _this.avifSupported = avifSupported;
       if (avifSupported) _this.propagateImageFormat();
