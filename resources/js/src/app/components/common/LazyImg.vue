@@ -32,7 +32,7 @@ export default {
     data()
     {
         return {
-            modernImgaFormatEnabled: App.config.logPerformanceWebpConversion,
+            modernImgaFormatEnabled: App.config.log.performanceWebpConversion,
             modernImgFormatEnabled: true,
             receivedImageExtension: null,
             browserSupportedImgExtension: null,
@@ -48,18 +48,12 @@ export default {
     {
         detectAvif(((avifSupported) => {
             this.avifSupported = avifSupported;
-
-            if (avifSupported === true) {
-                this.propagateImageFormat();
-            }
+            if (avifSupported === true) this.propagateImageFormat();
 
             if (!avifSupported) {
                 detectWebP(((webpSupported) => {
                     this.webpSupported = webpSupported;
-
-                    if (webpSupported === true) {
-                        this.propagateImageFormat();
-                    }
+                    if (webpSupported === true) this.propagateImageFormat();
                 }));
             }
         })).then(() => {
@@ -81,9 +75,7 @@ export default {
         {
             const matches = this.defaultImageUrl?.match(this.imgRegex);
 
-            if (matches) {
-                return `image/${matches[1].split('.').pop()}`;
-            }
+            if (matches) return `image/${matches[1].split('.').pop()}`;
 
             return null;
         },
@@ -104,9 +96,7 @@ export default {
         {
             const matches = this.imageUrl?.match(this.imgRegex);
 
-            if (matches) {
-                this.receivedImageExtension = matches[1].split('.').pop();
-            }
+            if (matches) this.receivedImageExtension = matches[1].split('.').pop();
         },
         setBrowserSupportedImageExtension()
         {

@@ -427,7 +427,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      modernImgaFormatEnabled: App.config.logPerformanceWebpConversion,
+      modernImgaFormatEnabled: App.config.log.performanceWebpConversion,
       modernImgFormatEnabled: true,
       receivedImageExtension: null,
       browserSupportedImgExtension: null,
@@ -444,18 +444,12 @@ __webpack_require__.r(__webpack_exports__);
 
     Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_5__["detectAvif"])(function (avifSupported) {
       _this.avifSupported = avifSupported;
-
-      if (avifSupported === true) {
-        _this.propagateImageFormat();
-      }
+      if (avifSupported === true) _this.propagateImageFormat();
 
       if (!avifSupported) {
         Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_5__["detectWebP"])(function (webpSupported) {
           _this.webpSupported = webpSupported;
-
-          if (webpSupported === true) {
-            _this.propagateImageFormat();
-          }
+          if (webpSupported === true) _this.propagateImageFormat();
         });
       }
     }).then(function () {
@@ -474,11 +468,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this$defaultImageUrl;
 
       var matches = (_this$defaultImageUrl = this.defaultImageUrl) === null || _this$defaultImageUrl === void 0 ? void 0 : _this$defaultImageUrl.match(this.imgRegex);
-
-      if (matches) {
-        return "image/".concat(matches[1].split('.').pop());
-      }
-
+      if (matches) return "image/".concat(matches[1].split('.').pop());
       return null;
     },
     convertedImageUrl: function convertedImageUrl() {
@@ -495,10 +485,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this$imageUrl;
 
       var matches = (_this$imageUrl = this.imageUrl) === null || _this$imageUrl === void 0 ? void 0 : _this$imageUrl.match(this.imgRegex);
-
-      if (matches) {
-        this.receivedImageExtension = matches[1].split('.').pop();
-      }
+      if (matches) this.receivedImageExtension = matches[1].split('.').pop();
     },
     setBrowserSupportedImageExtension: function setBrowserSupportedImageExtension() {
       if (this.avifSupported) {
