@@ -22,12 +22,30 @@ import {detectAvif, detectWebP} from "../../helper/featureDetect";
 export default {
     props:
     {
-        imageUrl: String,
-        fallbackUrl: String,
-        isBackgroundImage: Boolean,
-        pictureClass: String,
-        alt: String,
-        title: String
+        imageUrl: {
+            type: String,
+            default: null
+        },
+        fallbackUrl: {
+            type: String,
+            default: null
+        },
+        isBackgroundImage: {
+            type: Boolean,
+            default: false
+        },
+        pictureClass: {
+            type: String,
+            default: null
+        },
+        alt: {
+            type: String,
+            default: null
+        },
+        title: {
+            type: String,
+            default: null
+        }
     },
     data()
     {
