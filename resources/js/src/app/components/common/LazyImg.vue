@@ -32,7 +32,7 @@ export default {
     data()
     {
         return {
-            // configImagesFormatEnabled: App.config.global.log.performance.modernImagesConversion,
+            configImagesFormatEnabled: false,
             modernImgFormatEnabled: true,
             receivedImageExtension: null,
             browserSupportedImgExtension: null,
@@ -46,6 +46,8 @@ export default {
     },
     mounted()
     {
+        this.configImagesFormatEnabled = App.config.log.performanceModernImagesConversion;
+
         detectAvif(((avifSupported) => {
             this.avifSupported = avifSupported;
             if (avifSupported === true) this.propagateImageFormat();
