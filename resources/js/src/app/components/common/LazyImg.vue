@@ -32,7 +32,7 @@ export default {
     data()
     {
         return {
-            configImagesFormatEnabled: App.config.log.performance.modernImagesConversion,
+            configImagesFormatEnabled: App.config.global.log.performance.modernImagesConversion,
             modernImgFormatEnabled: true,
             receivedImageExtension: null,
             browserSupportedImgExtension: null,
