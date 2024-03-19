@@ -64,16 +64,16 @@ export default {
     },
     mounted()
     {
-        // this.configImagesFormatEnabled = App.config.log.performanceModernImagesConversion;
+        this.configImagesFormatEnabled = App.config.log.performanceModernImagesConversion;
 
         detectAvif(((avifSupported) => {
             this.avifSupported = avifSupported;
-            if (avifSupported === true) this.propagateImageFormat();
+            if (avifSupported) this.propagateImageFormat();
 
             if (!avifSupported) {
                 detectWebP(((webpSupported) => {
                     this.webpSupported = webpSupported;
-                    if (webpSupported === true) this.propagateImageFormat();
+                    if (webpSupported) this.propagateImageFormat();
                 }));
             }
         })).then(() => {

@@ -794,15 +794,15 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    // this.configImagesFormatEnabled = App.config.log.performanceModernImagesConversion;
+    this.configImagesFormatEnabled = App.config.log.performanceModernImagesConversion;
     Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_5__["detectAvif"])(function (avifSupported) {
       _this.avifSupported = avifSupported;
-      if (avifSupported === true) _this.propagateImageFormat();
+      if (avifSupported) _this.propagateImageFormat();
 
       if (!avifSupported) {
         Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_5__["detectWebP"])(function (webpSupported) {
           _this.webpSupported = webpSupported;
-          if (webpSupported === true) _this.propagateImageFormat();
+          if (webpSupported) _this.propagateImageFormat();
         });
       }
     }).then(function () {
