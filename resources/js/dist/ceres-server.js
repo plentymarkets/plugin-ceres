@@ -3013,7 +3013,8 @@ __webpack_require__.r(__webpack_exports__);
       this.defaultImageUrl = this.imageConversionEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension ? this.convertedImageUrl : this.imageUrl || this.fallbackUrl;
     },
     alternativeImage: function alternativeImage(event) {
-      console.log(event);
+      console.log('alternativeImage', event);
+      event.target.srcset = this.imageUrl;
       event.target.src = this.imageUrl;
       this.defaultImageUrl = this.imageUrl;
     }

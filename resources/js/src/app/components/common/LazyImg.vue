@@ -7,7 +7,7 @@
         :data-alt="alt"
         :data-title="title">
         <slot name="additionalimages"></slot>
-        <source :srcset="defaultImageUrl" :type="mimeType">
+        <source :srcset="defaultImageUrl" :type="mimeType" @error="alternativeImage">
         <source :srcset="imageUrl">
         <source v-if="fallbackUrl" :srcset="fallbackUrl">
     </picture>
@@ -169,7 +169,8 @@ export default {
         },
         alternativeImage(event)
         {
-            console.log(event);
+            console.log('alternativeImage', event);
+            event.target.srcset = this.imageUrl;
             event.target.src = this.imageUrl;
             this.defaultImageUrl = this.imageUrl;
         }

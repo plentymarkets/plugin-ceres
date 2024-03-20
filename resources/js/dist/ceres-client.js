@@ -550,7 +550,8 @@ __webpack_require__.r(__webpack_exports__);
       this.defaultImageUrl = this.imageConversionEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension ? this.convertedImageUrl : this.imageUrl || this.fallbackUrl;
     },
     alternativeImage: function alternativeImage(event) {
-      console.log(event);
+      console.log('alternativeImage', event);
+      event.target.srcset = this.imageUrl;
       event.target.src = this.imageUrl;
       this.defaultImageUrl = this.imageUrl;
     }
@@ -37993,7 +37994,8 @@ var render = function() {
           _vm._t("additionalimages"),
           _vm._v(" "),
           _c("source", {
-            attrs: { srcset: _vm.defaultImageUrl, type: _vm.mimeType }
+            attrs: { srcset: _vm.defaultImageUrl, type: _vm.mimeType },
+            on: { error: _vm.alternativeImage }
           }),
           _vm._v(" "),
           _c("source", { attrs: { srcset: _vm.imageUrl } }),
