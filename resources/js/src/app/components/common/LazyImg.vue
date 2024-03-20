@@ -75,24 +75,19 @@ export default {
                 }));
             }
         })).then(() => {
-            console.log('then');
             if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
             lozad(this.$el).observe();
         });
     },
     watch:
     {
-        defaultImageUrl:
+        defaultImageUrl()
         {
-            immediate: true,
-            handler() {
-                this.$nextTick(() =>
-                {
-                    console.log('watcher');
-                    this.$el.setAttribute('data-loaded', 'false');
-                    lozad(this.$el).triggerLoad(this.$el);
-                });
-            }
+            this.$nextTick(() =>
+            {
+                this.$el.setAttribute('data-loaded', 'false');
+                lozad(this.$el).triggerLoad(this.$el);
+            });
         }
     },
     computed:
@@ -165,8 +160,22 @@ export default {
             }
 
             this.defaultImageUrl = this.imageConversionEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension
-                ? this.convertedImageUrl
+                ? this.testImageUrl(this.convertedImageUrl)
+                    .then(function imageLoaded(e) {
+                        return this.convertedImageUrl;
+                    })
+                    .catch(function imageFailed(e) {
+                      return this.imageUrl;
+                    })
                 : this.imageUrl || this.fallbackUrl;
+        },
+        testImageUrl(url) {
+            return new Promise(function(resolve, reject) {
+                const image = new Image();
+                image.addEventListener('load', resolve);
+                image.addEventListener('error', reject);
+                image.src = url;
+            });
         }
     }
 }
