@@ -85,13 +85,17 @@ export default {
     },
     watch:
     {
-        defaultImageUrl()
+        defaultImageUrl:
         {
-            this.$nextTick(() =>
+            immediate: true,
+            handler()
             {
-                this.$el.setAttribute('data-loaded', 'false');
-                lozad(this.$el).triggerLoad(this.$el);
-            });
+                this.$nextTick(() =>
+                {
+                    this.$el.setAttribute('data-loaded', 'false');
+                    lozad(this.$el).triggerLoad(this.$el);
+                });
+            }
         }
     },
     computed:
