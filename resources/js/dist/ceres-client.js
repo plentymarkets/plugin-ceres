@@ -469,10 +469,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (avifSupported) {
         _this.$nextTick(function () {
-          if (!_this.isBackgroundImage) {
-            _this.$el.classList.toggle('lozad');
-          }
-
+          if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
           Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this.$el).observe();
         });
 
@@ -485,10 +482,7 @@ __webpack_require__.r(__webpack_exports__);
 
           if (webpSupported) {
             _this.$nextTick(function () {
-              if (!_this.isBackgroundImage) {
-                _this.$el.classList.toggle('lozad');
-              }
-
+              if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
               Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this.$el).observe();
             });
 

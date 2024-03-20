@@ -73,9 +73,7 @@ export default {
 
             if (avifSupported) {
                 this.$nextTick(() => {
-                    if (!this.isBackgroundImage) {
-                        this.$el.classList.toggle('lozad');
-                    }
+                    if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
                     lozad(this.$el).observe();
                 });
 
@@ -88,9 +86,7 @@ export default {
 
                     if (webpSupported) {
                         this.$nextTick(() => {
-                            if (!this.isBackgroundImage) {
-                                this.$el.classList.toggle('lozad');
-                            }
+                            if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
                             lozad(this.$el).observe();
                         });
 
