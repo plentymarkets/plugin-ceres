@@ -1,7 +1,6 @@
 <template>
     <picture
         v-if="!isBackgroundImage"
-        :data-iesrc="defaultImageUrl"
         :data-picture-class="pictureClass"
         :data-alt="alt"
         :data-title="title">
@@ -17,7 +16,6 @@
 </template>
 
 <script>
-import lozad from "../../plugins/lozad";
 import {detectAvif, detectWebP} from "../../helper/featureDetect";
 
 export default {
@@ -68,34 +66,13 @@ export default {
             this.avifSupported = avifSupported;
             if (avifSupported) this.propagateImageFormat();
 
-            this.$nextTick(() => {
-                if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-                lozad(this.$el).observe();
-            });
-
             if (!avifSupported) {
                 detectWebP(((webpSupported) => {
                     this.webpSupported = webpSupported;
                     if (webpSupported) this.propagateImageFormat();
-
-                    this.$nextTick(() => {
-                        if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-                        lozad(this.$el).observe();
-                    });
                 }));
             }
         }));
-    },
-    watch:
-    {
-        defaultImageUrl()
-        {
-            this.$nextTick(() =>
-            {
-                this.$el.setAttribute('data-loaded', 'false');
-                lozad(this.$el).triggerLoad(this.$el);
-            });
-        }
     },
     computed:
     {

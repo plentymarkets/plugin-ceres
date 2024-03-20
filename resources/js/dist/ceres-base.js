@@ -455,8 +455,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.concat.js */ "./node_modules/core-js/modules/es.array.concat.js");
 /* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _plugins_lozad__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../plugins/lozad */ "./resources/js/src/app/plugins/lozad.js");
-/* harmony import */ var _helper_featureDetect__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../helper/featureDetect */ "./resources/js/src/app/helper/featureDetect.js");
+/* harmony import */ var _helper_featureDetect__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../helper/featureDetect */ "./resources/js/src/app/helper/featureDetect.js");
 
 
 
@@ -478,8 +477,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -524,38 +521,17 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_5__["detectAvif"])(function (avifSupported) {
+    Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_4__["detectAvif"])(function (avifSupported) {
       _this.avifSupported = avifSupported;
       if (avifSupported) _this.propagateImageFormat();
 
-      _this.$nextTick(function () {
-        if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
-        Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this.$el).observe();
-      });
-
       if (!avifSupported) {
-        Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_5__["detectWebP"])(function (webpSupported) {
+        Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_4__["detectWebP"])(function (webpSupported) {
           _this.webpSupported = webpSupported;
           if (webpSupported) _this.propagateImageFormat();
-
-          _this.$nextTick(function () {
-            if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
-            Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this.$el).observe();
-          });
         });
       }
     });
-  },
-  watch: {
-    defaultImageUrl: function defaultImageUrl() {
-      var _this2 = this;
-
-      this.$nextTick(function () {
-        _this2.$el.setAttribute('data-loaded', 'false');
-
-        Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this2.$el).triggerLoad(_this2.$el);
-      });
-    }
   },
   computed: {
     mimeType: function mimeType() {
@@ -36235,7 +36211,6 @@ var render = function() {
         "picture",
         {
           attrs: {
-            "data-iesrc": _vm.defaultImageUrl,
             "data-picture-class": _vm.pictureClass,
             "data-alt": _vm.alt,
             "data-title": _vm.title
@@ -62972,287 +62947,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
       this.$options.template = this.$props.template;
     }
   }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/app/plugins/lozad.js":
-/*!***********************************************!*\
-  !*** ./resources/js/src/app/plugins/lozad.js ***!
-  \***********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.string.split.js */ "./node_modules/core-js/modules/es.string.split.js");
-/* harmony import */ var core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
-/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.join.js */ "./node_modules/core-js/modules/es.array.join.js");
-/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_index_of_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.index-of.js */ "./node_modules/core-js/modules/es.array.index-of.js");
-/* harmony import */ var core_js_modules_es_array_index_of_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_index_of_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.concat.js */ "./node_modules/core-js/modules/es.array.concat.js");
-/* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_object_assign_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.object.assign.js */ "./node_modules/core-js/modules/es.object.assign.js");
-/* harmony import */ var core_js_modules_es_object_assign_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_assign_js__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.array.slice.js */ "./node_modules/core-js/modules/es.array.slice.js");
-/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
-/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.array.from.js */ "./node_modules/core-js/modules/es.array.from.js");
-/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.string.iterator.js */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.symbol.description.js */ "./node_modules/core-js/modules/es.symbol.description.js");
-/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator.js */ "./node_modules/core-js/modules/es.symbol.iterator.js");
-/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! core-js/modules/es.array.iterator.js */ "./node_modules/core-js/modules/es.array.iterator.js");
-/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator.js */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_16__);
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * Lozad.js
- * We have found a limitation in lozad.js in connection with HTML5s <picture> tags.
- * Therefore we've decided to directly integrate lozad into our code and adapt it
- * to better fit our use cases.
- */
-
-/**
- * Detect IE browser
- * @const {boolean}
- * @private
- */
-var isIE = typeof document !== "undefined" && document.documentMode;
-var defaultConfig = {
-  rootMargin: "0px",
-  threshold: 0,
-  load: function load(element) {
-    if (element.nodeName.toLowerCase() === "picture") {
-      var img = document.createElement("img");
-
-      if (isIE && element.getAttribute("data-iesrc")) {
-        img.src = element.getAttribute("data-iesrc");
-      }
-
-      if (element.getAttribute("data-alt")) {
-        img.alt = element.getAttribute("data-alt");
-      }
-
-      if (element.getAttribute("data-title")) {
-        img.title = element.getAttribute("data-title");
-      }
-
-      if (element.getAttribute("data-picture-class")) {
-        var classes = element.getAttribute("data-picture-class");
-        classes = classes.split(" ");
-
-        var _iterator = _createForOfIteratorHelper(classes),
-            _step;
-
-        try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
-            var selector = _step.value;
-            img.classList.toggle(selector);
-          }
-        } catch (err) {
-          _iterator.e(err);
-        } finally {
-          _iterator.f();
-        }
-      }
-
-      element.appendChild(img);
-    }
-
-    if (element.nodeName.toLowerCase() === "video" && !element.getAttribute("data-src")) {
-      if (element.children) {
-        var childs = element.children;
-        var childSrc;
-
-        for (var i = 0; i <= childs.length - 1; i++) {
-          childSrc = childs[i].getAttribute("data-src");
-
-          if (childSrc) {
-            childs[i].src = childSrc;
-          }
-        }
-
-        element.load();
-      }
-    }
-
-    if (element.getAttribute("data-poster")) {
-      element.poster = element.getAttribute("data-poster");
-    }
-
-    if (element.getAttribute("data-src")) {
-      element.src = element.getAttribute("data-src");
-    }
-
-    if (element.getAttribute("data-srcset")) {
-      element.setAttribute("srcset", element.getAttribute("data-srcset"));
-    }
-
-    if (element.getAttribute("data-background-image")) {
-      element.style.backgroundImage = "url(\"".concat(element.getAttribute("data-background-image").split(",").join("\"),url(\""), "\")");
-    } else if (element.getAttribute("data-background-image-set")) {
-      var imageSetLinks = element.getAttribute("data-background-image-set").split(",");
-      var firstUrlLink = imageSetLinks[0].substr(0, imageSetLinks[0].indexOf(" ")) || imageSetLinks[0];
-      firstUrlLink = firstUrlLink.indexOf("url(") === -1 ? "url(".concat(firstUrlLink, ")") : firstUrlLink;
-
-      if (imageSetLinks.length === 1) {
-        element.style.backgroundImage = firstUrlLink;
-      } else {
-        element.setAttribute("style", (element.getAttribute("style") || "") + "background-image: ".concat(firstUrlLink, "; background-image: -webkit-image-set(").concat(imageSetLinks, "); background-image: image-set(").concat(imageSetLinks, ")"));
-      }
-    }
-
-    if (element.getAttribute("data-toggle-class")) {
-      var _classes = element.getAttribute("data-toggle-class").split(" ");
-
-      var _iterator2 = _createForOfIteratorHelper(_classes),
-          _step2;
-
-      try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-          var _selector = _step2.value;
-          element.classList.toggle(_selector);
-        }
-      } catch (err) {
-        _iterator2.e(err);
-      } finally {
-        _iterator2.f();
-      }
-    }
-  },
-  loaded: function loaded() {}
-};
-
-function markAsLoaded(element) {
-  element.setAttribute("data-loaded", true);
-}
-
-var isLoaded = function isLoaded(element) {
-  return element.getAttribute("data-loaded") === "true";
-};
-
-var onIntersection = function onIntersection(load, loaded) {
-  return function (entries, observer) {
-    entries.forEach(function (entry) {
-      if (entry.intersectionRatio > 0 || entry.isIntersecting) {
-        observer.unobserve(entry.target);
-
-        if (!isLoaded(entry.target)) {
-          entry.target.classList.toggle("lozad");
-          requestAnimationFrame(function () {
-            load(entry.target);
-            markAsLoaded(entry.target);
-            loaded(entry.target);
-          });
-        }
-      }
-    });
-  };
-};
-
-var getElements = function getElements(selector) {
-  var root = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
-
-  if (selector instanceof Element) {
-    return [selector];
-  }
-
-  if (selector instanceof NodeList) {
-    return selector;
-  }
-
-  return root.querySelectorAll(selector);
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (function () {
-  var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ".lozad";
-  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-  var _Object$assign = Object.assign({}, defaultConfig, options),
-      root = _Object$assign.root,
-      rootMargin = _Object$assign.rootMargin,
-      threshold = _Object$assign.threshold,
-      load = _Object$assign.load,
-      loaded = _Object$assign.loaded;
-
-  var observer;
-
-  if (typeof window !== "undefined" && window.IntersectionObserver) {
-    observer = new IntersectionObserver(onIntersection(load, loaded), {
-      root: root,
-      rootMargin: rootMargin,
-      threshold: threshold
-    });
-  }
-
-  return {
-    observe: function observe() {
-      var elements = getElements(selector, root);
-
-      for (var i = 0; i < elements.length; i++) {
-        if (isLoaded(elements[i])) {
-          continue;
-        }
-
-        if (observer) {
-          observer.observe(elements[i]);
-          continue;
-        }
-
-        load(elements[i]);
-        markAsLoaded(elements[i]);
-        loaded(elements[i]);
-      }
-    },
-    triggerLoad: function triggerLoad(element) {
-      if (isLoaded(element)) {
-        return;
-      }
-
-      load(element);
-      markAsLoaded(element);
-      loaded(element);
-    },
-    observer: observer
-  };
 });
 
 /***/ }),
