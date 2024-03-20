@@ -36985,7 +36985,8 @@ var render = function() {
         "picture",
         {
           attrs: {
-            "data-iesrc": _vm.defaultImageUrl,
+            "data-iesrc":
+              _vm.defaultImageUrl || _vm.fallbackUrl || _vm.imageUrl,
             "data-picture-class": _vm.pictureClass,
             "data-alt": _vm.alt,
             "data-title": _vm.title
@@ -37009,7 +37010,8 @@ var render = function() {
         {
           class: _vm.pictureClass,
           attrs: {
-            "data-background-image": _vm.defaultImageUrl || _vm.fallbackUrl
+            "data-background-image":
+              _vm.defaultImageUrl || _vm.fallbackUrl || _vm.imageUrl
           }
         },
         [_vm._t("default")],
