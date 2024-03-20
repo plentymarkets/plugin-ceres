@@ -67,6 +67,7 @@ export default {
     },
     mounted()
     {
+        console.log(App);
         detectAvif(((avifSupported) => {
             this.avifSupported = avifSupported;
             if (avifSupported) this.propagateImageFormat();
