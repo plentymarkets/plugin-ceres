@@ -7,7 +7,7 @@
         :data-title="title">
         <slot name="additionalimages"></slot>
         <source :srcset="defaultImageUrl" :type="mimeType">
-        <source v-if="imageUrl" :srcset="imageUrl">
+        <source :srcset="imageUrl">
         <source v-if="fallbackUrl" :srcset="fallbackUrl">
     </picture>
 
@@ -23,10 +23,6 @@ import {detectAvif, detectWebP} from "../../helper/featureDetect";
 export default {
     props:
     {
-        convertImage: {
-            type: Boolean,
-            default: true
-        },
         imageUrl: {
             type: String,
             default: null
@@ -160,7 +156,7 @@ export default {
                 return;
             }
 
-            this.defaultImageUrl = this.convertImage && this.imageConversionEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension
+            this.defaultImageUrl = this.imageConversionEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension
                 ? this.convertedImageUrl
                 : this.imageUrl || this.fallbackUrl;
         }
