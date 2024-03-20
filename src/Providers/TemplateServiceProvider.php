@@ -440,6 +440,7 @@ class TemplateServiceProvider extends ServiceProvider
             ->registerConfigValue('item.displayName', $ceresConfig->item->displayName)
             ->registerConfigValue('global.enableOldUrlPattern', $ceresConfig->global->enableOldUrlPattern)
             ->registerConfigValue('language.activeLanguages', $ceresConfig->language->activeLanguages)
-            ->registerConfigValue('log.performance.ssr', $ceresConfig->log->performanceSsr);
+            ->registerConfigValue('log.performance.ssr', $ceresConfig->log->performanceSsr)
+            ->registerConfigValue('contact.shop_mail', $ceresConfig->contact->shopMail);
     }
 }
