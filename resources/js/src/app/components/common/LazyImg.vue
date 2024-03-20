@@ -1,8 +1,8 @@
 <template>
     <picture
         v-if="!isBackgroundImage"
-        :data-iesrc="defaultImageUrl || imageUrl"
-        @error="defaultImageUrl = imageUrl"
+        :data-iesrc="defaultImageUrl"
+        @error="alternativeImage"
         :data-picture-class="pictureClass"
         :data-alt="alt"
         :data-title="title">
@@ -166,6 +166,12 @@ export default {
             this.defaultImageUrl = this.imageConversionEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension
                 ? this.convertedImageUrl
                 : this.imageUrl || this.fallbackUrl;
+        },
+        alternativeImage(event)
+        {
+            console.log(event);
+            event.target.src = this.imageUrl;
+            this.defaultImageUrl = this.imageUrl;
         }
     }
 }

@@ -882,6 +882,11 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       this.defaultImageUrl = this.imageConversionEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension ? this.convertedImageUrl : this.imageUrl || this.fallbackUrl;
+    },
+    alternativeImage: function alternativeImage(event) {
+      console.log(event);
+      event.target.src = this.imageUrl;
+      this.defaultImageUrl = this.imageUrl;
     }
   }
 });
@@ -40597,16 +40602,12 @@ var render = function() {
         "picture",
         {
           attrs: {
-            "data-iesrc": _vm.defaultImageUrl || _vm.imageUrl,
+            "data-iesrc": _vm.defaultImageUrl,
             "data-picture-class": _vm.pictureClass,
             "data-alt": _vm.alt,
             "data-title": _vm.title
           },
-          on: {
-            error: function($event) {
-              _vm.defaultImageUrl = _vm.imageUrl
-            }
-          }
+          on: { error: _vm.alternativeImage }
         },
         [
           _vm._t("additionalimages"),
