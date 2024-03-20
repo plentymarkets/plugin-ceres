@@ -76,16 +76,22 @@ export default {
                 }));
             }
         })).then(() => {
-            if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-            lozad(this.$el).observe();
+            this.$nextTick(() =>
+            {
+                if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
+                lozad(this.$el).observe();
+            });
         });
     },
     watch:
     {
         defaultImageUrl()
         {
-            this.$el.setAttribute('data-loaded', 'false');
-            lozad(this.$el).triggerLoad(this.$el);
+            this.$nextTick(() =>
+            {
+                this.$el.setAttribute('data-loaded', 'false');
+                lozad(this.$el).triggerLoad(this.$el);
+            });
         }
     },
     computed:
