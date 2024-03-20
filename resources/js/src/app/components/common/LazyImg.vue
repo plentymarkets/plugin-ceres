@@ -2,12 +2,11 @@
     <picture
         v-if="!isBackgroundImage"
         :data-iesrc="defaultImageUrl"
-        @error="alternativeImage"
         :data-picture-class="pictureClass"
         :data-alt="alt"
         :data-title="title">
         <slot name="additionalimages"></slot>
-        <source :srcset="defaultImageUrl" :type="mimeType" @error="alternativeImage">
+        <source :srcset="defaultImageUrl" :type="mimeType">
         <source :srcset="imageUrl">
         <source v-if="fallbackUrl" :srcset="fallbackUrl">
     </picture>
@@ -76,11 +75,9 @@ export default {
                 }));
             }
         })).then(() => {
-            this.$nextTick(() =>
-            {
-                if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-                lozad(this.$el).observe();
-            });
+            console.log('then');
+            if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
+            lozad(this.$el).observe();
         });
     },
     watch:
@@ -88,13 +85,10 @@ export default {
         defaultImageUrl:
         {
             immediate: true,
-            handler()
-            {
-                this.$nextTick(() =>
-                {
-                    this.$el.setAttribute('data-loaded', 'false');
-                    lozad(this.$el).triggerLoad(this.$el);
-                });
+            handler() {
+                console.log('waatcher');
+                this.$el.setAttribute('data-loaded', 'false');
+                lozad(this.$el).triggerLoad(this.$el);
             }
         }
     },
@@ -170,13 +164,6 @@ export default {
             this.defaultImageUrl = this.imageConversionEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension
                 ? this.convertedImageUrl
                 : this.imageUrl || this.fallbackUrl;
-        },
-        alternativeImage(event)
-        {
-            console.log('alternativeImage', event);
-            event.target.srcset = this.imageUrl;
-            event.target.src = this.imageUrl;
-            this.defaultImageUrl = this.imageUrl;
         }
     }
 }
