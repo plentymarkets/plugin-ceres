@@ -544,9 +544,15 @@ __webpack_require__.r(__webpack_exports__);
     defaultImageUrl: {
       immediate: true,
       handler: function handler() {
-        console.log('waatcher');
-        this.$el.setAttribute('data-loaded', 'false');
-        Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(this.$el).triggerLoad(this.$el);
+        var _this2 = this;
+
+        this.$nextTick(function () {
+          console.log('watcher');
+
+          _this2.$el.setAttribute('data-loaded', 'false');
+
+          Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this2.$el).triggerLoad(_this2.$el);
+        });
       }
     }
   },

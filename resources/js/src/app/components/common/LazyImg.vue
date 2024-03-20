@@ -86,9 +86,12 @@ export default {
         {
             immediate: true,
             handler() {
-                console.log('waatcher');
-                this.$el.setAttribute('data-loaded', 'false');
-                lozad(this.$el).triggerLoad(this.$el);
+                this.$nextTick(() =>
+                {
+                    console.log('watcher');
+                    this.$el.setAttribute('data-loaded', 'false');
+                    lozad(this.$el).triggerLoad(this.$el);
+                });
             }
         }
     },
