@@ -154,6 +154,7 @@
                         {% endif %}
 
                         {% if widget.settings.lazyLoading.mobile %}
+                            <div>FIRST</div>
                             <lazy-img
                                 picture-class="img-cover xxxx"
                                 image-url="{{ Twig.print("slide.imageUrl") }}"
@@ -169,6 +170,7 @@
                                     title="{{ Twig.print("imgTitle") }}">
                             </noscript>
                         {% else %}
+                            <div>SECOND</div>
                             <picture>
                                 <source srcset="{{ Twig.print("slide.imageUrl") }}" {{ Twig.if("slide.imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>
                                 <img
