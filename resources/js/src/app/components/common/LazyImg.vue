@@ -1,11 +1,12 @@
 <template>
     <picture
         v-if="!isBackgroundImage"
+        :data-iesrc="defaultImageUrl"
         :data-picture-class="pictureClass"
         :data-alt="alt"
         :data-title="title">
         <slot name="additionalimages"></slot>
-        <source :srcset="defaultImageUrl" :type="mimeType">
+        <source :srcset="defaultImageUrl" :type="mimeType" onerror="this.defaultImageUrl=this.imageUrl">
         <source :srcset="imageUrl">
         <source v-if="fallbackUrl" :srcset="fallbackUrl">
     </picture>
@@ -16,6 +17,7 @@
 </template>
 
 <script>
+import lozad from "../../plugins/lozad";
 import {detectAvif, detectWebP} from "../../helper/featureDetect";
 
 export default {
@@ -72,7 +74,18 @@ export default {
                     if (webpSupported) this.propagateImageFormat();
                 }));
             }
-        }));
+        })).then(() => {
+            if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
+            lozad(this.$el).observe();
+        });
+    },
+    watch:
+    {
+        defaultImageUrl()
+        {
+            this.$el.setAttribute('data-loaded', 'false');
+            lozad(this.$el).triggerLoad(this.$el);
+        }
     },
     computed:
     {
