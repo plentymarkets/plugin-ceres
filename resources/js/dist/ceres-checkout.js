@@ -783,7 +783,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      modernImgFormatEnabled: App.config.log.performanceModernImagesConversion,
+      imageConversionEnabled: App.config.log.modernImagesConversion,
       receivedImageExtension: null,
       browserSupportedImgExtension: null,
       defaultImageUrl: null,
@@ -797,7 +797,6 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    console.log(App);
     Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_5__["detectAvif"])(function (avifSupported) {
       _this.avifSupported = avifSupported;
       if (avifSupported) _this.propagateImageFormat();
@@ -877,7 +876,7 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      this.defaultImageUrl = this.convertImage && this.modernImgFormatEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension ? this.convertedImageUrl : this.imageUrl || this.fallbackUrl;
+      this.defaultImageUrl = this.convertImage && this.imageConversionEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension ? this.convertedImageUrl : this.imageUrl || this.fallbackUrl;
     }
   }
 });

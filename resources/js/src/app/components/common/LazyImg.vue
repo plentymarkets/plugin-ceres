@@ -54,7 +54,7 @@ export default {
     data()
     {
         return {
-            modernImgFormatEnabled: App.config.log.performanceModernImagesConversion,
+            imageConversionEnabled: App.config.log.modernImagesConversion,
             receivedImageExtension: null,
             browserSupportedImgExtension: null,
             defaultImageUrl: null,
@@ -67,7 +67,6 @@ export default {
     },
     mounted()
     {
-        console.log(App);
         detectAvif(((avifSupported) => {
             this.avifSupported = avifSupported;
             if (avifSupported) this.propagateImageFormat();
@@ -160,7 +159,7 @@ export default {
                 return;
             }
 
-            this.defaultImageUrl = this.convertImage && this.modernImgFormatEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension
+            this.defaultImageUrl = this.convertImage && this.imageConversionEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension
                 ? this.convertedImageUrl
                 : this.imageUrl || this.fallbackUrl;
         }
