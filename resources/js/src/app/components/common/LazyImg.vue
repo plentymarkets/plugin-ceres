@@ -54,7 +54,7 @@ export default {
             imageConversionEnabled: App.config.log.modernImagesConversion,
             receivedImageExtension: null,
             browserSupportedImgExtension: null,
-            defaultImageUrl: null,
+            defaultImageUrl: this.imageUrl,
             avifSupported: false,
             avifExtension: 'avif',
             webpSupported: false,
@@ -66,26 +66,22 @@ export default {
     {
         detectAvif(((avifSupported) => {
             this.avifSupported = avifSupported;
-            if (avifSupported) {
-                this.propagateImageFormat();
+            if (avifSupported) this.propagateImageFormat();
 
-                this.$nextTick(() => {
-                    if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-                    lozad(this.$el).observe();
-                });
-            }
+            this.$nextTick(() => {
+                if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
+                lozad(this.$el).observe();
+            });
 
             if (!avifSupported) {
                 detectWebP(((webpSupported) => {
                     this.webpSupported = webpSupported;
-                    if (webpSupported) {
-                        this.propagateImageFormat();
+                    if (webpSupported) this.propagateImageFormat();
 
-                        this.$nextTick(() => {
-                            if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-                            lozad(this.$el).observe();
-                        });
-                    }
+                    this.$nextTick(() => {
+                        if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
+                        lozad(this.$el).observe();
+                    });
                 }));
             }
         }));

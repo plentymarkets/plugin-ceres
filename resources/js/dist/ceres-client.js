@@ -449,7 +449,7 @@ __webpack_require__.r(__webpack_exports__);
       imageConversionEnabled: App.config.log.modernImagesConversion,
       receivedImageExtension: null,
       browserSupportedImgExtension: null,
-      defaultImageUrl: null,
+      defaultImageUrl: this.imageUrl,
       avifSupported: false,
       avifExtension: 'avif',
       webpSupported: false,
@@ -462,28 +462,22 @@ __webpack_require__.r(__webpack_exports__);
 
     Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_5__["detectAvif"])(function (avifSupported) {
       _this.avifSupported = avifSupported;
+      if (avifSupported) _this.propagateImageFormat();
 
-      if (avifSupported) {
-        _this.propagateImageFormat();
-
-        _this.$nextTick(function () {
-          if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
-          Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this.$el).observe();
-        });
-      }
+      _this.$nextTick(function () {
+        if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
+        Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this.$el).observe();
+      });
 
       if (!avifSupported) {
         Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_5__["detectWebP"])(function (webpSupported) {
           _this.webpSupported = webpSupported;
+          if (webpSupported) _this.propagateImageFormat();
 
-          if (webpSupported) {
-            _this.propagateImageFormat();
-
-            _this.$nextTick(function () {
-              if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
-              Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this.$el).observe();
-            });
-          }
+          _this.$nextTick(function () {
+            if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
+            Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_4__["default"])(_this.$el).observe();
+          });
         });
       }
     });
