@@ -108,7 +108,7 @@
 
         {% if widget.settings.lazyLoading.mobile %}
             <lazy-img
-                convert-image="false"
+                :convert-image="false"
                 picture-class="img-{{ imageSize }}"
                 image-url="{{ Twig.print("imageUrl") }}"
                 fallback-url="{{ fallbackImagePath }}"
