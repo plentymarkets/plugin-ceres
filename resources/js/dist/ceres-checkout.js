@@ -753,6 +753,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
+    convertImage: {
+      type: Boolean,
+      default: true
+    },
     imageUrl: {
       type: String,
       default: null
@@ -897,7 +901,7 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      this.defaultImageUrl = this.imageConversionEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension ? this.convertedImageUrl : this.imageUrl || this.fallbackUrl;
+      this.defaultImageUrl = this.convertImage && this.imageConversionEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension ? this.convertedImageUrl : this.imageUrl || this.fallbackUrl;
     }
   }
 });
