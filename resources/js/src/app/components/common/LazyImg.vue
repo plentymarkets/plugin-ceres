@@ -1,12 +1,13 @@
 <template>
     <picture
         v-if="!isBackgroundImage"
-        :data-iesrc="defaultImageUrl"
+        :data-iesrc="defaultImageUrl || imageUrl"
+        @error="defaultImageUrl = imageUrl"
         :data-picture-class="pictureClass"
         :data-alt="alt"
         :data-title="title">
         <slot name="additionalimages"></slot>
-        <source :srcset="defaultImageUrl" :type="mimeType" onerror="this.defaultImageUrl=this.imageUrl">
+        <source :srcset="defaultImageUrl" :type="mimeType">
         <source :srcset="imageUrl">
         <source v-if="fallbackUrl" :srcset="fallbackUrl">
     </picture>

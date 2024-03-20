@@ -415,6 +415,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -37969,21 +37970,22 @@ var render = function() {
         "picture",
         {
           attrs: {
-            "data-iesrc": _vm.defaultImageUrl,
+            "data-iesrc": _vm.defaultImageUrl || _vm.imageUrl,
             "data-picture-class": _vm.pictureClass,
             "data-alt": _vm.alt,
             "data-title": _vm.title
+          },
+          on: {
+            error: function($event) {
+              _vm.defaultImageUrl = _vm.imageUrl
+            }
           }
         },
         [
           _vm._t("additionalimages"),
           _vm._v(" "),
           _c("source", {
-            attrs: {
-              srcset: _vm.defaultImageUrl,
-              type: _vm.mimeType,
-              onerror: "this.defaultImageUrl=this.imageUrl"
-            }
+            attrs: { srcset: _vm.defaultImageUrl, type: _vm.mimeType }
           }),
           _vm._v(" "),
           _c("source", { attrs: { srcset: _vm.imageUrl } }),
