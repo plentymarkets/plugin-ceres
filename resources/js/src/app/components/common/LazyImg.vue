@@ -66,25 +66,41 @@ export default {
     {
         detectAvif(((avifSupported) => {
             this.avifSupported = avifSupported;
-            if (avifSupported) this.propagateImageFormat();
+
+            if (avifSupported) {
+                this.$nextTick(() => {
+                    if (!this.isBackgroundImage) {
+                        this.$el.classList.toggle('lozad');
+                    }
+                    lozad(this.$el).observe();
+                });
+
+                this.propagateImageFormat();
+            }
 
             if (!avifSupported) {
                 detectWebP(((webpSupported) => {
                     this.webpSupported = webpSupported;
-                    if (webpSupported) this.propagateImageFormat();
+
+                    if (webpSupported) {
+                        this.$nextTick(() => {
+                            if (!this.isBackgroundImage) {
+                                this.$el.classList.toggle('lozad');
+                            }
+                            lozad(this.$el).observe();
+                        });
+
+                        this.propagateImageFormat();
+                    }
                 }));
             }
-        })).then(() => {
-            if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-            lozad(this.$el).observe();
-        });
+        }));
     },
     watch:
     {
         defaultImageUrl()
         {
-            this.$nextTick(() =>
-            {
+            this.$nextTick(() => {
                 this.$el.setAttribute('data-loaded', 'false');
                 lozad(this.$el).triggerLoad(this.$el);
             });
@@ -160,22 +176,8 @@ export default {
             }
 
             this.defaultImageUrl = this.imageConversionEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension
-                ? this.testImageUrl(this.convertedImageUrl)
-                    .then(function imageLoaded(e) {
-                        return this.convertedImageUrl;
-                    })
-                    .catch(function imageFailed(e) {
-                      return this.imageUrl;
-                    })
+                ? this.convertedImageUrl
                 : this.imageUrl || this.fallbackUrl;
-        },
-        testImageUrl(url) {
-            return new Promise(function(resolve, reject) {
-                const image = new Image();
-                image.addEventListener('load', resolve);
-                image.addEventListener('error', reject);
-                image.src = url;
-            });
         }
     }
 }

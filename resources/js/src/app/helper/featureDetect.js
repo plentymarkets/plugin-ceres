@@ -6,7 +6,7 @@ let _supportsPassive;
  * Function to detect avif support
  * @param callback
  */
-export async function detectAvif(callback)
+export function detectAvif(callback)
 {
     if (!isNullOrUndefined(App.features.avif))
     {
