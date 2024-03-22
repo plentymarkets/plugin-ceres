@@ -9,7 +9,7 @@
             </div>
             <div class="col-sm-12" v-if="!guestMode">
                 <div class="input-unit" data-validate="password" ref="passwordInput">
-                    <popper v-cloak trigger="focus" placement="bottom" ref="passwordHint">
+                    <popper v-cloak trigger="focus" placement="left" ref="passwordHint">
                         <template #handle>
                             <input type="password" name="password" autocomplete="new-password" :id="'new-password-' + _uid" v-model="password">
                         </template>

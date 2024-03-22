@@ -42,6 +42,7 @@ __webpack_require__.r(__webpack_exports__);
       txtDefaultDelivery: this.$translate("biokinderDesign::Template.availabilityDisplayTxtDefaultDelivery"),
       txtShipsToday: this.$translate("biokinderDesign::Template.availabilityDisplayTxtShipsToday"),
       txtChristmasHint: "<span class='christmas'><i class='fa fa-gift' aria-hidden='true'></i> Pünktlich zu Weihnachten!</span>",
+      txtEasterHint: "<span class='easter'><i class='fa fa-gift' aria-hidden='true'></i> Pünktlich zu Ostern!</span>",
       txtShipsTomorrow: this.$translate("biokinderDesign::Template.availabilityDisplayTxtShipsTomorrow"),
       txtShipsMondays: this.$translate("biokinderDesign::Template.availabilityDisplayTxtShipsMondays"),
       // txtFrightShipsFriday: this.$translate("biokinderDesign::Template.availabilityDisplayTxtFrightShipsFriday"),
@@ -194,6 +195,17 @@ __webpack_require__.r(__webpack_exports__);
 
       console.info("BKAvailability", "default");
       return this.variation.availability.names.name;
+    },
+    avDisplayHoliday: function avDisplayHoliday() {
+      if (this.txtShipsToday != this.availabilityDisplay && this.txtShipsTomorrow != this.availabilityDisplay && this.txtShipsMondays != this.availabilityDisplay) {
+        return this.availabilityDisplay;
+      }
+
+      var dateTodayNow = new Date(1000 * this.avd.time.now);
+      var currentDayOfYear = Math.floor((dateTodayNow - new Date(dateTodayNow.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24)); // Easter
+
+      if (dateTodayNow.getFullYear() == 2024 && currentDayOfYear < 87) return "<span>" + this.availabilityDisplay + "</span>" + this.txtEasterHint;
+      return this.availabilityDisplay;
     }
   },
   mounted: function mounted() {
@@ -240,7 +252,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", {
       class: { "col-8": !_vm.short, liveShippingInfo: _vm.short },
-      domProps: { innerHTML: _vm._s(_vm.availabilityDisplay) }
+      domProps: { innerHTML: _vm._s(_vm.avDisplayHoliday) }
     })
   ])
 }

@@ -7158,6 +7158,7 @@ __webpack_require__.r(__webpack_exports__);
       txtDefaultDelivery: this.$translate("biokinderDesign::Template.availabilityDisplayTxtDefaultDelivery"),
       txtShipsToday: this.$translate("biokinderDesign::Template.availabilityDisplayTxtShipsToday"),
       txtChristmasHint: "<span class='christmas'><i class='fa fa-gift' aria-hidden='true'></i> Pünktlich zu Weihnachten!</span>",
+      txtEasterHint: "<span class='easter'><i class='fa fa-gift' aria-hidden='true'></i> Pünktlich zu Ostern!</span>",
       txtShipsTomorrow: this.$translate("biokinderDesign::Template.availabilityDisplayTxtShipsTomorrow"),
       txtShipsMondays: this.$translate("biokinderDesign::Template.availabilityDisplayTxtShipsMondays"),
       // txtFrightShipsFriday: this.$translate("biokinderDesign::Template.availabilityDisplayTxtFrightShipsFriday"),
@@ -7310,6 +7311,17 @@ __webpack_require__.r(__webpack_exports__);
 
       console.info("BKAvailability", "default");
       return this.variation.availability.names.name;
+    },
+    avDisplayHoliday: function avDisplayHoliday() {
+      if (this.txtShipsToday != this.availabilityDisplay && this.txtShipsTomorrow != this.availabilityDisplay && this.txtShipsMondays != this.availabilityDisplay) {
+        return this.availabilityDisplay;
+      }
+
+      var dateTodayNow = new Date(1000 * this.avd.time.now);
+      var currentDayOfYear = Math.floor((dateTodayNow - new Date(dateTodayNow.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24)); // Easter
+
+      if (dateTodayNow.getFullYear() == 2024 && currentDayOfYear < 87) return "<span>" + this.availabilityDisplay + "</span>" + this.txtEasterHint;
+      return this.availabilityDisplay;
     }
   },
   mounted: function mounted() {
@@ -10182,6 +10194,84 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -12069,6 +12159,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+//
 //
 //
 //
@@ -48879,7 +48970,7 @@ var render = function() {
                   [
                     _c("popper", {
                       ref: "passwordHint",
-                      attrs: { trigger: "focus", placement: "bottom" },
+                      attrs: { trigger: "focus", placement: "left" },
                       scopedSlots: _vm._u(
                         [
                           {
@@ -50209,7 +50300,7 @@ var render = function() {
           liveShippingInfo: _vm.short
         }) +
         ">" +
-        _vm._s(_vm.availabilityDisplay) +
+        _vm._s(_vm.avDisplayHoliday) +
         "</div>"
     )
   ])
@@ -51975,12 +52066,6 @@ var render = function() {
                     [
                       _vm._t("breadcrumb"),
                       _vm._v(" "),
-                      _c("bkAddToWishlist", {
-                        attrs: {
-                          "variation-id": _vm.currentVariation.variation.id
-                        }
-                      }),
-                      _vm._v(" "),
                       _c(
                         "div",
                         {
@@ -52043,7 +52128,7 @@ var render = function() {
                         "div",
                         {
                           staticClass:
-                            "col-md-5 singleItemDetails single-rightside mb-4"
+                            "col-md-5 singleItemDetails single-rightside mb-2"
                         },
                         [
                           _c("h1", {
@@ -52051,6 +52136,12 @@ var render = function() {
                               innerHTML: _vm._s(
                                 this.currentVariation.texts.name1
                               )
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("bkAddToWishlist", {
+                            attrs: {
+                              "variation-id": _vm.currentVariation.variation.id
                             }
                           }),
                           _vm._v(" "),
@@ -52595,7 +52686,8 @@ var render = function() {
                             ],
                             2
                           )
-                        ]
+                        ],
+                        1
                       )
                     ],
                     2
@@ -52684,12 +52776,14 @@ var render = function() {
                                               ry: "5"
                                             }
                                           }),
+                                          _vm._v(" "),
                                           _c("path", {
                                             attrs: {
                                               d:
                                                 "M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
                                             }
                                           }),
+                                          _vm._v(" "),
                                           _c("line", {
                                             attrs: {
                                               x1: "17.5",
@@ -52961,18 +53055,21 @@ var render = function() {
                                               y2: "4.21"
                                             }
                                           }),
+                                          _vm._v(" "),
                                           _c("path", {
                                             attrs: {
                                               d:
                                                 "M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
                                             }
                                           }),
+                                          _vm._v(" "),
                                           _c("polyline", {
                                             attrs: {
                                               points:
                                                 "3.27 6.96 12 12.01 20.73 6.96"
                                             }
                                           }),
+                                          _vm._v(" "),
                                           _c("line", {
                                             attrs: {
                                               x1: "12",
@@ -53207,6 +53304,7 @@ var render = function() {
                                     _c("circle", {
                                       attrs: { cx: "12", cy: "12", r: "3" }
                                     }),
+                                    _vm._v(" "),
                                     _c("path", {
                                       attrs: {
                                         d:
@@ -53495,6 +53593,7 @@ var render = function() {
                                                 y2: "19"
                                               }
                                             }),
+                                            _vm._v(" "),
                                             _c("line", {
                                               attrs: {
                                                 x1: "5",
@@ -53560,7 +53659,7 @@ var render = function() {
                                                               }
                                                             }),
                                                             _vm._v(
-                                                              "\n                            " +
+                                                              "\n                          " +
                                                                 _vm._s(
                                                                   careSet.name
                                                                 ) +
@@ -53637,6 +53736,7 @@ var render = function() {
                                       y2: "19"
                                     }
                                   }),
+                                  _vm._v(" "),
                                   _c("line", {
                                     attrs: {
                                       x1: "5",
@@ -53664,7 +53764,7 @@ var render = function() {
                               _c("div", { staticClass: "descriptionContent" }, [
                                 _c("p", [
                                   _vm._v(
-                                    "Wir helfen Ihnen gerne! Rufen Sie uns an oder schreiben Sie uns eine Nachricht. Wir stehen Ihnen Montags bis Freitags von 8:00 bis 16:00 Uhr zur Verfügung und beraten Sie gerne."
+                                    "Wir helfen Ihnen gerne! Rufen Sie uns an oder schreiben Sie uns eine Nachricht. Wir stehen Ihnen\n                    Montags bis Freitags von 8:00 bis 16:00 Uhr zur Verfügung und beraten Sie gerne."
                                   )
                                 ]),
                                 _vm._v(" "),
@@ -53758,7 +53858,7 @@ var render = function() {
                                               { attrs: { for: "name12" } },
                                               [
                                                 _vm._v(
-                                                  "\n                        Name *\n                          "
+                                                  "\n                          Name *\n                        "
                                                 )
                                               ]
                                             )
@@ -55055,7 +55155,7 @@ var render = function() {
         "</div>",
         [
           _vm._ssrNode(
-            '<input type="search" id="bk-searchbox-1"' +
+            '<input type="search" id="bk-searchbox-1" enterkeyhint="search"' +
               _vm._ssrAttr("autofocus", _vm.isShopBuilder) +
               _vm._ssrAttr(
                 "aria-label",

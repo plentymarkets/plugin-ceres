@@ -6786,7 +6786,7 @@ var render = function() {
                 [
                   _c("popper", {
                     ref: "passwordHint",
-                    attrs: { trigger: "focus", placement: "bottom" },
+                    attrs: { trigger: "focus", placement: "left" },
                     scopedSlots: _vm._u(
                       [
                         {

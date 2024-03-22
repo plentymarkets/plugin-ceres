@@ -3935,6 +3935,84 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4378,6 +4456,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+//
 //
 //
 //
@@ -45738,12 +45817,6 @@ var render = function() {
                     [
                       _vm._t("breadcrumb"),
                       _vm._v(" "),
-                      _c("bkAddToWishlist", {
-                        attrs: {
-                          "variation-id": _vm.currentVariation.variation.id
-                        }
-                      }),
-                      _vm._v(" "),
                       _c(
                         "div",
                         {
@@ -45806,7 +45879,7 @@ var render = function() {
                         "div",
                         {
                           staticClass:
-                            "col-md-5 singleItemDetails single-rightside mb-4"
+                            "col-md-5 singleItemDetails single-rightside mb-2"
                         },
                         [
                           _c("h1", {
@@ -45814,6 +45887,12 @@ var render = function() {
                               innerHTML: _vm._s(
                                 this.currentVariation.texts.name1
                               )
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("bkAddToWishlist", {
+                            attrs: {
+                              "variation-id": _vm.currentVariation.variation.id
                             }
                           }),
                           _vm._v(" "),
@@ -46317,7 +46396,8 @@ var render = function() {
                             ],
                             2
                           )
-                        ]
+                        ],
+                        1
                       )
                     ],
                     2
@@ -46406,12 +46486,14 @@ var render = function() {
                                               ry: "5"
                                             }
                                           }),
+                                          _vm._v(" "),
                                           _c("path", {
                                             attrs: {
                                               d:
                                                 "M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
                                             }
                                           }),
+                                          _vm._v(" "),
                                           _c("line", {
                                             attrs: {
                                               x1: "17.5",
@@ -46635,18 +46717,21 @@ var render = function() {
                                               y2: "4.21"
                                             }
                                           }),
+                                          _vm._v(" "),
                                           _c("path", {
                                             attrs: {
                                               d:
                                                 "M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
                                             }
                                           }),
+                                          _vm._v(" "),
                                           _c("polyline", {
                                             attrs: {
                                               points:
                                                 "3.27 6.96 12 12.01 20.73 6.96"
                                             }
                                           }),
+                                          _vm._v(" "),
                                           _c("line", {
                                             attrs: {
                                               x1: "12",
@@ -46881,6 +46966,7 @@ var render = function() {
                                     _c("circle", {
                                       attrs: { cx: "12", cy: "12", r: "3" }
                                     }),
+                                    _vm._v(" "),
                                     _c("path", {
                                       attrs: {
                                         d:
@@ -47169,6 +47255,7 @@ var render = function() {
                                                 y2: "19"
                                               }
                                             }),
+                                            _vm._v(" "),
                                             _c("line", {
                                               attrs: {
                                                 x1: "5",
@@ -47234,7 +47321,7 @@ var render = function() {
                                                               }
                                                             }),
                                                             _vm._v(
-                                                              "\n                            " +
+                                                              "\n                          " +
                                                                 _vm._s(
                                                                   careSet.name
                                                                 ) +
@@ -47311,6 +47398,7 @@ var render = function() {
                                       y2: "19"
                                     }
                                   }),
+                                  _vm._v(" "),
                                   _c("line", {
                                     attrs: {
                                       x1: "5",
@@ -47338,7 +47426,7 @@ var render = function() {
                               _c("div", { staticClass: "descriptionContent" }, [
                                 _c("p", [
                                   _vm._v(
-                                    "Wir helfen Ihnen gerne! Rufen Sie uns an oder schreiben Sie uns eine Nachricht. Wir stehen Ihnen Montags bis Freitags von 8:00 bis 16:00 Uhr zur Verfügung und beraten Sie gerne."
+                                    "Wir helfen Ihnen gerne! Rufen Sie uns an oder schreiben Sie uns eine Nachricht. Wir stehen Ihnen\n                    Montags bis Freitags von 8:00 bis 16:00 Uhr zur Verfügung und beraten Sie gerne."
                                   )
                                 ]),
                                 _vm._v(" "),
@@ -47629,7 +47717,7 @@ var staticRenderFns = [
         _c("input", { attrs: { name: "name12", type: "text", id: "name12" } }),
         _vm._v(" "),
         _c("label", { attrs: { for: "name12" } }, [
-          _vm._v("\n                        Name *\n                          ")
+          _vm._v("\n                          Name *\n                        ")
         ])
       ]
     )
@@ -47772,6 +47860,7 @@ var render = function() {
           attrs: {
             type: "search",
             id: "bk-searchbox-1",
+            enterkeyhint: "search",
             autofocus: _vm.isShopBuilder,
             "aria-label": _vm.$translate("Ceres::Template.headerSearchTerm"),
             placeholder: "Suchbegriff eingeben..."

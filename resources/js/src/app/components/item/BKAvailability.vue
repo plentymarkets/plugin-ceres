@@ -1,8 +1,8 @@
 <template>
     <div :class="{'row': !short}">
         <div class="col-4" v-if="!short">{{ $translate("biokinderDesign::Template.itemAvailability") }}</div>
-        <div :class="{ 'col-8': !short, 'liveShippingInfo': short }" v-html="availabilityDisplay"></div>
-      </div>
+        <div :class="{ 'col-8': !short, 'liveShippingInfo': short }" v-html="avDisplayHoliday"></div>
+    </div>
 </template>
 
 <script>
@@ -24,6 +24,7 @@ export default {
         txtDefaultDelivery: this.$translate("biokinderDesign::Template.availabilityDisplayTxtDefaultDelivery"),
         txtShipsToday: this.$translate("biokinderDesign::Template.availabilityDisplayTxtShipsToday"),
         txtChristmasHint: "<span class='christmas'><i class='fa fa-gift' aria-hidden='true'></i> Pünktlich zu Weihnachten!</span>",
+        txtEasterHint: "<span class='easter'><i class='fa fa-gift' aria-hidden='true'></i> Pünktlich zu Ostern!</span>",
         txtShipsTomorrow: this.$translate("biokinderDesign::Template.availabilityDisplayTxtShipsTomorrow"),
         txtShipsMondays: this.$translate("biokinderDesign::Template.availabilityDisplayTxtShipsMondays"),
         // txtFrightShipsFriday: this.$translate("biokinderDesign::Template.availabilityDisplayTxtFrightShipsFriday"),
@@ -185,6 +186,22 @@ export default {
             // if we forgot any case, default
             console.info("BKAvailability", "default");
             return this.variation.availability.names.name;
+        },
+        avDisplayHoliday()
+        {
+            if (this.txtShipsToday != this.availabilityDisplay && 
+                this.txtShipsTomorrow != this.availabilityDisplay && 
+                this.txtShipsMondays != this.availabilityDisplay) {
+                return this.availabilityDisplay;
+            }
+            let dateTodayNow = new Date(1000 * this.avd.time.now);
+            const currentDayOfYear = Math.floor((dateTodayNow - new Date(dateTodayNow.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+            
+            // Easter
+            if (dateTodayNow.getFullYear() == 2024 && currentDayOfYear < 87)
+                return "<span>" + this.availabilityDisplay + "</span>" + this.txtEasterHint;
+
+            return this.availabilityDisplay;
         }
     },
     mounted() {

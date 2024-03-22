@@ -6,6 +6,7 @@
             class="search-input flex-grow-1 px-2 py-2 bkmSearchbox"
             id="bk-searchbox-1"
             ref="searchInput"
+            enterkeyhint="search"
             v-model="searchString"
             @input="onValueChanged($event.target.value)"
             @keyup.enter="search()"
