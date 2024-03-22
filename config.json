@@ -5026,11 +5026,11 @@
                                     "selectBoxValues": [
                                         {
                                             "value": "false",
-                                            "caption": "Config.no"
+                                            "caption": "Config.itemRobotsNo"
                                         },
                                         {
                                             "value": "true",
-                                            "caption": "Config.yes"
+                                            "caption": "Config.itemRobotsYes"
                                         }
                                     ]
                                 }
