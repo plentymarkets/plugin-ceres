@@ -175,9 +175,16 @@ export default {
                 return;
             }
 
-            this.defaultImageUrl = this.convertImage && this.imageConversionEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension
+            this.defaultImageUrl = this.imageShouldBeConverted()
                 ? this.convertedImageUrl
                 : this.imageUrl || this.fallbackUrl;
+        },
+        imageShouldBeConverted()
+        {
+            return this.convertImage
+                && !this.imageUrl.startsWith('/images')
+                && this.imageConversionEnabled
+                && this.browserSupportedImgExtension !== this.receivedImageExtension
         }
     }
 }
