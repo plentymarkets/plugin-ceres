@@ -17,7 +17,7 @@
     {{ Twig.set("itemData", "item.documents[0].data") }}
     {{ Twig.set("itemImage", "itemData.images | itemImages(_imageSize) | orderByKey('position') | first") }}
 
-    {{ dump(ceresConfig.log) }}
+    {{ Twig.print("ceresConfig.log | raw" ) }}
 
     {{ Twig.set("preloadAvif", "itemImage.url ~ '.avif'")}}
     {{ Twig.print("add_asset(preloadAvif, 'image')") }}
