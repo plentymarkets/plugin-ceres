@@ -43663,9 +43663,11 @@ var render = function() {
             " <source" +
               _vm._ssrAttr("srcset", _vm.defaultImageUrl) +
               _vm._ssrAttr("type", _vm.mimeType) +
-              "> <source" +
-              _vm._ssrAttr("srcset", _vm.imageUrl) +
               "> " +
+              (_vm.defaultImageUrl !== _vm.imageUrl
+                ? "<source" + _vm._ssrAttr("srcset", _vm.imageUrl) + ">"
+                : "<!---->") +
+              " " +
               (_vm.fallbackUrl
                 ? "<source" + _vm._ssrAttr("srcset", _vm.fallbackUrl) + ">"
                 : "<!---->")

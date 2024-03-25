@@ -39871,7 +39871,9 @@ var render = function() {
             attrs: { srcset: _vm.defaultImageUrl, type: _vm.mimeType }
           }),
           _vm._v(" "),
-          _c("source", { attrs: { srcset: _vm.imageUrl } }),
+          _vm.defaultImageUrl !== _vm.imageUrl
+            ? _c("source", { attrs: { srcset: _vm.imageUrl } })
+            : _vm._e(),
           _vm._v(" "),
           _vm.fallbackUrl
             ? _c("source", { attrs: { srcset: _vm.fallbackUrl } })
