@@ -1,5 +1,5 @@
 <template>
-    <form class="w-100" autocomplete="on" method="post" @submit.prevent="validateRegistration()" ref="registrationForm">
+    <form class="w-100" autocomplete="on" method="post" @submit.prevent="sendRegistration()" ref="registrationForm">
         <div class="row">
             <div class="col-sm-12">
                 <div class="input-unit" data-validate="mail">
@@ -77,14 +77,12 @@
             </button>
         </div>
 
-        <recaptcha v-if="!!googleRecaptchaApiKey && (modalShown || !isSimpleRegistration)"></recaptcha>
     </form>
 </template>
 
 <script>
 import ValidationService from "../../services/ValidationService";
 import { navigateTo } from "../../services/UrlService";
-import { executeReCaptcha } from "../../helper/executeReCaptcha";
 import { isNullOrUndefined, isDefined } from "../../helper/utils";
 import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
 import AddressInputGroup from "./AddressInputGroup.vue";
@@ -134,7 +132,6 @@ export default {
             privacyPolicyAccepted : false,
             privacyPolicyShowError: false,
             enableConfirmingPrivacyPolicy: App.config.global.registrationRequirePrivacyPolicyConfirmation,
-            googleRecaptchaApiKey: App.config.global.googleRecaptchaApiKey,
             modalShown: false,
             honeypot: ""
         };
@@ -152,63 +149,6 @@ export default {
     },
 
     methods: {
-        /**
-         * Validate the registration form
-         */
-        validateRegistration()
-        {
-            executeReCaptcha(this.$refs.registrationForm)
-                .then((recaptchaToken) =>
-                {
-                    ValidationService.validate(this.$refs.registrationForm)
-                        .done(() =>
-                        {
-                            if (!this.enableConfirmingPrivacyPolicy || this.privacyPolicyAccepted)
-                            {
-                                this.sendRegistration(recaptchaToken);
-                            }
-                            else
-                            {
-                                this.privacyPolicyShowError = true;
-
-                                NotificationService.error(
-                                    this.$translate("Ceres::Template.contactAcceptFormPrivacyPolicy", { hyphen: "&shy;" })
-                                );
-                                this.resetRecaptcha();
-                            }
-                        })
-                        .fail(invalidFields =>
-                        {
-                            this.resetRecaptcha();
-
-                            if (!isNullOrUndefined(this.$refs.passwordHint) && invalidFields.indexOf(this.$refs.passwordInput) >= 0)
-                            {
-                                this.$refs.passwordHint.showPopper();
-                            }
-
-                            const invalidFieldNames = this.getInvalidFieldNames(invalidFields);
-
-                            if (invalidFieldNames.length > 0)
-                            {
-                                NotificationService.error(
-                                    this.$translate("Ceres::Template.checkoutCheckAddressFormFields", { fields: invalidFieldNames.join(", ") })
-                                );
-                            }
-
-                            ValidationService.markInvalidFields(invalidFields, "error");
-
-                            if (this.enableConfirmingPrivacyPolicy && !this.privacyPolicyAccepted)
-                            {
-                                this.privacyPolicyShowError = true;
-
-                                NotificationService.error(
-                                    this.$translate("Ceres::Template.contactAcceptFormPrivacyPolicy", { hyphen: "&shy;" })
-                                );
-                            }
-                        });
-                });
-        },
-
         getInvalidFieldNames(invalidFields = [])
         {
             const fieldNames = [];
@@ -227,11 +167,9 @@ export default {
         /**
          * Send the registration
          */
-        sendRegistration(recaptchaToken)
+        sendRegistration()
         {
             const userObject = this.getUserObject();
-
-            userObject.recaptcha = recaptchaToken;
 
             this.isDisabled = true;
 
@@ -267,8 +205,6 @@ export default {
                         NotificationService.error(
                             this.$translate("Ceres::Template.regError")
                         ).closeAfter(10000);
-
-                        this.resetRecaptcha();
                     }
 
                     this.isDisabled = false;
@@ -277,23 +213,8 @@ export default {
                 {
                     NotificationService.error(error.error).closeAfter(10000);
 
-                    this.resetRecaptcha();
-
                     this.isDisabled = false;
                 });
-        },
-
-        /** 
-         * Resets recaptcha v2 to make it capable of executing again.
-        */
-        resetRecaptcha()
-        {
-            if(App.config.global.googleRecaptchaVersion === 2 && window.grecaptcha)
-            {
-                const recaptchaId = this.$refs.registrationForm.querySelector("[data-recaptcha]");
-
-                window.grecaptcha.reset(recaptchaId);
-            }
         },
 
         setAddressDataField({ field, value })

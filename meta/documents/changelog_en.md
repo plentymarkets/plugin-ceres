@@ -27,7 +27,8 @@
 
 - Added average rating `feedbackDecimal` and number of feedbacks `feedbackCount` in item list result fields.
 - When executing a search via an external search provider, the normal result fields of the category are now used for lists.
-
+- The use of ReCaptcha has been removed from the registration component.
+- 
 ### Changed Templates
 
 - In plentyShop LTS 5.0.62 we made changes to template files relating the feedback plugin which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
