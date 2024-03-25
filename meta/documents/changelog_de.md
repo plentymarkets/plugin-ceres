@@ -2844,6 +2844,7 @@
 - Die im Warenkorb befindlichen Artikel werden nun nach dem Laden des Shops asynchron nachgeladen. Dies führt zu einem schnelleren Ausliefern der Seite.
 - Die Hinweisetexte für sichere Passwörter in der Registrierung wurden angepasst.
 - Die Einträge der Währungsauswahl wurden angepasst, um Suchmaschinen daran zu hindern, dieselbe Seite mehrfach zu crawlen.
+- Die Eingabe für Bestelleigenschaften vom Typ Text/Zahl ist nun auf 128 Zeichen beschränkt.
 
 ### Behoben
 
