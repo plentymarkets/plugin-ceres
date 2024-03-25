@@ -103,12 +103,15 @@
         {{ Twig.endif() }}
 
         {% if preloadImage %}
-            {{ Twig.print("add_asset(imageUrl,'image')") }}
+            {{ Twig.if("ceresConfig.log.modernImagesConversion") }}
+                {{ Twig.print("add_asset(imageUrl + '.avif','image')") }}
+             {{ Twig.else() }}
+                {{ Twig.print("add_asset(imageUrl,'image')") }}
+            {{ Twig.endif() }}
         {% endif %}
 
         {% if widget.settings.lazyLoading.mobile %}
             <lazy-img
-                :convert-image="false"
                 picture-class="img-{{ imageSize }}"
                 image-url="{{ Twig.print("imageUrl") }}"
                 fallback-url="{{ fallbackImagePath }}"

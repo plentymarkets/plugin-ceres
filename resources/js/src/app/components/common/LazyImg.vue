@@ -181,8 +181,10 @@ export default {
         },
         imageShouldBeConverted()
         {
-            return this.imageUrl.includes('/item/images/')
+            const cdnPathRegex = /\.com\/[^\/]+\/item\/images\//;
+            return this.convertImage 
                 && this.imageConversionEnabled
+                && cdnPathRegex.test(this.imageUrl)
                 && this.browserSupportedImgExtension !== this.receivedImageExtension
         }
     }
