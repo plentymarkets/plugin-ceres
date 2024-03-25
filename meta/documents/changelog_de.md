@@ -21,14 +21,14 @@
 - Im Schritt **Performance** des plentyShop-Assistenten wurde die Möglichkeit hinzugefügt, das Umwandeln von Bildern in das WebP-Format zu aktivieren.
 - Die Ergebnisfelder für Artikel wurde um Tags erweitert.
 - Die ShopBuilder-Widgets **Link** und **Auftragshistorie** bieten nun die Möglichkeit, mehrere Tracking-Links anzuzeigen, wenn die Einstellung **URLs splitten** im Menü **Einrichtung » Aufträge » Versand » Optionen** aktiviert ist.
-- Der Übersetzungschlüssel `checkoutPaidAmount` wurde in die Mehrsprachigkeit hinzugefügt.
+- Der Übersetzungschlüssel `checkoutPaidAmount` wurde in der Mehrsprachigkeits-UI hinzugefügt.
 
 ### Geändert
 
 - Durchschnittswert `feedbackDecimal` und Anzahl der Feedbacks `feedbackCount` in itemList- Ergebnisfeldern ergänzt.
 - Beim Ausführen von Suchen über externe Suchanbieter werden jetzt die normalen Resultfields der Kategorie für Listen benutzt.
-- Die Verwendung von ReCaptcha wurde aus der Komponente für die Registrierung entfernt.
-- 
+- Die Verwendung von ReCAPTCHA wurde aus der Komponente für die Registrierung entfernt.
+
 ### Angepasste Templates
 
 - Im Zuge des Releases von plentyShop LTS 5.0.62 gab es Änderungen an Template-Dateien, die das Feedback Plugin betreffen und für Theme-Entwickler relevant sind.  Die Verlinkung führt direkt zu der umgesetzten Änderung in der entsprechenden Datei.
