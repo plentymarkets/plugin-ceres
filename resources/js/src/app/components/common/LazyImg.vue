@@ -23,10 +23,6 @@ import {detectAvif, detectWebP} from "../../helper/featureDetect";
 export default {
     props:
     {
-        convertImage: {
-            type: Boolean,
-            default: true
-        },
         imageUrl: {
             type: String,
             default: null
@@ -181,8 +177,7 @@ export default {
         },
         imageShouldBeConverted()
         {
-            return this.convertImage
-                && !this.imageUrl.startsWith('/images')
+            return !this.imageUrl.startsWith('/images')
                 && this.imageConversionEnabled
                 && this.browserSupportedImgExtension !== this.receivedImageExtension
         }
