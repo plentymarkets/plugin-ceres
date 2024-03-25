@@ -21,6 +21,7 @@
 
     {{ Twig.set("preloadAvif", "itemImage.url ~ '.avif'")}}
     {{ Twig.print("add_asset(preloadAvif, 'image')") }}
+    {{ Twig.print("add_asset(itemImage.url,'image')") }}
 
 {% endif %}
 
