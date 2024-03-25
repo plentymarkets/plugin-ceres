@@ -181,8 +181,7 @@ export default {
         },
         imageShouldBeConverted()
         {
-            return this.convertImage
-                && !this.imageUrl.startsWith('/images')
+            return this.imageUrl.includes('/item/images/')
                 && this.imageConversionEnabled
                 && this.browserSupportedImgExtension !== this.receivedImageExtension
         }
