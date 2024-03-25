@@ -21,12 +21,13 @@
 - Im Schritt **Performance** des plentyShop-Assistenten wurde die Möglichkeit hinzugefügt, das Umwandeln von Bildern in das Avif, WebP-Format zu aktivieren.
 - Die Ergebnisfelder für Artikel wurde um Tags erweitert.
 - Die ShopBuilder-Widgets **Link** und **Auftragshistorie** bieten nun die Möglichkeit, mehrere Tracking-Links anzuzeigen, wenn die Einstellung **URLs splitten** im Menü **Einrichtung » Aufträge » Versand » Optionen** aktiviert ist.
-- Der Übersetzungschlüssel `checkoutPaidAmount` wurde in die Mehrsprachigkeit hinzugefügt.
+- Der Übersetzungschlüssel `checkoutPaidAmount` wurde in der Mehrsprachigkeits-UI hinzugefügt.
 
 ### Geändert
 
 - Durchschnittswert `feedbackDecimal` und Anzahl der Feedbacks `feedbackCount` in itemList- Ergebnisfeldern ergänzt.
 - Beim Ausführen von Suchen über externe Suchanbieter werden jetzt die normalen Resultfields der Kategorie für Listen benutzt.
+- Die Verwendung von ReCAPTCHA wurde aus der Komponente für die Registrierung entfernt.
 
 ### Angepasste Templates
 
