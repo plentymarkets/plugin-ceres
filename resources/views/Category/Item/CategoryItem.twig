@@ -131,8 +131,8 @@
                                     [
                                         {
                                             "@type": "ListItem",
-                                            "position": {{ position | raw }},
-                                            "name": {{ item.data | itemName | raw }},
+                                            "position": {{ position }},
+                                            "name": "{{ item.data | itemName }}",
                                             "url": "{{ item.data | itemURL }}"
                                         }
                                     ]
