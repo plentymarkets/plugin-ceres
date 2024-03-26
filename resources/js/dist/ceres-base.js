@@ -632,7 +632,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     imageShouldBeConverted: function imageShouldBeConverted() {
       var cdnPathRegex = /\/item\/images\//;
-      var validConversionExtensions = ['jpg', 'png'];
+      var validConversionExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG'];
       return this.convertImage && this.imageConversionEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension && validConversionExtensions.includes(this.receivedImageExtension) && cdnPathRegex.test(this.imageUrl);
     }
   }

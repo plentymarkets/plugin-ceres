@@ -182,7 +182,7 @@ export default {
         imageShouldBeConverted()
         {
             const cdnPathRegex = /\/item\/images\//;
-            const validConversionExtensions = ['jpg', 'png'];
+            const validConversionExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG'];
 
             return this.convertImage 
                 && this.imageConversionEnabled
