@@ -49480,8 +49480,8 @@ var render = function() {
                       alt: _vm.getAltText(_vm.singleImages[0].url),
                       "image-url": _vm.singleImages[0].url,
                       title: _vm.getImageName(_vm.singleImages[0].url),
-                      width: _vm.getImageWidth(_vm.singleImages[0].url),
-                      height: _vm.getImageHeight(_vm.singleImages[0].url),
+                      width: _vm.getImageWidth(_vm.singleImages[0]),
+                      height: _vm.getImageHeight(_vm.singleImages[0]),
                       "picture-class": "owl-placeholder"
                     }
                   })

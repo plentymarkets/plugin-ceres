@@ -29,8 +29,8 @@
                     :alt="getAltText(singleImages[0].url)"
                     :image-url="singleImages[0].url"
                     :title="getImageName(singleImages[0].url)"
-                    :width="getImageWidth(singleImages[0].url)"
-                    :height="getImageHeight(singleImages[0].url)"
+                    :width="getImageWidth(singleImages[0])"
+                    :height="getImageHeight(singleImages[0])"
                     picture-class="owl-placeholder" />
             </div>
         </div>
