@@ -181,7 +181,7 @@ export default {
         },
         imageShouldBeConverted()
         {
-            const cdnPathRegex = /\.com\/[^\/]+\/item\/images\//;
+            const cdnPathRegex = /\.com\/item\/images\/|\.de\/item\/images\//;
             return this.convertImage 
                 && this.imageConversionEnabled
                 && cdnPathRegex.test(this.imageUrl)
