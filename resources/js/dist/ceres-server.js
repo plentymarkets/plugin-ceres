@@ -1983,6 +1983,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -42484,6 +42485,15 @@ var render = function() {
                 ">",
               "</a>",
               [
+                _vm._ssrNode(
+                  _vm._ssrEscape(
+                    "\n              " +
+                      _vm._s(_vm.height) +
+                      " x " +
+                      _vm._s(_vm.width) +
+                      "\n                "
+                  )
+                ),
                 _vm.image
                   ? _c("lazy-img", {
                       attrs: {
@@ -42498,7 +42508,7 @@ var render = function() {
                     })
                   : _vm._e()
               ],
-              1
+              2
             )
           ]),
           _vm._ssrNode(" "),
