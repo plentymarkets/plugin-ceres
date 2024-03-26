@@ -7,6 +7,7 @@
         :data-title="title">
         <slot name="additionalimages"></slot>
         <source :srcset="defaultImageUrl" :type="mimeType">
+        <img v-if="receivedImageExtension === 'tif'" :src="defaultImageUrl">
         <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl">
         <source v-if="fallbackUrl" :srcset="fallbackUrl">
     </picture>
