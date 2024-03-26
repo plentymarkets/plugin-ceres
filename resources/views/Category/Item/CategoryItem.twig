@@ -131,10 +131,9 @@
                                     [
                                         {
                                             "@type": "ListItem",
-                                            "position": {{ position }},
-                                            "name": {{ item.data | itemName }}
-                                            "url": {{ item.data | itemURL }},
-                                            "image": {{ item.data | itemImage }}
+                                            "position": "{{ position }}",
+                                            "name": "{{ item.data | itemName }}",
+                                            "url": "{{ item.data | itemURL }}"
                                         }
                                     ] %}
                                 {% set listItems = listItems | merge(listItem) %}
@@ -150,7 +149,7 @@
                         "@type":"ItemList",
                         "name": {{ category.details[0].name }}
                         "itemListElement": {{ listItems | json_encode | raw }}
-                        }}
+                        }
                     </script2>
                     %}
                     {% if category is not defined and itemList is empty %}
