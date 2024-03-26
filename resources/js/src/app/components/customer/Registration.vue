@@ -1,5 +1,5 @@
 <template>
-    <form class="w-100" autocomplete="on" method="post" @submit.prevent="sendRegistration()" ref="registrationForm">
+    <form class="w-100" autocomplete="on" method="post" @submit.prevent="validateRegistration()" ref="registrationForm">
         <div class="row">
             <div class="col-sm-12">
                 <div class="input-unit" data-validate="mail">
@@ -149,6 +149,47 @@ export default {
     },
 
     methods: {
+      validateRegistration()
+      {
+                ValidationService.validate(this.$refs.registrationForm)
+                    .done(() =>
+                    {
+                      if (!this.enableConfirmingPrivacyPolicy || this.privacyPolicyAccepted)
+                      {
+                        this.sendRegistration();
+                      }
+                      else
+                      {
+                        this.privacyPolicyShowError = true;
+                        NotificationService.error(
+                            this.$translate("Ceres::Template.contactAcceptFormPrivacyPolicy", { hyphen: "&shy;" })
+                        );
+                        this.resetRecaptcha();
+                      }
+                    })
+                    .fail(invalidFields =>
+                    {
+                      if (!isNullOrUndefined(this.$refs.passwordHint) && invalidFields.indexOf(this.$refs.passwordInput) >= 0)
+                      {
+                        this.$refs.passwordHint.showPopper();
+                      }
+                      const invalidFieldNames = this.getInvalidFieldNames(invalidFields);
+                      if (invalidFieldNames.length > 0)
+                      {
+                        NotificationService.error(
+                            this.$translate("Ceres::Template.checkoutCheckAddressFormFields", { fields: invalidFieldNames.join(", ") })
+                        );
+                      }
+                      ValidationService.markInvalidFields(invalidFields, "error");
+                      if (this.enableConfirmingPrivacyPolicy && !this.privacyPolicyAccepted)
+                      {
+                        this.privacyPolicyShowError = true;
+                        NotificationService.error(
+                            this.$translate("Ceres::Template.contactAcceptFormPrivacyPolicy", { hyphen: "&shy;" })
+                        );
+                      }
+                });
+        },
         getInvalidFieldNames(invalidFields = [])
         {
             const fieldNames = [];
