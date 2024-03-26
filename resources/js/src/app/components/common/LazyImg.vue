@@ -4,11 +4,13 @@
         :data-iesrc="defaultImageUrl"
         :data-picture-class="pictureClass"
         :data-alt="alt"
-        :data-title="title">
+        :data-title="title"
+    >
         <slot name="additionalimages"></slot>
         <source :srcset="defaultImageUrl" :type="mimeType">
         <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl">
         <source v-if="fallbackUrl" :srcset="fallbackUrl">
+        <img v-if="height && width" :src="fallbackUrl" :alt="alt" :height="height" :width="width">
     </picture>
 
     <div v-else :data-background-image="defaultImageUrl || fallbackUrl" :class="pictureClass">
@@ -50,6 +52,14 @@ export default {
         title: {
             type: String,
             default: null
+        },
+        height: {
+          type: Number | undefined,
+          default: undefined
+        },
+        width: {
+          type: Number | undefined,
+          default: undefined
         }
     },
     data()
