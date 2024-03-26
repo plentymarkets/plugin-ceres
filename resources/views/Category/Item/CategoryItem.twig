@@ -152,7 +152,7 @@
                         "itemListElement": {{ listItems | json_encode | raw }}
                         }
                     </script2>
-                    %}
+                    {% endif %}
                     {% if category is not defined and itemList is empty %}
                         <p class="h3 text-muted mb-5 text-center">{{ trans("Ceres::Template.itemSearchNoResults", {"searchString": searchString}) }}</p>
                     {% endif %}
