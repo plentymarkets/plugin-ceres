@@ -28,6 +28,7 @@
 - Added average rating `feedbackDecimal` and number of feedbacks `feedbackCount` in item list result fields.
 - When executing a search via an external search provider, the normal result fields of the category are now used for lists.
 - The use of ReCAPTCHA has been removed from the registration component.
+- The input for order properties of type text/number is now limited to 128 characters.
 
 ### Changed Templates
 
