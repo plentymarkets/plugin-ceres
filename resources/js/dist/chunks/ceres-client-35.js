@@ -239,10 +239,6 @@ __webpack_require__.r(__webpack_exports__);
       console.log('getImageHeight', image);
       return image && image.height ? image.height : this.$options.filters.itemImageHeight(this.currentVariation);
     },
-    height: function height() {
-      var itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
-      return this.$options.filters.itemImageHeight(itemImages);
-    },
     loadLightbox: function loadLightbox() {
       var _this4 = this;
 
