@@ -67,6 +67,7 @@
         {{ Twig.set("slide", "slide | merge({ imageUrl: itemImage.url })") }}
         {{ Twig.set("slide", "slide | merge({ imageAltText: itemImage.alternate })") }}
         {{ Twig.set("slide", "slide | merge({ imageName: itemImage.name })") }}
+        {{ Twig.set("slide", "slide | merge({ type: 'item' })") }}
 
         {% set pushCurrentSlide = true %}
 
@@ -149,7 +150,12 @@
 
                         {% if preloadImage %}
                             {{ Twig.if("loop.first") }}
-                                {{ Twig.print("add_asset(slide.imageUrl,'image')") }}
+                                {{ Twig.if("ceresConfig.log.modernImagesConversion and slide.type == 'item'") }}
+                                    {{ Twig.set("preloadAvif", "slide.imageUrl ~ '.avif'")}}
+                                    {{ Twig.print("add_asset(preloadAvif, 'image')") }}
+                                {{ Twig.else() }}
+                                    {{ Twig.print("add_asset(slide.imageUrl,'image')") }}
+                                {{ Twig.endif() }}
                             {{ Twig.endif() }}
                         {% endif %}
 

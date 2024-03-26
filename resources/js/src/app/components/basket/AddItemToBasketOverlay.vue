@@ -19,8 +19,7 @@
                         <div class="row is-table-row">
                             <div class="col-md-4" style="min-height: 80px;">
                                 <lazy-img
-                                    :image-url="`${imageUrl}.webp`"
-                                    :fallback-url="imageUrl"
+                                    :image-url="imageUrl"
                                     :alt="imageAlternativeText || itemName"
                                     :title="itemName"
                                     :style="{ maxHeight: '140px' }"

@@ -193,10 +193,7 @@ var render = function() {
                           [
                             item.image
                               ? _c("lazy-img", {
-                                  attrs: {
-                                    "image-url": item.image + ".webp",
-                                    "fallback-url": item.image
-                                  }
+                                  attrs: { "image-url": item.image }
                                 })
                               : _vm._e()
                           ],

@@ -39,6 +39,11 @@ class CeresLogConfig extends PluginConfig
     public $performanceEventPropagation;
 
     /**
+     * @var bool $modernImagesConversion Flag for enabling avif, webp images loading
+     */
+    public $modernImagesConversion;
+
+    /**
      * @inheritDoc
      */
     protected function getPluginName() :string
@@ -71,5 +76,6 @@ class CeresLogConfig extends PluginConfig
         $this->checkSyntax = $this->getBooleanValue('log.check_syntax', true);
         $this->performanceSsr = $this->getBooleanValue('log.performance.ssr', false);
         $this->performanceEventPropagation = $this->getBooleanValue('log.performance.eventPropagation', true);
+        $this->modernImagesConversion      = $this->getBooleanValue( 'log.performance.modernImagesConversion', true );
     }
 }
