@@ -30,7 +30,7 @@ class PerformanceStep extends Step
                 $this->generateLoggingOptionsSection(),
                 $this->generatePerformanceSection(),
                 $this->generatePerformanceEventPropagationSection(),
-                $this->generateWebpConversionSection()
+                $this->generateModernImageConversionSection()
             ]
         ];
         
@@ -156,17 +156,17 @@ class PerformanceStep extends Step
     /**
      * @return array
      */
-    private function generateWebpConversionSection():array
+    private function generateModernImageConversionSection():array
     {
         return [
-            "title" => "Wizard.webpConversionTitle",
-            "description" => "Wizard.webpConversionDescription",
+            "title" => "Wizard.modernImageConversionTitle",
+            "description" => "Wizard.modernImageConversionDescription",
             "form" => [
-                "performance_webpConversion" => [
+                "performance_modernImagesConversion" => [
                     "type" => "toggle",
                     "defaultValue" => false,
                     "options" => [
-                        "name" =>  "Wizard.webpConversionName"
+                        "name" =>  "Wizard.modernImageConversionName"
                     ]
                 ]
             ]

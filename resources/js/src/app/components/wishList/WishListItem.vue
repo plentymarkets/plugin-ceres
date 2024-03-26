@@ -2,9 +2,14 @@
     <div class="basket-list-item py-3">
         <div class="basket-item component-loading with-icon d-flex">
             <div class="image-container">
-              <a :href="wishListItem | itemURL">
-                <lazy-img v-if="image" :image-url="`${image}.webp`" :fallback-url="image" :alt="wishListItem | itemName" :title="wishListItem | itemName" picture-class="d-block mw-100 mh-100" />
-              </a>
+                <a :href="wishListItem | itemURL">
+                    <lazy-img
+                        v-if="image"
+                        :image-url="image"
+                        :alt="wishListItem | itemName"
+                        :title="wishListItem | itemName"
+                        picture-class="d-block mw-100 mh-100" />
+                </a>
             </div>
 
             <div class="meta-container-wrapper">

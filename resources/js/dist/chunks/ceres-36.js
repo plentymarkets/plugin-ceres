@@ -54,6 +54,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-image-carousel",
@@ -91,8 +100,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       currentItem: 0,
-      initialized: false,
-      webpImagesEnabled: App.config.global.webpImages
+      initialized: false
     };
   },
   computed: {
@@ -283,7 +291,7 @@ var render = function() {
               "a",
               {
                 attrs: {
-                  href: _vm.webpImagesEnabled ? image.url + ".webp" : image.url,
+                  href: image.url,
                   "data-lightbox": "single-item-image" + _vm._uid
                 }
               },
@@ -291,8 +299,7 @@ var render = function() {
                 _c("lazy-img", {
                   attrs: {
                     alt: _vm.getAltText(image),
-                    "image-url": image.url + ".webp",
-                    "fallback-url": image.url,
+                    "image-url": image.url,
                     title: _vm.getImageName(image)
                   }
                 })
@@ -329,8 +336,7 @@ var render = function() {
                       class: { active: _vm.currentItem === index },
                       attrs: {
                         alt: _vm.getAltText(imagePreview),
-                        "image-url": imagePreview.url + ".webp",
-                        "fallback-url": imagePreview.url,
+                        "image-url": imagePreview.url,
                         title: _vm.getImageName(imagePreview),
                         "picture-class": "owl-thumb border-appearance"
                       }
@@ -359,8 +365,7 @@ var render = function() {
                   _c("lazy-img", {
                     attrs: {
                       alt: _vm.getAltText(_vm.singleImages[0].url),
-                      "image-url": _vm.singleImages[0].url + ".webp",
-                      "fallback-url": _vm.singleImages[0].url,
+                      "image-url": _vm.singleImages[0].url,
                       title: _vm.getImageName(_vm.singleImages[0].url),
                       "picture-class": "owl-placeholder"
                     }

@@ -5278,10 +5278,10 @@
                         "defaultValue": "true"
                     }
                 },
-                "log.performance.webpConversion": {
+                "log.performance.modernImagesConversion": {
                     "type": "checkBox",
                     "required": false,
-                    "label": "Config.logPerformanceWebpConversionLabel",
+                    "label": "Config.logPerformanceModernImageConversionLabel",
                     "options": {
                         "defaultValue": "false"
                     }

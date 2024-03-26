@@ -103,7 +103,12 @@
         {{ Twig.endif() }}
 
         {% if preloadImage %}
-            {{ Twig.print("add_asset(imageUrl,'image')") }}
+            {{ Twig.if("ceresConfig.log.modernImagesConversion") }}
+                {{ Twig.set("preloadAvif", "imageUrl ~ '.avif'")}}
+                {{ Twig.print("add_asset(preloadAvif, 'image')") }}
+             {{ Twig.else() }}
+                {{ Twig.print("add_asset(imageUrl,'image')") }}
+            {{ Twig.endif() }}
         {% endif %}
 
         {% if widget.settings.lazyLoading.mobile %}

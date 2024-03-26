@@ -1,97 +1,191 @@
 <template>
-    <picture v-if="!isBackgroundImage" :data-iesrc="pictureSource" :data-picture-class="pictureClass" :data-alt="alt" :data-title="title">
+    <picture
+        v-if="!isBackgroundImage"
+        :data-iesrc="defaultImageUrl"
+        :data-picture-class="pictureClass"
+        :data-alt="alt"
+        :data-title="title">
         <slot name="additionalimages"></slot>
-        <source v-if="defaultImage === pictureSource" :srcset="defaultImage" :type="mimeTypeWebp">
+        <source :srcset="defaultImageUrl" :type="mimeType">
+        <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl">
         <source v-if="fallbackUrl" :srcset="fallbackUrl">
     </picture>
 
-    <div v-else :data-background-image="backgroundSource" :class="pictureClass">
+    <div v-else :data-background-image="defaultImageUrl || fallbackUrl" :class="pictureClass">
         <slot></slot>
     </div>
 </template>
 
 <script>
 import lozad from "../../plugins/lozad";
-import { detectWebP } from "../../helper/featureDetect";
+import {detectAvif, detectWebP} from "../../helper/featureDetect";
 
 export default {
-    props: {
-        imageUrl: String,
-        fallbackUrl: String,
-        isBackgroundImage: Boolean,
-        pictureClass: String,
-        alt: String,
-        title: String
+    props:
+    {
+        convertImage: {
+            type: Boolean,
+            default: true
+        },
+        imageUrl: {
+            type: String,
+            default: null
+        },
+        fallbackUrl: {
+            type: String,
+            default: null
+        },
+        isBackgroundImage: {
+            type: Boolean,
+            default: false
+        },
+        pictureClass: {
+            type: String,
+            default: null
+        },
+        alt: {
+            type: String,
+            default: null
+        },
+        title: {
+            type: String,
+            default: null
+        }
     },
-
     data()
     {
         return {
-            defaultImage: this.imageUrl,
-            webpImagesEnabled: App.config.global.webpImages,
-            webpImageType: '.webp',
-            webpMimeType: 'image/webp',
-            webpBrowserSupport: false,
+            imageConversionEnabled: App.config.log.modernImagesConversion,
+            receivedImageExtension: null,
+            browserSupportedImgExtension: null,
+            defaultImageUrl: this.imageUrl,
+            avifSupported: false,
+            avifExtension: 'avif',
+            webpSupported: false,
+            webpExtension: 'webp',
             imgRegex: /.?(\.\w+)(?:$|\?)/
         }
     },
-
     mounted()
     {
-        if (this.webpImagesEnabled) {
-            const matches = this.fallbackUrl?.match(this.imgRegex);
-            if (matches && (matches[1] === this.webpImageType)) {
-                this.defaultImage = this.fallbackUrl;
-            }
-        }
+        detectAvif(((avifSupported) => {
+            this.avifSupported = avifSupported;
 
-        detectWebP(((supported) =>
-        {
-            this.webpBrowserSupport = supported;
-            this.$nextTick(() =>
-            {
-                if(!this.isBackgroundImage)
-                {
-                    this.$el.classList.toggle("lozad");
-                }
-                lozad(this.$el).observe();
-            });
+            if (avifSupported) {
+                this.$nextTick(() => {
+                    if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
+                    lozad(this.$el).observe();
+                });
+
+                this.propagateImageFormat();
+            }
+
+            if (!avifSupported) {
+                detectWebP(((webpSupported) => {
+                    this.webpSupported = webpSupported;
+
+                    if (webpSupported) {
+                        this.$nextTick(() => {
+                            if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
+                            lozad(this.$el).observe();
+                        });
+
+                        this.propagateImageFormat();
+                    }
+                }));
+            }
         }));
     },
-
     watch:
     {
-        defaultImage()
+        defaultImageUrl()
         {
-            this.$nextTick(() =>
-            {
-                this.$el.setAttribute("data-loaded", 'false');
+            this.$nextTick(() => {
+                this.$el.setAttribute('data-loaded', 'false');
                 lozad(this.$el).triggerLoad(this.$el);
             });
         }
     },
-
     computed:
     {
-        /**
-         *  Determine appropriate image url to use as background source
-         */
-        backgroundSource() {
-            return this.defaultImage && this.mimeTypeWebp
-                ? this.webpBrowserSupport ? this.defaultImage : this.fallbackUrl
-                : this.defaultImage || this.fallbackUrl;
+        mimeType()
+        {
+            const matches = this.defaultImageUrl?.match(this.imgRegex);
+
+            if (matches) return `image/${matches[1].split('.').pop()}`;
+
+            return null;
         },
-        /**
-        * Check if url points to a .webp image and return appropriate mime-type
-        */
-        mimeTypeWebp() {
-            const matches = this.defaultImage?.match(this.imgRegex);
-            return matches && (matches[1] === this.webpImageType) ? this.webpMimeType : null;
+        convertedImageUrl()
+        {
+            return `${this.imageUrl}.${this.browserSupportedImgExtension}`;
+        }
+    },
+    methods:
+    {
+        propagateImageFormat()
+        {
+            this.setReceivedImageExtension();
+            this.setBrowserSupportedImageExtension();
+            this.setDefaultImageUrl();
         },
-        pictureSource() {
-            return this.mimeTypeWebp === this.webpMimeType
-                ? (this.webpImagesEnabled && this.webpBrowserSupport) ? this.defaultImage : this.fallbackUrl
-                : this.fallbackUrl;
+        setReceivedImageExtension()
+        {
+            const matches = this.imageUrl?.match(this.imgRegex);
+
+            if (matches) this.receivedImageExtension = matches[1].split('.').pop();
+        },
+        setBrowserSupportedImageExtension()
+        {
+            if (this.avifSupported) {
+                this.browserSupportedImgExtension = this.avifExtension;
+                return;
+            }
+
+            if (this.webpSupported) {
+                this.browserSupportedImgExtension = this.webpExtension;
+                return;
+            }
+
+            this.browserSupportedImgExtension = this.receivedImageExtension !== this.avifExtension && this.receivedImageExtension !== this.webpExtension
+                ? this.receivedImageExtension
+                : 'jpeg';
+        },
+        setDefaultImageUrl()
+        {
+            if (this.receivedImageExtension === this.avifExtension) {
+                this.defaultImageUrl = this.browserSupportedImgExtension === this.avifExtension
+                    ? this.imageUrl
+                    : this.convertedImageUrl;
+                return;
+            }
+
+            if (this.receivedImageExtension === this.webpExtension) {
+                if (this.browserSupportedImgExtension === this.avifExtension) {
+                    this.defaultImageUrl = this.convertedImageUrl;
+                    return;
+                }
+
+                if (this.browserSupportedImgExtension === this.webpExtension) {
+                    this.defaultImageUrl = this.imageUrl;
+                    return;
+                }
+
+                this.defaultImageUrl = this.convertedImageUrl;
+                return;
+            }
+
+            this.defaultImageUrl = this.imageShouldBeConverted()
+                ? this.convertedImageUrl
+                : this.imageUrl || this.fallbackUrl;
+        },
+        imageShouldBeConverted()
+        {
+            const cdnPathRegex = /\.com\/[^\/]+\/item\/images\//;
+            return this.convertImage 
+                && this.imageConversionEnabled
+                && cdnPathRegex.test(this.imageUrl)
+                && this.browserSupportedImgExtension !== this.receivedImageExtension
         }
     }
 }

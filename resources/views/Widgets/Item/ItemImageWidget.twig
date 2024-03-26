@@ -17,8 +17,15 @@
     {{ Twig.set("itemData", "item.documents[0].data") }}
     {{ Twig.set("itemImage", "itemData.images | itemImages(_imageSize) | orderByKey('position') | first") }}
 
-    {{ Twig.print("add_asset(itemImage.url,'image')") }}
+    {{ Twig.if("ceresConfig.log.modernImagesConversion") }}
+        {{ Twig.set("preloadAvif", "itemImage.url ~ '.avif'")}}
+        {{ Twig.print("add_asset(preloadAvif, 'image')") }}
+    {{ Twig.else() }}
+        {{ Twig.print("add_asset(itemImage.url,'image')") }}
+     {{ Twig.endif() }}
+    
 {% endif %}
+
 
 <div class="widget widget-item-image widget-{{ appearance | default("primary") }}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}">
