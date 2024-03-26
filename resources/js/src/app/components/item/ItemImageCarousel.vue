@@ -287,13 +287,6 @@ export default {
           return image && image.height ? image.height : this.$options.filters.itemImageHeight(this.currentVariation);
         },
 
-        height()
-        {
-          const itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
-
-          return this.$options.filters.itemImageHeight(itemImages);
-        },
-
         loadLightbox()
         {
             return new Promise((resolve, reject) =>
