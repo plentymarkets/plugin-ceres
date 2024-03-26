@@ -131,9 +131,9 @@
                                     [
                                         {
                                             "@type": "ListItem",
-                                            "position": "{{ position }}",
-                                            "name": "{{ item.data | itemName }}",
-                                            "url": "{{ item.data | itemURL }}"
+                                            "position": {{ position }},
+                                            "name": {{ item.data | itemName }},
+                                            "url": {{ item.data | itemURL }}
                                         }
                                     ]
                                 %}
@@ -148,7 +148,7 @@
                         {
                         "@context":"http://schema.org/",
                         "@type":"ItemList",
-                        "name": {{ category.details[0].name }},
+                        "name": "{{ category.details[0].name }}",
                         "itemListElement": {{ listItems | json_encode | raw }}
                         }
                     </script2>
