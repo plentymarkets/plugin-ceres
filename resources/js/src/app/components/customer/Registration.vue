@@ -164,7 +164,6 @@ export default {
                         NotificationService.error(
                             this.$translate("Ceres::Template.contactAcceptFormPrivacyPolicy", { hyphen: "&shy;" })
                         );
-                        this.resetRecaptcha();
                       }
                     })
                     .fail(invalidFields =>
