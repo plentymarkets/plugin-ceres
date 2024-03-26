@@ -11,7 +11,8 @@
                         :alt="altText"
                         :title="itemName"
                         picture-class="d-block mw-100 mh-100"
-                        data-testing="basket-item-img" />
+                        data-testing="basket-item-img"
+                    />
                 </a>
             </div>
 
@@ -209,6 +210,20 @@ export default {
             const itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
 
             return this.$options.filters.itemImage(itemImages);
+        },
+
+        width()
+        {
+            const itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
+
+            return this.$options.filters.itemImageWidth(itemImages);
+        },
+
+        height()
+        {
+          const itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
+
+          return this.$options.filters.itemImageHeight(itemImages);
         },
 
         altText()

@@ -316,6 +316,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -360,6 +361,14 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
     image: function image() {
       var itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
       return this.$options.filters.itemImage(itemImages);
+    },
+    width: function width() {
+      var itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
+      return this.$options.filters.itemImageWidth(itemImages);
+    },
+    height: function height() {
+      var itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
+      return this.$options.filters.itemImageHeight(itemImages);
     },
     altText: function altText() {
       var images = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
