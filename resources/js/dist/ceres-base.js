@@ -629,7 +629,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     imageShouldBeConverted: function imageShouldBeConverted() {
       var cdnPathRegex = /\/item\/images\//;
-      return this.convertImage && this.imageConversionEnabled && cdnPathRegex.test(this.imageUrl) && this.browserSupportedImgExtension !== this.receivedImageExtension;
+      return this.convertImage && this.imageConversionEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension && cdnPathRegex.test(this.imageUrl);
     }
   }
 });

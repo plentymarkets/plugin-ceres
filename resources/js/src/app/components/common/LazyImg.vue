@@ -184,8 +184,8 @@ export default {
             const cdnPathRegex = /\/item\/images\//;
             return this.convertImage 
                 && this.imageConversionEnabled
-                && cdnPathRegex.test(this.imageUrl)
                 && this.browserSupportedImgExtension !== this.receivedImageExtension
+                && cdnPathRegex.test(this.imageUrl)
         }
     }
 }
