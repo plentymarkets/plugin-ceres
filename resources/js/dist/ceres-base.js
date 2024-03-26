@@ -628,7 +628,7 @@ __webpack_require__.r(__webpack_exports__);
       this.defaultImageUrl = this.imageShouldBeConverted() ? this.convertedImageUrl : this.imageUrl || this.fallbackUrl;
     },
     imageShouldBeConverted: function imageShouldBeConverted() {
-      var cdnPathRegex = /\.com\/item\/images\/|\.de\/item\/images\//;
+      var cdnPathRegex = /\/item\/images\//;
       return this.convertImage && this.imageConversionEnabled && cdnPathRegex.test(this.imageUrl) && this.browserSupportedImgExtension !== this.receivedImageExtension;
     }
   }
