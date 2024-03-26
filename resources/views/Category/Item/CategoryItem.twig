@@ -135,7 +135,8 @@
                                             "name": "{{ item.data | itemName }}",
                                             "url": "{{ item.data | itemURL }}"
                                         }
-                                    ] %}
+                                    ]
+                                %}
                                 {% set listItems = listItems | merge(listItem) %}
                                 {% set position = position + 1 %}
                             {% endfor %}
@@ -147,7 +148,7 @@
                         {
                         "@context":"http://schema.org/",
                         "@type":"ItemList",
-                        "name": {{ category.details[0].name }}
+                        "name": {{ category.details[0].name }},
                         "itemListElement": {{ listItems | json_encode | raw }}
                         }
                     </script2>
