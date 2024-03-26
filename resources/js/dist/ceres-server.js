@@ -2925,12 +2925,12 @@ __webpack_require__.r(__webpack_exports__);
       default: null
     },
     height: {
-      type: Number | undefined,
-      default: undefined
+      type: Number | null,
+      default: null
     },
     width: {
-      type: Number | undefined,
-      default: undefined
+      type: Number | null,
+      default: null
     }
   },
   data: function data() {
@@ -82640,13 +82640,13 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.filter("itemImageHeight", function (i
   var _itemImages$reduce$he2;
 
   if (itemImages.length === 0) {
-    return undefined;
+    return null;
   }
 
   if (itemImages.length === 1) {
     var _itemImages$0$height;
 
-    return (_itemImages$0$height = itemImages[0].height) !== null && _itemImages$0$height !== void 0 ? _itemImages$0$height : undefined;
+    return (_itemImages$0$height = itemImages[0].height) !== null && _itemImages$0$height !== void 0 ? _itemImages$0$height : null;
   }
 
   if (highestPosition) {
@@ -82654,12 +82654,12 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.filter("itemImageHeight", function (i
 
     return (_itemImages$reduce$he = itemImages.reduce(function (prev, current) {
       return prev.position > current.position ? prev : current;
-    }).height) !== null && _itemImages$reduce$he !== void 0 ? _itemImages$reduce$he : undefined;
+    }).height) !== null && _itemImages$reduce$he !== void 0 ? _itemImages$reduce$he : null;
   }
 
   return (_itemImages$reduce$he2 = itemImages.reduce(function (prev, current) {
     return prev.position < current.position ? prev : current;
-  }).height) !== null && _itemImages$reduce$he2 !== void 0 ? _itemImages$reduce$he2 : undefined;
+  }).height) !== null && _itemImages$reduce$he2 !== void 0 ? _itemImages$reduce$he2 : null;
 });
 
 /***/ }),
@@ -82683,13 +82683,13 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.filter("itemImageWidth", function (it
   var _itemImages$reduce$wi2;
 
   if (itemImages.length === 0) {
-    return undefined;
+    return null;
   }
 
   if (itemImages.length === 1) {
     var _itemImages$0$width;
 
-    return (_itemImages$0$width = itemImages[0].width) !== null && _itemImages$0$width !== void 0 ? _itemImages$0$width : undefined;
+    return (_itemImages$0$width = itemImages[0].width) !== null && _itemImages$0$width !== void 0 ? _itemImages$0$width : null;
   }
 
   if (highestPosition) {
@@ -82697,12 +82697,12 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.filter("itemImageWidth", function (it
 
     return (_itemImages$reduce$wi = itemImages.reduce(function (prev, current) {
       return prev.position > current.position ? prev : current;
-    }).width) !== null && _itemImages$reduce$wi !== void 0 ? _itemImages$reduce$wi : undefined;
+    }).width) !== null && _itemImages$reduce$wi !== void 0 ? _itemImages$reduce$wi : null;
   }
 
   return (_itemImages$reduce$wi2 = itemImages.reduce(function (prev, current) {
     return prev.position < current.position ? prev : current;
-  }).width) !== null && _itemImages$reduce$wi2 !== void 0 ? _itemImages$reduce$wi2 : undefined;
+  }).width) !== null && _itemImages$reduce$wi2 !== void 0 ? _itemImages$reduce$wi2 : null;
 });
 
 /***/ }),

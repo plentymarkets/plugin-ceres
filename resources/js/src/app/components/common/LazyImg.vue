@@ -54,12 +54,12 @@ export default {
             default: null
         },
         height: {
-          type: Number | undefined,
-          default: undefined
+          type: Number | null,
+          default: null
         },
         width: {
-          type: Number | undefined,
-          default: undefined
+          type: Number | null,
+          default: null
         }
     },
     data()
