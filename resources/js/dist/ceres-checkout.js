@@ -39573,7 +39573,7 @@ var render = function() {
           _vm.height && _vm.width
             ? _c("img", {
                 attrs: {
-                  src: _vm.fallbackUrl,
+                  src: _vm.defaultImageUrl || _vm.fallbackUrl,
                   alt: _vm.alt,
                   height: _vm.height,
                   width: _vm.width

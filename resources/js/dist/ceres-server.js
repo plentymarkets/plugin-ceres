@@ -1981,6 +1981,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -42488,6 +42490,8 @@ var render = function() {
                         "image-url": _vm.image,
                         alt: _vm.altText,
                         title: _vm.itemName,
+                        height: _vm.height,
+                        width: _vm.width,
                         "picture-class": "d-block mw-100 mh-100",
                         "data-testing": "basket-item-img"
                       }
@@ -43326,7 +43330,7 @@ var render = function() {
               " " +
               (_vm.height && _vm.width
                 ? "<img" +
-                  _vm._ssrAttr("src", _vm.fallbackUrl) +
+                  _vm._ssrAttr("src", _vm.defaultImageUrl || _vm.fallbackUrl) +
                   _vm._ssrAttr("alt", _vm.alt) +
                   _vm._ssrAttr("height", _vm.height) +
                   _vm._ssrAttr("width", _vm.width) +

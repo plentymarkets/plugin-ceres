@@ -317,6 +317,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -697,6 +699,8 @@ var render = function() {
                         "image-url": _vm.image,
                         alt: _vm.altText,
                         title: _vm.itemName,
+                        height: _vm.height,
+                        width: _vm.width,
                         "picture-class": "d-block mw-100 mh-100",
                         "data-testing": "basket-item-img"
                       }
