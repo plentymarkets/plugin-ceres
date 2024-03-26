@@ -10,6 +10,8 @@
                         :image-url="image"
                         :alt="altText"
                         :title="itemName"
+                        :height="height"
+                        :width="width"
                         picture-class="d-block mw-100 mh-100"
                         data-testing="basket-item-img"
                     />
