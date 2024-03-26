@@ -231,10 +231,12 @@ __webpack_require__.r(__webpack_exports__);
     getImageName: function getImageName(image) {
       return image && image.name ? image.name : this.$options.filters.itemName(this.currentVariation);
     },
-    getImageWidth: function getImageWidth() {
+    getImageWidth: function getImageWidth(image) {
+      console.log('getImageWidth', image);
       return image && image.width ? image.width : this.$options.filters.itemImageWidth(this.currentVariation);
     },
-    getImageHeight: function getImageHeight() {
+    getImageHeight: function getImageHeight(image) {
+      console.log('getImageHeight', image);
       return image && image.height ? image.height : this.$options.filters.itemImageHeight(this.currentVariation);
     },
     height: function height() {

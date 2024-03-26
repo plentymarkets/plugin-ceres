@@ -275,13 +275,15 @@ export default {
             return image && image.name ? image.name : this.$options.filters.itemName(this.currentVariation);
         },
 
-        getImageWidth()
+        getImageWidth(image)
         {
+          console.log('getImageWidth', image);
           return image && image.width ? image.width : this.$options.filters.itemImageWidth(this.currentVariation);
         },
 
-        getImageHeight()
+        getImageHeight(image)
         {
+          console.log('getImageHeight', image);
           return image && image.height ? image.height : this.$options.filters.itemImageHeight(this.currentVariation);
         },
 
