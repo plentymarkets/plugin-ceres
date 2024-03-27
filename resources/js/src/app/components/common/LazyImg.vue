@@ -110,7 +110,7 @@ export default {
         {
             this.propagateImageFormat();
 
-            const elements = document.getElementsByTagName('img');
+            const elements = $(this.$el).getElementsByTagName('img');
             for (let i = 0; i < elements.length; i++) {
               if (i > 0) elements[i].remove();
             }

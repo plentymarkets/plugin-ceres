@@ -842,7 +842,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     imageUrl: function imageUrl() {
       this.propagateImageFormat();
-      var elements = document.getElementsByTagName('img');
+      var elements = $(this.$el).getElementsByTagName('img');
 
       for (var i = 0; i < elements.length; i++) {
         if (i > 0) elements[i].remove();
