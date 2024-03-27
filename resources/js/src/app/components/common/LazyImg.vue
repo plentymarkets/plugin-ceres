@@ -165,9 +165,9 @@ export default {
         setDefaultImageUrl()
         {
 
-            const canConvertImage = imageShouldBeConverted();
+            const canConvertImage = this.imageShouldBeConverted();
             if (this.receivedImageExtension === this.avifExtension) {
-                this.defaultImageUrl = this.browserSupportedImgExtension === this.avifExtension
+                this.defaultImageUrl = this.browserSupportedImgExtension === this.avifExtension && canConvertImage
                     ? this.imageUrl
                     : this.convertedImageUrl;
                 return;

@@ -899,10 +899,10 @@ __webpack_require__.r(__webpack_exports__);
       this.browserSupportedImgExtension = this.receivedImageExtension !== this.avifExtension && this.receivedImageExtension !== this.webpExtension ? this.receivedImageExtension : 'jpeg';
     },
     setDefaultImageUrl: function setDefaultImageUrl() {
-      var canConvertImage = imageShouldBeConverted();
+      var canConvertImage = this.imageShouldBeConverted();
 
       if (this.receivedImageExtension === this.avifExtension) {
-        this.defaultImageUrl = this.browserSupportedImgExtension === this.avifExtension ? this.imageUrl : this.convertedImageUrl;
+        this.defaultImageUrl = this.browserSupportedImgExtension === this.avifExtension && canConvertImage ? this.imageUrl : this.convertedImageUrl;
         return;
       }
 
