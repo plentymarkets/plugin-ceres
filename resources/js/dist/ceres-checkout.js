@@ -39909,7 +39909,7 @@ var render = function() {
             ? _c("img", {
                 attrs: {
                   src: _vm.defaultImageUrl,
-                  alt: _vm.title,
+                  alt: _vm.alt,
                   type: "image/tiff"
                 }
               })

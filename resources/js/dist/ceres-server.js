@@ -43742,7 +43742,7 @@ var render = function() {
               (_vm.receivedImageExtension === "tif"
                 ? "<img" +
                   _vm._ssrAttr("src", _vm.defaultImageUrl) +
-                  _vm._ssrAttr("alt", _vm.title) +
+                  _vm._ssrAttr("alt", _vm.alt) +
                   ' type="image/tiff">'
                 : "<!---->")
           )

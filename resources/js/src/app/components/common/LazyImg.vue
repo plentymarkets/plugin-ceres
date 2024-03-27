@@ -10,7 +10,7 @@
         <source :srcset="defaultImageUrl" :type="mimeType">
         <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl">
         <source v-if="fallbackUrl" :srcset="fallbackUrl">
-        <img v-if="receivedImageExtension === 'tif'" :src="defaultImageUrl" :alt="title" type="image/tiff">
+        <img v-if="receivedImageExtension === 'tif'" :src="defaultImageUrl" :alt="alt" type="image/tiff">
     </picture>
 
     <div v-else :data-background-image="defaultImageUrl || fallbackUrl" :class="pictureClass">
