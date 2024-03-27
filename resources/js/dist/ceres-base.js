@@ -629,13 +629,15 @@ __webpack_require__.r(__webpack_exports__);
       this.browserSupportedImgExtension = this.receivedImageExtension !== this.avifExtension && this.receivedImageExtension !== this.webpExtension ? this.receivedImageExtension : 'jpeg';
     },
     setDefaultImageUrl: function setDefaultImageUrl() {
+      var canConvertImage = imageShouldBeConverted();
+
       if (this.receivedImageExtension === this.avifExtension) {
         this.defaultImageUrl = this.browserSupportedImgExtension === this.avifExtension ? this.imageUrl : this.convertedImageUrl;
         return;
       }
 
       if (this.receivedImageExtension === this.webpExtension) {
-        if (this.browserSupportedImgExtension === this.avifExtension) {
+        if (this.browserSupportedImgExtension === this.avifExtension && canConvertImage) {
           this.defaultImageUrl = this.convertedImageUrl;
           return;
         }
@@ -645,11 +647,14 @@ __webpack_require__.r(__webpack_exports__);
           return;
         }
 
-        this.defaultImageUrl = this.convertedImageUrl;
+        if (canConvertImage) {
+          this.defaultImageUrl = this.convertedImageUrl;
+        }
+
         return;
       }
 
-      this.defaultImageUrl = this.imageShouldBeConverted() ? this.convertedImageUrl : this.imageUrl || this.fallbackUrl;
+      this.defaultImageUrl = canConvertImage ? this.convertedImageUrl : this.imageUrl || this.fallbackUrl;
     },
     imageShouldBeConverted: function imageShouldBeConverted() {
       var validConversionExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG'];

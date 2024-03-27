@@ -164,6 +164,8 @@ export default {
         },
         setDefaultImageUrl()
         {
+
+            const canConvertImage = imageShouldBeConverted();
             if (this.receivedImageExtension === this.avifExtension) {
                 this.defaultImageUrl = this.browserSupportedImgExtension === this.avifExtension
                     ? this.imageUrl
@@ -172,7 +174,7 @@ export default {
             }
 
             if (this.receivedImageExtension === this.webpExtension) {
-                if (this.browserSupportedImgExtension === this.avifExtension) {
+                if (this.browserSupportedImgExtension === this.avifExtension && canConvertImage) {
                     this.defaultImageUrl = this.convertedImageUrl;
                     return;
                 }
@@ -181,12 +183,13 @@ export default {
                     this.defaultImageUrl = this.imageUrl;
                     return;
                 }
-
-                this.defaultImageUrl = this.convertedImageUrl;
+                if (canConvertImage) {
+                    this.defaultImageUrl = this.convertedImageUrl;
+                }
                 return;
             }
 
-            this.defaultImageUrl = this.imageShouldBeConverted()
+            this.defaultImageUrl = canConvertImage
                 ? this.convertedImageUrl
                 : this.imageUrl || this.fallbackUrl;
         },
