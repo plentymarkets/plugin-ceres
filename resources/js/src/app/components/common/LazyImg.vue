@@ -113,7 +113,7 @@ export default {
             this.generateUuid();
             this.$nextTick(() => {
                 this.propagateImageFormat();
-                const images = [...document.getElementById(this.uuid).getElementsByTagName('img')];
+                const images = document.getElementById(this.uuid).getElementsByTagName('img');
                 console.log(document.getElementById(this.uuid))
                 console.log(document.getElementById(this.uuid).getElementsByTagName('img'))
                 console.log(images)
