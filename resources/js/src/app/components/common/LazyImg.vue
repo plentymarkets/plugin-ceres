@@ -4,7 +4,8 @@
         :data-iesrc="defaultImageUrl"
         :data-picture-class="pictureClass"
         :data-alt="alt"
-        :data-title="title">
+        :data-title="title"
+        :id="uuid">
         <slot name="additionalimages"></slot>
         <source :srcset="defaultImageUrl" :type="mimeType">
         <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl">
@@ -64,6 +65,7 @@ export default {
             avifExtension: 'avif',
             webpSupported: false,
             webpExtension: 'webp',
+            uuid: this.generateHash(this.title),
             imgRegex: /.?(\.\w+)(?:$|\?)/
         }
     },
@@ -111,10 +113,10 @@ export default {
           this.$nextTick(() => {
               this.propagateImageFormat();
 
-              const images = [...document.getElementsByTagName('img')];
-              for (let i = 0; i < images.length; i++) {
-                  if (i > 0 && !images[i].src) images[i].remove();
-              }
+              const images = [...document.getElementById(this.uuid).getElementsByTagName('img')];
+              images.forEach((image, i) => {
+                if (i > 0 && !images[i].src) images[i].remove();
+              });
           });
         }
     },
@@ -200,6 +202,20 @@ export default {
                 && this.browserSupportedImgExtension !== this.receivedImageExtension
                 && validConversionExtensions.includes(this.receivedImageExtension)
                 && /\/item\/images\//.test(this.imageUrl)
+        },
+        generateHash(str)
+        {
+          let hash = 0, i, chr;
+
+          if (str.length === 0) return hash;
+
+          for (i = 0; i < str.length; i++) {
+            chr = str.charCodeAt(i);
+            hash = ((hash << 5) - hash) + chr;
+            hash |= 0;
+          }
+
+          return hash;
         }
     }
 }
