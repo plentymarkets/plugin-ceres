@@ -109,6 +109,8 @@ export default {
         imageUrl()
         {
           this.$nextTick(() => {
+            console.log('nextTick');
+            this.$el.classList.toggle('lozad');
             lozad(this.$el).observe();
             this.$el.setAttribute('data-loaded', 'false');
             lozad(this.$el).triggerLoad(this.$el);

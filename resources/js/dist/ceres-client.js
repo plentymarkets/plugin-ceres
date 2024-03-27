@@ -510,6 +510,10 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       this.$nextTick(function () {
+        console.log('nextTick');
+
+        _this3.$el.classList.toggle('lozad');
+
         Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_5__["default"])(_this3.$el).observe();
 
         _this3.$el.setAttribute('data-loaded', 'false');
