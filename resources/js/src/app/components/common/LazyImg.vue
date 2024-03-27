@@ -65,7 +65,7 @@ export default {
             avifExtension: 'avif',
             webpSupported: false,
             webpExtension: 'webp',
-            uuid: this.generateHash(this.imageUrl + Date.now().toString()),
+            uuid: this.generateUuid(),
             imgRegex: /.?(\.\w+)(?:$|\?)/
         }
     },
@@ -112,8 +112,8 @@ export default {
         {
           this.$nextTick(() => {
               this.propagateImageFormat();
-
-              const images = [...document.getElementById(this.uuid).getElementsByTagName('img')];
+              const targetElement = document.getElementById(this.uuid);
+              const images = [...targetElement.getElementsByTagName('img')];
               console.log(images);
               for (let i = 0; i < images.length; i++) if (i > 0 && !images[i].src) images[i].remove();
           });
@@ -202,19 +202,9 @@ export default {
                 && validConversionExtensions.includes(this.receivedImageExtension)
                 && /\/item\/images\//.test(this.imageUrl)
         },
-        generateHash(str)
+        generateUuid()
         {
-          let hash = 0, i, chr;
-
-          if ((str).length === 0) return hash;
-
-          for (i = 0; i < str.length; i++) {
-            chr = str.charCodeAt(i);
-            hash = ((hash << 5) - hash) + chr;
-            hash |= 0;
-          }
-
-          return hash;
+            return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         }
     }
 }
