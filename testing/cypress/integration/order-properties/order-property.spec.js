@@ -1,6 +1,9 @@
 // / <reference types="cypress" />
 context("Order Property", () =>
 {
+    const url = "/en/livingroom/armchair-and-stool/loungesessel-herkules_116_1014/";
+    const url2 = "/testartikel/merkmale_145_1134/";
+
 
     it("should display order properties", () =>
     {
@@ -223,5 +226,92 @@ context("Order Property", () =>
     {
         cy.visit("/en/testarticle/properties_145_1134/");
         cy.getByTestingAttr("order-property-input-radio").eq(0).parent().find("label").should("contain", "Single choice +€0");
+    });
+
+
+    it("should change language text for order properties", () =>
+    {
+        cy.visit(url);
+        cy.get(".widget-order-property").should("contain", "Genuine leather");
+    });
+
+    // Eigenschaften / Merkmale / Order Properties
+
+    it("should add correct price for radio button order property", () =>
+    {
+        cy.visit(url2);
+        cy.getByTestingAttr("order-property-input-radio").eq(0).click();
+        cy.get(".price").should("contain", "90,00");
+        cy.getByTestingAttr("order-property-input-radio").eq(1).click();
+        cy.get(".price").should("contain", "100,00");
+        cy.getByTestingAttr("order-property-input-radio").eq(2).click();
+        cy.get(".price").should("contain", "95,00");
+    });
+
+    it("should add correct price for multi checkbox button order property", () =>
+    {
+        cy.visit(url2);
+        cy.getByTestingAttr("order-property-next-slide").click();
+        cy.getByTestingAttr("order-property-input-checkbox").eq(0).click();
+        cy.getByTestingAttr("order-property-input-checkbox").eq(1).click();
+        cy.getByTestingAttr("order-property-input-checkbox").eq(2).click();
+        cy.get(".price").should("contain", "105,00");
+        cy.getByTestingAttr("order-property-input-checkbox").eq(1).click();
+        cy.get(".price").should("contain", "100,00");
+
+    });
+
+    it("should add correct price for file upload order property", () =>
+    {
+        cy.visit(url2);
+        cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
+        cy.fixture("test.png").then(fileContent =>
+        {
+            cy.getByTestingAttr("order-property-input-file").last().attachFile({
+                fileContent: fileContent.toString(),
+                fileName: "test.png",
+                mimeType: "image/png"
+            });
+        });
+        cy.get(".price").should("contain", "95,00");
+    });
+
+    it("should add correct price for selectbox order property", () =>
+    {
+        cy.visit(url2);
+        cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
+        cy.getByTestingAttr("order-property-selection").eq(1).select("Option 1");
+        cy.getByTestingAttr("order-property-selection").eq(1).should("contain", "Option 1");
+        cy.get(".price").should("contain", "95,00");
+    });
+
+    it("should add correct price for text order property", () =>
+    {
+        cy.visit(url2);
+        const value = "Lorem ipsum dolor sit amet consectetur adipisicing elit.";
+
+        cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
+        cy.getByTestingAttr("order-property-input-text").last().type(value);
+        cy.get(".price").should("contain", "95,00");
+    });
+
+    it("should add correct price for integer order property", () =>
+    {
+        cy.visit(url2);
+        const value = 123;
+
+        cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
+        cy.getByTestingAttr("order-property-input-int").last().type(value);
+        cy.get(".price").should("contain", "95,00");
+    });
+
+    it("should add correct price for float order property", () =>
+    {
+        cy.visit(url2);
+        const value = 1.23;
+
+        cy.getByTestingAttr("order-property-next-slide").click().click().click().click();
+        cy.getByTestingAttr("order-property-input-float").last().type(value);
+        cy.get(".price").should("contain", "95,00");
     });
 });

@@ -41,12 +41,6 @@ context("Header topbar languages", () =>
         cy.get(".tab-content").should("contain", "The feet made of real wood are inconspicuously and discreetly integrated into the overall appearance of the armchair.")
     });
 
-    it("should change language text for order properties", () =>
-    {
-        cy.visit(URL);
-        cy.get(".widget-order-property").should("contain", "Genuine leather");
-    });
-
     it("should display correct category lang in breadcrumbs", () =>
     {
         cy.visit(URL);
