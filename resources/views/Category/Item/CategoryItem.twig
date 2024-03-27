@@ -134,6 +134,7 @@
                                             "position": position,
                                             "name": item.data | itemName,
                                             "url": item.data | itemURL
+                                            "image": item.data | itemImage
                                         }
                                     ]
                                 %}
@@ -148,9 +149,9 @@
                         {
                         "@context":"http://schema.org/",
                         "@type":"ItemList",
-                        "name": category.details[0].name,
+                        "name": {{ category.details[0].name }},
                         "itemListElement": {{ listItems | json_encode | raw }}
-                        }
+                        }}
                     </script2>
                     {% endif %}
                     {% if category is not defined and itemList is empty %}
