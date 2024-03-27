@@ -112,9 +112,15 @@ export default {
               this.propagateImageFormat();
 
               const images = [...document.getElementsByTagName('img')];
-              images.forEach(image => {
-                  if (!image.classList.contains('owl-thumb')) image.remove();
-              });
+              for (let i = 0; i < images.length; i++) {
+                  console.log(images[i]);
+                  if (i > 0 && !images[i].src) images[i].remove();
+              }
+
+              // images.forEach(image => {
+              //     console.log(image);
+              //     if (!image.src) image.remove();
+              // });
 
               // const elements = this.$el.getElementsByTagName('img')
               // console.log(elements)
