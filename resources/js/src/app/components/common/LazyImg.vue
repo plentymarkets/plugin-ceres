@@ -110,13 +110,14 @@ export default {
         },
         imageUrl()
         {
-          this.$nextTick(() => {
-              this.propagateImageFormat();
-              const targetElement = document.getElementById(this.uuid);
-              const images = [...targetElement.getElementsByTagName('img')];
-              console.log(images);
-              for (let i = 0; i < images.length; i++) if (i > 0 && !images[i].src) images[i].remove();
-          });
+            this.$nextTick(() => {
+                this.propagateImageFormat();
+                const targetElement = document.getElementById(this.uuid);
+                console.log(targetElement)
+                // const images = [...targetElement.getElementsByTagName('img')];
+                // console.log(images);
+                // for (let i = 0; i < images.length; i++) if (i > 0 && !images[i].src) images[i].remove();
+            });
         }
     },
     computed:
