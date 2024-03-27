@@ -196,9 +196,9 @@ export default {
 
             return this.convertImage 
                 && this.imageConversionEnabled
+                && /\/item\/images\//.test(this.imageUrl)
                 && this.browserSupportedImgExtension !== this.receivedImageExtension
                 && validConversionExtensions.includes(this.receivedImageExtension)
-                && /\/item\/images\//.test(this.imageUrl)
         },
         generateUuid()
         {

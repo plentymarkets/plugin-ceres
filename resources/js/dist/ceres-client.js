@@ -589,7 +589,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     imageShouldBeConverted: function imageShouldBeConverted() {
       var validConversionExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG'];
-      return this.convertImage && this.imageConversionEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension && validConversionExtensions.includes(this.receivedImageExtension) && /\/item\/images\//.test(this.imageUrl);
+      return this.convertImage && this.imageConversionEnabled && /\/item\/images\//.test(this.imageUrl) && this.browserSupportedImgExtension !== this.receivedImageExtension && validConversionExtensions.includes(this.receivedImageExtension);
     },
     generateUuid: function generateUuid() {
       this.uuid = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
