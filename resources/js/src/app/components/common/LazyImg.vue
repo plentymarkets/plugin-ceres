@@ -109,6 +109,8 @@ export default {
         imageUrl()
         {
             this.propagateImageFormat();
+            this.$el.setAttribute('data-loaded', 'false');
+            lozad(this.$el).triggerLoad(this.$el);
         }
     },
     computed:

@@ -2971,6 +2971,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     imageUrl: function imageUrl() {
       this.propagateImageFormat();
+      this.$el.setAttribute('data-loaded', 'false');
+      Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_5__["default"])(this.$el).triggerLoad(this.$el);
     }
   },
   computed: {
