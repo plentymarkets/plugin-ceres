@@ -4,12 +4,13 @@
         :data-iesrc="defaultImageUrl"
         :data-picture-class="pictureClass"
         :data-alt="alt"
-        :data-title="title">
+        :data-title="title"
+        :id="uuid">
         <slot name="additionalimages"></slot>
         <source :srcset="defaultImageUrl" :type="mimeType">
-        <img v-if="receivedImageExtension === 'tif'" :src="defaultImageUrl">
         <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl">
         <source v-if="fallbackUrl" :srcset="fallbackUrl">
+        <img v-if="receivedImageExtension === 'tif'" :src="defaultImageUrl" :alt="alt" type="image/tiff">
     </picture>
 
     <div v-else :data-background-image="defaultImageUrl || fallbackUrl" :class="pictureClass">
@@ -64,6 +65,7 @@ export default {
             avifExtension: 'avif',
             webpSupported: false,
             webpExtension: 'webp',
+            uuid: null,
             imgRegex: /.?(\.\w+)(?:$|\?)/
         }
     },
@@ -104,6 +106,14 @@ export default {
             this.$nextTick(() => {
                 this.$el.setAttribute('data-loaded', 'false');
                 lozad(this.$el).triggerLoad(this.$el);
+            });
+        },
+        imageUrl()
+        {
+            this.generateUuid();
+            this.$nextTick(() => {
+                this.propagateImageFormat();
+                document.getElementById(this.uuid).getElementsByTagName('img')?.[0].remove();
             });
         }
     },
@@ -182,14 +192,17 @@ export default {
         },
         imageShouldBeConverted()
         {
-            const cdnPathRegex = /\/item\/images\//;
             const validConversionExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG'];
 
             return this.convertImage 
                 && this.imageConversionEnabled
                 && this.browserSupportedImgExtension !== this.receivedImageExtension
                 && validConversionExtensions.includes(this.receivedImageExtension)
-                && cdnPathRegex.test(this.imageUrl)
+                && /\/item\/images\//.test(this.imageUrl)
+        },
+        generateUuid()
+        {
+            this.uuid = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         }
     }
 }
