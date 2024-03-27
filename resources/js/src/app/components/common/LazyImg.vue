@@ -65,7 +65,7 @@ export default {
             avifExtension: 'avif',
             webpSupported: false,
             webpExtension: 'webp',
-            uuid: this.generateHash(this.title),
+            uuid: this.generateHash(this.imageUrl + Date.now().toString()),
             imgRegex: /.?(\.\w+)(?:$|\?)/
         }
     },
@@ -114,6 +114,7 @@ export default {
               this.propagateImageFormat();
 
               const images = [...document.getElementById(this.uuid).getElementsByTagName('img')];
+              console.log(images);
               for (let i = 0; i < images.length; i++) if (i > 0 && !images[i].src) images[i].remove();
           });
         }
@@ -205,7 +206,7 @@ export default {
         {
           let hash = 0, i, chr;
 
-          if (str.length === 0) return hash;
+          if ((str).length === 0) return hash;
 
           for (i = 0; i < str.length; i++) {
             chr = str.charCodeAt(i);
