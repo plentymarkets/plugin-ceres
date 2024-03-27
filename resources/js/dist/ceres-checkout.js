@@ -843,7 +843,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       avifExtension: 'avif',
       webpSupported: false,
       webpExtension: 'webp',
-      uuid: '',
+      uuid: null,
       imgRegex: /.?(\.\w+)(?:$|\?)/
     };
   },
@@ -896,6 +896,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         _this3.propagateImageFormat();
 
         var images = _toConsumableArray(document.getElementById(_this3.uuid).getElementsByTagName('img'));
+
+        console.log(document.getElementById(_this3.uuid));
+        console.log(document.getElementById(_this3.uuid).getElementsByTagName('img'));
+        console.log(images);
 
         for (var i = 0; i < images.length; i++) {
           if (i > 0 && !images[i].src) images[i].remove();

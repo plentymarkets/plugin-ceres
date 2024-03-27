@@ -65,7 +65,7 @@ export default {
             avifExtension: 'avif',
             webpSupported: false,
             webpExtension: 'webp',
-            uuid: '',
+            uuid: null,
             imgRegex: /.?(\.\w+)(?:$|\?)/
         }
     },
@@ -114,6 +114,9 @@ export default {
             this.$nextTick(() => {
                 this.propagateImageFormat();
                 const images = [...document.getElementById(this.uuid).getElementsByTagName('img')];
+                console.log(document.getElementById(this.uuid))
+                console.log(document.getElementById(this.uuid).getElementsByTagName('img'))
+                console.log(images)
                 for (let i = 0; i < images.length; i++) if (i > 0 && !images[i].src) images[i].remove();
             });
         }
