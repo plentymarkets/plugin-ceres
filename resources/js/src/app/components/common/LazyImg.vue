@@ -114,9 +114,7 @@ export default {
               this.propagateImageFormat();
 
               const images = [...document.getElementById(this.uuid).getElementsByTagName('img')];
-              images.forEach((image, i) => {
-                if (i > 0 && !images[i].src) images[i].remove();
-              });
+              for (let i = 0; i < images.length; i++) if (i > 0 && !images[i].src) images[i].remove();
           });
         }
     },
