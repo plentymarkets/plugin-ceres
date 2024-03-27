@@ -111,11 +111,16 @@ export default {
           this.$nextTick(() => {
               this.propagateImageFormat();
 
-              const elements = this.$el.getElementsByTagName('img')
-              console.log(elements)
-              for (let i = 0; i < elements.length; i++) {
-                  if (i > 0) elements[i].remove();
-              }
+              const images = [...document.getElementsByTagName('img')];
+              images.forEach(image => {
+                  if (!image.classList.contains('owl-thumb')) image.remove();
+              });
+
+              // const elements = this.$el.getElementsByTagName('img')
+              // console.log(elements)
+              // for (let i = 0; i < elements.length; i++) {
+              //     if (i > 0) elements[i].remove();
+              // }
           });
         }
     },
