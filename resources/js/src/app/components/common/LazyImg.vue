@@ -113,9 +113,9 @@ export default {
             this.generateUuid();
             this.$nextTick(() => {
                 this.propagateImageFormat();
-                const images = document.getElementById(this.uuid).getElementsByTagName('img');
-                console.log(document.getElementById(this.uuid))
-                console.log(document.getElementById(this.uuid).getElementsByTagName('img'))
+                const target = document.getElementById(this.uuid);
+                const images = target.getElementsByTagName('img');
+                console.log(target)
                 console.log(images)
                 for (let i = 0; i < images.length; i++) if (i > 0 && !images[i].src) images[i].remove();
             });

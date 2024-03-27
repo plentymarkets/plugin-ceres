@@ -521,9 +521,9 @@ __webpack_require__.r(__webpack_exports__);
       this.$nextTick(function () {
         _this3.propagateImageFormat();
 
-        var images = document.getElementById(_this3.uuid).getElementsByTagName('img');
-        console.log(document.getElementById(_this3.uuid));
-        console.log(document.getElementById(_this3.uuid).getElementsByTagName('img'));
+        var target = document.getElementById(_this3.uuid);
+        var images = target.getElementsByTagName('img');
+        console.log(target);
         console.log(images);
 
         for (var i = 0; i < images.length; i++) {
