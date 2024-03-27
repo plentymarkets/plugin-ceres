@@ -108,13 +108,15 @@ export default {
         },
         imageUrl()
         {
-            this.propagateImageFormat();
+          this.$nextTick(() => {
+              this.propagateImageFormat();
 
-            const elements = $(this.$el).find('img');
-            console.log(elements)
-            for (let i = 0; i < elements.length; i++) {
-              if (i > 0) elements[i].remove();
-            }
+              const elements = this.$el.getElementsByTagName('img')
+              console.log(elements)
+              for (let i = 0; i < elements.length; i++) {
+                  if (i > 0) elements[i].remove();
+              }
+          });
         }
     },
     computed:
