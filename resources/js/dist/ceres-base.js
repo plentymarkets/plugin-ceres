@@ -571,14 +571,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     imageUrl: function imageUrl() {
-      var _this3 = this;
-
+      Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_5__["default"])(this.$el).observe();
       this.propagateImageFormat();
-      this.$nextTick(function () {
-        _this3.$el.setAttribute('data-loaded', 'false');
-
-        Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_5__["default"])(_this3.$el).triggerLoad(_this3.$el);
-      });
     }
   },
   computed: {
