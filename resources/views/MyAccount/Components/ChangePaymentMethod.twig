@@ -9,7 +9,7 @@
             </div>
 
             <div class="payment-change-box-item" v-if="paymentStatus != 'fullyPaid'">
-                <div v-if="!changePossible" class="payment-align-center">
+                <div class="payment-align-center">
                     <div class="alert alert-info cannot-change-payment mb-2">
                         <i class="fa fa-info-circle" aria-hidden="true"></i>
                         <span class="info-badge">{{ trans("Ceres::Template.orderHistoryChangePaymentNotAllowed") }}</span>
@@ -30,7 +30,7 @@
             </a>
 
             <div v-if="paymentStatus != 'fullyPaid'" class="col-6 col-sm-7">
-                <span v-if="!changePossible" class="payment-align-center">{{ trans("Ceres::Template.orderHistoryChangePaymentNotPossible") }}</span>
+                <span class="payment-align-center">{{ trans("Ceres::Template.orderHistoryChangePaymentNotPossible") }}</span>
             </div>
 
         </div>
