@@ -622,18 +622,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         var images = _toConsumableArray(document.getElementsByTagName('img'));
 
         for (var i = 0; i < images.length; i++) {
-          console.log(images[i]);
           if (i > 0 && !images[i].src) images[i].remove();
-        } // images.forEach(image => {
-        //     console.log(image);
-        //     if (!image.src) image.remove();
-        // });
-        // const elements = this.$el.getElementsByTagName('img')
-        // console.log(elements)
-        // for (let i = 0; i < elements.length; i++) {
-        //     if (i > 0) elements[i].remove();
-        // }
-
+        }
       });
     }
   },
