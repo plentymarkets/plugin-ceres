@@ -7,9 +7,9 @@
         :data-title="title">
         <slot name="additionalimages"></slot>
         <source :srcset="defaultImageUrl" :type="mimeType">
-        <img v-if="receivedImageExtension === 'tif'" :src="defaultImageUrl">
         <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl">
         <source v-if="fallbackUrl" :srcset="fallbackUrl">
+        <img v-if="receivedImageExtension === 'tif'" :src="defaultImageUrl" :alt="title" type="image/tiff">
     </picture>
 
     <div v-else :data-background-image="defaultImageUrl || fallbackUrl" :class="pictureClass">
@@ -105,6 +105,10 @@ export default {
                 this.$el.setAttribute('data-loaded', 'false');
                 lozad(this.$el).triggerLoad(this.$el);
             });
+        },
+        imageUrl()
+        {
+            this.propagateImageFormat();
         }
     },
     computed:
@@ -182,14 +186,13 @@ export default {
         },
         imageShouldBeConverted()
         {
-            const cdnPathRegex = /\/item\/images\//;
             const validConversionExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG'];
 
             return this.convertImage 
                 && this.imageConversionEnabled
                 && this.browserSupportedImgExtension !== this.receivedImageExtension
                 && validConversionExtensions.includes(this.receivedImageExtension)
-                && cdnPathRegex.test(this.imageUrl)
+                && /\/item\/images\//.test(this.imageUrl)
         }
     }
 }
