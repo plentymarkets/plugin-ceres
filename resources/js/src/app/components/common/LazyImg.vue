@@ -108,14 +108,12 @@ export default {
         },
         imageUrl()
         {
-          this.$nextTick(() => {
-            console.log('nextTick');
-            this.$el.classList.toggle('lozad');
-            lozad(this.$el).observe();
-            this.$el.setAttribute('data-loaded', 'false');
-            lozad(this.$el).triggerLoad(this.$el);
             this.propagateImageFormat();
-          });
+
+            const elements = document.getElementsByTagName('img');
+            for (let i = 0; i < elements.length; i++) {
+              if (i > 0) elements[i].remove();
+            }
         }
     },
     computed:
