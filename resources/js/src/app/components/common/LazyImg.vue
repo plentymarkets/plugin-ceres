@@ -108,8 +108,12 @@ export default {
         },
         imageUrl()
         {
+          this.$nextTick(() => {
             lozad(this.$el).observe();
+            this.$el.setAttribute('data-loaded', 'false');
+            lozad(this.$el).triggerLoad(this.$el);
             this.propagateImageFormat();
+          });
         }
     },
     computed:
