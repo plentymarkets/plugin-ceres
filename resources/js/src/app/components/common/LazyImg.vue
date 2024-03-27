@@ -113,11 +113,8 @@ export default {
             this.generateUuid();
             this.$nextTick(() => {
                 this.propagateImageFormat();
-                const targetElement = document.getElementById(this.uuid);
-                console.log(targetElement)
-                // const images = [...targetElement.getElementsByTagName('img')];
-                // console.log(images);
-                // for (let i = 0; i < images.length; i++) if (i > 0 && !images[i].src) images[i].remove();
+                const images = [...document.getElementById(this.uuid).getElementsByTagName('img')];
+                for (let i = 0; i < images.length; i++) if (i > 0 && !images[i].src) images[i].remove();
             });
         }
     },
