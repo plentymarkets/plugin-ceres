@@ -65,7 +65,7 @@ export default {
             avifExtension: 'avif',
             webpSupported: false,
             webpExtension: 'webp',
-            uuid: this.generateUuid(),
+            uuid: '',
             imgRegex: /.?(\.\w+)(?:$|\?)/
         }
     },
@@ -110,6 +110,7 @@ export default {
         },
         imageUrl()
         {
+            this.generateUuid();
             this.$nextTick(() => {
                 this.propagateImageFormat();
                 const targetElement = document.getElementById(this.uuid);
@@ -205,7 +206,7 @@ export default {
         },
         generateUuid()
         {
-            return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+            this.uuid = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         }
     }
 }

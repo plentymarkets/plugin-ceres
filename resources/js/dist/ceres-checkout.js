@@ -803,7 +803,7 @@ __webpack_require__.r(__webpack_exports__);
       avifExtension: 'avif',
       webpSupported: false,
       webpExtension: 'webp',
-      uuid: this.generateUuid(),
+      uuid: '',
       imgRegex: /.?(\.\w+)(?:$|\?)/
     };
   },
@@ -851,6 +851,7 @@ __webpack_require__.r(__webpack_exports__);
     imageUrl: function imageUrl() {
       var _this3 = this;
 
+      this.generateUuid();
       this.$nextTick(function () {
         _this3.propagateImageFormat();
 
@@ -926,7 +927,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.convertImage && this.imageConversionEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension && validConversionExtensions.includes(this.receivedImageExtension) && /\/item\/images\//.test(this.imageUrl);
     },
     generateUuid: function generateUuid() {
-      return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+      this.uuid = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     }
   }
 });
