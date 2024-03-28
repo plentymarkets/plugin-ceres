@@ -127,8 +127,11 @@
                                         </a>
                                     </category-item>
                                 </li>
-                                <!-- Test -->
                                 {% set itemurl = item.data | itemURL %}
+                                {% set itemImage = item.data.images.variation[0].urlMiddle %}
+                                {% if itemImage | trim is not empty  %}
+                                    {% set itemImage = item.data.images.all[0].urlMiddle %}
+                                {% endif %}
                                 {% set listItem =
                                     [
                                         {
@@ -136,8 +139,7 @@
                                             "position": position,
                                             "name": item.data | itemName,
                                             "url": webstoreConfig.domainSsl ~ itemurl,
-                                            "image": item.data.images.variation[0].urlMiddle,
-                                            "image2": item.data.images.all[0].urlMiddle
+                                            "image": itemImage
                                         }
                                     ]
                                 %}
