@@ -135,7 +135,9 @@
                                             "@type": "ListItem",
                                             "position": position,
                                             "name": item.data | itemName,
-                                            "url": webstoreConfig.domainSsl ~ itemurl
+                                            "url": webstoreConfig.domainSsl ~ itemurl,
+                                            "image": item.data.images.variation[0].urlMiddle,
+                                            "image2": item.data.images.all[0].urlMiddle
                                         }
                                     ]
                                 %}
