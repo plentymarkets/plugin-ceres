@@ -127,13 +127,15 @@
                                         </a>
                                     </category-item>
                                 </li>
+                                <!-- Test -->
+                                {% set itemurl = item.data | itemURL %}
                                 {% set listItem =
                                     [
                                         {
                                             "@type": "ListItem",
                                             "position": position,
                                             "name": item.data | itemName,
-                                            "url": "https://kn71h80kvr3b.c14-01.plentymarkets.com/" ~ item.data | itemURL
+                                            "url": webstoreConfig.domainSsl ~ itemurl
                                         }
                                     ]
                                 %}
