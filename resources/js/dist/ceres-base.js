@@ -629,31 +629,37 @@ __webpack_require__.r(__webpack_exports__);
       this.browserSupportedImgExtension = this.receivedImageExtension !== this.avifExtension && this.receivedImageExtension !== this.webpExtension ? this.receivedImageExtension : 'jpeg';
     },
     setDefaultImageUrl: function setDefaultImageUrl() {
-      if (this.receivedImageExtension === this.avifExtension) {
-        this.defaultImageUrl = this.browserSupportedImgExtension === this.avifExtension ? this.imageUrl : this.convertedImageUrl;
-        return;
-      }
-
-      if (this.receivedImageExtension === this.webpExtension) {
-        if (this.browserSupportedImgExtension === this.avifExtension) {
-          this.defaultImageUrl = this.convertedImageUrl;
+      if (this.imageShouldBeConverted()) {
+        if (this.receivedImageExtension === this.avifExtension) {
+          this.defaultImageUrl = this.browserSupportedImgExtension === this.avifExtension ? this.imageUrl : this.convertedImageUrl;
           return;
         }
 
-        if (this.browserSupportedImgExtension === this.webpExtension) {
+        if (this.receivedImageExtension === this.webpExtension) {
+          if (this.browserSupportedImgExtension === this.avifExtension) {
+            this.defaultImageUrl = this.convertedImageUrl;
+            return;
+          }
+
+          if (this.browserSupportedImgExtension === this.webpExtension) {
+            this.defaultImageUrl = this.imageUrl;
+            return;
+          }
+
           this.defaultImageUrl = this.imageUrl;
           return;
-        }
+        } // convert anything other than avif or webp into browser supported format.
+
 
         this.defaultImageUrl = this.convertedImageUrl;
         return;
       }
 
-      this.defaultImageUrl = this.imageShouldBeConverted() ? this.convertedImageUrl : this.imageUrl || this.fallbackUrl;
+      this.defaultImageUrl = this.imageUrl || this.fallbackUrl;
     },
     imageShouldBeConverted: function imageShouldBeConverted() {
-      var validConversionExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG'];
-      return this.convertImage && this.imageConversionEnabled && this.browserSupportedImgExtension !== this.receivedImageExtension && validConversionExtensions.includes(this.receivedImageExtension) && /\/item\/images\//.test(this.imageUrl);
+      var validConversionExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG', 'webp'];
+      return this.convertImage && this.imageConversionEnabled && /\/item\/images\//.test(this.imageUrl) && this.browserSupportedImgExtension !== this.receivedImageExtension && validConversionExtensions.includes(this.receivedImageExtension);
     },
     generateUuid: function generateUuid() {
       this.uuid = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);

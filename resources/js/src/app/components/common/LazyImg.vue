@@ -164,41 +164,42 @@ export default {
         },
         setDefaultImageUrl()
         {
-            if (this.receivedImageExtension === this.avifExtension) {
-                this.defaultImageUrl = this.browserSupportedImgExtension === this.avifExtension
-                    ? this.imageUrl
-                    : this.convertedImageUrl;
-                return;
-            }
-
-            if (this.receivedImageExtension === this.webpExtension) {
-                if (this.browserSupportedImgExtension === this.avifExtension) {
-                    this.defaultImageUrl = this.convertedImageUrl;
+            if (this.imageShouldBeConverted()) {
+                if (this.receivedImageExtension === this.avifExtension) {
+                    this.defaultImageUrl = this.browserSupportedImgExtension === this.avifExtension
+                        ? this.imageUrl
+                        : this.convertedImageUrl;
                     return;
                 }
+                if (this.receivedImageExtension === this.webpExtension) {
+                    if (this.browserSupportedImgExtension === this.avifExtension) {
+                        this.defaultImageUrl = this.convertedImageUrl;
+                        return;
+                    }
+                    if (this.browserSupportedImgExtension === this.webpExtension) {
+                        this.defaultImageUrl = this.imageUrl;
+                        return;
+                    }
 
-                if (this.browserSupportedImgExtension === this.webpExtension) {
                     this.defaultImageUrl = this.imageUrl;
                     return;
                 }
 
+                // convert anything other than avif or webp into browser supported format.
                 this.defaultImageUrl = this.convertedImageUrl;
                 return;
             }
-
-            this.defaultImageUrl = this.imageShouldBeConverted()
-                ? this.convertedImageUrl
-                : this.imageUrl || this.fallbackUrl;
+            this.defaultImageUrl = this.imageUrl || this.fallbackUrl;
         },
         imageShouldBeConverted()
         {
-            const validConversionExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG'];
+            const validConversionExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG', 'webp'];
 
             return this.convertImage 
                 && this.imageConversionEnabled
+                && /\/item\/images\//.test(this.imageUrl)
                 && this.browserSupportedImgExtension !== this.receivedImageExtension
                 && validConversionExtensions.includes(this.receivedImageExtension)
-                && /\/item\/images\//.test(this.imageUrl)
         },
         generateUuid()
         {
