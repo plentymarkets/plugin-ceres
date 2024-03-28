@@ -583,8 +583,12 @@ __webpack_require__.r(__webpack_exports__);
           return;
         }
 
-        if (canConvertImage) this.defaultImageUrl = this.convertedImageUrl;
-        return;
+        if (canConvertImage) {
+          this.defaultImageUrl = this.convertedImageUrl;
+          return;
+        }
+
+        this.defaultImageUrl = this.imageUrl;
       }
 
       this.defaultImageUrl = canConvertImage ? this.convertedImageUrl : this.imageUrl || this.fallbackUrl;

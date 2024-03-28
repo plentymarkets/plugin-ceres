@@ -184,8 +184,12 @@ export default {
                     return;
                 }
 
-                if (canConvertImage) this.defaultImageUrl = this.convertedImageUrl;
-                return;
+                if (canConvertImage) {
+                    this.defaultImageUrl = this.convertedImageUrl;
+                    return;
+                }
+
+                this.defaultImageUrl = this.imageUrl;
             }
 
             this.defaultImageUrl = canConvertImage
