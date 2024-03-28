@@ -164,37 +164,32 @@ export default {
         },
         setDefaultImageUrl()
         {
-            const canConvertImage = this.imageShouldBeConverted();
-
-            if (this.receivedImageExtension === this.avifExtension) {
-                this.defaultImageUrl = this.browserSupportedImgExtension === this.avifExtension && canConvertImage
-                    ? this.imageUrl
-                    : this.convertedImageUrl;
-                return;
-            }
-
-            if (this.receivedImageExtension === this.webpExtension) {
-                if (this.browserSupportedImgExtension === this.avifExtension && canConvertImage) {
-                    this.defaultImageUrl = this.convertedImageUrl;
+            if (this.imageShouldBeConverted()) {
+                if (this.receivedImageExtension === this.avifExtension) {
+                    this.defaultImageUrl = this.browserSupportedImgExtension === this.avifExtension
+                        ? this.imageUrl
+                        : this.convertedImageUrl;
                     return;
                 }
+                if (this.receivedImageExtension === this.webpExtension) {
+                    if (this.browserSupportedImgExtension === this.avifExtension) {
+                        this.defaultImageUrl = this.convertedImageUrl;
+                        return;
+                    }
+                    if (this.browserSupportedImgExtension === this.webpExtension) {
+                        this.defaultImageUrl = this.imageUrl;
+                        return;
+                    }
 
-                if (this.browserSupportedImgExtension === this.webpExtension) {
                     this.defaultImageUrl = this.imageUrl;
                     return;
                 }
 
-                if (canConvertImage) {
-                    this.defaultImageUrl = this.convertedImageUrl;
-                    return;
-                }
-
-                this.defaultImageUrl = this.imageUrl;
+                // convert anything other than avif or webp into browser supported format.
+                this.defaultImageUrl = this.convertedImageUrl;
+                return;
             }
-
-            this.defaultImageUrl = canConvertImage
-                ? this.convertedImageUrl
-                : this.imageUrl || this.fallbackUrl;
+            this.defaultImageUrl = this.imageUrl || this.fallbackUrl;
         },
         imageShouldBeConverted()
         {
