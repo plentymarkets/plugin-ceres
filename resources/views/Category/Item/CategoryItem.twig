@@ -110,6 +110,8 @@
                 {% endif %}
 
                 <div class="col-12 col-lg-{% if category is defined and ceresConfig.header.showNavBars in ["side", "both"] %}9{% else %}12{% endif %}">
+                    {% set listItems = [] %}
+                    {% set position = 1 %}
                     {% if itemList is not empty %}
                         <ul class="product-list row grid">
                             {% for item in itemList %}
@@ -125,10 +127,38 @@
                                         </a>
                                     </category-item>
                                 </li>
+                                {% set itemurl = item.data | itemURL %}
+                                {% set itemImage = item.data.images.variation[0].urlMiddle %}
+                                {% if itemImage is null or (itemImage | trim is empty) %}
+                                    {% set itemImage = item.data.images.all[0].urlMiddle %}
+                                {% endif %}
+                                {% set listItem =
+                                    [
+                                        {
+                                            "@type": "ListItem",
+                                            "position": position,
+                                            "name": item.data | itemName,
+                                            "url": webstoreConfig.domainSsl ~ itemurl,
+                                            "image": itemImage
+                                        }
+                                    ]
+                                %}
+                                {% set listItems = listItems | merge(listItem) %}
+                                {% set position = position + 1 %}
                             {% endfor %}
                         </ul>
                     {% endif %}
 
+                    {% if category is defined %}
+                        <script2 type="application/ld+json">
+                            {
+                            "@context":"http://schema.org/",
+                            "@type":"ItemList",
+                            "name": "{{ category.details[0].name }}",
+                            "itemListElement": {{ listItems | json_encode | raw }}
+                            }}
+                        </script2>
+                    {% endif %}
                     {% if category is not defined and itemList is empty %}
                         <p class="h3 text-muted mb-5 text-center">{{ trans("Ceres::Template.itemSearchNoResults", {"searchString": searchString}) }}</p>
                     {% endif %}
