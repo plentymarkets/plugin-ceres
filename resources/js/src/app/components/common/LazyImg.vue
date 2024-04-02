@@ -1,19 +1,19 @@
 <template>
-    <picture
-        v-if="!isBackgroundImage"
-        :data-iesrc="defaultImageUrl"
-        :data-picture-class="pictureClass"
-        :data-alt="alt"
-        :data-title="title"
-        :id="uuid"
-    >
-        <slot name="additionalimages"></slot>
-        <source :srcset="defaultImageUrl" :type="mimeType">
-        <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl">
-        <source v-if="fallbackUrl" :srcset="fallbackUrl">
-        <!-- <img v-if="height && width" :src="defaultImageUrl || fallbackUrl" :alt="alt"> -->
-        <img v-if="receivedImageExtension === 'tif'" :src="defaultImageUrl" :alt="alt" type="image/tiff">
-    </picture>
+  <picture
+      v-if="!isBackgroundImage"
+      :data-iesrc="defaultImageUrl"
+      :data-picture-class="pictureClass"
+      :data-alt="alt"
+      :data-title="title"
+      :id="uuid"
+  >
+    <slot name="additionalimages"></slot>
+    <source :srcset="defaultImageUrl" :type="mimeType">
+    <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl">
+    <source v-if="fallbackUrl" :srcset="fallbackUrl">
+    <!-- <img v-if="height && width" :src="defaultImageUrl || fallbackUrl" :alt="alt"> -->
+    <img v-if="receivedImageExtension === 'tif'" :src="defaultImageUrl" :alt="alt" type="image/tiff">
+  </picture>
 
     <div v-else :data-background-image="defaultImageUrl || fallbackUrl" :class="pictureClass">
         <slot></slot>
