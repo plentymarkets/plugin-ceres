@@ -4,10 +4,10 @@
         :data-iesrc="defaultImageUrl"
         :data-picture-class="pictureClass"
         :data-alt="alt"
-        :data-title="title"
-        :data-height="height || 0"
-        :data-width="width || 0"
-    >
+        :data-title="title">
+        <!-- :data-height="height || 0"
+        :data-width="width || 0" -->
+
         <slot name="additionalimages"></slot>
         <source :srcset="defaultImageUrl" :type="mimeType">
         <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl">

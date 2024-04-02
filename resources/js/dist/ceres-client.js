@@ -36949,9 +36949,7 @@ var render = function() {
             "data-iesrc": _vm.defaultImageUrl,
             "data-picture-class": _vm.pictureClass,
             "data-alt": _vm.alt,
-            "data-title": _vm.title,
-            "data-height": _vm.height || 0,
-            "data-width": _vm.width || 0
+            "data-title": _vm.title
           }
         },
         [
