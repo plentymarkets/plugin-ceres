@@ -43,6 +43,21 @@
 - [resources/views/PageDesign/Partials/Head.twig](https://github.com/plentymarkets/plugin-ceres/pull/3483/files#diff-33a10158d672d50c9bc1c0e8a46fbd8edb701925dcb3f619c6ff6f8ca11e45ee)
 - [resources/views/MyAccount/Components/OrderHistoryListItem.twig](https://github.com/plentymarkets/plugin-ceres/pull/3444/files#diff-5fe1a8ad88eb65339901273251de979410bc15369c08e8b9fcb687412c4d28ea)
 - [resources/views/Widgets/Common/LinkWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3444/files#diff-374f59a54ec3fcbe1d2444facbddd25c4f8a114e71b7576c9c34d7a20a2d122b)
+- [resources/js/src/app/components/customer/Registration.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-08ea6661ac83d15694181be5eba4512b2c34fae95a6334a6144a82ba1f4c7e41)
+- Modern image format changes:
+    - [resources/js/src/app/components/basket/AddItemToBasketOverlay.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-311f3a2f3e02a8f6bb38785576b25dc75bf8b3e56a36a8cc2e4ae474745266b5)
+    - [resources/js/src/app/components/basket/list/BasketListItem.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-2e0729c79085beac37d2ad03e5d1a25ddec4020ecf8e3551d50e64a6cf5f91d3)
+    - [resources/js/src/app/components/common/LazyImg.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-8bf1fff9b8d538ae75c4ee791deef3a8acfe72e5e0e678d1c49672b17d787a73)
+    - [resources/js/src/app/components/item/ItemImageCarousel.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-78484b68defc6a9839cc69c5f3f9fc8bef2d0641a6db41ab6e68f58665f48912)
+    - [resources/js/src/app/components/itemList/CategoryImageCarousel.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-449e63fc921701c277c047250ed882be5e7039c498efa513e1469dffd8ff818f)
+    - [resources/js/src/app/components/itemList/SearchSuggestionItem.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-004f2a9020c0efb677e721298f2739088d6620ebafccde4b94ced464e21b75ec)
+    - [resources/js/src/app/components/orderReturn/OrderReturnItem.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-bd6f22438fc8f38a75e25a2ef425682fe398a6fd9f49dc85af637f559ec08f75)
+    - [resources/js/src/app/components/wishList/WishListItem.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-be8788b59e5887730f9bb4aa5a12d093908265ff19c26bb5ddca99485e7d7621)
+    - [resources/views/MyAccount/Partials/OrderHistoryListItemDetails.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-dcc9c181484eba069617434b9c7c20b7906e9ab74907f134720e220a818c968a)
+    - [resources/views/Widgets/Common/ImageBoxWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-9f438954b9f177761379a8b382eea014077ec743060583796ac4f9aaed3d3003)
+    - [resources/views/Widgets/Item/ItemImageWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-43b0576fe9cb61d0343a4aa220f562347c237717821f276ab632973e3970ec96)
+    - [resources/views/Widgets/Common/ItemListWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-56e4aca5195c81e2f933daaf2a1d1397fcd1e72844a24d75155dcab09e4cb0ee)
+    - [resources/views/Widgets/OrderConfirmation/PurchasedItemsWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-2cee15b4b8add92d304d2f4cbbb5a5891a5752c533b564f1e1d152982c1e62d0)
 
 ## v5.0.61 (2023-10-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.60...5.0.61" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
