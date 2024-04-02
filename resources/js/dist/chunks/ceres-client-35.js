@@ -233,11 +233,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     getImageWidth: function getImageWidth(image) {
       console.log('getImageWidth', image);
-      return image && image.width ? image.width : this.$options.filters.itemImageWidth(this.currentVariation);
+      console.log('carouselImages', this.carouselImages);
+      return image && image.width ? image.width : this.$options.filters.itemImageWidth(this.carouselImages);
     },
     getImageHeight: function getImageHeight(image) {
       console.log('getImageHeight', image);
-      return image && image.height ? image.height : this.$options.filters.itemImageHeight(this.currentVariation);
+      console.log('carouselImages', this.carouselImages);
+      return image && image.height ? image.height : this.$options.filters.itemImageHeight(this.carouselImages);
     },
     loadLightbox: function loadLightbox() {
       var _this4 = this;
