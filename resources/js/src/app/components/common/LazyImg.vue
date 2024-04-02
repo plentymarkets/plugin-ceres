@@ -12,7 +12,7 @@
         <source :srcset="defaultImageUrl" :type="mimeType">
         <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl">
         <source v-if="fallbackUrl" :srcset="fallbackUrl">
-        <img v-if="height && width" :src="defaultImageUrl || fallbackUrl" :alt="alt">
+        <!-- <img v-if="height && width" :src="defaultImageUrl || fallbackUrl" :alt="alt"> -->
     </picture>
 
     <div v-else :data-background-image="defaultImageUrl || fallbackUrl" :class="pictureClass">

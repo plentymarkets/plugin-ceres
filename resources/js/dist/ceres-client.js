@@ -36967,15 +36967,6 @@ var render = function() {
           _vm._v(" "),
           _vm.fallbackUrl
             ? _c("source", { attrs: { srcset: _vm.fallbackUrl } })
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.height && _vm.width
-            ? _c("img", {
-                attrs: {
-                  src: _vm.defaultImageUrl || _vm.fallbackUrl,
-                  alt: _vm.alt
-                }
-              })
             : _vm._e()
         ],
         2

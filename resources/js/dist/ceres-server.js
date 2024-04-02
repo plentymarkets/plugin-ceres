@@ -43354,13 +43354,6 @@ var render = function() {
               " " +
               (_vm.fallbackUrl
                 ? "<source" + _vm._ssrAttr("srcset", _vm.fallbackUrl) + ">"
-                : "<!---->") +
-              " " +
-              (_vm.height && _vm.width
-                ? "<img" +
-                  _vm._ssrAttr("src", _vm.defaultImageUrl || _vm.fallbackUrl) +
-                  _vm._ssrAttr("alt", _vm.alt) +
-                  ">"
                 : "<!---->")
           )
         ],
