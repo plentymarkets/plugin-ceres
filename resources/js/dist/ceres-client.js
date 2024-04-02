@@ -431,7 +431,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -36977,7 +36976,6 @@ var render = function() {
     ? _c(
         "picture",
         {
-          staticStyle: { height: "100%", width: "100%" },
           attrs: {
             "data-iesrc": _vm.defaultImageUrl,
             "data-picture-class": _vm.pictureClass,
@@ -37015,7 +37013,9 @@ var render = function() {
             ? _c("img", {
                 attrs: {
                   src: _vm.defaultImageUrl || _vm.fallbackUrl,
-                  alt: _vm.alt
+                  alt: _vm.alt,
+                  height: _vm.height,
+                  width: _vm.width
                 }
               })
             : _vm._e()

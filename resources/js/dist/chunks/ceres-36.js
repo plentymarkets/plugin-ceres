@@ -232,13 +232,9 @@ __webpack_require__.r(__webpack_exports__);
       return image && image.name ? image.name : this.$options.filters.itemName(this.currentVariation);
     },
     getImageWidth: function getImageWidth(image) {
-      console.log('getImageWidth', image);
-      console.log('carouselImages', this.carouselImages);
       return image && image.width ? image.width : this.$options.filters.itemImageWidth(this.carouselImages);
     },
     getImageHeight: function getImageHeight(image) {
-      console.log('getImageHeight', image);
-      console.log('carouselImages', this.carouselImages);
       return image && image.height ? image.height : this.$options.filters.itemImageHeight(this.carouselImages);
     },
     loadLightbox: function loadLightbox() {

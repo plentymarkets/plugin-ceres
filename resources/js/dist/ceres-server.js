@@ -1983,7 +1983,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -2881,7 +2880,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-//
 //
 //
 //
@@ -7573,13 +7571,9 @@ __webpack_require__.r(__webpack_exports__);
       return image && image.name ? image.name : this.$options.filters.itemName(this.currentVariation);
     },
     getImageWidth: function getImageWidth(image) {
-      console.log('getImageWidth', image);
-      console.log('carouselImages', this.carouselImages);
       return image && image.width ? image.width : this.$options.filters.itemImageWidth(this.carouselImages);
     },
     getImageHeight: function getImageHeight(image) {
-      console.log('getImageHeight', image);
-      console.log('carouselImages', this.carouselImages);
       return image && image.height ? image.height : this.$options.filters.itemImageHeight(this.carouselImages);
     },
     loadLightbox: function loadLightbox() {
@@ -42571,15 +42565,6 @@ var render = function() {
                 ">",
               "</a>",
               [
-                _vm._ssrNode(
-                  _vm._ssrEscape(
-                    "\n              " +
-                      _vm._s(_vm.height) +
-                      " x " +
-                      _vm._s(_vm.width) +
-                      "\n                "
-                  )
-                ),
                 _vm.image
                   ? _c("lazy-img", {
                       attrs: {
@@ -42594,7 +42579,7 @@ var render = function() {
                     })
                   : _vm._e()
               ],
-              2
+              1
             )
           ]),
           _vm._ssrNode(" "),
@@ -43402,7 +43387,6 @@ var render = function() {
     ? _c(
         "picture",
         {
-          staticStyle: { height: "100%", width: "100%" },
           attrs: {
             "data-iesrc": _vm.defaultImageUrl,
             "data-picture-class": _vm.pictureClass,
@@ -43437,6 +43421,8 @@ var render = function() {
                 ? "<img" +
                   _vm._ssrAttr("src", _vm.defaultImageUrl || _vm.fallbackUrl) +
                   _vm._ssrAttr("alt", _vm.alt) +
+                  _vm._ssrAttr("height", _vm.height) +
+                  _vm._ssrAttr("width", _vm.width) +
                   ">"
                 : "<!---->")
           )
