@@ -82764,14 +82764,20 @@ vue__WEBPACK_IMPORTED_MODULE_2___default.a.filter("itemImages", function (images
   }
 
   for (var image in images[imagesAccessor]) {
+    var _images$imagesAccesso, _images$imagesAccesso2;
+
     var imageUrl = images[imagesAccessor][image][accessor];
     var alternate = images[imagesAccessor][image].names ? images[imagesAccessor][image].names.alternate : null;
     var name = images[imagesAccessor][image].names ? images[imagesAccessor][image].names.name : null;
+    var width = (_images$imagesAccesso = images[imagesAccessor][image].width) !== null && _images$imagesAccesso !== void 0 ? _images$imagesAccesso : null;
+    var height = (_images$imagesAccesso2 = images[imagesAccessor][image].height) !== null && _images$imagesAccesso2 !== void 0 ? _images$imagesAccesso2 : null;
     imageUrls.push({
       url: imageUrl,
       position: images[imagesAccessor][image].position,
       alternate: alternate,
-      name: name
+      name: name,
+      width: width,
+      height: height
     });
   }
 
