@@ -107,6 +107,7 @@ export default {
                 this.$el.setAttribute('data-loaded', 'false');
                 lozad(this.$el).triggerLoad(this.$el);
             });
+            this.$el.classList.remove('lozad');
         },
         imageUrl()
         {

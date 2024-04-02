@@ -513,6 +513,7 @@ __webpack_require__.r(__webpack_exports__);
 
         Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_7__["default"])(_this2.$el).triggerLoad(_this2.$el);
       });
+      this.$el.classList.remove('lozad');
     },
     imageUrl: function imageUrl() {
       var _this3 = this;
