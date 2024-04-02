@@ -44,7 +44,7 @@
 - [resources/views/MyAccount/Components/OrderHistoryListItem.twig](https://github.com/plentymarkets/plugin-ceres/pull/3444/files#diff-5fe1a8ad88eb65339901273251de979410bc15369c08e8b9fcb687412c4d28ea)
 - [resources/views/Widgets/Common/LinkWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3444/files#diff-374f59a54ec3fcbe1d2444facbddd25c4f8a114e71b7576c9c34d7a20a2d122b)
 - [resources/js/src/app/components/customer/Registration.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-08ea6661ac83d15694181be5eba4512b2c34fae95a6334a6144a82ba1f4c7e41)
-- Änderungen moderne Bild Formatierung.
+- Änderungen moderne Bildformatierung:
     - [resources/js/src/app/components/basket/AddItemToBasketOverlay.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-311f3a2f3e02a8f6bb38785576b25dc75bf8b3e56a36a8cc2e4ae474745266b5)
     - [resources/js/src/app/components/basket/list/BasketListItem.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-2e0729c79085beac37d2ad03e5d1a25ddec4020ecf8e3551d50e64a6cf5f91d3)
     - [resources/js/src/app/components/common/LazyImg.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-8bf1fff9b8d538ae75c4ee791deef3a8acfe72e5e0e678d1c49672b17d787a73)
