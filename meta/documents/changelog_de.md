@@ -28,6 +28,7 @@
 - Durchschnittswert `feedbackDecimal` und Anzahl der Feedbacks `feedbackCount` in itemList- Ergebnisfeldern ergänzt.
 - Beim Ausführen von Suchen über externe Suchanbieter werden jetzt die normalen Resultfields der Kategorie für Listen benutzt.
 - Die Verwendung von ReCAPTCHA wurde aus der Komponente für die Registrierung entfernt.
+- Die Eingabe für Bestelleigenschaften vom Typ Text/Zahl ist nun auf 128 Zeichen beschränkt.
 
 ### Angepasste Templates
 

@@ -69,8 +69,8 @@ context("my-account order-history", () =>
     {
         cy.get(".order-history-list .container-clickable").eq(0).click();
         cy.getByTestingAttr("order-history-quantity").eq(0).should("contain", "1");
-        cy.get(".order-history-list .item img").eq(0)
-            .should("have.attr", "src", "https://cdn02.plentymarkets.com/2x3z2pucy2z9/item/images/116/preview/116-Loungesessel-Herkules.jpg");
+        cy.get(".order-history-list .item source").eq(0)
+            .should("have.attr", "srcset", "https://cdn02.plentymarkets.com/2x3z2pucy2z9/item/images/116/preview/116-Loungesessel-Herkules.jpg");
     });
 
     it("should check sums", () =>

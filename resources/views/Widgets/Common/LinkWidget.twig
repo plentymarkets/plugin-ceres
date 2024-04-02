@@ -40,7 +40,7 @@
     {% endif %}
 {% endif %}
 
-{{ Twig.if("real_url or #{ isPreview | json_encode }") }}
+{{ Twig.if("real_url or trackingUrls or #{ isPreview | json_encode }") }}
 <div class="widget widget-link widget-{{ appearance | default('primary') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}{% if outline %} btn-outline{% endif %}">
     {% if url.value.mobile == 'tracking' %}
         {{ Twig.for("trackingUrl", "trackingUrls") }}
