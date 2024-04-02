@@ -5,12 +5,14 @@
         :data-picture-class="pictureClass"
         :data-alt="alt"
         :data-title="title"
+        :data-height="height || 0"
+        :data-width="width || 0"
     >
         <slot name="additionalimages"></slot>
         <source :srcset="defaultImageUrl" :type="mimeType">
         <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl">
         <source v-if="fallbackUrl" :srcset="fallbackUrl">
-        <img v-if="height && width" :src="defaultImageUrl || fallbackUrl" :alt="alt" :height="height" :width="width">
+        <img v-if="height && width" :src="defaultImageUrl || fallbackUrl" :alt="alt">
     </picture>
 
     <div v-else :data-background-image="defaultImageUrl || fallbackUrl" :class="pictureClass">
