@@ -592,7 +592,16 @@ __webpack_require__.r(__webpack_exports__);
 
         _this2.$el.setAttribute('data-height', _this2.height);
 
-        Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_8__["default"])(_this2.$el).triggerLoad(_this2.$el);
+        _this2.$el.setAttribute('width', _this2.width);
+
+        _this2.$el.setAttribute('height', _this2.height);
+
+        Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_8__["default"])(_this2.$el, {
+          loaded: function loaded(el) {
+            el.setAttribute('width', el.getAttribute('data-width'));
+            el.setAttribute('height', el.getAttribute('data-height'));
+          }
+        }).triggerLoad(_this2.$el);
       });
       this.$el.classList.remove('lozad');
     },
