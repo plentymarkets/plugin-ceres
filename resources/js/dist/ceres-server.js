@@ -2902,6 +2902,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -43393,6 +43395,8 @@ var render = function() {
             "data-picture-class": _vm.pictureClass,
             "data-alt": _vm.alt,
             "data-title": _vm.title,
+            "data-width": _vm.width,
+            "data-height": _vm.height,
             id: _vm.uuid
           }
         },
@@ -43415,10 +43419,13 @@ var render = function() {
                 ? "<img" +
                   _vm._ssrAttr("src", _vm.defaultImageUrl) +
                   _vm._ssrAttr("alt", _vm.alt) +
+                  _vm._ssrAttr("height", _vm.height) +
+                  _vm._ssrAttr("width", _vm.width) +
                   ' type="image/tiff">'
-                : "<!---->") +
-              " " +
-              (_vm.height && _vm.width
+                : _vm.height &&
+                  _vm.width &&
+                  !_vm.webpSupported &&
+                  !_vm.avifSupported
                 ? "<img" +
                   _vm._ssrAttr("src", _vm.defaultImageUrl || _vm.fallbackUrl) +
                   _vm._ssrAttr("alt", _vm.alt) +
