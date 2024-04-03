@@ -41,6 +41,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "category-image-carousel",
   props: {
@@ -144,6 +148,14 @@ __webpack_require__.r(__webpack_exports__);
     getTitleText: function getTitleText(image) {
       var title = image && image.name ? image.name : this.title;
       return title;
+    },
+    getImageWidth: function getImageWidth(image) {
+      console.log('getImageWidth', image);
+      return image && image.width ? image.width : undefined;
+    },
+    getImageHeight: function getImageHeight(image) {
+      console.log('getImageHeight', image);
+      return image && image.height ? image.height : undefined;
     }
   }
 });
@@ -585,6 +597,8 @@ var render = function() {
                   "image-url": imageUrl.url,
                   alt: _vm.getAltText(imageUrl),
                   title: _vm.getTitleText(imageUrl),
+                  width: _vm.getImageWidth(imageUrl),
+                  height: _vm.getImageHeight(imageUrl),
                   "picture-class": "img-fluid",
                   role: "option"
                 }
@@ -605,6 +619,8 @@ var render = function() {
               "image-url": _vm.imageOrItemImage,
               alt: _vm.getAltText(_vm.imageUrls[0]),
               title: _vm.getTitleText(_vm.imageUrls[0]),
+              width: _vm.getImageWidth(_vm.imageUrls[0]),
+              height: _vm.getImageHeight(_vm.imageUrls[0]),
               "picture-class": "img-fluid"
             }
           })
