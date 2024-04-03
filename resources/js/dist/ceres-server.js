@@ -2902,6 +2902,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2995,20 +2997,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$nextTick(function () {
         _this2.$el.setAttribute('data-loaded', 'false');
 
-        _this2.$el.setAttribute('data-width', _this2.width);
-
-        _this2.$el.setAttribute('data-height', _this2.height);
-
-        _this2.$el.setAttribute('width', _this2.width);
-
-        _this2.$el.setAttribute('height', _this2.height);
-
-        Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_8__["default"])(_this2.$el, {
-          loaded: function loaded(el) {
-            el.setAttribute('width', el.getAttribute('data-width'));
-            el.setAttribute('height', el.getAttribute('data-height'));
-          }
-        }).triggerLoad(_this2.$el);
+        Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_8__["default"])(_this2.$el).triggerLoad(_this2.$el);
       });
       this.$el.classList.remove('lozad');
     },
@@ -43406,6 +43395,8 @@ var render = function() {
             "data-picture-class": _vm.pictureClass,
             "data-alt": _vm.alt,
             "data-title": _vm.title,
+            "data-height": _vm.height,
+            "data-width": _vm.width,
             id: _vm.uuid
           }
         },
@@ -85575,6 +85566,14 @@ var defaultConfig = {
 
       if (element.getAttribute("data-title")) {
         img.title = element.getAttribute("data-title");
+      }
+
+      if (element.getAttribute("data-width")) {
+        img.width = element.getAttribute("data-width");
+      }
+
+      if (element.getAttribute("data-height")) {
+        img.height = element.getAttribute("data-height");
       }
 
       if (element.getAttribute("data-picture-class")) {

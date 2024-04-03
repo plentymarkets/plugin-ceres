@@ -5,6 +5,8 @@
       :data-picture-class="pictureClass"
       :data-alt="alt"
       :data-title="title"
+      :data-height="height"
+      :data-width="width"
       :id="uuid"
   >
     <slot name="additionalimages"></slot>
@@ -115,16 +117,7 @@ export default {
         {
             this.$nextTick(() => {
                 this.$el.setAttribute('data-loaded', 'false');
-                this.$el.setAttribute('data-width', this.width);
-                this.$el.setAttribute('data-height', this.height);
-                this.$el.setAttribute('width', this.width);
-                this.$el.setAttribute('height', this.height);
-                lozad(this.$el, {
-                    loaded: function(el) {
-                        el.setAttribute('width', el.getAttribute('data-width'));
-                        el.setAttribute('height', el.getAttribute('data-height'));
-                    }
-                }).triggerLoad(this.$el);
+                lozad(this.$el).triggerLoad(this.$el);
             });
             this.$el.classList.remove('lozad');
         },
