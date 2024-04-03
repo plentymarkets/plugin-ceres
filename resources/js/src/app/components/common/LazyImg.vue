@@ -115,8 +115,9 @@ export default {
         {
             this.$nextTick(() => {
                 this.$el.setAttribute('data-loaded', 'false');
+                this.$el.setAttribute('data-width', this.width);
+                this.$el.setAttribute('data-height', this.height);
                 lozad(this.$el).triggerLoad(this.$el);
-                console.log(this);
             });
             this.$el.classList.remove('lozad');
         },

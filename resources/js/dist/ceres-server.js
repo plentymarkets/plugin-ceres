@@ -2995,8 +2995,11 @@ __webpack_require__.r(__webpack_exports__);
       this.$nextTick(function () {
         _this2.$el.setAttribute('data-loaded', 'false');
 
+        _this2.$el.setAttribute('data-width', _this2.width);
+
+        _this2.$el.setAttribute('data-height', _this2.height);
+
         Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_8__["default"])(_this2.$el).triggerLoad(_this2.$el);
-        console.log(_this2);
       });
       this.$el.classList.remove('lozad');
     },
