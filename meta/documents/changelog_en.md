@@ -1,6 +1,6 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.62 (2024-XX-XX) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...5.0.62" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.62 (2024-04-03) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...5.0.62" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
 
