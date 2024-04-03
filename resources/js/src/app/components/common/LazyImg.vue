@@ -117,9 +117,12 @@ export default {
         {
             this.$nextTick(() => {
                 this.$el.setAttribute('data-loaded', 'false');
-                lozad(this.$el).triggerLoad(this.$el);
+                lozad(this.$el, {
+                  loaded: function(el) {
+                    el.classList.remove('lozad');
+                  }
+                }).triggerLoad(this.$el);
             });
-            this.$el.classList.remove('lozad');
         },
         imageUrl()
         {
