@@ -115,12 +115,7 @@ export default {
         {
             this.$nextTick(() => {
                 this.$el.setAttribute('data-loaded', 'false');
-                lozad(this.$el, {
-                  loaded: function(el) {
-                    el.setAttribute('data-fge', 'true');
-                    el.setAttribute('width', this.width);
-                  }
-                }).triggerLoad(this.$el);
+                lozad(this.$el).triggerLoad(this.$el);
                 console.log(this);
             });
             this.$el.classList.remove('lozad');

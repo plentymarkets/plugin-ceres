@@ -858,12 +858,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$nextTick(function () {
         _this2.$el.setAttribute('data-loaded', 'false');
 
-        Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_8__["default"])(_this2.$el, {
-          loaded: function loaded(el) {
-            el.setAttribute('data-fge', 'true');
-            el.setAttribute('width', this.width);
-          }
-        }).triggerLoad(_this2.$el);
+        Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_8__["default"])(_this2.$el).triggerLoad(_this2.$el);
         console.log(_this2);
       });
       this.$el.classList.remove('lozad');
