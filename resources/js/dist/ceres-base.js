@@ -495,8 +495,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -561,7 +559,13 @@ __webpack_require__.r(__webpack_exports__);
       if (avifSupported) {
         _this.$nextTick(function () {
           if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
-          Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_8__["default"])(_this.$el).observe();
+          Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_8__["default"])(_this.$el, {
+            loaded: function loaded(el) {
+              console.log(this);
+              el.width = this.width;
+              el.height = this.height;
+            }
+          }).observe();
         });
 
         _this.propagateImageFormat();
@@ -35997,8 +36001,6 @@ var render = function() {
             "data-picture-class": _vm.pictureClass,
             "data-alt": _vm.alt,
             "data-title": _vm.title,
-            "data-width": _vm.width,
-            "data-height": _vm.height,
             id: _vm.uuid
           }
         },

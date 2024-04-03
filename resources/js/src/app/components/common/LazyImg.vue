@@ -5,8 +5,6 @@
       :data-picture-class="pictureClass"
       :data-alt="alt"
       :data-title="title"
-      :data-width="width"
-      :data-height="height"
       :id="uuid"
   >
     <slot name="additionalimages"></slot>
@@ -89,7 +87,13 @@ export default {
             if (avifSupported) {
                 this.$nextTick(() => {
                     if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-                    lozad(this.$el).observe();
+                    lozad(this.$el, {
+                      loaded: function(el) {
+                        console.log(this);
+                        el.width = this.width;
+                        el.height = this.height;
+                      }
+                    }).observe();
                 });
 
                 this.propagateImageFormat();
