@@ -87,13 +87,7 @@ export default {
             if (avifSupported) {
                 this.$nextTick(() => {
                     if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-                    lozad(this.$el, {
-                      loaded: function(el) {
-                        console.log(this);
-                        el.width = this.width;
-                        el.height = this.height;
-                      }
-                    }).observe();
+                    lozad(this.$el).observe();
                 });
 
                 this.propagateImageFormat();
@@ -121,7 +115,13 @@ export default {
         {
             this.$nextTick(() => {
                 this.$el.setAttribute('data-loaded', 'false');
-                lozad(this.$el).triggerLoad(this.$el);
+                lozad(this.$el, {
+                  loaded: function(el) {
+                    el.setAttribute('data-fge', 'true');
+                    el.setAttribute('width', this.width);
+                  }
+                }).triggerLoad(this.$el);
+                console.log(this);
             });
             this.$el.classList.remove('lozad');
         },
