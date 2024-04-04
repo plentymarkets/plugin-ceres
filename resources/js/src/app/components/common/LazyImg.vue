@@ -77,7 +77,11 @@ export default {
             if (avifSupported) {
                 this.$nextTick(() => {
                     if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-                    lozad(this.$el).observe();
+                    lozad(this.$el, {
+                        loaded: function(el) {
+                            el.classList.remove('lozad');
+                        }
+                    }).triggerLoad(this.$el);
                 });
 
                 this.propagateImageFormat();
@@ -90,7 +94,11 @@ export default {
                     if (webpSupported) {
                         this.$nextTick(() => {
                             if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-                            lozad(this.$el).observe();
+                            lozad(this.$el, {
+                                loaded: function(el) {
+                                    el.classList.remove('lozad');
+                                }
+                            }).triggerLoad(this.$el);
                         });
 
                         this.propagateImageFormat();
@@ -107,7 +115,6 @@ export default {
                 this.$el.setAttribute('data-loaded', 'false');
                 lozad(this.$el).triggerLoad(this.$el);
             });
-            this.$el.classList.remove('lozad');
         },
         imageUrl()
         {
