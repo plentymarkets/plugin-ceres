@@ -490,6 +490,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -36013,6 +36014,14 @@ var render = function() {
                   src: _vm.defaultImageUrl,
                   alt: _vm.alt,
                   type: "image/tiff"
+                }
+              })
+            : !_vm.avifSupported && !_vm.webpSupported
+            ? _c("img", {
+                attrs: {
+                  src: _vm.defaultImageUrl || _vm.fallbackUrl,
+                  title: _vm.title,
+                  alt: _vm.alt
                 }
               })
             : _vm._e()
