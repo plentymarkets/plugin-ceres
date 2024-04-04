@@ -43388,12 +43388,6 @@ var render = function() {
                   _vm._ssrAttr("src", _vm.defaultImageUrl) +
                   _vm._ssrAttr("alt", _vm.alt) +
                   ' type="image/tiff">'
-                : !_vm.avifSupported && !_vm.webpSupported
-                ? "<img" +
-                  _vm._ssrAttr("src", _vm.defaultImageUrl || _vm.fallbackUrl) +
-                  _vm._ssrAttr("title", _vm.title) +
-                  _vm._ssrAttr("alt", _vm.alt) +
-                  ">"
                 : "<!---->")
           )
         ],

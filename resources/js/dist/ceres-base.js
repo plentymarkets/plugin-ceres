@@ -36016,14 +36016,6 @@ var render = function() {
                   type: "image/tiff"
                 }
               })
-            : !_vm.avifSupported && !_vm.webpSupported
-            ? _c("img", {
-                attrs: {
-                  src: _vm.defaultImageUrl || _vm.fallbackUrl,
-                  title: _vm.title,
-                  alt: _vm.alt
-                }
-              })
             : _vm._e()
         ],
         2
