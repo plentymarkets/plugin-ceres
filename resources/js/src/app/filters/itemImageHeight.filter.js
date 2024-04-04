@@ -2,8 +2,6 @@ import Vue from "vue";
 
 Vue.filter("itemImageHeight", function(itemImages, highestPosition)
 {
-    // eslint-disable-next-line no-console
-    console.log("itemImageHeight", itemImages, highestPosition);
     if (itemImages.length === 0)
     {
         return null;

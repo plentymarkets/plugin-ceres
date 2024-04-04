@@ -82754,9 +82754,6 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.filter("itemImageHeight", function (itemImages, highestPosition) {
   var _itemImages$reduce$he2;
 
-  // eslint-disable-next-line no-console
-  console.log("itemImageHeight", itemImages, highestPosition);
-
   if (itemImages.length === 0) {
     return null;
   }
@@ -82799,9 +82796,6 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.filter("itemImageWidth", function (itemImages, highestPosition) {
   var _itemImages$reduce$wi2;
-
-  // eslint-disable-next-line no-console
-  console.log("itemImageWidth", itemImages, highestPosition);
 
   if (itemImages.length === 0) {
     return null;
