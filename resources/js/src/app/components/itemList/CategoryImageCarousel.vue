@@ -170,13 +170,13 @@ export default {
 
         getImageWidth(image)
         {
-            console.log('getImageWidth', image);
+            console.log('CategoryImageCarousel getImageWidth', image);
             return image && image.width ? image.width : undefined;
         },
 
         getImageHeight(image)
         {
-            console.log('getImageHeight', image);
+            console.log('CategoryImageCarousel getImageHeight', image);
             return image && image.height ? image.height : undefined;
         }
     }

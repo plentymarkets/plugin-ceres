@@ -150,11 +150,11 @@ __webpack_require__.r(__webpack_exports__);
       return title;
     },
     getImageWidth: function getImageWidth(image) {
-      console.log('getImageWidth', image);
+      console.log('CategoryImageCarousel getImageWidth', image);
       return image && image.width ? image.width : undefined;
     },
     getImageHeight: function getImageHeight(image) {
-      console.log('getImageHeight', image);
+      console.log('CategoryImageCarousel getImageHeight', image);
       return image && image.height ? image.height : undefined;
     }
   }
