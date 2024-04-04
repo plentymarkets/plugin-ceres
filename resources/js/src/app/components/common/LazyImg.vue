@@ -11,7 +11,7 @@
         <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl">
         <source v-if="fallbackUrl" :srcset="fallbackUrl">
         <img v-if="receivedImageExtension === 'tif'" :src="defaultImageUrl" :alt="alt" type="image/tiff">
-        <img v-else-if="!avifSupported && !webpSupported" :src="defaultImageUrl || fallbackUrl" :title="title" :alt="alt">
+        <!-- <img v-else-if="!avifSupported && !webpSupported" :src="defaultImageUrl || fallbackUrl" :title="title" :alt="alt"> -->
     </picture>
 
     <div v-else :data-background-image="defaultImageUrl || fallbackUrl" :class="pictureClass">
@@ -78,11 +78,6 @@ export default {
             if (avifSupported) {
                 this.$nextTick(() => {
                     if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-                    lozad(this.$el, {
-                        loaded: function(el) {
-                            el.classList.remove('lozad');
-                        }
-                    }).triggerLoad(this.$el);
                 });
 
                 this.propagateImageFormat();
@@ -95,17 +90,18 @@ export default {
                     if (webpSupported) {
                         this.$nextTick(() => {
                             if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-                            lozad(this.$el, {
-                                loaded: function(el) {
-                                    el.classList.remove('lozad');
-                                }
-                            }).triggerLoad(this.$el);
                         });
 
                         this.propagateImageFormat();
                     }
                 }));
             }
+
+            lozad(this.$el, {
+                loaded: function(el) {
+                    el.classList.remove('lozad');
+                }
+            }).triggerLoad(this.$el);
         }));
     },
     watch:

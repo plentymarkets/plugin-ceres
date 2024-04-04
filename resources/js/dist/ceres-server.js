@@ -2943,11 +2943,6 @@ __webpack_require__.r(__webpack_exports__);
       if (avifSupported) {
         _this.$nextTick(function () {
           if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
-          Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_7__["default"])(_this.$el, {
-            loaded: function loaded(el) {
-              el.classList.remove('lozad');
-            }
-          }).triggerLoad(_this.$el);
         });
 
         _this.propagateImageFormat();
@@ -2960,17 +2955,18 @@ __webpack_require__.r(__webpack_exports__);
           if (webpSupported) {
             _this.$nextTick(function () {
               if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
-              Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_7__["default"])(_this.$el, {
-                loaded: function loaded(el) {
-                  el.classList.remove('lozad');
-                }
-              }).triggerLoad(_this.$el);
             });
 
             _this.propagateImageFormat();
           }
         });
       }
+
+      Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_7__["default"])(_this.$el, {
+        loaded: function loaded(el) {
+          el.classList.remove('lozad');
+        }
+      }).triggerLoad(_this.$el);
     });
   },
   watch: {
@@ -43379,12 +43375,6 @@ var render = function() {
                   _vm._ssrAttr("src", _vm.defaultImageUrl) +
                   _vm._ssrAttr("alt", _vm.alt) +
                   ' type="image/tiff">'
-                : !_vm.avifSupported && !_vm.webpSupported
-                ? "<img" +
-                  _vm._ssrAttr("src", _vm.defaultImageUrl || _vm.fallbackUrl) +
-                  _vm._ssrAttr("title", _vm.title) +
-                  _vm._ssrAttr("alt", _vm.alt) +
-                  ">"
                 : "<!---->")
           )
         ],
