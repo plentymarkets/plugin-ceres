@@ -760,7 +760,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -844,6 +843,13 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   watch: {
+    defaultImageUrl: function defaultImageUrl() {
+      Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_7__["default"])(this.$el, {
+        loaded: function loaded(el) {
+          el.classList.remove('lozad');
+        }
+      }).triggerLoad(this.$el);
+    },
     imageUrl: function imageUrl() {
       var _this2 = this;
 

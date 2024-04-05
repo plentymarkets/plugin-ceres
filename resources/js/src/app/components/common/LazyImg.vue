@@ -105,6 +105,13 @@ export default {
     },
     watch:
     {
+        defaultImageUrl(){
+            lozad(this.$el, {
+                loaded: function(el) {
+                    el.classList.remove('lozad');
+                }
+            }).triggerLoad(this.$el);
+        },
         imageUrl()
         {
             this.generateUuid();
