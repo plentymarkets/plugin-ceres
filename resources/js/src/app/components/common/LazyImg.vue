@@ -77,7 +77,6 @@ export default {
             if (avifSupported) {
                 this.$nextTick(() => {
                     if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-                    lozad(this.$el).observe();
                 });
 
                 this.propagateImageFormat();
@@ -90,24 +89,31 @@ export default {
                     if (webpSupported) {
                         this.$nextTick(() => {
                             if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-                            lozad(this.$el).observe();
                         });
 
                         this.propagateImageFormat();
                     }
                 }));
             }
+
+            lozad(this.$el, {
+                loaded: function(el) {
+                    el.classList.remove('lozad');
+                }
+            }).triggerLoad(this.$el);
         }));
     },
     watch:
     {
-        defaultImageUrl()
-        {
+        defaultImageUrl(){
             this.$nextTick(() => {
                 this.$el.setAttribute('data-loaded', 'false');
-                lozad(this.$el).triggerLoad(this.$el);
+                lozad(this.$el, {
+                    loaded: function(el) {
+                        el.classList.remove('lozad');
+                    }
+                }).triggerLoad(this.$el);
             });
-            this.$el.classList.remove('lozad');
         },
         imageUrl()
         {
