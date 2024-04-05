@@ -106,11 +106,14 @@ export default {
     watch:
     {
         defaultImageUrl(){
-            lozad(this.$el, {
-                loaded: function(el) {
-                    el.classList.remove('lozad');
-                }
-            }).triggerLoad(this.$el);
+            this.$nextTick(() => {
+                this.$el.setAttribute('data-loaded', 'false');
+                lozad(this.$el, {
+                    loaded: function(el) {
+                        el.classList.remove('lozad');
+                    }
+                }).triggerLoad(this.$el);
+            });
         },
         imageUrl()
         {
