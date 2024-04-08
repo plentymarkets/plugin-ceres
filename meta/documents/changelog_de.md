@@ -4,7 +4,7 @@
 
 ### Behoben
 
-- Wenn der Browser webp oder avif nicht unterstützt, wurde das Fallback-Bild nicht als verwendet. Dies wurde behoben.
+- Wenn der Browser WebP oder AVIF Bilder-Formate nicht unterstützt, wurde das Fallback-Bild nicht verwendet. Dies wurde behoben.
 
 ### Angepasste Templates
 
