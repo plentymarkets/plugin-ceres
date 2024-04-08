@@ -72,6 +72,7 @@ export default {
     mounted()
     {
         this.generateUuid();
+
         detectAvif(((avifSupported) => {
             this.avifSupported = avifSupported;
 
@@ -103,7 +104,6 @@ export default {
                 this.$el.setAttribute('data-loaded', 'false');
 
                 const images = document.getElementById(this.uuid).getElementsByTagName('img');
-                console.log('Images length: ', images.length);
                 if (images.length > 0) {
                     images[0].remove();
                 }
