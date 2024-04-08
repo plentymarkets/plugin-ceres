@@ -100,6 +100,13 @@ export default {
         defaultImageUrl(){
             this.$nextTick(() => {
                 this.$el.setAttribute('data-loaded', 'false');
+
+                const images = document.getElementById(this.uuid).getElementsByTagName('img');
+                console.log('Images length: ', images.length);
+                if (images.length > 0) {
+                    images[0].remove();
+                }
+
                 lozad(this.$el, {
                     loaded: function(el) {
                         el.classList.remove('lozad');

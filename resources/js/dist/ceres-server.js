@@ -2967,6 +2967,13 @@ __webpack_require__.r(__webpack_exports__);
       this.$nextTick(function () {
         _this2.$el.setAttribute('data-loaded', 'false');
 
+        var images = document.getElementById(_this2.uuid).getElementsByTagName('img');
+        console.log('Images length: ', images.length);
+
+        if (images.length > 0) {
+          images[0].remove();
+        }
+
         Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_7__["default"])(_this2.$el, {
           loaded: function loaded(el) {
             el.classList.remove('lozad');
