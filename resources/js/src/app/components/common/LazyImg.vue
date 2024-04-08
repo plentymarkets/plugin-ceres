@@ -71,6 +71,7 @@ export default {
     },
     mounted()
     {
+        this.generateUuid();
         detectAvif(((avifSupported) => {
             this.avifSupported = avifSupported;
 
@@ -116,7 +117,6 @@ export default {
         },
         imageUrl()
         {
-            this.generateUuid();
             this.$nextTick(() => {
                 this.propagateImageFormat();
                 document.getElementById(this.uuid).getElementsByTagName('img')?.[0].remove();

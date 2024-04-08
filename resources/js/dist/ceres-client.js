@@ -476,6 +476,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
+    this.generateUuid();
     Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_8__["detectAvif"])(function (avifSupported) {
       _this.avifSupported = avifSupported;
 
@@ -524,7 +525,6 @@ __webpack_require__.r(__webpack_exports__);
     imageUrl: function imageUrl() {
       var _this3 = this;
 
-      this.generateUuid();
       this.$nextTick(function () {
         var _document$getElementB;
 
