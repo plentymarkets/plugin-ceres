@@ -75,10 +75,6 @@ export default {
             this.avifSupported = avifSupported;
 
             if (avifSupported) {
-                this.$nextTick(() => {
-                    if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-                });
-
                 this.propagateImageFormat();
             }
 
@@ -87,10 +83,6 @@ export default {
                     this.webpSupported = webpSupported;
 
                     if (webpSupported) {
-                        this.$nextTick(() => {
-                            if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-                        });
-
                         this.propagateImageFormat();
                     }
                 }));

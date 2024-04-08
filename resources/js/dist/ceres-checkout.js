@@ -814,10 +814,6 @@ __webpack_require__.r(__webpack_exports__);
       _this.avifSupported = avifSupported;
 
       if (avifSupported) {
-        _this.$nextTick(function () {
-          if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
-        });
-
         _this.propagateImageFormat();
       }
 
@@ -826,10 +822,6 @@ __webpack_require__.r(__webpack_exports__);
           _this.webpSupported = webpSupported;
 
           if (webpSupported) {
-            _this.$nextTick(function () {
-              if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
-            });
-
             _this.propagateImageFormat();
           }
         });
