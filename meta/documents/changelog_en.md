@@ -4,14 +4,12 @@
 
 ### Fixed
 
-- When the browser does not support webp or avif the image didn't use the provided fallback, this has been fixed.
+- The setting: "Check the boxes of the item information you want to display in the shopping cart preview" in the plentyShop assistant under step Displayed information had no effect on the information displayed. This has been fixed.
+- In case the browser doesn't support WebP or AVIF image-formats, the fallback image wasn't used. This has been fixed.
 
 ### Changed
 
 - The content of the component lifecycle hook "created" of the StepByStepNavigation was moved into "beforeMount" to fix problems with SSR.
-- The setting: "Check the boxes of the item information you want to display in the shopping cart preview" in the plentyShop assistant under step Displayed information had no effect on the information displayed. This has been fixed.
-- In case the browser doesn't support WebP or AVIF image-formats, the fallback image wasn't used. This has been fixed.
-
 
 ### Changed Templates
 
