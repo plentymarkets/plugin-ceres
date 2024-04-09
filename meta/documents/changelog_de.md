@@ -4,7 +4,7 @@
 
 ### Behoben
 
-- Hinzufügen von sichtbaren Feldern für die Warenkorbvorschau
+- Die Einstellung: "Hake die Artikelinformationen an, die du in der Warenkorbvorschau anzeigen möchtest." im plentyShop Assistenten unter Schritt Angezeigte Informationen hatte keine Auswirkung auf die angezeigten Informationen. Dies wurde behoben.
 
 - Wenn der Browser webp oder avif nicht unterstützt, wurde das Fallback-Bild nicht als verwendet. Dies wurde behoben.
 
