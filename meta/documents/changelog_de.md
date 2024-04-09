@@ -4,9 +4,8 @@
 
 ### Behoben
 
+- Wenn der Browser WebP oder AVIF Bilder-Formate nicht unterstützt, wurde das Fallback-Bild nicht verwendet. Dies wurde behoben.
 - Die Einstellung: "Hake die Artikelinformationen an, die du in der Warenkorbvorschau anzeigen möchtest." im plentyShop Assistenten unter Schritt Angezeigte Informationen hatte keine Auswirkung auf die angezeigten Informationen. Dies wurde behoben.
-- Wenn der Browser webp oder avif nicht unterstützt, wurde das Fallback-Bild nicht verwendet. Dies wurde behoben.
-
 
 ### Angepasste Templates
 
