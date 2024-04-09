@@ -117,7 +117,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return state.navigation.categoryChildren;
     }
   })),
-  beforeMount: function beforeMount() {
+  created: function created() {
     this.loadChunk();
   },
   methods: {
