@@ -4,6 +4,8 @@
 
 ### Fixed
 
+- Adding visible fields for basket preview
+
 - When the browser does not support webp or avif the image didnt use the provided fallback, this has been fixed.
 
 ### Changed Templates

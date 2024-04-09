@@ -4,6 +4,8 @@
 
 ### Behoben
 
+- Hinzufügen von sichtbaren Feldern für die Warenkorbvorschau
+
 - Wenn der Browser webp oder avif nicht unterstützt, wurde das Fallback-Bild nicht als verwendet. Dies wurde behoben.
 
 ### Angepasste Templates
