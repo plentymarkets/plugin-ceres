@@ -810,14 +810,11 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
+    this.generateUuid();
     Object(_helper_featureDetect__WEBPACK_IMPORTED_MODULE_8__["detectAvif"])(function (avifSupported) {
       _this.avifSupported = avifSupported;
 
       if (avifSupported) {
-        _this.$nextTick(function () {
-          if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
-        });
-
         _this.propagateImageFormat();
       }
 
@@ -826,10 +823,6 @@ __webpack_require__.r(__webpack_exports__);
           _this.webpSupported = webpSupported;
 
           if (webpSupported) {
-            _this.$nextTick(function () {
-              if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
-            });
-
             _this.propagateImageFormat();
           }
         });
@@ -849,6 +842,12 @@ __webpack_require__.r(__webpack_exports__);
       this.$nextTick(function () {
         _this2.$el.setAttribute('data-loaded', 'false');
 
+        var images = document.getElementById(_this2.uuid).getElementsByTagName('img');
+
+        if (images.length > 0) {
+          images[0].remove();
+        }
+
         Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_7__["default"])(_this2.$el, {
           loaded: function loaded(el) {
             el.classList.remove('lozad');
@@ -859,7 +858,6 @@ __webpack_require__.r(__webpack_exports__);
     imageUrl: function imageUrl() {
       var _this3 = this;
 
-      this.generateUuid();
       this.$nextTick(function () {
         var _document$getElementB;
 
