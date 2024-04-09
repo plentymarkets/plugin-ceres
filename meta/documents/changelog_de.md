@@ -6,6 +6,10 @@
 
 - Wenn der Browser webp oder avif nicht unterstützt, wurde das Fallback-Bild nicht als verwendet. Dies wurde behoben.
 
+### Geändert
+
+- Der Inhalt des Lifecycle Hooks "created" der Vue-Komponente StepByStepNavigation wurde verschoben nach "beforeMount", um Probleme mit SSR zu beheben.
+
 ### Angepasste Templates
 
 - Im Zuge des Releases von plentyShop LTS 5.0.63 gab es Änderungen an Template-Dateien, die das Feedback Plugin betreffen und für Theme-Entwickler relevant sind.  Die Verlinkung führt direkt zu der umgesetzten Änderung in der entsprechenden Datei.

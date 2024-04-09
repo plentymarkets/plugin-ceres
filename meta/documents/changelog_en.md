@@ -4,7 +4,11 @@
 
 ### Fixed
 
-- When the browser does not support webp or avif the image didnt use the provided fallback, this has been fixed.
+- When the browser does not support webp or avif the image didn't use the provided fallback, this has been fixed.
+
+### Changed
+
+- The content of the component lifecycle hook "created" of the StepByStepNavigation was moved into "beforeMount" to fix problems with SSR.
 
 ### Changed Templates
 
