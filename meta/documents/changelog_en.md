@@ -4,6 +4,7 @@
 
 ### Fixed
 
+- The setting: "Check the boxes of the item information you want to display in the shopping cart preview" in the plentyShop assistant under step Displayed information had no effect on the information displayed. This has been fixed.
 - When the browser does not support webp or avif the image didnt use the provided fallback, this has been fixed.
 
 ### Changed Templates
