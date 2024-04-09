@@ -71,14 +71,12 @@ export default {
     },
     mounted()
     {
+        this.generateUuid();
+
         detectAvif(((avifSupported) => {
             this.avifSupported = avifSupported;
 
             if (avifSupported) {
-                this.$nextTick(() => {
-                    if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-                });
-
                 this.propagateImageFormat();
             }
 
@@ -87,10 +85,6 @@ export default {
                     this.webpSupported = webpSupported;
 
                     if (webpSupported) {
-                        this.$nextTick(() => {
-                            if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-                        });
-
                         this.propagateImageFormat();
                     }
                 }));
@@ -108,6 +102,12 @@ export default {
         defaultImageUrl(){
             this.$nextTick(() => {
                 this.$el.setAttribute('data-loaded', 'false');
+
+                const images = document.getElementById(this.uuid).getElementsByTagName('img');
+                if (images.length > 0) {
+                    images[0].remove();
+                }
+
                 lozad(this.$el, {
                     loaded: function(el) {
                         el.classList.remove('lozad');
@@ -117,7 +117,6 @@ export default {
         },
         imageUrl()
         {
-            this.generateUuid();
             this.$nextTick(() => {
                 this.propagateImageFormat();
                 document.getElementById(this.uuid).getElementsByTagName('img')?.[0].remove();

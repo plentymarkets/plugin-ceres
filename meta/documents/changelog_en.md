@@ -9,6 +9,9 @@
 ### Changed
 
 - The content of the component lifecycle hook "created" of the StepByStepNavigation was moved into "beforeMount" to fix problems with SSR.
+- The setting: "Check the boxes of the item information you want to display in the shopping cart preview" in the plentyShop assistant under step Displayed information had no effect on the information displayed. This has been fixed.
+- In case the browser doesn't support WebP or AVIF image-formats, the fallback image wasn't used. This has been fixed.
+
 
 ### Changed Templates
 
@@ -16,12 +19,13 @@
 
 - [resources/js/src/app/components/common/LazyImg.vue](https://github.com/plentymarkets/plugin-ceres/pull/3523/files#diff-8bf1fff9b8d538ae75c4ee791deef3a8acfe72e5e0e678d1c49672b17d787a73)
 
+
 ## v5.0.62 (2024-04-03) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...5.0.62" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
 
 - To improve the CLS of your shop with the new header option (see **Added**), open the plugin configuration of plentyShop LTS after updating. Then, open the **Header** section and activate **Fix header at the top of the page**. To check if CLS in your shop can be improved, you can use public services like [PageSpeed Insights](https://pagespeed.web.dev/).
-- To enable the automatic conversion of item images to Avif, WebP and use the converted images in the online shop, open the plentyShop LTS assistant, go to the **Performance** step and activate **Automatic conversion into modern image formats**.
+- To enable the automatic conversion of item images to AVIF, WebP and use the converted images in the online shop, open the plentyShop LTS assistant, go to the **Performance** step and activate **Automatic conversion into modern image formats**.
 - If you use an external search provider in your shop, you should check whether your category and search pages are still displayed correctly due to the adjustments made to the result fields (see entry in the **Changed** section).
 
 ### Added
@@ -34,7 +38,7 @@
 - In the **SEO** section of the plentyShop LTS settings, a new setting has been added for the **Robots** on the single item page. With this setting it is now possible to set the robots behaviour for the single item view.
 - In the **SEO** section of the plentyShop LTS settings, the new setting **Select source for an individual canonical URL for the item page** has been added. With this setting, it is possible to have the variations point to a different canonical URL.
 - An option has been added to set addresses as the primary address.
-- Added the capability to activate the conversion of images to the Avif, WebP format in the **Performance** step of the plentyShop assistant.
+- Added the capability to activate the conversion of images to the AVIF, WebP format in the **Performance** step of the plentyShop assistant.
 - The result fields for articles have been expanded to include tags.
 - The ShopBuilder widgets **Link** and **Order history** now offer the possibility to display multiple tracking links if the **Split URLs** setting is activated in the **Setup » Orders » Shipping » Options** menu.
 - The translation key `checkoutPaidAmount` has been added to the multilingualism interface.
