@@ -80,7 +80,7 @@ export default {
             })
         },
 
-    created()
+    beforeMount()
     {
         this.loadChunk();
     },

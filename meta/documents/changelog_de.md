@@ -7,6 +7,10 @@
 - Wenn der Browser WebP oder AVIF Bilder-Formate nicht unterstützt, wurde das Fallback-Bild nicht verwendet. Dies wurde behoben.
 - Die Einstellung: "Hake die Artikelinformationen an, die du in der Warenkorbvorschau anzeigen möchtest." im plentyShop Assistenten unter Schritt Angezeigte Informationen hatte keine Auswirkung auf die angezeigten Informationen. Dies wurde behoben.
 
+### Geändert
+
+- Der Inhalt des Lifecycle Hooks "created" der Vue-Komponente StepByStepNavigation wurde verschoben nach "beforeMount", um Probleme mit SSR zu beheben.
+
 ### Angepasste Templates
 
 - Im Zuge des Releases von plentyShop LTS 5.0.63 gab es Änderungen an Template-Dateien, die das Feedback Plugin betreffen und für Theme-Entwickler relevant sind.  Die Verlinkung führt direkt zu der umgesetzten Änderung in der entsprechenden Datei.
