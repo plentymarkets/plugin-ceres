@@ -10,6 +10,7 @@
 ### Changed
 
 - The content of the component lifecycle hook "created" of the StepByStepNavigation was moved into "beforeMount" to fix problems with SSR.
+- To increase accessibility, the checkbox for confirming the general terms and conditions, the right of withdrawal and the data protection guidelines in the checkout process now contains a corresponding `aria-label`.
 
 ### Changed Templates
 
