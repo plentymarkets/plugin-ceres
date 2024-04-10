@@ -7,9 +7,9 @@
         :data-title="title"
         :id="uuid">
         <slot name="additionalimages"></slot>
-        <source :srcset="defaultImageUrl">
-        <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl">
-        <source v-if="fallbackUrl" :srcset="fallbackUrl">
+        <source :srcset="defaultImageUrl" :type="mimeType(defaultImageUrl)">
+        <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl" :type="mimeType(imageUrl)">
+        <source v-if="fallbackUrl" :srcset="fallbackUrl" :type="mimeType(fallbackUrl)">
         <img v-if="receivedImageExtension === 'tif'" :src="defaultImageUrl" :alt="alt" type="image/tiff">
     </picture>
 
@@ -21,6 +21,7 @@
 <script>
 import lozad from "../../plugins/lozad";
 import {detectAvif, detectWebP} from "../../helper/featureDetect";
+const mime = require('mime-types')
 
 export default {
     props:
@@ -125,14 +126,6 @@ export default {
     },
     computed:
     {
-        mimeType()
-        {
-            const matches = this.defaultImageUrl?.match(this.imgRegex);
-
-            if (matches) return `image/${matches[1].split('.').pop()}`;
-
-            return null;
-        },
         convertedImageUrl()
         {
             return `${this.imageUrl}.${this.browserSupportedImgExtension}`;
@@ -140,6 +133,9 @@ export default {
     },
     methods:
     {
+        mimeType(url){
+            return mime.lookup(url);
+        },
         propagateImageFormat()
         {
             this.setReceivedImageExtension();
