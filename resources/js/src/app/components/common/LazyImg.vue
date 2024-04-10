@@ -7,7 +7,7 @@
         :data-title="title"
         :id="uuid">
         <slot name="additionalimages"></slot>
-        <source :srcset="defaultImageUrl" :type="mimeType">
+        <source :srcset="defaultImageUrl">
         <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl">
         <source v-if="fallbackUrl" :srcset="fallbackUrl">
         <img v-if="receivedImageExtension === 'tif'" :src="defaultImageUrl" :alt="alt" type="image/tiff">

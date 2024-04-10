@@ -35993,9 +35993,7 @@ var render = function() {
         [
           _vm._t("additionalimages"),
           _vm._v(" "),
-          _c("source", {
-            attrs: { srcset: _vm.defaultImageUrl, type: _vm.mimeType }
-          }),
+          _c("source", { attrs: { srcset: _vm.defaultImageUrl } }),
           _vm._v(" "),
           _vm.defaultImageUrl !== _vm.imageUrl
             ? _c("source", { attrs: { srcset: _vm.imageUrl } })
