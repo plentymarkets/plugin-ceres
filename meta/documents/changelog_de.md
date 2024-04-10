@@ -11,6 +11,8 @@
 
 - Der Inhalt des Lifecycle Hooks "created" der Vue-Komponente StepByStepNavigation wurde verschoben nach "beforeMount", um Probleme mit SSR zu beheben.
 
+- Um die Barrierefreiheit zu erhöhen, enthält die Checkbox zur Bestätigung der Allgemeinen Geschäftsbedingungen, des Widerrufsrechts und der Datenschutzrichtlinien in der Kasse jetzt ein entsprechendes `aria-label`.
+
 ### Angepasste Templates
 
 - Im Zuge des Releases von plentyShop LTS 5.0.63 gab es Änderungen an Template-Dateien, die das Feedback Plugin betreffen und für Theme-Entwickler relevant sind.  Die Verlinkung führt direkt zu der umgesetzten Änderung in der entsprechenden Datei.

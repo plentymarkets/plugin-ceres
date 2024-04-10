@@ -11,6 +11,8 @@
 
 - The content of the component lifecycle hook "created" of the StepByStepNavigation was moved into "beforeMount" to fix problems with SSR.
 
+- To increase accessibility, the checkbox for confirming the general terms and conditions, the right of withdrawal and the data protection guidelines in the checkout process now contains a corresponding `aria-label`.
+
 ### Changed Templates
 
 - In plentyShop LTS 5.0.63 we made changes to template files relating the feedback plugin which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
