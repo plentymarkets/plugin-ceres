@@ -5,6 +5,8 @@
 ### Fixed
 
 - In case the browser doesn't support WebP or AVIF image formats, the fallback image wasn't used. This has been fixed.
+- The LazyImg component did not display images in SVG format. This has been fixed.
+    - As part of this fix, a [MIME-Type libary](https://www.npmjs.com/package/mime-types) was integrated. 
 - The setting: **Check the boxes of the item information you want to display in the shopping cart preview** in the plentyShop assistant step **Displayed information** had no effect on the information displayed. This has been fixed.
 - Fixing the header to improve CLS values sometimes caused undesired scroll behaviour when browing the shop. This has been fixed.
 

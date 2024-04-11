@@ -5,6 +5,8 @@
 ### Behoben
 
 - Wenn der Browser WebP- oder AVIF-Bilder-Formate nicht unterstützt, wurde das Fallback-Bild nicht verwendet. Dies wurde behoben.
+- Die LazyImg Komponente hat Bilder vom Format SVG nicht dargestellt. Dies wurde behoben.
+    - Im Zuge dieses Fixes wurde eine [MIME-Type libary](https://www.npmjs.com/package/mime-types) eingebunden. 
 - Die Einstellung: **Hake die Artikelinformationen an, die du in der Warenkorbvorschau anzeigen möchtest.** im plentyShop Assistenten Schritt **Angezeigte Informationen** hatte keine Auswirkung auf die angezeigten Informationen. Dies wurde behoben.
 - Durch das Fixieren des Headers zum Verbessern der CLS-Werte kam es unter Umständen zu einem ungewünschten Scroll-Verhalten beim Browsen des Shops. Dies wurde behoben.
 
