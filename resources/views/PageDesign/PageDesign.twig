@@ -56,7 +56,7 @@
 </script>
 
 <!-- SSR:app() -->
-<div id="vue-app" class="app">
+<div id="vue-app" class="app {% if lowClsHeader == "false" %}overflow-x-hidden{% endif %}">
     {{ context.renderState() }}
     <lazy-hydrate when-idle>
         <notifications template="#vue-notifications" :initial-notifications="{{ notifications | json_encode() }}"></notifications>
