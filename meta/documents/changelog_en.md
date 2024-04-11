@@ -5,7 +5,7 @@
 ### Fixed
 
 - In case the browser doesn't support WebP or AVIF image-formats, the fallback image wasn't used. This has been fixed.
-- The setting: "Check the boxes of the item information you want to display in the shopping cart preview" in the plentyShop assistant under step Displayed information had no effect on the information displayed. This has been fixed.
+- The setting: **Check the boxes of the item information you want to display in the shopping cart preview** in the plentyShop assistant step **Displayed information** had no effect on the information displayed. This has been fixed.
 
 ### Changed
 
@@ -22,14 +22,13 @@
 
 ### TODO
 
-- To improve the CLS of your shop with the new header option (see **Added**), open the plugin configuration of plentyShop LTS after updating. Then, open the **Header** section and activate **Fix header at the top of the page**. To check if CLS in your shop can be improved, you can use public services like [PageSpeed Insights](https://pagespeed.web.dev/).
+- plentyShop LTS now introduces a new header option aimed at improving your shop's Cumulative Layout Shift (CLS). It is automatically enabled upon update. It's important to note that this adjustment may affect the appearance of your shop's header, potentially conflicting with certain themes. Make sure to confirm compatibility with your themes. To check if CLS in your shop can be improved, you can use public services like [PageSpeed Insights](https://pagespeed.web.dev/).
 - To enable the automatic conversion of item images to AVIF, WebP and use the converted images in the online shop, open the plentyShop LTS assistant, go to the **Performance** step and activate **Automatic conversion into modern image formats**.
 - If you use an external search provider in your shop, you should check whether your category and search pages are still displayed correctly due to the adjustments made to the result fields (see entry in the **Changed** section).
 
 ### Added
 
-- The plugin configuration contains a new setting in the **Header** section. By activating the setting **Fix header at the top of the page**, the header is fixed at the top of the page when scrolling. This setting applies to both the default header and the ShopBuilder header. Activating this setting significantly decreases [Cumulative Layout Shift](https://web.dev/articles/cls) because it replaces an expensive calculation.
-    - The plentyShop LTS assistant contains the same configuration in the **Performance** step.
+- The plentyShop LTS assistant contains a new setting in the **Performance** step. By activating the setting **Fix header at the top of the page**, the header is fixed at the top of the page when scrolling. This setting applies to both the default header and the ShopBuilder header. Activating this setting significantly decreases [Cumulative Layout Shift](https://web.dev/articles/cls) because it replaces an expensive calculation.
     - ***Important:*** This setting always applies to the whole header. This means that, as far as fixating header elements is concerned, it takes precedent over the configuration of any individual ShopBuilder widget.
     - ***Important:*** It may take time until Google Search Console reflects the improved CLS. Google Search Console uses a rolling average of the past 28 days. This means Google Search Console may only reflect the full impact of this change after high CLS values no longer contribute to the rolling average.
 - The plugin configuration now contains the new setting **Select source for image in Rich Snippets of the item page** in the **Header** section. You can use this setting to select the image size that is delivered via the Rich Snippets.
