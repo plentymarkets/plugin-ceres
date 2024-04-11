@@ -22,7 +22,7 @@
 
 ### TODO
 
-- plentyShop LTS now introduces a new header option aimed at enhancing your shop's Cumulative Layout Shift (CLS). It is automatically enabled upon update. It's important to note that this adjustment may affect the appearance of your shop's header, potentially conflicting with certain themes. Therefore, it's imperative to confirm compatibility with any of your themes. To check if CLS in your shop can be improved, you can use public services like [PageSpeed Insights](https://pagespeed.web.dev/).
+- plentyShop LTS now introduces a new header option aimed at improving your shop's Cumulative Layout Shift (CLS). It is automatically enabled upon update. It's important to note that this adjustment may affect the appearance of your shop's header, potentially conflicting with certain themes. Make sure to confirm compatibility with your themes. To check if CLS in your shop can be improved, you can use public services like [PageSpeed Insights](https://pagespeed.web.dev/).
 - To enable the automatic conversion of item images to AVIF, WebP and use the converted images in the online shop, open the plentyShop LTS assistant, go to the **Performance** step and activate **Automatic conversion into modern image formats**.
 - If you use an external search provider in your shop, you should check whether your category and search pages are still displayed correctly due to the adjustments made to the result fields (see entry in the **Changed** section).
 
