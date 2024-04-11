@@ -5,13 +5,14 @@
 ### Behoben
 
 - Wenn der Browser WebP oder AVIF Bilder-Formate nicht unterstützt, wurde das Fallback-Bild nicht verwendet. Dies wurde behoben.
-- Die Einstellung: "Hake die Artikelinformationen an, die du in der Warenkorbvorschau anzeigen möchtest." im plentyShop Assistenten unter Schritt Angezeigte Informationen hatte keine Auswirkung auf die angezeigten Informationen. Dies wurde behoben.
 - Die LazyImg Komponente hat Bilder vom Format SVG nicht dargestellt. Dies wurde behoben.
     - Im Zuge dieses Fixes wurde eine [MIME-Type libary](https://www.npmjs.com/package/mime-types) eingebunden. 
+- Die Einstellung: **Hake die Artikelinformationen an, die du in der Warenkorbvorschau anzeigen möchtest.** im plentyShop Assistenten Schritt **Angezeigte Informationen** hatte keine Auswirkung auf die angezeigten Informationen. Dies wurde behoben.
 
 ### Geändert
 
 - Der Inhalt des Lifecycle Hooks "created" der Vue-Komponente StepByStepNavigation wurde verschoben nach "beforeMount", um Probleme mit SSR zu beheben.
+- Um die Barrierefreiheit zu erhöhen, enthält die Checkbox zur Bestätigung der Allgemeinen Geschäftsbedingungen, des Widerrufsrechts und der Datenschutzrichtlinien in der Kasse jetzt ein entsprechendes `aria-label`.
 
 ### Angepasste Templates
 
@@ -23,14 +24,13 @@
 
 ### TODO
 
-- Um die CLS-Werte deines Shops durch die neue Header-Option (s. **Hinzugefügt**) zu verbessern, öffne nach dem Update die Konfiguration des Plugins plentyShop-LTS. Öffne den Bereich **Header** und aktiviere die Einstellung **Header oben fixieren**. Wenn du prüfen möchtest, ob bei deinem Shop Verbesserungen der CLS-Werte möglich sind, kannst du öffentliche Dienste wie z.B. [PageSpeed Insights](https://pagespeed.web.dev/) verwenden.
+- plentyShop LTS führt eine neue Header-Option ein, um die kumulative Layoutverschiebung (CLS) deines Shops zu verbessern. Sie ist nach dem Update automatisch aktiviert. Es ist wichtig zu beachten, dass diese Anpassung das Erscheinungsbild des Headers deiner Shops beeinflussen und zu Konflikten mit bestimmten Themes führen kann. Überprüfe daher unbedingt die Kompatibilität mit deinen Themes. Wenn du prüfen möchtest, ob bei deinem Shop Verbesserungen der CLS-Werte möglich sind, kannst du öffentliche Dienste wie z.B. [PageSpeed Insights](https://pagespeed.web.dev/) verwenden.
 - Um das automatische Konvertieren von Bildern zu aktivieren und damit Artikelbilder in den Formaten AVIF und WebP im Webshop zu nutzen, öffne den plentyShop LTS-Assistenten und aktiviere im Schritt **Performance** die Option **Automatische Konvertierung in moderne Bildformate aktivieren**.
 - Falls du externe Suchanbieter in deinem Shop nutzt, solltest du aufgrund der Anpassungen der Result Fields (s. **Geändert**) überprüfen, ob deine Kategorie- und Suchseiten weiterhin wie gewünscht angezeigt werden.
 
 ### Hinzugefügt
 
-- In den Plugin-Einstellungen gibt es eine neue Einstellung im Bereich **Header**. Wenn du die Einstellung **Header oben fixieren** aktivierst, wird der Header beim Scrollen oben am Seitenanfang fixiert. Diese Einstellung hat Auswirkungen sowohl auf den Standard-Header als auch auf den ShopBuilder-Header. Durch das Aktivieren der Einstellung reduziert sich [Cumulative Layout Shift](https://web.dev/articles/cls) deutlich, weil somit eine teure Berechnung ersetzt wird.
-    - Im Assistenten von plentyShop LTS befindet sich dieselbe Einstellung im Schritt **Performance**.
+- Der plentyShop LTS-Assistent enthält eine neue Einstellung im Schritt **Performance**. Wenn du die Einstellung **Header oben fixieren** aktivierst, wird der Header beim Scrollen oben am Seitenanfang fixiert. Diese Einstellung hat Auswirkungen sowohl auf den Standard-Header als auch auf den ShopBuilder-Header. Durch das Aktivieren der Einstellung reduziert sich die [kumulative Layoutverschiebung](https://web.dev/articles/cls) deutlich, weil somit eine teure Berechnung ersetzt wird.
     - ***Wichtig:*** Die Einstellung betrifft den gesamten Header. Das bedeutet, dass sie für das Fixieren von Header-Elementen die Einstellungen einzelner ShopBuilder-Widgets überschreibt.
     - ***Wichtig:*** Es kann einige Zeit dauern bis die verbesserten CLS-Werte in Google Search Console reflektiert werden. Die Auswertung in Google Search Console bezieht sich auf den gleitenden Durchschnitt der vergangenen 28 Tage. Das bedeutet, dass die tatsächlichen Auswirkungen dieser Änderung erst in Google Search Console reflektiert werden, wenn hohe CLS-Werte nicht mehr Teil des gleitenden Durchschnitts sind.
 - In den Plugin-Einstellungen wurde die neue Einstellung **Quelle für das Bild in Rich Snippets für die Artikelseite wählen** im Bereich **SEO** hinzugefügt. Mit dieser Einstellung ist es nun möglich, die Bildergröße einzustellen, die über die Rich Snippets ausgeliefert wird.
