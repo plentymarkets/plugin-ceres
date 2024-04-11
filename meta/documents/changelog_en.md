@@ -1,6 +1,6 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.63 (2024-04-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.62...5.0.63" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.63 (2024-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.62...5.0.63" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed
 
@@ -11,7 +11,7 @@
 
 ### Changed
 
-- The content of the component lifecycle hook "created" of the StepByStepNavigation was moved into "beforeMount" to fix problems with SSR.
+- The content of the component lifecycle hook `created` of the `StepByStepNavigation` component was moved into `beforeMount` to fix problems with SSR.
 - To increase accessibility, the checkbox for confirming the general terms and conditions, the right of withdrawal and the data protection guidelines in the checkout process now contains a corresponding `aria-label`.
 
 ### Changed Templates
