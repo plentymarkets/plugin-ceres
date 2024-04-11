@@ -22,7 +22,7 @@
 
 ### TODO
 
-- plentyShop LTS führt eine neue Header-Option ein, um die kumulative Layoutverschiebung (CLS) deines Shops zu verbessern. Sie ist nach dem Update automatisch aktiviert. Es ist wichtig zu beachten, dass diese Anpassung das Erscheinungsbild des Headers deiner Shops beeinflussen kann und zu Konflikten mit bestimmten Themes führen kann. Überprüfe daher unbedingt die Kompatibilität mit deinen Themes. Wenn du prüfen möchtest, ob bei deinem Shop Verbesserungen der CLS-Werte möglich sind, kannst du öffentliche Dienste wie z.B. [PageSpeed Insights](https://pagespeed.web.dev/) verwenden.
+- plentyShop LTS führt eine neue Header-Option ein, um die kumulative Layoutverschiebung (CLS) deines Shops zu verbessern. Sie ist nach dem Update automatisch aktiviert. Es ist wichtig zu beachten, dass diese Anpassung das Erscheinungsbild des Headers deiner Shops beeinflussen und zu Konflikten mit bestimmten Themes führen kann. Überprüfe daher unbedingt die Kompatibilität mit deinen Themes. Wenn du prüfen möchtest, ob bei deinem Shop Verbesserungen der CLS-Werte möglich sind, kannst du öffentliche Dienste wie z.B. [PageSpeed Insights](https://pagespeed.web.dev/) verwenden.
 - Um das automatische Konvertieren von Bildern zu aktivieren und damit Artikelbilder in den Formaten AVIF und WebP im Webshop zu nutzen, öffne den plentyShop LTS-Assistenten und aktiviere im Schritt **Performance** die Option **Automatische Konvertierung in moderne Bildformate aktivieren**.
 - Falls du externe Suchanbieter in deinem Shop nutzt, solltest du aufgrund der Anpassungen der Result Fields (s. **Geändert**) überprüfen, ob deine Kategorie- und Suchseiten weiterhin wie gewünscht angezeigt werden.
 
