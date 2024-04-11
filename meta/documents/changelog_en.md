@@ -8,7 +8,7 @@
 - The setting: **Check the boxes of the item information you want to display in the shopping cart preview** in the plentyShop assistant step **Displayed information** had no effect on the information displayed. This has been fixed.
 - The LazyImg component did not display images in SVG format. This has been fixed.
     - As part of this fix, a [MIME-Type libary](https://www.npmjs.com/package/mime-types) was integrated.
-      The variable "requestedVariationUrl" now returns the URL without query parameters.
+- The variable "requestedVariationUrl" now returns the URL without query parameters.
 
 ### Changed
 
