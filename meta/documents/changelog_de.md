@@ -9,6 +9,7 @@
     - Im Zuge dieses Fixes wurde eine [MIME-Type libary](https://www.npmjs.com/package/mime-types) eingebunden. 
 - Die Einstellung: **Hake die Artikelinformationen an, die du in der Warenkorbvorschau anzeigen möchtest.** im plentyShop Assistenten Schritt **Angezeigte Informationen** hatte keine Auswirkung auf die angezeigten Informationen. Dies wurde behoben.
 - Durch das Fixieren des Headers zum Verbessern der CLS-Werte kam es unter Umständen zu einem ungewünschten Scroll-Verhalten beim Browsen des Shops. Dies wurde behoben.
+- Die Variable "requestedVariationUrl" gibt nun die URL ohne Query-Parameter zurück.
 
 ### Geändert
 
