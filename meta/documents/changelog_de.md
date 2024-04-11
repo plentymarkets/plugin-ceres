@@ -1,18 +1,18 @@
 # Release Notes für plentyShop LTS
 
-## v5.0.63 (2024-04-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.62...5.0.63" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.63 (2024-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.62...5.0.63" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben
 
 - Wenn der Browser WebP- oder AVIF-Bilder-Formate nicht unterstützt, wurde das Fallback-Bild nicht verwendet. Dies wurde behoben.
-- Die LazyImg Komponente hat Bilder vom Format SVG nicht dargestellt. Dies wurde behoben.
+- Die `LazyImg` Komponente hat Bilder vom Format SVG nicht dargestellt. Dies wurde behoben.
     - Im Zuge dieses Fixes wurde eine [MIME-Type libary](https://www.npmjs.com/package/mime-types) eingebunden. 
 - Die Einstellung: **Hake die Artikelinformationen an, die du in der Warenkorbvorschau anzeigen möchtest.** im plentyShop Assistenten Schritt **Angezeigte Informationen** hatte keine Auswirkung auf die angezeigten Informationen. Dies wurde behoben.
 - Durch das Fixieren des Headers zum Verbessern der CLS-Werte kam es unter Umständen zu einem ungewünschten Scroll-Verhalten beim Browsen des Shops. Dies wurde behoben.
 
 ### Geändert
 
-- Der Inhalt des Lifecycle Hooks "created" der Vue-Komponente StepByStepNavigation wurde verschoben nach "beforeMount", um Probleme mit SSR zu beheben.
+- Der Inhalt des Lifecycle Hooks `created` der `StepByStepNavigation` Komponente wurde verschoben nach `beforeMount`, um Probleme mit SSR zu beheben.
 - Um die Barrierefreiheit zu erhöhen, enthält die Checkbox zur Bestätigung der Allgemeinen Geschäftsbedingungen, des Widerrufsrechts und der Datenschutzrichtlinien in der Kasse jetzt ein entsprechendes `aria-label`.
 
 ### Angepasste Templates

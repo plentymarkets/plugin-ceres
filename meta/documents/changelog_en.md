@@ -1,18 +1,18 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.63 (2024-04-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.62...5.0.63" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.63 (2024-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.62...5.0.63" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed
 
 - In case the browser doesn't support WebP or AVIF image formats, the fallback image wasn't used. This has been fixed.
-- The LazyImg component did not display images in SVG format. This has been fixed.
+- The `LazyImg` component did not display images in SVG format. This has been fixed.
     - As part of this fix, a [MIME-Type libary](https://www.npmjs.com/package/mime-types) was integrated. 
 - The setting: **Check the boxes of the item information you want to display in the shopping cart preview** in the plentyShop assistant step **Displayed information** had no effect on the information displayed. This has been fixed.
 - Fixing the header to improve CLS values sometimes caused undesired scroll behaviour when browing the shop. This has been fixed.
 
 ### Changed
 
-- The content of the component lifecycle hook "created" of the StepByStepNavigation was moved into "beforeMount" to fix problems with SSR.
+- The content of the component lifecycle hook `created` of the `StepByStepNavigation` component was moved into `beforeMount` to fix problems with SSR.
 - To increase accessibility, the checkbox for confirming the general terms and conditions, the right of withdrawal and the data protection guidelines in the checkout process now contains a corresponding `aria-label`.
 
 ### Changed Templates
