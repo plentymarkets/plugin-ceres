@@ -257,16 +257,15 @@ var render = function() {
                 }
               },
               [
-                _c("img", {
-                  staticClass: "owl-lazy",
+                _c("lazy-img", {
                   attrs: {
-                    "data-src": image.url,
                     alt: _vm.getAltText(image),
+                    "image-url": image.url,
                     title: _vm.getImageName(image)
                   }
-                }),
-                _c("div", { staticClass: "magnifier" })
-              ]
+                })
+              ],
+              1
             )
           ])
         }),

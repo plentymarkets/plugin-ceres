@@ -3,7 +3,7 @@
           <div class="bkr-cc single-carousel owl-carousel owl-theme owl-single-item mt-0" id="imageGallery" ref="single">
               <div v-for="image in singleImages" class="prop-1-1 slide-owl-wrap">
                   <a :href="image.url" :data-fancybox="'single-item-image' + _uid">
-                      <img class="owl-lazy" :data-src="image.url" :alt="getAltText(image)" :title="getImageName(image)"><div class="magnifier"></div>
+                    <lazy-img :alt="getAltText(image)" :image-url="image.url" :title="getImageName(image)" />
                   </a>
               </div>
           </div>

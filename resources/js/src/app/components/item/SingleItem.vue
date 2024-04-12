@@ -14,6 +14,23 @@
 
               <slot name="breadcrumb"></slot>
 
+              <!-- New Item Headline here -->
+              <div class="singleItemName" v-if="!desktop">
+                <h1 v-html="this.currentVariation.texts.name1"></h1>
+                <div class="feedbackTags">
+                  <feedback-average class="box-feedback" :show-empty-ratings="false" size-of-stars="small"
+                    :show-ratings-amount="true">
+                  </feedback-average>
+
+                  <span class="tag tagFavorit" v-if="hasPropertySelection(166, 397)">Bestseller</span>
+                  <span class="tag tagVegan" v-if="hasPropertySelection(166, 393)">Vegan</span>
+                  <template v-for="tag in currentVariation.tags" v-if="[130, 131, 132, 133].includes(tag.id)">
+                    <span target="#sizeTable" :class="'scrollTo tag tagSize' + (parseInt(tag.id) - 129)"
+                      v-html="tag.names.name"></span>
+                  </template>
+                </div>
+              </div>
+
               <div class="col-md-7 singleItemImage text-center mb-2">
                 <slot name="image-carousel"></slot>
 
@@ -35,12 +52,9 @@
               </div>
               <div class="col-md-5 singleItemDetails single-rightside mb-2">
 
-                <h1 v-html="this.currentVariation.texts.name1"></h1>
-
-                <bkAddToWishlist :variation-id="currentVariation.variation.id"></bkAddToWishlist>
-
-                <div><!-- v-stick-in-parent -->
-
+                <!-- New Item Headline here -->
+                <div class="singleItemName" v-if="desktop">
+                  <h1 v-html="this.currentVariation.texts.name1"></h1>
                   <div class="feedbackTags">
                     <feedback-average class="box-feedback" :show-empty-ratings="false" size-of-stars="small"
                       :show-ratings-amount="true">
@@ -48,11 +62,16 @@
 
                     <span class="tag tagFavorit" v-if="hasPropertySelection(166, 397)">Bestseller</span>
                     <span class="tag tagVegan" v-if="hasPropertySelection(166, 393)">Vegan</span>
-                    <template v-for="tag in currentVariation.tags" v-if="[130,131,132,133].includes(tag.id)">
+                    <template v-for="tag in currentVariation.tags" v-if="[130, 131, 132, 133].includes(tag.id)">
                       <span target="#sizeTable" :class="'scrollTo tag tagSize' + (parseInt(tag.id) - 129)"
                         v-html="tag.names.name"></span>
                     </template>
                   </div>
+                </div>
+
+                <bkAddToWishlist :variation-id="currentVariation.variation.id"></bkAddToWishlist>
+
+                <div><!-- v-stick-in-parent -->
 
                   <div :class="'availabilityRow availabilityRow_' + currentVariation.variation.availability.id">
                     <biokinder-availability :avd="$attrs.availabilitydata"
@@ -559,6 +578,12 @@ export default {
         "variations"
     ],
 
+    data() {
+      return {
+        desktop: false,
+      };
+    },
+
     provide()
     {
         return {
@@ -687,14 +712,27 @@ export default {
             {
                 this.$store.dispatch("initSetComponents", this.itemData);   
             }
+
+            window.addEventListener('resize', this.determineBrowserSize);
+
+            this.determineBrowserSize();
         })
 
         // listen for variation change to hydrate all children lazy-hydrate components
         document.addEventListener("onVariationChanged", () => this.hydrateChildren(this.$children));
     },
 
+    beforeDestroy() {
+      window.removeEventListener('resize', this.determineBrowserSize);
+    },
+
     methods:
     {
+        determineBrowserSize()
+        {
+          this.desktop = window.innerWidth > 767;
+        },
+
         getDataField(field)
         {
             return get(this.currentVariation, field);

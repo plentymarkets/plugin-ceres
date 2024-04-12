@@ -1853,6 +1853,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1882,6 +1901,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     afterKey: Object
   },
   jsonDataFields: ["itemData", "attributesData", "variations"],
+  data: function data() {
+    return {
+      desktop: false
+    };
+  },
   provide: function provide() {
     return {
       itemId: this.$props.itemId
@@ -1986,13 +2010,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (_this.isItemSet) {
         _this.$store.dispatch("initSetComponents", _this.itemData);
       }
+
+      window.addEventListener('resize', _this.determineBrowserSize);
+
+      _this.determineBrowserSize();
     }); // listen for variation change to hydrate all children lazy-hydrate components
 
     document.addEventListener("onVariationChanged", function () {
       return _this.hydrateChildren(_this.$children);
     });
   },
+  beforeDestroy: function beforeDestroy() {
+    window.removeEventListener('resize', this.determineBrowserSize);
+  },
   methods: {
+    determineBrowserSize: function determineBrowserSize() {
+      this.desktop = window.innerWidth > 767;
+    },
     getDataField: function getDataField(field) {
       return Object(_helper_get__WEBPACK_IMPORTED_MODULE_20__["get"])(this.currentVariation, field);
     },
@@ -38582,6 +38616,68 @@ var render = function() {
                     [
                       _vm._t("breadcrumb"),
                       _vm._v(" "),
+                      !_vm.desktop
+                        ? _c("div", { staticClass: "singleItemName" }, [
+                            _c("h1", {
+                              domProps: {
+                                innerHTML: _vm._s(
+                                  this.currentVariation.texts.name1
+                                )
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "feedbackTags" },
+                              [
+                                _c("feedback-average", {
+                                  staticClass: "box-feedback",
+                                  attrs: {
+                                    "show-empty-ratings": false,
+                                    "size-of-stars": "small",
+                                    "show-ratings-amount": true
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _vm.hasPropertySelection(166, 397)
+                                  ? _c(
+                                      "span",
+                                      { staticClass: "tag tagFavorit" },
+                                      [_vm._v("Bestseller")]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.hasPropertySelection(166, 393)
+                                  ? _c(
+                                      "span",
+                                      { staticClass: "tag tagVegan" },
+                                      [_vm._v("Vegan")]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm._l(_vm.currentVariation.tags, function(
+                                  tag
+                                ) {
+                                  return [130, 131, 132, 133].includes(tag.id)
+                                    ? [
+                                        _c("span", {
+                                          class:
+                                            "scrollTo tag tagSize" +
+                                            (parseInt(tag.id) - 129),
+                                          attrs: { target: "#sizeTable" },
+                                          domProps: {
+                                            innerHTML: _vm._s(tag.names.name)
+                                          }
+                                        })
+                                      ]
+                                    : _vm._e()
+                                })
+                              ],
+                              2
+                            )
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
                       _c(
                         "div",
                         {
@@ -38647,13 +38743,71 @@ var render = function() {
                             "col-md-5 singleItemDetails single-rightside mb-2"
                         },
                         [
-                          _c("h1", {
-                            domProps: {
-                              innerHTML: _vm._s(
-                                this.currentVariation.texts.name1
-                              )
-                            }
-                          }),
+                          _vm.desktop
+                            ? _c("div", { staticClass: "singleItemName" }, [
+                                _c("h1", {
+                                  domProps: {
+                                    innerHTML: _vm._s(
+                                      this.currentVariation.texts.name1
+                                    )
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "feedbackTags" },
+                                  [
+                                    _c("feedback-average", {
+                                      staticClass: "box-feedback",
+                                      attrs: {
+                                        "show-empty-ratings": false,
+                                        "size-of-stars": "small",
+                                        "show-ratings-amount": true
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _vm.hasPropertySelection(166, 397)
+                                      ? _c(
+                                          "span",
+                                          { staticClass: "tag tagFavorit" },
+                                          [_vm._v("Bestseller")]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.hasPropertySelection(166, 393)
+                                      ? _c(
+                                          "span",
+                                          { staticClass: "tag tagVegan" },
+                                          [_vm._v("Vegan")]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm._l(_vm.currentVariation.tags, function(
+                                      tag
+                                    ) {
+                                      return [130, 131, 132, 133].includes(
+                                        tag.id
+                                      )
+                                        ? [
+                                            _c("span", {
+                                              class:
+                                                "scrollTo tag tagSize" +
+                                                (parseInt(tag.id) - 129),
+                                              attrs: { target: "#sizeTable" },
+                                              domProps: {
+                                                innerHTML: _vm._s(
+                                                  tag.names.name
+                                                )
+                                              }
+                                            })
+                                          ]
+                                        : _vm._e()
+                                    })
+                                  ],
+                                  2
+                                )
+                              ])
+                            : _vm._e(),
                           _vm._v(" "),
                           _c("bkAddToWishlist", {
                             attrs: {
@@ -38664,56 +38818,6 @@ var render = function() {
                           _c(
                             "div",
                             [
-                              _c(
-                                "div",
-                                { staticClass: "feedbackTags" },
-                                [
-                                  _c("feedback-average", {
-                                    staticClass: "box-feedback",
-                                    attrs: {
-                                      "show-empty-ratings": false,
-                                      "size-of-stars": "small",
-                                      "show-ratings-amount": true
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _vm.hasPropertySelection(166, 397)
-                                    ? _c(
-                                        "span",
-                                        { staticClass: "tag tagFavorit" },
-                                        [_vm._v("Bestseller")]
-                                      )
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _vm.hasPropertySelection(166, 393)
-                                    ? _c(
-                                        "span",
-                                        { staticClass: "tag tagVegan" },
-                                        [_vm._v("Vegan")]
-                                      )
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _vm._l(_vm.currentVariation.tags, function(
-                                    tag
-                                  ) {
-                                    return [130, 131, 132, 133].includes(tag.id)
-                                      ? [
-                                          _c("span", {
-                                            class:
-                                              "scrollTo tag tagSize" +
-                                              (parseInt(tag.id) - 129),
-                                            attrs: { target: "#sizeTable" },
-                                            domProps: {
-                                              innerHTML: _vm._s(tag.names.name)
-                                            }
-                                          })
-                                        ]
-                                      : _vm._e()
-                                  })
-                                ],
-                                2
-                              ),
-                              _vm._v(" "),
                               _c(
                                 "div",
                                 {
@@ -66631,11 +66735,12 @@ function executeReCaptcha(form) {
 /*!******************************************************!*\
   !*** ./resources/js/src/app/helper/featureDetect.js ***!
   \******************************************************/
-/*! exports provided: detectWebP, detectPassiveEvents, detectIntersectionObserver */
+/*! exports provided: detectAvif, detectWebP, detectPassiveEvents, detectIntersectionObserver */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "detectAvif", function() { return detectAvif; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "detectWebP", function() { return detectWebP; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "detectPassiveEvents", function() { return detectPassiveEvents; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "detectIntersectionObserver", function() { return detectIntersectionObserver; });
@@ -66683,28 +66788,25 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 var _supportsPassive;
 /**
- * Asynchronous function to detect webP support
+ * Function to detect avif support
  * @param callback
  */
 
 
-function detectWebP(callback) {
-  if (!Object(_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(App.features.webp)) {
-    callback(App.features.webp);
+function detectAvif(callback) {
+  if (!Object(_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(App.features.avif)) {
+    callback(App.features.avif);
     return;
   }
 
   var testUris = {
-    "lossy": "UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA",
-    "lossless": "UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==",
-    "alpha": "UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA==",
-    "animation": "UklGRlIAAABXRUJQVlA4WAoAAAASAAAAAAAAAAAAQU5JTQYAAAD/////AABBTk1GJgAAAAAAAAAAAAAAAAAAAGQAAABWUDhMDQAAAC8AAAAQBxAREYiI/gcA"
+    "avif": "AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUEAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAABYAAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgSAAAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAAB5tZGF0EgAKBzgADlAgIGkyCR/wAABAAACvcA=="
   };
   var promises = [];
 
   var _loop = function _loop(uri) {
     promises.push(new Promise(function (resolve, reject) {
-      _detectWebPSupport(testUris[uri], resolve);
+      _detectModernImageSupport("avif", testUris[uri], resolve);
     }));
   };
 
@@ -66728,23 +66830,69 @@ function detectWebP(callback) {
       _iterator.f();
     }
 
+    App.features.avif = isSupported;
+    callback(isSupported);
+  });
+}
+/**
+ * Function to detect webP support
+ * @param callback
+ */
+
+function detectWebP(callback) {
+  if (!Object(_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(App.features.webp)) {
+    callback(App.features.webp);
+    return;
+  }
+
+  var testUris = {
+    "webp": "UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA=="
+  };
+  var promises = [];
+
+  var _loop2 = function _loop2(uri) {
+    promises.push(new Promise(function (resolve, reject) {
+      _detectModernImageSupport("webp", testUris[uri], resolve);
+    }));
+  };
+
+  for (var uri in testUris) {
+    _loop2(uri);
+  }
+
+  var isSupported = true;
+  Promise.all(promises).then(function (values) {
+    var _iterator2 = _createForOfIteratorHelper(values),
+        _step2;
+
+    try {
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        var value = _step2.value;
+        isSupported = isSupported && value;
+      }
+    } catch (err) {
+      _iterator2.e(err);
+    } finally {
+      _iterator2.f();
+    }
+
     App.features.webp = isSupported;
     callback(isSupported);
   });
 }
 
-function _detectWebPSupport(uri, resolve) {
+function _detectModernImageSupport(targetExtension, uri, resolve) {
   var img = new Image();
 
   img.onload = function () {
-    resolve(img.width > 0 && img.height > 0);
+    resolve(true);
   };
 
   img.onerror = function () {
     resolve(false);
   };
 
-  img.src = "data:image/webp;base64," + uri;
+  img.src = "data:image/" + targetExtension + ";base64," + uri;
 }
 /**
  * Detect if the parameter passive is supported for the method addEventListener (MSIE is not)
