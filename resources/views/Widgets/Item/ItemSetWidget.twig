@@ -18,7 +18,7 @@
             </div>
         </single-item-set-component>
     {% else %}
-        {{ Twig.for("setComponent", "setComponents") }}
+        {{ Twig.for("setComponent", "setComponents | sort | reverse") }}
             {{ Twig.print(Twig.call("set_item_data_base", [Twig.var("setComponent")])) }}
 
             <single-item-set-component
