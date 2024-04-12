@@ -12,7 +12,13 @@
                         <img alt="{{ companyName }}" src="{{ companyLogo }}" class="img-fluid" />
                     </a>
                 {% endif %} 
-                <button v-open-mobile-navigation class="navbar-toggler d-lg-none p-3" type="button">
+                <button v-open-mobile-navigation
+                        class="navbar-toggler d-lg-none p-3"
+                        type="button"
+                        id="mobile-navigation-toggler"
+                        for="mobile-navigation-wrapper"
+                        aria-controls="menu"
+                        aria-label="{{ trans("Ceres::Template.menuLabel") }}">
                     &#9776;
                 </button>
             </div>
