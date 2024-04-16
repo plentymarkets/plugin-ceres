@@ -18,9 +18,7 @@
             </div>
         </single-item-set-component>
     {% else %}
-        <p>print data</p>
-        <p>data set components : {{ Twig.print("setComponents | json_encode") }}</p>
-        {% for setComponent in setComponents %}
+        {{ Twig.for("setComponent", "setComponents") }}
             {{ Twig.print(Twig.call("set_item_data_base", [Twig.var("setComponent")])) }}
 
             <single-item-set-component
@@ -38,6 +36,6 @@
             </single-item-set-component>
             
             {{ Twig.print(Twig.call("pop_item_data_base")) }}
-        {% endfor %}
+        {{ Twig.endfor() }}
     {% endif %}
 </div>
