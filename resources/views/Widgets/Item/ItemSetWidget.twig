@@ -18,7 +18,8 @@
             </div>
         </single-item-set-component>
     {% else %}
-        {{ Twig.for("setComponent", "setComponents") }}
+        {% for setComponent in setComponents|sort((a, b) => a.item.componentId <=> b.item.componentId) %}
+            <p>using for loop</p>
             {{ Twig.print(Twig.call("set_item_data_base", [Twig.var("setComponent")])) }}
 
             <single-item-set-component
@@ -36,6 +37,6 @@
             </single-item-set-component>
             
             {{ Twig.print(Twig.call("pop_item_data_base")) }}
-        {{ Twig.endfor() }}
+        {% endfor %}
     {% endif %}
 </div>
