@@ -18,8 +18,9 @@
             </div>
         </single-item-set-component>
     {% else %}
+        <p>print data</p>
+        <p>data set components : {{ Twig.print("setComponents | json_encode") }}</p>
         {% for setComponent in setComponents|sort((a, b) => a.item.componentId <=> b.item.componentId) %}
-            <p>using for loop</p>
             {{ Twig.print(Twig.call("set_item_data_base", [Twig.var("setComponent")])) }}
 
             <single-item-set-component
