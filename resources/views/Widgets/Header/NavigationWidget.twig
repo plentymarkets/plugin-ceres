@@ -42,7 +42,7 @@
             <div class="brand-wrapper px-lg-3 d-flex flex-fill">
                 {% if companyLogoUrl | trim | length > 0 %}
                     <a class="navbar-brand py-2" href="{{ Twig.print('urls.home') }}">
-                        <picture>
+                        <picture data-alt="{{ Twig.print('trans("Ceres::Template.headerCompanyName")') }}">
                             <source srcset="{{ companyLogoUrl }}"{% if companyLogoUrl matches '/.?(\\.webp)(?:$|\\?)/' %} type="image/webp"{% endif %}>
                             <img
                                 class="img-fluid"

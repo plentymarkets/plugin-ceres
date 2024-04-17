@@ -175,7 +175,7 @@
                                     title="{{ Twig.print("imgTitle") }}">
                             </noscript>
                         {% else %}
-                            <picture>
+                            <picture data-alt="{{ Twig.print("altText") }}">
                                 <source srcset="{{ Twig.print("slide.imageUrl") }}" {{ Twig.if("slide.imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>
                                 <img
                                     class="img-cover"

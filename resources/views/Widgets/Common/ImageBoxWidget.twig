@@ -126,7 +126,7 @@
                     {{ Twig.if("imageName | trim is not empty") }}title="{{ Twig.print("imageName") }}"{{ Twig.endif() }}>
             </noscript>
         {% else %}
-            <picture>
+            <picture data-alt="{{ Twig.print("imageAltText") }}">
                 <source srcset="{{ Twig.print("imageUrl") }}" {{ Twig.if("imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>
                 <img
                     class="img-{{ imageSize }}"
