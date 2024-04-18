@@ -59,6 +59,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-image-carousel",
@@ -257,15 +262,15 @@ var render = function() {
                 }
               },
               [
-                _c("lazy-img", {
+                _c("img", {
+                  staticClass: "owl-lazy",
                   attrs: {
+                    "data-src": image.url,
                     alt: _vm.getAltText(image),
-                    "image-url": image.url,
                     title: _vm.getImageName(image)
                   }
                 })
-              ],
-              1
+              ]
             )
           ])
         }),

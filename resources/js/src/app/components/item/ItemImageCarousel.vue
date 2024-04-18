@@ -1,38 +1,43 @@
 <template>
     <div itemscope itemtype="http://schema.org/Thing" class="bkr-cc">
-          <div class="bkr-cc single-carousel owl-carousel owl-theme owl-single-item mt-0" id="imageGallery" ref="single">
-              <div v-for="image in singleImages" class="prop-1-1 slide-owl-wrap">
-                  <a :href="image.url" :data-fancybox="'single-item-image' + _uid">
-                    <lazy-img :alt="getAltText(image)" :image-url="image.url" :title="getImageName(image)" />
-                  </a>
-              </div>
-          </div>
-          <div v-if="showThumbs" id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item" ref="thumbs">
-            <template v-if="currentVariation.variationProperties && currentVariation.variationProperties.filter(function (prop) { return (prop.id == 4) })[0]">
-            <template v-for="property in currentVariation.variationProperties.filter(function (prop) { return (prop.id == 4) })[0].properties.filter(function (prop) { return (prop.id == 192) })">
-                <div class="prop-1-1" v-if="property.values.value != ''">
-                  <div class="image-container">
-                    <a data-toggle="modal" class="videoButton text-center" data-target="#videoModal">
-                      <img src="https://cdn.bio-kinder.de/frontend/images/static/playbtn.svg" alt="Video wiedergeben" />
-                      <span>Video <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></span>
-                    </a>
-                  </div>
-                </div>
-            </template>
+        <div class="bkr-cc single-carousel owl-carousel owl-theme owl-single-item mt-0" id="imageGallery" ref="single">
+            <div v-for="image in singleImages" class="prop-1-1 slide-owl-wrap">
+                <a :href="image.url" :data-fancybox="'single-item-image' + _uid">
+                    <img class="owl-lazy" :data-src="image.url" :alt="getAltText(image)" :title="getImageName(image) ">
+                </a>
+            </div>
+        </div>
+        <div v-if="showThumbs" id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item"
+            ref="thumbs">
+            <template
+                v-if="currentVariation.variationProperties && currentVariation.variationProperties.filter(function (prop) { return (prop.id == 4) })[0]">
+                <template
+                    v-for="property in currentVariation.variationProperties.filter(function (prop) { return (prop.id == 4) })[0].properties.filter(function (prop) { return (prop.id == 192) })">
+                    <div class="prop-1-1" v-if="property.values.value != ''">
+                        <div class="image-container">
+                            <a data-toggle="modal" class="videoButton text-center" data-target="#videoModal">
+                                <img src="https://cdn.bio-kinder.de/frontend/images/static/playbtn.svg"
+                                    alt="Video wiedergeben" />
+                                <span>Video <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
+                                        stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                        class="css-i6dzq1">
+                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                    </svg></span>
+                            </a>
+                        </div>
+                    </div>
+                </template>
             </template>
             <div class="prop-1-1" v-for="(imagePreview, index) in carouselImages">
                 <div class="image-container" @click="goTo(index)">
-                    <lazy-img
-                        picture-class="owl-thumb border-appearance"
-                        v-bind:class="{ 'active': currentItem === index }"
-                        :image-url="imagePreview.url"
-                        :alt="getAltText(imagePreview)"
-                        :title="getImageName(imagePreview)">
+                    <lazy-img picture-class="owl-thumb border-appearance"
+                        v-bind:class="{ 'active': currentItem === index }" :image-url="imagePreview.url"
+                        :alt="getAltText(imagePreview)" :title="getImageName(imagePreview)">
                     </lazy-img>
                 </div>
             </div>
-          </div>
-      </div>
+        </div>
+    </div>
 </template>
 
 <script>

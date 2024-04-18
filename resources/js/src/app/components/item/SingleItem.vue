@@ -15,7 +15,7 @@
               <slot name="breadcrumb"></slot>
 
               <!-- New Item Headline here -->
-              <div class="singleItemName" v-if="!desktop">
+              <div class="singleItemName resMob" v-if="!desktop">
                 <h1 v-html="this.currentVariation.texts.name1"></h1>
                 <div class="feedbackTags">
                   <feedback-average class="box-feedback" :show-empty-ratings="false" size-of-stars="small"

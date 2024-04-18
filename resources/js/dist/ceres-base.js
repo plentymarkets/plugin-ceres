@@ -37645,7 +37645,7 @@ var render = function() {
                       _vm._t("breadcrumb"),
                       _vm._v(" "),
                       !_vm.desktop
-                        ? _c("div", { staticClass: "singleItemName" }, [
+                        ? _c("div", { staticClass: "singleItemName resMob" }, [
                             _c("h1", {
                               domProps: {
                                 innerHTML: _vm._s(

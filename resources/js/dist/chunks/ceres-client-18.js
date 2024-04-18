@@ -238,7 +238,7 @@ var render = function() {
               [
                 _c("basket-list", {
                   staticClass:
-                    "item-list d-flex flex-fill flex-nowrap flex-column overflow-auto px-3 py-2",
+                    "item-list d-flex flex-fill flex-nowrap flex-column overflow-auto p-2",
                   attrs: { "is-preview": true }
                 }),
                 _vm._v(" "),

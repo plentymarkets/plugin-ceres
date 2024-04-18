@@ -30,27 +30,12 @@
                     <!-- /dropdown -->
                     <!-- box and image -->
                     <div v-else-if="(attribute.type === 'box' || attribute.type === 'image')" :class="'attr' + attribute.attributeId">
-                        <div class="row attributeName" v-if="currentVariation.item.id == 27645">
-                          <div class="col-4 text-muted" v-if="attribute.attributeId == 3">Farbe oberes Bett:</div>
-                          <div class="col-4 text-muted" v-if="attribute.attributeId == 9">Farbe unteres Bett:</div>
+                        
+                        <div class="row attributeName">
+                          <div class="col-4 text-muted">{{ attribute.name }}:</div>
                           <div class="col-8"><b>{{ getSelectedAttributeValueName(attribute) }}</b></div>
                         </div>
-                        <div class="row attributeName" v-else-if="currentVariation.item.id == 28013">
-                          <div class="col-4 text-muted" v-if="attribute.attributeId == 3">Farbe Motivstecker:</div>
-                          <div class="col-4 text-muted" v-else-if="attribute.attributeId == 9">Farbe Garderobe:</div>
-                          <div class="col-4 text-muted" v-else>{{ attribute.name }}:</div>
-                          <div class="col-8"><b>{{ getSelectedAttributeValueName(attribute) }}</b></div>
-                        </div>
-                        <div class="row attributeName" v-else-if="attribute.attributeId != 40">
-                          <div class="col-4 text-muted" v-if="attribute.attributeId == 3 && attributes.filter(function (attr) { return (attr.attributeId == 9) })[0]">Farbe der Front:</div>
-                          <div class="col-4 text-muted" v-else>{{ attribute.name }}:</div>
-                          <div class="col-8"><b>{{ getSelectedAttributeValueName(attribute) }}</b></div>
-                        </div>
-                        <div v-else>
-                        <div class="row">
-                          <div class="col-12 text-muted">Set w&auml;hlen:</div> 
-                        </div>
-                        </div>
+                    
                         <div class="v-s-boxes pt-1 pb-3" :class="{ 'images': attribute.type === 'image' }">
                             <div class="v-s-box bg-white empty-option"
                                  v-if="addPleaseSelectOption"
@@ -216,7 +201,22 @@ export default {
         },
 
         attributes() {
-            return this.currentVariationSelect && this.currentVariationSelect.attributes;
+            let attributes = [];
+            if (this.currentVariationSelect && this.currentVariationSelect.attributes)
+            {
+                for (let attribute of this.currentVariationSelect.attributes)
+                {
+                    let newAttribute = attribute;
+                    if (this.newAttributeNames !== null && "object" === typeof this.newAttributeNames && attribute.attributeId in this.newAttributeNames) {
+                        // Use the value from newAttributeNames as the newValue
+                        const newValue = this.newAttributeNames[attribute.attributeId];
+                        // Update the name of the attribute with the new value
+                        newAttribute.name = newValue;
+                    }
+                    attributes.push(newAttribute);
+                }
+            }
+            return attributes;
         },
 
         selectedAttributes() {
@@ -229,6 +229,28 @@ export default {
 
         variations() {
             return this.currentVariationSelect && this.currentVariationSelect.variations;
+        },
+
+        // Enable to overwrite attribute names on variations product page
+        // by using a property (id 49). Example: 3:Neue Farbe,4:Neues Modell,37:Neuer Matratzen Name
+        newAttributeNames() {
+            if (this.currentVariation && this.currentVariation.variationProperties) {
+                for (const variationProperty of this.currentVariation.variationProperties) {
+                    if (variationProperty.properties) {
+                        const property49 = variationProperty.properties.find(property => property.id === 49);
+                        if (property49) {
+                            const valueArray = property49.values.value.split(',');
+                            const resultObject = {};
+                            valueArray.forEach(element => {
+                                const pair = element.split(':');
+                                resultObject[pair[0]] = pair[1];
+                            });
+                            return resultObject;
+                        }
+                    }
+                }
+            }
+            return null;
         }
     },
 

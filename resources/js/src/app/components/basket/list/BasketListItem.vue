@@ -1,147 +1,110 @@
 <template>
-    <div class="basket-list-item py-3 bkr-cc" :class="'item_' + basketItem.variation.data.item.id">
+    <div class="basket-list-item py-2 bkr-cc" :class="'item_' + basketItem.variation.data.item.id">
         <slot name="before-basket-item"></slot>
 
-        <div class="basket-item component-loading with-icon d-flex" :class="{ 'sending is-loading': waiting, 'is-loading': isCheckoutReadonly }">
+        <div class="basket-item component-loading with-icon d-flex"
+            :class="{ 'sending is-loading': waiting, 'is-loading': isCheckoutReadonly }">
             <div class="image-container">
-              <a :href="basketItem.variation.data | itemURL">
-                <lazy-img
-                    picture-class="d-block mw-100 mh-100"
-                    v-if="image"
-                    :image-url="image"
-                    :alt="altText"
-                    :title="itemName">
-                </lazy-img>
-              </a>
+                <a :href="basketItem.variation.data | itemURL">
+                    <lazy-img picture-class="d-block mw-100 mh-100" v-if="image" :image-url="image" :alt="altText"
+                        :title="itemName">
+                    </lazy-img>
+                </a>
             </div>
 
             <div class="meta-container-wrapper">
                 <div class="meta-container-wrapper-inner">
                     <div class="meta-container d-flex">
-                        <div class="position-relative w-100">
-                                <a :href="basketItem.variation.data | itemURL" class="item-name text-primary text-appearance small font-weight-bold">
-                                    {{ basketItem.variation.data | itemName }}
-                                </a>
+                        <div class="position-relative w-100 basket-item-name">
+                            <a :href="basketItem.variation.data | itemURL"
+                                class="item-name text-primary text-appearance small font-weight-bold">
+                                {{ basketItem.variation.data | itemName }}
+                            </a>
 
-                              <div>
-                                  <strong v-if="basketItem.variation.data.item.id == 500">Preis pro Baum: </strong>
-                                  <strong v-else>Einzelpreis: </strong>
-                                  <span>{{ unitPrice | currency }}</span>
-                              </div>
+                            <div class="smallProductInfo">
+                                <div>
+                                    <strong v-if="basketItem.variation.data.item.id == 500">Preis pro Baum: </strong>
+                                    <strong v-else>Einzelpreis: </strong>
+                                    <span>{{ unitPrice | currency }}</span>
+                                </div>
 
-                              <div class="text-muted small smallContent" v-if="!(basketItem.variation.data.unit.unitOfMeasurement === 'C62' && basketItem.variation.data.unit.content === 1) && basketItem.variation.data.variation.mayShowUnitPrice">
+                                <div class="text-muted small smallContent"
+                                    v-if="!(basketItem.variation.data.unit.unitOfMeasurement === 'C62' && basketItem.variation.data.unit.content === 1) && basketItem.variation.data.variation.mayShowUnitPrice">
+                                    <div>
+                                        <strong>{{ $translate("Ceres::Template.basketContent") }}: </strong>
+                                        {{ basketItem.variation.data.unit.content }} {{
+                                        basketItem.variation.data.unit.names.name }}
+                                    </div>
+                                    <div>
+                                        {{ basePrice }}
+                                    </div>
+                                </div>
 
-                                  <div>
-                                      <strong>{{ $translate("Ceres::Template.basketContent") }}: </strong>
-                                      {{ basketItem.variation.data.unit.content }} {{ basketItem.variation.data.unit.names.name }}
-                                  </div>
-                                  <div>
-                                      {{ basePrice }}
-                                  </div>
-                              </div>
+                                <div class="small smallUnit"
+                                    v-if="basketItem.inputLength > 0 || basketItem.inputWidth > 0">
+                                    <div>
+                                        <strong>{{ $translate("Ceres::Template.itemInput") }} {{ basketItem |
+                                            inputUnit(true) }}: </strong>
+                                        {{ basketItem | inputUnit }}
+                                    </div>
+                                </div>
 
-                              <div class="small smallUnit" v-if="basketItem.inputLength > 0 || basketItem.inputWidth > 0">
-                                  <div>
-                                      <strong>{{ $translate("Ceres::Template.itemInput") }} {{ basketItem | inputUnit(true) }}: </strong>
-                                      {{ basketItem | inputUnit }}
-                                  </div>
-                              </div>
+                                <div class="small smallUnit" v-if="basketItem.variation.data.item.id == 500 && showMoreInformation">
+                                    <strong>Wir sagen danke!</strong> Mit Ihrer Unterstützung pflanzen wir gemeinsam mit
+                                    HessenForst einen Baum im Taunus. Dieser bindet im Schnitt 12,5 kg CO<sub>2</sub>
+                                    pro Jahr.
+                                </div>
 
-                              <div class="small smallUnit" v-if="basketItem.variation.data.item.id == 500">
-                                  <strong>Wir sagen danke!</strong> Mit Ihrer Unterstützung pflanzen wir gemeinsam mit HessenForst einen Baum im Taunus. Dieser bindet im Schnitt 12,5 kg CO<sub>2</sub> pro Jahr.
-                              </div>
+                                <div class="small smallAttr" v-if="showMoreInformation">
+                                    <div class="attrAttr" v-for="attribute in attributes">
+                                        <strong>{{ attribute.name }}: </strong>
+                                        <span>{{ attribute.value.names.name }}</span>
+                                    </div>
+                                </div>
 
-                              <div class="small smallAttr">
-                                <template v-if="basketItem.variation.data.item.id == 27645">
-                                  <div class="attrBed" v-for="attribute in basketItem.variation.data.attributes">
-                                      <strong v-if="attribute.attributeId == 3">Farbe oberes Bett: </strong>
-                                      <strong v-if="attribute.attributeId == 9">Farbe unteres Bett: </strong>
-                                      <span>{{ attribute.value.names.name }}</span>
-                                  </div>
-                                </template>
-                                <template v-else-if="basketItem.variation.data.item.id == 28013">
-                                  <div class="attrBed" v-for="attribute in basketItem.variation.data.attributes">
-                                      <strong v-if="attribute.attributeId == 3">Farbe Motiv: </strong>
-                                      <strong v-else-if="attribute.attributeId == 9">Farbe Garderobe: </strong>
-                                      <strong v-else>{{ attribute.attribute.names.name }}: </strong>
-                                      <span>{{ attribute.value.names.name }}</span>
-                                  </div>
-                                </template>
-                                <template v-else>
-                                  <div class="attrAttr" v-for="attribute in basketItem.variation.data.attributes">
-                                      <strong v-if="attribute.attributeId == 3 && basketItem.variation.data.attributes.filter(function (attr) { return (attr.attributeId == 9) })[0]">Farbe Vorderseite: </strong>
-                                      <strong v-else>{{ attribute.attribute.names.name }}: </strong>
-                                      <span>{{ attribute.value.names.name }}</span>
-                                  </div>
-                                </template> 
-                              </div>
-                              <order-property-value-list :basket-item="basketItem"></order-property-value-list>
+                                <order-property-value-list v-if="showMoreInformation" :basket-item="basketItem"></order-property-value-list>
+
+                                <label class="showDetails" v-if="isMoreButtonVisible"
+                                    :class="{ 'collapsed': !showMoreInformation }"
+                                    @click="showMoreInformation = !showMoreInformation"
+                                    :data-show-more="'Details anzeigen'"
+                                    :data-show-less="'Details ausblenden'">
+                                </label>
+
+                            </div>
                         </div>
                         <div class="basket-item-container-right">
                             <div class="qty-box-container">
-                                <button class="btn text-danger p-0 mr-2" :title="$translate('Ceres::Template.basketDelete')" :class="{ 'disabled': waiting || isBasketLoading || isCheckoutReadonly || waitingForDelete }" @click="deleteItem">
+                                <button class="btn text-danger p-0 mr-2"
+                                    :title="$translate('Ceres::Template.basketDelete')"
+                                    :class="{ 'disabled': waiting || isBasketLoading || isCheckoutReadonly || waitingForDelete }"
+                                    @click="deleteItem">
                                     <icon icon="trash-o" class="default-float" :loading="waitingForDelete"></icon>
                                 </button>
-                                <quantity-input
-                                        @quantity-change="updateQuantity"
-                                        :use-appearance="true"
-                                        :value="basketItem.quantity"
-                                        :waiting="isInputLocked || isCheckoutReadonly"
-                                        :min="basketItem.variation.data.variation.minimumOrderQuantity"
-                                        :max="basketItem.variation.data.variation.maximumOrderQuantity"
-                                        :interval="basketItem.variation.data.variation.intervalOrderQuantity">
+                                <quantity-input @quantity-change="updateQuantity" :use-appearance="true"
+                                    :value="basketItem.quantity" :waiting="isInputLocked || isCheckoutReadonly"
+                                    :min="basketItem.variation.data.variation.minimumOrderQuantity"
+                                    :max="basketItem.variation.data.variation.maximumOrderQuantity"
+                                    :interval="basketItem.variation.data.variation.intervalOrderQuantity">
                                 </quantity-input>
                             </div>
                             <div class="font-weight-bold my-2 text-right prices" :class="{'crossPrice': hasCrossPrice}">
                                 <del v-if="hasCrossPrice" class="crossprice">
-                                    statt {{ basketItem.quantity * basketItem.variation.data.prices.rrp.price.value | currency(basketItem.variation.data.prices.default.currency) }}
+                                    statt {{ basketItem.quantity * basketItem.variation.data.prices.rrp.price.value |
+                                    currency(basketItem.variation.data.prices.default.currency) }}
                                 </del>
-                                {{ basketItem.quantity * unitPrice | currency(basketItem.variation.data.prices.default.currency) }}
+                                {{ basketItem.quantity * unitPrice |
+                                currency(basketItem.variation.data.prices.default.currency) }}
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <basket-set-component-list v-if="basketItem.setComponents" :set-components="basketItem.setComponents" :set-item="basketItem"></basket-set-component-list>
+                <basket-set-component-list v-if="basketItem.setComponents" :set-components="basketItem.setComponents"
+                    :set-item="basketItem"></basket-set-component-list>
 
-                <div class="small" v-if="showMoreInformation">
-                    <template v-if="isDataFieldVisible('basket.item.item_id') && basketItem.variation.data.item.id">
-                        <div class="mt-3">
-                            <strong>{{ $translate("Ceres::Template.basketItemId") }}:</strong>
-                            <span>{{ basketItem.variation.data.item.id }}</span>
-                        </div>
-                    </template>
+            
 
-                    <template v-if="isDataFieldVisible('basket.item.customNumber')">
-                        <div v-if="basketItem.variation.data.variation.number">
-                            <strong>{{ $translate("Ceres::Template.basketItemNumber") }}:</strong>
-                            <span>{{ basketItem.variation.data.variation.number }}</span>
-                        </div>
-                    </template>
-
-                    <template v-if="isDataFieldVisible('basket.item.availability')">
-                        <div v-if="basketItem.variation.data.variation.availability && basketItem.variation.data.variation.availability.names.name">
-                            <strong>{{ $translate("Ceres::Template.basketAvailability") }}:</strong>
-                            <span>{{ basketItem.variation.data.variation.availability.names.name }}</span>
-                        </div>
-                    </template>
-
-                    <template v-if="isDataFieldVisible('basket.item.description_long')">
-                        <p class="my-3" v-if="basketItem.variation.data.texts.description" v-html="basketItem.variation.data.texts.description"></p>
-                    </template>
-
-                    <template v-if="isDataFieldVisible('basket.item.description_short')">
-                        <p class="my-3" v-if="basketItem.variation.data.texts.shortDescription" v-html="basketItem.variation.data.texts.shortDescription"></p>
-                    </template>
-                </div>
-
-                <label v-if="isMoreButtonVisible"
-                    class="btn-collapse"
-                    :class="{ 'collapsed': !showMoreInformation }"
-                    @click="showMoreInformation = !showMoreInformation"
-                    :data-show-more="$translate('Ceres::Template.basketShowMore')"
-                    :data-show-less="$translate('Ceres::Template.basketShowLess')">
-                </label>
             </div>
         </div>
 
@@ -297,11 +260,51 @@ export default {
         // eslint-disable-next-line complexity
         isMoreButtonVisible()
         {
-            return this.isDataFieldVisible("basket.item.item_id") && this.basketItem.variation.data.item.id ||
-                   this.isDataFieldVisible("basket.item.customNumber") && this.basketItem.variation.data.variation.number ||
-                   this.isDataFieldVisible("basket.item.availability") && this.basketItem.variation.data.variation.availability.names.name ||
-                   this.isDataFieldVisible("basket.item.description_long") && this.basketItem.variation.data.texts.description ||
-                   this.isDataFieldVisible("basket.item.description_short") && this.basketItem.variation.data.texts.shortDescription;
+            return  this.basketItem.variation.data.item.id == 500 ||
+                    this.attributes.length > 0 ||
+                    this.basketItem.basketItemOrderParams.length > 0;
+        },
+
+
+        attributes() {
+            let attributes = [];
+            if (this.basketItem.variation.data.attributes) {
+                for (let attribute of this.basketItem.variation.data.attributes) {
+                    let newAttribute = attribute;
+                    if (this.newAttributeNames !== null && "object" === typeof this.newAttributeNames && attribute.attributeId in this.newAttributeNames) {
+                        // Use the value from newAttributeNames as the newValue
+                        const newValue = this.newAttributeNames[attribute.attributeId];
+                        // Update the name of the attribute with the new value
+                        newAttribute.name = newValue;
+                    } else {
+                        newAttribute.name = newAttribute.attribute.names.name;
+                    }
+                    
+                    attributes.push(newAttribute);
+                }
+            }
+            return attributes;
+        },
+        // Enable to overwrite attribute names on variations product page
+        // by using a property (id 49). Example: 3:Neue Farbe,4:Neues Modell,37:Neuer Matratzen Name
+        newAttributeNames() {
+            if (this.basketItem.variation.data.variationProperties) {
+                for (const variationProperty of this.basketItem.variation.data.variationProperties) {
+                    if (variationProperty.properties) {
+                        const property49 = variationProperty.properties.find(property => property.id === 49);
+                        if (property49) {
+                            const valueArray = property49.values.value.split(',');
+                            const resultObject = {};
+                            valueArray.forEach(element => {
+                                const pair = element.split(':');
+                                resultObject[pair[0]] = pair[1];
+                            });
+                            return resultObject;
+                        }
+                    }
+                }
+            }
+            return null;
         },
 
         ...mapState({

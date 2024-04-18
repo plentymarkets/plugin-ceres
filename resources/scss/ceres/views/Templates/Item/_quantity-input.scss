@@ -8,6 +8,7 @@
         border: 1px solid $qty-box-border;
         border-right: 0;
         outline: none;
+        @include border-radius($border-radius 0 0 $border-radius);
         @include transition(all .2s cubic-bezier(0, 0, .26, 1));
 
         &:focus {
@@ -31,7 +32,7 @@
         box-shadow: none;
         @include border-radius(0 $border-radius 0 0);
 
-        + .qty-btn {
+        &:nth-child(3) {
             border-top: 0;
             @include border-radius(0 0 $border-radius 0);
         }
