@@ -1,5 +1,11 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.64 (2024-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Die Einstellung `Automatische Konvertierung in moderne Bildformate (AVIF, WebP)` im plentyShop-Assistenten Schritt **Performance** ist im Standard aktiv. Kunden, die von Version 5.0.62 oder 5.0.63 updaten, sind davon nicht betroffen.
+
 ## v5.0.63 (2024-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.62...5.0.63" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben
