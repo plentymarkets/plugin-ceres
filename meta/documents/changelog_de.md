@@ -4,7 +4,7 @@
 
 ### Geändert
 
-- Die Einstellung `Automatische Konvertierung in moderne Bildformate (AVIF, WebP)` im plentyShop-Assistenten Schritt **Performance** ist im Standard aktiv. Kunden, die von Version 5.0.62 oder 5.0.63 updaten, sind davon nicht betroffen.
+- Die Einstellung `Automatische Konvertierung in moderne Bildformate (AVIF, WebP)` im plentyShop-Assistenten Schritt **Performance** ist nun im Standard aktiv. Wenn du die automatische Konvertierung nicht nutzen willst deaktiviere die Einstellung.
 
 ## v5.0.63 (2024-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.62...5.0.63" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
