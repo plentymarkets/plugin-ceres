@@ -38022,54 +38022,62 @@ var render = function() {
                                   ),
                                   _vm._v(" "),
                                   _vm.hasProperty(193)
-                                    ? [
-                                        _vm._l(_vm.getProperty(193), function(
-                                          prop
-                                        ) {
-                                          return prop.values.value != ""
-                                            ? _c(
-                                                "div",
-                                                { staticClass: "title" },
-                                                [
-                                                  _c("span", {
-                                                    domProps: {
-                                                      innerHTML: _vm._s(
-                                                        prop.values.value
-                                                      )
-                                                    }
-                                                  })
-                                                ]
-                                              )
-                                            : _vm._e()
-                                        }),
-                                        _vm._v(" "),
-                                        _vm._m(0),
-                                        _vm._v(" "),
-                                        _vm._m(1),
-                                        _vm._v(" "),
-                                        _vm._m(2),
-                                        _vm._v(" "),
-                                        _vm._l(_vm.getProperty(194), function(
-                                          prop
-                                        ) {
-                                          return prop.values.value != ""
-                                            ? _c(
-                                                "audio",
-                                                {
-                                                  attrs: { id: "audioPlayer" }
-                                                },
-                                                [
-                                                  _c("source", {
-                                                    attrs: {
-                                                      src: prop.values.value,
-                                                      type: "audio/mp3"
-                                                    }
-                                                  })
-                                                ]
-                                              )
-                                            : _vm._e()
-                                        })
-                                      ]
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass: "audioPlayer",
+                                          attrs: { id: "audioPlayerContainer" }
+                                        },
+                                        [
+                                          _vm._l(_vm.getProperty(193), function(
+                                            prop
+                                          ) {
+                                            return prop.values.value != ""
+                                              ? _c(
+                                                  "div",
+                                                  { staticClass: "title" },
+                                                  [
+                                                    _c("span", {
+                                                      domProps: {
+                                                        innerHTML: _vm._s(
+                                                          prop.values.value
+                                                        )
+                                                      }
+                                                    })
+                                                  ]
+                                                )
+                                              : _vm._e()
+                                          }),
+                                          _vm._v(" "),
+                                          _vm._m(0),
+                                          _vm._v(" "),
+                                          _vm._m(1),
+                                          _vm._v(" "),
+                                          _vm._m(2),
+                                          _vm._v(" "),
+                                          _vm._l(_vm.getProperty(194), function(
+                                            prop
+                                          ) {
+                                            return prop.values.value != ""
+                                              ? _c(
+                                                  "audio",
+                                                  {
+                                                    attrs: { id: "audioPlayer" }
+                                                  },
+                                                  [
+                                                    _c("source", {
+                                                      attrs: {
+                                                        src: prop.values.value,
+                                                        type: "audio/mp3"
+                                                      }
+                                                    })
+                                                  ]
+                                                )
+                                              : _vm._e()
+                                          })
+                                        ],
+                                        2
+                                      )
                                     : _vm._e(),
                                   _vm._v(" "),
                                   _vm._t("beaver")

@@ -134,7 +134,7 @@
                     <slot name="additional-content-after-add-to-basket"></slot>
 
                     <!-- Audioplayer -->
-                    <template v-if="hasProperty(193)">
+                    <div v-if="hasProperty(193) " class="audioPlayer" id="audioPlayerContainer">
                       <div v-for="prop in getProperty(193)" v-if="prop.values.value != ''" class='title'>
                         <span v-html="prop.values.value"></span>
                       </div>
@@ -155,7 +155,7 @@
                       <audio id="audioPlayer" v-for="prop in getProperty(194)" v-if="prop.values.value != ''">
                         <source :src="prop.values.value" type="audio/mp3">
                       </audio>
-                    </template>
+                    </div>
 
                     <slot name="beaver"></slot>
 
