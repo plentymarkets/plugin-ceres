@@ -7908,33 +7908,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
 /* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
-/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
 
 
 
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 //
 //
 //
@@ -8002,10 +7985,43 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.getters["".concat(this.itemId, "/currentItemVariation")];
     },
     carouselImages: function carouselImages() {
-      return this.$options.filters.itemImages(this.currentVariation.images, "urlPreview").slice(0, this.maxQuantity);
+      var carouselImages = this.$options.filters.itemImages(this.currentVariation.images, "urlPreview").slice(0, this.maxQuantity);
+
+      if (this.videoThumbUrl) {
+        var videoBtn = {
+          url: 'https://cdn.bio-kinder.de/frontend/images/static/playbtn.svg',
+          class: 'owl-thumb border-appearance videoButton',
+          alternate: 'Video abspielen',
+          position: -1,
+          name: ''
+        };
+        carouselImages.unshift(videoBtn);
+      } // Modify thumb image objects and add index + class
+
+
+      for (var i = 0; i < carouselImages.length; i++) {
+        var index = i;
+        if (this.videoThumbUrl) index--;
+        carouselImages[i].index = index;
+        carouselImages[i].class = 'owl-thumb border-appearance';
+      }
+
+      return carouselImages;
     },
     singleImages: function singleImages() {
       return this.$options.filters.itemImages(this.currentVariation.images, this.imageUrlAccessor).slice(0, this.maxQuantity);
+    },
+    videoThumbUrl: function videoThumbUrl() {
+      var _this$currentVariatio;
+
+      var hasProps = (_this$currentVariatio = this.currentVariation.variationProperties) === null || _this$currentVariatio === void 0 ? void 0 : _this$currentVariatio.find(function (prop) {
+        return prop.id === 4;
+      }); // Return the properties array filtered by id 192, if it exists
+
+      var videoUrl = hasProps ? hasProps.properties.filter(function (prop) {
+        return prop.id === 192;
+      }) : [];
+      return videoUrl.length > 0;
     }
   },
   watch: {
@@ -8100,6 +8116,11 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     goTo: function goTo(index) {
+      if (index < 0) {
+        $('#videoModal').modal('toggle');
+        return;
+      }
+
       var $owl = $(this.$refs.single);
       $owl.trigger("to.owl.carousel", [index, 350]);
     },
@@ -50779,50 +50800,30 @@ var render = function() {
         ? _vm._ssrNode(
             '<div id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item">',
             "</div>",
-            [
-              _vm._ssrNode(
-                (_vm.currentVariation.variationProperties &&
-                _vm.currentVariation.variationProperties.filter(function(prop) {
-                  return prop.id == 4
-                })[0]
-                  ? _vm._ssrList(
-                      _vm.currentVariation.variationProperties
-                        .filter(function(prop) {
-                          return prop.id == 4
-                        })[0]
-                        .properties.filter(function(prop) {
-                          return prop.id == 192
-                        }),
-                      function(property) {
-                        return property.values.value != ""
-                          ? '<div class="prop-1-1"><div class="image-container"><a data-toggle="modal" data-target="#videoModal" class="videoButton text-center"><img src="https://cdn.bio-kinder.de/frontend/images/static/playbtn.svg" alt="Video wiedergeben"> <span>Video <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></span></a></div></div>'
-                          : "<!---->"
+            _vm._l(_vm.carouselImages, function(imagePreview, idx) {
+              return _vm._ssrNode('<div class="prop-1-1">', "</div>", [
+                _vm._ssrNode(
+                  '<div class="image-container">',
+                  "</div>",
+                  [
+                    _c("lazy-img", {
+                      class: {
+                        active: _vm.currentItem === imagePreview.index,
+                        videoButton: imagePreview.index < 0
+                      },
+                      attrs: {
+                        "picture-class": imagePreview.class,
+                        "image-url": imagePreview.url,
+                        alt: _vm.getAltText(imagePreview),
+                        title: _vm.getImageName(imagePreview)
                       }
-                    )
-                  : "<!---->") + " "
-              ),
-              _vm._l(_vm.carouselImages, function(imagePreview, index) {
-                return _vm._ssrNode('<div class="prop-1-1">', "</div>", [
-                  _vm._ssrNode(
-                    '<div class="image-container">',
-                    "</div>",
-                    [
-                      _c("lazy-img", {
-                        class: { active: _vm.currentItem === index },
-                        attrs: {
-                          "picture-class": "owl-thumb border-appearance",
-                          "image-url": imagePreview.url,
-                          alt: _vm.getAltText(imagePreview),
-                          title: _vm.getImageName(imagePreview)
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ])
-              })
-            ],
-            2
+                    })
+                  ],
+                  1
+                )
+              ])
+            }),
+            0
           )
         : _vm._e()
     ],

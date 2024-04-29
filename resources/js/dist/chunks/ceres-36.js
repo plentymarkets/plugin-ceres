@@ -15,33 +15,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
 /* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
-/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
 
 
 
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 //
 //
 //
@@ -109,10 +92,43 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.getters["".concat(this.itemId, "/currentItemVariation")];
     },
     carouselImages: function carouselImages() {
-      return this.$options.filters.itemImages(this.currentVariation.images, "urlPreview").slice(0, this.maxQuantity);
+      var carouselImages = this.$options.filters.itemImages(this.currentVariation.images, "urlPreview").slice(0, this.maxQuantity);
+
+      if (this.videoThumbUrl) {
+        var videoBtn = {
+          url: 'https://cdn.bio-kinder.de/frontend/images/static/playbtn.svg',
+          class: 'owl-thumb border-appearance videoButton',
+          alternate: 'Video abspielen',
+          position: -1,
+          name: ''
+        };
+        carouselImages.unshift(videoBtn);
+      } // Modify thumb image objects and add index + class
+
+
+      for (var i = 0; i < carouselImages.length; i++) {
+        var index = i;
+        if (this.videoThumbUrl) index--;
+        carouselImages[i].index = index;
+        carouselImages[i].class = 'owl-thumb border-appearance';
+      }
+
+      return carouselImages;
     },
     singleImages: function singleImages() {
       return this.$options.filters.itemImages(this.currentVariation.images, this.imageUrlAccessor).slice(0, this.maxQuantity);
+    },
+    videoThumbUrl: function videoThumbUrl() {
+      var _this$currentVariatio;
+
+      var hasProps = (_this$currentVariatio = this.currentVariation.variationProperties) === null || _this$currentVariatio === void 0 ? void 0 : _this$currentVariatio.find(function (prop) {
+        return prop.id === 4;
+      }); // Return the properties array filtered by id 192, if it exists
+
+      var videoUrl = hasProps ? hasProps.properties.filter(function (prop) {
+        return prop.id === 192;
+      }) : [];
+      return videoUrl.length > 0;
     }
   },
   watch: {
@@ -207,6 +223,11 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     goTo: function goTo(index) {
+      if (index < 0) {
+        $('#videoModal').modal('toggle');
+        return;
+      }
+
       var $owl = $(this.$refs.single);
       $owl.trigger("to.owl.carousel", [index, 350]);
     },
@@ -285,109 +306,37 @@ var render = function() {
               staticClass: "owl-thumbs owl-carousel owl-theme owl-single-item",
               attrs: { id: "thumb-carousel" }
             },
-            [
-              _vm.currentVariation.variationProperties &&
-              _vm.currentVariation.variationProperties.filter(function(prop) {
-                return prop.id == 4
-              })[0]
-                ? [
-                    _vm._l(
-                      _vm.currentVariation.variationProperties
-                        .filter(function(prop) {
-                          return prop.id == 4
-                        })[0]
-                        .properties.filter(function(prop) {
-                          return prop.id == 192
-                        }),
-                      function(property) {
-                        return [
-                          property.values.value != ""
-                            ? _c("div", { staticClass: "prop-1-1" }, [
-                                _c("div", { staticClass: "image-container" }, [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "videoButton text-center",
-                                      attrs: {
-                                        "data-toggle": "modal",
-                                        "data-target": "#videoModal"
-                                      }
-                                    },
-                                    [
-                                      _c("img", {
-                                        attrs: {
-                                          src:
-                                            "https://cdn.bio-kinder.de/frontend/images/static/playbtn.svg",
-                                          alt: "Video wiedergeben"
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("span", [
-                                        _vm._v("Video "),
-                                        _c(
-                                          "svg",
-                                          {
-                                            staticClass: "css-i6dzq1",
-                                            attrs: {
-                                              viewBox: "0 0 24 24",
-                                              width: "24",
-                                              height: "24",
-                                              stroke: "currentColor",
-                                              "stroke-width": "2",
-                                              fill: "none",
-                                              "stroke-linecap": "round",
-                                              "stroke-linejoin": "round"
-                                            }
-                                          },
-                                          [
-                                            _c("polygon", {
-                                              attrs: {
-                                                points: "5 3 19 12 5 21 5 3"
-                                              }
-                                            })
-                                          ]
-                                        )
-                                      ])
-                                    ]
-                                  )
-                                ])
-                              ])
-                            : _vm._e()
-                        ]
+            _vm._l(_vm.carouselImages, function(imagePreview, idx) {
+              return _c("div", { staticClass: "prop-1-1" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "image-container",
+                    on: {
+                      click: function($event) {
+                        return _vm.goTo(imagePreview.index)
                       }
-                    )
-                  ]
-                : _vm._e(),
-              _vm._v(" "),
-              _vm._l(_vm.carouselImages, function(imagePreview, index) {
-                return _c("div", { staticClass: "prop-1-1" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "image-container",
-                      on: {
-                        click: function($event) {
-                          return _vm.goTo(index)
-                        }
+                    }
+                  },
+                  [
+                    _c("lazy-img", {
+                      class: {
+                        active: _vm.currentItem === imagePreview.index,
+                        videoButton: imagePreview.index < 0
+                      },
+                      attrs: {
+                        "picture-class": imagePreview.class,
+                        "image-url": imagePreview.url,
+                        alt: _vm.getAltText(imagePreview),
+                        title: _vm.getImageName(imagePreview)
                       }
-                    },
-                    [
-                      _c("lazy-img", {
-                        class: { active: _vm.currentItem === index },
-                        attrs: {
-                          "picture-class": "owl-thumb border-appearance",
-                          "image-url": imagePreview.url,
-                          alt: _vm.getAltText(imagePreview),
-                          title: _vm.getImageName(imagePreview)
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ])
-              })
-            ],
-            2
+                    })
+                  ],
+                  1
+                )
+              ])
+            }),
+            0
           )
         : _vm._e()
     ]

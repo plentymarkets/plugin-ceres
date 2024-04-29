@@ -7,31 +7,11 @@
                 </a>
             </div>
         </div>
-        <div v-if="showThumbs" id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item"
-            ref="thumbs">
-            <template
-                v-if="currentVariation.variationProperties && currentVariation.variationProperties.filter(function (prop) { return (prop.id == 4) })[0]">
-                <template
-                    v-for="property in currentVariation.variationProperties.filter(function (prop) { return (prop.id == 4) })[0].properties.filter(function (prop) { return (prop.id == 192) })">
-                    <div class="prop-1-1" v-if="property.values.value != ''">
-                        <div class="image-container">
-                            <a data-toggle="modal" class="videoButton text-center" data-target="#videoModal">
-                                <img src="https://cdn.bio-kinder.de/frontend/images/static/playbtn.svg"
-                                    alt="Video wiedergeben" />
-                                <span>Video <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
-                                        stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                                        class="css-i6dzq1">
-                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                                    </svg></span>
-                            </a>
-                        </div>
-                    </div>
-                </template>
-            </template>
-            <div class="prop-1-1" v-for="(imagePreview, index) in carouselImages">
-                <div class="image-container" @click="goTo(index)">
-                    <lazy-img picture-class="owl-thumb border-appearance"
-                        v-bind:class="{ 'active': currentItem === index }" :image-url="imagePreview.url"
+        <div v-if="showThumbs" id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item" ref="thumbs">
+            <div class="prop-1-1" v-for="(imagePreview, idx) in carouselImages">
+                <div class="image-container" @click="goTo(imagePreview.index)">
+                    <lazy-img :picture-class="imagePreview.class"
+                        v-bind:class="{ 'active': currentItem === imagePreview.index, 'videoButton': imagePreview.index < 0 }" :image-url="imagePreview.url"
                         :alt="getAltText(imagePreview)" :title="getImageName(imagePreview)">
                     </lazy-img>
                 </div>
@@ -102,10 +82,34 @@ export default {
 
         carouselImages()
         {
-            return this.$options.filters.itemImages(
+            const carouselImages =  this.$options.filters.itemImages(
                     this.currentVariation.images,
                     "urlPreview"
                 ).slice(0, this.maxQuantity);
+
+            if (this.videoThumbUrl) {
+                const videoBtn = {
+                    url: 'https://cdn.bio-kinder.de/frontend/images/static/playbtn.svg',
+                    class: 'owl-thumb border-appearance videoButton',
+                    alternate: 'Video abspielen',
+                    position: -1,
+                    name: ''
+                };
+                carouselImages.unshift(videoBtn);
+            }
+
+            // Modify thumb image objects and add index + class
+            for(let i = 0; i < carouselImages.length; i++)
+            {
+                let index = i;
+                if(this.videoThumbUrl)
+                    index--;
+
+                carouselImages[i].index = index;
+                carouselImages[i].class = 'owl-thumb border-appearance';
+            }
+
+            return carouselImages;
         },
 
         singleImages()
@@ -114,6 +118,14 @@ export default {
                     this.currentVariation.images,
                     this.imageUrlAccessor
             ).slice(0, this.maxQuantity);
+        },
+        videoThumbUrl()
+        {
+            const hasProps = this.currentVariation.variationProperties?.find(prop => prop.id === 4);
+            // Return the properties array filtered by id 192, if it exists
+            const videoUrl = hasProps ? hasProps.properties.filter(prop => prop.id === 192) : [];
+
+            return videoUrl.length > 0;
         }
     },
 
@@ -245,6 +257,12 @@ export default {
 
         goTo(index)
         {
+            if(index < 0) 
+            {
+                $('#videoModal').modal('toggle');
+                return;
+            }
+
             const $owl = $(this.$refs.single);
 
             $owl.trigger("to.owl.carousel", [
