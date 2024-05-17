@@ -2,16 +2,17 @@
     <div itemscope itemtype="http://schema.org/Thing" class="bkr-cc">
         <div class="bkr-cc single-carousel owl-carousel owl-theme owl-single-item mt-0" id="imageGallery" ref="single">
             <div v-for="image in singleImages" class="prop-1-1 slide-owl-wrap">
-                <a :href="image.url" :data-fancybox="'single-item-image' + _uid">
-                    <img class="owl-lazy" :data-src="image.url" :alt="getAltText(image)" :title="getImageName(image) ">
+                <a :href="image.url" :data-fancybox="'single-item-image' + _uid" :class="{'largeVideoThumb': image.position < 0}">
+                    <img class="owl-lazy" v-if="image.position >= 0" :data-src="image.url" :alt="getAltText(image)" :title="getImageName(image) " />
+                    <img class="owl-lazy" v-else :data-src="image.thumb" alt="Video abspielen" />
                 </a>
             </div>
         </div>
         <div v-if="showThumbs" id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item" ref="thumbs">
             <div class="prop-1-1" v-for="(imagePreview, idx) in carouselImages">
-                <div class="image-container" @click="goTo(imagePreview.index)">
+                <div class="image-container" @click="goTo(idx)">
                     <lazy-img :picture-class="imagePreview.class"
-                        v-bind:class="{ 'active': currentItem === imagePreview.index, 'videoButton': imagePreview.index < 0 }" :image-url="imagePreview.url"
+                        v-bind:class="{ 'active': currentItem === idx, 'videoButton': imagePreview.position < 0 }" :image-url="imagePreview.url"
                         :alt="getAltText(imagePreview)" :title="getImageName(imagePreview)">
                     </lazy-img>
                 </div>
@@ -31,6 +32,11 @@ export default {
         {
             type: Number,
             default: 10
+        },
+        videoCarouselPosition:
+        {
+            type: Number,
+            default: 1
         },
         imageUrlAccessor:
         {
@@ -80,6 +86,22 @@ export default {
             return this.$store.getters[`${this.itemId}/currentItemVariation`]
         },
 
+        youtubeVideoIds() 
+        {
+            let videoIdString = "";
+            if (isNullOrUndefined(this.currentVariation.variationProperties))
+                return [];
+
+            for (const property of this.currentVariation.variationProperties) {
+                for (const prop of property.properties) {
+                    if (prop.id === 192)
+                        videoIdString = prop.values.value.trim();
+                }
+            }
+
+            return videoIdString.split(",").map(item => item.trim()).filter(item => item !== "");
+        },
+
         carouselImages()
         {
             const carouselImages =  this.$options.filters.itemImages(
@@ -87,37 +109,56 @@ export default {
                     "urlPreview"
                 ).slice(0, this.maxQuantity);
 
-            if (this.videoThumbUrl) {
-                const videoBtn = {
-                    url: 'https://cdn.bio-kinder.de/frontend/images/static/playbtn.svg',
-                    class: 'owl-thumb border-appearance videoButton',
-                    alternate: 'Video abspielen',
-                    position: -1,
-                    name: ''
-                };
-                carouselImages.unshift(videoBtn);
-            }
 
-            // Modify thumb image objects and add index + class
-            for(let i = 0; i < carouselImages.length; i++)
-            {
-                let index = i;
-                if(this.videoThumbUrl)
-                    index--;
-
-                carouselImages[i].index = index;
-                carouselImages[i].class = 'owl-thumb border-appearance';
+            const carouselVideos = [];
+            if (this.videoThumbUrl && this.youtubeVideoIds.length > 0) {
+                let i = -1;
+                for (let id of this.youtubeVideoIds)
+                {
+                    const videoBtn = {
+                        url: 'https://img.youtube.com/vi/'+ id +'/mqdefault.jpg',
+                        class: 'owl-thumb border-appearance videoButton',
+                        alternate: 'Video abspielen',
+                        position: i,
+                        name: ''
+                    };
+                    carouselVideos.push(videoBtn);
+                    i--;
+                }
             }
+            
+            // Insert on the n-th position
+            carouselImages.splice(this.videoCarouselPosition, 0, ...carouselVideos);
 
             return carouselImages;
         },
 
         singleImages()
         {
-            return this.$options.filters.itemImages(
+            let images = this.$options.filters.itemImages(
                     this.currentVariation.images,
                     this.imageUrlAccessor
             ).slice(0, this.maxQuantity);
+
+            let videos = [];
+            if (this.videoThumbUrl && this.youtubeVideoIds.length > 0) {
+                let i = -1;
+                for (let id of this.youtubeVideoIds) {
+                    const videoBtn = {
+                        url: 'https://www.youtube.com/watch?v='+ id +'?autoplay=0',
+                        thumb: 'https://img.youtube.com/vi/' + id +'/maxresdefault.jpg',
+                        alternate: 'Video abspielen',
+                        position: i,
+                        name: ''
+                    };
+                    videos.push(videoBtn);
+                    i--;
+                }
+            }
+            // Insert after 1st element
+            images.splice(this.videoCarouselPosition, 0, ...videos);
+
+            return images;
         },
         videoThumbUrl()
         {
@@ -188,6 +229,7 @@ export default {
                 dots             : this.showDots,
                 items            : 1,
                 lazyLoad         : true,
+                video            : true,
                 rewind           : true,
                 margin           : 10,
                 mouseDrag        : imageCount > 1,
@@ -235,10 +277,10 @@ export default {
             $(this.$refs.thumbs).owlCarousel({
                 autoHeight       : true,
                 dots             : false,
-                items            : 5,
+                items            : 6,
                 lazyLoad         : true,
                 loop             : false,
-                margin           : 10,
+                margin           : 5,
                 mouseDrag        : false,
                 center           : false,
                 nav              : true,
