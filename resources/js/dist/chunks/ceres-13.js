@@ -347,7 +347,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
                 return property.id === 49;
               });
 
-              if (property49 && property49.values.value != "") {
+              if (property49 && property49.values.value != "" && property49.values.value != null) {
                 var _ret = function () {
                   var valueArray = property49.values.value.split(',');
                   var resultObject = {};

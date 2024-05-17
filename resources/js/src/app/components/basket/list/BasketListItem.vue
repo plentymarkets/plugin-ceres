@@ -292,7 +292,7 @@ export default {
                 for (const variationProperty of this.basketItem.variation.data.variationProperties) {
                     if (variationProperty.properties) {
                         const property49 = variationProperty.properties.find(property => property.id === 49);
-                        if (property49) {
+                        if (property49 && property49.values.value != "" && property49.values.value !== null) {
                             const valueArray = property49.values.value.split(',');
                             const resultObject = {};
                             valueArray.forEach(element => {
