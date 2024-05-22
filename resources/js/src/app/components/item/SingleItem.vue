@@ -23,7 +23,6 @@
                   </feedback-average>
 
                   <span class="tag tagFavorit" v-if="hasPropertySelection(166, 397)">Bestseller</span>
-                  <span class="tag tagVegan" v-if="hasPropertySelection(166, 393)">Vegan</span>
                   <template v-for="tag in currentVariation.tags" v-if="[130, 131, 132, 133].includes(tag.id)">
                     <span target="#sizeTable" :class="'scrollTo tag tagSize' + (parseInt(tag.id) - 129)"
                       v-html="tag.names.name"></span>
@@ -61,7 +60,6 @@
                     </feedback-average>
 
                     <span class="tag tagFavorit" v-if="hasPropertySelection(166, 397)">Bestseller</span>
-                    <span class="tag tagVegan" v-if="hasPropertySelection(166, 393)">Vegan</span>
                     <template v-for="tag in currentVariation.tags" v-if="[130, 131, 132, 133].includes(tag.id)">
                       <span target="#sizeTable" :class="'scrollTo tag tagSize' + (parseInt(tag.id) - 129)"
                         v-html="tag.names.name"></span>
@@ -378,7 +376,6 @@
                             currentVariation.variation.packingUnits }}</td>
                           <td v-else>1</td>
                         </tr>
-
                         <!-- loop -->
                         <template
                           v-if="$store.getters.currentItemVariation.variationProperties && $store.getters.currentItemVariation.variationProperties.filter(function (prop) { return (prop.id == 4) })[0]">
@@ -389,6 +386,12 @@
                             <td v-html="vProperty.values.value" v></td>
                           </tr>
                         </template>
+                        
+                        <tr v-if="hasPropertySelection(166, 393) ">
+                          <th>Vegan</th>
+                          <td>Ja</td>
+                        </tr>
+
                       </tbody>
                     </table>
 

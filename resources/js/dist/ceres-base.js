@@ -1936,6 +1936,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 
@@ -37675,14 +37678,6 @@ var render = function() {
                                     )
                                   : _vm._e(),
                                 _vm._v(" "),
-                                _vm.hasPropertySelection(166, 393)
-                                  ? _c(
-                                      "span",
-                                      { staticClass: "tag tagVegan" },
-                                      [_vm._v("Vegan")]
-                                    )
-                                  : _vm._e(),
-                                _vm._v(" "),
                                 _vm._l(_vm.currentVariation.tags, function(
                                   tag
                                 ) {
@@ -37799,14 +37794,6 @@ var render = function() {
                                           "span",
                                           { staticClass: "tag tagFavorit" },
                                           [_vm._v("Bestseller")]
-                                        )
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    _vm.hasPropertySelection(166, 393)
-                                      ? _c(
-                                          "span",
-                                          { staticClass: "tag tagVegan" },
-                                          [_vm._v("Vegan")]
                                         )
                                       : _vm._e(),
                                     _vm._v(" "),
@@ -39045,6 +39032,14 @@ var render = function() {
                                                   : _vm._e()
                                               }
                                             )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        _vm.hasPropertySelection(166, 393)
+                                          ? _c("tr", [
+                                              _c("th", [_vm._v("Vegan")]),
+                                              _vm._v(" "),
+                                              _c("td", [_vm._v("Ja")])
+                                            ])
                                           : _vm._e()
                                       ],
                                       2

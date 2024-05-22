@@ -26,6 +26,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "biokinder-availability",
@@ -149,37 +168,45 @@ __webpack_require__.r(__webpack_exports__);
             return this.txtDefaultDelivery;
         }
       } // availability = 1
+      // if (this.avd.isSped) {
+      //     // today is friday before 10 and no holiday, ships today!
+      //     if(currentWeekDay == 5 && !isHoliday(dateTodayNow, "HE") && dateTodayNow.getHours() < 10)
+      //          return this.txtShipsToday;
+      //    
+      //     
+      //     if (isHoliday(dateTodayNow, "HE"))
+      //         return this.variation.availability.names.name;
+      //     if(dateTodayNow.getHours() < 16)
+      //         return this.txtShipsToday; 
+      //     var nextFriday = new Date(this.avd.time.now * 1000);
+      //     var add = 0;
+      //     if (dateTodayNow.getDay() == 5)
+      //         var add = 7;
+      //      nextFriday.setDate(dateTodayNow.getDate() + ((5 + 7 - dateTodayNow.getDay()) % 7) + add);
+      //     // today is friday after 10, or not friday or friday + holiday 
+      //     // next friday is (also) a holiday 
+      //     // lost -> show default value
+      //     if (isHoliday(nextFriday, "HE"))
+      //         return this.variation.availability.names.name;
+      //     // we now know, next friday is not a holiday
+      //     // we also know, it's thursday
+      //     // so we will ship tomorrow
+      //     if(currentWeekDay == 4)
+      //         return this.txtFrightShipsTomorow;
+      //     // today is not friday or its friday and too late 
+      //     // it is also not thursday
+      //     // next friday, shipping is possible. so output that.
+      //     return this.txtFrightNextFriday;
+      // }
+      // product is available
+      // product is not freight
+      // check for holiday on monday
       // check for holidays
 
 
       var dateTodayNow = new Date(1000 * this.avd.time.now);
       var dateTomorrow = new Date(1000 * this.avd.time.now + 86400000);
       var currentWeekDay = new Date(1000 * this.avd.time.now).getDay();
-
-      if (this.avd.isSped) {
-        // today is friday before 10 and no holiday, ships today!
-        if (currentWeekDay == 5 && !Object(feiertagejs__WEBPACK_IMPORTED_MODULE_3__["isHoliday"])(dateTodayNow, "HE") && dateTodayNow.getHours() < 10) return this.txtShipsToday;
-        var nextFriday = new Date(this.avd.time.now * 1000);
-        var add = 0;
-        if (dateTodayNow.getDay() == 5) var add = 7;
-        nextFriday.setDate(dateTodayNow.getDate() + (5 + 7 - dateTodayNow.getDay()) % 7 + add); // today is friday after 10, or not friday or friday + holiday 
-        // next friday is (also) a holiday 
-        // lost -> show default value
-
-        if (Object(feiertagejs__WEBPACK_IMPORTED_MODULE_3__["isHoliday"])(nextFriday, "HE")) return this.variation.availability.names.name; // we now know, next friday is not a holiday
-        // we also know, it's thursday
-        // so we will ship tomorrow
-
-        if (currentWeekDay == 4) return this.txtFrightShipsTomorow; // today is not friday or its friday and too late 
-        // it is also not thursday
-        // next friday, shipping is possible. so output that.
-
-        return this.txtFrightNextFriday;
-      } // product is available
-      // product is not freight
-      // check for holiday on monday
-
-
       var daysUntilMonday = 8 - currentWeekDay % 7; // 8 - 5 % 7 = 3 --> friday + 3 days =) monday
 
       var timestampMonday = 1000 * this.avd.time.now + 86400000 * daysUntilMonday;
@@ -197,14 +224,23 @@ __webpack_require__.r(__webpack_exports__);
       return this.variation.availability.names.name;
     },
     avDisplayHoliday: function avDisplayHoliday() {
+      // Not available today, show default message
       if (this.txtShipsToday != this.availabilityDisplay && this.txtShipsTomorrow != this.availabilityDisplay && this.txtShipsMondays != this.availabilityDisplay) {
         return this.availabilityDisplay;
+      } // let dateTodayNow = new Date(1000 * this.avd.time.now);
+      // const currentDayOfYear = Math.floor((dateTodayNow - new Date(dateTodayNow.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+      // 
+      // Easter
+      // if (dateTodayNow.getFullYear() == 2024 && currentDayOfYear < 87)
+      // return "<span>" + this.availabilityDisplay + "</span>" + this.txtEasterHint;
+      // INFO Button for Freight-Goods to explain "Ships today" via Modal
+
+
+      if (this.avd.isSped) {
+        var infoHint = '<svg data-toggle="modal" data-target="#freightInfo" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>';
+        return "<span>" + this.availabilityDisplay + "</span>" + infoHint;
       }
 
-      var dateTodayNow = new Date(1000 * this.avd.time.now);
-      var currentDayOfYear = Math.floor((dateTodayNow - new Date(dateTodayNow.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24)); // Easter
-
-      if (dateTodayNow.getFullYear() == 2024 && currentDayOfYear < 87) return "<span>" + this.availabilityDisplay + "</span>" + this.txtEasterHint;
       return this.availabilityDisplay;
     }
   },
@@ -242,21 +278,75 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { class: { row: !_vm.short } }, [
-    !_vm.short
-      ? _c("div", { staticClass: "col-4" }, [
-          _vm._v(
-            _vm._s(_vm.$translate("biokinderDesign::Template.itemAvailability"))
-          )
-        ])
-      : _vm._e(),
+    _c(
+      "div",
+      {
+        class: {
+          "col-12 d-flex align-items-center": !_vm.short,
+          liveShippingInfo: _vm.short
+        }
+      },
+      [
+        _c("span", {
+          staticClass: "availabilityText bkIcon sofortLieferbar",
+          domProps: { innerHTML: _vm._s(_vm.avDisplayHoliday) }
+        })
+      ]
+    ),
     _vm._v(" "),
-    _c("div", {
-      class: { "col-8": !_vm.short, liveShippingInfo: _vm.short },
-      domProps: { innerHTML: _vm._s(_vm.avDisplayHoliday) }
-    })
+    _vm._m(0)
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "freightInfo",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "freightInfoToggle",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-body d-flex flex-column" }, [
+                _c("h3", { staticClass: "mb-2" }, [
+                  _vm._v("Lieferung per Spedition")
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    "Das Produkt ist auf Lager und wird umgehend für den Versand vorbereitet. \n                        Die Spedition wird sich in den nächsten Tagen mit Ihnen in Verbindung setzen,\n                        um einen Liefertermin zu vereinbaren."
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-bkm btn-sm ml-auto mt-2",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Schließen")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 

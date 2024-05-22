@@ -1,7 +1,26 @@
 <template>
     <div :class="{'row': !short}">
-        <div class="col-4" v-if="!short">{{ $translate("biokinderDesign::Template.itemAvailability") }}</div>
-        <div :class="{ 'col-8': !short, 'liveShippingInfo': short }" v-html="avDisplayHoliday"></div>
+        <div
+            :class="{ 'col-12 d-flex align-items-center': !short, 'liveShippingInfo': short }">
+            <span class="availabilityText bkIcon sofortLieferbar" v-html="avDisplayHoliday"></span>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="freightInfo" tabindex="-1" role="dialog" aria-labelledby="freightInfoToggle"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body d-flex flex-column">
+                        <h3 class="mb-2">Lieferung per Spedition</h3>
+                        <p>Das Produkt ist auf Lager und wird umgehend für den Versand vorbereitet. 
+                            Die Spedition wird sich in den nächsten Tagen mit Ihnen in Verbindung setzen,
+                            um einen Liefertermin zu vereinbaren.</p>
+                        <button type="button" class="btn btn-bkm btn-sm ml-auto mt-2"
+                            data-dismiss="modal">Schließen</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -129,45 +148,54 @@ export default {
 
             // availability = 1
 
+
+            // if (this.avd.isSped) {
+                
+            //     // today is friday before 10 and no holiday, ships today!
+            //     if(currentWeekDay == 5 && !isHoliday(dateTodayNow, "HE") && dateTodayNow.getHours() < 10)
+            //          return this.txtShipsToday;
+            //    
+
+            //     
+            //     if (isHoliday(dateTodayNow, "HE"))
+            //         return this.variation.availability.names.name;
+
+            //     if(dateTodayNow.getHours() < 16)
+            //         return this.txtShipsToday; 
+                
+            //     var nextFriday = new Date(this.avd.time.now * 1000);
+            //     var add = 0;
+            //     if (dateTodayNow.getDay() == 5)
+            //         var add = 7;
+                
+            //      nextFriday.setDate(dateTodayNow.getDate() + ((5 + 7 - dateTodayNow.getDay()) % 7) + add);
+        
+            //     // today is friday after 10, or not friday or friday + holiday 
+            //     // next friday is (also) a holiday 
+            //     // lost -> show default value
+            //     if (isHoliday(nextFriday, "HE"))
+            //         return this.variation.availability.names.name;
+                
+            //     // we now know, next friday is not a holiday
+            //     // we also know, it's thursday
+            //     // so we will ship tomorrow
+            //     if(currentWeekDay == 4)
+            //         return this.txtFrightShipsTomorow;
+
+            //     // today is not friday or its friday and too late 
+            //     // it is also not thursday
+            //     // next friday, shipping is possible. so output that.
+            //     return this.txtFrightNextFriday;
+            // }
+
+            // product is available
+            // product is not freight
+            // check for holiday on monday
             // check for holidays
             let dateTodayNow = new Date(1000 * this.avd.time.now);
             let dateTomorrow = new Date(1000 * this.avd.time.now + 86400000);
             let currentWeekDay = new Date(1000 * this.avd.time.now).getDay();
 
-            if (this.avd.isSped) {
-                
-                // today is friday before 10 and no holiday, ships today!
-                if(currentWeekDay == 5 && !isHoliday(dateTodayNow, "HE") && dateTodayNow.getHours() < 10)
-                    return this.txtShipsToday;
-
-                var nextFriday = new Date(this.avd.time.now * 1000);
-                var add = 0;
-                if (dateTodayNow.getDay() == 5)
-                    var add = 7;
-                
-                nextFriday.setDate(dateTodayNow.getDate() + ((5 + 7 - dateTodayNow.getDay()) % 7) + add);
-        
-                // today is friday after 10, or not friday or friday + holiday 
-                // next friday is (also) a holiday 
-                // lost -> show default value
-                if (isHoliday(nextFriday, "HE"))
-                    return this.variation.availability.names.name;
-                
-                // we now know, next friday is not a holiday
-                // we also know, it's thursday
-                // so we will ship tomorrow
-                if(currentWeekDay == 4)
-                    return this.txtFrightShipsTomorow;
-
-                // today is not friday or its friday and too late 
-                // it is also not thursday
-                // next friday, shipping is possible. so output that.
-                return this.txtFrightNextFriday;
-            }
-
-            // product is available
-            // product is not freight
-            // check for holiday on monday
             var daysUntilMonday = 8 - currentWeekDay % 7; // 8 - 5 % 7 = 3 --> friday + 3 days =) monday
             var timestampMonday = 1000 * this.avd.time.now + 86400000 * daysUntilMonday;
             let dateMonday = new Date(timestampMonday);
@@ -189,17 +217,24 @@ export default {
         },
         avDisplayHoliday()
         {
+            // Not available today, show default message
             if (this.txtShipsToday != this.availabilityDisplay && 
                 this.txtShipsTomorrow != this.availabilityDisplay && 
                 this.txtShipsMondays != this.availabilityDisplay) {
                 return this.availabilityDisplay;
             }
-            let dateTodayNow = new Date(1000 * this.avd.time.now);
-            const currentDayOfYear = Math.floor((dateTodayNow - new Date(dateTodayNow.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
-            
+            // let dateTodayNow = new Date(1000 * this.avd.time.now);
+            // const currentDayOfYear = Math.floor((dateTodayNow - new Date(dateTodayNow.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+            // 
             // Easter
-            if (dateTodayNow.getFullYear() == 2024 && currentDayOfYear < 87)
-                return "<span>" + this.availabilityDisplay + "</span>" + this.txtEasterHint;
+            // if (dateTodayNow.getFullYear() == 2024 && currentDayOfYear < 87)
+                // return "<span>" + this.availabilityDisplay + "</span>" + this.txtEasterHint;
+
+            // INFO Button for Freight-Goods to explain "Ships today" via Modal
+            if (this.avd.isSped) {
+                let infoHint = '<svg data-toggle="modal" data-target="#freightInfo" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>';
+                return "<span>" + this.availabilityDisplay + "</span>" + infoHint;
+            }
 
             return this.availabilityDisplay;
         }
