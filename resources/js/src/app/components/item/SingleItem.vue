@@ -353,45 +353,32 @@
                   <div class="descriptionContent">
                     <table class="table table-borderless table-sm">
                       <tbody>
-
                         <tr>
                           <th>Artikelnummer</th>
                           <td>{{ currentVariation.item.id }}-{{ currentVariation.variation.id }}</td>
                         </tr>
-
                         <tr
                           v-if="currentVariation.filter.hasManufacturer && currentVariation.item.manufacturer.externalName !== ''">
                           <th>{{ $translate("Ceres::Template.singleItemManufacturer") }}</th>
                           <td>{{ currentVariation.item.manufacturer.externalName }}</td>
                         </tr>
-
                         <tr v-if="currentVariation.variation.weightG > 0">
                           <th>Gewicht</th>
                           <td>ca. {{ (currentVariation.variation.weightG / 1000) | numberFormat(2, ',') }} kg</td>
                         </tr>
-
                         <tr>
                           <th>Pakete</th>
                           <td v-if="currentVariation.variation.packingUnits > 0">{{
                             currentVariation.variation.packingUnits }}</td>
                           <td v-else>1</td>
                         </tr>
-                        <!-- loop -->
-                        <template
-                          v-if="$store.getters.currentItemVariation.variationProperties && $store.getters.currentItemVariation.variationProperties.filter(function (prop) { return (prop.id == 4) })[0]">
-                          <tr
-                            v-for="vProperty in $store.getters.currentItemVariation.variationProperties.filter(function (prop) { return (prop.id == 4) })[0].properties"
-                            v-if="vProperty && vProperty.id != 166 && vProperty.id != 246 && vProperty.id != 191 && vProperty.id != 197 && vProperty.id != 192 && vProperty.id != 235 && vProperty.values.value != 0 && vProperty.values.value != ''">
-                            <th v-html="vProperty.names.name"></th>
-                            <td v-html="vProperty.values.value" v></td>
+                        <template v-if="techProperties.length > 0">
+                          <tr v-for="vProperty in techProperties">
+                            <th>{{ vProperty.name }}</th>
+                            <td>{{ vProperty.value }}</td>
                           </tr>
                         </template>
-                        
-                        <tr v-if="hasPropertySelection(166, 393) ">
-                          <th>Vegan</th>
-                          <td>Ja</td>
-                        </tr>
-
+                        <tr v-if="hasPropertySelection(166, 393)"><th>Vegan</th><td>Ja</td></tr>
                       </tbody>
                     </table>
 
@@ -687,9 +674,45 @@ export default {
             ? parseFloat(this.$attrs.atshippingcost)
             : this.currentVariation.variation.defaultShippingCosts;          
         },
-         ...mapState({
+        techProperties()
+        {
+          let returnProperties = [];
+          let hiddenProperties = [166, 246, 191, 197, 192, 235];
+
+          if (!this.currentVariation.variationProperties || !this.currentVariation.variationProperties.some(item => item.id === 4))
+          {
+            return returnProperties;
+          }
+
+          const property = this.currentVariation.variationProperties.find(item => item.id === 4);
+
+          if (!property || !property.properties)
+          {
+            return returnProperties;
+          }
+
+          for (let property of property.properties)
+          {
+            if(hiddenProperties.includes(property.id))
+            {
+              continue;
+            }
+            
+            if (property.values.value === null || property.values.value.trim() == "")
+            {
+              continue;
+            }
+
+            returnProperties.push({
+              name: property.names.name,
+              value: property.values.value.trim()
+            });
+          }
+          return returnProperties;
+        },
+        ...mapState({
           shippingCountryId: state => state.basket.data.shippingCountryId
-        })
+        }),
     },
 
     created()
