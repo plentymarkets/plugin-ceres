@@ -236,7 +236,7 @@ __webpack_require__.r(__webpack_exports__);
       // INFO Button for Freight-Goods to explain "Ships today" via Modal
 
 
-      if (this.avd.isSped) {
+      if (this.avd.isSped && !this.short) {
         var infoHint = '<svg data-toggle="modal" data-target="#freightInfo" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>';
         return "<span>" + this.availabilityDisplay + "</span>" + infoHint;
       }
@@ -288,13 +288,29 @@ var render = function() {
       },
       [
         _c("span", {
-          staticClass: "availabilityText bkIcon sofortLieferbar",
+          staticClass: "availabilityText sofortLieferbar",
+          class: { bkIcon: !_vm.short },
           domProps: { innerHTML: _vm._s(_vm.avDisplayHoliday) }
         })
       ]
     ),
     _vm._v(" "),
-    _vm._m(0)
+    !_vm.short
+      ? _c(
+          "div",
+          {
+            staticClass: "modal fade",
+            attrs: {
+              id: "freightInfo",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "freightInfoToggle",
+              "aria-hidden": "true"
+            }
+          },
+          [_vm._m(0)]
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -304,45 +320,30 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "freightInfo",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "freightInfoToggle",
-          "aria-hidden": "true"
-        }
-      },
+      { staticClass: "modal-dialog", attrs: { role: "document" } },
       [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-body d-flex flex-column" }, [
-                _c("h3", { staticClass: "mb-2" }, [
-                  _vm._v("Lieferung per Spedition")
-                ]),
-                _vm._v(" "),
-                _c("p", [
-                  _vm._v(
-                    "Das Produkt ist auf Lager und wird umgehend für den Versand vorbereitet. \n                        Die Spedition wird sich in den nächsten Tagen mit Ihnen in Verbindung setzen,\n                        um einen Liefertermin zu vereinbaren."
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-bkm btn-sm ml-auto mt-2",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Schließen")]
-                )
-              ])
-            ])
-          ]
-        )
+        _c("div", { staticClass: "modal-content" }, [
+          _c("div", { staticClass: "modal-body d-flex flex-column" }, [
+            _c("h3", { staticClass: "mb-2" }, [
+              _vm._v("Lieferung per Spedition")
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "Das Produkt ist auf Lager und wird umgehend für den Versand vorbereitet. \n                        Die Spedition wird sich in den nächsten Tagen mit Ihnen in Verbindung setzen,\n                        um einen Liefertermin zu vereinbaren."
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-bkm btn-sm ml-auto mt-2",
+                attrs: { type: "button", "data-dismiss": "modal" }
+              },
+              [_vm._v("Schließen")]
+            )
+          ])
+        ])
       ]
     )
   }

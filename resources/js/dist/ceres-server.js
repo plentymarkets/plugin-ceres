@@ -7400,7 +7400,7 @@ __webpack_require__.r(__webpack_exports__);
       // INFO Button for Freight-Goods to explain "Ships today" via Modal
 
 
-      if (this.avd.isSped) {
+      if (this.avd.isSped && !this.short) {
         var infoHint = '<svg data-toggle="modal" data-target="#freightInfo" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>';
         return "<span>" + this.availabilityDisplay + "</span>" + infoHint;
       }
@@ -50496,9 +50496,16 @@ var render = function() {
           "col-12 d-flex align-items-center": !_vm.short,
           liveShippingInfo: _vm.short
         }) +
-        '><span class="availabilityText bkIcon sofortLieferbar">' +
+        "><span" +
+        _vm._ssrClass("availabilityText sofortLieferbar", {
+          bkIcon: !_vm.short
+        }) +
+        ">" +
         _vm._s(_vm.avDisplayHoliday) +
-        '</span></div> <div id="freightInfo" tabindex="-1" role="dialog" aria-labelledby="freightInfoToggle" aria-hidden="true" class="modal fade"><div role="document" class="modal-dialog"><div class="modal-content"><div class="modal-body d-flex flex-column"><h3 class="mb-2">Lieferung per Spedition</h3> <p>Das Produkt ist auf Lager und wird umgehend für den Versand vorbereitet. \n                        Die Spedition wird sich in den nächsten Tagen mit Ihnen in Verbindung setzen,\n                        um einen Liefertermin zu vereinbaren.</p> <button type="button" data-dismiss="modal" class="btn btn-bkm btn-sm ml-auto mt-2">Schließen</button></div></div></div></div>'
+        "</span></div> " +
+        (!_vm.short
+          ? '<div id="freightInfo" tabindex="-1" role="dialog" aria-labelledby="freightInfoToggle" aria-hidden="true" class="modal fade"><div role="document" class="modal-dialog"><div class="modal-content"><div class="modal-body d-flex flex-column"><h3 class="mb-2">Lieferung per Spedition</h3> <p>Das Produkt ist auf Lager und wird umgehend für den Versand vorbereitet. \n                        Die Spedition wird sich in den nächsten Tagen mit Ihnen in Verbindung setzen,\n                        um einen Liefertermin zu vereinbaren.</p> <button type="button" data-dismiss="modal" class="btn btn-bkm btn-sm ml-auto mt-2">Schließen</button></div></div></div></div>'
+          : "<!---->")
     )
   ])
 }

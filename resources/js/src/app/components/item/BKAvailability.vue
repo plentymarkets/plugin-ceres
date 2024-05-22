@@ -2,11 +2,11 @@
     <div :class="{'row': !short}">
         <div
             :class="{ 'col-12 d-flex align-items-center': !short, 'liveShippingInfo': short }">
-            <span class="availabilityText bkIcon sofortLieferbar" v-html="avDisplayHoliday"></span>
+            <span class="availabilityText sofortLieferbar" :class="{'bkIcon': !short}" v-html="avDisplayHoliday"></span>
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="freightInfo" tabindex="-1" role="dialog" aria-labelledby="freightInfoToggle"
+        <div v-if="!short" class="modal fade" id="freightInfo" tabindex="-1" role="dialog" aria-labelledby="freightInfoToggle"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -231,7 +231,7 @@ export default {
                 // return "<span>" + this.availabilityDisplay + "</span>" + this.txtEasterHint;
 
             // INFO Button for Freight-Goods to explain "Ships today" via Modal
-            if (this.avd.isSped) {
+            if (this.avd.isSped && !this.short) {
                 let infoHint = '<svg data-toggle="modal" data-target="#freightInfo" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>';
                 return "<span>" + this.availabilityDisplay + "</span>" + infoHint;
             }
