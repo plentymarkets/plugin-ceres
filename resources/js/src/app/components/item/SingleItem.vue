@@ -698,7 +698,7 @@ export default {
               continue;
             }
             
-            if (property.values.value === null || property.values.value.trim() == "")
+            if (!property.values.value || property.values.value === null || property.values.value.trim() == "")
             {
               continue;
             }

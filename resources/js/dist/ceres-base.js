@@ -2071,7 +2071,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             continue;
           }
 
-          if (_property.values.value === null || _property.values.value.trim() == "") {
+          if (!_property.values.value || _property.values.value === null || _property.values.value.trim() == "") {
             continue;
           }
 
