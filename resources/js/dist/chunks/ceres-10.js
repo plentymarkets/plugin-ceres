@@ -34,8 +34,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -629,41 +627,37 @@ var render = function() {
         _c(
           "transition-group",
           { attrs: { name: "list-transition", tag: "div" } },
-          [
-            _vm._l(_vm.basketItems, function(basketItem) {
-              return [
-                _c("basket-list-item", {
-                  key: basketItem.id,
-                  attrs: {
-                    "basket-item": basketItem,
-                    "is-preview": _vm.isPreview,
-                    "basket-details-data": _vm.basketDetailsData
+          _vm._l(_vm.basketItems, function(basketItem) {
+            return _c("basket-list-item", {
+              key: basketItem.id,
+              attrs: {
+                "basket-item": basketItem,
+                "is-preview": _vm.isPreview,
+                "basket-details-data": _vm.basketDetailsData
+              },
+              scopedSlots: _vm._u(
+                [
+                  {
+                    key: "before-basket-item",
+                    fn: function() {
+                      return [_vm._t("before-basket-item")]
+                    },
+                    proxy: true
                   },
-                  scopedSlots: _vm._u(
-                    [
-                      {
-                        key: "before-basket-item",
-                        fn: function() {
-                          return [_vm._t("before-basket-item")]
-                        },
-                        proxy: true
-                      },
-                      {
-                        key: "after-basket-item",
-                        fn: function() {
-                          return [_vm._t("after-basket-item")]
-                        },
-                        proxy: true
-                      }
-                    ],
-                    null,
-                    true
-                  )
-                })
-              ]
+                  {
+                    key: "after-basket-item",
+                    fn: function() {
+                      return [_vm._t("after-basket-item")]
+                    },
+                    proxy: true
+                  }
+                ],
+                null,
+                true
+              )
             })
-          ],
-          2
+          }),
+          1
         )
       ],
       1
