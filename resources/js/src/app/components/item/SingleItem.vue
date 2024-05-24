@@ -113,7 +113,7 @@
                     </div>
                   </div>
 
-                  <sales-coupon :icon="false"></sales-coupon>
+                  <sales-coupon v-if="!reducedPrice" :icon="false"></sales-coupon>
 
                   <add-to-basket :variation-id="currentVariation.variation.id"
                     :is-salable="!!currentVariation.filter && currentVariation.filter.isSalable"
@@ -588,6 +588,20 @@ export default {
         itemConfig()
         {
             return App.config.item.itemData;
+        },
+
+        reducedPrice()
+        {
+            if(!this.currentVariation.prices || !this.currentVariation.prices.default || !this.currentVariation.prices.rrp)
+              return false;
+
+            if (this.currentVariation.prices.rrp === null || this.currentVariation.prices.default === null)
+              return false;
+
+            if (this.currentVariation.prices.default.price.value >= this.currentVariation.prices.rrp.price.value)
+              return false;
+            
+            return (this.currentVariation.prices.default.price.value <  this.currentVariation.prices.rrp.price.value);
         },
 
         isRecommendedPriceActive()

@@ -4070,6 +4070,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     itemConfig: function itemConfig() {
       return App.config.item.itemData;
     },
+    reducedPrice: function reducedPrice() {
+      if (!this.currentVariation.prices || !this.currentVariation.prices.default || !this.currentVariation.prices.rrp) return false;
+      if (this.currentVariation.prices.rrp === null || this.currentVariation.prices.default === null) return false;
+      if (this.currentVariation.prices.default.price.value >= this.currentVariation.prices.rrp.price.value) return false;
+      return this.currentVariation.prices.default.price.value < this.currentVariation.prices.rrp.price.value;
+    },
     isRecommendedPriceActive: function isRecommendedPriceActive() {
       return App.config.item.itemData.includes("item.recommendedPrice") || App.config.item.itemData.includes("all");
     },
@@ -46200,7 +46206,9 @@ var render = function() {
                                 ]
                               ),
                               _vm._v(" "),
-                              _c("sales-coupon", { attrs: { icon: false } }),
+                              !_vm.reducedPrice
+                                ? _c("sales-coupon", { attrs: { icon: false } })
+                                : _vm._e(),
                               _vm._v(" "),
                               _c("add-to-basket", {
                                 attrs: {
