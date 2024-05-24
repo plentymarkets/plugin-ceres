@@ -83,8 +83,8 @@
                   <!-- /Variation -->
 
                   <!-- ORDER PROPERTIES -->
-                  <div class="row" v-if="currentVariation.filter.isSalable && variationGroupedProperties.length">
-                    <div class="col-12 mt-2">
+                  <div class="row mb-3" v-if="currentVariation.filter.isSalable && variationGroupedProperties.length">
+                    <div class="col-12">
                       <order-property-list></order-property-list>
                     </div>
                     <slot name="aufbauservice"></slot>
@@ -93,7 +93,7 @@
 
                   <slot name="before-price"></slot>
 
-                  <div class="singleartprice my-2" itemprop="offerDetails" itemscope=""
+                  <div class="singleartprice mb-3" itemprop="offerDetails" itemscope=""
                     itemtype="http://data-vocabulary.org/Offer">
                     <span data-toggle="collapse" aria-expanded="false" class="variationManufacturer"
                       data-target="#manufacturer">
@@ -112,6 +112,8 @@
                         name="before-add-to-basket" class="mt-2"></slot>
                     </div>
                   </div>
+
+                  <sales-coupon :icon="false"></sales-coupon>
 
                   <add-to-basket :variation-id="currentVariation.variation.id"
                     :is-salable="!!currentVariation.filter && currentVariation.filter.isSalable"

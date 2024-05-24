@@ -980,7 +980,11 @@ var render = function() {
             _vm.propertyGroup.group
               ? _c(
                   "div",
-                  { class: _vm.paddingClasses, style: _vm.paddingInlineStyles },
+                  {
+                    staticClass: "d-none",
+                    class: _vm.paddingClasses,
+                    style: _vm.paddingInlineStyles
+                  },
                   [
                     _c("div", { staticClass: "h4" }, [
                       _vm._v(

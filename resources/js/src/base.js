@@ -124,11 +124,11 @@ Vue.component("biokinder-shipping-icon", () => import("./app/components/item/BKS
 Vue.component("single-item-bundle", () => import("./app/components/item/SingleItemBundle.vue"));
 Vue.component("single-add-to-basket", () => import("./app/components/item/SingleAddToBasket.vue"));
 Vue.component("set-quantity-input", () => import("./app/components/item/SetQuantityInput.vue"));
+Vue.component("sales-coupon", () => import("./app/components/item/SalesCoupon.vue"));
 import SingleItem from "./app/components/item/SingleItem.vue";
 Vue.component("single-item", SingleItem);
 import SingleItemSetComponent from "./app/components/item/SingleItemSetComponent.vue";
 Vue.component("single-item-set-component", SingleItemSetComponent);
-
 
 import LazyHydrate from "vue-lazy-hydration";
 Vue.component("lazy-hydrate", LazyHydrate);
