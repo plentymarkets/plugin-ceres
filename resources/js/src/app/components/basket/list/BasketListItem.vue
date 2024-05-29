@@ -280,6 +280,16 @@ export default {
                         newAttribute.name = newAttribute.attribute.names.name;
                     }
                     
+                    // Override Attribute values if present
+                    if (newAttribute.value)
+                    {
+                        if (this.newAttributeValues !== null && "object" === typeof this.newAttributeValues && newAttribute.value.id in this.newAttributeValues
+                            && this.newAttributeValues[newAttribute.value.id].trim() != "" && newAttribute.value.names.name)
+                        {
+                            newAttribute.value.names.name = this.newAttributeValues[newAttribute.value.id];
+                        } 
+                    }
+                    
                     attributes.push(newAttribute);
                 }
             }
@@ -306,7 +316,25 @@ export default {
             }
             return null;
         },
-
+        newAttributeValues() {
+            if (this.basketItem.variation.data && this.basketItem.variation.data.variationProperties) {
+                for (const variationProperty of this.basketItem.variation.data.variationProperties) {
+                    if (variationProperty.properties) {
+                        const property38 = variationProperty.properties.find(property => property.id === 38);
+                        if (property38 && property38.values.value != "" && property38.values.value != null) {
+                            const valueArray = property38.values.value.split(',');
+                            const resultObject = {};
+                            valueArray.forEach(element => {
+                                const pair = element.split(':');
+                                resultObject[pair[0]] = pair[1];
+                            });
+                            return resultObject;
+                        }
+                    }
+                }
+            }
+            return null;
+        },
         ...mapState({
             isBasketLoading: state => state.basket.isBasketLoading,
             isCheckoutReadonly: state => state.checkout.readOnly,

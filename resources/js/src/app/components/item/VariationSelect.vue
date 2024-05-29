@@ -213,6 +213,18 @@ export default {
                         // Update the name of the attribute with the new value
                         newAttribute.name = newValue;
                     }
+
+                    // Override Attribute values if present
+                    let newValues = [];
+                    for (let value of newAttribute.values) {
+                        if (this.newAttributeValues !== null && "object" === typeof this.newAttributeValues && value.attributeValueId in this.newAttributeValues
+                            && this.newAttributeValues[value.attributeValueId].trim() != "") {
+                            value.name = this.newAttributeValues[value.attributeValueId];
+                        }
+                        newValues.push(value);
+                    }
+                    newAttribute.values = newValues;
+
                     attributes.push(newAttribute);
                 }
             }
@@ -240,6 +252,25 @@ export default {
                         const property49 = variationProperty.properties.find(property => property.id === 49);
                         if (property49 && property49.values.value != "" && property49.values.value != null) {
                             const valueArray = property49.values.value.split(',');
+                            const resultObject = {};
+                            valueArray.forEach(element => {
+                                const pair = element.split(':');
+                                resultObject[pair[0]] = pair[1];
+                            });
+                            return resultObject;
+                        }
+                    }
+                }
+            }
+            return null;
+        },
+        newAttributeValues() {
+            if (this.currentVariation && this.currentVariation.variationProperties) {
+                for (const variationProperty of this.currentVariation.variationProperties) {
+                    if (variationProperty.properties) {
+                        const property38 = variationProperty.properties.find(property => property.id === 38);
+                        if (property38 && property38.values.value != "" && property38.values.value != null) {
+                            const valueArray = property38.values.value.split(',');
                             const resultObject = {};
                             valueArray.forEach(element => {
                                 const pair = element.split(':');
