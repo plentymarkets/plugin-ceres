@@ -155,6 +155,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       event.preventDefault();
       event.stopPropagation();
       this.$set(this.expandedGroups, groupKey, value);
+    },
+    necessaryRecaptcha: function necessaryRecaptcha(obj) {
+      return obj.key === 'media' && obj.consents.length === 1 && obj.consents[0].key === 'reCaptcha' && obj.consents[0].necessary === true;
     }
   })
 });
@@ -181,362 +184,405 @@ var render = function() {
       "div",
       { staticClass: "privacy-settings-body overflow-auto" },
       _vm._l(_vm.consentGroups, function(consentGroup, index) {
-        return _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: !(
-                  consentGroup.media.length === 1 &&
-                  consentGroup.media.consents[0].key === "reCaptcha" &&
-                  consentGroup.media.consents[0].necessary === true
-                ),
-                expression:
-                  "!(consentGroup.media.length === 1 && consentGroup.media.consents[0].key === 'reCaptcha' && consentGroup.media.consents[0].necessary === true)"
-              }
-            ],
-            staticClass: "card consent-group",
-            class: {
-              cardClass: _vm.cardClass,
-              "mb-3": index < consentGroup.length - 1
-            },
-            style: _vm.cardStyle
-          },
-          [
-            _c(
+        return !_vm.necessaryRecaptcha(consentGroup)
+          ? _c(
               "div",
               {
-                staticClass: "card-body mb-0",
-                on: {
-                  click: function($event) {
-                    $event.stopPropagation()
-                    return _vm.toggleConsent(consentGroup.key + ".*")
-                  }
-                }
+                staticClass: "card consent-group",
+                class: {
+                  cardClass: _vm.cardClass,
+                  "mb-3": index < consentGroup.length - 1
+                },
+                style: _vm.cardStyle
               },
               [
-                _c("p", { staticClass: "card-title h4 d-flex" }, [
-                  _c(
-                    "span",
-                    { staticClass: "flex-fill" },
-                    [
-                      consentGroup.label.length > 0
-                        ? [
-                            _vm._v(
-                              "\n                            " +
-                                _vm._s(consentGroup.label) +
-                                "\n                        "
-                            )
-                          ]
-                        : [
-                            _vm._v(
-                              "\n                            " +
-                                _vm._s(
-                                  _vm.$translate(
-                                    "Ceres::Template.privacySettingsDefaultGroup"
-                                  )
-                                ) +
-                                "\n                        "
-                            )
-                          ],
-                      _vm._v(
-                        "\n                        (" +
-                          _vm._s(consentGroup.consents.length) +
-                          ")\n                    "
-                      )
-                    ],
-                    2
-                  ),
-                  _vm._v(" "),
-                  !consentGroup.necessary
-                    ? _c(
+                _c(
+                  "div",
+                  {
+                    staticClass: "card-body mb-0",
+                    on: {
+                      click: function($event) {
+                        $event.stopPropagation()
+                        return _vm.toggleConsent(consentGroup.key + ".*")
+                      }
+                    }
+                  },
+                  [
+                    _c("p", { staticClass: "card-title h4 d-flex" }, [
+                      _c(
                         "span",
-                        {
-                          staticClass:
-                            "custom-control custom-switch custom-control-appearance"
-                        },
+                        { staticClass: "flex-fill" },
                         [
-                          _c("input", {
-                            staticClass: "custom-control-input",
-                            attrs: { type: "checkbox" },
-                            domProps: {
-                              checked: _vm.isConsented(consentGroup.key + ".*")
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("label", { staticClass: "custom-control-label" })
-                        ]
-                      )
-                    : _c(
-                        "span",
-                        { staticClass: "badge badge-primary bg-appearance" },
-                        [
+                          consentGroup.label.length > 0
+                            ? [
+                                _vm._v(
+                                  "\n                            " +
+                                    _vm._s(consentGroup.label) +
+                                    "\n                        "
+                                )
+                              ]
+                            : [
+                                _vm._v(
+                                  "\n                            " +
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.privacySettingsDefaultGroup"
+                                      )
+                                    ) +
+                                    "\n                        "
+                                )
+                              ],
                           _vm._v(
-                            _vm._s(
-                              _vm.$translate(
-                                "Ceres::Template.privacySettingsNecessary"
-                              )
-                            )
+                            "\n                        (" +
+                              _vm._s(consentGroup.consents.length) +
+                              ")\n                    "
                           )
-                        ]
-                      )
-                ]),
-                _vm._v(" "),
-                consentGroup.description.length > 0
-                  ? _c("p", { staticClass: "card-text" }, [
-                      _vm._v(_vm._s(consentGroup.description))
-                    ])
-                  : _vm._e()
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body mt-0" }, [
-              _vm.expandedGroups[consentGroup.key]
-                ? _c(
-                    "div",
-                    _vm._l(consentGroup.consents, function(consent) {
-                      return _c(
-                        "div",
-                        {
-                          staticClass: "card consent bg-light mb-3",
-                          class: {
-                            "border-primary border-appearance active":
-                              _vm.isConsented(
-                                consentGroup.key + "." + consent.key
-                              ) ||
-                              consent.necessary ||
-                              consentGroup.necessary
-                          }
-                        },
-                        [
-                          _c(
-                            "div",
+                        ],
+                        2
+                      ),
+                      _vm._v(" "),
+                      !consentGroup.necessary
+                        ? _c(
+                            "span",
                             {
-                              staticClass: "card-body",
-                              on: {
-                                click: function($event) {
-                                  $event.stopPropagation()
-                                  return _vm.toggleConsent(
-                                    consentGroup.key + "." + consent.key
+                              staticClass:
+                                "custom-control custom-switch custom-control-appearance"
+                            },
+                            [
+                              _c("input", {
+                                staticClass: "custom-control-input",
+                                attrs: { type: "checkbox" },
+                                domProps: {
+                                  checked: _vm.isConsented(
+                                    consentGroup.key + ".*"
                                   )
                                 }
+                              }),
+                              _vm._v(" "),
+                              _c("label", {
+                                staticClass: "custom-control-label"
+                              })
+                            ]
+                          )
+                        : _c(
+                            "span",
+                            {
+                              staticClass: "badge badge-primary bg-appearance"
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.$translate(
+                                    "Ceres::Template.privacySettingsNecessary"
+                                  )
+                                )
+                              )
+                            ]
+                          )
+                    ]),
+                    _vm._v(" "),
+                    consentGroup.description.length > 0
+                      ? _c("p", { staticClass: "card-text" }, [
+                          _vm._v(_vm._s(consentGroup.description))
+                        ])
+                      : _vm._e()
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body mt-0" }, [
+                  _vm.expandedGroups[consentGroup.key]
+                    ? _c(
+                        "div",
+                        _vm._l(consentGroup.consents, function(consent) {
+                          return _c(
+                            "div",
+                            {
+                              staticClass: "card consent bg-light mb-3",
+                              class: {
+                                "border-primary border-appearance active":
+                                  _vm.isConsented(
+                                    consentGroup.key + "." + consent.key
+                                  ) ||
+                                  consent.necessary ||
+                                  consentGroup.necessary
                               }
                             },
                             [
                               _c(
-                                "p",
-                                { staticClass: "d-flex mb-0 font-weight-bold" },
-                                [
-                                  _c("span", { staticClass: "flex-fill" }, [
-                                    _vm._v(_vm._s(consent.label))
-                                  ]),
-                                  _vm._v(" "),
-                                  !consentGroup.necessary && !consent.necessary
-                                    ? _c(
-                                        "span",
-                                        {
-                                          staticClass:
-                                            "custom-control custom-switch custom-control-appearance"
-                                        },
-                                        [
-                                          _c("input", {
-                                            staticClass: "custom-control-input",
-                                            attrs: { type: "checkbox" },
-                                            domProps: {
-                                              checked: _vm.isConsented(
-                                                consentGroup.key +
-                                                  "." +
-                                                  consent.key
-                                              )
-                                            }
-                                          }),
-                                          _vm._v(" "),
-                                          _c("label", {
-                                            staticClass: "custom-control-label"
-                                          })
-                                        ]
-                                      )
-                                    : _vm._e()
-                                ]
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          consent.provider.length > 0 ||
-                          consent.description.length > 0 ||
-                          consent.policyUrl.length > 0 ||
-                          consent.lifespan.length > 0
-                            ? _c(
-                                "table",
+                                "div",
                                 {
-                                  staticClass:
-                                    "table table-responsive-md table-sm table-striped mb-0"
+                                  staticClass: "card-body",
+                                  on: {
+                                    click: function($event) {
+                                      $event.stopPropagation()
+                                      return _vm.toggleConsent(
+                                        consentGroup.key + "." + consent.key
+                                      )
+                                    }
+                                  }
                                 },
                                 [
-                                  _c("tbody", [
-                                    consent.provider.length > 0
-                                      ? _c("tr", [
-                                          _c("td", { staticClass: "pl-3" }, [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.$translate(
-                                                  "Ceres::Template.privacySettingsProvider"
-                                                )
-                                              )
-                                            )
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("td", { staticClass: "pr-3" }, [
-                                            _vm._v(_vm._s(consent.provider))
-                                          ])
-                                        ])
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    consent.description.length > 0
-                                      ? _c("tr", [
-                                          _c("td", { staticClass: "pl-3" }, [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.$translate(
-                                                  "Ceres::Template.privacySettingsDescription"
-                                                )
-                                              )
-                                            )
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("td", { staticClass: "pr-3" }, [
-                                            _vm._v(_vm._s(consent.description))
-                                          ])
-                                        ])
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    consent.policyUrl.length > 0
-                                      ? _c("tr", [
-                                          _c("td", { staticClass: "pl-3" }, [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.$translate(
-                                                  "Ceres::Template.privacySettingsPolicyUrl"
-                                                )
-                                              )
-                                            )
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("td", { staticClass: "pr-3" }, [
-                                            _c(
-                                              "a",
-                                              {
+                                  _c(
+                                    "p",
+                                    {
+                                      staticClass:
+                                        "d-flex mb-0 font-weight-bold"
+                                    },
+                                    [
+                                      _c("span", { staticClass: "flex-fill" }, [
+                                        _vm._v(_vm._s(consent.label))
+                                      ]),
+                                      _vm._v(" "),
+                                      !consentGroup.necessary &&
+                                      !consent.necessary
+                                        ? _c(
+                                            "span",
+                                            {
+                                              staticClass:
+                                                "custom-control custom-switch custom-control-appearance"
+                                            },
+                                            [
+                                              _c("input", {
                                                 staticClass:
-                                                  "text-primary text-appearance",
-                                                attrs: {
-                                                  href: consent.policyUrl,
-                                                  target: "_blank"
+                                                  "custom-control-input",
+                                                attrs: { type: "checkbox" },
+                                                domProps: {
+                                                  checked: _vm.isConsented(
+                                                    consentGroup.key +
+                                                      "." +
+                                                      consent.key
+                                                  )
                                                 }
-                                              },
-                                              [
-                                                _vm._v(
-                                                  _vm._s(consent.policyUrl)
-                                                )
-                                              ]
-                                            )
-                                          ])
-                                        ])
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    consent.lifespan.length > 0
-                                      ? _c("tr", [
-                                          _c("td", { staticClass: "pl-3" }, [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.$translate(
-                                                  "Ceres::Template.privacySettingsLifespan"
-                                                )
-                                              )
-                                            )
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("td", { staticClass: "pr-3" }, [
-                                            _vm._v(_vm._s(consent.lifespan))
-                                          ])
-                                        ])
-                                      : _vm._e()
-                                  ])
+                                              }),
+                                              _vm._v(" "),
+                                              _c("label", {
+                                                staticClass:
+                                                  "custom-control-label"
+                                              })
+                                            ]
+                                          )
+                                        : _vm._e()
+                                    ]
+                                  )
                                 ]
+                              ),
+                              _vm._v(" "),
+                              consent.provider.length > 0 ||
+                              consent.description.length > 0 ||
+                              consent.policyUrl.length > 0 ||
+                              consent.lifespan.length > 0
+                                ? _c(
+                                    "table",
+                                    {
+                                      staticClass:
+                                        "table table-responsive-md table-sm table-striped mb-0"
+                                    },
+                                    [
+                                      _c("tbody", [
+                                        consent.provider.length > 0
+                                          ? _c("tr", [
+                                              _c(
+                                                "td",
+                                                { staticClass: "pl-3" },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.$translate(
+                                                        "Ceres::Template.privacySettingsProvider"
+                                                      )
+                                                    )
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                { staticClass: "pr-3" },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(consent.provider)
+                                                  )
+                                                ]
+                                              )
+                                            ])
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        consent.description.length > 0
+                                          ? _c("tr", [
+                                              _c(
+                                                "td",
+                                                { staticClass: "pl-3" },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.$translate(
+                                                        "Ceres::Template.privacySettingsDescription"
+                                                      )
+                                                    )
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                { staticClass: "pr-3" },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(consent.description)
+                                                  )
+                                                ]
+                                              )
+                                            ])
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        consent.policyUrl.length > 0
+                                          ? _c("tr", [
+                                              _c(
+                                                "td",
+                                                { staticClass: "pl-3" },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.$translate(
+                                                        "Ceres::Template.privacySettingsPolicyUrl"
+                                                      )
+                                                    )
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                { staticClass: "pr-3" },
+                                                [
+                                                  _c(
+                                                    "a",
+                                                    {
+                                                      staticClass:
+                                                        "text-primary text-appearance",
+                                                      attrs: {
+                                                        href: consent.policyUrl,
+                                                        target: "_blank"
+                                                      }
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          consent.policyUrl
+                                                        )
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ])
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        consent.lifespan.length > 0
+                                          ? _c("tr", [
+                                              _c(
+                                                "td",
+                                                { staticClass: "pl-3" },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.$translate(
+                                                        "Ceres::Template.privacySettingsLifespan"
+                                                      )
+                                                    )
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                { staticClass: "pr-3" },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(consent.lifespan)
+                                                  )
+                                                ]
+                                              )
+                                            ])
+                                          : _vm._e()
+                                      ])
+                                    ]
+                                  )
+                                : _vm._e()
+                            ]
+                          )
+                        }),
+                        0
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  !_vm.expandedGroups[consentGroup.key]
+                    ? _c(
+                        "a",
+                        {
+                          staticClass: "card-link text-primary text-appearance",
+                          attrs: {
+                            href: "#",
+                            "data-testing":
+                              "privacy-settings-show-more-information"
+                          },
+                          on: {
+                            click: function($event) {
+                              return _vm.setGroupVisibility(
+                                consentGroup.key,
+                                true,
+                                $event
                               )
-                            : _vm._e()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.privacySettingsMoreInformation"
+                                )
+                              ) +
+                              "\n                "
+                          )
                         ]
                       )
-                    }),
-                    0
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              !_vm.expandedGroups[consentGroup.key]
-                ? _c(
-                    "a",
-                    {
-                      staticClass: "card-link text-primary text-appearance",
-                      attrs: {
-                        href: "#",
-                        "data-testing": "privacy-settings-show-more-information"
-                      },
-                      on: {
-                        click: function($event) {
-                          return _vm.setGroupVisibility(
-                            consentGroup.key,
-                            true,
-                            $event
+                    : _c(
+                        "a",
+                        {
+                          staticClass: "card-link text-primary text-appearance",
+                          attrs: {
+                            href: "#",
+                            "data-testing":
+                              "privacy-settings-hide-more-information"
+                          },
+                          on: {
+                            click: function($event) {
+                              return _vm.setGroupVisibility(
+                                consentGroup.key,
+                                false,
+                                $event
+                              )
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.privacySettingsLessInformation"
+                                )
+                              ) +
+                              "\n                "
                           )
-                        }
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.$translate(
-                              "Ceres::Template.privacySettingsMoreInformation"
-                            )
-                          ) +
-                          "\n                "
+                        ]
                       )
-                    ]
-                  )
-                : _c(
-                    "a",
-                    {
-                      staticClass: "card-link text-primary text-appearance",
-                      attrs: {
-                        href: "#",
-                        "data-testing": "privacy-settings-hide-more-information"
-                      },
-                      on: {
-                        click: function($event) {
-                          return _vm.setGroupVisibility(
-                            consentGroup.key,
-                            false,
-                            $event
-                          )
-                        }
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.$translate(
-                              "Ceres::Template.privacySettingsLessInformation"
-                            )
-                          ) +
-                          "\n                "
-                      )
-                    ]
-                  )
-            ])
-          ]
-        )
+                ])
+              ]
+            )
+          : _vm._e()
       }),
       0
     )

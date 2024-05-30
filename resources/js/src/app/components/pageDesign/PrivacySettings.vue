@@ -6,7 +6,7 @@
                  index < consentGroup.length - 1}"
                  :style="cardStyle"
                  v-for="(consentGroup, index) in consentGroups"
-                 v-show="!(consentGroup.media.length === 1 && consentGroup.media.consents[0].key === 'reCaptcha' && consentGroup.media.consents[0].necessary === true)"
+                 v-if="!necessaryRecaptcha(consentGroup)"
             >
                 <div class="card-body mb-0" @click.stop="toggleConsent(consentGroup.key + '.*')">
                     <p class="card-title h4 d-flex">
@@ -131,6 +131,14 @@ export default {
             event.preventDefault();
             event.stopPropagation();
             this.$set(this.expandedGroups, groupKey, value);
+        },
+
+        necessaryRecaptcha(obj)
+        {
+          return obj.key === 'media' &&
+              obj.consents.length === 1 &&
+              obj.consents[0].key === 'reCaptcha' &&
+              obj.consents[0].necessary === true;
         }
     }
 }
