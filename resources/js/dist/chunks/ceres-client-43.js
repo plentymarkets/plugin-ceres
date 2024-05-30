@@ -123,6 +123,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -178,6 +184,19 @@ var render = function() {
         return _c(
           "div",
           {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: !(
+                  consentGroup.media.length === 1 &&
+                  consentGroup.media.consents[0].key === "reCaptcha" &&
+                  consentGroup.media.consents[0].necessary === true
+                ),
+                expression:
+                  "!(consentGroup.media.length === 1 && consentGroup.media.consents[0].key === 'reCaptcha' && consentGroup.media.consents[0].necessary === true)"
+              }
+            ],
             staticClass: "card consent-group",
             class: {
               cardClass: _vm.cardClass,
