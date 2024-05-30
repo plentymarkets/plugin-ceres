@@ -1,7 +1,13 @@
 <template>
     <div class="privacy-settings d-flex flex-column">
         <div class="privacy-settings-body overflow-auto">
-            <div class="card consent-group" :class="{cardClass, 'mb-3': index < consentGroup.length - 1}" :style="cardStyle" v-for="(consentGroup, index) in consentGroups">
+            <div class="card consent-group"
+                 :class="{cardClass, 'mb-3':
+                 index < consentGroup.length - 1}"
+                 :style="cardStyle"
+                 v-for="(consentGroup, index) in consentGroups"
+                 v-show="!(consentGroup.media.length === 1 && consentGroup.media.consents[0].key === 'reCaptcha' && consentGroup.media.consents[0].necessary === true)"
+            >
                 <div class="card-body mb-0" @click.stop="toggleConsent(consentGroup.key + '.*')">
                     <p class="card-title h4 d-flex">
                         <span class="flex-fill">
