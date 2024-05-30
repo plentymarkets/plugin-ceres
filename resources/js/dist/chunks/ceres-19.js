@@ -209,6 +209,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     toggleConsent: function toggleConsent(groupKey) {
       this.$store.commit("toggleConsent", groupKey + ".*");
+    },
+    necessaryRecaptcha: function necessaryRecaptcha(obj) {
+      return obj.key === 'media' && obj.consents.length === 1 && obj.consents[0].key === 'reCaptcha' && obj.consents[0].necessary === true;
     }
   })
 });
@@ -274,76 +277,80 @@ var render = function() {
                     "div",
                     [
                       _vm._l(_vm.consentGroups, function(consentGroup) {
-                        return [
-                          consentGroup.consents.length > 0
-                            ? _c(
-                                "span",
-                                {
-                                  key: consentGroup.key,
-                                  staticClass:
-                                    "custom-control custom-switch custom-control-appearance d-md-inline-block mr-3"
-                                },
-                                [
-                                  _c("input", {
-                                    staticClass: "custom-control-input",
-                                    attrs: {
-                                      type: "checkbox",
-                                      id:
-                                        _vm._cid + "-group-" + consentGroup.key,
-                                      disabled: consentGroup.necessary
-                                    },
-                                    domProps: {
-                                      checked:
-                                        _vm.isConsented(consentGroup.key) ||
-                                        consentGroup.necessary
-                                    },
-                                    on: {
-                                      change: function($event) {
-                                        return _vm.toggleConsent(
-                                          consentGroup.key
-                                        )
-                                      }
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "label",
+                        return !_vm.necessaryRecaptcha(consentGroup)
+                          ? [
+                              consentGroup.consents.length > 0
+                                ? _c(
+                                    "span",
                                     {
-                                      staticClass: "custom-control-label",
-                                      attrs: {
-                                        for:
-                                          _vm._cid +
-                                          "-group-" +
-                                          consentGroup.key
-                                      }
+                                      key: consentGroup.key,
+                                      staticClass:
+                                        "custom-control custom-switch custom-control-appearance d-md-inline-block mr-3"
                                     },
                                     [
-                                      consentGroup.label.length > 0
-                                        ? [
-                                            _vm._v(
-                                              "\n                                    " +
-                                                _vm._s(consentGroup.label) +
-                                                "\n                                "
+                                      _c("input", {
+                                        staticClass: "custom-control-input",
+                                        attrs: {
+                                          type: "checkbox",
+                                          id:
+                                            _vm._cid +
+                                            "-group-" +
+                                            consentGroup.key,
+                                          disabled: consentGroup.necessary
+                                        },
+                                        domProps: {
+                                          checked:
+                                            _vm.isConsented(consentGroup.key) ||
+                                            consentGroup.necessary
+                                        },
+                                        on: {
+                                          change: function($event) {
+                                            return _vm.toggleConsent(
+                                              consentGroup.key
                                             )
-                                          ]
-                                        : [
-                                            _vm._v(
-                                              "\n                                    " +
-                                                _vm._s(
-                                                  _vm.$translate(
-                                                    "Ceres::Template.privacySettingsDefaultGroup"
-                                                  )
-                                                ) +
-                                                "\n                                "
-                                            )
-                                          ]
-                                    ],
-                                    2
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass: "custom-control-label",
+                                          attrs: {
+                                            for:
+                                              _vm._cid +
+                                              "-group-" +
+                                              consentGroup.key
+                                          }
+                                        },
+                                        [
+                                          consentGroup.label.length > 0
+                                            ? [
+                                                _vm._v(
+                                                  "\n                                    " +
+                                                    _vm._s(consentGroup.label) +
+                                                    "\n                                "
+                                                )
+                                              ]
+                                            : [
+                                                _vm._v(
+                                                  "\n                                    " +
+                                                    _vm._s(
+                                                      _vm.$translate(
+                                                        "Ceres::Template.privacySettingsDefaultGroup"
+                                                      )
+                                                    ) +
+                                                    "\n                                "
+                                                )
+                                              ]
+                                        ],
+                                        2
+                                      )
+                                    ]
                                   )
-                                ]
-                              )
-                            : _vm._e()
-                        ]
+                                : _vm._e()
+                            ]
+                          : _vm._e()
                       }),
                       _vm._v(" "),
                       _c(

@@ -16,7 +16,7 @@
                     <p v-html="text"></p>
 
                     <div>
-                        <template v-for="consentGroup in consentGroups">
+                        <template v-for="consentGroup in consentGroups" v-if="!necessaryRecaptcha(consentGroup)">
                             <span v-if="consentGroup.consents.length > 0"
                                   class="custom-control custom-switch custom-control-appearance d-md-inline-block mr-3"
                                   :key="consentGroup.key">
@@ -195,6 +195,14 @@ export default {
         toggleConsent(groupKey)
         {
             this.$store.commit("toggleConsent", groupKey + ".*");
+        },
+
+        necessaryRecaptcha(obj)
+        {
+          return obj.key === 'media' &&
+              obj.consents.length === 1 &&
+              obj.consents[0].key === 'reCaptcha' &&
+              obj.consents[0].necessary === true;
         }
     }
 }
