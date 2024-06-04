@@ -45,15 +45,33 @@
 
                     </div>
                 </div>
-
+                <span a-data="{{ data.order | json_encode }}">data in here</span>
+                <div>line 48</div>
                 {{ LayoutContainer.show("Ceres::OrderConfirmation.BeforeOrderDetails", data.order) }}
-
+                <div>line 50</div>
 
                 {% include "Ceres::Checkout.OrderDetails" with { orderData: data } %}
 
                 <hr>
                 {% if addContentAfterOrderDetailsRow|trim is not empty %}
+                    <div>line 56</div>
                     <div class="row">
+                        <div class="widget widget-grid widget-three-col row">
+                            <div class="widget-inner col-12 col-md-4 widget-prop-md-3-2"></div>
+                            <div class="widget-inner col-12 col-md-4 widget-prop-md-3-2"></div>
+                            <div class="widget-inner col-12 col-md-4 widget-prop-md-3-2">
+
+                                <div>
+                                    <div class="widget widget-link widget-primary order-return">
+                                        <a rel="" href="/returns/107/" title="" class="btn btn-appearance  btn-block text-truncate" data-original-title="Return order">
+                                            <i aria-hidden="true" class="fa  ml-1" style="line-height: inherit;"></i>Return order
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div>line 72</div>
                         {{ addContentAfterOrderDetailsRow }}
                     </div>
                 {% endif %}
