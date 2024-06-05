@@ -53,7 +53,7 @@
                 {% include "Ceres::Checkout.OrderDetails" with { orderData: data } %}
 
                 <hr>
-                <div>
+                {% if data.order.statusId >= 7 %}
                     <div class="widget widget-grid widget-three-col row">
                         <div class="widget-inner col-12 col-md-4 widget-prop-md-3-2"></div>
                         <div class="widget-inner col-12 col-md-4 widget-prop-md-3-2"></div>
@@ -72,8 +72,8 @@
 
                         </div>
                     </div>
-                    <div>line 72</div>
-                </div>
+                {% endif %}
+
                 {% if addContentAfterOrderDetailsRow|trim is not empty %}
                     <div class="row">
                         {{ addContentAfterOrderDetailsRow }}
