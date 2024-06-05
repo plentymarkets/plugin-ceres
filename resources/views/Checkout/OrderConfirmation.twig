@@ -43,6 +43,26 @@
 
                         {{ LayoutContainer.show("Ceres::OrderConfirmation.AddContentAfterConfirmationThanks") }}
 
+                        {% if data.order.statusId >= 7 %}
+                            <div class="widget widget-grid widget-three-col row">
+                                <div class="widget-inner col-12 col-md-4 widget-prop-md-3-2"></div>
+                                <div class="widget-inner col-12 col-md-4 widget-prop-md-3-2"></div>
+                                <div class="widget-inner col-12 col-md-4 widget-prop-md-3-2">
+                                    <div>
+                                        <div class="widget widget-link widget-primary order-return">
+                                            <a rel="" href="/returns/{{ data.order.id }}/"
+                                               title=""
+                                               class="btn btn-appearance  btn-block text-truncate"
+                                               data-original-title="Return order">
+                                                <i aria-hidden="true" class="fa  ml-1" style="line-height: inherit;"></i>
+                                                Return order
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
                 <span a-data="{{ data.order | json_encode }}">data in here</span>
@@ -53,27 +73,6 @@
                 {% include "Ceres::Checkout.OrderDetails" with { orderData: data } %}
 
                 <hr>
-                {% if data.order.statusId >= 7 %}
-                    <div class="widget widget-grid widget-three-col row">
-                        <div class="widget-inner col-12 col-md-4 widget-prop-md-3-2"></div>
-                        <div class="widget-inner col-12 col-md-4 widget-prop-md-3-2"></div>
-                        <div class="widget-inner col-12 col-md-4 widget-prop-md-3-2">
-                            <div>
-                                <div class="widget widget-link widget-primary order-return">
-                                    <a rel="" href="/returns/{{ data.order.id }}/"
-                                       title=""
-                                       class="btn btn-appearance  btn-block text-truncate"
-                                       data-original-title="Return order">
-                                        <i aria-hidden="true" class="fa  ml-1" style="line-height: inherit;"></i>
-                                        Return order
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                {% endif %}
-
                 {% if addContentAfterOrderDetailsRow|trim is not empty %}
                     <div class="row">
                         {{ addContentAfterOrderDetailsRow }}
