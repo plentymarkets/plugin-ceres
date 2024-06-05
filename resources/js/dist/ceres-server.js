@@ -55152,9 +55152,8 @@ var render = function() {
                   _vm._s(_vm.text) +
                   "</p> <div>" +
                   _vm._ssrList(_vm.consentGroups, function(consentGroup) {
-                    return !_vm.necessaryRecaptcha(consentGroup)
-                      ? consentGroup.consents.length > 0
-                        ? '<span class="custom-control custom-switch custom-control-appearance d-md-inline-block mr-3"><input type="checkbox"' +
+                    return consentGroup.consents.length > 0
+                      ? '<span class="custom-control custom-switch custom-control-appearance d-md-inline-block mr-3"><input type="checkbox"' +
                           _vm._ssrAttr(
                             "id",
                             _vm._cid + "-group-" + consentGroup.key
@@ -55192,7 +55191,6 @@ var render = function() {
                                   "\n                                "
                               )) +
                           "</label></span>"
-                        : "<!---->"
                       : "<!---->"
                   }) +
                   ' <a href="#" data-testing="cookie-bar-show-more-information" class="text-primary text-appearance d-block d-md-inline-block">' +

@@ -16,7 +16,7 @@
                     <p v-html="text"></p>
 
                     <div>
-                        <template v-for="consentGroup in consentGroups" v-if="!necessaryRecaptcha(consentGroup)">
+                        <template v-for="consentGroup in consentGroups">
                             <span v-if="consentGroup.consents.length > 0"
                                   class="custom-control custom-switch custom-control-appearance d-md-inline-block mr-3"
                                   :key="consentGroup.key">
