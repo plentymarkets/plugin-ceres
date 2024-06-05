@@ -23,8 +23,8 @@
                                 <input type="checkbox"
                                        class="custom-control-input"
                                        :id="_cid + '-group-' + consentGroup.key"
-                                       :disabled="consentGroup.necessary"
-                                       :checked="isConsented(consentGroup.key) || consentGroup.necessary"
+                                       :disabled="consentGroup.necessary || necessaryOnly(consentGroup)"
+                                       :checked="isConsented(consentGroup.key) || consentGroup.necessary || necessaryOnly(consentGroup)"
                                        @change="toggleConsent(consentGroup.key)">
                                 <label class="custom-control-label" :for="_cid + '-group-' + consentGroup.key">
                                     <template v-if="consentGroup.label.length > 0">
@@ -197,12 +197,9 @@ export default {
             this.$store.commit("toggleConsent", groupKey + ".*");
         },
 
-        necessaryRecaptcha(obj)
+        necessaryOnly(obj)
         {
-          return obj.key === 'media' &&
-              obj.consents.length === 1 &&
-              obj.consents[0].key === 'reCaptcha' &&
-              obj.consents[0].necessary === true;
+          return obj.key === 'media' && obj.consents.every(consent => consent.necessary === true)
         }
     }
 }

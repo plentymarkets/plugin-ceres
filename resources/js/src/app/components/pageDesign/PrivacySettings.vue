@@ -6,7 +6,6 @@
                  index < consentGroup.length - 1}"
                  :style="cardStyle"
                  v-for="(consentGroup, index) in consentGroups"
-                 v-if="!necessaryRecaptcha(consentGroup)"
             >
                 <div class="card-body mb-0" @click.stop="toggleConsent(consentGroup.key + '.*')">
                     <p class="card-title h4 d-flex">
@@ -19,7 +18,7 @@
                             </template>
                             ({{ consentGroup.consents.length }})
                         </span>
-                        <span class="custom-control custom-switch custom-control-appearance" v-if="!consentGroup.necessary">
+                        <span class="custom-control custom-switch custom-control-appearance" v-if="!consentGroup.necessary || !necessaryOnly(consentGroup)">
                                 <input type="checkbox"
                                        class="custom-control-input"
                                        :checked="isConsented(consentGroup.key + '.*')">
@@ -133,12 +132,9 @@ export default {
             this.$set(this.expandedGroups, groupKey, value);
         },
 
-        necessaryRecaptcha(obj)
+        necessaryOnly(obj)
         {
-          return obj.key === 'media' &&
-              obj.consents.length === 1 &&
-              obj.consents[0].key === 'reCaptcha' &&
-              obj.consents[0].necessary === true;
+          return obj.key === 'media' && obj.consents.every(consent => consent.necessary === true)
         }
     }
 }

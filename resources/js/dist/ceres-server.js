@@ -13627,8 +13627,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     toggleConsent: function toggleConsent(groupKey) {
       this.$store.commit("toggleConsent", groupKey + ".*");
     },
-    necessaryRecaptcha: function necessaryRecaptcha(obj) {
-      return obj.key === 'media' && obj.consents.length === 1 && obj.consents[0].key === 'reCaptcha' && obj.consents[0].necessary === true;
+    necessaryOnly: function necessaryOnly(obj) {
+      return obj.key === 'media' && obj.consents.every(function (consent) {
+        return consent.necessary === true;
+      });
     }
   })
 });
@@ -14713,7 +14715,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -14741,8 +14742,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       event.stopPropagation();
       this.$set(this.expandedGroups, groupKey, value);
     },
-    necessaryRecaptcha: function necessaryRecaptcha(obj) {
-      return obj.key === 'media' && obj.consents.length === 1 && obj.consents[0].key === 'reCaptcha' && obj.consents[0].necessary === true;
+    necessaryOnly: function necessaryOnly(obj) {
+      return obj.key === 'media' && obj.consents.every(function (consent) {
+        return consent.necessary === true;
+      });
     }
   })
 });
@@ -55156,11 +55159,16 @@ var render = function() {
                             "id",
                             _vm._cid + "-group-" + consentGroup.key
                           ) +
-                          _vm._ssrAttr("disabled", consentGroup.necessary) +
+                          _vm._ssrAttr(
+                            "disabled",
+                            consentGroup.necessary ||
+                              _vm.necessaryOnly(consentGroup)
+                          ) +
                           _vm._ssrAttr(
                             "checked",
                             _vm.isConsented(consentGroup.key) ||
-                              consentGroup.necessary
+                              consentGroup.necessary ||
+                              _vm.necessaryOnly(consentGroup)
                           ) +
                           ' class="custom-control-input"> <label' +
                           _vm._ssrAttr(
@@ -55752,180 +55760,174 @@ var render = function() {
     _vm._ssrNode(
       '<div class="privacy-settings-body overflow-auto">' +
         _vm._ssrList(_vm.consentGroups, function(consentGroup, index) {
-          return !_vm.necessaryRecaptcha(consentGroup)
-            ? "<div" +
-                _vm._ssrClass("card consent-group", {
-                  cardClass: _vm.cardClass,
-                  "mb-3": index < consentGroup.length - 1
-                }) +
-                _vm._ssrStyle(null, _vm.cardStyle, null) +
-                '><div class="card-body mb-0"><p class="card-title h4 d-flex"><span class="flex-fill">' +
-                (consentGroup.label.length > 0
-                  ? _vm._ssrEscape(
-                      "\n                            " +
-                        _vm._s(consentGroup.label) +
-                        "\n                        "
-                    )
-                  : _vm._ssrEscape(
-                      "\n                            " +
-                        _vm._s(
-                          _vm.$translate(
-                            "Ceres::Template.privacySettingsDefaultGroup"
-                          )
-                        ) +
-                        "\n                        "
-                    )) +
-                _vm._ssrEscape(
-                  "\n                        (" +
-                    _vm._s(consentGroup.consents.length) +
-                    ")\n                    "
-                ) +
-                "</span> " +
-                (!consentGroup.necessary
-                  ? '<span class="custom-control custom-switch custom-control-appearance"><input type="checkbox"' +
-                    _vm._ssrAttr(
-                      "checked",
-                      _vm.isConsented(consentGroup.key + ".*")
-                    ) +
-                    ' class="custom-control-input"> <label class="custom-control-label"></label></span>'
-                  : '<span class="badge badge-primary bg-appearance">' +
-                    _vm._ssrEscape(
-                      _vm._s(
-                        _vm.$translate(
-                          "Ceres::Template.privacySettingsNecessary"
-                        )
+          return (
+            "<div" +
+            _vm._ssrClass("card consent-group", {
+              cardClass: _vm.cardClass,
+              "mb-3": index < consentGroup.length - 1
+            }) +
+            _vm._ssrStyle(null, _vm.cardStyle, null) +
+            '><div class="card-body mb-0"><p class="card-title h4 d-flex"><span class="flex-fill">' +
+            (consentGroup.label.length > 0
+              ? _vm._ssrEscape(
+                  "\n                            " +
+                    _vm._s(consentGroup.label) +
+                    "\n                        "
+                )
+              : _vm._ssrEscape(
+                  "\n                            " +
+                    _vm._s(
+                      _vm.$translate(
+                        "Ceres::Template.privacySettingsDefaultGroup"
                       )
                     ) +
-                    "</span>") +
-                "</p> " +
-                (consentGroup.description.length > 0
-                  ? '<p class="card-text">' +
-                    _vm._ssrEscape(_vm._s(consentGroup.description)) +
-                    "</p>"
-                  : "<!---->") +
-                '</div> <div class="card-body mt-0">' +
-                (_vm.expandedGroups[consentGroup.key]
-                  ? "<div>" +
-                    _vm._ssrList(consentGroup.consents, function(consent) {
-                      return (
-                        "<div" +
-                        _vm._ssrClass("card consent bg-light mb-3", {
-                          "border-primary border-appearance active":
-                            _vm.isConsented(
-                              consentGroup.key + "." + consent.key
-                            ) ||
-                            consent.necessary ||
-                            consentGroup.necessary
-                        }) +
-                        '><div class="card-body"><p class="d-flex mb-0 font-weight-bold"><span class="flex-fill">' +
-                        _vm._ssrEscape(_vm._s(consent.label)) +
-                        "</span> " +
-                        (!consentGroup.necessary && !consent.necessary
-                          ? '<span class="custom-control custom-switch custom-control-appearance"><input type="checkbox"' +
-                            _vm._ssrAttr(
-                              "checked",
-                              _vm.isConsented(
-                                consentGroup.key + "." + consent.key
+                    "\n                        "
+                )) +
+            _vm._ssrEscape(
+              "\n                        (" +
+                _vm._s(consentGroup.consents.length) +
+                ")\n                    "
+            ) +
+            "</span> " +
+            (!consentGroup.necessary || !_vm.necessaryOnly(consentGroup)
+              ? '<span class="custom-control custom-switch custom-control-appearance"><input type="checkbox"' +
+                _vm._ssrAttr(
+                  "checked",
+                  _vm.isConsented(consentGroup.key + ".*")
+                ) +
+                ' class="custom-control-input"> <label class="custom-control-label"></label></span>'
+              : '<span class="badge badge-primary bg-appearance">' +
+                _vm._ssrEscape(
+                  _vm._s(
+                    _vm.$translate("Ceres::Template.privacySettingsNecessary")
+                  )
+                ) +
+                "</span>") +
+            "</p> " +
+            (consentGroup.description.length > 0
+              ? '<p class="card-text">' +
+                _vm._ssrEscape(_vm._s(consentGroup.description)) +
+                "</p>"
+              : "<!---->") +
+            '</div> <div class="card-body mt-0">' +
+            (_vm.expandedGroups[consentGroup.key]
+              ? "<div>" +
+                _vm._ssrList(consentGroup.consents, function(consent) {
+                  return (
+                    "<div" +
+                    _vm._ssrClass("card consent bg-light mb-3", {
+                      "border-primary border-appearance active":
+                        _vm.isConsented(consentGroup.key + "." + consent.key) ||
+                        consent.necessary ||
+                        consentGroup.necessary
+                    }) +
+                    '><div class="card-body"><p class="d-flex mb-0 font-weight-bold"><span class="flex-fill">' +
+                    _vm._ssrEscape(_vm._s(consent.label)) +
+                    "</span> " +
+                    (!consentGroup.necessary && !consent.necessary
+                      ? '<span class="custom-control custom-switch custom-control-appearance"><input type="checkbox"' +
+                        _vm._ssrAttr(
+                          "checked",
+                          _vm.isConsented(consentGroup.key + "." + consent.key)
+                        ) +
+                        ' class="custom-control-input"> <label class="custom-control-label"></label></span>'
+                      : "<!---->") +
+                    "</p></div> " +
+                    (consent.provider.length > 0 ||
+                    consent.description.length > 0 ||
+                    consent.policyUrl.length > 0 ||
+                    consent.lifespan.length > 0
+                      ? '<table class="table table-responsive-md table-sm table-striped mb-0"><tbody>' +
+                        (consent.provider.length > 0
+                          ? '<tr><td class="pl-3">' +
+                            _vm._ssrEscape(
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.privacySettingsProvider"
+                                )
                               )
                             ) +
-                            ' class="custom-control-input"> <label class="custom-control-label"></label></span>'
+                            '</td> <td class="pr-3">' +
+                            _vm._ssrEscape(_vm._s(consent.provider)) +
+                            "</td></tr>"
                           : "<!---->") +
-                        "</p></div> " +
-                        (consent.provider.length > 0 ||
-                        consent.description.length > 0 ||
-                        consent.policyUrl.length > 0 ||
-                        consent.lifespan.length > 0
-                          ? '<table class="table table-responsive-md table-sm table-striped mb-0"><tbody>' +
-                            (consent.provider.length > 0
-                              ? '<tr><td class="pl-3">' +
-                                _vm._ssrEscape(
-                                  _vm._s(
-                                    _vm.$translate(
-                                      "Ceres::Template.privacySettingsProvider"
-                                    )
-                                  )
-                                ) +
-                                '</td> <td class="pr-3">' +
-                                _vm._ssrEscape(_vm._s(consent.provider)) +
-                                "</td></tr>"
-                              : "<!---->") +
-                            " " +
-                            (consent.description.length > 0
-                              ? '<tr><td class="pl-3">' +
-                                _vm._ssrEscape(
-                                  _vm._s(
-                                    _vm.$translate(
-                                      "Ceres::Template.privacySettingsDescription"
-                                    )
-                                  )
-                                ) +
-                                '</td> <td class="pr-3">' +
-                                _vm._ssrEscape(_vm._s(consent.description)) +
-                                "</td></tr>"
-                              : "<!---->") +
-                            " " +
-                            (consent.policyUrl.length > 0
-                              ? '<tr><td class="pl-3">' +
-                                _vm._ssrEscape(
-                                  _vm._s(
-                                    _vm.$translate(
-                                      "Ceres::Template.privacySettingsPolicyUrl"
-                                    )
-                                  )
-                                ) +
-                                '</td> <td class="pr-3"><a' +
-                                _vm._ssrAttr("href", consent.policyUrl) +
-                                ' target="_blank" class="text-primary text-appearance">' +
-                                _vm._ssrEscape(_vm._s(consent.policyUrl)) +
-                                "</a></td></tr>"
-                              : "<!---->") +
-                            " " +
-                            (consent.lifespan.length > 0
-                              ? '<tr><td class="pl-3">' +
-                                _vm._ssrEscape(
-                                  _vm._s(
-                                    _vm.$translate(
-                                      "Ceres::Template.privacySettingsLifespan"
-                                    )
-                                  )
-                                ) +
-                                '</td> <td class="pr-3">' +
-                                _vm._ssrEscape(_vm._s(consent.lifespan)) +
-                                "</td></tr>"
-                              : "<!---->") +
-                            "</tbody></table>"
+                        " " +
+                        (consent.description.length > 0
+                          ? '<tr><td class="pl-3">' +
+                            _vm._ssrEscape(
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.privacySettingsDescription"
+                                )
+                              )
+                            ) +
+                            '</td> <td class="pr-3">' +
+                            _vm._ssrEscape(_vm._s(consent.description)) +
+                            "</td></tr>"
                           : "<!---->") +
-                        "</div>"
-                      )
-                    }) +
+                        " " +
+                        (consent.policyUrl.length > 0
+                          ? '<tr><td class="pl-3">' +
+                            _vm._ssrEscape(
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.privacySettingsPolicyUrl"
+                                )
+                              )
+                            ) +
+                            '</td> <td class="pr-3"><a' +
+                            _vm._ssrAttr("href", consent.policyUrl) +
+                            ' target="_blank" class="text-primary text-appearance">' +
+                            _vm._ssrEscape(_vm._s(consent.policyUrl)) +
+                            "</a></td></tr>"
+                          : "<!---->") +
+                        " " +
+                        (consent.lifespan.length > 0
+                          ? '<tr><td class="pl-3">' +
+                            _vm._ssrEscape(
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.privacySettingsLifespan"
+                                )
+                              )
+                            ) +
+                            '</td> <td class="pr-3">' +
+                            _vm._ssrEscape(_vm._s(consent.lifespan)) +
+                            "</td></tr>"
+                          : "<!---->") +
+                        "</tbody></table>"
+                      : "<!---->") +
                     "</div>"
-                  : "<!---->") +
-                " " +
-                (!_vm.expandedGroups[consentGroup.key]
-                  ? '<a href="#" data-testing="privacy-settings-show-more-information" class="card-link text-primary text-appearance">' +
-                    _vm._ssrEscape(
-                      "\n                    " +
-                        _vm._s(
-                          _vm.$translate(
-                            "Ceres::Template.privacySettingsMoreInformation"
-                          )
-                        ) +
-                        "\n                "
+                  )
+                }) +
+                "</div>"
+              : "<!---->") +
+            " " +
+            (!_vm.expandedGroups[consentGroup.key]
+              ? '<a href="#" data-testing="privacy-settings-show-more-information" class="card-link text-primary text-appearance">' +
+                _vm._ssrEscape(
+                  "\n                    " +
+                    _vm._s(
+                      _vm.$translate(
+                        "Ceres::Template.privacySettingsMoreInformation"
+                      )
                     ) +
-                    "</a>"
-                  : '<a href="#" data-testing="privacy-settings-hide-more-information" class="card-link text-primary text-appearance">' +
-                    _vm._ssrEscape(
-                      "\n                    " +
-                        _vm._s(
-                          _vm.$translate(
-                            "Ceres::Template.privacySettingsLessInformation"
-                          )
-                        ) +
-                        "\n                "
+                    "\n                "
+                ) +
+                "</a>"
+              : '<a href="#" data-testing="privacy-settings-hide-more-information" class="card-link text-primary text-appearance">' +
+                _vm._ssrEscape(
+                  "\n                    " +
+                    _vm._s(
+                      _vm.$translate(
+                        "Ceres::Template.privacySettingsLessInformation"
+                      )
                     ) +
-                    "</a>") +
-                "</div></div>"
-            : "<!---->"
+                    "\n                "
+                ) +
+                "</a>") +
+            "</div></div>"
+          )
         }) +
         "</div>"
     )

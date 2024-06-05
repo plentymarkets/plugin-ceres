@@ -2666,8 +2666,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     toggleConsent: function toggleConsent(groupKey) {
       this.$store.commit("toggleConsent", groupKey + ".*");
     },
-    necessaryRecaptcha: function necessaryRecaptcha(obj) {
-      return obj.key === 'media' && obj.consents.length === 1 && obj.consents[0].key === 'reCaptcha' && obj.consents[0].necessary === true;
+    necessaryOnly: function necessaryOnly(obj) {
+      return obj.key === 'media' && obj.consents.every(function (consent) {
+        return consent.necessary === true;
+      });
     }
   })
 });
@@ -39654,12 +39656,15 @@ var render = function() {
                                             _vm._cid +
                                             "-group-" +
                                             consentGroup.key,
-                                          disabled: consentGroup.necessary
+                                          disabled:
+                                            consentGroup.necessary ||
+                                            _vm.necessaryOnly(consentGroup)
                                         },
                                         domProps: {
                                           checked:
                                             _vm.isConsented(consentGroup.key) ||
-                                            consentGroup.necessary
+                                            consentGroup.necessary ||
+                                            _vm.necessaryOnly(consentGroup)
                                         },
                                         on: {
                                           change: function($event) {
