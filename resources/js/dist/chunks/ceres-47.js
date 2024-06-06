@@ -241,7 +241,7 @@ var render = function() {
                     2
                   ),
                   _vm._v(" "),
-                  !consentGroup.necessary || !_vm.necessaryOnly(consentGroup)
+                  !consentGroup.necessary && !_vm.necessaryOnly(consentGroup)
                     ? _c(
                         "span",
                         {

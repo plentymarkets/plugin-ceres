@@ -55787,7 +55787,7 @@ var render = function() {
                 ")\n                    "
             ) +
             "</span> " +
-            (!consentGroup.necessary || !_vm.necessaryOnly(consentGroup)
+            (!consentGroup.necessary && !_vm.necessaryOnly(consentGroup)
               ? '<span class="custom-control custom-switch custom-control-appearance"><input type="checkbox"' +
                 _vm._ssrAttr(
                   "checked",

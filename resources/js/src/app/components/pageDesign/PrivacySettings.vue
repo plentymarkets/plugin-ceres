@@ -18,7 +18,7 @@
                             </template>
                             ({{ consentGroup.consents.length }})
                         </span>
-                        <span class="custom-control custom-switch custom-control-appearance" v-if="!consentGroup.necessary || !necessaryOnly(consentGroup)">
+                        <span class="custom-control custom-switch custom-control-appearance" v-if="!consentGroup.necessary && !necessaryOnly(consentGroup)">
                                 <input type="checkbox"
                                        class="custom-control-input"
                                        :checked="isConsented(consentGroup.key + '.*')">
