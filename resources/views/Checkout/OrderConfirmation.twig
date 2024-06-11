@@ -58,11 +58,9 @@
                                     <div>
                                         <div class="widget widget-link widget-primary order-return">
                                             <a rel="" href="/returns/{{ data.order.id }}/"
-                                               title=""
-                                               class="btn btn-appearance  btn-block text-truncate"
-                                               data-original-title="Return order">
-                                                <i aria-hidden="true" class="fa  ml-1" style="line-height: inherit;"></i>
-                                                Return order
+                                               class="btn btn-appearance btn-block text-truncate"
+                                               data-original-title="{{ trans("Ceres::Widget.urlReturnLabel") }}">
+                                                {{ trans("Ceres::Widget.urlReturnLabel") }}
                                             </a>
                                         </div>
                                     </div>
