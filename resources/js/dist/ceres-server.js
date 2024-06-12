@@ -86368,7 +86368,7 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.filter("hasItemDefaultPrice", function (itemData) {
   var defaultPrice = itemData.prices.default;
-  return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_1__["isDefined"])(defaultPrice) && !isNaN(defaultPrice.price.value) || itemData.item.itemType === "set";
+  return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_1__["isDefined"])(defaultPrice) && !isNaN(defaultPrice.price.value) && defaultPrice.price.value > 0 || itemData.item.itemType === "set" || itemData.variation.id == 12650;
 });
 
 /***/ }),
