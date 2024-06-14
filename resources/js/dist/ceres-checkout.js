@@ -4025,8 +4025,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 
 
@@ -46205,10 +46203,6 @@ var render = function() {
                                   )
                                 ]
                               ),
-                              _vm._v(" "),
-                              !_vm.reducedPrice
-                                ? _c("sales-coupon", { attrs: { icon: false } })
-                                : _vm._e(),
                               _vm._v(" "),
                               _c("add-to-basket", {
                                 attrs: {

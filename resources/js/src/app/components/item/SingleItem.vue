@@ -113,8 +113,6 @@
                     </div>
                   </div>
 
-                  <sales-coupon v-if="!reducedPrice" :icon="false"></sales-coupon>
-
                   <add-to-basket :variation-id="currentVariation.variation.id"
                     :is-salable="!!currentVariation.filter && currentVariation.filter.isSalable"
                     :has-children="!!currentVariation.filter && currentVariation.filter.hasActiveChildren"
