@@ -45,12 +45,30 @@
 
                     </div>
                 </div>
-
                 {{ LayoutContainer.show("Ceres::OrderConfirmation.BeforeOrderDetails", data.order) }}
 
-
                 {% include "Ceres::Checkout.OrderDetails" with { orderData: data } %}
-
+                {% if data.order.statusId >= 7 %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="widget-inner col-12 col-md-4 widget-prop-md-3-2"></div>
+                                <div class="widget-inner col-12 col-md-4 widget-prop-md-3-2"></div>
+                                <div class="widget-inner col-12 col-md-4 widget-prop-md-3-2">
+                                    <div>
+                                        <div class="widget widget-link widget-primary order-return">
+                                            <a href="{{ urls.returns(data.order.id) }}"
+                                               class="btn btn-appearance btn-block text-truncate"
+                                               data-original-title="{{ trans("Ceres::Widget.urlReturnLabel") }}">
+                                                {{ trans("Ceres::Widget.urlReturnLabel") }}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
                 <hr>
                 {% if addContentAfterOrderDetailsRow|trim is not empty %}
                     <div class="row">
