@@ -4025,6 +4025,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -46204,6 +46209,10 @@ var render = function() {
                                 ]
                               ),
                               _vm._v(" "),
+                              !_vm.reducedPrice
+                                ? _c("sales-coupon", { attrs: { icon: false } })
+                                : _vm._e(),
+                              _vm._v(" "),
                               _c("add-to-basket", {
                                 attrs: {
                                   "variation-id":
@@ -47257,6 +47266,7 @@ var render = function() {
                                         _vm.hasPropertySelection(166, 393)
                                           ? _c("tr", [
                                               _c("th", [_vm._v("Vegan")]),
+                                              _vm._v(" "),
                                               _c("td", [_vm._v("Ja")])
                                             ])
                                           : _vm._e()

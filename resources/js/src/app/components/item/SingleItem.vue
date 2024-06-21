@@ -113,6 +113,8 @@
                     </div>
                   </div>
 
+                  <sales-coupon v-if="!reducedPrice" :icon="false"></sales-coupon>
+
                   <add-to-basket :variation-id="currentVariation.variation.id"
                     :is-salable="!!currentVariation.filter && currentVariation.filter.isSalable"
                     :has-children="!!currentVariation.filter && currentVariation.filter.hasActiveChildren"
@@ -378,7 +380,10 @@
                             <td>{{ vProperty.value }}</td>
                           </tr>
                         </template>
-                        <tr v-if="hasPropertySelection(166, 393)"><th>Vegan</th><td>Ja</td></tr>
+                        <tr v-if="hasPropertySelection(166, 393)">
+                          <th>Vegan</th>
+                          <td>Ja</td>
+                        </tr>
                       </tbody>
                     </table>
 
