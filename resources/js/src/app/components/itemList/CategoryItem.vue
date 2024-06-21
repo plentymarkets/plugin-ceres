@@ -289,6 +289,11 @@ export default {
 
         ourFurniture()
         {
+            if(!this.item.tags)
+            {
+                return false;
+            }
+
             return this.item.tags.some(tag => tag.id === 63);
         },
 
@@ -302,6 +307,9 @@ export default {
             // attributeValueIds
             // 806 = corpus white, 816 = corpus gray, all others: attr #3 -> wood, not alder
             // 815 = oak
+            if (!this.item.attributes) {
+                return false;
+            }
 
             // Pine
             let pineAttrValSetIds = [806, 816, 802, 803, 141, 147, 126, 110, 109, 108, 107, 90];

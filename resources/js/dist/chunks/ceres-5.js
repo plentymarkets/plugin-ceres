@@ -424,6 +424,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return hasRrpPrice || hasBeforePrice;
     },
     ourFurniture: function ourFurniture() {
+      if (!this.item.tags) {
+        return false;
+      }
+
       return this.item.tags.some(function (tag) {
         return tag.id === 63;
       });
@@ -438,7 +442,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       // attributeValueIds
       // 806 = corpus white, 816 = corpus gray, all others: attr #3 -> wood, not alder
       // 815 = oak
-      // Pine
+      if (!this.item.attributes) {
+        return false;
+      } // Pine
+
+
       var pineAttrValSetIds = [806, 816, 802, 803, 141, 147, 126, 110, 109, 108, 107, 90];
 
       if (this.item.attributes.some(function (attribute) {
