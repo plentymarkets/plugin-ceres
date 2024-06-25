@@ -3,6 +3,7 @@
 namespace Ceres\Contexts;
 
 use IO\Helper\ContextInterface;
+use IO\Helper\RouteConfig;
 use IO\Helper\Utils;
 use IO\Models\LocalizedOrder;
 use Plenty\Modules\Webshop\Contracts\SessionStorageRepositoryContract;
@@ -67,6 +68,7 @@ class OrderConfirmationContext extends CategoryContext implements ContextInterfa
         $this->totals = $this->data['totals'];
         $this->showAdditionalPaymentInformation = $params['showAdditionalPaymentInformation'];
         $this->isOrderValid = $params['isOrderValid'];
+        $this->data->isReturnEnabled = in_array( RouteConfig::ORDER_RETURN, RouteConfig::getEnabledRoutes(true));
 
         if ($this->data instanceof LocalizedOrder) {
             /** @var SessionStorageRepositoryContract $sessionStorage */
