@@ -12,8 +12,15 @@
 <script type="x/template" data-component="cookie-bar">
 <div>
     {{ get_consent_groups() | json_encode }}
+    {{ showRejectAll }}
 </div>
 </script>
+
+<cookie-bar
+    :consent-groups="{{ get_consent_groups() | json_encode }}"
+    :show-reject-all="{{ true | json_encode }}"
+    data-testing="cookie-bar">
+</cookie-bar>
 
 <div class="footer d-print-none">
     <div class="btn text-center border mx-auto rounded-lg p-0{% if topButtonPosition == "right" %} back-to-top btn-secondary pt-1{% else %} back-to-top-center{% endif %}">
