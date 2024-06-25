@@ -47,6 +47,7 @@
                 </div>
                 {{ LayoutContainer.show("Ceres::OrderConfirmation.BeforeOrderDetails", data.order) }}
 
+                <span data="{{ ceresConfig.myAccount | json_encode }}">test</span>
                 {% include "Ceres::Checkout.OrderDetails" with { orderData: data } %}
                 {% if data.order.statusId >= 7 %}
                     <div class="row">
