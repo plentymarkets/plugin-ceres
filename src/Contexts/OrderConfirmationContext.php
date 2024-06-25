@@ -57,6 +57,9 @@ class OrderConfirmationContext extends CategoryContext implements ContextInterfa
     /** @var bool $isOrderValid Flag to indicate if the order confirmation link is still valid */
     public $isOrderValid = false;
 
+    /** @var bool $isReturnEnabled Flag to indicate if the order return link exists */
+    public $isReturnEnabled = false;
+
     /**
      * @inheritDoc
      */
@@ -68,7 +71,7 @@ class OrderConfirmationContext extends CategoryContext implements ContextInterfa
         $this->totals = $this->data['totals'];
         $this->showAdditionalPaymentInformation = $params['showAdditionalPaymentInformation'];
         $this->isOrderValid = $params['isOrderValid'];
-        $this->data->isReturnEnabled = in_array( RouteConfig::ORDER_RETURN, RouteConfig::getEnabledRoutes(true));
+        $this->isReturnEnabled = $params['isReturnEnabled'];
 
         if ($this->data instanceof LocalizedOrder) {
             /** @var SessionStorageRepositoryContract $sessionStorage */
