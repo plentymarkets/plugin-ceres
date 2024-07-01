@@ -8363,6 +8363,9 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     }
   })),
   methods: _objectSpread({
+    isOrderProperty: function isOrderProperty(property) {
+      return Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_20__["isOrderProperty"])(property);
+    },
     onInputValueChanged: function onInputValueChanged(value) {
       if (this.inputType === "int") {
         value = this.validateInt(value);

@@ -308,6 +308,9 @@ export default {
 
     methods:
     {
+        isOrderProperty(property){
+            return isOrderProperty(property)
+        },
         onInputValueChanged(value)
         {
             if (this.inputType === "int")
