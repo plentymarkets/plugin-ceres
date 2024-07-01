@@ -1,5 +1,16 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.64 (2024-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Leeres Anker-Tag im Bilderbox-Widget.
+- Vollbildbreite des Hintergrundbild-Widgets in der Fußzeile
+
+### Geändert
+
+- Die "Retouren"-Schaltfläche wurde auf der Bestellbestätigung für Gastbestellungen hinzugefügt. Diese Schaltfläche wird nur angezeigt, wenn die Route `order-returns` im IO-Plugin aktiv ist.
+  
 ## v5.0.63 (2024-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.62...5.0.63" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben
@@ -15,7 +26,6 @@
 
 - Der Inhalt des Lifecycle Hooks `created` der `StepByStepNavigation` Komponente wurde verschoben nach `beforeMount`, um Probleme mit SSR zu beheben.
 - Um die Barrierefreiheit zu erhöhen, enthält die Checkbox zur Bestätigung der Allgemeinen Geschäftsbedingungen, des Widerrufsrechts und der Datenschutzrichtlinien in der Kasse jetzt ein entsprechendes `aria-label`.
-- Die "Retouren"-Schaltfläche wurde auf der Bestellbestätigung für Gastbestellungen hinzugefügt. Diese Schaltfläche wird nur angezeigt, wenn die Route `order-returns` im IO-Plugin aktiv ist.
 
 ### Angepasste Templates
 
