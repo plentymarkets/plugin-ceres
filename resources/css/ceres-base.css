@@ -10303,8 +10303,7 @@ button:focus {
   margin: 0 !important;
 }
 
-div#page-body,
-div.footer {
+div#page-body {
   overflow-x: hidden;
 }
 

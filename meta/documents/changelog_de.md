@@ -5,6 +5,7 @@
 ### Behoben
 
 - Leeres Anker-Tag im Bilderbox-Widget.
+- Vollbildbreite des Hintergrundbild-Widgets in der Fußzeile
 
 ## v5.0.63 (2024-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.62...5.0.63" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
