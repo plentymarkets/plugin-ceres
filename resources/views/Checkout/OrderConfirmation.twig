@@ -48,7 +48,7 @@
                 {{ LayoutContainer.show("Ceres::OrderConfirmation.BeforeOrderDetails", data.order) }}
 
                 {% include "Ceres::Checkout.OrderDetails" with { orderData: data } %}
-                {% if data.order.statusId >= 7 %}
+                {% if data.order.statusId >= 7 and isReturnEnabled %}
                     <div class="row">
                         <div class="col-md-6">
                             <div class="row">
