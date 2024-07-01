@@ -7,7 +7,7 @@
                 v-model="inputValue"
                 v-tooltip
                 data-toggle="tooltip"
-                :maxlength="isOrderProperty(property) ? 128 : 1000"
+                :maxlength="isOrderProperty(property) ? 128 : 65535"
                 :title="property.names.description"
                 :data-testing="'order-property-input-' + inputType">
             <label class="d-flex">
