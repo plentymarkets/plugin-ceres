@@ -8076,7 +8076,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var _helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../helper/OrderPropertyHelper */ "./resources/js/src/app/helper/OrderPropertyHelper.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -8236,7 +8235,6 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
 
 
 
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "order-property-list-item",
   props: {
@@ -8363,9 +8361,6 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     }
   })),
   methods: _objectSpread({
-    isOrderProperty: function isOrderProperty(property) {
-      return Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_20__["isOrderProperty"])(property);
-    },
     onInputValueChanged: function onInputValueChanged(value) {
       if (this.inputType === "int") {
         value = this.validateInt(value);
@@ -50214,7 +50209,7 @@ var render = function() {
                   attrs: {
                     type: "text",
                     "data-toggle": "tooltip",
-                    maxlength: _vm.isOrderProperty(_vm.property) ? 128 : 65535,
+                    maxlength: _vm.property.isOderProperty ? 128 : 65535,
                     title: _vm.property.names.description,
                     "data-testing": "order-property-input-" + _vm.inputType
                   },
