@@ -1,5 +1,16 @@
 # Release Notes for plentyShop LTS
 
+## v5.0.64 (2024-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Empty anchor tag on image box widget.
+- Fullscreen width of background image widget in footer
+
+### Changed
+
+- Added the Return order button on the order confirmation page for guest users. This button is only displayed if the `order-return` route is active in the IO plugin.
+
 ## v5.0.63 (2024-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.62...5.0.63" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed
@@ -15,7 +26,6 @@
 
 - The content of the component lifecycle hook `created` of the `StepByStepNavigation` component was moved into `beforeMount` to fix problems with SSR.
 - To increase accessibility, the checkbox for confirming the general terms and conditions, the right of withdrawal and the data protection guidelines in the checkout process now contains a corresponding `aria-label`.
-- Added the Return order button on the order confirmation page for guest users. This button is only displayed if the `order-return` route is active in the IO plugin.
 
 ### Changed Templates
 
