@@ -15,7 +15,7 @@
 
 - The content of the component lifecycle hook `created` of the `StepByStepNavigation` component was moved into `beforeMount` to fix problems with SSR.
 - To increase accessibility, the checkbox for confirming the general terms and conditions, the right of withdrawal and the data protection guidelines in the checkout process now contains a corresponding `aria-label`.
-- Added the return button on the `order confirmation` page for guest users. This button is only displayed if the `Order return` route is active in the IO plugin.
+- Added the Return order button on the order confirmation page for guest users. This button is only displayed if the `order-return` route is active in the IO plugin.
 
 ### Changed Templates
 
