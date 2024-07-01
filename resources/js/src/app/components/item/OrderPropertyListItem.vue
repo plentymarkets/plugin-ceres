@@ -7,7 +7,7 @@
                 v-model="inputValue"
                 v-tooltip
                 data-toggle="tooltip"
-                maxlength="128"
+                :maxlength="isOrderProperty(property) ? 128 : 1000"
                 :title="property.names.description"
                 :data-testing="'order-property-input-' + inputType">
             <label class="d-flex">
@@ -133,6 +133,7 @@ const NotificationService = require("../../services/NotificationService");
 import { isNullOrUndefined } from "../../helper/utils";
 import { mapState, mapMutations } from "vuex";
 import TranslationService from '../../services/TranslationService';
+import { isOrderProperty } from '../../helper/OrderPropertyHelper';
 
 export default {
 
