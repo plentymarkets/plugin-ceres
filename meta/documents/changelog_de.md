@@ -15,6 +15,7 @@
 
 - Der Inhalt des Lifecycle Hooks `created` der `StepByStepNavigation` Komponente wurde verschoben nach `beforeMount`, um Probleme mit SSR zu beheben.
 - Um die Barrierefreiheit zu erhöhen, enthält die Checkbox zur Bestätigung der Allgemeinen Geschäftsbedingungen, des Widerrufsrechts und der Datenschutzrichtlinien in der Kasse jetzt ein entsprechendes `aria-label`.
+- Die "Retouren"-Schaltfläche wurde auf der Bestellbestätigung für Gastbestellungen hinzugefügt. Diese Schaltfläche wird nur angezeigt, wenn die Route `order-returns` im IO-Plugin aktiv ist.
 
 ### Angepasste Templates
 
