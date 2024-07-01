@@ -9,7 +9,7 @@
 
 ### Geändert
 
-- Die "Retouren"-Schaltfläche wurde auf der Bestellbestätigung für Gastbestellungen hinzugefügt. Diese Schaltfläche wird nur angezeigt, wenn die Route `order-returns` im IO-Plugin aktiv ist.
+- Die "Retouren"-Schaltfläche wurde auf der Bestellbestätigung für Gastbestellungen hinzugefügt. Diese Schaltfläche wird nur angezeigt, wenn die Route `order-returns` im IO-Plugin aktiv ist und sich der jeweilige Auftrag mindestens im Status 7 (Warenausgang gebucht) befindet.
   
 ## v5.0.63 (2024-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.62...5.0.63" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
