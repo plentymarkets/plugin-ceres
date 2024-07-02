@@ -37766,7 +37766,7 @@ var render = function() {
                                   attrs: {
                                     id: "videoModal",
                                     tabindex: "-1",
-                                    "aria-labelledby": "exampleModalLabel",
+                                    "aria-labelledby": "Youtube Video",
                                     "aria-hidden": "true"
                                   }
                                 },
@@ -37782,14 +37782,14 @@ var render = function() {
                                           [
                                             _c("iframe", {
                                               attrs: {
-                                                id: "videoFrame",
+                                                id: "ytplayer",
+                                                type: "text/html",
+                                                width: "100%",
+                                                height: "400px",
                                                 src:
                                                   "https://www.youtube.com/embed/" +
                                                   property.values.value +
-                                                  "?rel=0;controls=0;showinfo=0;theme=light",
-                                                allowfullscreen: "",
-                                                width: "100%",
-                                                height: "400px",
+                                                  "?autoplay=0&modestbranding=1",
                                                 frameborder: "0"
                                               }
                                             })

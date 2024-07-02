@@ -35,14 +35,14 @@
 
                 <!-- Video Modal -->
                 <template v-for="property in getProperty(192)">
-                  <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                  <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="Youtube Video"
                     aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-body">
-                          <iframe id="videoFrame"
-                            :src="'https://www.youtube.com/embed/' + property.values.value + '?rel=0;controls=0;showinfo=0;theme=light'"
-                            allowfullscreen="" width="100%" height="400px" frameborder="0"></iframe>
+                          <iframe id="ytplayer" type="text/html" width="100%" height="400px"
+                            :src="'https://www.youtube.com/embed/' + property.values.value + '?autoplay=0&modestbranding=1'"
+                            frameborder="0" />
                         </div>
                       </div>
                     </div>

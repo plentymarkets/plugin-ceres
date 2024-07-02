@@ -94,13 +94,15 @@ export default {
         ...mapState({
             facets(state)
             {
+                const allowedSingleFacets = [3, 11, 17]; // 3=Price, 11=Sofort lieferbar, 17:Als Beistellbett 
                 if (!this.allowedFacetsTypes.length)
                 {
-                    return state.itemList.facets;
+                    return state.itemList.facets.filter(facet => (facet.values.length > 1 || allowedSingleFacets.includes(facet.id)));
                 }
 
                 return state.itemList.facets
-                    .filter(facet => this.allowedFacetsTypes.includes(facet.id) || this.allowedFacetsTypes.includes(facet.type));
+                    .filter(facet => (this.allowedFacetsTypes.includes(facet.id) || this.allowedFacetsTypes.includes(facet.type)) 
+                                     && (facet.values.length > 1 || allowedSingleFacets.includes(facet.id)));
             },
             isLoading: state => state.itemList.isLoading,
             selectedFacets: state => state.itemList.selectedFacets
