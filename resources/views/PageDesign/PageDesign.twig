@@ -318,7 +318,7 @@
 
 {{ get_filtered_tags() }}
 
-{{ get_shop_builder_scripts("2.5.0-rc.6", ceresConfig.log.performanceLevel == 'live') }}
+{{ get_shop_builder_scripts("2.4.15", ceresConfig.log.performanceLevel == 'live') }}
 
 {% if not services.template.shouldBeCached() %}
     <input type="hidden" id="csrf-token" value="{{ csrf_token() }}">
