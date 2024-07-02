@@ -1102,7 +1102,11 @@ var render = function() {
                 attrs: {
                   type: "text",
                   "data-toggle": "tooltip",
-                  maxlength: _vm.property.isOderProperty ? 128 : 65535,
+                  maxlength:
+                    _vm.property.isOderProperty &&
+                    _vm.App.useVariationOrderProperties
+                      ? 128
+                      : 65535,
                   title: _vm.property.names.description,
                   "data-testing": "order-property-input-" + _vm.inputType
                 },
