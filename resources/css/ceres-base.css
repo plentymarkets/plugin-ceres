@@ -10303,6 +10303,10 @@ button:focus {
   margin: 0 !important;
 }
 
+div#page-body {
+  overflow-x: hidden;
+}
+
 .center-xy {
   display: flex;
   flex-flow: row nowrap;

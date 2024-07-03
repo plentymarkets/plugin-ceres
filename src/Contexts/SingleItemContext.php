@@ -2,14 +2,14 @@
 
 namespace Ceres\Contexts;
 
-use IO\Helper\Utils;
 use IO\Helper\ContextInterface;
+use IO\Helper\Utils;
 use IO\Services\CategoryService;
 use IO\Services\CustomerService;
+use Plenty\Modules\Category\Models\Category;
+use Plenty\Modules\Webshop\Contracts\ContactRepositoryContract;
 use Plenty\Modules\Webshop\Helpers\UrlQuery;
 use Plenty\Plugin\ConfigRepository;
-use Plenty\Modules\Webshop\Contracts\ContactRepositoryContract;
-use Plenty\Modules\Category\Models\Category;
 
 /**
  * Class SingleItemContext
@@ -312,7 +312,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $this->setAttributeMap = $params['setAttributeMap'];
         /** @var UrlQuery $urlQuery */
         $urlQuery = pluginApp(UrlQuery::class, ['path' => $this->request->getRequestUri(), 'lang' => Utils::getLang()]);
-        $this->requestedVariationUrl = $urlQuery->toAbsoluteUrl(Utils::getLang() !== $this->webstoreConfig->defaultLanguage);
+        $urlWithParameters = $urlQuery->toAbsoluteUrl(Utils::getLang() !== $this->webstoreConfig->defaultLanguage);
+        $this->requestedVariationUrl = explode("?", $urlWithParameters)[0] ?? '';
         $defaultCategoryId = 0;
         $plentyId = Utils::getPlentyId();
         foreach ($this->item['documents'][0]['data']['defaultCategories'] as $category) {

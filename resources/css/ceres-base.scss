@@ -9062,6 +9062,10 @@ button:focus {
     }
 }
 
+div#page-body {
+    overflow-x: hidden;
+}
+
 .center-xy {
     display: -webkit-box;
     display: -ms-flexbox;

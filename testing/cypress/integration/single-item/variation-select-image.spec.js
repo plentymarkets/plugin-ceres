@@ -37,19 +37,19 @@ context("Variation Select - Image", () =>
     {
         cy.visit("/variantenauswahl/ein-attribut-bild-nicht-kaufbar-angezeigt_144_1131/");
 
-        cy.get(".single-carousel img").should('have.attr', 'src', 'https://cdn02.plentymarkets.com/2x3z2pucy2z9/item/images/144/middle/schwarz.jpg');
+        cy.get(".single-carousel").find("source").first().should('have.attr', 'srcset', 'https://cdn02.plentymarkets.com/2x3z2pucy2z9/item/images/144/middle/schwarz.jpg.avif');
         cy.getByTestingAttr("variation-select-box").eq(1).find("img").should('have.attr', 'src', 'https://cdn02.plentymarkets.com/2x3z2pucy2z9/item/images/144/preview/schwarz.jpg');
         
         cy.getByTestingAttr("variation-select-box").eq(2).click();
-        cy.get(".single-carousel img").should('have.attr', 'src', 'https://cdn02.plentymarkets.com/2x3z2pucy2z9/item/images/144/middle/lila.jpg');
+        cy.get(".single-carousel").find("source").first().should('have.attr', 'srcset', 'https://cdn02.plentymarkets.com/2x3z2pucy2z9/item/images/144/middle/lila.jpg.avif');
         cy.getByTestingAttr("variation-select-box").eq(2).find("img").should('have.attr', 'src', 'https://cdn02.plentymarkets.com/2x3z2pucy2z9/item/images/144/preview/lila.jpg');
         
         cy.getByTestingAttr("variation-select-box").eq(3).click();
-        cy.get(".single-carousel .owl-item.active img").should('have.attr', 'src', 'https://cdn02.plentymarkets.com/2x3z2pucy2z9/item/images/144/middle/lila.jpg');
+        cy.get(".single-carousel .owl-item.active").find("source").first().should('have.attr', 'srcset', 'https://cdn02.plentymarkets.com/2x3z2pucy2z9/item/images/144/middle/lila.jpg.avif');
         cy.getByTestingAttr("variation-select-box").eq(3).find("img").should('have.attr', 'src', '/images/produkte/grp/attr_20.png');
         
         cy.getByTestingAttr("variation-select-box").eq(0).click();
-        cy.get(".single-carousel .owl-item.active img").should('have.attr', 'src', 'https://cdn02.plentymarkets.com/2x3z2pucy2z9/item/images/144/middle/lila.jpg');
+        cy.get(".single-carousel .owl-item.active").find("source").first().should('have.attr', 'srcset', 'https://cdn02.plentymarkets.com/2x3z2pucy2z9/item/images/144/middle/lila.jpg.avif');
         cy.getByTestingAttr("variation-select-box").eq(0).find("img").should('have.attr', 'src', '/images/produkte/grp/attr_17.png');
         
     });

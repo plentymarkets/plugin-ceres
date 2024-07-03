@@ -1,21 +1,20 @@
 <template>
-  <picture
-      v-if="!isBackgroundImage"
-      :data-iesrc="defaultImageUrl"
-      :data-picture-class="pictureClass"
-      :data-alt="alt"
-      :data-title="title"
-      :data-height="height"
-      :data-width="width"
-      :id="uuid"
-  >
-    <slot name="additionalimages"></slot>
-    <source :srcset="defaultImageUrl" :type="mimeType">
-    <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl">
-    <source v-if="fallbackUrl" :srcset="fallbackUrl">
-    <img v-if="receivedImageExtension === 'tif'" :src="defaultImageUrl" :alt="alt" :height="height" :width="width" type="image/tiff">
-    <img v-else-if="height && width && !webpSupported && !avifSupported" :src="defaultImageUrl || fallbackUrl" :alt="alt" :height="height" :width="width">
-  </picture>
+    <picture
+        v-if="!isBackgroundImage"
+        :data-iesrc="defaultImageUrl"
+        :data-picture-class="pictureClass"
+        :data-alt="alt"
+        :data-title="title"
+        :data-height="height"
+        :data-width="width"
+        :id="uuid">
+        <slot name="additionalimages"></slot>
+        <source :srcset="defaultImageUrl" :type="mimeType(defaultImageUrl)">
+        <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl" :type="mimeType(imageUrl)">
+        <source v-if="fallbackUrl" :srcset="fallbackUrl" :type="mimeType(fallbackUrl)">
+        <img v-if="receivedImageExtension === 'tif'" :src="defaultImageUrl" :alt="alt" :height="height" :width="width" type="image/tiff">
+        <img v-else-if="height && width && !webpSupported && !avifSupported" :src="defaultImageUrl || fallbackUrl" :alt="alt" :height="height" :width="width">
+    </picture>
 
     <div v-else :data-background-image="defaultImageUrl || fallbackUrl" :class="pictureClass">
         <slot></slot>
@@ -25,6 +24,7 @@
 <script>
 import lozad from "../../plugins/lozad";
 import {detectAvif, detectWebP} from "../../helper/featureDetect";
+const mime = require('mime-types')
 
 export default {
     props:
@@ -137,14 +137,6 @@ export default {
     },
     computed:
     {
-        mimeType()
-        {
-            const matches = this.defaultImageUrl?.match(this.imgRegex);
-
-            if (matches) return `image/${matches[1].split('.').pop()}`;
-
-            return null;
-        },
         convertedImageUrl()
         {
             return `${this.imageUrl}.${this.browserSupportedImgExtension}`;
@@ -152,6 +144,9 @@ export default {
     },
     methods:
     {
+        mimeType(url){
+            return mime.lookup(url);
+        },
         propagateImageFormat()
         {
             this.setReceivedImageExtension();
