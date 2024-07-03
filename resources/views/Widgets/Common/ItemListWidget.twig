@@ -139,7 +139,7 @@
                             {{ Twig.if("counter < maxPreload") }}
                                 {{ Twig.set("itemImage", "item.data.images | itemImages('urlMiddle') | orderByKey('position') | first") }}
 
-                                {{ Twig.if("ceresConfig.log.modernImagesConversion") }}
+                                {{ Twig.if("ceresConfig.log.modernImagesConversion and itemImage.url matches '/item\\/images/'") }}
                                     {{ Twig.set("preloadAvif", "itemImage.url ~ '.avif'")}}
                                     {{ Twig.print("add_asset(preloadAvif, 'image')") }}
                                 {{ Twig.else() }}
