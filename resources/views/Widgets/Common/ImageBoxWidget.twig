@@ -100,10 +100,10 @@
             {{ Twig.if("fallbackUrl | trim is empty") }}
                 {{ Twig.set("fallbackUrl", "imageUrl") }}
             {{ Twig.endif() }}
- <div class="test">{{ Twig.print("imageUrl matches '/item\/images/'") }}</div>
+
             {% if preloadImage %}
 
-                {{ Twig.if("ceresConfig.log.modernImagesConversion and imageUrl matches '/item\/images/'") }}
+                {{ Twig.if("ceresConfig.log.modernImagesConversion and imageUrl matches '/item\\/images/'") }}
                     {{ Twig.set("preloadAvif", "imageUrl ~ '.avif'")}}
                     {{ Twig.print("add_asset(preloadAvif, 'image')") }}
                  {{ Twig.else() }}
