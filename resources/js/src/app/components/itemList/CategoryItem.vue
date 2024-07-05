@@ -22,6 +22,7 @@
                         <span :class="'ct tag tagSize' + (parseInt(tag.id) - 129)"
                             v-if="[130, 131, 132, 133].includes(tag.id)" v-html="tag.names.name"></span>
                         <span class="tag tagFavorit" v-if="tag.id == 105">Bestseller</span>
+                        <span class="tag tagSet" v-if="tag.id == 153">Komplett-Set</span>
                     </template>
                 </div>
                 <div class="productName">
@@ -349,7 +350,7 @@ export default {
 
                 let attributeId = this.item.attributes[0].attributeId;
                 // Attr-Name: Attr-Val
-                if ([7, 16, 18].includes(attributeId) && this.item.groupedAttributes[0]) {
+                if ([7, 16, 18].includes(attributeId) && this.item.groupedAttributes !== undefined && this.item.groupedAttributes.length > 0) {
                     return this.item.groupedAttributes[0].name + ': ' + this.item.groupedAttributes[0].value;
                 }
 

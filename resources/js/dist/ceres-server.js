@@ -12608,6 +12608,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -12797,7 +12798,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (this.item.attributes.length == 1) {
         var attributeId = this.item.attributes[0].attributeId; // Attr-Name: Attr-Val
 
-        if ([7, 16, 18].includes(attributeId) && this.item.groupedAttributes[0]) {
+        if ([7, 16, 18].includes(attributeId) && this.item.groupedAttributes !== undefined && this.item.groupedAttributes.length > 0) {
           return this.item.groupedAttributes[0].name + ': ' + this.item.groupedAttributes[0].value;
         }
 
@@ -56278,6 +56279,10 @@ var render = function() {
                       " " +
                       (tag.id == 105
                         ? '<span class="tag tagFavorit">Bestseller</span>'
+                        : "<!---->") +
+                      " " +
+                      (tag.id == 153
+                        ? '<span class="tag tagSet">Komplett-Set</span>'
                         : "<!---->")
                     )
                   }) +
