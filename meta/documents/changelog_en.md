@@ -21,6 +21,7 @@
 - The setting: **Check the boxes of the item information you want to display in the shopping cart preview** in the plentyShop assistant step **Displayed information** had no effect on the information displayed. This has been fixed.
 - Fixing the header to improve CLS values sometimes caused undesired scroll behaviour when browing the shop. This has been fixed.
 - The variable "requestedVariationUrl" now returns the URL without query parameters.
+- Fixed wrong image preload on avif conversion.
 
 ### Changed
 
