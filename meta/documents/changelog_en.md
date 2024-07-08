@@ -1,5 +1,16 @@
 # Release Notes for plentyShop LTS
 
+## v5.0.64 (2024-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Empty anchor tag on image box widget.
+- Fullscreen width of background image widget in footer
+
+### Changed
+
+- Added the Return order button on the order confirmation page for guest users. This button is only displayed if the `order-return` route is active in the IO plugin and the order in question is in status 7 (Outgoing items booked) or higher.
+
 ## v5.0.63 (2024-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.62...5.0.63" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed
@@ -10,6 +21,7 @@
 - The setting: **Check the boxes of the item information you want to display in the shopping cart preview** in the plentyShop assistant step **Displayed information** had no effect on the information displayed. This has been fixed.
 - Fixing the header to improve CLS values sometimes caused undesired scroll behaviour when browing the shop. This has been fixed.
 - The variable "requestedVariationUrl" now returns the URL without query parameters.
+- Fixed wrong image preload on avif conversion.
 
 ### Changed
 
