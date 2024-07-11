@@ -27,7 +27,7 @@
             <div class="labeling">
                 <h3 v-if="!short">Sommer-Aktion: 20% sparen!*</h3>
                 <h3 v-else>Jetzt 20% sparen!*</h3>
-                <label v-if="showvalid">gültig bis 14. Juli 2024</label>
+                <label v-if="showvalid">gültig bis 21. Juli 2024</label>
             </div>
 
             <slot name="additionalContent"></slot>
@@ -45,7 +45,7 @@
         <div v-if="details" class="collapse couponDetails" id="couponDetails">
             <p>* G&uuml;ltig für die nächste Bestellung nur in Verbindung mit dem Gutscheincode {{ code }}.
                 Gilt <i>nicht</i> auf bereits reduzierte Ware. Nicht mit anderen Aktionen oder Gutscheinen kombinierbar.
-                Keine Auszahlung möglich. Gültig bis 14.07.2024</p>
+                Keine Auszahlung möglich. Gültig bis 21.07.2024</p>
         </div>
     </div>
 </template>

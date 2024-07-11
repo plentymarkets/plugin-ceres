@@ -260,7 +260,7 @@ var render = function() {
             : _c("h3", [_vm._v("Jetzt 20% sparen!*")]),
           _vm._v(" "),
           _vm.showvalid
-            ? _c("label", [_vm._v("gültig bis 14. Juli 2024")])
+            ? _c("label", [_vm._v("gültig bis 21. Juli 2024")])
             : _vm._e()
         ]),
         _vm._v(" "),
@@ -313,7 +313,7 @@ var render = function() {
               ),
               _c("i", [_vm._v("nicht")]),
               _vm._v(
-                " auf bereits reduzierte Ware. Nicht mit anderen Aktionen oder Gutscheinen kombinierbar.\n            Keine Auszahlung möglich. Gültig bis 14.07.2024"
+                " auf bereits reduzierte Ware. Nicht mit anderen Aktionen oder Gutscheinen kombinierbar.\n            Keine Auszahlung möglich. Gültig bis 21.07.2024"
               )
             ])
           ]

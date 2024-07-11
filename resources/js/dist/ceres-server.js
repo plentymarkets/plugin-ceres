@@ -53207,7 +53207,7 @@ var render = function() {
                 : "<h3>Jetzt 20% sparen!*</h3>") +
               " " +
               (_vm.showvalid
-                ? "<label>gültig bis 14. Juli 2024</label>"
+                ? "<label>gültig bis 21. Juli 2024</label>"
                 : "<!---->") +
               "</div> "
           ),
@@ -53237,7 +53237,7 @@ var render = function() {
                   _vm._s(_vm.code) +
                   ".\n            Gilt "
               ) +
-              "<i>nicht</i> auf bereits reduzierte Ware. Nicht mit anderen Aktionen oder Gutscheinen kombinierbar.\n            Keine Auszahlung möglich. Gültig bis 14.07.2024</p></div>"
+              "<i>nicht</i> auf bereits reduzierte Ware. Nicht mit anderen Aktionen oder Gutscheinen kombinierbar.\n            Keine Auszahlung möglich. Gültig bis 21.07.2024</p></div>"
             : "<!---->")
       )
     ],
