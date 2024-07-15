@@ -1,0 +1,3 @@
+resources/js/dist/** merge=ours linguist-generated=true
+resources/js/lang/** merge=ours linguist-generated=true
+resources/css/** merge=ours linguist-generated=true

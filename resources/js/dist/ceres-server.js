@@ -53203,7 +53203,7 @@ var render = function() {
               : "<!---->") +
               ' <div class="labeling">' +
               (!_vm.short
-                ? "<h3>Sommer-Aktion: 20% sparen!*</h3>"
+                ? "<h3>Sommer-Aktion:<br>20% sparen!*</h3>"
                 : "<h3>Jetzt 20% sparen!*</h3>") +
               " " +
               (_vm.showvalid

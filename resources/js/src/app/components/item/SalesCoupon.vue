@@ -25,7 +25,7 @@
                 <path d="m0 0h115.9988v119.914h-115.9988z" fill="none" />
             </svg>
             <div class="labeling">
-                <h3 v-if="!short">Sommer-Aktion: 20% sparen!*</h3>
+                <h3 v-if="!short">Sommer-Aktion:<br />20% sparen!*</h3>
                 <h3 v-else>Jetzt 20% sparen!*</h3>
                 <label v-if="showvalid">gültig bis 21. Juli 2024</label>
             </div>

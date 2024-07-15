@@ -256,7 +256,11 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "labeling" }, [
           !_vm.short
-            ? _c("h3", [_vm._v("Sommer-Aktion: 20% sparen!*")])
+            ? _c("h3", [
+                _vm._v("Sommer-Aktion:"),
+                _c("br"),
+                _vm._v("20% sparen!*")
+              ])
             : _c("h3", [_vm._v("Jetzt 20% sparen!*")]),
           _vm._v(" "),
           _vm.showvalid

@@ -1,0 +1,13 @@
+{% extends getPartial('page-design') %}
+
+{% block PartialHead %}
+    {% embed getPartial('page-metadata') %}
+        {% block title trans("Ceres::Template.wishList") %}
+    {% endembed %}
+{% endblock %}
+
+{% block PageBody %}
+    <div class="page-content wishlist container-max mb-5 py-3 bg-white">
+        <h1>Access Key View</h1>
+    </div>
+{% endblock %}
