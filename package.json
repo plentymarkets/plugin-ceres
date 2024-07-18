@@ -1,10 +1,10 @@
 {
-  "name": "Ceres",
+  "name": "ceres",
   "license": "AGPL-3.0",
   "version": "5.0.59",
   "repository": {
     "type": "git",
-    "url": "https://github.com/plentymarkets/plugin-ceres.git"
+    "url": "git+https://github.com/plentymarkets/plugin-ceres.git"
   },
   "scripts": {
     "start": "webpack --watch --progress",
@@ -46,6 +46,7 @@
     "eslint": "^6.8.0",
     "eslint-config-google": "^0.13.0",
     "eslint-loader": "^2.2.1",
+    "eslint-plugin-vue": "^9.27.0",
     "esm": "^3.2.25",
     "expose-loader": "^0.7.5",
     "glob": "^7.1.6",
@@ -86,5 +87,12 @@
     "vue-template-compiler": "^2.6.12",
     "vue-virtual-scroller": "^1.0.10",
     "vuex": "^3.3.0"
-  }
+  },
+  "description": "![plentymarkets Logo](http://www.plentymarkets.eu/layout/pm/images/logo/plentymarkets-logo.jpg) e # plentyShop LTS ![Travis Build Stable](https://img.shields.io/travis/plentymarkets/plugin-ceres/stable?label=build)",
+  "bugs": {
+    "url": "https://github.com/plentymarkets/plugin-ceres/issues"
+  },
+  "homepage": "https://github.com/plentymarkets/plugin-ceres#readme",
+  "main": "babel.config.js",
+  "author": ""
 }

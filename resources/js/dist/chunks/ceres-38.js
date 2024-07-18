@@ -74,7 +74,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -108,6 +107,45 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
   computed: {
     showItemBundleItems: function showItemBundleItems() {
       return App.bundleSetting !== 1 && this.bundleType === "bundle";
+    },
+    doy: function doy() {
+      var date = new Date();
+      var start = new Date(date.getFullYear(), 0, 0);
+      var diff = date - start;
+      var oneDay = 1000 * 60 * 60 * 24;
+      var dayOfYear = Math.floor(diff / oneDay);
+      return dayOfYear;
+    },
+    countdownText: function countdownText() {
+      switch (this.doy) {
+        // 18.07.2024 = 200th day
+        // this.doy = day of year  
+        case 200:
+          return "Nur noch 3 Tage";
+          break;
+
+        case 201:
+          return "Nur noch 2 Tage";
+          break;
+
+        case 202:
+          return "Nur noch 1 Tag";
+          break;
+
+        case (203, 204, 205):
+          return "Nur noch heute!";
+          break;
+
+        default:
+          return "Nur noch bis Sonntag";
+          break;
+      }
+    },
+    headingText: function headingText() {
+      var heading = "";
+      if (this.short) heading += "Jetzt 20% sparen!*";else heading += "Sommer-Aktion:<br />20% sparen!*";
+      if (this.countdownText && this.countdownText.length) heading += "<span>" + this.countdownText + "</span>";
+      return heading;
     }
   },
   methods: {
@@ -255,9 +293,7 @@ var render = function() {
           : _vm._e(),
         _vm._v(" "),
         _c("div", { staticClass: "labeling" }, [
-          !_vm.short
-            ? _c("h3", [_vm._v("Sommer-Aktion: 20% sparen!*")])
-            : _c("h3", [_vm._v("Jetzt 20% sparen!*")]),
+          _c("h3", { domProps: { innerHTML: _vm._s(_vm.headingText) } }),
           _vm._v(" "),
           _vm.showvalid
             ? _c("label", [_vm._v("gültig bis 21. Juli 2024")])

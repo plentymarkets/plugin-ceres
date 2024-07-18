@@ -26,7 +26,7 @@
                     </template>
                 </div>
                 <div class="productName">
-                    <a :href="item | itemURL" v-html="texts.name1" class="thumb-title small"></a>
+                    <a :href="item | itemURL" class="thumb-title small">{{ item | itemName }}</a>
                     <p class="variationHint" v-if="!item.variation.isMain" v-html="variationHint"></p>
                 </div>
 
@@ -60,7 +60,7 @@
             </div>
             <div class="productInfoContainer">
                 <div class="productName">
-                    <a :href="item | itemURL" v-html="texts.name1" class="thumb-title small"></a>
+                    <a :href="item | itemURL" class="thumb-title small">{{ item | itemName }}</a>
                 </div>
                 <div class="itemPrice">
                     <add-to-basket :variation-id="item.variation.id"
@@ -101,8 +101,8 @@
             </div>
             <div class="productInfoContainer">
                 <div class="productName">
-                    <a :href="item | itemURL" v-html="texts.name1" class="thumb-title small"
-                        :aria-label="'Empfehlung: Das passt dazu'" click-count></a>
+                    <a :href="item | itemURL" class="thumb-title small" :aria-label="'Empfehlung: Das passt dazu'"
+                        click-count>{{ item | itemName }}</a>
                 </div>
 
                 <p v-if="texts.shortDescription" class="bulletPoints" v-html="texts.shortDescription"></p>

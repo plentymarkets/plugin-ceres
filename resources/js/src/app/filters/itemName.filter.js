@@ -17,14 +17,15 @@ Vue.filter("itemName", ({ texts:{ name1, name2, name3 }, variation:{ name, bundl
         itemName = name1;
     }
 
-    if (itemDisplayName === "itemNameVariationName" && name && name.length)
+    if (name && name.length)
     {
-        itemName = `${itemName} ${name}`;
-    }
+        let filterStrings = ['strecke', 'auslauf', 'colli', 'bestell', '\\[', '\\]'];
+        let regex = new RegExp(filterStrings.join("|"), "i");
 
-    if (itemDisplayName === "variationName" && name && name.length)
-    {
-        itemName = name;
+        if (regex.test(name))
+            return itemName;
+
+        itemName = `${itemName} ${name}`;
     }
 
     return itemName;

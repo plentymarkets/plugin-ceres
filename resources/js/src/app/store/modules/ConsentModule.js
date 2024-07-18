@@ -3,7 +3,7 @@ function _setConsent(state, { key, value })
     const groupKey = key.split(".")[0];
     const consentKey = key.split(".")[1];
 
-    state.consents[groupKey] = state.consents[groupKey] || {};
+    state.consents[groupKey] = state.consents[groupKey] || {}; 
     if (consentKey === "*")
     {
         Object.keys(state.consents[groupKey]).forEach((cKey) =>

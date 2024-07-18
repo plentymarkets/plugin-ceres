@@ -850,11 +850,14 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("div", { staticClass: "productName" }, [
-                _c("a", {
-                  staticClass: "thumb-title small",
-                  attrs: { href: _vm._f("itemURL")(_vm.item) },
-                  domProps: { innerHTML: _vm._s(_vm.texts.name1) }
-                }),
+                _c(
+                  "a",
+                  {
+                    staticClass: "thumb-title small",
+                    attrs: { href: _vm._f("itemURL")(_vm.item) }
+                  },
+                  [_vm._v(_vm._s(_vm._f("itemName")(_vm.item)))]
+                ),
                 _vm._v(" "),
                 !_vm.item.variation.isMain
                   ? _c("p", {
@@ -941,11 +944,14 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "productInfoContainer" }, [
             _c("div", { staticClass: "productName" }, [
-              _c("a", {
-                staticClass: "thumb-title small",
-                attrs: { href: _vm._f("itemURL")(_vm.item) },
-                domProps: { innerHTML: _vm._s(_vm.texts.name1) }
-              })
+              _c(
+                "a",
+                {
+                  staticClass: "thumb-title small",
+                  attrs: { href: _vm._f("itemURL")(_vm.item) }
+                },
+                [_vm._v(_vm._s(_vm._f("itemName")(_vm.item)))]
+              )
             ]),
             _vm._v(" "),
             _c(
@@ -1063,15 +1069,18 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "productInfoContainer" }, [
               _c("div", { staticClass: "productName" }, [
-                _c("a", {
-                  staticClass: "thumb-title small",
-                  attrs: {
-                    href: _vm._f("itemURL")(_vm.item),
-                    "aria-label": "Empfehlung: Das passt dazu",
-                    "click-count": ""
+                _c(
+                  "a",
+                  {
+                    staticClass: "thumb-title small",
+                    attrs: {
+                      href: _vm._f("itemURL")(_vm.item),
+                      "aria-label": "Empfehlung: Das passt dazu",
+                      "click-count": ""
+                    }
                   },
-                  domProps: { innerHTML: _vm._s(_vm.texts.name1) }
-                })
+                  [_vm._v(_vm._s(_vm._f("itemName")(_vm.item)))]
+                )
               ]),
               _vm._v(" "),
               _vm.texts.shortDescription

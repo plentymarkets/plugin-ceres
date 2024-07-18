@@ -104,6 +104,11 @@ export default {
 
         close()
         {
+            gtag('consent', 'update', { 'ad_storage': (window.ConsentManager.isConsented('tracking.GAds') ? 'granted' : 'denied') });
+            gtag('consent', 'update', { 'ad_user_data': (window.ConsentManager.isConsented('tracking.GAds') ? 'granted' : 'denied') });
+            gtag('consent', 'update', { 'ad_personalization': (window.ConsentManager.isConsented('tracking.GAds') ? 'granted' : 'denied') });
+            gtag('consent', 'update', { 'analytics_storage': (window.ConsentManager.isConsented('tracking.GAnl') ? 'granted' : 'denied') }); 
+
             this.isCollapsed = true;
             this.isExpanded = false;
         },

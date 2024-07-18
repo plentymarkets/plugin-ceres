@@ -25,8 +25,7 @@
                 <path d="m0 0h115.9988v119.914h-115.9988z" fill="none" />
             </svg>
             <div class="labeling">
-                <h3 v-if="!short">Sommer-Aktion:<br />20% sparen!*</h3>
-                <h3 v-else>Jetzt 20% sparen!*</h3>
+                <h3 v-html="headingText"></h3>
                 <label v-if="showvalid">gültig bis 21. Juli 2024</label>
             </div>
 
@@ -90,6 +89,50 @@ export default {
     {
         showItemBundleItems() {
             return App.bundleSetting !== 1 && this.bundleType === "bundle";
+        },
+        doy() {
+            const date = new Date();
+            const start = new Date(date.getFullYear(), 0, 0);
+            const diff = date - start;
+            const oneDay = 1000 * 60 * 60 * 24;
+            const dayOfYear = Math.floor(diff / oneDay);
+            return dayOfYear;
+        },
+        countdownText() {
+            switch(this.doy)
+            {
+                // 18.07.2024 = 200th day
+                // this.doy = day of year  
+                case 200:
+                    return "Nur noch 3 Tage";
+                break;
+                case 201:
+                    return "Nur noch 2 Tage";
+                break;
+                case 202:
+                    return "Nur noch 1 Tag";
+                break;
+                case 203, 204, 205:
+                    return "Nur noch heute!";
+                break;
+                default:
+                    return "Nur noch bis Sonntag";
+                break;
+                
+            }
+        },
+        headingText()
+        {
+            let heading = "";
+            if(this.short)
+                heading += "Jetzt 20% sparen!*";
+            else 
+                heading += "Sommer-Aktion:<br />20% sparen!*";
+            
+            if (this.countdownText && this.countdownText.length)
+                heading += "<span>"+this.countdownText+"</span>";
+
+            return heading;
         }
     },
 
