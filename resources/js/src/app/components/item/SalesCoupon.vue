@@ -112,11 +112,14 @@ export default {
                 case 202:
                     return "Nur noch 1 Tag";
                 break;
-                case 203, 204, 205:
+                case 203:
+                    return "Nur noch heute!";
+                break;
+                case 204:
                     return "Nur noch heute!";
                 break;
                 default:
-                    return "Nur noch bis Sonntag";
+                    return "Nur noch heute!";
                 break;
                 
             }
