@@ -118,6 +118,9 @@ export default {
                 case 204:
                     return "Nur noch heute!";
                 break;
+                case 205:
+                    return "Nur noch heute!";
+                break;
                 default:
                     return "Nur noch heute!";
                 break;
