@@ -289,12 +289,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
                 $this->robots = "noindex, nofollow";
                 break;
             case "varProp":
-                $value = $this->getVariationProperty($itemData['variationProperties'], $robotsMappingId);
-                if (empty($value)) {
-                    $this->robots = "all";
-                } else {
-                    $this->robots = $value;
-                }
+                $this->robots = $this->getVariationProperty($itemData['variationProperties'], $robotsMappingId) ?: "all";
                 break;
         }
 
