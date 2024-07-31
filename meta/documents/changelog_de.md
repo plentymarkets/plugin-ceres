@@ -7,6 +7,7 @@
 - Leeres Anker-Tag im Bilderbox-Widget.
 - Vollbildbreite des Hintergrundbild-Widgets in der Fußzeile
 - Fehlerhafter Standardwert von einer in Version 5.0.62 eingeführten SEO Option auf der Artikelseite wurde behoben.
+- Das teilweise unregelmäßige Scroll-Verhalten auf mobilen Geräten wurde behoben.
 
 ### Geändert
 

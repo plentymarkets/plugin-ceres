@@ -10308,7 +10308,7 @@ button:focus {
 }
 
 div#page-body {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .center-xy {
