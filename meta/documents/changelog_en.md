@@ -22,6 +22,7 @@
 - Fixing the header to improve CLS values sometimes caused undesired scroll behaviour when browing the shop. This has been fixed.
 - The variable "requestedVariationUrl" now returns the URL without query parameters.
 - Fixed wrong image preload on avif conversion.
+- Fixed intermittent scrolling issue on mobile.
 
 ### Changed
 
