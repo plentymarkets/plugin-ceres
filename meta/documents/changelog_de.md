@@ -6,6 +6,7 @@
 
 - Leeres Anker-Tag im Bilderbox-Widget.
 - Vollbildbreite des Hintergrundbild-Widgets in der Fußzeile
+- Behobenes intermittierendes Scroll-Problem auf mobilen Geräten.
 
 ### Geändert
 
@@ -22,7 +23,6 @@
 - Durch das Fixieren des Headers zum Verbessern der CLS-Werte kam es unter Umständen zu einem ungewünschten Scroll-Verhalten beim Browsen des Shops. Dies wurde behoben.
 - Die Variable "requestedVariationUrl" gibt nun die URL ohne Query-Parameter zurück.
 - Falsches Vorladen des Bildes bei der AVIF-Konvertierung behoben
-- Behobenes intermittierendes Scroll-Problem auf mobilen Geräten.
 
 ### Geändert
 
