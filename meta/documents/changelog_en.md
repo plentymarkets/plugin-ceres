@@ -6,6 +6,7 @@
 
 - Empty anchor tag on image box widget.
 - Fullscreen width of background image widget in footer
+- Fixed intermittent scrolling issue on mobile.
 
 ### Changed
 

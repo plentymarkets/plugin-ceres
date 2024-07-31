@@ -6,6 +6,7 @@
 
 - Leeres Anker-Tag im Bilderbox-Widget.
 - Vollbildbreite des Hintergrundbild-Widgets in der Fußzeile
+- Das teilweise unregelmäßige Scroll-Verhalten auf mobilen Geräten wurde behoben.
 
 ### Geändert
 
