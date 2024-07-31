@@ -8361,6 +8361,9 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     }
   })),
   methods: _objectSpread({
+    isOrderProperty: function isOrderProperty(property) {
+      return property.isOderProperty && App.useVariationOrderProperties;
+    },
     onInputValueChanged: function onInputValueChanged(value) {
       if (this.inputType === "int") {
         value = this.validateInt(value);
@@ -50209,7 +50212,7 @@ var render = function() {
                   attrs: {
                     type: "text",
                     "data-toggle": "tooltip",
-                    maxlength: "128",
+                    maxlength: _vm.isOrderProperty(_vm.property) ? 128 : 65535,
                     title: _vm.property.names.description,
                     "data-testing": "order-property-input-" + _vm.inputType
                   },

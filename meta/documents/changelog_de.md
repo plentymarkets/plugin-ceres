@@ -7,6 +7,10 @@
 - Leeres Anker-Tag im Bilderbox-Widget.
 - Vollbildbreite des Hintergrundbild-Widgets in der Fußzeile
 
+### Geändert
+
+- Die "Retouren"-Schaltfläche wurde auf der Bestellbestätigung für Gastbestellungen hinzugefügt. Diese Schaltfläche wird nur angezeigt, wenn die Route `order-returns` im IO-Plugin aktiv ist und sich der jeweilige Auftrag mindestens im Status 7 (Warenausgang gebucht) befindet.
+  
 ## v5.0.63 (2024-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.62...5.0.63" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben
@@ -17,6 +21,7 @@
 - Die Einstellung: **Hake die Artikelinformationen an, die du in der Warenkorbvorschau anzeigen möchtest.** im plentyShop Assistenten Schritt **Angezeigte Informationen** hatte keine Auswirkung auf die angezeigten Informationen. Dies wurde behoben.
 - Durch das Fixieren des Headers zum Verbessern der CLS-Werte kam es unter Umständen zu einem ungewünschten Scroll-Verhalten beim Browsen des Shops. Dies wurde behoben.
 - Die Variable "requestedVariationUrl" gibt nun die URL ohne Query-Parameter zurück.
+- Falsches Vorladen des Bildes bei der AVIF-Konvertierung behoben
 
 ### Geändert
 
