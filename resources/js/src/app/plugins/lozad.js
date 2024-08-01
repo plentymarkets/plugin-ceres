@@ -36,6 +36,16 @@ const defaultConfig = {
                 img.title = element.getAttribute("data-title");
             }
 
+            if (element.getAttribute("data-width"))
+            {
+                img.width = element.getAttribute("data-width");
+            }
+
+            if (element.getAttribute("data-height"))
+            {
+                img.height = element.getAttribute("data-height");
+            }
+
             if (element.getAttribute("data-picture-class"))
             {
                 let classes = element.getAttribute("data-picture-class");

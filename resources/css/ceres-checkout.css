@@ -12435,6 +12435,7 @@ header#page-header {
 .basket-list-item .image-container {
   flex-shrink: 0;
   width: 75px;
+  height: 85px;
   margin-right: 10px;
 }
 @media (max-width: 575.98px) {
