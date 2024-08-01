@@ -6,7 +6,6 @@
 
 - Leeres Anker-Tag im Bilderbox-Widget.
 - Vollbildbreite des Hintergrundbild-Widgets in der Fußzeile
-- Umschalter im Bereich „Medien-Cookies“ entfernen
 
 ### Geändert
 
