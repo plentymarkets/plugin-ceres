@@ -102,7 +102,7 @@
             {{ Twig.endif() }}
 
             {% if preloadImage %}
-                {{ Twig.if("ceresConfig.log.modernImagesConversion") }}
+                {{ Twig.if("ceresConfig.log.modernImagesConversion and imageUrl matches '{item\/images}'") }}
                     {{ Twig.set("preloadAvif", "imageUrl ~ '.avif'")}}
                     {{ Twig.print("add_asset(preloadAvif, 'image')") }}
                  {{ Twig.else() }}
