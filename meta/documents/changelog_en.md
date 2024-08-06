@@ -6,6 +6,9 @@
 
 - Empty anchor tag on image box widget.
 - Fullscreen width of background image widget in footer
+- Incorrect default value of an SEO option introduced in version 5.0.62 on the single item page has been fixed.
+- Fixed intermittent scrolling issue on mobile.
+
 
 ### Changed
 

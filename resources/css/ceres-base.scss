@@ -9063,7 +9063,7 @@ button:focus {
 }
 
 div#page-body {
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 .center-xy {
@@ -9110,7 +9110,6 @@ a {
         img {
             -webkit-transform: scale(1.05);
                     transform: scale(1.05);
-            
         }
     }
     &.widget-image-box{
@@ -10915,6 +10914,7 @@ header#page-header {
         -ms-flex-negative: 0;
             flex-shrink: 0;
         width: 75px;
+        height: 85px;
         margin-right: 10px;
 
         @include media-breakpoint-down(xs) {
