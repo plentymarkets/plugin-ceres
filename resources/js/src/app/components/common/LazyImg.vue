@@ -69,7 +69,7 @@ export default {
     data()
     {
         return {
-            imageConversionEnabled: App.config.log.modernImagesConversion,
+            imageConversionEnabled: true,
             receivedImageExtension: null,
             browserSupportedImgExtension: null,
             defaultImageUrl: this.imageUrl,
@@ -208,7 +208,7 @@ export default {
         {
             const validConversionExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG', 'webp'];
 
-            return this.convertImage 
+            return this.convertImage
                 && this.imageConversionEnabled
                 && /\/item\/images\//.test(this.imageUrl)
                 && this.browserSupportedImgExtension !== this.receivedImageExtension

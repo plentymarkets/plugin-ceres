@@ -478,7 +478,7 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
   },
   data: function data() {
     return {
-      imageConversionEnabled: App.config.log.modernImagesConversion,
+      imageConversionEnabled: true,
       receivedImageExtension: null,
       browserSupportedImgExtension: null,
       defaultImageUrl: this.imageUrl,
