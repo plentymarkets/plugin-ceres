@@ -562,6 +562,11 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
       _this.avifSupported = avifSupported;
 
       if (avifSupported) {
+        _this.$nextTick(function () {
+          if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
+          Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_8__["default"])(_this.$el).observe();
+        });
+
         _this.propagateImageFormat();
       }
 
@@ -570,16 +575,20 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
           _this.webpSupported = webpSupported;
 
           if (webpSupported) {
+            _this.$nextTick(function () {
+              if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
+              Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_8__["default"])(_this.$el).observe();
+            });
+
             _this.propagateImageFormat();
           }
         });
-      }
+      } // lozad(this.$el, {
+      //     loaded: function(el) {
+      //         el.classList.remove('lozad');
+      //     }
+      // }).triggerLoad(this.$el);
 
-      Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_8__["default"])(_this.$el, {
-        loaded: function loaded(el) {
-          el.classList.remove('lozad');
-        }
-      }).triggerLoad(_this.$el);
     });
   },
   watch: {

@@ -89,6 +89,10 @@ export default {
             this.avifSupported = avifSupported;
 
             if (avifSupported) {
+                this.$nextTick(() => {
+                    if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
+                    lozad(this.$el).observe();
+                });
                 this.propagateImageFormat();
             }
 
@@ -97,16 +101,20 @@ export default {
                     this.webpSupported = webpSupported;
 
                     if (webpSupported) {
+                        this.$nextTick(() => {
+                            if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
+                            lozad(this.$el).observe();
+                        });
                         this.propagateImageFormat();
                     }
                 }));
             }
 
-            lozad(this.$el, {
-                loaded: function(el) {
-                    el.classList.remove('lozad');
-                }
-            }).triggerLoad(this.$el);
+            // lozad(this.$el, {
+            //     loaded: function(el) {
+            //         el.classList.remove('lozad');
+            //     }
+            // }).triggerLoad(this.$el);
         }));
     },
     watch:
