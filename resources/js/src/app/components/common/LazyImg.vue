@@ -109,24 +109,29 @@ export default {
                     }
                 }));
             }
+
+            // lozad(this.$el, {
+            //     loaded: function(el) {
+            //         el.classList.remove('lozad');
+            //     }
+            // }).triggerLoad(this.$el);
         }));
     },
     watch:
     {
-        defaultImageUrl(){
+        defaultImageUrl()
+        {
             this.$nextTick(() => {
                 this.$el.setAttribute('data-loaded', 'false');
 
                 const images = document.getElementById(this.uuid).getElementsByTagName('img');
-                if (images.length > 0) {
-                    images[0].remove();
-                }
+                if (images.length > 0) images[0].remove();
 
                 lozad(this.$el, {
                     loaded: function(el) {
                         el.classList.remove('lozad');
                     }
-                }).triggerLoad(this.$el);
+                }).observe();
             });
         },
         imageUrl()

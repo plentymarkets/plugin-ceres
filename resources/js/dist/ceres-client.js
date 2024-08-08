@@ -519,7 +519,12 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
             _this.propagateImageFormat();
           }
         });
-      }
+      } // lozad(this.$el, {
+      //     loaded: function(el) {
+      //         el.classList.remove('lozad');
+      //     }
+      // }).triggerLoad(this.$el);
+
     });
   },
   watch: {
@@ -530,16 +535,12 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
         _this2.$el.setAttribute('data-loaded', 'false');
 
         var images = document.getElementById(_this2.uuid).getElementsByTagName('img');
-
-        if (images.length > 0) {
-          images[0].remove();
-        }
-
+        if (images.length > 0) images[0].remove();
         Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_8__["default"])(_this2.$el, {
           loaded: function loaded(el) {
             el.classList.remove('lozad');
           }
-        }).triggerLoad(_this2.$el);
+        }).observe();
       });
     },
     imageUrl: function imageUrl() {
