@@ -69,7 +69,7 @@ export default {
     data()
     {
         return {
-            imageConversionEnabled: true,
+            imageConversionEnabled: App.config.log.modernImagesConversion,
             receivedImageExtension: null,
             browserSupportedImgExtension: null,
             defaultImageUrl: this.imageUrl,
@@ -109,12 +109,6 @@ export default {
                     }
                 }));
             }
-
-            // lozad(this.$el, {
-            //     loaded: function(el) {
-            //         el.classList.remove('lozad');
-            //     }
-            // }).triggerLoad(this.$el);
         }));
     },
     watch:
