@@ -109,12 +109,6 @@ export default {
                     }
                 }));
             }
-
-            // lozad(this.$el, {
-            //     loaded: function(el) {
-            //         el.classList.remove('lozad');
-            //     }
-            // }).triggerLoad(this.$el);
         }));
     },
     watch:
@@ -209,7 +203,7 @@ export default {
                 this.defaultImageUrl = this.convertedImageUrl;
                 return;
             }
-            this.defaultImageUrl = this.imageUrl || this.fallbackUrl;
+            this.defaultImageUrl = this.imageUrl;
         },
         imageShouldBeConverted()
         {

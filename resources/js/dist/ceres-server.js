@@ -2990,12 +2990,7 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
             _this.propagateImageFormat();
           }
         });
-      } // lozad(this.$el, {
-      //     loaded: function(el) {
-      //         el.classList.remove('lozad');
-      //     }
-      // }).triggerLoad(this.$el);
-
+      }
     });
   },
   watch: {
@@ -3086,7 +3081,7 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
         return;
       }
 
-      this.defaultImageUrl = this.imageUrl || this.fallbackUrl;
+      this.defaultImageUrl = this.imageUrl;
     },
     imageShouldBeConverted: function imageShouldBeConverted() {
       var validConversionExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG', 'webp'];
