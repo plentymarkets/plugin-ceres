@@ -203,7 +203,7 @@ export default {
                 this.defaultImageUrl = this.convertedImageUrl;
                 return;
             }
-            this.defaultImageUrl = this.imageUrl;
+            this.defaultImageUrl = this.imageUrl || this.fallbackUrl;
         },
         imageShouldBeConverted()
         {
