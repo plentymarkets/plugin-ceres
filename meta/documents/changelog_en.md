@@ -2,6 +2,10 @@
 
 ## v5.0.64 (2024-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
+### New
+
+- For the "Sorting" and "Articles per page" buttons on article category pages, `aria-labels` have been added to improve accessibility. They can be customised via the **CMS » Multilingualism** menu. We would like to thank @MaxBentz for his contribution.
+
 ### Fixed
 
 - Empty anchor tag on image box widget.
