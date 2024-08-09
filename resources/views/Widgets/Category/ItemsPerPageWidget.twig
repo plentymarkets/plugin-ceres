@@ -15,7 +15,7 @@
     <div class="widget-inner">
         <div class="list-itemsperpage">
             <select
-                class="custom-select"
+                class="custom-select" aria-label="{{ Twig.trans("Ceres::Template.itemsPerPageLabel") }}"
                 @change="$store.dispatch('selectItemsPerPage', $event.target.value)"
                 v-populate-store:mutation="{ name: 'setItemsPerPage', data: {{ Twig.print("itemsPerPage | json_encode") }} }">
                 {{ Twig.for("entry", "itemsPerPageEntries") }}
