@@ -54,7 +54,8 @@
 - Im Bereich **SEO** der plentyShop LTS-Einstellungen wurde eine neue Einstellung für die **Robots**-Angaben auf der Artikelseite hinzugefügt. Mit dieser Einstellung ist es nun möglich, das Robots-Verhalten einzustellen.
 - Im Bereich **SEO** der plentyShop LTS-Einstellungen wurde die neue Einstellung **Quelle für eine individuelle Canonical URL für die Artikelseite wählen** hinzugefügt. Mit dieser Einstellung ist es nun möglich, die Varianten auf eine andere Canonical URL zeigen zu lassen.
 - Es wurde eine Möglichkeit hinzugefügt, Adressen als primäre Adresse festzulegen.
-- Im Schritt **Performance** des plentyShop-Assistenten wurde die Möglichkeit hinzugefügt, das Umwandeln von Bildern in das Avif, WebP-Format zu aktivieren.
+- Im Schritt **Performance** des plentyShop-Assistenten wurde die Einstellung **Automatische Konvertierung in moderne Bildformate aktivieren** hinzugefügt. Damit werden Artikelbilder beim ersten Aufruf automatisch in das AVIF- oder WebP-Format umgewandelt.
+    - ***Wichtig:*** Die Zeit bis ein Artikelbild beim ersten Aufruf umgewandelt wird, ist hochgradig abhängig von der Größe, in der das ursprüngliche Artikelbild hochgeladen wurde. Um die Umwandlungszeit möglichst gering zu halten, sollte das hochgeladene Bild der im Menü **Einrichtung » Artikel » Bilder » Größen » full** hinterlegten Größe entsprechen.
 - Die Ergebnisfelder für Artikel wurde um Tags erweitert.
 - Die ShopBuilder-Widgets **Link** und **Auftragshistorie** bieten nun die Möglichkeit, mehrere Tracking-Links anzuzeigen, wenn die Einstellung **URLs splitten** im Menü **Einrichtung » Aufträge » Versand » Optionen** aktiviert ist.
 - Der Übersetzungschlüssel `checkoutPaidAmount` wurde in der Mehrsprachigkeits-UI hinzugefügt.

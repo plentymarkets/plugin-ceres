@@ -55,8 +55,9 @@
 - In the **SEO** section of the plentyShop LTS settings, a new setting has been added for the **Robots** on the single item page. With this setting it is now possible to set the robots behaviour for the single item view.
 - In the **SEO** section of the plentyShop LTS settings, the new setting **Select source for an individual canonical URL for the item page** has been added. With this setting, it is possible to have the variations point to a different canonical URL.
 - An option has been added to set addresses as the primary address.
-- Added the capability to activate the conversion of images to the AVIF, WebP format in the **Performance** step of the plentyShop assistant.
-- The result fields for articles have been expanded to include tags.
+- In the **Performance** step of the plentyShop assistant, the **Enable automatic conversion into modern image formats** setting has been added. This means that item images are automatically converted into the AVIF or WebP format the first time they are accessed.
+    - ***Important:*** The time until an item image is converted when it's first accessed is highly dependent on the size in which the original item image was uploaded. To minimise the conversion time, the uploaded image should correspond to the size stored in the **Setup » Item » Images » Sizes » full** menu.
+- The result fields for items have been expanded to include tags.
 - The ShopBuilder widgets **Link** and **Order history** now offer the possibility to display multiple tracking links if the **Split URLs** setting is activated in the **Setup » Orders » Shipping » Options** menu.
 - The translation key `checkoutPaidAmount` has been added to the multilingualism interface.
 
