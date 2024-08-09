@@ -6,7 +6,8 @@
     <select
         class="custom-select"
         @change="$store.dispatch('selectItemsPerPage', $event.target.value)"
-        v-populate-store:mutation="{ name: 'setItemsPerPage', data: {{selectedValue}} }">
+        v-populate-store:mutation="{ name: 'setItemsPerPage', data: {{selectedValue}} }"
+        aria-label="{{ trans("Ceres::Template.itemsPerPageLabel") }}">
         {% for value in itemsPerPage | sort %}
             <option value="{{ value }}"{% if value == selectedValue %} selected{% endif %}>
                 {{ value }}
