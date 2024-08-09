@@ -10,15 +10,17 @@
 
 ### Fixed
 
-- Empty anchor tag on image box widget.
+- The 'alt' attribute text of images from the webspace that were used in the image box widget was not displayed. This has been fixed.
 - Fullscreen width of background image widget in footer
 - Incorrect default value of an SEO option introduced in version 5.0.62 on the single item page has been fixed.
-- Fixed intermittent scrolling issue on mobile.
+- Incorrect scrolling behaviour could occur on mobile devices. This has been fixed.
+- The maximum number of characters displayed for characteristics was incorrectly limited to 128. This limit has been removed.
 
 ### Changed
 
 - Cookie groups that only contain cookies declared as “necessary” can no longer be deactivated
 - The setting `Automatic conversion into modern image formats (AVIF, WebP)` in the plentyShop assistant step **Performance** is active per default. If you do not want to use the automatic conversion, deactivate the setting.
+- The structure of the image box widget has been adapted so that search engines can identify a link title.
 
 ## v5.0.63 (2024-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.62...5.0.63" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
