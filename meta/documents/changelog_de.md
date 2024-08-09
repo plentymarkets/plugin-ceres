@@ -2,8 +2,17 @@
 
 ## v5.0.64 (2024-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
+### Behoben
+
+- Leeres Anker-Tag im Bilderbox-Widget.
+- Vollbildbreite des Hintergrundbild-Widgets in der Fußzeile
+- Fehlerhafter Standardwert von einer in Version 5.0.62 eingeführten SEO Option auf der Artikelseite wurde behoben.
+- Das teilweise unregelmäßige Scroll-Verhalten auf mobilen Geräten wurde behoben.
+
 ### Geändert
 
+- Die "Retouren"-Schaltfläche wurde auf der Bestellbestätigung für Gastbestellungen hinzugefügt. Diese Schaltfläche wird nur angezeigt, wenn die Route `order-returns` im IO-Plugin aktiv ist und sich der jeweilige Auftrag mindestens im Status 7 (Warenausgang gebucht) befindet.
+- Cookie Gruppen, die ausschließlich als "notwendig" deklarierte Cookies enthalten, können nicht mehr deaktiviert werden.
 - Die Einstellung `Automatische Konvertierung in moderne Bildformate (AVIF, WebP)` im plentyShop-Assistenten Schritt **Performance** ist nun im Standard aktiv. Wenn du die automatische Konvertierung nicht nutzen willst deaktiviere die Einstellung.
 
 ## v5.0.63 (2024-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.62...5.0.63" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
@@ -16,6 +25,7 @@
 - Die Einstellung: **Hake die Artikelinformationen an, die du in der Warenkorbvorschau anzeigen möchtest.** im plentyShop Assistenten Schritt **Angezeigte Informationen** hatte keine Auswirkung auf die angezeigten Informationen. Dies wurde behoben.
 - Durch das Fixieren des Headers zum Verbessern der CLS-Werte kam es unter Umständen zu einem ungewünschten Scroll-Verhalten beim Browsen des Shops. Dies wurde behoben.
 - Die Variable "requestedVariationUrl" gibt nun die URL ohne Query-Parameter zurück.
+- Falsches Vorladen des Bildes bei der AVIF-Konvertierung behoben
 
 ### Geändert
 
@@ -45,7 +55,8 @@
 - Im Bereich **SEO** der plentyShop LTS-Einstellungen wurde eine neue Einstellung für die **Robots**-Angaben auf der Artikelseite hinzugefügt. Mit dieser Einstellung ist es nun möglich, das Robots-Verhalten einzustellen.
 - Im Bereich **SEO** der plentyShop LTS-Einstellungen wurde die neue Einstellung **Quelle für eine individuelle Canonical URL für die Artikelseite wählen** hinzugefügt. Mit dieser Einstellung ist es nun möglich, die Varianten auf eine andere Canonical URL zeigen zu lassen.
 - Es wurde eine Möglichkeit hinzugefügt, Adressen als primäre Adresse festzulegen.
-- Im Schritt **Performance** des plentyShop-Assistenten wurde die Möglichkeit hinzugefügt, das Umwandeln von Bildern in das Avif, WebP-Format zu aktivieren.
+- Im Schritt **Performance** des plentyShop-Assistenten wurde die Einstellung **Automatische Konvertierung in moderne Bildformate aktivieren** hinzugefügt. Damit werden Artikelbilder beim ersten Aufruf automatisch in das AVIF- oder WebP-Format umgewandelt.
+    - ***Wichtig:*** Die Zeit bis ein Artikelbild beim ersten Aufruf umgewandelt wird, ist hochgradig abhängig von der Größe, in der das ursprüngliche Artikelbild hochgeladen wurde. Um die Umwandlungszeit möglichst gering zu halten, sollte das hochgeladene Bild der im Menü **Einrichtung » Artikel » Bilder » Größen » full** hinterlegten Größe entsprechen.
 - Die Ergebnisfelder für Artikel wurde um Tags erweitert.
 - Die ShopBuilder-Widgets **Link** und **Auftragshistorie** bieten nun die Möglichkeit, mehrere Tracking-Links anzuzeigen, wenn die Einstellung **URLs splitten** im Menü **Einrichtung » Aufträge » Versand » Optionen** aktiviert ist.
 - Der Übersetzungschlüssel `checkoutPaidAmount` wurde in der Mehrsprachigkeits-UI hinzugefügt.

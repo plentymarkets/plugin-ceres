@@ -123,6 +123,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -149,6 +154,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       event.preventDefault();
       event.stopPropagation();
       this.$set(this.expandedGroups, groupKey, value);
+    },
+    necessaryOnly: function necessaryOnly(obj) {
+      return obj.key === 'media' && obj.consents.every(function (consent) {
+        return consent.necessary === true;
+      });
     }
   })
 });
@@ -231,7 +241,7 @@ var render = function() {
                     2
                   ),
                   _vm._v(" "),
-                  !consentGroup.necessary
+                  !consentGroup.necessary && !_vm.necessaryOnly(consentGroup)
                     ? _c(
                         "span",
                         {

@@ -3,15 +3,18 @@
         <slot name="before-basket-item"></slot>
 
         <div class="basket-item component-loading with-icon d-flex" :class="{ 'sending is-loading': waiting, 'is-loading': isCheckoutReadonly }">
-            <div class="image-container">
+            <div class="image-container" style="aspect-ratio: 1/1;">
                 <a :href="basketItem.variation.data | itemURL">
                     <lazy-img
                         v-if="image"
                         :image-url="image"
                         :alt="altText"
                         :title="itemName"
+                        :height="height"
+                        :width="width"
                         picture-class="d-block mw-100 mh-100"
-                        data-testing="basket-item-img" />
+                        data-testing="basket-item-img"
+                    />
                 </a>
             </div>
 
@@ -209,6 +212,20 @@ export default {
             const itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
 
             return this.$options.filters.itemImage(itemImages);
+        },
+
+        width()
+        {
+            const itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
+
+            return this.$options.filters.itemImageWidth(itemImages);
+        },
+
+        height()
+        {
+          const itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
+
+          return this.$options.filters.itemImageHeight(itemImages);
         },
 
         altText()

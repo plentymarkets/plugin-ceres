@@ -1,7 +1,12 @@
 <template>
     <div class="privacy-settings d-flex flex-column">
         <div class="privacy-settings-body overflow-auto">
-            <div class="card consent-group" :class="{cardClass, 'mb-3': index < consentGroup.length - 1}" :style="cardStyle" v-for="(consentGroup, index) in consentGroups">
+            <div class="card consent-group"
+                 :class="{cardClass, 'mb-3':
+                 index < consentGroup.length - 1}"
+                 :style="cardStyle"
+                 v-for="(consentGroup, index) in consentGroups"
+            >
                 <div class="card-body mb-0" @click.stop="toggleConsent(consentGroup.key + '.*')">
                     <p class="card-title h4 d-flex">
                         <span class="flex-fill">
@@ -13,7 +18,7 @@
                             </template>
                             ({{ consentGroup.consents.length }})
                         </span>
-                        <span class="custom-control custom-switch custom-control-appearance" v-if="!consentGroup.necessary">
+                        <span class="custom-control custom-switch custom-control-appearance" v-if="!consentGroup.necessary && !necessaryOnly(consentGroup)">
                                 <input type="checkbox"
                                        class="custom-control-input"
                                        :checked="isConsented(consentGroup.key + '.*')">
@@ -125,6 +130,11 @@ export default {
             event.preventDefault();
             event.stopPropagation();
             this.$set(this.expandedGroups, groupKey, value);
+        },
+
+        necessaryOnly(obj)
+        {
+          return obj.key === 'media' && obj.consents.every(consent => consent.necessary === true)
         }
     }
 }

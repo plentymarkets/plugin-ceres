@@ -11,6 +11,8 @@
                 :image-url="imageUrl.url"
                 :alt="getAltText(imageUrl)"
                 :title="getTitleText(imageUrl)"
+                :width="getImageWidth(imageUrl)"
+                :height="getImageHeight(imageUrl)"
                 :ref="{ 'itemLazyImage' : index === 0 }"
                 picture-class="img-fluid"
                 role="option" />
@@ -23,6 +25,8 @@
             :image-url="imageOrItemImage"
             :alt="getAltText(imageUrls[0])"
             :title="getTitleText(imageUrls[0])"
+            :width="getImageWidth(imageUrls[0])"
+            :height="getImageHeight(imageUrls[0])"
             picture-class="img-fluid" />
     </a>
 </template>
@@ -162,6 +166,16 @@ export default {
             const title = image && image.name ? image.name : this.title;
 
             return title;
+        },
+
+        getImageWidth(image)
+        {
+            return image && image.width ? image.width : undefined;
+        },
+
+        getImageHeight(image)
+        {
+            return image && image.height ? image.height : undefined;
         }
     }
 }

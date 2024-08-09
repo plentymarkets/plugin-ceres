@@ -1,6 +1,5 @@
-div#page-body,
-div.footer {
-    overflow-x: hidden;
+div#page-body {
+    overflow-x: clip;
 }
 
 .center-xy {
@@ -38,7 +37,6 @@ a {
     &:hover, &:focus {
         img {
             transform: scale(1.05);
-            
         }
     }
     &.widget-image-box{

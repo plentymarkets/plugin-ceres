@@ -10303,9 +10303,8 @@ button:focus {
   margin: 0 !important;
 }
 
-div#page-body,
-div.footer {
-  overflow-x: hidden;
+div#page-body {
+  overflow-x: clip;
 }
 
 .center-xy {
@@ -12432,6 +12431,7 @@ header#page-header {
 .basket-list-item .image-container {
   flex-shrink: 0;
   width: 75px;
+  height: 85px;
   margin-right: 10px;
 }
 @media (max-width: 575.98px) {

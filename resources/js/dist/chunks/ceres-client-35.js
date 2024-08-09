@@ -63,6 +63,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-image-carousel",
@@ -227,6 +231,12 @@ __webpack_require__.r(__webpack_exports__);
     getImageName: function getImageName(image) {
       return image && image.name ? image.name : this.$options.filters.itemName(this.currentVariation);
     },
+    getImageWidth: function getImageWidth(image) {
+      return image && image.width ? image.width : this.$options.filters.itemImageWidth(this.carouselImages);
+    },
+    getImageHeight: function getImageHeight(image) {
+      return image && image.height ? image.height : this.$options.filters.itemImageHeight(this.carouselImages);
+    },
     loadLightbox: function loadLightbox() {
       var _this4 = this;
 
@@ -300,7 +310,9 @@ var render = function() {
                   attrs: {
                     alt: _vm.getAltText(image),
                     "image-url": image.url,
-                    title: _vm.getImageName(image)
+                    title: _vm.getImageName(image),
+                    width: _vm.getImageWidth(image),
+                    height: _vm.getImageHeight(image)
                   }
                 })
               ],
@@ -338,6 +350,8 @@ var render = function() {
                         alt: _vm.getAltText(imagePreview),
                         "image-url": imagePreview.url,
                         title: _vm.getImageName(imagePreview),
+                        width: _vm.getImageWidth(imagePreview),
+                        height: _vm.getImageHeight(imagePreview),
                         "picture-class": "owl-thumb border-appearance"
                       }
                     })
@@ -367,6 +381,8 @@ var render = function() {
                       alt: _vm.getAltText(_vm.singleImages[0].url),
                       "image-url": _vm.singleImages[0].url,
                       title: _vm.getImageName(_vm.singleImages[0].url),
+                      width: _vm.getImageWidth(_vm.singleImages[0]),
+                      height: _vm.getImageHeight(_vm.singleImages[0]),
                       "picture-class": "owl-placeholder"
                     }
                   })

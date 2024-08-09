@@ -177,6 +177,8 @@ import "./app/filters/inputUnit.filter";
 import "./app/filters/itemBundleName.filter";
 import "./app/filters/itemCrossPrice.filter";
 import "./app/filters/itemImage.filter";
+import "./app/filters/itemImageHeight.filter";
+import "./app/filters/itemImageWidth.filter";
 import "./app/filters/itemImageAlternativeText.filter";
 import "./app/filters/itemImages.filter";
 import "./app/filters/itemName.filter";

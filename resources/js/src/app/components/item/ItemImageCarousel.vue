@@ -3,7 +3,7 @@
         <div ref="single" class="single-carousel owl-carousel owl-theme owl-single-item mt-0">
             <div v-for="(image, index) in singleImages" :key="index" class="prop-1-1">
                 <a :href="image.url" :data-lightbox="`single-item-image${_uid}`">
-                    <lazy-img :alt="getAltText(image)" :image-url="image.url" :title="getImageName(image)" />
+                    <lazy-img :alt="getAltText(image)" :image-url="image.url" :title="getImageName(image)" :width="getImageWidth(image)" :height="getImageHeight(image)" />
                 </a>
             </div>
         </div>
@@ -15,6 +15,8 @@
                         :alt="getAltText(imagePreview)"
                         :image-url="imagePreview.url"
                         :title="getImageName(imagePreview)"
+                        :width="getImageWidth(imagePreview)"
+                        :height="getImageHeight(imagePreview)"
                         picture-class="owl-thumb border-appearance"
                         v-bind:class="{ 'active': currentItem === index}" />
                 </div>
@@ -27,6 +29,8 @@
                     :alt="getAltText(singleImages[0].url)"
                     :image-url="singleImages[0].url"
                     :title="getImageName(singleImages[0].url)"
+                    :width="getImageWidth(singleImages[0])"
+                    :height="getImageHeight(singleImages[0])"
                     picture-class="owl-placeholder" />
             </div>
         </div>
@@ -269,6 +273,16 @@ export default {
         getImageName(image)
         {
             return image && image.name ? image.name : this.$options.filters.itemName(this.currentVariation);
+        },
+
+        getImageWidth(image)
+        {
+          return image && image.width ? image.width : this.$options.filters.itemImageWidth(this.carouselImages);
+        },
+
+        getImageHeight(image)
+        {
+          return image && image.height ? image.height : this.$options.filters.itemImageHeight(this.carouselImages);
         },
 
         loadLightbox()
