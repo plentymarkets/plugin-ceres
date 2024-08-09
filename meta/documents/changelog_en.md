@@ -9,11 +9,11 @@
 - Incorrect default value of an SEO option introduced in version 5.0.62 on the single item page has been fixed.
 - Fixed intermittent scrolling issue on mobile.
 
-
 ### Changed
 
 - Added the Return order button on the order confirmation page for guest users. This button is only displayed if the `order-return` route is active in the IO plugin and the order in question is in status 7 (Outgoing items booked) or higher.
 - Cookie groups that only contain cookies declared as “necessary” can no longer be deactivated
+- The setting `Automatic conversion into modern image formats (AVIF, WebP)` in the plentyShop assistant step **Performance** is active per default. If you do not want to use the automatic conversion, deactivate the setting.
 
 ## v5.0.63 (2024-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.62...5.0.63" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 

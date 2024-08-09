@@ -13,7 +13,8 @@
 
 - Die "Retouren"-Schaltfläche wurde auf der Bestellbestätigung für Gastbestellungen hinzugefügt. Diese Schaltfläche wird nur angezeigt, wenn die Route `order-returns` im IO-Plugin aktiv ist und sich der jeweilige Auftrag mindestens im Status 7 (Warenausgang gebucht) befindet.
 - Cookie Gruppen, die ausschließlich als "notwendig" deklarierte Cookies enthalten, können nicht mehr deaktiviert werden.
-  
+- Die Einstellung `Automatische Konvertierung in moderne Bildformate (AVIF, WebP)` im Schritt **Performance** des plentyShop-Assistenten ist nun im Standard aktiv. Wenn du die automatische Konvertierung nicht nutzen willst, deaktiviere die Einstellung.
+
 ## v5.0.63 (2024-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.62...5.0.63" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben
