@@ -69,7 +69,7 @@ export default {
     data()
     {
         return {
-            imageConversionEnabled: true,
+            imageConversionEnabled: App.config.log.modernImagesConversion,
             receivedImageExtension: null,
             browserSupportedImgExtension: null,
             defaultImageUrl: this.imageUrl,
