@@ -4,6 +4,7 @@
 
 ### Added
 
+- To reduce unexpected shifts of content during page loading, the dimensions of article images are made available to the browser. This allows browsers to reserve the required space before loading. This can have a positive effect on the Google Page Speed Insights value **CLS**.
 - Added the Return order button on the order confirmation page for guest users. This button is only displayed if the `order-return` route is active in the IO plugin and the order in question is in status 7 (Outgoing items booked) or higher.
 - For the "Sorting" and "Articles per page" buttons on article category pages, `aria-labels` have been added to improve accessibility. They can be customised via the **CMS » Multilingualism** menu. We would like to thank @MaxBentz for his contribution.
 
