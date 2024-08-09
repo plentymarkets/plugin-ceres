@@ -2,8 +2,9 @@
 
 ## v5.0.64 (2024-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
-### Neu
+### Hinzugefügt
 
+- Die "Retouren"-Schaltfläche wurde auf der Bestellbestätigung für Gastbestellungen hinzugefügt. Diese Schaltfläche wird nur angezeigt, wenn die Route `order-returns` im IO-Plugin aktiv ist und sich der jeweilige Auftrag mindestens im Status 7 (Warenausgang gebucht) befindet.
 - Für die "Sortierung" und "Artikel pro Seite" Schaltflächen auf Artikelkategorieseiten wurden `aria-label` verbaut um die Barrierefreiheit zu verbessern. Sie können über das Menü **CMS » Mehrsprachigkeit** angepasst werden können. Wir möchten uns bei @MaxBentz für seinen Beitrag bedanken.
 
 ### Behoben
@@ -15,7 +16,6 @@
 
 ### Geändert
 
-- Die "Retouren"-Schaltfläche wurde auf der Bestellbestätigung für Gastbestellungen hinzugefügt. Diese Schaltfläche wird nur angezeigt, wenn die Route `order-returns` im IO-Plugin aktiv ist und sich der jeweilige Auftrag mindestens im Status 7 (Warenausgang gebucht) befindet.
 - Cookie Gruppen, die ausschließlich als "notwendig" deklarierte Cookies enthalten, können nicht mehr deaktiviert werden.
 - Die Einstellung `Automatische Konvertierung in moderne Bildformate (AVIF, WebP)` im Schritt **Performance** des plentyShop-Assistenten ist nun im Standard aktiv. Wenn du die automatische Konvertierung nicht nutzen willst, deaktiviere die Einstellung.
 
