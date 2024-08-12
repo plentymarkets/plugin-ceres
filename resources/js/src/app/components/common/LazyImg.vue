@@ -119,13 +119,15 @@ export default {
                 this.$el.setAttribute('data-loaded', 'false');
 
                 const images = document.getElementById(this.uuid).getElementsByTagName('img');
-                if (images.length > 0) images[0].remove();
+                if (images.length > 0) {
+                    images[0].remove();
+                }
 
                 lozad(this.$el, {
                     loaded: function(el) {
                         el.classList.remove('lozad');
                     }
-                }).observe();
+                }).triggerLoad(this.$el);
             });
         },
         imageUrl()
