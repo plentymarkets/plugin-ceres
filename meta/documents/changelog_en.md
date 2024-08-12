@@ -2,6 +2,10 @@
 
 ## v5.0.64 (2024-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
+### New
+
+- For the "Sorting" and "Articles per page" buttons on article category pages, `aria-labels` have been added to improve accessibility. They can be customised via the **CMS » Multilingualism** menu. We would like to thank @MaxBentz for his contribution.
+
 ### Fixed
 
 - Empty anchor tag on image box widget.
@@ -9,11 +13,11 @@
 - Incorrect default value of an SEO option introduced in version 5.0.62 on the single item page has been fixed.
 - Fixed intermittent scrolling issue on mobile.
 
-
 ### Changed
 
 - Added the Return order button on the order confirmation page for guest users. This button is only displayed if the `order-return` route is active in the IO plugin and the order in question is in status 7 (Outgoing items booked) or higher.
 - Cookie groups that only contain cookies declared as “necessary” can no longer be deactivated
+- The setting `Automatic conversion into modern image formats (AVIF, WebP)` in the plentyShop assistant step **Performance** is active per default. If you do not want to use the automatic conversion, deactivate the setting.
 
 ## v5.0.63 (2024-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.62...5.0.63" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
@@ -55,8 +59,9 @@
 - In the **SEO** section of the plentyShop LTS settings, a new setting has been added for the **Robots** on the single item page. With this setting it is now possible to set the robots behaviour for the single item view.
 - In the **SEO** section of the plentyShop LTS settings, the new setting **Select source for an individual canonical URL for the item page** has been added. With this setting, it is possible to have the variations point to a different canonical URL.
 - An option has been added to set addresses as the primary address.
-- Added the capability to activate the conversion of images to the AVIF, WebP format in the **Performance** step of the plentyShop assistant.
-- The result fields for articles have been expanded to include tags.
+- In the **Performance** step of the plentyShop assistant, the **Enable automatic conversion into modern image formats** setting has been added. This means that item images are automatically converted into the AVIF or WebP format the first time they are accessed.
+    - ***Important:*** The time until an item image is converted when it's first accessed is highly dependent on the size in which the original item image was uploaded. To minimise the conversion time, the uploaded image should correspond to the size stored in the **Setup » Item » Images » Sizes » full** menu.
+- The result fields for items have been expanded to include tags.
 - The ShopBuilder widgets **Link** and **Order history** now offer the possibility to display multiple tracking links if the **Split URLs** setting is activated in the **Setup » Orders » Shipping » Options** menu.
 - The translation key `checkoutPaidAmount` has been added to the multilingualism interface.
 

@@ -164,7 +164,7 @@ class PerformanceStep extends Step
             "form" => [
                 "performance_modernImagesConversion" => [
                     "type" => "toggle",
-                    "defaultValue" => false,
+                    "defaultValue" => true,
                     "options" => [
                         "name" =>  "Wizard.modernImageConversionName"
                     ]

@@ -13,7 +13,7 @@
     <div class="widget-inner">
         <div class="list-sort">
             <select
-                class="custom-select"
+                class="custom-select" aria-label="{{ Twig.trans("Ceres::Template.sortingLabel") }}"
                 @change="$store.dispatch('selectItemListSorting', $event.target.value)"
                 v-populate-store:mutation="{ name: 'setItemListSorting', data: {{ Twig.print("itemSorting | json_encode") }} }">
                 {{ Twig.for("value", "itemSortOptions") }}
