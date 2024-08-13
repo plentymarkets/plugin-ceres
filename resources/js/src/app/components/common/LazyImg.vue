@@ -7,13 +7,14 @@
         :data-title="title"
         :data-height="height"
         :data-width="width"
+        style="width:100%;height:100%;max-width:100%;"
         :id="uuid">
         <slot name="additionalimages"></slot>
         <source :srcset="defaultImageUrl" :type="mimeType(defaultImageUrl)">
         <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl" :type="mimeType(imageUrl)">
         <source v-if="fallbackUrl" :srcset="fallbackUrl" :type="mimeType(fallbackUrl)">
-        <img v-if="receivedImageExtension === 'tif'" :src="defaultImageUrl" :alt="alt" type="image/tiff">
-        <img v-else-if="height && width && !webpSupported && !avifSupported" :src="defaultImageUrl || fallbackUrl" :alt="alt">
+        <img v-if="receivedImageExtension === 'tif'" :src="defaultImageUrl" :alt="alt" :height="height" :width="width" type="image/tiff">
+        <img v-else-if="height && width && !webpSupported && !avifSupported" :src="defaultImageUrl || fallbackUrl" :alt="alt" :height="height" :width="width">
     </picture>
 
     <div v-else :data-background-image="defaultImageUrl || fallbackUrl" :class="pictureClass">

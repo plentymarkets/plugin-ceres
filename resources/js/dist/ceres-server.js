@@ -2903,6 +2903,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -43663,6 +43664,7 @@ var render = function() {
     ? _c(
         "picture",
         {
+          staticStyle: { width: "100%", height: "100%", "max-width": "100%" },
           attrs: {
             "data-iesrc": _vm.defaultImageUrl,
             "data-picture-class": _vm.pictureClass,
@@ -43698,6 +43700,8 @@ var render = function() {
                 ? "<img" +
                   _vm._ssrAttr("src", _vm.defaultImageUrl) +
                   _vm._ssrAttr("alt", _vm.alt) +
+                  _vm._ssrAttr("height", _vm.height) +
+                  _vm._ssrAttr("width", _vm.width) +
                   ' type="image/tiff">'
                 : _vm.height &&
                   _vm.width &&
@@ -43706,6 +43710,8 @@ var render = function() {
                 ? "<img" +
                   _vm._ssrAttr("src", _vm.defaultImageUrl || _vm.fallbackUrl) +
                   _vm._ssrAttr("alt", _vm.alt) +
+                  _vm._ssrAttr("height", _vm.height) +
+                  _vm._ssrAttr("width", _vm.width) +
                   ">"
                 : "<!---->")
           )
