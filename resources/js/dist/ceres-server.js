@@ -43700,7 +43700,7 @@ var render = function() {
                   _vm._ssrAttr("alt", _vm.alt) +
                   _vm._ssrAttr("height", _vm.height) +
                   _vm._ssrAttr("width", _vm.width) +
-                  ' type="image/tiff" class="w-100 h-auto">'
+                  ' type="image/tiff" class="mw-100 h-auto">'
                 : _vm.height &&
                   _vm.width &&
                   !_vm.webpSupported &&
@@ -43710,7 +43710,7 @@ var render = function() {
                   _vm._ssrAttr("alt", _vm.alt) +
                   _vm._ssrAttr("height", _vm.height) +
                   _vm._ssrAttr("width", _vm.width) +
-                  ' class="w-100 h-auto">'
+                  ' class="mw-100 h-auto">'
                 : "<!---->")
           )
         ],
