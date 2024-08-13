@@ -367,7 +367,10 @@ var render = function() {
       !_vm.initialized
         ? _c(
             "div",
-            { staticClass: "w-100 mt-0", staticStyle: { "max-width": "100%" } },
+            {
+              staticClass:
+                "single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0"
+            },
             [
               _c(
                 "div",

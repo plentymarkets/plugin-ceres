@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <div v-if="!initialized" class="w-100 mt-0" style="max-width:100%;">
+        <div v-if="!initialized" class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0">
             <div class="prop-1-1">
                 <lazy-img
                     :alt="getAltText(singleImages[0].url)"

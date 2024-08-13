@@ -40179,6 +40179,7 @@ var render = function() {
           _vm._v(" "),
           _vm.receivedImageExtension === "tif"
             ? _c("img", {
+                staticClass: "w-100 h-auto",
                 attrs: {
                   src: _vm.defaultImageUrl,
                   alt: _vm.alt,
@@ -40192,6 +40193,7 @@ var render = function() {
               !_vm.webpSupported &&
               !_vm.avifSupported
             ? _c("img", {
+                staticClass: "w-100 h-auto",
                 attrs: {
                   src: _vm.defaultImageUrl || _vm.fallbackUrl,
                   alt: _vm.alt,

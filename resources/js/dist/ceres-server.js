@@ -43700,7 +43700,7 @@ var render = function() {
                   _vm._ssrAttr("alt", _vm.alt) +
                   _vm._ssrAttr("height", _vm.height) +
                   _vm._ssrAttr("width", _vm.width) +
-                  ' type="image/tiff">'
+                  ' type="image/tiff" class="w-100 h-auto">'
                 : _vm.height &&
                   _vm.width &&
                   !_vm.webpSupported &&
@@ -43710,7 +43710,7 @@ var render = function() {
                   _vm._ssrAttr("alt", _vm.alt) +
                   _vm._ssrAttr("height", _vm.height) +
                   _vm._ssrAttr("width", _vm.width) +
-                  ">"
+                  ' class="w-100 h-auto">'
                 : "<!---->")
           )
         ],
@@ -49818,7 +49818,7 @@ var render = function() {
       _vm._ssrNode(" "),
       !_vm.initialized
         ? _vm._ssrNode(
-            '<div class="w-100 mt-0" style="max-width:100%;">',
+            '<div class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0">',
             "</div>",
             [
               _vm._ssrNode(
