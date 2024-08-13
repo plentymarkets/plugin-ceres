@@ -49759,7 +49759,7 @@ var render = function() {
     { attrs: { itemscope: "", itemtype: "https://schema.org/Thing" } },
     [
       _vm._ssrNode(
-        '<div class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0">',
+        '<div class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0" style="width:100%;max-width:100%;">',
         "</div>",
         [
           _vm._ssrNode(

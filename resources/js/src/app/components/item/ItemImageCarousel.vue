@@ -24,7 +24,7 @@
             </div>
         </div>
       -->
-        <div class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0">
+        <div class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0" style="width:100%;max-width:100%;">
             <div class="prop-1-1">
                 <lazy-img
                     :alt="getAltText(singleImages[0].url)"

@@ -293,7 +293,8 @@ var render = function() {
         "div",
         {
           staticClass:
-            "single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0"
+            "single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0",
+          staticStyle: { width: "100%", "max-width": "100%" }
         },
         [
           _c(
