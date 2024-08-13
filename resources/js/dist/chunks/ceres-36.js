@@ -67,6 +67,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-image-carousel",
@@ -367,32 +368,39 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0"
-        },
-        [
-          _c(
+      !_vm.initialized
+        ? _c(
             "div",
-            { staticClass: "prop-1-1" },
+            {
+              staticClass:
+                "single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0",
+              staticStyle: { width: "100%", "max-width": "100%" }
+            },
             [
-              _c("lazy-img", {
-                attrs: {
-                  alt: _vm.getAltText(_vm.singleImages[0].url),
-                  "image-url": _vm.singleImages[0].url,
-                  title: _vm.getImageName(_vm.singleImages[0].url),
-                  width: _vm.getImageWidth(_vm.singleImages[0]),
-                  height: _vm.getImageHeight(_vm.singleImages[0]),
-                  "picture-class": "owl-placeholder"
-                }
-              })
-            ],
-            1
+              _c(
+                "div",
+                {
+                  staticClass: "prop-1-1",
+                  staticStyle: { width: "100%", "max-width": "100%" }
+                },
+                [
+                  _c("lazy-img", {
+                    staticStyle: { width: "100%", "max-width": "100%" },
+                    attrs: {
+                      alt: _vm.getAltText(_vm.singleImages[0].url),
+                      "image-url": _vm.singleImages[0].url,
+                      title: _vm.getImageName(_vm.singleImages[0].url),
+                      width: _vm.getImageWidth(_vm.singleImages[0]),
+                      height: _vm.getImageHeight(_vm.singleImages[0]),
+                      "picture-class": "owl-placeholder"
+                    }
+                  })
+                ],
+                1
+              )
+            ]
           )
-        ]
-      )
+        : _vm._e()
     ]
   )
 }
