@@ -7416,7 +7416,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-image-carousel",
@@ -49756,10 +49755,72 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { itemscope: "", itemtype: "https://schema.org/Thing" } },
+    {
+      staticStyle: { width: "100%", "max-width": "100%" },
+      attrs: { itemscope: "", itemtype: "https://schema.org/Thing" }
+    },
     [
       _vm._ssrNode(
-        '<div class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0" style="width:100%;max-width:100%;">',
+        '<div class="single-carousel owl-carousel owl-theme owl-single-item mt-0">',
+        "</div>",
+        _vm._l(_vm.singleImages, function(image, index) {
+          return _vm._ssrNode('<div class="prop-1-1">', "</div>", [
+            _vm._ssrNode(
+              "<a" +
+                _vm._ssrAttr("href", image.url) +
+                _vm._ssrAttr("data-lightbox", "single-item-image" + _vm._uid) +
+                ">",
+              "</a>",
+              [
+                _c("lazy-img", {
+                  attrs: {
+                    alt: _vm.getAltText(image),
+                    "image-url": image.url,
+                    title: _vm.getImageName(image),
+                    width: _vm.getImageWidth(image),
+                    height: _vm.getImageHeight(image)
+                  }
+                })
+              ],
+              1
+            )
+          ])
+        }),
+        0
+      ),
+      _vm._ssrNode(" "),
+      _vm.showThumbs
+        ? _vm._ssrNode(
+            '<div id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item">',
+            "</div>",
+            _vm._l(_vm.carouselImages, function(imagePreview, index) {
+              return _vm._ssrNode('<div class="prop-1-1">', "</div>", [
+                _vm._ssrNode(
+                  '<div class="image-container">',
+                  "</div>",
+                  [
+                    _c("lazy-img", {
+                      class: { active: _vm.currentItem === index },
+                      attrs: {
+                        alt: _vm.getAltText(imagePreview),
+                        "image-url": imagePreview.url,
+                        title: _vm.getImageName(imagePreview),
+                        width: _vm.getImageWidth(imagePreview),
+                        height: _vm.getImageHeight(imagePreview),
+                        "picture-class": "owl-thumb border-appearance"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ])
+            }),
+            0
+          )
+        : _vm._e(),
+      _vm._ssrNode(" "),
+      _vm._ssrNode(
+        '<div class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0">',
         "</div>",
         [
           _vm._ssrNode(
@@ -49781,7 +49842,8 @@ var render = function() {
           )
         ]
       )
-    ]
+    ],
+    2
   )
 }
 var staticRenderFns = []
