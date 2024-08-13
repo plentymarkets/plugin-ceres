@@ -1,5 +1,5 @@
 <template>
-    <div itemscope itemtype="https://schema.org/Thing" style="width:100%;max-width:100%;">
+    <div itemscope itemtype="https://schema.org/Thing">
         <div ref="single" class="single-carousel owl-carousel owl-theme owl-single-item mt-0">
             <div v-for="(image, index) in singleImages" :key="index" class="prop-1-1">
                 <a :href="image.url" :data-lightbox="`single-item-image${_uid}`">
@@ -23,10 +23,9 @@
             </div>
         </div>
 
-        <div v-if="!initialized" class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0" style="width:100%;max-width:100%;">
-            <div class="prop-1-1" style="width:100%;max-width:100%;">
+        <div v-if="!initialized" class="w-100 mt-0" style="max-width:100%;">
+            <div class="prop-1-1">
                 <lazy-img
-                    style="width:100%;max-width:100%;"
                     :alt="getAltText(singleImages[0].url)"
                     :image-url="singleImages[0].url"
                     :title="getImageName(singleImages[0].url)"

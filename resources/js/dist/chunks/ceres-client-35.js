@@ -67,7 +67,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-image-carousel",
@@ -287,10 +286,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      staticStyle: { width: "100%", "max-width": "100%" },
-      attrs: { itemscope: "", itemtype: "https://schema.org/Thing" }
-    },
+    { attrs: { itemscope: "", itemtype: "https://schema.org/Thing" } },
     [
       _c(
         "div",
@@ -371,21 +367,13 @@ var render = function() {
       !_vm.initialized
         ? _c(
             "div",
-            {
-              staticClass:
-                "single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0",
-              staticStyle: { width: "100%", "max-width": "100%" }
-            },
+            { staticClass: "w-100 mt-0", staticStyle: { "max-width": "100%" } },
             [
               _c(
                 "div",
-                {
-                  staticClass: "prop-1-1",
-                  staticStyle: { width: "100%", "max-width": "100%" }
-                },
+                { staticClass: "prop-1-1" },
                 [
                   _c("lazy-img", {
-                    staticStyle: { width: "100%", "max-width": "100%" },
                     attrs: {
                       alt: _vm.getAltText(_vm.singleImages[0].url),
                       "image-url": _vm.singleImages[0].url,
