@@ -23,6 +23,7 @@
             </div>
         </div>
 
+      <!--
         <div v-if="!initialized" class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0">
             <div class="prop-1-1">
                 <lazy-img
@@ -34,6 +35,7 @@
                     picture-class="owl-placeholder" />
             </div>
         </div>
+        -->
     </div>
 </template>
 
