@@ -40182,8 +40182,6 @@ var render = function() {
                 attrs: {
                   src: _vm.defaultImageUrl,
                   alt: _vm.alt,
-                  height: _vm.height,
-                  width: _vm.width,
                   type: "image/tiff"
                 }
               })
@@ -40194,9 +40192,7 @@ var render = function() {
             ? _c("img", {
                 attrs: {
                   src: _vm.defaultImageUrl || _vm.fallbackUrl,
-                  alt: _vm.alt,
-                  height: _vm.height,
-                  width: _vm.width
+                  alt: _vm.alt
                 }
               })
             : _vm._e()
