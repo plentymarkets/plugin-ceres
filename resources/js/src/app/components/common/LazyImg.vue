@@ -7,7 +7,6 @@
         :data-title="title"
         :data-height="height"
         :data-width="width"
-        style="width:100%;height:100%;max-width:100%;"
         :id="uuid">
         <slot name="additionalimages"></slot>
         <source :srcset="defaultImageUrl" :type="mimeType(defaultImageUrl)">

@@ -496,7 +496,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -36548,7 +36547,6 @@ var render = function() {
     ? _c(
         "picture",
         {
-          staticStyle: { width: "100%", height: "100%", "max-width": "100%" },
           attrs: {
             "data-iesrc": _vm.defaultImageUrl,
             "data-picture-class": _vm.pictureClass,

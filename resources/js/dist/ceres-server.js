@@ -2903,7 +2903,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -7378,7 +7377,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-//
 //
 //
 //
@@ -43666,7 +43664,6 @@ var render = function() {
     ? _c(
         "picture",
         {
-          staticStyle: { width: "100%", height: "100%", "max-width": "100%" },
           attrs: {
             "data-iesrc": _vm.defaultImageUrl,
             "data-picture-class": _vm.pictureClass,
@@ -49762,65 +49759,29 @@ var render = function() {
     { attrs: { itemscope: "", itemtype: "https://schema.org/Thing" } },
     [
       _vm._ssrNode(
-        '<div class="single-carousel owl-carousel owl-theme owl-single-item mt-0">',
+        '<div class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0">',
         "</div>",
-        _vm._l(_vm.singleImages, function(image, index) {
-          return _vm._ssrNode('<div class="prop-1-1">', "</div>", [
-            _vm._ssrNode(
-              "<a" +
-                _vm._ssrAttr("href", image.url) +
-                _vm._ssrAttr("data-lightbox", "single-item-image" + _vm._uid) +
-                ">",
-              "</a>",
-              [
-                _c("lazy-img", {
-                  attrs: {
-                    alt: _vm.getAltText(image),
-                    "image-url": image.url,
-                    title: _vm.getImageName(image),
-                    width: _vm.getImageWidth(image),
-                    height: _vm.getImageHeight(image)
-                  }
-                })
-              ],
-              1
-            )
-          ])
-        }),
-        0
-      ),
-      _vm._ssrNode(" "),
-      _vm.showThumbs
-        ? _vm._ssrNode(
-            '<div id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item">',
+        [
+          _vm._ssrNode(
+            '<div class="prop-1-1">',
             "</div>",
-            _vm._l(_vm.carouselImages, function(imagePreview, index) {
-              return _vm._ssrNode('<div class="prop-1-1">', "</div>", [
-                _vm._ssrNode(
-                  '<div class="image-container">',
-                  "</div>",
-                  [
-                    _c("lazy-img", {
-                      class: { active: _vm.currentItem === index },
-                      attrs: {
-                        alt: _vm.getAltText(imagePreview),
-                        "image-url": imagePreview.url,
-                        title: _vm.getImageName(imagePreview),
-                        width: _vm.getImageWidth(imagePreview),
-                        height: _vm.getImageHeight(imagePreview),
-                        "picture-class": "owl-thumb border-appearance"
-                      }
-                    })
-                  ],
-                  1
-                )
-              ])
-            }),
-            0
+            [
+              _c("lazy-img", {
+                attrs: {
+                  alt: _vm.getAltText(_vm.singleImages[0].url),
+                  "image-url": _vm.singleImages[0].url,
+                  title: _vm.getImageName(_vm.singleImages[0].url),
+                  width: _vm.getImageWidth(_vm.singleImages[0]),
+                  height: _vm.getImageHeight(_vm.singleImages[0]),
+                  "picture-class": "owl-placeholder"
+                }
+              })
+            ],
+            1
           )
-        : _vm._e()
-    ],
-    2
+        ]
+      )
+    ]
   )
 }
 var staticRenderFns = []

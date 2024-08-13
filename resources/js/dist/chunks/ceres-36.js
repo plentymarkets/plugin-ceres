@@ -68,7 +68,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-image-carousel",
@@ -293,78 +292,29 @@ var render = function() {
       _c(
         "div",
         {
-          ref: "single",
           staticClass:
-            "single-carousel owl-carousel owl-theme owl-single-item mt-0"
+            "single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0"
         },
-        _vm._l(_vm.singleImages, function(image, index) {
-          return _c("div", { key: index, staticClass: "prop-1-1" }, [
-            _c(
-              "a",
-              {
-                attrs: {
-                  href: image.url,
-                  "data-lightbox": "single-item-image" + _vm._uid
-                }
-              },
-              [
-                _c("lazy-img", {
-                  attrs: {
-                    alt: _vm.getAltText(image),
-                    "image-url": image.url,
-                    title: _vm.getImageName(image),
-                    width: _vm.getImageWidth(image),
-                    height: _vm.getImageHeight(image)
-                  }
-                })
-              ],
-              1
-            )
-          ])
-        }),
-        0
-      ),
-      _vm._v(" "),
-      _vm.showThumbs
-        ? _c(
+        [
+          _c(
             "div",
-            {
-              ref: "thumbs",
-              staticClass: "owl-thumbs owl-carousel owl-theme owl-single-item",
-              attrs: { id: "thumb-carousel" }
-            },
-            _vm._l(_vm.carouselImages, function(imagePreview, index) {
-              return _c("div", { key: index, staticClass: "prop-1-1" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "image-container",
-                    on: {
-                      click: function($event) {
-                        return _vm.goTo(index)
-                      }
-                    }
-                  },
-                  [
-                    _c("lazy-img", {
-                      class: { active: _vm.currentItem === index },
-                      attrs: {
-                        alt: _vm.getAltText(imagePreview),
-                        "image-url": imagePreview.url,
-                        title: _vm.getImageName(imagePreview),
-                        width: _vm.getImageWidth(imagePreview),
-                        height: _vm.getImageHeight(imagePreview),
-                        "picture-class": "owl-thumb border-appearance"
-                      }
-                    })
-                  ],
-                  1
-                )
-              ])
-            }),
-            0
+            { staticClass: "prop-1-1" },
+            [
+              _c("lazy-img", {
+                attrs: {
+                  alt: _vm.getAltText(_vm.singleImages[0].url),
+                  "image-url": _vm.singleImages[0].url,
+                  title: _vm.getImageName(_vm.singleImages[0].url),
+                  width: _vm.getImageWidth(_vm.singleImages[0]),
+                  height: _vm.getImageHeight(_vm.singleImages[0]),
+                  "picture-class": "owl-placeholder"
+                }
+              })
+            ],
+            1
           )
-        : _vm._e()
+        ]
+      )
     ]
   )
 }
