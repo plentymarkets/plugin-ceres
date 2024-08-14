@@ -3035,6 +3035,20 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
     mimeType: function mimeType(url) {
       return mime.lookup(url);
     },
+    getHeight: function getHeight() {
+      if (this.height && this.height > 0) {
+        return this.height;
+      }
+
+      return undefined;
+    },
+    getWidth: function getWidth() {
+      if (this.width && this.width > 0) {
+        return this.width;
+      }
+
+      return undefined;
+    },
     propagateImageFormat: function propagateImageFormat() {
       this.setReceivedImageExtension();
       this.setBrowserSupportedImageExtension();
@@ -43695,20 +43709,15 @@ var render = function() {
                 ? "<img" +
                   _vm._ssrAttr("src", _vm.defaultImageUrl) +
                   _vm._ssrAttr("alt", _vm.alt) +
-                  _vm._ssrAttr("height", _vm.height) +
-                  _vm._ssrAttr("width", _vm.width) +
+                  _vm._ssrAttr("height", _vm.getHeight()) +
+                  _vm._ssrAttr("width", _vm.getWidth()) +
                   ' type="image/tiff" class="mw-100 h-auto">'
-                : _vm.height &&
-                  _vm.height > 0 &&
-                  _vm.width &&
-                  _vm.width > 0 &&
-                  !_vm.webpSupported &&
-                  !_vm.avifSupported
+                : !_vm.webpSupported && !_vm.avifSupported
                 ? "<img" +
                   _vm._ssrAttr("src", _vm.defaultImageUrl || _vm.fallbackUrl) +
                   _vm._ssrAttr("alt", _vm.alt) +
-                  _vm._ssrAttr("height", _vm.height) +
-                  _vm._ssrAttr("width", _vm.width) +
+                  _vm._ssrAttr("height", _vm.getHeight()) +
+                  _vm._ssrAttr("width", _vm.getWidth()) +
                   ' class="mw-100 h-auto">'
                 : "<img" +
                   _vm._ssrAttr("src", _vm.defaultImageUrl || _vm.fallbackUrl) +
