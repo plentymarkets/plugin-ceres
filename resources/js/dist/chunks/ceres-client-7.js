@@ -707,7 +707,7 @@ var render = function() {
                           title: _vm.itemName,
                           height: _vm.height,
                           width: _vm.width,
-                          "picture-class": "d-block mw-100 mh-100",
+                          "picture-class": "d-block w-100 h-100",
                           "data-testing": "basket-item-img"
                         }
                       })
