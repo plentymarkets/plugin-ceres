@@ -20,7 +20,7 @@
 - Incorrect scrolling behaviour could occur on mobile devices. This has been fixed.
 - The maximum number of characters displayed for characteristics was incorrectly limited to 128. This limit has been removed.
 - Fixed intermittent scrolling issue on mobile.
-- Fixed that some images are not being lazyloaded.
+- Fixed that some images are not being lazy loaded.
 
 ### Changed
 
