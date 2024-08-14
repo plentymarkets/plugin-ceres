@@ -12,8 +12,8 @@
         <source :srcset="defaultImageUrl" :type="mimeType(defaultImageUrl)">
         <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl" :type="mimeType(imageUrl)">
         <source v-if="fallbackUrl" :srcset="fallbackUrl" :type="mimeType(fallbackUrl)">
-        <img v-if="receivedImageExtension === 'tif'" :src="defaultImageUrl" :alt="alt" :height="height" :width="width" type="image/tiff">
-        <img v-else-if="height && width && !webpSupported && !avifSupported" :src="defaultImageUrl || fallbackUrl" :alt="alt" :height="height" :width="width">
+        <img v-if="receivedImageExtension === 'tif'" :src="defaultImageUrl" :alt="alt" :height="height" :width="width" type="image/tiff" class="mw-100 h-auto">
+        <img v-else-if="height && width && !webpSupported && !avifSupported" :src="defaultImageUrl || fallbackUrl" :alt="alt" :height="height" :width="width" class="mw-100 h-auto">
     </picture>
 
     <div v-else :data-background-image="defaultImageUrl || fallbackUrl" :class="pictureClass">
