@@ -12,8 +12,8 @@
         <source :srcset="defaultImageUrl" :type="mimeType(defaultImageUrl)">
         <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl" :type="mimeType(imageUrl)">
         <source v-if="fallbackUrl" :srcset="fallbackUrl" :type="mimeType(fallbackUrl)">
-        <img v-if="receivedImageExtension === 'tif'" :src="defaultImageUrl" :alt="alt" :height="height" :width="width" type="image/tiff">
-        <img v-else-if="height && width && !webpSupported && !avifSupported" :src="defaultImageUrl || fallbackUrl" :alt="alt" :height="height" :width="width">
+        <img v-if="receivedImageExtension === 'tif'" :src="defaultImageUrl" :alt="alt" :height="height" :width="width" type="image/tiff" class="mw-100 h-auto">
+        <img v-else-if="height && width && !webpSupported && !avifSupported" :src="defaultImageUrl || fallbackUrl" :alt="alt" :height="height" :width="width" class="mw-100 h-auto">
     </picture>
 
     <div v-else :data-background-image="defaultImageUrl || fallbackUrl" :class="pictureClass">
@@ -89,6 +89,10 @@ export default {
             this.avifSupported = avifSupported;
 
             if (avifSupported) {
+                this.$nextTick(() => {
+                    if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
+                    lozad(this.$el).observe();
+                });
                 this.propagateImageFormat();
             }
 
@@ -97,21 +101,20 @@ export default {
                     this.webpSupported = webpSupported;
 
                     if (webpSupported) {
+                        this.$nextTick(() => {
+                            if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
+                            lozad(this.$el).observe();
+                        });
                         this.propagateImageFormat();
                     }
                 }));
             }
-
-            lozad(this.$el, {
-                loaded: function(el) {
-                    el.classList.remove('lozad');
-                }
-            }).triggerLoad(this.$el);
         }));
     },
     watch:
     {
-        defaultImageUrl(){
+        defaultImageUrl()
+        {
             this.$nextTick(() => {
                 this.$el.setAttribute('data-loaded', 'false');
 
@@ -208,7 +211,7 @@ export default {
         {
             const validConversionExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG', 'webp'];
 
-            return this.convertImage 
+            return this.convertImage
                 && this.imageConversionEnabled
                 && /\/item\/images\//.test(this.imageUrl)
                 && this.browserSupportedImgExtension !== this.receivedImageExtension

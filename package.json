@@ -25,6 +25,8 @@
     "postbuild": "",
     "compareTranslations": "node tools/compareTranslations.js",
     "test": "npm run test:monetaryFormatter",
+    "test:e2e": "cypress run --browser electron",
+    "test:e2e:dev": "cypress open --browser electron",
     "test:monetaryFormatter": "node -r esm tools/testMonetaryFormatter.js"
   },
   "browserslist": [

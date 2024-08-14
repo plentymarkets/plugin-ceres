@@ -2969,6 +2969,11 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
       _this.avifSupported = avifSupported;
 
       if (avifSupported) {
+        _this.$nextTick(function () {
+          if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
+          Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_8__["default"])(_this.$el).observe();
+        });
+
         _this.propagateImageFormat();
       }
 
@@ -2977,16 +2982,15 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
           _this.webpSupported = webpSupported;
 
           if (webpSupported) {
+            _this.$nextTick(function () {
+              if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
+              Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_8__["default"])(_this.$el).observe();
+            });
+
             _this.propagateImageFormat();
           }
         });
       }
-
-      Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_8__["default"])(_this.$el, {
-        loaded: function loaded(el) {
-          el.classList.remove('lozad');
-        }
-      }).triggerLoad(_this.$el);
     });
   },
   watch: {
@@ -43696,7 +43700,7 @@ var render = function() {
                   _vm._ssrAttr("alt", _vm.alt) +
                   _vm._ssrAttr("height", _vm.height) +
                   _vm._ssrAttr("width", _vm.width) +
-                  ' type="image/tiff">'
+                  ' type="image/tiff" class="mw-100 h-auto">'
                 : _vm.height &&
                   _vm.width &&
                   !_vm.webpSupported &&
@@ -43706,7 +43710,7 @@ var render = function() {
                   _vm._ssrAttr("alt", _vm.alt) +
                   _vm._ssrAttr("height", _vm.height) +
                   _vm._ssrAttr("width", _vm.width) +
-                  ">"
+                  ' class="mw-100 h-auto">'
                 : "<!---->")
           )
         ],

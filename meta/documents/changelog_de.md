@@ -2,6 +2,10 @@
 
 ## v5.0.64 (2024-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
+### TODO
+
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+
 ### Hinzugefügt
 
 - Um unerwartete Verschiebungen von Inhalten während des Ladens von Seiten zu reduzieren, werden die Abmessungen von Artikelbildern dem Browser zur Verfügung gestellt. Dies erlaubt es Browsern, den benötigten Platz vor dem Laden zu reservieren. Das kann einen positiven Effekt auf den Google Page Speed Insights Wert **CLS** haben.
@@ -15,12 +19,15 @@
 - Fehlerhafter Standardwert von einer in Version 5.0.62 eingeführten SEO Option auf der Artikelseite wurde behoben.
 - Auf mobilen Geräten konnte es zu fehlerhaften Scrollverhalten kommen. Dies wurde behoben.
 - Die maximal angezeigten Zeichen von Merkmalen wurde fälschlicherweise auf 128 begrenzt. Diese Begrenzung wurde aufgehoben.
+- Das teilweise unregelmäßige Scroll-Verhalten auf mobilen Geräten wurde behoben.
+- Bilder wurden nicht verzögert geladen, dies wurde behoben.
 
 ### Geändert
 
 - Cookie Gruppen, die ausschließlich als "notwendig" deklarierte Cookies enthalten, können nicht mehr deaktiviert werden.
 - Die Einstellung `Automatische Konvertierung in moderne Bildformate (AVIF, WebP)` im Schritt **Performance** des plentyShop-Assistenten ist nun im Standard aktiv. Wenn du die automatische Konvertierung nicht nutzen willst, deaktiviere die Einstellung.
 - Die Struktur des Bilderbox-Widget wurde angepasst damit Suchmaschinen den Linktitel identifizieren können.
+- Die Library Lightbox wurde auf v2.11.4 aktualisiert. Wir möchten uns bei @MaxBentz für seinen Beitrag bedanken.
 
 ## v5.0.63 (2024-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.62...5.0.63" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 

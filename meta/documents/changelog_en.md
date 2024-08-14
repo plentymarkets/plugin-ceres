@@ -2,6 +2,10 @@
 
 ## v5.0.64 (2024-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
+### TODO
+
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
+
 ### Added
 
 - To reduce unexpected shifts of content during page loading, the dimensions of article images are made available to the browser. This allows browsers to reserve the required space before loading. This can have a positive effect on the Google Page Speed Insights value **CLS**.
@@ -15,12 +19,15 @@
 - Incorrect default value of an SEO option introduced in version 5.0.62 on the single item page has been fixed.
 - Incorrect scrolling behaviour could occur on mobile devices. This has been fixed.
 - The maximum number of characters displayed for characteristics was incorrectly limited to 128. This limit has been removed.
+- Fixed intermittent scrolling issue on mobile.
+- Fixed images not being lazyloaded.
 
 ### Changed
 
 - Cookie groups that only contain cookies declared as “necessary” can no longer be deactivated
 - The setting `Automatic conversion into modern image formats (AVIF, WebP)` in the plentyShop assistant step **Performance** is active per default. If you do not want to use the automatic conversion, deactivate the setting.
 - The structure of the image box widget has been adapted so that search engines can identify a link title.
+- The library Lightbox has been updated to v2.11.4. We would like to thank @MaxBentz for his contribution.
 
 ## v5.0.63 (2024-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.62...5.0.63" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
