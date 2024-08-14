@@ -15,7 +15,7 @@
 ### Behoben
 
 - Der Text von `alt` Attributen auf Bildern aus dem Webspace die im Bilderbox-Widget genutzt wurden, wurde nicht ausgegeben. Dies wurde behoben.
-- Vollbildbreite des Hintergrundbild-Widgets in der Fußzeile
+- Die Vollbildbreite Option des Hintergrundbild-Widgets wenn es im Footer positioniert ist.
 - Fehlerhafter Standardwert von einer in Version 5.0.62 eingeführten SEO Option auf der Artikelseite wurde behoben.
 - Auf mobilen Geräten konnte es zu fehlerhaften Scrollverhalten kommen. Dies wurde behoben.
 - Die maximal angezeigten Zeichen von Merkmalen wurde fälschlicherweise auf 128 begrenzt. Diese Begrenzung wurde aufgehoben.

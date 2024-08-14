@@ -15,7 +15,7 @@
 ### Fixed
 
 - The 'alt' attribute text of images from the webspace that were used in the image box widget was not displayed. This has been fixed.
-- Fullscreen width of background image widget in footer
+- the fullscreen width option of the background image widget when it is inside the footer.
 - Incorrect default value of an SEO option introduced in version 5.0.62 on the single item page has been fixed.
 - Incorrect scrolling behaviour could occur on mobile devices. This has been fixed.
 - The maximum number of characters displayed for characteristics was incorrectly limited to 128. This limit has been removed.
