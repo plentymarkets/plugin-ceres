@@ -684,39 +684,32 @@ var render = function() {
           }
         },
         [
-          _c(
-            "div",
-            {
-              staticClass: "image-container",
-              staticStyle: { "aspect-ratio": "1/1" }
-            },
-            [
-              _c(
-                "a",
-                {
-                  attrs: {
-                    href: _vm._f("itemURL")(_vm.basketItem.variation.data)
-                  }
-                },
-                [
-                  _vm.image
-                    ? _c("lazy-img", {
-                        attrs: {
-                          "image-url": _vm.image,
-                          alt: _vm.altText,
-                          title: _vm.itemName,
-                          height: _vm.height,
-                          width: _vm.width,
-                          "picture-class": "d-block w-100 h-100",
-                          "data-testing": "basket-item-img"
-                        }
-                      })
-                    : _vm._e()
-                ],
-                1
-              )
-            ]
-          ),
+          _c("div", { staticClass: "image-container" }, [
+            _c(
+              "a",
+              {
+                attrs: {
+                  href: _vm._f("itemURL")(_vm.basketItem.variation.data)
+                }
+              },
+              [
+                _vm.image
+                  ? _c("lazy-img", {
+                      attrs: {
+                        "image-url": _vm.image,
+                        alt: _vm.altText,
+                        title: _vm.itemName,
+                        height: _vm.height,
+                        width: _vm.width,
+                        "picture-class": "d-block w-100 h-100",
+                        "data-testing": "basket-item-img"
+                      }
+                    })
+                  : _vm._e()
+              ],
+              1
+            )
+          ]),
           _vm._v(" "),
           _c(
             "div",

@@ -42827,37 +42827,33 @@ var render = function() {
           ">",
         "</div>",
         [
-          _vm._ssrNode(
-            '<div class="image-container" style="aspect-ratio: 1/1;">',
-            "</div>",
-            [
-              _vm._ssrNode(
-                "<a" +
-                  _vm._ssrAttr(
-                    "href",
-                    _vm._f("itemURL")(_vm.basketItem.variation.data)
-                  ) +
-                  ">",
-                "</a>",
-                [
-                  _vm.image
-                    ? _c("lazy-img", {
-                        attrs: {
-                          "image-url": _vm.image,
-                          alt: _vm.altText,
-                          title: _vm.itemName,
-                          height: _vm.height,
-                          width: _vm.width,
-                          "picture-class": "d-block w-100 h-100",
-                          "data-testing": "basket-item-img"
-                        }
-                      })
-                    : _vm._e()
-                ],
-                1
-              )
-            ]
-          ),
+          _vm._ssrNode('<div class="image-container">', "</div>", [
+            _vm._ssrNode(
+              "<a" +
+                _vm._ssrAttr(
+                  "href",
+                  _vm._f("itemURL")(_vm.basketItem.variation.data)
+                ) +
+                ">",
+              "</a>",
+              [
+                _vm.image
+                  ? _c("lazy-img", {
+                      attrs: {
+                        "image-url": _vm.image,
+                        alt: _vm.altText,
+                        title: _vm.itemName,
+                        height: _vm.height,
+                        width: _vm.width,
+                        "picture-class": "d-block w-100 h-100",
+                        "data-testing": "basket-item-img"
+                      }
+                    })
+                  : _vm._e()
+              ],
+              1
+            )
+          ]),
           _vm._ssrNode(" "),
           _vm._ssrNode(
             '<div class="meta-container-wrapper">',

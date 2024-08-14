@@ -3,7 +3,7 @@
         <slot name="before-basket-item"></slot>
 
         <div class="basket-item component-loading with-icon d-flex" :class="{ 'sending is-loading': waiting, 'is-loading': isCheckoutReadonly }">
-            <div class="image-container" style="aspect-ratio: 1/1;">
+            <div class="image-container">
                 <a :href="basketItem.variation.data | itemURL">
                     <lazy-img
                         v-if="image"
