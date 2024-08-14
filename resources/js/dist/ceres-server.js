@@ -2903,6 +2903,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -42845,7 +42846,7 @@ var render = function() {
                         title: _vm.itemName,
                         height: _vm.height,
                         width: _vm.width,
-                        "picture-class": "d-block w-100 h-100",
+                        "picture-class": "d-block mw-100 mh-100",
                         "data-testing": "basket-item-img"
                       }
                     })
@@ -43698,7 +43699,9 @@ var render = function() {
                   _vm._ssrAttr("width", _vm.width) +
                   ' type="image/tiff" class="mw-100 h-auto">'
                 : _vm.height &&
+                  _vm.height > 0 &&
                   _vm.width &&
+                  _vm.width > 0 &&
                   !_vm.webpSupported &&
                   !_vm.avifSupported
                 ? "<img" +
@@ -43707,7 +43710,10 @@ var render = function() {
                   _vm._ssrAttr("height", _vm.height) +
                   _vm._ssrAttr("width", _vm.width) +
                   ' class="mw-100 h-auto">'
-                : "<!---->")
+                : "<img" +
+                  _vm._ssrAttr("src", _vm.defaultImageUrl || _vm.fallbackUrl) +
+                  _vm._ssrAttr("alt", _vm.alt) +
+                  ' class="mw-100 h-auto">')
           )
         ],
         2

@@ -496,6 +496,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -36597,7 +36598,9 @@ var render = function() {
                 }
               })
             : _vm.height &&
+              _vm.height > 0 &&
               _vm.width &&
+              _vm.width > 0 &&
               !_vm.webpSupported &&
               !_vm.avifSupported
             ? _c("img", {
@@ -36609,7 +36612,13 @@ var render = function() {
                   width: _vm.width
                 }
               })
-            : _vm._e()
+            : _c("img", {
+                staticClass: "mw-100 h-auto",
+                attrs: {
+                  src: _vm.defaultImageUrl || _vm.fallbackUrl,
+                  alt: _vm.alt
+                }
+              })
         ],
         2
       )
