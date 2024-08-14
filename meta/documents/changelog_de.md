@@ -41,6 +41,16 @@
 - [resources/js/src/app/components/item/OrderPropertyListItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3554/files#diff-38e564e102ed3a17d36a85e7a337ea233f1fba3a1e43d95808c20dde2484f1c9)
 - [resources/js/src/app/components/pageDesign/CookieBar.vue](https://github.com/plentymarkets/plugin-ceres/pull/3546/files#diff-07203a2a14f4fdfe0285c115db84358b9b18bbe84d3ab3536f80b667529b7392)
 - [resources/js/src/app/components/pageDesign/PrivacySettings.vue](https://github.com/plentymarkets/plugin-ceres/pull/3546/files#diff-9f2031aec851f46baecf85800d865e1b95d66c5ec279eda68bfb4016325ed195)
+- [resources/views/Category/Item/Partials/ItemSorting.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64#diff-f8f9dba2d8e3c0674cf2aac4edc3175570518c3cd83932731a35d4ce44aa6ba1)
+- [resources/views/Category/Item/Partials/ItemsPerPage.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64#diff-ce4a6a0d61b5493622e6358d874e9433f70748e6888cdc24e7b69eecad13588e)
+- [resources/views/Checkout/OrderConfirmation.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64#diff-17ee2b9aab5a177cadc8de620dd81d3c088673adc0fcb961f655cedee201d3a7)
+- [resources/views/Widgets/Category/ItemSortingWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3543/files#diff-aa652b1b9ecb9ff84376a17521fb1d18711f82fa23ba8d9dec51d4b8d272ad00)
+- [resources/views/Widgets/Category/ItemsPerPageWidget.twig](resources/views/Widgets/Category/ItemsPerPageWidget.twig)
+- [resources/views/Widgets/Common/ImageBoxWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64#diff-9f438954b9f177761379a8b382eea014077ec743060583796ac4f9aaed3d3003)
+- [resources/views/Widgets/Common/ImageCarouselWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64#diff-43b0576fe9cb61d0343a4aa220f562347c237717821f276ab632973e3970ec96)
+- [resources/views/Widgets/Common/ItemListWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64#diff-56e4aca5195c81e2f933daaf2a1d1397fcd1e72844a24d75155dcab09e4cb0ee)
+- [resources/views/Widgets/Header/NavigationWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64#diff-d9d8d5418b1e74986dcb27dfa315d297f65a5f90efed0734e8ab495651cab594)
+- [resources/views/Widgets/Item/ItemImageWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64#diff-e9d44ad6d7ca6325b265745487a158c45e697741e7ec84b86b338ecbfd511e98)
 
 ## v5.0.63 (2024-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.62...5.0.63" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
