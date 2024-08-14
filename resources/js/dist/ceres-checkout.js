@@ -80006,11 +80006,19 @@ var defaultConfig = {
       }
 
       if (element.getAttribute("data-width")) {
-        img.width = element.getAttribute("data-width");
+        var width = element.getAttribute("data-width");
+
+        if (width && width > 0) {
+          img.width = width;
+        }
       }
 
       if (element.getAttribute("data-height")) {
-        img.height = element.getAttribute("data-height");
+        var height = element.getAttribute("data-height");
+
+        if (height && height > 0) {
+          img.height = height;
+        }
       }
 
       if (element.getAttribute("data-picture-class")) {
