@@ -38,12 +38,22 @@ const defaultConfig = {
 
             if (element.getAttribute("data-width"))
             {
-                img.width = element.getAttribute("data-width");
+                const width = element.getAttribute("data-width");
+
+                if (width && width > 0)
+                {
+                    img.width = width;
+                }
             }
 
             if (element.getAttribute("data-height"))
             {
-                img.height = element.getAttribute("data-height");
+                const height = element.getAttribute("data-height");
+
+                if (height && height > 0)
+                {
+                    img.height = height;
+                }
             }
 
             if (element.getAttribute("data-picture-class"))
@@ -54,7 +64,10 @@ const defaultConfig = {
 
                 for (const selector of classes)
                 {
-                    img.classList.toggle(selector);
+                    if (!img.classList.contains(selector))
+                    {
+                        img.classList.add(selector);
+                    }
                 }
             }
 

@@ -432,6 +432,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -562,6 +563,20 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
   methods: {
     mimeType: function mimeType(url) {
       return mime.lookup(url);
+    },
+    getHeight: function getHeight() {
+      if (this.height && this.height > 0) {
+        return this.height;
+      }
+
+      return undefined;
+    },
+    getWidth: function getWidth() {
+      if (this.width && this.width > 0) {
+        return this.width;
+      }
+
+      return undefined;
     },
     propagateImageFormat: function propagateImageFormat() {
       this.setReceivedImageExtension();
@@ -37593,25 +37608,28 @@ var render = function() {
                 attrs: {
                   src: _vm.defaultImageUrl,
                   alt: _vm.alt,
-                  height: _vm.height,
-                  width: _vm.width,
+                  height: _vm.getHeight(),
+                  width: _vm.getWidth(),
                   type: "image/tiff"
                 }
               })
-            : _vm.height &&
-              _vm.width &&
-              !_vm.webpSupported &&
-              !_vm.avifSupported
+            : !_vm.webpSupported && !_vm.avifSupported
             ? _c("img", {
                 staticClass: "mw-100 h-auto",
                 attrs: {
                   src: _vm.defaultImageUrl || _vm.fallbackUrl,
                   alt: _vm.alt,
-                  height: _vm.height,
-                  width: _vm.width
+                  height: _vm.getHeight(),
+                  width: _vm.getWidth()
                 }
               })
-            : _vm._e()
+            : _c("img", {
+                staticClass: "mw-100 h-auto",
+                attrs: {
+                  src: _vm.defaultImageUrl || _vm.fallbackUrl,
+                  alt: _vm.alt
+                }
+              })
         ],
         2
       )
@@ -66581,11 +66599,19 @@ var defaultConfig = {
       }
 
       if (element.getAttribute("data-width")) {
-        img.width = element.getAttribute("data-width");
+        var width = element.getAttribute("data-width");
+
+        if (width && width > 0) {
+          img.width = width;
+        }
       }
 
       if (element.getAttribute("data-height")) {
-        img.height = element.getAttribute("data-height");
+        var height = element.getAttribute("data-height");
+
+        if (height && height > 0) {
+          img.height = height;
+        }
       }
 
       if (element.getAttribute("data-picture-class")) {
@@ -66598,7 +66624,10 @@ var defaultConfig = {
         try {
           for (_iterator.s(); !(_step = _iterator.n()).done;) {
             var selector = _step.value;
-            img.classList.toggle(selector);
+
+            if (!img.classList.contains(selector)) {
+              img.classList.add(selector);
+            }
           }
         } catch (err) {
           _iterator.e(err);
