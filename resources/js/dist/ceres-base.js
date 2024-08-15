@@ -63517,7 +63517,10 @@ var defaultConfig = {
         try {
           for (_iterator.s(); !(_step = _iterator.n()).done;) {
             var selector = _step.value;
-            img.classList.toggle(selector);
+
+            if (!img.classList.contains(selector)) {
+              img.classList.add(selector);
+            }
           }
         } catch (err) {
           _iterator.e(err);

@@ -64,7 +64,10 @@ const defaultConfig = {
 
                 for (const selector of classes)
                 {
-                    img.classList.toggle(selector);
+                    if (!img.classList.contains(selector))
+                    {
+                        img.classList.add(selector);
+                    }
                 }
             }
 
