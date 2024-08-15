@@ -20,7 +20,6 @@
 - Fehlerhafter Standardwert von einer in Version 5.0.62 eingeführten SEO Option auf der Artikelseite wurde behoben.
 - Auf mobilen Geräten konnte es zu fehlerhaften Scrollverhalten kommen. Dies wurde behoben.
 - Die maximal angezeigten Zeichen von Merkmalen wurde fälschlicherweise auf 128 begrenzt. Diese Begrenzung wurde aufgehoben.
-- Das teilweise unregelmäßige Scroll-Verhalten auf mobilen Geräten wurde behoben.
 - Einige Bilder wurden nicht verzögert geladen, dies wurde behoben.
 
 ### Geändert
@@ -32,7 +31,7 @@
 
 ### Angepasste Templates
 
-- Im Zuge des Releases von plentyShop LTS 5.0.64 gab es Änderungen an Template-Dateien, die das Feedback Plugin betreffen und für Theme-Entwickler relevant sind.  Die Verlinkung führt direkt zu der umgesetzten Änderung in der entsprechenden Datei.
+- Im Zuge des Releases von plentyShop LTS 5.0.64 gab es Änderungen an Template-Dateien die für Theme-Entwickler relevant sind.  Die Verlinkung führt direkt zu der umgesetzten Änderung in der entsprechenden Datei.
 
 - [resources/js/src/app/components/basket/list/BasketListItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3522/files#diff-2e0729c79085beac37d2ad03e5d1a25ddec4020ecf8e3551d50e64a6cf5f91d3)
 - [resources/js/src/app/components/common/LazyImg.vue](https://github.com/plentymarkets/plugin-ceres/pull/3522/files#diff-8bf1fff9b8d538ae75c4ee791deef3a8acfe72e5e0e678d1c49672b17d787a73)

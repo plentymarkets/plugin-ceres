@@ -20,7 +20,6 @@
 - Incorrect default value of an SEO option introduced in version 5.0.62 on the single item page has been fixed.
 - Incorrect scrolling behaviour could occur on mobile devices. This has been fixed.
 - The maximum number of characters displayed for characteristics was incorrectly limited to 128. This limit has been removed.
-- Fixed intermittent scrolling issue on mobile.
 - Fixed that some images are not being lazy loaded.
 
 ### Changed
@@ -32,7 +31,7 @@
 
 ### Changed Templates
 
-- In plentyShop LTS 5.0.64 we made changes to template files relating the feedback plugin which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
+- In plentyShop LTS 5.0.64 we made changes to template files which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
 
 - [resources/js/src/app/components/basket/list/BasketListItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3522/files#diff-2e0729c79085beac37d2ad03e5d1a25ddec4020ecf8e3551d50e64a6cf5f91d3)
 - [resources/js/src/app/components/common/LazyImg.vue](https://github.com/plentymarkets/plugin-ceres/pull/3522/files#diff-8bf1fff9b8d538ae75c4ee791deef3a8acfe72e5e0e678d1c49672b17d787a73)
