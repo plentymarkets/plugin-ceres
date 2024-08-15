@@ -103,6 +103,40 @@
                         "defaultValue": 0.5
                     }
                 },
+                "global.google_recaptcha_consentGroup": {
+                    "type": "selectBox",
+                    "required": false,
+                    "label": "Config.globalGoogleRecaptchaConsentGroupLabel",
+                    "options": {
+                        "defaultValue": "media",
+                        "selectBoxValues": [
+                            {
+                                "value": "necessary",
+                                "caption": "Config.globalGoogleRecaptchaConsentGroupNecessary"
+                            },
+                            {
+                                "value": "media",
+                                "caption": "Config.globalGoogleRecaptchaConsentGroupMedia"
+                            }
+                        ]
+                    }
+                },
+                "global.google_recaptcha_consentNecessary": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.globalGoogleRecaptchaConsentNecessaryLabel",
+                    "options": {
+                        "defaultValue": "false"
+                    }
+                },
+                "global.google_recaptcha_consentOptOut": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.globalGoogleRecaptchaConsentOptOutLabel",
+                    "options": {
+                        "defaultValue": "false"
+                    }
+                },
                 "global.user_data_hash_max_age": {
                     "type": "selectBox",
                     "required": false,
@@ -297,6 +331,14 @@
         "Config.HeaderTab": {
             "label": "Config.headerTab",
             "formFields": {
+                "header.low_cls_mode": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.headerStickyLabel",
+                    "options": {
+                        "defaultValue": "true"
+                    }
+                },
                 "header.show_navbars": {
                     "type": "selectBox",
                     "required": false,
@@ -4089,7 +4131,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityBackOrder"
                                         }
@@ -4142,7 +4185,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }
@@ -4195,7 +4239,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }
@@ -4248,7 +4293,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }
@@ -4301,7 +4347,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }
@@ -4354,7 +4401,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }
@@ -4407,7 +4455,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }
@@ -4460,7 +4509,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }
@@ -4513,7 +4563,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }
@@ -4566,7 +4617,8 @@
                                         {
                                             "value": "https://schema.org/SoldOut",
                                             "caption": "Config.availabilitySoldOut"
-                                        },                                        {
+                                        },
+                                        {
                                             "value": "https://schema.org/BackOrder",
                                             "caption": "Config.availabilityInStock"
                                         }
@@ -4916,6 +4968,125 @@
                             }
                         }
                     }
+                },
+
+                "itemRobots.mapping": {
+                    "type": "verticalContainer",
+                    "label": "Config.itemRobotsMapping",
+                    "options": {
+                        "containerEntries": {
+                            "itemRobots.mapping.itemRobots": {
+                                "type": "selectBox",
+                                "required": false,
+                                "label": "Config.itemRobots",
+                                "options": {
+                                    "defaultValue": "all",
+                                    "selectBoxValues": [
+                                        {
+                                            "value": "all",
+                                            "caption": "Config.metaRobotsAll"
+                                        },
+                                        {
+                                            "value": "index",
+                                            "caption": "Config.metaRobotsIndex"
+                                        },
+                                        {
+                                            "value": "nofollow",
+                                            "caption": "Config.metaRobotsNofollow"
+                                        },
+                                        {
+                                            "value": "noindex",
+                                            "caption": "Config.metaRobotsNoindex"
+                                        },
+                                        {
+                                            "value": "noindex, nofollow",
+                                            "caption": "Config.metaRobotsNoindexNofollow"
+                                        },
+                                        {
+                                            "value": "varProp",
+                                            "caption": "Config.metaRobotsVariationProperty"
+                                        }
+                                    ]
+                                }
+                            },
+                            "itemRobots.mapping.itemRobotsID": {
+                                "type": "inputText",
+                                "required": false,
+                                "label": "Config.itemRobotsID",
+                                "options": {
+                                    "defaultValue": ""
+                                }
+                            },
+                            "itemRobots.mapping.itemRobotsParameter": {
+                                "type": "selectBox",
+                                "required": false,
+                                "label": "Config.itemRobotsParameter",
+                                "options": {
+                                    "defaultValue": "false",
+                                    "selectBoxValues": [
+                                        {
+                                            "value": "false",
+                                            "caption": "Config.itemRobotsNo"
+                                        },
+                                        {
+                                            "value": "true",
+                                            "caption": "Config.itemRobotsYes"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "itemCanonical.mapping": {
+                    "type": "verticalContainer",
+                    "label": "Config.itemCanonicalMapping",
+                    "options": {
+                        "containerEntries": {
+                            "itemCanonical.mapping.itemCanonicalID": {
+                                "type": "inputText",
+                                "required": false,
+                                "label": "Config.itemCanonicalID",
+                                "options": {
+                                    "defaultValue": ""
+                                }
+                            }
+                        }
+                    }
+                },
+                "imageSeo.mapping": {
+                    "type": "verticalContainer",
+                    "label": "Config.imageSeoMapping",
+                    "options": {
+                        "containerEntries": {
+                            "imageSeo.mapping.image": {
+                                "type": "selectBox",
+                                "required": false,
+                                "label": "Config.imageSeo",
+                                "options": {
+                                    "defaultValue": "url",
+                                    "selectBoxValues": [
+                                        {
+                                            "value": "url",
+                                            "caption": "Config.imageSeoUrl"
+                                        },
+                                        {
+                                            "value": "urlPreview",
+                                            "caption": "Config.imageSeoUrlPreview"
+                                        },
+                                        {
+                                            "value": "urlSecondPreview",
+                                            "caption": "Config.imageSeoUrlSecondPreview"
+                                        },
+                                        {
+                                            "value": "urlMiddle",
+                                            "caption": "Config.imageSeoUrlMiddle"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
                 }
             }
         },
@@ -5103,6 +5274,14 @@
                     "type": "checkBox",
                     "required": false,
                     "label": "Config.logPerformanceEventPropagation",
+                    "options": {
+                        "defaultValue": "true"
+                    }
+                },
+                "log.performance.modernImagesConversion": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.logPerformanceModernImageConversionLabel",
                     "options": {
                         "defaultValue": "true"
                     }

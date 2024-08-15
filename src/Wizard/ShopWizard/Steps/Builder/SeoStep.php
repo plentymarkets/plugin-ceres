@@ -37,7 +37,10 @@ class SeoStep extends Step
                 $this->generateIsbnMappingSection(),
                 $this->generateMpnMappingSection(),
                 $this->generatePriceValidUntilMappingSection(),
-                $this->generateSkuMappingSection()
+                $this->generateSkuMappingSection(),
+                $this->generateImageSeoMappingSection(),
+                $this->generateItemRobotsMappingSection(),
+                $this->generateItemCanonicalSection()
             ]
         ];
     }
@@ -519,6 +522,91 @@ class SeoStep extends Step
                     "defaultValue" => "",
                     "options"      => [
                         "name"          => "Wizard.skuID",
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    private function generateItemRobotsMappingSection():array
+    {
+        $itemRobotsOptions = SeoConfig::getMetaRobotsOptions();
+        $itemRobotsOptions['itemRobotsVarProp'] = 'varProp';
+        $options = StepHelper::generateTranslatedListBoxValues($itemRobotsOptions);
+
+        $itemRobotsOptionsParameter = [
+            "itemRobotsNo" => "false",
+            "itemRobotsYes" => "true"
+        ];
+
+        $optionParameter =  StepHelper::generateTranslatedListBoxValues($itemRobotsOptionsParameter);
+        return [
+            "title"       => "Wizard.itemRobotsMapping",
+            "description" => "Wizard.itemRobotsMappingDescription",
+            "form"        => [
+                "seo_itemRobots" => [
+                    "type"         => "select",
+                    "defaultValue" => "all",
+                    "options"      => [
+                        "name" => "Wizard.itemRobotsChoose",
+                        "listBoxValues" => $options,
+                    ]
+                ],
+                "seo_itemRobotsID" => [
+                    "type"         => "text",
+                    "isVisible"    => "seo_itemRobots === 'varProp'",
+                    "defaultValue" => "",
+                    "options"      => [
+                        "name"          => "Wizard.itemID",
+                    ]
+                ],
+                "seo_itemRobotsParameter" => [
+                    "type"         => "select",
+                    "defaultValue" => "false",
+                    "options"      => [
+                        "name"          => "Wizard.itemRobotsParameterChoose",
+                        "listBoxValues" => $optionParameter
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    private function generateItemCanonicalSection():array
+    {
+        return [
+            "title"       => "Wizard.itemCanonicalMapping",
+            "description" => "Wizard.itemCanonicalMappingDescription",
+            "form"        => [
+                "seo_itemCanonical" => [
+                    "type"         => "text",
+                    "defaultValue" => "",
+                    "options"      => [
+                        "name"          => "Wizard.itemID",
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generateImageSeoMappingSection():array
+    {
+        $imageSeoOptions = SeoConfig::getImageSeoOtions();
+        $options = StepHelper::generateTranslatedListBoxValues($imageSeoOptions);
+
+        return [
+            "title"       => "Wizard.imageSeoMapping",
+            "description" => "Wizard.imageSeoMappingDescription",
+            "form"        => [
+                "seo_image" => [
+                    "type"         => "select",
+                    "defaultValue" => "1",
+                    "options"      => [
+                        "name" => "Wizard.imageSeoChoose",
+                        "listBoxValues" => $options,
                     ]
                 ]
             ]

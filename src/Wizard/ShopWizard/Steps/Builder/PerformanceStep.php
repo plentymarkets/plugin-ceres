@@ -26,9 +26,11 @@ class PerformanceStep extends Step
                           . $this->hasRequiredSettings(),
             "sections" => [
                 $this->generateSsrSection(),
+                $this->generateHeaderSection(),
                 $this->generateLoggingOptionsSection(),
                 $this->generatePerformanceSection(),
-                $this->generatePerformanceEventPropagationSection()
+                $this->generatePerformanceEventPropagationSection(),
+                $this->generateModernImageConversionSection()
             ]
         ];
         
@@ -46,6 +48,26 @@ class PerformanceStep extends Step
                     "defaultValue" => false,
                     "options" => [
                         "name" =>  "Wizard.activateSsr"
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generateHeaderSection():array
+    {
+        return [
+            "title" => "Wizard.fixedHeaderOptions",
+            "description" => "Wizard.fixedHeaderOptionsDescription",
+            "form" => [
+                "performance_headerOptions" => [
+                    "type" => "checkbox",
+                    "default" => true,
+                    "options" => [
+                        "name" => "Wizard.performanceHeaderOptionsCheck"
                     ]
                 ]
             ]
@@ -125,6 +147,26 @@ class PerformanceStep extends Step
                     "default" => true,
                     "options" => [
                         "name" => "Wizard.performanceEventPropagation"
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function generateModernImageConversionSection():array
+    {
+        return [
+            "title" => "Wizard.modernImageConversionTitle",
+            "description" => "Wizard.modernImageConversionDescription",
+            "form" => [
+                "performance_modernImagesConversion" => [
+                    "type" => "toggle",
+                    "defaultValue" => true,
+                    "options" => [
+                        "name" =>  "Wizard.modernImageConversionName"
                     ]
                 ]
             ]

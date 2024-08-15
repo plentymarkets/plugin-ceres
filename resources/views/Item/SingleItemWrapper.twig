@@ -6,11 +6,12 @@
 
     {% set itemData = item.documents[0].data %}
 
-    {% if queryString() | length > 0 %}
-        {% set robotsValue = 'NOINDEX' %}
+    {% if forceRobotsValue is same as (false) and queryString() | length > 0 %}
+        {% set robotsValue = 'noindex' %}
     {% else %}
-        {% set robotsValue = 'ALL' %}
+        {% set robotsValue = robots %}
     {% endif %}
+
     {% embed getPartial('page-metadata') %}
         {% block title          ItemName.get(itemData | itemName(webstoreConfig.urlTitleItemName - 1, ""), itemData.variation.bundleType) %}
         {% block description    itemData.texts.metaDescription %}
@@ -19,13 +20,13 @@
         {% block robots         robotsValue %}
         {% block schemaOrg %}
             {
-                "@context"      : "http://schema.org/",
+                "@context"      : "https://schema.org/",
                 "@type"         : "Product",
                 "@id"           : "{{ itemData.variation.id }}",
                 "name"          : "{{ ItemName.get(itemData | itemName, itemData.variation.bundleType) | trim }}",
                 "category"      : "{{ defaultCategory.details[0].name }}",
                 "releaseDate"   : "{{ itemData.variation.releasedAt }}",
-                "image"         : "{{ itemData.images.all[0].urlPreview }}",
+                "image"         : "{{ imageSeo }}",
                 "identifier"    : "{{ itemData.variation.id }}",
                 "description"   : "{{ itemData.texts.description | striptags | filterTabs }}",
                 "disambiguatingDescription" : "{{ itemData.texts.shortDescription }}",
@@ -67,7 +68,6 @@
                     "priceValidUntil": "{{ priceValidUntil }}",
 {% endif %}
                     "url"           : "{{ requestedVariationUrl }}",
-{% if itemData.prices.default.baseLot > 0 %}
                     "priceSpecification":[
                         {% if itemData.prices.rrp %}
                             {
@@ -95,7 +95,6 @@
                         }
 
                     ],
-{% endif %}
                     "availability"  : "{{ itemData.variation.availability.mappedAvailability }}",
                     "itemCondition" : "{{ conditionOfItem }}"
                 },

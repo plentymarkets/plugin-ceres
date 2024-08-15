@@ -141,7 +141,7 @@ export default {
 
         getIsGenderPersonal(gender)
         {
-            return ["male", "female", "diverse"].includes(gender);
+            return ["male", "female", "diverse", "please select"].includes(gender);
         }
     },
 

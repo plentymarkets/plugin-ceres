@@ -1,35 +1,37 @@
 <template>
-    <div itemscope itemtype="http://schema.org/Thing">
-        <template>
-            <div class="single-carousel owl-carousel owl-theme owl-single-item mt-0" ref="single">
-                <div v-for="image in singleImages" class="prop-1-1">
-                    <a :href="image.url" :data-lightbox="'single-item-image' + _uid">
-                        <img class="owl-lazy" :data-src="image.url" :alt="getAltText(image)" :title="getImageName(image)">
-                    </a>
+    <div itemscope itemtype="https://schema.org/Thing">
+        <div ref="single" class="single-carousel owl-carousel owl-theme owl-single-item mt-0">
+            <div v-for="(image, index) in singleImages" :key="index" class="prop-1-1">
+                <a :href="image.url" :data-lightbox="`single-item-image${_uid}`">
+                    <lazy-img :alt="getAltText(image)" :image-url="image.url" :title="getImageName(image)" :width="getImageWidth(image)" :height="getImageHeight(image)" />
+                </a>
+            </div>
+        </div>
+
+        <div v-if="showThumbs" id="thumb-carousel" ref="thumbs" class="owl-thumbs owl-carousel owl-theme owl-single-item">
+            <div v-for="(imagePreview, index) in carouselImages" :key="index" class="prop-1-1">
+                <div @click="goTo(index)" class="image-container">
+                    <lazy-img
+                        :alt="getAltText(imagePreview)"
+                        :image-url="imagePreview.url"
+                        :title="getImageName(imagePreview)"
+                        :width="getImageWidth(imagePreview)"
+                        :height="getImageHeight(imagePreview)"
+                        picture-class="owl-thumb border-appearance"
+                        v-bind:class="{ 'active': currentItem === index}" />
                 </div>
             </div>
-            <div v-if="showThumbs" id="thumb-carousel" class="owl-thumbs owl-carousel owl-theme owl-single-item" ref="thumbs">
-                <div class="prop-1-1" v-for="(imagePreview, index) in carouselImages">
-                    <div class="image-container" @click="goTo(index)">
-                        <lazy-img
-                            picture-class="owl-thumb border-appearance"
-                            v-bind:class="{ 'active': currentItem === index}"
-                            :image-url="imagePreview.url"
-                            :alt="getAltText(imagePreview)"
-                            :title="getImageName(imagePreview)">
-                        </lazy-img>
-                    </div>
-                </div>
-            </div>
-        </template>
+        </div>
+
         <div v-if="!initialized" class="single-carousel owl-carousel owl-loaded owl-theme owl-single-item mt-0">
             <div class="prop-1-1">
-                <img
-                    class="owl-placeholder"
-                    :src="singleImages[0].url"
+                <lazy-img
                     :alt="getAltText(singleImages[0].url)"
+                    :image-url="singleImages[0].url"
                     :title="getImageName(singleImages[0].url)"
-                >
+                    :width="getImageWidth(singleImages[0])"
+                    :height="getImageHeight(singleImages[0])"
+                    picture-class="owl-placeholder" />
             </div>
         </div>
     </div>
@@ -84,7 +86,7 @@ export default {
     {
         return {
             currentItem: 0,
-            initialized: false
+            initialized: false,
         };
     },
 
@@ -271,6 +273,16 @@ export default {
         getImageName(image)
         {
             return image && image.name ? image.name : this.$options.filters.itemName(this.currentVariation);
+        },
+
+        getImageWidth(image)
+        {
+          return image && image.width ? image.width : this.$options.filters.itemImageWidth(this.carouselImages);
+        },
+
+        getImageHeight(image)
+        {
+          return image && image.height ? image.height : this.$options.filters.itemImageHeight(this.carouselImages);
         },
 
         loadLightbox()

@@ -4,16 +4,18 @@
 
         <div class="basket-item component-loading with-icon d-flex" :class="{ 'sending is-loading': waiting, 'is-loading': isCheckoutReadonly }">
             <div class="image-container">
-              <a :href="basketItem.variation.data | itemURL">
-                <lazy-img
-                    picture-class="d-block mw-100 mh-100"
-                    v-if="image"
-                    :image-url="image"
-                    :alt="altText"
-                    :title="itemName"
-                    data-testing="basket-item-img">
-                </lazy-img>
-              </a>
+                <a :href="basketItem.variation.data | itemURL">
+                    <lazy-img
+                        v-if="image"
+                        :image-url="image"
+                        :alt="altText"
+                        :title="itemName"
+                        :height="height"
+                        :width="width"
+                        picture-class="d-block mw-100 mh-100 h-auto"
+                        data-testing="basket-item-img"
+                    />
+                </a>
             </div>
 
             <div class="meta-container-wrapper">
@@ -105,7 +107,7 @@
                 </div>
 
                 <basket-set-component-list v-if="basketItem.setComponents" :set-components="basketItem.setComponents" :set-item="basketItem"></basket-set-component-list>
-                
+
                 <order-property-value-list :basket-item="basketItem"></order-property-value-list>
 
                 <div class="small" v-if="showMoreInformation">
@@ -166,7 +168,7 @@ import OrderPropertyValueList from "../../item/OrderPropertyValueList.vue"
 
 export default {
     name: "basket-list-item",
-    
+
     components:
     {
         BasketSetComponentList,
@@ -210,6 +212,20 @@ export default {
             const itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
 
             return this.$options.filters.itemImage(itemImages);
+        },
+
+        width()
+        {
+            const itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
+
+            return this.$options.filters.itemImageWidth(itemImages);
+        },
+
+        height()
+        {
+          const itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
+
+          return this.$options.filters.itemImageHeight(itemImages);
         },
 
         altText()
@@ -262,7 +278,7 @@ export default {
         basePrice()
         {
             // if the 'AfterBasketItemUpdate' event contains a new base price for the item, return it
-            if (!isNullOrUndefined(this.basketItem.updatedBasePrice)) 
+            if (!isNullOrUndefined(this.basketItem.updatedBasePrice))
             {
                 return this.basketItem.updatedBasePrice;
             }

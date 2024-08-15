@@ -2,15 +2,14 @@
 
 namespace Ceres\Contexts;
 
-use IO\Helper\Utils;
 use IO\Helper\ContextInterface;
+use IO\Helper\Utils;
 use IO\Services\CategoryService;
 use IO\Services\CustomerService;
+use Plenty\Modules\Category\Models\Category;
+use Plenty\Modules\Webshop\Contracts\ContactRepositoryContract;
 use Plenty\Modules\Webshop\Helpers\UrlQuery;
 use Plenty\Plugin\ConfigRepository;
-use Plenty\Modules\Webshop\Contracts\ContactRepositoryContract;
-use Plenty\Modules\Category\Models\Category;
-
 
 /**
  * Class SingleItemContext
@@ -137,6 +136,26 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     public $sku = '';
 
     /**
+     * @var string $imageSeo Contains the image path for SEO attribute
+     */
+    public $imageSeo = '';
+
+    /**
+     * @var string $robots Contains a robots value for a specific variation
+     */
+    public $robots = '';
+
+    /**
+     * @var bool $forceRobotsValue Contains a bool if the robots setting should also be used whith parameter
+     */
+    public $forceRobotsValue = false;
+
+    /**
+     * @var string forcedCanonicalUrl Contains a string with a canonical url
+     */
+    public $forcedCanonicalUrl = '';
+
+    /**
      * @var string $conditionOfItem Contains the condition of the current item for structured data.
      */
     public $conditionOfItem = '';
@@ -158,7 +177,6 @@ class SingleItemContext extends GlobalContext implements ContextInterface
 
         $this->item = $params['item'];
         $itemData = $this->item['documents'][0]['data'];
-
 
         $this->conditionOfItem = $this->detectItemCondition($itemData['item']['condition']['id']);
 
@@ -250,6 +268,39 @@ class SingleItemContext extends GlobalContext implements ContextInterface
                 $this->sku = $itemData['item']['id'];
         }
 
+        $robotsMapping = $this->ceresConfig->seo->itemRobotsMapping;
+        $robotsMappingId = $this->ceresConfig->seo->itemRobotsMappingId;
+        $this->forceRobotsValue = $this->ceresConfig->seo->itemRobotsMappingParameter;
+
+        switch ($robotsMapping) {
+            case "all":
+                $this->robots = "all";
+                break;
+            case "index":
+                $this->robots = "index";
+                break;
+            case "nofollow":
+                $this->robots = "nofollow";
+                break;
+            case "noindex":
+                $this->robots = "noindex";
+                break;
+            case "noindex, nofollow":
+                $this->robots = "noindex, nofollow";
+                break;
+            case "varProp":
+                $this->robots = $this->getVariationProperty($itemData['variationProperties'], $robotsMappingId) ?: "all";
+                break;
+        }
+
+        $canonicalPropertyId = $this->ceresConfig->seo->itemCanonicalID;
+        $canonicalUrl = $this->getVariationProperty($itemData['variationProperties'], $canonicalPropertyId);
+
+        if(!empty($canonicalUrl)){
+            $this->forcedCanonicalUrl = $canonicalUrl;
+        }
+
+        $this->imageSeo = $itemData['images']['all'][0][$this->ceresConfig->seo->imageSeo] ?? '';
         $this->isItemSet = $params['isItemSet'];
 
         $this->attributes = $params['variationAttributeMap']['attributes'];
@@ -261,7 +312,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $this->setAttributeMap = $params['setAttributeMap'];
         /** @var UrlQuery $urlQuery */
         $urlQuery = pluginApp(UrlQuery::class, ['path' => $this->request->getRequestUri(), 'lang' => Utils::getLang()]);
-        $this->requestedVariationUrl = $urlQuery->toAbsoluteUrl(Utils::getLang() !== $this->webstoreConfig->defaultLanguage);
+        $urlWithParameters = $urlQuery->toAbsoluteUrl(Utils::getLang() !== $this->webstoreConfig->defaultLanguage);
+        $this->requestedVariationUrl = explode("?", $urlWithParameters)[0] ?? '';
         $defaultCategoryId = 0;
         $plentyId = Utils::getPlentyId();
         foreach ($this->item['documents'][0]['data']['defaultCategories'] as $category) {

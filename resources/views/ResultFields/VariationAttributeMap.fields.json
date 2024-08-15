@@ -22,5 +22,7 @@
     "filter.isSalable",
     "images.variation.path",
     "images.variation.position",
-    "images.variation.urlPreview"
+    "images.variation.urlPreview",
+    "images.variation.width",
+    "images.variation.height"
 ]

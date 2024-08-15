@@ -7,6 +7,7 @@
                 v-model="inputValue"
                 v-tooltip
                 data-toggle="tooltip"
+                :maxlength="isOrderProperty(property) ? 128 : 65535"
                 :title="property.names.description"
                 :data-testing="'order-property-input-' + inputType">
             <label class="d-flex">
@@ -306,6 +307,9 @@ export default {
 
     methods:
     {
+        isOrderProperty(property){
+           return property.isOderProperty && App.useVariationOrderProperties
+        },
         onInputValueChanged(value)
         {
             if (this.inputType === "int")

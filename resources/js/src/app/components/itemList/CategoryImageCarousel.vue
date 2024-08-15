@@ -1,15 +1,33 @@
 <template>
-    <a :id="'owl-carousel-' + _uid" v-if="$data.$_enableCarousel" class="owl-carousel owl-theme" :href="itemUrl" role="listbox" :aria-label="$translate('Ceres::Template.itemImageCarousel')">
+    <a
+        v-if="$data.$_enableCarousel"
+        :id="`owl-carousel-${_uid}`"
+        :href="itemUrl"
+        :aria-label="$translate('Ceres::Template.itemImageCarousel')"
+        role="listbox"
+        class="owl-carousel owl-theme">
         <div v-for="(imageUrl, index) in imageUrls" :key="index">
-            <lazy-img v-if="index === 0 && !disableLazyLoad" ref="itemLazyImage" picture-class="img-fluid" :image-url="imageUrl.url" :alt="getAltText(imageUrl)" :title="getTitleText(imageUrl)" role="option"></lazy-img>
-            <img v-else-if="index !== 0 && !disableLazyLoad" class="img-fluid owl-lazy" :data-src="imageUrl.url" :alt="getAltText(imageUrl)" :title="getTitleText(imageUrl)" role="option">
-            <img v-else class="img-fluid" :src="imageUrl.url" :alt="getAltText(imageUrl)" :title="getAltText(imageUrl)" role="option">
+            <lazy-img
+                :image-url="imageUrl.url"
+                :alt="getAltText(imageUrl)"
+                :title="getTitleText(imageUrl)"
+                :width="getImageWidth(imageUrl)"
+                :height="getImageHeight(imageUrl)"
+                :ref="{ 'itemLazyImage' : index === 0 }"
+                picture-class="img-fluid"
+                role="option" />
         </div>
     </a>
 
     <a v-else :href="itemUrl">
-        <lazy-img v-if="!disableLazyLoad" ref="itemLazyImage" picture-class="img-fluid" :image-url="imageUrls | itemImage" :alt="getAltText(imageUrls[0])" :title="getTitleText(imageUrls[0])"></lazy-img>
-        <img v-else class="img-fluid" :src="imageUrls | itemImage" :alt="getAltText(imageUrls[0])" :title="getTitleText(imageUrls[0])">
+        <lazy-img
+            :ref="{ 'itemLazyImage': !disableLazyLoad }"
+            :image-url="imageOrItemImage"
+            :alt="getAltText(imageUrls[0])"
+            :title="getTitleText(imageUrls[0])"
+            :width="getImageWidth(imageUrls[0])"
+            :height="getImageHeight(imageUrls[0])"
+            picture-class="img-fluid" />
     </a>
 </template>
 
@@ -76,6 +94,10 @@ export default {
         imageUrls()
         {
             return this.imageUrlsData;
+        },
+        imageOrItemImage()
+        {
+            return this.imageUrls.length ? this.imageUrls[0].url : this.itemImage;
         }
     },
 
@@ -144,6 +166,16 @@ export default {
             const title = image && image.name ? image.name : this.title;
 
             return title;
+        },
+
+        getImageWidth(image)
+        {
+            return image && image.width ? image.width : undefined;
+        },
+
+        getImageHeight(image)
+        {
+            return image && image.height ? image.height : undefined;
         }
     }
 }

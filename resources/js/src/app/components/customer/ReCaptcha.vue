@@ -30,12 +30,20 @@ export default {
         });
     },
 
+    computed: {
+        consentGroupKey() {
+            const consentGroup = App.config.global.googleRecaptchaConsentGroup;
+
+            return  consentGroup ?  `${consentGroup}.reCaptcha` : 'media.reCaptcha'
+        }
+    },
+
     methods:
     {
         checkConsent()
         {
             whenConsented(
-                "media.reCaptcha",
+                this.consentGroupKey,
                 () =>
                 {
                     this.createScript().then(() => this.initializeV3());
@@ -43,7 +51,9 @@ export default {
                 () =>
                 {
                     // remove recaptcha when previously consented
-                });
+                },
+                true
+            );
         },
 
         createScript()

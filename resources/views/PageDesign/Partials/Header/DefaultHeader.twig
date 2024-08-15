@@ -1,6 +1,8 @@
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+{% set lowClsHeader = config("Ceres.header.low_cls_mode") %}
+{% set visibleFields = ceresConfig.basket.previewData %}
 
-<header id="page-header" class="default-header d-print-none">
+<header id="page-header" class="default-header d-print-none {% if lowClsHeader == "true" %}sticky-top{% endif %}">
     <div class="container-max">
         <div class="row flex-row-reverse position-relative">
             <div id="page-header-parent" class="col-12 header-container" data-header-offset>
@@ -87,7 +89,7 @@
                                                 {% endif %}
                                             </a>
 
-                                            <basket-preview v-if="$store.state.lazyComponent.components['basket-preview']" :show-net-prices="{{ showNetPrices | json_encode }}">
+                                            <basket-preview v-if="$store.state.lazyComponent.components['basket-preview']" :show-net-prices="{{ showNetPrices | json_encode }}" :visible-fields="{{ visibleFields | json_encode }}">
                                                 <template #before-basket-item>
                                                     {{ LayoutContainer.show("Ceres::BasketList.BeforeItem") }}
                                                 </template>

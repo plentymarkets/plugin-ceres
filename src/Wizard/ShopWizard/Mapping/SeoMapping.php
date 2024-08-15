@@ -201,7 +201,7 @@ class SeoMapping
             'global'   => false,
             'optional' => true
         ],
-         'seo_sku' => [
+        'seo_sku' => [
             'field'    => 'sku.mapping.sku',
             'type'     => 'string',
             'global'   => false,
@@ -210,6 +210,36 @@ class SeoMapping
         'seo_skuId' => [
             'field'    => 'sku.mapping.skuID',
             'type'     => 'integer',
+            'global'   => false,
+            'optional' => true
+        ],
+        'seo_image' => [
+            'field'    => 'imageSeo.mapping.image',
+            'type'     => 'string',
+            'global'   => false,
+            'optional' => true
+        ],
+        'seo_itemRobots' => [
+            'field'    => 'itemRobots.mapping.itemRobots',
+            'type'     => 'string',
+            'global'   => false,
+            'optional' => true
+        ],
+        'seo_itemRobotsID' => [
+            'field'    => 'itemRobots.mapping.itemRobotsID',
+            'type'     => 'integer',
+            'global'   => false,
+            'optional' => true
+        ],
+        'seo_itemRobotsParameter' => [
+            'field'    => 'itemRobots.mapping.itemRobotsParameter',
+            'type'     => 'string',
+            'global'   => false,
+            'optional' => true
+        ],
+        'seo_itemCanonical' => [
+            'field'    => 'itemCanonical.mapping.itemCanonicalID',
+            'type'     => 'string',
             'global'   => false,
             'optional' => true
         ],

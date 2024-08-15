@@ -1,16 +1,153 @@
 # Release Notes für plentyShop LTS
 
-## v5.0.60 (2023-XX-XX) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.59...5.0.60" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.64 (2024-08-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Neu
+
+- Für die "Sortierung" und "Artikel pro Seite" Schaltflächen auf Artikelkategorieseiten wurden `aria-label` verbaut um die Barrierefreiheit zu verbessern. Sie können über das Menü **CMS » Mehrsprachigkeit** angepasst werden können. Wir möchten uns bei @MaxBentz für seinen Beitrag bedanken.
+
+### Behoben
+
+- Leeres Anker-Tag im Bilderbox-Widget.
+- Vollbildbreite des Hintergrundbild-Widgets in der Fußzeile
+- Fehlerhafter Standardwert von einer in Version 5.0.62 eingeführten SEO Option auf der Artikelseite wurde behoben.
+- Das teilweise unregelmäßige Scroll-Verhalten auf mobilen Geräten wurde behoben.
+- Bilder wurden nicht verzögert geladen, dies wurde behoben.
+
+### Geändert
+
+- Die "Retouren"-Schaltfläche wurde auf der Bestellbestätigung für Gastbestellungen hinzugefügt. Diese Schaltfläche wird nur angezeigt, wenn die Route `order-returns` im IO-Plugin aktiv ist und sich der jeweilige Auftrag mindestens im Status 7 (Warenausgang gebucht) befindet.
+- Cookie Gruppen, die ausschließlich als "notwendig" deklarierte Cookies enthalten, können nicht mehr deaktiviert werden.
+- Die Einstellung `Automatische Konvertierung in moderne Bildformate (AVIF, WebP)` im Schritt **Performance** des plentyShop-Assistenten ist nun im Standard aktiv. Wenn du die automatische Konvertierung nicht nutzen willst, deaktiviere die Einstellung.
+- Die Library Lightbox wurde auf v2.11.4 aktualisiert. Wir möchten uns bei @MaxBentz für seinen Beitrag bedanken.
+
+## v5.0.63 (2024-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.62...5.0.63" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Wenn der Browser WebP- oder AVIF-Bilder-Formate nicht unterstützt, wurde das Fallback-Bild nicht verwendet. Dies wurde behoben.
+- Die `LazyImg` Komponente hat Bilder vom Format SVG nicht dargestellt. Dies wurde behoben.
+    - Im Zuge dieses Fixes wurde eine [MIME-Type libary](https://www.npmjs.com/package/mime-types) eingebunden. 
+- Die Einstellung: **Hake die Artikelinformationen an, die du in der Warenkorbvorschau anzeigen möchtest.** im plentyShop Assistenten Schritt **Angezeigte Informationen** hatte keine Auswirkung auf die angezeigten Informationen. Dies wurde behoben.
+- Durch das Fixieren des Headers zum Verbessern der CLS-Werte kam es unter Umständen zu einem ungewünschten Scroll-Verhalten beim Browsen des Shops. Dies wurde behoben.
+- Die Variable "requestedVariationUrl" gibt nun die URL ohne Query-Parameter zurück.
+- Falsches Vorladen des Bildes bei der AVIF-Konvertierung behoben
+
+### Geändert
+
+- Der Inhalt des Lifecycle Hooks `created` der `StepByStepNavigation` Komponente wurde verschoben nach `beforeMount`, um Probleme mit SSR zu beheben.
+- Um die Barrierefreiheit zu erhöhen, enthält die Checkbox zur Bestätigung der Allgemeinen Geschäftsbedingungen, des Widerrufsrechts und der Datenschutzrichtlinien in der Kasse jetzt ein entsprechendes `aria-label`.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von plentyShop LTS 5.0.63 gab es Änderungen an Template-Dateien, die das Feedback Plugin betreffen und für Theme-Entwickler relevant sind.  Die Verlinkung führt direkt zu der umgesetzten Änderung in der entsprechenden Datei.
+
+- [resources/js/src/app/components/common/LazyImg.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.62...5.0.63#diff-8bf1fff9b8d538ae75c4ee791deef3a8acfe72e5e0e678d1c49672b17d787a73)
+
+## v5.0.62 (2024-04-03) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...5.0.62" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- plentyShop LTS führt eine neue Header-Option ein, um die kumulative Layoutverschiebung (CLS) deines Shops zu verbessern. Sie ist nach dem Update automatisch aktiviert. Es ist wichtig zu beachten, dass diese Anpassung das Erscheinungsbild des Headers deiner Shops beeinflussen und zu Konflikten mit bestimmten Themes führen kann. Überprüfe daher unbedingt die Kompatibilität mit deinen Themes. Wenn du prüfen möchtest, ob bei deinem Shop Verbesserungen der CLS-Werte möglich sind, kannst du öffentliche Dienste wie z.B. [PageSpeed Insights](https://pagespeed.web.dev/) verwenden.
+- Um das automatische Konvertieren von Bildern zu aktivieren und damit Artikelbilder in den Formaten AVIF und WebP im Webshop zu nutzen, öffne den plentyShop LTS-Assistenten und aktiviere im Schritt **Performance** die Option **Automatische Konvertierung in moderne Bildformate aktivieren**.
+- Falls du externe Suchanbieter in deinem Shop nutzt, solltest du aufgrund der Anpassungen der Result Fields (s. **Geändert**) überprüfen, ob deine Kategorie- und Suchseiten weiterhin wie gewünscht angezeigt werden.
+
+### Hinzugefügt
+
+- Der plentyShop LTS-Assistent enthält eine neue Einstellung im Schritt **Performance**. Wenn du die Einstellung **Header oben fixieren** aktivierst, wird der Header beim Scrollen oben am Seitenanfang fixiert. Diese Einstellung hat Auswirkungen sowohl auf den Standard-Header als auch auf den ShopBuilder-Header. Durch das Aktivieren der Einstellung reduziert sich die [kumulative Layoutverschiebung](https://web.dev/articles/cls) deutlich, weil somit eine teure Berechnung ersetzt wird.
+    - ***Wichtig:*** Die Einstellung betrifft den gesamten Header. Das bedeutet, dass sie für das Fixieren von Header-Elementen die Einstellungen einzelner ShopBuilder-Widgets überschreibt.
+    - ***Wichtig:*** Es kann einige Zeit dauern bis die verbesserten CLS-Werte in Google Search Console reflektiert werden. Die Auswertung in Google Search Console bezieht sich auf den gleitenden Durchschnitt der vergangenen 28 Tage. Das bedeutet, dass die tatsächlichen Auswirkungen dieser Änderung erst in Google Search Console reflektiert werden, wenn hohe CLS-Werte nicht mehr Teil des gleitenden Durchschnitts sind.
+- In den Plugin-Einstellungen wurde die neue Einstellung **Quelle für das Bild in Rich Snippets für die Artikelseite wählen** im Bereich **SEO** hinzugefügt. Mit dieser Einstellung ist es nun möglich, die Bildergröße einzustellen, die über die Rich Snippets ausgeliefert wird.
+- Im Bereich **SEO** der plentyShop LTS-Einstellungen wurde eine neue Einstellung für die **Robots**-Angaben auf der Artikelseite hinzugefügt. Mit dieser Einstellung ist es nun möglich, das Robots-Verhalten einzustellen.
+- Im Bereich **SEO** der plentyShop LTS-Einstellungen wurde die neue Einstellung **Quelle für eine individuelle Canonical URL für die Artikelseite wählen** hinzugefügt. Mit dieser Einstellung ist es nun möglich, die Varianten auf eine andere Canonical URL zeigen zu lassen.
+- Es wurde eine Möglichkeit hinzugefügt, Adressen als primäre Adresse festzulegen.
+- Im Schritt **Performance** des plentyShop-Assistenten wurde die Einstellung **Automatische Konvertierung in moderne Bildformate aktivieren** hinzugefügt. Damit werden Artikelbilder beim ersten Aufruf automatisch in das AVIF- oder WebP-Format umgewandelt.
+    - ***Wichtig:*** Die Zeit bis ein Artikelbild beim ersten Aufruf umgewandelt wird, ist hochgradig abhängig von der Größe, in der das ursprüngliche Artikelbild hochgeladen wurde. Um die Umwandlungszeit möglichst gering zu halten, sollte das hochgeladene Bild der im Menü **Einrichtung » Artikel » Bilder » Größen » full** hinterlegten Größe entsprechen.
+- Die Ergebnisfelder für Artikel wurde um Tags erweitert.
+- Die ShopBuilder-Widgets **Link** und **Auftragshistorie** bieten nun die Möglichkeit, mehrere Tracking-Links anzuzeigen, wenn die Einstellung **URLs splitten** im Menü **Einrichtung » Aufträge » Versand » Optionen** aktiviert ist.
+- Der Übersetzungschlüssel `checkoutPaidAmount` wurde in der Mehrsprachigkeits-UI hinzugefügt.
+
+### Geändert
+
+- Durchschnittswert `feedbackDecimal` und Anzahl der Feedbacks `feedbackCount` in itemList- Ergebnisfeldern ergänzt.
+- Beim Ausführen von Suchen über externe Suchanbieter werden jetzt die normalen Resultfields der Kategorie für Listen benutzt.
+- Die Verwendung von ReCAPTCHA wurde aus der Komponente für die Registrierung entfernt.
+- Die Eingabe für Bestelleigenschaften vom Typ Text/Zahl ist nun auf 128 Zeichen beschränkt.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von plentyShop LTS 5.0.62 gab es Änderungen an Template-Dateien, die das Feedback Plugin betreffen und für Theme-Entwickler relevant sind.  Die Verlinkung führt direkt zu der umgesetzten Änderung in der entsprechenden Datei.
+- Um die neue Einstellung zum Fixieren des Headers zu unterstützen, wurde in den Dateien `resources/scss/ceres/views/PageDesign/_header.scss` und `resources/scss/ceres/widgets/Header/_navigation-widget.scss` der Wert von `z-index` angepasst. [Übersicht der Änderungen in den entsprechenden Dateien.](https://github.com/plentymarkets/plugin-ceres/pull/3467/files?file-filters%5B%5D=.scss&show-viewed-files=true)
+- [resources/views/ResultFields/ListItem.fields.json](https://github.com/plentymarkets/plugin-ceres/pull/3459/files#diff)
+- [resources/scss/ceres/views/Templates/AddressSelect/_address-select.scss](https://github.com/plentymarkets/plugin-ceres/pull/3457/files#diff-f1d52ee4809b03e32c2b5f28327ad58460d32aab9a7ca789e4955cb82b063298)
+- [resources/views/Checkout/CheckoutView.twig](https://github.com/plentymarkets/plugin-ceres/pull/3457/files#diff-c74596cdf6d6196e3b9c8563916151e3a08a5edfa026845503c9169a0fcd8252)
+- [resources/views/Customer/Components/AddressSelect/AddressSelect.twig](https://github.com/plentymarkets/plugin-ceres/pull/3457/files#diff-969624803dfeb696a58e16de0d95c285a458ec83a615026882d9b1e65386935b)
+- [resources/views/MyAccount/MyAccountView.twig](https://github.com/plentymarkets/plugin-ceres/pull/3457/files#diff-dbc71118894a6415be3f82e4ee31dc1e6b7c3160b45b887ccce71f6620824d7c)
+- [resources/views/Item/SingleItemWrapper.twig](https://github.com/plentymarkets/plugin-ceres/pull/3483/files#diff-192a8837dba88964356b7ecd49003fe083ed719e2c601b9623e6dd4b24be9326)
+- [resources/views/PageDesign/Partials/Head.twig](https://github.com/plentymarkets/plugin-ceres/pull/3483/files#diff-33a10158d672d50c9bc1c0e8a46fbd8edb701925dcb3f619c6ff6f8ca11e45ee)
+- [resources/views/MyAccount/Components/OrderHistoryListItem.twig](https://github.com/plentymarkets/plugin-ceres/pull/3444/files#diff-5fe1a8ad88eb65339901273251de979410bc15369c08e8b9fcb687412c4d28ea)
+- [resources/views/Widgets/Common/LinkWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3444/files#diff-374f59a54ec3fcbe1d2444facbddd25c4f8a114e71b7576c9c34d7a20a2d122b)
+- [resources/js/src/app/components/customer/Registration.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-08ea6661ac83d15694181be5eba4512b2c34fae95a6334a6144a82ba1f4c7e41)
+- Änderungen moderne Bildformatierung:
+    - [resources/js/src/app/components/basket/AddItemToBasketOverlay.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-311f3a2f3e02a8f6bb38785576b25dc75bf8b3e56a36a8cc2e4ae474745266b5)
+    - [resources/js/src/app/components/basket/list/BasketListItem.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-2e0729c79085beac37d2ad03e5d1a25ddec4020ecf8e3551d50e64a6cf5f91d3)
+    - [resources/js/src/app/components/common/LazyImg.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-8bf1fff9b8d538ae75c4ee791deef3a8acfe72e5e0e678d1c49672b17d787a73)
+    - [resources/js/src/app/components/item/ItemImageCarousel.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-78484b68defc6a9839cc69c5f3f9fc8bef2d0641a6db41ab6e68f58665f48912)
+    - [resources/js/src/app/components/itemList/CategoryImageCarousel.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-449e63fc921701c277c047250ed882be5e7039c498efa513e1469dffd8ff818f)
+    - [resources/js/src/app/components/itemList/SearchSuggestionItem.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-004f2a9020c0efb677e721298f2739088d6620ebafccde4b94ced464e21b75ec)
+    - [resources/js/src/app/components/orderReturn/OrderReturnItem.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-bd6f22438fc8f38a75e25a2ef425682fe398a6fd9f49dc85af637f559ec08f75)
+    - [resources/js/src/app/components/wishList/WishListItem.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-be8788b59e5887730f9bb4aa5a12d093908265ff19c26bb5ddca99485e7d7621)
+    - [resources/views/MyAccount/Partials/OrderHistoryListItemDetails.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-dcc9c181484eba069617434b9c7c20b7906e9ab74907f134720e220a818c968a)
+    - [resources/views/Widgets/Common/ImageBoxWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-9f438954b9f177761379a8b382eea014077ec743060583796ac4f9aaed3d3003)
+    - [resources/views/Widgets/Item/ItemImageWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-43b0576fe9cb61d0343a4aa220f562347c237717821f276ab632973e3970ec96)
+    - [resources/views/Widgets/Common/ItemListWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-56e4aca5195c81e2f933daaf2a1d1397fcd1e72844a24d75155dcab09e4cb0ee)
+    - [resources/views/Widgets/OrderConfirmation/PurchasedItemsWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.61...stable#diff-2cee15b4b8add92d304d2f4cbbb5a5891a5752c533b564f1e1d152982c1e62d0)
+## v5.0.61 (2023-10-30) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.60...5.0.61" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+
+### Geändert
+
+- Um die schema.org-Daten [SalesPrice](https://schema.org/SalePrice) und [ListPrice](https://schema.org/ListPrice) auf der Artikeleinzelansicht auszugeben, ist es nun nicht mehr notwendig, an der Variante die Option **Grundpreis anzeigen** zu aktivieren.
+- Google reCAPTCHA wird nicht mehr ohne die entsprechende Cookie-Einwilligung geladen.
+- Die Englische Übersetzung für den Übersetzungsschlüssel `checkoutBuyNow` wurde von "Order now" zu "Buy" geändert.
+
+### Hinzugefügt
+
+- Das Google reCAPTCHA Cookie hat neue Einstellungsoptionen:
+    - Setzen in einer bestimmten Cookie-Gruppe: Essenziell oder Externe Medien.
+    - "Als notwendigen Cookie registrieren": Das Cookie kann vom User nicht abgewählt werden.
+    - "Als Opt-Out registrieren": Cookie ist vorausgewählt und muss aktiv abgewählt werden.
+    - Beachte, dass diese Einstellungen gegebenenfalls Änderungen an deiner Datenschutzerklärung notwendig machen, um plentyShop rechtssicher zu betreiben. 
+    
+### Behoben
+
+- Auf Geräten mit iOS Versionen <= 12.x wurden bei deaktiviertem SSR und Verwendung von ShopBuilder-Inhalten bestimmte Elemente nicht geladen. Wir möchten uns bei @KarolKski für den Beitrag bedanken.
+- Bei der Eingabe einer Adresse wurden durch Ändern der Anrede von der Option "Bitte auswählen" alle anderen Adressfelder zurückgesetzt. Dies wurde behoben.
+- Wenn das **Weitere Informationen Widget** zum Kontaktformular hinzugefügt wurde, führte ein Klick darauf dazu, dass die zusätzlichen Informationen nicht angezeigt wurden, sondern das Formular abgeschickt wurde. Dies wurde behoben.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von plentyShop LTS 5.0.61 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- [resources/views/Widgets/Form/MailFormWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3449/files#diff-0ab65328e036fc01116c458f2462d07bddf7a652c3ebe2e62c61538bf10e4f37)
+- [resources/js/src/app/components/common/Intersect.vue](https://github.com/plentymarkets/plugin-ceres/pull/3438/files#diff-035b8ec0b7f59651b154b66fc84d9a44a6af8525fe4f03e403b0be46e4ab2750)
+- [resources/views/Item/SingleItemWrapper.twig](https://github.com/plentymarkets/plugin-ceres/pull/3439/files#diff-192a8837dba88964356b7ecd49003fe083ed719e2c601b9623e6dd4b24be9326)
+- [resources/views/Widgets/Customer/ChangePasswordWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3445/files#diff-bb8668e53e2addea7047614e5fd28d1b66cfa20e91d445dd8d1b9911ca21e43e)
+
+## v5.0.60 (2023-07-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.59...5.0.60" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben
 
 - Auf der Artikeldetailseite in der nicht Standardsprache wurde in den schema.org Angaben das Sprackürzel in der URL nicht angezeigt. Das wurde behoben.
-- In den schema.org-Daten der Artikeldetailseite sind jetzt sowohl (SalePrice)[https://schema.org/SalePrice] als auch (ListPrice)[https://schema.org/ListPrice] hinterlegt.
-- Im Checkout wurde ein Javascript-Fehler behoben, der aufgrund einer unbefüllten Variable in der Funktion CheckDeliveryAddressError() auftrat.
+- In den schema.org-Daten der Artikeldetailseite sind jetzt sowohl [SalesPrice](https://schema.org/SalePrice) als auch [ListPrice](https://schema.org/ListPrice) hinterlegt.
+- Im Checkout wurde ein Javascript-Fehler behoben, der aufgrund einer unbefüllten Variable in der Funktion `CheckDeliveryAddressError()` auftrat.
 - In der Kategorieansicht wurden unter bestimmten Umständen der UVP nicht angezeigt.
 - Bei Aufruf von Kategorieseiten konnte mit sehr hoher Seitenzahl konnte es Out Of Memory Exception kommen.
 - Im Checkout wird die E-Mail-Adresse jetzt auch validiert, wenn sie nach der Ersteingabe erneut bearbeitet wird.
 - Die Kacheln zur Anzeige von Zahlungsanbietern im Checkout wurde auf älteren iOS Geräten zu groß dargestellt. Dies wurde behoben.
+- Der Aufruf der REST-Route /rest/io/customer/order/list mit 0 `orderPerPage` führte zu einem Fehler. Dies wurde behoben. Wir möchten uns bei @MaxBentz für seinen Beitrag bedanken.
   
 ### Geändert
 
@@ -22,8 +159,10 @@
 
 ### Angepasste Templates
 
-- Im Zuge des Releases von Ceres 5.0.60 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- Im Zuge des Releases von plentyShop LTS 5.0.60 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
 - [resources/views/Category/Item/Partials/Pagination.twig](https://github.com/plentymarkets/plugin-ceres/pull/3421/files#diff-1b8d2c7ce7416f660f89d11ad8e368be614c2b98efc30526e74286c7f180c3b8)
+- [resources/views/Item/SingleItemWrapper.twig](https://github.com/plentymarkets/plugin-ceres/pull/3433/files#diff-192a8837dba88964356b7ecd49003fe083ed719e2c601b9623e6dd4b24be9326)
+- [resources/js/src/app/components/itemList/CategoryItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3427/files#diff-4c35af622ef09ba8949eb1c47557e3e6651b088291a0d2e2463c9244007b5516)
 
 
 ## v5.0.59 (2023-02-23) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.58...5.0.59" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
@@ -54,7 +193,7 @@
 
 ### Angepasste Templates
 
-- Im Zuge des Releases von Ceres 5.0.59 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- Im Zuge des Releases von plentyShop LTS 5.0.59 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
 - [resources/views/Widgets/Common/ImageBoxWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3387/files#diff-9f438954b9f177761379a8b382eea014077ec743060583796ac4f9aaed3d3003)
 - [resources/views/Customer/Components/AddressSelect/AddressSelect.twig](https://github.com/plentymarkets/plugin-ceres/pull/3417/files/#diff-969624803dfeb696a58e16de0d95c285a458ec83a615026882d9b1e65386935b)
 - [resources/views/Checkout/Components/PlaceOrder.twig](https://github.com/plentymarkets/plugin-ceres/pull/3417/files/#diff-ac3499fe39e67fd08b24086c79be769096e1ab58885fd4a233847c502b94b317)
@@ -88,7 +227,7 @@
 
 ### Angepasste Templates
 
-- Im Zuge des Releases von Ceres 5.0.57 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- Im Zuge des Releases von plentyShop LTS 5.0.57 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
 - [resources/views/Category/Item/CategoryItem.twig](https://github.com/plentymarkets/plugin-ceres/pull/3372/files#diff-6e3fe08ffe8086b5176c1c0451cb0c0034b99195843630994e5e79347f8d1158)
 
 ## v5.0.56 (2022-11-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.55...5.0.56" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
@@ -118,7 +257,7 @@
 
 ### Angepasste Templates
 
-- Im Zuge des Releases von Ceres 5.0.56 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- Im Zuge des Releases von plentyShop LTS 5.0.56 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
 - [resources/views/Category/Item/Partials/Pagination.twig](https://github.com/plentymarkets/plugin-ceres/pull/3340/files#diff-1b8d2c7ce7416f660f89d11ad8e368be614c2b98efc30526e74286c7f180c3b8)
 - [resources/views/Widgets/OrderConfirmation/OrderDataWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3339/files#diff-82affb09026a21fd94995e057ae7214f6751cf84dfed718216f4760865567c33)
 
@@ -142,7 +281,7 @@
 
 ### Angepasste Templates
 
-- Im Zuge des Releases von Ceres 5.0.55 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- Im Zuge des Releases von plentyShop LTS 5.0.55 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
 - [resources/views/PageDesign/Partials/PageMetadata.twig](https://github.com/plentymarkets/plugin-ceres/pull/3329/files#diff-98be1deb08f271fd2d41c05df5d33c20846032e5b77cb7ba59f615dda20d767f)
 - [resources/views/Category/Item/Partials/Pagination.twig](https://github.com/plentymarkets/plugin-ceres/pull/3325/files#diff-1b8d2c7ce7416f660f89d11ad8e368be614c2b98efc30526e74286c7f180c3b8)
 - [resources/js/src/app/components/itemList/CategoryItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3265/files#diff-4c35af622ef09ba8949eb1c47557e3e6651b088291a0d2e2463c9244007b5516)
@@ -168,7 +307,7 @@
 
 ### Angepasste Templates
 
-- Im Zuge des Releases von Ceres 5.0.54 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- Im Zuge des Releases von plentyShop LTS 5.0.54 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
 - [resources/views/PageDesign/Partials/Header/DefaultHeader.twig](https://github.com/plentymarkets/plugin-ceres/pull/3319/files#diff-19f0c0c56118a0d17212318a2cf8c6e113276dc4c61779c2317b2e7a0976db31)
 - [resources/views/Widgets/Header/TopBarWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3319/files#diff-2696f6a2e31a39130c691133b3d6fdf30b218a6bdbbd0717433c835d060c3f66)
 - [resources/views/Widgets/OrderConfirmation/PurchasedItemsWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3318/files#diff-2cee15b4b8add92d304d2f4cbbb5a5891a5752c533b564f1e1d152982c1e62d0)
@@ -200,7 +339,7 @@
 
 ### Angepasste Templates
 
-- Im Zuge des Releases von Ceres 5.0.52 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- Im Zuge des Releases von plentyShop LTS 5.0.52 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
 - [resources/views/Customer/Components/AddressSelect/AddressSelect.twig](https://github.com/plentymarkets/plugin-ceres/pull/3290/files#diff-969624803dfeb696a58e16de0d95c285a458ec83a615026882d9b1e65386935b)
 
 
@@ -218,7 +357,7 @@
 
 ### Angepasste Templates
 
-- Im Zuge des Releases von Ceres 5.0.51 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- Im Zuge des Releases von plentyShop LTS 5.0.51 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
 - [resources/views/Checkout/OrderDetails.twig](https://github.com/plentymarkets/plugin-ceres/pull/3275/files#diff-49e9a28ec33181e8fd3720d39345363b8b0614f2bf29ceb66b403ef22c18bd4d)
 - [resources/views/MyAccount/Partials/OrderHistoryListItemDetails.twig](https://github.com/plentymarkets/plugin-ceres/pull/3275/files#diff-dcc9c181484eba069617434b9c7c20b7906e9ab74907f134720e220a818c968a)
 - [resources/views/Widgets/OrderConfirmation/PurchasedItemsWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3275/files#diff-2cee15b4b8add92d304d2f4cbbb5a5891a5752c533b564f1e1d152982c1e62d0)
@@ -241,7 +380,7 @@
 
 ### Angepasste Templates
 
-- Im Zuge des Releases von Ceres 5.0.50 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- Im Zuge des Releases von plentyShop LTS 5.0.50 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
 - [resources/views/Checkout/Macros/OrderTotals.twig](https://github.com/plentymarkets/plugin-ceres/pull/3246/files#diff-8ea271aa9d97b46230e0f009330b3da0be4020cf00d5e8f214bcfb05425186d2)
 
 ## v5.0.49 (2022-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.48...5.0.49" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
@@ -257,7 +396,7 @@
 
 ### Angepasste Templates
 
-- Im Zuge des Releases von Ceres 5.0.49 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- Im Zuge des Releases vonplentyShop LTS 5.0.49 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
 - [resources/js/src/app/components/itemList/CategoryItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3265/files#diff-4c35af622ef09ba8949eb1c47557e3e6651b088291a0d2e2463c9244007b5516)
 
 ## v5.0.48 (2022-03-21) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.47...5.0.48" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
@@ -287,7 +426,7 @@
 
 ### Angepasste Templates
 
-- Im Zuge des Releases von Ceres 5.0.48 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- Im Zuge des Releases von plentyShop LTS 5.0.48 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
 - [resources/views/Widgets/Category/ItemGridWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3232/files#diff-f0aaf1ea155523f16c664c97d4b8877ad9db66f705f85a59ebffc0a3834f2456)
 - [resources/views/Widgets/Common/ItemListWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3232/files#diff-56e4aca5195c81e2f933daaf2a1d1397fcd1e72844a24d75155dcab09e4cb0ee)
 - [resources/js/src/app/components/newsletter/NewsletterInput.vue](https://github.com/plentymarkets/plugin-ceres/pull/3235/files#diff-b0d8af375291becdbc1a0f4d1a4cee18317d747dc3bd044270ff390cdf4b1fa6)
@@ -339,7 +478,7 @@
 
 ### Angepasste Templates
 
-- Im Zuge des Releases von Ceres 5.0.46 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- Im Zuge des Releases von plentyShop LTS 5.0.46 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
 - [resources/js/src/app/components/basket/AddToBasket.vue](https://github.com/plentymarkets/plugin-ceres/pull/3112/files#diff-460828a2142adb35f926ca9c28a7d0c1c4eb9a2d127e2fafce1de5bceb925598)
 - [resources/js/src/app/components/itemList/CategoryItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3112/files#diff-4c35af622ef09ba8949eb1c47557e3e6651b088291a0d2e2463c9244007b5516)
 - [resources/js/src/app/components/item/AddToWishList.vue](https://github.com/plentymarkets/plugin-ceres/pull/3217/files#diff-ca84d4fb86526c6d5ab30af678de22127f6721548962854510cf3fc42d36352e)
@@ -408,7 +547,7 @@
 
 ### Angepasste Templates
 
-- Im Zuge des Releases von Ceres 5.0.44 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- Im Zuge des Releases von plentyShop LTS 5.0.44 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
 - [resources/js/src/app/components/pageDesign/CookieBar.vue](https://github.com/plentymarkets/plugin-ceres/pull/3133/files#diff-07203a2a14f4fdfe0285c115db84358b9b18bbe84d3ab3536f80b667529b7392)
 - [resources/views/Widgets/Footer/CookieBarWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3133/files#diff-c05849d77ed56c7c3fe936d53064ffa075171ba20822d0448e351ee940c1dc59)
 - [resources/views/PageDesign/Partials/Head.twig](https://github.com/plentymarkets/plugin-ceres/pull/3109/files#diff-33a10158d672d50c9bc1c0e8a46fbd8edb701925dcb3f619c6ff6f8ca11e45ee)
@@ -441,7 +580,7 @@
 
 ### Angepasste Templates
 
-- Im Zuge des Releases von Ceres 5.0.43 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- Im Zuge des Releases von plentyShop LTS 5.0.43 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
 - [resources/js/src/app/components/basket/AddItemToBasketOverlay.vue](https://github.com/plentymarkets/plugin-ceres/pull/3099/files#diff-311f3a2f3e02a8f6bb38785576b25dc75bf8b3e56a36a8cc2e4ae474745266b5)
 - [resources/js/src/app/components/basket/BasketPreview.vue](https://github.com/plentymarkets/plugin-ceres/pull/3099/files#diff-21af208d0ab5bd9055fcd8ca0bda5d6c0770336ed010aa788a2f0c1d7222e2b6)
 - [resources/js/src/app/components/customer/login/ForgotPassword.vue](https://github.com/plentymarkets/plugin-ceres/pull/3099/files#diff-44987529408a4046ff667225875e66b190a54913180f2aadcb986f8c349e1a33)
@@ -482,7 +621,7 @@
 
 ### Angepasste Templates
 
-- Im Zuge des Releases von Ceres 5.0.42 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+- Im Zuge des Releases von plentyShop LTS 5.0.42 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
 - [resources/views/Customer/Components/AddressSelect/AddressSelect.twig](https://github.com/plentymarkets/plugin-ceres/pull/2880/files#diff-969624803dfeb696a58e16de0d95c285a458ec83a615026882d9b1e65386935b)
 - [resources/views/Checkout/OrderDetails.twig](https://github.com/plentymarkets/plugin-ceres/pull/3086/files#diff-49e9a28ec33181e8fd3720d39345363b8b0614f2bf29ceb66b403ef22c18bd4d)
 - [resources/views/MyAccount/Components/BankDataSelect.twig](https://github.com/plentymarkets/plugin-ceres/pull/3086/files#diff-1f3a9b0d80f77b92422277ac44697c3af03430626f4bbc8afc281c5b66ec0b1f)
@@ -507,7 +646,7 @@
 
 ### Angepasste Templates
 
-- Im Zuge des Releases von Ceres 5.0.41 gab es Änderungen an einer Template-Datei, die für Theme-Entwickler relevant ist. Die Verlinkung führt direkt zu der umgesetzten Änderung in der entsprechenden Datei.
+- Im Zuge des Releases von plentyShop LTS 5.0.41 gab es Änderungen an einer Template-Datei, die für Theme-Entwickler relevant ist. Die Verlinkung führt direkt zu der umgesetzten Änderung in der entsprechenden Datei.
 - [resources/views/PageDesign/PageDesign.twig](https://github.com/plentymarkets/plugin-ceres/pull/3051/files#diff-6103acda40fc331c6f5ba92faab9976e92848d8fde0e9af7fe34abd593885128)
 
 ## v5.0.40 (2021-10-05) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.39...5.0.40" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
@@ -568,7 +707,7 @@
 
 ### Angepasste Templates
 
-- Im Zuge des Releases von Ceres 5.0.37 gab es Änderungen an einer Template-Datei, die für Theme-Entwickler relevant ist. Die Verlinkung führt direkt zu der umgesetzten Änderung in der entsprechenden Datei.
+- Im Zuge des Releases von plentyShop LTS 5.0.37 gab es Änderungen an einer Template-Datei, die für Theme-Entwickler relevant ist. Die Verlinkung führt direkt zu der umgesetzten Änderung in der entsprechenden Datei.
 - [resources/views/Widgets/Common/BackgroundWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/2995/files#diff-bd9967b42e5604fbd1cc0034b2ed9fbc4bb18113880fe371167076f046aee956)
 - [resources/js/src/app/components/itemList/filter/ItemFilterList.vue](https://github.com/plentymarkets/plugin-ceres/pull/3000/files#diff-e9e66af238168dbc3f834944944094a491bee28d6d7016c8e9365b673872a82b)
 - [resources/js/src/app/components/pageDesign/CookieBar.vue](https://github.com/plentymarkets/plugin-ceres/pull/3000/files#diff-07203a2a14f4fdfe0285c115db84358b9b18bbe84d3ab3536f80b667529b7392)
