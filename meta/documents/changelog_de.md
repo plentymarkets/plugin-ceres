@@ -5,6 +5,7 @@
 ### TODO
 
 - Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+- Aufgrund der hohen Anzahl von Änderungen sollten Nutzer von Themes die im Changelog unter "Angepasste Templates" angegebenen Template-Änderungen gesondert überprüfen lassen.
 
 ### Hinzugefügt
 

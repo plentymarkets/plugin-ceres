@@ -5,6 +5,7 @@
 ### TODO
 
 - Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
+- Due to the large number of changes, users of themes should have the template changes listed in the changelog under "Changed Templates" checked separately.
 
 ### Added
 
