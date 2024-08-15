@@ -34,8 +34,7 @@
 - Im Zuge des Releases von plentyShop LTS 5.0.64 gab es Änderungen an Template-Dateien, die das Feedback Plugin betreffen und für Theme-Entwickler relevant sind.  Die Verlinkung führt direkt zu der umgesetzten Änderung in der entsprechenden Datei.
 
 - [resources/js/src/app/components/basket/list/BasketListItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3522/files#diff-2e0729c79085beac37d2ad03e5d1a25ddec4020ecf8e3551d50e64a6cf5f91d3)
-- 1 [resources/js/src/app/components/common/LazyImg.vue](https://github.com/plentymarkets/plugin-ceres/pull/3522/files#diff-8bf1fff9b8d538ae75c4ee791deef3a8acfe72e5e0e678d1c49672b17d787a73)
-- 2 [resources/js/src/app/components/common/LazyImg.vue](https://github.com/plentymarkets/plugin-ceres/pull/3572/files#diff-8bf1fff9b8d538ae75c4ee791deef3a8acfe72e5e0e678d1c49672b17d787a73)
+- [resources/js/src/app/components/common/LazyImg.vue](https://github.com/plentymarkets/plugin-ceres/pull/3522/files#diff-8bf1fff9b8d538ae75c4ee791deef3a8acfe72e5e0e678d1c49672b17d787a73)
 - [resources/js/src/app/components/item/ItemImageCarousel.vue](https://github.com/plentymarkets/plugin-ceres/pull/3522/files#diff-78484b68defc6a9839cc69c5f3f9fc8bef2d0641a6db41ab6e68f58665f48912)
 - [resources/js/src/app/components/itemList/CategoryImageCarousel.vue](https://github.com/plentymarkets/plugin-ceres/pull/3522/files#diff-449e63fc921701c277c047250ed882be5e7039c498efa513e1469dffd8ff818f)
 - [resources/js/src/app/components/item/OrderPropertyListItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3554/files#diff-38e564e102ed3a17d36a85e7a337ea233f1fba3a1e43d95808c20dde2484f1c9)
@@ -45,7 +44,7 @@
 - [resources/views/Category/Item/Partials/ItemsPerPage.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64#diff-ce4a6a0d61b5493622e6358d874e9433f70748e6888cdc24e7b69eecad13588e)
 - [resources/views/Checkout/OrderConfirmation.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64#diff-17ee2b9aab5a177cadc8de620dd81d3c088673adc0fcb961f655cedee201d3a7)
 - [resources/views/Widgets/Category/ItemSortingWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3543/files#diff-aa652b1b9ecb9ff84376a17521fb1d18711f82fa23ba8d9dec51d4b8d272ad00)
-- [resources/views/Widgets/Category/ItemsPerPageWidget.twig](resources/views/Widgets/Category/ItemsPerPageWidget.twig)
+- [resources/views/Widgets/Category/ItemsPerPageWidget.twig](https://github.com/plentymarkets/plugin-ceres/commit/1a701747714f4cd9269f1a814bccd315e3b360b3#diff-3ef871521a42d811c24886d5054a8f3f57dece897428b48017b6fdcd488ce6c4)
 - [resources/views/Widgets/Common/ImageBoxWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64#diff-9f438954b9f177761379a8b382eea014077ec743060583796ac4f9aaed3d3003)
 - [resources/views/Widgets/Common/ImageCarouselWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64#diff-43b0576fe9cb61d0343a4aa220f562347c237717821f276ab632973e3970ec96)
 - [resources/views/Widgets/Common/ItemListWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64#diff-56e4aca5195c81e2f933daaf2a1d1397fcd1e72844a24d75155dcab09e4cb0ee)
