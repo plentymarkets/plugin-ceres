@@ -5,6 +5,7 @@
 ### New
 
 - For the "Sorting" and "Articles per page" buttons on article category pages, `aria-labels` have been added to improve accessibility. They can be customised via the **CMS » Multilingualism** menu. We would like to thank @MaxBentz for his contribution.
+- The meta tag for thumbnails is now set equivalent to og:image on the article detail page.
 
 ### Fixed
 
