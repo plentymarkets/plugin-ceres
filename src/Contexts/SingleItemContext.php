@@ -300,12 +300,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
             $this->forcedCanonicalUrl = $canonicalUrl;
         }
 
-        $selectionValue = $this->ceresConfig->seo->imageSeo;
-        $images = array_map(function ($image) use ($selectionValue) {
-            return $image[$selectionValue];
-        }, $itemData['images']['all'] ?? []);
-
-        $this->imageSeo = $images;
+        $this->imageSeo = $itemData['images']['all'][0][$this->ceresConfig->seo->imageSeo] ?? '';
         $this->isItemSet = $params['isItemSet'];
 
         $this->attributes = $params['variationAttributeMap']['attributes'];

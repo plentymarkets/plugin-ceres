@@ -26,7 +26,7 @@
                 "name"          : "{{ ItemName.get(itemData | itemName, itemData.variation.bundleType) | trim }}",
                 "category"      : "{{ defaultCategory.details[0].name }}",
                 "releaseDate"   : "{{ itemData.variation.releasedAt }}",
-                "image"         : ["{{ imageSeo | join(',') }}"],
+                "image"         : "{{ imageSeo }}",
                 "identifier"    : "{{ itemData.variation.id }}",
                 "description"   : "{{ itemData.texts.description | striptags | filterTabs }}",
                 "disambiguatingDescription" : "{{ itemData.texts.shortDescription }}",
