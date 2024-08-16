@@ -301,9 +301,9 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         }
 
         $selectionValue = $this->ceresConfig->seo->imageSeo;
-        $images = array_map(function ($image, $selectionValue) {
+        $images = array_map(function ($image) use ($selectionValue) {
             return $image[$selectionValue];
-        }, $itemData['images']['all'] ?? [], $selectionValue);
+        }, $itemData['images']['all'] ?? []);
 
         $this->imageSeo = $images;
         $this->isItemSet = $params['isItemSet'];
