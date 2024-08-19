@@ -5,7 +5,7 @@
 ### Neu
 
 - Für die "Sortierung" und "Artikel pro Seite" Schaltflächen auf Artikelkategorieseiten wurden `aria-label` verbaut um die Barrierefreiheit zu verbessern. Sie können über das Menü **CMS » Mehrsprachigkeit** angepasst werden können. Wir möchten uns bei @MaxBentz für seinen Beitrag bedanken.
-- Das Meta Tag für Thumbnails wird jetzt äquivalent zum og:image auf der Artikeldetailseite gesetzt.
+- Das Meta Tag für `thumbnail` wird jetzt äquivalent zum Meta Tag `og:image` auf der Artikeldetailseite gesetzt.
 
 ### Behoben
 
