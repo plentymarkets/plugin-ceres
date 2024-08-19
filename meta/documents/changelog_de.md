@@ -5,31 +5,31 @@
 ### TODO
 
 - Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
-- Aufgrund der hohen Anzahl von Änderungen sollten Nutzer von Themes die im Changelog unter "Angepasste Templates" angegebenen Template-Änderungen gesondert überprüfen lassen.
+- Aufgrund der hohen Anzahl von Änderungen sollten Nutzer, die eigene Themes verwenden, die im Changelog unter "Angepasste Templates" angegebenen Template-Änderungen gesondert überprüfen lassen.
 
 ### Hinzugefügt
 
-- Um unerwartete Verschiebungen von Inhalten während des Ladens von Seiten zu reduzieren, werden die Abmessungen von Artikelbildern dem Browser zur Verfügung gestellt. Dies erlaubt es Browsern, den benötigten Platz vor dem Laden zu reservieren. Das kann einen positiven Effekt auf den Google Page Speed Insights Wert **CLS** haben.
+- Um unerwartete Verschiebungen von Inhalten während des Ladens von Seiten zu reduzieren, werden dem Browser die Abmessungen von Artikelbildern zur Verfügung gestellt. Dadurch können Browser den benötigten Platz vor dem Laden reservieren. Das kann einen positiven Effekt auf den Google Page Speed Insights Wert **CLS** haben.
 - Die "Retouren"-Schaltfläche wurde auf der Seite der Bestellbestätigung für Gastbestellungen hinzugefügt. Diese Schaltfläche wird nur angezeigt, wenn die Route `order-returns` im IO-Plugin aktiv ist und sich der jeweilige Auftrag mindestens im Status 7 (Warenausgang gebucht) befindet.
-- Für die "Sortierung" und "Artikel pro Seite" Schaltflächen auf Artikelkategorieseiten wurden `aria-label` verbaut um die Barrierefreiheit zu verbessern. Sie können über das Menü **CMS » Mehrsprachigkeit** angepasst werden können. Wir möchten uns bei @MaxBentz für seinen Beitrag bedanken.
-- Das Meta Tag für `thumbnail` wird jetzt äquivalent zum Meta Tag `og:image` auf der Artikeldetailseite gesetzt.
-
-### Behoben
-
-- Der Text von `alt` Attributen auf Bildern aus dem Webspace die im Bilderbox-Widget genutzt wurden, wurde nicht ausgegeben. Dies wurde behoben.
-- Die Vollbildbreite Option des Hintergrundbild-Widgets wenn es im Footer positioniert ist.
-- Fehlerhafter Standardwert von einer in Version 5.0.62 eingeführten SEO Option auf der Artikelseite wurde behoben.
-- Auf mobilen Geräten konnte es zu fehlerhaften Scrollverhalten kommen. Dies wurde behoben.
-- Die maximal angezeigten Zeichen von Merkmalen wurde fälschlicherweise auf 128 begrenzt. Diese Begrenzung wurde aufgehoben.
-- Einige Bilder wurden nicht verzögert geladen, dies wurde behoben.
-- Im Checkout wird die E-Mail-Adresse jetzt auch validiert, wenn sie nach der Ersteingabe erneut bearbeitet wird.
+- Für die "Sortierung"- und "Artikel pro Seite"-Schaltflächen auf Artikelkategorieseiten wurden `aria-label` verbaut, um die Barrierefreiheit zu verbessern. Diese können im Menü **CMS » Mehrsprachigkeit** angepasst werden. Wir möchten uns bei @MaxBentz für diesen Beitrag bedanken.
+- Das Meta-Tag für `thumbnail` wird jetzt äquivalent zum Meta-Tag `og:image` auf der Artikeldetailseite gesetzt.
 
 ### Geändert
 
-- Die Einstellung `Automatische Konvertierung in moderne Bildformate (AVIF, WebP)` im Schritt **Performance** des plentyShop-Assistenten ist nun im Standard aktiv. Wenn du die automatische Konvertierung nicht nutzen willst, deaktiviere die Einstellung.
-- Cookie Gruppen, die ausschließlich als "notwendig" deklarierte Cookies enthalten, können nicht mehr deaktiviert werden.
-- Die Struktur des Bilderbox-Widget wurde angepasst damit Suchmaschinen den Linktitel identifizieren können.
+- Die Einstellung `Automatische Konvertierung in moderne Bildformate (AVIF, WebP)` im Schritt **Performance** des plentyShop-Assistenten ist nun standardmäßig aktiv. Wenn du die automatische Konvertierung nicht nutzen willst, deaktiviere die Einstellung.
+- Cookie-Gruppen, die ausschließlich als "notwendig" deklarierte Cookies enthalten, können nicht mehr deaktiviert werden.
+- Die Struktur des Bilderbox-Widget wurde angepasst, damit Suchmaschinen den Linktitel identifizieren können.
 - Die Library Lightbox wurde auf v2.11.4 aktualisiert. Wir möchten uns bei @MaxBentz für seinen Beitrag bedanken.
+
+### Behoben
+
+- Der Text von `alt`-Attributen auf Bildern aus dem Webspace, die im Bilderbox-Widget genutzt wurden, wurde nicht ausgegeben. Dies wurde behoben.
+- Die Vollbildbreite-Option des Hintergrundbild-Widgets funktionierte nicht wie beabsichtigt, wenn das Widget im Footer platziert wurde. Dies wurde behoben
+- Ein fehlerhafter Standardwert einer in Version 5.0.62 eingeführten SEO-Option auf der Artikelseite wurde korrigiert.
+- Auf mobilen Geräten konnte es zu fehlerhaftem Scrollverhalten kommen. Dies wurde behoben.
+- Die maximal angezeigten Zeichen von Merkmalen wurde fälschlicherweise auf 128 begrenzt. Diese Begrenzung wurde aufgehoben.
+- Einige Bilder wurden trotz Lazy Loading nicht verzögert geladen. Dies wurde behoben.
+- Im Checkout wird die E-Mail-Adresse jetzt auch validiert, wenn sie nach der Ersteingabe erneut bearbeitet wird.
 
 ### Angepasste Templates
 
