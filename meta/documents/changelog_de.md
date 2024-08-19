@@ -15,7 +15,6 @@
 - Bilder wurden nicht verzögert geladen, dies wurde behoben.
 - Im Checkout wird die E-Mail-Adresse jetzt auch validiert, wenn sie nach der Ersteingabe erneut bearbeitet wird.
 
-
 ### Geändert
 
 - Die "Retouren"-Schaltfläche wurde auf der Bestellbestätigung für Gastbestellungen hinzugefügt. Diese Schaltfläche wird nur angezeigt, wenn die Route `order-returns` im IO-Plugin aktiv ist und sich der jeweilige Auftrag mindestens im Status 7 (Warenausgang gebucht) befindet.
