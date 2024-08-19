@@ -13,6 +13,7 @@
 - Fehlerhafter Standardwert von einer in Version 5.0.62 eingeführten SEO Option auf der Artikelseite wurde behoben.
 - Das teilweise unregelmäßige Scroll-Verhalten auf mobilen Geräten wurde behoben.
 - Bilder wurden nicht verzögert geladen, dies wurde behoben.
+- Im Checkout wird die E-Mail-Adresse jetzt auch validiert, wenn sie nach der Ersteingabe erneut bearbeitet wird.
 
 ### Geändert
 
