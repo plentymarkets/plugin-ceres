@@ -13,6 +13,8 @@
 - Fehlerhafter Standardwert von einer in Version 5.0.62 eingeführten SEO Option auf der Artikelseite wurde behoben.
 - Das teilweise unregelmäßige Scroll-Verhalten auf mobilen Geräten wurde behoben.
 - Bilder wurden nicht verzögert geladen, dies wurde behoben.
+- Im Checkout wird die E-Mail-Adresse jetzt auch validiert, wenn sie nach der Ersteingabe erneut bearbeitet wird.
+
 
 ### Geändert
 
@@ -145,7 +147,6 @@
 - Im Checkout wurde ein Javascript-Fehler behoben, der aufgrund einer unbefüllten Variable in der Funktion `CheckDeliveryAddressError()` auftrat.
 - In der Kategorieansicht wurden unter bestimmten Umständen der UVP nicht angezeigt.
 - Bei Aufruf von Kategorieseiten konnte mit sehr hoher Seitenzahl konnte es Out Of Memory Exception kommen.
-- Im Checkout wird die E-Mail-Adresse jetzt auch validiert, wenn sie nach der Ersteingabe erneut bearbeitet wird.
 - Die Kacheln zur Anzeige von Zahlungsanbietern im Checkout wurde auf älteren iOS Geräten zu groß dargestellt. Dies wurde behoben.
 - Der Aufruf der REST-Route /rest/io/customer/order/list mit 0 `orderPerPage` führte zu einem Fehler. Dies wurde behoben. Wir möchten uns bei @MaxBentz für seinen Beitrag bedanken.
   

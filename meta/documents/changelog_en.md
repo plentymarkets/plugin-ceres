@@ -13,6 +13,7 @@
 - Incorrect default value of an SEO option introduced in version 5.0.62 on the single item page has been fixed.
 - Fixed intermittent scrolling issue on mobile.
 - Fixed images not being lazyloaded.
+- During checkout, the email address is now validated even when updating an already submited address.
 
 ### Changed
 
@@ -144,7 +145,6 @@
 - On the item detail page in the non-standard language, the language abbreviation was not displayed in the schema.org details in the URL. This has been fixed.
 - The schema.org data on the item details page now includes both the (SalePrice)[https://schema.org/SalePrice] and (ListPrice)[https://schema.org/ListPrice].
 - Fixed a Javascript error in the checkout due to an unfilled variable in the CheckDeliveryAddressError() function.
-- During checkout, the email address is now validated even when updating an already submited address.
 - In the category view, the MSRP was not displayed under certain circumstances.
 - When calling category pages with very high page count, Out Of Memory Exception could occur.
 - The tiles for displaying payment providers in Checkout were displayed too large on older iOS devices. This has been fixed.
