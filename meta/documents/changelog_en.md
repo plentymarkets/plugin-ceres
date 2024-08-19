@@ -5,31 +5,31 @@
 ### TODO
 
 - Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
-- Due to the large number of changes, users of themes should have the template changes listed in the changelog under "Changed Templates" checked separately.
+- Due to the large number of changes, users of themes should have the template changes listed in the "Changed Templates" section checked separately.
 
 ### Added
 
-- To reduce unexpected shifts of content during page loading, the dimensions of article images are made available to the browser. This allows browsers to reserve the required space before loading. This can have a positive effect on the Google Page Speed Insights value **CLS**.
-- Added the Return order button on the order confirmation page for guest users. This button is only displayed if the `order-return` route is active in the IO plugin and the order in question is in status 7 (Outgoing items booked) or higher.
-- For the "Sorting" and "Articles per page" buttons on item category pages, `aria-labels` have been added to improve accessibility. They can be customised via the **CMS » Multilingualism** menu. We would like to thank @MaxBentz for his contribution.
-- The meta tag `thumbnail` is now set equivalent to the meta tag `og:image` on the single item page.
+- To reduce unexpected shifts of content during page loading, the dimensions of item images are made available to the browser. This allows browsers to reserve the required space before loading. This can have a positive effect on the Google Page Speed Insights value **CLS**.
+- Added the "Return order" button on the order confirmation page for guest users. This button is only displayed if the `order-return` route is active in the IO plugin and the order in question is in status 7 (Outgoing items booked) or higher.
+- For the "Sorting" and "Items per page" buttons on item category pages, `aria-labels` have been added to improve accessibility. They can be customised in the **CMS » Multilingualism** menu. We would like to thank @MaxBentz for his contribution.
+- The meta tag `thumbnail` is now set equivalently to the meta tag `og:image` on the single item page.
+
+### Changed
+
+- The setting `Automatic conversion into modern image formats (AVIF, WebP)` in the plentyShop assistant step **Performance** is now active per default. If you do not want to use the automatic conversion, deactivate the setting.
+- Cookie groups that only contain cookies declared as “necessary” can no longer be deactivated.
+- The structure of the image box widget has been adapted so that search engines can identify link titles.
+- The library Lightbox has been updated to v2.11.4. We would like to thank @MaxBentz for his contribution.
 
 ### Fixed
 
 - The 'alt' attribute text of images from the webspace that were used in the image box widget was not displayed. This has been fixed.
-- the fullscreen width option of the background image widget when it is inside the footer.
-- Incorrect default value of an SEO option introduced in version 5.0.62 on the single item page has been fixed.
+- The fullscreen width option of the background image widget was not functioning properly when the widget was placed in the footer. This has been fixed.
+- An incorrect default value of an SEO option for the single item page that had been introduced in version 5.0.62 has been fixed.
 - Incorrect scrolling behaviour could occur on mobile devices. This has been fixed.
 - The maximum number of characters displayed for characteristics was incorrectly limited to 128. This limit has been removed.
-- Fixed that some images are not being lazy loaded.
-- During checkout, the email address is now validated even when updating an already submited address.
-
-### Changed
-
-- The setting `Automatic conversion into modern image formats (AVIF, WebP)` in the plentyShop assistant step **Performance** is active per default. If you do not want to use the automatic conversion, deactivate the setting.
-- Cookie groups that only contain cookies declared as “necessary” can no longer be deactivated
-- The structure of the image box widget has been adapted so that search engines can identify a link title.
-- The library Lightbox has been updated to v2.11.4. We would like to thank @MaxBentz for his contribution.
+- Due to an error, some images were not lazy loaded. This has been fixed.
+- During checkout, the email address is now validated even when updating an already submitted address.
 
 ### Changed Templates
 
