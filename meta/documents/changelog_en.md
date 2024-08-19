@@ -12,6 +12,7 @@
 - To reduce unexpected shifts of content during page loading, the dimensions of article images are made available to the browser. This allows browsers to reserve the required space before loading. This can have a positive effect on the Google Page Speed Insights value **CLS**.
 - Added the Return order button on the order confirmation page for guest users. This button is only displayed if the `order-return` route is active in the IO plugin and the order in question is in status 7 (Outgoing items booked) or higher.
 - For the "Sorting" and "Articles per page" buttons on item category pages, `aria-labels` have been added to improve accessibility. They can be customised via the **CMS » Multilingualism** menu. We would like to thank @MaxBentz for his contribution.
+- The meta tag `thumbnail` is now set equivalent to the meta tag `og:image` on the single item page.
 
 ### Fixed
 
@@ -21,6 +22,7 @@
 - Incorrect scrolling behaviour could occur on mobile devices. This has been fixed.
 - The maximum number of characters displayed for characteristics was incorrectly limited to 128. This limit has been removed.
 - Fixed that some images are not being lazy loaded.
+- During checkout, the email address is now validated even when updating an already submited address.
 
 ### Changed
 
@@ -172,7 +174,7 @@
 ### Fixed
 
 - On the item detail page in the non-standard language, the language abbreviation was not displayed in the schema.org details in the URL. This has been fixed.
-- The schema.org data on the item details page now includes both the [SalesPrice](https://schema.org/SalePrice) and [ListPrice](https://schema.org/ListPrice).
+- The schema.org data on the item details page now includes both the (SalePrice)[https://schema.org/SalePrice] and (ListPrice)[https://schema.org/ListPrice].
 - Fixed a Javascript error in the checkout due to an unfilled variable in the `CheckDeliveryAddressError()` function.
 - In the category view, the MSRP was not displayed under certain circumstances.
 - When calling category pages with very high page count, Out Of Memory Exception could occur.

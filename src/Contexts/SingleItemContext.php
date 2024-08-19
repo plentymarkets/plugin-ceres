@@ -246,7 +246,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $priceValidUntilMappingId = $this->ceresConfig->seo->priceValidUntilMappingId;
         if ($priceValidUntilMappingId > 0) {
             $orgDate = $this->getVariationProperty($itemData['variationProperties'], $priceValidUntilMappingId);
-            if(strlen($orgDate)) {
+            if (strlen($orgDate)) {
                 $orgDate = date("Y-m-d", strtotime($orgDate));
             }
             $this->priceValidUntil = $orgDate;
@@ -254,7 +254,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
 
         $skuMapping = $this->ceresConfig->seo->skuMapping;
         $skuMappingId = $this->ceresConfig->seo->skuMappingId;
-        switch($skuMapping) {
+        switch ($skuMapping) {
             case 1:
                 $this->sku = $itemData['variation']['id'];
                 break;
@@ -296,7 +296,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
         $canonicalPropertyId = $this->ceresConfig->seo->itemCanonicalID;
         $canonicalUrl = $this->getVariationProperty($itemData['variationProperties'], $canonicalPropertyId);
 
-        if(!empty($canonicalUrl)){
+        if (!empty($canonicalUrl)) {
             $this->forcedCanonicalUrl = $canonicalUrl;
         }
 
@@ -341,8 +341,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
      */
     private function detectItemCondition(int $conditionId): string
     {
-        switch($conditionId)
-        {
+        switch ($conditionId) {
             case 0:
                 $conditionString = $this->ceresConfig->seo->itemCondition0;
                 break;
@@ -370,11 +369,11 @@ class SingleItemContext extends GlobalContext implements ContextInterface
      */
     private function isWebshopReferrer($referrers)
     {
-        if($referrers[0] == -1) {
+        if ($referrers[0] == -1) {
             return true;
         }
         foreach ($referrers as $referrer) {
-            if($referrer == 1) {
+            if ($referrer == 1) {
                 return true;
             }
         }
@@ -387,7 +386,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
      *
      * @return string
      */
-    private function getVariationProperty($variationPropertyGroups, $mappingPropertyId) {
+    private function getVariationProperty($variationPropertyGroups, $mappingPropertyId)
+    {
         $variationProperty = '';
         foreach ($variationPropertyGroups as $propertyGroup) {
             foreach ($propertyGroup['properties'] as $property) {
@@ -406,7 +406,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
      *
      * @return string
      */
-    private function getFirstBarcode($barcodes, $barcodeType){
+    private function getFirstBarcode($barcodes, $barcodeType)
+    {
         $barcode = '';
         foreach ($barcodes as $property) {
             if (strpos($property['type'], $barcodeType) === 0 && $this->isWebshopReferrer($property['referrers'])) {
@@ -423,7 +424,8 @@ class SingleItemContext extends GlobalContext implements ContextInterface
      *
      * @return string
      */
-    private function getBarcodeWithId($barcodes, $barcodeMappingId){
+    private function getBarcodeWithId($barcodes, $barcodeMappingId)
+    {
         $barcode = '';
         foreach ($barcodes as $property) {
             if ($property['id'] == $barcodeMappingId) {
