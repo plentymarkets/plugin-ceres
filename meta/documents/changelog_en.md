@@ -1,27 +1,57 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.64 (2024-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.64 (2024-08-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
-### New
+### TODO
 
-- For the "Sorting" and "Articles per page" buttons on article category pages, `aria-labels` have been added to improve accessibility. They can be customised via the **CMS » Multilingualism** menu. We would like to thank @MaxBentz for his contribution.
-- The meta tag `thumbnail` is now set equivalent to the meta tag `og:image` on the single item page.
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
+- Due to the large number of changes, users of themes should have the template changes listed in the "Changed Templates" section checked separately.
 
-### Fixed
+### Added
 
-- Empty anchor tag on image box widget.
-- Fullscreen width of background image widget in footer
-- Incorrect default value of an SEO option introduced in version 5.0.62 on the single item page has been fixed.
-- Fixed intermittent scrolling issue on mobile.
-- Fixed images not being lazyloaded.
-- During checkout, the email address is now validated even when updating an already submited address.
+- To reduce unexpected shifts of content during page loading, the dimensions of item images are made available to the browser. This allows browsers to reserve the required space before loading. This can have a positive effect on the Google Page Speed Insights value **CLS**.
+- Added the "Return order" button on the order confirmation page for guest users. This button is only displayed if the `order-return` route is active in the IO plugin and the order in question is in status 7 (Outgoing items booked) or higher.
+- For the "Sorting" and "Items per page" buttons on item category pages, `aria-labels` have been added to improve accessibility. They can be customised in the **CMS » Multilingualism** menu. We would like to thank @MaxBentz for his contribution.
+- The meta tag `thumbnail` is now set equivalently to the meta tag `og:image` on the single item page.
 
 ### Changed
 
-- Added the Return order button on the order confirmation page for guest users. This button is only displayed if the `order-return` route is active in the IO plugin and the order in question is in status 7 (Outgoing items booked) or higher.
-- Cookie groups that only contain cookies declared as “necessary” can no longer be deactivated
-- The setting `Automatic conversion into modern image formats (AVIF, WebP)` in the plentyShop assistant step **Performance** is active per default. If you do not want to use the automatic conversion, deactivate the setting.
+- The setting `Automatic conversion into modern image formats (AVIF, WebP)` in the plentyShop assistant step **Performance** is now active per default. If you do not want to use the automatic conversion, deactivate the setting.
+- Cookie groups that only contain cookies declared as “necessary” can no longer be deactivated.
+- The structure of the image box widget has been adapted so that search engines can identify link titles.
 - The library Lightbox has been updated to v2.11.4. We would like to thank @MaxBentz for his contribution.
+
+### Fixed
+
+- The 'alt' attribute text of images from the webspace that were used in the image box widget was not displayed. This has been fixed.
+- The fullscreen width option of the background image widget was not functioning properly when the widget was placed in the footer. This has been fixed.
+- An incorrect default value of an SEO option for the single item page that had been introduced in version 5.0.62 has been fixed.
+- Incorrect scrolling behaviour could occur on mobile devices. This has been fixed.
+- The maximum number of characters displayed for characteristics was incorrectly limited to 128. This limit has been removed.
+- Due to an error, some images were not lazy loaded. This has been fixed.
+- During checkout, the email address is now validated even when updating an already submitted address.
+
+### Changed Templates
+
+- In plentyShop LTS 5.0.64 we made changes to template files which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
+
+- [resources/js/src/app/components/basket/list/BasketListItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3522/files#diff-2e0729c79085beac37d2ad03e5d1a25ddec4020ecf8e3551d50e64a6cf5f91d3)
+- [resources/js/src/app/components/common/LazyImg.vue](https://github.com/plentymarkets/plugin-ceres/pull/3522/files#diff-8bf1fff9b8d538ae75c4ee791deef3a8acfe72e5e0e678d1c49672b17d787a73)
+- [resources/js/src/app/components/item/ItemImageCarousel.vue](https://github.com/plentymarkets/plugin-ceres/pull/3522/files#diff-78484b68defc6a9839cc69c5f3f9fc8bef2d0641a6db41ab6e68f58665f48912)
+- [resources/js/src/app/components/itemList/CategoryImageCarousel.vue](https://github.com/plentymarkets/plugin-ceres/pull/3522/files#diff-449e63fc921701c277c047250ed882be5e7039c498efa513e1469dffd8ff818f)
+- [resources/js/src/app/components/item/OrderPropertyListItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3554/files#diff-38e564e102ed3a17d36a85e7a337ea233f1fba3a1e43d95808c20dde2484f1c9)
+- [resources/js/src/app/components/pageDesign/CookieBar.vue](https://github.com/plentymarkets/plugin-ceres/pull/3546/files#diff-07203a2a14f4fdfe0285c115db84358b9b18bbe84d3ab3536f80b667529b7392)
+- [resources/js/src/app/components/pageDesign/PrivacySettings.vue](https://github.com/plentymarkets/plugin-ceres/pull/3546/files#diff-9f2031aec851f46baecf85800d865e1b95d66c5ec279eda68bfb4016325ed195)
+- [resources/views/Category/Item/Partials/ItemSorting.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64#diff-f8f9dba2d8e3c0674cf2aac4edc3175570518c3cd83932731a35d4ce44aa6ba1)
+- [resources/views/Category/Item/Partials/ItemsPerPage.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64#diff-ce4a6a0d61b5493622e6358d874e9433f70748e6888cdc24e7b69eecad13588e)
+- [resources/views/Checkout/OrderConfirmation.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64#diff-17ee2b9aab5a177cadc8de620dd81d3c088673adc0fcb961f655cedee201d3a7)
+- [resources/views/Widgets/Category/ItemSortingWidget.twig](https://github.com/plentymarkets/plugin-ceres/pull/3543/files#diff-aa652b1b9ecb9ff84376a17521fb1d18711f82fa23ba8d9dec51d4b8d272ad00)
+- [resources/views/Widgets/Category/ItemsPerPageWidget.twig](https://github.com/plentymarkets/plugin-ceres/commit/1a701747714f4cd9269f1a814bccd315e3b360b3#diff-3ef871521a42d811c24886d5054a8f3f57dece897428b48017b6fdcd488ce6c4)
+- [resources/views/Widgets/Common/ImageBoxWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64#diff-9f438954b9f177761379a8b382eea014077ec743060583796ac4f9aaed3d3003)
+- [resources/views/Widgets/Common/ImageCarouselWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64#diff-43b0576fe9cb61d0343a4aa220f562347c237717821f276ab632973e3970ec96)
+- [resources/views/Widgets/Common/ItemListWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64#diff-56e4aca5195c81e2f933daaf2a1d1397fcd1e72844a24d75155dcab09e4cb0ee)
+- [resources/views/Widgets/Header/NavigationWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64#diff-d9d8d5418b1e74986dcb27dfa315d297f65a5f90efed0734e8ab495651cab594)
+- [resources/views/Widgets/Item/ItemImageWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64#diff-e9d44ad6d7ca6325b265745487a158c45e697741e7ec84b86b338ecbfd511e98)
 
 ## v5.0.63 (2024-04-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.62...5.0.63" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
@@ -145,7 +175,7 @@
 
 - On the item detail page in the non-standard language, the language abbreviation was not displayed in the schema.org details in the URL. This has been fixed.
 - The schema.org data on the item details page now includes both the (SalePrice)[https://schema.org/SalePrice] and (ListPrice)[https://schema.org/ListPrice].
-- Fixed a Javascript error in the checkout due to an unfilled variable in the CheckDeliveryAddressError() function.
+- Fixed a Javascript error in the checkout due to an unfilled variable in the `CheckDeliveryAddressError()` function.
 - In the category view, the MSRP was not displayed under certain circumstances.
 - When calling category pages with very high page count, Out Of Memory Exception could occur.
 - The tiles for displaying payment providers in Checkout were displayed too large on older iOS devices. This has been fixed.
