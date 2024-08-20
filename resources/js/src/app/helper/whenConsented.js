@@ -16,7 +16,7 @@ export function whenConsented(key, onConsent, onDecline, forceConsent = false)
 
     if (window.ConsentManager)
     {
-        if (window.ConsentManager.hasResponse())
+        if (window.ConsentManager.hasResponse() || window.ConsentManager.isConsented(key))
         {
             _call(window.ConsentManager.isConsented(key) ? onConsent : onDecline);
         }

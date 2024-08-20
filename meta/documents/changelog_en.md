@@ -5,6 +5,7 @@
 ### Changed
 
 - A change in version 5.0.64 could lead to horizontal scrolling behaviour. This change has been reversed.
+- The settings for reCAPTCHA have been revised. If reCAPTCHA has been registered as necessary or assigned to the ‘Essential’ group, it will be loaded without explicit consent.
 
 ## v5.0.64 (2024-08-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
