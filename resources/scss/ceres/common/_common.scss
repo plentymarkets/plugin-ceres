@@ -2,6 +2,12 @@ div#page-body {
     overflow-x: clip;
 }
 
+// ensures that plugins and code-widgets don't lead to the website scrolling when content doesn't fit the css box
+// widget-fw doesn't affect widgets if the parent container-max still has max-width
+div.footer {
+    overflow-x: clip;
+}
+
 .center-xy {
     display: flex;
     flex-flow: row nowrap;
