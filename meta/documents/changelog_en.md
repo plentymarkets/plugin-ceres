@@ -1,5 +1,11 @@
 # Release Notes for plentyShop LTS
 
+## v5.0.64 (2024-08-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.64...5.0.65" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Changed
+
+- A change in version 5.0.64 could lead to horizontal scrolling behaviour. This change has been reversed.
+
 ## v5.0.64 (2024-08-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.63...5.0.64" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
