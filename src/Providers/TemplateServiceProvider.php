@@ -377,10 +377,9 @@ class TemplateServiceProvider extends ServiceProvider
             );
         }
 
-        if (strlen($config->get('Ceres.global.google_recaptcha_secret')))
+        if (strlen($config->get('Ceres.global.google_recaptcha_secret'))) {
             $necessary = $config->get('Ceres.global.google_recaptcha_consentNecessary');
             $group = $config->get('Ceres.global.google_recaptcha_consentGroup', 'media');
-
             $isNecessary = $necessary === true || $necessary === 'true' || $necessary === '1' || $necessary === 1 || $group === 'necessary';
             $optOut = $config->get('Ceres.global.google_recaptcha_consentOptOut');
             $isOptOut = $optOut === true || $optOut === 'true' || $optOut === '1' || $optOut === 1;
