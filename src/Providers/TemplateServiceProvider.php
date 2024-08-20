@@ -44,10 +44,10 @@ use Plenty\Modules\Webshop\Helpers\UrlQuery;
 use Plenty\Modules\Webshop\ItemSearch\Helpers\ResultFieldTemplate;
 use Plenty\Modules\Webshop\Template\Contracts\TemplateConfigRepositoryContract;
 use Plenty\Modules\Wizard\Contracts\WizardContainerContract;
+use Plenty\Plugin\ConfigRepository;
+use Plenty\Plugin\Events\Dispatcher;
 use Plenty\Plugin\ServiceProvider;
 use Plenty\Plugin\Templates\Twig;
-use Plenty\Plugin\Events\Dispatcher;
-use Plenty\Plugin\ConfigRepository;
 
 /**
  * Class TemplateServiceProvider
@@ -378,6 +378,11 @@ class TemplateServiceProvider extends ServiceProvider
         }
 
         if (strlen($config->get('Ceres.global.google_recaptcha_secret'))) {
+            $necessary = $config->get('Ceres.global.google_recaptcha_consentNecessary');
+            $isNecessary = $necessary === true || $necessary === 'true' || $necessary === '1' || $necessary === 1;
+            $optOut = $config->get('Ceres.global.google_recaptcha_consentOptOut');
+            $isOptOut = $optOut === true || $optOut === 'true' || $optOut === '1' || $optOut === 1;
+
             $consentRepository->registerConsent(
                 'reCaptcha',
                 'Ceres::Template.consentReCaptchaLabel',
@@ -388,8 +393,8 @@ class TemplateServiceProvider extends ServiceProvider
                     'lifespan' => $webstoreConfig->sessionLifetime > 0 ? 'Ceres::Template.consentLifespan100Days' : 'Ceres::Template.consentLifespanSession',
                     'policyUrl' => 'Ceres::Template.consentReCaptchaPolicyUrl',
                     'group' => $config->get('Ceres.global.google_recaptcha_consentGroup', 'media'),
-                    'necessary' => $config->get('Ceres.global.google_recaptcha_consentNecessary') === 'true',
-                    'isOptOut' => $config->get('Ceres.global.google_recaptcha_consentOptOut') === 'true'
+                    'necessary' => $isNecessary,
+                    'isOptOut' => $isOptOut
                 ]
             );
         }
