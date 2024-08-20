@@ -9557,6 +9557,10 @@ div#page-body {
   overflow-x: clip;
 }
 
+div.footer {
+  overflow-x: clip;
+}
+
 .center-xy {
   display: flex;
   flex-flow: row nowrap;
