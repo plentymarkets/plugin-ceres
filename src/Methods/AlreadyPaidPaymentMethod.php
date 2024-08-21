@@ -2,14 +2,13 @@
 
 namespace Ceres\Methods;
 
+use Ceres\Config\CeresConfig;
 use Ceres\Wizard\ShopWizard\Services\SettingsHandlerService;
 use Plenty\Modules\Basket\Contracts\BasketRepositoryContract;
-use Plenty\Modules\Frontend\Session\Storage\Contracts\FrontendSessionStorageFactoryContract;
 use Plenty\Modules\Frontend\Contracts\Checkout;
 use Plenty\Modules\Payment\Method\Services\PaymentMethodBaseService;
 use Plenty\Plugin\Application;
 use Plenty\Plugin\Translation\Translator;
-use Ceres\Config\CeresConfig;
 
 class AlreadyPaidPaymentMethod extends PaymentMethodBaseService
 {
@@ -55,7 +54,12 @@ class AlreadyPaidPaymentMethod extends PaymentMethodBaseService
     public function isActive(): bool
     {
         $shippingCountries = $this->settingsHandlerService->getAlreadyPaidShippingCountries($this->app->getPlentyId());
-        return in_array($this->checkout->getShippingCountryId(), $shippingCountries, false) && $this->basketRepository->load()->basketAmount <= 0.0;
+        $coupon = $this->basketRepository->load()->couponCode ?? '';
+        return in_array(
+                $this->checkout->getShippingCountryId(),
+                $shippingCountries,
+                false
+            ) && $this->basketRepository->load()->basketAmount <= 0.0 && strlen($coupon);
     }
 
     /**

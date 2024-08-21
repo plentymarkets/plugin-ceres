@@ -1,5 +1,11 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.66 (2024-XX-XX) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.65...5.0.66" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Geändert
+
+- Die Überprüfung für die Zahlungsart "Bereits bezahlt" wurde verbessert.
+
 ## v5.0.65 (2024-08-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.64...5.0.65" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Geändert
