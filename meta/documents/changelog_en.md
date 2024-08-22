@@ -1,10 +1,11 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.66 (2024-XX-XX) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.65...5.0.66" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.66 (2024-08-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.65...5.0.66" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Changed
 
 - The check for the payment type ‘Already paid’ has been extended.
+- A change in the LazyImg component was reverted.
 
 ## v5.0.65 (2024-08-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.64...5.0.65" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
