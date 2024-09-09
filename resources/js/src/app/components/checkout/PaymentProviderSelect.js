@@ -47,6 +47,8 @@ export default Vue.component("payment-provider-select", {
          */
         onPaymentProviderChange(newMethodOfPayment)
         {
+            console.log("onPaymentProviderChange", newMethodOfPayment, this.methodOfPaymentId);
+
             this.$store.dispatch("selectMethodOfPayment", newMethodOfPayment.id)
                 .then(data =>
                 {

@@ -63,6 +63,8 @@ export default Vue.component("checkout", {
     {
         addEventHandler()
         {
+            console.log("addEventHandler");
+
             ApiService.listen("CheckoutChanged",
                 checkout =>
                 {
@@ -96,8 +98,11 @@ export default Vue.component("checkout", {
 
         handleCheckoutChangedEvent(checkout)
         {
+            console.log("checkout", checkout);
+
             if (!this.isEquals(this.checkout.payment.methodOfPaymentList, checkout.paymentDataList, "id"))
             {
+                console.log("1");
                 NotificationService.info(
                     TranslationService.translate("Ceres::Template.checkoutMethodOfPaymentListChanged")
                 );
@@ -106,11 +111,13 @@ export default Vue.component("checkout", {
 
             if (this.hasShippingProfileListChanged(this.checkout.shipping.shippingProfileList, checkout.shippingProfileList.slice()))
             {
+                console.log("2");
                 this.$store.commit("setShippingProfileList", checkout.shippingProfileList);
             }
 
             if (this.checkout.payment.methodOfPaymentId !== checkout.methodOfPaymentId)
             {
+                console.log("3");
                 NotificationService.warn(
                     TranslationService.translate("Ceres::Template.checkoutMethodOfPaymentChanged")
                 );
@@ -119,6 +126,7 @@ export default Vue.component("checkout", {
 
             if (this.checkout.shipping.shippingProfileId !== checkout.shippingProfileId)
             {
+                console.log("4");
                 NotificationService.warn(
                     TranslationService.translate("Ceres::Template.checkoutShippingProfileChanged")
                 );
@@ -127,6 +135,7 @@ export default Vue.component("checkout", {
 
             if (this.checkout.shipping.shippingCountryId !== checkout.shippingCountryId)
             {
+                console.log("5");
                 this.$store.commit("setShippingCountryId", checkout.shippingCountryId);
             }
 
@@ -134,6 +143,7 @@ export default Vue.component("checkout", {
 
             if (this.deliveryAddressId !== responseDeliveryAddressId)
             {
+                console.log("6");
                 NotificationService.warn(
                     TranslationService.translate("Ceres::Template.addressChangedWarning")
                 );
