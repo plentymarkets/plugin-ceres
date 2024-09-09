@@ -51,6 +51,8 @@ export default Vue.component("checkout", {
         this.$store.dispatch("initBillingAddress", { id: this.selectedBillingAddress, addressList: this.billingAddressList });
         this.$store.dispatch("initDeliveryAddress", { id: this.selectedDeliveryAddress, addressList: this.deliveryAddressList });
 
+        console.log("here");
+
         this.addEventHandler();
     },
 

@@ -69824,6 +69824,7 @@ var _isEqual = __webpack_require__(/*! lodash/isEqual */ "./node_modules/lodash/
       id: this.selectedDeliveryAddress,
       addressList: this.deliveryAddressList
     });
+    console.log("here");
     this.addEventHandler();
   },
   mounted: function mounted() {
