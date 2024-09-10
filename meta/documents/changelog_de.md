@@ -1,5 +1,12 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.67 (2024-09-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.66...5.0.67" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Im ImageBox Widget konnte es zu einem Fehler kommen bzgl. der aspect-ratio. Dies wurde behoben. 
+- Änderungen in den Abhängigkeiten wurden zurückgenommen, diese konnten zu Problemen mit den PayPal Buttons führen.
+
 ## v5.0.66 (2024-08-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.65...5.0.66" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Geändert
