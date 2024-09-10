@@ -42,7 +42,8 @@ export default Vue.component("checkout", {
 
     computed: mapState({
         checkout: state => state.checkout,
-        deliveryAddressId: state => state.address.deliveryAddressId
+        deliveryAddressId: state => state.address.deliveryAddressId,
+        basket: state => state.basket.data
     }),
 
     created()
@@ -141,11 +142,13 @@ export default Vue.component("checkout", {
                 this.$store.commit("setShippingCountryId", checkout.shippingCountryId);
             }
 
-            const responseDeliveryAddressId = checkout.deliveryAddressId !== 0 ? checkout.deliveryAddressId : -99;
+            const responseDeliveryAddressId = checkout.deliveryAddressId !== 0
+                ? checkout.deliveryAddressId
+                : this.basket.customerShippingAddressId || -99;
 
             if (this.deliveryAddressId !== responseDeliveryAddressId)
             {
-                console.log("6");
+                console.log("6", this.deliveryAddressId);
                 NotificationService.warn(
                     TranslationService.translate("Ceres::Template.addressChangedWarning")
                 );
