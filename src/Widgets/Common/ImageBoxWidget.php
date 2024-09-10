@@ -21,7 +21,8 @@ class ImageBoxWidget extends BaseWidget
         'png',
         'gif',
         'svg',
-        'apng'
+        'apng',
+        'avif'
     ];
 
     /** @const string[] MODERN_IMAGE_EXTENSIONS */
