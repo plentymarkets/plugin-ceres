@@ -4,8 +4,8 @@
 
 ### Fixed
 
-- In the ImageBox widget, an error could occur regarding the aspect-ratio. This has been fixed.
-- Changes in the dependencies have been reverted, as they could cause problems with the PayPal buttons.
+- An error could occur in the image box widget regarding the aspect ratio setting. This has been fixed.
+- Changes in the dependencies have been reverted because they could cause problems with the PayPal buttons in the checkout.
 
 ## v5.0.66 (2024-08-22) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.65...5.0.66" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
