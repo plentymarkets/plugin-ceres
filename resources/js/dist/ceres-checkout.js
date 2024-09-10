@@ -69827,7 +69827,6 @@ var _isEqual = __webpack_require__(/*! lodash/isEqual */ "./node_modules/lodash/
       id: this.selectedDeliveryAddress,
       addressList: this.deliveryAddressList
     });
-    console.log("here");
     this.addEventHandler();
   },
   mounted: function mounted() {
@@ -69837,7 +69836,6 @@ var _isEqual = __webpack_require__(/*! lodash/isEqual */ "./node_modules/lodash/
     addEventHandler: function addEventHandler() {
       var _this = this;
 
-      console.log("addEventHandler");
       ApiService.listen("CheckoutChanged", function (checkout) {
         _this.handleCheckoutChangedEvent(checkout.checkout);
       });
@@ -69860,40 +69858,32 @@ var _isEqual = __webpack_require__(/*! lodash/isEqual */ "./node_modules/lodash/
       });
     },
     handleCheckoutChangedEvent: function handleCheckoutChangedEvent(checkout) {
-      console.log("checkout", checkout);
-
       if (!this.isEquals(this.checkout.payment.methodOfPaymentList, checkout.paymentDataList, "id")) {
-        console.log("1");
         NotificationService.info(_services_TranslationService__WEBPACK_IMPORTED_MODULE_13__["default"].translate("Ceres::Template.checkoutMethodOfPaymentListChanged"));
         this.$store.commit("setMethodOfPaymentList", checkout.paymentDataList);
       }
 
       if (this.hasShippingProfileListChanged(this.checkout.shipping.shippingProfileList, checkout.shippingProfileList.slice())) {
-        console.log("2");
         this.$store.commit("setShippingProfileList", checkout.shippingProfileList);
       }
 
       if (this.checkout.payment.methodOfPaymentId !== checkout.methodOfPaymentId) {
-        console.log("3");
         NotificationService.warn(_services_TranslationService__WEBPACK_IMPORTED_MODULE_13__["default"].translate("Ceres::Template.checkoutMethodOfPaymentChanged"));
         this.$store.commit("setMethodOfPayment", checkout.methodOfPaymentId);
       }
 
       if (this.checkout.shipping.shippingProfileId !== checkout.shippingProfileId) {
-        console.log("4");
         NotificationService.warn(_services_TranslationService__WEBPACK_IMPORTED_MODULE_13__["default"].translate("Ceres::Template.checkoutShippingProfileChanged"));
         this.$store.commit("setShippingProfile", checkout.shippingProfileId);
       }
 
       if (this.checkout.shipping.shippingCountryId !== checkout.shippingCountryId) {
-        console.log("5");
         this.$store.commit("setShippingCountryId", checkout.shippingCountryId);
       }
 
       var responseDeliveryAddressId = checkout.deliveryAddressId !== 0 ? checkout.deliveryAddressId : this.basket.customerShippingAddressId || -99;
 
       if (this.deliveryAddressId !== responseDeliveryAddressId) {
-        console.log("6", this.deliveryAddressId);
         NotificationService.warn(_services_TranslationService__WEBPACK_IMPORTED_MODULE_13__["default"].translate("Ceres::Template.addressChangedWarning"));
         this.$store.commit("selectDeliveryAddressById", responseDeliveryAddressId);
       }
@@ -70153,7 +70143,6 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     onPaymentProviderChange: function onPaymentProviderChange(newMethodOfPayment) {
       var _this = this;
 
-      console.log("onPaymentProviderChange", newMethodOfPayment, this.methodOfPaymentId);
       this.$store.dispatch("selectMethodOfPayment", newMethodOfPayment.id).then(function (data) {
         document.dispatchEvent(new CustomEvent("afterPaymentMethodChanged", {
           detail: _this.methodOfPaymentId
