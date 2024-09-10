@@ -69,7 +69,7 @@
     "webpack-require-from": "^1.8.1"
   },
   "dependencies": {
-    "bootstrap": "4.4.1",
+    "bootstrap": "5.0.0",
     "core-js": "^3.6.5",
     "custom-event-polyfill": "^1.0.0",
     "dayjs": "^1.8.26",
