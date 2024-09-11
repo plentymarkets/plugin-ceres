@@ -21,13 +21,13 @@ class ImageBoxWidget extends BaseWidget
         'png',
         'gif',
         'svg',
-        'apng',
-        'avif'
+        'apng'
     ];
 
     /** @const string[] MODERN_IMAGE_EXTENSIONS */
     const MODERN_IMAGE_EXTENSIONS = [
-        'webp'
+        'webp',
+        'avif'
     ];
 
     /**
