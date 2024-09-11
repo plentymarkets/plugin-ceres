@@ -69881,7 +69881,7 @@ var _isEqual = __webpack_require__(/*! lodash/isEqual */ "./node_modules/lodash/
         this.$store.commit("setShippingCountryId", checkout.shippingCountryId);
       }
 
-      var responseDeliveryAddressId = checkout.deliveryAddressId !== 0 ? checkout.deliveryAddressId : this.basket.customerShippingAddressId || -99;
+      var responseDeliveryAddressId = checkout.deliveryAddressId !== 0 ? checkout.deliveryAddressId : this.selectedDeliveryAddress || -99;
 
       if (this.deliveryAddressId !== responseDeliveryAddressId) {
         NotificationService.warn(_services_TranslationService__WEBPACK_IMPORTED_MODULE_13__["default"].translate("Ceres::Template.addressChangedWarning"));

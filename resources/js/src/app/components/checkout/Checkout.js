@@ -133,7 +133,7 @@ export default Vue.component("checkout", {
 
             const responseDeliveryAddressId = checkout.deliveryAddressId !== 0
                 ? checkout.deliveryAddressId
-                : this.basket.customerShippingAddressId || -99;
+                : this.selectedDeliveryAddress || -99;
 
             if (this.deliveryAddressId !== responseDeliveryAddressId)
             {
