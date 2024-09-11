@@ -30,6 +30,7 @@ context("Primary Address", () =>
     it("should add first billing address", () =>
     {
         cy.login("test@plenty.com", "TestTest00");
+        cy.wait(2000);
         cy.visit("/my-account/");
         cy.intercept("POST", "/rest/io/customer/address/?typeId=1").as("createAddress");
 
