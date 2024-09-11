@@ -42,8 +42,7 @@ export default Vue.component("checkout", {
 
     computed: mapState({
         checkout: state => state.checkout,
-        deliveryAddressId: state => state.address.deliveryAddressId,
-        basket: state => state.basket.data
+        deliveryAddressId: state => state.address.deliveryAddressId
     }),
 
     created()

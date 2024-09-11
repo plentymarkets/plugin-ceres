@@ -69812,9 +69812,6 @@ var _isEqual = __webpack_require__(/*! lodash/isEqual */ "./node_modules/lodash/
     },
     deliveryAddressId: function deliveryAddressId(state) {
       return state.address.deliveryAddressId;
-    },
-    basket: function basket(state) {
-      return state.basket.data;
     }
   }),
   created: function created() {
