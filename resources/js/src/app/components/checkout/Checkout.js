@@ -42,7 +42,8 @@ export default Vue.component("checkout", {
 
     computed: mapState({
         checkout: state => state.checkout,
-        deliveryAddressId: state => state.address.deliveryAddressId
+        deliveryAddressId: state => state.address.deliveryAddressId,
+        basket: state => state.basket.data
     }),
 
     created()
@@ -132,7 +133,7 @@ export default Vue.component("checkout", {
 
             const responseDeliveryAddressId = checkout.deliveryAddressId !== 0
                 ? checkout.deliveryAddressId
-                : this.selectedDeliveryAddress || -99;
+                : this.basket.customerShippingAddressId || this.selectedDeliveryAddress || -99;
 
             if (this.deliveryAddressId !== responseDeliveryAddressId)
             {
