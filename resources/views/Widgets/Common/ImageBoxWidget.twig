@@ -95,7 +95,7 @@
     {% if margin | length > 0 %} {{ margin }}{% endif %}
     {% if zoomImage %} mouseover-zoom{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-    <a{{ Twig.if("url | trim is not empty") }} href="{{ Twig.print("url") }}"{{ Twig.endif() }}{% if openInNewTab == true %} target="_blank"{% endif %}{% if urlType == 'external' %} rel="noopener"{% endif %} class="display-block">
+    <a{{ Twig.if("url | trim is not empty") }} href="{{ Twig.print("url") }}"{{ Twig.endif() }}{% if openInNewTab == true %} target="_blank"{% endif %}{% if urlType == 'external' %} rel="noopener"{% endif %}>
         {{ Twig.if("imageUrl | trim is not empty") }}
             {{ Twig.set("fallbackUrl", fallbackImagePath | json_encode ) }}
             {{ Twig.if("fallbackUrl | trim is empty") }}
