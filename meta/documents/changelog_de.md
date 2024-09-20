@@ -2,7 +2,7 @@
 
 ### Behoben
 
-- Bilder im AVIF-Format konnten im Hintergrundbild-Widget nicht ausgewählt werden. Dies wurde behoben, das Hintergrundbild-Widget zeigt ein Fallback-Eingabefeld an.
+- Bilder im AVIF-Format konnten im Hintergrundbild-Widget nicht ausgewählt werden. Dies wurde behoben, das Hintergrundbild-Widget zeigt jetzt ein Fallback-Eingabefeld an.
 
 ## v5.0.67 (2024-09-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.66...5.0.67" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
