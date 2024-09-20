@@ -2,7 +2,7 @@
 
 ### Fixed
 
-- Images in AVIF format could not be selected in the Background Image widget. This has beeen adressed, the background image widget shows a fallback input field.
+- In the Background Image widget, it wasn't possible to select AVIF images. This has been fixed by providing a fallback input field.
 
 ## v5.0.67 (2024-09-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.66...5.0.67" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
