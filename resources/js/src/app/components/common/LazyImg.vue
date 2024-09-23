@@ -150,13 +150,13 @@ export default {
             return mime.lookup(url);
         },
         getHeight() {
-            if (this.height && this.height > 0) {
+            if (this.height && this.height > 0 && this.imageUrl.includes('/full/')) {
                 return this.height;
             }
             return undefined;
         },
         getWidth() {
-            if (this.width && this.width > 0) {
+            if (this.width && this.width > 0 && this.imageUrl.includes('/full/')) {
                 return this.width;
             }
             return undefined;
