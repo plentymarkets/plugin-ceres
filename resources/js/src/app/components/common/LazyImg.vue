@@ -5,8 +5,8 @@
         :data-picture-class="pictureClass"
         :data-alt="alt"
         :data-title="title"
-        :data-height="height"
-        :data-width="width"
+        :data-height="getHeight()"
+        :data-width="getWidth()"
         :id="uuid">
         <slot name="additionalimages"></slot>
         <source :srcset="defaultImageUrl" :type="mimeType(defaultImageUrl)">

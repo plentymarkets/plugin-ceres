@@ -37570,8 +37570,8 @@ var render = function() {
             "data-picture-class": _vm.pictureClass,
             "data-alt": _vm.alt,
             "data-title": _vm.title,
-            "data-height": _vm.height,
-            "data-width": _vm.width,
+            "data-height": _vm.getHeight(),
+            "data-width": _vm.getWidth(),
             id: _vm.uuid
           }
         },
