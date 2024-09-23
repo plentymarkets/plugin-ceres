@@ -566,14 +566,14 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
       return mime.lookup(url);
     },
     getHeight: function getHeight() {
-      if (this.height && this.height > 0 && this.imageUrl.includes('/full/')) {
+      if (this.height && this.height > 0 && this.defaultImageUrl.includes('/full/')) {
         return this.height;
       }
 
       return undefined;
     },
     getWidth: function getWidth() {
-      if (this.width && this.width > 0 && this.imageUrl.includes('/full/')) {
+      if (this.width && this.width > 0 && this.defaultImageUrl.includes('/full/')) {
         return this.width;
       }
 
