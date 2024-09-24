@@ -72,7 +72,7 @@
                 {%- if icon != "none" -%}
                     <i class="fa {{ icon }} ml-1" aria-hidden="true" style="line-height: inherit"></i>
                 {%- endif -%}
-                {{- text -}}  - {{ Twig.print("i") }}
+                {{ text }} - {{ Twig.print("i") }}
                 {{ Twig.do("set i = i + 1") }}
             </a>
         {{ Twig.endfor() }}
