@@ -59,7 +59,9 @@
 {{ Twig.elseif("real_url or trackingUrls") }}
     {% if url.value.mobile == 'tracking' %}
         <div class="widget widget-link widget-{{ appearance | default('primary') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}{% if outline %} btn-outline{% endif %}">
-        {{ Twig.for("trackingUrl", "trackingUrls") }}
+            {{ Twig.set('i', 1) }}
+
+            {{ Twig.for("trackingUrl", "trackingUrls") }}
             <a class="btn btn-appearance {{ buttonSize }}{% if block %} btn-block text-truncate{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                {% if linkRel != "none" %}rel="{{ linkRel }}"{% endif %}
                     {% if url.openInNewTab.mobile %} target="_blank"{% endif %}
@@ -70,7 +72,8 @@
                 {%- if icon != "none" -%}
                     <i class="fa {{ icon }} ml-1" aria-hidden="true" style="line-height: inherit"></i>
                 {%- endif -%}
-                {{- text -}}
+                {{- text -}} - {{ Twig.print("i") }}
+                {{ Twig.do("set i = i + 1") }}
             </a>
         {{ Twig.endfor() }}
         </div>
