@@ -41,7 +41,7 @@
 {% endif %}
 
 {{ Twig.if("#{ isPreview | json_encode }") }}
-<div class="widget cd widget-link widget-{{ appearance | default('primary') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}{% if outline %} btn-outline{% endif %}">
+<div class="widget widget-link widget-{{ appearance | default('primary') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}{% if outline %} btn-outline{% endif %}">
     <a class="btn btn-appearance {{ buttonSize }}{% if block %} btn-block text-truncate{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
        {% if linkRel != "none" %}rel="{{ linkRel }}"{% endif %}
        href="{{ Twig.print("real_url") }}"
@@ -58,11 +58,8 @@
 
 {{ Twig.elseif("real_url or trackingUrls") }}
     {% if url.value.mobile == 'tracking' %}
-        <div class="widget ab widget-link widget-{{ appearance | default('primary') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}{% if outline %} btn-outline{% endif %}">
+        <div class="widget widget-link widget-{{ appearance | default('primary') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}{% if outline %} btn-outline{% endif %}">
         {{ Twig.for("trackingUrl", "trackingUrls") }}
-            TESTOUTPUT
-            <!-- trackingUrl: {{ trackingUrl }} -->
-            <!-- trackingUrl: {{ Twig.print("trackingUrl") }} -->
             <a class="btn btn-appearance {{ buttonSize }}{% if block %} btn-block text-truncate{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                {% if linkRel != "none" %}rel="{{ linkRel }}"{% endif %}
                     {% if url.openInNewTab.mobile %} target="_blank"{% endif %}
@@ -78,7 +75,7 @@
         {{ Twig.endfor() }}
         </div>
     {% else %}
-        <div class="widget reb widget-link widget-{{ appearance | default('primary') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}{% if outline %} btn-outline{% endif %}">
+        <div class="widget widget-link widget-{{ appearance | default('primary') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}{% if outline %} btn-outline{% endif %}">
             <a class="btn btn-appearance {{ buttonSize }}{% if block %} btn-block text-truncate{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
                {% if linkRel != "none" %}rel="{{ linkRel }}"{% endif %}
                href="{{ Twig.print("real_url") }}"
