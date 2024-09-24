@@ -3,6 +3,12 @@
 ### Behoben
 
 - Bilder im AVIF-Format konnten im Hintergrundbild-Widget nicht ausgewählt werden. Dies wurde behoben, das Hintergrundbild-Widget zeigt jetzt ein Fallback-Eingabefeld an.
+- In manchen Fällen wurde das Bild im ImageBoxWidget nicht korrekt angezeigt. Dies wurde behoben.
+
+### Geändert
+
+- Der Favicon Typ wurde von `type="img/ico"` zu `type="image/x-icon"` geändert.
+- Die `height` und `width` Attribute werden nur auf der Artikeldetailseite für die Hauptbilder gesetzt.
 
 ## v5.0.67 (2024-09-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.66...5.0.67" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
