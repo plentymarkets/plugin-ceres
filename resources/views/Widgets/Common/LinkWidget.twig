@@ -40,36 +40,57 @@
     {% endif %}
 {% endif %}
 
-{{ Twig.if("real_url or trackingUrls or #{ isPreview | json_encode }") }}
+{{ Twig.if("#{ isPreview | json_encode }") }}
 <div class="widget widget-link widget-{{ appearance | default('primary') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}{% if outline %} btn-outline{% endif %}">
-    {% if url.value.mobile == 'tracking' %}
-        {{ Twig.for("trackingUrl", "trackingUrls") }}
-        <a class="btn btn-appearance {{ buttonSize }}{% if block %} btn-block text-truncate{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
-            {% if linkRel != "none" %}rel="{{ linkRel }}"{% endif %}
+    <a class="btn btn-appearance {{ buttonSize }}{% if block %} btn-block text-truncate{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+       {% if linkRel != "none" %}rel="{{ linkRel }}"{% endif %}
+       href="{{ Twig.print("real_url") }}"
             {% if url.openInNewTab.mobile %} target="_blank"{% endif %}
-            style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %} {% if inlinePadding | length > 0 %}{{ inlinePadding }}{% endif %}"
-            v-tooltip
-            :href="'{{ Twig.print("trackingUrl") }}'"
-            title="{{ linkTitle }}">
+       style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %} {% if inlinePadding | length > 0 %}{{ inlinePadding }}{% endif %}"
+       v-tooltip
+       title="{{ linkTitle }}">
+        {%- if icon != "none" -%}
+            <i class="fa {{ icon }} ml-1" aria-hidden="true" style="line-height: inherit"></i>
+        {%- endif -%}
+        {{- text -}}
+    </a>
+</div>
+
+{{ Twig.elseif("real_url or trackingUrls") }}
+    {% if url.value.mobile == 'tracking' %}
+        <div class="widget widget-link widget-{{ appearance | default('primary') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}{% if outline %} btn-outline{% endif %}">
+            {{ Twig.set('i', 1) }}
+
+            {{ Twig.for("trackingUrl", "trackingUrls") }}
+            <a class="btn btn-appearance {{ buttonSize }}{% if block %} btn-block text-truncate{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+               {% if linkRel != "none" %}rel="{{ linkRel }}"{% endif %}
+                    {% if url.openInNewTab.mobile %} target="_blank"{% endif %}
+               style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %} {% if inlinePadding | length > 0 %}{{ inlinePadding }}{% endif %}"
+               v-tooltip
+               :href="'{{ Twig.print("trackingUrl") }}'"
+               title="{{ linkTitle }}">
                 {%- if icon != "none" -%}
                     <i class="fa {{ icon }} ml-1" aria-hidden="true" style="line-height: inherit"></i>
                 {%- endif -%}
-               {{- text -}}
-        </a>
+                {{ text }} - {{ Twig.print("i") }}
+                {{ Twig.do("set i = i + 1") }}
+            </a>
         {{ Twig.endfor() }}
+        </div>
     {% else %}
-        <a class="btn btn-appearance {{ buttonSize }}{% if block %} btn-block text-truncate{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
-        {% if linkRel != "none" %}rel="{{ linkRel }}"{% endif %}
-        href="{{ Twig.print("real_url") }}"
-        {% if url.openInNewTab.mobile %} target="_blank"{% endif %}
-        style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %} {% if inlinePadding | length > 0 %}{{ inlinePadding }}{% endif %}"
-        v-tooltip
-        title="{{ linkTitle }}">
-            {%- if icon != "none" -%}
-                <i class="fa {{ icon }} ml-1" aria-hidden="true" style="line-height: inherit"></i>
-            {%- endif -%}
-            {{- text -}}
-        </a>
-    {% endif %}
-</div>
+        <div class="widget widget-link widget-{{ appearance | default('primary') }} {% if customClass | length > 0 %}{{ customClass }}{% endif %}{% if outline %} btn-outline{% endif %}">
+            <a class="btn btn-appearance {{ buttonSize }}{% if block %} btn-block text-truncate{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"
+               {% if linkRel != "none" %}rel="{{ linkRel }}"{% endif %}
+               href="{{ Twig.print("real_url") }}"
+                    {% if url.openInNewTab.mobile %} target="_blank"{% endif %}
+               style="{% if inlineMargin | length > 0 %}{{ inlineMargin }}{% endif %} {% if inlinePadding | length > 0 %}{{ inlinePadding }}{% endif %}"
+               v-tooltip
+               title="{{ linkTitle }}">
+                {%- if icon != "none" -%}
+                    <i class="fa {{ icon }} ml-1" aria-hidden="true" style="line-height: inherit"></i>
+                {%- endif -%}
+                {{- text -}}
+            </a>
+        </div>
+    {%- endif -%}
 {{ Twig.endif() }}
