@@ -1,14 +1,24 @@
 # Release Notes for plentyShop LTS
 
+## v5.0.68 (2024-09-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.67...5.0.68" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
+
 ### Fixed
 
-- In the Background Image widget, it wasn't possible to select AVIF images. This has been fixed by providing a fallback input field.
-- In some cases the image in the ImageBoxWidget was not displayed correctly. This has been fixed.
+- Images in AVIF format could not be selected in the background image widget. This has been fixed and the background image widget now displays a fallback input field.
+- In some cases the image and caption in the image box widget was not displayed correctly. This has been fixed.
 
 ### Changed
 
 - Changed favicon type from `type="img/ico"` to `type="image/x-icon"`.
-- The `height` and `width` attributes are only set on the single item page for the main images.
+- The `height` and `width` attributes are only used on article images if the image size `full` is used.
+
+### Changed Templates
+
+- In plentyShop LTS 5.0.68 we made changes to template files which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
 
 ## v5.0.67 (2024-09-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.66...5.0.67" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
