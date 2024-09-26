@@ -10,6 +10,7 @@
 
 - Images in AVIF format could not be selected in the background image widget. This has been fixed and the background image widget now displays a fallback input field.
 - In some cases the image and caption in the image box widget was not displayed correctly. This has been fixed.
+- The link widget was not displayed in the ShopBuilder if it was configured as a tracking link. This has been fixed.
 
 ### Changed
 
