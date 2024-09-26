@@ -10,6 +10,7 @@
 
 - Bilder im AVIF-Format konnten im Hintergrundbild-Widget nicht ausgewählt werden. Dies wurde behoben und das Hintergrundbild-Widget zeigt jetzt ein Fallback-Eingabefeld an.
 - In manchen Fällen wurde das Bild und die Bildunterschrift im ImageBoxWidget nicht korrekt angezeigt. Dies wurde behoben.
+- Das Link Widget wurde im ShopBuilder nicht angezeigt, wenn dieses als Tracking Link konfiguriert wurde. Dies wurde behoben.
 
 ### Geändert
 
