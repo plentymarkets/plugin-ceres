@@ -20,6 +20,11 @@
 
 - In plentyShop LTS 5.0.68 we made changes to template files which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
 
+- [resources/js/src/app/components/common/LazyImg.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.67...stable#diff-8bf1fff9b8d538ae75c4ee791deef3a8acfe72e5e0e678d1c49672b17d787a73)
+- [resources/views/PageDesign/Partials/Head.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.67...stable#diff-33a10158d672d50c9bc1c0e8a46fbd8edb701925dcb3f619c6ff6f8ca11e45ee)
+- [resources/views/Widgets/Common/ImageBoxWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.67...stable#diff-9f438954b9f177761379a8b382eea014077ec743060583796ac4f9aaed3d3003)
+- [resources/views/Widgets/Common/LinkWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.67...stable#diff-374f59a54ec3fcbe1d2444facbddd25c4f8a114e71b7576c9c34d7a20a2d122b)
+
 ## v5.0.67 (2024-09-10) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.66...5.0.67" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed
