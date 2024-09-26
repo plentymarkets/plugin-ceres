@@ -176,7 +176,10 @@
                             </noscript>
                         {% else %}
                             <picture data-alt="{{ Twig.print("altText") }}">
-                                <source srcset="{{ Twig.print("slide.imageUrl") }}" {{ Twig.if("slide.imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>
+                                <source
+                                    srcset="{{ Twig.print("slide.imageUrl") }}"
+                                    {{ Twig.if("slide.imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}
+                                    {{ Twig.if("slide.imageUrl matches '/.?(\\\\.avif)(?:$|\\\\?)/'") }} type="image/avif" {{ Twig.endif() }}>
                                 <img
                                     class="img-cover"
                                     src="{{ Twig.print("fallbackUrl") }}"
