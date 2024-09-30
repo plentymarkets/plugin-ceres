@@ -5,8 +5,8 @@
         :data-picture-class="pictureClass"
         :data-alt="alt"
         :data-title="title"
-        :data-height="height"
-        :data-width="width"
+        :data-height="getHeight()"
+        :data-width="getWidth()"
         :id="uuid">
         <slot name="additionalimages"></slot>
         <source :srcset="defaultImageUrl" :type="mimeType(defaultImageUrl)">
@@ -150,13 +150,13 @@ export default {
             return mime.lookup(url);
         },
         getHeight() {
-            if (this.height && this.height > 0) {
+            if (this.height && this.height > 0 && this.defaultImageUrl.includes('/full/')) {
                 return this.height;
             }
             return undefined;
         },
         getWidth() {
-            if (this.width && this.width > 0) {
+            if (this.width && this.width > 0 && this.defaultImageUrl.includes('/full/')) {
                 return this.width;
             }
             return undefined;

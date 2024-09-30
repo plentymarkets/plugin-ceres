@@ -120,7 +120,7 @@ class BackgroundWidget extends BaseWidget
 
 
         $settings->createFile('fallbackImagePath')
-            ->withCondition("sourceType === 'custom-image' && /.?(\.webp)(?:$|\?)/.test(customImagePath)")
+            ->withCondition("sourceType === 'custom-image' && /.?(\.webp|avif)(?:$|\?)/.test(customImagePath)")
             ->withName('Widget.backgroundFallbackImageSourceLabel')
             ->withTooltip('Widget.backgroundFallbackImageSourceTooltip')
             ->withAllowedExtensions(ImageBoxWidget::IMAGE_EXTENSIONS);
