@@ -43,7 +43,10 @@
                 {% if companyLogoUrl | trim | length > 0 %}
                     <a class="navbar-brand py-2" href="{{ Twig.print('urls.home') }}">
                         <picture data-alt="{{ Twig.print('trans("Ceres::Template.headerCompanyName")') }}">
-                            <source srcset="{{ companyLogoUrl }}"{% if companyLogoUrl matches '/.?(\\.webp)(?:$|\\?)/' %} type="image/webp"{% endif %}>
+                            <source
+                                srcset="{{ companyLogoUrl }}"
+                                {% if companyLogoUrl matches '/.?(\\.webp)(?:$|\\?)/' %} type="image/webp"{% endif %}
+                                {% if companyLogoUrl matches '/.?(\\.avif)(?:$|\\?)/' %} type="image/avif"{% endif %}>
                             <img
                                 class="img-fluid"
                                 src="{{ fallbackImagePath }}"
