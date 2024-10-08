@@ -1,5 +1,11 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.69 (YYYY-MM-DD) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.67...5.0.68" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- In ShopBuilder können jetzt Variablen genutzt werden, um bei Herstellern außerhalb der Europäischen Union den Namen, die Postanschrift und die elektronische Adresse des Verantwortlichen anzugeben.
+
 ## v5.0.68 (2024-09-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.67...5.0.68" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
