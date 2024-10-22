@@ -109,6 +109,7 @@ class DefaultSingleItemPreset implements ContentPreset
 
     private function createManufacturer()
     {
+
         $dataProvider = $this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::externalName',array('item.manufacturer.externalName'));
 
         $this->stickyContainer->createChild('sticky','Ceres::InlineTextWidget')
