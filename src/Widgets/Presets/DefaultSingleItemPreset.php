@@ -347,7 +347,7 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
             ->withSetting('text',$this->getShopBuilderDataFieldProvider(
-                'ManufacturerDataFieldProvider::name',
+                'ManufacturerDataFieldProvider',
                 array(
                     'manufacturer.name',
                     'manufacturer.externalName',
