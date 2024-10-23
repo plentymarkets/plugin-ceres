@@ -271,15 +271,20 @@ class DefaultSingleItemPreset implements ContentPreset
     private function createTabWidget()
     {
         $uuidGenerator = pluginApp(UniqueId::class);
-        $uuidTabDescription  = $uuidGenerator->generateUniqueId();
-        $uuidTabTechData     = $uuidGenerator->generateUniqueId();
-        $uuidTabMoreDetails  = $uuidGenerator->generateUniqueId();
+        $uuidTabDescription         = $uuidGenerator->generateUniqueId();
+        $uuidTabTechData            = $uuidGenerator->generateUniqueId();
+        $uuidTabMoreDetails         = $uuidGenerator->generateUniqueId();
+        $uuidEuResponsiblePerson    = $uuidGenerator->generateUniqueId();
         $titleTabDescription = $this->translator->trans("Ceres::Template.singleItemDescription");
         $titleTabTechData    = $this->translator->trans("Ceres::Template.singleItemTechnicalData");
         $titleTabMoreDetails = $this->translator->trans("Ceres::Template.singleItemMoreDetails");
-        $tabs = array(array('title' => $titleTabDescription,'uuid' => $uuidTabDescription),
-                      array('title' => $titleTabTechData, 'uuid' => $uuidTabTechData),
-                      array('title' => $titleTabMoreDetails, 'uuid' => $uuidTabMoreDetails));
+        $titleTabEuResponsiblePerson = $this->translator->trans("Ceres::Template.singleItemEuResponsiblePerson");
+        $tabs = array(
+            array('title' => $titleTabDescription,'uuid' => $uuidTabDescription),
+            array('title' => $titleTabTechData, 'uuid' => $uuidTabTechData),
+            array('title' => $titleTabMoreDetails, 'uuid' => $uuidTabMoreDetails),
+            array('title' => $titleTabEuResponsiblePerson, 'uuid' => $uuidEuResponsiblePerson),
+        );
 
         $this->tabWidget = $this->secondTwoColumnWidget->createChild('first', 'Ceres::TabWidget')
             ->withSetting('tabs', $tabs)
@@ -329,6 +334,19 @@ class DefaultSingleItemPreset implements ContentPreset
                                 "variation.weightNetG",
                                 "item.variationDimensions",
                                 "variation.customsTariffNumber"));
+
+        $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::InlineTextWidget')
+            ->withSetting('appearance','none')
+            ->withSetting('spacing.customPadding', true)
+            ->withSetting('spacing.padding.left.value', 0)
+            ->withSetting('spacing.padding.left.unit', null)
+            ->withSetting('spacing.padding.right.value', 0)
+            ->withSetting('spacing.padding.right.unit', null)
+            ->withSetting('spacing.padding.top.value', 0)
+            ->withSetting('spacing.padding.top.unit', null)
+            ->withSetting('spacing.padding.bottom.value', 0)
+            ->withSetting('spacing.padding.bottom.unit', null)
+            ->withSetting('text',$this->getShopBuilderDataFieldProvider('TextsDataFieldProvider::technicalData',array('texts.technicalData', null, null)));
     }
 
     private function createAttributeWidget()
