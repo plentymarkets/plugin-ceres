@@ -148,7 +148,7 @@ class WidgetCollection
         SeparatorWidget::class,
         TextWidget::class,
         TitleBarWidget::class,
-        ManufacturerDataWidget::class
+//        ManufacturerDataWidget::class
     ];
 
     const CONTACT_WIDGETS = [
