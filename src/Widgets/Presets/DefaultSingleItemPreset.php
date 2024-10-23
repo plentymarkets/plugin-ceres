@@ -346,14 +346,10 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.top.unit', null)
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
-            ->withSetting('text',$this->getShopBuilderDataFieldProvider(
-                'ManufacturerDataFieldProvider',
-                array(
-                    'manufacturer.externalName',
-                    'manufacturer.name',
-                    'manufacturer.logo'
-                )
-            ));
+
+            ->withSetting('text', $this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::name', array('manufacturer.name')))
+            ->withSetting('text', $this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::externalName', array('manufacturer.externalName')))
+            ->withSetting('text', $this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::logo', array('manufacturer.logo')));
     }
 
     private function createAttributeWidget()
