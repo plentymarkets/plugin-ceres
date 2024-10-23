@@ -69,7 +69,8 @@ class DefaultSingleItemPreset implements ContentPreset
         $this->createItemImageWidget();
         $this->createTabWidget();
         $this->createStickyContainer();
-        //$this->createManufacturer();
+        $this->createManufacturer();
+        $this->createManufacturerResponsibleName();
         $this->createNameHeader();
         $this->createTagsWidget();
         $this->createSeparatorWidget();
@@ -109,7 +110,6 @@ class DefaultSingleItemPreset implements ContentPreset
 
     private function createManufacturer()
     {
-
         $dataProvider = $this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::externalName',array('item.manufacturer.externalName'));
 
         $this->stickyContainer->createChild('sticky','Ceres::InlineTextWidget')
@@ -126,6 +126,26 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.bottom.unit', null)
             ->withSetting('text', $dataProvider);
     }
+
+    private function createManufacturerResponsibleName()
+    {
+        $dataProvider = $this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::responsibleName', array('manufacturer.responsibleName'));
+
+        $this->stickyContainer->createChild('sticky','Ceres::InlineTextWidget')
+            ->withSetting('appearance','none')
+            ->withSetting('customClass', 'producertag h6 producer text-muted')
+            ->withSetting('spacing.customPadding', true)
+            ->withSetting('spacing.padding.left.value', 0)
+            ->withSetting('spacing.padding.left.unit', null)
+            ->withSetting('spacing.padding.right.value', 0)
+            ->withSetting('spacing.padding.right.unit', null)
+            ->withSetting('spacing.padding.top.value', 0)
+            ->withSetting('spacing.padding.top.unit', null)
+            ->withSetting('spacing.padding.bottom.value', 2)
+            ->withSetting('spacing.padding.bottom.unit', null)
+            ->withSetting('text', $dataProvider);
+    }
+
     private function createNameHeader()
     {
         $itemName = '';
