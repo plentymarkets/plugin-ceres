@@ -296,6 +296,19 @@ class DefaultSingleItemPreset implements ContentPreset
             array('title' => $titleTabEuResponsiblePerson, 'uuid' => $uuidEuResponsiblePerson),
         );
 
+        $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::ManufacturerDataWidget')
+            ->withSetting('appearance','none')
+            ->withSetting('spacing.customPadding', true)
+            ->withSetting('spacing.padding.left.value', 0)
+            ->withSetting('spacing.padding.left.unit', null)
+            ->withSetting('spacing.padding.right.value', 0)
+            ->withSetting('spacing.padding.right.unit', null)
+            ->withSetting('spacing.padding.top.value', 0)
+            ->withSetting('spacing.padding.top.unit', null)
+            ->withSetting('spacing.padding.bottom.value', 0)
+            ->withSetting('spacing.padding.bottom.unit', null)
+            ->withSetting('text',$this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider', array('manufacturer.responsibleName', null, null)));
+
         $this->tabWidget = $this->secondTwoColumnWidget->createChild('first', 'Ceres::TabWidget')
             ->withSetting('tabs', $tabs)
             ->withSetting('spacing.customMargin', true)

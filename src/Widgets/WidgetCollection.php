@@ -39,6 +39,7 @@ use Ceres\Widgets\Common\LinkListWidget;
 use Ceres\Widgets\Common\LinkWidget;
 use Ceres\Widgets\Common\ListWidget;
 use Ceres\Widgets\Common\LiveShoppingWidget;
+use Ceres\Widgets\Common\ManufacturerDataWidget;
 use Ceres\Widgets\Common\NewsletterUnsubscribeWidget;
 use Ceres\Widgets\Common\NewsletterWidget;
 use Ceres\Widgets\Common\PrintButtonWidget;
@@ -146,7 +147,8 @@ class WidgetCollection
         PrivacySettingsWidget::class,
         SeparatorWidget::class,
         TextWidget::class,
-        TitleBarWidget::class
+        TitleBarWidget::class,
+        ManufacturerDataWidget::class
     ];
 
     const CONTACT_WIDGETS = [
