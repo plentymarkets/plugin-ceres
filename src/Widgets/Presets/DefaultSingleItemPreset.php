@@ -349,8 +349,8 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('text',$this->getShopBuilderDataFieldProvider(
                 'ManufacturerDataFieldProvider',
                 array(
-                    'manufacturer.name',
                     'manufacturer.externalName',
+                    'manufacturer.name',
                     'manufacturer.logo'
                 )
             ));
