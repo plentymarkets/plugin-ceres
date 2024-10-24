@@ -40,7 +40,7 @@ class SeoConfig
     private static $siteMapOptions = [
         "siteMapContentCategory" => "contentCategory",
         "siteMapItemCategory"    => "itemCategory",
-        "siteMapItemImage"       => "itemImage",
+        "siteMapItemImage"      => "itemImage",
         "siteMapItem"            => "item",
         "siteMapBlog"            => "blog",
     ];
