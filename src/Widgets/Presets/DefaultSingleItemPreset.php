@@ -362,7 +362,7 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.top.unit', null)
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
-            ->withSetting('text', "item_data_field('item.manufacturer.responsibleEmail')");
+            ->withSetting('text', "{{ item_data_field('item.manufacturer.responsibleEmail') }}");
     }
 
     private function createAttributeWidget()
