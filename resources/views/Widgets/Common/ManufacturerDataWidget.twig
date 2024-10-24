@@ -1,3 +1,7 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-<h1>Asdf</h1>
+{% set customMargin = widget.settings.customMargin.mobile %}
+{% set margin         = widget.settings.margin.mobile %}
+
+<h1>{{ customMargin }}</h1>
+<h1>{{ margin }}</h1>
