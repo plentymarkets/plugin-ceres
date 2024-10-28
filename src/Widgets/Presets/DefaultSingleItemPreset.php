@@ -360,7 +360,19 @@ class DefaultSingleItemPreset implements ContentPreset
                     "item.variationDimensions",
                     "variation.customsTariffNumber"));
 
-        $euResponsiblePersonTab = $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::ManufacturerDataWidget')
+//        $euResponsiblePersonTab = $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::ManufacturerDataWidget')
+//            ->withSetting('appearance','none')
+//            ->withSetting('spacing.customPadding', true)
+//            ->withSetting('spacing.padding.left.value', 0)
+//            ->withSetting('spacing.padding.left.unit', null)
+//            ->withSetting('spacing.padding.right.value', 0)
+//            ->withSetting('spacing.padding.right.unit', null)
+//            ->withSetting('spacing.padding.top.value', 0)
+//            ->withSetting('spacing.padding.top.unit', null)
+//            ->withSetting('spacing.padding.bottom.value', 0)
+//            ->withSetting('spacing.padding.bottom.unit', null);
+
+        $this->generateEUManufacturerField($this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::ManufacturerDataWidget')
             ->withSetting('appearance','none')
             ->withSetting('spacing.customPadding', true)
             ->withSetting('spacing.padding.left.value', 0)
@@ -370,15 +382,13 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.top.value', 0)
             ->withSetting('spacing.padding.top.unit', null)
             ->withSetting('spacing.padding.bottom.value', 0)
-            ->withSetting('spacing.padding.bottom.unit', null);
-
-        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_NAME, $uuidEuResponsiblePerson);
-        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_STREET, $uuidEuResponsiblePerson);
-        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_HOUSE_NO, $uuidEuResponsiblePerson);
-        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_POST_CODE, $uuidEuResponsiblePerson);
-        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_TOWN, $uuidEuResponsiblePerson);
-        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_COUNTRY, $uuidEuResponsiblePerson);
-        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_EMAIL, $uuidEuResponsiblePerson);
+            ->withSetting('spacing.padding.bottom.unit', null), ManufacturerDataFieldProvider::RESPONSIBLE_NAME, $uuidEuResponsiblePerson);
+//        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_STREET, $uuidEuResponsiblePerson);
+//        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_HOUSE_NO, $uuidEuResponsiblePerson);
+//        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_POST_CODE, $uuidEuResponsiblePerson);
+//        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_TOWN, $uuidEuResponsiblePerson);
+//        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_COUNTRY, $uuidEuResponsiblePerson);
+//        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_EMAIL, $uuidEuResponsiblePerson);
     }
 
     private function createAttributeWidget()
