@@ -370,8 +370,7 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.top.value', 0)
             ->withSetting('spacing.padding.top.unit', null)
             ->withSetting('spacing.padding.bottom.value', 0)
-            ->withSetting('spacing.padding.bottom.unit', null)
-            ->withSetting('text', "{{ item_data_field('item.manufacturer.responsibleEmail,item.manufacturer.responsibleStreet') }}");
+            ->withSetting('spacing.padding.bottom.unit', null);
 
         $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_NAME, $uuidEuResponsiblePerson);
         $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_STREET, $uuidEuResponsiblePerson);
