@@ -71,6 +71,15 @@ class DefaultSingleItemPreset implements ContentPreset
         $this->createTabWidget();
         $this->createStickyContainer();
         $this->createManufacturer();
+
+//        $this->generateEUManufacturerField(ManufacturerDataFieldProvider::RESPONSIBLE_NAME);
+//        $this->generateEUManufacturerField(ManufacturerDataFieldProvider::RESPONSIBLE_STREET);
+//        $this->generateEUManufacturerField(ManufacturerDataFieldProvider::RESPONSIBLE_HOUSE_NO);
+//        $this->generateEUManufacturerField(ManufacturerDataFieldProvider::RESPONSIBLE_POST_CODE);
+//        $this->generateEUManufacturerField(ManufacturerDataFieldProvider::RESPONSIBLE_TOWN);
+//        $this->generateEUManufacturerField(ManufacturerDataFieldProvider::RESPONSIBLE_COUNTRY);
+//        $this->generateEUManufacturerField(ManufacturerDataFieldProvider::RESPONSIBLE_EMAIL);
+
         $this->createNameHeader();
         $this->createTagsWidget();
         $this->createSeparatorWidget();
@@ -351,7 +360,7 @@ class DefaultSingleItemPreset implements ContentPreset
                     "item.variationDimensions",
                     "variation.customsTariffNumber"));
 
-        $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::ManufacturerDataWidget')
+        $euResponsiblePersonTab = $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::ManufacturerDataWidget')
             ->withSetting('appearance','none')
             ->withSetting('spacing.customPadding', true)
             ->withSetting('spacing.padding.left.value', 0)
@@ -363,6 +372,14 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
             ->withSetting('text', "{{ item_data_field('item.manufacturer.responsibleEmail,item.manufacturer.responsibleStreet') }}");
+
+        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_NAME, $uuidEuResponsiblePerson);
+        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_STREET, $uuidEuResponsiblePerson);
+        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_HOUSE_NO, $uuidEuResponsiblePerson);
+        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_POST_CODE, $uuidEuResponsiblePerson);
+        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_TOWN, $uuidEuResponsiblePerson);
+        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_COUNTRY, $uuidEuResponsiblePerson);
+        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_EMAIL, $uuidEuResponsiblePerson);
     }
 
     private function createAttributeWidget()
@@ -385,6 +402,30 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.margin.top.unit', null)
             ->withSetting('spacing.margin.right.value', 1)
             ->withSetting('spacing.margin.right.unit', null);
+    }
+
+    private function generateEUManufacturerField($euResponsiblePersonTab,
+                                                 string $manufacturerField,
+                                                 string $uuidEuResponsiblePerson): void
+    {
+        $dataProvider = $this->getShopBuilderDataFieldProvider(
+            'ManufacturerDataFieldProvider::' . $manufacturerField,
+            array('manufacturer.' . $manufacturerField)
+        );
+
+        $euResponsiblePersonTab->createChild($uuidEuResponsiblePerson,'Ceres::InlineTextWidget')
+            ->withSetting('appearance','none')
+            ->withSetting('customClass', 'producertag h6 producer text-muted')
+            ->withSetting('spacing.customPadding', true)
+            ->withSetting('spacing.padding.left.value', 0)
+            ->withSetting('spacing.padding.left.unit', null)
+            ->withSetting('spacing.padding.right.value', 0)
+            ->withSetting('spacing.padding.right.unit', null)
+            ->withSetting('spacing.padding.top.value', 0)
+            ->withSetting('spacing.padding.top.unit', null)
+            ->withSetting('spacing.padding.bottom.value', 2)
+            ->withSetting('spacing.padding.bottom.unit', null)
+            ->withSetting('text', $dataProvider);
     }
 
     private function getShopBuilderDataFieldProvider($provider,$itemDataFields)
