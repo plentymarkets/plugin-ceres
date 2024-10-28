@@ -341,7 +341,7 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.top.unit', null)
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
-            ->withSetting('text',$this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::technicalData',array('manufacturer.technicalData', null, null)));
+            ->withSetting('text',$this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::responsibleEmail',array('manufacturer.technicalData', null, null)));
 
         $this->tabWidget->createChild($uuidTabMoreDetails, 'Ceres::ItemDataTableWidget')
             ->withSetting('itemInformation',
