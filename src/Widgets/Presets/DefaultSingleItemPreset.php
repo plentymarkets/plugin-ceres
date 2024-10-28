@@ -330,7 +330,7 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.bottom.unit', null)
             ->withSetting('text',$this->getShopBuilderDataFieldProvider('TextsDataFieldProvider::technicalData',array('texts.technicalData', null, null)));
 
-        $this->tabWidget->createChild($uuidTabTechData, 'Ceres::InlineTextWidget')
+        $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::InlineTextWidget')
             ->withSetting('appearance','none')
             ->withSetting('spacing.customPadding', true)
             ->withSetting('spacing.padding.left.value', 0)
@@ -341,19 +341,22 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.top.unit', null)
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
-            ->withSetting('text',$this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::responsibleEmail',array('manufacturer.responsibleEmail', null, null)));
+            ->withSetting('text',$this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::technicalData',array('manufacturer.technicalData', null, null)));
 
-        $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::ManufacturerDataWidget')
-            ->withSetting('appearance','none')
-            ->withSetting('spacing.customPadding', true)
-            ->withSetting('spacing.padding.left.value', 0)
-            ->withSetting('spacing.padding.left.unit', null)
-            ->withSetting('spacing.padding.right.value', 0)
-            ->withSetting('spacing.padding.right.unit', null)
-            ->withSetting('spacing.padding.top.value', 0)
-            ->withSetting('spacing.padding.top.unit', null)
-            ->withSetting('spacing.padding.bottom.value', 0)
-            ->withSetting('spacing.padding.bottom.unit', null);
+        $this->tabWidget->createChild($uuidTabMoreDetails, 'Ceres::ItemDataTableWidget')
+            ->withSetting('itemInformation',
+                            array("item.id",
+                                "item.condition.names.name",
+                                "item.ageRestriction",
+                                "variation.externalId",
+                                "variation.model",
+                                "item.manufacturer.externalName",
+                                "item.producingCountry.names.name",
+                                "unit.names.name",
+                                "variation.weightG",
+                                "variation.weightNetG",
+                                "item.variationDimensions",
+                                "variation.customsTariffNumber"));
 
 //        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_NAME, $uuidEuResponsiblePerson);
 //        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_STREET, $uuidEuResponsiblePerson);
