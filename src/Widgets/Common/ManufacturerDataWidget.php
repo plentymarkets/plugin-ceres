@@ -41,26 +41,7 @@ class ManufacturerDataWidget extends BaseWidget
 
         $settings->createCustomClass();
         $settings->createAppearance(true);
-        $settings->createCodeEditor("text")
-            ->withName("Widget.textCodeEditorLabel");
-
-        $settings->createCheckbox('customPadding')
-            ->withName('Widget.widgetCustomPadding');
-
-        $settings->createSetting('padding')
-            ->withType('spacing')
-            ->withCondition('!!customPadding')
-            ->withOption('units', ['px', 'rem'])
-            ->withOption('direction', 'all');
-
-        $settings->createCheckbox('customMargin')
-            ->withName('Widget.widgetCustomMargin');
-
-        $settings->createSetting('margin')
-            ->withType('spacing')
-            ->withCondition('!!customMargin')
-            ->withOption('units', ['px', 'rem'])
-            ->withOption('direction', 'all');
+        $settings->createSpacing();
 
         return $settings->toArray();
     }

@@ -1,5 +1,59 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-{% set text = widget.settings.text.mobile %}
+{% set customClass = widget.settings.customClass.mobile %}
+{% set email         = widget.settings.email.mobile %}
+{% set country         = widget.settings.country.mobile %}
+{% set appearance   = widget.settings.appearance.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 
-<h1>Alt text aici: {{ text | raw }}</h1>
+{% if not isPreview %}
+    {# prevent hydration errors for invalid HTML (SSR) #}
+<lazy-hydrate never>
+    {% endif %}
+
+    <div class="widget widget-text widget-{{ appearance | default('none') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"{% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+        <div class="widget-inner bg-appearance{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}{{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview, "widget-inline-text") }}>
+            {% if isPreview %}
+                {{ WidgetHelper.editableTwig(isPreview, email | raw) }}
+            {% else %}
+                {{ email | raw }}
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="widget widget-text widget-{{ appearance | default('none') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"{% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+        <div class="widget-inner bg-appearance{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}{{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview, "widget-inline-text") }}>
+            {% if isPreview %}
+                {{ WidgetHelper.editableTwig(isPreview, country | raw) }}
+            {% else %}
+                {{ country | raw }}
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="widget widget-text widget-{{ appearance | default('none') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"{% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+        <div class="widget-inner bg-appearance{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}{{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview, "widget-inline-text") }}>
+            {% if isPreview %}
+                {{ WidgetHelper.editableTwig(isPreview, email | raw) }}
+            {% else %}
+                {{ email | raw }}
+            {% endif %}
+        </div>
+
+        <div class="widget-inner bg-appearance{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}{{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview, "widget-inline-text") }}>
+            {% if isPreview %}
+                {{ WidgetHelper.editableTwig(isPreview, country | raw) }}
+            {% else %}
+                {{ country | raw }}
+            {% endif %}
+        </div>
+    </div>
+
+    {% if not isPreview %}
+    {# prevent hydration errors for invalid HTML (SSR) #}
+</lazy-hydrate>
+{% endif %}

@@ -330,7 +330,7 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.bottom.unit', null)
             ->withSetting('text',$this->getShopBuilderDataFieldProvider('TextsDataFieldProvider::technicalData',array('texts.technicalData', null, null)));
 
-        $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::InlineTextWidget')
+        $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::ManufacturerDataWidget')
             ->withSetting('appearance','none')
             ->withSetting('spacing.customPadding', true)
             ->withSetting('spacing.padding.left.value', 0)
@@ -341,7 +341,8 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.top.unit', null)
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
-            ->withSetting('text',$this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::responsibleEmail',array('manufacturer.technicalData', null, null)));
+            ->withSetting('email',$this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::responsibleEmail',array('manufacturer.technicalData', null, null)))
+            ->withSetting('country',$this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::responsibleCountry',array('manufacturer.responsibleCountry', null, null)));
 
         $this->tabWidget->createChild($uuidTabMoreDetails, 'Ceres::ItemDataTableWidget')
             ->withSetting('itemInformation',
