@@ -30,6 +30,8 @@ class ManufacturerDataFieldProvider extends DataFieldProvider
     public const RESPONSIBLE_COUNTRY   = 'responsibleCountry';
     /** @var string */
     public const RESPONSIBLE_EMAIL     = 'responsibleEmail';
+    /** @var string */
+    public const RESPONSIBLE_PHONE     = 'responsiblePhoneNo';
 
         /**
      * Registers item data fields for use in the ShopBuilder.
@@ -47,5 +49,6 @@ class ManufacturerDataFieldProvider extends DataFieldProvider
         $this->addField(self::RESPONSIBLE_TOWN, "Ceres::Widget.dataFieldManufacturerResponsibleTown", "item_data_field('item.manufacturer.responsibleTown')");
         $this->addField(self::RESPONSIBLE_COUNTRY, "Ceres::Widget.dataFieldManufacturerResponsibleCountry", "item_data_field('item.manufacturer.responsibleCountry')");
         $this->addField(self::RESPONSIBLE_EMAIL, "Ceres::Widget.dataFieldManufacturerResponsibleEmail", "item_data_field('item.manufacturer.responsibleEmail')");
+        $this->addField(self::RESPONSIBLE_PHONE, "Ceres::Widget.dataFieldManufacturerResponsibleEmail", "item_data_field('item.manufacturer.responsibleEmail')");
     }
 }

@@ -4,7 +4,7 @@
 
 ### Added
 
-- When selling items by manufacturers outside the European Union, you can now use ShopBuilder variables to insert the name, address, and email of the person responsible.
+- When selling items by manufacturers outside the European Union, you can now use ShopBuilder variables to insert the name, address, email, and phone number of the person responsible.
 
 ## v5.0.68 (2024-09-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.67...5.0.68" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
