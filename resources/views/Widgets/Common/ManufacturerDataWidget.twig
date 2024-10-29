@@ -16,7 +16,7 @@
     {% endif %}
 
     <div class="widget widget-text widget-{{ appearance | default('none') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"{% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-        <div class="widget-inner bg-appearance{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}{{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview, "widget-inline-text") }}>
+        <div class="first widget-inner bg-appearance{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}{{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview, "widget-inline-text") }}>
             {% if isPreview %}
                 {{ WidgetHelper.editableTwig(isPreview, email | raw) }}
             {% else %}
@@ -26,7 +26,7 @@
     </div>
 
     <div class="widget widget-text widget-{{ appearance | default('none') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"{% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-        <div class="widget-inner bg-appearance{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}{{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview, "widget-inline-text") }}>
+        <div class="second widget-inner bg-appearance{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}{{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview, "widget-inline-text") }}>
             {% if isPreview %}
                 {{ WidgetHelper.editableTwig(isPreview, country | raw) }}
             {% else %}
@@ -36,7 +36,7 @@
     </div>
 
     <div class="widget widget-text widget-{{ appearance | default('none') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"{% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-        <div class="widget-inner bg-appearance{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}{{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview, "widget-inline-text") }}>
+        <div class="third widget-inner bg-appearance{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}{{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview, "widget-inline-text") }}>
             {% if isPreview %}
                 {{ WidgetHelper.editableTwig(isPreview, email | raw) }}
             {% else %}
@@ -44,7 +44,7 @@
             {% endif %}
         </div>
 
-        <div class="widget-inner bg-appearance{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}{{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview, "widget-inline-text") }}>
+        <div class="fourth widget-inner bg-appearance{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}{{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview, "widget-inline-text") }}>
             {% if isPreview %}
                 {{ WidgetHelper.editableTwig(isPreview, country | raw) }}
             {% else %}
