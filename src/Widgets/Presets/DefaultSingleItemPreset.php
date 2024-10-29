@@ -337,7 +337,7 @@ class DefaultSingleItemPreset implements ContentPreset
                 "variation.customsTariffNumber"
             ]);
 
-        $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::ManufacturerDataWidget')
+        $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::InlineTextWidget')
             ->withSetting('appearance','none')
             ->withSetting('spacing.customPadding', true)
             ->withSetting('spacing.padding.left.value', 0)
@@ -357,7 +357,7 @@ class DefaultSingleItemPreset implements ContentPreset
             );
 
         foreach (ManufacturerDataFieldProvider::getFields() as $field) {
-            $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::ManufacturerDataWidget')
+            $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::InlineTextWidget')
                 ->withSetting('appearance','none')
                 ->withSetting('spacing.customPadding', true)
                 ->withSetting('spacing.padding.left.value', 0)
