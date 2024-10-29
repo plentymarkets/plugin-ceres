@@ -360,9 +360,7 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('email', $this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::responsibleEmail',array('item.manufacturer.email', null, null)))
             ->withSetting('country', $this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::responsibleCountry', ['item.manufacturer.responsibleCountry', null, null]));
 
-        print_r($manufacturerWidget);
-        print_r($this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::responsibleEmail',array('item.manufacturer.email', null, null)));
-        print_r($this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::responsibleCountry', ['item.manufacturer.responsibleCountry', null, null]));
+
         $uuidOne    = $uuidGenerator->generateUniqueId();
         $manufacturerWidget->createChild($uuidOne, 'Ceres::ManufacturerDataWidget')
             ->withSetting('country', $this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::responsibleCountry', ['item.manufacturer.responsibleCountry', null, null]));
