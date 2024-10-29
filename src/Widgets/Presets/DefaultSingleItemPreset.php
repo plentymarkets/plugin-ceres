@@ -352,7 +352,7 @@ class DefaultSingleItemPreset implements ContentPreset
                 'text',
                 $this->getShopBuilderDataFieldProvider(
                     'ManufacturerDataFieldProvider::responsibleEmail',
-                    ['item.manufacturer.email', null, null]
+                    ['item.manufacturer.responsibleEmail', null, null]
                 )
             );
 
