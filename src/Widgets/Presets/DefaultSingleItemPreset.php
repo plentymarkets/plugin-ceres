@@ -346,7 +346,7 @@ class DefaultSingleItemPreset implements ContentPreset
                 "variation.customsTariffNumber"
             ]);
 
-        $manufacturerWidget = $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::ManufacturerDataWidget')
+        $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::ManufacturerDataWidget')
             ->withSetting('appearance','none')
             ->withSetting('spacing.customPadding', true)
             ->withSetting('spacing.padding.left.value', 0)
@@ -357,14 +357,24 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.top.unit', null)
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
-            ->withSetting('email', $this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::responsibleEmail',array('item.manufacturer.email', null, null)))
-            ->withSetting('country', $this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::responsibleCountry', ['item.manufacturer.responsibleCountry', null, null]));
+            ->withSetting(
+                'text',
+                $this->getShopBuilderDataFieldProvider(
+                    'ManufacturerDataFieldProvider::responsibleEmail',
+                    ['item.manufacturer.email', null, null]
+                )
+            );
 
+        $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::ManufacturerDataWidget')
+            ->withSetting(
+                'text',
+                $this->getShopBuilderDataFieldProvider(
+                    'ManufacturerDataFieldProvider::responsibleTown',
+                    ['item.manufacturer.responsibleTown', null, null]
+                )
+            );;
 
-        $uuidOne    = $uuidGenerator->generateUniqueId();
-        $manufacturerWidget->createChild($uuidOne, 'Ceres::ManufacturerDataWidget')
-            ->withSetting('country', $this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::responsibleCountry', ['item.manufacturer.responsibleCountry', null, null]));
-    }
+   }
 
     private function createAttributeWidget()
     {

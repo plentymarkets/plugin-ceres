@@ -1,8 +1,7 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {% set customClass = widget.settings.customClass.mobile %}
-{% set email         = widget.settings.email.mobile %}
-{% set country         = widget.settings.country.mobile %}
+{% set text         = widget.settings.text.mobile %}
 {% set appearance   = widget.settings.appearance.mobile %}
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
@@ -16,39 +15,11 @@
     {% endif %}
 
     <div class="widget widget-text widget-{{ appearance | default('none') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"{% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-        <div class="first widget-inner bg-appearance{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}{{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview, "widget-inline-text") }}>
+        <div class="widget-inner bg-appearance{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}{{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview, "widget-inline-text") }}>
             {% if isPreview %}
-                {{ WidgetHelper.editableTwig(isPreview, email | raw) }}
+                {{ WidgetHelper.editableTwig(isPreview, text | raw) }}
             {% else %}
-                {{ email | raw }}
-            {% endif %}
-        </div>
-    </div>
-
-    <div class="widget widget-text widget-{{ appearance | default('none') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"{% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-        <div class="second widget-inner bg-appearance{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}{{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview, "widget-inline-text") }}>
-            {% if isPreview %}
-                {{ WidgetHelper.editableTwig(isPreview, country | raw) }}
-            {% else %}
-                {{ country | raw }}
-            {% endif %}
-        </div>
-    </div>
-
-    <div class="widget widget-text widget-{{ appearance | default('none') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}"{% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-        <div class="third widget-inner bg-appearance{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}{{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview, "widget-inline-text") }}>
-            {% if isPreview %}
-                {{ WidgetHelper.editableTwig(isPreview, email | raw) }}
-            {% else %}
-                {{ email | raw }}
-            {% endif %}
-        </div>
-
-        <div class="fourth widget-inner bg-appearance{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}"{% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}{{ WidgetHelper.makeEditable("text", TOOLBAR_LAYOUT.ALL, isPreview, "widget-inline-text") }}>
-            {% if isPreview %}
-                {{ WidgetHelper.editableTwig(isPreview, country | raw) }}
-            {% else %}
-                {{ country | raw }}
+                {{ text | raw }}
             {% endif %}
         </div>
     </div>
