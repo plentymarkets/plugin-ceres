@@ -330,7 +330,23 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.bottom.unit', null)
             ->withSetting('text',$this->getShopBuilderDataFieldProvider('TextsDataFieldProvider::technicalData',array('texts.technicalData', null, null)));
 
-        $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::ManufacturerDataWidget')
+        $this->tabWidget->createChild($uuidTabMoreDetails, 'Ceres::ItemDataTableWidget')
+            ->withSetting('itemInformation', [
+                "item.id",
+                "item.condition.names.name",
+                "item.ageRestriction",
+                "variation.externalId",
+                "variation.model",
+                "item.manufacturer.externalName",
+                "item.producingCountry.names.name",
+                "unit.names.name",
+                "variation.weightG",
+                "variation.weightNetG",
+                "item.variationDimensions",
+                "variation.customsTariffNumber"
+            ]);
+
+        $manufacturerWidget = $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::ManufacturerDataWidget')
             ->withSetting('appearance','none')
             ->withSetting('spacing.customPadding', true)
             ->withSetting('spacing.padding.left.value', 0)
@@ -341,31 +357,15 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.top.unit', null)
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
-            ->withSetting('email',$this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::responsibleEmail',array('item.manufacturer.email', null, null)))
-            ->withSetting('country',$this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::responsibleCountry',array('item.manufacturer.responsibleCountry', null, null)));
+            ->withSetting('email', $this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::responsibleEmail',array('item.manufacturer.email', null, null)))
+            ->withSetting('country', $this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::responsibleCountry', ['item.manufacturer.responsibleCountry', null, null]));
 
-        $this->tabWidget->createChild($uuidTabMoreDetails, 'Ceres::ItemDataTableWidget')
-            ->withSetting('itemInformation',
-                            array("item.id",
-                                "item.condition.names.name",
-                                "item.ageRestriction",
-                                "variation.externalId",
-                                "variation.model",
-                                "item.manufacturer.externalName",
-                                "item.producingCountry.names.name",
-                                "unit.names.name",
-                                "variation.weightG",
-                                "variation.weightNetG",
-                                "item.variationDimensions",
-                                "variation.customsTariffNumber"));
-
-//        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_NAME, $uuidEuResponsiblePerson);
-//        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_STREET, $uuidEuResponsiblePerson);
-//        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_HOUSE_NO, $uuidEuResponsiblePerson);
-//        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_POST_CODE, $uuidEuResponsiblePerson);
-//        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_TOWN, $uuidEuResponsiblePerson);
-//        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_COUNTRY, $uuidEuResponsiblePerson);
-//        $this->generateEUManufacturerField($euResponsiblePersonTab, ManufacturerDataFieldProvider::RESPONSIBLE_EMAIL, $uuidEuResponsiblePerson);
+        var_dump($manufacturerWidget);
+        var_dump($this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::responsibleEmail',array('item.manufacturer.email', null, null)));
+        var_dump($this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::responsibleCountry', ['item.manufacturer.responsibleCountry', null, null]));
+        $uuidOne    = $uuidGenerator->generateUniqueId();
+        $manufacturerWidget->createChild($uuidOne, 'Ceres::ManufacturerDataWidget')
+            ->withSetting('country', $this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::responsibleCountry', ['item.manufacturer.responsibleCountry', null, null]));
     }
 
     private function createAttributeWidget()
