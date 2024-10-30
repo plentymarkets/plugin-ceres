@@ -337,6 +337,22 @@ class DefaultSingleItemPreset implements ContentPreset
                 "variation.customsTariffNumber"
             ]);
 
+        $euResponsiblePersonDescription = '<h2>'.$this->translator->trans("Ceres::Template.singleItemEuResponsiblePersonTitle").'</h2>';
+        $euResponsiblePersonDescription .= '<p>'.$this->translator->trans("Ceres::Template.singleItemEuResponsiblePersonBody").'</p>';
+
+        $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::InlineTextWidget')
+            ->withSetting('appearance','none')
+            ->withSetting('spacing.customPadding', true)
+            ->withSetting('spacing.padding.left.value', 0)
+            ->withSetting('spacing.padding.left.unit', null)
+            ->withSetting('spacing.padding.right.value', 0)
+            ->withSetting('spacing.padding.right.unit', null)
+            ->withSetting('spacing.padding.top.value', 0)
+            ->withSetting('spacing.padding.top.unit', null)
+            ->withSetting('spacing.padding.bottom.value', 0)
+            ->withSetting('spacing.padding.bottom.unit', null)
+            ->withSetting('text', $euResponsiblePersonDescription);
+
         foreach (ManufacturerDataFieldProvider::getFields() as $field) {
             $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::InlineTextWidget')
                 ->withSetting('appearance','none')
