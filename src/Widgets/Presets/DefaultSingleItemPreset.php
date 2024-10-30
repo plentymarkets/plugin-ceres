@@ -337,8 +337,8 @@ class DefaultSingleItemPreset implements ContentPreset
                 "variation.customsTariffNumber"
             ]);
 
-        $euResponsiblePersonDescription = '<h2>'.$this->translator->trans("Ceres::Template.singleItemEuResponsiblePersonTitle").'</h2>';
-        $euResponsiblePersonDescription .= '<p>'.$this->translator->trans("Ceres::Template.singleItemEuResponsiblePersonBody").'</p>';
+        $euResponsiblePersonDescription = '<h3>'.$this->translator->trans("Ceres::Template.singleItemEuResponsiblePersonTitle").'</h3>';
+        $euResponsiblePersonDescription .= '<p>'.$this->translator->trans("Ceres::Template.singleItemEuResponsiblePersonBody").'</p><br>';
 
         $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::InlineTextWidget')
             ->withSetting('appearance','none')
