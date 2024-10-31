@@ -63,6 +63,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -92,6 +100,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     inactiveVariationIds: function inactiveVariationIds(state) {
       return state.wishList.inactiveVariationIds;
+    },
+    showNetPrices: function showNetPrices(state) {
+      return state.basket.showNetPrices;
     }
   }),
   mounted: function mounted() {
@@ -540,7 +551,57 @@ var render = function() {
           ])
         : _vm._e(),
       _vm._v(" "),
-      _vm.isLoading ? _c("loading-animation") : _vm._e()
+      _vm.isLoading ? _c("loading-animation") : _vm._e(),
+      _vm._v(" "),
+      _c("div", { staticClass: "vat small text-muted" }, [
+        _vm._v(
+          "\n    " +
+            _vm._s(_vm.$translate("Ceres::Template.itemFootnote")) +
+            " "
+        ),
+        _vm.showNetPrices
+          ? _c("span", [
+              _vm._v(_vm._s(_vm.$translate("Ceres::Template.itemExclVAT")))
+            ])
+          : _c("span", [
+              _vm._v(_vm._s(_vm.$translate("Ceres::Template.itemInclVAT")))
+            ]),
+        _vm._v(
+          "\n    " +
+            _vm._s(_vm.$translate("Ceres::Template.itemExclusive")) +
+            "\n    "
+        ),
+        _vm.$ceres.config.global.shippingCostsCategoryId > 0
+          ? _c(
+              "a",
+              {
+                staticClass: "text-appearance",
+                attrs: {
+                  "data-toggle": "modal",
+                  href: "#shippingscosts",
+                  title: _vm.$translate("Ceres::Template.itemShippingCosts")
+                }
+              },
+              [
+                _vm._v(
+                  _vm._s(_vm.$translate("Ceres::Template.itemShippingCosts"))
+                )
+              ]
+            )
+          : _c(
+              "a",
+              {
+                attrs: {
+                  title: _vm.$translate("Ceres::Template.itemShippingCosts")
+                }
+              },
+              [
+                _vm._v(
+                  _vm._s(_vm.$translate("Ceres::Template.itemShippingCosts"))
+                )
+              ]
+            )
+      ])
     ],
     1
   )
