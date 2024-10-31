@@ -22,7 +22,7 @@
     <p class="h4 text-muted text-center my-5" v-if="!isLoading && (!wishListItems || wishListItems.length === 0) || inactiveVariationIds.length !== 0">{{ $translate("Ceres::Template.wishListNoItems") }}</p>
     <loading-animation v-if="isLoading"></loading-animation>
 
-    <div class="vat small text-muted">
+    <div v-if="wishListItems && wishListItems.length" class="vat small text-muted">
       {{ $translate("Ceres::Template.itemFootnote") }} <span v-if="showNetPrices">{{ $translate("Ceres::Template.itemExclVAT") }}</span>
       <span v-else>{{ $translate("Ceres::Template.itemInclVAT") }}</span>
       {{ $translate("Ceres::Template.itemExclusive") }}

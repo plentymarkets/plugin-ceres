@@ -56237,50 +56237,53 @@ var render = function() {
       ),
       _vm.isLoading ? _c("loading-animation") : _vm._e(),
       _vm._ssrNode(
-        ' <div class="vat small text-muted">' +
-          _vm._ssrEscape(
-            "\n    " +
-              _vm._s(_vm.$translate("Ceres::Template.itemFootnote")) +
-              " "
-          ) +
-          (_vm.showNetPrices
-            ? "<span>" +
+        " " +
+          (_vm.wishListItems && _vm.wishListItems.length
+            ? '<div class="vat small text-muted">' +
               _vm._ssrEscape(
-                _vm._s(_vm.$translate("Ceres::Template.itemExclVAT"))
+                "\n    " +
+                  _vm._s(_vm.$translate("Ceres::Template.itemFootnote")) +
+                  " "
               ) +
-              "</span>"
-            : "<span>" +
+              (_vm.showNetPrices
+                ? "<span>" +
+                  _vm._ssrEscape(
+                    _vm._s(_vm.$translate("Ceres::Template.itemExclVAT"))
+                  ) +
+                  "</span>"
+                : "<span>" +
+                  _vm._ssrEscape(
+                    _vm._s(_vm.$translate("Ceres::Template.itemInclVAT"))
+                  ) +
+                  "</span>") +
               _vm._ssrEscape(
-                _vm._s(_vm.$translate("Ceres::Template.itemInclVAT"))
+                "\n    " +
+                  _vm._s(_vm.$translate("Ceres::Template.itemExclusive")) +
+                  "\n    "
               ) +
-              "</span>") +
-          _vm._ssrEscape(
-            "\n    " +
-              _vm._s(_vm.$translate("Ceres::Template.itemExclusive")) +
-              "\n    "
-          ) +
-          (_vm.$ceres.config.global.shippingCostsCategoryId > 0
-            ? '<a data-toggle="modal" href="#shippingscosts"' +
-              _vm._ssrAttr(
-                "title",
-                _vm.$translate("Ceres::Template.itemShippingCosts")
-              ) +
-              ' class="text-appearance">' +
-              _vm._ssrEscape(
-                _vm._s(_vm.$translate("Ceres::Template.itemShippingCosts"))
-              ) +
-              "</a>"
-            : "<a" +
-              _vm._ssrAttr(
-                "title",
-                _vm.$translate("Ceres::Template.itemShippingCosts")
-              ) +
-              ">" +
-              _vm._ssrEscape(
-                _vm._s(_vm.$translate("Ceres::Template.itemShippingCosts"))
-              ) +
-              "</a>") +
-          "</div>"
+              (_vm.$ceres.config.global.shippingCostsCategoryId > 0
+                ? '<a data-toggle="modal" href="#shippingscosts"' +
+                  _vm._ssrAttr(
+                    "title",
+                    _vm.$translate("Ceres::Template.itemShippingCosts")
+                  ) +
+                  ' class="text-appearance">' +
+                  _vm._ssrEscape(
+                    _vm._s(_vm.$translate("Ceres::Template.itemShippingCosts"))
+                  ) +
+                  "</a>"
+                : "<a" +
+                  _vm._ssrAttr(
+                    "title",
+                    _vm.$translate("Ceres::Template.itemShippingCosts")
+                  ) +
+                  ">" +
+                  _vm._ssrEscape(
+                    _vm._s(_vm.$translate("Ceres::Template.itemShippingCosts"))
+                  ) +
+                  "</a>") +
+              "</div>"
+            : "<!---->")
       )
     ],
     2
@@ -56490,10 +56493,9 @@ var render = function() {
                     '</a> <div class="item-base-price small">' +
                     _vm._ssrEscape(
                       "\n                            " +
-                        _vm._s(_vm._f("currency")(_vm.unitPrice)) +
-                        "\n                        "
+                        _vm._s(_vm._f("currency")(_vm.unitPrice))
                     ) +
-                    "</div> " +
+                    "<sup>*</sup></div> " +
                     (!(
                       _vm.wishListItem.unit.unitOfMeasurement === "C62" &&
                       _vm.wishListItem.unit.content === 1
@@ -56616,10 +56618,9 @@ var render = function() {
                                   _vm._f("currency")(
                                     _vm.quantity * _vm.unitPrice
                                   )
-                                ) +
-                                "\n                        "
+                                )
                             ) +
-                            "</div> "
+                            "<sup>*</sup></div> "
                         ),
                         _vm._ssrNode(
                           '<div data-testing="remove-wlist-item" class="btn btn-sm text-danger p-0">',
