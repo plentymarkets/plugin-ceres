@@ -782,7 +782,8 @@ var render = function() {
                 _c("div", { staticClass: "item-base-price small" }, [
                   _vm._v(
                     "\n                            " +
-                      _vm._s(_vm._f("currency")(_vm.unitPrice))
+                      _vm._s(_vm._f("currency")(_vm.unitPrice)) +
+                      " "
                   ),
                   _c("sup", [_vm._v("*")])
                 ]),
@@ -926,7 +927,10 @@ var render = function() {
                   [
                     _vm._v(
                       "\n                            " +
-                        _vm._s(_vm._f("currency")(_vm.quantity * _vm.unitPrice))
+                        _vm._s(
+                          _vm._f("currency")(_vm.quantity * _vm.unitPrice)
+                        ) +
+                        " "
                     ),
                     _c("sup", [_vm._v("*")])
                   ]

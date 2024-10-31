@@ -56493,7 +56493,8 @@ var render = function() {
                     '</a> <div class="item-base-price small">' +
                     _vm._ssrEscape(
                       "\n                            " +
-                        _vm._s(_vm._f("currency")(_vm.unitPrice))
+                        _vm._s(_vm._f("currency")(_vm.unitPrice)) +
+                        " "
                     ) +
                     "<sup>*</sup></div> " +
                     (!(
@@ -56618,7 +56619,8 @@ var render = function() {
                                   _vm._f("currency")(
                                     _vm.quantity * _vm.unitPrice
                                   )
-                                )
+                                ) +
+                                " "
                             ) +
                             "<sup>*</sup></div> "
                         ),
