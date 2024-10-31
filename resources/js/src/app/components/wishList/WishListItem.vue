@@ -21,7 +21,7 @@
                             </a>
 
                             <div class="item-base-price small">
-                                {{ unitPrice | currency }}
+                                {{ unitPrice | currency }}&nbsp;<sup>*</sup>
                             </div>
 
                             <div class="item-small-prices text-muted small" v-if="!(wishListItem.unit.unitOfMeasurement === 'C62' && wishListItem.unit.content === 1) && wishListItem.variation.mayShowUnitPrice">
@@ -69,8 +69,8 @@
                         </div>
 
                         <div class="price-box text-right my-1 ml-2">
-                            <div class="item-total-price font-weight-bold text-nowrap">
-                                {{ quantity * unitPrice | currency }}
+                            <div class="item-total-price font-weight-bold text-nowrap d-flex align-items-center">
+                                {{ quantity * unitPrice | currency }}&nbsp;<sup>*</sup>
                             </div>
 
                             <div class="btn btn-sm text-danger p-0" @click="removeItem()" data-testing="remove-wlist-item">

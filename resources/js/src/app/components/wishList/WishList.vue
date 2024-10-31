@@ -21,6 +21,14 @@
     </transition-group>
     <p class="h4 text-muted text-center my-5" v-if="!isLoading && (!wishListItems || wishListItems.length === 0) || inactiveVariationIds.length !== 0">{{ $translate("Ceres::Template.wishListNoItems") }}</p>
     <loading-animation v-if="isLoading"></loading-animation>
+
+    <div v-if="wishListItems && wishListItems.length" class="vat small text-muted">
+      {{ $translate("Ceres::Template.itemFootnote") }} <span v-if="showNetPrices">{{ $translate("Ceres::Template.itemExclVAT") }}</span>
+      <span v-else>{{ $translate("Ceres::Template.itemInclVAT") }}</span>
+      {{ $translate("Ceres::Template.itemExclusive") }}
+      <a v-if="$ceres.config.global.shippingCostsCategoryId > 0" data-toggle="modal" href="#shippingscosts" class="text-appearance" :title="$translate('Ceres::Template.itemShippingCosts')">{{ $translate("Ceres::Template.itemShippingCosts") }}</a>
+      <a v-else :title="$translate('Ceres::Template.itemShippingCosts')">{{ $translate("Ceres::Template.itemShippingCosts") }}</a>
+    </div>
   </div>
 </template>
 
@@ -52,7 +60,8 @@ export default {
     wishListItems: state => state.wishList.wishListItems,
     isLoading: state => state.wishList.isLoading,
     wishListIds: state => state.wishList.wishListIds,
-    inactiveVariationIds: state => state.wishList.inactiveVariationIds
+    inactiveVariationIds: state => state.wishList.inactiveVariationIds,
+    showNetPrices: state => state.basket.showNetPrices
   }),
 
   mounted()
