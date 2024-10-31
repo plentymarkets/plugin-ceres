@@ -17,21 +17,21 @@ use Plenty\Modules\ShopBuilder\Providers\DataFieldProvider;
 class ManufacturerDataFieldProvider extends DataFieldProvider
 {
     /** @var string */
-    public const RESPONSIBLE_NAME      = 'responsibleName';
+    private const RESPONSIBLE_NAME      = 'responsibleName';
     /** @var string */
-    public const RESPONSIBLE_STREET    = 'responsibleStreet';
+    private const RESPONSIBLE_STREET    = 'responsibleStreet';
     /** @var string */
-    public const RESPONSIBLE_HOUSE_NO  = 'responsibleHouseNo';
+    private const RESPONSIBLE_HOUSE_NO  = 'responsibleHouseNo';
     /** @var string */
-    public const RESPONSIBLE_POST_CODE = 'responsiblePostCode';
+    private const RESPONSIBLE_POST_CODE = 'responsiblePostCode';
     /** @var string */
-    public const RESPONSIBLE_TOWN      = 'responsibleTown';
+    private const RESPONSIBLE_TOWN      = 'responsibleTown';
     /** @var string */
-    public const RESPONSIBLE_COUNTRY   = 'responsibleCountry';
+    private const RESPONSIBLE_COUNTRY   = 'responsibleCountry';
     /** @var string */
-    public const RESPONSIBLE_EMAIL     = 'responsibleEmail';
+    private const RESPONSIBLE_EMAIL     = 'responsibleEmail';
     /** @var string */
-    public const RESPONSIBLE_PHONE     = 'responsiblePhoneNo';
+    private const RESPONSIBLE_PHONE     = 'responsiblePhoneNo';
 
         /**
      * Registers item data fields for use in the ShopBuilder.
@@ -52,7 +52,7 @@ class ManufacturerDataFieldProvider extends DataFieldProvider
         $this->addField(self::RESPONSIBLE_PHONE, "Ceres::Widget.dataFieldManufacturerResponsiblePhoneNo", "item_data_field('item.manufacturer.responsiblePhoneNo')");
     }
 
-    public static function getFields(): array
+    public static function getEuResponsibleFields(): array
     {
         return [
             self::RESPONSIBLE_NAME,
