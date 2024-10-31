@@ -16,7 +16,24 @@ use Plenty\Modules\ShopBuilder\Providers\DataFieldProvider;
  */
 class ManufacturerDataFieldProvider extends DataFieldProvider
 {
-    /**
+    /** @var string */
+    private const RESPONSIBLE_NAME      = 'responsibleName';
+    /** @var string */
+    private const RESPONSIBLE_STREET    = 'responsibleStreet';
+    /** @var string */
+    private const RESPONSIBLE_HOUSE_NO  = 'responsibleHouseNo';
+    /** @var string */
+    private const RESPONSIBLE_POST_CODE = 'responsiblePostCode';
+    /** @var string */
+    private const RESPONSIBLE_TOWN      = 'responsibleTown';
+    /** @var string */
+    private const RESPONSIBLE_COUNTRY   = 'responsibleCountry';
+    /** @var string */
+    private const RESPONSIBLE_EMAIL     = 'responsibleEmail';
+    /** @var string */
+    private const RESPONSIBLE_PHONE     = 'responsiblePhoneNo';
+
+        /**
      * Registers item data fields for use in the ShopBuilder.
      */
     function register()
@@ -24,13 +41,28 @@ class ManufacturerDataFieldProvider extends DataFieldProvider
         $this->addField("name", "Ceres::Widget.dataFieldManufacturerName", "item_data_field('item.manufacturer.name')");
         $this->addField("externalName", "Ceres::Widget.dataFieldManufacturerExternalName", "item_data_field('item.manufacturer.externalName')");
         $this->addField("logo", "Ceres::Widget.dataFieldManufacturerLogo", "item_data_field('item.manufacturer.logo', null, 'src', 'img')");
-        $this->addField("responsibleName", "Ceres::Widget.dataFieldManufacturerResponsibleName", "item_data_field('item.manufacturer.responsibleName')");
-        $this->addField("responsibleStreet", "Ceres::Widget.dataFieldManufacturerResponsibleStreet", "item_data_field('item.manufacturer.responsibleStreet')");
-        $this->addField("responsibleHouseNo", "Ceres::Widget.dataFieldManufacturerResponsibleHouseNo", "item_data_field('item.manufacturer.responsibleHouseNo')");
-        $this->addField("responsiblePostCode", "Ceres::Widget.dataFieldManufacturerResponsiblePostCode", "item_data_field('item.manufacturer.responsiblePostCode')");
-        $this->addField("responsibleTown", "Ceres::Widget.dataFieldManufacturerResponsibleTown", "item_data_field('item.manufacturer.responsibleTown')");
-        $this->addField("responsibleCountry", "Ceres::Widget.dataFieldManufacturerResponsibleCountry", "item_data_field('item.manufacturer.responsibleCountry')");
-        $this->addField("responsibleEmail", "Ceres::Widget.dataFieldManufacturerResponsibleEmail", "item_data_field('item.manufacturer.responsibleEmail')");
-        $this->addField("responsiblePhoneNo", "Ceres::Widget.dataFieldManufacturerResponsiblePhoneNo", "item_data_field('item.manufacturer.responsiblePhoneNo')");
+
+        $this->addField(self::RESPONSIBLE_NAME, "Ceres::Widget.dataFieldManufacturerResponsibleName", "item_data_field('item.manufacturer.responsibleName')");
+        $this->addField(self::RESPONSIBLE_STREET, "Ceres::Widget.dataFieldManufacturerResponsibleStreet", "item_data_field('item.manufacturer.responsibleStreet')");
+        $this->addField(self::RESPONSIBLE_HOUSE_NO, "Ceres::Widget.dataFieldManufacturerResponsibleHouseNo", "item_data_field('item.manufacturer.responsibleHouseNo')");
+        $this->addField(self::RESPONSIBLE_POST_CODE, "Ceres::Widget.dataFieldManufacturerResponsiblePostCode", "item_data_field('item.manufacturer.responsiblePostCode')");
+        $this->addField(self::RESPONSIBLE_TOWN, "Ceres::Widget.dataFieldManufacturerResponsibleTown", "item_data_field('item.manufacturer.responsibleTown')");
+        $this->addField(self::RESPONSIBLE_COUNTRY, "Ceres::Widget.dataFieldManufacturerResponsibleCountry", "item_data_field('item.manufacturer.responsibleCountry')");
+        $this->addField(self::RESPONSIBLE_EMAIL, "Ceres::Widget.dataFieldManufacturerResponsibleEmail", "item_data_field('item.manufacturer.responsibleEmail')");
+        $this->addField(self::RESPONSIBLE_PHONE, "Ceres::Widget.dataFieldManufacturerResponsiblePhoneNo", "item_data_field('item.manufacturer.responsiblePhoneNo')");
+    }
+
+    public static function getEuResponsibleFields(): array
+    {
+        return [
+            self::RESPONSIBLE_NAME,
+            self::RESPONSIBLE_STREET,
+            self::RESPONSIBLE_HOUSE_NO,
+            self::RESPONSIBLE_POST_CODE,
+            self::RESPONSIBLE_TOWN,
+            self::RESPONSIBLE_COUNTRY,
+            self::RESPONSIBLE_EMAIL,
+            self::RESPONSIBLE_PHONE,
+        ];
     }
 }

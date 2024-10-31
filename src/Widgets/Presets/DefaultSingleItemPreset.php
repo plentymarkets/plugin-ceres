@@ -3,6 +3,7 @@
 namespace Ceres\Widgets\Presets;
 
 use Ceres\Config\CeresConfig;
+use Ceres\ShopBuilder\DataFieldProvider\Item\ManufacturerDataFieldProvider;
 use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
@@ -125,6 +126,7 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.bottom.unit', null)
             ->withSetting('text', $dataProvider);
     }
+
     private function createNameHeader()
     {
         $itemName = '';
@@ -270,15 +272,20 @@ class DefaultSingleItemPreset implements ContentPreset
     private function createTabWidget()
     {
         $uuidGenerator = pluginApp(UniqueId::class);
-        $uuidTabDescription  = $uuidGenerator->generateUniqueId();
-        $uuidTabTechData     = $uuidGenerator->generateUniqueId();
-        $uuidTabMoreDetails  = $uuidGenerator->generateUniqueId();
+        $uuidTabDescription         = $uuidGenerator->generateUniqueId();
+        $uuidTabTechData            = $uuidGenerator->generateUniqueId();
+        $uuidTabMoreDetails         = $uuidGenerator->generateUniqueId();
+        $uuidEuResponsiblePerson    = $uuidGenerator->generateUniqueId();
         $titleTabDescription = $this->translator->trans("Ceres::Template.singleItemDescription");
         $titleTabTechData    = $this->translator->trans("Ceres::Template.singleItemTechnicalData");
         $titleTabMoreDetails = $this->translator->trans("Ceres::Template.singleItemMoreDetails");
-        $tabs = array(array('title' => $titleTabDescription,'uuid' => $uuidTabDescription),
-                      array('title' => $titleTabTechData, 'uuid' => $uuidTabTechData),
-                      array('title' => $titleTabMoreDetails, 'uuid' => $uuidTabMoreDetails));
+        $titleTabEuResponsiblePerson = $this->translator->trans("Ceres::Template.singleItemEuResponsiblePerson");
+        $tabs = array(
+            array('title' => $titleTabDescription,'uuid' => $uuidTabDescription),
+            array('title' => $titleTabTechData, 'uuid' => $uuidTabTechData),
+            array('title' => $titleTabMoreDetails, 'uuid' => $uuidTabMoreDetails),
+            array('title' => $titleTabEuResponsiblePerson, 'uuid' => $uuidEuResponsiblePerson),
+        );
 
         $this->tabWidget = $this->secondTwoColumnWidget->createChild('first', 'Ceres::TabWidget')
             ->withSetting('tabs', $tabs)
@@ -315,20 +322,42 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('text',$this->getShopBuilderDataFieldProvider('TextsDataFieldProvider::technicalData',array('texts.technicalData', null, null)));
 
         $this->tabWidget->createChild($uuidTabMoreDetails, 'Ceres::ItemDataTableWidget')
-            ->withSetting('itemInformation',
-                            array("item.id",
-                                "item.condition.names.name",
-                                "item.ageRestriction",
-                                "variation.externalId",
-                                "variation.model",
-                                "item.manufacturer.externalName",
-                                "item.producingCountry.names.name",
-                                "unit.names.name",
-                                "variation.weightG",
-                                "variation.weightNetG",
-                                "item.variationDimensions",
-                                "variation.customsTariffNumber"));
-    }
+            ->withSetting('itemInformation', [
+                "item.id",
+                "item.condition.names.name",
+                "item.ageRestriction",
+                "variation.externalId",
+                "variation.model",
+                "item.manufacturer.externalName",
+                "item.producingCountry.names.name",
+                "unit.names.name",
+                "variation.weightG",
+                "variation.weightNetG",
+                "item.variationDimensions",
+                "variation.customsTariffNumber"
+            ]);
+
+        foreach (ManufacturerDataFieldProvider::getEuResponsibleFields() as $field) {
+            $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::InlineTextWidget')
+                ->withSetting('appearance','none')
+                ->withSetting('spacing.customPadding', true)
+                ->withSetting('spacing.padding.left.value', 0)
+                ->withSetting('spacing.padding.left.unit', null)
+                ->withSetting('spacing.padding.right.value', 0)
+                ->withSetting('spacing.padding.right.unit', null)
+                ->withSetting('spacing.padding.top.value', 0)
+                ->withSetting('spacing.padding.top.unit', null)
+                ->withSetting('spacing.padding.bottom.value', 0)
+                ->withSetting('spacing.padding.bottom.unit', null)
+                ->withSetting(
+                    'text',
+                    $this->getShopBuilderDataFieldProvider(
+                        'ManufacturerDataFieldProvider::' . $field,
+                        ['item.manufacturer.' . $field, null, null]
+                    )
+                );
+        }
+   }
 
     private function createAttributeWidget()
     {
