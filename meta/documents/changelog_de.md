@@ -5,6 +5,7 @@
 ### Hinzugefügt
 
 - In ShopBuilder können jetzt Variablen genutzt werden, um bei Herstellern außerhalb der Europäischen Union den Namen, die Postanschrift, die elektronische Adresse und die Telefonnummer des Verantwortlichen anzugeben.
+- Die ShopBuilder-Vorlage für die Artikelansicht enthält nun ein neues Tab, in dem Informationen zur EU-verantwortlichen Person angezeigt werden, um die Anforderungen Produktsicherheitsverordnung (GPSR) zu erfüllen.
 
 ## v5.0.68 (2024-09-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.67...5.0.68" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
