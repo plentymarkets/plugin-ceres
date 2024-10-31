@@ -56611,7 +56611,7 @@ var render = function() {
                       "</div>",
                       [
                         _vm._ssrNode(
-                          '<div class="item-total-price font-weight-bold text-nowrap">' +
+                          '<div class="item-total-price font-weight-bold text-nowrap d-flex align-items-center">' +
                             _vm._ssrEscape(
                               "\n                            " +
                                 _vm._s(

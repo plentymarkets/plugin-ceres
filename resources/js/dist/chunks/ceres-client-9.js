@@ -920,7 +920,8 @@ var render = function() {
                 _c(
                   "div",
                   {
-                    staticClass: "item-total-price font-weight-bold text-nowrap"
+                    staticClass:
+                      "item-total-price font-weight-bold text-nowrap d-flex align-items-center"
                   },
                   [
                     _vm._v(

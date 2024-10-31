@@ -69,7 +69,7 @@
                         </div>
 
                         <div class="price-box text-right my-1 ml-2">
-                            <div class="item-total-price font-weight-bold text-nowrap">
+                            <div class="item-total-price font-weight-bold text-nowrap d-flex align-items-center">
                                 {{ quantity * unitPrice | currency }}<sup>*</sup>
                             </div>
 
