@@ -43,10 +43,6 @@
 {% set type             = block('type') | default('article') %}
 {% set url              = block('url') | default(services.url.getCanonicalURL()) | default(webstoreConfig.domainSsl) %}
 
-{% if title | trim is not empty %}
-    {% set title = title ~ " | " %}
-{% endif %}
-{% set title = title ~ trans("Ceres::Template.headerCompanyName") %}
 
 {% if image starts with 'category/' %}
     {% set image = "/documents/" ~ image %}
