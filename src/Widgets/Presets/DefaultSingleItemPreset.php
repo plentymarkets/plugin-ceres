@@ -361,12 +361,16 @@ class DefaultSingleItemPreset implements ContentPreset
             }
 
             if ($field === ManufacturerDataFieldProvider::RESPONSIBLE_EMAIL) {
-                $fieldValue = '{# SHOPBUILDER:DATA_FIELD Ceres\\ShopBuilder\\DataFieldProvider\\Item\\ManufacturerDataFieldProvider::' . $field .' #}';
-                $fieldValue .= '{% set fieldData = item_data_field('.ManufacturerDataFieldProvider::RESPONSIBLE_EMAIL.') %}';
-                $fieldValue .= '{% if fieldData | trim is not empty %}';
-                $fieldValue .= 'Email: ' . '{{ item_data_field('.ManufacturerDataFieldProvider::RESPONSIBLE_EMAIL.') }}';
+                $fieldValue = '';
+                $fieldValue .= '{% set something = 123 %}';
+                $fieldValue .= '{% if something | trim is empty %}';
+                $fieldValue .= '<h1 class="h2">';
+                $fieldValue .= 'SOMETHING!';
+                $fieldValue .= '</h1>';
                 $fieldValue .= '{% else %}';
-                $fieldValue .= '{{ item_data_field('.ManufacturerDataFieldProvider::RESPONSIBLE_EMAIL.') }}';
+                $fieldValue .= '<h1 class="h2">';
+                $fieldValue .= 'SOMETHING ELSE!';
+                $fieldValue .= '</h1>';
                 $fieldValue .= '{% endif %}';
             }
 
