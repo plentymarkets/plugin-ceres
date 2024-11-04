@@ -12,8 +12,14 @@
         {% set robotsValue = robots %}
     {% endif %}
 
+    {% if itemData.texts.title is defined and itemData.texts.title | trim is not empty %}
+       {% set removeTitleCompanyName = true %}
+    {% endif %}
+
     {% embed getPartial('page-metadata') %}
-        {% block title          ItemName.get(itemData | itemName(webstoreConfig.urlTitleItemName - 1, ""), itemData.variation.bundleType) %}
+        {% block title %}
+            {{ itemData.texts.title | default(ItemName.get(itemData | itemName(webstoreConfig.urlTitleItemName - 1, ""), itemData.variation.bundleType)) }}
+        {% endblock %}
         {% block description    itemData.texts.metaDescription %}
         {% block keywords       itemData.texts.keywords %}
         {% block image          itemData.images.all[0].url %}
