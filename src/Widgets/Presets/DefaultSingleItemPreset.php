@@ -353,7 +353,7 @@ class DefaultSingleItemPreset implements ContentPreset
                     'text',
                     $this->getShopBuilderDataFieldProvider(
                         'ManufacturerDataFieldProvider::' . $field,
-                        ['item.manufacturer.' . $field, null, null]
+                        ['item.manufacturer.' . $field, 'item.manufacturer.' . $field, null]
                     )
                 );
         }
