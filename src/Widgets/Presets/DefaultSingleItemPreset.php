@@ -360,6 +360,17 @@ class DefaultSingleItemPreset implements ContentPreset
                 }
             }
 
+            if ($field === ManufacturerDataFieldProvider::RESPONSIBLE_EMAIL) {
+                $fieldValue = '{# SHOPBUILDER:DATA_FIELD Ceres\\ShopBuilder\\DataFieldProvider\\Item\\ManufacturerDataFieldProvider::' . $field .' #}';
+                $fieldValue .= '{% set fieldData = item_data_field('.ManufacturerDataFieldProvider::RESPONSIBLE_EMAIL.') %}';
+                $fieldValue .= '{% if fieldData | trim is not empty %}';
+                $fieldValue .= 'Email: ' . '{{ item_data_field('.ManufacturerDataFieldProvider::RESPONSIBLE_EMAIL.')}}';
+                $fieldValue .= '{% else %}';
+                $fieldValue .= '{{ item_data_field('.ManufacturerDataFieldProvider::RESPONSIBLE_EMAIL.')}}';
+                $fieldValue .= '{% endif %}';
+            }
+
+
             $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::InlineTextWidget')
                 ->withSetting('appearance','none')
                 ->withSetting('spacing.customPadding', true)
