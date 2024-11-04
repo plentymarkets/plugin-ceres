@@ -337,7 +337,29 @@ class DefaultSingleItemPreset implements ContentPreset
                 "variation.customsTariffNumber"
             ]);
 
+        $euManufacturerAddress = '';
+
         foreach (ManufacturerDataFieldProvider::getEuResponsibleFields() as $field) {
+            $fieldValue = $this->getShopBuilderDataFieldProvider(
+                'ManufacturerDataFieldProvider::' . $field,
+                ['item.manufacturer.' . $field, null, null]
+            );
+
+            if ($field === ManufacturerDataFieldProvider::RESPONSIBLE_TOWN) {
+                if (!empty($fieldValue)) {
+                    $euManufacturerAddress = $fieldValue;
+                    continue;
+                }
+            } else if ($field === ManufacturerDataFieldProvider::RESPONSIBLE_COUNTRY) {
+                if (!empty($fieldValue)) {
+                    if ($euManufacturerAddress !== '') {
+                        $euManufacturerAddress = $euManufacturerAddress . ',';
+                    }
+
+                    $fieldValue = $euManufacturerAddress . ' ' . $fieldValue;
+                }
+            }
+
             $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::InlineTextWidget')
                 ->withSetting('appearance','none')
                 ->withSetting('spacing.customPadding', true)
@@ -351,10 +373,7 @@ class DefaultSingleItemPreset implements ContentPreset
                 ->withSetting('spacing.padding.bottom.unit', null)
                 ->withSetting(
                     'text',
-                    $this->getShopBuilderDataFieldProvider(
-                        'ManufacturerDataFieldProvider::' . $field,
-                        ['item.manufacturer.' . $field, 'item.manufacturer.' . $field, null]
-                    )
+                    $fieldValue
                 );
         }
    }

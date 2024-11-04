@@ -17,21 +17,21 @@ use Plenty\Modules\ShopBuilder\Providers\DataFieldProvider;
 class ManufacturerDataFieldProvider extends DataFieldProvider
 {
     /** @var string */
-    private const RESPONSIBLE_NAME      = 'responsibleName';
+    public const RESPONSIBLE_NAME      = 'responsibleName';
     /** @var string */
-    private const RESPONSIBLE_STREET    = 'responsibleStreet';
+    public const RESPONSIBLE_STREET    = 'responsibleStreet';
     /** @var string */
-    private const RESPONSIBLE_HOUSE_NO  = 'responsibleHouseNo';
+    public const RESPONSIBLE_HOUSE_NO  = 'responsibleHouseNo';
     /** @var string */
-    private const RESPONSIBLE_POST_CODE = 'responsiblePostCode';
+    public const RESPONSIBLE_POST_CODE = 'responsiblePostCode';
     /** @var string */
-    private const RESPONSIBLE_TOWN      = 'responsibleTown';
+    public const RESPONSIBLE_TOWN      = 'responsibleTown';
     /** @var string */
-    private const RESPONSIBLE_COUNTRY   = 'responsibleCountry';
+    public const RESPONSIBLE_COUNTRY   = 'responsibleCountry';
     /** @var string */
-    private const RESPONSIBLE_EMAIL     = 'responsibleEmail';
+    public const RESPONSIBLE_EMAIL     = 'responsibleEmail';
     /** @var string */
-    private const RESPONSIBLE_PHONE     = 'responsiblePhoneNo';
+    public const RESPONSIBLE_PHONE     = 'responsiblePhoneNo';
 
         /**
      * Registers item data fields for use in the ShopBuilder.
