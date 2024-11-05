@@ -2,7 +2,9 @@
 
 namespace Ceres\Widgets\Presets;
 
+use Ceres\Builders\EuManufacturer\EuManufacturerBuilder;
 use Ceres\Config\CeresConfig;
+use Ceres\Helper\ShopBuilderHelper;
 use Ceres\ShopBuilder\DataFieldProvider\Item\ManufacturerDataFieldProvider;
 use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
@@ -55,6 +57,23 @@ class DefaultSingleItemPreset implements ContentPreset
 
     /** @var Translator */
     private $translator;
+
+    /** @var ShopBuilderHelper */
+    private ShopBuilderHelper $shopBuilderHelper;
+
+    /** @var EuManufacturerBuilder */
+    private EuManufacturerBuilder $euManufacturerBuilder;
+
+    /**
+     * @param ShopBuilderHelper $shopBuilderHelper
+     * @param EuManufacturerBuilder $euManufacturerBuilder
+     */
+    public function __construct(ShopBuilderHelper $shopBuilderHelper,
+                                EuManufacturerBuilder $euManufacturerBuilder)
+    {
+        $this->shopBuilderHelper = $shopBuilderHelper;
+        $this->euManufacturerBuilder = $euManufacturerBuilder;
+    }
 
     /**
      * @inheritDoc
@@ -110,7 +129,7 @@ class DefaultSingleItemPreset implements ContentPreset
 
     private function createManufacturer()
     {
-        $dataProvider = $this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::externalName',array('item.manufacturer.externalName'));
+        $dataProvider = $this->shopBuilderHelper->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::externalName',array('item.manufacturer.externalName'));
 
         $this->stickyContainer->createChild('sticky','Ceres::InlineTextWidget')
             ->withSetting('appearance','none')
@@ -144,7 +163,7 @@ class DefaultSingleItemPreset implements ContentPreset
             default;
                 $itemName = 'name1';
         }
-        $dataProvider = $this->getShopBuilderDataFieldProvider("TextsDataFieldProvider::$itemName",array("texts.$itemName"));
+        $dataProvider = $this->shopBuilderHelper->getShopBuilderDataFieldProvider("TextsDataFieldProvider::$itemName",array("texts.$itemName"));
         $this->stickyContainer->createChild('sticky', 'Ceres::InlineTextWidget')
             ->withSetting('customClass', 'title-outer item-name')
             ->withSetting('spacing.customPadding', true)
@@ -193,7 +212,7 @@ class DefaultSingleItemPreset implements ContentPreset
     {
         $text = '';
         $text .= '<b>{{ trans("Ceres::Template.singleItemNumber") }}&nbsp;</b>';
-        $text .= $this->getShopBuilderDataFieldProvider('VariationGlobalDataFieldProvider::number',array('variation.number'));
+        $text .= $this->shopBuilderHelper->getShopBuilderDataFieldProvider('VariationGlobalDataFieldProvider::number',array('variation.number'));
 
 
         $this->stickyContainer->createChild('sticky', 'Ceres::InlineTextWidget')
@@ -306,7 +325,7 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.top.unit', null)
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
-            ->withSetting('text', $this->getShopBuilderDataFieldProvider('TextsDataFieldProvider::description',array('texts.description', null, null)));
+            ->withSetting('text', $this->shopBuilderHelper->getShopBuilderDataFieldProvider('TextsDataFieldProvider::description',array('texts.description', null, null)));
 
         $this->tabWidget->createChild($uuidTabTechData, 'Ceres::InlineTextWidget')
             ->withSetting('appearance','none')
@@ -319,7 +338,7 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.top.unit', null)
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
-            ->withSetting('text',$this->getShopBuilderDataFieldProvider('TextsDataFieldProvider::technicalData',array('texts.technicalData', null, null)));
+            ->withSetting('text',$this->shopBuilderHelper->getShopBuilderDataFieldProvider('TextsDataFieldProvider::technicalData',array('texts.technicalData', null, null)));
 
         $this->tabWidget->createChild($uuidTabMoreDetails, 'Ceres::ItemDataTableWidget')
             ->withSetting('itemInformation', [
@@ -337,55 +356,12 @@ class DefaultSingleItemPreset implements ContentPreset
                 "variation.customsTariffNumber"
             ]);
 
-        $euManufacturerAddress = '';
-
-        foreach (ManufacturerDataFieldProvider::getEuResponsibleFields() as $field) {
-            $fieldValue = $this->getShopBuilderDataFieldProvider(
-                'ManufacturerDataFieldProvider::' . $field,
-                ['item.manufacturer.' . $field, null, null]
-            );
-
-            if ($field === ManufacturerDataFieldProvider::RESPONSIBLE_TOWN) {
-                if (!empty($fieldValue)) {
-                    $euManufacturerAddress = $fieldValue;
-                    continue;
-                }
-            } else if ($field === ManufacturerDataFieldProvider::RESPONSIBLE_COUNTRY) {
-                if (!empty($fieldValue)) {
-                    if ($euManufacturerAddress !== '') {
-                        $euManufacturerAddress = $euManufacturerAddress . ',';
-                    }
-
-                    $fieldValue = $euManufacturerAddress . ' ' . $fieldValue;
-                }
-            }
-
-            if ($field === ManufacturerDataFieldProvider::RESPONSIBLE_EMAIL) {
-                $fieldValue = '{# SHOPBUILDER:DATA_FIELD Ceres\\ShopBuilder\\DataFieldProvider\\Item\\ManufacturerDataFieldProvider::' . $field .' #}';
-                $fieldValue .= '{% set fieldData = item_data_field("'.ManufacturerDataFieldProvider::RESPONSIBLE_EMAIL.'") %}';
-                $fieldValue .= '{% if fieldData | trim is not empty %}';
-                $fieldValue .= 'Email: ' . '{{ item_data_field("'.ManufacturerDataFieldProvider::RESPONSIBLE_EMAIL.'")}}';
-                $fieldValue .= '{% else %}';
-                $fieldValue .= '{{ item_data_field("'.ManufacturerDataFieldProvider::RESPONSIBLE_EMAIL.'")}}';
-                $fieldValue .= '{% endif %}';
-            }
-            
-            $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::InlineTextWidget')
-                ->withSetting('appearance','none')
-                ->withSetting('spacing.customPadding', true)
-                ->withSetting('spacing.padding.left.value', 0)
-                ->withSetting('spacing.padding.left.unit', null)
-                ->withSetting('spacing.padding.right.value', 0)
-                ->withSetting('spacing.padding.right.unit', null)
-                ->withSetting('spacing.padding.top.value', 0)
-                ->withSetting('spacing.padding.top.unit', null)
-                ->withSetting('spacing.padding.bottom.value', 0)
-                ->withSetting('spacing.padding.bottom.unit', null)
-                ->withSetting(
-                    'text',
-                    $fieldValue
-                );
-        }
+        $this->euManufacturerBuilder->withName();
+        $this->euManufacturerBuilder->withDetailedAddress();
+        $this->euManufacturerBuilder->withGeneralAddress();
+        $this->euManufacturerBuilder->withMail();
+        $this->euManufacturerBuilder->withPhoneNumber();
+        $this->euManufacturerBuilder->build($this->tabWidget, $uuidEuResponsiblePerson);
    }
 
     private function createAttributeWidget()
@@ -408,13 +384,5 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.margin.top.unit', null)
             ->withSetting('spacing.margin.right.value', 1)
             ->withSetting('spacing.margin.right.unit', null);
-    }
-
-    private function getShopBuilderDataFieldProvider($provider,$itemDataFields)
-    {
-        $query = "{# SHOPBUILDER:DATA_FIELD Ceres\\ShopBuilder\\DataFieldProvider\\Item\\$provider #}";
-        $dataFields = implode(",", $itemDataFields);
-        $query .= "{{ item_data_field($dataFields)}}";
-        return $query;
     }
 }
