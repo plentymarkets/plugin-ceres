@@ -18,11 +18,17 @@ class EuManufacturerBuilder extends AbstractEuManufacturerBuilder
     /** @var GeneralAddressBuilder */
     public GeneralAddressBuilder $generalAddressBuilder;
 
-    public function __construct() {
+    /**
+     * @param DetailedAddressBuilder $detailedAddressBuilder
+     * @param GeneralAddressBuilder $generalAddressBuilder
+     */
+    public function __construct(DetailedAddressBuilder $detailedAddressBuilder,
+                                GeneralAddressBuilder $generalAddressBuilder
+    ) {
         parent::__construct();
 
-        $this->detailedAddressBuilder = pluginApp(DetailedAddressBuilder::class);
-        $this->generalAddressBuilder  = pluginApp(GeneralAddressBuilder::class);
+        $this->detailedAddressBuilder = $detailedAddressBuilder;
+        $this->generalAddressBuilder  = $generalAddressBuilder;
     }
 
     /**
