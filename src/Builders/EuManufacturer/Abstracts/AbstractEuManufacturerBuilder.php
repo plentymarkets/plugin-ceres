@@ -11,7 +11,7 @@ abstract class AbstractEuManufacturerBuilder
 
     protected function __construct()
     {
-        $this->shopBuilderHelper = app(ShopBuilderHelper::class);
+        $this->shopBuilderHelper = pluginApp(ShopBuilderHelper::class);
     }
 
     /**
