@@ -25,8 +25,6 @@ class EuManufacturerBuilder extends AbstractEuManufacturerBuilder
     public function __construct(DetailedAddressBuilder $detailedAddressBuilder,
                                 GeneralAddressBuilder $generalAddressBuilder
     ) {
-        parent::__construct();
-
         $this->detailedAddressBuilder = $detailedAddressBuilder;
         $this->generalAddressBuilder  = $generalAddressBuilder;
     }
