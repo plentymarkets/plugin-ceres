@@ -6,14 +6,6 @@ use Ceres\Helper\ShopBuilderHelper;
 
 abstract class AbstractEuManufacturerBuilder
 {
-    /** @var ShopBuilderHelper */
-    private ShopBuilderHelper $shopBuilderHelper;
-
-    protected function __construct()
-    {
-        $this->shopBuilderHelper = pluginApp(ShopBuilderHelper::class);
-    }
-
     /**
      * Constructs the actual field provider structure that's used to generate shop builder data fields.
      *
@@ -23,7 +15,10 @@ abstract class AbstractEuManufacturerBuilder
      */
     protected function getShopBuilderDataFieldProvider(string $provider): string
     {
-        return $this->shopBuilderHelper->getShopBuilderDataFieldProvider(
+        /** @var ShopBuilderHelper $shopBuilderHelper */
+        $shopBuilderHelper = pluginApp(ShopBuilderHelper::class);
+
+        return $shopBuilderHelper->getShopBuilderDataFieldProvider(
             'ManufacturerDataFieldProvider::' . $provider,
             ['item.manufacturer.' . $provider, null, null]
         );
