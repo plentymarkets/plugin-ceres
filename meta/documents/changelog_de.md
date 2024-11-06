@@ -1,12 +1,27 @@
 # Release Notes für plentyShop LTS
 
-## v5.0.69 (YYYY-MM-DD) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.67...5.0.68" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.69 (2024-11-06) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.68...5.0.69" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
 
 ### Hinzugefügt
 
 - In ShopBuilder können jetzt Variablen genutzt werden, um bei Herstellern außerhalb der Europäischen Union den Namen, die Postanschrift, die elektronische Adresse und die Telefonnummer des Verantwortlichen anzugeben.
 - Die ShopBuilder-Vorlage für die Artikelansicht enthält nun ein neues Tab, in dem Informationen zur EU-verantwortlichen Person angezeigt werden, um die Anforderungen Produktsicherheitsverordnung (GPSR) zu erfüllen.
-- Im Eingabefeld „HTML-Titel für Webshop“ eines Artikels kann jetzt den Title-Tag für Artikel angegeben werden. Wenn für einen Artikel kein Title-Tag hinterlegt ist, wird stattdessen der Fallback „Artikelname | Firmenname“ ausgegeben.
+- Im Eingabefeld „HTML-Titel für Webshop“ eines Artikels kann jetzt der Title-Tag für Artikel angegeben werden. Wenn für einen Artikel kein Title-Tag hinterlegt ist, wird stattdessen der bisherige Fallback „Artikelname | Firmenname“ ausgegeben.
+- Die Wunschliste enthält nun die Hinweistexte zur Mehrwertsteuer und zu den Versandkosten.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von plentyShop LTS 5.0.69 gab es Änderungen an Template-Dateien die für Theme-Entwickler relevant sind.  Die Verlinkung führt direkt zu der umgesetzten Änderung in der entsprechenden Datei.
+
+- [resources/js/src/app/components/wishList/WishList.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.68...stable#diff-6d45ccf2cd3d8bbfc18ca6a27e0b8738a386d2035ff5af1f6b45e9517b3b90bf)
+- [resources/js/src/app/components/wishList/WishListItem.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.68...stable#diff-be8788b59e5887730f9bb4aa5a12d093908265ff19c26bb5ddca99485e7d7621)
+- [resources/views/Item/SingleItemWrapper.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.68...stable#diff-192a8837dba88964356b7ecd49003fe083ed719e2c601b9623e6dd4b24be9326)
+- [resources/views/PageDesign/Partials/PageMetadata.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.68...stable#diff-98be1deb08f271fd2d41c05df5d33c20846032e5b77cb7ba59f615dda20d767f)
+
 ## v5.0.68 (2024-09-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.67...5.0.68" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
