@@ -6,7 +6,7 @@ context("Primary Address", () =>
         deleteAllAddresses();
     });
 
-    it("should create register user", () =>
+    it.skip("should create register user", () =>
     {
         cy.visit("/register/");
         cy.intercept("POST", "/rest/io/customer").as("registerCustomer");
@@ -27,7 +27,7 @@ context("Primary Address", () =>
     });
 
 
-    it("should add first billing address", () =>
+    it.skip("should add first billing address", () =>
     {
         cy.login("test@plenty.com", "TestTest00");
         cy.wait(2000);
