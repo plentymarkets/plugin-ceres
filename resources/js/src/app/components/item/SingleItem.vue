@@ -235,7 +235,7 @@
 
                                       <div class="p-0">
                                         <span>{{ currentVariation.item.manufacturer.responsibleTown }}</span>
-                                        <span v-if="currentVariation.item.manufacturer.responsibleCountryObject !== undefined">
+                                        <span v-if="currentVariation.item.manufacturer.responsibleCountryObject">
                                           {{ currentVariation.item.manufacturer.responsibleCountryObject.name }}
                                         </span>
                                         <span>{{ currentVariation.item.manufacturer.responsiblePostCode }}</span>

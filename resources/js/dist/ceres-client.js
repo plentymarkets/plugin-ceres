@@ -38900,7 +38900,7 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _vm.currentVariation.item.manufacturer
-                                      .responsibleCountryObject !== undefined
+                                      .responsibleCountryObject
                                       ? _c("span", [
                                           _vm._v(
                                             "\n                                      " +
