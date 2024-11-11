@@ -325,12 +325,13 @@ export default {
         isEuResponsibleTabShown()
         {
             return (this.currentVariation.item.manufacturer.responsibleEmail !== "") &&
-                (this.currentVariation.item.manufacturer.responsibleHouseNo) &&
-                (this.currentVariation.item.manufacturer.responsibleName) &&
-                (this.currentVariation.item.manufacturer.responsiblePhoneNo) &&
-                (this.currentVariation.item.manufacturer.responsiblePostCode) &&
-                (this.currentVariation.item.manufacturer.responsibleStreet) &&
-                (this.currentVariation.item.manufacturer.responsibleTown);
+                (this.currentVariation.item.manufacturer.responsibleHouseNo !== "") &&
+                (this.currentVariation.item.manufacturer.responsibleName !== "") &&
+                (this.currentVariation.item.manufacturer.responsiblePhoneNo !== "") &&
+                (this.currentVariation.item.manufacturer.responsiblePostCode !== "") &&
+                (this.currentVariation.item.manufacturer.responsibleStreet !== "") &&
+                (this.currentVariation.item.manufacturer.responsibleTown !== "") &&
+                (this.currentVariation.item.manufacturer.responsibleCountry !== 0);
         },
 
         isRecommendedPriceActive()
