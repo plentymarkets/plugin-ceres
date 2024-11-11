@@ -1444,6 +1444,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -38897,14 +38899,20 @@ var render = function() {
                                       )
                                     ]),
                                     _vm._v(" "),
-                                    _c("span", [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm.currentVariation.item.manufacturer
-                                            .responsibleCountryObject.name
-                                        )
-                                      )
-                                    ]),
+                                    _vm.currentVariation.item.manufacturer
+                                      .responsibleCountryObject !== undefined
+                                      ? _c("span", [
+                                          _vm._v(
+                                            "\n                                      " +
+                                              _vm._s(
+                                                _vm.currentVariation.item
+                                                  .manufacturer
+                                                  .responsibleCountryObject.name
+                                              ) +
+                                              "\n                                    "
+                                          )
+                                        ])
+                                      : _vm._e(),
                                     _vm._v(" "),
                                     _c("span", [
                                       _vm._v(
