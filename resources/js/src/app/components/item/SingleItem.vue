@@ -132,6 +132,10 @@
                                     <a :class="{ 'active': !isDescriptionTabActive && !isTechnicalDataTabActive }" class="nav-link" data-toggle="tab" href="#assessments-details" role="tab">{{ $translate("Ceres::Template.singleItemMoreDetails") }}</a>
                                 </li>
 
+                                <li class="nav-item" v-if="isEuResponsibleTabShown">
+                                    <a class="nav-link" data-toggle="tab" href="#eu-responsible" role="tab">{{ $translate("Ceres::Template.singleItemEuResponsiblePerson") }}</a>
+                                </li>
+
                                 <slot name="add-detail-tabs"></slot>
                             </ul>
 
@@ -218,6 +222,33 @@
                                     </div>
                                 </div>
 
+                                <div class="tab-pane overflow-auto" id="eu-responsible" role="tabpanel" v-if="isEuResponsibleTabShown">
+                                  <div class="my-4">
+                                      <div class="p-0">
+                                        <span>{{ currentVariation.item.manufacturer.responsibleName }}</span>
+                                      </div>
+
+                                      <div class="p-0">
+                                        <span>{{ currentVariation.item.manufacturer.responsibleStreet }}</span>
+                                        <span>{{ currentVariation.item.manufacturer.responsibleHouseNo }}</span>
+                                      </div>
+
+                                      <div class="p-0">
+                                        <span>{{ currentVariation.item.manufacturer.responsibleTown }}</span>
+                                        <span>{{ currentVariation.item.manufacturer.responsibleCountryObject.name }}</span>
+                                        <span>{{ currentVariation.item.manufacturer.responsibleHouseNo }}</span>
+                                      </div>
+
+                                      <div class="p-0">
+                                        <span>{{ currentVariation.item.manufacturer.responsibleEmail }}</span>
+                                      </div>
+
+                                      <div class="p-0">
+                                        <span>{{ currentVariation.item.manufacturer.responsiblePhoneNo }}</span>
+                                      </div>
+                                  </div>
+                                </div>
+
                                 <slot name="add-detail-tabs-content"></slot>
                             </div>
                         </div>
@@ -289,6 +320,17 @@ export default {
         {
             return (App.config.item.itemData.includes("item.description") || App.config.item.itemData.includes("all"))
                 && !!this.currentVariation.texts.description.length;
+        },
+
+        isEuResponsibleTabShown()
+        {
+            return (this.currentVariation.item.manufacturer.responsibleEmail !== "") &&
+                (this.currentVariation.item.manufacturer.responsibleHouseNo) &&
+                (this.currentVariation.item.manufacturer.responsibleName) &&
+                (this.currentVariation.item.manufacturer.responsiblePhoneNo) &&
+                (this.currentVariation.item.manufacturer.responsiblePostCode) &&
+                (this.currentVariation.item.manufacturer.responsibleStreet) &&
+                (this.currentVariation.item.manufacturer.responsibleTown);
         },
 
         isRecommendedPriceActive()
