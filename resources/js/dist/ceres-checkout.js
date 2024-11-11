@@ -46943,7 +46943,7 @@ var render = function() {
                                       _vm._v(
                                         _vm._s(
                                           _vm.currentVariation.item.manufacturer
-                                            .responsibleHouseNo
+                                            .responsiblePostCode
                                         )
                                       )
                                     ])

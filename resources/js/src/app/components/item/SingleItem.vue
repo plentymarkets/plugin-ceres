@@ -238,7 +238,7 @@
                                         <span v-if="currentVariation.item.manufacturer.responsibleCountryObject !== undefined">
                                           {{ currentVariation.item.manufacturer.responsibleCountryObject.name }}
                                         </span>
-                                        <span>{{ currentVariation.item.manufacturer.responsibleHouseNo }}</span>
+                                        <span>{{ currentVariation.item.manufacturer.responsiblePostCode }}</span>
                                       </div>
 
                                       <div class="p-0">
