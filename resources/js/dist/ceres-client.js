@@ -1413,6 +1413,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1452,6 +1485,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     isDescriptionTabActive: function isDescriptionTabActive() {
       return (App.config.item.itemData.includes("item.description") || App.config.item.itemData.includes("all")) && !!this.currentVariation.texts.description.length;
+    },
+    isEuResponsibleTabShown: function isEuResponsibleTabShown() {
+      return this.currentVariation.item.manufacturer.responsibleEmail !== "" || this.currentVariation.item.manufacturer.responsibleHouseNo !== "" || this.currentVariation.item.manufacturer.responsibleName !== "" || this.currentVariation.item.manufacturer.responsiblePhoneNo !== "" || this.currentVariation.item.manufacturer.responsiblePostCode !== "" || this.currentVariation.item.manufacturer.responsibleStreet !== "" || this.currentVariation.item.manufacturer.responsibleTown !== "" || this.currentVariation.item.manufacturer.responsibleCountry !== 0;
     },
     isRecommendedPriceActive: function isRecommendedPriceActive() {
       return App.config.item.itemData.includes("item.recommendedPrice") || App.config.item.itemData.includes("all");
@@ -38335,6 +38371,31 @@ var render = function() {
                           )
                         ]),
                         _vm._v(" "),
+                        _vm.isEuResponsibleTabShown
+                          ? _c("li", { staticClass: "nav-item" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "nav-link",
+                                  attrs: {
+                                    "data-toggle": "tab",
+                                    href: "#eu-responsible",
+                                    role: "tab"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.singleItemEuResponsiblePerson"
+                                      )
+                                    )
+                                  )
+                                ]
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
                         _vm._t("add-detail-tabs")
                       ],
                       2
@@ -38784,6 +38845,110 @@ var render = function() {
                             ])
                           ]
                         ),
+                        _vm._v(" "),
+                        _vm.isEuResponsibleTabShown
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: "tab-pane overflow-auto",
+                                attrs: {
+                                  id: "eu-responsible",
+                                  role: "tabpanel"
+                                }
+                              },
+                              [
+                                _c("div", { staticClass: "my-4" }, [
+                                  _c("div", { staticClass: "p-0" }, [
+                                    _c("span", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.currentVariation.item.manufacturer
+                                            .responsibleName
+                                        )
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "p-0" }, [
+                                    _c("span", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.currentVariation.item.manufacturer
+                                            .responsibleStreet
+                                        )
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("span", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.currentVariation.item.manufacturer
+                                            .responsibleHouseNo
+                                        )
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "p-0" }, [
+                                    _c("span", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.currentVariation.item.manufacturer
+                                            .responsibleTown
+                                        )
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _vm.currentVariation.item.manufacturer
+                                      .responsibleCountryObject
+                                      ? _c("span", [
+                                          _vm._v(
+                                            "\n                                      " +
+                                              _vm._s(
+                                                _vm.currentVariation.item
+                                                  .manufacturer
+                                                  .responsibleCountryObject.name
+                                              ) +
+                                              "\n                                    "
+                                          )
+                                        ])
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _c("span", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.currentVariation.item.manufacturer
+                                            .responsiblePostCode
+                                        )
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "p-0" }, [
+                                    _c("span", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.currentVariation.item.manufacturer
+                                            .responsibleEmail
+                                        )
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "p-0" }, [
+                                    _c("span", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.currentVariation.item.manufacturer
+                                            .responsiblePhoneNo
+                                        )
+                                      )
+                                    ])
+                                  ])
+                                ])
+                              ]
+                            )
+                          : _vm._e(),
                         _vm._v(" "),
                         _vm._t("add-detail-tabs-content")
                       ],
