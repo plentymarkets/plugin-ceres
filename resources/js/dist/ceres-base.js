@@ -595,10 +595,14 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
       this.$nextTick(function () {
         _this2.$el.setAttribute('data-loaded', 'false');
 
-        var images = document.getElementById(_this2.uuid).getElementsByTagName('img');
+        var imageComponent = document.getElementById(_this2.uuid);
 
-        if (images.length > 0) {
-          images[0].remove();
+        if (imageComponent) {
+          var images = imageComponent.getElementsByTagName('img');
+
+          if (images && images.length > 0) {
+            images[0].remove();
+          }
         }
 
         Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_9__["default"])(_this2.$el, {
