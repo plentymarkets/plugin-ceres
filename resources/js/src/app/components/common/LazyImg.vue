@@ -117,9 +117,13 @@ export default {
             this.$nextTick(() => {
                 this.$el.setAttribute('data-loaded', 'false');
 
-                const images = document.getElementById(this.uuid).getElementsByTagName('img');
-                if (images.length > 0) {
-                    images[0].remove();
+                const imageComponent = document.getElementById(this.uuid);
+
+                if (imageComponent) {
+                    const images = imageComponent.getElementsByTagName('img');
+                    if (images && images.length > 0) {
+                        images[0].remove();
+                    }
                 }
 
                 lozad(this.$el, {
