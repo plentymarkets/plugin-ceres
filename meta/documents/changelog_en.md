@@ -1,6 +1,6 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.69 (2024-11-07) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.68...5.0.69" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.69 (2024-11-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.68...5.0.69" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
 
@@ -9,7 +9,8 @@
 ### Added
 
 - When selling items by manufacturers outside the European Union, you can now use ShopBuilder variables to insert the name, address, email, and phone number of the person responsible.
-- The shopBuilder preset for the single item view now includes a new tab for displaying information about the EU-Responsible Person in order to be GPSR-compliant.
+- The ShopBuilder preset for the single item view now includes a new tab for displaying information about the EU-Responsible Person in order to be GPSR-compliant.
+- The default preset for the single item view now includes a new tab for displaying information about the EU-Responsible Person in order to be GPSR-compliant.
 - You can now specify the item title tag in the "HTML title for webshop" input field of an item. If no title tag has been saved for an item, the previous fallback "item name | company name" will be output instead.
 - The wish list now contains information on value-added tax and shipping costs.
 
@@ -21,6 +22,7 @@
 - [resources/js/src/app/components/wishList/WishListItem.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.68...stable#diff-be8788b59e5887730f9bb4aa5a12d093908265ff19c26bb5ddca99485e7d7621)
 - [resources/views/Item/SingleItemWrapper.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.68...stable#diff-192a8837dba88964356b7ecd49003fe083ed719e2c601b9623e6dd4b24be9326)
 - [resources/views/PageDesign/Partials/PageMetadata.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.68...stable#diff-98be1deb08f271fd2d41c05df5d33c20846032e5b77cb7ba59f615dda20d767f)
+- [resources/js/src/app/components/item/SingleItem.vue](https://github.com/plentymarkets/plugin-ceres/pull/3612/files#diff-24dd25ca458027f998950fb4b48c9908ba241ac54bcf94c6de48c26107d86c15)
 
 ## v5.0.68 (2024-09-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.67...5.0.68" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
