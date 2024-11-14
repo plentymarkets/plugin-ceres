@@ -11,7 +11,7 @@
                 <input :id="'option-' + value.id + '-' + _uid" class="form-check-input d-none" type="checkbox" :checked="isSelected(value.id)" @change="updateFacet(value)" :disabled="isLoading || value.count <= 0">
                 <label :for="'option-' + value.id + '-' + _uid" class="form-check-label" :class="[paddingClasses, isSelected(value.id) ? 'bg-appearance' : '', 'option-' + value.id]" :style="paddingInlineStyles">
                     <div class="d-flex">
-                        <span class="flex-grow-1">{{ value.name }}</span>
+                        <span class="flex-grow-1" v-html="value.name" />
                         <div class="filter-badge">{{ value.count }}</div>
                     </div>
                 </label>
