@@ -1,5 +1,11 @@
 # Release Notes for plentyShop LTS
 
+## v5.0.70 (xxxx-xx-xx)
+
+### Fixed
+
+- Fixed wrongful display of facet manufacturer name apostrophe character.
+
 ## v5.0.69 (2024-11-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.68...5.0.69" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
