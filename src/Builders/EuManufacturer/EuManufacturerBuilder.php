@@ -2,13 +2,13 @@
 
 namespace Ceres\Builders\EuManufacturer;
 
-use Ceres\Builders\EuManufacturer\Abstracts\AbstractEuManufacturerBuilder;
+use Ceres\Builders\Abstracts\AbstractBuilderFieldGenerator;
 use Ceres\Builders\EuManufacturer\Address\DetailedAddressBuilder;
 use Ceres\Builders\EuManufacturer\Address\GeneralAddressBuilder;
 use Ceres\ShopBuilder\DataFieldProvider\Item\ManufacturerDataFieldProvider;
 use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 
-class EuManufacturerBuilder extends AbstractEuManufacturerBuilder
+class EuManufacturerBuilder extends AbstractBuilderFieldGenerator
 {
     /** @var array */
     public array $results = [];

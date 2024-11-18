@@ -2,10 +2,10 @@
 
 namespace Ceres\Builders\EuManufacturer\Address;
 
-use Ceres\Builders\EuManufacturer\Abstracts\AbstractEuManufacturerBuilder;
+use Ceres\Builders\Abstracts\AbstractBuilderFieldGenerator;
 use Ceres\ShopBuilder\DataFieldProvider\Item\ManufacturerDataFieldProvider;
 
-class DetailedAddressBuilder extends AbstractEuManufacturerBuilder
+class DetailedAddressBuilder extends AbstractBuilderFieldGenerator
 {
     /** @var array */
     public array $results = [];
