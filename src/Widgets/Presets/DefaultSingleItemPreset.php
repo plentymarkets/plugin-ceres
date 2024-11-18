@@ -383,7 +383,7 @@ class DefaultSingleItemPreset implements ContentPreset
         $this->manufacturerBuilder->withCountry();
         $this->manufacturerBuilder->withPhoneNumber();
         $this->manufacturerBuilder->withFaxNumber();
-        //$this->manufacturerBuilder->withEmail();
+        $this->manufacturerBuilder->withEmail();
         $this->manufacturerBuilder->build($this->tabWidget, $uuidManufacturer);
    }
 
