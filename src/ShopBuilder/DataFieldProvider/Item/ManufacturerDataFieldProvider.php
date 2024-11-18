@@ -80,18 +80,4 @@ class ManufacturerDataFieldProvider extends DataFieldProvider
         $this->addField(self::RESPONSIBLE_EMAIL, "Ceres::Widget.dataFieldManufacturerResponsibleEmail", "item_data_field('item.manufacturer.responsibleEmail')");
         $this->addField(self::RESPONSIBLE_PHONE, "Ceres::Widget.dataFieldManufacturerResponsiblePhoneNo", "item_data_field('item.manufacturer.responsiblePhoneNo')");
     }
-
-    public static function getEuResponsibleFields(): array
-    {
-        return [
-            self::RESPONSIBLE_NAME,
-            self::RESPONSIBLE_STREET,
-            self::RESPONSIBLE_HOUSE_NO,
-            self::RESPONSIBLE_POST_CODE,
-            self::RESPONSIBLE_TOWN,
-            self::RESPONSIBLE_COUNTRY,
-            self::RESPONSIBLE_EMAIL,
-            self::RESPONSIBLE_PHONE,
-        ];
-    }
 }
