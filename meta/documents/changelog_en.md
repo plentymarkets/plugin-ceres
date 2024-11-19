@@ -4,7 +4,7 @@
 
 ### Fixed
 
-- Fixed wrongful display of facet manufacturer name apostrophe character.
+- Due to an error, apostrophes in manufacturers' names in facets were not displayed correctly. This has been fixed.
 
 ## v5.0.69 (2024-11-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.68...5.0.69" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 

@@ -1,5 +1,11 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.70 (xxxx-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.69...5.0.70" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Durch einen Fehler wurden Apostrophen in Herstellernamen nicht korrekt dargestellt, wenn Artikel nach Hersteller gefiltert wurden. Dies wurde behoben.
+
 ## v5.0.69 (2024-11-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.68...5.0.69" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
