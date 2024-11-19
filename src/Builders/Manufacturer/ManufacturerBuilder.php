@@ -34,7 +34,7 @@ class ManufacturerBuilder extends AbstractBuilderFieldGenerator
      */
     public function withName(): ManufacturerBuilder
     {
-        $this->results[] = $this->getShopBuilderDataFieldProvider(ManufacturerDataFieldProvider::HOMEPAGE);
+        $this->results[] = $this->getShopBuilderDataFieldProvider(ManufacturerDataFieldProvider::NAME);
 
         return $this;
     }
