@@ -210,7 +210,7 @@ class DisplayedInformationStep extends Step
                         "name" => "Wizard.attributeSelectDefaultOption",
                     ]
                 ],
-                "displayInfo_cartItemData" => [
+                "displayInfo_manufacturerInformation" => [
                     "type" => "checkboxGroup",
                     "defaultValue" => [],
                     "options" => [
