@@ -3,6 +3,8 @@
 namespace Ceres\Builders\Manufacturer;
 
 use Ceres\Builders\Abstracts\AbstractBuilderFieldGenerator;
+use Ceres\Builders\Manufacturer\Address\DetailedAddressBuilder;
+use Ceres\Builders\Manufacturer\Address\GeneralAddressBuilder;
 use Ceres\ShopBuilder\DataFieldProvider\Item\ManufacturerDataFieldProvider;
 use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 
@@ -10,6 +12,32 @@ class ManufacturerBuilder extends AbstractBuilderFieldGenerator
 {
     /** @var array */
     public array $results = [];
+
+    /** @var DetailedAddressBuilder */
+    public DetailedAddressBuilder $detailedAddressBuilder;
+    /** @var GeneralAddressBuilder */
+    public GeneralAddressBuilder $generalAddressBuilder;
+
+    /**
+     * @param DetailedAddressBuilder $detailedAddressBuilder
+     * @param GeneralAddressBuilder $generalAddressBuilder
+     */
+    public function __construct(DetailedAddressBuilder $detailedAddressBuilder,
+                                GeneralAddressBuilder $generalAddressBuilder
+    ) {
+        $this->detailedAddressBuilder = $detailedAddressBuilder;
+        $this->generalAddressBuilder  = $generalAddressBuilder;
+    }
+
+    /**
+     * @return ManufacturerBuilder
+     */
+    public function withName(): ManufacturerBuilder
+    {
+        $this->results[] = $this->getShopBuilderDataFieldProvider(ManufacturerDataFieldProvider::HOMEPAGE);
+
+        return $this;
+    }
 
     /**
      * @return ManufacturerBuilder
@@ -24,48 +52,28 @@ class ManufacturerBuilder extends AbstractBuilderFieldGenerator
     /**
      * @return ManufacturerBuilder
      */
-    public function withStreet(): ManufacturerBuilder
+    public function withDetailedAddress(): ManufacturerBuilder
     {
-        $this->results[] = $this->getShopBuilderDataFieldProvider(ManufacturerDataFieldProvider::STREET);
+        $this->detailedAddressBuilder->withStreet();
+        $this->detailedAddressBuilder->withHouseNumber();
+        $this->results[] = $this->detailedAddressBuilder->build();
 
         return $this;
     }
+
     /**
      * @return ManufacturerBuilder
      */
-    public function withHouseNumber(): ManufacturerBuilder
+    public function withGeneralAddress(): ManufacturerBuilder
     {
-        $this->results[] = $this->getShopBuilderDataFieldProvider(ManufacturerDataFieldProvider::HOUSE_NO);
+        $this->generalAddressBuilder->withCity();
+        $this->generalAddressBuilder->withCountry();
+        $this->generalAddressBuilder->withPostCode();
+        $this->results[] = $this->generalAddressBuilder->build();
 
         return $this;
     }
-    /**
-     * @return ManufacturerBuilder
-     */
-    public function withPostCode(): ManufacturerBuilder
-    {
-        $this->results[] = $this->getShopBuilderDataFieldProvider(ManufacturerDataFieldProvider::POST_CODE);
 
-        return $this;
-    }
-    /**
-     * @return ManufacturerBuilder
-     */
-    public function withTown(): ManufacturerBuilder
-    {
-        $this->results[] = $this->getShopBuilderDataFieldProvider(ManufacturerDataFieldProvider::TOWN);
-
-        return $this;
-    }
-    /**
-     * @return ManufacturerBuilder
-     */
-    public function withCountry(): ManufacturerBuilder
-    {
-        $this->results[] = $this->getShopBuilderDataFieldProvider(ManufacturerDataFieldProvider::COUNTRY);
-
-        return $this;
-    }
     /**
      * @return ManufacturerBuilder
      */

@@ -17,23 +17,29 @@ use Plenty\Modules\ShopBuilder\Providers\DataFieldProvider;
 class ManufacturerDataFieldProvider extends DataFieldProvider
 {
     /** @var string */
-    public const HOMEPAGE   = 'homepage';
+    public const NAME          = 'name';
     /** @var string */
-    public const STREET     = 'street';
+    public const EXTERNAL_NAME = 'externalName';
     /** @var string */
-    public const HOUSE_NO   = 'houseNo';
+    public const LOGO          = 'logo';
     /** @var string */
-    public const POST_CODE  = 'postcode';
+    public const HOMEPAGE      = 'homepage';
     /** @var string */
-    public const TOWN       = 'town';
+    public const STREET        = 'street';
     /** @var string */
-    public const COUNTRY    = 'country';
+    public const HOUSE_NO      = 'houseNo';
     /** @var string */
-    public const PHONE      = 'phoneNumber';
+    public const POST_CODE     = 'postcode';
     /** @var string */
-    public const FAX_NO     = 'faxNumber';
+    public const TOWN          = 'town';
     /** @var string */
-    public const EMAIL      = 'email';
+    public const COUNTRY       = 'country';
+    /** @var string */
+    public const PHONE         = 'phoneNumber';
+    /** @var string */
+    public const FAX_NO        = 'faxNumber';
+    /** @var string */
+    public const EMAIL         = 'email';
 
     /** @var string */
     public const RESPONSIBLE_NAME      = 'responsibleName';
@@ -57,9 +63,9 @@ class ManufacturerDataFieldProvider extends DataFieldProvider
      */
     function register()
     {
-        $this->addField("name", "Ceres::Widget.dataFieldManufacturerName", "item_data_field('item.manufacturer.name')");
-        $this->addField("externalName", "Ceres::Widget.dataFieldManufacturerExternalName", "item_data_field('item.manufacturer.externalName')");
-        $this->addField("logo", "Ceres::Widget.dataFieldManufacturerLogo", "item_data_field('item.manufacturer.logo', null, 'src', 'img')");
+        $this->addField(self::NAME, "Ceres::Widget.dataFieldManufacturerName", "item_data_field('item.manufacturer.name')");
+        $this->addField(self::EXTERNAL_NAME, "Ceres::Widget.dataFieldManufacturerExternalName", "item_data_field('item.manufacturer.externalName')");
+        $this->addField(self::LOGO, "Ceres::Widget.dataFieldManufacturerLogo", "item_data_field('item.manufacturer.logo', null, 'src', 'img')");
 
         $this->addField(self::HOMEPAGE, "Ceres::Widget.dataFieldManufacturerHomepage", "item_data_field('item.manufacturer.url')");
         $this->addField(self::STREET, "Ceres::Widget.dataFieldManufacturerStreet", "item_data_field('item.manufacturer.street')");
