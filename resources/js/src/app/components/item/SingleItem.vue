@@ -377,7 +377,7 @@ export default {
                 (this.currentVariation.item.manufacturer.houseNo !== "") ||
                 (this.currentVariation.item.manufacturer.postcode !== "") ||
                 (this.currentVariation.item.manufacturer.town !== "") ||
-                (this.currentVariation.item.manufacturer.country !== 0) ||
+                (this.currentVariation.item.manufacturer.countryId !== 0) ||
                 (this.currentVariation.item.manufacturer.phoneNumber !== "") ||
                 (this.currentVariation.item.manufacturer.faxNumber !== "") ||
                 (this.currentVariation.item.manufacturer.email !== "");
