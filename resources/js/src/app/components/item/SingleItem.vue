@@ -258,29 +258,28 @@
                                 <div class="tab-pane overflow-auto" id="manufacturer" role="tabpanel" v-if="isManufacturerTabShown">
                                 <div class="my-4">
                                   <div class="p-0">
-                                    <span>{{ currentVariation.item.manufacturer.url }}</span>
+                                    <span>{{ currentVariation.item.manufacturer.name }}</span>
                                   </div>
 
                                   <div class="p-0">
                                     <span>{{ currentVariation.item.manufacturer.street }}</span>
-                                  </div>
-
-                                  <div class="p-0">
                                     <span>{{ currentVariation.item.manufacturer.houseNo }}</span>
                                   </div>
 
                                   <div class="p-0">
+                                    <span>{{ currentVariation.item.manufacturer.town }}</span>
+                                    <span v-if="currentVariation.item.manufacturer.countryObject">
+                                      {{ currentVariation.item.manufacturer.countryObject.name }}
+                                    </span>
                                     <span>{{ currentVariation.item.manufacturer.postcode }}</span>
                                   </div>
 
                                   <div class="p-0">
-                                    <span>{{ currentVariation.item.manufacturer.town }}</span>
+                                    <span>{{ currentVariation.item.manufacturer.email }}</span>
                                   </div>
 
                                   <div class="p-0">
-                                    <span v-if="currentVariation.item.manufacturer.countryObject">
-                                      {{ currentVariation.item.manufacturer.countryObject.name }}
-                                    </span>
+                                    <span>{{ currentVariation.item.manufacturer.url }}</span>
                                   </div>
 
                                   <div class="p-0">
@@ -289,10 +288,6 @@
 
                                   <div class="p-0">
                                     <span>{{ currentVariation.item.manufacturer.faxNumber }}</span>
-                                  </div>
-
-                                  <div class="p-0">
-                                    <span>{{ currentVariation.item.manufacturer.email }}</span>
                                   </div>
                                 </div>
                               </div>
@@ -380,7 +375,8 @@ export default {
                 (this.currentVariation.item.manufacturer.countryId !== 0) ||
                 (this.currentVariation.item.manufacturer.phoneNumber !== "") ||
                 (this.currentVariation.item.manufacturer.faxNumber !== "") ||
-                (this.currentVariation.item.manufacturer.email !== "");
+                (this.currentVariation.item.manufacturer.email !== "") ||
+                (this.currentVariation.item.manufacturer.name !== "");
         },
 
         isEuResponsibleTabShown()
