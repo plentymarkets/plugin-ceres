@@ -136,6 +136,10 @@
                                     <a class="nav-link" data-toggle="tab" href="#eu-responsible" role="tab">{{ $translate("Ceres::Template.singleItemEuResponsiblePerson") }}</a>
                                 </li>
 
+                                <li class="nav-item" v-if="isManufacturerTabShown">
+                                  <a class="nav-link" data-toggle="tab" href="#manufacturer" role="tab">{{ $translate("Ceres::Template.singleItemManufacturer") }}</a>
+                                </li>
+
                                 <slot name="add-detail-tabs"></slot>
                             </ul>
 
@@ -251,6 +255,43 @@
                                   </div>
                                 </div>
 
+                                <div class="tab-pane overflow-auto" id="manufacturer" role="tabpanel" v-if="isManufacturerTabShown">
+                                <div class="my-4">
+                                  <div class="p-0">
+                                    <span>{{ currentVariation.item.manufacturer.name }}</span>
+                                  </div>
+
+                                  <div class="p-0">
+                                    <span>{{ currentVariation.item.manufacturer.street }}</span>
+                                    <span>{{ currentVariation.item.manufacturer.houseNo }}</span>
+                                  </div>
+
+                                  <div class="p-0">
+                                    <span>{{ currentVariation.item.manufacturer.town }}</span>
+                                    <span v-if="currentVariation.item.manufacturer.countryObject">
+                                      {{ currentVariation.item.manufacturer.countryObject.name }}
+                                    </span>
+                                    <span>{{ currentVariation.item.manufacturer.postcode }}</span>
+                                  </div>
+
+                                  <div class="p-0">
+                                    <span>{{ currentVariation.item.manufacturer.email }}</span>
+                                  </div>
+
+                                  <div class="p-0">
+                                    <span>{{ currentVariation.item.manufacturer.url }}</span>
+                                  </div>
+
+                                  <div class="p-0">
+                                    <span>{{ currentVariation.item.manufacturer.phoneNumber }}</span>
+                                  </div>
+
+                                  <div class="p-0">
+                                    <span>{{ currentVariation.item.manufacturer.faxNumber }}</span>
+                                  </div>
+                                </div>
+                              </div>
+
                                 <slot name="add-detail-tabs-content"></slot>
                             </div>
                         </div>
@@ -322,6 +363,20 @@ export default {
         {
             return (App.config.item.itemData.includes("item.description") || App.config.item.itemData.includes("all"))
                 && !!this.currentVariation.texts.description.length;
+        },
+
+        isManufacturerTabShown()
+        {
+            return (this.currentVariation.item.manufacturer.url !== "") ||
+                (this.currentVariation.item.manufacturer.street !== "") ||
+                (this.currentVariation.item.manufacturer.houseNo !== "") ||
+                (this.currentVariation.item.manufacturer.postcode !== "") ||
+                (this.currentVariation.item.manufacturer.town !== "") ||
+                (this.currentVariation.item.manufacturer.countryId !== 0) ||
+                (this.currentVariation.item.manufacturer.phoneNumber !== "") ||
+                (this.currentVariation.item.manufacturer.faxNumber !== "") ||
+                (this.currentVariation.item.manufacturer.email !== "") ||
+                (this.currentVariation.item.manufacturer.name !== "");
         },
 
         isEuResponsibleTabShown()
