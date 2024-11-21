@@ -956,6 +956,28 @@
                     "options": {
                         "defaultValue": "false"
                     }
+                },
+                "item.manufacturer_data": {
+                    "type": "multiCheckBox",
+                    "required": false,
+                    "label": "Config.itemManufacturerDataLabel",
+                    "options": {
+                        "defaultValue": "",
+                        "checkBoxValues": [
+                            {
+                                "value": "name",
+                                "caption": "Config.itemManufacturerName"
+                            },
+                            {
+                                "value": "logoUrl",
+                                "caption": "Config.itemManufacturerLogoUrl"
+                            },
+                            {
+                                "value": "homepage",
+                                "caption": "Config.itemManufacturerHomepage"
+                            }
+                        ]
+                    }
                 }
             }
         },
