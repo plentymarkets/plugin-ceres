@@ -1165,10 +1165,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.symbol.description.js */ "./node_modules/core-js/modules/es.symbol.description.js");
 /* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
-/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _helper_get__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../helper/get */ "./resources/js/src/app/helper/get.js");
 /* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
 
@@ -1178,6 +1178,47 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1485,6 +1526,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     isDescriptionTabActive: function isDescriptionTabActive() {
       return (App.config.item.itemData.includes("item.description") || App.config.item.itemData.includes("all")) && !!this.currentVariation.texts.description.length;
+    },
+    isManufacturerTabShown: function isManufacturerTabShown() {
+      return this.currentVariation.item.manufacturer.url !== "" || this.currentVariation.item.manufacturer.street !== "" || this.currentVariation.item.manufacturer.houseNo !== "" || this.currentVariation.item.manufacturer.postcode !== "" || this.currentVariation.item.manufacturer.town !== "" || this.currentVariation.item.manufacturer.countryId !== 0 || this.currentVariation.item.manufacturer.phoneNumber !== "" || this.currentVariation.item.manufacturer.faxNumber !== "" || this.currentVariation.item.manufacturer.email !== "" || this.currentVariation.item.manufacturer.name !== "";
     },
     isEuResponsibleTabShown: function isEuResponsibleTabShown() {
       return this.currentVariation.item.manufacturer.responsibleEmail !== "" || this.currentVariation.item.manufacturer.responsibleHouseNo !== "" || this.currentVariation.item.manufacturer.responsibleName !== "" || this.currentVariation.item.manufacturer.responsiblePhoneNo !== "" || this.currentVariation.item.manufacturer.responsiblePostCode !== "" || this.currentVariation.item.manufacturer.responsibleStreet !== "" || this.currentVariation.item.manufacturer.responsibleTown !== "" || this.currentVariation.item.manufacturer.responsibleCountry !== 0;
@@ -38396,6 +38440,31 @@ var render = function() {
                             ])
                           : _vm._e(),
                         _vm._v(" "),
+                        _vm.isManufacturerTabShown
+                          ? _c("li", { staticClass: "nav-item" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "nav-link",
+                                  attrs: {
+                                    "data-toggle": "tab",
+                                    href: "#manufacturer",
+                                    role: "tab"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.singleItemManufacturer"
+                                      )
+                                    )
+                                  )
+                                ]
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
                         _vm._t("add-detail-tabs")
                       ],
                       2
@@ -38941,6 +39010,129 @@ var render = function() {
                                         _vm._s(
                                           _vm.currentVariation.item.manufacturer
                                             .responsiblePhoneNo
+                                        )
+                                      )
+                                    ])
+                                  ])
+                                ])
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.isManufacturerTabShown
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: "tab-pane overflow-auto",
+                                attrs: { id: "manufacturer", role: "tabpanel" }
+                              },
+                              [
+                                _c("div", { staticClass: "my-4" }, [
+                                  _c("div", { staticClass: "p-0" }, [
+                                    _c("span", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.currentVariation.item.manufacturer
+                                            .name
+                                        )
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "p-0" }, [
+                                    _c("span", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.currentVariation.item.manufacturer
+                                            .street
+                                        )
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("span", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.currentVariation.item.manufacturer
+                                            .houseNo
+                                        )
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "p-0" }, [
+                                    _c("span", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.currentVariation.item.manufacturer
+                                            .town
+                                        )
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _vm.currentVariation.item.manufacturer
+                                      .countryObject
+                                      ? _c("span", [
+                                          _vm._v(
+                                            "\n                                  " +
+                                              _vm._s(
+                                                _vm.currentVariation.item
+                                                  .manufacturer.countryObject
+                                                  .name
+                                              ) +
+                                              "\n                                "
+                                          )
+                                        ])
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _c("span", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.currentVariation.item.manufacturer
+                                            .postcode
+                                        )
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "p-0" }, [
+                                    _c("span", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.currentVariation.item.manufacturer
+                                            .email
+                                        )
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "p-0" }, [
+                                    _c("span", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.currentVariation.item.manufacturer
+                                            .url
+                                        )
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "p-0" }, [
+                                    _c("span", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.currentVariation.item.manufacturer
+                                            .phoneNumber
+                                        )
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "p-0" }, [
+                                    _c("span", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.currentVariation.item.manufacturer
+                                            .faxNumber
                                         )
                                       )
                                     ])

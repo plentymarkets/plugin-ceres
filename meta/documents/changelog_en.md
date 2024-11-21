@@ -13,6 +13,8 @@
 - The default preset for the single item view now includes a new tab for displaying information about the EU-Responsible Person in order to be GPSR-compliant.
 - You can now specify the item title tag in the "HTML title for webshop" input field of an item. If no title tag has been saved for an item, the previous fallback "item name | company name" will be output instead.
 - The wish list now contains information on value-added tax and shipping costs.
+- The ShopBuilder preset for the single item view now includes a new tab for displaying information about the manufacturer.
+- The default template for the single item view now includes a new tab for displaying information about the manufacturer.
 
 ### Changed Templates
 

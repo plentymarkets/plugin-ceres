@@ -13,6 +13,8 @@
 - Die Standard-Vorlage für die Artikelansicht enthält nun ein neues Tab, in dem Informationen zur EU-verantwortlichen Person angezeigt werden, um die Anforderungen Produktsicherheitsverordnung (GPSR) zu erfüllen.
 - Im Eingabefeld „HTML-Titel für Webshop“ eines Artikels kann jetzt der Title-Tag für Artikel angegeben werden. Wenn für einen Artikel kein Title-Tag hinterlegt ist, wird stattdessen der bisherige Fallback „Artikelname | Firmenname“ ausgegeben.
 - Die Wunschliste enthält nun die Hinweistexte zur Mehrwertsteuer und zu den Versandkosten.
+- Die ShopBuilder-Vorlage für die Artikelansicht enthält jetzt ein neues Tab für die Anzeige von Informationen über den Hersteller.
+- Die Standardvorlage für die Artikelansicht enthält jetzt ein neues Tab für die Anzeige von Informationen über den Hersteller.
 
 ### Angepasste Templates
 

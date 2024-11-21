@@ -2,18 +2,18 @@
 
 namespace Ceres\Builders\EuManufacturer\Address;
 
-use Ceres\Builders\EuManufacturer\Abstracts\AbstractEuManufacturerBuilder;
+use Ceres\Builders\Abstracts\AbstractBuilderFieldGenerator;
 use Ceres\ShopBuilder\DataFieldProvider\Item\ManufacturerDataFieldProvider;
 
-class DetailedAddressBuilder extends AbstractEuManufacturerBuilder
+class DetailedEuAddressBuilder extends AbstractBuilderFieldGenerator
 {
     /** @var array */
     public array $results = [];
 
     /**
-     * @return DetailedAddressBuilder
+     * @return DetailedEuAddressBuilder
      */
-    public function withStreet(): DetailedAddressBuilder
+    public function withStreet(): DetailedEuAddressBuilder
     {
         $this->results[] = $this->getShopBuilderDataFieldProvider(ManufacturerDataFieldProvider::RESPONSIBLE_STREET);
 
@@ -21,9 +21,9 @@ class DetailedAddressBuilder extends AbstractEuManufacturerBuilder
     }
 
     /**
-     * @return DetailedAddressBuilder
+     * @return DetailedEuAddressBuilder
      */
-    public function withHouseNumber(): DetailedAddressBuilder
+    public function withHouseNumber(): DetailedEuAddressBuilder
     {
         $this->results[] = $this->getShopBuilderDataFieldProvider(ManufacturerDataFieldProvider::RESPONSIBLE_HOUSE_NO);
 
