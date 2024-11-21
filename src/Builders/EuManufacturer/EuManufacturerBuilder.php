@@ -3,8 +3,8 @@
 namespace Ceres\Builders\EuManufacturer;
 
 use Ceres\Builders\Abstracts\AbstractBuilderFieldGenerator;
-use Ceres\Builders\EuManufacturer\Address\DetailedAddressBuilder;
-use Ceres\Builders\EuManufacturer\Address\GeneralAddressBuilder;
+use Ceres\Builders\EuManufacturer\Address\DetailedEuAddressBuilder;
+use Ceres\Builders\EuManufacturer\Address\GeneralEuAddressBuilder;
 use Ceres\ShopBuilder\DataFieldProvider\Item\ManufacturerDataFieldProvider;
 use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 
@@ -13,17 +13,17 @@ class EuManufacturerBuilder extends AbstractBuilderFieldGenerator
     /** @var array */
     public array $results = [];
 
-    /** @var DetailedAddressBuilder */
-    public DetailedAddressBuilder $detailedAddressBuilder;
-    /** @var GeneralAddressBuilder */
-    public GeneralAddressBuilder $generalAddressBuilder;
+    /** @var DetailedEuAddressBuilder */
+    public DetailedEuAddressBuilder $detailedAddressBuilder;
+    /** @var GeneralEuAddressBuilder */
+    public GeneralEuAddressBuilder $generalAddressBuilder;
 
     /**
-     * @param DetailedAddressBuilder $detailedAddressBuilder
-     * @param GeneralAddressBuilder $generalAddressBuilder
+     * @param DetailedEuAddressBuilder $detailedAddressBuilder
+     * @param GeneralEuAddressBuilder $generalAddressBuilder
      */
-    public function __construct(DetailedAddressBuilder $detailedAddressBuilder,
-                                GeneralAddressBuilder $generalAddressBuilder
+    public function __construct(DetailedEuAddressBuilder $detailedAddressBuilder,
+                                GeneralEuAddressBuilder $generalAddressBuilder
     ) {
         $this->detailedAddressBuilder = $detailedAddressBuilder;
         $this->generalAddressBuilder  = $generalAddressBuilder;
