@@ -975,6 +975,42 @@
                             {
                                 "value": "homepage",
                                 "caption": "Config.itemManufacturerHomepage"
+                            },
+                            {
+                                "value": "street",
+                                "caption": "Config.itemManufacturerStreet"
+                            },
+                            {
+                                "value": "houseNumber",
+                                "caption": "Config.itemManufacturerHouseNo"
+                            },
+                            {
+                                "value": "postcode",
+                                "caption": "Config.itemManufacturerPostcode"
+                            },
+                            {
+                                "value": "town",
+                                "caption": "Config.itemManufacturerTown"
+                            },
+                            {
+                                "value": "country",
+                                "caption": "Config.itemManufacturerCountry"
+                            },
+                            {
+                                "value": "phoneNumber",
+                                "caption": "Config.itemManufacturerTelephoneNumber"
+                            },
+                            {
+                                "value": "faxNumber",
+                                "caption": "Config.itemManufacturerFaxNumber"
+                            },
+                            {
+                                "value": "email",
+                                "caption": "Config.itemManufacturerEmail"
+                            },
+                            {
+                                "value": "externalName",
+                                "caption": "Config.itemManufacturerExternalName"
                             }
                         ]
                     }

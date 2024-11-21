@@ -170,21 +170,6 @@ class DisplayedInformationStep extends Step
      */
     private function generateItemView(): array
     {
-        $options = [
-            ["value" => "name", "caption" => "Wizard.itemManufacturerName"],
-            ["value" => "logoUrl", "caption" => "Wizard.itemManufacturerLogoUrl"],
-            ["value" => "homepage", "caption" => "Wizard.itemManufacturerHomepage"],
-//            ["value" => "street", "caption" => "Wizard.itemManufacturerStreet"],
-//            ["value" => "houseNumber", "caption" => "Wizard.itemManufacturerHouseNo"],
-//            ["value" => "postcode", "caption" => "Wizard.itemManufacturerPostcode"],
-//            ["value" => "town", "caption" => "Wizard.itemManufacturerTown"],
-//            ["value" => "country", "caption" => "Wizard.itemManufacturerCountry"],
-//            ["value" => "phoneNumber", "caption" => "Wizard.itemManufacturerTelephoneNumber"],
-//            ["value" => "faxNumber", "caption" => "Wizard.itemManufacturerFaxNumber"],
-//            ["value" => "email", "caption" => "Wizard.itemManufacturerEmail"],
-//            ["value" => "externalName", "caption" => "Wizard.itemManufacturerExternalName"]
-        ];
-
         return [
             "title" => "Wizard.itemViewSettings",
             "form" => [
@@ -215,7 +200,20 @@ class DisplayedInformationStep extends Step
                     "defaultValue" => [],
                     "options" => [
                         "name" => "Wizard.displayManufacturerItemInfo",
-                        "checkboxValues" => $options
+                        "checkboxValues" => [
+                            ["value" => "name", "caption" => "Wizard.itemManufacturerName"],
+                            ["value" => "logoUrl", "caption" => "Wizard.itemManufacturerLogoUrl"],
+                            ["value" => "homepage", "caption" => "Wizard.itemManufacturerHomepage"],
+                            ["value" => "street", "caption" => "Wizard.itemManufacturerStreet"],
+                            ["value" => "houseNumber", "caption" => "Wizard.itemManufacturerHouseNo"],
+                            ["value" => "postcode", "caption" => "Wizard.itemManufacturerPostcode"],
+                            ["value" => "town", "caption" => "Wizard.itemManufacturerTown"],
+                            ["value" => "country", "caption" => "Wizard.itemManufacturerCountry"],
+                            ["value" => "phoneNumber", "caption" => "Wizard.itemManufacturerTelephoneNumber"],
+                            ["value" => "faxNumber", "caption" => "Wizard.itemManufacturerFaxNumber"],
+                            ["value" => "email", "caption" => "Wizard.itemManufacturerEmail"],
+                            ["value" => "externalName", "caption" => "Wizard.itemManufacturerExternalName"]
+                        ]
                     ]
                 ],
             ]
