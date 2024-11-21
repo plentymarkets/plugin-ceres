@@ -969,11 +969,11 @@
                                 "caption": "Config.itemManufacturerName"
                             },
                             {
-                                "value": "logoUrl",
+                                "value": "logo",
                                 "caption": "Config.itemManufacturerLogoUrl"
                             },
                             {
-                                "value": "homepage",
+                                "value": "url",
                                 "caption": "Config.itemManufacturerHomepage"
                             },
                             {
@@ -981,15 +981,15 @@
                                 "caption": "Config.itemManufacturerStreet"
                             },
                             {
-                                "value": "houseNumber",
+                                "value": "houseNo",
                                 "caption": "Config.itemManufacturerHouseNo"
                             },
                             {
-                                "value": "postcode",
+                                "value": "zip",
                                 "caption": "Config.itemManufacturerPostcode"
                             },
                             {
-                                "value": "town",
+                                "value": "city",
                                 "caption": "Config.itemManufacturerTown"
                             },
                             {

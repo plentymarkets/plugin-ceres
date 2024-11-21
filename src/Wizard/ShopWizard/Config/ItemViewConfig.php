@@ -69,12 +69,12 @@ class ItemViewConfig
 
     private static array $manufacturerItemInfo = [
         "itemManufacturerName"              => "name",
-        "itemManufacturerLogoUrl"           => "logoUrl",
-        "itemManufacturerHomepage"          => "homepage",
+        "itemManufacturerLogoUrl"           => "logo",
+        "itemManufacturerHomepage"          => "url",
         "itemManufacturerStreet"            => "street",
-        "itemManufacturerHouseNo"           => "houseNumber",
-        "itemManufacturerPostcode"          => "postcode",
-        "itemManufacturerTown"              => "town",
+        "itemManufacturerHouseNo"           => "houseNo",
+        "itemManufacturerPostcode"          => "zip",
+        "itemManufacturerTown"              => "city",
         "itemManufacturerCountry"           => "country",
         "itemManufacturerTelephoneNumber"   => "phoneNumber",
         "itemManufacturerFaxNumber"         => "faxNumber",
