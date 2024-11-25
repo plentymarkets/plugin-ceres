@@ -962,7 +962,7 @@
                     "required": false,
                     "label": "Config.itemManufacturerDataLabel",
                     "options": {
-                        "defaultValue": "",
+                        "defaultValue": "all",
                         "checkBoxValues": [
                             {
                                 "value": "name",
@@ -985,7 +985,7 @@
                                 "caption": "Config.itemManufacturerHouseNo"
                             },
                             {
-                                "value": "zip",
+                                "value": "postcode",
                                 "caption": "Config.itemManufacturerPostcode"
                             },
                             {
@@ -1011,6 +1011,14 @@
                             {
                                 "value": "externalName",
                                 "caption": "Config.itemManufacturerExternalName"
+                            },
+                            {
+                                "value": "legalName",
+                                "caption": "Config.itemManufacturerLegalName"
+                            },
+                            {
+                                "value": "contactUrl",
+                                "caption": "Config.itemManufacturerContactUrl"
                             }
                         ]
                     }

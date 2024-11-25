@@ -73,13 +73,15 @@ class ItemViewConfig
         "itemManufacturerHomepage"          => "url",
         "itemManufacturerStreet"            => "street",
         "itemManufacturerHouseNo"           => "houseNo",
-        "itemManufacturerPostcode"          => "zip",
+        "itemManufacturerPostcode"          => "postcode",
         "itemManufacturerTown"              => "city",
         "itemManufacturerCountry"           => "country",
         "itemManufacturerTelephoneNumber"   => "phoneNumber",
         "itemManufacturerFaxNumber"         => "faxNumber",
         "itemManufacturerEmail"             => "email",
         "itemManufacturerExternalName"      => "externalName",
+        "itemManufacturerLegalName"         => "legalName",
+        "itemManufacturerContactUrl"        => "contactUrl"
     ];
 
     /**
