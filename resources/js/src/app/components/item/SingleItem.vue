@@ -252,6 +252,10 @@
                                       <div class="p-0">
                                         <span>{{ currentVariation.item.manufacturer.responsiblePhoneNo }}</span>
                                       </div>
+
+                                    <div class="p-0">
+                                      <span>{{ currentVariation.item.manufacturer.responsibleContactUrl }}</span>
+                                    </div>
                                   </div>
                                 </div>
 
@@ -259,6 +263,10 @@
                                 <div class="my-4">
                                   <div class="p-0">
                                     <span>{{ currentVariation.item.manufacturer.name }}</span>
+                                  </div>
+
+                                  <div class="p-0">
+                                    <span>{{ currentVariation.item.manufacturer.legalName }}</span>
                                   </div>
 
                                   <div class="p-0">
@@ -288,6 +296,10 @@
 
                                   <div class="p-0">
                                     <span>{{ currentVariation.item.manufacturer.faxNumber }}</span>
+                                  </div>
+
+                                  <div class="p-0">
+                                    <span>{{ currentVariation.item.manufacturer.contactUrl }}</span>
                                   </div>
                                 </div>
                               </div>
@@ -376,6 +388,8 @@ export default {
                 (this.currentVariation.item.manufacturer.phoneNumber !== "") ||
                 (this.currentVariation.item.manufacturer.faxNumber !== "") ||
                 (this.currentVariation.item.manufacturer.email !== "") ||
+                (this.currentVariation.item.manufacturer.legalName !== "") ||
+                (this.currentVariation.item.manufacturer.contactUrl !== "") ||
                 (this.currentVariation.item.manufacturer.name !== "");
         },
 
@@ -388,6 +402,7 @@ export default {
                 (this.currentVariation.item.manufacturer.responsiblePostCode !== "") ||
                 (this.currentVariation.item.manufacturer.responsibleStreet !== "") ||
                 (this.currentVariation.item.manufacturer.responsibleTown !== "") ||
+                (this.currentVariation.item.manufacturer.responsibleContactUrl !== "") ||
                 (this.currentVariation.item.manufacturer.responsibleCountry !== 0);
         },
 

@@ -49,6 +49,8 @@
     "item.manufacturer.phoneNumber",
     "item.manufacturer.faxNumber",
     "item.manufacturer.email",
+    "item.manufacturer.legalName",
+    "item.manufacturer.contactUrl",
     "item.manufacturer.responsible*",
     "item.producingCountry.isoCode2",
     "item.producingCountry.isoCode3",
