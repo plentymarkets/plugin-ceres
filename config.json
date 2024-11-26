@@ -989,7 +989,7 @@
                                 "caption": "Config.itemManufacturerPostcode"
                             },
                             {
-                                "value": "city",
+                                "value": "town",
                                 "caption": "Config.itemManufacturerTown"
                             },
                             {
