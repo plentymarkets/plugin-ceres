@@ -74,7 +74,7 @@ class ItemViewConfig
         "itemManufacturerStreet"            => "street",
         "itemManufacturerHouseNo"           => "houseNo",
         "itemManufacturerPostcode"          => "postcode",
-        "itemManufacturerTown"              => "city",
+        "itemManufacturerTown"              => "town",
         "itemManufacturerCountry"           => "country",
         "itemManufacturerTelephoneNumber"   => "phoneNumber",
         "itemManufacturerFaxNumber"         => "faxNumber",
