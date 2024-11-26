@@ -15,6 +15,7 @@
 - The wish list now contains information on value-added tax and shipping costs.
 - The ShopBuilder preset for the single item view now includes a new tab for displaying information about the manufacturer.
 - The default template for the single item view now includes a new tab for displaying information about the manufacturer.
+- Added additional fields for EU Manufacturer and Manufacturer tabs of the ShopBuilder.
 
 ### Changed Templates
 

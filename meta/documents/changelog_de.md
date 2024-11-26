@@ -15,6 +15,7 @@
 - Die Wunschliste enthält nun die Hinweistexte zur Mehrwertsteuer und zu den Versandkosten.
 - Die ShopBuilder-Vorlage für die Artikelansicht enthält jetzt ein neues Tab für die Anzeige von Informationen über den Hersteller.
 - Die Standardvorlage für die Artikelansicht enthält jetzt ein neues Tab für die Anzeige von Informationen über den Hersteller.
+- Es wurden weitere Felder für den EU-Hersteller und das Hersteller-Tab im ShopBuilder hinzugefügt.
 
 ### Angepasste Templates
 
