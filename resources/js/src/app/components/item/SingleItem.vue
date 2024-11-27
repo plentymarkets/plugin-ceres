@@ -238,11 +238,11 @@
                                       </div>
 
                                       <div class="p-0">
+                                        <span>{{ currentVariation.item.manufacturer.responsiblePostCode }}</span>
                                         <span>{{ currentVariation.item.manufacturer.responsibleTown }}</span>
                                         <span v-if="currentVariation.item.manufacturer.responsibleCountryObject">
                                           {{ currentVariation.item.manufacturer.responsibleCountryObject.name }}
                                         </span>
-                                        <span>{{ currentVariation.item.manufacturer.responsiblePostCode }}</span>
                                       </div>
 
                                       <div class="p-0">
@@ -275,11 +275,12 @@
                                   </div>
 
                                   <div class="p-0">
+                                    <span>{{ currentVariation.item.manufacturer.postcode }}</span>
                                     <span>{{ currentVariation.item.manufacturer.town }}</span>
                                     <span v-if="currentVariation.item.manufacturer.countryObject">
                                       {{ currentVariation.item.manufacturer.countryObject.name }}
                                     </span>
-                                    <span>{{ currentVariation.item.manufacturer.postcode }}</span>
+
                                   </div>
 
                                   <div class="p-0">

@@ -76,9 +76,9 @@ class ManufacturerBuilder extends AbstractBuilderFieldGenerator
      */
     public function withGeneralAddress(): ManufacturerBuilder
     {
+        $this->generalAddressBuilder->withPostCode();
         $this->generalAddressBuilder->withCity();
         $this->generalAddressBuilder->withCountry();
-        $this->generalAddressBuilder->withPostCode();
         $this->results[] = $this->generalAddressBuilder->build();
 
         return $this;
