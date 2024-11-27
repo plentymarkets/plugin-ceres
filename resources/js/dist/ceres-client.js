@@ -1499,6 +1499,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -38975,6 +38976,15 @@ var render = function() {
                                       _vm._v(
                                         _vm._s(
                                           _vm.currentVariation.item.manufacturer
+                                            .responsiblePostCode
+                                        )
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("span", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.currentVariation.item.manufacturer
                                             .responsibleTown
                                         )
                                       )
@@ -38993,16 +39003,7 @@ var render = function() {
                                               "\n                                    "
                                           )
                                         ])
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    _c("span", [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm.currentVariation.item.manufacturer
-                                            .responsiblePostCode
-                                        )
-                                      )
-                                    ])
+                                      : _vm._e()
                                   ]),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "p-0" }, [
@@ -39098,6 +39099,15 @@ var render = function() {
                                       _vm._v(
                                         _vm._s(
                                           _vm.currentVariation.item.manufacturer
+                                            .postcode
+                                        )
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("span", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.currentVariation.item.manufacturer
                                             .town
                                         )
                                       )
@@ -39116,16 +39126,7 @@ var render = function() {
                                               "\n                                "
                                           )
                                         ])
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    _c("span", [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm.currentVariation.item.manufacturer
-                                            .postcode
-                                        )
-                                      )
-                                    ])
+                                      : _vm._e()
                                   ]),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "p-0" }, [
