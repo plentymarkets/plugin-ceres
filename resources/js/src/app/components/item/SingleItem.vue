@@ -238,11 +238,11 @@
                                       </div>
 
                                       <div class="p-0">
+                                        <span>{{ currentVariation.item.manufacturer.responsiblePostCode }}</span>
                                         <span>{{ currentVariation.item.manufacturer.responsibleTown }}</span>
                                         <span v-if="currentVariation.item.manufacturer.responsibleCountryObject">
                                           {{ currentVariation.item.manufacturer.responsibleCountryObject.name }}
                                         </span>
-                                        <span>{{ currentVariation.item.manufacturer.responsiblePostCode }}</span>
                                       </div>
 
                                       <div class="p-0">
@@ -252,6 +252,10 @@
                                       <div class="p-0">
                                         <span>{{ currentVariation.item.manufacturer.responsiblePhoneNo }}</span>
                                       </div>
+
+                                    <div class="p-0">
+                                      <span>{{ currentVariation.item.manufacturer.responsibleContactUrl }}</span>
+                                    </div>
                                   </div>
                                 </div>
 
@@ -262,16 +266,21 @@
                                   </div>
 
                                   <div class="p-0">
+                                    <span>{{ currentVariation.item.manufacturer.legalName }}</span>
+                                  </div>
+
+                                  <div class="p-0">
                                     <span>{{ currentVariation.item.manufacturer.street }}</span>
                                     <span>{{ currentVariation.item.manufacturer.houseNo }}</span>
                                   </div>
 
                                   <div class="p-0">
+                                    <span>{{ currentVariation.item.manufacturer.postcode }}</span>
                                     <span>{{ currentVariation.item.manufacturer.town }}</span>
                                     <span v-if="currentVariation.item.manufacturer.countryObject">
                                       {{ currentVariation.item.manufacturer.countryObject.name }}
                                     </span>
-                                    <span>{{ currentVariation.item.manufacturer.postcode }}</span>
+
                                   </div>
 
                                   <div class="p-0">
@@ -288,6 +297,10 @@
 
                                   <div class="p-0">
                                     <span>{{ currentVariation.item.manufacturer.faxNumber }}</span>
+                                  </div>
+
+                                  <div class="p-0">
+                                    <span>{{ currentVariation.item.manufacturer.contactUrl }}</span>
                                   </div>
                                 </div>
                               </div>
@@ -376,6 +389,8 @@ export default {
                 (this.currentVariation.item.manufacturer.phoneNumber !== "") ||
                 (this.currentVariation.item.manufacturer.faxNumber !== "") ||
                 (this.currentVariation.item.manufacturer.email !== "") ||
+                (this.currentVariation.item.manufacturer.legalName !== "") ||
+                (this.currentVariation.item.manufacturer.contactUrl !== "") ||
                 (this.currentVariation.item.manufacturer.name !== "");
         },
 
@@ -388,6 +403,7 @@ export default {
                 (this.currentVariation.item.manufacturer.responsiblePostCode !== "") ||
                 (this.currentVariation.item.manufacturer.responsibleStreet !== "") ||
                 (this.currentVariation.item.manufacturer.responsibleTown !== "") ||
+                (this.currentVariation.item.manufacturer.responsibleContactUrl !== "") ||
                 (this.currentVariation.item.manufacturer.responsibleCountry !== 0);
         },
 

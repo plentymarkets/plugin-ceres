@@ -85,6 +85,16 @@ class EuManufacturerBuilder extends AbstractBuilderFieldGenerator
     }
 
     /**
+     * @return EuManufacturerBuilder
+     */
+    public function withContactUrl(): EuManufacturerBuilder
+    {
+        $this->results[] = $this->getShopBuilderDataFieldProvider(ManufacturerDataFieldProvider::RESPONSIBLE_CONTACT_URL);
+
+        return $this;
+    }
+
+    /**
      * @param PresetWidgetFactory $presetWidgetFactory
      * @param string $uuidEuResponsiblePerson
      *

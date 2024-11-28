@@ -67,6 +67,23 @@ class ItemViewConfig
         "cartPreviewTypeRight" => "right",
     ];
 
+    private static array $manufacturerItemInfo = [
+        "itemManufacturerName"              => "name",
+        "itemManufacturerLogoUrl"           => "logo",
+        "itemManufacturerHomepage"          => "url",
+        "itemManufacturerStreet"            => "street",
+        "itemManufacturerHouseNo"           => "houseNo",
+        "itemManufacturerPostcode"          => "postcode",
+        "itemManufacturerTown"              => "town",
+        "itemManufacturerCountry"           => "country",
+        "itemManufacturerTelephoneNumber"   => "phoneNumber",
+        "itemManufacturerFaxNumber"         => "faxNumber",
+        "itemManufacturerEmail"             => "email",
+        "itemManufacturerExternalName"      => "externalName",
+        "itemManufacturerLegalName"         => "legalName",
+        "itemManufacturerContactUrl"        => "contactUrl"
+    ];
+
     /**
      * @return array
      */
@@ -129,5 +146,13 @@ class ItemViewConfig
     public static function getCartPreviewPosion()
     {
         return self::$cartPreviewPosition;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getManufacturerItemInfo(): array
+    {
+        return self::$manufacturerItemInfo;
     }
 }

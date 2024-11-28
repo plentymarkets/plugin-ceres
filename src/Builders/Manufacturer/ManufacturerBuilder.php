@@ -42,6 +42,16 @@ class ManufacturerBuilder extends AbstractBuilderFieldGenerator
     /**
      * @return ManufacturerBuilder
      */
+    public function withLegalName(): ManufacturerBuilder
+    {
+        $this->results[] = $this->getShopBuilderDataFieldProvider(ManufacturerDataFieldProvider::LEGAL_NAME);
+
+        return $this;
+    }
+
+    /**
+     * @return ManufacturerBuilder
+     */
     public function withHomepage(): ManufacturerBuilder
     {
         $this->results[] = $this->getShopBuilderDataFieldProvider(ManufacturerDataFieldProvider::HOMEPAGE);
@@ -66,9 +76,9 @@ class ManufacturerBuilder extends AbstractBuilderFieldGenerator
      */
     public function withGeneralAddress(): ManufacturerBuilder
     {
+        $this->generalAddressBuilder->withPostCode();
         $this->generalAddressBuilder->withCity();
         $this->generalAddressBuilder->withCountry();
-        $this->generalAddressBuilder->withPostCode();
         $this->results[] = $this->generalAddressBuilder->build();
 
         return $this;
@@ -83,6 +93,7 @@ class ManufacturerBuilder extends AbstractBuilderFieldGenerator
 
         return $this;
     }
+
     /**
      * @return ManufacturerBuilder
      */
@@ -92,6 +103,17 @@ class ManufacturerBuilder extends AbstractBuilderFieldGenerator
 
         return $this;
     }
+
+    /**
+     * @return ManufacturerBuilder
+     */
+    public function withContactUrl(): ManufacturerBuilder
+    {
+        $this->results[] = $this->getShopBuilderDataFieldProvider(ManufacturerDataFieldProvider::CONTACT_URL);
+
+        return $this;
+    }
+
     /**
      * @return ManufacturerBuilder
      */

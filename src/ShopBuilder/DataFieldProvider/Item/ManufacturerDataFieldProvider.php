@@ -40,23 +40,29 @@ class ManufacturerDataFieldProvider extends DataFieldProvider
     public const FAX_NO        = 'faxNumber';
     /** @var string */
     public const EMAIL         = 'email';
+    /** @var string */
+    public const LEGAL_NAME    = 'legalName';
+    /** @var string */
+    public const CONTACT_URL   = 'contactUrl';
 
     /** @var string */
-    public const RESPONSIBLE_NAME      = 'responsibleName';
+    public const RESPONSIBLE_NAME           = 'responsibleName';
     /** @var string */
-    public const RESPONSIBLE_STREET    = 'responsibleStreet';
+    public const RESPONSIBLE_STREET         = 'responsibleStreet';
     /** @var string */
-    public const RESPONSIBLE_HOUSE_NO  = 'responsibleHouseNo';
+    public const RESPONSIBLE_HOUSE_NO       = 'responsibleHouseNo';
     /** @var string */
-    public const RESPONSIBLE_POST_CODE = 'responsiblePostCode';
+    public const RESPONSIBLE_POST_CODE      = 'responsiblePostCode';
     /** @var string */
-    public const RESPONSIBLE_TOWN      = 'responsibleTown';
+    public const RESPONSIBLE_TOWN           = 'responsibleTown';
     /** @var string */
-    public const RESPONSIBLE_COUNTRY   = 'responsibleCountry';
+    public const RESPONSIBLE_COUNTRY        = 'responsibleCountry';
     /** @var string */
-    public const RESPONSIBLE_EMAIL     = 'responsibleEmail';
+    public const RESPONSIBLE_EMAIL          = 'responsibleEmail';
     /** @var string */
-    public const RESPONSIBLE_PHONE     = 'responsiblePhoneNo';
+    public const RESPONSIBLE_PHONE          = 'responsiblePhoneNo';
+    /** @var string */
+    public const RESPONSIBLE_CONTACT_URL    = 'responsibleContactUrl';
 
         /**
      * Registers item data fields for use in the ShopBuilder.
@@ -76,6 +82,8 @@ class ManufacturerDataFieldProvider extends DataFieldProvider
         $this->addField(self::PHONE, "Ceres::Widget.dataFieldManufacturerPhoneNo", "item_data_field('item.manufacturer.phoneNumber')");
         $this->addField(self::FAX_NO, "Ceres::Widget.dataFieldManufacturerFaxNo", "item_data_field('item.manufacturer.faxNumber')");
         $this->addField(self::EMAIL, "Ceres::Widget.dataFieldManufacturerEmail", "item_data_field('item.manufacturer.email')");
+        $this->addField(self::LEGAL_NAME, "Ceres::Widget.dataFieldManufacturerLegalName", "item_data_field('item.manufacturer.legalName')");
+        $this->addField(self::CONTACT_URL, "Ceres::Widget.dataFieldManufacturerContactUrl", "item_data_field('item.manufacturer.contactUrl')");
 
         $this->addField(self::RESPONSIBLE_NAME, "Ceres::Widget.dataFieldManufacturerResponsibleName", "item_data_field('item.manufacturer.responsibleName')");
         $this->addField(self::RESPONSIBLE_STREET, "Ceres::Widget.dataFieldManufacturerResponsibleStreet", "item_data_field('item.manufacturer.responsibleStreet')");
@@ -85,5 +93,6 @@ class ManufacturerDataFieldProvider extends DataFieldProvider
         $this->addField(self::RESPONSIBLE_COUNTRY, "Ceres::Widget.dataFieldManufacturerResponsibleCountry", "item_data_field('item.manufacturer.responsibleCountryObject.name')");
         $this->addField(self::RESPONSIBLE_EMAIL, "Ceres::Widget.dataFieldManufacturerResponsibleEmail", "item_data_field('item.manufacturer.responsibleEmail')");
         $this->addField(self::RESPONSIBLE_PHONE, "Ceres::Widget.dataFieldManufacturerResponsiblePhoneNo", "item_data_field('item.manufacturer.responsiblePhoneNo')");
+        $this->addField(self::RESPONSIBLE_CONTACT_URL, "Ceres::Widget.dataFieldManufacturerResponsibleContactUrl", "item_data_field('item.manufacturer.responsibleContactUrl')");
     }
 }

@@ -1487,6 +1487,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1528,10 +1541,10 @@ __webpack_require__.r(__webpack_exports__);
       return (App.config.item.itemData.includes("item.description") || App.config.item.itemData.includes("all")) && !!this.currentVariation.texts.description.length;
     },
     isManufacturerTabShown: function isManufacturerTabShown() {
-      return this.currentVariation.item.manufacturer.url !== "" || this.currentVariation.item.manufacturer.street !== "" || this.currentVariation.item.manufacturer.houseNo !== "" || this.currentVariation.item.manufacturer.postcode !== "" || this.currentVariation.item.manufacturer.town !== "" || this.currentVariation.item.manufacturer.countryId !== 0 || this.currentVariation.item.manufacturer.phoneNumber !== "" || this.currentVariation.item.manufacturer.faxNumber !== "" || this.currentVariation.item.manufacturer.email !== "" || this.currentVariation.item.manufacturer.name !== "";
+      return this.currentVariation.item.manufacturer.url !== "" || this.currentVariation.item.manufacturer.street !== "" || this.currentVariation.item.manufacturer.houseNo !== "" || this.currentVariation.item.manufacturer.postcode !== "" || this.currentVariation.item.manufacturer.town !== "" || this.currentVariation.item.manufacturer.countryId !== 0 || this.currentVariation.item.manufacturer.phoneNumber !== "" || this.currentVariation.item.manufacturer.faxNumber !== "" || this.currentVariation.item.manufacturer.email !== "" || this.currentVariation.item.manufacturer.legalName !== "" || this.currentVariation.item.manufacturer.contactUrl !== "" || this.currentVariation.item.manufacturer.name !== "";
     },
     isEuResponsibleTabShown: function isEuResponsibleTabShown() {
-      return this.currentVariation.item.manufacturer.responsibleEmail !== "" || this.currentVariation.item.manufacturer.responsibleHouseNo !== "" || this.currentVariation.item.manufacturer.responsibleName !== "" || this.currentVariation.item.manufacturer.responsiblePhoneNo !== "" || this.currentVariation.item.manufacturer.responsiblePostCode !== "" || this.currentVariation.item.manufacturer.responsibleStreet !== "" || this.currentVariation.item.manufacturer.responsibleTown !== "" || this.currentVariation.item.manufacturer.responsibleCountry !== 0;
+      return this.currentVariation.item.manufacturer.responsibleEmail !== "" || this.currentVariation.item.manufacturer.responsibleHouseNo !== "" || this.currentVariation.item.manufacturer.responsibleName !== "" || this.currentVariation.item.manufacturer.responsiblePhoneNo !== "" || this.currentVariation.item.manufacturer.responsiblePostCode !== "" || this.currentVariation.item.manufacturer.responsibleStreet !== "" || this.currentVariation.item.manufacturer.responsibleTown !== "" || this.currentVariation.item.manufacturer.responsibleContactUrl !== "" || this.currentVariation.item.manufacturer.responsibleCountry !== 0;
     },
     isRecommendedPriceActive: function isRecommendedPriceActive() {
       return App.config.item.itemData.includes("item.recommendedPrice") || App.config.item.itemData.includes("all");
@@ -38963,6 +38976,15 @@ var render = function() {
                                       _vm._v(
                                         _vm._s(
                                           _vm.currentVariation.item.manufacturer
+                                            .responsiblePostCode
+                                        )
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("span", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.currentVariation.item.manufacturer
                                             .responsibleTown
                                         )
                                       )
@@ -38981,16 +39003,7 @@ var render = function() {
                                               "\n                                    "
                                           )
                                         ])
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    _c("span", [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm.currentVariation.item.manufacturer
-                                            .responsiblePostCode
-                                        )
-                                      )
-                                    ])
+                                      : _vm._e()
                                   ]),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "p-0" }, [
@@ -39010,6 +39023,17 @@ var render = function() {
                                         _vm._s(
                                           _vm.currentVariation.item.manufacturer
                                             .responsiblePhoneNo
+                                        )
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "p-0" }, [
+                                    _c("span", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.currentVariation.item.manufacturer
+                                            .responsibleContactUrl
                                         )
                                       )
                                     ])
@@ -39044,6 +39068,17 @@ var render = function() {
                                       _vm._v(
                                         _vm._s(
                                           _vm.currentVariation.item.manufacturer
+                                            .legalName
+                                        )
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "p-0" }, [
+                                    _c("span", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.currentVariation.item.manufacturer
                                             .street
                                         )
                                       )
@@ -39060,6 +39095,15 @@ var render = function() {
                                   ]),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "p-0" }, [
+                                    _c("span", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.currentVariation.item.manufacturer
+                                            .postcode
+                                        )
+                                      )
+                                    ]),
+                                    _vm._v(" "),
                                     _c("span", [
                                       _vm._v(
                                         _vm._s(
@@ -39082,16 +39126,7 @@ var render = function() {
                                               "\n                                "
                                           )
                                         ])
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    _c("span", [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm.currentVariation.item.manufacturer
-                                            .postcode
-                                        )
-                                      )
-                                    ])
+                                      : _vm._e()
                                   ]),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "p-0" }, [
@@ -39133,6 +39168,17 @@ var render = function() {
                                         _vm._s(
                                           _vm.currentVariation.item.manufacturer
                                             .faxNumber
+                                        )
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "p-0" }, [
+                                    _c("span", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.currentVariation.item.manufacturer
+                                            .contactUrl
                                         )
                                       )
                                     ])

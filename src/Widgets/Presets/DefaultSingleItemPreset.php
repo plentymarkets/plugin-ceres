@@ -372,16 +372,19 @@ class DefaultSingleItemPreset implements ContentPreset
         $this->euManufacturerBuilder->withGeneralAddress();
         $this->euManufacturerBuilder->withMail();
         $this->euManufacturerBuilder->withPhoneNumber();
+        $this->euManufacturerBuilder->withContactUrl();
         $this->euManufacturerBuilder->build($this->tabWidget, $uuidEuResponsiblePerson);
 
         /* Generates base manufacturer fields */
         $this->manufacturerBuilder->withName();
+        $this->manufacturerBuilder->withLegalName();
         $this->manufacturerBuilder->withDetailedAddress();
         $this->manufacturerBuilder->withGeneralAddress();
         $this->manufacturerBuilder->withEmail();
         $this->manufacturerBuilder->withHomepage();
         $this->manufacturerBuilder->withPhoneNumber();
         $this->manufacturerBuilder->withFaxNumber();
+        $this->manufacturerBuilder->withContactUrl();
         $this->manufacturerBuilder->build($this->tabWidget, $uuidManufacturer);
    }
 
