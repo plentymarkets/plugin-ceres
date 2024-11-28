@@ -77,7 +77,7 @@ context("Single Item", () =>
             "Art.-ID", "116", "Zustand", "Neu", "Altersfreigabe", "Ohne Altersbeschränkung", "Hersteller", "A & C Design", "Herstellungsland", "Deutschland", "Inhalt", "250 Gramm"
         ];
 
-        cy.get(".nav-tabs").children().last().click();
+        cy.get(".nav-tabs").children().eq(-2).click();
         cy.get(".tab-pane.active").then((descText) =>
         {
             content.forEach((text) =>
