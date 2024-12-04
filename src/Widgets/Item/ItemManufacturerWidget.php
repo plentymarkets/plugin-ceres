@@ -7,7 +7,7 @@ use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetCategories;
 use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
-use Plenty\Modules\ContentBuilder\Factories\Settings\ValueListFactory;
+use Ceres\Widgets\Helper\Factories\Settings\ValueListFactory;
 
 class ItemManufacturerWidget extends BaseWidget
 {
@@ -22,7 +22,7 @@ class ItemManufacturerWidget extends BaseWidget
         return WidgetDataFactory::make("Ceres::ItemManufacturerWidget")
             ->withLabel("Widget.itemManufacturerLabel")
             ->withPreviewImageUrl("/images/widgets/item-bundle.svg")
-            ->withType(WidgetTypes::SINGLE_ITEM)
+            ->withType(WidgetTypes::ITEM)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(400)
             ->withSearchKeyWords([
@@ -40,7 +40,6 @@ class ItemManufacturerWidget extends BaseWidget
         $settingsFactory = pluginApp(WidgetSettingsFactory::class);
 
         $settingsFactory->createCustomClass();
-        $settingsFactory->createSpacing();
 
         $settingsFactory->createSelect("selectType")
             ->withDefaultValue("dropdown")
@@ -48,10 +47,11 @@ class ItemManufacturerWidget extends BaseWidget
             ->withTooltip("Widget.selectionSelectTypeTooltip")
             ->withListBoxValues(
                 ValueListFactory::make()
-                    ->addEntry("dropdown", "Widget.selectionSelectTypeDropdown")
-                    ->addEntry("radio", "Widget.selectionSelectTypeRadio")
-                    ->addEntry("checkbox", "Widget.selectionSelectTypeCheckbox")
+                    ->addEntry("manufacturer", "Widget.selectionSelectTypeManufacturer")
+                    ->addEntry("eu-responsible", "Widget.selectionSelectTypeEuResponsible")
                     ->toArray());
+
+        $settingsFactory->createSpacing();
 
         return $settingsFactory->toArray();
     }
