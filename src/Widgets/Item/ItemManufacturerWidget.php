@@ -7,6 +7,7 @@ use Ceres\Widgets\Helper\Factories\WidgetSettingsFactory;
 use Ceres\Widgets\Helper\WidgetCategories;
 use Ceres\Widgets\Helper\Factories\WidgetDataFactory;
 use Ceres\Widgets\Helper\WidgetTypes;
+use Plenty\Modules\ContentBuilder\Factories\Settings\ValueListFactory;
 
 class ItemManufacturerWidget extends BaseWidget
 {
@@ -40,6 +41,17 @@ class ItemManufacturerWidget extends BaseWidget
 
         $settingsFactory->createCustomClass();
         $settingsFactory->createSpacing();
+
+        $settingsFactory->createSelect("selectType")
+            ->withDefaultValue("dropdown")
+            ->withName("Widget.selectionSelectTypeLabel")
+            ->withTooltip("Widget.selectionSelectTypeTooltip")
+            ->withListBoxValues(
+                ValueListFactory::make()
+                    ->addEntry("dropdown", "Widget.selectionSelectTypeDropdown")
+                    ->addEntry("radio", "Widget.selectionSelectTypeRadio")
+                    ->addEntry("checkbox", "Widget.selectionSelectTypeCheckbox")
+                    ->toArray());
 
         return $settingsFactory->toArray();
     }
