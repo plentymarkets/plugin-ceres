@@ -56,9 +56,9 @@ class EuManufacturerBuilder extends AbstractBuilderFieldGenerator
      */
     public function withGeneralAddress(): EuManufacturerBuilder
     {
+        $this->generalAddressBuilder->withPostCode();
         $this->generalAddressBuilder->withCity();
         $this->generalAddressBuilder->withCountry();
-        $this->generalAddressBuilder->withPostCode();
         $this->results[] = $this->generalAddressBuilder->build();
 
         return $this;
