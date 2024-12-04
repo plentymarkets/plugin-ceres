@@ -1,5 +1,11 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.71 (YYYY-MM-DD) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.70...5.0.71" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Wird im Schritt **Performance** des Assistenten die Einstellung **Header oben fixieren** aktiviert, wird der Header jetzt so fixiert, dass sogenannte Cumulative Layout Shifts (CLS) reduziert werden.
+
 ## v5.0.70 (2024-11-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.69...5.0.70" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
