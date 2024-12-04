@@ -14,14 +14,12 @@
     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
-    <item-manufacturer :is-preview="{{ isPreview | json_encode }}">
-        <div class="col">
-            <div class="input-unit">
-                <select id="attribute-select" class="custom-select">
-                    <option>{{ trans("Ceres::Template.singleItemPleaseSelect") }}</option>
-                </select>
-                <label for="attribute-select">{{ trans("Ceres::Widget.attributeLabel") }}</label>
-            </div>
-        </div>
-    </item-manufacturer>
+        {% if isPreview %}
+            <b>Item name 1</b>
+            <br>
+            <b>Item name 2</b>
+        {% else %}
+            <item-manufacturer></item-manufacturer>
+        {% endif %}
+
 </div>
