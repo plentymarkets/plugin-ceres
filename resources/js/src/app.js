@@ -164,6 +164,7 @@ export function beforeCreate(context)
     Vue.component("variation-select", () => import("./app/components/item/VariationSelect.vue"));
     Vue.component("item-availability", () => import("./app/components/item/ItemAvailability.vue"));
     Vue.component("single-item-bundle", () => import("./app/components/item/SingleItemBundle.vue"));
+    Vue.component("item-manufacturer", () => import("./app/components/item/ItemManufacturer.vue"));
     Vue.component("single-add-to-basket", () => import("./app/components/item/SingleAddToBasket.vue"));
     Vue.component("set-quantity-input", () => import("./app/components/item/SetQuantityInput.vue"));
     Vue.component("single-item", SingleItem);

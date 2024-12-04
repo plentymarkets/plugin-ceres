@@ -80,6 +80,7 @@ use Ceres\Widgets\Item\ItemAvailabilityWidget;
 use Ceres\Widgets\Item\ItemBundleWidget;
 use Ceres\Widgets\Item\ItemDataTableWidget;
 use Ceres\Widgets\Item\ItemImageWidget;
+use Ceres\Widgets\Item\ItemManufacturerWidget;
 use Ceres\Widgets\Item\ItemPriceWidget;
 use Ceres\Widgets\Item\ItemSetWidget;
 use Ceres\Widgets\Item\OrderPropertyWidget;
@@ -205,12 +206,14 @@ class WidgetCollection
         ItemPriceWidget::class,
         OrderPropertyWidget::class,
         WishListWidget::class,
-        TagsWidget::class
+        TagsWidget::class,
+        ItemManufacturerWidget::class
     ];
 
     const ITEM_SET_WIDGETS = [
         ItemSetWidget::class,
-        QuantityInputWidget::class
+        QuantityInputWidget::class,
+        ItemManufacturerWidget::class
     ];
 
     const LEGAL_WIDGETS = [
