@@ -1,10 +1,11 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.71 (xxxx-xx-xx)
+## v5.0.71 (YYYY-MM-DD) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.70...5.0.71" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed
 
 - Due to an error, apostrophes in manufacturers' names in facets were not displayed correctly. This has been fixed.
+- Setting the option **Fix header at the top of the page** in the **Performance** step of the assistant now correctly sticks the header in a way that decreases Cumulative Layout Shifts (CLS).
 
 ## v5.0.70 (2024-11-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.69...5.0.70" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
