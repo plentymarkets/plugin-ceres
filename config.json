@@ -993,7 +993,7 @@
                                 "caption": "Config.itemManufacturerTown"
                             },
                             {
-                                "value": "country",
+                                "value": "countryId",
                                 "caption": "Config.itemManufacturerCountry"
                             },
                             {

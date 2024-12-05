@@ -53927,7 +53927,7 @@ var render = function() {
                     ]) +
                     _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
                     '><div class="d-flex"><span class="flex-grow-1">' +
-                    _vm._ssrEscape(_vm._s(value.name)) +
+                    _vm._s(value.name) +
                     '</span> <div class="filter-badge">' +
                     _vm._ssrEscape(_vm._s(value.count)) +
                     "</div></div></label></div></div>"
@@ -54164,9 +54164,9 @@ var render = function() {
               _vm.marginClasses
           ) +
           _vm._ssrStyle(null, _vm.marginInlineStyles, null) +
-          '><i aria-hidden="true" class="fa fa-times"></i>' +
-          _vm._ssrEscape(" " + _vm._s(tag.name) + "\n    ") +
-          "</span>"
+          '><i aria-hidden="true" class="fa fa-times"></i> <span>' +
+          _vm._s(tag.name) +
+          "</span></span>"
         )
       }) +
         " " +
