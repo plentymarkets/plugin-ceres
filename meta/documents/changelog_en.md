@@ -1,10 +1,44 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.70 (xxxx-xx-xx)
+## v5.0.71 (xxxx-xx-xx)
 
 ### Fixed
 
 - Due to an error, apostrophes in manufacturers' names in facets were not displayed correctly. This has been fixed.
+
+## v5.0.70 (2024-11-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.69...5.0.70" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- In this version, we are changing how manufacturer data is provided. Please read this <a href="https://forum.plentymarkets.com/t/handlungsbedarf-geaenderte-handhabung-von-herstellerdaten-in-der-naechsten-plentyshop-version-action-required-changed-handling-of-manufacturer-data-in-the-next-plentyshop-version/778724" target="_blank">forum thread</a> for more information.
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
+
+### Added
+
+- Placeholders have been added to the ShopBuilder. These can be freely placed in the Text widget.
+    - Legal Name
+    - Logo-URL
+    - Homepage
+    - Contact form
+    - Street
+    - House No.
+    - Postcode
+    - Town
+    - Country
+    - Telephone number
+    - Fax number
+    - Email
+    - EU-Responsible Contact form
+- The plentyShop LTS assistant now contains a new setting under **Displayed information** which determines which manufacturer data is made available in the frontend.
+- The ShopBuilder preset for the item view now contains a new tab in the Tab widget in which the manufacturer data is displayed.
+- The standard template for the item view now contains a new tab in which the manufacturer data is displayed.
+- The placeholder for „The EU-Responsible Contact form“ was added to the standard template and ShopBuilder preset of the item view.
+
+### Changed Templates
+
+- In plentyShop LTS 5.0.70 we made changes to template files which are relevant for theme developers. You can find the changed templates below. The link directs you to the effected changes in the corresponding files.
+
+- [resources/js/src/app/components/item/SingleItem.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.69...stable#diff-24dd25ca458027f998950fb4b48c9908ba241ac54bcf94c6de48c26107d86c15)
 
 ## v5.0.69 (2024-11-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.68...5.0.69" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 

@@ -170,6 +170,13 @@ class DisplayedInformationStep extends Step
      */
     private function generateItemView(): array
     {
+        $manufacturerItemData        = ItemViewConfig::getManufacturerItemInfo();
+        $manufacturerItemDataOptions = StepHelper::generateTranslatedListBoxValues($manufacturerItemData);
+
+        $defaultValues = array_map(function ($option) {
+            return $option['value'];
+        }, $manufacturerItemDataOptions);
+
         return [
             "title" => "Wizard.itemViewSettings",
             "form" => [
@@ -193,6 +200,14 @@ class DisplayedInformationStep extends Step
                     "defaultValue" => false,
                     "options" => [
                         "name" => "Wizard.attributeSelectDefaultOption",
+                    ]
+                ],
+                "displayInfo_manufacturerInformation" => [
+                    "type" => "checkboxGroup",
+                    "defaultValue" => $defaultValues,
+                    "options" => [
+                        "name" => "Wizard.displayManufacturerItemInfo",
+                        "checkboxValues" => $manufacturerItemDataOptions
                     ]
                 ],
             ]

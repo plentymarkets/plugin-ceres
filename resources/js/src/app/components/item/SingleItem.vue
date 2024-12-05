@@ -136,6 +136,10 @@
                                     <a class="nav-link" data-toggle="tab" href="#eu-responsible" role="tab">{{ $translate("Ceres::Template.singleItemEuResponsiblePerson") }}</a>
                                 </li>
 
+                                <li class="nav-item" v-if="isManufacturerTabShown">
+                                  <a class="nav-link" data-toggle="tab" href="#manufacturer" role="tab">{{ $translate("Ceres::Template.singleItemManufacturer") }}</a>
+                                </li>
+
                                 <slot name="add-detail-tabs"></slot>
                             </ul>
 
@@ -234,11 +238,11 @@
                                       </div>
 
                                       <div class="p-0">
+                                        <span>{{ currentVariation.item.manufacturer.responsiblePostCode }}</span>
                                         <span>{{ currentVariation.item.manufacturer.responsibleTown }}</span>
                                         <span v-if="currentVariation.item.manufacturer.responsibleCountryObject">
                                           {{ currentVariation.item.manufacturer.responsibleCountryObject.name }}
                                         </span>
-                                        <span>{{ currentVariation.item.manufacturer.responsiblePostCode }}</span>
                                       </div>
 
                                       <div class="p-0">
@@ -248,8 +252,58 @@
                                       <div class="p-0">
                                         <span>{{ currentVariation.item.manufacturer.responsiblePhoneNo }}</span>
                                       </div>
+
+                                    <div class="p-0">
+                                      <span>{{ currentVariation.item.manufacturer.responsibleContactUrl }}</span>
+                                    </div>
                                   </div>
                                 </div>
+
+                                <div class="tab-pane overflow-auto" id="manufacturer" role="tabpanel" v-if="isManufacturerTabShown">
+                                <div class="my-4">
+                                  <div class="p-0">
+                                    <span>{{ currentVariation.item.manufacturer.name }}</span>
+                                  </div>
+
+                                  <div class="p-0">
+                                    <span>{{ currentVariation.item.manufacturer.legalName }}</span>
+                                  </div>
+
+                                  <div class="p-0">
+                                    <span>{{ currentVariation.item.manufacturer.street }}</span>
+                                    <span>{{ currentVariation.item.manufacturer.houseNo }}</span>
+                                  </div>
+
+                                  <div class="p-0">
+                                    <span>{{ currentVariation.item.manufacturer.postcode }}</span>
+                                    <span>{{ currentVariation.item.manufacturer.town }}</span>
+                                    <span v-if="currentVariation.item.manufacturer.countryObject">
+                                      {{ currentVariation.item.manufacturer.countryObject.name }}
+                                    </span>
+
+                                  </div>
+
+                                  <div class="p-0">
+                                    <span>{{ currentVariation.item.manufacturer.email }}</span>
+                                  </div>
+
+                                  <div class="p-0">
+                                    <span>{{ currentVariation.item.manufacturer.url }}</span>
+                                  </div>
+
+                                  <div class="p-0">
+                                    <span>{{ currentVariation.item.manufacturer.phoneNumber }}</span>
+                                  </div>
+
+                                  <div class="p-0">
+                                    <span>{{ currentVariation.item.manufacturer.faxNumber }}</span>
+                                  </div>
+
+                                  <div class="p-0">
+                                    <span>{{ currentVariation.item.manufacturer.contactUrl }}</span>
+                                  </div>
+                                </div>
+                              </div>
 
                                 <slot name="add-detail-tabs-content"></slot>
                             </div>
@@ -324,6 +378,22 @@ export default {
                 && !!this.currentVariation.texts.description.length;
         },
 
+        isManufacturerTabShown()
+        {
+            return (this.currentVariation.item.manufacturer.url !== "") ||
+                (this.currentVariation.item.manufacturer.street !== "") ||
+                (this.currentVariation.item.manufacturer.houseNo !== "") ||
+                (this.currentVariation.item.manufacturer.postcode !== "") ||
+                (this.currentVariation.item.manufacturer.town !== "") ||
+                (this.currentVariation.item.manufacturer.countryId !== 0) ||
+                (this.currentVariation.item.manufacturer.phoneNumber !== "") ||
+                (this.currentVariation.item.manufacturer.faxNumber !== "") ||
+                (this.currentVariation.item.manufacturer.email !== "") ||
+                (this.currentVariation.item.manufacturer.legalName !== "") ||
+                (this.currentVariation.item.manufacturer.contactUrl !== "") ||
+                (this.currentVariation.item.manufacturer.name !== "");
+        },
+
         isEuResponsibleTabShown()
         {
             return (this.currentVariation.item.manufacturer.responsibleEmail !== "") ||
@@ -333,6 +403,7 @@ export default {
                 (this.currentVariation.item.manufacturer.responsiblePostCode !== "") ||
                 (this.currentVariation.item.manufacturer.responsibleStreet !== "") ||
                 (this.currentVariation.item.manufacturer.responsibleTown !== "") ||
+                (this.currentVariation.item.manufacturer.responsibleContactUrl !== "") ||
                 (this.currentVariation.item.manufacturer.responsibleCountry !== 0);
         },
 

@@ -87,6 +87,12 @@ class DisplayInfoMapping
             "global"   => true,
             "optional" => true,
         ],
+        "displayInfo_manufacturerInformation" => [
+            "field"    => "item.manufacturer_data",
+            "type"     => "concatenated",
+            "global"   => false,
+            "optional" => true,
+        ],
         "displayInfo_cartItemData" => [
             "field"    => "basket.item_data",
             "type"     => "concatenated",

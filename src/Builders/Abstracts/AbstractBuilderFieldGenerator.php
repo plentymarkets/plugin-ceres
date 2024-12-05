@@ -1,10 +1,10 @@
 <?php
 
-namespace Ceres\Builders\EuManufacturer\Abstracts;
+namespace Ceres\Builders\Abstracts;
 
 use Ceres\Helper\ShopBuilderHelper;
 
-abstract class AbstractEuManufacturerBuilder
+class AbstractBuilderFieldGenerator
 {
     /**
      * Constructs the actual field provider structure that's used to generate shop builder data fields.

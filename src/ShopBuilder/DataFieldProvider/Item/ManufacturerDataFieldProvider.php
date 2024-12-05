@@ -17,30 +17,73 @@ use Plenty\Modules\ShopBuilder\Providers\DataFieldProvider;
 class ManufacturerDataFieldProvider extends DataFieldProvider
 {
     /** @var string */
-    public const RESPONSIBLE_NAME      = 'responsibleName';
+    public const NAME          = 'name';
     /** @var string */
-    public const RESPONSIBLE_STREET    = 'responsibleStreet';
+    public const EXTERNAL_NAME = 'externalName';
     /** @var string */
-    public const RESPONSIBLE_HOUSE_NO  = 'responsibleHouseNo';
+    public const LOGO          = 'logo';
     /** @var string */
-    public const RESPONSIBLE_POST_CODE = 'responsiblePostCode';
+    public const HOMEPAGE      = 'homepage';
     /** @var string */
-    public const RESPONSIBLE_TOWN      = 'responsibleTown';
+    public const STREET        = 'street';
     /** @var string */
-    public const RESPONSIBLE_COUNTRY   = 'responsibleCountry';
+    public const HOUSE_NO      = 'houseNo';
     /** @var string */
-    public const RESPONSIBLE_EMAIL     = 'responsibleEmail';
+    public const POST_CODE     = 'postcode';
     /** @var string */
-    public const RESPONSIBLE_PHONE     = 'responsiblePhoneNo';
+    public const TOWN          = 'town';
+    /** @var string */
+    public const COUNTRY       = 'country';
+    /** @var string */
+    public const PHONE         = 'phoneNumber';
+    /** @var string */
+    public const FAX_NO        = 'faxNumber';
+    /** @var string */
+    public const EMAIL         = 'email';
+    /** @var string */
+    public const LEGAL_NAME    = 'legalName';
+    /** @var string */
+    public const CONTACT_URL   = 'contactUrl';
+
+    /** @var string */
+    public const RESPONSIBLE_NAME           = 'responsibleName';
+    /** @var string */
+    public const RESPONSIBLE_STREET         = 'responsibleStreet';
+    /** @var string */
+    public const RESPONSIBLE_HOUSE_NO       = 'responsibleHouseNo';
+    /** @var string */
+    public const RESPONSIBLE_POST_CODE      = 'responsiblePostCode';
+    /** @var string */
+    public const RESPONSIBLE_TOWN           = 'responsibleTown';
+    /** @var string */
+    public const RESPONSIBLE_COUNTRY        = 'responsibleCountry';
+    /** @var string */
+    public const RESPONSIBLE_EMAIL          = 'responsibleEmail';
+    /** @var string */
+    public const RESPONSIBLE_PHONE          = 'responsiblePhoneNo';
+    /** @var string */
+    public const RESPONSIBLE_CONTACT_URL    = 'responsibleContactUrl';
 
         /**
      * Registers item data fields for use in the ShopBuilder.
      */
     function register()
     {
-        $this->addField("name", "Ceres::Widget.dataFieldManufacturerName", "item_data_field('item.manufacturer.name')");
-        $this->addField("externalName", "Ceres::Widget.dataFieldManufacturerExternalName", "item_data_field('item.manufacturer.externalName')");
-        $this->addField("logo", "Ceres::Widget.dataFieldManufacturerLogo", "item_data_field('item.manufacturer.logo', null, 'src', 'img')");
+        $this->addField(self::NAME, "Ceres::Widget.dataFieldManufacturerName", "item_data_field('item.manufacturer.name')");
+        $this->addField(self::EXTERNAL_NAME, "Ceres::Widget.dataFieldManufacturerExternalName", "item_data_field('item.manufacturer.externalName')");
+        $this->addField(self::LOGO, "Ceres::Widget.dataFieldManufacturerLogo", "item_data_field('item.manufacturer.logo', null, 'src', 'img')");
+
+        $this->addField(self::HOMEPAGE, "Ceres::Widget.dataFieldManufacturerHomepage", "item_data_field('item.manufacturer.url')");
+        $this->addField(self::STREET, "Ceres::Widget.dataFieldManufacturerStreet", "item_data_field('item.manufacturer.street')");
+        $this->addField(self::HOUSE_NO, "Ceres::Widget.dataFieldManufacturerHouseNo", "item_data_field('item.manufacturer.houseNo')");
+        $this->addField(self::POST_CODE, "Ceres::Widget.dataFieldManufacturerPostCode", "item_data_field('item.manufacturer.postcode')");
+        $this->addField(self::TOWN, "Ceres::Widget.dataFieldManufacturerTown", "item_data_field('item.manufacturer.town')");
+        $this->addField(self::COUNTRY, "Ceres::Widget.dataFieldManufacturerCountry", "item_data_field('item.manufacturer.countryObject.name')");
+        $this->addField(self::PHONE, "Ceres::Widget.dataFieldManufacturerPhoneNo", "item_data_field('item.manufacturer.phoneNumber')");
+        $this->addField(self::FAX_NO, "Ceres::Widget.dataFieldManufacturerFaxNo", "item_data_field('item.manufacturer.faxNumber')");
+        $this->addField(self::EMAIL, "Ceres::Widget.dataFieldManufacturerEmail", "item_data_field('item.manufacturer.email')");
+        $this->addField(self::LEGAL_NAME, "Ceres::Widget.dataFieldManufacturerLegalName", "item_data_field('item.manufacturer.legalName')");
+        $this->addField(self::CONTACT_URL, "Ceres::Widget.dataFieldManufacturerContactUrl", "item_data_field('item.manufacturer.contactUrl')");
 
         $this->addField(self::RESPONSIBLE_NAME, "Ceres::Widget.dataFieldManufacturerResponsibleName", "item_data_field('item.manufacturer.responsibleName')");
         $this->addField(self::RESPONSIBLE_STREET, "Ceres::Widget.dataFieldManufacturerResponsibleStreet", "item_data_field('item.manufacturer.responsibleStreet')");
@@ -50,19 +93,6 @@ class ManufacturerDataFieldProvider extends DataFieldProvider
         $this->addField(self::RESPONSIBLE_COUNTRY, "Ceres::Widget.dataFieldManufacturerResponsibleCountry", "item_data_field('item.manufacturer.responsibleCountryObject.name')");
         $this->addField(self::RESPONSIBLE_EMAIL, "Ceres::Widget.dataFieldManufacturerResponsibleEmail", "item_data_field('item.manufacturer.responsibleEmail')");
         $this->addField(self::RESPONSIBLE_PHONE, "Ceres::Widget.dataFieldManufacturerResponsiblePhoneNo", "item_data_field('item.manufacturer.responsiblePhoneNo')");
-    }
-
-    public static function getEuResponsibleFields(): array
-    {
-        return [
-            self::RESPONSIBLE_NAME,
-            self::RESPONSIBLE_STREET,
-            self::RESPONSIBLE_HOUSE_NO,
-            self::RESPONSIBLE_POST_CODE,
-            self::RESPONSIBLE_TOWN,
-            self::RESPONSIBLE_COUNTRY,
-            self::RESPONSIBLE_EMAIL,
-            self::RESPONSIBLE_PHONE,
-        ];
+        $this->addField(self::RESPONSIBLE_CONTACT_URL, "Ceres::Widget.dataFieldManufacturerResponsibleContactUrl", "item_data_field('item.manufacturer.responsibleContactUrl')");
     }
 }

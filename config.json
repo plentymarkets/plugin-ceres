@@ -956,6 +956,72 @@
                     "options": {
                         "defaultValue": "false"
                     }
+                },
+                "item.manufacturer_data": {
+                    "type": "multiCheckBox",
+                    "required": false,
+                    "label": "Config.itemManufacturerDataLabel",
+                    "options": {
+                        "defaultValue": "all",
+                        "checkBoxValues": [
+                            {
+                                "value": "name",
+                                "caption": "Config.itemManufacturerName"
+                            },
+                            {
+                                "value": "logo",
+                                "caption": "Config.itemManufacturerLogoUrl"
+                            },
+                            {
+                                "value": "url",
+                                "caption": "Config.itemManufacturerHomepage"
+                            },
+                            {
+                                "value": "street",
+                                "caption": "Config.itemManufacturerStreet"
+                            },
+                            {
+                                "value": "houseNo",
+                                "caption": "Config.itemManufacturerHouseNo"
+                            },
+                            {
+                                "value": "postcode",
+                                "caption": "Config.itemManufacturerPostcode"
+                            },
+                            {
+                                "value": "town",
+                                "caption": "Config.itemManufacturerTown"
+                            },
+                            {
+                                "value": "countryId",
+                                "caption": "Config.itemManufacturerCountry"
+                            },
+                            {
+                                "value": "phoneNumber",
+                                "caption": "Config.itemManufacturerTelephoneNumber"
+                            },
+                            {
+                                "value": "faxNumber",
+                                "caption": "Config.itemManufacturerFaxNumber"
+                            },
+                            {
+                                "value": "email",
+                                "caption": "Config.itemManufacturerEmail"
+                            },
+                            {
+                                "value": "externalName",
+                                "caption": "Config.itemManufacturerExternalName"
+                            },
+                            {
+                                "value": "legalName",
+                                "caption": "Config.itemManufacturerLegalName"
+                            },
+                            {
+                                "value": "contactUrl",
+                                "caption": "Config.itemManufacturerContactUrl"
+                            }
+                        ]
+                    }
                 }
             }
         },

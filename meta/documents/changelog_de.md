@@ -1,10 +1,38 @@
 # Release Notes für plentyShop LTS
 
-## v5.0.70 (xxxx-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.69...5.0.70" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.70 (2024-11-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.69...5.0.70" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
-### Behoben
+### TODO
 
-- Durch einen Fehler wurden Apostrophen in Herstellernamen nicht korrekt dargestellt, wenn Artikel nach Hersteller gefiltert wurden. Dies wurde behoben.
+- Wir ändern in dieser Version, wie Herstellerdaten bereitgestellt werden. Beachte dazu <a href="https://forum.plentymarkets.com/t/handlungsbedarf-geaenderte-handhabung-von-herstellerdaten-in-der-naechsten-plentyshop-version-action-required-changed-handling-of-manufacturer-data-in-the-next-plentyshop-version/778724" target="_blank">diesen Forumsbeitrag</a>.
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+
+### Hinzugefügt
+
+- Im ShopBuilder wurden neue Platzhalter hinzugefügt. Diese können im Text-Widget frei platziert werden.
+    - Firmenname
+    - Logo-URL
+    - Homepage
+    - Kontaktformular
+    - Straße
+    - Haus-Nr.
+    - PLZ
+    - Ort
+    - Land
+    - Telefonnummer
+    - Faxnummer
+    - E-Mail
+    - EU-Verantwortlicher Kontaktformular
+- Der plentyShop LTS Assistent enthält jetzt eine Einstellung unter **Angezeigte Informationen**, mit der gesteuert werden kann, welche Herstellerdaten im Frontend verfügbar sind.
+- Die ShopBuilder-Vorlage für die Artikelansicht enthält nun ein neues Tab im Tab-Widget, in dem die Informationen zum Hersteller angezeigt werden.
+- Das Standard-Template für Artikelansichten, die nicht mit ShopBuilder erstellt wurden, enthält jetzt ein neues Tab, in dem Informationen zum Hersteller angezeigt werden.
+- Der Platzhalter für „EU-Verantwortlicher Kontaktformular“ wurde zum Standard-Template und zur ShopBuilder-Vorlage für die Artikelansicht hinzugefügt.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von plentyShop LTS 5.0.70 gab es Änderungen an Template-Dateien die für Theme-Entwickler relevant sind.  Die Verlinkung führt direkt zu der umgesetzten Änderung in der entsprechenden Datei.
+
+- [resources/js/src/app/components/item/SingleItem.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.69...stable#diff-24dd25ca458027f998950fb4b48c9908ba241ac54bcf94c6de48c26107d86c15)
 
 ## v5.0.69 (2024-11-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.68...5.0.69" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 

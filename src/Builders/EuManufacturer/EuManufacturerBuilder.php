@@ -2,28 +2,28 @@
 
 namespace Ceres\Builders\EuManufacturer;
 
-use Ceres\Builders\EuManufacturer\Abstracts\AbstractEuManufacturerBuilder;
-use Ceres\Builders\EuManufacturer\Address\DetailedAddressBuilder;
-use Ceres\Builders\EuManufacturer\Address\GeneralAddressBuilder;
+use Ceres\Builders\Abstracts\AbstractBuilderFieldGenerator;
+use Ceres\Builders\EuManufacturer\Address\DetailedEuAddressBuilder;
+use Ceres\Builders\EuManufacturer\Address\GeneralEuAddressBuilder;
 use Ceres\ShopBuilder\DataFieldProvider\Item\ManufacturerDataFieldProvider;
 use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 
-class EuManufacturerBuilder extends AbstractEuManufacturerBuilder
+class EuManufacturerBuilder extends AbstractBuilderFieldGenerator
 {
     /** @var array */
     public array $results = [];
 
-    /** @var DetailedAddressBuilder */
-    public DetailedAddressBuilder $detailedAddressBuilder;
-    /** @var GeneralAddressBuilder */
-    public GeneralAddressBuilder $generalAddressBuilder;
+    /** @var DetailedEuAddressBuilder */
+    public DetailedEuAddressBuilder $detailedAddressBuilder;
+    /** @var GeneralEuAddressBuilder */
+    public GeneralEuAddressBuilder $generalAddressBuilder;
 
     /**
-     * @param DetailedAddressBuilder $detailedAddressBuilder
-     * @param GeneralAddressBuilder $generalAddressBuilder
+     * @param DetailedEuAddressBuilder $detailedAddressBuilder
+     * @param GeneralEuAddressBuilder $generalAddressBuilder
      */
-    public function __construct(DetailedAddressBuilder $detailedAddressBuilder,
-                                GeneralAddressBuilder $generalAddressBuilder
+    public function __construct(DetailedEuAddressBuilder $detailedAddressBuilder,
+                                GeneralEuAddressBuilder $generalAddressBuilder
     ) {
         $this->detailedAddressBuilder = $detailedAddressBuilder;
         $this->generalAddressBuilder  = $generalAddressBuilder;
@@ -56,9 +56,9 @@ class EuManufacturerBuilder extends AbstractEuManufacturerBuilder
      */
     public function withGeneralAddress(): EuManufacturerBuilder
     {
+        $this->generalAddressBuilder->withPostCode();
         $this->generalAddressBuilder->withCity();
         $this->generalAddressBuilder->withCountry();
-        $this->generalAddressBuilder->withPostCode();
         $this->results[] = $this->generalAddressBuilder->build();
 
         return $this;
@@ -80,6 +80,16 @@ class EuManufacturerBuilder extends AbstractEuManufacturerBuilder
     public function withPhoneNumber(): EuManufacturerBuilder
     {
         $this->results[] = $this->getShopBuilderDataFieldProvider(ManufacturerDataFieldProvider::RESPONSIBLE_PHONE);
+
+        return $this;
+    }
+
+    /**
+     * @return EuManufacturerBuilder
+     */
+    public function withContactUrl(): EuManufacturerBuilder
+    {
+        $this->results[] = $this->getShopBuilderDataFieldProvider(ManufacturerDataFieldProvider::RESPONSIBLE_CONTACT_URL);
 
         return $this;
     }
