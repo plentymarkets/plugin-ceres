@@ -19,7 +19,10 @@
             <br>
             <b>Item name 2</b>
         {% else %}
-            <item-manufacturer></item-manufacturer>
+            <item-manufacturer
+                    padding-inline-styles="{{ inlinePadding }}"
+                    padding-classes="{{ paddingClasses }}">
+            </item-manufacturer>
         {% endif %}
 
 </div>
