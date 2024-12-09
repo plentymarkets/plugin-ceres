@@ -5,15 +5,10 @@
 </template>
 
 <script>
-// import ItemBundle from "./ItemBundle.vue";
 
 export default {
 
   name: "item-manufacturer",
-
-  components: {
-    // ItemBundle
-  },
 
   props:{
     isPreview: Boolean,
@@ -38,9 +33,9 @@ export default {
     //     return this.isPreview ? 'bundle' : this.$store.getters[`${this.itemId}/currentItemVariation`].variation.bundleType
     // },
     //
-    // bundleComponents () {
-    //     return this.$store.getters[`${this.itemId}/currentItemVariation`].bundleComponents;
-    // }
+    currentVariation() {
+      return this.$store.getters[`${this.itemId}/currentItemVariation`];
+    },
   }
 }
 </script>
