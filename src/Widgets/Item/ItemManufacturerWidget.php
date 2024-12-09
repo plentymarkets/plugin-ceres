@@ -41,8 +41,8 @@ class ItemManufacturerWidget extends BaseWidget
 
         $settingsFactory->createCustomClass();
 
-        $settingsFactory->createSelect("selectType")
-            ->withDefaultValue("dropdown")
+        $settingsFactory->createSelect("selectionType")
+            ->withDefaultValue("manufacturer")
             ->withName("Widget.selectionSelectTypeLabel")
             ->withTooltip("Widget.selectionSelectTypeTooltip")
             ->withListBoxValues(

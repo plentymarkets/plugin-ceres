@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>item manufacturer widget</p>
+    <p>item manufacturer widget {{ showCrossPrice }}</p>
   </div>
 </template>
 
@@ -20,6 +20,10 @@ export default {
       type: String,
       default: null
     },
+    showCrossPrice: {
+      type: String,
+      default: null
+    }
   },
 
   inject: {
@@ -29,12 +33,14 @@ export default {
   },
 
   computed: {
-    // bundleType() {
-    //     return this.isPreview ? 'bundle' : this.$store.getters[`${this.itemId}/currentItemVariation`].variation.bundleType
-    // },
-    //
     currentVariation() {
       return this.$store.getters[`${this.itemId}/currentItemVariation`];
+    },
+    isBundle() {
+      return this.$store.getters[`${this.itemId}/currentItemVariation`].variation.bundleType === 'bundle';
+    },
+    isItemSet() {
+      return this.$store.getters[`${this.itemId}/currentItemVariation`].item.itemType === 'set';
     },
   }
 }

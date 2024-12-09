@@ -1,14 +1,14 @@
 {% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
-{% set customClass = widget.settings.customClass.mobile %}
+{% set customClass     = widget.settings.customClass.mobile %}
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
-{% set appearance = widget.settings.appearance.mobile | default("primary") %}
+{% set selectionType   = widget.settings.selectionType.mobile | default("manufacturer") %}
 
 <div class="widget widget-item-manufacturer widget-{{ appearance }}
     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}
@@ -19,7 +19,7 @@
             <br>
             <b>Item name 2</b>
         {% else %}
-            <item-manufacturer
+            <item-manufacturer :selection-type="{{ selectionType }}"
                     padding-inline-styles="{{ inlinePadding }}"
                     padding-classes="{{ paddingClasses }}">
             </item-manufacturer>

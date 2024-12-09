@@ -26,6 +26,10 @@ __webpack_require__.r(__webpack_exports__);
     paddingInlineStyles: {
       type: String,
       default: null
+    },
+    showCrossPrice: {
+      type: String,
+      default: null
     }
   },
   inject: {
@@ -34,12 +38,14 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
-    // bundleType() {
-    //     return this.isPreview ? 'bundle' : this.$store.getters[`${this.itemId}/currentItemVariation`].variation.bundleType
-    // },
-    //
     currentVariation: function currentVariation() {
       return this.$store.getters["".concat(this.itemId, "/currentItemVariation")];
+    },
+    isBundle: function isBundle() {
+      return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].variation.bundleType === 'bundle';
+    },
+    isItemSet: function isItemSet() {
+      return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].item.itemType === 'set';
     }
   }
 });
@@ -61,16 +67,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("p", [_vm._v("item manufacturer widget " + _vm._s(_vm.showCrossPrice))])
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("p", [_vm._v("item manufacturer widget")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
