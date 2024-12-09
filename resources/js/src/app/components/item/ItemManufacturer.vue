@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>item manufacturer widget {{ showCrossPrice }}</p>
+    <p>item manufacturer widget {{ selectionType }}</p>
   </div>
 </template>
 
@@ -20,7 +20,7 @@ export default {
       type: String,
       default: null
     },
-    showCrossPrice: {
+    selectionType: {
       type: String,
       default: null
     }

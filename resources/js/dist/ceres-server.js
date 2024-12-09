@@ -7661,7 +7661,7 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       default: null
     },
-    showCrossPrice: {
+    selectionType: {
       type: String,
       default: null
     }
@@ -50029,7 +50029,7 @@ var render = function() {
     _vm._ssrNode(
       "<p>" +
         _vm._ssrEscape(
-          "item manufacturer widget " + _vm._s(_vm.showCrossPrice)
+          "item manufacturer widget " + _vm._s(_vm.selectionType)
         ) +
         "</p>"
     )

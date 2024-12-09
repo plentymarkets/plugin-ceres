@@ -27,7 +27,7 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       default: null
     },
-    showCrossPrice: {
+    selectionType: {
       type: String,
       default: null
     }
@@ -68,7 +68,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("p", [_vm._v("item manufacturer widget " + _vm._s(_vm.showCrossPrice))])
+    _c("p", [_vm._v("item manufacturer widget " + _vm._s(_vm.selectionType))])
   ])
 }
 var staticRenderFns = []
