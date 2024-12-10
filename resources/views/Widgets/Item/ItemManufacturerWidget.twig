@@ -15,9 +15,14 @@
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}"
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
         {% if isPreview %}
-            <b>Item name 1</b>
+            <b>{{ trans("Ceres::Widget.itemManufacturerSampleName") }}</b>
             <br>
-            <b>Item name 2</b>
+            <p>{{ trans("Ceres::Widget.itemManufacturerSampleCompanyName") }}</p>
+            <p>{{ trans("Ceres::Widget.itemManufacturerSampleAddress") }}</p>
+            <p>{{ trans("Ceres::Widget.itemManufacturerSampleLocation") }}</p>
+            <p>{{ trans("Ceres::Widget.itemManufacturerSampleDomain") }}</p>
+            <p>{{ trans("Ceres::Widget.itemManufacturerSampleHomepage") }}</p>
+            <p>{{ trans("Ceres::Widget.itemManufacturerSamplePhone") }}</p>
         {% else %}
             <item-manufacturer :selection-type="{{ selectionType }}"
                     padding-inline-styles="{{ inlinePadding }}"
