@@ -60,10 +60,11 @@ export default {
     getItemSetComponents() {
       if(this.isItemSet)
       {
+        const components = this.currentVariation.setComponents;
         const setComponents = [];
-        this.$store.state.items.setComponentIds.forEach(itemId =>
+        components.forEach(itemData =>
         {
-          const setComponent = this.$store.getters[`${itemId}/currentItemVariation`];
+          const setComponent = this.$store.getters[`${itemData.itemId}/currentItemVariation`];
 
           const variationId = setComponent && setComponent.variation.id;
 

@@ -66,9 +66,10 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       if (this.isItemSet) {
+        var components = this.currentVariation.setComponents;
         var setComponents = [];
-        this.$store.state.items.setComponentIds.forEach(function (itemId) {
-          var setComponent = _this.$store.getters["".concat(itemId, "/currentItemVariation")];
+        components.forEach(function (itemData) {
+          var setComponent = _this.$store.getters["".concat(itemData.itemId, "/currentItemVariation")];
 
           var variationId = setComponent && setComponent.variation.id;
           console.log(setComponent);
