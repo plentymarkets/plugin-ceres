@@ -96,7 +96,7 @@ const actions =
                         component.data.variation.maximumOrderQuantity = setComponentMeta.maximumOrderQuantity;
                         setComponentMeta.manufacturer = component.data.item.manufacturer;
                         setComponentMeta.manufacturerId = component.data.item.manufacturerId;
-                        setComponentMeta.texts = component.data.item.texts;
+                        setComponentMeta.texts = component.data.texts;
 
 
                         // register a module for every set item

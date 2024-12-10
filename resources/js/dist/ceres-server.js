@@ -7659,6 +7659,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-manufacturer",
   props: {
@@ -7710,9 +7751,12 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.isItemSet) {
         var components = this.currentVariation.setComponents;
-        var setComponents = [];
-        components.forEach(function (itemData) {
-          _this2.manufacturerList.push({});
+        components.forEach(function (component) {
+          _this2.manufacturerList.push({
+            name: component.texts.name1,
+            manufacturer: component.manufacturer,
+            manufacturerId: component.manufacturerId
+          });
         });
       }
     }
@@ -50062,7 +50106,49 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _vm._ssrNode(
-      _vm.isItemSet ? "<div></div>" : _vm.isBundle ? "<div></div>" : "<!---->"
+      _vm.isItemSet
+        ? "<div>" +
+            _vm._ssrList(_vm.manufacturerList, function(manufacturerItem) {
+              return (
+                '<div class="my-4"><div class="p-0"><span>' +
+                _vm._ssrEscape(_vm._s(manufacturerItem.name)) +
+                '</span></div> <div class="p-0"><span>' +
+                _vm._ssrEscape(_vm._s(manufacturerItem.legalName)) +
+                '</span></div> <div class="p-0"><span>' +
+                _vm._ssrEscape(_vm._s(manufacturerItem.street)) +
+                "</span> <span>" +
+                _vm._ssrEscape(_vm._s(manufacturerItem.houseNo)) +
+                '</span></div> <div class="p-0"><span>' +
+                _vm._ssrEscape(_vm._s(manufacturerItem.postcode)) +
+                "</span> <span>" +
+                _vm._ssrEscape(_vm._s(manufacturerItem.town)) +
+                "</span> " +
+                (manufacturerItem.countryObject
+                  ? "<span>" +
+                    _vm._ssrEscape(
+                      "\n          " +
+                        _vm._s(manufacturerItem.countryObject.name) +
+                        "\n        "
+                    ) +
+                    "</span>"
+                  : "<!---->") +
+                '</div> <div class="p-0"><span>' +
+                _vm._ssrEscape(_vm._s(manufacturerItem.email)) +
+                '</span></div> <div class="p-0"><span>' +
+                _vm._ssrEscape(_vm._s(manufacturerItem.url)) +
+                '</span></div> <div class="p-0"><span>' +
+                _vm._ssrEscape(_vm._s(manufacturerItem.phoneNumber)) +
+                '</span></div> <div class="p-0"><span>' +
+                _vm._ssrEscape(_vm._s(manufacturerItem.faxNumber)) +
+                '</span></div> <div class="p-0"><span>' +
+                _vm._ssrEscape(_vm._s(manufacturerItem.contactUrl)) +
+                "</span></div></div>"
+              )
+            }) +
+            "</div>"
+        : _vm.isBundle
+        ? "<div></div>"
+        : "<!---->"
     )
   ])
 }
@@ -91784,7 +91870,7 @@ var actions = {
           component.data.variation.maximumOrderQuantity = setComponentMeta.maximumOrderQuantity;
           setComponentMeta.manufacturer = component.data.item.manufacturer;
           setComponentMeta.manufacturerId = component.data.item.manufacturerId;
-          setComponentMeta.texts = component.data.item.texts; // register a module for every set item
+          setComponentMeta.texts = component.data.texts; // register a module for every set item
 
           dispatch("registerItem", component);
           commit("".concat(itemId, "/setPleaseSelectVariationId"), variationId);

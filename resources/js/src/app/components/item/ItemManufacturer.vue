@@ -2,7 +2,48 @@
   <div>
 
     <div v-if="isItemSet">
+      <div class="my-4" v-for="manufacturerItem in manufacturerList">
+        <div class="p-0">
+          <span>{{ manufacturerItem.name }}</span>
+        </div>
 
+        <div class="p-0">
+          <span>{{ manufacturerItem.legalName }}</span>
+        </div>
+
+        <div class="p-0">
+          <span>{{ manufacturerItem.street }}</span>
+          <span>{{ manufacturerItem.houseNo }}</span>
+        </div>
+
+        <div class="p-0">
+          <span>{{ manufacturerItem.postcode }}</span>
+          <span>{{ manufacturerItem.town }}</span>
+          <span v-if="manufacturerItem.countryObject">
+            {{ manufacturerItem.countryObject.name }}
+          </span>
+        </div>
+
+        <div class="p-0">
+          <span>{{ manufacturerItem.email }}</span>
+        </div>
+
+        <div class="p-0">
+          <span>{{ manufacturerItem.url }}</span>
+        </div>
+
+        <div class="p-0">
+          <span>{{ manufacturerItem.phoneNumber }}</span>
+        </div>
+
+        <div class="p-0">
+          <span>{{ manufacturerItem.faxNumber }}</span>
+        </div>
+
+        <div class="p-0">
+          <span>{{ manufacturerItem.contactUrl }}</span>
+        </div>
+      </div>
     </div>
 
     <div v-else-if="isBundle">
@@ -69,15 +110,14 @@ export default {
 
   methods: {
     getItemSetComponents() {
-      if(this.isItemSet)
-      {
+      if(this.isItemSet) {
         const components = this.currentVariation.setComponents;
-        const setComponents = [];
-        components.forEach(itemData =>
-        {
 
+        components.forEach(component => {
           this.manufacturerList.push({
-
+            name: component.texts.name1,
+            manufacturer: component.manufacturer,
+            manufacturerId: component.manufacturerId
           });
         });
       }
