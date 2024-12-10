@@ -2,7 +2,7 @@
   <div>
 
     <div v-if="isItemSet">
-      <div class="my-4" v-for="manufacturerItem in currentVariation.setComponents" :key="manufacturerItem.defaultVariationId">
+      <div class="my-4" v-for="manufacturerItem in currentVariation.setComponents">
         <div class="p-0">
           <span>{{ manufacturerItem.name }}</span>
         </div>
@@ -70,7 +70,7 @@ export default {
     },
     selectionType: {
       type: String,
-      default: null
+      default: "manufacturer"
     }
   },
 

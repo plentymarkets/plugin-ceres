@@ -80,7 +80,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     selectionType: {
       type: String,
-      default: null
+      default: "manufacturer"
     }
   },
   inject: {
@@ -150,61 +150,57 @@ var render = function() {
           _vm._l(_vm.currentVariation.setComponents, function(
             manufacturerItem
           ) {
-            return _c(
-              "div",
-              { key: manufacturerItem.defaultVariationId, staticClass: "my-4" },
-              [
-                _c("div", { staticClass: "p-0" }, [
-                  _c("span", [_vm._v(_vm._s(manufacturerItem.name))])
-                ]),
+            return _c("div", { staticClass: "my-4" }, [
+              _c("div", { staticClass: "p-0" }, [
+                _c("span", [_vm._v(_vm._s(manufacturerItem.name))])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "p-0" }, [
+                _c("span", [_vm._v(_vm._s(manufacturerItem.legalName))])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "p-0" }, [
+                _c("span", [_vm._v(_vm._s(manufacturerItem.street))]),
                 _vm._v(" "),
-                _c("div", { staticClass: "p-0" }, [
-                  _c("span", [_vm._v(_vm._s(manufacturerItem.legalName))])
-                ]),
+                _c("span", [_vm._v(_vm._s(manufacturerItem.houseNo))])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "p-0" }, [
+                _c("span", [_vm._v(_vm._s(manufacturerItem.postcode))]),
                 _vm._v(" "),
-                _c("div", { staticClass: "p-0" }, [
-                  _c("span", [_vm._v(_vm._s(manufacturerItem.street))]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v(_vm._s(manufacturerItem.houseNo))])
-                ]),
+                _c("span", [_vm._v(_vm._s(manufacturerItem.town))]),
                 _vm._v(" "),
-                _c("div", { staticClass: "p-0" }, [
-                  _c("span", [_vm._v(_vm._s(manufacturerItem.postcode))]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v(_vm._s(manufacturerItem.town))]),
-                  _vm._v(" "),
-                  manufacturerItem.countryObject
-                    ? _c("span", [
-                        _vm._v(
-                          "\n          " +
-                            _vm._s(manufacturerItem.countryObject.name) +
-                            "\n        "
-                        )
-                      ])
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "p-0" }, [
-                  _c("span", [_vm._v(_vm._s(manufacturerItem.email))])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "p-0" }, [
-                  _c("span", [_vm._v(_vm._s(manufacturerItem.url))])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "p-0" }, [
-                  _c("span", [_vm._v(_vm._s(manufacturerItem.phoneNumber))])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "p-0" }, [
-                  _c("span", [_vm._v(_vm._s(manufacturerItem.faxNumber))])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "p-0" }, [
-                  _c("span", [_vm._v(_vm._s(manufacturerItem.contactUrl))])
-                ])
-              ]
-            )
+                manufacturerItem.countryObject
+                  ? _c("span", [
+                      _vm._v(
+                        "\n          " +
+                          _vm._s(manufacturerItem.countryObject.name) +
+                          "\n        "
+                      )
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "p-0" }, [
+                _c("span", [_vm._v(_vm._s(manufacturerItem.email))])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "p-0" }, [
+                _c("span", [_vm._v(_vm._s(manufacturerItem.url))])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "p-0" }, [
+                _c("span", [_vm._v(_vm._s(manufacturerItem.phoneNumber))])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "p-0" }, [
+                _c("span", [_vm._v(_vm._s(manufacturerItem.faxNumber))])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "p-0" }, [
+                _c("span", [_vm._v(_vm._s(manufacturerItem.contactUrl))])
+              ])
+            ])
           }),
           0
         )
