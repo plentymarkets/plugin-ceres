@@ -28,19 +28,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-manufacturer",
   props: {
-    isPreview: Boolean,
-    paddingClasses: {
-      type: String,
-      default: null
-    },
-    paddingInlineStyles: {
-      type: String,
-      default: null
-    },
-    selectionType: {
-      type: String,
-      default: "manufacturer"
-    }
+    paddingClasses: String,
+    paddingInlineStyles: String,
+    selectionType: String
   },
   inject: {
     itemId: {
