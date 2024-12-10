@@ -3,8 +3,8 @@
 
     <div v-if="isItemSet && selectionType === 'manufacturer'">
       <ul>
-        <li v-for="manufacturer in setComponents" :key="manufacturer.itemId">
-          {{ manufacturer.name }}
+        <li v-for="component in setComponents" :key="component.manufacturer.itemId">
+          {{ component.manufacturer.name }}
         </li>
       </ul>
     </div>
@@ -46,7 +46,7 @@ export default {
     isItemSet() {
       return this.$store.getters[`${this.itemId}/currentItemVariation`].item.itemType === 'set';
     },
-    setComponents () {
+    setComponents() {
       return this.$store.getters[`${this.itemId}/currentItemVariation`].setComponents;
     },
   },

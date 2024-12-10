@@ -79,9 +79,13 @@ var render = function() {
       ? _c("div", [
           _c(
             "ul",
-            _vm._l(_vm.setComponents, function(manufacturer) {
-              return _c("li", { key: manufacturer.itemId }, [
-                _vm._v("\n        " + _vm._s(manufacturer.name) + "\n      ")
+            _vm._l(_vm.setComponents, function(component) {
+              return _c("li", { key: component.manufacturer.itemId }, [
+                _vm._v(
+                  "\n        " +
+                    _vm._s(component.manufacturer.name) +
+                    "\n      "
+                )
               ])
             }),
             0

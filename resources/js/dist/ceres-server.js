@@ -50036,11 +50036,13 @@ var render = function() {
     _vm._ssrNode(
       _vm.isItemSet && _vm.selectionType === "manufacturer"
         ? "<div><ul>" +
-            _vm._ssrList(_vm.setComponents, function(manufacturer) {
+            _vm._ssrList(_vm.setComponents, function(component) {
               return (
                 "<li>" +
                 _vm._ssrEscape(
-                  "\n        " + _vm._s(manufacturer.name) + "\n      "
+                  "\n        " +
+                    _vm._s(component.manufacturer.name) +
+                    "\n      "
                 ) +
                 "</li>"
               )
