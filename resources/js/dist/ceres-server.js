@@ -7659,47 +7659,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-manufacturer",
   props: {
@@ -50103,51 +50062,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _vm._ssrNode(
-      _vm.isItemSet
-        ? "<div>" +
-            _vm._ssrList(_vm.currentVariation.setComponents, function(
-              manufacturerItem
-            ) {
-              return (
-                '<div class="my-4"><div class="p-0"><span>' +
-                _vm._ssrEscape(_vm._s(manufacturerItem.name)) +
-                '</span></div> <div class="p-0"><span>' +
-                _vm._ssrEscape(_vm._s(manufacturerItem.legalName)) +
-                '</span></div> <div class="p-0"><span>' +
-                _vm._ssrEscape(_vm._s(manufacturerItem.street)) +
-                "</span> <span>" +
-                _vm._ssrEscape(_vm._s(manufacturerItem.houseNo)) +
-                '</span></div> <div class="p-0"><span>' +
-                _vm._ssrEscape(_vm._s(manufacturerItem.postcode)) +
-                "</span> <span>" +
-                _vm._ssrEscape(_vm._s(manufacturerItem.town)) +
-                "</span> " +
-                (manufacturerItem.countryObject
-                  ? "<span>" +
-                    _vm._ssrEscape(
-                      "\n          " +
-                        _vm._s(manufacturerItem.countryObject.name) +
-                        "\n        "
-                    ) +
-                    "</span>"
-                  : "<!---->") +
-                '</div> <div class="p-0"><span>' +
-                _vm._ssrEscape(_vm._s(manufacturerItem.email)) +
-                '</span></div> <div class="p-0"><span>' +
-                _vm._ssrEscape(_vm._s(manufacturerItem.url)) +
-                '</span></div> <div class="p-0"><span>' +
-                _vm._ssrEscape(_vm._s(manufacturerItem.phoneNumber)) +
-                '</span></div> <div class="p-0"><span>' +
-                _vm._ssrEscape(_vm._s(manufacturerItem.faxNumber)) +
-                '</span></div> <div class="p-0"><span>' +
-                _vm._ssrEscape(_vm._s(manufacturerItem.contactUrl)) +
-                "</span></div></div>"
-              )
-            }) +
-            "</div>"
-        : _vm.isBundle
-        ? "<div></div>"
-        : "<!---->"
+      _vm.isItemSet ? "<div></div>" : _vm.isBundle ? "<div></div>" : "<!---->"
     )
   ])
 }
