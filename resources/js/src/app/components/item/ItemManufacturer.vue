@@ -75,14 +75,9 @@ export default {
         const setComponents = [];
         components.forEach(itemData =>
         {
-          const setComponent = this.$store.getters[`${itemData.itemId}/currentItemVariation`];
 
-          const variationId = setComponent && setComponent.variation.id;
-
-          console.log(setComponent);
           this.manufacturerList.push({
-            name: setComponent.texts.name1,
-            manufacturer: setComponent.item.manufacturer,
+
           });
         });
       }

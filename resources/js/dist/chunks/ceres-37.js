@@ -78,15 +78,7 @@ __webpack_require__.r(__webpack_exports__);
         var components = this.currentVariation.setComponents;
         var setComponents = [];
         components.forEach(function (itemData) {
-          var setComponent = _this2.$store.getters["".concat(itemData.itemId, "/currentItemVariation")];
-
-          var variationId = setComponent && setComponent.variation.id;
-          console.log(setComponent);
-
-          _this2.manufacturerList.push({
-            name: setComponent.texts.name1,
-            manufacturer: setComponent.item.manufacturer
-          });
+          _this2.manufacturerList.push({});
         });
       }
     }

@@ -72282,7 +72282,10 @@ var actions = {
           }
 
           component.data.variation.minimumOrderQuantity = setComponentMeta.minimumOrderQuantity;
-          component.data.variation.maximumOrderQuantity = setComponentMeta.maximumOrderQuantity; // register a module for every set item
+          component.data.variation.maximumOrderQuantity = setComponentMeta.maximumOrderQuantity;
+          component.data.variation.manufacturer = component.data.item.manufacturer;
+          component.data.variation.manufacturerId = component.data.item.manufacturerId;
+          component.data.variation.texts = component.data.item.texts; // register a module for every set item
 
           dispatch("registerItem", component);
           commit("".concat(itemId, "/setPleaseSelectVariationId"), variationId);
