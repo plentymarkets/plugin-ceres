@@ -1,6 +1,13 @@
 <template>
   <div>
-    <p>item manufacturer widget {{ selectionType }}</p>
+
+    <div v-if="isItemSet">
+
+    </div>
+
+    <div v-else-if="isBundle">
+
+    </div>
   </div>
 </template>
 
@@ -42,6 +49,32 @@ export default {
     isItemSet() {
       return this.$store.getters[`${this.itemId}/currentItemVariation`].item.itemType === 'set';
     },
+  },
+
+  mounted()
+  {
+    this.getItemSetComponents();
+  },
+
+  methods: {
+    getItemSetComponents() {
+      if(this.isItemSet)
+      {
+        const setComponents = [];
+        this.$store.state.items.setComponentIds.forEach(itemId =>
+        {
+          const setComponent = this.$store.getters[`${itemId}/currentItemVariation`];
+
+          const variationId = setComponent && setComponent.variation.id;
+
+          console.log(setComponent);
+          setComponents.push({
+            variationId: variationId,
+          });
+        });
+      }
+    }
   }
+
 }
 </script>

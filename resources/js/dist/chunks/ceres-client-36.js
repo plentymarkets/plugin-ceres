@@ -9,6 +9,16 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0__);
+
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -47,6 +57,27 @@ __webpack_require__.r(__webpack_exports__);
     isItemSet: function isItemSet() {
       return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].item.itemType === 'set';
     }
+  },
+  mounted: function mounted() {
+    this.getItemSetComponents();
+  },
+  methods: {
+    getItemSetComponents: function getItemSetComponents() {
+      var _this = this;
+
+      if (this.isItemSet) {
+        var setComponents = [];
+        this.$store.state.items.setComponentIds.forEach(function (itemId) {
+          var setComponent = _this.$store.getters["".concat(itemId, "/currentItemVariation")];
+
+          var variationId = setComponent && setComponent.variation.id;
+          console.log(setComponent);
+          setComponents.push({
+            variationId: variationId
+          });
+        });
+      }
+    }
   }
 });
 
@@ -68,7 +99,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("p", [_vm._v("item manufacturer widget " + _vm._s(_vm.selectionType))])
+    _vm.isItemSet ? _c("div") : _vm.isBundle ? _c("div") : _vm._e()
   ])
 }
 var staticRenderFns = []
