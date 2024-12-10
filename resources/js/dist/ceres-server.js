@@ -7739,20 +7739,17 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    var _this = this;
-
-    this.$nextTick(function () {
-      _this.getItemSetComponents();
+    this.$nextTick(function () {// this.getItemSetComponents();
     });
   },
   methods: {
     getItemSetComponents: function getItemSetComponents() {
-      var _this2 = this;
+      var _this = this;
 
       if (this.isItemSet) {
         var components = this.currentVariation.setComponents;
         components.forEach(function (component) {
-          _this2.manufacturerList.push({
+          _this.manufacturerList.push({
             name: component.texts.name1,
             manufacturer: component.manufacturer,
             manufacturerId: component.manufacturerId
@@ -50108,7 +50105,9 @@ var render = function() {
     _vm._ssrNode(
       _vm.isItemSet
         ? "<div>" +
-            _vm._ssrList(_vm.manufacturerList, function(manufacturerItem) {
+            _vm._ssrList(_vm.currentVariation.setComponents, function(
+              manufacturerItem
+            ) {
               return (
                 '<div class="my-4"><div class="p-0"><span>' +
                 _vm._ssrEscape(_vm._s(manufacturerItem.name)) +

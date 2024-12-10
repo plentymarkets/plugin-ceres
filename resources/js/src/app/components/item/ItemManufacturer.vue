@@ -2,7 +2,7 @@
   <div>
 
     <div v-if="isItemSet">
-      <div class="my-4" v-for="manufacturerItem in manufacturerList">
+      <div class="my-4" v-for="manufacturerItem in currentVariation.setComponents" :key="manufacturerItem.defaultVariationId">
         <div class="p-0">
           <span>{{ manufacturerItem.name }}</span>
         </div>
@@ -103,7 +103,7 @@ export default {
   {
     this.$nextTick(() =>
         {
-          this.getItemSetComponents();
+          // this.getItemSetComponents();
     });
 
   },
