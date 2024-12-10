@@ -7659,6 +7659,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-manufacturer",
   props: {
@@ -50052,7 +50056,23 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _vm._ssrNode(
-      _vm.isItemSet ? "<div></div>" : _vm.isBundle ? "<div></div>" : "<!---->"
+      _vm.isItemSet
+        ? "<div><ul>" +
+            _vm._ssrList(_vm.currentVariation.setComponents, function(
+              manufacturer
+            ) {
+              return (
+                "<li>" +
+                _vm._ssrEscape(
+                  "\n        " + _vm._s(manufacturer.name) + "\n      "
+                ) +
+                "</li>"
+              )
+            }) +
+            "</ul></div>"
+        : _vm.isBundle
+        ? "<div></div>"
+        : "<!---->"
     )
   ])
 }

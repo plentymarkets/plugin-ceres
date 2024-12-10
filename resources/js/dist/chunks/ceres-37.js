@@ -25,6 +25,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-manufacturer",
   props: {
@@ -93,7 +97,21 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.isItemSet ? _c("div") : _vm.isBundle ? _c("div") : _vm._e()
+    _vm.isItemSet
+      ? _c("div", [
+          _c(
+            "ul",
+            _vm._l(_vm.currentVariation.setComponents, function(manufacturer) {
+              return _c("li", [
+                _vm._v("\n        " + _vm._s(manufacturer.name) + "\n      ")
+              ])
+            }),
+            0
+          )
+        ])
+      : _vm.isBundle
+      ? _c("div")
+      : _vm._e()
   ])
 }
 var staticRenderFns = []

@@ -2,7 +2,11 @@
   <div>
 
     <div v-if="isItemSet">
-
+      <ul>
+        <li v-for="manufacturer in currentVariation.setComponents">
+          {{ manufacturer.name }}
+        </li>
+      </ul>
     </div>
 
     <div v-else-if="isBundle">
