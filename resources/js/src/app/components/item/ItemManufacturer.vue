@@ -51,9 +51,20 @@ export default {
     },
   },
 
+  data()
+  {
+    return {
+      manufacturerList: []
+    };
+  },
+
   mounted()
   {
-    this.getItemSetComponents();
+    this.$nextTick(() =>
+        {
+          this.getItemSetComponents();
+    });
+
   },
 
   methods: {
@@ -69,8 +80,9 @@ export default {
           const variationId = setComponent && setComponent.variation.id;
 
           console.log(setComponent);
-          setComponents.push({
-            variationId: variationId,
+          this.manufacturerList.push({
+            name: setComponent.texts.name1,
+            manufacturer: setComponent.item.manufacturer,
           });
         });
       }

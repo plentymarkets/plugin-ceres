@@ -58,23 +58,34 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].item.itemType === 'set';
     }
   },
+  data: function data() {
+    return {
+      manufacturerList: []
+    };
+  },
   mounted: function mounted() {
-    this.getItemSetComponents();
+    var _this = this;
+
+    this.$nextTick(function () {
+      _this.getItemSetComponents();
+    });
   },
   methods: {
     getItemSetComponents: function getItemSetComponents() {
-      var _this = this;
+      var _this2 = this;
 
       if (this.isItemSet) {
         var components = this.currentVariation.setComponents;
         var setComponents = [];
         components.forEach(function (itemData) {
-          var setComponent = _this.$store.getters["".concat(itemData.itemId, "/currentItemVariation")];
+          var setComponent = _this2.$store.getters["".concat(itemData.itemId, "/currentItemVariation")];
 
           var variationId = setComponent && setComponent.variation.id;
           console.log(setComponent);
-          setComponents.push({
-            variationId: variationId
+
+          _this2.manufacturerList.push({
+            name: setComponent.texts.name1,
+            manufacturer: setComponent.item.manufacturer
           });
         });
       }
