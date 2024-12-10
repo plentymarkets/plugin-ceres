@@ -7643,9 +7643,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0__);
-
 //
 //
 //
@@ -7682,33 +7679,14 @@ __webpack_require__.r(__webpack_exports__);
     isBundle: function isBundle() {
       return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].variation.bundleType === 'bundle';
     },
+    bundleComponents: function bundleComponents() {
+      return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].bundleComponents;
+    },
     isItemSet: function isItemSet() {
       return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].item.itemType === 'set';
-    }
-  },
-  data: function data() {
-    return {
-      manufacturerList: []
-    };
-  },
-  mounted: function mounted() {
-    this.$nextTick(function () {// this.getItemSetComponents();
-    });
-  },
-  methods: {
-    getItemSetComponents: function getItemSetComponents() {
-      var _this = this;
-
-      if (this.isItemSet) {
-        var components = this.currentVariation.setComponents;
-        components.forEach(function (component) {
-          _this.manufacturerList.push({
-            name: component.texts.name1,
-            manufacturer: component.manufacturer,
-            manufacturerId: component.manufacturerId
-          });
-        });
-      }
+    },
+    setComponents: function setComponents() {
+      return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].setComponents;
     }
   }
 });
@@ -50056,11 +50034,9 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _vm._ssrNode(
-      _vm.isItemSet
+      _vm.isItemSet && _vm.selectionType === "manufacturer"
         ? "<div><ul>" +
-            _vm._ssrList(_vm.currentVariation.setComponents, function(
-              manufacturer
-            ) {
+            _vm._ssrList(_vm.setComponents, function(manufacturer) {
               return (
                 "<li>" +
                 _vm._ssrEscape(

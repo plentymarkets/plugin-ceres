@@ -1,9 +1,9 @@
 <template>
   <div>
 
-    <div v-if="isItemSet">
+    <div v-if="isItemSet && selectionType === 'manufacturer'">
       <ul>
-        <li v-for="manufacturer in currentVariation.setComponents">
+        <li v-for="manufacturer in setComponents" :key="manufacturer.itemId">
           {{ manufacturer.name }}
         </li>
       </ul>
@@ -40,42 +40,15 @@ export default {
     isBundle() {
       return this.$store.getters[`${this.itemId}/currentItemVariation`].variation.bundleType === 'bundle';
     },
+    bundleComponents () {
+      return this.$store.getters[`${this.itemId}/currentItemVariation`].bundleComponents;
+    },
     isItemSet() {
       return this.$store.getters[`${this.itemId}/currentItemVariation`].item.itemType === 'set';
     },
+    setComponents () {
+      return this.$store.getters[`${this.itemId}/currentItemVariation`].setComponents;
+    },
   },
-
-  data()
-  {
-    return {
-      manufacturerList: []
-    };
-  },
-
-  mounted()
-  {
-    this.$nextTick(() =>
-        {
-          // this.getItemSetComponents();
-    });
-
-  },
-
-  methods: {
-    getItemSetComponents() {
-      if(this.isItemSet) {
-        const components = this.currentVariation.setComponents;
-
-        components.forEach(component => {
-          this.manufacturerList.push({
-            name: component.texts.name1,
-            manufacturer: component.manufacturer,
-            manufacturerId: component.manufacturerId
-          });
-        });
-      }
-    }
-  }
-
 }
 </script>
