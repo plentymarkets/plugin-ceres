@@ -49,7 +49,8 @@ class ItemManufacturerWidget extends BaseWidget
                 ValueListFactory::make()
                     ->addEntry("manufacturer", "Widget.selectionSelectTypeManufacturer")
                     ->addEntry("eu-responsible", "Widget.selectionSelectTypeEuResponsible")
-                    ->toArray());
+                    ->toArray()
+            );
 
         $settingsFactory->createSpacing();
 
