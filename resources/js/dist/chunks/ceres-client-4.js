@@ -236,8 +236,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     transformComponents: function transformComponents(components) {
       var manufacturerMap = {};
       components.forEach(function (item) {
+        var _item$texts;
+
         var manufacturerId = item.manufacturerId;
-        var itemName = item.texts.name1 || '';
+        var itemName = ((_item$texts = item.texts) === null || _item$texts === void 0 ? void 0 : _item$texts.name1) || '';
         var manufacturer = item.manufacturer;
 
         if (!manufacturerMap[manufacturerId]) {
@@ -618,7 +620,8 @@ var render = function() {
               )
             : _vm._e()
         ])
-      : _c(
+      : _vm.setComponents.length !== 0 || _vm.bundleComponents.length !== 0
+      ? _c(
           "div",
           [
             _vm.selectionType === "manufacturer" && _vm.simpleItemManufacturer
@@ -634,6 +637,7 @@ var render = function() {
           ],
           1
         )
+      : _vm._e()
   ])
 }
 var staticRenderFns = []

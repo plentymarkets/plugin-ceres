@@ -21,7 +21,7 @@ class ItemManufacturerWidget extends BaseWidget
     {
         return WidgetDataFactory::make("Ceres::ItemManufacturerWidget")
             ->withLabel("Widget.itemManufacturerLabel")
-            ->withPreviewImageUrl("/images/widgets/item-bundle.svg")
+            ->withPreviewImageUrl("/images/widgets/manufacturer.svg")
             ->withType(WidgetTypes::ITEM)
             ->withCategory(WidgetCategories::ITEM)
             ->withPosition(400)

@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <div v-else>
+    <div v-else-if="setComponents.length !== 0 || bundleComponents.length !== 0">
       <manufacturer-details
           v-if="selectionType === 'manufacturer' && simpleItemManufacturer"
           :manufacturer="simpleItemManufacturer"
