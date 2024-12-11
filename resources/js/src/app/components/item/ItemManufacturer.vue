@@ -12,13 +12,13 @@
     </div>
 
     <div v-else-if="isBundle">
-<!--      <div v-if="selectionType === 'manufacturer'">-->
-<!--        <item-manufacturer-data-list :item-components="bundleComponents"></item-manufacturer-data-list>-->
-<!--      </div>-->
+      <div v-if="selectionType === 'manufacturer'">
+        <item-manufacturer-data-list :item-components="bundleComponents"></item-manufacturer-data-list>
+      </div>
 
-<!--      <div v-if="selectionType === 'eu-responsible'">-->
-<!--        <item-eu-responsible-data-list :item-components="bundleComponents"></item-eu-responsible-data-list>-->
-<!--      </div>-->
+      <div v-if="selectionType === 'eu-responsible'">
+        <item-eu-responsible-data-list :item-components="bundleComponents"></item-eu-responsible-data-list>
+      </div>
     </div>
 
     <div v-else>
