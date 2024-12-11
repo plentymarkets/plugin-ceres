@@ -1,7 +1,7 @@
 <template>
   <div v-if="itemComponents.length > 0">
     <div v-for="(component, index) in itemComponents" :key="index">
-      <eu-responsible-details
+      <eu-responsible-details v-if="component.manufacturer"
           :manufacturer="component.manufacturer"
           :concatenated-names="component.concatenatedNames"
       />

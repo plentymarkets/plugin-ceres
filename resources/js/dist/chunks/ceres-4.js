@@ -533,12 +533,14 @@ var render = function() {
             "div",
             { key: index },
             [
-              _c("eu-responsible-details", {
-                attrs: {
-                  manufacturer: component.manufacturer,
-                  "concatenated-names": component.concatenatedNames
-                }
-              }),
+              component.manufacturer
+                ? _c("eu-responsible-details", {
+                    attrs: {
+                      manufacturer: component.manufacturer,
+                      "concatenated-names": component.concatenatedNames
+                    }
+                  })
+                : _vm._e(),
               _vm._v(" "),
               _c("hr")
             ],
@@ -674,12 +676,14 @@ var render = function() {
             "div",
             { key: index },
             [
-              _c("manufacturer-details", {
-                attrs: {
-                  manufacturer: component.manufacturer,
-                  "concatenated-names": component.concatenatedNames
-                }
-              }),
+              component.manufacturer
+                ? _c("manufacturer-details", {
+                    attrs: {
+                      manufacturer: component.manufacturer,
+                      "concatenated-names": component.concatenatedNames
+                    }
+                  })
+                : _vm._e(),
               _vm._v(" "),
               _c("hr")
             ],

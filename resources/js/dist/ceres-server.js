@@ -50305,12 +50305,14 @@ var render = function() {
             "<div>",
             "</div>",
             [
-              _c("eu-responsible-details", {
-                attrs: {
-                  manufacturer: component.manufacturer,
-                  "concatenated-names": component.concatenatedNames
-                }
-              }),
+              component.manufacturer
+                ? _c("eu-responsible-details", {
+                    attrs: {
+                      manufacturer: component.manufacturer,
+                      "concatenated-names": component.concatenatedNames
+                    }
+                  })
+                : _vm._e(),
               _vm._ssrNode(" <hr>")
             ],
             2
@@ -50574,12 +50576,14 @@ var render = function() {
             "<div>",
             "</div>",
             [
-              _c("manufacturer-details", {
-                attrs: {
-                  manufacturer: component.manufacturer,
-                  "concatenated-names": component.concatenatedNames
-                }
-              }),
+              component.manufacturer
+                ? _c("manufacturer-details", {
+                    attrs: {
+                      manufacturer: component.manufacturer,
+                      "concatenated-names": component.concatenatedNames
+                    }
+                  })
+                : _vm._e(),
               _vm._ssrNode(" <hr>")
             ],
             2
