@@ -491,9 +491,10 @@ var render = function() {
                         },
                         [
                           _c("div", { staticClass: "d-flex" }, [
-                            _c("span", { staticClass: "flex-grow-1" }, [
-                              _vm._v(_vm._s(value.name))
-                            ]),
+                            _c("span", {
+                              staticClass: "flex-grow-1",
+                              domProps: { innerHTML: _vm._s(value.name) }
+                            }),
                             _vm._v(" "),
                             _c("div", { staticClass: "filter-badge" }, [
                               _vm._v(_vm._s(value.count))

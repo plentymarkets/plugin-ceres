@@ -133,7 +133,8 @@ var render = function() {
               staticClass: "fa fa-times",
               attrs: { "aria-hidden": "true" }
             }),
-            _vm._v(" " + _vm._s(tag.name) + "\n    ")
+            _vm._v(" "),
+            _c("span", { domProps: { innerHTML: _vm._s(tag.name) } })
           ]
         )
       }),

@@ -105,7 +105,9 @@ export default {
       return this.$store.getters[`${this.itemId}/currentItemVariation`].variation.bundleType === 'bundle';
     },
     bundleComponents () {
-      const items = this.$store.getters[`${this.itemId}/currentItemVariation`].bundleComponents || [];
+      const items = this.$store.getters[`${this.itemId}/currentItemVariation`].bundleComponents.map(component => {
+        return component.data.item
+      }) || [];
 
       return this.transformComponents(items);
     },
