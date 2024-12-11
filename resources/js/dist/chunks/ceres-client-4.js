@@ -213,6 +213,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     setComponents: function setComponents() {
       var items = this.$store.getters["".concat(this.itemId, "/currentItemVariation")].setComponents;
       var manufacturerMap = {};
+      console.log(items);
       items.forEach(function (item) {
         var manufacturerId = item.manufacturerId;
         var itemName = item.texts.name1 || '';

@@ -114,7 +114,7 @@ export default {
       const items = this.$store.getters[`${this.itemId}/currentItemVariation`].setComponents;
 
       const manufacturerMap = {};
-
+      console.log(items);
       items.forEach(item => {
           const manufacturerId = item.manufacturerId;
           const itemName = item.texts.name1 || '';
