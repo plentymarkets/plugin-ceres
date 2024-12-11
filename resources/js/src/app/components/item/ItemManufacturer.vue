@@ -137,9 +137,13 @@ export default {
       return this.$store.getters[`${this.itemId}/currentItemVariation`].variation.bundleType === 'bundle';
     },
     bundleComponents () {
-      const items = this.$store.getters[`${this.itemId}/currentItemVariation`].bundleComponents.map(component => {
-        return component.data.item
-      }) || [];
+      const bundleComponents = this.$store.getters[`${this.itemId}/currentItemVariation`].bundleComponents || [];
+
+      const items = bundleComponents.map(component => ({
+        manufacturerId: component.data.item.manufacturerId,
+        manufacturer: component.data.item.manufacturer,
+        texts: component.data.texts
+      }));
 
       return this.transformComponents(items);
     },
