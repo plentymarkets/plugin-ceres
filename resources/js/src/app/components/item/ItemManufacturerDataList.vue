@@ -1,9 +1,12 @@
 <template>
   <div v-if="itemComponents.length > 0">
       <div v-for="(component, index) in itemComponents" :key="index">
-        <b>{{ component.concatenatedNames }}</b>
-        <div class="p-0">
+        <b v-if="component.concatenatedNames">{{ component.concatenatedNames }}</b>
+        <div v-if="component.manufacturer.name" class="p-0">
           <span>{{ component.manufacturer.name }}</span>
+        </div>
+        <div v-else-if="component.manufacturer.externalName" class="p-0">
+          <span>{{ component.manufacturer.externalName }}</span>
         </div>
 
         <div class="p-0">

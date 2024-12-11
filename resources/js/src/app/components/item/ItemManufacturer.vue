@@ -105,7 +105,9 @@ export default {
       return this.$store.getters[`${this.itemId}/currentItemVariation`].variation.bundleType === 'bundle';
     },
     bundleComponents () {
-      return this.$store.getters[`${this.itemId}/currentItemVariation`].bundleComponents;
+      const items = this.$store.getters[`${this.itemId}/currentItemVariation`].bundleComponents || [];
+
+      return this.transformComponents(items);
     },
     isItemSet() {
       return this.$store.getters[`${this.itemId}/currentItemVariation`].item.itemType === 'set';
@@ -113,30 +115,35 @@ export default {
     setComponents() {
       const items = this.$store.getters[`${this.itemId}/currentItemVariation`].setComponents || [];
 
-      const manufacturerMap = {};
-      items.forEach(item => {
-          const manufacturerId = item.manufacturerId;
-          const itemName = item.texts.name1 || '';
-          const manufacturer = item.manufacturer;
-
-          if (!manufacturerMap[manufacturerId]) {
-            manufacturerMap[manufacturerId] = {
-              manufacturerId: manufacturerId,
-              manufacturer: manufacturer,
-              concatenatedNames: []
-            };
-          }
-
-          manufacturerMap[manufacturerId]['concatenatedNames'].push(itemName);
-      });
-
-      const result = Object.values(manufacturerMap).map(item => ({
-        ...item,
-            concatenatedNames: item['concatenatedNames'].join(', ')
-      }));
-
-      return result;
+      return this.transformComponents(items);
     },
   },
+
+  methods: {
+    transformComponents(components) {
+      const manufacturerMap = {};
+
+      components.forEach(item => {
+        const manufacturerId = item.manufacturerId;
+        const itemName = item.texts.name1 || '';
+        const manufacturer = item.manufacturer;
+
+        if (!manufacturerMap[manufacturerId]) {
+          manufacturerMap[manufacturerId] = {
+            manufacturerId: manufacturerId,
+            manufacturer: manufacturer,
+            concatenatedNames: []
+          };
+        }
+
+        manufacturerMap[manufacturerId].concatenatedNames.push(itemName);
+      });
+
+      return Object.values(manufacturerMap).map(item => ({
+        ...item,
+        concatenatedNames: item.concatenatedNames.join(', ')
+      }));
+    }
+  }
 }
 </script>
