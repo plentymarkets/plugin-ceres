@@ -1,55 +1,28 @@
 <template>
   <div v-if="itemComponents.length > 0">
-
     <div v-for="(component, index) in itemComponents" :key="index">
-      <b v-if="component.concatenatedNames">{{ component.concatenatedNames }}</b>
-      <div class="p-0">
-        <span>{{ component.manufacturer.responsibleName }}</span>
-      </div>
-
-      <div class="p-0">
-        <span>{{ component.manufacturer.responsibleStreet }}</span>
-        <span>{{ component.manufacturer.responsibleHouseNo }}</span>
-      </div>
-
-      <div class="p-0">
-        <span>{{ component.manufacturer.responsiblePostCode }}</span>
-        <span>{{ component.manufacturer.responsibleTown }}</span>
-        <span v-if="component.manufacturer.responsibleCountryObject">
-          {{ component.manufacturer.responsibleCountryObject.name }}
-        </span>
-      </div>
-
-      <div class="p-0">
-        <span>{{ component.manufacturer.responsibleEmail }}</span>
-      </div>
-
-      <div class="p-0">
-        <span>{{ component.manufacturer.responsiblePhoneNo }}</span>
-      </div>
-
-      <div class="p-0">
-        <span>{{ component.manufacturer.responsibleContactUrl }}</span>
-      </div>
-
+      <eu-responsible-details
+          :manufacturer="component.manufacturer"
+          :concatenated-names="component.concatenatedNames"
+      />
       <hr>
     </div>
-
   </div>
 </template>
 
 <script>
+import EuResponsibleDetails from "./EuResponsibleDetails.vue";
 
 export default {
-
   name: "item-eu-responsible-data-list",
-
+  components: {
+    EuResponsibleDetails
+  },
   props: {
     itemComponents: {
       type: Array,
       default: () => []
-    },
-  },
-
-}
+    }
+  }
+};
 </script>

@@ -21,87 +21,23 @@
     </div>
 
     <div v-else>
-      <div v-if="selectionType === 'manufacturer'">
-        <div v-if="simpleItemManufacturer.name" class="p-0">
-          <span>{{ simpleItemManufacturer.name }}</span>
-        </div>
-        <div v-else-if="simpleItemManufacturer.externalName" class="p-0">
-          <span>{{ simpleItemManufacturer.externalName }}</span>
-        </div>
-
-        <div class="p-0">
-          <span>{{ simpleItemManufacturer.street }}</span>
-          <span>{{ simpleItemManufacturer.houseNo }}</span>
-        </div>
-
-        <div class="p-0">
-          <span>{{ simpleItemManufacturer.postcode }}</span>
-          <span>{{ simpleItemManufacturer.town }}</span>
-          <span v-if="simpleItemManufacturer.countryObject">
-                {{ simpleItemManufacturer.countryObject.name }}
-              </span>
-        </div>
-
-        <div class="p-0">
-          <span>{{ simpleItemManufacturer.email }}</span>
-        </div>
-
-        <div class="p-0">
-          <span>{{ simpleItemManufacturer.url }}</span>
-        </div>
-
-        <div class="p-0">
-          <span>{{ simpleItemManufacturer.phoneNumber }}</span>
-        </div>
-
-        <div class="p-0">
-          <span>{{ simpleItemManufacturer.faxNumber }}</span>
-        </div>
-
-        <div class="p-0">
-          <span>{{ simpleItemManufacturer.contactUrl }}</span>
-        </div>
-      </div>
-
-      <div v-if="selectionType === 'eu-responsible'">
-        <b v-if="simpleItemManufacturer.concatenatedNames">{{ component.concatenatedNames }}</b>
-        <div class="p-0">
-          <span>{{ simpleItemManufacturer.responsibleName }}</span>
-        </div>
-
-        <div class="p-0">
-          <span>{{ simpleItemManufacturer.responsibleStreet }}</span>
-          <span>{{ simpleItemManufacturer.responsibleHouseNo }}</span>
-        </div>
-
-        <div class="p-0">
-          <span>{{ simpleItemManufacturer.responsiblePostCode }}</span>
-          <span>{{ simpleItemManufacturer.responsibleTown }}</span>
-          <span v-if="simpleItemManufacturer.responsibleCountryObject">
-          {{ simpleItemManufacturer.responsibleCountryObject.name }}
-        </span>
-        </div>
-
-        <div class="p-0">
-          <span>{{ simpleItemManufacturer.responsibleEmail }}</span>
-        </div>
-
-        <div class="p-0">
-          <span>{{ simpleItemManufacturer.responsiblePhoneNo }}</span>
-        </div>
-
-        <div class="p-0">
-          <span>{{ simpleItemManufacturer.responsibleContactUrl }}</span>
-        </div>
-      </div>
+      <manufacturer-details
+          v-if="selectionType === 'manufacturer' && simpleItemManufacturer"
+          :manufacturer="simpleItemManufacturer"
+      />
+      <eu-responsible-details
+          v-else-if="selectionType === 'eu-responsible' && simpleItemManufacturer"
+          :manufacturer="simpleItemManufacturer"
+      />
     </div>
   </div>
 </template>
 
 <script>
-
 import ItemManufacturerDataList from "./ItemManufacturerDataList.vue";
 import ItemEuResponsibleDataList from "./ItemEuResponsibleDataList.vue";
+import ManufacturerDetails from "./ManufacturerDetails.vue";
+import EuResponsibleDetails from "./EuResponsibleDetails.vue";
 
 export default {
 
@@ -109,7 +45,9 @@ export default {
 
   components: {
     ItemManufacturerDataList,
-    ItemEuResponsibleDataList
+    ItemEuResponsibleDataList,
+    ManufacturerDetails,
+    EuResponsibleDetails
   },
 
   props: {

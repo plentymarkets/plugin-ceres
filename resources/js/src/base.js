@@ -121,6 +121,8 @@ Vue.component("single-item-bundle", () => import("./app/components/item/SingleIt
 Vue.component("item-manufacturer", () => import("./app/components/item/ItemManufacturer.vue"));
 Vue.component("item-manufacturer-data-list", () => import("./app/components/item/ItemManufacturerDataList.vue"));
 Vue.component("item-eu-responsible-data-list", () => import("./app/components/item/ItemEuResponsibleDataList.vue"));
+Vue.component("manufacturer-details", () => import("./app/components/item/ManufacturerDetails.vue"));
+Vue.component("eu-responsible-details", () => import("./app/components/item/EuResponsibleDetails.vue"));
 Vue.component("single-add-to-basket", () => import("./app/components/item/SingleAddToBasket.vue"));
 Vue.component("set-quantity-input", () => import("./app/components/item/SetQuantityInput.vue"));
 import SingleItem from "./app/components/item/SingleItem.vue";
