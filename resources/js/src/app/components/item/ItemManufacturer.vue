@@ -99,7 +99,7 @@ export default {
 
       components.forEach(item => {
         const manufacturerId = item.manufacturerId;
-        const itemName = item.texts.name1 || '';
+        const itemName = item.texts?.name1 || '';
         const manufacturer = item.manufacturer;
 
         if (!manufacturerMap[manufacturerId]) {
