@@ -1,6 +1,5 @@
 <template>
   <div v-if="itemComponents.length > 0">
-
       <div v-for="(component, index) in itemComponents" :key="index">
         <div class="p-0">
           <span>{{ component.manufacturer.name }}</span>

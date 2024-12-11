@@ -12,12 +12,55 @@
     </div>
 
     <div v-else-if="isBundle">
-      <div v-if="selectionType === 'manufacturer'">
-        <item-manufacturer-data-list :item-components="bundleComponents"></item-manufacturer-data-list>
+<!--      <div v-if="selectionType === 'manufacturer'">-->
+<!--        <item-manufacturer-data-list :item-components="bundleComponents"></item-manufacturer-data-list>-->
+<!--      </div>-->
+
+<!--      <div v-if="selectionType === 'eu-responsible'">-->
+<!--        <item-eu-responsible-data-list :item-components="bundleComponents"></item-eu-responsible-data-list>-->
+<!--      </div>-->
+    </div>
+
+    <div v-else>
+      <div class="p-0">
+        <span>{{ simpleItemManufacturer.name }}</span>
       </div>
 
-      <div v-if="selectionType === 'eu-responsible'">
-        <item-eu-responsible-data-list :item-components="bundleComponents"></item-eu-responsible-data-list>
+      <div class="p-0">
+        <span>{{ simpleItemManufacturer.legalName }}</span>
+      </div>
+
+      <div class="p-0">
+        <span>{{ simpleItemManufacturer.street }}</span>
+        <span>{{ simpleItemManufacturer.houseNo }}</span>
+      </div>
+
+      <div class="p-0">
+        <span>{{ simpleItemManufacturer.postcode }}</span>
+        <span>{{ simpleItemManufacturer.town }}</span>
+        <span v-if="simpleItemManufacturer.countryObject">
+                {{ simpleItemManufacturer.countryObject.name }}
+              </span>
+      </div>
+
+      <div class="p-0">
+        <span>{{ simpleItemManufacturer.email }}</span>
+      </div>
+
+      <div class="p-0">
+        <span>{{ simpleItemManufacturer.url }}</span>
+      </div>
+
+      <div class="p-0">
+        <span>{{ simpleItemManufacturer.phoneNumber }}</span>
+      </div>
+
+      <div class="p-0">
+        <span>{{ simpleItemManufacturer.faxNumber }}</span>
+      </div>
+
+      <div class="p-0">
+        <span>{{ simpleItemManufacturer.contactUrl }}</span>
       </div>
     </div>
   </div>
@@ -50,6 +93,11 @@ export default {
   },
 
   computed: {
+    simpleItemManufacturer() {
+      if (!this.isItemSet && !this.isBundle) {
+        return this.$store.getters[`${this.itemId}/currentItemVariation`].item.manufacturer;
+      }
+    },
     currentVariation() {
       return this.$store.getters[`${this.itemId}/currentItemVariation`];
     },

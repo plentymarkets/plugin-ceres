@@ -7735,6 +7735,49 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7754,6 +7797,11 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
+    simpleItemManufacturer: function simpleItemManufacturer() {
+      if (!this.isItemSet && !this.isBundle) {
+        return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].item.manufacturer;
+      }
+    },
     currentVariation: function currentVariation() {
       return this.$store.getters["".concat(this.itemId, "/currentItemVariation")];
     },
@@ -7787,7 +7835,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -50296,39 +50343,42 @@ var render = function() {
           2
         )
       : _vm.isBundle
-      ? _vm._ssrNode(
-          "<div>",
-          "</div>",
-          [
-            _vm.selectionType === "manufacturer"
-              ? _vm._ssrNode(
-                  "<div>",
-                  "</div>",
-                  [
-                    _c("item-manufacturer-data-list", {
-                      attrs: { "item-components": _vm.bundleComponents }
-                    })
-                  ],
-                  1
-                )
-              : _vm._e(),
-            _vm._ssrNode(" "),
-            _vm.selectionType === "eu-responsible"
-              ? _vm._ssrNode(
-                  "<div>",
-                  "</div>",
-                  [
-                    _c("item-eu-responsible-data-list", {
-                      attrs: { "item-components": _vm.bundleComponents }
-                    })
-                  ],
-                  1
-                )
-              : _vm._e()
-          ],
-          2
+      ? _vm._ssrNode("<div></div>")
+      : _vm._ssrNode(
+          '<div><div class="p-0"><span>' +
+            _vm._ssrEscape(_vm._s(_vm.simpleItemManufacturer.name)) +
+            '</span></div> <div class="p-0"><span>' +
+            _vm._ssrEscape(_vm._s(_vm.simpleItemManufacturer.legalName)) +
+            '</span></div> <div class="p-0"><span>' +
+            _vm._ssrEscape(_vm._s(_vm.simpleItemManufacturer.street)) +
+            "</span> <span>" +
+            _vm._ssrEscape(_vm._s(_vm.simpleItemManufacturer.houseNo)) +
+            '</span></div> <div class="p-0"><span>' +
+            _vm._ssrEscape(_vm._s(_vm.simpleItemManufacturer.postcode)) +
+            "</span> <span>" +
+            _vm._ssrEscape(_vm._s(_vm.simpleItemManufacturer.town)) +
+            "</span> " +
+            (_vm.simpleItemManufacturer.countryObject
+              ? "<span>" +
+                _vm._ssrEscape(
+                  "\n                " +
+                    _vm._s(_vm.simpleItemManufacturer.countryObject.name) +
+                    "\n              "
+                ) +
+                "</span>"
+              : "<!---->") +
+            '</div> <div class="p-0"><span>' +
+            _vm._ssrEscape(_vm._s(_vm.simpleItemManufacturer.email)) +
+            '</span></div> <div class="p-0"><span>' +
+            _vm._ssrEscape(_vm._s(_vm.simpleItemManufacturer.url)) +
+            '</span></div> <div class="p-0"><span>' +
+            _vm._ssrEscape(_vm._s(_vm.simpleItemManufacturer.phoneNumber)) +
+            '</span></div> <div class="p-0"><span>' +
+            _vm._ssrEscape(_vm._s(_vm.simpleItemManufacturer.faxNumber)) +
+            '</span></div> <div class="p-0"><span>' +
+            _vm._ssrEscape(_vm._s(_vm.simpleItemManufacturer.contactUrl)) +
+            "</span></div></div>"
         )
-      : _vm._e()
   ])
 }
 var staticRenderFns = []

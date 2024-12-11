@@ -101,6 +101,49 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -120,6 +163,11 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
+    simpleItemManufacturer: function simpleItemManufacturer() {
+      if (!this.isItemSet && !this.isBundle) {
+        return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].item.manufacturer;
+      }
+    },
     currentVariation: function currentVariation() {
       return this.$store.getters["".concat(this.itemId, "/currentItemVariation")];
     },
@@ -153,7 +201,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -351,32 +398,58 @@ var render = function() {
             : _vm._e()
         ])
       : _vm.isBundle
-      ? _c("div", [
-          _vm.selectionType === "manufacturer"
-            ? _c(
-                "div",
-                [
-                  _c("item-manufacturer-data-list", {
-                    attrs: { "item-components": _vm.bundleComponents }
-                  })
-                ],
-                1
-              )
-            : _vm._e(),
+      ? _c("div")
+      : _c("div", [
+          _c("div", { staticClass: "p-0" }, [
+            _c("span", [_vm._v(_vm._s(_vm.simpleItemManufacturer.name))])
+          ]),
           _vm._v(" "),
-          _vm.selectionType === "eu-responsible"
-            ? _c(
-                "div",
-                [
-                  _c("item-eu-responsible-data-list", {
-                    attrs: { "item-components": _vm.bundleComponents }
-                  })
-                ],
-                1
-              )
-            : _vm._e()
+          _c("div", { staticClass: "p-0" }, [
+            _c("span", [_vm._v(_vm._s(_vm.simpleItemManufacturer.legalName))])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-0" }, [
+            _c("span", [_vm._v(_vm._s(_vm.simpleItemManufacturer.street))]),
+            _vm._v(" "),
+            _c("span", [_vm._v(_vm._s(_vm.simpleItemManufacturer.houseNo))])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-0" }, [
+            _c("span", [_vm._v(_vm._s(_vm.simpleItemManufacturer.postcode))]),
+            _vm._v(" "),
+            _c("span", [_vm._v(_vm._s(_vm.simpleItemManufacturer.town))]),
+            _vm._v(" "),
+            _vm.simpleItemManufacturer.countryObject
+              ? _c("span", [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm.simpleItemManufacturer.countryObject.name) +
+                      "\n              "
+                  )
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-0" }, [
+            _c("span", [_vm._v(_vm._s(_vm.simpleItemManufacturer.email))])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-0" }, [
+            _c("span", [_vm._v(_vm._s(_vm.simpleItemManufacturer.url))])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-0" }, [
+            _c("span", [_vm._v(_vm._s(_vm.simpleItemManufacturer.phoneNumber))])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-0" }, [
+            _c("span", [_vm._v(_vm._s(_vm.simpleItemManufacturer.faxNumber))])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-0" }, [
+            _c("span", [_vm._v(_vm._s(_vm.simpleItemManufacturer.contactUrl))])
+          ])
         ])
-      : _vm._e()
   ])
 }
 var staticRenderFns = []
