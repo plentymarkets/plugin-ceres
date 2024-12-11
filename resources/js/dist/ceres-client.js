@@ -1664,7 +1664,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1681,7 +1680,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   provide: function provide() {
     return {
-      itemId: App.isShopBuilder ? this.previewItemId : this.itemId
+      itemId: App.isShopBuilder ? this.previewItemId : this.itemId,
+      isComponent: true
     };
   },
   computed: {
@@ -39240,7 +39240,6 @@ var render = function() {
     [
       (!_vm.isSetLoading && _vm.variation) || _vm.$ceres.isShopBuilder
         ? _vm._t("default", null, {
-            isComponent: true,
             itemId: _vm.itemId,
             variationId: _vm.variationId,
             variation: _vm.variation,

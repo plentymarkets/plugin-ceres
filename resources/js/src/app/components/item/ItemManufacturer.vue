@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <div v-else-if="isComponent">
+    <div v-else-if="isItemComponent">
       <manufacturer-details
           v-if="selectionType === 'manufacturer' && simpleItemManufacturer"
           :manufacturer="simpleItemManufacturer"
@@ -52,19 +52,21 @@ export default {
 
   props: {
     selectionType: String,
-    isComponent: {
-      type: Boolean,
-      default: false
-    }
   },
 
   inject: {
     itemId: {
       default: null
+    },
+    isComponent: {
+      default: false,
     }
   },
 
   computed: {
+    isItemComponent() {
+      return this.isComponent;
+    },
     simpleItemManufacturer() {
       if (!this.isItemSet && !this.isBundle) {
         return this.$store.getters[`${this.itemId}/currentItemVariation`].item.manufacturer;

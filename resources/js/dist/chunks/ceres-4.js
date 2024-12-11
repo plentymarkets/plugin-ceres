@@ -194,18 +194,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     EuResponsibleDetails: _EuResponsibleDetails_vue__WEBPACK_IMPORTED_MODULE_12__["default"]
   },
   props: {
-    selectionType: String,
-    isComponent: {
-      type: Boolean,
-      default: false
-    }
+    selectionType: String
   },
   inject: {
     itemId: {
       default: null
+    },
+    isComponent: {
+      default: false
     }
   },
   computed: {
+    isItemComponent: function isItemComponent() {
+      return this.isComponent;
+    },
     simpleItemManufacturer: function simpleItemManufacturer() {
       if (!this.isItemSet && !this.isBundle) {
         return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].item.manufacturer;
@@ -626,7 +628,7 @@ var render = function() {
               )
             : _vm._e()
         ])
-      : _vm.isComponent
+      : _vm.isItemComponent
       ? _c(
           "div",
           [

@@ -3,7 +3,6 @@
 
         <slot
             v-if="!isSetLoading && variation || $ceres.isShopBuilder"
-            :isComponent="true"
             :itemId="itemId"
             :variationId="variationId"
             :variation="variation"
@@ -37,7 +36,8 @@ export default {
     provide()
     {
         return {
-            itemId: App.isShopBuilder ? this.previewItemId : this.itemId
+            itemId: App.isShopBuilder ? this.previewItemId : this.itemId,
+            isComponent: true
         }
     },
 

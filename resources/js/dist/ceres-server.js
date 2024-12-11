@@ -7828,18 +7828,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     EuResponsibleDetails: _EuResponsibleDetails_vue__WEBPACK_IMPORTED_MODULE_12__["default"]
   },
   props: {
-    selectionType: String,
-    isComponent: {
-      type: Boolean,
-      default: false
-    }
+    selectionType: String
   },
   inject: {
     itemId: {
       default: null
+    },
+    isComponent: {
+      default: false
     }
   },
   computed: {
+    isItemComponent: function isItemComponent() {
+      return this.isComponent;
+    },
     simpleItemManufacturer: function simpleItemManufacturer() {
       if (!this.isItemSet && !this.isBundle) {
         return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].item.manufacturer;
@@ -10188,7 +10190,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -10205,7 +10206,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   provide: function provide() {
     return {
-      itemId: App.isShopBuilder ? this.previewItemId : this.itemId
+      itemId: App.isShopBuilder ? this.previewItemId : this.itemId,
+      isComponent: true
     };
   },
   computed: {
@@ -50525,7 +50527,7 @@ var render = function() {
           ],
           2
         )
-      : _vm.isComponent
+      : _vm.isItemComponent
       ? _vm._ssrNode(
           "<div>",
           "</div>",
@@ -53329,7 +53331,6 @@ var render = function() {
     [
       (!_vm.isSetLoading && _vm.variation) || _vm.$ceres.isShopBuilder
         ? _vm._t("default", null, {
-            isComponent: true,
             itemId: _vm.itemId,
             variationId: _vm.variationId,
             variation: _vm.variation,
