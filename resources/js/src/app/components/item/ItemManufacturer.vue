@@ -111,8 +111,33 @@ export default {
       return this.$store.getters[`${this.itemId}/currentItemVariation`].item.itemType === 'set';
     },
     setComponents() {
-      return this.$store.getters[`${this.itemId}/currentItemVariation`].setComponents
-          ?.filter((value, index, array) => array.indexOf(value) === index) ?? [];
+      const items = this.$store.getters[`${this.itemId}/currentItemVariation`].setComponents;
+
+      const manufacturerMap = {};
+
+      items.forEach(item => {
+          const manufacturerId = item.manufacturerId;
+          const itemName = item.texts.name1 || '';
+          const manufacturer = item.manufacturer;
+
+          if (!manufacturerMap[manufacturerId]) {
+            manufacturerMap[manufacturerId] = {
+              manufacturerId: manufacturerId,
+              manufacturer: manufacturer
+            };
+          }
+          console.log("item: ", item);
+          manufacturerMap[manufacturerId]['concatenatedNames'].push(itemName);
+      });
+
+      console.log("manufacturerMap: ", manufacturerMap);
+      const result = Object.values(manufacturerMap).map(item => ({
+        ...item,
+            concatenatedNames: item['concatenatedNames'].join(', ')
+      }));
+
+      console.log("result: ", result);
+      return result;
     },
   },
 }
