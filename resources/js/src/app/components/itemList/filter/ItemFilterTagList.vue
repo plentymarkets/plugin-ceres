@@ -1,7 +1,7 @@
 <template>
     <div class="selected-filters clearfix">
         <span :class="'text-appearance selected-filter filter-' + tag.id + ' ' + marginClasses" :style="marginInlineStyles" v-for="tag in tagList" @click="removeTag(tag)">
-            <i class="fa fa-times" aria-hidden="true"></i> {{ tag.name }}
+            <i class="fa fa-times" aria-hidden="true"></i> <span v-html="tag.name" />
         </span>
 
         <span :class="'bg-appearance selected-filter reset-all' + ' '+ marginClasses" :style="marginInlineStyles" v-if="tagList.length >= 2" @click="resetAllTags()">
