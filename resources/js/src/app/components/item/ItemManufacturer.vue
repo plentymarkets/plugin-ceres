@@ -1,5 +1,5 @@
 <template>
-  <div :class="paddingClasses" :style="paddingInlineStyles">
+  <div>
     <div v-if="isItemSet">
       <div v-if="selectionType === 'manufacturer'">
           <item-manufacturer-data-list :item-components="setComponents"></item-manufacturer-data-list>
@@ -51,8 +51,6 @@ export default {
   },
 
   props: {
-    paddingClasses: String,
-    paddingInlineStyles: String,
     selectionType: String
   },
 
