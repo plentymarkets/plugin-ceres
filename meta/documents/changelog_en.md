@@ -1,6 +1,14 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.71 (YYYY-MM-DD) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.70...5.0.71" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.71 (2024-12-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.70...5.0.71" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
+
+### Added
+
+- A new widget has been added to the ShopBuilder. This widget can be used to display information about the manufacturer and the EU  Responsible Person on single item pages, item bundle pages, and item set pages.
 
 ### Fixed
 

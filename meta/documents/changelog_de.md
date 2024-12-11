@@ -1,11 +1,19 @@
 # Release Notes für plentyShop LTS
 
-## v5.0.71 (YYYY-MM-DD) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.70...5.0.71" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.71 (2024-12-11) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.70...5.0.71" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+
+### Hinzugefügt
+
+- Es wurde ein neues Widget zum ShopBuilder hinzugefügt. Mit diesem Widget können Informationen zum Hersteller und der EU-Verantwortlichen Person auf Artikelseiten, Seiten für Artikelpakete und Seiten für Artikelsets angezeigt werden.
 
 ### Behoben
 
 - Durch einen Fehler wurden Apostrophen in Herstellernamen nicht korrekt dargestellt, wenn Artikel nach Hersteller gefiltert wurden. Dies wurde behoben.
-- Wird im Schritt **Performance** des Assistenten die Einstellung **Header oben fixieren** aktiviert, wird der Header jetzt so fixiert, dass sogenannte Cumulative Layout Shifts (CLS) reduziert werden.
+- Wird im Schritt **Performance** des Assistenten die Einstellung **Header oben fixieren** aktiviert, wird der Header jetzt so fixiert, dass Cumulative Layout Shifts (CLS) reduziert werden.
 
 ## v5.0.70 (2024-11-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.69...5.0.70" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
