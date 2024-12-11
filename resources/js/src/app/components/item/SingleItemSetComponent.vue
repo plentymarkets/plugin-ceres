@@ -3,6 +3,7 @@
 
         <slot
             v-if="!isSetLoading && variation || $ceres.isShopBuilder"
+            :isComponent="true"
             :itemId="itemId"
             :variationId="variationId"
             :variation="variation"

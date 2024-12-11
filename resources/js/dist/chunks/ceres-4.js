@@ -194,7 +194,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     EuResponsibleDetails: _EuResponsibleDetails_vue__WEBPACK_IMPORTED_MODULE_12__["default"]
   },
   props: {
-    selectionType: String
+    selectionType: String,
+    isComponent: {
+      type: Boolean,
+      default: false
+    }
   },
   inject: {
     itemId: {
@@ -620,7 +624,7 @@ var render = function() {
               )
             : _vm._e()
         ])
-      : _vm.setComponents.length !== 0 || _vm.bundleComponents.length !== 0
+      : _vm.isComponent
       ? _c(
           "div",
           [

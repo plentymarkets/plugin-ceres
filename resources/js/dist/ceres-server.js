@@ -7828,7 +7828,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     EuResponsibleDetails: _EuResponsibleDetails_vue__WEBPACK_IMPORTED_MODULE_12__["default"]
   },
   props: {
-    selectionType: String
+    selectionType: String,
+    isComponent: {
+      type: Boolean,
+      default: false
+    }
   },
   inject: {
     itemId: {
@@ -10168,6 +10172,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helper_get__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helper/get */ "./resources/js/src/app/helper/get.js");
 /* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
 
+//
 //
 //
 //
@@ -50518,7 +50523,7 @@ var render = function() {
           ],
           2
         )
-      : _vm.setComponents.length !== 0 || _vm.bundleComponents.length !== 0
+      : _vm.isComponent
       ? _vm._ssrNode(
           "<div>",
           "</div>",
@@ -53320,6 +53325,7 @@ var render = function() {
     [
       (!_vm.isSetLoading && _vm.variation) || _vm.$ceres.isShopBuilder
         ? _vm._t("default", null, {
+            isComponent: true,
             itemId: _vm.itemId,
             variationId: _vm.variationId,
             variation: _vm.variation,

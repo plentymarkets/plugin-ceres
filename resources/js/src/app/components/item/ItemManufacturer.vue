@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <div v-else-if="setComponents.length !== 0 || bundleComponents.length !== 0">
+    <div v-else-if="isComponent">
       <manufacturer-details
           v-if="selectionType === 'manufacturer' && simpleItemManufacturer"
           :manufacturer="simpleItemManufacturer"
@@ -51,7 +51,11 @@ export default {
   },
 
   props: {
-    selectionType: String
+    selectionType: String,
+    isComponent: {
+      type: Boolean,
+      default: false
+    }
   },
 
   inject: {

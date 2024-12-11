@@ -3968,6 +3968,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -47264,6 +47265,7 @@ var render = function() {
     [
       (!_vm.isSetLoading && _vm.variation) || _vm.$ceres.isShopBuilder
         ? _vm._t("default", null, {
+            isComponent: true,
             itemId: _vm.itemId,
             variationId: _vm.variationId,
             variation: _vm.variation,
