@@ -206,15 +206,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].variation.bundleType === 'bundle';
     },
     bundleComponents: function bundleComponents() {
-      return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].bundleComponents;
+      var items = this.$store.getters["".concat(this.itemId, "/currentItemVariation")].bundleComponents || [];
+      return this.transformComponents(items);
     },
     isItemSet: function isItemSet() {
       return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].item.itemType === 'set';
     },
     setComponents: function setComponents() {
       var items = this.$store.getters["".concat(this.itemId, "/currentItemVariation")].setComponents || [];
+      return this.transformComponents(items);
+    }
+  },
+  methods: {
+    transformComponents: function transformComponents(components) {
       var manufacturerMap = {};
-      items.forEach(function (item) {
+      components.forEach(function (item) {
         var manufacturerId = item.manufacturerId;
         var itemName = item.texts.name1 || '';
         var manufacturer = item.manufacturer;
@@ -227,14 +233,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           };
         }
 
-        manufacturerMap[manufacturerId]['concatenatedNames'].push(itemName);
+        manufacturerMap[manufacturerId].concatenatedNames.push(itemName);
       });
-      var result = Object.values(manufacturerMap).map(function (item) {
+      return Object.values(manufacturerMap).map(function (item) {
         return _objectSpread(_objectSpread({}, item), {}, {
-          concatenatedNames: item['concatenatedNames'].join(', ')
+          concatenatedNames: item.concatenatedNames.join(', ')
         });
       });
-      return result;
     }
   }
 });
@@ -250,6 +255,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -514,7 +522,31 @@ var render = function() {
             : _vm._e()
         ])
       : _vm.isBundle
-      ? _c("div")
+      ? _c("div", [
+          _vm.selectionType === "manufacturer"
+            ? _c(
+                "div",
+                [
+                  _c("item-manufacturer-data-list", {
+                    attrs: { "item-components": _vm.bundleComponents }
+                  })
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.selectionType === "eu-responsible"
+            ? _c(
+                "div",
+                [
+                  _c("item-eu-responsible-data-list", {
+                    attrs: { "item-components": _vm.bundleComponents }
+                  })
+                ],
+                1
+              )
+            : _vm._e()
+        ])
       : _c("div", [
           _c("div", { staticClass: "p-0" }, [
             _c("span", [_vm._v(_vm._s(_vm.simpleItemManufacturer.name))])
@@ -538,9 +570,9 @@ var render = function() {
             _vm.simpleItemManufacturer.countryObject
               ? _c("span", [
                   _vm._v(
-                    "\n                " +
+                    "\n              " +
                       _vm._s(_vm.simpleItemManufacturer.countryObject.name) +
-                      "\n              "
+                      "\n            "
                   )
                 ])
               : _vm._e()
@@ -595,11 +627,21 @@ var render = function() {
         "div",
         _vm._l(_vm.itemComponents, function(component, index) {
           return _c("div", { key: index }, [
-            _c("b", [_vm._v(_vm._s(component.concatenatedNames))]),
+            component.concatenatedNames
+              ? _c("b", [_vm._v(_vm._s(component.concatenatedNames))])
+              : _vm._e(),
             _vm._v(" "),
-            _c("div", { staticClass: "p-0" }, [
-              _c("span", [_vm._v(_vm._s(component.manufacturer.name))])
-            ]),
+            component.manufacturer.name
+              ? _c("div", { staticClass: "p-0" }, [
+                  _c("span", [_vm._v(_vm._s(component.manufacturer.name))])
+                ])
+              : component.manufacturer.externalName
+              ? _c("div", { staticClass: "p-0" }, [
+                  _c("span", [
+                    _vm._v(_vm._s(component.manufacturer.externalName))
+                  ])
+                ])
+              : _vm._e(),
             _vm._v(" "),
             _c("div", { staticClass: "p-0" }, [
               _c("span", [_vm._v(_vm._s(component.manufacturer.legalName))])
