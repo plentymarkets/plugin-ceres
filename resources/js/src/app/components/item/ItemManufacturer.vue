@@ -3,83 +3,11 @@
 
     <div v-if="isItemSet">
       <div v-if="selectionType === 'manufacturer'">
-          <div v-for="(component, index) in setComponents" :key="index">
-            <div class="p-0">
-              <span>{{ component.manufacturer.name }}</span>
-            </div>
-
-            <div class="p-0">
-              <span>{{ component.manufacturer.legalName }}</span>
-            </div>
-
-            <div class="p-0">
-              <span>{{ component.manufacturer.street }}</span>
-              <span>{{ component.manufacturer.houseNo }}</span>
-            </div>
-
-            <div class="p-0">
-              <span>{{ component.manufacturer.postcode }}</span>
-              <span>{{ component.manufacturer.town }}</span>
-              <span v-if="component.manufacturer.countryObject">
-                {{ component.manufacturer.countryObject.name }}
-              </span>
-            </div>
-
-            <div class="p-0">
-              <span>{{ component.manufacturer.email }}</span>
-            </div>
-
-            <div class="p-0">
-              <span>{{ component.manufacturer.url }}</span>
-            </div>
-
-            <div class="p-0">
-              <span>{{ component.manufacturer.phoneNumber }}</span>
-            </div>
-
-            <div class="p-0">
-              <span>{{ component.manufacturer.faxNumber }}</span>
-            </div>
-
-            <div class="p-0">
-              <span>{{ component.manufacturer.contactUrl }}</span>
-            </div>
-          </div>
-          <hr>
+          <item-manufacturer-data-list :set-components="setComponents"></item-manufacturer-data-list>
       </div>
 
       <div v-if="selectionType === 'eu-responsible'">
-        <div v-for="(component, index) in setComponents" :key="index">
-          <div class="p-0">
-            <span>{{ component.manufacturer.responsibleName }}</span>
-          </div>
-
-          <div class="p-0">
-            <span>{{ component.manufacturer.responsibleStreet }}</span>
-            <span>{{ component.manufacturer.responsibleHouseNo }}</span>
-          </div>
-
-          <div class="p-0">
-            <span>{{ component.manufacturer.responsiblePostCode }}</span>
-            <span>{{ component.manufacturer.responsibleTown }}</span>
-            <span v-if="component.manufacturer.responsibleCountryObject">
-              {{ component.manufacturer.responsibleCountryObject.name }}
-            </span>
-          </div>
-
-          <div class="p-0">
-            <span>{{ component.manufacturer.responsibleEmail }}</span>
-          </div>
-
-          <div class="p-0">
-            <span>{{ component.manufacturer.responsiblePhoneNo }}</span>
-          </div>
-
-          <div class="p-0">
-            <span>{{ component.manufacturer.responsibleContactUrl }}</span>
-          </div>
-        </div>
-        <hr>
+        <item-eu-responsible-data-list :set-components="setComponents"></item-eu-responsible-data-list>
       </div>
     </div>
     <div v-else-if="isBundle">
@@ -90,11 +18,19 @@
 
 <script>
 
+import ItemManufacturerDataList from "./ItemManufacturerDataList.vue";
+import ItemEuResponsibleDataList from "./ItemEuResponsibleDataList.vue";
+
 export default {
 
   name: "item-manufacturer",
 
-  props:{
+  components: {
+    ItemManufacturerDataList,
+    ItemEuResponsibleDataList
+  },
+
+  props: {
     paddingClasses: String,
     paddingInlineStyles: String,
     selectionType: String
