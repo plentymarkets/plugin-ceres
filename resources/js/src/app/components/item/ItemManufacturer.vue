@@ -1,6 +1,5 @@
 <template>
-  <div>
-
+  <div :class="paddingClasses" :style="paddingInlineStyles">
     <div v-if="isItemSet">
       <div v-if="selectionType === 'manufacturer'">
           <item-manufacturer-data-list :item-components="setComponents"></item-manufacturer-data-list>
@@ -22,45 +21,78 @@
     </div>
 
     <div v-else>
-      <div class="p-0">
-        <span>{{ simpleItemManufacturer.name }}</span>
-      </div>
+      <div v-if="selectionType === 'manufacturer'">
+        <div v-if="simpleItemManufacturer.name" class="p-0">
+          <span>{{ simpleItemManufacturer.name }}</span>
+        </div>
+        <div v-else-if="simpleItemManufacturer.externalName" class="p-0">
+          <span>{{ simpleItemManufacturer.externalName }}</span>
+        </div>
 
-      <div class="p-0">
-        <span>{{ simpleItemManufacturer.legalName }}</span>
-      </div>
+        <div class="p-0">
+          <span>{{ simpleItemManufacturer.street }}</span>
+          <span>{{ simpleItemManufacturer.houseNo }}</span>
+        </div>
 
-      <div class="p-0">
-        <span>{{ simpleItemManufacturer.street }}</span>
-        <span>{{ simpleItemManufacturer.houseNo }}</span>
-      </div>
-
-      <div class="p-0">
-        <span>{{ simpleItemManufacturer.postcode }}</span>
-        <span>{{ simpleItemManufacturer.town }}</span>
-        <span v-if="simpleItemManufacturer.countryObject">
+        <div class="p-0">
+          <span>{{ simpleItemManufacturer.postcode }}</span>
+          <span>{{ simpleItemManufacturer.town }}</span>
+          <span v-if="simpleItemManufacturer.countryObject">
                 {{ simpleItemManufacturer.countryObject.name }}
               </span>
+        </div>
+
+        <div class="p-0">
+          <span>{{ simpleItemManufacturer.email }}</span>
+        </div>
+
+        <div class="p-0">
+          <span>{{ simpleItemManufacturer.url }}</span>
+        </div>
+
+        <div class="p-0">
+          <span>{{ simpleItemManufacturer.phoneNumber }}</span>
+        </div>
+
+        <div class="p-0">
+          <span>{{ simpleItemManufacturer.faxNumber }}</span>
+        </div>
+
+        <div class="p-0">
+          <span>{{ simpleItemManufacturer.contactUrl }}</span>
+        </div>
       </div>
 
-      <div class="p-0">
-        <span>{{ simpleItemManufacturer.email }}</span>
-      </div>
+      <div v-if="selectionType === 'eu-responsible'">
+        <b v-if="simpleItemManufacturer.concatenatedNames">{{ component.concatenatedNames }}</b>
+        <div class="p-0">
+          <span>{{ simpleItemManufacturer.responsibleName }}</span>
+        </div>
 
-      <div class="p-0">
-        <span>{{ simpleItemManufacturer.url }}</span>
-      </div>
+        <div class="p-0">
+          <span>{{ simpleItemManufacturer.responsibleStreet }}</span>
+          <span>{{ simpleItemManufacturer.responsibleHouseNo }}</span>
+        </div>
 
-      <div class="p-0">
-        <span>{{ simpleItemManufacturer.phoneNumber }}</span>
-      </div>
+        <div class="p-0">
+          <span>{{ simpleItemManufacturer.responsiblePostCode }}</span>
+          <span>{{ simpleItemManufacturer.responsibleTown }}</span>
+          <span v-if="simpleItemManufacturer.responsibleCountryObject">
+          {{ simpleItemManufacturer.responsibleCountryObject.name }}
+        </span>
+        </div>
 
-      <div class="p-0">
-        <span>{{ simpleItemManufacturer.faxNumber }}</span>
-      </div>
+        <div class="p-0">
+          <span>{{ simpleItemManufacturer.responsibleEmail }}</span>
+        </div>
 
-      <div class="p-0">
-        <span>{{ simpleItemManufacturer.contactUrl }}</span>
+        <div class="p-0">
+          <span>{{ simpleItemManufacturer.responsiblePhoneNo }}</span>
+        </div>
+
+        <div class="p-0">
+          <span>{{ simpleItemManufacturer.responsibleContactUrl }}</span>
+        </div>
       </div>
     </div>
   </div>

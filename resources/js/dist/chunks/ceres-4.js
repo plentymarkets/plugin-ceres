@@ -175,6 +175,38 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -409,7 +441,9 @@ var render = function() {
         "div",
         _vm._l(_vm.itemComponents, function(component, index) {
           return _c("div", { key: index }, [
-            _c("b", [_vm._v(_vm._s(component.concatenatedNames))]),
+            component.concatenatedNames
+              ? _c("b", [_vm._v(_vm._s(component.concatenatedNames))])
+              : _vm._e(),
             _vm._v(" "),
             _c("div", { staticClass: "p-0" }, [
               _c("span", [
@@ -496,111 +530,222 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.isItemSet
-      ? _c("div", [
-          _vm.selectionType === "manufacturer"
-            ? _c(
-                "div",
-                [
-                  _c("item-manufacturer-data-list", {
-                    attrs: { "item-components": _vm.setComponents }
-                  })
-                ],
-                1
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.selectionType === "eu-responsible"
-            ? _c(
-                "div",
-                [
-                  _c("item-eu-responsible-data-list", {
-                    attrs: { "item-components": _vm.setComponents }
-                  })
-                ],
-                1
-              )
-            : _vm._e()
-        ])
-      : _vm.isBundle
-      ? _c("div", [
-          _vm.selectionType === "manufacturer"
-            ? _c(
-                "div",
-                [
-                  _c("item-manufacturer-data-list", {
-                    attrs: { "item-components": _vm.bundleComponents }
-                  })
-                ],
-                1
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.selectionType === "eu-responsible"
-            ? _c(
-                "div",
-                [
-                  _c("item-eu-responsible-data-list", {
-                    attrs: { "item-components": _vm.bundleComponents }
-                  })
-                ],
-                1
-              )
-            : _vm._e()
-        ])
-      : _c("div", [
-          _c("div", { staticClass: "p-0" }, [
-            _c("span", [_vm._v(_vm._s(_vm.simpleItemManufacturer.name))])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "p-0" }, [
-            _c("span", [_vm._v(_vm._s(_vm.simpleItemManufacturer.legalName))])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "p-0" }, [
-            _c("span", [_vm._v(_vm._s(_vm.simpleItemManufacturer.street))]),
+  return _c(
+    "div",
+    { class: _vm.paddingClasses, style: _vm.paddingInlineStyles },
+    [
+      _vm.isItemSet
+        ? _c("div", [
+            _vm.selectionType === "manufacturer"
+              ? _c(
+                  "div",
+                  [
+                    _c("item-manufacturer-data-list", {
+                      attrs: { "item-components": _vm.setComponents }
+                    })
+                  ],
+                  1
+                )
+              : _vm._e(),
             _vm._v(" "),
-            _c("span", [_vm._v(_vm._s(_vm.simpleItemManufacturer.houseNo))])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "p-0" }, [
-            _c("span", [_vm._v(_vm._s(_vm.simpleItemManufacturer.postcode))]),
+            _vm.selectionType === "eu-responsible"
+              ? _c(
+                  "div",
+                  [
+                    _c("item-eu-responsible-data-list", {
+                      attrs: { "item-components": _vm.setComponents }
+                    })
+                  ],
+                  1
+                )
+              : _vm._e()
+          ])
+        : _vm.isBundle
+        ? _c("div", [
+            _vm.selectionType === "manufacturer"
+              ? _c(
+                  "div",
+                  [
+                    _c("item-manufacturer-data-list", {
+                      attrs: { "item-components": _vm.bundleComponents }
+                    })
+                  ],
+                  1
+                )
+              : _vm._e(),
             _vm._v(" "),
-            _c("span", [_vm._v(_vm._s(_vm.simpleItemManufacturer.town))]),
+            _vm.selectionType === "eu-responsible"
+              ? _c(
+                  "div",
+                  [
+                    _c("item-eu-responsible-data-list", {
+                      attrs: { "item-components": _vm.bundleComponents }
+                    })
+                  ],
+                  1
+                )
+              : _vm._e()
+          ])
+        : _c("div", [
+            _vm.selectionType === "manufacturer"
+              ? _c("div", [
+                  _vm.simpleItemManufacturer.name
+                    ? _c("div", { staticClass: "p-0" }, [
+                        _c("span", [
+                          _vm._v(_vm._s(_vm.simpleItemManufacturer.name))
+                        ])
+                      ])
+                    : _vm.simpleItemManufacturer.externalName
+                    ? _c("div", { staticClass: "p-0" }, [
+                        _c("span", [
+                          _vm._v(
+                            _vm._s(_vm.simpleItemManufacturer.externalName)
+                          )
+                        ])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "p-0" }, [
+                    _c("span", [
+                      _vm._v(_vm._s(_vm.simpleItemManufacturer.street))
+                    ]),
+                    _vm._v(" "),
+                    _c("span", [
+                      _vm._v(_vm._s(_vm.simpleItemManufacturer.houseNo))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "p-0" }, [
+                    _c("span", [
+                      _vm._v(_vm._s(_vm.simpleItemManufacturer.postcode))
+                    ]),
+                    _vm._v(" "),
+                    _c("span", [
+                      _vm._v(_vm._s(_vm.simpleItemManufacturer.town))
+                    ]),
+                    _vm._v(" "),
+                    _vm.simpleItemManufacturer.countryObject
+                      ? _c("span", [
+                          _vm._v(
+                            "\n              " +
+                              _vm._s(
+                                _vm.simpleItemManufacturer.countryObject.name
+                              ) +
+                              "\n            "
+                          )
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "p-0" }, [
+                    _c("span", [
+                      _vm._v(_vm._s(_vm.simpleItemManufacturer.email))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "p-0" }, [
+                    _c("span", [_vm._v(_vm._s(_vm.simpleItemManufacturer.url))])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "p-0" }, [
+                    _c("span", [
+                      _vm._v(_vm._s(_vm.simpleItemManufacturer.phoneNumber))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "p-0" }, [
+                    _c("span", [
+                      _vm._v(_vm._s(_vm.simpleItemManufacturer.faxNumber))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "p-0" }, [
+                    _c("span", [
+                      _vm._v(_vm._s(_vm.simpleItemManufacturer.contactUrl))
+                    ])
+                  ])
+                ])
+              : _vm._e(),
             _vm._v(" "),
-            _vm.simpleItemManufacturer.countryObject
-              ? _c("span", [
-                  _vm._v(
-                    "\n              " +
-                      _vm._s(_vm.simpleItemManufacturer.countryObject.name) +
-                      "\n            "
-                  )
+            _vm.selectionType === "eu-responsible"
+              ? _c("div", [
+                  _vm.simpleItemManufacturer.concatenatedNames
+                    ? _c("b", [_vm._v(_vm._s(_vm.component.concatenatedNames))])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "p-0" }, [
+                    _c("span", [
+                      _vm._v(_vm._s(_vm.simpleItemManufacturer.responsibleName))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "p-0" }, [
+                    _c("span", [
+                      _vm._v(
+                        _vm._s(_vm.simpleItemManufacturer.responsibleStreet)
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("span", [
+                      _vm._v(
+                        _vm._s(_vm.simpleItemManufacturer.responsibleHouseNo)
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "p-0" }, [
+                    _c("span", [
+                      _vm._v(
+                        _vm._s(_vm.simpleItemManufacturer.responsiblePostCode)
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("span", [
+                      _vm._v(_vm._s(_vm.simpleItemManufacturer.responsibleTown))
+                    ]),
+                    _vm._v(" "),
+                    _vm.simpleItemManufacturer.responsibleCountryObject
+                      ? _c("span", [
+                          _vm._v(
+                            "\n        " +
+                              _vm._s(
+                                _vm.simpleItemManufacturer
+                                  .responsibleCountryObject.name
+                              ) +
+                              "\n      "
+                          )
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "p-0" }, [
+                    _c("span", [
+                      _vm._v(
+                        _vm._s(_vm.simpleItemManufacturer.responsibleEmail)
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "p-0" }, [
+                    _c("span", [
+                      _vm._v(
+                        _vm._s(_vm.simpleItemManufacturer.responsiblePhoneNo)
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "p-0" }, [
+                    _c("span", [
+                      _vm._v(
+                        _vm._s(_vm.simpleItemManufacturer.responsibleContactUrl)
+                      )
+                    ])
+                  ])
                 ])
               : _vm._e()
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "p-0" }, [
-            _c("span", [_vm._v(_vm._s(_vm.simpleItemManufacturer.email))])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "p-0" }, [
-            _c("span", [_vm._v(_vm._s(_vm.simpleItemManufacturer.url))])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "p-0" }, [
-            _c("span", [_vm._v(_vm._s(_vm.simpleItemManufacturer.phoneNumber))])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "p-0" }, [
-            _c("span", [_vm._v(_vm._s(_vm.simpleItemManufacturer.faxNumber))])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "p-0" }, [
-            _c("span", [_vm._v(_vm._s(_vm.simpleItemManufacturer.contactUrl))])
           ])
-        ])
-  ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

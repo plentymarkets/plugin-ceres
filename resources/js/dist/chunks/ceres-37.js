@@ -83,7 +83,9 @@ var render = function() {
         "div",
         _vm._l(_vm.itemComponents, function(component, index) {
           return _c("div", { key: index }, [
-            _c("b", [_vm._v(_vm._s(component.concatenatedNames))]),
+            component.concatenatedNames
+              ? _c("b", [_vm._v(_vm._s(component.concatenatedNames))])
+              : _vm._e(),
             _vm._v(" "),
             _c("div", { staticClass: "p-0" }, [
               _c("span", [
