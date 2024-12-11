@@ -111,7 +111,7 @@ export default {
       return this.$store.getters[`${this.itemId}/currentItemVariation`].item.itemType === 'set';
     },
     setComponents() {
-      const items = this.$store.getters[`${this.itemId}/currentItemVariation`].setComponents;
+      const items = this.$store.getters[`${this.itemId}/currentItemVariation`].setComponents || [];
 
       const manufacturerMap = {};
       items.forEach(item => {

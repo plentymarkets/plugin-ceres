@@ -7846,7 +7846,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].item.itemType === 'set';
     },
     setComponents: function setComponents() {
-      var items = this.$store.getters["".concat(this.itemId, "/currentItemVariation")].setComponents;
+      var items = this.$store.getters["".concat(this.itemId, "/currentItemVariation")].setComponents || [];
       var manufacturerMap = {};
       items.forEach(function (item) {
         var manufacturerId = item.manufacturerId;
