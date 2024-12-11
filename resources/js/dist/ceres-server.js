@@ -7840,9 +7840,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].variation.bundleType === 'bundle';
     },
     bundleComponents: function bundleComponents() {
-      var items = this.$store.getters["".concat(this.itemId, "/currentItemVariation")].bundleComponents.map(function (component) {
-        return component.data.item;
-      }) || [];
+      var bundleComponents = this.$store.getters["".concat(this.itemId, "/currentItemVariation")].bundleComponents || [];
+      var items = bundleComponents.map(function (component) {
+        return {
+          manufacturerId: component.data.item.manufacturerId,
+          manufacturer: component.data.item.manufacturer,
+          texts: component.data.texts
+        };
+      });
       return this.transformComponents(items);
     },
     isItemSet: function isItemSet() {
