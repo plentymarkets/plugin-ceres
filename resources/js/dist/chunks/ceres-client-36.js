@@ -48,6 +48,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-eu-responsible-data-list",
   props: {
@@ -82,6 +83,8 @@ var render = function() {
         "div",
         _vm._l(_vm.itemComponents, function(component, index) {
           return _c("div", { key: index }, [
+            _c("b", [_vm._v(_vm._s(component.concatenatedNames))]),
+            _vm._v(" "),
             _c("div", { staticClass: "p-0" }, [
               _c("span", [
                 _vm._v(_vm._s(component.manufacturer.responsibleName))

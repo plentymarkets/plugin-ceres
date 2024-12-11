@@ -114,30 +114,27 @@ export default {
       const items = this.$store.getters[`${this.itemId}/currentItemVariation`].setComponents;
 
       const manufacturerMap = {};
-      console.log(items);
       items.forEach(item => {
           const manufacturerId = item.manufacturerId;
           const itemName = item.texts.name1 || '';
           const manufacturer = item.manufacturer;
-          manufacturerMap[manufacturerId]['concatenatedNames'] = manufacturerMap[manufacturerId]['concatenatedNames'] || [];
 
           if (!manufacturerMap[manufacturerId]) {
             manufacturerMap[manufacturerId] = {
               manufacturerId: manufacturerId,
-              manufacturer: manufacturer
+              manufacturer: manufacturer,
+              concatenatedNames: []
             };
           }
-          console.log("item: ", item);
+
           manufacturerMap[manufacturerId]['concatenatedNames'].push(itemName);
       });
 
-      console.log("manufacturerMap: ", manufacturerMap);
       const result = Object.values(manufacturerMap).map(item => ({
         ...item,
             concatenatedNames: item['concatenatedNames'].join(', ')
       }));
 
-      console.log("result: ", result);
       return result;
     },
   },

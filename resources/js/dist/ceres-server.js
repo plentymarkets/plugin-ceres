@@ -7413,6 +7413,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-eu-responsible-data-list",
   props: {
@@ -7847,30 +7848,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     setComponents: function setComponents() {
       var items = this.$store.getters["".concat(this.itemId, "/currentItemVariation")].setComponents;
       var manufacturerMap = {};
-      console.log(items);
       items.forEach(function (item) {
         var manufacturerId = item.manufacturerId;
         var itemName = item.texts.name1 || '';
         var manufacturer = item.manufacturer;
-        manufacturerMap[manufacturerId]['concatenatedNames'] = manufacturerMap[manufacturerId]['concatenatedNames'] || [];
 
         if (!manufacturerMap[manufacturerId]) {
           manufacturerMap[manufacturerId] = {
             manufacturerId: manufacturerId,
-            manufacturer: manufacturer
+            manufacturer: manufacturer,
+            concatenatedNames: []
           };
         }
 
-        console.log("item: ", item);
         manufacturerMap[manufacturerId]['concatenatedNames'].push(itemName);
       });
-      console.log("manufacturerMap: ", manufacturerMap);
       var result = Object.values(manufacturerMap).map(function (item) {
         return _objectSpread(_objectSpread({}, item), {}, {
           concatenatedNames: item['concatenatedNames'].join(', ')
         });
       });
-      console.log("result: ", result);
       return result;
     }
   }
@@ -7887,6 +7884,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -50181,7 +50179,9 @@ var render = function() {
         _vm._ssrNode(
           _vm._ssrList(_vm.itemComponents, function(component, index) {
             return (
-              '<div><div class="p-0"><span>' +
+              "<div><b>" +
+              _vm._ssrEscape(_vm._s(component.concatenatedNames)) +
+              '</b> <div class="p-0"><span>' +
               _vm._ssrEscape(_vm._s(component.manufacturer.responsibleName)) +
               '</span></div> <div class="p-0"><span>' +
               _vm._ssrEscape(_vm._s(component.manufacturer.responsibleStreet)) +
@@ -50460,7 +50460,9 @@ var render = function() {
         _vm._ssrNode(
           _vm._ssrList(_vm.itemComponents, function(component, index) {
             return (
-              '<div><div class="p-0"><span>' +
+              "<div><b>" +
+              _vm._ssrEscape(_vm._s(component.concatenatedNames)) +
+              '</b> <div class="p-0"><span>' +
               _vm._ssrEscape(_vm._s(component.manufacturer.name)) +
               '</span></div> <div class="p-0"><span>' +
               _vm._ssrEscape(_vm._s(component.manufacturer.legalName)) +
