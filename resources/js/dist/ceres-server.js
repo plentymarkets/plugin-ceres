@@ -7643,6 +7643,82 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0__);
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7686,7 +7762,9 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].item.itemType === 'set';
     },
     setComponents: function setComponents() {
-      return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].setComponents;
+      return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].setComponents.filter(function (value, index, array) {
+        return array.indexOf(value) === index;
+      });
     }
   }
 });
@@ -50034,20 +50112,105 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _vm._ssrNode(
-      _vm.isItemSet && _vm.selectionType === "manufacturer"
-        ? "<div><ul>" +
-            _vm._ssrList(_vm.setComponents, function(component) {
-              return (
-                "<li>" +
-                _vm._ssrEscape(
-                  "\n        " +
-                    _vm._s(component.manufacturer.name) +
-                    "\n      "
-                ) +
-                "</li>"
-              )
-            }) +
-            "</ul></div>"
+      _vm.isItemSet
+        ? "<div>" +
+            (_vm.selectionType === "manufacturer"
+              ? "<div>" +
+                _vm._ssrList(_vm.setComponents, function(component, index) {
+                  return (
+                    '<div><div class="p-0"><span>' +
+                    _vm._ssrEscape(_vm._s(component.manufacturer.name)) +
+                    '</span></div> <div class="p-0"><span>' +
+                    _vm._ssrEscape(_vm._s(component.manufacturer.legalName)) +
+                    '</span></div> <div class="p-0"><span>' +
+                    _vm._ssrEscape(_vm._s(component.manufacturer.street)) +
+                    "</span> <span>" +
+                    _vm._ssrEscape(_vm._s(component.manufacturer.houseNo)) +
+                    '</span></div> <div class="p-0"><span>' +
+                    _vm._ssrEscape(_vm._s(component.manufacturer.postcode)) +
+                    "</span> <span>" +
+                    _vm._ssrEscape(_vm._s(component.manufacturer.town)) +
+                    "</span> " +
+                    (component.manufacturer.countryObject
+                      ? "<span>" +
+                        _vm._ssrEscape(
+                          "\n              " +
+                            _vm._s(component.manufacturer.countryObject.name) +
+                            "\n            "
+                        ) +
+                        "</span>"
+                      : "<!---->") +
+                    '</div> <div class="p-0"><span>' +
+                    _vm._ssrEscape(_vm._s(component.manufacturer.email)) +
+                    '</span></div> <div class="p-0"><span>' +
+                    _vm._ssrEscape(_vm._s(component.manufacturer.url)) +
+                    '</span></div> <div class="p-0"><span>' +
+                    _vm._ssrEscape(_vm._s(component.manufacturer.phoneNumber)) +
+                    '</span></div> <div class="p-0"><span>' +
+                    _vm._ssrEscape(_vm._s(component.manufacturer.faxNumber)) +
+                    '</span></div> <div class="p-0"><span>' +
+                    _vm._ssrEscape(_vm._s(component.manufacturer.contactUrl)) +
+                    "</span></div></div>"
+                  )
+                }) +
+                " <hr></div>"
+              : "<!---->") +
+            " " +
+            (_vm.selectionType === "eu-responsible"
+              ? "<div>" +
+                _vm._ssrList(_vm.setComponents, function(component, index) {
+                  return (
+                    '<div><div class="p-0"><span>' +
+                    _vm._ssrEscape(
+                      _vm._s(component.manufacturer.responsibleName)
+                    ) +
+                    '</span></div> <div class="p-0"><span>' +
+                    _vm._ssrEscape(
+                      _vm._s(component.manufacturer.responsibleStreet)
+                    ) +
+                    "</span> <span>" +
+                    _vm._ssrEscape(
+                      _vm._s(component.manufacturer.responsibleHouseNo)
+                    ) +
+                    '</span></div> <div class="p-0"><span>' +
+                    _vm._ssrEscape(
+                      _vm._s(component.manufacturer.responsiblePostCode)
+                    ) +
+                    "</span> <span>" +
+                    _vm._ssrEscape(
+                      _vm._s(component.manufacturer.responsibleTown)
+                    ) +
+                    "</span> " +
+                    (component.manufacturer.responsibleCountryObject
+                      ? "<span>" +
+                        _vm._ssrEscape(
+                          "\n            " +
+                            _vm._s(
+                              component.manufacturer.responsibleCountryObject
+                                .name
+                            ) +
+                            "\n          "
+                        ) +
+                        "</span>"
+                      : "<!---->") +
+                    '</div> <div class="p-0"><span>' +
+                    _vm._ssrEscape(
+                      _vm._s(component.manufacturer.responsibleEmail)
+                    ) +
+                    '</span></div> <div class="p-0"><span>' +
+                    _vm._ssrEscape(
+                      _vm._s(component.manufacturer.responsiblePhoneNo)
+                    ) +
+                    '</span></div> <div class="p-0"><span>' +
+                    _vm._ssrEscape(
+                      _vm._s(component.manufacturer.responsibleContactUrl)
+                    ) +
+                    "</span></div></div>"
+                  )
+                }) +
+                " <hr></div>"
+              : "<!---->") +
+            "</div>"
         : _vm.isBundle
         ? "<div></div>"
         : "<!---->"

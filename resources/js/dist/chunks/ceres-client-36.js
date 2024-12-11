@@ -9,6 +9,82 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0__);
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -52,7 +128,9 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].item.itemType === 'set';
     },
     setComponents: function setComponents() {
-      return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].setComponents;
+      return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].setComponents.filter(function (value, index, array) {
+        return array.indexOf(value) === index;
+      });
     }
   }
 });
@@ -75,21 +153,176 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.isItemSet && _vm.selectionType === "manufacturer"
+    _vm.isItemSet
       ? _c("div", [
-          _c(
-            "ul",
-            _vm._l(_vm.setComponents, function(component) {
-              return _c("li", { key: component.manufacturer.itemId }, [
-                _vm._v(
-                  "\n        " +
-                    _vm._s(component.manufacturer.name) +
-                    "\n      "
-                )
-              ])
-            }),
-            0
-          )
+          _vm.selectionType === "manufacturer"
+            ? _c(
+                "div",
+                [
+                  _vm._l(_vm.setComponents, function(component, index) {
+                    return _c("div", { key: index }, [
+                      _c("div", { staticClass: "p-0" }, [
+                        _c("span", [
+                          _vm._v(_vm._s(component.manufacturer.name))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "p-0" }, [
+                        _c("span", [
+                          _vm._v(_vm._s(component.manufacturer.legalName))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "p-0" }, [
+                        _c("span", [
+                          _vm._v(_vm._s(component.manufacturer.street))
+                        ]),
+                        _vm._v(" "),
+                        _c("span", [
+                          _vm._v(_vm._s(component.manufacturer.houseNo))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "p-0" }, [
+                        _c("span", [
+                          _vm._v(_vm._s(component.manufacturer.postcode))
+                        ]),
+                        _vm._v(" "),
+                        _c("span", [
+                          _vm._v(_vm._s(component.manufacturer.town))
+                        ]),
+                        _vm._v(" "),
+                        component.manufacturer.countryObject
+                          ? _c("span", [
+                              _vm._v(
+                                "\n              " +
+                                  _vm._s(
+                                    component.manufacturer.countryObject.name
+                                  ) +
+                                  "\n            "
+                              )
+                            ])
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "p-0" }, [
+                        _c("span", [
+                          _vm._v(_vm._s(component.manufacturer.email))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "p-0" }, [
+                        _c("span", [_vm._v(_vm._s(component.manufacturer.url))])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "p-0" }, [
+                        _c("span", [
+                          _vm._v(_vm._s(component.manufacturer.phoneNumber))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "p-0" }, [
+                        _c("span", [
+                          _vm._v(_vm._s(component.manufacturer.faxNumber))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "p-0" }, [
+                        _c("span", [
+                          _vm._v(_vm._s(component.manufacturer.contactUrl))
+                        ])
+                      ])
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("hr")
+                ],
+                2
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.selectionType === "eu-responsible"
+            ? _c(
+                "div",
+                [
+                  _vm._l(_vm.setComponents, function(component, index) {
+                    return _c("div", { key: index }, [
+                      _c("div", { staticClass: "p-0" }, [
+                        _c("span", [
+                          _vm._v(_vm._s(component.manufacturer.responsibleName))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "p-0" }, [
+                        _c("span", [
+                          _vm._v(
+                            _vm._s(component.manufacturer.responsibleStreet)
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("span", [
+                          _vm._v(
+                            _vm._s(component.manufacturer.responsibleHouseNo)
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "p-0" }, [
+                        _c("span", [
+                          _vm._v(
+                            _vm._s(component.manufacturer.responsiblePostCode)
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("span", [
+                          _vm._v(_vm._s(component.manufacturer.responsibleTown))
+                        ]),
+                        _vm._v(" "),
+                        component.manufacturer.responsibleCountryObject
+                          ? _c("span", [
+                              _vm._v(
+                                "\n            " +
+                                  _vm._s(
+                                    component.manufacturer
+                                      .responsibleCountryObject.name
+                                  ) +
+                                  "\n          "
+                              )
+                            ])
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "p-0" }, [
+                        _c("span", [
+                          _vm._v(
+                            _vm._s(component.manufacturer.responsibleEmail)
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "p-0" }, [
+                        _c("span", [
+                          _vm._v(
+                            _vm._s(component.manufacturer.responsiblePhoneNo)
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "p-0" }, [
+                        _c("span", [
+                          _vm._v(
+                            _vm._s(component.manufacturer.responsibleContactUrl)
+                          )
+                        ])
+                      ])
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("hr")
+                ],
+                2
+              )
+            : _vm._e()
         ])
       : _vm.isBundle
       ? _c("div")
