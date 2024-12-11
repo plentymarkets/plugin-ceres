@@ -3,15 +3,22 @@
 
     <div v-if="isItemSet">
       <div v-if="selectionType === 'manufacturer'">
-          <item-manufacturer-data-list :set-components="setComponents"></item-manufacturer-data-list>
+          <item-manufacturer-data-list :item-components="setComponents"></item-manufacturer-data-list>
       </div>
 
       <div v-if="selectionType === 'eu-responsible'">
-        <item-eu-responsible-data-list :set-components="setComponents"></item-eu-responsible-data-list>
+        <item-eu-responsible-data-list :item-components="setComponents"></item-eu-responsible-data-list>
       </div>
     </div>
-    <div v-else-if="isBundle">
 
+    <div v-else-if="isBundle">
+      <div v-if="selectionType === 'manufacturer'">
+        <item-manufacturer-data-list :item-components="bundleComponents"></item-manufacturer-data-list>
+      </div>
+
+      <div v-if="selectionType === 'eu-responsible'">
+        <item-eu-responsible-data-list :item-components="bundleComponents"></item-eu-responsible-data-list>
+      </div>
     </div>
   </div>
 </template>
@@ -57,7 +64,7 @@ export default {
     },
     setComponents() {
       return this.$store.getters[`${this.itemId}/currentItemVariation`].setComponents
-          .filter((value, index, array) => array.indexOf(value) === index);
+          ?.filter((value, index, array) => array.indexOf(value) === index) ?? [];
     },
   },
 }

@@ -51,7 +51,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-eu-responsible-data-list",
   props: {
-    setComponents: {
+    itemComponents: {
       type: Array,
       default: function _default() {
         return [];
@@ -76,6 +76,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ItemManufacturerDataList_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ItemManufacturerDataList.vue */ "./resources/js/src/app/components/item/ItemManufacturerDataList.vue");
 /* harmony import */ var _ItemEuResponsibleDataList_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ItemEuResponsibleDataList.vue */ "./resources/js/src/app/components/item/ItemEuResponsibleDataList.vue");
 
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -126,9 +133,11 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].item.itemType === 'set';
     },
     setComponents: function setComponents() {
-      return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].setComponents.filter(function (value, index, array) {
+      var _this$$store$getters$, _this$$store$getters$2;
+
+      return (_this$$store$getters$ = (_this$$store$getters$2 = this.$store.getters["".concat(this.itemId, "/currentItemVariation")].setComponents) === null || _this$$store$getters$2 === void 0 ? void 0 : _this$$store$getters$2.filter(function (value, index, array) {
         return array.indexOf(value) === index;
-      });
+      })) !== null && _this$$store$getters$ !== void 0 ? _this$$store$getters$ : [];
     }
   }
 });
@@ -198,7 +207,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-manufacturer-data-list",
   props: {
-    setComponents: {
+    itemComponents: {
       type: Array,
       default: function _default() {
         return [];
@@ -224,10 +233,10 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.setComponents.length > 0
+  return _vm.itemComponents.length > 0
     ? _c(
         "div",
-        _vm._l(_vm.setComponents, function(component, index) {
+        _vm._l(_vm.itemComponents, function(component, index) {
           return _c("div", { key: index }, [
             _c("div", { staticClass: "p-0" }, [
               _c("span", [
@@ -322,7 +331,7 @@ var render = function() {
                 "div",
                 [
                   _c("item-manufacturer-data-list", {
-                    attrs: { "set-components": _vm.setComponents }
+                    attrs: { "item-components": _vm.setComponents }
                   })
                 ],
                 1
@@ -334,7 +343,7 @@ var render = function() {
                 "div",
                 [
                   _c("item-eu-responsible-data-list", {
-                    attrs: { "set-components": _vm.setComponents }
+                    attrs: { "item-components": _vm.setComponents }
                   })
                 ],
                 1
@@ -342,7 +351,31 @@ var render = function() {
             : _vm._e()
         ])
       : _vm.isBundle
-      ? _c("div")
+      ? _c("div", [
+          _vm.selectionType === "manufacturer"
+            ? _c(
+                "div",
+                [
+                  _c("item-manufacturer-data-list", {
+                    attrs: { "item-components": _vm.bundleComponents }
+                  })
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.selectionType === "eu-responsible"
+            ? _c(
+                "div",
+                [
+                  _c("item-eu-responsible-data-list", {
+                    attrs: { "item-components": _vm.bundleComponents }
+                  })
+                ],
+                1
+              )
+            : _vm._e()
+        ])
       : _vm._e()
   ])
 }
@@ -368,10 +401,10 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.setComponents.length > 0
+  return _vm.itemComponents.length > 0
     ? _c(
         "div",
-        _vm._l(_vm.setComponents, function(component, index) {
+        _vm._l(_vm.itemComponents, function(component, index) {
           return _c("div", { key: index }, [
             _c("div", { staticClass: "p-0" }, [
               _c("span", [_vm._v(_vm._s(component.manufacturer.name))])

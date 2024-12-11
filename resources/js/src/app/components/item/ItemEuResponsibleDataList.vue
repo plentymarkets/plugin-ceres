@@ -1,7 +1,7 @@
 <template>
-  <div v-if="setComponents.length > 0">
+  <div v-if="itemComponents.length > 0">
 
-    <div v-for="(component, index) in setComponents" :key="index">
+    <div v-for="(component, index) in itemComponents" :key="index">
       <div class="p-0">
         <span>{{ component.manufacturer.responsibleName }}</span>
       </div>
@@ -44,7 +44,7 @@ export default {
   name: "item-eu-responsible-data-list",
 
   props: {
-    setComponents: {
+    itemComponents: {
       type: Array,
       default: () => []
     },

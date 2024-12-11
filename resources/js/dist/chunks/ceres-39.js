@@ -63,7 +63,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-manufacturer-data-list",
   props: {
-    setComponents: {
+    itemComponents: {
       type: Array,
       default: function _default() {
         return [];
@@ -89,10 +89,10 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.setComponents.length > 0
+  return _vm.itemComponents.length > 0
     ? _c(
         "div",
-        _vm._l(_vm.setComponents, function(component, index) {
+        _vm._l(_vm.itemComponents, function(component, index) {
           return _c("div", { key: index }, [
             _c("div", { staticClass: "p-0" }, [
               _c("span", [_vm._v(_vm._s(component.manufacturer.name))])

@@ -7416,7 +7416,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-eu-responsible-data-list",
   props: {
-    setComponents: {
+    itemComponents: {
       type: Array,
       default: function _default() {
         return [];
@@ -7728,6 +7728,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7760,9 +7767,11 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].item.itemType === 'set';
     },
     setComponents: function setComponents() {
-      return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].setComponents.filter(function (value, index, array) {
+      var _this$$store$getters$, _this$$store$getters$2;
+
+      return (_this$$store$getters$ = (_this$$store$getters$2 = this.$store.getters["".concat(this.itemId, "/currentItemVariation")].setComponents) === null || _this$$store$getters$2 === void 0 ? void 0 : _this$$store$getters$2.filter(function (value, index, array) {
         return array.indexOf(value) === index;
-      });
+      })) !== null && _this$$store$getters$ !== void 0 ? _this$$store$getters$ : [];
     }
   }
 });
@@ -7832,7 +7841,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-manufacturer-data-list",
   props: {
-    setComponents: {
+    itemComponents: {
       type: Array,
       default: function _default() {
         return [];
@@ -50068,10 +50077,10 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.setComponents.length > 0
+  return _vm.itemComponents.length > 0
     ? _c("div", [
         _vm._ssrNode(
-          _vm._ssrList(_vm.setComponents, function(component, index) {
+          _vm._ssrList(_vm.itemComponents, function(component, index) {
             return (
               '<div><div class="p-0"><span>' +
               _vm._ssrEscape(_vm._s(component.manufacturer.responsibleName)) +
@@ -50264,7 +50273,7 @@ var render = function() {
                   "</div>",
                   [
                     _c("item-manufacturer-data-list", {
-                      attrs: { "set-components": _vm.setComponents }
+                      attrs: { "item-components": _vm.setComponents }
                     })
                   ],
                   1
@@ -50277,7 +50286,7 @@ var render = function() {
                   "</div>",
                   [
                     _c("item-eu-responsible-data-list", {
-                      attrs: { "set-components": _vm.setComponents }
+                      attrs: { "item-components": _vm.setComponents }
                     })
                   ],
                   1
@@ -50287,7 +50296,38 @@ var render = function() {
           2
         )
       : _vm.isBundle
-      ? _vm._ssrNode("<div></div>")
+      ? _vm._ssrNode(
+          "<div>",
+          "</div>",
+          [
+            _vm.selectionType === "manufacturer"
+              ? _vm._ssrNode(
+                  "<div>",
+                  "</div>",
+                  [
+                    _c("item-manufacturer-data-list", {
+                      attrs: { "item-components": _vm.bundleComponents }
+                    })
+                  ],
+                  1
+                )
+              : _vm._e(),
+            _vm._ssrNode(" "),
+            _vm.selectionType === "eu-responsible"
+              ? _vm._ssrNode(
+                  "<div>",
+                  "</div>",
+                  [
+                    _c("item-eu-responsible-data-list", {
+                      attrs: { "item-components": _vm.bundleComponents }
+                    })
+                  ],
+                  1
+                )
+              : _vm._e()
+          ],
+          2
+        )
       : _vm._e()
   ])
 }
@@ -50313,10 +50353,10 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.setComponents.length > 0
+  return _vm.itemComponents.length > 0
     ? _c("div", [
         _vm._ssrNode(
-          _vm._ssrList(_vm.setComponents, function(component, index) {
+          _vm._ssrList(_vm.itemComponents, function(component, index) {
             return (
               '<div><div class="p-0"><span>' +
               _vm._ssrEscape(_vm._s(component.manufacturer.name)) +
