@@ -119,6 +119,7 @@ export default {
           const manufacturerId = item.manufacturerId;
           const itemName = item.texts.name1 || '';
           const manufacturer = item.manufacturer;
+          manufacturerMap[manufacturerId]['concatenatedNames'] = manufacturerMap[manufacturerId]['concatenatedNames'] || [];
 
           if (!manufacturerMap[manufacturerId]) {
             manufacturerMap[manufacturerId] = {

@@ -7851,6 +7851,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         var manufacturerId = item.manufacturerId;
         var itemName = item.texts.name1 || '';
         var manufacturer = item.manufacturer;
+        manufacturerMap[manufacturerId]['concatenatedNames'] = manufacturerMap[manufacturerId]['concatenatedNames'] || [];
 
         if (!manufacturerMap[manufacturerId]) {
           manufacturerMap[manufacturerId] = {
