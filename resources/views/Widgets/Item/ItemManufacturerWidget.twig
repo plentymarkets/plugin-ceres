@@ -18,12 +18,28 @@
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div class="{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
         {% if isPreview %}
+
             <h4>{{ trans("Ceres::Widget.itemManufacturerSampleName") }}</h4>
             <br>
-            <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleCompanyName") }}</p>
+            {% if "name" in visibleFields %}
+                    <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleCompanyName") }}</p>
+            {% endif %}
+
+            {% if "legalName" in visibleFields %}
             <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleLegalName") }}</p>
-            <p class="mb-0"><span>{{ trans("Ceres::Widget.itemManufacturerSampleStreet") }} </span><span>{{ trans("Ceres::Widget.itemManufacturerSampleHouseNr") }} </span></p>
-            <p class="mb-0"><span>{{ trans("Ceres::Widget.itemManufacturerSamplePostcode") }} </span><span>{{ trans("Ceres::Widget.itemManufacturerSampleTown") }} </span><span>{{ trans("Ceres::Widget.itemManufacturerSampleCountry") }} </span></p>
+            {% endif %}
+
+            <p class="mb-0">
+                    {% if "street" in visibleFields %}
+                            <span>{{ trans("Ceres::Widget.itemManufacturerSampleStreet") }} </span>
+                    {% endif %}
+                <span>{{ trans("Ceres::Widget.itemManufacturerSampleHouseNr") }} </span>
+            </p>
+            <p class="mb-0">
+                <span>{{ trans("Ceres::Widget.itemManufacturerSamplePostcode") }} </span>
+                <span>{{ trans("Ceres::Widget.itemManufacturerSampleTown") }} </span>
+                <span>{{ trans("Ceres::Widget.itemManufacturerSampleCountry") }} </span>
+            </p>
             <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleEmail") }}</p>
             <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleHomepage") }}</p>
             <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSamplePhone") }}</p>
