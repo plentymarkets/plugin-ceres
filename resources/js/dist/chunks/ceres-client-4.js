@@ -52,6 +52,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EuResponsibleDetails",
   props: {
@@ -83,7 +85,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _EuResponsibleDetails_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EuResponsibleDetails.vue */ "./resources/js/src/app/components/item/EuResponsibleDetails.vue");
-//
 //
 //
 //
@@ -306,7 +307,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-manufacturer-data-list",
@@ -337,6 +337,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0__);
 
+//
+//
 //
 //
 //
@@ -498,6 +500,12 @@ var render = function() {
   return _c(
     "div",
     [
+      _c("h4", [
+        _vm._v(
+          _vm._s(_vm.$translate("Ceres::Template.itemEuResponsiblePersonTitle"))
+        )
+      ]),
+      _vm._v(" "),
       _vm.manufacturer && _vm.isEuResponsibleTabShown
         ? [
             _vm.concatenatedNames
@@ -588,12 +596,6 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("h4", [
-        _vm._v(
-          _vm._s(_vm.$translate("Ceres::Template.itemEuResponsiblePersonTitle"))
-        )
-      ]),
-      _vm._v(" "),
       _vm.itemComponents.length > 0
         ? [
             _vm._l(_vm.itemComponents, function(component) {
@@ -716,12 +718,6 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("h4", [
-        _vm._v(
-          _vm._s(_vm.$translate("Ceres::Template.itemManufacturerDetailsTitle"))
-        )
-      ]),
-      _vm._v(" "),
       _vm.itemComponents.length > 0
         ? [
             _vm._l(_vm.itemComponents, function(component) {
@@ -767,6 +763,12 @@ var render = function() {
   return _c(
     "div",
     [
+      _c("h4", [
+        _vm._v(
+          _vm._s(_vm.$translate("Ceres::Template.itemManufacturerDetailsTitle"))
+        )
+      ]),
+      _vm._v(" "),
       _vm.manufacturer && _vm.isManufacturerTabShown
         ? [
             _vm.concatenatedNames

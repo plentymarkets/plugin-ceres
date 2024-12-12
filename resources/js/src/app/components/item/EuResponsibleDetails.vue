@@ -1,5 +1,7 @@
 <template>
   <div>
+    <h4>{{ $translate("Ceres::Template.itemEuResponsiblePersonTitle") }}</h4>
+
     <template v-if="manufacturer && isEuResponsibleTabShown">
       <div v-if="concatenatedNames" class="mb-2">
         <b>{{ concatenatedNames }}</b>
