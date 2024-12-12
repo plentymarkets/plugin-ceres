@@ -1,0 +1,124 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass     = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+{% set selectionType   = widget.settings.selectionType.mobile | default("manufacturer") %}
+{% set visibleFields   = widget.settings.visibleFields.mobile | default([]) %}
+{% set visibleFieldsEU = widget.settings.visibleFieldsEU.mobile | default([]) %}
+
+<div class="widget widget-item-manufacturer
+    {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}
+    {% if customClass | length > 0 %} {{ customClass }}{% endif %}"
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <div class="{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
+        {% if isPreview %}
+            {% if selectionType == "manufacturer" %}
+                <h4>{{ trans("Ceres::Widget.itemManufacturerLabel") }}</h4>
+
+                {% if "name" in visibleFields %}
+                    <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleName") }}</p>
+                {% endif %}
+
+                {% if "legalName" in visibleFields %}
+                    <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleLegalName") }}</p>
+                {% endif %}
+
+                <p class="mb-0">
+                    {% if "street" in visibleFields %}
+                        <span>{{ trans("Ceres::Widget.itemManufacturerSampleStreet") }} </span>
+                    {% endif %}
+
+                    {% if "houseNr" in visibleFields %}
+                        <span>{{ trans("Ceres::Widget.itemManufacturerSampleHouseNr") }} </span>
+                    {% endif %}
+                </p>
+                <p class="mb-0">
+                    {% if "zipcode" in visibleFields %}
+                        <span>{{ trans("Ceres::Widget.itemManufacturerSamplePostcode") }} </span>
+                    {% endif %}
+
+                    {% if "city" in visibleFields %}
+                        <span>{{ trans("Ceres::Widget.itemManufacturerSampleTown") }} </span>
+                    {% endif %}
+
+                    {% if "country" in visibleFields %}
+                        <span>{{ trans("Ceres::Widget.itemManufacturerSampleCountry") }} </span>
+                    {% endif %}
+                </p>
+                {% if "mail" in visibleFields %}
+                    <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleEmail") }}</p>
+                {% endif %}
+
+                {% if "homepage" in visibleFields %}
+                    <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleHomepage") }}</p>
+                {% endif %}
+
+                {% if "phone" in visibleFields %}
+                    <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSamplePhone") }}</p>
+                {% endif %}
+
+                {% if "fax" in visibleFields %}
+                    <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleFax") }}</p>
+                {% endif %}
+
+                {% if "contactForm" in visibleFields %}
+                    <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleContactForm") }}</p>
+                {% endif %}
+
+            {% else %}
+                <h4>{{ trans("Ceres::Widget.itemManufacturerEULabel") }}</h4>
+
+                {% if "EUname" in visibleFieldsEU %}
+                    <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleEUResponsibleName") }}</p>
+                {% endif %}
+
+                <p class="mb-0">
+                    {% if "EUstreet" in visibleFieldsEU %}
+                        <span>{{ trans("Ceres::Widget.itemManufacturerSampleStreet") }} </span>
+                    {% endif %}
+
+                    {% if "EUhouseNr" in visibleFieldsEU %}
+                        <span>{{ trans("Ceres::Widget.itemManufacturerSampleHouseNr") }} </span>
+                    {% endif %}
+                </p>
+                <p class="mb-0">
+                    {% if "EUzipcode" in visibleFieldsEU %}
+                        <span>{{ trans("Ceres::Widget.itemManufacturerSamplePostcode") }} </span>
+                    {% endif %}
+
+                    {% if "EUcity" in visibleFieldsEU %}
+                        <span>{{ trans("Ceres::Widget.itemManufacturerSampleTown") }} </span>
+                    {% endif %}
+
+                    {% if "EUcountry" in visibleFieldsEU %}
+                        <span>{{ trans("Ceres::Widget.itemManufacturerSampleCountry") }} </span>
+                    {% endif %}
+                </p>
+                {% if "EUmail" in visibleFieldsEU %}
+                    <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleEmail") }}</p>
+                {% endif %}
+
+                {% if "EUphone" in visibleFieldsEU  %}
+                    <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSamplePhone") }}</p>
+                {% endif %}
+
+                {% if "EUcontactForm" in visibleFieldsEU %}
+                    <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleContactForm") }}</p>
+                {% endif %}
+
+            {% endif %}
+
+        {% else %}
+            <item-manufacturer
+                    :visible-fields="{{ visibleFields | json_encode }}"
+                    :visible-fields-eu="{{ visibleFieldsEU | json_encode }}"
+                    selection-type="{{ selectionType }}"></item-manufacturer>
+        {% endif %}
+    </div>
+</div>

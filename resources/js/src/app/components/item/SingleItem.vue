@@ -391,7 +391,8 @@ export default {
                 (this.currentVariation.item.manufacturer.email !== "") ||
                 (this.currentVariation.item.manufacturer.legalName !== "") ||
                 (this.currentVariation.item.manufacturer.contactUrl !== "") ||
-                (this.currentVariation.item.manufacturer.name !== "");
+                (this.currentVariation.item.manufacturer.name !== "") ||
+                (this.currentVariation.item.manufacturer.externalName !== "");
         },
 
         isEuResponsibleTabShown()
