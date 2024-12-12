@@ -18,41 +18,46 @@
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div class="{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
         {% if isPreview %}
-
-
             <h4>{{ trans("Ceres::Widget.itemManufacturerSampleName") }}</h4>
-            <br>
-            {% if "name" in visibleFields %}
-                <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleCompanyName") }}</p>
-            {% endif %}
 
-            {% if "legalName" in visibleFields %}
-                <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleLegalName") }}</p>
-            {% endif %}
+            <br>
+           {% if selectionType === "manufacturer" %}
+               {% if "name" in visibleFields %}
+                   <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleCompanyName") }}</p>
+               {% endif %}
+
+               {% if "legalName" in visibleFields %}
+                   <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleLegalName") }}</p>
+               {% endif %}
+           {% else %}
+               {% if "EUname" in visibleFields %}
+                    <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleEUResponsibleName") }}</p>
+               {% endif %}
+           {% endif %}
 
             <p class="mb-0">
-                {% if "street" in visibleFields %}
+                {% if "street" in visibleFields OR "EUstreet" in visibleFieldsEU %}
                         <span>{{ trans("Ceres::Widget.itemManufacturerSampleStreet") }} </span>
                 {% endif %}
 
-                {% if "houseNr" in visibleFields %}
+                {% if "houseNr" in visibleFields OR "EUhouseNr" in visibleFieldsEU %}
                     <span>{{ trans("Ceres::Widget.itemManufacturerSampleHouseNr") }} </span>
                 {% endif %}
             </p>
             <p class="mb-0">
-                {% if "zipcode" in visibleFields %}
+                {% if "zipcode" in visibleFields OR "EUzipcode" in visibleFieldsEU %}
                     <span>{{ trans("Ceres::Widget.itemManufacturerSamplePostcode") }} </span>
                 {% endif %}
 
-                {% if "city" in visibleFields %}
+                {% if "city" in visibleFields OR "EUcity" in visibleFieldsEU %}
                 <span>{{ trans("Ceres::Widget.itemManufacturerSampleTown") }} </span>
                 {% endif %}
 
-                {% if "country" in visibleFields %}
+                {% if "country" in visibleFields OR "EUcountry" in visibleFieldsEU %}
                     <span>{{ trans("Ceres::Widget.itemManufacturerSampleCountry") }} </span>
                 {% endif %}
             </p>
-            {% if "mail" in visibleFields %}
+            {% if "mail" in visibleFields OR "EUmail" in visibleFieldsEU %}
                 <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleEmail") }}</p>
             {% endif %}
 
@@ -60,7 +65,7 @@
                 <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleHomepage") }}</p>
             {% endif %}
 
-            {% if "phone" in visibleFields %}
+            {% if "phone" in visibleFields OR "EUphone" in visibleFieldsEU  %}
                 <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSamplePhone") }}</p>
             {% endif %}
 
@@ -68,7 +73,7 @@
                 <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleFax") }}</p>
             {% endif %}
 
-            {% if "contactForm" in visibleFields %}
+            {% if "contactForm" in visibleFields OR "EUcontactForm" in visibleFieldsEU %}
                 <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleContactForm") }}</p>
             {% endif %}
         {% else %}
