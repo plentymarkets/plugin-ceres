@@ -52,38 +52,38 @@ class ItemManufacturerWidget extends BaseWidget
                     ->toArray()
             );
 
-            $settings->createCheckboxGroup("visibleFields")
-                ->withName("Widget.selectionSelectTypeManufacturerFields")
-                ->withDefaultValue([
-                    "name",
-                    "legalName",
-                    "street",
-                    "houseNr",
-                    "zipcode",
-                    "city",
-                    "country",
-                    "mail",
-                    "homepage",
-                    "phone",
-                    "fax",
-                    "contactForm"
-                ])
-            ->withCheckboxValues(
-                ValueListFactory::make()
-                    ->addEntry("name", "Widget.itemManufacturerName")
-                    ->addEntry("legalName", "Widget.itemManufacturerLegalName")
-                    ->addEntry("street", "Widget.itemManufacturerStreet")
-                    ->addEntry("houseNr", "Widget.itemManufacturerHouseNr")
-                    ->addEntry("zipcode", "Widget.itemManufacturerZipcode")
-                    ->addEntry("city", "Widget.itemManufacturerCity")
-                    ->addEntry("country", "Widget.itemManufacturerCountry")
-                    ->addEntry("mail", "Widget.itemManufacturerMail")
-                    ->addEntry("homepage", "Widget.itemManufacturerHomepage")
-                    ->addEntry("phone", "Widget.itemManufacturerPhone")
-                    ->addEntry("fax", "Widget.itemManufacturerFax")
-                    ->addEntry("contactForm", "Widget.itemManufacturerContactForm")
-                    ->toArray()
-            );
+        $settingsFactory->createCheckboxGroup("visibleFields")
+            ->withName("Widget.selectionSelectTypeManufacturerFields")
+            ->withDefaultValue([
+                "name",
+                "legalName",
+                "street",
+                "houseNr",
+                "zipcode",
+                "city",
+                "country",
+                "mail",
+                "homepage",
+                "phone",
+                "fax",
+                "contactForm"
+            ])
+        ->withCheckboxValues(
+            ValueListFactory::make()
+                ->addEntry("name", "Widget.itemManufacturerName")
+                ->addEntry("legalName", "Widget.itemManufacturerLegalName")
+                ->addEntry("street", "Widget.itemManufacturerStreet")
+                ->addEntry("houseNr", "Widget.itemManufacturerHouseNr")
+                ->addEntry("zipcode", "Widget.itemManufacturerZipcode")
+                ->addEntry("city", "Widget.itemManufacturerCity")
+                ->addEntry("country", "Widget.itemManufacturerCountry")
+                ->addEntry("mail", "Widget.itemManufacturerMail")
+                ->addEntry("homepage", "Widget.itemManufacturerHomepage")
+                ->addEntry("phone", "Widget.itemManufacturerPhone")
+                ->addEntry("fax", "Widget.itemManufacturerFax")
+                ->addEntry("contactForm", "Widget.itemManufacturerContactForm")
+                ->toArray()
+        );
 
         $settingsFactory->createSpacing();
 
