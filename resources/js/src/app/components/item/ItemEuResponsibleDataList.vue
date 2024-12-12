@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h4>{{ $translate("Ceres::Template.itemEuResponsiblePersonTitle") }}</h4>
 
     <template v-if="itemComponents.length > 0">
       <template v-for="component in itemComponents">

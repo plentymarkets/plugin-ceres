@@ -25,7 +25,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-manufacturer-data-list",
@@ -155,12 +154,6 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("h4", [
-        _vm._v(
-          _vm._s(_vm.$translate("Ceres::Template.itemManufacturerDetailsTitle"))
-        )
-      ]),
-      _vm._v(" "),
       _vm.itemComponents.length > 0
         ? [
             _vm._l(_vm.itemComponents, function(component) {

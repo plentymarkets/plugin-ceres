@@ -7466,7 +7466,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-eu-responsible-data-list",
@@ -7927,7 +7926,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ManufacturerDetails_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ManufacturerDetails.vue */ "./resources/js/src/app/components/item/ManufacturerDetails.vue");
-//
 //
 //
 //
@@ -50356,15 +50354,6 @@ var render = function() {
   return _c(
     "div",
     [
-      _vm._ssrNode(
-        "<h4>" +
-          _vm._ssrEscape(
-            _vm._s(
-              _vm.$translate("Ceres::Template.itemEuResponsiblePersonTitle")
-            )
-          ) +
-          "</h4> "
-      ),
       _vm.itemComponents.length > 0
         ? [
             _vm._l(_vm.itemComponents, function(component) {
@@ -50600,15 +50589,6 @@ var render = function() {
   return _c(
     "div",
     [
-      _vm._ssrNode(
-        "<h4>" +
-          _vm._ssrEscape(
-            _vm._s(
-              _vm.$translate("Ceres::Template.itemManufacturerDetailsTitle")
-            )
-          ) +
-          "</h4> "
-      ),
       _vm.itemComponents.length > 0
         ? [
             _vm._l(_vm.itemComponents, function(component) {
