@@ -21,7 +21,7 @@
             <h4>{{ trans("Ceres::Widget.itemManufacturerSampleName") }}</h4>
 
             <br>
-           {% if selectionType === "manufacturer" %}
+           {% if selectionType == "manufacturer" %}
                {% if "name" in visibleFields %}
                    <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleCompanyName") }}</p>
                {% endif %}
@@ -76,6 +76,7 @@
             {% if "contactForm" in visibleFields OR "EUcontactForm" in visibleFieldsEU %}
                 <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleContactForm") }}</p>
             {% endif %}
+
         {% else %}
             <item-manufacturer
                     :visible-fields="{{ visibleFields | json_encode }}"
