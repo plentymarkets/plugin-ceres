@@ -1,12 +1,12 @@
 <template>
   <div v-if="itemComponents.length > 0">
-    <div v-for="(component, index) in itemComponents" :key="index">
+    <template v-for="component in itemComponents">
       <manufacturer-details v-if="component.manufacturer"
           :manufacturer="component.manufacturer"
           :concatenated-names="component.concatenatedNames"
       />
       <hr>
-    </div>
+    </template>
   </div>
 </template>
 

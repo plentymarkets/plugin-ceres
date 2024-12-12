@@ -1,6 +1,8 @@
 <template>
   <div>
-    <b v-if="concatenatedNames">{{ concatenatedNames }}</b>
+    <div v-if="concatenatedNames" class="mb-2">
+      <b>{{ concatenatedNames }}</b>
+    </div>
 
     <div class="p-0">
       <span>{{ manufacturer.responsibleName }}</span>

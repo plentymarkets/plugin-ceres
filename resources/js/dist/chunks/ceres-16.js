@@ -97,6 +97,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ManufacturerDetails",
   props: {
@@ -131,11 +133,9 @@ var render = function() {
   return _vm.itemComponents.length > 0
     ? _c(
         "div",
-        _vm._l(_vm.itemComponents, function(component, index) {
-          return _c(
-            "div",
-            { key: index },
-            [
+        [
+          _vm._l(_vm.itemComponents, function(component) {
+            return [
               component.manufacturer
                 ? _c("manufacturer-details", {
                     attrs: {
@@ -146,11 +146,10 @@ var render = function() {
                 : _vm._e(),
               _vm._v(" "),
               _c("hr")
-            ],
-            1
-          )
-        }),
-        0
+            ]
+          })
+        ],
+        2
       )
     : _vm._e()
 }
@@ -178,7 +177,9 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _vm.concatenatedNames
-      ? _c("b", [_vm._v(_vm._s(_vm.concatenatedNames))])
+      ? _c("div", { staticClass: "mb-2" }, [
+          _c("b", [_vm._v(_vm._s(_vm.concatenatedNames))])
+        ])
       : _vm._e(),
     _vm._v(" "),
     _vm.manufacturer.name

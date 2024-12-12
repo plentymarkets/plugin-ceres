@@ -7022,6 +7022,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EuResponsibleDetails",
   props: {
@@ -8087,6 +8089,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -49924,7 +49928,9 @@ var render = function() {
   return _c("div", [
     _vm._ssrNode(
       (_vm.concatenatedNames
-        ? "<b>" + _vm._ssrEscape(_vm._s(_vm.concatenatedNames)) + "</b>"
+        ? '<div class="mb-2"><b>' +
+          _vm._ssrEscape(_vm._s(_vm.concatenatedNames)) +
+          "</b></div>"
         : "<!---->") +
         ' <div class="p-0"><span>' +
         _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleName)) +
@@ -50302,11 +50308,9 @@ var render = function() {
   return _vm.itemComponents.length > 0
     ? _c(
         "div",
-        _vm._l(_vm.itemComponents, function(component, index) {
-          return _vm._ssrNode(
-            "<div>",
-            "</div>",
-            [
+        [
+          _vm._l(_vm.itemComponents, function(component) {
+            return [
               component.manufacturer
                 ? _c("eu-responsible-details", {
                     attrs: {
@@ -50316,11 +50320,10 @@ var render = function() {
                   })
                 : _vm._e(),
               _vm._ssrNode(" <hr>")
-            ],
-            2
-          )
-        }),
-        0
+            ]
+          })
+        ],
+        2
       )
     : _vm._e()
 }
@@ -50460,78 +50463,46 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.isItemSet
-      ? _vm._ssrNode(
-          "<div>",
-          "</div>",
-          [
+  return _c(
+    "div",
+    [
+      _vm.isItemSet
+        ? [
             _vm.selectionType === "manufacturer"
-              ? _vm._ssrNode(
-                  "<div>",
-                  "</div>",
-                  [
-                    _c("item-manufacturer-data-list", {
-                      attrs: { "item-components": _vm.setComponents }
-                    })
-                  ],
-                  1
-                )
+              ? [
+                  _c("item-manufacturer-data-list", {
+                    attrs: { "item-components": _vm.setComponents }
+                  })
+                ]
               : _vm._e(),
             _vm._ssrNode(" "),
             _vm.selectionType === "eu-responsible"
-              ? _vm._ssrNode(
-                  "<div>",
-                  "</div>",
-                  [
-                    _c("item-eu-responsible-data-list", {
-                      attrs: { "item-components": _vm.setComponents }
-                    })
-                  ],
-                  1
-                )
+              ? [
+                  _c("item-eu-responsible-data-list", {
+                    attrs: { "item-components": _vm.setComponents }
+                  })
+                ]
               : _vm._e()
-          ],
-          2
-        )
-      : _vm.isBundle
-      ? _vm._ssrNode(
-          "<div>",
-          "</div>",
-          [
+          ]
+        : _vm.isBundle
+        ? [
             _vm.selectionType === "manufacturer"
-              ? _vm._ssrNode(
-                  "<div>",
-                  "</div>",
-                  [
-                    _c("item-manufacturer-data-list", {
-                      attrs: { "item-components": _vm.bundleComponents }
-                    })
-                  ],
-                  1
-                )
+              ? [
+                  _c("item-manufacturer-data-list", {
+                    attrs: { "item-components": _vm.bundleComponents }
+                  })
+                ]
               : _vm._e(),
             _vm._ssrNode(" "),
             _vm.selectionType === "eu-responsible"
-              ? _vm._ssrNode(
-                  "<div>",
-                  "</div>",
-                  [
-                    _c("item-eu-responsible-data-list", {
-                      attrs: { "item-components": _vm.bundleComponents }
-                    })
-                  ],
-                  1
-                )
+              ? [
+                  _c("item-eu-responsible-data-list", {
+                    attrs: { "item-components": _vm.bundleComponents }
+                  })
+                ]
               : _vm._e()
-          ],
-          2
-        )
-      : _vm.isItemComponent
-      ? _vm._ssrNode(
-          "<div>",
-          "</div>",
-          [
+          ]
+        : [
             _vm.selectionType === "manufacturer" && _vm.simpleItemManufacturer
               ? _c("manufacturer-details", {
                   attrs: { manufacturer: _vm.simpleItemManufacturer }
@@ -50542,11 +50513,10 @@ var render = function() {
                   attrs: { manufacturer: _vm.simpleItemManufacturer }
                 })
               : _vm._e()
-          ],
-          1
-        )
-      : _vm._e()
-  ])
+          ]
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -50573,11 +50543,9 @@ var render = function() {
   return _vm.itemComponents.length > 0
     ? _c(
         "div",
-        _vm._l(_vm.itemComponents, function(component, index) {
-          return _vm._ssrNode(
-            "<div>",
-            "</div>",
-            [
+        [
+          _vm._l(_vm.itemComponents, function(component) {
+            return [
               component.manufacturer
                 ? _c("manufacturer-details", {
                     attrs: {
@@ -50587,11 +50555,10 @@ var render = function() {
                   })
                 : _vm._e(),
               _vm._ssrNode(" <hr>")
-            ],
-            2
-          )
-        }),
-        0
+            ]
+          })
+        ],
+        2
       )
     : _vm._e()
 }
@@ -50813,7 +50780,9 @@ var render = function() {
   return _c("div", [
     _vm._ssrNode(
       (_vm.concatenatedNames
-        ? "<b>" + _vm._ssrEscape(_vm._s(_vm.concatenatedNames)) + "</b>"
+        ? '<div class="mb-2"><b>' +
+          _vm._ssrEscape(_vm._s(_vm.concatenatedNames)) +
+          "</b></div>"
         : "<!---->") +
         " " +
         (_vm.manufacturer.name

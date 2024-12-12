@@ -1,26 +1,26 @@
 <template>
   <div>
-    <div v-if="isItemSet">
-      <div v-if="selectionType === 'manufacturer'">
+    <template v-if="isItemSet">
+      <template v-if="selectionType === 'manufacturer'">
           <item-manufacturer-data-list :item-components="setComponents"></item-manufacturer-data-list>
-      </div>
+      </template>
 
-      <div v-if="selectionType === 'eu-responsible'">
+      <template v-if="selectionType === 'eu-responsible'">
         <item-eu-responsible-data-list :item-components="setComponents"></item-eu-responsible-data-list>
-      </div>
-    </div>
+      </template>
+    </template>
 
-    <div v-else-if="isBundle">
-      <div v-if="selectionType === 'manufacturer'">
+    <template v-else-if="isBundle">
+      <template v-if="selectionType === 'manufacturer'">
         <item-manufacturer-data-list :item-components="bundleComponents"></item-manufacturer-data-list>
-      </div>
+      </template>
 
-      <div v-if="selectionType === 'eu-responsible'">
+      <template v-if="selectionType === 'eu-responsible'">
         <item-eu-responsible-data-list :item-components="bundleComponents"></item-eu-responsible-data-list>
-      </div>
-    </div>
+      </template>
+    </template>
 
-    <div v-else-if="isItemComponent">
+    <template v-else>
       <manufacturer-details
           v-if="selectionType === 'manufacturer' && simpleItemManufacturer"
           :manufacturer="simpleItemManufacturer"
@@ -29,7 +29,7 @@
           v-else-if="selectionType === 'eu-responsible' && simpleItemManufacturer"
           :manufacturer="simpleItemManufacturer"
       />
-    </div>
+    </template>
   </div>
 </template>
 

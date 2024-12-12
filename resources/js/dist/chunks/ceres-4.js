@@ -44,6 +44,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EuResponsibleDetails",
   props: {
@@ -366,6 +368,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ManufacturerDetails",
   props: {
@@ -463,7 +467,9 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _vm.concatenatedNames
-      ? _c("b", [_vm._v(_vm._s(_vm.concatenatedNames))])
+      ? _c("div", { staticClass: "mb-2" }, [
+          _c("b", [_vm._v(_vm._s(_vm.concatenatedNames))])
+        ])
       : _vm._e(),
     _vm._v(" "),
     _c("div", { staticClass: "p-0" }, [
@@ -530,11 +536,9 @@ var render = function() {
   return _vm.itemComponents.length > 0
     ? _c(
         "div",
-        _vm._l(_vm.itemComponents, function(component, index) {
-          return _c(
-            "div",
-            { key: index },
-            [
+        [
+          _vm._l(_vm.itemComponents, function(component) {
+            return [
               component.manufacturer
                 ? _c("eu-responsible-details", {
                     attrs: {
@@ -545,11 +549,10 @@ var render = function() {
                 : _vm._e(),
               _vm._v(" "),
               _c("hr")
-            ],
-            1
-          )
-        }),
-        0
+            ]
+          })
+        ],
+        2
       )
     : _vm._e()
 }
@@ -575,63 +578,46 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.isItemSet
-      ? _c("div", [
-          _vm.selectionType === "manufacturer"
-            ? _c(
-                "div",
-                [
+  return _c(
+    "div",
+    [
+      _vm.isItemSet
+        ? [
+            _vm.selectionType === "manufacturer"
+              ? [
                   _c("item-manufacturer-data-list", {
                     attrs: { "item-components": _vm.setComponents }
                   })
-                ],
-                1
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.selectionType === "eu-responsible"
-            ? _c(
-                "div",
-                [
+                ]
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.selectionType === "eu-responsible"
+              ? [
                   _c("item-eu-responsible-data-list", {
                     attrs: { "item-components": _vm.setComponents }
                   })
-                ],
-                1
-              )
-            : _vm._e()
-        ])
-      : _vm.isBundle
-      ? _c("div", [
-          _vm.selectionType === "manufacturer"
-            ? _c(
-                "div",
-                [
+                ]
+              : _vm._e()
+          ]
+        : _vm.isBundle
+        ? [
+            _vm.selectionType === "manufacturer"
+              ? [
                   _c("item-manufacturer-data-list", {
                     attrs: { "item-components": _vm.bundleComponents }
                   })
-                ],
-                1
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.selectionType === "eu-responsible"
-            ? _c(
-                "div",
-                [
+                ]
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.selectionType === "eu-responsible"
+              ? [
                   _c("item-eu-responsible-data-list", {
                     attrs: { "item-components": _vm.bundleComponents }
                   })
-                ],
-                1
-              )
-            : _vm._e()
-        ])
-      : _vm.isItemComponent
-      ? _c(
-          "div",
-          [
+                ]
+              : _vm._e()
+          ]
+        : [
             _vm.selectionType === "manufacturer" && _vm.simpleItemManufacturer
               ? _c("manufacturer-details", {
                   attrs: { manufacturer: _vm.simpleItemManufacturer }
@@ -642,11 +628,10 @@ var render = function() {
                   attrs: { manufacturer: _vm.simpleItemManufacturer }
                 })
               : _vm._e()
-          ],
-          1
-        )
-      : _vm._e()
-  ])
+          ]
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -673,11 +658,9 @@ var render = function() {
   return _vm.itemComponents.length > 0
     ? _c(
         "div",
-        _vm._l(_vm.itemComponents, function(component, index) {
-          return _c(
-            "div",
-            { key: index },
-            [
+        [
+          _vm._l(_vm.itemComponents, function(component) {
+            return [
               component.manufacturer
                 ? _c("manufacturer-details", {
                     attrs: {
@@ -688,11 +671,10 @@ var render = function() {
                 : _vm._e(),
               _vm._v(" "),
               _c("hr")
-            ],
-            1
-          )
-        }),
-        0
+            ]
+          })
+        ],
+        2
       )
     : _vm._e()
 }
@@ -720,7 +702,9 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _vm.concatenatedNames
-      ? _c("b", [_vm._v(_vm._s(_vm.concatenatedNames))])
+      ? _c("div", { staticClass: "mb-2" }, [
+          _c("b", [_vm._v(_vm._s(_vm.concatenatedNames))])
+        ])
       : _vm._e(),
     _vm._v(" "),
     _vm.manufacturer.name
