@@ -7042,6 +7042,12 @@ __webpack_require__.r(__webpack_exports__);
     concatenatedNames: {
       type: String,
       default: ''
+    },
+    visibleFieldsEu: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
     }
   },
   computed: {
@@ -7466,6 +7472,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-eu-responsible-data-list",
@@ -7474,6 +7481,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     itemComponents: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    visibleFieldsEu: {
       type: Array,
       default: function _default() {
         return [];
@@ -7834,6 +7847,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -7847,7 +7874,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     EuResponsibleDetails: _EuResponsibleDetails_vue__WEBPACK_IMPORTED_MODULE_12__["default"]
   },
   props: {
-    selectionType: String
+    selectionType: String,
+    visibleFields: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    visibleFieldsEu: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    }
   },
   inject: {
     itemId: {
@@ -7941,6 +7980,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-manufacturer-data-list",
@@ -7949,6 +7989,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     itemComponents: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    visibleFields: {
       type: Array,
       default: function _default() {
         return [];
@@ -8176,6 +8222,12 @@ __webpack_require__.r(__webpack_exports__);
     concatenatedNames: {
       type: String,
       default: ''
+    },
+    visibleFields: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
     }
   },
   computed: {
@@ -49969,33 +50021,65 @@ var render = function() {
                 _vm._ssrEscape(_vm._s(_vm.concatenatedNames)) +
                 "</b></div>"
               : "<!---->") +
-            ' <div class="p-0"><span>' +
-            _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleName)) +
-            '</span></div> <div class="p-0"><span>' +
-            _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleStreet)) +
-            "</span> <span>" +
-            _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleHouseNo)) +
-            '</span></div> <div class="p-0"><span>' +
-            _vm._ssrEscape(_vm._s(_vm.manufacturer.responsiblePostCode)) +
-            "</span> <span>" +
-            _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleTown)) +
-            "</span> " +
-            (_vm.manufacturer.responsibleCountryObject
+            " " +
+            (_vm.visibleFieldsEu.includes("EUname")
+              ? '<div class="p-0"><span>' +
+                _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleName)) +
+                "</span></div>"
+              : "<!---->") +
+            ' <div class="p-0">' +
+            (_vm.visibleFieldsEu.includes("EUstreet")
+              ? "<span>" +
+                _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleStreet)) +
+                "</span>"
+              : "<!---->") +
+            " " +
+            (_vm.visibleFieldsEu.includes("EUhouseNr")
+              ? "<span>" +
+                _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleHouseNo)) +
+                "</span>"
+              : "<!---->") +
+            '</div> <div class="p-0">' +
+            (_vm.visibleFieldsEu.includes("EUzipcode")
+              ? "<span>" +
+                _vm._ssrEscape(_vm._s(_vm.manufacturer.responsiblePostCode)) +
+                "</span>"
+              : "<!---->") +
+            " " +
+            (_vm.visibleFieldsEu.includes("EUcity")
+              ? "<span>" +
+                _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleTown)) +
+                "</span>"
+              : "<!---->") +
+            " " +
+            (_vm.manufacturer.responsibleCountryObject &&
+            _vm.visibleFieldsEu.includes("EUcountry")
               ? "<span>" +
                 _vm._ssrEscape(
-                  "\n      " +
+                  "\n        " +
                     _vm._s(_vm.manufacturer.responsibleCountryObject.name) +
-                    "\n    "
+                    "\n      "
                 ) +
                 "</span>"
               : "<!---->") +
-            '</div> <div class="p-0"><span>' +
-            _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleEmail)) +
-            '</span></div> <div class="p-0"><span>' +
-            _vm._ssrEscape(_vm._s(_vm.manufacturer.responsiblePhoneNo)) +
-            '</span></div> <div class="p-0"><span>' +
-            _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleContactUrl)) +
-            "</span></div>"
+            "</div> " +
+            (_vm.visibleFieldsEu.includes("EUmail")
+              ? '<div class="p-0"><span>' +
+                _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleEmail)) +
+                "</span></div>"
+              : "<!---->") +
+            " " +
+            (_vm.visibleFieldsEu.includes("EUphone")
+              ? '<div class="p-0"><span>' +
+                _vm._ssrEscape(_vm._s(_vm.manufacturer.responsiblePhoneNo)) +
+                "</span></div>"
+              : "<!---->") +
+            " " +
+            (_vm.visibleFieldsEu.includes("EUcontactForm")
+              ? '<div class="p-0"><span>' +
+                _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleContactUrl)) +
+                "</span></div>"
+              : "<!---->")
           : _vm._ssrEscape(
               "\n    " +
                 _vm._s(
@@ -50361,7 +50445,8 @@ var render = function() {
                 _c("eu-responsible-details", {
                   attrs: {
                     manufacturer: component.manufacturer,
-                    "concatenated-names": component.concatenatedNames
+                    "concatenated-names": component.concatenatedNames,
+                    "visible-fields-eu": _vm.visibleFieldsEu
                   }
                 }),
                 _vm._ssrNode(" <hr>")
@@ -50517,7 +50602,10 @@ var render = function() {
             _vm.selectionType === "manufacturer"
               ? [
                   _c("item-manufacturer-data-list", {
-                    attrs: { "item-components": _vm.setComponents }
+                    attrs: {
+                      "visible-fields": _vm.visibleFields,
+                      "item-components": _vm.setComponents
+                    }
                   })
                 ]
               : _vm._e(),
@@ -50525,7 +50613,10 @@ var render = function() {
             _vm.selectionType === "eu-responsible"
               ? [
                   _c("item-eu-responsible-data-list", {
-                    attrs: { "item-components": _vm.setComponents }
+                    attrs: {
+                      "visible-fields-eu": _vm.visibleFieldsEu,
+                      "item-components": _vm.setComponents
+                    }
                   })
                 ]
               : _vm._e()
@@ -50535,7 +50626,10 @@ var render = function() {
             _vm.selectionType === "manufacturer"
               ? [
                   _c("item-manufacturer-data-list", {
-                    attrs: { "item-components": _vm.bundleComponents }
+                    attrs: {
+                      "visible-fields": _vm.visibleFields,
+                      "item-components": _vm.bundleComponents
+                    }
                   })
                 ]
               : _vm._e(),
@@ -50543,7 +50637,10 @@ var render = function() {
             _vm.selectionType === "eu-responsible"
               ? [
                   _c("item-eu-responsible-data-list", {
-                    attrs: { "item-components": _vm.bundleComponents }
+                    attrs: {
+                      "visible-fields-eu": _vm.visibleFieldsEu,
+                      "item-components": _vm.bundleComponents
+                    }
                   })
                 ]
               : _vm._e()
@@ -50551,12 +50648,18 @@ var render = function() {
         : [
             _vm.selectionType === "manufacturer" && _vm.simpleItemManufacturer
               ? _c("manufacturer-details", {
-                  attrs: { manufacturer: _vm.simpleItemManufacturer }
+                  attrs: {
+                    "visible-fields": _vm.visibleFields,
+                    manufacturer: _vm.simpleItemManufacturer
+                  }
                 })
               : _vm.selectionType === "eu-responsible" &&
                 _vm.simpleItemManufacturer
               ? _c("eu-responsible-details", {
-                  attrs: { manufacturer: _vm.simpleItemManufacturer }
+                  attrs: {
+                    "visible-fields-eu": _vm.visibleFieldsEu,
+                    manufacturer: _vm.simpleItemManufacturer
+                  }
                 })
               : _vm._e()
           ]
@@ -50596,7 +50699,8 @@ var render = function() {
                 _c("manufacturer-details", {
                   attrs: {
                     manufacturer: component.manufacturer,
-                    "concatenated-names": component.concatenatedNames
+                    "concatenated-names": component.concatenatedNames,
+                    "visible-fields": _vm.visibleFields
                   }
                 }),
                 _vm._ssrNode(" <hr>")
@@ -50837,42 +50941,83 @@ var render = function() {
                 "</b></div>"
               : "<!---->") +
             " " +
-            (_vm.manufacturer.name
+            (_vm.manufacturer.name && _vm.visibleFields.includes("name")
               ? '<div class="p-0"><span>' +
                 _vm._ssrEscape(_vm._s(_vm.manufacturer.name)) +
                 "</span></div>"
-              : _vm.manufacturer.externalName
+              : _vm.manufacturer.externalName &&
+                _vm.visibleFields.includes("name")
               ? '<div class="p-0"><span>' +
                 _vm._ssrEscape(_vm._s(_vm.manufacturer.externalName)) +
                 "</span></div>"
               : "<!---->") +
-            ' <div class="p-0"><span>' +
-            _vm._ssrEscape(_vm._s(_vm.manufacturer.legalName)) +
-            '</span></div> <div class="p-0"><span>' +
-            _vm._ssrEscape(_vm._s(_vm.manufacturer.street)) +
-            "</span> <span>" +
-            _vm._ssrEscape(_vm._s(_vm.manufacturer.houseNo)) +
-            '</span></div> <div class="p-0"><span>' +
-            _vm._ssrEscape(_vm._s(_vm.manufacturer.postcode)) +
-            "</span> <span>" +
-            _vm._ssrEscape(_vm._s(_vm.manufacturer.town)) +
-            "</span> " +
-            (_vm.manufacturer.countryObject
+            " " +
+            (_vm.visibleFields.includes("legalName")
+              ? '<div class="p-0"><span>' +
+                _vm._ssrEscape(_vm._s(_vm.manufacturer.legalName)) +
+                "</span></div>"
+              : "<!---->") +
+            ' <div class="p-0">' +
+            (_vm.visibleFields.includes("street")
+              ? "<span>" +
+                _vm._ssrEscape(_vm._s(_vm.manufacturer.street)) +
+                "</span>"
+              : "<!---->") +
+            " " +
+            (_vm.visibleFields.includes("houseNr")
+              ? "<span>" +
+                _vm._ssrEscape(_vm._s(_vm.manufacturer.houseNo)) +
+                "</span>"
+              : "<!---->") +
+            '</div> <div class="p-0">' +
+            (_vm.visibleFields.includes("zipcode")
+              ? "<span>" +
+                _vm._ssrEscape(_vm._s(_vm.manufacturer.postcode)) +
+                "</span>"
+              : "<!---->") +
+            " " +
+            (_vm.visibleFields.includes("city")
+              ? "<span>" +
+                _vm._ssrEscape(_vm._s(_vm.manufacturer.town)) +
+                "</span>"
+              : "<!---->") +
+            " " +
+            (_vm.manufacturer.countryObject &&
+            _vm.visibleFields.includes("country")
               ? "<span>" +
                 _vm._ssrEscape(_vm._s(_vm.manufacturer.countryObject.name)) +
                 "</span>"
               : "<!---->") +
-            '</div> <div class="p-0"><span>' +
-            _vm._ssrEscape(_vm._s(_vm.manufacturer.email)) +
-            '</span></div> <div class="p-0"><span>' +
-            _vm._ssrEscape(_vm._s(_vm.manufacturer.url)) +
-            '</span></div> <div class="p-0"><span>' +
-            _vm._ssrEscape(_vm._s(_vm.manufacturer.phoneNumber)) +
-            '</span></div> <div class="p-0"><span>' +
-            _vm._ssrEscape(_vm._s(_vm.manufacturer.faxNumber)) +
-            '</span></div> <div class="p-0"><span>' +
-            _vm._ssrEscape(_vm._s(_vm.manufacturer.contactUrl)) +
-            "</span></div>"
+            "</div> " +
+            (_vm.visibleFields.includes("mail")
+              ? '<div class="p-0"><span>' +
+                _vm._ssrEscape(_vm._s(_vm.manufacturer.email)) +
+                "</span></div>"
+              : "<!---->") +
+            " " +
+            (_vm.visibleFields.includes("homepage")
+              ? '<div class="p-0"><span>' +
+                _vm._ssrEscape(_vm._s(_vm.manufacturer.url)) +
+                "</span></div>"
+              : "<!---->") +
+            " " +
+            (_vm.visibleFields.includes("phone")
+              ? '<div class="p-0"><span>' +
+                _vm._ssrEscape(_vm._s(_vm.manufacturer.phoneNumber)) +
+                "</span></div>"
+              : "<!---->") +
+            " " +
+            (_vm.visibleFields.includes("fax")
+              ? '<div class="p-0"><span>' +
+                _vm._ssrEscape(_vm._s(_vm.manufacturer.faxNumber)) +
+                "</span></div>"
+              : "<!---->") +
+            " " +
+            (_vm.visibleFields.includes("contactForm")
+              ? '<div class="p-0"><span>' +
+                _vm._ssrEscape(_vm._s(_vm.manufacturer.contactUrl)) +
+                "</span></div>"
+              : "<!---->")
           : _vm._ssrEscape(
               "\n    " +
                 _vm._s(

@@ -9,6 +9,8 @@
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
 
 {% set selectionType   = widget.settings.selectionType.mobile | default("manufacturer") %}
+{% set visibleFields   = widget.settings.visibleFields.mobile | default([]) %}
+{% set visibleFieldsEU = widget.settings.visibleFieldsEU.mobile | default([]) %}
 
 <div class="widget widget-item-manufacturer
     {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}
@@ -26,7 +28,10 @@
             <p mb-0>{{ trans("Ceres::Widget.itemManufacturerSamplePhone") }}</p>
             <p mb-0>{{ trans("Ceres::Widget.itemManufacturerSamplePhone") }}</p>
         {% else %}
-            <item-manufacturer selection-type="{{ selectionType }}"></item-manufacturer>
+            <item-manufacturer
+                    :visible-fields="{{ visibleFields | json_encode }}"
+                    :visible-fields-eu="{{ visibleFieldsEU | json_encode }}"
+                    selection-type="{{ selectionType }}"></item-manufacturer>
         {% endif %}
     </div>
 </div>

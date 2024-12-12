@@ -6,6 +6,7 @@
         <manufacturer-details
             :manufacturer="component.manufacturer"
             :concatenated-names="component.concatenatedNames"
+            :visible-fields="visibleFields"
         />
         <hr>
       </template>
@@ -23,6 +24,10 @@ export default {
   },
   props: {
     itemComponents: {
+      type: Array,
+      default: () => []
+    },
+    visibleFields: {
       type: Array,
       default: () => []
     }
