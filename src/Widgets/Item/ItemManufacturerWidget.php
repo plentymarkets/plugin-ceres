@@ -97,7 +97,7 @@ class ItemManufacturerWidget extends BaseWidget
                 "EUcity",
                 "EUcountry",
                 "EUmail",
-                "EUcontactForm"
+                "EUcontactForm",
                 "EUphone",
             ])
         ->withCheckboxValues(
