@@ -86,7 +86,7 @@ class ItemManufacturerWidget extends BaseWidget
                 ->toArray()
         );
 
-        $settingsFactory->createCheckboxGroup("visibleFieldsEU")
+        $settingsFactory->createCheckboxGroup("visibleFields")
             ->withCondition("selectionType === 'eu-responsible'")
             ->withName("Widget.selectionSelectTypeManufacturerFields")
             ->withDefaultValue([
