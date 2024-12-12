@@ -5,7 +5,7 @@
 ### TODO
 
 - Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
-- Falls du Artikelparkete oder Artikelsets verkaufst, deren Bestandteile verschiedene Hersteller und EU-Verantwortliche besitzen, solltest du das neue Herstellerdaten Widget nutzen.
+- Falls du Artikelpakete oder Artikelsets verkaufst, deren Bestandteile verschiedene Hersteller und EU-Verantwortliche besitzen, solltest du das neue Herstellerdaten-Widget nutzen.
 
 ### Hinzugefügt
 
