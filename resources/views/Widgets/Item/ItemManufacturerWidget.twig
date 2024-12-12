@@ -1,0 +1,32 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass     = widget.settings.customClass.mobile %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+{% set selectionType   = widget.settings.selectionType.mobile | default("manufacturer") %}
+
+<div class="widget widget-item-manufacturer
+    {% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}
+    {% if customClass | length > 0 %} {{ customClass }}{% endif %}"
+    {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+    <div class="{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
+        {% if isPreview %}
+            <b>{{ trans("Ceres::Widget.itemManufacturerSampleName") }}</b>
+            <br>
+            <p>{{ trans("Ceres::Widget.itemManufacturerSampleCompanyName") }}</p>
+            <p>{{ trans("Ceres::Widget.itemManufacturerSampleAddress") }}</p>
+            <p>{{ trans("Ceres::Widget.itemManufacturerSampleLocation") }}</p>
+            <p>{{ trans("Ceres::Widget.itemManufacturerSampleDomain") }}</p>
+            <p>{{ trans("Ceres::Widget.itemManufacturerSampleHomepage") }}</p>
+            <p>{{ trans("Ceres::Widget.itemManufacturerSamplePhone") }}</p>
+            <p>{{ trans("Ceres::Widget.itemManufacturerSamplePhone") }}</p>
+        {% else %}
+            <item-manufacturer selection-type="{{ selectionType }}"></item-manufacturer>
+        {% endif %}
+    </div>
+</div>

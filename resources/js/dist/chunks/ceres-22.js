@@ -1,67 +1,28 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[22],{
 
-/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/BasketTotals.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/basket/BasketTotals.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/pageDesign/CookieBar.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/pageDesign/CookieBar.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
-/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.number.constructor.js */ "./node_modules/core-js/modules/es.number.constructor.js");
-/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
-/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.array.slice.js */ "./node_modules/core-js/modules/es.array.slice.js");
-/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.array.from.js */ "./node_modules/core-js/modules/es.array.from.js");
-/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.string.iterator.js */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.symbol.description.js */ "./node_modules/core-js/modules/es.symbol.description.js");
-/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator.js */ "./node_modules/core-js/modules/es.symbol.iterator.js");
-/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! core-js/modules/es.array.iterator.js */ "./node_modules/core-js/modules/es.array.iterator.js");
-/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator.js */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../helper/OrderPropertyHelper */ "./resources/js/src/app/helper/OrderPropertyHelper.js");
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-
-
-
-
-
-
-
-
-
-
-
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _mixins_componentId_mixin__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../mixins/componentId.mixin */ "./resources/js/src/app/mixins/componentId.mixin.js");
 
 
 
@@ -194,245 +155,75 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "basket-totals",
+  props: {
+    styles: String,
+    classes: String,
+    consentGroups: Object,
+    showRejectAll: {
+      type: Boolean,
+      default: true
+    }
+  },
+  mixins: [_mixins_componentId_mixin__WEBPACK_IMPORTED_MODULE_7__["ComponentIdMixin"]],
+  // Experimental mixin, may be removed in the future.
   data: function data() {
     return {
-      displayedProperties: [],
-      displayedPropertiesWithoutTax: []
+      isCollapsed: true,
+      isExpanded: false
     };
   },
-  created: function created() {
-    this.setPropertiesForTotals(this.basketItems);
-  },
-  watch: {
-    basketItems: {
-      deep: true,
-      handler: function handler(newItems) {
-        this.setPropertiesForTotals(newItems);
-      }
+  computed: {
+    isVisible: function isVisible() {
+      return App.isShopBuilder || !this.$store.state.consents.hasResponse || !this.isCollapsed;
+    },
+    isShopBuilder: function isShopBuilder() {
+      return App.isShopBuilder;
+    },
+    text: function text() {
+      var links = {
+        gtc: "<a class=\"text-appearance\" href=\"" + App.urls.gtc + "\" target=\"_blank\">" + this.$translate("Ceres::Template.checkoutGtc") + "</a>",
+        cancellation: "<a class=\"text-appearance\" href=\"" + App.urls.cancellationRights + "\" target=\"_blank\">" + this.$translate("Ceres::Template.checkoutCancellationRight", {
+          "hyphen": "&shy;"
+        }) + "</a>",
+        policy: "<a class=\"text-appearance\" href=\"" + App.urls.privacyPolicy + "\" target=\"_blank\">" + this.$translate("Ceres::Template.checkoutPrivacyPolicy", {
+          "hyphen": "&shy;"
+        }) + "</a>",
+        legal: "<a class=\"text-appearance\" href=\"" + App.urls.legalDisclosure + "\" target=\"_blank\">" + this.$translate('Ceres::Template.footerLegalDisclosure') + "</a>"
+      };
+      return this.$translate("Ceres::Template.cookieBarHintText", links);
     }
   },
-  props: {
-    visibleFields: {
-      type: Array,
-      default: function _default() {
-        return ["basketValueNet", "basketValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "promotionCoupon", "totalSumNet", "vats", "additionalCosts", "totalSumGross", "salesCoupon", "openAmount", "subAmount"];
-      }
-    }
-  },
-  computed: _objectSpread({
-    currentShippingCountry: function currentShippingCountry() {
-      var shippingCountryId = this.basket.shippingCountryId;
-      return this.shippingCountries.find(function (country) {
-        return country.id === shippingCountryId;
-      });
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_6__["mapMutations"])(["storeConsents", "acceptAll", "denyAll"])), {}, {
+    close: function close() {
+      this.isCollapsed = true;
+      this.isExpanded = false;
     },
-    shopCountry: function shopCountry() {
-      var shopCountryId = this.basket.shopCountryId;
-      return this.shippingCountries.find(function (country) {
-        return country.id === shopCountryId;
-      });
+    open: function open() {
+      this.isCollapsed = false;
     },
-    deliveryExportTranslation: function deliveryExportTranslation() {
-      var shopCountry = this.shopCountry && this.shopCountry.currLangName;
-      var currentShippingCountry = this.currentShippingCountry && this.currentShippingCountry.currLangName;
-      return this.$translate("Ceres::Template.basketExportDeliveryWarning", {
-        from: shopCountry,
-        to: currentShippingCountry
+    isConsented: function isConsented(groupKey) {
+      return this.$store.getters.isConsented(groupKey + ".*");
+    },
+    toggleConsent: function toggleConsent(groupKey) {
+      this.$store.commit("toggleConsent", groupKey + ".*");
+    },
+    necessaryOnly: function necessaryOnly(obj) {
+      return obj.key === 'media' && obj.consents.every(function (consent) {
+        return consent.necessary === true;
       });
     }
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_17__["mapState"])({
-    basket: function basket(state) {
-      return state.basket.data;
-    },
-    basketItems: function basketItems(state) {
-      return state.basket.items;
-    },
-    isBasketLoading: function isBasketLoading(state) {
-      return state.basket.isBasketLoading;
-    },
-    shippingCountries: function shippingCountries(state) {
-      return state.localization.shippingCountries;
-    },
-    showNetPrices: function showNetPrices(state) {
-      return state.basket.showNetPrices;
-    }
-  })),
-  methods: {
-    calculateBaseValue: function calculateBaseValue(value, percent) {
-      return value / (100 - percent) * 100;
-    },
-    isVariationProperty: function isVariationProperty(property) {
-      return property.property.isOderProperty && App.useVariationOrderProperties;
-    },
-    isInBasketItemOrderParams: function isInBasketItemOrderParams(basketItem, property) {
-      if (!property.property.isOderProperty && !App.useVariationOrderProperties) {
-        return true;
-      }
-
-      return !!basketItem.basketItemOrderParams.find(function (param) {
-        return Number(param.propertyId) === Number(property.propertyId);
-      });
-    },
-    setPropertiesForTotals: function setPropertiesForTotals(newBasketItems) {
-      var _this = this;
-
-      this.displayedPropertiesWithoutTax = [];
-      this.displayedProperties = [];
-
-      var _iterator = _createForOfIteratorHelper(newBasketItems),
-          _step;
-
-      try {
-        var _loop = function _loop() {
-          var _basketItem$variation;
-
-          var basketItem = _step.value;
-          (_basketItem$variation = basketItem.variation.data.properties) === null || _basketItem$variation === void 0 ? void 0 : _basketItem$variation.forEach(function (property) {
-            if (_this.isInBasketItemOrderParams(basketItem, property) && (Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_18__["isAdditionalCosts"])(property) || !Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_18__["hasVat"])(property) && App.useVariationOrderProperties)) {
-              var existsIndisplayedProperties = _this.displayedProperties.find(function (entry) {
-                return entry.propertyId === property.propertyId;
-              });
-
-              var existsIndisplayedPropertiesWithoutTax = _this.displayedPropertiesWithoutTax.find(function (entry) {
-                return entry.propertyId === property.propertyId;
-              });
-
-              var existingProperty = existsIndisplayedProperties || existsIndisplayedPropertiesWithoutTax; // if new item gets added and its property already exist update quantity
-
-              if (existingProperty) {
-                existingProperty.quantity += basketItem.quantity;
-              } else {
-                var newProperty = {
-                  propertyId: property.propertyId,
-                  name: property.property.names.name,
-                  quantity: basketItem.quantity,
-                  surcharge: _this.$options.filters.propertySurcharge(basketItem.variation.data.properties, property.propertyId),
-                  vatId: property.property.vatId
-                };
-                !Object(_helper_OrderPropertyHelper__WEBPACK_IMPORTED_MODULE_18__["hasVat"])(property) ? _this.displayedPropertiesWithoutTax.push(newProperty) : _this.displayedProperties.push(newProperty);
-              }
-            }
-          });
-        };
-
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          _loop();
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-
-      this.displayedPropertiesWithoutTax.forEach(function (entry) {
-        entry.price = entry.quantity * entry.surcharge;
-      });
-      this.displayedProperties.forEach(function (entry) {
-        entry.price = entry.quantity * entry.surcharge;
-      });
-    }
-  }
+  })
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/BasketTotals.vue?vue&type=template&id=3765131c&":
-/*!******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/basket/BasketTotals.vue?vue&type=template&id=3765131c& ***!
-  \******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/pageDesign/CookieBar.vue?vue&type=template&id=cb92f282&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/pageDesign/CookieBar.vue?vue&type=template&id=cb92f282& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -444,652 +235,434 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "cmp-totals" }, [
-    _c("div", { staticClass: "h3" }, [
-      _vm._v(_vm._s(_vm.$translate("Ceres::Template.basketSum")))
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "component-loading with-icon refreshing",
-        class: { "is-loading": _vm.isBasketLoading }
-      },
-      [
-        _c(
-          "dl",
-          [
-            _vm._t("before-item-sum"),
-            _vm._v(" "),
-            (_vm.visibleFields.includes("additionalCosts") ||
-              _vm.visibleFields.includes("basket.additional_costs")) &&
-            _vm.displayedProperties.length
-              ? [
-                  _vm._l(_vm.displayedProperties, function(property) {
-                    return [
-                      _c(
-                        "dt",
-                        {
-                          key: "property-name-" + property.propertyId,
-                          class: { "font-weight-bold": _vm.showNetPrices },
-                          attrs: { "data-testing": "additionalcost-with-tax" }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(property.name) +
-                              "\n                    "
-                          )
-                        ]
-                      ),
-                      _c(
-                        "dd",
-                        {
-                          key: "property-price-" + property.propertyId,
-                          class: { "font-weight-bold": _vm.showNetPrices }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(_vm._f("currency")(property.price)) +
-                              "\n                    "
-                          )
-                        ]
-                      )
-                    ]
-                  })
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.visibleFields.includes("basketValueNet") ||
-            _vm.visibleFields.includes("basket.value_of_items_net")
-              ? [
-                  _c(
-                    "dt",
-                    { class: { "font-weight-bold": _vm.showNetPrices } },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.basketValue")
-                          ) +
-                          " " +
-                          _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          "\n                "
-                      )
-                    ]
-                  ),
-                  _c(
-                    "dd",
-                    {
-                      class: { "font-weight-bold": _vm.showNetPrices },
-                      attrs: { "data-testing": "item-sum-net" }
-                    },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm._f("currency")(
-                              _vm.calculateBaseValue(
-                                _vm.basket.itemSumNet,
-                                _vm.basket.basketRebate
-                              )
-                            )
-                          ) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.visibleFields.includes("basketValueGross") ||
-            _vm.visibleFields.includes("basket.value_of_items_gross")
-              ? [
-                  _c(
-                    "dt",
-                    { class: { "font-weight-bold": !_vm.showNetPrices } },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.basketValue")
-                          ) +
-                          " " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.basketGross")
-                          ) +
-                          "\n                "
-                      )
-                    ]
-                  ),
-                  _c(
-                    "dd",
-                    {
-                      class: { "font-weight-bold": !_vm.showNetPrices },
-                      attrs: { "data-testing": "item-sum" }
-                    },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm._f("currency")(
-                              _vm.calculateBaseValue(
-                                _vm.basket.itemSum,
-                                _vm.basket.basketRebate
-                              )
-                            )
-                          ) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            (_vm.visibleFields.includes("rebate") ||
-              _vm.visibleFields.includes("basket.rebate")) &&
-            _vm.basket.basketRebate
-              ? [
-                  _c("dt", { staticClass: "rebate-hint" }, [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(_vm.$translate("Ceres::Template.basketRebate")) +
-                        "\n                "
-                    )
-                  ]),
-                  !_vm.showNetPrices
-                    ? _c("dd", { staticClass: "rebate-hint" }, [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(
-                              _vm.$translate("Ceres::Template.basketRebateSign")
-                            ) +
-                            _vm._s(
-                              _vm._f("currency")(
-                                _vm.calculateBaseValue(
-                                  _vm.basket.itemSum,
-                                  _vm.basket.basketRebate
-                                ) - _vm.basket.itemSum
-                              )
-                            ) +
-                            "\n                "
-                        )
-                      ])
-                    : _c("dd", { staticClass: "rebate-hint" }, [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(
-                              _vm.$translate("Ceres::Template.basketRebateSign")
-                            ) +
-                            _vm._s(
-                              _vm._f("currency")(
-                                _vm.calculateBaseValue(
-                                  _vm.basket.itemSumNet,
-                                  _vm.basket.basketRebate
-                                ) - _vm.basket.itemSumNet
-                              )
-                            ) +
-                            "\n                "
-                        )
-                      ]),
+  return _c(
+    "div",
+    {
+      directives: [
+        {
+          name: "show",
+          rawName: "v-show",
+          value: !_vm.$ceres.isSSR,
+          expression: "!$ceres.isSSR"
+        }
+      ],
+      staticClass: "cookie-bar",
+      class: {
+        out: !_vm.isVisible,
+        "border-top bg-white": _vm.isVisible,
+        "fixed-bottom": !_vm.isShopBuilder || false
+      }
+    },
+    [
+      _vm.isVisible
+        ? _c("div", { staticClass: "container-max" }, [
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !_vm.isExpanded,
+                    expression: "!isExpanded"
+                  }
+                ],
+                staticClass: "row py-3",
+                class: _vm.classes,
+                style: _vm.styles
+              },
+              [
+                _c("div", { staticClass: "col-12 col-md-8" }, [
+                  _c("p", { domProps: { innerHTML: _vm._s(_vm.text) } }),
                   _vm._v(" "),
                   _c(
-                    "dt",
-                    { class: { "font-weight-bold": _vm.showNetPrices } },
+                    "div",
                     [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.basketSubTotal")
-                          ) +
-                          " " +
-                          _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          "\n                "
-                      )
-                    ]
-                  ),
-                  _c(
-                    "dd",
-                    { class: { "font-weight-bold": _vm.showNetPrices } },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm._f("currency")(_vm.basket.itemSumNet)) +
-                          "\n                "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "dt",
-                    { class: { "font-weight-bold": !_vm.showNetPrices } },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.basketSubTotal")
-                          ) +
-                          " " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.basketGross")
-                          ) +
-                          "\n                "
-                      )
-                    ]
-                  ),
-                  _c(
-                    "dd",
-                    { class: { "font-weight-bold": !_vm.showNetPrices } },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm._f("currency")(_vm.basket.itemSum)) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            _vm._t("after-item-sum"),
-            _vm._v(" "),
-            _vm._t("before-shipping-costs"),
-            _vm._v(" "),
-            _vm.visibleFields.includes("shippingCostsNet") ||
-            _vm.visibleFields.includes("basket.shipping_costs_net")
-              ? [
-                  _c(
-                    "dt",
-                    { class: { "font-weight-bold": _vm.showNetPrices } },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.$translate(
-                              "Ceres::Template.basketShippingCosts"
-                            )
-                          ) +
-                          " " +
-                          _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          "\n                "
-                      )
-                    ]
-                  ),
-                  _c(
-                    "dd",
-                    {
-                      class: { "font-weight-bold": _vm.showNetPrices },
-                      attrs: { "data-testing": "shipping-amount-net" }
-                    },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm._f("currency")(_vm.basket.shippingAmountNet)
-                          ) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.visibleFields.includes("shippingCostsGross") ||
-            _vm.visibleFields.includes("basket.shipping_costs_gross")
-              ? [
-                  _c(
-                    "dt",
-                    { class: { "font-weight-bold": !_vm.showNetPrices } },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.$translate(
-                              "Ceres::Template.basketShippingCosts"
-                            )
-                          ) +
-                          " " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.basketGross")
-                          ) +
-                          "\n                "
-                      )
-                    ]
-                  ),
-                  _c(
-                    "dd",
-                    {
-                      class: { "font-weight-bold": !_vm.showNetPrices },
-                      attrs: { "data-testing": "shipping-amount" }
-                    },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm._f("currency")(_vm.basket.shippingAmount)
-                          ) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            _vm._t("after-shipping-costs"),
-            _vm._v(" "),
-            (_vm.visibleFields.includes("promotionCoupon") ||
-              _vm.visibleFields.includes("basket.promotion_coupon")) &&
-            _vm.basket.couponCode &&
-            _vm.basket.couponCampaignType === "promotion"
-              ? [
-                  _c("dt", { staticClass: "font-weight-bold" }, [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(_vm.$translate("Ceres::Template.basketCoupon")) +
-                        "\n                "
-                    )
-                  ]),
-                  _c(
-                    "dd",
-                    {
-                      staticClass: "font-weight-bold",
-                      attrs: { "data-testing": "promotion-coupon" }
-                    },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm._f("currency")(_vm.basket.couponDiscount)
-                          ) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.visibleFields.includes("subAmount") ||
-            _vm.visibleFields.includes("basket.order_total_net") ||
-            _vm.visibleFields.includes("vats") ||
-            _vm.visibleFields.includes("basket.vat")
-              ? _c("hr")
-              : _vm._e(),
-            _vm._v(" "),
-            _vm._t("before-total-sum"),
-            _vm._v(" "),
-            _vm.visibleFields.includes("subAmount") ||
-            _vm.visibleFields.includes("basket.order_total_net")
-              ? [
-                  _c(
-                    "dt",
-                    { class: { "font-weight-bold": _vm.showNetPrices } },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.basketSubAmount")
-                          ) +
-                          " " +
-                          _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          "\n                "
-                      )
-                    ]
-                  ),
-                  _c(
-                    "dd",
-                    {
-                      class: { "font-weight-bold": _vm.showNetPrices },
-                      attrs: { "data-testing": "basket-sub-amount" }
-                    },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm._f("currency")(_vm.basket.subAmount)) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            _vm._t("before-vat"),
-            _vm._v(" "),
-            _vm._l(_vm.basket.totalVats, function(totalVat) {
-              return _vm.visibleFields.includes("vats") ||
-                _vm.visibleFields.includes("basket.vat")
-                ? [
-                    _c("dt", [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm.$translate("Ceres::Template.basketVAT")) +
-                          " " +
-                          _vm._s(totalVat.vatValue) +
-                          "%\n                "
-                      )
-                    ]),
-                    _c("dd", { attrs: { "data-testing": "vat-amount" } }, [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm._f("currency")(totalVat.vatAmount)) +
-                          "\n                "
-                      )
-                    ])
-                  ]
-                : _vm._e()
-            }),
-            _vm._v(" "),
-            _vm._t("after-vat"),
-            _vm._v(" "),
-            (_vm.visibleFields.includes("additionalCosts") ||
-              _vm.visibleFields.includes("basket.additional_costs")) &&
-            _vm.displayedPropertiesWithoutTax.length
-              ? [
-                  _vm._l(_vm.displayedPropertiesWithoutTax, function(property) {
-                    return [
+                      _vm._l(_vm.consentGroups, function(consentGroup) {
+                        return [
+                          consentGroup.consents.length > 0
+                            ? _c(
+                                "span",
+                                {
+                                  key: consentGroup.key,
+                                  staticClass:
+                                    "custom-control custom-switch custom-control-appearance d-md-inline-block mr-3"
+                                },
+                                [
+                                  _c("input", {
+                                    staticClass: "custom-control-input",
+                                    attrs: {
+                                      type: "checkbox",
+                                      id:
+                                        _vm._cid + "-group-" + consentGroup.key,
+                                      disabled:
+                                        consentGroup.necessary ||
+                                        _vm.necessaryOnly(consentGroup)
+                                    },
+                                    domProps: {
+                                      checked:
+                                        _vm.isConsented(consentGroup.key) ||
+                                        consentGroup.necessary ||
+                                        _vm.necessaryOnly(consentGroup)
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.toggleConsent(
+                                          consentGroup.key
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass: "custom-control-label",
+                                      attrs: {
+                                        for:
+                                          _vm._cid +
+                                          "-group-" +
+                                          consentGroup.key
+                                      }
+                                    },
+                                    [
+                                      consentGroup.label.length > 0
+                                        ? [
+                                            _vm._v(
+                                              "\n                                    " +
+                                                _vm._s(consentGroup.label) +
+                                                "\n                                "
+                                            )
+                                          ]
+                                        : [
+                                            _vm._v(
+                                              "\n                                    " +
+                                                _vm._s(
+                                                  _vm.$translate(
+                                                    "Ceres::Template.privacySettingsDefaultGroup"
+                                                  )
+                                                ) +
+                                                "\n                                "
+                                            )
+                                          ]
+                                    ],
+                                    2
+                                  )
+                                ]
+                              )
+                            : _vm._e()
+                        ]
+                      }),
+                      _vm._v(" "),
                       _c(
-                        "dt",
+                        "a",
                         {
-                          key: "property-name-" + property.propertyId,
-                          class: { "font-weight-bold": _vm.showNetPrices },
+                          staticClass:
+                            "text-primary text-appearance d-block d-md-inline-block",
                           attrs: {
-                            "data-testing": "additionalcost-without-tax"
+                            href: "#",
+                            "data-testing": "cookie-bar-show-more-information"
+                          },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              $event.stopPropagation()
+                              _vm.isExpanded = true
+                            }
                           }
                         },
                         [
                           _vm._v(
-                            "\n                        " +
-                              _vm._s(property.name) +
-                              "\n                    "
-                          )
-                        ]
-                      ),
-                      _c(
-                        "dd",
-                        {
-                          key: "property-price-" + property.propertyId,
-                          class: { "font-weight-bold": _vm.showNetPrices }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(_vm._f("currency")(property.price)) +
-                              "\n                    "
-                          )
-                        ]
-                      )
-                    ]
-                  })
-                ]
-              : _vm._e(),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "totalSum" },
-              [
-                _c("hr"),
-                _vm._v(" "),
-                _vm.visibleFields.includes("totalSumNet") ||
-                _vm.visibleFields.includes("basket.order_total_net")
-                  ? [
-                      _c(
-                        "dt",
-                        { class: { "font-weight-bold": _vm.showNetPrices } },
-                        [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(
-                                _vm.$translate("Ceres::Template.basketTotalSum")
-                              ) +
-                              " " +
-                              _vm._s(
-                                _vm.$translate("Ceres::Template.basketNet")
-                              ) +
-                              "\n                    "
-                          )
-                        ]
-                      ),
-                      _c(
-                        "dd",
-                        {
-                          class: { "font-weight-bold": _vm.showNetPrices },
-                          attrs: { "data-testing": "basket-amount-net" }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(
-                                _vm._f("currency")(_vm.basket.basketAmountNet)
-                              ) +
-                              "\n                    "
-                          )
-                        ]
-                      )
-                    ]
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.visibleFields.includes("totalSumGross") ||
-                _vm.visibleFields.includes("basket.order_total_gross")
-                  ? [
-                      _c(
-                        "dt",
-                        { class: { "font-weight-bold": !_vm.showNetPrices } },
-                        [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(
-                                _vm.$translate("Ceres::Template.basketTotalSum")
-                              ) +
-                              " " +
-                              _vm._s(
-                                _vm.$translate("Ceres::Template.basketGross")
-                              ) +
-                              "\n                    "
-                          )
-                        ]
-                      ),
-                      _c(
-                        "dd",
-                        {
-                          class: { "font-weight-bold": !_vm.showNetPrices },
-                          attrs: { "data-testing": "basket-amount" }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(
-                                _vm._f("currency")(_vm.basket.basketAmount)
-                              ) +
-                              "\n                    "
-                          )
-                        ]
-                      )
-                    ]
-                  : _vm._e(),
-                _vm._v(" "),
-                (_vm.visibleFields.includes("salesCoupon") ||
-                  _vm.visibleFields.includes("basket.sales_coupon")) &&
-                _vm.basket.couponCode &&
-                _vm.basket.couponCampaignType === "sales"
-                  ? [
-                      _c("dt", { staticClass: "font-weight-bold" }, [
-                        _vm._v(
-                          "\n                        " +
                             _vm._s(
-                              _vm.$translate("Ceres::Template.basketCoupon")
-                            ) +
-                            "\n                    "
-                        )
-                      ]),
-                      _c(
-                        "dd",
-                        {
-                          staticClass: "font-weight-bold",
-                          attrs: { "data-testing": "sales-coupon" }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(
-                                _vm._f("currency")(_vm.basket.couponDiscount)
-                              ) +
-                              "\n                    "
+                              _vm.$translate(
+                                "Ceres::Template.cookieBarMoreSettings"
+                              )
+                            )
                           )
                         ]
                       )
-                    ]
-                  : _vm._e(),
+                    ],
+                    2
+                  )
+                ]),
                 _vm._v(" "),
-                (_vm.visibleFields.includes("openAmount") ||
-                  _vm.visibleFields.includes("basket.open_amount")) &&
-                _vm.basket.couponCampaignType === "sales"
-                  ? [
-                      _c("dt", { staticClass: "font-weight-bold" }, [
+                _c(
+                  "div",
+                  { staticClass: "button-order col-12 col-md-4 pt-3 pt-md-0" },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "btn btn-block btn-default btn-appearance button-order-1 mb-2 mt-0",
+                        attrs: { "data-testing": "cookie-bar-accept-all" },
+                        on: {
+                          click: function($event) {
+                            _vm.acceptAll()
+                            _vm.close()
+                          }
+                        }
+                      },
+                      [
                         _vm._v(
-                          "\n                        " +
+                          "\n                    " +
                             _vm._s(
-                              _vm.$translate("Ceres::Template.basketOpenAmount")
+                              _vm.$translate(
+                                "Ceres::Template.cookieBarAcceptAll"
+                              )
                             ) +
-                            "\n                    "
+                            "\n                "
                         )
-                      ]),
-                      _c(
-                        "dd",
-                        {
-                          staticClass: "font-weight-bold",
-                          attrs: { "data-testing": "open-amount" }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(
-                                _vm._f("currency")(_vm.basket.openAmount)
-                              ) +
-                              "\n                    "
-                          )
-                        ]
-                      )
-                    ]
-                  : _vm._e()
-              ],
-              2
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm.showRejectAll
+                      ? _c(
+                          "button",
+                          {
+                            staticClass:
+                              "btn btn-block btn-default btn-appearance button-order-2 mb-2 mt-0",
+                            attrs: { "data-testing": "cookie-bar-deny-all" },
+                            on: {
+                              click: function($event) {
+                                _vm.denyAll()
+                                _vm.close()
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(
+                                  _vm.$translate(
+                                    "Ceres::Template.cookieBarDenyAll"
+                                  )
+                                ) +
+                                "\n                "
+                            )
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "btn btn-block btn-default button-order-3 mb-2 mt-0",
+                        attrs: { "data-testing": "cookie-bar-save" },
+                        on: {
+                          click: function($event) {
+                            _vm.storeConsents()
+                            _vm.close()
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(
+                              _vm.$translate("Ceres::Template.cookieBarSave")
+                            ) +
+                            "\n                "
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ]
             ),
             _vm._v(" "),
-            _vm._t("after-total-sum")
-          ],
-          2
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _vm.basket.isExportDelivery && _vm.deliveryExportTranslation
-      ? _c("div", { staticClass: "alert alert-info w-100" }, [
-          _vm._v(
-            "\n        " + _vm._s(_vm.deliveryExportTranslation) + "\n    "
-          )
-        ])
-      : _vm._e()
-  ])
+            _vm.isExpanded
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "row py-3",
+                    class: _vm.classes,
+                    style: _vm.styles
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "col-12 mb-3" },
+                      [
+                        _c("privacy-settings", {
+                          attrs: { "consent-groups": _vm.consentGroups }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-12 col-md-3" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass:
+                            "text-primary text-appearance d-inline-block mb-3",
+                          attrs: {
+                            href: "#",
+                            "data-testing": "cookie-bar-hide-more-information"
+                          },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              $event.stopPropagation()
+                              _vm.isExpanded = false
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(
+                                _vm.$translate("Ceres::Template.cookieBarBack")
+                              ) +
+                              "\n                "
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-12 col-md-9" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c(
+                          "div",
+                          { staticClass: "col-12 col-md-4 mt-2 mt-md-0" },
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "btn btn-block btn-default btn-appearance",
+                                attrs: {
+                                  "data-testing":
+                                    "cookie-bar-expanded-accept-all"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.acceptAll()
+                                    _vm.close()
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                            " +
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.cookieBarAcceptAll"
+                                      )
+                                    ) +
+                                    "\n                        "
+                                )
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm.showRejectAll
+                          ? _c(
+                              "div",
+                              { staticClass: "col-12 col-md-4 mt-2 mt-md-0" },
+                              [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-block btn-default btn-appearance",
+                                    attrs: {
+                                      "data-testing":
+                                        "cookie-bar-expanded-deny-all"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.denyAll()
+                                        _vm.close()
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                            " +
+                                        _vm._s(
+                                          _vm.$translate(
+                                            "Ceres::Template.cookieBarDenyAll"
+                                          )
+                                        ) +
+                                        "\n                        "
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-12 col-md-4" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-block btn-default",
+                              attrs: {
+                                "data-testing": "cookie-bar-expanded-save"
+                              },
+                              on: {
+                                click: function($event) {
+                                  _vm.storeConsents()
+                                  _vm.close()
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(
+                                    _vm.$translate(
+                                      "Ceres::Template.cookieBarSave"
+                                    )
+                                  ) +
+                                  "\n                        "
+                              )
+                            ]
+                          )
+                        ])
+                      ])
+                    ])
+                  ]
+                )
+              : _vm._e()
+          ])
+        : _c("div", [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary btn-appearance",
+                attrs: {
+                  "aria-label": _vm.$translate(
+                    "Ceres::Template.cookieBarPrivacySettings"
+                  )
+                },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    $event.stopPropagation()
+                    _vm.isCollapsed = false
+                  }
+                }
+              },
+              [
+                _c("i", { staticClass: "fa fa-shield float-none" }),
+                _vm._v(" "),
+                _c("span", { staticClass: "d-none d-sm-inline-block" }, [
+                  _vm._v(
+                    _vm._s(
+                      _vm.$translate("Ceres::Template.cookieBarPrivacySettings")
+                    )
+                  )
+                ])
+              ]
+            )
+          ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -1098,17 +671,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/src/app/components/basket/BasketTotals.vue":
-/*!*****************************************************************!*\
-  !*** ./resources/js/src/app/components/basket/BasketTotals.vue ***!
-  \*****************************************************************/
+/***/ "./resources/js/src/app/components/pageDesign/CookieBar.vue":
+/*!******************************************************************!*\
+  !*** ./resources/js/src/app/components/pageDesign/CookieBar.vue ***!
+  \******************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _BasketTotals_vue_vue_type_template_id_3765131c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BasketTotals.vue?vue&type=template&id=3765131c& */ "./resources/js/src/app/components/basket/BasketTotals.vue?vue&type=template&id=3765131c&");
-/* harmony import */ var _BasketTotals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BasketTotals.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/basket/BasketTotals.vue?vue&type=script&lang=js&");
+/* harmony import */ var _CookieBar_vue_vue_type_template_id_cb92f282___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CookieBar.vue?vue&type=template&id=cb92f282& */ "./resources/js/src/app/components/pageDesign/CookieBar.vue?vue&type=template&id=cb92f282&");
+/* harmony import */ var _CookieBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CookieBar.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/pageDesign/CookieBar.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -1118,9 +691,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _BasketTotals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _BasketTotals_vue_vue_type_template_id_3765131c___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _BasketTotals_vue_vue_type_template_id_3765131c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _CookieBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CookieBar_vue_vue_type_template_id_cb92f282___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CookieBar_vue_vue_type_template_id_cb92f282___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -1130,40 +703,171 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/src/app/components/basket/BasketTotals.vue"
+component.options.__file = "resources/js/src/app/components/pageDesign/CookieBar.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/src/app/components/basket/BasketTotals.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/src/app/components/basket/BasketTotals.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************/
+/***/ "./resources/js/src/app/components/pageDesign/CookieBar.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/src/app/components/pageDesign/CookieBar.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_BasketTotals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./BasketTotals.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/BasketTotals.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_BasketTotals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_CookieBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./CookieBar.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/pageDesign/CookieBar.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_CookieBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/src/app/components/basket/BasketTotals.vue?vue&type=template&id=3765131c&":
-/*!************************************************************************************************!*\
-  !*** ./resources/js/src/app/components/basket/BasketTotals.vue?vue&type=template&id=3765131c& ***!
-  \************************************************************************************************/
+/***/ "./resources/js/src/app/components/pageDesign/CookieBar.vue?vue&type=template&id=cb92f282&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/src/app/components/pageDesign/CookieBar.vue?vue&type=template&id=cb92f282& ***!
+  \*************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BasketTotals_vue_vue_type_template_id_3765131c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./BasketTotals.vue?vue&type=template&id=3765131c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/BasketTotals.vue?vue&type=template&id=3765131c&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BasketTotals_vue_vue_type_template_id_3765131c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CookieBar_vue_vue_type_template_id_cb92f282___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./CookieBar.vue?vue&type=template&id=cb92f282& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/pageDesign/CookieBar.vue?vue&type=template&id=cb92f282&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CookieBar_vue_vue_type_template_id_cb92f282___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BasketTotals_vue_vue_type_template_id_3765131c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CookieBar_vue_vue_type_template_id_cb92f282___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/src/app/mixins/componentId.mixin.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/src/app/mixins/componentId.mixin.js ***!
+  \**********************************************************/
+/*! exports provided: ComponentIdMixin */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ComponentIdMixin", function() { return ComponentIdMixin; });
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.slice.js */ "./node_modules/core-js/modules/es.array.slice.js");
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.from.js */ "./node_modules/core-js/modules/es.array.from.js");
+/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.string.iterator.js */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.symbol.description.js */ "./node_modules/core-js/modules/es.symbol.description.js");
+/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator.js */ "./node_modules/core-js/modules/es.symbol.iterator.js");
+/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.array.iterator.js */ "./node_modules/core-js/modules/es.array.iterator.js");
+/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator.js */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../helper/utils */ "./resources/js/src/app/helper/utils.js");
+
+
+
+
+
+
+
+
+
+
+
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+/**
+ * Mixing for generating unique keys, that can be similarly created on server and clientside.
+ * Collisions are possible in theory, be advised that this is an experimental mixin and may be removed in the future.
+ */
+
+var KEYS = {};
+
+if (typeof document !== "undefined") {
+  document.debug_component_ids = KEYS;
+}
+
+var ComponentIdMixin = {
+  created: function created() {
+    var _this$$vnode;
+
+    // Root elements, early exit
+    if (!this.$options._componentTag && !((_this$$vnode = this.$vnode) !== null && _this$$vnode !== void 0 && _this$$vnode.tag)) {
+      return;
+    }
+
+    this._cid = "";
+    var node = this;
+    var prevNode = null;
+
+    while (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(node)) {
+      if (!Object(_helper_utils__WEBPACK_IMPORTED_MODULE_11__["isNullOrUndefined"])(prevNode)) {
+        if (hasSiblings(node.$children, prevNode)) {
+          var occurenceIndex = getOwnOccurenceIndex(node.$children, prevNode);
+          this._cid += occurenceIndex;
+        }
+      }
+
+      this._cid += "_";
+
+      if (node.$options._componentTag) {
+        this._cid += node.$options._componentTag;
+      }
+
+      prevNode = node;
+      node = node.$parent;
+    }
+
+    if (!KEYS[this._cid]) {
+      KEYS[this._cid] = 0;
+    }
+
+    KEYS[this._cid]++;
+  }
+};
+
+function hasSiblings(potentialSiblings, node) {
+  var _iterator = _createForOfIteratorHelper(potentialSiblings),
+      _step;
+
+  try {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var potentialSibling = _step.value;
+
+      if (potentialSibling.$options._componentTag === node.$options._componentTag && potentialSibling !== node) {
+        return true;
+      }
+    }
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
+  }
+
+  return false;
+}
+
+function getOwnOccurenceIndex(potentialSiblings, node) {
+  var siblings = potentialSiblings.filter(function (potentialSibling) {
+    return potentialSibling.$options._componentTag === node.$options._componentTag;
+  });
+  return siblings.indexOf(node);
+}
 
 /***/ })
 

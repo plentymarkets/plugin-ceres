@@ -94,6 +94,10 @@ const actions =
 
                         component.data.variation.minimumOrderQuantity = setComponentMeta.minimumOrderQuantity;
                         component.data.variation.maximumOrderQuantity = setComponentMeta.maximumOrderQuantity;
+                        setComponentMeta.manufacturer = component.data.item.manufacturer;
+                        setComponentMeta.manufacturerId = component.data.item.manufacturerId;
+                        setComponentMeta.texts = component.data.texts;
+
 
                         // register a module for every set item
                         dispatch("registerItem", component);
