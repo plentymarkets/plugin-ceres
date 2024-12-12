@@ -114,6 +114,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ManufacturerDetails",
   props: {
@@ -204,6 +206,12 @@ var render = function() {
   return _c(
     "div",
     [
+      _c("h4", [
+        _vm._v(
+          _vm._s(_vm.$translate("Ceres::Template.itemManufacturerDetailsTitle"))
+        )
+      ]),
+      _vm._v(" "),
       _vm.manufacturer && _vm.isManufacturerTabShown
         ? [
             _vm.concatenatedNames

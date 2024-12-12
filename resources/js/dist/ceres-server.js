@@ -7030,6 +7030,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EuResponsibleDetails",
   props: {
@@ -8106,6 +8108,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0__);
 
+//
+//
 //
 //
 //
@@ -49956,12 +49960,17 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _vm._ssrNode(
-      _vm.manufacturer && _vm.isEuResponsibleTabShown
-        ? (_vm.concatenatedNames
-            ? '<div class="mb-2"><b>' +
-              _vm._ssrEscape(_vm._s(_vm.concatenatedNames)) +
-              "</b></div>"
-            : "<!---->") +
+      "<h4>" +
+        _vm._ssrEscape(
+          _vm._s(_vm.$translate("Ceres::Template.itemEuResponsiblePersonTitle"))
+        ) +
+        "</h4> " +
+        (_vm.manufacturer && _vm.isEuResponsibleTabShown
+          ? (_vm.concatenatedNames
+              ? '<div class="mb-2"><b>' +
+                _vm._ssrEscape(_vm._s(_vm.concatenatedNames)) +
+                "</b></div>"
+              : "<!---->") +
             ' <div class="p-0"><span>' +
             _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleName)) +
             '</span></div> <div class="p-0"><span>' +
@@ -49989,13 +49998,15 @@ var render = function() {
             '</span></div> <div class="p-0"><span>' +
             _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleContactUrl)) +
             "</span></div>"
-        : _vm._ssrEscape(
-            "\n    " +
-              _vm._s(
-                _vm.$translate("Ceres::Template.itemEuResponsibleNoInformation")
-              ) +
-              "\n  "
-          )
+          : _vm._ssrEscape(
+              "\n    " +
+                _vm._s(
+                  _vm.$translate(
+                    "Ceres::Template.itemEuResponsibleNoInformation"
+                  )
+                ) +
+                "\n  "
+            ))
     )
   ])
 }
@@ -50834,12 +50845,17 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _vm._ssrNode(
-      _vm.manufacturer && _vm.isManufacturerTabShown
-        ? (_vm.concatenatedNames
-            ? '<div class="mb-2"><b>' +
-              _vm._ssrEscape(_vm._s(_vm.concatenatedNames)) +
-              "</b></div>"
-            : "<!---->") +
+      "<h4>" +
+        _vm._ssrEscape(
+          _vm._s(_vm.$translate("Ceres::Template.itemManufacturerDetailsTitle"))
+        ) +
+        "</h4> " +
+        (_vm.manufacturer && _vm.isManufacturerTabShown
+          ? (_vm.concatenatedNames
+              ? '<div class="mb-2"><b>' +
+                _vm._ssrEscape(_vm._s(_vm.concatenatedNames)) +
+                "</b></div>"
+              : "<!---->") +
             " " +
             (_vm.manufacturer.name
               ? '<div class="p-0"><span>' +
@@ -50877,13 +50893,15 @@ var render = function() {
             '</span></div> <div class="p-0"><span>' +
             _vm._ssrEscape(_vm._s(_vm.manufacturer.contactUrl)) +
             "</span></div>"
-        : _vm._ssrEscape(
-            "\n    " +
-              _vm._s(
-                _vm.$translate("Ceres::Template.itemManufacturerNoInformation")
-              ) +
-              "\n  "
-          )
+          : _vm._ssrEscape(
+              "\n    " +
+                _vm._s(
+                  _vm.$translate(
+                    "Ceres::Template.itemManufacturerNoInformation"
+                  )
+                ) +
+                "\n  "
+            ))
     )
   ])
 }
