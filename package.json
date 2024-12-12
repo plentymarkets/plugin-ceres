@@ -81,7 +81,7 @@
     "mime-types": "^2.1.35",
     "owl.carousel": "2.2.0",
     "popper.js": "^1.16.1",
-    "vue": "^2.6.12",
+    "vue": "^3.0.0",
     "vue-lazy-hydration": "^2.0.0-beta.4",
     "vue-template-compiler": "^2.6.12",
     "vue-virtual-scroller": "^1.0.10",
