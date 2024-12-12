@@ -18,7 +18,11 @@
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div class="{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
         {% if isPreview %}
-            <h4>{{ trans("Ceres::Widget.itemManufacturerSampleName") }}</h4>
+            {% if selectionType == "manufacturer" %}
+                <h4>{{ trans("Ceres::Widget.itemManufacturerLabel") }}</h4>
+            {% else %}
+                <h4>{{ trans("Ceres::Widget.itemManufacturerEULabel") }}</h4>
+            {% endif %}
 
             <br>
            {% if selectionType == "manufacturer" %}
