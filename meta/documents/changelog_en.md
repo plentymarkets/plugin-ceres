@@ -5,6 +5,7 @@
 ### TODO
 
 - Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **CMS » ShopBuilder** menu.
+- If you are selling item bundles or item sets whose components have different manufacturers and EU responsible persons, you should use the new manufacturer data widget.
 
 ### Added
 
