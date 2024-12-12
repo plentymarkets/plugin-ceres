@@ -1,11 +1,36 @@
 # Release Notes für plentyShop LTS
 
-## v5.0.71 (YYYY-MM-DD) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.70...5.0.71" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.71 (2024-12-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.70...5.0.71" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **CMS » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+- Falls du Artikelpakete oder Artikelsets verkaufst, deren Bestandteile verschiedene Hersteller und EU-Verantwortliche besitzen, solltest du das neue Herstellerdaten-Widget nutzen.
+
+### Hinzugefügt
+
+- Es wurde ein neues Widget zum ShopBuilder hinzugefügt. Mit diesem Widget können Informationen zum Hersteller und der EU-Verantwortlichen Person auf Artikelseiten und Seiten für Artikelsets angezeigt werden.
 
 ### Behoben
 
 - Durch einen Fehler wurden Apostrophen in Herstellernamen nicht korrekt dargestellt, wenn Artikel nach Hersteller gefiltert wurden. Dies wurde behoben.
-- Wird im Schritt **Performance** des Assistenten die Einstellung **Header oben fixieren** aktiviert, wird der Header jetzt so fixiert, dass sogenannte Cumulative Layout Shifts (CLS) reduziert werden.
+- Wird im Schritt **Performance** des Assistenten die Einstellung **Header oben fixieren** aktiviert, wird der Header jetzt so fixiert, dass Cumulative Layout Shifts (CLS) reduziert werden.
+
+### Angepasste Templates
+
+- Im Zuge des Releases von plentyShop LTS 5.0.71 gab es Änderungen an Template-Dateien die für Theme-Entwickler relevant sind.  Die Verlinkung führt direkt zu der umgesetzten Änderung in der entsprechenden Datei.
+
+- [resources/views/Widgets/Item/ItemManufacturerWidget.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.70...feat/manufacturer_data_widget_multiselect#diff-ff02e6bc0d82ca1aa4a59073cb9ec8be391777e9c3e6c051f442f75bac5609bf)
+- [resources/views/PageDesign/Partials/Header/Header.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.70...feat/manufacturer_data_widget_multiselect#diff-f2a11c8bc92192c490363ceeb2b7e9a02819568c77971a10e43eedc93270014f)
+- [resources/views/PageDesign/Partials/Header/DefaultHeader.twig](https://github.com/plentymarkets/plugin-ceres/compare/5.0.70...feat/manufacturer_data_widget_multiselect#diff-19f0c0c56118a0d17212318a2cf8c6e113276dc4c61779c2317b2e7a0976db31)
+- [resources/js/src/app/components/itemList/filter/ItemFilterTagList.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.70...feat/manufacturer_data_widget_multiselect#diff-5715ad70ad29b61cb7b7226a837d9d5e3216890eb295dd1e959bad522e16458d)
+- [resources/js/src/app/components/itemList/filter/ItemFilter.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.70...feat/manufacturer_data_widget_multiselect#diff-eab69464064e5200e309de7a80e4fa43773919c60a5f31d5997058b8f7e2f478)
+- [resources/js/src/app/components/item/SingleItem.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.70...feat/manufacturer_data_widget_multiselect#diff-24dd25ca458027f998950fb4b48c9908ba241ac54bcf94c6de48c26107d86c15)
+- [resources/js/src/app/components/item/ManufacturerDetails.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.70...feat/manufacturer_data_widget_multiselect#diff-6727bd7ee1e71c6c41b337f3b969024b2fbc4495d4774666b974fa8b38a17805)
+- [resources/js/src/app/components/item/ItemManufacturerDataList.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.70...feat/manufacturer_data_widget_multiselect#diff-849da256ef9e720eff3f94e791a20576d9966f717dfe89ad60f081217d739a4d)
+- [resources/js/src/app/components/item/ItemManufacturer.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.70...feat/manufacturer_data_widget_multiselect#diff-1084eaf91cc41fbf3bb94d5b71a8f041bdccb863142735ae9d4abd162daab894)
+- [resources/js/src/app/components/item/ItemEuResponsibleDataList.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.70...feat/manufacturer_data_widget_multiselect#diff-a42f4a355d30690edda439966d9c106ed7a73374b5308ca5c0dc960b4616364c)
+- [resources/js/src/app/components/item/EuResponsibleDetails.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.70...feat/manufacturer_data_widget_multiselect#diff-9fcd8fdfbe9e61a1f65abdc15901f43342e6816d9e301ecb3e8326fc775dee07)
 
 ## v5.0.70 (2024-11-28) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.69...5.0.70" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
