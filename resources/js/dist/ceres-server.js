@@ -7835,15 +7835,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   inject: {
     itemId: {
       default: null
-    },
-    isComponent: {
-      default: false
     }
   },
   computed: {
-    isItemComponent: function isItemComponent() {
-      return this.isComponent;
-    },
     simpleItemManufacturer: function simpleItemManufacturer() {
       if (!this.isItemSet && !this.isBundle) {
         return this.$store.getters["".concat(this.itemId, "/currentItemVariation")].item.manufacturer;
@@ -10210,8 +10204,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   provide: function provide() {
     return {
-      itemId: App.isShopBuilder ? this.previewItemId : this.itemId,
-      isComponent: true
+      itemId: App.isShopBuilder ? this.previewItemId : this.itemId
     };
   },
   computed: {

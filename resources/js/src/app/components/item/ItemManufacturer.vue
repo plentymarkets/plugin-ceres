@@ -58,15 +58,9 @@ export default {
     itemId: {
       default: null
     },
-    isComponent: {
-      default: false,
-    }
   },
 
   computed: {
-    isItemComponent() {
-      return this.isComponent;
-    },
     simpleItemManufacturer() {
       if (!this.isItemSet && !this.isBundle) {
         return this.$store.getters[`${this.itemId}/currentItemVariation`].item.manufacturer;

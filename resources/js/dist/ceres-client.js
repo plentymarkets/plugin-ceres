@@ -1680,8 +1680,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   provide: function provide() {
     return {
-      itemId: App.isShopBuilder ? this.previewItemId : this.itemId,
-      isComponent: true
+      itemId: App.isShopBuilder ? this.previewItemId : this.itemId
     };
   },
   computed: {
