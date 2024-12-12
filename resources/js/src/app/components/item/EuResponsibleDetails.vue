@@ -7,32 +7,32 @@
         <b>{{ concatenatedNames }}</b>
       </div>
 
-      <div class="p-0">
+      <div v-if="visibleFieldsEu.includes('EUname')" class="p-0" >
         <span>{{ manufacturer.responsibleName }}</span>
       </div>
 
       <div class="p-0">
-        <span>{{ manufacturer.responsibleStreet }}</span>
-        <span>{{ manufacturer.responsibleHouseNo }}</span>
+        <span v-if="visibleFieldsEu.includes('EUstreet')">{{ manufacturer.responsibleStreet }}</span>
+        <span v-if="visibleFieldsEu.includes('EUhouseNr')">{{ manufacturer.responsibleHouseNo }}</span>
       </div>
 
       <div class="p-0">
-        <span>{{ manufacturer.responsiblePostCode }}</span>
-        <span>{{ manufacturer.responsibleTown }}</span>
-        <span v-if="manufacturer.responsibleCountryObject">
-        {{ manufacturer.responsibleCountryObject.name }}
-      </span>
+        <span v-if="visibleFieldsEu.includes('EUzipcode')">{{ manufacturer.responsiblePostCode }}</span>
+        <span v-if="visibleFieldsEu.includes('EUcity')">{{ manufacturer.responsibleTown }}</span>
+        <span v-if="manufacturer.responsibleCountryObject && visibleFieldsEu.includes('EUcountry')">
+          {{ manufacturer.responsibleCountryObject.name }}
+        </span>
       </div>
 
-      <div class="p-0">
+      <div v-if="visibleFieldsEu.includes('EUmail')" class="p-0" >
         <span>{{ manufacturer.responsibleEmail }}</span>
       </div>
 
-      <div class="p-0">
+      <div v-if="visibleFieldsEu.includes('EUphone')" class="p-0">
         <span>{{ manufacturer.responsiblePhoneNo }}</span>
       </div>
 
-      <div class="p-0">
+      <div v-if="visibleFieldsEu.includes('EUcontactForm')" class="p-0">
         <span>{{ manufacturer.responsibleContactUrl }}</span>
       </div>
     </template>
@@ -54,6 +54,10 @@ export default {
     concatenatedNames: {
       type: String,
       default: ''
+    },
+    visibleFieldsEu: {
+      type: Array,
+      default: () => []
     }
   },
   computed: {

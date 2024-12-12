@@ -7,45 +7,45 @@
         <b>{{ concatenatedNames }}</b>
       </div>
 
-      <div v-if="manufacturer.name" class="p-0">
+      <div v-if="manufacturer.name && visibleFields.includes('name')" class="p-0">
         <span>{{ manufacturer.name }}</span>
       </div>
-      <div v-else-if="manufacturer.externalName" class="p-0">
+      <div v-else-if="manufacturer.externalName && visibleFields.includes('name')" class="p-0">
         <span>{{ manufacturer.externalName }}</span>
       </div>
 
-      <div class="p-0">
+      <div v-if="visibleFields.includes('legalName')" class="p-0">
         <span>{{ manufacturer.legalName }}</span>
       </div>
 
       <div class="p-0">
-        <span>{{ manufacturer.street }}</span>
-        <span>{{ manufacturer.houseNo }}</span>
+        <span v-if="visibleFields.includes('street')">{{ manufacturer.street }}</span>
+        <span v-if="visibleFields.includes('houseNr')">{{ manufacturer.houseNo }}</span>
       </div>
 
       <div class="p-0">
-        <span>{{ manufacturer.postcode }}</span>
-        <span>{{ manufacturer.town }}</span>
-        <span v-if="manufacturer.countryObject">{{ manufacturer.countryObject.name }}</span>
+        <span v-if="visibleFields.includes('zipcode')">{{ manufacturer.postcode }}</span>
+        <span v-if="visibleFields.includes('city')">{{ manufacturer.town }}</span>
+        <span v-if="manufacturer.countryObject && visibleFields.includes('country')">{{ manufacturer.countryObject.name }}</span>
       </div>
 
-      <div class="p-0">
+      <div v-if="visibleFields.includes('mail')" class="p-0">
         <span>{{ manufacturer.email }}</span>
       </div>
 
-      <div class="p-0">
+      <div v-if="visibleFields.includes('homepage')" class="p-0">
         <span>{{ manufacturer.url }}</span>
       </div>
 
-      <div class="p-0">
+      <div v-if="visibleFields.includes('phone')" class="p-0">
         <span>{{ manufacturer.phoneNumber }}</span>
       </div>
 
-      <div class="p-0">
+      <div v-if="visibleFields.includes('fax')" class="p-0">
         <span>{{ manufacturer.faxNumber }}</span>
       </div>
 
-      <div class="p-0">
+      <div v-if="visibleFields.includes('contactForm')" class="p-0">
         <span>{{ manufacturer.contactUrl }}</span>
       </div>
     </template>
@@ -69,6 +69,10 @@ export default {
     concatenatedNames: {
       type: String,
       default: ''
+    },
+    visibleFields: {
+      type: Array,
+      default: () => []
     }
   },
   computed: {

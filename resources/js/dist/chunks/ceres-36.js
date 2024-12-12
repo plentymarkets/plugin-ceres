@@ -64,6 +64,12 @@ __webpack_require__.r(__webpack_exports__);
     concatenatedNames: {
       type: String,
       default: ''
+    },
+    visibleFieldsEu: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
     }
   },
   computed: {
@@ -107,47 +113,72 @@ var render = function() {
                 ])
               : _vm._e(),
             _vm._v(" "),
-            _c("div", { staticClass: "p-0" }, [
-              _c("span", [_vm._v(_vm._s(_vm.manufacturer.responsibleName))])
-            ]),
+            _vm.visibleFieldsEu.includes("EUname")
+              ? _c("div", { staticClass: "p-0" }, [
+                  _c("span", [_vm._v(_vm._s(_vm.manufacturer.responsibleName))])
+                ])
+              : _vm._e(),
             _vm._v(" "),
             _c("div", { staticClass: "p-0" }, [
-              _c("span", [_vm._v(_vm._s(_vm.manufacturer.responsibleStreet))]),
-              _vm._v(" "),
-              _c("span", [_vm._v(_vm._s(_vm.manufacturer.responsibleHouseNo))])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "p-0" }, [
-              _c("span", [
-                _vm._v(_vm._s(_vm.manufacturer.responsiblePostCode))
-              ]),
-              _vm._v(" "),
-              _c("span", [_vm._v(_vm._s(_vm.manufacturer.responsibleTown))]),
-              _vm._v(" "),
-              _vm.manufacturer.responsibleCountryObject
+              _vm.visibleFieldsEu.includes("EUstreet")
                 ? _c("span", [
-                    _vm._v(
-                      "\n      " +
-                        _vm._s(_vm.manufacturer.responsibleCountryObject.name) +
-                        "\n    "
-                    )
+                    _vm._v(_vm._s(_vm.manufacturer.responsibleStreet))
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.visibleFieldsEu.includes("EUhouseNr")
+                ? _c("span", [
+                    _vm._v(_vm._s(_vm.manufacturer.responsibleHouseNo))
                   ])
                 : _vm._e()
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "p-0" }, [
-              _c("span", [_vm._v(_vm._s(_vm.manufacturer.responsibleEmail))])
+              _vm.visibleFieldsEu.includes("EUzipcode")
+                ? _c("span", [
+                    _vm._v(_vm._s(_vm.manufacturer.responsiblePostCode))
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.visibleFieldsEu.includes("EUcity")
+                ? _c("span", [_vm._v(_vm._s(_vm.manufacturer.responsibleTown))])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.manufacturer.responsibleCountryObject &&
+              _vm.visibleFieldsEu.includes("EUcountry")
+                ? _c("span", [
+                    _vm._v(
+                      "\n        " +
+                        _vm._s(_vm.manufacturer.responsibleCountryObject.name) +
+                        "\n      "
+                    )
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "p-0" }, [
-              _c("span", [_vm._v(_vm._s(_vm.manufacturer.responsiblePhoneNo))])
-            ]),
+            _vm.visibleFieldsEu.includes("EUmail")
+              ? _c("div", { staticClass: "p-0" }, [
+                  _c("span", [
+                    _vm._v(_vm._s(_vm.manufacturer.responsibleEmail))
+                  ])
+                ])
+              : _vm._e(),
             _vm._v(" "),
-            _c("div", { staticClass: "p-0" }, [
-              _c("span", [
-                _vm._v(_vm._s(_vm.manufacturer.responsibleContactUrl))
-              ])
-            ])
+            _vm.visibleFieldsEu.includes("EUphone")
+              ? _c("div", { staticClass: "p-0" }, [
+                  _c("span", [
+                    _vm._v(_vm._s(_vm.manufacturer.responsiblePhoneNo))
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.visibleFieldsEu.includes("EUcontactForm")
+              ? _c("div", { staticClass: "p-0" }, [
+                  _c("span", [
+                    _vm._v(_vm._s(_vm.manufacturer.responsibleContactUrl))
+                  ])
+                ])
+              : _vm._e()
           ]
         : [
             _vm._v(

@@ -6,6 +6,7 @@
         <eu-responsible-details
             :manufacturer="component.manufacturer"
             :concatenated-names="component.concatenatedNames"
+            :visible-fields-eu="visibleFieldsEu"
         />
         <hr>
       </template>
@@ -24,6 +25,10 @@ export default {
   },
   props: {
     itemComponents: {
+      type: Array,
+      default: () => []
+    },
+    visibleFieldsEu: {
       type: Array,
       default: () => []
     }
