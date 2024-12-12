@@ -18,7 +18,7 @@
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div class="{% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %}>
         {% if isPreview %}
-            <b>{{ trans("Ceres::Widget.itemManufacturerSampleName") }}</b>
+            <h4>{{ trans("Ceres::Widget.itemManufacturerSampleName") }}</h4>
             <br>
             <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleCompanyName") }}</p>
             <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleAddress") }}</p>
