@@ -21,12 +21,14 @@
             <h4>{{ trans("Ceres::Widget.itemManufacturerSampleName") }}</h4>
             <br>
             <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleCompanyName") }}</p>
-            <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleAddress") }}</p>
-            <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleLocation") }}</p>
-            <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleDomain") }}</p>
+            <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleLegalName") }}</p>
+            <p class="mb-0"><span>{{ trans("Ceres::Widget.itemManufacturerSampleStreet") }} </span><span>{{ trans("Ceres::Widget.itemManufacturerSampleHouseNr") }} </span></p>
+            <p class="mb-0"><span>{{ trans("Ceres::Widget.itemManufacturerSamplePostcode") }} </span><span>{{ trans("Ceres::Widget.itemManufacturerSampleTown") }} </span><span>{{ trans("Ceres::Widget.itemManufacturerSampleCountry") }} </span></p>
+            <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleEmail") }}</p>
             <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleHomepage") }}</p>
             <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSamplePhone") }}</p>
-            <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSamplePhone") }}</p>
+            <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleFax") }}</p>
+            <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleContactForm") }}</p>
         {% else %}
             <item-manufacturer
                     :visible-fields="{{ visibleFields | json_encode }}"
