@@ -20,13 +20,13 @@
         {% if isPreview %}
             <b>{{ trans("Ceres::Widget.itemManufacturerSampleName") }}</b>
             <br>
-            <p mb-0>{{ trans("Ceres::Widget.itemManufacturerSampleCompanyName") }}</p>
-            <p mb-0>{{ trans("Ceres::Widget.itemManufacturerSampleAddress") }}</p>
-            <p mb-0>{{ trans("Ceres::Widget.itemManufacturerSampleLocation") }}</p>
-            <p mb-0>{{ trans("Ceres::Widget.itemManufacturerSampleDomain") }}</p>
-            <p mb-0>{{ trans("Ceres::Widget.itemManufacturerSampleHomepage") }}</p>
-            <p mb-0>{{ trans("Ceres::Widget.itemManufacturerSamplePhone") }}</p>
-            <p mb-0>{{ trans("Ceres::Widget.itemManufacturerSamplePhone") }}</p>
+            <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleCompanyName") }}</p>
+            <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleAddress") }}</p>
+            <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleLocation") }}</p>
+            <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleDomain") }}</p>
+            <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleHomepage") }}</p>
+            <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSamplePhone") }}</p>
+            <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSamplePhone") }}</p>
         {% else %}
             <item-manufacturer
                     :visible-fields="{{ visibleFields | json_encode }}"
