@@ -7024,6 +7024,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EuResponsibleDetails",
   props: {
@@ -7034,6 +7040,11 @@ __webpack_require__.r(__webpack_exports__);
     concatenatedNames: {
       type: String,
       default: ''
+    }
+  },
+  computed: {
+    isEuResponsibleTabShown: function isEuResponsibleTabShown() {
+      return this.manufacturer.responsibleEmail !== "" || this.manufacturer.responsibleHouseNo !== "" || this.manufacturer.responsibleName !== "" || this.manufacturer.responsiblePhoneNo !== "" || this.manufacturer.responsiblePostCode !== "" || this.manufacturer.responsibleStreet !== "" || this.manufacturer.responsibleTown !== "" || this.manufacturer.responsibleContactUrl !== "" || this.manufacturer.responsibleCountry !== 0;
     }
   }
 });
@@ -7437,6 +7448,11 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _EuResponsibleDetails_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EuResponsibleDetails.vue */ "./resources/js/src/app/components/item/EuResponsibleDetails.vue");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7921,6 +7937,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-manufacturer-data-list",
@@ -8083,6 +8103,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0__);
+
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -8143,6 +8174,11 @@ __webpack_require__.r(__webpack_exports__);
     concatenatedNames: {
       type: String,
       default: ''
+    }
+  },
+  computed: {
+    isManufacturerTabShown: function isManufacturerTabShown() {
+      return this.manufacturer.url !== "" || this.manufacturer.street !== "" || this.manufacturer.houseNo !== "" || this.manufacturer.postcode !== "" || this.manufacturer.town !== "" || this.manufacturer.countryId !== 0 || this.manufacturer.phoneNumber !== "" || this.manufacturer.faxNumber !== "" || this.manufacturer.email !== "" || this.manufacturer.legalName !== "" || this.manufacturer.contactUrl !== "" || this.manufacturer.name !== "" || this.manufacturer.externalName !== "";
     }
   }
 });
@@ -10006,7 +10042,7 @@ __webpack_require__.r(__webpack_exports__);
       return (App.config.item.itemData.includes("item.description") || App.config.item.itemData.includes("all")) && !!this.currentVariation.texts.description.length;
     },
     isManufacturerTabShown: function isManufacturerTabShown() {
-      return this.currentVariation.item.manufacturer.url !== "" || this.currentVariation.item.manufacturer.street !== "" || this.currentVariation.item.manufacturer.houseNo !== "" || this.currentVariation.item.manufacturer.postcode !== "" || this.currentVariation.item.manufacturer.town !== "" || this.currentVariation.item.manufacturer.countryId !== 0 || this.currentVariation.item.manufacturer.phoneNumber !== "" || this.currentVariation.item.manufacturer.faxNumber !== "" || this.currentVariation.item.manufacturer.email !== "" || this.currentVariation.item.manufacturer.legalName !== "" || this.currentVariation.item.manufacturer.contactUrl !== "" || this.currentVariation.item.manufacturer.name !== "";
+      return this.currentVariation.item.manufacturer.url !== "" || this.currentVariation.item.manufacturer.street !== "" || this.currentVariation.item.manufacturer.houseNo !== "" || this.currentVariation.item.manufacturer.postcode !== "" || this.currentVariation.item.manufacturer.town !== "" || this.currentVariation.item.manufacturer.countryId !== 0 || this.currentVariation.item.manufacturer.phoneNumber !== "" || this.currentVariation.item.manufacturer.faxNumber !== "" || this.currentVariation.item.manufacturer.email !== "" || this.currentVariation.item.manufacturer.legalName !== "" || this.currentVariation.item.manufacturer.contactUrl !== "" || this.currentVariation.item.manufacturer.name !== "" || this.currentVariation.item.manufacturer.externalName !== "";
     },
     isEuResponsibleTabShown: function isEuResponsibleTabShown() {
       return this.currentVariation.item.manufacturer.responsibleEmail !== "" || this.currentVariation.item.manufacturer.responsibleHouseNo !== "" || this.currentVariation.item.manufacturer.responsibleName !== "" || this.currentVariation.item.manufacturer.responsiblePhoneNo !== "" || this.currentVariation.item.manufacturer.responsiblePostCode !== "" || this.currentVariation.item.manufacturer.responsibleStreet !== "" || this.currentVariation.item.manufacturer.responsibleTown !== "" || this.currentVariation.item.manufacturer.responsibleContactUrl !== "" || this.currentVariation.item.manufacturer.responsibleCountry !== 0;
@@ -49920,38 +49956,46 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _vm._ssrNode(
-      (_vm.concatenatedNames
-        ? '<div class="mb-2"><b>' +
-          _vm._ssrEscape(_vm._s(_vm.concatenatedNames)) +
-          "</b></div>"
-        : "<!---->") +
-        ' <div class="p-0"><span>' +
-        _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleName)) +
-        '</span></div> <div class="p-0"><span>' +
-        _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleStreet)) +
-        "</span> <span>" +
-        _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleHouseNo)) +
-        '</span></div> <div class="p-0"><span>' +
-        _vm._ssrEscape(_vm._s(_vm.manufacturer.responsiblePostCode)) +
-        "</span> <span>" +
-        _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleTown)) +
-        "</span> " +
-        (_vm.manufacturer.responsibleCountryObject
-          ? "<span>" +
-            _vm._ssrEscape(
-              "\n      " +
-                _vm._s(_vm.manufacturer.responsibleCountryObject.name) +
-                "\n    "
-            ) +
-            "</span>"
-          : "<!---->") +
-        '</div> <div class="p-0"><span>' +
-        _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleEmail)) +
-        '</span></div> <div class="p-0"><span>' +
-        _vm._ssrEscape(_vm._s(_vm.manufacturer.responsiblePhoneNo)) +
-        '</span></div> <div class="p-0"><span>' +
-        _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleContactUrl)) +
-        "</span></div>"
+      _vm.manufacturer && _vm.isEuResponsibleTabShown
+        ? (_vm.concatenatedNames
+            ? '<div class="mb-2"><b>' +
+              _vm._ssrEscape(_vm._s(_vm.concatenatedNames)) +
+              "</b></div>"
+            : "<!---->") +
+            ' <div class="p-0"><span>' +
+            _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleName)) +
+            '</span></div> <div class="p-0"><span>' +
+            _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleStreet)) +
+            "</span> <span>" +
+            _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleHouseNo)) +
+            '</span></div> <div class="p-0"><span>' +
+            _vm._ssrEscape(_vm._s(_vm.manufacturer.responsiblePostCode)) +
+            "</span> <span>" +
+            _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleTown)) +
+            "</span> " +
+            (_vm.manufacturer.responsibleCountryObject
+              ? "<span>" +
+                _vm._ssrEscape(
+                  "\n      " +
+                    _vm._s(_vm.manufacturer.responsibleCountryObject.name) +
+                    "\n    "
+                ) +
+                "</span>"
+              : "<!---->") +
+            '</div> <div class="p-0"><span>' +
+            _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleEmail)) +
+            '</span></div> <div class="p-0"><span>' +
+            _vm._ssrEscape(_vm._s(_vm.manufacturer.responsiblePhoneNo)) +
+            '</span></div> <div class="p-0"><span>' +
+            _vm._ssrEscape(_vm._s(_vm.manufacturer.responsibleContactUrl)) +
+            "</span></div>"
+        : _vm._ssrEscape(
+            "\n    " +
+              _vm._s(
+                _vm.$translate("Ceres::Template.itemEuResponsibleNoInformation")
+              ) +
+              "\n  "
+          )
     )
   ])
 }
@@ -50298,27 +50342,36 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.itemComponents.length > 0
-    ? _c(
-        "div",
-        [
-          _vm._l(_vm.itemComponents, function(component) {
-            return [
-              component.manufacturer
-                ? _c("eu-responsible-details", {
-                    attrs: {
-                      manufacturer: component.manufacturer,
-                      "concatenated-names": component.concatenatedNames
-                    }
-                  })
-                : _vm._e(),
-              _vm._ssrNode(" <hr>")
-            ]
-          })
-        ],
-        2
-      )
-    : _vm._e()
+  return _c(
+    "div",
+    [
+      _vm._ssrNode(
+        "<h4>" +
+          _vm._ssrEscape(
+            _vm._s(
+              _vm.$translate("Ceres::Template.itemEuResponsiblePersonTitle")
+            )
+          ) +
+          "</h4> "
+      ),
+      _vm.itemComponents.length > 0
+        ? [
+            _vm._l(_vm.itemComponents, function(component) {
+              return [
+                _c("eu-responsible-details", {
+                  attrs: {
+                    manufacturer: component.manufacturer,
+                    "concatenated-names": component.concatenatedNames
+                  }
+                }),
+                _vm._ssrNode(" <hr>")
+              ]
+            })
+          ]
+        : _vm._e()
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -50533,27 +50586,36 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.itemComponents.length > 0
-    ? _c(
-        "div",
-        [
-          _vm._l(_vm.itemComponents, function(component) {
-            return [
-              component.manufacturer
-                ? _c("manufacturer-details", {
-                    attrs: {
-                      manufacturer: component.manufacturer,
-                      "concatenated-names": component.concatenatedNames
-                    }
-                  })
-                : _vm._e(),
-              _vm._ssrNode(" <hr>")
-            ]
-          })
-        ],
-        2
-      )
-    : _vm._e()
+  return _c(
+    "div",
+    [
+      _vm._ssrNode(
+        "<h4>" +
+          _vm._ssrEscape(
+            _vm._s(
+              _vm.$translate("Ceres::Template.itemManufacturerDetailsTitle")
+            )
+          ) +
+          "</h4> "
+      ),
+      _vm.itemComponents.length > 0
+        ? [
+            _vm._l(_vm.itemComponents, function(component) {
+              return [
+                _c("manufacturer-details", {
+                  attrs: {
+                    manufacturer: component.manufacturer,
+                    "concatenated-names": component.concatenatedNames
+                  }
+                }),
+                _vm._ssrNode(" <hr>")
+              ]
+            })
+          ]
+        : _vm._e()
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -50772,48 +50834,56 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _vm._ssrNode(
-      (_vm.concatenatedNames
-        ? '<div class="mb-2"><b>' +
-          _vm._ssrEscape(_vm._s(_vm.concatenatedNames)) +
-          "</b></div>"
-        : "<!---->") +
-        " " +
-        (_vm.manufacturer.name
-          ? '<div class="p-0"><span>' +
-            _vm._ssrEscape(_vm._s(_vm.manufacturer.name)) +
+      _vm.manufacturer && _vm.isManufacturerTabShown
+        ? (_vm.concatenatedNames
+            ? '<div class="mb-2"><b>' +
+              _vm._ssrEscape(_vm._s(_vm.concatenatedNames)) +
+              "</b></div>"
+            : "<!---->") +
+            " " +
+            (_vm.manufacturer.name
+              ? '<div class="p-0"><span>' +
+                _vm._ssrEscape(_vm._s(_vm.manufacturer.name)) +
+                "</span></div>"
+              : _vm.manufacturer.externalName
+              ? '<div class="p-0"><span>' +
+                _vm._ssrEscape(_vm._s(_vm.manufacturer.externalName)) +
+                "</span></div>"
+              : "<!---->") +
+            ' <div class="p-0"><span>' +
+            _vm._ssrEscape(_vm._s(_vm.manufacturer.legalName)) +
+            '</span></div> <div class="p-0"><span>' +
+            _vm._ssrEscape(_vm._s(_vm.manufacturer.street)) +
+            "</span> <span>" +
+            _vm._ssrEscape(_vm._s(_vm.manufacturer.houseNo)) +
+            '</span></div> <div class="p-0"><span>' +
+            _vm._ssrEscape(_vm._s(_vm.manufacturer.postcode)) +
+            "</span> <span>" +
+            _vm._ssrEscape(_vm._s(_vm.manufacturer.town)) +
+            "</span> " +
+            (_vm.manufacturer.countryObject
+              ? "<span>" +
+                _vm._ssrEscape(_vm._s(_vm.manufacturer.countryObject.name)) +
+                "</span>"
+              : "<!---->") +
+            '</div> <div class="p-0"><span>' +
+            _vm._ssrEscape(_vm._s(_vm.manufacturer.email)) +
+            '</span></div> <div class="p-0"><span>' +
+            _vm._ssrEscape(_vm._s(_vm.manufacturer.url)) +
+            '</span></div> <div class="p-0"><span>' +
+            _vm._ssrEscape(_vm._s(_vm.manufacturer.phoneNumber)) +
+            '</span></div> <div class="p-0"><span>' +
+            _vm._ssrEscape(_vm._s(_vm.manufacturer.faxNumber)) +
+            '</span></div> <div class="p-0"><span>' +
+            _vm._ssrEscape(_vm._s(_vm.manufacturer.contactUrl)) +
             "</span></div>"
-          : _vm.manufacturer.externalName
-          ? '<div class="p-0"><span>' +
-            _vm._ssrEscape(_vm._s(_vm.manufacturer.externalName)) +
-            "</span></div>"
-          : "<!---->") +
-        ' <div class="p-0"><span>' +
-        _vm._ssrEscape(_vm._s(_vm.manufacturer.legalName)) +
-        '</span></div> <div class="p-0"><span>' +
-        _vm._ssrEscape(_vm._s(_vm.manufacturer.street)) +
-        "</span> <span>" +
-        _vm._ssrEscape(_vm._s(_vm.manufacturer.houseNo)) +
-        '</span></div> <div class="p-0"><span>' +
-        _vm._ssrEscape(_vm._s(_vm.manufacturer.postcode)) +
-        "</span> <span>" +
-        _vm._ssrEscape(_vm._s(_vm.manufacturer.town)) +
-        "</span> " +
-        (_vm.manufacturer.countryObject
-          ? "<span>" +
-            _vm._ssrEscape(_vm._s(_vm.manufacturer.countryObject.name)) +
-            "</span>"
-          : "<!---->") +
-        '</div> <div class="p-0"><span>' +
-        _vm._ssrEscape(_vm._s(_vm.manufacturer.email)) +
-        '</span></div> <div class="p-0"><span>' +
-        _vm._ssrEscape(_vm._s(_vm.manufacturer.url)) +
-        '</span></div> <div class="p-0"><span>' +
-        _vm._ssrEscape(_vm._s(_vm.manufacturer.phoneNumber)) +
-        '</span></div> <div class="p-0"><span>' +
-        _vm._ssrEscape(_vm._s(_vm.manufacturer.faxNumber)) +
-        '</span></div> <div class="p-0"><span>' +
-        _vm._ssrEscape(_vm._s(_vm.manufacturer.contactUrl)) +
-        "</span></div>"
+        : _vm._ssrEscape(
+            "\n    " +
+              _vm._s(
+                _vm.$translate("Ceres::Template.itemManufacturerNoInformation")
+              ) +
+              "\n  "
+          )
     )
   ])
 }

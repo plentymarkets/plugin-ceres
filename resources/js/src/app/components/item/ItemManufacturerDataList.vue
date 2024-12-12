@@ -1,11 +1,15 @@
 <template>
-  <div v-if="itemComponents.length > 0">
-    <template v-for="component in itemComponents">
-      <manufacturer-details v-if="component.manufacturer"
-          :manufacturer="component.manufacturer"
-          :concatenated-names="component.concatenatedNames"
-      />
-      <hr>
+  <div>
+    <h4>{{ $translate("Ceres::Template.itemManufacturerDetailsTitle") }}</h4>
+
+    <template v-if="itemComponents.length > 0">
+      <template v-for="component in itemComponents">
+        <manufacturer-details
+            :manufacturer="component.manufacturer"
+            :concatenated-names="component.concatenatedNames"
+        />
+        <hr>
+      </template>
     </template>
   </div>
 </template>

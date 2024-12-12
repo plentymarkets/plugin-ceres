@@ -46,6 +46,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EuResponsibleDetails",
   props: {
@@ -56,6 +62,11 @@ __webpack_require__.r(__webpack_exports__);
     concatenatedNames: {
       type: String,
       default: ''
+    }
+  },
+  computed: {
+    isEuResponsibleTabShown: function isEuResponsibleTabShown() {
+      return this.manufacturer.responsibleEmail !== "" || this.manufacturer.responsibleHouseNo !== "" || this.manufacturer.responsibleName !== "" || this.manufacturer.responsiblePhoneNo !== "" || this.manufacturer.responsiblePostCode !== "" || this.manufacturer.responsibleStreet !== "" || this.manufacturer.responsibleTown !== "" || this.manufacturer.responsibleContactUrl !== "" || this.manufacturer.responsibleCountry !== 0;
     }
   }
 });
@@ -72,6 +83,11 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _EuResponsibleDetails_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EuResponsibleDetails.vue */ "./resources/js/src/app/components/item/EuResponsibleDetails.vue");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -117,51 +133,73 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.concatenatedNames
-      ? _c("div", { staticClass: "mb-2" }, [
-          _c("b", [_vm._v(_vm._s(_vm.concatenatedNames))])
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c("div", { staticClass: "p-0" }, [
-      _c("span", [_vm._v(_vm._s(_vm.manufacturer.responsibleName))])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "p-0" }, [
-      _c("span", [_vm._v(_vm._s(_vm.manufacturer.responsibleStreet))]),
-      _vm._v(" "),
-      _c("span", [_vm._v(_vm._s(_vm.manufacturer.responsibleHouseNo))])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "p-0" }, [
-      _c("span", [_vm._v(_vm._s(_vm.manufacturer.responsiblePostCode))]),
-      _vm._v(" "),
-      _c("span", [_vm._v(_vm._s(_vm.manufacturer.responsibleTown))]),
-      _vm._v(" "),
-      _vm.manufacturer.responsibleCountryObject
-        ? _c("span", [
+  return _c(
+    "div",
+    [
+      _vm.manufacturer && _vm.isEuResponsibleTabShown
+        ? [
+            _vm.concatenatedNames
+              ? _c("div", { staticClass: "mb-2" }, [
+                  _c("b", [_vm._v(_vm._s(_vm.concatenatedNames))])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-0" }, [
+              _c("span", [_vm._v(_vm._s(_vm.manufacturer.responsibleName))])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-0" }, [
+              _c("span", [_vm._v(_vm._s(_vm.manufacturer.responsibleStreet))]),
+              _vm._v(" "),
+              _c("span", [_vm._v(_vm._s(_vm.manufacturer.responsibleHouseNo))])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-0" }, [
+              _c("span", [
+                _vm._v(_vm._s(_vm.manufacturer.responsiblePostCode))
+              ]),
+              _vm._v(" "),
+              _c("span", [_vm._v(_vm._s(_vm.manufacturer.responsibleTown))]),
+              _vm._v(" "),
+              _vm.manufacturer.responsibleCountryObject
+                ? _c("span", [
+                    _vm._v(
+                      "\n      " +
+                        _vm._s(_vm.manufacturer.responsibleCountryObject.name) +
+                        "\n    "
+                    )
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-0" }, [
+              _c("span", [_vm._v(_vm._s(_vm.manufacturer.responsibleEmail))])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-0" }, [
+              _c("span", [_vm._v(_vm._s(_vm.manufacturer.responsiblePhoneNo))])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-0" }, [
+              _c("span", [
+                _vm._v(_vm._s(_vm.manufacturer.responsibleContactUrl))
+              ])
+            ])
+          ]
+        : [
             _vm._v(
-              "\n      " +
-                _vm._s(_vm.manufacturer.responsibleCountryObject.name) +
-                "\n    "
+              "\n    " +
+                _vm._s(
+                  _vm.$translate(
+                    "Ceres::Template.itemEuResponsibleNoInformation"
+                  )
+                ) +
+                "\n  "
             )
-          ])
-        : _vm._e()
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "p-0" }, [
-      _c("span", [_vm._v(_vm._s(_vm.manufacturer.responsibleEmail))])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "p-0" }, [
-      _c("span", [_vm._v(_vm._s(_vm.manufacturer.responsiblePhoneNo))])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "p-0" }, [
-      _c("span", [_vm._v(_vm._s(_vm.manufacturer.responsibleContactUrl))])
-    ])
-  ])
+          ]
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -185,28 +223,34 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.itemComponents.length > 0
-    ? _c(
-        "div",
-        [
-          _vm._l(_vm.itemComponents, function(component) {
-            return [
-              component.manufacturer
-                ? _c("eu-responsible-details", {
-                    attrs: {
-                      manufacturer: component.manufacturer,
-                      "concatenated-names": component.concatenatedNames
-                    }
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              _c("hr")
-            ]
-          })
-        ],
-        2
-      )
-    : _vm._e()
+  return _c(
+    "div",
+    [
+      _c("h4", [
+        _vm._v(
+          _vm._s(_vm.$translate("Ceres::Template.itemEuResponsiblePersonTitle"))
+        )
+      ]),
+      _vm._v(" "),
+      _vm.itemComponents.length > 0
+        ? [
+            _vm._l(_vm.itemComponents, function(component) {
+              return [
+                _c("eu-responsible-details", {
+                  attrs: {
+                    manufacturer: component.manufacturer,
+                    "concatenated-names": component.concatenatedNames
+                  }
+                }),
+                _vm._v(" "),
+                _c("hr")
+              ]
+            })
+          ]
+        : _vm._e()
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

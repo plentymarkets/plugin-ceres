@@ -22,6 +22,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "item-manufacturer-data-list",
@@ -49,6 +53,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0__);
+
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -110,6 +125,11 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       default: ''
     }
+  },
+  computed: {
+    isManufacturerTabShown: function isManufacturerTabShown() {
+      return this.manufacturer.url !== "" || this.manufacturer.street !== "" || this.manufacturer.houseNo !== "" || this.manufacturer.postcode !== "" || this.manufacturer.town !== "" || this.manufacturer.countryId !== 0 || this.manufacturer.phoneNumber !== "" || this.manufacturer.faxNumber !== "" || this.manufacturer.email !== "" || this.manufacturer.legalName !== "" || this.manufacturer.contactUrl !== "" || this.manufacturer.name !== "" || this.manufacturer.externalName !== "";
+    }
   }
 });
 
@@ -130,28 +150,34 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.itemComponents.length > 0
-    ? _c(
-        "div",
-        [
-          _vm._l(_vm.itemComponents, function(component) {
-            return [
-              component.manufacturer
-                ? _c("manufacturer-details", {
-                    attrs: {
-                      manufacturer: component.manufacturer,
-                      "concatenated-names": component.concatenatedNames
-                    }
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              _c("hr")
-            ]
-          })
-        ],
-        2
-      )
-    : _vm._e()
+  return _c(
+    "div",
+    [
+      _c("h4", [
+        _vm._v(
+          _vm._s(_vm.$translate("Ceres::Template.itemManufacturerDetailsTitle"))
+        )
+      ]),
+      _vm._v(" "),
+      _vm.itemComponents.length > 0
+        ? [
+            _vm._l(_vm.itemComponents, function(component) {
+              return [
+                _c("manufacturer-details", {
+                  attrs: {
+                    manufacturer: component.manufacturer,
+                    "concatenated-names": component.concatenatedNames
+                  }
+                }),
+                _vm._v(" "),
+                _c("hr")
+              ]
+            })
+          ]
+        : _vm._e()
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -175,63 +201,83 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.concatenatedNames
-      ? _c("div", { staticClass: "mb-2" }, [
-          _c("b", [_vm._v(_vm._s(_vm.concatenatedNames))])
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.manufacturer.name
-      ? _c("div", { staticClass: "p-0" }, [
-          _c("span", [_vm._v(_vm._s(_vm.manufacturer.name))])
-        ])
-      : _vm.manufacturer.externalName
-      ? _c("div", { staticClass: "p-0" }, [
-          _c("span", [_vm._v(_vm._s(_vm.manufacturer.externalName))])
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c("div", { staticClass: "p-0" }, [
-      _c("span", [_vm._v(_vm._s(_vm.manufacturer.legalName))])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "p-0" }, [
-      _c("span", [_vm._v(_vm._s(_vm.manufacturer.street))]),
-      _vm._v(" "),
-      _c("span", [_vm._v(_vm._s(_vm.manufacturer.houseNo))])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "p-0" }, [
-      _c("span", [_vm._v(_vm._s(_vm.manufacturer.postcode))]),
-      _vm._v(" "),
-      _c("span", [_vm._v(_vm._s(_vm.manufacturer.town))]),
-      _vm._v(" "),
-      _vm.manufacturer.countryObject
-        ? _c("span", [_vm._v(_vm._s(_vm.manufacturer.countryObject.name))])
-        : _vm._e()
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "p-0" }, [
-      _c("span", [_vm._v(_vm._s(_vm.manufacturer.email))])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "p-0" }, [
-      _c("span", [_vm._v(_vm._s(_vm.manufacturer.url))])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "p-0" }, [
-      _c("span", [_vm._v(_vm._s(_vm.manufacturer.phoneNumber))])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "p-0" }, [
-      _c("span", [_vm._v(_vm._s(_vm.manufacturer.faxNumber))])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "p-0" }, [
-      _c("span", [_vm._v(_vm._s(_vm.manufacturer.contactUrl))])
-    ])
-  ])
+  return _c(
+    "div",
+    [
+      _vm.manufacturer && _vm.isManufacturerTabShown
+        ? [
+            _vm.concatenatedNames
+              ? _c("div", { staticClass: "mb-2" }, [
+                  _c("b", [_vm._v(_vm._s(_vm.concatenatedNames))])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.manufacturer.name
+              ? _c("div", { staticClass: "p-0" }, [
+                  _c("span", [_vm._v(_vm._s(_vm.manufacturer.name))])
+                ])
+              : _vm.manufacturer.externalName
+              ? _c("div", { staticClass: "p-0" }, [
+                  _c("span", [_vm._v(_vm._s(_vm.manufacturer.externalName))])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-0" }, [
+              _c("span", [_vm._v(_vm._s(_vm.manufacturer.legalName))])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-0" }, [
+              _c("span", [_vm._v(_vm._s(_vm.manufacturer.street))]),
+              _vm._v(" "),
+              _c("span", [_vm._v(_vm._s(_vm.manufacturer.houseNo))])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-0" }, [
+              _c("span", [_vm._v(_vm._s(_vm.manufacturer.postcode))]),
+              _vm._v(" "),
+              _c("span", [_vm._v(_vm._s(_vm.manufacturer.town))]),
+              _vm._v(" "),
+              _vm.manufacturer.countryObject
+                ? _c("span", [
+                    _vm._v(_vm._s(_vm.manufacturer.countryObject.name))
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-0" }, [
+              _c("span", [_vm._v(_vm._s(_vm.manufacturer.email))])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-0" }, [
+              _c("span", [_vm._v(_vm._s(_vm.manufacturer.url))])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-0" }, [
+              _c("span", [_vm._v(_vm._s(_vm.manufacturer.phoneNumber))])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-0" }, [
+              _c("span", [_vm._v(_vm._s(_vm.manufacturer.faxNumber))])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-0" }, [
+              _c("span", [_vm._v(_vm._s(_vm.manufacturer.contactUrl))])
+            ])
+          ]
+        : [
+            _vm._v(
+              "\n    " +
+                _vm._s(
+                  _vm.$translate(
+                    "Ceres::Template.itemManufacturerNoInformation"
+                  )
+                ) +
+                "\n  "
+            )
+          ]
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
