@@ -109,8 +109,8 @@ class ItemManufacturerWidget extends BaseWidget
                 ->addEntry("EUcity", "Widget.itemManufacturerEUCity")
                 ->addEntry("EUcountry", "Widget.itemManufacturerEUCountry")
                 ->addEntry("EUmail", "Widget.itemManufacturerEUMail")
-                ->addEntry("EUcontactForm", "Widget.itemManufacturerEUContactForm")
                 ->addEntry("EUphone", "Widget.itemManufacturerEUPhone")
+                ->addEntry("EUcontactForm", "Widget.itemManufacturerEUContactForm")
                 ->toArray()
         );
 
