@@ -26,7 +26,7 @@
                         <img class="img-fluid" v-if="shippingProfile.icon" :src="shippingProfile.icon" :alt="shippingProfile.parcelServiceName" :title="shippingProfile.parcelServiceName">
                     </div><!--
                     --><div class="content">
-                        <span v-html="${ shippingProfile.parcelServiceName } - ${ shippingProfile.parcelServicePresetName }"></span>
+                        <span v-html="shippingProfile.parcelServiceName } - shippingProfile.parcelServicePresetName"></span>
                         <div>
                             <small>
                                 ${ shippingProfile.shippingAmount | currency }
