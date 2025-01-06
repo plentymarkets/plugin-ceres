@@ -75,10 +75,10 @@
                                     {{ $translate("Ceres::Template.itemSetPrice", { price: itemSetPrice }) }} {{ $translate("Ceres::Template.itemFootnote") }}
                                 </template>
                                 <template v-else-if="itemGraduatedPriceisCheapestSorting">
-                                    {{ $translate("Ceres::Template.itemFromPrice", { price: itemPriceGraduated }) }} {{ $translate("Ceres::Template.itemFootnote") }}
+                                    <span>{{ $translate("Ceres::Template.itemFromPrice", { price: itemPriceGraduated }) }}</span> {{ $translate("Ceres::Template.itemFootnote") }}
                                 </template>
                                 <template v-else-if="itemGraduatedPricesalableVariationCount">
-                                    {{ $translate("Ceres::Template.itemFromPrice", { price: itemPriceGraduated }) }} {{ $translate("Ceres::Template.itemFootnote") }}
+                                    <span>{{ $translate("Ceres::Template.itemFromPrice", { price: itemPriceGraduated }) }}</span> {{ $translate("Ceres::Template.itemFootnote") }}
                                 </template>
                                 <template v-else>
                                     {{ item.prices.default.unitPrice.formatted | specialOffer(item.prices, "unitPrice", "formatted") }} {{ $translate("Ceres::Template.itemFootnote") }}
