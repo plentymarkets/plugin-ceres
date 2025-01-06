@@ -1,5 +1,10 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.72 (2025-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.71...5.0.72" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+- Es wurde ein `<span>` Element hinzugefügt um die Übersetzung "ab :price" (`Ceres::Template.itemSetPrice`) mit CSS identifizieren zu können.
+
 ## v5.0.71 (2024-12-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.70...5.0.71" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
