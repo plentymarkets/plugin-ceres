@@ -164,6 +164,7 @@ class PaginationStep extends Step
         return [
             "title" => "Wizard.additionalSortingOption",
             "description" => "Wizard.additionalSortingOptionDescription",
+            "condition" => "client == 0",
             "form" => [
                 "pagination_sortingMonthlySales" => [
                     "type" => "select",
