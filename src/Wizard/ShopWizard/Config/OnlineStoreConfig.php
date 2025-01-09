@@ -40,7 +40,6 @@ class OnlineStoreConfig
         'globalMaxAge12Hours'  => 12,
         'globalMaxAge24Hours'  => 24,
         'globalMaxAge1Week'    => 168,
-        'globalMaxAgeInfinite' => -1
     ];
     
     private static $itemBundles = [

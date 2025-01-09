@@ -142,7 +142,7 @@
                     "required": false,
                     "label": "Config.globalUserDataHashMaxAgeLabel",
                     "options": {
-                        "defaultValue": 24,
+                        "defaultValue": 1,
                         "selectBoxValues": [
                             {
                                 "value": 1,
@@ -163,10 +163,6 @@
                             {
                                 "value": 168,
                                 "caption": "Config.globalMaxAge1Week"
-                            },
-                            {
-                                "value": -1,
-                                "caption": "Config.globalMaxAgeInfinite"
                             }
                         ]
                     }
