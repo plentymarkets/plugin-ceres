@@ -4,6 +4,7 @@
         :data-iesrc="defaultImageUrl"
         :data-picture-class="pictureClass"
         :data-alt="alt"
+        :aria-label="ariaLabel"
         :data-title="title"
         :data-height="getHeight()"
         :data-width="getWidth()"
@@ -52,6 +53,10 @@ export default {
             type: String,
             default: null
         },
+        ariaLabel: {
+            type: String,
+            default: null
+        },
         title: {
             type: String,
             default: null
@@ -72,6 +77,7 @@ export default {
             receivedImageExtension: null,
             browserSupportedImgExtension: null,
             defaultImageUrl: this.imageUrl,
+            ariaLabel: this.ariaLabel,
             avifSupported: false,
             avifExtension: 'avif',
             webpSupported: false,
