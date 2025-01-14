@@ -398,7 +398,7 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.top.unit', null)
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
-            ->withSetting('selectionType', 'euResponsible')
+            ->withSetting('selectionType', 'eu-responsible')
             ->withSetting('visibleFields', ['EUname', 'EUstreet']);
 
         $this->tabWidget->createChild($uuidManufacturer, 'Ceres::ItemManufacturerWidget')
