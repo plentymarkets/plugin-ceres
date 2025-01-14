@@ -1,8 +1,14 @@
 <template>
-    <div class="mobile-navigation" :class="{ 'open': isMobileNavigationOpen }">
+    <div
+        class="mobile-navigation"
+        :class="{ 'open': isMobileNavigationOpen }"
+        aria-labelledby="mobile-navigation-toggler"
+        itemscope
+        itemtype="https://schema.org/SiteNavigationElement"
+    >
         <div v-show="isNavigationInitialized">
             <ul class="breadcrumb d-block px-3 py-0">
-                <li class="btn-close" @click="closeNavigation()"></li>
+                <li class="btn-close" @click="closeNavigation()" :aria-label="$translate('Ceres::Template.closeIcon')"></li>
 
                 <li class="breadcrumb-item" @click="slideTo(null, true)">
                     <i class="fa fa-home" aria-hidden="true"></i>
@@ -20,7 +26,7 @@
                 </li>
 
                 <li class="ddown" v-for="category in dataContainer1.categories">
-                    <a :href="getCategoryUrl(category.url)">{{ category.details[0].name }}</a>
+                    <a :href="getCategoryUrl(category.url)" itemprop="name">{{ category.details[0].name }}</a>
                     <span class="nav-direction" v-if="category.childCount" @click="slideTo(category)">
                         <i class="fa fa-lg fa-caret-right" aria-hidden="true"></i>
                     </span>
@@ -45,7 +51,7 @@
                 </li>
 
                 <li  class="ddown" v-for="category in dataContainer2.categories">
-                    <a :href="getCategoryUrl(category.url)">{{ category.details[0].name }}</a>
+                    <a :href="getCategoryUrl(category.url)" itemprop="name">{{ category.details[0].name }}</a>
                     <span class="nav-direction" v-if="category.childCount" @click="slideTo(category)">
                         <i class="fa fa-lg fa-caret-right" aria-hidden="true"></i>
                     </span>
@@ -65,7 +71,7 @@
 
         <template v-if="!isNavigationInitialized">
             <ul class="breadcrumb">
-                <li class="btn-close" @click="closeNavigation()"></li>
+                <li class="btn-close" @click="closeNavigation()" :aria-label="$translate('Ceres::Template.closeIcon')"></li>
 
                 <li class="breadcrumb-item">
                     <i class="fa fa-home" aria-hidden="true"></i>
