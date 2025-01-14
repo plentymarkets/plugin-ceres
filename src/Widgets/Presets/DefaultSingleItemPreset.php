@@ -399,7 +399,17 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
             ->withSetting('selectionType', 'eu-responsible')
-            ->withSetting('visibleFields', ['EUname', 'EUstreet']);
+            ->withSetting('visibleFields', [
+                ManufacturerDataFieldProvider::RESPONSIBLE_NAME,
+                ManufacturerDataFieldProvider::RESPONSIBLE_STREET,
+                ManufacturerDataFieldProvider::RESPONSIBLE_HOUSE_NO,
+                ManufacturerDataFieldProvider::RESPONSIBLE_TOWN,
+                ManufacturerDataFieldProvider::RESPONSIBLE_COUNTRY,
+                ManufacturerDataFieldProvider::RESPONSIBLE_POST_CODE,
+                ManufacturerDataFieldProvider::RESPONSIBLE_EMAIL,
+                ManufacturerDataFieldProvider::RESPONSIBLE_PHONE,
+                ManufacturerDataFieldProvider::RESPONSIBLE_CONTACT_URL
+            ]);
 
         $this->tabWidget->createChild($uuidManufacturer, 'Ceres::ItemManufacturerWidget')
             ->withSetting('appearance','none')
@@ -413,7 +423,21 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
             ->withSetting('selectionType', 'manufacturer')
-            ->withSetting('visibleFields', ['name', 'street']);
+            ->withSetting('visibleFields', [
+                ManufacturerDataFieldProvider::NAME,
+                ManufacturerDataFieldProvider::LEGAL_NAME,
+                ManufacturerDataFieldProvider::STREET,
+                ManufacturerDataFieldProvider::HOUSE_NO,
+                ManufacturerDataFieldProvider::POST_CODE,
+                ManufacturerDataFieldProvider::TOWN,
+                ManufacturerDataFieldProvider::COUNTRY,
+                ManufacturerDataFieldProvider::EMAIL,
+                ManufacturerDataFieldProvider::HOMEPAGE,
+                ManufacturerDataFieldProvider::PHONE,
+                ManufacturerDataFieldProvider::FAX_NO,
+                ManufacturerDataFieldProvider::CONTACT_URL,
+                ManufacturerDataFieldProvider::NAME
+            ]);
    }
 
     private function createAttributeWidget()
