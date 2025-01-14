@@ -1,6 +1,7 @@
 {% set companyLogo  = config("Ceres.header.company_logo") %}
 {% set showHeaderNavBar = config("Ceres.header.show_navbars") %}
 {% set companyName  = trans("Ceres::Template.headerCompanyName") %}
+{% set menuLabel  = trans("Ceres::Template.menuLabel") %}
 {% set useMegaMenu  = config("Ceres.header.megamenu_levels") > 1 %}
 
 <nav class="navbar header-fw p-0 border-bottom{% if useMegaMenu %} megamenu{% else %} normalmenu{% endif %}">
@@ -12,7 +13,7 @@
                         <img alt="{{ companyName }}" src="{{ companyLogo }}" class="img-fluid" />
                     </a>
                 {% endif %} 
-                <button v-open-mobile-navigation class="navbar-toggler d-lg-none p-3" type="button" aria-label="{{ trans("Ceres::Template.menuLabel") }}">
+                <button v-open-mobile-navigation class="navbar-toggler d-lg-none p-3" type="button" aria-label="{{ menuLabel }}">
                     &#9776;
                 </button>
             </div>

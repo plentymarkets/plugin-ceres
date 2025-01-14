@@ -54,7 +54,7 @@
                         {{ category.details[0].name }}
                     </a>
                     {% if maxItemsPerStage[1] > 0 %}
-                    <ul data-level="1" class="collapse nav-dropdown-{{ counter }}" aria-label="{{ category.details[0].name }}">
+                    <ul data-level="1" class="collapse nav-dropdown-{{ counter }}">
                         {% set counter = counter + 1 %}
                         {% if megaMenuLevels == 1 %}
                             {% for child in category.children %}

@@ -2,6 +2,10 @@
 
 ## v5.0.72 (2025-XX-XX) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.71...5.0.72" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
+### Added
+
+- Accessibility improvements
+
 ### Geändert
 
 - We removed the Option "always" for the setting **Validity of URLs to change password and email address** in the plugin settings. The setting is now always set to 1 week.
