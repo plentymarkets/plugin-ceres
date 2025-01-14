@@ -367,25 +367,51 @@ class DefaultSingleItemPreset implements ContentPreset
             ]);
 
         /* Generates EU Manufacturer fields */
-        $this->euManufacturerBuilder->withName();
-        $this->euManufacturerBuilder->withDetailedAddress();
-        $this->euManufacturerBuilder->withGeneralAddress();
-        $this->euManufacturerBuilder->withMail();
-        $this->euManufacturerBuilder->withPhoneNumber();
-        $this->euManufacturerBuilder->withContactUrl();
-        $this->euManufacturerBuilder->build($this->tabWidget, $uuidEuResponsiblePerson);
+//        $this->euManufacturerBuilder->withName();
+//        $this->euManufacturerBuilder->withDetailedAddress();
+//        $this->euManufacturerBuilder->withGeneralAddress();
+//        $this->euManufacturerBuilder->withMail();
+//        $this->euManufacturerBuilder->withPhoneNumber();
+//        $this->euManufacturerBuilder->withContactUrl();
+//        $this->euManufacturerBuilder->build($this->tabWidget, $uuidEuResponsiblePerson);
 
         /* Generates base manufacturer fields */
-        $this->manufacturerBuilder->withName();
-        $this->manufacturerBuilder->withLegalName();
-        $this->manufacturerBuilder->withDetailedAddress();
-        $this->manufacturerBuilder->withGeneralAddress();
-        $this->manufacturerBuilder->withEmail();
-        $this->manufacturerBuilder->withHomepage();
-        $this->manufacturerBuilder->withPhoneNumber();
-        $this->manufacturerBuilder->withFaxNumber();
-        $this->manufacturerBuilder->withContactUrl();
-        $this->manufacturerBuilder->build($this->tabWidget, $uuidManufacturer);
+//        $this->manufacturerBuilder->withName();
+//        $this->manufacturerBuilder->withLegalName();
+//        $this->manufacturerBuilder->withDetailedAddress();
+//        $this->manufacturerBuilder->withGeneralAddress();
+//        $this->manufacturerBuilder->withEmail();
+//        $this->manufacturerBuilder->withHomepage();
+//        $this->manufacturerBuilder->withPhoneNumber();
+//        $this->manufacturerBuilder->withFaxNumber();
+//        $this->manufacturerBuilder->withContactUrl();
+//        $this->manufacturerBuilder->build($this->tabWidget, $uuidManufacturer);
+        
+        $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::ItemManufacturerWidget')
+            ->withSetting('appearance','none')
+            ->withSetting('spacing.customPadding', true)
+            ->withSetting('spacing.padding.left.value', 0)
+            ->withSetting('spacing.padding.left.unit', null)
+            ->withSetting('spacing.padding.right.value', 0)
+            ->withSetting('spacing.padding.right.unit', null)
+            ->withSetting('spacing.padding.top.value', 0)
+            ->withSetting('spacing.padding.top.unit', null)
+            ->withSetting('spacing.padding.bottom.value', 0)
+            ->withSetting('spacing.padding.bottom.unit', null)
+            ->withSetting('selectionType', 'euResponsible');
+
+        $this->tabWidget->createChild($uuidManufacturer, 'Ceres::ItemManufacturerWidget')
+            ->withSetting('appearance','none')
+            ->withSetting('spacing.customPadding', true)
+            ->withSetting('spacing.padding.left.value', 0)
+            ->withSetting('spacing.padding.left.unit', null)
+            ->withSetting('spacing.padding.right.value', 0)
+            ->withSetting('spacing.padding.right.unit', null)
+            ->withSetting('spacing.padding.top.value', 0)
+            ->withSetting('spacing.padding.top.unit', null)
+            ->withSetting('spacing.padding.bottom.value', 0)
+            ->withSetting('spacing.padding.bottom.unit', null)
+            ->withSetting('selectionType', 'manufacturer');
    }
 
     private function createAttributeWidget()
