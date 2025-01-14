@@ -400,15 +400,15 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.bottom.unit', null)
             ->withSetting('selectionType', 'eu-responsible')
             ->withSetting('visibleFields', [
-                ManufacturerDataFieldProvider::RESPONSIBLE_NAME,
-                ManufacturerDataFieldProvider::RESPONSIBLE_STREET,
-                ManufacturerDataFieldProvider::RESPONSIBLE_HOUSE_NO,
-                ManufacturerDataFieldProvider::RESPONSIBLE_TOWN,
-                ManufacturerDataFieldProvider::RESPONSIBLE_COUNTRY,
-                ManufacturerDataFieldProvider::RESPONSIBLE_POST_CODE,
-                ManufacturerDataFieldProvider::RESPONSIBLE_EMAIL,
-                ManufacturerDataFieldProvider::RESPONSIBLE_PHONE,
-                ManufacturerDataFieldProvider::RESPONSIBLE_CONTACT_URL
+                "EUname",
+                "EUstreet",
+                "EUhouseNr",
+                "EUzipcode",
+                "EUcity",
+                "EUcountry",
+                "EUmail",
+                "EUcontactForm",
+                "EUphone",
             ]);
 
         $this->tabWidget->createChild($uuidManufacturer, 'Ceres::ItemManufacturerWidget')
@@ -424,19 +424,18 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.bottom.unit', null)
             ->withSetting('selectionType', 'manufacturer')
             ->withSetting('visibleFields', [
-                ManufacturerDataFieldProvider::NAME,
-                ManufacturerDataFieldProvider::LEGAL_NAME,
-                ManufacturerDataFieldProvider::STREET,
-                ManufacturerDataFieldProvider::HOUSE_NO,
-                ManufacturerDataFieldProvider::POST_CODE,
-                ManufacturerDataFieldProvider::TOWN,
-                ManufacturerDataFieldProvider::COUNTRY,
-                ManufacturerDataFieldProvider::EMAIL,
-                ManufacturerDataFieldProvider::HOMEPAGE,
-                ManufacturerDataFieldProvider::PHONE,
-                ManufacturerDataFieldProvider::FAX_NO,
-                ManufacturerDataFieldProvider::CONTACT_URL,
-                ManufacturerDataFieldProvider::NAME
+                "name",
+                "legalName",
+                "street",
+                "houseNr",
+                "zipcode",
+                "city",
+                "country",
+                "mail",
+                "homepage",
+                "phone",
+                "fax",
+                "contactForm"
             ]);
    }
 
