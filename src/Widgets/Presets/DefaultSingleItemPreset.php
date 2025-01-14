@@ -399,7 +399,7 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
             ->withSetting('selectionType', 'eu-responsible')
-            ->withSetting('visibleFields', [
+            ->withSetting('visibleFieldsEU', [
                 "EUname",
                 "EUstreet",
                 "EUhouseNr",
