@@ -1,11 +1,12 @@
 <template>
     <div>
+        test label2
         <picture
             v-if="!isBackgroundImage"
             :data-iesrc="defaultImageUrl"
             :data-picture-class="pictureClass"
             :data-alt="alt"
-            aria-label="Default Aria Label"
+            :aria-label="title && title !== '' ? title : 'Default Aria Label'"
             :data-title="title"
             :data-height="getHeight()"
             :data-width="getWidth()"
