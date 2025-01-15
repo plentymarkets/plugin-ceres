@@ -7,8 +7,7 @@
         :data-title="title"
         :data-height="getHeight()"
         :data-width="getWidth()"
-        :id="uuid"
-        :aria-label="alt || 'Default Aria Label'">
+        :id="uuid">
         <slot name="additionalimages"></slot>
         <source :srcset="defaultImageUrl" :type="mimeType(defaultImageUrl)">
         <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl" :type="mimeType(imageUrl)">
@@ -110,6 +109,12 @@ export default {
                 }));
             }
         }));
+        this.$nextTick(() => {
+            const pictureElement = this.$el.querySelector('picture');
+            if (pictureElement) {
+                pictureElement.setAttribute('aria-label', this.alt || 'Default Aria Label');
+            }
+        });
     },
     watch:
     {
