@@ -153,8 +153,8 @@
                         <carousel :items-per-page="{{ itemsPerPage }}">
                             {{ Twig.for("item", "itemList.documents") }}
                                 <template slot="items">
+                                    {{ Twig.print("item.data | json_encode") }}
                                     <category-item
-                                        {{ Twig.print("item.data | json_encode") }}
                                         {% if isPreview %}:item-data="{{ Twig.print("item.data | json_encode") }}"{% else %}
                                         item-data-ref="{{ Twig.print("item.data | json_data") }}"{% endif %}
                                         :decimal-count="{{ Twig.print("ceresConfig.item.storeSpecial | default(0) | json_encode") }}"
