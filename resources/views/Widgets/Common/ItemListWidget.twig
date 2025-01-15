@@ -70,8 +70,6 @@
 
 <div class="widget widget-item-list widget-{{ widget.settings.appearance.mobile | default('primary') }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingMargin | length > 0 %} {{ spacingMargin }}{% endif %}{% if noVat %} item-vat-hidden{% endif %}{% if grayBackground %} item-bg-gray{% endif %}{% if outline %} btn-outline{% endif %}" {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div class="widget-inner">
-        {{ Twig.print("itemList.documents | json_encode") }}
-
         {% if listType == "last_seen" and not isPreview %}
             {# render vue component for last seen items #}
             <intersect>
@@ -111,6 +109,7 @@
         {% else %}
             {{ Twig.set("itemList", Twig.call("services.itemList.getItemList", [requestedListType, itemListId, itemSort, maxItems, crossSellingRelationType]) ) }}
             {{ Twig.if("itemList.documents is not empty or #{ isPreview | json_encode }") }}
+            {{ Twig.print("itemList.documents | json_encode") }}
 
                 {# render static item lists #}
                 {% if headlineStyle != "no-caption" %}
