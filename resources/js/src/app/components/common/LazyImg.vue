@@ -1,4 +1,5 @@
 <template>
+    <div>
     <picture
         v-if="!isBackgroundImage"
         :data-iesrc="defaultImageUrl"
@@ -19,6 +20,7 @@
     <div v-else :data-background-image="defaultImageUrl || fallbackUrl" :class="pictureClass">
         <slot></slot>
     </div>
+</div>
 </template>
 
 <script>
