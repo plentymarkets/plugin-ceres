@@ -107,7 +107,6 @@
                 </template>
             </intersect>
         {% else %}
-            {% if isPreview %} {{ Twig.set("maxItems", 4) }} {% endif %}
             {{ Twig.set("itemList", Twig.call("services.itemList.getItemList", [requestedListType, itemListId, itemSort, maxItems, crossSellingRelationType]) ) }}
             {{ Twig.if("itemList.documents is not empty or #{ isPreview | json_encode }") }}
 
@@ -155,6 +154,7 @@
                             {{ Twig.for("item", "itemList.documents") }}
                                 <template slot="items">
                                     <category-item
+                                        {{ Twig.print("item.data | json_encode") }}
                                         {% if isPreview %}:item-data="{{ Twig.print("item.data | json_encode") }}"{% else %}
                                         item-data-ref="{{ Twig.print("item.data | json_data") }}"{% endif %}
                                         :decimal-count="{{ Twig.print("ceresConfig.item.storeSpecial | default(0) | json_encode") }}"
