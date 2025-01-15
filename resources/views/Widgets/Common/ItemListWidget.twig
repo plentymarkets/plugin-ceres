@@ -150,10 +150,10 @@
                         {{ Twig.endfor() }}
                     {% endif %}
                     <intersect>
+                        {{ Twig.print("itemList.documents | json_encode") }}
                         <carousel :items-per-page="{{ itemsPerPage }}">
                             {{ Twig.for("item", "itemList.documents") }}
                                 <template slot="items">
-                                    {{ Twig.print("item.data | json_encode") }}
                                     <category-item
                                         {% if isPreview %}:item-data="{{ Twig.print("item.data | json_encode") }}"{% else %}
                                         item-data-ref="{{ Twig.print("item.data | json_data") }}"{% endif %}
