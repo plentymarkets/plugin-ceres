@@ -1,19 +1,21 @@
 <template>
-    <picture
-        v-if="!isBackgroundImage"
-        :data-iesrc="defaultImageUrl"
-        :data-picture-class="pictureClass"
-        :data-alt="alt"
-        :data-title="title"
-        :data-height="getHeight()"
-        :data-width="getWidth()"
-        :id="uuid">
-        <slot name="additionalimages"></slot>
-        <source :srcset="defaultImageUrl" :type="mimeType(defaultImageUrl)">
-        <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl" :type="mimeType(imageUrl)">
-        <source v-if="fallbackUrl" :srcset="fallbackUrl" :type="mimeType(fallbackUrl)">
-        <img v-if="receivedImageExtension === 'tif'" :src="defaultImageUrl" :alt="alt" :height="getHeight()" :width="getWidth()" type="image/tiff" class="mw-100 h-auto">
-    </picture>
+    <div v-if="!isBackgroundImage" class="picture-wrapper">
+        <picture
+            :data-iesrc="defaultImageUrl"
+            :data-picture-class="pictureClass"
+            :data-alt="alt"
+            :data-title="title"
+            :data-height="getHeight()"
+            :data-width="getWidth()"
+            :aria-label="alt || 'Default Aria Label'"
+            :id="uuid">
+            <slot name="additionalimages"></slot>
+            <source :srcset="defaultImageUrl" :type="mimeType(defaultImageUrl)">
+            <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl" :type="mimeType(imageUrl)">
+            <source v-if="fallbackUrl" :srcset="fallbackUrl" :type="mimeType(fallbackUrl)">
+            <img v-if="receivedImageExtension === 'tif'" :src="defaultImageUrl" :alt="alt" :height="getHeight()" :width="getWidth()" type="image/tiff" class="mw-100 h-auto">
+        </picture>
+    </div>
 
     <div v-else :data-background-image="defaultImageUrl || fallbackUrl" :class="pictureClass">
         <slot></slot>
@@ -241,3 +243,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.picture-wrapper {
+    display: inline-block;
+}
+</style>
