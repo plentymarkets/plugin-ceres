@@ -4,7 +4,7 @@
         :data-iesrc="defaultImageUrl"
         :data-picture-class="pictureClass"
         :data-alt="alt"
-        :aria-label="alt"
+        :aria-label="title ?? 'Default Aria Label'"
         :data-title="title"
         :data-height="getHeight()"
         :data-width="getWidth()"
