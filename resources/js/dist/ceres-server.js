@@ -14703,6 +14703,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -56819,7 +56825,12 @@ var render = function() {
     "div",
     {
       staticClass: "mobile-navigation",
-      class: { open: _vm.isMobileNavigationOpen }
+      class: { open: _vm.isMobileNavigationOpen },
+      attrs: {
+        "aria-labelledby": "mobile-navigation-toggler",
+        itemscope: "",
+        itemtype: "https://schema.org/SiteNavigationElement"
+      }
     },
     [
       _vm._ssrNode(
@@ -56831,7 +56842,12 @@ var render = function() {
         "</div>",
         [
           _vm._ssrNode(
-            '<ul class="breadcrumb d-block px-3 py-0"><li class="btn-close"></li> <li class="breadcrumb-item"><i aria-hidden="true" class="fa fa-home"></i></li> ' +
+            '<ul class="breadcrumb d-block px-3 py-0"><li' +
+              _vm._ssrAttr(
+                "aria-label",
+                _vm.$translate("Ceres::Template.closeIcon")
+              ) +
+              ' class="btn-close"></li> <li class="breadcrumb-item"><i aria-hidden="true" class="fa fa-home"></i></li> ' +
               _vm._ssrList(_vm.breadcrumbs, function(breadcrumb) {
                 return (
                   '<li class="breadcrumb-item">' +
@@ -56864,7 +56880,7 @@ var render = function() {
                     return (
                       '<li class="ddown"><a' +
                       _vm._ssrAttr("href", _vm.getCategoryUrl(category.url)) +
-                      ">" +
+                      ' itemprop="name">' +
                       _vm._ssrEscape(_vm._s(category.details[0].name)) +
                       "</a> " +
                       (category.childCount
@@ -56929,7 +56945,7 @@ var render = function() {
                     return (
                       '<li class="ddown"><a' +
                       _vm._ssrAttr("href", _vm.getCategoryUrl(category.url)) +
-                      ">" +
+                      ' itemprop="name">' +
                       _vm._ssrEscape(_vm._s(category.details[0].name)) +
                       "</a> " +
                       (category.childCount
@@ -56981,7 +56997,12 @@ var render = function() {
       !_vm.isNavigationInitialized
         ? [
             _vm._ssrNode(
-              '<ul class="breadcrumb"><li class="btn-close"></li> <li class="breadcrumb-item"><i aria-hidden="true" class="fa fa-home"></i></li></ul> '
+              '<ul class="breadcrumb"><li' +
+                _vm._ssrAttr(
+                  "aria-label",
+                  _vm.$translate("Ceres::Template.closeIcon")
+                ) +
+                ' class="btn-close"></li> <li class="breadcrumb-item"><i aria-hidden="true" class="fa fa-home"></i></li></ul> '
             ),
             _c("loading-animation")
           ]

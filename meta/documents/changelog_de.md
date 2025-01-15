@@ -2,6 +2,10 @@
 
 ## v5.0.72 (2025-XX-XX) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.71...5.0.72" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
+### Hinzugefügt
+
+- Verbesserungen der Barrierefreiheit
+
 ### Geändert
 
 - Für die Einstellung **Gültigkeit der URLs zum Ändern von Passwort bzw. E-Mail-Adresse** wurde der Wert "Immer" entfernt. Falls diese bisher genutzt wurde, greift eine maximale Gültigkeit von einer 1 Woche.
