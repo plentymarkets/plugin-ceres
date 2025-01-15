@@ -3,7 +3,7 @@
 ## v5.0.72 (2025-XX-XX) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.71...5.0.72" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
-
+- Widget anstelle von Datenfeldern für Hersteller- und EU-Verantwortliche-Registerkarten hinzugefügt.
 - Verbesserungen der Barrierefreiheit
 
 ### Geändert
