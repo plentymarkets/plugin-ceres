@@ -1,6 +1,5 @@
 <template>
     <div>
-        test label1
         <picture
             v-if="!isBackgroundImage"
             :data-iesrc="defaultImageUrl"
