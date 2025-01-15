@@ -7,7 +7,8 @@
         :data-title="title"
         :data-height="getHeight()"
         :data-width="getWidth()"
-        :id="uuid">
+        :id="uuid"
+        :aria-label="alt || 'Default Aria Label'">
         <slot name="additionalimages"></slot>
         <source :srcset="defaultImageUrl" :type="mimeType(defaultImageUrl)">
         <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl" :type="mimeType(imageUrl)">
