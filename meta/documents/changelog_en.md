@@ -3,7 +3,7 @@
 ## v5.0.72 (2025-XX-XX) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.71...5.0.72" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Added
-
+- Added widget instead of datafields for manufacturer and eu responsible tabs.
 - Accessibility improvements
 
 ### Geändert
