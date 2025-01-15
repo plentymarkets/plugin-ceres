@@ -1,10 +1,11 @@
 <template>
-    <div>
     <picture
         v-if="!isBackgroundImage"
         :data-iesrc="defaultImageUrl"
         :data-picture-class="pictureClass"
         :data-alt="alt"
+        class="text-center"
+        style="color:red;"
         :aria-label="title && title !== '' ? title : 'Default Aria Label'"
         :data-title="title"
         :data-height="getHeight()"
@@ -20,7 +21,6 @@
     <div v-else :data-background-image="defaultImageUrl || fallbackUrl" :class="pictureClass">
         <slot></slot>
     </div>
-</div>
 </template>
 
 <script>
