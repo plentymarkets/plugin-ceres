@@ -107,6 +107,7 @@
                 </template>
             </intersect>
         {% else %}
+            {% if isPreview %} {{ Twig.set("maxItems", 4) }} {% endif %}
             {{ Twig.set("itemList", Twig.call("services.itemList.getItemList", [requestedListType, itemListId, itemSort, maxItems, crossSellingRelationType]) ) }}
             {{ Twig.if("itemList.documents is not empty or #{ isPreview | json_encode }") }}
 
