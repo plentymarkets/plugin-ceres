@@ -129,7 +129,7 @@
         <div class="carousel-inner" role="listbox" aria-label="{{ trans("Ceres::Template.itemImageCarousel") }}">
             {{ Twig.for("slide", "slides") }}
 
-            <div class="carousel-item{{ Twig.if("loop.first") }} active{{ Twig.endif() }}">
+            <div class="carousel-item{{ Twig.if("loop.first") }} active{{ Twig.endif() }}" aria-label="{{ trans("Ceres::Template.itemImageCarousel") }}">
                 <a {{ Twig.if("slide.url is not empty") }}href="{{ Twig.print("slide.url") }}"{{ Twig.endif() }}
                     {{ Twig.if("slide.openInNewTab is not empty") }} target="_blank" {{ Twig.endif() }}>
                     {{ Twig.if("slide.imageUrl is not empty") }}
