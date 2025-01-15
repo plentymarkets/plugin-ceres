@@ -2,8 +2,6 @@
 
 namespace Ceres\Widgets\Presets;
 
-use Ceres\Builders\EuManufacturer\EuManufacturerBuilder;
-use Ceres\Builders\Manufacturer\ManufacturerBuilder;
 use Ceres\Config\CeresConfig;
 use Ceres\Helper\ShopBuilderHelper;
 use Ceres\ShopBuilder\DataFieldProvider\Item\ManufacturerDataFieldProvider;
@@ -62,24 +60,11 @@ class DefaultSingleItemPreset implements ContentPreset
     /** @var ShopBuilderHelper */
     private ShopBuilderHelper $shopBuilderHelper;
 
-    /** @var EuManufacturerBuilder */
-    private EuManufacturerBuilder $euManufacturerBuilder;
-
-    /** @var ManufacturerBuilder $manufacturerBuilder */
-    private ManufacturerBuilder $manufacturerBuilder;
-
     /**
      * @param ShopBuilderHelper $shopBuilderHelper
-     * @param EuManufacturerBuilder $euManufacturerBuilder
-     * @param ManufacturerBuilder $manufacturerBuilder
      */
-    public function __construct(ShopBuilderHelper $shopBuilderHelper,
-                                EuManufacturerBuilder $euManufacturerBuilder,
-                                ManufacturerBuilder $manufacturerBuilder)
-    {
+    public function __construct(ShopBuilderHelper $shopBuilderHelper) {
         $this->shopBuilderHelper     = $shopBuilderHelper;
-        $this->euManufacturerBuilder = $euManufacturerBuilder;
-        $this->manufacturerBuilder   = $manufacturerBuilder;
     }
 
     /**
@@ -366,27 +351,6 @@ class DefaultSingleItemPreset implements ContentPreset
                 "variation.customsTariffNumber"
             ]);
 
-        /* Generates EU Manufacturer fields */
-//        $this->euManufacturerBuilder->withName();
-//        $this->euManufacturerBuilder->withDetailedAddress();
-//        $this->euManufacturerBuilder->withGeneralAddress();
-//        $this->euManufacturerBuilder->withMail();
-//        $this->euManufacturerBuilder->withPhoneNumber();
-//        $this->euManufacturerBuilder->withContactUrl();
-//        $this->euManufacturerBuilder->build($this->tabWidget, $uuidEuResponsiblePerson);
-
-        /* Generates base manufacturer fields */
-//        $this->manufacturerBuilder->withName();
-//        $this->manufacturerBuilder->withLegalName();
-//        $this->manufacturerBuilder->withDetailedAddress();
-//        $this->manufacturerBuilder->withGeneralAddress();
-//        $this->manufacturerBuilder->withEmail();
-//        $this->manufacturerBuilder->withHomepage();
-//        $this->manufacturerBuilder->withPhoneNumber();
-//        $this->manufacturerBuilder->withFaxNumber();
-//        $this->manufacturerBuilder->withContactUrl();
-//        $this->manufacturerBuilder->build($this->tabWidget, $uuidManufacturer);
-        
         $this->tabWidget->createChild($uuidEuResponsiblePerson, 'Ceres::ItemManufacturerWidget')
             ->withSetting('appearance','none')
             ->withSetting('spacing.customPadding', true)
