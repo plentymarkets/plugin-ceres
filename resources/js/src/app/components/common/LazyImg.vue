@@ -8,7 +8,7 @@
             :data-height="getHeight()"
             :data-width="getWidth()"
             class="text-center"
-            aria-label="Default Aria Label"
+            :aria-label="alt || 'Default Aria Label'"
             :id="uuid">
             <slot name="additionalimages"></slot>
             <source :srcset="defaultImageUrl" :type="mimeType(defaultImageUrl)">
