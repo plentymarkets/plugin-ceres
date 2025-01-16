@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!isBackgroundImage">
+    <div v-if="!isBackgroundImage" style="display: inline-block;">
         <picture
             :data-iesrc="defaultImageUrl"
             :data-picture-class="pictureClass"
