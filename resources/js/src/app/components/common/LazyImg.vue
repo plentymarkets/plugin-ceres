@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!isBackgroundImage" class="picture-wrapper">
+    <div v-if="!isBackgroundImage">
         <picture
             :data-iesrc="defaultImageUrl"
             :data-picture-class="pictureClass"
@@ -244,9 +244,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.picture-wrapper {
-    display: inline-block;
-}
-</style>
