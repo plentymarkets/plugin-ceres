@@ -2149,10 +2149,6 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
       type: String,
       default: null
     },
-    ariaLabel: {
-      type: String,
-      default: null
-    },
     title: {
       type: String,
       default: null
@@ -2172,7 +2168,6 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
       receivedImageExtension: null,
       browserSupportedImgExtension: null,
       defaultImageUrl: this.imageUrl,
-      ariaLabel: this.ariaLabel,
       avifSupported: false,
       avifExtension: 'avif',
       webpSupported: false,
@@ -2204,6 +2199,12 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
             _this.propagateImageFormat();
           }
         });
+      }
+    });
+    this.$nextTick(function () {
+      var pictureElement = _this.$el.querySelector('picture');
+      if (pictureElement) {
+        pictureElement.setAttribute('aria-label', _this.alt || 'Default Aria Label');
       }
     });
   },
@@ -12110,7 +12111,24 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_vm._ssrNode("<div>test123</div> "), !_vm.isBackgroundImage ? _vm._ssrNode("<picture" + _vm._ssrAttr("data-iesrc", _vm.defaultImageUrl) + _vm._ssrAttr("data-picture-class", _vm.pictureClass) + _vm._ssrAttr("data-alt", _vm.alt) + ' aria-label="default aria label test"' + _vm._ssrAttr("data-title", _vm.title) + _vm._ssrAttr("data-height", _vm.getHeight()) + _vm._ssrAttr("data-width", _vm.getWidth()) + _vm._ssrAttr("id", _vm.uuid) + ">", "</picture>", [_vm._t("additionalimages"), _vm._ssrNode(" <source" + _vm._ssrAttr("srcset", _vm.defaultImageUrl) + _vm._ssrAttr("type", _vm.mimeType(_vm.defaultImageUrl)) + "> " + (_vm.defaultImageUrl !== _vm.imageUrl ? "<source" + _vm._ssrAttr("srcset", _vm.imageUrl) + _vm._ssrAttr("type", _vm.mimeType(_vm.imageUrl)) + ">" : "<!---->") + " " + (_vm.fallbackUrl ? "<source" + _vm._ssrAttr("srcset", _vm.fallbackUrl) + _vm._ssrAttr("type", _vm.mimeType(_vm.fallbackUrl)) + ">" : "<!---->") + " " + (_vm.receivedImageExtension === "tif" ? "<img" + _vm._ssrAttr("src", _vm.defaultImageUrl) + _vm._ssrAttr("alt", _vm.alt) + _vm._ssrAttr("height", _vm.getHeight()) + _vm._ssrAttr("width", _vm.getWidth()) + ' type="image/tiff" class="mw-100 h-auto">' : "<!---->"))], 2) : _vm._ssrNode("<div" + _vm._ssrAttr("data-background-image", _vm.defaultImageUrl || _vm.fallbackUrl) + _vm._ssrClass(null, _vm.pictureClass) + ">", "</div>", [_vm._t("default")], 2)], 2);
+  return !_vm.isBackgroundImage ? _c("picture", {
+    staticClass: "text-center",
+    attrs: {
+      "data-iesrc": _vm.defaultImageUrl,
+      "data-picture-class": _vm.pictureClass,
+      "data-alt": _vm.alt,
+      "data-title": _vm.title,
+      "data-height": _vm.getHeight(),
+      "data-width": _vm.getWidth(),
+      "aria-label": "Default Aria Label",
+      id: _vm.uuid
+    }
+  }, [_vm._t("additionalimages"), _vm._ssrNode(" <source" + _vm._ssrAttr("srcset", _vm.defaultImageUrl) + _vm._ssrAttr("type", _vm.mimeType(_vm.defaultImageUrl)) + "> " + (_vm.defaultImageUrl !== _vm.imageUrl ? "<source" + _vm._ssrAttr("srcset", _vm.imageUrl) + _vm._ssrAttr("type", _vm.mimeType(_vm.imageUrl)) + ">" : "<!---->") + " " + (_vm.fallbackUrl ? "<source" + _vm._ssrAttr("srcset", _vm.fallbackUrl) + _vm._ssrAttr("type", _vm.mimeType(_vm.fallbackUrl)) + ">" : "<!---->") + " " + (_vm.receivedImageExtension === "tif" ? "<img" + _vm._ssrAttr("src", _vm.defaultImageUrl) + _vm._ssrAttr("alt", _vm.alt) + _vm._ssrAttr("height", _vm.getHeight()) + _vm._ssrAttr("width", _vm.getWidth()) + ' type="image/tiff" class="mw-100 h-auto">' : "<!---->"))], 2) : _c("div", {
+    class: _vm.pictureClass,
+    attrs: {
+      "data-background-image": _vm.defaultImageUrl || _vm.fallbackUrl
+    }
+  }, [_vm._t("default")], 2);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -66336,7 +66354,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
+function injectStyles (context) {
+  
+  
+}
 
 /* normalize component */
 
@@ -66345,7 +66366,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   _LazyImg_vue_vue_type_template_id_48a7661d__WEBPACK_IMPORTED_MODULE_0__["render"],
   _LazyImg_vue_vue_type_template_id_48a7661d__WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
-  null,
+  injectStyles,
   null,
   "0353a6f0"
   

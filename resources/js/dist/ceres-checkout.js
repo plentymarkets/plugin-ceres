@@ -684,10 +684,6 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
       type: String,
       default: null
     },
-    ariaLabel: {
-      type: String,
-      default: null
-    },
     title: {
       type: String,
       default: null
@@ -707,7 +703,6 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
       receivedImageExtension: null,
       browserSupportedImgExtension: null,
       defaultImageUrl: this.imageUrl,
-      ariaLabel: this.ariaLabel,
       avifSupported: false,
       avifExtension: 'avif',
       webpSupported: false,
@@ -739,6 +734,12 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
             _this.propagateImageFormat();
           }
         });
+      }
+    });
+    this.$nextTick(function () {
+      var pictureElement = _this.$el.querySelector('picture');
+      if (pictureElement) {
+        pictureElement.setAttribute('aria-label', _this.alt || 'Default Aria Label');
       }
     });
   },
@@ -3561,15 +3562,16 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("div", [_vm._v("test123")]), _vm._v(" "), !_vm.isBackgroundImage ? _c("picture", {
+  return !_vm.isBackgroundImage ? _c("picture", {
+    staticClass: "text-center",
     attrs: {
       "data-iesrc": _vm.defaultImageUrl,
       "data-picture-class": _vm.pictureClass,
       "data-alt": _vm.alt,
-      "aria-label": "default aria label test",
       "data-title": _vm.title,
       "data-height": _vm.getHeight(),
       "data-width": _vm.getWidth(),
+      "aria-label": "Default Aria Label",
       id: _vm.uuid
     }
   }, [_vm._t("additionalimages"), _vm._v(" "), _c("source", {
@@ -3601,7 +3603,7 @@ var render = function render() {
     attrs: {
       "data-background-image": _vm.defaultImageUrl || _vm.fallbackUrl
     }
-  }, [_vm._t("default")], 2)]);
+  }, [_vm._t("default")], 2);
 };
 var staticRenderFns = [];
 render._withStripped = true;
