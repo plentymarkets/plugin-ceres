@@ -20,9 +20,19 @@
                         </span>
                         <span class="custom-control custom-switch custom-control-appearance" v-if="!consentGroup.necessary && !necessaryOnly(consentGroup)">
                                 <input type="checkbox"
+                                       :id="'privacy-policy_checkbox_' + consentGroup.key"
                                        class="custom-control-input"
                                        :checked="isConsented(consentGroup.key + '.*')">
-                                <label class="custom-control-label"></label>
+                                <label :for="'privacy-policy_checkbox_' + consentGroup.key" class="custom-control-label">
+                                  <span class="d-none">
+                                    <template v-if="consentGroup.label.length > 0">
+                                        {{ consentGroup.label }}
+                                    </template>
+                                    <template v-else>
+                                        {{ $translate("Ceres::Template.privacySettingsDefaultGroup") }}
+                                    </template>
+                                  </span>
+                                </label>
                         </span>
                         <span class="badge badge-primary bg-appearance" v-else>{{ $translate("Ceres::Template.privacySettingsNecessary") }}</span>
                     </p>
