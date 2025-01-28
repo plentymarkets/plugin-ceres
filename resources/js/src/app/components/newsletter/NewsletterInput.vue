@@ -20,7 +20,7 @@
                         <label :for="'email-input-id_' + _uid">{{ $translate("Ceres::Template.newsletterEmail") }} {{ $translate("Ceres::Template.newsletterIsRequiredFootnote") }}</label>
                         <input @focus="loadRecaptcha = true" type="email" autocomplete="email" :id="'email-input-id_' + _uid" v-model="email" data-testing="nl-mail">
                     </div>
-                    <label for="input-username">{{ $translate("Ceres::Template.newsletterUsername") }}</label>
+                    <label class="d-none" for="input-username">{{ $translate("Ceres::Template.newsletterUsername") }}</label>
                     <input id="input-username" autocomplete="none" class="honey" type="text" name="username" tabindex="-1" v-model="honeypot">
                 </div>
             </div>
