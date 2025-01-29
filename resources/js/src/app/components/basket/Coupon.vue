@@ -14,8 +14,6 @@
                 :disabled="disabled || isCheckoutReadonly"
                 data-testing="coupon-input"
             >
-            <label class="invisible" for="coupon-code-identifier">{{ $translate('Ceres::Template.couponEnterCoupon') }}</label>
-
             <span class="input-group-btn">
                 <button
                     class="btn btn-medium btn-primary btn-appearance"
