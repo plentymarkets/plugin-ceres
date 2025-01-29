@@ -1518,8 +1518,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
 
@@ -15264,16 +15262,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -43214,11 +43202,7 @@ var render = function() {
               _vm._ssrAttr("disabled", _vm.disabled || _vm.isCheckoutReadonly) +
               ' data-testing="coupon-input"' +
               _vm._ssrAttr("value", _vm.couponCode) +
-              ' class="form-control"> <label for="coupon-code-identifier" class="invisible">' +
-              _vm._ssrEscape(
-                _vm._s(_vm.$translate("Ceres::Template.couponEnterCoupon"))
-              ) +
-              "</label> "
+              ' class="form-control"> '
           ),
           _vm._ssrNode('<span class="input-group-btn">', "</span>", [
             !_vm.disabled
@@ -57221,35 +57205,10 @@ var render = function() {
             (!consentGroup.necessary && !_vm.necessaryOnly(consentGroup)
               ? '<span class="custom-control custom-switch custom-control-appearance"><input type="checkbox"' +
                 _vm._ssrAttr(
-                  "id",
-                  "privacy-policy_checkbox_" + consentGroup.key
-                ) +
-                _vm._ssrAttr(
                   "checked",
                   _vm.isConsented(consentGroup.key + ".*")
                 ) +
-                ' class="custom-control-input"> <label' +
-                _vm._ssrAttr(
-                  "for",
-                  "privacy-policy_checkbox_" + consentGroup.key
-                ) +
-                ' class="custom-control-label"><span class="d-none">' +
-                (consentGroup.label.length > 0
-                  ? _vm._ssrEscape(
-                      "\n                                    " +
-                        _vm._s(consentGroup.label) +
-                        "\n                                "
-                    )
-                  : _vm._ssrEscape(
-                      "\n                                    " +
-                        _vm._s(
-                          _vm.$translate(
-                            "Ceres::Template.privacySettingsDefaultGroup"
-                          )
-                        ) +
-                        "\n                                "
-                    )) +
-                "</span></label></span>"
+                ' class="custom-control-input"> <label class="custom-control-label"></label></span>'
               : '<span class="badge badge-primary bg-appearance">' +
                 _vm._ssrEscape(
                   _vm._s(

@@ -128,16 +128,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -261,53 +251,13 @@ var render = function() {
                         [
                           _c("input", {
                             staticClass: "custom-control-input",
-                            attrs: {
-                              type: "checkbox",
-                              id: "privacy-policy_checkbox_" + consentGroup.key
-                            },
+                            attrs: { type: "checkbox" },
                             domProps: {
                               checked: _vm.isConsented(consentGroup.key + ".*")
                             }
                           }),
                           _vm._v(" "),
-                          _c(
-                            "label",
-                            {
-                              staticClass: "custom-control-label",
-                              attrs: {
-                                for:
-                                  "privacy-policy_checkbox_" + consentGroup.key
-                              }
-                            },
-                            [
-                              _c(
-                                "span",
-                                { staticClass: "d-none" },
-                                [
-                                  consentGroup.label.length > 0
-                                    ? [
-                                        _vm._v(
-                                          "\n                                    " +
-                                            _vm._s(consentGroup.label) +
-                                            "\n                                "
-                                        )
-                                      ]
-                                    : [
-                                        _vm._v(
-                                          "\n                                    " +
-                                            _vm._s(
-                                              _vm.$translate(
-                                                "Ceres::Template.privacySettingsDefaultGroup"
-                                              )
-                                            ) +
-                                            "\n                                "
-                                        )
-                                      ]
-                                ],
-                                2
-                              )
-                            ]
-                          )
+                          _c("label", { staticClass: "custom-control-label" })
                         ]
                       )
                     : _c(
