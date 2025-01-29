@@ -1518,6 +1518,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
 
@@ -43202,7 +43205,11 @@ var render = function() {
               _vm._ssrAttr("disabled", _vm.disabled || _vm.isCheckoutReadonly) +
               ' data-testing="coupon-input"' +
               _vm._ssrAttr("value", _vm.couponCode) +
-              ' class="form-control"> '
+              ' class="form-control"> <label for="coupon-code-identifier"><span class="d-none">' +
+              _vm._ssrEscape(
+                _vm._s(_vm.$translate("Ceres::Template.couponEnterCoupon"))
+              ) +
+              "</span></label> "
           ),
           _vm._ssrNode('<span class="input-group-btn">', "</span>", [
             !_vm.disabled
