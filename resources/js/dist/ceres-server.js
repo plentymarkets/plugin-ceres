@@ -43197,7 +43197,8 @@ var render = function() {
         "</div>",
         [
           _vm._ssrNode(
-            '<input type="text" id="coupon-code-identifier"' +
+            '<input type="text"' +
+              _vm._ssrAttr("id", "coupon-code-identifier" + _vm._uid) +
               _vm._ssrAttr(
                 "placeholder",
                 _vm.$translate("Ceres::Template.couponEnterCoupon")
@@ -43205,7 +43206,9 @@ var render = function() {
               _vm._ssrAttr("disabled", _vm.disabled || _vm.isCheckoutReadonly) +
               ' data-testing="coupon-input"' +
               _vm._ssrAttr("value", _vm.couponCode) +
-              ' class="form-control"> <label for="coupon-code-identifier"><span class="d-none">' +
+              ' class="form-control"> <label' +
+              _vm._ssrAttr("for", "coupon-code-identifier" + _vm._uid) +
+              '><span class="d-none">' +
               _vm._ssrEscape(
                 _vm._s(_vm.$translate("Ceres::Template.couponEnterCoupon"))
               ) +
