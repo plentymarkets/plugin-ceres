@@ -2,7 +2,7 @@
     <div class="position-relative">
         <div v-if="inputType === 'text' || inputType === 'float' || inputType === 'int'" class="input-unit order-property-input" :class="{ 'active': property.value, 'error': hasError }" data-validate="text">
             <input
-                :id="'order-property-input' + group.id"
+                :id="'order-property-input_' + property.id"
                 type="text"
                 @input="onInputValueChanged($event.target.value)"
                 v-model="inputValue"
@@ -10,8 +10,8 @@
                 data-toggle="tooltip"
                 :maxlength="isOrderProperty(property) ? 128 : 65535"
                 :title="property.names.description"
-                :data-testing="'order-property-input-' + inputType">
-            <label :for="'order-property-input' + group.id" class="d-flex">
+                :data-testing="'order-property-input-' + inputType" />
+            <label :for="'order-property-input_' + property.id" class="d-flex">
                 <span class="text-truncate">{{ property.names.name }}</span>
                 <strong class="ml-1">
                     <template v-if="surcharge > 0">({{ inclOrPlus }} {{ surcharge | currency }})</template>

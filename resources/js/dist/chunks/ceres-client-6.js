@@ -1104,7 +1104,7 @@ var render = function() {
                   { name: "tooltip", rawName: "v-tooltip" }
                 ],
                 attrs: {
-                  id: "order-property-input" + _vm.group.id,
+                  id: "order-property-input_" + _vm.property.id,
                   type: "text",
                   "data-toggle": "tooltip",
                   maxlength: _vm.isOrderProperty(_vm.property) ? 128 : 65535,
@@ -1131,7 +1131,7 @@ var render = function() {
                 "label",
                 {
                   staticClass: "d-flex",
-                  attrs: { for: "order-property-input" + _vm.group.id }
+                  attrs: { for: "order-property-input_" + _vm.property.id }
                 },
                 [
                   _c("span", { staticClass: "text-truncate" }, [
