@@ -43,6 +43,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -55,8 +64,12 @@ __webpack_require__.r(__webpack_exports__);
     return {
       email: "",
       isDisabled: false,
-      honeypot: ""
+      honeypot: "",
+      uniqueId: null
     };
+  },
+  mounted: function mounted() {
+    this.uniqueId = this._uid;
   },
   methods: {
     validateData: function validateData() {
@@ -175,6 +188,18 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
+          _c(
+            "label",
+            { attrs: { for: "input-unsubscribe-username_" + _vm.uniqueId } },
+            [
+              _c("span", { staticClass: "d-none" }, [
+                _vm._v(
+                  _vm._s(_vm.$translate("Ceres::Template.newsletterUsername"))
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
           _c("input", {
             directives: [
               {
@@ -186,6 +211,7 @@ var render = function() {
             ],
             staticClass: "honey",
             attrs: {
+              id: "input-unsubscribe-username_" + _vm.uniqueId,
               type: "text",
               name: "username",
               autocomplete: "new-password",

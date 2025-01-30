@@ -13279,6 +13279,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -13447,6 +13449,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -13459,8 +13470,12 @@ __webpack_require__.r(__webpack_exports__);
     return {
       email: "",
       isDisabled: false,
-      honeypot: ""
+      honeypot: "",
+      uniqueId: null
     };
+  },
+  mounted: function mounted() {
+    this.uniqueId = this._uid;
   },
   methods: {
     validateData: function validateData() {
@@ -55760,11 +55775,11 @@ var render = function() {
               _vm._ssrAttr("value", _vm.email) +
               "></div> <label" +
               _vm._ssrAttr("for", "input-username_" + _vm.uniqueId) +
-              ' class="d-none">' +
+              '><span class="d-none">' +
               _vm._ssrEscape(
                 _vm._s(_vm.$translate("Ceres::Template.newsletterUsername"))
               ) +
-              "</label> <input" +
+              "</span></label> <input" +
               _vm._ssrAttr("id", "input-username_" + _vm.uniqueId) +
               ' autocomplete="none" type="text" name="username" tabindex="-1"' +
               _vm._ssrAttr("value", _vm.honeypot) +
@@ -55896,7 +55911,21 @@ var render = function() {
                 ) +
                 '</label> <input type="email" name="email" autocomplete="email" id="email-input-id" data-testing="unsub-nl-mail"' +
                 _vm._ssrAttr("value", _vm.email) +
-                ' class="form-control"></div> <input type="text" name="username" autocomplete="new-password" tabindex="-1"' +
+                ' class="form-control"></div> <label' +
+                _vm._ssrAttr(
+                  "for",
+                  "input-unsubscribe-username_" + _vm.uniqueId
+                ) +
+                '><span class="d-none">' +
+                _vm._ssrEscape(
+                  _vm._s(_vm.$translate("Ceres::Template.newsletterUsername"))
+                ) +
+                "</span></label> <input" +
+                _vm._ssrAttr(
+                  "id",
+                  "input-unsubscribe-username_" + _vm.uniqueId
+                ) +
+                ' type="text" name="username" autocomplete="new-password" tabindex="-1"' +
                 _vm._ssrAttr("value", _vm.honeypot) +
                 ' class="honey"> '
             ),
