@@ -13308,8 +13308,12 @@ __webpack_require__.r(__webpack_exports__);
       isDisabled: false,
       privacyPolicyValue: false,
       honeypot: "",
-      loadRecaptcha: false
+      loadRecaptcha: false,
+      uniqueId: null
     };
+  },
+  mounted: function mounted() {
+    this.uniqueId = this._uid;
   },
   computed: {
     privacyPolicyText: function privacyPolicyText() {
@@ -55713,13 +55717,13 @@ var render = function() {
           _vm._ssrNode(
             (_vm.showNameInputs
               ? '<div class="col-6"><div data-validate="!regex" class="input-unit"><label' +
-                _vm._ssrAttr("for", "first-name-input_" + _vm._uid) +
+                _vm._ssrAttr("for", "first-name-input_" + _vm.uniqueId) +
                 ">" +
                 _vm._ssrEscape(
                   _vm._s(_vm.$translate("Ceres::Template.newsletterFirstName"))
                 ) +
                 '</label> <input type="text" data-validate-ref="/[.:\\/\\d]/g"' +
-                _vm._ssrAttr("id", "first-name-input_" + _vm._uid) +
+                _vm._ssrAttr("id", "first-name-input_" + _vm.uniqueId) +
                 ' data-testing="nl-first-name"' +
                 _vm._ssrAttr("value", _vm.firstName) +
                 "></div></div>"
@@ -55727,19 +55731,19 @@ var render = function() {
               " " +
               (_vm.showNameInputs
                 ? '<div class="col-6 pl-0"><div data-validate="!regex" class="input-unit"><label' +
-                  _vm._ssrAttr("for", "last-name-input_" + _vm._uid) +
+                  _vm._ssrAttr("for", "last-name-input_" + _vm.uniqueId) +
                   ">" +
                   _vm._ssrEscape(
                     _vm._s(_vm.$translate("Ceres::Template.newsletterLastName"))
                   ) +
                   '</label> <input type="text" data-validate-ref="/[.:\\/\\d]/g"' +
-                  _vm._ssrAttr("id", "last-name-input_" + _vm._uid) +
+                  _vm._ssrAttr("id", "last-name-input_" + _vm.uniqueId) +
                   ' data-testing="nl-last-name"' +
                   _vm._ssrAttr("value", _vm.lastName) +
                   "></div></div>"
                 : "<!---->") +
               ' <div class="col-12"><div class="input-group"><div data-validate="mail" class="input-unit"><label' +
-              _vm._ssrAttr("for", "email-input-id_" + _vm._uid) +
+              _vm._ssrAttr("for", "email-input-id_" + _vm.uniqueId) +
               ">" +
               _vm._ssrEscape(
                 _vm._s(_vm.$translate("Ceres::Template.newsletterEmail")) +
@@ -55751,19 +55755,26 @@ var render = function() {
                   )
               ) +
               '</label> <input type="email" autocomplete="email"' +
-              _vm._ssrAttr("id", "email-input-id_" + _vm._uid) +
+              _vm._ssrAttr("id", "email-input-id_" + _vm.uniqueId) +
               ' data-testing="nl-mail"' +
               _vm._ssrAttr("value", _vm.email) +
-              '></div> <label for="input-username" class="d-none">' +
+              "></div> <label" +
+              _vm._ssrAttr("for", "input-username_" + _vm.uniqueId) +
+              ' class="d-none">' +
               _vm._ssrEscape(
                 _vm._s(_vm.$translate("Ceres::Template.newsletterUsername"))
               ) +
-              '</label> <input id="input-username" autocomplete="none" type="text" name="username" tabindex="-1"' +
+              "</label> <input" +
+              _vm._ssrAttr("id", "input-username_" + _vm.uniqueId) +
+              ' autocomplete="none" type="text" name="username" tabindex="-1"' +
               _vm._ssrAttr("value", _vm.honeypot) +
               ' class="honey"></div></div> ' +
               (_vm.showPrivacyPolicyCheckbox
                 ? '<div class="col-12"><div data-validate class="form-check small"><input type="checkbox"' +
-                  _vm._ssrAttr("id", "privacy-policy-accept-id_" + _vm._uid) +
+                  _vm._ssrAttr(
+                    "id",
+                    "privacy-policy-accept-id_" + _vm.uniqueId
+                  ) +
                   ' name="privacy-policy-accept" data-testing="nl-policy"' +
                   _vm._ssrAttr(
                     "checked",
@@ -55772,7 +55783,10 @@ var render = function() {
                       : _vm.privacyPolicyValue
                   ) +
                   ' class="form-check-input"> <label' +
-                  _vm._ssrAttr("for", "privacy-policy-accept-id_" + _vm._uid) +
+                  _vm._ssrAttr(
+                    "for",
+                    "privacy-policy-accept-id_" + _vm.uniqueId
+                  ) +
                   ' class="form-check-label">' +
                   _vm._s(_vm.privacyPolicyText) +
                   "</label></div></div>"

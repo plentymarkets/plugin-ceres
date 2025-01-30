@@ -107,8 +107,12 @@ __webpack_require__.r(__webpack_exports__);
       isDisabled: false,
       privacyPolicyValue: false,
       honeypot: "",
-      loadRecaptcha: false
+      loadRecaptcha: false,
+      uniqueId: null
     };
+  },
+  mounted: function mounted() {
+    this.uniqueId = this._uid;
   },
   computed: {
     privacyPolicyText: function privacyPolicyText() {
@@ -239,7 +243,7 @@ var render = function() {
                 [
                   _c(
                     "label",
-                    { attrs: { for: "first-name-input_" + _vm._uid } },
+                    { attrs: { for: "first-name-input_" + _vm.uniqueId } },
                     [
                       _vm._v(
                         _vm._s(
@@ -261,7 +265,7 @@ var render = function() {
                     attrs: {
                       type: "text",
                       "data-validate-ref": "/[.:\\/\\d]/g",
-                      id: "first-name-input_" + _vm._uid,
+                      id: "first-name-input_" + _vm.uniqueId,
                       "data-testing": "nl-first-name"
                     },
                     domProps: { value: _vm.firstName },
@@ -290,7 +294,7 @@ var render = function() {
                 [
                   _c(
                     "label",
-                    { attrs: { for: "last-name-input_" + _vm._uid } },
+                    { attrs: { for: "last-name-input_" + _vm.uniqueId } },
                     [
                       _vm._v(
                         _vm._s(
@@ -312,7 +316,7 @@ var render = function() {
                     attrs: {
                       type: "text",
                       "data-validate-ref": "/[.:\\/\\d]/g",
-                      id: "last-name-input_" + _vm._uid,
+                      id: "last-name-input_" + _vm.uniqueId,
                       "data-testing": "nl-last-name"
                     },
                     domProps: { value: _vm.lastName },
@@ -336,17 +340,23 @@ var render = function() {
               "div",
               { staticClass: "input-unit", attrs: { "data-validate": "mail" } },
               [
-                _c("label", { attrs: { for: "email-input-id_" + _vm._uid } }, [
-                  _vm._v(
-                    _vm._s(_vm.$translate("Ceres::Template.newsletterEmail")) +
-                      " " +
+                _c(
+                  "label",
+                  { attrs: { for: "email-input-id_" + _vm.uniqueId } },
+                  [
+                    _vm._v(
                       _vm._s(
-                        _vm.$translate(
-                          "Ceres::Template.newsletterIsRequiredFootnote"
+                        _vm.$translate("Ceres::Template.newsletterEmail")
+                      ) +
+                        " " +
+                        _vm._s(
+                          _vm.$translate(
+                            "Ceres::Template.newsletterIsRequiredFootnote"
+                          )
                         )
-                      )
-                  )
-                ]),
+                    )
+                  ]
+                ),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -360,7 +370,7 @@ var render = function() {
                   attrs: {
                     type: "email",
                     autocomplete: "email",
-                    id: "email-input-id_" + _vm._uid,
+                    id: "email-input-id_" + _vm.uniqueId,
                     "data-testing": "nl-mail"
                   },
                   domProps: { value: _vm.email },
@@ -381,7 +391,10 @@ var render = function() {
             _vm._v(" "),
             _c(
               "label",
-              { staticClass: "d-none", attrs: { for: "input-username" } },
+              {
+                staticClass: "d-none",
+                attrs: { for: "input-username_" + _vm.uniqueId }
+              },
               [
                 _vm._v(
                   _vm._s(_vm.$translate("Ceres::Template.newsletterUsername"))
@@ -400,7 +413,7 @@ var render = function() {
               ],
               staticClass: "honey",
               attrs: {
-                id: "input-username",
+                id: "input-username_" + _vm.uniqueId,
                 autocomplete: "none",
                 type: "text",
                 name: "username",
@@ -440,7 +453,7 @@ var render = function() {
                     staticClass: "form-check-input",
                     attrs: {
                       type: "checkbox",
-                      id: "privacy-policy-accept-id_" + _vm._uid,
+                      id: "privacy-policy-accept-id_" + _vm.uniqueId,
                       name: "privacy-policy-accept",
                       "data-testing": "nl-policy"
                     },
@@ -475,7 +488,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("label", {
                     staticClass: "form-check-label",
-                    attrs: { for: "privacy-policy-accept-id_" + _vm._uid },
+                    attrs: { for: "privacy-policy-accept-id_" + _vm.uniqueId },
                     domProps: { innerHTML: _vm._s(_vm.privacyPolicyText) }
                   })
                 ]
