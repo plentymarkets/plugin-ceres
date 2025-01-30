@@ -53,8 +53,8 @@
             {{ Twig.endif() }}
 
             <input id="mail-form-honey_{{ formId }}" class="honey" type="text" name="username" autocomplete="new-password" tabindex="-1">
-            <label class="d-none" for="mail-form-honey_{{ formId }}">
-                {{ trans("Ceres::Template.newsletterUsername") }}
+            <label for="mail-form-honey_{{ formId }}">
+                <span class="d-none">{{ trans("Ceres::Template.newsletterUsername") }}</span>
             </label>
 
             <div class="col-12 text-right">
