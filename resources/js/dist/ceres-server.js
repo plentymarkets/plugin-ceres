@@ -51311,7 +51311,7 @@ var render = function() {
                     { name: "tooltip", rawName: "v-tooltip" }
                   ],
                   attrs: {
-                    id: "order-property-input" + _vm._uid,
+                    id: "order-property-input" + _vm.group.id,
                     type: "text",
                     "data-toggle": "tooltip",
                     maxlength: _vm.isOrderProperty(_vm.property) ? 128 : 65535,
@@ -51337,7 +51337,7 @@ var render = function() {
               ),
               _vm._ssrNode(
                 " <label" +
-                  _vm._ssrAttr("for", "order-property-input" + _vm._uid) +
+                  _vm._ssrAttr("for", "order-property-input" + _vm.group.id) +
                   ' class="d-flex"><span class="text-truncate">' +
                   _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
                   '</span> <strong class="ml-1">' +
