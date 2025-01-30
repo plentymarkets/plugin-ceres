@@ -91,6 +91,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
 
@@ -234,6 +238,7 @@ var render = function() {
           staticClass: "form-control",
           attrs: {
             type: "text",
+            id: "coupon-code-identifier" + _vm._uid,
             placeholder: _vm.$translate("Ceres::Template.couponEnterCoupon"),
             disabled: _vm.disabled || _vm.isCheckoutReadonly,
             "data-testing": "coupon-input"
@@ -257,6 +262,12 @@ var render = function() {
             }
           }
         }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "coupon-code-identifier" + _vm._uid } }, [
+          _c("span", { staticClass: "d-none" }, [
+            _vm._v(_vm._s(_vm.$translate("Ceres::Template.couponEnterCoupon")))
+          ])
+        ]),
         _vm._v(" "),
         _c("span", { staticClass: "input-group-btn" }, [
           !_vm.disabled
