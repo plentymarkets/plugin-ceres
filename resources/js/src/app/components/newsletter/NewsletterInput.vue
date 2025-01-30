@@ -3,31 +3,34 @@
         <div class="row">
             <div class="col-6" v-if="showNameInputs">
                 <div class="input-unit" data-validate="!regex">
-                    <label :for="'first-name-input_' + _uid">{{ $translate("Ceres::Template.newsletterFirstName") }}</label>
-                    <input type="text" data-validate-ref="/[.:\/\d]/g" :id="'first-name-input_' + _uid" v-model="firstName" data-testing="nl-first-name">
+                    <label :for="'first-name-input_' + uniqueId">{{ $translate("Ceres::Template.newsletterFirstName") }}</label>
+                    <input type="text" data-validate-ref="/[.:\/\d]/g" :id="'first-name-input_' + uniqueId" v-model="firstName" data-testing="nl-first-name">
                 </div>
             </div>
             <div class="col-6 pl-0" v-if="showNameInputs">
                 <div class="input-unit" data-validate="!regex">
-                    <label :for="'last-name-input_' + _uid">{{ $translate("Ceres::Template.newsletterLastName") }}</label>
-                    <input type="text" data-validate-ref="/[.:\/\d]/g" :id="'last-name-input_' + _uid" v-model="lastName"  data-testing="nl-last-name">
+                    <label :for="'last-name-input_' + uniqueId">{{ $translate("Ceres::Template.newsletterLastName") }}</label>
+                    <input type="text" data-validate-ref="/[.:\/\d]/g" :id="'last-name-input_' + uniqueId" v-model="lastName"  data-testing="nl-last-name">
                 </div>
             </div>
 
             <div class="col-12">
                 <div class="input-group">
                     <div class="input-unit" data-validate="mail">
-                        <label :for="'email-input-id_' + _uid">{{ $translate("Ceres::Template.newsletterEmail") }} {{ $translate("Ceres::Template.newsletterIsRequiredFootnote") }}</label>
-                        <input @focus="loadRecaptcha = true" type="email" autocomplete="email" :id="'email-input-id_' + _uid" v-model="email" data-testing="nl-mail">
+                        <label :for="'email-input-id_' + uniqueId">{{ $translate("Ceres::Template.newsletterEmail") }} {{ $translate("Ceres::Template.newsletterIsRequiredFootnote") }}</label>
+                        <input @focus="loadRecaptcha = true" type="email" autocomplete="email" :id="'email-input-id_' + uniqueId" v-model="email" data-testing="nl-mail">
                     </div>
-                    <input autocomplete="none" class="honey" type="text" name="username" tabindex="-1" v-model="honeypot">
+                    <label :for="'input-username_' + uniqueId">
+                      <span class="d-none">{{ $translate("Ceres::Template.newsletterUsername") }}</span>
+                    </label>
+                    <input :id="'input-username_' + uniqueId" autocomplete="none" class="honey" type="text" name="username" tabindex="-1" v-model="honeypot">
                 </div>
             </div>
 
             <div class="col-12" v-if="showPrivacyPolicyCheckbox">
                 <div class="form-check small" data-validate>
-                    <input type="checkbox" class="form-check-input" :id="'privacy-policy-accept-id_' + _uid" name="privacy-policy-accept" v-model="privacyPolicyValue" data-testing="nl-policy">
-                    <label :for="'privacy-policy-accept-id_' + _uid" class="form-check-label" v-html="privacyPolicyText"></label>
+                    <input type="checkbox" class="form-check-input" :id="'privacy-policy-accept-id_' + uniqueId" name="privacy-policy-accept" v-model="privacyPolicyValue" data-testing="nl-policy">
+                    <label :for="'privacy-policy-accept-id_' + uniqueId" class="form-check-label" v-html="privacyPolicyText"></label>
                 </div>
             </div>
 
@@ -83,10 +86,14 @@ export default {
             isDisabled: false,
             privacyPolicyValue: false,
             honeypot: "",
-            loadRecaptcha: false
+            loadRecaptcha: false,
+            uniqueId: null,
         };
     },
-
+    mounted()
+    {
+      this.uniqueId = this._uid;
+    },
     computed:
     {
         privacyPolicyText()

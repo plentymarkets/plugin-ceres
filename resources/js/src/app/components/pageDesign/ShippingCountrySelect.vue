@@ -17,8 +17,8 @@
         </li>
     </ul>
     <div v-else>
-        <div class="h3">{{ $translate('Ceres::Template.headerSelectShippingCountry') }}</div>
-        <select v-if="localization.shippingCountries.length > 1" class="form-control" @change="setShippingCountry($event.target.value)">
+        <label for="shipping-country-select" class="h3">{{ $translate('Ceres::Template.headerSelectShippingCountry') }}</label>
+        <select id="shipping-country-select" v-if="localization.shippingCountries.length > 1" class="form-control" @change="setShippingCountry($event.target.value)">
             <option v-for="shippingCountry in localization.shippingCountries"
                     :value="shippingCountry.id"
                     :disabled="isDisabled"

@@ -6,6 +6,7 @@
         <div :class="{'input-group':true, 'component-loading':isCheckoutReadonly, 'is-loading':isCheckoutReadonly}">
             <input
                 type="text"
+                :id="'coupon-code-identifier' + _uid"
                 class="form-control"
                 v-model="couponCode"
                 :placeholder="$translate('Ceres::Template.couponEnterCoupon')"
@@ -13,6 +14,9 @@
                 :disabled="disabled || isCheckoutReadonly"
                 data-testing="coupon-input"
             >
+            <label :for="'coupon-code-identifier' + _uid">
+              <span class="d-none">{{ $translate('Ceres::Template.couponEnterCoupon') }}</span>
+            </label>
             <span class="input-group-btn">
                 <button
                     class="btn btn-medium btn-primary btn-appearance"
