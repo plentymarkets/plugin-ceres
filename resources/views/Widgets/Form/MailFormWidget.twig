@@ -52,8 +52,10 @@
                 <recaptcha></recaptcha>
             {{ Twig.endif() }}
 
-            <input id="mail-form-honey" class="honey" type="text" name="username" autocomplete="new-password" tabindex="-1">
-            <label class="d-none" for="mail-form-honey">{{ $translate("Ceres::Template.newsletterUsername") }}</label>
+            <input id="mail-form-honey_{{ formId }}" class="honey" type="text" name="username" autocomplete="new-password" tabindex="-1">
+            <label class="d-none" for="mail-form-honey_{{ formId }}">
+                {{ trans("Ceres::Template.newsletterUsername") }}
+            </label>
 
             <div class="col-12 text-right">
                 <button type="submit" class="btn-send-contact-form btn btn-{{ appearance }} {{ buttonSize }}" {{ Twig.print('set_testing_attr("data-testing", "send-contact-form")') }}>
