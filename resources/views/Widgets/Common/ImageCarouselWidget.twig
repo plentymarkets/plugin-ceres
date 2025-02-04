@@ -129,12 +129,7 @@
         <div class="carousel-inner" role="list" aria-label="{{ trans("Ceres::Template.itemImageCarousel") }}">
             {{ Twig.for("slide", "slides") }}
 
-            {{ Twig.set("imgTitle", "slide.imageName") }}
-            {{ Twig.if("imgTitle | trim is empty") }}
-                {{ Twig.set("imgTitle", "slide.name") }}
-            {{ Twig.endif() }}
-
-            <div aria-label="{{ Twig.print("imgTitle") }}" role="listitem" class="carousel-item{{ Twig.if("loop.first") }} active{{ Twig.endif() }}">
+            <div role="listitem" class="carousel-item{{ Twig.if("loop.first") }} active{{ Twig.endif() }}">
                 <a {{ Twig.if("slide.url is not empty") }}href="{{ Twig.print("slide.url") }}"{{ Twig.endif() }}
                     {{ Twig.if("slide.openInNewTab is not empty") }} target="_blank" {{ Twig.endif() }}>
                     {{ Twig.if("slide.imageUrl is not empty") }}
@@ -143,7 +138,10 @@
                             {{ Twig.set("altText", "slide.name") }}
                         {{ Twig.endif() }}
 
-
+                        {{ Twig.set("imgTitle", "slide.imageName") }}
+                        {{ Twig.if("imgTitle | trim is empty") }}
+                            {{ Twig.set("imgTitle", "slide.name") }}
+                        {{ Twig.endif() }}
 
                         {{ Twig.set("fallbackUrl", "slide.fallbackImageUrl") }}
                         {{ Twig.if("fallbackUrl | trim is empty") }}
