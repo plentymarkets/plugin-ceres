@@ -80,14 +80,16 @@
                                     :watch-data="true"
                                 >
                                     <li class="item">
-                                        <input
-                                            type="radio"
-                                            :name="'shippingAddress' + _uid"
-                                            :id="'addressSelectItem' + _uid + item.id"
-                                            :value="item.id"
-                                            :checked="selectedAddress && selectedAddress.id === item.id"
-                                            @change="onAddressChanged(item)">
-                                        <label :for="'addressSelectItem' + _uid + item.id" class="item-inner">
+                                        <fieldset>
+                                            <input
+                                                type="radio"
+                                                :name="'shippingAddress' + _uid"
+                                                :id="'addressSelectItem' + _uid + item.id"
+                                                :value="item.id"
+                                                :checked="selectedAddress && selectedAddress.id === item.id"
+                                                @change="onAddressChanged(item)">
+                                            <label :for="'addressSelectItem' + _uid + item.id" class="item-inner">
+                                        </fieldset>
                                         <div class="container-fluid px-0">
                                             <div class="row"> 
                                                 <div v-if="item.id == -99" class="col">
