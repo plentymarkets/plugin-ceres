@@ -41,13 +41,13 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="input-unit">
-                                            <input type="email" name="newMail" autocomplete="off" v-model="newMail" data-autofocus {{ set_testing_attr("data-testing", "change-mail") }}>
+                                            <input id="newMail" type="email" name="newMail" autocomplete="off" v-model="newMail" data-autofocus {{ set_testing_attr("data-testing", "change-mail") }}>
                                             <label for="newMail">{{ trans("Ceres::Template.myAccountNewEmail") }}</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="input-unit no-bottom">
-                                            <input type="email" name="newMail2" autocomplete="off" v-model="newMail2" {{ set_testing_attr("data-testing", "change-mail-repeat") }}>
+                                            <input id="newMail2" type="email" name="newMail2" autocomplete="off" v-model="newMail2" {{ set_testing_attr("data-testing", "change-mail-repeat") }}>
                                             <label for="newMail2">{{ trans("Ceres::Template.myAccountRepeatEmail") }}</label>
                                         </div>
                                     </div>
