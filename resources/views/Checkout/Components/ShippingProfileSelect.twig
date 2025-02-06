@@ -1,7 +1,7 @@
 <script type="x/template" id="vue-shipping-profile-select">
-    <fieldset>
-    <legend>{{ trans("Ceres::Template.checkoutShippingProfile") }}</legend>
     <div class="cmp cmp-method-list list mb-4" v-bind:class="{ 'error': showError }">
+    <fieldset>
+        <legend>{{ trans("Ceres::Template.checkoutShippingProfile") }}</legend>
         <ul class="method-list component-loading" :class="{ 'is-loading': isBasketLoading || isCheckoutReadonly }">
             <li v-for="shippingProfile in shippingProfileList" class="method-list-item"  :data-id="shippingProfile.parcelServicePresetId">
                 <input
@@ -46,6 +46,6 @@
                 </div>
             </li><!-- -->
         </ul>
+        </fieldset>
     </div>
-    </fieldset>
 </script>
