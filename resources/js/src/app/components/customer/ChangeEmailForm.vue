@@ -2,7 +2,7 @@
     <form method="post" @submit.prevent="submit()" class="clearfix">
         <div class="input-unit mt-3">
             <label :for="'new-mail' + _uid" class="disabled">{{ $translate("Ceres::Template.myAccountNewEmail") }}</label>
-            <input :id="'new-mail' + _uid" type="email" name="email" class="form-control" :id="'new-mail' + _uid" :value="newMail" disabled>
+            <input :id="'new-mail' + _uid" type="email" name="email" class="form-control" :value="newMail" disabled>
         </div>
 
         <div class="input-unit">
