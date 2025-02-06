@@ -81,14 +81,15 @@
                                 >
                                     <li class="item">
                                         <fieldset>
+                                            <legend>{{ 'addressSelectItem' + _uid + item.id }}</legend>
                                             <input
                                                 type="radio"
+                                                :aria-label="'addressSelectItem' + _uid + item.id"
                                                 :name="'shippingAddress' + _uid"
                                                 :id="'addressSelectItem' + _uid + item.id"
                                                 :value="item.id"
                                                 :checked="selectedAddress && selectedAddress.id === item.id"
                                                 @change="onAddressChanged(item)">
-                                            <label :for="'addressSelectItem' + _uid + item.id" class="item-inner">
                                         </fieldset>
                                         <div class="container-fluid px-0">
                                             <div class="row"> 

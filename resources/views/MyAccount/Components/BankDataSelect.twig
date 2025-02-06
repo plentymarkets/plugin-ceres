@@ -41,13 +41,13 @@
                                 -->
                                 <div class="item-controls">
                                     <span class="item-edit ml-auto" @click.prevent="openUpdateBank(index, bankData)">
-                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountEdit") }}" class="btn btn-primary btn-medium btn-appearance mr-1" @click.prevent="openUpdateBank(index, bankData)" {{ set_testing_attr("data-testing", "bank-data-delete-set") }}>
+                                        <button aria-label="delete-item" v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountEdit") }}" class="btn btn-primary btn-medium btn-appearance mr-1" @click.prevent="openUpdateBank(index, bankData)" {{ set_testing_attr("data-testing", "bank-data-delete-set") }}>
                                             <span>{{ trans("Ceres::Template.myAccountEdit") }}</span>
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </button>
                                     </span>
                                     <span class="item-remove" @click.prevent="openDeleteBank(index, bankData)">
-                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountDelete") }}" class="btn btn-danger" @click.prevent="openDeleteBank(index, bankData)" {{ set_testing_attr("data-testing", "bank-data-open-set") }}>
+                                        <button aria-label="delete-item" v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountDelete") }}" class="btn btn-danger" @click.prevent="openDeleteBank(index, bankData)" {{ set_testing_attr("data-testing", "bank-data-open-set") }}>
                                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                                         </button>
                                     </span>
@@ -77,6 +77,7 @@
                         </div>
 
                         <fieldset>
+                            <legend>${headline}</legend>
                             <form id="my-bankForm" method="post" @submit.prevent>
                                  <div class="modal-body">
                                     <div class="row">
