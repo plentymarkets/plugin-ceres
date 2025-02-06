@@ -2,7 +2,7 @@
     <div class="cmp cmp-method-list list mb-4" v-bind:class="{ 'error': showError }">
         <ul class="method-list component-loading" :class="{ 'is-loading': isBasketLoading || isCheckoutReadonly }">
             <fieldset>
-            <legend>{{ trans("Ceres::Template.checkoutShippingProfile" }}</legend>
+            <legend>{{ trans("Ceres::Template.checkoutShippingProfile") }}</legend>
             <li v-for="shippingProfile in shippingProfileList" class="method-list-item"  :data-id="shippingProfile.parcelServicePresetId">
                 <input
                         type="radio"
