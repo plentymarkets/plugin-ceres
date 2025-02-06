@@ -10,7 +10,8 @@
 ### Geändert
 
 - We removed the Option "always" for the setting **Validity of URLs to change password and email address** in the plugin settings. The setting is now always set to 1 week.
--
+- Removed role="listbox" and role="option" from divs inside the ImageCarouselWidget
+
 ## v5.0.71 (2024-12-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.70...5.0.71" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
