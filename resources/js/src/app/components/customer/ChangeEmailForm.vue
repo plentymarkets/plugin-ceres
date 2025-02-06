@@ -7,7 +7,7 @@
 
         <div class="input-unit">
             <label :for="'password' + _uid">{{ $translate("Ceres::Template.loginPassword") }}</label>
-            <input :id="'password' + _uid" type="password" name="password" autocomplete="current-password" class="form-control" :id="'password' + _uid" v-model="password">
+            <input :id="'password' + _uid" type="password" name="password" autocomplete="current-password" class="form-control" v-model="password">
         </div>
 
         <button type="submit" :disabled="isDisabled" class="btn btn-primary btn-appearance float-right btn-medium btn-xs-max-width">
