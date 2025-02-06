@@ -164,14 +164,12 @@
                                 picture-class="img-cover"
                                 image-url="{{ Twig.print("slide.imageUrl") }}"
                                 fallback-url="{{ Twig.print("slide.fallbackImageUrl") }}"
-                                alt="{{ Twig.print("altText") }}"
-                                title="{{ Twig.print("imgTitle") }}">
+                                alt="{{ Twig.print("altText") }}">
                             </lazy-img>
                             <noscript v-if="false">
                                 <img src="{{ Twig.print("fallbackUrl") }}"
                                     class="img-cover"
-                                    alt="{{ Twig.print("altText") }}"
-                                    title="{{ Twig.print("imgTitle") }}">
+                                    alt="{{ Twig.print("altText") }}">
                             </noscript>
                         {% else %}
                             <picture data-alt="{{ Twig.print("altText") }}">
@@ -180,7 +178,6 @@
                                     class="img-cover"
                                     src="{{ Twig.print("fallbackUrl") }}"
                                     alt="{{ Twig.print("altText") }}"
-                                    title="{{ Twig.print("imgTitle") }}"
                                 />
                             </picture>
                         {% endif %}
