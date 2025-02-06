@@ -28,6 +28,8 @@
                     </span>
                 </div>
                 <div class="dropdown-menu" aria-labelledby="bankData">
+                    <fieldset>
+                    <legend>{{ trans("Ceres::Template.myAccountBankDetails") }}</legend>
                     <ul>
                         <li class="item" v-for="(bankData, index) in userBankData">
                             <input type="radio" :id="bankData.id" name="bankData" :value="bankData" @change="changeSelecting(bankData)">
@@ -55,6 +57,7 @@
                             </label>
                         </li>
                     </ul>
+                    </fieldset>
                 </div>
             </div>
             <div class="add-item">
