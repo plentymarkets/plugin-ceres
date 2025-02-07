@@ -76,6 +76,7 @@
         {{ Twig.set("slide", "slide | merge({ url: #{ slideUrlValue | json_encode } })") }}
         {{ Twig.set("slide", "slide | merge({ imageUrl: #{ slideUrlValue | json_encode } })") }}
         {{ Twig.set("slide", "slide | merge({ imageAltText: cdn_metadata(#{ slideUrlValue | json_encode }, 'alttext') })") }}
+        {{ Twig.set("slide", "slide | merge({ allData: cdn_metadata(#{ slideUrlValue | json_encode }) })") }}
         {% set pushCurrentSlide = true %}
 
     {% elseif slideUrlType == 'external' and slideUrlValue | trim is not empty %}
