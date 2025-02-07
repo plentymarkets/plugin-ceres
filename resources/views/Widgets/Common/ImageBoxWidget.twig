@@ -39,6 +39,7 @@
     {{ Twig.set("url", Twig.call("services.category.getURL", ["$category"])) }}
     {{ Twig.set("imageUrl", "category.details[0].imagePath") }}
     {{ Twig.set("imageAltText", "category.details[0].name") }}
+    <span>line 42</span>
 
     {{ Twig.if("imageUrl | trim is not empty") }}
         {{ Twig.set("imageUrl", "\"/documents/\" ~ imageUrl") }}
@@ -54,6 +55,7 @@
     {{ Twig.set("url", "itemData | itemURL") }}
     {{ Twig.set("imageUrl", "itemImage.url") }}
     {{ Twig.set("imageAltText", "itemImage.alternate") }}
+    <span>line 58</span>
     {{ Twig.set("imageName", "itemImage.name") }}
 
 {% elseif urlType == 'file' and urlValue | trim is not empty %}
@@ -61,6 +63,7 @@
     {{ Twig.set("url", urlValue | json_encode) }}
     {{ Twig.set("imageUrl", urlValue | json_encode) }}
     {{ Twig.set("imageAltText", "cdn_metadata(imageUrl, 'alttext')") }}
+    <span>line 66</span>
 
 {% elseif urlType == 'external' and urlValue | trim is not empty %}
 
@@ -69,13 +72,16 @@
 {% endif %}
 
 {% if customImagePath | trim is not empty %}
+    <span>line 75</span>
     {{ Twig.set("imageUrl", customImagePath | json_encode) }}
     {{ Twig.if("imageAltText is empty") }}
         {{ Twig.set("imageAltText", "cdn_metadata(imageUrl, 'alttext')") }}
+    <span>line 79</span>
     {{ Twig.endif() }}
 {% endif %}
 
 {{ Twig.if("imageAltText | trim is empty") }}
+<span>line 84</span>
     {{ Twig.set("imageAltText", "name") }}
 {{ Twig.endif() }}
 
