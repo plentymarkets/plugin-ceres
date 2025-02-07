@@ -123,6 +123,7 @@
     {{ Twig.set("slides", "[{ imageUrl: #{ placeholder | json_encode } }, { imageUrl: #{ placeholder | json_encode } }, { imageUrl: #{ placeholder | json_encode } }]") }}
 
 {{ Twig.endif() }}
+<span data="{{ Twig.print("slides | json_encode") }}">test</span>
 
 <div class="widget widget-image-carousel widget-{{ appearance | default('primary') }} widget-proportional{% if aspectRatio != 'auto' and fullHeight != true %} widget-prop-{{ aspectRatio }}{% endif %}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if margin | length > 0 %} {{ margin }}{% endif %}{% if stylingClasses | length > 0 %} {{ stylingClasses }}{% endif %}{% if fullHeight %} vh-100{% endif %}{% if fullWidth %} widget-fw{% endif %}"{% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div id="image-carousel_{{ carouselId }}" class="widget-inner carousel slide{% if animationStyle == 'fade' %} carousel-fade{% endif %}" data-ride="carousel">
