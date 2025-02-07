@@ -112,6 +112,7 @@
             {% endif %}
 
             {% if widget.settings.lazyLoading.mobile %}
+                <span>lazyloading</span>
                 <lazy-img
                     picture-class="img-{{ imageSize }}"
                     image-url="{{ Twig.print("imageUrl") }}"
@@ -126,6 +127,7 @@
                         {{ Twig.if("imageName | trim is not empty") }}title="{{ Twig.print("imageName") }}"{{ Twig.endif() }}>
                 </noscript>
             {% else %}
+                <span>else lazyloading</span>
                 <picture>
                     <source srcset="{{ Twig.print("imageUrl") }}" {{ Twig.if("imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>
                     <img
