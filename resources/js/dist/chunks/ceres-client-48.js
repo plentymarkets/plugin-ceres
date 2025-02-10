@@ -128,6 +128,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -251,13 +252,18 @@ var render = function() {
                         [
                           _c("input", {
                             staticClass: "custom-control-input",
-                            attrs: { type: "checkbox" },
+                            attrs: {
+                              type: "checkbox",
+                              "aria-label": _vm.$translate(
+                                "Ceres::Template.privacySettings"
+                              )
+                            },
                             domProps: {
                               checked: _vm.isConsented(consentGroup.key + ".*")
                             }
                           }),
                           _vm._v(" "),
-                          _c("label", { staticClass: "custom-control-label" })
+                          _c("span", { staticClass: "custom-control-label" })
                         ]
                       )
                     : _c(

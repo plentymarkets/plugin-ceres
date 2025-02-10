@@ -319,6 +319,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -1149,7 +1150,7 @@ var render = function() {
                 : _vm._e(),
               _vm._v(" "),
               _vm.isMoreButtonVisible
-                ? _c("label", {
+                ? _c("div", {
                     staticClass: "btn-collapse",
                     class: { collapsed: !_vm.showMoreInformation },
                     attrs: {
@@ -1158,6 +1159,9 @@ var render = function() {
                       ),
                       "data-show-less": _vm.$translate(
                         "Ceres::Template.basketShowLess"
+                      ),
+                      "aria-label": _vm.$translate(
+                        "Ceres::Template.basketShowMore"
                       )
                     },
                     on: {

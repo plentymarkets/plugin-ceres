@@ -39717,10 +39717,7 @@ var render = function() {
                           staticClass: "text-appearance",
                           attrs: {
                             "data-toggle": "modal",
-                            href: "#shippingscosts",
-                            title: _vm.$translate(
-                              "Ceres::Template.itemShippingCosts"
-                            )
+                            href: "#shippingscosts"
                           }
                         },
                         [
@@ -39733,25 +39730,13 @@ var render = function() {
                           )
                         ]
                       )
-                    : _c(
-                        "a",
-                        {
-                          attrs: {
-                            title: _vm.$translate(
-                              "Ceres::Template.itemShippingCosts"
-                            )
-                          }
-                        },
-                        [
-                          _vm._v(
-                            _vm._s(
-                              _vm.$translate(
-                                "Ceres::Template.itemShippingCosts"
-                              )
-                            )
+                    : _c("a", [
+                        _vm._v(
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.itemShippingCosts")
                           )
-                        ]
-                      )
+                        )
+                      ])
                 ])
               ],
               2

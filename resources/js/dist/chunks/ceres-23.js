@@ -225,59 +225,48 @@ var render = function() {
                 class: "col-md-" + _vm.columnDivider
               },
               [
-                _c(
-                  "a",
-                  {
-                    attrs: {
-                      href: _vm.getCategoryUrl(category.url),
-                      title:
-                        category.details[0].metaTitle ||
-                        category.details[0].name
-                    }
-                  },
-                  [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "nav-item border d-flex",
-                        class: { "no-img": _vm.imageSource === "none" }
-                      },
-                      [
-                        category.details[0][_vm.imageSource]
-                          ? _c("div", { staticClass: "prop-1-1" }, [
-                              _vm.imageSource !== "none"
-                                ? _c("img", {
-                                    attrs: {
-                                      src:
-                                        "/documents/" +
-                                        category.details[0][_vm.imageSource],
-                                      alt:
-                                        category.details[0].metaTitle ||
-                                        category.details[0].name
-                                    }
-                                  })
-                                : _vm._e()
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "nav-text d-flex align-center p-2" },
-                          [
-                            _c(
-                              "span",
-                              {
-                                staticClass:
-                                  "text-appearance mx-auto text-truncate"
-                              },
-                              [_vm._v(_vm._s(category.details[0].name))]
-                            )
-                          ]
-                        )
-                      ]
-                    )
-                  ]
-                )
+                _c("a", { attrs: { href: _vm.getCategoryUrl(category.url) } }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "nav-item border d-flex",
+                      class: { "no-img": _vm.imageSource === "none" }
+                    },
+                    [
+                      category.details[0][_vm.imageSource]
+                        ? _c("div", { staticClass: "prop-1-1" }, [
+                            _vm.imageSource !== "none"
+                              ? _c("img", {
+                                  attrs: {
+                                    src:
+                                      "/documents/" +
+                                      category.details[0][_vm.imageSource],
+                                    alt:
+                                      category.details[0].metaTitle ||
+                                      category.details[0].name
+                                  }
+                                })
+                              : _vm._e()
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "nav-text d-flex align-center p-2" },
+                        [
+                          _c(
+                            "span",
+                            {
+                              staticClass:
+                                "text-appearance mx-auto text-truncate"
+                            },
+                            [_vm._v(_vm._s(category.details[0].name))]
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                ])
               ]
             )
           }),
