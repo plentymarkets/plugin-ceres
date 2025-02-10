@@ -119,17 +119,16 @@
                                                     {{ Twig.endfor() }}
                                                 </div>
 
-                                                <div
+                                                <label
                                                     class="btn-collapse mb-0 collapsed"
                                                     data-toggle="collapse"
                                                     data-target="#collapseOrderProperties"
                                                     aria-expanded="false"
                                                     aria-controls="collapseOrderProperties"
-                                                    aria-label="{{ Twig.trans("Ceres::Template.basketShowMore") }}"
                                                     data-show-more="{{ Twig.trans("Ceres::Template.basketShowMore") }}"
                                                     data-show-less="{{ Twig.trans("Ceres::Template.basketShowLess") }}">
                                                     <i class="fa fa-caret-down fa-lg"></i>
-                                                </div>
+                                                </label>
 
                                             {{ Twig.endif() }}
 
@@ -266,17 +265,16 @@
                                 {{ Twig.endfor() }}
                             </div>
 
-                            <div
+                            <label
                                 class="btn-collapse mb-0 collapsed"
                                 data-toggle="collapse"
                                 data-target="#collapse-{{ Twig.print('uid') }}"
                                 aria-expanded="false"
                                 aria-controls="collapse-{{ Twig.print('uid') }}"
-                                aria-label="{{ Twig.trans("Ceres::Template.basketShowMore") }}"
                                 data-show-more="{{ Twig.trans("Ceres::Template.basketShowMore") }}"
                                 data-show-less="{{ Twig.trans("Ceres::Template.basketShowLess") }}">
                                 <i class="fa fa-caret-down fa-lg"></i>
-                            </div>
+                            </label>
 
                         {{ Twig.endif() }}
 
