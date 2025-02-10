@@ -1,6 +1,10 @@
 <script type="x/template" id="vue-payment-provider-select">
     <div class="cmp cmp-method-list list mb-4" v-bind:class="{ 'error': showError }">
         <ul class="method-list component-loading" :class="{ 'is-loading': isBasketLoading || isCheckoutReadonly }">
+            <fieldset>
+            <legend>
+                <span class="d-none">{{ trans("Ceres::Template.checkoutChangeShippingProfileHint") }}</span>
+            </legend>
             <li v-for="paymentProvider in methodOfPaymentList" class="method-list-item" :data-id="paymentProvider.id">
                 <input
                         type="radio"
@@ -36,7 +40,7 @@
                         </div>
                     </div>
                 </label>
-            </li><!--
+            </li></fieldset><!--
             -->
         </ul>
     </div>
