@@ -80,16 +80,19 @@
                                     :watch-data="true"
                                 >
                                     <li class="item">
-                                        <input
-                                            type="radio"
-                                            :name="'shippingAddress' + _uid"
-                                            :id="'addressSelectItem' + _uid + item.id"
-                                            :value="item.id"
-                                            :checked="selectedAddress && selectedAddress.id === item.id"
-                                            @change="onAddressChanged(item)">
-                                        <label :for="'addressSelectItem' + _uid + item.id" class="item-inner">
+                                        <fieldset>
+                                            <legend>{{ trans("Ceres::Template.addressSelect") }}</legend>
+                                            <input
+                                                type="radio"
+                                                :aria-label="'addressSelectItem' + _uid + item.id"
+                                                :name="'shippingAddress' + _uid"
+                                                :id="'addressSelectItem' + _uid + item.id"
+                                                :value="item.id"
+                                                :checked="selectedAddress && selectedAddress.id === item.id"
+                                                @change="onAddressChanged(item)">
+                                        </fieldset>
                                         <div class="container-fluid px-0">
-                                            <div class="row"> 
+                                            <div class="row">
                                                 <div v-if="item.id == -99" class="col">
                                                     <p class="text-muted small font-italic pt-3">{{ trans("Ceres::Template.addressSameAsInvoice") }}</p>
                                                 </div>
@@ -133,6 +136,7 @@
                                                         </span>
                                                         <span class="item-remove col-12">
                                                             <button
+                                                                aria-label="{{ trans("Ceres::Template.addressDelete") }}"
                                                                 v-tooltip
                                                                 data-toggle="tooltip"
                                                                 data-placement="top"
@@ -144,7 +148,7 @@
                                                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                             </button>
                                                         </span>
-                                                    </div>  
+                                                    </div>
                                                 </div>
                                                 </div>
                                             </div>
@@ -153,7 +157,7 @@
                                 </DynamicScrollerItem>
                             </template>
 
-                            
+
                         </dynamic-scroller>
                     </ul>
                 </div>
@@ -173,6 +177,7 @@
 
                         <div class="modal-body">
                             <fieldset>
+                                <legend>{{ trans("Ceres::Template.addressAddAddress") }}</legend>
                                 <create-update-address
                                     template="#vue-create-update-address"
                                     :address-data="addressToEdit"
