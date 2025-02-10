@@ -194,6 +194,7 @@ var render = function render() {
     staticClass: "form-control",
     attrs: {
       type: "text",
+      "aria-label": _vm.$translate("Ceres::Template.couponEnterCoupon"),
       id: "coupon-code-identifier" + _vm._uid,
       placeholder: _vm.$translate("Ceres::Template.couponEnterCoupon"),
       disabled: _vm.disabled || _vm.isCheckoutReadonly,
@@ -212,13 +213,7 @@ var render = function render() {
         _vm.couponCode = $event.target.value;
       }
     }
-  }), _vm._v(" "), _c("label", {
-    attrs: {
-      for: "coupon-code-identifier" + _vm._uid
-    }
-  }, [_c("span", {
-    staticClass: "d-none"
-  }, [_vm._v(_vm._s(_vm.$translate("Ceres::Template.couponEnterCoupon")))])]), _vm._v(" "), _c("span", {
+  }), _vm._v(" "), _c("span", {
     staticClass: "input-group-btn"
   }, [!_vm.disabled ? _c("button", {
     staticClass: "btn btn-medium btn-primary btn-appearance",
