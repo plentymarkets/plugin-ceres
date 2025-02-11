@@ -15,10 +15,6 @@
         color: $gray-700;
     }
 
-    .color-gray-700 {
-        color: $gray-700 !important;
-    }
-
     .price-view-port {
         flex: 1 0 0;
     }
@@ -158,4 +154,8 @@
 
 .no-pointer-events {
     pointer-events: none;
+}
+
+.color-gray-700 {
+    color: $gray-700 !important;
 }
