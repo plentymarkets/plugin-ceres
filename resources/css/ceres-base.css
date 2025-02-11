@@ -12661,6 +12661,9 @@ body.basket-open {
   font-weight: 700;
   color: #495057;
 }
+.cmp-product-thumb .color-gray-700 {
+  color: #495057;
+}
 .cmp-product-thumb .price-view-port {
   flex: 1 0 0;
 }

@@ -39498,31 +39498,39 @@ var render = function() {
                         _vm.item.prices.default.price.value
                         ? _c("div", { staticClass: "price-view-port" }, [
                             _vm.item.prices.specialOffer
-                              ? _c("del", { staticClass: "crossprice" }, [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(
-                                        _vm._f("itemCrossPrice")(
-                                          _vm.item.prices.default.unitPrice
-                                            .formatted,
-                                          true
-                                        )
-                                      ) +
-                                      "\n                            "
-                                  )
-                                ])
-                              : _c("del", { staticClass: "crossprice" }, [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(
-                                        _vm._f("itemCrossPrice")(
-                                          _vm.item.prices.rrp.unitPrice
-                                            .formatted
-                                        )
-                                      ) +
-                                      "\n                            "
-                                  )
-                                ])
+                              ? _c(
+                                  "del",
+                                  { staticClass: "crossprice color-gray-700" },
+                                  [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(
+                                          _vm._f("itemCrossPrice")(
+                                            _vm.item.prices.default.unitPrice
+                                              .formatted,
+                                            true
+                                          )
+                                        ) +
+                                        "\n                            "
+                                    )
+                                  ]
+                                )
+                              : _c(
+                                  "del",
+                                  { staticClass: "crossprice color-gray-700" },
+                                  [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(
+                                          _vm._f("itemCrossPrice")(
+                                            _vm.item.prices.rrp.unitPrice
+                                              .formatted
+                                          )
+                                        ) +
+                                        "\n                            "
+                                    )
+                                  ]
+                                )
                           ])
                         : _vm._e(),
                       _vm._v(" "),
