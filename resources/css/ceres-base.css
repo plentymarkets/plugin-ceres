@@ -12812,10 +12812,6 @@ body.basket-open {
   pointer-events: none;
 }
 
-.color-gray-700 {
-  color: #495057 !important;
-}
-
 .component-loading {
   position: relative;
 }
