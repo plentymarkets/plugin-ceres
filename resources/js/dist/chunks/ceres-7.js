@@ -791,7 +791,10 @@ var render = function() {
                             _vm.item.prices.specialOffer
                               ? _c(
                                   "del",
-                                  { staticClass: "crossprice color-gray-700" },
+                                  {
+                                    staticClass: "crossprice",
+                                    staticStyle: { color: "#495057" }
+                                  },
                                   [
                                     _vm._v(
                                       "\n                                " +
@@ -808,7 +811,10 @@ var render = function() {
                                 )
                               : _c(
                                   "del",
-                                  { staticClass: "crossprice color-gray-700" },
+                                  {
+                                    staticClass: "crossprice",
+                                    staticStyle: { color: "#495057" }
+                                  },
                                   [
                                     _vm._v(
                                       "\n                                " +

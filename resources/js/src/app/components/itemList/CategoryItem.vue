@@ -62,10 +62,10 @@
 
                         <div class="prices">
                             <div v-if="item.prices.rrp && item.prices.rrp.price.value > 0 && item.prices.rrp.price.value > item.prices.default.price.value" class="price-view-port">
-                                <del class="crossprice color-gray-700" v-if="item.prices.specialOffer">
+                                <del class="crossprice" v-if="item.prices.specialOffer" style="color: #495057;">
                                     {{ item.prices.default.unitPrice.formatted | itemCrossPrice(true) }}
                                 </del>
-                                <del class="crossprice color-gray-700" v-else>
+                                <del class="crossprice" v-else style="color: #495057;">
                                     {{ item.prices.rrp.unitPrice.formatted | itemCrossPrice }}
                                 </del>
                             </div>
