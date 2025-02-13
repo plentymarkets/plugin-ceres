@@ -6,7 +6,7 @@
 - During registration process, enable the same set of countries as those available for the billing address.
 - Added widget instead of datafields for manufacturer and eu responsible tabs.
 - Accessibility improvements
-- Removed title for accessibility  for Image Carousel Widget./
+- Removed title for accessibility for Image Carousel Widget.
 
 ### Geändert
 
