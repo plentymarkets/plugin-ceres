@@ -1,5 +1,9 @@
 <script type="x/template" id="vue-shipping-profile-select">
     <div class="cmp cmp-method-list list mb-4" v-bind:class="{ 'error': showError }">
+    <fieldset>
+        <legend>
+            <span class="d-none">{{ trans("Ceres::Template.checkoutShippingProfile") }}</span>
+        </legend>
         <ul class="method-list component-loading" :class="{ 'is-loading': isBasketLoading || isCheckoutReadonly }">
             <li v-for="shippingProfile in shippingProfileList" class="method-list-item"  :data-id="shippingProfile.parcelServicePresetId">
                 <input
@@ -23,7 +27,7 @@
                        :data-title="getTooltip(shippingProfile.parcelServicePresetId, selectedPaymentMethodId)"
                     >
                     <div class="icon">
-                        <img class="img-fluid" v-if="shippingProfile.icon" :src="shippingProfile.icon" :alt="shippingProfile.parcelServiceName" :title="shippingProfile.parcelServiceName">
+                        <img class="img-fluid" v-if="shippingProfile.icon" :src="shippingProfile.icon" :alt="shippingProfile.parcelServiceName">
                     </div><!--
                     --><div class="content">
                         ${ shippingProfile.parcelServiceName } - ${ shippingProfile.parcelServicePresetName }
@@ -44,5 +48,6 @@
                 </div>
             </li><!-- -->
         </ul>
+        </fieldset>
     </div>
 </script>
