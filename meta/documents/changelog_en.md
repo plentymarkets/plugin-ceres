@@ -7,6 +7,7 @@
 - Added widget instead of datafields for manufacturer and eu responsible tabs.
 - Accessibility improvements
 - Removed title for accessibility for Image Carousel Widget.
+- Added aria-label for button inside AdditionalInformationWidget
 
 ### Geändert
 
