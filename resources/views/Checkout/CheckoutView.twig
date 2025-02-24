@@ -4,9 +4,6 @@
 {% set deliveryAddresses = services.customer.getAddresses(2) %}
 {% set billingAddresses = services.customer.getAddresses(1) %}
 
-{% set primaryDeliveryAddress = 0 %}
-{% set primaryBillingAddress = 0 %}
-
 {% set nrOfDeliveryAddresses = deliveryAddresses|length %}
 {% set nrOfBillingAddresses = billingAddresses|length %}
 
