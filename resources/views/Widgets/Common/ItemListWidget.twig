@@ -24,9 +24,9 @@
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 
-{% if itemsPerPage is empty or itemsPerPage > 4 %}
+{% if itemsPerPage is empty or itemsPerPage > 4 and not isPreview %}
     {% set itemsPerPage = 4 %}
-{% elseif itemsPerPage < 1 %}
+{% elseif itemsPerPage < 1 and not isPreview %}
     {% set itemsPerPage = 1 %}
 {% endif %}
 
