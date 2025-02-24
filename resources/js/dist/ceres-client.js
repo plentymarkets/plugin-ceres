@@ -529,11 +529,13 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
       var _this2 = this;
 
       this.$nextTick(function () {
+        var _document$getElementB;
+
         _this2.$el.setAttribute('data-loaded', 'false');
 
-        var images = document.getElementById(_this2.uuid).getElementsByTagName('img');
+        var images = (_document$getElementB = document.getElementById(_this2.uuid)) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB.getElementsByTagName('img');
 
-        if (images.length > 0) {
+        if (images && images.length > 0) {
           images[0].remove();
         }
 
@@ -548,11 +550,11 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
       var _this3 = this;
 
       this.$nextTick(function () {
-        var _document$getElementB;
+        var _document$getElementB2;
 
         _this3.propagateImageFormat();
 
-        (_document$getElementB = document.getElementById(_this3.uuid).getElementsByTagName('img')) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB[0].remove();
+        (_document$getElementB2 = document.getElementById(_this3.uuid).getElementsByTagName('img')) === null || _document$getElementB2 === void 0 ? void 0 : _document$getElementB2[0].remove();
       });
     }
   },
