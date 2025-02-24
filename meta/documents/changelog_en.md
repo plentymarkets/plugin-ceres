@@ -9,10 +9,15 @@
 - Removed title for accessibility for Image Carousel Widget.
 - Added aria-label for button inside AdditionalInformationWidget, aria-label for homepage inside BreadcrumbWidget
 
-### Geändert
+### Changed
 
 - We removed the Option "always" for the setting **Validity of URLs to change password and email address** in the plugin settings. The setting is now always set to 1 week.
 - Removed role="listbox" and role="option" from divs inside the ImageCarouselWidget
+
+### Fixed
+
+- The primary shipping address was not set correctly in the checkout on the initial visit.
+- If the user has primary addresses, the checkout address selection would always show them as selected. This has been fixed, the checkout now show the selected address again.
 
 ## v5.0.71 (2024-12-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.70...5.0.71" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
