@@ -34,10 +34,6 @@
     {% set maxItems = 4 %}
 {% endif %}
 
-{% if isPreview and itemsPerPage < 4 %}
-    {% set itemsPerPage = 4 %}
-{% endif %}
-
 {% if listType == "category" %}
     {% set itemListId = categoryId %}
     {{ Twig.set("category", Twig.call("services.category.get", [categoryId])) }}
