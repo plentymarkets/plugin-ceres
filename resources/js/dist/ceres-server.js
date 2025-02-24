@@ -3012,6 +3012,7 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
           images[0].remove();
         }
 
+        if (!images) return;
         Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_9__["default"])(_this2.$el, {
           loaded: function loaded(el) {
             el.classList.remove('lozad');
