@@ -121,6 +121,7 @@ export default {
                 if (images && images.length > 0) {
                     images[0].remove();
                 }
+                if (!images) return;
 
                 lozad(this.$el, {
                     loaded: function(el) {
