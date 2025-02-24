@@ -24,14 +24,18 @@
 {% set spacingPadding  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
 {% set spacingMargin   = WidgetHelper.getSpacingClasses(spacingSettings, "", spacingSettings.customMargin.mobile) %}
 
-{% if itemsPerPage is empty or itemsPerPage > 4 and not isPreview %}
+{% if itemsPerPage is empty or itemsPerPage > 4 %}
     {% set itemsPerPage = 4 %}
-{% elseif itemsPerPage < 1 and not isPreview %}
+{% elseif itemsPerPage < 1 %}
     {% set itemsPerPage = 1 %}
 {% endif %}
 
 {% if isPreview and maxItems > 4 %}
     {% set maxItems = 4 %}
+{% endif %}
+
+{% if isPreview and itemsPerPage < 4 %}
+    {% set itemsPerPage = 4 %}
 {% endif %}
 
 {% if listType == "category" %}
