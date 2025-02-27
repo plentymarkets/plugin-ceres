@@ -63,6 +63,10 @@ export default {
                 {
                     key: "company",
                     name: "addressSalutationCompany"
+                },
+                {
+                  key: "notToSay",
+                  name: "addressSalutationPreferNotToSay"
                 }
             ]
         };
