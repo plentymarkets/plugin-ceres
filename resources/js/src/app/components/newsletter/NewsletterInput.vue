@@ -20,10 +20,16 @@
                         <label :for="'email-input-id_' + uniqueId">{{ $translate("Ceres::Template.newsletterEmail") }} {{ $translate("Ceres::Template.newsletterIsRequiredFootnote") }}</label>
                         <input @focus="loadRecaptcha = true" type="email" autocomplete="email" :id="'email-input-id_' + uniqueId" v-model="email" data-testing="nl-mail">
                     </div>
-                    <label :for="'input-username_' + uniqueId">
-                      <span class="d-none">{{ $translate("Ceres::Template.newsletterUsername") }}</span>
-                    </label>
-                    <input :id="'input-username_' + uniqueId" autocomplete="none" class="honey" type="text" name="username" tabindex="-1" v-model="honeypot">
+                    <input
+                        :id="'input-username_' + uniqueId"
+                        autocomplete="none"
+                        class="honey"
+                        type="text"
+                        name="username"
+                        tabindex="-1"
+                        aria-hidden="true"
+                        :aria-label="$translate('Ceres::Template.newsletterUsername')"
+                        v-model="honeypot">
                 </div>
             </div>
 
