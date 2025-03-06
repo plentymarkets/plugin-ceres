@@ -13500,7 +13500,7 @@ html.crios .parallax-img-container .parallax-img-container-inner[style^=backgrou
 }
 .single .order-property-input .font-size-md,
 .page-singleitem .order-property-input .font-size-md {
-  font-size: 0.8em;
+  font-size: 0.8em !important;
 }
 .single .order-property-selection-info-popper,
 .page-singleitem .order-property-selection-info-popper {
