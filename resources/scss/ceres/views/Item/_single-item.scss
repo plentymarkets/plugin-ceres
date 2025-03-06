@@ -134,6 +134,10 @@
         &.active {
             border-color: $success;
         }
+
+        .font-size-md {
+            font-size: .8em;
+        }
     }
 
     .order-property-selection-info-popper {
