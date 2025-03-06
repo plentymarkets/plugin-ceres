@@ -13502,10 +13502,6 @@ html.crios .parallax-img-container .parallax-img-container-inner[style^=backgrou
 .page-singleitem .order-property-input.active {
   border-color: #28a745;
 }
-.single .order-property-input .font-size-md,
-.page-singleitem .order-property-input .font-size-md {
-  font-size: 0.8em !important;
-}
 .single .order-property-selection-info-popper,
 .page-singleitem .order-property-selection-info-popper {
   top: 0;
@@ -13683,6 +13679,10 @@ html.crios .parallax-img-container .parallax-img-container-inner[style^=backgrou
 }
 .add-to-basket-container .quantity-input-container {
   margin-right: 15px;
+}
+
+.font-size-md {
+  font-size: 0.8em !important;
 }
 
 .v-s-boxes {

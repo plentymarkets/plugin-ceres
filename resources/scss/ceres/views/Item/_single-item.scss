@@ -134,10 +134,6 @@
         &.active {
             border-color: $success;
         }
-
-        .font-size-md {
-            font-size: .8em !important;
-        }
     }
 
     .order-property-selection-info-popper {
@@ -335,6 +331,10 @@
     .quantity-input-container {
         margin-right: 15px;
     }
+}
+
+.font-size-md {
+    font-size: .8em !important;
 }
 
 .v-s-boxes {
