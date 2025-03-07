@@ -15,7 +15,7 @@
                 <span class="text-truncate font-size-md">{{ property.names.name }}</span>
                 <strong class="ml-1">
                     <template v-if="surcharge > 0">({{ inclOrPlus }} {{ surcharge | currency }})</template>
-                    <span>{{ footnotes }} {{ requiredFootnotes }}</span>
+                    <span class="font-size-md">{{ footnotes }} {{ requiredFootnotes }}</span>
                 </strong>
             </label>
         </div>
@@ -68,7 +68,7 @@
                     <span class="text-truncate font-size-md">{{ property.names.name }}</span>
                     <strong class="ml-1">
                         <template v-if="surcharge > 0">({{ inclOrPlus }} {{ surcharge | currency }})</template>
-                        <span>{{ footnotes }} {{ requiredFootnotes }}</span>
+                        <span class="font-size-md">{{ footnotes }} {{ requiredFootnotes }}</span>
                     </strong>
                 </label>
             </div>
@@ -90,7 +90,7 @@
                     <span class="text-truncate font-size-md">{{ property.names.name }}</span>
                     <strong class="ml-1">
                         <template v-if="surcharge > 0">({{ inclOrPlus }} {{ surcharge | currency }})</template>
-                        <span>{{ footnotes }} {{ requiredFootnotes }}</span>
+                        <span class="font-size-md">{{ footnotes }} {{ requiredFootnotes }}</span>
                     </strong>
                 </span>
                 <span class="input-unit-btn" v-if="!selectedFile">

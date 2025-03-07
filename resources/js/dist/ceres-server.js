@@ -51369,7 +51369,7 @@ var render = function() {
                           ")"
                       )
                     : "<!---->") +
-                  " <span>" +
+                  ' <span class="font-size-md">' +
                   _vm._ssrEscape(
                     _vm._s(_vm.footnotes) + " " + _vm._s(_vm.requiredFootnotes)
                   ) +
@@ -51551,7 +51551,7 @@ var render = function() {
                               ")"
                           )
                         : "<!---->") +
-                      " <span>" +
+                      ' <span class="font-size-md">' +
                       _vm._ssrEscape(
                         _vm._s(_vm.footnotes) +
                           " " +
@@ -51649,7 +51649,7 @@ var render = function() {
                               ")"
                           )
                         : "<!---->") +
-                      " <span>" +
+                      ' <span class="font-size-md">' +
                       _vm._ssrEscape(
                         _vm._s(_vm.footnotes) +
                           " " +
