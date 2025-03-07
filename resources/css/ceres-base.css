@@ -13677,10 +13677,6 @@ html.crios .parallax-img-container .parallax-img-container-inner[style^=backgrou
   margin-right: 15px;
 }
 
-.font-size-md {
-  font-size: 0.8em !important;
-}
-
 .v-s-boxes {
   display: flex;
   flex-flow: row wrap;
