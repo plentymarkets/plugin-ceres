@@ -193,7 +193,10 @@ var render = function() {
                           [
                             item.image
                               ? _c("lazy-img", {
-                                  attrs: { "image-url": item.image }
+                                  attrs: {
+                                    alt: item.imageAlt,
+                                    "image-url": item.image
+                                  }
                                 })
                               : _vm._e()
                           ],
