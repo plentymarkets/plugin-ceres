@@ -112,7 +112,11 @@ export default {
 
         getImageAlt(item)
         {
-          return item.imageAlt ?? item.label
+          if (item.imageAlt) {
+            return item.imageAlt;
+          }
+
+          return item.label ? item.label : '';
         }
     }
 }
