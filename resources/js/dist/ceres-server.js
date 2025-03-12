@@ -3013,15 +3013,10 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
       }).triggerLoad(this.$el);
     },
     imageUrl: function imageUrl() {
-      var _this2 = this;
+      var _document$getElementB;
 
-      this.$nextTick(function () {
-        var _document$getElementB;
-
-        _this2.propagateImageFormat();
-
-        (_document$getElementB = document.getElementById(_this2.uuid).getElementsByTagName('img')) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB[0].remove();
-      });
+      this.propagateImageFormat();
+      (_document$getElementB = document.getElementById(this.uuid).getElementsByTagName('img')) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB[0].remove();
     }
   },
   computed: {

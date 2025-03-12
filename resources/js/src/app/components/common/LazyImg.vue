@@ -129,10 +129,8 @@ export default {
         },
         imageUrl()
         {
-            this.$nextTick(() => {
-                this.propagateImageFormat();
-                document.getElementById(this.uuid).getElementsByTagName('img')?.[0].remove();
-            });
+            this.propagateImageFormat();
+            document.getElementById(this.uuid).getElementsByTagName('img')?.[0].remove();
         }
     },
     computed:
