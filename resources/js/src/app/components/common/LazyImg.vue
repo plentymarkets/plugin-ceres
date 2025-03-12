@@ -1,6 +1,4 @@
 <template>
-  <div>
-    <span class="sr-only" v-if="alt">{{ alt }}</span>
     <picture
         v-if="!isBackgroundImage"
         :data-iesrc="defaultImageUrl"
@@ -20,7 +18,6 @@
     <div v-else :data-background-image="defaultImageUrl || fallbackUrl" :class="pictureClass">
         <slot></slot>
     </div>
-  </div>
 </template>
 
 <script>
