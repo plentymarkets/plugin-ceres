@@ -1134,9 +1134,14 @@ var render = function() {
                   attrs: { for: "order-property-input_" + _vm.property.id }
                 },
                 [
-                  _c("span", { staticClass: "text-truncate font-size-md" }, [
-                    _vm._v(_vm._s(_vm.property.names.name))
-                  ]),
+                  _c(
+                    "span",
+                    {
+                      staticClass: "text-truncate font-size-md",
+                      staticStyle: { "font-size": ".8rem" }
+                    },
+                    [_vm._v(_vm._s(_vm.property.names.name))]
+                  ),
                   _vm._v(" "),
                   _c(
                     "strong",
@@ -1154,13 +1159,20 @@ var render = function() {
                           ]
                         : _vm._e(),
                       _vm._v(" "),
-                      _c("span", { staticClass: "font-size-md" }, [
-                        _vm._v(
-                          _vm._s(_vm.footnotes) +
-                            " " +
-                            _vm._s(_vm.requiredFootnotes)
-                        )
-                      ])
+                      _c(
+                        "span",
+                        {
+                          staticClass: "font-size-md",
+                          staticStyle: { "font-size": ".8rem" }
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(_vm.footnotes) +
+                              " " +
+                              _vm._s(_vm.requiredFootnotes)
+                          )
+                        ]
+                      )
                     ],
                     2
                   )
@@ -1359,7 +1371,10 @@ var render = function() {
                     [
                       _c(
                         "span",
-                        { staticClass: "text-truncate font-size-md" },
+                        {
+                          staticClass: "text-truncate font-size-md",
+                          staticStyle: { "font-size": ".8rem" }
+                        },
                         [_vm._v(_vm._s(_vm.property.names.name))]
                       ),
                       _vm._v(" "),
@@ -1379,13 +1394,20 @@ var render = function() {
                               ]
                             : _vm._e(),
                           _vm._v(" "),
-                          _c("span", { staticClass: "font-size-md" }, [
-                            _vm._v(
-                              _vm._s(_vm.footnotes) +
-                                " " +
-                                _vm._s(_vm.requiredFootnotes)
-                            )
-                          ])
+                          _c(
+                            "span",
+                            {
+                              staticClass: "font-size-md",
+                              staticStyle: { "font-size": ".8rem" }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.footnotes) +
+                                  " " +
+                                  _vm._s(_vm.requiredFootnotes)
+                              )
+                            ]
+                          )
                         ],
                         2
                       )
@@ -1471,9 +1493,14 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("span", { staticClass: "input-unit-label d-flex" }, [
-                    _c("span", { staticClass: "text-truncate font-size-md" }, [
-                      _vm._v(_vm._s(_vm.property.names.name))
-                    ]),
+                    _c(
+                      "span",
+                      {
+                        staticClass: "text-truncate font-size-md",
+                        staticStyle: { "font-size": ".8rem" }
+                      },
+                      [_vm._v(_vm._s(_vm.property.names.name))]
+                    ),
                     _vm._v(" "),
                     _c(
                       "strong",
@@ -1491,13 +1518,20 @@ var render = function() {
                             ]
                           : _vm._e(),
                         _vm._v(" "),
-                        _c("span", { staticClass: "font-size-md" }, [
-                          _vm._v(
-                            _vm._s(_vm.footnotes) +
-                              " " +
-                              _vm._s(_vm.requiredFootnotes)
-                          )
-                        ])
+                        _c(
+                          "span",
+                          {
+                            staticClass: "font-size-md",
+                            staticStyle: { "font-size": ".8rem" }
+                          },
+                          [
+                            _vm._v(
+                              _vm._s(_vm.footnotes) +
+                                " " +
+                                _vm._s(_vm.requiredFootnotes)
+                            )
+                          ]
+                        )
                       ],
                       2
                     )

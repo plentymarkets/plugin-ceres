@@ -51364,7 +51364,7 @@ var render = function() {
                     "for",
                     "order-property-input_" + _vm.property.id
                   ) +
-                  ' class="d-flex"><span class="text-truncate font-size-md">' +
+                  ' class="d-flex"><span class="text-truncate font-size-md" style="font-size: .8rem;">' +
                   _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
                   '</span> <strong class="ml-1">' +
                   (_vm.surcharge > 0
@@ -51376,7 +51376,7 @@ var render = function() {
                           ")"
                       )
                     : "<!---->") +
-                  ' <span class="font-size-md">' +
+                  ' <span class="font-size-md" style="font-size: .8rem;">' +
                   _vm._ssrEscape(
                     _vm._s(_vm.footnotes) + " " + _vm._s(_vm.requiredFootnotes)
                   ) +
@@ -51546,7 +51546,7 @@ var render = function() {
                     2
                   ),
                   _vm._ssrNode(
-                    ' <label for="order-property-input-select" class="d-flex w-100"><span class="text-truncate font-size-md">' +
+                    ' <label for="order-property-input-select" class="d-flex w-100"><span class="text-truncate font-size-md" style="font-size: .8rem;">' +
                       _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
                       '</span> <strong class="ml-1">' +
                       (_vm.surcharge > 0
@@ -51558,7 +51558,7 @@ var render = function() {
                               ")"
                           )
                         : "<!---->") +
-                      ' <span class="font-size-md">' +
+                      ' <span class="font-size-md" style="font-size: .8rem;">' +
                       _vm._ssrEscape(
                         _vm._s(_vm.footnotes) +
                           " " +
@@ -51644,7 +51644,7 @@ var render = function() {
                       }) +
                       ">" +
                       _vm._ssrEscape(_vm._s(_vm.selectedFileName)) +
-                      '</span> <span class="input-unit-label d-flex"><span class="text-truncate font-size-md">' +
+                      '</span> <span class="input-unit-label d-flex"><span class="text-truncate font-size-md" style="font-size: .8rem;">' +
                       _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
                       '</span> <strong class="ml-1">' +
                       (_vm.surcharge > 0
@@ -51656,7 +51656,7 @@ var render = function() {
                               ")"
                           )
                         : "<!---->") +
-                      ' <span class="font-size-md">' +
+                      ' <span class="font-size-md" style="font-size: .8rem;">' +
                       _vm._ssrEscape(
                         _vm._s(_vm.footnotes) +
                           " " +
