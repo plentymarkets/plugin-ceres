@@ -2907,6 +2907,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -2999,24 +3002,34 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
   },
   watch: {
     defaultImageUrl: function defaultImageUrl() {
-      this.$el.setAttribute('data-loaded', 'false');
-      var images = document.getElementById(this.uuid).getElementsByTagName('img');
+      var _this2 = this;
 
-      if (images.length > 0) {
-        images[0].remove();
-      }
+      this.$nextTick(function () {
+        _this2.$el.setAttribute('data-loaded', 'false');
 
-      Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_9__["default"])(this.$el, {
-        loaded: function loaded(el) {
-          el.classList.remove('lozad');
+        var images = document.getElementById(_this2.uuid).getElementsByTagName('img');
+
+        if (images.length > 0) {
+          images[0].remove();
         }
-      }).triggerLoad(this.$el);
+
+        Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_9__["default"])(_this2.$el, {
+          loaded: function loaded(el) {
+            el.classList.remove('lozad');
+          }
+        }).triggerLoad(_this2.$el);
+      });
     },
     imageUrl: function imageUrl() {
-      var _document$getElementB;
+      var _this3 = this;
 
-      this.propagateImageFormat();
-      (_document$getElementB = document.getElementById(this.uuid).getElementsByTagName('img')) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB[0].remove();
+      this.$nextTick(function () {
+        var _document$getElementB;
+
+        _this3.propagateImageFormat();
+
+        (_document$getElementB = document.getElementById(_this3.uuid).getElementsByTagName('img')) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB[0].remove();
+      });
     }
   },
   computed: {
@@ -44269,64 +44282,76 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return !_vm.isBackgroundImage
-    ? _c(
-        "picture",
-        {
-          attrs: {
-            "data-iesrc": _vm.defaultImageUrl,
-            "data-picture-class": _vm.pictureClass,
-            "data-alt": _vm.alt,
-            "data-title": _vm.title,
-            "data-height": _vm.getHeight(),
-            "data-width": _vm.getWidth(),
-            id: _vm.uuid
-          }
-        },
-        [
-          _vm._t("additionalimages"),
-          _vm._ssrNode(
-            " <source" +
-              _vm._ssrAttr("srcset", _vm.defaultImageUrl) +
-              _vm._ssrAttr("type", _vm.mimeType(_vm.defaultImageUrl)) +
-              "> " +
-              (_vm.defaultImageUrl !== _vm.imageUrl
-                ? "<source" +
-                  _vm._ssrAttr("srcset", _vm.imageUrl) +
-                  _vm._ssrAttr("type", _vm.mimeType(_vm.imageUrl)) +
-                  ">"
-                : "<!---->") +
-              " " +
-              (_vm.fallbackUrl
-                ? "<source" +
-                  _vm._ssrAttr("srcset", _vm.fallbackUrl) +
-                  _vm._ssrAttr("type", _vm.mimeType(_vm.fallbackUrl)) +
-                  ">"
-                : "<!---->") +
-              " " +
-              (_vm.receivedImageExtension === "tif"
-                ? "<img" +
-                  _vm._ssrAttr("src", _vm.defaultImageUrl) +
-                  _vm._ssrAttr("alt", _vm.alt) +
-                  _vm._ssrAttr("height", _vm.getHeight()) +
-                  _vm._ssrAttr("width", _vm.getWidth()) +
-                  ' type="image/tiff" class="mw-100 h-auto">'
-                : "<!---->")
+  return _c(
+    "div",
+    [
+      _vm._ssrNode(
+        (_vm.alt
+          ? '<span class="sr-only">' +
+            _vm._ssrEscape(_vm._s(_vm.alt)) +
+            "</span>"
+          : "<!---->") + " "
+      ),
+      !_vm.isBackgroundImage
+        ? _vm._ssrNode(
+            "<picture" +
+              _vm._ssrAttr("data-iesrc", _vm.defaultImageUrl) +
+              _vm._ssrAttr("data-picture-class", _vm.pictureClass) +
+              _vm._ssrAttr("data-alt", _vm.alt) +
+              _vm._ssrAttr("data-title", _vm.title) +
+              _vm._ssrAttr("data-height", _vm.getHeight()) +
+              _vm._ssrAttr("data-width", _vm.getWidth()) +
+              _vm._ssrAttr("id", _vm.uuid) +
+              ">",
+            "</picture>",
+            [
+              _vm._t("additionalimages"),
+              _vm._ssrNode(
+                " <source" +
+                  _vm._ssrAttr("srcset", _vm.defaultImageUrl) +
+                  _vm._ssrAttr("type", _vm.mimeType(_vm.defaultImageUrl)) +
+                  "> " +
+                  (_vm.defaultImageUrl !== _vm.imageUrl
+                    ? "<source" +
+                      _vm._ssrAttr("srcset", _vm.imageUrl) +
+                      _vm._ssrAttr("type", _vm.mimeType(_vm.imageUrl)) +
+                      ">"
+                    : "<!---->") +
+                  " " +
+                  (_vm.fallbackUrl
+                    ? "<source" +
+                      _vm._ssrAttr("srcset", _vm.fallbackUrl) +
+                      _vm._ssrAttr("type", _vm.mimeType(_vm.fallbackUrl)) +
+                      ">"
+                    : "<!---->") +
+                  " " +
+                  (_vm.receivedImageExtension === "tif"
+                    ? "<img" +
+                      _vm._ssrAttr("src", _vm.defaultImageUrl) +
+                      _vm._ssrAttr("alt", _vm.alt) +
+                      _vm._ssrAttr("height", _vm.getHeight()) +
+                      _vm._ssrAttr("width", _vm.getWidth()) +
+                      ' type="image/tiff" class="mw-100 h-auto">'
+                    : "<!---->")
+              )
+            ],
+            2
           )
-        ],
-        2
-      )
-    : _c(
-        "div",
-        {
-          class: _vm.pictureClass,
-          attrs: {
-            "data-background-image": _vm.defaultImageUrl || _vm.fallbackUrl
-          }
-        },
-        [_vm._t("default")],
-        2
-      )
+        : _vm._ssrNode(
+            "<div" +
+              _vm._ssrAttr(
+                "data-background-image",
+                _vm.defaultImageUrl || _vm.fallbackUrl
+              ) +
+              _vm._ssrClass(null, _vm.pictureClass) +
+              ">",
+            "</div>",
+            [_vm._t("default")],
+            2
+          )
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
