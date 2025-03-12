@@ -1500,7 +1500,7 @@ $toast-header-border-color:         rgba(0, 0, 0, .05) !default;
 
 // Badges
 
-$badge-font-size:                   80% !default;
+$badge-font-size:                   75% !default;
 $badge-font-weight:                 $font-weight-bold !default;
 $badge-padding-y:                   .25em !default;
 $badge-padding-x:                   .4em !default;
@@ -14903,6 +14903,4 @@ body.lb-disable-scrolling {
     opacity: 1;
 }
 
-.font-size-md {
-  font-size: .8rem;
-}
+
