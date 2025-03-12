@@ -17684,3 +17684,7 @@ body.lb-disable-scrolling {
   cursor: pointer;
   opacity: 1;
 }
+
+.font-size-md {
+  font-size: 0.8rem;
+}
