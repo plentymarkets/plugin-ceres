@@ -1,4 +1,6 @@
 <template>
+  <div>
+    <span class="sr-only" v-if="alt">{{ alt }}</span>
     <picture
         v-if="!isBackgroundImage"
         :data-iesrc="defaultImageUrl"
@@ -18,6 +20,7 @@
     <div v-else :data-background-image="defaultImageUrl || fallbackUrl" :class="pictureClass">
         <slot></slot>
     </div>
+  </div>
 </template>
 
 <script>
@@ -114,23 +117,27 @@ export default {
     {
         defaultImageUrl()
         {
-            this.$el.setAttribute('data-loaded', 'false');
+            this.$nextTick(() => {
+                this.$el.setAttribute('data-loaded', 'false');
 
-            const images = document.getElementById(this.uuid).getElementsByTagName('img');
-            if (images.length > 0) {
-                images[0].remove();
-            }
-
-            lozad(this.$el, {
-                loaded: function(el) {
-                    el.classList.remove('lozad');
+                const images = document.getElementById(this.uuid).getElementsByTagName('img');
+                if (images.length > 0) {
+                    images[0].remove();
                 }
-            }).triggerLoad(this.$el);
+
+                lozad(this.$el, {
+                    loaded: function(el) {
+                        el.classList.remove('lozad');
+                    }
+                }).triggerLoad(this.$el);
+            });
         },
         imageUrl()
         {
-            this.propagateImageFormat();
-            document.getElementById(this.uuid).getElementsByTagName('img')?.[0].remove();
+            this.$nextTick(() => {
+                this.propagateImageFormat();
+                document.getElementById(this.uuid).getElementsByTagName('img')?.[0].remove();
+            });
         }
     },
     computed:
