@@ -434,9 +434,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 
@@ -1746,6 +1743,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0__);
 
+//
+//
 //
 //
 //
@@ -37663,80 +37662,74 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.alt
-      ? _c("span", { staticClass: "sr-only" }, [_vm._v(_vm._s(_vm.alt))])
-      : _vm._e(),
-    _vm._v(" "),
-    !_vm.isBackgroundImage
-      ? _c(
-          "picture",
-          {
+  return !_vm.isBackgroundImage
+    ? _c(
+        "picture",
+        {
+          attrs: {
+            "data-iesrc": _vm.defaultImageUrl,
+            "data-picture-class": _vm.pictureClass,
+            "data-alt": _vm.alt,
+            "data-title": _vm.title,
+            "data-height": _vm.getHeight(),
+            "data-width": _vm.getWidth(),
+            id: _vm.uuid
+          }
+        },
+        [
+          _vm._t("additionalimages"),
+          _vm._v(" "),
+          _c("source", {
             attrs: {
-              "data-iesrc": _vm.defaultImageUrl,
-              "data-picture-class": _vm.pictureClass,
-              "data-alt": _vm.alt,
-              "data-title": _vm.title,
-              "data-height": _vm.getHeight(),
-              "data-width": _vm.getWidth(),
-              id: _vm.uuid
+              srcset: _vm.defaultImageUrl,
+              type: _vm.mimeType(_vm.defaultImageUrl)
             }
-          },
-          [
-            _vm._t("additionalimages"),
-            _vm._v(" "),
-            _c("source", {
-              attrs: {
-                srcset: _vm.defaultImageUrl,
-                type: _vm.mimeType(_vm.defaultImageUrl)
-              }
-            }),
-            _vm._v(" "),
-            _vm.defaultImageUrl !== _vm.imageUrl
-              ? _c("source", {
-                  attrs: {
-                    srcset: _vm.imageUrl,
-                    type: _vm.mimeType(_vm.imageUrl)
-                  }
-                })
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.fallbackUrl
-              ? _c("source", {
-                  attrs: {
-                    srcset: _vm.fallbackUrl,
-                    type: _vm.mimeType(_vm.fallbackUrl)
-                  }
-                })
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.receivedImageExtension === "tif"
-              ? _c("img", {
-                  staticClass: "mw-100 h-auto",
-                  attrs: {
-                    src: _vm.defaultImageUrl,
-                    alt: _vm.alt,
-                    height: _vm.getHeight(),
-                    width: _vm.getWidth(),
-                    type: "image/tiff"
-                  }
-                })
-              : _vm._e()
-          ],
-          2
-        )
-      : _c(
-          "div",
-          {
-            class: _vm.pictureClass,
-            attrs: {
-              "data-background-image": _vm.defaultImageUrl || _vm.fallbackUrl
-            }
-          },
-          [_vm._t("default")],
-          2
-        )
-  ])
+          }),
+          _vm._v(" "),
+          _vm.defaultImageUrl !== _vm.imageUrl
+            ? _c("source", {
+                attrs: {
+                  srcset: _vm.imageUrl,
+                  type: _vm.mimeType(_vm.imageUrl)
+                }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.fallbackUrl
+            ? _c("source", {
+                attrs: {
+                  srcset: _vm.fallbackUrl,
+                  type: _vm.mimeType(_vm.fallbackUrl)
+                }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.receivedImageExtension === "tif"
+            ? _c("img", {
+                staticClass: "mw-100 h-auto",
+                attrs: {
+                  src: _vm.defaultImageUrl,
+                  alt: _vm.alt,
+                  height: _vm.getHeight(),
+                  width: _vm.getWidth(),
+                  type: "image/tiff"
+                }
+              })
+            : _vm._e()
+        ],
+        2
+      )
+    : _c(
+        "div",
+        {
+          class: _vm.pictureClass,
+          attrs: {
+            "data-background-image": _vm.defaultImageUrl || _vm.fallbackUrl
+          }
+        },
+        [_vm._t("default")],
+        2
+      )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -39301,34 +39294,48 @@ var render = function() {
             role: "listbox"
           }
         },
-        _vm._l(_vm.imageUrls, function(imageUrl, index) {
-          return _c(
-            "div",
-            { key: index },
-            [
-              _c("lazy-img", {
-                ref: { itemLazyImage: index === 0 },
-                refInFor: true,
-                attrs: {
-                  "image-url": imageUrl.url,
-                  alt: _vm.getAltText(imageUrl),
-                  title: _vm.getTitleText(imageUrl),
-                  width: _vm.getImageWidth(imageUrl),
-                  height: _vm.getImageHeight(imageUrl),
-                  "picture-class": "img-fluid",
-                  role: "option"
-                }
-              })
-            ],
-            1
-          )
-        }),
-        0
+        [
+          _vm.imageUrls.length > 0 && _vm.getAltText(_vm.imageUrls[0])
+            ? _c("span", { staticClass: "sr-only" }, [
+                _vm._v(_vm._s(_vm.getAltText(_vm.imageUrls[0])))
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm._l(_vm.imageUrls, function(imageUrl, index) {
+            return _c(
+              "div",
+              { key: index },
+              [
+                _c("lazy-img", {
+                  ref: { itemLazyImage: index === 0 },
+                  refInFor: true,
+                  attrs: {
+                    "image-url": imageUrl.url,
+                    alt: _vm.getAltText(imageUrl),
+                    title: _vm.getTitleText(imageUrl),
+                    width: _vm.getImageWidth(imageUrl),
+                    height: _vm.getImageHeight(imageUrl),
+                    "picture-class": "img-fluid",
+                    role: "option"
+                  }
+                })
+              ],
+              1
+            )
+          })
+        ],
+        2
       )
     : _c(
         "a",
         { attrs: { href: _vm.itemUrl } },
         [
+          _vm.getAltText(_vm.imageUrls[0])
+            ? _c("span", { staticClass: "sr-only" }, [
+                _vm._v(_vm._s(_vm.getAltText(_vm.imageUrls[0])))
+              ])
+            : _vm._e(),
+          _vm._v(" "),
           _c("lazy-img", {
             ref: { itemLazyImage: !_vm.disableLazyLoad },
             attrs: {

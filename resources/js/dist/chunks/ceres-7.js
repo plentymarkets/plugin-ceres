@@ -45,6 +45,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "category-image-carousel",
   props: {
@@ -583,34 +585,48 @@ var render = function() {
             role: "listbox"
           }
         },
-        _vm._l(_vm.imageUrls, function(imageUrl, index) {
-          return _c(
-            "div",
-            { key: index },
-            [
-              _c("lazy-img", {
-                ref: { itemLazyImage: index === 0 },
-                refInFor: true,
-                attrs: {
-                  "image-url": imageUrl.url,
-                  alt: _vm.getAltText(imageUrl),
-                  title: _vm.getTitleText(imageUrl),
-                  width: _vm.getImageWidth(imageUrl),
-                  height: _vm.getImageHeight(imageUrl),
-                  "picture-class": "img-fluid",
-                  role: "option"
-                }
-              })
-            ],
-            1
-          )
-        }),
-        0
+        [
+          _vm.imageUrls.length > 0 && _vm.getAltText(_vm.imageUrls[0])
+            ? _c("span", { staticClass: "sr-only" }, [
+                _vm._v(_vm._s(_vm.getAltText(_vm.imageUrls[0])))
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm._l(_vm.imageUrls, function(imageUrl, index) {
+            return _c(
+              "div",
+              { key: index },
+              [
+                _c("lazy-img", {
+                  ref: { itemLazyImage: index === 0 },
+                  refInFor: true,
+                  attrs: {
+                    "image-url": imageUrl.url,
+                    alt: _vm.getAltText(imageUrl),
+                    title: _vm.getTitleText(imageUrl),
+                    width: _vm.getImageWidth(imageUrl),
+                    height: _vm.getImageHeight(imageUrl),
+                    "picture-class": "img-fluid",
+                    role: "option"
+                  }
+                })
+              ],
+              1
+            )
+          })
+        ],
+        2
       )
     : _c(
         "a",
         { attrs: { href: _vm.itemUrl } },
         [
+          _vm.getAltText(_vm.imageUrls[0])
+            ? _c("span", { staticClass: "sr-only" }, [
+                _vm._v(_vm._s(_vm.getAltText(_vm.imageUrls[0])))
+              ])
+            : _vm._e(),
+          _vm._v(" "),
           _c("lazy-img", {
             ref: { itemLazyImage: !_vm.disableLazyLoad },
             attrs: {
