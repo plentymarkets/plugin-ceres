@@ -11304,7 +11304,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "category-image-carousel",
   props: {
@@ -54032,38 +54031,29 @@ var render = function() {
             role: "listbox"
           }
         },
-        [
-          _vm._ssrNode(
-            (_vm.imageUrls.length > 0 && _vm.getAltText(_vm.imageUrls[0])
-              ? '<span class="sr-only">' +
-                _vm._ssrEscape(_vm._s(_vm.getAltText(_vm.imageUrls[0]))) +
-                "</span>"
-              : "<!---->") + " "
-          ),
-          _vm._l(_vm.imageUrls, function(imageUrl, index) {
-            return _vm._ssrNode(
-              "<div>",
-              "</div>",
-              [
-                _c("lazy-img", {
-                  ref: { itemLazyImage: index === 0 },
-                  refInFor: true,
-                  attrs: {
-                    "image-url": imageUrl.url,
-                    alt: _vm.getAltText(imageUrl),
-                    title: _vm.getTitleText(imageUrl),
-                    width: _vm.getImageWidth(imageUrl),
-                    height: _vm.getImageHeight(imageUrl),
-                    "picture-class": "img-fluid",
-                    role: "option"
-                  }
-                })
-              ],
-              1
-            )
-          })
-        ],
-        2
+        _vm._l(_vm.imageUrls, function(imageUrl, index) {
+          return _vm._ssrNode(
+            "<div>",
+            "</div>",
+            [
+              _c("lazy-img", {
+                ref: { itemLazyImage: index === 0 },
+                refInFor: true,
+                attrs: {
+                  "image-url": imageUrl.url,
+                  alt: _vm.getAltText(imageUrl),
+                  title: _vm.getTitleText(imageUrl),
+                  width: _vm.getImageWidth(imageUrl),
+                  height: _vm.getImageHeight(imageUrl),
+                  "picture-class": "img-fluid",
+                  role: "option"
+                }
+              })
+            ],
+            1
+          )
+        }),
+        0
       )
     : _c(
         "a",

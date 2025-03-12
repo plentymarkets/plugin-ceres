@@ -6,7 +6,6 @@
         :aria-label="$translate('Ceres::Template.itemImageCarousel')"
         role="listbox"
         class="owl-carousel owl-theme">
-        <span class="sr-only" v-if="imageUrls.length > 0 && getAltText(imageUrls[0])">{{ getAltText(imageUrls[0]) }}</span>
         <div v-for="(imageUrl, index) in imageUrls" :key="index">
             <lazy-img
                 :image-url="imageUrl.url"
