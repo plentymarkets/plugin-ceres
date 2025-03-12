@@ -13,7 +13,6 @@
         <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl" :type="mimeType(imageUrl)">
         <source v-if="fallbackUrl" :srcset="fallbackUrl" :type="mimeType(fallbackUrl)">
         <img v-if="receivedImageExtension === 'tif'" :src="defaultImageUrl" :alt="alt" :height="getHeight()" :width="getWidth()" type="image/tiff" class="mw-100 h-auto">
-        <img v-else :alt="alt" :id="uuid" />
     </picture>
 
     <div v-else :data-background-image="defaultImageUrl || fallbackUrl" :class="pictureClass">
@@ -115,20 +114,18 @@ export default {
     {
         defaultImageUrl()
         {
-            this.$nextTick(() => {
-                this.$el.setAttribute('data-loaded', 'false');
+            this.$el.setAttribute('data-loaded', 'false');
 
-                const images = document.getElementById(this.uuid).getElementsByTagName('img');
-                if (images.length > 0) {
-                    images[0].remove();
+            const images = document.getElementById(this.uuid).getElementsByTagName('img');
+            if (images.length > 0) {
+                images[0].remove();
+            }
+
+            lozad(this.$el, {
+                loaded: function(el) {
+                    el.classList.remove('lozad');
                 }
-
-                lozad(this.$el, {
-                    loaded: function(el) {
-                        el.classList.remove('lozad');
-                    }
-                }).triggerLoad(this.$el);
-            });
+            }).triggerLoad(this.$el);
         },
         imageUrl()
         {

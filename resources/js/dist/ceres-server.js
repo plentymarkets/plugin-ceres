@@ -2907,7 +2907,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -3000,33 +2999,28 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
   },
   watch: {
     defaultImageUrl: function defaultImageUrl() {
-      var _this2 = this;
+      this.$el.setAttribute('data-loaded', 'false');
+      var images = document.getElementById(this.uuid).getElementsByTagName('img');
 
-      this.$nextTick(function () {
-        _this2.$el.setAttribute('data-loaded', 'false');
+      if (images.length > 0) {
+        images[0].remove();
+      }
 
-        var images = document.getElementById(_this2.uuid).getElementsByTagName('img');
-
-        if (images.length > 0) {
-          images[0].remove();
+      Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_9__["default"])(this.$el, {
+        loaded: function loaded(el) {
+          el.classList.remove('lozad');
         }
-
-        Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_9__["default"])(_this2.$el, {
-          loaded: function loaded(el) {
-            el.classList.remove('lozad');
-          }
-        }).triggerLoad(_this2.$el);
-      });
+      }).triggerLoad(this.$el);
     },
     imageUrl: function imageUrl() {
-      var _this3 = this;
+      var _this2 = this;
 
       this.$nextTick(function () {
         var _document$getElementB;
 
-        _this3.propagateImageFormat();
+        _this2.propagateImageFormat();
 
-        (_document$getElementB = document.getElementById(_this3.uuid).getElementsByTagName('img')) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB[0].remove();
+        (_document$getElementB = document.getElementById(_this2.uuid).getElementsByTagName('img')) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB[0].remove();
       });
     }
   },
@@ -44322,10 +44316,7 @@ var render = function() {
                   _vm._ssrAttr("height", _vm.getHeight()) +
                   _vm._ssrAttr("width", _vm.getWidth()) +
                   ' type="image/tiff" class="mw-100 h-auto">'
-                : "<img" +
-                  _vm._ssrAttr("alt", _vm.alt) +
-                  _vm._ssrAttr("id", _vm.uuid) +
-                  ">")
+                : "<!---->")
           )
         ],
         2
