@@ -999,7 +999,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("fieldset", [
     _vm.isShownOnItemPageCount
       ? _c(
           "div",
@@ -1010,7 +1010,7 @@ var render = function() {
                   "div",
                   { class: _vm.paddingClasses, style: _vm.paddingInlineStyles },
                   [
-                    _c("div", { staticClass: "h4" }, [
+                    _c("legend", { staticClass: "h4" }, [
                       _vm._v(
                         "\n                " +
                           _vm._s(_vm.propertyGroup.group.names.name) +
