@@ -768,6 +768,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -40303,7 +40304,7 @@ var render = function() {
                   type: "image/tiff"
                 }
               })
-            : _vm._e()
+            : _c("img", { attrs: { alt: _vm.alt, id: _vm.uuid } })
         ],
         2
       )
