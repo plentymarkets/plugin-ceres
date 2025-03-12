@@ -45,7 +45,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "category-image-carousel",
   props: {
@@ -622,7 +621,6 @@ var render = function() {
             ref: { itemLazyImage: !_vm.disableLazyLoad },
             attrs: {
               "image-url": _vm.imageOrItemImage,
-              alt: _vm.getAltText(_vm.imageUrls[0]),
               title: _vm.getTitleText(_vm.imageUrls[0]),
               width: _vm.getImageWidth(_vm.imageUrls[0]),
               height: _vm.getImageHeight(_vm.imageUrls[0]),

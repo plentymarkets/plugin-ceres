@@ -24,7 +24,6 @@
         <lazy-img
             :ref="{ 'itemLazyImage': !disableLazyLoad }"
             :image-url="imageOrItemImage"
-            :alt="getAltText(imageUrls[0])"
             :title="getTitleText(imageUrls[0])"
             :width="getImageWidth(imageUrls[0])"
             :height="getImageHeight(imageUrls[0])"
