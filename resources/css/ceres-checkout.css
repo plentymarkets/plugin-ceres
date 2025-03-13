@@ -18442,3 +18442,7 @@ html.ie .confirmation-order-list .cmp-order-item .item-details .row strong:nth-o
   height: 100%;
   max-height: 500px;
 }
+
+.autocomplete-suggestion .count span {
+  color: #495057 !important;
+}

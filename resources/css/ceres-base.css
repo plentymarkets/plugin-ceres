@@ -17686,5 +17686,5 @@ body.lb-disable-scrolling {
 }
 
 .autocomplete-suggestion .count span {
-  color: #495057;
+  color: #495057 !important;
 }

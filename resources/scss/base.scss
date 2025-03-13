@@ -2,5 +2,5 @@
 @import "ceres/item";
 
 .autocomplete-suggestion .count span {
-  color: $gray-700;
+  color: $gray-700 !important;
 }
