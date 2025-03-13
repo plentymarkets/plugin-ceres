@@ -1,2 +1,6 @@
 @import "ceres/category";
 @import "ceres/item";
+
+.autocomplete-suggestion .count span {
+  color: $gray-700;
+}
