@@ -9,6 +9,7 @@
 - Removed title for accessibility for Image Carousel Widget.
 - Added aria-label for button inside AdditionalInformationWidget, aria-label for homepage inside BreadcrumbWidget.
 - Added accessibility fieldset and legend to order properties
+- Added accessibility for Search Widgets.
 
 ### Changed
 

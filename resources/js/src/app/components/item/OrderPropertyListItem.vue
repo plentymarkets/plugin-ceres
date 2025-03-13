@@ -12,10 +12,10 @@
                 :title="property.names.description"
                 :data-testing="'order-property-input-' + inputType" />
             <label :for="'order-property-input_' + property.id" class="d-flex">
-                <span class="text-truncate font-size-md">{{ property.names.name }}</span>
+                <span class="text-truncate font-size-md" style="font-size: .8rem;">{{ property.names.name }}</span>
                 <strong class="ml-1">
                     <template v-if="surcharge > 0">({{ inclOrPlus }} {{ surcharge | currency }})</template>
-                    <span class="font-size-md">{{ footnotes }} {{ requiredFootnotes }}</span>
+                    <span class="font-size-md" style="font-size: .8rem;">{{ footnotes }} {{ requiredFootnotes }}</span>
                 </strong>
             </label>
         </div>
@@ -65,10 +65,10 @@
                     <option :selected="property.id === id" :value="id" v-for="(value, id) in property.selectionValues" :key="id" data-testing="order-property-selection-option">{{ value.name }}</option>
                 </select>
                 <label class="d-flex w-100" for="order-property-input-select">
-                    <span class="text-truncate font-size-md">{{ property.names.name }}</span>
+                    <span class="text-truncate font-size-md" style="font-size: .8rem;">{{ property.names.name }}</span>
                     <strong class="ml-1">
                         <template v-if="surcharge > 0">({{ inclOrPlus }} {{ surcharge | currency }})</template>
-                        <span class="font-size-md">{{ footnotes }} {{ requiredFootnotes }}</span>
+                        <span class="font-size-md" style="font-size: .8rem;">{{ footnotes }} {{ requiredFootnotes }}</span>
                     </strong>
                 </label>
             </div>
@@ -87,10 +87,10 @@
             <label class="input-unit file-input order-property-input component-loading with-icon sending" :class="{ 'active': property.value, 'is-loading': waiting, 'error': hasError }" v-tooltip data-toggle="tooltip" :title="property.names.description">
                 <span class="input-unit-preview" :class="{ 'disabled': waiting }">{{selectedFileName}}</span>
                 <span class="input-unit-label d-flex">
-                    <span class="text-truncate font-size-md">{{ property.names.name }}</span>
+                    <span class="text-truncate font-size-md" style="font-size: .8rem;">{{ property.names.name }}</span>
                     <strong class="ml-1">
                         <template v-if="surcharge > 0">({{ inclOrPlus }} {{ surcharge | currency }})</template>
-                        <span class="font-size-md">{{ footnotes }} {{ requiredFootnotes }}</span>
+                        <span class="font-size-md" style="font-size: .8rem;">{{ footnotes }} {{ requiredFootnotes }}</span>
                     </strong>
                 </span>
                 <span class="input-unit-btn" v-if="!selectedFile">
