@@ -55,8 +55,8 @@ class TagsWidget extends BaseWidget
             ->withDefaultValue("h4")
             ->withListBoxValues(
                 ValueListFactory::make()
-                    ->addEntry("", "Widget.widgetButtonSizeSm")
-                    ->addEntry("h4", "Widget.widgetButtonSizeNormal")
+                    ->addEntry("h4", "Widget.widgetButtonSizeSm")
+                    ->addEntry("h3", "Widget.widgetButtonSizeNormal")
                     ->addEntry("h2", "Widget.widgetButtonSizeLg")
                     ->toArray()
             );
