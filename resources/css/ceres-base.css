@@ -11069,6 +11069,10 @@ html.ie .always-visible-search {
   min-height: 32px;
 }
 
+.autocomplete-suggestion .count span {
+  color: #495057 !important;
+}
+
 /**
 * Owl Carousel v2.2.0
 * Copyright 2013-2016 David Deutsch
@@ -17683,8 +17687,4 @@ body.lb-disable-scrolling {
 .lb-data .lb-close:hover {
   cursor: pointer;
   opacity: 1;
-}
-
-.autocomplete-suggestion .count span {
-  color: #495057 !important;
 }

@@ -98,3 +98,7 @@
 html.ie .always-visible-search { // stylelint-disable-line selector-no-qualifying-type
     min-height: 32px;
 }
+
+.autocomplete-suggestion .count span {
+    color: $gray-700 !important;
+}
