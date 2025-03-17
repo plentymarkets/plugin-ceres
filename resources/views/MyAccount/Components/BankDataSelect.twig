@@ -21,18 +21,13 @@
                             <span>IBAN:        ${ selectedBankData.iban }</span>
                             <span>BIC:         ${ selectedBankData.bic }</span>
                         </span>
-
                         <div class="item-content" v-show="!selectedBankData">
                             <p class="text-muted small font-italic pt-3">{{ trans("Ceres::Template.myAccountPleaseSelect") }}</p>
                         </div>
                     </span>
                 </div>
-                <div class="dropdown-menu" aria-labelledby="bankData">
-                    <fieldset>
-                    <legend>
-                        <span class="d-none">{{ trans("Ceres::Template.myAccountBankDetails") }}</span>
-                    </legend>
-                    <ul>
+                <div class="dropdown-menu" role="group" aria-label="{{ trans('Ceres::Template.myAccountBankDetails') }}" aria-hidden="true">
+                    <ul id="">
                         <li class="item" v-for="(bankData, index) in userBankData">
                             <input type="radio" :id="bankData.id" name="bankData" :value="bankData" @change="changeSelecting(bankData)">
                             <label :for="bankData.id" class="item-inner" {{ set_testing_attr("data-testing", "bank-data-set") }}>
@@ -59,7 +54,6 @@
                             </label>
                         </li>
                     </ul>
-                    </fieldset>
                 </div>
             </div>
             <div class="add-item">
