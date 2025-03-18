@@ -9,6 +9,7 @@
 ### Geändert
 
 - Für die Einstellung **Gültigkeit der URLs zum Ändern von Passwort bzw. E-Mail-Adresse** wurde der Wert "Immer" entfernt. Falls diese bisher genutzt wurde, greift eine maximale Gültigkeit von einer 1 Woche.
+- Im Übersetzungsschlüssel `cookieBarHintText`, in dem der Text für die Cookie Bar enthalten ist, wurde ein Link zum Impressum hinzugefügt.
 
 ### Behoben
 
