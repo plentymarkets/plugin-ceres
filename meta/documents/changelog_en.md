@@ -15,7 +15,7 @@
 - We removed the Option "always" for the setting **Validity of URLs to change password and email address** in the plugin settings. The setting is now always set to 1 week.
 - Removed role="listbox" and role="option" from divs inside the ImageCarouselWidget.
 - Changed Tags, Order Property Labels, Availability Text size.
-- The text of the cookie bar now includes a link to the legal disclosure.
+- The translation entry `cookieBarHintText`, which holds the text for the cookie bar, now includes a link to the legal disclosure.
 
 ### Fixed
 
