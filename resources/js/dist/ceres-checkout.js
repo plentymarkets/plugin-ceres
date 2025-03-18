@@ -4973,6 +4973,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -48202,7 +48208,12 @@ var render = function() {
     "div",
     {
       staticClass: "mobile-navigation",
-      class: { open: _vm.isMobileNavigationOpen }
+      class: { open: _vm.isMobileNavigationOpen },
+      attrs: {
+        "aria-labelledby": "mobile-navigation-toggler",
+        itemscope: "",
+        itemtype: "https://schema.org/SiteNavigationElement"
+      }
     },
     [
       _c(
@@ -48224,6 +48235,9 @@ var render = function() {
             [
               _c("li", {
                 staticClass: "btn-close",
+                attrs: {
+                  "aria-label": _vm.$translate("Ceres::Template.closeIcon")
+                },
                 on: {
                   click: function($event) {
                     return _vm.closeNavigation()
@@ -48305,7 +48319,12 @@ var render = function() {
                 return _c("li", { staticClass: "ddown" }, [
                   _c(
                     "a",
-                    { attrs: { href: _vm.getCategoryUrl(category.url) } },
+                    {
+                      attrs: {
+                        href: _vm.getCategoryUrl(category.url),
+                        itemprop: "name"
+                      }
+                    },
                     [_vm._v(_vm._s(category.details[0].name))]
                   ),
                   _vm._v(" "),
@@ -48392,7 +48411,12 @@ var render = function() {
                 return _c("li", { staticClass: "ddown" }, [
                   _c(
                     "a",
-                    { attrs: { href: _vm.getCategoryUrl(category.url) } },
+                    {
+                      attrs: {
+                        href: _vm.getCategoryUrl(category.url),
+                        itemprop: "name"
+                      }
+                    },
                     [_vm._v(_vm._s(category.details[0].name))]
                   ),
                   _vm._v(" "),
@@ -48454,6 +48478,9 @@ var render = function() {
             _c("ul", { staticClass: "breadcrumb" }, [
               _c("li", {
                 staticClass: "btn-close",
+                attrs: {
+                  "aria-label": _vm.$translate("Ceres::Template.closeIcon")
+                },
                 on: {
                   click: function($event) {
                     return _vm.closeNavigation()
@@ -72023,7 +72050,7 @@ var ModalService = __webpack_require__(/*! ../../../services/ModalService */ "./
     return {
       addressModal: {},
       modalType: "",
-      headline: "",
+      headline: _services_TranslationService__WEBPACK_IMPORTED_MODULE_21__["default"].translate("Ceres::Template.modalTitle"),
       addressToEdit: {
         gender: this.defaultSalutation,
         countryId: this.shippingCountryId

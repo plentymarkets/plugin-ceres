@@ -91,6 +91,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
 
@@ -234,6 +236,8 @@ var render = function() {
           staticClass: "form-control",
           attrs: {
             type: "text",
+            "aria-label": _vm.$translate("Ceres::Template.couponEnterCoupon"),
+            id: "coupon-code-identifier" + _vm._uid,
             placeholder: _vm.$translate("Ceres::Template.couponEnterCoupon"),
             disabled: _vm.disabled || _vm.isCheckoutReadonly,
             "data-testing": "coupon-input"

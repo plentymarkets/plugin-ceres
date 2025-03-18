@@ -3248,6 +3248,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -39711,10 +39717,7 @@ var render = function() {
                           staticClass: "text-appearance",
                           attrs: {
                             "data-toggle": "modal",
-                            href: "#shippingscosts",
-                            title: _vm.$translate(
-                              "Ceres::Template.itemShippingCosts"
-                            )
+                            href: "#shippingscosts"
                           }
                         },
                         [
@@ -39727,25 +39730,13 @@ var render = function() {
                           )
                         ]
                       )
-                    : _c(
-                        "a",
-                        {
-                          attrs: {
-                            title: _vm.$translate(
-                              "Ceres::Template.itemShippingCosts"
-                            )
-                          }
-                        },
-                        [
-                          _vm._v(
-                            _vm._s(
-                              _vm.$translate(
-                                "Ceres::Template.itemShippingCosts"
-                              )
-                            )
+                    : _c("a", [
+                        _vm._v(
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.itemShippingCosts")
                           )
-                        ]
-                      )
+                        )
+                      ])
                 ])
               ],
               2
@@ -40640,7 +40631,12 @@ var render = function() {
     "div",
     {
       staticClass: "mobile-navigation",
-      class: { open: _vm.isMobileNavigationOpen }
+      class: { open: _vm.isMobileNavigationOpen },
+      attrs: {
+        "aria-labelledby": "mobile-navigation-toggler",
+        itemscope: "",
+        itemtype: "https://schema.org/SiteNavigationElement"
+      }
     },
     [
       _c(
@@ -40662,6 +40658,9 @@ var render = function() {
             [
               _c("li", {
                 staticClass: "btn-close",
+                attrs: {
+                  "aria-label": _vm.$translate("Ceres::Template.closeIcon")
+                },
                 on: {
                   click: function($event) {
                     return _vm.closeNavigation()
@@ -40743,7 +40742,12 @@ var render = function() {
                 return _c("li", { staticClass: "ddown" }, [
                   _c(
                     "a",
-                    { attrs: { href: _vm.getCategoryUrl(category.url) } },
+                    {
+                      attrs: {
+                        href: _vm.getCategoryUrl(category.url),
+                        itemprop: "name"
+                      }
+                    },
                     [_vm._v(_vm._s(category.details[0].name))]
                   ),
                   _vm._v(" "),
@@ -40830,7 +40834,12 @@ var render = function() {
                 return _c("li", { staticClass: "ddown" }, [
                   _c(
                     "a",
-                    { attrs: { href: _vm.getCategoryUrl(category.url) } },
+                    {
+                      attrs: {
+                        href: _vm.getCategoryUrl(category.url),
+                        itemprop: "name"
+                      }
+                    },
                     [_vm._v(_vm._s(category.details[0].name))]
                   ),
                   _vm._v(" "),
@@ -40892,6 +40901,9 @@ var render = function() {
             _c("ul", { staticClass: "breadcrumb" }, [
               _c("li", {
                 staticClass: "btn-close",
+                attrs: {
+                  "aria-label": _vm.$translate("Ceres::Template.closeIcon")
+                },
                 on: {
                   click: function($event) {
                     return _vm.closeNavigation()

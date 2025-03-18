@@ -191,19 +191,27 @@ var render = function() {
         0
       )
     : _c("div", [
-        _c("div", { staticClass: "h3" }, [
-          _vm._v(
-            _vm._s(
-              _vm.$translate("Ceres::Template.headerSelectShippingCountry")
+        _c(
+          "label",
+          {
+            staticClass: "h3",
+            attrs: { for: "shipping-country-select" + _vm._uid }
+          },
+          [
+            _vm._v(
+              _vm._s(
+                _vm.$translate("Ceres::Template.headerSelectShippingCountry")
+              )
             )
-          )
-        ]),
+          ]
+        ),
         _vm._v(" "),
         _vm.localization.shippingCountries.length > 1
           ? _c(
               "select",
               {
                 staticClass: "form-control",
+                attrs: { id: "shipping-country-select" + _vm._uid },
                 on: {
                   change: function($event) {
                     return _vm.setShippingCountry($event.target.value)

@@ -20,9 +20,10 @@
                         </span>
                         <span class="custom-control custom-switch custom-control-appearance" v-if="!consentGroup.necessary && !necessaryOnly(consentGroup)">
                                 <input type="checkbox"
+                                       :aria-label="$translate('Ceres::Template.privacySettings')"
                                        class="custom-control-input"
                                        :checked="isConsented(consentGroup.key + '.*')">
-                                <label class="custom-control-label"></label>
+                                <span class="custom-control-label"></span>
                         </span>
                         <span class="badge badge-primary bg-appearance" v-else>{{ $translate("Ceres::Template.privacySettingsNecessary") }}</span>
                     </p>

@@ -514,6 +514,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
@@ -998,7 +999,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("fieldset", [
     _vm.isShownOnItemPageCount
       ? _c(
           "div",
@@ -1009,7 +1010,7 @@ var render = function() {
                   "div",
                   { class: _vm.paddingClasses, style: _vm.paddingInlineStyles },
                   [
-                    _c("div", { staticClass: "h4" }, [
+                    _c("legend", { staticClass: "h4" }, [
                       _vm._v(
                         "\n                " +
                           _vm._s(_vm.propertyGroup.group.names.name) +
@@ -1103,6 +1104,7 @@ var render = function() {
                   { name: "tooltip", rawName: "v-tooltip" }
                 ],
                 attrs: {
+                  id: "order-property-input_" + _vm.property.id,
                   type: "text",
                   "data-toggle": "tooltip",
                   maxlength: _vm.isOrderProperty(_vm.property) ? 128 : 65535,
@@ -1125,38 +1127,50 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c("label", { staticClass: "d-flex" }, [
-                _c("span", { staticClass: "text-truncate" }, [
-                  _vm._v(_vm._s(_vm.property.names.name))
-                ]),
-                _vm._v(" "),
-                _c(
-                  "strong",
-                  { staticClass: "ml-1" },
-                  [
-                    _vm.surcharge > 0
-                      ? [
-                          _vm._v(
-                            "(" +
-                              _vm._s(_vm.inclOrPlus) +
-                              " " +
-                              _vm._s(_vm._f("currency")(_vm.surcharge)) +
-                              ")"
-                          )
-                        ]
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c("span", [
-                      _vm._v(
-                        _vm._s(_vm.footnotes) +
-                          " " +
-                          _vm._s(_vm.requiredFootnotes)
-                      )
-                    ])
-                  ],
-                  2
-                )
-              ])
+              _c(
+                "label",
+                {
+                  staticClass: "d-flex",
+                  attrs: { for: "order-property-input_" + _vm.property.id }
+                },
+                [
+                  _c(
+                    "span",
+                    {
+                      staticClass: "text-truncate",
+                      staticStyle: { "font-size": ".8rem" }
+                    },
+                    [_vm._v(_vm._s(_vm.property.names.name))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "strong",
+                    { staticClass: "ml-1" },
+                    [
+                      _vm.surcharge > 0
+                        ? [
+                            _vm._v(
+                              "(" +
+                                _vm._s(_vm.inclOrPlus) +
+                                " " +
+                                _vm._s(_vm._f("currency")(_vm.surcharge)) +
+                                ")"
+                            )
+                          ]
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("span", { staticStyle: { "font-size": ".8rem" } }, [
+                        _vm._v(
+                          _vm._s(_vm.footnotes) +
+                            " " +
+                            _vm._s(_vm.requiredFootnotes)
+                        )
+                      ])
+                    ],
+                    2
+                  )
+                ]
+              )
             ]
           )
         : _vm.inputType === "checkbox" || _vm.inputType === "radio"
@@ -1348,9 +1362,14 @@ var render = function() {
                       attrs: { for: "order-property-input-select" }
                     },
                     [
-                      _c("span", { staticClass: "text-truncate" }, [
-                        _vm._v(_vm._s(_vm.property.names.name))
-                      ]),
+                      _c(
+                        "span",
+                        {
+                          staticClass: "text-truncate",
+                          staticStyle: { "font-size": ".8rem" }
+                        },
+                        [_vm._v(_vm._s(_vm.property.names.name))]
+                      ),
                       _vm._v(" "),
                       _c(
                         "strong",
@@ -1368,13 +1387,17 @@ var render = function() {
                               ]
                             : _vm._e(),
                           _vm._v(" "),
-                          _c("span", [
-                            _vm._v(
-                              _vm._s(_vm.footnotes) +
-                                " " +
-                                _vm._s(_vm.requiredFootnotes)
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticStyle: { "font-size": ".8rem" } },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.footnotes) +
+                                  " " +
+                                  _vm._s(_vm.requiredFootnotes)
+                              )
+                            ]
+                          )
                         ],
                         2
                       )
@@ -1460,9 +1483,14 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("span", { staticClass: "input-unit-label d-flex" }, [
-                    _c("span", { staticClass: "text-truncate" }, [
-                      _vm._v(_vm._s(_vm.property.names.name))
-                    ]),
+                    _c(
+                      "span",
+                      {
+                        staticClass: "text-truncate",
+                        staticStyle: { "font-size": ".8rem" }
+                      },
+                      [_vm._v(_vm._s(_vm.property.names.name))]
+                    ),
                     _vm._v(" "),
                     _c(
                       "strong",
@@ -1480,7 +1508,7 @@ var render = function() {
                             ]
                           : _vm._e(),
                         _vm._v(" "),
-                        _c("span", [
+                        _c("span", { staticStyle: { "font-size": ".8rem" } }, [
                           _vm._v(
                             _vm._s(_vm.footnotes) +
                               " " +

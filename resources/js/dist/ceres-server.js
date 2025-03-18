@@ -1517,6 +1517,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
 
 
@@ -8753,6 +8755,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 var ApiService = __webpack_require__(/*! ../../services/ApiService */ "./resources/js/src/app/services/ApiService.js");
 
 var NotificationService = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
@@ -13273,6 +13276,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -13302,8 +13314,12 @@ __webpack_require__.r(__webpack_exports__);
       isDisabled: false,
       privacyPolicyValue: false,
       honeypot: "",
-      loadRecaptcha: false
+      loadRecaptcha: false,
+      uniqueId: null
     };
+  },
+  mounted: function mounted() {
+    this.uniqueId = this._uid;
   },
   computed: {
     privacyPolicyText: function privacyPolicyText() {
@@ -13437,6 +13453,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -13449,8 +13473,12 @@ __webpack_require__.r(__webpack_exports__);
     return {
       email: "",
       isDisabled: false,
-      honeypot: ""
+      honeypot: "",
+      uniqueId: null
     };
+  },
+  mounted: function mounted() {
+    this.uniqueId = this._uid;
   },
   methods: {
     validateData: function validateData() {
@@ -14703,6 +14731,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -15253,6 +15287,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -43187,6 +43222,11 @@ var render = function() {
           _vm._ssrNode(
             '<input type="text"' +
               _vm._ssrAttr(
+                "aria-label",
+                _vm.$translate("Ceres::Template.couponEnterCoupon")
+              ) +
+              _vm._ssrAttr("id", "coupon-code-identifier" + _vm._uid) +
+              _vm._ssrAttr(
                 "placeholder",
                 _vm.$translate("Ceres::Template.couponEnterCoupon")
               ) +
@@ -43432,7 +43472,6 @@ var render = function() {
                       attrs: {
                         "image-url": _vm.image,
                         alt: _vm.altText,
-                        title: _vm.itemName,
                         height: _vm.height,
                         width: _vm.width,
                         "picture-class": "d-block mw-100 mh-100 h-auto",
@@ -43825,7 +43864,7 @@ var render = function() {
                     : "<!---->") +
                   " " +
                   (_vm.isMoreButtonVisible
-                    ? "<label" +
+                    ? "<div" +
                       _vm._ssrAttr(
                         "data-show-more",
                         _vm.$translate("Ceres::Template.basketShowMore")
@@ -43834,10 +43873,14 @@ var render = function() {
                         "data-show-less",
                         _vm.$translate("Ceres::Template.basketShowLess")
                       ) +
+                      _vm._ssrAttr(
+                        "aria-label",
+                        _vm.$translate("Ceres::Template.basketShowMore")
+                      ) +
                       _vm._ssrClass("btn-collapse", {
                         collapsed: !_vm.showMoreInformation
                       }) +
-                      "></label>"
+                      "></div>"
                     : "<!---->")
               )
             ],
@@ -44056,10 +44099,6 @@ var render = function() {
                 _vm._ssrClass("mb-3 col-6", "col-md-" + _vm.columnDivider) +
                 "><a" +
                 _vm._ssrAttr("href", _vm.getCategoryUrl(category.url)) +
-                _vm._ssrAttr(
-                  "title",
-                  category.details[0].metaTitle || category.details[0].name
-                ) +
                 "><div" +
                 _vm._ssrClass("nav-item border d-flex", {
                   "no-img": _vm.imageSource === "none"
@@ -48381,9 +48420,9 @@ var render = function() {
           _vm._ssrEscape(
             _vm._s(_vm.$translate("Ceres::Template.myAccountNewEmail"))
           ) +
-          '</label> <input type="email" name="email"' +
+          "</label> <input" +
           _vm._ssrAttr("id", "new-mail" + _vm._uid) +
-          ' disabled="disabled"' +
+          ' type="email" name="email" disabled="disabled"' +
           _vm._ssrAttr("value", _vm.newMail) +
           ' class="form-control"></div> <div class="input-unit"><label' +
           _vm._ssrAttr("for", "password" + _vm._uid) +
@@ -48391,8 +48430,9 @@ var render = function() {
           _vm._ssrEscape(
             _vm._s(_vm.$translate("Ceres::Template.loginPassword"))
           ) +
-          '</label> <input type="password" name="password" autocomplete="current-password"' +
+          "</label> <input" +
           _vm._ssrAttr("id", "password" + _vm._uid) +
+          ' type="password" name="password" autocomplete="current-password"' +
           _vm._ssrAttr("value", _vm.password) +
           ' class="form-control"></div> '
       ),
@@ -51189,7 +51229,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("fieldset", [
     _vm.isShownOnItemPageCount
       ? _vm._ssrNode(
           '<div class="pt-2">',
@@ -51200,13 +51240,13 @@ var render = function() {
                 ? "<div" +
                   _vm._ssrClass(null, _vm.paddingClasses) +
                   _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
-                  '><div class="h4">' +
+                  '><legend class="h4">' +
                   _vm._ssrEscape(
                     "\n                " +
                       _vm._s(_vm.propertyGroup.group.names.name) +
                       ":\n            "
                   ) +
-                  '</div> <p class="text-muted text-wrap">' +
+                  '</legend> <p class="text-muted text-wrap">' +
                   _vm._ssrEscape(
                     "\n                " +
                       _vm._s(_vm.propertyGroup.group.names.description) +
@@ -51292,6 +51332,7 @@ var render = function() {
                     { name: "tooltip", rawName: "v-tooltip" }
                   ],
                   attrs: {
+                    id: "order-property-input_" + _vm.property.id,
                     type: "text",
                     "data-toggle": "tooltip",
                     maxlength: _vm.isOrderProperty(_vm.property) ? 128 : 65535,
@@ -51316,7 +51357,12 @@ var render = function() {
                 []
               ),
               _vm._ssrNode(
-                ' <label class="d-flex"><span class="text-truncate">' +
+                " <label" +
+                  _vm._ssrAttr(
+                    "for",
+                    "order-property-input_" + _vm.property.id
+                  ) +
+                  ' class="d-flex"><span class="text-truncate" style="font-size: .8rem;">' +
                   _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
                   '</span> <strong class="ml-1">' +
                   (_vm.surcharge > 0
@@ -51328,7 +51374,7 @@ var render = function() {
                           ")"
                       )
                     : "<!---->") +
-                  " <span>" +
+                  ' <span style="font-size: .8rem;">' +
                   _vm._ssrEscape(
                     _vm._s(_vm.footnotes) + " " + _vm._s(_vm.requiredFootnotes)
                   ) +
@@ -51498,7 +51544,7 @@ var render = function() {
                     2
                   ),
                   _vm._ssrNode(
-                    ' <label for="order-property-input-select" class="d-flex w-100"><span class="text-truncate">' +
+                    ' <label for="order-property-input-select" class="d-flex w-100"><span class="text-truncate" style="font-size: .8rem;">' +
                       _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
                       '</span> <strong class="ml-1">' +
                       (_vm.surcharge > 0
@@ -51510,7 +51556,7 @@ var render = function() {
                               ")"
                           )
                         : "<!---->") +
-                      " <span>" +
+                      ' <span style="font-size: .8rem;">' +
                       _vm._ssrEscape(
                         _vm._s(_vm.footnotes) +
                           " " +
@@ -51596,7 +51642,7 @@ var render = function() {
                       }) +
                       ">" +
                       _vm._ssrEscape(_vm._s(_vm.selectedFileName)) +
-                      '</span> <span class="input-unit-label d-flex"><span class="text-truncate">' +
+                      '</span> <span class="input-unit-label d-flex"><span class="text-truncate" style="font-size: .8rem;">' +
                       _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
                       '</span> <strong class="ml-1">' +
                       (_vm.surcharge > 0
@@ -51608,7 +51654,7 @@ var render = function() {
                               ")"
                           )
                         : "<!---->") +
-                      " <span>" +
+                      ' <span style="font-size: .8rem;">' +
                       _vm._ssrEscape(
                         _vm._s(_vm.footnotes) +
                           " " +
@@ -54417,10 +54463,7 @@ var render = function() {
                           staticClass: "text-appearance",
                           attrs: {
                             "data-toggle": "modal",
-                            href: "#shippingscosts",
-                            title: _vm.$translate(
-                              "Ceres::Template.itemShippingCosts"
-                            )
+                            href: "#shippingscosts"
                           }
                         },
                         [
@@ -54433,25 +54476,13 @@ var render = function() {
                           )
                         ]
                       )
-                    : _c(
-                        "a",
-                        {
-                          attrs: {
-                            title: _vm.$translate(
-                              "Ceres::Template.itemShippingCosts"
-                            )
-                          }
-                        },
-                        [
-                          _vm._v(
-                            _vm._s(
-                              _vm.$translate(
-                                "Ceres::Template.itemShippingCosts"
-                              )
-                            )
+                    : _c("a", [
+                        _vm._v(
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.itemShippingCosts")
                           )
-                        ]
-                      )
+                        )
+                      ])
                 ])
               ],
               2
@@ -55688,13 +55719,13 @@ var render = function() {
           _vm._ssrNode(
             (_vm.showNameInputs
               ? '<div class="col-6"><div data-validate="!regex" class="input-unit"><label' +
-                _vm._ssrAttr("for", "first-name-input_" + _vm._uid) +
+                _vm._ssrAttr("for", "first-name-input_" + _vm.uniqueId) +
                 ">" +
                 _vm._ssrEscape(
                   _vm._s(_vm.$translate("Ceres::Template.newsletterFirstName"))
                 ) +
                 '</label> <input type="text" data-validate-ref="/[.:\\/\\d]/g"' +
-                _vm._ssrAttr("id", "first-name-input_" + _vm._uid) +
+                _vm._ssrAttr("id", "first-name-input_" + _vm.uniqueId) +
                 ' data-testing="nl-first-name"' +
                 _vm._ssrAttr("value", _vm.firstName) +
                 "></div></div>"
@@ -55702,19 +55733,19 @@ var render = function() {
               " " +
               (_vm.showNameInputs
                 ? '<div class="col-6 pl-0"><div data-validate="!regex" class="input-unit"><label' +
-                  _vm._ssrAttr("for", "last-name-input_" + _vm._uid) +
+                  _vm._ssrAttr("for", "last-name-input_" + _vm.uniqueId) +
                   ">" +
                   _vm._ssrEscape(
                     _vm._s(_vm.$translate("Ceres::Template.newsletterLastName"))
                   ) +
                   '</label> <input type="text" data-validate-ref="/[.:\\/\\d]/g"' +
-                  _vm._ssrAttr("id", "last-name-input_" + _vm._uid) +
+                  _vm._ssrAttr("id", "last-name-input_" + _vm.uniqueId) +
                   ' data-testing="nl-last-name"' +
                   _vm._ssrAttr("value", _vm.lastName) +
                   "></div></div>"
                 : "<!---->") +
               ' <div class="col-12"><div class="input-group"><div data-validate="mail" class="input-unit"><label' +
-              _vm._ssrAttr("for", "email-input-id_" + _vm._uid) +
+              _vm._ssrAttr("for", "email-input-id_" + _vm.uniqueId) +
               ">" +
               _vm._ssrEscape(
                 _vm._s(_vm.$translate("Ceres::Template.newsletterEmail")) +
@@ -55726,15 +55757,24 @@ var render = function() {
                   )
               ) +
               '</label> <input type="email" autocomplete="email"' +
-              _vm._ssrAttr("id", "email-input-id_" + _vm._uid) +
+              _vm._ssrAttr("id", "email-input-id_" + _vm.uniqueId) +
               ' data-testing="nl-mail"' +
               _vm._ssrAttr("value", _vm.email) +
-              '></div> <input autocomplete="none" type="text" name="username" tabindex="-1"' +
+              "></div> <input" +
+              _vm._ssrAttr("id", "input-username_" + _vm.uniqueId) +
+              ' autocomplete="none" type="text" name="username" tabindex="-1" aria-hidden="true"' +
+              _vm._ssrAttr(
+                "aria-label",
+                _vm.$translate("Ceres::Template.newsletterUsername")
+              ) +
               _vm._ssrAttr("value", _vm.honeypot) +
               ' class="honey"></div></div> ' +
               (_vm.showPrivacyPolicyCheckbox
                 ? '<div class="col-12"><div data-validate class="form-check small"><input type="checkbox"' +
-                  _vm._ssrAttr("id", "privacy-policy-accept-id_" + _vm._uid) +
+                  _vm._ssrAttr(
+                    "id",
+                    "privacy-policy-accept-id_" + _vm.uniqueId
+                  ) +
                   ' name="privacy-policy-accept" data-testing="nl-policy"' +
                   _vm._ssrAttr(
                     "checked",
@@ -55743,7 +55783,10 @@ var render = function() {
                       : _vm.privacyPolicyValue
                   ) +
                   ' class="form-check-input"> <label' +
-                  _vm._ssrAttr("for", "privacy-policy-accept-id_" + _vm._uid) +
+                  _vm._ssrAttr(
+                    "for",
+                    "privacy-policy-accept-id_" + _vm.uniqueId
+                  ) +
                   ' class="form-check-label">' +
                   _vm._s(_vm.privacyPolicyText) +
                   "</label></div></div>"
@@ -55853,7 +55896,16 @@ var render = function() {
                 ) +
                 '</label> <input type="email" name="email" autocomplete="email" id="email-input-id" data-testing="unsub-nl-mail"' +
                 _vm._ssrAttr("value", _vm.email) +
-                ' class="form-control"></div> <input type="text" name="username" autocomplete="new-password" tabindex="-1"' +
+                ' class="form-control"></div> <input' +
+                _vm._ssrAttr(
+                  "id",
+                  "input-unsubscribe-username_" + _vm.uniqueId
+                ) +
+                ' type="text" name="username" autocomplete="new-password" tabindex="-1" aria-hidden="true"' +
+                _vm._ssrAttr(
+                  "aria-label",
+                  _vm.$translate("Ceres::Template.newsletterUsername")
+                ) +
                 _vm._ssrAttr("value", _vm.honeypot) +
                 ' class="honey"> '
             ),
@@ -56819,7 +56871,12 @@ var render = function() {
     "div",
     {
       staticClass: "mobile-navigation",
-      class: { open: _vm.isMobileNavigationOpen }
+      class: { open: _vm.isMobileNavigationOpen },
+      attrs: {
+        "aria-labelledby": "mobile-navigation-toggler",
+        itemscope: "",
+        itemtype: "https://schema.org/SiteNavigationElement"
+      }
     },
     [
       _vm._ssrNode(
@@ -56831,7 +56888,12 @@ var render = function() {
         "</div>",
         [
           _vm._ssrNode(
-            '<ul class="breadcrumb d-block px-3 py-0"><li class="btn-close"></li> <li class="breadcrumb-item"><i aria-hidden="true" class="fa fa-home"></i></li> ' +
+            '<ul class="breadcrumb d-block px-3 py-0"><li' +
+              _vm._ssrAttr(
+                "aria-label",
+                _vm.$translate("Ceres::Template.closeIcon")
+              ) +
+              ' class="btn-close"></li> <li class="breadcrumb-item"><i aria-hidden="true" class="fa fa-home"></i></li> ' +
               _vm._ssrList(_vm.breadcrumbs, function(breadcrumb) {
                 return (
                   '<li class="breadcrumb-item">' +
@@ -56864,7 +56926,7 @@ var render = function() {
                     return (
                       '<li class="ddown"><a' +
                       _vm._ssrAttr("href", _vm.getCategoryUrl(category.url)) +
-                      ">" +
+                      ' itemprop="name">' +
                       _vm._ssrEscape(_vm._s(category.details[0].name)) +
                       "</a> " +
                       (category.childCount
@@ -56929,7 +56991,7 @@ var render = function() {
                     return (
                       '<li class="ddown"><a' +
                       _vm._ssrAttr("href", _vm.getCategoryUrl(category.url)) +
-                      ">" +
+                      ' itemprop="name">' +
                       _vm._ssrEscape(_vm._s(category.details[0].name)) +
                       "</a> " +
                       (category.childCount
@@ -56981,7 +57043,12 @@ var render = function() {
       !_vm.isNavigationInitialized
         ? [
             _vm._ssrNode(
-              '<ul class="breadcrumb"><li class="btn-close"></li> <li class="breadcrumb-item"><i aria-hidden="true" class="fa fa-home"></i></li></ul> '
+              '<ul class="breadcrumb"><li' +
+                _vm._ssrAttr(
+                  "aria-label",
+                  _vm.$translate("Ceres::Template.closeIcon")
+                ) +
+                ' class="btn-close"></li> <li class="breadcrumb-item"><i aria-hidden="true" class="fa fa-home"></i></li></ul> '
             ),
             _c("loading-animation")
           ]
@@ -57174,10 +57241,14 @@ var render = function() {
             (!consentGroup.necessary && !_vm.necessaryOnly(consentGroup)
               ? '<span class="custom-control custom-switch custom-control-appearance"><input type="checkbox"' +
                 _vm._ssrAttr(
+                  "aria-label",
+                  _vm.$translate("Ceres::Template.privacySettings")
+                ) +
+                _vm._ssrAttr(
                   "checked",
                   _vm.isConsented(consentGroup.key + ".*")
                 ) +
-                ' class="custom-control-input"> <label class="custom-control-label"></label></span>'
+                ' class="custom-control-input"> <span class="custom-control-label"></span></span>'
               : '<span class="badge badge-primary bg-appearance">' +
                 _vm._ssrEscape(
                   _vm._s(
@@ -57405,15 +57476,19 @@ var render = function() {
       )
     : _c("div", [
         _vm._ssrNode(
-          '<div class="h3">' +
+          "<label" +
+            _vm._ssrAttr("for", "shipping-country-select" + _vm._uid) +
+            ' class="h3">' +
             _vm._ssrEscape(
               _vm._s(
                 _vm.$translate("Ceres::Template.headerSelectShippingCountry")
               )
             ) +
-            "</div> " +
+            "</label> " +
             (_vm.localization.shippingCountries.length > 1
-              ? '<select class="form-control">' +
+              ? "<select" +
+                _vm._ssrAttr("id", "shipping-country-select" + _vm._uid) +
+                ' class="form-control">' +
                 _vm._ssrList(_vm.localization.shippingCountries, function(
                   shippingCountry
                 ) {

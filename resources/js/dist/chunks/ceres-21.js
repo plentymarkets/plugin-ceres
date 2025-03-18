@@ -43,6 +43,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -55,8 +63,12 @@ __webpack_require__.r(__webpack_exports__);
     return {
       email: "",
       isDisabled: false,
-      honeypot: ""
+      honeypot: "",
+      uniqueId: null
     };
+  },
+  mounted: function mounted() {
+    this.uniqueId = this._uid;
   },
   methods: {
     validateData: function validateData() {
@@ -186,10 +198,13 @@ var render = function() {
             ],
             staticClass: "honey",
             attrs: {
+              id: "input-unsubscribe-username_" + _vm.uniqueId,
               type: "text",
               name: "username",
               autocomplete: "new-password",
-              tabindex: "-1"
+              tabindex: "-1",
+              "aria-hidden": "true",
+              "aria-label": _vm.$translate("Ceres::Template.newsletterUsername")
             },
             domProps: { value: _vm.honeypot },
             on: {

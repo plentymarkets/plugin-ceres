@@ -698,7 +698,6 @@ var render = function() {
                       attrs: {
                         "image-url": _vm.image,
                         alt: _vm.altText,
-                        title: _vm.itemName,
                         height: _vm.height,
                         width: _vm.width,
                         "picture-class": "d-block mw-100 mh-100 h-auto",
@@ -1149,7 +1148,7 @@ var render = function() {
                 : _vm._e(),
               _vm._v(" "),
               _vm.isMoreButtonVisible
-                ? _c("label", {
+                ? _c("div", {
                     staticClass: "btn-collapse",
                     class: { collapsed: !_vm.showMoreInformation },
                     attrs: {
@@ -1158,6 +1157,9 @@ var render = function() {
                       ),
                       "data-show-less": _vm.$translate(
                         "Ceres::Template.basketShowLess"
+                      ),
+                      "aria-label": _vm.$translate(
+                        "Ceres::Template.basketShowMore"
                       )
                     },
                     on: {

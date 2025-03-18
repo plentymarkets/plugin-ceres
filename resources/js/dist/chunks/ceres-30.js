@@ -119,9 +119,9 @@ var render = function() {
         _c("input", {
           staticClass: "form-control",
           attrs: {
+            id: "new-mail" + _vm._uid,
             type: "email",
             name: "email",
-            id: "new-mail" + _vm._uid,
             disabled: ""
           },
           domProps: { value: _vm.newMail }
@@ -144,10 +144,10 @@ var render = function() {
           ],
           staticClass: "form-control",
           attrs: {
+            id: "password" + _vm._uid,
             type: "password",
             name: "password",
-            autocomplete: "current-password",
-            id: "password" + _vm._uid
+            autocomplete: "current-password"
           },
           domProps: { value: _vm.password },
           on: {

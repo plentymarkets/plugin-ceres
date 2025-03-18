@@ -28,6 +28,10 @@
                     </span>
                 </div>
                 <div class="dropdown-menu" aria-labelledby="bankData">
+                    <fieldset>
+                    <legend>
+                        <span class="d-none">{{ trans("Ceres::Template.myAccountBankDetails") }}</span>
+                    </legend>
                     <ul>
                         <li class="item" v-for="(bankData, index) in userBankData">
                             <input type="radio" :id="bankData.id" name="bankData" :value="bankData" @change="changeSelecting(bankData)">
@@ -41,13 +45,13 @@
                                 -->
                                 <div class="item-controls">
                                     <span class="item-edit ml-auto" @click.prevent="openUpdateBank(index, bankData)">
-                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountEdit") }}" class="btn btn-primary btn-medium btn-appearance mr-1" @click.prevent="openUpdateBank(index, bankData)" {{ set_testing_attr("data-testing", "bank-data-delete-set") }}>
+                                        <button aria-label="delete-item" v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountEdit") }}" class="btn btn-primary btn-medium btn-appearance mr-1" @click.prevent="openUpdateBank(index, bankData)" {{ set_testing_attr("data-testing", "bank-data-delete-set") }}>
                                             <span>{{ trans("Ceres::Template.myAccountEdit") }}</span>
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </button>
                                     </span>
                                     <span class="item-remove" @click.prevent="openDeleteBank(index, bankData)">
-                                        <button v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountDelete") }}" class="btn btn-danger" @click.prevent="openDeleteBank(index, bankData)" {{ set_testing_attr("data-testing", "bank-data-open-set") }}>
+                                        <button aria-label="delete-item" v-tooltip data-toggle="tooltip" data-placement="top" title="{{ trans("Ceres::Template.myAccountDelete") }}" class="btn btn-danger" @click.prevent="openDeleteBank(index, bankData)" {{ set_testing_attr("data-testing", "bank-data-open-set") }}>
                                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                                         </button>
                                     </span>
@@ -55,6 +59,7 @@
                             </label>
                         </li>
                     </ul>
+                    </fieldset>
                 </div>
             </div>
             <div class="add-item">
@@ -75,33 +80,35 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-
-                        <fieldset>
-                            <form id="my-bankForm" method="post" @submit.prevent>
+                        <form id="my-bankForm" method="post" @submit.prevent>
+                            <fieldset>
+                                 <legend>
+                                    <span class="d-none">${headline}</span>
+                                 </legend>
                                  <div class="modal-body">
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="input-unit accountOwner" data-validate="text">
-                                                <input type="text" name="kontoinhaber" v-model="updateBankData.accountOwner" data-autofocus data-testing="address-account-owner">
-                                                <label :for="'txt_firma' + _uid">{{ trans("Ceres::Template.myAccountHolder") }}*</label>
+                                                <input :id="'account_owner' + _uid" type="text" name="kontoinhaber" v-model="updateBankData.accountOwner" data-autofocus data-testing="address-account-owner">
+                                                <label :for="'account_owner' + _uid">{{ trans("Ceres::Template.myAccountHolder") }}*</label>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="input-unit">
-                                                <input type="text" name="kreditInstitut" v-model="updateBankData.bankName" {{ set_testing_attr("data-testing", "address-bank-name") }}>
-                                                <label :for="'txt_firma' + _uid">{{ trans("Ceres::Template.myAccountBank") }}</label>
+                                                <input :id="'bank_name' + _uid" type="text" name="kreditInstitut" v-model="updateBankData.bankName" {{ set_testing_attr("data-testing", "address-bank-name") }}>
+                                                <label :for="'bank_name' + _uid">{{ trans("Ceres::Template.myAccountBank") }}</label>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="input-unit iban" data-validate="regex">
-                                                <input type="text" name="iban" data-validate-ref="/[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}([a-zA-Z0-9]?){0,16}/" maxlength="32" v-model="updateBankData.iban" {{ set_testing_attr("data-testing", "address-iban") }}>
-                                                <label :for="'txt_firma' + _uid">IBAN*</label>
+                                                <input :id="'address_iban' + _uid" type="text" name="iban" data-validate-ref="/[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}([a-zA-Z0-9]?){0,16}/" maxlength="32" v-model="updateBankData.iban" {{ set_testing_attr("data-testing", "address-iban") }}>
+                                                <label :for="'address_iban' + _uid">IBAN*</label>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="input-unit no-bottom" data-validate="regex">
-                                                <input type="text" name="bic" data-validate-ref="/([a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?)/" v-model="updateBankData.bic" {{ set_testing_attr("data-testing", "address-bic") }}>
-                                                <label :for="'txt_firma' + _uid">BIC* - {{ trans("Ceres::Template.myAccountBankBicNotification") }}</label>
+                                                <input :id="'address_bic' + _uid" type="text" name="bic" data-validate-ref="/([a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?)/" v-model="updateBankData.bic" {{ set_testing_attr("data-testing", "address-bic") }}>
+                                                <label :for="'address_bic' + _uid">BIC* - {{ trans("Ceres::Template.myAccountBankBicNotification") }}</label>
                                             </div>
                                         </div>
                                     </div>
@@ -116,8 +123,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </form>
-                        </fieldset>
+                            </fieldset>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -136,9 +143,12 @@
 
                         <div class="modal-body">
                             <fieldset>
+                                <legend>
+                                    <span class="d-none">{{ trans("Ceres::Template.myAccountBankDeleteTitle") }}</span>
+                                </legend>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <label>{{ trans("Ceres::Template.myAccountBankDeleteWarning") }}</label>
+                                        <div>{{ trans("Ceres::Template.myAccountBankDeleteWarning") }}</div>
                                     </div>
                                 </div>
                                 <div class="row">

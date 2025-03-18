@@ -12663,7 +12663,7 @@ body.basket-open {
 .cmp-product-thumb .crossprice {
   font-size: 0.81em;
   font-weight: 700;
-  color: #adb5bd;
+  color: #6c757d;
 }
 .cmp-product-thumb .price-view-port {
   flex: 1 0 0;
@@ -13345,7 +13345,7 @@ html.crios .parallax-img-container .parallax-img-container-inner[style^=backgrou
   padding: 0.1rem 0;
   font-size: 0.85rem;
   line-height: 18px;
-  color: #6c757d;
+  color: #495057;
   text-align: center;
   background: #e9ecef;
 }

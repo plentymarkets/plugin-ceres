@@ -126,7 +126,7 @@
 
 <div class="widget widget-image-carousel widget-{{ appearance | default('primary') }} widget-proportional{% if aspectRatio != 'auto' and fullHeight != true %} widget-prop-{{ aspectRatio }}{% endif %}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if margin | length > 0 %} {{ margin }}{% endif %}{% if stylingClasses | length > 0 %} {{ stylingClasses }}{% endif %}{% if fullHeight %} vh-100{% endif %}{% if fullWidth %} widget-fw{% endif %}"{% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
     <div id="image-carousel_{{ carouselId }}" class="widget-inner carousel slide{% if animationStyle == 'fade' %} carousel-fade{% endif %}" data-ride="carousel">
-        <div class="carousel-inner" role="listbox" aria-label="{{ trans("Ceres::Template.itemImageCarousel") }}">
+        <div class="carousel-inner">
             {{ Twig.for("slide", "slides") }}
 
             <div class="carousel-item{{ Twig.if("loop.first") }} active{{ Twig.endif() }}">
@@ -164,15 +164,12 @@
                                 picture-class="img-cover"
                                 image-url="{{ Twig.print("slide.imageUrl") }}"
                                 fallback-url="{{ Twig.print("slide.fallbackImageUrl") }}"
-                                alt="{{ Twig.print("altText") }}"
-                                title="{{ Twig.print("imgTitle") }}"
-                                role="option">
+                                alt="{{ Twig.print("altText") }}">
                             </lazy-img>
                             <noscript v-if="false">
                                 <img src="{{ Twig.print("fallbackUrl") }}"
                                     class="img-cover"
-                                    alt="{{ Twig.print("altText") }}"
-                                    title="{{ Twig.print("imgTitle") }}">
+                                    alt="{{ Twig.print("altText") }}">
                             </noscript>
                         {% else %}
                             <picture data-alt="{{ Twig.print("altText") }}">
@@ -181,8 +178,6 @@
                                     class="img-cover"
                                     src="{{ Twig.print("fallbackUrl") }}"
                                     alt="{{ Twig.print("altText") }}"
-                                    title="{{ Twig.print("imgTitle") }}"
-                                    role="option"
                                 />
                             </picture>
                         {% endif %}

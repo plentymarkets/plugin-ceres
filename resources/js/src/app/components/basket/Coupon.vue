@@ -6,6 +6,8 @@
         <div :class="{'input-group':true, 'component-loading':isCheckoutReadonly, 'is-loading':isCheckoutReadonly}">
             <input
                 type="text"
+                :aria-label="$translate('Ceres::Template.couponEnterCoupon')"
+                :id="'coupon-code-identifier' + _uid"
                 class="form-control"
                 v-model="couponCode"
                 :placeholder="$translate('Ceres::Template.couponEnterCoupon')"
