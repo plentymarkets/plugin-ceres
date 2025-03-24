@@ -146,6 +146,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       return "".concat(App.urls.search, "?query=").concat(encodeURIComponent(item.label));
+    },
+    getImageAlt: function getImageAlt(item) {
+      if (item.imageAlt) {
+        return item.imageAlt;
+      }
+
+      return item.label ? item.label : '';
     }
   }
 });
@@ -193,7 +200,10 @@ var render = function() {
                           [
                             item.image
                               ? _c("lazy-img", {
-                                  attrs: { "image-url": item.image }
+                                  attrs: {
+                                    alt: _vm.getImageAlt(item),
+                                    "image-url": item.image
+                                  }
                                 })
                               : _vm._e()
                           ],
