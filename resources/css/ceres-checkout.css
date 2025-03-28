@@ -11004,7 +11004,7 @@ html.ios textarea {
   color: #212529;
 }
 .autocomplete-suggestion .label .small, .autocomplete-suggestion .label .btn-labeled {
-  color: #6c757d;
+  color: #495057;
 }
 .autocomplete-suggestion .label.compact .small, .autocomplete-suggestion .label.compact .btn-labeled {
   line-height: 0.85;
