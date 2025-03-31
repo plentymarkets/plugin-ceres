@@ -39331,8 +39331,8 @@ var render = function() {
           _c("lazy-img", {
             ref: { itemLazyImage: !_vm.disableLazyLoad },
             attrs: {
-              alt: _vm.getAltText(_vm.imageUrls[0]),
               "image-url": _vm.imageOrItemImage,
+              alt: _vm.getAltText(_vm.imageUrls[0]),
               title: _vm.getTitleText(_vm.imageUrls[0]),
               width: _vm.getImageWidth(_vm.imageUrls[0]),
               height: _vm.getImageHeight(_vm.imageUrls[0]),
