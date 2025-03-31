@@ -80,6 +80,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -391,14 +397,6 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _c("label", { attrs: { for: "input-username_" + _vm.uniqueId } }, [
-              _c("span", { staticClass: "d-none" }, [
-                _vm._v(
-                  _vm._s(_vm.$translate("Ceres::Template.newsletterUsername"))
-                )
-              ])
-            ]),
-            _vm._v(" "),
             _c("input", {
               directives: [
                 {
@@ -414,7 +412,11 @@ var render = function() {
                 autocomplete: "none",
                 type: "text",
                 name: "username",
-                tabindex: "-1"
+                tabindex: "-1",
+                "aria-hidden": "true",
+                "aria-label": _vm.$translate(
+                  "Ceres::Template.newsletterUsername"
+                )
               },
               domProps: { value: _vm.honeypot },
               on: {

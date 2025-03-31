@@ -12158,6 +12158,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       return "".concat(App.urls.search, "?query=").concat(encodeURIComponent(item.label));
+    },
+    getImageAlt: function getImageAlt(item) {
+      if (item.imageAlt) {
+        return item.imageAlt;
+      }
+
+      return item.label ? item.label : '';
     }
   }
 });
@@ -13280,6 +13287,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -13426,7 +13439,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../mixins/buttonSizeProperty.mixin */ "./resources/js/src/app/mixins/buttonSizeProperty.mixin.js");
 
 
-//
 //
 //
 //
@@ -51362,7 +51374,7 @@ var render = function() {
                     "for",
                     "order-property-input_" + _vm.property.id
                   ) +
-                  ' class="d-flex"><span class="text-truncate font-size-md">' +
+                  ' class="d-flex"><span class="text-truncate" style="font-size: .8rem;">' +
                   _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
                   '</span> <strong class="ml-1">' +
                   (_vm.surcharge > 0
@@ -51374,7 +51386,7 @@ var render = function() {
                           ")"
                       )
                     : "<!---->") +
-                  ' <span class="font-size-md">' +
+                  ' <span style="font-size: .8rem;">' +
                   _vm._ssrEscape(
                     _vm._s(_vm.footnotes) + " " + _vm._s(_vm.requiredFootnotes)
                   ) +
@@ -51544,7 +51556,7 @@ var render = function() {
                     2
                   ),
                   _vm._ssrNode(
-                    ' <label for="order-property-input-select" class="d-flex w-100"><span class="text-truncate font-size-md">' +
+                    ' <label for="order-property-input-select" class="d-flex w-100"><span class="text-truncate" style="font-size: .8rem;">' +
                       _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
                       '</span> <strong class="ml-1">' +
                       (_vm.surcharge > 0
@@ -51556,7 +51568,7 @@ var render = function() {
                               ")"
                           )
                         : "<!---->") +
-                      ' <span class="font-size-md">' +
+                      ' <span style="font-size: .8rem;">' +
                       _vm._ssrEscape(
                         _vm._s(_vm.footnotes) +
                           " " +
@@ -51642,7 +51654,7 @@ var render = function() {
                       }) +
                       ">" +
                       _vm._ssrEscape(_vm._s(_vm.selectedFileName)) +
-                      '</span> <span class="input-unit-label d-flex"><span class="text-truncate font-size-md">' +
+                      '</span> <span class="input-unit-label d-flex"><span class="text-truncate" style="font-size: .8rem;">' +
                       _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
                       '</span> <strong class="ml-1">' +
                       (_vm.surcharge > 0
@@ -51654,7 +51666,7 @@ var render = function() {
                               ")"
                           )
                         : "<!---->") +
-                      ' <span class="font-size-md">' +
+                      ' <span style="font-size: .8rem;">' +
                       _vm._ssrEscape(
                         _vm._s(_vm.footnotes) +
                           " " +
@@ -54726,7 +54738,10 @@ var render = function() {
                           [
                             item.image
                               ? _c("lazy-img", {
-                                  attrs: { "image-url": item.image }
+                                  attrs: {
+                                    alt: _vm.getImageAlt(item),
+                                    "image-url": item.image
+                                  }
                                 })
                               : _vm._e()
                           ],
@@ -55760,15 +55775,13 @@ var render = function() {
               _vm._ssrAttr("id", "email-input-id_" + _vm.uniqueId) +
               ' data-testing="nl-mail"' +
               _vm._ssrAttr("value", _vm.email) +
-              "></div> <label" +
-              _vm._ssrAttr("for", "input-username_" + _vm.uniqueId) +
-              '><span class="d-none">' +
-              _vm._ssrEscape(
-                _vm._s(_vm.$translate("Ceres::Template.newsletterUsername"))
-              ) +
-              "</span></label> <input" +
+              "></div> <input" +
               _vm._ssrAttr("id", "input-username_" + _vm.uniqueId) +
-              ' autocomplete="none" type="text" name="username" tabindex="-1"' +
+              ' autocomplete="none" type="text" name="username" tabindex="-1" aria-hidden="true"' +
+              _vm._ssrAttr(
+                "aria-label",
+                _vm.$translate("Ceres::Template.newsletterUsername")
+              ) +
               _vm._ssrAttr("value", _vm.honeypot) +
               ' class="honey"></div></div> ' +
               (_vm.showPrivacyPolicyCheckbox
@@ -55898,21 +55911,16 @@ var render = function() {
                 ) +
                 '</label> <input type="email" name="email" autocomplete="email" id="email-input-id" data-testing="unsub-nl-mail"' +
                 _vm._ssrAttr("value", _vm.email) +
-                ' class="form-control"></div> <label' +
-                _vm._ssrAttr(
-                  "for",
-                  "input-unsubscribe-username_" + _vm.uniqueId
-                ) +
-                '><span class="d-none">' +
-                _vm._ssrEscape(
-                  _vm._s(_vm.$translate("Ceres::Template.newsletterUsername"))
-                ) +
-                "</span></label> <input" +
+                ' class="form-control"></div> <input' +
                 _vm._ssrAttr(
                   "id",
                   "input-unsubscribe-username_" + _vm.uniqueId
                 ) +
-                ' type="text" name="username" autocomplete="new-password" tabindex="-1"' +
+                ' type="text" name="username" autocomplete="new-password" tabindex="-1" aria-hidden="true"' +
+                _vm._ssrAttr(
+                  "aria-label",
+                  _vm.$translate("Ceres::Template.newsletterUsername")
+                ) +
                 _vm._ssrAttr("value", _vm.honeypot) +
                 ' class="honey"> '
             ),

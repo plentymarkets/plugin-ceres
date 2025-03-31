@@ -76,7 +76,7 @@ export default Vue.component("address-select", {
         return {
             addressModal   : {},
             modalType      : "",
-            headline       : "",
+            headline       : TranslationService.translate("Ceres::Template.modalTitle"),
             addressToEdit  : {
                 gender: this.defaultSalutation,
                 countryId        : this.shippingCountryId

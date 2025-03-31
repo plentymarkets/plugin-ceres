@@ -12,7 +12,7 @@
                     tabindex="0">
 
                     <div class="image flex-shrink-0 mr-3" v-if="showImages">
-                        <lazy-img v-if="item.image" :image-url="item.image" />
+                        <lazy-img :alt="getImageAlt(item)" v-if="item.image" :image-url="item.image" />
                     </div>
 
                     <div class="label overflow-hidden" :class="{ 'compact': showAdditionalInformation && item.beforeLabel && item.afterLabel }">
@@ -108,6 +108,15 @@ export default {
             }
 
             return `${ App.urls.search }?query=${ encodeURIComponent(item.label) }`
+        },
+
+        getImageAlt(item)
+        {
+            if (item.imageAlt) {
+                return item.imageAlt;
+            }
+
+            return item.label ? item.label : '';
         }
     }
 }

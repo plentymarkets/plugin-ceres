@@ -8,13 +8,15 @@
 - Accessibility improvements
 - Removed title for accessibility for Image Carousel Widget.
 - Added aria-label for button inside AdditionalInformationWidget, aria-label for homepage inside BreadcrumbWidget.
-- Added accessibility fieldset and legend to order properties
+- Added accessibility fieldset and legend to order properties.
+- Added accessibility for Search Widgets.
 
 ### Changed
 
 - We removed the Option "always" for the setting **Validity of URLs to change password and email address** in the plugin settings. The setting is now always set to 1 week.
 - Removed role="listbox" and role="option" from divs inside the ImageCarouselWidget.
 - Changed Tags, Order Property Labels, Availability Text size.
+- The translation entry `cookieBarHintText`, which holds the text for the cookie bar, now includes a link to the legal disclosure.
 
 ### Fixed
 

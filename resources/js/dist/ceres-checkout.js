@@ -72058,7 +72058,7 @@ var ModalService = __webpack_require__(/*! ../../../services/ModalService */ "./
     return {
       addressModal: {},
       modalType: "",
-      headline: "",
+      headline: _services_TranslationService__WEBPACK_IMPORTED_MODULE_21__["default"].translate("Ceres::Template.modalTitle"),
       addressToEdit: {
         gender: this.defaultSalutation,
         countryId: this.shippingCountryId
