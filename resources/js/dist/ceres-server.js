@@ -2907,6 +2907,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -44321,7 +44322,11 @@ var render = function() {
                   _vm._ssrAttr("height", _vm.getHeight()) +
                   _vm._ssrAttr("width", _vm.getWidth()) +
                   ' type="image/tiff" class="mw-100 h-auto">'
-                : "<!---->")
+                : "<img" +
+                  _vm._ssrAttr("alt", _vm.alt) +
+                  _vm._ssrAttr("height", _vm.getHeight()) +
+                  _vm._ssrAttr("width", _vm.getWidth()) +
+                  ' class="mw-100 h-auto">')
           )
         ],
         2
@@ -54058,16 +54063,10 @@ var render = function() {
         "a",
         { attrs: { href: _vm.itemUrl } },
         [
-          _vm._ssrNode(
-            (_vm.getAltText(_vm.imageUrls[0])
-              ? '<span class="sr-only">' +
-                _vm._ssrEscape(_vm._s(_vm.getAltText(_vm.imageUrls[0]))) +
-                "</span>"
-              : "<!---->") + " "
-          ),
           _c("lazy-img", {
             ref: { itemLazyImage: !_vm.disableLazyLoad },
             attrs: {
+              alt: _vm.getAltText(_vm.imageUrls[0]),
               "image-url": _vm.imageOrItemImage,
               title: _vm.getTitleText(_vm.imageUrls[0]),
               width: _vm.getImageWidth(_vm.imageUrls[0]),
@@ -54076,7 +54075,7 @@ var render = function() {
             }
           })
         ],
-        2
+        1
       )
 }
 var staticRenderFns = []
@@ -87620,7 +87619,12 @@ var defaultConfig = {
   threshold: 0,
   load: function load(element) {
     if (element.nodeName.toLowerCase() === "picture") {
-      var img = document.createElement("img");
+      var img = element.querySelector("img");
+
+      if (!img) {
+        img = document.createElement("img");
+        element.appendChild(img);
+      }
 
       if (isIE && element.getAttribute("data-iesrc")) {
         img.src = element.getAttribute("data-iesrc");

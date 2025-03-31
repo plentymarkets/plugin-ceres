@@ -434,6 +434,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -37713,7 +37714,14 @@ var render = function() {
                   type: "image/tiff"
                 }
               })
-            : _vm._e()
+            : _c("img", {
+                staticClass: "mw-100 h-auto",
+                attrs: {
+                  alt: _vm.alt,
+                  height: _vm.getHeight(),
+                  width: _vm.getWidth()
+                }
+              })
         ],
         2
       )
@@ -39320,15 +39328,10 @@ var render = function() {
         "a",
         { attrs: { href: _vm.itemUrl } },
         [
-          _vm.getAltText(_vm.imageUrls[0])
-            ? _c("span", { staticClass: "sr-only" }, [
-                _vm._v(_vm._s(_vm.getAltText(_vm.imageUrls[0])))
-              ])
-            : _vm._e(),
-          _vm._v(" "),
           _c("lazy-img", {
             ref: { itemLazyImage: !_vm.disableLazyLoad },
             attrs: {
+              alt: _vm.getAltText(_vm.imageUrls[0]),
               "image-url": _vm.imageOrItemImage,
               title: _vm.getTitleText(_vm.imageUrls[0]),
               width: _vm.getImageWidth(_vm.imageUrls[0]),
@@ -67004,7 +67007,12 @@ var defaultConfig = {
   threshold: 0,
   load: function load(element) {
     if (element.nodeName.toLowerCase() === "picture") {
-      var img = document.createElement("img");
+      var img = element.querySelector("img");
+
+      if (!img) {
+        img = document.createElement("img");
+        element.appendChild(img);
+      }
 
       if (isIE && element.getAttribute("data-iesrc")) {
         img.src = element.getAttribute("data-iesrc");

@@ -611,15 +611,10 @@ var render = function() {
         "a",
         { attrs: { href: _vm.itemUrl } },
         [
-          _vm.getAltText(_vm.imageUrls[0])
-            ? _c("span", { staticClass: "sr-only" }, [
-                _vm._v(_vm._s(_vm.getAltText(_vm.imageUrls[0])))
-              ])
-            : _vm._e(),
-          _vm._v(" "),
           _c("lazy-img", {
             ref: { itemLazyImage: !_vm.disableLazyLoad },
             attrs: {
+              alt: _vm.getAltText(_vm.imageUrls[0]),
               "image-url": _vm.imageOrItemImage,
               title: _vm.getTitleText(_vm.imageUrls[0]),
               width: _vm.getImageWidth(_vm.imageUrls[0]),

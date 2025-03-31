@@ -498,6 +498,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -36711,7 +36712,14 @@ var render = function() {
                   type: "image/tiff"
                 }
               })
-            : _vm._e()
+            : _c("img", {
+                staticClass: "mw-100 h-auto",
+                attrs: {
+                  alt: _vm.alt,
+                  height: _vm.getHeight(),
+                  width: _vm.getWidth()
+                }
+              })
         ],
         2
       )
@@ -63892,7 +63900,12 @@ var defaultConfig = {
   threshold: 0,
   load: function load(element) {
     if (element.nodeName.toLowerCase() === "picture") {
-      var img = document.createElement("img");
+      var img = element.querySelector("img");
+
+      if (!img) {
+        img = document.createElement("img");
+        element.appendChild(img);
+      }
 
       if (isIE && element.getAttribute("data-iesrc")) {
         img.src = element.getAttribute("data-iesrc");

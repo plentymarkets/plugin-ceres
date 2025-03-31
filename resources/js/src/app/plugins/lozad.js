@@ -19,7 +19,13 @@ const defaultConfig = {
     {
         if (element.nodeName.toLowerCase() === "picture")
         {
-            const img = document.createElement("img");
+            let img = element.querySelector("img");
+
+            if (!img)
+            {
+                img = document.createElement("img");
+                element.appendChild(img);
+            }
 
             if (isIE && element.getAttribute("data-iesrc"))
             {

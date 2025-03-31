@@ -20,9 +20,9 @@
     </a>
 
     <a v-else :href="itemUrl">
-        <span class="sr-only" v-if="getAltText(imageUrls[0])">{{ getAltText(imageUrls[0]) }}</span>
         <lazy-img
             :ref="{ 'itemLazyImage': !disableLazyLoad }"
+            :alt="getAltText(imageUrls[0])"
             :image-url="imageOrItemImage"
             :title="getTitleText(imageUrls[0])"
             :width="getImageWidth(imageUrls[0])"
