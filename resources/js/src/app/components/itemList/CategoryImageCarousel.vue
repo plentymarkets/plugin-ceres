@@ -22,8 +22,8 @@
     <a v-else :href="itemUrl">
         <lazy-img
             :ref="{ 'itemLazyImage': !disableLazyLoad }"
-            :alt="getAltText(imageUrls[0])"
             :image-url="imageOrItemImage"
+            :alt="getAltText(imageUrls[0])"
             :title="getTitleText(imageUrls[0])"
             :width="getImageWidth(imageUrls[0])"
             :height="getImageHeight(imageUrls[0])"
