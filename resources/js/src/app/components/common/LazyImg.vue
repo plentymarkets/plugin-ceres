@@ -124,9 +124,9 @@ export default {
                     images[0].remove();
                 }
 
+                this.lozadLoaded = true;
                 lozad(this.$el, {
                     loaded: function(el) {
-                        this.lozadLoaded = true;
                         el.classList.remove('lozad');
                     }
                 }).triggerLoad(this.$el);
