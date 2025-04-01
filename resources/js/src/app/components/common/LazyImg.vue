@@ -93,7 +93,6 @@ export default {
                 this.$nextTick(() => {
                     if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
                     lozad(this.$el).observe();
-                    this.lozadLoaded = true;
                 });
                 this.propagateImageFormat();
             }
@@ -106,7 +105,6 @@ export default {
                         this.$nextTick(() => {
                             if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
                             lozad(this.$el).observe();
-                            this.lozadLoaded = true;
                         });
                         this.propagateImageFormat();
                     }
@@ -126,9 +124,9 @@ export default {
                     images[0].remove();
                 }
 
-                this.lozadLoaded = true;
                 lozad(this.$el, {
                     loaded: function(el) {
+                        this.lozadLoaded = true;
                         el.classList.remove('lozad');
                     }
                 }).triggerLoad(this.$el);
