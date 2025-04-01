@@ -577,11 +577,7 @@ var render = function() {
                   "a",
                   {
                     staticClass: "text-appearance",
-                    attrs: {
-                      "data-toggle": "modal",
-                      href: "#shippingscosts",
-                      title: _vm.$translate("Ceres::Template.itemShippingCosts")
-                    }
+                    attrs: { "data-toggle": "modal", href: "#shippingscosts" }
                   },
                   [
                     _vm._v(
