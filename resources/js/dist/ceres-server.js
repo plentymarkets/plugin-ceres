@@ -2954,8 +2954,8 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
   },
   data: function data() {
     return {
+      isImageReady: false,
       imageConversionEnabled: App.config.log.modernImagesConversion,
-      lozadLoaded: false,
       receivedImageExtension: null,
       browserSupportedImgExtension: null,
       defaultImageUrl: this.imageUrl,
@@ -3012,7 +3012,6 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
           images[0].remove();
         }
 
-        _this2.lozadLoaded = true;
         Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_9__["default"])(_this2.$el, {
           loaded: function loaded(el) {
             el.classList.remove('lozad');
@@ -3059,6 +3058,7 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
       this.setReceivedImageExtension();
       this.setBrowserSupportedImageExtension();
       this.setDefaultImageUrl();
+      this.isImageReady = true;
     },
     setReceivedImageExtension: function setReceivedImageExtension() {
       var _this$imageUrl;
@@ -44309,24 +44309,20 @@ var render = function() {
           }
         },
         [
-          _vm.lozadLoaded ? _vm._t("additionalimages") : _vm._e(),
+          _vm._t("additionalimages"),
           _vm._ssrNode(
-            " " +
-              (_vm.lozadLoaded
-                ? "<source" +
-                  _vm._ssrAttr("srcset", _vm.defaultImageUrl) +
-                  _vm._ssrAttr("type", _vm.mimeType(_vm.defaultImageUrl)) +
-                  ">"
-                : "<!---->") +
-              " " +
-              (_vm.lozadLoaded && _vm.defaultImageUrl !== _vm.imageUrl
+            " <source" +
+              _vm._ssrAttr("srcset", _vm.defaultImageUrl) +
+              _vm._ssrAttr("type", _vm.mimeType(_vm.defaultImageUrl)) +
+              "> " +
+              (_vm.defaultImageUrl !== _vm.imageUrl
                 ? "<source" +
                   _vm._ssrAttr("srcset", _vm.imageUrl) +
                   _vm._ssrAttr("type", _vm.mimeType(_vm.imageUrl)) +
                   ">"
                 : "<!---->") +
               " " +
-              (_vm.lozadLoaded && _vm.fallbackUrl
+              (_vm.fallbackUrl
                 ? "<source" +
                   _vm._ssrAttr("srcset", _vm.fallbackUrl) +
                   _vm._ssrAttr("type", _vm.mimeType(_vm.fallbackUrl)) +
@@ -44340,7 +44336,7 @@ var render = function() {
                   _vm._ssrAttr("height", _vm.getHeight()) +
                   _vm._ssrAttr("width", _vm.getWidth()) +
                   ' type="image/tiff" class="mw-100 h-auto">'
-                : !_vm.lozadLoaded
+                : _vm.isImageReady
                 ? "<img" +
                   _vm._ssrAttr("alt", _vm.alt) +
                   _vm._ssrAttr("height", _vm.getHeight()) +

@@ -545,8 +545,8 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
   },
   data: function data() {
     return {
+      isImageReady: false,
       imageConversionEnabled: App.config.log.modernImagesConversion,
-      lozadLoaded: false,
       receivedImageExtension: null,
       browserSupportedImgExtension: null,
       defaultImageUrl: this.imageUrl,
@@ -603,7 +603,6 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
           images[0].remove();
         }
 
-        _this2.lozadLoaded = true;
         Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_9__["default"])(_this2.$el, {
           loaded: function loaded(el) {
             el.classList.remove('lozad');
@@ -650,6 +649,7 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
       this.setReceivedImageExtension();
       this.setBrowserSupportedImageExtension();
       this.setDefaultImageUrl();
+      this.isImageReady = true;
     },
     setReceivedImageExtension: function setReceivedImageExtension() {
       var _this$imageUrl;
@@ -36676,18 +36676,16 @@ var render = function() {
           }
         },
         [
-          _vm.lozadLoaded ? _vm._t("additionalimages") : _vm._e(),
+          _vm._t("additionalimages"),
           _vm._v(" "),
-          _vm.lozadLoaded
-            ? _c("source", {
-                attrs: {
-                  srcset: _vm.defaultImageUrl,
-                  type: _vm.mimeType(_vm.defaultImageUrl)
-                }
-              })
-            : _vm._e(),
+          _c("source", {
+            attrs: {
+              srcset: _vm.defaultImageUrl,
+              type: _vm.mimeType(_vm.defaultImageUrl)
+            }
+          }),
           _vm._v(" "),
-          _vm.lozadLoaded && _vm.defaultImageUrl !== _vm.imageUrl
+          _vm.defaultImageUrl !== _vm.imageUrl
             ? _c("source", {
                 attrs: {
                   srcset: _vm.imageUrl,
@@ -36696,7 +36694,7 @@ var render = function() {
               })
             : _vm._e(),
           _vm._v(" "),
-          _vm.lozadLoaded && _vm.fallbackUrl
+          _vm.fallbackUrl
             ? _c("source", {
                 attrs: {
                   srcset: _vm.fallbackUrl,
@@ -36716,7 +36714,7 @@ var render = function() {
                   type: "image/tiff"
                 }
               })
-            : !_vm.lozadLoaded
+            : _vm.isImageReady
             ? _c("img", {
                 staticClass: "mw-100 h-auto",
                 attrs: {
