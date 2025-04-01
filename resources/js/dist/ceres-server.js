@@ -2907,7 +2907,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -44325,11 +44324,7 @@ var render = function() {
                   _vm._ssrAttr("height", _vm.getHeight()) +
                   _vm._ssrAttr("width", _vm.getWidth()) +
                   ' type="image/tiff" class="mw-100 h-auto">'
-                : "<img" +
-                  _vm._ssrAttr("alt", _vm.alt) +
-                  _vm._ssrAttr("height", _vm.getHeight()) +
-                  _vm._ssrAttr("width", _vm.getWidth()) +
-                  ' class="mw-100 h-auto">')
+                : "<!---->")
           )
         ],
         2

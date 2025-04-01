@@ -498,7 +498,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -36703,14 +36702,7 @@ var render = function() {
                   type: "image/tiff"
                 }
               })
-            : _c("img", {
-                staticClass: "mw-100 h-auto",
-                attrs: {
-                  alt: _vm.alt,
-                  height: _vm.getHeight(),
-                  width: _vm.getWidth()
-                }
-              })
+            : _vm._e()
         ],
         2
       )
