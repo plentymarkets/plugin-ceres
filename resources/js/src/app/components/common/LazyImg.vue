@@ -89,10 +89,8 @@ export default {
             this.avifSupported = avifSupported;
 
             if (avifSupported) {
-                this.$nextTick(() => {
-                    if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-                    lozad(this.$el).observe();
-                });
+                if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
+                lozad(this.$el).observe();
                 this.propagateImageFormat();
             }
 
@@ -101,10 +99,8 @@ export default {
                     this.webpSupported = webpSupported;
 
                     if (webpSupported) {
-                        this.$nextTick(() => {
-                            if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-                            lozad(this.$el).observe();
-                        });
+                        if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
+                        lozad(this.$el).observe();
                         this.propagateImageFormat();
                     }
                 }));
@@ -132,10 +128,8 @@ export default {
         },
         imageUrl()
         {
-            this.$nextTick(() => {
-                this.propagateImageFormat();
-                document.getElementById(this.uuid).getElementsByTagName('img')?.[0].remove();
-            });
+            this.propagateImageFormat();
+            document.getElementById(this.uuid).getElementsByTagName('img')?.[0].remove();
         }
     },
     computed:

@@ -835,10 +835,8 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
       _this.avifSupported = avifSupported;
 
       if (avifSupported) {
-        _this.$nextTick(function () {
-          if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
-          Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_9__["default"])(_this.$el).observe();
-        });
+        if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
+        Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_9__["default"])(_this.$el).observe();
 
         _this.propagateImageFormat();
       }
@@ -848,10 +846,8 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
           _this.webpSupported = webpSupported;
 
           if (webpSupported) {
-            _this.$nextTick(function () {
-              if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
-              Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_9__["default"])(_this.$el).observe();
-            });
+            if (!_this.isBackgroundImage) _this.$el.classList.toggle('lozad');
+            Object(_plugins_lozad__WEBPACK_IMPORTED_MODULE_9__["default"])(_this.$el).observe();
 
             _this.propagateImageFormat();
           }
@@ -880,15 +876,10 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
       });
     },
     imageUrl: function imageUrl() {
-      var _this3 = this;
+      var _document$getElementB;
 
-      this.$nextTick(function () {
-        var _document$getElementB;
-
-        _this3.propagateImageFormat();
-
-        (_document$getElementB = document.getElementById(_this3.uuid).getElementsByTagName('img')) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB[0].remove();
-      });
+      this.propagateImageFormat();
+      (_document$getElementB = document.getElementById(this.uuid).getElementsByTagName('img')) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB[0].remove();
     }
   },
   computed: {
