@@ -4,7 +4,7 @@
 
 ## Setting up plentyShop LTS in PlentyONE
 
-Learn how to set up and customise plentyShop LTS on [plentyKnowledge](https://knowledge.plentymarkets.com/en-gb/manual/main/online-store/setting-up-ceres.html).
+Learn how to set up and customise plentyShop LTS in [our manual](https://knowledge.plentymarkets.com/en-gb/manual/main/online-store/setting-up-ceres.html).
 
 ## Certifying the online store with Trusted Shops
 
