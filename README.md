@@ -1,6 +1,6 @@
 ![plentymarkets Logo](http://www.plentymarkets.eu/layout/pm/images/logo/plentymarkets-logo.jpg)
 
-# plentyShop LTS ![Travis Build Stable](https://img.shields.io/travis/plentymarkets/plugin-ceres/stable?label=build)
+# plentyShop LTS
 
 This is the official **plentyShop LTS** plugin developed by PlentyONE. **plentyShop LTS** is the default template plugin for [PlentyONE](https://www.plentyone.com/) online stores.
 
