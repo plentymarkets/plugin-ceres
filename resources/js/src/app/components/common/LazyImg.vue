@@ -8,11 +8,12 @@
         :data-height="getHeight()"
         :data-width="getWidth()"
         :id="uuid">
-        <slot name="additionalimages"></slot>
-        <source :srcset="defaultImageUrl" :type="mimeType(defaultImageUrl)">
-        <source v-if="defaultImageUrl !== imageUrl" :srcset="imageUrl" :type="mimeType(imageUrl)">
-        <source v-if="fallbackUrl" :srcset="fallbackUrl" :type="mimeType(fallbackUrl)">
+        <slot v-if="lozadLoaded" name="additionalimages"></slot>
+        <source v-if="lozadLoaded" :srcset="defaultImageUrl" :type="mimeType(defaultImageUrl)">
+        <source v-if="lozadLoaded && defaultImageUrl !== imageUrl" :srcset="imageUrl" :type="mimeType(imageUrl)">
+        <source v-if="lozadLoaded && fallbackUrl" :srcset="fallbackUrl" :type="mimeType(fallbackUrl)">
         <img v-if="receivedImageExtension === 'tif'" :src="defaultImageUrl" :alt="alt" :height="getHeight()" :width="getWidth()" type="image/tiff" class="mw-100 h-auto">
+        <img v-else-if="!lozadLoaded" :alt="alt" :height="getHeight()" :width="getWidth()" class="mw-100 h-auto">
     </picture>
 
     <div v-else :data-background-image="defaultImageUrl || fallbackUrl" :class="pictureClass">
@@ -69,6 +70,7 @@ export default {
     {
         return {
             imageConversionEnabled: App.config.log.modernImagesConversion,
+            lozadLoaded: false,
             receivedImageExtension: null,
             browserSupportedImgExtension: null,
             defaultImageUrl: this.imageUrl,
@@ -88,8 +90,11 @@ export default {
             this.avifSupported = avifSupported;
 
             if (avifSupported) {
-                if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-                lozad(this.$el).observe();
+                this.$nextTick(() => {
+                    if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
+                    lozad(this.$el).observe();
+                    this.lozadLoaded = true;
+                });
                 this.propagateImageFormat();
             }
 
@@ -98,8 +103,11 @@ export default {
                     this.webpSupported = webpSupported;
 
                     if (webpSupported) {
-                        if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
-                        lozad(this.$el).observe();
+                        this.$nextTick(() => {
+                            if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
+                            lozad(this.$el).observe();
+                            this.lozadLoaded = true;
+                        });
                         this.propagateImageFormat();
                     }
                 }));
@@ -118,6 +126,7 @@ export default {
                     images[0].remove();
                 }
 
+                this.lozadLoaded = true;
                 lozad(this.$el, {
                     loaded: function(el) {
                         el.classList.remove('lozad');
@@ -127,8 +136,10 @@ export default {
         },
         imageUrl()
         {
-            this.propagateImageFormat();
-            document.getElementById(this.uuid).getElementsByTagName('img')?.[0].remove();
+            this.$nextTick(() => {
+                this.propagateImageFormat();
+                document.getElementById(this.uuid).getElementsByTagName('img')?.[0].remove();
+            });
         }
     },
     computed:
