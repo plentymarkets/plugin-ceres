@@ -87683,8 +87683,6 @@ var defaultConfig = {
           _iterator.f();
         }
       }
-
-      element.appendChild(img);
     }
 
     if (element.nodeName.toLowerCase() === "video" && !element.getAttribute("data-src")) {
