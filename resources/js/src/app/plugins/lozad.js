@@ -20,11 +20,11 @@ const defaultConfig = {
         if (element.nodeName.toLowerCase() === "picture")
         {
             let img = element.querySelector("img");
+            const imgExists = !!img;
 
-            if (!img)
+            if (!imgExists)
             {
                 img = document.createElement("img");
-                element.appendChild(img);
             }
 
             if (isIE && element.getAttribute("data-iesrc"))
@@ -75,6 +75,11 @@ const defaultConfig = {
                         img.classList.add(selector);
                     }
                 }
+            }
+
+            if (!imgExists)
+            {
+                element.appendChild(img);
             }
         }
 

@@ -92,6 +92,7 @@ export default {
             if (avifSupported) {
                 this.$nextTick(() => {
                     if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
+                    this.lozadLoaded = true;
                     lozad(this.$el).observe();
                 });
                 this.propagateImageFormat();
@@ -104,6 +105,7 @@ export default {
                     if (webpSupported) {
                         this.$nextTick(() => {
                             if (!this.isBackgroundImage) this.$el.classList.toggle('lozad');
+                            this.lozadLoaded = true;
                             lozad(this.$el).observe();
                         });
                         this.propagateImageFormat();
