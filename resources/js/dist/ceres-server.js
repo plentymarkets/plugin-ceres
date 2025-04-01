@@ -55450,12 +55450,7 @@ var render = function() {
                   "\n                "
               ) +
               (_vm.$ceres.config.global.shippingCostsCategoryId > 0
-                ? '<a data-toggle="modal" href="#shippingscosts"' +
-                  _vm._ssrAttr(
-                    "title",
-                    _vm.$translate("Ceres::Template.itemShippingCosts")
-                  ) +
-                  ">" +
+                ? '<a data-toggle="modal" href="#shippingscosts">' +
                   _vm._ssrEscape(
                     _vm._s(_vm.$translate("Ceres::Template.itemShippingCosts"))
                   ) +
