@@ -15,6 +15,7 @@
 
 - Die primäre Lieferadresse wurde beim ersten Besuch im Checkout nicht richtig eingestellt.
 - Wenn der Benutzer primäre Adressen hat, wurden diese bei der Adressauswahl im Checkout immer als ausgewählt angezeigt. Dies wurde behoben, der Checkout zeigt nun wieder die ausgewählte Adresse an.
+- Die `LazyImg`-Komponente zeigte den Alt-Text für Bilder außerhalb des Viewports nicht an. Dies wurde nun behoben.
 
 ## v5.0.71 (2024-12-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.70...5.0.71" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
