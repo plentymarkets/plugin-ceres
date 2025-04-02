@@ -1,20 +1,29 @@
 # Release Notes für plentyShop LTS
 
-## v5.0.72 (2025-XX-XX) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.71...5.0.72" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.72 (2025-02-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.71...5.0.72" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
-- Widget anstelle von Datenfeldern für Hersteller- und EU-Verantwortliche-Registerkarten hinzugefügt.
-- Verbesserungen der Barrierefreiheit
+- Bei der Registrierung sind die gleichen Länder verfügbar, die auch für die Rechnungsadresse verfügbar sind.
+- Die ShopBuilder-Vorlage für die Artikelansicht enthält nun das Hersteller-Informationen Widget.
+- Beschriftung von Eingabefeldern um die Barrierefreiheit zu verbessern.
+- `<fieldsets>` werden verwendet um die Barrierefreiheit bestimmter Eingabegruppen zu verbessern.
+- `alt`-Attribute wurden hinzugefügt um die Barrierefreiheit zu verbessern.
+- `aria-label` wurden hinzugefügt um die Barrierefreiheit zu verbessern.
 
 ### Geändert
 
-- Für die Einstellung **Gültigkeit der URLs zum Ändern von Passwort bzw. E-Mail-Adresse** wurde der Wert "Immer" entfernt. Falls diese bisher genutzt wurde, greift eine maximale Gültigkeit von einer 1 Woche.
+- Aktualisiertes Branding
+- Für die Einstellung im Assistenten **Gültigkeit der URLs zum Ändern von Passwort bzw. E-Mail-Adresse** wurde der Wert "Immer" entfernt. Falls diese bisher genutzt wurde, greift eine maximale Gültigkeit von einer 1 Woche.
 - Im Übersetzungsschlüssel `cookieBarHintText`, in dem der Text für die Cookie Bar enthalten ist, wurde ein Link zum Impressum hinzugefügt.
+- Entfernt `role="listbox"` und `role="option"` innerhalb des ImageCarouselWidget.
+- Die Textgrößen wurden geändert, um die Barrierefreiheit zu verbessern.
+- Redundante `title` Attribute entfernt, um die Barrierefreiheit zu verbessern.
+- Eingige Grautöne wurden angepasst um den Kontrast zu erhöhen und die Barrierefreiheit zu verbessern.
 
 ### Behoben
 
-- Die primäre Lieferadresse wurde beim ersten Besuch im Checkout nicht richtig eingestellt.
-- Wenn der Benutzer primäre Adressen hat, wurden diese bei der Adressauswahl im Checkout immer als ausgewählt angezeigt. Dies wurde behoben, der Checkout zeigt nun wieder die ausgewählte Adresse an.
+- Die primäre Lieferadresse wurde in der Kasse beim ersten Besuch nicht korrekt eingestellt.
+- Wenn der Benutzer über eine primäre Lieferadresse verfügt, wurde sie in der Standard-Kasse immer als ausgewählt angezeigt. Dies wurde behoben und die Kasse zeigt nun wieder die korrekt ausgewählte Adresse an.
 - Die `LazyImg`-Komponente zeigte den Alt-Text für Bilder außerhalb des Viewports nicht an. Dies wurde nun behoben.
 
 ## v5.0.71 (2024-12-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.70...5.0.71" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
