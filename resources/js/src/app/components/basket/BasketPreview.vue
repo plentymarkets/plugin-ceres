@@ -67,13 +67,13 @@
                         <slot name="after-basket-totals"></slot>
 
                         <div class="basket-preview-footer d-flex pb-3">
-                            <a v-waiting-animation-infinite :href="$ceres.urls.basket" rel="nofollow" class="btn btn-outline-primary btn-block" :title="$translate('Ceres::Template.basket')">
+                            <a v-waiting-animation-infinite :href="$ceres.urls.basket" rel="nofollow" class="btn btn-outline-primary btn-block">
                                 <i class="fa fa-shopping-cart"></i>
                                 {{ $translate("Ceres::Template.basket") }}
                             </a>
 
                             <slot name="before-checkout-button"></slot>
-                            <a v-waiting-animation-infinite :href="$ceres.urls.checkout" rel="nofollow" class="btn btn-primary btn-block" :title="$translate('Ceres::Template.basketCheckout')">
+                            <a v-waiting-animation-infinite :href="$ceres.urls.checkout" rel="nofollow" class="btn btn-primary btn-block">
                                 <i class="fa fa-arrow-right" aria-hidden="true"></i>
                                 {{ $translate("Ceres::Template.basketCheckout") }}
                             </a>
