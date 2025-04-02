@@ -26,7 +26,7 @@
       {{ $translate("Ceres::Template.itemFootnote") }} <span v-if="showNetPrices">{{ $translate("Ceres::Template.itemExclVAT") }}</span>
       <span v-else>{{ $translate("Ceres::Template.itemInclVAT") }}</span>
       {{ $translate("Ceres::Template.itemExclusive") }}
-      <a v-if="$ceres.config.global.shippingCostsCategoryId > 0" data-toggle="modal" href="#shippingscosts" class="text-appearance" :title="$translate('Ceres::Template.itemShippingCosts')">{{ $translate("Ceres::Template.itemShippingCosts") }}</a>
+      <a v-if="$ceres.config.global.shippingCostsCategoryId > 0" data-toggle="modal" href="#shippingscosts" class="text-appearance">{{ $translate("Ceres::Template.itemShippingCosts") }}</a>
       <a v-else :title="$translate('Ceres::Template.itemShippingCosts')">{{ $translate("Ceres::Template.itemShippingCosts") }}</a>
     </div>
   </div>

@@ -46330,10 +46330,7 @@ var render = function() {
                                 {
                                   attrs: {
                                     "data-toggle": "modal",
-                                    href: "#shippingscosts",
-                                    title: _vm.$translate(
-                                      "Ceres::Template.singleItemShippingCosts"
-                                    )
+                                    href: "#shippingscosts"
                                   }
                                 },
                                 [

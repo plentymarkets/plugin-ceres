@@ -221,7 +221,7 @@ class DefaultHomepagePreset implements ContentPreset
 
         $this->preset->createWidget("Ceres::CodeWidget")
             ->withSetting("appearance", "none")
-            ->withSetting("text", "<p class='mb-0'>{{ trans('Ceres::Template.singleItemFootnote1') }} {% if services.customer.showNetPrices() %}{{ trans('Ceres::Template.singleItemExclVAT') }}{% else %}{{ trans('Ceres::Template.singleItemInclVAT') }}{% endif %} {{ trans('Ceres::Template.singleItemExclusive') }} <a {% if ceresConfig.global.shippingCostsCategoryId > 0 %} data-toggle='modal' href='#shippingscosts'{% endif %} title='{{ trans('Ceres::Template.singleItemShippingCosts') }}'>{{ trans('Ceres::Template.singleItemShippingCosts') }}</a></p>");
+            ->withSetting("text", "<p class='mb-0'>{{ trans('Ceres::Template.singleItemFootnote1') }} {% if services.customer.showNetPrices() %}{{ trans('Ceres::Template.singleItemExclVAT') }}{% else %}{{ trans('Ceres::Template.singleItemInclVAT') }}{% endif %} {{ trans('Ceres::Template.singleItemExclusive') }} <a {% if ceresConfig.global.shippingCostsCategoryId > 0 %} data-toggle='modal' href='#shippingscosts'{% endif %}>{{ trans('Ceres::Template.singleItemShippingCosts') }}</a></p>");
     }
     public function createTextBox(): void
     {
