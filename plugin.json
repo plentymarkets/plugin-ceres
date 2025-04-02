@@ -12,7 +12,7 @@
     "email"             : "sales@plentysystems.com",
     "phone"             : "+49 561 98 681 100",
     "categories"        : ["3885"],
-    "keywords"          : ["plentymarkets", "plugins", "layout", "template", "ceres", "plentyshop", "webshop"],
+    "keywords"          : ["plentymarkets", "plugins", "layout", "template", "ceres", "plentyshop", "webshop", "PlentyONE"],
     "type"              : "template",
     "require"           : {
         "IO": "~5.0.71"

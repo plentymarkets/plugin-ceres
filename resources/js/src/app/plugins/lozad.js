@@ -19,7 +19,13 @@ const defaultConfig = {
     {
         if (element.nodeName.toLowerCase() === "picture")
         {
-            const img = document.createElement("img");
+            let img = element.querySelector("img");
+            const imgExists = !!img;
+
+            if (!imgExists)
+            {
+                img = document.createElement("img");
+            }
 
             if (isIE && element.getAttribute("data-iesrc"))
             {
@@ -71,7 +77,10 @@ const defaultConfig = {
                 }
             }
 
-            element.appendChild(img);
+            if (!imgExists)
+            {
+                element.appendChild(img);
+            }
         }
 
         if (element.nodeName.toLowerCase() === "video" && !element.getAttribute("data-src"))

@@ -1,10 +1,10 @@
-# plentyShop LTS – Der neue Webshop für plentymarkets
+# plentyShop LTS – Der Webshop für PlentyONE
 
-**plentyShop LTS** ist das offizielle Template-Plugin für den Standard-Webshop von plentymarkets. Im neuen Webshop für plentymarkets sind Design und Logik voneinander getrennt. Der Webshop wird über zwei Plugins in deinem plentymarkets System eingebunden. Das Plugin **plentyShop LTS** beinhaltet das Standard-Design des Webshops und kann nach deinen Wünschen angepasst werden. Das Plugin **IO** beinhaltet die Webshop-Logik, stellt eine allgemeine Grundlage für alle Design-Plugins dar und kann auch von anderen Plugins verwendet werden.
+**plentyShop LTS** ist das offizielle Template-Plugin für den Standard-Webshop von PlentyONE. Im Webshop für PlentyONE sind Design und Logik voneinander getrennt. Der Webshop wird über zwei Plugins in deinem PlentyONE System eingebunden. Das Plugin **plentyShop LTS** beinhaltet das Standard-Design des Webshops und kann nach deinen Wünschen angepasst werden. Das Plugin **IO** beinhaltet die Webshop-Logik, stellt eine allgemeine Grundlage für alle Design-Plugins dar und kann auch von anderen Plugins verwendet werden.
 
 ## plentyShop LTS einrichten
 
-Wie du plentyShop LTS einrichtest und individualisierst, erfährst du auf [plentyKnowledge](https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html).
+Wie du plentyShop LTS einrichtest und individualisierst, erfährst du in unserem [Handbuch](https://knowledge.plentymarkets.com/de-de/manual/main/webshop/ceres-einrichten.html).
 
 ## Webshop bei Trusted Shops zertifizieren
 
