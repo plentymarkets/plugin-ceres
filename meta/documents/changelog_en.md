@@ -17,6 +17,7 @@
 - Removed role="listbox" and role="option" from divs inside the ImageCarouselWidget.
 - Changed Tags, Order Property Labels, Availability Text size.
 - The translation entry `cookieBarHintText`, which holds the text for the cookie bar, now includes a link to the legal disclosure.
+- Removed redundant title from the basket and checkout button from basket preview for accessibility.
 
 ### Fixed
 
