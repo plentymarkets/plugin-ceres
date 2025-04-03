@@ -2,6 +2,11 @@
 
 ## v5.0.72 (2025-04-03) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.71...5.0.72" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
+### TODO
+
+- Due to the large number of changes, users of themes should have the template changes listed in the "Changed Templates" section checked separately.
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **Shop » ShopBuilder** menu.
+
 ### Added
 - The same countries are available for the registration as are available for the billing address.
 - The ShopBuilder template for the item view now contains the manufacturer information widget.

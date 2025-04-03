@@ -2,6 +2,11 @@
 
 ## v5.0.72 (2025-04-03) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.71...5.0.72" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
+### TODO
+
+- Aufgrund der hohen Anzahl von Änderungen sollten Nutzer, die eigene Themes verwenden, die im Changelog unter "Angepasste Templates" angegebenen Template-Änderungen gesondert überprüfen lassen.
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **Shop » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+
 ### Hinzugefügt
 - Bei der Registrierung sind die gleichen Länder verfügbar, die auch für die Rechnungsadresse verfügbar sind.
 - Die ShopBuilder-Vorlage für die Artikelansicht enthält nun das Herstellerinformationen-Widget.
@@ -18,7 +23,7 @@
 - `role="listbox"` und `role="option"` wurden aus dem Bilderkarussell-Widget entfernt.
 - Die Textgrößen wurden geändert, um die Barrierefreiheit zu verbessern.
 - Redundante `title`-Attribute wurden entfernt, um die Barrierefreiheit zu verbessern.
-- Eingige Grautöne wurden angepasst, um den Kontrast zu erhöhen und damit die Barrierefreiheit zu verbessern.
+- Einige Grautöne wurden angepasst, um den Kontrast zu erhöhen und damit die Barrierefreiheit zu verbessern.
 
 ### Behoben
 
