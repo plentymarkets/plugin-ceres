@@ -18,7 +18,7 @@
 - `role="listbox"` und `role="option"` wurden aus dem Bilderkarussell-Widget entfernt.
 - Die Textgrößen wurden geändert, um die Barrierefreiheit zu verbessern.
 - Redundante `title`-Attribute wurden entfernt, um die Barrierefreiheit zu verbessern.
-- Eingige Grautöne wurden angepasst, um den Kontrast zu erhöhen und damit die Barrierefreiheit zu verbessern.
+- Einige Grautöne wurden angepasst, um den Kontrast zu erhöhen und damit die Barrierefreiheit zu verbessern.
 
 ### Behoben
 
