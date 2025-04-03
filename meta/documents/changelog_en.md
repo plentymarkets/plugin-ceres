@@ -1,30 +1,30 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.72 (2025-02-04) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.71...5.0.72" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.72 (2025-04-03) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.71...5.0.72" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Added
-- During registration process, the same countries are available as those for the billing address.
+- The same countries are available for the registration as are available for the billing address.
 - The ShopBuilder template for the item view now contains the manufacturer information widget.
-- Added labels to inputs to improve accessibility.
+- Labels have been added to user inputs to improve accessibility.
 - `<fieldsets>` are used to improve the accessibility of certain input groups.
 - `alt` attributes have been added to improve accessibility.
 - `aria-label` attributes have been added to improve accessibility.
 
 ### Changed
 
-- Updated branding
-- The value “Always” has been removed for the assistant setting **Validity of URLs for changing password or email address**. If this was previously used, a maximum validity of 1 week applies.
+- Updated branding from "plentysystems" to "PlentyONE".
+- The value “Always” has been removed for the assistant setting **Validity of URLs for changing password or email address**. If this value was in use, a maximum validity of 1 week now applies.
 - The translation entry `cookieBarHintText`, which holds the text for the cookie bar, now includes a link to the legal disclosure.
-- Removed `role="listbox"` and `role="option"` from inside the ImageCarouselWidget.
+- Removed `role="listbox"` and `role="option"` from inside the image carousel widget.
 - Changed text sizes to improve accessibility.
 - Redundant `title` attributes removed to improve accessibility.
-- Some gray tones have been adjusted to increase contrast and improve accessibility.
+- Some gray tones have been adjusted to increase contrast, thereby improving accessibility.
 
 ### Fixed
 
-- The primary shipping address was not set correctly in the checkout on the initial visit.
-- If the user has primary addresses, the address selection in the default checkout template would always show them as selected. This has been fixed and the checkout now shows the correcty selected address again.
-- The `LazyImg` component did not display the alt text for images outside the viewport. This has now been fixed.
+- The primary shipping address was not set correctly in the checkout upon the initial visit.
+- If the user had a primary addresses, the address selection in the default checkout template would always display this address as selected. This has been fixed and the checkout now correctly displays the selected address again.
+- The `LazyImg` component did not display the alternative text for images outside the viewport. This has now been fixed.
 
 ## v5.0.71 (2024-12-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.70...5.0.71" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
