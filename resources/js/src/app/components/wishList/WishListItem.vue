@@ -154,7 +154,7 @@ export default {
         },
         imageNames:
         {
-            type: Object,
+            type: String,
             default: "names"
         },
         itemDetailsData:
@@ -194,7 +194,7 @@ export default {
               return imageData.name;
             }
 
-            return  this.wishListItem.texts.name1;
+            return this.wishListItem.texts.name1;
         },
         unitPrice()
         {

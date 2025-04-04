@@ -15992,7 +15992,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       default: "urlPreview"
     },
     imageNames: {
-      type: Object,
+      type: String,
       default: "names"
     },
     itemDetailsData: {
