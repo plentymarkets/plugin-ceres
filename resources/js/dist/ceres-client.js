@@ -2066,7 +2066,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -39422,7 +39421,6 @@ var render = function() {
                         _vm.imageUrlAccessor
                       ),
                       alt: _vm._f("itemName")(_vm.item),
-                      title: _vm._f("itemName")(_vm.item),
                       "item-url": _vm._f("itemURL")(
                         _vm.item,
                         _vm.urlWithVariationId

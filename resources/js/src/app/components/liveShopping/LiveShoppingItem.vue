@@ -19,8 +19,7 @@
             <template #item-image>
                 <a v-if="!!displaySettings.customImagePath" :href="currentOffer.item | itemURL">
                     <lazy-img   :image-url="displaySettings.customImagePath"
-                                :alt="currentOffer.item | itemName"
-                                :title="currentOffer.item | itemName">
+                                :alt="currentOffer.item | itemName">
                     </lazy-img>
                 </a>
             </template>
