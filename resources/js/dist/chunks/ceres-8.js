@@ -693,7 +693,7 @@ var render = function() {
             ? _c("lazy-img", {
                 attrs: {
                   "image-url": _vm.orderItemImage,
-                  alt: _vm.itemBundleName,
+                  alt: _vm._f("itemBundleName")(_vm.orderItem),
                   "picture-class": "d-block mw-100 mh-100"
                 }
               })
