@@ -5,7 +5,7 @@
                 <lazy-img
                     v-if="orderItemImage"
                     :image-url="orderItemImage"
-                    :alt="orderItem | itemBundleName"
+                    :alt="itemBundleName"
                     picture-class="d-block mw-100 mh-100" />
             </div>
 
