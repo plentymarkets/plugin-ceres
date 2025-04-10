@@ -129,9 +129,7 @@ var render = function() {
     [
       _c("label", { attrs: { for: _vm.formFieldId } }, [
         _vm._v("\n        " + _vm._s(_vm.label)),
-        _vm.isRequired
-          ? _c("span", { staticStyle: { "font-size": ".8rem" } }, [_vm._v("*")])
-          : _vm._e()
+        _vm.isRequired ? _c("span", [_vm._v("*")]) : _vm._e()
       ]),
       _vm._v(" "),
       _c(

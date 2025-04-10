@@ -321,7 +321,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "order-return-item",
@@ -695,7 +694,6 @@ var render = function() {
                 attrs: {
                   "image-url": _vm.orderItemImage,
                   alt: _vm._f("itemBundleName")(_vm.orderItem),
-                  title: _vm._f("itemBundleName")(_vm.orderItem),
                   "picture-class": "d-block mw-100 mh-100"
                 }
               })
