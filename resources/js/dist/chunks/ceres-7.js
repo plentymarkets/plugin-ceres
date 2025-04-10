@@ -145,12 +145,9 @@ __webpack_require__.r(__webpack_exports__);
       var alt = image && image.alternate ? image.alternate : this.alt;
       return alt;
     },
-    computeTitleObject: function computeTitleObject(image) {
-      var title = image && image.name ? image.name : this.title; // if alt and title are the same, we don't need to set title for accessibility reasons
-
-      return title !== this.getAltText(image) ? {
-        title: title
-      } : {};
+    getTitleText: function getTitleText(image) {
+      var title = image && image.name ? image.name : this.title;
+      return title;
     },
     getImageWidth: function getImageWidth(image) {
       return image && image.width ? image.width : undefined;
@@ -203,6 +200,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+//
 //
 //
 //
@@ -590,26 +588,19 @@ var render = function() {
             "div",
             { key: index },
             [
-              _c(
-                "lazy-img",
-                _vm._b(
-                  {
-                    ref: { itemLazyImage: index === 0 },
-                    refInFor: true,
-                    attrs: {
-                      "image-url": imageUrl.url,
-                      alt: _vm.getAltText(imageUrl),
-                      width: _vm.getImageWidth(imageUrl),
-                      height: _vm.getImageHeight(imageUrl),
-                      "picture-class": "img-fluid",
-                      role: "option"
-                    }
-                  },
-                  "lazy-img",
-                  _vm.computeTitleObject(imageUrl),
-                  false
-                )
-              )
+              _c("lazy-img", {
+                ref: { itemLazyImage: index === 0 },
+                refInFor: true,
+                attrs: {
+                  "image-url": imageUrl.url,
+                  alt: _vm.getAltText(imageUrl),
+                  title: _vm.getTitleText(imageUrl),
+                  width: _vm.getImageWidth(imageUrl),
+                  height: _vm.getImageHeight(imageUrl),
+                  "picture-class": "img-fluid",
+                  role: "option"
+                }
+              })
             ],
             1
           )
@@ -620,24 +611,17 @@ var render = function() {
         "a",
         { attrs: { href: _vm.itemUrl } },
         [
-          _c(
-            "lazy-img",
-            _vm._b(
-              {
-                ref: { itemLazyImage: !_vm.disableLazyLoad },
-                attrs: {
-                  "image-url": _vm.imageOrItemImage,
-                  alt: _vm.getAltText(_vm.imageUrls[0]),
-                  width: _vm.getImageWidth(_vm.imageUrls[0]),
-                  height: _vm.getImageHeight(_vm.imageUrls[0]),
-                  "picture-class": "img-fluid"
-                }
-              },
-              "lazy-img",
-              _vm.computeTitleObject(_vm.imageUrl),
-              false
-            )
-          )
+          _c("lazy-img", {
+            ref: { itemLazyImage: !_vm.disableLazyLoad },
+            attrs: {
+              "image-url": _vm.imageOrItemImage,
+              alt: _vm.getAltText(_vm.imageUrls[0]),
+              title: _vm.getTitleText(_vm.imageUrls[0]),
+              width: _vm.getImageWidth(_vm.imageUrls[0]),
+              height: _vm.getImageHeight(_vm.imageUrls[0]),
+              "picture-class": "img-fluid"
+            }
+          })
         ],
         1
       )
@@ -720,6 +704,7 @@ var render = function() {
                         _vm.imageUrlAccessor
                       ),
                       alt: _vm._f("itemName")(_vm.item),
+                      title: _vm._f("itemName")(_vm.item),
                       "item-url": _vm._f("itemURL")(
                         _vm.item,
                         _vm.urlWithVariationId
