@@ -999,7 +999,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("fieldset", [
     _vm.isShownOnItemPageCount
       ? _c(
           "div",
@@ -1010,7 +1010,7 @@ var render = function() {
                   "div",
                   { class: _vm.paddingClasses, style: _vm.paddingInlineStyles },
                   [
-                    _c("div", { staticClass: "h4" }, [
+                    _c("legend", { staticClass: "h4" }, [
                       _vm._v(
                         "\n                " +
                           _vm._s(_vm.propertyGroup.group.names.name) +
@@ -1134,9 +1134,14 @@ var render = function() {
                   attrs: { for: "order-property-input_" + _vm.property.id }
                 },
                 [
-                  _c("span", { staticClass: "text-truncate" }, [
-                    _vm._v(_vm._s(_vm.property.names.name))
-                  ]),
+                  _c(
+                    "span",
+                    {
+                      staticClass: "text-truncate",
+                      staticStyle: { "font-size": ".8rem" }
+                    },
+                    [_vm._v(_vm._s(_vm.property.names.name))]
+                  ),
                   _vm._v(" "),
                   _c(
                     "strong",
@@ -1154,7 +1159,7 @@ var render = function() {
                           ]
                         : _vm._e(),
                       _vm._v(" "),
-                      _c("span", [
+                      _c("span", { staticStyle: { "font-size": ".8rem" } }, [
                         _vm._v(
                           _vm._s(_vm.footnotes) +
                             " " +
@@ -1357,9 +1362,14 @@ var render = function() {
                       attrs: { for: "order-property-input-select" }
                     },
                     [
-                      _c("span", { staticClass: "text-truncate" }, [
-                        _vm._v(_vm._s(_vm.property.names.name))
-                      ]),
+                      _c(
+                        "span",
+                        {
+                          staticClass: "text-truncate",
+                          staticStyle: { "font-size": ".8rem" }
+                        },
+                        [_vm._v(_vm._s(_vm.property.names.name))]
+                      ),
                       _vm._v(" "),
                       _c(
                         "strong",
@@ -1377,13 +1387,17 @@ var render = function() {
                               ]
                             : _vm._e(),
                           _vm._v(" "),
-                          _c("span", [
-                            _vm._v(
-                              _vm._s(_vm.footnotes) +
-                                " " +
-                                _vm._s(_vm.requiredFootnotes)
-                            )
-                          ])
+                          _c(
+                            "span",
+                            { staticStyle: { "font-size": ".8rem" } },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.footnotes) +
+                                  " " +
+                                  _vm._s(_vm.requiredFootnotes)
+                              )
+                            ]
+                          )
                         ],
                         2
                       )
@@ -1469,9 +1483,14 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("span", { staticClass: "input-unit-label d-flex" }, [
-                    _c("span", { staticClass: "text-truncate" }, [
-                      _vm._v(_vm._s(_vm.property.names.name))
-                    ]),
+                    _c(
+                      "span",
+                      {
+                        staticClass: "text-truncate",
+                        staticStyle: { "font-size": ".8rem" }
+                      },
+                      [_vm._v(_vm._s(_vm.property.names.name))]
+                    ),
                     _vm._v(" "),
                     _c(
                       "strong",
@@ -1489,7 +1508,7 @@ var render = function() {
                             ]
                           : _vm._e(),
                         _vm._v(" "),
-                        _c("span", [
+                        _c("span", { staticStyle: { "font-size": ".8rem" } }, [
                           _vm._v(
                             _vm._s(_vm.footnotes) +
                               " " +

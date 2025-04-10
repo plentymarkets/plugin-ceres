@@ -24,7 +24,7 @@
       "welcome": "Herzlich Willkommen!",
       "shortDescription": "... in unserem neuen Responsive-Template <b>plentyShop LTS</b>. Das Template wurde optimiert für die Darstellung auf allen modernen Endgeräten (Desktop, Notebook, Tablet, Smartphone). Wir freuen uns über Ihr Interesse und wünschen Ihnen viel Spaß beim Entdecken der neuen Funktionalitäten.",
       "longText": "",
-      "recommendText": "plentymarkets empfiehlt"
+      "recommendText": "PlentyONE empfiehlt"
     },
     "recommended":
     [
@@ -42,7 +42,7 @@
       },
       {
         "pluginIcon": "https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/resources/images/homepage/icon_plugin_paypal.png",
-        "pluginText": "Das offizielle PayPal-Plugin für plentymarkets",
+        "pluginText": "Das offizielle PayPal-Plugin für PlentyONE",
         "pluginLink": "https://marketplace.plentymarkets.com/de/plugins/plentymarkets-GmbH/PayPal_4690",
         "pluginTitle": "PayPal"
       }
@@ -74,7 +74,7 @@
       "welcome": "Welcome!",
       "shortDescription": "... to our new responsive template <b>plentyShop LTS</b>.",
       "longText": "",
-      "recommendText": "plentymarkets recommends"
+      "recommendText": "PlentyONE recommends"
     },
     "recommended":
     [
@@ -92,7 +92,7 @@
       },
       {
         "pluginIcon": "https://raw.githubusercontent.com/plentymarkets/plugin-ceres/stable/resources/images/homepage/icon_plugin_paypal.png",
-        "pluginText": "The official PayPal plugin for plentymarkets",
+        "pluginText": "The official PayPal plugin for PlentyONE",
         "pluginLink": "https://marketplace.plentymarkets.com/en/plugins/plentymarkets-GmbH/PayPal_4690",
         "pluginTitle": "PayPal"
       }

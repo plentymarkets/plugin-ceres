@@ -1,6 +1,7 @@
-plentymarkets plentyShop LTS
+PlentyONE plentyShop LTS
 
-Copyright © 2021 plentysystems AG
+
+Copyright © 2017-2025 PlentyONE GmbH
 
 According to our dual licensing model, this program can be used either
 under the terms of the GNU Affero General Public License, version 3,
@@ -11,7 +12,9 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU Affero General Public License for more details.
 
-"plentymarkets" is a registered trademark of plentysystems AG.
+
+"PlentyONE" is a registered trademark of PlentyONE GmbH.
+
 The licensing of the program under the AGPLv3 does not imply a
 trademark license. Therefore any rights, titles and interests in the
 above trademarks remain entirely with the trademark owners.

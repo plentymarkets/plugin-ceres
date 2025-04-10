@@ -29,7 +29,9 @@
                 </div>
                 <div class="dropdown-menu" aria-labelledby="bankData">
                     <fieldset>
-                    <legend>{{ trans("Ceres::Template.myAccountBankDetails") }}</legend>
+                    <legend>
+                        <span class="d-none">{{ trans("Ceres::Template.myAccountBankDetails") }}</span>
+                    </legend>
                     <ul>
                         <li class="item" v-for="(bankData, index) in userBankData">
                             <input type="radio" :id="bankData.id" name="bankData" :value="bankData" @change="changeSelecting(bankData)">
@@ -80,7 +82,9 @@
                         </div>
                         <form id="my-bankForm" method="post" @submit.prevent>
                             <fieldset>
-                                 <legend>${headline}</legend>
+                                 <legend>
+                                    <span class="d-none">${headline}</span>
+                                 </legend>
                                  <div class="modal-body">
                                     <div class="row">
                                         <div class="col-12">
@@ -139,7 +143,9 @@
 
                         <div class="modal-body">
                             <fieldset>
-                                <legend>{{ trans("Ceres::Template.myAccountBankDeleteTitle") }}</legend>
+                                <legend>
+                                    <span class="d-none">{{ trans("Ceres::Template.myAccountBankDeleteTitle") }}</span>
+                                </legend>
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div>{{ trans("Ceres::Template.myAccountBankDeleteWarning") }}</div>

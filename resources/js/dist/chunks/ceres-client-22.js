@@ -410,8 +410,7 @@ var render = function() {
                             staticClass: "btn btn-outline-primary btn-block",
                             attrs: {
                               href: _vm.$ceres.urls.basket,
-                              rel: "nofollow",
-                              title: _vm.$translate("Ceres::Template.basket")
+                              rel: "nofollow"
                             }
                           },
                           [
@@ -440,10 +439,7 @@ var render = function() {
                             staticClass: "btn btn-primary btn-block",
                             attrs: {
                               href: _vm.$ceres.urls.checkout,
-                              rel: "nofollow",
-                              title: _vm.$translate(
-                                "Ceres::Template.basketCheckout"
-                              )
+                              rel: "nofollow"
                             }
                           },
                           [

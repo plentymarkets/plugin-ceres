@@ -1,10 +1,10 @@
-# plentyShop LTS – The new online store for plentymarkets
+# plentyShop LTS – The online store for PlentyONE
 
-**plentyShop LTS** is the official template plugin for the default online store of plentymarkets. In the new online store for plentymarkets, design and logic are separated from each other. Two plugins are required to integrate the online store into your plentymarkets system. The **plentyShop LTS** plugin contains the new standard design of the online store and can be customised to meet your needs. The **IO** plugin contains the logic part of the online store, is a general basis for all design plugins and can also be used by other plugins.
+**plentyShop LTS** is the official template plugin for the default online store of PlentyONE. In the new online store for PlentyONE, design and logic are separated from each other. Two plugins are required to integrate the online store into your PlentyONE system. The **plentyShop LTS** plugin contains the new standard design of the online store and can be customised to meet your needs. The **IO** plugin contains the logic part of the online store, is a general basis for all design plugins and can also be used by other plugins.
 
-## Setting up plentyShop LTS in plentymarkets
+## Setting up plentyShop LTS in PlentyONE
 
-Learn how to set up and customise plentyShop LTS on [plentyKnowledge](https://knowledge.plentymarkets.com/en-gb/manual/main/online-store/setting-up-ceres.html).
+Learn how to set up and customise plentyShop LTS in [our manual](https://knowledge.plentymarkets.com/en-gb/manual/main/online-store/setting-up-ceres.html).
 
 ## Certifying the online store with Trusted Shops
 

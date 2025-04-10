@@ -768,6 +768,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -814,6 +815,7 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
   },
   data: function data() {
     return {
+      isImageReady: false,
       imageConversionEnabled: App.config.log.modernImagesConversion,
       receivedImageExtension: null,
       browserSupportedImgExtension: null,
@@ -917,6 +919,7 @@ var mime = __webpack_require__(/*! mime-types */ "./node_modules/mime-types/inde
       this.setReceivedImageExtension();
       this.setBrowserSupportedImageExtension();
       this.setDefaultImageUrl();
+      this.isImageReady = true;
     },
     setReceivedImageExtension: function setReceivedImageExtension() {
       var _this$imageUrl;
@@ -40306,6 +40309,15 @@ var render = function() {
                   type: "image/tiff"
                 }
               })
+            : _vm.isImageReady
+            ? _c("img", {
+                staticClass: "mw-100 h-auto",
+                attrs: {
+                  alt: _vm.alt,
+                  height: _vm.getHeight(),
+                  width: _vm.getWidth()
+                }
+              })
             : _vm._e()
         ],
         2
@@ -46321,10 +46333,7 @@ var render = function() {
                                 {
                                   attrs: {
                                     "data-toggle": "modal",
-                                    href: "#shippingscosts",
-                                    title: _vm.$translate(
-                                      "Ceres::Template.singleItemShippingCosts"
-                                    )
+                                    href: "#shippingscosts"
                                   }
                                 },
                                 [
@@ -72053,7 +72062,7 @@ var ModalService = __webpack_require__(/*! ../../../services/ModalService */ "./
     return {
       addressModal: {},
       modalType: "",
-      headline: "",
+      headline: _services_TranslationService__WEBPACK_IMPORTED_MODULE_21__["default"].translate("Ceres::Template.modalTitle"),
       addressToEdit: {
         gender: this.defaultSalutation,
         countryId: this.shippingCountryId
@@ -80409,7 +80418,12 @@ var defaultConfig = {
   threshold: 0,
   load: function load(element) {
     if (element.nodeName.toLowerCase() === "picture") {
-      var img = document.createElement("img");
+      var img = element.querySelector("img");
+      var imgExists = !!img;
+
+      if (!imgExists) {
+        img = document.createElement("img");
+      }
 
       if (isIE && element.getAttribute("data-iesrc")) {
         img.src = element.getAttribute("data-iesrc");
@@ -80461,7 +80475,9 @@ var defaultConfig = {
         }
       }
 
-      element.appendChild(img);
+      if (!imgExists) {
+        element.appendChild(img);
+      }
     }
 
     if (element.nodeName.toLowerCase() === "video" && !element.getAttribute("data-src")) {

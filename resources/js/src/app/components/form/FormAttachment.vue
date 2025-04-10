@@ -5,7 +5,7 @@
             data-toggle="tooltip"
             :title="selectedFiles">
         <label :for="formFieldId">
-            {{ label }}<span v-if="isRequired">*</span>
+            {{ label }}<span v-if="isRequired" style="font-size: .8rem;">*</span>
         </label>
 
         <span class="input-unit-preview"
