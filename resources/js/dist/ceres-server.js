@@ -49976,7 +49976,9 @@ var render = function() {
           _vm._ssrAttr("for", _vm.formFieldId) +
           ">" +
           _vm._ssrEscape("\n        " + _vm._s(_vm.label)) +
-          (_vm.isRequired ? "<span>*</span>" : "<!---->") +
+          (_vm.isRequired
+            ? '<span style="font-size: .8rem;">*</span>'
+            : "<!---->") +
           '</label> <span data-testing="form-attachment-file-name"' +
           _vm._ssrClass("input-unit-preview", {
             disabled: !!_vm.selectedFiles
