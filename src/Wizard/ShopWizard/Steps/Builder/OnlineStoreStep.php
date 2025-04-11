@@ -467,7 +467,7 @@ class OnlineStoreStep extends Step
             "form" => [
                 "onlineStore_useVariationOrderProperties" => [
                     "type" => "checkbox",
-                    "defaultValue" => false,
+                    "defaultValue" => true,
                     "options" => [
                         "name" => "Wizard.useVariationOrderProperties"
                     ]
