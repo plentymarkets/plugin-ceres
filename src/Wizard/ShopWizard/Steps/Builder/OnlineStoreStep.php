@@ -396,7 +396,7 @@ class OnlineStoreStep extends Step
             "form" => [
                 "onlineStore_sessionLifetime" => [
                     "type" => "select",
-                    "defaultValue" => 0,
+                    "defaultValue" => 86400,
                     "options" => [
                         "name" => "Wizard.sessionLifeTime",
                         "listBoxValues" => $sessionLifetimeOptions
