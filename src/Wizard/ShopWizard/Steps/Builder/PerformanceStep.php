@@ -45,7 +45,7 @@ class PerformanceStep extends Step
             "form" => [
                 "performance_ssr" => [
                     "type" => "toggle",
-                    "defaultValue" => false,
+                    "defaultValue" => true,
                     "options" => [
                         "name" =>  "Wizard.activateSsr"
                     ]
