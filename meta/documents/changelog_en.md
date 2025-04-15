@@ -9,7 +9,7 @@
 
 ### Added
 - The same countries are available for the registration as are available for the billing address.
-- The ShopBuilder template for the item view now contains the manufacturer information widget.
+- The ShopBuilder template for the item view now contains the manufacturer data widget.
 - Labels have been added to user inputs to improve accessibility.
 - `<fieldsets>` are used to improve the accessibility of certain input groups.
 - `alt` attributes have been added to improve accessibility.

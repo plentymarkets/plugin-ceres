@@ -9,7 +9,7 @@
 
 ### Hinzugefügt
 - Bei der Registrierung sind die gleichen Länder verfügbar, die auch für die Rechnungsadresse verfügbar sind.
-- Die ShopBuilder-Vorlage für die Artikelansicht enthält nun das Herstellerinformationen-Widget.
+- Die ShopBuilder-Vorlage für die Artikelansicht enthält nun das Herstellerdaten-Widget.
 - Es wurden Labels für Eingabefelder hinzugefügt, um die Barrierefreiheit zu verbessern.
 - `<fieldsets>` werden nun verwendet, um die Barrierefreiheit bestimmter Eingabegruppen zu verbessern.
 - `alt`-Attribute wurden hinzugefügt, um die Barrierefreiheit zu verbessern.
