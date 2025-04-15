@@ -46,7 +46,7 @@ context("Address", () =>
     {
         cy.getByTestingAttr("billing-address-select-add").click();
         cy.getByTestingAttr("salutation-select").eq(0).select("Firma");
-        cy.getByTestingAttr("billing-address-de-company").type("x").clear().type("plentysystems AG");
+        cy.getByTestingAttr("billing-address-de-company").type("x").clear().type("PlentyOne GmbH");
         cy.getByTestingAttr("vat-id").type("250560740", { delay: 15 });
         cy.getByTestingAttr("billing-address-de-street-inputs").find(`input[name="street"]`).type("Abby Road", { delay: 15 });
         cy.getByTestingAttr("billing-address-de-street-inputs").find(`input[name="housenumber"]`).type("1337", { delay: 15 });
@@ -73,7 +73,7 @@ context("Address", () =>
     {
         cy.getByTestingAttr("billing-address-select-add").click();
         cy.getByTestingAttr("salutation-select").eq(0).select("Firma");
-        cy.getByTestingAttr("billing-address-de-company").type("x").clear().type("plentysystems AG");
+        cy.getByTestingAttr("billing-address-de-company").type("x").clear().type("PlentyOne GmbH");
         cy.getByTestingAttr("vat-id").type("abcdefg", { delay: 15 });
         cy.getByTestingAttr("billing-address-de-street-inputs").find(`input[name="street"]`).type("Abby Road", { delay: 15 });
         cy.getByTestingAttr("billing-address-de-street-inputs").find(`input[name="housenumber"]`).type("1337", { delay: 15 });
