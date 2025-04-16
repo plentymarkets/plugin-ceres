@@ -2232,6 +2232,11 @@ fieldset:disabled a.btn {
     .show > .btn-outline-dark.dropdown-toggle:focus {
       box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5); }
 
+.span-link {
+  font-weight: 400;
+  color: #008ebd;
+}
+
 .btn-link {
   font-weight: 400;
   color: #008ebd;
