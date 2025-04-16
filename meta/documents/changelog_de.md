@@ -36,7 +36,7 @@
 - Im Zuge des Releases von plentyShop LTS 5.0.72 gab es Änderungen an Template-Dateien die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in der entsprechenden Datei.
 
 - [resources/js/src/app/components/basket/BasketPreview.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.71...stable#diff-21af208d0ab5bd9055fcd8ca0bda5d6c0770336ed010aa788a2f0c1d7222e2b6)
-- [resources/js/src/app/components/basket/Coupon.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.71...- stable#diff-1dac96324ab5ee4c8065623f9bb79737fba06cc25a7320814fbeab7ceaf68250)
+- [resources/js/src/app/components/basket/Coupon.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.71...stable#diff-1dac96324ab5ee4c8065623f9bb79737fba06cc25a7320814fbeab7ceaf68250)
 - [resources/js/src/app/components/basket/list/BasketListItem.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.71...stable#diff-2e0729c79085beac37d2ad03e5d1a25ddec4020ecf8e3551d50e64a6cf5f91d3)
 - [resources/js/src/app/components/category/StepByStepNavigation.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.71...stable#diff-9ae539efd2821ad6cb92d059879efe882a94e5701c0511373b71f3b9412e96d3)
 - [resources/js/src/app/components/common/LazyImg.vue](https://github.com/plentymarkets/plugin-ceres/compare/5.0.71...stable#diff-8bf1fff9b8d538ae75c4ee791deef3a8acfe72e5e0e678d1c49672b17d787a73)
