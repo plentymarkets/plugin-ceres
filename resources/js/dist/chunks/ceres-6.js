@@ -1461,7 +1461,7 @@ var render = function() {
                 {
                   directives: [{ name: "tooltip", rawName: "v-tooltip" }],
                   staticClass:
-                    "input-unit file-input order-property-input component-loading with-icon sending",
+                    "input-unit file-input order-property-input component-loading with-icon sending color-gray-700",
                   class: {
                     active: _vm.property.value,
                     "is-loading": _vm.waiting,
