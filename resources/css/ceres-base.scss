@@ -10752,6 +10752,15 @@ textarea.no-resize {
     z-index: -1;
 }
 
+.privacy-policy-input {
+    width: 16px;
+    height: 16px;
+
+    & + label {
+        margin-left: 4px;
+    }
+}
+
 
 // Page Design / Global components
 .back-to-top-center {
@@ -11466,6 +11475,7 @@ body.basket-open {
         -webkit-box-shadow: none;
                 box-shadow: none;
         @include border-radius(0 $border-radius 0 0);
+        font-size: 1.1rem;
 
         + .qty-btn {
             border-top: 0;

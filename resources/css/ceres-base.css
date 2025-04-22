@@ -12291,6 +12291,14 @@ textarea.no-resize {
   z-index: -1;
 }
 
+.privacy-policy-input {
+  width: 16px;
+  height: 16px;
+}
+.privacy-policy-input + label {
+  margin-left: 4px;
+}
+
 .back-to-top-center {
   position: fixed;
   right: 0;
@@ -12915,6 +12923,7 @@ body.basket-open {
   border: 1px solid #ced4da;
   box-shadow: none;
   border-radius: 0 0.1rem 0 0;
+  font-size: 1.1rem;
 }
 .qty-btn-container .qty-btn + .qty-btn {
   border-top: 0;
