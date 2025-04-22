@@ -50996,7 +50996,7 @@ var render = function() {
               : "<!---->") +
             " " +
             (_vm.manufacturer.name && _vm.visibleFields.includes("name")
-              ? '<div class="p-0"><span>' +
+              ? '<div class="p-0"><span class="color-gray-700">' +
                 _vm._ssrEscape(_vm._s(_vm.manufacturer.name)) +
                 "</span></div>"
               : _vm.manufacturer.externalName &&
