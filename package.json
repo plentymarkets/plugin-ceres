@@ -6,6 +6,9 @@
     "type": "git",
     "url": "https://github.com/plentymarkets/plugin-ceres.git"
   },
+  "engines": {
+    "node": "14"
+  },
   "scripts": {
     "start": "webpack --watch --progress",
     "build": "npm run build:prod && npm run build:dev",
