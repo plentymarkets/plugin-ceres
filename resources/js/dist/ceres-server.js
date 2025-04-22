@@ -51376,7 +51376,7 @@ var render = function() {
                     "for",
                     "order-property-input_" + _vm.property.id
                   ) +
-                  ' class="d-flex"><span class="text-truncate" style="font-size: .8rem;">' +
+                  ' class="d-flex color-gray-700"><span class="text-truncate" style="font-size: .8rem;">' +
                   _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
                   '</span> <strong class="ml-1">' +
                   (_vm.surcharge > 0
@@ -51432,7 +51432,8 @@ var render = function() {
                 "label",
                 {
                   directives: [{ name: "tooltip", rawName: "v-tooltip" }],
-                  staticClass: "form-check-label text-appearance d-flex",
+                  staticClass:
+                    "form-check-label text-appearance d-flex color-gray-700",
                   attrs: {
                     for: "check" + _vm._uid,
                     "data-toggle": "tooltip",
@@ -51558,7 +51559,7 @@ var render = function() {
                     2
                   ),
                   _vm._ssrNode(
-                    ' <label for="order-property-input-select" class="d-flex w-100"><span class="text-truncate" style="font-size: .8rem;">' +
+                    ' <label for="order-property-input-select color-gray-700" class="d-flex w-100"><span class="text-truncate" style="font-size: .8rem;">' +
                       _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
                       '</span> <strong class="ml-1">' +
                       (_vm.surcharge > 0
@@ -51637,7 +51638,7 @@ var render = function() {
                 {
                   directives: [{ name: "tooltip", rawName: "v-tooltip" }],
                   staticClass:
-                    "input-unit file-input order-property-input component-loading with-icon sending",
+                    "input-unit file-input order-property-input component-loading with-icon sending color-gray-700",
                   class: {
                     active: _vm.property.value,
                     "is-loading": _vm.waiting,

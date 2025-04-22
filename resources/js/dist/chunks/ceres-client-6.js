@@ -1130,7 +1130,7 @@ var render = function() {
               _c(
                 "label",
                 {
-                  staticClass: "d-flex",
+                  staticClass: "d-flex color-gray-700",
                   attrs: { for: "order-property-input_" + _vm.property.id }
                 },
                 [
@@ -1223,7 +1223,8 @@ var render = function() {
                 "label",
                 {
                   directives: [{ name: "tooltip", rawName: "v-tooltip" }],
-                  staticClass: "form-check-label text-appearance d-flex",
+                  staticClass:
+                    "form-check-label text-appearance d-flex color-gray-700",
                   attrs: {
                     for: "check" + _vm._uid,
                     "data-toggle": "tooltip",
@@ -1359,7 +1360,9 @@ var render = function() {
                     "label",
                     {
                       staticClass: "d-flex w-100",
-                      attrs: { for: "order-property-input-select" }
+                      attrs: {
+                        for: "order-property-input-select color-gray-700"
+                      }
                     },
                     [
                       _c(
@@ -1461,7 +1464,7 @@ var render = function() {
                 {
                   directives: [{ name: "tooltip", rawName: "v-tooltip" }],
                   staticClass:
-                    "input-unit file-input order-property-input component-loading with-icon sending",
+                    "input-unit file-input order-property-input component-loading with-icon sending color-gray-700",
                   class: {
                     active: _vm.property.value,
                     "is-loading": _vm.waiting,

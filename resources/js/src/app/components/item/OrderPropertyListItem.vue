@@ -11,7 +11,7 @@
                 :maxlength="isOrderProperty(property) ? 128 : 65535"
                 :title="property.names.description"
                 :data-testing="'order-property-input-' + inputType" />
-            <label :for="'order-property-input_' + property.id" class="d-flex">
+            <label :for="'order-property-input_' + property.id" class="d-flex color-gray-700">
                 <span class="text-truncate" style="font-size: .8rem;">{{ property.names.name }}</span>
                 <strong class="ml-1">
                     <template v-if="surcharge > 0">({{ inclOrPlus }} {{ surcharge | currency }})</template>
@@ -40,7 +40,7 @@
                    :checked="property.value"
                    data-testing="order-property-input-radio">
 
-            <label class="form-check-label text-appearance d-flex"
+            <label class="form-check-label text-appearance d-flex color-gray-700"
                    :for="'check' + _uid"
                    v-tooltip data-toggle="tooltip"
                    :title="property.names.description"
@@ -64,7 +64,7 @@
                     <option :selected="true" :value="null">{{ $translate("Ceres::Template.singleItemPleaseSelect") }}</option>
                     <option :selected="property.id === id" :value="id" v-for="(value, id) in property.selectionValues" :key="id" data-testing="order-property-selection-option">{{ value.name }}</option>
                 </select>
-                <label class="d-flex w-100" for="order-property-input-select">
+                <label class="d-flex w-100" for="order-property-input-select color-gray-700">
                     <span class="text-truncate" style="font-size: .8rem;">{{ property.names.name }}</span>
                     <strong class="ml-1">
                         <template v-if="surcharge > 0">({{ inclOrPlus }} {{ surcharge | currency }})</template>
@@ -84,7 +84,7 @@
         </div>
 
         <div v-else-if="inputType === 'file'" class="d-flex">
-            <label class="input-unit file-input order-property-input component-loading with-icon sending" :class="{ 'active': property.value, 'is-loading': waiting, 'error': hasError }" v-tooltip data-toggle="tooltip" :title="property.names.description">
+            <label class="input-unit file-input order-property-input component-loading with-icon sending color-gray-700" :class="{ 'active': property.value, 'is-loading': waiting, 'error': hasError }" v-tooltip data-toggle="tooltip" :title="property.names.description">
                 <span class="input-unit-preview" :class="{ 'disabled': waiting }">{{selectedFileName}}</span>
                 <span class="input-unit-label d-flex">
                     <span class="text-truncate" style="font-size: .8rem;">{{ property.names.name }}</span>

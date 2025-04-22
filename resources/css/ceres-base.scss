@@ -8778,7 +8778,7 @@ a.close.disabled {
     color: #002933;
 }
 .color-gray-700 {
-    color: $gray-700;
+    color: #910088 !important;
 }
 .input-group {
 
@@ -10445,7 +10445,7 @@ $border-width: 1px;
         font-size: .65em;
         font-weight: 600;
         line-height: 1em !important;
-        color: #212529;
+        color: $gray-500;
         text-overflow: ellipsis;
         text-transform: uppercase;
         letter-spacing: .1px;

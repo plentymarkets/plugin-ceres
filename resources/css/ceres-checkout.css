@@ -9973,7 +9973,7 @@ h3 {
 }
 
 .color-gray-700 {
-  color: #495057;
+  color: #910088 !important;
 }
 
 .input-group .input-unit + .input-group-btn {
@@ -12066,7 +12066,7 @@ html.ie .single-carousel .owl-item > div {
   font-size: 0.65em;
   font-weight: 600;
   line-height: 1em !important;
-  color: #212529;
+  color: #adb5bd;
   text-overflow: ellipsis;
   text-transform: uppercase;
   letter-spacing: 0.1px;
