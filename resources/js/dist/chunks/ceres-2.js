@@ -229,16 +229,12 @@ var render = function() {
             _vm._v(" "),
             _vm.manufacturer.name && _vm.visibleFields.includes("name")
               ? _c("div", { staticClass: "p-0" }, [
-                  _c("span", { staticClass: "color-gray-700" }, [
-                    _vm._v(_vm._s(_vm.manufacturer.name))
-                  ])
+                  _c("span", [_vm._v(_vm._s(_vm.manufacturer.name))])
                 ])
               : _vm.manufacturer.externalName &&
                 _vm.visibleFields.includes("name")
               ? _c("div", { staticClass: "p-0" }, [
-                  _c("span", { staticClass: "color-gray-700" }, [
-                    _vm._v(_vm._s(_vm.manufacturer.externalName))
-                  ])
+                  _c("span", [_vm._v(_vm._s(_vm.manufacturer.externalName))])
                 ])
               : _vm._e(),
             _vm._v(" "),
