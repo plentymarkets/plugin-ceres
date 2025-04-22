@@ -51001,7 +51001,7 @@ var render = function() {
                 "</span></div>"
               : _vm.manufacturer.externalName &&
                 _vm.visibleFields.includes("name")
-              ? '<div class="p-0"><span>' +
+              ? '<div class="p-0"><span class="color-gray-700">' +
                 _vm._ssrEscape(_vm._s(_vm.manufacturer.externalName)) +
                 "</span></div>"
               : "<!---->") +
@@ -52283,8 +52283,7 @@ var render = function() {
                         ? _c(
                             "div",
                             {
-                              staticClass:
-                                "producertag h6 producer text-muted color-gray-700"
+                              staticClass: "producertag h6 producer text-muted"
                             },
                             [
                               _vm._v(

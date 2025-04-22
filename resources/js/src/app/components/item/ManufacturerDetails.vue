@@ -11,7 +11,7 @@
         <span>{{ manufacturer.name }}</span>
       </div>
       <div v-else-if="manufacturer.externalName && visibleFields.includes('name')" class="p-0">
-        <span>{{ manufacturer.externalName }}</span>
+        <span class="color-gray-700">{{ manufacturer.externalName }}</span>
       </div>
 
       <div v-if="visibleFields.includes('legalName')" class="p-0">
