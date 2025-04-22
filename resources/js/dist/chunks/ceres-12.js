@@ -980,7 +980,7 @@ var render = function() {
                     _c(
                       "button",
                       {
-                        staticClass: "btn btn-sm text-danger p-0",
+                        staticClass: "btn btn-sm text-danger-darker p-0",
                         class: {
                           disabled:
                             _vm.waiting ||
