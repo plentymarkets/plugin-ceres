@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     name: "Distribute changes on stable branch"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: alagos/regex-merge@v1.0
         with:
           accessToken: ${{ secrets.GITHUB_TOKEN }}
