@@ -903,7 +903,7 @@ $lead-font-weight:            300 !default;
 
 $small-font-size:             80% !default;
 
-$text-muted:                  $gray-700 !default;
+$text-muted:                  $gray-600 !default;
 
 $blockquote-small-color:      $gray-600 !default;
 $blockquote-small-font-size:  $small-font-size !default;
@@ -4584,10 +4584,6 @@ fieldset:disabled a.btn {
   }
 }
 
-.span-link-color {
-  font-weight: 400;
-  color: #002933;
-}
 
 //
 // Link buttons
@@ -8777,7 +8773,10 @@ a.close.disabled {
 .bg-repeat {
     background-repeat: repeat !important; // stylelint-disable-line declaration-no-important
 }
-
+.span-link-color {
+    font-weight: 400;
+    color: #002933;
+}
 .input-group {
 
     .input-unit + .input-group-btn {
@@ -14907,6 +14906,4 @@ body.lb-disable-scrolling {
     opacity: 1;
 }
 
-.color-gray-700 {
-  color: $gray-700;
-}
+

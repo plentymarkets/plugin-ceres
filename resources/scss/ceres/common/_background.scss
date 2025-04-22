@@ -19,3 +19,10 @@
 .bg-repeat {
     background-repeat: repeat !important; // stylelint-disable-line declaration-no-important
 }
+.span-link-color {
+    font-weight: 400;
+    color: #002933;
+}
+.color-gray-700 {
+    color: $gray-700;
+}
