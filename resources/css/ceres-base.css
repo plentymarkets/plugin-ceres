@@ -12923,7 +12923,6 @@ body.basket-open {
   border: 1px solid #ced4da;
   box-shadow: none;
   border-radius: 0 0.1rem 0 0;
-  font-size: 1.75rem;
 }
 .qty-btn-container .qty-btn + .qty-btn {
   border-top: 0;
@@ -12934,6 +12933,10 @@ body.basket-open {
 }
 .qty-btn-container .qty-btn:not(.disabled):hover {
   background: #cbd3da;
+}
+
+.add-to-basket-container .qty-btn-container .qty-btn {
+  font-size: 1.75rem;
 }
 
 .product-list {
