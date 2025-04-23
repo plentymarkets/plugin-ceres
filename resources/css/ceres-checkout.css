@@ -12943,7 +12943,8 @@ body.basket-open {
   width: 28px;
 }
 .add-to-basket-container .qty-btn-container .qty-btn {
-  font-size: 1.75rem;
+  width: 28px;
+  height: 28px;
 }
 
 .product-list {
