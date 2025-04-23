@@ -12917,7 +12917,7 @@ body.basket-open {
 }
 
 .qty-btn-container {
-  width: 28px;
+  width: 24px;
   border-radius: 0 0.1rem 0.1rem 0;
 }
 .qty-btn-container .qty-btn {
@@ -12939,6 +12939,9 @@ body.basket-open {
   background: #cbd3da;
 }
 
+.add-to-basket-container .qty-btn-container {
+  width: 28px;
+}
 .add-to-basket-container .qty-btn-container .qty-btn {
   font-size: 1.75rem;
 }
