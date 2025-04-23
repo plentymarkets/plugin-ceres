@@ -415,7 +415,7 @@ $component-active-color:            color-yiq($component-active-bg) !default;
 
 // quantity input
 $qty-box-width: 48px !default;
-$qty-box-btn-width: 24px !default;
+$qty-box-btn-width: 28px !default;
 $qty-box-padding-x: 0 !default;
 $qty-box-padding-y: 10px !default;
 $qty-box-border: $gray-400 !default;
@@ -11475,7 +11475,7 @@ body.basket-open {
         -webkit-box-shadow: none;
                 box-shadow: none;
         @include border-radius(0 $border-radius 0 0);
-        font-size: 1.5rem;
+        font-size: 1.75rem;
 
         + .qty-btn {
             border-top: 0;
@@ -14554,6 +14554,10 @@ header .widget {
 label.customer-sign-label,
 label.contact-wish-label {
     color: $gray-700;
+}
+
+.basket-item-delete {
+    color: #c82333;
 }
 
 // stylelint-disable declaration-no-important

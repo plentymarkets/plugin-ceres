@@ -12913,7 +12913,7 @@ body.basket-open {
 }
 
 .qty-btn-container {
-  width: 24px;
+  width: 28px;
   border-radius: 0 0.1rem 0.1rem 0;
 }
 .qty-btn-container .qty-btn {
@@ -12923,7 +12923,7 @@ body.basket-open {
   border: 1px solid #ced4da;
   box-shadow: none;
   border-radius: 0 0.1rem 0 0;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
 }
 .qty-btn-container .qty-btn + .qty-btn {
   border-top: 0;
@@ -15984,6 +15984,10 @@ header .widget {
 label.customer-sign-label,
 label.contact-wish-label {
   color: #495057;
+}
+
+.basket-item-delete {
+  color: #c82333;
 }
 
 .widget-primary .text-appearance {
