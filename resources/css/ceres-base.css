@@ -12923,7 +12923,7 @@ body.basket-open {
   border: 1px solid #ced4da;
   box-shadow: none;
   border-radius: 0 0.1rem 0 0;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 .qty-btn-container .qty-btn + .qty-btn {
   border-top: 0;
@@ -15975,6 +15975,15 @@ header .widget {
 .widget-alignment-right .widget-alignment {
   display: flex;
   justify-content: flex-end;
+}
+
+.widget-greeting span {
+  color: #495057;
+}
+
+label.customer-sign-label,
+label.contact-wish-label {
+  color: #495057;
 }
 
 .widget-primary .text-appearance {

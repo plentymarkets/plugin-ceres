@@ -232,3 +232,14 @@ header .widget {
         justify-content: flex-end;
     }
 }
+
+.widget-greeting {
+    span {
+        color: $gray-700;
+    }
+}
+
+label.customer-sign-label,
+label.contact-wish-label {
+    color: $gray-700;
+}
