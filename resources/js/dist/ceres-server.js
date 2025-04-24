@@ -50010,7 +50010,7 @@ var render = function() {
     {
       directives: [{ name: "tooltip", rawName: "v-tooltip" }],
       ref: "addToWishList",
-      staticClass: "btn btn-link btn-sm text-muted",
+      staticClass: "btn btn-link btn-sm text-muted color-gray-700",
       attrs: {
         "data-toggle": "tooltip",
         "data-placement": "top",
@@ -51527,10 +51527,7 @@ var render = function() {
                     [
                       _c(
                         "option",
-                        {
-                          staticClass: "color-gray-700",
-                          domProps: { selected: true, value: null }
-                        },
+                        { domProps: { selected: true, value: null } },
                         [
                           _vm._v(
                             _vm._s(
@@ -51547,7 +51544,6 @@ var render = function() {
                           "option",
                           {
                             key: id,
-                            staticClass: "color-gray-700",
                             attrs: {
                               "data-testing": "order-property-selection-option"
                             },
@@ -51563,7 +51559,7 @@ var render = function() {
                     2
                   ),
                   _vm._ssrNode(
-                    ' <label for="order-property-input-select color-gray-700" class="d-flex w-100"><span class="text-truncate" style="font-size: .8rem;">' +
+                    ' <label for="order-property-input-select color-gray-700" class="d-flex w-100"><span class="text-truncate color-gray-700" style="font-size: .8rem;">' +
                       _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
                       '</span> <strong class="ml-1">' +
                       (_vm.surcharge > 0

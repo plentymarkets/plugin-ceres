@@ -1328,10 +1328,7 @@ var render = function() {
                     [
                       _c(
                         "option",
-                        {
-                          staticClass: "color-gray-700",
-                          domProps: { selected: true, value: null }
-                        },
+                        { domProps: { selected: true, value: null } },
                         [
                           _vm._v(
                             _vm._s(
@@ -1348,7 +1345,6 @@ var render = function() {
                           "option",
                           {
                             key: id,
-                            staticClass: "color-gray-700",
                             attrs: {
                               "data-testing": "order-property-selection-option"
                             },
@@ -1376,7 +1372,7 @@ var render = function() {
                       _c(
                         "span",
                         {
-                          staticClass: "text-truncate",
+                          staticClass: "text-truncate color-gray-700",
                           staticStyle: { "font-size": ".8rem" }
                         },
                         [_vm._v(_vm._s(_vm.property.names.name))]
