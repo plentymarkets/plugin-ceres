@@ -51260,7 +51260,7 @@ var render = function() {
                       _vm._s(_vm.propertyGroup.group.names.name) +
                       ":\n            "
                   ) +
-                  '</legend> <p class="text-muted text-wrap">' +
+                  '</legend> <p class="text-muted text-wrap color-gray-700">' +
                   _vm._ssrEscape(
                     "\n                " +
                       _vm._s(_vm.propertyGroup.group.names.description) +
