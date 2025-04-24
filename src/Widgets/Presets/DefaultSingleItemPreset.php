@@ -125,7 +125,7 @@ class DefaultSingleItemPreset implements ContentPreset
 
         $this->stickyContainer->createChild('sticky','Ceres::InlineTextWidget')
             ->withSetting('appearance','none')
-            ->withSetting('customClass', 'producertag h6 producer text-muted')
+            ->withSetting('customClass', 'producertag h6 producer text-muted color-gray-700')
             ->withSetting('spacing.customPadding', true)
             ->withSetting('spacing.padding.left.value', 0)
             ->withSetting('spacing.padding.left.unit', null)
