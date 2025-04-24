@@ -51479,7 +51479,7 @@ var render = function() {
                 "div",
                 {
                   directives: [{ name: "tooltip", rawName: "v-tooltip" }],
-                  staticClass: "input-unit order-property-input color-gray-700",
+                  staticClass: "input-unit order-property-input",
                   class: { active: _vm.property.value, error: _vm.hasError },
                   attrs: {
                     "data-toggle": "tooltip",
@@ -51498,7 +51498,7 @@ var render = function() {
                           expression: "selectionValue"
                         }
                       ],
-                      staticClass: "custom-select",
+                      staticClass: "custom-select color-gray-700",
                       attrs: {
                         id: "order-property-input-select",
                         "data-testing": "order-property-selection"
