@@ -55,7 +55,7 @@
 
         <div v-else-if="inputType === 'selection'" :class="{ 'd-flex': selectedDescription }">
             <div
-                class="input-unit order-property-input color-gray-700"
+                class="input-unit order-property-input"
                 :class="{ 'active': property.value, 'error': hasError }"
                 v-tooltip
                 data-toggle="tooltip"

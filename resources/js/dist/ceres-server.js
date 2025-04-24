@@ -50795,7 +50795,7 @@ var render = function() {
           _vm._ssrClass("crossprice", {
             "is-special-offer": _vm.hasSpecialOffer
           }) +
-          '><del class="text-muted small text-appearance">' +
+          '><del class="text-muted small text-appearance color-gray-700">' +
           (_vm.hasSpecialOffer
             ? _vm._ssrEscape(
                 "\n                " +
@@ -50850,7 +50850,7 @@ var render = function() {
         ) +
         "</sup></span> " +
         (_vm.propertiesWithAdditionalCostsVisible.length
-          ? '<ul class="text-muted pl-0 list-unstyled">' +
+          ? '<ul class="text-muted pl-0 list-unstyled color-gray-700">' +
             _vm._ssrList(_vm.propertiesWithAdditionalCostsVisible, function(
               property
             ) {
@@ -50899,7 +50899,7 @@ var render = function() {
         (_vm.currentVariation.prices.default.lowestPrice.value &&
         _vm.showCrossPrice &&
         _vm.hasCrossPrice
-          ? '<div class="lowest-price text-muted mb-3"><div>' +
+          ? '<div class="lowest-price text-muted mb-3 color-gray-700"><div>' +
             _vm._s(
               _vm.$translate("Ceres::Template.singleItemLowestPrice", {
                 price: _vm.currentVariation.prices.default.lowestPrice.formatted
@@ -50910,7 +50910,7 @@ var render = function() {
         " " +
         (_vm.currentVariation.unit
           ? "<div" +
-            _vm._ssrClass("base-price text-muted my-3", {
+            _vm._ssrClass("base-price text-muted my-3 color-gray-700", {
               "is-single-piece":
                 _vm.currentVariation.unit &&
                 _vm.currentVariation.unit.content === 1 &&
@@ -51479,7 +51479,7 @@ var render = function() {
                 "div",
                 {
                   directives: [{ name: "tooltip", rawName: "v-tooltip" }],
-                  staticClass: "input-unit order-property-input color-gray-700",
+                  staticClass: "input-unit order-property-input",
                   class: { active: _vm.property.value, error: _vm.hasError },
                   attrs: {
                     "data-toggle": "tooltip",
