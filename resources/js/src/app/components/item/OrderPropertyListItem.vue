@@ -61,8 +61,8 @@
                 data-toggle="tooltip"
                 :title="property.names.description">
                 <select id="order-property-input-select" v-model="selectionValue" @change="onInputValueChanged($event.target.value)" class="custom-select color-gray-700" data-testing="order-property-selection">
-                    <option :selected="true" :value="null">{{ $translate("Ceres::Template.singleItemPleaseSelect") }}</option>
-                    <option :selected="property.id === id" :value="id" v-for="(value, id) in property.selectionValues" :key="id" data-testing="order-property-selection-option">{{ value.name }}</option>
+                    <option :selected="true" :value="null" class="color-gray-700">{{ $translate("Ceres::Template.singleItemPleaseSelect") }}</option>
+                    <option :selected="property.id === id" :value="id" v-for="(value, id) in property.selectionValues" :key="id" data-testing="order-property-selection-option" class="color-gray-700">{{ value.name }}</option>
                 </select>
                 <label class="d-flex w-100" for="order-property-input-select color-gray-700">
                     <span class="text-truncate" style="font-size: .8rem;">{{ property.names.name }}</span>

@@ -1328,7 +1328,10 @@ var render = function() {
                     [
                       _c(
                         "option",
-                        { domProps: { selected: true, value: null } },
+                        {
+                          staticClass: "color-gray-700",
+                          domProps: { selected: true, value: null }
+                        },
                         [
                           _vm._v(
                             _vm._s(
@@ -1345,6 +1348,7 @@ var render = function() {
                           "option",
                           {
                             key: id,
+                            staticClass: "color-gray-700",
                             attrs: {
                               "data-testing": "order-property-selection-option"
                             },
