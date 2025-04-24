@@ -51561,7 +51561,7 @@ var render = function() {
                   _vm._ssrNode(
                     ' <label for="order-property-input-select color-gray-700" class="d-flex w-100"><span class="text-truncate color-gray-700" style="font-size: .8rem;">' +
                       _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
-                      '</span> <strong class="ml-1">' +
+                      '</span> <strong class="ml-1 color-gray-700">' +
                       (_vm.surcharge > 0
                         ? _vm._ssrEscape(
                             "(" +

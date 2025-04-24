@@ -1380,7 +1380,7 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "strong",
-                        { staticClass: "ml-1" },
+                        { staticClass: "ml-1 color-gray-700" },
                         [
                           _vm.surcharge > 0
                             ? [

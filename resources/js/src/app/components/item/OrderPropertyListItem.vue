@@ -66,7 +66,7 @@
                 </select>
                 <label class="d-flex w-100" for="order-property-input-select color-gray-700">
                     <span class="text-truncate color-gray-700" style="font-size: .8rem;">{{ property.names.name }}</span>
-                    <strong class="ml-1">
+                    <strong class="ml-1 color-gray-700">
                         <template v-if="surcharge > 0">({{ inclOrPlus }} {{ surcharge | currency }})</template>
                         <span style="font-size: .8rem;">{{ footnotes }} {{ requiredFootnotes }}</span>
                     </strong>
