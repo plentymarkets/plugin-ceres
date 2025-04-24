@@ -52283,7 +52283,8 @@ var render = function() {
                         ? _c(
                             "div",
                             {
-                              staticClass: "producertag h6 producer text-muted"
+                              staticClass:
+                                "producertag h6 producer text-muted color-gray-700"
                             },
                             [
                               _vm._v(
