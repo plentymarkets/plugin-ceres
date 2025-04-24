@@ -30,7 +30,7 @@
                             <hr>
 
                             <div class="mb-5">
-                                <span class="articlenumber small text-muted">
+                                <span class="articlenumber small text-muted color-gray-700">
                                     <b>{{ $translate("Ceres::Template.singleItemNumber") }} </b>
                                     <span>{{ currentVariation.variation.number }}</span>
                                 </span>
