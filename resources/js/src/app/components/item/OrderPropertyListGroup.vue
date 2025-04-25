@@ -5,7 +5,7 @@
                 <legend class="h4">
                     {{ propertyGroup.group.names.name }}:
                 </legend>
-                <p class="text-muted text-wrap">
+                <p class="text-muted text-wrap color-gray-700">
                     {{ propertyGroup.group.names.description }}
                 </p>
             </div>

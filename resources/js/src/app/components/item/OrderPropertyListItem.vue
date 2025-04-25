@@ -64,7 +64,7 @@
                     <option :selected="true" :value="null">{{ $translate("Ceres::Template.singleItemPleaseSelect") }}</option>
                     <option :selected="property.id === id" :value="id" v-for="(value, id) in property.selectionValues" :key="id" data-testing="order-property-selection-option">{{ value.name }}</option>
                 </select>
-                <label class="d-flex w-100" for="order-property-input-select">
+                <label class="d-flex w-100" for="order-property-input-select color-gray-700">
                     <span class="text-truncate" style="font-size: .8rem;">{{ property.names.name }}</span>
                     <strong class="ml-1 color-gray-700">
                         <template v-if="surcharge > 0">({{ inclOrPlus }} {{ surcharge | currency }})</template>

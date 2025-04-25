@@ -51283,7 +51283,7 @@ var render = function() {
                       _vm._s(_vm.propertyGroup.group.names.name) +
                       ":\n            "
                   ) +
-                  '</legend> <p class="text-muted text-wrap">' +
+                  '</legend> <p class="text-muted text-wrap color-gray-700">' +
                   _vm._ssrEscape(
                     "\n                " +
                       _vm._s(_vm.propertyGroup.group.names.description) +
@@ -51582,7 +51582,7 @@ var render = function() {
                     2
                   ),
                   _vm._ssrNode(
-                    ' <label for="order-property-input-select" class="d-flex w-100"><span class="text-truncate" style="font-size: .8rem;">' +
+                    ' <label for="order-property-input-select color-gray-700" class="d-flex w-100"><span class="text-truncate" style="font-size: .8rem;">' +
                       _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
                       '</span> <strong class="ml-1 color-gray-700">' +
                       (_vm.surcharge > 0
