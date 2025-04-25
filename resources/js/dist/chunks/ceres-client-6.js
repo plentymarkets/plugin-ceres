@@ -1018,13 +1018,17 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _c("p", { staticClass: "text-muted text-wrap" }, [
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(_vm.propertyGroup.group.names.description) +
-                          "\n            "
-                      )
-                    ])
+                    _c(
+                      "p",
+                      { staticClass: "text-muted text-wrap color-gray-700" },
+                      [
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(_vm.propertyGroup.group.names.description) +
+                            "\n            "
+                        )
+                      ]
+                    )
                   ]
                 )
               : _vm._e(),
@@ -1360,7 +1364,9 @@ var render = function() {
                     "label",
                     {
                       staticClass: "d-flex w-100",
-                      attrs: { for: "order-property-input-select" }
+                      attrs: {
+                        for: "order-property-input-select color-gray-700"
+                      }
                     },
                     [
                       _c(
