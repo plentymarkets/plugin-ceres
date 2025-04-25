@@ -51521,9 +51521,9 @@ var render = function() {
                           expression: "selectionValue"
                         }
                       ],
-                      staticClass: "custom-select",
+                      staticClass: "custom-select color-gray-700",
                       attrs: {
-                        id: "order-property-input-select color-gray-700",
+                        id: "order-property-input-select",
                         "data-testing": "order-property-selection"
                       },
                       on: {
@@ -51582,7 +51582,7 @@ var render = function() {
                     2
                   ),
                   _vm._ssrNode(
-                    ' <label for="order-property-input-select color-gray-700" class="d-flex w-100"><span class="text-truncate" style="font-size: .8rem;">' +
+                    ' <label for="order-property-input-select" class="d-flex w-100 color-gray-700"><span class="text-truncate" style="font-size: .8rem;">' +
                       _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
                       '</span> <strong class="ml-1 color-gray-700">' +
                       (_vm.surcharge > 0

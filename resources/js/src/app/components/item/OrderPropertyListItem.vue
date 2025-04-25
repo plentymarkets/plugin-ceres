@@ -60,11 +60,11 @@
                 v-tooltip
                 data-toggle="tooltip"
                 :title="property.names.description">
-                <select id="order-property-input-select color-gray-700" v-model="selectionValue" @change="onInputValueChanged($event.target.value)" class="custom-select" data-testing="order-property-selection">
+                <select id="order-property-input-select" v-model="selectionValue" @change="onInputValueChanged($event.target.value)" class="custom-select color-gray-700" data-testing="order-property-selection">
                     <option :selected="true" :value="null">{{ $translate("Ceres::Template.singleItemPleaseSelect") }}</option>
                     <option :selected="property.id === id" :value="id" v-for="(value, id) in property.selectionValues" :key="id" data-testing="order-property-selection-option">{{ value.name }}</option>
                 </select>
-                <label class="d-flex w-100" for="order-property-input-select color-gray-700">
+                <label class="d-flex w-100 color-gray-700" for="order-property-input-select">
                     <span class="text-truncate" style="font-size: .8rem;">{{ property.names.name }}</span>
                     <strong class="ml-1 color-gray-700">
                         <template v-if="surcharge > 0">({{ inclOrPlus }} {{ surcharge | currency }})</template>

@@ -1299,9 +1299,9 @@ var render = function() {
                           expression: "selectionValue"
                         }
                       ],
-                      staticClass: "custom-select",
+                      staticClass: "custom-select color-gray-700",
                       attrs: {
-                        id: "order-property-input-select color-gray-700",
+                        id: "order-property-input-select",
                         "data-testing": "order-property-selection"
                       },
                       on: {
@@ -1363,10 +1363,8 @@ var render = function() {
                   _c(
                     "label",
                     {
-                      staticClass: "d-flex w-100",
-                      attrs: {
-                        for: "order-property-input-select color-gray-700"
-                      }
+                      staticClass: "d-flex w-100 color-gray-700",
+                      attrs: { for: "order-property-input-select" }
                     },
                     [
                       _c(
