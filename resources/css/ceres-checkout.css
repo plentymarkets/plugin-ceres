@@ -9967,6 +9967,15 @@ h3 {
   background-repeat: repeat !important;
 }
 
+.span-link-color {
+  font-weight: 400;
+  color: #002933;
+}
+
+.color-gray-700 {
+  color: #495057 !important;
+}
+
 .input-group .input-unit + .input-group-btn {
   padding-bottom: 15px;
 }
