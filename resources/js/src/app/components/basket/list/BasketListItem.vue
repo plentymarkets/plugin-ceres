@@ -94,7 +94,7 @@
                             <div class="item-total-price font-weight-bold text-nowrap">{{ basketItem.quantity * unitPrice | currency(basketItem.variation.data.prices.default.currency) }}</div>
 
                             <button
-                                class="btn btn-sm text-danger p-0"
+                                class="btn btn-sm text-danger-darker p-0"
                                 :class="{ 'disabled': waiting || isBasketLoading || isCheckoutReadonly || waitingForDelete }"
                                 @click="deleteItem"
                                 data-testing="basket-item-delete">

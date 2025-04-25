@@ -10752,6 +10752,15 @@ textarea.no-resize {
     z-index: -1;
 }
 
+.privacy-policy-input {
+    width: 16px;
+    height: 16px;
+
+    & + label {
+        margin-left: 4px;
+    }
+}
+
 
 // Page Design / Global components
 .back-to-top-center {
@@ -11478,6 +11487,16 @@ body.basket-open {
 
         &:not(.disabled):hover {
             background: darken($qty-box-bg, 10%);
+        }
+    }
+}
+
+.add-to-basket-container {
+    .qty-btn-container {
+        width: 28px;
+        .qty-btn {
+            width: 28px;
+            height: 28px;
         }
     }
 }
@@ -14533,6 +14552,22 @@ header .widget {
             -ms-flex-pack: end;
                 justify-content: flex-end;
     }
+}
+
+.widget-greeting {
+    span {
+        color: $gray-700;
+    }
+}
+
+.gray-700,
+label.customer-sign-label,
+label.contact-wish-label {
+    color: $gray-700;
+}
+
+.basket-item-delete {
+    color: #c82333;
 }
 
 // stylelint-disable declaration-no-important
