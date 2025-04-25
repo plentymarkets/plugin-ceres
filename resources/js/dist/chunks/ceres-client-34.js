@@ -163,7 +163,7 @@ var render = function() {
     {
       directives: [{ name: "tooltip", rawName: "v-tooltip" }],
       ref: "addToWishList",
-      staticClass: "btn btn-link btn-sm text-muted color-gray-700",
+      staticClass: "btn btn-link btn-sm text-muted",
       attrs: {
         "data-toggle": "tooltip",
         "data-placement": "top",
