@@ -1018,13 +1018,17 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _c("p", { staticClass: "text-muted text-wrap" }, [
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(_vm.propertyGroup.group.names.description) +
-                          "\n            "
-                      )
-                    ])
+                    _c(
+                      "p",
+                      { staticClass: "text-muted text-wrap color-gray-700" },
+                      [
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(_vm.propertyGroup.group.names.description) +
+                            "\n            "
+                        )
+                      ]
+                    )
                   ]
                 )
               : _vm._e(),
@@ -1130,7 +1134,7 @@ var render = function() {
               _c(
                 "label",
                 {
-                  staticClass: "d-flex",
+                  staticClass: "d-flex color-gray-700",
                   attrs: { for: "order-property-input_" + _vm.property.id }
                 },
                 [
@@ -1223,7 +1227,8 @@ var render = function() {
                 "label",
                 {
                   directives: [{ name: "tooltip", rawName: "v-tooltip" }],
-                  staticClass: "form-check-label text-appearance d-flex",
+                  staticClass:
+                    "form-check-label text-appearance d-flex color-gray-700",
                   attrs: {
                     for: "check" + _vm._uid,
                     "data-toggle": "tooltip",
@@ -1294,7 +1299,7 @@ var render = function() {
                           expression: "selectionValue"
                         }
                       ],
-                      staticClass: "custom-select",
+                      staticClass: "custom-select color-gray-700",
                       attrs: {
                         id: "order-property-input-select",
                         "data-testing": "order-property-selection"
@@ -1359,13 +1364,15 @@ var render = function() {
                     "label",
                     {
                       staticClass: "d-flex w-100",
-                      attrs: { for: "order-property-input-select" }
+                      attrs: {
+                        for: "order-property-input-select color-gray-700"
+                      }
                     },
                     [
                       _c(
                         "span",
                         {
-                          staticClass: "text-truncate",
+                          staticClass: "text-truncate color-gray-700",
                           staticStyle: { "font-size": ".8rem" }
                         },
                         [_vm._v(_vm._s(_vm.property.names.name))]
@@ -1373,7 +1380,7 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "strong",
-                        { staticClass: "ml-1" },
+                        { staticClass: "ml-1 color-gray-700" },
                         [
                           _vm.surcharge > 0
                             ? [
@@ -1461,7 +1468,7 @@ var render = function() {
                 {
                   directives: [{ name: "tooltip", rawName: "v-tooltip" }],
                   staticClass:
-                    "input-unit file-input order-property-input component-loading with-icon sending",
+                    "input-unit file-input order-property-input component-loading with-icon sending color-gray-700",
                   class: {
                     active: _vm.property.value,
                     "is-loading": _vm.waiting,
