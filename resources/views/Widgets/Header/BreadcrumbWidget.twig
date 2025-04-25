@@ -104,7 +104,7 @@
                                             ]')
                         }}
                         {{ Twig.set('crumbs', 'crumbs | merge(crumb)') }}
-                        <span>{{ Twig.print("lastCategory.details[0].name") }}</span>
+                        <span class="span-link-color">{{ Twig.print("lastCategory.details[0].name") }}</span>
                     </li>
                 {{ Twig.elseif("item.documents[0].data is defined") }}
                     <li class="breadcrumb-item active">
@@ -122,7 +122,7 @@
                                 ]')
                         }}
                         {{ Twig.set('crumbs', 'crumbs | merge(crumb)') }}
-                        <span>{{ Twig.print("item.documents[0].data | itemName") }}</span>
+                        <span class="span-link-color">{{ Twig.print("item.documents[0].data | itemName") }}</span>
                     </li>
                 {{ Twig.endif() }}
             {{ Twig.endif() }}

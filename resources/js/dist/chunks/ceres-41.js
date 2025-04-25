@@ -161,7 +161,9 @@ var render = function() {
           [
             _c(
               "del",
-              { staticClass: "text-muted small text-appearance" },
+              {
+                staticClass: "text-muted small text-appearance color-gray-700"
+              },
               [
                 _vm.hasSpecialOffer
                   ? [
@@ -249,7 +251,7 @@ var render = function() {
     _vm.propertiesWithAdditionalCostsVisible.length
       ? _c(
           "ul",
-          { staticClass: "text-muted pl-0 list-unstyled" },
+          { staticClass: "text-muted pl-0 list-unstyled color-gray-700" },
           _vm._l(_vm.propertiesWithAdditionalCostsVisible, function(property) {
             return _c("li", { key: property.propertyId }, [
               _c(
@@ -308,25 +310,29 @@ var render = function() {
     _vm.currentVariation.prices.default.lowestPrice.value &&
     _vm.showCrossPrice &&
     _vm.hasCrossPrice
-      ? _c("div", { staticClass: "lowest-price text-muted mb-3" }, [
-          _c("div", {
-            domProps: {
-              innerHTML: _vm._s(
-                _vm.$translate("Ceres::Template.singleItemLowestPrice", {
-                  price:
-                    _vm.currentVariation.prices.default.lowestPrice.formatted
-                })
-              )
-            }
-          })
-        ])
+      ? _c(
+          "div",
+          { staticClass: "lowest-price text-muted mb-3 color-gray-700" },
+          [
+            _c("div", {
+              domProps: {
+                innerHTML: _vm._s(
+                  _vm.$translate("Ceres::Template.singleItemLowestPrice", {
+                    price:
+                      _vm.currentVariation.prices.default.lowestPrice.formatted
+                  })
+                )
+              }
+            })
+          ]
+        )
       : _vm._e(),
     _vm._v(" "),
     _vm.currentVariation.unit
       ? _c(
           "div",
           {
-            staticClass: "base-price text-muted my-3",
+            staticClass: "base-price text-muted my-3 color-gray-700",
             class: {
               "is-single-piece":
                 _vm.currentVariation.unit &&
