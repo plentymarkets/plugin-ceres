@@ -4,33 +4,37 @@
 
 {% block PartialHead %}
     {% embed getPartial('page-metadata') %}
-        {% block title          trans("Ceres::Template.legalDisclosure") %}
-        {% block description    trans('Ceres::Template.legalDisclosureMetaDescription') %}
-        {% block robots         ceresConfig.meta.robotsLegalDisclosure %}
+        {% block title          trans("Ceres::Template.privacyPolicy", {"hyphen": ""}) %}
+        {% block description    trans('Ceres::Template.privacyPolicyMetaDescription') %}
+        {% block robots         ceresConfig.meta.robotsPrivacyPolicy %}
     {% endembed %}
 {% endblock %}
 
 {% block PageBody %}
 
-    {% set legalDisclosure = services.legalInformation.getLegalDisclosure() %}
+    {% set privacyPolicy = services.legalInformation.getPrivacyPolicy() %}
 
     <div class="container-max page-content">
-    Test declaration of accessibility
+    Declaration of accessibity Test
+    -translations
+    -placeholders
+    - different layout container
+    -different unction call
         <div class="row">
             <div class="col-12">
                 {% autoescape false %}
-                    <h1 class="pt-3">{{ trans("Ceres::Template.legalDisclosure") }}</h1>
+                    <h1 class="pt-3">{{ trans("Ceres::Template.privacyPolicy", {"hyphen": "&shy;"}) }}</h1>
                 {% endautoescape %}
 
                 <hr class="my-5">
 
-                {% if legalDisclosure.htmlText %}
-                    {{ legalDisclosure.htmlText | raw }}
+                {% if privacyPolicy.htmlText %}
+                    {{ privacyPolicy.htmlText | raw }}
                 {% else %}
-                    <p>{{ legalDisclosure.plainText }}</p>
+                    <p>{{ privacyPolicy.plainText }}</p>
                 {% endif %}
 
-                {{ LayoutContainer.show("Ceres::StaticPages.LegalDisclosure") }}
+                {{ LayoutContainer.show("Ceres::StaticPages.PrivacyPolicy") }}
             </div>
         </div>
     </div>
