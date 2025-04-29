@@ -12,14 +12,9 @@
 
 {% block PageBody %}
 
-    {% set privacyPolicy = services.legalInformation.getPrivacyPolicy() %}
+    {% set declarationOfAccessibility = services.legalInformation.getDeclarationOfAccessibility() %}
 
     <div class="container-max page-content">
-    Declaration of accessibity Test
-    -translations
-    -placeholders
-    - different layout container
-    -different unction call
         <div class="row">
             <div class="col-12">
                 {% autoescape false %}
@@ -29,12 +24,12 @@
                 <hr class="my-5">
 
                 {% if privacyPolicy.htmlText %}
-                    {{ privacyPolicy.htmlText | raw }}
+                    {{ declarationOfAccessibility.htmlText | raw }}
                 {% else %}
-                    <p>{{ privacyPolicy.plainText }}</p>
+                    <p>{{ declarationOfAccessibility.plainText }}</p>
                 {% endif %}
 
-                {{ LayoutContainer.show("Ceres::StaticPages.PrivacyPolicy") }}
+                {{ LayoutContainer.show("Ceres::StaticPages.DeclarationOfAccessibility") }}
             </div>
         </div>
     </div>

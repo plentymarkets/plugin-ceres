@@ -94,6 +94,7 @@ class TemplateServiceProvider extends ServiceProvider
             'tpl.cancellation-form' => ['StaticPages.CancellationForm', GlobalContext::class],
             'tpl.legal-disclosure' => ['StaticPages.LegalDisclosure', GlobalContext::class],
             'tpl.privacy-policy' => ['StaticPages.PrivacyPolicy', GlobalContext::class],
+            'tpl.declaration-of-accessibility' => ['StaticPages.DeclarationOfAccessibility', GlobalContext::class],
             'tpl.terms-conditions' => ['StaticPages.TermsAndConditions', GlobalContext::class],
             'tpl.item-not-found' => ['StaticPages.ItemNotFound', GlobalContext::class],
             'tpl.page-not-found' => ['StaticPages.PageNotFound', GlobalContext::class],
