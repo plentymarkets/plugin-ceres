@@ -442,6 +442,14 @@
                         "name": "Config.routingEnableRoutePrivacyPolicy"
                     }
                 },
+                "declarationOfAccessibilityEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.declarationOfAccessibilityCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteDeclarationOfAccessibility"
+                    }
+                },
                 "gtcCategory": {
                     "type": "category",
                     "required": false,
