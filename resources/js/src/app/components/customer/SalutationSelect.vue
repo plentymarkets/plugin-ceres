@@ -5,7 +5,7 @@
             :selected="(addressData.gender === salutation.key || checkNotToSay()) && checkGenderCompany(salutation.key)"
             v-for="(salutation, index) in currentSalutation"
             :key="index">
-            {{ salutation.name }} - 2 - {{ addressData.gender }}
+            {{ salutation.name }} - 2 - {{ addressData.gender }} - 2 - {{ salutation.key }}
         </option>
     </select>
 </template>
