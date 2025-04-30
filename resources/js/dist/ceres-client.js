@@ -69380,6 +69380,7 @@ var actions = {
         option.value = dayjs__WEBPACK_IMPORTED_MODULE_6___default()(option.value * 1000).format("YYYY-MM-DD");
       }
     });
+    console.log("init billing address: ", addressList);
     commit("setBillingAddressList", addressList);
     commit("selectBillingAddress", addressList.find(function (address) {
       return address.id === id;

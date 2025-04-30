@@ -72528,6 +72528,7 @@ var NotificationService = __webpack_require__(/*! ../../../../services/Notificat
   },
   computed: {
     addressList: function addressList() {
+      console.log("addressList: ", this.$store.getters.getAddressList(this.addressType));
       return this.$store.getters.getAddressList(this.addressType);
     }
   },
@@ -82789,6 +82790,7 @@ var actions = {
         option.value = dayjs__WEBPACK_IMPORTED_MODULE_6___default()(option.value * 1000).format("YYYY-MM-DD");
       }
     });
+    console.log("init billing address: ", addressList);
     commit("setBillingAddressList", addressList);
     commit("selectBillingAddress", addressList.find(function (address) {
       return address.id === id;

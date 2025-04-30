@@ -234,6 +234,7 @@ const actions =
                 }
             });
 
+            console.log("init billing address: ", addressList);
             commit("setBillingAddressList", addressList);
             commit("selectBillingAddress", addressList.find(address => address.id === id));
             document.dispatchEvent(new CustomEvent("billingAddressChanged", state.billingAddress));

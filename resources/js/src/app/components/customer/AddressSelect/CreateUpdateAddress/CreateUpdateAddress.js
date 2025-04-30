@@ -63,6 +63,7 @@ export default Vue.component("create-update-address", {
     {
         addressList()
         {
+            console.log("addressList: ", this.$store.getters.getAddressList(this.addressType));
             return this.$store.getters.getAddressList(this.addressType);
         }
     },
