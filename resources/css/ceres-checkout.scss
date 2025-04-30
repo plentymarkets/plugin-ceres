@@ -7135,8 +7135,7 @@ a.close.disabled {
   border: $toast-border-width solid $toast-border-color;
   -webkit-box-shadow: $toast-box-shadow;
           box-shadow: $toast-box-shadow;
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   opacity: 0;
   @include border-radius($toast-border-radius);
 
@@ -14120,7 +14119,7 @@ html.ie { // stylelint-disable-line selector-no-qualifying-type
     }
 
     .cmp {
-        position: fixed;
+        position: absolute;
         right: 0;
         left: 0;
         z-index: $zindex-7;
