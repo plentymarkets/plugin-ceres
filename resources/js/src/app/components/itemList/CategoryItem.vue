@@ -26,7 +26,6 @@
                     <slot name="item-image">
                         <category-image-carousel :image-urls-data="item.images | itemImages(imageUrlAccessor)"
                                                 :alt="item | itemName"
-                                                :title="item | itemName"
                                                 :item-url="item | itemURL(urlWithVariationId)"
                                                 :enable-carousel="$ceres.config.item.enableImageCarousel"
                                                 :disable-carousel-on-mobile="disableCarouselOnMobile"

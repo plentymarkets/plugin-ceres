@@ -425,3 +425,12 @@ textarea.no-resize {
     width: 0;
     z-index: -1;
 }
+
+.privacy-policy-input {
+    width: 16px;
+    height: 16px;
+
+    & + label {
+        margin-left: 4px;
+    }
+}

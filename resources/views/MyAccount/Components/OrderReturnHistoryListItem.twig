@@ -31,7 +31,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <a class="align-top d-inline-block" :href="returnOrder.itemURLs[orderItem.itemVariationId]">
-                            <img :src="returnOrder.itemImages[orderItem.itemVariationId]" :alt=" orderItem | itemBundleName " :title="orderItem | itemBundleName">
+                            <img :src="returnOrder.itemImages[orderItem.itemVariationId]" :alt=" orderItem | itemBundleName ">
                         </a>
                         <div class="d-inline-block item-description pl-3">
                             <div><a class="text-primary text-appearance" :href="returnOrder.itemURLs[orderItem.itemVariationId]" {{ set_testing_attr("data-testing", "return-history-link") }}>${ orderItem | itemBundleName }</a></div>

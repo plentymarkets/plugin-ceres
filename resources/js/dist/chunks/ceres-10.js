@@ -496,7 +496,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -1339,12 +1338,7 @@ var render = function() {
                                 attrs: {
                                   "image-url":
                                     _vm.displaySettings.customImagePath,
-                                  alt: _vm._f("itemName")(
-                                    _vm.currentOffer.item
-                                  ),
-                                  title: _vm._f("itemName")(
-                                    _vm.currentOffer.item
-                                  )
+                                  alt: _vm._f("itemName")(_vm.currentOffer.item)
                                 }
                               })
                             ],

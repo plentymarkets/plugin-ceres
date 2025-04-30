@@ -1,21 +1,21 @@
 {
-    "version"           : "5.0.71",
+    "version"           : "5.0.72",
     "name"              : "Ceres",
     "marketplaceName"   : {"de": "plentyShop LTS","en": "plentyShop LTS"},
     "description"       : "This is the official plentyShop LTS plugin developed by PlentyONE. plentyShop LTS is the default template plugin for PlentyONE online stores.",
-    "author"            : "plentysystems AG",
+    "author"            : "PlentyONE GmbH",
     "license"           : "AGPL-3.0",
     "pluginIcon"        : "icon_plugin_xs.png",
     "price"             : 0.00,
     "shortDescription"  : {"de": "plentyShop LTS, das offizielle Onlineshop-Plugin von PlentyONE.","en": "plentyShop LTS, the PlentyONE online shop plugin."},
     "authorIcon"        : "icon_author_xs.png",
-    "email"             : "sales@plentysystems.com",
+    "email"             : "sales@plentyone.com",
     "phone"             : "+49 561 98 681 100",
     "categories"        : ["3885"],
     "keywords"          : ["plentymarkets", "plugins", "layout", "template", "ceres", "plentyshop", "webshop", "PlentyONE"],
     "type"              : "template",
     "require"           : {
-        "IO": "~5.0.71"
+        "IO": "~5.0.72"
     },
     "platform": {
         "php": ">=7.3 <8.1"

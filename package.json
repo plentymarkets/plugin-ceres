@@ -1,10 +1,13 @@
 {
   "name": "Ceres",
   "license": "AGPL-3.0",
-  "version": "5.0.71",
+  "version": "5.0.72",
   "repository": {
     "type": "git",
     "url": "https://github.com/plentymarkets/plugin-ceres.git"
+  },
+  "engines": {
+    "node": "14"
   },
   "scripts": {
     "start": "webpack --watch --progress",
