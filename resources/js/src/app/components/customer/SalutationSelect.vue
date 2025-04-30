@@ -2,10 +2,10 @@
     <select :value="addressData.gender" data-testing="salutation-select" class="custom-select" @change="emitInputEvent($event.target.value)" data-autofocus>
         <option
             :value="salutation.key"
-            :selected="(addressData.gender === salutation.key || checkNotToSay()) && checkGenderCompany(salutation.key)"
+            :selected="addressData.gender === salutation.key && checkGenderCompany(salutation.key)"
             v-for="(salutation, index) in currentSalutation"
             :key="index">
-            {{ salutation.name }} - 2 - {{ addressData.gender }} - 2 - {{ salutation.key }}
+            {{ salutation.name }}
         </option>
     </select>
 </template>
@@ -141,10 +141,6 @@ export default {
                 return (this.addressData.name1 !== null) || (this.addressData.name1 !== "");
             }
             return true;
-        },
-
-        checkNotToSay() {
-            return !this.addressData.gender;
         },
 
         getIsGenderPersonal(gender)

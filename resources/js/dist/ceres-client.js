@@ -69384,7 +69384,6 @@ var actions = {
         address.gender = "notToSay";
       }
     });
-    console.log("init billing address: ", addressList);
     commit("setBillingAddressList", addressList);
     commit("selectBillingAddress", addressList.find(function (address) {
       return address.id === id;

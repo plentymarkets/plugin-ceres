@@ -5906,9 +5906,6 @@ __webpack_require__.r(__webpack_exports__);
 
       return true;
     },
-    checkNotToSay: function checkNotToSay() {
-      return !this.addressData.gender;
-    },
     getIsGenderPersonal: function getIsGenderPersonal(gender) {
       return ["male", "female", "diverse", "please select"].includes(gender);
     }
@@ -49178,20 +49175,11 @@ var render = function() {
             _vm._ssrAttr("value", salutation.key) +
             _vm._ssrAttr(
               "selected",
-              (_vm.addressData.gender === salutation.key ||
-                _vm.checkNotToSay()) &&
+              _vm.addressData.gender === salutation.key &&
                 _vm.checkGenderCompany(salutation.key)
             ) +
             ">" +
-            _vm._ssrEscape(
-              "\n        " +
-                _vm._s(salutation.name) +
-                " - 2 - " +
-                _vm._s(_vm.addressData.gender) +
-                " - 2 - " +
-                _vm._s(salutation.key) +
-                "\n    "
-            ) +
+            _vm._ssrEscape("\n        " + _vm._s(salutation.name) + "\n    ") +
             "</option>"
           )
         })
@@ -90004,7 +89992,6 @@ var actions = {
         address.gender = "notToSay";
       }
     });
-    console.log("init billing address: ", addressList);
     commit("setBillingAddressList", addressList);
     commit("selectBillingAddress", addressList.find(function (address) {
       return address.id === id;
