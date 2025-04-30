@@ -450,6 +450,14 @@
                         "name": "Config.routingEnableRouteDeclarationOfAccessibility"
                     }
                 },
+                "declarationOfAccessibilityCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryDeclarationOfAccessibility"
+                    }
+                },
                 "gtcCategory": {
                     "type": "category",
                     "required": false,
