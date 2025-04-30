@@ -2,7 +2,7 @@
     <select :value="addressData.gender" data-testing="salutation-select" class="custom-select" @change="emitInputEvent($event.target.value)" data-autofocus>
         <option
             :value="salutation.key"
-            :selected="addressData.gender === salutation.key && checkGenderCompany(salutation.key)"
+            :selected="(addressData.gender === salutation.key || checkNotToSay(salutation.key)) && checkGenderCompany(salutation.key)"
             v-for="(salutation, index) in currentSalutation"
             :key="index">
             {{ salutation.name }}
@@ -120,7 +120,7 @@ export default {
         {
             const isNewGenderPersonal = this.getIsGenderPersonal(value)
             const isOldGenderPersonal = this.getIsGenderPersonal(this.addressData.gender)
-            
+
             this.$emit("input", { field: "gender", value: value });
 
             // just reset the input fields, when switching the gender between a personal one and company
@@ -141,6 +141,10 @@ export default {
                 return (this.addressData.name1 !== null) || (this.addressData.name1 !== "");
             }
             return true;
+        },
+
+        checkNotToSay(gender) {
+            return gender === "notToSay" ? this.addressData.gender === null : false;
         },
 
         getIsGenderPersonal(gender)

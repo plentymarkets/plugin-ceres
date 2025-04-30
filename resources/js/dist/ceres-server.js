@@ -5906,6 +5906,9 @@ __webpack_require__.r(__webpack_exports__);
 
       return true;
     },
+    checkNotToSay: function checkNotToSay(gender) {
+      return gender === "notToSay" ? this.addressData.gender === null : false;
+    },
     getIsGenderPersonal: function getIsGenderPersonal(gender) {
       return ["male", "female", "diverse", "please select"].includes(gender);
     }
@@ -49175,7 +49178,8 @@ var render = function() {
             _vm._ssrAttr("value", salutation.key) +
             _vm._ssrAttr(
               "selected",
-              _vm.addressData.gender === salutation.key &&
+              (_vm.addressData.gender === salutation.key ||
+                _vm.checkNotToSay(salutation.key)) &&
                 _vm.checkGenderCompany(salutation.key)
             ) +
             ">" +
