@@ -98,6 +98,10 @@
             },
             {
                 "label": "Widget.presetPrivacyPolicyDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultDeclarationOfAccessibilityPreset"
+            },
+            {
+                "label": "Widget.presetDeclarationOfAccessibilityDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultPrivacyPolicyPreset"
             },
             {
