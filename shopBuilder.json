@@ -98,11 +98,11 @@
             },
             {
                 "label": "Widget.presetPrivacyPolicyDefault",
-                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultDeclarationOfAccessibilityPreset"
+                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultPrivacyPolicyPreset"
             },
             {
                 "label": "Widget.presetDeclarationOfAccessibilityDefault",
-                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultPrivacyPolicyPreset"
+                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultDeclarationOfAccessibilityPreset"
             },
             {
                 "label": "Widget.presetGTCDefault",
