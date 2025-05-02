@@ -442,20 +442,20 @@
                         "name": "Config.routingEnableRoutePrivacyPolicy"
                     }
                 },
-                "declarationOfAccessibilityEnableRoute": {
-                    "type": "checkbox",
-                    "required": false,
-                    "isVisible": "!routing.declarationOfAccessibilityCategory",
-                    "options": {
-                        "name": "Config.routingEnableRouteDeclarationOfAccessibility"
-                    }
-                },
                 "declarationOfAccessibilityCategory": {
                     "type": "category",
                     "required": false,
                     "defaultValue": null,
                     "options": {
                         "name": "Config.routingCategoryDeclarationOfAccessibility"
+                    }
+                },
+                "declarationOfAccessibilityEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.declarationOfAccessibilityCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteDeclarationOfAccessibility"
                     }
                 },
                 "gtcCategory": {
