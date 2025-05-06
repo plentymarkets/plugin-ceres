@@ -104,6 +104,11 @@
             "description"   : "Add additional content on the privacy policy page."
         },
         {
+            "key"           : "StaticPages.DeclarationOfAccessibility",
+            "name"          : "Static Pages: Declaration Of Accessibility",
+            "description"   : "Add additional content on the declaration of accessibility page."
+        },
+        {
             "key"           : "StaticPages.TermsAndConditions",
             "name"          : "Static Pages: Terms and conditions",
             "description"   : "Add additional content on the terms and conditions page."

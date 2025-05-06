@@ -49,6 +49,7 @@ class LegalTextsWidget extends BaseWidget
                     ->addEntry("cancellationForm", "Widget.legalTextsTypeValueCancellationForm")
                     ->addEntry("legalDisclosure", "Widget.legalTextsTypeValueLegalDisclosure")
                     ->addEntry("privacyPolicy", "Widget.legalTextsTypeValuePrivacyPolicy")
+                    ->addEntry("declarationOfAccessibility", "Widget.legalTextsTypeValueDeclarationOfAccessibility")
                     ->addEntry("gtc", "Widget.legalTextsTypeValueGTC")
                     ->toArray()
             );

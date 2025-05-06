@@ -56,6 +56,10 @@ class LegalInformationWidget extends BaseWidget
             ->withDefaultValue(true)
             ->withName("Widget.legalInformationShowGtcLabel");
 
+        $settingsFactory->createCheckbox("showDeclarationOfAccessibility")
+            ->withDefaultValue(true)
+            ->withName("Widget.showDeclarationOfAccessibility");
+
         $cancellationFormContainer = $settingsFactory->createVerticalContainer("cancellationFormContainer")
             ->withName("Widget.legalInformationCancellationFormContainerLabel")
             ->children;

@@ -12,6 +12,7 @@
     showPrivacyPolicy: widget.settings.showPrivacyPolicy.mobile,
     showGtc: widget.settings.showGtc.mobile,
     showCancellationForm: widget.settings.cancellationFormContainer.showCancellationForm.mobile,
+    showDeclarationOfAccessibility: widget.settings.showDeclarationOfAccessibility.mobile,
     useCancellationPdfUpload: widget.settings.cancellationFormContainer.useCancellationPdfUpload.mobile,
     cancellationPdfPath: widget.settings.cancellationFormContainer.cancellationPdfPath.mobile
 } %}
@@ -44,6 +45,11 @@
         {% if configuration.showGtc %}
             <a class="py-4 px-2" href="{{ Twig.print('urls.gtc') }}">{{ Twig.trans("Ceres::Template.footerGtc", {"hyphen": "&shy;"}) }}</a>
         {% endif %}
+
+        {% if configuration.showDeclarationOfAccessibility %}
+            <a class="py-4 px-2" href="{{ Twig.print('urls.declarationOfAccessibility') }}">{{ Twig.trans("Ceres::Template.footerDeclarationOfAccessibility", {"hyphen": "&shy;"}) }}</a>
+        {% endif %}
+
 
         {{ Twig.if('(config("Ceres.contact.shop_mail") | length > 0 and config("Ceres.contact.shop_mail") != "your@email.com") or config("IO.routing.category_contact") > 0') }}
             <a class="py-4 px-2" href="{{ Twig.print('urls.contact') }}">{{ Twig.trans("Ceres::Template.footerContact") }}</a>
