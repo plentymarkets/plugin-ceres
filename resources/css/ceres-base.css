@@ -9963,9 +9963,8 @@ h3 {
   background-repeat: repeat !important;
 }
 
-.span-link-color {
-  font-weight: 400;
-  color: #002933;
+.breadcrumbs .breadcrumb-item span {
+  color: #495057;
 }
 
 .color-gray-700 {

@@ -8773,13 +8773,19 @@ a.close.disabled {
 .bg-repeat {
     background-repeat: repeat !important; // stylelint-disable-line declaration-no-important
 }
-.span-link-color {
-    font-weight: 400;
-    color: #002933;
+
+.breadcrumbs {
+    .breadcrumb-item {
+        span {
+            color: $gray-700;
+        }
+    }
 }
+
 .color-gray-700 {
-    color: #495057 !important;
+    color: $gray-700 !important;
 }
+
 .input-group {
 
     .input-unit + .input-group-btn {
