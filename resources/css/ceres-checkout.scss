@@ -8786,6 +8786,13 @@ a.close.disabled {
     color: $gray-700 !important;
 }
 
+.articlenumber,
+.producertag {
+    b, span {
+        color: $gray-700;
+    }
+}
+
 .input-group {
 
     .input-unit + .input-group-btn {

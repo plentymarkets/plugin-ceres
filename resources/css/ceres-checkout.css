@@ -9975,6 +9975,12 @@ h3 {
   color: #495057 !important;
 }
 
+.articlenumber b, .articlenumber span,
+.producertag b,
+.producertag span {
+  color: #495057;
+}
+
 .input-group .input-unit + .input-group-btn {
   padding-bottom: 15px;
 }

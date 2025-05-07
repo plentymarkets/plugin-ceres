@@ -191,7 +191,7 @@ class ItemSetPreset implements ContentPreset
 
         $this->setItemBackgroundWidget->createChild('background', 'Ceres::InlineTextWidget')
             ->withSetting('appearance','none')
-            ->withSetting('customClass', 'producertag h6 producer text-muted color-gray-700')
+            ->withSetting('customClass', 'producertag h6 producer text-muted')
             ->withSetting('spacing.customPadding', true)
             ->withSetting('spacing.padding.left.value', 0)
             ->withSetting('spacing.padding.left.unit', null)
