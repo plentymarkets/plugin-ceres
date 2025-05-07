@@ -24,6 +24,9 @@
 {% elseif type == "privacyPolicy" %}
     {% set serviceMethod = "getPrivacyPolicy" %}
     {% set layoutContainer = "PrivacyPolicy" %}
+{% elseif type == "declarationOfAccessibility" %}
+    {% set serviceMethod = "getDeclarationOfAccessibility" %}
+    {% set layoutContainer = "DeclarationOfAccessibility" %}
 {% else %}
     {% set serviceMethod = "getTermsAndConditions" %}
     {% set layoutContainer = "TermsAndConditions" %}

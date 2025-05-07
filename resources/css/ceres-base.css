@@ -15154,7 +15154,7 @@ html.ie .navbar-brand img[src*=svg] {
   position: fixed;
 }
 .top-bar .cmp {
-  position: fixed;
+  position: absolute;
   right: 0;
   left: 0;
   z-index: 1070;
