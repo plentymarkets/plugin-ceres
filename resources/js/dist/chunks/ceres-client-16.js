@@ -1054,7 +1054,7 @@ var render = function() {
                         _c(
                           "span",
                           {
-                            staticClass: "text-muted",
+                            staticClass: "text-muted color-gray-700",
                             attrs: { "data-testing": "attribute-name" }
                           },
                           [_vm._v(_vm._s(attribute.name) + ":")]

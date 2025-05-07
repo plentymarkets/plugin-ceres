@@ -481,7 +481,7 @@ export default {
 
             if (this.isItemSet)
             {
-                this.$store.dispatch("initSetComponents", this.itemData);   
+                this.$store.dispatch("initSetComponents", this.itemData);
             }
         })
 

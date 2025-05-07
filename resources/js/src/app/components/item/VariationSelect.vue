@@ -31,7 +31,7 @@
 
                 <!-- box and image -->
                 <div v-else-if="attribute.type === 'box' || attribute.type === 'image'">
-                    <span class="text-muted" data-testing="attribute-name">{{ attribute.name }}:</span> <b data-testing="attribute-value">{{ getSelectedAttributeValueName(attribute) }}</b>
+                    <span class="text-muted color-gray-700" data-testing="attribute-name">{{ attribute.name }}:</span> <b data-testing="attribute-value">{{ getSelectedAttributeValueName(attribute) }}</b>
                     <div class="v-s-boxes py-3" :class="{ 'images': attribute.type === 'image' }">
                         <div class="v-s-box bg-white empty-option"
                              data-testing="variation-select-box"
@@ -277,7 +277,7 @@ export default {
         {
             const qualifiedVariations = this.getQualifiedVariations(attributeId, attributeValueId, unitId);
             const closestVariations = this.getClosestVariations(qualifiedVariations);
-            
+
             // if the salable 'closestVariations' is undefined, take the not-salable one
             const closestVariation = closestVariations[0] || closestVariations[1];
 
