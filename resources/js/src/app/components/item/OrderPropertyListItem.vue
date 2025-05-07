@@ -85,8 +85,8 @@
 
         <div v-else-if="inputType === 'file'" class="d-flex">
             <label class="input-unit file-input order-property-input component-loading with-icon sending color-gray-700" :class="{ 'active': property.value, 'is-loading': waiting, 'error': hasError }" v-tooltip data-toggle="tooltip" :title="property.names.description">
-                <span class="input-unit-preview" :class="{ 'disabled': waiting }">{{selectedFileName}}</span>
-                <span class="input-unit-label d-flex">
+                <span class="color-gray-700 input-unit-preview" :class="{ 'disabled': waiting }">{{selectedFileName}}</span>
+                <span class="color-gray-700 input-unit-label d-flex">
                     <span class="text-truncate" style="font-size: .8rem;">{{ property.names.name }}</span>
                     <strong class="ml-1">
                         <template v-if="surcharge > 0">({{ inclOrPlus }} {{ surcharge | currency }})</template>

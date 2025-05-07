@@ -37030,7 +37030,8 @@ var render = function() {
                         ? _c(
                             "div",
                             {
-                              staticClass: "producertag h6 producer text-muted"
+                              staticClass:
+                                "producertag h6 producer text-muted color-gray-700"
                             },
                             [
                               _vm._v(
@@ -37083,7 +37084,10 @@ var render = function() {
                       _c("div", { staticClass: "mb-5" }, [
                         _c(
                           "span",
-                          { staticClass: "articlenumber small text-muted" },
+                          {
+                            staticClass:
+                              "articlenumber small text-muted color-gray-700"
+                          },
                           [
                             _c("b", [
                               _vm._v(

@@ -51675,12 +51675,12 @@ var render = function() {
                 [
                   _vm._ssrNode(
                     "<span" +
-                      _vm._ssrClass("input-unit-preview", {
+                      _vm._ssrClass("color-gray-700 input-unit-preview", {
                         disabled: _vm.waiting
                       }) +
                       ">" +
                       _vm._ssrEscape(_vm._s(_vm.selectedFileName)) +
-                      '</span> <span class="input-unit-label d-flex"><span class="text-truncate" style="font-size: .8rem;">' +
+                      '</span> <span class="color-gray-700 input-unit-label d-flex"><span class="text-truncate" style="font-size: .8rem;">' +
                       _vm._ssrEscape(_vm._s(_vm.property.names.name)) +
                       '</span> <strong class="ml-1">' +
                       (_vm.surcharge > 0
@@ -52306,7 +52306,8 @@ var render = function() {
                         ? _c(
                             "div",
                             {
-                              staticClass: "producertag h6 producer text-muted"
+                              staticClass:
+                                "producertag h6 producer text-muted color-gray-700"
                             },
                             [
                               _vm._v(
@@ -52359,7 +52360,10 @@ var render = function() {
                       _c("div", { staticClass: "mb-5" }, [
                         _c(
                           "span",
-                          { staticClass: "articlenumber small text-muted" },
+                          {
+                            staticClass:
+                              "articlenumber small text-muted color-gray-700"
+                          },
                           [
                             _c("b", [
                               _vm._v(
@@ -53839,7 +53843,7 @@ var render = function() {
                         "</div>",
                         [
                           _vm._ssrNode(
-                            '<span data-testing="attribute-name" class="text-muted">' +
+                            '<span data-testing="attribute-name" class="text-muted color-gray-700">' +
                               _vm._ssrEscape(_vm._s(attribute.name) + ":") +
                               '</span> <b data-testing="attribute-value">' +
                               _vm._ssrEscape(

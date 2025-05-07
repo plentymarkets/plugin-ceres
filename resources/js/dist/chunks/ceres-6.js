@@ -1481,49 +1481,57 @@ var render = function() {
                   _c(
                     "span",
                     {
-                      staticClass: "input-unit-preview",
+                      staticClass: "color-gray-700 input-unit-preview",
                       class: { disabled: _vm.waiting }
                     },
                     [_vm._v(_vm._s(_vm.selectedFileName))]
                   ),
                   _vm._v(" "),
-                  _c("span", { staticClass: "input-unit-label d-flex" }, [
-                    _c(
-                      "span",
-                      {
-                        staticClass: "text-truncate",
-                        staticStyle: { "font-size": ".8rem" }
-                      },
-                      [_vm._v(_vm._s(_vm.property.names.name))]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "strong",
-                      { staticClass: "ml-1" },
-                      [
-                        _vm.surcharge > 0
-                          ? [
+                  _c(
+                    "span",
+                    { staticClass: "color-gray-700 input-unit-label d-flex" },
+                    [
+                      _c(
+                        "span",
+                        {
+                          staticClass: "text-truncate",
+                          staticStyle: { "font-size": ".8rem" }
+                        },
+                        [_vm._v(_vm._s(_vm.property.names.name))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "strong",
+                        { staticClass: "ml-1" },
+                        [
+                          _vm.surcharge > 0
+                            ? [
+                                _vm._v(
+                                  "(" +
+                                    _vm._s(_vm.inclOrPlus) +
+                                    " " +
+                                    _vm._s(_vm._f("currency")(_vm.surcharge)) +
+                                    ")"
+                                )
+                              ]
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            { staticStyle: { "font-size": ".8rem" } },
+                            [
                               _vm._v(
-                                "(" +
-                                  _vm._s(_vm.inclOrPlus) +
+                                _vm._s(_vm.footnotes) +
                                   " " +
-                                  _vm._s(_vm._f("currency")(_vm.surcharge)) +
-                                  ")"
+                                  _vm._s(_vm.requiredFootnotes)
                               )
                             ]
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _c("span", { staticStyle: { "font-size": ".8rem" } }, [
-                          _vm._v(
-                            _vm._s(_vm.footnotes) +
-                              " " +
-                              _vm._s(_vm.requiredFootnotes)
                           )
-                        ])
-                      ],
-                      2
-                    )
-                  ]),
+                        ],
+                        2
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
                   !_vm.selectedFile
                     ? _c("span", { staticClass: "input-unit-btn" }, [
