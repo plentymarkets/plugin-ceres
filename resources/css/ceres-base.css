@@ -9982,11 +9982,11 @@ h3 {
   color: #495057;
 }
 
-.widget-newsletter .widget-inner form div div .input-unit label {
+.widget-newsletter .widget-inner form .input-unit label {
   color: #495057;
 }
 
-.widget-newsletter-unsubscribe .widget-inner form div div .input-unit label {
+.widget-newsletter-unsubscribe .widget-inner .input-unit label {
   color: #495057;
 }
 

@@ -42,9 +42,9 @@
     .widget {
         .input-unit,
         .widget-inner .widget-text-input .input-unit {
-        label {
-            color: $gray-700;
-        }
+            label {
+                color: $gray-700;
+            }
         }
     }
 }
@@ -52,13 +52,9 @@
 .widget-newsletter {
     .widget-inner {
         form {
-            div {
-                div {
-                    .input-unit {
-                        label {
-                            color: $gray-700;
-                        }
-                    }
+            .input-unit {
+                label {
+                    color: $gray-700;
                 }
             }
         }

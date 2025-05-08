@@ -8796,9 +8796,9 @@ a.close.disabled {
     .widget {
         .input-unit,
         .widget-inner .widget-text-input .input-unit {
-        label {
-            color: $gray-700;
-        }
+            label {
+                color: $gray-700;
+            }
         }
     }
 }
@@ -8806,13 +8806,9 @@ a.close.disabled {
 .widget-newsletter {
     .widget-inner {
         form {
-            div {
-                div {
-                    .input-unit {
-                        label {
-                            color: $gray-700;
-                        }
-                    }
+            .input-unit {
+                label {
+                    color: $gray-700;
                 }
             }
         }
@@ -8820,15 +8816,9 @@ a.close.disabled {
 }
 .widget-newsletter-unsubscribe {
     .widget-inner {
-        form {
-            div {
-                div {
-                    .input-unit {
-                        label {
-                            color: $gray-700;
-                        }
-                    }
-                }
+        .input-unit {
+            label {
+                color: $gray-700;
             }
         }
     }
