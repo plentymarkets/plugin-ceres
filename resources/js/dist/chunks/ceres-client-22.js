@@ -414,7 +414,10 @@ var render = function() {
                             }
                           },
                           [
-                            _c("i", { staticClass: "fa fa-shopping-cart" }),
+                            _c("i", {
+                              staticClass: "fa fa-shopping-cart",
+                              attrs: { "aria-hidden": "true" }
+                            }),
                             _vm._v(
                               "\n                            " +
                                 _vm._s(

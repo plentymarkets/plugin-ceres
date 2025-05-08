@@ -649,7 +649,10 @@ var render = function() {
                 }
               },
               [
-                _c("i", { staticClass: "fa fa-shield float-none" }),
+                _c("i", {
+                  staticClass: "fa fa-shield float-none",
+                  attrs: { "aria-hidden": "true" }
+                }),
                 _vm._v(" "),
                 _c("span", { staticClass: "d-none d-sm-inline-block" }, [
                   _vm._v(

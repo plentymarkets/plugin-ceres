@@ -9,7 +9,7 @@
                         {{ buttonTranslations[targetLang] }}
                     </a>
                     <a href="#" @click="refuseRedirect()" class="m-sm-1">
-                        <i class="fa fa-fw fa-close"></i>
+                        <i class="fa fa-fw fa-close" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>

@@ -7,8 +7,8 @@
             </a>
             <div class="dropdown-menu small m-0 p-0 mw-100">
                 <div class="list-group" aria-labelledby="accountMenuList" >
-                    <a :href="$ceres.urls.myAccount" class="list-group-item small"><i class="fa fa-user"></i> {{ $translate("Ceres::Template.loginMyAccount") }}</a>
-                    <a href="#" class="list-group-item small" v-logout><i class="fa fa-sign-out"></i> {{ $translate("Ceres::Template.loginLogout") }}</a>
+                    <a :href="$ceres.urls.myAccount" class="list-group-item small"><i class="fa fa-user" aria-hidden="true"></i> {{ $translate("Ceres::Template.loginMyAccount") }}</a>
+                    <a href="#" class="list-group-item small" v-logout><i class="fa fa-sign-out" aria-hidden="true"></i> {{ $translate("Ceres::Template.loginLogout") }}</a>
                 </div>
             </div>
         </div>

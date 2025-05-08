@@ -11,7 +11,7 @@
                 :data-title="$translate('Ceres::Template.headerChangeDeliveryCountry')"
                 :aria-label="$translate('Ceres::Template.headerChangeDeliveryCountry')">
 
-                <i :class="'flag-icon flag-icon-' + shippingCountry.isoCode2.toLowerCase()"></i>
+                <i :class="'flag-icon flag-icon-' + shippingCountry.isoCode2.toLowerCase()" aria-hidden="true"></i>
                 {{ shippingCountry.currLangName }}
             </a>
         </li>

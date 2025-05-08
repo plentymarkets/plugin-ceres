@@ -126,7 +126,7 @@
                                                     aria-controls="collapseOrderProperties"
                                                     data-show-more="{{ Twig.trans("Ceres::Template.basketShowMore") }}"
                                                     data-show-less="{{ Twig.trans("Ceres::Template.basketShowLess") }}">
-                                                    <i class="fa fa-caret-down fa-lg"></i>
+                                                    <i class="fa fa-caret-down fa-lg" aria-hidden="true"></i>
                                                 </label>
 
                                             {{ Twig.endif() }}
@@ -272,7 +272,7 @@
                                 aria-controls="collapse-{{ Twig.print('uid') }}"
                                 data-show-more="{{ Twig.trans("Ceres::Template.basketShowMore") }}"
                                 data-show-less="{{ Twig.trans("Ceres::Template.basketShowLess") }}">
-                                <i class="fa fa-caret-down fa-lg"></i>
+                                <i class="fa fa-caret-down fa-lg" aria-hidden="true"></i>
                             </label>
 
                         {{ Twig.endif() }}

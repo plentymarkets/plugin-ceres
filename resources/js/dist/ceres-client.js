@@ -37864,7 +37864,10 @@ var render = function() {
                     attrs: { href: _vm.$ceres.urls.myAccount }
                   },
                   [
-                    _c("i", { staticClass: "fa fa-user" }),
+                    _c("i", {
+                      staticClass: "fa fa-user",
+                      attrs: { "aria-hidden": "true" }
+                    }),
                     _vm._v(
                       " " +
                         _vm._s(_vm.$translate("Ceres::Template.loginMyAccount"))
@@ -37880,7 +37883,10 @@ var render = function() {
                     attrs: { href: "#" }
                   },
                   [
-                    _c("i", { staticClass: "fa fa-sign-out" }),
+                    _c("i", {
+                      staticClass: "fa fa-sign-out",
+                      attrs: { "aria-hidden": "true" }
+                    }),
                     _vm._v(
                       " " +
                         _vm._s(_vm.$translate("Ceres::Template.loginLogout"))
@@ -40478,7 +40484,10 @@ var render = function() {
                 }
               },
               [
-                _c("i", { staticClass: "fa fa-shield float-none" }),
+                _c("i", {
+                  staticClass: "fa fa-shield float-none",
+                  attrs: { "aria-hidden": "true" }
+                }),
                 _vm._v(" "),
                 _c("span", { staticClass: "d-none d-sm-inline-block" }, [
                   _vm._v(
@@ -40578,7 +40587,12 @@ var render = function() {
                     }
                   }
                 },
-                [_c("i", { staticClass: "fa fa-fw fa-close" })]
+                [
+                  _c("i", {
+                    staticClass: "fa fa-fw fa-close",
+                    attrs: { "aria-hidden": "true" }
+                  })
+                ]
               )
             ])
           ])
@@ -41109,7 +41123,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("button", { staticClass: "btn btn-icon btn-secondary btn-sm" }, [
-      _c("i", { staticClass: "fa fa-info" })
+      _c("i", { staticClass: "fa fa-info", attrs: { "aria-hidden": "true" } })
     ])
   }
 ]

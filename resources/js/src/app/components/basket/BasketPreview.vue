@@ -68,7 +68,7 @@
 
                         <div class="basket-preview-footer d-flex pb-3">
                             <a v-waiting-animation-infinite :href="$ceres.urls.basket" rel="nofollow" class="btn btn-outline-primary btn-block">
-                                <i class="fa fa-shopping-cart"></i>
+                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                 {{ $translate("Ceres::Template.basket") }}
                             </a>
 
