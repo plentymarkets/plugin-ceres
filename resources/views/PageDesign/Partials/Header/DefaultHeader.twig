@@ -35,7 +35,7 @@
                                                aria-controls="countrySettings"
                                                data-parent="#controlsList"
                                                aria-label="{{ trans('Ceres::Template.headerCountry') }}">
-                                                <i class="flag-icon flag-icon-{{ lang }}"></i>
+                                                <i class="flag-icon flag-icon-{{ lang }}" aria-hidden="true"></i>
                                             </a>
                                         </li>
 
@@ -199,7 +199,7 @@
                                                         {% set languageISO = services.localizationRepository.getLanguageCode(language) %}
                                                         <li class="col-6 col-sm-4 px-0{% if lang == language %} active{% endif %}">
                                                             <a class="nav-link" href="{% if languageUrls[languageISO] is defined %}{{ languageUrls[languageISO] ~ queryString() }}{% elseif language != defaultLanguage %}/{{ language }}{{ urls.trailingSlashSuffix }}{% else %}/{% endif %}" data-update-url>
-                                                                <i class="flag-icon flag-icon-{{ language }}"></i>
+                                                                <i class="flag-icon flag-icon-{{ language }}" aria-hidden="true"></i>
                                                                 {{ trans("Ceres::Template.header" ~ language | capitalize) }}
                                                             </a>
                                                         </li>

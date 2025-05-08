@@ -16,14 +16,14 @@
 
         <span class="input-unit-btn"
                 v-if="!selectedFiles">
-            <i class="fa fa-ellipsis-h"></i>
+            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
         </span>
 
         <span class="input-unit-btn"
                 v-else
                 @click.prevent="clearSelectedFiles()"
                 data-testing="remove-attached-file">
-            <i class="fa fa-times"></i>
+            <i class="fa fa-times" aria-hidden="true"></i>
         </span>
         
         <input type="file"

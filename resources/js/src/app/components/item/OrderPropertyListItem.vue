@@ -94,10 +94,10 @@
                     </strong>
                 </span>
                 <span class="input-unit-btn" v-if="!selectedFile">
-                    <i class="fa fa-ellipsis-h"></i>
+                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
                 </span>
                 <span class="input-unit-btn" v-else :disabled="waiting" @click.prevent="clearSelectedFile()">
-                    <i class="fa fa-times"></i>
+                    <i class="fa fa-times" aria-hidden="true"></i>
                 </span>
                 <input :disabled="waiting" ref="fileInput" type="file" size="50" @change="setPropertyFile($event)" data-testing="order-property-input-file">
             </label>
