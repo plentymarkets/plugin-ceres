@@ -38,3 +38,34 @@
         color: $gray-700;
     }
 }
+.cmp-contact {
+    .widget {
+        .input-unit,
+        .widget-inner .widget-text-input .input-unit {
+            label {
+                color: $gray-700;
+            }
+        }
+    }
+}
+
+.widget-newsletter {
+    .widget-inner {
+        form {
+            .input-unit {
+                label {
+                    color: $gray-700;
+                }
+            }
+        }
+    }
+}
+.widget-newsletter-unsubscribe {
+    .widget-inner {
+        .input-unit {
+            label {
+                color: $gray-700;
+            }
+        }
+    }
+}
