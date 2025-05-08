@@ -39,10 +39,21 @@
     }
 }
 .cmp-contact {
-	.widget {
-		.widget-inner {
+    .widget {
+        .input-unit,
+        .widget-inner .widget-text-input .input-unit {
+        label {
+            color: $gray-700;
+        }
+        }
+    }
+}
+
+.widget-newsletter {
+    .widget-inner {
+        form {
             div {
-                .widget-text-input {
+                div {
                     .input-unit {
                         label {
                             color: $gray-700;
@@ -53,8 +64,7 @@
         }
     }
 }
-
-.widget-newsletter {
+.widget-newsletter-unsubscribe {
     .widget-inner {
         form {
             div {

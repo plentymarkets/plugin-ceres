@@ -9981,11 +9981,16 @@ h3 {
   color: #495057;
 }
 
-.cmp-contact .widget .widget-inner div .widget-text-input .input-unit label {
+.cmp-contact .widget .input-unit label,
+.cmp-contact .widget .widget-inner .widget-text-input .input-unit label {
   color: #495057;
 }
 
 .widget-newsletter .widget-inner form div div .input-unit label {
+  color: #495057;
+}
+
+.widget-newsletter-unsubscribe .widget-inner form div div .input-unit label {
   color: #495057;
 }
 
