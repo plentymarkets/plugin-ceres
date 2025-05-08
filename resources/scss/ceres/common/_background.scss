@@ -66,15 +66,9 @@
 }
 .widget-newsletter-unsubscribe {
     .widget-inner {
-        form {
-            div {
-                div {
-                    .input-unit {
-                        label {
-                            color: $gray-700;
-                        }
-                    }
-                }
+        .input-unit {
+            label {
+                color: $gray-700;
             }
         }
     }
