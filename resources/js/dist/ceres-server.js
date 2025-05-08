@@ -42978,7 +42978,7 @@ var render = function() {
                   _vm.visibleFields.includes("basket.order_total_net") ||
                   _vm.visibleFields.includes("vats") ||
                   _vm.visibleFields.includes("basket.vat")
-                    ? '<div class="my-3"></div>'
+                    ? '<div class="my-3" style="border-top: 1px solid #dee2e6;"></div>'
                     : "<!---->") +
                   " "
               ),

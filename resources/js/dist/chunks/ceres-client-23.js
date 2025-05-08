@@ -817,7 +817,10 @@ var render = function() {
             _vm.visibleFields.includes("basket.order_total_net") ||
             _vm.visibleFields.includes("vats") ||
             _vm.visibleFields.includes("basket.vat")
-              ? _c("div", { staticClass: "my-3" })
+              ? _c("div", {
+                  staticClass: "my-3",
+                  staticStyle: { "border-top": "1px solid #dee2e6" }
+                })
               : _vm._e(),
             _vm._v(" "),
             _vm._t("before-total-sum"),

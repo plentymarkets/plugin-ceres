@@ -106,7 +106,7 @@
                 </template>
                 <!-- Coupon -->
 
-                <div class="my-3"
+                <div class="my-3" style="border-top: 1px solid #dee2e6;"
                      v-if="visibleFields.includes('subAmount') ||
                      visibleFields.includes('basket.order_total_net') ||
                      visibleFields.includes('vats') || visibleFields.includes('basket.vat')">
