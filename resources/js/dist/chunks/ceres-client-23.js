@@ -283,6 +283,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -813,7 +817,7 @@ var render = function() {
             _vm.visibleFields.includes("basket.order_total_net") ||
             _vm.visibleFields.includes("vats") ||
             _vm.visibleFields.includes("basket.vat")
-              ? _c("hr")
+              ? _c("div", { staticClass: "my-3" })
               : _vm._e(),
             _vm._v(" "),
             _vm._t("before-total-sum"),
@@ -927,7 +931,10 @@ var render = function() {
               "div",
               { staticClass: "totalSum" },
               [
-                _c("hr"),
+                _c("div", {
+                  staticClass: "my-3",
+                  staticStyle: { "border-top": "1px solid #dee2e6" }
+                }),
                 _vm._v(" "),
                 _vm.visibleFields.includes("totalSumNet") ||
                 _vm.visibleFields.includes("basket.order_total_net")
