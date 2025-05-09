@@ -120,7 +120,7 @@
                                         <template #item-data>{{ item.data | json_encode | e }}</template>
 
                                         <a href="{{ item.data | itemURL }}" class="small">
-                                            <i class="fa fa-image"></i>
+                                            <i class="fa fa-image" aria-hidden="true"></i>
                                             <span>{{ item.data | itemName }}</span>
                                         </a>
                                     </category-item>

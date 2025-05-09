@@ -101,6 +101,10 @@
                 "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultPrivacyPolicyPreset"
             },
             {
+                "label": "Widget.presetDeclarationOfAccessibilityDefault",
+                "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultDeclarationOfAccessibilityPreset"
+            },
+            {
                 "label": "Widget.presetGTCDefault",
                 "presetClass": "Ceres\\Widgets\\Presets\\Legal\\DefaultGTCPreset"
             }
@@ -440,6 +444,22 @@
                     "isVisible": "!routing.privacyPolicyCategory",
                     "options": {
                         "name": "Config.routingEnableRoutePrivacyPolicy"
+                    }
+                },
+                "declarationOfAccessibilityCategory": {
+                    "type": "category",
+                    "required": false,
+                    "defaultValue": null,
+                    "options": {
+                        "name": "Config.routingCategoryDeclarationOfAccessibility"
+                    }
+                },
+                "declarationOfAccessibilityEnableRoute": {
+                    "type": "checkbox",
+                    "required": false,
+                    "isVisible": "!routing.declarationOfAccessibilityCategory",
+                    "options": {
+                        "name": "Config.routingEnableRouteDeclarationOfAccessibility"
                     }
                 },
                 "gtcCategory": {

@@ -56,14 +56,14 @@
                                                class="search-input px-3 py-2 flex-grow-1"
                                                aria-label="{{ Twig.print('trans("Ceres::Template.headerSearchTerm", [], "de_DE")') }}">
                                         <button class="search-submit px-3" type="submit" aria-label="{{ Twig.print('trans("Ceres::Template.headerSearch")') }}">
-                                            <i class="fa fa-search"></i>
+                                            <i class="fa fa-search" aria-hidden="true"></i>
                                         </button>
                                     </div>
 
                                     {% if isPreview %}
                                         <template #search-button>
                                             <button class="search-submit px-3" type="submit" {{ WidgetHelper.makeClickable(isPreview) }} data-toggle="collapse" href="#search-suggestions_{{ uid }}" role="button">
-                                                <i class="fa fa-search"></i>
+                                                <i class="fa fa-search" aria-hidden="true"></i>
                                             </button>
                                         </template>
                                     {% endif %}
@@ -118,7 +118,7 @@
                                    aria-controls="countrySettings"
                                    data-parent="#controlsList"
                                    aria-label="{{ Twig.print('trans("Ceres::Template.headerCountry")') }}">
-                                    <i class="flag-icon flag-icon-{{ Twig.print('lang') }}"></i>
+                                    <i class="flag-icon flag-icon-{{ Twig.print('lang') }}" aria-hidden="true"></i>
                                 </a>
                             </li>
                         {% endif %}
@@ -316,7 +316,7 @@
                                                     {{ Twig.endif() }}
                                                     <a class="nav-link" href="{{ Twig.print("url") }}"
                                                         data-testing="lang-select-{{ Twig.print("language") }}" data-update-url>
-                                                        <i class="flag-icon flag-icon-{{ Twig.print("language") }}"></i>
+                                                        <i class="flag-icon flag-icon-{{ Twig.print("language") }}" aria-hidden="true"></i>
                                                         {{ Twig.print('trans("Ceres::Template.header" ~ language | capitalize)') }}
                                                     </a>
                                                 </li>

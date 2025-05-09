@@ -176,7 +176,8 @@ var render = function() {
                   _c("i", {
                     class:
                       "flag-icon flag-icon-" +
-                      shippingCountry.isoCode2.toLowerCase()
+                      shippingCountry.isoCode2.toLowerCase(),
+                    attrs: { "aria-hidden": "true" }
                   }),
                   _vm._v(
                     "\n            " +

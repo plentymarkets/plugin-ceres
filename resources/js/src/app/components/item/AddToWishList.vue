@@ -1,5 +1,5 @@
 <template>
-    <button class="btn btn-link btn-sm text-muted"
+    <button class="btn btn-link btn-sm text-muted color-gray-700"
         @click.prevent="switchState()"
         data-toggle="tooltip"
         data-placement="top"

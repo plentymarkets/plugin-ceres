@@ -1,7 +1,7 @@
 <template>
     <div :class="{ 'has-crossprice': hasCrossPrice }">
         <div class="crossprice" v-if="showCrossPrice && hasCrossPrice" :class="{ 'is-special-offer': hasSpecialOffer }">
-            <del class="text-muted small text-appearance">
+            <del class="text-muted small text-appearance color-gray-700">
                 <template v-if="hasSpecialOffer">
                     {{ currentVariation.prices.default.unitPrice.formatted | itemCrossPrice(true) }}
                 </template>
@@ -28,7 +28,7 @@
             <sup>{{ $translate("Ceres::Template.singleItemFootnote1") }}</sup>
         </span>
 
-        <ul class="text-muted pl-0 list-unstyled" v-if="propertiesWithAdditionalCostsVisible.length">
+        <ul class="text-muted pl-0 list-unstyled color-gray-700" v-if="propertiesWithAdditionalCostsVisible.length">
             <li v-for="property in propertiesWithAdditionalCostsVisible" :key="property.propertyId">
                 <span class="d-block">
                     {{ property.property.names.name }} <template v-if="$options.filters.propertySurcharge(currentVariation.properties, property.propertyId) > 0">({{ $translate("Ceres::Template.basketPlusAbbr") }} {{ currentVariation.properties | propertySurcharge(property.propertyId) | currency }})</template>
@@ -38,13 +38,13 @@
         </ul>
 
         <!-- lowest price, according to § 11 PAngV -->
-        <div class="lowest-price text-muted mb-3" v-if="currentVariation.prices.default.lowestPrice.value && showCrossPrice && hasCrossPrice">
+        <div class="lowest-price text-muted mb-3 color-gray-700" v-if="currentVariation.prices.default.lowestPrice.value && showCrossPrice && hasCrossPrice">
             <div v-html="$translate('Ceres::Template.singleItemLowestPrice', {'price': currentVariation.prices.default.lowestPrice.formatted})">
             </div>
         </div>
         
         <!-- class .is-single-piece is added for customers to hide the unit if it is C62 -->
-        <div class="base-price text-muted my-3"
+        <div class="base-price text-muted my-3 color-gray-700"
             v-if="currentVariation.unit"
             :class="{ 'is-single-piece': currentVariation.unit && currentVariation.unit.content === 1 && currentVariation.unit.unitOfMeasurement === 'C62' }">
             <div>

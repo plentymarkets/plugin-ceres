@@ -167,6 +167,7 @@ class DefaultFooterPreset implements ContentPreset
             ->withSetting('showLegalDisclosure', true)
             ->withSetting('showPrivacyPolicy', true)
             ->withSetting('showGtc', true)
+            ->withSetting('showDeclarationOfAccessibility', true)
             ->withSetting('cancellationFormContainer.showCancellationForm', true)
             ->withSetting('cancellationFormContainer.useCancellationPdfUpload', false)
             ->withSetting('cancellationFormContainer.cancellationPdfPath', '');

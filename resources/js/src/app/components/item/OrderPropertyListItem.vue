@@ -11,7 +11,7 @@
                 :maxlength="isOrderProperty(property) ? 128 : 65535"
                 :title="property.names.description"
                 :data-testing="'order-property-input-' + inputType" />
-            <label :for="'order-property-input_' + property.id" class="d-flex">
+            <label :for="'order-property-input_' + property.id" class="d-flex color-gray-700">
                 <span class="text-truncate" style="font-size: .8rem;">{{ property.names.name }}</span>
                 <strong class="ml-1">
                     <template v-if="surcharge > 0">({{ inclOrPlus }} {{ surcharge | currency }})</template>
@@ -40,7 +40,7 @@
                    :checked="property.value"
                    data-testing="order-property-input-radio">
 
-            <label class="form-check-label text-appearance d-flex"
+            <label class="form-check-label text-appearance d-flex color-gray-700"
                    :for="'check' + _uid"
                    v-tooltip data-toggle="tooltip"
                    :title="property.names.description"
@@ -60,13 +60,13 @@
                 v-tooltip
                 data-toggle="tooltip"
                 :title="property.names.description">
-                <select id="order-property-input-select" v-model="selectionValue" @change="onInputValueChanged($event.target.value)" class="custom-select" data-testing="order-property-selection">
+                <select id="order-property-input-select" v-model="selectionValue" @change="onInputValueChanged($event.target.value)" class="custom-select color-gray-700" data-testing="order-property-selection">
                     <option :selected="true" :value="null">{{ $translate("Ceres::Template.singleItemPleaseSelect") }}</option>
                     <option :selected="property.id === id" :value="id" v-for="(value, id) in property.selectionValues" :key="id" data-testing="order-property-selection-option">{{ value.name }}</option>
                 </select>
-                <label class="d-flex w-100" for="order-property-input-select">
+                <label class="d-flex w-100 color-gray-700" for="order-property-input-select">
                     <span class="text-truncate" style="font-size: .8rem;">{{ property.names.name }}</span>
-                    <strong class="ml-1">
+                    <strong class="ml-1 color-gray-700">
                         <template v-if="surcharge > 0">({{ inclOrPlus }} {{ surcharge | currency }})</template>
                         <span style="font-size: .8rem;">{{ footnotes }} {{ requiredFootnotes }}</span>
                     </strong>
@@ -84,9 +84,9 @@
         </div>
 
         <div v-else-if="inputType === 'file'" class="d-flex">
-            <label class="input-unit file-input order-property-input component-loading with-icon sending" :class="{ 'active': property.value, 'is-loading': waiting, 'error': hasError }" v-tooltip data-toggle="tooltip" :title="property.names.description">
-                <span class="input-unit-preview" :class="{ 'disabled': waiting }">{{selectedFileName}}</span>
-                <span class="input-unit-label d-flex">
+            <label class="input-unit file-input order-property-input component-loading with-icon sending color-gray-700" :class="{ 'active': property.value, 'is-loading': waiting, 'error': hasError }" v-tooltip data-toggle="tooltip" :title="property.names.description">
+                <span class="color-gray-700 input-unit-preview" :class="{ 'disabled': waiting }">{{selectedFileName}}</span>
+                <span class="color-gray-700 input-unit-label d-flex">
                     <span class="text-truncate" style="font-size: .8rem;">{{ property.names.name }}</span>
                     <strong class="ml-1">
                         <template v-if="surcharge > 0">({{ inclOrPlus }} {{ surcharge | currency }})</template>
@@ -94,10 +94,10 @@
                     </strong>
                 </span>
                 <span class="input-unit-btn" v-if="!selectedFile">
-                    <i class="fa fa-ellipsis-h"></i>
+                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
                 </span>
                 <span class="input-unit-btn" v-else :disabled="waiting" @click.prevent="clearSelectedFile()">
-                    <i class="fa fa-times"></i>
+                    <i class="fa fa-times" aria-hidden="true"></i>
                 </span>
                 <input :disabled="waiting" ref="fileInput" type="file" size="50" @change="setPropertyFile($event)" data-testing="order-property-input-file">
             </label>

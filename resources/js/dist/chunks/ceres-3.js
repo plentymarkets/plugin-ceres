@@ -539,7 +539,8 @@ var render = function() {
           },
           [
             _c("i", {
-              staticClass: "fa fa-arrow-right fa-lg d-none d-sm-block"
+              staticClass: "fa fa-arrow-right fa-lg d-none d-sm-block",
+              attrs: { "aria-hidden": "true" }
             })
           ]
         )

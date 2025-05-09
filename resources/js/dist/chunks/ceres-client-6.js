@@ -1018,13 +1018,17 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _c("p", { staticClass: "text-muted text-wrap" }, [
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(_vm.propertyGroup.group.names.description) +
-                          "\n            "
-                      )
-                    ])
+                    _c(
+                      "p",
+                      { staticClass: "text-muted text-wrap color-gray-700" },
+                      [
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(_vm.propertyGroup.group.names.description) +
+                            "\n            "
+                        )
+                      ]
+                    )
                   ]
                 )
               : _vm._e(),
@@ -1130,7 +1134,7 @@ var render = function() {
               _c(
                 "label",
                 {
-                  staticClass: "d-flex",
+                  staticClass: "d-flex color-gray-700",
                   attrs: { for: "order-property-input_" + _vm.property.id }
                 },
                 [
@@ -1223,7 +1227,8 @@ var render = function() {
                 "label",
                 {
                   directives: [{ name: "tooltip", rawName: "v-tooltip" }],
-                  staticClass: "form-check-label text-appearance d-flex",
+                  staticClass:
+                    "form-check-label text-appearance d-flex color-gray-700",
                   attrs: {
                     for: "check" + _vm._uid,
                     "data-toggle": "tooltip",
@@ -1294,7 +1299,7 @@ var render = function() {
                           expression: "selectionValue"
                         }
                       ],
-                      staticClass: "custom-select",
+                      staticClass: "custom-select color-gray-700",
                       attrs: {
                         id: "order-property-input-select",
                         "data-testing": "order-property-selection"
@@ -1358,7 +1363,7 @@ var render = function() {
                   _c(
                     "label",
                     {
-                      staticClass: "d-flex w-100",
+                      staticClass: "d-flex w-100 color-gray-700",
                       attrs: { for: "order-property-input-select" }
                     },
                     [
@@ -1373,7 +1378,7 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "strong",
-                        { staticClass: "ml-1" },
+                        { staticClass: "ml-1 color-gray-700" },
                         [
                           _vm.surcharge > 0
                             ? [
@@ -1461,7 +1466,7 @@ var render = function() {
                 {
                   directives: [{ name: "tooltip", rawName: "v-tooltip" }],
                   staticClass:
-                    "input-unit file-input order-property-input component-loading with-icon sending",
+                    "input-unit file-input order-property-input component-loading with-icon sending color-gray-700",
                   class: {
                     active: _vm.property.value,
                     "is-loading": _vm.waiting,
@@ -1476,53 +1481,64 @@ var render = function() {
                   _c(
                     "span",
                     {
-                      staticClass: "input-unit-preview",
+                      staticClass: "color-gray-700 input-unit-preview",
                       class: { disabled: _vm.waiting }
                     },
                     [_vm._v(_vm._s(_vm.selectedFileName))]
                   ),
                   _vm._v(" "),
-                  _c("span", { staticClass: "input-unit-label d-flex" }, [
-                    _c(
-                      "span",
-                      {
-                        staticClass: "text-truncate",
-                        staticStyle: { "font-size": ".8rem" }
-                      },
-                      [_vm._v(_vm._s(_vm.property.names.name))]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "strong",
-                      { staticClass: "ml-1" },
-                      [
-                        _vm.surcharge > 0
-                          ? [
+                  _c(
+                    "span",
+                    { staticClass: "color-gray-700 input-unit-label d-flex" },
+                    [
+                      _c(
+                        "span",
+                        {
+                          staticClass: "text-truncate",
+                          staticStyle: { "font-size": ".8rem" }
+                        },
+                        [_vm._v(_vm._s(_vm.property.names.name))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "strong",
+                        { staticClass: "ml-1" },
+                        [
+                          _vm.surcharge > 0
+                            ? [
+                                _vm._v(
+                                  "(" +
+                                    _vm._s(_vm.inclOrPlus) +
+                                    " " +
+                                    _vm._s(_vm._f("currency")(_vm.surcharge)) +
+                                    ")"
+                                )
+                              ]
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            { staticStyle: { "font-size": ".8rem" } },
+                            [
                               _vm._v(
-                                "(" +
-                                  _vm._s(_vm.inclOrPlus) +
+                                _vm._s(_vm.footnotes) +
                                   " " +
-                                  _vm._s(_vm._f("currency")(_vm.surcharge)) +
-                                  ")"
+                                  _vm._s(_vm.requiredFootnotes)
                               )
                             ]
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _c("span", { staticStyle: { "font-size": ".8rem" } }, [
-                          _vm._v(
-                            _vm._s(_vm.footnotes) +
-                              " " +
-                              _vm._s(_vm.requiredFootnotes)
                           )
-                        ])
-                      ],
-                      2
-                    )
-                  ]),
+                        ],
+                        2
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
                   !_vm.selectedFile
                     ? _c("span", { staticClass: "input-unit-btn" }, [
-                        _c("i", { staticClass: "fa fa-ellipsis-h" })
+                        _c("i", {
+                          staticClass: "fa fa-ellipsis-h",
+                          attrs: { "aria-hidden": "true" }
+                        })
                       ])
                     : _c(
                         "span",
@@ -1536,7 +1552,12 @@ var render = function() {
                             }
                           }
                         },
-                        [_c("i", { staticClass: "fa fa-times" })]
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-times",
+                            attrs: { "aria-hidden": "true" }
+                          })
+                        ]
                       ),
                   _vm._v(" "),
                   _c("input", {

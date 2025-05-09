@@ -23,8 +23,8 @@
                 {%- if inlinePadding | length > 0 %} body-style="{{ inlinePadding }}"{% endif %}>
             <template #handle>
                 <button aria-label="{{ trans("Ceres::Widget.additionalInformationLabel") }}"
-                        class="btn btn-icon btn-{{ appearance }} {{ buttonSize }}" {{ WidgetHelper.makeClickable(isPreview) }}>
-                    <i class="fa fa-fw {{ icon }}"></i>
+                        class="btn btn-icon btn-{{ appearance }} {{ buttonSize }}" {{ WidgetHelper.makeClickable(isPreview) }} title="{{ title }}">
+                    <i class="fa fa-fw {{ icon }}" aria-hidden="true"></i>
                 </button>
             </template>
             {% if title | length > 0 %}
@@ -39,7 +39,7 @@
     </div>
     {% else %}
         <button class="btn btn-icon btn-{{ appearance }} {{ buttonSize }}">
-            <i class="fa {{ icon }}"></i>
+            <i class="fa {{ icon }}" aria-hidden="true"></i>
         </button>
     {% endif %}
 </div>

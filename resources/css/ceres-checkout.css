@@ -9967,6 +9967,33 @@ h3 {
   background-repeat: repeat !important;
 }
 
+.breadcrumbs .breadcrumb-item span {
+  color: #495057;
+}
+
+.color-gray-700 {
+  color: #495057 !important;
+}
+
+.articlenumber b, .articlenumber span,
+.producertag b,
+.producertag span {
+  color: #495057;
+}
+
+.cmp-contact .widget .input-unit label,
+.cmp-contact .widget .widget-inner .widget-text-input .input-unit label {
+  color: #495057;
+}
+
+.widget-newsletter .widget-inner form .input-unit label {
+  color: #495057;
+}
+
+.widget-newsletter-unsubscribe .widget-inner .input-unit label {
+  color: #495057;
+}
+
 .input-group .input-unit + .input-group-btn {
   padding-bottom: 15px;
 }

@@ -45747,7 +45747,10 @@ var render = function() {
                     attrs: { href: _vm.$ceres.urls.myAccount }
                   },
                   [
-                    _c("i", { staticClass: "fa fa-user" }),
+                    _c("i", {
+                      staticClass: "fa fa-user",
+                      attrs: { "aria-hidden": "true" }
+                    }),
                     _vm._v(
                       " " +
                         _vm._s(_vm.$translate("Ceres::Template.loginMyAccount"))
@@ -45763,7 +45766,10 @@ var render = function() {
                     attrs: { href: "#" }
                   },
                   [
-                    _c("i", { staticClass: "fa fa-sign-out" }),
+                    _c("i", {
+                      staticClass: "fa fa-sign-out",
+                      attrs: { "aria-hidden": "true" }
+                    }),
                     _vm._v(
                       " " +
                         _vm._s(_vm.$translate("Ceres::Template.loginLogout"))
@@ -48186,7 +48192,12 @@ var render = function() {
                     }
                   }
                 },
-                [_c("i", { staticClass: "fa fa-fw fa-close" })]
+                [
+                  _c("i", {
+                    staticClass: "fa fa-fw fa-close",
+                    attrs: { "aria-hidden": "true" }
+                  })
+                ]
               )
             ])
           ])

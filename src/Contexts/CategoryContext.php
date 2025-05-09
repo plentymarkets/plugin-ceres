@@ -100,6 +100,9 @@ class CategoryContext extends GlobalContext implements ContextInterface
                 case RouteConfig::getCategoryId(RouteConfig::PRIVACY_POLICY):
                     $this->bodyClasses[] = "category-privacy-policy";
                     break;
+                case RouteConfig::getCategoryId(RouteConfig::DECLARATION_OF_ACCESSIBILITY):
+                    $this->bodyClasses[] = "category-declaration-of-accessibility";
+                    break;
                 case RouteConfig::getCategoryId(RouteConfig::REGISTER):
                     $this->bodyClasses[] = "category-register";
                     break;
