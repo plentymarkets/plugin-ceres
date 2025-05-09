@@ -106,11 +106,11 @@
                 </template>
                 <!-- Coupon -->
 
-                <div class="my-3" style="border-top: 1px solid #dee2e6;"
-                     v-if="visibleFields.includes('subAmount') ||
-                     visibleFields.includes('basket.order_total_net') ||
-                     visibleFields.includes('vats') || visibleFields.includes('basket.vat')">
-                </div>
+<!--                <div class="my-3" style="border-top: 1px solid #dee2e6;"-->
+<!--                     v-if="visibleFields.includes('subAmount') ||-->
+<!--                     visibleFields.includes('basket.order_total_net') ||-->
+<!--                     visibleFields.includes('vats') || visibleFields.includes('basket.vat')">-->
+<!--                </div>-->
                 <slot name="before-total-sum"></slot>
 
                 <!-- Subamount (net) -->
@@ -153,7 +153,7 @@
                 <!-- AdditionalCosts or order properties without tax -->
 
                 <div class="totalSum">
-                    <div class="my-3" style="border-top: 1px solid #dee2e6;"></div>
+<!--                    <div class="my-3" style="border-top: 1px solid #dee2e6;"></div>-->
 
                     <!-- Total sum (net) -->
                     <template v-if="visibleFields.includes('totalSumNet') || visibleFields.includes('basket.order_total_net')">

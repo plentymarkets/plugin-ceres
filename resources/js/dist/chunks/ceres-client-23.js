@@ -480,9 +480,9 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                        " +
+                            "\n                            " +
                               _vm._s(property.name) +
-                              "\n                    "
+                              "\n                        "
                           )
                         ]
                       ),
@@ -494,9 +494,9 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                        " +
+                            "\n                            " +
                               _vm._s(_vm._f("currency")(property.price)) +
-                              "\n                    "
+                              "\n                        "
                           )
                         ]
                       )
@@ -513,13 +513,13 @@ var render = function() {
                     { class: { "font-weight-bold": _vm.showNetPrices } },
                     [
                       _vm._v(
-                        "\n                    " +
+                        "\n                        " +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketValue")
                           ) +
                           " " +
                           _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          "\n                "
+                          "\n                    "
                       )
                     ]
                   ),
@@ -531,7 +531,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                    " +
+                        "\n                        " +
                           _vm._s(
                             _vm._f("currency")(
                               _vm.calculateBaseValue(
@@ -540,7 +540,7 @@ var render = function() {
                               )
                             )
                           ) +
-                          "\n                "
+                          "\n                    "
                       )
                     ]
                   )
@@ -555,7 +555,7 @@ var render = function() {
                     { class: { "font-weight-bold": !_vm.showNetPrices } },
                     [
                       _vm._v(
-                        "\n                    " +
+                        "\n                        " +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketValue")
                           ) +
@@ -563,7 +563,7 @@ var render = function() {
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketGross")
                           ) +
-                          "\n                "
+                          "\n                    "
                       )
                     ]
                   ),
@@ -575,7 +575,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                    " +
+                        "\n                        " +
                           _vm._s(
                             _vm._f("currency")(
                               _vm.calculateBaseValue(
@@ -584,7 +584,7 @@ var render = function() {
                               )
                             )
                           ) +
-                          "\n                "
+                          "\n                    "
                       )
                     ]
                   )
@@ -597,15 +597,15 @@ var render = function() {
               ? [
                   _c("dt", { staticClass: "rebate-hint" }, [
                     _vm._v(
-                      "\n                    " +
+                      "\n                        " +
                         _vm._s(_vm.$translate("Ceres::Template.basketRebate")) +
-                        "\n                "
+                        "\n                    "
                     )
                   ]),
                   !_vm.showNetPrices
                     ? _c("dd", { staticClass: "rebate-hint" }, [
                         _vm._v(
-                          "\n                    " +
+                          "\n                        " +
                             _vm._s(
                               _vm.$translate("Ceres::Template.basketRebateSign")
                             ) +
@@ -617,12 +617,12 @@ var render = function() {
                                 ) - _vm.basket.itemSum
                               )
                             ) +
-                            "\n                "
+                            "\n                    "
                         )
                       ])
                     : _c("dd", { staticClass: "rebate-hint" }, [
                         _vm._v(
-                          "\n                    " +
+                          "\n                        " +
                             _vm._s(
                               _vm.$translate("Ceres::Template.basketRebateSign")
                             ) +
@@ -634,7 +634,7 @@ var render = function() {
                                 ) - _vm.basket.itemSumNet
                               )
                             ) +
-                            "\n                "
+                            "\n                    "
                         )
                       ]),
                   _vm._v(" "),
@@ -643,13 +643,13 @@ var render = function() {
                     { class: { "font-weight-bold": _vm.showNetPrices } },
                     [
                       _vm._v(
-                        "\n                    " +
+                        "\n                        " +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketSubTotal")
                           ) +
                           " " +
                           _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          "\n                "
+                          "\n                    "
                       )
                     ]
                   ),
@@ -658,9 +658,9 @@ var render = function() {
                     { class: { "font-weight-bold": _vm.showNetPrices } },
                     [
                       _vm._v(
-                        "\n                    " +
+                        "\n                        " +
                           _vm._s(_vm._f("currency")(_vm.basket.itemSumNet)) +
-                          "\n                "
+                          "\n                    "
                       )
                     ]
                   ),
@@ -670,7 +670,7 @@ var render = function() {
                     { class: { "font-weight-bold": !_vm.showNetPrices } },
                     [
                       _vm._v(
-                        "\n                    " +
+                        "\n                        " +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketSubTotal")
                           ) +
@@ -678,7 +678,7 @@ var render = function() {
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketGross")
                           ) +
-                          "\n                "
+                          "\n                    "
                       )
                     ]
                   ),
@@ -687,9 +687,9 @@ var render = function() {
                     { class: { "font-weight-bold": !_vm.showNetPrices } },
                     [
                       _vm._v(
-                        "\n                    " +
+                        "\n                        " +
                           _vm._s(_vm._f("currency")(_vm.basket.itemSum)) +
-                          "\n                "
+                          "\n                    "
                       )
                     ]
                   )
@@ -708,7 +708,7 @@ var render = function() {
                     { class: { "font-weight-bold": _vm.showNetPrices } },
                     [
                       _vm._v(
-                        "\n                    " +
+                        "\n                        " +
                           _vm._s(
                             _vm.$translate(
                               "Ceres::Template.basketShippingCosts"
@@ -716,7 +716,7 @@ var render = function() {
                           ) +
                           " " +
                           _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          "\n                "
+                          "\n                    "
                       )
                     ]
                   ),
@@ -728,11 +728,11 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                    " +
+                        "\n                        " +
                           _vm._s(
                             _vm._f("currency")(_vm.basket.shippingAmountNet)
                           ) +
-                          "\n                "
+                          "\n                    "
                       )
                     ]
                   )
@@ -747,7 +747,7 @@ var render = function() {
                     { class: { "font-weight-bold": !_vm.showNetPrices } },
                     [
                       _vm._v(
-                        "\n                    " +
+                        "\n                        " +
                           _vm._s(
                             _vm.$translate(
                               "Ceres::Template.basketShippingCosts"
@@ -757,7 +757,7 @@ var render = function() {
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketGross")
                           ) +
-                          "\n                "
+                          "\n                    "
                       )
                     ]
                   ),
@@ -769,11 +769,11 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                    " +
+                        "\n                        " +
                           _vm._s(
                             _vm._f("currency")(_vm.basket.shippingAmount)
                           ) +
-                          "\n                "
+                          "\n                    "
                       )
                     ]
                   )
@@ -789,9 +789,9 @@ var render = function() {
               ? [
                   _c("dt", { staticClass: "font-weight-bold" }, [
                     _vm._v(
-                      "\n                    " +
+                      "\n                        " +
                         _vm._s(_vm.$translate("Ceres::Template.basketCoupon")) +
-                        "\n                "
+                        "\n                    "
                     )
                   ]),
                   _c(
@@ -802,25 +802,15 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                    " +
+                        "\n                        " +
                           _vm._s(
                             _vm._f("currency")(_vm.basket.couponDiscount)
                           ) +
-                          "\n                "
+                          "\n                    "
                       )
                     ]
                   )
                 ]
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.visibleFields.includes("subAmount") ||
-            _vm.visibleFields.includes("basket.order_total_net") ||
-            _vm.visibleFields.includes("vats") ||
-            _vm.visibleFields.includes("basket.vat")
-              ? _c("div", {
-                  staticClass: "my-3",
-                  staticStyle: { "border-top": "1px solid #dee2e6" }
-                })
               : _vm._e(),
             _vm._v(" "),
             _vm._t("before-total-sum"),
@@ -833,13 +823,13 @@ var render = function() {
                     { class: { "font-weight-bold": _vm.showNetPrices } },
                     [
                       _vm._v(
-                        "\n                    " +
+                        "\n                        " +
                           _vm._s(
                             _vm.$translate("Ceres::Template.basketSubAmount")
                           ) +
                           " " +
                           _vm._s(_vm.$translate("Ceres::Template.basketNet")) +
-                          "\n                "
+                          "\n                    "
                       )
                     ]
                   ),
@@ -851,9 +841,9 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                    " +
+                        "\n                        " +
                           _vm._s(_vm._f("currency")(_vm.basket.subAmount)) +
-                          "\n                "
+                          "\n                    "
                       )
                     ]
                   )
@@ -868,18 +858,18 @@ var render = function() {
                 ? [
                     _c("dt", [
                       _vm._v(
-                        "\n                    " +
+                        "\n                        " +
                           _vm._s(_vm.$translate("Ceres::Template.basketVAT")) +
                           " " +
                           _vm._s(totalVat.vatValue) +
-                          "%\n                "
+                          "%\n                    "
                       )
                     ]),
                     _c("dd", { attrs: { "data-testing": "vat-amount" } }, [
                       _vm._v(
-                        "\n                    " +
+                        "\n                        " +
                           _vm._s(_vm._f("currency")(totalVat.vatAmount)) +
-                          "\n                "
+                          "\n                    "
                       )
                     ])
                   ]
@@ -905,9 +895,9 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                        " +
+                            "\n                            " +
                               _vm._s(property.name) +
-                              "\n                    "
+                              "\n                        "
                           )
                         ]
                       ),
@@ -919,9 +909,9 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                        " +
+                            "\n                            " +
                               _vm._s(_vm._f("currency")(property.price)) +
-                              "\n                    "
+                              "\n                        "
                           )
                         ]
                       )
@@ -934,11 +924,6 @@ var render = function() {
               "div",
               { staticClass: "totalSum" },
               [
-                _c("div", {
-                  staticClass: "my-3",
-                  staticStyle: { "border-top": "1px solid #dee2e6" }
-                }),
-                _vm._v(" "),
                 _vm.visibleFields.includes("totalSumNet") ||
                 _vm.visibleFields.includes("basket.order_total_net")
                   ? [
@@ -947,7 +932,7 @@ var render = function() {
                         { class: { "font-weight-bold": _vm.showNetPrices } },
                         [
                           _vm._v(
-                            "\n                        " +
+                            "\n                            " +
                               _vm._s(
                                 _vm.$translate("Ceres::Template.basketTotalSum")
                               ) +
@@ -955,7 +940,7 @@ var render = function() {
                               _vm._s(
                                 _vm.$translate("Ceres::Template.basketNet")
                               ) +
-                              "\n                    "
+                              "\n                        "
                           )
                         ]
                       ),
@@ -967,11 +952,11 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                        " +
+                            "\n                            " +
                               _vm._s(
                                 _vm._f("currency")(_vm.basket.basketAmountNet)
                               ) +
-                              "\n                    "
+                              "\n                        "
                           )
                         ]
                       )
@@ -986,7 +971,7 @@ var render = function() {
                         { class: { "font-weight-bold": !_vm.showNetPrices } },
                         [
                           _vm._v(
-                            "\n                        " +
+                            "\n                            " +
                               _vm._s(
                                 _vm.$translate("Ceres::Template.basketTotalSum")
                               ) +
@@ -994,7 +979,7 @@ var render = function() {
                               _vm._s(
                                 _vm.$translate("Ceres::Template.basketGross")
                               ) +
-                              "\n                    "
+                              "\n                        "
                           )
                         ]
                       ),
@@ -1006,11 +991,11 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                        " +
+                            "\n                            " +
                               _vm._s(
                                 _vm._f("currency")(_vm.basket.basketAmount)
                               ) +
-                              "\n                    "
+                              "\n                        "
                           )
                         ]
                       )
@@ -1024,11 +1009,11 @@ var render = function() {
                   ? [
                       _c("dt", { staticClass: "font-weight-bold" }, [
                         _vm._v(
-                          "\n                        " +
+                          "\n                            " +
                             _vm._s(
                               _vm.$translate("Ceres::Template.basketCoupon")
                             ) +
-                            "\n                    "
+                            "\n                        "
                         )
                       ]),
                       _c(
@@ -1039,11 +1024,11 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                        " +
+                            "\n                            " +
                               _vm._s(
                                 _vm._f("currency")(_vm.basket.couponDiscount)
                               ) +
-                              "\n                    "
+                              "\n                        "
                           )
                         ]
                       )
@@ -1056,11 +1041,11 @@ var render = function() {
                   ? [
                       _c("dt", { staticClass: "font-weight-bold" }, [
                         _vm._v(
-                          "\n                        " +
+                          "\n                            " +
                             _vm._s(
                               _vm.$translate("Ceres::Template.basketOpenAmount")
                             ) +
-                            "\n                    "
+                            "\n                        "
                         )
                       ]),
                       _c(
@@ -1071,11 +1056,11 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                        " +
+                            "\n                            " +
                               _vm._s(
                                 _vm._f("currency")(_vm.basket.openAmount)
                               ) +
-                              "\n                    "
+                              "\n                        "
                           )
                         ]
                       )
@@ -1095,7 +1080,9 @@ var render = function() {
     _vm.basket.isExportDelivery && _vm.deliveryExportTranslation
       ? _c("div", { staticClass: "alert alert-info w-100" }, [
           _vm._v(
-            "\n        " + _vm._s(_vm.deliveryExportTranslation) + "\n    "
+            "\n            " +
+              _vm._s(_vm.deliveryExportTranslation) +
+              "\n        "
           )
         ])
       : _vm._e()
