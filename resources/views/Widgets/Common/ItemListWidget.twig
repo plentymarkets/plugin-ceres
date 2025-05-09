@@ -100,7 +100,7 @@
                 <template #loading>
                     <div class="category-item-placeholder w-100 invisible">
                         <a href="#" class="small">
-                            <i class="fa fa-image"></i>
+                            <i class="fa fa-image" aria-hidden="true"></i>
                             <span></span>
                         </a>
                     </div>
@@ -168,7 +168,7 @@
                                         </template>
 
                                         <a href="{{ Twig.print("item.data | itemURL") }}" class="small">
-                                            <i class="fa fa-image"></i>
+                                            <i class="fa fa-image" aria-hidden="true"></i>
                                             <span>{{ Twig.print("item.data | itemName") }}</span>
                                         </a>
                                     </category-item>
@@ -181,7 +181,7 @@
                                 {{ Twig.for("item", "itemList.documents") }}
                                 <div class="category-item-placeholder invisible col-12 col-sm-6 col-md-3">
                                     <a href="{{ Twig.print("item.data | itemURL(buildUrlWithVariationId | json_encode)") }}" class="small">
-                                        <i class="fa fa-image"></i>
+                                        <i class="fa fa-image" aria-hidden="true"></i>
                                         <span>{{ Twig.print("item.data | itemName") }}</span>
                                     </a>
                                 </div>

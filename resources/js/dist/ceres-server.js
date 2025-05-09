@@ -42098,7 +42098,7 @@ var render = function() {
             },
             [
               _vm._ssrNode(
-                '<i class="fa fa-arrow-right fa-lg d-none d-sm-block"></i>'
+                '<i aria-hidden="true" class="fa fa-arrow-right fa-lg d-none d-sm-block"></i>'
               )
             ]
           )
@@ -42541,7 +42541,7 @@ var render = function() {
                           },
                           [
                             _vm._ssrNode(
-                              '<i class="fa fa-shopping-cart"></i>' +
+                              '<i aria-hidden="true" class="fa fa-shopping-cart"></i>' +
                                 _vm._ssrEscape(
                                   "\n                            " +
                                     _vm._s(
@@ -49857,7 +49857,7 @@ var render = function() {
                       _vm._ssrNode(
                         "<a" +
                           _vm._ssrAttr("href", _vm.$ceres.urls.myAccount) +
-                          ' class="list-group-item small"><i class="fa fa-user"></i>' +
+                          ' class="list-group-item small"><i aria-hidden="true" class="fa fa-user"></i>' +
                           _vm._ssrEscape(
                             " " +
                               _vm._s(
@@ -49875,7 +49875,7 @@ var render = function() {
                         },
                         [
                           _vm._ssrNode(
-                            '<i class="fa fa-sign-out"></i>' +
+                            '<i aria-hidden="true" class="fa fa-sign-out"></i>' +
                               _vm._ssrEscape(
                                 " " +
                                   _vm._s(
@@ -49993,8 +49993,8 @@ var render = function() {
           _vm._ssrEscape("\n        " + _vm._s(_vm.selectedFiles) + "\n    ") +
           "</span> " +
           (!_vm.selectedFiles
-            ? '<span class="input-unit-btn"><i class="fa fa-ellipsis-h"></i></span>'
-            : '<span data-testing="remove-attached-file" class="input-unit-btn"><i class="fa fa-times"></i></span>') +
+            ? '<span class="input-unit-btn"><i aria-hidden="true" class="fa fa-ellipsis-h"></i></span>'
+            : '<span data-testing="remove-attached-file" class="input-unit-btn"><i aria-hidden="true" class="fa fa-times"></i></span>') +
           ' <input type="file"' +
           _vm._ssrAttr("multiple", _vm.allowMultiple) +
           _vm._ssrAttr("name", _vm.formFieldId) +
@@ -51703,10 +51703,10 @@ var render = function() {
                       ) +
                       "</span></strong></span> " +
                       (!_vm.selectedFile
-                        ? '<span class="input-unit-btn"><i class="fa fa-ellipsis-h"></i></span>'
+                        ? '<span class="input-unit-btn"><i aria-hidden="true" class="fa fa-ellipsis-h"></i></span>'
                         : "<span" +
                           _vm._ssrAttr("disabled", _vm.waiting) +
-                          ' class="input-unit-btn"><i class="fa fa-times"></i></span>') +
+                          ' class="input-unit-btn"><i aria-hidden="true" class="fa fa-times"></i></span>') +
                       " <input" +
                       _vm._ssrAttr("disabled", _vm.waiting) +
                       ' type="file" size="50" data-testing="order-property-input-file">'
@@ -56775,7 +56775,7 @@ var render = function() {
                 "aria-label",
                 _vm.$translate("Ceres::Template.cookieBarPrivacySettings")
               ) +
-              ' class="btn btn-primary btn-appearance"><i class="fa fa-shield float-none"></i> <span class="d-none d-sm-inline-block">' +
+              ' class="btn btn-primary btn-appearance"><i aria-hidden="true" class="fa fa-shield float-none"></i> <span class="d-none d-sm-inline-block">' +
               _vm._ssrEscape(
                 _vm._s(
                   _vm.$translate("Ceres::Template.cookieBarPrivacySettings")
@@ -56850,7 +56850,7 @@ var render = function() {
                 _vm._s(_vm.buttonTranslations[_vm.targetLang]) +
                 "\n                "
             ) +
-            '</a> <a href="#" class="m-sm-1"><i class="fa fa-fw fa-close"></i></a></div></div></div>'
+            '</a> <a href="#" class="m-sm-1"><i aria-hidden="true" class="fa fa-fw fa-close"></i></a></div></div></div>'
         )
       ])
     : _vm._e()
@@ -57186,7 +57186,10 @@ var render = function() {
         [
           _vm._t("handle", [
             _c("button", { staticClass: "btn btn-icon btn-secondary btn-sm" }, [
-              _c("i", { staticClass: "fa fa-info" })
+              _c("i", {
+                staticClass: "fa fa-info",
+                attrs: { "aria-hidden": "true" }
+              })
             ])
           ])
         ],
@@ -57492,7 +57495,7 @@ var render = function() {
                 },
                 [
                   _vm._ssrNode(
-                    "<i" +
+                    '<i aria-hidden="true"' +
                       _vm._ssrClass(
                         null,
                         "flag-icon flag-icon-" +

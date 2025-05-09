@@ -7,7 +7,7 @@
 
         <div class="add-to-basket-lg-container d-none d-lg-block" v-if="!showQuantity && useLargeScale && !canBeAddedToBasket"
              v-tooltip data-toggle="tooltip" data-placement="top" :title="$translate('Ceres::Template.itemShowItem')" @click="directToItem()">
-            <i class="fa fa-arrow-right fa-lg d-none d-sm-block"></i>
+            <i class="fa fa-arrow-right fa-lg d-none d-sm-block" aria-hidden="true"></i>
         </div>
 
         <div class="d-inline" v-if="showQuantity && !useLargeScale" :class="{'d-lg-none': !$ceres.isItemView }">

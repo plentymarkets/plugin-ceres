@@ -110,7 +110,7 @@
 
         <div v-else>
             <button class="btn btn-primary btn-appearance" @click.prevent.stop="isCollapsed = false" :aria-label="$translate('Ceres::Template.cookieBarPrivacySettings')">
-                <i class="fa fa-shield float-none"></i>
+                <i class="fa fa-shield float-none" aria-hidden="true"></i>
                 <span class="d-none d-sm-inline-block">{{ $translate("Ceres::Template.cookieBarPrivacySettings") }}</span>
             </button>
         </div>

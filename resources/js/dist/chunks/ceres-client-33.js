@@ -146,7 +146,10 @@ var render = function() {
       _vm._v(" "),
       !_vm.selectedFiles
         ? _c("span", { staticClass: "input-unit-btn" }, [
-            _c("i", { staticClass: "fa fa-ellipsis-h" })
+            _c("i", {
+              staticClass: "fa fa-ellipsis-h",
+              attrs: { "aria-hidden": "true" }
+            })
           ])
         : _c(
             "span",
@@ -160,7 +163,12 @@ var render = function() {
                 }
               }
             },
-            [_c("i", { staticClass: "fa fa-times" })]
+            [
+              _c("i", {
+                staticClass: "fa fa-times",
+                attrs: { "aria-hidden": "true" }
+              })
+            ]
           ),
       _vm._v(" "),
       _c("input", {
