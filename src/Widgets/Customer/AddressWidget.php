@@ -53,6 +53,7 @@ class AddressWidget extends BaseWidget
                     ->addEntry("female", "Widget.addressDefaultSalutationValueFemale")
                     ->addEntry("diverse", "Widget.addressDefaultSalutationValueDiverse")
                     ->addEntry("company", "Widget.addressDefaultSalutationValueCompany")
+                    ->addEntry("notToSay", "Widget.addressDefaultSalutationValuePreferNotToSay")
                     ->toArray()
             );
 

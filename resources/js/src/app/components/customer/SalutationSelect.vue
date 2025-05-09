@@ -63,6 +63,10 @@ export default {
                 {
                     key: "company",
                     name: "addressSalutationCompany"
+                },
+                {
+                  key: "notToSay",
+                  name: "addressSalutationPreferNotToSay"
                 }
             ]
         };
@@ -116,7 +120,7 @@ export default {
         {
             const isNewGenderPersonal = this.getIsGenderPersonal(value)
             const isOldGenderPersonal = this.getIsGenderPersonal(this.addressData.gender)
-            
+
             this.$emit("input", { field: "gender", value: value });
 
             // just reset the input fields, when switching the gender between a personal one and company
