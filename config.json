@@ -3009,6 +3009,10 @@
                             {
                                 "value": "company",
                                 "caption": "Config.addressDefaultSalutationValueCompany"
+                            },
+                            {
+                                "value": "notToSay",
+                                "caption": "Config.addressDefaultSalutationValuePreferNotToSay"
                             }
                         ]
                     }

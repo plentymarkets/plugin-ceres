@@ -69393,6 +69393,10 @@ var actions = {
       if (option && isNaN(Date.parse(option.value))) {
         option.value = dayjs__WEBPACK_IMPORTED_MODULE_6___default()(option.value * 1000).format("YYYY-MM-DD");
       }
+
+      if (!address.gender) {
+        address.gender = "notToSay";
+      }
     });
     commit("setBillingAddressList", addressList);
     commit("selectBillingAddress", addressList.find(function (address) {
@@ -69414,6 +69418,11 @@ var actions = {
       id = -99;
     }
 
+    addressList.forEach(function (address) {
+      if (!address.gender) {
+        address.gender = "notToSay";
+      }
+    });
     commit("setDeliveryAddressList", addressList);
     commit("selectDeliveryAddress", addressList.find(function (address) {
       return address.id === id;
