@@ -106,7 +106,10 @@
                 </template>
                 <!-- Coupon -->
 
-                <hr v-if="visibleFields.includes('subAmount') || visibleFields.includes('basket.order_total_net') || visibleFields.includes('vats') || visibleFields.includes('basket.vat')">
+                <hr aria-hidden="true" v-if="visibleFields.includes('subAmount') ||
+                     visibleFields.includes('basket.order_total_net') ||
+                     visibleFields.includes('vats') || visibleFields.includes('basket.vat')">
+
                 <slot name="before-total-sum"></slot>
 
                 <!-- Subamount (net) -->
@@ -149,7 +152,7 @@
                 <!-- AdditionalCosts or order properties without tax -->
 
                 <div class="totalSum">
-                    <hr>
+                    <hr aria-hidden="true">
 
                     <!-- Total sum (net) -->
                     <template v-if="visibleFields.includes('totalSumNet') || visibleFields.includes('basket.order_total_net')">
