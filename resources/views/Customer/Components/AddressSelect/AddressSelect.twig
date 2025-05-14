@@ -79,7 +79,7 @@
                                     :data-index="index"
                                     :watch-data="true"
                                 >
-                                    <li class="item">
+                                    <li class="item" role="radiogroup" :aria-label="{{ trans("Ceres::Template.checkoutShippingAddress") }}" aria-hidden="true">
                                         <input
                                             type="radio"
                                             :name="'shippingAddress' + _uid"
@@ -171,7 +171,7 @@
                             </button>
                         </div>
 
-                        <div class="modal-body" role="group" aria-label="{{ trans("Ceres::Template.addressInvoiceAddressCreate") }}">
+                        <div class="modal-body" role="group" aria-label="{{ trans("Ceres::Template.addressShippingAddressCreate") }}">
                             <create-update-address
                                 template="#vue-create-update-address"
                                 :address-data="addressToEdit"
@@ -200,7 +200,7 @@
                             </button>
                         </div>
 
-                        <div role="group" aria-label="{{ trans("Ceres::Template.addressInvoiceAddressDelete") }}" class="modal-body" {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-remove-modal-body'\"") | raw }}>
+                        <div role="group" aria-label="{{ trans("Ceres::Template.addressShippingAddressDelete") }}" class="modal-body" {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-remove-modal-body'\"") | raw }}>
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="modal-address">
