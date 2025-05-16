@@ -2,6 +2,9 @@
 
 ## v5.0.73 (2025-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.72...5.0.73" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
+### Added
+- External name option to manufacturer widget
+
 ### Changed
 - Changed label colors for improved color contrast accessibility.
 - Increased quantity buttons & checkout checkmark sizes to address touch targets accessibility issue.
