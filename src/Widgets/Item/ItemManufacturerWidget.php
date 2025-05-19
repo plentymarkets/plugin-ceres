@@ -57,6 +57,7 @@ class ItemManufacturerWidget extends BaseWidget
             ->withName("Widget.selectionSelectTypeManufacturerFields")
             ->withDefaultValue([
                 "name",
+                "externalName",
                 "legalName",
                 "street",
                 "houseNr",
@@ -72,6 +73,7 @@ class ItemManufacturerWidget extends BaseWidget
         ->withCheckboxValues(
             ValueListFactory::make()
                 ->addEntry("name", "Widget.itemManufacturerName")
+                ->addEntry("externalName", "Widget.itemManufacturerExternalName")
                 ->addEntry("legalName", "Widget.itemManufacturerLegalName")
                 ->addEntry("street", "Widget.itemManufacturerStreet")
                 ->addEntry("houseNr", "Widget.itemManufacturerHouseNr")

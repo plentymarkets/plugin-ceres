@@ -72,6 +72,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ManufacturerDetails",
   props: {
@@ -135,8 +136,10 @@ var render = function() {
               ? _c("div", { staticClass: "p-0" }, [
                   _c("span", [_vm._v(_vm._s(_vm.manufacturer.name))])
                 ])
-              : _vm.manufacturer.externalName &&
-                _vm.visibleFields.includes("name")
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.manufacturer.externalName &&
+            _vm.visibleFields.includes("externalName")
               ? _c("div", { staticClass: "p-0" }, [
                   _c("span", [_vm._v(_vm._s(_vm.manufacturer.externalName))])
                 ])

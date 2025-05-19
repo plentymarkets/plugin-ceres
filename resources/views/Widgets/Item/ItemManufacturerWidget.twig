@@ -25,6 +25,10 @@
                     <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleName") }}</p>
                 {% endif %}
 
+                {% if "externalName" in visibleFields %}
+                    <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleExternalName") }}</p>
+                {% endif %}
+
                 {% if "legalName" in visibleFields %}
                     <p class="mb-0">{{ trans("Ceres::Widget.itemManufacturerSampleLegalName") }}</p>
                 {% endif %}
