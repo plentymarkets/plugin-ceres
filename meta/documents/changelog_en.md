@@ -18,6 +18,7 @@
 
 - Fixed an error that caused the scroll bar to jump erratically in Mozilla and Safari browsers.
 - Due to an error, the feedback rating filter was not functioning properly in ShopBuilder. This has been fixed.
+- Fixed an accessibility issue regarding the address selection.
 
 ## v5.0.72 (2025-04-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.71...5.0.72" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
