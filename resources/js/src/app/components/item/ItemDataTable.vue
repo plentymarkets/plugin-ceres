@@ -3,7 +3,7 @@
         <tbody>
         <template v-for="itemDataAccessor in itemInformation">
             <tr v-if="isCheckedAndNotEmpty(itemDataAccessor)">
-                <td :class="paddingClasses" :style="paddingInlineStyles">
+                <td :class="paddingClasses" :style="paddingInlineStyles" role="presentation">
                     {{ getTranslation(itemDataAccessor) }}
                 </td>
 
