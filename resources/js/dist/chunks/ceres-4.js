@@ -2894,33 +2894,50 @@ var render = function() {
             _vm.isParcelOrOfficeAvailable
               ? _c("div", { staticClass: "col-12" }, [
                   _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-12" }, [
-                      _c("input", {
+                    _c(
+                      "div",
+                      {
+                        staticClass: "col-12",
                         attrs: {
-                          type: "checkbox",
-                          name: "togglePickup",
-                          id: "showPickup" + _vm._uid
-                        },
-                        domProps: { checked: _vm.value.showPickupStation },
-                        on: {
-                          change: function($event) {
-                            return _vm.togglePickupStation(
-                              $event.target.checked
-                            )
-                          }
+                          role: "checkbox",
+                          "aria-label": _vm.$translate(
+                            "Ceres::Template.addressToPickupStation"
+                          ),
+                          "aria-hidden": "true"
                         }
-                      }),
-                      _vm._v(" "),
-                      _c("label", { attrs: { for: "showPickup" + _vm._uid } }, [
-                        _vm._v(
-                          _vm._s(
-                            _vm.$translate(
-                              "Ceres::Template.addressToPickupStation"
+                      },
+                      [
+                        _c("input", {
+                          attrs: {
+                            type: "checkbox",
+                            name: "togglePickup",
+                            id: "showPickup" + _vm._uid
+                          },
+                          domProps: { checked: _vm.value.showPickupStation },
+                          on: {
+                            change: function($event) {
+                              return _vm.togglePickupStation(
+                                $event.target.checked
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          { attrs: { for: "showPickup" + _vm._uid } },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.addressToPickupStation"
+                                )
+                              )
                             )
-                          )
+                          ]
                         )
-                      ])
-                    ])
+                      ]
+                    )
                   ])
                 ])
               : _vm._e(),
@@ -5931,33 +5948,50 @@ var render = function() {
             _vm.isParcelOrOfficeAvailable
               ? _c("div", { staticClass: "col-12" }, [
                   _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-12" }, [
-                      _c("input", {
+                    _c(
+                      "div",
+                      {
+                        staticClass: "col-12",
                         attrs: {
-                          type: "checkbox",
-                          name: "togglePickup",
-                          id: "showPickup" + _vm._uid
-                        },
-                        domProps: { checked: _vm.value.showPickupStation },
-                        on: {
-                          change: function($event) {
-                            return _vm.togglePickupStation(
-                              $event.target.checked
-                            )
-                          }
+                          role: "checkbox",
+                          "aria-label": _vm.$translate(
+                            "Ceres::Template.addressToPickupStation"
+                          ),
+                          "aria-hidden": "true"
                         }
-                      }),
-                      _vm._v(" "),
-                      _c("label", { attrs: { for: "showPickup" + _vm._uid } }, [
-                        _vm._v(
-                          _vm._s(
-                            _vm.$translate(
-                              "Ceres::Template.addressToPickupStation"
+                      },
+                      [
+                        _c("input", {
+                          attrs: {
+                            type: "checkbox",
+                            name: "togglePickup",
+                            id: "showPickup" + _vm._uid
+                          },
+                          domProps: { checked: _vm.value.showPickupStation },
+                          on: {
+                            change: function($event) {
+                              return _vm.togglePickupStation(
+                                $event.target.checked
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          { attrs: { for: "showPickup" + _vm._uid } },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.addressToPickupStation"
+                                )
+                              )
                             )
-                          )
+                          ]
                         )
-                      ])
-                    ])
+                      ]
+                    )
                   ])
                 ])
               : _vm._e(),
