@@ -48855,7 +48855,7 @@ var render = function() {
                   ) +
                   "</label></div></div>"
                 : "<!---->") +
-              ' <input type="text" name="username" autocomplete="new-password" tabindex="-1" aria-hidden="true"' +
+              ' <input type="text" name="username" autocomplete="new-password" tabindex="-1" title="honeypot"' +
               _vm._ssrAttr("value", _vm.honeypot) +
               ' class="honey"> '
           ),
