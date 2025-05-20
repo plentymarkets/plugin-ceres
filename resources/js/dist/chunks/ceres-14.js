@@ -521,7 +521,8 @@ var render = function() {
                       "td",
                       {
                         class: _vm.paddingClasses,
-                        style: _vm.paddingInlineStyles
+                        style: _vm.paddingInlineStyles,
+                        attrs: { role: "presentation" }
                       },
                       [
                         _vm._v(
