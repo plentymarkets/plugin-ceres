@@ -7718,6 +7718,7 @@ var render = function() {
             name: "username",
             autocomplete: "new-password",
             tabindex: "-1",
+            "aria-label": "honeypot",
             title: "honeypot"
           },
           domProps: { value: _vm.honeypot },

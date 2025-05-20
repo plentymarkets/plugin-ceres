@@ -48855,7 +48855,7 @@ var render = function() {
                   ) +
                   "</label></div></div>"
                 : "<!---->") +
-              ' <input type="text" name="username" autocomplete="new-password" tabindex="-1" title="honeypot"' +
+              ' <input type="text" name="username" autocomplete="new-password" tabindex="-1" aria-label="honeypot" title="honeypot"' +
               _vm._ssrAttr("value", _vm.honeypot) +
               ' class="honey"> '
           ),
@@ -57195,14 +57195,9 @@ var render = function() {
               "button",
               {
                 staticClass: "btn btn-icon btn-secondary btn-sm",
-                attrs: { "aria-label": "More information" }
+                attrs: { "aria-hidden": "true" }
               },
-              [
-                _c("i", {
-                  staticClass: "fa fa-info",
-                  attrs: { "aria-hidden": "true" }
-                })
-              ]
+              [_c("i", { staticClass: "fa fa-info" })]
             )
           ])
         ],

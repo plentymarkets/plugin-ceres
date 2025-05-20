@@ -41126,9 +41126,9 @@ var staticRenderFns = [
       "button",
       {
         staticClass: "btn btn-icon btn-secondary btn-sm",
-        attrs: { "aria-label": "More information" }
+        attrs: { "aria-hidden": "true" }
       },
-      [_c("i", { staticClass: "fa fa-info", attrs: { "aria-hidden": "true" } })]
+      [_c("i", { staticClass: "fa fa-info" })]
     )
   }
 ]
