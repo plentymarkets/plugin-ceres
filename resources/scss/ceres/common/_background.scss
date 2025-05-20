@@ -69,3 +69,10 @@
         }
     }
 }
+.login-pwd-reset label[for^="email"] {
+    color: $gray-700;
+}
+  
+.login-pwd-reset label[for^="password"] {
+    color: $gray-700;
+}

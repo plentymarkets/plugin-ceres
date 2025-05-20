@@ -8823,6 +8823,13 @@ a.close.disabled {
         }
     }
 }
+.login-pwd-reset label[for^="email"] {
+    color: $gray-700;
+}
+  
+.login-pwd-reset label[for^="password"] {
+    color: $gray-700;
+}
 .input-group {
 
     .input-unit + .input-group-btn {
