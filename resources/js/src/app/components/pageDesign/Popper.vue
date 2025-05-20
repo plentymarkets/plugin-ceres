@@ -3,7 +3,7 @@
 		<div class="popper-handle" ref="handle">
 			<slot name="handle">
 				<!--Element to trigger popper -->
-                <button class="btn btn-icon btn-secondary btn-sm">
+                <button class="btn btn-icon btn-secondary btn-sm" aria-label='More information'>
                     <i class="fa fa-info" aria-hidden="true"></i>
                 </button>
 			</slot>
