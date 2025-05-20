@@ -7718,7 +7718,7 @@ var render = function() {
             name: "username",
             autocomplete: "new-password",
             tabindex: "-1",
-            "aria-hidden": ""
+            "aria-hidden": "true"
           },
           domProps: { value: _vm.honeypot },
           on: {
