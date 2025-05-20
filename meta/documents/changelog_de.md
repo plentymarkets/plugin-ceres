@@ -18,6 +18,7 @@
 
 - Es wurde ein Fehler behoben, durch den die Scroll-Leiste in Mozilla- und Safari-Browsern ruckartig gesprungen ist.
 - Durch einen Fehler funktionierte der Feedback-Filter für Artikel im ShopBuilder nicht wie beabsichtigt. Dies wurde behoben.
+- Es wurde ein Barrierefreiheits-Fehler in der Adressauswahl behoben.
 
 ## v5.0.72 (2025-04-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.71...5.0.72" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
