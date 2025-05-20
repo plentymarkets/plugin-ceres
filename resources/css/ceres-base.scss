@@ -10488,7 +10488,7 @@ $border-width: 1px;
         font-size: .65em;
         font-weight: 600;
         line-height: 1em !important;
-        color: $gray-500;
+        color: $gray-700;
         text-overflow: ellipsis;
         text-transform: uppercase;
         letter-spacing: .1px;
@@ -10502,7 +10502,7 @@ $border-width: 1px;
         -moz-osx-font-smoothing: grayscale;
 
         /* Enable click-through */
-        pointer-events: none; 
+        pointer-events: none;
 
         &.disabled,
         &:disabled {
