@@ -45015,7 +45015,12 @@ var render = function() {
             _vm._ssrNode(
               " " +
                 (_vm.isParcelOrOfficeAvailable
-                  ? '<div class="col-12"><div class="row"><div class="col-12"><input type="checkbox" name="togglePickup"' +
+                  ? '<div class="col-12"><div class="row"><div role="checkbox"' +
+                    _vm._ssrAttr(
+                      "aria-label",
+                      _vm.$translate("Ceres::Template.addressToPickupStation")
+                    ) +
+                    ' aria-hidden="true" class="col-12"><input type="checkbox" name="togglePickup"' +
                     _vm._ssrAttr("id", "showPickup" + _vm._uid) +
                     _vm._ssrAttr("checked", _vm.value.showPickupStation) +
                     "> <label" +
@@ -47399,7 +47404,12 @@ var render = function() {
             _vm._ssrNode(
               " " +
                 (_vm.isParcelOrOfficeAvailable
-                  ? '<div class="col-12"><div class="row"><div class="col-12"><input type="checkbox" name="togglePickup"' +
+                  ? '<div class="col-12"><div class="row"><div role="checkbox"' +
+                    _vm._ssrAttr(
+                      "aria-label",
+                      _vm.$translate("Ceres::Template.addressToPickupStation")
+                    ) +
+                    ' aria-hidden="true" class="col-12"><input type="checkbox" name="togglePickup"' +
                     _vm._ssrAttr("id", "showPickup" + _vm._uid) +
                     _vm._ssrAttr("checked", _vm.value.showPickupStation) +
                     "> <label" +

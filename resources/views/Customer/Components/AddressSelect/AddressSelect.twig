@@ -79,7 +79,7 @@
                                     :data-index="index"
                                     :watch-data="true"
                                 >
-                                    <li class="item">
+                                    <li class="item" role="radiogroup" :aria-label="{{ trans("Ceres::Template.checkoutShippingAddress") }}" aria-hidden="true">
                                         <input
                                             type="radio"
                                             :name="'shippingAddress' + _uid"
@@ -171,20 +171,18 @@
                             </button>
                         </div>
 
-                        <div class="modal-body">
-                            <fieldset>
-                                <create-update-address
-                                    template="#vue-create-update-address"
-                                    :address-data="addressToEdit"
-                                    :address-modal="addressModal"
-                                    :modal-type="modalType"
-                                    :address-type="addressType"
-                                    @input="setAddressToEditField($event)"
-                                    :optional-address-fields="optionalAddressFields"
-                                    :required-address-fields="requiredAddressFields"
-                                    :default-salutation="defaultSalutation">
-                                </create-update-address>
-                            </fieldset>
+                        <div class="modal-body" role="group" aria-label="{{ trans("Ceres::Template.addressShippingAddressCreate") }}">
+                            <create-update-address
+                                template="#vue-create-update-address"
+                                :address-data="addressToEdit"
+                                :address-modal="addressModal"
+                                :modal-type="modalType"
+                                :address-type="addressType"
+                                @input="setAddressToEditField($event)"
+                                :optional-address-fields="optionalAddressFields"
+                                :required-address-fields="requiredAddressFields"
+                                :default-salutation="defaultSalutation">
+                            </create-update-address>
                         </div>
                     </div>
                 </div>
@@ -202,29 +200,27 @@
                             </button>
                         </div>
 
-                        <div class="modal-body" {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-remove-modal-body'\"") | raw }}>
-                            <fieldset>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="modal-address">
-                                            <strong v-if="addressToDelete.name1 && addressToDelete.name1.length > 0">${addressToDelete.name1}</strong>
-                                            <strong v-if="!addressToDelete.name1 || addressToDelete.name1.length == 0">${addressToDelete | optionType(11)} ${addressToDelete.name2} ${addressToDelete.name3}</strong>
-                                            <span v-else>${selectedAddress | optionType(11)} ${addressToDelete.name2} ${addressToDelete.name3}</span>
-                                            <span>${addressToDelete.name4}</span>
-                                            <span>${addressToDelete.address1} ${addressToDelete.address2}</span>
-                                            <span>
-                                                <template v-if="addressToDelete.address1 === 'PACKSTATION' || addressToDelete.address1 === 'POSTFILIALE'">
-                                                    {{ trans("Ceres::Template.addressPostNummer") }}
-                                                    ${addressToDelete | optionType(6)}
-                                                </template> 
-                                                ${ addressToDelete.address3 }
-                                            </span>
-                                            <span>${addressToDelete.postalCode} ${addressToDelete.town}</span>
-                                            <span>${getCountryName(addressToDelete.countryId)}</span>
-                                        </div>
+                        <div role="group" aria-label="{{ trans("Ceres::Template.addressShippingAddressDelete") }}" class="modal-body" {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-remove-modal-body'\"") | raw }}>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="modal-address">
+                                        <strong v-if="addressToDelete.name1 && addressToDelete.name1.length > 0">${addressToDelete.name1}</strong>
+                                        <strong v-if="!addressToDelete.name1 || addressToDelete.name1.length == 0">${addressToDelete | optionType(11)} ${addressToDelete.name2} ${addressToDelete.name3}</strong>
+                                        <span v-else>${selectedAddress | optionType(11)} ${addressToDelete.name2} ${addressToDelete.name3}</span>
+                                        <span>${addressToDelete.name4}</span>
+                                        <span>${addressToDelete.address1} ${addressToDelete.address2}</span>
+                                        <span>
+                                            <template v-if="addressToDelete.address1 === 'PACKSTATION' || addressToDelete.address1 === 'POSTFILIALE'">
+                                                {{ trans("Ceres::Template.addressPostNummer") }}
+                                                ${addressToDelete | optionType(6)}
+                                            </template>
+                                            ${ addressToDelete.address3 }
+                                        </span>
+                                        <span>${addressToDelete.postalCode} ${addressToDelete.town}</span>
+                                        <span>${getCountryName(addressToDelete.countryId)}</span>
                                     </div>
                                 </div>
-                            </fieldset>
+                            </div>
                         </div>
 
                         <div class="modal-footer" {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-remove-modal-footer'\"") | raw }}>
