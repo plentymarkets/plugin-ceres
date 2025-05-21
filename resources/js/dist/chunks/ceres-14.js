@@ -508,7 +508,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "table",
-    { staticClass: "table table-striped table-hover table-sm" },
+    {
+      staticClass: "table table-striped table-hover table-sm",
+      attrs: { role: "table" }
+    },
     [
       _c(
         "tbody",
@@ -516,12 +519,13 @@ var render = function() {
           _vm._l(_vm.itemInformation, function(itemDataAccessor) {
             return [
               _vm.isCheckedAndNotEmpty(itemDataAccessor)
-                ? _c("tr", [
+                ? _c("tr", { attrs: { role: "row" } }, [
                     _c(
                       "td",
                       {
                         class: _vm.paddingClasses,
-                        style: _vm.paddingInlineStyles
+                        style: _vm.paddingInlineStyles,
+                        attrs: { role: "rowheader" }
                       },
                       [
                         _vm._v(
@@ -536,7 +540,8 @@ var render = function() {
                       "td",
                       {
                         class: _vm.paddingClasses,
-                        style: _vm.paddingInlineStyles
+                        style: _vm.paddingInlineStyles,
+                        attrs: { role: "cell" }
                       },
                       [
                         _vm._v(
