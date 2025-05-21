@@ -57187,18 +57187,16 @@ var render = function() {
     "div",
     [
       _vm._ssrNode(
-        '<div class="popper-handle test">',
+        '<div class="popper-handle">',
         "</div>",
         [
           _vm._t("handle", [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-icon btn-secondary btn-sm",
-                attrs: { "aria-label": "more information" }
-              },
-              [_c("i", { staticClass: "fa fa-info" })]
-            )
+            _c("button", { staticClass: "btn btn-icon btn-secondary btn-sm" }, [
+              _c("i", {
+                staticClass: "fa fa-info",
+                attrs: { "aria-hidden": "true" }
+              })
+            ])
           ])
         ],
         2

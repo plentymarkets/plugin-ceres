@@ -41086,7 +41086,7 @@ var render = function() {
   return _c("div", [
     _c(
       "div",
-      { ref: "handle", staticClass: "popper-handle test" },
+      { ref: "handle", staticClass: "popper-handle" },
       [_vm._t("handle", [_vm._m(0)])],
       2
     ),
@@ -41122,14 +41122,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-icon btn-secondary btn-sm",
-        attrs: { "aria-label": "more information" }
-      },
-      [_c("i", { staticClass: "fa fa-info" })]
-    )
+    return _c("button", { staticClass: "btn btn-icon btn-secondary btn-sm" }, [
+      _c("i", { staticClass: "fa fa-info", attrs: { "aria-hidden": "true" } })
+    ])
   }
 ]
 render._withStripped = true
