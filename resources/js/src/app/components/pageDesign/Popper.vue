@@ -1,9 +1,9 @@
 <template>
   	<div>
-		<div class="popper-handle" ref="handle">
+		<div class="popper-handle test" ref="handle" >
 			<slot name="handle">
 				<!--Element to trigger popper -->
-                <button class="btn btn-icon btn-secondary btn-sm" aria-hidden="true">
+                <button class="btn btn-icon btn-secondary btn-sm" aria-label="more information">
                     <i class="fa fa-info"></i>
                 </button>
 			</slot>

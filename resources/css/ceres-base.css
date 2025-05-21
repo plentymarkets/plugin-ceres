@@ -9990,14 +9990,6 @@ h3 {
   color: #495057;
 }
 
-.login-pwd-reset label[for^=email] {
-  color: #495057;
-}
-
-.login-pwd-reset label[for^=password] {
-  color: #495057;
-}
-
 .input-group .input-unit + .input-group-btn {
   padding-bottom: 15px;
 }

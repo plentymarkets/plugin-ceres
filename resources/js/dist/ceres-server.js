@@ -57187,7 +57187,7 @@ var render = function() {
     "div",
     [
       _vm._ssrNode(
-        '<div class="popper-handle">',
+        '<div class="popper-handle test">',
         "</div>",
         [
           _vm._t("handle", [
@@ -57195,7 +57195,7 @@ var render = function() {
               "button",
               {
                 staticClass: "btn btn-icon btn-secondary btn-sm",
-                attrs: { "aria-hidden": "true" }
+                attrs: { "aria-label": "more information" }
               },
               [_c("i", { staticClass: "fa fa-info" })]
             )

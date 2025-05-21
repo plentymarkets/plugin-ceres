@@ -41086,7 +41086,7 @@ var render = function() {
   return _c("div", [
     _c(
       "div",
-      { ref: "handle", staticClass: "popper-handle" },
+      { ref: "handle", staticClass: "popper-handle test" },
       [_vm._t("handle", [_vm._m(0)])],
       2
     ),
@@ -41126,7 +41126,7 @@ var staticRenderFns = [
       "button",
       {
         staticClass: "btn btn-icon btn-secondary btn-sm",
-        attrs: { "aria-hidden": "true" }
+        attrs: { "aria-label": "more information" }
       },
       [_c("i", { staticClass: "fa fa-info" })]
     )
