@@ -7338,6 +7338,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -50478,7 +50496,7 @@ var render = function() {
     },
     [
       _vm._ssrNode(
-        "<tbody>" +
+        '<thead><tr><th scope="col" aria-hidden="false" class="visually-hidden">\n                Product property type\n            </th> <th scope="col" aria-hidden="false" class="visually-hidden">\n                Value of Product property\n            </th></tr></thead> <tbody>' +
           _vm._ssrList(_vm.itemInformation, function(itemDataAccessor) {
             return _vm.isCheckedAndNotEmpty(itemDataAccessor)
               ? '<tr role="row"><td role="rowheader"' +

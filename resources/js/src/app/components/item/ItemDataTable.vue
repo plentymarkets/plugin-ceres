@@ -1,5 +1,23 @@
 <template>
     <table class="table table-striped table-hover table-sm" role="table">
+        <thead>
+            <tr>
+                <th 
+                    scope="col" 
+                    class="visually-hidden" 
+                    aria-hidden="false"
+                >
+                    Product property type
+                </th>
+                <th 
+                    scope="col" 
+                    class="visually-hidden" 
+                    aria-hidden="false"
+                >
+                    Value of Product property
+                </th>
+            </tr>
+        </thead>  
         <tbody>
         <template v-for="itemDataAccessor in itemInformation">
             <tr v-if="isCheckedAndNotEmpty(itemDataAccessor)" role="row">

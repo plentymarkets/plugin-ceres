@@ -30,6 +30,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -513,6 +531,8 @@ var render = function() {
       attrs: { role: "table" }
     },
     [
+      _vm._m(0),
+      _vm._v(" "),
       _c(
         "tbody",
         [
@@ -561,7 +581,34 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c(
+          "th",
+          {
+            staticClass: "visually-hidden",
+            attrs: { scope: "col", "aria-hidden": "false" }
+          },
+          [_vm._v("\n                Product property type\n            ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass: "visually-hidden",
+            attrs: { scope: "col", "aria-hidden": "false" }
+          },
+          [_vm._v("\n                Value of Product property\n            ")]
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
