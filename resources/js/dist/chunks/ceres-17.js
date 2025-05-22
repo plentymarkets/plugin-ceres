@@ -392,26 +392,30 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
 
       var invalidSelection = invalidSelections[0] || invalidSelections[1];
       var names = [];
+      console.log('invalidSelections[0]: ', invalidSelections[0]);
+      console.log('invalidSelections[1]: ', invalidSelections[1]);
 
-      var _iterator2 = _createForOfIteratorHelper(invalidSelection.attributesToReset),
-          _step2;
+      if (invalidSelection) {
+        var _iterator2 = _createForOfIteratorHelper(invalidSelection.attributesToReset),
+            _step2;
 
-      try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-          var attribute = _step2.value;
+        try {
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+            var attribute = _step2.value;
 
-          if (attribute.attributeId !== attributeId) {
-            names.push("<b>" + attribute.name + "</b>");
+            if (attribute.attributeId !== attributeId) {
+              names.push("<b>" + attribute.name + "</b>");
+            }
           }
+        } catch (err) {
+          _iterator2.e(err);
+        } finally {
+          _iterator2.f();
         }
-      } catch (err) {
-        _iterator2.e(err);
-      } finally {
-        _iterator2.f();
-      }
 
-      if (invalidSelection.newUnit) {
-        names.push("<b>" + this.$translate("Ceres::Template.singleItemContent") + "</b>");
+        if (invalidSelection.newUnit) {
+          names.push("<b>" + this.$translate("Ceres::Template.singleItemContent") + "</b>");
+        }
       }
 
       if (!names.length) {
