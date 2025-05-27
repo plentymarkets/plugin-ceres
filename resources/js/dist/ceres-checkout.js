@@ -70542,7 +70542,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("customer-sign-input", {
-  template: "\n    <div class=\"input-unit\">\n        <input type=\"text\" @change=\"setCustomerSign($event.srcElement.value)\" :id=\"'customer-sign_' + _uid\" :maxlength=\"maxLength\">\n        <label :for=\"'customer-sign_' + _uid\" class=\"customer-sign-label\">\n            ".concat(_services_TranslationService__WEBPACK_IMPORTED_MODULE_9__["default"].translate("Ceres::Template.checkoutCustomerSign"), "\n        </label>\n    </div>"),
+  template: "\n    <div class=\"input-unit\">\n        <input type=\"text\" @change=\"setCustomerSign($event.srcElement.value)\" :id=\"'customer-sign_' + _uid\" :maxlength=\"maxLength\">\n        <label :for=\"'customer-sign_' + _uid\">\n            ".concat(_services_TranslationService__WEBPACK_IMPORTED_MODULE_9__["default"].translate("Ceres::Template.checkoutCustomerSign"), "\n        </label>\n    </div>"),
   props: {
     maxLength: {
       type: Number,

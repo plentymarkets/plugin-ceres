@@ -48880,7 +48880,7 @@ var render = function() {
                   ) +
                   "</label></div></div>"
                 : "<!---->") +
-              ' <input type="text" name="username" autocomplete="new-password" tabindex="-1"' +
+              ' <input type="text" name="username" autocomplete="new-password" tabindex="-1" aria-label="honeypot"' +
               _vm._ssrAttr("value", _vm.honeypot) +
               ' class="honey"> '
           ),
