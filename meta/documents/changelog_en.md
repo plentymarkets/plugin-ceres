@@ -4,6 +4,7 @@
 
 ### Added
 - External name option to manufacturer widget
+- Added columnn descriptions to the *Technical Data* ShopBuilder widget in order to improve screen reader accessibility.
 
 ### Changed
 - Changed label colors for improved color contrast accessibility.

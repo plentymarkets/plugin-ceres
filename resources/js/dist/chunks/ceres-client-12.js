@@ -30,6 +30,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -508,8 +524,13 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "table",
-    { staticClass: "table table-striped table-hover table-sm" },
+    {
+      staticClass: "table table-striped table-hover table-sm",
+      attrs: { role: "table" }
+    },
     [
+      _vm._m(0),
+      _vm._v(" "),
       _c(
         "tbody",
         [
@@ -525,9 +546,9 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                " +
+                          "\n                    " +
                             _vm._s(_vm.getTranslation(itemDataAccessor)) +
-                            "\n            "
+                            "\n                "
                         )
                       ]
                     ),
@@ -540,9 +561,9 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                " +
+                          "\n                    " +
                             _vm._s(_vm.getFieldValue(itemDataAccessor)) +
-                            "\n            "
+                            "\n                "
                         )
                       ]
                     )
@@ -556,7 +577,24 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "visually-hidden", attrs: { scope: "col" } }, [
+          _vm._v("\n                Product property type\n            ")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "visually-hidden", attrs: { scope: "col" } }, [
+          _vm._v("\n                Product property value\n            ")
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
