@@ -6,13 +6,13 @@
                     scope="col" 
                     class="visually-hidden" 
                 >
-                    Product property type
+                  {{ $translate("Ceres::Template.singleItemTechnicalDataAttribute") }}
                 </th>
                 <th 
                     scope="col" 
                     class="visually-hidden" 
                 >
-                    Product property value
+                  {{ $translate("Ceres::Template.singleItemTechnicalDataValue") }}
                 </th>
             </tr>
         </thead>
