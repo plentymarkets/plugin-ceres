@@ -529,7 +529,41 @@ var render = function() {
       attrs: { role: "table" }
     },
     [
-      _vm._m(0),
+      _c("thead", [
+        _c("tr", [
+          _c(
+            "th",
+            { staticClass: "visually-hidden", attrs: { scope: "col" } },
+            [
+              _vm._v(
+                "\n              " +
+                  _vm._s(
+                    _vm.$translate(
+                      "Ceres::Template.singleItemTechnicalDataAttribute"
+                    )
+                  ) +
+                  "\n            "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "th",
+            { staticClass: "visually-hidden", attrs: { scope: "col" } },
+            [
+              _vm._v(
+                "\n              " +
+                  _vm._s(
+                    _vm.$translate(
+                      "Ceres::Template.singleItemTechnicalDataValue"
+                    )
+                  ) +
+                  "\n            "
+              )
+            ]
+          )
+        ])
+      ]),
       _vm._v(" "),
       _c(
         "tbody",
@@ -577,24 +611,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { staticClass: "visually-hidden", attrs: { scope: "col" } }, [
-          _vm._v("\n                Product property type\n            ")
-        ]),
-        _vm._v(" "),
-        _c("th", { staticClass: "visually-hidden", attrs: { scope: "col" } }, [
-          _vm._v("\n                Product property value\n            ")
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
