@@ -46,8 +46,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -539,13 +537,12 @@ var render = function() {
           _vm._l(_vm.itemInformation, function(itemDataAccessor) {
             return [
               _vm.isCheckedAndNotEmpty(itemDataAccessor)
-                ? _c("tr", { attrs: { role: "row" } }, [
+                ? _c("tr", [
                     _c(
                       "td",
                       {
                         class: _vm.paddingClasses,
-                        style: _vm.paddingInlineStyles,
-                        attrs: { role: "rowheader" }
+                        style: _vm.paddingInlineStyles
                       },
                       [
                         _vm._v(
@@ -560,8 +557,7 @@ var render = function() {
                       "td",
                       {
                         class: _vm.paddingClasses,
-                        style: _vm.paddingInlineStyles,
-                        attrs: { role: "cell" }
+                        style: _vm.paddingInlineStyles
                       },
                       [
                         _vm._v(
@@ -588,23 +584,13 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c(
-          "th",
-          {
-            staticClass: "visually-hidden",
-            attrs: { scope: "col", "aria-hidden": "false" }
-          },
-          [_vm._v("\n                Product property type\n            ")]
-        ),
+        _c("th", { staticClass: "visually-hidden", attrs: { scope: "col" } }, [
+          _vm._v("\n                Product property type\n            ")
+        ]),
         _vm._v(" "),
-        _c(
-          "th",
-          {
-            staticClass: "visually-hidden",
-            attrs: { scope: "col", "aria-hidden": "false" }
-          },
-          [_vm._v("\n                Product property value\n            ")]
-        )
+        _c("th", { staticClass: "visually-hidden", attrs: { scope: "col" } }, [
+          _vm._v("\n                Product property value\n            ")
+        ])
       ])
     ])
   }
