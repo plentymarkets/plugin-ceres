@@ -33,19 +33,19 @@
 {{ Twig.set("imageName", "" | json_encode) }}
 
 {% if urlType == 'category' and urlValue | trim is not empty %}
-    <span>line36</span>
+
     {{ Twig.set("category", Twig.call("services.category.get", [urlValue])) }}
     {{ Twig.set("name", "category.details[0].name") }}
     {{ Twig.set("url", Twig.call("services.category.getURL", ["$category"])) }}
     {{ Twig.set("imageUrl", "category.details[0].imagePath") }}
-    {{ Twig.set("imageAltText", "category.details[0].name") }}
+    {{ Twig.set("imageAltText", "cdn_metadata(imageUrl, 'alttext')") }}
 
     {{ Twig.if("imageUrl | trim is not empty") }}
         {{ Twig.set("imageUrl", "\"/documents/\" ~ imageUrl") }}
     {{ Twig.endif() }}
 
 {% elseif urlType == 'item' and urlValue | trim is not empty %}
-    <span>line48</span>
+
     {{ Twig.set("itemData", Twig.call("services.item.getVariation", [urlValue])) }}
     {{ Twig.set("itemData", "itemData.documents[0].data") }}
     {{ Twig.set("itemImage", "itemData.images | itemImages | orderByKey('position') | first") }}
@@ -57,7 +57,7 @@
     {{ Twig.set("imageName", "itemImage.name") }}
 
 {% elseif urlType == 'file' and urlValue | trim is not empty %}
-    <span>line60</span>
+
     {{ Twig.set("url", urlValue | json_encode) }}
     {{ Twig.set("imageUrl", urlValue | json_encode) }}
     {{ Twig.set("imageAltText", "cdn_metadata(imageUrl, 'alttext')") }}
@@ -69,7 +69,7 @@
 {% endif %}
 
 {% if customImagePath | trim is not empty %}
-    <span>line72</span>
+
     {{ Twig.set("imageUrl", customImagePath | json_encode) }}
     {{ Twig.if("imageAltText is empty") }}
         {{ Twig.set("imageAltText", "cdn_metadata(imageUrl, 'alttext')") }}
@@ -77,7 +77,7 @@
 {% endif %}
 
 {{ Twig.if("imageAltText | trim is empty") }}
-<span>line80</span>
+
     {{ Twig.set("imageAltText", "name") }}
 {{ Twig.endif() }}
 
@@ -114,7 +114,6 @@
             {% endif %}
 
             {% if widget.settings.lazyLoading.mobile %}
-                <span>line117</span>
                 <lazy-img
                     picture-class="img-{{ imageSize }}"
                     image-url="{{ Twig.print("imageUrl") }}"
@@ -129,7 +128,6 @@
                         {{ Twig.if("imageName | trim is not empty") }}title="{{ Twig.print("imageName") }}"{{ Twig.endif() }}>
                 </noscript>
             {% else %}
-                <span>line132</span>
                 <picture>
                     <source srcset="{{ Twig.print("imageUrl") }}" {{ Twig.if("imageUrl matches '/.?(\\\\.webp)(?:$|\\\\?)/'") }} type="image/webp" {{ Twig.endif() }}>
                     <img
