@@ -9,6 +9,7 @@
 ### Changed
 - Changed label colors for improved color contrast accessibility.
 - Increased quantity buttons & checkout checkmark sizes to address touch targets accessibility issue.
+- Alt text of an image from ImageBoxWidget is getting correctly fetched.
 
 ### Fixed
 
