@@ -84,7 +84,7 @@ context("Address", () =>
         cy.getByTestingAttr("modal-submit").first().click();
 
         cy.get(".notification-wrapper").children().should("have.class", "show").should("have.class", "alert");
-        cy.get(".notification-wrapper").children().first().should("contain", "Die Umsatzsteuer-Identifikationsnummer ist ungültig. Bitte entfernen Sie alle Leer- und Sonderzeichen.");
+        cy.get(".notification-wrapper").children().first().should("contain", "Die Umsatzsteuer-Identifikationsnummer ist ungültig. Bitte entfernen Sie alle Leer- und Sonderzeichen sowie das Länderkürzel.");
     });
 
     it("should add new delivery address", () =>
