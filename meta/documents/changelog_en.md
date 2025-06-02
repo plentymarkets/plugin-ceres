@@ -1,18 +1,20 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.73 (2025-05-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.72...5.0.73" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.73 (2025-06-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.72...5.0.73" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added
 
 - The option **External name** has been added to the manufacturer data widget settings in ShopBuilder.
-- The new legal page **Declaration of accessibility** has been added. You can edit the declaration of accessibility in the **Setup » Shop » [Select Shop] » Legal** menu. 
+- The new legal page **Declaration of accessibility** has been added. You can edit the declaration of accessibility in the **Setup » Shop » [Select Shop] » Legal** menu.
+- The option **Prefer not to say** has been added to the salutation select of the address selection widget.
 
 ### Changed
 
-- Changed the label colours in order to improve accessibility in terms of colour contrast.
+- Changed the input label colours in order to improve accessibility in terms of colour contrast.
 - Increased the touch target sizes of quantity buttons and the GTC checkbox in the checkout in order to improve accessibility.
 - `aria-hidden` labels have been added to all icons in the shop to improve accessibility.
 - Changed formatting of list in price information widget in order to conform to accessibility recommendations.
+- Removed redundant title attributes.
 
 ### Fixed
 

@@ -1,11 +1,12 @@
 # Release Notes für plentyShop LTS
 
-## v5.0.73 (2025-05-20) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.72...5.0.73" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.73 (2025-06-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.72...5.0.73" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
 
 - Die Option **Externer Name** wurde in den Einstellungen des Herstellerdaten-Widgets im ShopBuilder hinzugefügt.
-- Die neue Rechtstext-Seite **Barrierefreiheitserklärung** wurde hinzugefügt. Die Barrierefreiheitserklärung kann im Menü **Einrichtung » Shop » [Shop auswählen] » Rechtliches** bearbeitet werden. 
+- Die neue Rechtstext-Seite **Barrierefreiheitserklärung** wurde hinzugefügt. Die Barrierefreiheitserklärung kann im Menü **Einrichtung » Shop » [Shop auswählen] » Rechtliches** bearbeitet werden.
+- Die Option **Keine Anrede** wurde zur Anrede des Adressauswahl-Widgets hinzugefügt.
 
 ### Geändert
 
@@ -13,6 +14,7 @@
 - Die Größe der Touch Targets der Schaltflächen für die Mengeneingabe und die AGB-Checkbox im Checkout auf mobilen Endgeräten wurde erhöht, um die Barrierefreiheit zu verbessern.
 - Alle Icons im Shop wurden mit `aria-hidden`-Labels ausgestattet, um die Barrierefreiheit zu verbessern.
 - Die Formatierung der Liste im Summen-Widget wurde angepasst, um den Empfehlungen für Barrierefreiheit zu entsprechen.
+- Redundante Titelattribute wurden entfernt.
 
 ### Behoben
 
