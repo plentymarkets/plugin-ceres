@@ -1,20 +1,30 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.73 (2025-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.72...5.0.73" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.73 (2025-06-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.72...5.0.73" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added
-- External name option to manufacturer widget
-- Added columnn descriptions to the *Technical Data* ShopBuilder widget in order to improve screen reader accessibility.
-- Aria label to forgot password
+
+- The option **External name** has been added to the manufacturer data widget settings in ShopBuilder.
+- The new legal page **Declaration of accessibility** has been added. You can edit the declaration of accessibility in the **Setup » Shop » [Select Shop] » Legal** menu.
+- The option **Prefer not to say** has been added to the salutation select of the address selection widget.
 
 ### Changed
-- Changed label colors for improved color contrast accessibility.
-- Increased quantity buttons & checkout checkmark sizes to address touch targets accessibility issue.
-- Alt text of an image from ImageBoxWidget is getting correctly fetched.
+
+- Changed the input label colours in order to improve accessibility in terms of colour contrast.
+- Increased the touch target sizes of quantity buttons and the GTC checkbox in the checkout in order to improve accessibility.
+- `aria-hidden` labels have been added to all icons in the shop to improve accessibility.
+- Changed formatting of list in price information widget in order to conform to accessibility recommendations.
+- Removed redundant title attributes.
+- Increased quantity buttons & checkout checkmark sizes to address accessibility issue.
+- Added columnn descriptions to the **Item data table** ShopBuilder widget in order to improve screen reader accessibility.
 
 ### Fixed
 
-- Fix jumping scrollbar on scroll for Mozila and Safari
+- Fixed an error that caused the scroll bar to jump erratically in Mozilla and Safari browsers.
+- Due to an error, the feedback rating filter was not functioning properly in ShopBuilder. This has been fixed.
+- Fixed an accessibility issue regarding the address selection.
+- Alt attribut of image inside the image box widget is getting fetched correctly.
+- Added missing Aria labels for the input fields in the “Forgot password” dialog.
 
 ## v5.0.72 (2025-04-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.71...5.0.72" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
