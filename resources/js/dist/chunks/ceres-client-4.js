@@ -2902,8 +2902,7 @@ var render = function() {
                           role: "checkbox",
                           "aria-label": _vm.$translate(
                             "Ceres::Template.addressToPickupStation"
-                          ),
-                          "aria-hidden": "true"
+                          )
                         }
                       },
                       [
@@ -5956,8 +5955,7 @@ var render = function() {
                           role: "checkbox",
                           "aria-label": _vm.$translate(
                             "Ceres::Template.addressToPickupStation"
-                          ),
-                          "aria-hidden": "true"
+                          )
                         }
                       },
                       [
