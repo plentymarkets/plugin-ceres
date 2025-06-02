@@ -1,17 +1,33 @@
 <template>
-    <table class="table table-striped table-hover table-sm">
-        <tbody>
-        <template v-for="itemDataAccessor in itemInformation">
-            <tr v-if="isCheckedAndNotEmpty(itemDataAccessor)">
-                <td :class="paddingClasses" :style="paddingInlineStyles">
-                    {{ getTranslation(itemDataAccessor) }}
-                </td>
-
-                <td :class="paddingClasses" :style="paddingInlineStyles">
-                    {{ getFieldValue(itemDataAccessor) }}
-                </td>
+    <table class="table table-striped table-hover table-sm" role="table">
+        <thead>
+            <tr>
+                <th 
+                    scope="col" 
+                    class="visually-hidden" 
+                >
+                  {{ $translate("Ceres::Template.singleItemTechnicalDataAttribute") }}
+                </th>
+                <th 
+                    scope="col" 
+                    class="visually-hidden" 
+                >
+                  {{ $translate("Ceres::Template.singleItemTechnicalDataValue") }}
+                </th>
             </tr>
-        </template>
+        </thead>
+        <tbody>
+            <template v-for="itemDataAccessor in itemInformation">
+                <tr v-if="isCheckedAndNotEmpty(itemDataAccessor)">
+                    <td :class="paddingClasses" :style="paddingInlineStyles">
+                        {{ getTranslation(itemDataAccessor) }}
+                    </td>
+
+                    <td :class="paddingClasses" :style="paddingInlineStyles">
+                        {{ getFieldValue(itemDataAccessor) }}
+                    </td>
+                </tr>
+            </template>
         </tbody>
     </table>
 </template>

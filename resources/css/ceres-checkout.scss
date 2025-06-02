@@ -8792,37 +8792,7 @@ a.close.disabled {
         color: $gray-700;
     }
 }
-.cmp-contact {
-    .widget {
-        .input-unit,
-        .widget-inner .widget-text-input .input-unit {
-            label {
-                color: $gray-700;
-            }
-        }
-    }
-}
 
-.widget-newsletter {
-    .widget-inner {
-        form {
-            .input-unit {
-                label {
-                    color: $gray-700;
-                }
-            }
-        }
-    }
-}
-.widget-newsletter-unsubscribe {
-    .widget-inner {
-        .input-unit {
-            label {
-                color: $gray-700;
-            }
-        }
-    }
-}
 .input-group {
 
     .input-unit + .input-group-btn {
@@ -9184,6 +9154,17 @@ a {
 .lozad {
     display: block;
     min-height: 1px;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    overflow: hidden;
 }
 
 // stylelint-disable selector-type-no-unknown
@@ -10488,7 +10469,7 @@ $border-width: 1px;
         font-size: .65em;
         font-weight: 600;
         line-height: 1em !important;
-        color: $gray-500;
+        color: $gray-700;
         text-overflow: ellipsis;
         text-transform: uppercase;
         letter-spacing: .1px;
@@ -10502,7 +10483,7 @@ $border-width: 1px;
         -moz-osx-font-smoothing: grayscale;
 
         /* Enable click-through */
-        pointer-events: none; 
+        pointer-events: none;
 
         &.disabled,
         &:disabled {
@@ -14609,9 +14590,7 @@ header .widget {
     }
 }
 
-.gray-700,
-label.customer-sign-label,
-label.contact-wish-label {
+.gray-700 {
     color: $gray-700;
 }
 

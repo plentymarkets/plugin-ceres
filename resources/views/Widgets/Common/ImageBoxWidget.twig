@@ -38,7 +38,7 @@
     {{ Twig.set("name", "category.details[0].name") }}
     {{ Twig.set("url", Twig.call("services.category.getURL", ["$category"])) }}
     {{ Twig.set("imageUrl", "category.details[0].imagePath") }}
-    {{ Twig.set("imageAltText", "category.details[0].name") }}
+    {{ Twig.set("imageAltText", "cdn_metadata(imageUrl, 'alttext')") }}
 
     {{ Twig.if("imageUrl | trim is not empty") }}
         {{ Twig.set("imageUrl", "\"/documents/\" ~ imageUrl") }}
@@ -69,6 +69,7 @@
 {% endif %}
 
 {% if customImagePath | trim is not empty %}
+
     {{ Twig.set("imageUrl", customImagePath | json_encode) }}
     {{ Twig.if("imageAltText is empty") }}
         {{ Twig.set("imageAltText", "cdn_metadata(imageUrl, 'alttext')") }}
@@ -76,6 +77,7 @@
 {% endif %}
 
 {{ Twig.if("imageAltText | trim is empty") }}
+
     {{ Twig.set("imageAltText", "name") }}
 {{ Twig.endif() }}
 

@@ -40894,33 +40894,50 @@ var render = function() {
             _vm.isParcelOrOfficeAvailable
               ? _c("div", { staticClass: "col-12" }, [
                   _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-12" }, [
-                      _c("input", {
+                    _c(
+                      "div",
+                      {
+                        staticClass: "col-12",
                         attrs: {
-                          type: "checkbox",
-                          name: "togglePickup",
-                          id: "showPickup" + _vm._uid
-                        },
-                        domProps: { checked: _vm.value.showPickupStation },
-                        on: {
-                          change: function($event) {
-                            return _vm.togglePickupStation(
-                              $event.target.checked
-                            )
-                          }
+                          role: "checkbox",
+                          "aria-label": _vm.$translate(
+                            "Ceres::Template.addressToPickupStation"
+                          ),
+                          "aria-hidden": "true"
                         }
-                      }),
-                      _vm._v(" "),
-                      _c("label", { attrs: { for: "showPickup" + _vm._uid } }, [
-                        _vm._v(
-                          _vm._s(
-                            _vm.$translate(
-                              "Ceres::Template.addressToPickupStation"
+                      },
+                      [
+                        _c("input", {
+                          attrs: {
+                            type: "checkbox",
+                            name: "togglePickup",
+                            id: "showPickup" + _vm._uid
+                          },
+                          domProps: { checked: _vm.value.showPickupStation },
+                          on: {
+                            change: function($event) {
+                              return _vm.togglePickupStation(
+                                $event.target.checked
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          { attrs: { for: "showPickup" + _vm._uid } },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.addressToPickupStation"
+                                )
+                              )
                             )
-                          )
+                          ]
                         )
-                      ])
-                    ])
+                      ]
+                    )
                   ])
                 ])
               : _vm._e(),
@@ -43931,33 +43948,50 @@ var render = function() {
             _vm.isParcelOrOfficeAvailable
               ? _c("div", { staticClass: "col-12" }, [
                   _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-12" }, [
-                      _c("input", {
+                    _c(
+                      "div",
+                      {
+                        staticClass: "col-12",
                         attrs: {
-                          type: "checkbox",
-                          name: "togglePickup",
-                          id: "showPickup" + _vm._uid
-                        },
-                        domProps: { checked: _vm.value.showPickupStation },
-                        on: {
-                          change: function($event) {
-                            return _vm.togglePickupStation(
-                              $event.target.checked
-                            )
-                          }
+                          role: "checkbox",
+                          "aria-label": _vm.$translate(
+                            "Ceres::Template.addressToPickupStation"
+                          ),
+                          "aria-hidden": "true"
                         }
-                      }),
-                      _vm._v(" "),
-                      _c("label", { attrs: { for: "showPickup" + _vm._uid } }, [
-                        _vm._v(
-                          _vm._s(
-                            _vm.$translate(
-                              "Ceres::Template.addressToPickupStation"
+                      },
+                      [
+                        _c("input", {
+                          attrs: {
+                            type: "checkbox",
+                            name: "togglePickup",
+                            id: "showPickup" + _vm._uid
+                          },
+                          domProps: { checked: _vm.value.showPickupStation },
+                          on: {
+                            change: function($event) {
+                              return _vm.togglePickupStation(
+                                $event.target.checked
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          { attrs: { for: "showPickup" + _vm._uid } },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.addressToPickupStation"
+                                )
+                              )
                             )
-                          )
+                          ]
                         )
-                      ])
-                    ])
+                      ]
+                    )
                   ])
                 ])
               : _vm._e(),
@@ -70508,7 +70542,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("customer-sign-input", {
-  template: "\n    <div class=\"input-unit\">\n        <input type=\"text\" @change=\"setCustomerSign($event.srcElement.value)\" :id=\"'customer-sign_' + _uid\" :maxlength=\"maxLength\">\n        <label :for=\"'customer-sign_' + _uid\" class=\"customer-sign-label\">\n            ".concat(_services_TranslationService__WEBPACK_IMPORTED_MODULE_9__["default"].translate("Ceres::Template.checkoutCustomerSign"), "\n        </label>\n    </div>"),
+  template: "\n    <div class=\"input-unit\">\n        <input type=\"text\" @change=\"setCustomerSign($event.srcElement.value)\" :id=\"'customer-sign_' + _uid\" :maxlength=\"maxLength\">\n        <label :for=\"'customer-sign_' + _uid\">\n            ".concat(_services_TranslationService__WEBPACK_IMPORTED_MODULE_9__["default"].translate("Ceres::Template.checkoutCustomerSign"), "\n        </label>\n    </div>"),
   props: {
     maxLength: {
       type: Number,

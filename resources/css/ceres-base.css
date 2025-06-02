@@ -9977,19 +9977,6 @@ h3 {
   color: #495057;
 }
 
-.cmp-contact .widget .input-unit label,
-.cmp-contact .widget .widget-inner .widget-text-input .input-unit label {
-  color: #495057;
-}
-
-.widget-newsletter .widget-inner form .input-unit label {
-  color: #495057;
-}
-
-.widget-newsletter-unsubscribe .widget-inner .input-unit label {
-  color: #495057;
-}
-
 .input-group .input-unit + .input-group-btn {
   padding-bottom: 15px;
 }
@@ -10386,6 +10373,17 @@ a {
 .lozad {
   display: block;
   min-height: 1px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
 }
 
 [v-cloak],
@@ -12080,7 +12078,7 @@ html.ie .single-carousel .owl-item > div {
   font-size: 0.65em;
   font-weight: 600;
   line-height: 1em !important;
-  color: #adb5bd;
+  color: #495057;
   text-overflow: ellipsis;
   text-transform: uppercase;
   letter-spacing: 0.1px;
@@ -16015,9 +16013,7 @@ header .widget {
   color: #495057;
 }
 
-.gray-700,
-label.customer-sign-label,
-label.contact-wish-label {
+.gray-700 {
   color: #495057;
 }
 

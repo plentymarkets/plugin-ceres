@@ -6150,6 +6150,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -7320,6 +7329,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash_get__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/get */ "./node_modules/lodash/get.js");
 /* harmony import */ var lodash_get__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_get__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -11413,12 +11438,9 @@ __webpack_require__.r(__webpack_exports__);
       var alt = image && image.alternate ? image.alternate : this.alt;
       return alt;
     },
-    computeTitleObject: function computeTitleObject(image) {
-      var title = image && image.name ? image.name : this.title; // if alt and title are the same, we don't need to set title for accessibility reasons
-
-      return title !== this.getAltText(image) ? {
-        title: title
-      } : {};
+    getTitleText: function getTitleText(image) {
+      var title = image && image.name ? image.name : this.title;
+      return title;
     },
     getImageWidth: function getImageWidth(image) {
       return image && image.width ? image.width : undefined;
@@ -45015,7 +45037,12 @@ var render = function() {
             _vm._ssrNode(
               " " +
                 (_vm.isParcelOrOfficeAvailable
-                  ? '<div class="col-12"><div class="row"><div class="col-12"><input type="checkbox" name="togglePickup"' +
+                  ? '<div class="col-12"><div class="row"><div role="checkbox"' +
+                    _vm._ssrAttr(
+                      "aria-label",
+                      _vm.$translate("Ceres::Template.addressToPickupStation")
+                    ) +
+                    ' aria-hidden="true" class="col-12"><input type="checkbox" name="togglePickup"' +
                     _vm._ssrAttr("id", "showPickup" + _vm._uid) +
                     _vm._ssrAttr("checked", _vm.value.showPickupStation) +
                     "> <label" +
@@ -47399,7 +47426,12 @@ var render = function() {
             _vm._ssrNode(
               " " +
                 (_vm.isParcelOrOfficeAvailable
-                  ? '<div class="col-12"><div class="row"><div class="col-12"><input type="checkbox" name="togglePickup"' +
+                  ? '<div class="col-12"><div class="row"><div role="checkbox"' +
+                    _vm._ssrAttr(
+                      "aria-label",
+                      _vm.$translate("Ceres::Template.addressToPickupStation")
+                    ) +
+                    ' aria-hidden="true" class="col-12"><input type="checkbox" name="togglePickup"' +
                     _vm._ssrAttr("id", "showPickup" + _vm._uid) +
                     _vm._ssrAttr("checked", _vm.value.showPickupStation) +
                     "> <label" +
@@ -48855,7 +48887,7 @@ var render = function() {
                   ) +
                   "</label></div></div>"
                 : "<!---->") +
-              ' <input type="text" name="username" autocomplete="new-password" tabindex="-1"' +
+              ' <input type="text" name="username" autocomplete="new-password" tabindex="-1" aria-label="honeypot"' +
               _vm._ssrAttr("value", _vm.honeypot) +
               ' class="honey"> '
           ),
@@ -49378,7 +49410,11 @@ var render = function() {
                         )
                       )
                     ) +
-                    '</span></div> <div class="row"><div class="col-12"><input type="text" name="username" autocomplete="new-password" tabindex="-1"' +
+                    '</span></div> <div class="row"><div class="col-12"><input type="text" name="username" autocomplete="new-password" tabindex="-1" aria-hidden="true"' +
+                    _vm._ssrAttr(
+                      "aria-label",
+                      _vm.$translate("Ceres::Template.loginForgotPassword")
+                    ) +
                     _vm._ssrAttr("value", _vm.honeypot) +
                     ' class="honey"> <div data-validate="mail" class="input-unit no-bottom"><input type="email" name="email" autocomplete="email"' +
                     _vm._ssrAttr("id", "mail" + _vm._uid) +
@@ -50465,10 +50501,31 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "table",
-    { staticClass: "table table-striped table-hover table-sm" },
+    {
+      staticClass: "table table-striped table-hover table-sm",
+      attrs: { role: "table" }
+    },
     [
       _vm._ssrNode(
-        "<tbody>" +
+        '<thead><tr><th scope="col" class="visually-hidden">' +
+          _vm._ssrEscape(
+            "\n              " +
+              _vm._s(
+                _vm.$translate(
+                  "Ceres::Template.singleItemTechnicalDataAttribute"
+                )
+              ) +
+              "\n            "
+          ) +
+          '</th> <th scope="col" class="visually-hidden">' +
+          _vm._ssrEscape(
+            "\n              " +
+              _vm._s(
+                _vm.$translate("Ceres::Template.singleItemTechnicalDataValue")
+              ) +
+              "\n            "
+          ) +
+          "</th></tr></thead> <tbody>" +
           _vm._ssrList(_vm.itemInformation, function(itemDataAccessor) {
             return _vm.isCheckedAndNotEmpty(itemDataAccessor)
               ? "<tr><td" +
@@ -50476,18 +50533,18 @@ var render = function() {
                   _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
                   ">" +
                   _vm._ssrEscape(
-                    "\n                " +
+                    "\n                    " +
                       _vm._s(_vm.getTranslation(itemDataAccessor)) +
-                      "\n            "
+                      "\n                "
                   ) +
                   "</td> <td" +
                   _vm._ssrClass(null, _vm.paddingClasses) +
                   _vm._ssrStyle(null, _vm.paddingInlineStyles, null) +
                   ">" +
                   _vm._ssrEscape(
-                    "\n                " +
+                    "\n                    " +
                       _vm._s(_vm.getFieldValue(itemDataAccessor)) +
-                      "\n            "
+                      "\n                "
                   ) +
                   "</td></tr>"
               : "<!---->"
@@ -54084,26 +54141,19 @@ var render = function() {
             "<div>",
             "</div>",
             [
-              _c(
-                "lazy-img",
-                _vm._b(
-                  {
-                    ref: { itemLazyImage: index === 0 },
-                    refInFor: true,
-                    attrs: {
-                      "image-url": imageUrl.url,
-                      alt: _vm.getAltText(imageUrl),
-                      width: _vm.getImageWidth(imageUrl),
-                      height: _vm.getImageHeight(imageUrl),
-                      "picture-class": "img-fluid",
-                      role: "option"
-                    }
-                  },
-                  "lazy-img",
-                  _vm.computeTitleObject(imageUrl),
-                  false
-                )
-              )
+              _c("lazy-img", {
+                ref: { itemLazyImage: index === 0 },
+                refInFor: true,
+                attrs: {
+                  "image-url": imageUrl.url,
+                  alt: _vm.getAltText(imageUrl),
+                  title: _vm.getTitleText(imageUrl),
+                  width: _vm.getImageWidth(imageUrl),
+                  height: _vm.getImageHeight(imageUrl),
+                  "picture-class": "img-fluid",
+                  role: "option"
+                }
+              })
             ],
             1
           )
@@ -54114,24 +54164,17 @@ var render = function() {
         "a",
         { attrs: { href: _vm.itemUrl } },
         [
-          _c(
-            "lazy-img",
-            _vm._b(
-              {
-                ref: { itemLazyImage: !_vm.disableLazyLoad },
-                attrs: {
-                  "image-url": _vm.imageOrItemImage,
-                  alt: _vm.getAltText(_vm.imageUrls[0]),
-                  width: _vm.getImageWidth(_vm.imageUrls[0]),
-                  height: _vm.getImageHeight(_vm.imageUrls[0]),
-                  "picture-class": "img-fluid"
-                }
-              },
-              "lazy-img",
-              _vm.computeTitleObject(_vm.imageUrl),
-              false
-            )
-          )
+          _c("lazy-img", {
+            ref: { itemLazyImage: !_vm.disableLazyLoad },
+            attrs: {
+              "image-url": _vm.imageOrItemImage,
+              alt: _vm.getAltText(_vm.imageUrls[0]),
+              title: _vm.getTitleText(_vm.imageUrls[0]),
+              width: _vm.getImageWidth(_vm.imageUrls[0]),
+              height: _vm.getImageHeight(_vm.imageUrls[0]),
+              "picture-class": "img-fluid"
+            }
+          })
         ],
         1
       )

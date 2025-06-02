@@ -15,12 +15,16 @@
 - `aria-hidden` labels have been added to all icons in the shop to improve accessibility.
 - Changed formatting of list in price information widget in order to conform to accessibility recommendations.
 - Removed redundant title attributes.
+- Increased quantity buttons & checkout checkmark sizes to address accessibility issue.
+- Added columnn descriptions to the **Item data table** ShopBuilder widget in order to improve screen reader accessibility.
 
 ### Fixed
 
 - Fixed an error that caused the scroll bar to jump erratically in Mozilla and Safari browsers.
 - Due to an error, the feedback rating filter was not functioning properly in ShopBuilder. This has been fixed.
 - Fixed an accessibility issue regarding the address selection.
+- Alt attribut of image inside the image box widget is getting fetched correctly.
+- Added missing Aria labels for the input fields in the “Forgot password” dialog.
 
 ## v5.0.72 (2025-04-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.71...5.0.72" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 

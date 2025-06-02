@@ -66,6 +66,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -237,7 +246,11 @@ var render = function() {
                         type: "text",
                         name: "username",
                         autocomplete: "new-password",
-                        tabindex: "-1"
+                        tabindex: "-1",
+                        "aria-hidden": "true",
+                        "aria-label": _vm.$translate(
+                          "Ceres::Template.loginForgotPassword"
+                        )
                       },
                       domProps: { value: _vm.honeypot },
                       on: {

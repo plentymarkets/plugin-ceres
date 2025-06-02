@@ -10,7 +10,7 @@
             <lazy-img
                 :image-url="imageUrl.url"
                 :alt="getAltText(imageUrl)"
-                v-bind="computeTitleObject(imageUrl)"
+                :title="getTitleText(imageUrl)"
                 :width="getImageWidth(imageUrl)"
                 :height="getImageHeight(imageUrl)"
                 :ref="{ 'itemLazyImage' : index === 0 }"
@@ -24,7 +24,7 @@
             :ref="{ 'itemLazyImage': !disableLazyLoad }"
             :image-url="imageOrItemImage"
             :alt="getAltText(imageUrls[0])"
-            v-bind="computeTitleObject(imageUrl)"
+            :title="getTitleText(imageUrls[0])"
             :width="getImageWidth(imageUrls[0])"
             :height="getImageHeight(imageUrls[0])"
             picture-class="img-fluid" />
@@ -161,11 +161,11 @@ export default {
             return alt;
         },
 
-        computeTitleObject(image)
+        getTitleText(image)
         {
-            const title = image && image.name ? image.name : this.title;
-            // if alt and title are the same, we don't need to set title for accessibility reasons
-            return title !== this.getAltText(image) ? { title: title } : {}
+          const title = image && image.name ? image.name : this.title;
+
+          return title;
         },
 
         getImageWidth(image)
