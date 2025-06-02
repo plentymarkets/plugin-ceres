@@ -104,7 +104,7 @@
 
             <div class="col-12" v-if="isParcelOrOfficeAvailable">
                 <div class="row">
-                    <div role="checkbox" :aria-label="$translate('Ceres::Template.addressToPickupStation')" aria-hidden="true" class="col-12">
+                    <div role="checkbox" :aria-label="$translate('Ceres::Template.addressToPickupStation')" class="col-12">
                         <input type="checkbox" name="togglePickup" :checked="value.showPickupStation" @change="togglePickupStation($event.target.checked)" :id="'showPickup' + _uid">
                         <label :for="'showPickup' + _uid">{{ $translate("Ceres::Template.addressToPickupStation") }}</label>
                     </div>
@@ -728,7 +728,7 @@
 
             <div class="col-12" v-if="isParcelOrOfficeAvailable">
                 <div class="row">
-                    <div role="checkbox" :aria-label="$translate('Ceres::Template.addressToPickupStation')" aria-hidden="true" class="col-12">
+                    <div role="checkbox" :aria-label="$translate('Ceres::Template.addressToPickupStation')" class="col-12">
                         <input type="checkbox" name="togglePickup" :checked="value.showPickupStation" @change="togglePickupStation($event.target.checked)" :id="'showPickup' + _uid">
                         <label :for="'showPickup' + _uid">{{ $translate("Ceres::Template.addressToPickupStation") }}</label>
                     </div>

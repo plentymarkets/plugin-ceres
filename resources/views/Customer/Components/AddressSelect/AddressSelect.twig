@@ -79,7 +79,7 @@
                                     :data-index="index"
                                     :watch-data="true"
                                 >
-                                    <li class="item" role="radiogroup" aria-label="{{ trans("Ceres::Template.checkoutShippingAddress") }}" aria-hidden="true">
+                                    <li class="item" role="radiogroup" aria-label="{{ trans("Ceres::Template.checkoutShippingAddress") }}">
                                         <input
                                             type="radio"
                                             :name="'shippingAddress' + _uid"
@@ -137,7 +137,6 @@
                                                                 data-toggle="tooltip"
                                                                 data-placement="top"
                                                                 aria-label="{{ trans("Ceres::Template.addressDelete") }}"
-                                                                aria-hidden="true"
                                                                 title="{{ trans("Ceres::Template.addressDelete") }}"
                                                                 class="btn btn-danger"
                                                                 @click.prevent="showDeleteModal(item)"
