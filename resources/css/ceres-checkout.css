@@ -10397,6 +10397,11 @@ tab-list {
   display: none !important;
 }
 
+.thumb-meta .feedback-stars-average .feedback-count {
+  position: relative;
+  margin-left: 75%;
+}
+
 .mh-1 {
   min-height: 36px !important;
 }

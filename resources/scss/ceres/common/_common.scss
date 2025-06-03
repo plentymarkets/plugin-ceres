@@ -82,3 +82,12 @@ tab-list {
     display: none !important; // stylelint-disable-line declaration-no-important
 }
 // stylelint-enable selector-type-no-unknown
+
+.thumb-meta {
+    .feedback-stars-average {
+        .feedback-count {
+            position: relative;
+            margin-left: 75%;
+        }
+    }
+}
