@@ -25,6 +25,7 @@
 - Fixed an accessibility issue regarding the address selection.
 - Alt attribut of image inside the image box widget is getting fetched correctly.
 - Added missing Aria labels for the input fields in the “Forgot password” dialog.
+- Fixed an overlap of the feedback counter with the stars on category page.
 
 ## v5.0.72 (2025-04-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.71...5.0.72" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
