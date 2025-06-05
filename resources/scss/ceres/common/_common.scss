@@ -83,11 +83,13 @@ tab-list {
 }
 // stylelint-enable selector-type-no-unknown
 
-.thumb-meta {
+.thumb-content {
     .feedback-stars-average {
-        .feedback-count {
-            position: relative;
-            margin-left: 75%;
+        &.feedback-category-view {
+            .feedback-count {
+                position: relative;
+                margin-left: 75%;
+            }
         }
     }
 }

@@ -10393,7 +10393,7 @@ tab-list {
   display: none !important;
 }
 
-.thumb-meta .feedback-stars-average .feedback-count {
+.thumb-content .feedback-stars-average.feedback-category-view .feedback-count {
   position: relative;
   margin-left: 75%;
 }
