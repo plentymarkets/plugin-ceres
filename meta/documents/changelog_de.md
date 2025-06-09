@@ -1,5 +1,11 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.73 (2025-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.73...5.0.74" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Eine fehlerhafte Aria-Referenz im Header wurde korrigiert.
+
 ## v5.0.73 (2025-06-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.72...5.0.73" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
