@@ -1,5 +1,11 @@
 # Release Notes for plentyShop LTS
 
+## v5.0.74 (2025-xx-xx)
+
+### Fixed
+
+- Fixed an overlap of the feedback counter with the stars on category page.
+
 ## v5.0.73 (2025-06-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.72...5.0.73" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added

@@ -9176,6 +9176,17 @@ tab-list {
 }
 // stylelint-enable selector-type-no-unknown
 
+.thumb-content {
+    .feedback-stars-average {
+        &.feedback-category-view {
+            .feedback-count {
+                position: relative;
+                margin-left: 75%;
+            }
+        }
+    }
+}
+
 @each $breakpoint in map-keys($grid-breakpoints) {
     $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
