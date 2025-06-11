@@ -34,9 +34,9 @@
 {{ Twig.set("imageAltText", "" | json_encode) }}
 {{ Twig.set("imageAltText", "cdn_metadata(fallbackImagePath, 'alttext')") }}
 {{ Twig.print("add_asset(logoUrl,'image')") }}
-<p>data logoUrl: {{ Twig.print("logoUrl | json_encode") }}</p>
-<p>data fallbackImagePath: {{ Twig.print("fallbackImagePath | json_encode") }}</p>
-<p>data companyLogoUrl: {{ Twig.print("companyLogoUrl | json_encode") }}</p>
+<p>data logoUrl: {{ Twig.print("logoUrl") }}</p>
+<p>data fallbackImagePath: {{ Twig.print("fallbackImagePath") }}</p>
+<p>data companyLogoUrl: {{ companyLogoUrl }}</p>
 <p>data imageAltText: {{ Twig.print("imageAltText | json_encode") }}</p>
 
 {{ Twig.import("Tree", "Ceres::Category.Macros.CategoryTree") }}
