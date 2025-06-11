@@ -36,6 +36,12 @@
 {{ Twig.set("altTextValue", "cdn_metadata(logoUrl, 'alttext')" | json_encode) }}
 <p>data altTextValue: {{ altTextValue }}</p>
 
+{{ Twig.if("logoUrl | trim is empty") }}
+        <p>headerCompany: {{ Twig.print('trans("Ceres::Template.headerCompanyName")') }}</p>
+    {{ Twig.else() }}
+        <p>altText: {{ Twig.print("cdn_metadata(logoUrl, 'alttext')") }}</p>
+    {{ Twig.endif() }}
+
 {{ Twig.import("Tree", "Ceres::Category.Macros.CategoryTree") }}
 
 <nav class="navbar header-fw p-0 border-bottom{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if navigationStyle == 'megaMenu' %} megamenu{% else %} normalmenu{%endif%}{% if not isFixed %} unfixed{% endif %}">
