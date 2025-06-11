@@ -31,7 +31,8 @@
 {% endif %}
 
 {{ Twig.set("logoUrl", companyLogoUrl | json_encode) }}
-{{ Twig.set("imageAltText", "cdn_metadata(companyLogoUrl, 'alttext')") }}
+{{ Twig.set("imageAltText", "" | json_encode) }}
+{{ Twig.set("imageAltText", "cdn_metadata(fallbackImagePath, 'alttext')") }}
 {{ Twig.print("add_asset(logoUrl,'image')") }}
 <p>data imageAltText: {{ Twig.print("imageAltText | json_encode") }}</p>
 
