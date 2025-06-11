@@ -11315,10 +11315,6 @@ body.basket-open {
             -webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, .4);
                     box-shadow: 0 0 3px 0 rgba(0, 0, 0, .4);
         }
-        
-        .badge-success {
-            background-color: #051208 !important;
-        }
     }
 
     .thumb-content {
@@ -11347,7 +11343,7 @@ body.basket-open {
 
     .category-lowest-price,
     .category-unit-price {
-        color: $gray-500;
+        color: $gray-700;
     }
 
     .btn-group {
@@ -11405,6 +11401,9 @@ body.basket-open {
     pointer-events: none;
 }
 
+.badge-success {
+    background-color: #051208 !important;
+}
 .component-loading {
     position: relative;
 

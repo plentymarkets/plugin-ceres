@@ -12775,9 +12775,6 @@ body.basket-open {
   font-weight: 300;
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.4);
 }
-.cmp-product-thumb .special-tags .badge-success  {
-  background-color: #051208 !important;
-}
 .cmp-product-thumb .thumb-content {
   display: inline-block;
   width: calc(100% - 120px);
@@ -12800,7 +12797,7 @@ body.basket-open {
 }
 .cmp-product-thumb .category-lowest-price,
 .cmp-product-thumb .category-unit-price {
-  color: #adb5bd;
+  color: #495057;
 }
 .cmp-product-thumb .btn-group {
   margin-top: 5px;
@@ -12851,6 +12848,10 @@ body.basket-open {
 
 .no-pointer-events {
   pointer-events: none;
+}
+
+.badge-success  {
+  background-color: #051208 !important;
 }
 
 .component-loading {

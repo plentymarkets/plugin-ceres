@@ -71,10 +71,6 @@
             font-weight: 300;
             box-shadow: 0 0 3px 0 rgba(0, 0, 0, .4);
         }
-        
-        .badge-success {
-            background-color: #051208 !important;
-        }
     }
 
     .thumb-content {
@@ -103,7 +99,7 @@
 
     .category-lowest-price,
     .category-unit-price {
-        color: $gray-500;
+        color: $gray-700;
     }
 
     .btn-group {
@@ -158,4 +154,8 @@
 
 .no-pointer-events {
     pointer-events: none;
+}
+
+.badge-success {
+    background-color: #051208 !important;
 }
