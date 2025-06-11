@@ -12854,10 +12854,6 @@ body.basket-open {
   pointer-events: none;
 }
 
-.badge-success  {
-  background-color: #051208 !important;
-}
-
 .component-loading {
   position: relative;
 }
