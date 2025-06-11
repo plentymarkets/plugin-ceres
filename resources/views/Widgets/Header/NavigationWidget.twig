@@ -36,7 +36,7 @@
 {{ Twig.set("altTextValue", "cdn_metadata(logoUrl, 'alttext')" | json_encode) }}
 <p>data altTextValue: {{ altTextValue }}</p>
 
-{{ Twig.if("logoUrl | trim is empty") }}
+{{ Twig.if("altTextValue | trim is empty") }}
         <p>headerCompany: {{ Twig.print('trans("Ceres::Template.headerCompanyName")') }}</p>
     {{ Twig.else() }}
         <p>altText: {{ Twig.print("cdn_metadata(logoUrl, 'alttext')") }}</p>
