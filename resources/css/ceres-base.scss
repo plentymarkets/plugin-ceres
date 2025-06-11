@@ -11304,20 +11304,17 @@ body.basket-open {
 
     //TODO create separate mixin
     .special-tags {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 10;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10;
 
-      .badge {
-          font-size: .9rem;
-          font-weight: 300;
-          -webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, .4);
-                  box-shadow: 0 0 3px 0 rgba(0, 0, 0, .4);
-      }
-      .badge-success {
-          background-color: #051208 !important;
-      }
+        .badge {
+            font-size: .9rem;
+            font-weight: 300;
+            -webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, .4);
+                    box-shadow: 0 0 3px 0 rgba(0, 0, 0, .4);
+        }
     }
 
     .thumb-content {
