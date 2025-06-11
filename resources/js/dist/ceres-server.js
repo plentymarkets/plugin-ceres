@@ -52658,25 +52658,15 @@ var render = function() {
                                   )
                                 ]
                               )
-                            : _c(
-                                "a",
-                                {
-                                  attrs: {
-                                    title: _vm.$translate(
+                            : _c("a", [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.$translate(
                                       "Ceres::Template.singleItemShippingCosts"
                                     )
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.singleItemShippingCosts"
-                                      )
-                                    )
                                   )
-                                ]
-                              )
+                                )
+                              ])
                         ],
                         2
                       ),
