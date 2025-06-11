@@ -31,9 +31,9 @@
 {% endif %}
 
 {{ Twig.set("logoUrl", companyLogoUrl | json_encode) }}
-{{ Twig.set("imageAltText", "" | json_encode) }}
 {{ Twig.set("imageAltText", "cdn_metadata(companyLogoUrl, 'alttext')") }}
 {{ Twig.print("add_asset(logoUrl,'image')") }}
+<p>data imageAltText: {{ Twig.print("imageAltText | json_encode") }}</p>
 
 {{ Twig.import("Tree", "Ceres::Category.Macros.CategoryTree") }}
 
@@ -49,7 +49,7 @@
                             <img
                                 class="img-fluid"
                                 src="{{ fallbackImagePath }}"
-                                alt="{{ Twig.print("imageAltText")[0] }}" dataaa-img="{{ imageAltText }}"
+                                alt="{{ Twig.print("imageAltText") }}" data-img="{{ imageAltText }}"
                             />
                         </picture>
                     </a>
