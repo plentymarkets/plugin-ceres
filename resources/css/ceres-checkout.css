@@ -12779,6 +12779,9 @@ body.basket-open {
   font-weight: 300;
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.4);
 }
+.cmp-product-thumb .special-tags .badge-success  {
+  background-color: #051208 !important;
+}
 .cmp-product-thumb .thumb-content {
   display: inline-block;
   width: calc(100% - 120px);
