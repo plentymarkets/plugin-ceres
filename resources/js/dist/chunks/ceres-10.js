@@ -1088,6 +1088,7 @@ var render = function() {
                   ? _c(
                       "a",
                       {
+                        staticClass: "bg-danger",
                         attrs: {
                           "data-toggle": "modal",
                           href: "#shippingscosts"
@@ -1104,6 +1105,7 @@ var render = function() {
                   : _c(
                       "a",
                       {
+                        staticClass: "bg-danger",
                         attrs: {
                           title: _vm.$translate(
                             "Ceres::Template.itemShippingCosts"
