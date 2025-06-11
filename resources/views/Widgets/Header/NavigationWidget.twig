@@ -32,15 +32,6 @@
 
 {{ Twig.set("logoUrl", companyLogoUrl | json_encode) }}
 {{ Twig.print("add_asset(logoUrl,'image')") }}
-{{ Twig.set("altTextValue", "cdn_metadata(logoUrl, 'alttext')" | json_encode) }}
-{{ Twig.set("altTextValueNotEncoded", "cdn_metadata(logoUrl, 'alttext')") }}
-
-{% if Twig.print("cdn_metadata(logoUrl, 'alttext')") is empty %}
-        <p>headerCompany: {{ Twig.print('trans("Ceres::Template.headerCompanyName")') }}</p>
-{% else %}
-        <p>altTexttt: {{ altTextValue }}</p>
-        <p>altTextValueNotEncoded: {{ altTextValueNotEncoded }}</p>
-{% endif %}
 
 {{ Twig.import("Tree", "Ceres::Category.Macros.CategoryTree") }}
 
