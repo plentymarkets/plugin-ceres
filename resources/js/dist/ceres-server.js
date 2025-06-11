@@ -55455,7 +55455,7 @@ var render = function() {
                   "\n            "
               ) +
               (_vm.$ceres.config.global.shippingCostsCategoryId > 0
-                ? '<a data-toggle="modal" href="#shippingscosts" class="bg-danger">' +
+                ? '<a data-toggle="modal" href="#shippingscosts">' +
                   _vm._ssrEscape(
                     _vm._s(_vm.$translate("Ceres::Template.itemShippingCosts"))
                   ) +
@@ -55465,7 +55465,7 @@ var render = function() {
                     "title",
                     _vm.$translate("Ceres::Template.itemShippingCosts")
                   ) +
-                  ' class="bg-danger">' +
+                  ">" +
                   _vm._ssrEscape(
                     _vm._s(_vm.$translate("Ceres::Template.itemShippingCosts"))
                   ) +

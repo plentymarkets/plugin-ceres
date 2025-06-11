@@ -83,8 +83,8 @@
                 </div>
 
                 {{ $translate("Ceres::Template.liveShoppingFootnote") }} <template v-if="showNetPrices">{{ $translate("Ceres::Template.itemExclVAT") }}</template><template v-else>{{ $translate("Ceres::Template.itemInclVAT") }}</template> {{ $translate("Ceres::Template.itemExclusive") }}
-                <a v-if="$ceres.config.global.shippingCostsCategoryId > 0" data-toggle="modal" href="#shippingscosts" class="bg-danger">{{ $translate("Ceres::Template.itemShippingCosts") }}</a>
-                <a v-else :title="$translate('Ceres::Template.itemShippingCosts')" class="bg-danger">{{ $translate("Ceres::Template.itemShippingCosts") }}</a>
+                <a v-if="$ceres.config.global.shippingCostsCategoryId > 0" data-toggle="modal" href="#shippingscosts">{{ $translate("Ceres::Template.itemShippingCosts") }}</a>
+                <a v-else :title="$translate('Ceres::Template.itemShippingCosts')">{{ $translate("Ceres::Template.itemShippingCosts") }}</a>
             </div>
         </div>
 
