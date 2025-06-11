@@ -32,8 +32,9 @@
 
 {{ Twig.set("logoUrl", companyLogoUrl | json_encode) }}
 {{ Twig.print("add_asset(logoUrl,'image')") }}
-<p>data imageAltText: </p>
-
+<p>data logoUrl: {{ logoUrl }}</p>
+{{ Twig.set("altTextValue", cdn_metadata(logoUrl, 'alttext') | json_encode) }}
+<p>data altTextValue: {{ altTextValue }}</p>
 
 {{ Twig.import("Tree", "Ceres::Category.Macros.CategoryTree") }}
 
