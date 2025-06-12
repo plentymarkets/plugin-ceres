@@ -19,7 +19,7 @@
         </div>
     </a>
 
-    <a v-else :href="itemUrl">
+    <a v-else :href="itemUrl" :aria-label="getAltText(imageUrls[0])">
         <lazy-img
             :ref="{ 'itemLazyImage': !disableLazyLoad }"
             :image-url="imageOrItemImage"
