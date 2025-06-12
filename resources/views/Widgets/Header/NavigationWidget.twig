@@ -37,7 +37,7 @@
     "cdn_metadata(
          logoUrl,
          'alttext',
-         trans(\"Ceres::Template.headerCompanyName\")
+         trans("Ceres::Template.headerCompanyName")
      )"
 ) %}
 
@@ -57,7 +57,7 @@
                             <img
                                 class="img-fluid test"
                                 src="{{ fallbackImagePath }}"
-                                alt="{{ Twig.print("cdn_metadata(logoUrl, 'alttext')") | trim | default(Twig.print('trans(\"Ceres::Template.headerCompanyName\")')) }}"
+                                alt="{{ Twig.print("cdn_metadata(logoUrl, 'alttext')") | trim | default(Twig.print('trans("Ceres::Template.headerCompanyName")')) }}"
                             />
                         </picture>
                     </a>
