@@ -32,7 +32,7 @@
 
 {{ Twig.set("logoUrl", companyLogoUrl | json_encode) }}
 {{ Twig.print("add_asset(logoUrl,'image')") }}
-{{ Twig.set("logoAltText", Twig.print("cdn_metadata(logoUrl, 'alttext')")) }}
+{{ Twig.set("logoAltText", ceresConfig.header) }}
 
 {{ Twig.import("Tree", "Ceres::Category.Macros.CategoryTree") }}
 
