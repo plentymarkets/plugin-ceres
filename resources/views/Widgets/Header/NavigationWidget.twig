@@ -32,6 +32,7 @@
 
 {{ Twig.set("logoUrl", companyLogoUrl | json_encode) }}
 {{ Twig.print("add_asset(logoUrl,'image')") }}
+{{ Twig.set("logoUrlAltText", "cdn_metadata(imageUrl, 'alttext')") }}
 
 {{ Twig.import("Tree", "Ceres::Category.Macros.CategoryTree") }}
 
@@ -39,16 +40,16 @@
     <div class="container-max d-block{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
         <div class="row mx-0 position-relative d-flex">
-            test -- {{ Twig.print("cdn_metadata(logoUrl, 'alttext')") }}
+            test222 -- {{ logoUrlAltText }}
             <div class="brand-wrapper px-lg-3 d-flex flex-fill">
                 {% if companyLogoUrl | trim | length > 0 %}
                     <a class="navbar-brand py-2" href="{{ Twig.print('urls.home') }}">
                         <picture data-alt="{{ Twig.print('trans("Ceres::Template.headerCompanyName")') }}">
                             <source srcset="{{ companyLogoUrl }}"{% if companyLogoUrl matches '/.?(\\.webp)(?:$|\\?)/' %} type="image/webp"{% endif %}>
                             <img
-                                class="img-fluid test"
+                                class="img-fluid test2"
                                 src="{{ fallbackImagePath }}"
-                                alt="{{ Twig.print("cdn_metadata(logoUrl, 'alttext')") }}"
+                                alt="{{ logoUrlAltText }}"
                             />
                         </picture>
                     </a>
