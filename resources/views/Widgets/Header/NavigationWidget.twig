@@ -35,7 +35,7 @@
 
 {{ Twig.set("logoUrl", companyLogoUrl | json_encode) }}
 {{ Twig.print("add_asset(logoUrl,'image')") }}
-{{ Twig.set("logoUrlAltText", "cdn_metadata(imageUrl, 'alttext')") }}
+{{ Twig.set("logoUrlAltText", "cdn_metadata(imageUrl, 'alttext', `trans('Ceres::Template.headerCompanyName')`)") }}
 {{ Twig.set("logoUrlAltText2", cdn_metadata(imageUrl, 'alttext')) }}
 
 {{ Twig.import("Tree", "Ceres::Category.Macros.CategoryTree") }}
@@ -53,7 +53,7 @@
                             <img
                                 class="img-fluid test2"
                                 src="{{ fallbackImagePath }}"
-                                alt="{{ logoUrlAltText }}"
+                                alt="{{ Twig.print("logoUrlAltText", "cdn_metadata(imageUrl, 'alttext', `trans('Ceres::Template.headerCompanyName')`)") }}"
                             />
                         </picture>
                     </a>
