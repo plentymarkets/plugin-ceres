@@ -45,7 +45,7 @@
                         <picture data-alt="{{ Twig.print('trans("Ceres::Template.headerCompanyName")') }}">
                             <source srcset="{{ companyLogoUrl }}"{% if companyLogoUrl matches '/.?(\\.webp)(?:$|\\?)/' %} type="image/webp"{% endif %}>
                             <img
-                                class="img-fluid test"
+                                class="img-fluid"
                                 src="{{ fallbackImagePath }}"
                                 alt="{{ Twig.print("cdn_metadata(logoUrl, 'alttext') ?: trans('Ceres::Template.headerCompanyName')") }}"
                             />
