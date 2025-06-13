@@ -14,6 +14,7 @@
 - The option **External name** has been added to the manufacturer data widget settings in ShopBuilder.
 - The new legal page **Declaration of accessibility** has been added. You can edit the declaration of accessibility in the **Setup » Shop » [Select Shop] » Legal** menu.
 - The option **Prefer not to say** has been added to the salutation select of the address selection widget.
+- Aria label to `a` tag from the category image carousel
 
 ### Changed
 
