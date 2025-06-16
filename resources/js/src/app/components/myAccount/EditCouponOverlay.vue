@@ -30,13 +30,13 @@
             </div>
         </div>
         <form method="post" @submit.prevent="submit()">
-            <div :id="'edit-coupon-overlay-' + _uid" class="modal fade" tabindex="-1" role="dialog" ref="editCouponOverlay">
-                <div class="modal-dialog modal-lg mx-auto modal-dialog-scrollable" role="document">
+            <div :id="'edit-coupon-overlay-' + _uid" class="modal fade" tabindex="-1" role="dialog" ref="editCouponOverlay" aria-labelledby="modal-title" aria-modal="true">
+                <div class="modal-dialog modal-lg mx-auto modal-dialog-scrollable">
                     <div class="modal-content">
                         
                         <!-- MODAL HEADER -->
                         <div class="modal-header">
-                            <div class="modal-title h4">{{ $translate("Ceres::Template.couponEdit") }}</div>
+                            <h4 class="modal-title">{{ $translate("Ceres::Template.couponEdit") }}</h4>
                             <button type="button" class="close" data-dismiss="modal" :aria-label="$translate('Ceres::Template.closeIcon')" @click="closeEditModal()">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -127,13 +127,13 @@
             </div>
         </form>
 
-        <div id="confirm-finalization-overlay" class="modal fade" tabindex="-1" role="dialog" ref="confirmFinalizationOverlay">
-            <div class="modal-dialog" role="document">
+        <div id="confirm-finalization-overlay" class="modal fade" tabindex="-1" role="dialog" ref="confirmFinalizationOverlay" aria-labelledby="modal-title" aria-modal="true">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     
                     <!-- MODAL HEADER -->
                     <div class="modal-header">
-                        <div class="modal-title h4">{{ $translate("Ceres::Template.couponFinalize") }}</div>
+                        <h4 class="modal-title">{{ $translate("Ceres::Template.couponFinalize") }}</h4>
                         <button type="button" class="close" data-dismiss="modal" :aria-label="$translate('Ceres::Template.closeIcon')" @click="closeConfirmModal()">
                             <span aria-hidden="true">&times;</span>
                         </button>

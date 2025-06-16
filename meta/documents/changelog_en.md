@@ -7,6 +7,8 @@
 - Fixed a broken aria reference in the header.
 - Fixed an overlap of the feedback counter with the stars on category page.
 - Fixed alt text for logo not being linked to webspace field.
+- Added aria-labelledby reference to modals for improved accessibility.
+- Changed modal headlines to use HTML headlines instead of normal text for improved accessibility.
 
 ## v5.0.73 (2025-06-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.72...5.0.73" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 

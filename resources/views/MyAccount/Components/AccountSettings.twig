@@ -28,8 +28,8 @@
 
         {% if "change-mail" in enabledRoutes or "all" in enabledRoutes %}
             <div ref="accountEmailModal">
-                <div class="modal fade">
-                    <div class="modal-dialog" role="document">
+                <div class="modal fade" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+                    <div class="modal-dialog">
                         <form class="modal-content" method="post" @submit.prevent>
                             <div class="modal-header">
                                 <h4 class="modal-title">{{ trans("Ceres::Template.myAccountChangeEmail") }}</h4>
@@ -72,8 +72,8 @@
         {% endif %}
 
         <div ref="accountPasswordModal">
-            <div class="modal fade">
-                <div class="modal-dialog" role="document">
+            <div class="modal fade" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+                <div class="modal-dialog">
                     <form class="modal-content" method="post" @submit.prevent>
                         <div class="modal-header">
                             <h4 class="modal-title">{{ trans("Ceres::Template.myAccountChangePassword") }}</h4>

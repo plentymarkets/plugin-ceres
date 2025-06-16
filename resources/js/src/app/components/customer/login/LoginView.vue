@@ -33,11 +33,11 @@
             </div>
         </div>
 
-        <div class="modal fade" ref="guestModal" tabindex="-1" role="dialog">
+        <div class="modal fade" ref="guestModal" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-modal="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <div class="modal-title h3">{{ $translate("Ceres::Template.loginOrderAsGuest") }}</div>
+                        <h3 class="modal-title">{{ $translate("Ceres::Template.loginOrderAsGuest") }}</h3>
                         <button type="button" class="close" data-testing="guest-login-modal" data-dismiss="modal" aria-hidden="true" :aria-label="$translate('Ceres::Template.closeIcon')">&times;</button>
                     </div>
                     <div class="modal-body">
