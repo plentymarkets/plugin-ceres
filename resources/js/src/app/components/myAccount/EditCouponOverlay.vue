@@ -36,7 +36,7 @@
                         
                         <!-- MODAL HEADER -->
                         <div class="modal-header">
-                            <h4 class="modal-title">{{ $translate("Ceres::Template.couponEdit") }}</h4>
+                            <h4 id="modal-title" class="modal-title">{{ $translate("Ceres::Template.couponEdit") }}</h4>
                             <button type="button" class="close" data-dismiss="modal" :aria-label="$translate('Ceres::Template.closeIcon')" @click="closeEditModal()">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -133,7 +133,7 @@
                     
                     <!-- MODAL HEADER -->
                     <div class="modal-header">
-                        <h4 class="modal-title">{{ $translate("Ceres::Template.couponFinalize") }}</h4>
+                        <h4 id="modal-title" class="modal-title">{{ $translate("Ceres::Template.couponFinalize") }}</h4>
                         <button type="button" class="close" data-dismiss="modal" :aria-label="$translate('Ceres::Template.closeIcon')" @click="closeConfirmModal()">
                             <span aria-hidden="true">&times;</span>
                         </button>
