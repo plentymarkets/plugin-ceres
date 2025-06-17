@@ -41880,176 +41880,184 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "add-item-to-basket-overlay" } }, [
-    _vm._ssrNode('<div class="modal fade">', "</div>", [
-      _vm._ssrNode('<div role="document" class="modal-dialog">', "</div>", [
-        _vm.basketItem
-          ? _vm._ssrNode(
-              '<div class="modal-content">',
-              "</div>",
-              [
-                _vm._ssrNode(
-                  '<div class="modal-header"><div class="modal-title h5">' +
-                    _vm._ssrEscape(
-                      _vm._s(_vm.$translate("Ceres::Template.singleItemAdded"))
-                    ) +
-                    '</div> <span class="text-muted ml-auto"><span class="timer"></span>s</span> <button type="button" data-dismiss="modal"' +
-                    _vm._ssrAttr(
-                      "aria-label",
-                      _vm.$translate("Ceres::Template.closeIcon")
-                    ) +
-                    ' class="close ml-0 pl-1"><span aria-hidden="true">×</span></button></div> '
-                ),
-                _vm._ssrNode('<div class="modal-body">', "</div>", [
+    _vm._ssrNode(
+      '<div role="dialog" aria-labelledby="modal-title" aria-modal="true" class="modal fade">',
+      "</div>",
+      [
+        _vm._ssrNode('<div class="modal-dialog">', "</div>", [
+          _vm.basketItem
+            ? _vm._ssrNode(
+                '<div class="modal-content">',
+                "</div>",
+                [
                   _vm._ssrNode(
-                    '<div class="row is-table-row">',
+                    '<div class="modal-header"><h5 id="modal-title" class="modal-title">' +
+                      _vm._ssrEscape(
+                        _vm._s(
+                          _vm.$translate("Ceres::Template.singleItemAdded")
+                        )
+                      ) +
+                      '</h5> <span class="text-muted ml-auto"><span class="timer"></span>s</span> <button type="button" data-dismiss="modal"' +
+                      _vm._ssrAttr(
+                        "aria-label",
+                        _vm.$translate("Ceres::Template.closeIcon")
+                      ) +
+                      ' class="close ml-0 pl-1"><span aria-hidden="true">×</span></button></div> '
+                  ),
+                  _vm._ssrNode('<div class="modal-body">', "</div>", [
+                    _vm._ssrNode(
+                      '<div class="row is-table-row">',
+                      "</div>",
+                      [
+                        _vm._ssrNode(
+                          '<div class="col-md-4" style="min-height: 80px;">',
+                          "</div>",
+                          [
+                            _c("lazy-img", {
+                              style: { maxHeight: "140px" },
+                              attrs: {
+                                "image-url": _vm.imageUrl,
+                                alt: _vm.imageAlternativeText || _vm.itemName,
+                                title: _vm.itemName,
+                                "picture-class": "img-fluid mx-auto"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._ssrNode(" "),
+                        _vm._ssrNode(
+                          '<div class="col-md-8">',
+                          "</div>",
+                          [
+                            _vm._ssrNode(
+                              "<p><strong>" +
+                                _vm._ssrEscape(_vm._s(_vm.itemName)) +
+                                "</strong> <br> " +
+                                (_vm.countAdditionalBasketItems > 0
+                                  ? "<span>" +
+                                    _vm._ssrEscape(
+                                      _vm._s(
+                                        _vm.$translate(
+                                          "Ceres::Template.basketItemOverlayAdditionalCount",
+                                          {
+                                            count:
+                                              _vm.countAdditionalBasketItems
+                                          }
+                                        )
+                                      )
+                                    ) +
+                                    "</span>"
+                                  : "<!---->") +
+                                '</p> <p class="small"><strong><span class="text-muted">' +
+                                _vm._ssrEscape(
+                                  _vm._s(_vm.basketItem.quantity) + " x "
+                                ) +
+                                "</span> <span>" +
+                                _vm._ssrEscape(
+                                  _vm._s(_vm._f("currency")(_vm.price))
+                                ) +
+                                "</span></strong></p> " +
+                                _vm._ssrList(_vm.variation.attributes, function(
+                                  attribute
+                                ) {
+                                  return (
+                                    '<p class="small"><strong>' +
+                                    _vm._ssrEscape(
+                                      _vm._s(attribute.attribute.names.name)
+                                    ) +
+                                    "</strong>:\n                                <span>" +
+                                    _vm._ssrEscape(
+                                      _vm._s(attribute.value.names.name)
+                                    ) +
+                                    "</span></p>"
+                                  )
+                                }) +
+                                " "
+                            ),
+                            _c("order-property-value-list", {
+                              attrs: { "basket-item": _vm.basketItem }
+                            })
+                          ],
+                          2
+                        )
+                      ],
+                      2
+                    )
+                  ]),
+                  _vm._ssrNode(" "),
+                  _vm._ssrNode(
+                    '<div class="modal-footer">',
                     "</div>",
                     [
-                      _vm._ssrNode(
-                        '<div class="col-md-4" style="min-height: 80px;">',
-                        "</div>",
-                        [
-                          _c("lazy-img", {
-                            style: { maxHeight: "140px" },
-                            attrs: {
-                              "image-url": _vm.imageUrl,
-                              alt: _vm.imageAlternativeText || _vm.itemName,
-                              title: _vm.itemName,
-                              "picture-class": "img-fluid mx-auto"
+                      _c(
+                        "a",
+                        {
+                          directives: [
+                            {
+                              name: "waiting-animation-infinite",
+                              rawName: "v-waiting-animation-infinite"
                             }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._ssrNode(" "),
-                      _vm._ssrNode(
-                        '<div class="col-md-8">',
-                        "</div>",
+                          ],
+                          staticClass:
+                            "btn btn-outline-primary btn-medium mr-2",
+                          attrs: { href: _vm.urls.basket, rel: "nofollow" }
+                        },
                         [
                           _vm._ssrNode(
-                            "<p><strong>" +
-                              _vm._ssrEscape(_vm._s(_vm.itemName)) +
-                              "</strong> <br> " +
-                              (_vm.countAdditionalBasketItems > 0
-                                ? "<span>" +
-                                  _vm._ssrEscape(
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.basketItemOverlayAdditionalCount",
-                                        {
-                                          count: _vm.countAdditionalBasketItems
-                                        }
-                                      )
+                            '<i aria-hidden="true" class="fa fa-shopping-cart"></i>' +
+                              _vm._ssrEscape(
+                                "\n                        " +
+                                  _vm._s(
+                                    _vm.$translate(
+                                      "Ceres::Template.singleItemBasket"
                                     )
                                   ) +
-                                  "</span>"
-                                : "<!---->") +
-                              '</p> <p class="small"><strong><span class="text-muted">' +
+                                  "\n                    "
+                              )
+                          )
+                        ]
+                      ),
+                      _vm._ssrNode(" "),
+                      _c(
+                        "a",
+                        {
+                          directives: [
+                            {
+                              name: "waiting-animation-infinite",
+                              rawName: "v-waiting-animation-infinite"
+                            }
+                          ],
+                          staticClass: "btn btn-primary btn-medium",
+                          attrs: { href: _vm.urls.checkout, rel: "nofollow" }
+                        },
+                        [
+                          _vm._ssrNode(
+                            '<i aria-hidden="true" class="fa fa-arrow-right"></i>' +
                               _vm._ssrEscape(
-                                _vm._s(_vm.basketItem.quantity) + " x "
-                              ) +
-                              "</span> <span>" +
-                              _vm._ssrEscape(
-                                _vm._s(_vm._f("currency")(_vm.price))
-                              ) +
-                              "</span></strong></p> " +
-                              _vm._ssrList(_vm.variation.attributes, function(
-                                attribute
-                              ) {
-                                return (
-                                  '<p class="small"><strong>' +
-                                  _vm._ssrEscape(
-                                    _vm._s(attribute.attribute.names.name)
+                                "\n                        " +
+                                  _vm._s(
+                                    _vm.$translate(
+                                      "Ceres::Template.singleItemCheckout"
+                                    )
                                   ) +
-                                  "</strong>:\n                                <span>" +
-                                  _vm._ssrEscape(
-                                    _vm._s(attribute.value.names.name)
-                                  ) +
-                                  "</span></p>"
-                                )
-                              }) +
-                              " "
-                          ),
-                          _c("order-property-value-list", {
-                            attrs: { "basket-item": _vm.basketItem }
-                          })
-                        ],
-                        2
+                                  "\n                    "
+                              )
+                          )
+                        ]
                       )
                     ],
                     2
-                  )
-                ]),
-                _vm._ssrNode(" "),
-                _vm._ssrNode(
-                  '<div class="modal-footer">',
-                  "</div>",
-                  [
-                    _c(
-                      "a",
-                      {
-                        directives: [
-                          {
-                            name: "waiting-animation-infinite",
-                            rawName: "v-waiting-animation-infinite"
-                          }
-                        ],
-                        staticClass: "btn btn-outline-primary btn-medium mr-2",
-                        attrs: { href: _vm.urls.basket, rel: "nofollow" }
-                      },
-                      [
-                        _vm._ssrNode(
-                          '<i aria-hidden="true" class="fa fa-shopping-cart"></i>' +
-                            _vm._ssrEscape(
-                              "\n                        " +
-                                _vm._s(
-                                  _vm.$translate(
-                                    "Ceres::Template.singleItemBasket"
-                                  )
-                                ) +
-                                "\n                    "
-                            )
-                        )
-                      ]
-                    ),
-                    _vm._ssrNode(" "),
-                    _c(
-                      "a",
-                      {
-                        directives: [
-                          {
-                            name: "waiting-animation-infinite",
-                            rawName: "v-waiting-animation-infinite"
-                          }
-                        ],
-                        staticClass: "btn btn-primary btn-medium",
-                        attrs: { href: _vm.urls.checkout, rel: "nofollow" }
-                      },
-                      [
-                        _vm._ssrNode(
-                          '<i aria-hidden="true" class="fa fa-arrow-right"></i>' +
-                            _vm._ssrEscape(
-                              "\n                        " +
-                                _vm._s(
-                                  _vm.$translate(
-                                    "Ceres::Template.singleItemCheckout"
-                                  )
-                                ) +
-                                "\n                    "
-                            )
-                        )
-                      ]
-                    )
-                  ],
-                  2
-                ),
-                _vm._ssrNode(" "),
-                _vm._t("extendOverlayButtons")
-              ],
-              2
-            )
-          : _vm._e()
-      ])
-    ])
+                  ),
+                  _vm._ssrNode(" "),
+                  _vm._t("extendOverlayButtons")
+                ],
+                2
+              )
+            : _vm._e()
+        ])
+      ]
+    )
   ])
 }
 var staticRenderFns = []
@@ -49382,7 +49390,7 @@ var render = function() {
     },
     [
       _vm._ssrNode(
-        '<div id="resetPwd" tabindex="-1" role="dialog" class="modal fade">',
+        '<div id="resetPwd" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-modal="true" class="modal fade">',
         "</div>",
         [
           _vm._ssrNode('<div class="modal-dialog">', "</div>", [
@@ -49391,13 +49399,13 @@ var render = function() {
               "</div>",
               [
                 _vm._ssrNode(
-                  '<div class="modal-header"><div class="modal-title h3">' +
+                  '<div class="modal-header"><h3 id="modal-title" class="modal-title">' +
                     _vm._ssrEscape(
                       _vm._s(
                         _vm.$translate("Ceres::Template.loginForgotPassword")
                       )
                     ) +
-                    '</div> <button type="button" data-dismiss="modal" aria-hidden="true"' +
+                    '</h3> <button type="button" data-dismiss="modal" aria-hidden="true"' +
                     _vm._ssrAttr(
                       "aria-label",
                       _vm.$translate("Ceres::Template.closeIcon")
@@ -49799,7 +49807,7 @@ var render = function() {
       ]),
       _vm._ssrNode(" "),
       _vm._ssrNode(
-        '<div tabindex="-1" role="dialog" class="modal fade">',
+        '<div tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-modal="true" class="modal fade">',
         "</div>",
         [
           _vm._ssrNode('<div class="modal-dialog">', "</div>", [
@@ -49808,13 +49816,13 @@ var render = function() {
               "</div>",
               [
                 _vm._ssrNode(
-                  '<div class="modal-header"><div class="modal-title h3">' +
+                  '<div class="modal-header"><h3 id="modal-title" class="modal-title">' +
                     _vm._ssrEscape(
                       _vm._s(
                         _vm.$translate("Ceres::Template.loginOrderAsGuest")
                       )
                     ) +
-                    '</div> <button type="button" data-testing="guest-login-modal" data-dismiss="modal" aria-hidden="true"' +
+                    '</h3> <button type="button" data-testing="guest-login-modal" data-dismiss="modal" aria-hidden="true"' +
                     _vm._ssrAttr(
                       "aria-label",
                       _vm.$translate("Ceres::Template.closeIcon")
@@ -56096,7 +56104,7 @@ var render = function() {
           '<i aria-hidden="true" class="fa fa-arrow-right default-float"></i></button></div> '
       ),
       _vm._ssrNode(
-        '<div tabindex="-1" role="dialog" class="modal fade">',
+        '<div tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-modal="true" class="modal fade">',
         "</div>",
         [
           _vm._ssrNode('<div class="modal-dialog">', "</div>", [
@@ -56105,7 +56113,7 @@ var render = function() {
               "</div>",
               [
                 _vm._ssrNode(
-                  '<div class="modal-header"><h3 class="modal-title">' +
+                  '<div class="modal-header"><h3 id="modal-title" class="modal-title">' +
                     _vm._ssrEscape(
                       _vm._s(_vm.$translate("Ceres::Template.returnSendBack"))
                     ) +
