@@ -161,6 +161,13 @@ export default {
         {
             const filteredVariations = this.filterVariations(null, null, true);
 
+            if (filteredVariations.length > 1) {
+              const filteredVariations = filteredVariations.filter(
+                  (obj, index, self) =>
+                      index === self.findIndex(o => o.variationId === obj.variationId)
+              );
+            }
+
             if (filteredVariations.length === 1)
             {
                 return filteredVariations[0];
@@ -338,9 +345,6 @@ export default {
 
             const invalidSelection = invalidSelections[0] || invalidSelections[1];
             const names = [];
-
-            console.log('invalidSelections[0]: ', invalidSelections[0])
-            console.log('invalidSelections[1]: ', invalidSelections[1])
 
             if (invalidSelection)
             {
