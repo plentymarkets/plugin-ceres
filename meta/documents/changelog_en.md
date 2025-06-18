@@ -9,6 +9,7 @@
 - Fixed alt text for logo not being linked to webspace field.
 - Added aria-labelledby reference to modals for improved accessibility.
 - Changed modal headlines to use HTML headlines instead of normal text for improved accessibility.
+- A problem with variation select when variation count is higher than 10000 leading to the item add to cart button being disabled.
 
 ## v5.0.73 (2025-06-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.72...5.0.73" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
