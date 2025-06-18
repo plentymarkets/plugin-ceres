@@ -240,10 +240,10 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
      * returns false if there are none or multiple results
      */
     currentSelection: function currentSelection() {
-      var filteredVariations = this.filterVariations(null, null, true);
+      var filteredVariations = this.filterVariations(null, null, true) || [];
 
       if (filteredVariations && filteredVariations.length > 1) {
-        var _filteredVariations = _filteredVariations.filter(function (obj, index, self) {
+        filteredVariations = filteredVariations.filter(function (obj, index, self) {
           return index === self.findIndex(function (o) {
             return o.variationId === obj.variationId;
           });

@@ -159,10 +159,10 @@ export default {
          */
         currentSelection()
         {
-            const filteredVariations = this.filterVariations(null, null, true);
+            let filteredVariations = this.filterVariations(null, null, true) || [];
 
             if (filteredVariations && filteredVariations.length > 1) {
-              const filteredVariations = filteredVariations.filter(
+              filteredVariations = filteredVariations.filter(
                   (obj, index, self) =>
                       index === self.findIndex(o => o.variationId === obj.variationId)
               );
