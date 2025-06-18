@@ -39,10 +39,10 @@
         <!-- CHANGE_PAYMENT_MODAL -->
         <div ref="changePaymentModal">
             <div class="modal fade" data-backdrop="static">
-                <div class="modal-dialog" role="dialog">
+                <div class="modal-dialog" role="dialog" aria-labelledby="modal-title" aria-modal="true">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title">{{ trans("Ceres::Template.orderHistoryChooseNewPayment") }}</h4>
+                            <h4 id="modal-title" class="modal-title">{{ trans("Ceres::Template.orderHistoryChooseNewPayment") }}</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="{{ trans("Ceres::Template.closeIcon") }}" @click="closeModal()">
                                 <span aria-hidden="true">&times;</span>
                             </button>

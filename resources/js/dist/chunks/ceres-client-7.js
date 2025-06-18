@@ -536,17 +536,26 @@ var render = function() {
         {
           ref: "orderReturnConfirmation",
           staticClass: "modal fade",
-          attrs: { tabindex: "-1", role: "dialog" }
+          attrs: {
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "modal-title",
+            "aria-modal": "true"
+          }
         },
         [
           _c("div", { staticClass: "modal-dialog" }, [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-header" }, [
-                _c("h3", { staticClass: "modal-title" }, [
-                  _vm._v(
-                    _vm._s(_vm.$translate("Ceres::Template.returnSendBack"))
-                  )
-                ]),
+                _c(
+                  "h3",
+                  { staticClass: "modal-title", attrs: { id: "modal-title" } },
+                  [
+                    _vm._v(
+                      _vm._s(_vm.$translate("Ceres::Template.returnSendBack"))
+                    )
+                  ]
+                ),
                 _vm._v(" "),
                 _c(
                   "button",

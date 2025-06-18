@@ -184,19 +184,29 @@ var render = function() {
         {
           ref: "pwdModal",
           staticClass: "modal fade",
-          attrs: { id: "resetPwd", tabindex: "-1", role: "dialog" }
+          attrs: {
+            id: "resetPwd",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "modal-title",
+            "aria-modal": "true"
+          }
         },
         [
           _c("div", { staticClass: "modal-dialog" }, [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-header" }, [
-                _c("div", { staticClass: "modal-title h3" }, [
-                  _vm._v(
-                    _vm._s(
-                      _vm.$translate("Ceres::Template.loginForgotPassword")
+                _c(
+                  "h3",
+                  { staticClass: "modal-title", attrs: { id: "modal-title" } },
+                  [
+                    _vm._v(
+                      _vm._s(
+                        _vm.$translate("Ceres::Template.loginForgotPassword")
+                      )
                     )
-                  )
-                ]),
+                  ]
+                ),
                 _vm._v(" "),
                 _c(
                   "button",
