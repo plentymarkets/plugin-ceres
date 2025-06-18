@@ -161,7 +161,7 @@ export default {
         {
             const filteredVariations = this.filterVariations(null, null, true);
 
-            if (filteredVariations.length > 1) {
+            if (filteredVariations && filteredVariations.length > 1) {
               const filteredVariations = filteredVariations.filter(
                   (obj, index, self) =>
                       index === self.findIndex(o => o.variationId === obj.variationId)

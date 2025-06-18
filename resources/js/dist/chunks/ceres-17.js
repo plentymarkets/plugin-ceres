@@ -242,7 +242,7 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
     currentSelection: function currentSelection() {
       var filteredVariations = this.filterVariations(null, null, true);
 
-      if (filteredVariations.length > 1) {
+      if (filteredVariations && filteredVariations.length > 1) {
         var _filteredVariations = _filteredVariations.filter(function (obj, index, self) {
           return index === self.findIndex(function (o) {
             return o.variationId === obj.variationId;
