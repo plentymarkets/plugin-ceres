@@ -75,12 +75,12 @@
 
     <!-- LOGIN MODAL -->
     <div id="login-modal-wrapper">
-        <div class="modal fade login-modal" id="login" tabindex="-1" role="dialog">
+        <div class="modal fade login-modal" id="login" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-modal="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <div class="modal-title h3">{{ trans("Ceres::Template.login") }}</div>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="{{ trans("Ceres::Template.closeIcon") }}">&times;</button>
+                        <h3 id="modal-title" class="modal-title">{{ trans("Ceres::Template.login") }}</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="{{ trans("Ceres::Template.closeIcon") }}">&times;</button>
                     </div>
                     <lazy-load component="login-modal">
                         <login modal-element="login-modal-wrapper">
@@ -97,15 +97,14 @@
 
     <!-- REGISTRATION MODAL -->
     <div id="simple-registration-modal-wrapper">
-        <div class="modal fade" id="registration" tabindex="-1" role="dialog">
+        <div class="modal fade" id="registration" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-modal="true">
             <div class="modal-dialog">
                 <lazy-load component="register-modal">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <div class="modal-title h3">
+                            <h3 id="modal-title" class="modal-title">
                                 {{ trans("Ceres::Template.regCreateAccount") }}
-
-                            </div>
+                            </h3>
 
                             <popper v-cloak class="ml-auto">
                                 <template #handle>
@@ -126,7 +125,7 @@
                                 </template>
                             </popper>
 
-                            <button type="button" class="close ml-0" data-dismiss="modal" aria-hidden="true" aria-label="{{ trans("Ceres::Template.closeIcon") }}">&times;</button>
+                            <button type="button" class="close ml-0" data-dismiss="modal" aria-label="{{ trans("Ceres::Template.closeIcon") }}">&times;</button>
                         </div>
                         <div class="modal-body">
                             <registration :is-simple-registration="true" modal-element="simple-registration-modal-wrapper">
@@ -168,11 +167,11 @@
     <!-- SHIPPINGCOSTS MODAL -->
     {% if ceresConfig.global.shippingCostsCategoryId > 0 %}
         <div id="shippingscosts-modal-wrapper">
-            <div class="modal fade" id="shippingscosts" tabindex="-1" role="dialog">
+            <div class="modal fade" id="shippingscosts" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-modal="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <div class="modal-title h3">{{ trans('Ceres::Template.shippingInfoCosts') }}</div>
+                            <h3 id="modal-title" class="modal-title">{{ trans('Ceres::Template.shippingInfoCosts') }}</h3>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="{{ trans("Ceres::Template.closeIcon") }}">&times;</button>
                         </div>
                         <div class="modal-body">

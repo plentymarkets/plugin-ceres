@@ -169,7 +169,7 @@ context("new order properties", () =>
         // order is valid until 31.12.2026 11:18:00
         cy.visit("/bestellbestaetigung/?orderId=1507&accessKey=KNG0BV6DD");
         cy.get(`input[name="postcode"]`).type("12345");
-        cy.get(`button[type="submit"]`).click();
+        cy.get('button.btn.btn-primary.btn-appearance[type="submit"]').click();
 
         cy.get(".btn-collapse > .fa").click();
 
@@ -193,7 +193,7 @@ context("new order properties", () =>
         // order is valid until 31.12.2026 11:18:00
         cy.visit("/bestellbestaetigung/?orderId=1507&accessKey=KNG0BV6DD");
         cy.get(`input[name="postcode"]`).type("12345");
-        cy.get(`button[type="submit"]`).click();
+        cy.get('button.btn.btn-primary.btn-appearance[type="submit"]').click();
         cy.get(".btn-collapse > .fa").click();
 
         cy.getByTestingAttr("purchased-order-property").eq(0).should("contain", "zzgl.");

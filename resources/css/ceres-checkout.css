@@ -9981,19 +9981,6 @@ h3 {
   color: #495057;
 }
 
-.cmp-contact .widget .input-unit label,
-.cmp-contact .widget .widget-inner .widget-text-input .input-unit label {
-  color: #495057;
-}
-
-.widget-newsletter .widget-inner form .input-unit label {
-  color: #495057;
-}
-
-.widget-newsletter-unsubscribe .widget-inner .input-unit label {
-  color: #495057;
-}
-
 .input-group .input-unit + .input-group-btn {
   padding-bottom: 15px;
 }
@@ -10392,11 +10379,27 @@ a {
   min-height: 1px;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+}
+
 [v-cloak],
 script2,
 style2,
 tab-list {
   display: none !important;
+}
+
+.thumb-content .feedback-stars-average.feedback-category-view .feedback-count {
+  position: relative;
+  margin-left: 75%;
 }
 
 .mh-1 {
@@ -16025,9 +16028,7 @@ header .widget {
   color: #495057;
 }
 
-.gray-700,
-label.customer-sign-label,
-label.contact-wish-label {
+.gray-700 {
   color: #495057;
 }
 

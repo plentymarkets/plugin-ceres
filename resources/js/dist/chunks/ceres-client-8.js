@@ -380,183 +380,207 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "add-item-to-basket-overlay" } }, [
-    _c("div", { staticClass: "modal fade" }, [
-      _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
-        _vm.basketItem
-          ? _c(
-              "div",
-              { staticClass: "modal-content" },
-              [
-                _c("div", { staticClass: "modal-header" }, [
-                  _c("div", { staticClass: "modal-title h5" }, [
-                    _vm._v(
-                      _vm._s(_vm.$translate("Ceres::Template.singleItemAdded"))
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          role: "dialog",
+          "aria-labelledby": "modal-title",
+          "aria-modal": "true"
+        }
+      },
+      [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _vm.basketItem
+            ? _c(
+                "div",
+                { staticClass: "modal-content" },
+                [
+                  _c("div", { staticClass: "modal-header" }, [
+                    _c(
+                      "h5",
+                      {
+                        staticClass: "modal-title",
+                        attrs: { id: "modal-title" }
+                      },
+                      [
+                        _vm._v(
+                          _vm._s(
+                            _vm.$translate("Ceres::Template.singleItemAdded")
+                          )
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "close ml-0 pl-1",
+                        attrs: {
+                          type: "button",
+                          "data-dismiss": "modal",
+                          "aria-label": _vm.$translate(
+                            "Ceres::Template.closeIcon"
+                          )
+                        }
+                      },
+                      [
+                        _c("span", { attrs: { "aria-hidden": "true" } }, [
+                          _vm._v("×")
+                        ])
+                      ]
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(0),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("div", { staticClass: "row is-table-row" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "col-md-4",
+                          staticStyle: { "min-height": "80px" }
+                        },
+                        [
+                          _c("lazy-img", {
+                            style: { maxHeight: "140px" },
+                            attrs: {
+                              "image-url": _vm.imageUrl,
+                              alt: _vm.imageAlternativeText || _vm.itemName,
+                              title: _vm.itemName,
+                              "picture-class": "img-fluid mx-auto"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-md-8" },
+                        [
+                          _c("p", [
+                            _c("strong", [_vm._v(_vm._s(_vm.itemName))]),
+                            _vm._v(" "),
+                            _c("br"),
+                            _vm._v(" "),
+                            _vm.countAdditionalBasketItems > 0
+                              ? _c("span", [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.$translate(
+                                        "Ceres::Template.basketItemOverlayAdditionalCount",
+                                        {
+                                          count: _vm.countAdditionalBasketItems
+                                        }
+                                      )
+                                    )
+                                  )
+                                ])
+                              : _vm._e()
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "small" }, [
+                            _c("strong", [
+                              _c("span", { staticClass: "text-muted" }, [
+                                _vm._v(_vm._s(_vm.basketItem.quantity) + " x ")
+                              ]),
+                              _vm._v(" "),
+                              _c("span", [
+                                _vm._v(_vm._s(_vm._f("currency")(_vm.price)))
+                              ])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _vm._l(_vm.variation.attributes, function(attribute) {
+                            return _c("p", { staticClass: "small" }, [
+                              _c("strong", [
+                                _vm._v(_vm._s(attribute.attribute.names.name))
+                              ]),
+                              _vm._v(":\n                                "),
+                              _c("span", [
+                                _vm._v(_vm._s(attribute.value.names.name))
+                              ])
+                            ])
+                          }),
+                          _vm._v(" "),
+                          _c("order-property-value-list", {
+                            attrs: { "basket-item": _vm.basketItem }
+                          })
+                        ],
+                        2
+                      )
+                    ])
+                  ]),
                   _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "close ml-0 pl-1",
-                      attrs: {
-                        type: "button",
-                        "data-dismiss": "modal",
-                        "aria-label": _vm.$translate(
-                          "Ceres::Template.closeIcon"
-                        )
-                      }
-                    },
-                    [
-                      _c("span", { attrs: { "aria-hidden": "true" } }, [
-                        _vm._v("×")
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "modal-body" }, [
-                  _c("div", { staticClass: "row is-table-row" }, [
+                  _c("div", { staticClass: "modal-footer" }, [
                     _c(
-                      "div",
+                      "a",
                       {
-                        staticClass: "col-md-4",
-                        staticStyle: { "min-height": "80px" }
+                        directives: [
+                          {
+                            name: "waiting-animation-infinite",
+                            rawName: "v-waiting-animation-infinite"
+                          }
+                        ],
+                        staticClass: "btn btn-outline-primary btn-medium mr-2",
+                        attrs: { href: _vm.urls.basket, rel: "nofollow" }
                       },
                       [
-                        _c("lazy-img", {
-                          style: { maxHeight: "140px" },
-                          attrs: {
-                            "image-url": _vm.imageUrl,
-                            alt: _vm.imageAlternativeText || _vm.itemName,
-                            title: _vm.itemName,
-                            "picture-class": "img-fluid mx-auto"
-                          }
-                        })
-                      ],
-                      1
+                        _c("i", {
+                          staticClass: "fa fa-shopping-cart",
+                          attrs: { "aria-hidden": "true" }
+                        }),
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(
+                              _vm.$translate("Ceres::Template.singleItemBasket")
+                            ) +
+                            "\n                    "
+                        )
+                      ]
                     ),
                     _vm._v(" "),
                     _c(
-                      "div",
-                      { staticClass: "col-md-8" },
+                      "a",
+                      {
+                        directives: [
+                          {
+                            name: "waiting-animation-infinite",
+                            rawName: "v-waiting-animation-infinite"
+                          }
+                        ],
+                        staticClass: "btn btn-primary btn-medium",
+                        attrs: { href: _vm.urls.checkout, rel: "nofollow" }
+                      },
                       [
-                        _c("p", [
-                          _c("strong", [_vm._v(_vm._s(_vm.itemName))]),
-                          _vm._v(" "),
-                          _c("br"),
-                          _vm._v(" "),
-                          _vm.countAdditionalBasketItems > 0
-                            ? _c("span", [
-                                _vm._v(
-                                  _vm._s(
-                                    _vm.$translate(
-                                      "Ceres::Template.basketItemOverlayAdditionalCount",
-                                      { count: _vm.countAdditionalBasketItems }
-                                    )
-                                  )
-                                )
-                              ])
-                            : _vm._e()
-                        ]),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "small" }, [
-                          _c("strong", [
-                            _c("span", { staticClass: "text-muted" }, [
-                              _vm._v(_vm._s(_vm.basketItem.quantity) + " x ")
-                            ]),
-                            _vm._v(" "),
-                            _c("span", [
-                              _vm._v(_vm._s(_vm._f("currency")(_vm.price)))
-                            ])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _vm._l(_vm.variation.attributes, function(attribute) {
-                          return _c("p", { staticClass: "small" }, [
-                            _c("strong", [
-                              _vm._v(_vm._s(attribute.attribute.names.name))
-                            ]),
-                            _vm._v(":\n                                "),
-                            _c("span", [
-                              _vm._v(_vm._s(attribute.value.names.name))
-                            ])
-                          ])
+                        _c("i", {
+                          staticClass: "fa fa-arrow-right",
+                          attrs: { "aria-hidden": "true" }
                         }),
-                        _vm._v(" "),
-                        _c("order-property-value-list", {
-                          attrs: { "basket-item": _vm.basketItem }
-                        })
-                      ],
-                      2
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(
+                              _vm.$translate(
+                                "Ceres::Template.singleItemCheckout"
+                              )
+                            ) +
+                            "\n                    "
+                        )
+                      ]
                     )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "modal-footer" }, [
-                  _c(
-                    "a",
-                    {
-                      directives: [
-                        {
-                          name: "waiting-animation-infinite",
-                          rawName: "v-waiting-animation-infinite"
-                        }
-                      ],
-                      staticClass: "btn btn-outline-primary btn-medium mr-2",
-                      attrs: { href: _vm.urls.basket, rel: "nofollow" }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "fa fa-shopping-cart",
-                        attrs: { "aria-hidden": "true" }
-                      }),
-                      _vm._v(
-                        "\n                        " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.singleItemBasket")
-                          ) +
-                          "\n                    "
-                      )
-                    ]
-                  ),
+                  ]),
                   _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      directives: [
-                        {
-                          name: "waiting-animation-infinite",
-                          rawName: "v-waiting-animation-infinite"
-                        }
-                      ],
-                      staticClass: "btn btn-primary btn-medium",
-                      attrs: { href: _vm.urls.checkout, rel: "nofollow" }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "fa fa-arrow-right",
-                        attrs: { "aria-hidden": "true" }
-                      }),
-                      _vm._v(
-                        "\n                        " +
-                          _vm._s(
-                            _vm.$translate("Ceres::Template.singleItemCheckout")
-                          ) +
-                          "\n                    "
-                      )
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _vm._t("extendOverlayButtons")
-              ],
-              2
-            )
-          : _vm._e()
-      ])
-    ])
+                  _vm._t("extendOverlayButtons")
+                ],
+                2
+              )
+            : _vm._e()
+        ])
+      ]
+    )
   ])
 }
 var staticRenderFns = [

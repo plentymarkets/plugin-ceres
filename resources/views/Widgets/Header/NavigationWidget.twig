@@ -47,13 +47,13 @@
                             <img
                                 class="img-fluid"
                                 src="{{ fallbackImagePath }}"
-                                alt="{{ Twig.print('trans("Ceres::Template.headerCompanyName")') }}"
+                                alt="{{ Twig.print("cdn_metadata(logoUrl, 'alttext') ?: trans('Ceres::Template.headerCompanyName')") }}"
                             />
                         </picture>
                     </a>
                 {% endif %}
 
-                <button v-open-mobile-navigation class="navbar-toggler d-lg-none p-3" type="button">
+                <button v-open-mobile-navigation id="mobile-navigation-toggler" class="navbar-toggler d-lg-none p-3" type="button">
                     &#9776;
                 </button>
             </div>

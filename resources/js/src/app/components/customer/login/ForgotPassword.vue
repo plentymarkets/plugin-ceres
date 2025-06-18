@@ -1,10 +1,10 @@
 <template>
 	<form :id="'reset-pwd-form-' + _uid" method="post" class="reset-pwd-container login-pwd-reset">
-		<div class="modal fade" id="resetPwd" ref="pwdModal" tabindex="-1" role="dialog">
+		<div class="modal fade" id="resetPwd" ref="pwdModal" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-modal="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<div class="modal-title h3">{{ $translate("Ceres::Template.loginForgotPassword") }}</div>
+						<h3 id="modal-title" class="modal-title">{{ $translate("Ceres::Template.loginForgotPassword") }}</h3>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true" :aria-label="$translate('Ceres::Template.closeIcon')">&times;</button>
 					</div>
 					<div class="modal-body">
@@ -13,7 +13,16 @@
 						</div>
 						<div class="row">
 							<div class="col-12">
-                                <input class="honey" type="text" name="username" autocomplete="new-password" tabindex="-1" v-model="honeypot">
+                <input
+                    class="honey"
+                    type="text"
+                    name="username"
+                    autocomplete="new-password"
+                    tabindex="-1"
+                    aria-hidden="true"
+                    :aria-label="$translate('Ceres::Template.loginForgotPassword')"
+                    v-model="honeypot"
+                >
 								<div class="input-unit no-bottom" data-validate="mail">
 									<input type="email" name="email" autocomplete="email" :id="'mail' + _uid" v-model="username" data-autofocus>
 									<label :for="'mail' + _uid">{{ $translate("Ceres::Template.loginEmail") }}*</label>

@@ -6,7 +6,7 @@ context("Order confirmation", () =>
     {
         cy.visit("/bestellbestaetigung/?orderId=1392&accessKey=ILZIIM0MB");
         cy.get(`input[name="postcode"]`).type("12345");
-        cy.get(`button[type="submit"]`).click();
+        cy.get('button.btn.btn-primary.btn-appearance[type="submit"]').click();
         cy.get(".h3").should("contain", "1392");
     });
 
@@ -27,7 +27,7 @@ context("Order confirmation", () =>
         cy.visit("/bestellbestaetigung/?orderId=1392&accessKey=ILZIIM0MB");
         cy.get(`meta[content="NOINDEX"]`).should("exist");
         cy.get(`input[name="postcode"]`).type("12345");
-        cy.get(`button[type="submit"]`).click();
+        cy.get('button.btn.btn-primary.btn-appearance[type="submit"]').click();
         cy.get(".h3").should("contain", "1392");
         cy.get(`meta[content="NOINDEX"]`).should("exist");
     });

@@ -1,12 +1,12 @@
 <template>
     <div id="add-item-to-basket-overlay">
-        <div class="modal fade">
-            <div class="modal-dialog" role="document">
+        <div class="modal fade" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+            <div class="modal-dialog">
                 <div class="modal-content" v-if="basketItem">
 
                     <!-- MODAL HEADER -->
                     <div class="modal-header">
-                        <div class="modal-title h5">{{ $translate("Ceres::Template.singleItemAdded") }}</div>
+                        <h5 id="modal-title" class="modal-title">{{ $translate("Ceres::Template.singleItemAdded") }}</h5>
                         <span class="text-muted ml-auto"><span class="timer"></span>s</span>
                         <button type="button" class="close ml-0 pl-1" data-dismiss="modal" :aria-label="$translate('Ceres::Template.closeIcon')">
                             <span aria-hidden="true">&times;</span>

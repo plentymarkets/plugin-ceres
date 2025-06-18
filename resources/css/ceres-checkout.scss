@@ -8792,37 +8792,7 @@ a.close.disabled {
         color: $gray-700;
     }
 }
-.cmp-contact {
-    .widget {
-        .input-unit,
-        .widget-inner .widget-text-input .input-unit {
-            label {
-                color: $gray-700;
-            }
-        }
-    }
-}
 
-.widget-newsletter {
-    .widget-inner {
-        form {
-            .input-unit {
-                label {
-                    color: $gray-700;
-                }
-            }
-        }
-    }
-}
-.widget-newsletter-unsubscribe {
-    .widget-inner {
-        .input-unit {
-            label {
-                color: $gray-700;
-            }
-        }
-    }
-}
 .input-group {
 
     .input-unit + .input-group-btn {
@@ -9186,6 +9156,17 @@ a {
     min-height: 1px;
 }
 
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    overflow: hidden;
+}
+
 // stylelint-disable selector-type-no-unknown
 [v-cloak],
 script2,
@@ -9194,6 +9175,17 @@ tab-list {
     display: none !important; // stylelint-disable-line declaration-no-important
 }
 // stylelint-enable selector-type-no-unknown
+
+.thumb-content {
+    .feedback-stars-average {
+        &.feedback-category-view {
+            .feedback-count {
+                position: relative;
+                margin-left: 75%;
+            }
+        }
+    }
+}
 
 @each $breakpoint in map-keys($grid-breakpoints) {
     $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
@@ -14609,9 +14601,7 @@ header .widget {
     }
 }
 
-.gray-700,
-label.customer-sign-label,
-label.contact-wish-label {
+.gray-700 {
     color: $gray-700;
 }
 

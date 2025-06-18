@@ -1,5 +1,37 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.74 (2025-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.73...5.0.74" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Eine fehlerhafte Aria-Referenz im Header wurde korrigiert.
+
+## v5.0.73 (2025-06-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.72...5.0.73" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Die Option **Externer Name** wurde in den Einstellungen des Herstellerdaten-Widgets im ShopBuilder hinzugefügt.
+- Die neue Rechtstext-Seite **Barrierefreiheitserklärung** wurde hinzugefügt. Die Barrierefreiheitserklärung kann im Menü **Einrichtung » Shop » [Shop auswählen] » Rechtliches** bearbeitet werden.
+- Die Option **Keine Anrede** wurde zur Anrede des Adressauswahl-Widgets hinzugefügt.
+
+### Geändert
+
+- Die Farben der Labels wurden geändert, um die Barrierefreiheit in Bezug auf den Farbkontrast zu verbessern.
+- Die Größe der Touch Targets der Schaltflächen für die Mengeneingabe und die AGB-Checkbox im Checkout auf mobilen Endgeräten wurde erhöht, um die Barrierefreiheit zu verbessern.
+- Alle Icons im Shop wurden mit `aria-hidden`-Labels ausgestattet, um die Barrierefreiheit zu verbessern.
+- Die Formatierung der Liste im Summen-Widget wurde angepasst, um den Empfehlungen für Barrierefreiheit zu entsprechen.
+- Redundante Titelattribute wurden entfernt.
+- Die Schaltflächen für die Mengenauswahl und die Häkchenfelder im Checkout wurden vergrößert, um die Barrierefreiheit zu verbessern.
+- Dem ShopBuilder-Widget **Artikeldaten-Tabelle** wurden Spaltenbeschreibungen hinzugefügt, um die Barrierefreiheit zu verbessern.
+
+### Behoben
+
+- Es wurde ein Fehler behoben, durch den die Scroll-Leiste in Mozilla- und Safari-Browsern ruckartig gesprungen ist.
+- Durch einen Fehler funktionierte der Feedback-Filter für Artikel im ShopBuilder nicht wie beabsichtigt. Dies wurde behoben.
+- Es wurde ein Barrierefreiheits-Fehler in der Adressauswahl behoben.
+- Das Alt-Attribut eines Bildes im Bilderbox-Widget wird korrekt abgerufen.
+- Fehlende Aria-Beschriftung für die Eingabefelder im „Passwort vergessen“ Dialog hinzugefügt.
+
 ## v5.0.72 (2025-04-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.71...5.0.72" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO

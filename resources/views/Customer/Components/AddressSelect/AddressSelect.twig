@@ -79,7 +79,7 @@
                                     :data-index="index"
                                     :watch-data="true"
                                 >
-                                    <li class="item" role="radiogroup" :aria-label="{{ trans("Ceres::Template.checkoutShippingAddress") }}" aria-hidden="true">
+                                    <li class="item" role="radiogroup" aria-label="{{ trans("Ceres::Template.checkoutShippingAddress") }}">
                                         <input
                                             type="radio"
                                             :name="'shippingAddress' + _uid"
@@ -136,12 +136,13 @@
                                                                 v-tooltip
                                                                 data-toggle="tooltip"
                                                                 data-placement="top"
+                                                                aria-label="{{ trans("Ceres::Template.addressDelete") }}"
                                                                 title="{{ trans("Ceres::Template.addressDelete") }}"
                                                                 class="btn btn-danger"
                                                                 @click.prevent="showDeleteModal(item)"
                                                                 {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-remove'\"") | raw }}
                                                             >
-                                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                            <i class="fa fa-trash-o"></i>
                                                             </button>
                                                         </span>
                                                     </div>  
@@ -161,11 +162,11 @@
         </div>
 
         <div ref="addressModal">
-            <div class="modal fade" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
+            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+                <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title">${headline}</h4>
+                            <h4 id="modal-title" class="modal-title">${headline}</h4>
                             <button type="button" class="close" @click="closeAddressModal" aria-label="{{ trans("Ceres::Template.closeIcon") }}">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -190,11 +191,11 @@
         </div>
 
         <div ref="deleteModal" {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-remove-modal'\"") | raw }}>
-            <div class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-modal="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title">${headline}</h4>
+                            <h4 id="modal-title" class="modal-title">${headline}</h4>
                             <button type="button" class="close" @click="closeDeleteModal" aria-label="{{ trans("Ceres::Template.closeIcon") }}">
                                 <span aria-hidden="true">&times;</span>
                             </button>
