@@ -608,7 +608,12 @@ var render = function() {
       )
     : _c(
         "a",
-        { attrs: { href: _vm.itemUrl } },
+        {
+          attrs: {
+            href: _vm.itemUrl,
+            "aria-label": _vm.getAltText(_vm.imageUrls[0])
+          }
+        },
         [
           _c("lazy-img", {
             ref: { itemLazyImage: !_vm.disableLazyLoad },
