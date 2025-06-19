@@ -8,6 +8,7 @@
 
 ### Fixed
 
+- Contrast issues on unit values and color of link inside live shopping area.
 - Fixed a broken aria reference in the header.
 - Fixed an overlap of the feedback counter with the stars on category page.
 - Fixed alt text for logo not being linked to webspace field.
