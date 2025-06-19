@@ -162,11 +162,11 @@
         </div>
 
         <div ref="addressModal">
-            <div class="modal fade" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
+            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+                <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title">${headline}</h4>
+                            <h4 id="modal-title" class="modal-title">${headline}</h4>
                             <button type="button" class="close" @click="closeAddressModal" aria-label="{{ trans("Ceres::Template.closeIcon") }}">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -191,11 +191,11 @@
         </div>
 
         <div ref="deleteModal" {{ set_testing_attr(":data-testing", "\"addressTypePrefix + 'address-select-remove-modal'\"") | raw }}>
-            <div class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-modal="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title">${headline}</h4>
+                            <h4 id="modal-title" class="modal-title">${headline}</h4>
                             <button type="button" class="close" @click="closeDeleteModal" aria-label="{{ trans("Ceres::Template.closeIcon") }}">
                                 <span aria-hidden="true">&times;</span>
                             </button>

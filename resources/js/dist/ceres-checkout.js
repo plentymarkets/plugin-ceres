@@ -47628,7 +47628,9 @@ var render = function() {
             attrs: {
               id: "edit-coupon-overlay-" + _vm._uid,
               tabindex: "-1",
-              role: "dialog"
+              role: "dialog",
+              "aria-labelledby": "modal-title",
+              "aria-modal": "true"
             }
           },
           [
@@ -47636,17 +47638,23 @@ var render = function() {
               "div",
               {
                 staticClass:
-                  "modal-dialog modal-lg mx-auto modal-dialog-scrollable",
-                attrs: { role: "document" }
+                  "modal-dialog modal-lg mx-auto modal-dialog-scrollable"
               },
               [
                 _c("div", { staticClass: "modal-content" }, [
                   _c("div", { staticClass: "modal-header" }, [
-                    _c("div", { staticClass: "modal-title h4" }, [
-                      _vm._v(
-                        _vm._s(_vm.$translate("Ceres::Template.couponEdit"))
-                      )
-                    ]),
+                    _c(
+                      "h4",
+                      {
+                        staticClass: "modal-title",
+                        attrs: { id: "modal-title" }
+                      },
+                      [
+                        _vm._v(
+                          _vm._s(_vm.$translate("Ceres::Template.couponEdit"))
+                        )
+                      ]
+                    ),
                     _vm._v(" "),
                     _c(
                       "button",
@@ -47958,124 +47966,126 @@ var render = function() {
         attrs: {
           id: "confirm-finalization-overlay",
           tabindex: "-1",
-          role: "dialog"
+          role: "dialog",
+          "aria-labelledby": "modal-title",
+          "aria-modal": "true"
         }
       },
       [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c("div", { staticClass: "modal-title h4" }, [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-header" }, [
+              _c(
+                "h4",
+                { staticClass: "modal-title", attrs: { id: "modal-title" } },
+                [
                   _vm._v(
                     _vm._s(_vm.$translate("Ceres::Template.couponFinalize"))
                   )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      "aria-label": _vm.$translate("Ceres::Template.closeIcon")
-                    },
-                    on: {
-                      click: function($event) {
-                        return _vm.closeConfirmModal()
-                      }
-                    }
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("×")
-                    ])
-                  ]
-                )
-              ]),
+                ]
+              ),
               _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "my-2" }, [
-                  _vm._v(
-                    _vm._s(
-                      _vm.$translate("Ceres::Template.couponFinalizeConfirm")
-                    )
+              _c(
+                "button",
+                {
+                  staticClass: "close",
+                  attrs: {
+                    type: "button",
+                    "data-dismiss": "modal",
+                    "aria-label": _vm.$translate("Ceres::Template.closeIcon")
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.closeConfirmModal()
+                    }
+                  }
+                },
+                [
+                  _c("span", { attrs: { "aria-hidden": "true" } }, [
+                    _vm._v("×")
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("div", { staticClass: "my-2" }, [
+                _vm._v(
+                  _vm._s(
+                    _vm.$translate("Ceres::Template.couponFinalizeConfirm")
                   )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-danger",
-                    attrs: {
-                      type: "button",
-                      disabled: _vm.isFinalizing,
-                      "data-dismiss": "modal",
-                      "aria-label": _vm.$translate("Ceres::Template.closeIcon")
-                    },
-                    on: {
-                      click: function($event) {
-                        return _vm.closeConfirmModal()
-                      }
-                    }
-                  },
-                  [
-                    _c("span", [
-                      _vm._v(
-                        _vm._s(
-                          _vm.$translate(
-                            "Ceres::Template.couponFinalizeConfirmNo"
-                          )
-                        )
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("i", {
-                      staticClass: "fa fa-times default-float",
-                      attrs: { "aria-hidden": "true" }
-                    })
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    class: { disabled: _vm.isFinalizing },
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        return _vm.finalize()
-                      }
-                    }
-                  },
-                  [
-                    _c("span", [
-                      _vm._v(
-                        _vm._s(
-                          _vm.$translate(
-                            "Ceres::Template.couponFinalizeConfirmYes"
-                          )
-                        )
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("icon", {
-                      staticClass: "default-float",
-                      attrs: { icon: "check", loading: _vm.isFinalizing }
-                    })
-                  ],
-                  1
                 )
               ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger",
+                  attrs: {
+                    type: "button",
+                    disabled: _vm.isFinalizing,
+                    "data-dismiss": "modal",
+                    "aria-label": _vm.$translate("Ceres::Template.closeIcon")
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.closeConfirmModal()
+                    }
+                  }
+                },
+                [
+                  _c("span", [
+                    _vm._v(
+                      _vm._s(
+                        _vm.$translate(
+                          "Ceres::Template.couponFinalizeConfirmNo"
+                        )
+                      )
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("i", {
+                    staticClass: "fa fa-times default-float",
+                    attrs: { "aria-hidden": "true" }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  class: { disabled: _vm.isFinalizing },
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.finalize()
+                    }
+                  }
+                },
+                [
+                  _c("span", [
+                    _vm._v(
+                      _vm._s(
+                        _vm.$translate(
+                          "Ceres::Template.couponFinalizeConfirmYes"
+                        )
+                      )
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("icon", {
+                    staticClass: "default-float",
+                    attrs: { icon: "check", loading: _vm.isFinalizing }
+                  })
+                ],
+                1
+              )
             ])
-          ]
-        )
+          ])
+        ])
       ]
     )
   ])
