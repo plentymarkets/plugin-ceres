@@ -10162,7 +10162,7 @@ html.ie {
 
     a {
         font-weight: $font-weight-bold;
-        color: inherit;
+        color: $white !important;
     }
 }
 
@@ -11343,7 +11343,7 @@ body.basket-open {
 
     .category-lowest-price,
     .category-unit-price {
-        color: $gray-500;
+        color: $gray-700;
     }
 
     .btn-group {
@@ -11400,7 +11400,6 @@ body.basket-open {
 .no-pointer-events {
     pointer-events: none;
 }
-
 .component-loading {
     position: relative;
 

@@ -107,7 +107,7 @@
                             <span class="vat small text-muted">
                                 {{ $translate("Ceres::Template.singleItemFootnote1") }} <template v-if="showNetPrices">{{ $translate("Ceres::Template.singleItemExclVAT") }}</template><template v-else>{{ $translate("Ceres::Template.singleItemInclVAT") }}</template> {{ $translate("Ceres::Template.singleItemExclusive") }}
                             <a v-if="hasShippingCostsCategoryId" data-toggle="modal" href="#shippingscosts">{{ $translate("Ceres::Template.singleItemShippingCosts") }}</a>
-                            <a v-else :title="$translate('Ceres::Template.singleItemShippingCosts')">{{ $translate("Ceres::Template.singleItemShippingCosts") }}</a>
+                            <a v-else>{{ $translate("Ceres::Template.singleItemShippingCosts") }}</a>
 
                             </span>
 
