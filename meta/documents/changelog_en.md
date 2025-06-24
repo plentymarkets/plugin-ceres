@@ -2,6 +2,10 @@
 
 ## v5.0.74 (2025-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.73...5.0.74" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
+### Added
+
+- Aria label to honey input from contact
+
 ### Changed
 
 - Aria label to `a` tag from the category image carousel.
