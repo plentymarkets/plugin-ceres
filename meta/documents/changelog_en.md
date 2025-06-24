@@ -1,23 +1,18 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.74 (2025-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.73...5.0.74" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
-
-### Added
-
-- Aria label to honey input from contact
-
-### Changed
-
-- Aria label to `a` tag from the category image carousel.
+## v5.0.74 (2025-06-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.73...5.0.74" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed
 
-- Contrast issues on unit values and color of link inside live shopping area.
-- Fixed a broken aria reference in the header.
+- Added an `aria` label to `a` tag on the category image tiles for improved accessibility
+- Fixed contrast issues on item unit values for improved accessibility.
+- Unified link color inside live shopping widget for improved accessibility.
+- Fixed a broken `aria` reference in the header for improved accessibility.
 - Fixed an overlap of the feedback counter with the stars on category page.
-- Fixed alt text for logo not being linked to webspace field.
-- Added aria-labelledby reference to modals for improved accessibility.
+- The alt text of the shop logo is now taken from the webspace, if available.
+- Added `aria-labelledby` reference to modals for improved accessibility.
 - Changed modal headlines to use HTML headlines instead of normal text for improved accessibility.
+- Fixed accessibility issues of honeypot inputs.
 - A problem with variation select when variation count is higher than 10000 leading to the item add to cart button being disabled.
 
 ## v5.0.73 (2025-06-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.72...5.0.73" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
