@@ -1,10 +1,19 @@
 # Release Notes für plentyShop LTS
 
-## v5.0.74 (2025-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.73...5.0.74" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.74 (2025-06-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.73...5.0.74" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Behoben
 
-- Eine fehlerhafte Aria-Referenz im Header wurde korrigiert.
+
+- Ein `aria`-Label zum `a`-Tag auf den Kategorie-Bildkacheln hinzugefügt, um die Barrierefreiheit zu verbessern.
+- Kontrastprobleme bei den Mengeneinheiten von Artikeln behoben, um die Barrierefreiheit zu verbessern.
+- Link-Farbe im Live-Shopping-Widget vereinheitlicht, um die Barrierefreiheit zu verbessern.
+- Eine fehlerhafte `aria`-Referenz im Header behoben, um die Barrierefreiheit zu verbessern.
+- Überlappung des Feedback-Zählers mit den Sternen auf der Kategorieseite behoben.
+- Alternativtext des Shop-Logos wird nun vom Webspace genommen.
+- `aria-labelledby`-Referenz zu Modalen hinzugefügt, um die Barrierefreiheit zu verbessern.
+- Überschriften in Modalen von normalem Text auf HTML-Überschriften umgestellt, um die Barrierefreiheit zu verbessern.
+- Ein Problem bei der Variantenauswahl behoben, das bei mehr als 10.000 Varianten dazu führte, dass der „In den Warenkorb“-Button deaktiviert war.
 
 ## v5.0.73 (2025-06-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.72...5.0.73" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
