@@ -52678,25 +52678,15 @@ var render = function() {
                                   )
                                 ]
                               )
-                            : _c(
-                                "a",
-                                {
-                                  attrs: {
-                                    title: _vm.$translate(
+                            : _c("a", [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.$translate(
                                       "Ceres::Template.singleItemShippingCosts"
                                     )
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.singleItemShippingCosts"
-                                      )
-                                    )
                                   )
-                                ]
-                              )
+                                )
+                              ])
                         ],
                         2
                       ),
@@ -54182,7 +54172,12 @@ var render = function() {
       )
     : _c(
         "a",
-        { attrs: { href: _vm.itemUrl } },
+        {
+          attrs: {
+            href: _vm.itemUrl,
+            "aria-label": _vm.getAltText(_vm.imageUrls[0])
+          }
+        },
         [
           _c("lazy-img", {
             ref: { itemLazyImage: !_vm.disableLazyLoad },

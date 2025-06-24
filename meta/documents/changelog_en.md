@@ -2,8 +2,13 @@
 
 ## v5.0.74 (2025-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.73...5.0.74" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
+### Changed
+
+- Aria label to `a` tag from the category image carousel.
+
 ### Fixed
 
+- Contrast issues on unit values and color of link inside live shopping area.
 - Fixed a broken aria reference in the header.
 - Fixed an overlap of the feedback counter with the stars on category page.
 - Fixed alt text for logo not being linked to webspace field.

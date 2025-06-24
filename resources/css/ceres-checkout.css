@@ -11775,7 +11775,7 @@ html.ie .single-carousel .owl-item > div {
 }
 .live-shopping-prices-additional-info a {
   font-weight: 700;
-  color: inherit;
+  color: #fff !important;
 }
 
 .live-shopping-progress:not(:last-child) {
@@ -12801,7 +12801,7 @@ body.basket-open {
 }
 .cmp-product-thumb .category-lowest-price,
 .cmp-product-thumb .category-unit-price {
-  color: #adb5bd;
+  color: #495057;
 }
 .cmp-product-thumb .btn-group {
   margin-top: 5px;
