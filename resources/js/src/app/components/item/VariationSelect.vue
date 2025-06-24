@@ -159,7 +159,14 @@ export default {
          */
         currentSelection()
         {
-            const filteredVariations = this.filterVariations(null, null, true);
+            let filteredVariations = this.filterVariations(null, null, true) || [];
+
+            if (filteredVariations && filteredVariations.length > 1) {
+              filteredVariations = filteredVariations.filter(
+                  (obj, index, self) =>
+                      index === self.findIndex(o => o.variationId === obj.variationId)
+              );
+            }
 
             if (filteredVariations.length === 1)
             {
@@ -339,18 +346,21 @@ export default {
             const invalidSelection = invalidSelections[0] || invalidSelections[1];
             const names = [];
 
-            for (const attribute of invalidSelection.attributesToReset)
+            if (invalidSelection)
             {
+              for (const attribute of invalidSelection.attributesToReset)
+              {
                 if (attribute.attributeId !== attributeId)
                 {
-                    names.push("<b>" + attribute.name +"</b>");
+                  names.push("<b>" + attribute.name +"</b>");
                 }
-            }
-            if (invalidSelection.newUnit)
-            {
+              }
+              if (invalidSelection.newUnit)
+              {
                 names.push(
                     "<b>" + this.$translate("Ceres::Template.singleItemContent") + "</b>"
                 );
+              }
             }
 
             if (!names.length)
