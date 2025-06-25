@@ -85,7 +85,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -413,10 +412,7 @@ var render = function() {
                 type: "text",
                 name: "username",
                 tabindex: "-1",
-                "aria-hidden": "true",
-                "aria-label": _vm.$translate(
-                  "Ceres::Template.newsletterUsername"
-                )
+                "aria-hidden": "true"
               },
               domProps: { value: _vm.honeypot },
               on: {

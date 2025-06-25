@@ -7750,7 +7750,7 @@ var render = function() {
             name: "username",
             autocomplete: "new-password",
             tabindex: "-1",
-            "aria-label": "honeypot"
+            "aria-hidden": "true"
           },
           domProps: { value: _vm.honeypot },
           on: {

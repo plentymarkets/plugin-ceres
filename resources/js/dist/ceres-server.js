@@ -6158,7 +6158,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -13336,7 +13335,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -13483,7 +13481,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../mixins/buttonSizeProperty.mixin */ "./resources/js/src/app/mixins/buttonSizeProperty.mixin.js");
 
 
-//
 //
 //
 //
@@ -48907,7 +48904,7 @@ var render = function() {
                   ) +
                   "</label></div></div>"
                 : "<!---->") +
-              ' <input type="text" name="username" autocomplete="new-password" tabindex="-1" aria-label="honeypot"' +
+              ' <input type="text" name="username" autocomplete="new-password" tabindex="-1" aria-hidden="true"' +
               _vm._ssrAttr("value", _vm.honeypot) +
               ' class="honey"> '
           ),
@@ -49431,10 +49428,6 @@ var render = function() {
                       )
                     ) +
                     '</span></div> <div class="row"><div class="col-12"><input type="text" name="username" autocomplete="new-password" tabindex="-1" aria-hidden="true"' +
-                    _vm._ssrAttr(
-                      "aria-label",
-                      _vm.$translate("Ceres::Template.loginForgotPassword")
-                    ) +
                     _vm._ssrAttr("value", _vm.honeypot) +
                     ' class="honey"> <div data-validate="mail" class="input-unit no-bottom"><input type="email" name="email" autocomplete="email"' +
                     _vm._ssrAttr("id", "mail" + _vm._uid) +
@@ -55866,10 +55859,6 @@ var render = function() {
               "></div> <input" +
               _vm._ssrAttr("id", "input-username_" + _vm.uniqueId) +
               ' autocomplete="none" type="text" name="username" tabindex="-1" aria-hidden="true"' +
-              _vm._ssrAttr(
-                "aria-label",
-                _vm.$translate("Ceres::Template.newsletterUsername")
-              ) +
               _vm._ssrAttr("value", _vm.honeypot) +
               ' class="honey"></div></div> ' +
               (_vm.showPrivacyPolicyCheckbox
@@ -56005,10 +55994,6 @@ var render = function() {
                   "input-unsubscribe-username_" + _vm.uniqueId
                 ) +
                 ' type="text" name="username" autocomplete="new-password" tabindex="-1" aria-hidden="true"' +
-                _vm._ssrAttr(
-                  "aria-label",
-                  _vm.$translate("Ceres::Template.newsletterUsername")
-                ) +
                 _vm._ssrAttr("value", _vm.honeypot) +
                 ' class="honey"> '
             ),
