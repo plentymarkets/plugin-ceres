@@ -20,7 +20,6 @@
                     autocomplete="new-password"
                     tabindex="-1"
                     aria-hidden="true"
-                    :aria-label="$translate('Ceres::Template.loginForgotPassword')"
                     v-model="honeypot"
                 >
 								<div class="input-unit no-bottom" data-validate="mail">

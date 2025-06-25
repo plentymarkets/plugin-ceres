@@ -28,7 +28,6 @@
                       name="username"
                       tabindex="-1"
                       aria-hidden="true"
-                      :aria-label="$translate('Ceres::Template.newsletterUsername')"
                       v-model="honeypot">
                 </div>
             </div>
