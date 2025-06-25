@@ -14,7 +14,6 @@
                      autocomplete="new-password"
                      tabindex="-1"
                      aria-hidden="true"
-                     :aria-label="$translate('Ceres::Template.newsletterUsername')"
                      v-model="honeypot"/>
 
                 <span class="input-group-btn">
