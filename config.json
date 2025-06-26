@@ -3888,6 +3888,36 @@
                         ]
                     }
                 },
+                "meta.robots_declaration_of_accessibility": {
+                    "type": "selectBox",
+                    "required": false,
+                    "label": "Config.metaRobotsDeclarationOfAccessibilityLabel",
+                    "options": {
+                        "defaultValue": "all",
+                        "selectBoxValues": [
+                            {
+                                "value": "all",
+                                "caption": "Config.metaRobotsAll"
+                            },
+                            {
+                                "value": "index",
+                                "caption": "Config.metaRobotsIndex"
+                            },
+                            {
+                                "value": "nofollow",
+                                "caption": "Config.metaRobotsNofollow"
+                            },
+                            {
+                                "value": "noindex",
+                                "caption": "Config.metaRobotsNoindex"
+                            },
+                            {
+                                "value": "noindex, nofollow",
+                                "caption": "Config.metaRobotsNoindexNofollow"
+                            }
+                        ]
+                    }
+                },
                 "meta.robots_legal_disclosure": {
                     "type": "selectBox",
                     "required": false,

@@ -1,6 +1,11 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.74 (2025-06-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.73...5.0.74" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.74 (2025-06-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.73...5.0.74" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Added
+
+- Meta data for the declaration of accessibility can be edited.
+- The robots settings for the declaration of accessibility can be configured.
 
 ### Fixed
 

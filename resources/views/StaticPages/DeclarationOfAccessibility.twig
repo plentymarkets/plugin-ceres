@@ -2,6 +2,14 @@
 
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
+{% block PartialHead %}
+    {% embed getPartial('page-metadata') %}
+        {% block title          trans("Ceres::Template.declarationOfAccessibility") %}
+        {% block description    trans('Ceres::Template.declarationOfAccessibilityMetaDescription') %}
+        {% block robots         ceresConfig.meta.robotsDeclarationOfAccessibility %}
+    {% endembed %}
+{% endblock %}
+
 {% block PageBody %}
 
     {% set declarationOfAccessibility = services.legalInformation.getDeclarationOfAccessibility() %}
