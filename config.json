@@ -3891,7 +3891,7 @@
                 "meta.robots_declaration_of_accessibility": {
                     "type": "selectBox",
                     "required": false,
-                    "label": "Config.metaRobotsDeclarationOfAccessibility",
+                    "label": "Config.metaRobotsDeclarationOfAccessibilityLabel",
                     "options": {
                         "defaultValue": "all",
                         "selectBoxValues": [
