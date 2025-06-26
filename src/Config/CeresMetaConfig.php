@@ -34,6 +34,11 @@ class CeresMetaConfig extends PluginConfig
     public $robotsCancellationForm;
 
     /**
+     * @var string $robotsDeclarationOfAccessibility Robots for declaration of accessibility.
+     */
+    public $robotsDeclarationOfAccessibility;
+
+    /**
      * @var string $robotsLegalDisclosure Robots for legal disclosure.
      */
     public $robotsLegalDisclosure;
