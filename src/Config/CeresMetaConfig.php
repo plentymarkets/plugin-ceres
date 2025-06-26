@@ -75,6 +75,7 @@ class CeresMetaConfig extends PluginConfig
         $this->robotsContact                        = $this->getTextValue( 'meta.robots_contact' , 'all' );
         $this->robotsCancellationRights             = $this->getTextValue( 'meta.robots_cancel_rights' , 'all' );
         $this->robotsCancellationForm               = $this->getTextValue( 'meta.robots_cancel_form' , 'all' );
+        $this->robotsDeclarationOfAccessibility     = $this->getTextValue( 'meta.robots_declaration_of_accessibility' , 'all' );
         $this->robotsLegalDisclosure                = $this->getTextValue( 'meta.robots_legal_disclosure' , 'all' );
         $this->robotsPrivacyPolicy                  = $this->getTextValue( 'meta.robots_privacy_policy' , 'all' );
         $this->robotsTermsAndConditions             = $this->getTextValue( 'meta.robots_terms_and_conditions' , 'all' );
