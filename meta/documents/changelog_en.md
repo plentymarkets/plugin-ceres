@@ -1,5 +1,11 @@
 # Release Notes for plentyShop LTS
 
+## v5.0.75 (2025-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.74...5.0.75" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Fixed enabling of declaration of accessibility route from the global settings.
+
 ## v5.0.74 (2025-06-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.73...5.0.74" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added
