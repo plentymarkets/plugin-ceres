@@ -7,14 +7,19 @@
                     <input type="email" name="email" autocomplete="email" class="form-control" id="email-input-id" v-model="email" data-testing="unsub-nl-mail">
                 </div>
 
-              <input :id="'input-unsubscribe-username_' + uniqueId"
-                     class="honey"
-                     type="text"
-                     name="username"
-                     autocomplete="new-password"
-                     tabindex="-1"
-                     aria-hidden="true"
-                     v-model="honeypot"/>
+                <input :id="'input-unsubscribe-username_' + uniqueId"
+                       class="honey"
+                       type="text"
+                       name="username"
+                       autocomplete="new-password"
+                       tabindex="-1"
+                       aria-hidden="true"
+                       v-model="honeypot"/>
+                <label class="position-absolute" :for="'input-unsubscribe-username_' + uniqueId">
+                    <span class="visually-hidden">
+                      {{ $translate("Ceres::Template.regHoneypotLabel") }}
+                    </span>
+                </label>
 
                 <span class="input-group-btn">
                     <button type="submit" class="btn btn-primary btn-appearance float-right btn-medium btn-xs-max-width" @click="validateData" :disabled="isDisabled" :class="buttonSizeClass" data-testing="unsub-nl-send">

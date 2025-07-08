@@ -50,6 +50,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -214,6 +219,23 @@ var render = function() {
               }
             }
           }),
+          _vm._v(" "),
+          _c(
+            "label",
+            {
+              staticClass: "position-absolute",
+              attrs: { for: "input-unsubscribe-username_" + _vm.uniqueId }
+            },
+            [
+              _c("span", { staticClass: "visually-hidden" }, [
+                _vm._v(
+                  "\n                  " +
+                    _vm._s(_vm.$translate("Ceres::Template.regHoneypotLabel")) +
+                    "\n                "
+                )
+              ])
+            ]
+          ),
           _vm._v(" "),
           _c("span", { staticClass: "input-group-btn" }, [
             _c(

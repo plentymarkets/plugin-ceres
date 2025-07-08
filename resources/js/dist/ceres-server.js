@@ -6172,6 +6172,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -13349,6 +13354,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -13495,6 +13505,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_buttonSizeProperty_mixin__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../mixins/buttonSizeProperty.mixin */ "./resources/js/src/app/mixins/buttonSizeProperty.mixin.js");
 
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -49447,9 +49462,17 @@ var render = function() {
                         )
                       )
                     ) +
-                    '</span></div> <div class="row"><div class="col-12"><input type="text" name="username" autocomplete="new-password" tabindex="-1" aria-hidden="true"' +
+                    '</span></div> <div class="row"><div class="col-12"><input id="forgot_password_honey" type="text" name="username" autocomplete="new-password" tabindex="-1" aria-hidden="true"' +
                     _vm._ssrAttr("value", _vm.honeypot) +
-                    ' class="honey"> <div data-validate="mail" class="input-unit no-bottom"><input type="email" name="email" autocomplete="email"' +
+                    ' class="honey"> <label for="forgot_password_honey" class="position-absolute"><span class="visually-hidden">' +
+                    _vm._ssrEscape(
+                      "\n                      " +
+                        _vm._s(
+                          _vm.$translate("Ceres::Template.regHoneypotLabel")
+                        ) +
+                        "\n                    "
+                    ) +
+                    '</span></label> <div data-validate="mail" class="input-unit no-bottom"><input type="email" name="email" autocomplete="email"' +
                     _vm._ssrAttr("id", "mail" + _vm._uid) +
                     " data-autofocus" +
                     _vm._ssrAttr("value", _vm.username) +
@@ -55880,7 +55903,15 @@ var render = function() {
               _vm._ssrAttr("id", "input-username_" + _vm.uniqueId) +
               ' autocomplete="none" type="text" name="username" tabindex="-1" aria-hidden="true"' +
               _vm._ssrAttr("value", _vm.honeypot) +
-              ' class="honey"></div></div> ' +
+              ' class="honey"> <label' +
+              _vm._ssrAttr("for", "input-username_" + _vm.uniqueId) +
+              ' class="position-absolute"><span class="visually-hidden">' +
+              _vm._ssrEscape(
+                "\n                      " +
+                  _vm._s(_vm.$translate("Ceres::Template.regHoneypotLabel")) +
+                  "\n                    "
+              ) +
+              "</span></label></div></div> " +
               (_vm.showPrivacyPolicyCheckbox
                 ? '<div class="col-12"><div data-validate class="form-check small"><input type="checkbox"' +
                   _vm._ssrAttr(
@@ -56015,7 +56046,18 @@ var render = function() {
                 ) +
                 ' type="text" name="username" autocomplete="new-password" tabindex="-1" aria-hidden="true"' +
                 _vm._ssrAttr("value", _vm.honeypot) +
-                ' class="honey"> '
+                ' class="honey"> <label' +
+                _vm._ssrAttr(
+                  "for",
+                  "input-unsubscribe-username_" + _vm.uniqueId
+                ) +
+                ' class="position-absolute"><span class="visually-hidden">' +
+                _vm._ssrEscape(
+                  "\n                  " +
+                    _vm._s(_vm.$translate("Ceres::Template.regHoneypotLabel")) +
+                    "\n                "
+                ) +
+                "</span></label> "
             ),
             _vm._ssrNode('<span class="input-group-btn">', "</span>", [
               _vm._ssrNode(
