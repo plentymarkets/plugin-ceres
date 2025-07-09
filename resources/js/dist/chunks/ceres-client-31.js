@@ -287,7 +287,7 @@ var render = function() {
                             "\n                      " +
                               _vm._s(
                                 _vm.$translate(
-                                  "Ceres::Template.regHoneypotLabel"
+                                  "Ceres::Template.loginForgotPasswordHoneypotLabel"
                                 )
                               ) +
                               "\n                    "

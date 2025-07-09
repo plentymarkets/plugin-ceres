@@ -230,7 +230,11 @@ var render = function() {
               _c("span", { staticClass: "visually-hidden" }, [
                 _vm._v(
                   "\n                  " +
-                    _vm._s(_vm.$translate("Ceres::Template.regHoneypotLabel")) +
+                    _vm._s(
+                      _vm.$translate(
+                        "Ceres::Template.newsletterUnsubscribeHoneypotLabel"
+                      )
+                    ) +
                     "\n                "
                 )
               ])

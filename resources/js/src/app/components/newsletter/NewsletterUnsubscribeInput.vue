@@ -17,7 +17,7 @@
                        v-model="honeypot"/>
                 <label class="position-absolute" :for="'input-unsubscribe-username_' + uniqueId">
                     <span class="visually-hidden">
-                      {{ $translate("Ceres::Template.regHoneypotLabel") }}
+                      {{ $translate("Ceres::Template.newsletterUnsubscribeHoneypotLabel") }}
                     </span>
                 </label>
 

@@ -31,7 +31,7 @@
                         v-model="honeypot">
                     <label class="position-absolute" :for="'input-username_' + uniqueId">
                         <span class="visually-hidden">
-                          {{ $translate("Ceres::Template.regHoneypotLabel") }}
+                          {{ $translate("Ceres::Template.newsletterHoneypotLabel") }}
                         </span>
                     </label>
                 </div>

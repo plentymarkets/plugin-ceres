@@ -24,7 +24,7 @@
                     v-model="honeypot">
                 <label class="position-absolute" for="forgot_password_honey">
                     <span class="visually-hidden">
-                      {{ $translate("Ceres::Template.regHoneypotLabel") }}
+                      {{ $translate("Ceres::Template.loginForgotPasswordHoneypotLabel") }}
                     </span>
                 </label>
 								<div class="input-unit no-bottom" data-validate="mail">

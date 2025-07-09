@@ -49468,7 +49468,9 @@ var render = function() {
                     _vm._ssrEscape(
                       "\n                      " +
                         _vm._s(
-                          _vm.$translate("Ceres::Template.regHoneypotLabel")
+                          _vm.$translate(
+                            "Ceres::Template.loginForgotPasswordHoneypotLabel"
+                          )
                         ) +
                         "\n                    "
                     ) +
@@ -55908,7 +55910,9 @@ var render = function() {
               ' class="position-absolute"><span class="visually-hidden">' +
               _vm._ssrEscape(
                 "\n                      " +
-                  _vm._s(_vm.$translate("Ceres::Template.regHoneypotLabel")) +
+                  _vm._s(
+                    _vm.$translate("Ceres::Template.newsletterHoneypotLabel")
+                  ) +
                   "\n                    "
               ) +
               "</span></label></div></div> " +
@@ -56054,7 +56058,11 @@ var render = function() {
                 ' class="position-absolute"><span class="visually-hidden">' +
                 _vm._ssrEscape(
                   "\n                  " +
-                    _vm._s(_vm.$translate("Ceres::Template.regHoneypotLabel")) +
+                    _vm._s(
+                      _vm.$translate(
+                        "Ceres::Template.newsletterUnsubscribeHoneypotLabel"
+                      )
+                    ) +
                     "\n                "
                 ) +
                 "</span></label> "

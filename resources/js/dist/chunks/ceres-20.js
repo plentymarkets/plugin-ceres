@@ -441,7 +441,9 @@ var render = function() {
                   _vm._v(
                     "\n                      " +
                       _vm._s(
-                        _vm.$translate("Ceres::Template.regHoneypotLabel")
+                        _vm.$translate(
+                          "Ceres::Template.newsletterHoneypotLabel"
+                        )
                       ) +
                       "\n                    "
                   )
