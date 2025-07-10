@@ -45,6 +45,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "category-image-carousel",
   props: {
@@ -572,20 +575,31 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _vm.$data.$_enableCarousel
     ? _c(
-        "a",
+        "div",
         {
           staticClass: "owl-carousel owl-theme",
           attrs: {
             id: "owl-carousel-" + _vm._uid,
-            href: _vm.itemUrl,
             "aria-label": _vm.$translate("Ceres::Template.itemImageCarousel"),
-            role: "listbox"
+            role: "region",
+            "aria-roledescription": "carousel"
           }
         },
         _vm._l(_vm.imageUrls, function(imageUrl, index) {
           return _c(
             "div",
-            { key: index },
+            {
+              key: index,
+              attrs: {
+                role: "group",
+                "aria-label":
+                  _vm.$translate("Ceres::Template.image") +
+                  " " +
+                  (index + 1) +
+                  " / " +
+                  _vm.imageUrls.length
+              }
+            },
             [
               _c("lazy-img", {
                 ref: { itemLazyImage: index === 0 },
@@ -596,8 +610,7 @@ var render = function() {
                   title: _vm.getTitleText(imageUrl),
                   width: _vm.getImageWidth(imageUrl),
                   height: _vm.getImageHeight(imageUrl),
-                  "picture-class": "img-fluid",
-                  role: "option"
+                  "picture-class": "img-fluid"
                 }
               })
             ],

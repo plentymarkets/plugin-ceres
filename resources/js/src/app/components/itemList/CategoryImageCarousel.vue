@@ -1,12 +1,16 @@
 <template>
-    <a
+    <div
         v-if="$data.$_enableCarousel"
         :id="`owl-carousel-${_uid}`"
-        :href="itemUrl"
         :aria-label="$translate('Ceres::Template.itemImageCarousel')"
-        role="listbox"
+        role="region"
+        aria-roledescription="carousel"
         class="owl-carousel owl-theme">
-        <div v-for="(imageUrl, index) in imageUrls" :key="index">
+        <div
+            v-for="(imageUrl, index) in imageUrls"
+            :key="index"
+            role="group"
+            :aria-label="`${$translate('Ceres::Template.image')} ${index + 1} / ${imageUrls.length}`">
             <lazy-img
                 :image-url="imageUrl.url"
                 :alt="getAltText(imageUrl)"
@@ -14,10 +18,9 @@
                 :width="getImageWidth(imageUrl)"
                 :height="getImageHeight(imageUrl)"
                 :ref="{ 'itemLazyImage' : index === 0 }"
-                picture-class="img-fluid"
-                role="option" />
+                picture-class="img-fluid" />
         </div>
-    </a>
+    </div>
 
     <a v-else :href="itemUrl" :aria-label="getAltText(imageUrls[0])">
         <lazy-img
