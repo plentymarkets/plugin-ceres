@@ -168,7 +168,7 @@ var render = function() {
                 _vm.hasSpecialOffer
                   ? [
                       _vm._v(
-                        "\n                hasSpecialOffer:     " +
+                        "\n                " +
                           _vm._s(
                             _vm._f("itemCrossPrice")(
                               _vm.currentVariation.prices.default.unitPrice
@@ -181,11 +181,10 @@ var render = function() {
                     ]
                   : [
                       _vm._v(
-                        "\n                currentVariation.prices.rrp.unitPrice:   " +
+                        "\n                " +
                           _vm._s(
                             _vm._f("itemCrossPrice")(
-                              _vm.currentVariation.prices.rrp.unitPrice
-                                .formatted
+                              _vm.currentVariation.prices.rrp.price.formatted
                             )
                           ) +
                           "\n            "

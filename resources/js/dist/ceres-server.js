@@ -50898,7 +50898,7 @@ var render = function() {
           '><del class="text-muted small text-appearance color-gray-700">' +
           (_vm.hasSpecialOffer
             ? _vm._ssrEscape(
-                "\n                hasSpecialOffer:     " +
+                "\n                " +
                   _vm._s(
                     _vm._f("itemCrossPrice")(
                       _vm.currentVariation.prices.default.unitPrice.formatted,
@@ -50908,10 +50908,10 @@ var render = function() {
                   "\n            "
               )
             : _vm._ssrEscape(
-                "\n                currentVariation.prices.rrp.unitPrice:   " +
+                "\n                " +
                   _vm._s(
                     _vm._f("itemCrossPrice")(
-                      _vm.currentVariation.prices.rrp.unitPrice.formatted
+                      _vm.currentVariation.prices.rrp.price.formatted
                     )
                   ) +
                   "\n            "
@@ -54357,7 +54357,7 @@ var render = function() {
                                     "\n                                " +
                                       _vm._s(
                                         _vm._f("itemCrossPrice")(
-                                          _vm.item.prices.default.unitPrice
+                                          _vm.item.prices.default.price
                                             .formatted,
                                           true
                                         )
@@ -54370,8 +54370,7 @@ var render = function() {
                                     "\n                                " +
                                       _vm._s(
                                         _vm._f("itemCrossPrice")(
-                                          _vm.item.prices.rrp.unitPrice
-                                            .formatted
+                                          _vm.item.prices.rrp.price.formatted
                                         )
                                       ) +
                                       "\n                            "

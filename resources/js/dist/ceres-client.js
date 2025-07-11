@@ -39511,7 +39511,7 @@ var render = function() {
                                     "\n                                " +
                                       _vm._s(
                                         _vm._f("itemCrossPrice")(
-                                          _vm.item.prices.default.unitPrice
+                                          _vm.item.prices.default.price
                                             .formatted,
                                           true
                                         )
@@ -39524,8 +39524,7 @@ var render = function() {
                                     "\n                                " +
                                       _vm._s(
                                         _vm._f("itemCrossPrice")(
-                                          _vm.item.prices.rrp.unitPrice
-                                            .formatted
+                                          _vm.item.prices.rrp.price.formatted
                                         )
                                       ) +
                                       "\n                            "
