@@ -3,10 +3,10 @@
         <div class="crossprice" v-if="showCrossPrice && hasCrossPrice" :class="{ 'is-special-offer': hasSpecialOffer }">
             <del class="text-muted small text-appearance color-gray-700">
                 <template v-if="hasSpecialOffer">
-                    {{ currentVariation.prices.default.unitPrice.formatted | itemCrossPrice(true) }}
+                    hasSpecialOffer:     {{ currentVariation.prices.default.unitPrice.formatted | itemCrossPrice(true) }}
                 </template>
                 <template v-else>
-                    {{ currentVariation.prices.rrp.unitPrice.formatted | itemCrossPrice }}
+                    currentVariation.prices.rrp.unitPrice:   {{ currentVariation.prices.rrp.unitPrice.formatted | itemCrossPrice }}
                 </template>
             </del>
         </div>
