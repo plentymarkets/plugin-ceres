@@ -6,6 +6,7 @@
 {% set street           = config("system.company.street") %}
 {% set mapZoom          = config("Ceres.contact.map_zoom") %}
 {% set showMapInMobile  = config("Ceres.contact.map_show_in_mobile") %}
+{% set formId           = uid() %}
 
 {% set coordinates = services.contactMap.getMapCoordinates(googleApiKey, street, zip) %}
 
@@ -137,13 +138,18 @@
                     {% endif %}
 
                     <div class="col-12 col-md-3 offset-md-9">
-                    <input
+                    <input id="input-contact-username_{{ formId }}"
                         class="honey"
                         type="text"
                         name="username"
                         autocomplete="new-password"
                         aria-hidden="true"
                         tabindex="-1">
+                    <label class="position-absolute" for="input-contact-username">
+                        <span class="visually-hidden">
+                            {{ trans("Ceres::Template.contactHoneypotLabel") }}
+                        </span>
+                    </label>
                         <button type="submit" class="btn-send-contact-form btn btn-primary btn-block">
                             <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
                             {{ trans("Ceres::Template.contactSend") }}
