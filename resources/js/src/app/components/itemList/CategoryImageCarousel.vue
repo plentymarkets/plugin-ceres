@@ -4,7 +4,7 @@
         :id="`owl-carousel-${_uid}`"
         :href="itemUrl"
         :aria-label="$translate('Ceres::Template.itemImageCarousel')"
-        role="listbox"
+        role="group"
         class="owl-carousel owl-theme">
         <div v-for="(imageUrl, index) in imageUrls" :key="index">
             <lazy-img
@@ -14,8 +14,7 @@
                 :width="getImageWidth(imageUrl)"
                 :height="getImageHeight(imageUrl)"
                 :ref="{ 'itemLazyImage' : index === 0 }"
-                picture-class="img-fluid"
-                role="option" />
+                picture-class="img-fluid"/>
         </div>
     </a>
 
