@@ -74,6 +74,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -252,6 +257,7 @@ var render = function() {
                       ],
                       staticClass: "honey",
                       attrs: {
+                        id: "forgot_password_honey",
                         type: "text",
                         name: "username",
                         autocomplete: "new-password",
@@ -268,6 +274,27 @@ var render = function() {
                         }
                       }
                     }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "position-absolute",
+                        attrs: { for: "forgot_password_honey" }
+                      },
+                      [
+                        _c("span", { staticClass: "visually-hidden" }, [
+                          _vm._v(
+                            "\n                      " +
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.loginForgotPasswordHoneypotLabel"
+                                )
+                              ) +
+                              "\n                    "
+                          )
+                        ])
+                      ]
+                    ),
                     _vm._v(" "),
                     _c(
                       "div",

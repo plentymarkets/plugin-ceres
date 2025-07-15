@@ -14,14 +14,19 @@
 						<div class="row">
 							<div class="col-12">
                 <input
+                    id="forgot_password_honey"
                     class="honey"
                     type="text"
                     name="username"
                     autocomplete="new-password"
                     tabindex="-1"
                     aria-hidden="true"
-                    v-model="honeypot"
-                >
+                    v-model="honeypot">
+                <label class="position-absolute" for="forgot_password_honey">
+                    <span class="visually-hidden">
+                      {{ $translate("Ceres::Template.loginForgotPasswordHoneypotLabel") }}
+                    </span>
+                </label>
 								<div class="input-unit no-bottom" data-validate="mail">
 									<input type="email" name="email" autocomplete="email" :id="'mail' + _uid" v-model="username" data-autofocus>
 									<label :for="'mail' + _uid">{{ $translate("Ceres::Template.loginEmail") }}*</label>

@@ -85,6 +85,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -423,7 +428,28 @@ var render = function() {
                   _vm.honeypot = $event.target.value
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "position-absolute",
+                attrs: { for: "input-username_" + _vm.uniqueId }
+              },
+              [
+                _c("span", { staticClass: "visually-hidden" }, [
+                  _vm._v(
+                    "\n                      " +
+                      _vm._s(
+                        _vm.$translate(
+                          "Ceres::Template.newsletterHoneypotLabel"
+                        )
+                      ) +
+                      "\n                    "
+                  )
+                ])
+              ]
+            )
           ])
         ]),
         _vm._v(" "),

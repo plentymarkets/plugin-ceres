@@ -1689,6 +1689,20 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -7746,6 +7760,7 @@ var render = function() {
           ],
           staticClass: "honey",
           attrs: {
+            id: "registration_honey",
             type: "text",
             name: "username",
             autocomplete: "new-password",
@@ -7762,6 +7777,23 @@ var render = function() {
             }
           }
         }),
+        _vm._v(" "),
+        _c(
+          "label",
+          {
+            staticClass: "position-absolute",
+            attrs: { for: "registration_honey" }
+          },
+          [
+            _c("span", { staticClass: "visually-hidden" }, [
+              _vm._v(
+                "\n              " +
+                  _vm._s(_vm.$translate("Ceres::Template.regHoneypotLabel")) +
+                  "\n            "
+              )
+            ])
+          ]
+        ),
         _vm._v(" "),
         _c(
           "div",

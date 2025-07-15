@@ -60,6 +60,11 @@
                 autocomplete="new-password"
                 aria-hidden="true"
                 tabindex="-1">
+            <label class="position-absolute" for="mail-form-honey_{{ formId }}">
+                <span class="visually-hidden">
+                    {{ trans("Ceres::Template.mailFormHoneypotLabel") }}
+                </span>
+            </label>
 
             <div class="col-12 text-right">
                 <button type="submit" class="btn-send-contact-form btn btn-{{ appearance }} {{ buttonSize }}" {{ Twig.print('set_testing_attr("data-testing", "send-contact-form")') }}>
