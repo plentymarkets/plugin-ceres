@@ -11367,7 +11367,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "category-image-carousel",
   props: {
@@ -54181,7 +54180,7 @@ var render = function() {
             id: "owl-carousel-" + _vm._uid,
             href: _vm.itemUrl,
             "aria-label": _vm.$translate("Ceres::Template.itemImageCarousel"),
-            role: "listbox"
+            role: "group"
           }
         },
         _vm._l(_vm.imageUrls, function(imageUrl, index) {
@@ -54198,8 +54197,7 @@ var render = function() {
                   title: _vm.getTitleText(imageUrl),
                   width: _vm.getImageWidth(imageUrl),
                   height: _vm.getImageHeight(imageUrl),
-                  "picture-class": "img-fluid",
-                  role: "option"
+                  "picture-class": "img-fluid"
                 }
               })
             ],
