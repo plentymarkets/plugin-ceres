@@ -53816,11 +53816,11 @@ var render = function() {
                 [
                   attribute.type === "dropdown"
                     ? _vm._ssrNode(
-                        '<div class="input-unit">',
+                        '<div class="input-unit" style="overflow: visible;">',
                         "</div>",
                         [
                           _vm._ssrNode(
-                            '<select tabindex="0"' +
+                            "<select" +
                               _vm._ssrAttr(
                                 "id",
                                 "custom-select_" + attribute.name

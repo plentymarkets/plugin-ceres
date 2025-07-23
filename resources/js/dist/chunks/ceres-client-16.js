@@ -914,7 +914,8 @@ var render = function() {
                         {
                           ref: "attributesContaner",
                           refInFor: true,
-                          staticClass: "input-unit"
+                          staticClass: "input-unit",
+                          staticStyle: { overflow: "visible" }
                         },
                         [
                           _c(
@@ -922,7 +923,6 @@ var render = function() {
                             {
                               staticClass: "custom-select",
                               attrs: {
-                                tabindex: "0",
                                 id: "custom-select_" + attribute.name,
                                 "data-testing": "variation-select-dropdown"
                               },
