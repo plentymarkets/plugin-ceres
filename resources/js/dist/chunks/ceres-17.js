@@ -922,6 +922,7 @@ var render = function() {
                             {
                               staticClass: "custom-select",
                               attrs: {
+                                tabindex: "0",
                                 id: "custom-select_" + attribute.name,
                                 "data-testing": "variation-select-dropdown"
                               },

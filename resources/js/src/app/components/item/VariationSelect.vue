@@ -4,7 +4,7 @@
             <div class="col-12 variation-select" v-for="(attribute, index) in attributes" :key="index">
                 <!-- dropdown -->
                 <div class="input-unit" ref="attributesContaner" v-if="attribute.type === 'dropdown'">
-                    <select :id="'custom-select_' + attribute.name" class="custom-select" @change="selectAttribute(attribute.attributeId, $event.target.value)" data-testing="variation-select-dropdown">
+                    <select tabindex="0" :id="'custom-select_' + attribute.name" class="custom-select" @change="selectAttribute(attribute.attributeId, $event.target.value)" data-testing="variation-select-dropdown">
                         <option :value="-1" v-if="addPleaseSelectOption || !hasSelection">{{ $translate("Ceres::Template.singleItemPleaseSelect") }}</option>
                         <option
                                 :value="null" v-if="hasEmptyOption || selectedAttributes[attribute.attributeId] === null"
