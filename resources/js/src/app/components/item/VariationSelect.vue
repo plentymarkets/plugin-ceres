@@ -44,6 +44,7 @@
                         <div tabindex="0" class="v-s-box bg-white empty-option"
                              data-testing="variation-select-box"
                              v-if="hasEmptyOption"
+                             @keydown="handleKeydown"
                              @click="selectAttribute(attribute.attributeId, null)"
                              :class="{ 'active': selectedAttributes[attribute.attributeId] === null, 'invalid': !isAttributeSelectionValid(attribute.attributeId, null, true) }">
                             <span class="mx-3">{{ $translate("Ceres::Template.singleItemNoSelection") }}</span>
@@ -52,6 +53,7 @@
                         <div tabindex="0" class="v-s-box bg-white"
                              data-testing="variation-select-box"
                              v-for="value in attribute.values"
+                             @keydown="handleKeydown"
                              @click="selectAttribute(attribute.attributeId, value.attributeValueId)"
                              :class="{ 'active': value.attributeValueId === selectedAttributes[attribute.attributeId], 'invalid': !isAttributeSelectionValid(attribute.attributeId, value.attributeValueId, true) }"
                              v-tooltip="true" data-html="true" data-toggle="tooltip" data-placement="top" :data-original-title="getTooltip(attribute, value)"
@@ -711,7 +713,7 @@ export default {
         },
 
         handleKeydown(event) {
-            if (event.key === 'Enter' || event.keyCode === 13 || event.key === ' ' || event.keyCode === 32) {
+            if (event.key === 'Enter' || event.keyCode === 13) {
                 event.preventDefault();
                 event.target.click();
             }
