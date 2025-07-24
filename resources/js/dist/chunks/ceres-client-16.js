@@ -1109,6 +1109,7 @@ var render = function() {
                                       )
                                     },
                                     attrs: {
+                                      tabindex: "0",
                                       "data-testing": "variation-select-box"
                                     },
                                     on: {
@@ -1152,6 +1153,7 @@ var render = function() {
                                       )
                                     },
                                     attrs: {
+                                      tabindex: "0",
                                       "data-testing": "variation-select-box"
                                     },
                                     on: {
@@ -1204,6 +1206,7 @@ var render = function() {
                                     )
                                   },
                                   attrs: {
+                                    tabindex: "0",
                                     "data-testing": "variation-select-box",
                                     "data-html": "true",
                                     "data-toggle": "tooltip",

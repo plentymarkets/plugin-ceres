@@ -53972,7 +53972,7 @@ var render = function() {
                             [
                               _vm._ssrNode(
                                 (_vm.addPleaseSelectOption
-                                  ? '<div data-testing="variation-select-box"' +
+                                  ? '<div tabindex="0" data-testing="variation-select-box"' +
                                     _vm._ssrClass(
                                       "v-s-box bg-white empty-option",
                                       {
@@ -53998,7 +53998,7 @@ var render = function() {
                                   : "<!---->") +
                                   " " +
                                   (_vm.hasEmptyOption
-                                    ? '<div data-testing="variation-select-box"' +
+                                    ? '<div tabindex="0" data-testing="variation-select-box"' +
                                       _vm._ssrClass(
                                         "v-s-box bg-white empty-option",
                                         {
@@ -54052,6 +54052,7 @@ var render = function() {
                                       )
                                     },
                                     attrs: {
+                                      tabindex: "0",
                                       "data-testing": "variation-select-box",
                                       "data-html": "true",
                                       "data-toggle": "tooltip",

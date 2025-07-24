@@ -33,14 +33,14 @@
                 <div v-else-if="attribute.type === 'box' || attribute.type === 'image'">
                     <span class="text-muted color-gray-700" data-testing="attribute-name">{{ attribute.name }}:</span> <b data-testing="attribute-value">{{ getSelectedAttributeValueName(attribute) }}</b>
                     <div class="v-s-boxes py-3" :class="{ 'images': attribute.type === 'image' }">
-                        <div class="v-s-box bg-white empty-option"
+                        <div tabindex="0" class="v-s-box bg-white empty-option"
                              data-testing="variation-select-box"
                              v-if="addPleaseSelectOption"
                              @click="selectAttribute(attribute.attributeId, -1)"
                              :class="{ 'active': selectedAttributes[attribute.attributeId] === -1, 'invalid': !isAttributeSelectionValid(attribute.attributeId, -1) }">
                             <span class="mx-3">{{ $translate("Ceres::Template.singleItemPleaseSelect") }}</span>
                         </div>
-                        <div class="v-s-box bg-white empty-option"
+                        <div tabindex="0" class="v-s-box bg-white empty-option"
                              data-testing="variation-select-box"
                              v-if="hasEmptyOption"
                              @click="selectAttribute(attribute.attributeId, null)"
@@ -48,7 +48,7 @@
                             <span class="mx-3">{{ $translate("Ceres::Template.singleItemNoSelection") }}</span>
                         </div>
 
-                        <div class="v-s-box bg-white"
+                        <div tabindex="0" class="v-s-box bg-white"
                              data-testing="variation-select-box"
                              v-for="value in attribute.values"
                              @click="selectAttribute(attribute.attributeId, value.attributeValueId)"
