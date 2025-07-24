@@ -10714,6 +10714,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
 
 
 
@@ -11308,6 +11309,12 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       }
 
       return unitNameSplit;
+    },
+    handleKeydown: function handleKeydown(event) {
+      if (event.key === 'Enter' || event.keyCode === 13 || event.key === ' ' || event.keyCode === 32) {
+        event.preventDefault();
+        event.target.click();
+      }
     }
   },
   watch: {

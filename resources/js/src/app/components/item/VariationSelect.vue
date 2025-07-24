@@ -36,6 +36,7 @@
                         <div tabindex="0" class="v-s-box bg-white empty-option"
                              data-testing="variation-select-box"
                              v-if="addPleaseSelectOption"
+                             @keydown="handleKeydown"
                              @click="selectAttribute(attribute.attributeId, -1)"
                              :class="{ 'active': selectedAttributes[attribute.attributeId] === -1, 'invalid': !isAttributeSelectionValid(attribute.attributeId, -1) }">
                             <span class="mx-3">{{ $translate("Ceres::Template.singleItemPleaseSelect") }}</span>
@@ -707,6 +708,13 @@ export default {
             }
 
             return unitNameSplit;
+        },
+
+        handleKeydown(event) {
+            if (event.key === 'Enter' || event.keyCode === 13 || event.key === ' ' || event.keyCode === 32) {
+                event.preventDefault();
+                event.target.click();
+            }
         }
     },
 
