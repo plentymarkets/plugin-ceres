@@ -187,6 +187,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
 
 
 
@@ -781,6 +784,12 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       }
 
       return unitNameSplit;
+    },
+    handleKeydown: function handleKeydown(event) {
+      if (event.key === 'Enter' || event.keyCode === 13) {
+        event.preventDefault();
+        event.target.click();
+      }
     }
   },
   watch: {
@@ -914,7 +923,8 @@ var render = function() {
                         {
                           ref: "attributesContaner",
                           refInFor: true,
-                          staticClass: "input-unit"
+                          staticClass: "input-unit",
+                          staticStyle: { overflow: "visible" }
                         },
                         [
                           _c(
@@ -1108,9 +1118,11 @@ var render = function() {
                                       )
                                     },
                                     attrs: {
+                                      tabindex: "0",
                                       "data-testing": "variation-select-box"
                                     },
                                     on: {
+                                      keydown: _vm.handleKeydown,
                                       click: function($event) {
                                         return _vm.selectAttribute(
                                           attribute.attributeId,
@@ -1151,9 +1163,11 @@ var render = function() {
                                       )
                                     },
                                     attrs: {
+                                      tabindex: "0",
                                       "data-testing": "variation-select-box"
                                     },
                                     on: {
+                                      keydown: _vm.handleKeydown,
                                       click: function($event) {
                                         return _vm.selectAttribute(
                                           attribute.attributeId,
@@ -1203,6 +1217,7 @@ var render = function() {
                                     )
                                   },
                                   attrs: {
+                                    tabindex: "0",
                                     "data-testing": "variation-select-box",
                                     "data-html": "true",
                                     "data-toggle": "tooltip",
@@ -1213,6 +1228,7 @@ var render = function() {
                                     )
                                   },
                                   on: {
+                                    keydown: _vm.handleKeydown,
                                     click: function($event) {
                                       return _vm.selectAttribute(
                                         attribute.attributeId,
