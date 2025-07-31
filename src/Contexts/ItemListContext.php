@@ -165,10 +165,17 @@ trait ItemListContext
                             }
                         }
                     }
+                    
+                    $totalItems = $externalSearch->getCountTotal();
+                    $actualItems = $this->itemList ?? [];
                     if ($options['itemsPerPage'] == 0) {
                         $this->pageMax = 1;
                     } else {
-                        $this->pageMax = ceil(min($externalSearch->getCountTotal(), count($this->itemList)) / $options['itemsPerPage']);
+                        if ($this->currentPage === 1 && count($actualItems) < $this->itemsPerPage) {
+                            $totalItems = count($actualItems);
+                        }
+                    
+                        $this->pageMax = ceil($totalItems / $this->itemsPerPage);
                     }
                     $this->itemCountPage = count($variationIds);
                     $this->itemCountTotal = $externalSearch->getCountTotal();
