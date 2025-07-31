@@ -21,28 +21,34 @@
 
         <!-- PAGINATION -->
         <li class="page-item" v-if="{{ page }} === {{ pageMax }} && {{ page }} > 2">
+        .1.
             <a class="page-link" @click="{{ setPage }}({{ page }} - 2)">${ {{ page }} - 2 }</a>
         </li>
 
         <li class="page-item" v-if="{{ page }} > 1">
+        .2.
             <a class="page-link" @click="{{ setPage }}({{ page }} - 1)">${ {{ page }} - 1 }</a>
         </li>
 
         <li class="page-item active">
+        .3.
             <a class="page-link">${ {{ page }} }</a>
         </li>
 
         <li class="page-item" v-if="{{ page }} + 1 <= {{ pageMax }}">
+        .4.
             <a class="page-link" @click="{{ setPage }}({{ page }} + 1)">${ {{ page }} + 1 }</a>
         </li>
 
         <li class="page-item" v-if="{{ page }} === 1 && {{ page }} + 2 <= {{ pageMax }}">
+        .5.
             <a class="page-link" @click="{{ setPage }}({{ page }} + 2)">${ {{ page }} + 2 }</a>
         </li>
         <!-- ./PAGINATION -->
 
         <!-- NEXT LINK -->
         <li class="page-item" :class="{'disabled': {{ page }} >= {{ pageMax }}}">
+        next1: {{ page }} - {{ pageMax }}
             <a class="page-link" @click="{{ setPage }}({{ page }} + 1)" aria-label="{{ trans('Ceres::Template.paginationNextPage') }}">
                 <i class="fa fa-angle-right" aria-hidden="true"></i>
             </a>
@@ -51,6 +57,7 @@
 
         <!-- LAST PAGE LINK -->
         {% if config('Ceres.pagination.showLastPage') == "true" %}
+                LAST: {{ page }} - {{ pageMax }}
             <li class="page-item" v-if="{{ pageMax }} > 3 && {{ page }} < {{ pageMax }} - 1">
                 <a class="page-link" @click="{{ setPage }}({{ pageMax }})" aria-label="{{ trans('Ceres::Template.paginationLastPage') }}">
                     <i class="fa fa-angle-double-right" aria-hidden="true"></i>
@@ -58,5 +65,6 @@
             </li>
         {% endif %}
         <!-- ./LAST PAGE LINK -->
+        {{ config }}
     </ul>
 </nav>
