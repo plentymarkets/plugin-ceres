@@ -168,7 +168,7 @@ trait ItemListContext
                     if ($options['itemsPerPage'] == 0) {
                         $this->pageMax = 1;
                     } else {
-                        $this->pageMax = ceil($externalSearch->getCountTotal() / $options['itemsPerPage']);
+                        $this->pageMax = ceil(min($externalSearch->getCountTotal(), count($this->itemList)) / $options['itemsPerPage']);
                     }
                     $this->itemCountPage = count($variationIds);
                     $this->itemCountTotal = $externalSearch->getCountTotal();
