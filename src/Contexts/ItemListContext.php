@@ -133,7 +133,8 @@ trait ItemListContext
                     if ($options['itemsPerPage'] == 0) {
                         $this->pageMax = 1;
                     } else {
-                        $this->pageMax = ceil($externalSearch->getCountTotal() / $options['itemsPerPage']);
+                        $this->pageMax = 5;
+                        // $this->pageMax = ceil($externalSearch->getCountTotal() / $options['itemsPerPage']);
                     }
                     return;
                 }
@@ -165,17 +166,11 @@ trait ItemListContext
                             }
                         }
                     }
-                    
-                    $totalItems = $externalSearch->getCountTotal();
-                    $actualItems = $this->itemList ?? [];
                     if ($options['itemsPerPage'] == 0) {
                         $this->pageMax = 1;
                     } else {
-                        if ($this->currentPage === 1 && count($actualItems) < $this->itemsPerPage) {
-                            $totalItems = count($actualItems);
-                        }
-                    
-                        $this->pageMax = ceil($totalItems / $this->itemsPerPage);
+                        $this->pageMax = 6;
+                        // $this->pageMax = ceil($externalSearch->getCountTotal() / $options['itemsPerPage']);
                     }
                     $this->itemCountPage = count($variationIds);
                     $this->itemCountTotal = $externalSearch->getCountTotal();
@@ -222,7 +217,8 @@ trait ItemListContext
         if($options['itemsPerPage'] == 0) {
                 $this->pageMax = 1;
         } else {
-            $this->pageMax = ceil($this->itemCountTotal / $options['itemsPerPage']);
+            $this->pageMax = 7;
+            // $this->pageMax = ceil($this->itemCountTotal / $options['itemsPerPage']);
         }
 
         $this->itemCountPage = count($searchResults['itemList']['documents']);
