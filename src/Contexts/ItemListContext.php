@@ -217,7 +217,7 @@ trait ItemListContext
         if($options['itemsPerPage'] == 0) {
                 $this->pageMax = 1;
         } else {
-            $this->pageMax = 7;
+            $this->pageMax = $options['itemsPerPage'];
             // $this->pageMax = ceil($this->itemCountTotal / $options['itemsPerPage']);
         }
 

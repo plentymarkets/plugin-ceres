@@ -42,7 +42,9 @@
 {% set isFirstLastPagePossible = pageMax > (pageLimit * 2 + 1) %}
 
 <nav role="navigation" aria-label="{{ trans("Ceres::Template.paginationTitle") }}">
- pageMax:   {{ pageMax }}
+ $options[itemsPerPage]:   {{ pageMax }}
+ ITEMCOUNT: {{itemCountPage}}
+ itemCountTotal: {{itemCountTotal}}
     {% if pageMax > 1 %}
         <ul class="pagination widget-alignment">
 
