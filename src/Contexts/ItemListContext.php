@@ -90,17 +90,19 @@ trait ItemListContext
         $this->itemsPerPage = intval($options['itemsPerPage']);
         $this->itemSorting = $options['sorting'];
         $this->query = ['items' => $this->itemsPerPage, 'sorting' => $this->itemSorting];
+    
         $this->searchOptions = SearchOptions::get($scope);
         /** @var ItemSearchService $itemSearchService */
         $itemSearchService = pluginApp(ItemSearchService::class);
+    
         if (ExternalSearch::hasExternalSearch()) {
-            /** @var ExternalSearch $externalSearch */
             $externalSearch = pluginApp(ExternalSearch::class);
             $externalSearch->page = $this->currentPage;
             $externalSearch->itemsPerPage = $this->itemsPerPage;
             $externalSearch->searchString = $options['query'];
             $externalSearch->categoryId = $options['categoryId'];
             $externalSearch->sorting = $this->itemSorting;
+    
             $successfully = true;
             try {
                 ExternalSearch::getExternalResults($externalSearch);
@@ -112,19 +114,22 @@ trait ItemListContext
                 ]);
                 $this->getLogger(__METHOD__)->logException($exception, 10);
             }
+    
             if ($successfully && $externalSearch->hasResults()) {
                 $this->pageMax = 1;
                 $this->itemCountTotal = 0;
                 $this->itemCountPage = 0;
                 $this->facets = [];
+    
                 $documents = $externalSearch->getDocuments();
                 if (count($documents)) {
-                    $this->itemList = $documents;
-                    $this->itemCountTotal = $externalSearch->getCountTotal();
-                    $this->itemCountPage = count($documents);
+                    $this->itemCountTotal = count($documents);
                     $this->pageMax = ($options['itemsPerPage'] == 0)
                         ? 1
-                        : ceil($externalSearch->getCountTotal() / $options['itemsPerPage']);
+                        : ceil($this->itemCountTotal / $options['itemsPerPage']);
+                    $offset = max(($this->currentPage - 1), 0) * $this->itemsPerPage;
+                    $this->itemList = array_slice($documents, $offset, $this->itemsPerPage);
+                    $this->itemCountPage = count($this->itemList);
                     return;
                 }
     
@@ -138,30 +143,32 @@ trait ItemListContext
                     $searchResults = $itemSearchService->getResults($externalSearchFactory);
     
                     if (isset($searchResults['documents']) && count($searchResults['documents'])) {
+                        $documents = $searchResults['documents'];
                         $matchedDocuments = [];
+    
                         foreach ($variationIds as $variationId) {
-                            $variation = array_filter(
-                                $searchResults['documents'],
-                                fn($doc) => $doc['id'] == $variationId
-                            );
-                            if (count($variation) === 1) {
-                                $matchedDocuments[] = array_pop($variation);
+                            foreach ($documents as $doc) {
+                                if ($doc['id'] == $variationId) {
+                                    $matchedDocuments[] = $doc;
+                                    break;
+                                }
                             }
                         }
-                        $this->itemList = $matchedDocuments;
     
-                        $this->itemCountPage = count($matchedDocuments);
-                        $this->itemCountTotal = $externalSearch->getCountTotal();
+                        $this->itemCountTotal = count($matchedDocuments);
                         $this->pageMax = ($options['itemsPerPage'] == 0)
                             ? 1
-                            : ceil($externalSearch->getCountTotal() / $options['itemsPerPage']);
+                            : ceil($this->itemCountTotal / $options['itemsPerPage']);
+                        $offset = max(($this->currentPage - 1), 0) * $this->itemsPerPage;
+                        $this->itemList = array_slice($matchedDocuments, $offset, $this->itemsPerPage);
+                        $this->itemCountPage = count($this->itemList);
                         $this->facets = [];
                     }
                     return;
                 }
             }
         }
-    /** @var CacheTagRepositoryContract $cacheTagRepository */
+    
         $cacheTagRepository = pluginApp(CacheTagRepositoryContract::class);
         $searchResults = $cacheTagRepository->makeTaggable(
             'itemList',
@@ -192,10 +199,8 @@ trait ItemListContext
         $this->pageMax = ($options['itemsPerPage'] == 0)
             ? 1
             : ceil($this->itemCountTotal / $options['itemsPerPage']);
-    
         $this->itemList = $searchResults['itemList']['documents'];
         $this->itemCountPage = count($this->itemList);
         $this->facets = $searchResults['facets'];
     }
-    
 }
