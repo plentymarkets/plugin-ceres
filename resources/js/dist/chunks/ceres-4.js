@@ -2866,7 +2866,7 @@ var render = function() {
                               attrs: {
                                 type: "text",
                                 name: "telephone",
-                                id: "txtTelephone" + _vm._uid
+                                id: "delivery_txtTelephone" + _vm._uid
                               },
                               domProps: { value: _vm.value.telephone },
                               on: {
@@ -2881,7 +2881,11 @@ var render = function() {
                             _vm._v(" "),
                             _c(
                               "label",
-                              { attrs: { for: "txtTelephone" + _vm._uid } },
+                              {
+                                attrs: {
+                                  for: "delivery_txtTelephone" + _vm._uid
+                                }
+                              },
                               [
                                 _vm._v(
                                   "\n                            " +
@@ -3958,7 +3962,7 @@ var render = function() {
                                 attrs: {
                                   type: "text",
                                   name: "telephone",
-                                  id: "txtTelephone" + _vm._uid
+                                  id: "billing_txtTelephone" + _vm._uid
                                 },
                                 domProps: { value: _vm.value.telephone },
                                 on: {
@@ -3973,7 +3977,11 @@ var render = function() {
                               _vm._v(" "),
                               _c(
                                 "label",
-                                { attrs: { for: "txtTelephone" + _vm._uid } },
+                                {
+                                  attrs: {
+                                    for: "billing_txtTelephone" + _vm._uid
+                                  }
+                                },
                                 [
                                   _vm._v(
                                     "\n                            " +
@@ -4965,7 +4973,7 @@ var render = function() {
                               attrs: {
                                 type: "text",
                                 name: "telephone",
-                                id: "txtTelephone" + _vm._uid
+                                id: "billing_txtTelephone" + _vm._uid
                               },
                               domProps: { value: _vm.value.telephone },
                               on: {
@@ -4980,7 +4988,11 @@ var render = function() {
                             _vm._v(" "),
                             _c(
                               "label",
-                              { attrs: { for: "txtTelephone" + _vm._uid } },
+                              {
+                                attrs: {
+                                  for: "billing_txtTelephone" + _vm._uid
+                                }
+                              },
                               [
                                 _vm._v(
                                   "\n                            " +
@@ -5919,7 +5931,7 @@ var render = function() {
                               attrs: {
                                 type: "text",
                                 name: "telephone",
-                                id: "txtTelephone" + _vm._uid
+                                id: "delivery_txtTelephone" + _vm._uid
                               },
                               domProps: { value: _vm.value.telephone },
                               on: {
@@ -5934,7 +5946,11 @@ var render = function() {
                             _vm._v(" "),
                             _c(
                               "label",
-                              { attrs: { for: "txtTelephone" + _vm._uid } },
+                              {
+                                attrs: {
+                                  for: "delivery_txtTelephone" + _vm._uid
+                                }
+                              },
                               [
                                 _vm._v(
                                   "\n                            " +
