@@ -1,13 +1,13 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.75 (2025-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.74...5.0.75" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.75 (2025-08-12) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.74...5.0.75" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed
 
-- Fixed enabling of declaration of accessibility route from the global settings.
-- Improved accessibility of category image slider by removing wrong role attribute.
-- Fixed accessibility errors regarding honeypot elements
-- Users can navigate through all variant options using the Tab key without skipping any variant.
+- Fixed an issue where the declaration of accessibility route could not be enabled from global settings.
+- Improved accessibility of the image slider by removing an incorrect role attribute.
+- Fixed accessibility issues related to honeypot form elements.
+- Improved keyboard navigation attribute selection of items — users can now tab through all options without any being skipped.
 
 ## v5.0.74 (2025-06-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.73...5.0.74" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
