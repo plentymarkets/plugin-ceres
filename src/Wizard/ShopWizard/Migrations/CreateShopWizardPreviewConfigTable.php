@@ -20,7 +20,7 @@ class CreateShopWizardPreviewConfigTable
     public function run(Migrate $migrate)
     {
         $migrate->createTable(ShopWizardPreviewConfiguration::class);
-        $this->getLogger(__CLASS__)->debug(
+        $this->getLogger(self::class)->debug(
             'Ceres::Wizard.tableCreated',
             ['tableName' => 'ShopWizardPreviewConfigurations']
         );

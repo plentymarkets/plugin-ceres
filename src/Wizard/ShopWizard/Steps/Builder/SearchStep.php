@@ -116,20 +116,12 @@ class SearchStep extends Step
                 }
 
                 if ($i) {
-                    switch ($i) {
-                        case 1:
-                            $translationKey = "firstSearchField";
-                            break;
-                        case 2:
-                            $translationKey = "secondSearchField";
-                            break;
-                        case 3:
-                            $translationKey = "thirdSearchField";
-                            break;
-                        default:
-                            $translationKey = "{$i}thSearchField";
-
-                    }
+                    $translationKey = match ($i) {
+                        1 => "firstSearchField",
+                        2 => "secondSearchField",
+                        3 => "thirdSearchField",
+                        default => "{$i}thSearchField",
+                    };
 
                     $key = "search_{$translationKey}";
                     $formFields[$key] =[

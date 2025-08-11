@@ -67,7 +67,7 @@ class WidgetDataFactory
      */
     public function withCategory($category)
     {
-        $this->data["categories"] = $this->data["categories"] ?? [];
+        $this->data["categories"] ??= [];
         $this->data["categories"][] = $category;
         return $this;
     }

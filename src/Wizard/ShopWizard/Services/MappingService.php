@@ -70,7 +70,7 @@ class MappingService
                 if ($dismissNullValues && is_null($processingData[$key])) {
                     continue;
                 }
-                list($step,$fieldName) = explode("_", $itemKey);
+                [$step, $fieldName] = explode("_", $itemKey);
 
                 if ($itemData['optional'] && !empty($processingData[$key])) {
                     $matchedData[$step][] =  $processingData[$key];
