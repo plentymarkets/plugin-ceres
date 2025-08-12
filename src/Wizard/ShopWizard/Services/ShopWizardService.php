@@ -235,19 +235,12 @@ class ShopWizardService
             foreach ($searchFields as $fieldKey => $fieldSettings) {
                 $fieldKey += 1;
                 $formFieldPrefix = "search_";
-                switch ($fieldKey) {
-                    case 1:
-                        $formField = "{$formFieldPrefix}firstSearchField";
-                        break;
-                    case 2:
-                        $formField = "{$formFieldPrefix}secondSearchField";
-                        break;
-                    case 3:
-                        $formField = "{$formFieldPrefix}thirdSearchField";
-                        break;
-                    default:
-                        $formField = "{$formFieldPrefix}{$fieldKey}thSearchField";
-                }
+                $formField = match ($fieldKey) {
+                    1 => "{$formFieldPrefix}firstSearchField",
+                    2 => "{$formFieldPrefix}secondSearchField",
+                    3 => "{$formFieldPrefix}thirdSearchField",
+                    default => "{$formFieldPrefix}{$fieldKey}thSearchField",
+                };
                 $formFieldValue = $fieldSettings['isActive'] ? $fieldSettings['key'] : "";
 
                 $globalData[$formField] = $formFieldValue;
@@ -348,7 +341,7 @@ class ShopWizardService
 
         if (count($keys)) {
             foreach ($keys as $key) {
-                if (strpos($key, $keyPrefix) !== false && !empty($data[$key])) {
+                if (str_contains($key, $keyPrefix) && !empty($data[$key])) {
                     $hasData[] = $key;
                 }
             }

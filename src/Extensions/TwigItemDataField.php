@@ -58,7 +58,7 @@ class TwigItemDataField extends Twig_Extension
         return [
             $this->twig->createSimpleFunction('set_item_data_base', [$this, 'setItemDataBase']),
             $this->twig->createSimpleFunction('pop_item_data_base', [$this, 'popItemDataBase']),
-            $this->twig->createSimpleFunction('item_data_field', [$this, 'getDataField'], ['is_safe' => array('html')]),
+            $this->twig->createSimpleFunction('item_data_field', [$this, 'getDataField'], ['is_safe' => ['html']]),
             $this->twig->createSimpleFunction(
                 'item_data_field_html',
                 [$this, 'getDataFieldHtml'],

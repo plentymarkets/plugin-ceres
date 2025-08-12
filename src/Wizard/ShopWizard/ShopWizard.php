@@ -72,9 +72,9 @@ class ShopWizard extends WizardProvider
             'key' => 'shopCeres-assistant',
             'reloadStructure' => true,
             'iconPath' => 'https://plentymarkets-assistant.s3.eu-central-1.amazonaws.com/plentyShop-LTS.svg',
-            'dataSource' => 'Ceres\Wizard\ShopWizard\DataSource\ShopWizardDataSource',
-            'settingsHandlerClass' => 'Ceres\Wizard\ShopWizard\SettingsHandlers\ShopWizardSettingsHandler',
-            'dependencyClass' => 'Ceres\Wizard\ShopWizard\DynamicLoaders\ShopWizardDynamicLoader',
+            'dataSource' => \Ceres\Wizard\ShopWizard\DataSource\ShopWizardDataSource::class,
+            'settingsHandlerClass' => \Ceres\Wizard\ShopWizard\SettingsHandlers\ShopWizardSettingsHandler::class,
+            'dependencyClass' => \Ceres\Wizard\ShopWizard\DynamicLoaders\ShopWizardDynamicLoader::class,
             'translationNamespace' => 'Ceres',
             'options' => [
                 'client' => $this->buildClientOptions(),

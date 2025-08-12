@@ -8,6 +8,7 @@
 - Improved accessibility of the image slider by removing an incorrect role attribute.
 - Fixed accessibility issues related to honeypot form elements.
 - Improved attribute selection of items via keyboard navigation. users can now tab through all options without any being skipped.
+- Fixed accessibility issue of telephone number input in billing and delivery address.
 
 ## v5.0.74 (2025-06-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.73...5.0.74" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 

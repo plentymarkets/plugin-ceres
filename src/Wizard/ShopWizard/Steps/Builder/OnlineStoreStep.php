@@ -517,7 +517,7 @@ class OnlineStoreStep extends Step
         foreach ($orderStatusCollection as $status) {
             $statusName = $status->names[$currentLang] ?? '';
             $prefix = '[' . $status->statusId . ']';
-            if (substr($statusName, 0, strlen($prefix)) !== $prefix) {
+            if (!str_starts_with($statusName, $prefix)) {
                 $statusName = $prefix . $statusName;
             }
 

@@ -20,7 +20,7 @@ class UpdateShopWizardPreviewTableWebstoreId
     public function run(Migrate $migrate)
     {
         $migrate->updateTable(ShopWizardPreviewConfiguration::class);
-        $this->getLogger(__CLASS__)->debug(
+        $this->getLogger(self::class)->debug(
             'Ceres::Wizard.tableUpdated',
             ['tableName' => 'ShopWizardPreviewConfigurations']
         );

@@ -72,7 +72,7 @@ class TwigStyleScriptTagFilter extends Twig_Extension
             $this->twig->createSimpleFunction(
                 'get_filtered_tags',
                 [$this, 'getFilteredTags'],
-                ['is_safe' => array('html')]
+                ['is_safe' => ['html']]
             )
         ];
     }
@@ -85,7 +85,7 @@ class TwigStyleScriptTagFilter extends Twig_Extension
     public function getFilters(): array
     {
         return [
-            $this->twig->createSimpleFilter('filter_tags', [$this, 'filterTags'], ['is_safe' => array('html')])
+            $this->twig->createSimpleFilter('filter_tags', [$this, 'filterTags'], ['is_safe' => ['html']])
         ];
     }
 
@@ -111,8 +111,8 @@ class TwigStyleScriptTagFilter extends Twig_Extension
      */
     public function filterTags($content, $containerName)
     {
-        if (strpos($containerName, 'Ceres::Template') === 0 ||
-            strpos($containerName, 'Ceres::Script') === 0 ||
+        if (str_starts_with($containerName, 'Ceres::Template') ||
+            str_starts_with($containerName, 'Ceres::Script') ||
             in_array($containerName, self::$ignoreLayoutContainer)) {
 
             return $content;
@@ -138,7 +138,7 @@ class TwigStyleScriptTagFilter extends Twig_Extension
                 $content = $try;
             }
             else {
-                $this->getLogger(__CLASS__)->error(
+                $this->getLogger(self::class)->error(
                     "IO::Debug.LayoutContainer_backtrackLimitError",
                     [
                         "content" => $content
@@ -167,7 +167,7 @@ class TwigStyleScriptTagFilter extends Twig_Extension
                 $content = $try;
             }
             else {
-                $this->getLogger(__CLASS__)->error(
+                $this->getLogger(self::class)->error(
                     "IO::Debug.LayoutContainer_backtrackLimitError",
                     [
                         "content" => $content

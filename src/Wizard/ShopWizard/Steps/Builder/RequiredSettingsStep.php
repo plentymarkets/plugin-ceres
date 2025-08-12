@@ -48,7 +48,7 @@ class RequiredSettingsStep extends Step
             "title" => "Wizard.reqSettings",
             "description" => "Wizard.reqSettingsDescription",
             "condition" => !$this->hasRequiredSettings(),
-            "validationClass" => "Ceres\Wizard\ShopWizard\Validators\RequiredSettingsDataValidator",
+            "validationClass" => \Ceres\Wizard\ShopWizard\Validators\RequiredSettingsDataValidator::class,
             "sections" => [
                 $this->generateSection("shippingMethod", $hasShippingMethod, "/system/assistants/run/plugin_install"),
                 $this->generateSection("shippingProfile", $hasShippingProfile, "/system/assistants/overview/integration/fulfillment-shipping-profile-wizard"),

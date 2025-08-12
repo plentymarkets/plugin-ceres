@@ -18,7 +18,7 @@ class Migration_2022_11_22_001_CreateAlreadyPaidShippingCountrySettings
     public function run(Migrate $migrate)
     {
         $migrate->createTable(ShippingCountrySettings::class);
-        $this->getLogger(__CLASS__)->debug(
+        $this->getLogger(self::class)->debug(
             'Ceres::Wizard.tableCreated',
             ['tableName' => 'ShippingCountrySettings']
         );
