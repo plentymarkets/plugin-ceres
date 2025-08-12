@@ -48202,10 +48202,16 @@ var render = function() {
                           [
                             _vm._ssrNode(
                               '<input type="text" name="telephone"' +
-                                _vm._ssrAttr("id", "txtTelephone" + _vm._uid) +
+                                _vm._ssrAttr(
+                                  "id",
+                                  "delivery_txtTelephone" + _vm._uid
+                                ) +
                                 _vm._ssrAttr("value", _vm.value.telephone) +
                                 "> <label" +
-                                _vm._ssrAttr("for", "txtTelephone" + _vm._uid) +
+                                _vm._ssrAttr(
+                                  "for",
+                                  "delivery_txtTelephone" + _vm._uid
+                                ) +
                                 ">" +
                                 _vm._ssrEscape(
                                   "\n                            " +
