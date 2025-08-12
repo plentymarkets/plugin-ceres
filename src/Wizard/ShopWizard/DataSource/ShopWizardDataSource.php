@@ -64,7 +64,7 @@ class ShopWizardDataSource extends BaseWizardDataSource
      */
     public function getByOptionId(string $optionId = 'default')
     {
-        list($webstore, $pluginSet) = explode(".", $optionId);
+        [$webstore, $pluginSet] = explode(".", $optionId);
 
         $webstoreId = explode('_', $webstore)[1];
         $pluginSetId = explode('_', $pluginSet)[1];
@@ -104,7 +104,7 @@ class ShopWizardDataSource extends BaseWizardDataSource
      */
     public function deleteDataOption(string $optionId = 'default')
     {
-        list($webstore, $pluginSet) = explode('.', $optionId);
+        [$webstore, $pluginSet] = explode('.', $optionId);
         $webstoreId = explode('_', $webstore)[1];
         $pluginSetId = explode('_', $pluginSet)[1];
 

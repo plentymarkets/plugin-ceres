@@ -65,7 +65,7 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
             $webstoreConfig = pluginApp(WebstoreConfigurationRepositoryContract::class);
             $settingsHandlerService = pluginApp(SettingsHandlerService::class);
 
-            list($webstore, $pluginSet) = explode(".", $optionId);
+            [$webstore, $pluginSet] = explode(".", $optionId);
 
             $webstoreId = explode('_', $webstore)[1];
             $pluginSetId = explode('_', $pluginSet)[1];
@@ -133,7 +133,7 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     'other' => $intermediarBrowserLanguage
                 ];
                 foreach ($data as $dataKey => $dataValue) {
-                    if (strpos($dataKey, "languages_browserLang_") !== false) {
+                    if (str_contains($dataKey, "languages_browserLang_")) {
                         $exploded = explode("_", $dataKey);
                         $key = end($exploded);
                         $globalData['browserLanguage'][$key] = $dataValue;
@@ -348,7 +348,7 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
 
                 $configRepo->saveConfiguration($pluginId, $configData, $pluginSetId);
             }
-        } catch (\Exception $exception) {
+        } catch (\Exception) {
             return false;
         }
 
@@ -363,19 +363,12 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
         $searchSettings = [];
 
         for ($i = 0; $i < 13; $i++) {
-            switch ($i) {
-                case 1:
-                    $key = "search_firstSearchField";
-                    break;
-                case 2:
-                    $key = "search_secondSearchField";
-                    break;
-                case 3:
-                    $key = "search_thirdSearchField";
-                    break;
-                default:
-                    $key = "search_{$i}thSearchField";
-            }
+            $key = match ($i) {
+                1 => "search_firstSearchField",
+                2 => "search_secondSearchField",
+                3 => "search_thirdSearchField",
+                default => "search_{$i}thSearchField",
+            };
 
             $searchSettings[] = [
                 "key" => $key,

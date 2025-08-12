@@ -50,7 +50,7 @@ class TwigJsonDataContainer extends Twig_Extension
     public function getFilters(): array
     {
         return [
-            $this->twig->createSimpleFilter('json_data', [$this, 'storeJsonData'], ['is_safe' => array('html')])
+            $this->twig->createSimpleFilter('json_data', [$this, 'storeJsonData'], ['is_safe' => ['html']])
         ];
     }
 
@@ -62,7 +62,7 @@ class TwigJsonDataContainer extends Twig_Extension
     public function getFunctions(): array
     {
         return [
-            $this->twig->createSimpleFunction('get_json_data', [$this, 'getJsonData'], ['is_safe' => array('html')])
+            $this->twig->createSimpleFunction('get_json_data', [$this, 'getJsonData'], ['is_safe' => ['html']])
         ];
     }
 

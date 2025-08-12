@@ -28,7 +28,7 @@ class LayoutContainer
             return [];
         }
 
-        list($pluginName, $containerName) = explode("::", $containerWithPluginName);
+        [$pluginName, $containerName] = explode("::", $containerWithPluginName);
 
         /** @var Dispatcher $dispatcher */
         $dispatcher = pluginApp( Dispatcher::class );

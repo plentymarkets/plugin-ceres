@@ -121,7 +121,7 @@ class DefaultSingleItemPreset implements ContentPreset
 
     private function createManufacturer()
     {
-        $dataProvider = $this->shopBuilderHelper->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::externalName',array('item.manufacturer.externalName'));
+        $dataProvider = $this->shopBuilderHelper->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::externalName',['item.manufacturer.externalName']);
 
         $this->stickyContainer->createChild('sticky','Ceres::InlineTextWidget')
             ->withSetting('appearance','none')
@@ -141,21 +141,13 @@ class DefaultSingleItemPreset implements ContentPreset
     private function createNameHeader()
     {
         $itemName = '';
-        switch($this->ceresConfig->item->itemName)
-        {
-            case 0;
-                $itemName = 'name1';
-                break;
-            case 1;
-                $itemName = 'name2';
-                break;
-            case 2;
-                $itemName = 'name3';
-                break;
-            default;
-                $itemName = 'name1';
-        }
-        $dataProvider = $this->shopBuilderHelper->getShopBuilderDataFieldProvider("TextsDataFieldProvider::$itemName",array("texts.$itemName"));
+        $itemName = match ($this->ceresConfig->item->itemName) {
+            0 => 'name1',
+            1 => 'name2',
+            2 => 'name3',
+            default => 'name1',
+        };
+        $dataProvider = $this->shopBuilderHelper->getShopBuilderDataFieldProvider("TextsDataFieldProvider::$itemName",["texts.$itemName"]);
         $this->stickyContainer->createChild('sticky', 'Ceres::InlineTextWidget')
             ->withSetting('customClass', 'title-outer item-name')
             ->withSetting('spacing.customPadding', true)
@@ -204,7 +196,7 @@ class DefaultSingleItemPreset implements ContentPreset
     {
         $text = '';
         $text .= '<b>{{ trans("Ceres::Template.singleItemNumber") }}&nbsp;</b>';
-        $text .= $this->shopBuilderHelper->getShopBuilderDataFieldProvider('VariationGlobalDataFieldProvider::number',array('variation.number'));
+        $text .= $this->shopBuilderHelper->getShopBuilderDataFieldProvider('VariationGlobalDataFieldProvider::number',['variation.number']);
 
 
         $this->stickyContainer->createChild('sticky', 'Ceres::InlineTextWidget')
@@ -293,13 +285,13 @@ class DefaultSingleItemPreset implements ContentPreset
         $titleTabMoreDetails = $this->translator->trans("Ceres::Template.singleItemMoreDetails");
         $titleTabEuResponsiblePerson = $this->translator->trans("Ceres::Template.singleItemEuResponsiblePerson");
         $titleTabManufacturer = $this->translator->trans("Ceres::Template.singleItemManufacturer");
-        $tabs = array(
-            array('title' => $titleTabDescription,'uuid' => $uuidTabDescription),
-            array('title' => $titleTabTechData, 'uuid' => $uuidTabTechData),
-            array('title' => $titleTabMoreDetails, 'uuid' => $uuidTabMoreDetails),
-            array('title' => $titleTabEuResponsiblePerson, 'uuid' => $uuidEuResponsiblePerson),
-            array('title' => $titleTabManufacturer, 'uuid' => $uuidManufacturer),
-        );
+        $tabs = [
+            ['title' => $titleTabDescription,'uuid' => $uuidTabDescription],
+            ['title' => $titleTabTechData, 'uuid' => $uuidTabTechData],
+            ['title' => $titleTabMoreDetails, 'uuid' => $uuidTabMoreDetails],
+            ['title' => $titleTabEuResponsiblePerson, 'uuid' => $uuidEuResponsiblePerson],
+            ['title' => $titleTabManufacturer, 'uuid' => $uuidManufacturer],
+        ];
 
         $this->tabWidget = $this->secondTwoColumnWidget->createChild('first', 'Ceres::TabWidget')
             ->withSetting('tabs', $tabs)
@@ -320,7 +312,7 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.top.unit', null)
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
-            ->withSetting('text', $this->shopBuilderHelper->getShopBuilderDataFieldProvider('TextsDataFieldProvider::description',array('texts.description', null, null)));
+            ->withSetting('text', $this->shopBuilderHelper->getShopBuilderDataFieldProvider('TextsDataFieldProvider::description',['texts.description', null, null]));
 
         $this->tabWidget->createChild($uuidTabTechData, 'Ceres::InlineTextWidget')
             ->withSetting('appearance','none')
@@ -333,7 +325,7 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.padding.top.unit', null)
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
-            ->withSetting('text',$this->shopBuilderHelper->getShopBuilderDataFieldProvider('TextsDataFieldProvider::technicalData',array('texts.technicalData', null, null)));
+            ->withSetting('text',$this->shopBuilderHelper->getShopBuilderDataFieldProvider('TextsDataFieldProvider::technicalData',['texts.technicalData', null, null]));
 
         $this->tabWidget->createChild($uuidTabMoreDetails, 'Ceres::ItemDataTableWidget')
             ->withSetting('itemInformation', [
