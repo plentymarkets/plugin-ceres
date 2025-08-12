@@ -93,8 +93,8 @@
                             class="input-unit"
                             data-model="telephone"
                             v-validate:text="isInRequiredFields('de', 'delivery_address.phoneNumber')">
-                            <input type="text" name="telephone" :id="'txtTelephone' + _uid" :value="value.telephone" @input="emitInputEvent('telephone', $event.target.value)">
-                            <label :for="'txtTelephone' + _uid">
+                            <input type="text" name="telephone" :id="'delivery_txtTelephone' + _uid" :value="value.telephone" @input="emitInputEvent('telephone', $event.target.value)">
+                            <label :for="'delivery_txtTelephone' + _uid">
                                 {{ transformTranslation("Ceres::Template.addressTelephone", "de", "delivery_address.phoneNumber") }}
                             </label>
                         </div>
@@ -310,8 +310,8 @@
                             class="input-unit"
                             data-model="telephone"
                             v-validate:text="isInRequiredFields('de', 'billing_address.phoneNumber')">
-                            <input type="text" name="telephone" :id="'txtTelephone' + _uid" :value="value.telephone" @input="emitInputEvent('telephone', $event.target.value)">
-                            <label :for="'txtTelephone' + _uid">
+                            <input type="text" name="telephone" :id="'billing_txtTelephone' + _uid" :value="value.telephone" @input="emitInputEvent('telephone', $event.target.value)">
+                            <label :for="'billing_txtTelephone' + _uid">
                                 {{ transformTranslation("Ceres::Template.addressTelephone", "de", "billing_address.phoneNumber") }}
                             </label>
                         </div>
@@ -519,8 +519,8 @@
                             class="input-unit"
                             data-model="telephone"
                             v-validate:text="isInRequiredFields('gb', 'billing_address.phoneNumber')">
-                            <input type="text" name="telephone" :id="'txtTelephone' + _uid" :value="value.telephone" @input="emitInputEvent('telephone', $event.target.value)">
-                            <label :for="'txtTelephone' + _uid">
+                            <input type="text" name="telephone" :id="'billing_txtTelephone' + _uid" :value="value.telephone" @input="emitInputEvent('telephone', $event.target.value)">
+                            <label :for="'billing_txtTelephone' + _uid">
                                 {{ transformTranslation("Ceres::Template.addressTelephone", "gb", "billing_address.phoneNumber") }}
                             </label>
                         </div>
@@ -717,8 +717,8 @@
                             class="input-unit"
                             data-model="telephone"
                             v-validate:text="isInRequiredFields('de', 'delivery_address.phoneNumber')">
-                            <input type="text" name="telephone" :id="'txtTelephone' + _uid" :value="value.telephone" @input="emitInputEvent('telephone', $event.target.value)">
-                            <label :for="'txtTelephone' + _uid">
+                            <input type="text" name="telephone" :id="'delivery_txtTelephone' + _uid" :value="value.telephone" @input="emitInputEvent('telephone', $event.target.value)">
+                            <label :for="'delivery_txtTelephone' + _uid">
                                 {{ transformTranslation("Ceres::Template.addressTelephone", "de", "delivery_address.phoneNumber") }}
                             </label>
                         </div>
@@ -920,8 +920,8 @@
                             class="input-unit"
                             data-model="telephone"
                             v-validate:text="isInRequiredFields('gb', 'delivery_address.phoneNumber')">
-                            <input type="text" name="telephone" :id="'txtTelephone' + _uid" :value="value.telephone" @input="emitInputEvent('telephone', $event.target.value)">
-                            <label :for="'txtTelephone' + _uid">
+                            <input type="text" name="telephone" :id="'delivery_txtTelephone' + _uid" :value="value.telephone" @input="emitInputEvent('telephone', $event.target.value)">
+                            <label :for="'delivery_txtTelephone' + _uid">
                                 {{ transformTranslation("Ceres::Template.addressTelephone", "gb", "delivery_address.phoneNumber") }}
                             </label>
                         </div>
