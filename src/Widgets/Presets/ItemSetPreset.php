@@ -149,21 +149,13 @@ class ItemSetPreset implements ContentPreset
 
     private function createNameHeader()
     {
-        switch($this->ceresConfig->item->itemName)
-        {
-            case 0;
-                $itemName = 'name1';
-                break;
-            case 1;
-                $itemName = 'name2';
-                break;
-            case 2;
-                $itemName = 'name3';
-                break;
-            default;
-                $itemName = 'name1';
-        }
-        $dataProvider = $this->getShopBuilderDataFieldProvider("TextsDataFieldProvider::$itemName",array("texts.$itemName"));
+        $itemName = match ($this->ceresConfig->item->itemName) {
+            0 => 'name1',
+            1 => 'name2',
+            2 => 'name3',
+            default => 'name1',
+        };
+        $dataProvider = $this->getShopBuilderDataFieldProvider("TextsDataFieldProvider::$itemName",["texts.$itemName"]);
         $this->setItemBackgroundWidget->createChild('background', 'Ceres::InlineTextWidget')
             ->withSetting('customClass', 'title-outer')
             ->withSetting('spacing.customPadding', true)
@@ -187,7 +179,7 @@ class ItemSetPreset implements ContentPreset
 
     private function createManufacturer()
     {
-        $dataProvider = $this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::externalName',array('item.manufacturer.externalName'));
+        $dataProvider = $this->getShopBuilderDataFieldProvider('ManufacturerDataFieldProvider::externalName',['item.manufacturer.externalName']);
 
         $this->setItemBackgroundWidget->createChild('background', 'Ceres::InlineTextWidget')
             ->withSetting('appearance','none')
@@ -217,7 +209,7 @@ class ItemSetPreset implements ContentPreset
             ->withSetting('spacing.padding.top.unit', null)
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
-            ->withSetting('text', $this->getShopBuilderDataFieldProvider('TextsDataFieldProvider::description',array('texts.description', null, null)));
+            ->withSetting('text', $this->getShopBuilderDataFieldProvider('TextsDataFieldProvider::description',['texts.description', null, null]));
     }
 
     private function createSetDescriptionSeparatorWidget()
@@ -297,22 +289,14 @@ class ItemSetPreset implements ContentPreset
 
     private function createSetComponentItemName()
     {
-        switch($this->ceresConfig->item->itemName)
-        {
-            case 0;
-                $itemName = 'name1';
-                break;
-            case 1;
-                $itemName = 'name2';
-                break;
-            case 2;
-                $itemName = 'name3';
-                break;
-            default;
-                $itemName = 'name1';
-        }
+        $itemName = match ($this->ceresConfig->item->itemName) {
+            0 => 'name1',
+            1 => 'name2',
+            2 => 'name3',
+            default => 'name1',
+        };
 
-        $dataProvider = $this->getShopBuilderDataFieldProvider("TextsDataFieldProvider::$itemName",array("texts.$itemName"));
+        $dataProvider = $this->getShopBuilderDataFieldProvider("TextsDataFieldProvider::$itemName",["texts.$itemName"]);
         $this->setComponentThreeColumnWidget->createChild('first', 'Ceres::InlineTextWidget')
             ->withSetting('customClass', 'title-outer')
             ->withSetting('spacing.customPadding', true)
@@ -341,7 +325,7 @@ class ItemSetPreset implements ContentPreset
             ->withSetting('spacing.padding.top.unit', null)
             ->withSetting('spacing.padding.bottom.value', 0)
             ->withSetting('spacing.padding.bottom.unit', null)
-            ->withSetting('text', $this->getShopBuilderDataFieldProvider('TextsDataFieldProvider::description',array('texts.description', null, null)));
+            ->withSetting('text', $this->getShopBuilderDataFieldProvider('TextsDataFieldProvider::description',['texts.description', null, null]));
     }
 
     private function createSetComponentImageWidget()

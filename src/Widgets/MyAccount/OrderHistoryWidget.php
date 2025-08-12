@@ -106,7 +106,7 @@ class OrderHistoryWidget extends BaseWidget
                 {
                     return [
                         "id"            => $i,
-                        "total"         => rand(100, 100000) / 100,
+                        "total"         => random_int(100, 100000) / 100,
                         "status"        => $this->getRandomStatusName(),
                         "creationDate"  => date("Y-m-d H:i:s")
                     ];
@@ -145,7 +145,7 @@ class OrderHistoryWidget extends BaseWidget
             $this->lang = Utils::getLang();
         }
 
-        $idx = rand(0, count($this->statuses) - 1);
+        $idx = random_int(0, count($this->statuses) - 1);
         $status = $this->statuses[$idx];
 
         if (isset($status))

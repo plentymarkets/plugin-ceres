@@ -13,7 +13,7 @@ use Plenty\Plugin\Translation\Translator;
  */
 class LanguagesHelper
 {
-    private static $languages = array('de',
+    private static $languages = ['de',
         'en',
         'bg',
         'fr',
@@ -32,7 +32,7 @@ class LanguagesHelper
         'sk',
         'cn',
         'vn'
-    );
+    ];
     
     /**
      * @return array
@@ -73,7 +73,7 @@ class LanguagesHelper
             $currentUser = $userRepo->getCurrentUser();
             return $currentUser->lang;
         }
-        catch(\Exception $e)
+        catch(\Exception)
         {
             /** @var Request $request */
             $request = pluginApp(Request::class);

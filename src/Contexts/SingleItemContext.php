@@ -341,25 +341,14 @@ class SingleItemContext extends GlobalContext implements ContextInterface
      */
     private function detectItemCondition(int $conditionId): string
     {
-        switch ($conditionId) {
-            case 0:
-                $conditionString = $this->ceresConfig->seo->itemCondition0;
-                break;
-            case 1:
-                $conditionString = $this->ceresConfig->seo->itemCondition1;
-                break;
-            case 2:
-                $conditionString = $this->ceresConfig->seo->itemCondition2;
-                break;
-            case 3:
-                $conditionString = $this->ceresConfig->seo->itemCondition3;
-                break;
-            case 4:
-                $conditionString = $this->ceresConfig->seo->itemCondition4;
-                break;
-            default:
-                $conditionString = 'https://schema.org/NewCondition';
-        }
+        $conditionString = match ($conditionId) {
+            0 => $this->ceresConfig->seo->itemCondition0,
+            1 => $this->ceresConfig->seo->itemCondition1,
+            2 => $this->ceresConfig->seo->itemCondition2,
+            3 => $this->ceresConfig->seo->itemCondition3,
+            4 => $this->ceresConfig->seo->itemCondition4,
+            default => 'https://schema.org/NewCondition',
+        };
         return $conditionString;
     }
     /**
@@ -410,7 +399,7 @@ class SingleItemContext extends GlobalContext implements ContextInterface
     {
         $barcode = '';
         foreach ($barcodes as $property) {
-            if (strpos($property['type'], $barcodeType) === 0 && $this->isWebshopReferrer($property['referrers'])) {
+            if (str_starts_with($property['type'], $barcodeType) && $this->isWebshopReferrer($property['referrers'])) {
                 $barcode = $property['code'];
                 break;
             }

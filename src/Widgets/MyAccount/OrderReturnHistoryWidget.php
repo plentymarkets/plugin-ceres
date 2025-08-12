@@ -84,7 +84,7 @@ class OrderReturnHistoryWidget extends BaseWidget
                             "orderItems" => [],
                             "documents"  => [
                                 [
-                                    "id"    => rand(0, 100),
+                                    "id"    => random_int(0, 100),
                                     "type"  => "return_note"
                                 ]
                             ],
@@ -92,7 +92,7 @@ class OrderReturnHistoryWidget extends BaseWidget
                             "orderReferences" => [
                                 [
                                     "referenceType" => "parent",
-                                    "referenceOrderId" => rand(10, 1000)
+                                    "referenceOrderId" => random_int(10, 1000)
                                 ]
                             ]
                         ]
