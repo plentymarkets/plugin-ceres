@@ -8,6 +8,7 @@
 - Die Barrierefreiheit des Bilder-Sliders wurde verbessert, indem ein falsches Rollenattribut entfernt wurde.
 - Es wurden Probleme mit der Barrierefreiheit im Zusammenhang mit Honeypot-Formularelementen behoben.
 - Die Attributauswahl auf Artikelseiten über die Tastaturnavigation wurde verbessert. Benutzer:innen können nun mit der Tabulatortaste durch alle Optionen navigieren, ohne dass etwas übersprungen wird.
+- Problem mit Barrierefreiheit des Telefonnummern-Eingabefeld in der Rechnungs- und Lieferadresse behoben.
 
 ## v5.0.74 (2025-06-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.73...5.0.74" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
