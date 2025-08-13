@@ -1,5 +1,16 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.75 (2025-08-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.74...5.0.75" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Behoben
+
+- Es wurde ein Problem behoben, bei dem die Barrierefreiheitserklärung nicht über die globalen Einstellungen aktiviert werden konnte.
+- Die Barrierefreiheit des Bilder-Sliders wurde verbessert, indem ein falsches Rollenattribut entfernt wurde.
+- Es wurden Probleme mit der Barrierefreiheit im Zusammenhang mit Honeypot-Formularelementen behoben.
+- Die Attributauswahl auf Artikelseiten über die Tastaturnavigation wurde verbessert. Benutzer:innen können nun mit der Tabulatortaste durch alle Optionen navigieren, ohne dass etwas übersprungen wird.
+- Problem mit Barrierefreiheit des Telefonnummern-Eingabefeld in der Rechnungs- und Lieferadresse behoben.
+- Verbesserte Codequalität und Stabilität mit Rector
+
 ## v5.0.74 (2025-06-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.73...5.0.74" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
