@@ -4,8 +4,8 @@
             <span class="d-none">{{ trans("Ceres::Template.checkoutChangeShippingProfileHint") }}</span>
         </legend>
         <div class="cmp cmp-method-list list mb-4" v-bind:class="{ 'error': showError }">
-            <ul class="method-list component-loading" :class="{ 'is-loading': isBasketLoading || isCheckoutReadonly }" role="radiogroup" aria-label="{{ trans('Ceres::Template.checkoutPaymentMethod') }}">
-                <li v-for="paymentProvider in methodOfPaymentList" class="method-list-item" :data-id="paymentProvider.id" role="none">
+            <ul class="method-list component-loading" :class="{ 'is-loading': isBasketLoading || isCheckoutReadonly }">
+                <li v-for="paymentProvider in methodOfPaymentList" class="method-list-item" :data-id="paymentProvider.id">
                     <input
                             type="radio"
                             :id="'paymentMethod' + _uid + paymentProvider.id"
@@ -14,10 +14,7 @@
                             @change="onPaymentProviderChange(paymentProvider)"
                             :checked="methodOfPaymentId === paymentProvider.id"
                             :disabled="!paymentProvider.isSelectable || isCheckoutReadonly"
-                            :aria-label="paymentProvider.name"
-                            :aria-describedby="'paymentMethodDesc' + _uid + paymentProvider.id"
-                            tabindex="0"
-                            class="sr-only-focusable"
+                            style="position: absolute; opacity: 0; pointer-events: none;"
                     >
                     <label class="provider-select-label" :for="'paymentMethod' + _uid + paymentProvider.id"
                            :class="paddingClasses"
@@ -26,19 +23,24 @@
                            data-toggle="tooltip"
                            data-placement="top"
                            data-title="{{ trans('Ceres::Template.checkoutChangeShippingProfileHint') }}"
-                           tabindex="-1">
+                           tabindex="0"
+                           @keydown.space.prevent="paymentProvider.isSelectable && !isCheckoutReadonly ? onPaymentProviderChange(paymentProvider) : null"
+                           @keydown.enter.prevent="paymentProvider.isSelectable && !isCheckoutReadonly ? onPaymentProviderChange(paymentProvider) : null"
+                           role="radio"
+                           :aria-checked="methodOfPaymentId === paymentProvider.id"
+                           :aria-disabled="!paymentProvider.isSelectable || isCheckoutReadonly">
                         <div class="icon">
                             <img class="img-fluid" :src="paymentProvider.icon" :alt="paymentProvider.name">
                         </div><!--
                         --><div class="content">
                         ${ paymentProvider.name }
                             <small v-if="paymentProvider.sourceUrl" class="float-right">
-                                <a :href="paymentProvider.sourceUrl" rel="noopener noreferrer" target="_blank" :tabindex="methodOfPaymentId === paymentProvider.id ? 0 : -1">
+                                <a :href="paymentProvider.sourceUrl" rel="noopener noreferrer" target="_blank" tabindex="-1">
                                     <i class="fa fa-external-link" aria-hidden="true"></i>
                                     {{ trans("Ceres::Template.checkoutPaymentMethodDetailsLink") }}
                                 </a>
                             </small>
-                            <div :id="'paymentMethodDesc' + _uid + paymentProvider.id">
+                            <div>
                                 <small>
                                     ${ paymentProvider.description | truncate('150') }
                                 </small>
