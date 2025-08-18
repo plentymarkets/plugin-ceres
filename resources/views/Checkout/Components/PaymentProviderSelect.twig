@@ -14,7 +14,6 @@
                             @change="onPaymentProviderChange(paymentProvider)"
                             :checked="methodOfPaymentId === paymentProvider.id"
                             :disabled="!paymentProvider.isSelectable || isCheckoutReadonly"
-                            style="position: absolute; opacity: 0; pointer-events: none;"
                     >
                     <label class="provider-select-label" :for="'paymentMethod' + _uid + paymentProvider.id"
                            :class="paddingClasses"
@@ -22,20 +21,14 @@
                            v-tooltip="isPaymentMethodExcluded(paymentProvider.id)"
                            data-toggle="tooltip"
                            data-placement="top"
-                           data-title="{{ trans('Ceres::Template.checkoutChangeShippingProfileHint') }}"
-                           tabindex="0"
-                           @keydown.space.prevent="paymentProvider.isSelectable && !isCheckoutReadonly ? onPaymentProviderChange(paymentProvider) : null"
-                           @keydown.enter.prevent="paymentProvider.isSelectable && !isCheckoutReadonly ? onPaymentProviderChange(paymentProvider) : null"
-                           role="radio"
-                           :aria-checked="methodOfPaymentId === paymentProvider.id"
-                           :aria-disabled="!paymentProvider.isSelectable || isCheckoutReadonly">
+                           data-title="{{ trans("Ceres::Template.checkoutChangeShippingProfileHint") }}">
                         <div class="icon">
                             <img class="img-fluid" :src="paymentProvider.icon" :alt="paymentProvider.name">
                         </div><!--
                         --><div class="content">
-                        ${ paymentProvider.name }
+                        ${ paymentProvider.name } Test Live Plain Text!
                             <small v-if="paymentProvider.sourceUrl" class="float-right">
-                                <a :href="paymentProvider.sourceUrl" rel="noopener noreferrer" target="_blank" tabindex="-1">
+                                <a :href="paymentProvider.sourceUrl" rel="noopener noreferrer" target="_blank">
                                     <i class="fa fa-external-link" aria-hidden="true"></i>
                                     {{ trans("Ceres::Template.checkoutPaymentMethodDetailsLink") }}
                                 </a>

@@ -5,7 +5,7 @@
             <span class="d-none">{{ trans("Ceres::Template.checkoutShippingProfile") }}</span>
         </legend>
         <ul class="method-list component-loading" :class="{ 'is-loading': isBasketLoading || isCheckoutReadonly }">
-            <li v-for="shippingProfile in shippingProfileList" class="method-list-item" :data-id="shippingProfile.parcelServicePresetId">
+            <li v-for="shippingProfile in shippingProfileList" class="method-list-item"  :data-id="shippingProfile.parcelServicePresetId">
                 <input
                         type="radio"
                         :id="'ShippingProfileID' + _uid + shippingProfile.parcelServicePresetId"
@@ -14,23 +14,17 @@
                         @change="onShippingProfileChange(shippingProfile.parcelServicePresetId)"
                         :checked="shippingProfileId === shippingProfile.parcelServicePresetId"
                         :disabled="isBasketLoading || isCheckoutReadonly || (paymentContainerIsOverwritten && isPaymentMethodExcluded(shippingProfile, selectedPaymentMethodId))"
-                        style="position: absolute; opacity: 0; pointer-events: none;"
                 >
+
 
                 <label class="provider-select-label"
                        :for="'ShippingProfileID' +  _uid + shippingProfile.parcelServicePresetId"
                        :class="paddingClasses"
                        :style="paddingInlineStyles"
-                       v-tooltip="isPaymentMethodExcluded(shippingProfile, selectedPaymentMethodId)"
+                        v-tooltip="isPaymentMethodExcluded(shippingProfile, selectedPaymentMethodId)"
                        data-toggle="tooltip"
                        data-placement="top"
                        :data-title="getTooltip(shippingProfile.parcelServicePresetId, selectedPaymentMethodId)"
-                       tabindex="0"
-                       @keydown.space.prevent="!isBasketLoading && !isCheckoutReadonly && !(paymentContainerIsOverwritten && isPaymentMethodExcluded(shippingProfile, selectedPaymentMethodId)) ? onShippingProfileChange(shippingProfile.parcelServicePresetId) : null"
-                       @keydown.enter.prevent="!isBasketLoading && !isCheckoutReadonly && !(paymentContainerIsOverwritten && isPaymentMethodExcluded(shippingProfile, selectedPaymentMethodId)) ? onShippingProfileChange(shippingProfile.parcelServicePresetId) : null"
-                       role="radio"
-                       :aria-checked="shippingProfileId === shippingProfile.parcelServicePresetId"
-                       :aria-disabled="isBasketLoading || isCheckoutReadonly || (paymentContainerIsOverwritten && isPaymentMethodExcluded(shippingProfile, selectedPaymentMethodId))"
                     >
                     <div class="icon">
                         <img class="img-fluid" v-if="shippingProfile.icon" :src="shippingProfile.icon" :alt="shippingProfile.parcelServiceName">
@@ -49,7 +43,7 @@
             <li v-if="shippingProfileList.length <= 0" class="method-list-item has-error">
                 <div class="label">
                     <div class="content">
-                        {{ trans("Ceres::Template.notificationsCalculateShippingFailed") }}
+                        {{ trans("Ceres::Template.notificationsCalculateShippingFailed") }} Test Live PLain Text!
                     </div>
                 </div>
             </li><!-- -->
