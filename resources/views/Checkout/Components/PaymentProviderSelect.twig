@@ -7,6 +7,7 @@
             <ul class="method-list component-loading" :class="{ 'is-loading': isBasketLoading || isCheckoutReadonly }">
                 <li v-for="paymentProvider in methodOfPaymentList" class="method-list-item" :data-id="paymentProvider.id">
                     <input
+                            ref="'radio' + paymentProvider.id"
                             type="radio"
                             :id="'paymentMethod' + _uid + paymentProvider.id"
                             :name="'MethodOfPaymentID' + _uid"
@@ -18,6 +19,9 @@
                     <label class="provider-select-label" :for="'paymentMethod' + _uid + paymentProvider.id"
                            :class="paddingClasses"
                            :style="paddingInlineStyles"
+                           tabindex="0"
+                            @keydown.enter.prevent="$refs['radio' + paymentProvider.id].click()"
+                            @keydown.space.prevent="$refs['radio' + paymentProvider.id].click()"
                            v-tooltip="isPaymentMethodExcluded(paymentProvider.id)"
                            data-toggle="tooltip"
                            data-placement="top"
