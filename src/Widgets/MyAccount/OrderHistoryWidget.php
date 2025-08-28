@@ -99,11 +99,9 @@ class OrderHistoryWidget extends BaseWidget
     {
         $previewData = null;
 
-        if ( $isPreview )
-        {
+        if ($isPreview) {
             $previewData = $this->mockPaginatedResult(
-                function($i)
-                {
+                function ($i) {
                     return [
                         "id"            => $i,
                         "total"         => random_int(100, 100000) / 100,
@@ -112,7 +110,6 @@ class OrderHistoryWidget extends BaseWidget
                     ];
                 },
                 $widgetSettings["ordersPerPage"]["mobile"] ?? 5
-
             );
         }
 
@@ -123,33 +120,29 @@ class OrderHistoryWidget extends BaseWidget
 
     private function getRandomStatusName()
     {
-        if ( is_null($this->statuses) )
-        {
+        if (is_null($this->statuses)) {
             $this->statuses = [];
             /** @var AuthHelper $authHelper */
             $authHelper = pluginApp(AuthHelper::class);
-            $statuses = $authHelper->processUnguarded(function() {
+            $statuses = $authHelper->processUnguarded(function () {
                 /** @var OrderStatusRepositoryContract $orderStatusRepo */
                 $orderStatusRepo = pluginApp(OrderStatusRepositoryContract::class);
                 return $orderStatusRepo->all();
             });
 
             /** @var OrderStatus $status */
-            foreach( $statuses as $status )
-            {
-                if ($status->isFrontendVisible)
-                {
+            foreach ($statuses as $status) {
+                if ($status->isFrontendVisible) {
                     $this->statuses[] = $status;
                 }
             }
             $this->lang = Utils::getLang();
         }
 
-        $idx = random_int(0, count($this->statuses) - 1);
+        $idx = random_int(0, max(count($this->statuses) - 1, 0));
         $status = $this->statuses[$idx];
 
-        if (isset($status))
-        {
+        if (isset($status)) {
             return $status->names[$this->lang];
         }
 
