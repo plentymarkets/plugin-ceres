@@ -70675,6 +70675,8 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       }
     },
     handleKeydown: function handleKeydown(event) {
+      console.log(event.key);
+
       if (event.key === "Enter" || event.keyCode === 13) {
         event.preventDefault();
         event.target.click();
@@ -71270,6 +71272,8 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       }
     },
     handleKeydown: function handleKeydown(event) {
+      console.log(event.key);
+
       if (event.key === "Enter" || event.keyCode === 13) {
         event.preventDefault();
         event.target.click();
