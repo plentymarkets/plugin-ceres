@@ -15,6 +15,7 @@
     cursor: pointer;
     outline: none;
 
+    &:focus,
     &:hover {
         background: $gray-300;
     }

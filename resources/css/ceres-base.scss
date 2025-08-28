@@ -9313,6 +9313,7 @@ html.ios { // stylelint-disable-line selector-no-qualifying-type
     cursor: pointer;
     outline: none;
 
+    &:focus,
     &:hover {
         background: $gray-300;
     }

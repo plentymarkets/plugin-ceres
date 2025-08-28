@@ -11026,7 +11026,7 @@ html.ios textarea {
   cursor: pointer;
   outline: none;
 }
-.autocomplete-suggestion:hover {
+.autocomplete-suggestion:focus, .autocomplete-suggestion:hover {
   background: #dee2e6;
 }
 .autocomplete-suggestion .label {

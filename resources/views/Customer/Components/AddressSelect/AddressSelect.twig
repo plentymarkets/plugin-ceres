@@ -86,7 +86,8 @@
                                             :id="'addressSelectItem' + _uid + item.id"
                                             :value="item.id"
                                             :checked="selectedAddress && selectedAddress.id === item.id"
-                                            @change="onAddressChanged(item)">
+                                            @change="onAddressChanged(item)"
+                                            @keydown.enter.prevent="onAddressChanged(item)">
                                         <label :for="'addressSelectItem' + _uid + item.id" class="item-inner">
                                         <div class="container-fluid px-0">
                                             <div class="row"> 
