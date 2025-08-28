@@ -1,11 +1,11 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.76 (2025-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.75...5.0.76" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.76 (2025-08-29) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.75...5.0.76" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added
 
 - The home button in the breadcrumbs gets a prefilled `aria-label` to improve accessibility. The corresponding translation key is `headerBreadcrumbHome`.
-- Keyboard tab accessibility added for the items search results.
+- Accessibility via keyboard was improved for the search result preview and the basket preview.
 
 ## v5.0.75 (2025-08-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.74...5.0.75" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 

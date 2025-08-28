@@ -1,10 +1,11 @@
 # Release Notes für plentyShop LTS
 
-## v5.0.76 (2025-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.75...5.0.76" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.76 (2025-08-29) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.75...5.0.76" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
 
 - Der Home-Button in den Breadcrumbs bekommt ein vorausgefülltes `aria-label` um die Barrierefreiheit zu verbessern. Der entsprechende Übersetzungschlüssel ist `headerBreadcrumbHome`
+- Die Barrierefreiheit über die Tastatur wurde für die Vorschau der Suchergebnisse und die Warenkorbvorschau verbessert.
 
 ## v5.0.75 (2025-08-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.74...5.0.75" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
