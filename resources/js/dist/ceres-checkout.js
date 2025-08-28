@@ -70673,6 +70673,12 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       } else {
         return false;
       }
+    },
+    handleKeydown: function handleKeydown(event) {
+      if (event.key === "Enter" || event.keyCode === 13) {
+        event.preventDefault();
+        event.target.click();
+      }
     }
   }
 }));
