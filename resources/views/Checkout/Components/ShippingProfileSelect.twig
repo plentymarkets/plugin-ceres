@@ -12,7 +12,7 @@
                         :name="'shippingProfileSelect' + _uid"
                         :value="shippingProfile.parcelServicePresetId"
                         @change="onShippingProfileChange(shippingProfile.parcelServicePresetId)"
-                        @keydown="handleKeydown"
+                        @keydown.enter="handleKeydown"
                         :checked="shippingProfileId === shippingProfile.parcelServicePresetId"
                         :disabled="isBasketLoading || isCheckoutReadonly || (paymentContainerIsOverwritten && isPaymentMethodExcluded(shippingProfile, selectedPaymentMethodId))"
                 >
