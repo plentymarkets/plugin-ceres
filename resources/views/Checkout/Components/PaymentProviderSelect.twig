@@ -12,6 +12,7 @@
                             :name="'MethodOfPaymentID' + _uid"
                             :value="paymentProvider.id"
                             @change="onPaymentProviderChange(paymentProvider)"
+                            @keydown="handleKeydown"
                             :checked="methodOfPaymentId === paymentProvider.id"
                             :disabled="!paymentProvider.isSelectable || isCheckoutReadonly"
                     >
