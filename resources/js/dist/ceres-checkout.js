@@ -71272,10 +71272,11 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       }
     },
     handleKeydown: function handleKeydown(event) {
-      console.log(event.key);
+      console.log(event.currentTarget);
 
       if (event.key === "Enter" || event.keyCode === 13) {
         event.preventDefault();
+        event.stopPropagation();
         event.currentTarget.click();
       }
     }
