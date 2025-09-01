@@ -84,6 +84,15 @@ export default Vue.component("payment-provider-select", {
             {
                 return false;
             }
+        },
+
+        handleKeydown(event, inputId)
+        {
+            if (event.key === "Enter" || event.keyCode === 13)
+            {
+                event.preventDefault();
+                document.getElementById(inputId).click();
+            }
         }
     }
 });

@@ -5,7 +5,12 @@
             <span class="d-none">{{ trans("Ceres::Template.checkoutShippingProfile") }}</span>
         </legend>
         <ul class="method-list component-loading" :class="{ 'is-loading': isBasketLoading || isCheckoutReadonly }">
-            <li v-for="shippingProfile in shippingProfileList" class="method-list-item"  :data-id="shippingProfile.parcelServicePresetId">
+            <li
+                    @keydown="handleKeydown($event, 'ShippingProfileID' + _uid + shippingProfile.parcelServicePresetId)"
+                    tabindex="0"
+                    v-for="shippingProfile in shippingProfileList"
+                    class="method-list-item"
+                    :data-id="shippingProfile.parcelServicePresetId">
                 <input
                         type="radio"
                         :id="'ShippingProfileID' + _uid + shippingProfile.parcelServicePresetId"
