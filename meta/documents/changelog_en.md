@@ -1,6 +1,6 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.76 (2025-08-29) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.75...5.0.76" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.76 (2025-09-01) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.75...5.0.76" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added
 
@@ -10,6 +10,10 @@
     - basket preview
     - shipping profile selection
     - payment provider selection
+
+### Fixed
+
+- Widgets in the ShopBuilder could not be loaded under certain circumstances. This has been fixed.
 
 ## v5.0.75 (2025-08-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.74...5.0.75" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
