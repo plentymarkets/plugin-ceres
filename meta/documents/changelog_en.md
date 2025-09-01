@@ -5,7 +5,11 @@
 ### Added
 
 - The home button in the breadcrumbs gets a prefilled `aria-label` to improve accessibility. The corresponding translation key is `headerBreadcrumbHome`.
-- Accessibility via keyboard was improved for the search result preview and the basket preview.
+- Accessibility via keyboard was improved for the following components:
+    - search result preview
+    - basket preview
+    - shipping profile selection
+    - payment provider selection
 
 ## v5.0.75 (2025-08-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.74...5.0.75" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
@@ -17,7 +21,6 @@
 - Improved attribute selection of items via keyboard navigation. users can now tab through all options without any being skipped.
 - Fixed accessibility issue of telephone number input in billing and delivery address.
 - Improved code quality and stability with rector.
-- Improved accessibility shipping profile and payment provider selection. Users can use TAB key to navigate and ENTER to select an item.
 
 ## v5.0.74 (2025-06-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.73...5.0.74" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
