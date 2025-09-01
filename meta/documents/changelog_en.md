@@ -15,7 +15,8 @@
 - Fixed accessibility issues related to honeypot form elements.
 - Improved attribute selection of items via keyboard navigation. users can now tab through all options without any being skipped.
 - Fixed accessibility issue of telephone number input in billing and delivery address.
-- Improved code quality and stability with rector
+- Improved code quality and stability with rector.
+- Improved accessibility shipping profile and payment provider selection. Users can use TAB key to navigate and ENTER to select an item.
 
 ## v5.0.74 (2025-06-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.73...5.0.74" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
