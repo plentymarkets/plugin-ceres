@@ -70673,6 +70673,12 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
       } else {
         return false;
       }
+    },
+    handleKeydown: function handleKeydown(event, inputId) {
+      if (event.key === "Enter" || event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById(inputId).click();
+      }
     }
   }
 }));
@@ -71261,6 +71267,12 @@ var NotificationService = __webpack_require__(/*! ../../services/NotificationSer
         return shippingProfile.excludedPaymentMethodIds.includes(selectedPaymentMethodId);
       } else {
         return false;
+      }
+    },
+    handleKeydown: function handleKeydown(event, inputId) {
+      if (event.key === "Enter" || event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById(inputId).click();
       }
     }
   }

@@ -5,7 +5,12 @@
         </legend>
         <div class="cmp cmp-method-list list mb-4" v-bind:class="{ 'error': showError }">
             <ul class="method-list component-loading" :class="{ 'is-loading': isBasketLoading || isCheckoutReadonly }">
-                <li v-for="paymentProvider in methodOfPaymentList" class="method-list-item" :data-id="paymentProvider.id">
+                <li
+                        @keydown="handleKeydown($event, 'paymentMethod' + _uid + paymentProvider.id)"
+                        tabindex="0"
+                        v-for="paymentProvider in methodOfPaymentList"
+                        class="method-list-item"
+                        :data-id="paymentProvider.id">
                     <input
                             type="radio"
                             :id="'paymentMethod' + _uid + paymentProvider.id"
