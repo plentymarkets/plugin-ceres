@@ -123,15 +123,9 @@ export default Vue.component("shipping-profile-select", {
             }
         },
 
-        handleKeydown(event)
+        handleKeydown(inputId)
         {
-            console.log(event.currentTarget);
-            if (event.key === "Enter" || event.keyCode === 13)
-            {
-                event.preventDefault();
-                event.stopPropagation();
-                event.currentTarget.click();
-            }
+            document.getElementById(inputId).click();
         }
     }
 });
