@@ -86,13 +86,12 @@ export default Vue.component("payment-provider-select", {
             }
         },
 
-        handleKeydown(event)
+        handleKeydown(event, inputId)
         {
-            console.log(event.key);
             if (event.key === "Enter" || event.keyCode === 13)
             {
                 event.preventDefault();
-                event.target.click();
+                document.getElementById(inputId).click();
             }
         }
     }

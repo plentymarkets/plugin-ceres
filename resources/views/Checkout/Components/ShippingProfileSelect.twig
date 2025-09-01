@@ -7,7 +7,8 @@
         <ul class="method-list component-loading" :class="{ 'is-loading': isBasketLoading || isCheckoutReadonly }">
             <li
                     @keydown="handleKeydown($event, 'ShippingProfileID' + _uid + shippingProfile.parcelServicePresetId)"
-                    tabindex="0" v-for="shippingProfile in shippingProfileList"
+                    tabindex="0"
+                    v-for="shippingProfile in shippingProfileList"
                     class="method-list-item"
                     :data-id="shippingProfile.parcelServicePresetId">
                 <input
