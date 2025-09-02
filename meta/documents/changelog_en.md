@@ -2,6 +2,10 @@
 
 ## v5.0.76 (2025-09-01) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.75...5.0.76" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
+### TODO
+
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **Shop » ShopBuilder** menu.
+
 ### Added
 
 - The home button in the breadcrumbs gets a prefilled `aria-label` to improve accessibility. The corresponding translation key is `headerBreadcrumbHome`.
@@ -17,6 +21,10 @@
 
 ## v5.0.75 (2025-08-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.74...5.0.75" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
+### TODO
+
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **Shop » ShopBuilder** menu.
+
 ### Fixed
 
 - Fixed an issue where the declaration of accessibility route could not be enabled from global settings.
@@ -27,6 +35,10 @@
 - Improved code quality and stability with rector.
 
 ## v5.0.74 (2025-06-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.73...5.0.74" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **Shop » ShopBuilder** menu.
 
 ### Added
 
@@ -47,6 +59,10 @@
 - A problem with variation select when variation count is higher than 10000 leading to the item add to cart button being disabled.
 
 ## v5.0.73 (2025-06-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.72...5.0.73" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- Due to changes to ShopBuilder widgets, it is necessary to regenerate the ShopBuilder contents via the **Regenerate contents** button in the **Shop » ShopBuilder** menu.
 
 ### Added
 
