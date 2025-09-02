@@ -2,6 +2,10 @@
 
 ## v5.0.76 (2025-09-01) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.75...5.0.76" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
+### TODO
+
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **Shop » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+
 ### Hinzugefügt
 
 - Der Home-Button in den Breadcrumbs bekommt ein vorausgefülltes `aria-label` um die Barrierefreiheit zu verbessern. Der entsprechende Übersetzungschlüssel ist `headerBreadcrumbHome`
@@ -17,6 +21,10 @@
 
 ## v5.0.75 (2025-08-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.74...5.0.75" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
+### TODO
+
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **Shop » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+
 ### Behoben
 
 - Es wurde ein Problem behoben, bei dem die Barrierefreiheitserklärung nicht über die globalen Einstellungen aktiviert werden konnte.
@@ -27,6 +35,10 @@
 - Verbesserte Codequalität und Stabilität mit Rector
 
 ## v5.0.74 (2025-06-26) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.73...5.0.74" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **Shop » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
 
 ### Hinzugefügt
 
@@ -47,6 +59,10 @@
 - Ein Problem bei der Variantenauswahl behoben, das bei mehr als 10.000 Varianten dazu führte, dass der „In den Warenkorb“-Button deaktiviert war.
 
 ## v5.0.73 (2025-06-02) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.72...5.0.73" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **Shop » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
 
 ### Hinzugefügt
 
