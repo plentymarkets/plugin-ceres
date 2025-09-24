@@ -100,7 +100,7 @@
                     <dt class="font-weight-bold">
                         {{ $translate("Ceres::Template.basketCoupon") }}
                     </dt><!--
-                 --><dd v-if="basket.shippingDeleteByCoupon" class="font-weight-bold" data-testing="sales-coupon">
+                 --><dd v-if="basket.shippingDeleteByCoupon && basket.shippingAmount === 0" class="font-weight-bold" data-testing="sales-coupon">
                         {{ $translate("Ceres::Template.basketFreeShipping") }}
                     </dd>
                     <dd v-else class="font-weight-bold" data-testing="promotion-coupon">

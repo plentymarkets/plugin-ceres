@@ -796,7 +796,8 @@ var render = function() {
                         "\n                "
                     )
                   ]),
-                  _vm.basket.shippingDeleteByCoupon
+                  _vm.basket.shippingDeleteByCoupon &&
+                  _vm.basket.shippingAmount === 0
                     ? _c(
                         "dd",
                         {

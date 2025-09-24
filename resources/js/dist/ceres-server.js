@@ -43046,7 +43046,8 @@ var render = function() {
                           "\n                "
                       ) +
                       "</dt>" +
-                      (_vm.basket.shippingDeleteByCoupon
+                      (_vm.basket.shippingDeleteByCoupon &&
+                      _vm.basket.shippingAmount === 0
                         ? '<dd data-testing="sales-coupon" class="font-weight-bold">' +
                           _vm._ssrEscape(
                             "\n                    " +
