@@ -805,7 +805,13 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                  kostenloser Versand\n                "
+                            "\n                    " +
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.basketFreeShipping"
+                                )
+                              ) +
+                              "\n                "
                           )
                         ]
                       )

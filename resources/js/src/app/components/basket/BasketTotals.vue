@@ -101,7 +101,7 @@
                         {{ $translate("Ceres::Template.basketCoupon") }}
                     </dt><!--
                  --><dd v-if="basket.shippingDeleteByCoupon" class="font-weight-bold" data-testing="sales-coupon">
-                      kostenloser Versand
+                        {{ $translate("Ceres::Template.basketFreeShipping") }}
                     </dd>
                     <dd v-else class="font-weight-bold" data-testing="promotion-coupon">
                         {{ basket.couponDiscount | currency }}

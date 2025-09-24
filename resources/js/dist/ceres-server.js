@@ -43047,7 +43047,17 @@ var render = function() {
                       ) +
                       "</dt>" +
                       (_vm.basket.shippingDeleteByCoupon
-                        ? '<dd data-testing="sales-coupon" class="font-weight-bold">\n                  kostenloser Versand\n                </dd>'
+                        ? '<dd data-testing="sales-coupon" class="font-weight-bold">' +
+                          _vm._ssrEscape(
+                            "\n                    " +
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.basketFreeShipping"
+                                )
+                              ) +
+                              "\n                "
+                          ) +
+                          "</dd>"
                         : '<dd data-testing="promotion-coupon" class="font-weight-bold">' +
                           _vm._ssrEscape(
                             "\n                    " +
