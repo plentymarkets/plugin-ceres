@@ -181,7 +181,10 @@
                         <dt class="font-weight-bold">
                             {{ $translate("Ceres::Template.basketCoupon") }}
                         </dt><!--
-                     --><dd class="font-weight-bold" data-testing="sales-coupon">
+                     --><dd v-if="basket.shippingDeleteByCoupon" class="font-weight-bold" data-testing="sales-coupon">
+                            kostenloser Versand
+                        </dd>
+                        <dd v-else class="font-weight-bold" data-testing="sales-coupon">
                             {{ basket.couponDiscount | currency }}
                         </dd>
                     </template>
@@ -191,8 +194,8 @@
                     <template v-if="(visibleFields.includes('openAmount') || visibleFields.includes('basket.open_amount')) && basket.couponCampaignType === 'sales'">
                         <dt class="font-weight-bold">
                             {{ $translate("Ceres::Template.basketOpenAmount") }}
-                        </dt><!--
-                    --><dd class="font-weight-bold" data-testing="open-amount">
+                        </dt>
+                        <dd class="font-weight-bold" data-testing="open-amount">
                             {{ basket.openAmount | currency }}
                         </dd>
                     </template>
