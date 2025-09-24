@@ -43045,15 +43045,18 @@ var render = function() {
                           ) +
                           "\n                "
                       ) +
-                      '</dt><dd data-testing="promotion-coupon" class="font-weight-bold">' +
-                      _vm._ssrEscape(
-                        "\n                    " +
-                          _vm._s(
-                            _vm._f("currency")(_vm.basket.couponDiscount)
+                      "</dt>" +
+                      (_vm.basket.shippingDeleteByCoupon
+                        ? '<dd data-testing="sales-coupon" class="font-weight-bold">\n                  kostenloser Versand\n                </dd>'
+                        : '<dd data-testing="promotion-coupon" class="font-weight-bold">' +
+                          _vm._ssrEscape(
+                            "\n                    " +
+                              _vm._s(
+                                _vm._f("currency")(_vm.basket.couponDiscount)
+                              ) +
+                              "\n                "
                           ) +
-                          "\n                "
-                      ) +
-                      "</dd>"
+                          "</dd>")
                     : "<!---->") +
                   " " +
                   (_vm.visibleFields.includes("subAmount") ||
@@ -43233,18 +43236,15 @@ var render = function() {
                           ) +
                           "\n                    "
                       ) +
-                      "</dt>" +
-                      (_vm.basket.shippingDeleteByCoupon
-                        ? '<dd data-testing="sales-coupon" class="font-weight-bold">\n                        kostenloser Versand\n                    </dd>'
-                        : '<dd data-testing="sales-coupon" class="font-weight-bold">' +
-                          _vm._ssrEscape(
-                            "\n                        " +
-                              _vm._s(
-                                _vm._f("currency")(_vm.basket.couponDiscount)
-                              ) +
-                              "\n                    "
+                      '</dt><dd data-testing="sales-coupon" class="font-weight-bold">' +
+                      _vm._ssrEscape(
+                        "\n                        " +
+                          _vm._s(
+                            _vm._f("currency")(_vm.basket.couponDiscount)
                           ) +
-                          "</dd>")
+                          "\n                    "
+                      ) +
+                      "</dd>"
                     : "<!---->") +
                   " " +
                   ((_vm.visibleFields.includes("openAmount") ||

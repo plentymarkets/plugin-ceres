@@ -796,22 +796,35 @@ var render = function() {
                         "\n                "
                     )
                   ]),
-                  _c(
-                    "dd",
-                    {
-                      staticClass: "font-weight-bold",
-                      attrs: { "data-testing": "promotion-coupon" }
-                    },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(
-                            _vm._f("currency")(_vm.basket.couponDiscount)
-                          ) +
-                          "\n                "
+                  _vm.basket.shippingDeleteByCoupon
+                    ? _c(
+                        "dd",
+                        {
+                          staticClass: "font-weight-bold",
+                          attrs: { "data-testing": "sales-coupon" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                  kostenloser Versand\n                "
+                          )
+                        ]
                       )
-                    ]
-                  )
+                    : _c(
+                        "dd",
+                        {
+                          staticClass: "font-weight-bold",
+                          attrs: { "data-testing": "promotion-coupon" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(
+                                _vm._f("currency")(_vm.basket.couponDiscount)
+                              ) +
+                              "\n                "
+                          )
+                        ]
+                      )
                 ]
               : _vm._e(),
             _vm._v(" "),
@@ -1027,37 +1040,22 @@ var render = function() {
                             "\n                    "
                         )
                       ]),
-                      _vm.basket.shippingDeleteByCoupon
-                        ? _c(
-                            "dd",
-                            {
-                              staticClass: "font-weight-bold",
-                              attrs: { "data-testing": "sales-coupon" }
-                            },
-                            [
-                              _vm._v(
-                                "\n                        kostenloser Versand\n                    "
-                              )
-                            ]
+                      _c(
+                        "dd",
+                        {
+                          staticClass: "font-weight-bold",
+                          attrs: { "data-testing": "sales-coupon" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(
+                                _vm._f("currency")(_vm.basket.couponDiscount)
+                              ) +
+                              "\n                    "
                           )
-                        : _c(
-                            "dd",
-                            {
-                              staticClass: "font-weight-bold",
-                              attrs: { "data-testing": "sales-coupon" }
-                            },
-                            [
-                              _vm._v(
-                                "\n                        " +
-                                  _vm._s(
-                                    _vm._f("currency")(
-                                      _vm.basket.couponDiscount
-                                    )
-                                  ) +
-                                  "\n                    "
-                              )
-                            ]
-                          )
+                        ]
+                      )
                     ]
                   : _vm._e(),
                 _vm._v(" "),
