@@ -1577,15 +1577,6 @@
         "Config.ContactTab": {
             "label": "Config.contactTab",
             "formFields": {
-                "contact.shop_mail": {
-                    "type": "inputText",
-                    "required": false,
-                    "deprecated": true,
-                    "label": "Config.contactShopMailLabel",
-                    "options": {
-                        "defaultValue": "your@email.com"
-                    }
-                },
                 "contact.shop_mail_cc": {
                     "type": "inputText",
                     "required": false,
