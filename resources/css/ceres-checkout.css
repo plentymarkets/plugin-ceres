@@ -10323,6 +10323,7 @@ button:focus {
 
 div#page-body {
   overflow-x: clip;
+    display: block;
 }
 
 div.footer {
