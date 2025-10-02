@@ -20579,5 +20579,7 @@ header .widget {
     display: none !important; } }
 
 .hidden-xl-down {
-  display: none !important; }
+  display: none !important;
+    font-size: 25px;
+}
 
