@@ -240,7 +240,7 @@ class DefaultSingleItemPreset implements ContentPreset
         $text ="{{ trans(\"Ceres::Template.singleItemFootnote1\") }} {% if services.customer.showNetPrices() %}{{ trans(\"Ceres::Template.singleItemExclVAT\") }}{% else %}{{ trans(\"Ceres::Template.singleItemInclVAT\") }}{% endif %} {{ trans(\"Ceres::Template.singleItemExclusive\") }}";
         $text .="<a {% if ceresConfig.global.shippingCostsCategoryId > 0 %} data-toggle=\"modal\" href=\"#shippingscosts\"{% endif %}> {{ trans(\"Ceres::Template.singleItemShippingCosts\") }}</a>";
         $this->stickyContainer->createChild('sticky', 'Ceres::CodeWidget')
-            ->withSetting('customClass', 'vat small text-muted')
+            ->withSetting('customClass', 'vat small color-gray-700')
             ->withSetting('text', "<span>$text</span>")
             ->withSetting('appearance', 'none');
     }
@@ -249,7 +249,7 @@ class DefaultSingleItemPreset implements ContentPreset
     {
         $text ="{% if item.documents[0].data.hasRequiredOrderProperty %}<span>{{ trans(\"Ceres::Template.singleItemFootnote2\") }} {{ trans(\"Ceres::Template.singleItemIsRequiredProperty\") }}</span>{% endif %}";
         $this->stickyContainer->createChild('sticky', 'Ceres::CodeWidget')
-            ->withSetting('customClass', 'small text-muted')
+            ->withSetting('customClass', 'small color-gray-700')
             ->withSetting('text', "$text")
             ->withSetting('appearance', 'none');
     }

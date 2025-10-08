@@ -411,7 +411,7 @@ class ItemSetPreset implements ContentPreset
         $text ="* {% if services.customer.showNetPrices() %}{{ trans(\"Ceres::Template.singleItemExclVAT\") }}{% else %}{{ trans(\"Ceres::Template.singleItemInclVAT\") }}{% endif %} {{ trans(\"Ceres::Template.singleItemExclusive\") }}";
         $text .="<a {% if ceresConfig.global.shippingCostsCategoryId > 0 %} data-toggle=\"modal\" href=\"#shippingscosts\"{% endif %}> {{ trans(\"Ceres::Template.singleItemShippingCosts\") }}</a>";
         $this->secondTwoColumnWidget->createChild('first', 'Ceres::CodeWidget')
-            ->withSetting('customClass', 'vat small text-muted')
+            ->withSetting('customClass', 'vat small color-gray-700')
             ->withSetting('text', "<span>$text</span>")
             ->withSetting('appearance', 'none');
     }
