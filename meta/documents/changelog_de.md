@@ -1,5 +1,16 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.77 (2025-10-XX) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.76...5.0.77" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **Shop » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+
+### Behoben
+
+- Das Code-Widget wurde fälschlicherweise die CSS Klasse 'color-gray-700' zugewiesen. Dies wurde behoben.
+- Zur Behebung von Kontrastproblemen wurden einige Grautöne angepasst.
+
 ## v5.0.76 (2025-09-01) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.75...5.0.76" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
