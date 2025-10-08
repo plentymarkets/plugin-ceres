@@ -55,7 +55,7 @@ While we're always striving to improve the code documentation in the project, th
 9. Mention **@plentymarkets-plentyshop** in the description of your pull request.
 10. Add a few sentences that describe the changes you've made in the description of the pull request.
 
-After you've opened a pull requests, the PR will be subject to our automated tests. If one or more of the checks is failing, please consider the proposed adjustments to your pull request. If it's unclear why the test failed, make sure to contact us either by mentioning **@plentymarkets-plentyshop** in the PR's conversation.
+After you've opened a pull requests, the PR will be subject to our automated tests. If one or more of the checks is failing, please consider the proposed adjustments to your pull request. If it's unclear why the test failed, make sure to contact us by mentioning **@plentymarkets-plentyshop** in the PR's conversation.
 
 If your contribution requires additional documentation on our part, please also mention GitHub user **fmutschler** in the PR conversation.
 
