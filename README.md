@@ -26,14 +26,10 @@ Your Javascript, widget and SCSS changes have now been assembled locally.
 ## Plugin documentation
 
 - Learn how to create your [first plentymarkets plugin](https://developers.plentymarkets.com/tutorials/helloworld)
-- Installing a [template](https://developers.plentymarkets.com/tutorials/design)
+- Installing a [template](https://developers.plentymarkets.com/en-gb/developers/main/plentyshop-plugins/template-setup.html)
 - Developing [template plugins](https://developers.plentymarkets.com/dev-doc/template-plugins)
 - The plentymarkets [plugin interface](https://developers.plentymarkets.com/dev-doc/basics#introduction-interface)
-- The plentymarkets [REST API](https://developers.plentymarkets.com/rest-doc/introduction)
-
-## Join our community
-
-Sign up today and become a member of our [forum](https://forum.plentymarkets.com/c/plugin-entwicklung). Discuss the latest trends in plugin development and share your ideas with our community.
+- The plentymarkets [REST API](https://developers.plentymarkets.com/en-gb/developers/main/rest-api-guides/getting-started.html)
 
 ## Contribute to the project 
 
@@ -41,7 +37,7 @@ If you want to contribute to our open source projects, you can learn how to open
 
 ## Versioning
 
-Visit our forum and find the latest news and updates in our [Changelog](https://forum.plentymarkets.com/c/changelog?order=created).
+Find the latest news and updates in our [Changelog](https://github.com/plentymarkets/plugin-ceres/releases).
 
 ## License
 
