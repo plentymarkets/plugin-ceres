@@ -11426,7 +11426,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.imageUrls.length ? this.imageUrls[0].url : this.itemImage;
     },
     carouselProps: function carouselProps() {
-      return this.imageUrls.length > 1 ? {
+      return this.imageUrls.length <= 1 ? {
         role: 'group'
       } : {};
     }
