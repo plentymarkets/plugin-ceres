@@ -4,7 +4,7 @@
         :id="`owl-carousel-${_uid}`"
         :href="itemUrl"
         :aria-label="$translate('Ceres::Template.itemImageCarousel')"
-        role="group"
+        v-bind="carouselProps"
         class="owl-carousel owl-theme">
         <div v-for="(imageUrl, index) in imageUrls" :key="index">
             <lazy-img
@@ -97,6 +97,10 @@ export default {
         imageOrItemImage()
         {
             return this.imageUrls.length ? this.imageUrls[0].url : this.itemImage;
+        },
+        carouselProps()
+        {
+          return this.imageUrls.length > 1 ? {role: 'group'} : {};
         }
     },
 
