@@ -92,6 +92,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     imageOrItemImage: function imageOrItemImage() {
       return this.imageUrls.length ? this.imageUrls[0].url : this.itemImage;
+    },
+    carouselProps: function carouselProps() {
+      return this.imageUrls.length > 1 ? {
+        role: 'group'
+      } : {};
     }
   },
   mounted: function mounted() {
@@ -572,15 +577,19 @@ var render = function() {
   return _vm.$data.$_enableCarousel
     ? _c(
         "a",
-        {
-          staticClass: "owl-carousel owl-theme",
-          attrs: {
-            id: "owl-carousel-" + _vm._uid,
-            href: _vm.itemUrl,
-            "aria-label": _vm.$translate("Ceres::Template.itemImageCarousel"),
-            role: "group"
-          }
-        },
+        _vm._b(
+          {
+            staticClass: "owl-carousel owl-theme",
+            attrs: {
+              id: "owl-carousel-" + _vm._uid,
+              href: _vm.itemUrl,
+              "aria-label": _vm.$translate("Ceres::Template.itemImageCarousel")
+            }
+          },
+          "a",
+          _vm.carouselProps,
+          false
+        ),
         _vm._l(_vm.imageUrls, function(imageUrl, index) {
           return _c(
             "div",
