@@ -100,7 +100,7 @@ export default {
         },
         carouselProps()
         {
-          return this.imageUrls.length > 1 ? {role: 'group'} : {};
+          return this.imageUrls.length <= 1 ? {role: 'group'} : {};
         }
     },
 
