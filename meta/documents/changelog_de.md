@@ -1,5 +1,15 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.78 (2025-10-17) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.77...5.0.78" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **Shop » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+
+### Behoben
+
+- Aufgrund eines Fehlers beim Plugin-Upload wurde Version 5.0.77 nicht korrekt bereitgestellt. Diese Version dient als Ersatz.
+
 ## v5.0.77 (2025-10-13) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.76...5.0.77" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
