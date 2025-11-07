@@ -20560,9 +20560,7 @@ header .widget {
 
 .widget-wish-list .item-additional-information .badge,
 .page-wish-list .item-additional-information .badge {
-  font-size: 85%;
-
-
+  font-size: 85%
 }
 
 @media (max-width: 575.98px) {
