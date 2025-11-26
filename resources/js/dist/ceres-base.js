@@ -877,6 +877,8 @@ var TabNavItem = {
   render: function render(createElement) {
     var _this2 = this;
 
+    // eslint-disable-next-line no-unused-vars
+    var _renderKey = this.forceRenderKey;
     var tabListElements = [];
     var tabs = this.getVisibleTabs();
 
@@ -927,7 +929,9 @@ var TabNavItem = {
   data: function data() {
     return {
       tabComponents: [],
-      tabsHash: ""
+      isHydrated: false,
+      tabsHash: "",
+      forceRenderKey: 0
     };
   },
   created: function created() {
@@ -942,31 +946,43 @@ var TabNavItem = {
       });
     });
   },
+  mounted: function mounted() {
+    var _this4 = this;
+
+    this.$nextTick(function () {
+      _this4.isHydrated = true;
+    });
+  },
   updated: function updated() {
-    var tabs = this.getVisibleTabs();
-    var hash = tabs.map(function (component) {
-      return component._uid;
-    }).join("_"); // need to check if visible tabs have been changed after rendering
+    var _this5 = this;
 
-    if (this.tabsHash !== hash) {
-      // visible tabs changed => need to re-render component
-      this.tabsHash = hash;
-      this.$forceUpdate(); // check for active tab
+    this.$nextTick(function () {
+      var tabs = _this5.getVisibleTabs();
 
-      if (!tabs.some(function (tab) {
-        return tab.active;
-      }) && tabs.length > 0) {
-        this.activateTab(tabs[0]);
+      var hash = tabs.map(function (component) {
+        return component._uid;
+      }).join("_"); // need to check if visible tabs have been changed after rendering
+
+      if (_this5.tabsHash !== hash) {
+        // visible tabs changed => need to re-render component
+        _this5.tabsHash = hash;
+        _this5.forceRenderKey++; // check for active tab
+
+        if (!tabs.some(function (tab) {
+          return tab.active;
+        }) && tabs.length > 0) {
+          _this5.activateTab(tabs[0]);
+        }
       }
-    }
+    });
   },
   methods: {
     getVisibleTabs: function getVisibleTabs() {
-      var _this4 = this;
+      var _this6 = this;
 
       // filter visible tabs
       return this.tabComponents.filter(function (tab) {
-        return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_6__["isDefined"])(tab) && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_6__["isDefined"])(tab.$slots.default) && (_this4.renderEmpty || _this4.filterContent(tab));
+        return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_6__["isDefined"])(tab) && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_6__["isDefined"])(tab.$slots.default) && (_this6.renderEmpty || !_this6.isHydrated || _this6.filterContent(tab));
       });
     },
     activateTab: function activateTab(tab) {
