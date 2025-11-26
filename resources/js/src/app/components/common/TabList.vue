@@ -167,22 +167,24 @@ export default {
 
     updated()
     {
-        const tabs = this.getVisibleTabs();
-        const hash = tabs.map((component) => component._uid).join("_");
+        this.$nextTick(() => {
+            const tabs = this.getVisibleTabs();
+            const hash = tabs.map((component) => component._uid).join("_");
 
-        // need to check if visible tabs have been changed after rendering
-        if (this.tabsHash !== hash)
-        {
-            // visible tabs changed => need to re-render component
-            this.tabsHash = hash;
-            this.$forceUpdate();
-
-            // check for active tab
-            if (!tabs.some(tab => tab.active) && tabs.length > 0)
+            // need to check if visible tabs have been changed after rendering
+            if (this.tabsHash !== hash)
             {
-                this.activateTab(tabs[0]);
+                // visible tabs changed => need to re-render component
+                this.tabsHash = hash;
+                this.$forceUpdate();
+
+                // check for active tab
+                if (!tabs.some(tab => tab.active) && tabs.length > 0)
+                {
+                    this.activateTab(tabs[0]);
+                }
             }
-        }
+        });
     },
 
     methods:
