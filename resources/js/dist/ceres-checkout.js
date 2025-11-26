@@ -1079,17 +1079,29 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.number.constructor.js */ "./node_modules/core-js/modules/es.number.constructor.js");
 /* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.map.js */ "./node_modules/core-js/modules/es.array.map.js");
-/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
-/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.join.js */ "./node_modules/core-js/modules/es.array.join.js");
-/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
-/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_string_trim_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.string.trim.js */ "./node_modules/core-js/modules/es.string.trim.js");
-/* harmony import */ var core_js_modules_es_string_trim_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_trim_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+/* harmony import */ var core_js_modules_es_set_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.set.js */ "./node_modules/core-js/modules/es.set.js");
+/* harmony import */ var core_js_modules_es_set_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_set_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.string.iterator.js */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.iterator.js */ "./node_modules/core-js/modules/es.array.iterator.js");
+/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator.js */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.array.map.js */ "./node_modules/core-js/modules/es.array.map.js");
+/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_string_trim_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.string.trim.js */ "./node_modules/core-js/modules/es.string.trim.js");
+/* harmony import */ var core_js_modules_es_string_trim_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_trim_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/core-js/modules/es.array.find.js");
+/* harmony import */ var core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find_js__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
+
+
+
+
 
 
 
@@ -1147,19 +1159,30 @@ var TabNavItem = {
   render: function render(createElement) {
     var _this2 = this;
 
-    var tabListElements = [];
-    var tabs = this.getVisibleTabs();
+    var tabListElements = []; // Get all tab components and check which should be visible
 
-    if (tabs.length > 0) {
-      var navElements = tabs.map(function (tab, index) {
+    var allTabs = this.tabComponents;
+    var visibleTabsSet = new Set(allTabs.filter(function (tab) {
+      return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_10__["isDefined"])(tab) && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_10__["isDefined"])(tab.$slots.default) && (_this2.renderEmpty || !_this2.isHydrated || _this2.isTabVisible(tab));
+    }));
+
+    if (allTabs.length > 0) {
+      // Create nav items for all tabs, but hide empty ones with v-show
+      var navElements = allTabs.map(function (tab, index) {
+        var isVisible = visibleTabsSet.has(tab);
         return createElement(TabNavItem, {
+          key: tab._uid,
+          directives: [{
+            name: 'show',
+            value: isVisible
+          }],
           props: {
             tab: tab,
             tabIndex: index
           },
           on: {
             click: function click(evt) {
-              if (!tab.localActive) {
+              if (!tab.localActive && isVisible) {
                 _this2.activateTab(tab, evt);
               }
             }
@@ -1197,7 +1220,7 @@ var TabNavItem = {
   data: function data() {
     return {
       tabComponents: [],
-      tabsHash: ""
+      isHydrated: false
     };
   },
   created: function created() {
@@ -1212,32 +1235,45 @@ var TabNavItem = {
       });
     });
   },
+  mounted: function mounted() {
+    var _this4 = this;
+
+    // Mark as hydrated after initial mount to enable filtering
+    // This prevents hydration mismatch when SSR is enabled
+    this.$nextTick(function () {
+      _this4.isHydrated = true;
+
+      _this4.ensureActiveTab();
+    });
+  },
   updated: function updated() {
-    var tabs = this.getVisibleTabs();
-    var hash = tabs.map(function (component) {
-      return component._uid;
-    }).join("_"); // need to check if visible tabs have been changed after rendering
+    var _this5 = this;
 
-    if (this.tabsHash !== hash) {
-      // visible tabs changed => need to re-render component
-      this.tabsHash = hash;
-      this.$forceUpdate(); // check for active tab
-
-      if (!tabs.some(function (tab) {
-        return tab.active;
-      }) && tabs.length > 0) {
-        this.activateTab(tabs[0]);
-      }
-    }
+    // Ensure there's an active tab after DOM updates
+    this.$nextTick(function () {
+      _this5.ensureActiveTab();
+    });
   },
   methods: {
-    getVisibleTabs: function getVisibleTabs() {
-      var _this4 = this;
+    isTabVisible: function isTabVisible(tab) {
+      // Check if tab content contains text or media
+      return tab.$el.textContent.trim().length > 0 || tab.$el.querySelector("img, iframe, picture");
+    },
+    ensureActiveTab: function ensureActiveTab() {
+      var _this6 = this;
 
-      // filter visible tabs
-      return this.tabComponents.filter(function (tab) {
-        return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_6__["isDefined"])(tab) && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_6__["isDefined"])(tab.$slots.default) && (_this4.renderEmpty || _this4.filterContent(tab));
-      });
+      // Get visible tabs
+      var visibleTabs = this.tabComponents.filter(function (tab) {
+        return Object(_helper_utils__WEBPACK_IMPORTED_MODULE_10__["isDefined"])(tab) && Object(_helper_utils__WEBPACK_IMPORTED_MODULE_10__["isDefined"])(tab.$slots.default) && (_this6.renderEmpty || !_this6.isHydrated || _this6.isTabVisible(tab));
+      }); // Check if there's an active tab among visible tabs
+
+      var hasActiveVisibleTab = visibleTabs.some(function (tab) {
+        return tab.localActive;
+      }); // If no active visible tab, activate the first visible one
+
+      if (!hasActiveVisibleTab && visibleTabs.length > 0) {
+        this.activateTab(visibleTabs[0]);
+      }
     },
     activateTab: function activateTab(tab) {
       var activeTab = this.tabComponents.find(function (tab) {
@@ -1248,14 +1284,6 @@ var TabNavItem = {
       if (activeTab && activeTab.setActive && tab !== activeTab) {
         activeTab.setActive(false);
       }
-    },
-
-    /**
-     * Checks if tab content contains text or img or iframe element.
-     * @param {*} tab
-     */
-    filterContent: function filterContent(tab) {
-      return tab.$el.textContent.trim().length > 0 || tab.$el.querySelector("img, iframe, picture");
     }
   }
 });
