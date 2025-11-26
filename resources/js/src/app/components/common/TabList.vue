@@ -65,6 +65,9 @@ export default {
 
     render(createElement)
     {
+         // eslint-disable-next-line no-unused-vars
+        const _renderKey = this.forceRenderKey;
+        
         const tabListElements = [];
         const tabs = this.getVisibleTabs();
 
@@ -142,7 +145,8 @@ export default {
         return {
             tabComponents: [],
             isHydrated: false,
-            tabsHash: ""
+            tabsHash: "",
+            forceRenderKey: 0
         };
     },
 
@@ -176,7 +180,7 @@ export default {
             {
                 // visible tabs changed => need to re-render component
                 this.tabsHash = hash;
-                this.$forceUpdate();
+                this.forceRenderKey++;
 
                 // check for active tab
                 if (!tabs.some(tab => tab.active) && tabs.length > 0)
