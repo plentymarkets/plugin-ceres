@@ -66,15 +66,34 @@ export default {
     render(createElement)
     {
         const tabListElements = [];
-        const tabs = this.getVisibleTabs();
+        
+        // Get all tab components and check which should be visible
+        const allTabs = this.tabComponents;
+        const visibleTabsSet = new Set(
+            allTabs.filter(tab => 
+                isDefined(tab) && 
+                isDefined(tab.$slots.default) && 
+                (this.renderEmpty || !this.isHydrated || this.isTabVisible(tab))
+            )
+        );
 
-        if (tabs.length > 0)
+        if (allTabs.length > 0)
         {
-            const navElements = tabs.map((tab, index) =>
+            // Create nav items for all tabs, but hide empty ones with v-show
+            const navElements = allTabs.map((tab, index) =>
             {
+                const isVisible = visibleTabsSet.has(tab);
+                
                 return createElement(
                     TabNavItem,
                     {
+                        key: tab._uid,
+                        directives: [
+                            {
+                                name: 'show',
+                                value: isVisible
+                            }
+                        ],
                         props: {
                             tab: tab,
                             tabIndex: index
@@ -82,7 +101,7 @@ export default {
                         on: {
                             click: evt =>
                             {
-                                if (!tab.localActive)
+                                if (!tab.localActive && isVisible)
                                 {
                                     this.activateTab(tab, evt);
                                 }
@@ -141,7 +160,7 @@ export default {
     {
         return {
             tabComponents: [],
-            tabsHash: ""
+            isHydrated: false
         };
     },
 
@@ -156,37 +175,51 @@ export default {
         });
     },
 
+    mounted()
+    {
+        // Mark as hydrated after initial mount to enable filtering
+        // This prevents hydration mismatch when SSR is enabled
+        this.$nextTick(() =>
+        {
+            this.isHydrated = true;
+            this.ensureActiveTab();
+        });
+    },
+
     updated()
     {
-        const tabs = this.getVisibleTabs();
-        const hash = tabs.map((component) => component._uid).join("_");
-
-        // need to check if visible tabs have been changed after rendering
-        if (this.tabsHash !== hash)
-        {
-            // visible tabs changed => need to re-render component
-            this.tabsHash = hash;
-            this.$forceUpdate();
-
-            // check for active tab
-            if (!tabs.some(tab => tab.active) && tabs.length > 0)
-            {
-                this.activateTab(tabs[0]);
-            }
-        }
+        // Ensure there's an active tab after DOM updates
+        this.$nextTick(() => {
+            this.ensureActiveTab();
+        });
     },
 
     methods:
     {
-        getVisibleTabs()
+        isTabVisible(tab)
         {
-            // filter visible tabs
-            return this.tabComponents.filter((tab) =>
+            // Check if tab content contains text or media
+            return tab.$el.textContent.trim().length > 0 || 
+                   tab.$el.querySelector("img, iframe, picture");
+        },
+
+        ensureActiveTab()
+        {
+            // Get visible tabs
+            const visibleTabs = this.tabComponents.filter(tab => 
+                isDefined(tab) && 
+                isDefined(tab.$slots.default) && 
+                (this.renderEmpty || !this.isHydrated || this.isTabVisible(tab))
+            );
+
+            // Check if there's an active tab among visible tabs
+            const hasActiveVisibleTab = visibleTabs.some(tab => tab.localActive);
+
+            // If no active visible tab, activate the first visible one
+            if (!hasActiveVisibleTab && visibleTabs.length > 0)
             {
-                return isDefined(tab) &&
-                    isDefined(tab.$slots.default) &&
-                    (this.renderEmpty || this.filterContent(tab));
-            });
+                this.activateTab(visibleTabs[0]);
+            }
         },
 
         activateTab(tab)
@@ -199,15 +232,6 @@ export default {
             {
                 activeTab.setActive(false);
             }
-        },
-
-        /**
-         * Checks if tab content contains text or img or iframe element.
-         * @param {*} tab
-         */
-        filterContent(tab)
-        {
-            return tab.$el.textContent.trim().length > 0 || tab.$el.querySelector("img, iframe, picture");
         }
     }
 }
