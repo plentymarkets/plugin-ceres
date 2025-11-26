@@ -141,6 +141,7 @@ export default {
     {
         return {
             tabComponents: [],
+            isHydrated: false,
             tabsHash: ""
         };
     },
@@ -153,6 +154,14 @@ export default {
             this.tabComponents = (this.$slots.default || [])
                 .map((vnode) => vnode.componentInstance)
                 .filter((entry) => !!entry);
+        });
+    },
+
+    mounted()
+    {
+        this.$nextTick(() =>
+        {
+            this.isHydrated = true;
         });
     },
 
@@ -185,7 +194,7 @@ export default {
             {
                 return isDefined(tab) &&
                     isDefined(tab.$slots.default) &&
-                    (this.renderEmpty || this.filterContent(tab));
+                    (this.renderEmpty || !this.isHydrated || this.filterContent(tab));
             });
         },
 
