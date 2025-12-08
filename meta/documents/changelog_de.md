@@ -1,5 +1,11 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.79 (2025-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.78...5.0.79" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Fixed
+
+- Fehlender Hinweis für erforderliche Adressfelder im Checkout.
+
 ## v5.0.78 (2025-10-17) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.77...5.0.78" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
