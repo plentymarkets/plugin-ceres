@@ -166,7 +166,7 @@ class TwigItemDataField extends Twig_Extension
         if (in_array($htmlTagType, ['img'])) {
             $altText = self::DEFAULT_ALT_TEXT;
             $twigPrintPath = is_string($twigPrint) ? trim($twigPrint) : '';
-            if ($twigPrintPath !== '') {
+            if ($field === 'item.manufacturer.logo' && $twigPrintPath !== '') {
                 /** @var WebspaceRepositoryContract $webspaceRepository */
                 $webspaceRepository = pluginApp(WebspaceRepositoryContract::class);
                 $altText = $webspaceRepository->getCdnMetadata(
@@ -175,8 +175,8 @@ class TwigItemDataField extends Twig_Extension
                     self::DEFAULT_ALT_TEXT
                 );
             }
-            $escapedAltText = htmlspecialchars($altText, ENT_QUOTES, 'UTF-8');
-            $html = "<$htmlTagType $vueDirectiveAttr=\"$vueDirectiveValue\"$attributes alt=" . $escapedAltText . " v-if=\"$vueDirectiveValue\"/>";
+            $escapedAltText = htmlspecialchars($altText, ENT_QUOTES);
+            $html = "<$htmlTagType $vueDirectiveAttr=\"$vueDirectiveValue\"$attributes alt=\"$escapedAltText\" v-if=\"$vueDirectiveValue\"/>";
         } else {
             $html = "<$htmlTagType $vueDirectiveAttr=\"$vueDirectiveValue\"$attributes>$twigPrint</$htmlTagType>";
         }
