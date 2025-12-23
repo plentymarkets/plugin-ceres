@@ -165,16 +165,18 @@ class TwigItemDataField extends Twig_Extension
 
         if (in_array($htmlTagType, ['img'])) {
             $altText = self::DEFAULT_ALT_TEXT;
-            if (!is_null($twigPrint)) {
+            $twigPrintPath = is_string($twigPrint) ? trim($twigPrint) : '';
+            if ($twigPrintPath !== '') {
                 /** @var WebspaceRepositoryContract $webspaceRepository */
                 $webspaceRepository = pluginApp(WebspaceRepositoryContract::class);
                 $altText = $webspaceRepository->getCdnMetadata(
-                    $twigPrint,
+                    $twigPrintPath,
                     self::METADATA_ALT_TEXT_KEY,
                     self::DEFAULT_ALT_TEXT
                 );
             }
-            $html = "<$htmlTagType $vueDirectiveAttr=\"$vueDirectiveValue\"$attributes alt=" . $altText . " v-if=\"$vueDirectiveValue\"/>";
+            $escapedAltText = htmlspecialchars($altText, ENT_QUOTES, 'UTF-8');
+            $html = "<$htmlTagType $vueDirectiveAttr=\"$vueDirectiveValue\"$attributes alt=" . $escapedAltText . " v-if=\"$vueDirectiveValue\"/>";
         } else {
             $html = "<$htmlTagType $vueDirectiveAttr=\"$vueDirectiveValue\"$attributes>$twigPrint</$htmlTagType>";
         }
