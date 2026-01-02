@@ -2,14 +2,14 @@
 
 namespace Ceres\Extensions;
 
-use IO\Helper\Utils;
 use IO\Helper\SafeGetter;
+use IO\Helper\Utils;
 use IO\Services\PropertyFileService;
+use Plenty\Modules\Webshop\Contracts\WebspaceRepositoryContract;
 use Plenty\Plugin\Templates\Extensions\Twig_Extension;
 use Plenty\Plugin\Templates\Factories\TwigFactory;
 use Plenty\Plugin\Templates\Twig;
 use Plenty\Plugin\Translation\Translator;
-use Plenty\Modules\Webshop\Contracts\WebspaceRepositoryContract;
 
 /**
  * Class TwigItemDataField
@@ -30,8 +30,7 @@ class TwigItemDataField extends Twig_Extension
      */
     private $itemData = [];
 
-    const DEFAULT_ALT_TEXT = 'manufacturer logo';
-    const METADATA_ALT_TEXT_KEY = 'alttext';
+    private const METADATA_ALT_TEXT_KEY = 'alttext';
 
     /**
      * TwigItemDataField constructor.
@@ -164,19 +163,24 @@ class TwigItemDataField extends Twig_Extension
         }
 
         if (in_array($htmlTagType, ['img'])) {
-            $altText = self::DEFAULT_ALT_TEXT;
             $twigPrintPath = is_string($twigPrint) ? trim($twigPrint) : '';
+            $altText = '';
             if ($field === 'item.manufacturer.logo' && $twigPrintPath !== '') {
                 /** @var WebspaceRepositoryContract $webspaceRepository */
                 $webspaceRepository = pluginApp(WebspaceRepositoryContract::class);
                 $altText = $webspaceRepository->getCdnMetadata(
                     $twigPrintPath,
                     self::METADATA_ALT_TEXT_KEY,
-                    self::DEFAULT_ALT_TEXT
+                    ''
                 );
             }
-            $escapedAltText = htmlspecialchars($altText, ENT_QUOTES);
-            $html = "<$htmlTagType $vueDirectiveAttr=\"$vueDirectiveValue\"$attributes alt=\"$escapedAltText\" v-if=\"$vueDirectiveValue\"/>";
+            
+            if (is_string($altText) && strlen($altText) > 0) {
+                $escapedAltText = htmlspecialchars($altText, ENT_QUOTES);
+                $html = "<$htmlTagType $vueDirectiveAttr=\"$vueDirectiveValue\"$attributes alt=\"$escapedAltText\" v-if=\"$vueDirectiveValue\"/>";
+            } else {
+                $html = "<$htmlTagType $vueDirectiveAttr=\"$vueDirectiveValue\"$attributes v-if=\"$vueDirectiveValue\"/>";
+            }
         } else {
             $html = "<$htmlTagType $vueDirectiveAttr=\"$vueDirectiveValue\"$attributes>$twigPrint</$htmlTagType>";
         }
