@@ -5,6 +5,7 @@
 ### Fixed
 
 - Fehlender Hinweis für erforderliche Adressfelder im Checkout.
+- Herstellerlogos werden jetzt mit dem im Webspace hinterlegten Alttext ausgegeben.
 
 ## v5.0.78 (2025-10-17) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.77...5.0.78" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
