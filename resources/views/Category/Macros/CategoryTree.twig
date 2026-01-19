@@ -50,7 +50,15 @@
             {% if category.children and translatedChildren > 0 %}
 
                 <li {% if maxItemsPerStage[1] > 0 %}class="ddown"{% endif %} v-navigation-touch-handler>
-                    <a href="{{ currentScopeUrl }}{{ urls.trailingSlashSuffix }}" itemprop="name">
+                    <a href="{{ currentScopeUrl }}{{ urls.trailingSlashSuffix }}" itemprop="name"
+                       onkeydown="if(event.key === 'Space' || event.keyCode === 32) {
+                           event.preventDefault();
+                           let li = this.closest('li');
+
+                           let isOpen = li.classList.toggle('hover');
+                           this.setAttribute('aria-expanded', isOpen);
+                       }"
+                    >
                         {{ category.details[0].name }}
                     </a>
                     {% if maxItemsPerStage[1] > 0 %}
