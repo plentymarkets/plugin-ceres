@@ -69,7 +69,7 @@
                                 {% if child.details | length > 0 %}
                                     <li>
                                         <ul class="collapse-inner">
-                                            <li>
+                                            <li tabindex="0">
                                                 <a href="{{ currentScopeUrl }}/{{ child.details[0].nameUrl }}{{ urls.trailingSlashSuffix }}" itemprop="name">
                                                     {{ child.details[0].name }}
                                                 </a>
