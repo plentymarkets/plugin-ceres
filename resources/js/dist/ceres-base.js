@@ -63652,6 +63652,14 @@ function CeresMain() {
       $("#searchBox").collapse("hide");
       $("#currencySelect").collapse("hide");
     });
+    $(".ddown").on("keydown", function (event) {
+      if (event.key === "Space" || event.keyCode === 32) {
+        event.preventDefault();
+        var li = this.closest("li");
+        var isOpen = li.classList.toggle("hover");
+        this.setAttribute("aria-expanded", isOpen);
+      }
+    });
     fixPopperZIndexes(); // Emit event for Sticky Containers to update
 
     $(".collapse").on("show.bs.collapse hide.bs.collapse", function () {
