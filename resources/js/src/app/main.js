@@ -179,6 +179,19 @@ function CeresMain()
             $("#currencySelect").collapse("hide");
         });
 
+        $(".ddown").on("keydown", function(event)
+        {
+            if (event.key === "Space" || event.keyCode === 32)
+            {
+                event.preventDefault();
+                const li = this.closest("li");
+
+                const isOpen = li.classList.toggle("hover");
+
+                this.setAttribute("aria-expanded", isOpen);
+            }
+        });
+
         fixPopperZIndexes();
 
         // Emit event for Sticky Containers to update

@@ -50,7 +50,7 @@
             {% if category.children and translatedChildren > 0 %}
 
                 <li {% if maxItemsPerStage[1] > 0 %}class="ddown"{% endif %} v-navigation-touch-handler>
-                    <a href="{{ currentScopeUrl }}{{ urls.trailingSlashSuffix }}" itemprop="name">
+                    <a href="{{ currentScopeUrl }}{{ urls.trailingSlashSuffix }}" itemprop="name" tabindex="0">
                         {{ category.details[0].name }}
                     </a>
                     {% if maxItemsPerStage[1] > 0 %}
@@ -61,8 +61,8 @@
                                 {% if child.details | length > 0 %}
                                     <li>
                                         <ul class="collapse-inner">
-                                            <li>
-                                                <a href="{{ currentScopeUrl }}/{{ child.details[0].nameUrl }}{{ urls.trailingSlashSuffix }}" itemprop="name">
+                                        <li>
+                                                <a href="{{ currentScopeUrl }}/{{ child.details[0].nameUrl }}{{ urls.trailingSlashSuffix }}" itemprop="name" tabindex="0" >
                                                     {{ child.details[0].name }}
                                                 </a>
                                             </li>
