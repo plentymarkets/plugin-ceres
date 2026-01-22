@@ -189,6 +189,8 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     $webstoreData['faviconPath'] = '';
                 }
 
+                $data['defaultBusinessClassId'] = $data['defSettings_defaultB2C'] ?? 0;
+
                 $webstoreConfig->updateByPlentyId($webstoreData, $plentyId);
 
                 // we save robotsTxt
