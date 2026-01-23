@@ -123,8 +123,8 @@ class DefaultSettingsStep extends Step
                 $this->generateSection('defaultShippingProfile', $shippingProfilesList, $this->globalsCondition),
                 $this->generateSection('defaultPaymentMethod', $paymentMethodsList, $this->globalsCondition),
                 $this->generateCountryDeliverySection('defaultDeliveryCountry', $deliveryCountries, $this->globalsCondition),
-                $this->generateSection('defaultB2C', $b2bClassesList),
-                $this->generateSection('defaultB2B',$b2bClassesList),
+                $this->generateSection('defaultB2C', $b2bClassesList, $this->globalsCondition),
+                $this->generateSection('defaultB2B',$b2bClassesList, $this->globalsCondition),
                 $this->generateSection('defaultLocation',$locationsList, $this->globalsCondition)
             ]
         ];
