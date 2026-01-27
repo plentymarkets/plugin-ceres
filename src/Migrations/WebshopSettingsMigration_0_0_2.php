@@ -2,8 +2,7 @@
 
 namespace Ceres\Migrations;
 
-use Plenty\Modules\BI\Integrations\Plugin\Models\PluginSet;
-use Plenty\Modules\Plugin\Models\Plugin;
+use Plenty\Modules\Plugin\PluginSet\Models\PluginSet;
 use Plenty\Modules\Plugin\Contracts\ConfigurationRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
 use Plenty\Modules\Plugin\PluginSet\Models\PluginSetEntry;
@@ -27,6 +26,12 @@ class WebshopSettingsMigration_0_0_2
         $pluginSetRepo = pluginApp(PluginSetRepositoryContract::class);
         $pluginSets = $pluginSetRepo->list();
 
+        /** @var ConfigurationRepositoryContract $configurationRepository */
+        $configurationRepository = pluginApp(ConfigurationRepositoryContract::class);
+
+        /** @var WebstoreConfigurationRepositoryContract $webstoreConfigurationRepository */
+        $webstoreConfigurationRepository = pluginApp(WebstoreConfigurationRepositoryContract::class);
+
         /** @var PluginSet $pluginSet */
         foreach($pluginSets as $pluginSet)
         {
@@ -34,12 +39,27 @@ class WebshopSettingsMigration_0_0_2
             {
                 if ($pluginSetEntry instanceof PluginSetEntry && $pluginSetEntry->plugin->name === 'Ceres')
                 {
+                    // insert into webstore config for each pluginSetId found
+                    // the `global.default_contact_class_b2b` value as `defaultBusinessClassId`.
                     $pluginSetId = $pluginSetEntry->pluginSetId;
-                    $config      = $pluginSetEntry->configurations()->getResults();
 
-                    // insert into webstore config foreach pluginSetId found
-                    // the `global.default_contact_class_b2b` value as `'defaultBusinessClassId' => value,`
+                    $defaultContactClassB2B = $configurationRepository->getConfigurationValueByKey(
+                        'global.default_contact_class_b2b',
+                        $pluginSetId
+                    );
 
+                    if ($defaultContactClassB2B === null)
+                    {
+                        continue;
+                    }
+
+                    foreach ($pluginSet->webstores as $webstore)
+                    {
+                        $webstoreConfigurationRepository->updateByPlentyId(
+                            ['defaultBusinessClassId' => (int)$defaultContactClassB2B],
+                            $webstore->storeIdentifier
+                        );
+                    }
                 }
             }
         }
