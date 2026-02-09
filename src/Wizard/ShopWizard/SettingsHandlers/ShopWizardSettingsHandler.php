@@ -22,6 +22,7 @@ use Plenty\Modules\Webshop\Contracts\WebstoreConfigurationRepositoryContract as 
 use Plenty\Modules\Webshop\Seo\Contracts\RobotsRepositoryContract;
 use Plenty\Modules\Webshop\Seo\Contracts\SitemapConfigurationRepositoryContract;
 use Plenty\Modules\Wizard\Contracts\WizardSettingsHandler;
+use Plenty\Modules\Webshop\Storefront\Service\SyncCustomerClassSettingsService;
 
 /**
  * Class ShopWizardSettingsHandler
@@ -189,7 +190,12 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     $webstoreData['faviconPath'] = '';
                 }
 
-                $webstoreData['defaultBusinessClassId'] = $data['defSettings_defaultB2B'] ?? 0;
+                /** @var SyncCustomerClassSettingsService $syncCustomerClassSettingsService */
+                $syncCustomerClassSettingsService = pluginApp(SyncCustomerClassSettingsService::class);
+                $syncCustomerClassSettingsService->updatePwaSetting(
+                    $plentyId,
+                    $data['defSettings_defaultB2B'] ?? 0
+                );
 
                 $webstoreConfig->updateByPlentyId($webstoreData, $plentyId);
 
