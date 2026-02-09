@@ -40,9 +40,9 @@ class DefaultSettingsMapping
             "optional" => false,
         ],
         "defSettings_defaultB2B" => [
-            "field"    => "defaultBusinessClassId",
+            "field"    => "global.default_contact_class_b2b",
             "type"     => "integer",
-            "global"   => true,
+            "global"   => false,
             "optional" => false,
         ],
         "defSettings_defaultB2C" => [
