@@ -37,14 +37,6 @@
                     "label": "Config.globalShippingCostsCategoryIdLabel",
                     "options": {}
                 },
-                "global.default_contact_class_b2b": {
-                    "type": "inputText",
-                    "required": false,
-                    "label": "Config.globalDefaultContactClassB2bLabel",
-                    "options": {
-                        "defaultValue": ""
-                    }
-                },
                 "global.enableOldUrlPattern": {
                     "type": "checkBox",
                     "required": false,
