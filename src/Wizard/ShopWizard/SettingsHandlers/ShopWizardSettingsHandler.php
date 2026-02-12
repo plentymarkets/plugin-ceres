@@ -190,13 +190,6 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     $webstoreData['faviconPath'] = '';
                 }
 
-                /** @var SyncCustomerClassSettingsService $syncCustomerClassSettingsService */
-                $syncCustomerClassSettingsService = pluginApp(SyncCustomerClassSettingsService::class);
-                $syncCustomerClassSettingsService->updatePwaSetting(
-                    $plentyId,
-                    $data['defSettings_defaultB2B'] ?? 0
-                );
-
                 $webstoreConfig->updateByPlentyId($webstoreData, $plentyId);
 
                 // we save robotsTxt
