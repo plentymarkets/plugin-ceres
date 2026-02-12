@@ -2,6 +2,10 @@
 
 ## v5.0.79 (2025-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.78...5.0.79" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
+### TODO
+
+- Due to moving of customerB2BClass configuration, ShopWizard needs to be run in the **Setup » Assistants >> Plugins >> PlentyShop LTS >> Default Settings >> Default B2B customer class** section.
+
 ### Fixed
 
 - Missing asterix hint for required address input fields in checkout.
