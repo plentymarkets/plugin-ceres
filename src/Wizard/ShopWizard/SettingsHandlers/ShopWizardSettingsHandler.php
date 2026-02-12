@@ -22,7 +22,6 @@ use Plenty\Modules\Webshop\Contracts\WebstoreConfigurationRepositoryContract as 
 use Plenty\Modules\Webshop\Seo\Contracts\RobotsRepositoryContract;
 use Plenty\Modules\Webshop\Seo\Contracts\SitemapConfigurationRepositoryContract;
 use Plenty\Modules\Wizard\Contracts\WizardSettingsHandler;
-use Plenty\Modules\Webshop\Storefront\Service\SyncCustomerClassSettingsService;
 
 /**
  * Class ShopWizardSettingsHandler
