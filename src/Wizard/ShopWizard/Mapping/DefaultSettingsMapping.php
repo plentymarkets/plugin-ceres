@@ -42,7 +42,7 @@ class DefaultSettingsMapping
         "defSettings_defaultB2B" => [
             "field"    => "defaultCustomerB2BClassId",
             "type"     => "integer",
-            "global"   => true,
+            "global"   => false,
             "optional" => false,
         ],
         "defSettings_defaultB2C" => [
