@@ -40,7 +40,7 @@ class DefaultSettingsMapping
             "optional" => false,
         ],
         "defSettings_defaultB2B" => [
-            "field"    => "defaultCustomerB2BClassId",
+            "field"    => "defaultBusinessClassId",
             "type"     => "integer",
             "global"   => true,
             "optional" => false,
