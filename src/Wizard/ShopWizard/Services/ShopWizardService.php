@@ -135,6 +135,8 @@ class ShopWizardService
 
             $globalData = $this->mappingService->processGlobalMappingData($webstoreConfData);
 
+            $globalData['defSettings_defaultB2B'] = $webstoreConfData['defaultCustomerB2BClassId'] ?? 0;
+
             //we check for shipping country list
             if (is_array($webstoreConfData['defaultShippingCountryList']) && count($webstoreConfData['defaultShippingCountryList'])) {
                 foreach ($webstoreConfData['defaultShippingCountryList'] as $countryLang => $countryId) {
