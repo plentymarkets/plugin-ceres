@@ -52,7 +52,7 @@ class DefaultSettingsMapping
             "optional" => false,
         ],
     ];
-    
+
     /**
      * @return array
      */
