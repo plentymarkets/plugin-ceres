@@ -6,11 +6,11 @@ use Ceres\Wizard\ShopWizard\Helpers\LanguagesHelper;
 use Ceres\Wizard\ShopWizard\Helpers\StepHelper;
 use Ceres\Wizard\ShopWizard\Services\DefaultSettingsService;
 use Plenty\Modules\Account\Contact\Contracts\ContactClassRepositoryContract;
+use Plenty\Modules\Accounting\Contracts\AccountingLocationRepositoryContract;
 use Plenty\Modules\Authorization\Services\AuthHelper;
 use Plenty\Modules\Order\Shipping\Countries\Contracts\CountryRepositoryContract;
 use Plenty\Modules\Payment\Contracts\PaymentRepositoryContract;
 use Plenty\Modules\Payment\Method\Contracts\PaymentMethodRepositoryContract;
-use Plenty\Modules\Accounting\Contracts\AccountingLocationRepositoryContract;
 use Plenty\Plugin\Translation\Translator;
 
 /**
@@ -23,7 +23,7 @@ class DefaultSettingsStep extends Step
      * @var AuthHelper
      */
     private $authHelper;
-    
+
     /**
      * @var PaymentRepositoryContract
      */
@@ -64,9 +64,9 @@ class DefaultSettingsStep extends Step
         ContactClassRepositoryContract $classRepository,
         AccountingLocationRepositoryContract $accountingLocationRepositoryContract,
         Translator $translator
-    ){
+    ) {
         parent::__construct();
-        
+
         $this->authHelper = $authHelper;
         $this->paymentRepository = $paymentRepository;
         $this->countryRepository = $countryRepository;
@@ -96,23 +96,22 @@ class DefaultSettingsStep extends Step
         $paymentMethodsList = StepHelper::buildListBoxData($paymentMethods);
 
         $deliveryCountries = $this->countryRepository->getActiveCountriesList();
-        
+
         $b2bClasses  = $this->classRepository->allContactClasses();
-        if(!count($b2bClasses))
-        {
+        if (!count($b2bClasses)) {
             /** @var Translator $translator */
             $translator = pluginApp(Translator::class);
             $b2bClasses[0] = $translator->trans('Ceres::Wizard.defaultCustomerClass');
         }
-        
+
         $b2bClassesList = StepHelper::buildListBoxData($b2bClasses);
-        
+
         $locationRepository = $this->locationRepository;
-        $locations = $this->authHelper->processUnguarded(function() use ($locationRepository) {
+        $locations = $this->authHelper->processUnguarded(function () use ($locationRepository) {
             return $locationRepository->getAll()->toArray();
         });
         $locationsList = StepHelper::buildListBoxData($locations, 'name', 'id');
-        
+
         return [
             'title'       => 'Wizard.defaultSettings',
             'description' => 'Wizard.defaultSettingsDescription',
@@ -124,19 +123,19 @@ class DefaultSettingsStep extends Step
                 $this->generateSection('defaultPaymentMethod', $paymentMethodsList, $this->globalsCondition),
                 $this->generateCountryDeliverySection('defaultDeliveryCountry', $deliveryCountries, $this->globalsCondition),
                 $this->generateSection('defaultB2C', $b2bClassesList, $this->globalsCondition),
-                $this->generateSection('defaultB2B', $b2bClassesList, $this->globalsCondition),
-                $this->generateSection('defaultLocation',$locationsList, $this->globalsCondition)
+                $this->generateSection('defaultB2B', $b2bClassesList, $this->globalsCondition, 2),
+                $this->generateSection('defaultLocation', $locationsList, $this->globalsCondition)
             ]
         ];
     }
-    
+
     /**
      * @param $name
      * @param $listBoxValues
      * @param bool $condition
      * @return array
      */
-    private function generateSection($name, $listBoxValues, $condition = true):array
+    private function generateSection($name, $listBoxValues, $condition = true, $defaultValue = null): array
     {
         return [
             'title'       => 'Wizard.' . $name,
@@ -145,6 +144,7 @@ class DefaultSettingsStep extends Step
             'form'        => [
                 'defSettings_' . $name => [
                     'type'    => 'select',
+                    'defaultValue' => $defaultValue,
                     'options' => [
                         'name'          => 'Wizard.' . $name,
                         'listBoxValues' => $listBoxValues
@@ -161,7 +161,7 @@ class DefaultSettingsStep extends Step
      *
      * @return array
      */
-    private function generateCountryDeliverySection($name, $collection, $condition = true):array
+    private function generateCountryDeliverySection($name, $collection, $condition = true): array
     {
         return [
             'title' => 'Wizard.' . $name,
@@ -176,10 +176,10 @@ class DefaultSettingsStep extends Step
      *
      * @return array
      */
-    private function generateCountriesList($countriesCollection):array
+    private function generateCountriesList($countriesCollection): array
     {
         $list = [];
-    
+
         $languages = LanguagesHelper::getTranslatedLanguages();
         $countryNames = $this->countryRepository->getActiveCountryNameMap(LanguagesHelper::getUserLang());
         $prefix = $this->translator->trans('Ceres::Wizard.defaultDeliveryCountry');
@@ -189,7 +189,7 @@ class DefaultSettingsStep extends Step
 
                 $countries = $countriesCollection->where('lang', $langKey);
 
-                if(count($countries)) {
+                if (count($countries)) {
                     $list[$settingKey] = [
                         'type'    => 'select',
                         'options' => [
@@ -199,7 +199,7 @@ class DefaultSettingsStep extends Step
                         ]
                     ];
 
-                    foreach($countries as $country) {
+                    foreach ($countries as $country) {
                         $countryData = $country->toArray();
 
                         $list[$settingKey]['options']['listBoxValues'][] = [
