@@ -3,14 +3,12 @@
 namespace Ceres\Wizard\ShopWizard\SettingsHandlers;
 
 use Ceres\Wizard\ShopWizard\Helpers\LanguagesHelper;
-use Ceres\Wizard\ShopWizard\Interfaces\ShopWizardPreviewConfigurationInterface;
 use Ceres\Wizard\ShopWizard\Models\ShopWizardPreviewConfiguration;
 use Ceres\Wizard\ShopWizard\Repositories\ShopWizardConfigRepository;
+use Ceres\Wizard\ShopWizard\Services\AlreadyPaidShippingCountriesService;
 use Ceres\Wizard\ShopWizard\Services\MappingService;
 use Ceres\Wizard\ShopWizard\Services\SettingsHandlerService;
-use Ceres\Wizard\ShopWizard\Services\AlreadyPaidShippingCountriesService;
 use Plenty\Modules\ContentCache\Contracts\ContentCacheInvalidationRepositoryContract;
-use Plenty\Modules\ContentCache\Contracts\ContentCacheSettingsRepositoryContract;
 use Plenty\Modules\Item\Search\Contracts\VariationElasticSearchSettingsRepositoryContract;
 use Plenty\Modules\Order\Currency\Contracts\CurrencyRepositoryContract;
 use Plenty\Modules\Order\Shipping\Countries\Contracts\CountryRepositoryContract;
@@ -149,7 +147,7 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                 if (isset($data['onlineStore_externalVatIdCheck'])) {
                     $webstoreData['externalVatCheckInactive'] = $data['onlineStore_externalVatIdCheck'];
                 }
-    
+
                 if (isset($data['onlineStore_loginMode'])) {
                     $webstoreData['loginMode'] = $data['onlineStore_loginMode'];
                 }
@@ -181,7 +179,7 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     $webstoreData['urlTitleItemName'] = $data['seo_itemMetaTitle'];
                 }
 
-                if(!empty($data["onlineStore_storeFavicon"])) {
+                if (!empty($data["onlineStore_storeFavicon"])) {
                     /** @var WebshopWebstoreConfigurationRepositoryContract $webshopConfigRepository */
                     $webshopConfigRepository = pluginApp(WebshopWebstoreConfigurationRepositoryContract::class);
                     $webshopConfigRepository->setFaviconFromWebspace($plentyId, $data["onlineStore_storeFavicon"]);
@@ -258,10 +256,12 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                     $itemSearchSettingsData = [];
 
                     foreach ($searchSettings as $searchSetting) {
-                        if (!empty($data[$searchSetting['key']]) && !in_array(
+                        if (
+                            !empty($data[$searchSetting['key']]) && !in_array(
                                 $data[$searchSetting['key']],
                                 $completedSettings ?? []
-                            )) {
+                            )
+                        ) {
                             $itemSearchSettingsData[] = [
                                 "key" => $data[$searchSetting['key']],
                                 "boost" => 2000 - (intval($searchSetting['position']) * 100),
@@ -302,7 +302,7 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
                 ];
 
                 $this->savePreviewConfig($pluginSetId, $previewConfData, (int)$webstoreId);
-                
+
                 //invalidate caching
                 $cacheInvalidRepo = pluginApp(ContentCacheInvalidationRepositoryContract::class);
                 $cacheInvalidRepo->invalidateAll($plentyId);
@@ -355,6 +355,17 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
         return true;
     }
 
+    private function getSearchSetingsKeys(array $settingsData): array
+    {
+        $searchKeys = [];
+
+        foreach ($settingsData as $setting) {
+            $searchKeys[] = $setting['key'];
+        }
+
+        return $searchKeys;
+    }
+
     /**
      * @return array
      */
@@ -378,18 +389,6 @@ class ShopWizardSettingsHandler implements WizardSettingsHandler
 
         return $searchSettings;
     }
-
-    private function getSearchSetingsKeys(array $settingsData): array
-    {
-        $searchKeys = [];
-
-        foreach ($settingsData as $setting) {
-            $searchKeys[] = $setting['key'];
-        }
-
-        return $searchKeys;
-    }
-
 
     private function savePreviewConfig($pluginSetId, $previewConfData, $webstoreId = null)
     {
