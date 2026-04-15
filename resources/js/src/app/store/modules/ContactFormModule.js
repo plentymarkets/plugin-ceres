@@ -160,8 +160,13 @@ const actions =
                                 resetRecaptcha(recaptchaEl);
                                 executeReCaptcha(event.target).then((recaptchaToken2) =>
                                 {
+                                    const formType = event.target.dataset.formType;
+                                    const endpoint = (formType === "contract-withdrawal")
+                                        ? "/rest/storefront/contract-withdrawal"
+                                        : "/rest/io/customer/contact/mail";
+
                                     ApiService.post(
-                                        "/rest/io/customer/contact/mail",
+                                        endpoint,
                                         {
                                             data:       formData,
                                             recipient:  formOptions.recipient,
