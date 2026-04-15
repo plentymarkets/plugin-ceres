@@ -87,8 +87,8 @@ class DefaultCancellationFormPreset implements ContentPreset
     private function createMailForm()
     {
         $formWidget = $this->preset->createWidget('Ceres::MailFormWidget')
-            ->withSetting('appearance', 'primary')
-            ->withSetting('labelSubmit', $this->translator->trans('Ceres::Template.contactSend'))
+            ->withSetting('appearance', 'danger')
+            ->withSetting('labelSubmit', $this->translator->trans('Ceres::Template.cancellationFormSend'))
             ->withSetting(
                 'mailTarget',
                 $this->config->contact->shopMail !== 'your@email.com' ? $this->config->contact->shopMail : ''
@@ -98,28 +98,26 @@ class DefaultCancellationFormPreset implements ContentPreset
 
 
         $formWidget->createChild('formFields', 'Ceres::TextInputWidget')
-            ->withSetting('label', $this->translator->trans('Ceres::Template.contactName'))
+            ->withSetting('label', $this->translator->trans('Ceres::Template.cancellationFormFullName'))
+            ->withSetting('isRequired', true)
             ->withSetting('isReplyToName', true);
 
         $formWidget->createChild('formFields', 'Ceres::TextInputWidget')
-            ->withSetting('label', $this->translator->trans('Ceres::Template.contactOrderId'));
+            ->withSetting('isRequired', true)
+            ->withSetting('label', $this->translator->trans('Ceres::Template.cancellationFormOrderNumber'));
 
         $formWidget->createChild('formFields', 'Ceres::MailInputWidget')
-            ->withSetting('label', $this->translator->trans('Ceres::Template.contactMail'))
+            ->withSetting('label', $this->translator->trans('Ceres::Template.cancellationFormContactMail'))
             ->withSetting('isRequired', true)
-            ->withSetting('replyToMail', true)
-            ->withSetting('allowMailCC', true);
+            ->withSetting('replyToMail', true);
 
         $formWidget->createChild('formFields', 'Ceres::TextAreaWidget')
             ->withSetting('customClass','contact-form-message')
             ->withSetting('rows', 15)
-            ->withSetting('label', $this->translator->trans('Ceres::Template.contactMessage'))
+            ->withSetting('label', $this->translator->trans('Ceres::Template.cancellationFormReason'))
             ->withSetting('fixedHeight', true)
-            ->withSetting('isRequired', true)
             ->withSetting('spacing.customMargin', true)
             ->withSetting('spacing.margin.top.value', 3)
             ->withSetting('spacing.margin.top.unit', null);
-        
     }
-
 }
