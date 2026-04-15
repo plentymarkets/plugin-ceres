@@ -13,6 +13,7 @@
 {% set formId          = uid() %}
 {% set buttonSize      = widget.settings.buttonSize.mobile | default("") %}
 {% set customClass     = widget.settings.customClass.mobile %}
+{% set typeForm        = widget.settings.typeForm.mobile %}
 
 <div class="widget widget-contact-form
     {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}
@@ -20,6 +21,7 @@
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
 
     <div class="widget-inner">
+        {% if typeForm == "contact" %} <p>contact</p> {% else %} <p>withdrawal contract</p>  {% endif %}
         <form class="row" id="{{ formId }}" method="post" @submit.prevent="$store.dispatch('sendContactForm', $event)">
 
             {{ Twig.if("#{ mailTarget | trim | json_encode } is empty and ceresConfig.contact.shopMail | trim is empty and #{ isPreview | json_encode }") }}
