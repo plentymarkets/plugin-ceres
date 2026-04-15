@@ -97,14 +97,14 @@ class DefaultCancellationFormPreset implements ContentPreset
             ->withSetting('bccAddresses', [$this->config->contact->mailBCC]);
 
 
-        $formWidget->createChild('first', 'Ceres::TextInputWidget')
+        $formWidget->createChild('formFields', 'Ceres::TextInputWidget')
             ->withSetting('label', $this->translator->trans('Ceres::Template.contactName'))
             ->withSetting('isReplyToName', true);
 
-        $formWidget->createChild('second', 'Ceres::TextInputWidget')
+        $formWidget->createChild('formFields', 'Ceres::TextInputWidget')
             ->withSetting('label', $this->translator->trans('Ceres::Template.contactOrderId'));
 
-        $formWidget->createChild('third', 'Ceres::MailInputWidget')
+        $formWidget->createChild('formFields', 'Ceres::MailInputWidget')
             ->withSetting('label', $this->translator->trans('Ceres::Template.contactMail'))
             ->withSetting('isRequired', true)
             ->withSetting('replyToMail', true)
