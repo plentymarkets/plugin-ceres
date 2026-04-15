@@ -36,6 +36,9 @@ class DefaultCancellationFormPreset implements ContentPreset
      */
     public function getWidgets()
     {
+        $this->config = pluginApp(CeresConfig::class);
+        $this->translator = pluginApp(Translator::class);
+        
         $this->preset = pluginApp(PresetHelper::class);
 
         $this->createHeadline();
