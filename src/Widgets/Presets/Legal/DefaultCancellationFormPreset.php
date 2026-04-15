@@ -104,7 +104,7 @@ class DefaultCancellationFormPreset implements ContentPreset
         $formWidget->createChild('second', 'Ceres::TextInputWidget')
             ->withSetting('label', $this->translator->trans('Ceres::Template.contactOrderId'));
 
-        $formWidget->createChild('second', 'Ceres::MailInputWidget')
+        $formWidget->createChild('third', 'Ceres::MailInputWidget')
             ->withSetting('label', $this->translator->trans('Ceres::Template.contactMail'))
             ->withSetting('isRequired', true)
             ->withSetting('replyToMail', true)
