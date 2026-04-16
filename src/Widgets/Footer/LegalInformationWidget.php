@@ -69,6 +69,10 @@ class LegalInformationWidget extends BaseWidget
             ->withDefaultValue(true)
             ->withName("Widget.legalInformationShowCancellationFormLabel");
 
+        $cancellationFormContainer->createCheckbox("styleLinkAsButton")
+            ->withDefaultValue(true)
+            ->withName("Widget.cancellationFormAsButtonLabel");    
+
         $cancellationFormContainer->createCheckbox("useCancellationPdfUpload")
             ->withDefaultValue(false)
             ->withCondition("cancellationFormContainer.showCancellationForm")
