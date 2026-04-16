@@ -13882,6 +13882,12 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   margin-right: 10px;
   color: #000;
 }
+.widget-legal-information #cancellation-button {
+  color: #fff;
+}
+.widget-legal-information #cancellation-button:hover {
+  color: #fff;
+}
 
 .widget-list .widget-inner .list-container,
 .widget-list .widget-inner .list-centered,
