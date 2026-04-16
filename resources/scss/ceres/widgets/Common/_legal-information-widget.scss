@@ -1,16 +1,15 @@
 .widget-legal-information {
-    a {
-        display: inline-block;
-        margin-right: 10px;
-        color: $black;
+  a {
+    display: inline-block;
+    margin-right: 10px;
+    color: $black;
+  }
+
+  #cancellation-button {
+    color: $white !important;
+
+    &:hover {
+      color: $white !important;
     }
-
-    #cancellation-button{
-        color: $white;
-
-        &:hover {
-            color: $white;
-        }
-    }
-
+  }
 }
