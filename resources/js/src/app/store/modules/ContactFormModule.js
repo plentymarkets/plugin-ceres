@@ -162,7 +162,7 @@ const actions =
                                 {
                                     const formType = event.target.dataset.formType;
                                     const endpoint = (formType === "contract-withdrawal")
-                                        ? "/rest/storefront/contract-withdrawal"
+                                        ? "/rest/io/cancellation"
                                         : "/rest/io/customer/contact/mail";
 
                                     ApiService.post(

@@ -67543,7 +67543,7 @@ var actions = {
           resetRecaptcha(recaptchaEl);
           Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_20__["executeReCaptcha"])(event.target).then(function (recaptchaToken2) {
             var formType = event.target.dataset.formType;
-            var endpoint = formType === "contract-withdrawal" ? "/rest/storefront/contract-withdrawal" : "/rest/io/customer/contact/mail";
+            var endpoint = formType === "contract-withdrawal" ? "/rest/io/cancellation" : "/rest/io/customer/contact/mail";
             ApiService.post(endpoint, {
               data: formData,
               recipient: formOptions.recipient,
