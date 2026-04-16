@@ -4,4 +4,13 @@
         margin-right: 10px;
         color: $black;
     }
+
+    #cancellation-button{
+        color: $white;
+
+        &:hover {
+            color: $white;
+        }
+    }
+
 }
