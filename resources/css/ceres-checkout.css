@@ -13899,6 +13899,13 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   color: #fff !important;
 }
 
+.cancellation-button {
+  color: #fff !important;
+}
+.cancellation-button:hover, .cancellation-button:focus {
+  color: #fff !important;
+}
+
 .widget-list .widget-inner .list-container,
 .widget-list .widget-inner .list-centered,
 .widget-link-list .widget-inner .list-container,

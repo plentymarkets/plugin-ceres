@@ -14,3 +14,11 @@
     }
   }
 }
+
+.cancellation-button {
+  color: $white !important;
+  &:hover,
+  &:focus {
+    color: $white !important;
+  }
+}

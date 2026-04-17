@@ -13464,6 +13464,14 @@ html.ie {
   }
 }
 
+.cancellation-button {
+  color: $white !important;
+  &:hover,
+  &:focus {
+    color: $white !important;
+  }
+}
+
 .widget-list,
 .widget-link-list {
     .widget-inner {
