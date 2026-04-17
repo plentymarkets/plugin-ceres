@@ -6,11 +6,11 @@
   }
 
   a.btn-primary {
-    color: $white;
+    color: $white!important;
 
     &:hover,
     &:focus {
-      color: $white;
+      color: $white!important;
     }
   }
 }

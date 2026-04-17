@@ -13893,10 +13893,10 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   color: #000;
 }
 .widget-legal-information a.btn-primary {
-  color: #fff;
+  color: #fff !important;
 }
 .widget-legal-information a.btn-primary:hover, .widget-legal-information a.btn-primary:focus {
-  color: #fff;
+  color: #fff !important;
 }
 
 .widget-list .widget-inner .list-container,
