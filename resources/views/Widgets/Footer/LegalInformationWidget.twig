@@ -46,7 +46,7 @@
         {% if configuration.showCancellationForm %}
             {% if not configuration.useCancellationPdfUpload %}
                 {% if configuration.styleLinkAsButton is not same as(false) %}
-                    <a id="cancellation-button" class="btn btn-primary py-2 px-4" href="{{ Twig.print('urls.cancellationForm') }}">{{ Twig.trans("Ceres::Template.footerWithdrawFromContract") }}</a>
+                    <a class="btn btn-primary py-2 px-4" href="{{ Twig.print('urls.cancellationForm') }}">{{ Twig.trans("Ceres::Template.footerWithdrawFromContract") }}</a>
                 {% else %}
                     <a class="py-4 px-2" href="{{ Twig.print('urls.cancellationForm') }}">{{ Twig.trans("Ceres::Template.footerCancellationForm", {"hyphen": "&shy;"}) }}</a>
                 {% endif %}

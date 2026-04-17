@@ -13892,11 +13892,11 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   margin-right: 10px;
   color: #000;
 }
-.widget-legal-information #cancellation-button {
-  color: #fff !important;
+.widget-legal-information a.btn-primary {
+  color: #fff;
 }
-.widget-legal-information #cancellation-button:hover {
-  color: #fff !important;
+.widget-legal-information a.btn-primary:hover, .widget-legal-information a.btn-primary:focus {
+  color: #fff;
 }
 
 .widget-list .widget-inner .list-container,

@@ -5,11 +5,12 @@
     color: $black;
   }
 
-  #cancellation-button {
-    color: $white !important;
+  a.btn-primary {
+    color: $white;
 
-    &:hover {
-      color: $white !important;
+    &:hover,
+    &:focus {
+      color: $white;
     }
   }
 }
