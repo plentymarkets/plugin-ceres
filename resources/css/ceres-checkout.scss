@@ -10853,11 +10853,11 @@ textarea.no-resize {
     color: $footer-color;
   }
 
-  .cancellation-button {
-    color: $white !important;
+  .btn-primary {
+    color: $white;
     &:hover,
     &:focus {
-      color: $white !important;
+      color: $white;
     }
   }
 
@@ -13469,14 +13469,6 @@ html.ie {
     &:focus {
       color: $white !important;
     }
-  }
-}
-
-.cancellation-button {
-  color: $white !important;
-  &:hover,
-  &:focus {
-    color: $white !important;
   }
 }
 

@@ -11591,11 +11591,11 @@ textarea.no-resize {
 .footer a {
   color: #212529;
 }
-.footer .cancellation-button {
-  color: #fff !important;
+.footer .btn-primary {
+  color: #fff;
 }
-.footer .cancellation-button:hover, .footer .cancellation-button:focus {
-  color: #fff !important;
+.footer .btn-primary:hover, .footer .btn-primary:focus {
+  color: #fff;
 }
 .footer > .container-max {
   max-width: 1170px;
@@ -13892,13 +13892,6 @@ html.ie .widget-image-carousel .widget-inner .carousel-item .img-cover {
   color: #fff !important;
 }
 .widget-legal-information a.btn-primary:hover, .widget-legal-information a.btn-primary:focus {
-  color: #fff !important;
-}
-
-.cancellation-button {
-  color: #fff !important;
-}
-.cancellation-button:hover, .cancellation-button:focus {
   color: #fff !important;
 }
 

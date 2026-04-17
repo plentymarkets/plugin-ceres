@@ -47,6 +47,14 @@
     color: $footer-color;
   }
 
+  .btn-primary {
+    color: $white;
+    &:hover,
+    &:focus {
+      color: $white;
+    }
+  }
+
   > .container-max {
     max-width: 1170px;
   }
