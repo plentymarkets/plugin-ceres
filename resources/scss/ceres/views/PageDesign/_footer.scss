@@ -47,14 +47,6 @@
     color: $footer-color;
   }
 
-  .cancellation-button {
-    color: $white !important;
-    &:hover,
-    &:focus {
-      color: $white !important;
-    }
-  }
-
   > .container-max {
     max-width: 1170px;
   }
