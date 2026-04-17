@@ -21,7 +21,7 @@
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
 
     <div class="widget-inner">
-        {% if typeForm === "contract-withdrawal" %} <p>cancellation</p> {% else %} <p>contact</p> {% endif %}>
+        {% if typeForm == "contract-withdrawal" %} <p>cancellation</p> {% else %} <p>contact</p> {% endif %}>
         <form class="row" data-form-type="{{ typeForm }}" id="{{ formId }}" method="post" @submit.prevent="$store.dispatch('sendContactForm', $event)">
 
             {{ Twig.if("#{ mailTarget | trim | json_encode } is empty and ceresConfig.contact.shopMail | trim is empty and #{ isPreview | json_encode }") }}
