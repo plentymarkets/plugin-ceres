@@ -161,7 +161,7 @@ const actions =
                                 executeReCaptcha(event.target).then((recaptchaToken2) =>
                                 {
                                     const formType = event.target.dataset.formType;
-                                    const endpoint = (formType === "contract-withdrawal")
+                                    const endpoint = formType === "contract-withdrawal"
                                         ? "/rest/io/cancellation"
                                         : "/rest/io/customer/contact/mail";
 
