@@ -11595,6 +11595,12 @@ textarea.no-resize {
 .footer a {
   color: #212529;
 }
+.footer .cancellation-button {
+  color: #fff !important;
+}
+.footer .cancellation-button:hover, .footer .cancellation-button:focus {
+  color: #fff !important;
+}
 .footer > .container-max {
   max-width: 1170px;
 }
