@@ -53,6 +53,17 @@ class MailFormWidget extends BaseWidget
             ->withName("Widget.mailFormMailTargetLabel")
             ->withTooltip("Widget.mailFormMailTargetTooltip");
 
+        $settingsFactory->createSelect('typeForm')
+            ->withDefaultValue('contact')
+            ->withName('Widget.mailFormType')
+            ->withTooltip('Widget.mailFormTypeTooltip')
+            ->withListBoxValues(
+                ValueListFactory::make()
+                    ->addEntry('contact', 'Widget.mailFormContact')
+                    ->addEntry('contract-withdrawal', 'Widget.mailFormContractWithdrawal')
+                    ->toArray()
+            );
+
         $settingsFactory->createText("subject")
             ->withDefaultValue("")
             ->withName("Widget.mailFormSubjectLabel")
