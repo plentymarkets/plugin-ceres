@@ -1,77 +1,85 @@
 .back-to-top-center {
-    position: fixed;
-    right: 0;
-    bottom: -17px;
-    left: 0;
-    z-index: $zindex-5;
-    display: none;
-    width: 94px;
-    height: 50px;
-    background: $white;
-    opacity: .5;
-    @include transition(opacity .3s);
+  position: fixed;
+  right: 0;
+  bottom: -17px;
+  left: 0;
+  z-index: $zindex-5;
+  display: none;
+  width: 94px;
+  height: 50px;
+  background: $white;
+  opacity: 0.5;
+  @include transition(opacity 0.3s);
 
-    &:hover {
-        opacity: 1;
-    }
+  &:hover {
+    opacity: 1;
+  }
 
-    @include media-breakpoint-down(sm) {
-        display: none !important; // stylelint-disable-line declaration-no-important
-    }
+  @include media-breakpoint-down(sm) {
+    display: none !important; // stylelint-disable-line declaration-no-important
+  }
 }
 
 .back-to-top {
-    position: fixed;
-    right: 2rem;
-    bottom: 2rem;
-    z-index: $zindex-5;
-    display: none;
-    width: 40px;
-    height: 42px;
-    opacity: .5;
-    @include transition(opacity .3s);
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  z-index: $zindex-5;
+  display: none;
+  width: 40px;
+  height: 42px;
+  opacity: 0.5;
+  @include transition(opacity 0.3s);
 
-    &:hover {
-        opacity: 1;
-    }
+  &:hover {
+    opacity: 1;
+  }
 
-    @include media-breakpoint-down(sm) {
-        display: none !important; // stylelint-disable-line declaration-no-important
-    }
+  @include media-breakpoint-down(sm) {
+    display: none !important; // stylelint-disable-line declaration-no-important
+  }
 }
 
 .footer {
-    background-color: $footer-bg;
+  background-color: $footer-bg;
 
-    a {
-        color: $footer-color;
+  a {
+    color: $footer-color;
+  }
+
+  .btn-primary {
+    color: $white;
+    &:hover,
+    &:focus {
+      color: $white;
+    }
+  }
+
+  > .container-max {
+    max-width: 1170px;
+  }
+
+  .plenty-brand {
+    height: 30px;
+  }
+
+  .footer-features {
+    background-color: $footer-features-bg;
+  }
+
+  .footer-services {
+    flex-flow: column nowrap;
+
+    div {
+      display: inline-flex;
+      flex-flow: row wrap;
+    }
+    img {
+      max-height: 4rem;
     }
 
-    > .container-max {
-        max-width: 1170px;
+    @include media-breakpoint-up(sm) {
+      flex-flow: row nowrap;
     }
-
-    .plenty-brand {
-        height: 30px;
-    }
-
-    .footer-features {
-        background-color: $footer-features-bg;
-    }
-
-    .footer-services {
-        flex-flow: column nowrap;
-
-        div {
-            display: inline-flex;
-            flex-flow: row wrap;
-        }
-        img {
-            max-height: 4rem;
-        }
-
-        @include media-breakpoint-up(sm) {
-            flex-flow: row nowrap;
-        }
-    }
+  }
 }

@@ -12391,6 +12391,12 @@ textarea.no-resize {
 .footer a {
   color: #212529;
 }
+.footer .btn-primary {
+  color: #fff;
+}
+.footer .btn-primary:hover, .footer .btn-primary:focus {
+  color: #fff;
+}
 .footer > .container-max {
   max-width: 1170px;
 }
