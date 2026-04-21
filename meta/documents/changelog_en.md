@@ -1,11 +1,11 @@
 # Release Notes for plentyShop LTS
 
-
 ## v5.0.79 (2025-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.78...5.0.79" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 ### Added
 
 - Reordered the settings from LegalInformation Widget both php setting and twig 
 - Created a new option called footerWithdrawFromContract that is always enabled and gives us a new styled button that will redirect to the cancellation page
+- New setting in mail form widget - you can define if the form should be used as a contact form or a contract cancellation form.
 
 ### TODO
 
