@@ -47,11 +47,11 @@ class LegalInformationWidget extends BaseWidget
         $settingsFactory->createCheckbox("showPrivacyPolicy")
             ->withDefaultValue(true)
             ->withName("Widget.legalInformationShowPrivacyPolicyLabel");
-            
+        
         $settingsFactory->createCheckbox("showGtc")
             ->withDefaultValue(true)
             ->withName("Widget.legalInformationShowGtcLabel");
-            
+        
         $settingsFactory->createCheckbox("showDeclarationOfAccessibility")
             ->withDefaultValue(true)
             ->withName("Widget.legalInformationShowDeclarationOfAccessibility");    
