@@ -86,6 +86,7 @@ class DefaultCancellationFormPreset implements ContentPreset
                 'mailTarget',
                 $this->config->contact->shopMail !== 'your@email.com' ? $this->config->contact->shopMail : ''
             )
+            ->withSetting('typeForm', 'contract-withdrawal')
             ->withSetting('ccAddresses', [$this->config->contact->mailCC])
             ->withSetting('bccAddresses', [$this->config->contact->mailBCC]);
 
