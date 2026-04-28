@@ -91399,10 +91399,11 @@ function readFormOptions(form, formData) {
 }
 
 function remapCancellationFormData(form, formData) {
-  var _form$querySelector$v, _form$querySelector, _form$querySelector$v2, _form$querySelector2;
+  var _form$querySelector$v, _form$querySelector, _form$querySelector$v2, _form$querySelector2, _form$querySelector$v3, _form$querySelector3;
 
   var mailKey = (_form$querySelector$v = (_form$querySelector = form.querySelector("[data-mail=\"reply-to-address\"]")) === null || _form$querySelector === void 0 ? void 0 : _form$querySelector.value) !== null && _form$querySelector$v !== void 0 ? _form$querySelector$v : null;
   var nameKey = (_form$querySelector$v2 = (_form$querySelector2 = form.querySelector("[data-mail=\"reply-to-name\"]")) === null || _form$querySelector2 === void 0 ? void 0 : _form$querySelector2.value) !== null && _form$querySelector$v2 !== void 0 ? _form$querySelector$v2 : null;
+  var orderIdKey = (_form$querySelector$v3 = (_form$querySelector3 = form.querySelector("[data-mail=\"order-id\"]")) === null || _form$querySelector3 === void 0 ? void 0 : _form$querySelector3.value) !== null && _form$querySelector$v3 !== void 0 ? _form$querySelector$v3 : null;
   var remapped = {};
 
   for (var _i = 0, _Object$entries = Object.entries(formData); _i < _Object$entries.length; _i++) {
@@ -91410,15 +91411,15 @@ function remapCancellationFormData(form, formData) {
         key = _Object$entries$_i[0],
         entry = _Object$entries$_i[1];
 
-    if (key === "username") {
-      remapped[key] = entry;
-    } else if (key === mailKey) {
+    if (key === mailKey) {
       remapped[key + "_mail"] = entry;
     } else if (key === nameKey) {
       remapped[key + "_name"] = entry;
+    } else if (key === orderIdKey) {
+      remapped[key + "_order"] = entry;
     } else {
       var inputEl = form.querySelector("[name=\"" + key + "\"]");
-      var suffix = inputEl && inputEl.tagName.toLowerCase() === "textarea" ? "_message" : "_order";
+      var suffix = inputEl && inputEl.tagName.toLowerCase() === "textarea" ? "_message" : "_unknown";
       remapped[key + suffix] = entry;
     }
   }

@@ -65,6 +65,11 @@ class TextInputWidget extends BaseWidget
             ->withName("Widget.textInputIsReplyToNameLabel")
             ->withTooltip("Widget.textInputIsReplyToNameTooltip");
 
+        $settingsFactory->createCheckbox("isOrderId")
+            ->withDefaultValue(false)
+            ->withName("Widget.textInputIsOrderIdLabel")
+            ->withTooltip("Widget.textInputIsOrderIdTooltip");
+
         $settingsFactory->createSpacing(false, true);
 
         return $settingsFactory->toArray();
