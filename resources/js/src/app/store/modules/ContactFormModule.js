@@ -114,6 +114,41 @@ function readFormOptions(form, formData)
     return formOptions;
 }
 
+function remapCancellationFormData(form, formData)
+{
+    const mailKey = form.querySelector("[data-mail=\"reply-to-address\"]")?.value ?? null;
+    const nameKey = form.querySelector("[data-mail=\"reply-to-name\"]")?.value ?? null;
+
+    const remapped = {};
+
+    for (const [key, entry] of Object.entries(formData))
+    {
+        if (key === "username")
+        {
+            remapped[key] = entry;
+        }
+        else if (key === mailKey)
+        {
+            remapped[key + "_mail"] = entry;
+        }
+        else if (key === nameKey)
+        {
+            remapped[key + "_name"] = entry;
+        }
+        else
+        {
+            const inputEl = form.querySelector("[name=\"" + key + "\"]");
+            const suffix  = inputEl && inputEl.tagName.toLowerCase() === "textarea"
+                ? "_message"
+                : "_order";
+
+            remapped[key + suffix] = entry;
+        }
+    }
+
+    return remapped;
+}
+
 function disableForm(form, disabled)
 {
     Array.prototype.slice.call(
@@ -165,10 +200,14 @@ const actions =
                                         ? "/rest/io/cancellation"
                                         : "/rest/io/customer/contact/mail";
 
+                                    const postData = formType === "contract-withdrawal"
+                                        ? remapCancellationFormData(event.target, formData)
+                                        : formData;
+
                                     ApiService.post(
                                         endpoint,
                                         {
-                                            data:       formData,
+                                            data:       postData,
                                             recipient:  formOptions.recipient,
                                             subject:    formOptions.subject || "",
                                             cc:         formOptions.cc,
