@@ -5,7 +5,6 @@
 {% set label           = widget.settings.label.mobile %}
 {% set isMailSubject   = widget.settings.isMailSubject.mobile %}
 {% set isReplyToName   = widget.settings.isReplyToName.mobile %}
-{% set isOrderId       = widget.settings.isOrderId.mobile %}
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlineSpacings  = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set spacingClasses  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
@@ -30,9 +29,6 @@
         {% endif %}
         {% if isReplyToName %}
             <input type="hidden" data-mail="reply-to-name" value="{{ formFieldId }}">
-        {% endif %}
-        {% if isOrderId %}
-            <input type="hidden" data-mail="order-id" value="{{ formFieldId }}">
         {% endif %}
     </div>
 </div>

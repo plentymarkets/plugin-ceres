@@ -116,15 +116,18 @@ function readFormOptions(form, formData)
 
 function remapCancellationFormData(form, formData)
 {
-    const mailKey    = form.querySelector("[data-mail=\"reply-to-address\"]")?.value ?? null;
-    const nameKey    = form.querySelector("[data-mail=\"reply-to-name\"]")?.value ?? null;
-    const orderIdKey = form.querySelector("[data-mail=\"order-id\"]")?.value ?? null;
+    const mailKey = form.querySelector("[data-mail=\"reply-to-address\"]")?.value ?? null;
+    const nameKey = form.querySelector("[data-mail=\"reply-to-name\"]")?.value ?? null;
 
     const remapped = {};
 
     for (const [key, entry]of Object.entries(formData))
     {
-        if (key === mailKey)
+        if (key === "username")
+        {
+            remapped[key] = entry;
+        }
+        else if (key === mailKey)
         {
             remapped[key + "_mail"] = entry;
         }
@@ -132,16 +135,12 @@ function remapCancellationFormData(form, formData)
         {
             remapped[key + "_name"] = entry;
         }
-        else if (key === orderIdKey)
-        {
-            remapped[key + "_order"] = entry;
-        }
         else
         {
             const inputEl = form.querySelector("[name=\"" + key + "\"]");
             const suffix  = inputEl && inputEl.tagName.toLowerCase() === "textarea"
                 ? "_message"
-                : "_unknown";
+                : "_order";
 
             remapped[key + suffix] = entry;
         }
