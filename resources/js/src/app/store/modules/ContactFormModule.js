@@ -121,7 +121,7 @@ function remapCancellationFormData(form, formData)
 
     const remapped = {};
 
-    for (const [key, entry] of Object.entries(formData))
+    for (const [key, entry]of Object.entries(formData))
     {
         if (key === "username")
         {

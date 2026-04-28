@@ -63898,10 +63898,10 @@ module.exports = __webpack_require__(/*! ./build */ "./node_modules/vue-template
 /*!*********************************************************!*\
   !*** ./node_modules/vue-template-compiler/package.json ***!
   \*********************************************************/
-/*! exports provided: _args, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, browser, bugs, dependencies, description, devDependencies, homepage, jsdelivr, keywords, license, main, name, repository, types, unpkg, version, default */
+/*! exports provided: name, version, description, main, unpkg, jsdelivr, browser, types, repository, keywords, author, license, bugs, homepage, dependencies, devDependencies, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"_args\":[[\"vue-template-compiler@2.6.12\",\"/Users/plentydev/workspace/developer-environment/plugins/Ceres\"]],\"_from\":\"vue-template-compiler@2.6.12\",\"_id\":\"vue-template-compiler@2.6.12\",\"_inBundle\":false,\"_integrity\":\"sha512-OzzZ52zS41YUbkCBfdXShQTe69j1gQDZ9HIX8miuC9C3rBCk9wIRjLiZZLrmX9V+Ftq/YEyv1JaVr5Y/hNtByg==\",\"_location\":\"/vue-template-compiler\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"vue-template-compiler@2.6.12\",\"name\":\"vue-template-compiler\",\"escapedName\":\"vue-template-compiler\",\"rawSpec\":\"2.6.12\",\"saveSpec\":null,\"fetchSpec\":\"2.6.12\"},\"_requiredBy\":[\"/\"],\"_resolved\":\"https://registry.npmjs.org/vue-template-compiler/-/vue-template-compiler-2.6.12.tgz\",\"_spec\":\"2.6.12\",\"_where\":\"/Users/plentydev/workspace/developer-environment/plugins/Ceres\",\"author\":{\"name\":\"Evan You\"},\"browser\":\"browser.js\",\"bugs\":{\"url\":\"https://github.com/vuejs/vue/issues\"},\"dependencies\":{\"de-indent\":\"^1.0.2\",\"he\":\"^1.1.0\"},\"description\":\"template compiler for Vue 2.0\",\"devDependencies\":{\"vue\":\"file:../..\"},\"homepage\":\"https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#readme\",\"jsdelivr\":\"browser.js\",\"keywords\":[\"vue\",\"compiler\"],\"license\":\"MIT\",\"main\":\"index.js\",\"name\":\"vue-template-compiler\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/vuejs/vue.git\"},\"types\":\"types/index.d.ts\",\"unpkg\":\"browser.js\",\"version\":\"2.6.12\"}");
+module.exports = JSON.parse("{\"name\":\"vue-template-compiler\",\"version\":\"2.6.12\",\"description\":\"template compiler for Vue 2.0\",\"main\":\"index.js\",\"unpkg\":\"browser.js\",\"jsdelivr\":\"browser.js\",\"browser\":\"browser.js\",\"types\":\"types/index.d.ts\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/vuejs/vue.git\"},\"keywords\":[\"vue\",\"compiler\"],\"author\":\"Evan You\",\"license\":\"MIT\",\"bugs\":{\"url\":\"https://github.com/vuejs/vue/issues\"},\"homepage\":\"https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#readme\",\"dependencies\":{\"he\":\"^1.1.0\",\"de-indent\":\"^1.0.2\"},\"devDependencies\":{\"vue\":\"file:../..\"}}");
 
 /***/ }),
 
@@ -77598,7 +77598,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3029ef42"
+  "7aaa3f17"
   
 )
 
@@ -77665,7 +77665,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5586a4ae"
+  "132670f6"
   
 )
 
@@ -77732,7 +77732,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "258506ee"
+  "0b3a3d94"
   
 )
 
@@ -77799,7 +77799,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "9d531b0e"
+  "b09fa19e"
   
 )
 
@@ -77866,7 +77866,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1b917c0a"
+  "544522c2"
   
 )
 
@@ -77933,7 +77933,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "642b9cd2"
+  "3a8acc42"
   
 )
 
@@ -78000,7 +78000,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "f5af79be"
+  "cc0ea92e"
   
 )
 
@@ -78067,7 +78067,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "59661758"
+  "84c00ec8"
   
 )
 
@@ -78134,7 +78134,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "11cc027c"
+  "83cb8278"
   
 )
 
@@ -78201,7 +78201,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "e628f96a"
+  "2e8e9593"
   
 )
 
@@ -78268,7 +78268,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "daa776e2"
+  "256b7b47"
   
 )
 
@@ -78335,7 +78335,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6ca95a34"
+  "c2eda5a4"
   
 )
 
@@ -78401,7 +78401,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "9dcaee94"
+  "f4a7d924"
   
 )
 
@@ -78450,7 +78450,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4a841e8f"
+  "1f15a947"
   
 )
 
@@ -78517,7 +78517,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "f5f05860"
+  "1183dbd0"
   
 )
 
@@ -78584,7 +78584,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "8475bec0"
+  "c8f35e30"
   
 )
 
@@ -78651,7 +78651,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "d62bc54e"
+  "6f4ef611"
   
 )
 
@@ -78717,7 +78717,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4cbcbe8e"
+  "913a5dfe"
   
 )
 
@@ -78765,7 +78765,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "38b1ce78"
+  "7d2f6de8"
   
 )
 
@@ -78814,7 +78814,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "bf90538c"
+  "00455af2"
   
 )
 
@@ -78881,7 +78881,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7796ba82"
+  "d428558c"
   
 )
 
@@ -78948,7 +78948,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3b8421e6"
+  "66de1956"
   
 )
 
@@ -79015,7 +79015,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6c3a7958"
+  "278b8cc8"
   
 )
 
@@ -79082,7 +79082,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "61abe4d6"
+  "767c4d1e"
   
 )
 
@@ -79149,7 +79149,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7e57762a"
+  "7e741133"
   
 )
 
@@ -79216,7 +79216,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "29265a45"
+  "1ff86e06"
   
 )
 
@@ -79286,7 +79286,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   injectStyles,
   null,
-  "94598cdc"
+  "bfb3844c"
   
 )
 
@@ -79353,7 +79353,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "371b5740"
+  "5fb2a9f8"
   
 )
 
@@ -79420,7 +79420,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "f9d9bc70"
+  "60d45210"
   
 )
 
@@ -79487,7 +79487,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "149f0b60"
+  "ef209df0"
   
 )
 
@@ -79554,7 +79554,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "63f4ff63"
+  "e6e75bca"
   
 )
 
@@ -79621,7 +79621,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "86991f32"
+  "dcdd6aa2"
   
 )
 
@@ -79688,7 +79688,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "672895a8"
+  "2279a918"
   
 )
 
@@ -79755,7 +79755,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "523c64fe"
+  "3208cdb6"
   
 )
 
@@ -79822,7 +79822,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "43ca1d26"
+  "5716a3b6"
   
 )
 
@@ -79889,7 +79889,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "866396cc"
+  "7a6e00e2"
   
 )
 
@@ -79956,7 +79956,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "c4e0d19a"
+  "73b22c2a"
   
 )
 
@@ -80023,7 +80023,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "874b0f08"
+  "dd8f5a78"
   
 )
 
@@ -80090,7 +80090,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0220a685"
+  "6e03d586"
   
 )
 
@@ -80157,7 +80157,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "78a0cbac"
+  "5305a464"
   
 )
 
@@ -80224,7 +80224,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "ab3367ec"
+  "68061852"
   
 )
 
@@ -80291,7 +80291,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1911bd74"
+  "438d4488"
   
 )
 
@@ -80358,7 +80358,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1b64a1be"
+  "071e1769"
   
 )
 
@@ -80425,7 +80425,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6a7689fb"
+  "3153f8b3"
   
 )
 
@@ -80492,7 +80492,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "141b0683"
+  "b24b858a"
   
 )
 
@@ -80559,7 +80559,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6171238f"
+  "3f3253d7"
   
 )
 
@@ -80626,7 +80626,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "37ba9fec"
+  "067a2652"
   
 )
 
@@ -80693,7 +80693,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2083819a"
+  "3553e9e2"
   
 )
 
@@ -80760,7 +80760,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "beba9896"
+  "00b0386d"
   
 )
 
@@ -80827,7 +80827,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "8cfb6366"
+  "b8555ad6"
   
 )
 
@@ -80894,7 +80894,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4a3df9e3"
+  "ab6902ca"
   
 )
 
@@ -80961,7 +80961,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "15457a16"
+  "15dc3a64"
   
 )
 
@@ -81028,7 +81028,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "44fcf698"
+  "029cc2e0"
   
 )
 
@@ -81095,7 +81095,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1156e2fe"
+  "4a0a89b6"
   
 )
 
@@ -81162,7 +81162,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "fd3dc898"
+  "483e8a6c"
   
 )
 
@@ -81229,7 +81229,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "e36615da"
+  "b9c5454a"
   
 )
 
@@ -81296,7 +81296,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3aaeaa9c"
+  "85e4f92c"
   
 )
 
@@ -81363,7 +81363,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2371aad4"
+  "2b61cce8"
   
 )
 
@@ -81430,7 +81430,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3c4c110d"
+  "c74cd476"
   
 )
 
@@ -81497,7 +81497,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2df67c31"
+  "61571e79"
   
 )
 
@@ -81564,7 +81564,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0ece2948"
+  "38a7f8e0"
   
 )
 
@@ -81631,7 +81631,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1be3d354"
+  "3de918c8"
   
 )
 
@@ -81698,7 +81698,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7dbc68aa"
+  "4499d762"
   
 )
 
@@ -81765,7 +81765,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7afc7d54"
+  "71563a0c"
   
 )
 
@@ -81832,7 +81832,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "426d5d78"
+  "0760a3fc"
   
 )
 
@@ -81899,7 +81899,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "4e1f2678"
+  "3e4345a0"
   
 )
 
@@ -81966,7 +81966,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "7f6cac79"
+  "69bfb0c1"
   
 )
 
@@ -82033,7 +82033,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3bdb2c92"
+  "b18bec02"
   
 )
 
@@ -82100,7 +82100,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2d1cc200"
+  "0ce92ab8"
   
 )
 
@@ -82167,7 +82167,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "3efdcccf"
+  "5d52e787"
   
 )
 
@@ -82234,7 +82234,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "253a3630"
+  "07239330"
   
 )
 
@@ -82301,7 +82301,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "9a9af446"
+  "4571bc95"
   
 )
 
@@ -82368,7 +82368,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "65498ed0"
+  "4f9c9318"
   
 )
 
@@ -82435,7 +82435,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "807ac93a"
+  "241b9a1b"
   
 )
 
@@ -82502,7 +82502,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2a19e828"
+  "a152ee40"
   
 )
 
@@ -82569,7 +82569,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "a572844a"
+  "0d544293"
   
 )
 
@@ -82636,7 +82636,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "e32e147e"
+  "407d2679"
   
 )
 
@@ -82703,7 +82703,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2a67e886"
+  "3db46f16"
   
 )
 
@@ -82770,7 +82770,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5e711302"
+  "334eed4a"
   
 )
 
@@ -82837,7 +82837,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1b785cd6"
+  "144594e4"
   
 )
 
@@ -82904,7 +82904,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "0363c400"
+  "b5f25370"
   
 )
 
@@ -82971,7 +82971,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "13aaa1f6"
+  "563833bd"
   
 )
 
@@ -83038,7 +83038,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1189829a"
+  "5748c36b"
   
 )
 
@@ -83105,7 +83105,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5f6afedb"
+  "fc7b15ba"
   
 )
 
@@ -83172,7 +83172,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "2188ba6e"
+  "7865a4fe"
   
 )
 
@@ -83239,7 +83239,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "1a09117e"
+  "045c15c6"
   
 )
 
@@ -83306,7 +83306,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "67b463d2"
+  "34330742"
   
 )
 
@@ -83373,7 +83373,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "76b018ca"
+  "4b41a382"
   
 )
 
@@ -83440,7 +83440,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "26c8a5d6"
+  "016c155d"
   
 )
 
@@ -83507,7 +83507,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "5608fdf0"
+  "67bab7c0"
   
 )
 
@@ -83574,7 +83574,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   false,
   null,
   null,
-  "6c2fcd7d"
+  "330d3c35"
   
 )
 
@@ -91220,40 +91220,49 @@ var getters = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.slice.js */ "./node_modules/core-js/modules/es.array.slice.js");
-/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.includes.js */ "./node_modules/core-js/modules/es.array.includes.js");
-/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.string.includes.js */ "./node_modules/core-js/modules/es.string.includes.js");
-/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.join.js */ "./node_modules/core-js/modules/es.array.join.js");
-/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.promise.js */ "./node_modules/core-js/modules/es.promise.js");
-/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.array.from.js */ "./node_modules/core-js/modules/es.array.from.js");
-/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.string.iterator.js */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.symbol.description.js */ "./node_modules/core-js/modules/es.symbol.description.js");
-/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator.js */ "./node_modules/core-js/modules/es.symbol.iterator.js");
-/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.array.iterator.js */ "./node_modules/core-js/modules/es.array.iterator.js");
-/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator.js */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
-/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
-/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
-/* harmony import */ var _helper_serializeForm__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../helper/serializeForm */ "./resources/js/src/app/helper/serializeForm.js");
-/* harmony import */ var _helper_strings__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../helper/strings */ "./resources/js/src/app/helper/strings.js");
-/* harmony import */ var _helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../helper/executeReCaptcha */ "./resources/js/src/app/helper/executeReCaptcha.js");
+/* harmony import */ var core_js_modules_es_object_entries_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.object.entries.js */ "./node_modules/core-js/modules/es.object.entries.js");
+/* harmony import */ var core_js_modules_es_object_entries_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_entries_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.slice.js */ "./node_modules/core-js/modules/es.array.slice.js");
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.includes.js */ "./node_modules/core-js/modules/es.array.includes.js");
+/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.string.includes.js */ "./node_modules/core-js/modules/es.string.includes.js");
+/* harmony import */ var core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.array.join.js */ "./node_modules/core-js/modules/es.array.join.js");
+/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.promise.js */ "./node_modules/core-js/modules/es.promise.js");
+/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.array.from.js */ "./node_modules/core-js/modules/es.array.from.js");
+/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.string.iterator.js */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.symbol.description.js */ "./node_modules/core-js/modules/es.symbol.description.js");
+/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator.js */ "./node_modules/core-js/modules/es.symbol.iterator.js");
+/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/es.array.iterator.js */ "./node_modules/core-js/modules/es.array.iterator.js");
+/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator.js */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _services_ValidationService__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../services/ValidationService */ "./resources/js/src/app/services/ValidationService.js");
+/* harmony import */ var _services_NotificationService__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../services/NotificationService */ "./resources/js/src/app/services/NotificationService.js");
+/* harmony import */ var _services_TranslationService__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../services/TranslationService */ "./resources/js/src/app/services/TranslationService.js");
+/* harmony import */ var _helper_serializeForm__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../helper/serializeForm */ "./resources/js/src/app/helper/serializeForm.js");
+/* harmony import */ var _helper_strings__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../helper/strings */ "./resources/js/src/app/helper/strings.js");
+/* harmony import */ var _helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../helper/executeReCaptcha */ "./resources/js/src/app/helper/executeReCaptcha.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
@@ -91270,7 +91279,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
@@ -91309,9 +91320,9 @@ function readFormOptions(form, formData) {
         switch (element.dataset.mail) {
           case "cc":
             if (element.value) {
-              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(element.value)) {
+              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_20__["isMail"])(element.value)) {
                 formOptions.cc.push(element.value);
-              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(formData[element.value].value)) {
+              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_20__["isMail"])(formData[element.value].value)) {
                 formOptions.cc.push(formData[element.value].value);
               }
             }
@@ -91320,9 +91331,9 @@ function readFormOptions(form, formData) {
 
           case "bcc":
             if (element.value) {
-              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(element.value)) {
+              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_20__["isMail"])(element.value)) {
                 formOptions.bcc.push(element.value);
-              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(formData[element.value].value)) {
+              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_20__["isMail"])(formData[element.value].value)) {
                 formOptions.bcc.push(formData[element.value].value);
               }
             }
@@ -91331,9 +91342,9 @@ function readFormOptions(form, formData) {
 
           case "reply-to-address":
             if (element.value) {
-              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(element.value)) {
+              if (Object(_helper_strings__WEBPACK_IMPORTED_MODULE_20__["isMail"])(element.value)) {
                 formOptions.replyTo.mail = element.value;
-              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_19__["isMail"])(formData[element.value].value)) {
+              } else if (formData.hasOwnProperty(element.value) && Object(_helper_strings__WEBPACK_IMPORTED_MODULE_20__["isMail"])(formData[element.value].value)) {
                 formOptions.replyTo.mail = formData[element.value].value;
               }
             }
@@ -91387,6 +91398,34 @@ function readFormOptions(form, formData) {
   return formOptions;
 }
 
+function remapCancellationFormData(form, formData) {
+  var _form$querySelector$v, _form$querySelector, _form$querySelector$v2, _form$querySelector2;
+
+  var mailKey = (_form$querySelector$v = (_form$querySelector = form.querySelector("[data-mail=\"reply-to-address\"]")) === null || _form$querySelector === void 0 ? void 0 : _form$querySelector.value) !== null && _form$querySelector$v !== void 0 ? _form$querySelector$v : null;
+  var nameKey = (_form$querySelector$v2 = (_form$querySelector2 = form.querySelector("[data-mail=\"reply-to-name\"]")) === null || _form$querySelector2 === void 0 ? void 0 : _form$querySelector2.value) !== null && _form$querySelector$v2 !== void 0 ? _form$querySelector$v2 : null;
+  var remapped = {};
+
+  for (var _i = 0, _Object$entries = Object.entries(formData); _i < _Object$entries.length; _i++) {
+    var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+        key = _Object$entries$_i[0],
+        entry = _Object$entries$_i[1];
+
+    if (key === "username") {
+      remapped[key] = entry;
+    } else if (key === mailKey) {
+      remapped[key + "_mail"] = entry;
+    } else if (key === nameKey) {
+      remapped[key + "_name"] = entry;
+    } else {
+      var inputEl = form.querySelector("[name=\"" + key + "\"]");
+      var suffix = inputEl && inputEl.tagName.toLowerCase() === "textarea" ? "_message" : "_order";
+      remapped[key + suffix] = entry;
+    }
+  }
+
+  return remapped;
+}
+
 function disableForm(form, disabled) {
   Array.prototype.slice.call(form.querySelectorAll("input, select, textarea, button")).forEach(function (input) {
     return input.disabled = disabled;
@@ -91407,22 +91446,23 @@ var actions = {
     var recaptchaEl = event.target.querySelector("[data-recaptcha]");
 
     if (App.config.global.googleRecaptchaApiKey && (!window.grecaptcha || !recaptchaEl)) {
-      _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactAcceptRecaptchaCookie"));
+      _services_NotificationService__WEBPACK_IMPORTED_MODULE_17__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_18__["default"].translate("Ceres::Template.contactAcceptRecaptchaCookie"));
       return;
     }
 
-    Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_20__["executeReCaptcha"])(event.target).then(function (recaptchaResponse) {
-      _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__["default"].validate(event.target).done(function () {
+    Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_21__["executeReCaptcha"])(event.target).then(function (recaptchaResponse) {
+      _services_ValidationService__WEBPACK_IMPORTED_MODULE_16__["default"].validate(event.target).done(function () {
         disableForm(event.target, true);
-        var formData = Object(_helper_serializeForm__WEBPACK_IMPORTED_MODULE_18__["serializeForm"])(event.target);
+        var formData = Object(_helper_serializeForm__WEBPACK_IMPORTED_MODULE_19__["serializeForm"])(event.target);
         var formOptions = readFormOptions(event.target, formData);
         sendFile(event, recaptchaResponse).then(function (response) {
           resetRecaptcha(recaptchaEl);
-          Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_20__["executeReCaptcha"])(event.target).then(function (recaptchaToken2) {
+          Object(_helper_executeReCaptcha__WEBPACK_IMPORTED_MODULE_21__["executeReCaptcha"])(event.target).then(function (recaptchaToken2) {
             var formType = event.target.dataset.formType;
             var endpoint = formType === "contract-withdrawal" ? "/rest/io/cancellation" : "/rest/io/customer/contact/mail";
+            var postData = formType === "contract-withdrawal" ? remapCancellationFormData(event.target, formData) : formData;
             ApiService.post(endpoint, {
-              data: formData,
+              data: postData,
               recipient: formOptions.recipient,
               subject: formOptions.subject || "",
               cc: formOptions.cc,
@@ -91434,21 +91474,21 @@ var actions = {
               resetRecaptcha(recaptchaEl);
               event.target.reset();
               disableForm(event.target, false);
-              _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactSendSuccess")).closeAfter(3000);
+              _services_NotificationService__WEBPACK_IMPORTED_MODULE_17__["default"].success(_services_TranslationService__WEBPACK_IMPORTED_MODULE_18__["default"].translate("Ceres::Template.contactSendSuccess")).closeAfter(3000);
               document.dispatchEvent(new CustomEvent("contactFormSent", {
                 detail: formData
               }));
             }).fail(function (response) {
               resetRecaptcha(recaptchaEl);
               disableForm(event.target, false);
-              _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactSendFail"));
+              _services_NotificationService__WEBPACK_IMPORTED_MODULE_17__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_18__["default"].translate("Ceres::Template.contactSendFail"));
             });
           });
         }, function (response) {
           resetRecaptcha(recaptchaEl);
           disableForm(event.target, false);
-          response.error.message = response.error.message || _services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactFileUploadFail");
-          _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(response.error);
+          response.error.message = response.error.message || _services_TranslationService__WEBPACK_IMPORTED_MODULE_18__["default"].translate("Ceres::Template.contactFileUploadFail");
+          _services_NotificationService__WEBPACK_IMPORTED_MODULE_17__["default"].error(response.error);
         });
       }).fail(function (invalidFields) {
         resetRecaptcha(recaptchaEl);
@@ -91460,7 +91500,7 @@ var actions = {
         try {
           for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
             var field = _step2.value;
-            fieldNames.push(Object(_helper_serializeForm__WEBPACK_IMPORTED_MODULE_18__["getLabel"])(field));
+            fieldNames.push(Object(_helper_serializeForm__WEBPACK_IMPORTED_MODULE_19__["getLabel"])(field));
           }
         } catch (err) {
           _iterator2.e(err);
@@ -91468,13 +91508,13 @@ var actions = {
           _iterator2.f();
         }
 
-        _services_ValidationService__WEBPACK_IMPORTED_MODULE_15__["default"].markInvalidFields(invalidFields, "error");
-        _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.checkoutCheckAddressFormFields", {
+        _services_ValidationService__WEBPACK_IMPORTED_MODULE_16__["default"].markInvalidFields(invalidFields, "error");
+        _services_NotificationService__WEBPACK_IMPORTED_MODULE_17__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_18__["default"].translate("Ceres::Template.checkoutCheckAddressFormFields", {
           fields: fieldNames.join(", ")
         }));
       });
     }).catch(function (error) {
-      _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactReCaptchaFailed"));
+      _services_NotificationService__WEBPACK_IMPORTED_MODULE_17__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_18__["default"].translate("Ceres::Template.contactReCaptchaFailed"));
     });
   }
 };
