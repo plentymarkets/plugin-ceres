@@ -5,6 +5,8 @@ namespace Ceres\Widgets\Presets\Legal;
 use Ceres\Widgets\Helper\Factories\PresetWidgetFactory;
 use Ceres\Widgets\Helper\PresetHelper;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
+use Ceres\Config\CeresConfig;
+use Plenty\Plugin\Translation\Translator;
 
 /**
  * Class DefaultCancellationFormPreset
@@ -20,20 +22,33 @@ use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
  */
 class DefaultCancellationFormPreset implements ContentPreset
 {
+    const IDENTIFIER_MAIL_TEMPLATE_NAME = 'name';
+    const IDENTIFIER_MAIL_TEMPLATE_ORDER = 'order';
+    const IDENTIFIER_MAIL_TEMPLATE_EMAIL = 'email';
+    const IDENTIFIER_MAIL_TEMPLATE_REASON = 'reason';
+    
     /** @var PresetHelper $preset */
     private $preset;
+
+    /** @var CeresConfig */
+    private $config;
+
+    /** @var Translator */
+    private $translator;
     
     /**
      * @inheritDoc
      */
     public function getWidgets()
     {
+        $this->config = pluginApp(CeresConfig::class);
+        $this->translator = pluginApp(Translator::class);
+        
         $this->preset = pluginApp(PresetHelper::class);
 
         $this->createHeadline();
         $this->createLegalTextsWidget();
-        $this->createSeparatorWidget();
-        $this->createPrintButtonWidget();
+        $this->createMailForm();
 
         return $this->preset->toArray();
     }
@@ -56,13 +71,6 @@ class DefaultCancellationFormPreset implements ContentPreset
                      ->withSetting("spacing.customMargin", true)
                      ->withSetting("spacing.margin.bottom.value", 0)
                      ->withSetting("spacing.margin.bottom.unit", null);
-    
-        $this->preset->createWidget("Ceres::SeparatorWidget")
-                     ->withSetting("customMargin", true)
-                     ->withSetting("margin.top.value", 5)
-                     ->withSetting("margin.top.unit", null)
-                     ->withSetting("margin.bottom.value", 5)
-                     ->withSetting("margin.bottom.unit", null);
     }
 
     private function createLegalTextsWidget()
@@ -74,20 +82,45 @@ class DefaultCancellationFormPreset implements ContentPreset
             ->withSetting("spacing.margin.bottom.unit", null);
     }
 
-    private function createSeparatorWidget()
+    private function createMailForm()
     {
-        $this->preset->createWidget("Ceres::SeparatorWidget")
-            ->withSetting("customMargin", true)
-            ->withSetting("margin.top.value", 5)
-            ->withSetting("margin.top.unit", null)
-            ->withSetting("margin.bottom.value", 5)
-            ->withSetting("margin.bottom.unit", null);
-    }
+        $formWidget = $this->preset->createWidget('Ceres::MailFormWidget')
+            ->withSetting('appearance', 'primary')
+            ->withSetting('labelSubmit', $this->translator->trans('Ceres::Template.cancellationFormSend'))
+            ->withSetting(
+                'mailTarget',
+                $this->config->contact->shopMail !== 'your@email.com' ? $this->config->contact->shopMail : ''
+            )
+            ->withSetting('typeForm', 'contract-withdrawal')
+            ->withSetting('ccAddresses', [$this->config->contact->mailCC])
+            ->withSetting('bccAddresses', [$this->config->contact->mailBCC]);
 
-    private function createPrintButtonWidget()
-    {
-        $this->preset->createWidget("Ceres::PrintButtonWidget")
-            ->withSetting("customClass", "float-right")
-            ->withSetting("buttonSize", "md");
+
+        $formWidget->createChild('formFields', 'Ceres::TextInputWidget')
+            ->withSetting('label', $this->translator->trans('Ceres::Template.cancellationFormFullName'))
+            ->withSetting('isRequired', true)
+            ->withSetting('isReplyToName', true)
+            ->withSetting('key', self::IDENTIFIER_MAIL_TEMPLATE_NAME);
+
+        $formWidget->createChild('formFields', 'Ceres::TextInputWidget')
+            ->withSetting('isRequired', true)
+            ->withSetting('label', $this->translator->trans('Ceres::Template.cancellationFormOrderNumber'))
+            ->withSetting('key', self::IDENTIFIER_MAIL_TEMPLATE_ORDER);
+
+        $formWidget->createChild('formFields', 'Ceres::MailInputWidget')
+            ->withSetting('label', $this->translator->trans('Ceres::Template.cancellationFormContactMail'))
+            ->withSetting('isRequired', true)
+            ->withSetting('replyToMail', true)
+            ->withSetting('key', self::IDENTIFIER_MAIL_TEMPLATE_EMAIL);
+
+        $formWidget->createChild('formFields', 'Ceres::TextAreaWidget')
+            ->withSetting('customClass','contact-form-message')
+            ->withSetting('rows', 15)
+            ->withSetting('label', $this->translator->trans('Ceres::Template.cancellationFormReason'))
+            ->withSetting('fixedHeight', true)
+            ->withSetting('spacing.customMargin', true)
+            ->withSetting('spacing.margin.top.value', 3)
+            ->withSetting('spacing.margin.top.unit', null)
+            ->withSetting('key', self::IDENTIFIER_MAIL_TEMPLATE_REASON);
     }
 }
