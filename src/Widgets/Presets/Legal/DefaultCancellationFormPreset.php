@@ -22,6 +22,11 @@ use Plenty\Plugin\Translation\Translator;
  */
 class DefaultCancellationFormPreset implements ContentPreset
 {
+    const IDENTIFIER_MAIL_TEMPLATE_NAME = 'name';
+    const IDENTIFIER_MAIL_TEMPLATE_ORDER = 'order';
+    const IDENTIFIER_MAIL_TEMPLATE_EMAIL = 'email';
+    const IDENTIFIER_MAIL_TEMPLATE_REASON = 'reason';
+    
     /** @var PresetHelper $preset */
     private $preset;
 
@@ -94,16 +99,19 @@ class DefaultCancellationFormPreset implements ContentPreset
         $formWidget->createChild('formFields', 'Ceres::TextInputWidget')
             ->withSetting('label', $this->translator->trans('Ceres::Template.cancellationFormFullName'))
             ->withSetting('isRequired', true)
-            ->withSetting('isReplyToName', true);
+            ->withSetting('isReplyToName', true)
+            ->withSetting('key', self::IDENTIFIER_MAIL_TEMPLATE_NAME);
 
         $formWidget->createChild('formFields', 'Ceres::TextInputWidget')
             ->withSetting('isRequired', true)
-            ->withSetting('label', $this->translator->trans('Ceres::Template.cancellationFormOrderNumber'));
+            ->withSetting('label', $this->translator->trans('Ceres::Template.cancellationFormOrderNumber'))
+            ->withSetting('key', self::IDENTIFIER_MAIL_TEMPLATE_ORDER);
 
         $formWidget->createChild('formFields', 'Ceres::MailInputWidget')
             ->withSetting('label', $this->translator->trans('Ceres::Template.cancellationFormContactMail'))
             ->withSetting('isRequired', true)
-            ->withSetting('replyToMail', true);
+            ->withSetting('replyToMail', true)
+            ->withSetting('key', self::IDENTIFIER_MAIL_TEMPLATE_EMAIL);
 
         $formWidget->createChild('formFields', 'Ceres::TextAreaWidget')
             ->withSetting('customClass','contact-form-message')
@@ -112,6 +120,7 @@ class DefaultCancellationFormPreset implements ContentPreset
             ->withSetting('fixedHeight', true)
             ->withSetting('spacing.customMargin', true)
             ->withSetting('spacing.margin.top.value', 3)
-            ->withSetting('spacing.margin.top.unit', null);
+            ->withSetting('spacing.margin.top.unit', null)
+            ->withSetting('key', self::IDENTIFIER_MAIL_TEMPLATE_REASON);
     }
 }
