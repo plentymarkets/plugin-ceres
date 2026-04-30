@@ -84157,7 +84157,7 @@ var actions = {
               disableForm(event.target, false);
               var errorMsgKey = "Ceres::Template.contactSendFail";
 
-              if (response.error.message === "Missing required fields") {
+              if (response.error.message === "Error submitting cancellation request.") {
                 errorMsgKey = "Ceres::Template.contactSubmissionFail";
               }
 
