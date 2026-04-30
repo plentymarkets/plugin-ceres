@@ -67553,6 +67553,8 @@ var actions = {
               replyTo: formOptions.replyTo,
               recaptchaToken: recaptchaToken2,
               fileKeys: response.fileKeys
+            }, {
+              supressNotifications: true
             }).done(function (response) {
               resetRecaptcha(recaptchaEl);
               event.target.reset();
