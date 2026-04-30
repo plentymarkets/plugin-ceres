@@ -176,8 +176,7 @@ const actions =
                                             replyTo:    formOptions.replyTo,
                                             recaptchaToken: recaptchaToken2,
                                             fileKeys: response.fileKeys
-                                        },
-                                        { supressNotifications: true }
+                                        }
                                     )
                                         .done(response =>
                                         {
@@ -198,6 +197,7 @@ const actions =
                                         })
                                         .fail(response =>
                                         {
+                                            console.log(formType);
                                             resetRecaptcha(recaptchaEl);
                                             disableForm(event.target, false);
                                             let errorMsgKey = "Ceres::Template.contactSendFail";
