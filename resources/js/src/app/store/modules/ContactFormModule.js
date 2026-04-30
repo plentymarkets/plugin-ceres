@@ -197,16 +197,9 @@ const actions =
                                         })
                                         .fail(response =>
                                         {
-                                            console.log(formType);
                                             resetRecaptcha(recaptchaEl);
                                             disableForm(event.target, false);
-                                            let errorMsgKey = "Ceres::Template.contactSendFail";
-
-                                            if (response.error.message === "Error submitting cancellation request.")
-                                            {
-                                                errorMsgKey = "Ceres::Template.contactSubmissionFail";
-                                            }
-                                            NotificationService.error(TranslationService.translate(errorMsgKey));
+                                            NotificationService.error(TranslationService.translate("Ceres::Template.contactSendFail"));
                                         });
                                 });
                             },

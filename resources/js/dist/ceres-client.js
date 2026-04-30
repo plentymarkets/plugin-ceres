@@ -70664,8 +70664,6 @@ var actions = {
               replyTo: formOptions.replyTo,
               recaptchaToken: recaptchaToken2,
               fileKeys: response.fileKeys
-            }, {
-              supressNotifications: true
             }).done(function (response) {
               resetRecaptcha(recaptchaEl);
               event.target.reset();
@@ -70677,13 +70675,7 @@ var actions = {
             }).fail(function (response) {
               resetRecaptcha(recaptchaEl);
               disableForm(event.target, false);
-              var errorMsgKey = "Ceres::Template.contactSendFail";
-
-              if (response.error.message === "Error submitting cancellation request.") {
-                errorMsgKey = "Ceres::Template.contactSubmissionFail";
-              }
-
-              _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate(errorMsgKey));
+              _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactSendFail"));
             });
           });
         }, function (response) {
