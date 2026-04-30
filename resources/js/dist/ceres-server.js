@@ -91441,7 +91441,13 @@ var actions = {
             }).fail(function (response) {
               resetRecaptcha(recaptchaEl);
               disableForm(event.target, false);
-              _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactSendFail"));
+              var errorMsgKey = "Ceres::Template.contactSendFail";
+
+              if (event.target.dataset.formType === "contract-withdrawal") {
+                errorMsgKey = "Ceres::Template.contactSubmissionFail";
+              }
+
+              _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate(errorMsgKey));
             });
           });
         }, function (response) {

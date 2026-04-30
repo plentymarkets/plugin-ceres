@@ -199,7 +199,13 @@ const actions =
                                         {
                                             resetRecaptcha(recaptchaEl);
                                             disableForm(event.target, false);
-                                            NotificationService.error(TranslationService.translate("Ceres::Template.contactSendFail"));
+                                            let errorMsgKey = "Ceres::Template.contactSendFail";
+
+                                            if (event.target.dataset.formType === "contract-withdrawal")
+                                            {
+                                                errorMsgKey = "Ceres::Template.contactSubmissionFail";
+                                            }
+                                            NotificationService.error(TranslationService.translate(errorMsgKey));
                                         });
                                 });
                             },
