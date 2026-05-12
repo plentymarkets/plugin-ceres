@@ -2,6 +2,13 @@
 
 ## v5.0.79 (2025-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.78...5.0.79" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
+### Hinzugefügt
+
+- Die Einstellungen im Widget LegalInformation wurden neu angeordnet (sowohl die PHP-Einstellungen als auch die Twig-Einstellungen)
+- Es wurde eine neue Option namens footerWithdrawFromContract erstellt, die standardmäßig aktiviert ist und eine neu gestaltete Schaltfläche bereitstellt, die zur Widerrufsseite weiterleitet
+- Neue Einstellung im E-Mail-Formular-Widget – Sie können festlegen, ob das Formular als Kontaktformular oder als Formular für den Vertragswiderruf verwendet werden soll.
+- Die Seite für das Widerrufsformular verfügt über eine Standardvoreinstellung.
+
 ### TODO
 
 - Aufgrund der Verschiebung der Konfiguration der B2B-Kundenklasse muss ShopWizard im Abschnitt **Einrichtung » Assistenten >> Plugins >> PlentyShop LTS >> Standardeinstellungen >> Standardkundenklasse für B2B-Kunden** ausgeführt werden.
