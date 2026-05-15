@@ -4,10 +4,10 @@
 
 ### Hinzugefügt
 
-- Die Einstellungen im Widget LegalInformation wurden neu angeordnet (sowohl die PHP-Einstellungen als auch die Twig-Einstellungen)
-- Es wurde eine neue Option namens footerWithdrawFromContract erstellt, die standardmäßig aktiviert ist und eine neu gestaltete Schaltfläche bereitstellt, die zur Widerrufsseite weiterleitet
-- Neue Einstellung im E-Mail-Formular-Widget – Sie können festlegen, ob das Formular als Kontaktformular oder als Formular für den Vertragswiderruf verwendet werden soll.
-- Die Seite für das Widerrufsformular verfügt über eine Standardvoreinstellung.
+- Im Widget für E-Mail-Formulare wurde eine neue Einstellung hinzugefügt, um zu wählen, ob es sich um ein Kontaktformular oder ein Widerrufsformular handelt.
+- Eine neue ShopBuilder-Vorlage für eine Seite mit Widerrufsformular wurde hinzugefügt.
+- Im Widget Rechtliche Informationen des Footers wurde eine Einstellung hinzugefügt, um den Link zum Widerrufsformular als Button anzuzeigen.
+- Im Widget Rechtliche Informationen wurde die Reihenfolge von bestehenden Einstellungen aktualisiert.
 
 ### TODO
 

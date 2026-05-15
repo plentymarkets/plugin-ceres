@@ -7,7 +7,10 @@
 - Reordered the settings from LegalInformation Widget both php setting and twig 
 - Created a new option called footerWithdrawFromContract that is always enabled and gives us a new styled button that will redirect to the cancellation page
 - New setting in mail form widget - you can define if the form should be used as a contact form or a contract cancellation form.
-- Cancellation form page has a default preset.
+- Added a setting to the email form widget to designate the form either as a contact form or a cancellation form.
+- Added a ShopBuilder preset for the cancellation form page.
+- Added a setting to the legal information widget in the footer to style the cancellation form link as a button.
+- Updated the order of existing settings in the legal information widget.
 
 ### TODO
 
