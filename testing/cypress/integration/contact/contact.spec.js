@@ -166,13 +166,15 @@ context("Contact Page", () =>
     it("should send form to contract withdrawal route when data-form-type is contract-withdrawal", () =>
     {
         cy.get(".widget-mail-input").type(`user${new Date().valueOf()}@plentye2etest.de`, { delay: 40 });
+        cy.get(".contact-form-name").type("john doe");
+        cy.get(".contact-form-order").type("100");
         cy.get(".contact-form-subject").type("g");
         cy.get(".contact-form-message").type("g");
         cy.get(".widget-accept-privacy-policy").click();
 
         cy.get("form").invoke("attr", "data-form-type", "contract-withdrawal");
 
-        cy.intercept("POST", "/rest/storefront/contract-withdrawal").as("sendContractWithdrawalForm");
+        cy.intercept("POST", "/rest/io/cancellation").as("sendContractWithdrawalForm");
 
         cy.getByTestingAttr("send-contact-form").click();
 
@@ -180,7 +182,7 @@ context("Contact Page", () =>
         {
             cy.get(".notification-wrapper").children().should("have.class", "show").and("have.class", "alert-success");
             cy.get(".notification-wrapper").children().first().should("contain", "Deine Anfrage wurde erfolgreich gesendet.");
-            expect(res.response.statusCode).to.eql(201);
+            expect(res.response.statusCode).to.eql(200);
         });
     });
 });
