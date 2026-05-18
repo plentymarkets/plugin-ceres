@@ -1,26 +1,25 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.79 (2025-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.78...5.0.79" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
-
-### Added
-
-- Reordered the settings from LegalInformation Widget both php setting and twig 
-- Created a new option called footerWithdrawFromContract that is always enabled and gives us a new styled button that will redirect to the cancellation page
-- New setting in mail form widget - you can define if the form should be used as a contact form or a contract cancellation form.
-- Added a setting to the email form widget to designate the form either as a contact form or a cancellation form.
-- Added a ShopBuilder preset for the cancellation form page.
-- Added a setting to the legal information widget in the footer to style the cancellation form link as a button.
-- Updated the order of existing settings in the legal information widget.
+## v5.0.79 (2026-05-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.78...5.0.79" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
 
-- Due to moving of customerB2BClass configuration, ShopWizard needs to be run in the **Setup » Assistants >> Plugins >> PlentyShop LTS >> Default Settings >> Default B2B customer class** section.
+- To comply with the legal requirements under Section 356a of the German Civil Code (BGB) (cancellation button), please follow the instructions in our manual. (LINK TODO)
+- Due to moving of the B2B Customer Class configuration, the plentyShop LTS Assistant needs to be run in the **Setup » Assistants >> Plugins >> PlentyShop LTS >> Default Settings >> Default B2B customer class** section.
+- Due to changes to existing widgets, ShopBuilder content must be updated in the **Shop » ShopBuilder** menu using the **Regenerate Content** button.
+
+### Added
+
+- The ‘Form type’ setting has been added to the settings of the email form widget in ShopBuilder. This setting determines whether the form is a contact form or a cancellation form. If the ‘Contract Withdrawal Form’ option is selected, this triggers the automatic dispatch of an email internally for ‘Send the customer a confirmation of receipt of the contract withdrawal’.
+- The option ’Style link as a button (recommended)’ has been added to the settings of the Legal Information widget in the ShopBuilder. This setting highlights the link to the contract withdrawal form.
+- The ShopBuilder template for Cancellation form’ has been revised and now includes a contract withdrawal form with all necessary and correctly configured input fields.
+- The ShopBuilder template for ‘Footer’ has been revised and now includes the highlighted link to the contract withdrawal form.
 
 ### Fixed
 
-- Missing asterix hint for required address input fields in checkout.
+- Missing asterisk hint for required address input fields in checkout.
 - Manufacturer logos are now displayed with the alt text stored in the web space.
-- Accessibility via keyboard was improved for the category navbar.
+- Accessibility via keyboard was improved for the category navigation.
 
 ## v5.0.78 (2025-10-17) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.77...5.0.78" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 

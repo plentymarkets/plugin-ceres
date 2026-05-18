@@ -1,22 +1,25 @@
 # Release Notes für plentyShop LTS
 
-## v5.0.79 (2025-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.78...5.0.79" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
-
-### Hinzugefügt
-
-- Im Widget für E-Mail-Formulare wurde eine neue Einstellung hinzugefügt, um zu wählen, ob es sich um ein Kontaktformular oder ein Widerrufsformular handelt.
-- Eine neue ShopBuilder-Vorlage für eine Seite mit Widerrufsformular wurde hinzugefügt.
-- Im Widget Rechtliche Informationen des Footers wurde eine Einstellung hinzugefügt, um den Link zum Widerrufsformular als Button anzuzeigen.
-- Im Widget Rechtliche Informationen wurde die Reihenfolge von bestehenden Einstellungen aktualisiert.
+## v5.0.79 (2026-05-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.78...5.0.79" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
 
-- Aufgrund der Verschiebung der Konfiguration der B2B-Kundenklasse muss ShopWizard im Abschnitt **Einrichtung » Assistenten >> Plugins >> PlentyShop LTS >> Standardeinstellungen >> Standardkundenklasse für B2B-Kunden** ausgeführt werden.
+- Um die gesetzlichen Anforderungen gemäß § 356a BGB (Widerrufsbutton) zu erfüllen, befolge bitte die Anweisungen in unserem Handbuch. (LINK TODO)
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **Shop » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+- Aufgrund der Verschiebung der Konfiguration der B2B-Kundenklasse muss der plentyShop LTS Assistent im Abschnitt **Einrichtung » Assistenten >> Plugins >> PlentyShop LTS >> Standardeinstellungen >> Standardkundenklasse für B2B-Kunden** ausgeführt werden.
 
-### Fixed
+### Hinzugefügt
 
-- Fehlender Hinweis für erforderliche Adressfelder im Checkout.
-- Herstellerlogos werden jetzt mit dem im Webspace hinterlegten Alttext ausgegeben.
+- Die Einstellung "Formulartyp" wurde in den Einstellungen des E-Mail-Formular-Widgets im ShopBuilder hinzugefügt. Über diese Einstellung wird gesteuert, ob es sich um ein Kontakt- oder ein Widerrufsformular handelt. Wird die Option "Widerrufsformular" genutzt, löst dies intern den automatischen Mail-Versand für "Dem Kunden eine Eingangsbestätigung der Vertragskündigung senden" aus.
+- Die Option "Link als Button gestalten (empfohlen)" wurde in den Einstellungen des Rechtliche Informationen-Widgets im ShopBuilder hinzugefügt. Diese Einstellung hebt den Link zum Widerrufsformular hervor.
+- Die ShopBuilder-Vorlage für "Widerrufsformular" wurde überarbeitet und enthält nun ein Widerrufsformular mit allen notwendigen und korrekt konfigurierten Eingabefeldern.
+- Die ShopBuilder-Vorlage für "Footer" wurde überarbeitet und enthält nun den hervorgehobenen Link zum Widerrufsformular.
+
+### Behoben
+
+- Es fehlte der Sternchenhinweis für Pflichtfelder bei der Adressangabe an der Kasse.
+- Herstellerlogos werden nun mit dem im Webspace gespeicherten Alt-Text angezeigt.
+- Die Barrierefreiheit bei der Bedienung über die Tastatur wurde für die Kategorie-Navigation verbessert.
 
 ## v5.0.78 (2025-10-17) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.77...5.0.78" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
