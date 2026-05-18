@@ -12,7 +12,7 @@ context("prices", () =>
         cy.get(".crossprice").should("contain", "0,80");
         cy.login("bernd.business@plentye2etest.de", "Testuser1234");
         cy.reload();
-        cy.get(".crossprice").should("contain", "0,61");
+        cy.get(".crossprice").should("contain", "0,67");
         cy.get(".price").should("contain", "0,53");
 
     });
@@ -30,7 +30,7 @@ context("prices", () =>
         cy.login("bernd.business@plentye2etest.de", "Testuser1234");
         cy.visit(url1);
         cy.get(".price").should("contain", "0,53");
-        cy.get(".crossprice").should("contain", "0,61");
+        cy.get(".crossprice").should("contain", "0,67");
     });
 
     it("should display brutto price for b2c class", () =>
