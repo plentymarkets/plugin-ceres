@@ -4,7 +4,7 @@
 
 ### TODO
 
-- Um die gesetzlichen Anforderungen gemäß § 356a BGB (Widerrufsbutton) zu erfüllen, befolge bitte die Anweisungen in unserem Handbuch. (LINK TODO)
+- Um die gesetzlichen Anforderungen gemäß § 356a BGB (Widerrufsbutton) zu erfüllen, befolge bitte die Anweisungen in unserem <a href="https://knowledge.plentyone.com/de-de/manual/main/webshop/shop-best-practices.html#widerrufsbutton-lts" target="_blank">Handbuch</a>.
 - Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **Shop » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
 - Aufgrund der Verschiebung der Konfiguration der B2B-Kundenklasse muss der plentyShop LTS Assistent im Abschnitt **Einrichtung » Assistenten >> Plugins >> PlentyShop LTS >> Standardeinstellungen >> Standardkundenklasse für B2B-Kunden** ausgeführt werden.
 

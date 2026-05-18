@@ -4,7 +4,7 @@
 
 ### TODO
 
-- To comply with the legal requirements under Section 356a of the German Civil Code (BGB) (cancellation button), please follow the instructions in our manual. (LINK TODO)
+- To comply with the legal requirements under Section 356a of the German Civil Code (BGB) (cancellation button), please follow the instructions in our <a href="https://knowledge.plentyone.com/en-gb/manual/main/online-store/shop-best-practices.html#withdrawal-button-lts" target="_blank">manual</a>.
 - Due to moving of the B2B Customer Class configuration, the plentyShop LTS Assistant needs to be run in the **Setup » Assistants >> Plugins >> PlentyShop LTS >> Default Settings >> Default B2B customer class** section.
 - Due to changes to existing widgets, ShopBuilder content must be updated in the **Shop » ShopBuilder** menu using the **Regenerate Content** button.
 
