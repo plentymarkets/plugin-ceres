@@ -1,5 +1,11 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.80 (2026-05-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.79...5.0.80" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Fixed
+
+- Ein Problem im Zusammenhang mit der Drosselung bei Varianten.
+
 ## v5.0.79 (2026-05-19) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.78...5.0.79" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
