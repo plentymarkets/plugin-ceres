@@ -7,6 +7,8 @@ use Ceres\Widgets\Helper\PresetHelper;
 use Plenty\Modules\ShopBuilder\Contracts\ContentPreset;
 use Ceres\Config\CeresConfig;
 use Plenty\Plugin\Translation\Translator;
+use Plenty\Modules\Webshop\Helpers\UrlQuery;
+use IO\Extensions\Constants\ShopUrls;
 
 /**
  * Class DefaultCancellationFormPreset
@@ -49,6 +51,7 @@ class DefaultCancellationFormPreset implements ContentPreset
         $this->createHeadline();
         $this->createLegalTextsWidget();
         $this->createMailForm();
+        $this->createDataPrivacyDisclaimer();
 
         return $this->preset->toArray();
     }
@@ -122,5 +125,37 @@ class DefaultCancellationFormPreset implements ContentPreset
             ->withSetting('spacing.margin.top.value', 3)
             ->withSetting('spacing.margin.top.unit', null)
             ->withSetting('key', self::IDENTIFIER_MAIL_TEMPLATE_REASON);
+    }
+
+    private function createDataPrivacyDisclaimer(): void
+    {
+        /** @var ShopUrls $shopUrls */
+        $shopUrls = pluginApp(ShopUrls::class);
+        /** @var UrlQuery $urlQuery */
+        $urlQuery = pluginApp(UrlQuery::class, ['path' => $shopUrls->privacyPolicy]);
+
+        $privacyHtml = '<a href="' . $urlQuery->toAbsoluteUrl() . '" target="_blank">';
+        $privacyHtml .=     '<span>';
+        $privacyHtml .=         $this->translator->trans("Ceres::Template.contactPrivacyPolicy", ["hyphen" => "&shy;"]);
+        $privacyHtml .=     '</span>';
+        $privacyHtml .= '</a>';
+
+        $text = '{% autoescape false %}';
+        $text .= '<p>';
+        $text .=  $this->translator->trans("Ceres::Template.cancellationFormPrivacyPolicy", ["privacy" => $privacyHtml]);
+        $text .= '</p>';
+        $text .= '{% endautoescape %}';
+
+        $this->preset->createWidget('Ceres::InlineTextWidget')
+            ->withSetting("text", $text)
+            ->withSetting("appearance", "none")
+            ->withSetting("spacing.customPadding", true)
+            ->withSetting("spacing.padding.top.value", 3)
+            ->withSetting("spacing.padding.top.unit", null)
+            ->withSetting("spacing.padding.bottom.value", 0)
+            ->withSetting("spacing.padding.bottom.unit", null)
+            ->withSetting("spacing.customMargin", true)
+            ->withSetting("spacing.margin.bottom.value", 0)
+            ->withSetting("spacing.margin.bottom.unit", null);
     }
 }
