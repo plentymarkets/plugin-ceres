@@ -140,11 +140,9 @@ class DefaultCancellationFormPreset implements ContentPreset
         $privacyHtml .=     '</span>';
         $privacyHtml .= '</a>';
 
-        $text = '{% autoescape false %}';
-        $text .= '<p>';
+        $text = '<p>';
         $text .=  $this->translator->trans("Ceres::Template.cancellationFormPrivacyPolicy", ["privacy" => $privacyHtml]);
         $text .= '</p>';
-        $text .= '{% endautoescape %}';
 
         $this->preset->createWidget('Ceres::InlineTextWidget')
             ->withSetting("text", $text)
