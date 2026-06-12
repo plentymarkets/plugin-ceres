@@ -128,8 +128,7 @@ class DefaultCancellationFormPreset implements ContentPreset
 
         $privacyDisclaimerText = $this->createDataPrivacyDisclaimerText();
 
-        $formWidget->createChild('formFields', 'Ceres::InlineTextWidget')
-            ->withSetting('customClass', 'h1')
+        $this->preset->createWidget('Ceres::InlineTextWidget')
             ->withSetting("text", $privacyDisclaimerText)
             ->withSetting('appearance', 'none')
             ->withSetting('spacing.customPadding', true)
