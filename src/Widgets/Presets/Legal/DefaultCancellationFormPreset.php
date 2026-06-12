@@ -125,17 +125,27 @@ class DefaultCancellationFormPreset implements ContentPreset
             ->withSetting('spacing.margin.top.unit', null)
             ->withSetting('key', self::IDENTIFIER_MAIL_TEMPLATE_REASON);
 
+
+        $privacyDisclaimerText = $this->createDataPrivacyDisclaimerText();
+
         $formWidget->createChild('formFields', 'Ceres::InlineTextWidget')
-            ->withSetting("text", $this->createDataPrivacyDisclaimerText())
-            ->withSetting("appearance", "none")
-            ->withSetting("spacing.customPadding", true)
-            ->withSetting("spacing.padding.top.value", 3)
-            ->withSetting("spacing.padding.top.unit", null)
-            ->withSetting("spacing.padding.bottom.value", 0)
-            ->withSetting("spacing.padding.bottom.unit", null)
-            ->withSetting("spacing.customMargin", true)
-            ->withSetting("spacing.margin.bottom.value", 0)
-            ->withSetting("spacing.margin.bottom.unit", null);
+            ->withSetting('customClass', 'h1')
+            ->withSetting("text", $privacyDisclaimerText)
+            ->withSetting('appearance', 'none')
+            ->withSetting('spacing.customPadding', true)
+            ->withSetting('spacing.padding.top.value', 0)
+            ->withSetting('spacing.padding.top.unit', null)
+            ->withSetting('spacing.padding.bottom.value', 0)
+            ->withSetting('spacing.padding.bottom.unit', null)
+            ->withSetting('spacing.padding.left.value', 0)
+            ->withSetting('spacing.padding.left.unit', null)
+            ->withSetting('spacing.padding.right.value', 0)
+            ->withSetting('spacing.padding.right.unit', null)
+            ->withSetting('spacing.customMargin', true)
+            ->withSetting('spacing.margin.top.value', 3)
+            ->withSetting('spacing.margin.top.unit', null)
+            ->withSetting('spacing.margin.bottom.value', 0)
+            ->withSetting('spacing.margin.bottom.unit', null);
     }
 
     private function createDataPrivacyDisclaimerText(): string
@@ -145,9 +155,6 @@ class DefaultCancellationFormPreset implements ContentPreset
         /** @var UrlQuery $urlQuery */
         $urlQuery = pluginApp(UrlQuery::class, ['path' => $shopUrls->privacyPolicy]);
 
-        if ($urlQuery == '') {
-            return '';
-        }
         $privacyHtml = '<a href="' . $urlQuery->toAbsoluteUrl() . '" target="_blank">';
         $privacyHtml .=     '<span>';
         $privacyHtml .=         $this->translator->trans("Ceres::Template.contactPrivacyPolicy", ["hyphen" => "&shy;"]);
