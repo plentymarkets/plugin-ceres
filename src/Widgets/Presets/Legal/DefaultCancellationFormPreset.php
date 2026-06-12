@@ -125,10 +125,11 @@ class DefaultCancellationFormPreset implements ContentPreset
             ->withSetting('spacing.margin.top.unit', null)
             ->withSetting('key', self::IDENTIFIER_MAIL_TEMPLATE_REASON);
 
+        $row_1 = $formWidget->createChild('formFields', 'Ceres::TwoColumnWidget')->withSetting('layout', 'oneToOne');
 
         $privacyDisclaimerText = $this->createDataPrivacyDisclaimerText();
 
-        $this->preset->createWidget('Ceres::InlineTextWidget')
+        $row_1->createChild('first', 'Ceres::InlineTextWidget')
             ->withSetting("text", $privacyDisclaimerText)
             ->withSetting('appearance', 'none')
             ->withSetting('spacing.customPadding', true)
