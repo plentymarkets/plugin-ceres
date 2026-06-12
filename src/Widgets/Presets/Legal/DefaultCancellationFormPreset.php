@@ -142,7 +142,7 @@ class DefaultCancellationFormPreset implements ContentPreset
             ->withSetting('spacing.padding.right.value', 0)
             ->withSetting('spacing.padding.right.unit', null)
             ->withSetting('spacing.customMargin', true)
-            ->withSetting('spacing.margin.top.value', 3)
+            ->withSetting('spacing.margin.top.value', 0)
             ->withSetting('spacing.margin.top.unit', null)
             ->withSetting('spacing.margin.bottom.value', 0)
             ->withSetting('spacing.margin.bottom.unit', null);
