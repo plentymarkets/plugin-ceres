@@ -49,7 +49,7 @@
                 {{ children.formFields | raw }}
             </div>
 
-            {{ Twig.if("ceresConfig.global.googleRecaptchaApiKey | trim is not empty") }}
+            {{ Twig.if("ceresConfig.global.googleRecaptchaApiKey | trim is not empty and #{ typeForm | json_encode } != 'contract-withdrawal'") }}
                 <recaptcha></recaptcha>
             {{ Twig.endif() }}
 
