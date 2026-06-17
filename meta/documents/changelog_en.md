@@ -1,5 +1,11 @@
 # Release Notes for plentyShop LTS
 
+## v5.0.81 (2026-06-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.80...5.0.81" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Submitting a cancellation form no longer requires consenting to Google reCAPTCHA.
+
 ## v5.0.80 (2026-05-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.79...5.0.80" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Fixed
