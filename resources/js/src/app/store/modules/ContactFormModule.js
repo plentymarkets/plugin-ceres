@@ -137,8 +137,9 @@ const actions =
             }
 
             const recaptchaEl = event.target.querySelector("[data-recaptcha]");
+            const dataFormType = event.target.querySelector("[data-form-type]") || event.target.closest("[data-form-type]");
 
-            if (App.config.global.googleRecaptchaApiKey && (!window.grecaptcha || !recaptchaEl))
+            if (App.config.global.googleRecaptchaApiKey && (!window.grecaptcha || !recaptchaEl) && (dataFormType?.dataset.formType !== "contract-withdrawal"))
             {
                 NotificationService.error(TranslationService.translate("Ceres::Template.contactAcceptRecaptchaCookie"));
                 return;
