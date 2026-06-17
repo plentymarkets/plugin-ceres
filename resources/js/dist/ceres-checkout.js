@@ -84119,8 +84119,9 @@ var actions = {
     }
 
     var recaptchaEl = event.target.querySelector("[data-recaptcha]");
+    var dataFormType = event.target.querySelector("[data-form-type]") || event.target.closest("[data-form-type]");
 
-    if (App.config.global.googleRecaptchaApiKey && (!window.grecaptcha || !recaptchaEl)) {
+    if (App.config.global.googleRecaptchaApiKey && (!window.grecaptcha || !recaptchaEl) && (dataFormType === null || dataFormType === void 0 ? void 0 : dataFormType.dataset.formType) !== "contract-withdrawal") {
       _services_NotificationService__WEBPACK_IMPORTED_MODULE_16__["default"].error(_services_TranslationService__WEBPACK_IMPORTED_MODULE_17__["default"].translate("Ceres::Template.contactAcceptRecaptchaCookie"));
       return;
     }
