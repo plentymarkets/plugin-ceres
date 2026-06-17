@@ -128,6 +128,9 @@ const actions =
             event.preventDefault();
             event.stopPropagation();
 
+            const formType = event.target.dataset.formType;
+            const isContractWithdrawal = formType === "contract-withdrawal";
+
             const btnClassName = event.submitter.className;
             const btnSendContactForm = "btn-send-contact-form";
 
@@ -137,15 +140,18 @@ const actions =
             }
 
             const recaptchaEl = event.target.querySelector("[data-recaptcha]");
-            const dataFormType = event.target.querySelector("[data-form-type]") || event.target.closest("[data-form-type]");
 
-            if (App.config.global.googleRecaptchaApiKey && (!window.grecaptcha || !recaptchaEl) && (dataFormType?.dataset.formType !== "contract-withdrawal"))
+            if (App.config.global.googleRecaptchaApiKey && (!window.grecaptcha || !recaptchaEl) && !isContractWithdrawal)
             {
                 NotificationService.error(TranslationService.translate("Ceres::Template.contactAcceptRecaptchaCookie"));
                 return;
             }
 
-            executeReCaptcha(event.target)
+            const recaptchaPromise = isContractWithdrawal
+                ? Promise.resolve(null)
+                : executeReCaptcha(event.target);
+
+            recaptchaPromise
                 .then((recaptchaResponse) =>
                 {
                     ValidationService.validate(event.target)
@@ -159,25 +165,35 @@ const actions =
                             sendFile(event, recaptchaResponse).then((response) =>
                             {
                                 resetRecaptcha(recaptchaEl);
-                                executeReCaptcha(event.target).then((recaptchaToken2) =>
+
+                                const recaptchaTokenPromise = isContractWithdrawal
+                                    ? Promise.resolve(null)
+                                    : executeReCaptcha(event.target);
+
+                                recaptchaTokenPromise.then((recaptchaToken2) =>
                                 {
-                                    const formType = event.target.dataset.formType;
                                     const endpoint = formType === "contract-withdrawal"
                                         ? "/rest/io/cancellation"
                                         : "/rest/io/customer/contact/mail";
 
+                                    const payload = {
+                                        data:       formData,
+                                        recipient:  formOptions.recipient,
+                                        subject:    formOptions.subject || "",
+                                        cc:         formOptions.cc,
+                                        bcc:        formOptions.bcc,
+                                        replyTo:    formOptions.replyTo,
+                                        fileKeys:   response.fileKeys
+                                    };
+
+                                    if (!isContractWithdrawal)
+                                    {
+                                        payload.recaptchaToken = recaptchaToken2;
+                                    }
+
                                     ApiService.post(
                                         endpoint,
-                                        {
-                                            data:       formData,
-                                            recipient:  formOptions.recipient,
-                                            subject:    formOptions.subject || "",
-                                            cc:         formOptions.cc,
-                                            bcc:        formOptions.bcc,
-                                            replyTo:    formOptions.replyTo,
-                                            recaptchaToken: recaptchaToken2,
-                                            fileKeys: response.fileKeys
-                                        }
+                                        payload
                                     )
                                         .done(response =>
                                         {
