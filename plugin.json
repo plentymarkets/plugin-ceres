@@ -15,7 +15,7 @@
     "keywords"          : ["plentymarkets", "plugins", "layout", "template", "ceres", "plentyshop", "webshop", "PlentyONE"],
     "type"              : "template",
     "require"           : {
-        "IO": "~5.0.80"
+        "IO": "~5.0.81"
     },
     "platform": {
         "php": ">=7.3 <8.1"
