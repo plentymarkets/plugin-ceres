@@ -1,6 +1,10 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.81 (2026-06-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.80...5.0.81" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.81 (2026-06-18) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.80...5.0.81" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Added
+
+- A link to the shop's privacy policy has been added to the default template of the cancellation form.
 
 ### Fixed
 

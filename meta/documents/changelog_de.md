@@ -1,6 +1,10 @@
 # Release Notes für plentyShop LTS
 
-## v5.0.81 (2026-06-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.80...5.0.81" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.81 (2026-06-18) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.80...5.0.81" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### Hinzugefügt
+
+- Die Standardvorlage des Widerrufsformulars wurde um eine Verlinkung zu der Datenschutzerklärung des Shops erweitert.
 
 ### Fixed
 
