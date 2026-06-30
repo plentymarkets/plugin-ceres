@@ -61,6 +61,7 @@ const actions =
             commit("setMainItemId", variation.documents[0].data.item.id);
 
             const setComponents = variation.documents[0].data.setComponents;
+            console.log('setComponents', setComponents);
 
             if (!App.isShopBuilder && setComponents && setComponents.length)
             {
