@@ -43,7 +43,10 @@ const mutations =
         addComponent(state, itemId)
         {
             state.setComponentIds = state.setComponentIds || [];
-            state.setComponentIds.push(itemId);
+            if (!state.setComponentIds.includes(itemId))
+            {
+                state.setComponentIds.push(itemId);
+            }
         },
 
         setMainItemId(state, itemId)
