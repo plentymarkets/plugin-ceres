@@ -43,7 +43,10 @@ const mutations =
         addComponent(state, itemId)
         {
             state.setComponentIds = state.setComponentIds || [];
-            state.setComponentIds.push(itemId);
+            if (!state.setComponentIds.includes(itemId))
+            {
+                state.setComponentIds.push(itemId);
+            }
         },
 
         setMainItemId(state, itemId)
@@ -61,7 +64,6 @@ const actions =
             commit("setMainItemId", variation.documents[0].data.item.id);
 
             const setComponents = variation.documents[0].data.setComponents;
-            console.log('setComponents', setComponents);
 
             if (!App.isShopBuilder && setComponents && setComponents.length)
             {
@@ -72,6 +74,7 @@ const actions =
 
         initSetComponents({ commit, dispatch, state, getters })
         {
+            console.log("initSetComponents called, current setComponentIds:", [...state.setComponentIds]);
             const setComponentIds = (getters.currentItemVariation.setComponents || []).map(component => component.defaultVariationId);
 
             commit("setIsSetLoading", true);
