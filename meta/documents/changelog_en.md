@@ -4,7 +4,7 @@
 
 ### Fixed
 
-- Double price calculation for item sets is now fixed.
+- Double price calculation for item sets are now fixed.
 
 ## v5.0.81 (2026-06-18) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.80...5.0.81" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
