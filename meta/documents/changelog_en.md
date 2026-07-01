@@ -1,5 +1,11 @@
 # Release Notes for plentyShop LTS
 
+## v5.0.82 (2026-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.81...5.0.82" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### Fixed
+
+- Double price calculation for item sets is now fixed.
+
 ## v5.0.81 (2026-06-18) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.80...5.0.81" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added
