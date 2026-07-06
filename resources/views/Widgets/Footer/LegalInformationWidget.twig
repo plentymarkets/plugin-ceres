@@ -14,6 +14,7 @@
     showCancellationRights: widget.settings.showCancellationRights.mobile,
     showCancellationForm: widget.settings.cancellationFormContainer.showCancellationForm.mobile,
     styleLinkAsButton: widget.settings.cancellationFormContainer.styleLinkAsButton.mobile,
+    showContact: widget.settings.showContact.mobile,
     useCancellationPdfUpload: widget.settings.cancellationFormContainer.useCancellationPdfUpload.mobile,
     cancellationPdfPath: widget.settings.cancellationFormContainer.cancellationPdfPath.mobile
 } %}
@@ -64,9 +65,11 @@
         {% endif %}
 
 
-        {{ Twig.if('(config("Ceres.contact.shop_mail") | length > 0 and config("Ceres.contact.shop_mail") != "your@email.com") or config("IO.routing.category_contact") > 0') }}
-            <a class="py-4 px-2" href="{{ Twig.print('urls.contact') }}">{{ Twig.trans("Ceres::Template.footerContact") }}</a>
-        {{ Twig.endif() }}
+        {% if configuration.showContact %}
+            {{ Twig.if('(config("Ceres.contact.shop_mail") | length > 0 and config("Ceres.contact.shop_mail") != "your@email.com") or config("IO.routing.category_contact") > 0') }}
+                <a class="py-4 px-2" href="{{ Twig.print('urls.contact') }}">{{ Twig.trans("Ceres::Template.footerContact") }}</a>
+            {{ Twig.endif() }}
+        {% endif %}
         {{ Twig.do('endautoescape') }}
     </div>
 </div>

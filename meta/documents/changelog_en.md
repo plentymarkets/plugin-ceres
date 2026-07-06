@@ -1,5 +1,15 @@
 # Release Notes for plentyShop LTS
 
+## unreleased
+
+### TODO
+
+- Due to changes to the **Legal information** widget, ShopBuilder content must be updated in the **Shop » ShopBuilder** menu using the **Regenerate Content** button.
+
+### Added
+
+- The option **Show contact** has been added to the legal information widget settings in ShopBuilder, allowing the contact link to be hidden independently of the other legal links.
+
 ## v5.0.81 (2026-06-18) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.80...5.0.81" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added
