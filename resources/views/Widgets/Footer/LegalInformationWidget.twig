@@ -6,6 +6,11 @@
 {% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
+{% set showContact = widget.settings.showContact.mobile %}
+{% if showContact is not defined or showContact is null %}
+    {% set showContact = true %}
+{% endif %}
+
 {% set configuration = {
     showLegalDisclosure: widget.settings.showLegalDisclosure.mobile,
     showPrivacyPolicy: widget.settings.showPrivacyPolicy.mobile,
@@ -14,7 +19,7 @@
     showCancellationRights: widget.settings.showCancellationRights.mobile,
     showCancellationForm: widget.settings.cancellationFormContainer.showCancellationForm.mobile,
     styleLinkAsButton: widget.settings.cancellationFormContainer.styleLinkAsButton.mobile,
-    showContact: widget.settings.showContact.mobile,
+    showContact: showContact,
     useCancellationPdfUpload: widget.settings.cancellationFormContainer.useCancellationPdfUpload.mobile,
     cancellationPdfPath: widget.settings.cancellationFormContainer.cancellationPdfPath.mobile
 } %}
