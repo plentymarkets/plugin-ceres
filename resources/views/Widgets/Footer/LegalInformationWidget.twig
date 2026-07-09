@@ -6,6 +6,11 @@
 {% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
+{% set showContact = widget.settings.showContact.mobile %}
+{% if showContact is not defined or showContact is null %}
+    {% set showContact = true %}
+{% endif %}
+
 {% set configuration = {
     showLegalDisclosure: widget.settings.showLegalDisclosure.mobile,
     showPrivacyPolicy: widget.settings.showPrivacyPolicy.mobile,
@@ -14,6 +19,7 @@
     showCancellationRights: widget.settings.showCancellationRights.mobile,
     showCancellationForm: widget.settings.cancellationFormContainer.showCancellationForm.mobile,
     styleLinkAsButton: widget.settings.cancellationFormContainer.styleLinkAsButton.mobile,
+    showContact: showContact,
     useCancellationPdfUpload: widget.settings.cancellationFormContainer.useCancellationPdfUpload.mobile,
     cancellationPdfPath: widget.settings.cancellationFormContainer.cancellationPdfPath.mobile
 } %}
@@ -64,9 +70,11 @@
         {% endif %}
 
 
-        {{ Twig.if('(config("Ceres.contact.shop_mail") | length > 0 and config("Ceres.contact.shop_mail") != "your@email.com") or config("IO.routing.category_contact") > 0') }}
-            <a class="py-4 px-2" href="{{ Twig.print('urls.contact') }}">{{ Twig.trans("Ceres::Template.footerContact") }}</a>
-        {{ Twig.endif() }}
+        {% if configuration.showContact %}
+            {{ Twig.if('(config("Ceres.contact.shop_mail") | length > 0 and config("Ceres.contact.shop_mail") != "your@email.com") or config("IO.routing.category_contact") > 0') }}
+                <a class="py-4 px-2" href="{{ Twig.print('urls.contact') }}">{{ Twig.trans("Ceres::Template.footerContact") }}</a>
+            {{ Twig.endif() }}
+        {% endif %}
         {{ Twig.do('endautoescape') }}
     </div>
 </div>
