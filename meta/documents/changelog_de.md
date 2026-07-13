@@ -10,6 +10,10 @@
 
 - Beim Absenden eines Widerrufsformulars ist keine Einwilligung für Google reCAPTCHA mehr notwendig.
 
+### TODO
+
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **Shop » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+
 ## v5.0.80 (2026-05-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.79...5.0.80" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Fixed
