@@ -81,6 +81,7 @@ class DefaultCheckoutPreset implements ContentPreset
         $this->createContactWishWidget($bgContainer);
         $this->createShippingPrivacyCheckWidget($bgContainer);
         $this->createGtcCheckWidget($bgContainer);
+        $this->createGuaranteeLabelWidget($bgContainer);
     }
 
     /**
@@ -158,6 +159,14 @@ class DefaultCheckoutPreset implements ContentPreset
         $bgContainer->createChild('background', 'Ceres::GtcCheckWidget')
             ->withSetting('isPreselected', false)
             ->withSetting('isRequired', true);
+    }
+
+    /**
+     * @param PresetWidgetFactory $bgContainer
+     */
+    private function createGuaranteeLabelWidget($bgContainer)
+    {
+        $bgContainer->createChild('background', 'Ceres::GuaranteeLabelWidget');
     }
 
     //======================================
