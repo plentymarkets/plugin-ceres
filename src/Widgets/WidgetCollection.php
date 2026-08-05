@@ -22,7 +22,6 @@ use Ceres\Widgets\Checkout\CancelPaymentWidget;
 use Ceres\Widgets\Checkout\ContactWishWidget;
 use Ceres\Widgets\Checkout\CustomerSignWidget;
 use Ceres\Widgets\Checkout\GtcCheckWidget;
-use Ceres\Widgets\Checkout\GuaranteeLabelWidget;
 use Ceres\Widgets\Checkout\PaymentProviderWidget;
 use Ceres\Widgets\Checkout\PlaceOrderWidget;
 use Ceres\Widgets\Checkout\ShippingPrivacyCheckWidget;
@@ -77,6 +76,7 @@ use Ceres\Widgets\Item\AddToBasketWidget;
 use Ceres\Widgets\Item\AddToWishListWidget;
 use Ceres\Widgets\Item\AttributeWidget;
 use Ceres\Widgets\Item\GraduatedPriceWidget;
+use Ceres\Widgets\Item\GuaranteeLabelWidget;
 use Ceres\Widgets\Item\ItemAvailabilityWidget;
 use Ceres\Widgets\Item\ItemBundleWidget;
 use Ceres\Widgets\Item\ItemDataTableWidget;
@@ -120,7 +120,6 @@ class WidgetCollection
         CancelPaymentWidget::class,
         ContactWishWidget::class,
         GtcCheckWidget::class,
-        GuaranteeLabelWidget::class,
         PaymentProviderWidget::class,
         PlaceOrderWidget::class,
         ShippingPrivacyCheckWidget::class,
@@ -201,6 +200,7 @@ class WidgetCollection
         AddToWishListWidget::class,
         AttributeWidget::class,
         GraduatedPriceWidget::class,
+        GuaranteeLabelWidget::class,
         ItemAvailabilityWidget::class,
         ItemBundleWidget::class,
         ItemDataTableWidget::class,

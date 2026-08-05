@@ -1,0 +1,25 @@
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass = widget.settings.customClass.mobile %}
+
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+
+{% set badgeImageUrl = plugin_path("Ceres") ~ "/images/legal/guarantee-badge.svg" %}
+{% set fullLabelImageUrl = plugin_path("Ceres") ~ "/images/legal/guarantee-label-full.svg" %}
+{% set collapseId = "guarantee-label-collapse-" ~ uid() %}
+
+<div class="widget widget-guarantee-label{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+
+    <button type="button" class="guarantee-badge-toggle btn-collapse p-0 border-0 bg-transparent collapsed"
+            data-toggle="collapse" data-target="#{{ collapseId }}"
+            aria-expanded="false" aria-controls="{{ collapseId }}">
+        <img src="{{ badgeImageUrl }}" class="guarantee-badge-image" alt="{{ trans("Ceres::Widget.guaranteeLabelBadgeAlt") }}" />
+    </button>
+
+    <div id="{{ collapseId }}" class="collapse guarantee-label-collapse">
+        <img src="{{ fullLabelImageUrl }}" class="img-fluid guarantee-label-full-image" alt="{{ trans("Ceres::Widget.guaranteeLabelFullAlt") }}" />
+    </div>
+</div>
