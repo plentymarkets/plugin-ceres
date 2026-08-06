@@ -1,13 +1,16 @@
 {% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
 
 {% set customClass = widget.settings.customClass.mobile %}
+{% set guaranteeValue = widget.settings.guaranteeValue.mobile | default("XX") %}
 
 {% set spacingSettings = widget.settings.spacing %}
 {% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 {% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
 
-{% set badgeImageUrl = plugin_path("Ceres") ~ "/images/legal/guarantee-badge.svg" %}
-{% set fullLabelImageUrl = plugin_path("Ceres") ~ "/images/legal/guarantee-label-full.svg" %}
+{% set itemData = item.documents[0].data %}
+{% set brandValue = itemData.item.manufacturer.name | default("") %}
+{% set modelValue = itemData.variation.model | default("") %}
+
 {% set collapseId = "guarantee-label-collapse-" ~ uid() %}
 
 <div class="widget widget-guarantee-label{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
@@ -15,11 +18,16 @@
 
     <button type="button" class="guarantee-badge-toggle btn-collapse p-0 border-0 bg-transparent collapsed"
             data-toggle="collapse" data-target="#{{ collapseId }}"
-            aria-expanded="false" aria-controls="{{ collapseId }}">
-        <img src="{{ badgeImageUrl }}" class="guarantee-badge-image" alt="{{ trans("Ceres::Widget.guaranteeLabelBadgeAlt") }}" />
+            aria-expanded="false" aria-controls="{{ collapseId }}"
+            aria-label="{{ trans("Ceres::Widget.guaranteeLabelBadgeAlt") }}">
+        {% include "Ceres::Widgets.Item.Partials.GuaranteeBadge" with { "guaranteeValue": guaranteeValue } %}
     </button>
 
     <div id="{{ collapseId }}" class="collapse guarantee-label-collapse">
-        <img src="{{ fullLabelImageUrl }}" class="img-fluid guarantee-label-full-image" alt="{{ trans("Ceres::Widget.guaranteeLabelFullAlt") }}" />
+        {% include "Ceres::Widgets.Item.Partials.GuaranteeLabelFull" with {
+            "guaranteeValue": guaranteeValue,
+            "brandValue": brandValue,
+            "modelValue": modelValue
+        } %}
     </div>
 </div>
