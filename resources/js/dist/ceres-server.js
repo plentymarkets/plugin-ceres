@@ -44560,60 +44560,6 @@ var render = function() {
                               _vm.basketItem.variation.data.bundleComponents
                           }
                         }),
-                        _vm._ssrNode(" "),
-                        _vm._ssrNode(
-                          '<div class="guarantee-label-container">',
-                          "</div>",
-                          [
-                            _vm._ssrNode(
-                              '<button type="button"' +
-                                _vm._ssrAttr(
-                                  "aria-expanded",
-                                  _vm.showGuaranteeLabel.toString()
-                                ) +
-                                _vm._ssrAttr(
-                                  "aria-label",
-                                  _vm.$translate(
-                                    "Ceres::Widget.guaranteeLabelBadgeAlt"
-                                  )
-                                ) +
-                                _vm._ssrClass(
-                                  "guarantee-badge-toggle btn-collapse p-0 border-0 bg-transparent",
-                                  { collapsed: !_vm.showGuaranteeLabel }
-                                ) +
-                                ">",
-                              "</button>",
-                              [
-                                _c("guarantee-badge", {
-                                  attrs: { guarantee: _vm.guarantee }
-                                })
-                              ],
-                              1
-                            ),
-                            _vm._ssrNode(" "),
-                            _vm.showGuaranteeLabel
-                              ? _vm._ssrNode(
-                                  '<div class="guarantee-label-collapse">',
-                                  "</div>",
-                                  [
-                                    _c("guarantee-label-full", {
-                                      attrs: {
-                                        guarantee: _vm.guarantee,
-                                        brand:
-                                          _vm.basketItem.variation.data.item
-                                            .manufacturer.name,
-                                        model:
-                                          _vm.basketItem.variation.data
-                                            .variation.model
-                                      }
-                                    })
-                                  ],
-                                  1
-                                )
-                              : _vm._e()
-                          ],
-                          2
-                        ),
                         _vm._ssrNode(
                           " " +
                             (!(
@@ -44973,6 +44919,48 @@ var render = function() {
             ],
             2
           )
+        ],
+        2
+      ),
+      _vm._ssrNode(" "),
+      _vm._ssrNode(
+        '<div class="guarantee-label-container">',
+        "</div>",
+        [
+          _vm._ssrNode(
+            '<button type="button"' +
+              _vm._ssrAttr("aria-expanded", _vm.showGuaranteeLabel.toString()) +
+              _vm._ssrAttr(
+                "aria-label",
+                _vm.$translate("Ceres::Widget.guaranteeLabelBadgeAlt")
+              ) +
+              _vm._ssrClass(
+                "guarantee-badge-toggle btn-collapse p-0 border-0 bg-transparent",
+                { collapsed: !_vm.showGuaranteeLabel }
+              ) +
+              ">",
+            "</button>",
+            [_c("guarantee-badge", { attrs: { guarantee: _vm.guarantee } })],
+            1
+          ),
+          _vm._ssrNode(" "),
+          _vm.showGuaranteeLabel
+            ? _vm._ssrNode(
+                '<div class="guarantee-label-collapse">',
+                "</div>",
+                [
+                  _c("guarantee-label-full", {
+                    attrs: {
+                      guarantee: _vm.guarantee,
+                      brand:
+                        _vm.basketItem.variation.data.item.manufacturer.name,
+                      model: _vm.basketItem.variation.data.variation.model
+                    }
+                  })
+                ],
+                1
+              )
+            : _vm._e()
         ],
         2
       ),

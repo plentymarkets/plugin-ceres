@@ -17554,6 +17554,10 @@ header .widget {
   border-color: #d4021d !important;
 }
 
+.guarantee-label-container {
+  margin-top: 10px;
+}
+
 .widget-guarantee-label .guarantee-badge-toggle,
 .guarantee-label-container .guarantee-badge-toggle {
   cursor: pointer;

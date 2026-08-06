@@ -14765,6 +14765,10 @@ header .widget {
 // Vue's client-side template compiler strips <style>/<script> tags when it
 // hydrates server-rendered markup, so those rules can't live inside the
 // inlined SVGs and must be compiled into the stylesheet instead.
+.guarantee-label-container {
+    margin-top: 10px;
+}
+
 .widget-guarantee-label,
 .guarantee-label-container {
     .guarantee-badge-toggle {
