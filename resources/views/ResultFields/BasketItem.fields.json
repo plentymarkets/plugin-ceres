@@ -22,7 +22,7 @@
     "variation.mayShowUnitPrice",
     "variation.bundleType",
     "variation.vatId",
-    "variation.data.variation.model",
+    "variation.model",
     "variationProperties.*",
     "item.id",
     "item.itemType",
