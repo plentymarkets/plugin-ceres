@@ -22,6 +22,7 @@
     "variation.mayShowUnitPrice",
     "variation.bundleType",
     "variation.vatId",
+    "variation.*",
     "variationProperties.*",
     "item.id",
     "item.itemType",
