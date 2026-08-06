@@ -166,10 +166,9 @@
                     :brand="basketItem.variation.data.item.manufacturer.name"
                     :model="basketItem.variation.data.variation.model">
                 </guarantee-label-full>
-
-                <pre>{{ basketItem }}</pre>
             </div>
         </div>
+        <pre>{{ basketItem }}</pre>
 
         <slot name="after-basket-item"></slot>
     </div>

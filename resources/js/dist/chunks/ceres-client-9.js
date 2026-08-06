@@ -338,7 +338,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -1238,15 +1237,15 @@ var render = function() {
                           _vm.basketItem.variation.data.item.manufacturer.name,
                         model: _vm.basketItem.variation.data.variation.model
                       }
-                    }),
-                    _vm._v(" "),
-                    _c("pre", [_vm._v(_vm._s(_vm.basketItem))])
+                    })
                   ],
                   1
                 )
               : _vm._e()
           ])
         : _vm._e(),
+      _vm._v(" "),
+      _c("pre", [_vm._v(_vm._s(_vm.basketItem))]),
       _vm._v(" "),
       _vm._t("after-basket-item")
     ],

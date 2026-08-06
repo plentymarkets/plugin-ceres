@@ -2007,7 +2007,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -44968,21 +44967,18 @@ var render = function() {
                               .name,
                           model: _vm.basketItem.variation.data.variation.model
                         }
-                      }),
-                      _vm._ssrNode(
-                        " <pre>" +
-                          _vm._ssrEscape(_vm._s(_vm.basketItem)) +
-                          "</pre>"
-                      )
+                      })
                     ],
-                    2
+                    1
                   )
                 : _vm._e()
             ],
             2
           )
         : _vm._e(),
-      _vm._ssrNode(" "),
+      _vm._ssrNode(
+        " <pre>" + _vm._ssrEscape(_vm._s(_vm.basketItem)) + "</pre> "
+      ),
       _vm._t("after-basket-item")
     ],
     2
