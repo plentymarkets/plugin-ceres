@@ -1,3 +1,4 @@
+<template>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 269.29 283.46" class="guarantee-label-full-image">
   <defs>
     <clipPath id="gtl-clippath">
@@ -34,8 +35,8 @@
   <g id="gtl-Layer_1" data-name="Layer 1">
     <rect class="gtl-cls-9" x="3.09" y="2.63" width="263.11" height="165.38"/>
     <rect class="gtl-cls-9" x="3.09" y="171.68" width="263.11" height="108.38"/>
-    <text class="gtl-cls-5" transform="translate(6.32 74.52)"><tspan x="0" y="0">{{ brandValue }}</tspan></text>
-    <text class="gtl-cls-5" transform="translate(196.75 74.52)"><tspan x="0" y="0">{{ modelValue }}</tspan></text>
+    <text class="gtl-cls-5" transform="translate(6.32 74.52)"><tspan x="0" y="0">{{ brand }}</tspan></text>
+    <text class="gtl-cls-5" transform="translate(196.75 74.52)"><tspan x="0" y="0">{{ model }}</tspan></text>
     <line class="gtl-cls-10" x1="6.32" y1="61.34" x2="262.97" y2="61.34"/>
     <path class="gtl-cls-17" d="M229.14,0v39.02c0,1.72.91,3.24,2.24,3.75l13.63,5.22c.67.26,1.38.26,2.05.01l13.59-5.01c1.35-.5,2.27-2.03,2.27-3.76V0h-33.79Z"/>
     <g>
@@ -772,7 +773,7 @@
       <path class="gtl-cls-7" d="M194.13,43.87s-1.05,1.2-1.41,1.58c-.25.26-.57.73-.96.93-1.02.52-1.22.5-2.24.24-.43-.11-.83-.43-1.16-.73l-6.81-6.08c-.82-.74-.27-2.1.83-2.06l4.27.16c.52.02,1.02.23,1.4.58l6.09,5.36Z"/>
       <path class="gtl-cls-7" d="M186.62,44.36l2.04,1.82c1.19.84,2.62.87,3.66-.28l12.06-13.48c.69-.78.19-2.02-.88-2.14l-2.02-.24c-.92-.11-1.83.22-2.44.88l-12.42,13.45Z"/>
     </g>
-    <text class="gtl-cls-3" transform="translate(5.07 150.57)"><tspan x="0" y="0">{{ guaranteeValue }}</tspan></text>
+    <text class="gtl-cls-3" transform="translate(5.07 150.57)"><tspan x="0" y="0">{{ guarantee }}</tspan></text>
     <g>
       <rect class="gtl-cls-9" x="121.47" y="127.8" width="26.36" height="22.68" rx="1.66" ry="1.66"/>
       <rect class="gtl-cls-7" x="128.31" y="124.74" width="3.13" height="6.19" rx=".54" ry=".54"/>
@@ -786,3 +787,26 @@
     </g>
   </g>
 </svg>
+</template>
+
+<script>
+export default {
+
+    name: "guarantee-label-full",
+
+    props: {
+        brand: {
+            type: String,
+            default: ""
+        },
+        model: {
+            type: String,
+            default: ""
+        },
+        guarantee: {
+            type: [String, Number],
+            default: "XX"
+        }
+    }
+}
+</script>

@@ -34,6 +34,24 @@
                                     :bundle-components="basketItem.variation.data.bundleComponents">
                             </item-bundle>
 
+                            <div class="guarantee-label-container">
+                                <button type="button" class="guarantee-badge-toggle btn-collapse p-0 border-0 bg-transparent"
+                                        :class="{ collapsed: !showGuaranteeLabel }"
+                                        @click="showGuaranteeLabel = !showGuaranteeLabel"
+                                        :aria-expanded="showGuaranteeLabel.toString()"
+                                        :aria-label="$translate('Ceres::Widget.guaranteeLabelBadgeAlt')">
+                                    <guarantee-badge :guarantee="guarantee"></guarantee-badge>
+                                </button>
+
+                                <div class="guarantee-label-collapse" v-if="showGuaranteeLabel">
+                                    <guarantee-label-full
+                                        :guarantee="guarantee"
+                                        :brand="basketItem.variation.data.item.manufacturer.name"
+                                        :model="basketItem.variation.data.variation.model">
+                                    </guarantee-label-full>
+                                </div>
+                            </div>
+
                             <div class="text-muted small" v-if="!(basketItem.variation.data.unit.unitOfMeasurement === 'C62' && basketItem.variation.data.unit.content === 1) && basketItem.variation.data.variation.mayShowUnitPrice">
                                 <div>
                                     {{ basePrice }}
@@ -201,7 +219,10 @@ export default {
             waiting: false,
             waitingForDelete: false,
             itemCondition: "",
-            showMoreInformation: false
+            showMoreInformation: false,
+            showGuaranteeLabel: false,
+            // placeholder until a real guarantee duration is available on the basket item data
+            guarantee: "2"
         };
     },
 

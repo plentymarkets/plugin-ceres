@@ -20,14 +20,10 @@
             data-toggle="collapse" data-target="#{{ collapseId }}"
             aria-expanded="false" aria-controls="{{ collapseId }}"
             aria-label="{{ trans("Ceres::Widget.guaranteeLabelBadgeAlt") }}">
-        {% include "Ceres::Widgets.Item.Partials.GuaranteeBadge" with { "guaranteeValue": guaranteeValue } %}
+        <guarantee-badge guarantee="{{ guaranteeValue }}"></guarantee-badge>
     </button>
 
     <div id="{{ collapseId }}" class="collapse guarantee-label-collapse">
-        {% include "Ceres::Widgets.Item.Partials.GuaranteeLabelFull" with {
-            "guaranteeValue": guaranteeValue,
-            "brandValue": brandValue,
-            "modelValue": modelValue
-        } %}
+        <guarantee-label-full guarantee="{{ guaranteeValue }}" brand="{{ brandValue }}" model="{{ modelValue }}"></guarantee-label-full>
     </div>
 </div>

@@ -319,6 +319,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -356,7 +374,10 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
       waiting: false,
       waitingForDelete: false,
       itemCondition: "",
-      showMoreInformation: false
+      showMoreInformation: false,
+      showGuaranteeLabel: false,
+      // placeholder until a real guarantee duration is available on the basket item data
+      guarantee: "2"
     };
   },
   computed: _objectSpread({
@@ -761,6 +782,56 @@ var render = function() {
                             _vm.basketItem.variation.data.bundleComponents
                         }
                       }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "guarantee-label-container" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass:
+                              "guarantee-badge-toggle btn-collapse p-0 border-0 bg-transparent",
+                            class: { collapsed: !_vm.showGuaranteeLabel },
+                            attrs: {
+                              type: "button",
+                              "aria-expanded": _vm.showGuaranteeLabel.toString(),
+                              "aria-label": _vm.$translate(
+                                "Ceres::Widget.guaranteeLabelBadgeAlt"
+                              )
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.showGuaranteeLabel = !_vm.showGuaranteeLabel
+                              }
+                            }
+                          },
+                          [
+                            _c("guarantee-badge", {
+                              attrs: { guarantee: _vm.guarantee }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _vm.showGuaranteeLabel
+                          ? _c(
+                              "div",
+                              { staticClass: "guarantee-label-collapse" },
+                              [
+                                _c("guarantee-label-full", {
+                                  attrs: {
+                                    guarantee: _vm.guarantee,
+                                    brand:
+                                      _vm.basketItem.variation.data.item
+                                        .manufacturer.name,
+                                    model:
+                                      _vm.basketItem.variation.data.variation
+                                        .model
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          : _vm._e()
+                      ]),
                       _vm._v(" "),
                       !(
                         _vm.basketItem.variation.data.unit.unitOfMeasurement ===

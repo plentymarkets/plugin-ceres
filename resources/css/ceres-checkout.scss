@@ -14760,6 +14760,173 @@ header .widget {
     }
 }
 
+// Style rules for .gtb-cls-*/.gtl-cls-* below are extracted from the inline
+// <style> blocks that originally lived inside the guarantee badge/label SVGs.
+// Vue's client-side template compiler strips <style>/<script> tags when it
+// hydrates server-rendered markup, so those rules can't live inside the
+// inlined SVGs and must be compiled into the stylesheet instead.
+.widget-guarantee-label,
+.guarantee-label-container {
+    .guarantee-badge-toggle {
+        cursor: pointer;
+    }
+
+    .guarantee-badge-image {
+        max-width: 120px;
+
+        .gtb-cls-1 {
+            font-family: Inter-ExtraBold, Inter; // stylelint-disable-line font-family-no-missing-generic-family-keyword
+            font-size: 41.56px;
+            font-variation-settings: "wght" 800, "slnt" 0;
+            font-weight: 700;
+            letter-spacing: -.02em;
+        }
+
+        .gtb-cls-1,
+        .gtb-cls-2 {
+            fill: #231f20;
+        }
+
+        .gtb-cls-3,
+        .gtb-cls-4 {
+            fill: #fff;
+        }
+
+        .gtb-cls-3,
+        .gtb-cls-5 {
+            stroke: #231f20;
+            stroke-miterlimit: 10;
+            stroke-width: .5px;
+        }
+
+        .gtb-cls-6 {
+            fill: #034ea2;
+        }
+
+        .gtb-cls-5 {
+            fill: none;
+        }
+
+        .gtb-cls-7 {
+            fill: #fff200;
+        }
+    }
+
+    .guarantee-label-full-image {
+        max-width: 300px;
+        height: auto;
+
+        .gtl-cls-1 {
+            -webkit-clip-path: url("#gtl-clippath-6");
+                    clip-path: url("#gtl-clippath-6");
+        }
+
+        .gtl-cls-2 {
+            -webkit-clip-path: url("#gtl-clippath-7");
+                    clip-path: url("#gtl-clippath-7");
+        }
+
+        .gtl-cls-3 {
+            font-family: Inter-ExtraBold, Inter; // stylelint-disable-line font-family-no-missing-generic-family-keyword
+            font-size: 80px;
+            font-variation-settings: "wght" 800, "slnt" 0;
+            font-weight: 700;
+            letter-spacing: -.03em;
+        }
+
+        .gtl-cls-3,
+        .gtl-cls-4,
+        .gtl-cls-5 {
+            fill: #231f20;
+        }
+
+        .gtl-cls-6 {
+            -webkit-clip-path: url("#gtl-clippath-4");
+                    clip-path: url("#gtl-clippath-4");
+        }
+
+        .gtl-cls-7,
+        .gtl-cls-8 {
+            fill: #fff;
+        }
+
+        .gtl-cls-7,
+        .gtl-cls-9 {
+            stroke-width: .5px;
+        }
+
+        .gtl-cls-7,
+        .gtl-cls-9,
+        .gtl-cls-10 {
+            stroke: #231f20;
+            stroke-miterlimit: 10;
+        }
+
+        .gtl-cls-11,
+        .gtl-cls-12,
+        .gtl-cls-9,
+        .gtl-cls-10 {
+            fill: none;
+        }
+
+        .gtl-cls-13 {
+            -webkit-clip-path: url("#gtl-clippath-1");
+                    clip-path: url("#gtl-clippath-1");
+        }
+
+        .gtl-cls-5 {
+            font-family: Inter-Regular, Inter; // stylelint-disable-line font-family-no-missing-generic-family-keyword
+            font-size: 9px;
+            font-variation-settings: "wght" 400, "slnt" 0;
+        }
+
+        .gtl-cls-14 {
+            -webkit-clip-path: url("#gtl-clippath-5");
+                    clip-path: url("#gtl-clippath-5");
+        }
+
+        .gtl-cls-12 {
+            -webkit-clip-path: url("#gtl-clippath");
+                    clip-path: url("#gtl-clippath");
+        }
+
+        .gtl-cls-15 {
+            -webkit-clip-path: url("#gtl-clippath-8");
+                    clip-path: url("#gtl-clippath-8");
+        }
+
+        .gtl-cls-16 {
+            -webkit-clip-path: url("#gtl-clippath-3");
+                    clip-path: url("#gtl-clippath-3");
+        }
+
+        .gtl-cls-17 {
+            fill: #034ea2;
+        }
+
+        .gtl-cls-18 {
+            fill: #010101;
+        }
+
+        .gtl-cls-19 {
+            letter-spacing: -.06em;
+        }
+
+        .gtl-cls-20 {
+            -webkit-clip-path: url("#gtl-clippath-2");
+                    clip-path: url("#gtl-clippath-2");
+        }
+
+        .gtl-cls-21 {
+            fill: #fff200;
+        }
+
+        .gtl-cls-22 {
+            letter-spacing: 0;
+        }
+    }
+}
+
 .widget-wish-list,
 .page-wish-list {
     .category-list-view-port {
