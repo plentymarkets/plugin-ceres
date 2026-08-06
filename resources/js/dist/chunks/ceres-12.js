@@ -86,12 +86,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.map.js */ "./node_modules/core-js/modules/es.array.map.js");
-/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
-/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.map.js */ "./node_modules/core-js/modules/es.array.map.js");
+/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
 /* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.symbol.description.js */ "./node_modules/core-js/modules/es.symbol.description.js");
@@ -130,31 +130,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _BasketSetComponentList_vue__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./BasketSetComponentList.vue */ "./resources/js/src/app/components/basket/list/BasketSetComponentList.vue");
 /* harmony import */ var _item_OrderPropertyValueList_vue__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../item/OrderPropertyValueList.vue */ "./resources/js/src/app/components/item/OrderPropertyValueList.vue");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -162,6 +162,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -381,6 +383,9 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
     };
   },
   computed: _objectSpread({
+    isGuaranteeLabelVisible: function isGuaranteeLabelVisible() {
+      return !!(this.basketItem.variation.data.item.manufacturer.name && this.basketItem.variation.data.variation.model);
+    },
     image: function image() {
       var itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
       return this.$options.filters.itemImage(itemImages);
@@ -1196,47 +1201,52 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "guarantee-label-container" }, [
-        _c(
-          "button",
-          {
-            staticClass:
-              "guarantee-badge-toggle btn-collapse p-0 border-0 bg-transparent",
-            class: { collapsed: !_vm.showGuaranteeLabel },
-            attrs: {
-              type: "button",
-              "aria-expanded": _vm.showGuaranteeLabel.toString(),
-              "aria-label": _vm.$translate(
-                "Ceres::Widget.guaranteeLabelBadgeAlt"
-              )
-            },
-            on: {
-              click: function($event) {
-                _vm.showGuaranteeLabel = !_vm.showGuaranteeLabel
-              }
-            }
-          },
-          [_c("guarantee-badge", { attrs: { guarantee: _vm.guarantee } })],
-          1
-        ),
-        _vm._v(" "),
-        _vm.showGuaranteeLabel
-          ? _c(
-              "div",
-              { staticClass: "guarantee-label-collapse" },
-              [
-                _c("guarantee-label-full", {
-                  attrs: {
-                    guarantee: _vm.guarantee,
-                    brand: _vm.basketItem.variation.data.item.manufacturer.name,
-                    model: _vm.basketItem.variation.data.variation.model
+      _vm.isGuaranteeLabelVisible
+        ? _c("div", { staticClass: "guarantee-label-container" }, [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "guarantee-badge-toggle btn-collapse p-0 border-0 bg-transparent",
+                class: { collapsed: !_vm.showGuaranteeLabel },
+                attrs: {
+                  type: "button",
+                  "aria-expanded": _vm.showGuaranteeLabel.toString(),
+                  "aria-label": _vm.$translate(
+                    "Ceres::Widget.guaranteeLabelBadgeAlt"
+                  )
+                },
+                on: {
+                  click: function($event) {
+                    _vm.showGuaranteeLabel = !_vm.showGuaranteeLabel
                   }
-                })
-              ],
+                }
+              },
+              [_c("guarantee-badge", { attrs: { guarantee: _vm.guarantee } })],
               1
-            )
-          : _vm._e()
-      ]),
+            ),
+            _vm._v(" "),
+            _vm.showGuaranteeLabel
+              ? _c(
+                  "div",
+                  { staticClass: "guarantee-label-collapse" },
+                  [
+                    _c("guarantee-label-full", {
+                      attrs: {
+                        guarantee: _vm.guarantee,
+                        brand:
+                          _vm.basketItem.variation.data.item.manufacturer.name,
+                        model: _vm.basketItem.variation.data.variation.model
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("pre", [_vm._v(_vm._s(_vm.basketItem))])
+                  ],
+                  1
+                )
+              : _vm._e()
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _vm._t("after-basket-item")
     ],

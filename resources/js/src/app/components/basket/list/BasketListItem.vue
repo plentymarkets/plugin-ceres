@@ -151,7 +151,7 @@
             </div>
         </div>
 
-        <div class="guarantee-label-container">
+        <div class="guarantee-label-container" v-if="isGuaranteeLabelVisible">
             <button type="button" class="guarantee-badge-toggle btn-collapse p-0 border-0 bg-transparent"
                     :class="{ collapsed: !showGuaranteeLabel }"
                     @click="showGuaranteeLabel = !showGuaranteeLabel"
@@ -166,6 +166,8 @@
                     :brand="basketItem.variation.data.item.manufacturer.name"
                     :model="basketItem.variation.data.variation.model">
                 </guarantee-label-full>
+
+                <pre>{{ basketItem }}</pre>
             </div>
         </div>
 
@@ -228,6 +230,11 @@ export default {
 
     computed:
     {
+        isGuaranteeLabelVisible()
+        {
+            return !!(this.basketItem.variation.data.item.manufacturer.name && this.basketItem.variation.data.variation.model);
+        },
+
         image()
         {
             const itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
