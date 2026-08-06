@@ -17560,7 +17560,7 @@ header .widget {
 }
 .widget-guarantee-label .guarantee-badge-image,
 .guarantee-label-container .guarantee-badge-image {
-  max-width: 120px;
+  max-width: 100%;
 }
 .widget-guarantee-label .guarantee-badge-image .gtb-cls-1,
 .guarantee-label-container .guarantee-badge-image .gtb-cls-1 {
@@ -17604,7 +17604,7 @@ header .widget {
 }
 .widget-guarantee-label .guarantee-label-full-image,
 .guarantee-label-container .guarantee-label-full-image {
-  max-width: 300px;
+  max-width: 100%;
   height: auto;
 }
 .widget-guarantee-label .guarantee-label-full-image .gtl-cls-1,

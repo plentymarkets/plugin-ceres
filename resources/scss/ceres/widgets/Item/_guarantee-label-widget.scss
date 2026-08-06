@@ -10,7 +10,7 @@
     }
 
     .guarantee-badge-image {
-        max-width: 120px;
+        max-width: 100%;
 
         .gtb-cls-1 {
             font-family: Inter-ExtraBold, Inter; // stylelint-disable-line font-family-no-missing-generic-family-keyword
@@ -51,7 +51,7 @@
     }
 
     .guarantee-label-full-image {
-        max-width: 300px;
+        max-width: 100%;
         height: auto;
 
         .gtl-cls-1 {
