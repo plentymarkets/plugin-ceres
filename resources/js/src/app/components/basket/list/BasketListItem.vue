@@ -168,8 +168,6 @@
                 </guarantee-label-full>
             </div>
         </div>
-        <pre>{{ basketItem }}</pre>
-
         <slot name="after-basket-item"></slot>
     </div>
 </template>
