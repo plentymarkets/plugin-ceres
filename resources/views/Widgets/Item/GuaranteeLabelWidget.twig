@@ -11,6 +11,11 @@
 {% set brandValue = itemData.item.manufacturer.name | default("") %}
 {% set modelValue = itemData.variation.model | default("") %}
 
+{% if isPreview %}
+    {% set brandValue = trans("Ceres::Widget.guaranteeLabelSampleBrand") %}
+    {% set modelValue = trans("Ceres::Widget.guaranteeLabelSampleModel") %}
+{% endif %}
+
 {% set collapseId = "guarantee-label-collapse-" ~ uid() %}
 
 {% if brandValue | length > 0 and modelValue | length > 0 %}
