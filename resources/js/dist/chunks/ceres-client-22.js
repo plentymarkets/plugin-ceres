@@ -139,12 +139,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       default: function _default() {
         return ["basketValueNet", "basketValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "promotionCoupon", "totalSumNet", "vats", "additionalCosts", "totalSumGross", "salesCoupon", "openAmount", "subAmount"];
       }
-    },
-    basketDetailsData: {
-      type: Array,
-      default: function _default() {
-        return App.config.basket.itemData;
-      }
     }
   },
   computed: _objectSpread({
@@ -289,10 +283,7 @@ var render = function() {
                 _c("basket-list", {
                   staticClass:
                     "item-list d-flex flex-fill flex-nowrap flex-column overflow-auto px-3",
-                  attrs: {
-                    "is-preview": true,
-                    "basket-details-data": _vm.basketDetailsData
-                  },
+                  attrs: { "is-preview": true },
                   scopedSlots: _vm._u(
                     [
                       {
