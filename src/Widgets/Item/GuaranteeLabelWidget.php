@@ -41,11 +41,6 @@ class GuaranteeLabelWidget extends BaseWidget
 
         $settingsFactory->createCustomClass();
 
-        $settingsFactory->createText("guaranteeValue")
-            ->withDefaultValue("2")
-            ->withName("Widget.guaranteeLabelValueLabel")
-            ->withTooltip("Widget.guaranteeLabelValueTooltip");
-
         $settingsFactory->createSpacing();
 
         return $settingsFactory->toArray();
