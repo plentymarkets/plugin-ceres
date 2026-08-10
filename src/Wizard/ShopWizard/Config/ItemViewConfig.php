@@ -39,6 +39,7 @@ class ItemViewConfig
         "basketItemDescriptionLong"  => "basket.item.description_long",
         "basketItemAvailability"     => "basket.item.availability",
         "basketItemCustomNumber"     => "basket.item.customNumber",
+        "basketItemGuaranteeLabel"   => "basket.item.guaranteeLabel",
     ];
 
     private static $cartItemPreviewData = [

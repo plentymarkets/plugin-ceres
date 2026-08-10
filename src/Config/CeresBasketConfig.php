@@ -80,13 +80,15 @@ class CeresBasketConfig extends PluginConfig
                 'basket.item.description_short',
                 'basket.item.description_long',
                 'basket.item.availability',
-                'basket.item.customNumber'
+                'basket.item.customNumber',
+                'basket.item.guaranteeLabel'
             ],
             [
                 'basket.item.item_id',
                 'basket.item.description_short',
                 'basket.item.availability',
-                'basket.item.customNumber'
+                'basket.item.customNumber',
+                'basket.item.guaranteeLabel'
             ]
         );
 

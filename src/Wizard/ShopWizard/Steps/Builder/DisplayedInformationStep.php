@@ -241,6 +241,7 @@ class DisplayedInformationStep extends Step
                         $cartItemOptions[1]['value'],
                         $cartItemOptions[3]['value'],
                         $cartItemOptions[4]['value'],
+                        $cartItemOptions[5]['value'],
                     ],
                     "options" => [
                         "name" => "Wizard.displayShoppingCartInfo",
