@@ -153,14 +153,14 @@
 
         <div class="guarantee-label-container" v-if="isGuaranteeLabelVisible">
             <button type="button" class="guarantee-badge-toggle btn-collapse p-0 border-0 bg-transparent"
-                    :class="{ collapsed: !showGuaranteeLabel }"
-                    @click="showGuaranteeLabel = !showGuaranteeLabel"
-                    :aria-expanded="showGuaranteeLabel.toString()"
+                    :class="{ collapsed: !guaranteeLabelExpanded }"
+                    @click="guaranteeLabelExpanded = !guaranteeLabelExpanded"
+                    :aria-expanded="guaranteeLabelExpanded.toString()"
                     :aria-label="$translate('Ceres::Widget.guaranteeLabelBadgeAlt')">
                 <guarantee-badge :guarantee="guarantee"></guarantee-badge>
             </button>
 
-            <div class="guarantee-label-collapse" v-if="showGuaranteeLabel">
+            <div class="guarantee-label-collapse" v-if="guaranteeLabelExpanded">
                 <guarantee-label-full
                     :guarantee="guarantee"
                     :brand="basketItem.variation.data.item.manufacturer.name"
@@ -219,7 +219,7 @@ export default {
             waitingForDelete: false,
             itemCondition: "",
             showMoreInformation: false,
-            showGuaranteeLabel: false,
+            guaranteeLabelExpanded: false,
             // placeholder until a real guarantee duration is available on the basket item data
             guarantee: "2"
         };
@@ -229,7 +229,8 @@ export default {
     {
         isGuaranteeLabelVisible()
         {
-            return !!(this.basketItem.variation.data.item.manufacturer.name && this.basketItem.variation.data.variation.model);
+            return this.isDataFieldVisible("basket.item.guaranteeLabel") &&
+                !!(this.basketItem.variation.data.item.manufacturer.name && this.basketItem.variation.data.variation.model);
         },
 
         image()

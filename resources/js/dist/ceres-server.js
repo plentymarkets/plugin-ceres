@@ -2043,14 +2043,14 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
       waitingForDelete: false,
       itemCondition: "",
       showMoreInformation: false,
-      showGuaranteeLabel: false,
+      guaranteeLabelExpanded: false,
       // placeholder until a real guarantee duration is available on the basket item data
       guarantee: "2"
     };
   },
   computed: _objectSpread({
     isGuaranteeLabelVisible: function isGuaranteeLabelVisible() {
-      return !!(this.basketItem.variation.data.item.manufacturer.name && this.basketItem.variation.data.variation.model);
+      return this.isDataFieldVisible("basket.item.guaranteeLabel") && !!(this.basketItem.variation.data.item.manufacturer.name && this.basketItem.variation.data.variation.model);
     },
     image: function image() {
       var itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
@@ -44934,7 +44934,7 @@ var render = function() {
                 '<button type="button"' +
                   _vm._ssrAttr(
                     "aria-expanded",
-                    _vm.showGuaranteeLabel.toString()
+                    _vm.guaranteeLabelExpanded.toString()
                   ) +
                   _vm._ssrAttr(
                     "aria-label",
@@ -44942,7 +44942,7 @@ var render = function() {
                   ) +
                   _vm._ssrClass(
                     "guarantee-badge-toggle btn-collapse p-0 border-0 bg-transparent",
-                    { collapsed: !_vm.showGuaranteeLabel }
+                    { collapsed: !_vm.guaranteeLabelExpanded }
                   ) +
                   ">",
                 "</button>",
@@ -44952,7 +44952,7 @@ var render = function() {
                 1
               ),
               _vm._ssrNode(" "),
-              _vm.showGuaranteeLabel
+              _vm.guaranteeLabelExpanded
                 ? _vm._ssrNode(
                     '<div class="guarantee-label-collapse">',
                     "</div>",

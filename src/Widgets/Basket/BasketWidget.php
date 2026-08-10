@@ -44,7 +44,7 @@ class BasketWidget extends BaseWidget
 
         $settingsFactory->createCheckboxGroup("basketDetailsData")
             ->withName("Widget.basketDetailsDataLabel")
-            ->withDefaultValue(["basket.item.availability"])
+            ->withDefaultValue(["basket.item.availability", "basket.item.guaranteeLabel"])
             ->withCheckboxValues(
                 ValueListFactory::make()
                     ->addEntry("basket.item.item_id", "Widget.basketDetailsDataItemId")
@@ -52,6 +52,7 @@ class BasketWidget extends BaseWidget
                     ->addEntry("basket.item.availability", "Widget.basketDetailsDataAvailability")
                     ->addEntry("basket.item.description_long", "Widget.basketDetailsDataDescriptionLong")
                     ->addEntry("basket.item.description_short", "Widget.basketDetailsDataDescriptionShort")
+                    ->addEntry("basket.item.guaranteeLabel", "Widget.basketDetailsDataGuaranteeLabel")
                     ->toArray()
             );
 

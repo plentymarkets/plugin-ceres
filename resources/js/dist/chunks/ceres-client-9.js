@@ -374,14 +374,14 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
       waitingForDelete: false,
       itemCondition: "",
       showMoreInformation: false,
-      showGuaranteeLabel: false,
+      guaranteeLabelExpanded: false,
       // placeholder until a real guarantee duration is available on the basket item data
       guarantee: "2"
     };
   },
   computed: _objectSpread({
     isGuaranteeLabelVisible: function isGuaranteeLabelVisible() {
-      return !!(this.basketItem.variation.data.item.manufacturer.name && this.basketItem.variation.data.variation.model);
+      return this.isDataFieldVisible("basket.item.guaranteeLabel") && !!(this.basketItem.variation.data.item.manufacturer.name && this.basketItem.variation.data.variation.model);
     },
     image: function image() {
       var itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");
@@ -1205,17 +1205,17 @@ var render = function() {
               {
                 staticClass:
                   "guarantee-badge-toggle btn-collapse p-0 border-0 bg-transparent",
-                class: { collapsed: !_vm.showGuaranteeLabel },
+                class: { collapsed: !_vm.guaranteeLabelExpanded },
                 attrs: {
                   type: "button",
-                  "aria-expanded": _vm.showGuaranteeLabel.toString(),
+                  "aria-expanded": _vm.guaranteeLabelExpanded.toString(),
                   "aria-label": _vm.$translate(
                     "Ceres::Widget.guaranteeLabelBadgeAlt"
                   )
                 },
                 on: {
                   click: function($event) {
-                    _vm.showGuaranteeLabel = !_vm.showGuaranteeLabel
+                    _vm.guaranteeLabelExpanded = !_vm.guaranteeLabelExpanded
                   }
                 }
               },
@@ -1223,7 +1223,7 @@ var render = function() {
               1
             ),
             _vm._v(" "),
-            _vm.showGuaranteeLabel
+            _vm.guaranteeLabelExpanded
               ? _c(
                   "div",
                   { staticClass: "guarantee-label-collapse" },
