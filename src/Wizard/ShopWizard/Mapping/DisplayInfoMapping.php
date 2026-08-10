@@ -123,6 +123,12 @@ class DisplayInfoMapping
             "global"   => false,
             "optional" => true,
         ],
+        "displayInfo_previewShowGuaranteeLabel" => [
+            "field"    => "basket.preview_show_guarantee_label",
+            "type"     => "boolean",
+            "global"   => false,
+            "optional" => true,
+        ],
     ];
 
     /**

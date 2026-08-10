@@ -56,6 +56,11 @@ class CeresBasketConfig extends PluginConfig
     public $showShippingCountrySelect;
 
     /**
+     * @var boolean $previewShowGuaranteeLabel Defines if the guarantee label is shown in the basket preview.
+     */
+    public $previewShowGuaranteeLabel;
+
+    /**
      * @var mixed $splitBundles No usage.
      */
     public $splitBundles;
@@ -128,6 +133,8 @@ class CeresBasketConfig extends PluginConfig
         $this->previewType = $this->getTextValue('basket.preview_type', 'right');
 
         $this->showShippingCountrySelect = $this->getBooleanValue('basket.show_shipping_country_select', true);
+
+        $this->previewShowGuaranteeLabel = $this->getBooleanValue('basket.preview_show_guarantee_label', true);
 
         $this->splitBundles = $this->getTextValue('basket.split_bundles', 'onlyBundleItem');
     }

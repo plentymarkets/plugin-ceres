@@ -291,6 +291,13 @@ class DisplayedInformationStep extends Step
                     "options" => [
                         "name" => "Wizard.showShippingCountry",
                     ]
+                ],
+                "displayInfo_previewShowGuaranteeLabel" => [
+                    "type" => "checkbox",
+                    "defaultValue" => true,
+                    "options" => [
+                        "name" => "Wizard.previewShowGuaranteeLabel",
+                    ]
                 ]
             ]
         ];

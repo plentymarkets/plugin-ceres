@@ -1567,6 +1567,14 @@
                     "options": {
                         "defaultValue": "true"
                     }
+                },
+                "basket.preview_show_guarantee_label": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.basketPreviewShowGuaranteeLabel",
+                    "options": {
+                        "defaultValue": "true"
+                    }
                 }
             }
         },

@@ -381,6 +381,10 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
   },
   computed: _objectSpread({
     isGuaranteeLabelVisible: function isGuaranteeLabelVisible() {
+      if (this.isPreview && !App.config.basket.previewShowGuaranteeLabel) {
+        return false;
+      }
+
       return this.isDataFieldVisible("basket.item.guaranteeLabel") && !!(this.basketItem.variation.data.item.manufacturer.name && this.basketItem.variation.data.variation.model);
     },
     image: function image() {

@@ -945,6 +945,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       default: function _default() {
         return ["basketValueNet", "basketValueGross", "rebate", "shippingCostsNet", "shippingCostsGross", "promotionCoupon", "totalSumNet", "vats", "additionalCosts", "totalSumGross", "salesCoupon", "openAmount", "subAmount"];
       }
+    },
+    basketDetailsData: {
+      type: Array,
+      default: function _default() {
+        return App.config.basket.itemData;
+      }
     }
   },
   computed: _objectSpread({
@@ -2050,6 +2056,10 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
   },
   computed: _objectSpread({
     isGuaranteeLabelVisible: function isGuaranteeLabelVisible() {
+      if (this.isPreview && !App.config.basket.previewShowGuaranteeLabel) {
+        return false;
+      }
+
       return this.isDataFieldVisible("basket.item.guaranteeLabel") && !!(this.basketItem.variation.data.item.manufacturer.name && this.basketItem.variation.data.variation.model);
     },
     image: function image() {
@@ -43417,7 +43427,10 @@ var render = function() {
                 _c("basket-list", {
                   staticClass:
                     "item-list d-flex flex-fill flex-nowrap flex-column overflow-auto px-3",
-                  attrs: { "is-preview": true },
+                  attrs: {
+                    "is-preview": true,
+                    "basket-details-data": _vm.basketDetailsData
+                  },
                   scopedSlots: _vm._u(
                     [
                       {

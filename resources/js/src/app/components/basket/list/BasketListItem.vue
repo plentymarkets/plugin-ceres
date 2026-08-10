@@ -229,6 +229,11 @@ export default {
     {
         isGuaranteeLabelVisible()
         {
+            if (this.isPreview && !App.config.basket.previewShowGuaranteeLabel)
+            {
+                return false;
+            }
+
             return this.isDataFieldVisible("basket.item.guaranteeLabel") &&
                 !!(this.basketItem.variation.data.item.manufacturer.name && this.basketItem.variation.data.variation.model);
         },
