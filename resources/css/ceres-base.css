@@ -17570,7 +17570,7 @@ header .widget {
 }
 .widget-guarantee-label .guarantee-badge-image,
 .guarantee-label-container .guarantee-badge-image {
-  width: 100px;
+  width: 200px;
   max-width: 100%;
 }
 .widget-guarantee-label .guarantee-badge-image .gtb-cls-1,
