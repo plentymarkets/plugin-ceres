@@ -17558,6 +17558,13 @@ header .widget {
   margin-top: 10px;
 }
 
+.basket-list-item .guarantee-label-container {
+  text-align: right;
+}
+.basket-list-item .guarantee-label-container .guarantee-label-collapse {
+  margin-left: auto;
+}
+
 .widget-guarantee-label .guarantee-badge-toggle,
 .guarantee-label-container .guarantee-badge-toggle {
   display: inline-block;

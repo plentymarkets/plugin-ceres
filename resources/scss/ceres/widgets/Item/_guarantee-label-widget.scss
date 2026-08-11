@@ -7,6 +7,14 @@
     margin-top: 10px;
 }
 
+.basket-list-item .guarantee-label-container {
+    text-align: right;
+
+    .guarantee-label-collapse {
+        margin-left: auto;
+    }
+}
+
 .widget-guarantee-label,
 .guarantee-label-container {
     .guarantee-badge-toggle {
