@@ -10,10 +10,27 @@
 .widget-guarantee-label,
 .guarantee-label-container {
     .guarantee-badge-toggle {
+        display: inline-block;
+        width: auto;
         cursor: pointer;
+
+        &::before,
+        &::after {
+            content: none;
+        }
+    }
+
+    .guarantee-label-collapse {
+        max-width: 280px;
+        padding: 15px;
+        margin-top: 10px;
+        background-color: $white;
+        border: 1px solid $gray-300;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
     }
 
     .guarantee-badge-image {
+        width: 100px;
         max-width: 100%;
 
         .gtb-cls-1 {
