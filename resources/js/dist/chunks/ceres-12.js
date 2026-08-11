@@ -325,6 +325,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -363,6 +374,7 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
       waitingForDelete: false,
       itemCondition: "",
       showMoreInformation: false,
+      guaranteeLabelExpanded: false,
       // placeholder until a real guarantee duration is available on the basket item data
       guarantee: "2"
     };
@@ -1191,13 +1203,48 @@ var render = function() {
       ),
       _vm._v(" "),
       _vm.isGuaranteeLabelVisible
-        ? _c("guarantee-label", {
-            attrs: {
-              guarantee: _vm.guarantee,
-              brand: _vm.basketItem.variation.data.item.manufacturer.name,
-              model: _vm.basketItem.variation.data.variation.model
-            }
-          })
+        ? _c("div", { staticClass: "guarantee-label-container" }, [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "guarantee-badge-toggle btn-collapse p-0 border-0 bg-transparent",
+                class: { collapsed: !_vm.guaranteeLabelExpanded },
+                attrs: {
+                  type: "button",
+                  "aria-expanded": _vm.guaranteeLabelExpanded.toString(),
+                  "aria-label": _vm.$translate(
+                    "Ceres::Widget.guaranteeLabelBadgeAlt"
+                  )
+                },
+                on: {
+                  click: function($event) {
+                    _vm.guaranteeLabelExpanded = !_vm.guaranteeLabelExpanded
+                  }
+                }
+              },
+              [_c("guarantee-badge", { attrs: { guarantee: _vm.guarantee } })],
+              1
+            ),
+            _vm._v(" "),
+            _vm.guaranteeLabelExpanded
+              ? _c(
+                  "div",
+                  { staticClass: "guarantee-label-collapse" },
+                  [
+                    _c("guarantee-label-full", {
+                      attrs: {
+                        guarantee: _vm.guarantee,
+                        brand:
+                          _vm.basketItem.variation.data.item.manufacturer.name,
+                        model: _vm.basketItem.variation.data.variation.model
+                      }
+                    })
+                  ],
+                  1
+                )
+              : _vm._e()
+          ])
         : _vm._e(),
       _vm._v(" "),
       _vm._t("after-basket-item")

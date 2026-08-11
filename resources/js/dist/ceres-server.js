@@ -2000,6 +2000,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2038,6 +2049,7 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
       waitingForDelete: false,
       itemCondition: "",
       showMoreInformation: false,
+      guaranteeLabelExpanded: false,
       // placeholder until a real guarantee duration is available on the basket item data
       guarantee: "2"
     };
@@ -7327,62 +7339,6 @@ __webpack_require__.r(__webpack_exports__);
     guarantee: {
       type: [String, Number],
       default: "XX"
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/GuaranteeLabel.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/item/GuaranteeLabel.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.number.constructor.js */ "./node_modules/core-js/modules/es.number.constructor.js");
-/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__);
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: "guarantee-label",
-  props: {
-    guarantee: {
-      type: [String, Number],
-      default: "XX"
-    },
-    brand: {
-      type: String,
-      default: ""
-    },
-    model: {
-      type: String,
-      default: ""
     }
   }
 });
@@ -44983,13 +44939,53 @@ var render = function() {
       ),
       _vm._ssrNode(" "),
       _vm.isGuaranteeLabelVisible
-        ? _c("guarantee-label", {
-            attrs: {
-              guarantee: _vm.guarantee,
-              brand: _vm.basketItem.variation.data.item.manufacturer.name,
-              model: _vm.basketItem.variation.data.variation.model
-            }
-          })
+        ? _vm._ssrNode(
+            '<div class="guarantee-label-container">',
+            "</div>",
+            [
+              _vm._ssrNode(
+                '<button type="button"' +
+                  _vm._ssrAttr(
+                    "aria-expanded",
+                    _vm.guaranteeLabelExpanded.toString()
+                  ) +
+                  _vm._ssrAttr(
+                    "aria-label",
+                    _vm.$translate("Ceres::Widget.guaranteeLabelBadgeAlt")
+                  ) +
+                  _vm._ssrClass(
+                    "guarantee-badge-toggle btn-collapse p-0 border-0 bg-transparent",
+                    { collapsed: !_vm.guaranteeLabelExpanded }
+                  ) +
+                  ">",
+                "</button>",
+                [
+                  _c("guarantee-badge", { attrs: { guarantee: _vm.guarantee } })
+                ],
+                1
+              ),
+              _vm._ssrNode(" "),
+              _vm.guaranteeLabelExpanded
+                ? _vm._ssrNode(
+                    '<div class="guarantee-label-collapse">',
+                    "</div>",
+                    [
+                      _c("guarantee-label-full", {
+                        attrs: {
+                          guarantee: _vm.guarantee,
+                          brand:
+                            _vm.basketItem.variation.data.item.manufacturer
+                              .name,
+                          model: _vm.basketItem.variation.data.variation.model
+                        }
+                      })
+                    ],
+                    1
+                  )
+                : _vm._e()
+            ],
+            2
+          )
         : _vm._e(),
       _vm._ssrNode(" "),
       _vm._t("after-basket-item")
@@ -51499,98 +51495,6 @@ var render = function() {
           '</tspan></text> <g><rect x="70.87" y="34.81" width="13.7" height="11.78" rx="1.66" ry="1.66" class="gtb-cls-5"></rect> <rect x="74.42" y="33.22" width="1.62" height="3.22" rx=".54" ry=".54" class="gtb-cls-3"></rect> <rect x="79.38" y="33.22" width="1.62" height="3.22" rx=".54" ry=".54" class="gtb-cls-3"></rect> <line x1="70.87" y1="38.02" x2="84.56" y2="38.02" class="gtb-cls-5"></line> <g><path d="M73.71,44.59c-.33,0-.62-.06-.88-.17-.25-.11-.45-.27-.6-.47-.15-.2-.22-.43-.22-.69h1.05c0,.09.03.18.09.25.06.07.13.13.23.17.1.04.21.06.33.06s.23-.02.33-.07.17-.11.22-.18c.05-.08.08-.17.08-.27,0-.1-.03-.19-.09-.27-.06-.08-.14-.14-.25-.18s-.24-.07-.38-.07h-.42v-.74h.42c.13,0,.24-.02.34-.06s.17-.1.23-.18.08-.17.08-.27c0-.1-.02-.18-.07-.26s-.11-.13-.2-.17c-.08-.04-.18-.06-.29-.06-.12,0-.22.02-.31.06-.09.04-.17.1-.22.17-.06.07-.08.16-.09.26h-1c0-.26.07-.49.22-.68.14-.2.33-.35.58-.46.24-.11.52-.17.83-.17s.58.05.82.16.42.26.55.44c.13.19.2.4.2.63,0,.24-.08.45-.24.6-.16.16-.37.26-.62.29v.03c.34.04.59.15.76.33s.26.4.25.67c0,.25-.07.47-.22.67-.15.19-.35.35-.61.46-.26.11-.56.17-.9.17Z" class="gtb-cls-2"></path> <path d="M77.77,44.59c-.24,0-.46-.04-.68-.12-.22-.08-.41-.2-.58-.37s-.3-.39-.4-.66c-.1-.27-.15-.61-.14-1,0-.36.04-.68.13-.96.09-.28.21-.53.37-.72.16-.2.35-.35.58-.46.22-.1.47-.16.75-.16.3,0,.57.06.8.18s.42.28.56.47c.14.2.22.42.25.66h-1.03c-.03-.14-.1-.24-.2-.31-.1-.07-.23-.11-.37-.11-.27,0-.46.11-.59.34-.13.23-.2.54-.2.92h.03c.06-.13.14-.24.26-.33s.24-.16.38-.21c.14-.05.3-.08.46-.08.26,0,.49.06.69.18.2.12.35.28.47.49s.17.45.17.71c0,.3-.07.57-.21.8s-.34.41-.59.54c-.25.13-.54.19-.87.19ZM77.76,43.78c.13,0,.24-.03.34-.09s.18-.14.24-.25c.06-.1.09-.22.08-.35,0-.13-.03-.25-.08-.35s-.14-.18-.24-.25-.22-.09-.35-.09c-.09,0-.18.02-.26.05-.08.03-.15.08-.21.15s-.11.14-.14.22c-.03.08-.05.17-.05.27,0,.13.03.24.09.35.06.1.14.19.24.25.1.06.21.09.34.09Z" class="gtb-cls-2"></path> <path d="M81.7,44.59c-.32,0-.6-.06-.84-.17-.25-.11-.44-.27-.58-.47-.14-.2-.22-.43-.22-.69h1.02c0,.16.07.29.19.38s.27.14.43.14c.13,0,.25-.03.35-.09.1-.06.18-.14.24-.24s.09-.23.08-.36c0-.14-.03-.26-.09-.37-.06-.1-.14-.19-.24-.24-.1-.06-.22-.09-.35-.09-.13,0-.24.03-.36.08-.11.06-.2.13-.25.23l-.92-.17.19-2.34h2.78v.84h-1.92l-.1,1.02h.03c.07-.12.19-.22.35-.3s.34-.12.55-.12c.26,0,.49.06.69.18.2.12.36.29.48.5s.18.46.18.73c0,.3-.07.56-.21.79-.14.23-.34.41-.59.54s-.55.2-.88.2Z" class="gtb-cls-2"></path></g></g></g>'
       )
     ]
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/GuaranteeLabel.vue?vue&type=template&id=69ff2db4&":
-/*!******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/item/GuaranteeLabel.vue?vue&type=template&id=69ff2db4& ***!
-  \******************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "guarantee-label-container" },
-    [
-      _vm._ssrNode(
-        '<button type="button" data-toggle="modal"' +
-          _vm._ssrAttr("data-target", "#guarantee-label-modal-" + _vm._uid) +
-          _vm._ssrAttr(
-            "aria-label",
-            _vm.$translate("Ceres::Widget.guaranteeLabelBadgeAlt")
-          ) +
-          ' class="guarantee-badge-toggle p-0 border-0 bg-transparent">',
-        "</button>",
-        [_c("guarantee-badge", { attrs: { guarantee: _vm.guarantee } })],
-        1
-      ),
-      _vm._ssrNode(" "),
-      _vm._ssrNode(
-        "<div" +
-          _vm._ssrAttr("id", "guarantee-label-modal-" + _vm._uid) +
-          ' tabindex="-1" role="dialog" aria-labelledby="guarantee-label-modal-title" aria-modal="true" class="modal fade guarantee-label-modal">',
-        "</div>",
-        [
-          _vm._ssrNode(
-            '<div class="modal-dialog modal-dialog-centered">',
-            "</div>",
-            [
-              _vm._ssrNode(
-                '<div class="modal-content">',
-                "</div>",
-                [
-                  _vm._ssrNode(
-                    '<div class="modal-header"><h5 id="guarantee-label-modal-title" class="modal-title">' +
-                      _vm._ssrEscape(
-                        _vm._s(
-                          _vm.$translate("Ceres::Widget.guaranteeLabelFullAlt")
-                        )
-                      ) +
-                      '</h5> <button type="button" data-dismiss="modal" aria-hidden="true"' +
-                      _vm._ssrAttr(
-                        "aria-label",
-                        _vm.$translate("Ceres::Template.closeIcon")
-                      ) +
-                      ' class="close">×</button></div> '
-                  ),
-                  _vm._ssrNode(
-                    '<div class="modal-body">',
-                    "</div>",
-                    [
-                      _c("guarantee-label-full", {
-                        attrs: {
-                          guarantee: _vm.guarantee,
-                          brand: _vm.brand,
-                          model: _vm.model
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                2
-              )
-            ]
-          )
-        ]
-      )
-    ],
-    2
   )
 }
 var staticRenderFns = []
@@ -78617,9 +78521,6 @@ function beforeCreate(context) {
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("guarantee-label-full", function () {
     return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./app/components/item/GuaranteeLabelFull.vue */ "./resources/js/src/app/components/item/GuaranteeLabelFull.vue"));
   });
-  vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("guarantee-label", function () {
-    return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./app/components/item/GuaranteeLabel.vue */ "./resources/js/src/app/components/item/GuaranteeLabel.vue"));
-  });
   vue__WEBPACK_IMPORTED_MODULE_11___default.a.component("quantity-input", function () {
     return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./app/components/item/QuantityInput.vue */ "./resources/js/src/app/components/item/QuantityInput.vue"));
   });
@@ -81299,73 +81200,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GuaranteeBadge_vue_vue_type_template_id_6d279655___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GuaranteeBadge_vue_vue_type_template_id_6d279655___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/item/GuaranteeLabel.vue":
-/*!*****************************************************************!*\
-  !*** ./resources/js/src/app/components/item/GuaranteeLabel.vue ***!
-  \*****************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _GuaranteeLabel_vue_vue_type_template_id_69ff2db4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GuaranteeLabel.vue?vue&type=template&id=69ff2db4& */ "./resources/js/src/app/components/item/GuaranteeLabel.vue?vue&type=template&id=69ff2db4&");
-/* harmony import */ var _GuaranteeLabel_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GuaranteeLabel.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/item/GuaranteeLabel.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _GuaranteeLabel_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _GuaranteeLabel_vue_vue_type_template_id_69ff2db4___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _GuaranteeLabel_vue_vue_type_template_id_69ff2db4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  "cff5624a"
-  
-)
-
-component.options.__file = "resources/js/src/app/components/item/GuaranteeLabel.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/item/GuaranteeLabel.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/src/app/components/item/GuaranteeLabel.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GuaranteeLabel_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./GuaranteeLabel.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/GuaranteeLabel.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GuaranteeLabel_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/src/app/components/item/GuaranteeLabel.vue?vue&type=template&id=69ff2db4&":
-/*!************************************************************************************************!*\
-  !*** ./resources/js/src/app/components/item/GuaranteeLabel.vue?vue&type=template&id=69ff2db4& ***!
-  \************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GuaranteeLabel_vue_vue_type_template_id_69ff2db4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./GuaranteeLabel.vue?vue&type=template&id=69ff2db4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/GuaranteeLabel.vue?vue&type=template&id=69ff2db4&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GuaranteeLabel_vue_vue_type_template_id_69ff2db4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GuaranteeLabel_vue_vue_type_template_id_69ff2db4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -12,11 +12,22 @@
 {% if isPreview %}
     {% set brandValue = trans("Ceres::Widget.guaranteeLabelSampleBrand") %}
     {% set modelValue = trans("Ceres::Widget.guaranteeLabelSampleModel") %}
+    {% set collapseId = "guarantee-label-collapse-" ~ uid() %}
 
     {% if brandValue | length > 0 and modelValue | length > 0 %}
         <div class="widget widget-guarantee-label{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
             {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-            <guarantee-label guarantee="{{ guaranteeValue }}" brand="{{ brandValue }}" model="{{ modelValue }}"></guarantee-label>
+
+            <button type="button" class="guarantee-badge-toggle btn-collapse p-0 border-0 bg-transparent collapsed"
+                    data-toggle="collapse" data-target="#{{ collapseId }}"
+                    aria-expanded="false" aria-controls="{{ collapseId }}"
+                    aria-label="{{ trans("Ceres::Widget.guaranteeLabelBadgeAlt") }}">
+                <guarantee-badge guarantee="{{ guaranteeValue }}"></guarantee-badge>
+            </button>
+
+            <div id="{{ collapseId }}" class="collapse guarantee-label-collapse">
+                <guarantee-label-full guarantee="{{ guaranteeValue }}" brand="{{ brandValue }}" model="{{ modelValue }}"></guarantee-label-full>
+            </div>
         </div>
     {% endif %}
 {% else %}
@@ -25,11 +36,22 @@
     {{ Twig.set("itemData", "item.documents[0].data") }}
     {{ Twig.set("brandValue", "itemData.item.manufacturer.name | default('')") }}
     {{ Twig.set("modelValue", "itemData.variation.model | default('')") }}
+    {{ Twig.set("collapseId", "'guarantee-label-collapse-' ~ uid()") }}
 
     {{ Twig.if("brandValue | length > 0 and modelValue | length > 0") }}
         <div class="widget widget-guarantee-label{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
             {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-            <guarantee-label guarantee="{{ guaranteeValue }}" brand="{{ Twig.print("brandValue") }}" model="{{ Twig.print("modelValue") }}"></guarantee-label>
+
+            <button type="button" class="guarantee-badge-toggle btn-collapse p-0 border-0 bg-transparent collapsed"
+                    data-toggle="collapse" data-target="#{{ Twig.print("collapseId") }}"
+                    aria-expanded="false" aria-controls="{{ Twig.print("collapseId") }}"
+                    aria-label="{{ trans("Ceres::Widget.guaranteeLabelBadgeAlt") }}">
+                <guarantee-badge guarantee="{{ guaranteeValue }}"></guarantee-badge>
+            </button>
+
+            <div id="{{ Twig.print("collapseId") }}" class="collapse guarantee-label-collapse">
+                <guarantee-label-full guarantee="{{ guaranteeValue }}" brand="{{ Twig.print("brandValue") }}" model="{{ Twig.print("modelValue") }}"></guarantee-label-full>
+            </div>
         </div>
     {{ Twig.endif() }}
 {% endif %}

@@ -132,7 +132,6 @@ export function beforeCreate(context)
     Vue.component("item-bundle", () => import("./app/components/item/ItemBundle.vue"));
     Vue.component("guarantee-badge", () => import("./app/components/item/GuaranteeBadge.vue"));
     Vue.component("guarantee-label-full", () => import("./app/components/item/GuaranteeLabelFull.vue"));
-    Vue.component("guarantee-label", () => import("./app/components/item/GuaranteeLabel.vue"));
     Vue.component("quantity-input", () => import("./app/components/item/QuantityInput.vue"));
     Vue.component("tag-list", () => import("./app/components/item/TagList.vue"));
     Vue.component("category-item", CategoryItem);
