@@ -151,23 +151,12 @@
             </div>
         </div>
 
-        <div class="guarantee-label-container" v-if="isGuaranteeLabelVisible">
-            <button type="button" class="guarantee-badge-toggle btn-collapse p-0 border-0 bg-transparent"
-                    :class="{ collapsed: !guaranteeLabelExpanded }"
-                    @click="guaranteeLabelExpanded = !guaranteeLabelExpanded"
-                    :aria-expanded="guaranteeLabelExpanded.toString()"
-                    :aria-label="$translate('Ceres::Widget.guaranteeLabelBadgeAlt')">
-                <guarantee-badge :guarantee="guarantee"></guarantee-badge>
-            </button>
-
-            <div class="guarantee-label-collapse" v-if="guaranteeLabelExpanded">
-                <guarantee-label-full
-                    :guarantee="guarantee"
-                    :brand="basketItem.variation.data.item.manufacturer.name"
-                    :model="basketItem.variation.data.variation.model">
-                </guarantee-label-full>
-            </div>
-        </div>
+        <guarantee-label
+            v-if="isGuaranteeLabelVisible"
+            :guarantee="guarantee"
+            :brand="basketItem.variation.data.item.manufacturer.name"
+            :model="basketItem.variation.data.variation.model">
+        </guarantee-label>
         <slot name="after-basket-item"></slot>
     </div>
 </template>
@@ -219,7 +208,6 @@ export default {
             waitingForDelete: false,
             itemCondition: "",
             showMoreInformation: false,
-            guaranteeLabelExpanded: false,
             // placeholder until a real guarantee duration is available on the basket item data
             guarantee: "2"
         };

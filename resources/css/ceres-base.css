@@ -17550,10 +17550,13 @@ header .widget {
 
 .widget-guarantee-label .guarantee-badge-toggle,
 .guarantee-label-container .guarantee-badge-toggle {
+  display: inline-block;
+  width: auto;
   cursor: pointer;
 }
 .widget-guarantee-label .guarantee-badge-image,
 .guarantee-label-container .guarantee-badge-image {
+  width: 100px;
   max-width: 100%;
 }
 .widget-guarantee-label .guarantee-badge-image .gtb-cls-1,
@@ -17718,6 +17721,13 @@ header .widget {
 .widget-guarantee-label .guarantee-label-full-image .gtl-cls-22,
 .guarantee-label-container .guarantee-label-full-image .gtl-cls-22 {
   letter-spacing: 0;
+}
+
+.guarantee-label-modal .modal-body {
+  text-align: center;
+}
+.guarantee-label-modal .guarantee-label-full-image {
+  width: 260px;
 }
 
 .widget-wish-list .category-list-view-port button,

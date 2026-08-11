@@ -14772,10 +14772,13 @@ header .widget {
 .widget-guarantee-label,
 .guarantee-label-container {
     .guarantee-badge-toggle {
+        display: inline-block;
+        width: auto;
         cursor: pointer;
     }
 
     .guarantee-badge-image {
+        width: 100px;
         max-width: 100%;
 
         .gtb-cls-1 {
@@ -14928,6 +14931,16 @@ header .widget {
         .gtl-cls-22 {
             letter-spacing: 0;
         }
+    }
+}
+
+.guarantee-label-modal {
+    .modal-body {
+        text-align: center;
+    }
+
+    .guarantee-label-full-image {
+        width: 260px;
     }
 }
 
