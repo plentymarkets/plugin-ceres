@@ -28,6 +28,11 @@ class CeresCheckoutConfig extends PluginConfig
     public $alreadyPaidIconUrl;
 
     /**
+     * @var bool $showGuaranteeNotice Defines if the legal guarantee notice link is shown on the checkout page.
+     */
+    public $showGuaranteeNotice;
+
+    /**
      * @inheritDoc
      */
     protected function getPluginName() :string
@@ -42,5 +47,6 @@ class CeresCheckoutConfig extends PluginConfig
     {
         $this->showAllShippingProfiles = $this->getBooleanValue('checkout.show_all_shipping_profiles', false);
         $this->alreadyPaidIconUrl = $this->getTextValue('checkout.already_paid_icon_url', '');
+        $this->showGuaranteeNotice = $this->getBooleanValue('checkout.show_guarantee_notice', true);
     }
 }

@@ -3440,6 +3440,14 @@
                     "options": {
                         "defaultValue": ""
                     }
+                },
+                "checkout.show_guarantee_notice": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.checkoutShowGuaranteeNotice",
+                    "options": {
+                        "defaultValue": "true"
+                    }
                 }
             }
         },

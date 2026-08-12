@@ -5,6 +5,7 @@ import { mapState } from "vuex";
 import { ButtonSizePropertyMixin } from "../../mixins/buttonSizeProperty.mixin";
 
 const ApiService = require("../../services/ApiService");
+const ModalService = require("../../services/ModalService");
 const NotificationService = require("../../services/NotificationService");
 
 export default Vue.component("place-order", {
@@ -228,6 +229,11 @@ export default Vue.component("place-order", {
                 this.isInvalidShippingCountry = !validShippingCountry;
             }
 
+        },
+
+        showGuaranteeNoticeModal()
+        {
+            ModalService.findModal(this.$refs.guaranteeNoticeModal).show();
         }
     },
 
