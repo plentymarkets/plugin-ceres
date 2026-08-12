@@ -15861,13 +15861,14 @@ body.lb-disable-scrolling {
     line-height: 0;
     font-weight: normal;
     outline: none;
+    display: none;
 }
 
 .lightbox .lb-image {
     display: block;
     height: auto;
     max-width: inherit;
-    max-height: none;
+    max-height: inherit;
     border-radius: 3px;
 
     /* Image border */
@@ -15883,6 +15884,8 @@ body.lb-disable-scrolling {
     zoom: 1;
     width: 250px;
     height: 250px;
+    max-width: 92vw;
+    max-height: 90vh;
     margin: 0 auto;
     border-radius: 4px;
 
