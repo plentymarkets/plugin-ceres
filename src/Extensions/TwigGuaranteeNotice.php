@@ -24,12 +24,13 @@ class TwigGuaranteeNotice extends Twig_Extension
     ];
 
     /**
-     * @var array $availableLanguages Webshop language codes for which a translated asset exists.
-     * Any language not listed here falls back to the English asset.
+     * @var array $availableLanguages Webshop language codes for which a translated asset exists
+     * (excluding 'se'/'cz', which are handled via $localeOverrides). Any language not listed
+     * here, and not in $localeOverrides, falls back to the English asset.
      */
     private static $availableLanguages = [
-        'de', 'en', 'bg', 'fr', 'it', 'es', 'tr', 'nl', 'pl', 'pt',
-        'nn', 'ro', 'da', 'se', 'cz', 'ru', 'sk'
+        'bg', 'da', 'de', 'el', 'en', 'es', 'et', 'fi', 'fr', 'ga',
+        'hr', 'hu', 'it', 'lt', 'lv', 'mt', 'nl', 'pl', 'pt', 'ro', 'sk', 'sl'
     ];
 
     /**
