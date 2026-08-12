@@ -5,11 +5,12 @@
 ### TODO
 
 - Due to changes to the **Legal information** widget, ShopBuilder content must be updated in the **Shop » ShopBuilder** menu using the **Regenerate Content** button.
+- Due to the new **Guarantee notice** widget being added to the default checkout template, ShopBuilder content must be updated in the **Shop » ShopBuilder** menu using the **Regenerate Content** button to have it placed below the buy button automatically.
 
 ### Added
 
 - The option **Show contact** has been added to the legal information widget settings in ShopBuilder, allowing the contact link to be hidden independently of the other legal links.
-- A link to the legal guarantee notice has been added below the buy button on the checkout page, opening a modal with the shop language's statutory guarantee notice. It can be disabled via the new **Show legal guarantee notice link** setting under **Shop » Settings » Ceres » Checkout and My account**.
+- A new **Guarantee notice** widget has been added, showing a link below the buy button on the checkout page that opens a full-screen preview of the shop language's statutory guarantee notice. It can be freely repositioned in ShopBuilder and given its own appearance/color, independent of the buy button.
 
 ## v5.0.81 (2026-06-18) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.80...5.0.81" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 

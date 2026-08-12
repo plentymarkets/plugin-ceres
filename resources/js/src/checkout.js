@@ -5,6 +5,7 @@ import "./app/components/checkout/AcceptGtcCheck";
 import "./app/components/checkout/Checkout";
 import "./app/components/checkout/ContactWishInput";
 import "./app/components/checkout/CustomerSignInput";
+import "./app/components/checkout/GuaranteeNotice";
 import "./app/components/checkout/PaymentProviderSelect";
 import "./app/components/checkout/PlaceOrder";
 import "./app/components/checkout/ShippingPrivacyHintCheck";

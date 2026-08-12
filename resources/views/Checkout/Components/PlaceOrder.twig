@@ -17,16 +17,5 @@
                 {{ trans("Ceres::Template.checkoutBuyNow") }}
             </button>
         {% endif %}
-
-        {% if ceresConfig.checkout.showGuaranteeNotice %}
-            <div class="text-center mt-2">
-                <a
-                        href="{{ plugin_path('Ceres') }}/images/guarantee_notice/{{ guarantee_notice_svg_filename(lang) }}"
-                        data-lightbox="guarantee-notice"
-                        data-title="{{ trans("Ceres::Template.checkoutGuaranteeNoticeLink") }}">
-                    {{ trans("Ceres::Template.checkoutGuaranteeNoticeLink") }}
-                </a>
-            </div>
-        {% endif %}
     </div>
 </script>

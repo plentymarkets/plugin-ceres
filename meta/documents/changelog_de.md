@@ -2,9 +2,13 @@
 
 ## unreleased
 
+### TODO
+
+- Aufgrund des neuen Widgets **Garantiehinweis**, das dem Standard-Checkout-Template hinzugefügt wurde, müssen die ShopBuilder-Inhalte im Menü **Shop » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden, damit es automatisch unterhalb des Kaufen-Buttons platziert wird.
+
 ### Hinzugefügt
 
-- Auf der Checkout-Seite wurde unterhalb des Kaufen-Buttons ein Link zum Hinweis auf die gesetzlichen Garantieansprüche hinzugefügt, der ein Modal mit dem entsprechenden Hinweis in der Sprache des Shops öffnet. Der Link kann über die neue Einstellung **Hinweis zu gesetzlichen Garantieansprüchen auf der Checkout-Seite anzeigen** unter **Shop » Einstellungen » Ceres » Kaufabwicklung und Mein Konto** deaktiviert werden.
+- Ein neues Widget **Garantiehinweis** wurde hinzugefügt. Es zeigt unterhalb des Kaufen-Buttons auf der Checkout-Seite einen Link an, der eine Vollbildvorschau des gesetzlichen Garantiehinweises in der Sprache des Shops öffnet. Das Widget kann im ShopBuilder frei verschoben und unabhängig vom Kaufen-Button farblich angepasst werden.
 
 ## v5.0.81 (2026-06-18) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.80...5.0.81" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 

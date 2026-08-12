@@ -31,11 +31,6 @@ export default Vue.component("place-order", {
         {
             type: String,
             default: null
-        },
-        pluginPath:
-        {
-            type: String,
-            default: ""
         }
     },
 
@@ -102,10 +97,6 @@ export default Vue.component("place-order", {
     mounted()
     {
         this.checkDeliveryAddressError();
-        this.loadLightbox().catch(event =>
-        {
-            console.log("error while loading lightbox", event);
-        });
     },
 
     methods: {
@@ -237,32 +228,6 @@ export default Vue.component("place-order", {
                 this.isInvalidShippingCountry = !validShippingCountry;
             }
 
-        },
-
-        loadLightbox()
-        {
-            return new Promise((resolve, reject) =>
-            {
-                const script = document.querySelector("script#lightboxscript");
-
-                if (isDefined(script))
-                {
-                    resolve();
-                }
-                else
-                {
-                    const script = document.createElement("script");
-
-                    script.type = "text/javascript";
-                    script.id = "lightboxscript";
-                    script.src = `${ this.pluginPath }/js/dist/lightbox.min.js`;
-
-                    script.addEventListener("load", () => resolve(), false);
-                    script.addEventListener("error", event => reject(event), false);
-
-                    document.body.appendChild(script);
-                }
-            });
         }
     },
 
