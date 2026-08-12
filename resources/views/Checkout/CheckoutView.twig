@@ -238,7 +238,7 @@
 
                             {{ LayoutContainer.show("Ceres::Checkout.BeforePlaceOrder") }}
                             <place-order target-continue="{{ homepageURL }}{% if homepageURL | last != '/'%}/{% endif %}place-order{% if urls.appendTrailingSlash %}/{% endif %}{% if services.checkout.getReadOnlyCheckout() == 1 %}?readonlyCheckout=1{% endif %}" @payment-response="checkoutComp.showModal($event)"></place-order>
-                            <guarantee-notice plugin-path="{{ plugin_path('Ceres') }}"></guarantee-notice>
+                            <guarantee-notice></guarantee-notice>
                             {{ LayoutContainer.show("Ceres::Checkout.AfterPlaceOrder") }}
 
                             {% if checkout.readOnly %}

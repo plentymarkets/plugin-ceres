@@ -70581,60 +70581,14 @@ vue__WEBPACK_IMPORTED_MODULE_7___default.a.component("customer-sign-input", {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.promise.js */ "../../../node_modules/core-js/modules/es.promise.js");
-/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "../../../node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _helper_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../helper/utils */ "./resources/js/src/app/helper/utils.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "../../../node_modules/vue/dist/vue.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "../../../node_modules/vue/dist/vue.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_3___default.a.component("guarantee-notice", {
+/* harmony default export */ __webpack_exports__["default"] = (vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("guarantee-notice", {
   props: {
     template: {
       type: String,
       default: "#vue-guarantee-notice"
-    },
-    pluginPath: {
-      type: String,
-      default: ""
-    }
-  },
-  mounted: function mounted() {
-    this.loadLightbox().catch(function (event) {
-      console.log("error while loading lightbox", event);
-    });
-  },
-  methods: {
-    loadLightbox: function loadLightbox() {
-      var _this = this;
-
-      return new Promise(function (resolve, reject) {
-        var script = document.querySelector("script#lightboxscript");
-
-        if (Object(_helper_utils__WEBPACK_IMPORTED_MODULE_2__["isDefined"])(script)) {
-          resolve();
-        } else {
-          var _script = document.createElement("script");
-
-          _script.type = "text/javascript";
-          _script.id = "lightboxscript";
-          _script.src = "".concat(_this.pluginPath, "/js/dist/lightbox.min.js");
-
-          _script.addEventListener("load", function () {
-            return resolve();
-          }, false);
-
-          _script.addEventListener("error", function (event) {
-            return reject(event);
-          }, false);
-
-          document.body.appendChild(_script);
-        }
-      });
     }
   }
 }));

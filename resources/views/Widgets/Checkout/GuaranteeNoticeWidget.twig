@@ -12,5 +12,5 @@
 
 <div class="widget widget-guarantee-notice widget-{{ appearance | default("primary") }}{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    <guarantee-notice plugin-path="{{ Twig.print("plugin_path('Ceres')") }}"></guarantee-notice>
+    <guarantee-notice></guarantee-notice>
 </div>

@@ -1,9 +1,6 @@
 <script type="x/template" id="vue-guarantee-notice">
     <div class="text-center mt-2">
-        <a
-                href="{{ plugin_path('Ceres') }}/images/guarantee_notice/{{ guarantee_notice_svg_filename(lang) }}"
-                data-lightbox="guarantee-notice"
-                data-title="{{ trans("Ceres::Template.checkoutGuaranteeNoticeLink") }}">
+        <a href="#guarantee-notice-modal" data-toggle="modal">
             {{ trans("Ceres::Template.checkoutGuaranteeNoticeLink") }}
         </a>
     </div>
