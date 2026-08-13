@@ -16,6 +16,7 @@ use Ceres\Contexts\OrderReturnContext;
 use Ceres\Contexts\PasswordResetContext;
 use Ceres\Contexts\SingleItemContext;
 use Ceres\Contexts\TagSearchContext;
+use Ceres\Extensions\TwigGuaranteeNotice;
 use Ceres\Extensions\TwigItemDataField;
 use Ceres\Extensions\TwigJsonDataContainer;
 use Ceres\Extensions\TwigLayoutContainerInternal;
@@ -149,6 +150,7 @@ class TemplateServiceProvider extends ServiceProvider
         $twig->addExtension(TwigLayoutContainerInternal::class);
         $twig->addExtension(TwigJsonDataContainer::class);
         $twig->addExtension(TwigItemDataField::class);
+        $twig->addExtension(TwigGuaranteeNotice::class);
 
         $this->listenToIO(
             'tpl.*',

@@ -188,6 +188,24 @@
         </div>
     {% endif %}
     <!-- ./SHIPPINGCOSTS MODAL -->
+
+    <!-- GUARANTEE NOTICE MODAL -->
+    <div id="guarantee-notice-modal-wrapper">
+        <div class="modal fade" id="guarantee-notice-modal" tabindex="-1" role="dialog" aria-labelledby="guarantee-notice-modal-title" aria-modal="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 id="guarantee-notice-modal-title" class="modal-title">{{ trans("Ceres::Template.checkoutGuaranteeNoticeLink") }}</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="{{ trans("Ceres::Template.closeIcon") }}">&times;</button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <img src="{{ plugin_path('Ceres') }}/images/guarantee_notice/{{ guarantee_notice_svg_filename(lang) }}" class="img-fluid" alt="{{ trans("Ceres::Template.checkoutGuaranteeNoticeLink") }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ./GUARANTEE NOTICE MODAL -->
 </div>
 <!-- /SSR -->
 

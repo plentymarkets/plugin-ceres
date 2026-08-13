@@ -181,6 +181,7 @@ class DefaultCheckoutPreset implements ContentPreset
         $stickyContainer = $bgContainer->createChild('background', 'Ceres::StickyContainerWidget');
         $this->createBasketTotalsWidget($stickyContainer);
         $this->createPlaceOrderWidget($stickyContainer);
+        $this->createGuaranteeNoticeWidget($stickyContainer);
         $this->createCancelPaymentWidget($stickyContainer);
     }
 
@@ -263,6 +264,14 @@ class DefaultCheckoutPreset implements ContentPreset
     private function createPlaceOrderWidget($stickyContainer)
     {
         $stickyContainer->createChild('sticky', 'Ceres::PlaceOrderWidget');
+    }
+
+    /**
+     * @param PresetWidgetFactory $stickyContainer
+     */
+    private function createGuaranteeNoticeWidget($stickyContainer)
+    {
+        $stickyContainer->createChild('sticky', 'Ceres::GuaranteeNoticeWidget');
     }
 
     /**
