@@ -1,15 +1,15 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[25],{
 
-/***/ "../../../node_modules/babel-loader/lib/index.js!../../../node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** /Users/maximilianroell/workspace2/plugins/Ceres/node_modules/babel-loader/lib!/Users/maximilianroell/workspace2/plugins/Ceres/node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "../../../node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
 /* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_0__);
 
 //
@@ -49,10 +49,10 @@ var ADDRESS_EMAIL_TYPE_ID = 5;
 
 /***/ }),
 
-/***/ "../../../node_modules/vue-loader/lib/loaders/templateLoader.js?!../../../node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=template&id=2e21aa14&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** /Users/maximilianroell/workspace2/plugins/Ceres/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/maximilianroell/workspace2/plugins/Ceres/node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=template&id=2e21aa14& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=template&id=2e21aa14&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=template&id=2e21aa14& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -97,7 +97,7 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _MailChangedInfo_vue_vue_type_template_id_2e21aa14___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MailChangedInfo.vue?vue&type=template&id=2e21aa14& */ "./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=template&id=2e21aa14&");
 /* harmony import */ var _MailChangedInfo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MailChangedInfo.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -132,7 +132,7 @@ component.options.__file = "resources/js/src/app/components/basket/MailChangedIn
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_MailChangedInfo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../../../node_modules/babel-loader/lib!../../../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./MailChangedInfo.vue?vue&type=script&lang=js& */ "../../../node_modules/babel-loader/lib/index.js!../../../node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_MailChangedInfo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./MailChangedInfo.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_MailChangedInfo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
@@ -146,7 +146,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MailChangedInfo_vue_vue_type_template_id_2e21aa14___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./MailChangedInfo.vue?vue&type=template&id=2e21aa14& */ "../../../node_modules/vue-loader/lib/loaders/templateLoader.js?!../../../node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=template&id=2e21aa14&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MailChangedInfo_vue_vue_type_template_id_2e21aa14___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./MailChangedInfo.vue?vue&type=template&id=2e21aa14& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/basket/MailChangedInfo.vue?vue&type=template&id=2e21aa14&");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MailChangedInfo_vue_vue_type_template_id_2e21aa14___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MailChangedInfo_vue_vue_type_template_id_2e21aa14___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
