@@ -90,6 +90,7 @@
     "variation.availability.names.*",
     "variation.availableUntil",
     "variation.bundleType",
+    "variation.durabilityYears",
     "variation.externalId",
     "variation.heightMM",
     "variation.id",
