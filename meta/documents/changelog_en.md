@@ -12,6 +12,10 @@
 - The option **Show contact** has been added to the legal information widget settings in ShopBuilder, allowing the contact link to be hidden independently of the other legal links.
 - A new **Guarantee notice** widget has been added, showing a link below the buy button on the checkout page that opens a full-screen preview of the shop language's statutory guarantee notice. It can be freely repositioned in ShopBuilder and given its own appearance/color, independent of the buy button.
 
+### Fixed
+
+- The guarantee notice image is no longer loaded on every page. It is now only loaded on the checkout page once the guarantee notice modal is opened.
+
 ## v5.0.81 (2026-06-18) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.80...5.0.81" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### Added

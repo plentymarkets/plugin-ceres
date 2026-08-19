@@ -10,6 +10,10 @@
 
 - Ein neues Widget **Garantiehinweis** wurde hinzugefügt. Es zeigt unterhalb des Kaufen-Buttons auf der Checkout-Seite einen Link an, der eine Vollbildvorschau des gesetzlichen Garantiehinweises in der Sprache des Shops öffnet. Das Widget kann im ShopBuilder frei verschoben und unabhängig vom Kaufen-Button farblich angepasst werden.
 
+### Fixed
+
+- Das Bild des Garantiehinweises wird nicht mehr auf jeder Seite geladen. Es wird jetzt nur noch auf der Checkout-Seite geladen, sobald das Garantiehinweis-Modal geöffnet wird.
+
 ## v5.0.81 (2026-06-18) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.80...5.0.81" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### Hinzugefügt
