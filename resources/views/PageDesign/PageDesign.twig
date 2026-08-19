@@ -200,7 +200,7 @@
                     </div>
                     <div class="modal-body text-center">
                         <lazy-load component="guarantee-notice-modal">
-                            <img src="{{ plugin_path('Ceres') }}/images/guarantee_notice/{{ guarantee_notice_svg_filename(lang) }}" class="img-fluid" alt="{{ trans("Ceres::Template.checkoutGuaranteeNoticeLink") }}">
+                            <guarantee-notice-image src="{{ plugin_path('Ceres') }}/images/guarantee_notice/{{ guarantee_notice_svg_filename(lang) }}" alt="{{ trans("Ceres::Template.checkoutGuaranteeNoticeLink") }}"></guarantee-notice-image>
                         </lazy-load>
                     </div>
                 </div>
