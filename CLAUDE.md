@@ -167,9 +167,6 @@ Note "container" means two different things: the `dataProviders` classes in `src
   - `fr`, `nl`, `pl`: only Homepage, MultilingualismConfig, Template
 
   So admin-facing strings (`Config.*`, `Widget.*`, `Wizard.*`) are de/en only, while shop-facing `Template.*` is translated into all five. Only `Template` is pushed to the client (via `Translations.add("Ceres","Template")`); the rest are backend-only.
-- `npm run compareTranslations` treats **`de` as the source of truth** and compares key presence only, never values. It is not wired into CI and does **not** currently pass — it reports every `Config`/`Widget`/`Wizard`/`Page` key as missing from fr/nl/pl by design. Read its output selectively; don't try to make it clean.
-- ESLint is `google` config with heavy overrides ([.eslintrc.json](.eslintrc.json)): **Allman brace style**, 4-space indent, double quotes, no trailing commas, `object-curly-spacing: always`, min identifier length 2 (except `$`, `i`, `j`, `k`), comments on their own line above code.
-- Stylelint is `stylelint-config-twbs-bootstrap` with `border-radius`, `transition` and `calc()` **blacklisted** ([.stylelintrc](.stylelintrc)) — use the project's mixins/variables instead.
 - Deprecations are annotated `@deprecated since X. Will be removed in 6.0.0.` rather than deleted — the LTS promise forbids breaking changes in 5.0.x, and this plugin is public API for third-party themes. Preserve this pattern; do not remove deprecated members. Corollary: a `@deprecated` tag does not mean unused — check call sites before migrating off something.
 - Classes are suffixed by role: `*Widget`, `*Context`, `*Preset`, `*Config`, `*Container`, `*DataFieldProvider`, `*SettingFactory`, `*Step`, `*Builder`; migrations are `Migration_YYYY_MM_DD_NNN_Description` or `*Migration_0_0_1`.
 - Bootstrap 4.4 and jQuery are in play alongside Vue; jQuery is exposed globally via `expose-loader`.
