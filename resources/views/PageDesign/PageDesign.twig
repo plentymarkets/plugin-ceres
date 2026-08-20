@@ -199,7 +199,9 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="{{ trans("Ceres::Template.closeIcon") }}">&times;</button>
                     </div>
                     <div class="modal-body text-center">
-                        <img src="{{ plugin_path('Ceres') }}/images/guarantee_notice/{{ guarantee_notice_svg_filename(lang) }}" class="img-fluid" alt="{{ trans("Ceres::Template.checkoutGuaranteeNoticeLink") }}">
+                        <lazy-load component="guarantee-notice-modal">
+                            <guarantee-notice-image src="{{ plugin_path('Ceres') }}/images/guarantee_notice/{{ guarantee_notice_svg_filename(lang) }}" alt="{{ trans("Ceres::Template.checkoutGuaranteeNoticeLink") }}"></guarantee-notice-image>
+                        </lazy-load>
                     </div>
                 </div>
             </div>
