@@ -40313,6 +40313,8 @@ var render = function() {
             ? _c("img", {
                 staticClass: "mw-100 h-auto",
                 attrs: {
+                  loading: "lazy",
+                  decoding: "async",
                   alt: _vm.alt,
                   height: _vm.getHeight(),
                   width: _vm.getWidth()

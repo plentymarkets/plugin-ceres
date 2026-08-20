@@ -44439,7 +44439,7 @@ var render = function() {
                   _vm._ssrAttr("width", _vm.getWidth()) +
                   ' type="image/tiff" class="mw-100 h-auto">'
                 : _vm.isImageReady
-                ? "<img" +
+                ? '<img loading="lazy" decoding="async"' +
                   _vm._ssrAttr("alt", _vm.alt) +
                   _vm._ssrAttr("height", _vm.getHeight()) +
                   _vm._ssrAttr("width", _vm.getWidth()) +
