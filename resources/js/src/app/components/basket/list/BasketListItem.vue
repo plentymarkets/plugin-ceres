@@ -233,7 +233,9 @@ export default {
             }
 
             return this.isDataFieldVisible("basket.item.guaranteeLabel") &&
-                !!(this.basketItem.variation.data.item.manufacturer.name && this.basketItem.variation.data.variation.model);
+                !!(this.basketItem.variation.data.item.manufacturer.name 
+                && this.basketItem.variation.data.variation.model
+                && this.basketItem.variation.data.variation.durabilityYears);
         },
 
         image()

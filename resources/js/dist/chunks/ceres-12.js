@@ -383,7 +383,7 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
         return false;
       }
 
-      return this.isDataFieldVisible("basket.item.guaranteeLabel") && !!(this.basketItem.variation.data.item.manufacturer.name && this.basketItem.variation.data.variation.model);
+      return this.isDataFieldVisible("basket.item.guaranteeLabel") && !!(this.basketItem.variation.data.item.manufacturer.name && this.basketItem.variation.data.variation.model && this.basketItem.variation.data.variation.durabilityYears);
     },
     image: function image() {
       var itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");

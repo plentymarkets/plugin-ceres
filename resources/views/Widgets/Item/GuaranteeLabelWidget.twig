@@ -21,11 +21,11 @@
                     data-toggle="collapse" data-target="#{{ collapseId }}"
                     aria-expanded="false" aria-controls="{{ collapseId }}"
                     aria-label="{{ trans("Ceres::Widget.guaranteeLabelBadgeAlt") }}">
-                <guarantee-badge guarantee="{{ guaranteeValue }}"></guarantee-badge>
+                <guarantee-badge guarantee="{{ XX }}"></guarantee-badge>
             </button>
 
             <div id="{{ collapseId }}" class="collapse guarantee-label-collapse">
-                <guarantee-label-full guarantee="{{ guaranteeValue }}" brand="{{ brandValue }}" model="{{ modelValue }}"></guarantee-label-full>
+                <guarantee-label-full guarantee="{{ XX }}" brand="{{ brandValue }}" model="{{ modelValue }}"></guarantee-label-full>
             </div>
         </div>
     {% endif %}
@@ -38,7 +38,7 @@
     {{ Twig.set("durabilityYears", "itemData.variation.durabilityYears | default('')") }}
     {{ Twig.set("collapseId", "'guarantee-label-collapse-' ~ uid()") }}
 
-    {{ Twig.if("brandValue | length > 0 and modelValue | length > 0") }}
+    {{ Twig.if("brandValue | length > 0 and modelValue | length > 0 and durabilityYears | length > 0") }}
         <div class="widget widget-guarantee-label{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
             {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
 
