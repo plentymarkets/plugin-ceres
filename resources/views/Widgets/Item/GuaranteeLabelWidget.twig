@@ -1,0 +1,58 @@
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{# TODO: read guarantee value from item data once it is available there #}
+
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlineSpacings = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+{% set spacingClasses = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, spacingSettings.customMargin.mobile) %}
+
+{% if isPreview %}
+    {% set brandValue = trans("Ceres::Widget.guaranteeLabelSampleBrand") %}
+    {% set modelValue = trans("Ceres::Widget.guaranteeLabelSampleModel") %}
+    {% set collapseId = "guarantee-label-collapse-" ~ uid() %}
+    {% set guaranteeDefaultValue = "XX" %}
+
+    {% if brandValue | length > 0 and modelValue | length > 0 %}
+        <div class="widget widget-guarantee-label{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+            {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+
+            <button type="button" class="guarantee-badge-toggle btn-collapse p-0 border-0 bg-transparent collapsed"
+                    data-toggle="collapse" data-target="#{{ collapseId }}"
+                    aria-expanded="false" aria-controls="{{ collapseId }}"
+                    aria-label="{{ trans("Ceres::Widget.guaranteeLabelBadgeAlt") }}">
+                <guarantee-badge guarantee="{{ guaranteeDefaultValue }}"></guarantee-badge>
+            </button>
+
+            <div id="{{ collapseId }}" class="collapse guarantee-label-collapse">
+                <guarantee-label-full guarantee="{{ guaranteeDefaultValue }}" brand="{{ brandValue }}" model="{{ modelValue }}"></guarantee-label-full>
+            </div>
+        </div>
+    {% endif %}
+{% else %}
+    {# item data is only available in the surrounding per-item Twig context (e.g. inside ItemSetWidget's loop),
+       so these expressions must stay deferred rather than being resolved during this widget's own render pass #}
+    {{ Twig.set("itemData", "item.documents[0].data") }}
+    {{ Twig.set("brandValue", "itemData.item.manufacturer.name | default('')") }}
+    {{ Twig.set("modelValue", "itemData.variation.model | default('')") }}
+    {{ Twig.set("durabilityYears", "itemData.variation.durabilityYears | default('')") }}
+    {{ Twig.set("collapseId", "'guarantee-label-collapse-' ~ uid()") }}
+
+    {{ Twig.if("brandValue | length > 0 and modelValue | length > 0 and durabilityYears | length > 0") }}
+        <div class="widget widget-guarantee-label{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
+            {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+
+            <button type="button" class="guarantee-badge-toggle btn-collapse p-0 border-0 bg-transparent collapsed"
+                    data-toggle="collapse" data-target="#{{ Twig.print("collapseId") }}"
+                    aria-expanded="false" aria-controls="{{ Twig.print("collapseId") }}"
+                    aria-label="{{ trans("Ceres::Widget.guaranteeLabelBadgeAlt") }}">
+                <guarantee-badge guarantee="{{ Twig.print("durabilityYears") }}"></guarantee-badge>
+            </button>
+
+            <div id="{{ Twig.print("collapseId") }}" class="collapse guarantee-label-collapse">
+                <guarantee-label-full guarantee="{{ Twig.print("durabilityYears") }}" brand="{{ Twig.print("brandValue") }}" model="{{ Twig.print("modelValue") }}"></guarantee-label-full>
+            </div>
+        </div>
+    {{ Twig.endif() }}
+{% endif %}

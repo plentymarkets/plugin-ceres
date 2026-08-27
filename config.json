@@ -1394,7 +1394,7 @@
                     "required": false,
                     "label": "Config.basketItemDataLabel",
                     "options": {
-                        "defaultValue": "basket.item.item_id, basket.item.description_short, basket.item.availability, basket.item.customNumber",
+                        "defaultValue": "basket.item.item_id, basket.item.description_short, basket.item.availability, basket.item.customNumber, basket.item.guaranteeLabel",
                         "checkBoxValues": [
                             {
                                 "value": "basket.item.item_id",
@@ -1415,6 +1415,10 @@
                             {
                                 "value": "basket.item.customNumber",
                                 "caption": "Config.basketItemDataCustomNumber"
+                            },
+                            {
+                                "value": "basket.item.guaranteeLabel",
+                                "caption": "Config.basketItemDataGuaranteeLabel"
                             }
                         ]
                     }
@@ -1560,6 +1564,14 @@
                     "type": "checkBox",
                     "required": false,
                     "label": "Config.basketShowShippingCountrySelect",
+                    "options": {
+                        "defaultValue": "true"
+                    }
+                },
+                "basket.preview_show_guarantee_label": {
+                    "type": "checkBox",
+                    "required": false,
+                    "label": "Config.basketPreviewShowGuaranteeLabel",
                     "options": {
                         "defaultValue": "true"
                     }

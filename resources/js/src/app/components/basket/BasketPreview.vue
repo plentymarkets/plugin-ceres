@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="basket-preview-content d-flex flex-fill">
-                    <basket-list class="item-list d-flex flex-fill flex-nowrap flex-column overflow-auto px-3" :is-preview="true">
+                    <basket-list class="item-list d-flex flex-fill flex-nowrap flex-column overflow-auto px-3" :is-preview="true" :basket-details-data="basketDetailsData">
                         <template #before-basket-item>
                             <slot name="before-basket-item"></slot>
                         </template>
@@ -119,6 +119,11 @@ export default {
                 "openAmount",
                 "subAmount"
             ]
+        },
+        basketDetailsData:
+        {
+            type: Array,
+            default: () => App.config.basket.itemData
         }
     },
 

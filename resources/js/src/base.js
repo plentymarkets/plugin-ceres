@@ -68,6 +68,8 @@ Vue.component("user-login-handler", UserLoginHandler);
 Vue.component("form-attachment", () => import("./app/components/form/FormAttachment.vue"));
 
 Vue.component("item-bundle", () => import("./app/components/item/ItemBundle.vue"));
+Vue.component("guarantee-badge", () => import("./app/components/item/GuaranteeBadge.vue"));
+Vue.component("guarantee-label-full", () => import("./app/components/item/GuaranteeLabelFull.vue"));
 Vue.component("quantity-input", () => import("./app/components/item/QuantityInput.vue"));
 
 Vue.component("tag-list", () => import("./app/components/item/TagList.vue"));

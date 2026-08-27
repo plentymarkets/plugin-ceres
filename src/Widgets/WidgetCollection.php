@@ -77,6 +77,7 @@ use Ceres\Widgets\Item\AddToBasketWidget;
 use Ceres\Widgets\Item\AddToWishListWidget;
 use Ceres\Widgets\Item\AttributeWidget;
 use Ceres\Widgets\Item\GraduatedPriceWidget;
+use Ceres\Widgets\Item\GuaranteeLabelWidget;
 use Ceres\Widgets\Item\ItemAvailabilityWidget;
 use Ceres\Widgets\Item\ItemBundleWidget;
 use Ceres\Widgets\Item\ItemDataTableWidget;
@@ -201,6 +202,7 @@ class WidgetCollection
         AddToWishListWidget::class,
         AttributeWidget::class,
         GraduatedPriceWidget::class,
+        GuaranteeLabelWidget::class,
         ItemAvailabilityWidget::class,
         ItemBundleWidget::class,
         ItemDataTableWidget::class,

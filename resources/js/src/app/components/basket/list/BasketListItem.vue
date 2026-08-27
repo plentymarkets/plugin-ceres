@@ -151,6 +151,23 @@
             </div>
         </div>
 
+        <div class="guarantee-label-container" v-if="isGuaranteeLabelVisible">
+            <button type="button" class="guarantee-badge-toggle btn-collapse p-0 border-0 bg-transparent"
+                    :class="{ collapsed: !guaranteeLabelExpanded }"
+                    @click="guaranteeLabelExpanded = !guaranteeLabelExpanded"
+                    :aria-expanded="guaranteeLabelExpanded.toString()"
+                    :aria-label="$translate('Ceres::Widget.guaranteeLabelBadgeAlt')">
+                <guarantee-badge :guarantee="basketItem.variation.data.variation.durabilityYears"></guarantee-badge>
+            </button>
+
+            <div class="guarantee-label-collapse" v-if="guaranteeLabelExpanded">
+                <guarantee-label-full
+                    :guarantee="basketItem.variation.data.variation.durabilityYears"
+                    :brand="basketItem.variation.data.item.manufacturer.name"
+                    :model="basketItem.variation.data.variation.model">
+                </guarantee-label-full>
+            </div>
+        </div>
         <slot name="after-basket-item"></slot>
     </div>
 </template>
@@ -201,12 +218,26 @@ export default {
             waiting: false,
             waitingForDelete: false,
             itemCondition: "",
-            showMoreInformation: false
+            showMoreInformation: false,
+            guaranteeLabelExpanded: false,
         };
     },
 
     computed:
     {
+        isGuaranteeLabelVisible()
+        {
+            if (this.isPreview && !App.config.basket.previewShowGuaranteeLabel)
+            {
+                return false;
+            }
+
+            return this.isDataFieldVisible("basket.item.guaranteeLabel") &&
+                !!(this.basketItem.variation.data.item.manufacturer.name 
+                && this.basketItem.variation.data.variation.model
+                && this.basketItem.variation.data.variation.durabilityYears);
+        },
+
         image()
         {
             const itemImages = this.$options.filters.itemImages(this.basketItem.variation.data.images, "urlPreview");

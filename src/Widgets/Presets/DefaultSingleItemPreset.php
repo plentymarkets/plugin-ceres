@@ -31,6 +31,7 @@ use IO\Extensions\Functions\UniqueId;
  * - ItemDataTableWidget
  * - AttributeWidget
  * - TagsWidget
+ * - GuaranteeLabelWidget
  *
  * @package Ceres\Widgets\Presets
  */
@@ -96,6 +97,7 @@ class DefaultSingleItemPreset implements ContentPreset
         $this->createAddToWishListWiget();
         $this->createLegalInformation();
         $this->createIsRequieredFootnote();
+        $this->createGuaranteeLabelWidget();
 
         return $this->preset->toArray();
     }
@@ -415,5 +417,10 @@ class DefaultSingleItemPreset implements ContentPreset
             ->withSetting('spacing.margin.top.unit', null)
             ->withSetting('spacing.margin.right.value', 1)
             ->withSetting('spacing.margin.right.unit', null);
+    }
+
+    private function createGuaranteeLabelWidget()
+    {
+        $this->stickyContainer->createChild('sticky', 'Ceres::GuaranteeLabelWidget');
     }
 }
