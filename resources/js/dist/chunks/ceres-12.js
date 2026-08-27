@@ -374,9 +374,7 @@ var NotificationService = __webpack_require__(/*! ../../../services/Notification
       waitingForDelete: false,
       itemCondition: "",
       showMoreInformation: false,
-      guaranteeLabelExpanded: false,
-      // placeholder until a real guarantee duration is available on the basket item data
-      guarantee: "2"
+      guaranteeLabelExpanded: false
     };
   },
   computed: _objectSpread({
@@ -1223,7 +1221,14 @@ var render = function() {
                   }
                 }
               },
-              [_c("guarantee-badge", { attrs: { guarantee: _vm.guarantee } })],
+              [
+                _c("guarantee-badge", {
+                  attrs: {
+                    guarantee:
+                      _vm.basketItem.variation.data.variation.durabilityYears
+                  }
+                })
+              ],
               1
             ),
             _vm._v(" "),
@@ -1234,7 +1239,9 @@ var render = function() {
                   [
                     _c("guarantee-label-full", {
                       attrs: {
-                        guarantee: _vm.guarantee,
+                        guarantee:
+                          _vm.basketItem.variation.data.variation
+                            .durabilityYears,
                         brand:
                           _vm.basketItem.variation.data.item.manufacturer.name,
                         model: _vm.basketItem.variation.data.variation.model

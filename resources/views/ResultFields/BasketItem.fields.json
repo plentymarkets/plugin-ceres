@@ -23,6 +23,7 @@
     "variation.bundleType",
     "variation.vatId",
     "variation.model",
+    "variation.durabilityYears",
     "variationProperties.*",
     "item.id",
     "item.itemType",

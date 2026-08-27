@@ -157,12 +157,12 @@
                     @click="guaranteeLabelExpanded = !guaranteeLabelExpanded"
                     :aria-expanded="guaranteeLabelExpanded.toString()"
                     :aria-label="$translate('Ceres::Widget.guaranteeLabelBadgeAlt')">
-                <guarantee-badge :guarantee="guarantee"></guarantee-badge>
+                <guarantee-badge :guarantee="basketItem.variation.data.variation.durabilityYears"></guarantee-badge>
             </button>
 
             <div class="guarantee-label-collapse" v-if="guaranteeLabelExpanded">
                 <guarantee-label-full
-                    :guarantee="guarantee"
+                    :guarantee="basketItem.variation.data.variation.durabilityYears"
                     :brand="basketItem.variation.data.item.manufacturer.name"
                     :model="basketItem.variation.data.variation.model">
                 </guarantee-label-full>
@@ -220,8 +220,6 @@ export default {
             itemCondition: "",
             showMoreInformation: false,
             guaranteeLabelExpanded: false,
-            // placeholder until a real guarantee duration is available on the basket item data
-            guarantee: "2"
         };
     },
 
