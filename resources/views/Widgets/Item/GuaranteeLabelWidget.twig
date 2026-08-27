@@ -12,6 +12,7 @@
     {% set brandValue = trans("Ceres::Widget.guaranteeLabelSampleBrand") %}
     {% set modelValue = trans("Ceres::Widget.guaranteeLabelSampleModel") %}
     {% set collapseId = "guarantee-label-collapse-" ~ uid() %}
+    {% set guaranteeDefaultValue = "XX" %}
 
     {% if brandValue | length > 0 and modelValue | length > 0 %}
         <div class="widget widget-guarantee-label{% if customClass | length > 0 %} {{ customClass }}{% endif %}{% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}"
@@ -21,11 +22,11 @@
                     data-toggle="collapse" data-target="#{{ collapseId }}"
                     aria-expanded="false" aria-controls="{{ collapseId }}"
                     aria-label="{{ trans("Ceres::Widget.guaranteeLabelBadgeAlt") }}">
-                <guarantee-badge guarantee="XX"></guarantee-badge>
+                <guarantee-badge guarantee="{{ guaranteeDefaultValue }}"></guarantee-badge>
             </button>
 
             <div id="{{ collapseId }}" class="collapse guarantee-label-collapse">
-                <guarantee-label-full guarantee="XX" brand="{{ brandValue }}" model="{{ modelValue }}"></guarantee-label-full>
+                <guarantee-label-full guarantee="{{ guaranteeDefaultValue }}" brand="{{ brandValue }}" model="{{ modelValue }}"></guarantee-label-full>
             </div>
         </div>
     {% endif %}
