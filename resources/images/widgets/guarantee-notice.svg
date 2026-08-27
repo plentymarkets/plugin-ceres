@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg width="100%" height="100%" viewBox="0 0 350 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;">
+    <rect width="350" height="120" style="fill:#008ebd;"/>
+    <path d="M175,25 L200,35 L200,65 C200,80 190,90 175,95 C160,90 150,80 150,65 L150,35 Z" style="fill:none;stroke:#ffffff;stroke-width:3;"/>
+    <path d="M164,60 L173,70 L188,50" style="fill:none;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;"/>
+</svg>

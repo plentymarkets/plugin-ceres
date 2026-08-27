@@ -1,43 +1,59 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[38],{
 
-/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/GuaranteeBadge.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/item/GuaranteeBadge.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/GraduatedPrices.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/item/GraduatedPrices.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.number.constructor.js */ "./node_modules/core-js/modules/es.number.constructor.js");
-/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.symbol.description.js */ "./node_modules/core-js/modules/es.symbol.description.js");
+/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator.js */ "./node_modules/core-js/modules/es.symbol.iterator.js");
+/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.string.iterator.js */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.array.iterator.js */ "./node_modules/core-js/modules/es.array.iterator.js");
+/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator.js */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.array.from.js */ "./node_modules/core-js/modules/es.array.from.js");
+/* harmony import */ var core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_from_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.array.slice.js */ "./node_modules/core-js/modules/es.array.slice.js");
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_10__);
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
+
+
+
+
+
+
+
+
+
+
 //
 //
 //
@@ -66,21 +82,66 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "guarantee-badge",
+  name: "graduated-prices",
   props: {
-    guarantee: {
-      type: [String, Number],
-      default: "XX"
+    paddingClasses: {
+      type: String
+    },
+    paddingInlineStyles: {
+      type: String
+    }
+  },
+  inject: {
+    itemId: {
+      default: null
+    }
+  },
+  computed: {
+    graduatedPrices: function graduatedPrices() {
+      var currentVariation = this.$store.getters["".concat(this.itemId, "/currentItemVariation")];
+      var prices = currentVariation && currentVariation.prices.graduatedPrices;
+      var minQuantity = currentVariation && currentVariation.variation.minimumOrderQuantity;
+      prices = prices.filter(function (price) {
+        return price.minimumOrderQuantity > minQuantity;
+      });
+      return _toConsumableArray(prices).sort(function (priceA, priceB) {
+        return priceA.minimumOrderQuantity - priceB.minimumOrderQuantity;
+      });
+    },
+    showBasePrice: function showBasePrice() {
+      var currentVariation = this.$store.getters["".concat(this.itemId, "/currentItemVariation")];
+      var mayShowUnitPrice = currentVariation.variation.mayShowUnitPrice;
+      var isSinglePiece = currentVariation.unit && currentVariation.unit.content === 1 && currentVariation.unit.unitOfMeasurement === "C62";
+      return mayShowUnitPrice && !isSinglePiece;
+    },
+    activeGraduationIndex: function activeGraduationIndex() {
+      var _this = this;
+
+      var prices = this.graduatedPrices.filter(function (price) {
+        return _this.variationOrderQuantity >= price.minimumOrderQuantity;
+      });
+
+      if (!prices.length) {
+        return -1;
+      }
+
+      var price = prices.reduce(function (prev, current) {
+        return prev.minimumOrderQuantity > current.minimumOrderQuantity ? prev : current;
+      });
+      return this.graduatedPrices.indexOf(price);
+    },
+    variationOrderQuantity: function variationOrderQuantity() {
+      return this.$store.state.items[this.itemId] && this.$store.state.items[this.itemId].variationOrderQuantity;
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/GuaranteeBadge.vue?vue&type=template&id=6d279655&":
-/*!******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/item/GuaranteeBadge.vue?vue&type=template&id=6d279655& ***!
-  \******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/GraduatedPrices.vue?vue&type=template&id=0fc0278e&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/app/components/item/GraduatedPrices.vue?vue&type=template&id=0fc0278e& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -92,288 +153,131 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "svg",
-    {
-      staticClass: "guarantee-badge-image",
-      attrs: { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 368.5 56.69" }
-    },
-    [
-      _c("defs"),
-      _vm._v(" "),
-      _c("g", { attrs: { id: "gtb-Layer_3", "data-name": "Layer 3" } }, [
-        _c("rect", {
-          staticClass: "gtb-cls-4",
-          attrs: { width: "368.5", height: "56.69" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("g", { attrs: { id: "gtb-Layer_1", "data-name": "Layer 1" } }, [
-        _c("line", {
-          staticClass: "gtb-cls-5",
-          attrs: { x1: "93.73", y1: "10.49", x2: "93.73", y2: "46.08" }
-        }),
-        _vm._v(" "),
-        _c("path", {
-          staticClass: "gtb-cls-6",
-          attrs: {
-            d:
-              "M321.38-1.51v44.63c0,1.97,1.04,3.71,2.56,4.29l15.59,5.98c.76.29,1.58.3,2.35.02l15.55-5.73c1.54-.57,2.6-2.32,2.6-4.3V-1.51h-38.65Z"
-          }
-        }),
-        _vm._v(" "),
-        _c("g", [
-          _c("polygon", {
-            staticClass: "gtb-cls-7",
-            attrs: {
-              points:
-                "339.23 16.09 340.71 15.01 342.19 16.09 341.62 14.34 343.13 13.26 341.27 13.26 340.71 11.49 340.14 13.26 338.29 13.26 339.79 14.34 339.23 16.09"
-            }
-          }),
-          _vm._v(" "),
-          _c("polygon", {
-            staticClass: "gtb-cls-7",
-            attrs: {
-              points:
-                "331.56 18.15 333.04 17.07 334.52 18.15 333.96 16.4 335.46 15.32 333.61 15.32 333.04 13.55 332.47 15.32 330.62 15.32 332.12 16.4 331.56 18.15"
-            }
-          }),
-          _vm._v(" "),
-          _c("polygon", {
-            staticClass: "gtb-cls-7",
-            attrs: {
-              points:
-                "327.43 19.17 326.87 20.94 325.01 20.94 326.52 22.02 325.95 23.77 327.43 22.69 328.92 23.77 328.35 22.02 329.86 20.94 328 20.94 327.43 19.17"
-            }
-          }),
-          _vm._v(" "),
-          _c("polygon", {
-            staticClass: "gtb-cls-7",
-            attrs: {
-              points:
-                "325.38 30.34 326.86 31.42 326.3 29.67 327.8 28.59 325.95 28.59 325.38 26.82 324.81 28.6 322.96 28.59 324.46 29.67 323.9 31.42 325.38 30.34"
-            }
-          }),
-          _vm._v(" "),
-          _c("polygon", {
-            staticClass: "gtb-cls-7",
-            attrs: {
-              points:
-                "328 36.27 327.43 34.5 326.87 36.27 325.01 36.27 326.52 37.35 325.95 39.1 327.43 38.02 328.92 39.1 328.35 37.35 329.86 36.27 328 36.27"
-            }
-          }),
-          _vm._v(" "),
-          _c("polygon", {
-            staticClass: "gtb-cls-7",
-            attrs: {
-              points:
-                "333.62 41.89 333.05 40.12 332.49 41.89 330.63 41.89 332.14 42.97 331.57 44.72 333.05 43.64 334.53 44.72 333.97 42.97 335.47 41.89 333.62 41.89"
-            }
-          }),
-          _vm._v(" "),
-          _c("polygon", {
-            staticClass: "gtb-cls-7",
-            attrs: {
-              points:
-                "341.27 43.92 340.71 42.15 340.14 43.93 338.29 43.92 339.79 45 339.23 46.75 340.71 45.67 342.19 46.75 341.62 45 343.13 43.92 341.27 43.92"
-            }
-          }),
-          _vm._v(" "),
-          _c("polygon", {
-            staticClass: "gtb-cls-7",
-            attrs: {
-              points:
-                "348.93 41.89 348.36 40.12 347.79 41.89 345.94 41.89 347.44 42.97 346.88 44.72 348.36 43.64 349.84 44.72 349.28 42.97 350.78 41.89 348.93 41.89"
-            }
-          }),
-          _vm._v(" "),
-          _c("polygon", {
-            staticClass: "gtb-cls-7",
-            attrs: {
-              points:
-                "354.55 36.27 353.98 34.5 353.41 36.27 351.56 36.27 353.06 37.35 352.5 39.1 353.98 38.02 355.46 39.1 354.9 37.35 356.4 36.27 354.55 36.27"
-            }
-          }),
-          _vm._v(" "),
-          _c("polygon", {
-            staticClass: "gtb-cls-7",
-            attrs: {
-              points:
-                "358.44 28.57 356.58 28.57 356.01 26.8 355.45 28.57 353.59 28.57 355.1 29.65 354.54 31.4 356.01 30.32 357.5 31.4 356.93 29.65 358.44 28.57"
-            }
-          }),
-          _vm._v(" "),
-          _c("polygon", {
-            staticClass: "gtb-cls-7",
-            attrs: {
-              points:
-                "352.5 23.74 353.98 22.66 355.46 23.74 354.9 22 356.4 20.92 354.55 20.92 353.98 19.15 353.41 20.92 351.56 20.92 353.06 22 352.5 23.74"
-            }
-          }),
-          _vm._v(" "),
-          _c("polygon", {
-            staticClass: "gtb-cls-7",
-            attrs: {
-              points:
-                "348.38 13.55 347.82 15.32 345.96 15.32 347.46 16.4 346.9 18.15 348.39 17.07 349.86 18.15 349.3 16.4 350.81 15.32 348.95 15.32 348.38 13.55"
-            }
-          })
+  return _vm.graduatedPrices[0]
+    ? _c("div", [
+        _c("b", [
+          _vm._v(
+            _vm._s(
+              _vm.$translate("Ceres::Template.singleItemGraduatedPrices")
+            ) + ":"
+          )
         ]),
         _vm._v(" "),
-        _c("g", [
-          _c("path", {
-            staticClass: "gtb-cls-2",
-            attrs: {
-              d:
-                "M127.64,23.08c-.28-.92-.67-1.75-1.17-2.48-.49-.73-1.09-1.36-1.77-1.88s-1.47-.92-2.36-1.18-1.85-.4-2.9-.4c-1.88,0-3.55.47-5.01,1.41-1.47.94-2.62,2.33-3.45,4.15-.83,1.82-1.25,4.04-1.25,6.66s.42,4.87,1.24,6.7c.83,1.83,1.98,3.22,3.46,4.17s3.19,1.42,5.15,1.42c1.77,0,3.31-.34,4.61-1.02,1.3-.68,2.3-1.65,3.01-2.91s1.06-2.73,1.06-4.42l1.43.22h-9.48v-4.94h14.16v4.19c0,2.99-.64,5.57-1.91,7.75-1.27,2.18-3.02,3.86-5.25,5.04-2.23,1.18-4.78,1.76-7.67,1.76-3.22,0-6.04-.72-8.46-2.17-2.43-1.45-4.32-3.51-5.68-6.19-1.36-2.68-2.04-5.85-2.04-9.54,0-2.82.4-5.33,1.2-7.55.8-2.22,1.92-4.1,3.37-5.65,1.44-1.55,3.14-2.73,5.08-3.55,1.94-.81,4.06-1.22,6.34-1.22,1.93,0,3.73.28,5.4.84s3.16,1.36,4.46,2.4,2.37,2.26,3.21,3.68,1.39,2.99,1.65,4.7h-6.44Z"
-            }
-          }),
-          _vm._v(" "),
-          _c("path", {
-            staticClass: "gtb-cls-2",
-            attrs: {
-              d:
-                "M144.37,46.84h-6.75l12.29-34.91h7.81l12.31,34.91h-6.75l-9.32-27.75h-.27l-9.31,27.75ZM144.59,33.16h18.41v5.08h-18.41v-5.08Z"
-            }
-          }),
-          _vm._v(" "),
-          _c("path", {
-            staticClass: "gtb-cls-2",
-            attrs: {
-              d:
-                "M175.1,46.84V11.93h13.09c2.68,0,4.93.47,6.76,1.4,1.82.93,3.2,2.24,4.14,3.91.94,1.68,1.41,3.63,1.41,5.86s-.47,4.18-1.42,5.82c-.95,1.64-2.34,2.91-4.18,3.8-1.84.89-4.1,1.34-6.78,1.34h-9.32v-5.25h8.47c1.57,0,2.85-.22,3.85-.66s1.74-1.08,2.22-1.93c.48-.85.72-1.89.72-3.13s-.24-2.3-.73-3.18c-.49-.88-1.23-1.55-2.23-2.01s-2.29-.69-3.87-.69h-5.8v29.62h-6.32ZM193.14,31.03l8.64,15.82h-7.06l-8.49-15.82h6.9Z"
-            }
-          }),
-          _vm._v(" "),
-          _c("path", {
-            staticClass: "gtb-cls-2",
-            attrs: {
-              d:
-                "M211.29,46.84h-6.75l12.29-34.91h7.81l12.31,34.91h-6.75l-9.32-27.75h-.27l-9.31,27.75ZM211.51,33.16h18.41v5.08h-18.41v-5.08Z"
-            }
-          }),
-          _vm._v(" "),
-          _c("path", {
-            staticClass: "gtb-cls-2",
-            attrs: {
-              d:
-                "M270.72,11.93v34.91h-5.62l-16.45-23.78h-.29v23.78h-6.32V11.93h5.66l16.43,23.8h.31V11.93h6.29Z"
-            }
-          })
+        _c("table", { staticClass: "graduated-prices-table text-muted" }, [
+          _c(
+            "tbody",
+            [
+              _vm._l(_vm.graduatedPrices, function(price, index) {
+                return [
+                  _c("tr", [
+                    _c(
+                      "td",
+                      {
+                        class: _vm.paddingClasses,
+                        style: _vm.paddingInlineStyles
+                      },
+                      [
+                        _vm._v(
+                          _vm._s(
+                            _vm.$translate(
+                              "Ceres::Template.singleItemMinimumQuantity"
+                            )
+                          ) +
+                            " " +
+                            _vm._s(price.minimumOrderQuantity)
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        staticClass: "graduated-price",
+                        class: _vm.paddingClasses,
+                        style: _vm.paddingInlineStyles
+                      },
+                      [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(price.unitPrice.formatted) +
+                            "\n                        "
+                        ),
+                        _c("transition", { attrs: { name: "fade" } }, [
+                          index === _vm.activeGraduationIndex
+                            ? _c("i", {
+                                staticClass:
+                                  "fa fa-lg fa-check-circle-o text-appearance",
+                                attrs: { "aria-hidden": "true" }
+                              })
+                            : _vm._e()
+                        ])
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _vm.showBasePrice
+                      ? _c(
+                          "td",
+                          {
+                            staticClass:
+                              "graduated-base-price pl-3 d-none d-xl-block",
+                            class: _vm.paddingClasses,
+                            style: _vm.paddingInlineStyles
+                          },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                _vm.$translate(
+                                  "Ceres::Template.singleItemGraduatedBasePrice",
+                                  { price: price.basePrice }
+                                )
+                              )
+                            )
+                          ]
+                        )
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _vm.showBasePrice
+                    ? _c(
+                        "tr",
+                        { staticClass: "graduated-base-price d-xl-none" },
+                        [
+                          _c("td", {
+                            class: _vm.paddingClasses,
+                            style: _vm.paddingInlineStyles
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              class: _vm.paddingClasses,
+                              style: _vm.paddingInlineStyles
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.$translate(
+                                    "Ceres::Template.singleItemGraduatedBasePrice",
+                                    { price: price.basePrice }
+                                  )
+                                )
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    : _vm._e()
+                ]
+              })
+            ],
+            2
+          )
         ]),
         _vm._v(" "),
-        _c("path", {
-          staticClass: "gtb-cls-4",
-          attrs: {
-            d:
-              "M336.7,36.73c-2.6-1.83-4.26-4.71-4.55-7.88l-.45-4.88,4.26-1.96c1.29-.59,2.67-.99,4.09-1.07,1.81-.1,3.57.23,5.2.98l4.45,2.05-.18,2-1.14-.1.11-1.15-3.58-1.69c-.11-.05-.18-.08-.27-.12-1.43-.63-2.95-.91-4.52-.82-1.27.07-2.5.43-3.66.96l-3.54,1.63.37,4.08c.26,2.84,1.74,5.4,4.07,7.05l3.38,2.39,3.31-2.39c1.98-1.4,3.36-3.47,3.88-5.84l.14-.59h-7.36v-1.14h8.61l-.06.62c-.29,3.16-1.95,6.04-4.55,7.88l-4,2.83-4-2.83Z"
-          }
-        }),
-        _vm._v(" "),
-        _c("g", [
-          _c("circle", { attrs: { cx: "286.5", cy: "37.57", r: "9.18" } }),
-          _vm._v(" "),
-          _c("path", {
-            staticClass: "gtb-cls-3",
-            attrs: {
-              d:
-                "M291.18,43.11s-1.05,1.2-1.41,1.58c-.25.26-.57.73-.96.93-1.02.52-1.22.5-2.24.24-.43-.11-.83-.43-1.16-.73l-6.81-6.08c-.82-.74-.27-2.1.83-2.06l4.27.16c.52.02,1.02.23,1.4.58l6.09,5.36Z"
-            }
-          }),
-          _vm._v(" "),
-          _c("path", {
-            staticClass: "gtb-cls-3",
-            attrs: {
-              d:
-                "M283.68,43.59l2.04,1.82c1.19.84,2.62.87,3.66-.28l12.06-13.48c.69-.78.19-2.02-.88-2.14l-2.02-.24c-.92-.11-1.83.22-2.44.88l-12.42,13.45Z"
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "text",
-          {
-            staticClass: "gtb-cls-1",
-            attrs: { transform: "translate(10.39 46.65)" }
-          },
-          [
-            _c("tspan", { attrs: { x: "0", y: "0" } }, [
-              _vm._v(_vm._s(_vm.guarantee))
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c("g", [
-          _c("rect", {
-            staticClass: "gtb-cls-5",
-            attrs: {
-              x: "70.87",
-              y: "34.81",
-              width: "13.7",
-              height: "11.78",
-              rx: "1.66",
-              ry: "1.66"
-            }
-          }),
-          _vm._v(" "),
-          _c("rect", {
-            staticClass: "gtb-cls-3",
-            attrs: {
-              x: "74.42",
-              y: "33.22",
-              width: "1.62",
-              height: "3.22",
-              rx: ".54",
-              ry: ".54"
-            }
-          }),
-          _vm._v(" "),
-          _c("rect", {
-            staticClass: "gtb-cls-3",
-            attrs: {
-              x: "79.38",
-              y: "33.22",
-              width: "1.62",
-              height: "3.22",
-              rx: ".54",
-              ry: ".54"
-            }
-          }),
-          _vm._v(" "),
-          _c("line", {
-            staticClass: "gtb-cls-5",
-            attrs: { x1: "70.87", y1: "38.02", x2: "84.56", y2: "38.02" }
-          }),
-          _vm._v(" "),
-          _c("g", [
-            _c("path", {
-              staticClass: "gtb-cls-2",
-              attrs: {
-                d:
-                  "M73.71,44.59c-.33,0-.62-.06-.88-.17-.25-.11-.45-.27-.6-.47-.15-.2-.22-.43-.22-.69h1.05c0,.09.03.18.09.25.06.07.13.13.23.17.1.04.21.06.33.06s.23-.02.33-.07.17-.11.22-.18c.05-.08.08-.17.08-.27,0-.1-.03-.19-.09-.27-.06-.08-.14-.14-.25-.18s-.24-.07-.38-.07h-.42v-.74h.42c.13,0,.24-.02.34-.06s.17-.1.23-.18.08-.17.08-.27c0-.1-.02-.18-.07-.26s-.11-.13-.2-.17c-.08-.04-.18-.06-.29-.06-.12,0-.22.02-.31.06-.09.04-.17.1-.22.17-.06.07-.08.16-.09.26h-1c0-.26.07-.49.22-.68.14-.2.33-.35.58-.46.24-.11.52-.17.83-.17s.58.05.82.16.42.26.55.44c.13.19.2.4.2.63,0,.24-.08.45-.24.6-.16.16-.37.26-.62.29v.03c.34.04.59.15.76.33s.26.4.25.67c0,.25-.07.47-.22.67-.15.19-.35.35-.61.46-.26.11-.56.17-.9.17Z"
-              }
-            }),
-            _vm._v(" "),
-            _c("path", {
-              staticClass: "gtb-cls-2",
-              attrs: {
-                d:
-                  "M77.77,44.59c-.24,0-.46-.04-.68-.12-.22-.08-.41-.2-.58-.37s-.3-.39-.4-.66c-.1-.27-.15-.61-.14-1,0-.36.04-.68.13-.96.09-.28.21-.53.37-.72.16-.2.35-.35.58-.46.22-.1.47-.16.75-.16.3,0,.57.06.8.18s.42.28.56.47c.14.2.22.42.25.66h-1.03c-.03-.14-.1-.24-.2-.31-.1-.07-.23-.11-.37-.11-.27,0-.46.11-.59.34-.13.23-.2.54-.2.92h.03c.06-.13.14-.24.26-.33s.24-.16.38-.21c.14-.05.3-.08.46-.08.26,0,.49.06.69.18.2.12.35.28.47.49s.17.45.17.71c0,.3-.07.57-.21.8s-.34.41-.59.54c-.25.13-.54.19-.87.19ZM77.76,43.78c.13,0,.24-.03.34-.09s.18-.14.24-.25c.06-.1.09-.22.08-.35,0-.13-.03-.25-.08-.35s-.14-.18-.24-.25-.22-.09-.35-.09c-.09,0-.18.02-.26.05-.08.03-.15.08-.21.15s-.11.14-.14.22c-.03.08-.05.17-.05.27,0,.13.03.24.09.35.06.1.14.19.24.25.1.06.21.09.34.09Z"
-              }
-            }),
-            _vm._v(" "),
-            _c("path", {
-              staticClass: "gtb-cls-2",
-              attrs: {
-                d:
-                  "M81.7,44.59c-.32,0-.6-.06-.84-.17-.25-.11-.44-.27-.58-.47-.14-.2-.22-.43-.22-.69h1.02c0,.16.07.29.19.38s.27.14.43.14c.13,0,.25-.03.35-.09.1-.06.18-.14.24-.24s.09-.23.08-.36c0-.14-.03-.26-.09-.37-.06-.1-.14-.19-.24-.24-.1-.06-.22-.09-.35-.09-.13,0-.24.03-.36.08-.11.06-.2.13-.25.23l-.92-.17.19-2.34h2.78v.84h-1.92l-.1,1.02h.03c.07-.12.19-.22.35-.3s.34-.12.55-.12c.26,0,.49.06.69.18.2.12.36.29.48.5s.18.46.18.73c0,.3-.07.56-.21.79-.14.23-.34.41-.59.54s-.55.2-.88.2Z"
-              }
-            })
-          ])
-        ])
+        _c("br")
       ])
-    ]
-  )
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -382,17 +286,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/src/app/components/item/GuaranteeBadge.vue":
-/*!*****************************************************************!*\
-  !*** ./resources/js/src/app/components/item/GuaranteeBadge.vue ***!
-  \*****************************************************************/
+/***/ "./resources/js/src/app/components/item/GraduatedPrices.vue":
+/*!******************************************************************!*\
+  !*** ./resources/js/src/app/components/item/GraduatedPrices.vue ***!
+  \******************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _GuaranteeBadge_vue_vue_type_template_id_6d279655___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GuaranteeBadge.vue?vue&type=template&id=6d279655& */ "./resources/js/src/app/components/item/GuaranteeBadge.vue?vue&type=template&id=6d279655&");
-/* harmony import */ var _GuaranteeBadge_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GuaranteeBadge.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/item/GuaranteeBadge.vue?vue&type=script&lang=js&");
+/* harmony import */ var _GraduatedPrices_vue_vue_type_template_id_0fc0278e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GraduatedPrices.vue?vue&type=template&id=0fc0278e& */ "./resources/js/src/app/components/item/GraduatedPrices.vue?vue&type=template&id=0fc0278e&");
+/* harmony import */ var _GraduatedPrices_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GraduatedPrices.vue?vue&type=script&lang=js& */ "./resources/js/src/app/components/item/GraduatedPrices.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -402,9 +306,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _GuaranteeBadge_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _GuaranteeBadge_vue_vue_type_template_id_6d279655___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _GuaranteeBadge_vue_vue_type_template_id_6d279655___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _GraduatedPrices_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _GraduatedPrices_vue_vue_type_template_id_0fc0278e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _GraduatedPrices_vue_vue_type_template_id_0fc0278e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -414,38 +318,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/src/app/components/item/GuaranteeBadge.vue"
+component.options.__file = "resources/js/src/app/components/item/GraduatedPrices.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/src/app/components/item/GuaranteeBadge.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/src/app/components/item/GuaranteeBadge.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************/
+/***/ "./resources/js/src/app/components/item/GraduatedPrices.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/src/app/components/item/GraduatedPrices.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GuaranteeBadge_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./GuaranteeBadge.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/GuaranteeBadge.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GuaranteeBadge_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GraduatedPrices_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./GraduatedPrices.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/GraduatedPrices.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_GraduatedPrices_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/src/app/components/item/GuaranteeBadge.vue?vue&type=template&id=6d279655&":
-/*!************************************************************************************************!*\
-  !*** ./resources/js/src/app/components/item/GuaranteeBadge.vue?vue&type=template&id=6d279655& ***!
-  \************************************************************************************************/
+/***/ "./resources/js/src/app/components/item/GraduatedPrices.vue?vue&type=template&id=0fc0278e&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/src/app/components/item/GraduatedPrices.vue?vue&type=template&id=0fc0278e& ***!
+  \*************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GuaranteeBadge_vue_vue_type_template_id_6d279655___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./GuaranteeBadge.vue?vue&type=template&id=6d279655& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/GuaranteeBadge.vue?vue&type=template&id=6d279655&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GuaranteeBadge_vue_vue_type_template_id_6d279655___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GraduatedPrices_vue_vue_type_template_id_0fc0278e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./GraduatedPrices.vue?vue&type=template&id=0fc0278e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/app/components/item/GraduatedPrices.vue?vue&type=template&id=0fc0278e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GraduatedPrices_vue_vue_type_template_id_0fc0278e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GuaranteeBadge_vue_vue_type_template_id_6d279655___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GraduatedPrices_vue_vue_type_template_id_0fc0278e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

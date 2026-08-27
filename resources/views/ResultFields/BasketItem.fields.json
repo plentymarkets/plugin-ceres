@@ -9,6 +9,8 @@
     "texts.urlPath",
     "texts.lang",
     "variation.name",
+    "variation.model",
+    "variation.durabilityYears",
     "variation.number",
     "variation.availability.id",
     "variation.availability.names.*",

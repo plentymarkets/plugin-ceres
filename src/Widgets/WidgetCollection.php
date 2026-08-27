@@ -22,6 +22,7 @@ use Ceres\Widgets\Checkout\CancelPaymentWidget;
 use Ceres\Widgets\Checkout\ContactWishWidget;
 use Ceres\Widgets\Checkout\CustomerSignWidget;
 use Ceres\Widgets\Checkout\GtcCheckWidget;
+use Ceres\Widgets\Checkout\GuaranteeNoticeWidget;
 use Ceres\Widgets\Checkout\PaymentProviderWidget;
 use Ceres\Widgets\Checkout\PlaceOrderWidget;
 use Ceres\Widgets\Checkout\ShippingPrivacyCheckWidget;
@@ -120,6 +121,7 @@ class WidgetCollection
         CancelPaymentWidget::class,
         ContactWishWidget::class,
         GtcCheckWidget::class,
+        GuaranteeNoticeWidget::class,
         PaymentProviderWidget::class,
         PlaceOrderWidget::class,
         ShippingPrivacyCheckWidget::class,
