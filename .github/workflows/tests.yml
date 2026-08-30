@@ -1,0 +1,41 @@
+name: End-to-end tests
+
+on:
+  push:
+    branches: [ stable ]
+  workflow_dispatch:
+    inputs:
+      tag-version:
+        description: 'The tag version, branch name or SHA to checkout'
+        required: true
+
+env:
+  NODE_VERSION: "14"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.tag-version }}
+          token: ${{ secrets.PUBLIC_PAT_CICD4_PUBLIC }}
+
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install dependencies
+        run: |
+          rm -rf node_modules
+          npm install
+
+      - name: Build files
+        run: |
+          npm run build
+
+      - name: Run end-to-end tests
+        run: |
+          npm run test:e2e
