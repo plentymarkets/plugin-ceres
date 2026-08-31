@@ -1,14 +1,20 @@
 # Release Notes für plentyShop LTS
 
-## unreleased
+## v5.0.82 (2026-08-31) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.81...5.0.82" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
 
-- Aufgrund des neuen Widgets **Garantiehinweis**, das dem Standard-Checkout-Template hinzugefügt wurde, müssen die ShopBuilder-Inhalte im Menü **Shop » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden, damit es automatisch unterhalb des Kaufen-Buttons platziert wird.
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **Shop » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
 
 ### Hinzugefügt
 
-- Ein neues Widget **Garantiehinweis** wurde hinzugefügt. Es zeigt unterhalb des Kaufen-Buttons auf der Checkout-Seite einen Link an, der eine Vollbildvorschau des gesetzlichen Garantiehinweises in der Sprache des Shops öffnet. Das Widget kann im ShopBuilder frei verschoben und unabhängig vom Kaufen-Button farblich angepasst werden.
+- Ein neues Widget **Garantiehinweis** wurde hinzugefügt. Es zeigt die Harmonised Notice on the Legal Guarantee of Conformity an und kann im Checkout platziert werden.
+- Ein neues Widget **Garantiekennzeichnung** wurde hinzugefügt. Es zeigt das Harmonised Label for Commercial Guarantees of Durability ("GARAN"-Label) an und kann auf der Artikelseite und im Warenkorb platziert werden.
+- Die Option **Kontakt sichtbar machen** wurde dem Widget **Widerrufsformular** hinzugefügt. Dadurch kann der Link zur Kontaktseite unabhängig von anderen rechtlichen Verlinkungen ausgeblendet werden.
+
+### Behoben
+
+- Teilweise wurden bei Bildern die Einstellung für Lazy Loading nicht respektiert. Dieses Problem wurde behoben.
 
 ## v5.0.81 (2026-06-18) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.80...5.0.81" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
@@ -16,7 +22,7 @@
 
 - Die Standardvorlage des Widerrufsformulars wurde um eine Verlinkung zu der Datenschutzerklärung des Shops erweitert.
 
-### Fixed
+### Behoben
 
 - Beim Absenden eines Widerrufsformulars ist keine Einwilligung für Google reCAPTCHA mehr notwendig.
 
@@ -26,7 +32,7 @@
 
 ## v5.0.80 (2026-05-27) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.79...5.0.80" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
-### Fixed
+### Behoben
 
 - Ein Problem im Zusammenhang mit der Drosselung bei Varianten.
 

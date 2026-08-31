@@ -1,16 +1,20 @@
 # Release Notes for plentyShop LTS
 
-## unreleased
+## v5.0.81 (2026-08-31) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.81...5.0.82" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
 
-- Due to changes to the **Legal information** widget, ShopBuilder content must be updated in the **Shop » ShopBuilder** menu using the **Regenerate Content** button.
-- Due to the new **Guarantee notice** widget being added to the default checkout template, ShopBuilder content must be updated in the **Shop » ShopBuilder** menu using the **Regenerate Content** button to have it placed below the buy button automatically.
+- Due to changes to existing widgets, ShopBuilder content must be updated in the **Shop » ShopBuilder** menu using the **Regenerate Content** button.
 
 ### Added
 
-- The option **Show contact** has been added to the legal information widget settings in ShopBuilder, allowing the contact link to be hidden independently of the other legal links.
-- A new **Guarantee notice** widget has been added, showing a link below the buy button on the checkout page that opens a full-screen preview of the shop language's statutory guarantee notice. It can be freely repositioned in ShopBuilder and given its own appearance/color, independent of the buy button.
+- The **Guarantee notice** widget has been added. It displays the Harmonised Notice on the Legal Guarantee of Conformity and can be added on the checkout page.
+- The **EU guarantee label** widget has been added. It displays the Harmonised Label for Commercial Guarantees of Durability ("GARAN"-Label) and can be added on the single item page and on the basket.
+- The **Show contact** option has been added to the **Cancellation form** widget. This lets you show or hide the link to the contact page independent of other legal links.
+
+### Fixed
+
+- In some cases, the lazy loading settings for images were not respected. This has been resolved.
 
 ## v5.0.81 (2026-06-18) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.80...5.0.81" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
