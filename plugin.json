@@ -1,5 +1,5 @@
 {
-    "version"           : "5.0.82",
+    "version"           : "5.0.83",
     "name"              : "Ceres",
     "marketplaceName"   : {"de": "plentyShop LTS","en": "plentyShop LTS"},
     "description"       : "This is the official plentyShop LTS plugin developed by PlentyONE. plentyShop LTS is the default template plugin for PlentyONE online stores.",

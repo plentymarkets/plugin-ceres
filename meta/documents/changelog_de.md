@@ -1,6 +1,6 @@
 # Release Notes für plentyShop LTS
 
-## v5.0.82 (2026-08-31) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.81...5.0.82" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.83 (2026-09-01) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.81...5.0.83" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
 
@@ -15,6 +15,7 @@
 ### Behoben
 
 - Teilweise wurden bei Bildern die Einstellung für Lazy Loading nicht respektiert. Dieses Problem wurde behoben.
+- Die CDN-URLs wurden von `.plentymarkets` auf `.plentyone` geändert, um Weiterleitungen zu vermeiden.
 
 ## v5.0.81 (2026-06-18) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.80...5.0.81" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 

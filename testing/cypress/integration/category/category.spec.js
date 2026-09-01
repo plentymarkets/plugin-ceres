@@ -133,7 +133,7 @@ context("category", () =>
 
     it("should show category item image for card", () =>
     {
-        const imgUrl = "https://cdn02.plentymarkets.com/2x3z2pucy2z9/item/images/109/middle/109-Barhocker-White-SanFrancisco.jpg";
+        const imgUrl = "https://cdn02.plentyone.com/2x3z2pucy2z9/item/images/109/middle/109-Barhocker-White-SanFrancisco.jpg";
 
         cy.get(".product-list").children().first().find("picture")
             .invoke("attr", "data-iesrc", imgUrl)
