@@ -1,10 +1,14 @@
 # Release Notes for plentyShop LTS
 
-## v5.0.84 (yyyy-mm-dd) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.83...5.0.84" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+## v5.0.84 (2026-09-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.83...5.0.84" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
+
+### TODO
+
+- Due to changes to existing widgets, ShopBuilder content must be updated in the **Shop » ShopBuilder** menu using the **Regenerate Content** button.
 
 ### Fixed
 
-- Terminology concerning Regulation (EU) 2025/1960 has been fixed. These changes are retroactively available in v5.0.83.
+- Terminology concerning Regulation (EU) 2025/1960 has been fixed.
 
 ## v5.0.83 (2026-09-01) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.81...5.0.83" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
