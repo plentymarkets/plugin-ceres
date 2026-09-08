@@ -56,7 +56,7 @@ class CeresBasketConfig extends PluginConfig
     public $showShippingCountrySelect;
 
     /**
-     * @var boolean $previewShowGuaranteeLabel Defines if the guarantee label is shown in the basket preview.
+     * @var boolean $previewShowGuaranteeLabel Defines if the guarantee of durability is shown in the basket preview.
      */
     public $previewShowGuaranteeLabel;
 
