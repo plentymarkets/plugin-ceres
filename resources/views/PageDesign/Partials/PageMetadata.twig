@@ -37,8 +37,7 @@
 {% if block('title') is defined %}
     {% set title = block('title') %}
 {% elseif details is not null %}
-    {% set title = details.metaTitle | default(details.name) %}
-{% endif %}
+    {% set title = details.metaTitle  %}
 
 {% set type             = block('type') | default('article') %}
 {% set url              = block('url') | default(services.url.getCanonicalURL()) | default(webstoreConfig.domainSsl) %}

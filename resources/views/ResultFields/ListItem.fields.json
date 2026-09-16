@@ -29,6 +29,12 @@
     "texts.name2",
     "texts.name3",
 
+    "variationProperties.*",
+    "images.all.urlPreview",
+    "images.all.urlSecondPreview",
+    "images.variation.urlPreview",
+    "images.variation.urlSecondPreview",
+
     "bundleComponents.*",
 
     "defaultCategories",
