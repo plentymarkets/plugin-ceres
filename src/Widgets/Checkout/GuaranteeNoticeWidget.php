@@ -42,6 +42,11 @@ class GuaranteeNoticeWidget extends BaseWidget
         $settings->createAppearance()
             ->withDefaultValue("primary");
 
+        $settings->createCheckbox("renderInline")
+            ->withDefaultValue(false)
+            ->withName("Widget.guaranteeNoticeRenderInlineLabel")
+            ->withTooltip("Widget.guaranteeNoticeRenderInlineTooltip");
+
         $settings->createSpacing();
 
         return $settings->toArray();

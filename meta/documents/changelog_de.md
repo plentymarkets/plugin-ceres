@@ -1,5 +1,15 @@
 # Release Notes für plentyShop LTS
 
+## v5.0.85 (2026-09-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.84...5.0.85" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+
+### TODO
+
+- Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **Shop » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
+
+### Hinzugefügt
+
+- Das Widget **Gewährleistungsrecht** verfügt jetzt über die Einstellung **Hinweis direkt anzeigen**, mit der der Hinweis direkt auf der Seite angezeigt werden kann, anstatt einen Link zu zeigen, der ihn in einem Modal öffnet.
+
 ## v5.0.84 (2026-09-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.83...5.0.84" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
@@ -8,7 +18,7 @@
 
 ### Behoben
 
-- Die Terminologie im Bezug auf Durchführungsverordnung (EU) 2025/1960 wurden korrigiert.
+- Die Terminologie im Bezug auf Durchführungsverordnung (EU) 2025/1960 wurde korrigiert.
 
 ## v5.0.83 (2026-09-01) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.81...5.0.83" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
