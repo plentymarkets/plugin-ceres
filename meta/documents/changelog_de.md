@@ -4,7 +4,7 @@
 
 ### Hinzugefügt
 
-- Das Widget **Garantiehinweis** verfügt jetzt über die Einstellung **Hinweis direkt anzeigen**, mit der der gesetzliche Garantiehinweis direkt auf der Seite angezeigt werden kann, anstatt einen Link zu zeigen, der ihn in einem Modal öffnet.
+- Das Widget **Gewährleistungsrecht** verfügt jetzt über die Einstellung **Hinweis direkt anzeigen**, mit der der Hinweis direkt auf der Seite angezeigt werden kann, anstatt einen Link zu zeigen, der ihn in einem Modal öffnet.
 
 ## v5.0.84 (2026-09-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.83...5.0.84" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
@@ -14,7 +14,7 @@
 
 ### Behoben
 
-- Die Terminologie im Bezug auf Durchführungsverordnung (EU) 2025/1960 wurden korrigiert.
+- Die Terminologie im Bezug auf Durchführungsverordnung (EU) 2025/1960 wurde korrigiert.
 
 ## v5.0.83 (2026-09-01) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.81...5.0.83" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
