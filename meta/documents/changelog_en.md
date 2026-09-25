@@ -1,5 +1,11 @@
 # Release Notes for plentyShop LTS
 
+## unreleased
+
+### Added
+
+- The **Guarantee notice** widget now has a **Show notice directly** setting, letting you render the legal guarantee notice content directly on the page instead of showing a link that opens it in a modal.
+
 ## v5.0.84 (2026-09-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.83...5.0.84" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO

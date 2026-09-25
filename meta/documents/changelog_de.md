@@ -1,5 +1,11 @@
 # Release Notes für plentyShop LTS
 
+## unreleased
+
+### Hinzugefügt
+
+- Das Widget **Garantiehinweis** verfügt jetzt über die Einstellung **Hinweis direkt anzeigen**, mit der der gesetzliche Garantiehinweis direkt auf der Seite angezeigt werden kann, anstatt einen Link zu zeigen, der ihn in einem Modal öffnet.
+
 ## v5.0.84 (2026-09-08) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.83...5.0.84" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
