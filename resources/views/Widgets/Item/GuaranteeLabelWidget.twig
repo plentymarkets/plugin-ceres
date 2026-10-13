@@ -34,7 +34,7 @@
     {# item data is only available in the surrounding per-item Twig context (e.g. inside ItemSetWidget's loop),
        so these expressions must stay deferred rather than being resolved during this widget's own render pass #}
     {{ Twig.set("itemData", "item.documents[0].data") }}
-    {{ Twig.set("brandValue", "itemData.item.manufacturer.name | default('')") }}
+    {{ Twig.set("brandValue", "itemData.item.manufacturer.externalName | default('')") }}
     {{ Twig.set("modelValue", "itemData.variation.model | default('')") }}
     {{ Twig.set("durabilityYears", "itemData.variation.durabilityYears | default('')") }}
     {{ Twig.set("collapseId", "'guarantee-label-collapse-' ~ uid()") }}
