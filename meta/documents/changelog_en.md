@@ -6,9 +6,10 @@
 
 - Due to changes to existing widgets, ShopBuilder content must be updated in the **Shop » ShopBuilder** menu using the **Regenerate Content** button.
 
-### Added
+### Fixed
 
 - The **Guarantee of durability** widget now displays the manufacturer's external name instead of their name.
+- The **Guarantee of durability** widget now updates when the shopper changes the item variation, instead of staying stuck on the data from the initially loaded variation.
 
 ## v5.0.85 (2026-09-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.84...5.0.85" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
