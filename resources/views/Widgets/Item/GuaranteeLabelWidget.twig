@@ -29,8 +29,6 @@
         </div>
     {% endif %}
 {% else %}
-    {# brand/model/durabilityYears are read reactively from the variation store inside guarantee-label-widget,
-       so this label stays in sync when the shopper changes the item variation #}
     {% set collapseId = "guarantee-label-collapse-" ~ uid() %}
 
     <guarantee-label-widget
