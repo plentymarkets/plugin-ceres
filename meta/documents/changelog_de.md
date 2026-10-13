@@ -6,12 +6,9 @@
 
 - Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü **Shop » ShopBuilder** über die Schaltfläche **Inhalte neu generieren** aktualisiert werden.
 
-### Hinzugefügt
-
-- Im Widget **Haltbarkeitsgarantie** wird für den Hersteller jetzt der externe Name angezeigt statt des Namens.
-
 ### Behoben
 
+- Im Widget **Haltbarkeitsgarantie** wird für den Hersteller jetzt der externe Name angezeigt statt des Namens.
 - Das Widget **Haltbarkeitsgarantie** aktualisiert sich jetzt, wenn der Kunde die Variante wechselt, anstatt weiterhin die Daten der ursprünglich geladenen Variante anzuzeigen.
 
 ## v5.0.85 (2026-09-25) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.84...5.0.85" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
