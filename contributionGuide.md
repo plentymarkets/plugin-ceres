@@ -69,6 +69,42 @@ If your changes require **beta** or **early**, please indicate this by adding a 
 
 ## Resources
 
+### Soft-login parent regression
+
+Run the standalone rendering regression with PHP and an external Composer installation of Twig
+(no PlentyONE runtime or PHP test framework is needed):
+
+```bash
+composer require --working-dir=/tmp/ceres-twig-regression twig/twig:3.30.0
+php /home/runner/work/plugin-ceres/plugin-ceres/tools/testOrderConfirmationSoftlogin.php /tmp/ceres-twig-regression/vendor/autoload.php
+```
+
+Create the temporary directory first, and adjust the checkout path as needed. The test renders the
+production inheritance preamble and `PageBody` verbatim with an in-memory recording loader and fixtures
+for the parent templates, form and ShopBuilder helper. It omits the existing `PartialHead` block:
+stock Twig rejects its conditional nested block declaration, so metadata needs platform validation.
+It checks that rejected candidates never reach any loader
+method, preserves plugin/core-style namespaced parents, and simulates the per-parameter `json_decode`
+boundary from IO #1266. This does not exercise IO, the real form, or the platform loader.
+
+Manual end-to-end regression (requires a disposable PlentyONE shop with IO #1266 applied):
+
+1. Instrument the platform template loader to record **all** resolution attempts and reject
+   candidates outside a test allow-list before any filesystem access.
+2. Send the normal `io/template` request with `template=Ceres::Checkout.OrderConfirmationSoftlogin`
+   and the individual `params[originalTemplate]` value set to the JSON string
+   `["/etc/passwd", "::"]` (not a top-level template array).
+3. Verify the normal order-confirmation fallback and soft-login body render, and that neither
+   `/etc/passwd` nor `::` occurs in the loader trace. An empty response alone is not evidence.
+4. Repeat with a JSON-encoded associative object containing `"::"` and the supported scalar
+   rejection cases. Repeat with an existing server-provided namespaced parent, including
+   `Plenty\Modules\Webshop::SoftLogin.OrderConfirmationOverride`, and with/without ShopBuilder content.
+
+This closes the array-valued parent-guard bypass in Ceres #3796; its relevant guard is included
+because it was not on the default branch when this fix was prepared. IO #1266 validates the
+top-level template but still decodes parameter values independently. Neither this focused check
+nor the isolated tests establish strict string validation, demonstrated file disclosure, or complete
+platform loader security. The manual platform regression is separate from the automated test.
+
 You can find our developers documentation [here](https://developers.plentymarkets.com/en-gb/developers/main/plentyshop-plugins/template-setup.html).
 Our [manual](https://knowledge.plentymarkets.com/en-gb/manual/main/online-store/setting-up-ceres.html) can also help you identify which contributions could be a worthwile endeavour.
-
