@@ -31,7 +31,7 @@ class UploadFavicon
      * @param PluginSet $pluginSet The plugin set to search for favicon config in.
      * @param Webstore|null $webstore The webstore to upload the favicon for.
      */
-    public static function upload(PluginSet $pluginSet, Webstore $webstore = null)
+    public static function upload(PluginSet $pluginSet, ?Webstore $webstore = null)
     {
         /** @var PluginSetEntry $pluginSetEntry */
         foreach($pluginSet->pluginSetEntries as $pluginSetEntry) {
