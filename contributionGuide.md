@@ -71,4 +71,3 @@ If your changes require **beta** or **early**, please indicate this by adding a 
 
 You can find our developers documentation [here](https://developers.plentymarkets.com/en-gb/developers/main/plentyshop-plugins/template-setup.html).
 Our [manual](https://knowledge.plentymarkets.com/en-gb/manual/main/online-store/setting-up-ceres.html) can also help you identify which contributions could be a worthwile endeavour.
-
