@@ -8,6 +8,7 @@
 
 ### Behoben
 
+- Die Soft-Login-Vorlage der Bestellbestätigung erweitert eine über Request-Parameter übergebene Vorlagenreferenz nur noch dann, wenn es sich um eine gültige Namespace-Vorlage handelt. Damit wird eine Local-File-Inclusion-Schwachstelle geschlossen.
 - Im Widget **Haltbarkeitsgarantie** wird für den Hersteller jetzt der externe Name angezeigt statt des Namens.
 - Das Widget **Haltbarkeitsgarantie** aktualisiert sich jetzt, wenn der Kunde die Variante wechselt, anstatt weiterhin die Daten der ursprünglich geladenen Variante anzuzeigen.
 

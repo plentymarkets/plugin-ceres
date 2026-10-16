@@ -8,6 +8,7 @@
 
 ### Fixed
 
+- The order-confirmation soft-login template no longer extends a template reference supplied through request parameters unless it is a valid namespaced template, closing a local file inclusion vector.
 - The **Guarantee of durability** widget now displays the manufacturer's external name instead of their name.
 - The **Guarantee of durability** widget now updates when the shopper changes the item variation, instead of staying stuck on the data from the initially loaded variation.
 

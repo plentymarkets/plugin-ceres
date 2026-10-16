@@ -1,4 +1,14 @@
-{% extends originalTemplate %}
+{# originalTemplate is set server-side by the core soft-login hook to a namespaced template
+   reference (e.g. "Plenty\Modules\Webshop::SoftLogin.OrderConfirmationOverride"). The public
+   io/template route lets a client override it with request params, so guard it here: only extend
+   a namespaced reference (contains "::") that is not a filesystem path or traversal. Anything else
+   (e.g. "/etc/passwd") falls back to the normal order-confirmation page instead of being loaded. #}
+{% set originalTemplateIsSafe = originalTemplate is defined
+    and originalTemplate is not empty
+    and '::' in originalTemplate
+    and '/' not in originalTemplate
+    and '..' not in originalTemplate %}
+{% extends originalTemplateIsSafe ? originalTemplate : "Ceres::Checkout.OrderConfirmation" %}
 {% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
 
 {% block PartialHead %}
