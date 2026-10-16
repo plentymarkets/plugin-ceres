@@ -1,6 +1,6 @@
 # Release Notes für plentyShop LTS
 
-## v5.0.86 (xxxx-xx-xx) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.85...5.0.86" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
+## v5.0.86 (2026-10-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.85...5.0.86" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO
 
@@ -9,6 +9,7 @@
 ### Behoben
 
 - Die Soft-Login-Vorlage der Bestellbestätigung prüft jetzt Vorlagenreferenzen und weist iterierbare Werte vor den Namespace-/Pfadprüfungen zurück. Damit wird die Umgehung dieser Prüfungen durch Array-Werte verhindert.
+- Der Linktext des Hinweises zum **Gewährleistungsrecht** im Checkout wird jetzt unterstrichen.
 - Im Widget **Haltbarkeitsgarantie** wird für den Hersteller jetzt der externe Name angezeigt statt des Namens.
 - Das Widget **Haltbarkeitsgarantie** aktualisiert sich jetzt, wenn der Kunde die Variante wechselt, anstatt weiterhin die Daten der ursprünglich geladenen Variante anzuzeigen.
 
