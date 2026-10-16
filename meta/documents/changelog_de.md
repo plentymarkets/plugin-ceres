@@ -8,6 +8,7 @@
 
 ### Behoben
 
+- Die Soft-Login-Vorlage der Bestellbestätigung prüft jetzt Vorlagenreferenzen und weist iterierbare Werte vor den Namespace-/Pfadprüfungen zurück. Damit wird die Umgehung dieser Prüfungen durch Array-Werte verhindert.
 - Der Linktext des Hinweises zum **Gewährleistungsrecht** im Checkout wird jetzt unterstrichen.
 - Im Widget **Haltbarkeitsgarantie** wird für den Hersteller jetzt der externe Name angezeigt statt des Namens.
 - Das Widget **Haltbarkeitsgarantie** aktualisiert sich jetzt, wenn der Kunde die Variante wechselt, anstatt weiterhin die Daten der ursprünglich geladenen Variante anzuzeigen.

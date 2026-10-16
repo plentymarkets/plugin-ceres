@@ -8,6 +8,7 @@
 
 ### Fixed
 
+- The order-confirmation soft-login template now guards parent references and rejects iterable values before namespace/path checks, closing the array-valued parent-guard bypass.
 - The link text of the **Guarantee of conformity** notice in the checkout is now underlined.
 - The **Guarantee of durability** widget now displays the manufacturer's external name instead of their name.
 - The **Guarantee of durability** widget now updates when the shopper changes the item variation, instead of staying stuck on the data from the initially loaded variation.
