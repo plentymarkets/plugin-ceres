@@ -31,9 +31,9 @@
                     <div class="col-12">
                         <h1 class="h2">
                             {% if isTag %}
-                                {{ trans("Ceres::Template.tagSearchResults", {"searchString": searchString|replace({'_': " "}) }) }}
+                                <span v-pre>{{ trans("Ceres::Template.tagSearchResults", {"searchString": searchString|replace({'_': " "}) }) }}</span>
                             {% else %}
-                                {{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }}
+                                {{ trans("Ceres::Template.itemSearchResults") }} <span v-pre>{{ searchString }}</span>
                             {% endif %}
                         </h1>
                     </div>
@@ -130,7 +130,7 @@
                     {% endif %}
 
                     {% if category is not defined and itemList is empty %}
-                        <p class="h3 text-muted mb-5 text-center">{{ trans("Ceres::Template.itemSearchNoResults", {"searchString": searchString}) }}</p>
+                        <p class="h3 text-muted mb-5 text-center"><span v-pre>{{ trans("Ceres::Template.itemSearchNoResults", {"searchString": searchString}) }}</span></p>
                     {% endif %}
                 </div>
             </div>
