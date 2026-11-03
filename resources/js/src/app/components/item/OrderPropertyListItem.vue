@@ -445,9 +445,16 @@ export default {
         {
             if (error.hasOwnProperty("validation_errors"))
             {
-                for (const err of Object.values(error.validation_errors))
+                if (typeof error.validation_errors === "string")
                 {
-                    NotificationService.error(err[0]);
+                    NotificationService.error(error.validation_errors);
+                }
+                else
+                {
+                    for (const err of Object.values(error.validation_errors))
+                    {
+                        NotificationService.error(err[0]);
+                    }
                 }
             }
 
