@@ -82,19 +82,19 @@ class ItemSearchPreset implements ContentPreset
     <div class="col-12">
         <h1 class="h2">
             {% if isTag %}
-                {{ trans("Ceres::Template.tagSearchResults", {"searchString": searchString|replace({"_": " "}) }) }}
+                <span v-pre>{{ trans("Ceres::Template.tagSearchResults", {"searchString": searchString|replace({"_": " "}) }) }}</span>
             {% elseif itemCountTotal > 0 and suggestionString | length > 0 %}
-                <p class="color-gray-700">{{ trans("Ceres::Template.itemSearchNoResults", {"searchString": searchString}) }}</p>
+                <p class="color-gray-700" v-pre>{{ trans("Ceres::Template.itemSearchNoResults", {"searchString": searchString}) }}</p>
                 <p>
                     {% autoescape false %}
                         {% set suggestionStringHtml -%}
-                            <a href="{{ queryString({query: suggestionString }) }}">{{ suggestionString }}</a>
+                            <a v-pre href="{{ queryString({query: suggestionString }) }}">{{ suggestionString }}</a>
                         {%- endset %}
                         {{ trans("Ceres::Template.itemSearchDidYouMean", {"suggestionString": suggestionStringHtml }) }}
                     {% endautoescape %}
                 </p>
             {% elseif itemCountTotal > 0 %}
-                {{ trans("Ceres::Template.itemSearchResults") }} {{ searchString }}
+                {{ trans("Ceres::Template.itemSearchResults") }} <span v-pre>{{ searchString }}</span>
             {% endif %}
         </h1>
     </div>
@@ -109,7 +109,7 @@ class ItemSearchPreset implements ContentPreset
                      ->withSetting('text',
 '{% if itemCountTotal <= 0 %}
     {% if category is empty and searchString is empty %}{% set searchString = trans("Ceres::Template.itemSearchSearchTerm") %}{% endif %}
-    <p class="h3 text-muted mb-5 text-center">{{ trans("Ceres::Template.itemSearchNoResults", {"searchString": searchString}) }}</p>
+    <p class="h3 text-muted mb-5 text-center" v-pre>{{ trans("Ceres::Template.itemSearchNoResults", {"searchString": searchString}) }}</p>
 {% endif%}');
     }
 

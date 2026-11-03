@@ -1,5 +1,11 @@
 # Release Notes für plentyShop LTS
 
+## unreleased
+
+### TODO
+
+- Bearbeite auf jeder bestehenden ShopBuilder-Artikelsuchseite den gespeicherten Text beider **Code**-Widgets aus dem Preset „Artikelsuche“. Füge `v-pre` zum `<span>` für Tag-Suchergebnisse, zum `<p>` für keine Suchergebnisse, zum Vorschlags-`<a>`, zum `searchString`-`<span>` in der Überschrift und zum `<p>` der Meldung für keine Suchergebnisse hinzu. Speichere die Widgets; durch erneutes Generieren der Inhalte wird ihr gespeicherter Text nicht aktualisiert.
+
 ## v5.0.86 (2026-10-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.85...5.0.86" target="_blank" rel="noopener"><b>Übersicht aller Änderungen</b></a>
 
 ### TODO

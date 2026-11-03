@@ -1,5 +1,11 @@
 # Release Notes for plentyShop LTS
 
+## unreleased
+
+### TODO
+
+- On each existing ShopBuilder item-search page, edit the saved text in both **Code** widgets from the Item Search preset. Add `v-pre` to the tag-results `<span>`, the no-results `<p>`, the suggestion `<a>`, the heading's `searchString` `<span>`, and the no-results message `<p>`. Save the widgets; regenerating content alone does not update their saved text.
+
 ## v5.0.86 (2026-10-16) <a href="https://github.com/plentymarkets/plugin-ceres/compare/5.0.85...5.0.86" target="_blank" rel="noopener"><b>Overview of all changes</b></a>
 
 ### TODO
